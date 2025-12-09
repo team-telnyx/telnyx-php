@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type UserBundleShape = array{
  *   id: string,
  *   active: bool,
- *   billing_bundle: BillingBundleSummary,
- *   created_at: \DateTimeInterface,
+ *   billingBundle: BillingBundleSummary,
+ *   createdAt: \DateTimeInterface,
  *   resources: list<UserBundleResource>,
- *   user_id: string,
- *   updated_at?: \DateTimeInterface|null,
+ *   userID: string,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class UserBundle implements BaseModel
@@ -38,14 +38,14 @@ final class UserBundle implements BaseModel
     #[Required]
     public bool $active;
 
-    #[Required]
-    public BillingBundleSummary $billing_bundle;
+    #[Required('billing_bundle')]
+    public BillingBundleSummary $billingBundle;
 
     /**
      * Date the user bundle was created.
      */
-    #[Required]
-    public \DateTimeInterface $created_at;
+    #[Required('created_at')]
+    public \DateTimeInterface $createdAt;
 
     /** @var list<UserBundleResource> $resources */
     #[Required(list: UserBundleResource::class)]
@@ -54,14 +54,14 @@ final class UserBundle implements BaseModel
     /**
      * The customer's ID that owns this user bundle.
      */
-    #[Required]
-    public string $user_id;
+    #[Required('user_id')]
+    public string $userID;
 
     /**
      * Date the user bundle was last updated.
      */
-    #[Optional(nullable: true)]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at', nullable: true)]
+    public ?\DateTimeInterface $updatedAt;
 
     /**
      * `new UserBundle()` is missing required properties by the API.
@@ -71,10 +71,10 @@ final class UserBundle implements BaseModel
      * UserBundle::with(
      *   id: ...,
      *   active: ...,
-     *   billing_bundle: ...,
-     *   created_at: ...,
+     *   billingBundle: ...,
+     *   createdAt: ...,
      *   resources: ...,
-     *   user_id: ...,
+     *   userID: ...,
      * )
      * ```
      *
@@ -102,42 +102,42 @@ final class UserBundle implements BaseModel
      *
      * @param BillingBundleSummary|array{
      *   id: string,
-     *   cost_code: string,
-     *   created_at: \DateTimeInterface,
-     *   is_public: bool,
+     *   costCode: string,
+     *   createdAt: \DateTimeInterface,
+     *   isPublic: bool,
      *   name: string,
      *   currency?: string|null,
-     *   mrc_price?: float|null,
+     *   mrcPrice?: float|null,
      *   slug?: string|null,
      *   specs?: list<string>|null,
-     * } $billing_bundle
+     * } $billingBundle
      * @param list<UserBundleResource|array{
      *   id: string,
-     *   created_at: \DateTimeInterface,
+     *   createdAt: \DateTimeInterface,
      *   resource: string,
-     *   resource_type: string,
-     *   updated_at?: \DateTimeInterface|null,
+     *   resourceType: string,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $resources
      */
     public static function with(
         string $id,
         bool $active,
-        BillingBundleSummary|array $billing_bundle,
-        \DateTimeInterface $created_at,
+        BillingBundleSummary|array $billingBundle,
+        \DateTimeInterface $createdAt,
         array $resources,
-        string $user_id,
-        ?\DateTimeInterface $updated_at = null,
+        string $userID,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
         $obj = new self;
 
         $obj['id'] = $id;
         $obj['active'] = $active;
-        $obj['billing_bundle'] = $billing_bundle;
-        $obj['created_at'] = $created_at;
+        $obj['billingBundle'] = $billingBundle;
+        $obj['createdAt'] = $createdAt;
         $obj['resources'] = $resources;
-        $obj['user_id'] = $user_id;
+        $obj['userID'] = $userID;
 
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -167,12 +167,12 @@ final class UserBundle implements BaseModel
     /**
      * @param BillingBundleSummary|array{
      *   id: string,
-     *   cost_code: string,
-     *   created_at: \DateTimeInterface,
-     *   is_public: bool,
+     *   costCode: string,
+     *   createdAt: \DateTimeInterface,
+     *   isPublic: bool,
      *   name: string,
      *   currency?: string|null,
-     *   mrc_price?: float|null,
+     *   mrcPrice?: float|null,
      *   slug?: string|null,
      *   specs?: list<string>|null,
      * } $billingBundle
@@ -181,7 +181,7 @@ final class UserBundle implements BaseModel
         BillingBundleSummary|array $billingBundle
     ): self {
         $obj = clone $this;
-        $obj['billing_bundle'] = $billingBundle;
+        $obj['billingBundle'] = $billingBundle;
 
         return $obj;
     }
@@ -192,7 +192,7 @@ final class UserBundle implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -200,10 +200,10 @@ final class UserBundle implements BaseModel
     /**
      * @param list<UserBundleResource|array{
      *   id: string,
-     *   created_at: \DateTimeInterface,
+     *   createdAt: \DateTimeInterface,
      *   resource: string,
-     *   resource_type: string,
-     *   updated_at?: \DateTimeInterface|null,
+     *   resourceType: string,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $resources
      */
     public function withResources(array $resources): self
@@ -220,7 +220,7 @@ final class UserBundle implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj['user_id'] = $userID;
+        $obj['userID'] = $userID;
 
         return $obj;
     }
@@ -231,7 +231,7 @@ final class UserBundle implements BaseModel
     public function withUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

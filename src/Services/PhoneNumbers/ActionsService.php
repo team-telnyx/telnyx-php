@@ -28,7 +28,7 @@ final class ActionsService implements ActionsContract
      *
      * Change the bundle status for a phone number (set to being in a bundle or remove from a bundle)
      *
-     * @param array{bundle_id: string}|ActionChangeBundleStatusParams $params
+     * @param array{bundleID: string}|ActionChangeBundleStatusParams $params
      *
      * @throws APIException
      */
@@ -60,7 +60,7 @@ final class ActionsService implements ActionsContract
      * Enable emergency for a phone number
      *
      * @param array{
-     *   emergency_address_id: string, emergency_enabled: bool
+     *   emergencyAddressID: string, emergencyEnabled: bool
      * }|ActionEnableEmergencyParams $params
      *
      * @throws APIException
@@ -92,7 +92,7 @@ final class ActionsService implements ActionsContract
      *
      * Verifies ownership of the provided phone numbers and returns a mapping of numbers to their IDs, plus a list of numbers not found in the account.
      *
-     * @param array{phone_numbers: list<string>}|ActionVerifyOwnershipParams $params
+     * @param array{phoneNumbers: list<string>}|ActionVerifyOwnershipParams $params
      *
      * @throws APIException
      */

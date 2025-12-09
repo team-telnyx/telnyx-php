@@ -16,13 +16,13 @@ use Telnyx\SimCardGroups\Actions\SimCardGroupAction\Type;
  *
  * @phpstan-type SimCardGroupActionShape = array{
  *   id?: string|null,
- *   created_at?: string|null,
- *   record_type?: string|null,
+ *   createdAt?: string|null,
+ *   recordType?: string|null,
  *   settings?: Settings|null,
- *   sim_card_group_id?: string|null,
+ *   simCardGroupID?: string|null,
  *   status?: value-of<Status>|null,
  *   type?: value-of<Type>|null,
- *   updated_at?: string|null,
+ *   updatedAt?: string|null,
  * }
  */
 final class SimCardGroupAction implements BaseModel
@@ -39,11 +39,11 @@ final class SimCardGroupAction implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Optional]
-    public ?string $created_at;
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * A JSON object representation of the action params.
@@ -54,8 +54,8 @@ final class SimCardGroupAction implements BaseModel
     /**
      * The SIM card group identification.
      */
-    #[Optional]
-    public ?string $sim_card_group_id;
+    #[Optional('sim_card_group_id')]
+    public ?string $simCardGroupID;
 
     /** @var value-of<Status>|null $status */
     #[Optional(enum: Status::class)]
@@ -72,8 +72,8 @@ final class SimCardGroupAction implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Optional]
-    public ?string $updated_at;
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     public function __construct()
     {
@@ -85,30 +85,30 @@ final class SimCardGroupAction implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Settings|array{private_wireless_gateway_id?: string|null} $settings
+     * @param Settings|array{privateWirelessGatewayID?: string|null} $settings
      * @param Status|value-of<Status> $status
      * @param Type|value-of<Type> $type
      */
     public static function with(
         ?string $id = null,
-        ?string $created_at = null,
-        ?string $record_type = null,
+        ?string $createdAt = null,
+        ?string $recordType = null,
         Settings|array|null $settings = null,
-        ?string $sim_card_group_id = null,
+        ?string $simCardGroupID = null,
         Status|string|null $status = null,
         Type|string|null $type = null,
-        ?string $updated_at = null,
+        ?string $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $recordType && $obj['recordType'] = $recordType;
         null !== $settings && $obj['settings'] = $settings;
-        null !== $sim_card_group_id && $obj['sim_card_group_id'] = $sim_card_group_id;
+        null !== $simCardGroupID && $obj['simCardGroupID'] = $simCardGroupID;
         null !== $status && $obj['status'] = $status;
         null !== $type && $obj['type'] = $type;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class SimCardGroupAction implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -138,7 +138,7 @@ final class SimCardGroupAction implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -146,7 +146,7 @@ final class SimCardGroupAction implements BaseModel
     /**
      * A JSON object representation of the action params.
      *
-     * @param Settings|array{private_wireless_gateway_id?: string|null} $settings
+     * @param Settings|array{privateWirelessGatewayID?: string|null} $settings
      */
     public function withSettings(Settings|array $settings): self
     {
@@ -162,7 +162,7 @@ final class SimCardGroupAction implements BaseModel
     public function withSimCardGroupID(string $simCardGroupID): self
     {
         $obj = clone $this;
-        $obj['sim_card_group_id'] = $simCardGroupID;
+        $obj['simCardGroupID'] = $simCardGroupID;
 
         return $obj;
     }
@@ -197,7 +197,7 @@ final class SimCardGroupAction implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

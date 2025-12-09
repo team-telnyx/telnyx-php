@@ -40,21 +40,21 @@ final class ManagedAccountListResponse implements BaseModel
      *
      * @param list<Data|array{
      *   id: string,
-     *   api_user: string,
-     *   created_at: string,
+     *   apiUser: string,
+     *   createdAt: string,
      *   email: string,
-     *   manager_account_id: string,
-     *   record_type: value-of<RecordType>,
-     *   updated_at: string,
-     *   managed_account_allow_custom_pricing?: bool|null,
-     *   organization_name?: string|null,
-     *   rollup_billing?: bool|null,
+     *   managerAccountID: string,
+     *   recordType: value-of<RecordType>,
+     *   updatedAt: string,
+     *   managedAccountAllowCustomPricing?: bool|null,
+     *   organizationName?: string|null,
+     *   rollupBilling?: bool|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -72,15 +72,15 @@ final class ManagedAccountListResponse implements BaseModel
     /**
      * @param list<Data|array{
      *   id: string,
-     *   api_user: string,
-     *   created_at: string,
+     *   apiUser: string,
+     *   createdAt: string,
      *   email: string,
-     *   manager_account_id: string,
-     *   record_type: value-of<RecordType>,
-     *   updated_at: string,
-     *   managed_account_allow_custom_pricing?: bool|null,
-     *   organization_name?: string|null,
-     *   rollup_billing?: bool|null,
+     *   managerAccountID: string,
+     *   recordType: value-of<RecordType>,
+     *   updatedAt: string,
+     *   managedAccountAllowCustomPricing?: bool|null,
+     *   organizationName?: string|null,
+     *   rollupBilling?: bool|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -93,10 +93,10 @@ final class ManagedAccountListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

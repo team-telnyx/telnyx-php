@@ -64,13 +64,13 @@ final class Summary implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Adjustment|array{
-     *   amount: string, description: string, event_date: \DateTimeInterface
+     *   amount: string, description: string, eventDate: \DateTimeInterface
      * }> $adjustments
      * @param list<Comparative|array{
      *   alias: string,
-     *   existing_this_month: MonthDetail,
+     *   existingThisMonth: MonthDetail,
      *   name: string,
-     *   new_this_month: MonthDetail,
+     *   newThisMonth: MonthDetail,
      *   type?: 'comparative',
      * }|Simple|array{
      *   alias: string, amount: string, name: string, quantity: int, type?: 'simple'
@@ -90,7 +90,7 @@ final class Summary implements BaseModel
      * List of billing adjustments.
      *
      * @param list<Adjustment|array{
-     *   amount: string, description: string, event_date: \DateTimeInterface
+     *   amount: string, description: string, eventDate: \DateTimeInterface
      * }> $adjustments
      */
     public function withAdjustments(array $adjustments): self
@@ -106,9 +106,9 @@ final class Summary implements BaseModel
      *
      * @param list<Comparative|array{
      *   alias: string,
-     *   existing_this_month: MonthDetail,
+     *   existingThisMonth: MonthDetail,
      *   name: string,
-     *   new_this_month: MonthDetail,
+     *   newThisMonth: MonthDetail,
      *   type?: 'comparative',
      * }|Simple|array{
      *   alias: string, amount: string, name: string, quantity: int, type?: 'simple'

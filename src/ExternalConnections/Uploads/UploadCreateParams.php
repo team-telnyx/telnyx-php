@@ -18,10 +18,10 @@ use Telnyx\ExternalConnections\Uploads\UploadCreateParams\Usage;
  * @see Telnyx\Services\ExternalConnections\UploadsService::create()
  *
  * @phpstan-type UploadCreateParamsShape = array{
- *   number_ids: list<string>,
- *   additional_usages?: list<AdditionalUsage|value-of<AdditionalUsage>>,
- *   civic_address_id?: string,
- *   location_id?: string,
+ *   numberIDs: list<string>,
+ *   additionalUsages?: list<AdditionalUsage|value-of<AdditionalUsage>>,
+ *   civicAddressID?: string,
+ *   locationID?: string,
  *   usage?: Usage|value-of<Usage>,
  * }
  */
@@ -31,25 +31,25 @@ final class UploadCreateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var list<string> $number_ids */
-    #[Required(list: 'string')]
-    public array $number_ids;
+    /** @var list<string> $numberIDs */
+    #[Required('number_ids', list: 'string')]
+    public array $numberIDs;
 
-    /** @var list<value-of<AdditionalUsage>>|null $additional_usages */
-    #[Optional(list: AdditionalUsage::class)]
-    public ?array $additional_usages;
+    /** @var list<value-of<AdditionalUsage>>|null $additionalUsages */
+    #[Optional('additional_usages', list: AdditionalUsage::class)]
+    public ?array $additionalUsages;
 
     /**
      * Identifies the civic address to assign all phone numbers to.
      */
-    #[Optional]
-    public ?string $civic_address_id;
+    #[Optional('civic_address_id')]
+    public ?string $civicAddressID;
 
     /**
      * Identifies the location to assign all phone numbers to.
      */
-    #[Optional]
-    public ?string $location_id;
+    #[Optional('location_id')]
+    public ?string $locationID;
 
     /**
      * The use case of the upload request. NOTE: `calling_user_assignment` is not supported for toll free numbers.
@@ -64,7 +64,7 @@ final class UploadCreateParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * UploadCreateParams::with(number_ids: ...)
+     * UploadCreateParams::with(numberIDs: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -83,24 +83,24 @@ final class UploadCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $number_ids
-     * @param list<AdditionalUsage|value-of<AdditionalUsage>> $additional_usages
+     * @param list<string> $numberIDs
+     * @param list<AdditionalUsage|value-of<AdditionalUsage>> $additionalUsages
      * @param Usage|value-of<Usage> $usage
      */
     public static function with(
-        array $number_ids,
-        ?array $additional_usages = null,
-        ?string $civic_address_id = null,
-        ?string $location_id = null,
+        array $numberIDs,
+        ?array $additionalUsages = null,
+        ?string $civicAddressID = null,
+        ?string $locationID = null,
         Usage|string|null $usage = null,
     ): self {
         $obj = new self;
 
-        $obj['number_ids'] = $number_ids;
+        $obj['numberIDs'] = $numberIDs;
 
-        null !== $additional_usages && $obj['additional_usages'] = $additional_usages;
-        null !== $civic_address_id && $obj['civic_address_id'] = $civic_address_id;
-        null !== $location_id && $obj['location_id'] = $location_id;
+        null !== $additionalUsages && $obj['additionalUsages'] = $additionalUsages;
+        null !== $civicAddressID && $obj['civicAddressID'] = $civicAddressID;
+        null !== $locationID && $obj['locationID'] = $locationID;
         null !== $usage && $obj['usage'] = $usage;
 
         return $obj;
@@ -112,7 +112,7 @@ final class UploadCreateParams implements BaseModel
     public function withNumberIDs(array $numberIDs): self
     {
         $obj = clone $this;
-        $obj['number_ids'] = $numberIDs;
+        $obj['numberIDs'] = $numberIDs;
 
         return $obj;
     }
@@ -123,7 +123,7 @@ final class UploadCreateParams implements BaseModel
     public function withAdditionalUsages(array $additionalUsages): self
     {
         $obj = clone $this;
-        $obj['additional_usages'] = $additionalUsages;
+        $obj['additionalUsages'] = $additionalUsages;
 
         return $obj;
     }
@@ -134,7 +134,7 @@ final class UploadCreateParams implements BaseModel
     public function withCivicAddressID(string $civicAddressID): self
     {
         $obj = clone $this;
-        $obj['civic_address_id'] = $civicAddressID;
+        $obj['civicAddressID'] = $civicAddressID;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class UploadCreateParams implements BaseModel
     public function withLocationID(string $locationID): self
     {
         $obj = clone $this;
-        $obj['location_id'] = $locationID;
+        $obj['locationID'] = $locationID;
 
         return $obj;
     }

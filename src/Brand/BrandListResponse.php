@@ -42,7 +42,7 @@ final class BrandListResponse implements BaseModel
      *
      * @param list<Record|array{
      *   assignedCampaingsCount?: int|null,
-     *   brandId?: string|null,
+     *   brandID?: string|null,
      *   companyName?: string|null,
      *   createdAt?: string|null,
      *   displayName?: string|null,
@@ -51,7 +51,7 @@ final class BrandListResponse implements BaseModel
      *   failureReasons?: string|null,
      *   identityStatus?: value-of<BrandIdentityStatus>|null,
      *   status?: value-of<Status>|null,
-     *   tcrBrandId?: string|null,
+     *   tcrBrandID?: string|null,
      *   updatedAt?: string|null,
      *   website?: string|null,
      * }> $records
@@ -81,7 +81,7 @@ final class BrandListResponse implements BaseModel
     /**
      * @param list<Record|array{
      *   assignedCampaingsCount?: int|null,
-     *   brandId?: string|null,
+     *   brandID?: string|null,
      *   companyName?: string|null,
      *   createdAt?: string|null,
      *   displayName?: string|null,
@@ -90,7 +90,7 @@ final class BrandListResponse implements BaseModel
      *   failureReasons?: string|null,
      *   identityStatus?: value-of<BrandIdentityStatus>|null,
      *   status?: value-of<Status>|null,
-     *   tcrBrandId?: string|null,
+     *   tcrBrandID?: string|null,
      *   updatedAt?: string|null,
      *   website?: string|null,
      * }> $records

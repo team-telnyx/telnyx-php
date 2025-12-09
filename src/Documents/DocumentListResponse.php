@@ -41,22 +41,22 @@ final class DocumentListResponse implements BaseModel
      *
      * @param list<DocServiceDocument|array{
      *   id?: string|null,
-     *   av_scan_status?: value-of<AvScanStatus>|null,
-     *   content_type?: string|null,
-     *   created_at?: string|null,
-     *   customer_reference?: string|null,
+     *   avScanStatus?: value-of<AvScanStatus>|null,
+     *   contentType?: string|null,
+     *   createdAt?: string|null,
+     *   customerReference?: string|null,
      *   filename?: string|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      *   sha256?: string|null,
      *   size?: Size|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -74,16 +74,16 @@ final class DocumentListResponse implements BaseModel
     /**
      * @param list<DocServiceDocument|array{
      *   id?: string|null,
-     *   av_scan_status?: value-of<AvScanStatus>|null,
-     *   content_type?: string|null,
-     *   created_at?: string|null,
-     *   customer_reference?: string|null,
+     *   avScanStatus?: value-of<AvScanStatus>|null,
+     *   contentType?: string|null,
+     *   createdAt?: string|null,
+     *   customerReference?: string|null,
      *   filename?: string|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      *   sha256?: string|null,
      *   size?: Size|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -96,10 +96,10 @@ final class DocumentListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

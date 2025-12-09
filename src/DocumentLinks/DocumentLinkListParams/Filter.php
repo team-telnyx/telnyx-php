@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter for document links (deepObject style). Originally: filter[linked_record_type], filter[linked_resource_id].
  *
  * @phpstan-type FilterShape = array{
- *   linked_record_type?: string|null, linked_resource_id?: string|null
+ *   linkedRecordType?: string|null, linkedResourceID?: string|null
  * }
  */
 final class Filter implements BaseModel
@@ -23,14 +23,14 @@ final class Filter implements BaseModel
     /**
      * The linked_record_type of the document to filter on.
      */
-    #[Optional]
-    public ?string $linked_record_type;
+    #[Optional('linked_record_type')]
+    public ?string $linkedRecordType;
 
     /**
      * The linked_resource_id of the document to filter on.
      */
-    #[Optional]
-    public ?string $linked_resource_id;
+    #[Optional('linked_resource_id')]
+    public ?string $linkedResourceID;
 
     public function __construct()
     {
@@ -43,13 +43,13 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $linked_record_type = null,
-        ?string $linked_resource_id = null
+        ?string $linkedRecordType = null,
+        ?string $linkedResourceID = null
     ): self {
         $obj = new self;
 
-        null !== $linked_record_type && $obj['linked_record_type'] = $linked_record_type;
-        null !== $linked_resource_id && $obj['linked_resource_id'] = $linked_resource_id;
+        null !== $linkedRecordType && $obj['linkedRecordType'] = $linkedRecordType;
+        null !== $linkedResourceID && $obj['linkedResourceID'] = $linkedResourceID;
 
         return $obj;
     }
@@ -60,7 +60,7 @@ final class Filter implements BaseModel
     public function withLinkedRecordType(string $linkedRecordType): self
     {
         $obj = clone $this;
-        $obj['linked_record_type'] = $linkedRecordType;
+        $obj['linkedRecordType'] = $linkedRecordType;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class Filter implements BaseModel
     public function withLinkedResourceID(string $linkedResourceID): self
     {
         $obj = clone $this;
-        $obj['linked_resource_id'] = $linkedResourceID;
+        $obj['linkedResourceID'] = $linkedResourceID;
 
         return $obj;
     }

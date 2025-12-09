@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\DocumentsService::update()
  *
  * @phpstan-type DocumentUpdateParamsShape = array{
- *   customer_reference?: string, filename?: string
+ *   customerReference?: string, filename?: string
  * }
  */
 final class DocumentUpdateParams implements BaseModel
@@ -27,8 +27,8 @@ final class DocumentUpdateParams implements BaseModel
     /**
      * Optional reference string for customer tracking.
      */
-    #[Optional]
-    public ?string $customer_reference;
+    #[Optional('customer_reference')]
+    public ?string $customerReference;
 
     /**
      * The filename of the document.
@@ -47,12 +47,12 @@ final class DocumentUpdateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $customer_reference = null,
+        ?string $customerReference = null,
         ?string $filename = null
     ): self {
         $obj = new self;
 
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
         null !== $filename && $obj['filename'] = $filename;
 
         return $obj;
@@ -64,7 +64,7 @@ final class DocumentUpdateParams implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }

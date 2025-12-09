@@ -7,6 +7,7 @@ namespace Telnyx\Services\Rooms;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\Sessions\SessionGetParticipantsResponse;
 use Telnyx\Rooms\Sessions\SessionGetResponse;
@@ -39,7 +40,7 @@ final class SessionsService implements SessionsContract
      *
      * View a room session.
      *
-     * @param array{include_participants?: bool}|SessionRetrieveParams $params
+     * @param array{includeParticipants?: bool}|SessionRetrieveParams $params
      *
      * @throws APIException
      */
@@ -57,7 +58,10 @@ final class SessionsService implements SessionsContract
         $response = $this->client->request(
             method: 'get',
             path: ['room_sessions/%1$s', $roomSessionID],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['includeParticipants' => 'include_participants']
+            ),
             options: $options,
             convert: SessionGetResponse::class,
         );
@@ -73,24 +77,24 @@ final class SessionsService implements SessionsContract
      * @param array{
      *   filter?: array{
      *     active?: bool,
-     *     date_created_at?: array{
+     *     dateCreatedAt?: array{
      *       eq?: string|\DateTimeInterface,
      *       gte?: string|\DateTimeInterface,
      *       lte?: string|\DateTimeInterface,
      *     },
-     *     date_ended_at?: array{
+     *     dateEndedAt?: array{
      *       eq?: string|\DateTimeInterface,
      *       gte?: string|\DateTimeInterface,
      *       lte?: string|\DateTimeInterface,
      *     },
-     *     date_updated_at?: array{
+     *     dateUpdatedAt?: array{
      *       eq?: string|\DateTimeInterface,
      *       gte?: string|\DateTimeInterface,
      *       lte?: string|\DateTimeInterface,
      *     },
-     *     room_id?: string,
+     *     roomID?: string,
      *   },
-     *   include_participants?: bool,
+     *   includeParticipants?: bool,
      *   page?: array{number?: int, size?: int},
      * }|SessionList0Params $params
      *
@@ -109,7 +113,10 @@ final class SessionsService implements SessionsContract
         $response = $this->client->request(
             method: 'get',
             path: 'room_sessions',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['includeParticipants' => 'include_participants']
+            ),
             options: $options,
             convert: SessionList0Response::class,
         );
@@ -125,23 +132,23 @@ final class SessionsService implements SessionsContract
      * @param array{
      *   filter?: array{
      *     active?: bool,
-     *     date_created_at?: array{
+     *     dateCreatedAt?: array{
      *       eq?: string|\DateTimeInterface,
      *       gte?: string|\DateTimeInterface,
      *       lte?: string|\DateTimeInterface,
      *     },
-     *     date_ended_at?: array{
+     *     dateEndedAt?: array{
      *       eq?: string|\DateTimeInterface,
      *       gte?: string|\DateTimeInterface,
      *       lte?: string|\DateTimeInterface,
      *     },
-     *     date_updated_at?: array{
+     *     dateUpdatedAt?: array{
      *       eq?: string|\DateTimeInterface,
      *       gte?: string|\DateTimeInterface,
      *       lte?: string|\DateTimeInterface,
      *     },
      *   },
-     *   include_participants?: bool,
+     *   includeParticipants?: bool,
      *   page?: array{number?: int, size?: int},
      * }|SessionList1Params $params
      *
@@ -161,7 +168,10 @@ final class SessionsService implements SessionsContract
         $response = $this->client->request(
             method: 'get',
             path: ['rooms/%1$s/sessions', $roomID],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['includeParticipants' => 'include_participants']
+            ),
             options: $options,
             convert: SessionList1Response::class,
         );
@@ -177,17 +187,17 @@ final class SessionsService implements SessionsContract
      * @param array{
      *   filter?: array{
      *     context?: string,
-     *     date_joined_at?: array{
+     *     dateJoinedAt?: array{
      *       eq?: string|\DateTimeInterface,
      *       gte?: string|\DateTimeInterface,
      *       lte?: string|\DateTimeInterface,
      *     },
-     *     date_left_at?: array{
+     *     dateLeftAt?: array{
      *       eq?: string|\DateTimeInterface,
      *       gte?: string|\DateTimeInterface,
      *       lte?: string|\DateTimeInterface,
      *     },
-     *     date_updated_at?: array{
+     *     dateUpdatedAt?: array{
      *       eq?: string|\DateTimeInterface,
      *       gte?: string|\DateTimeInterface,
      *       lte?: string|\DateTimeInterface,

@@ -19,18 +19,18 @@ use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\VoiceUsagePaymentMethod
  * Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[phone_number], filter[status], filter[country_iso_alpha2], filter[connection_id], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference], filter[number_type], filter[source].
  *
  * @phpstan-type FilterShape = array{
- *   billing_group_id?: string|null,
- *   connection_id?: string|null,
- *   country_iso_alpha2?: string|null|list<string>,
- *   customer_reference?: string|null,
- *   emergency_address_id?: string|null,
- *   number_type?: NumberType|null,
- *   phone_number?: string|null,
+ *   billingGroupID?: string|null,
+ *   connectionID?: string|null,
+ *   countryISOAlpha2?: string|null|list<string>,
+ *   customerReference?: string|null,
+ *   emergencyAddressID?: string|null,
+ *   numberType?: NumberType|null,
+ *   phoneNumber?: string|null,
  *   source?: value-of<Source>|null,
  *   status?: value-of<Status>|null,
  *   tag?: string|null,
- *   voice_connection_name?: VoiceConnectionName|null,
- *   voice_usage_payment_method?: value-of<VoiceUsagePaymentMethod>|null,
+ *   voiceConnectionName?: VoiceConnectionName|null,
+ *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
  * }
  */
 final class Filter implements BaseModel
@@ -41,47 +41,47 @@ final class Filter implements BaseModel
     /**
      * Filter by the billing_group_id associated with phone numbers. To filter to only phone numbers that have no billing group associated them, set the value of this filter to the string 'null'.
      */
-    #[Optional]
-    public ?string $billing_group_id;
+    #[Optional('billing_group_id')]
+    public ?string $billingGroupID;
 
     /**
      * Filter by connection_id.
      */
-    #[Optional]
-    public ?string $connection_id;
+    #[Optional('connection_id')]
+    public ?string $connectionID;
 
     /**
      * Filter by phone number country ISO alpha-2 code. Can be a single value or an array of values.
      *
-     * @var string|list<string>|null $country_iso_alpha2
+     * @var string|list<string>|null $countryISOAlpha2
      */
-    #[Optional(union: CountryISOAlpha2::class)]
-    public string|array|null $country_iso_alpha2;
+    #[Optional('country_iso_alpha2', union: CountryISOAlpha2::class)]
+    public string|array|null $countryISOAlpha2;
 
     /**
      * Filter numbers via the customer_reference set.
      */
-    #[Optional]
-    public ?string $customer_reference;
+    #[Optional('customer_reference')]
+    public ?string $customerReference;
 
     /**
      * Filter by the emergency_address_id associated with phone numbers. To filter only phone numbers that have no emergency address associated with them, set the value of this filter to the string 'null'.
      */
-    #[Optional]
-    public ?string $emergency_address_id;
+    #[Optional('emergency_address_id')]
+    public ?string $emergencyAddressID;
 
     /**
      * Filter phone numbers by phone number type.
      */
-    #[Optional]
-    public ?NumberType $number_type;
+    #[Optional('number_type')]
+    public ?NumberType $numberType;
 
     /**
      * Filter by phone number. Requires at least three digits.
      *              Non-numerical characters will result in no values being returned.
      */
-    #[Optional]
-    public ?string $phone_number;
+    #[Optional('phone_number')]
+    public ?string $phoneNumber;
 
     /**
      * Filter phone numbers by their source. Use 'ported' for numbers ported from other carriers, or 'purchased' for numbers bought directly from Telnyx.
@@ -109,18 +109,18 @@ final class Filter implements BaseModel
      * Filter by voice connection name pattern matching (requires include_connection param).
      */
     #[Optional('voice.connection_name')]
-    public ?VoiceConnectionName $voice_connection_name;
+    public ?VoiceConnectionName $voiceConnectionName;
 
     /**
      * Filter by usage_payment_method.
      *
-     * @var value-of<VoiceUsagePaymentMethod>|null $voice_usage_payment_method
+     * @var value-of<VoiceUsagePaymentMethod>|null $voiceUsagePaymentMethod
      */
     #[Optional(
         'voice.usage_payment_method',
         enum: VoiceUsagePaymentMethod::class
     )]
-    public ?string $voice_usage_payment_method;
+    public ?string $voiceUsagePaymentMethod;
 
     public function __construct()
     {
@@ -132,46 +132,46 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param string|list<string> $country_iso_alpha2
-     * @param NumberType|array{eq?: value-of<Eq>|null} $number_type
+     * @param string|list<string> $countryISOAlpha2
+     * @param NumberType|array{eq?: value-of<Eq>|null} $numberType
      * @param Source|value-of<Source> $source
      * @param Status|value-of<Status> $status
      * @param VoiceConnectionName|array{
      *   contains?: string|null,
-     *   ends_with?: string|null,
+     *   endsWith?: string|null,
      *   eq?: string|null,
-     *   starts_with?: string|null,
-     * } $voice_connection_name
-     * @param VoiceUsagePaymentMethod|value-of<VoiceUsagePaymentMethod> $voice_usage_payment_method
+     *   startsWith?: string|null,
+     * } $voiceConnectionName
+     * @param VoiceUsagePaymentMethod|value-of<VoiceUsagePaymentMethod> $voiceUsagePaymentMethod
      */
     public static function with(
-        ?string $billing_group_id = null,
-        ?string $connection_id = null,
-        string|array|null $country_iso_alpha2 = null,
-        ?string $customer_reference = null,
-        ?string $emergency_address_id = null,
-        NumberType|array|null $number_type = null,
-        ?string $phone_number = null,
+        ?string $billingGroupID = null,
+        ?string $connectionID = null,
+        string|array|null $countryISOAlpha2 = null,
+        ?string $customerReference = null,
+        ?string $emergencyAddressID = null,
+        NumberType|array|null $numberType = null,
+        ?string $phoneNumber = null,
         Source|string|null $source = null,
         Status|string|null $status = null,
         ?string $tag = null,
-        VoiceConnectionName|array|null $voice_connection_name = null,
-        VoiceUsagePaymentMethod|string|null $voice_usage_payment_method = null,
+        VoiceConnectionName|array|null $voiceConnectionName = null,
+        VoiceUsagePaymentMethod|string|null $voiceUsagePaymentMethod = null,
     ): self {
         $obj = new self;
 
-        null !== $billing_group_id && $obj['billing_group_id'] = $billing_group_id;
-        null !== $connection_id && $obj['connection_id'] = $connection_id;
-        null !== $country_iso_alpha2 && $obj['country_iso_alpha2'] = $country_iso_alpha2;
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
-        null !== $emergency_address_id && $obj['emergency_address_id'] = $emergency_address_id;
-        null !== $number_type && $obj['number_type'] = $number_type;
-        null !== $phone_number && $obj['phone_number'] = $phone_number;
+        null !== $billingGroupID && $obj['billingGroupID'] = $billingGroupID;
+        null !== $connectionID && $obj['connectionID'] = $connectionID;
+        null !== $countryISOAlpha2 && $obj['countryISOAlpha2'] = $countryISOAlpha2;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
+        null !== $emergencyAddressID && $obj['emergencyAddressID'] = $emergencyAddressID;
+        null !== $numberType && $obj['numberType'] = $numberType;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
         null !== $source && $obj['source'] = $source;
         null !== $status && $obj['status'] = $status;
         null !== $tag && $obj['tag'] = $tag;
-        null !== $voice_connection_name && $obj['voice_connection_name'] = $voice_connection_name;
-        null !== $voice_usage_payment_method && $obj['voice_usage_payment_method'] = $voice_usage_payment_method;
+        null !== $voiceConnectionName && $obj['voiceConnectionName'] = $voiceConnectionName;
+        null !== $voiceUsagePaymentMethod && $obj['voiceUsagePaymentMethod'] = $voiceUsagePaymentMethod;
 
         return $obj;
     }
@@ -182,7 +182,7 @@ final class Filter implements BaseModel
     public function withBillingGroupID(string $billingGroupID): self
     {
         $obj = clone $this;
-        $obj['billing_group_id'] = $billingGroupID;
+        $obj['billingGroupID'] = $billingGroupID;
 
         return $obj;
     }
@@ -193,7 +193,7 @@ final class Filter implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj['connection_id'] = $connectionID;
+        $obj['connectionID'] = $connectionID;
 
         return $obj;
     }
@@ -206,7 +206,7 @@ final class Filter implements BaseModel
     public function withCountryISOAlpha2(string|array $countryISOAlpha2): self
     {
         $obj = clone $this;
-        $obj['country_iso_alpha2'] = $countryISOAlpha2;
+        $obj['countryISOAlpha2'] = $countryISOAlpha2;
 
         return $obj;
     }
@@ -217,7 +217,7 @@ final class Filter implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }
@@ -228,7 +228,7 @@ final class Filter implements BaseModel
     public function withEmergencyAddressID(string $emergencyAddressID): self
     {
         $obj = clone $this;
-        $obj['emergency_address_id'] = $emergencyAddressID;
+        $obj['emergencyAddressID'] = $emergencyAddressID;
 
         return $obj;
     }
@@ -241,7 +241,7 @@ final class Filter implements BaseModel
     public function withNumberType(NumberType|array $numberType): self
     {
         $obj = clone $this;
-        $obj['number_type'] = $numberType;
+        $obj['numberType'] = $numberType;
 
         return $obj;
     }
@@ -253,7 +253,7 @@ final class Filter implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -300,16 +300,16 @@ final class Filter implements BaseModel
      *
      * @param VoiceConnectionName|array{
      *   contains?: string|null,
-     *   ends_with?: string|null,
+     *   endsWith?: string|null,
      *   eq?: string|null,
-     *   starts_with?: string|null,
+     *   startsWith?: string|null,
      * } $voiceConnectionName
      */
     public function withVoiceConnectionName(
         VoiceConnectionName|array $voiceConnectionName
     ): self {
         $obj = clone $this;
-        $obj['voice_connection_name'] = $voiceConnectionName;
+        $obj['voiceConnectionName'] = $voiceConnectionName;
 
         return $obj;
     }
@@ -323,7 +323,7 @@ final class Filter implements BaseModel
         VoiceUsagePaymentMethod|string $voiceUsagePaymentMethod
     ): self {
         $obj = clone $this;
-        $obj['voice_usage_payment_method'] = $voiceUsagePaymentMethod;
+        $obj['voiceUsagePaymentMethod'] = $voiceUsagePaymentMethod;
 
         return $obj;
     }

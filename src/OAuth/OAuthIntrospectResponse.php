@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type OAuthIntrospectResponseShape = array{
  *   active: bool,
  *   aud?: string|null,
- *   client_id?: string|null,
+ *   clientID?: string|null,
  *   exp?: int|null,
  *   iat?: int|null,
  *   iss?: string|null,
@@ -40,8 +40,8 @@ final class OAuthIntrospectResponse implements BaseModel
     /**
      * Client identifier.
      */
-    #[Optional]
-    public ?string $client_id;
+    #[Optional('client_id')]
+    public ?string $clientID;
 
     /**
      * Expiration timestamp.
@@ -94,7 +94,7 @@ final class OAuthIntrospectResponse implements BaseModel
     public static function with(
         bool $active,
         ?string $aud = null,
-        ?string $client_id = null,
+        ?string $clientID = null,
         ?int $exp = null,
         ?int $iat = null,
         ?string $iss = null,
@@ -105,7 +105,7 @@ final class OAuthIntrospectResponse implements BaseModel
         $obj['active'] = $active;
 
         null !== $aud && $obj['aud'] = $aud;
-        null !== $client_id && $obj['client_id'] = $client_id;
+        null !== $clientID && $obj['clientID'] = $clientID;
         null !== $exp && $obj['exp'] = $exp;
         null !== $iat && $obj['iat'] = $iat;
         null !== $iss && $obj['iss'] = $iss;
@@ -142,7 +142,7 @@ final class OAuthIntrospectResponse implements BaseModel
     public function withClientID(string $clientID): self
     {
         $obj = clone $this;
-        $obj['client_id'] = $clientID;
+        $obj['clientID'] = $clientID;
 
         return $obj;
     }

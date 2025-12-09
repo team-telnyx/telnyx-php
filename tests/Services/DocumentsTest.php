@@ -134,6 +134,7 @@ final class DocumentsTest extends TestCase
 
         $result = $this->client->documents->upload([
             'url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+            'file' => 'ZXhhbXBsZSBvZiBlbmNvZGVkIGNvbnRlbnQ=',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -149,8 +150,9 @@ final class DocumentsTest extends TestCase
 
         $result = $this->client->documents->upload([
             'url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-            'customer_reference' => 'MY REF 001',
+            'customerReference' => 'MY REF 001',
             'filename' => 'test-document.pdf',
+            'file' => 'ZXhhbXBsZSBvZiBlbmNvZGVkIGNvbnRlbnQ=',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -166,6 +168,7 @@ final class DocumentsTest extends TestCase
 
         $result = $this->client->documents->uploadJson([
             'url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+            'file' => 'ZXhhbXBsZSBvZiBlbmNvZGVkIGNvbnRlbnQ=',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -181,8 +184,9 @@ final class DocumentsTest extends TestCase
 
         $result = $this->client->documents->uploadJson([
             'url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-            'customer_reference' => 'MY REF 001',
+            'customerReference' => 'MY REF 001',
             'filename' => 'test-document.pdf',
+            'file' => 'ZXhhbXBsZSBvZiBlbmNvZGVkIGNvbnRlbnQ=',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -39,18 +39,18 @@ final class VerificationCodeListResponse implements BaseModel
      *
      * @param list<Data|array{
      *   id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   phone_number?: string|null,
-     *   porting_order_id?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   phoneNumber?: string|null,
+     *   portingOrderID?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      *   verified?: bool|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -68,11 +68,11 @@ final class VerificationCodeListResponse implements BaseModel
     /**
      * @param list<Data|array{
      *   id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   phone_number?: string|null,
-     *   porting_order_id?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   phoneNumber?: string|null,
+     *   portingOrderID?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      *   verified?: bool|null,
      * }> $data
      */
@@ -86,10 +86,10 @@ final class VerificationCodeListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

@@ -31,20 +31,19 @@ use Telnyx\Core\Contracts\BaseModel;
  *   model: string,
  *   name: string,
  *   description?: string,
- *   dynamic_variables?: array<string,mixed>,
- *   dynamic_variables_webhook_url?: string,
- *   enabled_features?: list<EnabledFeatures|value-of<EnabledFeatures>>,
+ *   dynamicVariables?: array<string,mixed>,
+ *   dynamicVariablesWebhookURL?: string,
+ *   enabledFeatures?: list<EnabledFeatures|value-of<EnabledFeatures>>,
  *   greeting?: string,
- *   insight_settings?: InsightSettings|array{insight_group_id?: string|null},
- *   llm_api_key_ref?: string,
- *   messaging_settings?: MessagingSettings|array{
- *     default_messaging_profile_id?: string|null,
- *     delivery_status_webhook_url?: string|null,
+ *   insightSettings?: InsightSettings|array{insightGroupID?: string|null},
+ *   llmAPIKeyRef?: string,
+ *   messagingSettings?: MessagingSettings|array{
+ *     defaultMessagingProfileID?: string|null,
+ *     deliveryStatusWebhookURL?: string|null,
  *   },
- *   privacy_settings?: PrivacySettings|array{data_retention?: bool|null},
- *   telephony_settings?: TelephonySettings|array{
- *     default_texml_app_id?: string|null,
- *     supports_unauthenticated_web_calls?: bool|null,
+ *   privacySettings?: PrivacySettings|array{dataRetention?: bool|null},
+ *   telephonySettings?: TelephonySettings|array{
+ *     defaultTexmlAppID?: string|null, supportsUnauthenticatedWebCalls?: bool|null
  *   },
  *   tools?: list<WebhookTool|array{
  *     type: value-of<Type>, webhook: InferenceEmbeddingWebhookToolParams
@@ -64,7 +63,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *     refer: Refer,
  *     type: value-of<\Telnyx\AI\Assistants\AssistantTool\SipReferTool\Type>,
  *   }|DtmfTool|array{
- *     send_dtmf: array<string,mixed>,
+ *     sendDtmf: array<string,mixed>,
  *     type: value-of<\Telnyx\AI\Assistants\AssistantTool\DtmfTool\Type>,
  *   }>,
  *   transcription?: TranscriptionSettings|array{
@@ -73,11 +72,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *     region?: string|null,
  *     settings?: Settings|null,
  *   },
- *   voice_settings?: VoiceSettings|array{
+ *   voiceSettings?: VoiceSettings|array{
  *     voice: string,
- *     api_key_ref?: string|null,
- *     background_audio?: null|UnionMember0|UnionMember1|UnionMember2,
- *     voice_speed?: float|null,
+ *     apiKeyRef?: string|null,
+ *     backgroundAudio?: null|UnionMember0|UnionMember1|UnionMember2,
+ *     voiceSpeed?: float|null,
  *   },
  * }
  */
@@ -108,20 +107,20 @@ final class AssistantCreateParams implements BaseModel
     /**
      * Map of dynamic variables and their default values.
      *
-     * @var array<string,mixed>|null $dynamic_variables
+     * @var array<string,mixed>|null $dynamicVariables
      */
-    #[Optional(map: 'mixed')]
-    public ?array $dynamic_variables;
+    #[Optional('dynamic_variables', map: 'mixed')]
+    public ?array $dynamicVariables;
 
     /**
      * If the dynamic_variables_webhook_url is set for the assistant, we will send a request at the start of the conversation. See our [guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) for more information.
      */
-    #[Optional]
-    public ?string $dynamic_variables_webhook_url;
+    #[Optional('dynamic_variables_webhook_url')]
+    public ?string $dynamicVariablesWebhookURL;
 
-    /** @var list<value-of<EnabledFeatures>>|null $enabled_features */
-    #[Optional(list: EnabledFeatures::class)]
-    public ?array $enabled_features;
+    /** @var list<value-of<EnabledFeatures>>|null $enabledFeatures */
+    #[Optional('enabled_features', list: EnabledFeatures::class)]
+    public ?array $enabledFeatures;
 
     /**
      * Text that the assistant will use to start the conversation. This may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
@@ -129,23 +128,23 @@ final class AssistantCreateParams implements BaseModel
     #[Optional]
     public ?string $greeting;
 
-    #[Optional]
-    public ?InsightSettings $insight_settings;
+    #[Optional('insight_settings')]
+    public ?InsightSettings $insightSettings;
 
     /**
      * This is only needed when using third-party inference providers. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) that refers to your LLM provider's API key. Warning: Free plans are unlikely to work with this integration.
      */
-    #[Optional]
-    public ?string $llm_api_key_ref;
+    #[Optional('llm_api_key_ref')]
+    public ?string $llmAPIKeyRef;
 
-    #[Optional]
-    public ?MessagingSettings $messaging_settings;
+    #[Optional('messaging_settings')]
+    public ?MessagingSettings $messagingSettings;
 
-    #[Optional]
-    public ?PrivacySettings $privacy_settings;
+    #[Optional('privacy_settings')]
+    public ?PrivacySettings $privacySettings;
 
-    #[Optional]
-    public ?TelephonySettings $telephony_settings;
+    #[Optional('telephony_settings')]
+    public ?TelephonySettings $telephonySettings;
 
     /**
      * The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
@@ -158,8 +157,8 @@ final class AssistantCreateParams implements BaseModel
     #[Optional]
     public ?TranscriptionSettings $transcription;
 
-    #[Optional]
-    public ?VoiceSettings $voice_settings;
+    #[Optional('voice_settings')]
+    public ?VoiceSettings $voiceSettings;
 
     /**
      * `new AssistantCreateParams()` is missing required properties by the API.
@@ -188,18 +187,17 @@ final class AssistantCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,mixed> $dynamic_variables
-     * @param list<EnabledFeatures|value-of<EnabledFeatures>> $enabled_features
-     * @param InsightSettings|array{insight_group_id?: string|null} $insight_settings
+     * @param array<string,mixed> $dynamicVariables
+     * @param list<EnabledFeatures|value-of<EnabledFeatures>> $enabledFeatures
+     * @param InsightSettings|array{insightGroupID?: string|null} $insightSettings
      * @param MessagingSettings|array{
-     *   default_messaging_profile_id?: string|null,
-     *   delivery_status_webhook_url?: string|null,
-     * } $messaging_settings
-     * @param PrivacySettings|array{data_retention?: bool|null} $privacy_settings
+     *   defaultMessagingProfileID?: string|null,
+     *   deliveryStatusWebhookURL?: string|null,
+     * } $messagingSettings
+     * @param PrivacySettings|array{dataRetention?: bool|null} $privacySettings
      * @param TelephonySettings|array{
-     *   default_texml_app_id?: string|null,
-     *   supports_unauthenticated_web_calls?: bool|null,
-     * } $telephony_settings
+     *   defaultTexmlAppID?: string|null, supportsUnauthenticatedWebCalls?: bool|null
+     * } $telephonySettings
      * @param list<WebhookTool|array{
      *   type: value-of<Type>, webhook: InferenceEmbeddingWebhookToolParams
      * }|RetrievalTool|array{
@@ -218,7 +216,7 @@ final class AssistantCreateParams implements BaseModel
      *   refer: Refer,
      *   type: value-of<SipReferTool\Type>,
      * }|DtmfTool|array{
-     *   send_dtmf: array<string,mixed>,
+     *   sendDtmf: array<string,mixed>,
      *   type: value-of<DtmfTool\Type>,
      * }> $tools
      * @param TranscriptionSettings|array{
@@ -229,28 +227,28 @@ final class AssistantCreateParams implements BaseModel
      * } $transcription
      * @param VoiceSettings|array{
      *   voice: string,
-     *   api_key_ref?: string|null,
-     *   background_audio?: UnionMember0|UnionMember1|UnionMember2|null,
-     *   voice_speed?: float|null,
-     * } $voice_settings
+     *   apiKeyRef?: string|null,
+     *   backgroundAudio?: UnionMember0|UnionMember1|UnionMember2|null,
+     *   voiceSpeed?: float|null,
+     * } $voiceSettings
      */
     public static function with(
         string $instructions,
         string $model,
         string $name,
         ?string $description = null,
-        ?array $dynamic_variables = null,
-        ?string $dynamic_variables_webhook_url = null,
-        ?array $enabled_features = null,
+        ?array $dynamicVariables = null,
+        ?string $dynamicVariablesWebhookURL = null,
+        ?array $enabledFeatures = null,
         ?string $greeting = null,
-        InsightSettings|array|null $insight_settings = null,
-        ?string $llm_api_key_ref = null,
-        MessagingSettings|array|null $messaging_settings = null,
-        PrivacySettings|array|null $privacy_settings = null,
-        TelephonySettings|array|null $telephony_settings = null,
+        InsightSettings|array|null $insightSettings = null,
+        ?string $llmAPIKeyRef = null,
+        MessagingSettings|array|null $messagingSettings = null,
+        PrivacySettings|array|null $privacySettings = null,
+        TelephonySettings|array|null $telephonySettings = null,
         ?array $tools = null,
         TranscriptionSettings|array|null $transcription = null,
-        VoiceSettings|array|null $voice_settings = null,
+        VoiceSettings|array|null $voiceSettings = null,
     ): self {
         $obj = new self;
 
@@ -259,18 +257,18 @@ final class AssistantCreateParams implements BaseModel
         $obj['name'] = $name;
 
         null !== $description && $obj['description'] = $description;
-        null !== $dynamic_variables && $obj['dynamic_variables'] = $dynamic_variables;
-        null !== $dynamic_variables_webhook_url && $obj['dynamic_variables_webhook_url'] = $dynamic_variables_webhook_url;
-        null !== $enabled_features && $obj['enabled_features'] = $enabled_features;
+        null !== $dynamicVariables && $obj['dynamicVariables'] = $dynamicVariables;
+        null !== $dynamicVariablesWebhookURL && $obj['dynamicVariablesWebhookURL'] = $dynamicVariablesWebhookURL;
+        null !== $enabledFeatures && $obj['enabledFeatures'] = $enabledFeatures;
         null !== $greeting && $obj['greeting'] = $greeting;
-        null !== $insight_settings && $obj['insight_settings'] = $insight_settings;
-        null !== $llm_api_key_ref && $obj['llm_api_key_ref'] = $llm_api_key_ref;
-        null !== $messaging_settings && $obj['messaging_settings'] = $messaging_settings;
-        null !== $privacy_settings && $obj['privacy_settings'] = $privacy_settings;
-        null !== $telephony_settings && $obj['telephony_settings'] = $telephony_settings;
+        null !== $insightSettings && $obj['insightSettings'] = $insightSettings;
+        null !== $llmAPIKeyRef && $obj['llmAPIKeyRef'] = $llmAPIKeyRef;
+        null !== $messagingSettings && $obj['messagingSettings'] = $messagingSettings;
+        null !== $privacySettings && $obj['privacySettings'] = $privacySettings;
+        null !== $telephonySettings && $obj['telephonySettings'] = $telephonySettings;
         null !== $tools && $obj['tools'] = $tools;
         null !== $transcription && $obj['transcription'] = $transcription;
-        null !== $voice_settings && $obj['voice_settings'] = $voice_settings;
+        null !== $voiceSettings && $obj['voiceSettings'] = $voiceSettings;
 
         return $obj;
     }
@@ -321,7 +319,7 @@ final class AssistantCreateParams implements BaseModel
     public function withDynamicVariables(array $dynamicVariables): self
     {
         $obj = clone $this;
-        $obj['dynamic_variables'] = $dynamicVariables;
+        $obj['dynamicVariables'] = $dynamicVariables;
 
         return $obj;
     }
@@ -333,7 +331,7 @@ final class AssistantCreateParams implements BaseModel
         string $dynamicVariablesWebhookURL
     ): self {
         $obj = clone $this;
-        $obj['dynamic_variables_webhook_url'] = $dynamicVariablesWebhookURL;
+        $obj['dynamicVariablesWebhookURL'] = $dynamicVariablesWebhookURL;
 
         return $obj;
     }
@@ -344,7 +342,7 @@ final class AssistantCreateParams implements BaseModel
     public function withEnabledFeatures(array $enabledFeatures): self
     {
         $obj = clone $this;
-        $obj['enabled_features'] = $enabledFeatures;
+        $obj['enabledFeatures'] = $enabledFeatures;
 
         return $obj;
     }
@@ -361,13 +359,13 @@ final class AssistantCreateParams implements BaseModel
     }
 
     /**
-     * @param InsightSettings|array{insight_group_id?: string|null} $insightSettings
+     * @param InsightSettings|array{insightGroupID?: string|null} $insightSettings
      */
     public function withInsightSettings(
         InsightSettings|array $insightSettings
     ): self {
         $obj = clone $this;
-        $obj['insight_settings'] = $insightSettings;
+        $obj['insightSettings'] = $insightSettings;
 
         return $obj;
     }
@@ -378,49 +376,48 @@ final class AssistantCreateParams implements BaseModel
     public function withLlmAPIKeyRef(string $llmAPIKeyRef): self
     {
         $obj = clone $this;
-        $obj['llm_api_key_ref'] = $llmAPIKeyRef;
+        $obj['llmAPIKeyRef'] = $llmAPIKeyRef;
 
         return $obj;
     }
 
     /**
      * @param MessagingSettings|array{
-     *   default_messaging_profile_id?: string|null,
-     *   delivery_status_webhook_url?: string|null,
+     *   defaultMessagingProfileID?: string|null,
+     *   deliveryStatusWebhookURL?: string|null,
      * } $messagingSettings
      */
     public function withMessagingSettings(
         MessagingSettings|array $messagingSettings
     ): self {
         $obj = clone $this;
-        $obj['messaging_settings'] = $messagingSettings;
+        $obj['messagingSettings'] = $messagingSettings;
 
         return $obj;
     }
 
     /**
-     * @param PrivacySettings|array{data_retention?: bool|null} $privacySettings
+     * @param PrivacySettings|array{dataRetention?: bool|null} $privacySettings
      */
     public function withPrivacySettings(
         PrivacySettings|array $privacySettings
     ): self {
         $obj = clone $this;
-        $obj['privacy_settings'] = $privacySettings;
+        $obj['privacySettings'] = $privacySettings;
 
         return $obj;
     }
 
     /**
      * @param TelephonySettings|array{
-     *   default_texml_app_id?: string|null,
-     *   supports_unauthenticated_web_calls?: bool|null,
+     *   defaultTexmlAppID?: string|null, supportsUnauthenticatedWebCalls?: bool|null
      * } $telephonySettings
      */
     public function withTelephonySettings(
         TelephonySettings|array $telephonySettings
     ): self {
         $obj = clone $this;
-        $obj['telephony_settings'] = $telephonySettings;
+        $obj['telephonySettings'] = $telephonySettings;
 
         return $obj;
     }
@@ -446,7 +443,7 @@ final class AssistantCreateParams implements BaseModel
      *   refer: Refer,
      *   type: value-of<SipReferTool\Type>,
      * }|DtmfTool|array{
-     *   send_dtmf: array<string,mixed>,
+     *   sendDtmf: array<string,mixed>,
      *   type: value-of<DtmfTool\Type>,
      * }> $tools
      */
@@ -478,15 +475,15 @@ final class AssistantCreateParams implements BaseModel
     /**
      * @param VoiceSettings|array{
      *   voice: string,
-     *   api_key_ref?: string|null,
-     *   background_audio?: UnionMember0|UnionMember1|UnionMember2|null,
-     *   voice_speed?: float|null,
+     *   apiKeyRef?: string|null,
+     *   backgroundAudio?: UnionMember0|UnionMember1|UnionMember2|null,
+     *   voiceSpeed?: float|null,
      * } $voiceSettings
      */
     public function withVoiceSettings(VoiceSettings|array $voiceSettings): self
     {
         $obj = clone $this;
-        $obj['voice_settings'] = $voiceSettings;
+        $obj['voiceSettings'] = $voiceSettings;
 
         return $obj;
     }

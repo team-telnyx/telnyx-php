@@ -51,9 +51,9 @@ final class WebhookDeliveriesService implements WebhookDeliveriesContract
      * @param array{
      *   filter?: array{
      *     attempts?: array{contains?: string},
-     *     event_type?: string,
-     *     finished_at?: array{gte?: string, lte?: string},
-     *     started_at?: array{gte?: string, lte?: string},
+     *     eventType?: string,
+     *     finishedAt?: array{gte?: string, lte?: string},
+     *     startedAt?: array{gte?: string, lte?: string},
      *     status?: array{eq?: 'delivered'|'failed'|Eq},
      *     webhook?: array{contains?: string},
      *   },

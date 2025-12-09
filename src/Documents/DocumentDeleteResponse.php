@@ -36,16 +36,16 @@ final class DocumentDeleteResponse implements BaseModel
      *
      * @param DocServiceDocument|array{
      *   id?: string|null,
-     *   av_scan_status?: value-of<AvScanStatus>|null,
-     *   content_type?: string|null,
-     *   created_at?: string|null,
-     *   customer_reference?: string|null,
+     *   avScanStatus?: value-of<AvScanStatus>|null,
+     *   contentType?: string|null,
+     *   createdAt?: string|null,
+     *   customerReference?: string|null,
      *   filename?: string|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      *   sha256?: string|null,
      *   size?: Size|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public static function with(DocServiceDocument|array|null $data = null): self
@@ -60,16 +60,16 @@ final class DocumentDeleteResponse implements BaseModel
     /**
      * @param DocServiceDocument|array{
      *   id?: string|null,
-     *   av_scan_status?: value-of<AvScanStatus>|null,
-     *   content_type?: string|null,
-     *   created_at?: string|null,
-     *   customer_reference?: string|null,
+     *   avScanStatus?: value-of<AvScanStatus>|null,
+     *   contentType?: string|null,
+     *   createdAt?: string|null,
+     *   customerReference?: string|null,
      *   filename?: string|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      *   sha256?: string|null,
      *   size?: Size|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public function withData(DocServiceDocument|array $data): self

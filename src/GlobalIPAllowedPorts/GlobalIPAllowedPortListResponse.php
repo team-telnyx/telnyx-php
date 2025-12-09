@@ -35,11 +35,11 @@ final class GlobalIPAllowedPortListResponse implements BaseModel
      *
      * @param list<Data|array{
      *   id?: string|null,
-     *   first_port?: int|null,
-     *   last_port?: int|null,
+     *   firstPort?: int|null,
+     *   lastPort?: int|null,
      *   name?: string|null,
-     *   protocol_code?: string|null,
-     *   record_type?: string|null,
+     *   protocolCode?: string|null,
+     *   recordType?: string|null,
      * }> $data
      */
     public static function with(?array $data = null): self
@@ -54,11 +54,11 @@ final class GlobalIPAllowedPortListResponse implements BaseModel
     /**
      * @param list<Data|array{
      *   id?: string|null,
-     *   first_port?: int|null,
-     *   last_port?: int|null,
+     *   firstPort?: int|null,
+     *   lastPort?: int|null,
      *   name?: string|null,
-     *   protocol_code?: string|null,
-     *   record_type?: string|null,
+     *   protocolCode?: string|null,
+     *   recordType?: string|null,
      * }> $data
      */
     public function withData(array $data): self

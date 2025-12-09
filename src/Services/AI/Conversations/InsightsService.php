@@ -30,7 +30,7 @@ final class InsightsService implements InsightsContract
      * @param array{
      *   instructions: string,
      *   name: string,
-     *   json_schema?: mixed|string,
+     *   jsonSchema?: mixed|string,
      *   webhook?: string,
      * }|InsightCreateParams $params
      *
@@ -86,7 +86,7 @@ final class InsightsService implements InsightsContract
      *
      * @param array{
      *   instructions?: string,
-     *   json_schema?: mixed|string,
+     *   jsonSchema?: mixed|string,
      *   name?: string,
      *   webhook?: string,
      * }|InsightUpdateParams $params

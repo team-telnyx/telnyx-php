@@ -12,11 +12,11 @@ use Telnyx\WirelessBlocklists\WirelessBlocklist\Type;
 /**
  * @phpstan-type WirelessBlocklistShape = array{
  *   id?: string|null,
- *   created_at?: string|null,
+ *   createdAt?: string|null,
  *   name?: string|null,
- *   record_type?: string|null,
+ *   recordType?: string|null,
  *   type?: value-of<Type>|null,
- *   updated_at?: string|null,
+ *   updatedAt?: string|null,
  *   values?: list<string>|null,
  * }
  */
@@ -34,8 +34,8 @@ final class WirelessBlocklist implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Optional]
-    public ?string $created_at;
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
     /**
      * The wireless blocklist name.
@@ -43,8 +43,8 @@ final class WirelessBlocklist implements BaseModel
     #[Optional]
     public ?string $name;
 
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * The type of the wireless blocklist.
@@ -57,8 +57,8 @@ final class WirelessBlocklist implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Optional]
-    public ?string $updated_at;
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     /**
      * Values to block. The values here depend on the `type` of Wireless Blocklist.
@@ -83,21 +83,21 @@ final class WirelessBlocklist implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $created_at = null,
+        ?string $createdAt = null,
         ?string $name = null,
-        ?string $record_type = null,
+        ?string $recordType = null,
         Type|string|null $type = null,
-        ?string $updated_at = null,
+        ?string $updatedAt = null,
         ?array $values = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
         null !== $name && $obj['name'] = $name;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $recordType && $obj['recordType'] = $recordType;
         null !== $type && $obj['type'] = $type;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
         null !== $values && $obj['values'] = $values;
 
         return $obj;
@@ -120,7 +120,7 @@ final class WirelessBlocklist implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class WirelessBlocklist implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -163,7 +163,7 @@ final class WirelessBlocklist implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

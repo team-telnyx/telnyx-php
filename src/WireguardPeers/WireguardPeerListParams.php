@@ -17,7 +17,7 @@ use Telnyx\WireguardPeers\WireguardPeerListParams\Page;
  * @see Telnyx\Services\WireguardPeersService::list()
  *
  * @phpstan-type WireguardPeerListParamsShape = array{
- *   filter?: Filter|array{wireguard_interface_id?: string|null},
+ *   filter?: Filter|array{wireguardInterfaceID?: string|null},
  *   page?: Page|array{number?: int|null, size?: int|null},
  * }
  */
@@ -49,7 +49,7 @@ final class WireguardPeerListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{wireguard_interface_id?: string|null} $filter
+     * @param Filter|array{wireguardInterfaceID?: string|null} $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      */
     public static function with(
@@ -67,7 +67,7 @@ final class WireguardPeerListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[wireguard_interface_id].
      *
-     * @param Filter|array{wireguard_interface_id?: string|null} $filter
+     * @param Filter|array{wireguardInterfaceID?: string|null} $filter
      */
     public function withFilter(Filter|array $filter): self
     {

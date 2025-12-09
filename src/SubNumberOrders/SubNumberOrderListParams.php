@@ -17,10 +17,10 @@ use Telnyx\SubNumberOrders\SubNumberOrderListParams\Filter;
  *
  * @phpstan-type SubNumberOrderListParamsShape = array{
  *   filter?: Filter|array{
- *     country_code?: string|null,
- *     order_request_id?: string|null,
- *     phone_number_type?: string|null,
- *     phone_numbers_count?: int|null,
+ *     countryCode?: string|null,
+ *     orderRequestID?: string|null,
+ *     phoneNumberType?: string|null,
+ *     phoneNumbersCount?: int|null,
  *     status?: string|null,
  *   },
  * }
@@ -48,10 +48,10 @@ final class SubNumberOrderListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   country_code?: string|null,
-     *   order_request_id?: string|null,
-     *   phone_number_type?: string|null,
-     *   phone_numbers_count?: int|null,
+     *   countryCode?: string|null,
+     *   orderRequestID?: string|null,
+     *   phoneNumberType?: string|null,
+     *   phoneNumbersCount?: int|null,
      *   status?: string|null,
      * } $filter
      */
@@ -68,10 +68,10 @@ final class SubNumberOrderListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[order_request_id], filter[country_code], filter[phone_number_type], filter[phone_numbers_count].
      *
      * @param Filter|array{
-     *   country_code?: string|null,
-     *   order_request_id?: string|null,
-     *   phone_number_type?: string|null,
-     *   phone_numbers_count?: int|null,
+     *   countryCode?: string|null,
+     *   orderRequestID?: string|null,
+     *   phoneNumberType?: string|null,
+     *   phoneNumbersCount?: int|null,
      *   status?: string|null,
      * } $filter
      */

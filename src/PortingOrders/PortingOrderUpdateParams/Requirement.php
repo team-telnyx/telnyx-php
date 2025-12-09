@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Specifies a value for a requirement on the Porting Order.
  *
  * @phpstan-type RequirementShape = array{
- *   field_value: string, requirement_type_id: string
+ *   fieldValue: string, requirementTypeID: string
  * }
  */
 final class Requirement implements BaseModel
@@ -23,21 +23,21 @@ final class Requirement implements BaseModel
     /**
      * identifies the document or provides the text value that satisfies this requirement.
      */
-    #[Required]
-    public string $field_value;
+    #[Required('field_value')]
+    public string $fieldValue;
 
     /**
      * Identifies the requirement type that the `field_value` fulfills.
      */
-    #[Required]
-    public string $requirement_type_id;
+    #[Required('requirement_type_id')]
+    public string $requirementTypeID;
 
     /**
      * `new Requirement()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Requirement::with(field_value: ..., requirement_type_id: ...)
+     * Requirement::with(fieldValue: ..., requirementTypeID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -57,13 +57,13 @@ final class Requirement implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $field_value,
-        string $requirement_type_id
+        string $fieldValue,
+        string $requirementTypeID
     ): self {
         $obj = new self;
 
-        $obj['field_value'] = $field_value;
-        $obj['requirement_type_id'] = $requirement_type_id;
+        $obj['fieldValue'] = $fieldValue;
+        $obj['requirementTypeID'] = $requirementTypeID;
 
         return $obj;
     }
@@ -74,7 +74,7 @@ final class Requirement implements BaseModel
     public function withFieldValue(string $fieldValue): self
     {
         $obj = clone $this;
-        $obj['field_value'] = $fieldValue;
+        $obj['fieldValue'] = $fieldValue;
 
         return $obj;
     }
@@ -85,7 +85,7 @@ final class Requirement implements BaseModel
     public function withRequirementTypeID(string $requirementTypeID): self
     {
         $obj = clone $this;
-        $obj['requirement_type_id'] = $requirementTypeID;
+        $obj['requirementTypeID'] = $requirementTypeID;
 
         return $obj;
     }

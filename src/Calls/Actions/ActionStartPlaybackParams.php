@@ -27,17 +27,17 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Calls\ActionsService::startPlayback()
  *
  * @phpstan-type ActionStartPlaybackParamsShape = array{
- *   audio_type?: AudioType|value-of<AudioType>,
- *   audio_url?: string,
- *   cache_audio?: bool,
- *   client_state?: string,
- *   command_id?: string,
+ *   audioType?: AudioType|value-of<AudioType>,
+ *   audioURL?: string,
+ *   cacheAudio?: bool,
+ *   clientState?: string,
+ *   commandID?: string,
  *   loop?: string|int,
- *   media_name?: string,
+ *   mediaName?: string,
  *   overlay?: bool,
- *   playback_content?: string,
+ *   playbackContent?: string,
  *   stop?: string,
- *   target_legs?: string,
+ *   targetLegs?: string,
  * }
  */
 final class ActionStartPlaybackParams implements BaseModel
@@ -49,34 +49,34 @@ final class ActionStartPlaybackParams implements BaseModel
     /**
      * Specifies the type of audio provided in `audio_url` or `playback_content`.
      *
-     * @var value-of<AudioType>|null $audio_type
+     * @var value-of<AudioType>|null $audioType
      */
-    #[Optional(enum: AudioType::class)]
-    public ?string $audio_type;
+    #[Optional('audio_type', enum: AudioType::class)]
+    public ?string $audioType;
 
     /**
      * The URL of a file to be played back on the call. The URL can point to either a WAV or MP3 file. media_name and audio_url cannot be used together in one request.
      */
-    #[Optional]
-    public ?string $audio_url;
+    #[Optional('audio_url')]
+    public ?string $audioURL;
 
     /**
      * Caches the audio file. Useful when playing the same audio file multiple times during the call.
      */
-    #[Optional]
-    public ?bool $cache_audio;
+    #[Optional('cache_audio')]
+    public ?bool $cacheAudio;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Optional]
-    public ?string $client_state;
+    #[Optional('client_state')]
+    public ?string $clientState;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Optional]
-    public ?string $command_id;
+    #[Optional('command_id')]
+    public ?string $commandID;
 
     /**
      * The number of times the audio file should be played. If supplied, the value must be an integer between 1 and 100, or the special string `infinity` for an endless loop.
@@ -87,8 +87,8 @@ final class ActionStartPlaybackParams implements BaseModel
     /**
      * The media_name of a file to be played back on the call. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file.
      */
-    #[Optional]
-    public ?string $media_name;
+    #[Optional('media_name')]
+    public ?string $mediaName;
 
     /**
      * When enabled, audio will be mixed on top of any other audio that is actively being played back. Note that `overlay: true` will only work if there is another audio file already being played on the call.
@@ -99,8 +99,8 @@ final class ActionStartPlaybackParams implements BaseModel
     /**
      * Allows a user to provide base64 encoded mp3 or wav. Note: when using this parameter, `media_url` and `media_name` in the `playback_started` and `playback_ended` webhooks will be empty.
      */
-    #[Optional]
-    public ?string $playback_content;
+    #[Optional('playback_content')]
+    public ?string $playbackContent;
 
     /**
      * When specified, it stops the current audio being played. Specify `current` to stop the current audio being played, and to play the next file in the queue. Specify `all` to stop the current audio file being played and to also clear all audio files from the queue.
@@ -111,8 +111,8 @@ final class ActionStartPlaybackParams implements BaseModel
     /**
      * Specifies the leg or legs on which audio will be played. If supplied, the value must be either `self`, `opposite` or `both`.
      */
-    #[Optional]
-    public ?string $target_legs;
+    #[Optional('target_legs')]
+    public ?string $targetLegs;
 
     public function __construct()
     {
@@ -124,34 +124,34 @@ final class ActionStartPlaybackParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AudioType|value-of<AudioType> $audio_type
+     * @param AudioType|value-of<AudioType> $audioType
      */
     public static function with(
-        AudioType|string|null $audio_type = null,
-        ?string $audio_url = null,
-        ?bool $cache_audio = null,
-        ?string $client_state = null,
-        ?string $command_id = null,
+        AudioType|string|null $audioType = null,
+        ?string $audioURL = null,
+        ?bool $cacheAudio = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
         string|int|null $loop = null,
-        ?string $media_name = null,
+        ?string $mediaName = null,
         ?bool $overlay = null,
-        ?string $playback_content = null,
+        ?string $playbackContent = null,
         ?string $stop = null,
-        ?string $target_legs = null,
+        ?string $targetLegs = null,
     ): self {
         $obj = new self;
 
-        null !== $audio_type && $obj['audio_type'] = $audio_type;
-        null !== $audio_url && $obj['audio_url'] = $audio_url;
-        null !== $cache_audio && $obj['cache_audio'] = $cache_audio;
-        null !== $client_state && $obj['client_state'] = $client_state;
-        null !== $command_id && $obj['command_id'] = $command_id;
+        null !== $audioType && $obj['audioType'] = $audioType;
+        null !== $audioURL && $obj['audioURL'] = $audioURL;
+        null !== $cacheAudio && $obj['cacheAudio'] = $cacheAudio;
+        null !== $clientState && $obj['clientState'] = $clientState;
+        null !== $commandID && $obj['commandID'] = $commandID;
         null !== $loop && $obj['loop'] = $loop;
-        null !== $media_name && $obj['media_name'] = $media_name;
+        null !== $mediaName && $obj['mediaName'] = $mediaName;
         null !== $overlay && $obj['overlay'] = $overlay;
-        null !== $playback_content && $obj['playback_content'] = $playback_content;
+        null !== $playbackContent && $obj['playbackContent'] = $playbackContent;
         null !== $stop && $obj['stop'] = $stop;
-        null !== $target_legs && $obj['target_legs'] = $target_legs;
+        null !== $targetLegs && $obj['targetLegs'] = $targetLegs;
 
         return $obj;
     }
@@ -164,7 +164,7 @@ final class ActionStartPlaybackParams implements BaseModel
     public function withAudioType(AudioType|string $audioType): self
     {
         $obj = clone $this;
-        $obj['audio_type'] = $audioType;
+        $obj['audioType'] = $audioType;
 
         return $obj;
     }
@@ -175,7 +175,7 @@ final class ActionStartPlaybackParams implements BaseModel
     public function withAudioURL(string $audioURL): self
     {
         $obj = clone $this;
-        $obj['audio_url'] = $audioURL;
+        $obj['audioURL'] = $audioURL;
 
         return $obj;
     }
@@ -186,7 +186,7 @@ final class ActionStartPlaybackParams implements BaseModel
     public function withCacheAudio(bool $cacheAudio): self
     {
         $obj = clone $this;
-        $obj['cache_audio'] = $cacheAudio;
+        $obj['cacheAudio'] = $cacheAudio;
 
         return $obj;
     }
@@ -197,7 +197,7 @@ final class ActionStartPlaybackParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj['client_state'] = $clientState;
+        $obj['clientState'] = $clientState;
 
         return $obj;
     }
@@ -208,7 +208,7 @@ final class ActionStartPlaybackParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj['command_id'] = $commandID;
+        $obj['commandID'] = $commandID;
 
         return $obj;
     }
@@ -230,7 +230,7 @@ final class ActionStartPlaybackParams implements BaseModel
     public function withMediaName(string $mediaName): self
     {
         $obj = clone $this;
-        $obj['media_name'] = $mediaName;
+        $obj['mediaName'] = $mediaName;
 
         return $obj;
     }
@@ -252,7 +252,7 @@ final class ActionStartPlaybackParams implements BaseModel
     public function withPlaybackContent(string $playbackContent): self
     {
         $obj = clone $this;
-        $obj['playback_content'] = $playbackContent;
+        $obj['playbackContent'] = $playbackContent;
 
         return $obj;
     }
@@ -274,7 +274,7 @@ final class ActionStartPlaybackParams implements BaseModel
     public function withTargetLegs(string $targetLegs): self
     {
         $obj = clone $this;
-        $obj['target_legs'] = $targetLegs;
+        $obj['targetLegs'] = $targetLegs;
 
         return $obj;
     }

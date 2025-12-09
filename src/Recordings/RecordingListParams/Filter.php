@@ -13,13 +13,13 @@ use Telnyx\Recordings\RecordingListParams\Filter\CreatedAt;
  * Consolidated filter parameter (deepObject style). Originally: filter[conference_id], filter[created_at][gte], filter[created_at][lte], filter[call_leg_id], filter[call_session_id], filter[from], filter[to], filter[connection_id], filter[sip_call_id].
  *
  * @phpstan-type FilterShape = array{
- *   call_leg_id?: string|null,
- *   call_session_id?: string|null,
- *   conference_id?: string|null,
- *   connection_id?: string|null,
- *   created_at?: CreatedAt|null,
+ *   callLegID?: string|null,
+ *   callSessionID?: string|null,
+ *   conferenceID?: string|null,
+ *   connectionID?: string|null,
+ *   createdAt?: CreatedAt|null,
  *   from?: string|null,
- *   sip_call_id?: string|null,
+ *   sipCallID?: string|null,
  *   to?: string|null,
  * }
  */
@@ -31,29 +31,29 @@ final class Filter implements BaseModel
     /**
      * If present, recordings will be filtered to those with a matching call_leg_id.
      */
-    #[Optional]
-    public ?string $call_leg_id;
+    #[Optional('call_leg_id')]
+    public ?string $callLegID;
 
     /**
      * If present, recordings will be filtered to those with a matching call_session_id.
      */
-    #[Optional]
-    public ?string $call_session_id;
+    #[Optional('call_session_id')]
+    public ?string $callSessionID;
 
     /**
      * Returns only recordings associated with a given conference.
      */
-    #[Optional]
-    public ?string $conference_id;
+    #[Optional('conference_id')]
+    public ?string $conferenceID;
 
     /**
      * If present, recordings will be filtered to those with a matching `connection_id` attribute (case-sensitive).
      */
-    #[Optional]
-    public ?string $connection_id;
+    #[Optional('connection_id')]
+    public ?string $connectionID;
 
-    #[Optional]
-    public ?CreatedAt $created_at;
+    #[Optional('created_at')]
+    public ?CreatedAt $createdAt;
 
     /**
      * If present, recordings will be filtered to those with a matching `from` attribute (case-sensitive).
@@ -64,8 +64,8 @@ final class Filter implements BaseModel
     /**
      * If present, recordings will be filtered to those with a matching `sip_call_id` attribute. Matching is case-sensitive.
      */
-    #[Optional]
-    public ?string $sip_call_id;
+    #[Optional('sip_call_id')]
+    public ?string $sipCallID;
 
     /**
      * If present, recordings will be filtered to those with a matching `to` attribute (case-sensitive).
@@ -83,27 +83,27 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CreatedAt|array{gte?: string|null, lte?: string|null} $created_at
+     * @param CreatedAt|array{gte?: string|null, lte?: string|null} $createdAt
      */
     public static function with(
-        ?string $call_leg_id = null,
-        ?string $call_session_id = null,
-        ?string $conference_id = null,
-        ?string $connection_id = null,
-        CreatedAt|array|null $created_at = null,
+        ?string $callLegID = null,
+        ?string $callSessionID = null,
+        ?string $conferenceID = null,
+        ?string $connectionID = null,
+        CreatedAt|array|null $createdAt = null,
         ?string $from = null,
-        ?string $sip_call_id = null,
+        ?string $sipCallID = null,
         ?string $to = null,
     ): self {
         $obj = new self;
 
-        null !== $call_leg_id && $obj['call_leg_id'] = $call_leg_id;
-        null !== $call_session_id && $obj['call_session_id'] = $call_session_id;
-        null !== $conference_id && $obj['conference_id'] = $conference_id;
-        null !== $connection_id && $obj['connection_id'] = $connection_id;
-        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $callLegID && $obj['callLegID'] = $callLegID;
+        null !== $callSessionID && $obj['callSessionID'] = $callSessionID;
+        null !== $conferenceID && $obj['conferenceID'] = $conferenceID;
+        null !== $connectionID && $obj['connectionID'] = $connectionID;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
         null !== $from && $obj['from'] = $from;
-        null !== $sip_call_id && $obj['sip_call_id'] = $sip_call_id;
+        null !== $sipCallID && $obj['sipCallID'] = $sipCallID;
         null !== $to && $obj['to'] = $to;
 
         return $obj;
@@ -115,7 +115,7 @@ final class Filter implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj['call_leg_id'] = $callLegID;
+        $obj['callLegID'] = $callLegID;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class Filter implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj['call_session_id'] = $callSessionID;
+        $obj['callSessionID'] = $callSessionID;
 
         return $obj;
     }
@@ -137,7 +137,7 @@ final class Filter implements BaseModel
     public function withConferenceID(string $conferenceID): self
     {
         $obj = clone $this;
-        $obj['conference_id'] = $conferenceID;
+        $obj['conferenceID'] = $conferenceID;
 
         return $obj;
     }
@@ -148,7 +148,7 @@ final class Filter implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj['connection_id'] = $connectionID;
+        $obj['connectionID'] = $connectionID;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class Filter implements BaseModel
     public function withCreatedAt(CreatedAt|array $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -181,7 +181,7 @@ final class Filter implements BaseModel
     public function withSipCallID(string $sipCallID): self
     {
         $obj = clone $this;
-        $obj['sip_call_id'] = $sipCallID;
+        $obj['sipCallID'] = $sipCallID;
 
         return $obj;
     }

@@ -41,18 +41,18 @@ final class OtaUpdateListResponse implements BaseModel
      *
      * @param list<Data|array{
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   record_type?: string|null,
-     *   sim_card_id?: string|null,
+     *   createdAt?: string|null,
+     *   recordType?: string|null,
+     *   simCardID?: string|null,
      *   status?: value-of<Status>|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -70,12 +70,12 @@ final class OtaUpdateListResponse implements BaseModel
     /**
      * @param list<Data|array{
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   record_type?: string|null,
-     *   sim_card_id?: string|null,
+     *   createdAt?: string|null,
+     *   recordType?: string|null,
+     *   simCardID?: string|null,
      *   status?: value-of<Status>|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -88,10 +88,10 @@ final class OtaUpdateListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

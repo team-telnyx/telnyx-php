@@ -31,12 +31,12 @@ final class SimCardGetDeviceDetailsResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Data|array{
-     *   brand_name?: string|null,
-     *   device_type?: string|null,
+     *   brandName?: string|null,
+     *   deviceType?: string|null,
      *   imei?: string|null,
-     *   model_name?: string|null,
-     *   operating_system?: string|null,
-     *   record_type?: string|null,
+     *   modelName?: string|null,
+     *   operatingSystem?: string|null,
+     *   recordType?: string|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -50,12 +50,12 @@ final class SimCardGetDeviceDetailsResponse implements BaseModel
 
     /**
      * @param Data|array{
-     *   brand_name?: string|null,
-     *   device_type?: string|null,
+     *   brandName?: string|null,
+     *   deviceType?: string|null,
      *   imei?: string|null,
-     *   model_name?: string|null,
-     *   operating_system?: string|null,
-     *   record_type?: string|null,
+     *   modelName?: string|null,
+     *   operatingSystem?: string|null,
+     *   recordType?: string|null,
      * } $data
      */
     public function withData(Data|array $data): self

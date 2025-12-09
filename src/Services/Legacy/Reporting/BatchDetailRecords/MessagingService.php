@@ -32,25 +32,25 @@ final class MessagingService implements MessagingContract
      * Creates a new MDR detailed report request with the specified filters
      *
      * @param array{
-     *   end_time: string|\DateTimeInterface,
-     *   start_time: string|\DateTimeInterface,
+     *   endTime: string|\DateTimeInterface,
+     *   startTime: string|\DateTimeInterface,
      *   connections?: list<int>,
      *   directions?: list<int>,
      *   filters?: list<array{
-     *     billing_group?: string,
+     *     billingGroup?: string,
      *     cld?: string,
-     *     cld_filter?: 'contains'|'starts_with'|'ends_with'|CldFilter,
+     *     cldFilter?: 'contains'|'starts_with'|'ends_with'|CldFilter,
      *     cli?: string,
-     *     cli_filter?: 'contains'|'starts_with'|'ends_with'|CliFilter,
-     *     filter_type?: 'and'|'or'|FilterType,
-     *     tags_list?: string,
+     *     cliFilter?: 'contains'|'starts_with'|'ends_with'|CliFilter,
+     *     filterType?: 'and'|'or'|FilterType,
+     *     tagsList?: string,
      *   }|Filter>,
-     *   include_message_body?: bool,
-     *   managed_accounts?: list<string>,
+     *   includeMessageBody?: bool,
+     *   managedAccounts?: list<string>,
      *   profiles?: list<string>,
-     *   record_types?: list<int>,
-     *   report_name?: string,
-     *   select_all_managed_accounts?: bool,
+     *   recordTypes?: list<int>,
+     *   reportName?: string,
+     *   selectAllManagedAccounts?: bool,
      *   timezone?: string,
      * }|MessagingCreateParams $params
      *

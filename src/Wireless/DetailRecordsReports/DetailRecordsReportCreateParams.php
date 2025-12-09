@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Wireless\DetailRecordsReportsService::create()
  *
  * @phpstan-type DetailRecordsReportCreateParamsShape = array{
- *   end_time?: string, start_time?: string
+ *   endTime?: string, startTime?: string
  * }
  */
 final class DetailRecordsReportCreateParams implements BaseModel
@@ -27,14 +27,14 @@ final class DetailRecordsReportCreateParams implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating the end time.
      */
-    #[Optional]
-    public ?string $end_time;
+    #[Optional('end_time')]
+    public ?string $endTime;
 
     /**
      * ISO 8601 formatted date-time indicating the start time.
      */
-    #[Optional]
-    public ?string $start_time;
+    #[Optional('start_time')]
+    public ?string $startTime;
 
     public function __construct()
     {
@@ -47,13 +47,13 @@ final class DetailRecordsReportCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $end_time = null,
-        ?string $start_time = null
+        ?string $endTime = null,
+        ?string $startTime = null
     ): self {
         $obj = new self;
 
-        null !== $end_time && $obj['end_time'] = $end_time;
-        null !== $start_time && $obj['start_time'] = $start_time;
+        null !== $endTime && $obj['endTime'] = $endTime;
+        null !== $startTime && $obj['startTime'] = $startTime;
 
         return $obj;
     }
@@ -64,7 +64,7 @@ final class DetailRecordsReportCreateParams implements BaseModel
     public function withEndTime(string $endTime): self
     {
         $obj = clone $this;
-        $obj['end_time'] = $endTime;
+        $obj['endTime'] = $endTime;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class DetailRecordsReportCreateParams implements BaseModel
     public function withStartTime(string $startTime): self
     {
         $obj = clone $this;
-        $obj['start_time'] = $startTime;
+        $obj['startTime'] = $startTime;
 
         return $obj;
     }

@@ -11,7 +11,7 @@ use Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data1\Payload\
 
 /**
  * @phpstan-type Result1Shape = array{
- *   insight_id?: string|null, result?: mixed|string|null
+ *   insightID?: string|null, result?: mixed|string|null
  * }
  */
 final class Result1 implements BaseModel
@@ -22,8 +22,8 @@ final class Result1 implements BaseModel
     /**
      * ID that is unique to the insight result being generated for the call.
      */
-    #[Optional]
-    public ?string $insight_id;
+    #[Optional('insight_id')]
+    public ?string $insightID;
 
     /**
      * The result of the insight.
@@ -46,12 +46,12 @@ final class Result1 implements BaseModel
      * @param mixed|string $result
      */
     public static function with(
-        ?string $insight_id = null,
+        ?string $insightID = null,
         mixed $result = null
     ): self {
         $obj = new self;
 
-        null !== $insight_id && $obj['insight_id'] = $insight_id;
+        null !== $insightID && $obj['insightID'] = $insightID;
         null !== $result && $obj['result'] = $result;
 
         return $obj;
@@ -63,7 +63,7 @@ final class Result1 implements BaseModel
     public function withInsightID(string $insightID): self
     {
         $obj = clone $this;
-        $obj['insight_id'] = $insightID;
+        $obj['insightID'] = $insightID;
 
         return $obj;
     }

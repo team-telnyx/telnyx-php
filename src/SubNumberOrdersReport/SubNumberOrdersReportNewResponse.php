@@ -34,12 +34,12 @@ final class SubNumberOrdersReportNewResponse implements BaseModel
      *
      * @param Data|array{
      *   id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   filters?: Filters|null,
-     *   order_type?: string|null,
+     *   orderType?: string|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
-     *   user_id?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     *   userID?: string|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -54,12 +54,12 @@ final class SubNumberOrdersReportNewResponse implements BaseModel
     /**
      * @param Data|array{
      *   id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   filters?: Filters|null,
-     *   order_type?: string|null,
+     *   orderType?: string|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
-     *   user_id?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     *   userID?: string|null,
      * } $data
      */
     public function withData(Data|array $data): self

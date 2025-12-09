@@ -14,8 +14,8 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type AzureShape = array{
  *   region: value-of<Region>,
- *   transcription_engine?: 'Azure',
- *   api_key_ref?: string|null,
+ *   transcriptionEngine?: 'Azure',
+ *   apiKeyRef?: string|null,
  *   language?: value-of<Language>|null,
  * }
  */
@@ -27,10 +27,10 @@ final class Azure implements BaseModel
     /**
      * Engine identifier for Azure transcription service.
      *
-     * @var 'Azure' $transcription_engine
+     * @var 'Azure' $transcriptionEngine
      */
-    #[Required]
-    public string $transcription_engine = 'Azure';
+    #[Required('transcription_engine')]
+    public string $transcriptionEngine = 'Azure';
 
     /**
      * Azure region to use for speech recognition.
@@ -43,8 +43,8 @@ final class Azure implements BaseModel
     /**
      * Reference to the API key for authentication. See [integration secrets documentation](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) for details. The parameter is optional as defaults are available for some regions.
      */
-    #[Optional]
-    public ?string $api_key_ref;
+    #[Optional('api_key_ref')]
+    public ?string $apiKeyRef;
 
     /**
      * Language to use for speech recognition.
@@ -83,14 +83,14 @@ final class Azure implements BaseModel
      */
     public static function with(
         Region|string $region,
-        ?string $api_key_ref = null,
+        ?string $apiKeyRef = null,
         Language|string|null $language = null,
     ): self {
         $obj = new self;
 
         $obj['region'] = $region;
 
-        null !== $api_key_ref && $obj['api_key_ref'] = $api_key_ref;
+        null !== $apiKeyRef && $obj['apiKeyRef'] = $apiKeyRef;
         null !== $language && $obj['language'] = $language;
 
         return $obj;
@@ -115,7 +115,7 @@ final class Azure implements BaseModel
     public function withAPIKeyRef(string $apiKeyRef): self
     {
         $obj = clone $this;
-        $obj['api_key_ref'] = $apiKeyRef;
+        $obj['apiKeyRef'] = $apiKeyRef;
 
         return $obj;
     }

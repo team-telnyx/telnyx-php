@@ -12,10 +12,10 @@ use Telnyx\OAuth\OAuthTokenResponse\TokenType;
 
 /**
  * @phpstan-type OAuthTokenResponseShape = array{
- *   access_token: string,
- *   expires_in: int,
- *   token_type: value-of<TokenType>,
- *   refresh_token?: string|null,
+ *   accessToken: string,
+ *   expiresIn: int,
+ *   tokenType: value-of<TokenType>,
+ *   refreshToken?: string|null,
  *   scope?: string|null,
  * }
  */
@@ -27,28 +27,28 @@ final class OAuthTokenResponse implements BaseModel
     /**
      * The access token.
      */
-    #[Required]
-    public string $access_token;
+    #[Required('access_token')]
+    public string $accessToken;
 
     /**
      * Token lifetime in seconds.
      */
-    #[Required]
-    public int $expires_in;
+    #[Required('expires_in')]
+    public int $expiresIn;
 
     /**
      * Token type.
      *
-     * @var value-of<TokenType> $token_type
+     * @var value-of<TokenType> $tokenType
      */
-    #[Required(enum: TokenType::class)]
-    public string $token_type;
+    #[Required('token_type', enum: TokenType::class)]
+    public string $tokenType;
 
     /**
      * Refresh token (if applicable).
      */
-    #[Optional]
-    public ?string $refresh_token;
+    #[Optional('refresh_token')]
+    public ?string $refreshToken;
 
     /**
      * Space-separated list of granted scopes.
@@ -61,7 +61,7 @@ final class OAuthTokenResponse implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * OAuthTokenResponse::with(access_token: ..., expires_in: ..., token_type: ...)
+     * OAuthTokenResponse::with(accessToken: ..., expiresIn: ..., tokenType: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -83,22 +83,22 @@ final class OAuthTokenResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param TokenType|value-of<TokenType> $token_type
+     * @param TokenType|value-of<TokenType> $tokenType
      */
     public static function with(
-        string $access_token,
-        int $expires_in,
-        TokenType|string $token_type,
-        ?string $refresh_token = null,
+        string $accessToken,
+        int $expiresIn,
+        TokenType|string $tokenType,
+        ?string $refreshToken = null,
         ?string $scope = null,
     ): self {
         $obj = new self;
 
-        $obj['access_token'] = $access_token;
-        $obj['expires_in'] = $expires_in;
-        $obj['token_type'] = $token_type;
+        $obj['accessToken'] = $accessToken;
+        $obj['expiresIn'] = $expiresIn;
+        $obj['tokenType'] = $tokenType;
 
-        null !== $refresh_token && $obj['refresh_token'] = $refresh_token;
+        null !== $refreshToken && $obj['refreshToken'] = $refreshToken;
         null !== $scope && $obj['scope'] = $scope;
 
         return $obj;
@@ -110,7 +110,7 @@ final class OAuthTokenResponse implements BaseModel
     public function withAccessToken(string $accessToken): self
     {
         $obj = clone $this;
-        $obj['access_token'] = $accessToken;
+        $obj['accessToken'] = $accessToken;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class OAuthTokenResponse implements BaseModel
     public function withExpiresIn(int $expiresIn): self
     {
         $obj = clone $this;
-        $obj['expires_in'] = $expiresIn;
+        $obj['expiresIn'] = $expiresIn;
 
         return $obj;
     }
@@ -134,7 +134,7 @@ final class OAuthTokenResponse implements BaseModel
     public function withTokenType(TokenType|string $tokenType): self
     {
         $obj = clone $this;
-        $obj['token_type'] = $tokenType;
+        $obj['tokenType'] = $tokenType;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class OAuthTokenResponse implements BaseModel
     public function withRefreshToken(string $refreshToken): self
     {
         $obj = clone $this;
-        $obj['refresh_token'] = $refreshToken;
+        $obj['refreshToken'] = $refreshToken;
 
         return $obj;
     }

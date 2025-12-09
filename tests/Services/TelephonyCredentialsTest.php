@@ -39,7 +39,7 @@ final class TelephonyCredentialsTest extends TestCase
         }
 
         $result = $this->client->telephonyCredentials->create([
-            'connection_id' => '1234567890',
+            'connectionID' => '1234567890',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -54,8 +54,8 @@ final class TelephonyCredentialsTest extends TestCase
         }
 
         $result = $this->client->telephonyCredentials->create([
-            'connection_id' => '1234567890',
-            'expires_at' => '2018-02-02T22:25:27.521Z',
+            'connectionID' => '1234567890',
+            'expiresAt' => '2018-02-02T22:25:27.521Z',
             'name' => 'My-new-credential',
             'tag' => 'some_tag',
         ]);

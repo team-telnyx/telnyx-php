@@ -24,7 +24,7 @@ final class UserTagsService implements UserTagsContract
      *
      * List all user tags.
      *
-     * @param array{filter?: array{starts_with?: string}}|UserTagListParams $params
+     * @param array{filter?: array{startsWith?: string}}|UserTagListParams $params
      *
      * @throws APIException
      */

@@ -12,8 +12,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[created_before], filter[created_after].
  *
  * @phpstan-type FilterShape = array{
- *   created_after?: \DateTimeInterface|null,
- *   created_before?: \DateTimeInterface|null,
+ *   createdAfter?: \DateTimeInterface|null,
+ *   createdBefore?: \DateTimeInterface|null,
  * }
  */
 final class Filter implements BaseModel
@@ -24,14 +24,14 @@ final class Filter implements BaseModel
     /**
      * Filter for audit events created after a specific date.
      */
-    #[Optional]
-    public ?\DateTimeInterface $created_after;
+    #[Optional('created_after')]
+    public ?\DateTimeInterface $createdAfter;
 
     /**
      * Filter for audit events created before a specific date.
      */
-    #[Optional]
-    public ?\DateTimeInterface $created_before;
+    #[Optional('created_before')]
+    public ?\DateTimeInterface $createdBefore;
 
     public function __construct()
     {
@@ -44,13 +44,13 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?\DateTimeInterface $created_after = null,
-        ?\DateTimeInterface $created_before = null,
+        ?\DateTimeInterface $createdAfter = null,
+        ?\DateTimeInterface $createdBefore = null,
     ): self {
         $obj = new self;
 
-        null !== $created_after && $obj['created_after'] = $created_after;
-        null !== $created_before && $obj['created_before'] = $created_before;
+        null !== $createdAfter && $obj['createdAfter'] = $createdAfter;
+        null !== $createdBefore && $obj['createdBefore'] = $createdBefore;
 
         return $obj;
     }
@@ -61,7 +61,7 @@ final class Filter implements BaseModel
     public function withCreatedAfter(\DateTimeInterface $createdAfter): self
     {
         $obj = clone $this;
-        $obj['created_after'] = $createdAfter;
+        $obj['createdAfter'] = $createdAfter;
 
         return $obj;
     }
@@ -72,7 +72,7 @@ final class Filter implements BaseModel
     public function withCreatedBefore(\DateTimeInterface $createdBefore): self
     {
         $obj = clone $this;
-        $obj['created_before'] = $createdBefore;
+        $obj['createdBefore'] = $createdBefore;
 
         return $obj;
     }

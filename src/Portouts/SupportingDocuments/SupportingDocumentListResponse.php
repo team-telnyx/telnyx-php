@@ -36,12 +36,12 @@ final class SupportingDocumentListResponse implements BaseModel
      *
      * @param list<Data|array{
      *   id: string,
-     *   created_at: string,
-     *   document_id: string,
-     *   portout_id: string,
-     *   record_type: string,
+     *   createdAt: string,
+     *   documentID: string,
+     *   portoutID: string,
+     *   recordType: string,
      *   type: value-of<Type>,
-     *   updated_at: string,
+     *   updatedAt: string,
      * }> $data
      */
     public static function with(?array $data = null): self
@@ -56,12 +56,12 @@ final class SupportingDocumentListResponse implements BaseModel
     /**
      * @param list<Data|array{
      *   id: string,
-     *   created_at: string,
-     *   document_id: string,
-     *   portout_id: string,
-     *   record_type: string,
+     *   createdAt: string,
+     *   documentID: string,
+     *   portoutID: string,
+     *   recordType: string,
      *   type: value-of<Type>,
-     *   updated_at: string,
+     *   updatedAt: string,
      * }> $data
      */
     public function withData(array $data): self

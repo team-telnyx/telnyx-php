@@ -20,7 +20,7 @@ use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Sort\V
  * @see Telnyx\Services\PortingOrders\AdditionalDocumentsService::list()
  *
  * @phpstan-type AdditionalDocumentListParamsShape = array{
- *   filter?: Filter|array{document_type?: list<value-of<DocumentType>>|null},
+ *   filter?: Filter|array{documentType?: list<value-of<DocumentType>>|null},
  *   page?: Page|array{number?: int|null, size?: int|null},
  *   sort?: Sort|array{value?: value-of<Value>|null},
  * }
@@ -59,7 +59,7 @@ final class AdditionalDocumentListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{document_type?: list<value-of<DocumentType>>|null} $filter
+     * @param Filter|array{documentType?: list<value-of<DocumentType>>|null} $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      * @param Sort|array{value?: value-of<Value>|null} $sort
      */
@@ -80,7 +80,7 @@ final class AdditionalDocumentListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[document_type].
      *
-     * @param Filter|array{document_type?: list<value-of<DocumentType>>|null} $filter
+     * @param Filter|array{documentType?: list<value-of<DocumentType>>|null} $filter
      */
     public function withFilter(Filter|array $filter): self
     {

@@ -11,10 +11,10 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   channel_limit?: int|null,
+ *   channelLimit?: int|null,
  *   email?: string|null,
- *   manager_account_id?: string|null,
- *   record_type?: string|null,
+ *   managerAccountID?: string|null,
+ *   recordType?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -31,8 +31,8 @@ final class Data implements BaseModel
     /**
      * Integer value that indicates the number of allocatable global outbound channels that are allocated to the managed account. If the value is 0 then the account will have no usable channels and will not be able to perform outbound calling.
      */
-    #[Optional]
-    public ?int $channel_limit;
+    #[Optional('channel_limit')]
+    public ?int $channelLimit;
 
     /**
      * The email of the managed account.
@@ -43,14 +43,14 @@ final class Data implements BaseModel
     /**
      * The user ID of the manager of the account.
      */
-    #[Optional]
-    public ?string $manager_account_id;
+    #[Optional('manager_account_id')]
+    public ?string $managerAccountID;
 
     /**
      * The name of the type of data in the response.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     public function __construct()
     {
@@ -64,18 +64,18 @@ final class Data implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?int $channel_limit = null,
+        ?int $channelLimit = null,
         ?string $email = null,
-        ?string $manager_account_id = null,
-        ?string $record_type = null,
+        ?string $managerAccountID = null,
+        ?string $recordType = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $channel_limit && $obj['channel_limit'] = $channel_limit;
+        null !== $channelLimit && $obj['channelLimit'] = $channelLimit;
         null !== $email && $obj['email'] = $email;
-        null !== $manager_account_id && $obj['manager_account_id'] = $manager_account_id;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $managerAccountID && $obj['managerAccountID'] = $managerAccountID;
+        null !== $recordType && $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class Data implements BaseModel
     public function withChannelLimit(int $channelLimit): self
     {
         $obj = clone $this;
-        $obj['channel_limit'] = $channelLimit;
+        $obj['channelLimit'] = $channelLimit;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class Data implements BaseModel
     public function withManagerAccountID(string $managerAccountID): self
     {
         $obj = clone $this;
-        $obj['manager_account_id'] = $managerAccountID;
+        $obj['managerAccountID'] = $managerAccountID;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

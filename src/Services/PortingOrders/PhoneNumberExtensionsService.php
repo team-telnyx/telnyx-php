@@ -30,9 +30,9 @@ final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContrac
      * Creates a new phone number extension.
      *
      * @param array{
-     *   activation_ranges: list<array{end_at: int, start_at: int}>,
-     *   extension_range: array{end_at: int, start_at: int},
-     *   porting_phone_number_id: string,
+     *   activationRanges: list<array{endAt: int, startAt: int}>,
+     *   extensionRange: array{endAt: int, startAt: int},
+     *   portingPhoneNumberID: string,
      * }|PhoneNumberExtensionCreateParams $params
      *
      * @throws APIException
@@ -65,7 +65,7 @@ final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContrac
      * Returns a list of all phone number extensions of a porting order.
      *
      * @param array{
-     *   filter?: array{porting_phone_number_id?: string},
+     *   filter?: array{portingPhoneNumberID?: string},
      *   page?: array{number?: int, size?: int},
      *   sort?: array{value?: '-created_at'|'created_at'|Value},
      * }|PhoneNumberExtensionListParams $params
@@ -99,7 +99,7 @@ final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContrac
      *
      * Deletes a phone number extension.
      *
-     * @param array{porting_order_id: string}|PhoneNumberExtensionDeleteParams $params
+     * @param array{portingOrderID: string}|PhoneNumberExtensionDeleteParams $params
      *
      * @throws APIException
      */
@@ -112,8 +112,8 @@ final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContrac
             $params,
             $requestOptions,
         );
-        $portingOrderID = $parsed['porting_order_id'];
-        unset($parsed['porting_order_id']);
+        $portingOrderID = $parsed['portingOrderID'];
+        unset($parsed['portingOrderID']);
 
         /** @var BaseResponse<PhoneNumberExtensionDeleteResponse> */
         $response = $this->client->request(

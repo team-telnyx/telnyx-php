@@ -48,15 +48,15 @@ final class CreateVerificationResponse implements BaseModel
      *
      * @param Verification|array{
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   custom_code?: string|null,
-     *   phone_number?: string|null,
-     *   record_type?: value-of<RecordType>|null,
+     *   createdAt?: string|null,
+     *   customCode?: string|null,
+     *   phoneNumber?: string|null,
+     *   recordType?: value-of<RecordType>|null,
      *   status?: value-of<Status>|null,
-     *   timeout_secs?: int|null,
+     *   timeoutSecs?: int|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: string|null,
-     *   verify_profile_id?: string|null,
+     *   updatedAt?: string|null,
+     *   verifyProfileID?: string|null,
      * } $data
      */
     public static function with(Verification|array $data): self
@@ -71,15 +71,15 @@ final class CreateVerificationResponse implements BaseModel
     /**
      * @param Verification|array{
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   custom_code?: string|null,
-     *   phone_number?: string|null,
-     *   record_type?: value-of<RecordType>|null,
+     *   createdAt?: string|null,
+     *   customCode?: string|null,
+     *   phoneNumber?: string|null,
+     *   recordType?: value-of<RecordType>|null,
      *   status?: value-of<Status>|null,
-     *   timeout_secs?: int|null,
+     *   timeoutSecs?: int|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: string|null,
-     *   verify_profile_id?: string|null,
+     *   updatedAt?: string|null,
+     *   verifyProfileID?: string|null,
      * } $data
      */
     public function withData(Verification|array $data): self

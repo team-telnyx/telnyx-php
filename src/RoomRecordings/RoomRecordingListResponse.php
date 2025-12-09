@@ -42,26 +42,26 @@ final class RoomRecordingListResponse implements BaseModel
      * @param list<Data|array{
      *   id?: string|null,
      *   codec?: string|null,
-     *   completed_at?: \DateTimeInterface|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   download_url?: string|null,
-     *   duration_secs?: int|null,
-     *   ended_at?: \DateTimeInterface|null,
-     *   participant_id?: string|null,
-     *   record_type?: string|null,
-     *   room_id?: string|null,
-     *   session_id?: string|null,
-     *   size_mb?: float|null,
-     *   started_at?: \DateTimeInterface|null,
+     *   completedAt?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   downloadURL?: string|null,
+     *   durationSecs?: int|null,
+     *   endedAt?: \DateTimeInterface|null,
+     *   participantID?: string|null,
+     *   recordType?: string|null,
+     *   roomID?: string|null,
+     *   sessionID?: string|null,
+     *   sizeMB?: float|null,
+     *   startedAt?: \DateTimeInterface|null,
      *   status?: value-of<Status>|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -80,20 +80,20 @@ final class RoomRecordingListResponse implements BaseModel
      * @param list<Data|array{
      *   id?: string|null,
      *   codec?: string|null,
-     *   completed_at?: \DateTimeInterface|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   download_url?: string|null,
-     *   duration_secs?: int|null,
-     *   ended_at?: \DateTimeInterface|null,
-     *   participant_id?: string|null,
-     *   record_type?: string|null,
-     *   room_id?: string|null,
-     *   session_id?: string|null,
-     *   size_mb?: float|null,
-     *   started_at?: \DateTimeInterface|null,
+     *   completedAt?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   downloadURL?: string|null,
+     *   durationSecs?: int|null,
+     *   endedAt?: \DateTimeInterface|null,
+     *   participantID?: string|null,
+     *   recordType?: string|null,
+     *   roomID?: string|null,
+     *   sessionID?: string|null,
+     *   sizeMB?: float|null,
+     *   startedAt?: \DateTimeInterface|null,
      *   status?: value-of<Status>|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -106,10 +106,10 @@ final class RoomRecordingListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

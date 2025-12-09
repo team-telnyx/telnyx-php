@@ -36,8 +36,8 @@ final class RequirementGroupsTest extends TestCase
 
         $result = $this->client->requirementGroups->create([
             'action' => 'ordering',
-            'country_code' => 'US',
-            'phone_number_type' => 'local',
+            'countryCode' => 'US',
+            'phoneNumberType' => 'local',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -53,11 +53,11 @@ final class RequirementGroupsTest extends TestCase
 
         $result = $this->client->requirementGroups->create([
             'action' => 'ordering',
-            'country_code' => 'US',
-            'phone_number_type' => 'local',
-            'customer_reference' => 'My Requirement Group',
-            'regulatory_requirements' => [
-                ['field_value' => 'field_value', 'requirement_id' => 'requirement_id'],
+            'countryCode' => 'US',
+            'phoneNumberType' => 'local',
+            'customerReference' => 'My Requirement Group',
+            'regulatoryRequirements' => [
+                ['fieldValue' => 'field_value', 'requirementID' => 'requirement_id'],
             ],
         ]);
 

@@ -48,10 +48,10 @@ final class IntegrationListResponse implements BaseModel
      *
      * @param list<Data|array{
      *   id: string,
-     *   available_tools: list<string>,
+     *   availableTools: list<string>,
      *   description: string,
-     *   display_name: string,
-     *   logo_url: string,
+     *   displayName: string,
+     *   logoURL: string,
      *   name: string,
      *   status: value-of<Status>,
      * }> $data
@@ -68,10 +68,10 @@ final class IntegrationListResponse implements BaseModel
     /**
      * @param list<Data|array{
      *   id: string,
-     *   available_tools: list<string>,
+     *   availableTools: list<string>,
      *   description: string,
-     *   display_name: string,
-     *   logo_url: string,
+     *   displayName: string,
+     *   logoURL: string,
      *   name: string,
      *   status: value-of<Status>,
      * }> $data

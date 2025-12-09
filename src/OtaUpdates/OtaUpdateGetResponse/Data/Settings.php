@@ -13,7 +13,7 @@ use Telnyx\OtaUpdates\OtaUpdateGetResponse\Data\Settings\MobileNetworkOperatorsP
  * A JSON object representation of the operation. The information present here will relate directly to the source of the OTA request.
  *
  * @phpstan-type SettingsShape = array{
- *   mobile_network_operators_preferences?: list<MobileNetworkOperatorsPreference>|null,
+ *   mobileNetworkOperatorsPreferences?: list<MobileNetworkOperatorsPreference>|null,
  * }
  */
 final class Settings implements BaseModel
@@ -24,10 +24,13 @@ final class Settings implements BaseModel
     /**
      * A list of mobile network operators and the priority that should be applied when the SIM is connecting to the network.
      *
-     * @var list<MobileNetworkOperatorsPreference>|null $mobile_network_operators_preferences
+     * @var list<MobileNetworkOperatorsPreference>|null $mobileNetworkOperatorsPreferences
      */
-    #[Optional(list: MobileNetworkOperatorsPreference::class)]
-    public ?array $mobile_network_operators_preferences;
+    #[Optional(
+        'mobile_network_operators_preferences',
+        list: MobileNetworkOperatorsPreference::class,
+    )]
+    public ?array $mobileNetworkOperatorsPreferences;
 
     public function __construct()
     {
@@ -40,17 +43,17 @@ final class Settings implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<MobileNetworkOperatorsPreference|array{
-     *   mobile_network_operator_id?: string|null,
-     *   mobile_network_operator_name?: string|null,
+     *   mobileNetworkOperatorID?: string|null,
+     *   mobileNetworkOperatorName?: string|null,
      *   priority?: int|null,
-     * }> $mobile_network_operators_preferences
+     * }> $mobileNetworkOperatorsPreferences
      */
     public static function with(
-        ?array $mobile_network_operators_preferences = null
+        ?array $mobileNetworkOperatorsPreferences = null
     ): self {
         $obj = new self;
 
-        null !== $mobile_network_operators_preferences && $obj['mobile_network_operators_preferences'] = $mobile_network_operators_preferences;
+        null !== $mobileNetworkOperatorsPreferences && $obj['mobileNetworkOperatorsPreferences'] = $mobileNetworkOperatorsPreferences;
 
         return $obj;
     }
@@ -59,8 +62,8 @@ final class Settings implements BaseModel
      * A list of mobile network operators and the priority that should be applied when the SIM is connecting to the network.
      *
      * @param list<MobileNetworkOperatorsPreference|array{
-     *   mobile_network_operator_id?: string|null,
-     *   mobile_network_operator_name?: string|null,
+     *   mobileNetworkOperatorID?: string|null,
+     *   mobileNetworkOperatorName?: string|null,
      *   priority?: int|null,
      * }> $mobileNetworkOperatorsPreferences
      */
@@ -68,7 +71,7 @@ final class Settings implements BaseModel
         array $mobileNetworkOperatorsPreferences
     ): self {
         $obj = clone $this;
-        $obj['mobile_network_operators_preferences'] = $mobileNetworkOperatorsPreferences;
+        $obj['mobileNetworkOperatorsPreferences'] = $mobileNetworkOperatorsPreferences;
 
         return $obj;
     }

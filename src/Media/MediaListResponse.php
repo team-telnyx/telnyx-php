@@ -37,17 +37,17 @@ final class MediaListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<MediaResource|array{
-     *   content_type?: string|null,
-     *   created_at?: string|null,
-     *   expires_at?: string|null,
-     *   media_name?: string|null,
-     *   updated_at?: string|null,
+     *   contentType?: string|null,
+     *   createdAt?: string|null,
+     *   expiresAt?: string|null,
+     *   mediaName?: string|null,
+     *   updatedAt?: string|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -64,11 +64,11 @@ final class MediaListResponse implements BaseModel
 
     /**
      * @param list<MediaResource|array{
-     *   content_type?: string|null,
-     *   created_at?: string|null,
-     *   expires_at?: string|null,
-     *   media_name?: string|null,
-     *   updated_at?: string|null,
+     *   contentType?: string|null,
+     *   createdAt?: string|null,
+     *   expiresAt?: string|null,
+     *   mediaName?: string|null,
+     *   updatedAt?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -81,10 +81,10 @@ final class MediaListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

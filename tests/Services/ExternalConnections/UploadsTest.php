@@ -42,7 +42,7 @@ final class UploadsTest extends TestCase
         $result = $this->client->externalConnections->uploads->create(
             'id',
             [
-                'number_ids' => [
+                'numberIDs' => [
                     '3920457616934164700',
                     '3920457616934164701',
                     '3920457616934164702',
@@ -65,15 +65,15 @@ final class UploadsTest extends TestCase
         $result = $this->client->externalConnections->uploads->create(
             'id',
             [
-                'number_ids' => [
+                'numberIDs' => [
                     '3920457616934164700',
                     '3920457616934164701',
                     '3920457616934164702',
                     '3920457616934164703',
                 ],
-                'additional_usages' => ['calling_user_assignment'],
-                'civic_address_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-                'location_id' => '67ea7693-9cd5-4a68-8c76-abb3aa5bf5d2',
+                'additionalUsages' => ['calling_user_assignment'],
+                'civicAddressID' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+                'locationID' => '67ea7693-9cd5-4a68-8c76-abb3aa5bf5d2',
                 'usage' => 'first_party_app_assignment',
             ],
         );

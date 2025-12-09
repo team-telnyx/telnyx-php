@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   created_at?: \DateTimeInterface|null,
- *   phone_number?: string|null,
- *   porting_order_id?: string|null,
- *   record_type?: string|null,
- *   updated_at?: \DateTimeInterface|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   phoneNumber?: string|null,
+ *   portingOrderID?: string|null,
+ *   recordType?: string|null,
+ *   updatedAt?: \DateTimeInterface|null,
  *   verified?: bool|null,
  * }
  */
@@ -33,32 +33,32 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
     /**
      * E164 formatted phone number.
      */
-    #[Optional]
-    public ?string $phone_number;
+    #[Optional('phone_number')]
+    public ?string $phoneNumber;
 
     /**
      * Identifies the associated porting order.
      */
-    #[Optional]
-    public ?string $porting_order_id;
+    #[Optional('porting_order_id')]
+    public ?string $portingOrderID;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     /**
      * Indicates whether the verification code has been verified.
@@ -78,21 +78,21 @@ final class Data implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?\DateTimeInterface $created_at = null,
-        ?string $phone_number = null,
-        ?string $porting_order_id = null,
-        ?string $record_type = null,
-        ?\DateTimeInterface $updated_at = null,
+        ?\DateTimeInterface $createdAt = null,
+        ?string $phoneNumber = null,
+        ?string $portingOrderID = null,
+        ?string $recordType = null,
+        ?\DateTimeInterface $updatedAt = null,
         ?bool $verified = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $phone_number && $obj['phone_number'] = $phone_number;
-        null !== $porting_order_id && $obj['porting_order_id'] = $porting_order_id;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
+        null !== $portingOrderID && $obj['portingOrderID'] = $portingOrderID;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
         null !== $verified && $obj['verified'] = $verified;
 
         return $obj;
@@ -115,7 +115,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class Data implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -137,7 +137,7 @@ final class Data implements BaseModel
     public function withPortingOrderID(string $portingOrderID): self
     {
         $obj = clone $this;
-        $obj['porting_order_id'] = $portingOrderID;
+        $obj['portingOrderID'] = $portingOrderID;
 
         return $obj;
     }
@@ -148,7 +148,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

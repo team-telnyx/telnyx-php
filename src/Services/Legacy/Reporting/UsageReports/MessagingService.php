@@ -7,6 +7,7 @@ namespace Telnyx\Services\Legacy\Reporting\UsageReports;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingCreateParams;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingDeleteResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingGetResponse;
@@ -29,12 +30,12 @@ final class MessagingService implements MessagingContract
      * Creates a new legacy usage V2 MDR report request with the specified filters
      *
      * @param array{
-     *   aggregation_type: int,
-     *   end_time?: string|\DateTimeInterface,
-     *   managed_accounts?: list<string>,
+     *   aggregationType: int,
+     *   endTime?: string|\DateTimeInterface,
+     *   managedAccounts?: list<string>,
      *   profiles?: list<string>,
-     *   select_all_managed_accounts?: bool,
-     *   start_time?: string|\DateTimeInterface,
+     *   selectAllManagedAccounts?: bool,
+     *   startTime?: string|\DateTimeInterface,
      * }|MessagingCreateParams $params
      *
      * @throws APIException
@@ -88,7 +89,7 @@ final class MessagingService implements MessagingContract
      *
      * Fetch all previous requests for MDR usage reports.
      *
-     * @param array{page?: int, per_page?: int}|MessagingListParams $params
+     * @param array{page?: int, perPage?: int}|MessagingListParams $params
      *
      * @throws APIException
      */
@@ -105,7 +106,7 @@ final class MessagingService implements MessagingContract
         $response = $this->client->request(
             method: 'get',
             path: 'legacy/reporting/usage_reports/messaging',
-            query: $parsed,
+            query: Util::array_transform_keys($parsed, ['perPage' => 'per_page']),
             options: $options,
             convert: MessagingListResponse::class,
         );

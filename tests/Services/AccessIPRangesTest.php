@@ -36,7 +36,7 @@ final class AccessIPRangesTest extends TestCase
         }
 
         $result = $this->client->accessIPRanges->create([
-            'cidr_block' => 'cidr_block',
+            'cidrBlock' => 'cidr_block',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -51,7 +51,7 @@ final class AccessIPRangesTest extends TestCase
         }
 
         $result = $this->client->accessIPRanges->create([
-            'cidr_block' => 'cidr_block', 'description' => 'description',
+            'cidrBlock' => 'cidr_block', 'description' => 'description',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

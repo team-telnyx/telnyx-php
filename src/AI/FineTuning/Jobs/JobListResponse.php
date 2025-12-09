@@ -48,14 +48,14 @@ final class JobListResponse implements BaseModel
      *
      * @param list<FineTuningJob|array{
      *   id: string,
-     *   created_at: int,
-     *   finished_at: int|null,
+     *   createdAt: int,
+     *   finishedAt: int|null,
      *   hyperparameters: Hyperparameters,
      *   model: string,
-     *   organization_id: string,
+     *   organizationID: string,
      *   status: value-of<Status>,
-     *   trained_tokens: int|null,
-     *   training_file: string,
+     *   trainedTokens: int|null,
+     *   trainingFile: string,
      * }> $data
      */
     public static function with(array $data): self
@@ -70,14 +70,14 @@ final class JobListResponse implements BaseModel
     /**
      * @param list<FineTuningJob|array{
      *   id: string,
-     *   created_at: int,
-     *   finished_at: int|null,
+     *   createdAt: int,
+     *   finishedAt: int|null,
      *   hyperparameters: Hyperparameters,
      *   model: string,
-     *   organization_id: string,
+     *   organizationID: string,
      *   status: value-of<Status>,
-     *   trained_tokens: int|null,
-     *   training_file: string,
+     *   trainedTokens: int|null,
+     *   trainingFile: string,
      * }> $data
      */
     public function withData(array $data): self

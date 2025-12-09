@@ -53,15 +53,15 @@ final class InsightListResponse implements BaseModel
      *
      * @param list<InsightTemplate|array{
      *   id: string,
-     *   created_at: \DateTimeInterface,
+     *   createdAt: \DateTimeInterface,
      *   instructions: string,
-     *   insight_type?: value-of<InsightType>|null,
-     *   json_schema?: mixed|string|null,
+     *   insightType?: value-of<InsightType>|null,
+     *   jsonSchema?: mixed|string|null,
      *   name?: string|null,
      *   webhook?: string|null,
      * }> $data
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public static function with(array $data, Meta|array $meta): self
@@ -77,10 +77,10 @@ final class InsightListResponse implements BaseModel
     /**
      * @param list<InsightTemplate|array{
      *   id: string,
-     *   created_at: \DateTimeInterface,
+     *   createdAt: \DateTimeInterface,
      *   instructions: string,
-     *   insight_type?: value-of<InsightType>|null,
-     *   json_schema?: mixed|string|null,
+     *   insightType?: value-of<InsightType>|null,
+     *   jsonSchema?: mixed|string|null,
      *   name?: string|null,
      *   webhook?: string|null,
      * }> $data
@@ -95,7 +95,7 @@ final class InsightListResponse implements BaseModel
 
     /**
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public function withMeta(Meta|array $meta): self

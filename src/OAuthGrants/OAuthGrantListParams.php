@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\OAuthGrantsService::list()
  *
  * @phpstan-type OAuthGrantListParamsShape = array{
- *   page_number_?: int, page_size_?: int
+ *   pageNumber?: int, pageSize?: int
  * }
  */
 final class OAuthGrantListParams implements BaseModel
@@ -28,13 +28,13 @@ final class OAuthGrantListParams implements BaseModel
      * Page number.
      */
     #[Optional]
-    public ?int $page_number_;
+    public ?int $pageNumber;
 
     /**
      * Number of results per page.
      */
     #[Optional]
-    public ?int $page_size_;
+    public ?int $pageSize;
 
     public function __construct()
     {
@@ -47,13 +47,13 @@ final class OAuthGrantListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?int $page_number_ = null,
-        ?int $page_size_ = null
+        ?int $pageNumber = null,
+        ?int $pageSize = null
     ): self {
         $obj = new self;
 
-        null !== $page_number_ && $obj['page_number_'] = $page_number_;
-        null !== $page_size_ && $obj['page_size_'] = $page_size_;
+        null !== $pageNumber && $obj['pageNumber'] = $pageNumber;
+        null !== $pageSize && $obj['pageSize'] = $pageSize;
 
         return $obj;
     }
@@ -64,7 +64,7 @@ final class OAuthGrantListParams implements BaseModel
     public function withPageNumber(int $pageNumber): self
     {
         $obj = clone $this;
-        $obj['page_number_'] = $pageNumber;
+        $obj['pageNumber'] = $pageNumber;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class OAuthGrantListParams implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj['page_size_'] = $pageSize;
+        $obj['pageSize'] = $pageSize;
 
         return $obj;
     }

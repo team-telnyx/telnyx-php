@@ -47,7 +47,7 @@ final class UserBundleListUnusedResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   billing_bundle: BillingBundleSummary, user_bundle_ids: list<string>
+     *   billingBundle: BillingBundleSummary, userBundleIDs: list<string>
      * }> $data
      */
     public static function with(array $data): self
@@ -61,7 +61,7 @@ final class UserBundleListUnusedResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   billing_bundle: BillingBundleSummary, user_bundle_ids: list<string>
+     *   billingBundle: BillingBundleSummary, userBundleIDs: list<string>
      * }> $data
      */
     public function withData(array $data): self

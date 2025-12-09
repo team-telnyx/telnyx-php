@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Phone number search criteria.
  *
  * @phpstan-type PhoneNumberShape = array{
- *   contains?: string|null, ends_with?: string|null, starts_with?: string|null
+ *   contains?: string|null, endsWith?: string|null, startsWith?: string|null
  * }
  */
 final class PhoneNumber implements BaseModel
@@ -29,14 +29,14 @@ final class PhoneNumber implements BaseModel
     /**
      * Filter by the ending digits of the phone number.
      */
-    #[Optional]
-    public ?string $ends_with;
+    #[Optional('ends_with')]
+    public ?string $endsWith;
 
     /**
      * Filter by the starting digits of the phone number.
      */
-    #[Optional]
-    public ?string $starts_with;
+    #[Optional('starts_with')]
+    public ?string $startsWith;
 
     public function __construct()
     {
@@ -50,14 +50,14 @@ final class PhoneNumber implements BaseModel
      */
     public static function with(
         ?string $contains = null,
-        ?string $ends_with = null,
-        ?string $starts_with = null,
+        ?string $endsWith = null,
+        ?string $startsWith = null
     ): self {
         $obj = new self;
 
         null !== $contains && $obj['contains'] = $contains;
-        null !== $ends_with && $obj['ends_with'] = $ends_with;
-        null !== $starts_with && $obj['starts_with'] = $starts_with;
+        null !== $endsWith && $obj['endsWith'] = $endsWith;
+        null !== $startsWith && $obj['startsWith'] = $startsWith;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class PhoneNumber implements BaseModel
     public function withEndsWith(string $endsWith): self
     {
         $obj = clone $this;
-        $obj['ends_with'] = $endsWith;
+        $obj['endsWith'] = $endsWith;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class PhoneNumber implements BaseModel
     public function withStartsWith(string $startsWith): self
     {
         $obj = clone $this;
-        $obj['starts_with'] = $startsWith;
+        $obj['startsWith'] = $startsWith;
 
         return $obj;
     }

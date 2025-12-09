@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * The CNAM listing settings for a phone number.
  *
  * @phpstan-type CnamListingShape = array{
- *   cnam_listing_details?: string|null, cnam_listing_enabled?: bool|null
+ *   cnamListingDetails?: string|null, cnamListingEnabled?: bool|null
  * }
  */
 final class CnamListing implements BaseModel
@@ -23,14 +23,14 @@ final class CnamListing implements BaseModel
     /**
      * The CNAM listing details for this number. Must be alphanumeric characters or spaces with a maximum length of 15. Requires cnam_listing_enabled to also be set to true.
      */
-    #[Optional]
-    public ?string $cnam_listing_details;
+    #[Optional('cnam_listing_details')]
+    public ?string $cnamListingDetails;
 
     /**
      * Enables CNAM listings for this number. Requires cnam_listing_details to also be set.
      */
-    #[Optional]
-    public ?bool $cnam_listing_enabled;
+    #[Optional('cnam_listing_enabled')]
+    public ?bool $cnamListingEnabled;
 
     public function __construct()
     {
@@ -43,13 +43,13 @@ final class CnamListing implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $cnam_listing_details = null,
-        ?bool $cnam_listing_enabled = null
+        ?string $cnamListingDetails = null,
+        ?bool $cnamListingEnabled = null
     ): self {
         $obj = new self;
 
-        null !== $cnam_listing_details && $obj['cnam_listing_details'] = $cnam_listing_details;
-        null !== $cnam_listing_enabled && $obj['cnam_listing_enabled'] = $cnam_listing_enabled;
+        null !== $cnamListingDetails && $obj['cnamListingDetails'] = $cnamListingDetails;
+        null !== $cnamListingEnabled && $obj['cnamListingEnabled'] = $cnamListingEnabled;
 
         return $obj;
     }
@@ -60,7 +60,7 @@ final class CnamListing implements BaseModel
     public function withCnamListingDetails(string $cnamListingDetails): self
     {
         $obj = clone $this;
-        $obj['cnam_listing_details'] = $cnamListingDetails;
+        $obj['cnamListingDetails'] = $cnamListingDetails;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class CnamListing implements BaseModel
     public function withCnamListingEnabled(bool $cnamListingEnabled): self
     {
         $obj = clone $this;
-        $obj['cnam_listing_enabled'] = $cnamListingEnabled;
+        $obj['cnamListingEnabled'] = $cnamListingEnabled;
 
         return $obj;
     }

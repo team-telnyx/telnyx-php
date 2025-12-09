@@ -34,14 +34,14 @@ final class AdditionalDocumentNewResponse implements BaseModel
      *
      * @param list<Data|array{
      *   id?: string|null,
-     *   content_type?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   document_id?: string|null,
-     *   document_type?: value-of<DocumentType>|null,
+     *   contentType?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   documentID?: string|null,
+     *   documentType?: value-of<DocumentType>|null,
      *   filename?: string|null,
-     *   porting_order_id?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   portingOrderID?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public static function with(?array $data = null): self
@@ -56,14 +56,14 @@ final class AdditionalDocumentNewResponse implements BaseModel
     /**
      * @param list<Data|array{
      *   id?: string|null,
-     *   content_type?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   document_id?: string|null,
-     *   document_type?: value-of<DocumentType>|null,
+     *   contentType?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   documentID?: string|null,
+     *   documentType?: value-of<DocumentType>|null,
      *   filename?: string|null,
-     *   porting_order_id?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   portingOrderID?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public function withData(array $data): self

@@ -91,8 +91,8 @@ final class ClustersTest extends TestCase
         $result = $this->client->ai->clusters->compute([
             'bucket' => 'bucket',
             'files' => ['string'],
-            'min_cluster_size' => 0,
-            'min_subcluster_size' => 0,
+            'minClusterSize' => 0,
+            'minSubclusterSize' => 0,
             'prefix' => 'prefix',
         ]);
 

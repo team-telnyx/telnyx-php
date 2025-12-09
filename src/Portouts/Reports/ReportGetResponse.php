@@ -33,13 +33,13 @@ final class ReportGetResponse implements BaseModel
      *
      * @param PortoutReport|array{
      *   id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   document_id?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   documentID?: string|null,
      *   params?: ExportPortoutsCsvReport|null,
-     *   record_type?: string|null,
-     *   report_type?: value-of<ReportType>|null,
+     *   recordType?: string|null,
+     *   reportType?: value-of<ReportType>|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(PortoutReport|array|null $data = null): self
@@ -54,13 +54,13 @@ final class ReportGetResponse implements BaseModel
     /**
      * @param PortoutReport|array{
      *   id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   document_id?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   documentID?: string|null,
      *   params?: ExportPortoutsCsvReport|null,
-     *   record_type?: string|null,
-     *   report_type?: value-of<ReportType>|null,
+     *   recordType?: string|null,
+     *   reportType?: value-of<ReportType>|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(PortoutReport|array $data): self

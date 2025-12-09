@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\PhoneNumberCampaignsService::update()
  *
  * @phpstan-type PhoneNumberCampaignUpdateParamsShape = array{
- *   campaignId: string, phoneNumber: string
+ *   campaignID: string, phoneNumber: string
  * }
  */
 final class PhoneNumberCampaignUpdateParams implements BaseModel
@@ -27,8 +27,8 @@ final class PhoneNumberCampaignUpdateParams implements BaseModel
     /**
      * The ID of the campaign you want to link to the specified phone number.
      */
-    #[Required]
-    public string $campaignId;
+    #[Required('campaignId')]
+    public string $campaignID;
 
     /**
      * The phone number you want to link to a specified campaign.
@@ -41,7 +41,7 @@ final class PhoneNumberCampaignUpdateParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * PhoneNumberCampaignUpdateParams::with(campaignId: ..., phoneNumber: ...)
+     * PhoneNumberCampaignUpdateParams::with(campaignID: ..., phoneNumber: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -60,11 +60,11 @@ final class PhoneNumberCampaignUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $campaignId, string $phoneNumber): self
+    public static function with(string $campaignID, string $phoneNumber): self
     {
         $obj = new self;
 
-        $obj['campaignId'] = $campaignId;
+        $obj['campaignID'] = $campaignID;
         $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
@@ -76,7 +76,7 @@ final class PhoneNumberCampaignUpdateParams implements BaseModel
     public function withCampaignID(string $campaignID): self
     {
         $obj = clone $this;
-        $obj['campaignId'] = $campaignID;
+        $obj['campaignID'] = $campaignID;
 
         return $obj;
     }

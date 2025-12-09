@@ -27,7 +27,7 @@ final class RunsService implements RunsContract
      *
      * Retrieves detailed information about a specific test run execution
      *
-     * @param array{test_id: string}|RunRetrieveParams $params
+     * @param array{testID: string}|RunRetrieveParams $params
      *
      * @throws APIException
      */
@@ -40,8 +40,8 @@ final class RunsService implements RunsContract
             $params,
             $requestOptions,
         );
-        $testID = $parsed['test_id'];
-        unset($parsed['test_id']);
+        $testID = $parsed['testID'];
+        unset($parsed['testID']);
 
         /** @var BaseResponse<TestRunResponse> */
         $response = $this->client->request(
@@ -92,7 +92,7 @@ final class RunsService implements RunsContract
      *
      * Initiates immediate execution of a specific assistant test
      *
-     * @param array{destination_version_id?: string}|RunTriggerParams $params
+     * @param array{destinationVersionID?: string}|RunTriggerParams $params
      *
      * @throws APIException
      */

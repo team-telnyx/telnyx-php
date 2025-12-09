@@ -34,9 +34,9 @@ final class ActionValidateRegistrationCodesResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   invalid_detail?: string|null,
-     *   record_type?: string|null,
-     *   registration_code?: string|null,
+     *   invalidDetail?: string|null,
+     *   recordType?: string|null,
+     *   registrationCode?: string|null,
      *   valid?: bool|null,
      * }> $data
      */
@@ -51,9 +51,9 @@ final class ActionValidateRegistrationCodesResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   invalid_detail?: string|null,
-     *   record_type?: string|null,
-     *   registration_code?: string|null,
+     *   invalidDetail?: string|null,
+     *   recordType?: string|null,
+     *   registrationCode?: string|null,
      *   valid?: bool|null,
      * }> $data
      */

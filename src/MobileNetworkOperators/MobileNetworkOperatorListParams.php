@@ -19,11 +19,11 @@ use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Page;
  *
  * @phpstan-type MobileNetworkOperatorListParamsShape = array{
  *   filter?: Filter|array{
- *     country_code?: string|null,
+ *     countryCode?: string|null,
  *     mcc?: string|null,
  *     mnc?: string|null,
  *     name?: Name|null,
- *     network_preferences_enabled?: bool|null,
+ *     networkPreferencesEnabled?: bool|null,
  *     tadig?: string|null,
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
@@ -58,11 +58,11 @@ final class MobileNetworkOperatorListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   country_code?: string|null,
+     *   countryCode?: string|null,
      *   mcc?: string|null,
      *   mnc?: string|null,
      *   name?: Name|null,
-     *   network_preferences_enabled?: bool|null,
+     *   networkPreferencesEnabled?: bool|null,
      *   tadig?: string|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
@@ -83,11 +83,11 @@ final class MobileNetworkOperatorListParams implements BaseModel
      * Consolidated filter parameter for mobile network operators (deepObject style). Originally: filter[name][starts_with], filter[name][contains], filter[name][ends_with], filter[country_code], filter[mcc], filter[mnc], filter[tadig], filter[network_preferences_enabled].
      *
      * @param Filter|array{
-     *   country_code?: string|null,
+     *   countryCode?: string|null,
      *   mcc?: string|null,
      *   mnc?: string|null,
      *   name?: Name|null,
-     *   network_preferences_enabled?: bool|null,
+     *   networkPreferencesEnabled?: bool|null,
      *   tadig?: string|null,
      * } $filter
      */

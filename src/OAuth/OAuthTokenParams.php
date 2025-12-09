@@ -17,13 +17,13 @@ use Telnyx\OAuth\OAuthTokenParams\GrantType;
  * @see Telnyx\Services\OAuthService::token()
  *
  * @phpstan-type OAuthTokenParamsShape = array{
- *   grant_type: GrantType|value-of<GrantType>,
- *   client_id?: string,
- *   client_secret?: string,
+ *   grantType: GrantType|value-of<GrantType>,
+ *   clientID?: string,
+ *   clientSecret?: string,
  *   code?: string,
- *   code_verifier?: string,
- *   redirect_uri?: string,
- *   refresh_token?: string,
+ *   codeVerifier?: string,
+ *   redirectUri?: string,
+ *   refreshToken?: string,
  *   scope?: string,
  * }
  */
@@ -36,22 +36,22 @@ final class OAuthTokenParams implements BaseModel
     /**
      * OAuth 2.0 grant type.
      *
-     * @var value-of<GrantType> $grant_type
+     * @var value-of<GrantType> $grantType
      */
-    #[Required(enum: GrantType::class)]
-    public string $grant_type;
+    #[Required('grant_type', enum: GrantType::class)]
+    public string $grantType;
 
     /**
      * OAuth client ID (if not using HTTP Basic auth).
      */
-    #[Optional]
-    public ?string $client_id;
+    #[Optional('client_id')]
+    public ?string $clientID;
 
     /**
      * OAuth client secret (if not using HTTP Basic auth).
      */
-    #[Optional]
-    public ?string $client_secret;
+    #[Optional('client_secret')]
+    public ?string $clientSecret;
 
     /**
      * Authorization code (for authorization_code flow).
@@ -62,20 +62,20 @@ final class OAuthTokenParams implements BaseModel
     /**
      * PKCE code verifier (for authorization_code flow).
      */
-    #[Optional]
-    public ?string $code_verifier;
+    #[Optional('code_verifier')]
+    public ?string $codeVerifier;
 
     /**
      * Redirect URI (for authorization_code flow).
      */
-    #[Optional]
-    public ?string $redirect_uri;
+    #[Optional('redirect_uri')]
+    public ?string $redirectUri;
 
     /**
      * Refresh token (for refresh_token flow).
      */
-    #[Optional]
-    public ?string $refresh_token;
+    #[Optional('refresh_token')]
+    public ?string $refreshToken;
 
     /**
      * Space-separated list of requested scopes (for client_credentials).
@@ -88,7 +88,7 @@ final class OAuthTokenParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * OAuthTokenParams::with(grant_type: ...)
+     * OAuthTokenParams::with(grantType: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -107,28 +107,28 @@ final class OAuthTokenParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param GrantType|value-of<GrantType> $grant_type
+     * @param GrantType|value-of<GrantType> $grantType
      */
     public static function with(
-        GrantType|string $grant_type,
-        ?string $client_id = null,
-        ?string $client_secret = null,
+        GrantType|string $grantType,
+        ?string $clientID = null,
+        ?string $clientSecret = null,
         ?string $code = null,
-        ?string $code_verifier = null,
-        ?string $redirect_uri = null,
-        ?string $refresh_token = null,
+        ?string $codeVerifier = null,
+        ?string $redirectUri = null,
+        ?string $refreshToken = null,
         ?string $scope = null,
     ): self {
         $obj = new self;
 
-        $obj['grant_type'] = $grant_type;
+        $obj['grantType'] = $grantType;
 
-        null !== $client_id && $obj['client_id'] = $client_id;
-        null !== $client_secret && $obj['client_secret'] = $client_secret;
+        null !== $clientID && $obj['clientID'] = $clientID;
+        null !== $clientSecret && $obj['clientSecret'] = $clientSecret;
         null !== $code && $obj['code'] = $code;
-        null !== $code_verifier && $obj['code_verifier'] = $code_verifier;
-        null !== $redirect_uri && $obj['redirect_uri'] = $redirect_uri;
-        null !== $refresh_token && $obj['refresh_token'] = $refresh_token;
+        null !== $codeVerifier && $obj['codeVerifier'] = $codeVerifier;
+        null !== $redirectUri && $obj['redirectUri'] = $redirectUri;
+        null !== $refreshToken && $obj['refreshToken'] = $refreshToken;
         null !== $scope && $obj['scope'] = $scope;
 
         return $obj;
@@ -142,7 +142,7 @@ final class OAuthTokenParams implements BaseModel
     public function withGrantType(GrantType|string $grantType): self
     {
         $obj = clone $this;
-        $obj['grant_type'] = $grantType;
+        $obj['grantType'] = $grantType;
 
         return $obj;
     }
@@ -153,7 +153,7 @@ final class OAuthTokenParams implements BaseModel
     public function withClientID(string $clientID): self
     {
         $obj = clone $this;
-        $obj['client_id'] = $clientID;
+        $obj['clientID'] = $clientID;
 
         return $obj;
     }
@@ -164,7 +164,7 @@ final class OAuthTokenParams implements BaseModel
     public function withClientSecret(string $clientSecret): self
     {
         $obj = clone $this;
-        $obj['client_secret'] = $clientSecret;
+        $obj['clientSecret'] = $clientSecret;
 
         return $obj;
     }
@@ -186,7 +186,7 @@ final class OAuthTokenParams implements BaseModel
     public function withCodeVerifier(string $codeVerifier): self
     {
         $obj = clone $this;
-        $obj['code_verifier'] = $codeVerifier;
+        $obj['codeVerifier'] = $codeVerifier;
 
         return $obj;
     }
@@ -197,7 +197,7 @@ final class OAuthTokenParams implements BaseModel
     public function withRedirectUri(string $redirectUri): self
     {
         $obj = clone $this;
-        $obj['redirect_uri'] = $redirectUri;
+        $obj['redirectUri'] = $redirectUri;
 
         return $obj;
     }
@@ -208,7 +208,7 @@ final class OAuthTokenParams implements BaseModel
     public function withRefreshToken(string $refreshToken): self
     {
         $obj = clone $this;
-        $obj['refresh_token'] = $refreshToken;
+        $obj['refreshToken'] = $refreshToken;
 
         return $obj;
     }

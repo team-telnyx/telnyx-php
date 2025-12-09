@@ -35,13 +35,13 @@ final class DetailRecordsReportListResponse implements BaseModel
      *
      * @param list<WdrReport|array{
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   end_time?: string|null,
-     *   record_type?: string|null,
-     *   report_url?: string|null,
-     *   start_time?: string|null,
+     *   createdAt?: string|null,
+     *   endTime?: string|null,
+     *   recordType?: string|null,
+     *   reportURL?: string|null,
+     *   startTime?: string|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * }> $data
      */
     public static function with(?array $data = null): self
@@ -56,13 +56,13 @@ final class DetailRecordsReportListResponse implements BaseModel
     /**
      * @param list<WdrReport|array{
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   end_time?: string|null,
-     *   record_type?: string|null,
-     *   report_url?: string|null,
-     *   start_time?: string|null,
+     *   createdAt?: string|null,
+     *   endTime?: string|null,
+     *   recordType?: string|null,
+     *   reportURL?: string|null,
+     *   startTime?: string|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * }> $data
      */
     public function withData(array $data): self

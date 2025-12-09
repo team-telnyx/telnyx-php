@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListParams;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListResponse;
 use Telnyx\MobilePushCredentials\PushCredentialResponse;
@@ -15,11 +16,13 @@ interface MobilePushCredentialsContract
     /**
      * @api
      *
+     * @param array<mixed>|MobilePushCredentialCreateParams $params
+     *
      * @throws APIException
      */
     public function create(
-        mixed $params,
-        ?RequestOptions $requestOptions = null
+        array|MobilePushCredentialCreateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): PushCredentialResponse;
 
     /**

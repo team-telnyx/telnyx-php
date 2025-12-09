@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Texml\Accounts\ConferencesService::retrieveRecordingsJson()
  *
  * @phpstan-type ConferenceRetrieveRecordingsJsonParamsShape = array{
- *   account_sid: string
+ *   accountSid: string
  * }
  */
 final class ConferenceRetrieveRecordingsJsonParams implements BaseModel
@@ -25,14 +25,14 @@ final class ConferenceRetrieveRecordingsJsonParams implements BaseModel
     use SdkParams;
 
     #[Required]
-    public string $account_sid;
+    public string $accountSid;
 
     /**
      * `new ConferenceRetrieveRecordingsJsonParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ConferenceRetrieveRecordingsJsonParams::with(account_sid: ...)
+     * ConferenceRetrieveRecordingsJsonParams::with(accountSid: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -51,11 +51,11 @@ final class ConferenceRetrieveRecordingsJsonParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $account_sid): self
+    public static function with(string $accountSid): self
     {
         $obj = new self;
 
-        $obj['account_sid'] = $account_sid;
+        $obj['accountSid'] = $accountSid;
 
         return $obj;
     }
@@ -63,7 +63,7 @@ final class ConferenceRetrieveRecordingsJsonParams implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj['account_sid'] = $accountSid;
+        $obj['accountSid'] = $accountSid;
 
         return $obj;
     }

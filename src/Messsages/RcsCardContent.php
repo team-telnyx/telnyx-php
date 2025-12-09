@@ -62,7 +62,7 @@ final class RcsCardContent implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Media|array{
-     *   content_info?: RcsContentInfo|null, height?: value-of<Height>|null
+     *   contentInfo?: RcsContentInfo|null, height?: value-of<Height>|null
      * } $media
      * @param list<RcsSuggestion|array{
      *   action?: Action|null, reply?: Reply|null
@@ -99,7 +99,7 @@ final class RcsCardContent implements BaseModel
      * A media file within a rich card.
      *
      * @param Media|array{
-     *   content_info?: RcsContentInfo|null, height?: value-of<Height>|null
+     *   contentInfo?: RcsContentInfo|null, height?: value-of<Height>|null
      * } $media
      */
     public function withMedia(Media|array $media): self

@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\TelephonyCredentialsService::create()
  *
  * @phpstan-type TelephonyCredentialCreateParamsShape = array{
- *   connection_id: string, expires_at?: string, name?: string, tag?: string
+ *   connectionID: string, expiresAt?: string, name?: string, tag?: string
  * }
  */
 final class TelephonyCredentialCreateParams implements BaseModel
@@ -28,14 +28,14 @@ final class TelephonyCredentialCreateParams implements BaseModel
     /**
      * Identifies the Credential Connection this credential is associated with.
      */
-    #[Required]
-    public string $connection_id;
+    #[Required('connection_id')]
+    public string $connectionID;
 
     /**
      * ISO-8601 formatted date indicating when the credential will expire.
      */
-    #[Optional]
-    public ?string $expires_at;
+    #[Optional('expires_at')]
+    public ?string $expiresAt;
 
     #[Optional]
     public ?string $name;
@@ -51,7 +51,7 @@ final class TelephonyCredentialCreateParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * TelephonyCredentialCreateParams::with(connection_id: ...)
+     * TelephonyCredentialCreateParams::with(connectionID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -71,16 +71,16 @@ final class TelephonyCredentialCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $connection_id,
-        ?string $expires_at = null,
+        string $connectionID,
+        ?string $expiresAt = null,
         ?string $name = null,
         ?string $tag = null,
     ): self {
         $obj = new self;
 
-        $obj['connection_id'] = $connection_id;
+        $obj['connectionID'] = $connectionID;
 
-        null !== $expires_at && $obj['expires_at'] = $expires_at;
+        null !== $expiresAt && $obj['expiresAt'] = $expiresAt;
         null !== $name && $obj['name'] = $name;
         null !== $tag && $obj['tag'] = $tag;
 
@@ -93,7 +93,7 @@ final class TelephonyCredentialCreateParams implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj['connection_id'] = $connectionID;
+        $obj['connectionID'] = $connectionID;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class TelephonyCredentialCreateParams implements BaseModel
     public function withExpiresAt(string $expiresAt): self
     {
         $obj = clone $this;
-        $obj['expires_at'] = $expiresAt;
+        $obj['expiresAt'] = $expiresAt;
 
         return $obj;
     }

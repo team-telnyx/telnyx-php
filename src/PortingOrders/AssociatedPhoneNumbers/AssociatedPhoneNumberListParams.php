@@ -21,7 +21,7 @@ use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams\
  *
  * @phpstan-type AssociatedPhoneNumberListParamsShape = array{
  *   filter?: Filter|array{
- *     action?: value-of<Action>|null, phone_number?: string|null
+ *     action?: value-of<Action>|null, phoneNumber?: string|null
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
  *   sort?: Sort|array{value?: value-of<Value>|null},
@@ -62,7 +62,7 @@ final class AssociatedPhoneNumberListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   action?: value-of<Action>|null, phone_number?: string|null
+     *   action?: value-of<Action>|null, phoneNumber?: string|null
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      * @param Sort|array{value?: value-of<Value>|null} $sort
@@ -85,7 +85,7 @@ final class AssociatedPhoneNumberListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[action].
      *
      * @param Filter|array{
-     *   action?: value-of<Action>|null, phone_number?: string|null
+     *   action?: value-of<Action>|null, phoneNumber?: string|null
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

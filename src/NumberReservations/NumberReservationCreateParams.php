@@ -16,15 +16,15 @@ use Telnyx\NumberReservations\ReservedPhoneNumber\Status;
  * @see Telnyx\Services\NumberReservationsService::create()
  *
  * @phpstan-type NumberReservationCreateParamsShape = array{
- *   customer_reference?: string,
- *   phone_numbers?: list<ReservedPhoneNumber|array{
+ *   customerReference?: string,
+ *   phoneNumbers?: list<ReservedPhoneNumber|array{
  *     id?: string|null,
- *     created_at?: \DateTimeInterface|null,
- *     expired_at?: \DateTimeInterface|null,
- *     phone_number?: string|null,
- *     record_type?: string|null,
+ *     createdAt?: \DateTimeInterface|null,
+ *     expiredAt?: \DateTimeInterface|null,
+ *     phoneNumber?: string|null,
+ *     recordType?: string|null,
  *     status?: value-of<Status>|null,
- *     updated_at?: \DateTimeInterface|null,
+ *     updatedAt?: \DateTimeInterface|null,
  *   }>,
  * }
  */
@@ -37,12 +37,12 @@ final class NumberReservationCreateParams implements BaseModel
     /**
      * A customer reference string for customer look ups.
      */
-    #[Optional]
-    public ?string $customer_reference;
+    #[Optional('customer_reference')]
+    public ?string $customerReference;
 
-    /** @var list<ReservedPhoneNumber>|null $phone_numbers */
-    #[Optional(list: ReservedPhoneNumber::class)]
-    public ?array $phone_numbers;
+    /** @var list<ReservedPhoneNumber>|null $phoneNumbers */
+    #[Optional('phone_numbers', list: ReservedPhoneNumber::class)]
+    public ?array $phoneNumbers;
 
     public function __construct()
     {
@@ -56,22 +56,22 @@ final class NumberReservationCreateParams implements BaseModel
      *
      * @param list<ReservedPhoneNumber|array{
      *   id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   expired_at?: \DateTimeInterface|null,
-     *   phone_number?: string|null,
-     *   record_type?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   expiredAt?: \DateTimeInterface|null,
+     *   phoneNumber?: string|null,
+     *   recordType?: string|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
-     * }> $phone_numbers
+     *   updatedAt?: \DateTimeInterface|null,
+     * }> $phoneNumbers
      */
     public static function with(
-        ?string $customer_reference = null,
-        ?array $phone_numbers = null
+        ?string $customerReference = null,
+        ?array $phoneNumbers = null
     ): self {
         $obj = new self;
 
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
-        null !== $phone_numbers && $obj['phone_numbers'] = $phone_numbers;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
+        null !== $phoneNumbers && $obj['phoneNumbers'] = $phoneNumbers;
 
         return $obj;
     }
@@ -82,7 +82,7 @@ final class NumberReservationCreateParams implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }
@@ -90,18 +90,18 @@ final class NumberReservationCreateParams implements BaseModel
     /**
      * @param list<ReservedPhoneNumber|array{
      *   id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   expired_at?: \DateTimeInterface|null,
-     *   phone_number?: string|null,
-     *   record_type?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   expiredAt?: \DateTimeInterface|null,
+     *   phoneNumber?: string|null,
+     *   recordType?: string|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj['phone_numbers'] = $phoneNumbers;
+        $obj['phoneNumbers'] = $phoneNumbers;
 
         return $obj;
     }

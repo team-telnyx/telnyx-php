@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type RunListParamsShape = array{
  *   page?: Page|array{number?: int|null, size?: int|null},
  *   status?: string,
- *   test_suite_run_id?: string,
+ *   testSuiteRunID?: string,
  * }
  */
 final class RunListParams implements BaseModel
@@ -43,7 +43,7 @@ final class RunListParams implements BaseModel
      * Filter runs by specific suite execution batch ID.
      */
     #[Optional]
-    public ?string $test_suite_run_id;
+    public ?string $testSuiteRunID;
 
     public function __construct()
     {
@@ -60,13 +60,13 @@ final class RunListParams implements BaseModel
     public static function with(
         Page|array|null $page = null,
         ?string $status = null,
-        ?string $test_suite_run_id = null,
+        ?string $testSuiteRunID = null,
     ): self {
         $obj = new self;
 
         null !== $page && $obj['page'] = $page;
         null !== $status && $obj['status'] = $status;
-        null !== $test_suite_run_id && $obj['test_suite_run_id'] = $test_suite_run_id;
+        null !== $testSuiteRunID && $obj['testSuiteRunID'] = $testSuiteRunID;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class RunListParams implements BaseModel
     public function withTestSuiteRunID(string $testSuiteRunID): self
     {
         $obj = clone $this;
-        $obj['test_suite_run_id'] = $testSuiteRunID;
+        $obj['testSuiteRunID'] = $testSuiteRunID;
 
         return $obj;
     }

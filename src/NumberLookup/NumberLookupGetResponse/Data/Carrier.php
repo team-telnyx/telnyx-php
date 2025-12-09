@@ -11,11 +11,11 @@ use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Carrier\Type;
 
 /**
  * @phpstan-type CarrierShape = array{
- *   error_code?: string|null,
- *   mobile_country_code?: string|null,
- *   mobile_network_code?: string|null,
+ *   errorCode?: string|null,
+ *   mobileCountryCode?: string|null,
+ *   mobileNetworkCode?: string|null,
  *   name?: string|null,
- *   normalized_carrier?: string|null,
+ *   normalizedCarrier?: string|null,
  *   type?: value-of<Type>|null,
  * }
  */
@@ -27,20 +27,20 @@ final class Carrier implements BaseModel
     /**
      * Unused.
      */
-    #[Optional(nullable: true)]
-    public ?string $error_code;
+    #[Optional('error_code', nullable: true)]
+    public ?string $errorCode;
 
     /**
      * Region code that matches the specific country calling code if the requested phone number type is mobile.
      */
-    #[Optional]
-    public ?string $mobile_country_code;
+    #[Optional('mobile_country_code')]
+    public ?string $mobileCountryCode;
 
     /**
      * National destination code (NDC), with a 0 prefix, if an NDC is found and the requested phone number type is mobile.
      */
-    #[Optional]
-    public ?string $mobile_network_code;
+    #[Optional('mobile_network_code')]
+    public ?string $mobileNetworkCode;
 
     /**
      * SPID (Service Provider ID) name, if the requested phone number has been ported; otherwise, the name of carrier who owns the phone number block.
@@ -51,8 +51,8 @@ final class Carrier implements BaseModel
     /**
      * If known to Telnyx and applicable, the primary network carrier.
      */
-    #[Optional]
-    public ?string $normalized_carrier;
+    #[Optional('normalized_carrier')]
+    public ?string $normalizedCarrier;
 
     /**
      * A phone number type that identifies the type of service associated with the requested phone number.
@@ -75,20 +75,20 @@ final class Carrier implements BaseModel
      * @param Type|value-of<Type> $type
      */
     public static function with(
-        ?string $error_code = null,
-        ?string $mobile_country_code = null,
-        ?string $mobile_network_code = null,
+        ?string $errorCode = null,
+        ?string $mobileCountryCode = null,
+        ?string $mobileNetworkCode = null,
         ?string $name = null,
-        ?string $normalized_carrier = null,
+        ?string $normalizedCarrier = null,
         Type|string|null $type = null,
     ): self {
         $obj = new self;
 
-        null !== $error_code && $obj['error_code'] = $error_code;
-        null !== $mobile_country_code && $obj['mobile_country_code'] = $mobile_country_code;
-        null !== $mobile_network_code && $obj['mobile_network_code'] = $mobile_network_code;
+        null !== $errorCode && $obj['errorCode'] = $errorCode;
+        null !== $mobileCountryCode && $obj['mobileCountryCode'] = $mobileCountryCode;
+        null !== $mobileNetworkCode && $obj['mobileNetworkCode'] = $mobileNetworkCode;
         null !== $name && $obj['name'] = $name;
-        null !== $normalized_carrier && $obj['normalized_carrier'] = $normalized_carrier;
+        null !== $normalizedCarrier && $obj['normalizedCarrier'] = $normalizedCarrier;
         null !== $type && $obj['type'] = $type;
 
         return $obj;
@@ -100,7 +100,7 @@ final class Carrier implements BaseModel
     public function withErrorCode(?string $errorCode): self
     {
         $obj = clone $this;
-        $obj['error_code'] = $errorCode;
+        $obj['errorCode'] = $errorCode;
 
         return $obj;
     }
@@ -111,7 +111,7 @@ final class Carrier implements BaseModel
     public function withMobileCountryCode(string $mobileCountryCode): self
     {
         $obj = clone $this;
-        $obj['mobile_country_code'] = $mobileCountryCode;
+        $obj['mobileCountryCode'] = $mobileCountryCode;
 
         return $obj;
     }
@@ -122,7 +122,7 @@ final class Carrier implements BaseModel
     public function withMobileNetworkCode(string $mobileNetworkCode): self
     {
         $obj = clone $this;
-        $obj['mobile_network_code'] = $mobileNetworkCode;
+        $obj['mobileNetworkCode'] = $mobileNetworkCode;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class Carrier implements BaseModel
     public function withNormalizedCarrier(string $normalizedCarrier): self
     {
         $obj = clone $this;
-        $obj['normalized_carrier'] = $normalizedCarrier;
+        $obj['normalizedCarrier'] = $normalizedCarrier;
 
         return $obj;
     }

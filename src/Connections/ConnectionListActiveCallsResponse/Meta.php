@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   cursors?: Cursors|null,
  *   next?: string|null,
  *   previous?: string|null,
- *   total_items?: int|null,
+ *   totalItems?: int|null,
  * }
  */
 final class Meta implements BaseModel
@@ -37,8 +37,8 @@ final class Meta implements BaseModel
     #[Optional]
     public ?string $previous;
 
-    #[Optional]
-    public ?int $total_items;
+    #[Optional('total_items')]
+    public ?int $totalItems;
 
     public function __construct()
     {
@@ -56,14 +56,14 @@ final class Meta implements BaseModel
         Cursors|array|null $cursors = null,
         ?string $next = null,
         ?string $previous = null,
-        ?int $total_items = null,
+        ?int $totalItems = null,
     ): self {
         $obj = new self;
 
         null !== $cursors && $obj['cursors'] = $cursors;
         null !== $next && $obj['next'] = $next;
         null !== $previous && $obj['previous'] = $previous;
-        null !== $total_items && $obj['total_items'] = $total_items;
+        null !== $totalItems && $obj['totalItems'] = $totalItems;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class Meta implements BaseModel
     public function withTotalItems(int $totalItems): self
     {
         $obj = clone $this;
-        $obj['total_items'] = $totalItems;
+        $obj['totalItems'] = $totalItems;
 
         return $obj;
     }

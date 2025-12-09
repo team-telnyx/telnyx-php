@@ -11,12 +11,12 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   country_code?: string|null,
+ *   countryCode?: string|null,
  *   mcc?: string|null,
  *   mnc?: string|null,
  *   name?: string|null,
- *   network_preferences_enabled?: bool|null,
- *   record_type?: string|null,
+ *   networkPreferencesEnabled?: bool|null,
+ *   recordType?: string|null,
  *   tadig?: string|null,
  * }
  */
@@ -34,8 +34,8 @@ final class Data implements BaseModel
     /**
      * The mobile operator two-character (ISO 3166-1 alpha-2) origin country code.
      */
-    #[Optional]
-    public ?string $country_code;
+    #[Optional('country_code')]
+    public ?string $countryCode;
 
     /**
      * MCC stands for Mobile Country Code. It's a three decimal digit that identifies a country.<br/><br/>
@@ -60,14 +60,14 @@ final class Data implements BaseModel
     /**
      * Indicate whether the mobile network operator can be set as preferred in the Network Preferences API.
      */
-    #[Optional]
-    public ?bool $network_preferences_enabled;
+    #[Optional('network_preferences_enabled')]
+    public ?bool $networkPreferencesEnabled;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * TADIG stands for Transferred Account Data Interchange Group. The TADIG code is a unique identifier for network operators in GSM mobile networks.
@@ -87,23 +87,23 @@ final class Data implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $country_code = null,
+        ?string $countryCode = null,
         ?string $mcc = null,
         ?string $mnc = null,
         ?string $name = null,
-        ?bool $network_preferences_enabled = null,
-        ?string $record_type = null,
+        ?bool $networkPreferencesEnabled = null,
+        ?string $recordType = null,
         ?string $tadig = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $country_code && $obj['country_code'] = $country_code;
+        null !== $countryCode && $obj['countryCode'] = $countryCode;
         null !== $mcc && $obj['mcc'] = $mcc;
         null !== $mnc && $obj['mnc'] = $mnc;
         null !== $name && $obj['name'] = $name;
-        null !== $network_preferences_enabled && $obj['network_preferences_enabled'] = $network_preferences_enabled;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $networkPreferencesEnabled && $obj['networkPreferencesEnabled'] = $networkPreferencesEnabled;
+        null !== $recordType && $obj['recordType'] = $recordType;
         null !== $tadig && $obj['tadig'] = $tadig;
 
         return $obj;
@@ -126,7 +126,7 @@ final class Data implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj['country_code'] = $countryCode;
+        $obj['countryCode'] = $countryCode;
 
         return $obj;
     }
@@ -173,7 +173,7 @@ final class Data implements BaseModel
         bool $networkPreferencesEnabled
     ): self {
         $obj = clone $this;
-        $obj['network_preferences_enabled'] = $networkPreferencesEnabled;
+        $obj['networkPreferencesEnabled'] = $networkPreferencesEnabled;
 
         return $obj;
     }
@@ -184,7 +184,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

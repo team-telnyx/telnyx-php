@@ -33,11 +33,11 @@ final class SslCertificateGetResponse implements BaseModel
      *
      * @param SslCertificate|array{
      *   id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   issued_by?: IssuedBy|null,
-     *   issued_to?: IssuedTo|null,
-     *   valid_from?: \DateTimeInterface|null,
-     *   valid_to?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   issuedBy?: IssuedBy|null,
+     *   issuedTo?: IssuedTo|null,
+     *   validFrom?: \DateTimeInterface|null,
+     *   validTo?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(SslCertificate|array|null $data = null): self
@@ -52,11 +52,11 @@ final class SslCertificateGetResponse implements BaseModel
     /**
      * @param SslCertificate|array{
      *   id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   issued_by?: IssuedBy|null,
-     *   issued_to?: IssuedTo|null,
-     *   valid_from?: \DateTimeInterface|null,
-     *   valid_to?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   issuedBy?: IssuedBy|null,
+     *   issuedTo?: IssuedTo|null,
+     *   validFrom?: \DateTimeInterface|null,
+     *   validTo?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(SslCertificate|array $data): self

@@ -12,9 +12,9 @@ use Telnyx\NetworkCoverage\NetworkCoverageListResponse\Data\Location;
 
 /**
  * @phpstan-type DataShape = array{
- *   available_services?: list<value-of<AvailableService>>|null,
+ *   availableServices?: list<value-of<AvailableService>>|null,
  *   location?: Location|null,
- *   record_type?: string|null,
+ *   recordType?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -25,10 +25,10 @@ final class Data implements BaseModel
     /**
      * List of interface types supported in this region.
      *
-     * @var list<value-of<AvailableService>>|null $available_services
+     * @var list<value-of<AvailableService>>|null $availableServices
      */
-    #[Optional(list: AvailableService::class)]
-    public ?array $available_services;
+    #[Optional('available_services', list: AvailableService::class)]
+    public ?array $availableServices;
 
     #[Optional]
     public ?Location $location;
@@ -36,8 +36,8 @@ final class Data implements BaseModel
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     public function __construct()
     {
@@ -49,7 +49,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AvailableService|value-of<AvailableService>> $available_services
+     * @param list<AvailableService|value-of<AvailableService>> $availableServices
      * @param Location|array{
      *   code?: string|null,
      *   name?: string|null,
@@ -59,15 +59,15 @@ final class Data implements BaseModel
      * } $location
      */
     public static function with(
-        ?array $available_services = null,
+        ?array $availableServices = null,
         Location|array|null $location = null,
-        ?string $record_type = null,
+        ?string $recordType = null,
     ): self {
         $obj = new self;
 
-        null !== $available_services && $obj['available_services'] = $available_services;
+        null !== $availableServices && $obj['availableServices'] = $availableServices;
         null !== $location && $obj['location'] = $location;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $recordType && $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -80,7 +80,7 @@ final class Data implements BaseModel
     public function withAvailableServices(array $availableServices): self
     {
         $obj = clone $this;
-        $obj['available_services'] = $availableServices;
+        $obj['availableServices'] = $availableServices;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

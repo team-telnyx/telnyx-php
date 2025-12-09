@@ -29,9 +29,9 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
      * Create a Global IP health check.
      *
      * @param array{
-     *   global_ip_id?: string,
-     *   health_check_params?: array<string,mixed>,
-     *   health_check_type?: string,
+     *   globalIPID?: string,
+     *   healthCheckParams?: array<string,mixed>,
+     *   healthCheckType?: string,
      * }|GlobalIPHealthCheckCreateParams $params
      *
      * @throws APIException

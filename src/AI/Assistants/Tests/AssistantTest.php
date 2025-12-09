@@ -18,16 +18,16 @@ use Telnyx\Core\Contracts\BaseModel;
  * after creating/updating tests.
  *
  * @phpstan-type AssistantTestShape = array{
- *   created_at: \DateTimeInterface,
+ *   createdAt: \DateTimeInterface,
  *   name: string,
  *   rubric: list<Rubric>,
- *   telnyx_conversation_channel: value-of<TelnyxConversationChannel>,
- *   test_id: string,
+ *   telnyxConversationChannel: value-of<TelnyxConversationChannel>,
+ *   testID: string,
  *   description?: string|null,
  *   destination?: string|null,
  *   instructions?: string|null,
- *   max_duration_seconds?: int|null,
- *   test_suite?: string|null,
+ *   maxDurationSeconds?: int|null,
+ *   testSuite?: string|null,
  * }
  */
 final class AssistantTest implements BaseModel
@@ -38,8 +38,8 @@ final class AssistantTest implements BaseModel
     /**
      * Timestamp when the test was created.
      */
-    #[Required]
-    public \DateTimeInterface $created_at;
+    #[Required('created_at')]
+    public \DateTimeInterface $createdAt;
 
     /**
      * Human-readable name of the test.
@@ -58,16 +58,19 @@ final class AssistantTest implements BaseModel
     /**
      * Communication channel used for test execution.
      *
-     * @var value-of<TelnyxConversationChannel> $telnyx_conversation_channel
+     * @var value-of<TelnyxConversationChannel> $telnyxConversationChannel
      */
-    #[Required(enum: TelnyxConversationChannel::class)]
-    public string $telnyx_conversation_channel;
+    #[Required(
+        'telnyx_conversation_channel',
+        enum: TelnyxConversationChannel::class
+    )]
+    public string $telnyxConversationChannel;
 
     /**
      * Unique identifier for the assistant test.
      */
-    #[Required]
-    public string $test_id;
+    #[Required('test_id')]
+    public string $testID;
 
     /**
      * Detailed description of the test's purpose and scope.
@@ -90,14 +93,14 @@ final class AssistantTest implements BaseModel
     /**
      * Maximum allowed duration for test execution in seconds.
      */
-    #[Optional]
-    public ?int $max_duration_seconds;
+    #[Optional('max_duration_seconds')]
+    public ?int $maxDurationSeconds;
 
     /**
      * Test suite grouping for organizational purposes.
      */
-    #[Optional]
-    public ?string $test_suite;
+    #[Optional('test_suite')]
+    public ?string $testSuite;
 
     /**
      * `new AssistantTest()` is missing required properties by the API.
@@ -105,11 +108,11 @@ final class AssistantTest implements BaseModel
      * To enforce required parameters use
      * ```
      * AssistantTest::with(
-     *   created_at: ...,
+     *   createdAt: ...,
      *   name: ...,
      *   rubric: ...,
-     *   telnyx_conversation_channel: ...,
-     *   test_id: ...,
+     *   telnyxConversationChannel: ...,
+     *   testID: ...,
      * )
      * ```
      *
@@ -135,33 +138,33 @@ final class AssistantTest implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Rubric|array{criteria: string, name: string}> $rubric
-     * @param TelnyxConversationChannel|value-of<TelnyxConversationChannel> $telnyx_conversation_channel
+     * @param TelnyxConversationChannel|value-of<TelnyxConversationChannel> $telnyxConversationChannel
      */
     public static function with(
-        \DateTimeInterface $created_at,
+        \DateTimeInterface $createdAt,
         string $name,
         array $rubric,
-        TelnyxConversationChannel|string $telnyx_conversation_channel,
-        string $test_id,
+        TelnyxConversationChannel|string $telnyxConversationChannel,
+        string $testID,
         ?string $description = null,
         ?string $destination = null,
         ?string $instructions = null,
-        ?int $max_duration_seconds = null,
-        ?string $test_suite = null,
+        ?int $maxDurationSeconds = null,
+        ?string $testSuite = null,
     ): self {
         $obj = new self;
 
-        $obj['created_at'] = $created_at;
+        $obj['createdAt'] = $createdAt;
         $obj['name'] = $name;
         $obj['rubric'] = $rubric;
-        $obj['telnyx_conversation_channel'] = $telnyx_conversation_channel;
-        $obj['test_id'] = $test_id;
+        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
+        $obj['testID'] = $testID;
 
         null !== $description && $obj['description'] = $description;
         null !== $destination && $obj['destination'] = $destination;
         null !== $instructions && $obj['instructions'] = $instructions;
-        null !== $max_duration_seconds && $obj['max_duration_seconds'] = $max_duration_seconds;
-        null !== $test_suite && $obj['test_suite'] = $test_suite;
+        null !== $maxDurationSeconds && $obj['maxDurationSeconds'] = $maxDurationSeconds;
+        null !== $testSuite && $obj['testSuite'] = $testSuite;
 
         return $obj;
     }
@@ -172,7 +175,7 @@ final class AssistantTest implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -210,7 +213,7 @@ final class AssistantTest implements BaseModel
         TelnyxConversationChannel|string $telnyxConversationChannel
     ): self {
         $obj = clone $this;
-        $obj['telnyx_conversation_channel'] = $telnyxConversationChannel;
+        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
 
         return $obj;
     }
@@ -221,7 +224,7 @@ final class AssistantTest implements BaseModel
     public function withTestID(string $testID): self
     {
         $obj = clone $this;
-        $obj['test_id'] = $testID;
+        $obj['testID'] = $testID;
 
         return $obj;
     }
@@ -265,7 +268,7 @@ final class AssistantTest implements BaseModel
     public function withMaxDurationSeconds(int $maxDurationSeconds): self
     {
         $obj = clone $this;
-        $obj['max_duration_seconds'] = $maxDurationSeconds;
+        $obj['maxDurationSeconds'] = $maxDurationSeconds;
 
         return $obj;
     }
@@ -276,7 +279,7 @@ final class AssistantTest implements BaseModel
     public function withTestSuite(string $testSuite): self
     {
         $obj = clone $this;
-        $obj['test_suite'] = $testSuite;
+        $obj['testSuite'] = $testSuite;
 
         return $obj;
     }

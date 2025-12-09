@@ -12,10 +12,10 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type UserBundleResourceShape = array{
  *   id: string,
- *   created_at: \DateTimeInterface,
+ *   createdAt: \DateTimeInterface,
  *   resource: string,
- *   resource_type: string,
- *   updated_at?: \DateTimeInterface|null,
+ *   resourceType: string,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class UserBundleResource implements BaseModel
@@ -32,8 +32,8 @@ final class UserBundleResource implements BaseModel
     /**
      * Date the resource was created.
      */
-    #[Required]
-    public \DateTimeInterface $created_at;
+    #[Required('created_at')]
+    public \DateTimeInterface $createdAt;
 
     /**
      * The resource itself (usually a phone number).
@@ -44,14 +44,14 @@ final class UserBundleResource implements BaseModel
     /**
      * The type of the resource (usually 'number').
      */
-    #[Required]
-    public string $resource_type;
+    #[Required('resource_type')]
+    public string $resourceType;
 
     /**
      * Date the resource was last updated.
      */
-    #[Optional(nullable: true)]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at', nullable: true)]
+    public ?\DateTimeInterface $updatedAt;
 
     /**
      * `new UserBundleResource()` is missing required properties by the API.
@@ -59,7 +59,7 @@ final class UserBundleResource implements BaseModel
      * To enforce required parameters use
      * ```
      * UserBundleResource::with(
-     *   id: ..., created_at: ..., resource: ..., resource_type: ...
+     *   id: ..., createdAt: ..., resource: ..., resourceType: ...
      * )
      * ```
      *
@@ -85,19 +85,19 @@ final class UserBundleResource implements BaseModel
      */
     public static function with(
         string $id,
-        \DateTimeInterface $created_at,
+        \DateTimeInterface $createdAt,
         string $resource,
-        string $resource_type,
-        ?\DateTimeInterface $updated_at = null,
+        string $resourceType,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
         $obj = new self;
 
         $obj['id'] = $id;
-        $obj['created_at'] = $created_at;
+        $obj['createdAt'] = $createdAt;
         $obj['resource'] = $resource;
-        $obj['resource_type'] = $resource_type;
+        $obj['resourceType'] = $resourceType;
 
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class UserBundleResource implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -141,7 +141,7 @@ final class UserBundleResource implements BaseModel
     public function withResourceType(string $resourceType): self
     {
         $obj = clone $this;
-        $obj['resource_type'] = $resourceType;
+        $obj['resourceType'] = $resourceType;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class UserBundleResource implements BaseModel
     public function withUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

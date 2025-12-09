@@ -41,13 +41,13 @@ final class MessagingHostedNumberOrderListResponse implements BaseModel
      *
      * @param list<MessagingHostedNumberOrder|array{
      *   id?: string|null,
-     *   messaging_profile_id?: string|null,
-     *   phone_numbers?: list<HostedNumber>|null,
-     *   record_type?: string|null,
+     *   messagingProfileID?: string|null,
+     *   phoneNumbers?: list<HostedNumber>|null,
+     *   recordType?: string|null,
      *   status?: value-of<Status>|null,
      * }> $data
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public static function with(
@@ -65,9 +65,9 @@ final class MessagingHostedNumberOrderListResponse implements BaseModel
     /**
      * @param list<MessagingHostedNumberOrder|array{
      *   id?: string|null,
-     *   messaging_profile_id?: string|null,
-     *   phone_numbers?: list<HostedNumber>|null,
-     *   record_type?: string|null,
+     *   messagingProfileID?: string|null,
+     *   phoneNumbers?: list<HostedNumber>|null,
+     *   recordType?: string|null,
      *   status?: value-of<Status>|null,
      * }> $data
      */
@@ -81,7 +81,7 @@ final class MessagingHostedNumberOrderListResponse implements BaseModel
 
     /**
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public function withMeta(Meta|array $meta): self

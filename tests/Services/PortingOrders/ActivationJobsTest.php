@@ -88,7 +88,7 @@ final class ActivationJobsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             [
                 'id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-                'activate_at' => new \DateTimeImmutable('2019-01-01T00:00:00Z'),
+                'activateAt' => new \DateTimeImmutable('2019-01-01T00:00:00Z'),
             ],
         );
 

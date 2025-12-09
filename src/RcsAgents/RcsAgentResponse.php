@@ -30,15 +30,15 @@ final class RcsAgentResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param RcsAgent|array{
-     *   agent_id?: string|null,
-     *   agent_name?: string|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   agentID?: string|null,
+     *   agentName?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   enabled?: bool|null,
-     *   profile_id?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
-     *   user_id?: string|null,
-     *   webhook_failover_url?: string|null,
-     *   webhook_url?: string|null,
+     *   profileID?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     *   userID?: string|null,
+     *   webhookFailoverURL?: string|null,
+     *   webhookURL?: string|null,
      * } $data
      */
     public static function with(RcsAgent|array|null $data = null): self
@@ -52,15 +52,15 @@ final class RcsAgentResponse implements BaseModel
 
     /**
      * @param RcsAgent|array{
-     *   agent_id?: string|null,
-     *   agent_name?: string|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   agentID?: string|null,
+     *   agentName?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   enabled?: bool|null,
-     *   profile_id?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
-     *   user_id?: string|null,
-     *   webhook_failover_url?: string|null,
-     *   webhook_url?: string|null,
+     *   profileID?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     *   userID?: string|null,
+     *   webhookFailoverURL?: string|null,
+     *   webhookURL?: string|null,
      * } $data
      */
     public function withData(RcsAgent|array $data): self

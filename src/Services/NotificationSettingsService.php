@@ -30,9 +30,9 @@ final class NotificationSettingsService implements NotificationSettingsContract
      * Add a notification setting.
      *
      * @param array{
-     *   notification_channel_id?: string,
-     *   notification_event_condition_id?: string,
-     *   notification_profile_id?: string,
+     *   notificationChannelID?: string,
+     *   notificationEventConditionID?: string,
+     *   notificationProfileID?: string,
      *   parameters?: list<array{name?: string, value?: string}>,
      * }|NotificationSettingCreateParams $params
      *
@@ -88,13 +88,13 @@ final class NotificationSettingsService implements NotificationSettingsContract
      *
      * @param array{
      *   filter?: array{
-     *     associated_record_type?: array{eq?: 'account'|'phone_number'|Eq},
-     *     channel_type_id?: array{
+     *     associatedRecordType?: array{eq?: 'account'|'phone_number'|Eq},
+     *     channelTypeID?: array{
      *       eq?: 'webhook'|'sms'|'email'|'voice'|NotificationSettingListParams\Filter\ChannelTypeID\Eq,
      *     },
-     *     notification_channel?: array{eq?: string},
-     *     notification_event_condition_id?: array{eq?: string},
-     *     notification_profile_id?: array{eq?: string},
+     *     notificationChannel?: array{eq?: string},
+     *     notificationEventConditionID?: array{eq?: string},
+     *     notificationProfileID?: array{eq?: string},
      *     status?: array{
      *       eq?: 'enabled'|'enable-received'|'enable-pending'|'enable-submtited'|'delete-received'|'delete-pending'|'delete-submitted'|'deleted'|NotificationSettingListParams\Filter\Status\Eq,
      *     },

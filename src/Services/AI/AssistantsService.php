@@ -28,6 +28,7 @@ use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\AssistantsContract;
 use Telnyx\Services\AI\Assistants\CanaryDeploysService;
@@ -85,18 +86,18 @@ final class AssistantsService implements AssistantsContract
      *   model: string,
      *   name: string,
      *   description?: string,
-     *   dynamic_variables?: array<string,mixed>,
-     *   dynamic_variables_webhook_url?: string,
-     *   enabled_features?: list<'telephony'|'messaging'|EnabledFeatures>,
+     *   dynamicVariables?: array<string,mixed>,
+     *   dynamicVariablesWebhookURL?: string,
+     *   enabledFeatures?: list<'telephony'|'messaging'|EnabledFeatures>,
      *   greeting?: string,
-     *   insight_settings?: array{insight_group_id?: string}|InsightSettings,
-     *   llm_api_key_ref?: string,
-     *   messaging_settings?: array{
-     *     default_messaging_profile_id?: string, delivery_status_webhook_url?: string
+     *   insightSettings?: array{insightGroupID?: string}|InsightSettings,
+     *   llmAPIKeyRef?: string,
+     *   messagingSettings?: array{
+     *     defaultMessagingProfileID?: string, deliveryStatusWebhookURL?: string
      *   }|MessagingSettings,
-     *   privacy_settings?: array{data_retention?: bool}|PrivacySettings,
-     *   telephony_settings?: array{
-     *     default_texml_app_id?: string, supports_unauthenticated_web_calls?: bool
+     *   privacySettings?: array{dataRetention?: bool}|PrivacySettings,
+     *   telephonySettings?: array{
+     *     defaultTexmlAppID?: string, supportsUnauthenticatedWebCalls?: bool
      *   }|TelephonySettings,
      *   tools?: list<AssistantTool|array<string,mixed>>,
      *   transcription?: array{
@@ -104,17 +105,17 @@ final class AssistantsService implements AssistantsContract
      *     model?: 'deepgram/flux'|'deepgram/nova-3'|'deepgram/nova-2'|'azure/fast'|'distil-whisper/distil-large-v2'|'openai/whisper-large-v3-turbo'|Model,
      *     region?: string,
      *     settings?: array{
-     *       eot_threshold?: float,
-     *       eot_timeout_ms?: int,
+     *       eotThreshold?: float,
+     *       eotTimeoutMs?: int,
      *       numerals?: bool,
-     *       smart_format?: bool,
+     *       smartFormat?: bool,
      *     },
      *   }|TranscriptionSettings,
-     *   voice_settings?: array{
+     *   voiceSettings?: array{
      *     voice: string,
-     *     api_key_ref?: string,
-     *     background_audio?: array<string,mixed>,
-     *     voice_speed?: float,
+     *     apiKeyRef?: string,
+     *     backgroundAudio?: array<string,mixed>,
+     *     voiceSpeed?: float,
      *   }|VoiceSettings,
      * }|AssistantCreateParams $params
      *
@@ -147,8 +148,8 @@ final class AssistantsService implements AssistantsContract
      * Retrieve an AI Assistant configuration by `assistant_id`.
      *
      * @param array{
-     *   call_control_id?: string,
-     *   fetch_dynamic_variables_from_webhook?: bool,
+     *   callControlID?: string,
+     *   fetchDynamicVariablesFromWebhook?: bool,
      *   from?: string,
      *   to?: string,
      * }|AssistantRetrieveParams $params
@@ -169,7 +170,13 @@ final class AssistantsService implements AssistantsContract
         $response = $this->client->request(
             method: 'get',
             path: ['ai/assistants/%1$s', $assistantID],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'callControlID' => 'call_control_id',
+                    'fetchDynamicVariablesFromWebhook' => 'fetch_dynamic_variables_from_webhook',
+                ],
+            ),
             options: $options,
             convert: InferenceEmbedding::class,
         );
@@ -184,22 +191,22 @@ final class AssistantsService implements AssistantsContract
      *
      * @param array{
      *   description?: string,
-     *   dynamic_variables?: array<string,mixed>,
-     *   dynamic_variables_webhook_url?: string,
-     *   enabled_features?: list<'telephony'|'messaging'|EnabledFeatures>,
+     *   dynamicVariables?: array<string,mixed>,
+     *   dynamicVariablesWebhookURL?: string,
+     *   enabledFeatures?: list<'telephony'|'messaging'|EnabledFeatures>,
      *   greeting?: string,
-     *   insight_settings?: array{insight_group_id?: string}|InsightSettings,
+     *   insightSettings?: array{insightGroupID?: string}|InsightSettings,
      *   instructions?: string,
-     *   llm_api_key_ref?: string,
-     *   messaging_settings?: array{
-     *     default_messaging_profile_id?: string, delivery_status_webhook_url?: string
+     *   llmAPIKeyRef?: string,
+     *   messagingSettings?: array{
+     *     defaultMessagingProfileID?: string, deliveryStatusWebhookURL?: string
      *   }|MessagingSettings,
      *   model?: string,
      *   name?: string,
-     *   privacy_settings?: array{data_retention?: bool}|PrivacySettings,
-     *   promote_to_main?: bool,
-     *   telephony_settings?: array{
-     *     default_texml_app_id?: string, supports_unauthenticated_web_calls?: bool
+     *   privacySettings?: array{dataRetention?: bool}|PrivacySettings,
+     *   promoteToMain?: bool,
+     *   telephonySettings?: array{
+     *     defaultTexmlAppID?: string, supportsUnauthenticatedWebCalls?: bool
      *   }|TelephonySettings,
      *   tools?: list<AssistantTool|array<string,mixed>>,
      *   transcription?: array{
@@ -207,17 +214,17 @@ final class AssistantsService implements AssistantsContract
      *     model?: 'deepgram/flux'|'deepgram/nova-3'|'deepgram/nova-2'|'azure/fast'|'distil-whisper/distil-large-v2'|'openai/whisper-large-v3-turbo'|Model,
      *     region?: string,
      *     settings?: array{
-     *       eot_threshold?: float,
-     *       eot_timeout_ms?: int,
+     *       eotThreshold?: float,
+     *       eotTimeoutMs?: int,
      *       numerals?: bool,
-     *       smart_format?: bool,
+     *       smartFormat?: bool,
      *     },
      *   }|TranscriptionSettings,
-     *   voice_settings?: array{
+     *   voiceSettings?: array{
      *     voice: string,
-     *     api_key_ref?: string,
-     *     background_audio?: array<string,mixed>,
-     *     voice_speed?: float,
+     *     apiKeyRef?: string,
+     *     backgroundAudio?: array<string,mixed>,
+     *     voiceSpeed?: float,
      *   }|VoiceSettings,
      * }|AssistantUpdateParams $params
      *
@@ -293,7 +300,7 @@ final class AssistantsService implements AssistantsContract
      * This endpoint allows a client to send a chat message to a specific AI Assistant. The assistant processes the message and returns a relevant reply based on the current conversation context. Refer to the Conversation API to [create a conversation](https://developers.telnyx.com/api/inference/inference-embedding/create-new-conversation-public-conversations-post), [filter existing conversations](https://developers.telnyx.com/api/inference/inference-embedding/get-conversations-public-conversations-get), [fetch messages for a conversation](https://developers.telnyx.com/api/inference/inference-embedding/get-conversations-public-conversation-id-messages-get), and [manually add messages to a conversation](https://developers.telnyx.com/api/inference/inference-embedding/add-new-message).
      *
      * @param array{
-     *   content: string, conversation_id: string, name?: string
+     *   content: string, conversationID: string, name?: string
      * }|AssistantChatParams $params
      *
      * @throws APIException
@@ -370,7 +377,7 @@ final class AssistantsService implements AssistantsContract
      * Import assistants from external providers. Any assistant that has already been imported will be overwritten with its latest version from the importing provider.
      *
      * @param array{
-     *   api_key_ref: string, provider: 'elevenlabs'|'vapi'|'retell'|Provider
+     *   apiKeyRef: string, provider: 'elevenlabs'|'vapi'|'retell'|Provider
      * }|AssistantImportParams $params
      *
      * @throws APIException
@@ -410,8 +417,8 @@ final class AssistantsService implements AssistantsContract
      *   from: string,
      *   text: string,
      *   to: string,
-     *   conversation_metadata?: array<string,string|int|bool>,
-     *   should_create_conversation?: bool,
+     *   conversationMetadata?: array<string,string|int|bool>,
+     *   shouldCreateConversation?: bool,
      * }|AssistantSendSMSParams $params
      *
      * @throws APIException

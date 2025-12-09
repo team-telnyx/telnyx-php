@@ -11,6 +11,7 @@ use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BulkSimCardActionsContract;
 
@@ -49,9 +50,9 @@ final class BulkSimCardActionsService implements BulkSimCardActionsContract
      * This API lists a paginated collection of bulk SIM card actions. A bulk SIM card action contains details about a collection of individual SIM card actions.
      *
      * @param array{
-     *   filter_action_type_?: 'bulk_set_public_ips'|FilterActionType,
-     *   page_number_?: int,
-     *   page_size_?: int,
+     *   filterActionType?: 'bulk_set_public_ips'|FilterActionType,
+     *   pageNumber?: int,
+     *   pageSize?: int,
      * }|BulkSimCardActionListParams $params
      *
      * @throws APIException
@@ -69,7 +70,14 @@ final class BulkSimCardActionsService implements BulkSimCardActionsContract
         $response = $this->client->request(
             method: 'get',
             path: 'bulk_sim_card_actions',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'filterActionType' => 'filter[action_type]',
+                    'pageNumber' => 'page[number]',
+                    'pageSize' => 'page[size]',
+                ],
+            ),
             options: $options,
             convert: BulkSimCardActionListResponse::class,
         );

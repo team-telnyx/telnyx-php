@@ -32,8 +32,8 @@ final class BucketNewPresignedURLResponse implements BaseModel
      *
      * @param Content|array{
      *   token?: string|null,
-     *   expires_at?: \DateTimeInterface|null,
-     *   presigned_url?: string|null,
+     *   expiresAt?: \DateTimeInterface|null,
+     *   presignedURL?: string|null,
      * } $content
      */
     public static function with(Content|array|null $content = null): self
@@ -48,8 +48,8 @@ final class BucketNewPresignedURLResponse implements BaseModel
     /**
      * @param Content|array{
      *   token?: string|null,
-     *   expires_at?: \DateTimeInterface|null,
-     *   presigned_url?: string|null,
+     *   expiresAt?: \DateTimeInterface|null,
+     *   presignedURL?: string|null,
      * } $content
      */
     public function withContent(Content|array $content): self

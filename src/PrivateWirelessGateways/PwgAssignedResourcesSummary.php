@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * The summary of the resource that have been assigned to the Private Wireless Gateway.
  *
  * @phpstan-type PwgAssignedResourcesSummaryShape = array{
- *   count?: int|null, record_type?: string|null
+ *   count?: int|null, recordType?: string|null
  * }
  */
 final class PwgAssignedResourcesSummary implements BaseModel
@@ -29,8 +29,8 @@ final class PwgAssignedResourcesSummary implements BaseModel
     /**
      * The type of the resource assigned to the Private Wireless Gateway.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     public function __construct()
     {
@@ -44,12 +44,12 @@ final class PwgAssignedResourcesSummary implements BaseModel
      */
     public static function with(
         ?int $count = null,
-        ?string $record_type = null
+        ?string $recordType = null
     ): self {
         $obj = new self;
 
         null !== $count && $obj['count'] = $count;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $recordType && $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class PwgAssignedResourcesSummary implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

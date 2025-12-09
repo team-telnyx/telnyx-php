@@ -11,12 +11,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   call_control_id: string,
- *   call_duration: int,
- *   call_leg_id: string,
- *   call_session_id: string,
- *   client_state: string,
- *   record_type: value-of<RecordType>,
+ *   callControlID: string,
+ *   callDuration: int,
+ *   callLegID: string,
+ *   callSessionID: string,
+ *   clientState: string,
+ *   recordType: value-of<RecordType>,
  * }
  */
 final class Data implements BaseModel
@@ -27,36 +27,36 @@ final class Data implements BaseModel
     /**
      * Unique identifier and token for controlling the call.
      */
-    #[Required]
-    public string $call_control_id;
+    #[Required('call_control_id')]
+    public string $callControlID;
 
     /**
      * Indicates the duration of the call in seconds.
      */
-    #[Required]
-    public int $call_duration;
+    #[Required('call_duration')]
+    public int $callDuration;
 
     /**
      * ID that is unique to the call and can be used to correlate webhook events.
      */
-    #[Required]
-    public string $call_leg_id;
+    #[Required('call_leg_id')]
+    public string $callLegID;
 
     /**
      * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
      */
-    #[Required]
-    public string $call_session_id;
+    #[Required('call_session_id')]
+    public string $callSessionID;
 
     /**
      * State received from a command.
      */
-    #[Required]
-    public string $client_state;
+    #[Required('client_state')]
+    public string $clientState;
 
-    /** @var value-of<RecordType> $record_type */
-    #[Required(enum: RecordType::class)]
-    public string $record_type;
+    /** @var value-of<RecordType> $recordType */
+    #[Required('record_type', enum: RecordType::class)]
+    public string $recordType;
 
     /**
      * `new Data()` is missing required properties by the API.
@@ -64,12 +64,12 @@ final class Data implements BaseModel
      * To enforce required parameters use
      * ```
      * Data::with(
-     *   call_control_id: ...,
-     *   call_duration: ...,
-     *   call_leg_id: ...,
-     *   call_session_id: ...,
-     *   client_state: ...,
-     *   record_type: ...,
+     *   callControlID: ...,
+     *   callDuration: ...,
+     *   callLegID: ...,
+     *   callSessionID: ...,
+     *   clientState: ...,
+     *   recordType: ...,
      * )
      * ```
      *
@@ -95,24 +95,24 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $record_type
+     * @param RecordType|value-of<RecordType> $recordType
      */
     public static function with(
-        string $call_control_id,
-        int $call_duration,
-        string $call_leg_id,
-        string $call_session_id,
-        string $client_state,
-        RecordType|string $record_type,
+        string $callControlID,
+        int $callDuration,
+        string $callLegID,
+        string $callSessionID,
+        string $clientState,
+        RecordType|string $recordType,
     ): self {
         $obj = new self;
 
-        $obj['call_control_id'] = $call_control_id;
-        $obj['call_duration'] = $call_duration;
-        $obj['call_leg_id'] = $call_leg_id;
-        $obj['call_session_id'] = $call_session_id;
-        $obj['client_state'] = $client_state;
-        $obj['record_type'] = $record_type;
+        $obj['callControlID'] = $callControlID;
+        $obj['callDuration'] = $callDuration;
+        $obj['callLegID'] = $callLegID;
+        $obj['callSessionID'] = $callSessionID;
+        $obj['clientState'] = $clientState;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -123,7 +123,7 @@ final class Data implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj['call_control_id'] = $callControlID;
+        $obj['callControlID'] = $callControlID;
 
         return $obj;
     }
@@ -134,7 +134,7 @@ final class Data implements BaseModel
     public function withCallDuration(int $callDuration): self
     {
         $obj = clone $this;
-        $obj['call_duration'] = $callDuration;
+        $obj['callDuration'] = $callDuration;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class Data implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj['call_leg_id'] = $callLegID;
+        $obj['callLegID'] = $callLegID;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class Data implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj['call_session_id'] = $callSessionID;
+        $obj['callSessionID'] = $callSessionID;
 
         return $obj;
     }
@@ -167,7 +167,7 @@ final class Data implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj['client_state'] = $clientState;
+        $obj['clientState'] = $clientState;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

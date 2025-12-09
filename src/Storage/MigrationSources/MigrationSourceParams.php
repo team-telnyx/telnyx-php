@@ -13,11 +13,11 @@ use Telnyx\Storage\MigrationSources\MigrationSourceParams\ProviderAuth;
 
 /**
  * @phpstan-type MigrationSourceParamsShape = array{
- *   bucket_name: string,
+ *   bucketName: string,
  *   provider: value-of<Provider>,
- *   provider_auth: ProviderAuth,
+ *   providerAuth: ProviderAuth,
  *   id?: string|null,
- *   source_region?: string|null,
+ *   sourceRegion?: string|null,
  * }
  */
 final class MigrationSourceParams implements BaseModel
@@ -28,8 +28,8 @@ final class MigrationSourceParams implements BaseModel
     /**
      * Bucket name to migrate the data from.
      */
-    #[Required]
-    public string $bucket_name;
+    #[Required('bucket_name')]
+    public string $bucketName;
 
     /**
      * Cloud provider from which to migrate data. Use 'telnyx' if you want to migrate data from one Telnyx bucket to another.
@@ -39,8 +39,8 @@ final class MigrationSourceParams implements BaseModel
     #[Required(enum: Provider::class)]
     public string $provider;
 
-    #[Required]
-    public ProviderAuth $provider_auth;
+    #[Required('provider_auth')]
+    public ProviderAuth $providerAuth;
 
     /**
      * Unique identifier for the data migration source.
@@ -51,15 +51,15 @@ final class MigrationSourceParams implements BaseModel
     /**
      * For intra-Telnyx buckets migration, specify the source bucket region in this field.
      */
-    #[Optional]
-    public ?string $source_region;
+    #[Optional('source_region')]
+    public ?string $sourceRegion;
 
     /**
      * `new MigrationSourceParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * MigrationSourceParams::with(bucket_name: ..., provider: ..., provider_auth: ...)
+     * MigrationSourceParams::with(bucketName: ..., provider: ..., providerAuth: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -83,24 +83,24 @@ final class MigrationSourceParams implements BaseModel
      *
      * @param Provider|value-of<Provider> $provider
      * @param ProviderAuth|array{
-     *   access_key?: string|null, secret_access_key?: string|null
-     * } $provider_auth
+     *   accessKey?: string|null, secretAccessKey?: string|null
+     * } $providerAuth
      */
     public static function with(
-        string $bucket_name,
+        string $bucketName,
         Provider|string $provider,
-        ProviderAuth|array $provider_auth,
+        ProviderAuth|array $providerAuth,
         ?string $id = null,
-        ?string $source_region = null,
+        ?string $sourceRegion = null,
     ): self {
         $obj = new self;
 
-        $obj['bucket_name'] = $bucket_name;
+        $obj['bucketName'] = $bucketName;
         $obj['provider'] = $provider;
-        $obj['provider_auth'] = $provider_auth;
+        $obj['providerAuth'] = $providerAuth;
 
         null !== $id && $obj['id'] = $id;
-        null !== $source_region && $obj['source_region'] = $source_region;
+        null !== $sourceRegion && $obj['sourceRegion'] = $sourceRegion;
 
         return $obj;
     }
@@ -111,7 +111,7 @@ final class MigrationSourceParams implements BaseModel
     public function withBucketName(string $bucketName): self
     {
         $obj = clone $this;
-        $obj['bucket_name'] = $bucketName;
+        $obj['bucketName'] = $bucketName;
 
         return $obj;
     }
@@ -131,13 +131,13 @@ final class MigrationSourceParams implements BaseModel
 
     /**
      * @param ProviderAuth|array{
-     *   access_key?: string|null, secret_access_key?: string|null
+     *   accessKey?: string|null, secretAccessKey?: string|null
      * } $providerAuth
      */
     public function withProviderAuth(ProviderAuth|array $providerAuth): self
     {
         $obj = clone $this;
-        $obj['provider_auth'] = $providerAuth;
+        $obj['providerAuth'] = $providerAuth;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class MigrationSourceParams implements BaseModel
     public function withSourceRegion(string $sourceRegion): self
     {
         $obj = clone $this;
-        $obj['source_region'] = $sourceRegion;
+        $obj['sourceRegion'] = $sourceRegion;
 
         return $obj;
     }

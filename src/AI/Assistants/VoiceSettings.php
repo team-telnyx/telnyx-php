@@ -17,9 +17,9 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type VoiceSettingsShape = array{
  *   voice: string,
- *   api_key_ref?: string|null,
- *   background_audio?: null|UnionMember0|UnionMember1|UnionMember2,
- *   voice_speed?: float|null,
+ *   apiKeyRef?: string|null,
+ *   backgroundAudio?: null|UnionMember0|UnionMember1|UnionMember2,
+ *   voiceSpeed?: float|null,
  * }
  */
 final class VoiceSettings implements BaseModel
@@ -37,20 +37,20 @@ final class VoiceSettings implements BaseModel
     /**
      * The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) that refers to your ElevenLabs API key. Warning: Free plans are unlikely to work with this integration.
      */
-    #[Optional]
-    public ?string $api_key_ref;
+    #[Optional('api_key_ref')]
+    public ?string $apiKeyRef;
 
     /**
      * Optional background audio to play on the call. Use a predefined media bed, or supply a looped MP3 URL. If a media URL is chosen in the portal, customers can preview it before saving.
      */
-    #[Optional]
-    public UnionMember0|UnionMember1|UnionMember2|null $background_audio;
+    #[Optional('background_audio')]
+    public UnionMember0|UnionMember1|UnionMember2|null $backgroundAudio;
 
     /**
      * The speed of the voice in the range [0.25, 2.0]. 1.0 is deafult speed. Larger numbers make the voice faster, smaller numbers make it slower. This is only applicable for Telnyx Natural voices.
      */
-    #[Optional]
-    public ?float $voice_speed;
+    #[Optional('voice_speed')]
+    public ?float $voiceSpeed;
 
     /**
      * `new VoiceSettings()` is missing required properties by the API.
@@ -84,21 +84,21 @@ final class VoiceSettings implements BaseModel
      * }|UnionMember2|array{
      *   type: value-of<UnionMember2\Type>,
      *   value: string,
-     * } $background_audio
+     * } $backgroundAudio
      */
     public static function with(
         string $voice,
-        ?string $api_key_ref = null,
-        UnionMember0|array|UnionMember1|UnionMember2|null $background_audio = null,
-        ?float $voice_speed = null,
+        ?string $apiKeyRef = null,
+        UnionMember0|array|UnionMember1|UnionMember2|null $backgroundAudio = null,
+        ?float $voiceSpeed = null,
     ): self {
         $obj = new self;
 
         $obj['voice'] = $voice;
 
-        null !== $api_key_ref && $obj['api_key_ref'] = $api_key_ref;
-        null !== $background_audio && $obj['background_audio'] = $background_audio;
-        null !== $voice_speed && $obj['voice_speed'] = $voice_speed;
+        null !== $apiKeyRef && $obj['apiKeyRef'] = $apiKeyRef;
+        null !== $backgroundAudio && $obj['backgroundAudio'] = $backgroundAudio;
+        null !== $voiceSpeed && $obj['voiceSpeed'] = $voiceSpeed;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class VoiceSettings implements BaseModel
     public function withAPIKeyRef(string $apiKeyRef): self
     {
         $obj = clone $this;
-        $obj['api_key_ref'] = $apiKeyRef;
+        $obj['apiKeyRef'] = $apiKeyRef;
 
         return $obj;
     }
@@ -143,7 +143,7 @@ final class VoiceSettings implements BaseModel
         UnionMember0|array|UnionMember1|UnionMember2 $backgroundAudio
     ): self {
         $obj = clone $this;
-        $obj['background_audio'] = $backgroundAudio;
+        $obj['backgroundAudio'] = $backgroundAudio;
 
         return $obj;
     }
@@ -154,7 +154,7 @@ final class VoiceSettings implements BaseModel
     public function withVoiceSpeed(float $voiceSpeed): self
     {
         $obj = clone $this;
-        $obj['voice_speed'] = $voiceSpeed;
+        $obj['voiceSpeed'] = $voiceSpeed;
 
         return $obj;
     }

@@ -12,12 +12,12 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type BillingBundleSummaryShape = array{
  *   id: string,
- *   cost_code: string,
- *   created_at: \DateTimeInterface,
- *   is_public: bool,
+ *   costCode: string,
+ *   createdAt: \DateTimeInterface,
+ *   isPublic: bool,
  *   name: string,
  *   currency?: string|null,
- *   mrc_price?: float|null,
+ *   mrcPrice?: float|null,
  *   slug?: string|null,
  *   specs?: list<string>|null,
  * }
@@ -36,20 +36,20 @@ final class BillingBundleSummary implements BaseModel
     /**
      * Bundle's cost code, this is used to identify the bundle in the billing system.
      */
-    #[Required]
-    public string $cost_code;
+    #[Required('cost_code')]
+    public string $costCode;
 
     /**
      * Date the bundle was created.
      */
-    #[Required]
-    public \DateTimeInterface $created_at;
+    #[Required('created_at')]
+    public \DateTimeInterface $createdAt;
 
     /**
      * Available to all customers or only to specific customers.
      */
-    #[Required]
-    public bool $is_public;
+    #[Required('is_public')]
+    public bool $isPublic;
 
     /**
      * Bundle's name, this is used to identify the bundle in the UI.
@@ -66,8 +66,8 @@ final class BillingBundleSummary implements BaseModel
     /**
      * Monthly recurring charge price.
      */
-    #[Optional]
-    public ?float $mrc_price;
+    #[Optional('mrc_price')]
+    public ?float $mrcPrice;
 
     /**
      * Slugified version of the bundle's name.
@@ -85,7 +85,7 @@ final class BillingBundleSummary implements BaseModel
      * To enforce required parameters use
      * ```
      * BillingBundleSummary::with(
-     *   id: ..., cost_code: ..., created_at: ..., is_public: ..., name: ...
+     *   id: ..., costCode: ..., createdAt: ..., isPublic: ..., name: ...
      * )
      * ```
      *
@@ -114,25 +114,25 @@ final class BillingBundleSummary implements BaseModel
      */
     public static function with(
         string $id,
-        string $cost_code,
-        \DateTimeInterface $created_at,
-        bool $is_public,
+        string $costCode,
+        \DateTimeInterface $createdAt,
+        bool $isPublic,
         string $name,
         ?string $currency = null,
-        ?float $mrc_price = null,
+        ?float $mrcPrice = null,
         ?string $slug = null,
         ?array $specs = null,
     ): self {
         $obj = new self;
 
         $obj['id'] = $id;
-        $obj['cost_code'] = $cost_code;
-        $obj['created_at'] = $created_at;
-        $obj['is_public'] = $is_public;
+        $obj['costCode'] = $costCode;
+        $obj['createdAt'] = $createdAt;
+        $obj['isPublic'] = $isPublic;
         $obj['name'] = $name;
 
         null !== $currency && $obj['currency'] = $currency;
-        null !== $mrc_price && $obj['mrc_price'] = $mrc_price;
+        null !== $mrcPrice && $obj['mrcPrice'] = $mrcPrice;
         null !== $slug && $obj['slug'] = $slug;
         null !== $specs && $obj['specs'] = $specs;
 
@@ -156,7 +156,7 @@ final class BillingBundleSummary implements BaseModel
     public function withCostCode(string $costCode): self
     {
         $obj = clone $this;
-        $obj['cost_code'] = $costCode;
+        $obj['costCode'] = $costCode;
 
         return $obj;
     }
@@ -167,7 +167,7 @@ final class BillingBundleSummary implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class BillingBundleSummary implements BaseModel
     public function withIsPublic(bool $isPublic): self
     {
         $obj = clone $this;
-        $obj['is_public'] = $isPublic;
+        $obj['isPublic'] = $isPublic;
 
         return $obj;
     }
@@ -211,7 +211,7 @@ final class BillingBundleSummary implements BaseModel
     public function withMrcPrice(float $mrcPrice): self
     {
         $obj = clone $this;
-        $obj['mrc_price'] = $mrcPrice;
+        $obj['mrcPrice'] = $mrcPrice;
 
         return $obj;
     }

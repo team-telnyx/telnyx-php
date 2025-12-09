@@ -39,8 +39,8 @@ final class CallControlApplicationsTest extends TestCase
         }
 
         $result = $this->client->callControlApplications->create([
-            'application_name' => 'call-router',
-            'webhook_event_url' => 'https://example.com',
+            'applicationName' => 'call-router',
+            'webhookEventURL' => 'https://example.com',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -55,28 +55,28 @@ final class CallControlApplicationsTest extends TestCase
         }
 
         $result = $this->client->callControlApplications->create([
-            'application_name' => 'call-router',
-            'webhook_event_url' => 'https://example.com',
+            'applicationName' => 'call-router',
+            'webhookEventURL' => 'https://example.com',
             'active' => false,
-            'anchorsite_override' => 'Latency',
-            'call_cost_in_webhooks' => true,
-            'dtmf_type' => 'Inband',
-            'first_command_timeout' => true,
-            'first_command_timeout_secs' => 10,
+            'anchorsiteOverride' => 'Latency',
+            'callCostInWebhooks' => true,
+            'dtmfType' => 'Inband',
+            'firstCommandTimeout' => true,
+            'firstCommandTimeoutSecs' => 10,
             'inbound' => [
-                'channel_limit' => 10,
-                'shaken_stir_enabled' => true,
-                'sip_subdomain' => 'example',
-                'sip_subdomain_receive_settings' => 'only_my_connections',
+                'channelLimit' => 10,
+                'shakenStirEnabled' => true,
+                'sipSubdomain' => 'example',
+                'sipSubdomainReceiveSettings' => 'only_my_connections',
             ],
             'outbound' => [
-                'channel_limit' => 10,
-                'outbound_voice_profile_id' => 'outbound_voice_profile_id',
+                'channelLimit' => 10,
+                'outboundVoiceProfileID' => 'outbound_voice_profile_id',
             ],
-            'redact_dtmf_debug_logging' => true,
-            'webhook_api_version' => '1',
-            'webhook_event_failover_url' => 'https://failover.example.com',
-            'webhook_timeout_secs' => 25,
+            'redactDtmfDebugLogging' => true,
+            'webhookAPIVersion' => '1',
+            'webhookEventFailoverURL' => 'https://failover.example.com',
+            'webhookTimeoutSecs' => 25,
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -106,8 +106,8 @@ final class CallControlApplicationsTest extends TestCase
         $result = $this->client->callControlApplications->update(
             'id',
             [
-                'application_name' => 'call-router',
-                'webhook_event_url' => 'https://example.com',
+                'applicationName' => 'call-router',
+                'webhookEventURL' => 'https://example.com',
             ],
         );
 
@@ -128,29 +128,29 @@ final class CallControlApplicationsTest extends TestCase
         $result = $this->client->callControlApplications->update(
             'id',
             [
-                'application_name' => 'call-router',
-                'webhook_event_url' => 'https://example.com',
+                'applicationName' => 'call-router',
+                'webhookEventURL' => 'https://example.com',
                 'active' => false,
-                'anchorsite_override' => 'Latency',
-                'call_cost_in_webhooks' => true,
-                'dtmf_type' => 'Inband',
-                'first_command_timeout' => true,
-                'first_command_timeout_secs' => 10,
+                'anchorsiteOverride' => 'Latency',
+                'callCostInWebhooks' => true,
+                'dtmfType' => 'Inband',
+                'firstCommandTimeout' => true,
+                'firstCommandTimeoutSecs' => 10,
                 'inbound' => [
-                    'channel_limit' => 10,
-                    'shaken_stir_enabled' => true,
-                    'sip_subdomain' => 'example',
-                    'sip_subdomain_receive_settings' => 'only_my_connections',
+                    'channelLimit' => 10,
+                    'shakenStirEnabled' => true,
+                    'sipSubdomain' => 'example',
+                    'sipSubdomainReceiveSettings' => 'only_my_connections',
                 ],
                 'outbound' => [
-                    'channel_limit' => 10,
-                    'outbound_voice_profile_id' => 'outbound_voice_profile_id',
+                    'channelLimit' => 10,
+                    'outboundVoiceProfileID' => 'outbound_voice_profile_id',
                 ],
-                'redact_dtmf_debug_logging' => true,
+                'redactDtmfDebugLogging' => true,
                 'tags' => ['tag1', 'tag2'],
-                'webhook_api_version' => '1',
-                'webhook_event_failover_url' => 'https://failover.example.com',
-                'webhook_timeout_secs' => 25,
+                'webhookAPIVersion' => '1',
+                'webhookEventFailoverURL' => 'https://failover.example.com',
+                'webhookTimeoutSecs' => 25,
             ],
         );
 

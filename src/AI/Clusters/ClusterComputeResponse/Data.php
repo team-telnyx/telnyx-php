@@ -9,22 +9,22 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type DataShape = array{task_id: string}
+ * @phpstan-type DataShape = array{taskID: string}
  */
 final class Data implements BaseModel
 {
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Required]
-    public string $task_id;
+    #[Required('task_id')]
+    public string $taskID;
 
     /**
      * `new Data()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Data::with(task_id: ...)
+     * Data::with(taskID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -43,11 +43,11 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $task_id): self
+    public static function with(string $taskID): self
     {
         $obj = new self;
 
-        $obj['task_id'] = $task_id;
+        $obj['taskID'] = $taskID;
 
         return $obj;
     }
@@ -55,7 +55,7 @@ final class Data implements BaseModel
     public function withTaskID(string $taskID): self
     {
         $obj = clone $this;
-        $obj['task_id'] = $taskID;
+        $obj['taskID'] = $taskID;
 
         return $obj;
     }

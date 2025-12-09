@@ -35,13 +35,13 @@ final class CommentGetResponse implements BaseModel
      * @param Data|array{
      *   id?: string|null,
      *   body?: string|null,
-     *   comment_record_id?: string|null,
-     *   comment_record_type?: value-of<CommentRecordType>|null,
+     *   commentRecordID?: string|null,
+     *   commentRecordType?: value-of<CommentRecordType>|null,
      *   commenter?: string|null,
-     *   commenter_type?: value-of<CommenterType>|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   read_at?: \DateTimeInterface|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   commenterType?: value-of<CommenterType>|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   readAt?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -57,13 +57,13 @@ final class CommentGetResponse implements BaseModel
      * @param Data|array{
      *   id?: string|null,
      *   body?: string|null,
-     *   comment_record_id?: string|null,
-     *   comment_record_type?: value-of<CommentRecordType>|null,
+     *   commentRecordID?: string|null,
+     *   commentRecordType?: value-of<CommentRecordType>|null,
      *   commenter?: string|null,
-     *   commenter_type?: value-of<CommenterType>|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   read_at?: \DateTimeInterface|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   commenterType?: value-of<CommenterType>|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   readAt?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(Data|array $data): self

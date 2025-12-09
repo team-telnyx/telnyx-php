@@ -16,7 +16,7 @@ use Telnyx\UserTags\UserTagListParams\Filter;
  * @see Telnyx\Services\UserTagsService::list()
  *
  * @phpstan-type UserTagListParamsShape = array{
- *   filter?: Filter|array{starts_with?: string|null}
+ *   filter?: Filter|array{startsWith?: string|null}
  * }
  */
 final class UserTagListParams implements BaseModel
@@ -41,7 +41,7 @@ final class UserTagListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{starts_with?: string|null} $filter
+     * @param Filter|array{startsWith?: string|null} $filter
      */
     public static function with(Filter|array|null $filter = null): self
     {
@@ -55,7 +55,7 @@ final class UserTagListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[starts_with].
      *
-     * @param Filter|array{starts_with?: string|null} $filter
+     * @param Filter|array{startsWith?: string|null} $filter
      */
     public function withFilter(Filter|array $filter): self
     {

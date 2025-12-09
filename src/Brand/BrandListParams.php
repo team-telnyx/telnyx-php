@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\BrandService::list()
  *
  * @phpstan-type BrandListParamsShape = array{
- *   brandId?: string,
+ *   brandID?: string,
  *   country?: string,
  *   displayName?: string,
  *   entityType?: string,
@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   recordsPerPage?: int,
  *   sort?: Sort|value-of<Sort>,
  *   state?: string,
- *   tcrBrandId?: string,
+ *   tcrBrandID?: string,
  * }
  */
 final class BrandListParams implements BaseModel
@@ -37,7 +37,7 @@ final class BrandListParams implements BaseModel
      * Filter results by the Telnyx Brand id.
      */
     #[Optional]
-    public ?string $brandId;
+    public ?string $brandID;
 
     #[Optional]
     public ?string $country;
@@ -72,7 +72,7 @@ final class BrandListParams implements BaseModel
      * Filter results by the TCR Brand id.
      */
     #[Optional]
-    public ?string $tcrBrandId;
+    public ?string $tcrBrandID;
 
     public function __construct()
     {
@@ -87,7 +87,7 @@ final class BrandListParams implements BaseModel
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
-        ?string $brandId = null,
+        ?string $brandID = null,
         ?string $country = null,
         ?string $displayName = null,
         ?string $entityType = null,
@@ -95,11 +95,11 @@ final class BrandListParams implements BaseModel
         ?int $recordsPerPage = null,
         Sort|string|null $sort = null,
         ?string $state = null,
-        ?string $tcrBrandId = null,
+        ?string $tcrBrandID = null,
     ): self {
         $obj = new self;
 
-        null !== $brandId && $obj['brandId'] = $brandId;
+        null !== $brandID && $obj['brandID'] = $brandID;
         null !== $country && $obj['country'] = $country;
         null !== $displayName && $obj['displayName'] = $displayName;
         null !== $entityType && $obj['entityType'] = $entityType;
@@ -107,7 +107,7 @@ final class BrandListParams implements BaseModel
         null !== $recordsPerPage && $obj['recordsPerPage'] = $recordsPerPage;
         null !== $sort && $obj['sort'] = $sort;
         null !== $state && $obj['state'] = $state;
-        null !== $tcrBrandId && $obj['tcrBrandId'] = $tcrBrandId;
+        null !== $tcrBrandID && $obj['tcrBrandID'] = $tcrBrandID;
 
         return $obj;
     }
@@ -118,7 +118,7 @@ final class BrandListParams implements BaseModel
     public function withBrandID(string $brandID): self
     {
         $obj = clone $this;
-        $obj['brandId'] = $brandID;
+        $obj['brandID'] = $brandID;
 
         return $obj;
     }
@@ -193,7 +193,7 @@ final class BrandListParams implements BaseModel
     public function withTcrBrandID(string $tcrBrandID): self
     {
         $obj = clone $this;
-        $obj['tcrBrandId'] = $tcrBrandID;
+        $obj['tcrBrandID'] = $tcrBrandID;
 
         return $obj;
     }

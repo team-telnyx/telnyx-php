@@ -39,16 +39,16 @@ final class JobUpdateEmergencySettingsBatchResponse implements BaseModel
      *
      * @param PhoneNumbersJob|array{
      *   id?: string|null,
-     *   created_at?: string|null,
+     *   createdAt?: string|null,
      *   etc?: \DateTimeInterface|null,
-     *   failed_operations?: list<FailedOperation>|null,
-     *   pending_operations?: list<PendingOperation>|null,
-     *   phone_numbers?: list<PhoneNumber>|null,
-     *   record_type?: string|null,
+     *   failedOperations?: list<FailedOperation>|null,
+     *   pendingOperations?: list<PendingOperation>|null,
+     *   phoneNumbers?: list<PhoneNumber>|null,
+     *   recordType?: string|null,
      *   status?: value-of<Status>|null,
-     *   successful_operations?: list<SuccessfulOperation>|null,
+     *   successfulOperations?: list<SuccessfulOperation>|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public static function with(PhoneNumbersJob|array|null $data = null): self
@@ -63,16 +63,16 @@ final class JobUpdateEmergencySettingsBatchResponse implements BaseModel
     /**
      * @param PhoneNumbersJob|array{
      *   id?: string|null,
-     *   created_at?: string|null,
+     *   createdAt?: string|null,
      *   etc?: \DateTimeInterface|null,
-     *   failed_operations?: list<FailedOperation>|null,
-     *   pending_operations?: list<PendingOperation>|null,
-     *   phone_numbers?: list<PhoneNumber>|null,
-     *   record_type?: string|null,
+     *   failedOperations?: list<FailedOperation>|null,
+     *   pendingOperations?: list<PendingOperation>|null,
+     *   phoneNumbers?: list<PhoneNumber>|null,
+     *   recordType?: string|null,
      *   status?: value-of<Status>|null,
-     *   successful_operations?: list<SuccessfulOperation>|null,
+     *   successfulOperations?: list<SuccessfulOperation>|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public function withData(PhoneNumbersJob|array $data): self

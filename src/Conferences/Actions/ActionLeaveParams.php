@@ -22,9 +22,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Conferences\ActionsService::leave()
  *
  * @phpstan-type ActionLeaveParamsShape = array{
- *   call_control_id: string,
- *   beep_enabled?: BeepEnabled|value-of<BeepEnabled>,
- *   command_id?: string,
+ *   callControlID: string,
+ *   beepEnabled?: BeepEnabled|value-of<BeepEnabled>,
+ *   commandID?: string,
  *   region?: Region|value-of<Region>,
  * }
  */
@@ -37,22 +37,22 @@ final class ActionLeaveParams implements BaseModel
     /**
      * Unique identifier and token for controlling the call.
      */
-    #[Required]
-    public string $call_control_id;
+    #[Required('call_control_id')]
+    public string $callControlID;
 
     /**
      * Whether a beep sound should be played when the participant leaves the conference. Can be used to override the conference-level setting.
      *
-     * @var value-of<BeepEnabled>|null $beep_enabled
+     * @var value-of<BeepEnabled>|null $beepEnabled
      */
-    #[Optional(enum: BeepEnabled::class)]
-    public ?string $beep_enabled;
+    #[Optional('beep_enabled', enum: BeepEnabled::class)]
+    public ?string $beepEnabled;
 
     /**
      * Use this field to avoid execution of duplicate commands. Telnyx will ignore subsequent commands with the same `command_id` as one that has already been executed.
      */
-    #[Optional]
-    public ?string $command_id;
+    #[Optional('command_id')]
+    public ?string $commandID;
 
     /**
      * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
@@ -67,7 +67,7 @@ final class ActionLeaveParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * ActionLeaveParams::with(call_control_id: ...)
+     * ActionLeaveParams::with(callControlID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -86,21 +86,21 @@ final class ActionLeaveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BeepEnabled|value-of<BeepEnabled> $beep_enabled
+     * @param BeepEnabled|value-of<BeepEnabled> $beepEnabled
      * @param Region|value-of<Region> $region
      */
     public static function with(
-        string $call_control_id,
-        BeepEnabled|string|null $beep_enabled = null,
-        ?string $command_id = null,
+        string $callControlID,
+        BeepEnabled|string|null $beepEnabled = null,
+        ?string $commandID = null,
         Region|string|null $region = null,
     ): self {
         $obj = new self;
 
-        $obj['call_control_id'] = $call_control_id;
+        $obj['callControlID'] = $callControlID;
 
-        null !== $beep_enabled && $obj['beep_enabled'] = $beep_enabled;
-        null !== $command_id && $obj['command_id'] = $command_id;
+        null !== $beepEnabled && $obj['beepEnabled'] = $beepEnabled;
+        null !== $commandID && $obj['commandID'] = $commandID;
         null !== $region && $obj['region'] = $region;
 
         return $obj;
@@ -112,7 +112,7 @@ final class ActionLeaveParams implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj['call_control_id'] = $callControlID;
+        $obj['callControlID'] = $callControlID;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class ActionLeaveParams implements BaseModel
     public function withBeepEnabled(BeepEnabled|string $beepEnabled): self
     {
         $obj = clone $this;
-        $obj['beep_enabled'] = $beepEnabled;
+        $obj['beepEnabled'] = $beepEnabled;
 
         return $obj;
     }
@@ -136,7 +136,7 @@ final class ActionLeaveParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj['command_id'] = $commandID;
+        $obj['commandID'] = $commandID;
 
         return $obj;
     }

@@ -40,9 +40,9 @@ final class UsageReportGetOptionsResponse implements BaseModel
      *
      * @param list<Data|array{
      *   product?: string|null,
-     *   product_dimensions?: list<string>|null,
-     *   product_metrics?: list<string>|null,
-     *   record_types?: list<RecordType>|null,
+     *   productDimensions?: list<string>|null,
+     *   productMetrics?: list<string>|null,
+     *   recordTypes?: list<RecordType>|null,
      * }> $data
      */
     public static function with(?array $data = null): self
@@ -59,9 +59,9 @@ final class UsageReportGetOptionsResponse implements BaseModel
      *
      * @param list<Data|array{
      *   product?: string|null,
-     *   product_dimensions?: list<string>|null,
-     *   product_metrics?: list<string>|null,
-     *   record_types?: list<RecordType>|null,
+     *   productDimensions?: list<string>|null,
+     *   productMetrics?: list<string>|null,
+     *   recordTypes?: list<RecordType>|null,
      * }> $data
      */
     public function withData(array $data): self

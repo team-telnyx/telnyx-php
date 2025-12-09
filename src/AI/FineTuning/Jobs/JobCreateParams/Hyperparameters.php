@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The hyperparameters used for the fine-tuning job.
  *
- * @phpstan-type HyperparametersShape = array{n_epochs?: int|null}
+ * @phpstan-type HyperparametersShape = array{nEpochs?: int|null}
  */
 final class Hyperparameters implements BaseModel
 {
@@ -21,8 +21,8 @@ final class Hyperparameters implements BaseModel
     /**
      * The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset. 'auto' decides the optimal number of epochs based on the size of the dataset. If setting the number manually, we support any number between 1 and 50 epochs.
      */
-    #[Optional]
-    public ?int $n_epochs;
+    #[Optional('n_epochs')]
+    public ?int $nEpochs;
 
     public function __construct()
     {
@@ -34,11 +34,11 @@ final class Hyperparameters implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?int $n_epochs = null): self
+    public static function with(?int $nEpochs = null): self
     {
         $obj = new self;
 
-        null !== $n_epochs && $obj['n_epochs'] = $n_epochs;
+        null !== $nEpochs && $obj['nEpochs'] = $nEpochs;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class Hyperparameters implements BaseModel
     public function withNEpochs(int $nEpochs): self
     {
         $obj = clone $this;
-        $obj['n_epochs'] = $nEpochs;
+        $obj['nEpochs'] = $nEpochs;
 
         return $obj;
     }

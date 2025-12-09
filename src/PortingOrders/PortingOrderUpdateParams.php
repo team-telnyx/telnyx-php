@@ -23,39 +23,39 @@ use Telnyx\PortingOrders\PortingOrderUpdateParams\Requirement;
  * @see Telnyx\Services\PortingOrdersService::update()
  *
  * @phpstan-type PortingOrderUpdateParamsShape = array{
- *   activation_settings?: ActivationSettings|array{
- *     foc_datetime_requested?: \DateTimeInterface|null
+ *   activationSettings?: ActivationSettings|array{
+ *     focDatetimeRequested?: \DateTimeInterface|null
  *   },
- *   customer_group_reference?: string,
- *   customer_reference?: string,
+ *   customerGroupReference?: string,
+ *   customerReference?: string,
  *   documents?: PortingOrderDocuments|array{
  *     invoice?: string|null, loa?: string|null
  *   },
- *   end_user?: PortingOrderEndUser|array{
+ *   endUser?: PortingOrderEndUser|array{
  *     admin?: PortingOrderEndUserAdmin|null,
  *     location?: PortingOrderEndUserLocation|null,
  *   },
- *   messaging?: Messaging|array{enable_messaging?: bool|null},
+ *   messaging?: Messaging|array{enableMessaging?: bool|null},
  *   misc?: null|PortingOrderMisc|array{
- *     new_billing_phone_number?: string|null,
- *     remaining_numbers_action?: value-of<RemainingNumbersAction>|null,
+ *     newBillingPhoneNumber?: string|null,
+ *     remainingNumbersAction?: value-of<RemainingNumbersAction>|null,
  *     type?: value-of<PortingOrderType>|null,
  *   },
- *   phone_number_configuration?: PortingOrderPhoneNumberConfiguration|array{
- *     billing_group_id?: string|null,
- *     connection_id?: string|null,
- *     emergency_address_id?: string|null,
- *     messaging_profile_id?: string|null,
+ *   phoneNumberConfiguration?: PortingOrderPhoneNumberConfiguration|array{
+ *     billingGroupID?: string|null,
+ *     connectionID?: string|null,
+ *     emergencyAddressID?: string|null,
+ *     messagingProfileID?: string|null,
  *     tags?: list<string>|null,
  *   },
- *   requirement_group_id?: string,
+ *   requirementGroupID?: string,
  *   requirements?: list<Requirement|array{
- *     field_value: string, requirement_type_id: string
+ *     fieldValue: string, requirementTypeID: string
  *   }>,
- *   user_feedback?: PortingOrderUserFeedback|array{
- *     user_comment?: string|null, user_rating?: int|null
+ *   userFeedback?: PortingOrderUserFeedback|array{
+ *     userComment?: string|null, userRating?: int|null
  *   },
- *   webhook_url?: string,
+ *   webhookURL?: string,
  * }
  */
 final class PortingOrderUpdateParams implements BaseModel
@@ -64,14 +64,14 @@ final class PortingOrderUpdateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Optional]
-    public ?ActivationSettings $activation_settings;
+    #[Optional('activation_settings')]
+    public ?ActivationSettings $activationSettings;
 
-    #[Optional]
-    public ?string $customer_group_reference;
+    #[Optional('customer_group_reference')]
+    public ?string $customerGroupReference;
 
-    #[Optional]
-    public ?string $customer_reference;
+    #[Optional('customer_reference')]
+    public ?string $customerReference;
 
     /**
      * Can be specified directly or via the `requirement_group_id` parameter.
@@ -79,8 +79,8 @@ final class PortingOrderUpdateParams implements BaseModel
     #[Optional]
     public ?PortingOrderDocuments $documents;
 
-    #[Optional]
-    public ?PortingOrderEndUser $end_user;
+    #[Optional('end_user')]
+    public ?PortingOrderEndUser $endUser;
 
     #[Optional]
     public ?Messaging $messaging;
@@ -88,14 +88,14 @@ final class PortingOrderUpdateParams implements BaseModel
     #[Optional(nullable: true)]
     public ?PortingOrderMisc $misc;
 
-    #[Optional]
-    public ?PortingOrderPhoneNumberConfiguration $phone_number_configuration;
+    #[Optional('phone_number_configuration')]
+    public ?PortingOrderPhoneNumberConfiguration $phoneNumberConfiguration;
 
     /**
      * If present, we will read the current values from the specified Requirement Group into the Documents and Requirements for this Porting Order. Note that any future changes in the Requirement Group would have no impact on this Porting Order. We will return an error if a specified Requirement Group conflicts with documents or requirements in the same request.
      */
-    #[Optional]
-    public ?string $requirement_group_id;
+    #[Optional('requirement_group_id')]
+    public ?string $requirementGroupID;
 
     /**
      * List of requirements for porting numbers.
@@ -105,11 +105,11 @@ final class PortingOrderUpdateParams implements BaseModel
     #[Optional(list: Requirement::class)]
     public ?array $requirements;
 
-    #[Optional]
-    public ?PortingOrderUserFeedback $user_feedback;
+    #[Optional('user_feedback')]
+    public ?PortingOrderUserFeedback $userFeedback;
 
-    #[Optional]
-    public ?string $webhook_url;
+    #[Optional('webhook_url')]
+    public ?string $webhookURL;
 
     public function __construct()
     {
@@ -122,77 +122,77 @@ final class PortingOrderUpdateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param ActivationSettings|array{
-     *   foc_datetime_requested?: \DateTimeInterface|null
-     * } $activation_settings
+     *   focDatetimeRequested?: \DateTimeInterface|null
+     * } $activationSettings
      * @param PortingOrderDocuments|array{
      *   invoice?: string|null, loa?: string|null
      * } $documents
      * @param PortingOrderEndUser|array{
      *   admin?: PortingOrderEndUserAdmin|null,
      *   location?: PortingOrderEndUserLocation|null,
-     * } $end_user
-     * @param Messaging|array{enable_messaging?: bool|null} $messaging
+     * } $endUser
+     * @param Messaging|array{enableMessaging?: bool|null} $messaging
      * @param PortingOrderMisc|array{
-     *   new_billing_phone_number?: string|null,
-     *   remaining_numbers_action?: value-of<RemainingNumbersAction>|null,
+     *   newBillingPhoneNumber?: string|null,
+     *   remainingNumbersAction?: value-of<RemainingNumbersAction>|null,
      *   type?: value-of<PortingOrderType>|null,
      * }|null $misc
      * @param PortingOrderPhoneNumberConfiguration|array{
-     *   billing_group_id?: string|null,
-     *   connection_id?: string|null,
-     *   emergency_address_id?: string|null,
-     *   messaging_profile_id?: string|null,
+     *   billingGroupID?: string|null,
+     *   connectionID?: string|null,
+     *   emergencyAddressID?: string|null,
+     *   messagingProfileID?: string|null,
      *   tags?: list<string>|null,
-     * } $phone_number_configuration
+     * } $phoneNumberConfiguration
      * @param list<Requirement|array{
-     *   field_value: string, requirement_type_id: string
+     *   fieldValue: string, requirementTypeID: string
      * }> $requirements
      * @param PortingOrderUserFeedback|array{
-     *   user_comment?: string|null, user_rating?: int|null
-     * } $user_feedback
+     *   userComment?: string|null, userRating?: int|null
+     * } $userFeedback
      */
     public static function with(
-        ActivationSettings|array|null $activation_settings = null,
-        ?string $customer_group_reference = null,
-        ?string $customer_reference = null,
+        ActivationSettings|array|null $activationSettings = null,
+        ?string $customerGroupReference = null,
+        ?string $customerReference = null,
         PortingOrderDocuments|array|null $documents = null,
-        PortingOrderEndUser|array|null $end_user = null,
+        PortingOrderEndUser|array|null $endUser = null,
         Messaging|array|null $messaging = null,
         PortingOrderMisc|array|null $misc = null,
-        PortingOrderPhoneNumberConfiguration|array|null $phone_number_configuration = null,
-        ?string $requirement_group_id = null,
+        PortingOrderPhoneNumberConfiguration|array|null $phoneNumberConfiguration = null,
+        ?string $requirementGroupID = null,
         ?array $requirements = null,
-        PortingOrderUserFeedback|array|null $user_feedback = null,
-        ?string $webhook_url = null,
+        PortingOrderUserFeedback|array|null $userFeedback = null,
+        ?string $webhookURL = null,
     ): self {
         $obj = new self;
 
-        null !== $activation_settings && $obj['activation_settings'] = $activation_settings;
-        null !== $customer_group_reference && $obj['customer_group_reference'] = $customer_group_reference;
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $activationSettings && $obj['activationSettings'] = $activationSettings;
+        null !== $customerGroupReference && $obj['customerGroupReference'] = $customerGroupReference;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
         null !== $documents && $obj['documents'] = $documents;
-        null !== $end_user && $obj['end_user'] = $end_user;
+        null !== $endUser && $obj['endUser'] = $endUser;
         null !== $messaging && $obj['messaging'] = $messaging;
         null !== $misc && $obj['misc'] = $misc;
-        null !== $phone_number_configuration && $obj['phone_number_configuration'] = $phone_number_configuration;
-        null !== $requirement_group_id && $obj['requirement_group_id'] = $requirement_group_id;
+        null !== $phoneNumberConfiguration && $obj['phoneNumberConfiguration'] = $phoneNumberConfiguration;
+        null !== $requirementGroupID && $obj['requirementGroupID'] = $requirementGroupID;
         null !== $requirements && $obj['requirements'] = $requirements;
-        null !== $user_feedback && $obj['user_feedback'] = $user_feedback;
-        null !== $webhook_url && $obj['webhook_url'] = $webhook_url;
+        null !== $userFeedback && $obj['userFeedback'] = $userFeedback;
+        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
 
         return $obj;
     }
 
     /**
      * @param ActivationSettings|array{
-     *   foc_datetime_requested?: \DateTimeInterface|null
+     *   focDatetimeRequested?: \DateTimeInterface|null
      * } $activationSettings
      */
     public function withActivationSettings(
         ActivationSettings|array $activationSettings
     ): self {
         $obj = clone $this;
-        $obj['activation_settings'] = $activationSettings;
+        $obj['activationSettings'] = $activationSettings;
 
         return $obj;
     }
@@ -201,7 +201,7 @@ final class PortingOrderUpdateParams implements BaseModel
         string $customerGroupReference
     ): self {
         $obj = clone $this;
-        $obj['customer_group_reference'] = $customerGroupReference;
+        $obj['customerGroupReference'] = $customerGroupReference;
 
         return $obj;
     }
@@ -209,7 +209,7 @@ final class PortingOrderUpdateParams implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }
@@ -238,13 +238,13 @@ final class PortingOrderUpdateParams implements BaseModel
     public function withEndUser(PortingOrderEndUser|array $endUser): self
     {
         $obj = clone $this;
-        $obj['end_user'] = $endUser;
+        $obj['endUser'] = $endUser;
 
         return $obj;
     }
 
     /**
-     * @param Messaging|array{enable_messaging?: bool|null} $messaging
+     * @param Messaging|array{enableMessaging?: bool|null} $messaging
      */
     public function withMessaging(Messaging|array $messaging): self
     {
@@ -256,8 +256,8 @@ final class PortingOrderUpdateParams implements BaseModel
 
     /**
      * @param PortingOrderMisc|array{
-     *   new_billing_phone_number?: string|null,
-     *   remaining_numbers_action?: value-of<RemainingNumbersAction>|null,
+     *   newBillingPhoneNumber?: string|null,
+     *   remainingNumbersAction?: value-of<RemainingNumbersAction>|null,
      *   type?: value-of<PortingOrderType>|null,
      * }|null $misc
      */
@@ -271,10 +271,10 @@ final class PortingOrderUpdateParams implements BaseModel
 
     /**
      * @param PortingOrderPhoneNumberConfiguration|array{
-     *   billing_group_id?: string|null,
-     *   connection_id?: string|null,
-     *   emergency_address_id?: string|null,
-     *   messaging_profile_id?: string|null,
+     *   billingGroupID?: string|null,
+     *   connectionID?: string|null,
+     *   emergencyAddressID?: string|null,
+     *   messagingProfileID?: string|null,
      *   tags?: list<string>|null,
      * } $phoneNumberConfiguration
      */
@@ -282,7 +282,7 @@ final class PortingOrderUpdateParams implements BaseModel
         PortingOrderPhoneNumberConfiguration|array $phoneNumberConfiguration
     ): self {
         $obj = clone $this;
-        $obj['phone_number_configuration'] = $phoneNumberConfiguration;
+        $obj['phoneNumberConfiguration'] = $phoneNumberConfiguration;
 
         return $obj;
     }
@@ -293,7 +293,7 @@ final class PortingOrderUpdateParams implements BaseModel
     public function withRequirementGroupID(string $requirementGroupID): self
     {
         $obj = clone $this;
-        $obj['requirement_group_id'] = $requirementGroupID;
+        $obj['requirementGroupID'] = $requirementGroupID;
 
         return $obj;
     }
@@ -302,7 +302,7 @@ final class PortingOrderUpdateParams implements BaseModel
      * List of requirements for porting numbers.
      *
      * @param list<Requirement|array{
-     *   field_value: string, requirement_type_id: string
+     *   fieldValue: string, requirementTypeID: string
      * }> $requirements
      */
     public function withRequirements(array $requirements): self
@@ -315,14 +315,14 @@ final class PortingOrderUpdateParams implements BaseModel
 
     /**
      * @param PortingOrderUserFeedback|array{
-     *   user_comment?: string|null, user_rating?: int|null
+     *   userComment?: string|null, userRating?: int|null
      * } $userFeedback
      */
     public function withUserFeedback(
         PortingOrderUserFeedback|array $userFeedback
     ): self {
         $obj = clone $this;
-        $obj['user_feedback'] = $userFeedback;
+        $obj['userFeedback'] = $userFeedback;
 
         return $obj;
     }
@@ -330,7 +330,7 @@ final class PortingOrderUpdateParams implements BaseModel
     public function withWebhookURL(string $webhookURL): self
     {
         $obj = clone $this;
-        $obj['webhook_url'] = $webhookURL;
+        $obj['webhookURL'] = $webhookURL;
 
         return $obj;
     }

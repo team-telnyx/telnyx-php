@@ -42,24 +42,24 @@ final class MessagingListResponse implements BaseModel
      * @param list<MdrDetailReportResponse|array{
      *   id?: string|null,
      *   connections?: list<int>|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   directions?: list<value-of<Direction>>|null,
-     *   end_date?: \DateTimeInterface|null,
+     *   endDate?: \DateTimeInterface|null,
      *   filters?: list<Filter>|null,
      *   profiles?: list<string>|null,
-     *   record_type?: string|null,
-     *   record_types?: list<value-of<RecordType>>|null,
-     *   report_name?: string|null,
-     *   report_url?: string|null,
-     *   start_date?: \DateTimeInterface|null,
+     *   recordType?: string|null,
+     *   recordTypes?: list<value-of<RecordType>>|null,
+     *   reportName?: string|null,
+     *   reportURL?: string|null,
+     *   startDate?: \DateTimeInterface|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      * @param BatchCsvPaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -78,18 +78,18 @@ final class MessagingListResponse implements BaseModel
      * @param list<MdrDetailReportResponse|array{
      *   id?: string|null,
      *   connections?: list<int>|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   directions?: list<value-of<Direction>>|null,
-     *   end_date?: \DateTimeInterface|null,
+     *   endDate?: \DateTimeInterface|null,
      *   filters?: list<Filter>|null,
      *   profiles?: list<string>|null,
-     *   record_type?: string|null,
-     *   record_types?: list<value-of<RecordType>>|null,
-     *   report_name?: string|null,
-     *   report_url?: string|null,
-     *   start_date?: \DateTimeInterface|null,
+     *   recordType?: string|null,
+     *   recordTypes?: list<value-of<RecordType>>|null,
+     *   reportName?: string|null,
+     *   reportURL?: string|null,
+     *   startDate?: \DateTimeInterface|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -102,10 +102,10 @@ final class MessagingListResponse implements BaseModel
 
     /**
      * @param BatchCsvPaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(BatchCsvPaginationMeta|array $meta): self

@@ -46,7 +46,7 @@ final class ConnectionListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   id: string, allowed_tools: list<string>, integration_id: string
+     *   id: string, allowedTools: list<string>, integrationID: string
      * }> $data
      */
     public static function with(array $data): self
@@ -60,7 +60,7 @@ final class ConnectionListResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   id: string, allowed_tools: list<string>, integration_id: string
+     *   id: string, allowedTools: list<string>, integrationID: string
      * }> $data
      */
     public function withData(array $data): self

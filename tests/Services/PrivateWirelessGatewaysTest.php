@@ -39,7 +39,7 @@ final class PrivateWirelessGatewaysTest extends TestCase
 
         $result = $this->client->privateWirelessGateways->create([
             'name' => 'My private wireless gateway',
-            'network_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            'networkID' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -55,8 +55,8 @@ final class PrivateWirelessGatewaysTest extends TestCase
 
         $result = $this->client->privateWirelessGateways->create([
             'name' => 'My private wireless gateway',
-            'network_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            'region_code' => 'dc2',
+            'networkID' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            'regionCode' => 'dc2',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

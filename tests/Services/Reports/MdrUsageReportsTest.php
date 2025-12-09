@@ -39,9 +39,9 @@ final class MdrUsageReportsTest extends TestCase
         }
 
         $result = $this->client->reports->mdrUsageReports->create([
-            'aggregation_type' => 'NO_AGGREGATION',
-            'end_date' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
-            'start_date' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
+            'aggregationType' => 'NO_AGGREGATION',
+            'endDate' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
+            'startDate' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -56,9 +56,9 @@ final class MdrUsageReportsTest extends TestCase
         }
 
         $result = $this->client->reports->mdrUsageReports->create([
-            'aggregation_type' => 'NO_AGGREGATION',
-            'end_date' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
-            'start_date' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
+            'aggregationType' => 'NO_AGGREGATION',
+            'endDate' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
+            'startDate' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
             'profiles' => 'My profile',
         ]);
 
@@ -117,7 +117,7 @@ final class MdrUsageReportsTest extends TestCase
         }
 
         $result = $this->client->reports->mdrUsageReports->fetchSync([
-            'aggregation_type' => 'PROFILE',
+            'aggregationType' => 'PROFILE',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -132,10 +132,10 @@ final class MdrUsageReportsTest extends TestCase
         }
 
         $result = $this->client->reports->mdrUsageReports->fetchSync([
-            'aggregation_type' => 'PROFILE',
-            'end_date' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
+            'aggregationType' => 'PROFILE',
+            'endDate' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
             'profiles' => ['My profile'],
-            'start_date' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
+            'startDate' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

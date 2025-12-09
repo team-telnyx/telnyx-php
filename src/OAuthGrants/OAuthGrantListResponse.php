@@ -39,17 +39,17 @@ final class OAuthGrantListResponse implements BaseModel
      *
      * @param list<OAuthGrant|array{
      *   id: string,
-     *   client_id: string,
-     *   created_at: \DateTimeInterface,
-     *   record_type: value-of<RecordType>,
+     *   clientID: string,
+     *   createdAt: \DateTimeInterface,
+     *   recordType: value-of<RecordType>,
      *   scopes: list<string>,
-     *   last_used_at?: \DateTimeInterface|null,
+     *   lastUsedAt?: \DateTimeInterface|null,
      * }> $data
      * @param PaginationMetaOAuth|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -67,11 +67,11 @@ final class OAuthGrantListResponse implements BaseModel
     /**
      * @param list<OAuthGrant|array{
      *   id: string,
-     *   client_id: string,
-     *   created_at: \DateTimeInterface,
-     *   record_type: value-of<RecordType>,
+     *   clientID: string,
+     *   createdAt: \DateTimeInterface,
+     *   recordType: value-of<RecordType>,
      *   scopes: list<string>,
-     *   last_used_at?: \DateTimeInterface|null,
+     *   lastUsedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -84,10 +84,10 @@ final class OAuthGrantListResponse implements BaseModel
 
     /**
      * @param PaginationMetaOAuth|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMetaOAuth|array $meta): self

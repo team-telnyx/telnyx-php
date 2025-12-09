@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   filename: string,
  *   source: string,
  *   certainty?: float|null,
- *   loader_metadata?: array<string,mixed>|null,
+ *   loaderMetadata?: array<string,mixed>|null,
  * }
  */
 final class Metadata implements BaseModel
@@ -39,9 +39,9 @@ final class Metadata implements BaseModel
     #[Optional]
     public ?float $certainty;
 
-    /** @var array<string,mixed>|null $loader_metadata */
-    #[Optional(map: 'mixed')]
-    public ?array $loader_metadata;
+    /** @var array<string,mixed>|null $loaderMetadata */
+    #[Optional('loader_metadata', map: 'mixed')]
+    public ?array $loaderMetadata;
 
     /**
      * `new Metadata()` is missing required properties by the API.
@@ -71,7 +71,7 @@ final class Metadata implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,mixed> $loader_metadata
+     * @param array<string,mixed> $loaderMetadata
      */
     public static function with(
         string $checksum,
@@ -79,7 +79,7 @@ final class Metadata implements BaseModel
         string $filename,
         string $source,
         ?float $certainty = null,
-        ?array $loader_metadata = null,
+        ?array $loaderMetadata = null,
     ): self {
         $obj = new self;
 
@@ -89,7 +89,7 @@ final class Metadata implements BaseModel
         $obj['source'] = $source;
 
         null !== $certainty && $obj['certainty'] = $certainty;
-        null !== $loader_metadata && $obj['loader_metadata'] = $loader_metadata;
+        null !== $loaderMetadata && $obj['loaderMetadata'] = $loaderMetadata;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class Metadata implements BaseModel
     public function withLoaderMetadata(array $loaderMetadata): self
     {
         $obj = clone $this;
-        $obj['loader_metadata'] = $loaderMetadata;
+        $obj['loaderMetadata'] = $loaderMetadata;
 
         return $obj;
     }

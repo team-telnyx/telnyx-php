@@ -16,12 +16,12 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Calls\ActionsService::enqueue()
  *
  * @phpstan-type ActionEnqueueParamsShape = array{
- *   queue_name: string,
- *   client_state?: string,
- *   command_id?: string,
- *   keep_after_hangup?: bool,
- *   max_size?: int,
- *   max_wait_time_secs?: int,
+ *   queueName: string,
+ *   clientState?: string,
+ *   commandID?: string,
+ *   keepAfterHangup?: bool,
+ *   maxSize?: int,
+ *   maxWaitTimeSecs?: int,
  * }
  */
 final class ActionEnqueueParams implements BaseModel
@@ -33,45 +33,45 @@ final class ActionEnqueueParams implements BaseModel
     /**
      * The name of the queue the call should be put in. If a queue with a given name doesn't exist yet it will be created.
      */
-    #[Required]
-    public string $queue_name;
+    #[Required('queue_name')]
+    public string $queueName;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Optional]
-    public ?string $client_state;
+    #[Optional('client_state')]
+    public ?string $clientState;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Optional]
-    public ?string $command_id;
+    #[Optional('command_id')]
+    public ?string $commandID;
 
     /**
      * If set to true, the call will remain in the queue after hangup. In this case bridging to such call will fail with necessary information needed to re-establish the call.
      */
-    #[Optional]
-    public ?bool $keep_after_hangup;
+    #[Optional('keep_after_hangup')]
+    public ?bool $keepAfterHangup;
 
     /**
      * The maximum number of calls allowed in the queue at a given time. Can't be modified for an existing queue.
      */
-    #[Optional]
-    public ?int $max_size;
+    #[Optional('max_size')]
+    public ?int $maxSize;
 
     /**
      * The number of seconds after which the call will be removed from the queue.
      */
-    #[Optional]
-    public ?int $max_wait_time_secs;
+    #[Optional('max_wait_time_secs')]
+    public ?int $maxWaitTimeSecs;
 
     /**
      * `new ActionEnqueueParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ActionEnqueueParams::with(queue_name: ...)
+     * ActionEnqueueParams::with(queueName: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -91,22 +91,22 @@ final class ActionEnqueueParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $queue_name,
-        ?string $client_state = null,
-        ?string $command_id = null,
-        ?bool $keep_after_hangup = null,
-        ?int $max_size = null,
-        ?int $max_wait_time_secs = null,
+        string $queueName,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        ?bool $keepAfterHangup = null,
+        ?int $maxSize = null,
+        ?int $maxWaitTimeSecs = null,
     ): self {
         $obj = new self;
 
-        $obj['queue_name'] = $queue_name;
+        $obj['queueName'] = $queueName;
 
-        null !== $client_state && $obj['client_state'] = $client_state;
-        null !== $command_id && $obj['command_id'] = $command_id;
-        null !== $keep_after_hangup && $obj['keep_after_hangup'] = $keep_after_hangup;
-        null !== $max_size && $obj['max_size'] = $max_size;
-        null !== $max_wait_time_secs && $obj['max_wait_time_secs'] = $max_wait_time_secs;
+        null !== $clientState && $obj['clientState'] = $clientState;
+        null !== $commandID && $obj['commandID'] = $commandID;
+        null !== $keepAfterHangup && $obj['keepAfterHangup'] = $keepAfterHangup;
+        null !== $maxSize && $obj['maxSize'] = $maxSize;
+        null !== $maxWaitTimeSecs && $obj['maxWaitTimeSecs'] = $maxWaitTimeSecs;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class ActionEnqueueParams implements BaseModel
     public function withQueueName(string $queueName): self
     {
         $obj = clone $this;
-        $obj['queue_name'] = $queueName;
+        $obj['queueName'] = $queueName;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class ActionEnqueueParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj['client_state'] = $clientState;
+        $obj['clientState'] = $clientState;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class ActionEnqueueParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj['command_id'] = $commandID;
+        $obj['commandID'] = $commandID;
 
         return $obj;
     }
@@ -150,7 +150,7 @@ final class ActionEnqueueParams implements BaseModel
     public function withKeepAfterHangup(bool $keepAfterHangup): self
     {
         $obj = clone $this;
-        $obj['keep_after_hangup'] = $keepAfterHangup;
+        $obj['keepAfterHangup'] = $keepAfterHangup;
 
         return $obj;
     }
@@ -161,7 +161,7 @@ final class ActionEnqueueParams implements BaseModel
     public function withMaxSize(int $maxSize): self
     {
         $obj = clone $this;
-        $obj['max_size'] = $maxSize;
+        $obj['maxSize'] = $maxSize;
 
         return $obj;
     }
@@ -172,7 +172,7 @@ final class ActionEnqueueParams implements BaseModel
     public function withMaxWaitTimeSecs(int $maxWaitTimeSecs): self
     {
         $obj = clone $this;
-        $obj['max_wait_time_secs'] = $maxWaitTimeSecs;
+        $obj['maxWaitTimeSecs'] = $maxWaitTimeSecs;
 
         return $obj;
     }

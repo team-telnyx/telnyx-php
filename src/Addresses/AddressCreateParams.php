@@ -16,21 +16,21 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AddressesService::create()
  *
  * @phpstan-type AddressCreateParamsShape = array{
- *   business_name: string,
- *   country_code: string,
- *   first_name: string,
- *   last_name: string,
+ *   businessName: string,
+ *   countryCode: string,
+ *   firstName: string,
+ *   lastName: string,
  *   locality: string,
- *   street_address: string,
- *   address_book?: bool,
- *   administrative_area?: string,
+ *   streetAddress: string,
+ *   addressBook?: bool,
+ *   administrativeArea?: string,
  *   borough?: string,
- *   customer_reference?: string,
- *   extended_address?: string,
+ *   customerReference?: string,
+ *   extendedAddress?: string,
  *   neighborhood?: string,
- *   phone_number?: string,
- *   postal_code?: string,
- *   validate_address?: bool,
+ *   phoneNumber?: string,
+ *   postalCode?: string,
+ *   validateAddress?: bool,
  * }
  */
 final class AddressCreateParams implements BaseModel
@@ -42,26 +42,26 @@ final class AddressCreateParams implements BaseModel
     /**
      * The business name associated with the address. An address must have either a first last name or a business name.
      */
-    #[Required]
-    public string $business_name;
+    #[Required('business_name')]
+    public string $businessName;
 
     /**
      * The two-character (ISO 3166-1 alpha-2) country code of the address.
      */
-    #[Required]
-    public string $country_code;
+    #[Required('country_code')]
+    public string $countryCode;
 
     /**
      * The first name associated with the address. An address must have either a first last name or a business name.
      */
-    #[Required]
-    public string $first_name;
+    #[Required('first_name')]
+    public string $firstName;
 
     /**
      * The last name associated with the address. An address must have either a first last name or a business name.
      */
-    #[Required]
-    public string $last_name;
+    #[Required('last_name')]
+    public string $lastName;
 
     /**
      * The locality of the address. For US addresses, this corresponds to the city of the address.
@@ -72,20 +72,20 @@ final class AddressCreateParams implements BaseModel
     /**
      * The primary street address information about the address.
      */
-    #[Required]
-    public string $street_address;
+    #[Required('street_address')]
+    public string $streetAddress;
 
     /**
      * Indicates whether or not the address should be considered part of your list of addresses that appear for regular use.
      */
-    #[Optional]
-    public ?bool $address_book;
+    #[Optional('address_book')]
+    public ?bool $addressBook;
 
     /**
      * The locality of the address. For US addresses, this corresponds to the state of the address.
      */
-    #[Optional]
-    public ?string $administrative_area;
+    #[Optional('administrative_area')]
+    public ?string $administrativeArea;
 
     /**
      * The borough of the address. This field is not used for addresses in the US but is used for some international addresses.
@@ -96,14 +96,14 @@ final class AddressCreateParams implements BaseModel
     /**
      * A customer reference string for customer look ups.
      */
-    #[Optional]
-    public ?string $customer_reference;
+    #[Optional('customer_reference')]
+    public ?string $customerReference;
 
     /**
      * Additional street address information about the address such as, but not limited to, unit number or apartment number.
      */
-    #[Optional]
-    public ?string $extended_address;
+    #[Optional('extended_address')]
+    public ?string $extendedAddress;
 
     /**
      * The neighborhood of the address. This field is not used for addresses in the US but is used for some international addresses.
@@ -114,20 +114,20 @@ final class AddressCreateParams implements BaseModel
     /**
      * The phone number associated with the address.
      */
-    #[Optional]
-    public ?string $phone_number;
+    #[Optional('phone_number')]
+    public ?string $phoneNumber;
 
     /**
      * The postal code of the address.
      */
-    #[Optional]
-    public ?string $postal_code;
+    #[Optional('postal_code')]
+    public ?string $postalCode;
 
     /**
      * Indicates whether or not the address should be validated for emergency use upon creation or not. This should be left with the default value of `true` unless you have used the `/addresses/actions/validate` endpoint to validate the address separately prior to creation. If an address is not validated for emergency use upon creation and it is not valid, it will not be able to be used for emergency services.
      */
-    #[Optional]
-    public ?bool $validate_address;
+    #[Optional('validate_address')]
+    public ?bool $validateAddress;
 
     /**
      * `new AddressCreateParams()` is missing required properties by the API.
@@ -135,12 +135,12 @@ final class AddressCreateParams implements BaseModel
      * To enforce required parameters use
      * ```
      * AddressCreateParams::with(
-     *   business_name: ...,
-     *   country_code: ...,
-     *   first_name: ...,
-     *   last_name: ...,
+     *   businessName: ...,
+     *   countryCode: ...,
+     *   firstName: ...,
+     *   lastName: ...,
      *   locality: ...,
-     *   street_address: ...,
+     *   streetAddress: ...,
      * )
      * ```
      *
@@ -167,40 +167,40 @@ final class AddressCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $business_name,
-        string $country_code,
-        string $first_name,
-        string $last_name,
+        string $businessName,
+        string $countryCode,
+        string $firstName,
+        string $lastName,
         string $locality,
-        string $street_address,
-        ?bool $address_book = null,
-        ?string $administrative_area = null,
+        string $streetAddress,
+        ?bool $addressBook = null,
+        ?string $administrativeArea = null,
         ?string $borough = null,
-        ?string $customer_reference = null,
-        ?string $extended_address = null,
+        ?string $customerReference = null,
+        ?string $extendedAddress = null,
         ?string $neighborhood = null,
-        ?string $phone_number = null,
-        ?string $postal_code = null,
-        ?bool $validate_address = null,
+        ?string $phoneNumber = null,
+        ?string $postalCode = null,
+        ?bool $validateAddress = null,
     ): self {
         $obj = new self;
 
-        $obj['business_name'] = $business_name;
-        $obj['country_code'] = $country_code;
-        $obj['first_name'] = $first_name;
-        $obj['last_name'] = $last_name;
+        $obj['businessName'] = $businessName;
+        $obj['countryCode'] = $countryCode;
+        $obj['firstName'] = $firstName;
+        $obj['lastName'] = $lastName;
         $obj['locality'] = $locality;
-        $obj['street_address'] = $street_address;
+        $obj['streetAddress'] = $streetAddress;
 
-        null !== $address_book && $obj['address_book'] = $address_book;
-        null !== $administrative_area && $obj['administrative_area'] = $administrative_area;
+        null !== $addressBook && $obj['addressBook'] = $addressBook;
+        null !== $administrativeArea && $obj['administrativeArea'] = $administrativeArea;
         null !== $borough && $obj['borough'] = $borough;
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
-        null !== $extended_address && $obj['extended_address'] = $extended_address;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
+        null !== $extendedAddress && $obj['extendedAddress'] = $extendedAddress;
         null !== $neighborhood && $obj['neighborhood'] = $neighborhood;
-        null !== $phone_number && $obj['phone_number'] = $phone_number;
-        null !== $postal_code && $obj['postal_code'] = $postal_code;
-        null !== $validate_address && $obj['validate_address'] = $validate_address;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
+        null !== $postalCode && $obj['postalCode'] = $postalCode;
+        null !== $validateAddress && $obj['validateAddress'] = $validateAddress;
 
         return $obj;
     }
@@ -211,7 +211,7 @@ final class AddressCreateParams implements BaseModel
     public function withBusinessName(string $businessName): self
     {
         $obj = clone $this;
-        $obj['business_name'] = $businessName;
+        $obj['businessName'] = $businessName;
 
         return $obj;
     }
@@ -222,7 +222,7 @@ final class AddressCreateParams implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj['country_code'] = $countryCode;
+        $obj['countryCode'] = $countryCode;
 
         return $obj;
     }
@@ -233,7 +233,7 @@ final class AddressCreateParams implements BaseModel
     public function withFirstName(string $firstName): self
     {
         $obj = clone $this;
-        $obj['first_name'] = $firstName;
+        $obj['firstName'] = $firstName;
 
         return $obj;
     }
@@ -244,7 +244,7 @@ final class AddressCreateParams implements BaseModel
     public function withLastName(string $lastName): self
     {
         $obj = clone $this;
-        $obj['last_name'] = $lastName;
+        $obj['lastName'] = $lastName;
 
         return $obj;
     }
@@ -266,7 +266,7 @@ final class AddressCreateParams implements BaseModel
     public function withStreetAddress(string $streetAddress): self
     {
         $obj = clone $this;
-        $obj['street_address'] = $streetAddress;
+        $obj['streetAddress'] = $streetAddress;
 
         return $obj;
     }
@@ -277,7 +277,7 @@ final class AddressCreateParams implements BaseModel
     public function withAddressBook(bool $addressBook): self
     {
         $obj = clone $this;
-        $obj['address_book'] = $addressBook;
+        $obj['addressBook'] = $addressBook;
 
         return $obj;
     }
@@ -288,7 +288,7 @@ final class AddressCreateParams implements BaseModel
     public function withAdministrativeArea(string $administrativeArea): self
     {
         $obj = clone $this;
-        $obj['administrative_area'] = $administrativeArea;
+        $obj['administrativeArea'] = $administrativeArea;
 
         return $obj;
     }
@@ -310,7 +310,7 @@ final class AddressCreateParams implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }
@@ -321,7 +321,7 @@ final class AddressCreateParams implements BaseModel
     public function withExtendedAddress(string $extendedAddress): self
     {
         $obj = clone $this;
-        $obj['extended_address'] = $extendedAddress;
+        $obj['extendedAddress'] = $extendedAddress;
 
         return $obj;
     }
@@ -343,7 +343,7 @@ final class AddressCreateParams implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -354,7 +354,7 @@ final class AddressCreateParams implements BaseModel
     public function withPostalCode(string $postalCode): self
     {
         $obj = clone $this;
-        $obj['postal_code'] = $postalCode;
+        $obj['postalCode'] = $postalCode;
 
         return $obj;
     }
@@ -365,7 +365,7 @@ final class AddressCreateParams implements BaseModel
     public function withValidateAddress(bool $validateAddress): self
     {
         $obj = clone $this;
-        $obj['validate_address'] = $validateAddress;
+        $obj['validateAddress'] = $validateAddress;
 
         return $obj;
     }

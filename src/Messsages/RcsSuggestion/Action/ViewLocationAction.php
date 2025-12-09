@@ -13,7 +13,7 @@ use Telnyx\Messsages\RcsSuggestion\Action\ViewLocationAction\LatLong;
  * Opens the user's default map app and selects the agent-specified location.
  *
  * @phpstan-type ViewLocationActionShape = array{
- *   label?: string|null, lat_long?: LatLong|null, query?: string|null
+ *   label?: string|null, latLong?: LatLong|null, query?: string|null
  * }
  */
 final class ViewLocationAction implements BaseModel
@@ -27,8 +27,8 @@ final class ViewLocationAction implements BaseModel
     #[Optional]
     public ?string $label;
 
-    #[Optional]
-    public ?LatLong $lat_long;
+    #[Optional('lat_long')]
+    public ?LatLong $latLong;
 
     /**
      * query string (Android only).
@@ -46,17 +46,17 @@ final class ViewLocationAction implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param LatLong|array{latitude: float, longitude: float} $lat_long
+     * @param LatLong|array{latitude: float, longitude: float} $latLong
      */
     public static function with(
         ?string $label = null,
-        LatLong|array|null $lat_long = null,
+        LatLong|array|null $latLong = null,
         ?string $query = null
     ): self {
         $obj = new self;
 
         null !== $label && $obj['label'] = $label;
-        null !== $lat_long && $obj['lat_long'] = $lat_long;
+        null !== $latLong && $obj['latLong'] = $latLong;
         null !== $query && $obj['query'] = $query;
 
         return $obj;
@@ -79,7 +79,7 @@ final class ViewLocationAction implements BaseModel
     public function withLatLong(LatLong|array $latLong): self
     {
         $obj = clone $this;
-        $obj['lat_long'] = $latLong;
+        $obj['latLong'] = $latLong;
 
         return $obj;
     }

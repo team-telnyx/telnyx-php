@@ -25,9 +25,9 @@ final class ToolsService implements ToolsContract
      * Test a webhook tool for an assistant
      *
      * @param array{
-     *   assistant_id: string,
+     *   assistantID: string,
      *   arguments?: array<string,mixed>,
-     *   dynamic_variables?: array<string,mixed>,
+     *   dynamicVariables?: array<string,mixed>,
      * }|ToolTestParams $params
      *
      * @throws APIException
@@ -41,14 +41,14 @@ final class ToolsService implements ToolsContract
             $params,
             $requestOptions,
         );
-        $assistantID = $parsed['assistant_id'];
-        unset($parsed['assistant_id']);
+        $assistantID = $parsed['assistantID'];
+        unset($parsed['assistantID']);
 
         /** @var BaseResponse<ToolTestResponse> */
         $response = $this->client->request(
             method: 'post',
             path: ['ai/assistants/%1$s/tools/%2$s/test', $assistantID, $toolID],
-            body: (object) array_diff_key($parsed, ['assistant_id']),
+            body: (object) array_diff_key($parsed, ['assistantID']),
             options: $options,
             convert: ToolTestResponse::class,
         );

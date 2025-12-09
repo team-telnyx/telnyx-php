@@ -51,10 +51,10 @@ final class ExportPortingOrdersCsvReport implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filters|array{
-     *   created_at__gt?: \DateTimeInterface|null,
-     *   created_at__lt?: \DateTimeInterface|null,
-     *   customer_reference__in?: list<string>|null,
-     *   status__in?: list<value-of<StatusIn>>|null,
+     *   createdAtGt?: \DateTimeInterface|null,
+     *   createdAtLt?: \DateTimeInterface|null,
+     *   customerReferenceIn?: list<string>|null,
+     *   statusIn?: list<value-of<StatusIn>>|null,
      * } $filters
      */
     public static function with(Filters|array $filters): self
@@ -70,10 +70,10 @@ final class ExportPortingOrdersCsvReport implements BaseModel
      * The filters to apply to the export porting order CSV report.
      *
      * @param Filters|array{
-     *   created_at__gt?: \DateTimeInterface|null,
-     *   created_at__lt?: \DateTimeInterface|null,
-     *   customer_reference__in?: list<string>|null,
-     *   status__in?: list<value-of<StatusIn>>|null,
+     *   createdAtGt?: \DateTimeInterface|null,
+     *   createdAtLt?: \DateTimeInterface|null,
+     *   customerReferenceIn?: list<string>|null,
+     *   statusIn?: list<value-of<StatusIn>>|null,
      * } $filters
      */
     public function withFilters(Filters|array $filters): self

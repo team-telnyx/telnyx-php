@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   conversation_id?: string|null, result?: string|null
+ *   conversationID?: string|null, result?: string|null
  * }
  */
 final class Data implements BaseModel
@@ -21,8 +21,8 @@ final class Data implements BaseModel
     /**
      * The ID of the conversation created by the command.
      */
-    #[Optional]
-    public ?string $conversation_id;
+    #[Optional('conversation_id')]
+    public ?string $conversationID;
 
     #[Optional]
     public ?string $result;
@@ -38,12 +38,12 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $conversation_id = null,
+        ?string $conversationID = null,
         ?string $result = null
     ): self {
         $obj = new self;
 
-        null !== $conversation_id && $obj['conversation_id'] = $conversation_id;
+        null !== $conversationID && $obj['conversationID'] = $conversationID;
         null !== $result && $obj['result'] = $result;
 
         return $obj;
@@ -55,7 +55,7 @@ final class Data implements BaseModel
     public function withConversationID(string $conversationID): self
     {
         $obj = clone $this;
-        $obj['conversation_id'] = $conversationID;
+        $obj['conversationID'] = $conversationID;
 
         return $obj;
     }

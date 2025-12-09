@@ -21,15 +21,15 @@ use Telnyx\UsageReports\UsageReportListParams\Page;
  *   dimensions: list<string>,
  *   metrics: list<string>,
  *   product: string,
- *   date_range?: string,
- *   end_date?: string,
+ *   dateRange?: string,
+ *   endDate?: string,
  *   filter?: string,
  *   format?: Format|value-of<Format>,
- *   managed_accounts?: bool,
+ *   managedAccounts?: bool,
  *   page?: Page|array{number?: int|null, size?: int|null},
  *   sort?: list<string>,
- *   start_date?: string,
- *   authorization_bearer?: string,
+ *   startDate?: string,
+ *   authorizationBearer?: string,
  * }
  */
 final class UsageReportListParams implements BaseModel
@@ -64,13 +64,13 @@ final class UsageReportListParams implements BaseModel
      * A more user-friendly way to specify the timespan you want to filter by. More options can be found in the Telnyx API Reference docs.
      */
     #[Optional]
-    public ?string $date_range;
+    public ?string $dateRange;
 
     /**
      * The end date for the time range you are interested in. The maximum time range is 31 days. Format: YYYY-MM-DDTHH:mm:ssZ.
      */
     #[Optional]
-    public ?string $end_date;
+    public ?string $endDate;
 
     /**
      * Filter records on dimensions.
@@ -90,7 +90,7 @@ final class UsageReportListParams implements BaseModel
      * Return the aggregations for all Managed Accounts under the user making the request.
      */
     #[Optional]
-    public ?bool $managed_accounts;
+    public ?bool $managedAccounts;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
@@ -110,13 +110,13 @@ final class UsageReportListParams implements BaseModel
      * The start date for the time range you are interested in. The maximum time range is 31 days. Format: YYYY-MM-DDTHH:mm:ssZ.
      */
     #[Optional]
-    public ?string $start_date;
+    public ?string $startDate;
 
     /**
      * Authenticates the request with your Telnyx API V2 KEY.
      */
     #[Optional]
-    public ?string $authorization_bearer;
+    public ?string $authorizationBearer;
 
     /**
      * `new UsageReportListParams()` is missing required properties by the API.
@@ -155,15 +155,15 @@ final class UsageReportListParams implements BaseModel
         array $dimensions,
         array $metrics,
         string $product,
-        ?string $date_range = null,
-        ?string $end_date = null,
+        ?string $dateRange = null,
+        ?string $endDate = null,
         ?string $filter = null,
         Format|string|null $format = null,
-        ?bool $managed_accounts = null,
+        ?bool $managedAccounts = null,
         Page|array|null $page = null,
         ?array $sort = null,
-        ?string $start_date = null,
-        ?string $authorization_bearer = null,
+        ?string $startDate = null,
+        ?string $authorizationBearer = null,
     ): self {
         $obj = new self;
 
@@ -171,15 +171,15 @@ final class UsageReportListParams implements BaseModel
         $obj['metrics'] = $metrics;
         $obj['product'] = $product;
 
-        null !== $date_range && $obj['date_range'] = $date_range;
-        null !== $end_date && $obj['end_date'] = $end_date;
+        null !== $dateRange && $obj['dateRange'] = $dateRange;
+        null !== $endDate && $obj['endDate'] = $endDate;
         null !== $filter && $obj['filter'] = $filter;
         null !== $format && $obj['format'] = $format;
-        null !== $managed_accounts && $obj['managed_accounts'] = $managed_accounts;
+        null !== $managedAccounts && $obj['managedAccounts'] = $managedAccounts;
         null !== $page && $obj['page'] = $page;
         null !== $sort && $obj['sort'] = $sort;
-        null !== $start_date && $obj['start_date'] = $start_date;
-        null !== $authorization_bearer && $obj['authorization_bearer'] = $authorization_bearer;
+        null !== $startDate && $obj['startDate'] = $startDate;
+        null !== $authorizationBearer && $obj['authorizationBearer'] = $authorizationBearer;
 
         return $obj;
     }
@@ -227,7 +227,7 @@ final class UsageReportListParams implements BaseModel
     public function withDateRange(string $dateRange): self
     {
         $obj = clone $this;
-        $obj['date_range'] = $dateRange;
+        $obj['dateRange'] = $dateRange;
 
         return $obj;
     }
@@ -238,7 +238,7 @@ final class UsageReportListParams implements BaseModel
     public function withEndDate(string $endDate): self
     {
         $obj = clone $this;
-        $obj['end_date'] = $endDate;
+        $obj['endDate'] = $endDate;
 
         return $obj;
     }
@@ -273,7 +273,7 @@ final class UsageReportListParams implements BaseModel
     public function withManagedAccounts(bool $managedAccounts): self
     {
         $obj = clone $this;
-        $obj['managed_accounts'] = $managedAccounts;
+        $obj['managedAccounts'] = $managedAccounts;
 
         return $obj;
     }
@@ -310,7 +310,7 @@ final class UsageReportListParams implements BaseModel
     public function withStartDate(string $startDate): self
     {
         $obj = clone $this;
-        $obj['start_date'] = $startDate;
+        $obj['startDate'] = $startDate;
 
         return $obj;
     }
@@ -321,7 +321,7 @@ final class UsageReportListParams implements BaseModel
     public function withAuthorizationBearer(string $authorizationBearer): self
     {
         $obj = clone $this;
-        $obj['authorization_bearer'] = $authorizationBearer;
+        $obj['authorizationBearer'] = $authorizationBearer;
 
         return $obj;
     }

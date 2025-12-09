@@ -49,32 +49,32 @@ final class ActionConfirmResponse implements BaseModel
      *
      * @param PortingOrder|array{
      *   id?: string|null,
-     *   activation_settings?: PortingOrderActivationSettings|null,
-     *   additional_steps?: list<value-of<AdditionalStep>>|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   customer_group_reference?: string|null,
-     *   customer_reference?: string|null,
+     *   activationSettings?: PortingOrderActivationSettings|null,
+     *   additionalSteps?: list<value-of<AdditionalStep>>|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   customerGroupReference?: string|null,
+     *   customerReference?: string|null,
      *   description?: string|null,
      *   documents?: PortingOrderDocuments|null,
-     *   end_user?: PortingOrderEndUser|null,
+     *   endUser?: PortingOrderEndUser|null,
      *   messaging?: PortingOrderMessaging|null,
      *   misc?: PortingOrderMisc|null,
-     *   old_service_provider_ocn?: string|null,
-     *   parent_support_key?: string|null,
-     *   phone_number_configuration?: PortingOrderPhoneNumberConfiguration|null,
-     *   phone_number_type?: value-of<PhoneNumberType>|null,
-     *   porting_phone_numbers_count?: int|null,
-     *   record_type?: string|null,
+     *   oldServiceProviderOcn?: string|null,
+     *   parentSupportKey?: string|null,
+     *   phoneNumberConfiguration?: PortingOrderPhoneNumberConfiguration|null,
+     *   phoneNumberType?: value-of<PhoneNumberType>|null,
+     *   portingPhoneNumbersCount?: int|null,
+     *   recordType?: string|null,
      *   requirements?: list<PortingOrderRequirement>|null,
-     *   requirements_met?: bool|null,
+     *   requirementsMet?: bool|null,
      *   status?: PortingOrderStatus|null,
-     *   support_key?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
-     *   user_feedback?: PortingOrderUserFeedback|null,
-     *   user_id?: string|null,
-     *   webhook_url?: string|null,
+     *   supportKey?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     *   userFeedback?: PortingOrderUserFeedback|null,
+     *   userID?: string|null,
+     *   webhookURL?: string|null,
      * } $data
-     * @param Meta|array{phone_numbers_url?: string|null} $meta
+     * @param Meta|array{phoneNumbersURL?: string|null} $meta
      */
     public static function with(
         PortingOrder|array|null $data = null,
@@ -91,30 +91,30 @@ final class ActionConfirmResponse implements BaseModel
     /**
      * @param PortingOrder|array{
      *   id?: string|null,
-     *   activation_settings?: PortingOrderActivationSettings|null,
-     *   additional_steps?: list<value-of<AdditionalStep>>|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   customer_group_reference?: string|null,
-     *   customer_reference?: string|null,
+     *   activationSettings?: PortingOrderActivationSettings|null,
+     *   additionalSteps?: list<value-of<AdditionalStep>>|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   customerGroupReference?: string|null,
+     *   customerReference?: string|null,
      *   description?: string|null,
      *   documents?: PortingOrderDocuments|null,
-     *   end_user?: PortingOrderEndUser|null,
+     *   endUser?: PortingOrderEndUser|null,
      *   messaging?: PortingOrderMessaging|null,
      *   misc?: PortingOrderMisc|null,
-     *   old_service_provider_ocn?: string|null,
-     *   parent_support_key?: string|null,
-     *   phone_number_configuration?: PortingOrderPhoneNumberConfiguration|null,
-     *   phone_number_type?: value-of<PhoneNumberType>|null,
-     *   porting_phone_numbers_count?: int|null,
-     *   record_type?: string|null,
+     *   oldServiceProviderOcn?: string|null,
+     *   parentSupportKey?: string|null,
+     *   phoneNumberConfiguration?: PortingOrderPhoneNumberConfiguration|null,
+     *   phoneNumberType?: value-of<PhoneNumberType>|null,
+     *   portingPhoneNumbersCount?: int|null,
+     *   recordType?: string|null,
      *   requirements?: list<PortingOrderRequirement>|null,
-     *   requirements_met?: bool|null,
+     *   requirementsMet?: bool|null,
      *   status?: PortingOrderStatus|null,
-     *   support_key?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
-     *   user_feedback?: PortingOrderUserFeedback|null,
-     *   user_id?: string|null,
-     *   webhook_url?: string|null,
+     *   supportKey?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     *   userFeedback?: PortingOrderUserFeedback|null,
+     *   userID?: string|null,
+     *   webhookURL?: string|null,
      * } $data
      */
     public function withData(PortingOrder|array $data): self
@@ -126,7 +126,7 @@ final class ActionConfirmResponse implements BaseModel
     }
 
     /**
-     * @param Meta|array{phone_numbers_url?: string|null} $meta
+     * @param Meta|array{phoneNumbersURL?: string|null} $meta
      */
     public function withMeta(Meta|array $meta): self
     {

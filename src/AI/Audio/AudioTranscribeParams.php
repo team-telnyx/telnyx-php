@@ -21,9 +21,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type AudioTranscribeParamsShape = array{
  *   model: Model|value-of<Model>,
  *   file?: string,
- *   file_url?: string,
- *   response_format?: ResponseFormat|value-of<ResponseFormat>,
- *   timestamp_granularities__?: TimestampGranularities|value-of<TimestampGranularities>,
+ *   fileURL?: string,
+ *   responseFormat?: ResponseFormat|value-of<ResponseFormat>,
+ *   timestampGranularities?: TimestampGranularities|value-of<TimestampGranularities>,
  * }
  */
 final class AudioTranscribeParams implements BaseModel
@@ -49,24 +49,24 @@ final class AudioTranscribeParams implements BaseModel
     /**
      * Link to audio file in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. Support for hosted files is limited to 100MB. Cannot be used together with `file`.
      */
-    #[Optional]
-    public ?string $file_url;
+    #[Optional('file_url')]
+    public ?string $fileURL;
 
     /**
      * The format of the transcript output. Use `verbose_json` to take advantage of timestamps.
      *
-     * @var value-of<ResponseFormat>|null $response_format
+     * @var value-of<ResponseFormat>|null $responseFormat
      */
-    #[Optional(enum: ResponseFormat::class)]
-    public ?string $response_format;
+    #[Optional('response_format', enum: ResponseFormat::class)]
+    public ?string $responseFormat;
 
     /**
      * The timestamp granularities to populate for this transcription. `response_format` must be set verbose_json to use timestamp granularities. Currently `segment` is supported.
      *
-     * @var value-of<TimestampGranularities>|null $timestamp_granularities__
+     * @var value-of<TimestampGranularities>|null $timestampGranularities
      */
     #[Optional('timestamp_granularities[]', enum: TimestampGranularities::class)]
-    public ?string $timestamp_granularities__;
+    public ?string $timestampGranularities;
 
     /**
      * `new AudioTranscribeParams()` is missing required properties by the API.
@@ -93,24 +93,24 @@ final class AudioTranscribeParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Model|value-of<Model> $model
-     * @param ResponseFormat|value-of<ResponseFormat> $response_format
-     * @param TimestampGranularities|value-of<TimestampGranularities> $timestamp_granularities__
+     * @param ResponseFormat|value-of<ResponseFormat> $responseFormat
+     * @param TimestampGranularities|value-of<TimestampGranularities> $timestampGranularities
      */
     public static function with(
         Model|string $model = 'distil-whisper/distil-large-v2',
         ?string $file = null,
-        ?string $file_url = null,
-        ResponseFormat|string|null $response_format = null,
-        TimestampGranularities|string|null $timestamp_granularities__ = null,
+        ?string $fileURL = null,
+        ResponseFormat|string|null $responseFormat = null,
+        TimestampGranularities|string|null $timestampGranularities = null,
     ): self {
         $obj = new self;
 
         $obj['model'] = $model;
 
         null !== $file && $obj['file'] = $file;
-        null !== $file_url && $obj['file_url'] = $file_url;
-        null !== $response_format && $obj['response_format'] = $response_format;
-        null !== $timestamp_granularities__ && $obj['timestamp_granularities__'] = $timestamp_granularities__;
+        null !== $fileURL && $obj['fileURL'] = $fileURL;
+        null !== $responseFormat && $obj['responseFormat'] = $responseFormat;
+        null !== $timestampGranularities && $obj['timestampGranularities'] = $timestampGranularities;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class AudioTranscribeParams implements BaseModel
     public function withFileURL(string $fileURL): self
     {
         $obj = clone $this;
-        $obj['file_url'] = $fileURL;
+        $obj['fileURL'] = $fileURL;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class AudioTranscribeParams implements BaseModel
         ResponseFormat|string $responseFormat
     ): self {
         $obj = clone $this;
-        $obj['response_format'] = $responseFormat;
+        $obj['responseFormat'] = $responseFormat;
 
         return $obj;
     }
@@ -173,7 +173,7 @@ final class AudioTranscribeParams implements BaseModel
         TimestampGranularities|string $timestampGranularities
     ): self {
         $obj = clone $this;
-        $obj['timestamp_granularities__'] = $timestampGranularities;
+        $obj['timestampGranularities'] = $timestampGranularities;
 
         return $obj;
     }

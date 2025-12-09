@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   port_request_id?: string|null, sub_request_id?: string|null
+ *   portRequestID?: string|null, subRequestID?: string|null
  * }
  */
 final class Data implements BaseModel
@@ -21,14 +21,14 @@ final class Data implements BaseModel
     /**
      * Identifies the Port Request associated with the Porting Order.
      */
-    #[Optional]
-    public ?string $port_request_id;
+    #[Optional('port_request_id')]
+    public ?string $portRequestID;
 
     /**
      * Identifies the Sub Request associated with the Porting Order.
      */
-    #[Optional]
-    public ?string $sub_request_id;
+    #[Optional('sub_request_id')]
+    public ?string $subRequestID;
 
     public function __construct()
     {
@@ -41,13 +41,13 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $port_request_id = null,
-        ?string $sub_request_id = null
+        ?string $portRequestID = null,
+        ?string $subRequestID = null
     ): self {
         $obj = new self;
 
-        null !== $port_request_id && $obj['port_request_id'] = $port_request_id;
-        null !== $sub_request_id && $obj['sub_request_id'] = $sub_request_id;
+        null !== $portRequestID && $obj['portRequestID'] = $portRequestID;
+        null !== $subRequestID && $obj['subRequestID'] = $subRequestID;
 
         return $obj;
     }
@@ -58,7 +58,7 @@ final class Data implements BaseModel
     public function withPortRequestID(string $portRequestID): self
     {
         $obj = clone $this;
-        $obj['port_request_id'] = $portRequestID;
+        $obj['portRequestID'] = $portRequestID;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class Data implements BaseModel
     public function withSubRequestID(string $subRequestID): self
     {
         $obj = clone $this;
-        $obj['sub_request_id'] = $subRequestID;
+        $obj['subRequestID'] = $subRequestID;
 
         return $obj;
     }

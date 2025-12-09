@@ -13,8 +13,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type DataShape = array{
  *   code: string,
  *   name: string,
- *   inserted_at?: \DateTimeInterface|null,
- *   updated_at?: \DateTimeInterface|null,
+ *   insertedAt?: \DateTimeInterface|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class Data implements BaseModel
@@ -37,14 +37,14 @@ final class Data implements BaseModel
     /**
      * Timestamp when the region was inserted.
      */
-    #[Optional]
-    public ?\DateTimeInterface $inserted_at;
+    #[Optional('inserted_at')]
+    public ?\DateTimeInterface $insertedAt;
 
     /**
      * Timestamp when the region was last updated.
      */
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     /**
      * `new Data()` is missing required properties by the API.
@@ -73,16 +73,16 @@ final class Data implements BaseModel
     public static function with(
         string $code,
         string $name,
-        ?\DateTimeInterface $inserted_at = null,
-        ?\DateTimeInterface $updated_at = null,
+        ?\DateTimeInterface $insertedAt = null,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
         $obj = new self;
 
         $obj['code'] = $code;
         $obj['name'] = $name;
 
-        null !== $inserted_at && $obj['inserted_at'] = $inserted_at;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $insertedAt && $obj['insertedAt'] = $insertedAt;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class Data implements BaseModel
     public function withInsertedAt(\DateTimeInterface $insertedAt): self
     {
         $obj = clone $this;
-        $obj['inserted_at'] = $insertedAt;
+        $obj['insertedAt'] = $insertedAt;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

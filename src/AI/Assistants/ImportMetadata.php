@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ImportMetadataShape = array{
- *   import_id?: string|null, import_provider?: value-of<ImportProvider>|null
+ *   importID?: string|null, importProvider?: value-of<ImportProvider>|null
  * }
  */
 final class ImportMetadata implements BaseModel
@@ -22,16 +22,16 @@ final class ImportMetadata implements BaseModel
     /**
      * ID of the assistant in the provider's system.
      */
-    #[Optional]
-    public ?string $import_id;
+    #[Optional('import_id')]
+    public ?string $importID;
 
     /**
      * Provider the assistant was imported from.
      *
-     * @var value-of<ImportProvider>|null $import_provider
+     * @var value-of<ImportProvider>|null $importProvider
      */
-    #[Optional(enum: ImportProvider::class)]
-    public ?string $import_provider;
+    #[Optional('import_provider', enum: ImportProvider::class)]
+    public ?string $importProvider;
 
     public function __construct()
     {
@@ -43,16 +43,16 @@ final class ImportMetadata implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ImportProvider|value-of<ImportProvider> $import_provider
+     * @param ImportProvider|value-of<ImportProvider> $importProvider
      */
     public static function with(
-        ?string $import_id = null,
-        ImportProvider|string|null $import_provider = null
+        ?string $importID = null,
+        ImportProvider|string|null $importProvider = null
     ): self {
         $obj = new self;
 
-        null !== $import_id && $obj['import_id'] = $import_id;
-        null !== $import_provider && $obj['import_provider'] = $import_provider;
+        null !== $importID && $obj['importID'] = $importID;
+        null !== $importProvider && $obj['importProvider'] = $importProvider;
 
         return $obj;
     }
@@ -63,7 +63,7 @@ final class ImportMetadata implements BaseModel
     public function withImportID(string $importID): self
     {
         $obj = clone $this;
-        $obj['import_id'] = $importID;
+        $obj['importID'] = $importID;
 
         return $obj;
     }
@@ -77,7 +77,7 @@ final class ImportMetadata implements BaseModel
         ImportProvider|string $importProvider
     ): self {
         $obj = clone $this;
-        $obj['import_provider'] = $importProvider;
+        $obj['importProvider'] = $importProvider;
 
         return $obj;
     }

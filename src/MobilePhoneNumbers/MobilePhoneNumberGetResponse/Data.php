@@ -21,27 +21,27 @@ use Telnyx\MobilePhoneNumbers\MobilePhoneNumberGetResponse\Data\Outbound;
 /**
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   call_forwarding?: CallForwarding|null,
- *   call_recording?: CallRecording|null,
- *   caller_id_name_enabled?: bool|null,
- *   cnam_listing?: CnamListing|null,
- *   connection_id?: string|null,
- *   connection_name?: string|null,
- *   connection_type?: string|null,
- *   country_iso_alpha2?: string|null,
- *   created_at?: \DateTimeInterface|null,
- *   customer_reference?: string|null,
+ *   callForwarding?: CallForwarding|null,
+ *   callRecording?: CallRecording|null,
+ *   callerIDNameEnabled?: bool|null,
+ *   cnamListing?: CnamListing|null,
+ *   connectionID?: string|null,
+ *   connectionName?: string|null,
+ *   connectionType?: string|null,
+ *   countryISOAlpha2?: string|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   customerReference?: string|null,
  *   inbound?: Inbound|null,
- *   inbound_call_screening?: value-of<InboundCallScreening>|null,
- *   mobile_voice_enabled?: bool|null,
- *   noise_suppression?: value-of<NoiseSuppression>|null,
+ *   inboundCallScreening?: value-of<InboundCallScreening>|null,
+ *   mobileVoiceEnabled?: bool|null,
+ *   noiseSuppression?: value-of<NoiseSuppression>|null,
  *   outbound?: Outbound|null,
- *   phone_number?: string|null,
- *   record_type?: string|null,
- *   sim_card_id?: string|null,
+ *   phoneNumber?: string|null,
+ *   recordType?: string|null,
+ *   simCardID?: string|null,
  *   status?: string|null,
  *   tags?: list<string>|null,
- *   updated_at?: \DateTimeInterface|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class Data implements BaseModel
@@ -55,56 +55,56 @@ final class Data implements BaseModel
     #[Optional]
     public ?string $id;
 
-    #[Optional]
-    public ?CallForwarding $call_forwarding;
+    #[Optional('call_forwarding')]
+    public ?CallForwarding $callForwarding;
 
-    #[Optional]
-    public ?CallRecording $call_recording;
+    #[Optional('call_recording')]
+    public ?CallRecording $callRecording;
 
     /**
      * Indicates if caller ID name is enabled.
      */
-    #[Optional]
-    public ?bool $caller_id_name_enabled;
+    #[Optional('caller_id_name_enabled')]
+    public ?bool $callerIDNameEnabled;
 
-    #[Optional]
-    public ?CnamListing $cnam_listing;
+    #[Optional('cnam_listing')]
+    public ?CnamListing $cnamListing;
 
     /**
      * The ID of the connection associated with this number.
      */
-    #[Optional(nullable: true)]
-    public ?string $connection_id;
+    #[Optional('connection_id', nullable: true)]
+    public ?string $connectionID;
 
     /**
      * The name of the connection.
      */
-    #[Optional(nullable: true)]
-    public ?string $connection_name;
+    #[Optional('connection_name', nullable: true)]
+    public ?string $connectionName;
 
     /**
      * The type of the connection.
      */
-    #[Optional(nullable: true)]
-    public ?string $connection_type;
+    #[Optional('connection_type', nullable: true)]
+    public ?string $connectionType;
 
     /**
      * The ISO 3166-1 alpha-2 country code of the number.
      */
-    #[Optional]
-    public ?string $country_iso_alpha2;
+    #[Optional('country_iso_alpha2')]
+    public ?string $countryISOAlpha2;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
     /**
      * A customer reference string.
      */
-    #[Optional(nullable: true)]
-    public ?string $customer_reference;
+    #[Optional('customer_reference', nullable: true)]
+    public ?string $customerReference;
 
     #[Optional]
     public ?Inbound $inbound;
@@ -112,24 +112,28 @@ final class Data implements BaseModel
     /**
      * The inbound call screening setting.
      *
-     * @var value-of<InboundCallScreening>|null $inbound_call_screening
+     * @var value-of<InboundCallScreening>|null $inboundCallScreening
      */
-    #[Optional(enum: InboundCallScreening::class, nullable: true)]
-    public ?string $inbound_call_screening;
+    #[Optional(
+        'inbound_call_screening',
+        enum: InboundCallScreening::class,
+        nullable: true
+    )]
+    public ?string $inboundCallScreening;
 
     /**
      * Indicates if mobile voice is enabled.
      */
-    #[Optional]
-    public ?bool $mobile_voice_enabled;
+    #[Optional('mobile_voice_enabled')]
+    public ?bool $mobileVoiceEnabled;
 
     /**
      * The noise suppression setting.
      *
-     * @var value-of<NoiseSuppression>|null $noise_suppression
+     * @var value-of<NoiseSuppression>|null $noiseSuppression
      */
-    #[Optional(enum: NoiseSuppression::class)]
-    public ?string $noise_suppression;
+    #[Optional('noise_suppression', enum: NoiseSuppression::class)]
+    public ?string $noiseSuppression;
 
     #[Optional]
     public ?Outbound $outbound;
@@ -137,20 +141,20 @@ final class Data implements BaseModel
     /**
      * The +E.164-formatted phone number.
      */
-    #[Optional]
-    public ?string $phone_number;
+    #[Optional('phone_number')]
+    public ?string $phoneNumber;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * The ID of the SIM card associated with this number.
      */
-    #[Optional]
-    public ?string $sim_card_id;
+    #[Optional('sim_card_id')]
+    public ?string $simCardID;
 
     /**
      * The status of the phone number.
@@ -169,8 +173,8 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was last updated.
      */
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
     {
@@ -183,76 +187,76 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param CallForwarding|array{
-     *   call_forwarding_enabled?: bool|null,
-     *   forwarding_type?: value-of<ForwardingType>|null,
-     *   forwards_to?: string|null,
-     * } $call_forwarding
+     *   callForwardingEnabled?: bool|null,
+     *   forwardingType?: value-of<ForwardingType>|null,
+     *   forwardsTo?: string|null,
+     * } $callForwarding
      * @param CallRecording|array{
-     *   inbound_call_recording_channels?: value-of<InboundCallRecordingChannels>|null,
-     *   inbound_call_recording_enabled?: bool|null,
-     *   inbound_call_recording_format?: value-of<InboundCallRecordingFormat>|null,
-     * } $call_recording
+     *   inboundCallRecordingChannels?: value-of<InboundCallRecordingChannels>|null,
+     *   inboundCallRecordingEnabled?: bool|null,
+     *   inboundCallRecordingFormat?: value-of<InboundCallRecordingFormat>|null,
+     * } $callRecording
      * @param CnamListing|array{
-     *   cnam_listing_details?: string|null, cnam_listing_enabled?: bool|null
-     * } $cnam_listing
+     *   cnamListingDetails?: string|null, cnamListingEnabled?: bool|null
+     * } $cnamListing
      * @param Inbound|array{
-     *   interception_app_id?: string|null, interception_app_name?: string|null
+     *   interceptionAppID?: string|null, interceptionAppName?: string|null
      * } $inbound
-     * @param InboundCallScreening|value-of<InboundCallScreening>|null $inbound_call_screening
-     * @param NoiseSuppression|value-of<NoiseSuppression> $noise_suppression
+     * @param InboundCallScreening|value-of<InboundCallScreening>|null $inboundCallScreening
+     * @param NoiseSuppression|value-of<NoiseSuppression> $noiseSuppression
      * @param Outbound|array{
-     *   interception_app_id?: string|null, interception_app_name?: string|null
+     *   interceptionAppID?: string|null, interceptionAppName?: string|null
      * } $outbound
      * @param list<string> $tags
      */
     public static function with(
         ?string $id = null,
-        CallForwarding|array|null $call_forwarding = null,
-        CallRecording|array|null $call_recording = null,
-        ?bool $caller_id_name_enabled = null,
-        CnamListing|array|null $cnam_listing = null,
-        ?string $connection_id = null,
-        ?string $connection_name = null,
-        ?string $connection_type = null,
-        ?string $country_iso_alpha2 = null,
-        ?\DateTimeInterface $created_at = null,
-        ?string $customer_reference = null,
+        CallForwarding|array|null $callForwarding = null,
+        CallRecording|array|null $callRecording = null,
+        ?bool $callerIDNameEnabled = null,
+        CnamListing|array|null $cnamListing = null,
+        ?string $connectionID = null,
+        ?string $connectionName = null,
+        ?string $connectionType = null,
+        ?string $countryISOAlpha2 = null,
+        ?\DateTimeInterface $createdAt = null,
+        ?string $customerReference = null,
         Inbound|array|null $inbound = null,
-        InboundCallScreening|string|null $inbound_call_screening = null,
-        ?bool $mobile_voice_enabled = null,
-        NoiseSuppression|string|null $noise_suppression = null,
+        InboundCallScreening|string|null $inboundCallScreening = null,
+        ?bool $mobileVoiceEnabled = null,
+        NoiseSuppression|string|null $noiseSuppression = null,
         Outbound|array|null $outbound = null,
-        ?string $phone_number = null,
-        ?string $record_type = null,
-        ?string $sim_card_id = null,
+        ?string $phoneNumber = null,
+        ?string $recordType = null,
+        ?string $simCardID = null,
         ?string $status = null,
         ?array $tags = null,
-        ?\DateTimeInterface $updated_at = null,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $call_forwarding && $obj['call_forwarding'] = $call_forwarding;
-        null !== $call_recording && $obj['call_recording'] = $call_recording;
-        null !== $caller_id_name_enabled && $obj['caller_id_name_enabled'] = $caller_id_name_enabled;
-        null !== $cnam_listing && $obj['cnam_listing'] = $cnam_listing;
-        null !== $connection_id && $obj['connection_id'] = $connection_id;
-        null !== $connection_name && $obj['connection_name'] = $connection_name;
-        null !== $connection_type && $obj['connection_type'] = $connection_type;
-        null !== $country_iso_alpha2 && $obj['country_iso_alpha2'] = $country_iso_alpha2;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $callForwarding && $obj['callForwarding'] = $callForwarding;
+        null !== $callRecording && $obj['callRecording'] = $callRecording;
+        null !== $callerIDNameEnabled && $obj['callerIDNameEnabled'] = $callerIDNameEnabled;
+        null !== $cnamListing && $obj['cnamListing'] = $cnamListing;
+        null !== $connectionID && $obj['connectionID'] = $connectionID;
+        null !== $connectionName && $obj['connectionName'] = $connectionName;
+        null !== $connectionType && $obj['connectionType'] = $connectionType;
+        null !== $countryISOAlpha2 && $obj['countryISOAlpha2'] = $countryISOAlpha2;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
         null !== $inbound && $obj['inbound'] = $inbound;
-        null !== $inbound_call_screening && $obj['inbound_call_screening'] = $inbound_call_screening;
-        null !== $mobile_voice_enabled && $obj['mobile_voice_enabled'] = $mobile_voice_enabled;
-        null !== $noise_suppression && $obj['noise_suppression'] = $noise_suppression;
+        null !== $inboundCallScreening && $obj['inboundCallScreening'] = $inboundCallScreening;
+        null !== $mobileVoiceEnabled && $obj['mobileVoiceEnabled'] = $mobileVoiceEnabled;
+        null !== $noiseSuppression && $obj['noiseSuppression'] = $noiseSuppression;
         null !== $outbound && $obj['outbound'] = $outbound;
-        null !== $phone_number && $obj['phone_number'] = $phone_number;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $sim_card_id && $obj['sim_card_id'] = $sim_card_id;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $simCardID && $obj['simCardID'] = $simCardID;
         null !== $status && $obj['status'] = $status;
         null !== $tags && $obj['tags'] = $tags;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -270,31 +274,31 @@ final class Data implements BaseModel
 
     /**
      * @param CallForwarding|array{
-     *   call_forwarding_enabled?: bool|null,
-     *   forwarding_type?: value-of<ForwardingType>|null,
-     *   forwards_to?: string|null,
+     *   callForwardingEnabled?: bool|null,
+     *   forwardingType?: value-of<ForwardingType>|null,
+     *   forwardsTo?: string|null,
      * } $callForwarding
      */
     public function withCallForwarding(
         CallForwarding|array $callForwarding
     ): self {
         $obj = clone $this;
-        $obj['call_forwarding'] = $callForwarding;
+        $obj['callForwarding'] = $callForwarding;
 
         return $obj;
     }
 
     /**
      * @param CallRecording|array{
-     *   inbound_call_recording_channels?: value-of<InboundCallRecordingChannels>|null,
-     *   inbound_call_recording_enabled?: bool|null,
-     *   inbound_call_recording_format?: value-of<InboundCallRecordingFormat>|null,
+     *   inboundCallRecordingChannels?: value-of<InboundCallRecordingChannels>|null,
+     *   inboundCallRecordingEnabled?: bool|null,
+     *   inboundCallRecordingFormat?: value-of<InboundCallRecordingFormat>|null,
      * } $callRecording
      */
     public function withCallRecording(CallRecording|array $callRecording): self
     {
         $obj = clone $this;
-        $obj['call_recording'] = $callRecording;
+        $obj['callRecording'] = $callRecording;
 
         return $obj;
     }
@@ -305,20 +309,20 @@ final class Data implements BaseModel
     public function withCallerIDNameEnabled(bool $callerIDNameEnabled): self
     {
         $obj = clone $this;
-        $obj['caller_id_name_enabled'] = $callerIDNameEnabled;
+        $obj['callerIDNameEnabled'] = $callerIDNameEnabled;
 
         return $obj;
     }
 
     /**
      * @param CnamListing|array{
-     *   cnam_listing_details?: string|null, cnam_listing_enabled?: bool|null
+     *   cnamListingDetails?: string|null, cnamListingEnabled?: bool|null
      * } $cnamListing
      */
     public function withCnamListing(CnamListing|array $cnamListing): self
     {
         $obj = clone $this;
-        $obj['cnam_listing'] = $cnamListing;
+        $obj['cnamListing'] = $cnamListing;
 
         return $obj;
     }
@@ -329,7 +333,7 @@ final class Data implements BaseModel
     public function withConnectionID(?string $connectionID): self
     {
         $obj = clone $this;
-        $obj['connection_id'] = $connectionID;
+        $obj['connectionID'] = $connectionID;
 
         return $obj;
     }
@@ -340,7 +344,7 @@ final class Data implements BaseModel
     public function withConnectionName(?string $connectionName): self
     {
         $obj = clone $this;
-        $obj['connection_name'] = $connectionName;
+        $obj['connectionName'] = $connectionName;
 
         return $obj;
     }
@@ -351,7 +355,7 @@ final class Data implements BaseModel
     public function withConnectionType(?string $connectionType): self
     {
         $obj = clone $this;
-        $obj['connection_type'] = $connectionType;
+        $obj['connectionType'] = $connectionType;
 
         return $obj;
     }
@@ -362,7 +366,7 @@ final class Data implements BaseModel
     public function withCountryISOAlpha2(string $countryISOAlpha2): self
     {
         $obj = clone $this;
-        $obj['country_iso_alpha2'] = $countryISOAlpha2;
+        $obj['countryISOAlpha2'] = $countryISOAlpha2;
 
         return $obj;
     }
@@ -373,7 +377,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -384,14 +388,14 @@ final class Data implements BaseModel
     public function withCustomerReference(?string $customerReference): self
     {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }
 
     /**
      * @param Inbound|array{
-     *   interception_app_id?: string|null, interception_app_name?: string|null
+     *   interceptionAppID?: string|null, interceptionAppName?: string|null
      * } $inbound
      */
     public function withInbound(Inbound|array $inbound): self
@@ -411,7 +415,7 @@ final class Data implements BaseModel
         InboundCallScreening|string|null $inboundCallScreening
     ): self {
         $obj = clone $this;
-        $obj['inbound_call_screening'] = $inboundCallScreening;
+        $obj['inboundCallScreening'] = $inboundCallScreening;
 
         return $obj;
     }
@@ -422,7 +426,7 @@ final class Data implements BaseModel
     public function withMobileVoiceEnabled(bool $mobileVoiceEnabled): self
     {
         $obj = clone $this;
-        $obj['mobile_voice_enabled'] = $mobileVoiceEnabled;
+        $obj['mobileVoiceEnabled'] = $mobileVoiceEnabled;
 
         return $obj;
     }
@@ -436,14 +440,14 @@ final class Data implements BaseModel
         NoiseSuppression|string $noiseSuppression
     ): self {
         $obj = clone $this;
-        $obj['noise_suppression'] = $noiseSuppression;
+        $obj['noiseSuppression'] = $noiseSuppression;
 
         return $obj;
     }
 
     /**
      * @param Outbound|array{
-     *   interception_app_id?: string|null, interception_app_name?: string|null
+     *   interceptionAppID?: string|null, interceptionAppName?: string|null
      * } $outbound
      */
     public function withOutbound(Outbound|array $outbound): self
@@ -460,7 +464,7 @@ final class Data implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -471,7 +475,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -482,7 +486,7 @@ final class Data implements BaseModel
     public function withSimCardID(string $simCardID): self
     {
         $obj = clone $this;
-        $obj['sim_card_id'] = $simCardID;
+        $obj['simCardID'] = $simCardID;
 
         return $obj;
     }
@@ -517,7 +521,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

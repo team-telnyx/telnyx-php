@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   autoRenewal?: bool,
  *   helpMessage?: string,
  *   messageFlow?: string,
- *   resellerId?: string,
+ *   resellerID?: string,
  *   sample1?: string,
  *   sample2?: string,
  *   sample3?: string,
@@ -55,8 +55,8 @@ final class CampaignUpdateParams implements BaseModel
     /**
      * Alphanumeric identifier of the reseller that you want to associate with this campaign.
      */
-    #[Optional]
-    public ?string $resellerId;
+    #[Optional('resellerId')]
+    public ?string $resellerID;
 
     /**
      * Message sample. Some campaign tiers require 1 or more message samples.
@@ -114,7 +114,7 @@ final class CampaignUpdateParams implements BaseModel
         ?bool $autoRenewal = null,
         ?string $helpMessage = null,
         ?string $messageFlow = null,
-        ?string $resellerId = null,
+        ?string $resellerID = null,
         ?string $sample1 = null,
         ?string $sample2 = null,
         ?string $sample3 = null,
@@ -128,7 +128,7 @@ final class CampaignUpdateParams implements BaseModel
         null !== $autoRenewal && $obj['autoRenewal'] = $autoRenewal;
         null !== $helpMessage && $obj['helpMessage'] = $helpMessage;
         null !== $messageFlow && $obj['messageFlow'] = $messageFlow;
-        null !== $resellerId && $obj['resellerId'] = $resellerId;
+        null !== $resellerID && $obj['resellerID'] = $resellerID;
         null !== $sample1 && $obj['sample1'] = $sample1;
         null !== $sample2 && $obj['sample2'] = $sample2;
         null !== $sample3 && $obj['sample3'] = $sample3;
@@ -179,7 +179,7 @@ final class CampaignUpdateParams implements BaseModel
     public function withResellerID(string $resellerID): self
     {
         $obj = clone $this;
-        $obj['resellerId'] = $resellerID;
+        $obj['resellerID'] = $resellerID;
 
         return $obj;
     }

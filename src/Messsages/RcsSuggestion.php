@@ -44,16 +44,16 @@ final class RcsSuggestion implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Action|array{
-     *   create_calendar_event_action?: CreateCalendarEventAction|null,
-     *   dial_action?: DialAction|null,
-     *   fallback_url?: string|null,
-     *   open_url_action?: OpenURLAction|null,
-     *   postback_data?: string|null,
-     *   share_location_action?: mixed,
+     *   createCalendarEventAction?: CreateCalendarEventAction|null,
+     *   dialAction?: DialAction|null,
+     *   fallbackURL?: string|null,
+     *   openURLAction?: OpenURLAction|null,
+     *   postbackData?: string|null,
+     *   shareLocationAction?: mixed,
      *   text?: string|null,
-     *   view_location_action?: ViewLocationAction|null,
+     *   viewLocationAction?: ViewLocationAction|null,
      * } $action
-     * @param Reply|array{postback_data?: string|null, text?: string|null} $reply
+     * @param Reply|array{postbackData?: string|null, text?: string|null} $reply
      */
     public static function with(
         Action|array|null $action = null,
@@ -71,14 +71,14 @@ final class RcsSuggestion implements BaseModel
      * When tapped, initiates the corresponding native action on the device.
      *
      * @param Action|array{
-     *   create_calendar_event_action?: CreateCalendarEventAction|null,
-     *   dial_action?: DialAction|null,
-     *   fallback_url?: string|null,
-     *   open_url_action?: OpenURLAction|null,
-     *   postback_data?: string|null,
-     *   share_location_action?: mixed,
+     *   createCalendarEventAction?: CreateCalendarEventAction|null,
+     *   dialAction?: DialAction|null,
+     *   fallbackURL?: string|null,
+     *   openURLAction?: OpenURLAction|null,
+     *   postbackData?: string|null,
+     *   shareLocationAction?: mixed,
      *   text?: string|null,
-     *   view_location_action?: ViewLocationAction|null,
+     *   viewLocationAction?: ViewLocationAction|null,
      * } $action
      */
     public function withAction(Action|array $action): self
@@ -90,7 +90,7 @@ final class RcsSuggestion implements BaseModel
     }
 
     /**
-     * @param Reply|array{postback_data?: string|null, text?: string|null} $reply
+     * @param Reply|array{postbackData?: string|null, text?: string|null} $reply
      */
     public function withReply(Reply|array $reply): self
     {

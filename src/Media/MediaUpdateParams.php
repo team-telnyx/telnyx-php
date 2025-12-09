@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\MediaService::update()
  *
- * @phpstan-type MediaUpdateParamsShape = array{media_url?: string, ttl_secs?: int}
+ * @phpstan-type MediaUpdateParamsShape = array{mediaURL?: string, ttlSecs?: int}
  */
 final class MediaUpdateParams implements BaseModel
 {
@@ -25,14 +25,14 @@ final class MediaUpdateParams implements BaseModel
     /**
      * The URL where the media to be stored in Telnyx network is currently hosted. The maximum allowed size is 20 MB.
      */
-    #[Optional]
-    public ?string $media_url;
+    #[Optional('media_url')]
+    public ?string $mediaURL;
 
     /**
      * The number of seconds after which the media resource will be deleted, defaults to 2 days. The maximum allowed vale is 630720000, which translates to 20 years.
      */
-    #[Optional]
-    public ?int $ttl_secs;
+    #[Optional('ttl_secs')]
+    public ?int $ttlSecs;
 
     public function __construct()
     {
@@ -45,13 +45,13 @@ final class MediaUpdateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $media_url = null,
-        ?int $ttl_secs = null
+        ?string $mediaURL = null,
+        ?int $ttlSecs = null
     ): self {
         $obj = new self;
 
-        null !== $media_url && $obj['media_url'] = $media_url;
-        null !== $ttl_secs && $obj['ttl_secs'] = $ttl_secs;
+        null !== $mediaURL && $obj['mediaURL'] = $mediaURL;
+        null !== $ttlSecs && $obj['ttlSecs'] = $ttlSecs;
 
         return $obj;
     }
@@ -62,7 +62,7 @@ final class MediaUpdateParams implements BaseModel
     public function withMediaURL(string $mediaURL): self
     {
         $obj = clone $this;
-        $obj['media_url'] = $mediaURL;
+        $obj['mediaURL'] = $mediaURL;
 
         return $obj;
     }
@@ -73,7 +73,7 @@ final class MediaUpdateParams implements BaseModel
     public function withTtlSecs(int $ttlSecs): self
     {
         $obj = clone $this;
-        $obj['ttl_secs'] = $ttlSecs;
+        $obj['ttlSecs'] = $ttlSecs;
 
         return $obj;
     }

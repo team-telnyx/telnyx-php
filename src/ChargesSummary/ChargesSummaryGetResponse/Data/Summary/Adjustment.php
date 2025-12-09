@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type AdjustmentShape = array{
- *   amount: string, description: string, event_date: \DateTimeInterface
+ *   amount: string, description: string, eventDate: \DateTimeInterface
  * }
  */
 final class Adjustment implements BaseModel
@@ -33,15 +33,15 @@ final class Adjustment implements BaseModel
     /**
      * Date when the adjustment occurred.
      */
-    #[Required]
-    public \DateTimeInterface $event_date;
+    #[Required('event_date')]
+    public \DateTimeInterface $eventDate;
 
     /**
      * `new Adjustment()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Adjustment::with(amount: ..., description: ..., event_date: ...)
+     * Adjustment::with(amount: ..., description: ..., eventDate: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -63,13 +63,13 @@ final class Adjustment implements BaseModel
     public static function with(
         string $amount,
         string $description,
-        \DateTimeInterface $event_date
+        \DateTimeInterface $eventDate
     ): self {
         $obj = new self;
 
         $obj['amount'] = $amount;
         $obj['description'] = $description;
-        $obj['event_date'] = $event_date;
+        $obj['eventDate'] = $eventDate;
 
         return $obj;
     }
@@ -102,7 +102,7 @@ final class Adjustment implements BaseModel
     public function withEventDate(\DateTimeInterface $eventDate): self
     {
         $obj = clone $this;
-        $obj['event_date'] = $eventDate;
+        $obj['eventDate'] = $eventDate;
 
         return $obj;
     }

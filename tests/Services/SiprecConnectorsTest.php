@@ -57,7 +57,7 @@ final class SiprecConnectorsTest extends TestCase
             'host' => 'siprec.telnyx.com',
             'name' => 'my-siprec-connector',
             'port' => 5060,
-            'app_subdomain' => 'my-app',
+            'appSubdomain' => 'my-app',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -110,7 +110,7 @@ final class SiprecConnectorsTest extends TestCase
                 'host' => 'siprec.telnyx.com',
                 'name' => 'my-siprec-connector',
                 'port' => 5060,
-                'app_subdomain' => 'my-app',
+                'appSubdomain' => 'my-app',
             ],
         );
 

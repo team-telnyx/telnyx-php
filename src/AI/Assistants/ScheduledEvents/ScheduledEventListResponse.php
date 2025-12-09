@@ -53,36 +53,36 @@ final class ScheduledEventListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<ScheduledPhoneCallEventResponse|array{
-     *   assistant_id: string,
-     *   scheduled_at_fixed_datetime: \DateTimeInterface,
-     *   telnyx_agent_target: string,
-     *   telnyx_conversation_channel: value-of<ConversationChannelType>,
-     *   telnyx_end_user_target: string,
-     *   conversation_id?: string|null,
-     *   conversation_metadata?: array<string,string|int|bool>|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   assistantID: string,
+     *   scheduledAtFixedDatetime: \DateTimeInterface,
+     *   telnyxAgentTarget: string,
+     *   telnyxConversationChannel: value-of<ConversationChannelType>,
+     *   telnyxEndUserTarget: string,
+     *   conversationID?: string|null,
+     *   conversationMetadata?: array<string,string|int|bool>|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   errors?: list<string>|null,
-     *   retry_attempts?: int|null,
-     *   retry_count?: int|null,
-     *   scheduled_event_id?: string|null,
+     *   retryAttempts?: int|null,
+     *   retryCount?: int|null,
+     *   scheduledEventID?: string|null,
      *   status?: value-of<EventStatus>|null,
      * }|ScheduledSMSEventResponse|array{
-     *   assistant_id: string,
-     *   scheduled_at_fixed_datetime: \DateTimeInterface,
-     *   telnyx_agent_target: string,
-     *   telnyx_conversation_channel: value-of<ConversationChannelType>,
-     *   telnyx_end_user_target: string,
+     *   assistantID: string,
+     *   scheduledAtFixedDatetime: \DateTimeInterface,
+     *   telnyxAgentTarget: string,
+     *   telnyxConversationChannel: value-of<ConversationChannelType>,
+     *   telnyxEndUserTarget: string,
      *   text: string,
-     *   conversation_id?: string|null,
-     *   conversation_metadata?: array<string,string|int|bool>|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   conversationID?: string|null,
+     *   conversationMetadata?: array<string,string|int|bool>|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   errors?: list<string>|null,
-     *   retry_count?: int|null,
-     *   scheduled_event_id?: string|null,
+     *   retryCount?: int|null,
+     *   scheduledEventID?: string|null,
      *   status?: value-of<EventStatus>|null,
      * }> $data
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public static function with(array $data, Meta|array $meta): self
@@ -97,32 +97,32 @@ final class ScheduledEventListResponse implements BaseModel
 
     /**
      * @param list<ScheduledPhoneCallEventResponse|array{
-     *   assistant_id: string,
-     *   scheduled_at_fixed_datetime: \DateTimeInterface,
-     *   telnyx_agent_target: string,
-     *   telnyx_conversation_channel: value-of<ConversationChannelType>,
-     *   telnyx_end_user_target: string,
-     *   conversation_id?: string|null,
-     *   conversation_metadata?: array<string,string|int|bool>|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   assistantID: string,
+     *   scheduledAtFixedDatetime: \DateTimeInterface,
+     *   telnyxAgentTarget: string,
+     *   telnyxConversationChannel: value-of<ConversationChannelType>,
+     *   telnyxEndUserTarget: string,
+     *   conversationID?: string|null,
+     *   conversationMetadata?: array<string,string|int|bool>|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   errors?: list<string>|null,
-     *   retry_attempts?: int|null,
-     *   retry_count?: int|null,
-     *   scheduled_event_id?: string|null,
+     *   retryAttempts?: int|null,
+     *   retryCount?: int|null,
+     *   scheduledEventID?: string|null,
      *   status?: value-of<EventStatus>|null,
      * }|ScheduledSMSEventResponse|array{
-     *   assistant_id: string,
-     *   scheduled_at_fixed_datetime: \DateTimeInterface,
-     *   telnyx_agent_target: string,
-     *   telnyx_conversation_channel: value-of<ConversationChannelType>,
-     *   telnyx_end_user_target: string,
+     *   assistantID: string,
+     *   scheduledAtFixedDatetime: \DateTimeInterface,
+     *   telnyxAgentTarget: string,
+     *   telnyxConversationChannel: value-of<ConversationChannelType>,
+     *   telnyxEndUserTarget: string,
      *   text: string,
-     *   conversation_id?: string|null,
-     *   conversation_metadata?: array<string,string|int|bool>|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   conversationID?: string|null,
+     *   conversationMetadata?: array<string,string|int|bool>|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   errors?: list<string>|null,
-     *   retry_count?: int|null,
-     *   scheduled_event_id?: string|null,
+     *   retryCount?: int|null,
+     *   scheduledEventID?: string|null,
      *   status?: value-of<EventStatus>|null,
      * }> $data
      */
@@ -136,7 +136,7 @@ final class ScheduledEventListResponse implements BaseModel
 
     /**
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public function withMeta(Meta|array $meta): self

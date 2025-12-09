@@ -54,8 +54,8 @@ final class SipReferTool implements BaseModel
      *
      * @param Refer|array{
      *   targets: list<Target>,
-     *   custom_headers?: list<CustomHeader>|null,
-     *   sip_headers?: list<SipHeader>|null,
+     *   customHeaders?: list<CustomHeader>|null,
+     *   sipHeaders?: list<SipHeader>|null,
      * } $refer
      * @param Type|value-of<Type> $type
      */
@@ -72,8 +72,8 @@ final class SipReferTool implements BaseModel
     /**
      * @param Refer|array{
      *   targets: list<Target>,
-     *   custom_headers?: list<CustomHeader>|null,
-     *   sip_headers?: list<SipHeader>|null,
+     *   customHeaders?: list<CustomHeader>|null,
+     *   sipHeaders?: list<SipHeader>|null,
      * } $refer
      */
     public function withRefer(Refer|array $refer): self

@@ -16,9 +16,9 @@ use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
  * @see Telnyx\Services\NumberOrdersService::update()
  *
  * @phpstan-type NumberOrderUpdateParamsShape = array{
- *   customer_reference?: string,
- *   regulatory_requirements?: list<UpdateRegulatoryRequirement|array{
- *     field_value?: string|null, requirement_id?: string|null
+ *   customerReference?: string,
+ *   regulatoryRequirements?: list<UpdateRegulatoryRequirement|array{
+ *     fieldValue?: string|null, requirementID?: string|null
  *   }>,
  * }
  */
@@ -31,12 +31,15 @@ final class NumberOrderUpdateParams implements BaseModel
     /**
      * A customer reference string for customer look ups.
      */
-    #[Optional]
-    public ?string $customer_reference;
+    #[Optional('customer_reference')]
+    public ?string $customerReference;
 
-    /** @var list<UpdateRegulatoryRequirement>|null $regulatory_requirements */
-    #[Optional(list: UpdateRegulatoryRequirement::class)]
-    public ?array $regulatory_requirements;
+    /** @var list<UpdateRegulatoryRequirement>|null $regulatoryRequirements */
+    #[Optional(
+        'regulatory_requirements',
+        list: UpdateRegulatoryRequirement::class
+    )]
+    public ?array $regulatoryRequirements;
 
     public function __construct()
     {
@@ -49,17 +52,17 @@ final class NumberOrderUpdateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<UpdateRegulatoryRequirement|array{
-     *   field_value?: string|null, requirement_id?: string|null
-     * }> $regulatory_requirements
+     *   fieldValue?: string|null, requirementID?: string|null
+     * }> $regulatoryRequirements
      */
     public static function with(
-        ?string $customer_reference = null,
-        ?array $regulatory_requirements = null
+        ?string $customerReference = null,
+        ?array $regulatoryRequirements = null
     ): self {
         $obj = new self;
 
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
-        null !== $regulatory_requirements && $obj['regulatory_requirements'] = $regulatory_requirements;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
+        null !== $regulatoryRequirements && $obj['regulatoryRequirements'] = $regulatoryRequirements;
 
         return $obj;
     }
@@ -70,21 +73,21 @@ final class NumberOrderUpdateParams implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }
 
     /**
      * @param list<UpdateRegulatoryRequirement|array{
-     *   field_value?: string|null, requirement_id?: string|null
+     *   fieldValue?: string|null, requirementID?: string|null
      * }> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements
     ): self {
         $obj = clone $this;
-        $obj['regulatory_requirements'] = $regulatoryRequirements;
+        $obj['regulatoryRequirements'] = $regulatoryRequirements;
 
         return $obj;
     }

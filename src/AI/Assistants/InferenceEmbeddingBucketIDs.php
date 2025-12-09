@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type InferenceEmbeddingBucketIDsShape = array{
- *   bucket_ids: list<string>, max_num_results?: int|null
+ *   bucketIDs: list<string>, maxNumResults?: int|null
  * }
  */
 final class InferenceEmbeddingBucketIDs implements BaseModel
@@ -22,23 +22,23 @@ final class InferenceEmbeddingBucketIDs implements BaseModel
     /**
      * List of [embedded storage buckets](https://developers.telnyx.com/api/inference/inference-embedding/post-embedding) to use for retrieval-augmented generation.
      *
-     * @var list<string> $bucket_ids
+     * @var list<string> $bucketIDs
      */
-    #[Required(list: 'string')]
-    public array $bucket_ids;
+    #[Required('bucket_ids', list: 'string')]
+    public array $bucketIDs;
 
     /**
      * The maximum number of results to retrieve as context for the language model.
      */
-    #[Optional]
-    public ?int $max_num_results;
+    #[Optional('max_num_results')]
+    public ?int $maxNumResults;
 
     /**
      * `new InferenceEmbeddingBucketIDs()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * InferenceEmbeddingBucketIDs::with(bucket_ids: ...)
+     * InferenceEmbeddingBucketIDs::with(bucketIDs: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -57,17 +57,17 @@ final class InferenceEmbeddingBucketIDs implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $bucket_ids
+     * @param list<string> $bucketIDs
      */
     public static function with(
-        array $bucket_ids,
-        ?int $max_num_results = null
+        array $bucketIDs,
+        ?int $maxNumResults = null
     ): self {
         $obj = new self;
 
-        $obj['bucket_ids'] = $bucket_ids;
+        $obj['bucketIDs'] = $bucketIDs;
 
-        null !== $max_num_results && $obj['max_num_results'] = $max_num_results;
+        null !== $maxNumResults && $obj['maxNumResults'] = $maxNumResults;
 
         return $obj;
     }
@@ -80,7 +80,7 @@ final class InferenceEmbeddingBucketIDs implements BaseModel
     public function withBucketIDs(array $bucketIDs): self
     {
         $obj = clone $this;
-        $obj['bucket_ids'] = $bucketIDs;
+        $obj['bucketIDs'] = $bucketIDs;
 
         return $obj;
     }
@@ -91,7 +91,7 @@ final class InferenceEmbeddingBucketIDs implements BaseModel
     public function withMaxNumResults(int $maxNumResults): self
     {
         $obj = clone $this;
-        $obj['max_num_results'] = $maxNumResults;
+        $obj['maxNumResults'] = $maxNumResults;
 
         return $obj;
     }

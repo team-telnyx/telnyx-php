@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\MessagingOptouts\MessagingOptoutListParams;
 use Telnyx\MessagingOptouts\MessagingOptoutListResponse;
 use Telnyx\RequestOptions;
@@ -25,12 +26,12 @@ final class MessagingOptoutsService implements MessagingOptoutsContract
      * Retrieve a list of opt-out blocks.
      *
      * @param array{
-     *   created_at?: array{
+     *   createdAt?: array{
      *     gte?: string|\DateTimeInterface, lte?: string|\DateTimeInterface
      *   },
-     *   filter?: array{from?: string, messaging_profile_id?: string},
+     *   filter?: array{from?: string, messagingProfileID?: string},
      *   page?: array{number?: int, size?: int},
-     *   redaction_enabled?: string,
+     *   redactionEnabled?: string,
      * }|MessagingOptoutListParams $params
      *
      * @throws APIException
@@ -48,7 +49,12 @@ final class MessagingOptoutsService implements MessagingOptoutsContract
         $response = $this->client->request(
             method: 'get',
             path: 'messaging_optouts',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'createdAt' => 'created_at', 'redactionEnabled' => 'redaction_enabled',
+                ],
+            ),
             options: $options,
             convert: MessagingOptoutListResponse::class,
         );

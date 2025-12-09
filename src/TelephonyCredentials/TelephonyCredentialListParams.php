@@ -19,8 +19,8 @@ use Telnyx\TelephonyCredentials\TelephonyCredentialListParams\Page;
  * @phpstan-type TelephonyCredentialListParamsShape = array{
  *   filter?: Filter|array{
  *     name?: string|null,
- *     resource_id?: string|null,
- *     sip_username?: string|null,
+ *     resourceID?: string|null,
+ *     sipUsername?: string|null,
  *     status?: string|null,
  *     tag?: string|null,
  *   },
@@ -57,8 +57,8 @@ final class TelephonyCredentialListParams implements BaseModel
      *
      * @param Filter|array{
      *   name?: string|null,
-     *   resource_id?: string|null,
-     *   sip_username?: string|null,
+     *   resourceID?: string|null,
+     *   sipUsername?: string|null,
      *   status?: string|null,
      *   tag?: string|null,
      * } $filter
@@ -81,8 +81,8 @@ final class TelephonyCredentialListParams implements BaseModel
      *
      * @param Filter|array{
      *   name?: string|null,
-     *   resource_id?: string|null,
-     *   sip_username?: string|null,
+     *   resourceID?: string|null,
+     *   sipUsername?: string|null,
      *   status?: string|null,
      *   tag?: string|null,
      * } $filter

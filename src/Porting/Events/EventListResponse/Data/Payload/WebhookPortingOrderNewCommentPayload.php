@@ -14,9 +14,7 @@ use Telnyx\Porting\Events\EventListResponse\Data\Payload\WebhookPortingOrderNewC
  * The webhook payload for the porting_order.new_comment event.
  *
  * @phpstan-type WebhookPortingOrderNewCommentPayloadShape = array{
- *   comment?: Comment|null,
- *   porting_order_id?: string|null,
- *   support_key?: string|null,
+ *   comment?: Comment|null, portingOrderID?: string|null, supportKey?: string|null
  * }
  */
 final class WebhookPortingOrderNewCommentPayload implements BaseModel
@@ -33,14 +31,14 @@ final class WebhookPortingOrderNewCommentPayload implements BaseModel
     /**
      * Identifies the porting order that the comment was added to.
      */
-    #[Optional]
-    public ?string $porting_order_id;
+    #[Optional('porting_order_id')]
+    public ?string $portingOrderID;
 
     /**
      * Identifies the support key associated with the porting order.
      */
-    #[Optional]
-    public ?string $support_key;
+    #[Optional('support_key')]
+    public ?string $supportKey;
 
     public function __construct()
     {
@@ -55,21 +53,21 @@ final class WebhookPortingOrderNewCommentPayload implements BaseModel
      * @param Comment|array{
      *   id?: string|null,
      *   body?: string|null,
-     *   inserted_at?: \DateTimeInterface|null,
-     *   user_id?: string|null,
-     *   user_type?: value-of<UserType>|null,
+     *   insertedAt?: \DateTimeInterface|null,
+     *   userID?: string|null,
+     *   userType?: value-of<UserType>|null,
      * } $comment
      */
     public static function with(
         Comment|array|null $comment = null,
-        ?string $porting_order_id = null,
-        ?string $support_key = null,
+        ?string $portingOrderID = null,
+        ?string $supportKey = null,
     ): self {
         $obj = new self;
 
         null !== $comment && $obj['comment'] = $comment;
-        null !== $porting_order_id && $obj['porting_order_id'] = $porting_order_id;
-        null !== $support_key && $obj['support_key'] = $support_key;
+        null !== $portingOrderID && $obj['portingOrderID'] = $portingOrderID;
+        null !== $supportKey && $obj['supportKey'] = $supportKey;
 
         return $obj;
     }
@@ -80,9 +78,9 @@ final class WebhookPortingOrderNewCommentPayload implements BaseModel
      * @param Comment|array{
      *   id?: string|null,
      *   body?: string|null,
-     *   inserted_at?: \DateTimeInterface|null,
-     *   user_id?: string|null,
-     *   user_type?: value-of<UserType>|null,
+     *   insertedAt?: \DateTimeInterface|null,
+     *   userID?: string|null,
+     *   userType?: value-of<UserType>|null,
      * } $comment
      */
     public function withComment(Comment|array $comment): self
@@ -99,7 +97,7 @@ final class WebhookPortingOrderNewCommentPayload implements BaseModel
     public function withPortingOrderID(string $portingOrderID): self
     {
         $obj = clone $this;
-        $obj['porting_order_id'] = $portingOrderID;
+        $obj['portingOrderID'] = $portingOrderID;
 
         return $obj;
     }
@@ -110,7 +108,7 @@ final class WebhookPortingOrderNewCommentPayload implements BaseModel
     public function withSupportKey(string $supportKey): self
     {
         $obj = clone $this;
-        $obj['support_key'] = $supportKey;
+        $obj['supportKey'] = $supportKey;
 
         return $obj;
     }

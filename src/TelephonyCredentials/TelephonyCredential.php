@@ -11,15 +11,15 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type TelephonyCredentialShape = array{
  *   id?: string|null,
- *   created_at?: string|null,
+ *   createdAt?: string|null,
  *   expired?: bool|null,
- *   expires_at?: string|null,
+ *   expiresAt?: string|null,
  *   name?: string|null,
- *   record_type?: string|null,
- *   resource_id?: string|null,
- *   sip_password?: string|null,
- *   sip_username?: string|null,
- *   updated_at?: string|null,
+ *   recordType?: string|null,
+ *   resourceID?: string|null,
+ *   sipPassword?: string|null,
+ *   sipUsername?: string|null,
+ *   updatedAt?: string|null,
  * }
  */
 final class TelephonyCredential implements BaseModel
@@ -36,8 +36,8 @@ final class TelephonyCredential implements BaseModel
     /**
      * ISO-8601 formatted date indicating when the resource was created.
      */
-    #[Optional]
-    public ?string $created_at;
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
     /**
      * Defaults to false.
@@ -48,8 +48,8 @@ final class TelephonyCredential implements BaseModel
     /**
      * ISO-8601 formatted date indicating when the resource will expire.
      */
-    #[Optional]
-    public ?string $expires_at;
+    #[Optional('expires_at')]
+    public ?string $expiresAt;
 
     #[Optional]
     public ?string $name;
@@ -57,32 +57,32 @@ final class TelephonyCredential implements BaseModel
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * Identifies the resource this credential is associated with.
      */
-    #[Optional]
-    public ?string $resource_id;
+    #[Optional('resource_id')]
+    public ?string $resourceID;
 
     /**
      * The randomly generated SIP password for the credential.
      */
-    #[Optional]
-    public ?string $sip_password;
+    #[Optional('sip_password')]
+    public ?string $sipPassword;
 
     /**
      * The randomly generated SIP username for the credential.
      */
-    #[Optional]
-    public ?string $sip_username;
+    #[Optional('sip_username')]
+    public ?string $sipUsername;
 
     /**
      * ISO-8601 formatted date indicating when the resource was updated.
      */
-    #[Optional]
-    public ?string $updated_at;
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     public function __construct()
     {
@@ -96,28 +96,28 @@ final class TelephonyCredential implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $created_at = null,
+        ?string $createdAt = null,
         ?bool $expired = null,
-        ?string $expires_at = null,
+        ?string $expiresAt = null,
         ?string $name = null,
-        ?string $record_type = null,
-        ?string $resource_id = null,
-        ?string $sip_password = null,
-        ?string $sip_username = null,
-        ?string $updated_at = null,
+        ?string $recordType = null,
+        ?string $resourceID = null,
+        ?string $sipPassword = null,
+        ?string $sipUsername = null,
+        ?string $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
         null !== $expired && $obj['expired'] = $expired;
-        null !== $expires_at && $obj['expires_at'] = $expires_at;
+        null !== $expiresAt && $obj['expiresAt'] = $expiresAt;
         null !== $name && $obj['name'] = $name;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $resource_id && $obj['resource_id'] = $resource_id;
-        null !== $sip_password && $obj['sip_password'] = $sip_password;
-        null !== $sip_username && $obj['sip_username'] = $sip_username;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $resourceID && $obj['resourceID'] = $resourceID;
+        null !== $sipPassword && $obj['sipPassword'] = $sipPassword;
+        null !== $sipUsername && $obj['sipUsername'] = $sipUsername;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class TelephonyCredential implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -161,7 +161,7 @@ final class TelephonyCredential implements BaseModel
     public function withExpiresAt(string $expiresAt): self
     {
         $obj = clone $this;
-        $obj['expires_at'] = $expiresAt;
+        $obj['expiresAt'] = $expiresAt;
 
         return $obj;
     }
@@ -180,7 +180,7 @@ final class TelephonyCredential implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -191,7 +191,7 @@ final class TelephonyCredential implements BaseModel
     public function withResourceID(string $resourceID): self
     {
         $obj = clone $this;
-        $obj['resource_id'] = $resourceID;
+        $obj['resourceID'] = $resourceID;
 
         return $obj;
     }
@@ -202,7 +202,7 @@ final class TelephonyCredential implements BaseModel
     public function withSipPassword(string $sipPassword): self
     {
         $obj = clone $this;
-        $obj['sip_password'] = $sipPassword;
+        $obj['sipPassword'] = $sipPassword;
 
         return $obj;
     }
@@ -213,7 +213,7 @@ final class TelephonyCredential implements BaseModel
     public function withSipUsername(string $sipUsername): self
     {
         $obj = clone $this;
-        $obj['sip_username'] = $sipUsername;
+        $obj['sipUsername'] = $sipUsername;
 
         return $obj;
     }
@@ -224,7 +224,7 @@ final class TelephonyCredential implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

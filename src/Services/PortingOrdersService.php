@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\PortingOrders\PortingOrderCreateParams;
 use Telnyx\PortingOrders\PortingOrderDocuments;
 use Telnyx\PortingOrders\PortingOrderEndUser;
@@ -119,9 +120,9 @@ final class PortingOrdersService implements PortingOrdersContract
      * Creates a new porting order object.
      *
      * @param array{
-     *   phone_numbers: list<string>,
-     *   customer_group_reference?: string,
-     *   customer_reference?: string|null,
+     *   phoneNumbers: list<string>,
+     *   customerGroupReference?: string,
+     *   customerReference?: string|null,
      * }|PortingOrderCreateParams $params
      *
      * @throws APIException
@@ -152,7 +153,7 @@ final class PortingOrdersService implements PortingOrdersContract
      *
      * Retrieves the details of an existing porting order.
      *
-     * @param array{include_phone_numbers?: bool}|PortingOrderRetrieveParams $params
+     * @param array{includePhoneNumbers?: bool}|PortingOrderRetrieveParams $params
      *
      * @throws APIException
      */
@@ -170,7 +171,10 @@ final class PortingOrdersService implements PortingOrdersContract
         $response = $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s', $id],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['includePhoneNumbers' => 'include_phone_numbers']
+            ),
             options: $options,
             convert: PortingOrderGetResponse::class,
         );
@@ -188,37 +192,35 @@ final class PortingOrdersService implements PortingOrdersContract
      * If a request does not include all of the attributes for a resource, the system will interpret the missing attributes as if they were included with their current values. To explicitly set something to null, it must be included in the request with a null value.
      *
      * @param array{
-     *   activation_settings?: array{
-     *     foc_datetime_requested?: string|\DateTimeInterface
-     *   },
-     *   customer_group_reference?: string,
-     *   customer_reference?: string,
+     *   activationSettings?: array{focDatetimeRequested?: string|\DateTimeInterface},
+     *   customerGroupReference?: string,
+     *   customerReference?: string,
      *   documents?: array{
      *     invoice?: string|null, loa?: string|null
      *   }|PortingOrderDocuments,
-     *   end_user?: array{
+     *   endUser?: array{
      *     admin?: array<mixed>|PortingOrderEndUserAdmin,
      *     location?: array<mixed>|PortingOrderEndUserLocation,
      *   }|PortingOrderEndUser,
-     *   messaging?: array{enable_messaging?: bool},
+     *   messaging?: array{enableMessaging?: bool},
      *   misc?: array{
-     *     new_billing_phone_number?: string|null,
-     *     remaining_numbers_action?: 'keep'|'disconnect'|RemainingNumbersAction|null,
+     *     newBillingPhoneNumber?: string|null,
+     *     remainingNumbersAction?: 'keep'|'disconnect'|RemainingNumbersAction|null,
      *     type?: 'full'|'partial'|PortingOrderType,
      *   }|PortingOrderMisc|null,
-     *   phone_number_configuration?: array{
-     *     billing_group_id?: string|null,
-     *     connection_id?: string|null,
-     *     emergency_address_id?: string|null,
-     *     messaging_profile_id?: string|null,
+     *   phoneNumberConfiguration?: array{
+     *     billingGroupID?: string|null,
+     *     connectionID?: string|null,
+     *     emergencyAddressID?: string|null,
+     *     messagingProfileID?: string|null,
      *     tags?: list<string>,
      *   }|PortingOrderPhoneNumberConfiguration,
-     *   requirement_group_id?: string,
-     *   requirements?: list<array{field_value: string, requirement_type_id: string}>,
-     *   user_feedback?: array{
-     *     user_comment?: string|null, user_rating?: int|null
+     *   requirementGroupID?: string,
+     *   requirements?: list<array{fieldValue: string, requirementTypeID: string}>,
+     *   userFeedback?: array{
+     *     userComment?: string|null, userRating?: int|null
      *   }|PortingOrderUserFeedback,
-     *   webhook_url?: string,
+     *   webhookURL?: string,
      * }|PortingOrderUpdateParams $params
      *
      * @throws APIException
@@ -252,24 +254,24 @@ final class PortingOrdersService implements PortingOrdersContract
      *
      * @param array{
      *   filter?: array{
-     *     activation_settings?: array{
-     *       fast_port_eligible?: bool,
-     *       foc_datetime_requested?: array{gt?: string, lt?: string},
+     *     activationSettings?: array{
+     *       fastPortEligible?: bool,
+     *       focDatetimeRequested?: array{gt?: string, lt?: string},
      *     },
-     *     customer_group_reference?: string,
-     *     customer_reference?: string,
-     *     end_user?: array{
-     *       admin?: array{auth_person_name?: string, entity_name?: string}
+     *     customerGroupReference?: string,
+     *     customerReference?: string,
+     *     endUser?: array{
+     *       admin?: array{authPersonName?: string, entityName?: string}
      *     },
      *     misc?: array{type?: 'full'|'partial'|PortingOrderType},
-     *     parent_support_key?: string,
-     *     phone_numbers?: array{
-     *       carrier_name?: string,
-     *       country_code?: string,
-     *       phone_number?: array{contains?: string},
+     *     parentSupportKey?: string,
+     *     phoneNumbers?: array{
+     *       carrierName?: string,
+     *       countryCode?: string,
+     *       phoneNumber?: array{contains?: string},
      *     },
      *   },
-     *   include_phone_numbers?: bool,
+     *   includePhoneNumbers?: bool,
      *   page?: array{number?: int, size?: int},
      *   sort?: array{
      *     value?: 'created_at'|'-created_at'|'activation_settings.foc_datetime_requested'|'-activation_settings.foc_datetime_requested'|Value,
@@ -291,7 +293,10 @@ final class PortingOrdersService implements PortingOrdersContract
         $response = $this->client->request(
             method: 'get',
             path: 'porting_orders',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['includePhoneNumbers' => 'include_phone_numbers']
+            ),
             options: $options,
             convert: PortingOrderListResponse::class,
         );
@@ -370,7 +375,7 @@ final class PortingOrdersService implements PortingOrdersContract
      * Download a porting order loa template
      *
      * @param array{
-     *   loa_configuration_id?: string
+     *   loaConfigurationID?: string
      * }|PortingOrderRetrieveLoaTemplateParams $params
      *
      * @throws APIException
@@ -389,7 +394,10 @@ final class PortingOrdersService implements PortingOrdersContract
         $response = $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/loa_template', $id],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['loaConfigurationID' => 'loa_configuration_id']
+            ),
             headers: ['Accept' => 'application/pdf'],
             options: $options,
             convert: 'string',

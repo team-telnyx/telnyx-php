@@ -50,10 +50,10 @@ final class ToolTestResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Data|array{
-     *   content_type: string,
+     *   contentType: string,
      *   request: array<string,mixed>,
      *   response: string,
-     *   status_code: int,
+     *   statusCode: int,
      *   success: bool,
      * } $data
      */
@@ -70,10 +70,10 @@ final class ToolTestResponse implements BaseModel
      * Response model for webhook tool test results.
      *
      * @param Data|array{
-     *   content_type: string,
+     *   contentType: string,
      *   request: array<string,mixed>,
      *   response: string,
-     *   status_code: int,
+     *   statusCode: int,
      *   success: bool,
      * } $data
      */

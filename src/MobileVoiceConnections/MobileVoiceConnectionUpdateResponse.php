@@ -37,17 +37,17 @@ final class MobileVoiceConnectionUpdateResponse implements BaseModel
      * @param Data|array{
      *   id?: string|null,
      *   active?: bool|null,
-     *   connection_name?: string|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   connectionName?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   inbound?: Inbound|null,
      *   outbound?: Outbound|null,
-     *   record_type?: value-of<RecordType>|null,
+     *   recordType?: value-of<RecordType>|null,
      *   tags?: list<string>|null,
-     *   updated_at?: \DateTimeInterface|null,
-     *   webhook_api_version?: value-of<WebhookAPIVersion>|null,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_event_url?: string|null,
-     *   webhook_timeout_secs?: int|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookEventURL?: string|null,
+     *   webhookTimeoutSecs?: int|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -63,17 +63,17 @@ final class MobileVoiceConnectionUpdateResponse implements BaseModel
      * @param Data|array{
      *   id?: string|null,
      *   active?: bool|null,
-     *   connection_name?: string|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   connectionName?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   inbound?: Inbound|null,
      *   outbound?: Outbound|null,
-     *   record_type?: value-of<RecordType>|null,
+     *   recordType?: value-of<RecordType>|null,
      *   tags?: list<string>|null,
-     *   updated_at?: \DateTimeInterface|null,
-     *   webhook_api_version?: value-of<WebhookAPIVersion>|null,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_event_url?: string|null,
-     *   webhook_timeout_secs?: int|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookEventURL?: string|null,
+     *   webhookTimeoutSecs?: int|null,
      * } $data
      */
     public function withData(Data|array $data): self

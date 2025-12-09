@@ -35,8 +35,8 @@ final class CdrUsageReportsTest extends TestCase
         }
 
         $result = $this->client->reports->cdrUsageReports->fetchSync([
-            'aggregation_type' => 'NO_AGGREGATION',
-            'product_breakdown' => 'NO_BREAKDOWN',
+            'aggregationType' => 'NO_AGGREGATION',
+            'productBreakdown' => 'NO_BREAKDOWN',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -51,11 +51,11 @@ final class CdrUsageReportsTest extends TestCase
         }
 
         $result = $this->client->reports->cdrUsageReports->fetchSync([
-            'aggregation_type' => 'NO_AGGREGATION',
-            'product_breakdown' => 'NO_BREAKDOWN',
+            'aggregationType' => 'NO_AGGREGATION',
+            'productBreakdown' => 'NO_BREAKDOWN',
             'connections' => [1234567890123],
-            'end_date' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
-            'start_date' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
+            'endDate' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
+            'startDate' => new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -22,18 +22,18 @@ use Telnyx\Portouts\PortoutListParams\Page;
  *
  * @phpstan-type PortoutListParamsShape = array{
  *   filter?: Filter|array{
- *     carrier_name?: string|null,
- *     country_code?: string|null,
- *     country_code_in?: list<string>|null,
- *     foc_date?: \DateTimeInterface|null,
- *     inserted_at?: InsertedAt|null,
- *     phone_number?: string|null,
+ *     carrierName?: string|null,
+ *     countryCode?: string|null,
+ *     countryCodeIn?: list<string>|null,
+ *     focDate?: \DateTimeInterface|null,
+ *     insertedAt?: InsertedAt|null,
+ *     phoneNumber?: string|null,
  *     pon?: string|null,
- *     ported_out_at?: PortedOutAt|null,
+ *     portedOutAt?: PortedOutAt|null,
  *     spid?: string|null,
  *     status?: value-of<Status>|null,
- *     status_in?: list<value-of<StatusIn>>|null,
- *     support_key?: string|null,
+ *     statusIn?: list<value-of<StatusIn>>|null,
+ *     supportKey?: string|null,
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
  * }
@@ -67,18 +67,18 @@ final class PortoutListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   carrier_name?: string|null,
-     *   country_code?: string|null,
-     *   country_code_in?: list<string>|null,
-     *   foc_date?: \DateTimeInterface|null,
-     *   inserted_at?: InsertedAt|null,
-     *   phone_number?: string|null,
+     *   carrierName?: string|null,
+     *   countryCode?: string|null,
+     *   countryCodeIn?: list<string>|null,
+     *   focDate?: \DateTimeInterface|null,
+     *   insertedAt?: InsertedAt|null,
+     *   phoneNumber?: string|null,
      *   pon?: string|null,
-     *   ported_out_at?: PortedOutAt|null,
+     *   portedOutAt?: PortedOutAt|null,
      *   spid?: string|null,
      *   status?: value-of<Status>|null,
-     *   status_in?: list<value-of<StatusIn>>|null,
-     *   support_key?: string|null,
+     *   statusIn?: list<value-of<StatusIn>>|null,
+     *   supportKey?: string|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      */
@@ -98,18 +98,18 @@ final class PortoutListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[carrier_name], filter[country_code], filter[country_code_in], filter[foc_date], filter[inserted_at], filter[phone_number], filter[pon], filter[ported_out_at], filter[spid], filter[status], filter[status_in], filter[support_key].
      *
      * @param Filter|array{
-     *   carrier_name?: string|null,
-     *   country_code?: string|null,
-     *   country_code_in?: list<string>|null,
-     *   foc_date?: \DateTimeInterface|null,
-     *   inserted_at?: InsertedAt|null,
-     *   phone_number?: string|null,
+     *   carrierName?: string|null,
+     *   countryCode?: string|null,
+     *   countryCodeIn?: list<string>|null,
+     *   focDate?: \DateTimeInterface|null,
+     *   insertedAt?: InsertedAt|null,
+     *   phoneNumber?: string|null,
      *   pon?: string|null,
-     *   ported_out_at?: PortedOutAt|null,
+     *   portedOutAt?: PortedOutAt|null,
      *   spid?: string|null,
      *   status?: value-of<Status>|null,
-     *   status_in?: list<value-of<StatusIn>>|null,
-     *   support_key?: string|null,
+     *   statusIn?: list<value-of<StatusIn>>|null,
+     *   supportKey?: string|null,
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

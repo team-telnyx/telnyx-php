@@ -14,21 +14,21 @@ use Telnyx\FqdnConnections\OutboundFqdn\T38ReinviteSource;
 
 /**
  * @phpstan-type OutboundFqdnShape = array{
- *   ani_override?: string|null,
- *   ani_override_type?: value-of<AniOverrideType>|null,
- *   call_parking_enabled?: bool|null,
- *   channel_limit?: int|null,
- *   encrypted_media?: value-of<EncryptedMedia>|null,
- *   generate_ringback_tone?: bool|null,
- *   instant_ringback_enabled?: bool|null,
- *   ip_authentication_method?: value-of<IPAuthenticationMethod>|null,
- *   ip_authentication_token?: string|null,
+ *   aniOverride?: string|null,
+ *   aniOverrideType?: value-of<AniOverrideType>|null,
+ *   callParkingEnabled?: bool|null,
+ *   channelLimit?: int|null,
+ *   encryptedMedia?: value-of<EncryptedMedia>|null,
+ *   generateRingbackTone?: bool|null,
+ *   instantRingbackEnabled?: bool|null,
+ *   ipAuthenticationMethod?: value-of<IPAuthenticationMethod>|null,
+ *   ipAuthenticationToken?: string|null,
  *   localization?: string|null,
- *   outbound_voice_profile_id?: string|null,
- *   t38_reinvite_source?: value-of<T38ReinviteSource>|null,
- *   tech_prefix?: string|null,
- *   timeout_1xx_secs?: int|null,
- *   timeout_2xx_secs?: int|null,
+ *   outboundVoiceProfileID?: string|null,
+ *   t38ReinviteSource?: value-of<T38ReinviteSource>|null,
+ *   techPrefix?: string|null,
+ *   timeout1xxSecs?: int|null,
+ *   timeout2xxSecs?: int|null,
  * }
  */
 final class OutboundFqdn implements BaseModel
@@ -39,55 +39,55 @@ final class OutboundFqdn implements BaseModel
     /**
      * Set a phone number as the ani_override value to override caller id number on outbound calls.
      */
-    #[Optional]
-    public ?string $ani_override;
+    #[Optional('ani_override')]
+    public ?string $aniOverride;
 
     /**
      * Specifies when we should apply your ani_override setting. Only applies when ani_override is not blank.
      *
-     * @var value-of<AniOverrideType>|null $ani_override_type
+     * @var value-of<AniOverrideType>|null $aniOverrideType
      */
-    #[Optional(enum: AniOverrideType::class)]
-    public ?string $ani_override_type;
+    #[Optional('ani_override_type', enum: AniOverrideType::class)]
+    public ?string $aniOverrideType;
 
     /**
      * Forces all SIP calls originated on this connection to be \"parked\" instead of \"bridged\" to the destination specified on the URI. Parked calls will return ringback to the caller and will await for a Call Control command to define which action will be taken next.
      */
-    #[Optional(nullable: true)]
-    public ?bool $call_parking_enabled;
+    #[Optional('call_parking_enabled', nullable: true)]
+    public ?bool $callParkingEnabled;
 
     /**
      * When set, this will limit the total number of inbound calls to phone numbers associated with this connection.
      */
-    #[Optional]
-    public ?int $channel_limit;
+    #[Optional('channel_limit')]
+    public ?int $channelLimit;
 
     /**
      * Enable use of SRTP for encryption. Cannot be set if the transport_portocol is TLS.
      *
-     * @var value-of<EncryptedMedia>|null $encrypted_media
+     * @var value-of<EncryptedMedia>|null $encryptedMedia
      */
-    #[Optional(enum: EncryptedMedia::class, nullable: true)]
-    public ?string $encrypted_media;
+    #[Optional('encrypted_media', enum: EncryptedMedia::class, nullable: true)]
+    public ?string $encryptedMedia;
 
     /**
      * Generate ringback tone through 183 session progress message with early media.
      */
-    #[Optional]
-    public ?bool $generate_ringback_tone;
+    #[Optional('generate_ringback_tone')]
+    public ?bool $generateRingbackTone;
 
     /**
      * When set, ringback will not wait for indication before sending ringback tone to calling party.
      */
-    #[Optional]
-    public ?bool $instant_ringback_enabled;
+    #[Optional('instant_ringback_enabled')]
+    public ?bool $instantRingbackEnabled;
 
-    /** @var value-of<IPAuthenticationMethod>|null $ip_authentication_method */
-    #[Optional(enum: IPAuthenticationMethod::class)]
-    public ?string $ip_authentication_method;
+    /** @var value-of<IPAuthenticationMethod>|null $ipAuthenticationMethod */
+    #[Optional('ip_authentication_method', enum: IPAuthenticationMethod::class)]
+    public ?string $ipAuthenticationMethod;
 
-    #[Optional]
-    public ?string $ip_authentication_token;
+    #[Optional('ip_authentication_token')]
+    public ?string $ipAuthenticationToken;
 
     /**
      * A 2-character country code specifying the country whose national dialing rules should be used. For example, if set to `US` then any US number can be dialed without preprending +1 to the number. When left blank, Telnyx will try US and GB dialing rules, in that order, by default.",.
@@ -98,34 +98,34 @@ final class OutboundFqdn implements BaseModel
     /**
      * Identifies the associated outbound voice profile.
      */
-    #[Optional]
-    public ?string $outbound_voice_profile_id;
+    #[Optional('outbound_voice_profile_id')]
+    public ?string $outboundVoiceProfileID;
 
     /**
      * This setting only affects connections with Fax-type Outbound Voice Profiles. The setting dictates whether or not Telnyx sends a t.38 reinvite. By default, Telnyx will send the re-invite. If set to `customer`, the caller is expected to send the t.38 reinvite.
      *
-     * @var value-of<T38ReinviteSource>|null $t38_reinvite_source
+     * @var value-of<T38ReinviteSource>|null $t38ReinviteSource
      */
-    #[Optional(enum: T38ReinviteSource::class)]
-    public ?string $t38_reinvite_source;
+    #[Optional('t38_reinvite_source', enum: T38ReinviteSource::class)]
+    public ?string $t38ReinviteSource;
 
     /**
      * Numerical chars only, exactly 4 characters.
      */
-    #[Optional]
-    public ?string $tech_prefix;
+    #[Optional('tech_prefix')]
+    public ?string $techPrefix;
 
     /**
      * Time(sec) before aborting if connection is not made.
      */
-    #[Optional]
-    public ?int $timeout_1xx_secs;
+    #[Optional('timeout_1xx_secs')]
+    public ?int $timeout1xxSecs;
 
     /**
      * Time(sec) before aborting if call is unanswered (min: 1, max: 600).
      */
-    #[Optional]
-    public ?int $timeout_2xx_secs;
+    #[Optional('timeout_2xx_secs')]
+    public ?int $timeout2xxSecs;
 
     public function __construct()
     {
@@ -137,45 +137,45 @@ final class OutboundFqdn implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AniOverrideType|value-of<AniOverrideType> $ani_override_type
-     * @param EncryptedMedia|value-of<EncryptedMedia>|null $encrypted_media
-     * @param IPAuthenticationMethod|value-of<IPAuthenticationMethod> $ip_authentication_method
-     * @param T38ReinviteSource|value-of<T38ReinviteSource> $t38_reinvite_source
+     * @param AniOverrideType|value-of<AniOverrideType> $aniOverrideType
+     * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
+     * @param IPAuthenticationMethod|value-of<IPAuthenticationMethod> $ipAuthenticationMethod
+     * @param T38ReinviteSource|value-of<T38ReinviteSource> $t38ReinviteSource
      */
     public static function with(
-        ?string $ani_override = null,
-        AniOverrideType|string|null $ani_override_type = null,
-        ?bool $call_parking_enabled = null,
-        ?int $channel_limit = null,
-        EncryptedMedia|string|null $encrypted_media = null,
-        ?bool $generate_ringback_tone = null,
-        ?bool $instant_ringback_enabled = null,
-        IPAuthenticationMethod|string|null $ip_authentication_method = null,
-        ?string $ip_authentication_token = null,
+        ?string $aniOverride = null,
+        AniOverrideType|string|null $aniOverrideType = null,
+        ?bool $callParkingEnabled = null,
+        ?int $channelLimit = null,
+        EncryptedMedia|string|null $encryptedMedia = null,
+        ?bool $generateRingbackTone = null,
+        ?bool $instantRingbackEnabled = null,
+        IPAuthenticationMethod|string|null $ipAuthenticationMethod = null,
+        ?string $ipAuthenticationToken = null,
         ?string $localization = null,
-        ?string $outbound_voice_profile_id = null,
-        T38ReinviteSource|string|null $t38_reinvite_source = null,
-        ?string $tech_prefix = null,
-        ?int $timeout_1xx_secs = null,
-        ?int $timeout_2xx_secs = null,
+        ?string $outboundVoiceProfileID = null,
+        T38ReinviteSource|string|null $t38ReinviteSource = null,
+        ?string $techPrefix = null,
+        ?int $timeout1xxSecs = null,
+        ?int $timeout2xxSecs = null,
     ): self {
         $obj = new self;
 
-        null !== $ani_override && $obj['ani_override'] = $ani_override;
-        null !== $ani_override_type && $obj['ani_override_type'] = $ani_override_type;
-        null !== $call_parking_enabled && $obj['call_parking_enabled'] = $call_parking_enabled;
-        null !== $channel_limit && $obj['channel_limit'] = $channel_limit;
-        null !== $encrypted_media && $obj['encrypted_media'] = $encrypted_media;
-        null !== $generate_ringback_tone && $obj['generate_ringback_tone'] = $generate_ringback_tone;
-        null !== $instant_ringback_enabled && $obj['instant_ringback_enabled'] = $instant_ringback_enabled;
-        null !== $ip_authentication_method && $obj['ip_authentication_method'] = $ip_authentication_method;
-        null !== $ip_authentication_token && $obj['ip_authentication_token'] = $ip_authentication_token;
+        null !== $aniOverride && $obj['aniOverride'] = $aniOverride;
+        null !== $aniOverrideType && $obj['aniOverrideType'] = $aniOverrideType;
+        null !== $callParkingEnabled && $obj['callParkingEnabled'] = $callParkingEnabled;
+        null !== $channelLimit && $obj['channelLimit'] = $channelLimit;
+        null !== $encryptedMedia && $obj['encryptedMedia'] = $encryptedMedia;
+        null !== $generateRingbackTone && $obj['generateRingbackTone'] = $generateRingbackTone;
+        null !== $instantRingbackEnabled && $obj['instantRingbackEnabled'] = $instantRingbackEnabled;
+        null !== $ipAuthenticationMethod && $obj['ipAuthenticationMethod'] = $ipAuthenticationMethod;
+        null !== $ipAuthenticationToken && $obj['ipAuthenticationToken'] = $ipAuthenticationToken;
         null !== $localization && $obj['localization'] = $localization;
-        null !== $outbound_voice_profile_id && $obj['outbound_voice_profile_id'] = $outbound_voice_profile_id;
-        null !== $t38_reinvite_source && $obj['t38_reinvite_source'] = $t38_reinvite_source;
-        null !== $tech_prefix && $obj['tech_prefix'] = $tech_prefix;
-        null !== $timeout_1xx_secs && $obj['timeout_1xx_secs'] = $timeout_1xx_secs;
-        null !== $timeout_2xx_secs && $obj['timeout_2xx_secs'] = $timeout_2xx_secs;
+        null !== $outboundVoiceProfileID && $obj['outboundVoiceProfileID'] = $outboundVoiceProfileID;
+        null !== $t38ReinviteSource && $obj['t38ReinviteSource'] = $t38ReinviteSource;
+        null !== $techPrefix && $obj['techPrefix'] = $techPrefix;
+        null !== $timeout1xxSecs && $obj['timeout1xxSecs'] = $timeout1xxSecs;
+        null !== $timeout2xxSecs && $obj['timeout2xxSecs'] = $timeout2xxSecs;
 
         return $obj;
     }
@@ -186,7 +186,7 @@ final class OutboundFqdn implements BaseModel
     public function withAniOverride(string $aniOverride): self
     {
         $obj = clone $this;
-        $obj['ani_override'] = $aniOverride;
+        $obj['aniOverride'] = $aniOverride;
 
         return $obj;
     }
@@ -200,7 +200,7 @@ final class OutboundFqdn implements BaseModel
         AniOverrideType|string $aniOverrideType
     ): self {
         $obj = clone $this;
-        $obj['ani_override_type'] = $aniOverrideType;
+        $obj['aniOverrideType'] = $aniOverrideType;
 
         return $obj;
     }
@@ -211,7 +211,7 @@ final class OutboundFqdn implements BaseModel
     public function withCallParkingEnabled(?bool $callParkingEnabled): self
     {
         $obj = clone $this;
-        $obj['call_parking_enabled'] = $callParkingEnabled;
+        $obj['callParkingEnabled'] = $callParkingEnabled;
 
         return $obj;
     }
@@ -222,7 +222,7 @@ final class OutboundFqdn implements BaseModel
     public function withChannelLimit(int $channelLimit): self
     {
         $obj = clone $this;
-        $obj['channel_limit'] = $channelLimit;
+        $obj['channelLimit'] = $channelLimit;
 
         return $obj;
     }
@@ -236,7 +236,7 @@ final class OutboundFqdn implements BaseModel
         EncryptedMedia|string|null $encryptedMedia
     ): self {
         $obj = clone $this;
-        $obj['encrypted_media'] = $encryptedMedia;
+        $obj['encryptedMedia'] = $encryptedMedia;
 
         return $obj;
     }
@@ -247,7 +247,7 @@ final class OutboundFqdn implements BaseModel
     public function withGenerateRingbackTone(bool $generateRingbackTone): self
     {
         $obj = clone $this;
-        $obj['generate_ringback_tone'] = $generateRingbackTone;
+        $obj['generateRingbackTone'] = $generateRingbackTone;
 
         return $obj;
     }
@@ -259,7 +259,7 @@ final class OutboundFqdn implements BaseModel
         bool $instantRingbackEnabled
     ): self {
         $obj = clone $this;
-        $obj['instant_ringback_enabled'] = $instantRingbackEnabled;
+        $obj['instantRingbackEnabled'] = $instantRingbackEnabled;
 
         return $obj;
     }
@@ -271,7 +271,7 @@ final class OutboundFqdn implements BaseModel
         IPAuthenticationMethod|string $ipAuthenticationMethod
     ): self {
         $obj = clone $this;
-        $obj['ip_authentication_method'] = $ipAuthenticationMethod;
+        $obj['ipAuthenticationMethod'] = $ipAuthenticationMethod;
 
         return $obj;
     }
@@ -280,7 +280,7 @@ final class OutboundFqdn implements BaseModel
         string $ipAuthenticationToken
     ): self {
         $obj = clone $this;
-        $obj['ip_authentication_token'] = $ipAuthenticationToken;
+        $obj['ipAuthenticationToken'] = $ipAuthenticationToken;
 
         return $obj;
     }
@@ -303,7 +303,7 @@ final class OutboundFqdn implements BaseModel
         string $outboundVoiceProfileID
     ): self {
         $obj = clone $this;
-        $obj['outbound_voice_profile_id'] = $outboundVoiceProfileID;
+        $obj['outboundVoiceProfileID'] = $outboundVoiceProfileID;
 
         return $obj;
     }
@@ -317,7 +317,7 @@ final class OutboundFqdn implements BaseModel
         T38ReinviteSource|string $t38ReinviteSource
     ): self {
         $obj = clone $this;
-        $obj['t38_reinvite_source'] = $t38ReinviteSource;
+        $obj['t38ReinviteSource'] = $t38ReinviteSource;
 
         return $obj;
     }
@@ -328,7 +328,7 @@ final class OutboundFqdn implements BaseModel
     public function withTechPrefix(string $techPrefix): self
     {
         $obj = clone $this;
-        $obj['tech_prefix'] = $techPrefix;
+        $obj['techPrefix'] = $techPrefix;
 
         return $obj;
     }
@@ -339,7 +339,7 @@ final class OutboundFqdn implements BaseModel
     public function withTimeout1xxSecs(int $timeout1xxSecs): self
     {
         $obj = clone $this;
-        $obj['timeout_1xx_secs'] = $timeout1xxSecs;
+        $obj['timeout1xxSecs'] = $timeout1xxSecs;
 
         return $obj;
     }
@@ -350,7 +350,7 @@ final class OutboundFqdn implements BaseModel
     public function withTimeout2xxSecs(int $timeout2xxSecs): self
     {
         $obj = clone $this;
-        $obj['timeout_2xx_secs'] = $timeout2xxSecs;
+        $obj['timeout2xxSecs'] = $timeout2xxSecs;
 
         return $obj;
     }

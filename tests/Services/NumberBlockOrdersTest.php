@@ -37,7 +37,7 @@ final class NumberBlockOrdersTest extends TestCase
         }
 
         $result = $this->client->numberBlockOrders->create([
-            'range' => 10, 'starting_number' => '+19705555000',
+            'range' => 10, 'startingNumber' => '+19705555000',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -53,10 +53,10 @@ final class NumberBlockOrdersTest extends TestCase
 
         $result = $this->client->numberBlockOrders->create([
             'range' => 10,
-            'starting_number' => '+19705555000',
-            'connection_id' => '346789098765567',
-            'customer_reference' => 'MY REF 001',
-            'messaging_profile_id' => 'abc85f64-5717-4562-b3fc-2c9600',
+            'startingNumber' => '+19705555000',
+            'connectionID' => '346789098765567',
+            'customerReference' => 'MY REF 001',
+            'messagingProfileID' => 'abc85f64-5717-4562-b3fc-2c9600',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

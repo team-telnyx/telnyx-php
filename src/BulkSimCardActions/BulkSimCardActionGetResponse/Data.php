@@ -14,12 +14,12 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   action_type?: value-of<ActionType>|null,
- *   created_at?: string|null,
- *   record_type?: string|null,
+ *   actionType?: value-of<ActionType>|null,
+ *   createdAt?: string|null,
+ *   recordType?: string|null,
  *   settings?: array<string,mixed>|null,
- *   sim_card_actions_summary?: list<SimCardActionsSummary>|null,
- *   updated_at?: string|null,
+ *   simCardActionsSummary?: list<SimCardActionsSummary>|null,
+ *   updatedAt?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -39,19 +39,19 @@ final class Data implements BaseModel
      * <li><code>bulk_set_public_ips</code> - set a public IP for each specified SIM card.</li>
      * </ul>.
      *
-     * @var value-of<ActionType>|null $action_type
+     * @var value-of<ActionType>|null $actionType
      */
-    #[Optional(enum: ActionType::class)]
-    public ?string $action_type;
+    #[Optional('action_type', enum: ActionType::class)]
+    public ?string $actionType;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Optional]
-    public ?string $created_at;
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * A JSON object representation of the bulk action payload.
@@ -61,15 +61,15 @@ final class Data implements BaseModel
     #[Optional(map: 'mixed')]
     public ?array $settings;
 
-    /** @var list<SimCardActionsSummary>|null $sim_card_actions_summary */
-    #[Optional(list: SimCardActionsSummary::class)]
-    public ?array $sim_card_actions_summary;
+    /** @var list<SimCardActionsSummary>|null $simCardActionsSummary */
+    #[Optional('sim_card_actions_summary', list: SimCardActionsSummary::class)]
+    public ?array $simCardActionsSummary;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Optional]
-    public ?string $updated_at;
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     public function __construct()
     {
@@ -81,30 +81,30 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ActionType|value-of<ActionType> $action_type
+     * @param ActionType|value-of<ActionType> $actionType
      * @param array<string,mixed> $settings
      * @param list<SimCardActionsSummary|array{
      *   count?: int|null, status?: value-of<Status>|null
-     * }> $sim_card_actions_summary
+     * }> $simCardActionsSummary
      */
     public static function with(
         ?string $id = null,
-        ActionType|string|null $action_type = null,
-        ?string $created_at = null,
-        ?string $record_type = null,
+        ActionType|string|null $actionType = null,
+        ?string $createdAt = null,
+        ?string $recordType = null,
         ?array $settings = null,
-        ?array $sim_card_actions_summary = null,
-        ?string $updated_at = null,
+        ?array $simCardActionsSummary = null,
+        ?string $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $action_type && $obj['action_type'] = $action_type;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $actionType && $obj['actionType'] = $actionType;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $recordType && $obj['recordType'] = $recordType;
         null !== $settings && $obj['settings'] = $settings;
-        null !== $sim_card_actions_summary && $obj['sim_card_actions_summary'] = $sim_card_actions_summary;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $simCardActionsSummary && $obj['simCardActionsSummary'] = $simCardActionsSummary;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class Data implements BaseModel
     public function withActionType(ActionType|string $actionType): self
     {
         $obj = clone $this;
-        $obj['action_type'] = $actionType;
+        $obj['actionType'] = $actionType;
 
         return $obj;
     }
@@ -142,7 +142,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -150,7 +150,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -177,7 +177,7 @@ final class Data implements BaseModel
         array $simCardActionsSummary
     ): self {
         $obj = clone $this;
-        $obj['sim_card_actions_summary'] = $simCardActionsSummary;
+        $obj['simCardActionsSummary'] = $simCardActionsSummary;
 
         return $obj;
     }
@@ -188,7 +188,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

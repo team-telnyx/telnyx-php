@@ -13,8 +13,8 @@ use Telnyx\Messages\MessageGetResponse\Data\InboundMessagePayload\Cc\Status;
 /**
  * @phpstan-type CcShape = array{
  *   carrier?: string|null,
- *   line_type?: value-of<LineType>|null,
- *   phone_number?: string|null,
+ *   lineType?: value-of<LineType>|null,
+ *   phoneNumber?: string|null,
  *   status?: value-of<Status>|null,
  * }
  */
@@ -32,16 +32,16 @@ final class Cc implements BaseModel
     /**
      * The line-type of the receiver.
      *
-     * @var value-of<LineType>|null $line_type
+     * @var value-of<LineType>|null $lineType
      */
-    #[Optional(enum: LineType::class)]
-    public ?string $line_type;
+    #[Optional('line_type', enum: LineType::class)]
+    public ?string $lineType;
 
     /**
      * Receiving address (+E.164 formatted phone number or short code).
      */
-    #[Optional]
-    public ?string $phone_number;
+    #[Optional('phone_number')]
+    public ?string $phoneNumber;
 
     /** @var value-of<Status>|null $status */
     #[Optional(enum: Status::class)]
@@ -57,20 +57,20 @@ final class Cc implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param LineType|value-of<LineType> $line_type
+     * @param LineType|value-of<LineType> $lineType
      * @param Status|value-of<Status> $status
      */
     public static function with(
         ?string $carrier = null,
-        LineType|string|null $line_type = null,
-        ?string $phone_number = null,
+        LineType|string|null $lineType = null,
+        ?string $phoneNumber = null,
         Status|string|null $status = null,
     ): self {
         $obj = new self;
 
         null !== $carrier && $obj['carrier'] = $carrier;
-        null !== $line_type && $obj['line_type'] = $line_type;
-        null !== $phone_number && $obj['phone_number'] = $phone_number;
+        null !== $lineType && $obj['lineType'] = $lineType;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -95,7 +95,7 @@ final class Cc implements BaseModel
     public function withLineType(LineType|string $lineType): self
     {
         $obj = clone $this;
-        $obj['line_type'] = $lineType;
+        $obj['lineType'] = $lineType;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class Cc implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }

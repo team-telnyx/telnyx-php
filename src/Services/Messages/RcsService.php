@@ -7,6 +7,7 @@ namespace Telnyx\Services\Messages;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Messages\Rcs\RcGenerateDeeplinkParams;
 use Telnyx\Messages\Rcs\RcGenerateDeeplinkResponse;
 use Telnyx\RequestOptions;
@@ -25,7 +26,7 @@ final class RcsService implements RcsContract
      * Generate a deeplink URL that can be used to start an RCS conversation with a specific agent.
      *
      * @param array{
-     *   body?: string, phone_number?: string
+     *   body?: string, phoneNumber?: string
      * }|RcGenerateDeeplinkParams $params
      *
      * @throws APIException
@@ -44,7 +45,10 @@ final class RcsService implements RcsContract
         $response = $this->client->request(
             method: 'get',
             path: ['messages/rcs/deeplinks/%1$s', $agentID],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['phoneNumber' => 'phone_number']
+            ),
             options: $options,
             convert: RcGenerateDeeplinkResponse::class,
         );

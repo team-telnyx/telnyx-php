@@ -10,9 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type RegulatoryRequirementShape = array{
- *   field_type?: string|null,
- *   record_type?: string|null,
- *   requirement_id?: string|null,
+ *   fieldType?: string|null, recordType?: string|null, requirementID?: string|null
  * }
  */
 final class RegulatoryRequirement implements BaseModel
@@ -20,14 +18,14 @@ final class RegulatoryRequirement implements BaseModel
     /** @use SdkModel<RegulatoryRequirementShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?string $field_type;
+    #[Optional('field_type')]
+    public ?string $fieldType;
 
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
-    #[Optional]
-    public ?string $requirement_id;
+    #[Optional('requirement_id')]
+    public ?string $requirementID;
 
     public function __construct()
     {
@@ -40,15 +38,15 @@ final class RegulatoryRequirement implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $field_type = null,
-        ?string $record_type = null,
-        ?string $requirement_id = null,
+        ?string $fieldType = null,
+        ?string $recordType = null,
+        ?string $requirementID = null,
     ): self {
         $obj = new self;
 
-        null !== $field_type && $obj['field_type'] = $field_type;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $requirement_id && $obj['requirement_id'] = $requirement_id;
+        null !== $fieldType && $obj['fieldType'] = $fieldType;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $requirementID && $obj['requirementID'] = $requirementID;
 
         return $obj;
     }
@@ -56,7 +54,7 @@ final class RegulatoryRequirement implements BaseModel
     public function withFieldType(string $fieldType): self
     {
         $obj = clone $this;
-        $obj['field_type'] = $fieldType;
+        $obj['fieldType'] = $fieldType;
 
         return $obj;
     }
@@ -64,7 +62,7 @@ final class RegulatoryRequirement implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -72,7 +70,7 @@ final class RegulatoryRequirement implements BaseModel
     public function withRequirementID(string $requirementID): self
     {
         $obj = clone $this;
-        $obj['requirement_id'] = $requirementID;
+        $obj['requirementID'] = $requirementID;
 
         return $obj;
     }

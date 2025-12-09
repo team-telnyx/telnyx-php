@@ -18,11 +18,11 @@ use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams\ProductBreakdow
  * @see Telnyx\Services\Reports\CdrUsageReportsService::fetchSync()
  *
  * @phpstan-type CdrUsageReportFetchSyncParamsShape = array{
- *   aggregation_type: AggregationType|value-of<AggregationType>,
- *   product_breakdown: ProductBreakdown|value-of<ProductBreakdown>,
+ *   aggregationType: AggregationType|value-of<AggregationType>,
+ *   productBreakdown: ProductBreakdown|value-of<ProductBreakdown>,
  *   connections?: list<float>,
- *   end_date?: \DateTimeInterface,
- *   start_date?: \DateTimeInterface,
+ *   endDate?: \DateTimeInterface,
+ *   startDate?: \DateTimeInterface,
  * }
  */
 final class CdrUsageReportFetchSyncParams implements BaseModel
@@ -31,32 +31,30 @@ final class CdrUsageReportFetchSyncParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var value-of<AggregationType> $aggregation_type */
+    /** @var value-of<AggregationType> $aggregationType */
     #[Required(enum: AggregationType::class)]
-    public string $aggregation_type;
+    public string $aggregationType;
 
-    /** @var value-of<ProductBreakdown> $product_breakdown */
+    /** @var value-of<ProductBreakdown> $productBreakdown */
     #[Required(enum: ProductBreakdown::class)]
-    public string $product_breakdown;
+    public string $productBreakdown;
 
     /** @var list<float>|null $connections */
     #[Optional(list: 'float')]
     public ?array $connections;
 
     #[Optional]
-    public ?\DateTimeInterface $end_date;
+    public ?\DateTimeInterface $endDate;
 
     #[Optional]
-    public ?\DateTimeInterface $start_date;
+    public ?\DateTimeInterface $startDate;
 
     /**
      * `new CdrUsageReportFetchSyncParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * CdrUsageReportFetchSyncParams::with(
-     *   aggregation_type: ..., product_breakdown: ...
-     * )
+     * CdrUsageReportFetchSyncParams::with(aggregationType: ..., productBreakdown: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -77,25 +75,25 @@ final class CdrUsageReportFetchSyncParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AggregationType|value-of<AggregationType> $aggregation_type
-     * @param ProductBreakdown|value-of<ProductBreakdown> $product_breakdown
+     * @param AggregationType|value-of<AggregationType> $aggregationType
+     * @param ProductBreakdown|value-of<ProductBreakdown> $productBreakdown
      * @param list<float> $connections
      */
     public static function with(
-        AggregationType|string $aggregation_type,
-        ProductBreakdown|string $product_breakdown,
+        AggregationType|string $aggregationType,
+        ProductBreakdown|string $productBreakdown,
         ?array $connections = null,
-        ?\DateTimeInterface $end_date = null,
-        ?\DateTimeInterface $start_date = null,
+        ?\DateTimeInterface $endDate = null,
+        ?\DateTimeInterface $startDate = null,
     ): self {
         $obj = new self;
 
-        $obj['aggregation_type'] = $aggregation_type;
-        $obj['product_breakdown'] = $product_breakdown;
+        $obj['aggregationType'] = $aggregationType;
+        $obj['productBreakdown'] = $productBreakdown;
 
         null !== $connections && $obj['connections'] = $connections;
-        null !== $end_date && $obj['end_date'] = $end_date;
-        null !== $start_date && $obj['start_date'] = $start_date;
+        null !== $endDate && $obj['endDate'] = $endDate;
+        null !== $startDate && $obj['startDate'] = $startDate;
 
         return $obj;
     }
@@ -107,7 +105,7 @@ final class CdrUsageReportFetchSyncParams implements BaseModel
         AggregationType|string $aggregationType
     ): self {
         $obj = clone $this;
-        $obj['aggregation_type'] = $aggregationType;
+        $obj['aggregationType'] = $aggregationType;
 
         return $obj;
     }
@@ -119,7 +117,7 @@ final class CdrUsageReportFetchSyncParams implements BaseModel
         ProductBreakdown|string $productBreakdown
     ): self {
         $obj = clone $this;
-        $obj['product_breakdown'] = $productBreakdown;
+        $obj['productBreakdown'] = $productBreakdown;
 
         return $obj;
     }
@@ -138,7 +136,7 @@ final class CdrUsageReportFetchSyncParams implements BaseModel
     public function withEndDate(\DateTimeInterface $endDate): self
     {
         $obj = clone $this;
-        $obj['end_date'] = $endDate;
+        $obj['endDate'] = $endDate;
 
         return $obj;
     }
@@ -146,7 +144,7 @@ final class CdrUsageReportFetchSyncParams implements BaseModel
     public function withStartDate(\DateTimeInterface $startDate): self
     {
         $obj = clone $this;
-        $obj['start_date'] = $startDate;
+        $obj['startDate'] = $startDate;
 
         return $obj;
     }

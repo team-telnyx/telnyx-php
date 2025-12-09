@@ -11,10 +11,10 @@ use Telnyx\PortingOrders\PortingOrderActivationSettings\ActivationStatus;
 
 /**
  * @phpstan-type PortingOrderActivationSettingsShape = array{
- *   activation_status?: value-of<ActivationStatus>|null,
- *   fast_port_eligible?: bool|null,
- *   foc_datetime_actual?: \DateTimeInterface|null,
- *   foc_datetime_requested?: \DateTimeInterface|null,
+ *   activationStatus?: value-of<ActivationStatus>|null,
+ *   fastPortEligible?: bool|null,
+ *   focDatetimeActual?: \DateTimeInterface|null,
+ *   focDatetimeRequested?: \DateTimeInterface|null,
  * }
  */
 final class PortingOrderActivationSettings implements BaseModel
@@ -25,28 +25,32 @@ final class PortingOrderActivationSettings implements BaseModel
     /**
      * Activation status.
      *
-     * @var value-of<ActivationStatus>|null $activation_status
+     * @var value-of<ActivationStatus>|null $activationStatus
      */
-    #[Optional(enum: ActivationStatus::class, nullable: true)]
-    public ?string $activation_status;
+    #[Optional(
+        'activation_status',
+        enum: ActivationStatus::class,
+        nullable: true
+    )]
+    public ?string $activationStatus;
 
     /**
      * Indicates whether this porting order is eligible for FastPort.
      */
-    #[Optional]
-    public ?bool $fast_port_eligible;
+    #[Optional('fast_port_eligible')]
+    public ?bool $fastPortEligible;
 
     /**
      * ISO 8601 formatted Date/Time of the FOC date.
      */
-    #[Optional(nullable: true)]
-    public ?\DateTimeInterface $foc_datetime_actual;
+    #[Optional('foc_datetime_actual', nullable: true)]
+    public ?\DateTimeInterface $focDatetimeActual;
 
     /**
      * ISO 8601 formatted Date/Time requested for the FOC date.
      */
-    #[Optional(nullable: true)]
-    public ?\DateTimeInterface $foc_datetime_requested;
+    #[Optional('foc_datetime_requested', nullable: true)]
+    public ?\DateTimeInterface $focDatetimeRequested;
 
     public function __construct()
     {
@@ -58,20 +62,20 @@ final class PortingOrderActivationSettings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ActivationStatus|value-of<ActivationStatus>|null $activation_status
+     * @param ActivationStatus|value-of<ActivationStatus>|null $activationStatus
      */
     public static function with(
-        ActivationStatus|string|null $activation_status = null,
-        ?bool $fast_port_eligible = null,
-        ?\DateTimeInterface $foc_datetime_actual = null,
-        ?\DateTimeInterface $foc_datetime_requested = null,
+        ActivationStatus|string|null $activationStatus = null,
+        ?bool $fastPortEligible = null,
+        ?\DateTimeInterface $focDatetimeActual = null,
+        ?\DateTimeInterface $focDatetimeRequested = null,
     ): self {
         $obj = new self;
 
-        null !== $activation_status && $obj['activation_status'] = $activation_status;
-        null !== $fast_port_eligible && $obj['fast_port_eligible'] = $fast_port_eligible;
-        null !== $foc_datetime_actual && $obj['foc_datetime_actual'] = $foc_datetime_actual;
-        null !== $foc_datetime_requested && $obj['foc_datetime_requested'] = $foc_datetime_requested;
+        null !== $activationStatus && $obj['activationStatus'] = $activationStatus;
+        null !== $fastPortEligible && $obj['fastPortEligible'] = $fastPortEligible;
+        null !== $focDatetimeActual && $obj['focDatetimeActual'] = $focDatetimeActual;
+        null !== $focDatetimeRequested && $obj['focDatetimeRequested'] = $focDatetimeRequested;
 
         return $obj;
     }
@@ -85,7 +89,7 @@ final class PortingOrderActivationSettings implements BaseModel
         ActivationStatus|string|null $activationStatus
     ): self {
         $obj = clone $this;
-        $obj['activation_status'] = $activationStatus;
+        $obj['activationStatus'] = $activationStatus;
 
         return $obj;
     }
@@ -96,7 +100,7 @@ final class PortingOrderActivationSettings implements BaseModel
     public function withFastPortEligible(bool $fastPortEligible): self
     {
         $obj = clone $this;
-        $obj['fast_port_eligible'] = $fastPortEligible;
+        $obj['fastPortEligible'] = $fastPortEligible;
 
         return $obj;
     }
@@ -108,7 +112,7 @@ final class PortingOrderActivationSettings implements BaseModel
         ?\DateTimeInterface $focDatetimeActual
     ): self {
         $obj = clone $this;
-        $obj['foc_datetime_actual'] = $focDatetimeActual;
+        $obj['focDatetimeActual'] = $focDatetimeActual;
 
         return $obj;
     }
@@ -120,7 +124,7 @@ final class PortingOrderActivationSettings implements BaseModel
         ?\DateTimeInterface $focDatetimeRequested
     ): self {
         $obj = clone $this;
-        $obj['foc_datetime_requested'] = $focDatetimeRequested;
+        $obj['focDatetimeRequested'] = $focDatetimeRequested;
 
         return $obj;
     }

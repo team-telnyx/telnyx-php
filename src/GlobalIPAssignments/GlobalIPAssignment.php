@@ -12,15 +12,15 @@ use Telnyx\Networks\InterfaceStatus;
 /**
  * @phpstan-type GlobalIPAssignmentShape = array{
  *   id?: string|null,
- *   created_at?: string|null,
- *   record_type?: string|null,
- *   updated_at?: string|null,
- *   global_ip_id?: string|null,
- *   is_announced?: bool|null,
- *   is_connected?: bool|null,
- *   is_in_maintenance?: bool|null,
+ *   createdAt?: string|null,
+ *   recordType?: string|null,
+ *   updatedAt?: string|null,
+ *   globalIPID?: string|null,
+ *   isAnnounced?: bool|null,
+ *   isConnected?: bool|null,
+ *   isInMaintenance?: bool|null,
  *   status?: value-of<InterfaceStatus>|null,
- *   wireguard_peer_id?: string|null,
+ *   wireguardPeerID?: string|null,
  * }
  */
 final class GlobalIPAssignment implements BaseModel
@@ -37,44 +37,44 @@ final class GlobalIPAssignment implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Optional]
-    public ?string $created_at;
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Optional]
-    public ?string $updated_at;
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     /**
      * Global IP ID.
      */
-    #[Optional]
-    public ?string $global_ip_id;
+    #[Optional('global_ip_id')]
+    public ?string $globalIPID;
 
     /**
      * Status of BGP announcement.
      */
-    #[Optional]
-    public ?bool $is_announced;
+    #[Optional('is_announced')]
+    public ?bool $isAnnounced;
 
     /**
      * Wireguard peer is connected.
      */
-    #[Optional]
-    public ?bool $is_connected;
+    #[Optional('is_connected')]
+    public ?bool $isConnected;
 
     /**
      * Enable/disable BGP announcement.
      */
-    #[Optional]
-    public ?bool $is_in_maintenance;
+    #[Optional('is_in_maintenance')]
+    public ?bool $isInMaintenance;
 
     /**
      * The current status of the interface deployment.
@@ -87,8 +87,8 @@ final class GlobalIPAssignment implements BaseModel
     /**
      * Wireguard peer ID.
      */
-    #[Optional]
-    public ?string $wireguard_peer_id;
+    #[Optional('wireguard_peer_id')]
+    public ?string $wireguardPeerID;
 
     public function __construct()
     {
@@ -104,28 +104,28 @@ final class GlobalIPAssignment implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $created_at = null,
-        ?string $record_type = null,
-        ?string $updated_at = null,
-        ?string $global_ip_id = null,
-        ?bool $is_announced = null,
-        ?bool $is_connected = null,
-        ?bool $is_in_maintenance = null,
+        ?string $createdAt = null,
+        ?string $recordType = null,
+        ?string $updatedAt = null,
+        ?string $globalIPID = null,
+        ?bool $isAnnounced = null,
+        ?bool $isConnected = null,
+        ?bool $isInMaintenance = null,
         InterfaceStatus|string|null $status = null,
-        ?string $wireguard_peer_id = null,
+        ?string $wireguardPeerID = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
-        null !== $global_ip_id && $obj['global_ip_id'] = $global_ip_id;
-        null !== $is_announced && $obj['is_announced'] = $is_announced;
-        null !== $is_connected && $obj['is_connected'] = $is_connected;
-        null !== $is_in_maintenance && $obj['is_in_maintenance'] = $is_in_maintenance;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $globalIPID && $obj['globalIPID'] = $globalIPID;
+        null !== $isAnnounced && $obj['isAnnounced'] = $isAnnounced;
+        null !== $isConnected && $obj['isConnected'] = $isConnected;
+        null !== $isInMaintenance && $obj['isInMaintenance'] = $isInMaintenance;
         null !== $status && $obj['status'] = $status;
-        null !== $wireguard_peer_id && $obj['wireguard_peer_id'] = $wireguard_peer_id;
+        null !== $wireguardPeerID && $obj['wireguardPeerID'] = $wireguardPeerID;
 
         return $obj;
     }
@@ -147,7 +147,7 @@ final class GlobalIPAssignment implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -158,7 +158,7 @@ final class GlobalIPAssignment implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -169,7 +169,7 @@ final class GlobalIPAssignment implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -177,10 +177,10 @@ final class GlobalIPAssignment implements BaseModel
     /**
      * Global IP ID.
      */
-    public function withGlobalIPID(string $globalIPID): self
+    public function withGlobalIpid(string $globalIPID): self
     {
         $obj = clone $this;
-        $obj['global_ip_id'] = $globalIPID;
+        $obj['globalIPID'] = $globalIPID;
 
         return $obj;
     }
@@ -191,7 +191,7 @@ final class GlobalIPAssignment implements BaseModel
     public function withIsAnnounced(bool $isAnnounced): self
     {
         $obj = clone $this;
-        $obj['is_announced'] = $isAnnounced;
+        $obj['isAnnounced'] = $isAnnounced;
 
         return $obj;
     }
@@ -202,7 +202,7 @@ final class GlobalIPAssignment implements BaseModel
     public function withIsConnected(bool $isConnected): self
     {
         $obj = clone $this;
-        $obj['is_connected'] = $isConnected;
+        $obj['isConnected'] = $isConnected;
 
         return $obj;
     }
@@ -213,7 +213,7 @@ final class GlobalIPAssignment implements BaseModel
     public function withIsInMaintenance(bool $isInMaintenance): self
     {
         $obj = clone $this;
-        $obj['is_in_maintenance'] = $isInMaintenance;
+        $obj['isInMaintenance'] = $isInMaintenance;
 
         return $obj;
     }
@@ -237,7 +237,7 @@ final class GlobalIPAssignment implements BaseModel
     public function withWireguardPeerID(string $wireguardPeerID): self
     {
         $obj = clone $this;
-        $obj['wireguard_peer_id'] = $wireguardPeerID;
+        $obj['wireguardPeerID'] = $wireguardPeerID;
 
         return $obj;
     }

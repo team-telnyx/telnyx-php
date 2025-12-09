@@ -53,7 +53,7 @@ final class OAuthTest extends TestCase
         }
 
         $result = $this->client->oauth->grants([
-            'allowed' => true, 'consent_token' => 'consent_token',
+            'allowed' => true, 'consentToken' => 'consent_token',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -68,7 +68,7 @@ final class OAuthTest extends TestCase
         }
 
         $result = $this->client->oauth->grants([
-            'allowed' => true, 'consent_token' => 'consent_token',
+            'allowed' => true, 'consentToken' => 'consent_token',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -122,9 +122,9 @@ final class OAuthTest extends TestCase
         }
 
         $result = $this->client->oauth->retrieveAuthorize([
-            'client_id' => 'client_id',
-            'redirect_uri' => 'https://example.com',
-            'response_type' => 'code',
+            'clientID' => 'client_id',
+            'redirectUri' => 'https://example.com',
+            'responseType' => 'code',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -139,11 +139,11 @@ final class OAuthTest extends TestCase
         }
 
         $result = $this->client->oauth->retrieveAuthorize([
-            'client_id' => 'client_id',
-            'redirect_uri' => 'https://example.com',
-            'response_type' => 'code',
-            'code_challenge' => 'code_challenge',
-            'code_challenge_method' => 'plain',
+            'clientID' => 'client_id',
+            'redirectUri' => 'https://example.com',
+            'responseType' => 'code',
+            'codeChallenge' => 'code_challenge',
+            'codeChallengeMethod' => 'plain',
             'scope' => 'scope',
             'state' => 'state',
         ]);
@@ -173,7 +173,7 @@ final class OAuthTest extends TestCase
         }
 
         $result = $this->client->oauth->token([
-            'grant_type' => 'client_credentials',
+            'grantType' => 'client_credentials',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -188,13 +188,13 @@ final class OAuthTest extends TestCase
         }
 
         $result = $this->client->oauth->token([
-            'grant_type' => 'client_credentials',
-            'client_id' => 'client_id',
-            'client_secret' => 'client_secret',
+            'grantType' => 'client_credentials',
+            'clientID' => 'client_id',
+            'clientSecret' => 'client_secret',
             'code' => 'code',
-            'code_verifier' => 'code_verifier',
-            'redirect_uri' => 'https://example.com',
-            'refresh_token' => 'refresh_token',
+            'codeVerifier' => 'code_verifier',
+            'redirectUri' => 'https://example.com',
+            'refreshToken' => 'refresh_token',
             'scope' => 'admin',
         ]);
 

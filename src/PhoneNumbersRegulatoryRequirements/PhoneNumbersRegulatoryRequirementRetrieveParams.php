@@ -16,7 +16,7 @@ use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementR
  * @see Telnyx\Services\PhoneNumbersRegulatoryRequirementsService::retrieve()
  *
  * @phpstan-type PhoneNumbersRegulatoryRequirementRetrieveParamsShape = array{
- *   filter?: Filter|array{phone_number?: string|null}
+ *   filter?: Filter|array{phoneNumber?: string|null}
  * }
  */
 final class PhoneNumbersRegulatoryRequirementRetrieveParams implements BaseModel
@@ -41,7 +41,7 @@ final class PhoneNumbersRegulatoryRequirementRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{phone_number?: string|null} $filter
+     * @param Filter|array{phoneNumber?: string|null} $filter
      */
     public static function with(Filter|array|null $filter = null): self
     {
@@ -55,7 +55,7 @@ final class PhoneNumbersRegulatoryRequirementRetrieveParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[phone_number].
      *
-     * @param Filter|array{phone_number?: string|null} $filter
+     * @param Filter|array{phoneNumber?: string|null} $filter
      */
     public function withFilter(Filter|array $filter): self
     {

@@ -58,11 +58,11 @@ final class ActionsService implements ActionsContract
      * Validates an address for emergency services.
      *
      * @param array{
-     *   country_code: string,
-     *   postal_code: string,
-     *   street_address: string,
-     *   administrative_area?: string,
-     *   extended_address?: string,
+     *   countryCode: string,
+     *   postalCode: string,
+     *   streetAddress: string,
+     *   administrativeArea?: string,
+     *   extendedAddress?: string,
      *   locality?: string,
      * }|ActionValidateParams $params
      *

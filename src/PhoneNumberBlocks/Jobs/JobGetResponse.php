@@ -35,14 +35,14 @@ final class JobGetResponse implements BaseModel
      *
      * @param Job|array{
      *   id?: string|null,
-     *   created_at?: string|null,
+     *   createdAt?: string|null,
      *   etc?: \DateTimeInterface|null,
-     *   failed_operations?: list<FailedOperation>|null,
-     *   record_type?: string|null,
+     *   failedOperations?: list<FailedOperation>|null,
+     *   recordType?: string|null,
      *   status?: value-of<Status>|null,
-     *   successful_operations?: list<SuccessfulOperation>|null,
+     *   successfulOperations?: list<SuccessfulOperation>|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public static function with(Job|array|null $data = null): self
@@ -57,14 +57,14 @@ final class JobGetResponse implements BaseModel
     /**
      * @param Job|array{
      *   id?: string|null,
-     *   created_at?: string|null,
+     *   createdAt?: string|null,
      *   etc?: \DateTimeInterface|null,
-     *   failed_operations?: list<FailedOperation>|null,
-     *   record_type?: string|null,
+     *   failedOperations?: list<FailedOperation>|null,
+     *   recordType?: string|null,
      *   status?: value-of<Status>|null,
-     *   successful_operations?: list<SuccessfulOperation>|null,
+     *   successfulOperations?: list<SuccessfulOperation>|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public function withData(Job|array $data): self

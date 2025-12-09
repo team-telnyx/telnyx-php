@@ -22,11 +22,11 @@ use Telnyx\Rooms\Sessions\SessionList1Params\Page;
  * @phpstan-type SessionList1ParamsShape = array{
  *   filter?: Filter|array{
  *     active?: bool|null,
- *     date_created_at?: DateCreatedAt|null,
- *     date_ended_at?: DateEndedAt|null,
- *     date_updated_at?: DateUpdatedAt|null,
+ *     dateCreatedAt?: DateCreatedAt|null,
+ *     dateEndedAt?: DateEndedAt|null,
+ *     dateUpdatedAt?: DateUpdatedAt|null,
  *   },
- *   include_participants?: bool,
+ *   includeParticipants?: bool,
  *   page?: Page|array{number?: int|null, size?: int|null},
  * }
  */
@@ -46,7 +46,7 @@ final class SessionList1Params implements BaseModel
      * To decide if room participants should be included in the response.
      */
     #[Optional]
-    public ?bool $include_participants;
+    public ?bool $includeParticipants;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
@@ -66,21 +66,21 @@ final class SessionList1Params implements BaseModel
      *
      * @param Filter|array{
      *   active?: bool|null,
-     *   date_created_at?: DateCreatedAt|null,
-     *   date_ended_at?: DateEndedAt|null,
-     *   date_updated_at?: DateUpdatedAt|null,
+     *   dateCreatedAt?: DateCreatedAt|null,
+     *   dateEndedAt?: DateEndedAt|null,
+     *   dateUpdatedAt?: DateUpdatedAt|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      */
     public static function with(
         Filter|array|null $filter = null,
-        ?bool $include_participants = null,
+        ?bool $includeParticipants = null,
         Page|array|null $page = null,
     ): self {
         $obj = new self;
 
         null !== $filter && $obj['filter'] = $filter;
-        null !== $include_participants && $obj['include_participants'] = $include_participants;
+        null !== $includeParticipants && $obj['includeParticipants'] = $includeParticipants;
         null !== $page && $obj['page'] = $page;
 
         return $obj;
@@ -91,9 +91,9 @@ final class SessionList1Params implements BaseModel
      *
      * @param Filter|array{
      *   active?: bool|null,
-     *   date_created_at?: DateCreatedAt|null,
-     *   date_ended_at?: DateEndedAt|null,
-     *   date_updated_at?: DateUpdatedAt|null,
+     *   dateCreatedAt?: DateCreatedAt|null,
+     *   dateEndedAt?: DateEndedAt|null,
+     *   dateUpdatedAt?: DateUpdatedAt|null,
      * } $filter
      */
     public function withFilter(Filter|array $filter): self
@@ -110,7 +110,7 @@ final class SessionList1Params implements BaseModel
     public function withIncludeParticipants(bool $includeParticipants): self
     {
         $obj = clone $this;
-        $obj['include_participants'] = $includeParticipants;
+        $obj['includeParticipants'] = $includeParticipants;
 
         return $obj;
     }

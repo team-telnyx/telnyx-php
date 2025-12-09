@@ -13,17 +13,17 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type MdrUsageReportResponseLegacyShape = array{
  *   id?: string|null,
- *   aggregation_type?: int|null,
+ *   aggregationType?: int|null,
  *   connections?: list<string>|null,
- *   created_at?: \DateTimeInterface|null,
- *   end_time?: \DateTimeInterface|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   endTime?: \DateTimeInterface|null,
  *   profiles?: list<string>|null,
- *   record_type?: string|null,
- *   report_url?: string|null,
+ *   recordType?: string|null,
+ *   reportURL?: string|null,
  *   result?: mixed,
- *   start_time?: \DateTimeInterface|null,
+ *   startTime?: \DateTimeInterface|null,
  *   status?: int|null,
- *   updated_at?: \DateTimeInterface|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class MdrUsageReportResponseLegacy implements BaseModel
@@ -40,18 +40,18 @@ final class MdrUsageReportResponseLegacy implements BaseModel
     /**
      * Aggregation type: No aggregation = 0, By Messaging Profile = 1, By Tags = 2.
      */
-    #[Optional]
-    public ?int $aggregation_type;
+    #[Optional('aggregation_type')]
+    public ?int $aggregationType;
 
     /** @var list<string>|null $connections */
     #[Optional(list: 'string')]
     public ?array $connections;
 
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
-    #[Optional]
-    public ?\DateTimeInterface $end_time;
+    #[Optional('end_time')]
+    public ?\DateTimeInterface $endTime;
 
     /**
      * List of messaging profile IDs.
@@ -61,17 +61,17 @@ final class MdrUsageReportResponseLegacy implements BaseModel
     #[Optional(list: 'string')]
     public ?array $profiles;
 
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
-    #[Optional]
-    public ?string $report_url;
+    #[Optional('report_url')]
+    public ?string $reportURL;
 
     #[Optional]
     public mixed $result;
 
-    #[Optional]
-    public ?\DateTimeInterface $start_time;
+    #[Optional('start_time')]
+    public ?\DateTimeInterface $startTime;
 
     /**
      * Status of the report (Pending = 1, Complete = 2, Failed = 3, Expired = 4).
@@ -79,8 +79,8 @@ final class MdrUsageReportResponseLegacy implements BaseModel
     #[Optional]
     public ?int $status;
 
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
     {
@@ -97,32 +97,32 @@ final class MdrUsageReportResponseLegacy implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?int $aggregation_type = null,
+        ?int $aggregationType = null,
         ?array $connections = null,
-        ?\DateTimeInterface $created_at = null,
-        ?\DateTimeInterface $end_time = null,
+        ?\DateTimeInterface $createdAt = null,
+        ?\DateTimeInterface $endTime = null,
         ?array $profiles = null,
-        ?string $record_type = null,
-        ?string $report_url = null,
+        ?string $recordType = null,
+        ?string $reportURL = null,
         mixed $result = null,
-        ?\DateTimeInterface $start_time = null,
+        ?\DateTimeInterface $startTime = null,
         ?int $status = null,
-        ?\DateTimeInterface $updated_at = null,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $aggregation_type && $obj['aggregation_type'] = $aggregation_type;
+        null !== $aggregationType && $obj['aggregationType'] = $aggregationType;
         null !== $connections && $obj['connections'] = $connections;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $end_time && $obj['end_time'] = $end_time;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $endTime && $obj['endTime'] = $endTime;
         null !== $profiles && $obj['profiles'] = $profiles;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $report_url && $obj['report_url'] = $report_url;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $reportURL && $obj['reportURL'] = $reportURL;
         null !== $result && $obj['result'] = $result;
-        null !== $start_time && $obj['start_time'] = $start_time;
+        null !== $startTime && $obj['startTime'] = $startTime;
         null !== $status && $obj['status'] = $status;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class MdrUsageReportResponseLegacy implements BaseModel
     public function withAggregationType(int $aggregationType): self
     {
         $obj = clone $this;
-        $obj['aggregation_type'] = $aggregationType;
+        $obj['aggregationType'] = $aggregationType;
 
         return $obj;
     }
@@ -163,7 +163,7 @@ final class MdrUsageReportResponseLegacy implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -171,7 +171,7 @@ final class MdrUsageReportResponseLegacy implements BaseModel
     public function withEndTime(\DateTimeInterface $endTime): self
     {
         $obj = clone $this;
-        $obj['end_time'] = $endTime;
+        $obj['endTime'] = $endTime;
 
         return $obj;
     }
@@ -192,7 +192,7 @@ final class MdrUsageReportResponseLegacy implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -200,7 +200,7 @@ final class MdrUsageReportResponseLegacy implements BaseModel
     public function withReportURL(string $reportURL): self
     {
         $obj = clone $this;
-        $obj['report_url'] = $reportURL;
+        $obj['reportURL'] = $reportURL;
 
         return $obj;
     }
@@ -216,7 +216,7 @@ final class MdrUsageReportResponseLegacy implements BaseModel
     public function withStartTime(\DateTimeInterface $startTime): self
     {
         $obj = clone $this;
-        $obj['start_time'] = $startTime;
+        $obj['startTime'] = $startTime;
 
         return $obj;
     }
@@ -235,7 +235,7 @@ final class MdrUsageReportResponseLegacy implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

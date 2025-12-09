@@ -18,8 +18,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type TestListParamsShape = array{
  *   destination?: string,
  *   page?: Page|array{number?: int|null, size?: int|null},
- *   telnyx_conversation_channel?: string,
- *   test_suite?: string,
+ *   telnyxConversationChannel?: string,
+ *   testSuite?: string,
  * }
  */
 final class TestListParams implements BaseModel
@@ -44,13 +44,13 @@ final class TestListParams implements BaseModel
      * Filter tests by communication channel (e.g., 'web_chat', 'sms').
      */
     #[Optional]
-    public ?string $telnyx_conversation_channel;
+    public ?string $telnyxConversationChannel;
 
     /**
      * Filter tests by test suite name.
      */
     #[Optional]
-    public ?string $test_suite;
+    public ?string $testSuite;
 
     public function __construct()
     {
@@ -67,15 +67,15 @@ final class TestListParams implements BaseModel
     public static function with(
         ?string $destination = null,
         Page|array|null $page = null,
-        ?string $telnyx_conversation_channel = null,
-        ?string $test_suite = null,
+        ?string $telnyxConversationChannel = null,
+        ?string $testSuite = null,
     ): self {
         $obj = new self;
 
         null !== $destination && $obj['destination'] = $destination;
         null !== $page && $obj['page'] = $page;
-        null !== $telnyx_conversation_channel && $obj['telnyx_conversation_channel'] = $telnyx_conversation_channel;
-        null !== $test_suite && $obj['test_suite'] = $test_suite;
+        null !== $telnyxConversationChannel && $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
+        null !== $testSuite && $obj['testSuite'] = $testSuite;
 
         return $obj;
     }
@@ -111,7 +111,7 @@ final class TestListParams implements BaseModel
         string $telnyxConversationChannel
     ): self {
         $obj = clone $this;
-        $obj['telnyx_conversation_channel'] = $telnyxConversationChannel;
+        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
 
         return $obj;
     }
@@ -122,7 +122,7 @@ final class TestListParams implements BaseModel
     public function withTestSuite(string $testSuite): self
     {
         $obj = clone $this;
-        $obj['test_suite'] = $testSuite;
+        $obj['testSuite'] = $testSuite;
 
         return $obj;
     }

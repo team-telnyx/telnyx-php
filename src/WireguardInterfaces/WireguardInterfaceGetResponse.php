@@ -34,17 +34,17 @@ final class WireguardInterfaceGetResponse implements BaseModel
      *
      * @param Data|array{
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: string|null,
+     *   createdAt?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: string|null,
      *   name?: string|null,
-     *   network_id?: string|null,
+     *   networkID?: string|null,
      *   status?: value-of<InterfaceStatus>|null,
-     *   enable_sip_trunking?: bool|null,
+     *   enableSipTrunking?: bool|null,
      *   endpoint?: string|null,
-     *   public_key?: string|null,
+     *   publicKey?: string|null,
      *   region?: Region|null,
-     *   region_code?: string|null,
+     *   regionCode?: string|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -59,17 +59,17 @@ final class WireguardInterfaceGetResponse implements BaseModel
     /**
      * @param Data|array{
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: string|null,
+     *   createdAt?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: string|null,
      *   name?: string|null,
-     *   network_id?: string|null,
+     *   networkID?: string|null,
      *   status?: value-of<InterfaceStatus>|null,
-     *   enable_sip_trunking?: bool|null,
+     *   enableSipTrunking?: bool|null,
      *   endpoint?: string|null,
-     *   public_key?: string|null,
+     *   publicKey?: string|null,
      *   region?: Region|null,
-     *   region_code?: string|null,
+     *   regionCode?: string|null,
      * } $data
      */
     public function withData(Data|array $data): self

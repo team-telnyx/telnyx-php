@@ -20,9 +20,9 @@ use Telnyx\Portouts\Events\EventListParams\Page;
  *
  * @phpstan-type EventListParamsShape = array{
  *   filter?: Filter|array{
- *     created_at?: CreatedAt|null,
- *     event_type?: value-of<EventType>|null,
- *     portout_id?: string|null,
+ *     createdAt?: CreatedAt|null,
+ *     eventType?: value-of<EventType>|null,
+ *     portoutID?: string|null,
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
  * }
@@ -56,9 +56,9 @@ final class EventListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   created_at?: CreatedAt|null,
-     *   event_type?: value-of<EventType>|null,
-     *   portout_id?: string|null,
+     *   createdAt?: CreatedAt|null,
+     *   eventType?: value-of<EventType>|null,
+     *   portoutID?: string|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      */
@@ -78,9 +78,9 @@ final class EventListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[event_type], filter[portout_id], filter[created_at].
      *
      * @param Filter|array{
-     *   created_at?: CreatedAt|null,
-     *   event_type?: value-of<EventType>|null,
-     *   portout_id?: string|null,
+     *   createdAt?: CreatedAt|null,
+     *   eventType?: value-of<EventType>|null,
+     *   portoutID?: string|null,
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

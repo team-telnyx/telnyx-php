@@ -17,9 +17,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type UserBundleListUnusedParamsShape = array{
  *   filter?: Filter|array{
- *     country_iso?: list<string>|null, resource?: list<string>|null
+ *     countryISO?: list<string>|null, resource?: list<string>|null
  *   },
- *   authorization_bearer?: string,
+ *   authorizationBearer?: string,
  * }
  */
 final class UserBundleListUnusedParams implements BaseModel
@@ -38,7 +38,7 @@ final class UserBundleListUnusedParams implements BaseModel
      * Authenticates the request with your Telnyx API V2 KEY.
      */
     #[Optional]
-    public ?string $authorization_bearer;
+    public ?string $authorizationBearer;
 
     public function __construct()
     {
@@ -51,17 +51,17 @@ final class UserBundleListUnusedParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   country_iso?: list<string>|null, resource?: list<string>|null
+     *   countryISO?: list<string>|null, resource?: list<string>|null
      * } $filter
      */
     public static function with(
         Filter|array|null $filter = null,
-        ?string $authorization_bearer = null
+        ?string $authorizationBearer = null
     ): self {
         $obj = new self;
 
         null !== $filter && $obj['filter'] = $filter;
-        null !== $authorization_bearer && $obj['authorization_bearer'] = $authorization_bearer;
+        null !== $authorizationBearer && $obj['authorizationBearer'] = $authorizationBearer;
 
         return $obj;
     }
@@ -70,7 +70,7 @@ final class UserBundleListUnusedParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Supports filtering by country_iso and resource. Examples: filter[country_iso]=US or filter[resource]=+15617819942.
      *
      * @param Filter|array{
-     *   country_iso?: list<string>|null, resource?: list<string>|null
+     *   countryISO?: list<string>|null, resource?: list<string>|null
      * } $filter
      */
     public function withFilter(Filter|array $filter): self
@@ -87,7 +87,7 @@ final class UserBundleListUnusedParams implements BaseModel
     public function withAuthorizationBearer(string $authorizationBearer): self
     {
         $obj = clone $this;
-        $obj['authorization_bearer'] = $authorizationBearer;
+        $obj['authorizationBearer'] = $authorizationBearer;
 
         return $obj;
     }

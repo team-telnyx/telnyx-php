@@ -24,14 +24,14 @@ use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Configur
  *     credentials?: string|null,
  *   }|S3ConfigurationData|array{
  *     backend: value-of<\Telnyx\CustomStorageCredentials\S3ConfigurationData\Backend>,
- *     aws_access_key_id?: string|null,
- *     aws_secret_access_key?: string|null,
+ *     awsAccessKeyID?: string|null,
+ *     awsSecretAccessKey?: string|null,
  *     bucket?: string|null,
  *     region?: string|null,
  *   }|AzureConfigurationData|array{
  *     backend: value-of<\Telnyx\CustomStorageCredentials\AzureConfigurationData\Backend>,
- *     account_key?: string|null,
- *     account_name?: string|null,
+ *     accountKey?: string|null,
+ *     accountName?: string|null,
  *     bucket?: string|null,
  *   },
  * }
@@ -82,14 +82,14 @@ final class CustomStorageCredentialUpdateParams implements BaseModel
      *   credentials?: string|null,
      * }|S3ConfigurationData|array{
      *   backend: value-of<S3ConfigurationData\Backend>,
-     *   aws_access_key_id?: string|null,
-     *   aws_secret_access_key?: string|null,
+     *   awsAccessKeyID?: string|null,
+     *   awsSecretAccessKey?: string|null,
      *   bucket?: string|null,
      *   region?: string|null,
      * }|AzureConfigurationData|array{
      *   backend: value-of<AzureConfigurationData\Backend>,
-     *   account_key?: string|null,
-     *   account_name?: string|null,
+     *   accountKey?: string|null,
+     *   accountName?: string|null,
      *   bucket?: string|null,
      * } $configuration
      */
@@ -123,14 +123,14 @@ final class CustomStorageCredentialUpdateParams implements BaseModel
      *   credentials?: string|null,
      * }|S3ConfigurationData|array{
      *   backend: value-of<S3ConfigurationData\Backend>,
-     *   aws_access_key_id?: string|null,
-     *   aws_secret_access_key?: string|null,
+     *   awsAccessKeyID?: string|null,
+     *   awsSecretAccessKey?: string|null,
      *   bucket?: string|null,
      *   region?: string|null,
      * }|AzureConfigurationData|array{
      *   backend: value-of<AzureConfigurationData\Backend>,
-     *   account_key?: string|null,
-     *   account_name?: string|null,
+     *   accountKey?: string|null,
+     *   accountName?: string|null,
      *   bucket?: string|null,
      * } $configuration
      */

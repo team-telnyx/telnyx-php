@@ -46,8 +46,8 @@ final class ConversationListResponse implements BaseModel
      *
      * @param list<Conversation|array{
      *   id: string,
-     *   created_at: \DateTimeInterface,
-     *   last_message_at: \DateTimeInterface,
+     *   createdAt: \DateTimeInterface,
+     *   lastMessageAt: \DateTimeInterface,
      *   metadata: array<string,string>,
      *   name?: string|null,
      * }> $data
@@ -64,8 +64,8 @@ final class ConversationListResponse implements BaseModel
     /**
      * @param list<Conversation|array{
      *   id: string,
-     *   created_at: \DateTimeInterface,
-     *   last_message_at: \DateTimeInterface,
+     *   createdAt: \DateTimeInterface,
+     *   lastMessageAt: \DateTimeInterface,
      *   metadata: array<string,string>,
      *   name?: string|null,
      * }> $data

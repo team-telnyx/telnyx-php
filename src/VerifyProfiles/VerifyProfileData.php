@@ -36,15 +36,15 @@ final class VerifyProfileData implements BaseModel
      * @param VerifyProfile|array{
      *   id?: string|null,
      *   call?: Call|null,
-     *   created_at?: string|null,
+     *   createdAt?: string|null,
      *   flashcall?: Flashcall|null,
      *   language?: string|null,
      *   name?: string|null,
-     *   record_type?: value-of<RecordType>|null,
+     *   recordType?: value-of<RecordType>|null,
      *   sms?: SMS|null,
-     *   updated_at?: string|null,
-     *   webhook_failover_url?: string|null,
-     *   webhook_url?: string|null,
+     *   updatedAt?: string|null,
+     *   webhookFailoverURL?: string|null,
+     *   webhookURL?: string|null,
      * } $data
      */
     public static function with(VerifyProfile|array|null $data = null): self
@@ -60,15 +60,15 @@ final class VerifyProfileData implements BaseModel
      * @param VerifyProfile|array{
      *   id?: string|null,
      *   call?: Call|null,
-     *   created_at?: string|null,
+     *   createdAt?: string|null,
      *   flashcall?: Flashcall|null,
      *   language?: string|null,
      *   name?: string|null,
-     *   record_type?: value-of<RecordType>|null,
+     *   recordType?: value-of<RecordType>|null,
      *   sms?: SMS|null,
-     *   updated_at?: string|null,
-     *   webhook_failover_url?: string|null,
-     *   webhook_url?: string|null,
+     *   updatedAt?: string|null,
+     *   webhookFailoverURL?: string|null,
+     *   webhookURL?: string|null,
      * } $data
      */
     public function withData(VerifyProfile|array $data): self

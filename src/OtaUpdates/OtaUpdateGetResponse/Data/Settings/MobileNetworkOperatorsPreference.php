@@ -10,8 +10,8 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type MobileNetworkOperatorsPreferenceShape = array{
- *   mobile_network_operator_id?: string|null,
- *   mobile_network_operator_name?: string|null,
+ *   mobileNetworkOperatorID?: string|null,
+ *   mobileNetworkOperatorName?: string|null,
  *   priority?: int|null,
  * }
  */
@@ -23,14 +23,14 @@ final class MobileNetworkOperatorsPreference implements BaseModel
     /**
      * The mobile network operator resource identification UUID.
      */
-    #[Optional]
-    public ?string $mobile_network_operator_id;
+    #[Optional('mobile_network_operator_id')]
+    public ?string $mobileNetworkOperatorID;
 
     /**
      * The mobile network operator resource name.
      */
-    #[Optional]
-    public ?string $mobile_network_operator_name;
+    #[Optional('mobile_network_operator_name')]
+    public ?string $mobileNetworkOperatorName;
 
     /**
      * It determines what is the priority of a specific network operator that should be assumed by a SIM card when connecting to a network. The highest priority is 0, the second highest is 1 and so on.
@@ -49,14 +49,14 @@ final class MobileNetworkOperatorsPreference implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $mobile_network_operator_id = null,
-        ?string $mobile_network_operator_name = null,
+        ?string $mobileNetworkOperatorID = null,
+        ?string $mobileNetworkOperatorName = null,
         ?int $priority = null,
     ): self {
         $obj = new self;
 
-        null !== $mobile_network_operator_id && $obj['mobile_network_operator_id'] = $mobile_network_operator_id;
-        null !== $mobile_network_operator_name && $obj['mobile_network_operator_name'] = $mobile_network_operator_name;
+        null !== $mobileNetworkOperatorID && $obj['mobileNetworkOperatorID'] = $mobileNetworkOperatorID;
+        null !== $mobileNetworkOperatorName && $obj['mobileNetworkOperatorName'] = $mobileNetworkOperatorName;
         null !== $priority && $obj['priority'] = $priority;
 
         return $obj;
@@ -69,7 +69,7 @@ final class MobileNetworkOperatorsPreference implements BaseModel
         string $mobileNetworkOperatorID
     ): self {
         $obj = clone $this;
-        $obj['mobile_network_operator_id'] = $mobileNetworkOperatorID;
+        $obj['mobileNetworkOperatorID'] = $mobileNetworkOperatorID;
 
         return $obj;
     }
@@ -81,7 +81,7 @@ final class MobileNetworkOperatorsPreference implements BaseModel
         string $mobileNetworkOperatorName
     ): self {
         $obj = clone $this;
-        $obj['mobile_network_operator_name'] = $mobileNetworkOperatorName;
+        $obj['mobileNetworkOperatorName'] = $mobileNetworkOperatorName;
 
         return $obj;
     }

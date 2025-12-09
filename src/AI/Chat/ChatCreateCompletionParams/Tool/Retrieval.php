@@ -52,7 +52,7 @@ final class Retrieval implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param InferenceEmbeddingBucketIDs|array{
-     *   bucket_ids: list<string>, max_num_results?: int|null
+     *   bucketIDs: list<string>, maxNumResults?: int|null
      * } $retrieval
      * @param Type|value-of<Type> $type
      */
@@ -70,7 +70,7 @@ final class Retrieval implements BaseModel
 
     /**
      * @param InferenceEmbeddingBucketIDs|array{
-     *   bucket_ids: list<string>, max_num_results?: int|null
+     *   bucketIDs: list<string>, maxNumResults?: int|null
      * } $retrieval
      */
     public function withRetrieval(

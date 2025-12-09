@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\Assistants\CanaryDeploysService::update()
  *
  * @phpstan-type CanaryDeployUpdateParamsShape = array{
- *   versions: list<VersionConfig|array{percentage: float, version_id: string}>
+ *   versions: list<VersionConfig|array{percentage: float, versionID: string}>
  * }
  */
 final class CanaryDeployUpdateParams implements BaseModel
@@ -59,9 +59,7 @@ final class CanaryDeployUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VersionConfig|array{
-     *   percentage: float, version_id: string
-     * }> $versions
+     * @param list<VersionConfig|array{percentage: float, versionID: string}> $versions
      */
     public static function with(array $versions): self
     {
@@ -75,9 +73,7 @@ final class CanaryDeployUpdateParams implements BaseModel
     /**
      * List of version configurations.
      *
-     * @param list<VersionConfig|array{
-     *   percentage: float, version_id: string
-     * }> $versions
+     * @param list<VersionConfig|array{percentage: float, versionID: string}> $versions
      */
     public function withVersions(array $versions): self
     {

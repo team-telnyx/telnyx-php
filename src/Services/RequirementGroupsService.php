@@ -32,11 +32,11 @@ final class RequirementGroupsService implements RequirementGroupsContract
      *
      * @param array{
      *   action: 'ordering'|'porting'|Action,
-     *   country_code: string,
-     *   phone_number_type: 'local'|'toll_free'|'mobile'|'national'|'shared_cost'|PhoneNumberType,
-     *   customer_reference?: string,
-     *   regulatory_requirements?: list<array{
-     *     field_value?: string, requirement_id?: string
+     *   countryCode: string,
+     *   phoneNumberType: 'local'|'toll_free'|'mobile'|'national'|'shared_cost'|PhoneNumberType,
+     *   customerReference?: string,
+     *   regulatoryRequirements?: list<array{
+     *     fieldValue?: string, requirementID?: string
      *   }>,
      * }|RequirementGroupCreateParams $params
      *
@@ -91,9 +91,9 @@ final class RequirementGroupsService implements RequirementGroupsContract
      * Update requirement values in requirement group
      *
      * @param array{
-     *   customer_reference?: string,
-     *   regulatory_requirements?: list<array{
-     *     field_value?: string, requirement_id?: string
+     *   customerReference?: string,
+     *   regulatoryRequirements?: list<array{
+     *     fieldValue?: string, requirementID?: string
      *   }>,
      * }|RequirementGroupUpdateParams $params
      *
@@ -129,9 +129,9 @@ final class RequirementGroupsService implements RequirementGroupsContract
      * @param array{
      *   filter?: array{
      *     action?: 'ordering'|'porting'|'action'|RequirementGroupListParams\Filter\Action,
-     *     country_code?: string,
-     *     customer_reference?: string,
-     *     phone_number_type?: 'local'|'toll_free'|'mobile'|'national'|'shared_cost'|RequirementGroupListParams\Filter\PhoneNumberType,
+     *     countryCode?: string,
+     *     customerReference?: string,
+     *     phoneNumberType?: 'local'|'toll_free'|'mobile'|'national'|'shared_cost'|RequirementGroupListParams\Filter\PhoneNumberType,
      *     status?: 'approved'|'unapproved'|'pending-approval'|'declined'|'expired'|Status,
      *   },
      * }|RequirementGroupListParams $params

@@ -14,18 +14,18 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type DataShape = array{
  *   id: string,
- *   call_control_id: string,
- *   call_leg_id: string,
+ *   callControlID: string,
+ *   callLegID: string,
  *   conference: Conference,
- *   created_at: string,
- *   end_conference_on_exit: bool,
+ *   createdAt: string,
+ *   endConferenceOnExit: bool,
  *   muted: bool,
- *   on_hold: bool,
- *   record_type: value-of<RecordType>,
- *   soft_end_conference_on_exit: bool,
+ *   onHold: bool,
+ *   recordType: value-of<RecordType>,
+ *   softEndConferenceOnExit: bool,
  *   status: value-of<Status>,
- *   updated_at: string,
- *   whisper_call_control_ids: list<string>,
+ *   updatedAt: string,
+ *   whisperCallControlIDs: list<string>,
  * }
  */
 final class Data implements BaseModel
@@ -42,14 +42,14 @@ final class Data implements BaseModel
     /**
      * Call Control ID associated with the partiipant of the conference.
      */
-    #[Required]
-    public string $call_control_id;
+    #[Required('call_control_id')]
+    public string $callControlID;
 
     /**
      * Uniquely identifies the call leg associated with the participant.
      */
-    #[Required]
-    public string $call_leg_id;
+    #[Required('call_leg_id')]
+    public string $callLegID;
 
     /**
      * Info about the conference that the participant is in.
@@ -60,14 +60,14 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date of when the participant was created.
      */
-    #[Required]
-    public string $created_at;
+    #[Required('created_at')]
+    public string $createdAt;
 
     /**
      * Whether the conference will end and all remaining participants be hung up after the participant leaves the conference.
      */
-    #[Required]
-    public bool $end_conference_on_exit;
+    #[Required('end_conference_on_exit')]
+    public bool $endConferenceOnExit;
 
     /**
      * Whether the participant is muted.
@@ -78,18 +78,18 @@ final class Data implements BaseModel
     /**
      * Whether the participant is put on_hold.
      */
-    #[Required]
-    public bool $on_hold;
+    #[Required('on_hold')]
+    public bool $onHold;
 
-    /** @var value-of<RecordType> $record_type */
-    #[Required(enum: RecordType::class)]
-    public string $record_type;
+    /** @var value-of<RecordType> $recordType */
+    #[Required('record_type', enum: RecordType::class)]
+    public string $recordType;
 
     /**
      * Whether the conference will end after the participant leaves the conference.
      */
-    #[Required]
-    public bool $soft_end_conference_on_exit;
+    #[Required('soft_end_conference_on_exit')]
+    public bool $softEndConferenceOnExit;
 
     /**
      * The status of the participant with respect to the lifecycle within the conference.
@@ -102,16 +102,16 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date of when the participant was last updated.
      */
-    #[Required]
-    public string $updated_at;
+    #[Required('updated_at')]
+    public string $updatedAt;
 
     /**
      * Array of unique call_control_ids the participant can whisper to..
      *
-     * @var list<string> $whisper_call_control_ids
+     * @var list<string> $whisperCallControlIDs
      */
-    #[Required(list: 'string')]
-    public array $whisper_call_control_ids;
+    #[Required('whisper_call_control_ids', list: 'string')]
+    public array $whisperCallControlIDs;
 
     /**
      * `new Data()` is missing required properties by the API.
@@ -120,18 +120,18 @@ final class Data implements BaseModel
      * ```
      * Data::with(
      *   id: ...,
-     *   call_control_id: ...,
-     *   call_leg_id: ...,
+     *   callControlID: ...,
+     *   callLegID: ...,
      *   conference: ...,
-     *   created_at: ...,
-     *   end_conference_on_exit: ...,
+     *   createdAt: ...,
+     *   endConferenceOnExit: ...,
      *   muted: ...,
-     *   on_hold: ...,
-     *   record_type: ...,
-     *   soft_end_conference_on_exit: ...,
+     *   onHold: ...,
+     *   recordType: ...,
+     *   softEndConferenceOnExit: ...,
      *   status: ...,
-     *   updated_at: ...,
-     *   whisper_call_control_ids: ...,
+     *   updatedAt: ...,
+     *   whisperCallControlIDs: ...,
      * )
      * ```
      *
@@ -165,40 +165,40 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Conference|array{id?: string|null, name?: string|null} $conference
-     * @param RecordType|value-of<RecordType> $record_type
+     * @param RecordType|value-of<RecordType> $recordType
      * @param Status|value-of<Status> $status
-     * @param list<string> $whisper_call_control_ids
+     * @param list<string> $whisperCallControlIDs
      */
     public static function with(
         string $id,
-        string $call_control_id,
-        string $call_leg_id,
+        string $callControlID,
+        string $callLegID,
         Conference|array $conference,
-        string $created_at,
-        bool $end_conference_on_exit,
+        string $createdAt,
+        bool $endConferenceOnExit,
         bool $muted,
-        bool $on_hold,
-        RecordType|string $record_type,
-        bool $soft_end_conference_on_exit,
+        bool $onHold,
+        RecordType|string $recordType,
+        bool $softEndConferenceOnExit,
         Status|string $status,
-        string $updated_at,
-        array $whisper_call_control_ids,
+        string $updatedAt,
+        array $whisperCallControlIDs,
     ): self {
         $obj = new self;
 
         $obj['id'] = $id;
-        $obj['call_control_id'] = $call_control_id;
-        $obj['call_leg_id'] = $call_leg_id;
+        $obj['callControlID'] = $callControlID;
+        $obj['callLegID'] = $callLegID;
         $obj['conference'] = $conference;
-        $obj['created_at'] = $created_at;
-        $obj['end_conference_on_exit'] = $end_conference_on_exit;
+        $obj['createdAt'] = $createdAt;
+        $obj['endConferenceOnExit'] = $endConferenceOnExit;
         $obj['muted'] = $muted;
-        $obj['on_hold'] = $on_hold;
-        $obj['record_type'] = $record_type;
-        $obj['soft_end_conference_on_exit'] = $soft_end_conference_on_exit;
+        $obj['onHold'] = $onHold;
+        $obj['recordType'] = $recordType;
+        $obj['softEndConferenceOnExit'] = $softEndConferenceOnExit;
         $obj['status'] = $status;
-        $obj['updated_at'] = $updated_at;
-        $obj['whisper_call_control_ids'] = $whisper_call_control_ids;
+        $obj['updatedAt'] = $updatedAt;
+        $obj['whisperCallControlIDs'] = $whisperCallControlIDs;
 
         return $obj;
     }
@@ -220,7 +220,7 @@ final class Data implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj['call_control_id'] = $callControlID;
+        $obj['callControlID'] = $callControlID;
 
         return $obj;
     }
@@ -231,7 +231,7 @@ final class Data implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj['call_leg_id'] = $callLegID;
+        $obj['callLegID'] = $callLegID;
 
         return $obj;
     }
@@ -255,7 +255,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -266,7 +266,7 @@ final class Data implements BaseModel
     public function withEndConferenceOnExit(bool $endConferenceOnExit): self
     {
         $obj = clone $this;
-        $obj['end_conference_on_exit'] = $endConferenceOnExit;
+        $obj['endConferenceOnExit'] = $endConferenceOnExit;
 
         return $obj;
     }
@@ -288,7 +288,7 @@ final class Data implements BaseModel
     public function withOnHold(bool $onHold): self
     {
         $obj = clone $this;
-        $obj['on_hold'] = $onHold;
+        $obj['onHold'] = $onHold;
 
         return $obj;
     }
@@ -299,7 +299,7 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -311,7 +311,7 @@ final class Data implements BaseModel
         bool $softEndConferenceOnExit
     ): self {
         $obj = clone $this;
-        $obj['soft_end_conference_on_exit'] = $softEndConferenceOnExit;
+        $obj['softEndConferenceOnExit'] = $softEndConferenceOnExit;
 
         return $obj;
     }
@@ -335,7 +335,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -349,7 +349,7 @@ final class Data implements BaseModel
         array $whisperCallControlIDs
     ): self {
         $obj = clone $this;
-        $obj['whisper_call_control_ids'] = $whisperCallControlIDs;
+        $obj['whisperCallControlIDs'] = $whisperCallControlIDs;
 
         return $obj;
     }

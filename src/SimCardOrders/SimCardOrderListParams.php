@@ -22,9 +22,9 @@ use Telnyx\SimCardOrders\SimCardOrderListParams\Page;
  *   filter?: Filter|array{
  *     address?: Address|null,
  *     cost?: Cost|null,
- *     created_at?: \DateTimeInterface|null,
+ *     createdAt?: \DateTimeInterface|null,
  *     quantity?: int|null,
- *     updated_at?: \DateTimeInterface|null,
+ *     updatedAt?: \DateTimeInterface|null,
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
  * }
@@ -60,9 +60,9 @@ final class SimCardOrderListParams implements BaseModel
      * @param Filter|array{
      *   address?: Address|null,
      *   cost?: Cost|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   quantity?: int|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      */
@@ -84,9 +84,9 @@ final class SimCardOrderListParams implements BaseModel
      * @param Filter|array{
      *   address?: Address|null,
      *   cost?: Cost|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   quantity?: int|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

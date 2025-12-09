@@ -32,12 +32,12 @@ final class GlobalIPHealthCheckGetResponse implements BaseModel
      *
      * @param Data|array{
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: string|null,
-     *   global_ip_id?: string|null,
-     *   health_check_params?: array<string,mixed>|null,
-     *   health_check_type?: string|null,
+     *   createdAt?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: string|null,
+     *   globalIPID?: string|null,
+     *   healthCheckParams?: array<string,mixed>|null,
+     *   healthCheckType?: string|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -52,12 +52,12 @@ final class GlobalIPHealthCheckGetResponse implements BaseModel
     /**
      * @param Data|array{
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: string|null,
-     *   global_ip_id?: string|null,
-     *   health_check_params?: array<string,mixed>|null,
-     *   health_check_type?: string|null,
+     *   createdAt?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: string|null,
+     *   globalIPID?: string|null,
+     *   healthCheckParams?: array<string,mixed>|null,
+     *   healthCheckType?: string|null,
      * } $data
      */
     public function withData(Data|array $data): self

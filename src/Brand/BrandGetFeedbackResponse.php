@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type BrandGetFeedbackResponseShape = array{
- *   brandId: string, category: list<Category>
+ *   brandID: string, category: list<Category>
  * }
  */
 final class BrandGetFeedbackResponse implements BaseModel
@@ -22,8 +22,8 @@ final class BrandGetFeedbackResponse implements BaseModel
     /**
      * ID of the brand being queried about.
      */
-    #[Required]
-    public string $brandId;
+    #[Required('brandId')]
+    public string $brandID;
 
     /**
      * A list of reasons why brand creation/revetting didn't go as planned.
@@ -38,7 +38,7 @@ final class BrandGetFeedbackResponse implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * BrandGetFeedbackResponse::with(brandId: ..., category: ...)
+     * BrandGetFeedbackResponse::with(brandID: ..., category: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -61,11 +61,11 @@ final class BrandGetFeedbackResponse implements BaseModel
      *   id: string, description: string, displayName: string, fields: list<string>
      * }> $category
      */
-    public static function with(string $brandId, array $category): self
+    public static function with(string $brandID, array $category): self
     {
         $obj = new self;
 
-        $obj['brandId'] = $brandId;
+        $obj['brandID'] = $brandID;
         $obj['category'] = $category;
 
         return $obj;
@@ -77,7 +77,7 @@ final class BrandGetFeedbackResponse implements BaseModel
     public function withBrandID(string $brandID): self
     {
         $obj = clone $this;
-        $obj['brandId'] = $brandID;
+        $obj['brandID'] = $brandID;
 
         return $obj;
     }

@@ -35,7 +35,7 @@ final class GlobalIPUsageGetResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   global_ip?: GlobalIP|null,
+     *   globalIP?: GlobalIP|null,
      *   received?: Received|null,
      *   timestamp?: \DateTimeInterface|null,
      *   transmitted?: Transmitted|null,
@@ -52,7 +52,7 @@ final class GlobalIPUsageGetResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   global_ip?: GlobalIP|null,
+     *   globalIP?: GlobalIP|null,
      *   received?: Received|null,
      *   timestamp?: \DateTimeInterface|null,
      *   transmitted?: Transmitted|null,

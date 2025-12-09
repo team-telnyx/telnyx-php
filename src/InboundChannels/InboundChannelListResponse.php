@@ -30,7 +30,7 @@ final class InboundChannelListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{channels?: int|null, record_type?: string|null} $data
+     * @param Data|array{channels?: int|null, recordType?: string|null} $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -42,7 +42,7 @@ final class InboundChannelListResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{channels?: int|null, record_type?: string|null} $data
+     * @param Data|array{channels?: int|null, recordType?: string|null} $data
      */
     public function withData(Data|array $data): self
     {

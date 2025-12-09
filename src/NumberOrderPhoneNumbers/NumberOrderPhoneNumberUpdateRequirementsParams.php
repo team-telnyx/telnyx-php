@@ -15,8 +15,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\NumberOrderPhoneNumbersService::updateRequirements()
  *
  * @phpstan-type NumberOrderPhoneNumberUpdateRequirementsParamsShape = array{
- *   regulatory_requirements?: list<UpdateRegulatoryRequirement|array{
- *     field_value?: string|null, requirement_id?: string|null
+ *   regulatoryRequirements?: list<UpdateRegulatoryRequirement|array{
+ *     fieldValue?: string|null, requirementID?: string|null
  *   }>,
  * }
  */
@@ -26,9 +26,12 @@ final class NumberOrderPhoneNumberUpdateRequirementsParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var list<UpdateRegulatoryRequirement>|null $regulatory_requirements */
-    #[Optional(list: UpdateRegulatoryRequirement::class)]
-    public ?array $regulatory_requirements;
+    /** @var list<UpdateRegulatoryRequirement>|null $regulatoryRequirements */
+    #[Optional(
+        'regulatory_requirements',
+        list: UpdateRegulatoryRequirement::class
+    )]
+    public ?array $regulatoryRequirements;
 
     public function __construct()
     {
@@ -41,28 +44,28 @@ final class NumberOrderPhoneNumberUpdateRequirementsParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<UpdateRegulatoryRequirement|array{
-     *   field_value?: string|null, requirement_id?: string|null
-     * }> $regulatory_requirements
+     *   fieldValue?: string|null, requirementID?: string|null
+     * }> $regulatoryRequirements
      */
-    public static function with(?array $regulatory_requirements = null): self
+    public static function with(?array $regulatoryRequirements = null): self
     {
         $obj = new self;
 
-        null !== $regulatory_requirements && $obj['regulatory_requirements'] = $regulatory_requirements;
+        null !== $regulatoryRequirements && $obj['regulatoryRequirements'] = $regulatoryRequirements;
 
         return $obj;
     }
 
     /**
      * @param list<UpdateRegulatoryRequirement|array{
-     *   field_value?: string|null, requirement_id?: string|null
+     *   fieldValue?: string|null, requirementID?: string|null
      * }> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements
     ): self {
         $obj = clone $this;
-        $obj['regulatory_requirements'] = $regulatoryRequirements;
+        $obj['regulatoryRequirements'] = $regulatoryRequirements;
 
         return $obj;
     }

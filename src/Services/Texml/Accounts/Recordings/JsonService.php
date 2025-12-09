@@ -25,7 +25,7 @@ final class JsonService implements JsonContract
      *
      * Deletes recording resource identified by recording id.
      *
-     * @param array{account_sid: string}|JsonDeleteRecordingSidJsonParams $params
+     * @param array{accountSid: string}|JsonDeleteRecordingSidJsonParams $params
      *
      * @throws APIException
      */
@@ -38,8 +38,8 @@ final class JsonService implements JsonContract
             $params,
             $requestOptions,
         );
-        $accountSid = $parsed['account_sid'];
-        unset($parsed['account_sid']);
+        $accountSid = $parsed['accountSid'];
+        unset($parsed['accountSid']);
 
         /** @var BaseResponse<mixed> */
         $response = $this->client->request(
@@ -59,7 +59,7 @@ final class JsonService implements JsonContract
      *
      * Returns recording resource identified by recording id.
      *
-     * @param array{account_sid: string}|JsonRetrieveRecordingSidJsonParams $params
+     * @param array{accountSid: string}|JsonRetrieveRecordingSidJsonParams $params
      *
      * @throws APIException
      */
@@ -72,8 +72,8 @@ final class JsonService implements JsonContract
             $params,
             $requestOptions,
         );
-        $accountSid = $parsed['account_sid'];
-        unset($parsed['account_sid']);
+        $accountSid = $parsed['accountSid'];
+        unset($parsed['accountSid']);
 
         /** @var BaseResponse<TexmlGetCallRecordingResponseBody> */
         $response = $this->client->request(

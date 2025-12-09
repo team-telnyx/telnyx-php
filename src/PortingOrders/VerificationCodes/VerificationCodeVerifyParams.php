@@ -16,8 +16,8 @@ use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyParams\Verifica
  * @see Telnyx\Services\PortingOrders\VerificationCodesService::verify()
  *
  * @phpstan-type VerificationCodeVerifyParamsShape = array{
- *   verification_codes?: list<VerificationCode|array{
- *     code?: string|null, phone_number?: string|null
+ *   verificationCodes?: list<VerificationCode|array{
+ *     code?: string|null, phoneNumber?: string|null
  *   }>,
  * }
  */
@@ -27,9 +27,9 @@ final class VerificationCodeVerifyParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var list<VerificationCode>|null $verification_codes */
-    #[Optional(list: VerificationCode::class)]
-    public ?array $verification_codes;
+    /** @var list<VerificationCode>|null $verificationCodes */
+    #[Optional('verification_codes', list: VerificationCode::class)]
+    public ?array $verificationCodes;
 
     public function __construct()
     {
@@ -42,27 +42,27 @@ final class VerificationCodeVerifyParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<VerificationCode|array{
-     *   code?: string|null, phone_number?: string|null
-     * }> $verification_codes
+     *   code?: string|null, phoneNumber?: string|null
+     * }> $verificationCodes
      */
-    public static function with(?array $verification_codes = null): self
+    public static function with(?array $verificationCodes = null): self
     {
         $obj = new self;
 
-        null !== $verification_codes && $obj['verification_codes'] = $verification_codes;
+        null !== $verificationCodes && $obj['verificationCodes'] = $verificationCodes;
 
         return $obj;
     }
 
     /**
      * @param list<VerificationCode|array{
-     *   code?: string|null, phone_number?: string|null
+     *   code?: string|null, phoneNumber?: string|null
      * }> $verificationCodes
      */
     public function withVerificationCodes(array $verificationCodes): self
     {
         $obj = clone $this;
-        $obj['verification_codes'] = $verificationCodes;
+        $obj['verificationCodes'] = $verificationCodes;
 
         return $obj;
     }

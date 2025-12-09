@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * A paginated response.
  *
  * @phpstan-type RequestListResponseShape = array{
- *   records: list<VerificationRequestStatus>, total_records: int
+ *   records: list<VerificationRequestStatus>, totalRecords: int
  * }
  */
 final class RequestListResponse implements BaseModel
@@ -31,15 +31,15 @@ final class RequestListResponse implements BaseModel
     /**
      * The total amount of records for these query parameters.
      */
-    #[Required]
-    public int $total_records;
+    #[Required('total_records')]
+    public int $totalRecords;
 
     /**
      * `new RequestListResponse()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * RequestListResponse::with(records: ..., total_records: ...)
+     * RequestListResponse::with(records: ..., totalRecords: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -95,17 +95,17 @@ final class RequestListResponse implements BaseModel
      *   reason?: string|null,
      *   termsAndConditionURL?: string|null,
      *   updatedAt?: \DateTimeInterface|null,
-     *   webhookUrl?: string|null,
+     *   webhookURL?: string|null,
      * }> $records
      */
     public static function with(
         array $records = [],
-        int $total_records = 0
+        int $totalRecords = 0
     ): self {
         $obj = new self;
 
         $obj['records'] = $records;
-        $obj['total_records'] = $total_records;
+        $obj['totalRecords'] = $totalRecords;
 
         return $obj;
     }
@@ -150,7 +150,7 @@ final class RequestListResponse implements BaseModel
      *   reason?: string|null,
      *   termsAndConditionURL?: string|null,
      *   updatedAt?: \DateTimeInterface|null,
-     *   webhookUrl?: string|null,
+     *   webhookURL?: string|null,
      * }> $records
      */
     public function withRecords(array $records): self
@@ -167,7 +167,7 @@ final class RequestListResponse implements BaseModel
     public function withTotalRecords(int $totalRecords): self
     {
         $obj = clone $this;
-        $obj['total_records'] = $totalRecords;
+        $obj['totalRecords'] = $totalRecords;
 
         return $obj;
     }

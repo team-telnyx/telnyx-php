@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type CampaignDeactivateResponseShape = array{
- *   time: float, message?: string|null, record_type?: string|null
+ *   time: float, message?: string|null, recordType?: string|null
  * }
  */
 final class CampaignDeactivateResponse implements BaseModel
@@ -25,8 +25,8 @@ final class CampaignDeactivateResponse implements BaseModel
     #[Optional]
     public ?string $message;
 
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * `new CampaignDeactivateResponse()` is missing required properties by the API.
@@ -55,14 +55,14 @@ final class CampaignDeactivateResponse implements BaseModel
     public static function with(
         float $time,
         ?string $message = null,
-        ?string $record_type = null
+        ?string $recordType = null
     ): self {
         $obj = new self;
 
         $obj['time'] = $time;
 
         null !== $message && $obj['message'] = $message;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $recordType && $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -86,7 +86,7 @@ final class CampaignDeactivateResponse implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

@@ -34,7 +34,7 @@ final class CampaignBuilderService implements CampaignBuilderContract
      * Before creating a campaign, use the [Qualify By Usecase endpoint](https://developers.telnyx.com/api/messaging/10dlc/get-usecase-qualification) to ensure that the brand you want to assign a new campaign to is qualified for the desired use case of that campaign. **Please note:** After campaign creation, you'll only be able to edit the campaign's sample messages. Creating a campaign will entail an upfront, non-refundable three month's cost that will depend on the campaign's use case ([see 10DLC Costs section for details](https://developers.telnyx.com/docs/messaging/10dlc/concepts#10dlc-costs)).
      *
      * @param array{
-     *   brandId: string,
+     *   brandID: string,
      *   description: string,
      *   usecase: string,
      *   ageGated?: bool,
@@ -46,15 +46,15 @@ final class CampaignBuilderService implements CampaignBuilderContract
      *   helpKeywords?: string,
      *   helpMessage?: string,
      *   messageFlow?: string,
-     *   mnoIds?: list<int>,
+     *   mnoIDs?: list<int>,
      *   numberPool?: bool,
      *   optinKeywords?: string,
      *   optinMessage?: string,
      *   optoutKeywords?: string,
      *   optoutMessage?: string,
      *   privacyPolicyLink?: string,
-     *   referenceId?: string,
-     *   resellerId?: string,
+     *   referenceID?: string,
+     *   resellerID?: string,
      *   sample1?: string,
      *   sample2?: string,
      *   sample3?: string,

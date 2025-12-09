@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type UploadNewResponseShape = array{
- *   success?: bool|null, ticket_id?: string|null
+ *   success?: bool|null, ticketID?: string|null
  * }
  */
 final class UploadNewResponse implements BaseModel
@@ -27,8 +27,8 @@ final class UploadNewResponse implements BaseModel
     /**
      * Ticket id of the upload request.
      */
-    #[Optional]
-    public ?string $ticket_id;
+    #[Optional('ticket_id')]
+    public ?string $ticketID;
 
     public function __construct()
     {
@@ -42,12 +42,12 @@ final class UploadNewResponse implements BaseModel
      */
     public static function with(
         ?bool $success = null,
-        ?string $ticket_id = null
+        ?string $ticketID = null
     ): self {
         $obj = new self;
 
         null !== $success && $obj['success'] = $success;
-        null !== $ticket_id && $obj['ticket_id'] = $ticket_id;
+        null !== $ticketID && $obj['ticketID'] = $ticketID;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class UploadNewResponse implements BaseModel
     public function withTicketID(string $ticketID): self
     {
         $obj = clone $this;
-        $obj['ticket_id'] = $ticketID;
+        $obj['ticketID'] = $ticketID;
 
         return $obj;
     }

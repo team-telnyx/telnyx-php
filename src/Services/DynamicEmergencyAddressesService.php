@@ -31,17 +31,17 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
      * Creates a dynamic emergency address.
      *
      * @param array{
-     *   administrative_area: string,
-     *   country_code: 'US'|'CA'|'PR'|CountryCode,
-     *   house_number: string,
+     *   administrativeArea: string,
+     *   countryCode: 'US'|'CA'|'PR'|CountryCode,
+     *   houseNumber: string,
      *   locality: string,
-     *   postal_code: string,
-     *   street_name: string,
-     *   extended_address?: string,
-     *   house_suffix?: string,
-     *   street_post_directional?: string,
-     *   street_pre_directional?: string,
-     *   street_suffix?: string,
+     *   postalCode: string,
+     *   streetName: string,
+     *   extendedAddress?: string,
+     *   houseSuffix?: string,
+     *   streetPostDirectional?: string,
+     *   streetPreDirectional?: string,
+     *   streetSuffix?: string,
      * }|DynamicEmergencyAddressCreateParams $params
      *
      * @throws APIException
@@ -96,7 +96,7 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
      *
      * @param array{
      *   filter?: array{
-     *     country_code?: string, status?: 'pending'|'activated'|'rejected'|Status
+     *     countryCode?: string, status?: 'pending'|'activated'|'rejected'|Status
      *   },
      *   page?: array{number?: int, size?: int},
      * }|DynamicEmergencyAddressListParams $params

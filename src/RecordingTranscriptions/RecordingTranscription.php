@@ -13,13 +13,13 @@ use Telnyx\RecordingTranscriptions\RecordingTranscription\Status;
 /**
  * @phpstan-type RecordingTranscriptionShape = array{
  *   id?: string|null,
- *   created_at?: string|null,
- *   duration_millis?: int|null,
- *   record_type?: value-of<RecordType>|null,
- *   recording_id?: string|null,
+ *   createdAt?: string|null,
+ *   durationMillis?: int|null,
+ *   recordType?: value-of<RecordType>|null,
+ *   recordingID?: string|null,
  *   status?: value-of<Status>|null,
- *   transcription_text?: string|null,
- *   updated_at?: string|null,
+ *   transcriptionText?: string|null,
+ *   updatedAt?: string|null,
  * }
  */
 final class RecordingTranscription implements BaseModel
@@ -36,24 +36,24 @@ final class RecordingTranscription implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Optional]
-    public ?string $created_at;
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
     /**
      * The duration of the recording transcription in milliseconds.
      */
-    #[Optional]
-    public ?int $duration_millis;
+    #[Optional('duration_millis')]
+    public ?int $durationMillis;
 
-    /** @var value-of<RecordType>|null $record_type */
-    #[Optional(enum: RecordType::class)]
-    public ?string $record_type;
+    /** @var value-of<RecordType>|null $recordType */
+    #[Optional('record_type', enum: RecordType::class)]
+    public ?string $recordType;
 
     /**
      * Uniquely identifies the recording associated with this transcription.
      */
-    #[Optional]
-    public ?string $recording_id;
+    #[Optional('recording_id')]
+    public ?string $recordingID;
 
     /**
      * The status of the recording transcription. Only `completed` has transcription text available.
@@ -66,14 +66,14 @@ final class RecordingTranscription implements BaseModel
     /**
      * The recording's transcribed text.
      */
-    #[Optional]
-    public ?string $transcription_text;
+    #[Optional('transcription_text')]
+    public ?string $transcriptionText;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Optional]
-    public ?string $updated_at;
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     public function __construct()
     {
@@ -85,29 +85,29 @@ final class RecordingTranscription implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $record_type
+     * @param RecordType|value-of<RecordType> $recordType
      * @param Status|value-of<Status> $status
      */
     public static function with(
         ?string $id = null,
-        ?string $created_at = null,
-        ?int $duration_millis = null,
-        RecordType|string|null $record_type = null,
-        ?string $recording_id = null,
+        ?string $createdAt = null,
+        ?int $durationMillis = null,
+        RecordType|string|null $recordType = null,
+        ?string $recordingID = null,
         Status|string|null $status = null,
-        ?string $transcription_text = null,
-        ?string $updated_at = null,
+        ?string $transcriptionText = null,
+        ?string $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $duration_millis && $obj['duration_millis'] = $duration_millis;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $recording_id && $obj['recording_id'] = $recording_id;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $durationMillis && $obj['durationMillis'] = $durationMillis;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $recordingID && $obj['recordingID'] = $recordingID;
         null !== $status && $obj['status'] = $status;
-        null !== $transcription_text && $obj['transcription_text'] = $transcription_text;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $transcriptionText && $obj['transcriptionText'] = $transcriptionText;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class RecordingTranscription implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class RecordingTranscription implements BaseModel
     public function withDurationMillis(int $durationMillis): self
     {
         $obj = clone $this;
-        $obj['duration_millis'] = $durationMillis;
+        $obj['durationMillis'] = $durationMillis;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class RecordingTranscription implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -162,7 +162,7 @@ final class RecordingTranscription implements BaseModel
     public function withRecordingID(string $recordingID): self
     {
         $obj = clone $this;
-        $obj['recording_id'] = $recordingID;
+        $obj['recordingID'] = $recordingID;
 
         return $obj;
     }
@@ -186,7 +186,7 @@ final class RecordingTranscription implements BaseModel
     public function withTranscriptionText(string $transcriptionText): self
     {
         $obj = clone $this;
-        $obj['transcription_text'] = $transcriptionText;
+        $obj['transcriptionText'] = $transcriptionText;
 
         return $obj;
     }
@@ -197,7 +197,7 @@ final class RecordingTranscription implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

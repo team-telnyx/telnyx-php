@@ -26,7 +26,7 @@ final class DefaultGatewayService implements DefaultGatewayContract
      *
      * Create Default Gateway.
      *
-     * @param array{wireguard_peer_id?: string}|DefaultGatewayCreateParams $params
+     * @param array{wireguardPeerID?: string}|DefaultGatewayCreateParams $params
      *
      * @throws APIException
      */

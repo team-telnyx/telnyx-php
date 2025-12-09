@@ -19,7 +19,7 @@ use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams\So
  * @see Telnyx\Services\PortingOrders\PhoneNumberExtensionsService::list()
  *
  * @phpstan-type PhoneNumberExtensionListParamsShape = array{
- *   filter?: Filter|array{porting_phone_number_id?: string|null},
+ *   filter?: Filter|array{portingPhoneNumberID?: string|null},
  *   page?: Page|array{number?: int|null, size?: int|null},
  *   sort?: Sort|array{value?: value-of<Value>|null},
  * }
@@ -58,7 +58,7 @@ final class PhoneNumberExtensionListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{porting_phone_number_id?: string|null} $filter
+     * @param Filter|array{portingPhoneNumberID?: string|null} $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      * @param Sort|array{value?: value-of<Value>|null} $sort
      */
@@ -79,7 +79,7 @@ final class PhoneNumberExtensionListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[porting_phone_number_id].
      *
-     * @param Filter|array{porting_phone_number_id?: string|null} $filter
+     * @param Filter|array{portingPhoneNumberID?: string|null} $filter
      */
     public function withFilter(Filter|array $filter): self
     {

@@ -32,16 +32,16 @@ final class CallDialResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Data|array{
-     *   call_control_id: string,
-     *   call_leg_id: string,
-     *   call_session_id: string,
-     *   is_alive: bool,
-     *   record_type: value-of<RecordType>,
-     *   call_duration?: int|null,
-     *   client_state?: string|null,
-     *   end_time?: string|null,
-     *   recording_id?: string|null,
-     *   start_time?: string|null,
+     *   callControlID: string,
+     *   callLegID: string,
+     *   callSessionID: string,
+     *   isAlive: bool,
+     *   recordType: value-of<RecordType>,
+     *   callDuration?: int|null,
+     *   clientState?: string|null,
+     *   endTime?: string|null,
+     *   recordingID?: string|null,
+     *   startTime?: string|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -55,16 +55,16 @@ final class CallDialResponse implements BaseModel
 
     /**
      * @param Data|array{
-     *   call_control_id: string,
-     *   call_leg_id: string,
-     *   call_session_id: string,
-     *   is_alive: bool,
-     *   record_type: value-of<RecordType>,
-     *   call_duration?: int|null,
-     *   client_state?: string|null,
-     *   end_time?: string|null,
-     *   recording_id?: string|null,
-     *   start_time?: string|null,
+     *   callControlID: string,
+     *   callLegID: string,
+     *   callSessionID: string,
+     *   isAlive: bool,
+     *   recordType: value-of<RecordType>,
+     *   callDuration?: int|null,
+     *   clientState?: string|null,
+     *   endTime?: string|null,
+     *   recordingID?: string|null,
+     *   startTime?: string|null,
      * } $data
      */
     public function withData(Data|array $data): self

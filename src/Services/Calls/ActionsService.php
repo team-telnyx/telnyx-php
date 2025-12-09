@@ -142,40 +142,40 @@ final class ActionsService implements ActionsContract
      * When the `record` parameter is set to `record-from-answer`, the response will include a `recording_id` field.
      *
      * @param array{
-     *   billing_group_id?: string,
-     *   client_state?: string,
-     *   command_id?: string,
-     *   custom_headers?: list<array{name: string, value: string}|CustomSipHeader>,
-     *   preferred_codecs?: 'G722,PCMU,PCMA,G729,OPUS,VP8,H264'|PreferredCodecs,
+     *   billingGroupID?: string,
+     *   clientState?: string,
+     *   commandID?: string,
+     *   customHeaders?: list<array{name: string, value: string}|CustomSipHeader>,
+     *   preferredCodecs?: 'G722,PCMU,PCMA,G729,OPUS,VP8,H264'|PreferredCodecs,
      *   record?: 'record-from-answer'|Record,
-     *   record_channels?: 'single'|'dual'|RecordChannels,
-     *   record_custom_file_name?: string,
-     *   record_format?: 'wav'|'mp3'|RecordFormat,
-     *   record_max_length?: int,
-     *   record_timeout_secs?: int,
-     *   record_track?: 'both'|'inbound'|'outbound'|RecordTrack,
-     *   record_trim?: 'trim-silence'|RecordTrim,
-     *   send_silence_when_idle?: bool,
-     *   sip_headers?: list<array{name: 'User-to-User'|Name, value: string}|SipHeader>,
-     *   sound_modifications?: array{
+     *   recordChannels?: 'single'|'dual'|RecordChannels,
+     *   recordCustomFileName?: string,
+     *   recordFormat?: 'wav'|'mp3'|RecordFormat,
+     *   recordMaxLength?: int,
+     *   recordTimeoutSecs?: int,
+     *   recordTrack?: 'both'|'inbound'|'outbound'|RecordTrack,
+     *   recordTrim?: 'trim-silence'|RecordTrim,
+     *   sendSilenceWhenIdle?: bool,
+     *   sipHeaders?: list<array{name: 'User-to-User'|Name, value: string}|SipHeader>,
+     *   soundModifications?: array{
      *     octaves?: float, pitch?: float, semitone?: float, track?: string
      *   },
-     *   stream_bidirectional_codec?: 'PCMU'|'PCMA'|'G722'|'OPUS'|'AMR-WB'|'L16'|StreamBidirectionalCodec,
-     *   stream_bidirectional_mode?: 'mp3'|'rtp'|StreamBidirectionalMode,
-     *   stream_bidirectional_target_legs?: 'both'|'self'|'opposite'|StreamBidirectionalTargetLegs,
-     *   stream_codec?: 'PCMU'|'PCMA'|'G722'|'OPUS'|'AMR-WB'|'L16'|'default'|StreamCodec,
-     *   stream_track?: 'inbound_track'|'outbound_track'|'both_tracks'|StreamTrack,
-     *   stream_url?: string,
+     *   streamBidirectionalCodec?: 'PCMU'|'PCMA'|'G722'|'OPUS'|'AMR-WB'|'L16'|StreamBidirectionalCodec,
+     *   streamBidirectionalMode?: 'mp3'|'rtp'|StreamBidirectionalMode,
+     *   streamBidirectionalTargetLegs?: 'both'|'self'|'opposite'|StreamBidirectionalTargetLegs,
+     *   streamCodec?: 'PCMU'|'PCMA'|'G722'|'OPUS'|'AMR-WB'|'L16'|'default'|StreamCodec,
+     *   streamTrack?: 'inbound_track'|'outbound_track'|'both_tracks'|StreamTrack,
+     *   streamURL?: string,
      *   transcription?: bool,
-     *   transcription_config?: array{
-     *     client_state?: string,
-     *     command_id?: string,
-     *     transcription_engine?: 'Google'|'Telnyx'|'Deepgram'|'Azure'|'A'|'B'|TranscriptionEngine,
-     *     transcription_engine_config?: array<string,mixed>,
-     *     transcription_tracks?: string,
+     *   transcriptionConfig?: array{
+     *     clientState?: string,
+     *     commandID?: string,
+     *     transcriptionEngine?: 'Google'|'Telnyx'|'Deepgram'|'Azure'|'A'|'B'|TranscriptionEngine,
+     *     transcriptionEngineConfig?: array<string,mixed>,
+     *     transcriptionTracks?: string,
      *   },
-     *   webhook_url?: string,
-     *   webhook_url_method?: 'POST'|'GET'|WebhookURLMethod,
+     *   webhookURL?: string,
+     *   webhookURLMethod?: 'POST'|'GET'|WebhookURLMethod,
      * }|ActionAnswerParams $params
      *
      * @throws APIException
@@ -213,24 +213,24 @@ final class ActionsService implements ActionsContract
      * - `call.bridged` for Leg B
      *
      * @param array{
-     *   call_control_id: string,
-     *   client_state?: string,
-     *   command_id?: string,
-     *   mute_dtmf?: 'none'|'both'|'self'|'opposite'|MuteDtmf,
-     *   park_after_unbridge?: string,
-     *   play_ringtone?: bool,
+     *   callControlID: string,
+     *   clientState?: string,
+     *   commandID?: string,
+     *   muteDtmf?: 'none'|'both'|'self'|'opposite'|MuteDtmf,
+     *   parkAfterUnbridge?: string,
+     *   playRingtone?: bool,
      *   queue?: string,
      *   record?: 'record-from-answer'|ActionBridgeParams\Record,
-     *   record_channels?: 'single'|'dual'|ActionBridgeParams\RecordChannels,
-     *   record_custom_file_name?: string,
-     *   record_format?: 'wav'|'mp3'|ActionBridgeParams\RecordFormat,
-     *   record_max_length?: int,
-     *   record_timeout_secs?: int,
-     *   record_track?: 'both'|'inbound'|'outbound'|ActionBridgeParams\RecordTrack,
-     *   record_trim?: 'trim-silence'|ActionBridgeParams\RecordTrim,
+     *   recordChannels?: 'single'|'dual'|ActionBridgeParams\RecordChannels,
+     *   recordCustomFileName?: string,
+     *   recordFormat?: 'wav'|'mp3'|ActionBridgeParams\RecordFormat,
+     *   recordMaxLength?: int,
+     *   recordTimeoutSecs?: int,
+     *   recordTrack?: 'both'|'inbound'|'outbound'|ActionBridgeParams\RecordTrack,
+     *   recordTrim?: 'trim-silence'|ActionBridgeParams\RecordTrim,
      *   ringtone?: value-of<Ringtone>,
-     *   video_room_context?: string,
-     *   video_room_id?: string,
+     *   videoRoomContext?: string,
+     *   videoRoomID?: string,
      * }|ActionBridgeParams $params
      *
      * @throws APIException
@@ -263,12 +263,12 @@ final class ActionsService implements ActionsContract
      * Put the call in a queue.
      *
      * @param array{
-     *   queue_name: string,
-     *   client_state?: string,
-     *   command_id?: string,
-     *   keep_after_hangup?: bool,
-     *   max_size?: int,
-     *   max_wait_time_secs?: int,
+     *   queueName: string,
+     *   clientState?: string,
+     *   commandID?: string,
+     *   keepAfterHangup?: bool,
+     *   maxSize?: int,
+     *   maxWaitTimeSecs?: int,
      * }|ActionEnqueueParams $params
      *
      * @throws APIException
@@ -308,16 +308,16 @@ final class ActionsService implements ActionsContract
      * - `call.gather.ended`
      *
      * @param array{
-     *   client_state?: string,
-     *   command_id?: string,
-     *   gather_id?: string,
-     *   initial_timeout_millis?: int,
-     *   inter_digit_timeout_millis?: int,
-     *   maximum_digits?: int,
-     *   minimum_digits?: int,
-     *   terminating_digit?: string,
-     *   timeout_millis?: int,
-     *   valid_digits?: string,
+     *   clientState?: string,
+     *   commandID?: string,
+     *   gatherID?: string,
+     *   initialTimeoutMillis?: int,
+     *   interDigitTimeoutMillis?: int,
+     *   maximumDigits?: int,
+     *   minimumDigits?: int,
+     *   terminatingDigit?: string,
+     *   timeoutMillis?: int,
+     *   validDigits?: string,
      * }|ActionGatherParams $params
      *
      * @throws APIException
@@ -363,23 +363,23 @@ final class ActionsService implements ActionsContract
      *   assistant?: array{
      *     instructions?: string,
      *     model?: string,
-     *     openai_api_key_ref?: string,
+     *     openaiAPIKeyRef?: string,
      *     tools?: list<array<string,mixed>>,
      *   },
-     *   client_state?: string,
-     *   command_id?: string,
+     *   clientState?: string,
+     *   commandID?: string,
      *   greeting?: string,
-     *   interruption_settings?: array{enable?: bool},
+     *   interruptionSettings?: array{enable?: bool},
      *   language?: value-of<GoogleTranscriptionLanguage>,
-     *   message_history?: list<array{
+     *   messageHistory?: list<array{
      *     content?: string, role?: 'assistant'|'user'|Role
      *   }>,
-     *   send_message_history_updates?: bool,
-     *   send_partial_results?: bool,
+     *   sendMessageHistoryUpdates?: bool,
+     *   sendPartialResults?: bool,
      *   transcription?: array{model?: string},
-     *   user_response_timeout_ms?: int,
+     *   userResponseTimeoutMs?: int,
      *   voice?: string,
-     *   voice_settings?: array<string,mixed>,
+     *   voiceSettings?: array<string,mixed>,
      * }|ActionGatherUsingAIParams $params
      *
      * @throws APIException
@@ -421,19 +421,19 @@ final class ActionsService implements ActionsContract
      * - `call.gather.ended`
      *
      * @param array{
-     *   audio_url?: string,
-     *   client_state?: string,
-     *   command_id?: string,
-     *   inter_digit_timeout_millis?: int,
-     *   invalid_audio_url?: string,
-     *   invalid_media_name?: string,
-     *   maximum_digits?: int,
-     *   maximum_tries?: int,
-     *   media_name?: string,
-     *   minimum_digits?: int,
-     *   terminating_digit?: string,
-     *   timeout_millis?: int,
-     *   valid_digits?: string,
+     *   audioURL?: string,
+     *   clientState?: string,
+     *   commandID?: string,
+     *   interDigitTimeoutMillis?: int,
+     *   invalidAudioURL?: string,
+     *   invalidMediaName?: string,
+     *   maximumDigits?: int,
+     *   maximumTries?: int,
+     *   mediaName?: string,
+     *   minimumDigits?: int,
+     *   terminatingDigit?: string,
+     *   timeoutMillis?: int,
+     *   validDigits?: string,
      * }|ActionGatherUsingAudioParams $params
      *
      * @throws APIException
@@ -475,20 +475,20 @@ final class ActionsService implements ActionsContract
      * @param array{
      *   payload: string,
      *   voice: string,
-     *   client_state?: string,
-     *   command_id?: string,
-     *   inter_digit_timeout_millis?: int,
-     *   invalid_payload?: string,
+     *   clientState?: string,
+     *   commandID?: string,
+     *   interDigitTimeoutMillis?: int,
+     *   invalidPayload?: string,
      *   language?: value-of<Language>,
-     *   maximum_digits?: int,
-     *   maximum_tries?: int,
-     *   minimum_digits?: int,
-     *   payload_type?: 'text'|'ssml'|PayloadType,
-     *   service_level?: 'basic'|'premium'|ServiceLevel,
-     *   terminating_digit?: string,
-     *   timeout_millis?: int,
-     *   valid_digits?: string,
-     *   voice_settings?: array<string,mixed>,
+     *   maximumDigits?: int,
+     *   maximumTries?: int,
+     *   minimumDigits?: int,
+     *   payloadType?: 'text'|'ssml'|PayloadType,
+     *   serviceLevel?: 'basic'|'premium'|ServiceLevel,
+     *   terminatingDigit?: string,
+     *   timeoutMillis?: int,
+     *   validDigits?: string,
+     *   voiceSettings?: array<string,mixed>,
      * }|ActionGatherUsingSpeakParams $params
      *
      * @throws APIException
@@ -526,7 +526,7 @@ final class ActionsService implements ActionsContract
      * - `call.recording.saved`
      *
      * @param array{
-     *   client_state?: string, command_id?: string
+     *   clientState?: string, commandID?: string
      * }|ActionHangupParams $params
      *
      * @throws APIException
@@ -559,7 +559,7 @@ final class ActionsService implements ActionsContract
      * Removes the call from a queue.
      *
      * @param array{
-     *   client_state?: string, command_id?: string
+     *   clientState?: string, commandID?: string
      * }|ActionLeaveQueueParams $params
      *
      * @throws APIException
@@ -596,7 +596,7 @@ final class ActionsService implements ActionsContract
      * There are no webhooks associated with this command.
      *
      * @param array{
-     *   client_state?: string, command_id?: string, recording_id?: string
+     *   clientState?: string, commandID?: string, recordingID?: string
      * }|ActionPauseRecordingParams $params
      *
      * @throws APIException
@@ -635,13 +635,13 @@ final class ActionsService implements ActionsContract
      * - `call.refer.failed`
      *
      * @param array{
-     *   sip_address: string,
-     *   client_state?: string,
-     *   command_id?: string,
-     *   custom_headers?: list<array{name: string, value: string}|CustomSipHeader>,
-     *   sip_auth_password?: string,
-     *   sip_auth_username?: string,
-     *   sip_headers?: list<array{name: 'User-to-User'|Name, value: string}|SipHeader>,
+     *   sipAddress: string,
+     *   clientState?: string,
+     *   commandID?: string,
+     *   customHeaders?: list<array{name: string, value: string}|CustomSipHeader>,
+     *   sipAuthPassword?: string,
+     *   sipAuthUsername?: string,
+     *   sipHeaders?: list<array{name: 'User-to-User'|Name, value: string}|SipHeader>,
      * }|ActionReferParams $params
      *
      * @throws APIException
@@ -679,8 +679,8 @@ final class ActionsService implements ActionsContract
      *
      * @param array{
      *   cause: 'CALL_REJECTED'|'USER_BUSY'|Cause,
-     *   client_state?: string,
-     *   command_id?: string,
+     *   clientState?: string,
+     *   commandID?: string,
      * }|ActionRejectParams $params
      *
      * @throws APIException
@@ -717,7 +717,7 @@ final class ActionsService implements ActionsContract
      * There are no webhooks associated with this command.
      *
      * @param array{
-     *   client_state?: string, command_id?: string, recording_id?: string
+     *   clientState?: string, commandID?: string, recordingID?: string
      * }|ActionResumeRecordingParams $params
      *
      * @throws APIException
@@ -754,10 +754,7 @@ final class ActionsService implements ActionsContract
      * There are no webhooks associated with this command.
      *
      * @param array{
-     *   digits: string,
-     *   client_state?: string,
-     *   command_id?: string,
-     *   duration_millis?: int,
+     *   digits: string, clientState?: string, commandID?: string, durationMillis?: int
      * }|ActionSendDtmfParams $params
      *
      * @throws APIException
@@ -794,7 +791,7 @@ final class ActionsService implements ActionsContract
      * - `call.sip_info.received` (to be received on the target call leg)
      *
      * @param array{
-     *   body: string, content_type: string, client_state?: string, command_id?: string
+     *   body: string, contentType: string, clientState?: string, commandID?: string
      * }|ActionSendSipInfoParams $params
      *
      * @throws APIException
@@ -834,13 +831,13 @@ final class ActionsService implements ActionsContract
      * @param array{
      *   payload: string,
      *   voice: string,
-     *   client_state?: string,
-     *   command_id?: string,
+     *   clientState?: string,
+     *   commandID?: string,
      *   language?: value-of<ActionSpeakParams\Language>,
-     *   payload_type?: 'text'|'ssml'|ActionSpeakParams\PayloadType,
-     *   service_level?: 'basic'|'premium'|ActionSpeakParams\ServiceLevel,
+     *   payloadType?: 'text'|'ssml'|ActionSpeakParams\PayloadType,
+     *   serviceLevel?: 'basic'|'premium'|ActionSpeakParams\ServiceLevel,
      *   stop?: string,
-     *   voice_settings?: array<string,mixed>,
+     *   voiceSettings?: array<string,mixed>,
      * }|ActionSpeakParams $params
      *
      * @throws APIException
@@ -879,15 +876,15 @@ final class ActionsService implements ActionsContract
      *
      * @param array{
      *   assistant?: array{
-     *     id?: string, instructions?: string, openai_api_key_ref?: string
+     *     id?: string, instructions?: string, openaiAPIKeyRef?: string
      *   },
-     *   client_state?: string,
-     *   command_id?: string,
+     *   clientState?: string,
+     *   commandID?: string,
      *   greeting?: string,
-     *   interruption_settings?: array{enable?: bool},
+     *   interruptionSettings?: array{enable?: bool},
      *   transcription?: array{model?: string},
      *   voice?: string,
-     *   voice_settings?: array<string,mixed>,
+     *   voiceSettings?: array<string,mixed>,
      * }|ActionStartAIAssistantParams $params
      *
      * @throws APIException
@@ -928,10 +925,10 @@ final class ActionsService implements ActionsContract
      * - `call.fork.stopped`
      *
      * @param array{
-     *   client_state?: string,
-     *   command_id?: string,
+     *   clientState?: string,
+     *   commandID?: string,
      *   rx?: string,
-     *   stream_type?: 'decrypted'|StreamType,
+     *   streamType?: 'decrypted'|StreamType,
      *   tx?: string,
      * }|ActionStartForkingParams $params
      *
@@ -965,11 +962,11 @@ final class ActionsService implements ActionsContract
      * Noise Suppression Start (BETA)
      *
      * @param array{
-     *   client_state?: string,
-     *   command_id?: string,
+     *   clientState?: string,
+     *   commandID?: string,
      *   direction?: 'inbound'|'outbound'|'both'|Direction,
-     *   noise_suppression_engine?: 'Denoiser'|'DeepFilterNet'|NoiseSuppressionEngine,
-     *   noise_suppression_engine_config?: array{attenuation_limit?: int},
+     *   noiseSuppressionEngine?: 'Denoiser'|'DeepFilterNet'|NoiseSuppressionEngine,
+     *   noiseSuppressionEngineConfig?: array{attenuationLimit?: int},
      * }|ActionStartNoiseSuppressionParams $params
      *
      * @throws APIException
@@ -1013,17 +1010,17 @@ final class ActionsService implements ActionsContract
      * - `call.playback.ended`
      *
      * @param array{
-     *   audio_type?: 'mp3'|'wav'|AudioType,
-     *   audio_url?: string,
-     *   cache_audio?: bool,
-     *   client_state?: string,
-     *   command_id?: string,
+     *   audioType?: 'mp3'|'wav'|AudioType,
+     *   audioURL?: string,
+     *   cacheAudio?: bool,
+     *   clientState?: string,
+     *   commandID?: string,
      *   loop?: string|int,
-     *   media_name?: string,
+     *   mediaName?: string,
      *   overlay?: bool,
-     *   playback_content?: string,
+     *   playbackContent?: string,
      *   stop?: string,
-     *   target_legs?: string,
+     *   targetLegs?: string,
      * }|ActionStartPlaybackParams $params
      *
      * @throws APIException
@@ -1064,20 +1061,20 @@ final class ActionsService implements ActionsContract
      * @param array{
      *   channels: 'single'|'dual'|Channels,
      *   format: 'wav'|'mp3'|Format,
-     *   client_state?: string,
-     *   command_id?: string,
-     *   custom_file_name?: string,
-     *   max_length?: int,
-     *   play_beep?: bool,
-     *   recording_track?: 'both'|'inbound'|'outbound'|RecordingTrack,
-     *   timeout_secs?: int,
+     *   clientState?: string,
+     *   commandID?: string,
+     *   customFileName?: string,
+     *   maxLength?: int,
+     *   playBeep?: bool,
+     *   recordingTrack?: 'both'|'inbound'|'outbound'|RecordingTrack,
+     *   timeoutSecs?: int,
      *   transcription?: bool,
-     *   transcription_engine?: string,
-     *   transcription_language?: value-of<TranscriptionLanguage>,
-     *   transcription_max_speaker_count?: int,
-     *   transcription_min_speaker_count?: int,
-     *   transcription_profanity_filter?: bool,
-     *   transcription_speaker_diarization?: bool,
+     *   transcriptionEngine?: string,
+     *   transcriptionLanguage?: value-of<TranscriptionLanguage>,
+     *   transcriptionMaxSpeakerCount?: int,
+     *   transcriptionMinSpeakerCount?: int,
+     *   transcriptionProfanityFilter?: bool,
+     *   transcriptionSpeakerDiarization?: bool,
      *   trim?: 'trim-silence'|Trim,
      * }|ActionStartRecordingParams $params
      *
@@ -1117,13 +1114,13 @@ final class ActionsService implements ActionsContract
      * - `siprec.failed`
      *
      * @param array{
-     *   client_state?: string,
-     *   connector_name?: string,
-     *   include_metadata_custom_headers?: bool,
+     *   clientState?: string,
+     *   connectorName?: string,
+     *   includeMetadataCustomHeaders?: bool,
      *   secure?: bool,
-     *   session_timeout_secs?: int,
-     *   sip_transport?: 'udp'|'tcp'|'tls'|SipTransport,
-     *   siprec_track?: 'inbound_track'|'outbound_track'|'both_tracks'|SiprecTrack,
+     *   sessionTimeoutSecs?: int,
+     *   sipTransport?: 'udp'|'tcp'|'tls'|SipTransport,
+     *   siprecTrack?: 'inbound_track'|'outbound_track'|'both_tracks'|SiprecTrack,
      * }|ActionStartSiprecParams $params
      *
      * @throws APIException
@@ -1158,19 +1155,19 @@ final class ActionsService implements ActionsContract
      * Please find more details about media streaming messages specification under the [link](https://developers.telnyx.com/docs/voice/programmable-voice/media-streaming).
      *
      * @param array{
-     *   client_state?: string,
-     *   command_id?: string,
-     *   dialogflow_config?: array{
-     *     analyze_sentiment?: bool, partial_automated_agent_reply?: bool
+     *   clientState?: string,
+     *   commandID?: string,
+     *   dialogflowConfig?: array{
+     *     analyzeSentiment?: bool, partialAutomatedAgentReply?: bool
      *   },
-     *   enable_dialogflow?: bool,
-     *   stream_bidirectional_codec?: 'PCMU'|'PCMA'|'G722'|'OPUS'|'AMR-WB'|'L16'|StreamBidirectionalCodec,
-     *   stream_bidirectional_mode?: 'mp3'|'rtp'|StreamBidirectionalMode,
-     *   stream_bidirectional_sampling_rate?: 8000|16000|22050|24000|48000|StreamBidirectionalSamplingRate,
-     *   stream_bidirectional_target_legs?: 'both'|'self'|'opposite'|StreamBidirectionalTargetLegs,
-     *   stream_codec?: 'PCMU'|'PCMA'|'G722'|'OPUS'|'AMR-WB'|'L16'|'default'|StreamCodec,
-     *   stream_track?: 'inbound_track'|'outbound_track'|'both_tracks'|ActionStartStreamingParams\StreamTrack,
-     *   stream_url?: string,
+     *   enableDialogflow?: bool,
+     *   streamBidirectionalCodec?: 'PCMU'|'PCMA'|'G722'|'OPUS'|'AMR-WB'|'L16'|StreamBidirectionalCodec,
+     *   streamBidirectionalMode?: 'mp3'|'rtp'|StreamBidirectionalMode,
+     *   streamBidirectionalSamplingRate?: 8000|16000|22050|24000|48000|StreamBidirectionalSamplingRate,
+     *   streamBidirectionalTargetLegs?: 'both'|'self'|'opposite'|StreamBidirectionalTargetLegs,
+     *   streamCodec?: 'PCMU'|'PCMA'|'G722'|'OPUS'|'AMR-WB'|'L16'|'default'|StreamCodec,
+     *   streamTrack?: 'inbound_track'|'outbound_track'|'both_tracks'|ActionStartStreamingParams\StreamTrack,
+     *   streamURL?: string,
      * }|ActionStartStreamingParams $params
      *
      * @throws APIException
@@ -1207,11 +1204,11 @@ final class ActionsService implements ActionsContract
      * - `call.transcription`
      *
      * @param array{
-     *   client_state?: string,
-     *   command_id?: string,
-     *   transcription_engine?: 'Google'|'Telnyx'|'Deepgram'|'Azure'|'A'|'B'|ActionStartTranscriptionParams\TranscriptionEngine,
-     *   transcription_engine_config?: array<string,mixed>,
-     *   transcription_tracks?: string,
+     *   clientState?: string,
+     *   commandID?: string,
+     *   transcriptionEngine?: 'Google'|'Telnyx'|'Deepgram'|'Azure'|'A'|'B'|ActionStartTranscriptionParams\TranscriptionEngine,
+     *   transcriptionEngineConfig?: array<string,mixed>,
+     *   transcriptionTracks?: string,
      * }|ActionStartTranscriptionParams $params
      *
      * @throws APIException
@@ -1244,7 +1241,7 @@ final class ActionsService implements ActionsContract
      * Stop an AI assistant on the call.
      *
      * @param array{
-     *   client_state?: string, command_id?: string
+     *   clientState?: string, commandID?: string
      * }|ActionStopAIAssistantParams $params
      *
      * @throws APIException
@@ -1281,9 +1278,9 @@ final class ActionsService implements ActionsContract
      * - `call.fork.stopped`
      *
      * @param array{
-     *   client_state?: string,
-     *   command_id?: string,
-     *   stream_type?: 'raw'|'decrypted'|ActionStopForkingParams\StreamType,
+     *   clientState?: string,
+     *   commandID?: string,
+     *   streamType?: 'raw'|'decrypted'|ActionStopForkingParams\StreamType,
      * }|ActionStopForkingParams $params
      *
      * @throws APIException
@@ -1320,7 +1317,7 @@ final class ActionsService implements ActionsContract
      * - `call.gather.ended`
      *
      * @param array{
-     *   client_state?: string, command_id?: string
+     *   clientState?: string, commandID?: string
      * }|ActionStopGatherParams $params
      *
      * @throws APIException
@@ -1353,7 +1350,7 @@ final class ActionsService implements ActionsContract
      * Noise Suppression Stop (BETA)
      *
      * @param array{
-     *   client_state?: string, command_id?: string
+     *   clientState?: string, commandID?: string
      * }|ActionStopNoiseSuppressionParams $params
      *
      * @throws APIException
@@ -1390,7 +1387,7 @@ final class ActionsService implements ActionsContract
      * - `call.playback.ended` or `call.speak.ended`
      *
      * @param array{
-     *   client_state?: string, command_id?: string, overlay?: bool, stop?: string
+     *   clientState?: string, commandID?: string, overlay?: bool, stop?: string
      * }|ActionStopPlaybackParams $params
      *
      * @throws APIException
@@ -1427,7 +1424,7 @@ final class ActionsService implements ActionsContract
      * - `call.recording.saved`
      *
      * @param array{
-     *   client_state?: string, command_id?: string, recording_id?: string
+     *   clientState?: string, commandID?: string, recordingID?: string
      * }|ActionStopRecordingParams $params
      *
      * @throws APIException
@@ -1464,7 +1461,7 @@ final class ActionsService implements ActionsContract
      * - `siprec.stopped`
      *
      * @param array{
-     *   client_state?: string, command_id?: string
+     *   clientState?: string, commandID?: string
      * }|ActionStopSiprecParams $params
      *
      * @throws APIException
@@ -1501,7 +1498,7 @@ final class ActionsService implements ActionsContract
      * - `streaming.stopped`
      *
      * @param array{
-     *   client_state?: string, command_id?: string, stream_id?: string
+     *   clientState?: string, commandID?: string, streamID?: string
      * }|ActionStopStreamingParams $params
      *
      * @throws APIException
@@ -1534,7 +1531,7 @@ final class ActionsService implements ActionsContract
      * Stop real-time transcription.
      *
      * @param array{
-     *   client_state?: string, command_id?: string
+     *   clientState?: string, commandID?: string
      * }|ActionStopTranscriptionParams $params
      *
      * @throws APIException
@@ -1611,51 +1608,51 @@ final class ActionsService implements ActionsContract
      *
      * @param array{
      *   to: string,
-     *   answering_machine_detection?: 'premium'|'detect'|'detect_beep'|'detect_words'|'greeting_end'|'disabled'|AnsweringMachineDetection,
-     *   answering_machine_detection_config?: array{
-     *     after_greeting_silence_millis?: int,
-     *     between_words_silence_millis?: int,
-     *     greeting_duration_millis?: int,
-     *     greeting_silence_duration_millis?: int,
-     *     greeting_total_analysis_time_millis?: int,
-     *     initial_silence_millis?: int,
-     *     maximum_number_of_words?: int,
-     *     maximum_word_length_millis?: int,
-     *     silence_threshold?: int,
-     *     total_analysis_time_millis?: int,
+     *   answeringMachineDetection?: 'premium'|'detect'|'detect_beep'|'detect_words'|'greeting_end'|'disabled'|AnsweringMachineDetection,
+     *   answeringMachineDetectionConfig?: array{
+     *     afterGreetingSilenceMillis?: int,
+     *     betweenWordsSilenceMillis?: int,
+     *     greetingDurationMillis?: int,
+     *     greetingSilenceDurationMillis?: int,
+     *     greetingTotalAnalysisTimeMillis?: int,
+     *     initialSilenceMillis?: int,
+     *     maximumNumberOfWords?: int,
+     *     maximumWordLengthMillis?: int,
+     *     silenceThreshold?: int,
+     *     totalAnalysisTimeMillis?: int,
      *   },
-     *   audio_url?: string,
-     *   client_state?: string,
-     *   command_id?: string,
-     *   custom_headers?: list<array{name: string, value: string}|CustomSipHeader>,
-     *   early_media?: bool,
+     *   audioURL?: string,
+     *   clientState?: string,
+     *   commandID?: string,
+     *   customHeaders?: list<array{name: string, value: string}|CustomSipHeader>,
+     *   earlyMedia?: bool,
      *   from?: string,
-     *   from_display_name?: string,
-     *   media_encryption?: 'disabled'|'SRTP'|'DTLS'|MediaEncryption,
-     *   media_name?: string,
-     *   mute_dtmf?: 'none'|'both'|'self'|'opposite'|ActionTransferParams\MuteDtmf,
-     *   park_after_unbridge?: string,
+     *   fromDisplayName?: string,
+     *   mediaEncryption?: 'disabled'|'SRTP'|'DTLS'|MediaEncryption,
+     *   mediaName?: string,
+     *   muteDtmf?: 'none'|'both'|'self'|'opposite'|ActionTransferParams\MuteDtmf,
+     *   parkAfterUnbridge?: string,
      *   record?: 'record-from-answer'|ActionTransferParams\Record,
-     *   record_channels?: 'single'|'dual'|ActionTransferParams\RecordChannels,
-     *   record_custom_file_name?: string,
-     *   record_format?: 'wav'|'mp3'|ActionTransferParams\RecordFormat,
-     *   record_max_length?: int,
-     *   record_timeout_secs?: int,
-     *   record_track?: 'both'|'inbound'|'outbound'|ActionTransferParams\RecordTrack,
-     *   record_trim?: 'trim-silence'|ActionTransferParams\RecordTrim,
-     *   sip_auth_password?: string,
-     *   sip_auth_username?: string,
-     *   sip_headers?: list<array{name: 'User-to-User'|Name, value: string}|SipHeader>,
-     *   sip_region?: 'US'|'Europe'|'Canada'|'Australia'|'Middle East'|SipRegion,
-     *   sip_transport_protocol?: 'UDP'|'TCP'|'TLS'|SipTransportProtocol,
-     *   sound_modifications?: array{
+     *   recordChannels?: 'single'|'dual'|ActionTransferParams\RecordChannels,
+     *   recordCustomFileName?: string,
+     *   recordFormat?: 'wav'|'mp3'|ActionTransferParams\RecordFormat,
+     *   recordMaxLength?: int,
+     *   recordTimeoutSecs?: int,
+     *   recordTrack?: 'both'|'inbound'|'outbound'|ActionTransferParams\RecordTrack,
+     *   recordTrim?: 'trim-silence'|ActionTransferParams\RecordTrim,
+     *   sipAuthPassword?: string,
+     *   sipAuthUsername?: string,
+     *   sipHeaders?: list<array{name: 'User-to-User'|Name, value: string}|SipHeader>,
+     *   sipRegion?: 'US'|'Europe'|'Canada'|'Australia'|'Middle East'|SipRegion,
+     *   sipTransportProtocol?: 'UDP'|'TCP'|'TLS'|SipTransportProtocol,
+     *   soundModifications?: array{
      *     octaves?: float, pitch?: float, semitone?: float, track?: string
      *   },
-     *   target_leg_client_state?: string,
-     *   time_limit_secs?: int,
-     *   timeout_secs?: int,
-     *   webhook_url?: string,
-     *   webhook_url_method?: 'POST'|'GET'|ActionTransferParams\WebhookURLMethod,
+     *   targetLegClientState?: string,
+     *   timeLimitSecs?: int,
+     *   timeoutSecs?: int,
+     *   webhookURL?: string,
+     *   webhookURLMethod?: 'POST'|'GET'|ActionTransferParams\WebhookURLMethod,
      * }|ActionTransferParams $params
      *
      * @throws APIException
@@ -1687,7 +1684,7 @@ final class ActionsService implements ActionsContract
      *
      * Updates client state
      *
-     * @param array{client_state: string}|ActionUpdateClientStateParams $params
+     * @param array{clientState: string}|ActionUpdateClientStateParams $params
      *
      * @throws APIException
      */

@@ -31,7 +31,7 @@ final class UploadPendingCountResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Data|array{
-     *   pending_numbers_count?: int|null, pending_orders_count?: int|null
+     *   pendingNumbersCount?: int|null, pendingOrdersCount?: int|null
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -45,7 +45,7 @@ final class UploadPendingCountResponse implements BaseModel
 
     /**
      * @param Data|array{
-     *   pending_numbers_count?: int|null, pending_orders_count?: int|null
+     *   pendingNumbersCount?: int|null, pendingOrdersCount?: int|null
      * } $data
      */
     public function withData(Data|array $data): self

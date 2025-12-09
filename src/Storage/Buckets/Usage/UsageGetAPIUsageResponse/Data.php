@@ -47,17 +47,17 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Category1|array{
-     *   bytes_received?: int|null,
-     *   bytes_sent?: int|null,
+     *   bytesReceived?: int|null,
+     *   bytesSent?: int|null,
      *   category?: value-of<Category>|null,
      *   ops?: int|null,
-     *   successful_ops?: int|null,
+     *   successfulOps?: int|null,
      * }> $categories
      * @param Total|array{
-     *   bytes_received?: int|null,
-     *   bytes_sent?: int|null,
+     *   bytesReceived?: int|null,
+     *   bytesSent?: int|null,
      *   ops?: int|null,
-     *   successful_ops?: int|null,
+     *   successfulOps?: int|null,
      * } $total
      */
     public static function with(
@@ -76,11 +76,11 @@ final class Data implements BaseModel
 
     /**
      * @param list<Category1|array{
-     *   bytes_received?: int|null,
-     *   bytes_sent?: int|null,
+     *   bytesReceived?: int|null,
+     *   bytesSent?: int|null,
      *   category?: value-of<Category>|null,
      *   ops?: int|null,
-     *   successful_ops?: int|null,
+     *   successfulOps?: int|null,
      * }> $categories
      */
     public function withCategories(array $categories): self
@@ -104,10 +104,10 @@ final class Data implements BaseModel
 
     /**
      * @param Total|array{
-     *   bytes_received?: int|null,
-     *   bytes_sent?: int|null,
+     *   bytesReceived?: int|null,
+     *   bytesSent?: int|null,
      *   ops?: int|null,
-     *   successful_ops?: int|null,
+     *   successfulOps?: int|null,
      * } $total
      */
     public function withTotal(Total|array $total): self

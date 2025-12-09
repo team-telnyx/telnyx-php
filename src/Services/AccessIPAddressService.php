@@ -27,7 +27,7 @@ final class AccessIPAddressService implements AccessIPAddressContract
      * Create new Access IP Address
      *
      * @param array{
-     *   ip_address: string, description?: string
+     *   ipAddress: string, description?: string
      * }|AccessIPAddressCreateParams $params
      *
      * @throws APIException
@@ -82,14 +82,14 @@ final class AccessIPAddressService implements AccessIPAddressContract
      *
      * @param array{
      *   filter?: array{
-     *     created_at?: string|\DateTimeInterface|array{
+     *     createdAt?: string|\DateTimeInterface|array{
      *       gt?: string|\DateTimeInterface,
      *       gte?: string|\DateTimeInterface,
      *       lt?: string|\DateTimeInterface,
      *       lte?: string|\DateTimeInterface,
      *     },
-     *     ip_address?: string,
-     *     ip_source?: string,
+     *     ipAddress?: string,
+     *     ipSource?: string,
      *   },
      *   page?: array{number?: int, size?: int},
      * }|AccessIPAddressListParams $params

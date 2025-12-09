@@ -14,8 +14,8 @@ use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\Hea
 
 /**
  * @phpstan-type DataShape = array{
- *   global_ip?: GlobalIP|null,
- *   global_ip_assignment?: GlobalIPAssignment|null,
+ *   globalIP?: GlobalIP|null,
+ *   globalIPAssignment?: GlobalIPAssignment|null,
  *   health?: Health|null,
  *   timestamp?: \DateTimeInterface|null,
  * }
@@ -25,11 +25,11 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?GlobalIP $global_ip;
+    #[Optional('global_ip')]
+    public ?GlobalIP $globalIP;
 
-    #[Optional]
-    public ?GlobalIPAssignment $global_ip_assignment;
+    #[Optional('global_ip_assignment')]
+    public ?GlobalIPAssignment $globalIPAssignment;
 
     #[Optional]
     public ?Health $health;
@@ -50,24 +50,24 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param GlobalIP|array{id?: string|null, ip_address?: string|null} $global_ip
+     * @param GlobalIP|array{id?: string|null, ipAddress?: string|null} $globalIP
      * @param GlobalIPAssignment|array{
      *   id?: string|null,
-     *   wireguard_peer?: WireguardPeer|null,
-     *   wireguard_peer_id?: string|null,
-     * } $global_ip_assignment
+     *   wireguardPeer?: WireguardPeer|null,
+     *   wireguardPeerID?: string|null,
+     * } $globalIPAssignment
      * @param Health|array{fail?: float|null, pass?: float|null} $health
      */
     public static function with(
-        GlobalIP|array|null $global_ip = null,
-        GlobalIPAssignment|array|null $global_ip_assignment = null,
+        GlobalIP|array|null $globalIP = null,
+        GlobalIPAssignment|array|null $globalIPAssignment = null,
         Health|array|null $health = null,
         ?\DateTimeInterface $timestamp = null,
     ): self {
         $obj = new self;
 
-        null !== $global_ip && $obj['global_ip'] = $global_ip;
-        null !== $global_ip_assignment && $obj['global_ip_assignment'] = $global_ip_assignment;
+        null !== $globalIP && $obj['globalIP'] = $globalIP;
+        null !== $globalIPAssignment && $obj['globalIPAssignment'] = $globalIPAssignment;
         null !== $health && $obj['health'] = $health;
         null !== $timestamp && $obj['timestamp'] = $timestamp;
 
@@ -75,12 +75,12 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param GlobalIP|array{id?: string|null, ip_address?: string|null} $globalIP
+     * @param GlobalIP|array{id?: string|null, ipAddress?: string|null} $globalIP
      */
     public function withGlobalIP(GlobalIP|array $globalIP): self
     {
         $obj = clone $this;
-        $obj['global_ip'] = $globalIP;
+        $obj['globalIP'] = $globalIP;
 
         return $obj;
     }
@@ -88,15 +88,15 @@ final class Data implements BaseModel
     /**
      * @param GlobalIPAssignment|array{
      *   id?: string|null,
-     *   wireguard_peer?: WireguardPeer|null,
-     *   wireguard_peer_id?: string|null,
+     *   wireguardPeer?: WireguardPeer|null,
+     *   wireguardPeerID?: string|null,
      * } $globalIPAssignment
      */
     public function withGlobalIPAssignment(
         GlobalIPAssignment|array $globalIPAssignment
     ): self {
         $obj = clone $this;
-        $obj['global_ip_assignment'] = $globalIPAssignment;
+        $obj['globalIPAssignment'] = $globalIPAssignment;
 
         return $obj;
     }

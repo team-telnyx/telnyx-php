@@ -12,10 +12,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * Response model for webhook tool test results.
  *
  * @phpstan-type DataShape = array{
- *   content_type: string,
+ *   contentType: string,
  *   request: array<string,mixed>,
  *   response: string,
- *   status_code: int,
+ *   statusCode: int,
  *   success: bool,
  * }
  */
@@ -24,8 +24,8 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Required]
-    public string $content_type;
+    #[Required('content_type')]
+    public string $contentType;
 
     /** @var array<string,mixed> $request */
     #[Required(map: 'mixed')]
@@ -34,8 +34,8 @@ final class Data implements BaseModel
     #[Required]
     public string $response;
 
-    #[Required]
-    public int $status_code;
+    #[Required('status_code')]
+    public int $statusCode;
 
     #[Required]
     public bool $success;
@@ -46,7 +46,7 @@ final class Data implements BaseModel
      * To enforce required parameters use
      * ```
      * Data::with(
-     *   content_type: ..., request: ..., response: ..., status_code: ..., success: ...
+     *   contentType: ..., request: ..., response: ..., statusCode: ..., success: ...
      * )
      * ```
      *
@@ -74,18 +74,18 @@ final class Data implements BaseModel
      * @param array<string,mixed> $request
      */
     public static function with(
-        string $content_type,
+        string $contentType,
         array $request,
         string $response,
-        int $status_code,
+        int $statusCode,
         bool $success,
     ): self {
         $obj = new self;
 
-        $obj['content_type'] = $content_type;
+        $obj['contentType'] = $contentType;
         $obj['request'] = $request;
         $obj['response'] = $response;
-        $obj['status_code'] = $status_code;
+        $obj['statusCode'] = $statusCode;
         $obj['success'] = $success;
 
         return $obj;
@@ -94,7 +94,7 @@ final class Data implements BaseModel
     public function withContentType(string $contentType): self
     {
         $obj = clone $this;
-        $obj['content_type'] = $contentType;
+        $obj['contentType'] = $contentType;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class Data implements BaseModel
     public function withStatusCode(int $statusCode): self
     {
         $obj = clone $this;
-        $obj['status_code'] = $statusCode;
+        $obj['statusCode'] = $statusCode;
 
         return $obj;
     }

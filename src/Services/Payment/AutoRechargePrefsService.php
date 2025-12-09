@@ -28,10 +28,10 @@ final class AutoRechargePrefsService implements AutoRechargePrefsContract
      *
      * @param array{
      *   enabled?: bool,
-     *   invoice_enabled?: bool,
+     *   invoiceEnabled?: bool,
      *   preference?: 'credit_paypal'|'ach'|Preference,
-     *   recharge_amount?: string,
-     *   threshold_amount?: string,
+     *   rechargeAmount?: string,
+     *   thresholdAmount?: string,
      * }|AutoRechargePrefUpdateParams $params
      *
      * @throws APIException

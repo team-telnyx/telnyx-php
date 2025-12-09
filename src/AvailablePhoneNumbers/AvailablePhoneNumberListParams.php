@@ -20,18 +20,18 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type AvailablePhoneNumberListParamsShape = array{
  *   filter?: Filter|array{
- *     administrative_area?: string|null,
- *     best_effort?: bool|null,
- *     country_code?: string|null,
- *     exclude_held_numbers?: bool|null,
+ *     administrativeArea?: string|null,
+ *     bestEffort?: bool|null,
+ *     countryCode?: string|null,
+ *     excludeHeldNumbers?: bool|null,
  *     features?: list<value-of<Feature>>|null,
  *     limit?: int|null,
  *     locality?: string|null,
- *     national_destination_code?: string|null,
- *     phone_number?: PhoneNumber|null,
- *     phone_number_type?: value-of<PhoneNumberType>|null,
+ *     nationalDestinationCode?: string|null,
+ *     phoneNumber?: PhoneNumber|null,
+ *     phoneNumberType?: value-of<PhoneNumberType>|null,
  *     quickship?: bool|null,
- *     rate_center?: string|null,
+ *     rateCenter?: string|null,
  *     reservable?: bool|null,
  *   },
  * }
@@ -59,18 +59,18 @@ final class AvailablePhoneNumberListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   administrative_area?: string|null,
-     *   best_effort?: bool|null,
-     *   country_code?: string|null,
-     *   exclude_held_numbers?: bool|null,
+     *   administrativeArea?: string|null,
+     *   bestEffort?: bool|null,
+     *   countryCode?: string|null,
+     *   excludeHeldNumbers?: bool|null,
      *   features?: list<value-of<Feature>>|null,
      *   limit?: int|null,
      *   locality?: string|null,
-     *   national_destination_code?: string|null,
-     *   phone_number?: PhoneNumber|null,
-     *   phone_number_type?: value-of<PhoneNumberType>|null,
+     *   nationalDestinationCode?: string|null,
+     *   phoneNumber?: PhoneNumber|null,
+     *   phoneNumberType?: value-of<PhoneNumberType>|null,
      *   quickship?: bool|null,
-     *   rate_center?: string|null,
+     *   rateCenter?: string|null,
      *   reservable?: bool|null,
      * } $filter
      */
@@ -87,18 +87,18 @@ final class AvailablePhoneNumberListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[locality], filter[administrative_area], filter[country_code], filter[national_destination_code], filter[rate_center], filter[phone_number_type], filter[features], filter[limit], filter[best_effort], filter[quickship], filter[reservable], filter[exclude_held_numbers].
      *
      * @param Filter|array{
-     *   administrative_area?: string|null,
-     *   best_effort?: bool|null,
-     *   country_code?: string|null,
-     *   exclude_held_numbers?: bool|null,
+     *   administrativeArea?: string|null,
+     *   bestEffort?: bool|null,
+     *   countryCode?: string|null,
+     *   excludeHeldNumbers?: bool|null,
      *   features?: list<value-of<Feature>>|null,
      *   limit?: int|null,
      *   locality?: string|null,
-     *   national_destination_code?: string|null,
-     *   phone_number?: PhoneNumber|null,
-     *   phone_number_type?: value-of<PhoneNumberType>|null,
+     *   nationalDestinationCode?: string|null,
+     *   phoneNumber?: PhoneNumber|null,
+     *   phoneNumberType?: value-of<PhoneNumberType>|null,
      *   quickship?: bool|null,
-     *   rate_center?: string|null,
+     *   rateCenter?: string|null,
      *   reservable?: bool|null,
      * } $filter
      */

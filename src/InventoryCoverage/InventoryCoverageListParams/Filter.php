@@ -16,14 +16,14 @@ use Telnyx\InventoryCoverage\InventoryCoverageListParams\Filter\PhoneNumberType;
  * Consolidated filter parameter (deepObject style). Originally: filter[npa], filter[nxx], filter[administrative_area], filter[phone_number_type], filter[country_code], filter[count], filter[features], filter[groupBy].
  *
  * @phpstan-type FilterShape = array{
- *   administrative_area?: string|null,
+ *   administrativeArea?: string|null,
  *   count?: bool|null,
- *   country_code?: value-of<CountryCode>|null,
+ *   countryCode?: value-of<CountryCode>|null,
  *   features?: list<value-of<Feature>>|null,
  *   groupBy?: value-of<GroupBy>|null,
  *   npa?: int|null,
  *   nxx?: int|null,
- *   phone_number_type?: value-of<PhoneNumberType>|null,
+ *   phoneNumberType?: value-of<PhoneNumberType>|null,
  * }
  */
 final class Filter implements BaseModel
@@ -34,8 +34,8 @@ final class Filter implements BaseModel
     /**
      * Filter by administrative area.
      */
-    #[Optional]
-    public ?string $administrative_area;
+    #[Optional('administrative_area')]
+    public ?string $administrativeArea;
 
     /**
      * Include count in the result.
@@ -46,10 +46,10 @@ final class Filter implements BaseModel
     /**
      * Filter by country. Defaults to US.
      *
-     * @var value-of<CountryCode>|null $country_code
+     * @var value-of<CountryCode>|null $countryCode
      */
-    #[Optional(enum: CountryCode::class)]
-    public ?string $country_code;
+    #[Optional('country_code', enum: CountryCode::class)]
+    public ?string $countryCode;
 
     /**
      * Filter if the phone number should be used for voice, fax, mms, sms, emergency. Returns features in the response when used.
@@ -82,10 +82,10 @@ final class Filter implements BaseModel
     /**
      * Filter by phone number type.
      *
-     * @var value-of<PhoneNumberType>|null $phone_number_type
+     * @var value-of<PhoneNumberType>|null $phoneNumberType
      */
-    #[Optional(enum: PhoneNumberType::class)]
-    public ?string $phone_number_type;
+    #[Optional('phone_number_type', enum: PhoneNumberType::class)]
+    public ?string $phoneNumberType;
 
     public function __construct()
     {
@@ -97,31 +97,31 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CountryCode|value-of<CountryCode> $country_code
+     * @param CountryCode|value-of<CountryCode> $countryCode
      * @param list<Feature|value-of<Feature>> $features
      * @param GroupBy|value-of<GroupBy> $groupBy
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phone_number_type
+     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
      */
     public static function with(
-        ?string $administrative_area = null,
+        ?string $administrativeArea = null,
         ?bool $count = null,
-        CountryCode|string|null $country_code = null,
+        CountryCode|string|null $countryCode = null,
         ?array $features = null,
         GroupBy|string|null $groupBy = null,
         ?int $npa = null,
         ?int $nxx = null,
-        PhoneNumberType|string|null $phone_number_type = null,
+        PhoneNumberType|string|null $phoneNumberType = null,
     ): self {
         $obj = new self;
 
-        null !== $administrative_area && $obj['administrative_area'] = $administrative_area;
+        null !== $administrativeArea && $obj['administrativeArea'] = $administrativeArea;
         null !== $count && $obj['count'] = $count;
-        null !== $country_code && $obj['country_code'] = $country_code;
+        null !== $countryCode && $obj['countryCode'] = $countryCode;
         null !== $features && $obj['features'] = $features;
         null !== $groupBy && $obj['groupBy'] = $groupBy;
         null !== $npa && $obj['npa'] = $npa;
         null !== $nxx && $obj['nxx'] = $nxx;
-        null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
+        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class Filter implements BaseModel
     public function withAdministrativeArea(string $administrativeArea): self
     {
         $obj = clone $this;
-        $obj['administrative_area'] = $administrativeArea;
+        $obj['administrativeArea'] = $administrativeArea;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class Filter implements BaseModel
     public function withCountryCode(CountryCode|string $countryCode): self
     {
         $obj = clone $this;
-        $obj['country_code'] = $countryCode;
+        $obj['countryCode'] = $countryCode;
 
         return $obj;
     }
@@ -218,7 +218,7 @@ final class Filter implements BaseModel
         PhoneNumberType|string $phoneNumberType
     ): self {
         $obj = clone $this;
-        $obj['phone_number_type'] = $phoneNumberType;
+        $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }

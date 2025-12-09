@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Messaging\RcsService::retrieveCapabilities()
  *
- * @phpstan-type RcRetrieveCapabilitiesParamsShape = array{agent_id: string}
+ * @phpstan-type RcRetrieveCapabilitiesParamsShape = array{agentID: string}
  */
 final class RcRetrieveCapabilitiesParams implements BaseModel
 {
@@ -23,14 +23,14 @@ final class RcRetrieveCapabilitiesParams implements BaseModel
     use SdkParams;
 
     #[Required]
-    public string $agent_id;
+    public string $agentID;
 
     /**
      * `new RcRetrieveCapabilitiesParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * RcRetrieveCapabilitiesParams::with(agent_id: ...)
+     * RcRetrieveCapabilitiesParams::with(agentID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -49,11 +49,11 @@ final class RcRetrieveCapabilitiesParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $agent_id): self
+    public static function with(string $agentID): self
     {
         $obj = new self;
 
-        $obj['agent_id'] = $agent_id;
+        $obj['agentID'] = $agentID;
 
         return $obj;
     }
@@ -61,7 +61,7 @@ final class RcRetrieveCapabilitiesParams implements BaseModel
     public function withAgentID(string $agentID): self
     {
         $obj = clone $this;
-        $obj['agent_id'] = $agentID;
+        $obj['agentID'] = $agentID;
 
         return $obj;
     }

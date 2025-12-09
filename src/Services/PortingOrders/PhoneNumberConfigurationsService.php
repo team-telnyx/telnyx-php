@@ -29,8 +29,8 @@ final class PhoneNumberConfigurationsService implements PhoneNumberConfiguration
      * Creates a list of phone number configurations.
      *
      * @param array{
-     *   phone_number_configurations?: list<array{
-     *     porting_phone_number_id: string, user_bundle_id: string
+     *   phoneNumberConfigurations?: list<array{
+     *     portingPhoneNumberID: string, userBundleID: string
      *   }>,
      * }|PhoneNumberConfigurationCreateParams $params
      *
@@ -64,11 +64,11 @@ final class PhoneNumberConfigurationsService implements PhoneNumberConfiguration
      *
      * @param array{
      *   filter?: array{
-     *     porting_order?: array{
+     *     portingOrder?: array{
      *       status?: list<'activation-in-progress'|'cancel-pending'|'cancelled'|'draft'|'exception'|'foc-date-confirmed'|'in-process'|'ported'|'submitted'|Status>,
      *     },
-     *     porting_phone_number?: list<string>,
-     *     user_bundle_id?: list<string>,
+     *     portingPhoneNumber?: list<string>,
+     *     userBundleID?: list<string>,
      *   },
      *   page?: array{number?: int, size?: int},
      *   sort?: array{value?: 'created_at'|'-created_at'|Value},

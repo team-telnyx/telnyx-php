@@ -12,9 +12,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * An object following one of the schemas published in https://developers.telnyx.com/docs/api/v2/detail-records.
  *
  * @phpstan-type RecordTypeShape = array{
- *   product_dimensions?: list<string>|null,
- *   product_metrics?: list<string>|null,
- *   record_type?: string|null,
+ *   productDimensions?: list<string>|null,
+ *   productMetrics?: list<string>|null,
+ *   recordType?: string|null,
  * }
  */
 final class RecordType implements BaseModel
@@ -25,24 +25,24 @@ final class RecordType implements BaseModel
     /**
      * Telnyx Product Dimensions.
      *
-     * @var list<string>|null $product_dimensions
+     * @var list<string>|null $productDimensions
      */
-    #[Optional(list: 'string')]
-    public ?array $product_dimensions;
+    #[Optional('product_dimensions', list: 'string')]
+    public ?array $productDimensions;
 
     /**
      * Telnyx Product Metrics.
      *
-     * @var list<string>|null $product_metrics
+     * @var list<string>|null $productMetrics
      */
-    #[Optional(list: 'string')]
-    public ?array $product_metrics;
+    #[Optional('product_metrics', list: 'string')]
+    public ?array $productMetrics;
 
     /**
      * Telnyx Product type.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     public function __construct()
     {
@@ -54,19 +54,19 @@ final class RecordType implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $product_dimensions
-     * @param list<string> $product_metrics
+     * @param list<string> $productDimensions
+     * @param list<string> $productMetrics
      */
     public static function with(
-        ?array $product_dimensions = null,
-        ?array $product_metrics = null,
-        ?string $record_type = null,
+        ?array $productDimensions = null,
+        ?array $productMetrics = null,
+        ?string $recordType = null,
     ): self {
         $obj = new self;
 
-        null !== $product_dimensions && $obj['product_dimensions'] = $product_dimensions;
-        null !== $product_metrics && $obj['product_metrics'] = $product_metrics;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $productDimensions && $obj['productDimensions'] = $productDimensions;
+        null !== $productMetrics && $obj['productMetrics'] = $productMetrics;
+        null !== $recordType && $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class RecordType implements BaseModel
     public function withProductDimensions(array $productDimensions): self
     {
         $obj = clone $this;
-        $obj['product_dimensions'] = $productDimensions;
+        $obj['productDimensions'] = $productDimensions;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class RecordType implements BaseModel
     public function withProductMetrics(array $productMetrics): self
     {
         $obj = clone $this;
-        $obj['product_metrics'] = $productMetrics;
+        $obj['productMetrics'] = $productMetrics;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class RecordType implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

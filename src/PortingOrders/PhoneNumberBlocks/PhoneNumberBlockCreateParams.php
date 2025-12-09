@@ -17,10 +17,8 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\PhoneNum
  * @see Telnyx\Services\PortingOrders\PhoneNumberBlocksService::create()
  *
  * @phpstan-type PhoneNumberBlockCreateParamsShape = array{
- *   activation_ranges: list<ActivationRange|array{
- *     end_at: string, start_at: string
- *   }>,
- *   phone_number_range: PhoneNumberRange|array{end_at: string, start_at: string},
+ *   activationRanges: list<ActivationRange|array{endAt: string, startAt: string}>,
+ *   phoneNumberRange: PhoneNumberRange|array{endAt: string, startAt: string},
  * }
  */
 final class PhoneNumberBlockCreateParams implements BaseModel
@@ -32,22 +30,20 @@ final class PhoneNumberBlockCreateParams implements BaseModel
     /**
      * Specifies the activation ranges for this porting phone number block. The activation range must be within the block range and should not overlap with other activation ranges.
      *
-     * @var list<ActivationRange> $activation_ranges
+     * @var list<ActivationRange> $activationRanges
      */
-    #[Required(list: ActivationRange::class)]
-    public array $activation_ranges;
+    #[Required('activation_ranges', list: ActivationRange::class)]
+    public array $activationRanges;
 
-    #[Required]
-    public PhoneNumberRange $phone_number_range;
+    #[Required('phone_number_range')]
+    public PhoneNumberRange $phoneNumberRange;
 
     /**
      * `new PhoneNumberBlockCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * PhoneNumberBlockCreateParams::with(
-     *   activation_ranges: ..., phone_number_range: ...
-     * )
+     * PhoneNumberBlockCreateParams::with(activationRanges: ..., phoneNumberRange: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -69,20 +65,18 @@ final class PhoneNumberBlockCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<ActivationRange|array{
-     *   end_at: string, start_at: string
-     * }> $activation_ranges
-     * @param PhoneNumberRange|array{
-     *   end_at: string, start_at: string
-     * } $phone_number_range
+     *   endAt: string, startAt: string
+     * }> $activationRanges
+     * @param PhoneNumberRange|array{endAt: string, startAt: string} $phoneNumberRange
      */
     public static function with(
-        array $activation_ranges,
-        PhoneNumberRange|array $phone_number_range
+        array $activationRanges,
+        PhoneNumberRange|array $phoneNumberRange
     ): self {
         $obj = new self;
 
-        $obj['activation_ranges'] = $activation_ranges;
-        $obj['phone_number_range'] = $phone_number_range;
+        $obj['activationRanges'] = $activationRanges;
+        $obj['phoneNumberRange'] = $phoneNumberRange;
 
         return $obj;
     }
@@ -91,27 +85,25 @@ final class PhoneNumberBlockCreateParams implements BaseModel
      * Specifies the activation ranges for this porting phone number block. The activation range must be within the block range and should not overlap with other activation ranges.
      *
      * @param list<ActivationRange|array{
-     *   end_at: string, start_at: string
+     *   endAt: string, startAt: string
      * }> $activationRanges
      */
     public function withActivationRanges(array $activationRanges): self
     {
         $obj = clone $this;
-        $obj['activation_ranges'] = $activationRanges;
+        $obj['activationRanges'] = $activationRanges;
 
         return $obj;
     }
 
     /**
-     * @param PhoneNumberRange|array{
-     *   end_at: string, start_at: string
-     * } $phoneNumberRange
+     * @param PhoneNumberRange|array{endAt: string, startAt: string} $phoneNumberRange
      */
     public function withPhoneNumberRange(
         PhoneNumberRange|array $phoneNumberRange
     ): self {
         $obj = clone $this;
-        $obj['phone_number_range'] = $phoneNumberRange;
+        $obj['phoneNumberRange'] = $phoneNumberRange;
 
         return $obj;
     }

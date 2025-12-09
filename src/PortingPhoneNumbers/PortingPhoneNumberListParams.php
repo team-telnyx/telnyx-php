@@ -18,9 +18,7 @@ use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Page;
  * @see Telnyx\Services\PortingPhoneNumbersService::list()
  *
  * @phpstan-type PortingPhoneNumberListParamsShape = array{
- *   filter?: Filter|array{
- *     porting_order_status?: value-of<PortingOrderStatus>|null
- *   },
+ *   filter?: Filter|array{portingOrderStatus?: value-of<PortingOrderStatus>|null},
  *   page?: Page|array{number?: int|null, size?: int|null},
  * }
  */
@@ -53,7 +51,7 @@ final class PortingPhoneNumberListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   porting_order_status?: value-of<PortingOrderStatus>|null
+     *   portingOrderStatus?: value-of<PortingOrderStatus>|null
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      */
@@ -73,7 +71,7 @@ final class PortingPhoneNumberListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[porting_order_status].
      *
      * @param Filter|array{
-     *   porting_order_status?: value-of<PortingOrderStatus>|null
+     *   portingOrderStatus?: value-of<PortingOrderStatus>|null
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

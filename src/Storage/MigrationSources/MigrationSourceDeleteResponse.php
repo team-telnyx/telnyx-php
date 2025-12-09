@@ -34,11 +34,11 @@ final class MigrationSourceDeleteResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param MigrationSourceParams|array{
-     *   bucket_name: string,
+     *   bucketName: string,
      *   provider: value-of<Provider>,
-     *   provider_auth: ProviderAuth,
+     *   providerAuth: ProviderAuth,
      *   id?: string|null,
-     *   source_region?: string|null,
+     *   sourceRegion?: string|null,
      * } $data
      */
     public static function with(MigrationSourceParams|array|null $data = null): self
@@ -52,11 +52,11 @@ final class MigrationSourceDeleteResponse implements BaseModel
 
     /**
      * @param MigrationSourceParams|array{
-     *   bucket_name: string,
+     *   bucketName: string,
      *   provider: value-of<Provider>,
-     *   provider_auth: ProviderAuth,
+     *   providerAuth: ProviderAuth,
      *   id?: string|null,
-     *   source_region?: string|null,
+     *   sourceRegion?: string|null,
      * } $data
      */
     public function withData(MigrationSourceParams|array $data): self

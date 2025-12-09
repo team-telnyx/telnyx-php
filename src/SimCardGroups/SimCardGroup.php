@@ -12,15 +12,15 @@ use Telnyx\SimCardGroups\SimCardGroup\DataLimit;
 /**
  * @phpstan-type SimCardGroupShape = array{
  *   id?: string|null,
- *   consumed_data?: ConsumedData|null,
- *   created_at?: string|null,
- *   data_limit?: DataLimit|null,
+ *   consumedData?: ConsumedData|null,
+ *   createdAt?: string|null,
+ *   dataLimit?: DataLimit|null,
  *   default?: bool|null,
  *   name?: string|null,
- *   private_wireless_gateway_id?: string|null,
- *   record_type?: string|null,
- *   updated_at?: string|null,
- *   wireless_blocklist_id?: string|null,
+ *   privateWirelessGatewayID?: string|null,
+ *   recordType?: string|null,
+ *   updatedAt?: string|null,
+ *   wirelessBlocklistID?: string|null,
  * }
  */
 final class SimCardGroup implements BaseModel
@@ -37,20 +37,20 @@ final class SimCardGroup implements BaseModel
     /**
      * Represents the amount of data consumed.
      */
-    #[Optional]
-    public ?ConsumedData $consumed_data;
+    #[Optional('consumed_data')]
+    public ?ConsumedData $consumedData;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Optional]
-    public ?string $created_at;
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
     /**
      * Upper limit on the amount of data the SIM cards, within the group, can use.
      */
-    #[Optional]
-    public ?DataLimit $data_limit;
+    #[Optional('data_limit')]
+    public ?DataLimit $dataLimit;
 
     /**
      * Indicates whether the SIM card group is the users default group.<br/>The default group is created for the user and can not be removed.
@@ -67,26 +67,26 @@ final class SimCardGroup implements BaseModel
     /**
      * The identification of the related Private Wireless Gateway resource.
      */
-    #[Optional]
-    public ?string $private_wireless_gateway_id;
+    #[Optional('private_wireless_gateway_id')]
+    public ?string $privateWirelessGatewayID;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Optional]
-    public ?string $updated_at;
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     /**
      * The identification of the related Wireless Blocklist resource.
      */
-    #[Optional]
-    public ?string $wireless_blocklist_id;
+    #[Optional('wireless_blocklist_id')]
+    public ?string $wirelessBlocklistID;
 
     public function __construct()
     {
@@ -100,33 +100,33 @@ final class SimCardGroup implements BaseModel
      *
      * @param ConsumedData|array{
      *   amount?: string|null, unit?: string|null
-     * } $consumed_data
-     * @param DataLimit|array{amount?: string|null, unit?: string|null} $data_limit
+     * } $consumedData
+     * @param DataLimit|array{amount?: string|null, unit?: string|null} $dataLimit
      */
     public static function with(
         ?string $id = null,
-        ConsumedData|array|null $consumed_data = null,
-        ?string $created_at = null,
-        DataLimit|array|null $data_limit = null,
+        ConsumedData|array|null $consumedData = null,
+        ?string $createdAt = null,
+        DataLimit|array|null $dataLimit = null,
         ?bool $default = null,
         ?string $name = null,
-        ?string $private_wireless_gateway_id = null,
-        ?string $record_type = null,
-        ?string $updated_at = null,
-        ?string $wireless_blocklist_id = null,
+        ?string $privateWirelessGatewayID = null,
+        ?string $recordType = null,
+        ?string $updatedAt = null,
+        ?string $wirelessBlocklistID = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $consumed_data && $obj['consumed_data'] = $consumed_data;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $data_limit && $obj['data_limit'] = $data_limit;
+        null !== $consumedData && $obj['consumedData'] = $consumedData;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $dataLimit && $obj['dataLimit'] = $dataLimit;
         null !== $default && $obj['default'] = $default;
         null !== $name && $obj['name'] = $name;
-        null !== $private_wireless_gateway_id && $obj['private_wireless_gateway_id'] = $private_wireless_gateway_id;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
-        null !== $wireless_blocklist_id && $obj['wireless_blocklist_id'] = $wireless_blocklist_id;
+        null !== $privateWirelessGatewayID && $obj['privateWirelessGatewayID'] = $privateWirelessGatewayID;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $wirelessBlocklistID && $obj['wirelessBlocklistID'] = $wirelessBlocklistID;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class SimCardGroup implements BaseModel
     public function withConsumedData(ConsumedData|array $consumedData): self
     {
         $obj = clone $this;
-        $obj['consumed_data'] = $consumedData;
+        $obj['consumedData'] = $consumedData;
 
         return $obj;
     }
@@ -163,7 +163,7 @@ final class SimCardGroup implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -176,7 +176,7 @@ final class SimCardGroup implements BaseModel
     public function withDataLimit(DataLimit|array $dataLimit): self
     {
         $obj = clone $this;
-        $obj['data_limit'] = $dataLimit;
+        $obj['dataLimit'] = $dataLimit;
 
         return $obj;
     }
@@ -210,7 +210,7 @@ final class SimCardGroup implements BaseModel
         string $privateWirelessGatewayID
     ): self {
         $obj = clone $this;
-        $obj['private_wireless_gateway_id'] = $privateWirelessGatewayID;
+        $obj['privateWirelessGatewayID'] = $privateWirelessGatewayID;
 
         return $obj;
     }
@@ -221,7 +221,7 @@ final class SimCardGroup implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -232,7 +232,7 @@ final class SimCardGroup implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -243,7 +243,7 @@ final class SimCardGroup implements BaseModel
     public function withWirelessBlocklistID(string $wirelessBlocklistID): self
     {
         $obj = clone $this;
-        $obj['wireless_blocklist_id'] = $wirelessBlocklistID;
+        $obj['wirelessBlocklistID'] = $wirelessBlocklistID;
 
         return $obj;
     }

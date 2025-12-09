@@ -34,8 +34,8 @@ final class WirelessGetRegionsResponse implements BaseModel
      * @param list<Data|array{
      *   code: string,
      *   name: string,
-     *   inserted_at?: \DateTimeInterface|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   insertedAt?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public static function with(?array $data = null): self
@@ -51,8 +51,8 @@ final class WirelessGetRegionsResponse implements BaseModel
      * @param list<Data|array{
      *   code: string,
      *   name: string,
-     *   inserted_at?: \DateTimeInterface|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   insertedAt?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public function withData(array $data): self

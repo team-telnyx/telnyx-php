@@ -12,12 +12,12 @@ use Telnyx\ExternalConnections\Releases\ReleaseListResponse\Data\TelephoneNumber
 
 /**
  * @phpstan-type DataShape = array{
- *   created_at?: string|null,
- *   error_message?: string|null,
+ *   createdAt?: string|null,
+ *   errorMessage?: string|null,
  *   status?: value-of<Status>|null,
- *   telephone_numbers?: list<TelephoneNumber>|null,
- *   tenant_id?: string|null,
- *   ticket_id?: string|null,
+ *   telephoneNumbers?: list<TelephoneNumber>|null,
+ *   tenantID?: string|null,
+ *   ticketID?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -28,14 +28,14 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Optional]
-    public ?string $created_at;
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
     /**
      * A message set if there is an error with the upload process.
      */
-    #[Optional]
-    public ?string $error_message;
+    #[Optional('error_message')]
+    public ?string $errorMessage;
 
     /**
      * Represents the status of the release on Microsoft Teams.
@@ -45,18 +45,18 @@ final class Data implements BaseModel
     #[Optional(enum: Status::class)]
     public ?string $status;
 
-    /** @var list<TelephoneNumber>|null $telephone_numbers */
-    #[Optional(list: TelephoneNumber::class)]
-    public ?array $telephone_numbers;
+    /** @var list<TelephoneNumber>|null $telephoneNumbers */
+    #[Optional('telephone_numbers', list: TelephoneNumber::class)]
+    public ?array $telephoneNumbers;
 
-    #[Optional]
-    public ?string $tenant_id;
+    #[Optional('tenant_id')]
+    public ?string $tenantID;
 
     /**
      * Uniquely identifies the resource.
      */
-    #[Optional]
-    public ?string $ticket_id;
+    #[Optional('ticket_id')]
+    public ?string $ticketID;
 
     public function __construct()
     {
@@ -70,25 +70,25 @@ final class Data implements BaseModel
      *
      * @param Status|value-of<Status> $status
      * @param list<TelephoneNumber|array{
-     *   number_id?: string|null, phone_number?: string|null
-     * }> $telephone_numbers
+     *   numberID?: string|null, phoneNumber?: string|null
+     * }> $telephoneNumbers
      */
     public static function with(
-        ?string $created_at = null,
-        ?string $error_message = null,
+        ?string $createdAt = null,
+        ?string $errorMessage = null,
         Status|string|null $status = null,
-        ?array $telephone_numbers = null,
-        ?string $tenant_id = null,
-        ?string $ticket_id = null,
+        ?array $telephoneNumbers = null,
+        ?string $tenantID = null,
+        ?string $ticketID = null,
     ): self {
         $obj = new self;
 
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $error_message && $obj['error_message'] = $error_message;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $errorMessage && $obj['errorMessage'] = $errorMessage;
         null !== $status && $obj['status'] = $status;
-        null !== $telephone_numbers && $obj['telephone_numbers'] = $telephone_numbers;
-        null !== $tenant_id && $obj['tenant_id'] = $tenant_id;
-        null !== $ticket_id && $obj['ticket_id'] = $ticket_id;
+        null !== $telephoneNumbers && $obj['telephoneNumbers'] = $telephoneNumbers;
+        null !== $tenantID && $obj['tenantID'] = $tenantID;
+        null !== $ticketID && $obj['ticketID'] = $ticketID;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class Data implements BaseModel
     public function withErrorMessage(string $errorMessage): self
     {
         $obj = clone $this;
-        $obj['error_message'] = $errorMessage;
+        $obj['errorMessage'] = $errorMessage;
 
         return $obj;
     }
@@ -130,13 +130,13 @@ final class Data implements BaseModel
 
     /**
      * @param list<TelephoneNumber|array{
-     *   number_id?: string|null, phone_number?: string|null
+     *   numberID?: string|null, phoneNumber?: string|null
      * }> $telephoneNumbers
      */
     public function withTelephoneNumbers(array $telephoneNumbers): self
     {
         $obj = clone $this;
-        $obj['telephone_numbers'] = $telephoneNumbers;
+        $obj['telephoneNumbers'] = $telephoneNumbers;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class Data implements BaseModel
     public function withTenantID(string $tenantID): self
     {
         $obj = clone $this;
-        $obj['tenant_id'] = $tenantID;
+        $obj['tenantID'] = $tenantID;
 
         return $obj;
     }
@@ -155,7 +155,7 @@ final class Data implements BaseModel
     public function withTicketID(string $ticketID): self
     {
         $obj = clone $this;
-        $obj['ticket_id'] = $ticketID;
+        $obj['ticketID'] = $ticketID;
 
         return $obj;
     }

@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardsContract;
 use Telnyx\Services\SimCards\ActionsService;
@@ -50,7 +51,7 @@ final class SimCardsService implements SimCardsContract
      * Returns the details regarding a specific SIM card.
      *
      * @param array{
-     *   include_pin_puk_codes?: bool, include_sim_card_group?: bool
+     *   includePinPukCodes?: bool, includeSimCardGroup?: bool
      * }|SimCardRetrieveParams $params
      *
      * @throws APIException
@@ -69,7 +70,13 @@ final class SimCardsService implements SimCardsContract
         $response = $this->client->request(
             method: 'get',
             path: ['sim_cards/%1$s', $id],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'includePinPukCodes' => 'include_pin_puk_codes',
+                    'includeSimCardGroup' => 'include_sim_card_group',
+                ],
+            ),
             options: $options,
             convert: SimCardGetResponse::class,
         );
@@ -83,9 +90,9 @@ final class SimCardsService implements SimCardsContract
      * Updates SIM card data
      *
      * @param array{
-     *   authorized_imeis?: list<string>|null,
-     *   data_limit?: array{amount?: string, unit?: 'MB'|'GB'|Unit},
-     *   sim_card_group_id?: string,
+     *   authorizedImeis?: list<string>|null,
+     *   dataLimit?: array{amount?: string, unit?: 'MB'|'GB'|Unit},
+     *   simCardGroupID?: string,
      *   status?: array{
      *     reason?: string,
      *     value?: 'registering'|'enabling'|'enabled'|'disabling'|'disabled'|'data_limit_exceeded'|'setting_standby'|'standby'|Value,
@@ -128,8 +135,8 @@ final class SimCardsService implements SimCardsContract
      *     status?: list<'enabled'|'disabled'|'standby'|'data_limit_exceeded'|'unauthorized_imei'|Status>,
      *     tags?: list<string>,
      *   },
-     *   filter_sim_card_group_id_?: string,
-     *   include_sim_card_group?: bool,
+     *   filterSimCardGroupID?: string,
+     *   includeSimCardGroup?: bool,
      *   page?: array{number?: int, size?: int},
      *   sort?: 'current_billing_period_consumed_data.amount'|Sort,
      * }|SimCardListParams $params
@@ -149,7 +156,13 @@ final class SimCardsService implements SimCardsContract
         $response = $this->client->request(
             method: 'get',
             path: 'sim_cards',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'filterSimCardGroupID' => 'filter[sim_card_group_id]',
+                    'includeSimCardGroup' => 'include_sim_card_group',
+                ],
+            ),
             options: $options,
             convert: SimCardListResponse::class,
         );
@@ -164,7 +177,7 @@ final class SimCardsService implements SimCardsContract
      * Transitioning to the disabled state may take a period of time.
      * Until the transition is completed, the SIM card status will be disabling <code>disabling</code>.<br />In order to re-enable the SIM card, you will need to re-register it.
      *
-     * @param array{report_lost?: bool}|SimCardDeleteParams $params
+     * @param array{reportLost?: bool}|SimCardDeleteParams $params
      *
      * @throws APIException
      */
@@ -182,7 +195,10 @@ final class SimCardsService implements SimCardsContract
         $response = $this->client->request(
             method: 'delete',
             path: ['sim_cards/%1$s', $id],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['reportLost' => 'report_lost']
+            ),
             options: $options,
             convert: SimCardDeleteResponse::class,
         );
@@ -263,7 +279,7 @@ final class SimCardsService implements SimCardsContract
      * This API allows listing a paginated collection of Wireless Connectivity Logs associated with a SIM Card, for troubleshooting purposes.
      *
      * @param array{
-     *   page_number_?: int, page_size_?: int
+     *   pageNumber?: int, pageSize?: int
      * }|SimCardListWirelessConnectivityLogsParams $params
      *
      * @throws APIException
@@ -282,7 +298,10 @@ final class SimCardsService implements SimCardsContract
         $response = $this->client->request(
             method: 'get',
             path: ['sim_cards/%1$s/wireless_connectivity_logs', $id],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: SimCardListWirelessConnectivityLogsResponse::class,
         );

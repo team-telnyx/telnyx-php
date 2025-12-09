@@ -45,7 +45,7 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      * Create a messaging hosted number order
      *
      * @param array{
-     *   messaging_profile_id?: string, phone_numbers?: list<string>
+     *   messagingProfileID?: string, phoneNumbers?: list<string>
      * }|MessagingHostedNumberOrderCreateParams $params
      *
      * @throws APIException
@@ -153,7 +153,7 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      * Check eligibility of phone numbers for hosted messaging
      *
      * @param array{
-     *   phone_numbers: list<string>
+     *   phoneNumbers: list<string>
      * }|MessagingHostedNumberOrderCheckEligibilityParams $params
      *
      * @throws APIException
@@ -185,8 +185,8 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      * Create verification codes to validate numbers of the hosted order. The verification codes will be sent to the numbers of the hosted order.
      *
      * @param array{
-     *   phone_numbers: list<string>,
-     *   verification_method: 'sms'|'call'|'flashcall'|VerificationMethod,
+     *   phoneNumbers: list<string>,
+     *   verificationMethod: 'sms'|'call'|'flashcall'|VerificationMethod,
      * }|MessagingHostedNumberOrderCreateVerificationCodesParams $params
      *
      * @throws APIException
@@ -219,7 +219,7 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      * Validate the verification codes sent to the numbers of the hosted order. The verification codes must be created in the verification codes endpoint.
      *
      * @param array{
-     *   verification_codes: list<array{code: string, phone_number: string}>
+     *   verificationCodes: list<array{code: string, phoneNumber: string}>
      * }|MessagingHostedNumberOrderValidateCodesParams $params
      *
      * @throws APIException

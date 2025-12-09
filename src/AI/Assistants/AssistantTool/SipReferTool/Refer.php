@@ -16,8 +16,8 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type ReferShape = array{
  *   targets: list<Target>,
- *   custom_headers?: list<CustomHeader>|null,
- *   sip_headers?: list<SipHeader>|null,
+ *   customHeaders?: list<CustomHeader>|null,
+ *   sipHeaders?: list<SipHeader>|null,
  * }
  */
 final class Refer implements BaseModel
@@ -36,18 +36,18 @@ final class Refer implements BaseModel
     /**
      * Custom headers to be added to the SIP REFER.
      *
-     * @var list<CustomHeader>|null $custom_headers
+     * @var list<CustomHeader>|null $customHeaders
      */
-    #[Optional(list: CustomHeader::class)]
-    public ?array $custom_headers;
+    #[Optional('custom_headers', list: CustomHeader::class)]
+    public ?array $customHeaders;
 
     /**
      * SIP headers to be added to the SIP REFER. Currently only User-to-User and Diversion headers are supported.
      *
-     * @var list<SipHeader>|null $sip_headers
+     * @var list<SipHeader>|null $sipHeaders
      */
-    #[Optional(list: SipHeader::class)]
-    public ?array $sip_headers;
+    #[Optional('sip_headers', list: SipHeader::class)]
+    public ?array $sipHeaders;
 
     /**
      * `new Refer()` is missing required properties by the API.
@@ -75,28 +75,28 @@ final class Refer implements BaseModel
      *
      * @param list<Target|array{
      *   name: string,
-     *   sip_address: string,
-     *   sip_auth_password?: string|null,
-     *   sip_auth_username?: string|null,
+     *   sipAddress: string,
+     *   sipAuthPassword?: string|null,
+     *   sipAuthUsername?: string|null,
      * }> $targets
      * @param list<CustomHeader|array{
      *   name?: string|null, value?: string|null
-     * }> $custom_headers
+     * }> $customHeaders
      * @param list<SipHeader|array{
      *   name?: value-of<Name>|null, value?: string|null
-     * }> $sip_headers
+     * }> $sipHeaders
      */
     public static function with(
         array $targets,
-        ?array $custom_headers = null,
-        ?array $sip_headers = null
+        ?array $customHeaders = null,
+        ?array $sipHeaders = null
     ): self {
         $obj = new self;
 
         $obj['targets'] = $targets;
 
-        null !== $custom_headers && $obj['custom_headers'] = $custom_headers;
-        null !== $sip_headers && $obj['sip_headers'] = $sip_headers;
+        null !== $customHeaders && $obj['customHeaders'] = $customHeaders;
+        null !== $sipHeaders && $obj['sipHeaders'] = $sipHeaders;
 
         return $obj;
     }
@@ -106,9 +106,9 @@ final class Refer implements BaseModel
      *
      * @param list<Target|array{
      *   name: string,
-     *   sip_address: string,
-     *   sip_auth_password?: string|null,
-     *   sip_auth_username?: string|null,
+     *   sipAddress: string,
+     *   sipAuthPassword?: string|null,
+     *   sipAuthUsername?: string|null,
      * }> $targets
      */
     public function withTargets(array $targets): self
@@ -129,7 +129,7 @@ final class Refer implements BaseModel
     public function withCustomHeaders(array $customHeaders): self
     {
         $obj = clone $this;
-        $obj['custom_headers'] = $customHeaders;
+        $obj['customHeaders'] = $customHeaders;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class Refer implements BaseModel
     public function withSipHeaders(array $sipHeaders): self
     {
         $obj = clone $this;
-        $obj['sip_headers'] = $sipHeaders;
+        $obj['sipHeaders'] = $sipHeaders;
 
         return $obj;
     }

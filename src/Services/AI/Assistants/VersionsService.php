@@ -22,6 +22,7 @@ use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\VersionsContract;
 
@@ -38,7 +39,7 @@ final class VersionsService implements VersionsContract
      * Retrieves a specific version of an assistant by assistant_id and version_id
      *
      * @param array{
-     *   assistant_id: string, include_mcp_servers?: bool
+     *   assistantID: string, includeMcpServers?: bool
      * }|VersionRetrieveParams $params
      *
      * @throws APIException
@@ -52,14 +53,17 @@ final class VersionsService implements VersionsContract
             $params,
             $requestOptions,
         );
-        $assistantID = $parsed['assistant_id'];
-        unset($parsed['assistant_id']);
+        $assistantID = $parsed['assistantID'];
+        unset($parsed['assistantID']);
 
         /** @var BaseResponse<InferenceEmbedding> */
         $response = $this->client->request(
             method: 'get',
             path: ['ai/assistants/%1$s/versions/%2$s', $assistantID, $versionID],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['includeMcpServers' => 'include_mcp_servers']
+            ),
             options: $options,
             convert: InferenceEmbedding::class,
         );
@@ -73,23 +77,23 @@ final class VersionsService implements VersionsContract
      * Updates the configuration of a specific assistant version. Can not update main version
      *
      * @param array{
-     *   assistant_id: string,
+     *   assistantID: string,
      *   description?: string,
-     *   dynamic_variables?: array<string,mixed>,
-     *   dynamic_variables_webhook_url?: string,
-     *   enabled_features?: list<'telephony'|'messaging'|EnabledFeatures>,
+     *   dynamicVariables?: array<string,mixed>,
+     *   dynamicVariablesWebhookURL?: string,
+     *   enabledFeatures?: list<'telephony'|'messaging'|EnabledFeatures>,
      *   greeting?: string,
-     *   insight_settings?: array{insight_group_id?: string}|InsightSettings,
+     *   insightSettings?: array{insightGroupID?: string}|InsightSettings,
      *   instructions?: string,
-     *   llm_api_key_ref?: string,
-     *   messaging_settings?: array{
-     *     default_messaging_profile_id?: string, delivery_status_webhook_url?: string
+     *   llmAPIKeyRef?: string,
+     *   messagingSettings?: array{
+     *     defaultMessagingProfileID?: string, deliveryStatusWebhookURL?: string
      *   }|MessagingSettings,
      *   model?: string,
      *   name?: string,
-     *   privacy_settings?: array{data_retention?: bool}|PrivacySettings,
-     *   telephony_settings?: array{
-     *     default_texml_app_id?: string, supports_unauthenticated_web_calls?: bool
+     *   privacySettings?: array{dataRetention?: bool}|PrivacySettings,
+     *   telephonySettings?: array{
+     *     defaultTexmlAppID?: string, supportsUnauthenticatedWebCalls?: bool
      *   }|TelephonySettings,
      *   tools?: list<AssistantTool|array<string,mixed>>,
      *   transcription?: array{
@@ -97,17 +101,17 @@ final class VersionsService implements VersionsContract
      *     model?: 'deepgram/flux'|'deepgram/nova-3'|'deepgram/nova-2'|'azure/fast'|'distil-whisper/distil-large-v2'|'openai/whisper-large-v3-turbo'|Model,
      *     region?: string,
      *     settings?: array{
-     *       eot_threshold?: float,
-     *       eot_timeout_ms?: int,
+     *       eotThreshold?: float,
+     *       eotTimeoutMs?: int,
      *       numerals?: bool,
-     *       smart_format?: bool,
+     *       smartFormat?: bool,
      *     },
      *   }|TranscriptionSettings,
-     *   voice_settings?: array{
+     *   voiceSettings?: array{
      *     voice: string,
-     *     api_key_ref?: string,
-     *     background_audio?: array<string,mixed>,
-     *     voice_speed?: float,
+     *     apiKeyRef?: string,
+     *     backgroundAudio?: array<string,mixed>,
+     *     voiceSpeed?: float,
      *   }|VoiceSettings,
      * }|VersionUpdateParams $params
      *
@@ -122,14 +126,14 @@ final class VersionsService implements VersionsContract
             $params,
             $requestOptions,
         );
-        $assistantID = $parsed['assistant_id'];
-        unset($parsed['assistant_id']);
+        $assistantID = $parsed['assistantID'];
+        unset($parsed['assistantID']);
 
         /** @var BaseResponse<InferenceEmbedding> */
         $response = $this->client->request(
             method: 'post',
             path: ['ai/assistants/%1$s/versions/%2$s', $assistantID, $versionID],
-            body: (object) array_diff_key($parsed, ['assistant_id']),
+            body: (object) array_diff_key($parsed, ['assistantID']),
             options: $options,
             convert: InferenceEmbedding::class,
         );
@@ -164,7 +168,7 @@ final class VersionsService implements VersionsContract
      *
      * Permanently removes a specific version of an assistant. Can not delete main version
      *
-     * @param array{assistant_id: string}|VersionDeleteParams $params
+     * @param array{assistantID: string}|VersionDeleteParams $params
      *
      * @throws APIException
      */
@@ -177,8 +181,8 @@ final class VersionsService implements VersionsContract
             $params,
             $requestOptions,
         );
-        $assistantID = $parsed['assistant_id'];
-        unset($parsed['assistant_id']);
+        $assistantID = $parsed['assistantID'];
+        unset($parsed['assistantID']);
 
         /** @var BaseResponse<mixed> */
         $response = $this->client->request(
@@ -196,7 +200,7 @@ final class VersionsService implements VersionsContract
      *
      * Promotes a specific version to be the main/current version of the assistant. This will delete any existing canary deploy configuration and send all live production traffic to this version.
      *
-     * @param array{assistant_id: string}|VersionPromoteParams $params
+     * @param array{assistantID: string}|VersionPromoteParams $params
      *
      * @throws APIException
      */
@@ -209,8 +213,8 @@ final class VersionsService implements VersionsContract
             $params,
             $requestOptions,
         );
-        $assistantID = $parsed['assistant_id'];
-        unset($parsed['assistant_id']);
+        $assistantID = $parsed['assistantID'];
+        unset($parsed['assistantID']);
 
         /** @var BaseResponse<InferenceEmbedding> */
         $response = $this->client->request(

@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type WireguardPeerShape = array{
- *   ip_address?: string|null, name?: string|null
+ *   ipAddress?: string|null, name?: string|null
  * }
  */
 final class WireguardPeer implements BaseModel
@@ -21,8 +21,8 @@ final class WireguardPeer implements BaseModel
     /**
      * The IP address of the interface.
      */
-    #[Optional]
-    public ?string $ip_address;
+    #[Optional('ip_address')]
+    public ?string $ipAddress;
 
     /**
      * A user specified name for the interface.
@@ -41,12 +41,12 @@ final class WireguardPeer implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $ip_address = null,
+        ?string $ipAddress = null,
         ?string $name = null
     ): self {
         $obj = new self;
 
-        null !== $ip_address && $obj['ip_address'] = $ip_address;
+        null !== $ipAddress && $obj['ipAddress'] = $ipAddress;
         null !== $name && $obj['name'] = $name;
 
         return $obj;
@@ -58,7 +58,7 @@ final class WireguardPeer implements BaseModel
     public function withIPAddress(string $ipAddress): self
     {
         $obj = clone $this;
-        $obj['ip_address'] = $ipAddress;
+        $obj['ipAddress'] = $ipAddress;
 
         return $obj;
     }

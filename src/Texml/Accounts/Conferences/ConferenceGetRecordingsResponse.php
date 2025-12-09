@@ -14,10 +14,10 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording\
 /**
  * @phpstan-type ConferenceGetRecordingsResponseShape = array{
  *   end?: int|null,
- *   first_page_uri?: string|null,
- *   next_page_uri?: string|null,
+ *   firstPageUri?: string|null,
+ *   nextPageUri?: string|null,
  *   page?: int|null,
- *   page_size?: int|null,
+ *   pageSize?: int|null,
  *   recordings?: list<Recording>|null,
  *   start?: int|null,
  *   uri?: string|null,
@@ -37,14 +37,14 @@ final class ConferenceGetRecordingsResponse implements BaseModel
     /**
      * /v2/texml/Accounts/61bf923e-5e4d-4595-a110-56190ea18a1b/Conferences/6dc6cc1a-1ba1-4351-86b8-4c22c95cd98f/Recordings.json?page=0&pagesize=20.
      */
-    #[Optional]
-    public ?string $first_page_uri;
+    #[Optional('first_page_uri')]
+    public ?string $firstPageUri;
 
     /**
      * /v2/texml/Accounts/61bf923e-5e4d-4595-a110-56190ea18a1b/Conferences/6dc6cc1a-1ba1-4351-86b8-4c22c95cd98f/Recordings.json?Page=1&PageSize=1&PageToken=MTY4AjgyNDkwNzIxMQ.
      */
-    #[Optional]
-    public ?string $next_page_uri;
+    #[Optional('next_page_uri')]
+    public ?string $nextPageUri;
 
     /**
      * Current page number, zero-indexed.
@@ -55,8 +55,8 @@ final class ConferenceGetRecordingsResponse implements BaseModel
     /**
      * The number of items on the page.
      */
-    #[Optional]
-    public ?int $page_size;
+    #[Optional('page_size')]
+    public ?int $pageSize;
 
     /** @var list<Recording>|null $recordings */
     #[Optional(list: Recording::class)]
@@ -85,29 +85,29 @@ final class ConferenceGetRecordingsResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Recording|array{
-     *   account_sid?: string|null,
-     *   call_sid?: string|null,
+     *   accountSid?: string|null,
+     *   callSid?: string|null,
      *   channels?: int|null,
-     *   conference_sid?: string|null,
-     *   date_created?: string|null,
-     *   date_updated?: string|null,
+     *   conferenceSid?: string|null,
+     *   dateCreated?: string|null,
+     *   dateUpdated?: string|null,
      *   duration?: int|null,
-     *   error_code?: string|null,
-     *   media_url?: string|null,
+     *   errorCode?: string|null,
+     *   mediaURL?: string|null,
      *   sid?: string|null,
      *   source?: value-of<Source>|null,
-     *   start_time?: string|null,
+     *   startTime?: string|null,
      *   status?: value-of<Status>|null,
-     *   subresource_uris?: array<string,mixed>|null,
+     *   subresourceUris?: array<string,mixed>|null,
      *   uri?: string|null,
      * }> $recordings
      */
     public static function with(
         ?int $end = null,
-        ?string $first_page_uri = null,
-        ?string $next_page_uri = null,
+        ?string $firstPageUri = null,
+        ?string $nextPageUri = null,
         ?int $page = null,
-        ?int $page_size = null,
+        ?int $pageSize = null,
         ?array $recordings = null,
         ?int $start = null,
         ?string $uri = null,
@@ -115,10 +115,10 @@ final class ConferenceGetRecordingsResponse implements BaseModel
         $obj = new self;
 
         null !== $end && $obj['end'] = $end;
-        null !== $first_page_uri && $obj['first_page_uri'] = $first_page_uri;
-        null !== $next_page_uri && $obj['next_page_uri'] = $next_page_uri;
+        null !== $firstPageUri && $obj['firstPageUri'] = $firstPageUri;
+        null !== $nextPageUri && $obj['nextPageUri'] = $nextPageUri;
         null !== $page && $obj['page'] = $page;
-        null !== $page_size && $obj['page_size'] = $page_size;
+        null !== $pageSize && $obj['pageSize'] = $pageSize;
         null !== $recordings && $obj['recordings'] = $recordings;
         null !== $start && $obj['start'] = $start;
         null !== $uri && $obj['uri'] = $uri;
@@ -143,7 +143,7 @@ final class ConferenceGetRecordingsResponse implements BaseModel
     public function withFirstPageUri(string $firstPageUri): self
     {
         $obj = clone $this;
-        $obj['first_page_uri'] = $firstPageUri;
+        $obj['firstPageUri'] = $firstPageUri;
 
         return $obj;
     }
@@ -154,7 +154,7 @@ final class ConferenceGetRecordingsResponse implements BaseModel
     public function withNextPageUri(string $nextPageUri): self
     {
         $obj = clone $this;
-        $obj['next_page_uri'] = $nextPageUri;
+        $obj['nextPageUri'] = $nextPageUri;
 
         return $obj;
     }
@@ -176,27 +176,27 @@ final class ConferenceGetRecordingsResponse implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj['page_size'] = $pageSize;
+        $obj['pageSize'] = $pageSize;
 
         return $obj;
     }
 
     /**
      * @param list<Recording|array{
-     *   account_sid?: string|null,
-     *   call_sid?: string|null,
+     *   accountSid?: string|null,
+     *   callSid?: string|null,
      *   channels?: int|null,
-     *   conference_sid?: string|null,
-     *   date_created?: string|null,
-     *   date_updated?: string|null,
+     *   conferenceSid?: string|null,
+     *   dateCreated?: string|null,
+     *   dateUpdated?: string|null,
      *   duration?: int|null,
-     *   error_code?: string|null,
-     *   media_url?: string|null,
+     *   errorCode?: string|null,
+     *   mediaURL?: string|null,
      *   sid?: string|null,
      *   source?: value-of<Source>|null,
-     *   start_time?: string|null,
+     *   startTime?: string|null,
      *   status?: value-of<Status>|null,
-     *   subresource_uris?: array<string,mixed>|null,
+     *   subresourceUris?: array<string,mixed>|null,
      *   uri?: string|null,
      * }> $recordings
      */

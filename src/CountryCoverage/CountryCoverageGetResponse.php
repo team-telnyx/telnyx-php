@@ -38,19 +38,19 @@ final class CountryCoverageGetResponse implements BaseModel
      * @param array<string,Data|array{
      *   code?: string|null,
      *   features?: list<string>|null,
-     *   international_sms?: bool|null,
-     *   inventory_coverage?: bool|null,
+     *   internationalSMS?: bool|null,
+     *   inventoryCoverage?: bool|null,
      *   local?: Local|null,
      *   mobile?: array<string,mixed>|null,
      *   national?: array<string,mixed>|null,
      *   numbers?: bool|null,
      *   p2p?: bool|null,
-     *   phone_number_type?: list<string>|null,
+     *   phoneNumberType?: list<string>|null,
      *   quickship?: bool|null,
      *   region?: string|null,
      *   reservable?: bool|null,
-     *   shared_cost?: array<string,mixed>|null,
-     *   toll_free?: TollFree|null,
+     *   sharedCost?: array<string,mixed>|null,
+     *   tollFree?: TollFree|null,
      * }> $data
      */
     public static function with(?array $data = null): self
@@ -66,19 +66,19 @@ final class CountryCoverageGetResponse implements BaseModel
      * @param array<string,Data|array{
      *   code?: string|null,
      *   features?: list<string>|null,
-     *   international_sms?: bool|null,
-     *   inventory_coverage?: bool|null,
+     *   internationalSMS?: bool|null,
+     *   inventoryCoverage?: bool|null,
      *   local?: Local|null,
      *   mobile?: array<string,mixed>|null,
      *   national?: array<string,mixed>|null,
      *   numbers?: bool|null,
      *   p2p?: bool|null,
-     *   phone_number_type?: list<string>|null,
+     *   phoneNumberType?: list<string>|null,
      *   quickship?: bool|null,
      *   region?: string|null,
      *   reservable?: bool|null,
-     *   shared_cost?: array<string,mixed>|null,
-     *   toll_free?: TollFree|null,
+     *   sharedCost?: array<string,mixed>|null,
+     *   tollFree?: TollFree|null,
      * }> $data
      */
     public function withData(array $data): self

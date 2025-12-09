@@ -15,9 +15,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\GlobalIPHealthChecksService::create()
  *
  * @phpstan-type GlobalIPHealthCheckCreateParamsShape = array{
- *   global_ip_id?: string,
- *   health_check_params?: array<string,mixed>,
- *   health_check_type?: string,
+ *   globalIPID?: string,
+ *   healthCheckParams?: array<string,mixed>,
+ *   healthCheckType?: string,
  * }
  */
 final class GlobalIPHealthCheckCreateParams implements BaseModel
@@ -29,22 +29,22 @@ final class GlobalIPHealthCheckCreateParams implements BaseModel
     /**
      * Global IP ID.
      */
-    #[Optional]
-    public ?string $global_ip_id;
+    #[Optional('global_ip_id')]
+    public ?string $globalIPID;
 
     /**
      * A Global IP health check params.
      *
-     * @var array<string,mixed>|null $health_check_params
+     * @var array<string,mixed>|null $healthCheckParams
      */
-    #[Optional(map: 'mixed')]
-    public ?array $health_check_params;
+    #[Optional('health_check_params', map: 'mixed')]
+    public ?array $healthCheckParams;
 
     /**
      * The Global IP health check type.
      */
-    #[Optional]
-    public ?string $health_check_type;
+    #[Optional('health_check_type')]
+    public ?string $healthCheckType;
 
     public function __construct()
     {
@@ -56,18 +56,18 @@ final class GlobalIPHealthCheckCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,mixed> $health_check_params
+     * @param array<string,mixed> $healthCheckParams
      */
     public static function with(
-        ?string $global_ip_id = null,
-        ?array $health_check_params = null,
-        ?string $health_check_type = null,
+        ?string $globalIPID = null,
+        ?array $healthCheckParams = null,
+        ?string $healthCheckType = null,
     ): self {
         $obj = new self;
 
-        null !== $global_ip_id && $obj['global_ip_id'] = $global_ip_id;
-        null !== $health_check_params && $obj['health_check_params'] = $health_check_params;
-        null !== $health_check_type && $obj['health_check_type'] = $health_check_type;
+        null !== $globalIPID && $obj['globalIPID'] = $globalIPID;
+        null !== $healthCheckParams && $obj['healthCheckParams'] = $healthCheckParams;
+        null !== $healthCheckType && $obj['healthCheckType'] = $healthCheckType;
 
         return $obj;
     }
@@ -75,10 +75,10 @@ final class GlobalIPHealthCheckCreateParams implements BaseModel
     /**
      * Global IP ID.
      */
-    public function withGlobalIPID(string $globalIPID): self
+    public function withGlobalIpid(string $globalIPID): self
     {
         $obj = clone $this;
-        $obj['global_ip_id'] = $globalIPID;
+        $obj['globalIPID'] = $globalIPID;
 
         return $obj;
     }
@@ -91,7 +91,7 @@ final class GlobalIPHealthCheckCreateParams implements BaseModel
     public function withHealthCheckParams(array $healthCheckParams): self
     {
         $obj = clone $this;
-        $obj['health_check_params'] = $healthCheckParams;
+        $obj['healthCheckParams'] = $healthCheckParams;
 
         return $obj;
     }
@@ -102,7 +102,7 @@ final class GlobalIPHealthCheckCreateParams implements BaseModel
     public function withHealthCheckType(string $healthCheckType): self
     {
         $obj = clone $this;
-        $obj['health_check_type'] = $healthCheckType;
+        $obj['healthCheckType'] = $healthCheckType;
 
         return $obj;
     }

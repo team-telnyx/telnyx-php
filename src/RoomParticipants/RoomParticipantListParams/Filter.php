@@ -16,10 +16,10 @@ use Telnyx\RoomParticipants\RoomParticipantListParams\Filter\DateUpdatedAt;
  *
  * @phpstan-type FilterShape = array{
  *   context?: string|null,
- *   date_joined_at?: DateJoinedAt|null,
- *   date_left_at?: DateLeftAt|null,
- *   date_updated_at?: DateUpdatedAt|null,
- *   session_id?: string|null,
+ *   dateJoinedAt?: DateJoinedAt|null,
+ *   dateLeftAt?: DateLeftAt|null,
+ *   dateUpdatedAt?: DateUpdatedAt|null,
+ *   sessionID?: string|null,
  * }
  */
 final class Filter implements BaseModel
@@ -33,20 +33,20 @@ final class Filter implements BaseModel
     #[Optional]
     public ?string $context;
 
-    #[Optional]
-    public ?DateJoinedAt $date_joined_at;
+    #[Optional('date_joined_at')]
+    public ?DateJoinedAt $dateJoinedAt;
 
-    #[Optional]
-    public ?DateLeftAt $date_left_at;
+    #[Optional('date_left_at')]
+    public ?DateLeftAt $dateLeftAt;
 
-    #[Optional]
-    public ?DateUpdatedAt $date_updated_at;
+    #[Optional('date_updated_at')]
+    public ?DateUpdatedAt $dateUpdatedAt;
 
     /**
      * Session_id for filtering room participants.
      */
-    #[Optional]
-    public ?string $session_id;
+    #[Optional('session_id')]
+    public ?string $sessionID;
 
     public function __construct()
     {
@@ -62,32 +62,32 @@ final class Filter implements BaseModel
      *   eq?: \DateTimeInterface|null,
      *   gte?: \DateTimeInterface|null,
      *   lte?: \DateTimeInterface|null,
-     * } $date_joined_at
+     * } $dateJoinedAt
      * @param DateLeftAt|array{
      *   eq?: \DateTimeInterface|null,
      *   gte?: \DateTimeInterface|null,
      *   lte?: \DateTimeInterface|null,
-     * } $date_left_at
+     * } $dateLeftAt
      * @param DateUpdatedAt|array{
      *   eq?: \DateTimeInterface|null,
      *   gte?: \DateTimeInterface|null,
      *   lte?: \DateTimeInterface|null,
-     * } $date_updated_at
+     * } $dateUpdatedAt
      */
     public static function with(
         ?string $context = null,
-        DateJoinedAt|array|null $date_joined_at = null,
-        DateLeftAt|array|null $date_left_at = null,
-        DateUpdatedAt|array|null $date_updated_at = null,
-        ?string $session_id = null,
+        DateJoinedAt|array|null $dateJoinedAt = null,
+        DateLeftAt|array|null $dateLeftAt = null,
+        DateUpdatedAt|array|null $dateUpdatedAt = null,
+        ?string $sessionID = null,
     ): self {
         $obj = new self;
 
         null !== $context && $obj['context'] = $context;
-        null !== $date_joined_at && $obj['date_joined_at'] = $date_joined_at;
-        null !== $date_left_at && $obj['date_left_at'] = $date_left_at;
-        null !== $date_updated_at && $obj['date_updated_at'] = $date_updated_at;
-        null !== $session_id && $obj['session_id'] = $session_id;
+        null !== $dateJoinedAt && $obj['dateJoinedAt'] = $dateJoinedAt;
+        null !== $dateLeftAt && $obj['dateLeftAt'] = $dateLeftAt;
+        null !== $dateUpdatedAt && $obj['dateUpdatedAt'] = $dateUpdatedAt;
+        null !== $sessionID && $obj['sessionID'] = $sessionID;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class Filter implements BaseModel
     public function withDateJoinedAt(DateJoinedAt|array $dateJoinedAt): self
     {
         $obj = clone $this;
-        $obj['date_joined_at'] = $dateJoinedAt;
+        $obj['dateJoinedAt'] = $dateJoinedAt;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class Filter implements BaseModel
     public function withDateLeftAt(DateLeftAt|array $dateLeftAt): self
     {
         $obj = clone $this;
-        $obj['date_left_at'] = $dateLeftAt;
+        $obj['dateLeftAt'] = $dateLeftAt;
 
         return $obj;
     }
@@ -143,7 +143,7 @@ final class Filter implements BaseModel
     public function withDateUpdatedAt(DateUpdatedAt|array $dateUpdatedAt): self
     {
         $obj = clone $this;
-        $obj['date_updated_at'] = $dateUpdatedAt;
+        $obj['dateUpdatedAt'] = $dateUpdatedAt;
 
         return $obj;
     }
@@ -154,7 +154,7 @@ final class Filter implements BaseModel
     public function withSessionID(string $sessionID): self
     {
         $obj = clone $this;
-        $obj['session_id'] = $sessionID;
+        $obj['sessionID'] = $sessionID;
 
         return $obj;
     }

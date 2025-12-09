@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   first_port?: int|null,
- *   last_port?: int|null,
+ *   firstPort?: int|null,
+ *   lastPort?: int|null,
  *   name?: string|null,
- *   protocol_code?: string|null,
- *   record_type?: string|null,
+ *   protocolCode?: string|null,
+ *   recordType?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -32,14 +32,14 @@ final class Data implements BaseModel
     /**
      * First port of a range.
      */
-    #[Optional]
-    public ?int $first_port;
+    #[Optional('first_port')]
+    public ?int $firstPort;
 
     /**
      * Last port of a range.
      */
-    #[Optional]
-    public ?int $last_port;
+    #[Optional('last_port')]
+    public ?int $lastPort;
 
     /**
      * A name for the Global IP ports range.
@@ -50,14 +50,14 @@ final class Data implements BaseModel
     /**
      * The Global IP Protocol code.
      */
-    #[Optional]
-    public ?string $protocol_code;
+    #[Optional('protocol_code')]
+    public ?string $protocolCode;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     public function __construct()
     {
@@ -71,20 +71,20 @@ final class Data implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?int $first_port = null,
-        ?int $last_port = null,
+        ?int $firstPort = null,
+        ?int $lastPort = null,
         ?string $name = null,
-        ?string $protocol_code = null,
-        ?string $record_type = null,
+        ?string $protocolCode = null,
+        ?string $recordType = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $first_port && $obj['first_port'] = $first_port;
-        null !== $last_port && $obj['last_port'] = $last_port;
+        null !== $firstPort && $obj['firstPort'] = $firstPort;
+        null !== $lastPort && $obj['lastPort'] = $lastPort;
         null !== $name && $obj['name'] = $name;
-        null !== $protocol_code && $obj['protocol_code'] = $protocol_code;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $protocolCode && $obj['protocolCode'] = $protocolCode;
+        null !== $recordType && $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class Data implements BaseModel
     public function withFirstPort(int $firstPort): self
     {
         $obj = clone $this;
-        $obj['first_port'] = $firstPort;
+        $obj['firstPort'] = $firstPort;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class Data implements BaseModel
     public function withLastPort(int $lastPort): self
     {
         $obj = clone $this;
-        $obj['last_port'] = $lastPort;
+        $obj['lastPort'] = $lastPort;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class Data implements BaseModel
     public function withProtocolCode(string $protocolCode): self
     {
         $obj = clone $this;
-        $obj['protocol_code'] = $protocolCode;
+        $obj['protocolCode'] = $protocolCode;
 
         return $obj;
     }
@@ -150,7 +150,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

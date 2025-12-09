@@ -31,7 +31,7 @@ final class ActionRefreshClientTokenResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Data|array{
-     *   token?: string|null, token_expires_at?: \DateTimeInterface|null
+     *   token?: string|null, tokenExpiresAt?: \DateTimeInterface|null
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -45,7 +45,7 @@ final class ActionRefreshClientTokenResponse implements BaseModel
 
     /**
      * @param Data|array{
-     *   token?: string|null, token_expires_at?: \DateTimeInterface|null
+     *   token?: string|null, tokenExpiresAt?: \DateTimeInterface|null
      * } $data
      */
     public function withData(Data|array $data): self

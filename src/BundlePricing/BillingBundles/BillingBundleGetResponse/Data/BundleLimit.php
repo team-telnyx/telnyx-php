@@ -13,14 +13,14 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type BundleLimitShape = array{
  *   id: string,
- *   created_at: \DateTimeInterface,
+ *   createdAt: \DateTimeInterface,
  *   metric: string,
  *   service: string,
- *   updated_at: \DateTimeInterface,
- *   billing_service?: string|null,
+ *   updatedAt: \DateTimeInterface,
+ *   billingService?: string|null,
  *   country?: string|null,
- *   country_code?: int|null,
- *   country_iso?: string|null,
+ *   countryCode?: int|null,
+ *   countryISO?: string|null,
  *   direction?: value-of<Direction>|null,
  *   limit?: int|null,
  *   rate?: string|null,
@@ -35,8 +35,8 @@ final class BundleLimit implements BaseModel
     #[Required]
     public string $id;
 
-    #[Required]
-    public \DateTimeInterface $created_at;
+    #[Required('created_at')]
+    public \DateTimeInterface $createdAt;
 
     #[Required]
     public string $metric;
@@ -44,11 +44,11 @@ final class BundleLimit implements BaseModel
     #[Required]
     public string $service;
 
-    #[Required]
-    public \DateTimeInterface $updated_at;
+    #[Required('updated_at')]
+    public \DateTimeInterface $updatedAt;
 
-    #[Optional]
-    public ?string $billing_service;
+    #[Optional('billing_service')]
+    public ?string $billingService;
 
     /**
      * @deprecated
@@ -58,11 +58,11 @@ final class BundleLimit implements BaseModel
     #[Optional]
     public ?string $country;
 
-    #[Optional]
-    public ?int $country_code;
+    #[Optional('country_code')]
+    public ?int $countryCode;
 
-    #[Optional]
-    public ?string $country_iso;
+    #[Optional('country_iso')]
+    public ?string $countryISO;
 
     /**
      * An enumeration.
@@ -88,7 +88,7 @@ final class BundleLimit implements BaseModel
      * To enforce required parameters use
      * ```
      * BundleLimit::with(
-     *   id: ..., created_at: ..., metric: ..., service: ..., updated_at: ...
+     *   id: ..., createdAt: ..., metric: ..., service: ..., updatedAt: ...
      * )
      * ```
      *
@@ -118,14 +118,14 @@ final class BundleLimit implements BaseModel
      */
     public static function with(
         string $id,
-        \DateTimeInterface $created_at,
+        \DateTimeInterface $createdAt,
         string $metric,
         string $service,
-        \DateTimeInterface $updated_at,
-        ?string $billing_service = null,
+        \DateTimeInterface $updatedAt,
+        ?string $billingService = null,
         ?string $country = null,
-        ?int $country_code = null,
-        ?string $country_iso = null,
+        ?int $countryCode = null,
+        ?string $countryISO = null,
         Direction|string|null $direction = null,
         ?int $limit = null,
         ?string $rate = null,
@@ -134,15 +134,15 @@ final class BundleLimit implements BaseModel
         $obj = new self;
 
         $obj['id'] = $id;
-        $obj['created_at'] = $created_at;
+        $obj['createdAt'] = $createdAt;
         $obj['metric'] = $metric;
         $obj['service'] = $service;
-        $obj['updated_at'] = $updated_at;
+        $obj['updatedAt'] = $updatedAt;
 
-        null !== $billing_service && $obj['billing_service'] = $billing_service;
+        null !== $billingService && $obj['billingService'] = $billingService;
         null !== $country && $obj['country'] = $country;
-        null !== $country_code && $obj['country_code'] = $country_code;
-        null !== $country_iso && $obj['country_iso'] = $country_iso;
+        null !== $countryCode && $obj['countryCode'] = $countryCode;
+        null !== $countryISO && $obj['countryISO'] = $countryISO;
         null !== $direction && $obj['direction'] = $direction;
         null !== $limit && $obj['limit'] = $limit;
         null !== $rate && $obj['rate'] = $rate;
@@ -162,7 +162,7 @@ final class BundleLimit implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -186,7 +186,7 @@ final class BundleLimit implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -194,7 +194,7 @@ final class BundleLimit implements BaseModel
     public function withBillingService(string $billingService): self
     {
         $obj = clone $this;
-        $obj['billing_service'] = $billingService;
+        $obj['billingService'] = $billingService;
 
         return $obj;
     }
@@ -213,7 +213,7 @@ final class BundleLimit implements BaseModel
     public function withCountryCode(int $countryCode): self
     {
         $obj = clone $this;
-        $obj['country_code'] = $countryCode;
+        $obj['countryCode'] = $countryCode;
 
         return $obj;
     }
@@ -221,7 +221,7 @@ final class BundleLimit implements BaseModel
     public function withCountryISO(string $countryISO): self
     {
         $obj = clone $this;
-        $obj['country_iso'] = $countryISO;
+        $obj['countryISO'] = $countryISO;
 
         return $obj;
     }

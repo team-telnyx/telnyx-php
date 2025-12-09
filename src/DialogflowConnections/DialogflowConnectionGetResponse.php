@@ -45,11 +45,11 @@ final class DialogflowConnectionGetResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Data|array{
-     *   connection_id?: string|null,
-     *   conversation_profile_id?: string|null,
+     *   connectionID?: string|null,
+     *   conversationProfileID?: string|null,
      *   environment?: string|null,
-     *   record_type?: string|null,
-     *   service_account?: string|null,
+     *   recordType?: string|null,
+     *   serviceAccount?: string|null,
      * } $data
      */
     public static function with(Data|array $data): self
@@ -63,11 +63,11 @@ final class DialogflowConnectionGetResponse implements BaseModel
 
     /**
      * @param Data|array{
-     *   connection_id?: string|null,
-     *   conversation_profile_id?: string|null,
+     *   connectionID?: string|null,
+     *   conversationProfileID?: string|null,
      *   environment?: string|null,
-     *   record_type?: string|null,
-     *   service_account?: string|null,
+     *   recordType?: string|null,
+     *   serviceAccount?: string|null,
      * } $data
      */
     public function withData(Data|array $data): self

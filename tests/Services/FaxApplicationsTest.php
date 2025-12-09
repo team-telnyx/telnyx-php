@@ -40,8 +40,8 @@ final class FaxApplicationsTest extends TestCase
         }
 
         $result = $this->client->faxApplications->create([
-            'application_name' => 'fax-router',
-            'webhook_event_url' => 'https://example.com',
+            'applicationName' => 'fax-router',
+            'webhookEventURL' => 'https://example.com',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -56,22 +56,21 @@ final class FaxApplicationsTest extends TestCase
         }
 
         $result = $this->client->faxApplications->create([
-            'application_name' => 'fax-router',
-            'webhook_event_url' => 'https://example.com',
+            'applicationName' => 'fax-router',
+            'webhookEventURL' => 'https://example.com',
             'active' => false,
-            'anchorsite_override' => AnchorsiteOverride::AMSTERDAM_NETHERLANDS,
+            'anchorsiteOverride' => AnchorsiteOverride::AMSTERDAM_NETHERLANDS,
             'inbound' => [
-                'channel_limit' => 10,
-                'sip_subdomain' => 'example',
-                'sip_subdomain_receive_settings' => 'only_my_connections',
+                'channelLimit' => 10,
+                'sipSubdomain' => 'example',
+                'sipSubdomainReceiveSettings' => 'only_my_connections',
             ],
             'outbound' => [
-                'channel_limit' => 10,
-                'outbound_voice_profile_id' => '1293384261075731499',
+                'channelLimit' => 10, 'outboundVoiceProfileID' => '1293384261075731499',
             ],
             'tags' => ['tag1', 'tag2'],
-            'webhook_event_failover_url' => 'https://failover.example.com',
-            'webhook_timeout_secs' => 25,
+            'webhookEventFailoverURL' => 'https://failover.example.com',
+            'webhookTimeoutSecs' => 25,
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -101,8 +100,8 @@ final class FaxApplicationsTest extends TestCase
         $result = $this->client->faxApplications->update(
             '1293384261075731499',
             [
-                'application_name' => 'fax-router',
-                'webhook_event_url' => 'https://example.com',
+                'applicationName' => 'fax-router',
+                'webhookEventURL' => 'https://example.com',
             ],
         );
 
@@ -120,23 +119,23 @@ final class FaxApplicationsTest extends TestCase
         $result = $this->client->faxApplications->update(
             '1293384261075731499',
             [
-                'application_name' => 'fax-router',
-                'webhook_event_url' => 'https://example.com',
+                'applicationName' => 'fax-router',
+                'webhookEventURL' => 'https://example.com',
                 'active' => false,
-                'anchorsite_override' => AnchorsiteOverride::AMSTERDAM_NETHERLANDS,
-                'fax_email_recipient' => 'user@example.com',
+                'anchorsiteOverride' => AnchorsiteOverride::AMSTERDAM_NETHERLANDS,
+                'faxEmailRecipient' => 'user@example.com',
                 'inbound' => [
-                    'channel_limit' => 10,
-                    'sip_subdomain' => 'example',
-                    'sip_subdomain_receive_settings' => 'only_my_connections',
+                    'channelLimit' => 10,
+                    'sipSubdomain' => 'example',
+                    'sipSubdomainReceiveSettings' => 'only_my_connections',
                 ],
                 'outbound' => [
-                    'channel_limit' => 10,
-                    'outbound_voice_profile_id' => '1293384261075731499',
+                    'channelLimit' => 10,
+                    'outboundVoiceProfileID' => '1293384261075731499',
                 ],
                 'tags' => ['tag1', 'tag2'],
-                'webhook_event_failover_url' => 'https://failover.example.com',
-                'webhook_timeout_secs' => 25,
+                'webhookEventFailoverURL' => 'https://failover.example.com',
+                'webhookTimeoutSecs' => 25,
             ],
         );
 

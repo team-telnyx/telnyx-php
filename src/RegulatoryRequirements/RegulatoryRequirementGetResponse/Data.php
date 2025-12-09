@@ -13,9 +13,9 @@ use Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse\Data\Regulato
 /**
  * @phpstan-type DataShape = array{
  *   action?: string|null,
- *   country_code?: string|null,
- *   phone_number_type?: string|null,
- *   regulatory_requirements?: list<RegulatoryRequirement>|null,
+ *   countryCode?: string|null,
+ *   phoneNumberType?: string|null,
+ *   regulatoryRequirements?: list<RegulatoryRequirement>|null,
  * }
  */
 final class Data implements BaseModel
@@ -26,15 +26,15 @@ final class Data implements BaseModel
     #[Optional]
     public ?string $action;
 
-    #[Optional]
-    public ?string $country_code;
+    #[Optional('country_code')]
+    public ?string $countryCode;
 
-    #[Optional]
-    public ?string $phone_number_type;
+    #[Optional('phone_number_type')]
+    public ?string $phoneNumberType;
 
-    /** @var list<RegulatoryRequirement>|null $regulatory_requirements */
-    #[Optional(list: RegulatoryRequirement::class)]
-    public ?array $regulatory_requirements;
+    /** @var list<RegulatoryRequirement>|null $regulatoryRequirements */
+    #[Optional('regulatory_requirements', list: RegulatoryRequirement::class)]
+    public ?array $regulatoryRequirements;
 
     public function __construct()
     {
@@ -48,25 +48,25 @@ final class Data implements BaseModel
      *
      * @param list<RegulatoryRequirement|array{
      *   id?: string|null,
-     *   acceptance_criteria?: AcceptanceCriteria|null,
+     *   acceptanceCriteria?: AcceptanceCriteria|null,
      *   description?: string|null,
      *   example?: string|null,
-     *   field_type?: string|null,
+     *   fieldType?: string|null,
      *   name?: string|null,
-     * }> $regulatory_requirements
+     * }> $regulatoryRequirements
      */
     public static function with(
         ?string $action = null,
-        ?string $country_code = null,
-        ?string $phone_number_type = null,
-        ?array $regulatory_requirements = null,
+        ?string $countryCode = null,
+        ?string $phoneNumberType = null,
+        ?array $regulatoryRequirements = null,
     ): self {
         $obj = new self;
 
         null !== $action && $obj['action'] = $action;
-        null !== $country_code && $obj['country_code'] = $country_code;
-        null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
-        null !== $regulatory_requirements && $obj['regulatory_requirements'] = $regulatory_requirements;
+        null !== $countryCode && $obj['countryCode'] = $countryCode;
+        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
+        null !== $regulatoryRequirements && $obj['regulatoryRequirements'] = $regulatoryRequirements;
 
         return $obj;
     }
@@ -82,7 +82,7 @@ final class Data implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj['country_code'] = $countryCode;
+        $obj['countryCode'] = $countryCode;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class Data implements BaseModel
     public function withPhoneNumberType(string $phoneNumberType): self
     {
         $obj = clone $this;
-        $obj['phone_number_type'] = $phoneNumberType;
+        $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }
@@ -98,10 +98,10 @@ final class Data implements BaseModel
     /**
      * @param list<RegulatoryRequirement|array{
      *   id?: string|null,
-     *   acceptance_criteria?: AcceptanceCriteria|null,
+     *   acceptanceCriteria?: AcceptanceCriteria|null,
      *   description?: string|null,
      *   example?: string|null,
-     *   field_type?: string|null,
+     *   fieldType?: string|null,
      *   name?: string|null,
      * }> $regulatoryRequirements
      */
@@ -109,7 +109,7 @@ final class Data implements BaseModel
         array $regulatoryRequirements
     ): self {
         $obj = clone $this;
-        $obj['regulatory_requirements'] = $regulatoryRequirements;
+        $obj['regulatoryRequirements'] = $regulatoryRequirements;
 
         return $obj;
     }

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Configuration parameters for noise suppression engines.
  *
  * @phpstan-type NoiseSuppressionEngineConfigShape = array{
- *   attenuation_limit?: int|null
+ *   attenuationLimit?: int|null
  * }
  */
 final class NoiseSuppressionEngineConfig implements BaseModel
@@ -23,8 +23,8 @@ final class NoiseSuppressionEngineConfig implements BaseModel
     /**
      * The attenuation limit for noise suppression (0-100). Only applicable for DeepFilterNet.
      */
-    #[Optional]
-    public ?int $attenuation_limit;
+    #[Optional('attenuation_limit')]
+    public ?int $attenuationLimit;
 
     public function __construct()
     {
@@ -36,11 +36,11 @@ final class NoiseSuppressionEngineConfig implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?int $attenuation_limit = null): self
+    public static function with(?int $attenuationLimit = null): self
     {
         $obj = new self;
 
-        null !== $attenuation_limit && $obj['attenuation_limit'] = $attenuation_limit;
+        null !== $attenuationLimit && $obj['attenuationLimit'] = $attenuationLimit;
 
         return $obj;
     }
@@ -51,7 +51,7 @@ final class NoiseSuppressionEngineConfig implements BaseModel
     public function withAttenuationLimit(int $attenuationLimit): self
     {
         $obj = clone $this;
-        $obj['attenuation_limit'] = $attenuationLimit;
+        $obj['attenuationLimit'] = $attenuationLimit;
 
         return $obj;
     }

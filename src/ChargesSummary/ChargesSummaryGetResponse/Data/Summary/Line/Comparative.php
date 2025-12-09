@@ -12,9 +12,9 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type ComparativeShape = array{
  *   alias: string,
- *   existing_this_month: MonthDetail,
+ *   existingThisMonth: MonthDetail,
  *   name: string,
- *   new_this_month: MonthDetail,
+ *   newThisMonth: MonthDetail,
  *   type?: 'comparative',
  * }
  */
@@ -33,8 +33,8 @@ final class Comparative implements BaseModel
     #[Required]
     public string $alias;
 
-    #[Required]
-    public MonthDetail $existing_this_month;
+    #[Required('existing_this_month')]
+    public MonthDetail $existingThisMonth;
 
     /**
      * Service name.
@@ -42,8 +42,8 @@ final class Comparative implements BaseModel
     #[Required]
     public string $name;
 
-    #[Required]
-    public MonthDetail $new_this_month;
+    #[Required('new_this_month')]
+    public MonthDetail $newThisMonth;
 
     /**
      * `new Comparative()` is missing required properties by the API.
@@ -51,7 +51,7 @@ final class Comparative implements BaseModel
      * To enforce required parameters use
      * ```
      * Comparative::with(
-     *   alias: ..., existing_this_month: ..., name: ..., new_this_month: ...
+     *   alias: ..., existingThisMonth: ..., name: ..., newThisMonth: ...
      * )
      * ```
      *
@@ -77,23 +77,23 @@ final class Comparative implements BaseModel
      *
      * @param MonthDetail|array{
      *   mrc: string, quantity: int, otc?: string|null
-     * } $existing_this_month
+     * } $existingThisMonth
      * @param MonthDetail|array{
      *   mrc: string, quantity: int, otc?: string|null
-     * } $new_this_month
+     * } $newThisMonth
      */
     public static function with(
         string $alias,
-        MonthDetail|array $existing_this_month,
+        MonthDetail|array $existingThisMonth,
         string $name,
-        MonthDetail|array $new_this_month,
+        MonthDetail|array $newThisMonth,
     ): self {
         $obj = new self;
 
         $obj['alias'] = $alias;
-        $obj['existing_this_month'] = $existing_this_month;
+        $obj['existingThisMonth'] = $existingThisMonth;
         $obj['name'] = $name;
-        $obj['new_this_month'] = $new_this_month;
+        $obj['newThisMonth'] = $newThisMonth;
 
         return $obj;
     }
@@ -118,7 +118,7 @@ final class Comparative implements BaseModel
         MonthDetail|array $existingThisMonth
     ): self {
         $obj = clone $this;
-        $obj['existing_this_month'] = $existingThisMonth;
+        $obj['existingThisMonth'] = $existingThisMonth;
 
         return $obj;
     }
@@ -142,7 +142,7 @@ final class Comparative implements BaseModel
     public function withNewThisMonth(MonthDetail|array $newThisMonth): self
     {
         $obj = clone $this;
-        $obj['new_this_month'] = $newThisMonth;
+        $obj['newThisMonth'] = $newThisMonth;
 
         return $obj;
     }

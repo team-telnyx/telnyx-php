@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ExtensionRangeShape = array{end_at: int, start_at: int}
+ * @phpstan-type ExtensionRangeShape = array{endAt: int, startAt: int}
  */
 final class ExtensionRange implements BaseModel
 {
@@ -19,21 +19,21 @@ final class ExtensionRange implements BaseModel
     /**
      * Specifies the end of the extension range for this porting phone number extension.
      */
-    #[Required]
-    public int $end_at;
+    #[Required('end_at')]
+    public int $endAt;
 
     /**
      * Specifies the start of the extension range for this porting phone number extension.
      */
-    #[Required]
-    public int $start_at;
+    #[Required('start_at')]
+    public int $startAt;
 
     /**
      * `new ExtensionRange()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ExtensionRange::with(end_at: ..., start_at: ...)
+     * ExtensionRange::with(endAt: ..., startAt: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -52,12 +52,12 @@ final class ExtensionRange implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(int $end_at, int $start_at): self
+    public static function with(int $endAt, int $startAt): self
     {
         $obj = new self;
 
-        $obj['end_at'] = $end_at;
-        $obj['start_at'] = $start_at;
+        $obj['endAt'] = $endAt;
+        $obj['startAt'] = $startAt;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class ExtensionRange implements BaseModel
     public function withEndAt(int $endAt): self
     {
         $obj = clone $this;
-        $obj['end_at'] = $endAt;
+        $obj['endAt'] = $endAt;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class ExtensionRange implements BaseModel
     public function withStartAt(int $startAt): self
     {
         $obj = clone $this;
-        $obj['start_at'] = $startAt;
+        $obj['startAt'] = $startAt;
 
         return $obj;
     }

@@ -12,12 +12,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   call_leg_id: string,
- *   call_session_id: string,
- *   event_timestamp: string,
+ *   callLegID: string,
+ *   callSessionID: string,
+ *   eventTimestamp: string,
  *   metadata: mixed,
  *   name: string,
- *   record_type: value-of<RecordType>,
+ *   recordType: value-of<RecordType>,
  *   type: value-of<Type>,
  * }
  */
@@ -29,20 +29,20 @@ final class Data implements BaseModel
     /**
      * Uniquely identifies an individual call leg.
      */
-    #[Required]
-    public string $call_leg_id;
+    #[Required('call_leg_id')]
+    public string $callLegID;
 
     /**
      * Uniquely identifies the call control session. A session may include multiple call leg events.
      */
-    #[Required]
-    public string $call_session_id;
+    #[Required('call_session_id')]
+    public string $callSessionID;
 
     /**
      * Event timestamp.
      */
-    #[Required]
-    public string $event_timestamp;
+    #[Required('event_timestamp')]
+    public string $eventTimestamp;
 
     /**
      * Event metadata, which includes raw event, and extra information based on event type.
@@ -56,9 +56,9 @@ final class Data implements BaseModel
     #[Required]
     public string $name;
 
-    /** @var value-of<RecordType> $record_type */
-    #[Required(enum: RecordType::class)]
-    public string $record_type;
+    /** @var value-of<RecordType> $recordType */
+    #[Required('record_type', enum: RecordType::class)]
+    public string $recordType;
 
     /**
      * Event type.
@@ -74,12 +74,12 @@ final class Data implements BaseModel
      * To enforce required parameters use
      * ```
      * Data::with(
-     *   call_leg_id: ...,
-     *   call_session_id: ...,
-     *   event_timestamp: ...,
+     *   callLegID: ...,
+     *   callSessionID: ...,
+     *   eventTimestamp: ...,
      *   metadata: ...,
      *   name: ...,
-     *   record_type: ...,
+     *   recordType: ...,
      *   type: ...,
      * )
      * ```
@@ -107,26 +107,26 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $record_type
+     * @param RecordType|value-of<RecordType> $recordType
      * @param Type|value-of<Type> $type
      */
     public static function with(
-        string $call_leg_id,
-        string $call_session_id,
-        string $event_timestamp,
+        string $callLegID,
+        string $callSessionID,
+        string $eventTimestamp,
         mixed $metadata,
         string $name,
-        RecordType|string $record_type,
+        RecordType|string $recordType,
         Type|string $type,
     ): self {
         $obj = new self;
 
-        $obj['call_leg_id'] = $call_leg_id;
-        $obj['call_session_id'] = $call_session_id;
-        $obj['event_timestamp'] = $event_timestamp;
+        $obj['callLegID'] = $callLegID;
+        $obj['callSessionID'] = $callSessionID;
+        $obj['eventTimestamp'] = $eventTimestamp;
         $obj['metadata'] = $metadata;
         $obj['name'] = $name;
-        $obj['record_type'] = $record_type;
+        $obj['recordType'] = $recordType;
         $obj['type'] = $type;
 
         return $obj;
@@ -138,7 +138,7 @@ final class Data implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj['call_leg_id'] = $callLegID;
+        $obj['callLegID'] = $callLegID;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class Data implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj['call_session_id'] = $callSessionID;
+        $obj['callSessionID'] = $callSessionID;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class Data implements BaseModel
     public function withEventTimestamp(string $eventTimestamp): self
     {
         $obj = clone $this;
-        $obj['event_timestamp'] = $eventTimestamp;
+        $obj['eventTimestamp'] = $eventTimestamp;
 
         return $obj;
     }
@@ -193,7 +193,7 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

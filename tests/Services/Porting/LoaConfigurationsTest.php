@@ -40,16 +40,16 @@ final class LoaConfigurationsTest extends TestCase
         $result = $this->client->porting->loaConfigurations->create([
             'address' => [
                 'city' => 'Austin',
-                'country_code' => 'US',
+                'countryCode' => 'US',
                 'state' => 'TX',
-                'street_address' => '600 Congress Avenue',
-                'zip_code' => '78701',
+                'streetAddress' => '600 Congress Avenue',
+                'zipCode' => '78701',
             ],
-            'company_name' => 'Telnyx',
+            'companyName' => 'Telnyx',
             'contact' => [
-                'email' => 'testing@telnyx.com', 'phone_number' => '+12003270001',
+                'email' => 'testing@telnyx.com', 'phoneNumber' => '+12003270001',
             ],
-            'logo' => ['document_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+            'logo' => ['documentID' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
             'name' => 'My LOA Configuration',
         ]);
 
@@ -67,17 +67,17 @@ final class LoaConfigurationsTest extends TestCase
         $result = $this->client->porting->loaConfigurations->create([
             'address' => [
                 'city' => 'Austin',
-                'country_code' => 'US',
+                'countryCode' => 'US',
                 'state' => 'TX',
-                'street_address' => '600 Congress Avenue',
-                'zip_code' => '78701',
-                'extended_address' => '14th Floor',
+                'streetAddress' => '600 Congress Avenue',
+                'zipCode' => '78701',
+                'extendedAddress' => '14th Floor',
             ],
-            'company_name' => 'Telnyx',
+            'companyName' => 'Telnyx',
             'contact' => [
-                'email' => 'testing@telnyx.com', 'phone_number' => '+12003270001',
+                'email' => 'testing@telnyx.com', 'phoneNumber' => '+12003270001',
             ],
-            'logo' => ['document_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+            'logo' => ['documentID' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
             'name' => 'My LOA Configuration',
         ]);
 
@@ -112,16 +112,16 @@ final class LoaConfigurationsTest extends TestCase
             [
                 'address' => [
                     'city' => 'Austin',
-                    'country_code' => 'US',
+                    'countryCode' => 'US',
                     'state' => 'TX',
-                    'street_address' => '600 Congress Avenue',
-                    'zip_code' => '78701',
+                    'streetAddress' => '600 Congress Avenue',
+                    'zipCode' => '78701',
                 ],
-                'company_name' => 'Telnyx',
+                'companyName' => 'Telnyx',
                 'contact' => [
-                    'email' => 'testing@telnyx.com', 'phone_number' => '+12003270001',
+                    'email' => 'testing@telnyx.com', 'phoneNumber' => '+12003270001',
                 ],
-                'logo' => ['document_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+                'logo' => ['documentID' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
                 'name' => 'My LOA Configuration',
             ],
         );
@@ -142,17 +142,17 @@ final class LoaConfigurationsTest extends TestCase
             [
                 'address' => [
                     'city' => 'Austin',
-                    'country_code' => 'US',
+                    'countryCode' => 'US',
                     'state' => 'TX',
-                    'street_address' => '600 Congress Avenue',
-                    'zip_code' => '78701',
-                    'extended_address' => '14th Floor',
+                    'streetAddress' => '600 Congress Avenue',
+                    'zipCode' => '78701',
+                    'extendedAddress' => '14th Floor',
                 ],
-                'company_name' => 'Telnyx',
+                'companyName' => 'Telnyx',
                 'contact' => [
-                    'email' => 'testing@telnyx.com', 'phone_number' => '+12003270001',
+                    'email' => 'testing@telnyx.com', 'phoneNumber' => '+12003270001',
                 ],
-                'logo' => ['document_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+                'logo' => ['documentID' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
                 'name' => 'My LOA Configuration',
             ],
         );
@@ -199,16 +199,16 @@ final class LoaConfigurationsTest extends TestCase
         $result = $this->client->porting->loaConfigurations->preview0([
             'address' => [
                 'city' => 'Austin',
-                'country_code' => 'US',
+                'countryCode' => 'US',
                 'state' => 'TX',
-                'street_address' => '600 Congress Avenue',
-                'zip_code' => '78701',
+                'streetAddress' => '600 Congress Avenue',
+                'zipCode' => '78701',
             ],
-            'company_name' => 'Telnyx',
+            'companyName' => 'Telnyx',
             'contact' => [
-                'email' => 'testing@telnyx.com', 'phone_number' => '+12003270001',
+                'email' => 'testing@telnyx.com', 'phoneNumber' => '+12003270001',
             ],
-            'logo' => ['document_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+            'logo' => ['documentID' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
             'name' => 'My LOA Configuration',
         ]);
 
@@ -226,17 +226,17 @@ final class LoaConfigurationsTest extends TestCase
         $result = $this->client->porting->loaConfigurations->preview0([
             'address' => [
                 'city' => 'Austin',
-                'country_code' => 'US',
+                'countryCode' => 'US',
                 'state' => 'TX',
-                'street_address' => '600 Congress Avenue',
-                'zip_code' => '78701',
-                'extended_address' => '14th Floor',
+                'streetAddress' => '600 Congress Avenue',
+                'zipCode' => '78701',
+                'extendedAddress' => '14th Floor',
             ],
-            'company_name' => 'Telnyx',
+            'companyName' => 'Telnyx',
             'contact' => [
-                'email' => 'testing@telnyx.com', 'phone_number' => '+12003270001',
+                'email' => 'testing@telnyx.com', 'phoneNumber' => '+12003270001',
             ],
-            'logo' => ['document_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+            'logo' => ['documentID' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
             'name' => 'My LOA Configuration',
         ]);
 

@@ -39,23 +39,23 @@ final class CallListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   call_control_id: string,
-     *   call_leg_id: string,
-     *   call_session_id: string,
-     *   connection_id: string,
-     *   enqueued_at: string,
+     *   callControlID: string,
+     *   callLegID: string,
+     *   callSessionID: string,
+     *   connectionID: string,
+     *   enqueuedAt: string,
      *   from: string,
-     *   queue_id: string,
-     *   queue_position: int,
-     *   record_type: value-of<RecordType>,
+     *   queueID: string,
+     *   queuePosition: int,
+     *   recordType: value-of<RecordType>,
      *   to: string,
-     *   wait_time_secs: int,
+     *   waitTimeSecs: int,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -72,17 +72,17 @@ final class CallListResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   call_control_id: string,
-     *   call_leg_id: string,
-     *   call_session_id: string,
-     *   connection_id: string,
-     *   enqueued_at: string,
+     *   callControlID: string,
+     *   callLegID: string,
+     *   callSessionID: string,
+     *   connectionID: string,
+     *   enqueuedAt: string,
      *   from: string,
-     *   queue_id: string,
-     *   queue_position: int,
-     *   record_type: value-of<RecordType>,
+     *   queueID: string,
+     *   queuePosition: int,
+     *   recordType: value-of<RecordType>,
      *   to: string,
-     *   wait_time_secs: int,
+     *   waitTimeSecs: int,
      * }> $data
      */
     public function withData(array $data): self
@@ -95,10 +95,10 @@ final class CallListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

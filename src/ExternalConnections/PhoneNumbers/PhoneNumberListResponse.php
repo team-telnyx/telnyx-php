@@ -39,19 +39,19 @@ final class PhoneNumberListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<ExternalConnectionPhoneNumber|array{
-     *   acquired_capabilities?: list<value-of<AcquiredCapability>>|null,
-     *   civic_address_id?: string|null,
-     *   displayed_country_code?: string|null,
-     *   location_id?: string|null,
-     *   number_id?: string|null,
-     *   telephone_number?: string|null,
-     *   ticket_id?: string|null,
+     *   acquiredCapabilities?: list<value-of<AcquiredCapability>>|null,
+     *   civicAddressID?: string|null,
+     *   displayedCountryCode?: string|null,
+     *   locationID?: string|null,
+     *   numberID?: string|null,
+     *   telephoneNumber?: string|null,
+     *   ticketID?: string|null,
      * }> $data
      * @param ExternalVoiceIntegrationsPaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -68,13 +68,13 @@ final class PhoneNumberListResponse implements BaseModel
 
     /**
      * @param list<ExternalConnectionPhoneNumber|array{
-     *   acquired_capabilities?: list<value-of<AcquiredCapability>>|null,
-     *   civic_address_id?: string|null,
-     *   displayed_country_code?: string|null,
-     *   location_id?: string|null,
-     *   number_id?: string|null,
-     *   telephone_number?: string|null,
-     *   ticket_id?: string|null,
+     *   acquiredCapabilities?: list<value-of<AcquiredCapability>>|null,
+     *   civicAddressID?: string|null,
+     *   displayedCountryCode?: string|null,
+     *   locationID?: string|null,
+     *   numberID?: string|null,
+     *   telephoneNumber?: string|null,
+     *   ticketID?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -87,10 +87,10 @@ final class PhoneNumberListResponse implements BaseModel
 
     /**
      * @param ExternalVoiceIntegrationsPaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(

@@ -20,13 +20,13 @@ use Telnyx\PortingOrders\PortingOrderType;
  * Consolidated filter parameter (deepObject style). Originally: filter[customer_reference], filter[customer_group_reference], filter[parent_support_key], filter[phone_numbers.country_code], filter[phone_numbers.carrier_name], filter[misc.type], filter[end_user.admin.entity_name], filter[end_user.admin.auth_person_name], filter[activation_settings.fast_port_eligible], filter[activation_settings.foc_datetime_requested][gt], filter[activation_settings.foc_datetime_requested][lt], filter[phone_numbers.phone_number][contains].
  *
  * @phpstan-type FilterShape = array{
- *   activation_settings?: ActivationSettings|null,
- *   customer_group_reference?: string|null,
- *   customer_reference?: string|null,
- *   end_user?: EndUser|null,
+ *   activationSettings?: ActivationSettings|null,
+ *   customerGroupReference?: string|null,
+ *   customerReference?: string|null,
+ *   endUser?: EndUser|null,
  *   misc?: Misc|null,
- *   parent_support_key?: string|null,
- *   phone_numbers?: PhoneNumbers|null,
+ *   parentSupportKey?: string|null,
+ *   phoneNumbers?: PhoneNumbers|null,
  * }
  */
 final class Filter implements BaseModel
@@ -34,23 +34,23 @@ final class Filter implements BaseModel
     /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?ActivationSettings $activation_settings;
+    #[Optional('activation_settings')]
+    public ?ActivationSettings $activationSettings;
 
     /**
      * Filter results by customer_group_reference.
      */
-    #[Optional]
-    public ?string $customer_group_reference;
+    #[Optional('customer_group_reference')]
+    public ?string $customerGroupReference;
 
     /**
      * Filter results by customer_reference.
      */
-    #[Optional]
-    public ?string $customer_reference;
+    #[Optional('customer_reference')]
+    public ?string $customerReference;
 
-    #[Optional]
-    public ?EndUser $end_user;
+    #[Optional('end_user')]
+    public ?EndUser $endUser;
 
     #[Optional]
     public ?Misc $misc;
@@ -58,11 +58,11 @@ final class Filter implements BaseModel
     /**
      * Filter results by parent_support_key.
      */
-    #[Optional]
-    public ?string $parent_support_key;
+    #[Optional('parent_support_key')]
+    public ?string $parentSupportKey;
 
-    #[Optional]
-    public ?PhoneNumbers $phone_numbers;
+    #[Optional('phone_numbers')]
+    public ?PhoneNumbers $phoneNumbers;
 
     public function __construct()
     {
@@ -75,50 +75,48 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param ActivationSettings|array{
-     *   fast_port_eligible?: bool|null,
-     *   foc_datetime_requested?: FocDatetimeRequested|null,
-     * } $activation_settings
-     * @param EndUser|array{admin?: Admin|null} $end_user
+     *   fastPortEligible?: bool|null, focDatetimeRequested?: FocDatetimeRequested|null
+     * } $activationSettings
+     * @param EndUser|array{admin?: Admin|null} $endUser
      * @param Misc|array{type?: value-of<PortingOrderType>|null} $misc
      * @param PhoneNumbers|array{
-     *   carrier_name?: string|null,
-     *   country_code?: string|null,
-     *   phone_number?: PhoneNumber|null,
-     * } $phone_numbers
+     *   carrierName?: string|null,
+     *   countryCode?: string|null,
+     *   phoneNumber?: PhoneNumber|null,
+     * } $phoneNumbers
      */
     public static function with(
-        ActivationSettings|array|null $activation_settings = null,
-        ?string $customer_group_reference = null,
-        ?string $customer_reference = null,
-        EndUser|array|null $end_user = null,
+        ActivationSettings|array|null $activationSettings = null,
+        ?string $customerGroupReference = null,
+        ?string $customerReference = null,
+        EndUser|array|null $endUser = null,
         Misc|array|null $misc = null,
-        ?string $parent_support_key = null,
-        PhoneNumbers|array|null $phone_numbers = null,
+        ?string $parentSupportKey = null,
+        PhoneNumbers|array|null $phoneNumbers = null,
     ): self {
         $obj = new self;
 
-        null !== $activation_settings && $obj['activation_settings'] = $activation_settings;
-        null !== $customer_group_reference && $obj['customer_group_reference'] = $customer_group_reference;
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
-        null !== $end_user && $obj['end_user'] = $end_user;
+        null !== $activationSettings && $obj['activationSettings'] = $activationSettings;
+        null !== $customerGroupReference && $obj['customerGroupReference'] = $customerGroupReference;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
+        null !== $endUser && $obj['endUser'] = $endUser;
         null !== $misc && $obj['misc'] = $misc;
-        null !== $parent_support_key && $obj['parent_support_key'] = $parent_support_key;
-        null !== $phone_numbers && $obj['phone_numbers'] = $phone_numbers;
+        null !== $parentSupportKey && $obj['parentSupportKey'] = $parentSupportKey;
+        null !== $phoneNumbers && $obj['phoneNumbers'] = $phoneNumbers;
 
         return $obj;
     }
 
     /**
      * @param ActivationSettings|array{
-     *   fast_port_eligible?: bool|null,
-     *   foc_datetime_requested?: FocDatetimeRequested|null,
+     *   fastPortEligible?: bool|null, focDatetimeRequested?: FocDatetimeRequested|null
      * } $activationSettings
      */
     public function withActivationSettings(
         ActivationSettings|array $activationSettings
     ): self {
         $obj = clone $this;
-        $obj['activation_settings'] = $activationSettings;
+        $obj['activationSettings'] = $activationSettings;
 
         return $obj;
     }
@@ -130,7 +128,7 @@ final class Filter implements BaseModel
         string $customerGroupReference
     ): self {
         $obj = clone $this;
-        $obj['customer_group_reference'] = $customerGroupReference;
+        $obj['customerGroupReference'] = $customerGroupReference;
 
         return $obj;
     }
@@ -141,7 +139,7 @@ final class Filter implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }
@@ -152,7 +150,7 @@ final class Filter implements BaseModel
     public function withEndUser(EndUser|array $endUser): self
     {
         $obj = clone $this;
-        $obj['end_user'] = $endUser;
+        $obj['endUser'] = $endUser;
 
         return $obj;
     }
@@ -174,22 +172,22 @@ final class Filter implements BaseModel
     public function withParentSupportKey(string $parentSupportKey): self
     {
         $obj = clone $this;
-        $obj['parent_support_key'] = $parentSupportKey;
+        $obj['parentSupportKey'] = $parentSupportKey;
 
         return $obj;
     }
 
     /**
      * @param PhoneNumbers|array{
-     *   carrier_name?: string|null,
-     *   country_code?: string|null,
-     *   phone_number?: PhoneNumber|null,
+     *   carrierName?: string|null,
+     *   countryCode?: string|null,
+     *   phoneNumber?: PhoneNumber|null,
      * } $phoneNumbers
      */
     public function withPhoneNumbers(PhoneNumbers|array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj['phone_numbers'] = $phoneNumbers;
+        $obj['phoneNumbers'] = $phoneNumbers;
 
         return $obj;
     }

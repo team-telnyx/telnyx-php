@@ -37,26 +37,26 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
      * Creates a TeXML Application.
      *
      * @param array{
-     *   friendly_name: string,
-     *   voice_url: string,
+     *   friendlyName: string,
+     *   voiceURL: string,
      *   active?: bool,
-     *   anchorsite_override?: value-of<AnchorsiteOverride>,
-     *   call_cost_in_webhooks?: bool,
-     *   dtmf_type?: 'RFC 2833'|'Inband'|'SIP INFO'|DtmfType,
-     *   first_command_timeout?: bool,
-     *   first_command_timeout_secs?: int,
+     *   anchorsiteOverride?: value-of<AnchorsiteOverride>,
+     *   callCostInWebhooks?: bool,
+     *   dtmfType?: 'RFC 2833'|'Inband'|'SIP INFO'|DtmfType,
+     *   firstCommandTimeout?: bool,
+     *   firstCommandTimeoutSecs?: int,
      *   inbound?: array{
-     *     channel_limit?: int,
-     *     shaken_stir_enabled?: bool,
-     *     sip_subdomain?: string,
-     *     sip_subdomain_receive_settings?: 'only_my_connections'|'from_anyone'|SipSubdomainReceiveSettings,
+     *     channelLimit?: int,
+     *     shakenStirEnabled?: bool,
+     *     sipSubdomain?: string,
+     *     sipSubdomainReceiveSettings?: 'only_my_connections'|'from_anyone'|SipSubdomainReceiveSettings,
      *   },
-     *   outbound?: array{channel_limit?: int, outbound_voice_profile_id?: string},
-     *   status_callback?: string,
-     *   status_callback_method?: 'get'|'post'|StatusCallbackMethod,
+     *   outbound?: array{channelLimit?: int, outboundVoiceProfileID?: string},
+     *   statusCallback?: string,
+     *   statusCallbackMethod?: 'get'|'post'|StatusCallbackMethod,
      *   tags?: list<string>,
-     *   voice_fallback_url?: string,
-     *   voice_method?: 'get'|'post'|VoiceMethod,
+     *   voiceFallbackURL?: string,
+     *   voiceMethod?: 'get'|'post'|VoiceMethod,
      * }|TexmlApplicationCreateParams $params
      *
      * @throws APIException
@@ -110,26 +110,26 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
      * Updates settings of an existing TeXML Application.
      *
      * @param array{
-     *   friendly_name: string,
-     *   voice_url: string,
+     *   friendlyName: string,
+     *   voiceURL: string,
      *   active?: bool,
-     *   anchorsite_override?: value-of<AnchorsiteOverride>,
-     *   call_cost_in_webhooks?: bool,
-     *   dtmf_type?: 'RFC 2833'|'Inband'|'SIP INFO'|DtmfType,
-     *   first_command_timeout?: bool,
-     *   first_command_timeout_secs?: int,
+     *   anchorsiteOverride?: value-of<AnchorsiteOverride>,
+     *   callCostInWebhooks?: bool,
+     *   dtmfType?: 'RFC 2833'|'Inband'|'SIP INFO'|DtmfType,
+     *   firstCommandTimeout?: bool,
+     *   firstCommandTimeoutSecs?: int,
      *   inbound?: array{
-     *     channel_limit?: int,
-     *     shaken_stir_enabled?: bool,
-     *     sip_subdomain?: string,
-     *     sip_subdomain_receive_settings?: 'only_my_connections'|'from_anyone'|TexmlApplicationUpdateParams\Inbound\SipSubdomainReceiveSettings,
+     *     channelLimit?: int,
+     *     shakenStirEnabled?: bool,
+     *     sipSubdomain?: string,
+     *     sipSubdomainReceiveSettings?: 'only_my_connections'|'from_anyone'|TexmlApplicationUpdateParams\Inbound\SipSubdomainReceiveSettings,
      *   },
-     *   outbound?: array{channel_limit?: int, outbound_voice_profile_id?: string},
-     *   status_callback?: string,
-     *   status_callback_method?: 'get'|'post'|TexmlApplicationUpdateParams\StatusCallbackMethod,
+     *   outbound?: array{channelLimit?: int, outboundVoiceProfileID?: string},
+     *   statusCallback?: string,
+     *   statusCallbackMethod?: 'get'|'post'|TexmlApplicationUpdateParams\StatusCallbackMethod,
      *   tags?: list<string>,
-     *   voice_fallback_url?: string,
-     *   voice_method?: 'get'|'post'|TexmlApplicationUpdateParams\VoiceMethod,
+     *   voiceFallbackURL?: string,
+     *   voiceMethod?: 'get'|'post'|TexmlApplicationUpdateParams\VoiceMethod,
      * }|TexmlApplicationUpdateParams $params
      *
      * @throws APIException
@@ -162,7 +162,7 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
      * Returns a list of your TeXML Applications.
      *
      * @param array{
-     *   filter?: array{friendly_name?: string, outbound_voice_profile_id?: string},
+     *   filter?: array{friendlyName?: string, outboundVoiceProfileID?: string},
      *   page?: array{number?: int, size?: int},
      *   sort?: 'created_at'|'friendly_name'|'active'|Sort,
      * }|TexmlApplicationListParams $params

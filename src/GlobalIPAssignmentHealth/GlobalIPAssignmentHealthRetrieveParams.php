@@ -18,8 +18,8 @@ use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filte
  *
  * @phpstan-type GlobalIPAssignmentHealthRetrieveParamsShape = array{
  *   filter?: Filter|array{
- *     global_ip_assignment_id?: string|null|In,
- *     global_ip_id?: string|null|\Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filter\GlobalIPID\In,
+ *     globalIPAssignmentID?: string|null|In,
+ *     globalIPID?: string|null|\Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filter\GlobalIPID\In,
  *   },
  * }
  */
@@ -46,8 +46,8 @@ final class GlobalIPAssignmentHealthRetrieveParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   global_ip_assignment_id?: string|In|null,
-     *   global_ip_id?: string|Filter\GlobalIPID\In|null,
+     *   globalIPAssignmentID?: string|In|null,
+     *   globalIPID?: string|Filter\GlobalIPID\In|null,
      * } $filter
      */
     public static function with(Filter|array|null $filter = null): self
@@ -63,8 +63,8 @@ final class GlobalIPAssignmentHealthRetrieveParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in], filter[global_ip_assignment_id][in].
      *
      * @param Filter|array{
-     *   global_ip_assignment_id?: string|In|null,
-     *   global_ip_id?: string|Filter\GlobalIPID\In|null,
+     *   globalIPAssignmentID?: string|In|null,
+     *   globalIPID?: string|Filter\GlobalIPID\In|null,
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

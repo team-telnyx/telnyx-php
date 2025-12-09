@@ -26,37 +26,37 @@ use Telnyx\Texml\Calls\CallInitiateParams\URLMethod;
  * @see Telnyx\Services\Texml\CallsService::initiate()
  *
  * @phpstan-type CallInitiateParamsShape = array{
- *   From: string,
- *   To: string,
- *   AsyncAmd?: bool,
- *   AsyncAmdStatusCallback?: string,
- *   AsyncAmdStatusCallbackMethod?: \Telnyx\Texml\Calls\CallInitiateParams\AsyncAmdStatusCallbackMethod|value-of<\Telnyx\Texml\Calls\CallInitiateParams\AsyncAmdStatusCallbackMethod>,
- *   CallerId?: string,
- *   CancelPlaybackOnDetectMessageEnd?: bool,
- *   CancelPlaybackOnMachineDetection?: bool,
- *   DetectionMode?: \Telnyx\Texml\Calls\CallInitiateParams\DetectionMode|value-of<\Telnyx\Texml\Calls\CallInitiateParams\DetectionMode>,
- *   FallbackUrl?: string,
- *   MachineDetection?: \Telnyx\Texml\Calls\CallInitiateParams\MachineDetection|value-of<\Telnyx\Texml\Calls\CallInitiateParams\MachineDetection>,
- *   MachineDetectionSilenceTimeout?: int,
- *   MachineDetectionSpeechEndThreshold?: int,
- *   MachineDetectionSpeechThreshold?: int,
- *   MachineDetectionTimeout?: int,
- *   PreferredCodecs?: string,
- *   Record?: bool,
- *   RecordingChannels?: \Telnyx\Texml\Calls\CallInitiateParams\RecordingChannels|value-of<\Telnyx\Texml\Calls\CallInitiateParams\RecordingChannels>,
- *   RecordingStatusCallback?: string,
- *   RecordingStatusCallbackEvent?: string,
- *   RecordingStatusCallbackMethod?: \Telnyx\Texml\Calls\CallInitiateParams\RecordingStatusCallbackMethod|value-of<\Telnyx\Texml\Calls\CallInitiateParams\RecordingStatusCallbackMethod>,
- *   RecordingTimeout?: int,
- *   RecordingTrack?: \Telnyx\Texml\Calls\CallInitiateParams\RecordingTrack|value-of<\Telnyx\Texml\Calls\CallInitiateParams\RecordingTrack>,
- *   SipAuthPassword?: string,
- *   SipAuthUsername?: string,
- *   StatusCallback?: string,
- *   StatusCallbackEvent?: \Telnyx\Texml\Calls\CallInitiateParams\StatusCallbackEvent|value-of<\Telnyx\Texml\Calls\CallInitiateParams\StatusCallbackEvent>,
- *   StatusCallbackMethod?: \Telnyx\Texml\Calls\CallInitiateParams\StatusCallbackMethod|value-of<\Telnyx\Texml\Calls\CallInitiateParams\StatusCallbackMethod>,
- *   Trim?: \Telnyx\Texml\Calls\CallInitiateParams\Trim|value-of<\Telnyx\Texml\Calls\CallInitiateParams\Trim>,
- *   Url?: string,
- *   UrlMethod?: URLMethod|value-of<URLMethod>,
+ *   from: string,
+ *   to: string,
+ *   asyncAmd?: bool,
+ *   asyncAmdStatusCallback?: string,
+ *   asyncAmdStatusCallbackMethod?: AsyncAmdStatusCallbackMethod|value-of<AsyncAmdStatusCallbackMethod>,
+ *   callerID?: string,
+ *   cancelPlaybackOnDetectMessageEnd?: bool,
+ *   cancelPlaybackOnMachineDetection?: bool,
+ *   detectionMode?: DetectionMode|value-of<DetectionMode>,
+ *   fallbackURL?: string,
+ *   machineDetection?: MachineDetection|value-of<MachineDetection>,
+ *   machineDetectionSilenceTimeout?: int,
+ *   machineDetectionSpeechEndThreshold?: int,
+ *   machineDetectionSpeechThreshold?: int,
+ *   machineDetectionTimeout?: int,
+ *   preferredCodecs?: string,
+ *   record?: bool,
+ *   recordingChannels?: RecordingChannels|value-of<RecordingChannels>,
+ *   recordingStatusCallback?: string,
+ *   recordingStatusCallbackEvent?: string,
+ *   recordingStatusCallbackMethod?: RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod>,
+ *   recordingTimeout?: int,
+ *   recordingTrack?: RecordingTrack|value-of<RecordingTrack>,
+ *   sipAuthPassword?: string,
+ *   sipAuthUsername?: string,
+ *   statusCallback?: string,
+ *   statusCallbackEvent?: StatusCallbackEvent|value-of<StatusCallbackEvent>,
+ *   statusCallbackMethod?: StatusCallbackMethod|value-of<StatusCallbackMethod>,
+ *   trim?: Trim|value-of<Trim>,
+ *   url?: string,
+ *   urlMethod?: URLMethod|value-of<URLMethod>,
  * }
  */
 final class CallInitiateParams implements BaseModel
@@ -68,229 +68,221 @@ final class CallInitiateParams implements BaseModel
     /**
      * The phone number of the party that initiated the call. Phone numbers are formatted with a `+` and country code.
      */
-    #[Required]
-    public string $From;
+    #[Required('From')]
+    public string $from;
 
     /**
      * The phone number of the called party. Phone numbers are formatted with a `+` and country code.
      */
-    #[Required]
-    public string $To;
+    #[Required('To')]
+    public string $to;
 
     /**
      * Select whether to perform answering machine detection in the background. By default execution is blocked until Answering Machine Detection is completed.
      */
-    #[Optional]
-    public ?bool $AsyncAmd;
+    #[Optional('AsyncAmd')]
+    public ?bool $asyncAmd;
 
     /**
      * URL destination for Telnyx to send AMD callback events to for the call.
      */
-    #[Optional]
-    public ?string $AsyncAmdStatusCallback;
+    #[Optional('AsyncAmdStatusCallback')]
+    public ?string $asyncAmdStatusCallback;
 
     /**
      * HTTP request type used for `AsyncAmdStatusCallback`. The default value is inherited from TeXML Application setting.
      *
-     * @var value-of<AsyncAmdStatusCallbackMethod>|null $AsyncAmdStatusCallbackMethod
+     * @var value-of<AsyncAmdStatusCallbackMethod>|null $asyncAmdStatusCallbackMethod
      */
     #[Optional(
-        enum: AsyncAmdStatusCallbackMethod::class,
+        'AsyncAmdStatusCallbackMethod',
+        enum: AsyncAmdStatusCallbackMethod::class
     )]
-    public ?string $AsyncAmdStatusCallbackMethod;
+    public ?string $asyncAmdStatusCallbackMethod;
 
     /**
      * To be used as the caller id name (SIP From Display Name) presented to the destination (`To` number). The string should have a maximum of 128 characters, containing only letters, numbers, spaces, and `-_~!.+` special characters. If ommited, the display name will be the same as the number in the `From` field.
      */
-    #[Optional]
-    public ?string $CallerId;
+    #[Optional('CallerId')]
+    public ?string $callerID;
 
     /**
      * Whether to cancel ongoing playback on `greeting ended` detection. Defaults to `true`.
      */
-    #[Optional]
-    public ?bool $CancelPlaybackOnDetectMessageEnd;
+    #[Optional('CancelPlaybackOnDetectMessageEnd')]
+    public ?bool $cancelPlaybackOnDetectMessageEnd;
 
     /**
      * Whether to cancel ongoing playback on `machine` detection. Defaults to `true`.
      */
-    #[Optional]
-    public ?bool $CancelPlaybackOnMachineDetection;
+    #[Optional('CancelPlaybackOnMachineDetection')]
+    public ?bool $cancelPlaybackOnMachineDetection;
 
     /**
      * Allows you to chose between Premium and Standard detections.
      *
-     * @var value-of<DetectionMode>|null $DetectionMode
+     * @var value-of<DetectionMode>|null $detectionMode
      */
-    #[Optional(enum: DetectionMode::class)]
-    public ?string $DetectionMode;
+    #[Optional('DetectionMode', enum: DetectionMode::class)]
+    public ?string $detectionMode;
 
     /**
      * A failover URL for which Telnyx will retrieve the TeXML call instructions if the `Url` is not responding.
      */
-    #[Optional]
-    public ?string $FallbackUrl;
+    #[Optional('FallbackUrl')]
+    public ?string $fallbackURL;
 
     /**
      * Enables Answering Machine Detection.
      *
-     * @var value-of<MachineDetection>|null $MachineDetection
+     * @var value-of<MachineDetection>|null $machineDetection
      */
-    #[Optional(
-        enum: MachineDetection::class
-    )]
-    public ?string $MachineDetection;
+    #[Optional('MachineDetection', enum: MachineDetection::class)]
+    public ?string $machineDetection;
 
     /**
      * If initial silence duration is greater than this value, consider it a machine. Ignored when `premium` detection is used.
      */
-    #[Optional]
-    public ?int $MachineDetectionSilenceTimeout;
+    #[Optional('MachineDetectionSilenceTimeout')]
+    public ?int $machineDetectionSilenceTimeout;
 
     /**
      * Silence duration threshold after a greeting message or voice for it be considered human. Ignored when `premium` detection is used.
      */
-    #[Optional]
-    public ?int $MachineDetectionSpeechEndThreshold;
+    #[Optional('MachineDetectionSpeechEndThreshold')]
+    public ?int $machineDetectionSpeechEndThreshold;
 
     /**
      * Maximum threshold of a human greeting. If greeting longer than this value, considered machine. Ignored when `premium` detection is used.
      */
-    #[Optional]
-    public ?int $MachineDetectionSpeechThreshold;
+    #[Optional('MachineDetectionSpeechThreshold')]
+    public ?int $machineDetectionSpeechThreshold;
 
     /**
      * Maximum timeout threshold in milliseconds for overall detection.
      */
-    #[Optional]
-    public ?int $MachineDetectionTimeout;
+    #[Optional('MachineDetectionTimeout')]
+    public ?int $machineDetectionTimeout;
 
     /**
      * The list of comma-separated codecs to be offered on a call.
      */
-    #[Optional]
-    public ?string $PreferredCodecs;
+    #[Optional('PreferredCodecs')]
+    public ?string $preferredCodecs;
 
     /**
      * Whether to record the entire participant's call leg. Defaults to `false`.
      */
-    #[Optional]
-    public ?bool $Record;
+    #[Optional('Record')]
+    public ?bool $record;
 
     /**
      * The number of channels in the final recording. Defaults to `mono`.
      *
-     * @var value-of<RecordingChannels>|null $RecordingChannels
+     * @var value-of<RecordingChannels>|null $recordingChannels
      */
-    #[Optional(
-        enum: RecordingChannels::class
-    )]
-    public ?string $RecordingChannels;
+    #[Optional('RecordingChannels', enum: RecordingChannels::class)]
+    public ?string $recordingChannels;
 
     /**
      * The URL the recording callbacks will be sent to.
      */
-    #[Optional]
-    public ?string $RecordingStatusCallback;
+    #[Optional('RecordingStatusCallback')]
+    public ?string $recordingStatusCallback;
 
     /**
      * The changes to the recording's state that should generate a call to `RecoridngStatusCallback`. Can be: `in-progress`, `completed` and `absent`. Separate multiple values with a space. Defaults to `completed`.
      */
-    #[Optional]
-    public ?string $RecordingStatusCallbackEvent;
+    #[Optional('RecordingStatusCallbackEvent')]
+    public ?string $recordingStatusCallbackEvent;
 
     /**
      * HTTP request type used for `RecordingStatusCallback`. Defaults to `POST`.
      *
-     * @var value-of<RecordingStatusCallbackMethod>|null $RecordingStatusCallbackMethod
+     * @var value-of<RecordingStatusCallbackMethod>|null $recordingStatusCallbackMethod
      */
     #[Optional(
-        enum: RecordingStatusCallbackMethod::class,
+        'RecordingStatusCallbackMethod',
+        enum: RecordingStatusCallbackMethod::class
     )]
-    public ?string $RecordingStatusCallbackMethod;
+    public ?string $recordingStatusCallbackMethod;
 
     /**
      * The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected. The timer only starts when the speech is detected. Please note that the transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
      */
-    #[Optional]
-    public ?int $RecordingTimeout;
+    #[Optional('RecordingTimeout')]
+    public ?int $recordingTimeout;
 
     /**
      * The audio track to record for the call. The default is `both`.
      *
-     * @var value-of<RecordingTrack>|null $RecordingTrack
+     * @var value-of<RecordingTrack>|null $recordingTrack
      */
-    #[Optional(
-        enum: RecordingTrack::class
-    )]
-    public ?string $RecordingTrack;
+    #[Optional('RecordingTrack', enum: RecordingTrack::class)]
+    public ?string $recordingTrack;
 
     /**
      * The password to use for SIP authentication.
      */
-    #[Optional]
-    public ?string $SipAuthPassword;
+    #[Optional('SipAuthPassword')]
+    public ?string $sipAuthPassword;
 
     /**
      * The username to use for SIP authentication.
      */
-    #[Optional]
-    public ?string $SipAuthUsername;
+    #[Optional('SipAuthUsername')]
+    public ?string $sipAuthUsername;
 
     /**
      * URL destination for Telnyx to send status callback events to for the call.
      */
-    #[Optional]
-    public ?string $StatusCallback;
+    #[Optional('StatusCallback')]
+    public ?string $statusCallback;
 
     /**
      * The call events for which Telnyx should send a webhook. Multiple events can be defined when separated by a space.
      *
-     * @var value-of<StatusCallbackEvent>|null $StatusCallbackEvent
+     * @var value-of<StatusCallbackEvent>|null $statusCallbackEvent
      */
-    #[Optional(
-        enum: StatusCallbackEvent::class
-    )]
-    public ?string $StatusCallbackEvent;
+    #[Optional('StatusCallbackEvent', enum: StatusCallbackEvent::class)]
+    public ?string $statusCallbackEvent;
 
     /**
      * HTTP request type used for `StatusCallback`.
      *
-     * @var value-of<StatusCallbackMethod>|null $StatusCallbackMethod
+     * @var value-of<StatusCallbackMethod>|null $statusCallbackMethod
      */
-    #[Optional(
-        enum: StatusCallbackMethod::class
-    )]
-    public ?string $StatusCallbackMethod;
+    #[Optional('StatusCallbackMethod', enum: StatusCallbackMethod::class)]
+    public ?string $statusCallbackMethod;
 
     /**
      * Whether to trim any leading and trailing silence from the recording. Defaults to `trim-silence`.
      *
-     * @var value-of<Trim>|null $Trim
+     * @var value-of<Trim>|null $trim
      */
-    #[Optional(enum: Trim::class)]
-    public ?string $Trim;
+    #[Optional('Trim', enum: Trim::class)]
+    public ?string $trim;
 
     /**
      * The URL from which Telnyx will retrieve the TeXML call instructions.
      */
-    #[Optional]
-    public ?string $Url;
+    #[Optional('Url')]
+    public ?string $url;
 
     /**
      * HTTP request type used for `Url`. The default value is inherited from TeXML Application setting.
      *
-     * @var value-of<URLMethod>|null $UrlMethod
+     * @var value-of<URLMethod>|null $urlMethod
      */
-    #[Optional(enum: URLMethod::class)]
-    public ?string $UrlMethod;
+    #[Optional('UrlMethod', enum: URLMethod::class)]
+    public ?string $urlMethod;
 
     /**
      * `new CallInitiateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * CallInitiateParams::with(From: ..., To: ...)
+     * CallInitiateParams::with(from: ..., to: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -309,84 +301,84 @@ final class CallInitiateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AsyncAmdStatusCallbackMethod|value-of<AsyncAmdStatusCallbackMethod> $AsyncAmdStatusCallbackMethod
-     * @param DetectionMode|value-of<DetectionMode> $DetectionMode
-     * @param MachineDetection|value-of<MachineDetection> $MachineDetection
-     * @param RecordingChannels|value-of<RecordingChannels> $RecordingChannels
-     * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod> $RecordingStatusCallbackMethod
-     * @param RecordingTrack|value-of<RecordingTrack> $RecordingTrack
-     * @param StatusCallbackEvent|value-of<StatusCallbackEvent> $StatusCallbackEvent
-     * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $StatusCallbackMethod
-     * @param Trim|value-of<Trim> $Trim
-     * @param URLMethod|value-of<URLMethod> $UrlMethod
+     * @param AsyncAmdStatusCallbackMethod|value-of<AsyncAmdStatusCallbackMethod> $asyncAmdStatusCallbackMethod
+     * @param DetectionMode|value-of<DetectionMode> $detectionMode
+     * @param MachineDetection|value-of<MachineDetection> $machineDetection
+     * @param RecordingChannels|value-of<RecordingChannels> $recordingChannels
+     * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod> $recordingStatusCallbackMethod
+     * @param RecordingTrack|value-of<RecordingTrack> $recordingTrack
+     * @param StatusCallbackEvent|value-of<StatusCallbackEvent> $statusCallbackEvent
+     * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $statusCallbackMethod
+     * @param Trim|value-of<Trim> $trim
+     * @param URLMethod|value-of<URLMethod> $urlMethod
      */
     public static function with(
-        string $From,
-        string $To,
-        ?bool $AsyncAmd = null,
-        ?string $AsyncAmdStatusCallback = null,
-        AsyncAmdStatusCallbackMethod|string|null $AsyncAmdStatusCallbackMethod = null,
-        ?string $CallerId = null,
-        ?bool $CancelPlaybackOnDetectMessageEnd = null,
-        ?bool $CancelPlaybackOnMachineDetection = null,
-        DetectionMode|string|null $DetectionMode = null,
-        ?string $FallbackUrl = null,
-        MachineDetection|string|null $MachineDetection = null,
-        ?int $MachineDetectionSilenceTimeout = null,
-        ?int $MachineDetectionSpeechEndThreshold = null,
-        ?int $MachineDetectionSpeechThreshold = null,
-        ?int $MachineDetectionTimeout = null,
-        ?string $PreferredCodecs = null,
-        ?bool $Record = null,
-        RecordingChannels|string|null $RecordingChannels = null,
-        ?string $RecordingStatusCallback = null,
-        ?string $RecordingStatusCallbackEvent = null,
-        RecordingStatusCallbackMethod|string|null $RecordingStatusCallbackMethod = null,
-        ?int $RecordingTimeout = null,
-        RecordingTrack|string|null $RecordingTrack = null,
-        ?string $SipAuthPassword = null,
-        ?string $SipAuthUsername = null,
-        ?string $StatusCallback = null,
-        StatusCallbackEvent|string|null $StatusCallbackEvent = null,
-        StatusCallbackMethod|string|null $StatusCallbackMethod = null,
-        Trim|string|null $Trim = null,
-        ?string $Url = null,
-        URLMethod|string|null $UrlMethod = null,
+        string $from,
+        string $to,
+        ?bool $asyncAmd = null,
+        ?string $asyncAmdStatusCallback = null,
+        AsyncAmdStatusCallbackMethod|string|null $asyncAmdStatusCallbackMethod = null,
+        ?string $callerID = null,
+        ?bool $cancelPlaybackOnDetectMessageEnd = null,
+        ?bool $cancelPlaybackOnMachineDetection = null,
+        DetectionMode|string|null $detectionMode = null,
+        ?string $fallbackURL = null,
+        MachineDetection|string|null $machineDetection = null,
+        ?int $machineDetectionSilenceTimeout = null,
+        ?int $machineDetectionSpeechEndThreshold = null,
+        ?int $machineDetectionSpeechThreshold = null,
+        ?int $machineDetectionTimeout = null,
+        ?string $preferredCodecs = null,
+        ?bool $record = null,
+        RecordingChannels|string|null $recordingChannels = null,
+        ?string $recordingStatusCallback = null,
+        ?string $recordingStatusCallbackEvent = null,
+        RecordingStatusCallbackMethod|string|null $recordingStatusCallbackMethod = null,
+        ?int $recordingTimeout = null,
+        RecordingTrack|string|null $recordingTrack = null,
+        ?string $sipAuthPassword = null,
+        ?string $sipAuthUsername = null,
+        ?string $statusCallback = null,
+        StatusCallbackEvent|string|null $statusCallbackEvent = null,
+        StatusCallbackMethod|string|null $statusCallbackMethod = null,
+        Trim|string|null $trim = null,
+        ?string $url = null,
+        URLMethod|string|null $urlMethod = null,
     ): self {
         $obj = new self;
 
-        $obj['From'] = $From;
-        $obj['To'] = $To;
+        $obj['from'] = $from;
+        $obj['to'] = $to;
 
-        null !== $AsyncAmd && $obj['AsyncAmd'] = $AsyncAmd;
-        null !== $AsyncAmdStatusCallback && $obj['AsyncAmdStatusCallback'] = $AsyncAmdStatusCallback;
-        null !== $AsyncAmdStatusCallbackMethod && $obj['AsyncAmdStatusCallbackMethod'] = $AsyncAmdStatusCallbackMethod;
-        null !== $CallerId && $obj['CallerId'] = $CallerId;
-        null !== $CancelPlaybackOnDetectMessageEnd && $obj['CancelPlaybackOnDetectMessageEnd'] = $CancelPlaybackOnDetectMessageEnd;
-        null !== $CancelPlaybackOnMachineDetection && $obj['CancelPlaybackOnMachineDetection'] = $CancelPlaybackOnMachineDetection;
-        null !== $DetectionMode && $obj['DetectionMode'] = $DetectionMode;
-        null !== $FallbackUrl && $obj['FallbackUrl'] = $FallbackUrl;
-        null !== $MachineDetection && $obj['MachineDetection'] = $MachineDetection;
-        null !== $MachineDetectionSilenceTimeout && $obj['MachineDetectionSilenceTimeout'] = $MachineDetectionSilenceTimeout;
-        null !== $MachineDetectionSpeechEndThreshold && $obj['MachineDetectionSpeechEndThreshold'] = $MachineDetectionSpeechEndThreshold;
-        null !== $MachineDetectionSpeechThreshold && $obj['MachineDetectionSpeechThreshold'] = $MachineDetectionSpeechThreshold;
-        null !== $MachineDetectionTimeout && $obj['MachineDetectionTimeout'] = $MachineDetectionTimeout;
-        null !== $PreferredCodecs && $obj['PreferredCodecs'] = $PreferredCodecs;
-        null !== $Record && $obj['Record'] = $Record;
-        null !== $RecordingChannels && $obj['RecordingChannels'] = $RecordingChannels;
-        null !== $RecordingStatusCallback && $obj['RecordingStatusCallback'] = $RecordingStatusCallback;
-        null !== $RecordingStatusCallbackEvent && $obj['RecordingStatusCallbackEvent'] = $RecordingStatusCallbackEvent;
-        null !== $RecordingStatusCallbackMethod && $obj['RecordingStatusCallbackMethod'] = $RecordingStatusCallbackMethod;
-        null !== $RecordingTimeout && $obj['RecordingTimeout'] = $RecordingTimeout;
-        null !== $RecordingTrack && $obj['RecordingTrack'] = $RecordingTrack;
-        null !== $SipAuthPassword && $obj['SipAuthPassword'] = $SipAuthPassword;
-        null !== $SipAuthUsername && $obj['SipAuthUsername'] = $SipAuthUsername;
-        null !== $StatusCallback && $obj['StatusCallback'] = $StatusCallback;
-        null !== $StatusCallbackEvent && $obj['StatusCallbackEvent'] = $StatusCallbackEvent;
-        null !== $StatusCallbackMethod && $obj['StatusCallbackMethod'] = $StatusCallbackMethod;
-        null !== $Trim && $obj['Trim'] = $Trim;
-        null !== $Url && $obj['Url'] = $Url;
-        null !== $UrlMethod && $obj['UrlMethod'] = $UrlMethod;
+        null !== $asyncAmd && $obj['asyncAmd'] = $asyncAmd;
+        null !== $asyncAmdStatusCallback && $obj['asyncAmdStatusCallback'] = $asyncAmdStatusCallback;
+        null !== $asyncAmdStatusCallbackMethod && $obj['asyncAmdStatusCallbackMethod'] = $asyncAmdStatusCallbackMethod;
+        null !== $callerID && $obj['callerID'] = $callerID;
+        null !== $cancelPlaybackOnDetectMessageEnd && $obj['cancelPlaybackOnDetectMessageEnd'] = $cancelPlaybackOnDetectMessageEnd;
+        null !== $cancelPlaybackOnMachineDetection && $obj['cancelPlaybackOnMachineDetection'] = $cancelPlaybackOnMachineDetection;
+        null !== $detectionMode && $obj['detectionMode'] = $detectionMode;
+        null !== $fallbackURL && $obj['fallbackURL'] = $fallbackURL;
+        null !== $machineDetection && $obj['machineDetection'] = $machineDetection;
+        null !== $machineDetectionSilenceTimeout && $obj['machineDetectionSilenceTimeout'] = $machineDetectionSilenceTimeout;
+        null !== $machineDetectionSpeechEndThreshold && $obj['machineDetectionSpeechEndThreshold'] = $machineDetectionSpeechEndThreshold;
+        null !== $machineDetectionSpeechThreshold && $obj['machineDetectionSpeechThreshold'] = $machineDetectionSpeechThreshold;
+        null !== $machineDetectionTimeout && $obj['machineDetectionTimeout'] = $machineDetectionTimeout;
+        null !== $preferredCodecs && $obj['preferredCodecs'] = $preferredCodecs;
+        null !== $record && $obj['record'] = $record;
+        null !== $recordingChannels && $obj['recordingChannels'] = $recordingChannels;
+        null !== $recordingStatusCallback && $obj['recordingStatusCallback'] = $recordingStatusCallback;
+        null !== $recordingStatusCallbackEvent && $obj['recordingStatusCallbackEvent'] = $recordingStatusCallbackEvent;
+        null !== $recordingStatusCallbackMethod && $obj['recordingStatusCallbackMethod'] = $recordingStatusCallbackMethod;
+        null !== $recordingTimeout && $obj['recordingTimeout'] = $recordingTimeout;
+        null !== $recordingTrack && $obj['recordingTrack'] = $recordingTrack;
+        null !== $sipAuthPassword && $obj['sipAuthPassword'] = $sipAuthPassword;
+        null !== $sipAuthUsername && $obj['sipAuthUsername'] = $sipAuthUsername;
+        null !== $statusCallback && $obj['statusCallback'] = $statusCallback;
+        null !== $statusCallbackEvent && $obj['statusCallbackEvent'] = $statusCallbackEvent;
+        null !== $statusCallbackMethod && $obj['statusCallbackMethod'] = $statusCallbackMethod;
+        null !== $trim && $obj['trim'] = $trim;
+        null !== $url && $obj['url'] = $url;
+        null !== $urlMethod && $obj['urlMethod'] = $urlMethod;
 
         return $obj;
     }
@@ -397,7 +389,7 @@ final class CallInitiateParams implements BaseModel
     public function withFrom(string $from): self
     {
         $obj = clone $this;
-        $obj['From'] = $from;
+        $obj['from'] = $from;
 
         return $obj;
     }
@@ -408,7 +400,7 @@ final class CallInitiateParams implements BaseModel
     public function withTo(string $to): self
     {
         $obj = clone $this;
-        $obj['To'] = $to;
+        $obj['to'] = $to;
 
         return $obj;
     }
@@ -419,7 +411,7 @@ final class CallInitiateParams implements BaseModel
     public function withAsyncAmd(bool $asyncAmd): self
     {
         $obj = clone $this;
-        $obj['AsyncAmd'] = $asyncAmd;
+        $obj['asyncAmd'] = $asyncAmd;
 
         return $obj;
     }
@@ -431,7 +423,7 @@ final class CallInitiateParams implements BaseModel
         string $asyncAmdStatusCallback
     ): self {
         $obj = clone $this;
-        $obj['AsyncAmdStatusCallback'] = $asyncAmdStatusCallback;
+        $obj['asyncAmdStatusCallback'] = $asyncAmdStatusCallback;
 
         return $obj;
     }
@@ -442,10 +434,10 @@ final class CallInitiateParams implements BaseModel
      * @param AsyncAmdStatusCallbackMethod|value-of<AsyncAmdStatusCallbackMethod> $asyncAmdStatusCallbackMethod
      */
     public function withAsyncAmdStatusCallbackMethod(
-        AsyncAmdStatusCallbackMethod|string $asyncAmdStatusCallbackMethod,
+        AsyncAmdStatusCallbackMethod|string $asyncAmdStatusCallbackMethod
     ): self {
         $obj = clone $this;
-        $obj['AsyncAmdStatusCallbackMethod'] = $asyncAmdStatusCallbackMethod;
+        $obj['asyncAmdStatusCallbackMethod'] = $asyncAmdStatusCallbackMethod;
 
         return $obj;
     }
@@ -456,7 +448,7 @@ final class CallInitiateParams implements BaseModel
     public function withCallerID(string $callerID): self
     {
         $obj = clone $this;
-        $obj['CallerId'] = $callerID;
+        $obj['callerID'] = $callerID;
 
         return $obj;
     }
@@ -468,7 +460,7 @@ final class CallInitiateParams implements BaseModel
         bool $cancelPlaybackOnDetectMessageEnd
     ): self {
         $obj = clone $this;
-        $obj['CancelPlaybackOnDetectMessageEnd'] = $cancelPlaybackOnDetectMessageEnd;
+        $obj['cancelPlaybackOnDetectMessageEnd'] = $cancelPlaybackOnDetectMessageEnd;
 
         return $obj;
     }
@@ -480,7 +472,7 @@ final class CallInitiateParams implements BaseModel
         bool $cancelPlaybackOnMachineDetection
     ): self {
         $obj = clone $this;
-        $obj['CancelPlaybackOnMachineDetection'] = $cancelPlaybackOnMachineDetection;
+        $obj['cancelPlaybackOnMachineDetection'] = $cancelPlaybackOnMachineDetection;
 
         return $obj;
     }
@@ -490,11 +482,10 @@ final class CallInitiateParams implements BaseModel
      *
      * @param DetectionMode|value-of<DetectionMode> $detectionMode
      */
-    public function withDetectionMode(
-        DetectionMode|string $detectionMode
-    ): self {
+    public function withDetectionMode(DetectionMode|string $detectionMode): self
+    {
         $obj = clone $this;
-        $obj['DetectionMode'] = $detectionMode;
+        $obj['detectionMode'] = $detectionMode;
 
         return $obj;
     }
@@ -505,7 +496,7 @@ final class CallInitiateParams implements BaseModel
     public function withFallbackURL(string $fallbackURL): self
     {
         $obj = clone $this;
-        $obj['FallbackUrl'] = $fallbackURL;
+        $obj['fallbackURL'] = $fallbackURL;
 
         return $obj;
     }
@@ -516,10 +507,10 @@ final class CallInitiateParams implements BaseModel
      * @param MachineDetection|value-of<MachineDetection> $machineDetection
      */
     public function withMachineDetection(
-        MachineDetection|string $machineDetection,
+        MachineDetection|string $machineDetection
     ): self {
         $obj = clone $this;
-        $obj['MachineDetection'] = $machineDetection;
+        $obj['machineDetection'] = $machineDetection;
 
         return $obj;
     }
@@ -531,7 +522,7 @@ final class CallInitiateParams implements BaseModel
         int $machineDetectionSilenceTimeout
     ): self {
         $obj = clone $this;
-        $obj['MachineDetectionSilenceTimeout'] = $machineDetectionSilenceTimeout;
+        $obj['machineDetectionSilenceTimeout'] = $machineDetectionSilenceTimeout;
 
         return $obj;
     }
@@ -543,7 +534,7 @@ final class CallInitiateParams implements BaseModel
         int $machineDetectionSpeechEndThreshold
     ): self {
         $obj = clone $this;
-        $obj['MachineDetectionSpeechEndThreshold'] = $machineDetectionSpeechEndThreshold;
+        $obj['machineDetectionSpeechEndThreshold'] = $machineDetectionSpeechEndThreshold;
 
         return $obj;
     }
@@ -555,7 +546,7 @@ final class CallInitiateParams implements BaseModel
         int $machineDetectionSpeechThreshold
     ): self {
         $obj = clone $this;
-        $obj['MachineDetectionSpeechThreshold'] = $machineDetectionSpeechThreshold;
+        $obj['machineDetectionSpeechThreshold'] = $machineDetectionSpeechThreshold;
 
         return $obj;
     }
@@ -567,7 +558,7 @@ final class CallInitiateParams implements BaseModel
         int $machineDetectionTimeout
     ): self {
         $obj = clone $this;
-        $obj['MachineDetectionTimeout'] = $machineDetectionTimeout;
+        $obj['machineDetectionTimeout'] = $machineDetectionTimeout;
 
         return $obj;
     }
@@ -578,7 +569,7 @@ final class CallInitiateParams implements BaseModel
     public function withPreferredCodecs(string $preferredCodecs): self
     {
         $obj = clone $this;
-        $obj['PreferredCodecs'] = $preferredCodecs;
+        $obj['preferredCodecs'] = $preferredCodecs;
 
         return $obj;
     }
@@ -589,7 +580,7 @@ final class CallInitiateParams implements BaseModel
     public function withRecord(bool $record): self
     {
         $obj = clone $this;
-        $obj['Record'] = $record;
+        $obj['record'] = $record;
 
         return $obj;
     }
@@ -600,10 +591,10 @@ final class CallInitiateParams implements BaseModel
      * @param RecordingChannels|value-of<RecordingChannels> $recordingChannels
      */
     public function withRecordingChannels(
-        RecordingChannels|string $recordingChannels,
+        RecordingChannels|string $recordingChannels
     ): self {
         $obj = clone $this;
-        $obj['RecordingChannels'] = $recordingChannels;
+        $obj['recordingChannels'] = $recordingChannels;
 
         return $obj;
     }
@@ -615,7 +606,7 @@ final class CallInitiateParams implements BaseModel
         string $recordingStatusCallback
     ): self {
         $obj = clone $this;
-        $obj['RecordingStatusCallback'] = $recordingStatusCallback;
+        $obj['recordingStatusCallback'] = $recordingStatusCallback;
 
         return $obj;
     }
@@ -627,7 +618,7 @@ final class CallInitiateParams implements BaseModel
         string $recordingStatusCallbackEvent
     ): self {
         $obj = clone $this;
-        $obj['RecordingStatusCallbackEvent'] = $recordingStatusCallbackEvent;
+        $obj['recordingStatusCallbackEvent'] = $recordingStatusCallbackEvent;
 
         return $obj;
     }
@@ -638,10 +629,10 @@ final class CallInitiateParams implements BaseModel
      * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod> $recordingStatusCallbackMethod
      */
     public function withRecordingStatusCallbackMethod(
-        RecordingStatusCallbackMethod|string $recordingStatusCallbackMethod,
+        RecordingStatusCallbackMethod|string $recordingStatusCallbackMethod
     ): self {
         $obj = clone $this;
-        $obj['RecordingStatusCallbackMethod'] = $recordingStatusCallbackMethod;
+        $obj['recordingStatusCallbackMethod'] = $recordingStatusCallbackMethod;
 
         return $obj;
     }
@@ -652,7 +643,7 @@ final class CallInitiateParams implements BaseModel
     public function withRecordingTimeout(int $recordingTimeout): self
     {
         $obj = clone $this;
-        $obj['RecordingTimeout'] = $recordingTimeout;
+        $obj['recordingTimeout'] = $recordingTimeout;
 
         return $obj;
     }
@@ -666,7 +657,7 @@ final class CallInitiateParams implements BaseModel
         RecordingTrack|string $recordingTrack
     ): self {
         $obj = clone $this;
-        $obj['RecordingTrack'] = $recordingTrack;
+        $obj['recordingTrack'] = $recordingTrack;
 
         return $obj;
     }
@@ -677,7 +668,7 @@ final class CallInitiateParams implements BaseModel
     public function withSipAuthPassword(string $sipAuthPassword): self
     {
         $obj = clone $this;
-        $obj['SipAuthPassword'] = $sipAuthPassword;
+        $obj['sipAuthPassword'] = $sipAuthPassword;
 
         return $obj;
     }
@@ -688,7 +679,7 @@ final class CallInitiateParams implements BaseModel
     public function withSipAuthUsername(string $sipAuthUsername): self
     {
         $obj = clone $this;
-        $obj['SipAuthUsername'] = $sipAuthUsername;
+        $obj['sipAuthUsername'] = $sipAuthUsername;
 
         return $obj;
     }
@@ -699,7 +690,7 @@ final class CallInitiateParams implements BaseModel
     public function withStatusCallback(string $statusCallback): self
     {
         $obj = clone $this;
-        $obj['StatusCallback'] = $statusCallback;
+        $obj['statusCallback'] = $statusCallback;
 
         return $obj;
     }
@@ -710,10 +701,10 @@ final class CallInitiateParams implements BaseModel
      * @param StatusCallbackEvent|value-of<StatusCallbackEvent> $statusCallbackEvent
      */
     public function withStatusCallbackEvent(
-        StatusCallbackEvent|string $statusCallbackEvent,
+        StatusCallbackEvent|string $statusCallbackEvent
     ): self {
         $obj = clone $this;
-        $obj['StatusCallbackEvent'] = $statusCallbackEvent;
+        $obj['statusCallbackEvent'] = $statusCallbackEvent;
 
         return $obj;
     }
@@ -724,10 +715,10 @@ final class CallInitiateParams implements BaseModel
      * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $statusCallbackMethod
      */
     public function withStatusCallbackMethod(
-        StatusCallbackMethod|string $statusCallbackMethod,
+        StatusCallbackMethod|string $statusCallbackMethod
     ): self {
         $obj = clone $this;
-        $obj['StatusCallbackMethod'] = $statusCallbackMethod;
+        $obj['statusCallbackMethod'] = $statusCallbackMethod;
 
         return $obj;
     }
@@ -737,11 +728,10 @@ final class CallInitiateParams implements BaseModel
      *
      * @param Trim|value-of<Trim> $trim
      */
-    public function withTrim(
-        Trim|string $trim
-    ): self {
+    public function withTrim(Trim|string $trim): self
+    {
         $obj = clone $this;
-        $obj['Trim'] = $trim;
+        $obj['trim'] = $trim;
 
         return $obj;
     }
@@ -752,7 +742,7 @@ final class CallInitiateParams implements BaseModel
     public function withURL(string $url): self
     {
         $obj = clone $this;
-        $obj['Url'] = $url;
+        $obj['url'] = $url;
 
         return $obj;
     }
@@ -765,7 +755,7 @@ final class CallInitiateParams implements BaseModel
     public function withURLMethod(URLMethod|string $urlMethod): self
     {
         $obj = clone $this;
-        $obj['UrlMethod'] = $urlMethod;
+        $obj['urlMethod'] = $urlMethod;
 
         return $obj;
     }

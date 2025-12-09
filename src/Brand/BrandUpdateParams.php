@@ -21,8 +21,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *   email: string,
  *   entityType: EntityType|value-of<EntityType>,
  *   vertical: Vertical|value-of<Vertical>,
- *   altBusiness_id?: string,
- *   altBusinessIdType?: AltBusinessIDType|value-of<AltBusinessIDType>,
+ *   altBusinessID?: string,
+ *   altBusinessIDType?: AltBusinessIDType|value-of<AltBusinessIDType>,
  *   businessContactEmail?: string,
  *   city?: string,
  *   companyName?: string,
@@ -86,16 +86,16 @@ final class BrandUpdateParams implements BaseModel
     /**
      * Alternate business identifier such as DUNS, LEI, or GIIN.
      */
-    #[Optional]
-    public ?string $altBusiness_id;
+    #[Optional('altBusiness_id')]
+    public ?string $altBusinessID;
 
     /**
      * An enumeration.
      *
-     * @var value-of<AltBusinessIDType>|null $altBusinessIdType
+     * @var value-of<AltBusinessIDType>|null $altBusinessIDType
      */
-    #[Optional(enum: AltBusinessIDType::class)]
-    public ?string $altBusinessIdType;
+    #[Optional('altBusinessIdType', enum: AltBusinessIDType::class)]
+    public ?string $altBusinessIDType;
 
     /**
      * Business contact email.
@@ -241,7 +241,7 @@ final class BrandUpdateParams implements BaseModel
      *
      * @param EntityType|value-of<EntityType> $entityType
      * @param Vertical|value-of<Vertical> $vertical
-     * @param AltBusinessIDType|value-of<AltBusinessIDType> $altBusinessIdType
+     * @param AltBusinessIDType|value-of<AltBusinessIDType> $altBusinessIDType
      * @param BrandIdentityStatus|value-of<BrandIdentityStatus> $identityStatus
      * @param StockExchange|value-of<StockExchange> $stockExchange
      */
@@ -251,8 +251,8 @@ final class BrandUpdateParams implements BaseModel
         string $email,
         EntityType|string $entityType,
         Vertical|string $vertical,
-        ?string $altBusiness_id = null,
-        AltBusinessIDType|string|null $altBusinessIdType = null,
+        ?string $altBusinessID = null,
+        AltBusinessIDType|string|null $altBusinessIDType = null,
         ?string $businessContactEmail = null,
         ?string $city = null,
         ?string $companyName = null,
@@ -280,8 +280,8 @@ final class BrandUpdateParams implements BaseModel
         $obj['entityType'] = $entityType;
         $obj['vertical'] = $vertical;
 
-        null !== $altBusiness_id && $obj['altBusiness_id'] = $altBusiness_id;
-        null !== $altBusinessIdType && $obj['altBusinessIdType'] = $altBusinessIdType;
+        null !== $altBusinessID && $obj['altBusinessID'] = $altBusinessID;
+        null !== $altBusinessIDType && $obj['altBusinessIDType'] = $altBusinessIDType;
         null !== $businessContactEmail && $obj['businessContactEmail'] = $businessContactEmail;
         null !== $city && $obj['city'] = $city;
         null !== $companyName && $obj['companyName'] = $companyName;
@@ -369,7 +369,7 @@ final class BrandUpdateParams implements BaseModel
     public function withAltBusinessID(string $altBusinessID): self
     {
         $obj = clone $this;
-        $obj['altBusiness_id'] = $altBusinessID;
+        $obj['altBusinessID'] = $altBusinessID;
 
         return $obj;
     }
@@ -383,7 +383,7 @@ final class BrandUpdateParams implements BaseModel
         AltBusinessIDType|string $altBusinessIDType
     ): self {
         $obj = clone $this;
-        $obj['altBusinessIdType'] = $altBusinessIDType;
+        $obj['altBusinessIDType'] = $altBusinessIDType;
 
         return $obj;
     }

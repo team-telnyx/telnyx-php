@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type AssistantSendSMSResponseShape = array{
- *   conversation_id?: string|null
+ *   conversationID?: string|null
  * }
  */
 final class AssistantSendSMSResponse implements BaseModel
@@ -18,8 +18,8 @@ final class AssistantSendSMSResponse implements BaseModel
     /** @use SdkModel<AssistantSendSMSResponseShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?string $conversation_id;
+    #[Optional('conversation_id')]
+    public ?string $conversationID;
 
     public function __construct()
     {
@@ -31,11 +31,11 @@ final class AssistantSendSMSResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $conversation_id = null): self
+    public static function with(?string $conversationID = null): self
     {
         $obj = new self;
 
-        null !== $conversation_id && $obj['conversation_id'] = $conversation_id;
+        null !== $conversationID && $obj['conversationID'] = $conversationID;
 
         return $obj;
     }
@@ -43,7 +43,7 @@ final class AssistantSendSMSResponse implements BaseModel
     public function withConversationID(string $conversationID): self
     {
         $obj = clone $this;
-        $obj['conversation_id'] = $conversationID;
+        $obj['conversationID'] = $conversationID;
 
         return $obj;
     }

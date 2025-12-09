@@ -20,7 +20,7 @@ use Telnyx\Porting\Reports\ReportListParams\Page;
  *
  * @phpstan-type ReportListParamsShape = array{
  *   filter?: Filter|array{
- *     report_type?: value-of<ReportType>|null, status?: value-of<Status>|null
+ *     reportType?: value-of<ReportType>|null, status?: value-of<Status>|null
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
  * }
@@ -54,7 +54,7 @@ final class ReportListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   report_type?: value-of<ReportType>|null, status?: value-of<Status>|null
+     *   reportType?: value-of<ReportType>|null, status?: value-of<Status>|null
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      */
@@ -74,7 +74,7 @@ final class ReportListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[report_type], filter[status].
      *
      * @param Filter|array{
-     *   report_type?: value-of<ReportType>|null, status?: value-of<Status>|null
+     *   reportType?: value-of<ReportType>|null, status?: value-of<Status>|null
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

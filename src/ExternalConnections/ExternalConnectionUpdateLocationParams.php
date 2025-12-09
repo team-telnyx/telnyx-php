@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\ExternalConnectionsService::updateLocation()
  *
  * @phpstan-type ExternalConnectionUpdateLocationParamsShape = array{
- *   id: string, static_emergency_address_id: string
+ *   id: string, staticEmergencyAddressID: string
  * }
  */
 final class ExternalConnectionUpdateLocationParams implements BaseModel
@@ -30,8 +30,8 @@ final class ExternalConnectionUpdateLocationParams implements BaseModel
     /**
      * A new static emergency address ID to update the location with.
      */
-    #[Required]
-    public string $static_emergency_address_id;
+    #[Required('static_emergency_address_id')]
+    public string $staticEmergencyAddressID;
 
     /**
      * `new ExternalConnectionUpdateLocationParams()` is missing required properties by the API.
@@ -39,7 +39,7 @@ final class ExternalConnectionUpdateLocationParams implements BaseModel
      * To enforce required parameters use
      * ```
      * ExternalConnectionUpdateLocationParams::with(
-     *   id: ..., static_emergency_address_id: ...
+     *   id: ..., staticEmergencyAddressID: ...
      * )
      * ```
      *
@@ -63,12 +63,12 @@ final class ExternalConnectionUpdateLocationParams implements BaseModel
      */
     public static function with(
         string $id,
-        string $static_emergency_address_id
+        string $staticEmergencyAddressID
     ): self {
         $obj = new self;
 
         $obj['id'] = $id;
-        $obj['static_emergency_address_id'] = $static_emergency_address_id;
+        $obj['staticEmergencyAddressID'] = $staticEmergencyAddressID;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class ExternalConnectionUpdateLocationParams implements BaseModel
         string $staticEmergencyAddressID
     ): self {
         $obj = clone $this;
-        $obj['static_emergency_address_id'] = $staticEmergencyAddressID;
+        $obj['staticEmergencyAddressID'] = $staticEmergencyAddressID;
 
         return $obj;
     }

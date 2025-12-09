@@ -50,11 +50,11 @@ final class EventsService implements EventsContract
      *
      * @param array{
      *   filter?: array{
-     *     created_at?: array{
+     *     createdAt?: array{
      *       gte?: string|\DateTimeInterface, lte?: string|\DateTimeInterface
      *     },
-     *     event_type?: 'portout.status_changed'|'portout.new_comment'|'portout.foc_date_changed'|EventType,
-     *     portout_id?: string,
+     *     eventType?: 'portout.status_changed'|'portout.new_comment'|'portout.foc_date_changed'|EventType,
+     *     portoutID?: string,
      *   },
      *   page?: array{number?: int, size?: int},
      * }|EventListParams $params

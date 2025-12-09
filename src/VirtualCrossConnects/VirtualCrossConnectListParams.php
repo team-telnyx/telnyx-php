@@ -17,7 +17,7 @@ use Telnyx\VirtualCrossConnects\VirtualCrossConnectListParams\Page;
  * @see Telnyx\Services\VirtualCrossConnectsService::list()
  *
  * @phpstan-type VirtualCrossConnectListParamsShape = array{
- *   filter?: Filter|array{network_id?: string|null},
+ *   filter?: Filter|array{networkID?: string|null},
  *   page?: Page|array{number?: int|null, size?: int|null},
  * }
  */
@@ -49,7 +49,7 @@ final class VirtualCrossConnectListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{network_id?: string|null} $filter
+     * @param Filter|array{networkID?: string|null} $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      */
     public static function with(
@@ -67,7 +67,7 @@ final class VirtualCrossConnectListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[network_id].
      *
-     * @param Filter|array{network_id?: string|null} $filter
+     * @param Filter|array{networkID?: string|null} $filter
      */
     public function withFilter(Filter|array $filter): self
     {

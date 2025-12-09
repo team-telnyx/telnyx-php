@@ -95,7 +95,7 @@ final class ActionsService implements ActionsContract
      * Creates a sharing token for a porting order. The token can be used to share the porting order with non-Telnyx users.
      *
      * @param array{
-     *   expires_in_seconds?: int,
+     *   expiresInSeconds?: int,
      *   permissions?: 'porting_order.document.read'|'porting_order.document.update'|Permissions,
      * }|ActionShareParams $params
      *

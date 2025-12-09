@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\UsageReportsService::getOptions()
  *
  * @phpstan-type UsageReportGetOptionsParamsShape = array{
- *   product?: string, authorization_bearer?: string
+ *   product?: string, authorizationBearer?: string
  * }
  */
 final class UsageReportGetOptionsParams implements BaseModel
@@ -34,7 +34,7 @@ final class UsageReportGetOptionsParams implements BaseModel
      * Authenticates the request with your Telnyx API V2 KEY.
      */
     #[Optional]
-    public ?string $authorization_bearer;
+    public ?string $authorizationBearer;
 
     public function __construct()
     {
@@ -48,12 +48,12 @@ final class UsageReportGetOptionsParams implements BaseModel
      */
     public static function with(
         ?string $product = null,
-        ?string $authorization_bearer = null
+        ?string $authorizationBearer = null
     ): self {
         $obj = new self;
 
         null !== $product && $obj['product'] = $product;
-        null !== $authorization_bearer && $obj['authorization_bearer'] = $authorization_bearer;
+        null !== $authorizationBearer && $obj['authorizationBearer'] = $authorizationBearer;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class UsageReportGetOptionsParams implements BaseModel
     public function withAuthorizationBearer(string $authorizationBearer): self
     {
         $obj = clone $this;
-        $obj['authorization_bearer'] = $authorizationBearer;
+        $obj['authorizationBearer'] = $authorizationBearer;
 
         return $obj;
     }

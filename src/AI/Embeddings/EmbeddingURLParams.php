@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\EmbeddingsService::url()
  *
- * @phpstan-type EmbeddingURLParamsShape = array{bucket_name: string, url: string}
+ * @phpstan-type EmbeddingURLParamsShape = array{bucketName: string, url: string}
  */
 final class EmbeddingURLParams implements BaseModel
 {
@@ -25,8 +25,8 @@ final class EmbeddingURLParams implements BaseModel
     /**
      * Name of the bucket to store the embeddings. This bucket must already exist.
      */
-    #[Required]
-    public string $bucket_name;
+    #[Required('bucket_name')]
+    public string $bucketName;
 
     /**
      * The URL of the webpage to embed.
@@ -39,7 +39,7 @@ final class EmbeddingURLParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * EmbeddingURLParams::with(bucket_name: ..., url: ...)
+     * EmbeddingURLParams::with(bucketName: ..., url: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -58,11 +58,11 @@ final class EmbeddingURLParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $bucket_name, string $url): self
+    public static function with(string $bucketName, string $url): self
     {
         $obj = new self;
 
-        $obj['bucket_name'] = $bucket_name;
+        $obj['bucketName'] = $bucketName;
         $obj['url'] = $url;
 
         return $obj;
@@ -74,7 +74,7 @@ final class EmbeddingURLParams implements BaseModel
     public function withBucketName(string $bucketName): self
     {
         $obj = clone $this;
-        $obj['bucket_name'] = $bucketName;
+        $obj['bucketName'] = $bucketName;
 
         return $obj;
     }

@@ -27,8 +27,8 @@ final class AuditEventsService implements AuditEventsContract
      *
      * @param array{
      *   filter?: array{
-     *     created_after?: string|\DateTimeInterface,
-     *     created_before?: string|\DateTimeInterface,
+     *     createdAfter?: string|\DateTimeInterface,
+     *     createdBefore?: string|\DateTimeInterface,
      *   },
      *   page?: array{number?: int, size?: int},
      *   sort?: 'asc'|'desc'|Sort,

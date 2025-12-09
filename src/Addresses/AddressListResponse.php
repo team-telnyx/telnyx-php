@@ -38,30 +38,30 @@ final class AddressListResponse implements BaseModel
      *
      * @param list<Address|array{
      *   id?: string|null,
-     *   address_book?: bool|null,
-     *   administrative_area?: string|null,
+     *   addressBook?: bool|null,
+     *   administrativeArea?: string|null,
      *   borough?: string|null,
-     *   business_name?: string|null,
-     *   country_code?: string|null,
-     *   created_at?: string|null,
-     *   customer_reference?: string|null,
-     *   extended_address?: string|null,
-     *   first_name?: string|null,
-     *   last_name?: string|null,
+     *   businessName?: string|null,
+     *   countryCode?: string|null,
+     *   createdAt?: string|null,
+     *   customerReference?: string|null,
+     *   extendedAddress?: string|null,
+     *   firstName?: string|null,
+     *   lastName?: string|null,
      *   locality?: string|null,
      *   neighborhood?: string|null,
-     *   phone_number?: string|null,
-     *   postal_code?: string|null,
-     *   record_type?: string|null,
-     *   street_address?: string|null,
-     *   updated_at?: string|null,
-     *   validate_address?: bool|null,
+     *   phoneNumber?: string|null,
+     *   postalCode?: string|null,
+     *   recordType?: string|null,
+     *   streetAddress?: string|null,
+     *   updatedAt?: string|null,
+     *   validateAddress?: bool|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -79,24 +79,24 @@ final class AddressListResponse implements BaseModel
     /**
      * @param list<Address|array{
      *   id?: string|null,
-     *   address_book?: bool|null,
-     *   administrative_area?: string|null,
+     *   addressBook?: bool|null,
+     *   administrativeArea?: string|null,
      *   borough?: string|null,
-     *   business_name?: string|null,
-     *   country_code?: string|null,
-     *   created_at?: string|null,
-     *   customer_reference?: string|null,
-     *   extended_address?: string|null,
-     *   first_name?: string|null,
-     *   last_name?: string|null,
+     *   businessName?: string|null,
+     *   countryCode?: string|null,
+     *   createdAt?: string|null,
+     *   customerReference?: string|null,
+     *   extendedAddress?: string|null,
+     *   firstName?: string|null,
+     *   lastName?: string|null,
      *   locality?: string|null,
      *   neighborhood?: string|null,
-     *   phone_number?: string|null,
-     *   postal_code?: string|null,
-     *   record_type?: string|null,
-     *   street_address?: string|null,
-     *   updated_at?: string|null,
-     *   validate_address?: bool|null,
+     *   phoneNumber?: string|null,
+     *   postalCode?: string|null,
+     *   recordType?: string|null,
+     *   streetAddress?: string|null,
+     *   updatedAt?: string|null,
+     *   validateAddress?: bool|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -109,10 +109,10 @@ final class AddressListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

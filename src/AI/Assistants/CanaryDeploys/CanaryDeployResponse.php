@@ -12,9 +12,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * Response model for canary deploy operations.
  *
  * @phpstan-type CanaryDeployResponseShape = array{
- *   assistant_id: string,
- *   created_at: \DateTimeInterface,
- *   updated_at: \DateTimeInterface,
+ *   assistantID: string,
+ *   createdAt: \DateTimeInterface,
+ *   updatedAt: \DateTimeInterface,
  *   versions: list<VersionConfig>,
  * }
  */
@@ -23,14 +23,14 @@ final class CanaryDeployResponse implements BaseModel
     /** @use SdkModel<CanaryDeployResponseShape> */
     use SdkModel;
 
-    #[Required]
-    public string $assistant_id;
+    #[Required('assistant_id')]
+    public string $assistantID;
 
-    #[Required]
-    public \DateTimeInterface $created_at;
+    #[Required('created_at')]
+    public \DateTimeInterface $createdAt;
 
-    #[Required]
-    public \DateTimeInterface $updated_at;
+    #[Required('updated_at')]
+    public \DateTimeInterface $updatedAt;
 
     /** @var list<VersionConfig> $versions */
     #[Required(list: VersionConfig::class)]
@@ -42,7 +42,7 @@ final class CanaryDeployResponse implements BaseModel
      * To enforce required parameters use
      * ```
      * CanaryDeployResponse::with(
-     *   assistant_id: ..., created_at: ..., updated_at: ..., versions: ...
+     *   assistantID: ..., createdAt: ..., updatedAt: ..., versions: ...
      * )
      * ```
      *
@@ -66,21 +66,19 @@ final class CanaryDeployResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VersionConfig|array{
-     *   percentage: float, version_id: string
-     * }> $versions
+     * @param list<VersionConfig|array{percentage: float, versionID: string}> $versions
      */
     public static function with(
-        string $assistant_id,
-        \DateTimeInterface $created_at,
-        \DateTimeInterface $updated_at,
+        string $assistantID,
+        \DateTimeInterface $createdAt,
+        \DateTimeInterface $updatedAt,
         array $versions,
     ): self {
         $obj = new self;
 
-        $obj['assistant_id'] = $assistant_id;
-        $obj['created_at'] = $created_at;
-        $obj['updated_at'] = $updated_at;
+        $obj['assistantID'] = $assistantID;
+        $obj['createdAt'] = $createdAt;
+        $obj['updatedAt'] = $updatedAt;
         $obj['versions'] = $versions;
 
         return $obj;
@@ -89,7 +87,7 @@ final class CanaryDeployResponse implements BaseModel
     public function withAssistantID(string $assistantID): self
     {
         $obj = clone $this;
-        $obj['assistant_id'] = $assistantID;
+        $obj['assistantID'] = $assistantID;
 
         return $obj;
     }
@@ -97,7 +95,7 @@ final class CanaryDeployResponse implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -105,15 +103,13 @@ final class CanaryDeployResponse implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
 
     /**
-     * @param list<VersionConfig|array{
-     *   percentage: float, version_id: string
-     * }> $versions
+     * @param list<VersionConfig|array{percentage: float, versionID: string}> $versions
      */
     public function withVersions(array $versions): self
     {

@@ -33,12 +33,12 @@ final class ReleaseGetResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Data|array{
-     *   created_at?: string|null,
-     *   error_message?: string|null,
+     *   createdAt?: string|null,
+     *   errorMessage?: string|null,
      *   status?: value-of<Status>|null,
-     *   telephone_numbers?: list<TelephoneNumber>|null,
-     *   tenant_id?: string|null,
-     *   ticket_id?: string|null,
+     *   telephoneNumbers?: list<TelephoneNumber>|null,
+     *   tenantID?: string|null,
+     *   ticketID?: string|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -52,12 +52,12 @@ final class ReleaseGetResponse implements BaseModel
 
     /**
      * @param Data|array{
-     *   created_at?: string|null,
-     *   error_message?: string|null,
+     *   createdAt?: string|null,
+     *   errorMessage?: string|null,
      *   status?: value-of<Status>|null,
-     *   telephone_numbers?: list<TelephoneNumber>|null,
-     *   tenant_id?: string|null,
-     *   ticket_id?: string|null,
+     *   telephoneNumbers?: list<TelephoneNumber>|null,
+     *   tenantID?: string|null,
+     *   ticketID?: string|null,
      * } $data
      */
     public function withData(Data|array $data): self

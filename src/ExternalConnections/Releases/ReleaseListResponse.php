@@ -40,18 +40,18 @@ final class ReleaseListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   created_at?: string|null,
-     *   error_message?: string|null,
+     *   createdAt?: string|null,
+     *   errorMessage?: string|null,
      *   status?: value-of<Status>|null,
-     *   telephone_numbers?: list<TelephoneNumber>|null,
-     *   tenant_id?: string|null,
-     *   ticket_id?: string|null,
+     *   telephoneNumbers?: list<TelephoneNumber>|null,
+     *   tenantID?: string|null,
+     *   ticketID?: string|null,
      * }> $data
      * @param ExternalVoiceIntegrationsPaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -68,12 +68,12 @@ final class ReleaseListResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   created_at?: string|null,
-     *   error_message?: string|null,
+     *   createdAt?: string|null,
+     *   errorMessage?: string|null,
      *   status?: value-of<Status>|null,
-     *   telephone_numbers?: list<TelephoneNumber>|null,
-     *   tenant_id?: string|null,
-     *   ticket_id?: string|null,
+     *   telephoneNumbers?: list<TelephoneNumber>|null,
+     *   tenantID?: string|null,
+     *   ticketID?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -86,10 +86,10 @@ final class ReleaseListResponse implements BaseModel
 
     /**
      * @param ExternalVoiceIntegrationsPaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(

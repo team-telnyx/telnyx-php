@@ -36,9 +36,7 @@ final class Features implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param MessagingFeatureSet|array{
-     *   domestic_two_way: bool,
-     *   international_inbound: bool,
-     *   international_outbound: bool,
+     *   domesticTwoWay: bool, internationalInbound: bool, internationalOutbound: bool
      * }|null $sms
      */
     public static function with(
@@ -57,9 +55,7 @@ final class Features implements BaseModel
      * product configuration.
      *
      * @param MessagingFeatureSet|array{
-     *   domestic_two_way: bool,
-     *   international_inbound: bool,
-     *   international_outbound: bool,
+     *   domesticTwoWay: bool, internationalInbound: bool, internationalOutbound: bool
      * }|null $sms
      */
     public function withSMS(MessagingFeatureSet|array|null $sms): self

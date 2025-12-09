@@ -30,7 +30,7 @@ final class RoomRecordingDeleteBulkResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{room_recordings?: int|null} $data
+     * @param Data|array{roomRecordings?: int|null} $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -42,7 +42,7 @@ final class RoomRecordingDeleteBulkResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{room_recordings?: int|null} $data
+     * @param Data|array{roomRecordings?: int|null} $data
      */
     public function withData(Data|array $data): self
     {

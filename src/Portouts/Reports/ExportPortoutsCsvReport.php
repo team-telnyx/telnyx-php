@@ -51,12 +51,12 @@ final class ExportPortoutsCsvReport implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filters|array{
-     *   created_at__gt?: \DateTimeInterface|null,
-     *   created_at__lt?: \DateTimeInterface|null,
-     *   customer_reference__in?: list<string>|null,
-     *   end_user_name?: string|null,
-     *   phone_numbers__overlaps?: list<string>|null,
-     *   status__in?: list<value-of<StatusIn>>|null,
+     *   createdAtGt?: \DateTimeInterface|null,
+     *   createdAtLt?: \DateTimeInterface|null,
+     *   customerReferenceIn?: list<string>|null,
+     *   endUserName?: string|null,
+     *   phoneNumbersOverlaps?: list<string>|null,
+     *   statusIn?: list<value-of<StatusIn>>|null,
      * } $filters
      */
     public static function with(Filters|array $filters): self
@@ -72,12 +72,12 @@ final class ExportPortoutsCsvReport implements BaseModel
      * The filters to apply to the export port-out CSV report.
      *
      * @param Filters|array{
-     *   created_at__gt?: \DateTimeInterface|null,
-     *   created_at__lt?: \DateTimeInterface|null,
-     *   customer_reference__in?: list<string>|null,
-     *   end_user_name?: string|null,
-     *   phone_numbers__overlaps?: list<string>|null,
-     *   status__in?: list<value-of<StatusIn>>|null,
+     *   createdAtGt?: \DateTimeInterface|null,
+     *   createdAtLt?: \DateTimeInterface|null,
+     *   customerReferenceIn?: list<string>|null,
+     *   endUserName?: string|null,
+     *   phoneNumbersOverlaps?: list<string>|null,
+     *   statusIn?: list<value-of<StatusIn>>|null,
      * } $filters
      */
     public function withFilters(Filters|array $filters): self

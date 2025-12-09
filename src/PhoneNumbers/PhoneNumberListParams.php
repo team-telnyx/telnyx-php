@@ -25,19 +25,19 @@ use Telnyx\PhoneNumbers\PhoneNumberListParams\Sort;
  *
  * @phpstan-type PhoneNumberListParamsShape = array{
  *   filter?: Filter|array{
- *     billing_group_id?: string|null,
- *     connection_id?: string|null,
- *     country_iso_alpha2?: string|null|list<string>,
- *     customer_reference?: string|null,
- *     emergency_address_id?: string|null,
- *     number_type?: NumberType|null,
- *     phone_number?: string|null,
+ *     billingGroupID?: string|null,
+ *     connectionID?: string|null,
+ *     countryISOAlpha2?: string|null|list<string>,
+ *     customerReference?: string|null,
+ *     emergencyAddressID?: string|null,
+ *     numberType?: NumberType|null,
+ *     phoneNumber?: string|null,
  *     source?: value-of<Source>|null,
  *     status?: value-of<Status>|null,
  *     tag?: string|null,
- *     voice_connection_name?: VoiceConnectionName|null,
- *     voice_usage_payment_method?: value-of<VoiceUsagePaymentMethod>|null,
- *     without_tags?: value-of<WithoutTags>|null,
+ *     voiceConnectionName?: VoiceConnectionName|null,
+ *     voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
+ *     withoutTags?: value-of<WithoutTags>|null,
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
  *   sort?: Sort|value-of<Sort>,
@@ -80,19 +80,19 @@ final class PhoneNumberListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   billing_group_id?: string|null,
-     *   connection_id?: string|null,
-     *   country_iso_alpha2?: string|list<string>|null,
-     *   customer_reference?: string|null,
-     *   emergency_address_id?: string|null,
-     *   number_type?: NumberType|null,
-     *   phone_number?: string|null,
+     *   billingGroupID?: string|null,
+     *   connectionID?: string|null,
+     *   countryISOAlpha2?: string|list<string>|null,
+     *   customerReference?: string|null,
+     *   emergencyAddressID?: string|null,
+     *   numberType?: NumberType|null,
+     *   phoneNumber?: string|null,
      *   source?: value-of<Source>|null,
      *   status?: value-of<Status>|null,
      *   tag?: string|null,
-     *   voice_connection_name?: VoiceConnectionName|null,
-     *   voice_usage_payment_method?: value-of<VoiceUsagePaymentMethod>|null,
-     *   without_tags?: value-of<WithoutTags>|null,
+     *   voiceConnectionName?: VoiceConnectionName|null,
+     *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
+     *   withoutTags?: value-of<WithoutTags>|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      * @param Sort|value-of<Sort> $sort
@@ -115,19 +115,19 @@ final class PhoneNumberListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[phone_number], filter[status], filter[country_iso_alpha2], filter[connection_id], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference], filter[number_type], filter[source].
      *
      * @param Filter|array{
-     *   billing_group_id?: string|null,
-     *   connection_id?: string|null,
-     *   country_iso_alpha2?: string|list<string>|null,
-     *   customer_reference?: string|null,
-     *   emergency_address_id?: string|null,
-     *   number_type?: NumberType|null,
-     *   phone_number?: string|null,
+     *   billingGroupID?: string|null,
+     *   connectionID?: string|null,
+     *   countryISOAlpha2?: string|list<string>|null,
+     *   customerReference?: string|null,
+     *   emergencyAddressID?: string|null,
+     *   numberType?: NumberType|null,
+     *   phoneNumber?: string|null,
      *   source?: value-of<Source>|null,
      *   status?: value-of<Status>|null,
      *   tag?: string|null,
-     *   voice_connection_name?: VoiceConnectionName|null,
-     *   voice_usage_payment_method?: value-of<VoiceUsagePaymentMethod>|null,
-     *   without_tags?: value-of<WithoutTags>|null,
+     *   voiceConnectionName?: VoiceConnectionName|null,
+     *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
+     *   withoutTags?: value-of<WithoutTags>|null,
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

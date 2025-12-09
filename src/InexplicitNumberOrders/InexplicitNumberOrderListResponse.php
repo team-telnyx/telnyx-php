@@ -40,19 +40,19 @@ final class InexplicitNumberOrderListResponse implements BaseModel
      *
      * @param list<Data|array{
      *   id?: string|null,
-     *   billing_group_id?: string|null,
-     *   connection_id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   customer_reference?: string|null,
-     *   messaging_profile_id?: string|null,
-     *   ordering_groups?: list<OrderingGroup>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   billingGroupID?: string|null,
+     *   connectionID?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   customerReference?: string|null,
+     *   messagingProfileID?: string|null,
+     *   orderingGroups?: list<OrderingGroup>|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -70,13 +70,13 @@ final class InexplicitNumberOrderListResponse implements BaseModel
     /**
      * @param list<Data|array{
      *   id?: string|null,
-     *   billing_group_id?: string|null,
-     *   connection_id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   customer_reference?: string|null,
-     *   messaging_profile_id?: string|null,
-     *   ordering_groups?: list<OrderingGroup>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   billingGroupID?: string|null,
+     *   connectionID?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   customerReference?: string|null,
+     *   messagingProfileID?: string|null,
+     *   orderingGroups?: list<OrderingGroup>|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -89,10 +89,10 @@ final class InexplicitNumberOrderListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

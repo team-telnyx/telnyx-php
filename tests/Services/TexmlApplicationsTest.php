@@ -41,7 +41,7 @@ final class TexmlApplicationsTest extends TestCase
         }
 
         $result = $this->client->texmlApplications->create([
-            'friendly_name' => 'call-router', 'voice_url' => 'https://example.com',
+            'friendlyName' => 'call-router', 'voiceURL' => 'https://example.com',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -56,29 +56,28 @@ final class TexmlApplicationsTest extends TestCase
         }
 
         $result = $this->client->texmlApplications->create([
-            'friendly_name' => 'call-router',
-            'voice_url' => 'https://example.com',
+            'friendlyName' => 'call-router',
+            'voiceURL' => 'https://example.com',
             'active' => false,
-            'anchorsite_override' => AnchorsiteOverride::AMSTERDAM_NETHERLANDS,
-            'call_cost_in_webhooks' => false,
-            'dtmf_type' => DtmfType::INBAND,
-            'first_command_timeout' => true,
-            'first_command_timeout_secs' => 10,
+            'anchorsiteOverride' => AnchorsiteOverride::AMSTERDAM_NETHERLANDS,
+            'callCostInWebhooks' => false,
+            'dtmfType' => DtmfType::INBAND,
+            'firstCommandTimeout' => true,
+            'firstCommandTimeoutSecs' => 10,
             'inbound' => [
-                'channel_limit' => 10,
-                'shaken_stir_enabled' => true,
-                'sip_subdomain' => 'example',
-                'sip_subdomain_receive_settings' => 'only_my_connections',
+                'channelLimit' => 10,
+                'shakenStirEnabled' => true,
+                'sipSubdomain' => 'example',
+                'sipSubdomainReceiveSettings' => 'only_my_connections',
             ],
             'outbound' => [
-                'channel_limit' => 10,
-                'outbound_voice_profile_id' => '1293384261075731499',
+                'channelLimit' => 10, 'outboundVoiceProfileID' => '1293384261075731499',
             ],
-            'status_callback' => 'https://example.com',
-            'status_callback_method' => 'get',
+            'statusCallback' => 'https://example.com',
+            'statusCallbackMethod' => 'get',
             'tags' => ['tag1', 'tag2'],
-            'voice_fallback_url' => 'https://fallback.example.com',
-            'voice_method' => 'get',
+            'voiceFallbackURL' => 'https://fallback.example.com',
+            'voiceMethod' => 'get',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -107,7 +106,7 @@ final class TexmlApplicationsTest extends TestCase
 
         $result = $this->client->texmlApplications->update(
             '1293384261075731499',
-            ['friendly_name' => 'call-router', 'voice_url' => 'https://example.com'],
+            ['friendlyName' => 'call-router', 'voiceURL' => 'https://example.com'],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -124,29 +123,29 @@ final class TexmlApplicationsTest extends TestCase
         $result = $this->client->texmlApplications->update(
             '1293384261075731499',
             [
-                'friendly_name' => 'call-router',
-                'voice_url' => 'https://example.com',
+                'friendlyName' => 'call-router',
+                'voiceURL' => 'https://example.com',
                 'active' => false,
-                'anchorsite_override' => AnchorsiteOverride::AMSTERDAM_NETHERLANDS,
-                'call_cost_in_webhooks' => false,
-                'dtmf_type' => DtmfType::INBAND,
-                'first_command_timeout' => true,
-                'first_command_timeout_secs' => 10,
+                'anchorsiteOverride' => AnchorsiteOverride::AMSTERDAM_NETHERLANDS,
+                'callCostInWebhooks' => false,
+                'dtmfType' => DtmfType::INBAND,
+                'firstCommandTimeout' => true,
+                'firstCommandTimeoutSecs' => 10,
                 'inbound' => [
-                    'channel_limit' => 10,
-                    'shaken_stir_enabled' => true,
-                    'sip_subdomain' => 'example',
-                    'sip_subdomain_receive_settings' => 'only_my_connections',
+                    'channelLimit' => 10,
+                    'shakenStirEnabled' => true,
+                    'sipSubdomain' => 'example',
+                    'sipSubdomainReceiveSettings' => 'only_my_connections',
                 ],
                 'outbound' => [
-                    'channel_limit' => 10,
-                    'outbound_voice_profile_id' => '1293384261075731499',
+                    'channelLimit' => 10,
+                    'outboundVoiceProfileID' => '1293384261075731499',
                 ],
-                'status_callback' => 'https://example.com',
-                'status_callback_method' => 'get',
+                'statusCallback' => 'https://example.com',
+                'statusCallbackMethod' => 'get',
                 'tags' => ['tag1', 'tag2'],
-                'voice_fallback_url' => 'https://fallback.example.com',
-                'voice_method' => 'get',
+                'voiceFallbackURL' => 'https://fallback.example.com',
+                'voiceMethod' => 'get',
             ],
         );
 

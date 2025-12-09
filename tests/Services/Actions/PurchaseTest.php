@@ -50,10 +50,10 @@ final class PurchaseTest extends TestCase
         $result = $this->client->actions->purchase->create([
             'amount' => 10,
             'product' => 'whitelabel',
-            'sim_card_group_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            'simCardGroupID' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
             'status' => 'standby',
             'tags' => ['personal', 'customers', 'active-customers'],
-            'whitelabel_name' => 'Custom SPN',
+            'whitelabelName' => 'Custom SPN',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

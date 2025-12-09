@@ -20,11 +20,11 @@ use Telnyx\RequirementGroups\RequirementGroupCreateParams\RegulatoryRequirement;
  *
  * @phpstan-type RequirementGroupCreateParamsShape = array{
  *   action: Action|value-of<Action>,
- *   country_code: string,
- *   phone_number_type: PhoneNumberType|value-of<PhoneNumberType>,
- *   customer_reference?: string,
- *   regulatory_requirements?: list<RegulatoryRequirement|array{
- *     field_value?: string|null, requirement_id?: string|null
+ *   countryCode: string,
+ *   phoneNumberType: PhoneNumberType|value-of<PhoneNumberType>,
+ *   customerReference?: string,
+ *   regulatoryRequirements?: list<RegulatoryRequirement|array{
+ *     fieldValue?: string|null, requirementID?: string|null
  *   }>,
  * }
  */
@@ -41,19 +41,19 @@ final class RequirementGroupCreateParams implements BaseModel
     /**
      * ISO alpha 2 country code.
      */
-    #[Required]
-    public string $country_code;
+    #[Required('country_code')]
+    public string $countryCode;
 
-    /** @var value-of<PhoneNumberType> $phone_number_type */
-    #[Required(enum: PhoneNumberType::class)]
-    public string $phone_number_type;
+    /** @var value-of<PhoneNumberType> $phoneNumberType */
+    #[Required('phone_number_type', enum: PhoneNumberType::class)]
+    public string $phoneNumberType;
 
-    #[Optional]
-    public ?string $customer_reference;
+    #[Optional('customer_reference')]
+    public ?string $customerReference;
 
-    /** @var list<RegulatoryRequirement>|null $regulatory_requirements */
-    #[Optional(list: RegulatoryRequirement::class)]
-    public ?array $regulatory_requirements;
+    /** @var list<RegulatoryRequirement>|null $regulatoryRequirements */
+    #[Optional('regulatory_requirements', list: RegulatoryRequirement::class)]
+    public ?array $regulatoryRequirements;
 
     /**
      * `new RequirementGroupCreateParams()` is missing required properties by the API.
@@ -61,7 +61,7 @@ final class RequirementGroupCreateParams implements BaseModel
      * To enforce required parameters use
      * ```
      * RequirementGroupCreateParams::with(
-     *   action: ..., country_code: ..., phone_number_type: ...
+     *   action: ..., countryCode: ..., phoneNumberType: ...
      * )
      * ```
      *
@@ -85,26 +85,26 @@ final class RequirementGroupCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Action|value-of<Action> $action
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phone_number_type
+     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
      * @param list<RegulatoryRequirement|array{
-     *   field_value?: string|null, requirement_id?: string|null
-     * }> $regulatory_requirements
+     *   fieldValue?: string|null, requirementID?: string|null
+     * }> $regulatoryRequirements
      */
     public static function with(
         Action|string $action,
-        string $country_code,
-        PhoneNumberType|string $phone_number_type,
-        ?string $customer_reference = null,
-        ?array $regulatory_requirements = null,
+        string $countryCode,
+        PhoneNumberType|string $phoneNumberType,
+        ?string $customerReference = null,
+        ?array $regulatoryRequirements = null,
     ): self {
         $obj = new self;
 
         $obj['action'] = $action;
-        $obj['country_code'] = $country_code;
-        $obj['phone_number_type'] = $phone_number_type;
+        $obj['countryCode'] = $countryCode;
+        $obj['phoneNumberType'] = $phoneNumberType;
 
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
-        null !== $regulatory_requirements && $obj['regulatory_requirements'] = $regulatory_requirements;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
+        null !== $regulatoryRequirements && $obj['regulatoryRequirements'] = $regulatoryRequirements;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class RequirementGroupCreateParams implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj['country_code'] = $countryCode;
+        $obj['countryCode'] = $countryCode;
 
         return $obj;
     }
@@ -138,7 +138,7 @@ final class RequirementGroupCreateParams implements BaseModel
         PhoneNumberType|string $phoneNumberType
     ): self {
         $obj = clone $this;
-        $obj['phone_number_type'] = $phoneNumberType;
+        $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }
@@ -146,21 +146,21 @@ final class RequirementGroupCreateParams implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }
 
     /**
      * @param list<RegulatoryRequirement|array{
-     *   field_value?: string|null, requirement_id?: string|null
+     *   fieldValue?: string|null, requirementID?: string|null
      * }> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements
     ): self {
         $obj = clone $this;
-        $obj['regulatory_requirements'] = $regulatoryRequirements;
+        $obj['regulatoryRequirements'] = $regulatoryRequirements;
 
         return $obj;
     }

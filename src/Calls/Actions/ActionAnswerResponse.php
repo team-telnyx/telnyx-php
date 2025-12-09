@@ -30,7 +30,7 @@ final class ActionAnswerResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{recording_id?: string|null, result?: string|null} $data
+     * @param Data|array{recordingID?: string|null, result?: string|null} $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -42,7 +42,7 @@ final class ActionAnswerResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{recording_id?: string|null, result?: string|null} $data
+     * @param Data|array{recordingID?: string|null, result?: string|null} $data
      */
     public function withData(Data|array $data): self
     {

@@ -21,9 +21,9 @@ use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListP
  *
  * @phpstan-type PhoneNumberConfigurationListParamsShape = array{
  *   filter?: Filter|array{
- *     porting_order?: PortingOrder|null,
- *     porting_phone_number?: list<string>|null,
- *     user_bundle_id?: list<string>|null,
+ *     portingOrder?: PortingOrder|null,
+ *     portingPhoneNumber?: list<string>|null,
+ *     userBundleID?: list<string>|null,
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
  *   sort?: Sort|array{value?: value-of<Value>|null},
@@ -64,9 +64,9 @@ final class PhoneNumberConfigurationListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   porting_order?: PortingOrder|null,
-     *   porting_phone_number?: list<string>|null,
-     *   user_bundle_id?: list<string>|null,
+     *   portingOrder?: PortingOrder|null,
+     *   portingPhoneNumber?: list<string>|null,
+     *   userBundleID?: list<string>|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      * @param Sort|array{value?: value-of<Value>|null} $sort
@@ -89,9 +89,9 @@ final class PhoneNumberConfigurationListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[porting_order.status][in][], filter[porting_phone_number][in][], filter[user_bundle_id][in][].
      *
      * @param Filter|array{
-     *   porting_order?: PortingOrder|null,
-     *   porting_phone_number?: list<string>|null,
-     *   user_bundle_id?: list<string>|null,
+     *   portingOrder?: PortingOrder|null,
+     *   portingPhoneNumber?: list<string>|null,
+     *   userBundleID?: list<string>|null,
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

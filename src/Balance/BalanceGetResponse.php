@@ -32,12 +32,12 @@ final class BalanceGetResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Data|array{
-     *   available_credit?: string|null,
+     *   availableCredit?: string|null,
      *   balance?: string|null,
-     *   credit_limit?: string|null,
+     *   creditLimit?: string|null,
      *   currency?: string|null,
      *   pending?: string|null,
-     *   record_type?: value-of<RecordType>|null,
+     *   recordType?: value-of<RecordType>|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -51,12 +51,12 @@ final class BalanceGetResponse implements BaseModel
 
     /**
      * @param Data|array{
-     *   available_credit?: string|null,
+     *   availableCredit?: string|null,
      *   balance?: string|null,
-     *   credit_limit?: string|null,
+     *   creditLimit?: string|null,
      *   currency?: string|null,
      *   pending?: string|null,
-     *   record_type?: value-of<RecordType>|null,
+     *   recordType?: value-of<RecordType>|null,
      * } $data
      */
     public function withData(Data|array $data): self

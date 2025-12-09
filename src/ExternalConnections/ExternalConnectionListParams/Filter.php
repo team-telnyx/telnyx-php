@@ -16,10 +16,10 @@ use Telnyx\ExternalConnections\ExternalConnectionListParams\Filter\PhoneNumber;
  *
  * @phpstan-type FilterShape = array{
  *   id?: string|null,
- *   connection_name?: ConnectionName|null,
- *   created_at?: string|null,
- *   external_sip_connection?: value-of<ExternalSipConnection>|null,
- *   phone_number?: PhoneNumber|null,
+ *   connectionName?: ConnectionName|null,
+ *   createdAt?: string|null,
+ *   externalSipConnection?: value-of<ExternalSipConnection>|null,
+ *   phoneNumber?: PhoneNumber|null,
  * }
  */
 final class Filter implements BaseModel
@@ -33,28 +33,28 @@ final class Filter implements BaseModel
     #[Optional]
     public ?string $id;
 
-    #[Optional]
-    public ?ConnectionName $connection_name;
+    #[Optional('connection_name')]
+    public ?ConnectionName $connectionName;
 
     /**
      * If present, connections with <code>created_at</code> date matching the given YYYY-MM-DD date will be returned.
      */
-    #[Optional]
-    public ?string $created_at;
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
     /**
      * If present, connections with <code>external_sip_connection</code> matching the given value will be returned.
      *
-     * @var value-of<ExternalSipConnection>|null $external_sip_connection
+     * @var value-of<ExternalSipConnection>|null $externalSipConnection
      */
-    #[Optional(enum: ExternalSipConnection::class)]
-    public ?string $external_sip_connection;
+    #[Optional('external_sip_connection', enum: ExternalSipConnection::class)]
+    public ?string $externalSipConnection;
 
     /**
      * Phone number filter for connections. Note: Despite the 'contains' name, this requires a full E164 match per the original specification.
      */
-    #[Optional]
-    public ?PhoneNumber $phone_number;
+    #[Optional('phone_number')]
+    public ?PhoneNumber $phoneNumber;
 
     public function __construct()
     {
@@ -66,24 +66,24 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ConnectionName|array{contains?: string|null} $connection_name
-     * @param ExternalSipConnection|value-of<ExternalSipConnection> $external_sip_connection
-     * @param PhoneNumber|array{contains?: string|null} $phone_number
+     * @param ConnectionName|array{contains?: string|null} $connectionName
+     * @param ExternalSipConnection|value-of<ExternalSipConnection> $externalSipConnection
+     * @param PhoneNumber|array{contains?: string|null} $phoneNumber
      */
     public static function with(
         ?string $id = null,
-        ConnectionName|array|null $connection_name = null,
-        ?string $created_at = null,
-        ExternalSipConnection|string|null $external_sip_connection = null,
-        PhoneNumber|array|null $phone_number = null,
+        ConnectionName|array|null $connectionName = null,
+        ?string $createdAt = null,
+        ExternalSipConnection|string|null $externalSipConnection = null,
+        PhoneNumber|array|null $phoneNumber = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $connection_name && $obj['connection_name'] = $connection_name;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $external_sip_connection && $obj['external_sip_connection'] = $external_sip_connection;
-        null !== $phone_number && $obj['phone_number'] = $phone_number;
+        null !== $connectionName && $obj['connectionName'] = $connectionName;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $externalSipConnection && $obj['externalSipConnection'] = $externalSipConnection;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class Filter implements BaseModel
         ConnectionName|array $connectionName
     ): self {
         $obj = clone $this;
-        $obj['connection_name'] = $connectionName;
+        $obj['connectionName'] = $connectionName;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class Filter implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class Filter implements BaseModel
         ExternalSipConnection|string $externalSipConnection
     ): self {
         $obj = clone $this;
-        $obj['external_sip_connection'] = $externalSipConnection;
+        $obj['externalSipConnection'] = $externalSipConnection;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class Filter implements BaseModel
     public function withPhoneNumber(PhoneNumber|array $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }

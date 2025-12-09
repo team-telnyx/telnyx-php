@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type RecordShape = array{
  *   assignedCampaingsCount?: int|null,
- *   brandId?: string|null,
+ *   brandID?: string|null,
  *   companyName?: string|null,
  *   createdAt?: string|null,
  *   displayName?: string|null,
@@ -23,7 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   failureReasons?: string|null,
  *   identityStatus?: value-of<BrandIdentityStatus>|null,
  *   status?: value-of<Status>|null,
- *   tcrBrandId?: string|null,
+ *   tcrBrandID?: string|null,
  *   updatedAt?: string|null,
  *   website?: string|null,
  * }
@@ -42,8 +42,8 @@ final class Record implements BaseModel
     /**
      * Unique identifier assigned to the brand.
      */
-    #[Optional]
-    public ?string $brandId;
+    #[Optional('brandId')]
+    public ?string $brandID;
 
     /**
      * (Required for Non-profit/private/public) Legal company name.
@@ -102,8 +102,8 @@ final class Record implements BaseModel
     /**
      * Unique identifier assigned to the brand by the registry.
      */
-    #[Optional]
-    public ?string $tcrBrandId;
+    #[Optional('tcrBrandId')]
+    public ?string $tcrBrandID;
 
     /**
      * Date and time that the brand was last updated at.
@@ -133,7 +133,7 @@ final class Record implements BaseModel
      */
     public static function with(
         ?int $assignedCampaingsCount = null,
-        ?string $brandId = null,
+        ?string $brandID = null,
         ?string $companyName = null,
         ?string $createdAt = null,
         ?string $displayName = null,
@@ -142,14 +142,14 @@ final class Record implements BaseModel
         ?string $failureReasons = null,
         BrandIdentityStatus|string|null $identityStatus = null,
         Status|string|null $status = null,
-        ?string $tcrBrandId = null,
+        ?string $tcrBrandID = null,
         ?string $updatedAt = null,
         ?string $website = null,
     ): self {
         $obj = new self;
 
         null !== $assignedCampaingsCount && $obj['assignedCampaingsCount'] = $assignedCampaingsCount;
-        null !== $brandId && $obj['brandId'] = $brandId;
+        null !== $brandID && $obj['brandID'] = $brandID;
         null !== $companyName && $obj['companyName'] = $companyName;
         null !== $createdAt && $obj['createdAt'] = $createdAt;
         null !== $displayName && $obj['displayName'] = $displayName;
@@ -158,7 +158,7 @@ final class Record implements BaseModel
         null !== $failureReasons && $obj['failureReasons'] = $failureReasons;
         null !== $identityStatus && $obj['identityStatus'] = $identityStatus;
         null !== $status && $obj['status'] = $status;
-        null !== $tcrBrandId && $obj['tcrBrandId'] = $tcrBrandId;
+        null !== $tcrBrandID && $obj['tcrBrandID'] = $tcrBrandID;
         null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
         null !== $website && $obj['website'] = $website;
 
@@ -183,7 +183,7 @@ final class Record implements BaseModel
     public function withBrandID(string $brandID): self
     {
         $obj = clone $this;
-        $obj['brandId'] = $brandID;
+        $obj['brandID'] = $brandID;
 
         return $obj;
     }
@@ -289,7 +289,7 @@ final class Record implements BaseModel
     public function withTcrBrandID(string $tcrBrandID): self
     {
         $obj = clone $this;
-        $obj['tcrBrandId'] = $tcrBrandID;
+        $obj['tcrBrandID'] = $tcrBrandID;
 
         return $obj;
     }

@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\OAuth\OAuthGetJwksResponse;
 use Telnyx\OAuth\OAuthGetResponse;
 use Telnyx\OAuth\OAuthGrantsParams;
@@ -59,7 +60,7 @@ final class OAuthService implements OAuthContract
      *
      * Create an OAuth authorization grant
      *
-     * @param array{allowed: bool, consent_token: string}|OAuthGrantsParams $params
+     * @param array{allowed: bool, consentToken: string}|OAuthGrantsParams $params
      *
      * @throws APIException
      */
@@ -121,15 +122,15 @@ final class OAuthService implements OAuthContract
      * Register a new OAuth client dynamically (RFC 7591)
      *
      * @param array{
-     *   client_name?: string,
-     *   grant_types?: list<'authorization_code'|'client_credentials'|'refresh_token'|OAuthRegisterParams\GrantType>,
-     *   logo_uri?: string,
-     *   policy_uri?: string,
-     *   redirect_uris?: list<string>,
-     *   response_types?: list<string>,
+     *   clientName?: string,
+     *   grantTypes?: list<'authorization_code'|'client_credentials'|'refresh_token'|OAuthRegisterParams\GrantType>,
+     *   logoUri?: string,
+     *   policyUri?: string,
+     *   redirectUris?: list<string>,
+     *   responseTypes?: list<string>,
      *   scope?: string,
-     *   token_endpoint_auth_method?: 'none'|'client_secret_basic'|'client_secret_post'|TokenEndpointAuthMethod,
-     *   tos_uri?: string,
+     *   tokenEndpointAuthMethod?: 'none'|'client_secret_basic'|'client_secret_post'|TokenEndpointAuthMethod,
+     *   tosUri?: string,
      * }|OAuthRegisterParams $params
      *
      * @throws APIException
@@ -161,11 +162,11 @@ final class OAuthService implements OAuthContract
      * OAuth 2.0 authorization endpoint for the authorization code flow
      *
      * @param array{
-     *   client_id: string,
-     *   redirect_uri: string,
-     *   response_type: 'code'|ResponseType,
-     *   code_challenge?: string,
-     *   code_challenge_method?: 'plain'|'S256'|CodeChallengeMethod,
+     *   clientID: string,
+     *   redirectUri: string,
+     *   responseType: 'code'|ResponseType,
+     *   codeChallenge?: string,
+     *   codeChallengeMethod?: 'plain'|'S256'|CodeChallengeMethod,
      *   scope?: string,
      *   state?: string,
      * }|OAuthRetrieveAuthorizeParams $params
@@ -185,7 +186,16 @@ final class OAuthService implements OAuthContract
         $response = $this->client->request(
             method: 'get',
             path: 'oauth/authorize',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'clientID' => 'client_id',
+                    'redirectUri' => 'redirect_uri',
+                    'responseType' => 'response_type',
+                    'codeChallenge' => 'code_challenge',
+                    'codeChallengeMethod' => 'code_challenge_method',
+                ],
+            ),
             options: $options,
             convert: null,
         );
@@ -220,13 +230,13 @@ final class OAuthService implements OAuthContract
      * Exchange authorization code, client credentials, or refresh token for access token
      *
      * @param array{
-     *   grant_type: 'client_credentials'|'authorization_code'|'refresh_token'|GrantType,
-     *   client_id?: string,
-     *   client_secret?: string,
+     *   grantType: 'client_credentials'|'authorization_code'|'refresh_token'|GrantType,
+     *   clientID?: string,
+     *   clientSecret?: string,
      *   code?: string,
-     *   code_verifier?: string,
-     *   redirect_uri?: string,
-     *   refresh_token?: string,
+     *   codeVerifier?: string,
+     *   redirectUri?: string,
+     *   refreshToken?: string,
      *   scope?: string,
      * }|OAuthTokenParams $params
      *

@@ -52,7 +52,7 @@ final class AIGetModelsResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   id: string, created: int, owned_by: string, object?: string|null
+     *   id: string, created: int, ownedBy: string, object?: string|null
      * }> $data
      */
     public static function with(array $data, ?string $object = null): self
@@ -68,7 +68,7 @@ final class AIGetModelsResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   id: string, created: int, owned_by: string, object?: string|null
+     *   id: string, created: int, ownedBy: string, object?: string|null
      * }> $data
      */
     public function withData(array $data): self

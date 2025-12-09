@@ -40,7 +40,7 @@ final class ManagedAccountsTest extends TestCase
         }
 
         $result = $this->client->managedAccounts->create([
-            'business_name' => 'Larry\'s Cat Food Inc',
+            'businessName' => 'Larry\'s Cat Food Inc',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -55,11 +55,11 @@ final class ManagedAccountsTest extends TestCase
         }
 
         $result = $this->client->managedAccounts->create([
-            'business_name' => 'Larry\'s Cat Food Inc',
+            'businessName' => 'Larry\'s Cat Food Inc',
             'email' => 'larry_cat_food@customer.org',
-            'managed_account_allow_custom_pricing' => false,
+            'managedAccountAllowCustomPricing' => false,
             'password' => '3jVjLq!tMuWKyWx4NN*CvhnB',
-            'rollup_billing' => false,
+            'rollupBilling' => false,
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

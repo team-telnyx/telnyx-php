@@ -17,8 +17,8 @@ use Telnyx\Messsages\RcsSuggestion\Reply;
 
 /**
  * @phpstan-type ContentMessageShape = array{
- *   content_info?: RcsContentInfo|null,
- *   rich_card?: RichCard|null,
+ *   contentInfo?: RcsContentInfo|null,
+ *   richCard?: RichCard|null,
  *   suggestions?: list<RcsSuggestion>|null,
  *   text?: string|null,
  * }
@@ -28,11 +28,11 @@ final class ContentMessage implements BaseModel
     /** @use SdkModel<ContentMessageShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?RcsContentInfo $content_info;
+    #[Optional('content_info')]
+    public ?RcsContentInfo $contentInfo;
 
-    #[Optional]
-    public ?RichCard $rich_card;
+    #[Optional('rich_card')]
+    public ?RichCard $richCard;
 
     /**
      * List of suggested actions and replies.
@@ -59,25 +59,25 @@ final class ContentMessage implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param RcsContentInfo|array{
-     *   file_url: string, force_refresh?: bool|null, thumbnail_url?: string|null
-     * } $content_info
+     *   fileURL: string, forceRefresh?: bool|null, thumbnailURL?: string|null
+     * } $contentInfo
      * @param RichCard|array{
-     *   carousel_card?: CarouselCard|null, standalone_card?: StandaloneCard|null
-     * } $rich_card
+     *   carouselCard?: CarouselCard|null, standaloneCard?: StandaloneCard|null
+     * } $richCard
      * @param list<RcsSuggestion|array{
      *   action?: Action|null, reply?: Reply|null
      * }> $suggestions
      */
     public static function with(
-        RcsContentInfo|array|null $content_info = null,
-        RichCard|array|null $rich_card = null,
+        RcsContentInfo|array|null $contentInfo = null,
+        RichCard|array|null $richCard = null,
         ?array $suggestions = null,
         ?string $text = null,
     ): self {
         $obj = new self;
 
-        null !== $content_info && $obj['content_info'] = $content_info;
-        null !== $rich_card && $obj['rich_card'] = $rich_card;
+        null !== $contentInfo && $obj['contentInfo'] = $contentInfo;
+        null !== $richCard && $obj['richCard'] = $richCard;
         null !== $suggestions && $obj['suggestions'] = $suggestions;
         null !== $text && $obj['text'] = $text;
 
@@ -86,26 +86,26 @@ final class ContentMessage implements BaseModel
 
     /**
      * @param RcsContentInfo|array{
-     *   file_url: string, force_refresh?: bool|null, thumbnail_url?: string|null
+     *   fileURL: string, forceRefresh?: bool|null, thumbnailURL?: string|null
      * } $contentInfo
      */
     public function withContentInfo(RcsContentInfo|array $contentInfo): self
     {
         $obj = clone $this;
-        $obj['content_info'] = $contentInfo;
+        $obj['contentInfo'] = $contentInfo;
 
         return $obj;
     }
 
     /**
      * @param RichCard|array{
-     *   carousel_card?: CarouselCard|null, standalone_card?: StandaloneCard|null
+     *   carouselCard?: CarouselCard|null, standaloneCard?: StandaloneCard|null
      * } $richCard
      */
     public function withRichCard(RichCard|array $richCard): self
     {
         $obj = clone $this;
-        $obj['rich_card'] = $richCard;
+        $obj['richCard'] = $richCard;
 
         return $obj;
     }

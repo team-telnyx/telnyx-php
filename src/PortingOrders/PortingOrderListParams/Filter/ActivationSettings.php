@@ -11,8 +11,7 @@ use Telnyx\PortingOrders\PortingOrderListParams\Filter\ActivationSettings\FocDat
 
 /**
  * @phpstan-type ActivationSettingsShape = array{
- *   fast_port_eligible?: bool|null,
- *   foc_datetime_requested?: FocDatetimeRequested|null,
+ *   fastPortEligible?: bool|null, focDatetimeRequested?: FocDatetimeRequested|null
  * }
  */
 final class ActivationSettings implements BaseModel
@@ -23,14 +22,14 @@ final class ActivationSettings implements BaseModel
     /**
      * Filter results by fast port eligible.
      */
-    #[Optional]
-    public ?bool $fast_port_eligible;
+    #[Optional('fast_port_eligible')]
+    public ?bool $fastPortEligible;
 
     /**
      * FOC datetime range filtering operations.
      */
-    #[Optional]
-    public ?FocDatetimeRequested $foc_datetime_requested;
+    #[Optional('foc_datetime_requested')]
+    public ?FocDatetimeRequested $focDatetimeRequested;
 
     public function __construct()
     {
@@ -44,16 +43,16 @@ final class ActivationSettings implements BaseModel
      *
      * @param FocDatetimeRequested|array{
      *   gt?: string|null, lt?: string|null
-     * } $foc_datetime_requested
+     * } $focDatetimeRequested
      */
     public static function with(
-        ?bool $fast_port_eligible = null,
-        FocDatetimeRequested|array|null $foc_datetime_requested = null,
+        ?bool $fastPortEligible = null,
+        FocDatetimeRequested|array|null $focDatetimeRequested = null,
     ): self {
         $obj = new self;
 
-        null !== $fast_port_eligible && $obj['fast_port_eligible'] = $fast_port_eligible;
-        null !== $foc_datetime_requested && $obj['foc_datetime_requested'] = $foc_datetime_requested;
+        null !== $fastPortEligible && $obj['fastPortEligible'] = $fastPortEligible;
+        null !== $focDatetimeRequested && $obj['focDatetimeRequested'] = $focDatetimeRequested;
 
         return $obj;
     }
@@ -64,7 +63,7 @@ final class ActivationSettings implements BaseModel
     public function withFastPortEligible(bool $fastPortEligible): self
     {
         $obj = clone $this;
-        $obj['fast_port_eligible'] = $fastPortEligible;
+        $obj['fastPortEligible'] = $fastPortEligible;
 
         return $obj;
     }
@@ -80,7 +79,7 @@ final class ActivationSettings implements BaseModel
         FocDatetimeRequested|array $focDatetimeRequested
     ): self {
         $obj = clone $this;
-        $obj['foc_datetime_requested'] = $focDatetimeRequested;
+        $obj['focDatetimeRequested'] = $focDatetimeRequested;
 
         return $obj;
     }

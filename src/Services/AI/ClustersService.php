@@ -14,6 +14,7 @@ use Telnyx\AI\Clusters\ClusterRetrieveParams;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\ClustersContract;
 
@@ -30,7 +31,7 @@ final class ClustersService implements ClustersContract
      * Fetch a cluster
      *
      * @param array{
-     *   show_subclusters?: bool, top_n_nodes?: int
+     *   showSubclusters?: bool, topNNodes?: int
      * }|ClusterRetrieveParams $params
      *
      * @throws APIException
@@ -49,7 +50,10 @@ final class ClustersService implements ClustersContract
         $response = $this->client->request(
             method: 'get',
             path: ['ai/clusters/%1$s', $taskID],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['showSubclusters' => 'show_subclusters', 'topNNodes' => 'top_n_nodes'],
+            ),
             options: $options,
             convert: ClusterGetResponse::class,
         );
@@ -117,8 +121,8 @@ final class ClustersService implements ClustersContract
      * @param array{
      *   bucket: string,
      *   files?: list<string>,
-     *   min_cluster_size?: int,
-     *   min_subcluster_size?: int,
+     *   minClusterSize?: int,
+     *   minSubclusterSize?: int,
      *   prefix?: string,
      * }|ClusterComputeParams $params
      *
@@ -150,7 +154,7 @@ final class ClustersService implements ClustersContract
      *
      * Fetch a cluster visualization
      *
-     * @param array{cluster_id?: int}|ClusterFetchGraphParams $params
+     * @param array{clusterID?: int}|ClusterFetchGraphParams $params
      *
      * @throws APIException
      */
@@ -168,7 +172,7 @@ final class ClustersService implements ClustersContract
         $response = $this->client->request(
             method: 'get',
             path: ['ai/clusters/%1$s/graph', $taskID],
-            query: $parsed,
+            query: Util::array_transform_keys($parsed, ['clusterID' => 'cluster_id']),
             headers: ['Accept' => 'image/png'],
             options: $options,
             convert: 'string',

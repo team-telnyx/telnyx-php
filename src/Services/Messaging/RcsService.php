@@ -70,7 +70,7 @@ final class RcsService implements RcsContract
      * List RCS capabilities of a given batch of phone numbers
      *
      * @param array{
-     *   agent_id: string, phone_numbers: list<string>
+     *   agentID: string, phoneNumbers: list<string>
      * }|RcListBulkCapabilitiesParams $params
      *
      * @throws APIException
@@ -101,7 +101,7 @@ final class RcsService implements RcsContract
      *
      * List RCS capabilities of a phone number
      *
-     * @param array{agent_id: string}|RcRetrieveCapabilitiesParams $params
+     * @param array{agentID: string}|RcRetrieveCapabilitiesParams $params
      *
      * @throws APIException
      */
@@ -114,8 +114,8 @@ final class RcsService implements RcsContract
             $params,
             $requestOptions,
         );
-        $agentID = $parsed['agent_id'];
-        unset($parsed['agent_id']);
+        $agentID = $parsed['agentID'];
+        unset($parsed['agentID']);
 
         /** @var BaseResponse<RcGetCapabilitiesResponse> */
         $response = $this->client->request(

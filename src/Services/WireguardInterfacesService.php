@@ -29,10 +29,7 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
      * Create a new WireGuard Interface. Current limitation of 10 interfaces per user can be created.
      *
      * @param array{
-     *   network_id: string,
-     *   region_code: string,
-     *   enable_sip_trunking?: bool,
-     *   name?: string,
+     *   networkID: string, regionCode: string, enableSipTrunking?: bool, name?: string
      * }|WireguardInterfaceCreateParams $params
      *
      * @throws APIException
@@ -86,7 +83,7 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
      * List all WireGuard Interfaces.
      *
      * @param array{
-     *   filter?: array{network_id?: string}, page?: array{number?: int, size?: int}
+     *   filter?: array{networkID?: string}, page?: array{number?: int, size?: int}
      * }|WireguardInterfaceListParams $params
      *
      * @throws APIException

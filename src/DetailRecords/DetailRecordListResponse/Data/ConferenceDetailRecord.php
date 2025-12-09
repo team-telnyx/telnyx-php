@@ -11,21 +11,21 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ConferenceDetailRecordShape = array{
- *   record_type: string,
+ *   recordType: string,
  *   id?: string|null,
- *   call_leg_id?: string|null,
- *   call_sec?: int|null,
- *   call_session_id?: string|null,
- *   connection_id?: string|null,
- *   ended_at?: \DateTimeInterface|null,
- *   expires_at?: \DateTimeInterface|null,
- *   is_telnyx_billable?: bool|null,
+ *   callLegID?: string|null,
+ *   callSec?: int|null,
+ *   callSessionID?: string|null,
+ *   connectionID?: string|null,
+ *   endedAt?: \DateTimeInterface|null,
+ *   expiresAt?: \DateTimeInterface|null,
+ *   isTelnyxBillable?: bool|null,
  *   name?: string|null,
- *   participant_call_sec?: int|null,
- *   participant_count?: int|null,
+ *   participantCallSec?: int|null,
+ *   participantCount?: int|null,
  *   region?: string|null,
- *   started_at?: \DateTimeInterface|null,
- *   user_id?: string|null,
+ *   startedAt?: \DateTimeInterface|null,
+ *   userID?: string|null,
  * }
  */
 final class ConferenceDetailRecord implements BaseModel
@@ -33,8 +33,8 @@ final class ConferenceDetailRecord implements BaseModel
     /** @use SdkModel<ConferenceDetailRecordShape> */
     use SdkModel;
 
-    #[Required]
-    public string $record_type;
+    #[Required('record_type')]
+    public string $recordType;
 
     /**
      * Conference id.
@@ -45,44 +45,44 @@ final class ConferenceDetailRecord implements BaseModel
     /**
      * Telnyx UUID that identifies the conference call leg.
      */
-    #[Optional]
-    public ?string $call_leg_id;
+    #[Optional('call_leg_id')]
+    public ?string $callLegID;
 
     /**
      * Duration of the conference call in seconds.
      */
-    #[Optional]
-    public ?int $call_sec;
+    #[Optional('call_sec')]
+    public ?int $callSec;
 
     /**
      * Telnyx UUID that identifies with conference call session.
      */
-    #[Optional]
-    public ?string $call_session_id;
+    #[Optional('call_session_id')]
+    public ?string $callSessionID;
 
     /**
      * Connection id.
      */
-    #[Optional]
-    public ?string $connection_id;
+    #[Optional('connection_id')]
+    public ?string $connectionID;
 
     /**
      * Conference end time.
      */
-    #[Optional]
-    public ?\DateTimeInterface $ended_at;
+    #[Optional('ended_at')]
+    public ?\DateTimeInterface $endedAt;
 
     /**
      * Conference expiry time.
      */
-    #[Optional]
-    public ?\DateTimeInterface $expires_at;
+    #[Optional('expires_at')]
+    public ?\DateTimeInterface $expiresAt;
 
     /**
      * Indicates whether Telnyx billing charges might be applicable.
      */
-    #[Optional]
-    public ?bool $is_telnyx_billable;
+    #[Optional('is_telnyx_billable')]
+    public ?bool $isTelnyxBillable;
 
     /**
      * Conference name.
@@ -93,14 +93,14 @@ final class ConferenceDetailRecord implements BaseModel
     /**
      * Sum of the conference call duration for all participants in seconds.
      */
-    #[Optional]
-    public ?int $participant_call_sec;
+    #[Optional('participant_call_sec')]
+    public ?int $participantCallSec;
 
     /**
      * Number of participants that joined the conference call.
      */
-    #[Optional]
-    public ?int $participant_count;
+    #[Optional('participant_count')]
+    public ?int $participantCount;
 
     /**
      * Region where the conference is hosted.
@@ -111,21 +111,21 @@ final class ConferenceDetailRecord implements BaseModel
     /**
      * Conference start time.
      */
-    #[Optional]
-    public ?\DateTimeInterface $started_at;
+    #[Optional('started_at')]
+    public ?\DateTimeInterface $startedAt;
 
     /**
      * User id.
      */
-    #[Optional]
-    public ?string $user_id;
+    #[Optional('user_id')]
+    public ?string $userID;
 
     /**
      * `new ConferenceDetailRecord()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ConferenceDetailRecord::with(record_type: ...)
+     * ConferenceDetailRecord::with(recordType: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -145,40 +145,40 @@ final class ConferenceDetailRecord implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $record_type = 'conference_detail_record',
+        string $recordType = 'conference_detail_record',
         ?string $id = null,
-        ?string $call_leg_id = null,
-        ?int $call_sec = null,
-        ?string $call_session_id = null,
-        ?string $connection_id = null,
-        ?\DateTimeInterface $ended_at = null,
-        ?\DateTimeInterface $expires_at = null,
-        ?bool $is_telnyx_billable = null,
+        ?string $callLegID = null,
+        ?int $callSec = null,
+        ?string $callSessionID = null,
+        ?string $connectionID = null,
+        ?\DateTimeInterface $endedAt = null,
+        ?\DateTimeInterface $expiresAt = null,
+        ?bool $isTelnyxBillable = null,
         ?string $name = null,
-        ?int $participant_call_sec = null,
-        ?int $participant_count = null,
+        ?int $participantCallSec = null,
+        ?int $participantCount = null,
         ?string $region = null,
-        ?\DateTimeInterface $started_at = null,
-        ?string $user_id = null,
+        ?\DateTimeInterface $startedAt = null,
+        ?string $userID = null,
     ): self {
         $obj = new self;
 
-        $obj['record_type'] = $record_type;
+        $obj['recordType'] = $recordType;
 
         null !== $id && $obj['id'] = $id;
-        null !== $call_leg_id && $obj['call_leg_id'] = $call_leg_id;
-        null !== $call_sec && $obj['call_sec'] = $call_sec;
-        null !== $call_session_id && $obj['call_session_id'] = $call_session_id;
-        null !== $connection_id && $obj['connection_id'] = $connection_id;
-        null !== $ended_at && $obj['ended_at'] = $ended_at;
-        null !== $expires_at && $obj['expires_at'] = $expires_at;
-        null !== $is_telnyx_billable && $obj['is_telnyx_billable'] = $is_telnyx_billable;
+        null !== $callLegID && $obj['callLegID'] = $callLegID;
+        null !== $callSec && $obj['callSec'] = $callSec;
+        null !== $callSessionID && $obj['callSessionID'] = $callSessionID;
+        null !== $connectionID && $obj['connectionID'] = $connectionID;
+        null !== $endedAt && $obj['endedAt'] = $endedAt;
+        null !== $expiresAt && $obj['expiresAt'] = $expiresAt;
+        null !== $isTelnyxBillable && $obj['isTelnyxBillable'] = $isTelnyxBillable;
         null !== $name && $obj['name'] = $name;
-        null !== $participant_call_sec && $obj['participant_call_sec'] = $participant_call_sec;
-        null !== $participant_count && $obj['participant_count'] = $participant_count;
+        null !== $participantCallSec && $obj['participantCallSec'] = $participantCallSec;
+        null !== $participantCount && $obj['participantCount'] = $participantCount;
         null !== $region && $obj['region'] = $region;
-        null !== $started_at && $obj['started_at'] = $started_at;
-        null !== $user_id && $obj['user_id'] = $user_id;
+        null !== $startedAt && $obj['startedAt'] = $startedAt;
+        null !== $userID && $obj['userID'] = $userID;
 
         return $obj;
     }
@@ -186,7 +186,7 @@ final class ConferenceDetailRecord implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -208,7 +208,7 @@ final class ConferenceDetailRecord implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj['call_leg_id'] = $callLegID;
+        $obj['callLegID'] = $callLegID;
 
         return $obj;
     }
@@ -219,7 +219,7 @@ final class ConferenceDetailRecord implements BaseModel
     public function withCallSec(int $callSec): self
     {
         $obj = clone $this;
-        $obj['call_sec'] = $callSec;
+        $obj['callSec'] = $callSec;
 
         return $obj;
     }
@@ -230,7 +230,7 @@ final class ConferenceDetailRecord implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj['call_session_id'] = $callSessionID;
+        $obj['callSessionID'] = $callSessionID;
 
         return $obj;
     }
@@ -241,7 +241,7 @@ final class ConferenceDetailRecord implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj['connection_id'] = $connectionID;
+        $obj['connectionID'] = $connectionID;
 
         return $obj;
     }
@@ -252,7 +252,7 @@ final class ConferenceDetailRecord implements BaseModel
     public function withEndedAt(\DateTimeInterface $endedAt): self
     {
         $obj = clone $this;
-        $obj['ended_at'] = $endedAt;
+        $obj['endedAt'] = $endedAt;
 
         return $obj;
     }
@@ -263,7 +263,7 @@ final class ConferenceDetailRecord implements BaseModel
     public function withExpiresAt(\DateTimeInterface $expiresAt): self
     {
         $obj = clone $this;
-        $obj['expires_at'] = $expiresAt;
+        $obj['expiresAt'] = $expiresAt;
 
         return $obj;
     }
@@ -274,7 +274,7 @@ final class ConferenceDetailRecord implements BaseModel
     public function withIsTelnyxBillable(bool $isTelnyxBillable): self
     {
         $obj = clone $this;
-        $obj['is_telnyx_billable'] = $isTelnyxBillable;
+        $obj['isTelnyxBillable'] = $isTelnyxBillable;
 
         return $obj;
     }
@@ -296,7 +296,7 @@ final class ConferenceDetailRecord implements BaseModel
     public function withParticipantCallSec(int $participantCallSec): self
     {
         $obj = clone $this;
-        $obj['participant_call_sec'] = $participantCallSec;
+        $obj['participantCallSec'] = $participantCallSec;
 
         return $obj;
     }
@@ -307,7 +307,7 @@ final class ConferenceDetailRecord implements BaseModel
     public function withParticipantCount(int $participantCount): self
     {
         $obj = clone $this;
-        $obj['participant_count'] = $participantCount;
+        $obj['participantCount'] = $participantCount;
 
         return $obj;
     }
@@ -329,7 +329,7 @@ final class ConferenceDetailRecord implements BaseModel
     public function withStartedAt(\DateTimeInterface $startedAt): self
     {
         $obj = clone $this;
-        $obj['started_at'] = $startedAt;
+        $obj['startedAt'] = $startedAt;
 
         return $obj;
     }
@@ -340,7 +340,7 @@ final class ConferenceDetailRecord implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj['user_id'] = $userID;
+        $obj['userID'] = $userID;
 
         return $obj;
     }

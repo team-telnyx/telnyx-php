@@ -38,18 +38,18 @@ final class AgentListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<RcsAgent|array{
-     *   agent_id?: string|null,
-     *   agent_name?: string|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   agentID?: string|null,
+     *   agentName?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   enabled?: bool|null,
-     *   profile_id?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
-     *   user_id?: string|null,
-     *   webhook_failover_url?: string|null,
-     *   webhook_url?: string|null,
+     *   profileID?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     *   userID?: string|null,
+     *   webhookFailoverURL?: string|null,
+     *   webhookURL?: string|null,
      * }> $data
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public static function with(
@@ -66,15 +66,15 @@ final class AgentListResponse implements BaseModel
 
     /**
      * @param list<RcsAgent|array{
-     *   agent_id?: string|null,
-     *   agent_name?: string|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   agentID?: string|null,
+     *   agentName?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   enabled?: bool|null,
-     *   profile_id?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
-     *   user_id?: string|null,
-     *   webhook_failover_url?: string|null,
-     *   webhook_url?: string|null,
+     *   profileID?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     *   userID?: string|null,
+     *   webhookFailoverURL?: string|null,
+     *   webhookURL?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -87,7 +87,7 @@ final class AgentListResponse implements BaseModel
 
     /**
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public function withMeta(Meta|array $meta): self

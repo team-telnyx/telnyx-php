@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ElevenLabsVoiceSettingsShape = array{
- *   type: value-of<Type>, api_key_ref?: string|null
+ *   type: value-of<Type>, apiKeyRef?: string|null
  * }
  */
 final class ElevenLabsVoiceSettings implements BaseModel
@@ -31,8 +31,8 @@ final class ElevenLabsVoiceSettings implements BaseModel
     /**
      * The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) that refers to your ElevenLabs API key. Warning: Free plans are unlikely to work with this integration.
      */
-    #[Optional]
-    public ?string $api_key_ref;
+    #[Optional('api_key_ref')]
+    public ?string $apiKeyRef;
 
     /**
      * `new ElevenLabsVoiceSettings()` is missing required properties by the API.
@@ -62,13 +62,13 @@ final class ElevenLabsVoiceSettings implements BaseModel
      */
     public static function with(
         Type|string $type,
-        ?string $api_key_ref = null
+        ?string $apiKeyRef = null
     ): self {
         $obj = new self;
 
         $obj['type'] = $type;
 
-        null !== $api_key_ref && $obj['api_key_ref'] = $api_key_ref;
+        null !== $apiKeyRef && $obj['apiKeyRef'] = $apiKeyRef;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class ElevenLabsVoiceSettings implements BaseModel
     public function withAPIKeyRef(string $apiKeyRef): self
     {
         $obj = clone $this;
-        $obj['api_key_ref'] = $apiKeyRef;
+        $obj['apiKeyRef'] = $apiKeyRef;
 
         return $obj;
     }

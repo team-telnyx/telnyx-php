@@ -12,9 +12,9 @@ use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateNewResponse\Dat
 /**
  * @phpstan-type DataShape = array{
  *   failed?: list<string>|null,
- *   order_id?: string|null,
+ *   orderID?: string|null,
  *   pending?: list<string>|null,
- *   record_type?: value-of<RecordType>|null,
+ *   recordType?: value-of<RecordType>|null,
  *   success?: list<string>|null,
  * }
  */
@@ -34,8 +34,8 @@ final class Data implements BaseModel
     /**
      * Order ID to verify bulk update status.
      */
-    #[Optional]
-    public ?string $order_id;
+    #[Optional('order_id')]
+    public ?string $orderID;
 
     /**
      * Phone numbers pending to be updated.
@@ -48,10 +48,10 @@ final class Data implements BaseModel
     /**
      * Identifies the type of the resource.
      *
-     * @var value-of<RecordType>|null $record_type
+     * @var value-of<RecordType>|null $recordType
      */
-    #[Optional(enum: RecordType::class)]
-    public ?string $record_type;
+    #[Optional('record_type', enum: RecordType::class)]
+    public ?string $recordType;
 
     /**
      * Phoned numbers updated successfully.
@@ -73,22 +73,22 @@ final class Data implements BaseModel
      *
      * @param list<string> $failed
      * @param list<string> $pending
-     * @param RecordType|value-of<RecordType> $record_type
+     * @param RecordType|value-of<RecordType> $recordType
      * @param list<string> $success
      */
     public static function with(
         ?array $failed = null,
-        ?string $order_id = null,
+        ?string $orderID = null,
         ?array $pending = null,
-        RecordType|string|null $record_type = null,
+        RecordType|string|null $recordType = null,
         ?array $success = null,
     ): self {
         $obj = new self;
 
         null !== $failed && $obj['failed'] = $failed;
-        null !== $order_id && $obj['order_id'] = $order_id;
+        null !== $orderID && $obj['orderID'] = $orderID;
         null !== $pending && $obj['pending'] = $pending;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $recordType && $obj['recordType'] = $recordType;
         null !== $success && $obj['success'] = $success;
 
         return $obj;
@@ -113,7 +113,7 @@ final class Data implements BaseModel
     public function withOrderID(string $orderID): self
     {
         $obj = clone $this;
-        $obj['order_id'] = $orderID;
+        $obj['orderID'] = $orderID;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

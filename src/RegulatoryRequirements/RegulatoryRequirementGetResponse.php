@@ -36,9 +36,9 @@ final class RegulatoryRequirementGetResponse implements BaseModel
      *
      * @param list<Data|array{
      *   action?: string|null,
-     *   country_code?: string|null,
-     *   phone_number_type?: string|null,
-     *   regulatory_requirements?: list<RegulatoryRequirement>|null,
+     *   countryCode?: string|null,
+     *   phoneNumberType?: string|null,
+     *   regulatoryRequirements?: list<RegulatoryRequirement>|null,
      * }> $data
      */
     public static function with(?array $data = null): self
@@ -53,9 +53,9 @@ final class RegulatoryRequirementGetResponse implements BaseModel
     /**
      * @param list<Data|array{
      *   action?: string|null,
-     *   country_code?: string|null,
-     *   phone_number_type?: string|null,
-     *   regulatory_requirements?: list<RegulatoryRequirement>|null,
+     *   countryCode?: string|null,
+     *   phoneNumberType?: string|null,
+     *   regulatoryRequirements?: list<RegulatoryRequirement>|null,
      * }> $data
      */
     public function withData(array $data): self

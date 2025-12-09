@@ -13,17 +13,17 @@ use Telnyx\WireguardInterfaces\WireguardInterfaceNewResponse\Data\Region;
 /**
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   created_at?: string|null,
- *   record_type?: string|null,
- *   updated_at?: string|null,
+ *   createdAt?: string|null,
+ *   recordType?: string|null,
+ *   updatedAt?: string|null,
  *   name?: string|null,
- *   network_id?: string|null,
+ *   networkID?: string|null,
  *   status?: value-of<InterfaceStatus>|null,
- *   enable_sip_trunking?: bool|null,
+ *   enableSipTrunking?: bool|null,
  *   endpoint?: string|null,
- *   public_key?: string|null,
+ *   publicKey?: string|null,
  *   region?: Region|null,
- *   region_code?: string|null,
+ *   regionCode?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -40,20 +40,20 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Optional]
-    public ?string $created_at;
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Optional]
-    public ?string $updated_at;
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     /**
      * A user specified name for the interface.
@@ -64,8 +64,8 @@ final class Data implements BaseModel
     /**
      * The id of the network associated with the interface.
      */
-    #[Optional]
-    public ?string $network_id;
+    #[Optional('network_id')]
+    public ?string $networkID;
 
     /**
      * The current status of the interface deployment.
@@ -78,8 +78,8 @@ final class Data implements BaseModel
     /**
      * Enable SIP traffic forwarding over VPN interface.
      */
-    #[Optional]
-    public ?bool $enable_sip_trunking;
+    #[Optional('enable_sip_trunking')]
+    public ?bool $enableSipTrunking;
 
     /**
      * The Telnyx WireGuard peers `Peer.endpoint` value.
@@ -90,8 +90,8 @@ final class Data implements BaseModel
     /**
      * The Telnyx WireGuard peers `Peer.PublicKey`.
      */
-    #[Optional]
-    public ?string $public_key;
+    #[Optional('public_key')]
+    public ?string $publicKey;
 
     #[Optional]
     public ?Region $region;
@@ -99,8 +99,8 @@ final class Data implements BaseModel
     /**
      * The region interface is deployed to.
      */
-    #[Optional]
-    public ?string $region_code;
+    #[Optional('region_code')]
+    public ?string $regionCode;
 
     public function __construct()
     {
@@ -114,37 +114,37 @@ final class Data implements BaseModel
      *
      * @param InterfaceStatus|value-of<InterfaceStatus> $status
      * @param Region|array{
-     *   code?: string|null, name?: string|null, record_type?: string|null
+     *   code?: string|null, name?: string|null, recordType?: string|null
      * } $region
      */
     public static function with(
         ?string $id = null,
-        ?string $created_at = null,
-        ?string $record_type = null,
-        ?string $updated_at = null,
+        ?string $createdAt = null,
+        ?string $recordType = null,
+        ?string $updatedAt = null,
         ?string $name = null,
-        ?string $network_id = null,
+        ?string $networkID = null,
         InterfaceStatus|string|null $status = null,
-        ?bool $enable_sip_trunking = null,
+        ?bool $enableSipTrunking = null,
         ?string $endpoint = null,
-        ?string $public_key = null,
+        ?string $publicKey = null,
         Region|array|null $region = null,
-        ?string $region_code = null,
+        ?string $regionCode = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
         null !== $name && $obj['name'] = $name;
-        null !== $network_id && $obj['network_id'] = $network_id;
+        null !== $networkID && $obj['networkID'] = $networkID;
         null !== $status && $obj['status'] = $status;
-        null !== $enable_sip_trunking && $obj['enable_sip_trunking'] = $enable_sip_trunking;
+        null !== $enableSipTrunking && $obj['enableSipTrunking'] = $enableSipTrunking;
         null !== $endpoint && $obj['endpoint'] = $endpoint;
-        null !== $public_key && $obj['public_key'] = $public_key;
+        null !== $publicKey && $obj['publicKey'] = $publicKey;
         null !== $region && $obj['region'] = $region;
-        null !== $region_code && $obj['region_code'] = $region_code;
+        null !== $regionCode && $obj['regionCode'] = $regionCode;
 
         return $obj;
     }
@@ -166,7 +166,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -177,7 +177,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -188,7 +188,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -210,7 +210,7 @@ final class Data implements BaseModel
     public function withNetworkID(string $networkID): self
     {
         $obj = clone $this;
-        $obj['network_id'] = $networkID;
+        $obj['networkID'] = $networkID;
 
         return $obj;
     }
@@ -234,7 +234,7 @@ final class Data implements BaseModel
     public function withEnableSipTrunking(bool $enableSipTrunking): self
     {
         $obj = clone $this;
-        $obj['enable_sip_trunking'] = $enableSipTrunking;
+        $obj['enableSipTrunking'] = $enableSipTrunking;
 
         return $obj;
     }
@@ -256,14 +256,14 @@ final class Data implements BaseModel
     public function withPublicKey(string $publicKey): self
     {
         $obj = clone $this;
-        $obj['public_key'] = $publicKey;
+        $obj['publicKey'] = $publicKey;
 
         return $obj;
     }
 
     /**
      * @param Region|array{
-     *   code?: string|null, name?: string|null, record_type?: string|null
+     *   code?: string|null, name?: string|null, recordType?: string|null
      * } $region
      */
     public function withRegion(Region|array $region): self
@@ -280,7 +280,7 @@ final class Data implements BaseModel
     public function withRegionCode(string $regionCode): self
     {
         $obj = clone $this;
-        $obj['region_code'] = $regionCode;
+        $obj['regionCode'] = $regionCode;
 
         return $obj;
     }

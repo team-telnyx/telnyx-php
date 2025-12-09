@@ -34,7 +34,7 @@ final class PortoutListRejectionCodesResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   code?: int|null, description?: string|null, reason_required?: bool|null
+     *   code?: int|null, description?: string|null, reasonRequired?: bool|null
      * }> $data
      */
     public static function with(?array $data = null): self
@@ -48,7 +48,7 @@ final class PortoutListRejectionCodesResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   code?: int|null, description?: string|null, reason_required?: bool|null
+     *   code?: int|null, description?: string|null, reasonRequired?: bool|null
      * }> $data
      */
     public function withData(array $data): self

@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type OutboundShape = array{
- *   channel_limit?: int|null, outbound_voice_profile_id?: string|null
+ *   channelLimit?: int|null, outboundVoiceProfileID?: string|null
  * }
  */
 final class Outbound implements BaseModel
@@ -18,11 +18,11 @@ final class Outbound implements BaseModel
     /** @use SdkModel<OutboundShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?int $channel_limit;
+    #[Optional('channel_limit')]
+    public ?int $channelLimit;
 
-    #[Optional]
-    public ?string $outbound_voice_profile_id;
+    #[Optional('outbound_voice_profile_id')]
+    public ?string $outboundVoiceProfileID;
 
     public function __construct()
     {
@@ -35,13 +35,13 @@ final class Outbound implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?int $channel_limit = null,
-        ?string $outbound_voice_profile_id = null
+        ?int $channelLimit = null,
+        ?string $outboundVoiceProfileID = null
     ): self {
         $obj = new self;
 
-        null !== $channel_limit && $obj['channel_limit'] = $channel_limit;
-        null !== $outbound_voice_profile_id && $obj['outbound_voice_profile_id'] = $outbound_voice_profile_id;
+        null !== $channelLimit && $obj['channelLimit'] = $channelLimit;
+        null !== $outboundVoiceProfileID && $obj['outboundVoiceProfileID'] = $outboundVoiceProfileID;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class Outbound implements BaseModel
     public function withChannelLimit(int $channelLimit): self
     {
         $obj = clone $this;
-        $obj['channel_limit'] = $channelLimit;
+        $obj['channelLimit'] = $channelLimit;
 
         return $obj;
     }
@@ -58,7 +58,7 @@ final class Outbound implements BaseModel
         string $outboundVoiceProfileID
     ): self {
         $obj = clone $this;
-        $obj['outbound_voice_profile_id'] = $outboundVoiceProfileID;
+        $obj['outboundVoiceProfileID'] = $outboundVoiceProfileID;
 
         return $obj;
     }

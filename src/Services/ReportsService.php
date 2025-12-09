@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Reports\ReportListMdrsParams;
 use Telnyx\Reports\ReportListMdrsParams\Direction;
 use Telnyx\Reports\ReportListMdrsParams\MessageType;
@@ -50,10 +51,10 @@ final class ReportsService implements ReportsContract
      *   cld?: string,
      *   cli?: string,
      *   direction?: 'INBOUND'|'OUTBOUND'|Direction,
-     *   end_date?: string,
-     *   message_type?: 'SMS'|'MMS'|MessageType,
+     *   endDate?: string,
+     *   messageType?: 'SMS'|'MMS'|MessageType,
      *   profile?: string,
-     *   start_date?: string,
+     *   startDate?: string,
      *   status?: value-of<Status>,
      * }|ReportListMdrsParams $params
      *
@@ -72,7 +73,14 @@ final class ReportsService implements ReportsContract
         $response = $this->client->request(
             method: 'get',
             path: 'reports/mdrs',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'endDate' => 'end_date',
+                    'messageType' => 'message_type',
+                    'startDate' => 'start_date',
+                ],
+            ),
             options: $options,
             convert: ReportListMdrsResponse::class,
         );
@@ -87,17 +95,17 @@ final class ReportsService implements ReportsContract
      *
      * @param array{
      *   id?: string,
-     *   end_date?: string,
+     *   endDate?: string,
      *   imsi?: string,
      *   mcc?: string,
      *   mnc?: string,
      *   page?: array{number?: int, size?: int},
-     *   phone_number?: string,
-     *   sim_card_id?: string,
-     *   sim_group_id?: string,
-     *   sim_group_name?: string,
+     *   phoneNumber?: string,
+     *   simCardID?: string,
+     *   simGroupID?: string,
+     *   simGroupName?: string,
      *   sort?: list<string>,
-     *   start_date?: string,
+     *   startDate?: string,
      * }|ReportListWdrsParams $params
      *
      * @throws APIException
@@ -115,7 +123,17 @@ final class ReportsService implements ReportsContract
         $response = $this->client->request(
             method: 'get',
             path: 'reports/wdrs',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'endDate' => 'end_date',
+                    'phoneNumber' => 'phone_number',
+                    'simCardID' => 'sim_card_id',
+                    'simGroupID' => 'sim_group_id',
+                    'simGroupName' => 'sim_group_name',
+                    'startDate' => 'start_date',
+                ],
+            ),
             options: $options,
             convert: ReportListWdrsResponse::class,
         );

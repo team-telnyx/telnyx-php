@@ -42,19 +42,19 @@ final class ActivationJobListResponse implements BaseModel
      *
      * @param list<PortingOrdersActivationJob|array{
      *   id?: string|null,
-     *   activate_at?: \DateTimeInterface|null,
-     *   activation_type?: value-of<ActivationType>|null,
-     *   activation_windows?: list<ActivationWindow>|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   record_type?: string|null,
+     *   activateAt?: \DateTimeInterface|null,
+     *   activationType?: value-of<ActivationType>|null,
+     *   activationWindows?: list<ActivationWindow>|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   recordType?: string|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -72,13 +72,13 @@ final class ActivationJobListResponse implements BaseModel
     /**
      * @param list<PortingOrdersActivationJob|array{
      *   id?: string|null,
-     *   activate_at?: \DateTimeInterface|null,
-     *   activation_type?: value-of<ActivationType>|null,
-     *   activation_windows?: list<ActivationWindow>|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   record_type?: string|null,
+     *   activateAt?: \DateTimeInterface|null,
+     *   activationType?: value-of<ActivationType>|null,
+     *   activationWindows?: list<ActivationWindow>|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   recordType?: string|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -91,10 +91,10 @@ final class ActivationJobListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

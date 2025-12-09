@@ -16,7 +16,7 @@ use Telnyx\TextToSpeech\TextToSpeechListVoicesParams\Provider;
  * @see Telnyx\Services\TextToSpeechService::listVoices()
  *
  * @phpstan-type TextToSpeechListVoicesParamsShape = array{
- *   elevenlabs_api_key_ref?: string, provider?: Provider|value-of<Provider>
+ *   elevenlabsAPIKeyRef?: string, provider?: Provider|value-of<Provider>
  * }
  */
 final class TextToSpeechListVoicesParams implements BaseModel
@@ -29,7 +29,7 @@ final class TextToSpeechListVoicesParams implements BaseModel
      * Reference to your ElevenLabs API key stored in the Telnyx Portal.
      */
     #[Optional]
-    public ?string $elevenlabs_api_key_ref;
+    public ?string $elevenlabsAPIKeyRef;
 
     /**
      * Filter voices by provider.
@@ -52,12 +52,12 @@ final class TextToSpeechListVoicesParams implements BaseModel
      * @param Provider|value-of<Provider> $provider
      */
     public static function with(
-        ?string $elevenlabs_api_key_ref = null,
+        ?string $elevenlabsAPIKeyRef = null,
         Provider|string|null $provider = null
     ): self {
         $obj = new self;
 
-        null !== $elevenlabs_api_key_ref && $obj['elevenlabs_api_key_ref'] = $elevenlabs_api_key_ref;
+        null !== $elevenlabsAPIKeyRef && $obj['elevenlabsAPIKeyRef'] = $elevenlabsAPIKeyRef;
         null !== $provider && $obj['provider'] = $provider;
 
         return $obj;
@@ -69,7 +69,7 @@ final class TextToSpeechListVoicesParams implements BaseModel
     public function withElevenlabsAPIKeyRef(string $elevenlabsAPIKeyRef): self
     {
         $obj = clone $this;
-        $obj['elevenlabs_api_key_ref'] = $elevenlabsAPIKeyRef;
+        $obj['elevenlabsAPIKeyRef'] = $elevenlabsAPIKeyRef;
 
         return $obj;
     }

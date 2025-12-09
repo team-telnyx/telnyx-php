@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type VerificationCodeShape = array{code: string, phone_number: string}
+ * @phpstan-type VerificationCodeShape = array{code: string, phoneNumber: string}
  */
 final class VerificationCode implements BaseModel
 {
@@ -19,15 +19,15 @@ final class VerificationCode implements BaseModel
     #[Required]
     public string $code;
 
-    #[Required]
-    public string $phone_number;
+    #[Required('phone_number')]
+    public string $phoneNumber;
 
     /**
      * `new VerificationCode()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * VerificationCode::with(code: ..., phone_number: ...)
+     * VerificationCode::with(code: ..., phoneNumber: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -46,12 +46,12 @@ final class VerificationCode implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $code, string $phone_number): self
+    public static function with(string $code, string $phoneNumber): self
     {
         $obj = new self;
 
         $obj['code'] = $code;
-        $obj['phone_number'] = $phone_number;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class VerificationCode implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }

@@ -51,20 +51,20 @@ final class RoomRecordingsService implements RoomRecordingsContract
      *
      * @param array{
      *   filter?: array{
-     *     date_ended_at?: array{
+     *     dateEndedAt?: array{
      *       eq?: string|\DateTimeInterface,
      *       gte?: string|\DateTimeInterface,
      *       lte?: string|\DateTimeInterface,
      *     },
-     *     date_started_at?: array{
+     *     dateStartedAt?: array{
      *       eq?: string|\DateTimeInterface,
      *       gte?: string|\DateTimeInterface,
      *       lte?: string|\DateTimeInterface,
      *     },
-     *     duration_secs?: int,
-     *     participant_id?: string,
-     *     room_id?: string,
-     *     session_id?: string,
+     *     durationSecs?: int,
+     *     participantID?: string,
+     *     roomID?: string,
+     *     sessionID?: string,
      *     status?: string,
      *     type?: string,
      *   },
@@ -123,20 +123,20 @@ final class RoomRecordingsService implements RoomRecordingsContract
      *
      * @param array{
      *   filter?: array{
-     *     date_ended_at?: array{
+     *     dateEndedAt?: array{
      *       eq?: string|\DateTimeInterface,
      *       gte?: string|\DateTimeInterface,
      *       lte?: string|\DateTimeInterface,
      *     },
-     *     date_started_at?: array{
+     *     dateStartedAt?: array{
      *       eq?: string|\DateTimeInterface,
      *       gte?: string|\DateTimeInterface,
      *       lte?: string|\DateTimeInterface,
      *     },
-     *     duration_secs?: int,
-     *     participant_id?: string,
-     *     room_id?: string,
-     *     session_id?: string,
+     *     durationSecs?: int,
+     *     participantID?: string,
+     *     roomID?: string,
+     *     sessionID?: string,
      *     status?: string,
      *     type?: string,
      *   },

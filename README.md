@@ -48,10 +48,10 @@ use Telnyx\Client;
 $client = new Client(apiKey: getenv('TELNYX_API_KEY') ?: 'My API Key');
 
 $response = $client->calls->dial([
-  'connection_id' => 'conn12345',
+  'connectionID' => 'conn12345',
   'from' => '+15557654321',
   'to' => '+15551234567',
-  'webhook_url' => 'https://your-webhook.url/events',
+  'webhookURL' => 'https://your-webhook.url/events',
 ]);
 
 var_dump($response->data);
@@ -121,7 +121,7 @@ $client = new Client(maxRetries: 0);
 
 // Or, configure per-request:
 $result = $client->numberOrders->create(
-  ['phone_numbers' => [['phone_number' => '+15558675309']]],
+  ['phoneNumbers' => [['phoneNumber' => '+15558675309']]],
   RequestOptions::with(maxRetries: 5),
 );
 ```
@@ -142,7 +142,7 @@ Note: the `extra*` parameters of the same name overrides the documented paramete
 use Telnyx\RequestOptions;
 
 $numberOrder = $client->numberOrders->create(
-  ['phone_numbers' => [['phone_number' => '+15558675309']]],
+  ['phoneNumbers' => [['phoneNumber' => '+15558675309']]],
   RequestOptions::with(
     extraQueryParams: ['my_query_parameter' => 'value'],
     extraBodyParams: ['my_body_parameter' => 'value'],

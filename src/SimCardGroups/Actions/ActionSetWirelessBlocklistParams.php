@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\SimCardGroups\ActionsService::setWirelessBlocklist()
  *
  * @phpstan-type ActionSetWirelessBlocklistParamsShape = array{
- *   wireless_blocklist_id: string
+ *   wirelessBlocklistID: string
  * }
  */
 final class ActionSetWirelessBlocklistParams implements BaseModel
@@ -27,15 +27,15 @@ final class ActionSetWirelessBlocklistParams implements BaseModel
     /**
      * The identification of the related Wireless Blocklist resource.
      */
-    #[Required]
-    public string $wireless_blocklist_id;
+    #[Required('wireless_blocklist_id')]
+    public string $wirelessBlocklistID;
 
     /**
      * `new ActionSetWirelessBlocklistParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ActionSetWirelessBlocklistParams::with(wireless_blocklist_id: ...)
+     * ActionSetWirelessBlocklistParams::with(wirelessBlocklistID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -54,11 +54,11 @@ final class ActionSetWirelessBlocklistParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $wireless_blocklist_id): self
+    public static function with(string $wirelessBlocklistID): self
     {
         $obj = new self;
 
-        $obj['wireless_blocklist_id'] = $wireless_blocklist_id;
+        $obj['wirelessBlocklistID'] = $wirelessBlocklistID;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class ActionSetWirelessBlocklistParams implements BaseModel
     public function withWirelessBlocklistID(string $wirelessBlocklistID): self
     {
         $obj = clone $this;
-        $obj['wireless_blocklist_id'] = $wirelessBlocklistID;
+        $obj['wirelessBlocklistID'] = $wirelessBlocklistID;
 
         return $obj;
     }

@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   created_at?: \DateTimeInterface|null,
- *   porting_phone_number_id?: string|null,
- *   record_type?: string|null,
- *   updated_at?: \DateTimeInterface|null,
- *   user_bundle_id?: string|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   portingPhoneNumberID?: string|null,
+ *   recordType?: string|null,
+ *   updatedAt?: \DateTimeInterface|null,
+ *   userBundleID?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -32,32 +32,32 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
     /**
      * Identifies the associated porting phone number.
      */
-    #[Optional]
-    public ?string $porting_phone_number_id;
+    #[Optional('porting_phone_number_id')]
+    public ?string $portingPhoneNumberID;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     /**
      * Identifies the associated user bundle.
      */
-    #[Optional]
-    public ?string $user_bundle_id;
+    #[Optional('user_bundle_id')]
+    public ?string $userBundleID;
 
     public function __construct()
     {
@@ -71,20 +71,20 @@ final class Data implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?\DateTimeInterface $created_at = null,
-        ?string $porting_phone_number_id = null,
-        ?string $record_type = null,
-        ?\DateTimeInterface $updated_at = null,
-        ?string $user_bundle_id = null,
+        ?\DateTimeInterface $createdAt = null,
+        ?string $portingPhoneNumberID = null,
+        ?string $recordType = null,
+        ?\DateTimeInterface $updatedAt = null,
+        ?string $userBundleID = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $porting_phone_number_id && $obj['porting_phone_number_id'] = $porting_phone_number_id;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
-        null !== $user_bundle_id && $obj['user_bundle_id'] = $user_bundle_id;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $portingPhoneNumberID && $obj['portingPhoneNumberID'] = $portingPhoneNumberID;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $userBundleID && $obj['userBundleID'] = $userBundleID;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class Data implements BaseModel
     public function withPortingPhoneNumberID(string $portingPhoneNumberID): self
     {
         $obj = clone $this;
-        $obj['porting_phone_number_id'] = $portingPhoneNumberID;
+        $obj['portingPhoneNumberID'] = $portingPhoneNumberID;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -150,7 +150,7 @@ final class Data implements BaseModel
     public function withUserBundleID(string $userBundleID): self
     {
         $obj = clone $this;
-        $obj['user_bundle_id'] = $userBundleID;
+        $obj['userBundleID'] = $userBundleID;
 
         return $obj;
     }

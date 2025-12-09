@@ -20,13 +20,13 @@ use Telnyx\NetworkCoverage\NetworkCoverageListParams\Page;
  *
  * @phpstan-type NetworkCoverageListParamsShape = array{
  *   filter?: Filter|array{
- *     location_code?: string|null,
- *     location_pop?: string|null,
- *     location_region?: string|null,
- *     location_site?: string|null,
+ *     locationCode?: string|null,
+ *     locationPop?: string|null,
+ *     locationRegion?: string|null,
+ *     locationSite?: string|null,
  *   },
  *   filters?: Filters|array{
- *     available_services?: null|Contains|value-of<AvailableService>
+ *     availableServices?: null|Contains|value-of<AvailableService>
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
  * }
@@ -66,13 +66,13 @@ final class NetworkCoverageListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   location_code?: string|null,
-     *   location_pop?: string|null,
-     *   location_region?: string|null,
-     *   location_site?: string|null,
+     *   locationCode?: string|null,
+     *   locationPop?: string|null,
+     *   locationRegion?: string|null,
+     *   locationSite?: string|null,
      * } $filter
      * @param Filters|array{
-     *   available_services?: Contains|value-of<AvailableService>|null
+     *   availableServices?: Contains|value-of<AvailableService>|null
      * } $filters
      * @param Page|array{number?: int|null, size?: int|null} $page
      */
@@ -94,10 +94,10 @@ final class NetworkCoverageListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[location.region], filter[location.site], filter[location.pop], filter[location.code].
      *
      * @param Filter|array{
-     *   location_code?: string|null,
-     *   location_pop?: string|null,
-     *   location_region?: string|null,
-     *   location_site?: string|null,
+     *   locationCode?: string|null,
+     *   locationPop?: string|null,
+     *   locationRegion?: string|null,
+     *   locationSite?: string|null,
      * } $filter
      */
     public function withFilter(Filter|array $filter): self
@@ -112,7 +112,7 @@ final class NetworkCoverageListParams implements BaseModel
      * Consolidated filters parameter (deepObject style). Originally: filters[available_services][contains].
      *
      * @param Filters|array{
-     *   available_services?: Contains|value-of<AvailableService>|null
+     *   availableServices?: Contains|value-of<AvailableService>|null
      * } $filters
      */
     public function withFilters(Filters|array $filters): self

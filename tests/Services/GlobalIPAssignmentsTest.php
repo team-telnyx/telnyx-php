@@ -68,7 +68,7 @@ final class GlobalIPAssignmentsTest extends TestCase
 
         $result = $this->client->globalIPAssignments->update(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            []
+            ['body' => []]
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -85,8 +85,10 @@ final class GlobalIPAssignmentsTest extends TestCase
         $result = $this->client->globalIPAssignments->update(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
             [
-                'global_ip_id' => 'a836125b-20b6-452e-9c03-2653f09c7ed7',
-                'wireguard_peer_id' => 'e66c496d-4a85-423b-8b2a-8e63fac20320',
+                'body' => [
+                    'globalIPID' => 'a836125b-20b6-452e-9c03-2653f09c7ed7',
+                    'wireguardPeerID' => 'e66c496d-4a85-423b-8b2a-8e63fac20320',
+                ],
             ],
         );
 

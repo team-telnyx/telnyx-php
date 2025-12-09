@@ -21,10 +21,10 @@ use Telnyx\PhoneNumbers\Voice\VoiceListParams\Sort;
  *
  * @phpstan-type VoiceListParamsShape = array{
  *   filter?: Filter|array{
- *     connection_name?: ConnectionName|null,
- *     customer_reference?: string|null,
- *     phone_number?: string|null,
- *     voice_usage_payment_method?: value-of<VoiceUsagePaymentMethod>|null,
+ *     connectionName?: ConnectionName|null,
+ *     customerReference?: string|null,
+ *     phoneNumber?: string|null,
+ *     voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
  *   sort?: Sort|value-of<Sort>,
@@ -67,10 +67,10 @@ final class VoiceListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   connection_name?: ConnectionName|null,
-     *   customer_reference?: string|null,
-     *   phone_number?: string|null,
-     *   voice_usage_payment_method?: value-of<VoiceUsagePaymentMethod>|null,
+     *   connectionName?: ConnectionName|null,
+     *   customerReference?: string|null,
+     *   phoneNumber?: string|null,
+     *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      * @param Sort|value-of<Sort> $sort
@@ -93,10 +93,10 @@ final class VoiceListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[connection_name], filter[customer_reference], filter[voice.usage_payment_method].
      *
      * @param Filter|array{
-     *   connection_name?: ConnectionName|null,
-     *   customer_reference?: string|null,
-     *   phone_number?: string|null,
-     *   voice_usage_payment_method?: value-of<VoiceUsagePaymentMethod>|null,
+     *   connectionName?: ConnectionName|null,
+     *   customerReference?: string|null,
+     *   phoneNumber?: string|null,
+     *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

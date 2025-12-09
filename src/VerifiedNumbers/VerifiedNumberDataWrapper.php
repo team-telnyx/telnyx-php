@@ -31,9 +31,9 @@ final class VerifiedNumberDataWrapper implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param VerifiedNumber|array{
-     *   phone_number?: string|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   verified_at?: string|null,
+     *   phoneNumber?: string|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   verifiedAt?: string|null,
      * } $data
      */
     public static function with(VerifiedNumber|array|null $data = null): self
@@ -47,9 +47,9 @@ final class VerifiedNumberDataWrapper implements BaseModel
 
     /**
      * @param VerifiedNumber|array{
-     *   phone_number?: string|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   verified_at?: string|null,
+     *   phoneNumber?: string|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   verifiedAt?: string|null,
      * } $data
      */
     public function withData(VerifiedNumber|array $data): self

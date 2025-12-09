@@ -13,12 +13,12 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type AccessIPRangeShape = array{
  *   id: string,
- *   cidr_block: string,
+ *   cidrBlock: string,
  *   status: value-of<CloudflareSyncStatus>,
- *   user_id: string,
- *   created_at?: \DateTimeInterface|null,
+ *   userID: string,
+ *   createdAt?: \DateTimeInterface|null,
  *   description?: string|null,
- *   updated_at?: \DateTimeInterface|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class AccessIPRange implements BaseModel
@@ -29,8 +29,8 @@ final class AccessIPRange implements BaseModel
     #[Required]
     public string $id;
 
-    #[Required]
-    public string $cidr_block;
+    #[Required('cidr_block')]
+    public string $cidrBlock;
 
     /**
      * An enumeration.
@@ -40,24 +40,24 @@ final class AccessIPRange implements BaseModel
     #[Required(enum: CloudflareSyncStatus::class)]
     public string $status;
 
-    #[Required]
-    public string $user_id;
+    #[Required('user_id')]
+    public string $userID;
 
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
     #[Optional]
     public ?string $description;
 
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     /**
      * `new AccessIPRange()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * AccessIPRange::with(id: ..., cidr_block: ..., status: ..., user_id: ...)
+     * AccessIPRange::with(id: ..., cidrBlock: ..., status: ..., userID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -84,23 +84,23 @@ final class AccessIPRange implements BaseModel
      */
     public static function with(
         string $id,
-        string $cidr_block,
+        string $cidrBlock,
         CloudflareSyncStatus|string $status,
-        string $user_id,
-        ?\DateTimeInterface $created_at = null,
+        string $userID,
+        ?\DateTimeInterface $createdAt = null,
         ?string $description = null,
-        ?\DateTimeInterface $updated_at = null,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
         $obj = new self;
 
         $obj['id'] = $id;
-        $obj['cidr_block'] = $cidr_block;
+        $obj['cidrBlock'] = $cidrBlock;
         $obj['status'] = $status;
-        $obj['user_id'] = $user_id;
+        $obj['userID'] = $userID;
 
-        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
         null !== $description && $obj['description'] = $description;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class AccessIPRange implements BaseModel
     public function withCidrBlock(string $cidrBlock): self
     {
         $obj = clone $this;
-        $obj['cidr_block'] = $cidrBlock;
+        $obj['cidrBlock'] = $cidrBlock;
 
         return $obj;
     }
@@ -137,7 +137,7 @@ final class AccessIPRange implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj['user_id'] = $userID;
+        $obj['userID'] = $userID;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class AccessIPRange implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -161,7 +161,7 @@ final class AccessIPRange implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

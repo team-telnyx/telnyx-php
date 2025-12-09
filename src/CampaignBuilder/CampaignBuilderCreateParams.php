@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\CampaignBuilderService::create()
  *
  * @phpstan-type CampaignBuilderCreateParamsShape = array{
- *   brandId: string,
+ *   brandID: string,
  *   description: string,
  *   usecase: string,
  *   ageGated?: bool,
@@ -28,15 +28,15 @@ use Telnyx\Core\Contracts\BaseModel;
  *   helpKeywords?: string,
  *   helpMessage?: string,
  *   messageFlow?: string,
- *   mnoIds?: list<int>,
+ *   mnoIDs?: list<int>,
  *   numberPool?: bool,
  *   optinKeywords?: string,
  *   optinMessage?: string,
  *   optoutKeywords?: string,
  *   optoutMessage?: string,
  *   privacyPolicyLink?: string,
- *   referenceId?: string,
- *   resellerId?: string,
+ *   referenceID?: string,
+ *   resellerID?: string,
  *   sample1?: string,
  *   sample2?: string,
  *   sample3?: string,
@@ -62,8 +62,8 @@ final class CampaignBuilderCreateParams implements BaseModel
     /**
      * Alphanumeric identifier of the brand associated with this campaign.
      */
-    #[Required]
-    public string $brandId;
+    #[Required('brandId')]
+    public string $brandID;
 
     /**
      * Summary description of this campaign.
@@ -134,10 +134,10 @@ final class CampaignBuilderCreateParams implements BaseModel
     /**
      * Submit campaign to given list of MNOs by MNO's network ID. Default is all MNOs if no value provided.
      *
-     * @var list<int>|null $mnoIds
+     * @var list<int>|null $mnoIDs
      */
-    #[Optional(list: 'int')]
-    public ?array $mnoIds;
+    #[Optional('mnoIds', list: 'int')]
+    public ?array $mnoIDs;
 
     /**
      * Does campaign utilize pool of phone numbers?
@@ -178,14 +178,14 @@ final class CampaignBuilderCreateParams implements BaseModel
     /**
      * Caller supplied campaign reference ID. If supplied, the value must be unique across all submitted campaigns. Can be used to prevent duplicate campaign registrations.
      */
-    #[Optional]
-    public ?string $referenceId;
+    #[Optional('referenceId')]
+    public ?string $referenceID;
 
     /**
      * Alphanumeric identifier of the reseller that you want to associate with this campaign.
      */
-    #[Optional]
-    public ?string $resellerId;
+    #[Optional('resellerId')]
+    public ?string $resellerID;
 
     /**
      * Message sample. Some campaign tiers require 1 or more message samples.
@@ -280,7 +280,7 @@ final class CampaignBuilderCreateParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * CampaignBuilderCreateParams::with(brandId: ..., description: ..., usecase: ...)
+     * CampaignBuilderCreateParams::with(brandID: ..., description: ..., usecase: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -302,12 +302,12 @@ final class CampaignBuilderCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<int> $mnoIds
+     * @param list<int> $mnoIDs
      * @param list<string> $subUsecases
      * @param list<string> $tag
      */
     public static function with(
-        string $brandId,
+        string $brandID,
         string $description,
         string $usecase,
         ?bool $ageGated = null,
@@ -319,15 +319,15 @@ final class CampaignBuilderCreateParams implements BaseModel
         ?string $helpKeywords = null,
         ?string $helpMessage = null,
         ?string $messageFlow = null,
-        ?array $mnoIds = null,
+        ?array $mnoIDs = null,
         ?bool $numberPool = null,
         ?string $optinKeywords = null,
         ?string $optinMessage = null,
         ?string $optoutKeywords = null,
         ?string $optoutMessage = null,
         ?string $privacyPolicyLink = null,
-        ?string $referenceId = null,
-        ?string $resellerId = null,
+        ?string $referenceID = null,
+        ?string $resellerID = null,
         ?string $sample1 = null,
         ?string $sample2 = null,
         ?string $sample3 = null,
@@ -345,7 +345,7 @@ final class CampaignBuilderCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj['brandId'] = $brandId;
+        $obj['brandID'] = $brandID;
         $obj['description'] = $description;
         $obj['usecase'] = $usecase;
 
@@ -358,15 +358,15 @@ final class CampaignBuilderCreateParams implements BaseModel
         null !== $helpKeywords && $obj['helpKeywords'] = $helpKeywords;
         null !== $helpMessage && $obj['helpMessage'] = $helpMessage;
         null !== $messageFlow && $obj['messageFlow'] = $messageFlow;
-        null !== $mnoIds && $obj['mnoIds'] = $mnoIds;
+        null !== $mnoIDs && $obj['mnoIDs'] = $mnoIDs;
         null !== $numberPool && $obj['numberPool'] = $numberPool;
         null !== $optinKeywords && $obj['optinKeywords'] = $optinKeywords;
         null !== $optinMessage && $obj['optinMessage'] = $optinMessage;
         null !== $optoutKeywords && $obj['optoutKeywords'] = $optoutKeywords;
         null !== $optoutMessage && $obj['optoutMessage'] = $optoutMessage;
         null !== $privacyPolicyLink && $obj['privacyPolicyLink'] = $privacyPolicyLink;
-        null !== $referenceId && $obj['referenceId'] = $referenceId;
-        null !== $resellerId && $obj['resellerId'] = $resellerId;
+        null !== $referenceID && $obj['referenceID'] = $referenceID;
+        null !== $resellerID && $obj['resellerID'] = $resellerID;
         null !== $sample1 && $obj['sample1'] = $sample1;
         null !== $sample2 && $obj['sample2'] = $sample2;
         null !== $sample3 && $obj['sample3'] = $sample3;
@@ -391,7 +391,7 @@ final class CampaignBuilderCreateParams implements BaseModel
     public function withBrandID(string $brandID): self
     {
         $obj = clone $this;
-        $obj['brandId'] = $brandID;
+        $obj['brandID'] = $brandID;
 
         return $obj;
     }
@@ -525,7 +525,7 @@ final class CampaignBuilderCreateParams implements BaseModel
     public function withMnoIDs(array $mnoIDs): self
     {
         $obj = clone $this;
-        $obj['mnoIds'] = $mnoIDs;
+        $obj['mnoIDs'] = $mnoIDs;
 
         return $obj;
     }
@@ -602,7 +602,7 @@ final class CampaignBuilderCreateParams implements BaseModel
     public function withReferenceID(string $referenceID): self
     {
         $obj = clone $this;
-        $obj['referenceId'] = $referenceID;
+        $obj['referenceID'] = $referenceID;
 
         return $obj;
     }
@@ -613,7 +613,7 @@ final class CampaignBuilderCreateParams implements BaseModel
     public function withResellerID(string $resellerID): self
     {
         $obj = clone $this;
-        $obj['resellerId'] = $resellerID;
+        $obj['resellerID'] = $resellerID;
 
         return $obj;
     }

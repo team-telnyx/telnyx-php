@@ -11,21 +11,21 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type MediaStorageDetailRecordShape = array{
- *   record_type: string,
+ *   recordType: string,
  *   id?: string|null,
- *   action_type?: string|null,
- *   asset_id?: string|null,
+ *   actionType?: string|null,
+ *   assetID?: string|null,
  *   cost?: string|null,
- *   created_at?: \DateTimeInterface|null,
+ *   createdAt?: \DateTimeInterface|null,
  *   currency?: string|null,
- *   link_channel_id?: string|null,
- *   link_channel_type?: string|null,
- *   org_id?: string|null,
+ *   linkChannelID?: string|null,
+ *   linkChannelType?: string|null,
+ *   orgID?: string|null,
  *   rate?: string|null,
- *   rate_measured_in?: string|null,
+ *   rateMeasuredIn?: string|null,
  *   status?: string|null,
- *   user_id?: string|null,
- *   webhook_id?: string|null,
+ *   userID?: string|null,
+ *   webhookID?: string|null,
  * }
  */
 final class MediaStorageDetailRecord implements BaseModel
@@ -33,8 +33,8 @@ final class MediaStorageDetailRecord implements BaseModel
     /** @use SdkModel<MediaStorageDetailRecordShape> */
     use SdkModel;
 
-    #[Required]
-    public string $record_type;
+    #[Required('record_type')]
+    public string $recordType;
 
     /**
      * Unique identifier for the Media Storage Event.
@@ -45,14 +45,14 @@ final class MediaStorageDetailRecord implements BaseModel
     /**
      * Type of action performed against the Media Storage API.
      */
-    #[Optional]
-    public ?string $action_type;
+    #[Optional('action_type')]
+    public ?string $actionType;
 
     /**
      * Asset id.
      */
-    #[Optional]
-    public ?string $asset_id;
+    #[Optional('asset_id')]
+    public ?string $assetID;
 
     /**
      * Currency amount for Telnyx billing cost.
@@ -63,8 +63,8 @@ final class MediaStorageDetailRecord implements BaseModel
     /**
      * Event creation time.
      */
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
     /**
      * Telnyx account currency used to describe monetary values, including billing cost.
@@ -75,20 +75,20 @@ final class MediaStorageDetailRecord implements BaseModel
     /**
      * Link channel id.
      */
-    #[Optional]
-    public ?string $link_channel_id;
+    #[Optional('link_channel_id')]
+    public ?string $linkChannelID;
 
     /**
      * Link channel type.
      */
-    #[Optional]
-    public ?string $link_channel_type;
+    #[Optional('link_channel_type')]
+    public ?string $linkChannelType;
 
     /**
      * Organization owner id.
      */
-    #[Optional]
-    public ?string $org_id;
+    #[Optional('org_id')]
+    public ?string $orgID;
 
     /**
      * Currency amount per billing unit used to calculate the Telnyx billing cost.
@@ -99,8 +99,8 @@ final class MediaStorageDetailRecord implements BaseModel
     /**
      * Billing unit used to calculate the Telnyx billing cost.
      */
-    #[Optional]
-    public ?string $rate_measured_in;
+    #[Optional('rate_measured_in')]
+    public ?string $rateMeasuredIn;
 
     /**
      * Request status.
@@ -111,21 +111,21 @@ final class MediaStorageDetailRecord implements BaseModel
     /**
      * User id.
      */
-    #[Optional]
-    public ?string $user_id;
+    #[Optional('user_id')]
+    public ?string $userID;
 
     /**
      * Webhook id.
      */
-    #[Optional]
-    public ?string $webhook_id;
+    #[Optional('webhook_id')]
+    public ?string $webhookID;
 
     /**
      * `new MediaStorageDetailRecord()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * MediaStorageDetailRecord::with(record_type: ...)
+     * MediaStorageDetailRecord::with(recordType: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -145,40 +145,40 @@ final class MediaStorageDetailRecord implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $record_type = 'media_storage',
+        string $recordType = 'media_storage',
         ?string $id = null,
-        ?string $action_type = null,
-        ?string $asset_id = null,
+        ?string $actionType = null,
+        ?string $assetID = null,
         ?string $cost = null,
-        ?\DateTimeInterface $created_at = null,
+        ?\DateTimeInterface $createdAt = null,
         ?string $currency = null,
-        ?string $link_channel_id = null,
-        ?string $link_channel_type = null,
-        ?string $org_id = null,
+        ?string $linkChannelID = null,
+        ?string $linkChannelType = null,
+        ?string $orgID = null,
         ?string $rate = null,
-        ?string $rate_measured_in = null,
+        ?string $rateMeasuredIn = null,
         ?string $status = null,
-        ?string $user_id = null,
-        ?string $webhook_id = null,
+        ?string $userID = null,
+        ?string $webhookID = null,
     ): self {
         $obj = new self;
 
-        $obj['record_type'] = $record_type;
+        $obj['recordType'] = $recordType;
 
         null !== $id && $obj['id'] = $id;
-        null !== $action_type && $obj['action_type'] = $action_type;
-        null !== $asset_id && $obj['asset_id'] = $asset_id;
+        null !== $actionType && $obj['actionType'] = $actionType;
+        null !== $assetID && $obj['assetID'] = $assetID;
         null !== $cost && $obj['cost'] = $cost;
-        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
         null !== $currency && $obj['currency'] = $currency;
-        null !== $link_channel_id && $obj['link_channel_id'] = $link_channel_id;
-        null !== $link_channel_type && $obj['link_channel_type'] = $link_channel_type;
-        null !== $org_id && $obj['org_id'] = $org_id;
+        null !== $linkChannelID && $obj['linkChannelID'] = $linkChannelID;
+        null !== $linkChannelType && $obj['linkChannelType'] = $linkChannelType;
+        null !== $orgID && $obj['orgID'] = $orgID;
         null !== $rate && $obj['rate'] = $rate;
-        null !== $rate_measured_in && $obj['rate_measured_in'] = $rate_measured_in;
+        null !== $rateMeasuredIn && $obj['rateMeasuredIn'] = $rateMeasuredIn;
         null !== $status && $obj['status'] = $status;
-        null !== $user_id && $obj['user_id'] = $user_id;
-        null !== $webhook_id && $obj['webhook_id'] = $webhook_id;
+        null !== $userID && $obj['userID'] = $userID;
+        null !== $webhookID && $obj['webhookID'] = $webhookID;
 
         return $obj;
     }
@@ -186,7 +186,7 @@ final class MediaStorageDetailRecord implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -208,7 +208,7 @@ final class MediaStorageDetailRecord implements BaseModel
     public function withActionType(string $actionType): self
     {
         $obj = clone $this;
-        $obj['action_type'] = $actionType;
+        $obj['actionType'] = $actionType;
 
         return $obj;
     }
@@ -219,7 +219,7 @@ final class MediaStorageDetailRecord implements BaseModel
     public function withAssetID(string $assetID): self
     {
         $obj = clone $this;
-        $obj['asset_id'] = $assetID;
+        $obj['assetID'] = $assetID;
 
         return $obj;
     }
@@ -241,7 +241,7 @@ final class MediaStorageDetailRecord implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -263,7 +263,7 @@ final class MediaStorageDetailRecord implements BaseModel
     public function withLinkChannelID(string $linkChannelID): self
     {
         $obj = clone $this;
-        $obj['link_channel_id'] = $linkChannelID;
+        $obj['linkChannelID'] = $linkChannelID;
 
         return $obj;
     }
@@ -274,7 +274,7 @@ final class MediaStorageDetailRecord implements BaseModel
     public function withLinkChannelType(string $linkChannelType): self
     {
         $obj = clone $this;
-        $obj['link_channel_type'] = $linkChannelType;
+        $obj['linkChannelType'] = $linkChannelType;
 
         return $obj;
     }
@@ -285,7 +285,7 @@ final class MediaStorageDetailRecord implements BaseModel
     public function withOrgID(string $orgID): self
     {
         $obj = clone $this;
-        $obj['org_id'] = $orgID;
+        $obj['orgID'] = $orgID;
 
         return $obj;
     }
@@ -307,7 +307,7 @@ final class MediaStorageDetailRecord implements BaseModel
     public function withRateMeasuredIn(string $rateMeasuredIn): self
     {
         $obj = clone $this;
-        $obj['rate_measured_in'] = $rateMeasuredIn;
+        $obj['rateMeasuredIn'] = $rateMeasuredIn;
 
         return $obj;
     }
@@ -329,7 +329,7 @@ final class MediaStorageDetailRecord implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj['user_id'] = $userID;
+        $obj['userID'] = $userID;
 
         return $obj;
     }
@@ -340,7 +340,7 @@ final class MediaStorageDetailRecord implements BaseModel
     public function withWebhookID(string $webhookID): self
     {
         $obj = clone $this;
-        $obj['webhook_id'] = $webhookID;
+        $obj['webhookID'] = $webhookID;
 
         return $obj;
     }

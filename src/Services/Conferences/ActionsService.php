@@ -58,11 +58,11 @@ final class ActionsService implements ActionsContract
      * Update conference participant supervisor_role
      *
      * @param array{
-     *   call_control_id: string,
-     *   supervisor_role: 'barge'|'monitor'|'none'|'whisper'|SupervisorRole,
-     *   command_id?: string,
+     *   callControlID: string,
+     *   supervisorRole: 'barge'|'monitor'|'none'|'whisper'|SupervisorRole,
+     *   commandID?: string,
      *   region?: 'Australia'|'Europe'|'Middle East'|'US'|Region,
-     *   whisper_call_control_ids?: list<string>,
+     *   whisperCallControlIDs?: list<string>,
      * }|ActionUpdateParams $params
      *
      * @throws APIException
@@ -95,9 +95,9 @@ final class ActionsService implements ActionsContract
      * Hold a list of participants in a conference call
      *
      * @param array{
-     *   audio_url?: string,
-     *   call_control_ids?: list<string>,
-     *   media_name?: string,
+     *   audioURL?: string,
+     *   callControlIDs?: list<string>,
+     *   mediaName?: string,
      *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ActionHoldParams\Region,
      * }|ActionHoldParams $params
      *
@@ -136,20 +136,20 @@ final class ActionsService implements ActionsContract
      * - `conference.participant.left`
      *
      * @param array{
-     *   call_control_id: string,
-     *   beep_enabled?: 'always'|'never'|'on_enter'|'on_exit'|BeepEnabled,
-     *   client_state?: string,
-     *   command_id?: string,
-     *   end_conference_on_exit?: bool,
+     *   callControlID: string,
+     *   beepEnabled?: 'always'|'never'|'on_enter'|'on_exit'|BeepEnabled,
+     *   clientState?: string,
+     *   commandID?: string,
+     *   endConferenceOnExit?: bool,
      *   hold?: bool,
-     *   hold_audio_url?: string,
-     *   hold_media_name?: string,
+     *   holdAudioURL?: string,
+     *   holdMediaName?: string,
      *   mute?: bool,
      *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ActionJoinParams\Region,
-     *   soft_end_conference_on_exit?: bool,
-     *   start_conference_on_enter?: bool,
-     *   supervisor_role?: 'barge'|'monitor'|'none'|'whisper'|ActionJoinParams\SupervisorRole,
-     *   whisper_call_control_ids?: list<string>,
+     *   softEndConferenceOnExit?: bool,
+     *   startConferenceOnEnter?: bool,
+     *   supervisorRole?: 'barge'|'monitor'|'none'|'whisper'|ActionJoinParams\SupervisorRole,
+     *   whisperCallControlIDs?: list<string>,
      * }|ActionJoinParams $params
      *
      * @throws APIException
@@ -186,9 +186,9 @@ final class ActionsService implements ActionsContract
      * - `conference.participant.left`
      *
      * @param array{
-     *   call_control_id: string,
-     *   beep_enabled?: 'always'|'never'|'on_enter'|'on_exit'|ActionLeaveParams\BeepEnabled,
-     *   command_id?: string,
+     *   callControlID: string,
+     *   beepEnabled?: 'always'|'never'|'on_enter'|'on_exit'|ActionLeaveParams\BeepEnabled,
+     *   commandID?: string,
      *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ActionLeaveParams\Region,
      * }|ActionLeaveParams $params
      *
@@ -222,7 +222,7 @@ final class ActionsService implements ActionsContract
      * Mute a list of participants in a conference call
      *
      * @param array{
-     *   call_control_ids?: list<string>,
+     *   callControlIDs?: list<string>,
      *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ActionMuteParams\Region,
      * }|ActionMuteParams $params
      *
@@ -256,10 +256,10 @@ final class ActionsService implements ActionsContract
      * Play audio to all or some participants on a conference call.
      *
      * @param array{
-     *   audio_url?: string,
-     *   call_control_ids?: list<string>,
+     *   audioURL?: string,
+     *   callControlIDs?: list<string>,
      *   loop?: string|int,
-     *   media_name?: string,
+     *   mediaName?: string,
      *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ActionPlayParams\Region,
      * }|ActionPlayParams $params
      *
@@ -293,8 +293,8 @@ final class ActionsService implements ActionsContract
      * Pause conference recording.
      *
      * @param array{
-     *   command_id?: string,
-     *   recording_id?: string,
+     *   commandID?: string,
+     *   recordingID?: string,
      *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ActionRecordPauseParams\Region,
      * }|ActionRecordPauseParams $params
      *
@@ -328,8 +328,8 @@ final class ActionsService implements ActionsContract
      * Resume conference recording.
      *
      * @param array{
-     *   command_id?: string,
-     *   recording_id?: string,
+     *   commandID?: string,
+     *   recordingID?: string,
      *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ActionRecordResumeParams\Region,
      * }|ActionRecordResumeParams $params
      *
@@ -368,9 +368,9 @@ final class ActionsService implements ActionsContract
      *
      * @param array{
      *   format: 'wav'|'mp3'|Format,
-     *   command_id?: string,
-     *   custom_file_name?: string,
-     *   play_beep?: bool,
+     *   commandID?: string,
+     *   customFileName?: string,
+     *   playBeep?: bool,
      *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ActionRecordStartParams\Region,
      *   trim?: 'trim-silence'|Trim,
      * }|ActionRecordStartParams $params
@@ -409,9 +409,9 @@ final class ActionsService implements ActionsContract
      * - `conference.recording.saved`
      *
      * @param array{
-     *   client_state?: string,
-     *   command_id?: string,
-     *   recording_id?: string,
+     *   clientState?: string,
+     *   commandID?: string,
+     *   recordingID?: string,
      *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ActionRecordStopParams\Region,
      * }|ActionRecordStopParams $params
      *
@@ -447,12 +447,12 @@ final class ActionsService implements ActionsContract
      * @param array{
      *   payload: string,
      *   voice: string,
-     *   call_control_ids?: list<string>,
-     *   command_id?: string,
+     *   callControlIDs?: list<string>,
+     *   commandID?: string,
      *   language?: value-of<Language>,
-     *   payload_type?: 'text'|'ssml'|PayloadType,
+     *   payloadType?: 'text'|'ssml'|PayloadType,
      *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ActionSpeakParams\Region,
-     *   voice_settings?: array<string,mixed>,
+     *   voiceSettings?: array<string,mixed>,
      * }|ActionSpeakParams $params
      *
      * @throws APIException
@@ -485,7 +485,7 @@ final class ActionsService implements ActionsContract
      * Stop audio being played to all or some participants on a conference call.
      *
      * @param array{
-     *   call_control_ids?: list<string>,
+     *   callControlIDs?: list<string>,
      *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ActionStopParams\Region,
      * }|ActionStopParams $params
      *
@@ -519,7 +519,7 @@ final class ActionsService implements ActionsContract
      * Unhold a list of participants in a conference call
      *
      * @param array{
-     *   call_control_ids: list<string>,
+     *   callControlIDs: list<string>,
      *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ActionUnholdParams\Region,
      * }|ActionUnholdParams $params
      *
@@ -553,7 +553,7 @@ final class ActionsService implements ActionsContract
      * Unmute a list of participants in a conference call
      *
      * @param array{
-     *   call_control_ids?: list<string>,
+     *   callControlIDs?: list<string>,
      *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ActionUnmuteParams\Region,
      * }|ActionUnmuteParams $params
      *

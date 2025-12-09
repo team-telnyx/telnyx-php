@@ -12,21 +12,21 @@ use Telnyx\DetailRecords\DetailRecordListResponse\Data\AmdDetailRecord\Feature;
 
 /**
  * @phpstan-type AmdDetailRecordShape = array{
- *   record_type: string,
+ *   recordType: string,
  *   id?: string|null,
- *   billing_group_id?: string|null,
- *   billing_group_name?: string|null,
- *   call_leg_id?: string|null,
- *   call_session_id?: string|null,
- *   connection_id?: string|null,
- *   connection_name?: string|null,
+ *   billingGroupID?: string|null,
+ *   billingGroupName?: string|null,
+ *   callLegID?: string|null,
+ *   callSessionID?: string|null,
+ *   connectionID?: string|null,
+ *   connectionName?: string|null,
  *   cost?: string|null,
  *   currency?: string|null,
  *   feature?: value-of<Feature>|null,
- *   invoked_at?: \DateTimeInterface|null,
- *   is_telnyx_billable?: bool|null,
+ *   invokedAt?: \DateTimeInterface|null,
+ *   isTelnyxBillable?: bool|null,
  *   rate?: string|null,
- *   rate_measured_in?: string|null,
+ *   rateMeasuredIn?: string|null,
  *   tags?: string|null,
  * }
  */
@@ -35,8 +35,8 @@ final class AmdDetailRecord implements BaseModel
     /** @use SdkModel<AmdDetailRecordShape> */
     use SdkModel;
 
-    #[Required]
-    public string $record_type;
+    #[Required('record_type')]
+    public string $recordType;
 
     /**
      * Feature invocation id.
@@ -47,38 +47,38 @@ final class AmdDetailRecord implements BaseModel
     /**
      * Billing Group id.
      */
-    #[Optional]
-    public ?string $billing_group_id;
+    #[Optional('billing_group_id')]
+    public ?string $billingGroupID;
 
     /**
      * Name of the Billing Group specified in billing_group_id.
      */
-    #[Optional]
-    public ?string $billing_group_name;
+    #[Optional('billing_group_name')]
+    public ?string $billingGroupName;
 
     /**
      * Telnyx UUID that identifies the related call leg.
      */
-    #[Optional]
-    public ?string $call_leg_id;
+    #[Optional('call_leg_id')]
+    public ?string $callLegID;
 
     /**
      * Telnyx UUID that identifies the related call session.
      */
-    #[Optional]
-    public ?string $call_session_id;
+    #[Optional('call_session_id')]
+    public ?string $callSessionID;
 
     /**
      * Connection id.
      */
-    #[Optional]
-    public ?string $connection_id;
+    #[Optional('connection_id')]
+    public ?string $connectionID;
 
     /**
      * Connection name.
      */
-    #[Optional]
-    public ?string $connection_name;
+    #[Optional('connection_name')]
+    public ?string $connectionName;
 
     /**
      * Currency amount for Telnyx billing cost.
@@ -103,14 +103,14 @@ final class AmdDetailRecord implements BaseModel
     /**
      * Feature invocation time.
      */
-    #[Optional]
-    public ?\DateTimeInterface $invoked_at;
+    #[Optional('invoked_at')]
+    public ?\DateTimeInterface $invokedAt;
 
     /**
      * Indicates whether Telnyx billing charges might be applicable.
      */
-    #[Optional]
-    public ?bool $is_telnyx_billable;
+    #[Optional('is_telnyx_billable')]
+    public ?bool $isTelnyxBillable;
 
     /**
      * Currency amount per billing unit used to calculate the Telnyx billing cost.
@@ -121,8 +121,8 @@ final class AmdDetailRecord implements BaseModel
     /**
      * Billing unit used to calculate the Telnyx billing cost.
      */
-    #[Optional]
-    public ?string $rate_measured_in;
+    #[Optional('rate_measured_in')]
+    public ?string $rateMeasuredIn;
 
     /**
      * User-provided tags.
@@ -135,7 +135,7 @@ final class AmdDetailRecord implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * AmdDetailRecord::with(record_type: ...)
+     * AmdDetailRecord::with(recordType: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -157,41 +157,41 @@ final class AmdDetailRecord implements BaseModel
      * @param Feature|value-of<Feature> $feature
      */
     public static function with(
-        string $record_type = 'amd_detail_record',
+        string $recordType = 'amd_detail_record',
         ?string $id = null,
-        ?string $billing_group_id = null,
-        ?string $billing_group_name = null,
-        ?string $call_leg_id = null,
-        ?string $call_session_id = null,
-        ?string $connection_id = null,
-        ?string $connection_name = null,
+        ?string $billingGroupID = null,
+        ?string $billingGroupName = null,
+        ?string $callLegID = null,
+        ?string $callSessionID = null,
+        ?string $connectionID = null,
+        ?string $connectionName = null,
         ?string $cost = null,
         ?string $currency = null,
         Feature|string|null $feature = null,
-        ?\DateTimeInterface $invoked_at = null,
-        ?bool $is_telnyx_billable = null,
+        ?\DateTimeInterface $invokedAt = null,
+        ?bool $isTelnyxBillable = null,
         ?string $rate = null,
-        ?string $rate_measured_in = null,
+        ?string $rateMeasuredIn = null,
         ?string $tags = null,
     ): self {
         $obj = new self;
 
-        $obj['record_type'] = $record_type;
+        $obj['recordType'] = $recordType;
 
         null !== $id && $obj['id'] = $id;
-        null !== $billing_group_id && $obj['billing_group_id'] = $billing_group_id;
-        null !== $billing_group_name && $obj['billing_group_name'] = $billing_group_name;
-        null !== $call_leg_id && $obj['call_leg_id'] = $call_leg_id;
-        null !== $call_session_id && $obj['call_session_id'] = $call_session_id;
-        null !== $connection_id && $obj['connection_id'] = $connection_id;
-        null !== $connection_name && $obj['connection_name'] = $connection_name;
+        null !== $billingGroupID && $obj['billingGroupID'] = $billingGroupID;
+        null !== $billingGroupName && $obj['billingGroupName'] = $billingGroupName;
+        null !== $callLegID && $obj['callLegID'] = $callLegID;
+        null !== $callSessionID && $obj['callSessionID'] = $callSessionID;
+        null !== $connectionID && $obj['connectionID'] = $connectionID;
+        null !== $connectionName && $obj['connectionName'] = $connectionName;
         null !== $cost && $obj['cost'] = $cost;
         null !== $currency && $obj['currency'] = $currency;
         null !== $feature && $obj['feature'] = $feature;
-        null !== $invoked_at && $obj['invoked_at'] = $invoked_at;
-        null !== $is_telnyx_billable && $obj['is_telnyx_billable'] = $is_telnyx_billable;
+        null !== $invokedAt && $obj['invokedAt'] = $invokedAt;
+        null !== $isTelnyxBillable && $obj['isTelnyxBillable'] = $isTelnyxBillable;
         null !== $rate && $obj['rate'] = $rate;
-        null !== $rate_measured_in && $obj['rate_measured_in'] = $rate_measured_in;
+        null !== $rateMeasuredIn && $obj['rateMeasuredIn'] = $rateMeasuredIn;
         null !== $tags && $obj['tags'] = $tags;
 
         return $obj;
@@ -200,7 +200,7 @@ final class AmdDetailRecord implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -222,7 +222,7 @@ final class AmdDetailRecord implements BaseModel
     public function withBillingGroupID(string $billingGroupID): self
     {
         $obj = clone $this;
-        $obj['billing_group_id'] = $billingGroupID;
+        $obj['billingGroupID'] = $billingGroupID;
 
         return $obj;
     }
@@ -233,7 +233,7 @@ final class AmdDetailRecord implements BaseModel
     public function withBillingGroupName(string $billingGroupName): self
     {
         $obj = clone $this;
-        $obj['billing_group_name'] = $billingGroupName;
+        $obj['billingGroupName'] = $billingGroupName;
 
         return $obj;
     }
@@ -244,7 +244,7 @@ final class AmdDetailRecord implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj['call_leg_id'] = $callLegID;
+        $obj['callLegID'] = $callLegID;
 
         return $obj;
     }
@@ -255,7 +255,7 @@ final class AmdDetailRecord implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj['call_session_id'] = $callSessionID;
+        $obj['callSessionID'] = $callSessionID;
 
         return $obj;
     }
@@ -266,7 +266,7 @@ final class AmdDetailRecord implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj['connection_id'] = $connectionID;
+        $obj['connectionID'] = $connectionID;
 
         return $obj;
     }
@@ -277,7 +277,7 @@ final class AmdDetailRecord implements BaseModel
     public function withConnectionName(string $connectionName): self
     {
         $obj = clone $this;
-        $obj['connection_name'] = $connectionName;
+        $obj['connectionName'] = $connectionName;
 
         return $obj;
     }
@@ -323,7 +323,7 @@ final class AmdDetailRecord implements BaseModel
     public function withInvokedAt(\DateTimeInterface $invokedAt): self
     {
         $obj = clone $this;
-        $obj['invoked_at'] = $invokedAt;
+        $obj['invokedAt'] = $invokedAt;
 
         return $obj;
     }
@@ -334,7 +334,7 @@ final class AmdDetailRecord implements BaseModel
     public function withIsTelnyxBillable(bool $isTelnyxBillable): self
     {
         $obj = clone $this;
-        $obj['is_telnyx_billable'] = $isTelnyxBillable;
+        $obj['isTelnyxBillable'] = $isTelnyxBillable;
 
         return $obj;
     }
@@ -356,7 +356,7 @@ final class AmdDetailRecord implements BaseModel
     public function withRateMeasuredIn(string $rateMeasuredIn): self
     {
         $obj = clone $this;
-        $obj['rate_measured_in'] = $rateMeasuredIn;
+        $obj['rateMeasuredIn'] = $rateMeasuredIn;
 
         return $obj;
     }

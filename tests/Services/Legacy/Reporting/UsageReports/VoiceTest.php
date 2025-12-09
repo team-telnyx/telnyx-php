@@ -38,8 +38,8 @@ final class VoiceTest extends TestCase
         }
 
         $result = $this->client->legacy->reporting->usageReports->voice->create([
-            'end_time' => new \DateTimeImmutable('2024-02-01T00:00:00Z'),
-            'start_time' => new \DateTimeImmutable('2024-02-01T00:00:00Z'),
+            'endTime' => new \DateTimeImmutable('2024-02-01T00:00:00Z'),
+            'startTime' => new \DateTimeImmutable('2024-02-01T00:00:00Z'),
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -54,16 +54,16 @@ final class VoiceTest extends TestCase
         }
 
         $result = $this->client->legacy->reporting->usageReports->voice->create([
-            'end_time' => new \DateTimeImmutable('2024-02-01T00:00:00Z'),
-            'start_time' => new \DateTimeImmutable('2024-02-01T00:00:00Z'),
-            'aggregation_type' => 0,
+            'endTime' => new \DateTimeImmutable('2024-02-01T00:00:00Z'),
+            'startTime' => new \DateTimeImmutable('2024-02-01T00:00:00Z'),
+            'aggregationType' => 0,
             'connections' => [123, 456],
-            'managed_accounts' => [
+            'managedAccounts' => [
                 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 '6ba7b810-9dad-11d1-80b4-00c04fd430c8',
             ],
-            'product_breakdown' => 0,
-            'select_all_managed_accounts' => false,
+            'productBreakdown' => 0,
+            'selectAllManagedAccounts' => false,
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

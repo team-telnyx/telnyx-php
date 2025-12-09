@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Queues\CallsService::update()
  *
  * @phpstan-type CallUpdateParamsShape = array{
- *   queue_name: string, keep_after_hangup?: bool
+ *   queueName: string, keepAfterHangup?: bool
  * }
  */
 final class CallUpdateParams implements BaseModel
@@ -26,20 +26,20 @@ final class CallUpdateParams implements BaseModel
     use SdkParams;
 
     #[Required]
-    public string $queue_name;
+    public string $queueName;
 
     /**
      * Whether the call should remain in queue after hangup.
      */
-    #[Optional]
-    public ?bool $keep_after_hangup;
+    #[Optional('keep_after_hangup')]
+    public ?bool $keepAfterHangup;
 
     /**
      * `new CallUpdateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * CallUpdateParams::with(queue_name: ...)
+     * CallUpdateParams::with(queueName: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -59,14 +59,14 @@ final class CallUpdateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $queue_name,
-        ?bool $keep_after_hangup = null
+        string $queueName,
+        ?bool $keepAfterHangup = null
     ): self {
         $obj = new self;
 
-        $obj['queue_name'] = $queue_name;
+        $obj['queueName'] = $queueName;
 
-        null !== $keep_after_hangup && $obj['keep_after_hangup'] = $keep_after_hangup;
+        null !== $keepAfterHangup && $obj['keepAfterHangup'] = $keepAfterHangup;
 
         return $obj;
     }
@@ -74,7 +74,7 @@ final class CallUpdateParams implements BaseModel
     public function withQueueName(string $queueName): self
     {
         $obj = clone $this;
-        $obj['queue_name'] = $queueName;
+        $obj['queueName'] = $queueName;
 
         return $obj;
     }
@@ -85,7 +85,7 @@ final class CallUpdateParams implements BaseModel
     public function withKeepAfterHangup(bool $keepAfterHangup): self
     {
         $obj = clone $this;
-        $obj['keep_after_hangup'] = $keepAfterHangup;
+        $obj['keepAfterHangup'] = $keepAfterHangup;
 
         return $obj;
     }

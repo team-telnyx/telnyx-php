@@ -24,21 +24,21 @@ use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Sort;
  *
  * @phpstan-type PhoneNumberSlimListParamsShape = array{
  *   filter?: Filter|array{
- *     billing_group_id?: string|null,
- *     connection_id?: string|null,
- *     country_iso_alpha2?: string|null|list<string>,
- *     customer_reference?: string|null,
- *     emergency_address_id?: string|null,
- *     number_type?: NumberType|null,
- *     phone_number?: string|null,
+ *     billingGroupID?: string|null,
+ *     connectionID?: string|null,
+ *     countryISOAlpha2?: string|null|list<string>,
+ *     customerReference?: string|null,
+ *     emergencyAddressID?: string|null,
+ *     numberType?: NumberType|null,
+ *     phoneNumber?: string|null,
  *     source?: value-of<Source>|null,
  *     status?: value-of<Status>|null,
  *     tag?: string|null,
- *     voice_connection_name?: VoiceConnectionName|null,
- *     voice_usage_payment_method?: value-of<VoiceUsagePaymentMethod>|null,
+ *     voiceConnectionName?: VoiceConnectionName|null,
+ *     voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
  *   },
- *   include_connection?: bool,
- *   include_tags?: bool,
+ *   includeConnection?: bool,
+ *   includeTags?: bool,
  *   page?: Page|array{number?: int|null, size?: int|null},
  *   sort?: Sort|value-of<Sort>,
  * }
@@ -59,13 +59,13 @@ final class PhoneNumberSlimListParams implements BaseModel
      * Include the connection associated with the phone number.
      */
     #[Optional]
-    public ?bool $include_connection;
+    public ?bool $includeConnection;
 
     /**
      * Include the tags associated with the phone number.
      */
     #[Optional]
-    public ?bool $include_tags;
+    public ?bool $includeTags;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
@@ -92,34 +92,34 @@ final class PhoneNumberSlimListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   billing_group_id?: string|null,
-     *   connection_id?: string|null,
-     *   country_iso_alpha2?: string|list<string>|null,
-     *   customer_reference?: string|null,
-     *   emergency_address_id?: string|null,
-     *   number_type?: NumberType|null,
-     *   phone_number?: string|null,
+     *   billingGroupID?: string|null,
+     *   connectionID?: string|null,
+     *   countryISOAlpha2?: string|list<string>|null,
+     *   customerReference?: string|null,
+     *   emergencyAddressID?: string|null,
+     *   numberType?: NumberType|null,
+     *   phoneNumber?: string|null,
      *   source?: value-of<Source>|null,
      *   status?: value-of<Status>|null,
      *   tag?: string|null,
-     *   voice_connection_name?: VoiceConnectionName|null,
-     *   voice_usage_payment_method?: value-of<VoiceUsagePaymentMethod>|null,
+     *   voiceConnectionName?: VoiceConnectionName|null,
+     *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
         Filter|array|null $filter = null,
-        ?bool $include_connection = null,
-        ?bool $include_tags = null,
+        ?bool $includeConnection = null,
+        ?bool $includeTags = null,
         Page|array|null $page = null,
         Sort|string|null $sort = null,
     ): self {
         $obj = new self;
 
         null !== $filter && $obj['filter'] = $filter;
-        null !== $include_connection && $obj['include_connection'] = $include_connection;
-        null !== $include_tags && $obj['include_tags'] = $include_tags;
+        null !== $includeConnection && $obj['includeConnection'] = $includeConnection;
+        null !== $includeTags && $obj['includeTags'] = $includeTags;
         null !== $page && $obj['page'] = $page;
         null !== $sort && $obj['sort'] = $sort;
 
@@ -130,18 +130,18 @@ final class PhoneNumberSlimListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[phone_number], filter[status], filter[country_iso_alpha2], filter[connection_id], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference], filter[number_type], filter[source].
      *
      * @param Filter|array{
-     *   billing_group_id?: string|null,
-     *   connection_id?: string|null,
-     *   country_iso_alpha2?: string|list<string>|null,
-     *   customer_reference?: string|null,
-     *   emergency_address_id?: string|null,
-     *   number_type?: NumberType|null,
-     *   phone_number?: string|null,
+     *   billingGroupID?: string|null,
+     *   connectionID?: string|null,
+     *   countryISOAlpha2?: string|list<string>|null,
+     *   customerReference?: string|null,
+     *   emergencyAddressID?: string|null,
+     *   numberType?: NumberType|null,
+     *   phoneNumber?: string|null,
      *   source?: value-of<Source>|null,
      *   status?: value-of<Status>|null,
      *   tag?: string|null,
-     *   voice_connection_name?: VoiceConnectionName|null,
-     *   voice_usage_payment_method?: value-of<VoiceUsagePaymentMethod>|null,
+     *   voiceConnectionName?: VoiceConnectionName|null,
+     *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
      * } $filter
      */
     public function withFilter(Filter|array $filter): self
@@ -158,7 +158,7 @@ final class PhoneNumberSlimListParams implements BaseModel
     public function withIncludeConnection(bool $includeConnection): self
     {
         $obj = clone $this;
-        $obj['include_connection'] = $includeConnection;
+        $obj['includeConnection'] = $includeConnection;
 
         return $obj;
     }
@@ -169,7 +169,7 @@ final class PhoneNumberSlimListParams implements BaseModel
     public function withIncludeTags(bool $includeTags): self
     {
         $obj = clone $this;
-        $obj['include_tags'] = $includeTags;
+        $obj['includeTags'] = $includeTags;
 
         return $obj;
     }

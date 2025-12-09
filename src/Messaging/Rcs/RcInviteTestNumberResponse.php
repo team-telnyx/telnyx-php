@@ -46,9 +46,9 @@ final class RcInviteTestNumberResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Data|array{
-     *   agent_id?: string|null,
-     *   phone_number?: string|null,
-     *   record_type?: value-of<RecordType>|null,
+     *   agentID?: string|null,
+     *   phoneNumber?: string|null,
+     *   recordType?: value-of<RecordType>|null,
      *   status?: string|null,
      * } $data
      */
@@ -63,9 +63,9 @@ final class RcInviteTestNumberResponse implements BaseModel
 
     /**
      * @param Data|array{
-     *   agent_id?: string|null,
-     *   phone_number?: string|null,
-     *   record_type?: value-of<RecordType>|null,
+     *   agentID?: string|null,
+     *   phoneNumber?: string|null,
+     *   recordType?: value-of<RecordType>|null,
      *   status?: string|null,
      * } $data
      */

@@ -21,8 +21,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type URLShortenerSettingsShape = array{
  *   domain: string,
  *   prefix?: string|null,
- *   replace_blacklist_only?: bool|null,
- *   send_webhooks?: bool|null,
+ *   replaceBlacklistOnly?: bool|null,
+ *   sendWebhooks?: bool|null,
  * }
  */
 final class URLShortenerSettings implements BaseModel
@@ -45,14 +45,14 @@ final class URLShortenerSettings implements BaseModel
     /**
      * Use the link replacement tool only for links that are specifically blacklisted by Telnyx.
      */
-    #[Optional]
-    public ?bool $replace_blacklist_only;
+    #[Optional('replace_blacklist_only')]
+    public ?bool $replaceBlacklistOnly;
 
     /**
      * Receive webhooks for when your replaced links are clicked. Webhooks are sent to the webhooks on the messaging profile.
      */
-    #[Optional]
-    public ?bool $send_webhooks;
+    #[Optional('send_webhooks')]
+    public ?bool $sendWebhooks;
 
     /**
      * `new URLShortenerSettings()` is missing required properties by the API.
@@ -81,16 +81,16 @@ final class URLShortenerSettings implements BaseModel
     public static function with(
         string $domain,
         ?string $prefix = null,
-        ?bool $replace_blacklist_only = null,
-        ?bool $send_webhooks = null,
+        ?bool $replaceBlacklistOnly = null,
+        ?bool $sendWebhooks = null,
     ): self {
         $obj = new self;
 
         $obj['domain'] = $domain;
 
         null !== $prefix && $obj['prefix'] = $prefix;
-        null !== $replace_blacklist_only && $obj['replace_blacklist_only'] = $replace_blacklist_only;
-        null !== $send_webhooks && $obj['send_webhooks'] = $send_webhooks;
+        null !== $replaceBlacklistOnly && $obj['replaceBlacklistOnly'] = $replaceBlacklistOnly;
+        null !== $sendWebhooks && $obj['sendWebhooks'] = $sendWebhooks;
 
         return $obj;
     }
@@ -123,7 +123,7 @@ final class URLShortenerSettings implements BaseModel
     public function withReplaceBlacklistOnly(bool $replaceBlacklistOnly): self
     {
         $obj = clone $this;
-        $obj['replace_blacklist_only'] = $replaceBlacklistOnly;
+        $obj['replaceBlacklistOnly'] = $replaceBlacklistOnly;
 
         return $obj;
     }
@@ -134,7 +134,7 @@ final class URLShortenerSettings implements BaseModel
     public function withSendWebhooks(bool $sendWebhooks): self
     {
         $obj = clone $this;
-        $obj['send_webhooks'] = $sendWebhooks;
+        $obj['sendWebhooks'] = $sendWebhooks;
 
         return $obj;
     }

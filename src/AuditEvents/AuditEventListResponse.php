@@ -41,21 +41,21 @@ final class AuditEventListResponse implements BaseModel
      *
      * @param list<Data|array{
      *   id?: string|null,
-     *   alternate_resource_id?: string|null,
-     *   change_made_by?: value-of<ChangeMadeBy>|null,
-     *   change_type?: string|null,
+     *   alternateResourceID?: string|null,
+     *   changeMadeBy?: value-of<ChangeMadeBy>|null,
+     *   changeType?: string|null,
      *   changes?: list<Change>|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   organization_id?: string|null,
-     *   record_type?: string|null,
-     *   resource_id?: string|null,
-     *   user_id?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   organizationID?: string|null,
+     *   recordType?: string|null,
+     *   resourceID?: string|null,
+     *   userID?: string|null,
      * }> $data
      * @param Meta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -73,15 +73,15 @@ final class AuditEventListResponse implements BaseModel
     /**
      * @param list<Data|array{
      *   id?: string|null,
-     *   alternate_resource_id?: string|null,
-     *   change_made_by?: value-of<ChangeMadeBy>|null,
-     *   change_type?: string|null,
+     *   alternateResourceID?: string|null,
+     *   changeMadeBy?: value-of<ChangeMadeBy>|null,
+     *   changeType?: string|null,
      *   changes?: list<Change>|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   organization_id?: string|null,
-     *   record_type?: string|null,
-     *   resource_id?: string|null,
-     *   user_id?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   organizationID?: string|null,
+     *   recordType?: string|null,
+     *   resourceID?: string|null,
+     *   userID?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -94,10 +94,10 @@ final class AuditEventListResponse implements BaseModel
 
     /**
      * @param Meta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(Meta|array $meta): self

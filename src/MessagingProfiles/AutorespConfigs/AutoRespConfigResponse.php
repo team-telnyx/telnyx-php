@@ -46,12 +46,12 @@ final class AutoRespConfigResponse implements BaseModel
      *
      * @param AutoRespConfig|array{
      *   id: string,
-     *   country_code: string,
-     *   created_at: \DateTimeInterface,
+     *   countryCode: string,
+     *   createdAt: \DateTimeInterface,
      *   keywords: list<string>,
      *   op: value-of<Op>,
-     *   updated_at: \DateTimeInterface,
-     *   resp_text?: string|null,
+     *   updatedAt: \DateTimeInterface,
+     *   respText?: string|null,
      * } $data
      */
     public static function with(AutoRespConfig|array $data): self
@@ -66,12 +66,12 @@ final class AutoRespConfigResponse implements BaseModel
     /**
      * @param AutoRespConfig|array{
      *   id: string,
-     *   country_code: string,
-     *   created_at: \DateTimeInterface,
+     *   countryCode: string,
+     *   createdAt: \DateTimeInterface,
      *   keywords: list<string>,
      *   op: value-of<Op>,
-     *   updated_at: \DateTimeInterface,
-     *   resp_text?: string|null,
+     *   updatedAt: \DateTimeInterface,
+     *   respText?: string|null,
      * } $data
      */
     public function withData(AutoRespConfig|array $data): self

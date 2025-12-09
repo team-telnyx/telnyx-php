@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WirelessBlocklistsContract;
 use Telnyx\WirelessBlocklists\WirelessBlocklistCreateParams;
@@ -120,11 +121,11 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      * Get all Wireless Blocklists belonging to the user.
      *
      * @param array{
-     *   filter_name_?: string,
-     *   filter_type_?: string,
-     *   filter_values_?: string,
-     *   page_number_?: int,
-     *   page_size_?: int,
+     *   filterName?: string,
+     *   filterType?: string,
+     *   filterValues?: string,
+     *   pageNumber?: int,
+     *   pageSize?: int,
      * }|WirelessBlocklistListParams $params
      *
      * @throws APIException
@@ -142,7 +143,16 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
         $response = $this->client->request(
             method: 'get',
             path: 'wireless_blocklists',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'filterName' => 'filter[name]',
+                    'filterType' => 'filter[type]',
+                    'filterValues' => 'filter[values]',
+                    'pageNumber' => 'page[number]',
+                    'pageSize' => 'page[size]',
+                ],
+            ),
             options: $options,
             convert: WirelessBlocklistListResponse::class,
         );

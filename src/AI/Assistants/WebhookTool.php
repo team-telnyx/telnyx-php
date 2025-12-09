@@ -60,11 +60,11 @@ final class WebhookTool implements BaseModel
      *   description: string,
      *   name: string,
      *   url: string,
-     *   body_parameters?: BodyParameters|null,
+     *   bodyParameters?: BodyParameters|null,
      *   headers?: list<Header>|null,
      *   method?: value-of<Method>|null,
-     *   path_parameters?: PathParameters|null,
-     *   query_parameters?: QueryParameters|null,
+     *   pathParameters?: PathParameters|null,
+     *   queryParameters?: QueryParameters|null,
      * } $webhook
      */
     public static function with(
@@ -95,11 +95,11 @@ final class WebhookTool implements BaseModel
      *   description: string,
      *   name: string,
      *   url: string,
-     *   body_parameters?: BodyParameters|null,
+     *   bodyParameters?: BodyParameters|null,
      *   headers?: list<Header>|null,
      *   method?: value-of<Method>|null,
-     *   path_parameters?: PathParameters|null,
-     *   query_parameters?: QueryParameters|null,
+     *   pathParameters?: PathParameters|null,
+     *   queryParameters?: QueryParameters|null,
      * } $webhook
      */
     public function withWebhook(

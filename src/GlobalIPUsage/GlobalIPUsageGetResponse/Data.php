@@ -13,7 +13,7 @@ use Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse\Data\Transmitted;
 
 /**
  * @phpstan-type DataShape = array{
- *   global_ip?: GlobalIP|null,
+ *   globalIP?: GlobalIP|null,
  *   received?: Received|null,
  *   timestamp?: \DateTimeInterface|null,
  *   transmitted?: Transmitted|null,
@@ -24,8 +24,8 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?GlobalIP $global_ip;
+    #[Optional('global_ip')]
+    public ?GlobalIP $globalIP;
 
     #[Optional]
     public ?Received $received;
@@ -49,19 +49,19 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param GlobalIP|array{id?: string|null, ip_address?: string|null} $global_ip
+     * @param GlobalIP|array{id?: string|null, ipAddress?: string|null} $globalIP
      * @param Received|array{amount?: float|null, unit?: string|null} $received
      * @param Transmitted|array{amount?: float|null, unit?: string|null} $transmitted
      */
     public static function with(
-        GlobalIP|array|null $global_ip = null,
+        GlobalIP|array|null $globalIP = null,
         Received|array|null $received = null,
         ?\DateTimeInterface $timestamp = null,
         Transmitted|array|null $transmitted = null,
     ): self {
         $obj = new self;
 
-        null !== $global_ip && $obj['global_ip'] = $global_ip;
+        null !== $globalIP && $obj['globalIP'] = $globalIP;
         null !== $received && $obj['received'] = $received;
         null !== $timestamp && $obj['timestamp'] = $timestamp;
         null !== $transmitted && $obj['transmitted'] = $transmitted;
@@ -70,12 +70,12 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param GlobalIP|array{id?: string|null, ip_address?: string|null} $globalIP
+     * @param GlobalIP|array{id?: string|null, ipAddress?: string|null} $globalIP
      */
     public function withGlobalIP(GlobalIP|array $globalIP): self
     {
         $obj = clone $this;
-        $obj['global_ip'] = $globalIP;
+        $obj['globalIP'] = $globalIP;
 
         return $obj;
     }

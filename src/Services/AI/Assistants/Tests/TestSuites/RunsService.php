@@ -12,6 +12,7 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Conversion\ListOf;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\Tests\TestSuites\RunsContract;
 
@@ -30,7 +31,7 @@ final class RunsService implements RunsContract
      * @param array{
      *   page?: array{number?: int, size?: int},
      *   status?: string,
-     *   test_suite_run_id?: string,
+     *   testSuiteRunID?: string,
      * }|RunListParams $params
      *
      * @throws APIException
@@ -49,7 +50,10 @@ final class RunsService implements RunsContract
         $response = $this->client->request(
             method: 'get',
             path: ['ai/assistants/tests/test-suites/%1$s/runs', $suiteName],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['testSuiteRunID' => 'test_suite_run_id']
+            ),
             options: $options,
             convert: PaginatedTestRunList::class,
         );
@@ -62,7 +66,7 @@ final class RunsService implements RunsContract
      *
      * Executes all tests within a specific test suite as a batch operation
      *
-     * @param array{destination_version_id?: string}|RunTriggerParams $params
+     * @param array{destinationVersionID?: string}|RunTriggerParams $params
      *
      * @return list<TestRunResponse>
      *

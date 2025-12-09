@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\PrivateWirelessGatewaysService::create()
  *
  * @phpstan-type PrivateWirelessGatewayCreateParamsShape = array{
- *   name: string, network_id: string, region_code?: string
+ *   name: string, networkID: string, regionCode?: string
  * }
  */
 final class PrivateWirelessGatewayCreateParams implements BaseModel
@@ -34,21 +34,21 @@ final class PrivateWirelessGatewayCreateParams implements BaseModel
     /**
      * The identification of the related network resource.
      */
-    #[Required]
-    public string $network_id;
+    #[Required('network_id')]
+    public string $networkID;
 
     /**
      * The code of the region where the private wireless gateway will be assigned. A list of available regions can be found at the regions endpoint.
      */
-    #[Optional]
-    public ?string $region_code;
+    #[Optional('region_code')]
+    public ?string $regionCode;
 
     /**
      * `new PrivateWirelessGatewayCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * PrivateWirelessGatewayCreateParams::with(name: ..., network_id: ...)
+     * PrivateWirelessGatewayCreateParams::with(name: ..., networkID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -69,15 +69,15 @@ final class PrivateWirelessGatewayCreateParams implements BaseModel
      */
     public static function with(
         string $name,
-        string $network_id,
-        ?string $region_code = null
+        string $networkID,
+        ?string $regionCode = null
     ): self {
         $obj = new self;
 
         $obj['name'] = $name;
-        $obj['network_id'] = $network_id;
+        $obj['networkID'] = $networkID;
 
-        null !== $region_code && $obj['region_code'] = $region_code;
+        null !== $regionCode && $obj['regionCode'] = $regionCode;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class PrivateWirelessGatewayCreateParams implements BaseModel
     public function withNetworkID(string $networkID): self
     {
         $obj = clone $this;
-        $obj['network_id'] = $networkID;
+        $obj['networkID'] = $networkID;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class PrivateWirelessGatewayCreateParams implements BaseModel
     public function withRegionCode(string $regionCode): self
     {
         $obj = clone $this;
-        $obj['region_code'] = $regionCode;
+        $obj['regionCode'] = $regionCode;
 
         return $obj;
     }

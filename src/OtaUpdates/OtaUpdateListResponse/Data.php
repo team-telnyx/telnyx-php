@@ -15,12 +15,12 @@ use Telnyx\OtaUpdates\OtaUpdateListResponse\Data\Type;
  *
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   created_at?: string|null,
- *   record_type?: string|null,
- *   sim_card_id?: string|null,
+ *   createdAt?: string|null,
+ *   recordType?: string|null,
+ *   simCardID?: string|null,
  *   status?: value-of<Status>|null,
  *   type?: value-of<Type>|null,
- *   updated_at?: string|null,
+ *   updatedAt?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -37,17 +37,17 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Optional]
-    public ?string $created_at;
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * The identification UUID of the related SIM card resource.
      */
-    #[Optional]
-    public ?string $sim_card_id;
+    #[Optional('sim_card_id')]
+    public ?string $simCardID;
 
     /** @var value-of<Status>|null $status */
     #[Optional(enum: Status::class)]
@@ -64,8 +64,8 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Optional]
-    public ?string $updated_at;
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     public function __construct()
     {
@@ -82,22 +82,22 @@ final class Data implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $created_at = null,
-        ?string $record_type = null,
-        ?string $sim_card_id = null,
+        ?string $createdAt = null,
+        ?string $recordType = null,
+        ?string $simCardID = null,
         Status|string|null $status = null,
         Type|string|null $type = null,
-        ?string $updated_at = null,
+        ?string $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $sim_card_id && $obj['sim_card_id'] = $sim_card_id;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $simCardID && $obj['simCardID'] = $simCardID;
         null !== $status && $obj['status'] = $status;
         null !== $type && $obj['type'] = $type;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -127,7 +127,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -138,7 +138,7 @@ final class Data implements BaseModel
     public function withSimCardID(string $simCardID): self
     {
         $obj = clone $this;
-        $obj['sim_card_id'] = $simCardID;
+        $obj['simCardID'] = $simCardID;
 
         return $obj;
     }
@@ -173,7 +173,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

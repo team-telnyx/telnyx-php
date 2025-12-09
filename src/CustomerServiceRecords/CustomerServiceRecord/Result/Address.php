@@ -12,11 +12,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * The address of the customer service record.
  *
  * @phpstan-type AddressShape = array{
- *   administrative_area?: string|null,
- *   full_address?: string|null,
+ *   administrativeArea?: string|null,
+ *   fullAddress?: string|null,
  *   locality?: string|null,
- *   postal_code?: string|null,
- *   street_address?: string|null,
+ *   postalCode?: string|null,
+ *   streetAddress?: string|null,
  * }
  */
 final class Address implements BaseModel
@@ -27,14 +27,14 @@ final class Address implements BaseModel
     /**
      * The state of the address.
      */
-    #[Optional]
-    public ?string $administrative_area;
+    #[Optional('administrative_area')]
+    public ?string $administrativeArea;
 
     /**
      * The full address.
      */
-    #[Optional]
-    public ?string $full_address;
+    #[Optional('full_address')]
+    public ?string $fullAddress;
 
     /**
      * The city of the address.
@@ -45,14 +45,14 @@ final class Address implements BaseModel
     /**
      * The zip code of the address.
      */
-    #[Optional]
-    public ?string $postal_code;
+    #[Optional('postal_code')]
+    public ?string $postalCode;
 
     /**
      * The street address.
      */
-    #[Optional]
-    public ?string $street_address;
+    #[Optional('street_address')]
+    public ?string $streetAddress;
 
     public function __construct()
     {
@@ -65,19 +65,19 @@ final class Address implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $administrative_area = null,
-        ?string $full_address = null,
+        ?string $administrativeArea = null,
+        ?string $fullAddress = null,
         ?string $locality = null,
-        ?string $postal_code = null,
-        ?string $street_address = null,
+        ?string $postalCode = null,
+        ?string $streetAddress = null,
     ): self {
         $obj = new self;
 
-        null !== $administrative_area && $obj['administrative_area'] = $administrative_area;
-        null !== $full_address && $obj['full_address'] = $full_address;
+        null !== $administrativeArea && $obj['administrativeArea'] = $administrativeArea;
+        null !== $fullAddress && $obj['fullAddress'] = $fullAddress;
         null !== $locality && $obj['locality'] = $locality;
-        null !== $postal_code && $obj['postal_code'] = $postal_code;
-        null !== $street_address && $obj['street_address'] = $street_address;
+        null !== $postalCode && $obj['postalCode'] = $postalCode;
+        null !== $streetAddress && $obj['streetAddress'] = $streetAddress;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class Address implements BaseModel
     public function withAdministrativeArea(string $administrativeArea): self
     {
         $obj = clone $this;
-        $obj['administrative_area'] = $administrativeArea;
+        $obj['administrativeArea'] = $administrativeArea;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class Address implements BaseModel
     public function withFullAddress(string $fullAddress): self
     {
         $obj = clone $this;
-        $obj['full_address'] = $fullAddress;
+        $obj['fullAddress'] = $fullAddress;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class Address implements BaseModel
     public function withPostalCode(string $postalCode): self
     {
         $obj = clone $this;
-        $obj['postal_code'] = $postalCode;
+        $obj['postalCode'] = $postalCode;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class Address implements BaseModel
     public function withStreetAddress(string $streetAddress): self
     {
         $obj = clone $this;
-        $obj['street_address'] = $streetAddress;
+        $obj['streetAddress'] = $streetAddress;
 
         return $obj;
     }

@@ -71,7 +71,7 @@ final class ActionsTest extends TestCase
         }
 
         $result = $this->client->simCards->actions->bulkSetPublicIPs([
-            'sim_card_ids' => ['6b14e151-8493-4fa1-8664-1cc4e6d14158'],
+            'simCardIDs' => ['6b14e151-8493-4fa1-8664-1cc4e6d14158'],
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -86,7 +86,7 @@ final class ActionsTest extends TestCase
         }
 
         $result = $this->client->simCards->actions->bulkSetPublicIPs([
-            'sim_card_ids' => ['6b14e151-8493-4fa1-8664-1cc4e6d14158'],
+            'simCardIDs' => ['6b14e151-8493-4fa1-8664-1cc4e6d14158'],
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

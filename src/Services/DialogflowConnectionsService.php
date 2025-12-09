@@ -29,9 +29,9 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
      * Save Dialogflow Credentiails to Telnyx, so it can be used with other Telnyx services.
      *
      * @param array{
-     *   service_account: array<string,mixed>,
-     *   conversation_profile_id?: string,
-     *   dialogflow_api?: 'cx'|'es'|DialogflowAPI,
+     *   serviceAccount: array<string,mixed>,
+     *   conversationProfileID?: string,
+     *   dialogflowAPI?: 'cx'|'es'|DialogflowAPI,
      *   environment?: string,
      *   location?: string,
      * }|DialogflowConnectionCreateParams $params
@@ -88,9 +88,9 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
      * Updates a stored Dialogflow Connection.
      *
      * @param array{
-     *   service_account: array<string,mixed>,
-     *   conversation_profile_id?: string,
-     *   dialogflow_api?: 'cx'|'es'|DialogflowConnectionUpdateParams\DialogflowAPI,
+     *   serviceAccount: array<string,mixed>,
+     *   conversationProfileID?: string,
+     *   dialogflowAPI?: 'cx'|'es'|DialogflowConnectionUpdateParams\DialogflowAPI,
      *   environment?: string,
      *   location?: string,
      * }|DialogflowConnectionUpdateParams $params

@@ -39,21 +39,21 @@ final class AddressesService implements AddressesContract
      * Creates an address.
      *
      * @param array{
-     *   business_name: string,
-     *   country_code: string,
-     *   first_name: string,
-     *   last_name: string,
+     *   businessName: string,
+     *   countryCode: string,
+     *   firstName: string,
+     *   lastName: string,
      *   locality: string,
-     *   street_address: string,
-     *   address_book?: bool,
-     *   administrative_area?: string,
+     *   streetAddress: string,
+     *   addressBook?: bool,
+     *   administrativeArea?: string,
      *   borough?: string,
-     *   customer_reference?: string,
-     *   extended_address?: string,
+     *   customerReference?: string,
+     *   extendedAddress?: string,
      *   neighborhood?: string,
-     *   phone_number?: string,
-     *   postal_code?: string,
-     *   validate_address?: bool,
+     *   phoneNumber?: string,
+     *   postalCode?: string,
+     *   validateAddress?: bool,
      * }|AddressCreateParams $params
      *
      * @throws APIException
@@ -108,10 +108,10 @@ final class AddressesService implements AddressesContract
      *
      * @param array{
      *   filter?: array{
-     *     address_book?: array{eq?: string},
-     *     customer_reference?: string|array{contains?: string, eq?: string},
-     *     street_address?: array{contains?: string},
-     *     used_as_emergency?: string,
+     *     addressBook?: array{eq?: string},
+     *     customerReference?: string|array{contains?: string, eq?: string},
+     *     streetAddress?: array{contains?: string},
+     *     usedAsEmergency?: string,
      *   },
      *   page?: array{number?: int, size?: int},
      *   sort?: 'created_at'|'first_name'|'last_name'|'business_name'|'street_address'|Sort,

@@ -42,19 +42,19 @@ final class AssociatedPhoneNumberListResponse implements BaseModel
      * @param list<PortingAssociatedPhoneNumber|array{
      *   id?: string|null,
      *   action?: value-of<Action>|null,
-     *   country_code?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   phone_number_range?: PhoneNumberRange|null,
-     *   phone_number_type?: value-of<PhoneNumberType>|null,
-     *   porting_order_id?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   countryCode?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   phoneNumberRange?: PhoneNumberRange|null,
+     *   phoneNumberType?: value-of<PhoneNumberType>|null,
+     *   portingOrderID?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -73,13 +73,13 @@ final class AssociatedPhoneNumberListResponse implements BaseModel
      * @param list<PortingAssociatedPhoneNumber|array{
      *   id?: string|null,
      *   action?: value-of<Action>|null,
-     *   country_code?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   phone_number_range?: PhoneNumberRange|null,
-     *   phone_number_type?: value-of<PhoneNumberType>|null,
-     *   porting_order_id?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   countryCode?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   phoneNumberRange?: PhoneNumberRange|null,
+     *   phoneNumberType?: value-of<PhoneNumberType>|null,
+     *   portingOrderID?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -92,10 +92,10 @@ final class AssociatedPhoneNumberListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

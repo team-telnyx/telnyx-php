@@ -34,11 +34,11 @@ final class AutoRechargePrefListResponse implements BaseModel
      * @param Data|array{
      *   id?: string|null,
      *   enabled?: bool|null,
-     *   invoice_enabled?: bool|null,
+     *   invoiceEnabled?: bool|null,
      *   preference?: value-of<Preference>|null,
-     *   recharge_amount?: string|null,
-     *   record_type?: string|null,
-     *   threshold_amount?: string|null,
+     *   rechargeAmount?: string|null,
+     *   recordType?: string|null,
+     *   thresholdAmount?: string|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -54,11 +54,11 @@ final class AutoRechargePrefListResponse implements BaseModel
      * @param Data|array{
      *   id?: string|null,
      *   enabled?: bool|null,
-     *   invoice_enabled?: bool|null,
+     *   invoiceEnabled?: bool|null,
      *   preference?: value-of<Preference>|null,
-     *   recharge_amount?: string|null,
-     *   record_type?: string|null,
-     *   threshold_amount?: string|null,
+     *   rechargeAmount?: string|null,
+     *   recordType?: string|null,
+     *   thresholdAmount?: string|null,
      * } $data
      */
     public function withData(Data|array $data): self

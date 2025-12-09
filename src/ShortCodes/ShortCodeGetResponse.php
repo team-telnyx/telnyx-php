@@ -32,14 +32,14 @@ final class ShortCodeGetResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param ShortCode|array{
-     *   messaging_profile_id: string|null,
+     *   messagingProfileID: string|null,
      *   id?: string|null,
-     *   country_code?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   short_code?: string|null,
+     *   countryCode?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   shortCode?: string|null,
      *   tags?: list<string>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(ShortCode|array|null $data = null): self
@@ -53,14 +53,14 @@ final class ShortCodeGetResponse implements BaseModel
 
     /**
      * @param ShortCode|array{
-     *   messaging_profile_id: string|null,
+     *   messagingProfileID: string|null,
      *   id?: string|null,
-     *   country_code?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   short_code?: string|null,
+     *   countryCode?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   shortCode?: string|null,
      *   tags?: list<string>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(ShortCode|array $data): self

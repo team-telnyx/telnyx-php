@@ -31,7 +31,7 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
      * Create a credential.
      *
      * @param array{
-     *   connection_id: string, expires_at?: string, name?: string, tag?: string
+     *   connectionID: string, expiresAt?: string, name?: string, tag?: string
      * }|TelephonyCredentialCreateParams $params
      *
      * @throws APIException
@@ -85,7 +85,7 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
      * Update an existing credential.
      *
      * @param array{
-     *   connection_id?: string, expires_at?: string, name?: string, tag?: string
+     *   connectionID?: string, expiresAt?: string, name?: string, tag?: string
      * }|TelephonyCredentialUpdateParams $params
      *
      * @throws APIException
@@ -120,8 +120,8 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
      * @param array{
      *   filter?: array{
      *     name?: string,
-     *     resource_id?: string,
-     *     sip_username?: string,
+     *     resourceID?: string,
+     *     sipUsername?: string,
      *     status?: string,
      *     tag?: string,
      *   },

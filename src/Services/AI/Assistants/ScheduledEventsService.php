@@ -16,6 +16,7 @@ use Telnyx\AI\Assistants\ScheduledEvents\ScheduledSMSEventResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\ScheduledEventsContract;
 
@@ -32,11 +33,11 @@ final class ScheduledEventsService implements ScheduledEventsContract
      * Create a scheduled event for an assistant
      *
      * @param array{
-     *   scheduled_at_fixed_datetime: string|\DateTimeInterface,
-     *   telnyx_agent_target: string,
-     *   telnyx_conversation_channel: 'phone_call'|'sms_chat'|ConversationChannelType,
-     *   telnyx_end_user_target: string,
-     *   conversation_metadata?: array<string,string|int|bool>,
+     *   scheduledAtFixedDatetime: string|\DateTimeInterface,
+     *   telnyxAgentTarget: string,
+     *   telnyxConversationChannel: 'phone_call'|'sms_chat'|ConversationChannelType,
+     *   telnyxEndUserTarget: string,
+     *   conversationMetadata?: array<string,string|int|bool>,
      *   text?: string,
      * }|ScheduledEventCreateParams $params
      *
@@ -69,7 +70,7 @@ final class ScheduledEventsService implements ScheduledEventsContract
      *
      * Retrieve a scheduled event by event ID
      *
-     * @param array{assistant_id: string}|ScheduledEventRetrieveParams $params
+     * @param array{assistantID: string}|ScheduledEventRetrieveParams $params
      *
      * @throws APIException
      */
@@ -82,8 +83,8 @@ final class ScheduledEventsService implements ScheduledEventsContract
             $params,
             $requestOptions,
         );
-        $assistantID = $parsed['assistant_id'];
-        unset($parsed['assistant_id']);
+        $assistantID = $parsed['assistantID'];
+        unset($parsed['assistantID']);
 
         /** @var BaseResponse<ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse,> */
         $response = $this->client->request(
@@ -104,10 +105,10 @@ final class ScheduledEventsService implements ScheduledEventsContract
      * Get scheduled events for an assistant with pagination and filtering
      *
      * @param array{
-     *   conversation_channel?: 'phone_call'|'sms_chat'|ConversationChannelType,
-     *   from_date?: string|\DateTimeInterface,
+     *   conversationChannel?: 'phone_call'|'sms_chat'|ConversationChannelType,
+     *   fromDate?: string|\DateTimeInterface,
      *   page?: array{number?: int, size?: int},
-     *   to_date?: string|\DateTimeInterface,
+     *   toDate?: string|\DateTimeInterface,
      * }|ScheduledEventListParams $params
      *
      * @throws APIException
@@ -126,7 +127,14 @@ final class ScheduledEventsService implements ScheduledEventsContract
         $response = $this->client->request(
             method: 'get',
             path: ['ai/assistants/%1$s/scheduled_events', $assistantID],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'conversationChannel' => 'conversation_channel',
+                    'fromDate' => 'from_date',
+                    'toDate' => 'to_date',
+                ],
+            ),
             options: $options,
             convert: ScheduledEventListResponse::class,
         );
@@ -139,7 +147,7 @@ final class ScheduledEventsService implements ScheduledEventsContract
      *
      * If the event is pending, this will cancel the event. Otherwise, this will simply remove the record of the event.
      *
-     * @param array{assistant_id: string}|ScheduledEventDeleteParams $params
+     * @param array{assistantID: string}|ScheduledEventDeleteParams $params
      *
      * @throws APIException
      */
@@ -152,8 +160,8 @@ final class ScheduledEventsService implements ScheduledEventsContract
             $params,
             $requestOptions,
         );
-        $assistantID = $parsed['assistant_id'];
-        unset($parsed['assistant_id']);
+        $assistantID = $parsed['assistantID'];
+        unset($parsed['assistantID']);
 
         /** @var BaseResponse<mixed> */
         $response = $this->client->request(

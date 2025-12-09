@@ -35,13 +35,13 @@ final class CustomerServiceRecordGetResponse implements BaseModel
      *
      * @param CustomerServiceRecord|array{
      *   id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   error_message?: string|null,
-     *   phone_number?: string|null,
-     *   record_type?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   errorMessage?: string|null,
+     *   phoneNumber?: string|null,
+     *   recordType?: string|null,
      *   result?: Result|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(CustomerServiceRecord|array|null $data = null): self
@@ -56,13 +56,13 @@ final class CustomerServiceRecordGetResponse implements BaseModel
     /**
      * @param CustomerServiceRecord|array{
      *   id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   error_message?: string|null,
-     *   phone_number?: string|null,
-     *   record_type?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   errorMessage?: string|null,
+     *   phoneNumber?: string|null,
+     *   recordType?: string|null,
      *   result?: Result|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(CustomerServiceRecord|array $data): self

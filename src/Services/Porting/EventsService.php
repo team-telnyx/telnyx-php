@@ -50,10 +50,10 @@ final class EventsService implements EventsContract
      *
      * @param array{
      *   filter?: array{
-     *     created_at?: array{
+     *     createdAt?: array{
      *       gte?: string|\DateTimeInterface, lte?: string|\DateTimeInterface
      *     },
-     *     porting_order_id?: string,
+     *     portingOrderID?: string,
      *     type?: 'porting_order.deleted'|'porting_order.loa_updated'|'porting_order.messaging_changed'|'porting_order.status_changed'|'porting_order.sharing_token_expired'|'porting_order.new_comment'|'porting_order.split'|Type,
      *   },
      *   page?: array{number?: int, size?: int},

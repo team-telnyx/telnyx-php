@@ -16,14 +16,14 @@ use Telnyx\NumberOrders\NumberOrderCreateParams\PhoneNumber;
  * @see Telnyx\Services\NumberOrdersService::create()
  *
  * @phpstan-type NumberOrderCreateParamsShape = array{
- *   billing_group_id?: string,
- *   connection_id?: string,
- *   customer_reference?: string,
- *   messaging_profile_id?: string,
- *   phone_numbers?: list<\Telnyx\NumberOrders\NumberOrderCreateParams\PhoneNumber|array{
- *     phone_number: string,
- *     bundle_id?: string|null,
- *     requirement_group_id?: string|null,
+ *   billingGroupID?: string,
+ *   connectionID?: string,
+ *   customerReference?: string,
+ *   messagingProfileID?: string,
+ *   phoneNumbers?: list<\Telnyx\NumberOrders\NumberOrderCreateParams\PhoneNumber|array{
+ *     phoneNumber: string,
+ *     bundleID?: string|null,
+ *     requirementGroupID?: string|null,
  *   }>,
  * }
  */
@@ -36,34 +36,35 @@ final class NumberOrderCreateParams implements BaseModel
     /**
      * Identifies the billing group associated with the phone number.
      */
-    #[Optional]
-    public ?string $billing_group_id;
+    #[Optional('billing_group_id')]
+    public ?string $billingGroupID;
 
     /**
      * Identifies the connection associated with this phone number.
      */
-    #[Optional]
-    public ?string $connection_id;
+    #[Optional('connection_id')]
+    public ?string $connectionID;
 
     /**
      * A customer reference string for customer look ups.
      */
-    #[Optional]
-    public ?string $customer_reference;
+    #[Optional('customer_reference')]
+    public ?string $customerReference;
 
     /**
      * Identifies the messaging profile associated with the phone number.
      */
-    #[Optional]
-    public ?string $messaging_profile_id;
+    #[Optional('messaging_profile_id')]
+    public ?string $messagingProfileID;
 
     /**
-     * @var list<PhoneNumber>|null $phone_numbers
+     * @var list<PhoneNumber>|null $phoneNumbers
      */
     #[Optional(
-        list: PhoneNumber::class
+        'phone_numbers',
+        list: PhoneNumber::class,
     )]
-    public ?array $phone_numbers;
+    public ?array $phoneNumbers;
 
     public function __construct()
     {
@@ -76,25 +77,23 @@ final class NumberOrderCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<PhoneNumber|array{
-     *   phone_number: string,
-     *   bundle_id?: string|null,
-     *   requirement_group_id?: string|null,
-     * }> $phone_numbers
+     *   phoneNumber: string, bundleID?: string|null, requirementGroupID?: string|null
+     * }> $phoneNumbers
      */
     public static function with(
-        ?string $billing_group_id = null,
-        ?string $connection_id = null,
-        ?string $customer_reference = null,
-        ?string $messaging_profile_id = null,
-        ?array $phone_numbers = null,
+        ?string $billingGroupID = null,
+        ?string $connectionID = null,
+        ?string $customerReference = null,
+        ?string $messagingProfileID = null,
+        ?array $phoneNumbers = null,
     ): self {
         $obj = new self;
 
-        null !== $billing_group_id && $obj['billing_group_id'] = $billing_group_id;
-        null !== $connection_id && $obj['connection_id'] = $connection_id;
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
-        null !== $messaging_profile_id && $obj['messaging_profile_id'] = $messaging_profile_id;
-        null !== $phone_numbers && $obj['phone_numbers'] = $phone_numbers;
+        null !== $billingGroupID && $obj['billingGroupID'] = $billingGroupID;
+        null !== $connectionID && $obj['connectionID'] = $connectionID;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
+        null !== $messagingProfileID && $obj['messagingProfileID'] = $messagingProfileID;
+        null !== $phoneNumbers && $obj['phoneNumbers'] = $phoneNumbers;
 
         return $obj;
     }
@@ -105,7 +104,7 @@ final class NumberOrderCreateParams implements BaseModel
     public function withBillingGroupID(string $billingGroupID): self
     {
         $obj = clone $this;
-        $obj['billing_group_id'] = $billingGroupID;
+        $obj['billingGroupID'] = $billingGroupID;
 
         return $obj;
     }
@@ -116,7 +115,7 @@ final class NumberOrderCreateParams implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj['connection_id'] = $connectionID;
+        $obj['connectionID'] = $connectionID;
 
         return $obj;
     }
@@ -127,7 +126,7 @@ final class NumberOrderCreateParams implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }
@@ -138,22 +137,20 @@ final class NumberOrderCreateParams implements BaseModel
     public function withMessagingProfileID(string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj['messaging_profile_id'] = $messagingProfileID;
+        $obj['messagingProfileID'] = $messagingProfileID;
 
         return $obj;
     }
 
     /**
      * @param list<PhoneNumber|array{
-     *   phone_number: string,
-     *   bundle_id?: string|null,
-     *   requirement_group_id?: string|null,
+     *   phoneNumber: string, bundleID?: string|null, requirementGroupID?: string|null
      * }> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj['phone_numbers'] = $phoneNumbers;
+        $obj['phoneNumbers'] = $phoneNumbers;
 
         return $obj;
     }

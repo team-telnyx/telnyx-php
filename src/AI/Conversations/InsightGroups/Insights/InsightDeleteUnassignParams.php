@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\Conversations\InsightGroups\InsightsService::deleteUnassign()
  *
- * @phpstan-type InsightDeleteUnassignParamsShape = array{group_id: string}
+ * @phpstan-type InsightDeleteUnassignParamsShape = array{groupID: string}
  */
 final class InsightDeleteUnassignParams implements BaseModel
 {
@@ -26,14 +26,14 @@ final class InsightDeleteUnassignParams implements BaseModel
      * The ID of the insight group.
      */
     #[Required]
-    public string $group_id;
+    public string $groupID;
 
     /**
      * `new InsightDeleteUnassignParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * InsightDeleteUnassignParams::with(group_id: ...)
+     * InsightDeleteUnassignParams::with(groupID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -52,11 +52,11 @@ final class InsightDeleteUnassignParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $group_id): self
+    public static function with(string $groupID): self
     {
         $obj = new self;
 
-        $obj['group_id'] = $group_id;
+        $obj['groupID'] = $groupID;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class InsightDeleteUnassignParams implements BaseModel
     public function withGroupID(string $groupID): self
     {
         $obj = clone $this;
-        $obj['group_id'] = $groupID;
+        $obj['groupID'] = $groupID;
 
         return $obj;
     }

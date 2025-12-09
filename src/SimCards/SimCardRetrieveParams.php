@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\SimCardsService::retrieve()
  *
  * @phpstan-type SimCardRetrieveParamsShape = array{
- *   include_pin_puk_codes?: bool, include_sim_card_group?: bool
+ *   includePinPukCodes?: bool, includeSimCardGroup?: bool
  * }
  */
 final class SimCardRetrieveParams implements BaseModel
@@ -28,13 +28,13 @@ final class SimCardRetrieveParams implements BaseModel
      * When set to true, includes the PIN and PUK codes in the response. These codes are used for SIM card security and unlocking purposes. Available for both physical SIM cards and eSIMs.
      */
     #[Optional]
-    public ?bool $include_pin_puk_codes;
+    public ?bool $includePinPukCodes;
 
     /**
      * It includes the associated SIM card group object in the response when present.
      */
     #[Optional]
-    public ?bool $include_sim_card_group;
+    public ?bool $includeSimCardGroup;
 
     public function __construct()
     {
@@ -47,13 +47,13 @@ final class SimCardRetrieveParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?bool $include_pin_puk_codes = null,
-        ?bool $include_sim_card_group = null
+        ?bool $includePinPukCodes = null,
+        ?bool $includeSimCardGroup = null
     ): self {
         $obj = new self;
 
-        null !== $include_pin_puk_codes && $obj['include_pin_puk_codes'] = $include_pin_puk_codes;
-        null !== $include_sim_card_group && $obj['include_sim_card_group'] = $include_sim_card_group;
+        null !== $includePinPukCodes && $obj['includePinPukCodes'] = $includePinPukCodes;
+        null !== $includeSimCardGroup && $obj['includeSimCardGroup'] = $includeSimCardGroup;
 
         return $obj;
     }
@@ -64,7 +64,7 @@ final class SimCardRetrieveParams implements BaseModel
     public function withIncludePinPukCodes(bool $includePinPukCodes): self
     {
         $obj = clone $this;
-        $obj['include_pin_puk_codes'] = $includePinPukCodes;
+        $obj['includePinPukCodes'] = $includePinPukCodes;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class SimCardRetrieveParams implements BaseModel
     public function withIncludeSimCardGroup(bool $includeSimCardGroup): self
     {
         $obj = clone $this;
-        $obj['include_sim_card_group'] = $includeSimCardGroup;
+        $obj['includeSimCardGroup'] = $includeSimCardGroup;
 
         return $obj;
     }

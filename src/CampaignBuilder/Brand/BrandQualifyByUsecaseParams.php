@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\CampaignBuilder\BrandService::qualifyByUsecase()
  *
- * @phpstan-type BrandQualifyByUsecaseParamsShape = array{brandId: string}
+ * @phpstan-type BrandQualifyByUsecaseParamsShape = array{brandID: string}
  */
 final class BrandQualifyByUsecaseParams implements BaseModel
 {
@@ -23,14 +23,14 @@ final class BrandQualifyByUsecaseParams implements BaseModel
     use SdkParams;
 
     #[Required]
-    public string $brandId;
+    public string $brandID;
 
     /**
      * `new BrandQualifyByUsecaseParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * BrandQualifyByUsecaseParams::with(brandId: ...)
+     * BrandQualifyByUsecaseParams::with(brandID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -49,11 +49,11 @@ final class BrandQualifyByUsecaseParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $brandId): self
+    public static function with(string $brandID): self
     {
         $obj = new self;
 
-        $obj['brandId'] = $brandId;
+        $obj['brandID'] = $brandID;
 
         return $obj;
     }
@@ -61,7 +61,7 @@ final class BrandQualifyByUsecaseParams implements BaseModel
     public function withBrandID(string $brandID): self
     {
         $obj = clone $this;
-        $obj['brandId'] = $brandID;
+        $obj['brandID'] = $brandID;
 
         return $obj;
     }

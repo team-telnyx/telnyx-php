@@ -36,15 +36,15 @@ final class AdvancedOrderListResponse implements BaseModel
      *
      * @param list<Data|array{
      *   id?: string|null,
-     *   area_code?: string|null,
+     *   areaCode?: string|null,
      *   comments?: string|null,
-     *   country_code?: string|null,
-     *   customer_reference?: string|null,
+     *   countryCode?: string|null,
+     *   customerReference?: string|null,
      *   features?: list<value-of<Feature>>|null,
      *   orders?: list<string>|null,
-     *   phone_number_type?: list<value-of<PhoneNumberType>>|null,
+     *   phoneNumberType?: list<value-of<PhoneNumberType>>|null,
      *   quantity?: int|null,
-     *   requirement_group_id?: string|null,
+     *   requirementGroupID?: string|null,
      *   status?: list<value-of<Status>>|null,
      * }> $data
      */
@@ -60,15 +60,15 @@ final class AdvancedOrderListResponse implements BaseModel
     /**
      * @param list<Data|array{
      *   id?: string|null,
-     *   area_code?: string|null,
+     *   areaCode?: string|null,
      *   comments?: string|null,
-     *   country_code?: string|null,
-     *   customer_reference?: string|null,
+     *   countryCode?: string|null,
+     *   customerReference?: string|null,
      *   features?: list<value-of<Feature>>|null,
      *   orders?: list<string>|null,
-     *   phone_number_type?: list<value-of<PhoneNumberType>>|null,
+     *   phoneNumberType?: list<value-of<PhoneNumberType>>|null,
      *   quantity?: int|null,
-     *   requirement_group_id?: string|null,
+     *   requirementGroupID?: string|null,
      *   status?: list<value-of<Status>>|null,
      * }> $data
      */

@@ -28,7 +28,7 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
      * Creates a new SIPREC connector configuration.
      *
      * @param array{
-     *   host: string, name: string, port: int, app_subdomain?: string
+     *   host: string, name: string, port: int, appSubdomain?: string
      * }|SiprecConnectorCreateParams $params
      *
      * @throws APIException
@@ -82,7 +82,7 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
      * Updates a stored SIPREC connector configuration.
      *
      * @param array{
-     *   host: string, name: string, port: int, app_subdomain?: string
+     *   host: string, name: string, port: int, appSubdomain?: string
      * }|SiprecConnectorUpdateParams $params
      *
      * @throws APIException

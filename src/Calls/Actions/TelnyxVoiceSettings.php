@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type TelnyxVoiceSettingsShape = array{
- *   type: value-of<Type>, voice_speed?: float|null
+ *   type: value-of<Type>, voiceSpeed?: float|null
  * }
  */
 final class TelnyxVoiceSettings implements BaseModel
@@ -31,8 +31,8 @@ final class TelnyxVoiceSettings implements BaseModel
     /**
      * The voice speed to be used for the voice. The voice speed must be between 0.1 and 2.0. Default value is 1.0.
      */
-    #[Optional]
-    public ?float $voice_speed;
+    #[Optional('voice_speed')]
+    public ?float $voiceSpeed;
 
     /**
      * `new TelnyxVoiceSettings()` is missing required properties by the API.
@@ -62,13 +62,13 @@ final class TelnyxVoiceSettings implements BaseModel
      */
     public static function with(
         Type|string $type,
-        ?float $voice_speed = null
+        ?float $voiceSpeed = null
     ): self {
         $obj = new self;
 
         $obj['type'] = $type;
 
-        null !== $voice_speed && $obj['voice_speed'] = $voice_speed;
+        null !== $voiceSpeed && $obj['voiceSpeed'] = $voiceSpeed;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class TelnyxVoiceSettings implements BaseModel
     public function withVoiceSpeed(float $voiceSpeed): self
     {
         $obj = clone $this;
-        $obj['voice_speed'] = $voiceSpeed;
+        $obj['voiceSpeed'] = $voiceSpeed;
 
         return $obj;
     }

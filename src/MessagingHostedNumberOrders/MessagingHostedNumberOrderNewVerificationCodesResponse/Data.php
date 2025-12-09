@@ -14,10 +14,10 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerification
  * Verification code result response.
  *
  * @phpstan-type DataShape = array{
- *   phone_number: string,
+ *   phoneNumber: string,
  *   error?: string|null,
  *   type?: value-of<Type>|null,
- *   verification_code_id?: string|null,
+ *   verificationCodeID?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -28,8 +28,8 @@ final class Data implements BaseModel
     /**
      * Phone number for which the verification code was created.
      */
-    #[Required]
-    public string $phone_number;
+    #[Required('phone_number')]
+    public string $phoneNumber;
 
     /**
      * Error message describing why the verification code creation failed.
@@ -48,15 +48,15 @@ final class Data implements BaseModel
     /**
      * Unique identifier for the verification code.
      */
-    #[Optional]
-    public ?string $verification_code_id;
+    #[Optional('verification_code_id')]
+    public ?string $verificationCodeID;
 
     /**
      * `new Data()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Data::with(phone_number: ...)
+     * Data::with(phoneNumber: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -78,18 +78,18 @@ final class Data implements BaseModel
      * @param Type|value-of<Type> $type
      */
     public static function with(
-        string $phone_number,
+        string $phoneNumber,
         ?string $error = null,
         Type|string|null $type = null,
-        ?string $verification_code_id = null,
+        ?string $verificationCodeID = null,
     ): self {
         $obj = new self;
 
-        $obj['phone_number'] = $phone_number;
+        $obj['phoneNumber'] = $phoneNumber;
 
         null !== $error && $obj['error'] = $error;
         null !== $type && $obj['type'] = $type;
-        null !== $verification_code_id && $obj['verification_code_id'] = $verification_code_id;
+        null !== $verificationCodeID && $obj['verificationCodeID'] = $verificationCodeID;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class Data implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class Data implements BaseModel
     public function withVerificationCodeID(string $verificationCodeID): self
     {
         $obj = clone $this;
-        $obj['verification_code_id'] = $verificationCodeID;
+        $obj['verificationCodeID'] = $verificationCodeID;
 
         return $obj;
     }

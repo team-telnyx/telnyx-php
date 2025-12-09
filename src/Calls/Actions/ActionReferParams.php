@@ -25,13 +25,13 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Calls\ActionsService::refer()
  *
  * @phpstan-type ActionReferParamsShape = array{
- *   sip_address: string,
- *   client_state?: string,
- *   command_id?: string,
- *   custom_headers?: list<CustomSipHeader|array{name: string, value: string}>,
- *   sip_auth_password?: string,
- *   sip_auth_username?: string,
- *   sip_headers?: list<SipHeader|array{name: value-of<Name>, value: string}>,
+ *   sipAddress: string,
+ *   clientState?: string,
+ *   commandID?: string,
+ *   customHeaders?: list<CustomSipHeader|array{name: string, value: string}>,
+ *   sipAuthPassword?: string,
+ *   sipAuthUsername?: string,
+ *   sipHeaders?: list<SipHeader|array{name: value-of<Name>, value: string}>,
  * }
  */
 final class ActionReferParams implements BaseModel
@@ -43,55 +43,55 @@ final class ActionReferParams implements BaseModel
     /**
      * The SIP URI to which the call will be referred to.
      */
-    #[Required]
-    public string $sip_address;
+    #[Required('sip_address')]
+    public string $sipAddress;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Optional]
-    public ?string $client_state;
+    #[Optional('client_state')]
+    public ?string $clientState;
 
     /**
      * Use this field to avoid execution of duplicate commands. Telnyx will ignore subsequent commands with the same `command_id` as one that has already been executed.
      */
-    #[Optional]
-    public ?string $command_id;
+    #[Optional('command_id')]
+    public ?string $commandID;
 
     /**
      * Custom headers to be added to the SIP INVITE.
      *
-     * @var list<CustomSipHeader>|null $custom_headers
+     * @var list<CustomSipHeader>|null $customHeaders
      */
-    #[Optional(list: CustomSipHeader::class)]
-    public ?array $custom_headers;
+    #[Optional('custom_headers', list: CustomSipHeader::class)]
+    public ?array $customHeaders;
 
     /**
      * SIP Authentication password used for SIP challenges.
      */
-    #[Optional]
-    public ?string $sip_auth_password;
+    #[Optional('sip_auth_password')]
+    public ?string $sipAuthPassword;
 
     /**
      * SIP Authentication username used for SIP challenges.
      */
-    #[Optional]
-    public ?string $sip_auth_username;
+    #[Optional('sip_auth_username')]
+    public ?string $sipAuthUsername;
 
     /**
      * SIP headers to be added to the request. Currently only User-to-User header is supported.
      *
-     * @var list<SipHeader>|null $sip_headers
+     * @var list<SipHeader>|null $sipHeaders
      */
-    #[Optional(list: SipHeader::class)]
-    public ?array $sip_headers;
+    #[Optional('sip_headers', list: SipHeader::class)]
+    public ?array $sipHeaders;
 
     /**
      * `new ActionReferParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ActionReferParams::with(sip_address: ...)
+     * ActionReferParams::with(sipAddress: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -110,28 +110,28 @@ final class ActionReferParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<CustomSipHeader|array{name: string, value: string}> $custom_headers
-     * @param list<SipHeader|array{name: value-of<Name>, value: string}> $sip_headers
+     * @param list<CustomSipHeader|array{name: string, value: string}> $customHeaders
+     * @param list<SipHeader|array{name: value-of<Name>, value: string}> $sipHeaders
      */
     public static function with(
-        string $sip_address,
-        ?string $client_state = null,
-        ?string $command_id = null,
-        ?array $custom_headers = null,
-        ?string $sip_auth_password = null,
-        ?string $sip_auth_username = null,
-        ?array $sip_headers = null,
+        string $sipAddress,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        ?array $customHeaders = null,
+        ?string $sipAuthPassword = null,
+        ?string $sipAuthUsername = null,
+        ?array $sipHeaders = null,
     ): self {
         $obj = new self;
 
-        $obj['sip_address'] = $sip_address;
+        $obj['sipAddress'] = $sipAddress;
 
-        null !== $client_state && $obj['client_state'] = $client_state;
-        null !== $command_id && $obj['command_id'] = $command_id;
-        null !== $custom_headers && $obj['custom_headers'] = $custom_headers;
-        null !== $sip_auth_password && $obj['sip_auth_password'] = $sip_auth_password;
-        null !== $sip_auth_username && $obj['sip_auth_username'] = $sip_auth_username;
-        null !== $sip_headers && $obj['sip_headers'] = $sip_headers;
+        null !== $clientState && $obj['clientState'] = $clientState;
+        null !== $commandID && $obj['commandID'] = $commandID;
+        null !== $customHeaders && $obj['customHeaders'] = $customHeaders;
+        null !== $sipAuthPassword && $obj['sipAuthPassword'] = $sipAuthPassword;
+        null !== $sipAuthUsername && $obj['sipAuthUsername'] = $sipAuthUsername;
+        null !== $sipHeaders && $obj['sipHeaders'] = $sipHeaders;
 
         return $obj;
     }
@@ -142,7 +142,7 @@ final class ActionReferParams implements BaseModel
     public function withSipAddress(string $sipAddress): self
     {
         $obj = clone $this;
-        $obj['sip_address'] = $sipAddress;
+        $obj['sipAddress'] = $sipAddress;
 
         return $obj;
     }
@@ -153,7 +153,7 @@ final class ActionReferParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj['client_state'] = $clientState;
+        $obj['clientState'] = $clientState;
 
         return $obj;
     }
@@ -164,7 +164,7 @@ final class ActionReferParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj['command_id'] = $commandID;
+        $obj['commandID'] = $commandID;
 
         return $obj;
     }
@@ -177,7 +177,7 @@ final class ActionReferParams implements BaseModel
     public function withCustomHeaders(array $customHeaders): self
     {
         $obj = clone $this;
-        $obj['custom_headers'] = $customHeaders;
+        $obj['customHeaders'] = $customHeaders;
 
         return $obj;
     }
@@ -188,7 +188,7 @@ final class ActionReferParams implements BaseModel
     public function withSipAuthPassword(string $sipAuthPassword): self
     {
         $obj = clone $this;
-        $obj['sip_auth_password'] = $sipAuthPassword;
+        $obj['sipAuthPassword'] = $sipAuthPassword;
 
         return $obj;
     }
@@ -199,7 +199,7 @@ final class ActionReferParams implements BaseModel
     public function withSipAuthUsername(string $sipAuthUsername): self
     {
         $obj = clone $this;
-        $obj['sip_auth_username'] = $sipAuthUsername;
+        $obj['sipAuthUsername'] = $sipAuthUsername;
 
         return $obj;
     }
@@ -212,7 +212,7 @@ final class ActionReferParams implements BaseModel
     public function withSipHeaders(array $sipHeaders): self
     {
         $obj = clone $this;
-        $obj['sip_headers'] = $sipHeaders;
+        $obj['sipHeaders'] = $sipHeaders;
 
         return $obj;
     }

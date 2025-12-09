@@ -39,19 +39,19 @@ final class MobileNetworkOperatorListResponse implements BaseModel
      *
      * @param list<Data|array{
      *   id?: string|null,
-     *   country_code?: string|null,
+     *   countryCode?: string|null,
      *   mcc?: string|null,
      *   mnc?: string|null,
      *   name?: string|null,
-     *   network_preferences_enabled?: bool|null,
-     *   record_type?: string|null,
+     *   networkPreferencesEnabled?: bool|null,
+     *   recordType?: string|null,
      *   tadig?: string|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -69,12 +69,12 @@ final class MobileNetworkOperatorListResponse implements BaseModel
     /**
      * @param list<Data|array{
      *   id?: string|null,
-     *   country_code?: string|null,
+     *   countryCode?: string|null,
      *   mcc?: string|null,
      *   mnc?: string|null,
      *   name?: string|null,
-     *   network_preferences_enabled?: bool|null,
-     *   record_type?: string|null,
+     *   networkPreferencesEnabled?: bool|null,
+     *   recordType?: string|null,
      *   tadig?: string|null,
      * }> $data
      */
@@ -88,10 +88,10 @@ final class MobileNetworkOperatorListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

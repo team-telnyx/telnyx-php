@@ -16,9 +16,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *   channels: int,
  *   countries: list<string>,
  *   name: string,
- *   record_type: value-of<RecordType>,
- *   created_at?: string|null,
- *   updated_at?: string|null,
+ *   recordType: value-of<RecordType>,
+ *   createdAt?: string|null,
+ *   updatedAt?: string|null,
  * }
  */
 final class ChannelZoneUpdateResponse implements BaseModel
@@ -43,21 +43,21 @@ final class ChannelZoneUpdateResponse implements BaseModel
     #[Required]
     public string $name;
 
-    /** @var value-of<RecordType> $record_type */
-    #[Required(enum: RecordType::class)]
-    public string $record_type;
+    /** @var value-of<RecordType> $recordType */
+    #[Required('record_type', enum: RecordType::class)]
+    public string $recordType;
 
     /**
      * ISO 8601 formatted date of when the channel zone was created.
      */
-    #[Optional]
-    public ?string $created_at;
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
     /**
      * ISO 8601 formatted date of when the channel zone was updated.
      */
-    #[Optional]
-    public ?string $updated_at;
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     /**
      * `new ChannelZoneUpdateResponse()` is missing required properties by the API.
@@ -65,7 +65,7 @@ final class ChannelZoneUpdateResponse implements BaseModel
      * To enforce required parameters use
      * ```
      * ChannelZoneUpdateResponse::with(
-     *   id: ..., channels: ..., countries: ..., name: ..., record_type: ...
+     *   id: ..., channels: ..., countries: ..., name: ..., recordType: ...
      * )
      * ```
      *
@@ -91,16 +91,16 @@ final class ChannelZoneUpdateResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $countries
-     * @param RecordType|value-of<RecordType> $record_type
+     * @param RecordType|value-of<RecordType> $recordType
      */
     public static function with(
         string $id,
         int $channels,
         array $countries,
         string $name,
-        RecordType|string $record_type,
-        ?string $created_at = null,
-        ?string $updated_at = null,
+        RecordType|string $recordType,
+        ?string $createdAt = null,
+        ?string $updatedAt = null,
     ): self {
         $obj = new self;
 
@@ -108,10 +108,10 @@ final class ChannelZoneUpdateResponse implements BaseModel
         $obj['channels'] = $channels;
         $obj['countries'] = $countries;
         $obj['name'] = $name;
-        $obj['record_type'] = $record_type;
+        $obj['recordType'] = $recordType;
 
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class ChannelZoneUpdateResponse implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -170,7 +170,7 @@ final class ChannelZoneUpdateResponse implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -181,7 +181,7 @@ final class ChannelZoneUpdateResponse implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

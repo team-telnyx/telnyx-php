@@ -14,14 +14,14 @@ use Telnyx\ExternalConnections\Uploads\Upload\Status;
 
 /**
  * @phpstan-type UploadShape = array{
- *   available_usages?: list<value-of<AvailableUsage>>|null,
- *   error_code?: string|null,
- *   error_message?: string|null,
- *   location_id?: string|null,
+ *   availableUsages?: list<value-of<AvailableUsage>>|null,
+ *   errorCode?: string|null,
+ *   errorMessage?: string|null,
+ *   locationID?: string|null,
  *   status?: value-of<Status>|null,
- *   tenant_id?: string|null,
- *   ticket_id?: string|null,
- *   tn_upload_entries?: list<TnUploadEntry>|null,
+ *   tenantID?: string|null,
+ *   ticketID?: string|null,
+ *   tnUploadEntries?: list<TnUploadEntry>|null,
  * }
  */
 final class Upload implements BaseModel
@@ -29,24 +29,24 @@ final class Upload implements BaseModel
     /** @use SdkModel<UploadShape> */
     use SdkModel;
 
-    /** @var list<value-of<AvailableUsage>>|null $available_usages */
-    #[Optional(list: AvailableUsage::class)]
-    public ?array $available_usages;
+    /** @var list<value-of<AvailableUsage>>|null $availableUsages */
+    #[Optional('available_usages', list: AvailableUsage::class)]
+    public ?array $availableUsages;
 
     /**
      * A code returned by Microsoft Teams if there is an error with the upload process.
      */
-    #[Optional]
-    public ?string $error_code;
+    #[Optional('error_code')]
+    public ?string $errorCode;
 
     /**
      * A message set if there is an error with the upload process.
      */
-    #[Optional]
-    public ?string $error_message;
+    #[Optional('error_message')]
+    public ?string $errorMessage;
 
-    #[Optional]
-    public ?string $location_id;
+    #[Optional('location_id')]
+    public ?string $locationID;
 
     /**
      * Represents the status of the upload on Microsoft Teams.
@@ -56,18 +56,18 @@ final class Upload implements BaseModel
     #[Optional(enum: Status::class)]
     public ?string $status;
 
-    #[Optional]
-    public ?string $tenant_id;
+    #[Optional('tenant_id')]
+    public ?string $tenantID;
 
     /**
      * Uniquely identifies the resource.
      */
-    #[Optional]
-    public ?string $ticket_id;
+    #[Optional('ticket_id')]
+    public ?string $ticketID;
 
-    /** @var list<TnUploadEntry>|null $tn_upload_entries */
-    #[Optional(list: TnUploadEntry::class)]
-    public ?array $tn_upload_entries;
+    /** @var list<TnUploadEntry>|null $tnUploadEntries */
+    #[Optional('tn_upload_entries', list: TnUploadEntry::class)]
+    public ?array $tnUploadEntries;
 
     public function __construct()
     {
@@ -79,39 +79,39 @@ final class Upload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AvailableUsage|value-of<AvailableUsage>> $available_usages
+     * @param list<AvailableUsage|value-of<AvailableUsage>> $availableUsages
      * @param Status|value-of<Status> $status
      * @param list<TnUploadEntry|array{
-     *   civic_address_id?: string|null,
-     *   error_code?: value-of<ErrorCode>|null,
-     *   error_message?: string|null,
-     *   internal_status?: value-of<InternalStatus>|null,
-     *   location_id?: string|null,
-     *   number_id?: string|null,
-     *   phone_number?: string|null,
+     *   civicAddressID?: string|null,
+     *   errorCode?: value-of<ErrorCode>|null,
+     *   errorMessage?: string|null,
+     *   internalStatus?: value-of<InternalStatus>|null,
+     *   locationID?: string|null,
+     *   numberID?: string|null,
+     *   phoneNumber?: string|null,
      *   status?: value-of<TnUploadEntry\Status>|null,
-     * }> $tn_upload_entries
+     * }> $tnUploadEntries
      */
     public static function with(
-        ?array $available_usages = null,
-        ?string $error_code = null,
-        ?string $error_message = null,
-        ?string $location_id = null,
+        ?array $availableUsages = null,
+        ?string $errorCode = null,
+        ?string $errorMessage = null,
+        ?string $locationID = null,
         Status|string|null $status = null,
-        ?string $tenant_id = null,
-        ?string $ticket_id = null,
-        ?array $tn_upload_entries = null,
+        ?string $tenantID = null,
+        ?string $ticketID = null,
+        ?array $tnUploadEntries = null,
     ): self {
         $obj = new self;
 
-        null !== $available_usages && $obj['available_usages'] = $available_usages;
-        null !== $error_code && $obj['error_code'] = $error_code;
-        null !== $error_message && $obj['error_message'] = $error_message;
-        null !== $location_id && $obj['location_id'] = $location_id;
+        null !== $availableUsages && $obj['availableUsages'] = $availableUsages;
+        null !== $errorCode && $obj['errorCode'] = $errorCode;
+        null !== $errorMessage && $obj['errorMessage'] = $errorMessage;
+        null !== $locationID && $obj['locationID'] = $locationID;
         null !== $status && $obj['status'] = $status;
-        null !== $tenant_id && $obj['tenant_id'] = $tenant_id;
-        null !== $ticket_id && $obj['ticket_id'] = $ticket_id;
-        null !== $tn_upload_entries && $obj['tn_upload_entries'] = $tn_upload_entries;
+        null !== $tenantID && $obj['tenantID'] = $tenantID;
+        null !== $ticketID && $obj['ticketID'] = $ticketID;
+        null !== $tnUploadEntries && $obj['tnUploadEntries'] = $tnUploadEntries;
 
         return $obj;
     }
@@ -122,7 +122,7 @@ final class Upload implements BaseModel
     public function withAvailableUsages(array $availableUsages): self
     {
         $obj = clone $this;
-        $obj['available_usages'] = $availableUsages;
+        $obj['availableUsages'] = $availableUsages;
 
         return $obj;
     }
@@ -133,7 +133,7 @@ final class Upload implements BaseModel
     public function withErrorCode(string $errorCode): self
     {
         $obj = clone $this;
-        $obj['error_code'] = $errorCode;
+        $obj['errorCode'] = $errorCode;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class Upload implements BaseModel
     public function withErrorMessage(string $errorMessage): self
     {
         $obj = clone $this;
-        $obj['error_message'] = $errorMessage;
+        $obj['errorMessage'] = $errorMessage;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class Upload implements BaseModel
     public function withLocationID(string $locationID): self
     {
         $obj = clone $this;
-        $obj['location_id'] = $locationID;
+        $obj['locationID'] = $locationID;
 
         return $obj;
     }
@@ -173,7 +173,7 @@ final class Upload implements BaseModel
     public function withTenantID(string $tenantID): self
     {
         $obj = clone $this;
-        $obj['tenant_id'] = $tenantID;
+        $obj['tenantID'] = $tenantID;
 
         return $obj;
     }
@@ -184,27 +184,27 @@ final class Upload implements BaseModel
     public function withTicketID(string $ticketID): self
     {
         $obj = clone $this;
-        $obj['ticket_id'] = $ticketID;
+        $obj['ticketID'] = $ticketID;
 
         return $obj;
     }
 
     /**
      * @param list<TnUploadEntry|array{
-     *   civic_address_id?: string|null,
-     *   error_code?: value-of<ErrorCode>|null,
-     *   error_message?: string|null,
-     *   internal_status?: value-of<InternalStatus>|null,
-     *   location_id?: string|null,
-     *   number_id?: string|null,
-     *   phone_number?: string|null,
+     *   civicAddressID?: string|null,
+     *   errorCode?: value-of<ErrorCode>|null,
+     *   errorMessage?: string|null,
+     *   internalStatus?: value-of<InternalStatus>|null,
+     *   locationID?: string|null,
+     *   numberID?: string|null,
+     *   phoneNumber?: string|null,
      *   status?: value-of<TnUploadEntry\Status>|null,
      * }> $tnUploadEntries
      */
     public function withTnUploadEntries(array $tnUploadEntries): self
     {
         $obj = clone $this;
-        $obj['tn_upload_entries'] = $tnUploadEntries;
+        $obj['tnUploadEntries'] = $tnUploadEntries;
 
         return $obj;
     }

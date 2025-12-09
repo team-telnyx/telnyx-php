@@ -65,8 +65,8 @@ final class VerificationCodesService implements VerificationCodesContract
      * Send the verification code for all porting phone numbers.
      *
      * @param array{
-     *   phone_numbers?: list<string>,
-     *   verification_method?: 'sms'|'call'|VerificationMethod,
+     *   phoneNumbers?: list<string>,
+     *   verificationMethod?: 'sms'|'call'|VerificationMethod,
      * }|VerificationCodeSendParams $params
      *
      * @throws APIException
@@ -99,7 +99,7 @@ final class VerificationCodesService implements VerificationCodesContract
      * Verifies the verification code for a list of phone numbers.
      *
      * @param array{
-     *   verification_codes?: list<array{code?: string, phone_number?: string}>
+     *   verificationCodes?: list<array{code?: string, phoneNumber?: string}>
      * }|VerificationCodeVerifyParams $params
      *
      * @throws APIException

@@ -38,7 +38,7 @@ final class VersionsTest extends TestCase
 
         $result = $this->client->ai->assistants->versions->retrieve(
             'version_id',
-            ['assistant_id' => 'assistant_id']
+            ['assistantID' => 'assistant_id']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -54,7 +54,7 @@ final class VersionsTest extends TestCase
 
         $result = $this->client->ai->assistants->versions->retrieve(
             'version_id',
-            ['assistant_id' => 'assistant_id', 'include_mcp_servers' => true],
+            ['assistantID' => 'assistant_id', 'includeMcpServers' => true],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -70,7 +70,7 @@ final class VersionsTest extends TestCase
 
         $result = $this->client->ai->assistants->versions->update(
             'version_id',
-            ['assistant_id' => 'assistant_id']
+            ['assistantID' => 'assistant_id']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -87,25 +87,25 @@ final class VersionsTest extends TestCase
         $result = $this->client->ai->assistants->versions->update(
             'version_id',
             [
-                'assistant_id' => 'assistant_id',
+                'assistantID' => 'assistant_id',
                 'description' => 'description',
-                'dynamic_variables' => ['foo' => 'bar'],
-                'dynamic_variables_webhook_url' => 'dynamic_variables_webhook_url',
-                'enabled_features' => [EnabledFeatures::TELEPHONY],
+                'dynamicVariables' => ['foo' => 'bar'],
+                'dynamicVariablesWebhookURL' => 'dynamic_variables_webhook_url',
+                'enabledFeatures' => [EnabledFeatures::TELEPHONY],
                 'greeting' => 'greeting',
-                'insight_settings' => ['insight_group_id' => 'insight_group_id'],
+                'insightSettings' => ['insightGroupID' => 'insight_group_id'],
                 'instructions' => 'instructions',
-                'llm_api_key_ref' => 'llm_api_key_ref',
-                'messaging_settings' => [
-                    'default_messaging_profile_id' => 'default_messaging_profile_id',
-                    'delivery_status_webhook_url' => 'delivery_status_webhook_url',
+                'llmAPIKeyRef' => 'llm_api_key_ref',
+                'messagingSettings' => [
+                    'defaultMessagingProfileID' => 'default_messaging_profile_id',
+                    'deliveryStatusWebhookURL' => 'delivery_status_webhook_url',
                 ],
                 'model' => 'model',
                 'name' => 'name',
-                'privacy_settings' => ['data_retention' => true],
-                'telephony_settings' => [
-                    'default_texml_app_id' => 'default_texml_app_id',
-                    'supports_unauthenticated_web_calls' => true,
+                'privacySettings' => ['dataRetention' => true],
+                'telephonySettings' => [
+                    'defaultTexmlAppID' => 'default_texml_app_id',
+                    'supportsUnauthenticatedWebCalls' => true,
                 ],
                 'tools' => [
                     [
@@ -114,19 +114,19 @@ final class VersionsTest extends TestCase
                             'description' => 'description',
                             'name' => 'name',
                             'url' => 'https://example.com/api/v1/function',
-                            'body_parameters' => [
+                            'bodyParameters' => [
                                 'properties' => ['age' => 'bar', 'location' => 'bar'],
                                 'required' => ['age', 'location'],
                                 'type' => 'object',
                             ],
                             'headers' => [['name' => 'name', 'value' => 'value']],
                             'method' => 'GET',
-                            'path_parameters' => [
+                            'pathParameters' => [
                                 'properties' => ['id' => 'bar'],
                                 'required' => ['id'],
                                 'type' => 'object',
                             ],
-                            'query_parameters' => [
+                            'queryParameters' => [
                                 'properties' => ['page' => 'bar'],
                                 'required' => ['page'],
                                 'type' => 'object',
@@ -139,19 +139,19 @@ final class VersionsTest extends TestCase
                     'model' => 'deepgram/flux',
                     'region' => 'region',
                     'settings' => [
-                        'eot_threshold' => 0,
-                        'eot_timeout_ms' => 0,
+                        'eotThreshold' => 0,
+                        'eotTimeoutMs' => 0,
                         'numerals' => true,
-                        'smart_format' => true,
+                        'smartFormat' => true,
                     ],
                 ],
-                'voice_settings' => [
+                'voiceSettings' => [
                     'voice' => 'voice',
-                    'api_key_ref' => 'api_key_ref',
-                    'background_audio' => [
+                    'apiKeyRef' => 'api_key_ref',
+                    'backgroundAudio' => [
                         'type' => 'predefined_media', 'value' => 'silence',
                     ],
-                    'voice_speed' => 0,
+                    'voiceSpeed' => 0,
                 ],
             ],
         );
@@ -182,7 +182,7 @@ final class VersionsTest extends TestCase
 
         $result = $this->client->ai->assistants->versions->delete(
             'version_id',
-            ['assistant_id' => 'assistant_id']
+            ['assistantID' => 'assistant_id']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -198,7 +198,7 @@ final class VersionsTest extends TestCase
 
         $result = $this->client->ai->assistants->versions->delete(
             'version_id',
-            ['assistant_id' => 'assistant_id']
+            ['assistantID' => 'assistant_id']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -214,7 +214,7 @@ final class VersionsTest extends TestCase
 
         $result = $this->client->ai->assistants->versions->promote(
             'version_id',
-            ['assistant_id' => 'assistant_id']
+            ['assistantID' => 'assistant_id']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -230,7 +230,7 @@ final class VersionsTest extends TestCase
 
         $result = $this->client->ai->assistants->versions->promote(
             'version_id',
-            ['assistant_id' => 'assistant_id']
+            ['assistantID' => 'assistant_id']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -36,9 +36,9 @@ final class MigrationsService implements MigrationsContract
      * Initiate a migration of data from an external provider into Telnyx Cloud Storage. Currently, only S3 is supported.
      *
      * @param array{
-     *   source_id: string,
-     *   target_bucket_name: string,
-     *   target_region: string,
+     *   sourceID: string,
+     *   targetBucketName: string,
+     *   targetRegion: string,
      *   refresh?: bool,
      * }|MigrationCreateParams $params
      *

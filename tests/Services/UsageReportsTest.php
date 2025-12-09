@@ -56,15 +56,15 @@ final class UsageReportsTest extends TestCase
             'dimensions' => ['string'],
             'metrics' => ['string'],
             'product' => 'product',
-            'date_range' => 'date_range',
-            'end_date' => 'end_date',
+            'dateRange' => 'date_range',
+            'endDate' => 'end_date',
             'filter' => 'filter',
             'format' => 'csv',
-            'managed_accounts' => true,
+            'managedAccounts' => true,
             'page' => ['number' => 1, 'size' => 5000],
             'sort' => ['string'],
-            'start_date' => 'start_date',
-            'authorization_bearer' => 'authorization_bearer',
+            'startDate' => 'start_date',
+            'authorizationBearer' => 'authorization_bearer',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

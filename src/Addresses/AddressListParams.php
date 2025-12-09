@@ -22,10 +22,10 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type AddressListParamsShape = array{
  *   filter?: Filter|array{
- *     address_book?: AddressBook|null,
- *     customer_reference?: string|null|UnionMember1,
- *     street_address?: StreetAddress|null,
- *     used_as_emergency?: string|null,
+ *     addressBook?: AddressBook|null,
+ *     customerReference?: string|null|UnionMember1,
+ *     streetAddress?: StreetAddress|null,
+ *     usedAsEmergency?: string|null,
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
  *   sort?: Sort|value-of<Sort>,
@@ -79,10 +79,10 @@ final class AddressListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   address_book?: AddressBook|null,
-     *   customer_reference?: string|UnionMember1|null,
-     *   street_address?: StreetAddress|null,
-     *   used_as_emergency?: string|null,
+     *   addressBook?: AddressBook|null,
+     *   customerReference?: string|UnionMember1|null,
+     *   streetAddress?: StreetAddress|null,
+     *   usedAsEmergency?: string|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      * @param Sort|value-of<Sort> $sort
@@ -105,10 +105,10 @@ final class AddressListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[customer_reference][eq], filter[customer_reference][contains], filter[used_as_emergency], filter[street_address][contains], filter[address_book][eq].
      *
      * @param Filter|array{
-     *   address_book?: AddressBook|null,
-     *   customer_reference?: string|UnionMember1|null,
-     *   street_address?: StreetAddress|null,
-     *   used_as_emergency?: string|null,
+     *   addressBook?: AddressBook|null,
+     *   customerReference?: string|UnionMember1|null,
+     *   streetAddress?: StreetAddress|null,
+     *   usedAsEmergency?: string|null,
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

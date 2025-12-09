@@ -15,9 +15,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\MobileVoiceConnectionsService::list()
  *
  * @phpstan-type MobileVoiceConnectionListParamsShape = array{
- *   filter_connection_name__contains_?: string,
- *   page_number_?: int,
- *   page_size_?: int,
+ *   filterConnectionNameContains?: string,
+ *   pageNumber?: int,
+ *   pageSize?: int,
  *   sort?: string,
  * }
  */
@@ -31,19 +31,19 @@ final class MobileVoiceConnectionListParams implements BaseModel
      * Filter by connection name containing the given string.
      */
     #[Optional]
-    public ?string $filter_connection_name__contains_;
+    public ?string $filterConnectionNameContains;
 
     /**
      * The page number to load.
      */
     #[Optional]
-    public ?int $page_number_;
+    public ?int $pageNumber;
 
     /**
      * The size of the page.
      */
     #[Optional]
-    public ?int $page_size_;
+    public ?int $pageSize;
 
     /**
      * Sort by field (e.g., created_at, connection_name, active). Prefix with - for descending order.
@@ -62,16 +62,16 @@ final class MobileVoiceConnectionListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $filter_connection_name__contains_ = null,
-        ?int $page_number_ = null,
-        ?int $page_size_ = null,
+        ?string $filterConnectionNameContains = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         ?string $sort = null,
     ): self {
         $obj = new self;
 
-        null !== $filter_connection_name__contains_ && $obj['filter_connection_name__contains_'] = $filter_connection_name__contains_;
-        null !== $page_number_ && $obj['page_number_'] = $page_number_;
-        null !== $page_size_ && $obj['page_size_'] = $page_size_;
+        null !== $filterConnectionNameContains && $obj['filterConnectionNameContains'] = $filterConnectionNameContains;
+        null !== $pageNumber && $obj['pageNumber'] = $pageNumber;
+        null !== $pageSize && $obj['pageSize'] = $pageSize;
         null !== $sort && $obj['sort'] = $sort;
 
         return $obj;
@@ -84,7 +84,7 @@ final class MobileVoiceConnectionListParams implements BaseModel
         string $filterConnectionNameContains
     ): self {
         $obj = clone $this;
-        $obj['filter_connection_name__contains_'] = $filterConnectionNameContains;
+        $obj['filterConnectionNameContains'] = $filterConnectionNameContains;
 
         return $obj;
     }
@@ -95,7 +95,7 @@ final class MobileVoiceConnectionListParams implements BaseModel
     public function withPageNumber(int $pageNumber): self
     {
         $obj = clone $this;
-        $obj['page_number_'] = $pageNumber;
+        $obj['pageNumber'] = $pageNumber;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class MobileVoiceConnectionListParams implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj['page_size_'] = $pageSize;
+        $obj['pageSize'] = $pageSize;
 
         return $obj;
     }

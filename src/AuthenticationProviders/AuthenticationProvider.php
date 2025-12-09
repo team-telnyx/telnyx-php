@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type AuthenticationProviderShape = array{
  *   id?: string|null,
  *   active?: bool|null,
- *   created_at?: \DateTimeInterface|null,
+ *   createdAt?: \DateTimeInterface|null,
  *   name?: string|null,
- *   organization_id?: string|null,
- *   record_type?: string|null,
+ *   organizationID?: string|null,
+ *   recordType?: string|null,
  *   settings?: \Telnyx\AuthenticationProviders\AuthenticationProvider\Settings|null,
- *   short_name?: string|null,
- *   updated_at?: \DateTimeInterface|null,
+ *   shortName?: string|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class AuthenticationProvider implements BaseModel
@@ -43,8 +43,8 @@ final class AuthenticationProvider implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
     /**
      * The name associated with the authentication provider.
@@ -55,14 +55,14 @@ final class AuthenticationProvider implements BaseModel
     /**
      * The id from the Organization the authentication provider belongs to.
      */
-    #[Optional]
-    public ?string $organization_id;
+    #[Optional('organization_id')]
+    public ?string $organizationID;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * The settings associated with the authentication provider.
@@ -73,14 +73,14 @@ final class AuthenticationProvider implements BaseModel
     /**
      * The short name associated with the authentication provider. This must be unique and URL-friendly, as it's going to be part of the login URL.
      */
-    #[Optional]
-    public ?string $short_name;
+    #[Optional('short_name')]
+    public ?string $shortName;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
     {
@@ -93,37 +93,37 @@ final class AuthenticationProvider implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Settings|array{
-     *   assertion_consumer_service_url?: string|null,
-     *   idp_cert_fingerprint?: string|null,
-     *   idp_cert_fingerprint_algorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
-     *   idp_entity_id?: string|null,
-     *   idp_sso_target_url?: string|null,
-     *   name_identifier_format?: string|null,
-     *   service_provider_entity_id?: string|null,
+     *   assertionConsumerServiceURL?: string|null,
+     *   idpCertFingerprint?: string|null,
+     *   idpCertFingerprintAlgorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
+     *   idpEntityID?: string|null,
+     *   idpSSOTargetURL?: string|null,
+     *   nameIdentifierFormat?: string|null,
+     *   serviceProviderEntityID?: string|null,
      * } $settings
      */
     public static function with(
         ?string $id = null,
         ?bool $active = null,
-        ?\DateTimeInterface $created_at = null,
+        ?\DateTimeInterface $createdAt = null,
         ?string $name = null,
-        ?string $organization_id = null,
-        ?string $record_type = null,
+        ?string $organizationID = null,
+        ?string $recordType = null,
         Settings|array|null $settings = null,
-        ?string $short_name = null,
-        ?\DateTimeInterface $updated_at = null,
+        ?string $shortName = null,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
         null !== $active && $obj['active'] = $active;
-        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
         null !== $name && $obj['name'] = $name;
-        null !== $organization_id && $obj['organization_id'] = $organization_id;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $organizationID && $obj['organizationID'] = $organizationID;
+        null !== $recordType && $obj['recordType'] = $recordType;
         null !== $settings && $obj['settings'] = $settings;
-        null !== $short_name && $obj['short_name'] = $short_name;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $shortName && $obj['shortName'] = $shortName;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class AuthenticationProvider implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class AuthenticationProvider implements BaseModel
     public function withOrganizationID(string $organizationID): self
     {
         $obj = clone $this;
-        $obj['organization_id'] = $organizationID;
+        $obj['organizationID'] = $organizationID;
 
         return $obj;
     }
@@ -189,7 +189,7 @@ final class AuthenticationProvider implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -198,13 +198,13 @@ final class AuthenticationProvider implements BaseModel
      * The settings associated with the authentication provider.
      *
      * @param Settings|array{
-     *   assertion_consumer_service_url?: string|null,
-     *   idp_cert_fingerprint?: string|null,
-     *   idp_cert_fingerprint_algorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
-     *   idp_entity_id?: string|null,
-     *   idp_sso_target_url?: string|null,
-     *   name_identifier_format?: string|null,
-     *   service_provider_entity_id?: string|null,
+     *   assertionConsumerServiceURL?: string|null,
+     *   idpCertFingerprint?: string|null,
+     *   idpCertFingerprintAlgorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
+     *   idpEntityID?: string|null,
+     *   idpSSOTargetURL?: string|null,
+     *   nameIdentifierFormat?: string|null,
+     *   serviceProviderEntityID?: string|null,
      * } $settings
      */
     public function withSettings(
@@ -222,7 +222,7 @@ final class AuthenticationProvider implements BaseModel
     public function withShortName(string $shortName): self
     {
         $obj = clone $this;
-        $obj['short_name'] = $shortName;
+        $obj['shortName'] = $shortName;
 
         return $obj;
     }
@@ -233,7 +233,7 @@ final class AuthenticationProvider implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

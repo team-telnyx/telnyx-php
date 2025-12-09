@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type MessagingShape = array{enable_messaging?: bool|null}
+ * @phpstan-type MessagingShape = array{enableMessaging?: bool|null}
  */
 final class Messaging implements BaseModel
 {
@@ -19,8 +19,8 @@ final class Messaging implements BaseModel
     /**
      * Indicates whether Telnyx will port messaging capabilities from the losing carrier. If false, any messaging capabilities will stay with their current provider.
      */
-    #[Optional]
-    public ?bool $enable_messaging;
+    #[Optional('enable_messaging')]
+    public ?bool $enableMessaging;
 
     public function __construct()
     {
@@ -32,11 +32,11 @@ final class Messaging implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?bool $enable_messaging = null): self
+    public static function with(?bool $enableMessaging = null): self
     {
         $obj = new self;
 
-        null !== $enable_messaging && $obj['enable_messaging'] = $enable_messaging;
+        null !== $enableMessaging && $obj['enableMessaging'] = $enableMessaging;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class Messaging implements BaseModel
     public function withEnableMessaging(bool $enableMessaging): self
     {
         $obj = clone $this;
-        $obj['enable_messaging'] = $enableMessaging;
+        $obj['enableMessaging'] = $enableMessaging;
 
         return $obj;
     }

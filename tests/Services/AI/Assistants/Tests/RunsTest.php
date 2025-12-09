@@ -37,7 +37,7 @@ final class RunsTest extends TestCase
 
         $result = $this->client->ai->assistants->tests->runs->retrieve(
             'run_id',
-            ['test_id' => 'test_id']
+            ['testID' => 'test_id']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -53,7 +53,7 @@ final class RunsTest extends TestCase
 
         $result = $this->client->ai->assistants->tests->runs->retrieve(
             'run_id',
-            ['test_id' => 'test_id']
+            ['testID' => 'test_id']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

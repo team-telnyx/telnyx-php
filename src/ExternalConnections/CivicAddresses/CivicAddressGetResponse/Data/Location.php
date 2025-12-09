@@ -11,9 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type LocationShape = array{
  *   id?: string|null,
- *   additional_info?: string|null,
+ *   additionalInfo?: string|null,
  *   description?: string|null,
- *   is_default?: bool|null,
+ *   isDefault?: bool|null,
  * }
  */
 final class Location implements BaseModel
@@ -27,8 +27,8 @@ final class Location implements BaseModel
     #[Optional]
     public ?string $id;
 
-    #[Optional]
-    public ?string $additional_info;
+    #[Optional('additional_info')]
+    public ?string $additionalInfo;
 
     #[Optional]
     public ?string $description;
@@ -36,8 +36,8 @@ final class Location implements BaseModel
     /**
      * Represents whether the location is the default or not.
      */
-    #[Optional]
-    public ?bool $is_default;
+    #[Optional('is_default')]
+    public ?bool $isDefault;
 
     public function __construct()
     {
@@ -51,16 +51,16 @@ final class Location implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $additional_info = null,
+        ?string $additionalInfo = null,
         ?string $description = null,
-        ?bool $is_default = null,
+        ?bool $isDefault = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $additional_info && $obj['additional_info'] = $additional_info;
+        null !== $additionalInfo && $obj['additionalInfo'] = $additionalInfo;
         null !== $description && $obj['description'] = $description;
-        null !== $is_default && $obj['is_default'] = $is_default;
+        null !== $isDefault && $obj['isDefault'] = $isDefault;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class Location implements BaseModel
     public function withAdditionalInfo(string $additionalInfo): self
     {
         $obj = clone $this;
-        $obj['additional_info'] = $additionalInfo;
+        $obj['additionalInfo'] = $additionalInfo;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class Location implements BaseModel
     public function withIsDefault(bool $isDefault): self
     {
         $obj = clone $this;
-        $obj['is_default'] = $isDefault;
+        $obj['isDefault'] = $isDefault;
 
         return $obj;
     }

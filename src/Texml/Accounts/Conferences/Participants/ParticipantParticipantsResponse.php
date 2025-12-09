@@ -11,11 +11,11 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsRespon
 
 /**
  * @phpstan-type ParticipantParticipantsResponseShape = array{
- *   account_sid?: string|null,
- *   call_sid?: string|null,
+ *   accountSid?: string|null,
+ *   callSid?: string|null,
  *   coaching?: bool|null,
- *   coaching_call_sid?: string|null,
- *   end_conference_on_exit?: bool|null,
+ *   coachingCallSid?: string|null,
+ *   endConferenceOnExit?: bool|null,
  *   hold?: bool|null,
  *   muted?: bool|null,
  *   status?: value-of<Status>|null,
@@ -30,14 +30,14 @@ final class ParticipantParticipantsResponse implements BaseModel
     /**
      * The id of the account the resource belongs to.
      */
-    #[Optional]
-    public ?string $account_sid;
+    #[Optional('account_sid')]
+    public ?string $accountSid;
 
     /**
      * The identifier of this participant's call.
      */
-    #[Optional]
-    public ?string $call_sid;
+    #[Optional('call_sid')]
+    public ?string $callSid;
 
     /**
      * Whether the participant is coaching another call.
@@ -48,14 +48,14 @@ final class ParticipantParticipantsResponse implements BaseModel
     /**
      * The identifier of the coached participant's call.
      */
-    #[Optional]
-    public ?string $coaching_call_sid;
+    #[Optional('coaching_call_sid')]
+    public ?string $coachingCallSid;
 
     /**
      * Whether the conference ends when the participant leaves.
      */
-    #[Optional]
-    public ?bool $end_conference_on_exit;
+    #[Optional('end_conference_on_exit')]
+    public ?bool $endConferenceOnExit;
 
     /**
      * Whether the participant is on hold.
@@ -96,11 +96,11 @@ final class ParticipantParticipantsResponse implements BaseModel
      * @param Status|value-of<Status> $status
      */
     public static function with(
-        ?string $account_sid = null,
-        ?string $call_sid = null,
+        ?string $accountSid = null,
+        ?string $callSid = null,
         ?bool $coaching = null,
-        ?string $coaching_call_sid = null,
-        ?bool $end_conference_on_exit = null,
+        ?string $coachingCallSid = null,
+        ?bool $endConferenceOnExit = null,
         ?bool $hold = null,
         ?bool $muted = null,
         Status|string|null $status = null,
@@ -108,11 +108,11 @@ final class ParticipantParticipantsResponse implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $account_sid && $obj['account_sid'] = $account_sid;
-        null !== $call_sid && $obj['call_sid'] = $call_sid;
+        null !== $accountSid && $obj['accountSid'] = $accountSid;
+        null !== $callSid && $obj['callSid'] = $callSid;
         null !== $coaching && $obj['coaching'] = $coaching;
-        null !== $coaching_call_sid && $obj['coaching_call_sid'] = $coaching_call_sid;
-        null !== $end_conference_on_exit && $obj['end_conference_on_exit'] = $end_conference_on_exit;
+        null !== $coachingCallSid && $obj['coachingCallSid'] = $coachingCallSid;
+        null !== $endConferenceOnExit && $obj['endConferenceOnExit'] = $endConferenceOnExit;
         null !== $hold && $obj['hold'] = $hold;
         null !== $muted && $obj['muted'] = $muted;
         null !== $status && $obj['status'] = $status;
@@ -127,7 +127,7 @@ final class ParticipantParticipantsResponse implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj['account_sid'] = $accountSid;
+        $obj['accountSid'] = $accountSid;
 
         return $obj;
     }
@@ -138,7 +138,7 @@ final class ParticipantParticipantsResponse implements BaseModel
     public function withCallSid(string $callSid): self
     {
         $obj = clone $this;
-        $obj['call_sid'] = $callSid;
+        $obj['callSid'] = $callSid;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class ParticipantParticipantsResponse implements BaseModel
     public function withCoachingCallSid(string $coachingCallSid): self
     {
         $obj = clone $this;
-        $obj['coaching_call_sid'] = $coachingCallSid;
+        $obj['coachingCallSid'] = $coachingCallSid;
 
         return $obj;
     }
@@ -171,7 +171,7 @@ final class ParticipantParticipantsResponse implements BaseModel
     public function withEndConferenceOnExit(bool $endConferenceOnExit): self
     {
         $obj = clone $this;
-        $obj['end_conference_on_exit'] = $endConferenceOnExit;
+        $obj['endConferenceOnExit'] = $endConferenceOnExit;
 
         return $obj;
     }

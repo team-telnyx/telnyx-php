@@ -11,9 +11,9 @@ use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateResponse\Data\CallForwardin
 
 /**
  * @phpstan-type CallForwardingShape = array{
- *   call_forwarding_enabled?: bool|null,
- *   forwarding_type?: value-of<ForwardingType>|null,
- *   forwards_to?: string|null,
+ *   callForwardingEnabled?: bool|null,
+ *   forwardingType?: value-of<ForwardingType>|null,
+ *   forwardsTo?: string|null,
  * }
  */
 final class CallForwarding implements BaseModel
@@ -21,15 +21,15 @@ final class CallForwarding implements BaseModel
     /** @use SdkModel<CallForwardingShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?bool $call_forwarding_enabled;
+    #[Optional('call_forwarding_enabled')]
+    public ?bool $callForwardingEnabled;
 
-    /** @var value-of<ForwardingType>|null $forwarding_type */
-    #[Optional(enum: ForwardingType::class, nullable: true)]
-    public ?string $forwarding_type;
+    /** @var value-of<ForwardingType>|null $forwardingType */
+    #[Optional('forwarding_type', enum: ForwardingType::class, nullable: true)]
+    public ?string $forwardingType;
 
-    #[Optional(nullable: true)]
-    public ?string $forwards_to;
+    #[Optional('forwards_to', nullable: true)]
+    public ?string $forwardsTo;
 
     public function __construct()
     {
@@ -41,18 +41,18 @@ final class CallForwarding implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ForwardingType|value-of<ForwardingType>|null $forwarding_type
+     * @param ForwardingType|value-of<ForwardingType>|null $forwardingType
      */
     public static function with(
-        ?bool $call_forwarding_enabled = null,
-        ForwardingType|string|null $forwarding_type = null,
-        ?string $forwards_to = null,
+        ?bool $callForwardingEnabled = null,
+        ForwardingType|string|null $forwardingType = null,
+        ?string $forwardsTo = null,
     ): self {
         $obj = new self;
 
-        null !== $call_forwarding_enabled && $obj['call_forwarding_enabled'] = $call_forwarding_enabled;
-        null !== $forwarding_type && $obj['forwarding_type'] = $forwarding_type;
-        null !== $forwards_to && $obj['forwards_to'] = $forwards_to;
+        null !== $callForwardingEnabled && $obj['callForwardingEnabled'] = $callForwardingEnabled;
+        null !== $forwardingType && $obj['forwardingType'] = $forwardingType;
+        null !== $forwardsTo && $obj['forwardsTo'] = $forwardsTo;
 
         return $obj;
     }
@@ -60,7 +60,7 @@ final class CallForwarding implements BaseModel
     public function withCallForwardingEnabled(bool $callForwardingEnabled): self
     {
         $obj = clone $this;
-        $obj['call_forwarding_enabled'] = $callForwardingEnabled;
+        $obj['callForwardingEnabled'] = $callForwardingEnabled;
 
         return $obj;
     }
@@ -72,7 +72,7 @@ final class CallForwarding implements BaseModel
         ForwardingType|string|null $forwardingType
     ): self {
         $obj = clone $this;
-        $obj['forwarding_type'] = $forwardingType;
+        $obj['forwardingType'] = $forwardingType;
 
         return $obj;
     }
@@ -80,7 +80,7 @@ final class CallForwarding implements BaseModel
     public function withForwardsTo(?string $forwardsTo): self
     {
         $obj = clone $this;
-        $obj['forwards_to'] = $forwardsTo;
+        $obj['forwardsTo'] = $forwardsTo;
 
         return $obj;
     }

@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Brand\ExternalVettingService::order()
  *
  * @phpstan-type ExternalVettingOrderParamsShape = array{
- *   evpId: string, vettingClass: string
+ *   evpID: string, vettingClass: string
  * }
  */
 final class ExternalVettingOrderParams implements BaseModel
@@ -27,8 +27,8 @@ final class ExternalVettingOrderParams implements BaseModel
     /**
      * External vetting provider ID for the brand.
      */
-    #[Required]
-    public string $evpId;
+    #[Required('evpId')]
+    public string $evpID;
 
     /**
      * Identifies the vetting classification.
@@ -41,7 +41,7 @@ final class ExternalVettingOrderParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * ExternalVettingOrderParams::with(evpId: ..., vettingClass: ...)
+     * ExternalVettingOrderParams::with(evpID: ..., vettingClass: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -60,11 +60,11 @@ final class ExternalVettingOrderParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $evpId, string $vettingClass): self
+    public static function with(string $evpID, string $vettingClass): self
     {
         $obj = new self;
 
-        $obj['evpId'] = $evpId;
+        $obj['evpID'] = $evpID;
         $obj['vettingClass'] = $vettingClass;
 
         return $obj;
@@ -76,7 +76,7 @@ final class ExternalVettingOrderParams implements BaseModel
     public function withEvpID(string $evpID): self
     {
         $obj = clone $this;
-        $obj['evpId'] = $evpID;
+        $obj['evpID'] = $evpID;
 
         return $obj;
     }

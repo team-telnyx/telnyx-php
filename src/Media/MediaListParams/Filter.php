@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[content_type][].
  *
- * @phpstan-type FilterShape = array{content_type?: list<string>|null}
+ * @phpstan-type FilterShape = array{contentType?: list<string>|null}
  */
 final class Filter implements BaseModel
 {
@@ -21,10 +21,10 @@ final class Filter implements BaseModel
     /**
      * Filters files by given content types.
      *
-     * @var list<string>|null $content_type
+     * @var list<string>|null $contentType
      */
-    #[Optional(list: 'string')]
-    public ?array $content_type;
+    #[Optional('content_type', list: 'string')]
+    public ?array $contentType;
 
     public function __construct()
     {
@@ -36,13 +36,13 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $content_type
+     * @param list<string> $contentType
      */
-    public static function with(?array $content_type = null): self
+    public static function with(?array $contentType = null): self
     {
         $obj = new self;
 
-        null !== $content_type && $obj['content_type'] = $content_type;
+        null !== $contentType && $obj['contentType'] = $contentType;
 
         return $obj;
     }
@@ -55,7 +55,7 @@ final class Filter implements BaseModel
     public function withContentType(array $contentType): self
     {
         $obj = clone $this;
-        $obj['content_type'] = $contentType;
+        $obj['contentType'] = $contentType;
 
         return $obj;
     }

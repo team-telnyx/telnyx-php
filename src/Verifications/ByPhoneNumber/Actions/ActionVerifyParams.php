@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Verifications\ByPhoneNumber\ActionsService::verify()
  *
  * @phpstan-type ActionVerifyParamsShape = array{
- *   code: string, verify_profile_id: string
+ *   code: string, verifyProfileID: string
  * }
  */
 final class ActionVerifyParams implements BaseModel
@@ -33,15 +33,15 @@ final class ActionVerifyParams implements BaseModel
     /**
      * The identifier of the associated Verify profile.
      */
-    #[Required]
-    public string $verify_profile_id;
+    #[Required('verify_profile_id')]
+    public string $verifyProfileID;
 
     /**
      * `new ActionVerifyParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ActionVerifyParams::with(code: ..., verify_profile_id: ...)
+     * ActionVerifyParams::with(code: ..., verifyProfileID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -60,12 +60,12 @@ final class ActionVerifyParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $code, string $verify_profile_id): self
+    public static function with(string $code, string $verifyProfileID): self
     {
         $obj = new self;
 
         $obj['code'] = $code;
-        $obj['verify_profile_id'] = $verify_profile_id;
+        $obj['verifyProfileID'] = $verifyProfileID;
 
         return $obj;
     }
@@ -87,7 +87,7 @@ final class ActionVerifyParams implements BaseModel
     public function withVerifyProfileID(string $verifyProfileID): self
     {
         $obj = clone $this;
-        $obj['verify_profile_id'] = $verifyProfileID;
+        $obj['verifyProfileID'] = $verifyProfileID;
 
         return $obj;
     }

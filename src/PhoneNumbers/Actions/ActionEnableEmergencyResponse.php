@@ -40,19 +40,19 @@ final class ActionEnableEmergencyResponse implements BaseModel
      *
      * @param PhoneNumberWithVoiceSettings|array{
      *   id?: string|null,
-     *   call_forwarding?: CallForwarding|null,
-     *   call_recording?: CallRecording|null,
-     *   cnam_listing?: CnamListing|null,
-     *   connection_id?: string|null,
-     *   customer_reference?: string|null,
+     *   callForwarding?: CallForwarding|null,
+     *   callRecording?: CallRecording|null,
+     *   cnamListing?: CnamListing|null,
+     *   connectionID?: string|null,
+     *   customerReference?: string|null,
      *   emergency?: Emergency|null,
-     *   inbound_call_screening?: value-of<InboundCallScreening>|null,
-     *   media_features?: MediaFeatures|null,
-     *   phone_number?: string|null,
-     *   record_type?: string|null,
-     *   tech_prefix_enabled?: bool|null,
-     *   translated_number?: string|null,
-     *   usage_payment_method?: value-of<UsagePaymentMethod>|null,
+     *   inboundCallScreening?: value-of<InboundCallScreening>|null,
+     *   mediaFeatures?: MediaFeatures|null,
+     *   phoneNumber?: string|null,
+     *   recordType?: string|null,
+     *   techPrefixEnabled?: bool|null,
+     *   translatedNumber?: string|null,
+     *   usagePaymentMethod?: value-of<UsagePaymentMethod>|null,
      * } $data
      */
     public static function with(
@@ -68,19 +68,19 @@ final class ActionEnableEmergencyResponse implements BaseModel
     /**
      * @param PhoneNumberWithVoiceSettings|array{
      *   id?: string|null,
-     *   call_forwarding?: CallForwarding|null,
-     *   call_recording?: CallRecording|null,
-     *   cnam_listing?: CnamListing|null,
-     *   connection_id?: string|null,
-     *   customer_reference?: string|null,
+     *   callForwarding?: CallForwarding|null,
+     *   callRecording?: CallRecording|null,
+     *   cnamListing?: CnamListing|null,
+     *   connectionID?: string|null,
+     *   customerReference?: string|null,
      *   emergency?: Emergency|null,
-     *   inbound_call_screening?: value-of<InboundCallScreening>|null,
-     *   media_features?: MediaFeatures|null,
-     *   phone_number?: string|null,
-     *   record_type?: string|null,
-     *   tech_prefix_enabled?: bool|null,
-     *   translated_number?: string|null,
-     *   usage_payment_method?: value-of<UsagePaymentMethod>|null,
+     *   inboundCallScreening?: value-of<InboundCallScreening>|null,
+     *   mediaFeatures?: MediaFeatures|null,
+     *   phoneNumber?: string|null,
+     *   recordType?: string|null,
+     *   techPrefixEnabled?: bool|null,
+     *   translatedNumber?: string|null,
+     *   usagePaymentMethod?: value-of<UsagePaymentMethod>|null,
      * } $data
      */
     public function withData(PhoneNumberWithVoiceSettings|array $data): self

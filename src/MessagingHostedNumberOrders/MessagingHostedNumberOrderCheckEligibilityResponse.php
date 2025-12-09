@@ -12,7 +12,7 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilit
 
 /**
  * @phpstan-type MessagingHostedNumberOrderCheckEligibilityResponseShape = array{
- *   phone_numbers?: list<PhoneNumber>|null
+ *   phoneNumbers?: list<PhoneNumber>|null
  * }
  */
 final class MessagingHostedNumberOrderCheckEligibilityResponse implements BaseModel
@@ -23,10 +23,10 @@ final class MessagingHostedNumberOrderCheckEligibilityResponse implements BaseMo
     /**
      * List of phone numbers with their eligibility status.
      *
-     * @var list<PhoneNumber>|null $phone_numbers
+     * @var list<PhoneNumber>|null $phoneNumbers
      */
-    #[Optional(list: PhoneNumber::class)]
-    public ?array $phone_numbers;
+    #[Optional('phone_numbers', list: PhoneNumber::class)]
+    public ?array $phoneNumbers;
 
     public function __construct()
     {
@@ -41,15 +41,15 @@ final class MessagingHostedNumberOrderCheckEligibilityResponse implements BaseMo
      * @param list<PhoneNumber|array{
      *   detail?: string|null,
      *   eligible?: bool|null,
-     *   eligible_status?: value-of<EligibleStatus>|null,
-     *   phone_number?: string|null,
-     * }> $phone_numbers
+     *   eligibleStatus?: value-of<EligibleStatus>|null,
+     *   phoneNumber?: string|null,
+     * }> $phoneNumbers
      */
-    public static function with(?array $phone_numbers = null): self
+    public static function with(?array $phoneNumbers = null): self
     {
         $obj = new self;
 
-        null !== $phone_numbers && $obj['phone_numbers'] = $phone_numbers;
+        null !== $phoneNumbers && $obj['phoneNumbers'] = $phoneNumbers;
 
         return $obj;
     }
@@ -60,14 +60,14 @@ final class MessagingHostedNumberOrderCheckEligibilityResponse implements BaseMo
      * @param list<PhoneNumber|array{
      *   detail?: string|null,
      *   eligible?: bool|null,
-     *   eligible_status?: value-of<EligibleStatus>|null,
-     *   phone_number?: string|null,
+     *   eligibleStatus?: value-of<EligibleStatus>|null,
+     *   phoneNumber?: string|null,
      * }> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj['phone_numbers'] = $phoneNumbers;
+        $obj['phoneNumbers'] = $phoneNumbers;
 
         return $obj;
     }

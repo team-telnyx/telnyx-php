@@ -57,7 +57,7 @@ final class DocumentsService implements DocumentsContract
      * Update a document.
      *
      * @param array{
-     *   customer_reference?: string, filename?: string
+     *   customerReference?: string, filename?: string
      * }|DocumentUpdateParams $params
      *
      * @throws APIException
@@ -91,10 +91,10 @@ final class DocumentsService implements DocumentsContract
      *
      * @param array{
      *   filter?: array{
-     *     created_at?: array{
+     *     createdAt?: array{
      *       gt?: string|\DateTimeInterface, lt?: string|\DateTimeInterface
      *     },
-     *     customer_reference?: array{eq?: string, in?: list<string>},
+     *     customerReference?: array{eq?: string, in?: list<string>},
      *     filename?: array{contains?: string},
      *   },
      *   page?: array{number?: int, size?: int},
@@ -196,10 +196,14 @@ final class DocumentsService implements DocumentsContract
      *
      * Upload a document.<br /><br />Uploaded files must be linked to a service within 30 minutes or they will be automatically deleted.
      *
+     * @param array{
+     *   url: string, customerReference?: string, filename?: string, file: string
+     * }|DocumentUploadParams $params
+     *
      * @throws APIException
      */
     public function upload(
-        mixed $params,
+        array|DocumentUploadParams $params,
         ?RequestOptions $requestOptions = null
     ): DocumentUploadResponse {
         [$parsed, $options] = DocumentUploadParams::parseRequest(
@@ -224,11 +228,15 @@ final class DocumentsService implements DocumentsContract
      *
      * Upload a document.<br /><br />Uploaded files must be linked to a service within 30 minutes or they will be automatically deleted.
      *
+     * @param array{
+     *   url: string, customerReference?: string, filename?: string, file: string
+     * }|DocumentUploadJsonParams $params
+     *
      * @throws APIException
      */
     public function uploadJson(
-        mixed $params,
-        ?RequestOptions $requestOptions = null
+        array|DocumentUploadJsonParams $params,
+        ?RequestOptions $requestOptions = null,
     ): DocumentUploadJsonResponse {
         [$parsed, $options] = DocumentUploadJsonParams::parseRequest(
             $params,

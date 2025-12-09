@@ -52,9 +52,9 @@ final class ConnectionsService implements ConnectionsContract
      *
      * @param array{
      *   filter?: array{
-     *     connection_name?: array{contains?: string},
+     *     connectionName?: array{contains?: string},
      *     fqdn?: string,
-     *     outbound_voice_profile_id?: string,
+     *     outboundVoiceProfileID?: string,
      *   },
      *   page?: array{number?: int, size?: int},
      *   sort?: 'created_at'|'connection_name'|'active'|Sort,

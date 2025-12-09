@@ -47,11 +47,11 @@ final class ChargesBreakdownGetResponse implements BaseModel
      *
      * @param Data|array{
      *   currency: string,
-     *   end_date: \DateTimeInterface,
+     *   endDate: \DateTimeInterface,
      *   results: list<Result>,
-     *   start_date: \DateTimeInterface,
-     *   user_email: string,
-     *   user_id: string,
+     *   startDate: \DateTimeInterface,
+     *   userEmail: string,
+     *   userID: string,
      * } $data
      */
     public static function with(Data|array $data): self
@@ -66,11 +66,11 @@ final class ChargesBreakdownGetResponse implements BaseModel
     /**
      * @param Data|array{
      *   currency: string,
-     *   end_date: \DateTimeInterface,
+     *   endDate: \DateTimeInterface,
      *   results: list<Result>,
-     *   start_date: \DateTimeInterface,
-     *   user_email: string,
-     *   user_id: string,
+     *   startDate: \DateTimeInterface,
+     *   userEmail: string,
+     *   userID: string,
      * } $data
      */
     public function withData(Data|array $data): self

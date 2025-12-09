@@ -34,9 +34,9 @@ final class ActionGenerateJoinClientTokenResponse implements BaseModel
      *
      * @param Data|array{
      *   token?: string|null,
-     *   refresh_token?: string|null,
-     *   refresh_token_expires_at?: \DateTimeInterface|null,
-     *   token_expires_at?: \DateTimeInterface|null,
+     *   refreshToken?: string|null,
+     *   refreshTokenExpiresAt?: \DateTimeInterface|null,
+     *   tokenExpiresAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -51,9 +51,9 @@ final class ActionGenerateJoinClientTokenResponse implements BaseModel
     /**
      * @param Data|array{
      *   token?: string|null,
-     *   refresh_token?: string|null,
-     *   refresh_token_expires_at?: \DateTimeInterface|null,
-     *   token_expires_at?: \DateTimeInterface|null,
+     *   refreshToken?: string|null,
+     *   refreshTokenExpiresAt?: \DateTimeInterface|null,
+     *   tokenExpiresAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(Data|array $data): self

@@ -12,13 +12,13 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   created_at: \DateTimeInterface,
+ *   createdAt: \DateTimeInterface,
  *   status: value-of<BackgroundTaskStatus>,
- *   task_id: string,
- *   task_name: string,
- *   user_id: string,
+ *   taskID: string,
+ *   taskName: string,
+ *   userID: string,
  *   bucket?: string|null,
- *   finished_at?: \DateTimeInterface|null,
+ *   finishedAt?: \DateTimeInterface|null,
  * }
  */
 final class Data implements BaseModel
@@ -26,8 +26,8 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Required]
-    public \DateTimeInterface $created_at;
+    #[Required('created_at')]
+    public \DateTimeInterface $createdAt;
 
     /**
      * Status of an embeddings task.
@@ -37,29 +37,27 @@ final class Data implements BaseModel
     #[Required(enum: BackgroundTaskStatus::class)]
     public string $status;
 
-    #[Required]
-    public string $task_id;
+    #[Required('task_id')]
+    public string $taskID;
 
-    #[Required]
-    public string $task_name;
+    #[Required('task_name')]
+    public string $taskName;
 
-    #[Required]
-    public string $user_id;
+    #[Required('user_id')]
+    public string $userID;
 
     #[Optional]
     public ?string $bucket;
 
-    #[Optional]
-    public ?\DateTimeInterface $finished_at;
+    #[Optional('finished_at')]
+    public ?\DateTimeInterface $finishedAt;
 
     /**
      * `new Data()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Data::with(
-     *   created_at: ..., status: ..., task_id: ..., task_name: ..., user_id: ...
-     * )
+     * Data::with(createdAt: ..., status: ..., taskID: ..., taskName: ..., userID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -86,24 +84,24 @@ final class Data implements BaseModel
      * @param BackgroundTaskStatus|value-of<BackgroundTaskStatus> $status
      */
     public static function with(
-        \DateTimeInterface $created_at,
+        \DateTimeInterface $createdAt,
         BackgroundTaskStatus|string $status,
-        string $task_id,
-        string $task_name,
-        string $user_id,
+        string $taskID,
+        string $taskName,
+        string $userID,
         ?string $bucket = null,
-        ?\DateTimeInterface $finished_at = null,
+        ?\DateTimeInterface $finishedAt = null,
     ): self {
         $obj = new self;
 
-        $obj['created_at'] = $created_at;
+        $obj['createdAt'] = $createdAt;
         $obj['status'] = $status;
-        $obj['task_id'] = $task_id;
-        $obj['task_name'] = $task_name;
-        $obj['user_id'] = $user_id;
+        $obj['taskID'] = $taskID;
+        $obj['taskName'] = $taskName;
+        $obj['userID'] = $userID;
 
         null !== $bucket && $obj['bucket'] = $bucket;
-        null !== $finished_at && $obj['finished_at'] = $finished_at;
+        null !== $finishedAt && $obj['finishedAt'] = $finishedAt;
 
         return $obj;
     }
@@ -111,7 +109,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -132,7 +130,7 @@ final class Data implements BaseModel
     public function withTaskID(string $taskID): self
     {
         $obj = clone $this;
-        $obj['task_id'] = $taskID;
+        $obj['taskID'] = $taskID;
 
         return $obj;
     }
@@ -140,7 +138,7 @@ final class Data implements BaseModel
     public function withTaskName(string $taskName): self
     {
         $obj = clone $this;
-        $obj['task_name'] = $taskName;
+        $obj['taskName'] = $taskName;
 
         return $obj;
     }
@@ -148,7 +146,7 @@ final class Data implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj['user_id'] = $userID;
+        $obj['userID'] = $userID;
 
         return $obj;
     }
@@ -164,7 +162,7 @@ final class Data implements BaseModel
     public function withFinishedAt(\DateTimeInterface $finishedAt): self
     {
         $obj = clone $this;
-        $obj['finished_at'] = $finishedAt;
+        $obj['finishedAt'] = $finishedAt;
 
         return $obj;
     }

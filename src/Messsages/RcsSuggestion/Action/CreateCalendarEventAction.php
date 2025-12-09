@@ -13,8 +13,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type CreateCalendarEventActionShape = array{
  *   description?: string|null,
- *   end_time?: \DateTimeInterface|null,
- *   start_time?: \DateTimeInterface|null,
+ *   endTime?: \DateTimeInterface|null,
+ *   startTime?: \DateTimeInterface|null,
  *   title?: string|null,
  * }
  */
@@ -29,11 +29,11 @@ final class CreateCalendarEventAction implements BaseModel
     #[Optional]
     public ?string $description;
 
-    #[Optional]
-    public ?\DateTimeInterface $end_time;
+    #[Optional('end_time')]
+    public ?\DateTimeInterface $endTime;
 
-    #[Optional]
-    public ?\DateTimeInterface $start_time;
+    #[Optional('start_time')]
+    public ?\DateTimeInterface $startTime;
 
     /**
      * Event title. Maximum 100 characters.
@@ -53,15 +53,15 @@ final class CreateCalendarEventAction implements BaseModel
      */
     public static function with(
         ?string $description = null,
-        ?\DateTimeInterface $end_time = null,
-        ?\DateTimeInterface $start_time = null,
+        ?\DateTimeInterface $endTime = null,
+        ?\DateTimeInterface $startTime = null,
         ?string $title = null,
     ): self {
         $obj = new self;
 
         null !== $description && $obj['description'] = $description;
-        null !== $end_time && $obj['end_time'] = $end_time;
-        null !== $start_time && $obj['start_time'] = $start_time;
+        null !== $endTime && $obj['endTime'] = $endTime;
+        null !== $startTime && $obj['startTime'] = $startTime;
         null !== $title && $obj['title'] = $title;
 
         return $obj;
@@ -81,7 +81,7 @@ final class CreateCalendarEventAction implements BaseModel
     public function withEndTime(\DateTimeInterface $endTime): self
     {
         $obj = clone $this;
-        $obj['end_time'] = $endTime;
+        $obj['endTime'] = $endTime;
 
         return $obj;
     }
@@ -89,7 +89,7 @@ final class CreateCalendarEventAction implements BaseModel
     public function withStartTime(\DateTimeInterface $startTime): self
     {
         $obj = clone $this;
-        $obj['start_time'] = $startTime;
+        $obj['startTime'] = $startTime;
 
         return $obj;
     }

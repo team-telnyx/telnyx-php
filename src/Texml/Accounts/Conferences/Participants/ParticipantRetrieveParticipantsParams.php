@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Texml\Accounts\Conferences\ParticipantsService::retrieveParticipants()
  *
  * @phpstan-type ParticipantRetrieveParticipantsParamsShape = array{
- *   account_sid: string
+ *   accountSid: string
  * }
  */
 final class ParticipantRetrieveParticipantsParams implements BaseModel
@@ -25,14 +25,14 @@ final class ParticipantRetrieveParticipantsParams implements BaseModel
     use SdkParams;
 
     #[Required]
-    public string $account_sid;
+    public string $accountSid;
 
     /**
      * `new ParticipantRetrieveParticipantsParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ParticipantRetrieveParticipantsParams::with(account_sid: ...)
+     * ParticipantRetrieveParticipantsParams::with(accountSid: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -51,11 +51,11 @@ final class ParticipantRetrieveParticipantsParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $account_sid): self
+    public static function with(string $accountSid): self
     {
         $obj = new self;
 
-        $obj['account_sid'] = $account_sid;
+        $obj['accountSid'] = $accountSid;
 
         return $obj;
     }
@@ -63,7 +63,7 @@ final class ParticipantRetrieveParticipantsParams implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj['account_sid'] = $accountSid;
+        $obj['accountSid'] = $accountSid;
 
         return $obj;
     }

@@ -34,10 +34,10 @@ final class CommentNewResponse implements BaseModel
      * @param Data|array{
      *   id?: string|null,
      *   body?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   porting_order_id?: string|null,
-     *   record_type?: string|null,
-     *   user_type?: value-of<UserType>|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   portingOrderID?: string|null,
+     *   recordType?: string|null,
+     *   userType?: value-of<UserType>|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -53,10 +53,10 @@ final class CommentNewResponse implements BaseModel
      * @param Data|array{
      *   id?: string|null,
      *   body?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   porting_order_id?: string|null,
-     *   record_type?: string|null,
-     *   user_type?: value-of<UserType>|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   portingOrderID?: string|null,
+     *   recordType?: string|null,
+     *   userType?: value-of<UserType>|null,
      * } $data
      */
     public function withData(Data|array $data): self

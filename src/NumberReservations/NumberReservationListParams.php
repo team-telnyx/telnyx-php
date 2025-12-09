@@ -19,9 +19,9 @@ use Telnyx\NumberReservations\NumberReservationListParams\Page;
  *
  * @phpstan-type NumberReservationListParamsShape = array{
  *   filter?: Filter|array{
- *     created_at?: CreatedAt|null,
- *     customer_reference?: string|null,
- *     phone_numbers_phone_number?: string|null,
+ *     createdAt?: CreatedAt|null,
+ *     customerReference?: string|null,
+ *     phoneNumbersPhoneNumber?: string|null,
  *     status?: string|null,
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
@@ -56,9 +56,9 @@ final class NumberReservationListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   created_at?: CreatedAt|null,
-     *   customer_reference?: string|null,
-     *   phone_numbers_phone_number?: string|null,
+     *   createdAt?: CreatedAt|null,
+     *   customerReference?: string|null,
+     *   phoneNumbersPhoneNumber?: string|null,
      *   status?: string|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
@@ -79,9 +79,9 @@ final class NumberReservationListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers.phone_number], filter[customer_reference].
      *
      * @param Filter|array{
-     *   created_at?: CreatedAt|null,
-     *   customer_reference?: string|null,
-     *   phone_numbers_phone_number?: string|null,
+     *   createdAt?: CreatedAt|null,
+     *   customerReference?: string|null,
+     *   phoneNumbersPhoneNumber?: string|null,
      *   status?: string|null,
      * } $filter
      */

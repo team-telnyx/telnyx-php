@@ -44,25 +44,25 @@ final class ReportListWdrsResponse implements BaseModel
      * @param list<Data|array{
      *   id?: string|null,
      *   cost?: Cost|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   downlink_data?: DownlinkData|null,
-     *   duration_seconds?: float|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   downlinkData?: DownlinkData|null,
+     *   durationSeconds?: float|null,
      *   imsi?: string|null,
      *   mcc?: string|null,
      *   mnc?: string|null,
-     *   phone_number?: string|null,
+     *   phoneNumber?: string|null,
      *   rate?: Rate|null,
-     *   record_type?: string|null,
-     *   sim_card_id?: string|null,
-     *   sim_group_id?: string|null,
-     *   sim_group_name?: string|null,
-     *   uplink_data?: UplinkData|null,
+     *   recordType?: string|null,
+     *   simCardID?: string|null,
+     *   simGroupID?: string|null,
+     *   simGroupName?: string|null,
+     *   uplinkData?: UplinkData|null,
      * }> $data
      * @param Meta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -81,19 +81,19 @@ final class ReportListWdrsResponse implements BaseModel
      * @param list<Data|array{
      *   id?: string|null,
      *   cost?: Cost|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   downlink_data?: DownlinkData|null,
-     *   duration_seconds?: float|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   downlinkData?: DownlinkData|null,
+     *   durationSeconds?: float|null,
      *   imsi?: string|null,
      *   mcc?: string|null,
      *   mnc?: string|null,
-     *   phone_number?: string|null,
+     *   phoneNumber?: string|null,
      *   rate?: Rate|null,
-     *   record_type?: string|null,
-     *   sim_card_id?: string|null,
-     *   sim_group_id?: string|null,
-     *   sim_group_name?: string|null,
-     *   uplink_data?: UplinkData|null,
+     *   recordType?: string|null,
+     *   simCardID?: string|null,
+     *   simGroupID?: string|null,
+     *   simGroupName?: string|null,
+     *   uplinkData?: UplinkData|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -106,10 +106,10 @@ final class ReportListWdrsResponse implements BaseModel
 
     /**
      * @param Meta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(Meta|array $meta): self

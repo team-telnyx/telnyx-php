@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * The phone numbers successfully updated.
  *
  * @phpstan-type SuccessfulOperationShape = array{
- *   id?: string|null, phone_number?: string|null
+ *   id?: string|null, phoneNumber?: string|null
  * }
  */
 final class SuccessfulOperation implements BaseModel
@@ -29,8 +29,8 @@ final class SuccessfulOperation implements BaseModel
     /**
      * The phone number in e164 format.
      */
-    #[Optional]
-    public ?string $phone_number;
+    #[Optional('phone_number')]
+    public ?string $phoneNumber;
 
     public function __construct()
     {
@@ -44,12 +44,12 @@ final class SuccessfulOperation implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $phone_number = null
+        ?string $phoneNumber = null
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $phone_number && $obj['phone_number'] = $phone_number;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class SuccessfulOperation implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }

@@ -10,9 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   num_objects?: int|null,
+ *   numObjects?: int|null,
  *   size?: int|null,
- *   size_kb?: int|null,
+ *   sizeKB?: int|null,
  *   timestamp?: \DateTimeInterface|null,
  * }
  */
@@ -24,8 +24,8 @@ final class Data implements BaseModel
     /**
      * The number of objects in the bucket.
      */
-    #[Optional]
-    public ?int $num_objects;
+    #[Optional('num_objects')]
+    public ?int $numObjects;
 
     /**
      * The size of the bucket in bytes.
@@ -36,8 +36,8 @@ final class Data implements BaseModel
     /**
      * The size of the bucket in kilobytes.
      */
-    #[Optional]
-    public ?int $size_kb;
+    #[Optional('size_kb')]
+    public ?int $sizeKB;
 
     /**
      * The time the snapshot was taken.
@@ -56,16 +56,16 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?int $num_objects = null,
+        ?int $numObjects = null,
         ?int $size = null,
-        ?int $size_kb = null,
+        ?int $sizeKB = null,
         ?\DateTimeInterface $timestamp = null,
     ): self {
         $obj = new self;
 
-        null !== $num_objects && $obj['num_objects'] = $num_objects;
+        null !== $numObjects && $obj['numObjects'] = $numObjects;
         null !== $size && $obj['size'] = $size;
-        null !== $size_kb && $obj['size_kb'] = $size_kb;
+        null !== $sizeKB && $obj['sizeKB'] = $sizeKB;
         null !== $timestamp && $obj['timestamp'] = $timestamp;
 
         return $obj;
@@ -77,7 +77,7 @@ final class Data implements BaseModel
     public function withNumObjects(int $numObjects): self
     {
         $obj = clone $this;
-        $obj['num_objects'] = $numObjects;
+        $obj['numObjects'] = $numObjects;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class Data implements BaseModel
     public function withSizeKB(int $sizeKB): self
     {
         $obj = clone $this;
-        $obj['size_kb'] = $sizeKB;
+        $obj['sizeKB'] = $sizeKB;
 
         return $obj;
     }

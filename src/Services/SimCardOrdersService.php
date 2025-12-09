@@ -27,7 +27,7 @@ final class SimCardOrdersService implements SimCardOrdersContract
      *
      * Creates a new order for SIM cards.
      *
-     * @param array{address_id: string, quantity: int}|SimCardOrderCreateParams $params
+     * @param array{addressID: string, quantity: int}|SimCardOrderCreateParams $params
      *
      * @throws APIException
      */
@@ -83,17 +83,17 @@ final class SimCardOrdersService implements SimCardOrdersContract
      *   filter?: array{
      *     address?: array{
      *       id?: string,
-     *       administrative_area?: string,
-     *       country_code?: string,
-     *       extended_address?: string,
+     *       administrativeArea?: string,
+     *       countryCode?: string,
+     *       extendedAddress?: string,
      *       locality?: string,
-     *       postal_code?: string,
-     *       street_address?: string,
+     *       postalCode?: string,
+     *       streetAddress?: string,
      *     },
      *     cost?: array{amount?: string, currency?: string},
-     *     created_at?: string|\DateTimeInterface,
+     *     createdAt?: string|\DateTimeInterface,
      *     quantity?: int,
-     *     updated_at?: string|\DateTimeInterface,
+     *     updatedAt?: string|\DateTimeInterface,
      *   },
      *   page?: array{number?: int, size?: int},
      * }|SimCardOrderListParams $params

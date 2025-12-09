@@ -11,7 +11,7 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesRe
 
 /**
  * @phpstan-type PhoneNumberShape = array{
- *   phone_number: string, status: value-of<Status>
+ *   phoneNumber: string, status: value-of<Status>
  * }
  */
 final class PhoneNumber implements BaseModel
@@ -19,8 +19,8 @@ final class PhoneNumber implements BaseModel
     /** @use SdkModel<PhoneNumberShape> */
     use SdkModel;
 
-    #[Required]
-    public string $phone_number;
+    #[Required('phone_number')]
+    public string $phoneNumber;
 
     /** @var value-of<Status> $status */
     #[Required(enum: Status::class)]
@@ -31,7 +31,7 @@ final class PhoneNumber implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * PhoneNumber::with(phone_number: ..., status: ...)
+     * PhoneNumber::with(phoneNumber: ..., status: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -53,12 +53,12 @@ final class PhoneNumber implements BaseModel
      * @param Status|value-of<Status> $status
      */
     public static function with(
-        string $phone_number,
+        string $phoneNumber,
         Status|string $status
     ): self {
         $obj = new self;
 
-        $obj['phone_number'] = $phone_number;
+        $obj['phoneNumber'] = $phoneNumber;
         $obj['status'] = $status;
 
         return $obj;
@@ -67,7 +67,7 @@ final class PhoneNumber implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }

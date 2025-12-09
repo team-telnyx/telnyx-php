@@ -49,7 +49,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   reason?: string|null,
  *   termsAndConditionURL?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
- *   webhookUrl?: string|null,
+ *   webhookURL?: string|null,
  * }
  */
 final class VerificationRequestStatus implements BaseModel
@@ -187,8 +187,8 @@ final class VerificationRequestStatus implements BaseModel
     #[Optional]
     public ?\DateTimeInterface $updatedAt;
 
-    #[Optional]
-    public ?string $webhookUrl;
+    #[Optional('webhookUrl')]
+    public ?string $webhookURL;
 
     /**
      * `new VerificationRequestStatus()` is missing required properties by the API.
@@ -301,7 +301,7 @@ final class VerificationRequestStatus implements BaseModel
         ?string $reason = null,
         ?string $termsAndConditionURL = null,
         ?\DateTimeInterface $updatedAt = null,
-        ?string $webhookUrl = null,
+        ?string $webhookURL = null,
     ): self {
         $obj = new self;
 
@@ -342,7 +342,7 @@ final class VerificationRequestStatus implements BaseModel
         null !== $reason && $obj['reason'] = $reason;
         null !== $termsAndConditionURL && $obj['termsAndConditionURL'] = $termsAndConditionURL;
         null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
-        null !== $webhookUrl && $obj['webhookUrl'] = $webhookUrl;
+        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
 
         return $obj;
     }
@@ -675,7 +675,7 @@ final class VerificationRequestStatus implements BaseModel
     public function withWebhookURL(string $webhookURL): self
     {
         $obj = clone $this;
-        $obj['webhookUrl'] = $webhookURL;
+        $obj['webhookURL'] = $webhookURL;
 
         return $obj;
     }

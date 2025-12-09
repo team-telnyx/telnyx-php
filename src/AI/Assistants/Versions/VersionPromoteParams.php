@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\Assistants\VersionsService::promote()
  *
- * @phpstan-type VersionPromoteParamsShape = array{assistant_id: string}
+ * @phpstan-type VersionPromoteParamsShape = array{assistantID: string}
  */
 final class VersionPromoteParams implements BaseModel
 {
@@ -23,14 +23,14 @@ final class VersionPromoteParams implements BaseModel
     use SdkParams;
 
     #[Required]
-    public string $assistant_id;
+    public string $assistantID;
 
     /**
      * `new VersionPromoteParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * VersionPromoteParams::with(assistant_id: ...)
+     * VersionPromoteParams::with(assistantID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -49,11 +49,11 @@ final class VersionPromoteParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $assistant_id): self
+    public static function with(string $assistantID): self
     {
         $obj = new self;
 
-        $obj['assistant_id'] = $assistant_id;
+        $obj['assistantID'] = $assistantID;
 
         return $obj;
     }
@@ -61,7 +61,7 @@ final class VersionPromoteParams implements BaseModel
     public function withAssistantID(string $assistantID): self
     {
         $obj = clone $this;
-        $obj['assistant_id'] = $assistantID;
+        $obj['assistantID'] = $assistantID;
 
         return $obj;
     }

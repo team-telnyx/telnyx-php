@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type PaginationResponseShape = array{
- *   page_number: int, page_size: int, total_pages: int, total_results: int
+ *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
  * }
  */
 final class PaginationResponse implements BaseModel
@@ -21,26 +21,26 @@ final class PaginationResponse implements BaseModel
     /**
      * The current page number.
      */
-    #[Required]
-    public int $page_number;
+    #[Required('page_number')]
+    public int $pageNumber;
 
     /**
      * The number of results per page.
      */
-    #[Required]
-    public int $page_size;
+    #[Required('page_size')]
+    public int $pageSize;
 
     /**
      * Total number of pages from the results.
      */
-    #[Required]
-    public int $total_pages;
+    #[Required('total_pages')]
+    public int $totalPages;
 
     /**
      * Total number of results returned.
      */
-    #[Required]
-    public int $total_results;
+    #[Required('total_results')]
+    public int $totalResults;
 
     /**
      * `new PaginationResponse()` is missing required properties by the API.
@@ -48,7 +48,7 @@ final class PaginationResponse implements BaseModel
      * To enforce required parameters use
      * ```
      * PaginationResponse::with(
-     *   page_number: ..., page_size: ..., total_pages: ..., total_results: ...
+     *   pageNumber: ..., pageSize: ..., totalPages: ..., totalResults: ...
      * )
      * ```
      *
@@ -73,17 +73,17 @@ final class PaginationResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        int $page_number,
-        int $page_size,
-        int $total_pages,
-        int $total_results
+        int $pageNumber,
+        int $pageSize,
+        int $totalPages,
+        int $totalResults
     ): self {
         $obj = new self;
 
-        $obj['page_number'] = $page_number;
-        $obj['page_size'] = $page_size;
-        $obj['total_pages'] = $total_pages;
-        $obj['total_results'] = $total_results;
+        $obj['pageNumber'] = $pageNumber;
+        $obj['pageSize'] = $pageSize;
+        $obj['totalPages'] = $totalPages;
+        $obj['totalResults'] = $totalResults;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class PaginationResponse implements BaseModel
     public function withPageNumber(int $pageNumber): self
     {
         $obj = clone $this;
-        $obj['page_number'] = $pageNumber;
+        $obj['pageNumber'] = $pageNumber;
 
         return $obj;
     }
@@ -105,7 +105,7 @@ final class PaginationResponse implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj['page_size'] = $pageSize;
+        $obj['pageSize'] = $pageSize;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class PaginationResponse implements BaseModel
     public function withTotalPages(int $totalPages): self
     {
         $obj = clone $this;
-        $obj['total_pages'] = $totalPages;
+        $obj['totalPages'] = $totalPages;
 
         return $obj;
     }
@@ -127,7 +127,7 @@ final class PaginationResponse implements BaseModel
     public function withTotalResults(int $totalResults): self
     {
         $obj = clone $this;
-        $obj['total_results'] = $totalResults;
+        $obj['totalResults'] = $totalResults;
 
         return $obj;
     }

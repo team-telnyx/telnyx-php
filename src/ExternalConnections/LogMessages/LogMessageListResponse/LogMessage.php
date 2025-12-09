@@ -65,9 +65,9 @@ final class LogMessage implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Meta|array{
-     *   external_connection_id?: string|null,
-     *   telephone_number?: string|null,
-     *   ticket_id?: string|null,
+     *   externalConnectionID?: string|null,
+     *   telephoneNumber?: string|null,
+     *   ticketID?: string|null,
      * } $meta
      * @param Source|array{pointer?: string|null} $source
      */
@@ -116,9 +116,9 @@ final class LogMessage implements BaseModel
 
     /**
      * @param Meta|array{
-     *   external_connection_id?: string|null,
-     *   telephone_number?: string|null,
-     *   ticket_id?: string|null,
+     *   externalConnectionID?: string|null,
+     *   telephoneNumber?: string|null,
+     *   ticketID?: string|null,
      * } $meta
      */
     public function withMeta(Meta|array $meta): self

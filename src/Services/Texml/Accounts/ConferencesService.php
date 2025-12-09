@@ -7,6 +7,7 @@ namespace Telnyx\Services\Texml\Accounts;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\ConferencesContract;
 use Telnyx\Services\Texml\Accounts\Conferences\ParticipantsService;
@@ -43,7 +44,7 @@ final class ConferencesService implements ConferencesContract
      *
      * Returns a conference resource.
      *
-     * @param array{account_sid: string}|ConferenceRetrieveParams $params
+     * @param array{accountSid: string}|ConferenceRetrieveParams $params
      *
      * @throws APIException
      */
@@ -56,8 +57,8 @@ final class ConferencesService implements ConferencesContract
             $params,
             $requestOptions,
         );
-        $accountSid = $parsed['account_sid'];
-        unset($parsed['account_sid']);
+        $accountSid = $parsed['accountSid'];
+        unset($parsed['accountSid']);
 
         /** @var BaseResponse<ConferenceGetResponse> */
         $response = $this->client->request(
@@ -78,10 +79,10 @@ final class ConferencesService implements ConferencesContract
      * Updates a conference resource.
      *
      * @param array{
-     *   account_sid: string,
-     *   AnnounceMethod?: 'GET'|'POST'|AnnounceMethod,
-     *   AnnounceUrl?: string,
-     *   Status?: string,
+     *   accountSid: string,
+     *   announceMethod?: 'GET'|'POST'|AnnounceMethod,
+     *   announceURL?: string,
+     *   status?: string,
      * }|ConferenceUpdateParams $params
      *
      * @throws APIException
@@ -95,8 +96,8 @@ final class ConferencesService implements ConferencesContract
             $params,
             $requestOptions,
         );
-        $accountSid = $parsed['account_sid'];
-        unset($parsed['account_sid']);
+        $accountSid = $parsed['accountSid'];
+        unset($parsed['accountSid']);
 
         /** @var BaseResponse<ConferenceUpdateResponse> */
         $response = $this->client->request(
@@ -105,7 +106,7 @@ final class ConferencesService implements ConferencesContract
                 'texml/Accounts/%1$s/Conferences/%2$s', $accountSid, $conferenceSid,
             ],
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
-            body: (object) array_diff_key($parsed, ['account_sid']),
+            body: (object) array_diff_key($parsed, ['accountSid']),
             options: $options,
             convert: ConferenceUpdateResponse::class,
         );
@@ -119,13 +120,13 @@ final class ConferencesService implements ConferencesContract
      * Lists conference resources.
      *
      * @param array{
-     *   DateCreated?: string,
-     *   DateUpdated?: string,
-     *   FriendlyName?: string,
-     *   Page?: int,
-     *   PageSize?: int,
-     *   PageToken?: string,
-     *   Status?: 'init'|'in-progress'|'completed'|Status,
+     *   dateCreated?: string,
+     *   dateUpdated?: string,
+     *   friendlyName?: string,
+     *   page?: int,
+     *   pageSize?: int,
+     *   pageToken?: string,
+     *   status?: 'init'|'in-progress'|'completed'|Status,
      * }|ConferenceRetrieveConferencesParams $params
      *
      * @throws APIException
@@ -144,7 +145,18 @@ final class ConferencesService implements ConferencesContract
         $response = $this->client->request(
             method: 'get',
             path: ['texml/Accounts/%1$s/Conferences', $accountSid],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'dateCreated' => 'DateCreated',
+                    'dateUpdated' => 'DateUpdated',
+                    'friendlyName' => 'FriendlyName',
+                    'page' => 'Page',
+                    'pageSize' => 'PageSize',
+                    'pageToken' => 'PageToken',
+                    'status' => 'Status',
+                ],
+            ),
             options: $options,
             convert: ConferenceGetConferencesResponse::class,
         );
@@ -157,7 +169,7 @@ final class ConferencesService implements ConferencesContract
      *
      * Lists conference recordings
      *
-     * @param array{account_sid: string}|ConferenceRetrieveRecordingsParams $params
+     * @param array{accountSid: string}|ConferenceRetrieveRecordingsParams $params
      *
      * @throws APIException
      */
@@ -170,8 +182,8 @@ final class ConferencesService implements ConferencesContract
             $params,
             $requestOptions,
         );
-        $accountSid = $parsed['account_sid'];
-        unset($parsed['account_sid']);
+        $accountSid = $parsed['accountSid'];
+        unset($parsed['accountSid']);
 
         /** @var BaseResponse<ConferenceGetRecordingsResponse> */
         $response = $this->client->request(
@@ -193,7 +205,7 @@ final class ConferencesService implements ConferencesContract
      *
      * Returns recordings for a conference identified by conference_sid.
      *
-     * @param array{account_sid: string}|ConferenceRetrieveRecordingsJsonParams $params
+     * @param array{accountSid: string}|ConferenceRetrieveRecordingsJsonParams $params
      *
      * @throws APIException
      */
@@ -206,8 +218,8 @@ final class ConferencesService implements ConferencesContract
             $params,
             $requestOptions,
         );
-        $accountSid = $parsed['account_sid'];
-        unset($parsed['account_sid']);
+        $accountSid = $parsed['accountSid'];
+        unset($parsed['accountSid']);
 
         /** @var BaseResponse<ConferenceGetRecordingsJsonResponse> */
         $response = $this->client->request(

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[outbound_voice_profile_id], filter[friendly_name].
  *
  * @phpstan-type FilterShape = array{
- *   friendly_name?: string|null, outbound_voice_profile_id?: string|null
+ *   friendlyName?: string|null, outboundVoiceProfileID?: string|null
  * }
  */
 final class Filter implements BaseModel
@@ -23,14 +23,14 @@ final class Filter implements BaseModel
     /**
      * If present, applications with <code>friendly_name</code> containing the given value will be returned. Matching is not case-sensitive. Requires at least three characters.
      */
-    #[Optional]
-    public ?string $friendly_name;
+    #[Optional('friendly_name')]
+    public ?string $friendlyName;
 
     /**
      * Identifies the associated outbound voice profile.
      */
-    #[Optional]
-    public ?string $outbound_voice_profile_id;
+    #[Optional('outbound_voice_profile_id')]
+    public ?string $outboundVoiceProfileID;
 
     public function __construct()
     {
@@ -43,13 +43,13 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $friendly_name = null,
-        ?string $outbound_voice_profile_id = null
+        ?string $friendlyName = null,
+        ?string $outboundVoiceProfileID = null
     ): self {
         $obj = new self;
 
-        null !== $friendly_name && $obj['friendly_name'] = $friendly_name;
-        null !== $outbound_voice_profile_id && $obj['outbound_voice_profile_id'] = $outbound_voice_profile_id;
+        null !== $friendlyName && $obj['friendlyName'] = $friendlyName;
+        null !== $outboundVoiceProfileID && $obj['outboundVoiceProfileID'] = $outboundVoiceProfileID;
 
         return $obj;
     }
@@ -60,7 +60,7 @@ final class Filter implements BaseModel
     public function withFriendlyName(string $friendlyName): self
     {
         $obj = clone $this;
-        $obj['friendly_name'] = $friendlyName;
+        $obj['friendlyName'] = $friendlyName;
 
         return $obj;
     }
@@ -72,7 +72,7 @@ final class Filter implements BaseModel
         string $outboundVoiceProfileID
     ): self {
         $obj = clone $this;
-        $obj['outbound_voice_profile_id'] = $outboundVoiceProfileID;
+        $obj['outboundVoiceProfileID'] = $outboundVoiceProfileID;
 
         return $obj;
     }

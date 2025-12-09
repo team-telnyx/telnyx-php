@@ -39,28 +39,28 @@ final class VoiceListResponse implements BaseModel
      *
      * @param list<CdrDetailedReqResponse|array{
      *   id?: string|null,
-     *   call_types?: list<int>|null,
+     *   callTypes?: list<int>|null,
      *   connections?: list<int>|null,
-     *   created_at?: string|null,
-     *   end_time?: string|null,
+     *   createdAt?: string|null,
+     *   endTime?: string|null,
      *   filters?: list<Filter>|null,
-     *   managed_accounts?: list<string>|null,
-     *   record_type?: string|null,
-     *   record_types?: list<int>|null,
-     *   report_name?: string|null,
-     *   report_url?: string|null,
+     *   managedAccounts?: list<string>|null,
+     *   recordType?: string|null,
+     *   recordTypes?: list<int>|null,
+     *   reportName?: string|null,
+     *   reportURL?: string|null,
      *   retry?: int|null,
      *   source?: string|null,
-     *   start_time?: string|null,
+     *   startTime?: string|null,
      *   status?: int|null,
      *   timezone?: string|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * }> $data
      * @param BatchCsvPaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -78,22 +78,22 @@ final class VoiceListResponse implements BaseModel
     /**
      * @param list<CdrDetailedReqResponse|array{
      *   id?: string|null,
-     *   call_types?: list<int>|null,
+     *   callTypes?: list<int>|null,
      *   connections?: list<int>|null,
-     *   created_at?: string|null,
-     *   end_time?: string|null,
+     *   createdAt?: string|null,
+     *   endTime?: string|null,
      *   filters?: list<Filter>|null,
-     *   managed_accounts?: list<string>|null,
-     *   record_type?: string|null,
-     *   record_types?: list<int>|null,
-     *   report_name?: string|null,
-     *   report_url?: string|null,
+     *   managedAccounts?: list<string>|null,
+     *   recordType?: string|null,
+     *   recordTypes?: list<int>|null,
+     *   reportName?: string|null,
+     *   reportURL?: string|null,
      *   retry?: int|null,
      *   source?: string|null,
-     *   start_time?: string|null,
+     *   startTime?: string|null,
      *   status?: int|null,
      *   timezone?: string|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -106,10 +106,10 @@ final class VoiceListResponse implements BaseModel
 
     /**
      * @param BatchCsvPaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(BatchCsvPaginationMeta|array $meta): self

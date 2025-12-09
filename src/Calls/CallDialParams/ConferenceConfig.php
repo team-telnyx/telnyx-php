@@ -15,19 +15,19 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type ConferenceConfigShape = array{
  *   id?: string|null,
- *   beep_enabled?: value-of<BeepEnabled>|null,
- *   conference_name?: string|null,
- *   early_media?: bool|null,
- *   end_conference_on_exit?: bool|null,
+ *   beepEnabled?: value-of<BeepEnabled>|null,
+ *   conferenceName?: string|null,
+ *   earlyMedia?: bool|null,
+ *   endConferenceOnExit?: bool|null,
  *   hold?: bool|null,
- *   hold_audio_url?: string|null,
- *   hold_media_name?: string|null,
+ *   holdAudioURL?: string|null,
+ *   holdMediaName?: string|null,
  *   mute?: bool|null,
- *   soft_end_conference_on_exit?: bool|null,
- *   start_conference_on_create?: bool|null,
- *   start_conference_on_enter?: bool|null,
- *   supervisor_role?: value-of<\Telnyx\Calls\CallDialParams\ConferenceConfig\SupervisorRole>|null,
- *   whisper_call_control_ids?: list<string>|null,
+ *   softEndConferenceOnExit?: bool|null,
+ *   startConferenceOnCreate?: bool|null,
+ *   startConferenceOnEnter?: bool|null,
+ *   supervisorRole?: value-of<\Telnyx\Calls\CallDialParams\ConferenceConfig\SupervisorRole>|null,
+ *   whisperCallControlIDs?: list<string>|null,
  * }
  */
 final class ConferenceConfig implements BaseModel
@@ -44,28 +44,28 @@ final class ConferenceConfig implements BaseModel
     /**
      * Whether a beep sound should be played when the participant joins and/or leaves the conference. Can be used to override the conference-level setting.
      *
-     * @var value-of<BeepEnabled>|null $beep_enabled
+     * @var value-of<BeepEnabled>|null $beepEnabled
      */
-    #[Optional(enum: BeepEnabled::class)]
-    public ?string $beep_enabled;
+    #[Optional('beep_enabled', enum: BeepEnabled::class)]
+    public ?string $beepEnabled;
 
     /**
      * Conference name to be joined.
      */
-    #[Optional]
-    public ?string $conference_name;
+    #[Optional('conference_name')]
+    public ?string $conferenceName;
 
     /**
      * Controls the moment when dialled call is joined into conference. If set to `true` user will be joined as soon as media is available (ringback). If `false` user will be joined when call is answered. Defaults to `true`.
      */
-    #[Optional]
-    public ?bool $early_media;
+    #[Optional('early_media')]
+    public ?bool $earlyMedia;
 
     /**
      * Whether the conference should end and all remaining participants be hung up after the participant leaves the conference. Defaults to "false".
      */
-    #[Optional]
-    public ?bool $end_conference_on_exit;
+    #[Optional('end_conference_on_exit')]
+    public ?bool $endConferenceOnExit;
 
     /**
      * Whether the participant should be put on hold immediately after joining the conference. Defaults to "false".
@@ -76,14 +76,14 @@ final class ConferenceConfig implements BaseModel
     /**
      * The URL of a file to be played to the participant when they are put on hold after joining the conference. hold_media_name and hold_audio_url cannot be used together in one request. Takes effect only when "start_conference_on_create" is set to "false". This property takes effect only if "hold" is set to "true".
      */
-    #[Optional]
-    public ?string $hold_audio_url;
+    #[Optional('hold_audio_url')]
+    public ?string $holdAudioURL;
 
     /**
      * The media_name of a file to be played to the participant when they are put on hold after joining the conference. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file. Takes effect only when "start_conference_on_create" is set to "false". This property takes effect only if "hold" is set to "true".
      */
-    #[Optional]
-    public ?string $hold_media_name;
+    #[Optional('hold_media_name')]
+    public ?string $holdMediaName;
 
     /**
      * Whether the participant should be muted immediately after joining the conference. Defaults to "false".
@@ -94,38 +94,39 @@ final class ConferenceConfig implements BaseModel
     /**
      * Whether the conference should end after the participant leaves the conference. NOTE this doesn't hang up the other participants. Defaults to "false".
      */
-    #[Optional]
-    public ?bool $soft_end_conference_on_exit;
+    #[Optional('soft_end_conference_on_exit')]
+    public ?bool $softEndConferenceOnExit;
 
     /**
      * Whether the conference should be started on creation. If the conference isn't started all participants that join are automatically put on hold. Defaults to "true".
      */
-    #[Optional]
-    public ?bool $start_conference_on_create;
+    #[Optional('start_conference_on_create')]
+    public ?bool $startConferenceOnCreate;
 
     /**
      * Whether the conference should be started after the participant joins the conference. Defaults to "false".
      */
-    #[Optional]
-    public ?bool $start_conference_on_enter;
+    #[Optional('start_conference_on_enter')]
+    public ?bool $startConferenceOnEnter;
 
     /**
      * Sets the joining participant as a supervisor for the conference. A conference can have multiple supervisors. "barge" means the supervisor enters the conference as a normal participant. This is the same as "none". "monitor" means the supervisor is muted but can hear all participants. "whisper" means that only the specified "whisper_call_control_ids" can hear the supervisor. Defaults to "none".
      *
-     * @var value-of<SupervisorRole>|null $supervisor_role
+     * @var value-of<SupervisorRole>|null $supervisorRole
      */
     #[Optional(
-        enum: SupervisorRole::class
+        'supervisor_role',
+        enum: SupervisorRole::class,
     )]
-    public ?string $supervisor_role;
+    public ?string $supervisorRole;
 
     /**
      * Array of unique call_control_ids the joining supervisor can whisper to. If none provided, the supervisor will join the conference as a monitoring participant only.
      *
-     * @var list<string>|null $whisper_call_control_ids
+     * @var list<string>|null $whisperCallControlIDs
      */
-    #[Optional(list: 'string')]
-    public ?array $whisper_call_control_ids;
+    #[Optional('whisper_call_control_ids', list: 'string')]
+    public ?array $whisperCallControlIDs;
 
     public function __construct()
     {
@@ -137,42 +138,42 @@ final class ConferenceConfig implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BeepEnabled|value-of<BeepEnabled> $beep_enabled
-     * @param SupervisorRole|value-of<SupervisorRole> $supervisor_role
-     * @param list<string> $whisper_call_control_ids
+     * @param BeepEnabled|value-of<BeepEnabled> $beepEnabled
+     * @param SupervisorRole|value-of<SupervisorRole> $supervisorRole
+     * @param list<string> $whisperCallControlIDs
      */
     public static function with(
         ?string $id = null,
-        BeepEnabled|string|null $beep_enabled = null,
-        ?string $conference_name = null,
-        ?bool $early_media = null,
-        ?bool $end_conference_on_exit = null,
+        BeepEnabled|string|null $beepEnabled = null,
+        ?string $conferenceName = null,
+        ?bool $earlyMedia = null,
+        ?bool $endConferenceOnExit = null,
         ?bool $hold = null,
-        ?string $hold_audio_url = null,
-        ?string $hold_media_name = null,
+        ?string $holdAudioURL = null,
+        ?string $holdMediaName = null,
         ?bool $mute = null,
-        ?bool $soft_end_conference_on_exit = null,
-        ?bool $start_conference_on_create = null,
-        ?bool $start_conference_on_enter = null,
-        SupervisorRole|string|null $supervisor_role = null,
-        ?array $whisper_call_control_ids = null,
+        ?bool $softEndConferenceOnExit = null,
+        ?bool $startConferenceOnCreate = null,
+        ?bool $startConferenceOnEnter = null,
+        SupervisorRole|string|null $supervisorRole = null,
+        ?array $whisperCallControlIDs = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $beep_enabled && $obj['beep_enabled'] = $beep_enabled;
-        null !== $conference_name && $obj['conference_name'] = $conference_name;
-        null !== $early_media && $obj['early_media'] = $early_media;
-        null !== $end_conference_on_exit && $obj['end_conference_on_exit'] = $end_conference_on_exit;
+        null !== $beepEnabled && $obj['beepEnabled'] = $beepEnabled;
+        null !== $conferenceName && $obj['conferenceName'] = $conferenceName;
+        null !== $earlyMedia && $obj['earlyMedia'] = $earlyMedia;
+        null !== $endConferenceOnExit && $obj['endConferenceOnExit'] = $endConferenceOnExit;
         null !== $hold && $obj['hold'] = $hold;
-        null !== $hold_audio_url && $obj['hold_audio_url'] = $hold_audio_url;
-        null !== $hold_media_name && $obj['hold_media_name'] = $hold_media_name;
+        null !== $holdAudioURL && $obj['holdAudioURL'] = $holdAudioURL;
+        null !== $holdMediaName && $obj['holdMediaName'] = $holdMediaName;
         null !== $mute && $obj['mute'] = $mute;
-        null !== $soft_end_conference_on_exit && $obj['soft_end_conference_on_exit'] = $soft_end_conference_on_exit;
-        null !== $start_conference_on_create && $obj['start_conference_on_create'] = $start_conference_on_create;
-        null !== $start_conference_on_enter && $obj['start_conference_on_enter'] = $start_conference_on_enter;
-        null !== $supervisor_role && $obj['supervisor_role'] = $supervisor_role;
-        null !== $whisper_call_control_ids && $obj['whisper_call_control_ids'] = $whisper_call_control_ids;
+        null !== $softEndConferenceOnExit && $obj['softEndConferenceOnExit'] = $softEndConferenceOnExit;
+        null !== $startConferenceOnCreate && $obj['startConferenceOnCreate'] = $startConferenceOnCreate;
+        null !== $startConferenceOnEnter && $obj['startConferenceOnEnter'] = $startConferenceOnEnter;
+        null !== $supervisorRole && $obj['supervisorRole'] = $supervisorRole;
+        null !== $whisperCallControlIDs && $obj['whisperCallControlIDs'] = $whisperCallControlIDs;
 
         return $obj;
     }
@@ -196,7 +197,7 @@ final class ConferenceConfig implements BaseModel
     public function withBeepEnabled(BeepEnabled|string $beepEnabled): self
     {
         $obj = clone $this;
-        $obj['beep_enabled'] = $beepEnabled;
+        $obj['beepEnabled'] = $beepEnabled;
 
         return $obj;
     }
@@ -207,7 +208,7 @@ final class ConferenceConfig implements BaseModel
     public function withConferenceName(string $conferenceName): self
     {
         $obj = clone $this;
-        $obj['conference_name'] = $conferenceName;
+        $obj['conferenceName'] = $conferenceName;
 
         return $obj;
     }
@@ -218,7 +219,7 @@ final class ConferenceConfig implements BaseModel
     public function withEarlyMedia(bool $earlyMedia): self
     {
         $obj = clone $this;
-        $obj['early_media'] = $earlyMedia;
+        $obj['earlyMedia'] = $earlyMedia;
 
         return $obj;
     }
@@ -229,7 +230,7 @@ final class ConferenceConfig implements BaseModel
     public function withEndConferenceOnExit(bool $endConferenceOnExit): self
     {
         $obj = clone $this;
-        $obj['end_conference_on_exit'] = $endConferenceOnExit;
+        $obj['endConferenceOnExit'] = $endConferenceOnExit;
 
         return $obj;
     }
@@ -251,7 +252,7 @@ final class ConferenceConfig implements BaseModel
     public function withHoldAudioURL(string $holdAudioURL): self
     {
         $obj = clone $this;
-        $obj['hold_audio_url'] = $holdAudioURL;
+        $obj['holdAudioURL'] = $holdAudioURL;
 
         return $obj;
     }
@@ -262,7 +263,7 @@ final class ConferenceConfig implements BaseModel
     public function withHoldMediaName(string $holdMediaName): self
     {
         $obj = clone $this;
-        $obj['hold_media_name'] = $holdMediaName;
+        $obj['holdMediaName'] = $holdMediaName;
 
         return $obj;
     }
@@ -285,7 +286,7 @@ final class ConferenceConfig implements BaseModel
         bool $softEndConferenceOnExit
     ): self {
         $obj = clone $this;
-        $obj['soft_end_conference_on_exit'] = $softEndConferenceOnExit;
+        $obj['softEndConferenceOnExit'] = $softEndConferenceOnExit;
 
         return $obj;
     }
@@ -297,7 +298,7 @@ final class ConferenceConfig implements BaseModel
         bool $startConferenceOnCreate
     ): self {
         $obj = clone $this;
-        $obj['start_conference_on_create'] = $startConferenceOnCreate;
+        $obj['startConferenceOnCreate'] = $startConferenceOnCreate;
 
         return $obj;
     }
@@ -309,7 +310,7 @@ final class ConferenceConfig implements BaseModel
         bool $startConferenceOnEnter
     ): self {
         $obj = clone $this;
-        $obj['start_conference_on_enter'] = $startConferenceOnEnter;
+        $obj['startConferenceOnEnter'] = $startConferenceOnEnter;
 
         return $obj;
     }
@@ -323,7 +324,7 @@ final class ConferenceConfig implements BaseModel
         SupervisorRole|string $supervisorRole,
     ): self {
         $obj = clone $this;
-        $obj['supervisor_role'] = $supervisorRole;
+        $obj['supervisorRole'] = $supervisorRole;
 
         return $obj;
     }
@@ -337,7 +338,7 @@ final class ConferenceConfig implements BaseModel
         array $whisperCallControlIDs
     ): self {
         $obj = clone $this;
-        $obj['whisper_call_control_ids'] = $whisperCallControlIDs;
+        $obj['whisperCallControlIDs'] = $whisperCallControlIDs;
 
         return $obj;
     }

@@ -20,15 +20,15 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo;
  * @phpstan-type LoaConfigurationPreview0ParamsShape = array{
  *   address: Address|array{
  *     city: string,
- *     country_code: string,
+ *     countryCode: string,
  *     state: string,
- *     street_address: string,
- *     zip_code: string,
- *     extended_address?: string|null,
+ *     streetAddress: string,
+ *     zipCode: string,
+ *     extendedAddress?: string|null,
  *   },
- *   company_name: string,
- *   contact: Contact|array{email: string, phone_number: string},
- *   logo: Logo|array{document_id: string},
+ *   companyName: string,
+ *   contact: Contact|array{email: string, phoneNumber: string},
+ *   logo: Logo|array{documentID: string},
  *   name: string,
  * }
  */
@@ -47,8 +47,8 @@ final class LoaConfigurationPreview0Params implements BaseModel
     /**
      * The name of the company.
      */
-    #[Required]
-    public string $company_name;
+    #[Required('company_name')]
+    public string $companyName;
 
     /**
      * The contact information of the company.
@@ -74,7 +74,7 @@ final class LoaConfigurationPreview0Params implements BaseModel
      * To enforce required parameters use
      * ```
      * LoaConfigurationPreview0Params::with(
-     *   address: ..., company_name: ..., contact: ..., logo: ..., name: ...
+     *   address: ..., companyName: ..., contact: ..., logo: ..., name: ...
      * )
      * ```
      *
@@ -101,18 +101,18 @@ final class LoaConfigurationPreview0Params implements BaseModel
      *
      * @param Address|array{
      *   city: string,
-     *   country_code: string,
+     *   countryCode: string,
      *   state: string,
-     *   street_address: string,
-     *   zip_code: string,
-     *   extended_address?: string|null,
+     *   streetAddress: string,
+     *   zipCode: string,
+     *   extendedAddress?: string|null,
      * } $address
-     * @param Contact|array{email: string, phone_number: string} $contact
-     * @param Logo|array{document_id: string} $logo
+     * @param Contact|array{email: string, phoneNumber: string} $contact
+     * @param Logo|array{documentID: string} $logo
      */
     public static function with(
         Address|array $address,
-        string $company_name,
+        string $companyName,
         Contact|array $contact,
         Logo|array $logo,
         string $name,
@@ -120,7 +120,7 @@ final class LoaConfigurationPreview0Params implements BaseModel
         $obj = new self;
 
         $obj['address'] = $address;
-        $obj['company_name'] = $company_name;
+        $obj['companyName'] = $companyName;
         $obj['contact'] = $contact;
         $obj['logo'] = $logo;
         $obj['name'] = $name;
@@ -133,11 +133,11 @@ final class LoaConfigurationPreview0Params implements BaseModel
      *
      * @param Address|array{
      *   city: string,
-     *   country_code: string,
+     *   countryCode: string,
      *   state: string,
-     *   street_address: string,
-     *   zip_code: string,
-     *   extended_address?: string|null,
+     *   streetAddress: string,
+     *   zipCode: string,
+     *   extendedAddress?: string|null,
      * } $address
      */
     public function withAddress(Address|array $address): self
@@ -154,7 +154,7 @@ final class LoaConfigurationPreview0Params implements BaseModel
     public function withCompanyName(string $companyName): self
     {
         $obj = clone $this;
-        $obj['company_name'] = $companyName;
+        $obj['companyName'] = $companyName;
 
         return $obj;
     }
@@ -162,7 +162,7 @@ final class LoaConfigurationPreview0Params implements BaseModel
     /**
      * The contact information of the company.
      *
-     * @param Contact|array{email: string, phone_number: string} $contact
+     * @param Contact|array{email: string, phoneNumber: string} $contact
      */
     public function withContact(Contact|array $contact): self
     {
@@ -175,7 +175,7 @@ final class LoaConfigurationPreview0Params implements BaseModel
     /**
      * The logo of the LOA configuration.
      *
-     * @param Logo|array{document_id: string} $logo
+     * @param Logo|array{documentID: string} $logo
      */
     public function withLogo(Logo|array $logo): self
     {

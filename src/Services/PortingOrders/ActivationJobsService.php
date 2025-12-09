@@ -61,7 +61,7 @@ final class ActivationJobsService implements ActivationJobsContract
      * Updates the activation time of a porting activation job.
      *
      * @param array{
-     *   id: string, activate_at?: string|\DateTimeInterface
+     *   id: string, activateAt?: string|\DateTimeInterface
      * }|ActivationJobUpdateParams $params
      *
      * @throws APIException

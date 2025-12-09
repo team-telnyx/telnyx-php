@@ -36,7 +36,7 @@ final class JobsTest extends TestCase
         }
 
         $result = $this->client->ai->fineTuning->jobs->create([
-            'model' => 'model', 'training_file' => 'training_file',
+            'model' => 'model', 'trainingFile' => 'training_file',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -52,8 +52,8 @@ final class JobsTest extends TestCase
 
         $result = $this->client->ai->fineTuning->jobs->create([
             'model' => 'model',
-            'training_file' => 'training_file',
-            'hyperparameters' => ['n_epochs' => 1],
+            'trainingFile' => 'training_file',
+            'hyperparameters' => ['nEpochs' => 1],
             'suffix' => 'suffix',
         ]);
 

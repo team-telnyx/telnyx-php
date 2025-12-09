@@ -36,16 +36,16 @@ final class NumberLookupGetResponse implements BaseModel
      *
      * @param Data|array{
      *   id?: string|null,
-     *   aggregation_type?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   end_date?: \DateTimeInterface|null,
-     *   managed_accounts?: list<string>|null,
-     *   record_type?: string|null,
-     *   report_url?: string|null,
+     *   aggregationType?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   endDate?: \DateTimeInterface|null,
+     *   managedAccounts?: list<string>|null,
+     *   recordType?: string|null,
+     *   reportURL?: string|null,
      *   result?: list<Result>|null,
-     *   start_date?: \DateTimeInterface|null,
+     *   startDate?: \DateTimeInterface|null,
      *   status?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -62,16 +62,16 @@ final class NumberLookupGetResponse implements BaseModel
      *
      * @param Data|array{
      *   id?: string|null,
-     *   aggregation_type?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   end_date?: \DateTimeInterface|null,
-     *   managed_accounts?: list<string>|null,
-     *   record_type?: string|null,
-     *   report_url?: string|null,
+     *   aggregationType?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   endDate?: \DateTimeInterface|null,
+     *   managedAccounts?: list<string>|null,
+     *   recordType?: string|null,
+     *   reportURL?: string|null,
      *   result?: list<Result>|null,
-     *   start_date?: \DateTimeInterface|null,
+     *   startDate?: \DateTimeInterface|null,
      *   status?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(Data|array $data): self

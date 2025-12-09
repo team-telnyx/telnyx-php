@@ -16,9 +16,9 @@ use Telnyx\NotificationChannels\NotificationChannelCreateParams\ChannelTypeID;
  * @see Telnyx\Services\NotificationChannelsService::create()
  *
  * @phpstan-type NotificationChannelCreateParamsShape = array{
- *   channel_destination?: string,
- *   channel_type_id?: ChannelTypeID|value-of<ChannelTypeID>,
- *   notification_profile_id?: string,
+ *   channelDestination?: string,
+ *   channelTypeID?: ChannelTypeID|value-of<ChannelTypeID>,
+ *   notificationProfileID?: string,
  * }
  */
 final class NotificationChannelCreateParams implements BaseModel
@@ -30,22 +30,22 @@ final class NotificationChannelCreateParams implements BaseModel
     /**
      * The destination associated with the channel type.
      */
-    #[Optional]
-    public ?string $channel_destination;
+    #[Optional('channel_destination')]
+    public ?string $channelDestination;
 
     /**
      * A Channel Type ID.
      *
-     * @var value-of<ChannelTypeID>|null $channel_type_id
+     * @var value-of<ChannelTypeID>|null $channelTypeID
      */
-    #[Optional(enum: ChannelTypeID::class)]
-    public ?string $channel_type_id;
+    #[Optional('channel_type_id', enum: ChannelTypeID::class)]
+    public ?string $channelTypeID;
 
     /**
      * A UUID reference to the associated Notification Profile.
      */
-    #[Optional]
-    public ?string $notification_profile_id;
+    #[Optional('notification_profile_id')]
+    public ?string $notificationProfileID;
 
     public function __construct()
     {
@@ -57,18 +57,18 @@ final class NotificationChannelCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ChannelTypeID|value-of<ChannelTypeID> $channel_type_id
+     * @param ChannelTypeID|value-of<ChannelTypeID> $channelTypeID
      */
     public static function with(
-        ?string $channel_destination = null,
-        ChannelTypeID|string|null $channel_type_id = null,
-        ?string $notification_profile_id = null,
+        ?string $channelDestination = null,
+        ChannelTypeID|string|null $channelTypeID = null,
+        ?string $notificationProfileID = null,
     ): self {
         $obj = new self;
 
-        null !== $channel_destination && $obj['channel_destination'] = $channel_destination;
-        null !== $channel_type_id && $obj['channel_type_id'] = $channel_type_id;
-        null !== $notification_profile_id && $obj['notification_profile_id'] = $notification_profile_id;
+        null !== $channelDestination && $obj['channelDestination'] = $channelDestination;
+        null !== $channelTypeID && $obj['channelTypeID'] = $channelTypeID;
+        null !== $notificationProfileID && $obj['notificationProfileID'] = $notificationProfileID;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class NotificationChannelCreateParams implements BaseModel
     public function withChannelDestination(string $channelDestination): self
     {
         $obj = clone $this;
-        $obj['channel_destination'] = $channelDestination;
+        $obj['channelDestination'] = $channelDestination;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class NotificationChannelCreateParams implements BaseModel
     public function withChannelTypeID(ChannelTypeID|string $channelTypeID): self
     {
         $obj = clone $this;
-        $obj['channel_type_id'] = $channelTypeID;
+        $obj['channelTypeID'] = $channelTypeID;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class NotificationChannelCreateParams implements BaseModel
         string $notificationProfileID
     ): self {
         $obj = clone $this;
-        $obj['notification_profile_id'] = $notificationProfileID;
+        $obj['notificationProfileID'] = $notificationProfileID;
 
         return $obj;
     }

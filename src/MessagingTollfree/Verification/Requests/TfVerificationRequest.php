@@ -44,7 +44,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   optInKeywords?: string|null,
  *   privacyPolicyURL?: string|null,
  *   termsAndConditionURL?: string|null,
- *   webhookUrl?: string|null,
+ *   webhookURL?: string|null,
  * }
  */
 final class TfVerificationRequest implements BaseModel
@@ -251,8 +251,8 @@ final class TfVerificationRequest implements BaseModel
     /**
      * URL that should receive webhooks relating to this verification request.
      */
-    #[Optional]
-    public ?string $webhookUrl;
+    #[Optional('webhookUrl')]
+    public ?string $webhookURL;
 
     /**
      * `new TfVerificationRequest()` is missing required properties by the API.
@@ -355,7 +355,7 @@ final class TfVerificationRequest implements BaseModel
         ?string $optInKeywords = null,
         ?string $privacyPolicyURL = null,
         ?string $termsAndConditionURL = null,
-        ?string $webhookUrl = null,
+        ?string $webhookURL = null,
     ): self {
         $obj = new self;
 
@@ -391,7 +391,7 @@ final class TfVerificationRequest implements BaseModel
         null !== $optInKeywords && $obj['optInKeywords'] = $optInKeywords;
         null !== $privacyPolicyURL && $obj['privacyPolicyURL'] = $privacyPolicyURL;
         null !== $termsAndConditionURL && $obj['termsAndConditionURL'] = $termsAndConditionURL;
-        null !== $webhookUrl && $obj['webhookUrl'] = $webhookUrl;
+        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
 
         return $obj;
     }
@@ -764,7 +764,7 @@ final class TfVerificationRequest implements BaseModel
     public function withWebhookURL(string $webhookURL): self
     {
         $obj = clone $this;
-        $obj['webhookUrl'] = $webhookURL;
+        $obj['webhookURL'] = $webhookURL;
 
         return $obj;
     }

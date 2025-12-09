@@ -11,6 +11,7 @@ use Telnyx\GlobalIPAssignments\GlobalIPAssignmentGetResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListParams;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentNewResponse;
+use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateResponse;
 use Telnyx\RequestOptions;
 
@@ -41,14 +42,14 @@ interface GlobalIPAssignmentsContract
     /**
      * @api
      *
-     * @param array<mixed> $params
+     * @param array<mixed>|GlobalIPAssignmentUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|GlobalIPAssignmentUpdateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): GlobalIPAssignmentUpdateResponse;
 
     /**

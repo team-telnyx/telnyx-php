@@ -26,8 +26,8 @@ final class GlobalIPAssignmentsUsageService implements GlobalIPAssignmentsUsageC
      *
      * @param array{
      *   filter?: array{
-     *     global_ip_assignment_id?: string|array{in?: string},
-     *     global_ip_id?: string|array{in?: string},
+     *     globalIPAssignmentID?: string|array{in?: string},
+     *     globalIPID?: string|array{in?: string},
      *   },
      * }|GlobalIPAssignmentsUsageRetrieveParams $params
      *

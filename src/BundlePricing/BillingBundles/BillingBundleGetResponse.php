@@ -48,10 +48,10 @@ final class BillingBundleGetResponse implements BaseModel
      * @param Data|array{
      *   id: string,
      *   active: bool,
-     *   bundle_limits: list<BundleLimit>,
-     *   cost_code: string,
-     *   created_at: \DateTimeInterface,
-     *   is_public: bool,
+     *   bundleLimits: list<BundleLimit>,
+     *   costCode: string,
+     *   createdAt: \DateTimeInterface,
+     *   isPublic: bool,
      *   name: string,
      *   slug?: string|null,
      * } $data
@@ -69,10 +69,10 @@ final class BillingBundleGetResponse implements BaseModel
      * @param Data|array{
      *   id: string,
      *   active: bool,
-     *   bundle_limits: list<BundleLimit>,
-     *   cost_code: string,
-     *   created_at: \DateTimeInterface,
-     *   is_public: bool,
+     *   bundleLimits: list<BundleLimit>,
+     *   costCode: string,
+     *   createdAt: \DateTimeInterface,
+     *   isPublic: bool,
      *   name: string,
      *   slug?: string|null,
      * } $data

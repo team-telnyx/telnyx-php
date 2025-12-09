@@ -54,12 +54,12 @@ final class MessageListResponse implements BaseModel
      * @param list<Data|array{
      *   role: value-of<Role>,
      *   text: string,
-     *   created_at?: \DateTimeInterface|null,
-     *   sent_at?: \DateTimeInterface|null,
-     *   tool_calls?: list<ToolCall>|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   sentAt?: \DateTimeInterface|null,
+     *   toolCalls?: list<ToolCall>|null,
      * }> $data
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public static function with(array $data, Meta|array $meta): self
@@ -76,9 +76,9 @@ final class MessageListResponse implements BaseModel
      * @param list<Data|array{
      *   role: value-of<Role>,
      *   text: string,
-     *   created_at?: \DateTimeInterface|null,
-     *   sent_at?: \DateTimeInterface|null,
-     *   tool_calls?: list<ToolCall>|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   sentAt?: \DateTimeInterface|null,
+     *   toolCalls?: list<ToolCall>|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -91,7 +91,7 @@ final class MessageListResponse implements BaseModel
 
     /**
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public function withMeta(Meta|array $meta): self

@@ -17,9 +17,9 @@ use Telnyx\Reports\MdrUsageReports\MdrUsageReportCreateParams\AggregationType;
  * @see Telnyx\Services\Reports\MdrUsageReportsService::create()
  *
  * @phpstan-type MdrUsageReportCreateParamsShape = array{
- *   aggregation_type: AggregationType|value-of<AggregationType>,
- *   end_date: \DateTimeInterface,
- *   start_date: \DateTimeInterface,
+ *   aggregationType: AggregationType|value-of<AggregationType>,
+ *   endDate: \DateTimeInterface,
+ *   startDate: \DateTimeInterface,
  *   profiles?: string,
  * }
  */
@@ -29,15 +29,15 @@ final class MdrUsageReportCreateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var value-of<AggregationType> $aggregation_type */
-    #[Required(enum: AggregationType::class)]
-    public string $aggregation_type;
+    /** @var value-of<AggregationType> $aggregationType */
+    #[Required('aggregation_type', enum: AggregationType::class)]
+    public string $aggregationType;
 
-    #[Required]
-    public \DateTimeInterface $end_date;
+    #[Required('end_date')]
+    public \DateTimeInterface $endDate;
 
-    #[Required]
-    public \DateTimeInterface $start_date;
+    #[Required('start_date')]
+    public \DateTimeInterface $startDate;
 
     #[Optional]
     public ?string $profiles;
@@ -48,7 +48,7 @@ final class MdrUsageReportCreateParams implements BaseModel
      * To enforce required parameters use
      * ```
      * MdrUsageReportCreateParams::with(
-     *   aggregation_type: ..., end_date: ..., start_date: ...
+     *   aggregationType: ..., endDate: ..., startDate: ...
      * )
      * ```
      *
@@ -71,19 +71,19 @@ final class MdrUsageReportCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AggregationType|value-of<AggregationType> $aggregation_type
+     * @param AggregationType|value-of<AggregationType> $aggregationType
      */
     public static function with(
-        AggregationType|string $aggregation_type,
-        \DateTimeInterface $end_date,
-        \DateTimeInterface $start_date,
+        AggregationType|string $aggregationType,
+        \DateTimeInterface $endDate,
+        \DateTimeInterface $startDate,
         ?string $profiles = null,
     ): self {
         $obj = new self;
 
-        $obj['aggregation_type'] = $aggregation_type;
-        $obj['end_date'] = $end_date;
-        $obj['start_date'] = $start_date;
+        $obj['aggregationType'] = $aggregationType;
+        $obj['endDate'] = $endDate;
+        $obj['startDate'] = $startDate;
 
         null !== $profiles && $obj['profiles'] = $profiles;
 
@@ -97,7 +97,7 @@ final class MdrUsageReportCreateParams implements BaseModel
         AggregationType|string $aggregationType
     ): self {
         $obj = clone $this;
-        $obj['aggregation_type'] = $aggregationType;
+        $obj['aggregationType'] = $aggregationType;
 
         return $obj;
     }
@@ -105,7 +105,7 @@ final class MdrUsageReportCreateParams implements BaseModel
     public function withEndDate(\DateTimeInterface $endDate): self
     {
         $obj = clone $this;
-        $obj['end_date'] = $endDate;
+        $obj['endDate'] = $endDate;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class MdrUsageReportCreateParams implements BaseModel
     public function withStartDate(\DateTimeInterface $startDate): self
     {
         $obj = clone $this;
-        $obj['start_date'] = $startDate;
+        $obj['startDate'] = $startDate;
 
         return $obj;
     }

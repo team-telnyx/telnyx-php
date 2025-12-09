@@ -19,8 +19,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type AuditEventListParamsShape = array{
  *   filter?: Filter|array{
- *     created_after?: \DateTimeInterface|null,
- *     created_before?: \DateTimeInterface|null,
+ *     createdAfter?: \DateTimeInterface|null,
+ *     createdBefore?: \DateTimeInterface|null,
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
  *   sort?: Sort|value-of<Sort>,
@@ -63,8 +63,8 @@ final class AuditEventListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   created_after?: \DateTimeInterface|null,
-     *   created_before?: \DateTimeInterface|null,
+     *   createdAfter?: \DateTimeInterface|null,
+     *   createdBefore?: \DateTimeInterface|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      * @param Sort|value-of<Sort> $sort
@@ -87,8 +87,8 @@ final class AuditEventListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[created_before], filter[created_after].
      *
      * @param Filter|array{
-     *   created_after?: \DateTimeInterface|null,
-     *   created_before?: \DateTimeInterface|null,
+     *   createdAfter?: \DateTimeInterface|null,
+     *   createdBefore?: \DateTimeInterface|null,
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

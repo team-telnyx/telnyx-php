@@ -16,8 +16,8 @@ use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreat
  * @see Telnyx\Services\PortingOrders\PhoneNumberConfigurationsService::create()
  *
  * @phpstan-type PhoneNumberConfigurationCreateParamsShape = array{
- *   phone_number_configurations?: list<PhoneNumberConfiguration|array{
- *     porting_phone_number_id: string, user_bundle_id: string
+ *   phoneNumberConfigurations?: list<PhoneNumberConfiguration|array{
+ *     portingPhoneNumberID: string, userBundleID: string
  *   }>,
  * }
  */
@@ -27,9 +27,12 @@ final class PhoneNumberConfigurationCreateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var list<PhoneNumberConfiguration>|null $phone_number_configurations */
-    #[Optional(list: PhoneNumberConfiguration::class)]
-    public ?array $phone_number_configurations;
+    /** @var list<PhoneNumberConfiguration>|null $phoneNumberConfigurations */
+    #[Optional(
+        'phone_number_configurations',
+        list: PhoneNumberConfiguration::class
+    )]
+    public ?array $phoneNumberConfigurations;
 
     public function __construct()
     {
@@ -42,28 +45,28 @@ final class PhoneNumberConfigurationCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<PhoneNumberConfiguration|array{
-     *   porting_phone_number_id: string, user_bundle_id: string
-     * }> $phone_number_configurations
+     *   portingPhoneNumberID: string, userBundleID: string
+     * }> $phoneNumberConfigurations
      */
-    public static function with(?array $phone_number_configurations = null): self
+    public static function with(?array $phoneNumberConfigurations = null): self
     {
         $obj = new self;
 
-        null !== $phone_number_configurations && $obj['phone_number_configurations'] = $phone_number_configurations;
+        null !== $phoneNumberConfigurations && $obj['phoneNumberConfigurations'] = $phoneNumberConfigurations;
 
         return $obj;
     }
 
     /**
      * @param list<PhoneNumberConfiguration|array{
-     *   porting_phone_number_id: string, user_bundle_id: string
+     *   portingPhoneNumberID: string, userBundleID: string
      * }> $phoneNumberConfigurations
      */
     public function withPhoneNumberConfigurations(
         array $phoneNumberConfigurations
     ): self {
         $obj = clone $this;
-        $obj['phone_number_configurations'] = $phoneNumberConfigurations;
+        $obj['phoneNumberConfigurations'] = $phoneNumberConfigurations;
 
         return $obj;
     }

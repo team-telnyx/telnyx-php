@@ -37,7 +37,7 @@ final class ActionValidateResponse implements BaseModel
      *   result: value-of<Result>,
      *   suggested: Suggested,
      *   errors?: list<APIError>|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -54,7 +54,7 @@ final class ActionValidateResponse implements BaseModel
      *   result: value-of<Result>,
      *   suggested: Suggested,
      *   errors?: list<APIError>|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      * } $data
      */
     public function withData(Data|array $data): self

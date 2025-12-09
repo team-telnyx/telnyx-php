@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type MetadataShape = array{
- *   best_effort_results?: int|null, total_results?: int|null
+ *   bestEffortResults?: int|null, totalResults?: int|null
  * }
  */
 final class Metadata implements BaseModel
@@ -18,11 +18,11 @@ final class Metadata implements BaseModel
     /** @use SdkModel<MetadataShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?int $best_effort_results;
+    #[Optional('best_effort_results')]
+    public ?int $bestEffortResults;
 
-    #[Optional]
-    public ?int $total_results;
+    #[Optional('total_results')]
+    public ?int $totalResults;
 
     public function __construct()
     {
@@ -35,13 +35,13 @@ final class Metadata implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?int $best_effort_results = null,
-        ?int $total_results = null
+        ?int $bestEffortResults = null,
+        ?int $totalResults = null
     ): self {
         $obj = new self;
 
-        null !== $best_effort_results && $obj['best_effort_results'] = $best_effort_results;
-        null !== $total_results && $obj['total_results'] = $total_results;
+        null !== $bestEffortResults && $obj['bestEffortResults'] = $bestEffortResults;
+        null !== $totalResults && $obj['totalResults'] = $totalResults;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class Metadata implements BaseModel
     public function withBestEffortResults(int $bestEffortResults): self
     {
         $obj = clone $this;
-        $obj['best_effort_results'] = $bestEffortResults;
+        $obj['bestEffortResults'] = $bestEffortResults;
 
         return $obj;
     }
@@ -57,7 +57,7 @@ final class Metadata implements BaseModel
     public function withTotalResults(int $totalResults): self
     {
         $obj = clone $this;
-        $obj['total_results'] = $totalResults;
+        $obj['totalResults'] = $totalResults;
 
         return $obj;
     }

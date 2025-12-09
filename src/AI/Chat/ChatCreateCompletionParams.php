@@ -30,24 +30,24 @@ use Telnyx\Core\Contracts\BaseModel;
  *   messages: list<Message|array{
  *     content: string|list<TextAndImageArray>, role: value-of<Role>
  *   }>,
- *   api_key_ref?: string,
- *   best_of?: int,
- *   early_stopping?: bool,
- *   frequency_penalty?: float,
- *   guided_choice?: list<string>,
- *   guided_json?: array<string,mixed>,
- *   guided_regex?: string,
- *   length_penalty?: float,
+ *   apiKeyRef?: string,
+ *   bestOf?: int,
+ *   earlyStopping?: bool,
+ *   frequencyPenalty?: float,
+ *   guidedChoice?: list<string>,
+ *   guidedJson?: array<string,mixed>,
+ *   guidedRegex?: string,
+ *   lengthPenalty?: float,
  *   logprobs?: bool,
- *   max_tokens?: int,
- *   min_p?: float,
+ *   maxTokens?: int,
+ *   minP?: float,
  *   model?: string,
  *   n?: float,
- *   presence_penalty?: float,
- *   response_format?: ResponseFormat|array{type: value-of<Type>},
+ *   presencePenalty?: float,
+ *   responseFormat?: ResponseFormat|array{type: value-of<Type>},
  *   stream?: bool,
  *   temperature?: float,
- *   tool_choice?: ToolChoice|value-of<ToolChoice>,
+ *   toolChoice?: ToolChoice|value-of<ToolChoice>,
  *   tools?: list<ChatCompletionToolParam|array{
  *     function: Function1,
  *     type: value-of<\Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam\Type>,
@@ -55,9 +55,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *     retrieval: InferenceEmbeddingBucketIDs,
  *     type: value-of<\Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\Retrieval\Type>,
  *   }>,
- *   top_logprobs?: int,
- *   top_p?: float,
- *   use_beam_search?: bool,
+ *   topLogprobs?: int,
+ *   topP?: float,
+ *   useBeamSearch?: bool,
  * }
  */
 final class ChatCreateCompletionParams implements BaseModel
@@ -77,54 +77,54 @@ final class ChatCreateCompletionParams implements BaseModel
     /**
      * If you are using an external inference provider like xAI or OpenAI, this field allows you to pass along a reference to your API key. After creating an [integration secret](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) for you API key, pass the secret's `identifier` in this field.
      */
-    #[Optional]
-    public ?string $api_key_ref;
+    #[Optional('api_key_ref')]
+    public ?string $apiKeyRef;
 
     /**
      * This is used with `use_beam_search` to determine how many candidate beams to explore.
      */
-    #[Optional]
-    public ?int $best_of;
+    #[Optional('best_of')]
+    public ?int $bestOf;
 
     /**
      * This is used with `use_beam_search`. If `true`, generation stops as soon as there are `best_of` complete candidates; if `false`, a heuristic is applied and the generation stops when is it very unlikely to find better candidates.
      */
-    #[Optional]
-    public ?bool $early_stopping;
+    #[Optional('early_stopping')]
+    public ?bool $earlyStopping;
 
     /**
      * Higher values will penalize the model from repeating the same output tokens.
      */
-    #[Optional]
-    public ?float $frequency_penalty;
+    #[Optional('frequency_penalty')]
+    public ?float $frequencyPenalty;
 
     /**
      * If specified, the output will be exactly one of the choices.
      *
-     * @var list<string>|null $guided_choice
+     * @var list<string>|null $guidedChoice
      */
-    #[Optional(list: 'string')]
-    public ?array $guided_choice;
+    #[Optional('guided_choice', list: 'string')]
+    public ?array $guidedChoice;
 
     /**
      * Must be a valid JSON schema. If specified, the output will follow the JSON schema.
      *
-     * @var array<string,mixed>|null $guided_json
+     * @var array<string,mixed>|null $guidedJson
      */
-    #[Optional(map: 'mixed')]
-    public ?array $guided_json;
+    #[Optional('guided_json', map: 'mixed')]
+    public ?array $guidedJson;
 
     /**
      * If specified, the output will follow the regex pattern.
      */
-    #[Optional]
-    public ?string $guided_regex;
+    #[Optional('guided_regex')]
+    public ?string $guidedRegex;
 
     /**
      * This is used with `use_beam_search` to prefer shorter or longer completions.
      */
-    #[Optional]
-    public ?float $length_penalty;
+    #[Optional('length_penalty')]
+    public ?float $lengthPenalty;
 
     /**
      * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the `content` of `message`.
@@ -135,14 +135,14 @@ final class ChatCreateCompletionParams implements BaseModel
     /**
      * Maximum number of completion tokens the model should generate.
      */
-    #[Optional]
-    public ?int $max_tokens;
+    #[Optional('max_tokens')]
+    public ?int $maxTokens;
 
     /**
      * This is an alternative to `top_p` that [many prefer](https://github.com/huggingface/transformers/issues/27670). Must be in [0, 1].
      */
-    #[Optional]
-    public ?float $min_p;
+    #[Optional('min_p')]
+    public ?float $minP;
 
     /**
      * The language model to chat with.
@@ -159,14 +159,14 @@ final class ChatCreateCompletionParams implements BaseModel
     /**
      * Higher values will penalize the model from repeating the same output tokens.
      */
-    #[Optional]
-    public ?float $presence_penalty;
+    #[Optional('presence_penalty')]
+    public ?float $presencePenalty;
 
     /**
      * Use this is you want to guarantee a JSON output without defining a schema. For control over the schema, use `guided_json`.
      */
-    #[Optional]
-    public ?ResponseFormat $response_format;
+    #[Optional('response_format')]
+    public ?ResponseFormat $responseFormat;
 
     /**
      * Whether or not to stream data-only server-sent events as they become available.
@@ -180,9 +180,9 @@ final class ChatCreateCompletionParams implements BaseModel
     #[Optional]
     public ?float $temperature;
 
-    /** @var value-of<ToolChoice>|null $tool_choice */
-    #[Optional(enum: ToolChoice::class)]
-    public ?string $tool_choice;
+    /** @var value-of<ToolChoice>|null $toolChoice */
+    #[Optional('tool_choice', enum: ToolChoice::class)]
+    public ?string $toolChoice;
 
     /**
      * The `function` tool type follows the same schema as the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat). The `retrieval` tool type is unique to Telnyx. You may pass a list of [embedded storage buckets](https://developers.telnyx.com/api/inference/inference-embedding/post-embedding) for retrieval-augmented generation.
@@ -195,20 +195,20 @@ final class ChatCreateCompletionParams implements BaseModel
     /**
      * This is used with `logprobs`. An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability.
      */
-    #[Optional]
-    public ?int $top_logprobs;
+    #[Optional('top_logprobs')]
+    public ?int $topLogprobs;
 
     /**
      * An alternative or complement to `temperature`. This adjusts how many of the top possibilities to consider.
      */
-    #[Optional]
-    public ?float $top_p;
+    #[Optional('top_p')]
+    public ?float $topP;
 
     /**
      * Setting this to `true` will allow the model to [explore more completion options](https://huggingface.co/blog/how-to-generate#beam-search). This is not supported by OpenAI.
      */
-    #[Optional]
-    public ?bool $use_beam_search;
+    #[Optional('use_beam_search')]
+    public ?bool $useBeamSearch;
 
     /**
      * `new ChatCreateCompletionParams()` is missing required properties by the API.
@@ -237,10 +237,10 @@ final class ChatCreateCompletionParams implements BaseModel
      * @param list<Message|array{
      *   content: string|list<TextAndImageArray>, role: value-of<Role>
      * }> $messages
-     * @param list<string> $guided_choice
-     * @param array<string,mixed> $guided_json
-     * @param ResponseFormat|array{type: value-of<Type>} $response_format
-     * @param ToolChoice|value-of<ToolChoice> $tool_choice
+     * @param list<string> $guidedChoice
+     * @param array<string,mixed> $guidedJson
+     * @param ResponseFormat|array{type: value-of<Type>} $responseFormat
+     * @param ToolChoice|value-of<ToolChoice> $toolChoice
      * @param list<ChatCompletionToolParam|array{
      *   function: Function1,
      *   type: value-of<ChatCompletionToolParam\Type>,
@@ -251,55 +251,55 @@ final class ChatCreateCompletionParams implements BaseModel
      */
     public static function with(
         array $messages,
-        ?string $api_key_ref = null,
-        ?int $best_of = null,
-        ?bool $early_stopping = null,
-        ?float $frequency_penalty = null,
-        ?array $guided_choice = null,
-        ?array $guided_json = null,
-        ?string $guided_regex = null,
-        ?float $length_penalty = null,
+        ?string $apiKeyRef = null,
+        ?int $bestOf = null,
+        ?bool $earlyStopping = null,
+        ?float $frequencyPenalty = null,
+        ?array $guidedChoice = null,
+        ?array $guidedJson = null,
+        ?string $guidedRegex = null,
+        ?float $lengthPenalty = null,
         ?bool $logprobs = null,
-        ?int $max_tokens = null,
-        ?float $min_p = null,
+        ?int $maxTokens = null,
+        ?float $minP = null,
         ?string $model = null,
         ?float $n = null,
-        ?float $presence_penalty = null,
-        ResponseFormat|array|null $response_format = null,
+        ?float $presencePenalty = null,
+        ResponseFormat|array|null $responseFormat = null,
         ?bool $stream = null,
         ?float $temperature = null,
-        ToolChoice|string|null $tool_choice = null,
+        ToolChoice|string|null $toolChoice = null,
         ?array $tools = null,
-        ?int $top_logprobs = null,
-        ?float $top_p = null,
-        ?bool $use_beam_search = null,
+        ?int $topLogprobs = null,
+        ?float $topP = null,
+        ?bool $useBeamSearch = null,
     ): self {
         $obj = new self;
 
         $obj['messages'] = $messages;
 
-        null !== $api_key_ref && $obj['api_key_ref'] = $api_key_ref;
-        null !== $best_of && $obj['best_of'] = $best_of;
-        null !== $early_stopping && $obj['early_stopping'] = $early_stopping;
-        null !== $frequency_penalty && $obj['frequency_penalty'] = $frequency_penalty;
-        null !== $guided_choice && $obj['guided_choice'] = $guided_choice;
-        null !== $guided_json && $obj['guided_json'] = $guided_json;
-        null !== $guided_regex && $obj['guided_regex'] = $guided_regex;
-        null !== $length_penalty && $obj['length_penalty'] = $length_penalty;
+        null !== $apiKeyRef && $obj['apiKeyRef'] = $apiKeyRef;
+        null !== $bestOf && $obj['bestOf'] = $bestOf;
+        null !== $earlyStopping && $obj['earlyStopping'] = $earlyStopping;
+        null !== $frequencyPenalty && $obj['frequencyPenalty'] = $frequencyPenalty;
+        null !== $guidedChoice && $obj['guidedChoice'] = $guidedChoice;
+        null !== $guidedJson && $obj['guidedJson'] = $guidedJson;
+        null !== $guidedRegex && $obj['guidedRegex'] = $guidedRegex;
+        null !== $lengthPenalty && $obj['lengthPenalty'] = $lengthPenalty;
         null !== $logprobs && $obj['logprobs'] = $logprobs;
-        null !== $max_tokens && $obj['max_tokens'] = $max_tokens;
-        null !== $min_p && $obj['min_p'] = $min_p;
+        null !== $maxTokens && $obj['maxTokens'] = $maxTokens;
+        null !== $minP && $obj['minP'] = $minP;
         null !== $model && $obj['model'] = $model;
         null !== $n && $obj['n'] = $n;
-        null !== $presence_penalty && $obj['presence_penalty'] = $presence_penalty;
-        null !== $response_format && $obj['response_format'] = $response_format;
+        null !== $presencePenalty && $obj['presencePenalty'] = $presencePenalty;
+        null !== $responseFormat && $obj['responseFormat'] = $responseFormat;
         null !== $stream && $obj['stream'] = $stream;
         null !== $temperature && $obj['temperature'] = $temperature;
-        null !== $tool_choice && $obj['tool_choice'] = $tool_choice;
+        null !== $toolChoice && $obj['toolChoice'] = $toolChoice;
         null !== $tools && $obj['tools'] = $tools;
-        null !== $top_logprobs && $obj['top_logprobs'] = $top_logprobs;
-        null !== $top_p && $obj['top_p'] = $top_p;
-        null !== $use_beam_search && $obj['use_beam_search'] = $use_beam_search;
+        null !== $topLogprobs && $obj['topLogprobs'] = $topLogprobs;
+        null !== $topP && $obj['topP'] = $topP;
+        null !== $useBeamSearch && $obj['useBeamSearch'] = $useBeamSearch;
 
         return $obj;
     }
@@ -325,7 +325,7 @@ final class ChatCreateCompletionParams implements BaseModel
     public function withAPIKeyRef(string $apiKeyRef): self
     {
         $obj = clone $this;
-        $obj['api_key_ref'] = $apiKeyRef;
+        $obj['apiKeyRef'] = $apiKeyRef;
 
         return $obj;
     }
@@ -336,7 +336,7 @@ final class ChatCreateCompletionParams implements BaseModel
     public function withBestOf(int $bestOf): self
     {
         $obj = clone $this;
-        $obj['best_of'] = $bestOf;
+        $obj['bestOf'] = $bestOf;
 
         return $obj;
     }
@@ -347,7 +347,7 @@ final class ChatCreateCompletionParams implements BaseModel
     public function withEarlyStopping(bool $earlyStopping): self
     {
         $obj = clone $this;
-        $obj['early_stopping'] = $earlyStopping;
+        $obj['earlyStopping'] = $earlyStopping;
 
         return $obj;
     }
@@ -358,7 +358,7 @@ final class ChatCreateCompletionParams implements BaseModel
     public function withFrequencyPenalty(float $frequencyPenalty): self
     {
         $obj = clone $this;
-        $obj['frequency_penalty'] = $frequencyPenalty;
+        $obj['frequencyPenalty'] = $frequencyPenalty;
 
         return $obj;
     }
@@ -371,7 +371,7 @@ final class ChatCreateCompletionParams implements BaseModel
     public function withGuidedChoice(array $guidedChoice): self
     {
         $obj = clone $this;
-        $obj['guided_choice'] = $guidedChoice;
+        $obj['guidedChoice'] = $guidedChoice;
 
         return $obj;
     }
@@ -384,7 +384,7 @@ final class ChatCreateCompletionParams implements BaseModel
     public function withGuidedJson(array $guidedJson): self
     {
         $obj = clone $this;
-        $obj['guided_json'] = $guidedJson;
+        $obj['guidedJson'] = $guidedJson;
 
         return $obj;
     }
@@ -395,7 +395,7 @@ final class ChatCreateCompletionParams implements BaseModel
     public function withGuidedRegex(string $guidedRegex): self
     {
         $obj = clone $this;
-        $obj['guided_regex'] = $guidedRegex;
+        $obj['guidedRegex'] = $guidedRegex;
 
         return $obj;
     }
@@ -406,7 +406,7 @@ final class ChatCreateCompletionParams implements BaseModel
     public function withLengthPenalty(float $lengthPenalty): self
     {
         $obj = clone $this;
-        $obj['length_penalty'] = $lengthPenalty;
+        $obj['lengthPenalty'] = $lengthPenalty;
 
         return $obj;
     }
@@ -428,7 +428,7 @@ final class ChatCreateCompletionParams implements BaseModel
     public function withMaxTokens(int $maxTokens): self
     {
         $obj = clone $this;
-        $obj['max_tokens'] = $maxTokens;
+        $obj['maxTokens'] = $maxTokens;
 
         return $obj;
     }
@@ -439,7 +439,7 @@ final class ChatCreateCompletionParams implements BaseModel
     public function withMinP(float $minP): self
     {
         $obj = clone $this;
-        $obj['min_p'] = $minP;
+        $obj['minP'] = $minP;
 
         return $obj;
     }
@@ -472,7 +472,7 @@ final class ChatCreateCompletionParams implements BaseModel
     public function withPresencePenalty(float $presencePenalty): self
     {
         $obj = clone $this;
-        $obj['presence_penalty'] = $presencePenalty;
+        $obj['presencePenalty'] = $presencePenalty;
 
         return $obj;
     }
@@ -486,7 +486,7 @@ final class ChatCreateCompletionParams implements BaseModel
         ResponseFormat|array $responseFormat
     ): self {
         $obj = clone $this;
-        $obj['response_format'] = $responseFormat;
+        $obj['responseFormat'] = $responseFormat;
 
         return $obj;
     }
@@ -519,7 +519,7 @@ final class ChatCreateCompletionParams implements BaseModel
     public function withToolChoice(ToolChoice|string $toolChoice): self
     {
         $obj = clone $this;
-        $obj['tool_choice'] = $toolChoice;
+        $obj['toolChoice'] = $toolChoice;
 
         return $obj;
     }
@@ -549,7 +549,7 @@ final class ChatCreateCompletionParams implements BaseModel
     public function withTopLogprobs(int $topLogprobs): self
     {
         $obj = clone $this;
-        $obj['top_logprobs'] = $topLogprobs;
+        $obj['topLogprobs'] = $topLogprobs;
 
         return $obj;
     }
@@ -560,7 +560,7 @@ final class ChatCreateCompletionParams implements BaseModel
     public function withTopP(float $topP): self
     {
         $obj = clone $this;
-        $obj['top_p'] = $topP;
+        $obj['topP'] = $topP;
 
         return $obj;
     }
@@ -571,7 +571,7 @@ final class ChatCreateCompletionParams implements BaseModel
     public function withUseBeamSearch(bool $useBeamSearch): self
     {
         $obj = clone $this;
-        $obj['use_beam_search'] = $useBeamSearch;
+        $obj['useBeamSearch'] = $useBeamSearch;
 
         return $obj;
     }

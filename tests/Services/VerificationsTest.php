@@ -51,8 +51,8 @@ final class VerificationsTest extends TestCase
         }
 
         $result = $this->client->verifications->triggerCall([
-            'phone_number' => '+13035551234',
-            'verify_profile_id' => '12ade33a-21c0-473b-b055-b3c836e1c292',
+            'phoneNumber' => '+13035551234',
+            'verifyProfileID' => '12ade33a-21c0-473b-b055-b3c836e1c292',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -67,11 +67,11 @@ final class VerificationsTest extends TestCase
         }
 
         $result = $this->client->verifications->triggerCall([
-            'phone_number' => '+13035551234',
-            'verify_profile_id' => '12ade33a-21c0-473b-b055-b3c836e1c292',
-            'custom_code' => '43612',
+            'phoneNumber' => '+13035551234',
+            'verifyProfileID' => '12ade33a-21c0-473b-b055-b3c836e1c292',
+            'customCode' => '43612',
             'extension' => '1www2WABCDw9',
-            'timeout_secs' => 300,
+            'timeoutSecs' => 300,
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -86,8 +86,8 @@ final class VerificationsTest extends TestCase
         }
 
         $result = $this->client->verifications->triggerFlashcall([
-            'phone_number' => '+13035551234',
-            'verify_profile_id' => '12ade33a-21c0-473b-b055-b3c836e1c292',
+            'phoneNumber' => '+13035551234',
+            'verifyProfileID' => '12ade33a-21c0-473b-b055-b3c836e1c292',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -102,9 +102,9 @@ final class VerificationsTest extends TestCase
         }
 
         $result = $this->client->verifications->triggerFlashcall([
-            'phone_number' => '+13035551234',
-            'verify_profile_id' => '12ade33a-21c0-473b-b055-b3c836e1c292',
-            'timeout_secs' => 300,
+            'phoneNumber' => '+13035551234',
+            'verifyProfileID' => '12ade33a-21c0-473b-b055-b3c836e1c292',
+            'timeoutSecs' => 300,
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -119,8 +119,8 @@ final class VerificationsTest extends TestCase
         }
 
         $result = $this->client->verifications->triggerSMS([
-            'phone_number' => '+13035551234',
-            'verify_profile_id' => '12ade33a-21c0-473b-b055-b3c836e1c292',
+            'phoneNumber' => '+13035551234',
+            'verifyProfileID' => '12ade33a-21c0-473b-b055-b3c836e1c292',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -135,10 +135,10 @@ final class VerificationsTest extends TestCase
         }
 
         $result = $this->client->verifications->triggerSMS([
-            'phone_number' => '+13035551234',
-            'verify_profile_id' => '12ade33a-21c0-473b-b055-b3c836e1c292',
-            'custom_code' => '43612',
-            'timeout_secs' => 300,
+            'phoneNumber' => '+13035551234',
+            'verifyProfileID' => '12ade33a-21c0-473b-b055-b3c836e1c292',
+            'customCode' => '43612',
+            'timeoutSecs' => 300,
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -108,7 +108,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->simCardGroups->actions->setPrivateWirelessGateway(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            ['private_wireless_gateway_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58'],
+            ['privateWirelessGatewayID' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58'],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -127,7 +127,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->simCardGroups->actions->setPrivateWirelessGateway(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            ['private_wireless_gateway_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58'],
+            ['privateWirelessGatewayID' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58'],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -146,7 +146,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->simCardGroups->actions->setWirelessBlocklist(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            ['wireless_blocklist_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58'],
+            ['wirelessBlocklistID' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58'],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -162,7 +162,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->simCardGroups->actions->setWirelessBlocklist(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            ['wireless_blocklist_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58'],
+            ['wirelessBlocklistID' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58'],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

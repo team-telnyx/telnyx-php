@@ -26,9 +26,9 @@ final class RecordingsService implements RecordingsContract
      * Updates recording resource for particular call.
      *
      * @param array{
-     *   account_sid: string,
-     *   call_sid: string,
-     *   Status?: 'in-progress'|'paused'|'stopped'|Status,
+     *   accountSid: string,
+     *   callSid: string,
+     *   status?: 'in-progress'|'paused'|'stopped'|Status,
      * }|RecordingRecordingSidJsonParams $params
      *
      * @throws APIException
@@ -42,10 +42,10 @@ final class RecordingsService implements RecordingsContract
             $params,
             $requestOptions,
         );
-        $accountSid = $parsed['account_sid'];
-        unset($parsed['account_sid']);
-        $callSid = $parsed['call_sid'];
-        unset($parsed['call_sid']);
+        $accountSid = $parsed['accountSid'];
+        unset($parsed['accountSid']);
+        $callSid = $parsed['callSid'];
+        unset($parsed['callSid']);
 
         /** @var BaseResponse<RecordingRecordingSidJsonResponse> */
         $response = $this->client->request(
@@ -59,7 +59,7 @@ final class RecordingsService implements RecordingsContract
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
             body: (object) array_diff_key(
                 $parsed,
-                array_flip(['account_sid', 'call_sid'])
+                array_flip(['accountSid', 'callSid'])
             ),
             options: $options,
             convert: RecordingRecordingSidJsonResponse::class,

@@ -24,7 +24,7 @@ final class ActionsService implements ActionsContract
      *
      * Verify verification code by phone number
      *
-     * @param array{code: string, verify_profile_id: string}|ActionVerifyParams $params
+     * @param array{code: string, verifyProfileID: string}|ActionVerifyParams $params
      *
      * @throws APIException
      */

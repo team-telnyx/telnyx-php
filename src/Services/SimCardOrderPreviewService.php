@@ -25,7 +25,7 @@ final class SimCardOrderPreviewService implements SimCardOrderPreviewContract
      * Preview SIM card order purchases.
      *
      * @param array{
-     *   address_id: string, quantity: int
+     *   addressID: string, quantity: int
      * }|SimCardOrderPreviewPreviewParams $params
      *
      * @throws APIException

@@ -15,11 +15,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\SimCardGroupsService::list()
  *
  * @phpstan-type SimCardGroupListParamsShape = array{
- *   filter_name_?: string,
- *   filter_private_wireless_gateway_id_?: string,
- *   filter_wireless_blocklist_id_?: string,
- *   page_number_?: int,
- *   page_size_?: int,
+ *   filterName?: string,
+ *   filterPrivateWirelessGatewayID?: string,
+ *   filterWirelessBlocklistID?: string,
+ *   pageNumber?: int,
+ *   pageSize?: int,
  * }
  */
 final class SimCardGroupListParams implements BaseModel
@@ -32,31 +32,31 @@ final class SimCardGroupListParams implements BaseModel
      * A valid SIM card group name.
      */
     #[Optional]
-    public ?string $filter_name_;
+    public ?string $filterName;
 
     /**
      * A Private Wireless Gateway ID associated with the group.
      */
     #[Optional]
-    public ?string $filter_private_wireless_gateway_id_;
+    public ?string $filterPrivateWirelessGatewayID;
 
     /**
      * A Wireless Blocklist ID associated with the group.
      */
     #[Optional]
-    public ?string $filter_wireless_blocklist_id_;
+    public ?string $filterWirelessBlocklistID;
 
     /**
      * The page number to load.
      */
     #[Optional]
-    public ?int $page_number_;
+    public ?int $pageNumber;
 
     /**
      * The size of the page.
      */
     #[Optional]
-    public ?int $page_size_;
+    public ?int $pageSize;
 
     public function __construct()
     {
@@ -69,19 +69,19 @@ final class SimCardGroupListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $filter_name_ = null,
-        ?string $filter_private_wireless_gateway_id_ = null,
-        ?string $filter_wireless_blocklist_id_ = null,
-        ?int $page_number_ = null,
-        ?int $page_size_ = null,
+        ?string $filterName = null,
+        ?string $filterPrivateWirelessGatewayID = null,
+        ?string $filterWirelessBlocklistID = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
     ): self {
         $obj = new self;
 
-        null !== $filter_name_ && $obj['filter_name_'] = $filter_name_;
-        null !== $filter_private_wireless_gateway_id_ && $obj['filter_private_wireless_gateway_id_'] = $filter_private_wireless_gateway_id_;
-        null !== $filter_wireless_blocklist_id_ && $obj['filter_wireless_blocklist_id_'] = $filter_wireless_blocklist_id_;
-        null !== $page_number_ && $obj['page_number_'] = $page_number_;
-        null !== $page_size_ && $obj['page_size_'] = $page_size_;
+        null !== $filterName && $obj['filterName'] = $filterName;
+        null !== $filterPrivateWirelessGatewayID && $obj['filterPrivateWirelessGatewayID'] = $filterPrivateWirelessGatewayID;
+        null !== $filterWirelessBlocklistID && $obj['filterWirelessBlocklistID'] = $filterWirelessBlocklistID;
+        null !== $pageNumber && $obj['pageNumber'] = $pageNumber;
+        null !== $pageSize && $obj['pageSize'] = $pageSize;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class SimCardGroupListParams implements BaseModel
     public function withFilterName(string $filterName): self
     {
         $obj = clone $this;
-        $obj['filter_name_'] = $filterName;
+        $obj['filterName'] = $filterName;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class SimCardGroupListParams implements BaseModel
         string $filterPrivateWirelessGatewayID
     ): self {
         $obj = clone $this;
-        $obj['filter_private_wireless_gateway_id_'] = $filterPrivateWirelessGatewayID;
+        $obj['filterPrivateWirelessGatewayID'] = $filterPrivateWirelessGatewayID;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class SimCardGroupListParams implements BaseModel
         string $filterWirelessBlocklistID
     ): self {
         $obj = clone $this;
-        $obj['filter_wireless_blocklist_id_'] = $filterWirelessBlocklistID;
+        $obj['filterWirelessBlocklistID'] = $filterWirelessBlocklistID;
 
         return $obj;
     }
@@ -127,7 +127,7 @@ final class SimCardGroupListParams implements BaseModel
     public function withPageNumber(int $pageNumber): self
     {
         $obj = clone $this;
-        $obj['page_number_'] = $pageNumber;
+        $obj['pageNumber'] = $pageNumber;
 
         return $obj;
     }
@@ -138,7 +138,7 @@ final class SimCardGroupListParams implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj['page_size_'] = $pageSize;
+        $obj['pageSize'] = $pageSize;
 
         return $obj;
     }

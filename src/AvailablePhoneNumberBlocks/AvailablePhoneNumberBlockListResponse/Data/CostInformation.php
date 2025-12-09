@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type CostInformationShape = array{
- *   currency?: string|null, monthly_cost?: string|null, upfront_cost?: string|null
+ *   currency?: string|null, monthlyCost?: string|null, upfrontCost?: string|null
  * }
  */
 final class CostInformation implements BaseModel
@@ -24,11 +24,11 @@ final class CostInformation implements BaseModel
     #[Optional]
     public ?string $currency;
 
-    #[Optional]
-    public ?string $monthly_cost;
+    #[Optional('monthly_cost')]
+    public ?string $monthlyCost;
 
-    #[Optional]
-    public ?string $upfront_cost;
+    #[Optional('upfront_cost')]
+    public ?string $upfrontCost;
 
     public function __construct()
     {
@@ -42,14 +42,14 @@ final class CostInformation implements BaseModel
      */
     public static function with(
         ?string $currency = null,
-        ?string $monthly_cost = null,
-        ?string $upfront_cost = null,
+        ?string $monthlyCost = null,
+        ?string $upfrontCost = null,
     ): self {
         $obj = new self;
 
         null !== $currency && $obj['currency'] = $currency;
-        null !== $monthly_cost && $obj['monthly_cost'] = $monthly_cost;
-        null !== $upfront_cost && $obj['upfront_cost'] = $upfront_cost;
+        null !== $monthlyCost && $obj['monthlyCost'] = $monthlyCost;
+        null !== $upfrontCost && $obj['upfrontCost'] = $upfrontCost;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class CostInformation implements BaseModel
     public function withMonthlyCost(string $monthlyCost): self
     {
         $obj = clone $this;
-        $obj['monthly_cost'] = $monthlyCost;
+        $obj['monthlyCost'] = $monthlyCost;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class CostInformation implements BaseModel
     public function withUpfrontCost(string $upfrontCost): self
     {
         $obj = clone $this;
-        $obj['upfront_cost'] = $upfrontCost;
+        $obj['upfrontCost'] = $upfrontCost;
 
         return $obj;
     }

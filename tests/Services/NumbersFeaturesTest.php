@@ -35,7 +35,7 @@ final class NumbersFeaturesTest extends TestCase
         }
 
         $result = $this->client->numbersFeatures->create([
-            'phone_numbers' => ['string'],
+            'phoneNumbers' => ['string'],
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -50,7 +50,7 @@ final class NumbersFeaturesTest extends TestCase
         }
 
         $result = $this->client->numbersFeatures->create([
-            'phone_numbers' => ['string'],
+            'phoneNumbers' => ['string'],
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

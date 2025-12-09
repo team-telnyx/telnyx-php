@@ -22,9 +22,9 @@ use Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Page;
  * @phpstan-type SessionRetrieveParticipantsParamsShape = array{
  *   filter?: Filter|array{
  *     context?: string|null,
- *     date_joined_at?: DateJoinedAt|null,
- *     date_left_at?: DateLeftAt|null,
- *     date_updated_at?: DateUpdatedAt|null,
+ *     dateJoinedAt?: DateJoinedAt|null,
+ *     dateLeftAt?: DateLeftAt|null,
+ *     dateUpdatedAt?: DateUpdatedAt|null,
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
  * }
@@ -59,9 +59,9 @@ final class SessionRetrieveParticipantsParams implements BaseModel
      *
      * @param Filter|array{
      *   context?: string|null,
-     *   date_joined_at?: DateJoinedAt|null,
-     *   date_left_at?: DateLeftAt|null,
-     *   date_updated_at?: DateUpdatedAt|null,
+     *   dateJoinedAt?: DateJoinedAt|null,
+     *   dateLeftAt?: DateLeftAt|null,
+     *   dateUpdatedAt?: DateUpdatedAt|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      */
@@ -82,9 +82,9 @@ final class SessionRetrieveParticipantsParams implements BaseModel
      *
      * @param Filter|array{
      *   context?: string|null,
-     *   date_joined_at?: DateJoinedAt|null,
-     *   date_left_at?: DateLeftAt|null,
-     *   date_updated_at?: DateUpdatedAt|null,
+     *   dateJoinedAt?: DateJoinedAt|null,
+     *   dateLeftAt?: DateLeftAt|null,
+     *   dateUpdatedAt?: DateUpdatedAt|null,
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

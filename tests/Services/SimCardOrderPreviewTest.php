@@ -35,7 +35,7 @@ final class SimCardOrderPreviewTest extends TestCase
         }
 
         $result = $this->client->simCardOrderPreview->preview([
-            'address_id' => '1293384261075731499', 'quantity' => 21,
+            'addressID' => '1293384261075731499', 'quantity' => 21,
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -50,7 +50,7 @@ final class SimCardOrderPreviewTest extends TestCase
         }
 
         $result = $this->client->simCardOrderPreview->preview([
-            'address_id' => '1293384261075731499', 'quantity' => 21,
+            'addressID' => '1293384261075731499', 'quantity' => 21,
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

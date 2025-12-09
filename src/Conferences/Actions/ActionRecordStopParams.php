@@ -20,9 +20,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Conferences\ActionsService::recordStop()
  *
  * @phpstan-type ActionRecordStopParamsShape = array{
- *   client_state?: string,
- *   command_id?: string,
- *   recording_id?: string,
+ *   clientState?: string,
+ *   commandID?: string,
+ *   recordingID?: string,
  *   region?: Region|value-of<Region>,
  * }
  */
@@ -35,20 +35,20 @@ final class ActionRecordStopParams implements BaseModel
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Optional]
-    public ?string $client_state;
+    #[Optional('client_state')]
+    public ?string $clientState;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Optional]
-    public ?string $command_id;
+    #[Optional('command_id')]
+    public ?string $commandID;
 
     /**
      * Uniquely identifies the resource.
      */
-    #[Optional]
-    public ?string $recording_id;
+    #[Optional('recording_id')]
+    public ?string $recordingID;
 
     /**
      * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
@@ -71,16 +71,16 @@ final class ActionRecordStopParams implements BaseModel
      * @param Region|value-of<Region> $region
      */
     public static function with(
-        ?string $client_state = null,
-        ?string $command_id = null,
-        ?string $recording_id = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        ?string $recordingID = null,
         Region|string|null $region = null,
     ): self {
         $obj = new self;
 
-        null !== $client_state && $obj['client_state'] = $client_state;
-        null !== $command_id && $obj['command_id'] = $command_id;
-        null !== $recording_id && $obj['recording_id'] = $recording_id;
+        null !== $clientState && $obj['clientState'] = $clientState;
+        null !== $commandID && $obj['commandID'] = $commandID;
+        null !== $recordingID && $obj['recordingID'] = $recordingID;
         null !== $region && $obj['region'] = $region;
 
         return $obj;
@@ -92,7 +92,7 @@ final class ActionRecordStopParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj['client_state'] = $clientState;
+        $obj['clientState'] = $clientState;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class ActionRecordStopParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj['command_id'] = $commandID;
+        $obj['commandID'] = $commandID;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class ActionRecordStopParams implements BaseModel
     public function withRecordingID(string $recordingID): self
     {
         $obj = clone $this;
-        $obj['recording_id'] = $recordingID;
+        $obj['recordingID'] = $recordingID;
 
         return $obj;
     }

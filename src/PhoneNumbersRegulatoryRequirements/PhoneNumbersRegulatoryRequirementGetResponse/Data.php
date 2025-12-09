@@ -13,11 +13,11 @@ use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementG
 
 /**
  * @phpstan-type DataShape = array{
- *   phone_number?: string|null,
- *   phone_number_type?: string|null,
- *   record_type?: string|null,
- *   region_information?: list<RegionInformation>|null,
- *   regulatory_requirements?: list<RegulatoryRequirement>|null,
+ *   phoneNumber?: string|null,
+ *   phoneNumberType?: string|null,
+ *   recordType?: string|null,
+ *   regionInformation?: list<RegionInformation>|null,
+ *   regulatoryRequirements?: list<RegulatoryRequirement>|null,
  * }
  */
 final class Data implements BaseModel
@@ -25,22 +25,22 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?string $phone_number;
+    #[Optional('phone_number')]
+    public ?string $phoneNumber;
 
-    #[Optional]
-    public ?string $phone_number_type;
+    #[Optional('phone_number_type')]
+    public ?string $phoneNumberType;
 
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
-    /** @var list<RegionInformation>|null $region_information */
-    #[Optional(list: RegionInformation::class)]
-    public ?array $region_information;
+    /** @var list<RegionInformation>|null $regionInformation */
+    #[Optional('region_information', list: RegionInformation::class)]
+    public ?array $regionInformation;
 
-    /** @var list<RegulatoryRequirement>|null $regulatory_requirements */
-    #[Optional(list: RegulatoryRequirement::class)]
-    public ?array $regulatory_requirements;
+    /** @var list<RegulatoryRequirement>|null $regulatoryRequirements */
+    #[Optional('regulatory_requirements', list: RegulatoryRequirement::class)]
+    public ?array $regulatoryRequirements;
 
     public function __construct()
     {
@@ -53,32 +53,32 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<RegionInformation|array{
-     *   region_name?: string|null, region_type?: string|null
-     * }> $region_information
+     *   regionName?: string|null, regionType?: string|null
+     * }> $regionInformation
      * @param list<RegulatoryRequirement|array{
      *   id?: string|null,
-     *   acceptance_criteria?: AcceptanceCriteria|null,
+     *   acceptanceCriteria?: AcceptanceCriteria|null,
      *   description?: string|null,
      *   example?: string|null,
-     *   field_type?: string|null,
+     *   fieldType?: string|null,
      *   label?: string|null,
-     *   record_type?: string|null,
-     * }> $regulatory_requirements
+     *   recordType?: string|null,
+     * }> $regulatoryRequirements
      */
     public static function with(
-        ?string $phone_number = null,
-        ?string $phone_number_type = null,
-        ?string $record_type = null,
-        ?array $region_information = null,
-        ?array $regulatory_requirements = null,
+        ?string $phoneNumber = null,
+        ?string $phoneNumberType = null,
+        ?string $recordType = null,
+        ?array $regionInformation = null,
+        ?array $regulatoryRequirements = null,
     ): self {
         $obj = new self;
 
-        null !== $phone_number && $obj['phone_number'] = $phone_number;
-        null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $region_information && $obj['region_information'] = $region_information;
-        null !== $regulatory_requirements && $obj['regulatory_requirements'] = $regulatory_requirements;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
+        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $regionInformation && $obj['regionInformation'] = $regionInformation;
+        null !== $regulatoryRequirements && $obj['regulatoryRequirements'] = $regulatoryRequirements;
 
         return $obj;
     }
@@ -86,7 +86,7 @@ final class Data implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class Data implements BaseModel
     public function withPhoneNumberType(string $phoneNumberType): self
     {
         $obj = clone $this;
-        $obj['phone_number_type'] = $phoneNumberType;
+        $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }
@@ -102,20 +102,20 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
 
     /**
      * @param list<RegionInformation|array{
-     *   region_name?: string|null, region_type?: string|null
+     *   regionName?: string|null, regionType?: string|null
      * }> $regionInformation
      */
     public function withRegionInformation(array $regionInformation): self
     {
         $obj = clone $this;
-        $obj['region_information'] = $regionInformation;
+        $obj['regionInformation'] = $regionInformation;
 
         return $obj;
     }
@@ -123,19 +123,19 @@ final class Data implements BaseModel
     /**
      * @param list<RegulatoryRequirement|array{
      *   id?: string|null,
-     *   acceptance_criteria?: AcceptanceCriteria|null,
+     *   acceptanceCriteria?: AcceptanceCriteria|null,
      *   description?: string|null,
      *   example?: string|null,
-     *   field_type?: string|null,
+     *   fieldType?: string|null,
      *   label?: string|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      * }> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements
     ): self {
         $obj = clone $this;
-        $obj['regulatory_requirements'] = $regulatoryRequirements;
+        $obj['regulatoryRequirements'] = $regulatoryRequirements;
 
         return $obj;
     }

@@ -24,7 +24,7 @@ final class NumbersFeaturesService implements NumbersFeaturesContract
      *
      * Retrieve the features for a list of numbers
      *
-     * @param array{phone_numbers: list<string>}|NumbersFeatureCreateParams $params
+     * @param array{phoneNumbers: list<string>}|NumbersFeatureCreateParams $params
      *
      * @throws APIException
      */

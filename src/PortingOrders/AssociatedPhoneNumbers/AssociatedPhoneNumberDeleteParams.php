@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\PortingOrders\AssociatedPhoneNumbersService::delete()
  *
  * @phpstan-type AssociatedPhoneNumberDeleteParamsShape = array{
- *   porting_order_id: string
+ *   portingOrderID: string
  * }
  */
 final class AssociatedPhoneNumberDeleteParams implements BaseModel
@@ -25,14 +25,14 @@ final class AssociatedPhoneNumberDeleteParams implements BaseModel
     use SdkParams;
 
     #[Required]
-    public string $porting_order_id;
+    public string $portingOrderID;
 
     /**
      * `new AssociatedPhoneNumberDeleteParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * AssociatedPhoneNumberDeleteParams::with(porting_order_id: ...)
+     * AssociatedPhoneNumberDeleteParams::with(portingOrderID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -51,11 +51,11 @@ final class AssociatedPhoneNumberDeleteParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $porting_order_id): self
+    public static function with(string $portingOrderID): self
     {
         $obj = new self;
 
-        $obj['porting_order_id'] = $porting_order_id;
+        $obj['portingOrderID'] = $portingOrderID;
 
         return $obj;
     }
@@ -63,7 +63,7 @@ final class AssociatedPhoneNumberDeleteParams implements BaseModel
     public function withPortingOrderID(string $portingOrderID): self
     {
         $obj = clone $this;
-        $obj['porting_order_id'] = $portingOrderID;
+        $obj['portingOrderID'] = $portingOrderID;
 
         return $obj;
     }

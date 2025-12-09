@@ -30,9 +30,7 @@ final class SimCardGetActivationCodeResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   activation_code?: string|null, record_type?: string|null
-     * } $data
+     * @param Data|array{activationCode?: string|null, recordType?: string|null} $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -44,9 +42,7 @@ final class SimCardGetActivationCodeResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   activation_code?: string|null, record_type?: string|null
-     * } $data
+     * @param Data|array{activationCode?: string|null, recordType?: string|null} $data
      */
     public function withData(Data|array $data): self
     {

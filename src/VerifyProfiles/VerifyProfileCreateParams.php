@@ -21,27 +21,27 @@ use Telnyx\VerifyProfiles\VerifyProfileCreateParams\SMS;
  * @phpstan-type VerifyProfileCreateParamsShape = array{
  *   name: string,
  *   call?: Call|array{
- *     app_name?: string|null,
- *     code_length?: int|null,
- *     default_verification_timeout_secs?: int|null,
- *     messaging_template_id?: string|null,
- *     whitelisted_destinations?: list<string>|null,
+ *     appName?: string|null,
+ *     codeLength?: int|null,
+ *     defaultVerificationTimeoutSecs?: int|null,
+ *     messagingTemplateID?: string|null,
+ *     whitelistedDestinations?: list<string>|null,
  *   },
  *   flashcall?: Flashcall|array{
- *     default_verification_timeout_secs?: int|null,
- *     whitelisted_destinations?: list<string>|null,
+ *     defaultVerificationTimeoutSecs?: int|null,
+ *     whitelistedDestinations?: list<string>|null,
  *   },
  *   language?: string,
  *   sms?: SMS|array{
- *     whitelisted_destinations: list<string>,
- *     alpha_sender?: string|null,
- *     app_name?: string|null,
- *     code_length?: int|null,
- *     default_verification_timeout_secs?: int|null,
- *     messaging_template_id?: string|null,
+ *     whitelistedDestinations: list<string>,
+ *     alphaSender?: string|null,
+ *     appName?: string|null,
+ *     codeLength?: int|null,
+ *     defaultVerificationTimeoutSecs?: int|null,
+ *     messagingTemplateID?: string|null,
  *   },
- *   webhook_failover_url?: string,
- *   webhook_url?: string,
+ *   webhookFailoverURL?: string,
+ *   webhookURL?: string,
  * }
  */
 final class VerifyProfileCreateParams implements BaseModel
@@ -65,11 +65,11 @@ final class VerifyProfileCreateParams implements BaseModel
     #[Optional]
     public ?SMS $sms;
 
-    #[Optional]
-    public ?string $webhook_failover_url;
+    #[Optional('webhook_failover_url')]
+    public ?string $webhookFailoverURL;
 
-    #[Optional]
-    public ?string $webhook_url;
+    #[Optional('webhook_url')]
+    public ?string $webhookURL;
 
     /**
      * `new VerifyProfileCreateParams()` is missing required properties by the API.
@@ -96,23 +96,23 @@ final class VerifyProfileCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Call|array{
-     *   app_name?: string|null,
-     *   code_length?: int|null,
-     *   default_verification_timeout_secs?: int|null,
-     *   messaging_template_id?: string|null,
-     *   whitelisted_destinations?: list<string>|null,
+     *   appName?: string|null,
+     *   codeLength?: int|null,
+     *   defaultVerificationTimeoutSecs?: int|null,
+     *   messagingTemplateID?: string|null,
+     *   whitelistedDestinations?: list<string>|null,
      * } $call
      * @param Flashcall|array{
-     *   default_verification_timeout_secs?: int|null,
-     *   whitelisted_destinations?: list<string>|null,
+     *   defaultVerificationTimeoutSecs?: int|null,
+     *   whitelistedDestinations?: list<string>|null,
      * } $flashcall
      * @param SMS|array{
-     *   whitelisted_destinations: list<string>,
-     *   alpha_sender?: string|null,
-     *   app_name?: string|null,
-     *   code_length?: int|null,
-     *   default_verification_timeout_secs?: int|null,
-     *   messaging_template_id?: string|null,
+     *   whitelistedDestinations: list<string>,
+     *   alphaSender?: string|null,
+     *   appName?: string|null,
+     *   codeLength?: int|null,
+     *   defaultVerificationTimeoutSecs?: int|null,
+     *   messagingTemplateID?: string|null,
      * } $sms
      */
     public static function with(
@@ -121,8 +121,8 @@ final class VerifyProfileCreateParams implements BaseModel
         Flashcall|array|null $flashcall = null,
         ?string $language = null,
         SMS|array|null $sms = null,
-        ?string $webhook_failover_url = null,
-        ?string $webhook_url = null,
+        ?string $webhookFailoverURL = null,
+        ?string $webhookURL = null,
     ): self {
         $obj = new self;
 
@@ -132,8 +132,8 @@ final class VerifyProfileCreateParams implements BaseModel
         null !== $flashcall && $obj['flashcall'] = $flashcall;
         null !== $language && $obj['language'] = $language;
         null !== $sms && $obj['sms'] = $sms;
-        null !== $webhook_failover_url && $obj['webhook_failover_url'] = $webhook_failover_url;
-        null !== $webhook_url && $obj['webhook_url'] = $webhook_url;
+        null !== $webhookFailoverURL && $obj['webhookFailoverURL'] = $webhookFailoverURL;
+        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
 
         return $obj;
     }
@@ -148,11 +148,11 @@ final class VerifyProfileCreateParams implements BaseModel
 
     /**
      * @param Call|array{
-     *   app_name?: string|null,
-     *   code_length?: int|null,
-     *   default_verification_timeout_secs?: int|null,
-     *   messaging_template_id?: string|null,
-     *   whitelisted_destinations?: list<string>|null,
+     *   appName?: string|null,
+     *   codeLength?: int|null,
+     *   defaultVerificationTimeoutSecs?: int|null,
+     *   messagingTemplateID?: string|null,
+     *   whitelistedDestinations?: list<string>|null,
      * } $call
      */
     public function withCall(Call|array $call): self
@@ -165,8 +165,8 @@ final class VerifyProfileCreateParams implements BaseModel
 
     /**
      * @param Flashcall|array{
-     *   default_verification_timeout_secs?: int|null,
-     *   whitelisted_destinations?: list<string>|null,
+     *   defaultVerificationTimeoutSecs?: int|null,
+     *   whitelistedDestinations?: list<string>|null,
      * } $flashcall
      */
     public function withFlashcall(Flashcall|array $flashcall): self
@@ -187,12 +187,12 @@ final class VerifyProfileCreateParams implements BaseModel
 
     /**
      * @param SMS|array{
-     *   whitelisted_destinations: list<string>,
-     *   alpha_sender?: string|null,
-     *   app_name?: string|null,
-     *   code_length?: int|null,
-     *   default_verification_timeout_secs?: int|null,
-     *   messaging_template_id?: string|null,
+     *   whitelistedDestinations: list<string>,
+     *   alphaSender?: string|null,
+     *   appName?: string|null,
+     *   codeLength?: int|null,
+     *   defaultVerificationTimeoutSecs?: int|null,
+     *   messagingTemplateID?: string|null,
      * } $sms
      */
     public function withSMS(SMS|array $sms): self
@@ -206,7 +206,7 @@ final class VerifyProfileCreateParams implements BaseModel
     public function withWebhookFailoverURL(string $webhookFailoverURL): self
     {
         $obj = clone $this;
-        $obj['webhook_failover_url'] = $webhookFailoverURL;
+        $obj['webhookFailoverURL'] = $webhookFailoverURL;
 
         return $obj;
     }
@@ -214,7 +214,7 @@ final class VerifyProfileCreateParams implements BaseModel
     public function withWebhookURL(string $webhookURL): self
     {
         $obj = clone $this;
-        $obj['webhook_url'] = $webhookURL;
+        $obj['webhookURL'] = $webhookURL;
 
         return $obj;
     }

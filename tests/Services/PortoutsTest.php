@@ -105,7 +105,7 @@ final class PortoutsTest extends TestCase
             [
                 'id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
                 'reason' => 'I do not recognize this transaction',
-                'host_messaging' => false,
+                'hostMessaging' => false,
             ],
         );
 

@@ -36,17 +36,17 @@ final class VoiceNewResponse implements BaseModel
      *
      * @param CdrUsageReportResponseLegacy|array{
      *   id?: string|null,
-     *   aggregation_type?: int|null,
+     *   aggregationType?: int|null,
      *   connections?: list<string>|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   end_time?: \DateTimeInterface|null,
-     *   product_breakdown?: int|null,
-     *   record_type?: string|null,
-     *   report_url?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   endTime?: \DateTimeInterface|null,
+     *   productBreakdown?: int|null,
+     *   recordType?: string|null,
+     *   reportURL?: string|null,
      *   result?: mixed,
-     *   start_time?: \DateTimeInterface|null,
+     *   startTime?: \DateTimeInterface|null,
      *   status?: int|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(
@@ -64,17 +64,17 @@ final class VoiceNewResponse implements BaseModel
      *
      * @param CdrUsageReportResponseLegacy|array{
      *   id?: string|null,
-     *   aggregation_type?: int|null,
+     *   aggregationType?: int|null,
      *   connections?: list<string>|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   end_time?: \DateTimeInterface|null,
-     *   product_breakdown?: int|null,
-     *   record_type?: string|null,
-     *   report_url?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   endTime?: \DateTimeInterface|null,
+     *   productBreakdown?: int|null,
+     *   recordType?: string|null,
+     *   reportURL?: string|null,
      *   result?: mixed,
-     *   start_time?: \DateTimeInterface|null,
+     *   startTime?: \DateTimeInterface|null,
      *   status?: int|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(CdrUsageReportResponseLegacy|array $data): self

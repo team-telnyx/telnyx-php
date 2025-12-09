@@ -19,14 +19,14 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type AuthenticationProviderCreateParamsShape = array{
  *   name: string,
  *   settings: Settings|array{
- *     idp_cert_fingerprint: string,
- *     idp_entity_id: string,
- *     idp_sso_target_url: string,
- *     idp_cert_fingerprint_algorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
+ *     idpCertFingerprint: string,
+ *     idpEntityID: string,
+ *     idpSSOTargetURL: string,
+ *     idpCertFingerprintAlgorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
  *   },
- *   short_name: string,
+ *   shortName: string,
  *   active?: bool,
- *   settings_url?: string,
+ *   settingsURL?: string,
  * }
  */
 final class AuthenticationProviderCreateParams implements BaseModel
@@ -50,8 +50,8 @@ final class AuthenticationProviderCreateParams implements BaseModel
     /**
      * The short name associated with the authentication provider. This must be unique and URL-friendly, as it's going to be part of the login URL.
      */
-    #[Required]
-    public string $short_name;
+    #[Required('short_name')]
+    public string $shortName;
 
     /**
      * The active status of the authentication provider.
@@ -62,8 +62,8 @@ final class AuthenticationProviderCreateParams implements BaseModel
     /**
      * The URL for the identity provider metadata file to populate the settings automatically. If the settings attribute is provided, that will be used instead.
      */
-    #[Optional]
-    public ?string $settings_url;
+    #[Optional('settings_url')]
+    public ?string $settingsURL;
 
     /**
      * `new AuthenticationProviderCreateParams()` is missing required properties by the API.
@@ -71,7 +71,7 @@ final class AuthenticationProviderCreateParams implements BaseModel
      * To enforce required parameters use
      * ```
      * AuthenticationProviderCreateParams::with(
-     *   name: ..., settings: ..., short_name: ...
+     *   name: ..., settings: ..., shortName: ...
      * )
      * ```
      *
@@ -95,27 +95,27 @@ final class AuthenticationProviderCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Settings|array{
-     *   idp_cert_fingerprint: string,
-     *   idp_entity_id: string,
-     *   idp_sso_target_url: string,
-     *   idp_cert_fingerprint_algorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
+     *   idpCertFingerprint: string,
+     *   idpEntityID: string,
+     *   idpSSOTargetURL: string,
+     *   idpCertFingerprintAlgorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
      * } $settings
      */
     public static function with(
         string $name,
         Settings|array $settings,
-        string $short_name,
+        string $shortName,
         ?bool $active = null,
-        ?string $settings_url = null,
+        ?string $settingsURL = null,
     ): self {
         $obj = new self;
 
         $obj['name'] = $name;
         $obj['settings'] = $settings;
-        $obj['short_name'] = $short_name;
+        $obj['shortName'] = $shortName;
 
         null !== $active && $obj['active'] = $active;
-        null !== $settings_url && $obj['settings_url'] = $settings_url;
+        null !== $settingsURL && $obj['settingsURL'] = $settingsURL;
 
         return $obj;
     }
@@ -135,10 +135,10 @@ final class AuthenticationProviderCreateParams implements BaseModel
      * The settings associated with the authentication provider.
      *
      * @param Settings|array{
-     *   idp_cert_fingerprint: string,
-     *   idp_entity_id: string,
-     *   idp_sso_target_url: string,
-     *   idp_cert_fingerprint_algorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
+     *   idpCertFingerprint: string,
+     *   idpEntityID: string,
+     *   idpSSOTargetURL: string,
+     *   idpCertFingerprintAlgorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
      * } $settings
      */
     public function withSettings(Settings|array $settings): self
@@ -155,7 +155,7 @@ final class AuthenticationProviderCreateParams implements BaseModel
     public function withShortName(string $shortName): self
     {
         $obj = clone $this;
-        $obj['short_name'] = $shortName;
+        $obj['shortName'] = $shortName;
 
         return $obj;
     }
@@ -177,7 +177,7 @@ final class AuthenticationProviderCreateParams implements BaseModel
     public function withSettingsURL(string $settingsURL): self
     {
         $obj = clone $this;
-        $obj['settings_url'] = $settingsURL;
+        $obj['settingsURL'] = $settingsURL;
 
         return $obj;
     }

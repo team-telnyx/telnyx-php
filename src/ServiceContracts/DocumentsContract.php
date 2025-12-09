@@ -12,7 +12,9 @@ use Telnyx\Documents\DocumentListParams;
 use Telnyx\Documents\DocumentListResponse;
 use Telnyx\Documents\DocumentUpdateParams;
 use Telnyx\Documents\DocumentUpdateResponse;
+use Telnyx\Documents\DocumentUploadJsonParams;
 use Telnyx\Documents\DocumentUploadJsonResponse;
+use Telnyx\Documents\DocumentUploadParams;
 use Telnyx\Documents\DocumentUploadResponse;
 use Telnyx\RequestOptions;
 
@@ -86,20 +88,24 @@ interface DocumentsContract
     /**
      * @api
      *
+     * @param array<mixed>|DocumentUploadParams $params
+     *
      * @throws APIException
      */
     public function upload(
-        mixed $params,
+        array|DocumentUploadParams $params,
         ?RequestOptions $requestOptions = null
     ): DocumentUploadResponse;
 
     /**
      * @api
      *
+     * @param array<mixed>|DocumentUploadJsonParams $params
+     *
      * @throws APIException
      */
     public function uploadJson(
-        mixed $params,
-        ?RequestOptions $requestOptions = null
+        array|DocumentUploadJsonParams $params,
+        ?RequestOptions $requestOptions = null,
     ): DocumentUploadJsonResponse;
 }

@@ -40,22 +40,22 @@ final class NumberLookupListResponse implements BaseModel
      *
      * @param list<Data|array{
      *   id?: string|null,
-     *   aggregation_type?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   end_date?: \DateTimeInterface|null,
-     *   managed_accounts?: list<string>|null,
-     *   record_type?: string|null,
-     *   report_url?: string|null,
+     *   aggregationType?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   endDate?: \DateTimeInterface|null,
+     *   managedAccounts?: list<string>|null,
+     *   recordType?: string|null,
+     *   reportURL?: string|null,
      *   result?: list<Result>|null,
-     *   start_date?: \DateTimeInterface|null,
+     *   startDate?: \DateTimeInterface|null,
      *   status?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      * @param StandardPaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -73,16 +73,16 @@ final class NumberLookupListResponse implements BaseModel
     /**
      * @param list<Data|array{
      *   id?: string|null,
-     *   aggregation_type?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   end_date?: \DateTimeInterface|null,
-     *   managed_accounts?: list<string>|null,
-     *   record_type?: string|null,
-     *   report_url?: string|null,
+     *   aggregationType?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   endDate?: \DateTimeInterface|null,
+     *   managedAccounts?: list<string>|null,
+     *   recordType?: string|null,
+     *   reportURL?: string|null,
      *   result?: list<Result>|null,
-     *   start_date?: \DateTimeInterface|null,
+     *   startDate?: \DateTimeInterface|null,
      *   status?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -95,10 +95,10 @@ final class NumberLookupListResponse implements BaseModel
 
     /**
      * @param StandardPaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(StandardPaginationMeta|array $meta): self

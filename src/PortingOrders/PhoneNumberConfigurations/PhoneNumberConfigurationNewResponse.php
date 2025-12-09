@@ -35,11 +35,11 @@ final class PhoneNumberConfigurationNewResponse implements BaseModel
      *
      * @param list<Data|array{
      *   id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   porting_phone_number_id?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
-     *   user_bundle_id?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   portingPhoneNumberID?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     *   userBundleID?: string|null,
      * }> $data
      */
     public static function with(?array $data = null): self
@@ -54,11 +54,11 @@ final class PhoneNumberConfigurationNewResponse implements BaseModel
     /**
      * @param list<Data|array{
      *   id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   porting_phone_number_id?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
-     *   user_bundle_id?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   portingPhoneNumberID?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     *   userBundleID?: string|null,
      * }> $data
      */
     public function withData(array $data): self

@@ -47,7 +47,7 @@ final class EmbeddingSimilaritySearchResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   distance: float, document_chunk: string, metadata: Metadata
+     *   distance: float, documentChunk: string, metadata: Metadata
      * }> $data
      */
     public static function with(array $data): self
@@ -61,7 +61,7 @@ final class EmbeddingSimilaritySearchResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   distance: float, document_chunk: string, metadata: Metadata
+     *   distance: float, documentChunk: string, metadata: Metadata
      * }> $data
      */
     public function withData(array $data): self

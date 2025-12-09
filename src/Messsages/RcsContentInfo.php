@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type RcsContentInfoShape = array{
- *   file_url: string, force_refresh?: bool|null, thumbnail_url?: string|null
+ *   fileURL: string, forceRefresh?: bool|null, thumbnailURL?: string|null
  * }
  */
 final class RcsContentInfo implements BaseModel
@@ -22,27 +22,27 @@ final class RcsContentInfo implements BaseModel
     /**
      * Publicly reachable URL of the file.
      */
-    #[Required]
-    public string $file_url;
+    #[Required('file_url')]
+    public string $fileURL;
 
     /**
      * If set the URL content will not be cached.
      */
-    #[Optional]
-    public ?bool $force_refresh;
+    #[Optional('force_refresh')]
+    public ?bool $forceRefresh;
 
     /**
      * Publicly reachable URL of the thumbnail. Maximum size of 100 kB.
      */
-    #[Optional]
-    public ?string $thumbnail_url;
+    #[Optional('thumbnail_url')]
+    public ?string $thumbnailURL;
 
     /**
      * `new RcsContentInfo()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * RcsContentInfo::with(file_url: ...)
+     * RcsContentInfo::with(fileURL: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -62,16 +62,16 @@ final class RcsContentInfo implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $file_url,
-        ?bool $force_refresh = null,
-        ?string $thumbnail_url = null
+        string $fileURL,
+        ?bool $forceRefresh = null,
+        ?string $thumbnailURL = null
     ): self {
         $obj = new self;
 
-        $obj['file_url'] = $file_url;
+        $obj['fileURL'] = $fileURL;
 
-        null !== $force_refresh && $obj['force_refresh'] = $force_refresh;
-        null !== $thumbnail_url && $obj['thumbnail_url'] = $thumbnail_url;
+        null !== $forceRefresh && $obj['forceRefresh'] = $forceRefresh;
+        null !== $thumbnailURL && $obj['thumbnailURL'] = $thumbnailURL;
 
         return $obj;
     }
@@ -82,7 +82,7 @@ final class RcsContentInfo implements BaseModel
     public function withFileURL(string $fileURL): self
     {
         $obj = clone $this;
-        $obj['file_url'] = $fileURL;
+        $obj['fileURL'] = $fileURL;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class RcsContentInfo implements BaseModel
     public function withForceRefresh(bool $forceRefresh): self
     {
         $obj = clone $this;
-        $obj['force_refresh'] = $forceRefresh;
+        $obj['forceRefresh'] = $forceRefresh;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class RcsContentInfo implements BaseModel
     public function withThumbnailURL(string $thumbnailURL): self
     {
         $obj = clone $this;
-        $obj['thumbnail_url'] = $thumbnailURL;
+        $obj['thumbnailURL'] = $thumbnailURL;
 
         return $obj;
     }

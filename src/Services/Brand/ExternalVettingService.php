@@ -55,7 +55,7 @@ final class ExternalVettingService implements ExternalVettingContract
      * saved with the brand and will be considered for future campaign qualification.
      *
      * @param array{
-     *   evpId: string, vettingId: string, vettingToken?: string
+     *   evpID: string, vettingID: string, vettingToken?: string
      * }|ExternalVettingImportParams $params
      *
      * @throws APIException
@@ -88,7 +88,7 @@ final class ExternalVettingService implements ExternalVettingContract
      * Order new external vetting for a brand
      *
      * @param array{
-     *   evpId: string, vettingClass: string
+     *   evpID: string, vettingClass: string
      * }|ExternalVettingOrderParams $params
      *
      * @throws APIException

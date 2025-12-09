@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   connection_id?: string|null,
- *   conversation_profile_id?: string|null,
+ *   connectionID?: string|null,
+ *   conversationProfileID?: string|null,
  *   environment?: string|null,
- *   record_type?: string|null,
- *   service_account?: string|null,
+ *   recordType?: string|null,
+ *   serviceAccount?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -25,14 +25,14 @@ final class Data implements BaseModel
     /**
      * Uniquely identifies a Telnyx application (Call Control).
      */
-    #[Optional]
-    public ?string $connection_id;
+    #[Optional('connection_id')]
+    public ?string $connectionID;
 
     /**
      * The id of a configured conversation profile on your Dialogflow account. (If you use Dialogflow CX, this param is required).
      */
-    #[Optional]
-    public ?string $conversation_profile_id;
+    #[Optional('conversation_profile_id')]
+    public ?string $conversationProfileID;
 
     /**
      * Which Dialogflow environment will be used.
@@ -40,14 +40,14 @@ final class Data implements BaseModel
     #[Optional]
     public ?string $environment;
 
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * The JSON map to connect your Dialoglow account.
      */
-    #[Optional]
-    public ?string $service_account;
+    #[Optional('service_account')]
+    public ?string $serviceAccount;
 
     public function __construct()
     {
@@ -60,19 +60,19 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $connection_id = null,
-        ?string $conversation_profile_id = null,
+        ?string $connectionID = null,
+        ?string $conversationProfileID = null,
         ?string $environment = null,
-        ?string $record_type = null,
-        ?string $service_account = null,
+        ?string $recordType = null,
+        ?string $serviceAccount = null,
     ): self {
         $obj = new self;
 
-        null !== $connection_id && $obj['connection_id'] = $connection_id;
-        null !== $conversation_profile_id && $obj['conversation_profile_id'] = $conversation_profile_id;
+        null !== $connectionID && $obj['connectionID'] = $connectionID;
+        null !== $conversationProfileID && $obj['conversationProfileID'] = $conversationProfileID;
         null !== $environment && $obj['environment'] = $environment;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $service_account && $obj['service_account'] = $service_account;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $serviceAccount && $obj['serviceAccount'] = $serviceAccount;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class Data implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj['connection_id'] = $connectionID;
+        $obj['connectionID'] = $connectionID;
 
         return $obj;
     }
@@ -95,7 +95,7 @@ final class Data implements BaseModel
         string $conversationProfileID
     ): self {
         $obj = clone $this;
-        $obj['conversation_profile_id'] = $conversationProfileID;
+        $obj['conversationProfileID'] = $conversationProfileID;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class Data implements BaseModel
     public function withServiceAccount(string $serviceAccount): self
     {
         $obj = clone $this;
-        $obj['service_account'] = $serviceAccount;
+        $obj['serviceAccount'] = $serviceAccount;
 
         return $obj;
     }

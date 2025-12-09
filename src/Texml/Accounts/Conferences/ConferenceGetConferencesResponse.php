@@ -15,10 +15,10 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse\Conferenc
  * @phpstan-type ConferenceGetConferencesResponseShape = array{
  *   conferences?: list<Conference>|null,
  *   end?: int|null,
- *   first_page_uri?: string|null,
- *   next_page_uri?: string|null,
+ *   firstPageUri?: string|null,
+ *   nextPageUri?: string|null,
  *   page?: int|null,
- *   page_size?: int|null,
+ *   pageSize?: int|null,
  *   start?: int|null,
  *   uri?: string|null,
  * }
@@ -41,14 +41,14 @@ final class ConferenceGetConferencesResponse implements BaseModel
     /**
      * /v2/texml/Accounts/61bf923e-5e4d-4595-a110-56190ea18a1b/Conferences.json?Page=0&PageSize=1.
      */
-    #[Optional]
-    public ?string $first_page_uri;
+    #[Optional('first_page_uri')]
+    public ?string $firstPageUri;
 
     /**
      * /v2/texml/Accounts/61bf923e-5e4d-4595-a110-56190ea18a1b/Conferences.json?Page=1&PageSize=1&PageToken=MTY4AjgyNDkwNzIxMQ.
      */
-    #[Optional]
-    public ?string $next_page_uri;
+    #[Optional('next_page_uri')]
+    public ?string $nextPageUri;
 
     /**
      * Current page number, zero-indexed.
@@ -59,8 +59,8 @@ final class ConferenceGetConferencesResponse implements BaseModel
     /**
      * The number of items on the page.
      */
-    #[Optional]
-    public ?int $page_size;
+    #[Optional('page_size')]
+    public ?int $pageSize;
 
     /**
      * The number of the first element on the page, zero-indexed.
@@ -85,27 +85,27 @@ final class ConferenceGetConferencesResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Conference|array{
-     *   account_sid?: string|null,
-     *   api_version?: string|null,
-     *   call_sid_ending_conference?: string|null,
-     *   date_created?: string|null,
-     *   date_updated?: string|null,
-     *   friendly_name?: string|null,
-     *   reason_conference_ended?: value-of<ReasonConferenceEnded>|null,
+     *   accountSid?: string|null,
+     *   apiVersion?: string|null,
+     *   callSidEndingConference?: string|null,
+     *   dateCreated?: string|null,
+     *   dateUpdated?: string|null,
+     *   friendlyName?: string|null,
+     *   reasonConferenceEnded?: value-of<ReasonConferenceEnded>|null,
      *   region?: string|null,
      *   sid?: string|null,
      *   status?: value-of<Status>|null,
-     *   subresource_uris?: array<string,mixed>|null,
+     *   subresourceUris?: array<string,mixed>|null,
      *   uri?: string|null,
      * }> $conferences
      */
     public static function with(
         ?array $conferences = null,
         ?int $end = null,
-        ?string $first_page_uri = null,
-        ?string $next_page_uri = null,
+        ?string $firstPageUri = null,
+        ?string $nextPageUri = null,
         ?int $page = null,
-        ?int $page_size = null,
+        ?int $pageSize = null,
         ?int $start = null,
         ?string $uri = null,
     ): self {
@@ -113,10 +113,10 @@ final class ConferenceGetConferencesResponse implements BaseModel
 
         null !== $conferences && $obj['conferences'] = $conferences;
         null !== $end && $obj['end'] = $end;
-        null !== $first_page_uri && $obj['first_page_uri'] = $first_page_uri;
-        null !== $next_page_uri && $obj['next_page_uri'] = $next_page_uri;
+        null !== $firstPageUri && $obj['firstPageUri'] = $firstPageUri;
+        null !== $nextPageUri && $obj['nextPageUri'] = $nextPageUri;
         null !== $page && $obj['page'] = $page;
-        null !== $page_size && $obj['page_size'] = $page_size;
+        null !== $pageSize && $obj['pageSize'] = $pageSize;
         null !== $start && $obj['start'] = $start;
         null !== $uri && $obj['uri'] = $uri;
 
@@ -125,17 +125,17 @@ final class ConferenceGetConferencesResponse implements BaseModel
 
     /**
      * @param list<Conference|array{
-     *   account_sid?: string|null,
-     *   api_version?: string|null,
-     *   call_sid_ending_conference?: string|null,
-     *   date_created?: string|null,
-     *   date_updated?: string|null,
-     *   friendly_name?: string|null,
-     *   reason_conference_ended?: value-of<ReasonConferenceEnded>|null,
+     *   accountSid?: string|null,
+     *   apiVersion?: string|null,
+     *   callSidEndingConference?: string|null,
+     *   dateCreated?: string|null,
+     *   dateUpdated?: string|null,
+     *   friendlyName?: string|null,
+     *   reasonConferenceEnded?: value-of<ReasonConferenceEnded>|null,
      *   region?: string|null,
      *   sid?: string|null,
      *   status?: value-of<Status>|null,
-     *   subresource_uris?: array<string,mixed>|null,
+     *   subresourceUris?: array<string,mixed>|null,
      *   uri?: string|null,
      * }> $conferences
      */
@@ -164,7 +164,7 @@ final class ConferenceGetConferencesResponse implements BaseModel
     public function withFirstPageUri(string $firstPageUri): self
     {
         $obj = clone $this;
-        $obj['first_page_uri'] = $firstPageUri;
+        $obj['firstPageUri'] = $firstPageUri;
 
         return $obj;
     }
@@ -175,7 +175,7 @@ final class ConferenceGetConferencesResponse implements BaseModel
     public function withNextPageUri(string $nextPageUri): self
     {
         $obj = clone $this;
-        $obj['next_page_uri'] = $nextPageUri;
+        $obj['nextPageUri'] = $nextPageUri;
 
         return $obj;
     }
@@ -197,7 +197,7 @@ final class ConferenceGetConferencesResponse implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj['page_size'] = $pageSize;
+        $obj['pageSize'] = $pageSize;
 
         return $obj;
     }

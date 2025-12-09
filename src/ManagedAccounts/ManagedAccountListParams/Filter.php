@@ -14,7 +14,7 @@ use Telnyx\ManagedAccounts\ManagedAccountListParams\Filter\OrganizationName;
  * Consolidated filter parameter (deepObject style). Originally: filter[email][contains], filter[email][eq], filter[organization_name][contains], filter[organization_name][eq].
  *
  * @phpstan-type FilterShape = array{
- *   email?: Email|null, organization_name?: OrganizationName|null
+ *   email?: Email|null, organizationName?: OrganizationName|null
  * }
  */
 final class Filter implements BaseModel
@@ -25,8 +25,8 @@ final class Filter implements BaseModel
     #[Optional]
     public ?Email $email;
 
-    #[Optional]
-    public ?OrganizationName $organization_name;
+    #[Optional('organization_name')]
+    public ?OrganizationName $organizationName;
 
     public function __construct()
     {
@@ -41,16 +41,16 @@ final class Filter implements BaseModel
      * @param Email|array{contains?: string|null, eq?: string|null} $email
      * @param OrganizationName|array{
      *   contains?: string|null, eq?: string|null
-     * } $organization_name
+     * } $organizationName
      */
     public static function with(
         Email|array|null $email = null,
-        OrganizationName|array|null $organization_name = null
+        OrganizationName|array|null $organizationName = null
     ): self {
         $obj = new self;
 
         null !== $email && $obj['email'] = $email;
-        null !== $organization_name && $obj['organization_name'] = $organization_name;
+        null !== $organizationName && $obj['organizationName'] = $organizationName;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class Filter implements BaseModel
         OrganizationName|array $organizationName
     ): self {
         $obj = clone $this;
-        $obj['organization_name'] = $organizationName;
+        $obj['organizationName'] = $organizationName;
 
         return $obj;
     }

@@ -33,7 +33,7 @@ final class MessagingHostedNumberOrderValidateCodesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{order_id: string, phone_numbers: list<PhoneNumber>} $data
+     * @param Data|array{orderID: string, phoneNumbers: list<PhoneNumber>} $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class MessagingHostedNumberOrderValidateCodesResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{order_id: string, phone_numbers: list<PhoneNumber>} $data
+     * @param Data|array{orderID: string, phoneNumbers: list<PhoneNumber>} $data
      */
     public function withData(Data|array $data): self
     {

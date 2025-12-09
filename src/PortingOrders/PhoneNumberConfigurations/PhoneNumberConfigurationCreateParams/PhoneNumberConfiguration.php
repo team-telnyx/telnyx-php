@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type PhoneNumberConfigurationShape = array{
- *   porting_phone_number_id: string, user_bundle_id: string
+ *   portingPhoneNumberID: string, userBundleID: string
  * }
  */
 final class PhoneNumberConfiguration implements BaseModel
@@ -21,23 +21,21 @@ final class PhoneNumberConfiguration implements BaseModel
     /**
      * Identifies the porting phone number to be configured.
      */
-    #[Required]
-    public string $porting_phone_number_id;
+    #[Required('porting_phone_number_id')]
+    public string $portingPhoneNumberID;
 
     /**
      * Identifies the user bundle to be associated with the porting phone number.
      */
-    #[Required]
-    public string $user_bundle_id;
+    #[Required('user_bundle_id')]
+    public string $userBundleID;
 
     /**
      * `new PhoneNumberConfiguration()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * PhoneNumberConfiguration::with(
-     *   porting_phone_number_id: ..., user_bundle_id: ...
-     * )
+     * PhoneNumberConfiguration::with(portingPhoneNumberID: ..., userBundleID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -59,13 +57,13 @@ final class PhoneNumberConfiguration implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $porting_phone_number_id,
-        string $user_bundle_id
+        string $portingPhoneNumberID,
+        string $userBundleID
     ): self {
         $obj = new self;
 
-        $obj['porting_phone_number_id'] = $porting_phone_number_id;
-        $obj['user_bundle_id'] = $user_bundle_id;
+        $obj['portingPhoneNumberID'] = $portingPhoneNumberID;
+        $obj['userBundleID'] = $userBundleID;
 
         return $obj;
     }
@@ -76,7 +74,7 @@ final class PhoneNumberConfiguration implements BaseModel
     public function withPortingPhoneNumberID(string $portingPhoneNumberID): self
     {
         $obj = clone $this;
-        $obj['porting_phone_number_id'] = $portingPhoneNumberID;
+        $obj['portingPhoneNumberID'] = $portingPhoneNumberID;
 
         return $obj;
     }
@@ -87,7 +85,7 @@ final class PhoneNumberConfiguration implements BaseModel
     public function withUserBundleID(string $userBundleID): self
     {
         $obj = clone $this;
-        $obj['user_bundle_id'] = $userBundleID;
+        $obj['userBundleID'] = $userBundleID;
 
         return $obj;
     }

@@ -15,15 +15,15 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   best_effort?: bool|null,
- *   cost_information?: CostInformation|null,
+ *   bestEffort?: bool|null,
+ *   costInformation?: CostInformation|null,
  *   features?: list<Feature>|null,
- *   phone_number?: string|null,
+ *   phoneNumber?: string|null,
  *   quickship?: bool|null,
- *   record_type?: value-of<RecordType>|null,
- *   region_information?: list<RegionInformation>|null,
+ *   recordType?: value-of<RecordType>|null,
+ *   regionInformation?: list<RegionInformation>|null,
  *   reservable?: bool|null,
- *   vanity_format?: string|null,
+ *   vanityFormat?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -34,18 +34,18 @@ final class Data implements BaseModel
     /**
      * Specifies whether the phone number is an exact match based on the search criteria or not.
      */
-    #[Optional]
-    public ?bool $best_effort;
+    #[Optional('best_effort')]
+    public ?bool $bestEffort;
 
-    #[Optional]
-    public ?CostInformation $cost_information;
+    #[Optional('cost_information')]
+    public ?CostInformation $costInformation;
 
     /** @var list<Feature>|null $features */
     #[Optional(list: Feature::class)]
     public ?array $features;
 
-    #[Optional]
-    public ?string $phone_number;
+    #[Optional('phone_number')]
+    public ?string $phoneNumber;
 
     /**
      * Specifies whether the phone number can receive calls immediately after purchase or not.
@@ -53,13 +53,13 @@ final class Data implements BaseModel
     #[Optional]
     public ?bool $quickship;
 
-    /** @var value-of<RecordType>|null $record_type */
-    #[Optional(enum: RecordType::class)]
-    public ?string $record_type;
+    /** @var value-of<RecordType>|null $recordType */
+    #[Optional('record_type', enum: RecordType::class)]
+    public ?string $recordType;
 
-    /** @var list<RegionInformation>|null $region_information */
-    #[Optional(list: RegionInformation::class)]
-    public ?array $region_information;
+    /** @var list<RegionInformation>|null $regionInformation */
+    #[Optional('region_information', list: RegionInformation::class)]
+    public ?array $regionInformation;
 
     /**
      * Specifies whether the phone number can be reserved before purchase or not.
@@ -67,8 +67,8 @@ final class Data implements BaseModel
     #[Optional]
     public ?bool $reservable;
 
-    #[Optional]
-    public ?string $vanity_format;
+    #[Optional('vanity_format')]
+    public ?string $vanityFormat;
 
     public function __construct()
     {
@@ -81,36 +81,36 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param CostInformation|array{
-     *   currency?: string|null, monthly_cost?: string|null, upfront_cost?: string|null
-     * } $cost_information
+     *   currency?: string|null, monthlyCost?: string|null, upfrontCost?: string|null
+     * } $costInformation
      * @param list<Feature|array{name?: string|null}> $features
-     * @param RecordType|value-of<RecordType> $record_type
+     * @param RecordType|value-of<RecordType> $recordType
      * @param list<RegionInformation|array{
-     *   region_name?: string|null, region_type?: value-of<RegionType>|null
-     * }> $region_information
+     *   regionName?: string|null, regionType?: value-of<RegionType>|null
+     * }> $regionInformation
      */
     public static function with(
-        ?bool $best_effort = null,
-        CostInformation|array|null $cost_information = null,
+        ?bool $bestEffort = null,
+        CostInformation|array|null $costInformation = null,
         ?array $features = null,
-        ?string $phone_number = null,
+        ?string $phoneNumber = null,
         ?bool $quickship = null,
-        RecordType|string|null $record_type = null,
-        ?array $region_information = null,
+        RecordType|string|null $recordType = null,
+        ?array $regionInformation = null,
         ?bool $reservable = null,
-        ?string $vanity_format = null,
+        ?string $vanityFormat = null,
     ): self {
         $obj = new self;
 
-        null !== $best_effort && $obj['best_effort'] = $best_effort;
-        null !== $cost_information && $obj['cost_information'] = $cost_information;
+        null !== $bestEffort && $obj['bestEffort'] = $bestEffort;
+        null !== $costInformation && $obj['costInformation'] = $costInformation;
         null !== $features && $obj['features'] = $features;
-        null !== $phone_number && $obj['phone_number'] = $phone_number;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
         null !== $quickship && $obj['quickship'] = $quickship;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $region_information && $obj['region_information'] = $region_information;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $regionInformation && $obj['regionInformation'] = $regionInformation;
         null !== $reservable && $obj['reservable'] = $reservable;
-        null !== $vanity_format && $obj['vanity_format'] = $vanity_format;
+        null !== $vanityFormat && $obj['vanityFormat'] = $vanityFormat;
 
         return $obj;
     }
@@ -121,21 +121,21 @@ final class Data implements BaseModel
     public function withBestEffort(bool $bestEffort): self
     {
         $obj = clone $this;
-        $obj['best_effort'] = $bestEffort;
+        $obj['bestEffort'] = $bestEffort;
 
         return $obj;
     }
 
     /**
      * @param CostInformation|array{
-     *   currency?: string|null, monthly_cost?: string|null, upfront_cost?: string|null
+     *   currency?: string|null, monthlyCost?: string|null, upfrontCost?: string|null
      * } $costInformation
      */
     public function withCostInformation(
         CostInformation|array $costInformation
     ): self {
         $obj = clone $this;
-        $obj['cost_information'] = $costInformation;
+        $obj['costInformation'] = $costInformation;
 
         return $obj;
     }
@@ -154,7 +154,7 @@ final class Data implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -176,20 +176,20 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
 
     /**
      * @param list<RegionInformation|array{
-     *   region_name?: string|null, region_type?: value-of<RegionType>|null
+     *   regionName?: string|null, regionType?: value-of<RegionType>|null
      * }> $regionInformation
      */
     public function withRegionInformation(array $regionInformation): self
     {
         $obj = clone $this;
-        $obj['region_information'] = $regionInformation;
+        $obj['regionInformation'] = $regionInformation;
 
         return $obj;
     }
@@ -208,7 +208,7 @@ final class Data implements BaseModel
     public function withVanityFormat(string $vanityFormat): self
     {
         $obj = clone $this;
-        $obj['vanity_format'] = $vanityFormat;
+        $obj['vanityFormat'] = $vanityFormat;
 
         return $obj;
     }

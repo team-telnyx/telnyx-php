@@ -38,7 +38,7 @@ final class ActionsTest extends TestCase
             '+13035551234',
             [
                 'code' => '17686',
-                'verify_profile_id' => '12ade33a-21c0-473b-b055-b3c836e1c292',
+                'verifyProfileID' => '12ade33a-21c0-473b-b055-b3c836e1c292',
             ],
         );
 
@@ -57,7 +57,7 @@ final class ActionsTest extends TestCase
             '+13035551234',
             [
                 'code' => '17686',
-                'verify_profile_id' => '12ade33a-21c0-473b-b055-b3c836e1c292',
+                'verifyProfileID' => '12ade33a-21c0-473b-b055-b3c836e1c292',
             ],
         );
 

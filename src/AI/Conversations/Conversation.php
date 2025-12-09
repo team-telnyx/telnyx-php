@@ -12,8 +12,8 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type ConversationShape = array{
  *   id: string,
- *   created_at: \DateTimeInterface,
- *   last_message_at: \DateTimeInterface,
+ *   createdAt: \DateTimeInterface,
+ *   lastMessageAt: \DateTimeInterface,
  *   metadata: array<string,string>,
  *   name?: string|null,
  * }
@@ -29,14 +29,14 @@ final class Conversation implements BaseModel
     /**
      * The datetime the conversation was created.
      */
-    #[Required]
-    public \DateTimeInterface $created_at;
+    #[Required('created_at')]
+    public \DateTimeInterface $createdAt;
 
     /**
      * The datetime of the latest message in the conversation.
      */
-    #[Required]
-    public \DateTimeInterface $last_message_at;
+    #[Required('last_message_at')]
+    public \DateTimeInterface $lastMessageAt;
 
     /**
      * Metadata associated with the conversation. Telnyx provides several pieces of metadata, but customers can also add their own.
@@ -54,9 +54,7 @@ final class Conversation implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * Conversation::with(
-     *   id: ..., created_at: ..., last_message_at: ..., metadata: ...
-     * )
+     * Conversation::with(id: ..., createdAt: ..., lastMessageAt: ..., metadata: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -83,16 +81,16 @@ final class Conversation implements BaseModel
      */
     public static function with(
         string $id,
-        \DateTimeInterface $created_at,
-        \DateTimeInterface $last_message_at,
+        \DateTimeInterface $createdAt,
+        \DateTimeInterface $lastMessageAt,
         array $metadata,
         ?string $name = null,
     ): self {
         $obj = new self;
 
         $obj['id'] = $id;
-        $obj['created_at'] = $created_at;
-        $obj['last_message_at'] = $last_message_at;
+        $obj['createdAt'] = $createdAt;
+        $obj['lastMessageAt'] = $lastMessageAt;
         $obj['metadata'] = $metadata;
 
         null !== $name && $obj['name'] = $name;
@@ -114,7 +112,7 @@ final class Conversation implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -125,7 +123,7 @@ final class Conversation implements BaseModel
     public function withLastMessageAt(\DateTimeInterface $lastMessageAt): self
     {
         $obj = clone $this;
-        $obj['last_message_at'] = $lastMessageAt;
+        $obj['lastMessageAt'] = $lastMessageAt;
 
         return $obj;
     }

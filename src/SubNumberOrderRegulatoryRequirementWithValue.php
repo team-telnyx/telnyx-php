@@ -11,10 +11,10 @@ use Telnyx\SubNumberOrderRegulatoryRequirementWithValue\FieldType;
 
 /**
  * @phpstan-type SubNumberOrderRegulatoryRequirementWithValueShape = array{
- *   field_type?: value-of<FieldType>|null,
- *   field_value?: string|null,
- *   record_type?: string|null,
- *   requirement_id?: string|null,
+ *   fieldType?: value-of<FieldType>|null,
+ *   fieldValue?: string|null,
+ *   recordType?: string|null,
+ *   requirementID?: string|null,
  * }
  */
 final class SubNumberOrderRegulatoryRequirementWithValue implements BaseModel
@@ -22,24 +22,24 @@ final class SubNumberOrderRegulatoryRequirementWithValue implements BaseModel
     /** @use SdkModel<SubNumberOrderRegulatoryRequirementWithValueShape> */
     use SdkModel;
 
-    /** @var value-of<FieldType>|null $field_type */
-    #[Optional(enum: FieldType::class)]
-    public ?string $field_type;
+    /** @var value-of<FieldType>|null $fieldType */
+    #[Optional('field_type', enum: FieldType::class)]
+    public ?string $fieldType;
 
     /**
      * The value of the requirement, this could be an id to a resource or a string value.
      */
-    #[Optional]
-    public ?string $field_value;
+    #[Optional('field_value')]
+    public ?string $fieldValue;
 
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * Unique id for a requirement.
      */
-    #[Optional]
-    public ?string $requirement_id;
+    #[Optional('requirement_id')]
+    public ?string $requirementID;
 
     public function __construct()
     {
@@ -51,20 +51,20 @@ final class SubNumberOrderRegulatoryRequirementWithValue implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FieldType|value-of<FieldType> $field_type
+     * @param FieldType|value-of<FieldType> $fieldType
      */
     public static function with(
-        FieldType|string|null $field_type = null,
-        ?string $field_value = null,
-        ?string $record_type = null,
-        ?string $requirement_id = null,
+        FieldType|string|null $fieldType = null,
+        ?string $fieldValue = null,
+        ?string $recordType = null,
+        ?string $requirementID = null,
     ): self {
         $obj = new self;
 
-        null !== $field_type && $obj['field_type'] = $field_type;
-        null !== $field_value && $obj['field_value'] = $field_value;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $requirement_id && $obj['requirement_id'] = $requirement_id;
+        null !== $fieldType && $obj['fieldType'] = $fieldType;
+        null !== $fieldValue && $obj['fieldValue'] = $fieldValue;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $requirementID && $obj['requirementID'] = $requirementID;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class SubNumberOrderRegulatoryRequirementWithValue implements BaseModel
     public function withFieldType(FieldType|string $fieldType): self
     {
         $obj = clone $this;
-        $obj['field_type'] = $fieldType;
+        $obj['fieldType'] = $fieldType;
 
         return $obj;
     }
@@ -86,7 +86,7 @@ final class SubNumberOrderRegulatoryRequirementWithValue implements BaseModel
     public function withFieldValue(string $fieldValue): self
     {
         $obj = clone $this;
-        $obj['field_value'] = $fieldValue;
+        $obj['fieldValue'] = $fieldValue;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class SubNumberOrderRegulatoryRequirementWithValue implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -105,7 +105,7 @@ final class SubNumberOrderRegulatoryRequirementWithValue implements BaseModel
     public function withRequirementID(string $requirementID): self
     {
         $obj = clone $this;
-        $obj['requirement_id'] = $requirementID;
+        $obj['requirementID'] = $requirementID;
 
         return $obj;
     }

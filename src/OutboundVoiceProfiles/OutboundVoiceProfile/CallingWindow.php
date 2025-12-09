@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * (BETA) Specifies the time window and call limits for calls made using this outbound voice profile. Note that all times are UTC in 24-hour clock time.
  *
  * @phpstan-type CallingWindowShape = array{
- *   calls_per_cld?: int|null, end_time?: string|null, start_time?: string|null
+ *   callsPerCld?: int|null, endTime?: string|null, startTime?: string|null
  * }
  */
 final class CallingWindow implements BaseModel
@@ -23,20 +23,20 @@ final class CallingWindow implements BaseModel
     /**
      * (BETA) The maximum number of calls that can be initiated to a single called party (CLD) within the calling window. A null value means no limit.
      */
-    #[Optional]
-    public ?int $calls_per_cld;
+    #[Optional('calls_per_cld')]
+    public ?int $callsPerCld;
 
     /**
      * (BETA) The UTC time of day (in HH:MM format, 24-hour clock) when calls are no longer allowed to start.
      */
-    #[Optional]
-    public ?string $end_time;
+    #[Optional('end_time')]
+    public ?string $endTime;
 
     /**
      * (BETA) The UTC time of day (in HH:MM format, 24-hour clock) when calls are allowed to start.
      */
-    #[Optional]
-    public ?string $start_time;
+    #[Optional('start_time')]
+    public ?string $startTime;
 
     public function __construct()
     {
@@ -49,15 +49,15 @@ final class CallingWindow implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?int $calls_per_cld = null,
-        ?string $end_time = null,
-        ?string $start_time = null,
+        ?int $callsPerCld = null,
+        ?string $endTime = null,
+        ?string $startTime = null
     ): self {
         $obj = new self;
 
-        null !== $calls_per_cld && $obj['calls_per_cld'] = $calls_per_cld;
-        null !== $end_time && $obj['end_time'] = $end_time;
-        null !== $start_time && $obj['start_time'] = $start_time;
+        null !== $callsPerCld && $obj['callsPerCld'] = $callsPerCld;
+        null !== $endTime && $obj['endTime'] = $endTime;
+        null !== $startTime && $obj['startTime'] = $startTime;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class CallingWindow implements BaseModel
     public function withCallsPerCld(int $callsPerCld): self
     {
         $obj = clone $this;
-        $obj['calls_per_cld'] = $callsPerCld;
+        $obj['callsPerCld'] = $callsPerCld;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class CallingWindow implements BaseModel
     public function withEndTime(string $endTime): self
     {
         $obj = clone $this;
-        $obj['end_time'] = $endTime;
+        $obj['endTime'] = $endTime;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class CallingWindow implements BaseModel
     public function withStartTime(string $startTime): self
     {
         $obj = clone $this;
-        $obj['start_time'] = $startTime;
+        $obj['startTime'] = $startTime;
 
         return $obj;
     }

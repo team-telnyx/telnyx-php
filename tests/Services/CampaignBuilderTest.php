@@ -35,7 +35,7 @@ final class CampaignBuilderTest extends TestCase
         }
 
         $result = $this->client->campaignBuilder->create([
-            'brandId' => 'brandId',
+            'brandID' => 'brandId',
             'description' => 'description',
             'usecase' => 'usecase',
         ]);
@@ -52,7 +52,7 @@ final class CampaignBuilderTest extends TestCase
         }
 
         $result = $this->client->campaignBuilder->create([
-            'brandId' => 'brandId',
+            'brandID' => 'brandId',
             'description' => 'description',
             'usecase' => 'usecase',
             'ageGated' => true,
@@ -64,15 +64,15 @@ final class CampaignBuilderTest extends TestCase
             'helpKeywords' => 'helpKeywords',
             'helpMessage' => 'helpMessage',
             'messageFlow' => 'messageFlow',
-            'mnoIds' => [0],
+            'mnoIDs' => [0],
             'numberPool' => true,
             'optinKeywords' => 'optinKeywords',
             'optinMessage' => 'optinMessage',
             'optoutKeywords' => 'optoutKeywords',
             'optoutMessage' => 'optoutMessage',
             'privacyPolicyLink' => 'privacyPolicyLink',
-            'referenceId' => 'referenceId',
-            'resellerId' => 'resellerId',
+            'referenceID' => 'referenceId',
+            'resellerID' => 'resellerId',
             'sample1' => 'sample1',
             'sample2' => 'sample2',
             'sample3' => 'sample3',

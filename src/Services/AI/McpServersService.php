@@ -15,6 +15,7 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Conversion\ListOf;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\McpServersContract;
 
@@ -34,8 +35,8 @@ final class McpServersService implements McpServersContract
      *   name: string,
      *   type: string,
      *   url: string,
-     *   allowed_tools?: list<string>|null,
-     *   api_key_ref?: string|null,
+     *   allowedTools?: list<string>|null,
+     *   apiKeyRef?: string|null,
      * }|McpServerCreateParams $params
      *
      * @throws APIException
@@ -90,9 +91,9 @@ final class McpServersService implements McpServersContract
      *
      * @param array{
      *   id?: string,
-     *   allowed_tools?: list<string>|null,
-     *   api_key_ref?: string|null,
-     *   created_at?: string|\DateTimeInterface,
+     *   allowedTools?: list<string>|null,
+     *   apiKeyRef?: string|null,
+     *   createdAt?: string|\DateTimeInterface,
      *   name?: string,
      *   type?: string,
      *   url?: string,
@@ -128,7 +129,7 @@ final class McpServersService implements McpServersContract
      * Retrieve a list of MCP servers.
      *
      * @param array{
-     *   page_number_?: int, page_size_?: int, type?: string, url?: string
+     *   pageNumber?: int, pageSize?: int, type?: string, url?: string
      * }|McpServerListParams $params
      *
      * @return list<McpServerListResponseItem>
@@ -148,7 +149,10 @@ final class McpServersService implements McpServersContract
         $response = $this->client->request(
             method: 'get',
             path: 'ai/mcp_servers',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: new ListOf(McpServerListResponseItem::class),
         );

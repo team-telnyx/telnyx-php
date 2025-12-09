@@ -33,12 +33,12 @@ final class PortingListUkCarriersResponse implements BaseModel
      *
      * @param list<Data|array{
      *   id?: string|null,
-     *   alternative_cupids?: list<string>|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   alternativeCupids?: list<string>|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   cupid?: string|null,
      *   name?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   recordType?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public static function with(?array $data = null): self
@@ -53,12 +53,12 @@ final class PortingListUkCarriersResponse implements BaseModel
     /**
      * @param list<Data|array{
      *   id?: string|null,
-     *   alternative_cupids?: list<string>|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   alternativeCupids?: list<string>|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   cupid?: string|null,
      *   name?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   recordType?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public function withData(array $data): self

@@ -35,11 +35,11 @@ final class VerificationCodeVerifyResponse implements BaseModel
      *
      * @param list<Data|array{
      *   id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   phone_number?: string|null,
-     *   porting_order_id?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   phoneNumber?: string|null,
+     *   portingOrderID?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      *   verified?: bool|null,
      * }> $data
      */
@@ -55,11 +55,11 @@ final class VerificationCodeVerifyResponse implements BaseModel
     /**
      * @param list<Data|array{
      *   id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   phone_number?: string|null,
-     *   porting_order_id?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   phoneNumber?: string|null,
+     *   portingOrderID?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      *   verified?: bool|null,
      * }> $data
      */

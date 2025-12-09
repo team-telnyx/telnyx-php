@@ -27,13 +27,13 @@ final class NetworkCoverageService implements NetworkCoverageContract
      *
      * @param array{
      *   filter?: array{
-     *     'location.code'?: string,
-     *     'location.pop'?: string,
-     *     'location.region'?: string,
-     *     'location.site'?: string,
+     *     locationCode?: string,
+     *     locationPop?: string,
+     *     locationRegion?: string,
+     *     locationSite?: string,
      *   },
      *   filters?: array{
-     *     available_services?: 'cloud_vpn'|'private_wireless_gateway'|'virtual_cross_connect'|AvailableService|array{
+     *     availableServices?: 'cloud_vpn'|'private_wireless_gateway'|'virtual_cross_connect'|AvailableService|array{
      *       contains?: 'cloud_vpn'|'private_wireless_gateway'|'virtual_cross_connect'|AvailableService,
      *     },
      *   },

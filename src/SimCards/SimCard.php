@@ -21,31 +21,31 @@ use Telnyx\SimCardStatus\Value;
 /**
  * @phpstan-type SimCardShape = array{
  *   id?: string|null,
- *   actions_in_progress?: bool|null,
- *   authorized_imeis?: list<string>|null,
- *   created_at?: string|null,
- *   current_billing_period_consumed_data?: CurrentBillingPeriodConsumedData|null,
- *   current_device_location?: CurrentDeviceLocation|null,
- *   current_imei?: string|null,
- *   current_mcc?: string|null,
- *   current_mnc?: string|null,
- *   data_limit?: DataLimit|null,
+ *   actionsInProgress?: bool|null,
+ *   authorizedImeis?: list<string>|null,
+ *   createdAt?: string|null,
+ *   currentBillingPeriodConsumedData?: CurrentBillingPeriodConsumedData|null,
+ *   currentDeviceLocation?: CurrentDeviceLocation|null,
+ *   currentImei?: string|null,
+ *   currentMcc?: string|null,
+ *   currentMnc?: string|null,
+ *   dataLimit?: DataLimit|null,
  *   eid?: string|null,
- *   esim_installation_status?: value-of<EsimInstallationStatus>|null,
+ *   esimInstallationStatus?: value-of<EsimInstallationStatus>|null,
  *   iccid?: string|null,
  *   imsi?: string|null,
  *   ipv4?: string|null,
  *   ipv6?: string|null,
- *   live_data_session?: value-of<LiveDataSession>|null,
+ *   liveDataSession?: value-of<LiveDataSession>|null,
  *   msisdn?: string|null,
- *   pin_puk_codes?: PinPukCodes|null,
- *   record_type?: string|null,
- *   resources_with_in_progress_actions?: list<mixed>|null,
- *   sim_card_group_id?: string|null,
+ *   pinPukCodes?: PinPukCodes|null,
+ *   recordType?: string|null,
+ *   resourcesWithInProgressActions?: list<mixed>|null,
+ *   simCardGroupID?: string|null,
  *   status?: SimCardStatus|null,
  *   tags?: list<string>|null,
  *   type?: value-of<Type>|null,
- *   updated_at?: string|null,
+ *   updatedAt?: string|null,
  *   version?: string|null,
  * }
  */
@@ -63,60 +63,60 @@ final class SimCard implements BaseModel
     /**
      * Indicate whether the SIM card has any pending (in-progress) actions.
      */
-    #[Optional]
-    public ?bool $actions_in_progress;
+    #[Optional('actions_in_progress')]
+    public ?bool $actionsInProgress;
 
     /**
      * List of IMEIs authorized to use a given SIM card.
      *
-     * @var list<string>|null $authorized_imeis
+     * @var list<string>|null $authorizedImeis
      */
-    #[Optional(list: 'string', nullable: true)]
-    public ?array $authorized_imeis;
+    #[Optional('authorized_imeis', list: 'string', nullable: true)]
+    public ?array $authorizedImeis;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Optional]
-    public ?string $created_at;
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
     /**
      * The SIM card consumption so far in the current billing cycle.
      */
-    #[Optional]
-    public ?CurrentBillingPeriodConsumedData $current_billing_period_consumed_data;
+    #[Optional('current_billing_period_consumed_data')]
+    public ?CurrentBillingPeriodConsumedData $currentBillingPeriodConsumedData;
 
     /**
      * Current physical location data of a given SIM card. Accuracy is given in meters.
      */
-    #[Optional]
-    public ?CurrentDeviceLocation $current_device_location;
+    #[Optional('current_device_location')]
+    public ?CurrentDeviceLocation $currentDeviceLocation;
 
     /**
      * IMEI of the device where a given SIM card is currently being used.
      */
-    #[Optional]
-    public ?string $current_imei;
+    #[Optional('current_imei')]
+    public ?string $currentImei;
 
     /**
      * Mobile Country Code of the current network to which the SIM card is connected. It's a three decimal digit that identifies a country.<br/><br/>
      * This code is commonly seen joined with a Mobile Network Code (MNC) in a tuple that allows identifying a carrier known as PLMN (Public Land Mobile Network) code.
      */
-    #[Optional]
-    public ?string $current_mcc;
+    #[Optional('current_mcc')]
+    public ?string $currentMcc;
 
     /**
      * Mobile Network Code of the current network to which the SIM card is connected. It's a two to three decimal digits that identify a network.<br/><br/>
      *  This code is commonly seen joined with a Mobile Country Code (MCC) in a tuple that allows identifying a carrier known as PLMN (Public Land Mobile Network) code.
      */
-    #[Optional]
-    public ?string $current_mnc;
+    #[Optional('current_mnc')]
+    public ?string $currentMnc;
 
     /**
      * The SIM card individual data limit configuration.
      */
-    #[Optional]
-    public ?DataLimit $data_limit;
+    #[Optional('data_limit')]
+    public ?DataLimit $dataLimit;
 
     /**
      * The Embedded Identity Document (eID) for eSIM cards.
@@ -127,10 +127,14 @@ final class SimCard implements BaseModel
     /**
      * The installation status of the eSIM. Only applicable for eSIM cards.
      *
-     * @var value-of<EsimInstallationStatus>|null $esim_installation_status
+     * @var value-of<EsimInstallationStatus>|null $esimInstallationStatus
      */
-    #[Optional(enum: EsimInstallationStatus::class, nullable: true)]
-    public ?string $esim_installation_status;
+    #[Optional(
+        'esim_installation_status',
+        enum: EsimInstallationStatus::class,
+        nullable: true,
+    )]
+    public ?string $esimInstallationStatus;
 
     /**
      * The ICCID is the identifier of the specific SIM card/chip. Each SIM is internationally identified by its integrated circuit card identifier (ICCID). ICCIDs are stored in the SIM card's memory and are also engraved or printed on the SIM card body during a process called personalization.
@@ -160,10 +164,10 @@ final class SimCard implements BaseModel
     /**
      * Indicates whether the device is actively connected to a network and able to run data.
      *
-     * @var value-of<LiveDataSession>|null $live_data_session
+     * @var value-of<LiveDataSession>|null $liveDataSession
      */
-    #[Optional(enum: LiveDataSession::class)]
-    public ?string $live_data_session;
+    #[Optional('live_data_session', enum: LiveDataSession::class)]
+    public ?string $liveDataSession;
 
     /**
      * Mobile Station International Subscriber Directory Number (MSISDN) is a number used to identify a mobile phone number internationally. <br/>
@@ -175,25 +179,25 @@ final class SimCard implements BaseModel
     /**
      * PIN and PUK codes for the SIM card. Only available when include_pin_puk_codes=true is set in the request.
      */
-    #[Optional]
-    public ?PinPukCodes $pin_puk_codes;
+    #[Optional('pin_puk_codes')]
+    public ?PinPukCodes $pinPukCodes;
 
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * List of resources with actions in progress.
      *
-     * @var list<mixed>|null $resources_with_in_progress_actions
+     * @var list<mixed>|null $resourcesWithInProgressActions
      */
-    #[Optional(list: 'mixed')]
-    public ?array $resources_with_in_progress_actions;
+    #[Optional('resources_with_in_progress_actions', list: 'mixed')]
+    public ?array $resourcesWithInProgressActions;
 
     /**
      * The group SIMCardGroup identification. This attribute can be <code>null</code> when it's present in an associated resource.
      */
-    #[Optional]
-    public ?string $sim_card_group_id;
+    #[Optional('sim_card_group_id')]
+    public ?string $simCardGroupID;
 
     #[Optional]
     public ?SimCardStatus $status;
@@ -217,8 +221,8 @@ final class SimCard implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Optional]
-    public ?string $updated_at;
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     /**
      * The version of the SIM card.
@@ -236,25 +240,25 @@ final class SimCard implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string>|null $authorized_imeis
+     * @param list<string>|null $authorizedImeis
      * @param CurrentBillingPeriodConsumedData|array{
      *   amount?: string|null, unit?: string|null
-     * } $current_billing_period_consumed_data
+     * } $currentBillingPeriodConsumedData
      * @param CurrentDeviceLocation|array{
      *   accuracy?: int|null,
-     *   accuracy_unit?: string|null,
+     *   accuracyUnit?: string|null,
      *   latitude?: string|null,
      *   longitude?: string|null,
-     * } $current_device_location
+     * } $currentDeviceLocation
      * @param DataLimit|array{
      *   amount?: string|null, unit?: value-of<Unit>|null
-     * } $data_limit
-     * @param EsimInstallationStatus|value-of<EsimInstallationStatus>|null $esim_installation_status
-     * @param LiveDataSession|value-of<LiveDataSession> $live_data_session
+     * } $dataLimit
+     * @param EsimInstallationStatus|value-of<EsimInstallationStatus>|null $esimInstallationStatus
+     * @param LiveDataSession|value-of<LiveDataSession> $liveDataSession
      * @param PinPukCodes|array{
      *   pin1?: string|null, pin2?: string|null, puk1?: string|null, puk2?: string|null
-     * } $pin_puk_codes
-     * @param list<mixed> $resources_with_in_progress_actions
+     * } $pinPukCodes
+     * @param list<mixed> $resourcesWithInProgressActions
      * @param SimCardStatus|array{
      *   reason?: string|null, value?: value-of<Value>|null
      * } $status
@@ -263,61 +267,61 @@ final class SimCard implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?bool $actions_in_progress = null,
-        ?array $authorized_imeis = null,
-        ?string $created_at = null,
-        CurrentBillingPeriodConsumedData|array|null $current_billing_period_consumed_data = null,
-        CurrentDeviceLocation|array|null $current_device_location = null,
-        ?string $current_imei = null,
-        ?string $current_mcc = null,
-        ?string $current_mnc = null,
-        DataLimit|array|null $data_limit = null,
+        ?bool $actionsInProgress = null,
+        ?array $authorizedImeis = null,
+        ?string $createdAt = null,
+        CurrentBillingPeriodConsumedData|array|null $currentBillingPeriodConsumedData = null,
+        CurrentDeviceLocation|array|null $currentDeviceLocation = null,
+        ?string $currentImei = null,
+        ?string $currentMcc = null,
+        ?string $currentMnc = null,
+        DataLimit|array|null $dataLimit = null,
         ?string $eid = null,
-        EsimInstallationStatus|string|null $esim_installation_status = null,
+        EsimInstallationStatus|string|null $esimInstallationStatus = null,
         ?string $iccid = null,
         ?string $imsi = null,
         ?string $ipv4 = null,
         ?string $ipv6 = null,
-        LiveDataSession|string|null $live_data_session = null,
+        LiveDataSession|string|null $liveDataSession = null,
         ?string $msisdn = null,
-        PinPukCodes|array|null $pin_puk_codes = null,
-        ?string $record_type = null,
-        ?array $resources_with_in_progress_actions = null,
-        ?string $sim_card_group_id = null,
+        PinPukCodes|array|null $pinPukCodes = null,
+        ?string $recordType = null,
+        ?array $resourcesWithInProgressActions = null,
+        ?string $simCardGroupID = null,
         SimCardStatus|array|null $status = null,
         ?array $tags = null,
         Type|string|null $type = null,
-        ?string $updated_at = null,
+        ?string $updatedAt = null,
         ?string $version = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $actions_in_progress && $obj['actions_in_progress'] = $actions_in_progress;
-        null !== $authorized_imeis && $obj['authorized_imeis'] = $authorized_imeis;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $current_billing_period_consumed_data && $obj['current_billing_period_consumed_data'] = $current_billing_period_consumed_data;
-        null !== $current_device_location && $obj['current_device_location'] = $current_device_location;
-        null !== $current_imei && $obj['current_imei'] = $current_imei;
-        null !== $current_mcc && $obj['current_mcc'] = $current_mcc;
-        null !== $current_mnc && $obj['current_mnc'] = $current_mnc;
-        null !== $data_limit && $obj['data_limit'] = $data_limit;
+        null !== $actionsInProgress && $obj['actionsInProgress'] = $actionsInProgress;
+        null !== $authorizedImeis && $obj['authorizedImeis'] = $authorizedImeis;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $currentBillingPeriodConsumedData && $obj['currentBillingPeriodConsumedData'] = $currentBillingPeriodConsumedData;
+        null !== $currentDeviceLocation && $obj['currentDeviceLocation'] = $currentDeviceLocation;
+        null !== $currentImei && $obj['currentImei'] = $currentImei;
+        null !== $currentMcc && $obj['currentMcc'] = $currentMcc;
+        null !== $currentMnc && $obj['currentMnc'] = $currentMnc;
+        null !== $dataLimit && $obj['dataLimit'] = $dataLimit;
         null !== $eid && $obj['eid'] = $eid;
-        null !== $esim_installation_status && $obj['esim_installation_status'] = $esim_installation_status;
+        null !== $esimInstallationStatus && $obj['esimInstallationStatus'] = $esimInstallationStatus;
         null !== $iccid && $obj['iccid'] = $iccid;
         null !== $imsi && $obj['imsi'] = $imsi;
         null !== $ipv4 && $obj['ipv4'] = $ipv4;
         null !== $ipv6 && $obj['ipv6'] = $ipv6;
-        null !== $live_data_session && $obj['live_data_session'] = $live_data_session;
+        null !== $liveDataSession && $obj['liveDataSession'] = $liveDataSession;
         null !== $msisdn && $obj['msisdn'] = $msisdn;
-        null !== $pin_puk_codes && $obj['pin_puk_codes'] = $pin_puk_codes;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $resources_with_in_progress_actions && $obj['resources_with_in_progress_actions'] = $resources_with_in_progress_actions;
-        null !== $sim_card_group_id && $obj['sim_card_group_id'] = $sim_card_group_id;
+        null !== $pinPukCodes && $obj['pinPukCodes'] = $pinPukCodes;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $resourcesWithInProgressActions && $obj['resourcesWithInProgressActions'] = $resourcesWithInProgressActions;
+        null !== $simCardGroupID && $obj['simCardGroupID'] = $simCardGroupID;
         null !== $status && $obj['status'] = $status;
         null !== $tags && $obj['tags'] = $tags;
         null !== $type && $obj['type'] = $type;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
         null !== $version && $obj['version'] = $version;
 
         return $obj;
@@ -340,7 +344,7 @@ final class SimCard implements BaseModel
     public function withActionsInProgress(bool $actionsInProgress): self
     {
         $obj = clone $this;
-        $obj['actions_in_progress'] = $actionsInProgress;
+        $obj['actionsInProgress'] = $actionsInProgress;
 
         return $obj;
     }
@@ -353,7 +357,7 @@ final class SimCard implements BaseModel
     public function withAuthorizedImeis(?array $authorizedImeis): self
     {
         $obj = clone $this;
-        $obj['authorized_imeis'] = $authorizedImeis;
+        $obj['authorizedImeis'] = $authorizedImeis;
 
         return $obj;
     }
@@ -364,7 +368,7 @@ final class SimCard implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -380,7 +384,7 @@ final class SimCard implements BaseModel
         CurrentBillingPeriodConsumedData|array $currentBillingPeriodConsumedData
     ): self {
         $obj = clone $this;
-        $obj['current_billing_period_consumed_data'] = $currentBillingPeriodConsumedData;
+        $obj['currentBillingPeriodConsumedData'] = $currentBillingPeriodConsumedData;
 
         return $obj;
     }
@@ -390,7 +394,7 @@ final class SimCard implements BaseModel
      *
      * @param CurrentDeviceLocation|array{
      *   accuracy?: int|null,
-     *   accuracy_unit?: string|null,
+     *   accuracyUnit?: string|null,
      *   latitude?: string|null,
      *   longitude?: string|null,
      * } $currentDeviceLocation
@@ -399,7 +403,7 @@ final class SimCard implements BaseModel
         CurrentDeviceLocation|array $currentDeviceLocation
     ): self {
         $obj = clone $this;
-        $obj['current_device_location'] = $currentDeviceLocation;
+        $obj['currentDeviceLocation'] = $currentDeviceLocation;
 
         return $obj;
     }
@@ -410,7 +414,7 @@ final class SimCard implements BaseModel
     public function withCurrentImei(string $currentImei): self
     {
         $obj = clone $this;
-        $obj['current_imei'] = $currentImei;
+        $obj['currentImei'] = $currentImei;
 
         return $obj;
     }
@@ -422,7 +426,7 @@ final class SimCard implements BaseModel
     public function withCurrentMcc(string $currentMcc): self
     {
         $obj = clone $this;
-        $obj['current_mcc'] = $currentMcc;
+        $obj['currentMcc'] = $currentMcc;
 
         return $obj;
     }
@@ -434,7 +438,7 @@ final class SimCard implements BaseModel
     public function withCurrentMnc(string $currentMnc): self
     {
         $obj = clone $this;
-        $obj['current_mnc'] = $currentMnc;
+        $obj['currentMnc'] = $currentMnc;
 
         return $obj;
     }
@@ -449,7 +453,7 @@ final class SimCard implements BaseModel
     public function withDataLimit(DataLimit|array $dataLimit): self
     {
         $obj = clone $this;
-        $obj['data_limit'] = $dataLimit;
+        $obj['dataLimit'] = $dataLimit;
 
         return $obj;
     }
@@ -474,7 +478,7 @@ final class SimCard implements BaseModel
         EsimInstallationStatus|string|null $esimInstallationStatus
     ): self {
         $obj = clone $this;
-        $obj['esim_installation_status'] = $esimInstallationStatus;
+        $obj['esimInstallationStatus'] = $esimInstallationStatus;
 
         return $obj;
     }
@@ -533,7 +537,7 @@ final class SimCard implements BaseModel
         LiveDataSession|string $liveDataSession
     ): self {
         $obj = clone $this;
-        $obj['live_data_session'] = $liveDataSession;
+        $obj['liveDataSession'] = $liveDataSession;
 
         return $obj;
     }
@@ -560,7 +564,7 @@ final class SimCard implements BaseModel
     public function withPinPukCodes(PinPukCodes|array $pinPukCodes): self
     {
         $obj = clone $this;
-        $obj['pin_puk_codes'] = $pinPukCodes;
+        $obj['pinPukCodes'] = $pinPukCodes;
 
         return $obj;
     }
@@ -568,7 +572,7 @@ final class SimCard implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -582,7 +586,7 @@ final class SimCard implements BaseModel
         array $resourcesWithInProgressActions
     ): self {
         $obj = clone $this;
-        $obj['resources_with_in_progress_actions'] = $resourcesWithInProgressActions;
+        $obj['resourcesWithInProgressActions'] = $resourcesWithInProgressActions;
 
         return $obj;
     }
@@ -593,7 +597,7 @@ final class SimCard implements BaseModel
     public function withSimCardGroupID(string $simCardGroupID): self
     {
         $obj = clone $this;
-        $obj['sim_card_group_id'] = $simCardGroupID;
+        $obj['simCardGroupID'] = $simCardGroupID;
 
         return $obj;
     }
@@ -643,7 +647,7 @@ final class SimCard implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

@@ -18,10 +18,10 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type AvailablePhoneNumberBlockListParamsShape = array{
  *   filter?: Filter|array{
- *     country_code?: string|null,
+ *     countryCode?: string|null,
  *     locality?: string|null,
- *     national_destination_code?: string|null,
- *     phone_number_type?: value-of<PhoneNumberType>|null,
+ *     nationalDestinationCode?: string|null,
+ *     phoneNumberType?: value-of<PhoneNumberType>|null,
  *   },
  * }
  */
@@ -48,10 +48,10 @@ final class AvailablePhoneNumberBlockListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   country_code?: string|null,
+     *   countryCode?: string|null,
      *   locality?: string|null,
-     *   national_destination_code?: string|null,
-     *   phone_number_type?: value-of<PhoneNumberType>|null,
+     *   nationalDestinationCode?: string|null,
+     *   phoneNumberType?: value-of<PhoneNumberType>|null,
      * } $filter
      */
     public static function with(Filter|array|null $filter = null): self
@@ -67,10 +67,10 @@ final class AvailablePhoneNumberBlockListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[locality], filter[country_code], filter[national_destination_code], filter[phone_number_type].
      *
      * @param Filter|array{
-     *   country_code?: string|null,
+     *   countryCode?: string|null,
      *   locality?: string|null,
-     *   national_destination_code?: string|null,
-     *   phone_number_type?: value-of<PhoneNumberType>|null,
+     *   nationalDestinationCode?: string|null,
+     *   phoneNumberType?: value-of<PhoneNumberType>|null,
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

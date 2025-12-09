@@ -14,8 +14,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type WebhookPortoutNewCommentPayloadShape = array{
  *   id?: string|null,
  *   comment?: string|null,
- *   portout_id?: string|null,
- *   user_id?: string|null,
+ *   portoutID?: string|null,
+ *   userID?: string|null,
  * }
  */
 final class WebhookPortoutNewCommentPayload implements BaseModel
@@ -38,14 +38,14 @@ final class WebhookPortoutNewCommentPayload implements BaseModel
     /**
      * Identifies the port-out order that the comment was added to.
      */
-    #[Optional]
-    public ?string $portout_id;
+    #[Optional('portout_id')]
+    public ?string $portoutID;
 
     /**
      * Identifies the user that added the comment.
      */
-    #[Optional]
-    public ?string $user_id;
+    #[Optional('user_id')]
+    public ?string $userID;
 
     public function __construct()
     {
@@ -60,15 +60,15 @@ final class WebhookPortoutNewCommentPayload implements BaseModel
     public static function with(
         ?string $id = null,
         ?string $comment = null,
-        ?string $portout_id = null,
-        ?string $user_id = null,
+        ?string $portoutID = null,
+        ?string $userID = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
         null !== $comment && $obj['comment'] = $comment;
-        null !== $portout_id && $obj['portout_id'] = $portout_id;
-        null !== $user_id && $obj['user_id'] = $user_id;
+        null !== $portoutID && $obj['portoutID'] = $portoutID;
+        null !== $userID && $obj['userID'] = $userID;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class WebhookPortoutNewCommentPayload implements BaseModel
     public function withPortoutID(string $portoutID): self
     {
         $obj = clone $this;
-        $obj['portout_id'] = $portoutID;
+        $obj['portoutID'] = $portoutID;
 
         return $obj;
     }
@@ -112,7 +112,7 @@ final class WebhookPortoutNewCommentPayload implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj['user_id'] = $userID;
+        $obj['userID'] = $userID;
 
         return $obj;
     }

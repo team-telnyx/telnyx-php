@@ -17,10 +17,10 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type NumberBlockOrderCreateParamsShape = array{
  *   range: int,
- *   starting_number: string,
- *   connection_id?: string,
- *   customer_reference?: string,
- *   messaging_profile_id?: string,
+ *   startingNumber: string,
+ *   connectionID?: string,
+ *   customerReference?: string,
+ *   messagingProfileID?: string,
  * }
  */
 final class NumberBlockOrderCreateParams implements BaseModel
@@ -38,33 +38,33 @@ final class NumberBlockOrderCreateParams implements BaseModel
     /**
      * Starting phone number block.
      */
-    #[Required]
-    public string $starting_number;
+    #[Required('starting_number')]
+    public string $startingNumber;
 
     /**
      * Identifies the connection associated with this phone number.
      */
-    #[Optional]
-    public ?string $connection_id;
+    #[Optional('connection_id')]
+    public ?string $connectionID;
 
     /**
      * A customer reference string for customer look ups.
      */
-    #[Optional]
-    public ?string $customer_reference;
+    #[Optional('customer_reference')]
+    public ?string $customerReference;
 
     /**
      * Identifies the messaging profile associated with the phone number.
      */
-    #[Optional]
-    public ?string $messaging_profile_id;
+    #[Optional('messaging_profile_id')]
+    public ?string $messagingProfileID;
 
     /**
      * `new NumberBlockOrderCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * NumberBlockOrderCreateParams::with(range: ..., starting_number: ...)
+     * NumberBlockOrderCreateParams::with(range: ..., startingNumber: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -85,19 +85,19 @@ final class NumberBlockOrderCreateParams implements BaseModel
      */
     public static function with(
         int $range,
-        string $starting_number,
-        ?string $connection_id = null,
-        ?string $customer_reference = null,
-        ?string $messaging_profile_id = null,
+        string $startingNumber,
+        ?string $connectionID = null,
+        ?string $customerReference = null,
+        ?string $messagingProfileID = null,
     ): self {
         $obj = new self;
 
         $obj['range'] = $range;
-        $obj['starting_number'] = $starting_number;
+        $obj['startingNumber'] = $startingNumber;
 
-        null !== $connection_id && $obj['connection_id'] = $connection_id;
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
-        null !== $messaging_profile_id && $obj['messaging_profile_id'] = $messaging_profile_id;
+        null !== $connectionID && $obj['connectionID'] = $connectionID;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
+        null !== $messagingProfileID && $obj['messagingProfileID'] = $messagingProfileID;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class NumberBlockOrderCreateParams implements BaseModel
     public function withStartingNumber(string $startingNumber): self
     {
         $obj = clone $this;
-        $obj['starting_number'] = $startingNumber;
+        $obj['startingNumber'] = $startingNumber;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class NumberBlockOrderCreateParams implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj['connection_id'] = $connectionID;
+        $obj['connectionID'] = $connectionID;
 
         return $obj;
     }
@@ -141,7 +141,7 @@ final class NumberBlockOrderCreateParams implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class NumberBlockOrderCreateParams implements BaseModel
     public function withMessagingProfileID(string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj['messaging_profile_id'] = $messagingProfileID;
+        $obj['messagingProfileID'] = $messagingProfileID;
 
         return $obj;
     }

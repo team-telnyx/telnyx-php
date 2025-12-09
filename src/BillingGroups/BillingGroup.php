@@ -12,12 +12,12 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type BillingGroupShape = array{
  *   id?: string|null,
- *   created_at?: \DateTimeInterface|null,
- *   deleted_at?: \DateTimeInterface|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   deletedAt?: \DateTimeInterface|null,
  *   name?: string|null,
- *   organization_id?: string|null,
- *   record_type?: value-of<RecordType>|null,
- *   updated_at?: \DateTimeInterface|null,
+ *   organizationID?: string|null,
+ *   recordType?: value-of<RecordType>|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class BillingGroup implements BaseModel
@@ -34,14 +34,14 @@ final class BillingGroup implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
     /**
      * ISO 8601 formatted date indicating when the resource was removed.
      */
-    #[Optional(nullable: true)]
-    public ?\DateTimeInterface $deleted_at;
+    #[Optional('deleted_at', nullable: true)]
+    public ?\DateTimeInterface $deletedAt;
 
     /**
      * A user-specified name for the billing group.
@@ -52,22 +52,22 @@ final class BillingGroup implements BaseModel
     /**
      * Identifies the organization that owns the resource.
      */
-    #[Optional]
-    public ?string $organization_id;
+    #[Optional('organization_id')]
+    public ?string $organizationID;
 
     /**
      * Identifies the type of the resource.
      *
-     * @var value-of<RecordType>|null $record_type
+     * @var value-of<RecordType>|null $recordType
      */
-    #[Optional(enum: RecordType::class)]
-    public ?string $record_type;
+    #[Optional('record_type', enum: RecordType::class)]
+    public ?string $recordType;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
     {
@@ -79,26 +79,26 @@ final class BillingGroup implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $record_type
+     * @param RecordType|value-of<RecordType> $recordType
      */
     public static function with(
         ?string $id = null,
-        ?\DateTimeInterface $created_at = null,
-        ?\DateTimeInterface $deleted_at = null,
+        ?\DateTimeInterface $createdAt = null,
+        ?\DateTimeInterface $deletedAt = null,
         ?string $name = null,
-        ?string $organization_id = null,
-        RecordType|string|null $record_type = null,
-        ?\DateTimeInterface $updated_at = null,
+        ?string $organizationID = null,
+        RecordType|string|null $recordType = null,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $deleted_at && $obj['deleted_at'] = $deleted_at;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $deletedAt && $obj['deletedAt'] = $deletedAt;
         null !== $name && $obj['name'] = $name;
-        null !== $organization_id && $obj['organization_id'] = $organization_id;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $organizationID && $obj['organizationID'] = $organizationID;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class BillingGroup implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class BillingGroup implements BaseModel
     public function withDeletedAt(?\DateTimeInterface $deletedAt): self
     {
         $obj = clone $this;
-        $obj['deleted_at'] = $deletedAt;
+        $obj['deletedAt'] = $deletedAt;
 
         return $obj;
     }
@@ -153,7 +153,7 @@ final class BillingGroup implements BaseModel
     public function withOrganizationID(string $organizationID): self
     {
         $obj = clone $this;
-        $obj['organization_id'] = $organizationID;
+        $obj['organizationID'] = $organizationID;
 
         return $obj;
     }
@@ -166,7 +166,7 @@ final class BillingGroup implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -177,7 +177,7 @@ final class BillingGroup implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

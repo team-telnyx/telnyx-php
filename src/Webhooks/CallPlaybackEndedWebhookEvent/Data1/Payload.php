@@ -11,16 +11,16 @@ use Telnyx\Webhooks\CallPlaybackEndedWebhookEvent\Data1\Payload\Status;
 
 /**
  * @phpstan-type PayloadShape = array{
- *   call_control_id?: string|null,
- *   call_leg_id?: string|null,
- *   call_session_id?: string|null,
- *   client_state?: string|null,
- *   connection_id?: string|null,
- *   media_name?: string|null,
- *   media_url?: string|null,
+ *   callControlID?: string|null,
+ *   callLegID?: string|null,
+ *   callSessionID?: string|null,
+ *   clientState?: string|null,
+ *   connectionID?: string|null,
+ *   mediaName?: string|null,
+ *   mediaURL?: string|null,
  *   overlay?: bool|null,
  *   status?: value-of<Status>|null,
- *   status_detail?: string|null,
+ *   statusDetail?: string|null,
  * }
  */
 final class Payload implements BaseModel
@@ -31,44 +31,44 @@ final class Payload implements BaseModel
     /**
      * Call ID used to issue commands via Call Control API.
      */
-    #[Optional]
-    public ?string $call_control_id;
+    #[Optional('call_control_id')]
+    public ?string $callControlID;
 
     /**
      * ID that is unique to the call and can be used to correlate webhook events.
      */
-    #[Optional]
-    public ?string $call_leg_id;
+    #[Optional('call_leg_id')]
+    public ?string $callLegID;
 
     /**
      * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
      */
-    #[Optional]
-    public ?string $call_session_id;
+    #[Optional('call_session_id')]
+    public ?string $callSessionID;
 
     /**
      * State received from a command.
      */
-    #[Optional]
-    public ?string $client_state;
+    #[Optional('client_state')]
+    public ?string $clientState;
 
     /**
      * Call Control App ID (formerly Telnyx connection ID) used in the call.
      */
-    #[Optional]
-    public ?string $connection_id;
+    #[Optional('connection_id')]
+    public ?string $connectionID;
 
     /**
      * The name of the audio media file being played back, if media_name has been used to start.
      */
-    #[Optional]
-    public ?string $media_name;
+    #[Optional('media_name')]
+    public ?string $mediaName;
 
     /**
      * The audio URL being played back, if audio_url has been used to start.
      */
-    #[Optional]
-    public ?string $media_url;
+    #[Optional('media_url')]
+    public ?string $mediaURL;
 
     /**
      * Whether the stopped audio was in overlay mode or not.
@@ -87,8 +87,8 @@ final class Payload implements BaseModel
     /**
      * Provides details in case of failure.
      */
-    #[Optional]
-    public ?string $status_detail;
+    #[Optional('status_detail')]
+    public ?string $statusDetail;
 
     public function __construct()
     {
@@ -103,29 +103,29 @@ final class Payload implements BaseModel
      * @param Status|value-of<Status> $status
      */
     public static function with(
-        ?string $call_control_id = null,
-        ?string $call_leg_id = null,
-        ?string $call_session_id = null,
-        ?string $client_state = null,
-        ?string $connection_id = null,
-        ?string $media_name = null,
-        ?string $media_url = null,
+        ?string $callControlID = null,
+        ?string $callLegID = null,
+        ?string $callSessionID = null,
+        ?string $clientState = null,
+        ?string $connectionID = null,
+        ?string $mediaName = null,
+        ?string $mediaURL = null,
         ?bool $overlay = null,
         Status|string|null $status = null,
-        ?string $status_detail = null,
+        ?string $statusDetail = null,
     ): self {
         $obj = new self;
 
-        null !== $call_control_id && $obj['call_control_id'] = $call_control_id;
-        null !== $call_leg_id && $obj['call_leg_id'] = $call_leg_id;
-        null !== $call_session_id && $obj['call_session_id'] = $call_session_id;
-        null !== $client_state && $obj['client_state'] = $client_state;
-        null !== $connection_id && $obj['connection_id'] = $connection_id;
-        null !== $media_name && $obj['media_name'] = $media_name;
-        null !== $media_url && $obj['media_url'] = $media_url;
+        null !== $callControlID && $obj['callControlID'] = $callControlID;
+        null !== $callLegID && $obj['callLegID'] = $callLegID;
+        null !== $callSessionID && $obj['callSessionID'] = $callSessionID;
+        null !== $clientState && $obj['clientState'] = $clientState;
+        null !== $connectionID && $obj['connectionID'] = $connectionID;
+        null !== $mediaName && $obj['mediaName'] = $mediaName;
+        null !== $mediaURL && $obj['mediaURL'] = $mediaURL;
         null !== $overlay && $obj['overlay'] = $overlay;
         null !== $status && $obj['status'] = $status;
-        null !== $status_detail && $obj['status_detail'] = $status_detail;
+        null !== $statusDetail && $obj['statusDetail'] = $statusDetail;
 
         return $obj;
     }
@@ -136,7 +136,7 @@ final class Payload implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj['call_control_id'] = $callControlID;
+        $obj['callControlID'] = $callControlID;
 
         return $obj;
     }
@@ -147,7 +147,7 @@ final class Payload implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj['call_leg_id'] = $callLegID;
+        $obj['callLegID'] = $callLegID;
 
         return $obj;
     }
@@ -158,7 +158,7 @@ final class Payload implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj['call_session_id'] = $callSessionID;
+        $obj['callSessionID'] = $callSessionID;
 
         return $obj;
     }
@@ -169,7 +169,7 @@ final class Payload implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj['client_state'] = $clientState;
+        $obj['clientState'] = $clientState;
 
         return $obj;
     }
@@ -180,7 +180,7 @@ final class Payload implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj['connection_id'] = $connectionID;
+        $obj['connectionID'] = $connectionID;
 
         return $obj;
     }
@@ -191,7 +191,7 @@ final class Payload implements BaseModel
     public function withMediaName(string $mediaName): self
     {
         $obj = clone $this;
-        $obj['media_name'] = $mediaName;
+        $obj['mediaName'] = $mediaName;
 
         return $obj;
     }
@@ -202,7 +202,7 @@ final class Payload implements BaseModel
     public function withMediaURL(string $mediaURL): self
     {
         $obj = clone $this;
-        $obj['media_url'] = $mediaURL;
+        $obj['mediaURL'] = $mediaURL;
 
         return $obj;
     }
@@ -237,7 +237,7 @@ final class Payload implements BaseModel
     public function withStatusDetail(string $statusDetail): self
     {
         $obj = clone $this;
-        $obj['status_detail'] = $statusDetail;
+        $obj['statusDetail'] = $statusDetail;
 
         return $obj;
     }

@@ -55,8 +55,8 @@ final class McpServersTest extends TestCase
             'name' => 'name',
             'type' => 'type',
             'url' => 'url',
-            'allowed_tools' => ['string'],
-            'api_key_ref' => 'api_key_ref',
+            'allowedTools' => ['string'],
+            'apiKeyRef' => 'api_key_ref',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

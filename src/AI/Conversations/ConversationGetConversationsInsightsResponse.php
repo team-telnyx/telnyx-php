@@ -55,12 +55,12 @@ final class ConversationGetConversationsInsightsResponse implements BaseModel
      *
      * @param list<Data|array{
      *   id: string,
-     *   conversation_insights: list<ConversationInsight>,
-     *   created_at: \DateTimeInterface,
+     *   conversationInsights: list<ConversationInsight>,
+     *   createdAt: \DateTimeInterface,
      *   status: value-of<Status>,
      * }> $data
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public static function with(array $data, Meta|array $meta): self
@@ -76,8 +76,8 @@ final class ConversationGetConversationsInsightsResponse implements BaseModel
     /**
      * @param list<Data|array{
      *   id: string,
-     *   conversation_insights: list<ConversationInsight>,
-     *   created_at: \DateTimeInterface,
+     *   conversationInsights: list<ConversationInsight>,
+     *   createdAt: \DateTimeInterface,
      *   status: value-of<Status>,
      * }> $data
      */
@@ -91,7 +91,7 @@ final class ConversationGetConversationsInsightsResponse implements BaseModel
 
     /**
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public function withMeta(Meta|array $meta): self

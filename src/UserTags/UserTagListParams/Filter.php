@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[starts_with].
  *
- * @phpstan-type FilterShape = array{starts_with?: string|null}
+ * @phpstan-type FilterShape = array{startsWith?: string|null}
  */
 final class Filter implements BaseModel
 {
@@ -21,8 +21,8 @@ final class Filter implements BaseModel
     /**
      * Filter tags by prefix.
      */
-    #[Optional]
-    public ?string $starts_with;
+    #[Optional('starts_with')]
+    public ?string $startsWith;
 
     public function __construct()
     {
@@ -34,11 +34,11 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $starts_with = null): self
+    public static function with(?string $startsWith = null): self
     {
         $obj = new self;
 
-        null !== $starts_with && $obj['starts_with'] = $starts_with;
+        null !== $startsWith && $obj['startsWith'] = $startsWith;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class Filter implements BaseModel
     public function withStartsWith(string $startsWith): self
     {
         $obj = clone $this;
-        $obj['starts_with'] = $startsWith;
+        $obj['startsWith'] = $startsWith;
 
         return $obj;
     }

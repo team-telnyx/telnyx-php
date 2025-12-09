@@ -44,30 +44,30 @@ final class SimCardListResponse implements BaseModel
      *
      * @param list<SimpleSimCard|array{
      *   id?: string|null,
-     *   actions_in_progress?: bool|null,
-     *   authorized_imeis?: list<string>|null,
-     *   created_at?: string|null,
-     *   current_billing_period_consumed_data?: CurrentBillingPeriodConsumedData|null,
-     *   data_limit?: DataLimit|null,
+     *   actionsInProgress?: bool|null,
+     *   authorizedImeis?: list<string>|null,
+     *   createdAt?: string|null,
+     *   currentBillingPeriodConsumedData?: CurrentBillingPeriodConsumedData|null,
+     *   dataLimit?: DataLimit|null,
      *   eid?: string|null,
-     *   esim_installation_status?: value-of<EsimInstallationStatus>|null,
+     *   esimInstallationStatus?: value-of<EsimInstallationStatus>|null,
      *   iccid?: string|null,
      *   imsi?: string|null,
      *   msisdn?: string|null,
-     *   record_type?: string|null,
-     *   resources_with_in_progress_actions?: list<mixed>|null,
-     *   sim_card_group_id?: string|null,
+     *   recordType?: string|null,
+     *   resourcesWithInProgressActions?: list<mixed>|null,
+     *   simCardGroupID?: string|null,
      *   status?: SimCardStatus|null,
      *   tags?: list<string>|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      *   version?: string|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -85,23 +85,23 @@ final class SimCardListResponse implements BaseModel
     /**
      * @param list<SimpleSimCard|array{
      *   id?: string|null,
-     *   actions_in_progress?: bool|null,
-     *   authorized_imeis?: list<string>|null,
-     *   created_at?: string|null,
-     *   current_billing_period_consumed_data?: CurrentBillingPeriodConsumedData|null,
-     *   data_limit?: DataLimit|null,
+     *   actionsInProgress?: bool|null,
+     *   authorizedImeis?: list<string>|null,
+     *   createdAt?: string|null,
+     *   currentBillingPeriodConsumedData?: CurrentBillingPeriodConsumedData|null,
+     *   dataLimit?: DataLimit|null,
      *   eid?: string|null,
-     *   esim_installation_status?: value-of<EsimInstallationStatus>|null,
+     *   esimInstallationStatus?: value-of<EsimInstallationStatus>|null,
      *   iccid?: string|null,
      *   imsi?: string|null,
      *   msisdn?: string|null,
-     *   record_type?: string|null,
-     *   resources_with_in_progress_actions?: list<mixed>|null,
-     *   sim_card_group_id?: string|null,
+     *   recordType?: string|null,
+     *   resourcesWithInProgressActions?: list<mixed>|null,
+     *   simCardGroupID?: string|null,
      *   status?: SimCardStatus|null,
      *   tags?: list<string>|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      *   version?: string|null,
      * }> $data
      */
@@ -115,10 +115,10 @@ final class SimCardListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

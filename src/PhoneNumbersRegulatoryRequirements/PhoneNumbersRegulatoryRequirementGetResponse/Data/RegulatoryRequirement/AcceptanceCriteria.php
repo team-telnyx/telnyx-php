@@ -10,9 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type AcceptanceCriteriaShape = array{
- *   field_type?: string|null,
- *   field_value?: string|null,
- *   locality_limit?: string|null,
+ *   fieldType?: string|null, fieldValue?: string|null, localityLimit?: string|null
  * }
  */
 final class AcceptanceCriteria implements BaseModel
@@ -20,14 +18,14 @@ final class AcceptanceCriteria implements BaseModel
     /** @use SdkModel<AcceptanceCriteriaShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?string $field_type;
+    #[Optional('field_type')]
+    public ?string $fieldType;
 
-    #[Optional]
-    public ?string $field_value;
+    #[Optional('field_value')]
+    public ?string $fieldValue;
 
-    #[Optional]
-    public ?string $locality_limit;
+    #[Optional('locality_limit')]
+    public ?string $localityLimit;
 
     public function __construct()
     {
@@ -40,15 +38,15 @@ final class AcceptanceCriteria implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $field_type = null,
-        ?string $field_value = null,
-        ?string $locality_limit = null,
+        ?string $fieldType = null,
+        ?string $fieldValue = null,
+        ?string $localityLimit = null,
     ): self {
         $obj = new self;
 
-        null !== $field_type && $obj['field_type'] = $field_type;
-        null !== $field_value && $obj['field_value'] = $field_value;
-        null !== $locality_limit && $obj['locality_limit'] = $locality_limit;
+        null !== $fieldType && $obj['fieldType'] = $fieldType;
+        null !== $fieldValue && $obj['fieldValue'] = $fieldValue;
+        null !== $localityLimit && $obj['localityLimit'] = $localityLimit;
 
         return $obj;
     }
@@ -56,7 +54,7 @@ final class AcceptanceCriteria implements BaseModel
     public function withFieldType(string $fieldType): self
     {
         $obj = clone $this;
-        $obj['field_type'] = $fieldType;
+        $obj['fieldType'] = $fieldType;
 
         return $obj;
     }
@@ -64,7 +62,7 @@ final class AcceptanceCriteria implements BaseModel
     public function withFieldValue(string $fieldValue): self
     {
         $obj = clone $this;
-        $obj['field_value'] = $fieldValue;
+        $obj['fieldValue'] = $fieldValue;
 
         return $obj;
     }
@@ -72,7 +70,7 @@ final class AcceptanceCriteria implements BaseModel
     public function withLocalityLimit(string $localityLimit): self
     {
         $obj = clone $this;
-        $obj['locality_limit'] = $localityLimit;
+        $obj['localityLimit'] = $localityLimit;
 
         return $obj;
     }

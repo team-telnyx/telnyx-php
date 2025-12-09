@@ -23,8 +23,8 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Sort\Val
  * @phpstan-type ActionRequirementListParamsShape = array{
  *   filter?: Filter|array{
  *     id?: list<string>|null,
- *     action_type?: value-of<ActionType>|null,
- *     requirement_type_id?: string|null,
+ *     actionType?: value-of<ActionType>|null,
+ *     requirementTypeID?: string|null,
  *     status?: value-of<Status>|null,
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
@@ -67,8 +67,8 @@ final class ActionRequirementListParams implements BaseModel
      *
      * @param Filter|array{
      *   id?: list<string>|null,
-     *   action_type?: value-of<ActionType>|null,
-     *   requirement_type_id?: string|null,
+     *   actionType?: value-of<ActionType>|null,
+     *   requirementTypeID?: string|null,
      *   status?: value-of<Status>|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
@@ -93,8 +93,8 @@ final class ActionRequirementListParams implements BaseModel
      *
      * @param Filter|array{
      *   id?: list<string>|null,
-     *   action_type?: value-of<ActionType>|null,
-     *   requirement_type_id?: string|null,
+     *   actionType?: value-of<ActionType>|null,
+     *   requirementTypeID?: string|null,
      *   status?: value-of<Status>|null,
      * } $filter
      */

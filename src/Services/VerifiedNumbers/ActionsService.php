@@ -25,7 +25,7 @@ final class ActionsService implements ActionsContract
      * Submit verification code
      *
      * @param array{
-     *   verification_code: string
+     *   verificationCode: string
      * }|ActionSubmitVerificationCodeParams $params
      *
      * @throws APIException

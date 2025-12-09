@@ -46,12 +46,12 @@ final class BucketGetResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   created_at: \DateTimeInterface,
+     *   createdAt: \DateTimeInterface,
      *   filename: string,
      *   status: string,
-     *   error_reason?: string|null,
-     *   last_embedded_at?: \DateTimeInterface|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   errorReason?: string|null,
+     *   lastEmbeddedAt?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public static function with(array $data): self
@@ -65,12 +65,12 @@ final class BucketGetResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   created_at: \DateTimeInterface,
+     *   createdAt: \DateTimeInterface,
      *   filename: string,
      *   status: string,
-     *   error_reason?: string|null,
-     *   last_embedded_at?: \DateTimeInterface|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   errorReason?: string|null,
+     *   lastEmbeddedAt?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public function withData(array $data): self

@@ -16,7 +16,7 @@ use Telnyx\Porting\Events\EventListResponse\Data\Payload\WebhookPortingOrderSpli
  *
  * @phpstan-type WebhookPortingOrderSplitPayloadShape = array{
  *   from?: From|null,
- *   porting_phone_numbers?: list<PortingPhoneNumber>|null,
+ *   portingPhoneNumbers?: list<PortingPhoneNumber>|null,
  *   to?: To|null,
  * }
  */
@@ -34,10 +34,10 @@ final class WebhookPortingOrderSplitPayload implements BaseModel
     /**
      * The list of porting phone numbers that were moved to the new porting order.
      *
-     * @var list<PortingPhoneNumber>|null $porting_phone_numbers
+     * @var list<PortingPhoneNumber>|null $portingPhoneNumbers
      */
-    #[Optional(list: PortingPhoneNumber::class)]
-    public ?array $porting_phone_numbers;
+    #[Optional('porting_phone_numbers', list: PortingPhoneNumber::class)]
+    public ?array $portingPhoneNumbers;
 
     /**
      * The new porting order that the phone numbers was moved to.
@@ -56,18 +56,18 @@ final class WebhookPortingOrderSplitPayload implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param From|array{id?: string|null} $from
-     * @param list<PortingPhoneNumber|array{id?: string|null}> $porting_phone_numbers
+     * @param list<PortingPhoneNumber|array{id?: string|null}> $portingPhoneNumbers
      * @param To|array{id?: string|null} $to
      */
     public static function with(
         From|array|null $from = null,
-        ?array $porting_phone_numbers = null,
+        ?array $portingPhoneNumbers = null,
         To|array|null $to = null,
     ): self {
         $obj = new self;
 
         null !== $from && $obj['from'] = $from;
-        null !== $porting_phone_numbers && $obj['porting_phone_numbers'] = $porting_phone_numbers;
+        null !== $portingPhoneNumbers && $obj['portingPhoneNumbers'] = $portingPhoneNumbers;
         null !== $to && $obj['to'] = $to;
 
         return $obj;
@@ -94,7 +94,7 @@ final class WebhookPortingOrderSplitPayload implements BaseModel
     public function withPortingPhoneNumbers(array $portingPhoneNumbers): self
     {
         $obj = clone $this;
-        $obj['porting_phone_numbers'] = $portingPhoneNumbers;
+        $obj['portingPhoneNumbers'] = $portingPhoneNumbers;
 
         return $obj;
     }

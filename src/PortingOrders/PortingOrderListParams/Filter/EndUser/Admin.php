@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type AdminShape = array{
- *   auth_person_name?: string|null, entity_name?: string|null
+ *   authPersonName?: string|null, entityName?: string|null
  * }
  */
 final class Admin implements BaseModel
@@ -21,14 +21,14 @@ final class Admin implements BaseModel
     /**
      * Filter results by authorized person.
      */
-    #[Optional]
-    public ?string $auth_person_name;
+    #[Optional('auth_person_name')]
+    public ?string $authPersonName;
 
     /**
      * Filter results by person or company name.
      */
-    #[Optional]
-    public ?string $entity_name;
+    #[Optional('entity_name')]
+    public ?string $entityName;
 
     public function __construct()
     {
@@ -41,13 +41,13 @@ final class Admin implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $auth_person_name = null,
-        ?string $entity_name = null
+        ?string $authPersonName = null,
+        ?string $entityName = null
     ): self {
         $obj = new self;
 
-        null !== $auth_person_name && $obj['auth_person_name'] = $auth_person_name;
-        null !== $entity_name && $obj['entity_name'] = $entity_name;
+        null !== $authPersonName && $obj['authPersonName'] = $authPersonName;
+        null !== $entityName && $obj['entityName'] = $entityName;
 
         return $obj;
     }
@@ -58,7 +58,7 @@ final class Admin implements BaseModel
     public function withAuthPersonName(string $authPersonName): self
     {
         $obj = clone $this;
-        $obj['auth_person_name'] = $authPersonName;
+        $obj['authPersonName'] = $authPersonName;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class Admin implements BaseModel
     public function withEntityName(string $entityName): self
     {
         $obj = clone $this;
-        $obj['entity_name'] = $entityName;
+        $obj['entityName'] = $entityName;
 
         return $obj;
     }

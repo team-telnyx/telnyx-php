@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\CustomerServiceRecordsService::verifyPhoneNumberCoverage()
  *
  * @phpstan-type CustomerServiceRecordVerifyPhoneNumberCoverageParamsShape = array{
- *   phone_numbers: list<string>
+ *   phoneNumbers: list<string>
  * }
  */
 final class CustomerServiceRecordVerifyPhoneNumberCoverageParams implements BaseModel
@@ -27,17 +27,17 @@ final class CustomerServiceRecordVerifyPhoneNumberCoverageParams implements Base
     /**
      * The phone numbers list to be verified.
      *
-     * @var list<string> $phone_numbers
+     * @var list<string> $phoneNumbers
      */
-    #[Required(list: 'string')]
-    public array $phone_numbers;
+    #[Required('phone_numbers', list: 'string')]
+    public array $phoneNumbers;
 
     /**
      * `new CustomerServiceRecordVerifyPhoneNumberCoverageParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * CustomerServiceRecordVerifyPhoneNumberCoverageParams::with(phone_numbers: ...)
+     * CustomerServiceRecordVerifyPhoneNumberCoverageParams::with(phoneNumbers: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -57,13 +57,13 @@ final class CustomerServiceRecordVerifyPhoneNumberCoverageParams implements Base
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $phone_numbers
+     * @param list<string> $phoneNumbers
      */
-    public static function with(array $phone_numbers): self
+    public static function with(array $phoneNumbers): self
     {
         $obj = new self;
 
-        $obj['phone_numbers'] = $phone_numbers;
+        $obj['phoneNumbers'] = $phoneNumbers;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class CustomerServiceRecordVerifyPhoneNumberCoverageParams implements Base
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj['phone_numbers'] = $phoneNumbers;
+        $obj['phoneNumbers'] = $phoneNumbers;
 
         return $obj;
     }

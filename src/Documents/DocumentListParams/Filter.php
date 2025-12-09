@@ -15,8 +15,8 @@ use Telnyx\Documents\DocumentListParams\Filter\Filename;
  * Consolidated filter parameter for documents (deepObject style). Originally: filter[filename][contains], filter[customer_reference][eq], filter[customer_reference][in][], filter[created_at][gt], filter[created_at][lt].
  *
  * @phpstan-type FilterShape = array{
- *   created_at?: CreatedAt|null,
- *   customer_reference?: CustomerReference|null,
+ *   createdAt?: CreatedAt|null,
+ *   customerReference?: CustomerReference|null,
  *   filename?: Filename|null,
  * }
  */
@@ -25,11 +25,11 @@ final class Filter implements BaseModel
     /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?CreatedAt $created_at;
+    #[Optional('created_at')]
+    public ?CreatedAt $createdAt;
 
-    #[Optional]
-    public ?CustomerReference $customer_reference;
+    #[Optional('customer_reference')]
+    public ?CustomerReference $customerReference;
 
     #[Optional]
     public ?Filename $filename;
@@ -46,21 +46,21 @@ final class Filter implements BaseModel
      *
      * @param CreatedAt|array{
      *   gt?: \DateTimeInterface|null, lt?: \DateTimeInterface|null
-     * } $created_at
+     * } $createdAt
      * @param CustomerReference|array{
      *   eq?: string|null, in?: list<string>|null
-     * } $customer_reference
+     * } $customerReference
      * @param Filename|array{contains?: string|null} $filename
      */
     public static function with(
-        CreatedAt|array|null $created_at = null,
-        CustomerReference|array|null $customer_reference = null,
+        CreatedAt|array|null $createdAt = null,
+        CustomerReference|array|null $customerReference = null,
         Filename|array|null $filename = null,
     ): self {
         $obj = new self;
 
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
         null !== $filename && $obj['filename'] = $filename;
 
         return $obj;
@@ -74,7 +74,7 @@ final class Filter implements BaseModel
     public function withCreatedAt(CreatedAt|array $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class Filter implements BaseModel
         CustomerReference|array $customerReference
     ): self {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }

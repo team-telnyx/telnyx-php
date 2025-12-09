@@ -20,8 +20,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type AccessIPRangeListParamsShape = array{
  *   filter?: Filter|array{
- *     cidr_block?: string|null|CidrBlockPatternFilter,
- *     created_at?: null|\DateTimeInterface|DateRangeFilter,
+ *     cidrBlock?: string|null|CidrBlockPatternFilter,
+ *     createdAt?: null|\DateTimeInterface|DateRangeFilter,
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
  * }
@@ -55,8 +55,8 @@ final class AccessIPRangeListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   cidr_block?: string|CidrBlockPatternFilter|null,
-     *   created_at?: \DateTimeInterface|DateRangeFilter|null,
+     *   cidrBlock?: string|CidrBlockPatternFilter|null,
+     *   createdAt?: \DateTimeInterface|DateRangeFilter|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      */
@@ -76,8 +76,8 @@ final class AccessIPRangeListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[cidr_block], filter[cidr_block][startswith], filter[cidr_block][endswith], filter[cidr_block][contains], filter[created_at]. Supports complex bracket operations for dynamic filtering.
      *
      * @param Filter|array{
-     *   cidr_block?: string|CidrBlockPatternFilter|null,
-     *   created_at?: \DateTimeInterface|DateRangeFilter|null,
+     *   cidrBlock?: string|CidrBlockPatternFilter|null,
+     *   createdAt?: \DateTimeInterface|DateRangeFilter|null,
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

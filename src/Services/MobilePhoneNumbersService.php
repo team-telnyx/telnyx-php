@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberGetResponse;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberListParams;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberListResponse;
@@ -63,26 +64,26 @@ final class MobilePhoneNumbersService implements MobilePhoneNumbersContract
      * Update a Mobile Phone Number
      *
      * @param array{
-     *   call_forwarding?: array{
-     *     call_forwarding_enabled?: bool,
-     *     forwarding_type?: 'always'|'on-failure'|ForwardingType|null,
-     *     forwards_to?: string|null,
+     *   callForwarding?: array{
+     *     callForwardingEnabled?: bool,
+     *     forwardingType?: 'always'|'on-failure'|ForwardingType|null,
+     *     forwardsTo?: string|null,
      *   },
-     *   call_recording?: array{
-     *     inbound_call_recording_channels?: 'single'|'dual'|InboundCallRecordingChannels,
-     *     inbound_call_recording_enabled?: bool,
-     *     inbound_call_recording_format?: 'wav'|'mp3'|InboundCallRecordingFormat,
+     *   callRecording?: array{
+     *     inboundCallRecordingChannels?: 'single'|'dual'|InboundCallRecordingChannels,
+     *     inboundCallRecordingEnabled?: bool,
+     *     inboundCallRecordingFormat?: 'wav'|'mp3'|InboundCallRecordingFormat,
      *   },
-     *   caller_id_name_enabled?: bool,
-     *   cnam_listing?: array{
-     *     cnam_listing_details?: string|null, cnam_listing_enabled?: bool
+     *   callerIDNameEnabled?: bool,
+     *   cnamListing?: array{
+     *     cnamListingDetails?: string|null, cnamListingEnabled?: bool
      *   },
-     *   connection_id?: string|null,
-     *   customer_reference?: string|null,
-     *   inbound?: array{interception_app_id?: string|null},
-     *   inbound_call_screening?: 'disabled'|'reject_calls'|'flag_calls'|InboundCallScreening,
-     *   noise_suppression?: bool,
-     *   outbound?: array{interception_app_id?: string|null},
+     *   connectionID?: string|null,
+     *   customerReference?: string|null,
+     *   inbound?: array{interceptionAppID?: string|null},
+     *   inboundCallScreening?: 'disabled'|'reject_calls'|'flag_calls'|InboundCallScreening,
+     *   noiseSuppression?: bool,
+     *   outbound?: array{interceptionAppID?: string|null},
      *   tags?: list<string>,
      * }|MobilePhoneNumberUpdateParams $params
      *
@@ -116,7 +117,7 @@ final class MobilePhoneNumbersService implements MobilePhoneNumbersContract
      * List Mobile Phone Numbers
      *
      * @param array{
-     *   page_number_?: int, page_size_?: int
+     *   pageNumber?: int, pageSize?: int
      * }|MobilePhoneNumberListParams $params
      *
      * @throws APIException
@@ -134,7 +135,10 @@ final class MobilePhoneNumbersService implements MobilePhoneNumbersContract
         $response = $this->client->request(
             method: 'get',
             path: 'v2/mobile_phone_numbers',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: MobilePhoneNumberListResponse::class,
         );

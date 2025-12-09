@@ -13,9 +13,9 @@ use Telnyx\NumberReservations\NumberReservationListParams\Filter\CreatedAt;
  * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers.phone_number], filter[customer_reference].
  *
  * @phpstan-type FilterShape = array{
- *   created_at?: CreatedAt|null,
- *   customer_reference?: string|null,
- *   phone_numbers_phone_number?: string|null,
+ *   createdAt?: CreatedAt|null,
+ *   customerReference?: string|null,
+ *   phoneNumbersPhoneNumber?: string|null,
  *   status?: string|null,
  * }
  */
@@ -27,20 +27,20 @@ final class Filter implements BaseModel
     /**
      * Filter number reservations by date range.
      */
-    #[Optional]
-    public ?CreatedAt $created_at;
+    #[Optional('created_at')]
+    public ?CreatedAt $createdAt;
 
     /**
      * Filter number reservations via the customer reference set.
      */
-    #[Optional]
-    public ?string $customer_reference;
+    #[Optional('customer_reference')]
+    public ?string $customerReference;
 
     /**
      * Filter number reservations having these phone numbers.
      */
     #[Optional('phone_numbers.phone_number')]
-    public ?string $phone_numbers_phone_number;
+    public ?string $phoneNumbersPhoneNumber;
 
     /**
      * Filter number reservations by status.
@@ -58,19 +58,19 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CreatedAt|array{gt?: string|null, lt?: string|null} $created_at
+     * @param CreatedAt|array{gt?: string|null, lt?: string|null} $createdAt
      */
     public static function with(
-        CreatedAt|array|null $created_at = null,
-        ?string $customer_reference = null,
-        ?string $phone_numbers_phone_number = null,
+        CreatedAt|array|null $createdAt = null,
+        ?string $customerReference = null,
+        ?string $phoneNumbersPhoneNumber = null,
         ?string $status = null,
     ): self {
         $obj = new self;
 
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
-        null !== $phone_numbers_phone_number && $obj['phone_numbers_phone_number'] = $phone_numbers_phone_number;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
+        null !== $phoneNumbersPhoneNumber && $obj['phoneNumbersPhoneNumber'] = $phoneNumbersPhoneNumber;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -84,7 +84,7 @@ final class Filter implements BaseModel
     public function withCreatedAt(CreatedAt|array $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -95,7 +95,7 @@ final class Filter implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }
@@ -107,7 +107,7 @@ final class Filter implements BaseModel
         string $phoneNumbersPhoneNumber
     ): self {
         $obj = clone $this;
-        $obj['phone_numbers_phone_number'] = $phoneNumbersPhoneNumber;
+        $obj['phoneNumbersPhoneNumber'] = $phoneNumbersPhoneNumber;
 
         return $obj;
     }

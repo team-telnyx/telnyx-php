@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   file_id?: string|null,
- *   invoice_id?: string|null,
+ *   fileID?: string|null,
+ *   invoiceID?: string|null,
  *   paid?: bool|null,
- *   period_end?: \DateTimeInterface|null,
- *   period_start?: \DateTimeInterface|null,
+ *   periodEnd?: \DateTimeInterface|null,
+ *   periodStart?: \DateTimeInterface|null,
  *   url?: string|null,
  * }
  */
@@ -23,20 +23,20 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?string $file_id;
+    #[Optional('file_id')]
+    public ?string $fileID;
 
-    #[Optional]
-    public ?string $invoice_id;
+    #[Optional('invoice_id')]
+    public ?string $invoiceID;
 
     #[Optional]
     public ?bool $paid;
 
-    #[Optional]
-    public ?\DateTimeInterface $period_end;
+    #[Optional('period_end')]
+    public ?\DateTimeInterface $periodEnd;
 
-    #[Optional]
-    public ?\DateTimeInterface $period_start;
+    #[Optional('period_start')]
+    public ?\DateTimeInterface $periodStart;
 
     #[Optional]
     public ?string $url;
@@ -52,20 +52,20 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $file_id = null,
-        ?string $invoice_id = null,
+        ?string $fileID = null,
+        ?string $invoiceID = null,
         ?bool $paid = null,
-        ?\DateTimeInterface $period_end = null,
-        ?\DateTimeInterface $period_start = null,
+        ?\DateTimeInterface $periodEnd = null,
+        ?\DateTimeInterface $periodStart = null,
         ?string $url = null,
     ): self {
         $obj = new self;
 
-        null !== $file_id && $obj['file_id'] = $file_id;
-        null !== $invoice_id && $obj['invoice_id'] = $invoice_id;
+        null !== $fileID && $obj['fileID'] = $fileID;
+        null !== $invoiceID && $obj['invoiceID'] = $invoiceID;
         null !== $paid && $obj['paid'] = $paid;
-        null !== $period_end && $obj['period_end'] = $period_end;
-        null !== $period_start && $obj['period_start'] = $period_start;
+        null !== $periodEnd && $obj['periodEnd'] = $periodEnd;
+        null !== $periodStart && $obj['periodStart'] = $periodStart;
         null !== $url && $obj['url'] = $url;
 
         return $obj;
@@ -74,7 +74,7 @@ final class Data implements BaseModel
     public function withFileID(string $fileID): self
     {
         $obj = clone $this;
-        $obj['file_id'] = $fileID;
+        $obj['fileID'] = $fileID;
 
         return $obj;
     }
@@ -82,7 +82,7 @@ final class Data implements BaseModel
     public function withInvoiceID(string $invoiceID): self
     {
         $obj = clone $this;
-        $obj['invoice_id'] = $invoiceID;
+        $obj['invoiceID'] = $invoiceID;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class Data implements BaseModel
     public function withPeriodEnd(\DateTimeInterface $periodEnd): self
     {
         $obj = clone $this;
-        $obj['period_end'] = $periodEnd;
+        $obj['periodEnd'] = $periodEnd;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class Data implements BaseModel
     public function withPeriodStart(\DateTimeInterface $periodStart): self
     {
         $obj = clone $this;
-        $obj['period_start'] = $periodStart;
+        $obj['periodStart'] = $periodStart;
 
         return $obj;
     }

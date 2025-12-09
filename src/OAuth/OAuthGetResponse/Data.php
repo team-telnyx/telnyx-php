@@ -11,13 +11,13 @@ use Telnyx\OAuth\OAuthGetResponse\Data\RequestedScope;
 
 /**
  * @phpstan-type DataShape = array{
- *   client_id?: string|null,
- *   logo_uri?: string|null,
+ *   clientID?: string|null,
+ *   logoUri?: string|null,
  *   name?: string|null,
- *   policy_uri?: string|null,
- *   redirect_uri?: string|null,
- *   requested_scopes?: list<RequestedScope>|null,
- *   tos_uri?: string|null,
+ *   policyUri?: string|null,
+ *   redirectUri?: string|null,
+ *   requestedScopes?: list<RequestedScope>|null,
+ *   tosUri?: string|null,
  *   verified?: bool|null,
  * }
  */
@@ -29,14 +29,14 @@ final class Data implements BaseModel
     /**
      * Client ID.
      */
-    #[Optional]
-    public ?string $client_id;
+    #[Optional('client_id')]
+    public ?string $clientID;
 
     /**
      * URL of the client logo.
      */
-    #[Optional(nullable: true)]
-    public ?string $logo_uri;
+    #[Optional('logo_uri', nullable: true)]
+    public ?string $logoUri;
 
     /**
      * Client name.
@@ -47,24 +47,24 @@ final class Data implements BaseModel
     /**
      * URL of the client's privacy policy.
      */
-    #[Optional(nullable: true)]
-    public ?string $policy_uri;
+    #[Optional('policy_uri', nullable: true)]
+    public ?string $policyUri;
 
     /**
      * The redirect URI for this authorization.
      */
-    #[Optional]
-    public ?string $redirect_uri;
+    #[Optional('redirect_uri')]
+    public ?string $redirectUri;
 
-    /** @var list<RequestedScope>|null $requested_scopes */
-    #[Optional(list: RequestedScope::class)]
-    public ?array $requested_scopes;
+    /** @var list<RequestedScope>|null $requestedScopes */
+    #[Optional('requested_scopes', list: RequestedScope::class)]
+    public ?array $requestedScopes;
 
     /**
      * URL of the client's terms of service.
      */
-    #[Optional(nullable: true)]
-    public ?string $tos_uri;
+    #[Optional('tos_uri', nullable: true)]
+    public ?string $tosUri;
 
     /**
      * Whether the client is verified.
@@ -84,27 +84,27 @@ final class Data implements BaseModel
      *
      * @param list<RequestedScope|array{
      *   id?: string|null, description?: string|null, name?: string|null
-     * }> $requested_scopes
+     * }> $requestedScopes
      */
     public static function with(
-        ?string $client_id = null,
-        ?string $logo_uri = null,
+        ?string $clientID = null,
+        ?string $logoUri = null,
         ?string $name = null,
-        ?string $policy_uri = null,
-        ?string $redirect_uri = null,
-        ?array $requested_scopes = null,
-        ?string $tos_uri = null,
+        ?string $policyUri = null,
+        ?string $redirectUri = null,
+        ?array $requestedScopes = null,
+        ?string $tosUri = null,
         ?bool $verified = null,
     ): self {
         $obj = new self;
 
-        null !== $client_id && $obj['client_id'] = $client_id;
-        null !== $logo_uri && $obj['logo_uri'] = $logo_uri;
+        null !== $clientID && $obj['clientID'] = $clientID;
+        null !== $logoUri && $obj['logoUri'] = $logoUri;
         null !== $name && $obj['name'] = $name;
-        null !== $policy_uri && $obj['policy_uri'] = $policy_uri;
-        null !== $redirect_uri && $obj['redirect_uri'] = $redirect_uri;
-        null !== $requested_scopes && $obj['requested_scopes'] = $requested_scopes;
-        null !== $tos_uri && $obj['tos_uri'] = $tos_uri;
+        null !== $policyUri && $obj['policyUri'] = $policyUri;
+        null !== $redirectUri && $obj['redirectUri'] = $redirectUri;
+        null !== $requestedScopes && $obj['requestedScopes'] = $requestedScopes;
+        null !== $tosUri && $obj['tosUri'] = $tosUri;
         null !== $verified && $obj['verified'] = $verified;
 
         return $obj;
@@ -116,7 +116,7 @@ final class Data implements BaseModel
     public function withClientID(string $clientID): self
     {
         $obj = clone $this;
-        $obj['client_id'] = $clientID;
+        $obj['clientID'] = $clientID;
 
         return $obj;
     }
@@ -127,7 +127,7 @@ final class Data implements BaseModel
     public function withLogoUri(?string $logoUri): self
     {
         $obj = clone $this;
-        $obj['logo_uri'] = $logoUri;
+        $obj['logoUri'] = $logoUri;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class Data implements BaseModel
     public function withPolicyUri(?string $policyUri): self
     {
         $obj = clone $this;
-        $obj['policy_uri'] = $policyUri;
+        $obj['policyUri'] = $policyUri;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class Data implements BaseModel
     public function withRedirectUri(string $redirectUri): self
     {
         $obj = clone $this;
-        $obj['redirect_uri'] = $redirectUri;
+        $obj['redirectUri'] = $redirectUri;
 
         return $obj;
     }
@@ -173,7 +173,7 @@ final class Data implements BaseModel
     public function withRequestedScopes(array $requestedScopes): self
     {
         $obj = clone $this;
-        $obj['requested_scopes'] = $requestedScopes;
+        $obj['requestedScopes'] = $requestedScopes;
 
         return $obj;
     }
@@ -184,7 +184,7 @@ final class Data implements BaseModel
     public function withTosUri(?string $tosUri): self
     {
         $obj = clone $this;
-        $obj['tos_uri'] = $tosUri;
+        $obj['tosUri'] = $tosUri;
 
         return $obj;
     }

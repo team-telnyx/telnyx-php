@@ -42,8 +42,8 @@ final class PartnerCampaignListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<TelnyxDownstreamCampaign|array{
-     *   tcrBrandId: string,
-     *   tcrCampaignId: string,
+     *   tcrBrandID: string,
+     *   tcrCampaignID: string,
      *   ageGated?: bool|null,
      *   assignedPhoneNumbersCount?: float|null,
      *   brandDisplayName?: string|null,
@@ -105,8 +105,8 @@ final class PartnerCampaignListResponse implements BaseModel
 
     /**
      * @param list<TelnyxDownstreamCampaign|array{
-     *   tcrBrandId: string,
-     *   tcrCampaignId: string,
+     *   tcrBrandID: string,
+     *   tcrCampaignID: string,
      *   ageGated?: bool|null,
      *   assignedPhoneNumbersCount?: float|null,
      *   brandDisplayName?: string|null,

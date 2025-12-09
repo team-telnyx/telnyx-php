@@ -37,7 +37,7 @@ final class PhoneNumberAssignmentByProfileTest extends TestCase
         }
 
         $result = $this->client->phoneNumberAssignmentByProfile->assign([
-            'messagingProfileId' => '4001767e-ce0f-4cae-9d5f-0d5e636e7809',
+            'messagingProfileID' => '4001767e-ce0f-4cae-9d5f-0d5e636e7809',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -55,9 +55,9 @@ final class PhoneNumberAssignmentByProfileTest extends TestCase
         }
 
         $result = $this->client->phoneNumberAssignmentByProfile->assign([
-            'messagingProfileId' => '4001767e-ce0f-4cae-9d5f-0d5e636e7809',
-            'campaignId' => '4b300178-131c-d902-d54e-72d90ba1620j',
-            'tcrCampaignId' => 'CWZTFH1',
+            'messagingProfileID' => '4001767e-ce0f-4cae-9d5f-0d5e636e7809',
+            'campaignID' => '4b300178-131c-d902-d54e-72d90ba1620j',
+            'tcrCampaignID' => 'CWZTFH1',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

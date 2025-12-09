@@ -38,23 +38,23 @@ final class RoomListResponse implements BaseModel
      *
      * @param list<Room|array{
      *   id?: string|null,
-     *   active_session_id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   enable_recording?: bool|null,
-     *   max_participants?: int|null,
-     *   record_type?: string|null,
+     *   activeSessionID?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   enableRecording?: bool|null,
+     *   maxParticipants?: int|null,
+     *   recordType?: string|null,
      *   sessions?: list<RoomSession>|null,
-     *   unique_name?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_event_url?: string|null,
-     *   webhook_timeout_secs?: int|null,
+     *   uniqueName?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookEventURL?: string|null,
+     *   webhookTimeoutSecs?: int|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -72,17 +72,17 @@ final class RoomListResponse implements BaseModel
     /**
      * @param list<Room|array{
      *   id?: string|null,
-     *   active_session_id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   enable_recording?: bool|null,
-     *   max_participants?: int|null,
-     *   record_type?: string|null,
+     *   activeSessionID?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   enableRecording?: bool|null,
+     *   maxParticipants?: int|null,
+     *   recordType?: string|null,
      *   sessions?: list<RoomSession>|null,
-     *   unique_name?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_event_url?: string|null,
-     *   webhook_timeout_secs?: int|null,
+     *   uniqueName?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookEventURL?: string|null,
+     *   webhookTimeoutSecs?: int|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -95,10 +95,10 @@ final class RoomListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

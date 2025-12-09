@@ -19,11 +19,11 @@ use Telnyx\NotificationSettings\NotificationSettingListParams\Filter\Status;
  * Consolidated filter parameter (deepObject style). Originally: filter[associated_record_type][eq], filter[channel_type_id][eq], filter[notification_profile_id][eq], filter[notification_channel][eq], filter[notification_event_condition_id][eq], filter[status][eq].
  *
  * @phpstan-type FilterShape = array{
- *   associated_record_type?: AssociatedRecordType|null,
- *   channel_type_id?: ChannelTypeID|null,
- *   notification_channel?: NotificationChannel|null,
- *   notification_event_condition_id?: NotificationEventConditionID|null,
- *   notification_profile_id?: NotificationProfileID|null,
+ *   associatedRecordType?: AssociatedRecordType|null,
+ *   channelTypeID?: ChannelTypeID|null,
+ *   notificationChannel?: NotificationChannel|null,
+ *   notificationEventConditionID?: NotificationEventConditionID|null,
+ *   notificationProfileID?: NotificationProfileID|null,
  *   status?: Status|null,
  * }
  */
@@ -32,20 +32,20 @@ final class Filter implements BaseModel
     /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?AssociatedRecordType $associated_record_type;
+    #[Optional('associated_record_type')]
+    public ?AssociatedRecordType $associatedRecordType;
 
-    #[Optional]
-    public ?ChannelTypeID $channel_type_id;
+    #[Optional('channel_type_id')]
+    public ?ChannelTypeID $channelTypeID;
 
-    #[Optional]
-    public ?NotificationChannel $notification_channel;
+    #[Optional('notification_channel')]
+    public ?NotificationChannel $notificationChannel;
 
-    #[Optional]
-    public ?NotificationEventConditionID $notification_event_condition_id;
+    #[Optional('notification_event_condition_id')]
+    public ?NotificationEventConditionID $notificationEventConditionID;
 
-    #[Optional]
-    public ?NotificationProfileID $notification_profile_id;
+    #[Optional('notification_profile_id')]
+    public ?NotificationProfileID $notificationProfileID;
 
     #[Optional]
     public ?Status $status;
@@ -60,36 +60,34 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AssociatedRecordType|array{
-     *   eq?: value-of<Eq>|null
-     * } $associated_record_type
+     * @param AssociatedRecordType|array{eq?: value-of<Eq>|null} $associatedRecordType
      * @param ChannelTypeID|array{
      *   eq?: value-of<ChannelTypeID\Eq>|null,
-     * } $channel_type_id
-     * @param NotificationChannel|array{eq?: string|null} $notification_channel
+     * } $channelTypeID
+     * @param NotificationChannel|array{eq?: string|null} $notificationChannel
      * @param NotificationEventConditionID|array{
      *   eq?: string|null
-     * } $notification_event_condition_id
-     * @param NotificationProfileID|array{eq?: string|null} $notification_profile_id
+     * } $notificationEventConditionID
+     * @param NotificationProfileID|array{eq?: string|null} $notificationProfileID
      * @param Status|array{
      *   eq?: value-of<Status\Eq>|null,
      * } $status
      */
     public static function with(
-        AssociatedRecordType|array|null $associated_record_type = null,
-        ChannelTypeID|array|null $channel_type_id = null,
-        NotificationChannel|array|null $notification_channel = null,
-        NotificationEventConditionID|array|null $notification_event_condition_id = null,
-        NotificationProfileID|array|null $notification_profile_id = null,
+        AssociatedRecordType|array|null $associatedRecordType = null,
+        ChannelTypeID|array|null $channelTypeID = null,
+        NotificationChannel|array|null $notificationChannel = null,
+        NotificationEventConditionID|array|null $notificationEventConditionID = null,
+        NotificationProfileID|array|null $notificationProfileID = null,
         Status|array|null $status = null,
     ): self {
         $obj = new self;
 
-        null !== $associated_record_type && $obj['associated_record_type'] = $associated_record_type;
-        null !== $channel_type_id && $obj['channel_type_id'] = $channel_type_id;
-        null !== $notification_channel && $obj['notification_channel'] = $notification_channel;
-        null !== $notification_event_condition_id && $obj['notification_event_condition_id'] = $notification_event_condition_id;
-        null !== $notification_profile_id && $obj['notification_profile_id'] = $notification_profile_id;
+        null !== $associatedRecordType && $obj['associatedRecordType'] = $associatedRecordType;
+        null !== $channelTypeID && $obj['channelTypeID'] = $channelTypeID;
+        null !== $notificationChannel && $obj['notificationChannel'] = $notificationChannel;
+        null !== $notificationEventConditionID && $obj['notificationEventConditionID'] = $notificationEventConditionID;
+        null !== $notificationProfileID && $obj['notificationProfileID'] = $notificationProfileID;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -102,7 +100,7 @@ final class Filter implements BaseModel
         AssociatedRecordType|array $associatedRecordType
     ): self {
         $obj = clone $this;
-        $obj['associated_record_type'] = $associatedRecordType;
+        $obj['associatedRecordType'] = $associatedRecordType;
 
         return $obj;
     }
@@ -115,7 +113,7 @@ final class Filter implements BaseModel
     public function withChannelTypeID(ChannelTypeID|array $channelTypeID): self
     {
         $obj = clone $this;
-        $obj['channel_type_id'] = $channelTypeID;
+        $obj['channelTypeID'] = $channelTypeID;
 
         return $obj;
     }
@@ -127,7 +125,7 @@ final class Filter implements BaseModel
         NotificationChannel|array $notificationChannel
     ): self {
         $obj = clone $this;
-        $obj['notification_channel'] = $notificationChannel;
+        $obj['notificationChannel'] = $notificationChannel;
 
         return $obj;
     }
@@ -141,7 +139,7 @@ final class Filter implements BaseModel
         NotificationEventConditionID|array $notificationEventConditionID
     ): self {
         $obj = clone $this;
-        $obj['notification_event_condition_id'] = $notificationEventConditionID;
+        $obj['notificationEventConditionID'] = $notificationEventConditionID;
 
         return $obj;
     }
@@ -153,7 +151,7 @@ final class Filter implements BaseModel
         NotificationProfileID|array $notificationProfileID
     ): self {
         $obj = clone $this;
-        $obj['notification_profile_id'] = $notificationProfileID;
+        $obj['notificationProfileID'] = $notificationProfileID;
 
         return $obj;
     }

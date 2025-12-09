@@ -10,9 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   invalid_detail?: string|null,
- *   record_type?: string|null,
- *   registration_code?: string|null,
+ *   invalidDetail?: string|null,
+ *   recordType?: string|null,
+ *   registrationCode?: string|null,
  *   valid?: bool|null,
  * }
  */
@@ -24,17 +24,17 @@ final class Data implements BaseModel
     /**
      * The validation message.
      */
-    #[Optional(nullable: true)]
-    public ?string $invalid_detail;
+    #[Optional('invalid_detail', nullable: true)]
+    public ?string $invalidDetail;
 
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * The 10-digit SIM card registration code.
      */
-    #[Optional]
-    public ?string $registration_code;
+    #[Optional('registration_code')]
+    public ?string $registrationCode;
 
     /**
      * The attribute that denotes whether the code is valid or not.
@@ -53,16 +53,16 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $invalid_detail = null,
-        ?string $record_type = null,
-        ?string $registration_code = null,
+        ?string $invalidDetail = null,
+        ?string $recordType = null,
+        ?string $registrationCode = null,
         ?bool $valid = null,
     ): self {
         $obj = new self;
 
-        null !== $invalid_detail && $obj['invalid_detail'] = $invalid_detail;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $registration_code && $obj['registration_code'] = $registration_code;
+        null !== $invalidDetail && $obj['invalidDetail'] = $invalidDetail;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $registrationCode && $obj['registrationCode'] = $registrationCode;
         null !== $valid && $obj['valid'] = $valid;
 
         return $obj;
@@ -74,7 +74,7 @@ final class Data implements BaseModel
     public function withInvalidDetail(?string $invalidDetail): self
     {
         $obj = clone $this;
-        $obj['invalid_detail'] = $invalidDetail;
+        $obj['invalidDetail'] = $invalidDetail;
 
         return $obj;
     }
@@ -82,7 +82,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class Data implements BaseModel
     public function withRegistrationCode(string $registrationCode): self
     {
         $obj = clone $this;
-        $obj['registration_code'] = $registrationCode;
+        $obj['registrationCode'] = $registrationCode;
 
         return $obj;
     }

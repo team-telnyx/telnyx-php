@@ -17,10 +17,10 @@ use Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType
  * @see Telnyx\Services\Reports\MdrUsageReportsService::fetchSync()
  *
  * @phpstan-type MdrUsageReportFetchSyncParamsShape = array{
- *   aggregation_type: AggregationType|value-of<AggregationType>,
- *   end_date?: \DateTimeInterface,
+ *   aggregationType: AggregationType|value-of<AggregationType>,
+ *   endDate?: \DateTimeInterface,
  *   profiles?: list<string>,
- *   start_date?: \DateTimeInterface,
+ *   startDate?: \DateTimeInterface,
  * }
  */
 final class MdrUsageReportFetchSyncParams implements BaseModel
@@ -29,26 +29,26 @@ final class MdrUsageReportFetchSyncParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var value-of<AggregationType> $aggregation_type */
+    /** @var value-of<AggregationType> $aggregationType */
     #[Required(enum: AggregationType::class)]
-    public string $aggregation_type;
+    public string $aggregationType;
 
     #[Optional]
-    public ?\DateTimeInterface $end_date;
+    public ?\DateTimeInterface $endDate;
 
     /** @var list<string>|null $profiles */
     #[Optional(list: 'string')]
     public ?array $profiles;
 
     #[Optional]
-    public ?\DateTimeInterface $start_date;
+    public ?\DateTimeInterface $startDate;
 
     /**
      * `new MdrUsageReportFetchSyncParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * MdrUsageReportFetchSyncParams::with(aggregation_type: ...)
+     * MdrUsageReportFetchSyncParams::with(aggregationType: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -67,22 +67,22 @@ final class MdrUsageReportFetchSyncParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AggregationType|value-of<AggregationType> $aggregation_type
+     * @param AggregationType|value-of<AggregationType> $aggregationType
      * @param list<string> $profiles
      */
     public static function with(
-        AggregationType|string $aggregation_type,
-        ?\DateTimeInterface $end_date = null,
+        AggregationType|string $aggregationType,
+        ?\DateTimeInterface $endDate = null,
         ?array $profiles = null,
-        ?\DateTimeInterface $start_date = null,
+        ?\DateTimeInterface $startDate = null,
     ): self {
         $obj = new self;
 
-        $obj['aggregation_type'] = $aggregation_type;
+        $obj['aggregationType'] = $aggregationType;
 
-        null !== $end_date && $obj['end_date'] = $end_date;
+        null !== $endDate && $obj['endDate'] = $endDate;
         null !== $profiles && $obj['profiles'] = $profiles;
-        null !== $start_date && $obj['start_date'] = $start_date;
+        null !== $startDate && $obj['startDate'] = $startDate;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class MdrUsageReportFetchSyncParams implements BaseModel
         AggregationType|string $aggregationType
     ): self {
         $obj = clone $this;
-        $obj['aggregation_type'] = $aggregationType;
+        $obj['aggregationType'] = $aggregationType;
 
         return $obj;
     }
@@ -102,7 +102,7 @@ final class MdrUsageReportFetchSyncParams implements BaseModel
     public function withEndDate(\DateTimeInterface $endDate): self
     {
         $obj = clone $this;
-        $obj['end_date'] = $endDate;
+        $obj['endDate'] = $endDate;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class MdrUsageReportFetchSyncParams implements BaseModel
     public function withStartDate(\DateTimeInterface $startDate): self
     {
         $obj = clone $this;
-        $obj['start_date'] = $startDate;
+        $obj['startDate'] = $startDate;
 
         return $obj;
     }

@@ -34,11 +34,11 @@ final class WirelessBlocklistGetResponse implements BaseModel
      *
      * @param WirelessBlocklist|array{
      *   id?: string|null,
-     *   created_at?: string|null,
+     *   createdAt?: string|null,
      *   name?: string|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      *   values?: list<string>|null,
      * } $data
      */
@@ -54,11 +54,11 @@ final class WirelessBlocklistGetResponse implements BaseModel
     /**
      * @param WirelessBlocklist|array{
      *   id?: string|null,
-     *   created_at?: string|null,
+     *   createdAt?: string|null,
      *   name?: string|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      *   values?: list<string>|null,
      * } $data
      */

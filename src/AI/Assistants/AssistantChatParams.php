@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\AssistantsService::chat()
  *
  * @phpstan-type AssistantChatParamsShape = array{
- *   content: string, conversation_id: string, name?: string
+ *   content: string, conversationID: string, name?: string
  * }
  */
 final class AssistantChatParams implements BaseModel
@@ -34,8 +34,8 @@ final class AssistantChatParams implements BaseModel
     /**
      * A unique identifier for the conversation thread, used to maintain context.
      */
-    #[Required]
-    public string $conversation_id;
+    #[Required('conversation_id')]
+    public string $conversationID;
 
     /**
      * The optional display name of the user sending the message.
@@ -48,7 +48,7 @@ final class AssistantChatParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * AssistantChatParams::with(content: ..., conversation_id: ...)
+     * AssistantChatParams::with(content: ..., conversationID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -69,13 +69,13 @@ final class AssistantChatParams implements BaseModel
      */
     public static function with(
         string $content,
-        string $conversation_id,
+        string $conversationID,
         ?string $name = null
     ): self {
         $obj = new self;
 
         $obj['content'] = $content;
-        $obj['conversation_id'] = $conversation_id;
+        $obj['conversationID'] = $conversationID;
 
         null !== $name && $obj['name'] = $name;
 
@@ -99,7 +99,7 @@ final class AssistantChatParams implements BaseModel
     public function withConversationID(string $conversationID): self
     {
         $obj = clone $this;
-        $obj['conversation_id'] = $conversationID;
+        $obj['conversationID'] = $conversationID;
 
         return $obj;
     }

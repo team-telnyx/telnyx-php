@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type FqdnShape = array{
  *   id?: string|null,
- *   connection_id?: string|null,
- *   created_at?: string|null,
- *   dns_record_type?: string|null,
+ *   connectionID?: string|null,
+ *   createdAt?: string|null,
+ *   dnsRecordType?: string|null,
  *   fqdn?: string|null,
  *   port?: int|null,
- *   record_type?: string|null,
- *   updated_at?: string|null,
+ *   recordType?: string|null,
+ *   updatedAt?: string|null,
  * }
  */
 final class Fqdn implements BaseModel
@@ -34,20 +34,20 @@ final class Fqdn implements BaseModel
     /**
      * ID of the FQDN connection to which this FQDN is attached.
      */
-    #[Optional]
-    public ?string $connection_id;
+    #[Optional('connection_id')]
+    public ?string $connectionID;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Optional]
-    public ?string $created_at;
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
     /**
      * The DNS record type for the FQDN. For cases where a port is not set, the DNS record type must be 'srv'. For cases where a port is set, the DNS record type must be 'a'. If the DNS record type is 'a' and a port is not specified, 5060 will be used.
      */
-    #[Optional]
-    public ?string $dns_record_type;
+    #[Optional('dns_record_type')]
+    public ?string $dnsRecordType;
 
     /**
      * FQDN represented by this resource.
@@ -64,14 +64,14 @@ final class Fqdn implements BaseModel
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Optional]
-    public ?string $updated_at;
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     public function __construct()
     {
@@ -85,24 +85,24 @@ final class Fqdn implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $connection_id = null,
-        ?string $created_at = null,
-        ?string $dns_record_type = null,
+        ?string $connectionID = null,
+        ?string $createdAt = null,
+        ?string $dnsRecordType = null,
         ?string $fqdn = null,
         ?int $port = null,
-        ?string $record_type = null,
-        ?string $updated_at = null,
+        ?string $recordType = null,
+        ?string $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $connection_id && $obj['connection_id'] = $connection_id;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $dns_record_type && $obj['dns_record_type'] = $dns_record_type;
+        null !== $connectionID && $obj['connectionID'] = $connectionID;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $dnsRecordType && $obj['dnsRecordType'] = $dnsRecordType;
         null !== $fqdn && $obj['fqdn'] = $fqdn;
         null !== $port && $obj['port'] = $port;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class Fqdn implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj['connection_id'] = $connectionID;
+        $obj['connectionID'] = $connectionID;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class Fqdn implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -146,7 +146,7 @@ final class Fqdn implements BaseModel
     public function withDNSRecordType(string $dnsRecordType): self
     {
         $obj = clone $this;
-        $obj['dns_record_type'] = $dnsRecordType;
+        $obj['dnsRecordType'] = $dnsRecordType;
 
         return $obj;
     }
@@ -179,7 +179,7 @@ final class Fqdn implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -190,7 +190,7 @@ final class Fqdn implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

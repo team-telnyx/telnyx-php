@@ -41,7 +41,7 @@ final class MessagingProfilesTest extends TestCase
         }
 
         $result = $this->client->messagingProfiles->create([
-            'name' => 'My name', 'whitelisted_destinations' => ['US'],
+            'name' => 'My name', 'whitelistedDestinations' => ['US'],
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -57,30 +57,30 @@ final class MessagingProfilesTest extends TestCase
 
         $result = $this->client->messagingProfiles->create([
             'name' => 'My name',
-            'whitelisted_destinations' => ['US'],
-            'alpha_sender' => 'sqF',
-            'daily_spend_limit' => '269125115713',
-            'daily_spend_limit_enabled' => true,
+            'whitelistedDestinations' => ['US'],
+            'alphaSender' => 'sqF',
+            'dailySpendLimit' => '269125115713',
+            'dailySpendLimitEnabled' => true,
             'enabled' => true,
-            'mms_fall_back_to_sms' => true,
-            'mms_transcoding' => true,
-            'mobile_only' => true,
-            'number_pool_settings' => [
-                'long_code_weight' => 1,
-                'skip_unhealthy' => true,
-                'toll_free_weight' => 10,
+            'mmsFallBackToSMS' => true,
+            'mmsTranscoding' => true,
+            'mobileOnly' => true,
+            'numberPoolSettings' => [
+                'longCodeWeight' => 1,
+                'skipUnhealthy' => true,
+                'tollFreeWeight' => 10,
                 'geomatch' => false,
-                'sticky_sender' => false,
+                'stickySender' => false,
             ],
-            'url_shortener_settings' => [
+            'urlShortenerSettings' => [
                 'domain' => 'example.ex',
                 'prefix' => '',
-                'replace_blacklist_only' => true,
-                'send_webhooks' => false,
+                'replaceBlacklistOnly' => true,
+                'sendWebhooks' => false,
             ],
-            'webhook_api_version' => '2',
-            'webhook_failover_url' => 'https://backup.example.com/hooks',
-            'webhook_url' => 'https://www.example.com/hooks',
+            'webhookAPIVersion' => '2',
+            'webhookFailoverURL' => 'https://backup.example.com/hooks',
+            'webhookURL' => 'https://www.example.com/hooks',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

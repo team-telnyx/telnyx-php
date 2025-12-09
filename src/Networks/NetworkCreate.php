@@ -12,9 +12,9 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type NetworkCreateShape = array{
  *   id?: string|null,
- *   created_at?: string|null,
- *   record_type?: string|null,
- *   updated_at?: string|null,
+ *   createdAt?: string|null,
+ *   recordType?: string|null,
+ *   updatedAt?: string|null,
  *   name: string,
  * }
  */
@@ -32,20 +32,20 @@ final class NetworkCreate implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Optional]
-    public ?string $created_at;
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Optional]
-    public ?string $updated_at;
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     /**
      * A user specified name for the network.
@@ -80,18 +80,18 @@ final class NetworkCreate implements BaseModel
     public static function with(
         string $name,
         ?string $id = null,
-        ?string $created_at = null,
-        ?string $record_type = null,
-        ?string $updated_at = null,
+        ?string $createdAt = null,
+        ?string $recordType = null,
+        ?string $updatedAt = null,
     ): self {
         $obj = new self;
 
         $obj['name'] = $name;
 
         null !== $id && $obj['id'] = $id;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class NetworkCreate implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class NetworkCreate implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class NetworkCreate implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

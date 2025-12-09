@@ -69,7 +69,7 @@ final class RcsTest extends TestCase
         }
 
         $result = $this->client->messaging->rcs->listBulkCapabilities([
-            'agent_id' => 'TestAgent', 'phone_numbers' => ['+13125551234'],
+            'agentID' => 'TestAgent', 'phoneNumbers' => ['+13125551234'],
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -84,7 +84,7 @@ final class RcsTest extends TestCase
         }
 
         $result = $this->client->messaging->rcs->listBulkCapabilities([
-            'agent_id' => 'TestAgent', 'phone_numbers' => ['+13125551234'],
+            'agentID' => 'TestAgent', 'phoneNumbers' => ['+13125551234'],
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -100,7 +100,7 @@ final class RcsTest extends TestCase
 
         $result = $this->client->messaging->rcs->retrieveCapabilities(
             'phone_number',
-            ['agent_id' => 'agent_id']
+            ['agentID' => 'agent_id']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -116,7 +116,7 @@ final class RcsTest extends TestCase
 
         $result = $this->client->messaging->rcs->retrieveCapabilities(
             'phone_number',
-            ['agent_id' => 'agent_id']
+            ['agentID' => 'agent_id']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

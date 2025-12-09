@@ -12,16 +12,16 @@ use Telnyx\Webhooks\FaxMediaProcessedWebhookEvent\Payload1\Status;
 
 /**
  * @phpstan-type Payload1Shape = array{
- *   client_state?: string|null,
- *   connection_id?: string|null,
+ *   clientState?: string|null,
+ *   connectionID?: string|null,
  *   direction?: value-of<Direction>|null,
- *   fax_id?: string|null,
+ *   faxID?: string|null,
  *   from?: string|null,
- *   media_name?: string|null,
- *   original_media_url?: string|null,
+ *   mediaName?: string|null,
+ *   originalMediaURL?: string|null,
  *   status?: value-of<Status>|null,
  *   to?: string|null,
- *   user_id?: string|null,
+ *   userID?: string|null,
  * }
  */
 final class Payload1 implements BaseModel
@@ -32,14 +32,14 @@ final class Payload1 implements BaseModel
     /**
      * State received from a command.
      */
-    #[Optional]
-    public ?string $client_state;
+    #[Optional('client_state')]
+    public ?string $clientState;
 
     /**
      * The ID of the connection used to send the fax.
      */
-    #[Optional]
-    public ?string $connection_id;
+    #[Optional('connection_id')]
+    public ?string $connectionID;
 
     /**
      * The direction of the fax.
@@ -52,8 +52,8 @@ final class Payload1 implements BaseModel
     /**
      * Identifies the fax.
      */
-    #[Optional]
-    public ?string $fax_id;
+    #[Optional('fax_id')]
+    public ?string $faxID;
 
     /**
      * The phone number, in E.164 format, the fax will be sent from.
@@ -64,14 +64,14 @@ final class Payload1 implements BaseModel
     /**
      * The media_name used for the fax's media. Must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. media_name and media_url/contents can't be submitted together.
      */
-    #[Optional]
-    public ?string $media_name;
+    #[Optional('media_name')]
+    public ?string $mediaName;
 
     /**
      * The original URL to the PDF used for the fax's media. If media_name was supplied, this is omitted.
      */
-    #[Optional]
-    public ?string $original_media_url;
+    #[Optional('original_media_url')]
+    public ?string $originalMediaURL;
 
     /**
      * The status of the fax.
@@ -90,8 +90,8 @@ final class Payload1 implements BaseModel
     /**
      * Identifier of the user to whom the fax belongs.
      */
-    #[Optional]
-    public ?string $user_id;
+    #[Optional('user_id')]
+    public ?string $userID;
 
     public function __construct()
     {
@@ -107,29 +107,29 @@ final class Payload1 implements BaseModel
      * @param Status|value-of<Status> $status
      */
     public static function with(
-        ?string $client_state = null,
-        ?string $connection_id = null,
+        ?string $clientState = null,
+        ?string $connectionID = null,
         Direction|string|null $direction = null,
-        ?string $fax_id = null,
+        ?string $faxID = null,
         ?string $from = null,
-        ?string $media_name = null,
-        ?string $original_media_url = null,
+        ?string $mediaName = null,
+        ?string $originalMediaURL = null,
         Status|string|null $status = null,
         ?string $to = null,
-        ?string $user_id = null,
+        ?string $userID = null,
     ): self {
         $obj = new self;
 
-        null !== $client_state && $obj['client_state'] = $client_state;
-        null !== $connection_id && $obj['connection_id'] = $connection_id;
+        null !== $clientState && $obj['clientState'] = $clientState;
+        null !== $connectionID && $obj['connectionID'] = $connectionID;
         null !== $direction && $obj['direction'] = $direction;
-        null !== $fax_id && $obj['fax_id'] = $fax_id;
+        null !== $faxID && $obj['faxID'] = $faxID;
         null !== $from && $obj['from'] = $from;
-        null !== $media_name && $obj['media_name'] = $media_name;
-        null !== $original_media_url && $obj['original_media_url'] = $original_media_url;
+        null !== $mediaName && $obj['mediaName'] = $mediaName;
+        null !== $originalMediaURL && $obj['originalMediaURL'] = $originalMediaURL;
         null !== $status && $obj['status'] = $status;
         null !== $to && $obj['to'] = $to;
-        null !== $user_id && $obj['user_id'] = $user_id;
+        null !== $userID && $obj['userID'] = $userID;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class Payload1 implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj['client_state'] = $clientState;
+        $obj['clientState'] = $clientState;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class Payload1 implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj['connection_id'] = $connectionID;
+        $obj['connectionID'] = $connectionID;
 
         return $obj;
     }
@@ -175,7 +175,7 @@ final class Payload1 implements BaseModel
     public function withFaxID(string $faxID): self
     {
         $obj = clone $this;
-        $obj['fax_id'] = $faxID;
+        $obj['faxID'] = $faxID;
 
         return $obj;
     }
@@ -197,7 +197,7 @@ final class Payload1 implements BaseModel
     public function withMediaName(string $mediaName): self
     {
         $obj = clone $this;
-        $obj['media_name'] = $mediaName;
+        $obj['mediaName'] = $mediaName;
 
         return $obj;
     }
@@ -208,7 +208,7 @@ final class Payload1 implements BaseModel
     public function withOriginalMediaURL(string $originalMediaURL): self
     {
         $obj = clone $this;
-        $obj['original_media_url'] = $originalMediaURL;
+        $obj['originalMediaURL'] = $originalMediaURL;
 
         return $obj;
     }
@@ -243,7 +243,7 @@ final class Payload1 implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj['user_id'] = $userID;
+        $obj['userID'] = $userID;
 
         return $obj;
     }

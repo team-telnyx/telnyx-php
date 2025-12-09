@@ -35,9 +35,9 @@ final class SetiGetBlackBoxTestResultsResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   black_box_tests?: list<BlackBoxTest>|null,
+     *   blackBoxTests?: list<BlackBoxTest>|null,
      *   product?: string|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      * }> $data
      */
     public static function with(?array $data = null): self
@@ -51,9 +51,9 @@ final class SetiGetBlackBoxTestResultsResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   black_box_tests?: list<BlackBoxTest>|null,
+     *   blackBoxTests?: list<BlackBoxTest>|null,
      *   product?: string|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      * }> $data
      */
     public function withData(array $data): self

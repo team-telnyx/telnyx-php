@@ -42,22 +42,22 @@ final class ConnectionListResponse implements BaseModel
      * @param list<Data|array{
      *   id?: string|null,
      *   active?: bool|null,
-     *   anchorsite_override?: value-of<AnchorsiteOverride>|null,
-     *   connection_name?: string|null,
-     *   created_at?: string|null,
-     *   outbound_voice_profile_id?: string|null,
-     *   record_type?: string|null,
+     *   anchorsiteOverride?: value-of<AnchorsiteOverride>|null,
+     *   connectionName?: string|null,
+     *   createdAt?: string|null,
+     *   outboundVoiceProfileID?: string|null,
+     *   recordType?: string|null,
      *   tags?: list<string>|null,
-     *   updated_at?: string|null,
-     *   webhook_api_version?: value-of<WebhookAPIVersion>|null,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_event_url?: string|null,
+     *   updatedAt?: string|null,
+     *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookEventURL?: string|null,
      * }> $data
      * @param ConnectionsPaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -76,16 +76,16 @@ final class ConnectionListResponse implements BaseModel
      * @param list<Data|array{
      *   id?: string|null,
      *   active?: bool|null,
-     *   anchorsite_override?: value-of<AnchorsiteOverride>|null,
-     *   connection_name?: string|null,
-     *   created_at?: string|null,
-     *   outbound_voice_profile_id?: string|null,
-     *   record_type?: string|null,
+     *   anchorsiteOverride?: value-of<AnchorsiteOverride>|null,
+     *   connectionName?: string|null,
+     *   createdAt?: string|null,
+     *   outboundVoiceProfileID?: string|null,
+     *   recordType?: string|null,
      *   tags?: list<string>|null,
-     *   updated_at?: string|null,
-     *   webhook_api_version?: value-of<WebhookAPIVersion>|null,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_event_url?: string|null,
+     *   updatedAt?: string|null,
+     *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookEventURL?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -98,10 +98,10 @@ final class ConnectionListResponse implements BaseModel
 
     /**
      * @param ConnectionsPaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(ConnectionsPaginationMeta|array $meta): self

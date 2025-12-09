@@ -49,7 +49,7 @@ final class PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse implement
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Record|array{
-     *   phoneNumber: string, status: string, taskId: string
+     *   phoneNumber: string, status: string, taskID: string
      * }> $records
      */
     public static function with(array $records): self
@@ -63,7 +63,7 @@ final class PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse implement
 
     /**
      * @param list<Record|array{
-     *   phoneNumber: string, status: string, taskId: string
+     *   phoneNumber: string, status: string, taskID: string
      * }> $records
      */
     public function withRecords(array $records): self

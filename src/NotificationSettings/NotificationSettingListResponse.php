@@ -40,21 +40,21 @@ final class NotificationSettingListResponse implements BaseModel
      *
      * @param list<NotificationSetting|array{
      *   id?: string|null,
-     *   associated_record_type?: string|null,
-     *   associated_record_type_value?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   notification_channel_id?: string|null,
-     *   notification_event_condition_id?: string|null,
-     *   notification_profile_id?: string|null,
+     *   associatedRecordType?: string|null,
+     *   associatedRecordTypeValue?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   notificationChannelID?: string|null,
+     *   notificationEventConditionID?: string|null,
+     *   notificationProfileID?: string|null,
      *   parameters?: list<Parameter>|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -72,15 +72,15 @@ final class NotificationSettingListResponse implements BaseModel
     /**
      * @param list<NotificationSetting|array{
      *   id?: string|null,
-     *   associated_record_type?: string|null,
-     *   associated_record_type_value?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   notification_channel_id?: string|null,
-     *   notification_event_condition_id?: string|null,
-     *   notification_profile_id?: string|null,
+     *   associatedRecordType?: string|null,
+     *   associatedRecordTypeValue?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   notificationChannelID?: string|null,
+     *   notificationEventConditionID?: string|null,
+     *   notificationProfileID?: string|null,
      *   parameters?: list<Parameter>|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -93,10 +93,10 @@ final class NotificationSettingListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

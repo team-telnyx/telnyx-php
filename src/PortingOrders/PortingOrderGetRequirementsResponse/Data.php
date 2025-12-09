@@ -12,11 +12,11 @@ use Telnyx\PortingOrders\PortingOrderGetRequirementsResponse\Data\RequirementTyp
 
 /**
  * @phpstan-type DataShape = array{
- *   field_type?: value-of<FieldType>|null,
- *   field_value?: string|null,
- *   record_type?: string|null,
- *   requirement_status?: string|null,
- *   requirement_type?: RequirementType|null,
+ *   fieldType?: value-of<FieldType>|null,
+ *   fieldValue?: string|null,
+ *   recordType?: string|null,
+ *   requirementStatus?: string|null,
+ *   requirementType?: RequirementType|null,
  * }
  */
 final class Data implements BaseModel
@@ -27,34 +27,34 @@ final class Data implements BaseModel
     /**
      * Type of value expected on field_value field.
      *
-     * @var value-of<FieldType>|null $field_type
+     * @var value-of<FieldType>|null $fieldType
      */
-    #[Optional(enum: FieldType::class)]
-    public ?string $field_type;
+    #[Optional('field_type', enum: FieldType::class)]
+    public ?string $fieldType;
 
     /**
      * Identifies the document that satisfies this requirement.
      */
-    #[Optional]
-    public ?string $field_value;
+    #[Optional('field_value')]
+    public ?string $fieldValue;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * Status of the requirement.
      */
-    #[Optional]
-    public ?string $requirement_status;
+    #[Optional('requirement_status')]
+    public ?string $requirementStatus;
 
     /**
      * Identifies the requirement type that meets this requirement.
      */
-    #[Optional]
-    public ?RequirementType $requirement_type;
+    #[Optional('requirement_type')]
+    public ?RequirementType $requirementType;
 
     public function __construct()
     {
@@ -66,30 +66,30 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FieldType|value-of<FieldType> $field_type
+     * @param FieldType|value-of<FieldType> $fieldType
      * @param RequirementType|array{
      *   id?: string|null,
-     *   acceptance_criteria?: array<string,mixed>|null,
+     *   acceptanceCriteria?: array<string,mixed>|null,
      *   description?: string|null,
      *   example?: string|null,
      *   name?: string|null,
      *   type?: string|null,
-     * } $requirement_type
+     * } $requirementType
      */
     public static function with(
-        FieldType|string|null $field_type = null,
-        ?string $field_value = null,
-        ?string $record_type = null,
-        ?string $requirement_status = null,
-        RequirementType|array|null $requirement_type = null,
+        FieldType|string|null $fieldType = null,
+        ?string $fieldValue = null,
+        ?string $recordType = null,
+        ?string $requirementStatus = null,
+        RequirementType|array|null $requirementType = null,
     ): self {
         $obj = new self;
 
-        null !== $field_type && $obj['field_type'] = $field_type;
-        null !== $field_value && $obj['field_value'] = $field_value;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $requirement_status && $obj['requirement_status'] = $requirement_status;
-        null !== $requirement_type && $obj['requirement_type'] = $requirement_type;
+        null !== $fieldType && $obj['fieldType'] = $fieldType;
+        null !== $fieldValue && $obj['fieldValue'] = $fieldValue;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $requirementStatus && $obj['requirementStatus'] = $requirementStatus;
+        null !== $requirementType && $obj['requirementType'] = $requirementType;
 
         return $obj;
     }
@@ -102,7 +102,7 @@ final class Data implements BaseModel
     public function withFieldType(FieldType|string $fieldType): self
     {
         $obj = clone $this;
-        $obj['field_type'] = $fieldType;
+        $obj['fieldType'] = $fieldType;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class Data implements BaseModel
     public function withFieldValue(string $fieldValue): self
     {
         $obj = clone $this;
-        $obj['field_value'] = $fieldValue;
+        $obj['fieldValue'] = $fieldValue;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class Data implements BaseModel
     public function withRequirementStatus(string $requirementStatus): self
     {
         $obj = clone $this;
-        $obj['requirement_status'] = $requirementStatus;
+        $obj['requirementStatus'] = $requirementStatus;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class Data implements BaseModel
      *
      * @param RequirementType|array{
      *   id?: string|null,
-     *   acceptance_criteria?: array<string,mixed>|null,
+     *   acceptanceCriteria?: array<string,mixed>|null,
      *   description?: string|null,
      *   example?: string|null,
      *   name?: string|null,
@@ -156,7 +156,7 @@ final class Data implements BaseModel
         RequirementType|array $requirementType
     ): self {
         $obj = clone $this;
-        $obj['requirement_type'] = $requirementType;
+        $obj['requirementType'] = $requirementType;
 
         return $obj;
     }

@@ -12,10 +12,10 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type IntegrationSecretShape = array{
  *   id: string,
- *   created_at: \DateTimeInterface,
+ *   createdAt: \DateTimeInterface,
  *   identifier: string,
- *   record_type: string,
- *   updated_at?: \DateTimeInterface|null,
+ *   recordType: string,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class IntegrationSecret implements BaseModel
@@ -26,17 +26,17 @@ final class IntegrationSecret implements BaseModel
     #[Required]
     public string $id;
 
-    #[Required]
-    public \DateTimeInterface $created_at;
+    #[Required('created_at')]
+    public \DateTimeInterface $createdAt;
 
     #[Required]
     public string $identifier;
 
-    #[Required]
-    public string $record_type;
+    #[Required('record_type')]
+    public string $recordType;
 
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     /**
      * `new IntegrationSecret()` is missing required properties by the API.
@@ -44,7 +44,7 @@ final class IntegrationSecret implements BaseModel
      * To enforce required parameters use
      * ```
      * IntegrationSecret::with(
-     *   id: ..., created_at: ..., identifier: ..., record_type: ...
+     *   id: ..., createdAt: ..., identifier: ..., recordType: ...
      * )
      * ```
      *
@@ -70,19 +70,19 @@ final class IntegrationSecret implements BaseModel
      */
     public static function with(
         string $id,
-        \DateTimeInterface $created_at,
+        \DateTimeInterface $createdAt,
         string $identifier,
-        string $record_type,
-        ?\DateTimeInterface $updated_at = null,
+        string $recordType,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
         $obj = new self;
 
         $obj['id'] = $id;
-        $obj['created_at'] = $created_at;
+        $obj['createdAt'] = $createdAt;
         $obj['identifier'] = $identifier;
-        $obj['record_type'] = $record_type;
+        $obj['recordType'] = $recordType;
 
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class IntegrationSecret implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class IntegrationSecret implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -122,7 +122,7 @@ final class IntegrationSecret implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

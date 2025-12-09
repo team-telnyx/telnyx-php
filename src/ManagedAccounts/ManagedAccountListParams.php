@@ -21,9 +21,9 @@ use Telnyx\ManagedAccounts\ManagedAccountListParams\Sort;
  *
  * @phpstan-type ManagedAccountListParamsShape = array{
  *   filter?: Filter|array{
- *     email?: Email|null, organization_name?: OrganizationName|null
+ *     email?: Email|null, organizationName?: OrganizationName|null
  *   },
- *   include_cancelled_accounts?: bool,
+ *   includeCancelledAccounts?: bool,
  *   page?: Page|array{number?: int|null, size?: int|null},
  *   sort?: Sort|value-of<Sort>,
  * }
@@ -44,7 +44,7 @@ final class ManagedAccountListParams implements BaseModel
      * Specifies if cancelled accounts should be included in the results.
      */
     #[Optional]
-    public ?bool $include_cancelled_accounts;
+    public ?bool $includeCancelledAccounts;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
@@ -82,21 +82,21 @@ final class ManagedAccountListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   email?: Email|null, organization_name?: OrganizationName|null
+     *   email?: Email|null, organizationName?: OrganizationName|null
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
         Filter|array|null $filter = null,
-        ?bool $include_cancelled_accounts = null,
+        ?bool $includeCancelledAccounts = null,
         Page|array|null $page = null,
         Sort|string|null $sort = null,
     ): self {
         $obj = new self;
 
         null !== $filter && $obj['filter'] = $filter;
-        null !== $include_cancelled_accounts && $obj['include_cancelled_accounts'] = $include_cancelled_accounts;
+        null !== $includeCancelledAccounts && $obj['includeCancelledAccounts'] = $includeCancelledAccounts;
         null !== $page && $obj['page'] = $page;
         null !== $sort && $obj['sort'] = $sort;
 
@@ -107,7 +107,7 @@ final class ManagedAccountListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[email][contains], filter[email][eq], filter[organization_name][contains], filter[organization_name][eq].
      *
      * @param Filter|array{
-     *   email?: Email|null, organization_name?: OrganizationName|null
+     *   email?: Email|null, organizationName?: OrganizationName|null
      * } $filter
      */
     public function withFilter(Filter|array $filter): self
@@ -125,7 +125,7 @@ final class ManagedAccountListParams implements BaseModel
         bool $includeCancelledAccounts
     ): self {
         $obj = clone $this;
-        $obj['include_cancelled_accounts'] = $includeCancelledAccounts;
+        $obj['includeCancelledAccounts'] = $includeCancelledAccounts;
 
         return $obj;
     }

@@ -18,9 +18,9 @@ use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\Type;
  * @phpstan-type MobilePushCredentialCreateParamsShape = array{
  *   alias: string,
  *   certificate: string,
- *   private_key: string,
+ *   privateKey: string,
  *   type: Type|value-of<Type>,
- *   project_account_json_file: array<string,mixed>,
+ *   projectAccountJsonFile: array<string,mixed>,
  * }
  */
 final class MobilePushCredentialCreateParams implements BaseModel
@@ -44,8 +44,8 @@ final class MobilePushCredentialCreateParams implements BaseModel
     /**
      * Corresponding private key to the certificate as received from APNs.
      */
-    #[Required]
-    public string $private_key;
+    #[Required('private_key')]
+    public string $privateKey;
 
     /**
      * Type of mobile push credential. Should be <code>android</code> here.
@@ -58,10 +58,10 @@ final class MobilePushCredentialCreateParams implements BaseModel
     /**
      * Private key file in JSON format.
      *
-     * @var array<string,mixed> $project_account_json_file
+     * @var array<string,mixed> $projectAccountJsonFile
      */
-    #[Required(map: 'mixed')]
-    public array $project_account_json_file;
+    #[Required('project_account_json_file', map: 'mixed')]
+    public array $projectAccountJsonFile;
 
     /**
      * `new MobilePushCredentialCreateParams()` is missing required properties by the API.
@@ -71,9 +71,9 @@ final class MobilePushCredentialCreateParams implements BaseModel
      * MobilePushCredentialCreateParams::with(
      *   alias: ...,
      *   certificate: ...,
-     *   private_key: ...,
+     *   privateKey: ...,
      *   type: ...,
-     *   project_account_json_file: ...,
+     *   projectAccountJsonFile: ...,
      * )
      * ```
      *
@@ -99,22 +99,22 @@ final class MobilePushCredentialCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Type|value-of<Type> $type
-     * @param array<string,mixed> $project_account_json_file
+     * @param array<string,mixed> $projectAccountJsonFile
      */
     public static function with(
         string $alias,
         string $certificate,
-        string $private_key,
+        string $privateKey,
         Type|string $type,
-        array $project_account_json_file,
+        array $projectAccountJsonFile,
     ): self {
         $obj = new self;
 
         $obj['alias'] = $alias;
         $obj['certificate'] = $certificate;
-        $obj['private_key'] = $private_key;
+        $obj['privateKey'] = $privateKey;
         $obj['type'] = $type;
-        $obj['project_account_json_file'] = $project_account_json_file;
+        $obj['projectAccountJsonFile'] = $projectAccountJsonFile;
 
         return $obj;
     }
@@ -147,7 +147,7 @@ final class MobilePushCredentialCreateParams implements BaseModel
     public function withPrivateKey(string $privateKey): self
     {
         $obj = clone $this;
-        $obj['private_key'] = $privateKey;
+        $obj['privateKey'] = $privateKey;
 
         return $obj;
     }
@@ -174,7 +174,7 @@ final class MobilePushCredentialCreateParams implements BaseModel
         array $projectAccountJsonFile
     ): self {
         $obj = clone $this;
-        $obj['project_account_json_file'] = $projectAccountJsonFile;
+        $obj['projectAccountJsonFile'] = $projectAccountJsonFile;
 
         return $obj;
     }

@@ -9,9 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type FlashcallShape = array{
- *   default_verification_timeout_secs?: int|null
- * }
+ * @phpstan-type FlashcallShape = array{defaultVerificationTimeoutSecs?: int|null}
  */
 final class Flashcall implements BaseModel
 {
@@ -21,8 +19,8 @@ final class Flashcall implements BaseModel
     /**
      * For every request that is initiated via this Verify profile, this sets the number of seconds before a verification request code expires. Once the verification request expires, the user cannot use the code to verify their identity.
      */
-    #[Optional]
-    public ?int $default_verification_timeout_secs;
+    #[Optional('default_verification_timeout_secs')]
+    public ?int $defaultVerificationTimeoutSecs;
 
     public function __construct()
     {
@@ -35,11 +33,11 @@ final class Flashcall implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?int $default_verification_timeout_secs = null
+        ?int $defaultVerificationTimeoutSecs = null
     ): self {
         $obj = new self;
 
-        null !== $default_verification_timeout_secs && $obj['default_verification_timeout_secs'] = $default_verification_timeout_secs;
+        null !== $defaultVerificationTimeoutSecs && $obj['defaultVerificationTimeoutSecs'] = $defaultVerificationTimeoutSecs;
 
         return $obj;
     }
@@ -51,7 +49,7 @@ final class Flashcall implements BaseModel
         int $defaultVerificationTimeoutSecs
     ): self {
         $obj = clone $this;
-        $obj['default_verification_timeout_secs'] = $defaultVerificationTimeoutSecs;
+        $obj['defaultVerificationTimeoutSecs'] = $defaultVerificationTimeoutSecs;
 
         return $obj;
     }

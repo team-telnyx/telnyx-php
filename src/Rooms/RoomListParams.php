@@ -20,11 +20,11 @@ use Telnyx\Rooms\RoomListParams\Page;
  *
  * @phpstan-type RoomListParamsShape = array{
  *   filter?: Filter|array{
- *     date_created_at?: DateCreatedAt|null,
- *     date_updated_at?: DateUpdatedAt|null,
- *     unique_name?: string|null,
+ *     dateCreatedAt?: DateCreatedAt|null,
+ *     dateUpdatedAt?: DateUpdatedAt|null,
+ *     uniqueName?: string|null,
  *   },
- *   include_sessions?: bool,
+ *   includeSessions?: bool,
  *   page?: Page|array{number?: int|null, size?: int|null},
  * }
  */
@@ -44,7 +44,7 @@ final class RoomListParams implements BaseModel
      * To decide if room sessions should be included in the response.
      */
     #[Optional]
-    public ?bool $include_sessions;
+    public ?bool $includeSessions;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
@@ -63,21 +63,21 @@ final class RoomListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   date_created_at?: DateCreatedAt|null,
-     *   date_updated_at?: DateUpdatedAt|null,
-     *   unique_name?: string|null,
+     *   dateCreatedAt?: DateCreatedAt|null,
+     *   dateUpdatedAt?: DateUpdatedAt|null,
+     *   uniqueName?: string|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      */
     public static function with(
         Filter|array|null $filter = null,
-        ?bool $include_sessions = null,
+        ?bool $includeSessions = null,
         Page|array|null $page = null,
     ): self {
         $obj = new self;
 
         null !== $filter && $obj['filter'] = $filter;
-        null !== $include_sessions && $obj['include_sessions'] = $include_sessions;
+        null !== $includeSessions && $obj['includeSessions'] = $includeSessions;
         null !== $page && $obj['page'] = $page;
 
         return $obj;
@@ -87,9 +87,9 @@ final class RoomListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[unique_name].
      *
      * @param Filter|array{
-     *   date_created_at?: DateCreatedAt|null,
-     *   date_updated_at?: DateUpdatedAt|null,
-     *   unique_name?: string|null,
+     *   dateCreatedAt?: DateCreatedAt|null,
+     *   dateUpdatedAt?: DateUpdatedAt|null,
+     *   uniqueName?: string|null,
      * } $filter
      */
     public function withFilter(Filter|array $filter): self
@@ -106,7 +106,7 @@ final class RoomListParams implements BaseModel
     public function withIncludeSessions(bool $includeSessions): self
     {
         $obj = clone $this;
-        $obj['include_sessions'] = $includeSessions;
+        $obj['includeSessions'] = $includeSessions;
 
         return $obj;
     }

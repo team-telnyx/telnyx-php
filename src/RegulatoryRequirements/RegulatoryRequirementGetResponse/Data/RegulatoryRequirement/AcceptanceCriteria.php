@@ -10,14 +10,14 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type AcceptanceCriteriaShape = array{
- *   acceptable_characters?: string|null,
- *   acceptable_values?: list<string>|null,
- *   case_sensitive?: string|null,
- *   locality_limit?: string|null,
- *   max_length?: string|null,
- *   min_length?: string|null,
+ *   acceptableCharacters?: string|null,
+ *   acceptableValues?: list<string>|null,
+ *   caseSensitive?: string|null,
+ *   localityLimit?: string|null,
+ *   maxLength?: string|null,
+ *   minLength?: string|null,
  *   regex?: string|null,
- *   time_limit?: string|null,
+ *   timeLimit?: string|null,
  * }
  */
 final class AcceptanceCriteria implements BaseModel
@@ -25,30 +25,30 @@ final class AcceptanceCriteria implements BaseModel
     /** @use SdkModel<AcceptanceCriteriaShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?string $acceptable_characters;
+    #[Optional('acceptable_characters')]
+    public ?string $acceptableCharacters;
 
-    /** @var list<string>|null $acceptable_values */
-    #[Optional(list: 'string')]
-    public ?array $acceptable_values;
+    /** @var list<string>|null $acceptableValues */
+    #[Optional('acceptable_values', list: 'string')]
+    public ?array $acceptableValues;
 
-    #[Optional]
-    public ?string $case_sensitive;
+    #[Optional('case_sensitive')]
+    public ?string $caseSensitive;
 
-    #[Optional]
-    public ?string $locality_limit;
+    #[Optional('locality_limit')]
+    public ?string $localityLimit;
 
-    #[Optional]
-    public ?string $max_length;
+    #[Optional('max_length')]
+    public ?string $maxLength;
 
-    #[Optional]
-    public ?string $min_length;
+    #[Optional('min_length')]
+    public ?string $minLength;
 
     #[Optional]
     public ?string $regex;
 
-    #[Optional]
-    public ?string $time_limit;
+    #[Optional('time_limit')]
+    public ?string $timeLimit;
 
     public function __construct()
     {
@@ -60,28 +60,28 @@ final class AcceptanceCriteria implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $acceptable_values
+     * @param list<string> $acceptableValues
      */
     public static function with(
-        ?string $acceptable_characters = null,
-        ?array $acceptable_values = null,
-        ?string $case_sensitive = null,
-        ?string $locality_limit = null,
-        ?string $max_length = null,
-        ?string $min_length = null,
+        ?string $acceptableCharacters = null,
+        ?array $acceptableValues = null,
+        ?string $caseSensitive = null,
+        ?string $localityLimit = null,
+        ?string $maxLength = null,
+        ?string $minLength = null,
         ?string $regex = null,
-        ?string $time_limit = null,
+        ?string $timeLimit = null,
     ): self {
         $obj = new self;
 
-        null !== $acceptable_characters && $obj['acceptable_characters'] = $acceptable_characters;
-        null !== $acceptable_values && $obj['acceptable_values'] = $acceptable_values;
-        null !== $case_sensitive && $obj['case_sensitive'] = $case_sensitive;
-        null !== $locality_limit && $obj['locality_limit'] = $locality_limit;
-        null !== $max_length && $obj['max_length'] = $max_length;
-        null !== $min_length && $obj['min_length'] = $min_length;
+        null !== $acceptableCharacters && $obj['acceptableCharacters'] = $acceptableCharacters;
+        null !== $acceptableValues && $obj['acceptableValues'] = $acceptableValues;
+        null !== $caseSensitive && $obj['caseSensitive'] = $caseSensitive;
+        null !== $localityLimit && $obj['localityLimit'] = $localityLimit;
+        null !== $maxLength && $obj['maxLength'] = $maxLength;
+        null !== $minLength && $obj['minLength'] = $minLength;
         null !== $regex && $obj['regex'] = $regex;
-        null !== $time_limit && $obj['time_limit'] = $time_limit;
+        null !== $timeLimit && $obj['timeLimit'] = $timeLimit;
 
         return $obj;
     }
@@ -89,7 +89,7 @@ final class AcceptanceCriteria implements BaseModel
     public function withAcceptableCharacters(string $acceptableCharacters): self
     {
         $obj = clone $this;
-        $obj['acceptable_characters'] = $acceptableCharacters;
+        $obj['acceptableCharacters'] = $acceptableCharacters;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class AcceptanceCriteria implements BaseModel
     public function withAcceptableValues(array $acceptableValues): self
     {
         $obj = clone $this;
-        $obj['acceptable_values'] = $acceptableValues;
+        $obj['acceptableValues'] = $acceptableValues;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class AcceptanceCriteria implements BaseModel
     public function withCaseSensitive(string $caseSensitive): self
     {
         $obj = clone $this;
-        $obj['case_sensitive'] = $caseSensitive;
+        $obj['caseSensitive'] = $caseSensitive;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class AcceptanceCriteria implements BaseModel
     public function withLocalityLimit(string $localityLimit): self
     {
         $obj = clone $this;
-        $obj['locality_limit'] = $localityLimit;
+        $obj['localityLimit'] = $localityLimit;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class AcceptanceCriteria implements BaseModel
     public function withMaxLength(string $maxLength): self
     {
         $obj = clone $this;
-        $obj['max_length'] = $maxLength;
+        $obj['maxLength'] = $maxLength;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class AcceptanceCriteria implements BaseModel
     public function withMinLength(string $minLength): self
     {
         $obj = clone $this;
-        $obj['min_length'] = $minLength;
+        $obj['minLength'] = $minLength;
 
         return $obj;
     }
@@ -148,7 +148,7 @@ final class AcceptanceCriteria implements BaseModel
     public function withTimeLimit(string $timeLimit): self
     {
         $obj = clone $this;
-        $obj['time_limit'] = $timeLimit;
+        $obj['timeLimit'] = $timeLimit;
 
         return $obj;
     }

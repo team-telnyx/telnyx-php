@@ -24,21 +24,19 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type ActionStartAIAssistantParamsShape = array{
  *   assistant?: Assistant|array{
- *     id?: string|null,
- *     instructions?: string|null,
- *     openai_api_key_ref?: string|null,
+ *     id?: string|null, instructions?: string|null, openaiAPIKeyRef?: string|null
  *   },
- *   client_state?: string,
- *   command_id?: string,
+ *   clientState?: string,
+ *   commandID?: string,
  *   greeting?: string,
- *   interruption_settings?: InterruptionSettings|array{enable?: bool|null},
+ *   interruptionSettings?: InterruptionSettings|array{enable?: bool|null},
  *   transcription?: TranscriptionConfig|array{model?: string|null},
  *   voice?: string,
- *   voice_settings?: ElevenLabsVoiceSettings|array{
- *     type: value-of<Type>, api_key_ref?: string|null
+ *   voiceSettings?: ElevenLabsVoiceSettings|array{
+ *     type: value-of<Type>, apiKeyRef?: string|null
  *   }|TelnyxVoiceSettings|array{
  *     type: value-of<\Telnyx\Calls\Actions\TelnyxVoiceSettings\Type>,
- *     voice_speed?: float|null,
+ *     voiceSpeed?: float|null,
  *   }|AwsVoiceSettings|array{
  *     type: value-of<\Telnyx\Calls\Actions\AwsVoiceSettings\Type>
  *   },
@@ -59,14 +57,14 @@ final class ActionStartAIAssistantParams implements BaseModel
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Optional]
-    public ?string $client_state;
+    #[Optional('client_state')]
+    public ?string $clientState;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Optional]
-    public ?string $command_id;
+    #[Optional('command_id')]
+    public ?string $commandID;
 
     /**
      * Text that will be played when the assistant starts, if none then nothing will be played when the assistant starts. The greeting can be text for any voice or SSML for `AWS.Polly.<voice_id>` voices. There is a 3,000 character limit.
@@ -77,8 +75,8 @@ final class ActionStartAIAssistantParams implements BaseModel
     /**
      * Settings for handling user interruptions during assistant speech.
      */
-    #[Optional]
-    public ?InterruptionSettings $interruption_settings;
+    #[Optional('interruption_settings')]
+    public ?InterruptionSettings $interruptionSettings;
 
     /**
      * The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
@@ -101,8 +99,8 @@ final class ActionStartAIAssistantParams implements BaseModel
     /**
      * The settings associated with the voice selected.
      */
-    #[Optional(union: VoiceSettings::class)]
-    public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|null $voice_settings;
+    #[Optional('voice_settings', union: VoiceSettings::class)]
+    public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|null $voiceSettings;
 
     public function __construct()
     {
@@ -115,39 +113,39 @@ final class ActionStartAIAssistantParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Assistant|array{
-     *   id?: string|null, instructions?: string|null, openai_api_key_ref?: string|null
+     *   id?: string|null, instructions?: string|null, openaiAPIKeyRef?: string|null
      * } $assistant
-     * @param InterruptionSettings|array{enable?: bool|null} $interruption_settings
+     * @param InterruptionSettings|array{enable?: bool|null} $interruptionSettings
      * @param TranscriptionConfig|array{model?: string|null} $transcription
      * @param ElevenLabsVoiceSettings|array{
-     *   type: value-of<Type>, api_key_ref?: string|null
+     *   type: value-of<Type>, apiKeyRef?: string|null
      * }|TelnyxVoiceSettings|array{
      *   type: value-of<TelnyxVoiceSettings\Type>,
-     *   voice_speed?: float|null,
+     *   voiceSpeed?: float|null,
      * }|AwsVoiceSettings|array{
      *   type: value-of<AwsVoiceSettings\Type>
-     * } $voice_settings
+     * } $voiceSettings
      */
     public static function with(
         Assistant|array|null $assistant = null,
-        ?string $client_state = null,
-        ?string $command_id = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
         ?string $greeting = null,
-        InterruptionSettings|array|null $interruption_settings = null,
+        InterruptionSettings|array|null $interruptionSettings = null,
         TranscriptionConfig|array|null $transcription = null,
         ?string $voice = null,
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|null $voice_settings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|null $voiceSettings = null,
     ): self {
         $obj = new self;
 
         null !== $assistant && $obj['assistant'] = $assistant;
-        null !== $client_state && $obj['client_state'] = $client_state;
-        null !== $command_id && $obj['command_id'] = $command_id;
+        null !== $clientState && $obj['clientState'] = $clientState;
+        null !== $commandID && $obj['commandID'] = $commandID;
         null !== $greeting && $obj['greeting'] = $greeting;
-        null !== $interruption_settings && $obj['interruption_settings'] = $interruption_settings;
+        null !== $interruptionSettings && $obj['interruptionSettings'] = $interruptionSettings;
         null !== $transcription && $obj['transcription'] = $transcription;
         null !== $voice && $obj['voice'] = $voice;
-        null !== $voice_settings && $obj['voice_settings'] = $voice_settings;
+        null !== $voiceSettings && $obj['voiceSettings'] = $voiceSettings;
 
         return $obj;
     }
@@ -156,7 +154,7 @@ final class ActionStartAIAssistantParams implements BaseModel
      * AI Assistant configuration.
      *
      * @param Assistant|array{
-     *   id?: string|null, instructions?: string|null, openai_api_key_ref?: string|null
+     *   id?: string|null, instructions?: string|null, openaiAPIKeyRef?: string|null
      * } $assistant
      */
     public function withAssistant(Assistant|array $assistant): self
@@ -173,7 +171,7 @@ final class ActionStartAIAssistantParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj['client_state'] = $clientState;
+        $obj['clientState'] = $clientState;
 
         return $obj;
     }
@@ -184,7 +182,7 @@ final class ActionStartAIAssistantParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj['command_id'] = $commandID;
+        $obj['commandID'] = $commandID;
 
         return $obj;
     }
@@ -209,7 +207,7 @@ final class ActionStartAIAssistantParams implements BaseModel
         InterruptionSettings|array $interruptionSettings
     ): self {
         $obj = clone $this;
-        $obj['interruption_settings'] = $interruptionSettings;
+        $obj['interruptionSettings'] = $interruptionSettings;
 
         return $obj;
     }
@@ -249,10 +247,10 @@ final class ActionStartAIAssistantParams implements BaseModel
      * The settings associated with the voice selected.
      *
      * @param ElevenLabsVoiceSettings|array{
-     *   type: value-of<Type>, api_key_ref?: string|null
+     *   type: value-of<Type>, apiKeyRef?: string|null
      * }|TelnyxVoiceSettings|array{
      *   type: value-of<TelnyxVoiceSettings\Type>,
-     *   voice_speed?: float|null,
+     *   voiceSpeed?: float|null,
      * }|AwsVoiceSettings|array{
      *   type: value-of<AwsVoiceSettings\Type>
      * } $voiceSettings
@@ -261,7 +259,7 @@ final class ActionStartAIAssistantParams implements BaseModel
         ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings $voiceSettings,
     ): self {
         $obj = clone $this;
-        $obj['voice_settings'] = $voiceSettings;
+        $obj['voiceSettings'] = $voiceSettings;
 
         return $obj;
     }

@@ -35,16 +35,16 @@ final class ConferenceGetResponse implements BaseModel
      *
      * @param Conference|array{
      *   id: string,
-     *   created_at: string,
-     *   expires_at: string,
+     *   createdAt: string,
+     *   expiresAt: string,
      *   name: string,
-     *   record_type: value-of<RecordType>,
-     *   connection_id?: string|null,
-     *   end_reason?: value-of<EndReason>|null,
-     *   ended_by?: EndedBy|null,
+     *   recordType: value-of<RecordType>,
+     *   connectionID?: string|null,
+     *   endReason?: value-of<EndReason>|null,
+     *   endedBy?: EndedBy|null,
      *   region?: string|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public static function with(Conference|array|null $data = null): self
@@ -59,16 +59,16 @@ final class ConferenceGetResponse implements BaseModel
     /**
      * @param Conference|array{
      *   id: string,
-     *   created_at: string,
-     *   expires_at: string,
+     *   createdAt: string,
+     *   expiresAt: string,
      *   name: string,
-     *   record_type: value-of<RecordType>,
-     *   connection_id?: string|null,
-     *   end_reason?: value-of<EndReason>|null,
-     *   ended_by?: EndedBy|null,
+     *   recordType: value-of<RecordType>,
+     *   connectionID?: string|null,
+     *   endReason?: value-of<EndReason>|null,
+     *   endedBy?: EndedBy|null,
      *   region?: string|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public function withData(Conference|array $data): self

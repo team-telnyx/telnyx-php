@@ -48,7 +48,7 @@ final class InsightTemplateGroupDetail implements BaseModel
      *
      * @param InsightTemplateGroup|array{
      *   id: string,
-     *   created_at: \DateTimeInterface,
+     *   createdAt: \DateTimeInterface,
      *   name: string,
      *   description?: string|null,
      *   insights?: list<InsightTemplate>|null,
@@ -67,7 +67,7 @@ final class InsightTemplateGroupDetail implements BaseModel
     /**
      * @param InsightTemplateGroup|array{
      *   id: string,
-     *   created_at: \DateTimeInterface,
+     *   createdAt: \DateTimeInterface,
      *   name: string,
      *   description?: string|null,
      *   insights?: list<InsightTemplate>|null,

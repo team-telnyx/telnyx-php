@@ -115,7 +115,7 @@ final class RequestsTest extends TestCase
             'optInKeywords' => 'START, YES, SUBSCRIBE',
             'privacyPolicyURL' => 'https://example.com/privacy',
             'termsAndConditionURL' => 'https://example.com/terms',
-            'webhookUrl' => 'http://example-webhook.com',
+            'webhookURL' => 'http://example-webhook.com',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -228,7 +228,7 @@ final class RequestsTest extends TestCase
                 'optInKeywords' => 'START, YES, SUBSCRIBE',
                 'privacyPolicyURL' => 'https://example.com/privacy',
                 'termsAndConditionURL' => 'https://example.com/terms',
-                'webhookUrl' => 'http://example-webhook.com',
+                'webhookURL' => 'http://example-webhook.com',
             ],
         );
 
@@ -244,7 +244,7 @@ final class RequestsTest extends TestCase
         }
 
         $result = $this->client->messagingTollfree->verification->requests->list([
-            'page' => 1, 'page_size' => 1,
+            'page' => 1, 'pageSize' => 1,
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -260,10 +260,10 @@ final class RequestsTest extends TestCase
 
         $result = $this->client->messagingTollfree->verification->requests->list([
             'page' => 1,
-            'page_size' => 1,
-            'date_end' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
-            'date_start' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
-            'phone_number' => 'phone_number',
+            'pageSize' => 1,
+            'dateEnd' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+            'dateStart' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+            'phoneNumber' => 'phone_number',
             'status' => TfVerificationStatus::VERIFIED,
         ]);
 

@@ -13,12 +13,12 @@ use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportGetResponse\Data\Status;
 /**
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   created_at?: \DateTimeInterface|null,
+ *   createdAt?: \DateTimeInterface|null,
  *   filters?: Filters|null,
- *   order_type?: string|null,
+ *   orderType?: string|null,
  *   status?: value-of<Status>|null,
- *   updated_at?: \DateTimeInterface|null,
- *   user_id?: string|null,
+ *   updatedAt?: \DateTimeInterface|null,
+ *   userID?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -35,8 +35,8 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
     /**
      * The filters that were applied to generate this report.
@@ -47,8 +47,8 @@ final class Data implements BaseModel
     /**
      * The type of order report.
      */
-    #[Optional]
-    public ?string $order_type;
+    #[Optional('order_type')]
+    public ?string $orderType;
 
     /**
      * Indicates the completion level of the sub number orders report. The report must have a status of 'success' before it can be downloaded.
@@ -61,14 +61,14 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     /**
      * The ID of the user who created the report.
      */
-    #[Optional]
-    public ?string $user_id;
+    #[Optional('user_id')]
+    public ?string $userID;
 
     public function __construct()
     {
@@ -81,33 +81,33 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filters|array{
-     *   country_code?: string|null,
-     *   created_at_gt?: \DateTimeInterface|null,
-     *   created_at_lt?: \DateTimeInterface|null,
-     *   customer_reference?: string|null,
-     *   order_request_id?: string|null,
+     *   countryCode?: string|null,
+     *   createdAtGt?: \DateTimeInterface|null,
+     *   createdAtLt?: \DateTimeInterface|null,
+     *   customerReference?: string|null,
+     *   orderRequestID?: string|null,
      *   status?: string|null,
      * } $filters
      * @param Status|value-of<Status> $status
      */
     public static function with(
         ?string $id = null,
-        ?\DateTimeInterface $created_at = null,
+        ?\DateTimeInterface $createdAt = null,
         Filters|array|null $filters = null,
-        ?string $order_type = null,
+        ?string $orderType = null,
         Status|string|null $status = null,
-        ?\DateTimeInterface $updated_at = null,
-        ?string $user_id = null,
+        ?\DateTimeInterface $updatedAt = null,
+        ?string $userID = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
         null !== $filters && $obj['filters'] = $filters;
-        null !== $order_type && $obj['order_type'] = $order_type;
+        null !== $orderType && $obj['orderType'] = $orderType;
         null !== $status && $obj['status'] = $status;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
-        null !== $user_id && $obj['user_id'] = $user_id;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $userID && $obj['userID'] = $userID;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -138,11 +138,11 @@ final class Data implements BaseModel
      * The filters that were applied to generate this report.
      *
      * @param Filters|array{
-     *   country_code?: string|null,
-     *   created_at_gt?: \DateTimeInterface|null,
-     *   created_at_lt?: \DateTimeInterface|null,
-     *   customer_reference?: string|null,
-     *   order_request_id?: string|null,
+     *   countryCode?: string|null,
+     *   createdAtGt?: \DateTimeInterface|null,
+     *   createdAtLt?: \DateTimeInterface|null,
+     *   customerReference?: string|null,
+     *   orderRequestID?: string|null,
      *   status?: string|null,
      * } $filters
      */
@@ -160,7 +160,7 @@ final class Data implements BaseModel
     public function withOrderType(string $orderType): self
     {
         $obj = clone $this;
-        $obj['order_type'] = $orderType;
+        $obj['orderType'] = $orderType;
 
         return $obj;
     }
@@ -184,7 +184,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -195,7 +195,7 @@ final class Data implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj['user_id'] = $userID;
+        $obj['userID'] = $userID;
 
         return $obj;
     }

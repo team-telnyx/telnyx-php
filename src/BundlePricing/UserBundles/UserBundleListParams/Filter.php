@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Supports filtering by country_iso and resource. Examples: filter[country_iso]=US or filter[resource]=+15617819942.
  *
  * @phpstan-type FilterShape = array{
- *   country_iso?: list<string>|null, resource?: list<string>|null
+ *   countryISO?: list<string>|null, resource?: list<string>|null
  * }
  */
 final class Filter implements BaseModel
@@ -23,10 +23,10 @@ final class Filter implements BaseModel
     /**
      * Filter by country code.
      *
-     * @var list<string>|null $country_iso
+     * @var list<string>|null $countryISO
      */
-    #[Optional(list: 'string')]
-    public ?array $country_iso;
+    #[Optional('country_iso', list: 'string')]
+    public ?array $countryISO;
 
     /**
      * Filter by resource.
@@ -46,16 +46,16 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $country_iso
+     * @param list<string> $countryISO
      * @param list<string> $resource
      */
     public static function with(
-        ?array $country_iso = null,
+        ?array $countryISO = null,
         ?array $resource = null
     ): self {
         $obj = new self;
 
-        null !== $country_iso && $obj['country_iso'] = $country_iso;
+        null !== $countryISO && $obj['countryISO'] = $countryISO;
         null !== $resource && $obj['resource'] = $resource;
 
         return $obj;
@@ -69,7 +69,7 @@ final class Filter implements BaseModel
     public function withCountryISO(array $countryISO): self
     {
         $obj = clone $this;
-        $obj['country_iso'] = $countryISO;
+        $obj['countryISO'] = $countryISO;
 
         return $obj;
     }

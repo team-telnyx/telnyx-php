@@ -52,13 +52,13 @@ final class IntegrationSecretListResponse implements BaseModel
      *
      * @param list<IntegrationSecret|array{
      *   id: string,
-     *   created_at: \DateTimeInterface,
+     *   createdAt: \DateTimeInterface,
      *   identifier: string,
-     *   record_type: string,
-     *   updated_at?: \DateTimeInterface|null,
+     *   recordType: string,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public static function with(array $data, Meta|array $meta): self
@@ -74,10 +74,10 @@ final class IntegrationSecretListResponse implements BaseModel
     /**
      * @param list<IntegrationSecret|array{
      *   id: string,
-     *   created_at: \DateTimeInterface,
+     *   createdAt: \DateTimeInterface,
      *   identifier: string,
-     *   record_type: string,
-     *   updated_at?: \DateTimeInterface|null,
+     *   recordType: string,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -90,7 +90,7 @@ final class IntegrationSecretListResponse implements BaseModel
 
     /**
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public function withMeta(Meta|array $meta): self

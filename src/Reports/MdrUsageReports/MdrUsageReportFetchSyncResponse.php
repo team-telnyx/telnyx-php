@@ -36,17 +36,17 @@ final class MdrUsageReportFetchSyncResponse implements BaseModel
      *
      * @param MdrUsageReport|array{
      *   id?: string|null,
-     *   aggregation_type?: value-of<AggregationType>|null,
+     *   aggregationType?: value-of<AggregationType>|null,
      *   connections?: list<int>|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   end_date?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   endDate?: \DateTimeInterface|null,
      *   profiles?: string|null,
-     *   record_type?: string|null,
-     *   report_url?: string|null,
+     *   recordType?: string|null,
+     *   reportURL?: string|null,
      *   result?: list<Result>|null,
-     *   start_date?: \DateTimeInterface|null,
+     *   startDate?: \DateTimeInterface|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(MdrUsageReport|array|null $data = null): self
@@ -61,17 +61,17 @@ final class MdrUsageReportFetchSyncResponse implements BaseModel
     /**
      * @param MdrUsageReport|array{
      *   id?: string|null,
-     *   aggregation_type?: value-of<AggregationType>|null,
+     *   aggregationType?: value-of<AggregationType>|null,
      *   connections?: list<int>|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   end_date?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   endDate?: \DateTimeInterface|null,
      *   profiles?: string|null,
-     *   record_type?: string|null,
-     *   report_url?: string|null,
+     *   recordType?: string|null,
+     *   reportURL?: string|null,
      *   result?: list<Result>|null,
-     *   start_date?: \DateTimeInterface|null,
+     *   startDate?: \DateTimeInterface|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(MdrUsageReport|array $data): self

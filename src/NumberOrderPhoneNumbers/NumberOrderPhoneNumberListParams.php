@@ -16,7 +16,7 @@ use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListParams\Filter;
  * @see Telnyx\Services\NumberOrderPhoneNumbersService::list()
  *
  * @phpstan-type NumberOrderPhoneNumberListParamsShape = array{
- *   filter?: Filter|array{country_code?: string|null}
+ *   filter?: Filter|array{countryCode?: string|null}
  * }
  */
 final class NumberOrderPhoneNumberListParams implements BaseModel
@@ -41,7 +41,7 @@ final class NumberOrderPhoneNumberListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{country_code?: string|null} $filter
+     * @param Filter|array{countryCode?: string|null} $filter
      */
     public static function with(Filter|array|null $filter = null): self
     {
@@ -55,7 +55,7 @@ final class NumberOrderPhoneNumberListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[country_code].
      *
-     * @param Filter|array{country_code?: string|null} $filter
+     * @param Filter|array{countryCode?: string|null} $filter
      */
     public function withFilter(Filter|array $filter): self
     {

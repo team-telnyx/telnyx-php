@@ -12,12 +12,12 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type McpServerNewResponseShape = array{
  *   id: string,
- *   created_at: \DateTimeInterface,
+ *   createdAt: \DateTimeInterface,
  *   name: string,
  *   type: string,
  *   url: string,
- *   allowed_tools?: list<string>|null,
- *   api_key_ref?: string|null,
+ *   allowedTools?: list<string>|null,
+ *   apiKeyRef?: string|null,
  * }
  */
 final class McpServerNewResponse implements BaseModel
@@ -28,8 +28,8 @@ final class McpServerNewResponse implements BaseModel
     #[Required]
     public string $id;
 
-    #[Required]
-    public \DateTimeInterface $created_at;
+    #[Required('created_at')]
+    public \DateTimeInterface $createdAt;
 
     #[Required]
     public string $name;
@@ -40,12 +40,12 @@ final class McpServerNewResponse implements BaseModel
     #[Required]
     public string $url;
 
-    /** @var list<string>|null $allowed_tools */
-    #[Optional(list: 'string', nullable: true)]
-    public ?array $allowed_tools;
+    /** @var list<string>|null $allowedTools */
+    #[Optional('allowed_tools', list: 'string', nullable: true)]
+    public ?array $allowedTools;
 
-    #[Optional(nullable: true)]
-    public ?string $api_key_ref;
+    #[Optional('api_key_ref', nullable: true)]
+    public ?string $apiKeyRef;
 
     /**
      * `new McpServerNewResponse()` is missing required properties by the API.
@@ -53,7 +53,7 @@ final class McpServerNewResponse implements BaseModel
      * To enforce required parameters use
      * ```
      * McpServerNewResponse::with(
-     *   id: ..., created_at: ..., name: ..., type: ..., url: ...
+     *   id: ..., createdAt: ..., name: ..., type: ..., url: ...
      * )
      * ```
      *
@@ -78,27 +78,27 @@ final class McpServerNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string>|null $allowed_tools
+     * @param list<string>|null $allowedTools
      */
     public static function with(
         string $id,
-        \DateTimeInterface $created_at,
+        \DateTimeInterface $createdAt,
         string $name,
         string $type,
         string $url,
-        ?array $allowed_tools = null,
-        ?string $api_key_ref = null,
+        ?array $allowedTools = null,
+        ?string $apiKeyRef = null,
     ): self {
         $obj = new self;
 
         $obj['id'] = $id;
-        $obj['created_at'] = $created_at;
+        $obj['createdAt'] = $createdAt;
         $obj['name'] = $name;
         $obj['type'] = $type;
         $obj['url'] = $url;
 
-        null !== $allowed_tools && $obj['allowed_tools'] = $allowed_tools;
-        null !== $api_key_ref && $obj['api_key_ref'] = $api_key_ref;
+        null !== $allowedTools && $obj['allowedTools'] = $allowedTools;
+        null !== $apiKeyRef && $obj['apiKeyRef'] = $apiKeyRef;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class McpServerNewResponse implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class McpServerNewResponse implements BaseModel
     public function withAllowedTools(?array $allowedTools): self
     {
         $obj = clone $this;
-        $obj['allowed_tools'] = $allowedTools;
+        $obj['allowedTools'] = $allowedTools;
 
         return $obj;
     }
@@ -157,7 +157,7 @@ final class McpServerNewResponse implements BaseModel
     public function withAPIKeyRef(?string $apiKeyRef): self
     {
         $obj = clone $this;
-        $obj['api_key_ref'] = $apiKeyRef;
+        $obj['apiKeyRef'] = $apiKeyRef;
 
         return $obj;
     }

@@ -16,10 +16,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\Assistants\ScheduledEventsService::list()
  *
  * @phpstan-type ScheduledEventListParamsShape = array{
- *   conversation_channel?: ConversationChannelType|value-of<ConversationChannelType>,
- *   from_date?: \DateTimeInterface,
+ *   conversationChannel?: ConversationChannelType|value-of<ConversationChannelType>,
+ *   fromDate?: \DateTimeInterface,
  *   page?: Page|array{number?: int|null, size?: int|null},
- *   to_date?: \DateTimeInterface,
+ *   toDate?: \DateTimeInterface,
  * }
  */
 final class ScheduledEventListParams implements BaseModel
@@ -28,12 +28,12 @@ final class ScheduledEventListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var value-of<ConversationChannelType>|null $conversation_channel */
+    /** @var value-of<ConversationChannelType>|null $conversationChannel */
     #[Optional(enum: ConversationChannelType::class)]
-    public ?string $conversation_channel;
+    public ?string $conversationChannel;
 
     #[Optional]
-    public ?\DateTimeInterface $from_date;
+    public ?\DateTimeInterface $fromDate;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
@@ -42,7 +42,7 @@ final class ScheduledEventListParams implements BaseModel
     public ?Page $page;
 
     #[Optional]
-    public ?\DateTimeInterface $to_date;
+    public ?\DateTimeInterface $toDate;
 
     public function __construct()
     {
@@ -54,21 +54,21 @@ final class ScheduledEventListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ConversationChannelType|value-of<ConversationChannelType> $conversation_channel
+     * @param ConversationChannelType|value-of<ConversationChannelType> $conversationChannel
      * @param Page|array{number?: int|null, size?: int|null} $page
      */
     public static function with(
-        ConversationChannelType|string|null $conversation_channel = null,
-        ?\DateTimeInterface $from_date = null,
+        ConversationChannelType|string|null $conversationChannel = null,
+        ?\DateTimeInterface $fromDate = null,
         Page|array|null $page = null,
-        ?\DateTimeInterface $to_date = null,
+        ?\DateTimeInterface $toDate = null,
     ): self {
         $obj = new self;
 
-        null !== $conversation_channel && $obj['conversation_channel'] = $conversation_channel;
-        null !== $from_date && $obj['from_date'] = $from_date;
+        null !== $conversationChannel && $obj['conversationChannel'] = $conversationChannel;
+        null !== $fromDate && $obj['fromDate'] = $fromDate;
         null !== $page && $obj['page'] = $page;
-        null !== $to_date && $obj['to_date'] = $to_date;
+        null !== $toDate && $obj['toDate'] = $toDate;
 
         return $obj;
     }
@@ -80,7 +80,7 @@ final class ScheduledEventListParams implements BaseModel
         ConversationChannelType|string $conversationChannel
     ): self {
         $obj = clone $this;
-        $obj['conversation_channel'] = $conversationChannel;
+        $obj['conversationChannel'] = $conversationChannel;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class ScheduledEventListParams implements BaseModel
     public function withFromDate(\DateTimeInterface $fromDate): self
     {
         $obj = clone $this;
-        $obj['from_date'] = $fromDate;
+        $obj['fromDate'] = $fromDate;
 
         return $obj;
     }
@@ -109,7 +109,7 @@ final class ScheduledEventListParams implements BaseModel
     public function withToDate(\DateTimeInterface $toDate): self
     {
         $obj = clone $this;
-        $obj['to_date'] = $toDate;
+        $obj['toDate'] = $toDate;
 
         return $obj;
     }

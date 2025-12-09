@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams\WebhookAPIVersion;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionDeleteResponse;
@@ -33,14 +34,14 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
      *
      * @param array{
      *   active?: bool,
-     *   connection_name?: string,
-     *   inbound?: array{channel_limit?: int},
-     *   outbound?: array{channel_limit?: int, outbound_voice_profile_id?: string},
+     *   connectionName?: string,
+     *   inbound?: array{channelLimit?: int},
+     *   outbound?: array{channelLimit?: int, outboundVoiceProfileID?: string},
      *   tags?: list<string>,
-     *   webhook_api_version?: '1'|'2'|WebhookAPIVersion,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_event_url?: string|null,
-     *   webhook_timeout_secs?: int|null,
+     *   webhookAPIVersion?: '1'|'2'|WebhookAPIVersion,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookEventURL?: string|null,
+     *   webhookTimeoutSecs?: int|null,
      * }|MobileVoiceConnectionCreateParams $params
      *
      * @throws APIException
@@ -95,14 +96,14 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
      *
      * @param array{
      *   active?: bool,
-     *   connection_name?: string,
-     *   inbound?: array{channel_limit?: int},
-     *   outbound?: array{channel_limit?: int, outbound_voice_profile_id?: string},
+     *   connectionName?: string,
+     *   inbound?: array{channelLimit?: int},
+     *   outbound?: array{channelLimit?: int, outboundVoiceProfileID?: string},
      *   tags?: list<string>,
-     *   webhook_api_version?: '1'|'2'|MobileVoiceConnectionUpdateParams\WebhookAPIVersion,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_event_url?: string|null,
-     *   webhook_timeout_secs?: int,
+     *   webhookAPIVersion?: '1'|'2'|MobileVoiceConnectionUpdateParams\WebhookAPIVersion,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookEventURL?: string|null,
+     *   webhookTimeoutSecs?: int,
      * }|MobileVoiceConnectionUpdateParams $params
      *
      * @throws APIException
@@ -135,9 +136,9 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
      * List Mobile Voice Connections
      *
      * @param array{
-     *   filter_connection_name__contains_?: string,
-     *   page_number_?: int,
-     *   page_size_?: int,
+     *   filterConnectionNameContains?: string,
+     *   pageNumber?: int,
+     *   pageSize?: int,
      *   sort?: string,
      * }|MobileVoiceConnectionListParams $params
      *
@@ -156,7 +157,14 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
         $response = $this->client->request(
             method: 'get',
             path: 'v2/mobile_voice_connections',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'filterConnectionNameContains' => 'filter[connection_name][contains]',
+                    'pageNumber' => 'page[number]',
+                    'pageSize' => 'page[size]',
+                ],
+            ),
             options: $options,
             convert: MobileVoiceConnectionListResponse::class,
         );

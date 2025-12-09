@@ -19,16 +19,16 @@ use Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams\WebhookAPIVe
  *
  * @phpstan-type MobileVoiceConnectionCreateParamsShape = array{
  *   active?: bool,
- *   connection_name?: string,
- *   inbound?: Inbound|array{channel_limit?: int|null},
+ *   connectionName?: string,
+ *   inbound?: Inbound|array{channelLimit?: int|null},
  *   outbound?: Outbound|array{
- *     channel_limit?: int|null, outbound_voice_profile_id?: string|null
+ *     channelLimit?: int|null, outboundVoiceProfileID?: string|null
  *   },
  *   tags?: list<string>,
- *   webhook_api_version?: WebhookAPIVersion|value-of<WebhookAPIVersion>,
- *   webhook_event_failover_url?: string|null,
- *   webhook_event_url?: string|null,
- *   webhook_timeout_secs?: int|null,
+ *   webhookAPIVersion?: WebhookAPIVersion|value-of<WebhookAPIVersion>,
+ *   webhookEventFailoverURL?: string|null,
+ *   webhookEventURL?: string|null,
+ *   webhookTimeoutSecs?: int|null,
  * }
  */
 final class MobileVoiceConnectionCreateParams implements BaseModel
@@ -40,8 +40,8 @@ final class MobileVoiceConnectionCreateParams implements BaseModel
     #[Optional]
     public ?bool $active;
 
-    #[Optional]
-    public ?string $connection_name;
+    #[Optional('connection_name')]
+    public ?string $connectionName;
 
     #[Optional]
     public ?Inbound $inbound;
@@ -53,18 +53,18 @@ final class MobileVoiceConnectionCreateParams implements BaseModel
     #[Optional(list: 'string')]
     public ?array $tags;
 
-    /** @var value-of<WebhookAPIVersion>|null $webhook_api_version */
-    #[Optional(enum: WebhookAPIVersion::class)]
-    public ?string $webhook_api_version;
+    /** @var value-of<WebhookAPIVersion>|null $webhookAPIVersion */
+    #[Optional('webhook_api_version', enum: WebhookAPIVersion::class)]
+    public ?string $webhookAPIVersion;
 
-    #[Optional(nullable: true)]
-    public ?string $webhook_event_failover_url;
+    #[Optional('webhook_event_failover_url', nullable: true)]
+    public ?string $webhookEventFailoverURL;
 
-    #[Optional(nullable: true)]
-    public ?string $webhook_event_url;
+    #[Optional('webhook_event_url', nullable: true)]
+    public ?string $webhookEventURL;
 
-    #[Optional(nullable: true)]
-    public ?int $webhook_timeout_secs;
+    #[Optional('webhook_timeout_secs', nullable: true)]
+    public ?int $webhookTimeoutSecs;
 
     public function __construct()
     {
@@ -76,35 +76,35 @@ final class MobileVoiceConnectionCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Inbound|array{channel_limit?: int|null} $inbound
+     * @param Inbound|array{channelLimit?: int|null} $inbound
      * @param Outbound|array{
-     *   channel_limit?: int|null, outbound_voice_profile_id?: string|null
+     *   channelLimit?: int|null, outboundVoiceProfileID?: string|null
      * } $outbound
      * @param list<string> $tags
-     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhook_api_version
+     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion
      */
     public static function with(
         ?bool $active = null,
-        ?string $connection_name = null,
+        ?string $connectionName = null,
         Inbound|array|null $inbound = null,
         Outbound|array|null $outbound = null,
         ?array $tags = null,
-        WebhookAPIVersion|string|null $webhook_api_version = null,
-        ?string $webhook_event_failover_url = null,
-        ?string $webhook_event_url = null,
-        ?int $webhook_timeout_secs = null,
+        WebhookAPIVersion|string|null $webhookAPIVersion = null,
+        ?string $webhookEventFailoverURL = null,
+        ?string $webhookEventURL = null,
+        ?int $webhookTimeoutSecs = null,
     ): self {
         $obj = new self;
 
         null !== $active && $obj['active'] = $active;
-        null !== $connection_name && $obj['connection_name'] = $connection_name;
+        null !== $connectionName && $obj['connectionName'] = $connectionName;
         null !== $inbound && $obj['inbound'] = $inbound;
         null !== $outbound && $obj['outbound'] = $outbound;
         null !== $tags && $obj['tags'] = $tags;
-        null !== $webhook_api_version && $obj['webhook_api_version'] = $webhook_api_version;
-        null !== $webhook_event_failover_url && $obj['webhook_event_failover_url'] = $webhook_event_failover_url;
-        null !== $webhook_event_url && $obj['webhook_event_url'] = $webhook_event_url;
-        null !== $webhook_timeout_secs && $obj['webhook_timeout_secs'] = $webhook_timeout_secs;
+        null !== $webhookAPIVersion && $obj['webhookAPIVersion'] = $webhookAPIVersion;
+        null !== $webhookEventFailoverURL && $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        null !== $webhookEventURL && $obj['webhookEventURL'] = $webhookEventURL;
+        null !== $webhookTimeoutSecs && $obj['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
         return $obj;
     }
@@ -120,13 +120,13 @@ final class MobileVoiceConnectionCreateParams implements BaseModel
     public function withConnectionName(string $connectionName): self
     {
         $obj = clone $this;
-        $obj['connection_name'] = $connectionName;
+        $obj['connectionName'] = $connectionName;
 
         return $obj;
     }
 
     /**
-     * @param Inbound|array{channel_limit?: int|null} $inbound
+     * @param Inbound|array{channelLimit?: int|null} $inbound
      */
     public function withInbound(Inbound|array $inbound): self
     {
@@ -138,7 +138,7 @@ final class MobileVoiceConnectionCreateParams implements BaseModel
 
     /**
      * @param Outbound|array{
-     *   channel_limit?: int|null, outbound_voice_profile_id?: string|null
+     *   channelLimit?: int|null, outboundVoiceProfileID?: string|null
      * } $outbound
      */
     public function withOutbound(Outbound|array $outbound): self
@@ -167,7 +167,7 @@ final class MobileVoiceConnectionCreateParams implements BaseModel
         WebhookAPIVersion|string $webhookAPIVersion
     ): self {
         $obj = clone $this;
-        $obj['webhook_api_version'] = $webhookAPIVersion;
+        $obj['webhookAPIVersion'] = $webhookAPIVersion;
 
         return $obj;
     }
@@ -176,7 +176,7 @@ final class MobileVoiceConnectionCreateParams implements BaseModel
         ?string $webhookEventFailoverURL
     ): self {
         $obj = clone $this;
-        $obj['webhook_event_failover_url'] = $webhookEventFailoverURL;
+        $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
 
         return $obj;
     }
@@ -184,7 +184,7 @@ final class MobileVoiceConnectionCreateParams implements BaseModel
     public function withWebhookEventURL(?string $webhookEventURL): self
     {
         $obj = clone $this;
-        $obj['webhook_event_url'] = $webhookEventURL;
+        $obj['webhookEventURL'] = $webhookEventURL;
 
         return $obj;
     }
@@ -192,7 +192,7 @@ final class MobileVoiceConnectionCreateParams implements BaseModel
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
         $obj = clone $this;
-        $obj['webhook_timeout_secs'] = $webhookTimeoutSecs;
+        $obj['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
         return $obj;
     }

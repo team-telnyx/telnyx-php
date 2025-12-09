@@ -20,10 +20,10 @@ use Telnyx\Messsages\RcsAgentMessage\Event;
  *   direction?: string|null,
  *   encoding?: string|null,
  *   from?: From|null,
- *   messaging_profile_id?: string|null,
- *   organization_id?: string|null,
- *   received_at?: \DateTimeInterface|null,
- *   record_type?: string|null,
+ *   messagingProfileID?: string|null,
+ *   organizationID?: string|null,
+ *   receivedAt?: \DateTimeInterface|null,
+ *   recordType?: string|null,
  *   to?: list<To>|null,
  *   type?: string|null,
  * }
@@ -51,17 +51,17 @@ final class Data implements BaseModel
     #[Optional]
     public ?From $from;
 
-    #[Optional]
-    public ?string $messaging_profile_id;
+    #[Optional('messaging_profile_id')]
+    public ?string $messagingProfileID;
 
-    #[Optional]
-    public ?string $organization_id;
+    #[Optional('organization_id')]
+    public ?string $organizationID;
 
-    #[Optional]
-    public ?\DateTimeInterface $received_at;
+    #[Optional('received_at')]
+    public ?\DateTimeInterface $receivedAt;
 
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /** @var list<To>|null $to */
     #[Optional(list: To::class)]
@@ -81,18 +81,18 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param RcsAgentMessage|array{
-     *   content_message?: ContentMessage|null,
+     *   contentMessage?: ContentMessage|null,
      *   event?: Event|null,
-     *   expire_time?: \DateTimeInterface|null,
+     *   expireTime?: \DateTimeInterface|null,
      *   ttl?: string|null,
      * } $body
      * @param From|array{
-     *   agent_id?: string|null, agent_name?: string|null, carrier?: string|null
+     *   agentID?: string|null, agentName?: string|null, carrier?: string|null
      * } $from
      * @param list<To|array{
      *   carrier?: string|null,
-     *   line_type?: string|null,
-     *   phone_number?: string|null,
+     *   lineType?: string|null,
+     *   phoneNumber?: string|null,
      *   status?: string|null,
      * }> $to
      */
@@ -102,10 +102,10 @@ final class Data implements BaseModel
         ?string $direction = null,
         ?string $encoding = null,
         From|array|null $from = null,
-        ?string $messaging_profile_id = null,
-        ?string $organization_id = null,
-        ?\DateTimeInterface $received_at = null,
-        ?string $record_type = null,
+        ?string $messagingProfileID = null,
+        ?string $organizationID = null,
+        ?\DateTimeInterface $receivedAt = null,
+        ?string $recordType = null,
         ?array $to = null,
         ?string $type = null,
     ): self {
@@ -116,10 +116,10 @@ final class Data implements BaseModel
         null !== $direction && $obj['direction'] = $direction;
         null !== $encoding && $obj['encoding'] = $encoding;
         null !== $from && $obj['from'] = $from;
-        null !== $messaging_profile_id && $obj['messaging_profile_id'] = $messaging_profile_id;
-        null !== $organization_id && $obj['organization_id'] = $organization_id;
-        null !== $received_at && $obj['received_at'] = $received_at;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $messagingProfileID && $obj['messagingProfileID'] = $messagingProfileID;
+        null !== $organizationID && $obj['organizationID'] = $organizationID;
+        null !== $receivedAt && $obj['receivedAt'] = $receivedAt;
+        null !== $recordType && $obj['recordType'] = $recordType;
         null !== $to && $obj['to'] = $to;
         null !== $type && $obj['type'] = $type;
 
@@ -139,9 +139,9 @@ final class Data implements BaseModel
 
     /**
      * @param RcsAgentMessage|array{
-     *   content_message?: ContentMessage|null,
+     *   contentMessage?: ContentMessage|null,
      *   event?: Event|null,
-     *   expire_time?: \DateTimeInterface|null,
+     *   expireTime?: \DateTimeInterface|null,
      *   ttl?: string|null,
      * } $body
      */
@@ -171,7 +171,7 @@ final class Data implements BaseModel
 
     /**
      * @param From|array{
-     *   agent_id?: string|null, agent_name?: string|null, carrier?: string|null
+     *   agentID?: string|null, agentName?: string|null, carrier?: string|null
      * } $from
      */
     public function withFrom(From|array $from): self
@@ -185,7 +185,7 @@ final class Data implements BaseModel
     public function withMessagingProfileID(string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj['messaging_profile_id'] = $messagingProfileID;
+        $obj['messagingProfileID'] = $messagingProfileID;
 
         return $obj;
     }
@@ -193,7 +193,7 @@ final class Data implements BaseModel
     public function withOrganizationID(string $organizationID): self
     {
         $obj = clone $this;
-        $obj['organization_id'] = $organizationID;
+        $obj['organizationID'] = $organizationID;
 
         return $obj;
     }
@@ -201,7 +201,7 @@ final class Data implements BaseModel
     public function withReceivedAt(\DateTimeInterface $receivedAt): self
     {
         $obj = clone $this;
-        $obj['received_at'] = $receivedAt;
+        $obj['receivedAt'] = $receivedAt;
 
         return $obj;
     }
@@ -209,7 +209,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -217,8 +217,8 @@ final class Data implements BaseModel
     /**
      * @param list<To|array{
      *   carrier?: string|null,
-     *   line_type?: string|null,
-     *   phone_number?: string|null,
+     *   lineType?: string|null,
+     *   phoneNumber?: string|null,
      *   status?: string|null,
      * }> $to
      */

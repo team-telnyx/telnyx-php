@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * The webhook payload for the portout.foc_date_changed event.
  *
  * @phpstan-type WebhookPortoutFocDateChangedPayloadShape = array{
- *   id?: string|null, foc_date?: \DateTimeInterface|null, user_id?: string|null
+ *   id?: string|null, focDate?: \DateTimeInterface|null, userID?: string|null
  * }
  */
 final class WebhookPortoutFocDateChangedPayload implements BaseModel
@@ -29,14 +29,14 @@ final class WebhookPortoutFocDateChangedPayload implements BaseModel
     /**
      * ISO 8601 formatted date indicating the new FOC date.
      */
-    #[Optional]
-    public ?\DateTimeInterface $foc_date;
+    #[Optional('foc_date')]
+    public ?\DateTimeInterface $focDate;
 
     /**
      * Identifies the organization that port-out order belongs to.
      */
-    #[Optional]
-    public ?string $user_id;
+    #[Optional('user_id')]
+    public ?string $userID;
 
     public function __construct()
     {
@@ -50,14 +50,14 @@ final class WebhookPortoutFocDateChangedPayload implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?\DateTimeInterface $foc_date = null,
-        ?string $user_id = null,
+        ?\DateTimeInterface $focDate = null,
+        ?string $userID = null
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $foc_date && $obj['foc_date'] = $foc_date;
-        null !== $user_id && $obj['user_id'] = $user_id;
+        null !== $focDate && $obj['focDate'] = $focDate;
+        null !== $userID && $obj['userID'] = $userID;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class WebhookPortoutFocDateChangedPayload implements BaseModel
     public function withFocDate(\DateTimeInterface $focDate): self
     {
         $obj = clone $this;
-        $obj['foc_date'] = $focDate;
+        $obj['focDate'] = $focDate;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class WebhookPortoutFocDateChangedPayload implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj['user_id'] = $userID;
+        $obj['userID'] = $userID;
 
         return $obj;
     }

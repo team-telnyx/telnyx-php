@@ -65,21 +65,21 @@ final class PaginatedTestRunList implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<TestRunResponse|array{
-     *   created_at: \DateTimeInterface,
-     *   run_id: string,
+     *   createdAt: \DateTimeInterface,
+     *   runID: string,
      *   status: value-of<TestStatus>,
-     *   test_id: string,
-     *   triggered_by: string,
-     *   completed_at?: \DateTimeInterface|null,
-     *   conversation_id?: string|null,
-     *   conversation_insights_id?: string|null,
-     *   detail_status?: list<DetailStatus>|null,
+     *   testID: string,
+     *   triggeredBy: string,
+     *   completedAt?: \DateTimeInterface|null,
+     *   conversationID?: string|null,
+     *   conversationInsightsID?: string|null,
+     *   detailStatus?: list<DetailStatus>|null,
      *   logs?: string|null,
-     *   test_suite_run_id?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   testSuiteRunID?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public static function with(array $data, Meta|array $meta): self
@@ -96,18 +96,18 @@ final class PaginatedTestRunList implements BaseModel
      * Array of test run objects for the current page.
      *
      * @param list<TestRunResponse|array{
-     *   created_at: \DateTimeInterface,
-     *   run_id: string,
+     *   createdAt: \DateTimeInterface,
+     *   runID: string,
      *   status: value-of<TestStatus>,
-     *   test_id: string,
-     *   triggered_by: string,
-     *   completed_at?: \DateTimeInterface|null,
-     *   conversation_id?: string|null,
-     *   conversation_insights_id?: string|null,
-     *   detail_status?: list<DetailStatus>|null,
+     *   testID: string,
+     *   triggeredBy: string,
+     *   completedAt?: \DateTimeInterface|null,
+     *   conversationID?: string|null,
+     *   conversationInsightsID?: string|null,
+     *   detailStatus?: list<DetailStatus>|null,
      *   logs?: string|null,
-     *   test_suite_run_id?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   testSuiteRunID?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -122,7 +122,7 @@ final class PaginatedTestRunList implements BaseModel
      * Pagination metadata including total counts and current page info.
      *
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public function withMeta(Meta|array $meta): self

@@ -37,13 +37,13 @@ final class ActionGetResponse implements BaseModel
      *
      * @param SimCardGroupAction|array{
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   record_type?: string|null,
+     *   createdAt?: string|null,
+     *   recordType?: string|null,
      *   settings?: Settings|null,
-     *   sim_card_group_id?: string|null,
+     *   simCardGroupID?: string|null,
      *   status?: value-of<Status>|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public static function with(SimCardGroupAction|array|null $data = null): self
@@ -60,13 +60,13 @@ final class ActionGetResponse implements BaseModel
      *
      * @param SimCardGroupAction|array{
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   record_type?: string|null,
+     *   createdAt?: string|null,
+     *   recordType?: string|null,
      *   settings?: Settings|null,
-     *   sim_card_group_id?: string|null,
+     *   simCardGroupID?: string|null,
      *   status?: value-of<Status>|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public function withData(SimCardGroupAction|array $data): self

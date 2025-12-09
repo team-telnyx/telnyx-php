@@ -43,18 +43,18 @@ final class WebhookDeliveryListResponse implements BaseModel
      * @param list<Data|array{
      *   id?: string|null,
      *   attempts?: list<Attempt>|null,
-     *   finished_at?: \DateTimeInterface|null,
-     *   record_type?: string|null,
-     *   started_at?: \DateTimeInterface|null,
+     *   finishedAt?: \DateTimeInterface|null,
+     *   recordType?: string|null,
+     *   startedAt?: \DateTimeInterface|null,
      *   status?: value-of<Status>|null,
-     *   user_id?: string|null,
+     *   userID?: string|null,
      *   webhook?: Webhook|null,
      * }> $data
      * @param PaginationMetaSimple|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -73,11 +73,11 @@ final class WebhookDeliveryListResponse implements BaseModel
      * @param list<Data|array{
      *   id?: string|null,
      *   attempts?: list<Attempt>|null,
-     *   finished_at?: \DateTimeInterface|null,
-     *   record_type?: string|null,
-     *   started_at?: \DateTimeInterface|null,
+     *   finishedAt?: \DateTimeInterface|null,
+     *   recordType?: string|null,
+     *   startedAt?: \DateTimeInterface|null,
      *   status?: value-of<Status>|null,
-     *   user_id?: string|null,
+     *   userID?: string|null,
      *   webhook?: Webhook|null,
      * }> $data
      */
@@ -91,10 +91,10 @@ final class WebhookDeliveryListResponse implements BaseModel
 
     /**
      * @param PaginationMetaSimple|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMetaSimple|array $meta): self

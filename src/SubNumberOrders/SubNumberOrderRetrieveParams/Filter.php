@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[include_phone_numbers].
  *
- * @phpstan-type FilterShape = array{include_phone_numbers?: bool|null}
+ * @phpstan-type FilterShape = array{includePhoneNumbers?: bool|null}
  */
 final class Filter implements BaseModel
 {
@@ -21,8 +21,8 @@ final class Filter implements BaseModel
     /**
      * Include the first 50 phone number objects in the results.
      */
-    #[Optional]
-    public ?bool $include_phone_numbers;
+    #[Optional('include_phone_numbers')]
+    public ?bool $includePhoneNumbers;
 
     public function __construct()
     {
@@ -34,11 +34,11 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?bool $include_phone_numbers = null): self
+    public static function with(?bool $includePhoneNumbers = null): self
     {
         $obj = new self;
 
-        null !== $include_phone_numbers && $obj['include_phone_numbers'] = $include_phone_numbers;
+        null !== $includePhoneNumbers && $obj['includePhoneNumbers'] = $includePhoneNumbers;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class Filter implements BaseModel
     public function withIncludePhoneNumbers(bool $includePhoneNumbers): self
     {
         $obj = clone $this;
-        $obj['include_phone_numbers'] = $includePhoneNumbers;
+        $obj['includePhoneNumbers'] = $includePhoneNumbers;
 
         return $obj;
     }

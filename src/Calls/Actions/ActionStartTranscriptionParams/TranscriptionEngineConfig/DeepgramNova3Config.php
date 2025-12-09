@@ -13,9 +13,9 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DeepgramNova3ConfigShape = array{
- *   transcription_engine?: 'Deepgram',
- *   transcription_model: value-of<TranscriptionModel>,
- *   keywords_boosting?: array<string,float>|null,
+ *   transcriptionEngine?: 'Deepgram',
+ *   transcriptionModel: value-of<TranscriptionModel>,
+ *   keywordsBoosting?: array<string,float>|null,
  *   language?: value-of<Language>|null,
  * }
  */
@@ -24,21 +24,21 @@ final class DeepgramNova3Config implements BaseModel
     /** @use SdkModel<DeepgramNova3ConfigShape> */
     use SdkModel;
 
-    /** @var 'Deepgram' $transcription_engine */
-    #[Required]
-    public string $transcription_engine = 'Deepgram';
+    /** @var 'Deepgram' $transcriptionEngine */
+    #[Required('transcription_engine')]
+    public string $transcriptionEngine = 'Deepgram';
 
-    /** @var value-of<TranscriptionModel> $transcription_model */
-    #[Required(enum: TranscriptionModel::class)]
-    public string $transcription_model;
+    /** @var value-of<TranscriptionModel> $transcriptionModel */
+    #[Required('transcription_model', enum: TranscriptionModel::class)]
+    public string $transcriptionModel;
 
     /**
      * Keywords and their respective intensifiers (boosting values) to improve transcription accuracy for specific words or phrases. The intensifier should be a numeric value. Example: `{"snuffleupagus": 5, "systrom": 2, "krieger": 1}`.
      *
-     * @var array<string,float>|null $keywords_boosting
+     * @var array<string,float>|null $keywordsBoosting
      */
-    #[Optional(map: 'float')]
-    public ?array $keywords_boosting;
+    #[Optional('keywords_boosting', map: 'float')]
+    public ?array $keywordsBoosting;
 
     /**
      * Language to use for speech recognition with nova-3 model.
@@ -53,7 +53,7 @@ final class DeepgramNova3Config implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * DeepgramNova3Config::with(transcription_model: ...)
+     * DeepgramNova3Config::with(transcriptionModel: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -72,20 +72,20 @@ final class DeepgramNova3Config implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param TranscriptionModel|value-of<TranscriptionModel> $transcription_model
-     * @param array<string,float> $keywords_boosting
+     * @param TranscriptionModel|value-of<TranscriptionModel> $transcriptionModel
+     * @param array<string,float> $keywordsBoosting
      * @param Language|value-of<Language> $language
      */
     public static function with(
-        TranscriptionModel|string $transcription_model,
-        ?array $keywords_boosting = null,
+        TranscriptionModel|string $transcriptionModel,
+        ?array $keywordsBoosting = null,
         Language|string|null $language = null,
     ): self {
         $obj = new self;
 
-        $obj['transcription_model'] = $transcription_model;
+        $obj['transcriptionModel'] = $transcriptionModel;
 
-        null !== $keywords_boosting && $obj['keywords_boosting'] = $keywords_boosting;
+        null !== $keywordsBoosting && $obj['keywordsBoosting'] = $keywordsBoosting;
         null !== $language && $obj['language'] = $language;
 
         return $obj;
@@ -98,7 +98,7 @@ final class DeepgramNova3Config implements BaseModel
         TranscriptionModel|string $transcriptionModel
     ): self {
         $obj = clone $this;
-        $obj['transcription_model'] = $transcriptionModel;
+        $obj['transcriptionModel'] = $transcriptionModel;
 
         return $obj;
     }
@@ -111,7 +111,7 @@ final class DeepgramNova3Config implements BaseModel
     public function withKeywordsBoosting(array $keywordsBoosting): self
     {
         $obj = clone $this;
-        $obj['keywords_boosting'] = $keywordsBoosting;
+        $obj['keywordsBoosting'] = $keywordsBoosting;
 
         return $obj;
     }

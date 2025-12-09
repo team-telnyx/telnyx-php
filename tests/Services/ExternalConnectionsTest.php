@@ -40,7 +40,7 @@ final class ExternalConnectionsTest extends TestCase
         }
 
         $result = $this->client->externalConnections->create([
-            'external_sip_connection' => 'zoom', 'outbound' => [],
+            'externalSipConnection' => 'zoom', 'outbound' => [],
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -55,20 +55,20 @@ final class ExternalConnectionsTest extends TestCase
         }
 
         $result = $this->client->externalConnections->create([
-            'external_sip_connection' => 'zoom',
+            'externalSipConnection' => 'zoom',
             'outbound' => [
-                'channel_limit' => 10,
-                'outbound_voice_profile_id' => 'outbound_voice_profile_id',
+                'channelLimit' => 10,
+                'outboundVoiceProfileID' => 'outbound_voice_profile_id',
             ],
             'active' => false,
             'inbound' => [
-                'outbound_voice_profile_id' => '12345678-1234-1234-1234-123456789012',
-                'channel_limit' => 10,
+                'outboundVoiceProfileID' => '12345678-1234-1234-1234-123456789012',
+                'channelLimit' => 10,
             ],
             'tags' => ['tag1', 'tag2'],
-            'webhook_event_failover_url' => 'https://failover.example.com',
-            'webhook_event_url' => 'https://example.com',
-            'webhook_timeout_secs' => 25,
+            'webhookEventFailoverURL' => 'https://failover.example.com',
+            'webhookEventURL' => 'https://example.com',
+            'webhookTimeoutSecs' => 25,
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -97,11 +97,7 @@ final class ExternalConnectionsTest extends TestCase
 
         $result = $this->client->externalConnections->update(
             'id',
-            [
-                'outbound' => [
-                    'outbound_voice_profile_id' => 'outbound_voice_profile_id',
-                ],
-            ],
+            ['outbound' => ['outboundVoiceProfileID' => 'outbound_voice_profile_id']],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -119,15 +115,15 @@ final class ExternalConnectionsTest extends TestCase
             'id',
             [
                 'outbound' => [
-                    'outbound_voice_profile_id' => 'outbound_voice_profile_id',
-                    'channel_limit' => 10,
+                    'outboundVoiceProfileID' => 'outbound_voice_profile_id',
+                    'channelLimit' => 10,
                 ],
                 'active' => false,
-                'inbound' => ['channel_limit' => 10],
+                'inbound' => ['channelLimit' => 10],
                 'tags' => ['tag1', 'tag2'],
-                'webhook_event_failover_url' => 'https://failover.example.com',
-                'webhook_event_url' => 'https://example.com',
-                'webhook_timeout_secs' => 25,
+                'webhookEventFailoverURL' => 'https://failover.example.com',
+                'webhookEventURL' => 'https://example.com',
+                'webhookTimeoutSecs' => 25,
             ],
         );
 
@@ -172,7 +168,7 @@ final class ExternalConnectionsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             [
                 'id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-                'static_emergency_address_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+                'staticEmergencyAddressID' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             ],
         );
 
@@ -194,7 +190,7 @@ final class ExternalConnectionsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             [
                 'id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-                'static_emergency_address_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+                'staticEmergencyAddressID' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             ],
         );
 

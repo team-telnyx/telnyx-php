@@ -16,9 +16,9 @@ use Telnyx\Rooms\Sessions\SessionList1Params\Filter\DateUpdatedAt;
  *
  * @phpstan-type FilterShape = array{
  *   active?: bool|null,
- *   date_created_at?: DateCreatedAt|null,
- *   date_ended_at?: DateEndedAt|null,
- *   date_updated_at?: DateUpdatedAt|null,
+ *   dateCreatedAt?: DateCreatedAt|null,
+ *   dateEndedAt?: DateEndedAt|null,
+ *   dateUpdatedAt?: DateUpdatedAt|null,
  * }
  */
 final class Filter implements BaseModel
@@ -32,14 +32,14 @@ final class Filter implements BaseModel
     #[Optional]
     public ?bool $active;
 
-    #[Optional]
-    public ?DateCreatedAt $date_created_at;
+    #[Optional('date_created_at')]
+    public ?DateCreatedAt $dateCreatedAt;
 
-    #[Optional]
-    public ?DateEndedAt $date_ended_at;
+    #[Optional('date_ended_at')]
+    public ?DateEndedAt $dateEndedAt;
 
-    #[Optional]
-    public ?DateUpdatedAt $date_updated_at;
+    #[Optional('date_updated_at')]
+    public ?DateUpdatedAt $dateUpdatedAt;
 
     public function __construct()
     {
@@ -55,30 +55,30 @@ final class Filter implements BaseModel
      *   eq?: \DateTimeInterface|null,
      *   gte?: \DateTimeInterface|null,
      *   lte?: \DateTimeInterface|null,
-     * } $date_created_at
+     * } $dateCreatedAt
      * @param DateEndedAt|array{
      *   eq?: \DateTimeInterface|null,
      *   gte?: \DateTimeInterface|null,
      *   lte?: \DateTimeInterface|null,
-     * } $date_ended_at
+     * } $dateEndedAt
      * @param DateUpdatedAt|array{
      *   eq?: \DateTimeInterface|null,
      *   gte?: \DateTimeInterface|null,
      *   lte?: \DateTimeInterface|null,
-     * } $date_updated_at
+     * } $dateUpdatedAt
      */
     public static function with(
         ?bool $active = null,
-        DateCreatedAt|array|null $date_created_at = null,
-        DateEndedAt|array|null $date_ended_at = null,
-        DateUpdatedAt|array|null $date_updated_at = null,
+        DateCreatedAt|array|null $dateCreatedAt = null,
+        DateEndedAt|array|null $dateEndedAt = null,
+        DateUpdatedAt|array|null $dateUpdatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $active && $obj['active'] = $active;
-        null !== $date_created_at && $obj['date_created_at'] = $date_created_at;
-        null !== $date_ended_at && $obj['date_ended_at'] = $date_ended_at;
-        null !== $date_updated_at && $obj['date_updated_at'] = $date_updated_at;
+        null !== $dateCreatedAt && $obj['dateCreatedAt'] = $dateCreatedAt;
+        null !== $dateEndedAt && $obj['dateEndedAt'] = $dateEndedAt;
+        null !== $dateUpdatedAt && $obj['dateUpdatedAt'] = $dateUpdatedAt;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class Filter implements BaseModel
     public function withDateCreatedAt(DateCreatedAt|array $dateCreatedAt): self
     {
         $obj = clone $this;
-        $obj['date_created_at'] = $dateCreatedAt;
+        $obj['dateCreatedAt'] = $dateCreatedAt;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class Filter implements BaseModel
     public function withDateEndedAt(DateEndedAt|array $dateEndedAt): self
     {
         $obj = clone $this;
-        $obj['date_ended_at'] = $dateEndedAt;
+        $obj['dateEndedAt'] = $dateEndedAt;
 
         return $obj;
     }
@@ -134,7 +134,7 @@ final class Filter implements BaseModel
     public function withDateUpdatedAt(DateUpdatedAt|array $dateUpdatedAt): self
     {
         $obj = clone $this;
-        $obj['date_updated_at'] = $dateUpdatedAt;
+        $obj['dateUpdatedAt'] = $dateUpdatedAt;
 
         return $obj;
     }

@@ -32,7 +32,7 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
      *
      * @param array{
      *   action: 'keep'|'disconnect'|Action,
-     *   phone_number_range: array{end_at?: string, start_at?: string},
+     *   phoneNumberRange: array{endAt?: string, startAt?: string},
      * }|AssociatedPhoneNumberCreateParams $params
      *
      * @throws APIException
@@ -67,7 +67,7 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
      * @param array{
      *   filter?: array{
      *     action?: 'keep'|'disconnect'|AssociatedPhoneNumberListParams\Filter\Action,
-     *     phone_number?: string,
+     *     phoneNumber?: string,
      *   },
      *   page?: array{number?: int, size?: int},
      *   sort?: array{value?: '-created_at'|'created_at'|Value},
@@ -102,7 +102,7 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
      *
      * Deletes an associated phone number from a porting order.
      *
-     * @param array{porting_order_id: string}|AssociatedPhoneNumberDeleteParams $params
+     * @param array{portingOrderID: string}|AssociatedPhoneNumberDeleteParams $params
      *
      * @throws APIException
      */
@@ -115,8 +115,8 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
             $params,
             $requestOptions,
         );
-        $portingOrderID = $parsed['porting_order_id'];
-        unset($parsed['porting_order_id']);
+        $portingOrderID = $parsed['portingOrderID'];
+        unset($parsed['portingOrderID']);
 
         /** @var BaseResponse<AssociatedPhoneNumberDeleteResponse> */
         $response = $this->client->request(

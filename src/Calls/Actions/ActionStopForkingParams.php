@@ -20,9 +20,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Calls\ActionsService::stopForking()
  *
  * @phpstan-type ActionStopForkingParamsShape = array{
- *   client_state?: string,
- *   command_id?: string,
- *   stream_type?: StreamType|value-of<StreamType>,
+ *   clientState?: string,
+ *   commandID?: string,
+ *   streamType?: StreamType|value-of<StreamType>,
  * }
  */
 final class ActionStopForkingParams implements BaseModel
@@ -34,22 +34,22 @@ final class ActionStopForkingParams implements BaseModel
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Optional]
-    public ?string $client_state;
+    #[Optional('client_state')]
+    public ?string $clientState;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Optional]
-    public ?string $command_id;
+    #[Optional('command_id')]
+    public ?string $commandID;
 
     /**
      * Optionally specify a `stream_type`. This should match the `stream_type` that was used in `fork_start` command to properly stop the fork.
      *
-     * @var value-of<StreamType>|null $stream_type
+     * @var value-of<StreamType>|null $streamType
      */
-    #[Optional(enum: StreamType::class)]
-    public ?string $stream_type;
+    #[Optional('stream_type', enum: StreamType::class)]
+    public ?string $streamType;
 
     public function __construct()
     {
@@ -61,18 +61,18 @@ final class ActionStopForkingParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param StreamType|value-of<StreamType> $stream_type
+     * @param StreamType|value-of<StreamType> $streamType
      */
     public static function with(
-        ?string $client_state = null,
-        ?string $command_id = null,
-        StreamType|string|null $stream_type = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        StreamType|string|null $streamType = null,
     ): self {
         $obj = new self;
 
-        null !== $client_state && $obj['client_state'] = $client_state;
-        null !== $command_id && $obj['command_id'] = $command_id;
-        null !== $stream_type && $obj['stream_type'] = $stream_type;
+        null !== $clientState && $obj['clientState'] = $clientState;
+        null !== $commandID && $obj['commandID'] = $commandID;
+        null !== $streamType && $obj['streamType'] = $streamType;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class ActionStopForkingParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj['client_state'] = $clientState;
+        $obj['clientState'] = $clientState;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class ActionStopForkingParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj['command_id'] = $commandID;
+        $obj['commandID'] = $commandID;
 
         return $obj;
     }
@@ -107,7 +107,7 @@ final class ActionStopForkingParams implements BaseModel
     public function withStreamType(StreamType|string $streamType): self
     {
         $obj = clone $this;
-        $obj['stream_type'] = $streamType;
+        $obj['streamType'] = $streamType;
 
         return $obj;
     }

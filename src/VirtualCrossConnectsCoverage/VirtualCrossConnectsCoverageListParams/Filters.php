@@ -12,7 +12,7 @@ use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\F
 /**
  * Consolidated filters parameter (deepObject style). Originally: filters[available_bandwidth][contains].
  *
- * @phpstan-type FiltersShape = array{available_bandwidth?: int|null|Contains}
+ * @phpstan-type FiltersShape = array{availableBandwidth?: int|null|Contains}
  */
 final class Filters implements BaseModel
 {
@@ -22,8 +22,8 @@ final class Filters implements BaseModel
     /**
      * Filter by exact available bandwidth match.
      */
-    #[Optional]
-    public int|Contains|null $available_bandwidth;
+    #[Optional('available_bandwidth')]
+    public int|Contains|null $availableBandwidth;
 
     public function __construct()
     {
@@ -35,14 +35,14 @@ final class Filters implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param int|Contains|array{contains?: int|null} $available_bandwidth
+     * @param int|Contains|array{contains?: int|null} $availableBandwidth
      */
     public static function with(
-        int|Contains|array|null $available_bandwidth = null
+        int|Contains|array|null $availableBandwidth = null
     ): self {
         $obj = new self;
 
-        null !== $available_bandwidth && $obj['available_bandwidth'] = $available_bandwidth;
+        null !== $availableBandwidth && $obj['availableBandwidth'] = $availableBandwidth;
 
         return $obj;
     }
@@ -56,7 +56,7 @@ final class Filters implements BaseModel
         int|Contains|array $availableBandwidth
     ): self {
         $obj = clone $this;
-        $obj['available_bandwidth'] = $availableBandwidth;
+        $obj['availableBandwidth'] = $availableBandwidth;
 
         return $obj;
     }

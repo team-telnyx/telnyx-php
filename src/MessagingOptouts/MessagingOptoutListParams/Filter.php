@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[messaging_profile_id], filter[from].
  *
  * @phpstan-type FilterShape = array{
- *   from?: string|null, messaging_profile_id?: string|null
+ *   from?: string|null, messagingProfileID?: string|null
  * }
  */
 final class Filter implements BaseModel
@@ -29,8 +29,8 @@ final class Filter implements BaseModel
     /**
      * The ID of the messaging profile to retrieve opt-outs for.
      */
-    #[Optional]
-    public ?string $messaging_profile_id;
+    #[Optional('messaging_profile_id')]
+    public ?string $messagingProfileID;
 
     public function __construct()
     {
@@ -44,12 +44,12 @@ final class Filter implements BaseModel
      */
     public static function with(
         ?string $from = null,
-        ?string $messaging_profile_id = null
+        ?string $messagingProfileID = null
     ): self {
         $obj = new self;
 
         null !== $from && $obj['from'] = $from;
-        null !== $messaging_profile_id && $obj['messaging_profile_id'] = $messaging_profile_id;
+        null !== $messagingProfileID && $obj['messagingProfileID'] = $messagingProfileID;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class Filter implements BaseModel
     public function withMessagingProfileID(string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj['messaging_profile_id'] = $messagingProfileID;
+        $obj['messagingProfileID'] = $messagingProfileID;
 
         return $obj;
     }

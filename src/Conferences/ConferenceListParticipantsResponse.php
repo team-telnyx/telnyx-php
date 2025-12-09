@@ -42,24 +42,24 @@ final class ConferenceListParticipantsResponse implements BaseModel
      *
      * @param list<Data|array{
      *   id: string,
-     *   call_control_id: string,
-     *   call_leg_id: string,
+     *   callControlID: string,
+     *   callLegID: string,
      *   conference: Conference,
-     *   created_at: string,
-     *   end_conference_on_exit: bool,
+     *   createdAt: string,
+     *   endConferenceOnExit: bool,
      *   muted: bool,
-     *   on_hold: bool,
-     *   record_type: value-of<RecordType>,
-     *   soft_end_conference_on_exit: bool,
+     *   onHold: bool,
+     *   recordType: value-of<RecordType>,
+     *   softEndConferenceOnExit: bool,
      *   status: value-of<Status>,
-     *   updated_at: string,
-     *   whisper_call_control_ids: list<string>,
+     *   updatedAt: string,
+     *   whisperCallControlIDs: list<string>,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -77,18 +77,18 @@ final class ConferenceListParticipantsResponse implements BaseModel
     /**
      * @param list<Data|array{
      *   id: string,
-     *   call_control_id: string,
-     *   call_leg_id: string,
+     *   callControlID: string,
+     *   callLegID: string,
      *   conference: Conference,
-     *   created_at: string,
-     *   end_conference_on_exit: bool,
+     *   createdAt: string,
+     *   endConferenceOnExit: bool,
      *   muted: bool,
-     *   on_hold: bool,
-     *   record_type: value-of<RecordType>,
-     *   soft_end_conference_on_exit: bool,
+     *   onHold: bool,
+     *   recordType: value-of<RecordType>,
+     *   softEndConferenceOnExit: bool,
      *   status: value-of<Status>,
-     *   updated_at: string,
-     *   whisper_call_control_ids: list<string>,
+     *   updatedAt: string,
+     *   whisperCallControlIDs: list<string>,
      * }> $data
      */
     public function withData(array $data): self
@@ -101,10 +101,10 @@ final class ConferenceListParticipantsResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

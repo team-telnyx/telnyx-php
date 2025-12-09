@@ -11,17 +11,17 @@ use Telnyx\Queues\Calls\CallGetResponse\Data\RecordType;
 
 /**
  * @phpstan-type DataShape = array{
- *   call_control_id: string,
- *   call_leg_id: string,
- *   call_session_id: string,
- *   connection_id: string,
- *   enqueued_at: string,
+ *   callControlID: string,
+ *   callLegID: string,
+ *   callSessionID: string,
+ *   connectionID: string,
+ *   enqueuedAt: string,
  *   from: string,
- *   queue_id: string,
- *   queue_position: int,
- *   record_type: value-of<RecordType>,
+ *   queueID: string,
+ *   queuePosition: int,
+ *   recordType: value-of<RecordType>,
  *   to: string,
- *   wait_time_secs: int,
+ *   waitTimeSecs: int,
  * }
  */
 final class Data implements BaseModel
@@ -32,32 +32,32 @@ final class Data implements BaseModel
     /**
      * Unique identifier and token for controlling the call.
      */
-    #[Required]
-    public string $call_control_id;
+    #[Required('call_control_id')]
+    public string $callControlID;
 
     /**
      * ID that is unique to the call and can be used to correlate webhook events.
      */
-    #[Required]
-    public string $call_leg_id;
+    #[Required('call_leg_id')]
+    public string $callLegID;
 
     /**
      * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
      */
-    #[Required]
-    public string $call_session_id;
+    #[Required('call_session_id')]
+    public string $callSessionID;
 
     /**
      * Call Control App ID (formerly Telnyx connection ID) used in the call.
      */
-    #[Required]
-    public string $connection_id;
+    #[Required('connection_id')]
+    public string $connectionID;
 
     /**
      * ISO 8601 formatted date of when the call was put in the queue.
      */
-    #[Required]
-    public string $enqueued_at;
+    #[Required('enqueued_at')]
+    public string $enqueuedAt;
 
     /**
      * Number or SIP URI placing the call.
@@ -68,18 +68,18 @@ final class Data implements BaseModel
     /**
      * Unique identifier of the queue the call is in.
      */
-    #[Required]
-    public string $queue_id;
+    #[Required('queue_id')]
+    public string $queueID;
 
     /**
      * Current position of the call in the queue.
      */
-    #[Required]
-    public int $queue_position;
+    #[Required('queue_position')]
+    public int $queuePosition;
 
-    /** @var value-of<RecordType> $record_type */
-    #[Required(enum: RecordType::class)]
-    public string $record_type;
+    /** @var value-of<RecordType> $recordType */
+    #[Required('record_type', enum: RecordType::class)]
+    public string $recordType;
 
     /**
      * Destination number or SIP URI of the call.
@@ -90,8 +90,8 @@ final class Data implements BaseModel
     /**
      * The time the call has been waiting in the queue, given in seconds.
      */
-    #[Required]
-    public int $wait_time_secs;
+    #[Required('wait_time_secs')]
+    public int $waitTimeSecs;
 
     /**
      * `new Data()` is missing required properties by the API.
@@ -99,17 +99,17 @@ final class Data implements BaseModel
      * To enforce required parameters use
      * ```
      * Data::with(
-     *   call_control_id: ...,
-     *   call_leg_id: ...,
-     *   call_session_id: ...,
-     *   connection_id: ...,
-     *   enqueued_at: ...,
+     *   callControlID: ...,
+     *   callLegID: ...,
+     *   callSessionID: ...,
+     *   connectionID: ...,
+     *   enqueuedAt: ...,
      *   from: ...,
-     *   queue_id: ...,
-     *   queue_position: ...,
-     *   record_type: ...,
+     *   queueID: ...,
+     *   queuePosition: ...,
+     *   recordType: ...,
      *   to: ...,
-     *   wait_time_secs: ...,
+     *   waitTimeSecs: ...,
      * )
      * ```
      *
@@ -140,34 +140,34 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $record_type
+     * @param RecordType|value-of<RecordType> $recordType
      */
     public static function with(
-        string $call_control_id,
-        string $call_leg_id,
-        string $call_session_id,
-        string $connection_id,
-        string $enqueued_at,
+        string $callControlID,
+        string $callLegID,
+        string $callSessionID,
+        string $connectionID,
+        string $enqueuedAt,
         string $from,
-        string $queue_id,
-        int $queue_position,
-        RecordType|string $record_type,
+        string $queueID,
+        int $queuePosition,
+        RecordType|string $recordType,
         string $to,
-        int $wait_time_secs,
+        int $waitTimeSecs,
     ): self {
         $obj = new self;
 
-        $obj['call_control_id'] = $call_control_id;
-        $obj['call_leg_id'] = $call_leg_id;
-        $obj['call_session_id'] = $call_session_id;
-        $obj['connection_id'] = $connection_id;
-        $obj['enqueued_at'] = $enqueued_at;
+        $obj['callControlID'] = $callControlID;
+        $obj['callLegID'] = $callLegID;
+        $obj['callSessionID'] = $callSessionID;
+        $obj['connectionID'] = $connectionID;
+        $obj['enqueuedAt'] = $enqueuedAt;
         $obj['from'] = $from;
-        $obj['queue_id'] = $queue_id;
-        $obj['queue_position'] = $queue_position;
-        $obj['record_type'] = $record_type;
+        $obj['queueID'] = $queueID;
+        $obj['queuePosition'] = $queuePosition;
+        $obj['recordType'] = $recordType;
         $obj['to'] = $to;
-        $obj['wait_time_secs'] = $wait_time_secs;
+        $obj['waitTimeSecs'] = $waitTimeSecs;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class Data implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj['call_control_id'] = $callControlID;
+        $obj['callControlID'] = $callControlID;
 
         return $obj;
     }
@@ -189,7 +189,7 @@ final class Data implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj['call_leg_id'] = $callLegID;
+        $obj['callLegID'] = $callLegID;
 
         return $obj;
     }
@@ -200,7 +200,7 @@ final class Data implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj['call_session_id'] = $callSessionID;
+        $obj['callSessionID'] = $callSessionID;
 
         return $obj;
     }
@@ -211,7 +211,7 @@ final class Data implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj['connection_id'] = $connectionID;
+        $obj['connectionID'] = $connectionID;
 
         return $obj;
     }
@@ -222,7 +222,7 @@ final class Data implements BaseModel
     public function withEnqueuedAt(string $enqueuedAt): self
     {
         $obj = clone $this;
-        $obj['enqueued_at'] = $enqueuedAt;
+        $obj['enqueuedAt'] = $enqueuedAt;
 
         return $obj;
     }
@@ -244,7 +244,7 @@ final class Data implements BaseModel
     public function withQueueID(string $queueID): self
     {
         $obj = clone $this;
-        $obj['queue_id'] = $queueID;
+        $obj['queueID'] = $queueID;
 
         return $obj;
     }
@@ -255,7 +255,7 @@ final class Data implements BaseModel
     public function withQueuePosition(int $queuePosition): self
     {
         $obj = clone $this;
-        $obj['queue_position'] = $queuePosition;
+        $obj['queuePosition'] = $queuePosition;
 
         return $obj;
     }
@@ -266,7 +266,7 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -288,7 +288,7 @@ final class Data implements BaseModel
     public function withWaitTimeSecs(int $waitTimeSecs): self
     {
         $obj = clone $this;
-        $obj['wait_time_secs'] = $waitTimeSecs;
+        $obj['waitTimeSecs'] = $waitTimeSecs;
 
         return $obj;
     }

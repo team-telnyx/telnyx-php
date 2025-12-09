@@ -41,21 +41,21 @@ final class ActionRequirementListResponse implements BaseModel
      *
      * @param list<Data|array{
      *   id?: string|null,
-     *   action_type?: string|null,
-     *   action_url?: string|null,
-     *   cancel_reason?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   porting_order_id?: string|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   requirement_type_id?: string|null,
+     *   actionType?: string|null,
+     *   actionURL?: string|null,
+     *   cancelReason?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   portingOrderID?: string|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   requirementTypeID?: string|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -73,15 +73,15 @@ final class ActionRequirementListResponse implements BaseModel
     /**
      * @param list<Data|array{
      *   id?: string|null,
-     *   action_type?: string|null,
-     *   action_url?: string|null,
-     *   cancel_reason?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   porting_order_id?: string|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   requirement_type_id?: string|null,
+     *   actionType?: string|null,
+     *   actionURL?: string|null,
+     *   cancelReason?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   portingOrderID?: string|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   requirementTypeID?: string|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -94,10 +94,10 @@ final class ActionRequirementListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

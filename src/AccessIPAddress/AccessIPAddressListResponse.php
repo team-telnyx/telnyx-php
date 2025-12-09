@@ -51,16 +51,16 @@ final class AccessIPAddressListResponse implements BaseModel
      *
      * @param list<AccessIPAddressResponse|array{
      *   id: string,
-     *   ip_address: string,
+     *   ipAddress: string,
      *   source: string,
      *   status: value-of<CloudflareSyncStatus>,
-     *   user_id: string,
-     *   created_at?: \DateTimeInterface|null,
+     *   userID: string,
+     *   createdAt?: \DateTimeInterface|null,
      *   description?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      * @param PaginationMetaCloudflareIPListSync|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public static function with(
@@ -78,13 +78,13 @@ final class AccessIPAddressListResponse implements BaseModel
     /**
      * @param list<AccessIPAddressResponse|array{
      *   id: string,
-     *   ip_address: string,
+     *   ipAddress: string,
      *   source: string,
      *   status: value-of<CloudflareSyncStatus>,
-     *   user_id: string,
-     *   created_at?: \DateTimeInterface|null,
+     *   userID: string,
+     *   createdAt?: \DateTimeInterface|null,
      *   description?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -97,7 +97,7 @@ final class AccessIPAddressListResponse implements BaseModel
 
     /**
      * @param PaginationMetaCloudflareIPListSync|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public function withMeta(

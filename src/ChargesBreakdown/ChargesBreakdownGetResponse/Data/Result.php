@@ -11,9 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ResultShape = array{
- *   charge_type: string,
- *   service_owner_email: string,
- *   service_owner_user_id: string,
+ *   chargeType: string,
+ *   serviceOwnerEmail: string,
+ *   serviceOwnerUserID: string,
  *   services: list<Service>,
  *   tn: string,
  * }
@@ -26,20 +26,20 @@ final class Result implements BaseModel
     /**
      * Type of charge for the number.
      */
-    #[Required]
-    public string $charge_type;
+    #[Required('charge_type')]
+    public string $chargeType;
 
     /**
      * Email address of the service owner.
      */
-    #[Required]
-    public string $service_owner_email;
+    #[Required('service_owner_email')]
+    public string $serviceOwnerEmail;
 
     /**
      * User ID of the service owner.
      */
-    #[Required]
-    public string $service_owner_user_id;
+    #[Required('service_owner_user_id')]
+    public string $serviceOwnerUserID;
 
     /**
      * List of services associated with this number.
@@ -61,9 +61,9 @@ final class Result implements BaseModel
      * To enforce required parameters use
      * ```
      * Result::with(
-     *   charge_type: ...,
-     *   service_owner_email: ...,
-     *   service_owner_user_id: ...,
+     *   chargeType: ...,
+     *   serviceOwnerEmail: ...,
+     *   serviceOwnerUserID: ...,
      *   services: ...,
      *   tn: ...,
      * )
@@ -91,21 +91,21 @@ final class Result implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Service|array{
-     *   cost: string, cost_type: string, name: string
+     *   cost: string, costType: string, name: string
      * }> $services
      */
     public static function with(
-        string $charge_type,
-        string $service_owner_email,
-        string $service_owner_user_id,
+        string $chargeType,
+        string $serviceOwnerEmail,
+        string $serviceOwnerUserID,
         array $services,
         string $tn,
     ): self {
         $obj = new self;
 
-        $obj['charge_type'] = $charge_type;
-        $obj['service_owner_email'] = $service_owner_email;
-        $obj['service_owner_user_id'] = $service_owner_user_id;
+        $obj['chargeType'] = $chargeType;
+        $obj['serviceOwnerEmail'] = $serviceOwnerEmail;
+        $obj['serviceOwnerUserID'] = $serviceOwnerUserID;
         $obj['services'] = $services;
         $obj['tn'] = $tn;
 
@@ -118,7 +118,7 @@ final class Result implements BaseModel
     public function withChargeType(string $chargeType): self
     {
         $obj = clone $this;
-        $obj['charge_type'] = $chargeType;
+        $obj['chargeType'] = $chargeType;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class Result implements BaseModel
     public function withServiceOwnerEmail(string $serviceOwnerEmail): self
     {
         $obj = clone $this;
-        $obj['service_owner_email'] = $serviceOwnerEmail;
+        $obj['serviceOwnerEmail'] = $serviceOwnerEmail;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class Result implements BaseModel
     public function withServiceOwnerUserID(string $serviceOwnerUserID): self
     {
         $obj = clone $this;
-        $obj['service_owner_user_id'] = $serviceOwnerUserID;
+        $obj['serviceOwnerUserID'] = $serviceOwnerUserID;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class Result implements BaseModel
      * List of services associated with this number.
      *
      * @param list<Service|array{
-     *   cost: string, cost_type: string, name: string
+     *   cost: string, costType: string, name: string
      * }> $services
      */
     public function withServices(array $services): self

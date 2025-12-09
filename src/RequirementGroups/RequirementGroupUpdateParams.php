@@ -16,9 +16,9 @@ use Telnyx\RequirementGroups\RequirementGroupUpdateParams\RegulatoryRequirement;
  * @see Telnyx\Services\RequirementGroupsService::update()
  *
  * @phpstan-type RequirementGroupUpdateParamsShape = array{
- *   customer_reference?: string,
- *   regulatory_requirements?: list<RegulatoryRequirement|array{
- *     field_value?: string|null, requirement_id?: string|null
+ *   customerReference?: string,
+ *   regulatoryRequirements?: list<RegulatoryRequirement|array{
+ *     fieldValue?: string|null, requirementID?: string|null
  *   }>,
  * }
  */
@@ -31,12 +31,12 @@ final class RequirementGroupUpdateParams implements BaseModel
     /**
      * Reference for the customer.
      */
-    #[Optional]
-    public ?string $customer_reference;
+    #[Optional('customer_reference')]
+    public ?string $customerReference;
 
-    /** @var list<RegulatoryRequirement>|null $regulatory_requirements */
-    #[Optional(list: RegulatoryRequirement::class)]
-    public ?array $regulatory_requirements;
+    /** @var list<RegulatoryRequirement>|null $regulatoryRequirements */
+    #[Optional('regulatory_requirements', list: RegulatoryRequirement::class)]
+    public ?array $regulatoryRequirements;
 
     public function __construct()
     {
@@ -49,17 +49,17 @@ final class RequirementGroupUpdateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<RegulatoryRequirement|array{
-     *   field_value?: string|null, requirement_id?: string|null
-     * }> $regulatory_requirements
+     *   fieldValue?: string|null, requirementID?: string|null
+     * }> $regulatoryRequirements
      */
     public static function with(
-        ?string $customer_reference = null,
-        ?array $regulatory_requirements = null
+        ?string $customerReference = null,
+        ?array $regulatoryRequirements = null
     ): self {
         $obj = new self;
 
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
-        null !== $regulatory_requirements && $obj['regulatory_requirements'] = $regulatory_requirements;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
+        null !== $regulatoryRequirements && $obj['regulatoryRequirements'] = $regulatoryRequirements;
 
         return $obj;
     }
@@ -70,21 +70,21 @@ final class RequirementGroupUpdateParams implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }
 
     /**
      * @param list<RegulatoryRequirement|array{
-     *   field_value?: string|null, requirement_id?: string|null
+     *   fieldValue?: string|null, requirementID?: string|null
      * }> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements
     ): self {
         $obj = clone $this;
-        $obj['regulatory_requirements'] = $regulatoryRequirements;
+        $obj['regulatoryRequirements'] = $regulatoryRequirements;
 
         return $obj;
     }

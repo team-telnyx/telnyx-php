@@ -38,7 +38,7 @@ final class IPsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ips->create(['ip_address' => '192.168.0.0']);
+        $result = $this->client->ips->create(['ipAddress' => '192.168.0.0']);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(IPNewResponse::class, $result);
@@ -52,8 +52,8 @@ final class IPsTest extends TestCase
         }
 
         $result = $this->client->ips->create([
-            'ip_address' => '192.168.0.0',
-            'connection_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            'ipAddress' => '192.168.0.0',
+            'connectionID' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
             'port' => 5060,
         ]);
 
@@ -85,7 +85,7 @@ final class IPsTest extends TestCase
 
         $result = $this->client->ips->update(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            ['ip_address' => '192.168.0.0']
+            ['ipAddress' => '192.168.0.0']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -102,8 +102,8 @@ final class IPsTest extends TestCase
         $result = $this->client->ips->update(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
             [
-                'ip_address' => '192.168.0.0',
-                'connection_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+                'ipAddress' => '192.168.0.0',
+                'connectionID' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
                 'port' => 5060,
             ],
         );

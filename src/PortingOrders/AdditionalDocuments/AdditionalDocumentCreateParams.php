@@ -17,8 +17,8 @@ use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\Addi
  * @see Telnyx\Services\PortingOrders\AdditionalDocumentsService::create()
  *
  * @phpstan-type AdditionalDocumentCreateParamsShape = array{
- *   additional_documents?: list<AdditionalDocument|array{
- *     document_id?: string|null, document_type?: value-of<DocumentType>|null
+ *   additionalDocuments?: list<AdditionalDocument|array{
+ *     documentID?: string|null, documentType?: value-of<DocumentType>|null
  *   }>,
  * }
  */
@@ -28,9 +28,9 @@ final class AdditionalDocumentCreateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var list<AdditionalDocument>|null $additional_documents */
-    #[Optional(list: AdditionalDocument::class)]
-    public ?array $additional_documents;
+    /** @var list<AdditionalDocument>|null $additionalDocuments */
+    #[Optional('additional_documents', list: AdditionalDocument::class)]
+    public ?array $additionalDocuments;
 
     public function __construct()
     {
@@ -43,27 +43,27 @@ final class AdditionalDocumentCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<AdditionalDocument|array{
-     *   document_id?: string|null, document_type?: value-of<DocumentType>|null
-     * }> $additional_documents
+     *   documentID?: string|null, documentType?: value-of<DocumentType>|null
+     * }> $additionalDocuments
      */
-    public static function with(?array $additional_documents = null): self
+    public static function with(?array $additionalDocuments = null): self
     {
         $obj = new self;
 
-        null !== $additional_documents && $obj['additional_documents'] = $additional_documents;
+        null !== $additionalDocuments && $obj['additionalDocuments'] = $additionalDocuments;
 
         return $obj;
     }
 
     /**
      * @param list<AdditionalDocument|array{
-     *   document_id?: string|null, document_type?: value-of<DocumentType>|null
+     *   documentID?: string|null, documentType?: value-of<DocumentType>|null
      * }> $additionalDocuments
      */
     public function withAdditionalDocuments(array $additionalDocuments): self
     {
         $obj = clone $this;
-        $obj['additional_documents'] = $additionalDocuments;
+        $obj['additionalDocuments'] = $additionalDocuments;
 
         return $obj;
     }

@@ -36,10 +36,13 @@ final class MobilePushCredentialsTest extends TestCase
         }
 
         $result = $this->client->mobilePushCredentials->create([
-            'alias' => 'LucyIosCredential',
+            'alias' => 'LucyAndroidCredential',
             'certificate' => '-----BEGIN CERTIFICATE----- MIIGVDCCBTKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END CERTIFICATE-----',
-            'private_key' => '-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END RSA PRIVATE KEY-----',
-            'type' => 'ios',
+            'privateKey' => '-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END RSA PRIVATE KEY-----',
+            'type' => 'android',
+            'projectAccountJsonFile' => [
+                'private_key' => 'bar', 'client_email' => 'bar',
+            ],
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -54,10 +57,13 @@ final class MobilePushCredentialsTest extends TestCase
         }
 
         $result = $this->client->mobilePushCredentials->create([
-            'alias' => 'LucyIosCredential',
+            'alias' => 'LucyAndroidCredential',
             'certificate' => '-----BEGIN CERTIFICATE----- MIIGVDCCBTKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END CERTIFICATE-----',
-            'private_key' => '-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END RSA PRIVATE KEY-----',
-            'type' => 'ios',
+            'privateKey' => '-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END RSA PRIVATE KEY-----',
+            'type' => 'android',
+            'projectAccountJsonFile' => [
+                'private_key' => 'bar', 'client_email' => 'bar',
+            ],
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

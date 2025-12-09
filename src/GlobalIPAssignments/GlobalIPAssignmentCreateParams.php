@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\GlobalIPAssignmentsService::create()
  *
  * @phpstan-type GlobalIPAssignmentCreateParamsShape = array{
- *   global_ip_id?: string, is_in_maintenance?: bool, wireguard_peer_id?: string
+ *   globalIPID?: string, isInMaintenance?: bool, wireguardPeerID?: string
  * }
  */
 final class GlobalIPAssignmentCreateParams implements BaseModel
@@ -27,20 +27,20 @@ final class GlobalIPAssignmentCreateParams implements BaseModel
     /**
      * Global IP ID.
      */
-    #[Optional]
-    public ?string $global_ip_id;
+    #[Optional('global_ip_id')]
+    public ?string $globalIPID;
 
     /**
      * Enable/disable BGP announcement.
      */
-    #[Optional]
-    public ?bool $is_in_maintenance;
+    #[Optional('is_in_maintenance')]
+    public ?bool $isInMaintenance;
 
     /**
      * Wireguard peer ID.
      */
-    #[Optional]
-    public ?string $wireguard_peer_id;
+    #[Optional('wireguard_peer_id')]
+    public ?string $wireguardPeerID;
 
     public function __construct()
     {
@@ -53,15 +53,15 @@ final class GlobalIPAssignmentCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $global_ip_id = null,
-        ?bool $is_in_maintenance = null,
-        ?string $wireguard_peer_id = null,
+        ?string $globalIPID = null,
+        ?bool $isInMaintenance = null,
+        ?string $wireguardPeerID = null,
     ): self {
         $obj = new self;
 
-        null !== $global_ip_id && $obj['global_ip_id'] = $global_ip_id;
-        null !== $is_in_maintenance && $obj['is_in_maintenance'] = $is_in_maintenance;
-        null !== $wireguard_peer_id && $obj['wireguard_peer_id'] = $wireguard_peer_id;
+        null !== $globalIPID && $obj['globalIPID'] = $globalIPID;
+        null !== $isInMaintenance && $obj['isInMaintenance'] = $isInMaintenance;
+        null !== $wireguardPeerID && $obj['wireguardPeerID'] = $wireguardPeerID;
 
         return $obj;
     }
@@ -69,10 +69,10 @@ final class GlobalIPAssignmentCreateParams implements BaseModel
     /**
      * Global IP ID.
      */
-    public function withGlobalIPID(string $globalIPID): self
+    public function withGlobalIpid(string $globalIPID): self
     {
         $obj = clone $this;
-        $obj['global_ip_id'] = $globalIPID;
+        $obj['globalIPID'] = $globalIPID;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class GlobalIPAssignmentCreateParams implements BaseModel
     public function withIsInMaintenance(bool $isInMaintenance): self
     {
         $obj = clone $this;
-        $obj['is_in_maintenance'] = $isInMaintenance;
+        $obj['isInMaintenance'] = $isInMaintenance;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class GlobalIPAssignmentCreateParams implements BaseModel
     public function withWireguardPeerID(string $wireguardPeerID): self
     {
         $obj = clone $this;
-        $obj['wireguard_peer_id'] = $wireguardPeerID;
+        $obj['wireguardPeerID'] = $wireguardPeerID;
 
         return $obj;
     }

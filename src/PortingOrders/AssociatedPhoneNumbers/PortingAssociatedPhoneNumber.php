@@ -15,13 +15,13 @@ use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber\Pho
  * @phpstan-type PortingAssociatedPhoneNumberShape = array{
  *   id?: string|null,
  *   action?: value-of<Action>|null,
- *   country_code?: string|null,
- *   created_at?: \DateTimeInterface|null,
- *   phone_number_range?: PhoneNumberRange|null,
- *   phone_number_type?: value-of<PhoneNumberType>|null,
- *   porting_order_id?: string|null,
- *   record_type?: string|null,
- *   updated_at?: \DateTimeInterface|null,
+ *   countryCode?: string|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   phoneNumberRange?: PhoneNumberRange|null,
+ *   phoneNumberType?: value-of<PhoneNumberType>|null,
+ *   portingOrderID?: string|null,
+ *   recordType?: string|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class PortingAssociatedPhoneNumber implements BaseModel
@@ -46,46 +46,46 @@ final class PortingAssociatedPhoneNumber implements BaseModel
     /**
      * Specifies the country code for this associated phone number. It is a two-letter ISO 3166-1 alpha-2 country code.
      */
-    #[Optional]
-    public ?string $country_code;
+    #[Optional('country_code')]
+    public ?string $countryCode;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
     /**
      * Specifies the phone number range for this associated phone number.
      */
-    #[Optional]
-    public ?PhoneNumberRange $phone_number_range;
+    #[Optional('phone_number_range')]
+    public ?PhoneNumberRange $phoneNumberRange;
 
     /**
      * Specifies the phone number type for this associated phone number.
      *
-     * @var value-of<PhoneNumberType>|null $phone_number_type
+     * @var value-of<PhoneNumberType>|null $phoneNumberType
      */
-    #[Optional(enum: PhoneNumberType::class)]
-    public ?string $phone_number_type;
+    #[Optional('phone_number_type', enum: PhoneNumberType::class)]
+    public ?string $phoneNumberType;
 
     /**
      * Identifies the porting order associated with this phone number.
      */
-    #[Optional]
-    public ?string $porting_order_id;
+    #[Optional('porting_order_id')]
+    public ?string $portingOrderID;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * ISO 8601 formatted date indicating when the resource was last updated.
      */
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
     {
@@ -99,32 +99,32 @@ final class PortingAssociatedPhoneNumber implements BaseModel
      *
      * @param Action|value-of<Action> $action
      * @param PhoneNumberRange|array{
-     *   end_at?: string|null, start_at?: string|null
-     * } $phone_number_range
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phone_number_type
+     *   endAt?: string|null, startAt?: string|null
+     * } $phoneNumberRange
+     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
      */
     public static function with(
         ?string $id = null,
         Action|string|null $action = null,
-        ?string $country_code = null,
-        ?\DateTimeInterface $created_at = null,
-        PhoneNumberRange|array|null $phone_number_range = null,
-        PhoneNumberType|string|null $phone_number_type = null,
-        ?string $porting_order_id = null,
-        ?string $record_type = null,
-        ?\DateTimeInterface $updated_at = null,
+        ?string $countryCode = null,
+        ?\DateTimeInterface $createdAt = null,
+        PhoneNumberRange|array|null $phoneNumberRange = null,
+        PhoneNumberType|string|null $phoneNumberType = null,
+        ?string $portingOrderID = null,
+        ?string $recordType = null,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
         null !== $action && $obj['action'] = $action;
-        null !== $country_code && $obj['country_code'] = $country_code;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $phone_number_range && $obj['phone_number_range'] = $phone_number_range;
-        null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
-        null !== $porting_order_id && $obj['porting_order_id'] = $porting_order_id;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $countryCode && $obj['countryCode'] = $countryCode;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $phoneNumberRange && $obj['phoneNumberRange'] = $phoneNumberRange;
+        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
+        null !== $portingOrderID && $obj['portingOrderID'] = $portingOrderID;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class PortingAssociatedPhoneNumber implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj['country_code'] = $countryCode;
+        $obj['countryCode'] = $countryCode;
 
         return $obj;
     }
@@ -170,7 +170,7 @@ final class PortingAssociatedPhoneNumber implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -179,14 +179,14 @@ final class PortingAssociatedPhoneNumber implements BaseModel
      * Specifies the phone number range for this associated phone number.
      *
      * @param PhoneNumberRange|array{
-     *   end_at?: string|null, start_at?: string|null
+     *   endAt?: string|null, startAt?: string|null
      * } $phoneNumberRange
      */
     public function withPhoneNumberRange(
         PhoneNumberRange|array $phoneNumberRange
     ): self {
         $obj = clone $this;
-        $obj['phone_number_range'] = $phoneNumberRange;
+        $obj['phoneNumberRange'] = $phoneNumberRange;
 
         return $obj;
     }
@@ -200,7 +200,7 @@ final class PortingAssociatedPhoneNumber implements BaseModel
         PhoneNumberType|string $phoneNumberType
     ): self {
         $obj = clone $this;
-        $obj['phone_number_type'] = $phoneNumberType;
+        $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }
@@ -211,7 +211,7 @@ final class PortingAssociatedPhoneNumber implements BaseModel
     public function withPortingOrderID(string $portingOrderID): self
     {
         $obj = clone $this;
-        $obj['porting_order_id'] = $portingOrderID;
+        $obj['portingOrderID'] = $portingOrderID;
 
         return $obj;
     }
@@ -222,7 +222,7 @@ final class PortingAssociatedPhoneNumber implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -233,7 +233,7 @@ final class PortingAssociatedPhoneNumber implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

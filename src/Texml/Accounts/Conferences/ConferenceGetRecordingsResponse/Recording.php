@@ -12,20 +12,20 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording\
 
 /**
  * @phpstan-type RecordingShape = array{
- *   account_sid?: string|null,
- *   call_sid?: string|null,
+ *   accountSid?: string|null,
+ *   callSid?: string|null,
  *   channels?: int|null,
- *   conference_sid?: string|null,
- *   date_created?: string|null,
- *   date_updated?: string|null,
+ *   conferenceSid?: string|null,
+ *   dateCreated?: string|null,
+ *   dateUpdated?: string|null,
  *   duration?: int|null,
- *   error_code?: string|null,
- *   media_url?: string|null,
+ *   errorCode?: string|null,
+ *   mediaURL?: string|null,
  *   sid?: string|null,
  *   source?: value-of<Source>|null,
- *   start_time?: string|null,
+ *   startTime?: string|null,
  *   status?: value-of<Status>|null,
- *   subresource_uris?: array<string,mixed>|null,
+ *   subresourceUris?: array<string,mixed>|null,
  *   uri?: string|null,
  * }
  */
@@ -37,14 +37,14 @@ final class Recording implements BaseModel
     /**
      * The id of the account the resource belongs to.
      */
-    #[Optional]
-    public ?string $account_sid;
+    #[Optional('account_sid')]
+    public ?string $accountSid;
 
     /**
      * The identifier of the related participant's call.
      */
-    #[Optional]
-    public ?string $call_sid;
+    #[Optional('call_sid')]
+    public ?string $callSid;
 
     /**
      * The number of channels in the recording.
@@ -55,20 +55,20 @@ final class Recording implements BaseModel
     /**
      * The identifier of the related conference.
      */
-    #[Optional]
-    public ?string $conference_sid;
+    #[Optional('conference_sid')]
+    public ?string $conferenceSid;
 
     /**
      * The timestamp of when the resource was created.
      */
-    #[Optional]
-    public ?string $date_created;
+    #[Optional('date_created')]
+    public ?string $dateCreated;
 
     /**
      * The timestamp of when the resource was last updated.
      */
-    #[Optional]
-    public ?string $date_updated;
+    #[Optional('date_updated')]
+    public ?string $dateUpdated;
 
     /**
      * Duratin of the recording in seconds.
@@ -79,14 +79,14 @@ final class Recording implements BaseModel
     /**
      * The recording error, if any.
      */
-    #[Optional]
-    public ?string $error_code;
+    #[Optional('error_code')]
+    public ?string $errorCode;
 
     /**
      * The URL to use to download the recording.
      */
-    #[Optional]
-    public ?string $media_url;
+    #[Optional('media_url')]
+    public ?string $mediaURL;
 
     /**
      * The unique identifier of the recording.
@@ -105,8 +105,8 @@ final class Recording implements BaseModel
     /**
      * The timestamp of when the recording was started.
      */
-    #[Optional]
-    public ?string $start_time;
+    #[Optional('start_time')]
+    public ?string $startTime;
 
     /**
      * The status of the recording.
@@ -119,10 +119,10 @@ final class Recording implements BaseModel
     /**
      * A list of related resources identified by their relative URIs.
      *
-     * @var array<string,mixed>|null $subresource_uris
+     * @var array<string,mixed>|null $subresourceUris
      */
-    #[Optional(map: 'mixed')]
-    public ?array $subresource_uris;
+    #[Optional('subresource_uris', map: 'mixed')]
+    public ?array $subresourceUris;
 
     /**
      * The relative URI for this recording.
@@ -142,41 +142,41 @@ final class Recording implements BaseModel
      *
      * @param Source|value-of<Source> $source
      * @param Status|value-of<Status> $status
-     * @param array<string,mixed> $subresource_uris
+     * @param array<string,mixed> $subresourceUris
      */
     public static function with(
-        ?string $account_sid = null,
-        ?string $call_sid = null,
+        ?string $accountSid = null,
+        ?string $callSid = null,
         ?int $channels = null,
-        ?string $conference_sid = null,
-        ?string $date_created = null,
-        ?string $date_updated = null,
+        ?string $conferenceSid = null,
+        ?string $dateCreated = null,
+        ?string $dateUpdated = null,
         ?int $duration = null,
-        ?string $error_code = null,
-        ?string $media_url = null,
+        ?string $errorCode = null,
+        ?string $mediaURL = null,
         ?string $sid = null,
         Source|string|null $source = null,
-        ?string $start_time = null,
+        ?string $startTime = null,
         Status|string|null $status = null,
-        ?array $subresource_uris = null,
+        ?array $subresourceUris = null,
         ?string $uri = null,
     ): self {
         $obj = new self;
 
-        null !== $account_sid && $obj['account_sid'] = $account_sid;
-        null !== $call_sid && $obj['call_sid'] = $call_sid;
+        null !== $accountSid && $obj['accountSid'] = $accountSid;
+        null !== $callSid && $obj['callSid'] = $callSid;
         null !== $channels && $obj['channels'] = $channels;
-        null !== $conference_sid && $obj['conference_sid'] = $conference_sid;
-        null !== $date_created && $obj['date_created'] = $date_created;
-        null !== $date_updated && $obj['date_updated'] = $date_updated;
+        null !== $conferenceSid && $obj['conferenceSid'] = $conferenceSid;
+        null !== $dateCreated && $obj['dateCreated'] = $dateCreated;
+        null !== $dateUpdated && $obj['dateUpdated'] = $dateUpdated;
         null !== $duration && $obj['duration'] = $duration;
-        null !== $error_code && $obj['error_code'] = $error_code;
-        null !== $media_url && $obj['media_url'] = $media_url;
+        null !== $errorCode && $obj['errorCode'] = $errorCode;
+        null !== $mediaURL && $obj['mediaURL'] = $mediaURL;
         null !== $sid && $obj['sid'] = $sid;
         null !== $source && $obj['source'] = $source;
-        null !== $start_time && $obj['start_time'] = $start_time;
+        null !== $startTime && $obj['startTime'] = $startTime;
         null !== $status && $obj['status'] = $status;
-        null !== $subresource_uris && $obj['subresource_uris'] = $subresource_uris;
+        null !== $subresourceUris && $obj['subresourceUris'] = $subresourceUris;
         null !== $uri && $obj['uri'] = $uri;
 
         return $obj;
@@ -188,7 +188,7 @@ final class Recording implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj['account_sid'] = $accountSid;
+        $obj['accountSid'] = $accountSid;
 
         return $obj;
     }
@@ -199,7 +199,7 @@ final class Recording implements BaseModel
     public function withCallSid(string $callSid): self
     {
         $obj = clone $this;
-        $obj['call_sid'] = $callSid;
+        $obj['callSid'] = $callSid;
 
         return $obj;
     }
@@ -221,7 +221,7 @@ final class Recording implements BaseModel
     public function withConferenceSid(string $conferenceSid): self
     {
         $obj = clone $this;
-        $obj['conference_sid'] = $conferenceSid;
+        $obj['conferenceSid'] = $conferenceSid;
 
         return $obj;
     }
@@ -232,7 +232,7 @@ final class Recording implements BaseModel
     public function withDateCreated(string $dateCreated): self
     {
         $obj = clone $this;
-        $obj['date_created'] = $dateCreated;
+        $obj['dateCreated'] = $dateCreated;
 
         return $obj;
     }
@@ -243,7 +243,7 @@ final class Recording implements BaseModel
     public function withDateUpdated(string $dateUpdated): self
     {
         $obj = clone $this;
-        $obj['date_updated'] = $dateUpdated;
+        $obj['dateUpdated'] = $dateUpdated;
 
         return $obj;
     }
@@ -265,7 +265,7 @@ final class Recording implements BaseModel
     public function withErrorCode(string $errorCode): self
     {
         $obj = clone $this;
-        $obj['error_code'] = $errorCode;
+        $obj['errorCode'] = $errorCode;
 
         return $obj;
     }
@@ -276,7 +276,7 @@ final class Recording implements BaseModel
     public function withMediaURL(string $mediaURL): self
     {
         $obj = clone $this;
-        $obj['media_url'] = $mediaURL;
+        $obj['mediaURL'] = $mediaURL;
 
         return $obj;
     }
@@ -311,7 +311,7 @@ final class Recording implements BaseModel
     public function withStartTime(string $startTime): self
     {
         $obj = clone $this;
-        $obj['start_time'] = $startTime;
+        $obj['startTime'] = $startTime;
 
         return $obj;
     }
@@ -337,7 +337,7 @@ final class Recording implements BaseModel
     public function withSubresourceUris(array $subresourceUris): self
     {
         $obj = clone $this;
-        $obj['subresource_uris'] = $subresourceUris;
+        $obj['subresourceUris'] = $subresourceUris;
 
         return $obj;
     }

@@ -13,15 +13,15 @@ use Telnyx\ManagedAccounts\ManagedAccountListResponse\Data\RecordType;
 /**
  * @phpstan-type DataShape = array{
  *   id: string,
- *   api_user: string,
- *   created_at: string,
+ *   apiUser: string,
+ *   createdAt: string,
  *   email: string,
- *   manager_account_id: string,
- *   record_type: value-of<RecordType>,
- *   updated_at: string,
- *   managed_account_allow_custom_pricing?: bool|null,
- *   organization_name?: string|null,
- *   rollup_billing?: bool|null,
+ *   managerAccountID: string,
+ *   recordType: value-of<RecordType>,
+ *   updatedAt: string,
+ *   managedAccountAllowCustomPricing?: bool|null,
+ *   organizationName?: string|null,
+ *   rollupBilling?: bool|null,
  * }
  */
 final class Data implements BaseModel
@@ -38,14 +38,14 @@ final class Data implements BaseModel
     /**
      * The manager account's email, which serves as the V1 API user identifier.
      */
-    #[Required]
-    public string $api_user;
+    #[Required('api_user')]
+    public string $apiUser;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Required]
-    public string $created_at;
+    #[Required('created_at')]
+    public string $createdAt;
 
     /**
      * The managed account's email.
@@ -56,40 +56,40 @@ final class Data implements BaseModel
     /**
      * The ID of the manager account associated with the managed account.
      */
-    #[Required]
-    public string $manager_account_id;
+    #[Required('manager_account_id')]
+    public string $managerAccountID;
 
     /**
      * Identifies the type of the resource.
      *
-     * @var value-of<RecordType> $record_type
+     * @var value-of<RecordType> $recordType
      */
-    #[Required(enum: RecordType::class)]
-    public string $record_type;
+    #[Required('record_type', enum: RecordType::class)]
+    public string $recordType;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Required]
-    public string $updated_at;
+    #[Required('updated_at')]
+    public string $updatedAt;
 
     /**
      * Boolean value that indicates if the managed account is able to have custom pricing set for it or not. If false, uses the pricing of the manager account. Defaults to false. There may be time lag between when the value is changed and pricing changes take effect.
      */
-    #[Optional]
-    public ?bool $managed_account_allow_custom_pricing;
+    #[Optional('managed_account_allow_custom_pricing')]
+    public ?bool $managedAccountAllowCustomPricing;
 
     /**
      * The organization the managed account is associated with.
      */
-    #[Optional]
-    public ?string $organization_name;
+    #[Optional('organization_name')]
+    public ?string $organizationName;
 
     /**
      * Boolean value that indicates if the billing information and charges to the managed account "roll up" to the manager account. If true, the managed account will not have its own balance and will use the shared balance with the manager account. This value cannot be changed after account creation without going through Telnyx support as changes require manual updates to the account ledger. Defaults to false.
      */
-    #[Optional]
-    public ?bool $rollup_billing;
+    #[Optional('rollup_billing')]
+    public ?bool $rollupBilling;
 
     /**
      * `new Data()` is missing required properties by the API.
@@ -98,12 +98,12 @@ final class Data implements BaseModel
      * ```
      * Data::with(
      *   id: ...,
-     *   api_user: ...,
-     *   created_at: ...,
+     *   apiUser: ...,
+     *   createdAt: ...,
      *   email: ...,
-     *   manager_account_id: ...,
-     *   record_type: ...,
-     *   updated_at: ...,
+     *   managerAccountID: ...,
+     *   recordType: ...,
+     *   updatedAt: ...,
      * )
      * ```
      *
@@ -130,33 +130,33 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $record_type
+     * @param RecordType|value-of<RecordType> $recordType
      */
     public static function with(
         string $id,
-        string $api_user,
-        string $created_at,
+        string $apiUser,
+        string $createdAt,
         string $email,
-        string $manager_account_id,
-        RecordType|string $record_type,
-        string $updated_at,
-        ?bool $managed_account_allow_custom_pricing = null,
-        ?string $organization_name = null,
-        ?bool $rollup_billing = null,
+        string $managerAccountID,
+        RecordType|string $recordType,
+        string $updatedAt,
+        ?bool $managedAccountAllowCustomPricing = null,
+        ?string $organizationName = null,
+        ?bool $rollupBilling = null,
     ): self {
         $obj = new self;
 
         $obj['id'] = $id;
-        $obj['api_user'] = $api_user;
-        $obj['created_at'] = $created_at;
+        $obj['apiUser'] = $apiUser;
+        $obj['createdAt'] = $createdAt;
         $obj['email'] = $email;
-        $obj['manager_account_id'] = $manager_account_id;
-        $obj['record_type'] = $record_type;
-        $obj['updated_at'] = $updated_at;
+        $obj['managerAccountID'] = $managerAccountID;
+        $obj['recordType'] = $recordType;
+        $obj['updatedAt'] = $updatedAt;
 
-        null !== $managed_account_allow_custom_pricing && $obj['managed_account_allow_custom_pricing'] = $managed_account_allow_custom_pricing;
-        null !== $organization_name && $obj['organization_name'] = $organization_name;
-        null !== $rollup_billing && $obj['rollup_billing'] = $rollup_billing;
+        null !== $managedAccountAllowCustomPricing && $obj['managedAccountAllowCustomPricing'] = $managedAccountAllowCustomPricing;
+        null !== $organizationName && $obj['organizationName'] = $organizationName;
+        null !== $rollupBilling && $obj['rollupBilling'] = $rollupBilling;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class Data implements BaseModel
     public function withAPIUser(string $apiUser): self
     {
         $obj = clone $this;
-        $obj['api_user'] = $apiUser;
+        $obj['apiUser'] = $apiUser;
 
         return $obj;
     }
@@ -189,7 +189,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -211,7 +211,7 @@ final class Data implements BaseModel
     public function withManagerAccountID(string $managerAccountID): self
     {
         $obj = clone $this;
-        $obj['manager_account_id'] = $managerAccountID;
+        $obj['managerAccountID'] = $managerAccountID;
 
         return $obj;
     }
@@ -224,7 +224,7 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -235,7 +235,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -247,7 +247,7 @@ final class Data implements BaseModel
         bool $managedAccountAllowCustomPricing
     ): self {
         $obj = clone $this;
-        $obj['managed_account_allow_custom_pricing'] = $managedAccountAllowCustomPricing;
+        $obj['managedAccountAllowCustomPricing'] = $managedAccountAllowCustomPricing;
 
         return $obj;
     }
@@ -258,7 +258,7 @@ final class Data implements BaseModel
     public function withOrganizationName(string $organizationName): self
     {
         $obj = clone $this;
-        $obj['organization_name'] = $organizationName;
+        $obj['organizationName'] = $organizationName;
 
         return $obj;
     }
@@ -269,7 +269,7 @@ final class Data implements BaseModel
     public function withRollupBilling(bool $rollupBilling): self
     {
         $obj = clone $this;
-        $obj['rollup_billing'] = $rollupBilling;
+        $obj['rollupBilling'] = $rollupBilling;
 
         return $obj;
     }

@@ -30,14 +30,14 @@ final class RecordingsJsonService implements RecordingsJsonContract
      * Starts recording with specified parameters for call idientified by call_sid.
      *
      * @param array{
-     *   account_sid: string,
-     *   PlayBeep?: bool,
-     *   RecordingChannels?: 'single'|'dual'|RecordingChannels,
-     *   RecordingStatusCallback?: string,
-     *   RecordingStatusCallbackEvent?: string,
-     *   RecordingStatusCallbackMethod?: 'GET'|'POST'|RecordingStatusCallbackMethod,
-     *   RecordingTrack?: 'inbound'|'outbound'|'both'|RecordingTrack,
-     *   SendRecordingUrl?: bool,
+     *   accountSid: string,
+     *   playBeep?: bool,
+     *   recordingChannels?: 'single'|'dual'|RecordingChannels,
+     *   recordingStatusCallback?: string,
+     *   recordingStatusCallbackEvent?: string,
+     *   recordingStatusCallbackMethod?: 'GET'|'POST'|RecordingStatusCallbackMethod,
+     *   recordingTrack?: 'inbound'|'outbound'|'both'|RecordingTrack,
+     *   sendRecordingURL?: bool,
      * }|RecordingsJsonRecordingsJsonParams $params
      *
      * @throws APIException
@@ -51,8 +51,8 @@ final class RecordingsJsonService implements RecordingsJsonContract
             $params,
             $requestOptions,
         );
-        $accountSid = $parsed['account_sid'];
-        unset($parsed['account_sid']);
+        $accountSid = $parsed['accountSid'];
+        unset($parsed['accountSid']);
 
         /** @var BaseResponse<RecordingsJsonRecordingsJsonResponse> */
         $response = $this->client->request(
@@ -61,7 +61,7 @@ final class RecordingsJsonService implements RecordingsJsonContract
                 'texml/Accounts/%1$s/Calls/%2$s/Recordings.json', $accountSid, $callSid,
             ],
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
-            body: (object) array_diff_key($parsed, ['account_sid']),
+            body: (object) array_diff_key($parsed, ['accountSid']),
             options: $options,
             convert: RecordingsJsonRecordingsJsonResponse::class,
         );
@@ -75,7 +75,7 @@ final class RecordingsJsonService implements RecordingsJsonContract
      * Returns recordings for a call identified by call_sid.
      *
      * @param array{
-     *   account_sid: string
+     *   accountSid: string
      * }|RecordingsJsonRetrieveRecordingsJsonParams $params
      *
      * @throws APIException
@@ -89,8 +89,8 @@ final class RecordingsJsonService implements RecordingsJsonContract
             $params,
             $requestOptions,
         );
-        $accountSid = $parsed['account_sid'];
-        unset($parsed['account_sid']);
+        $accountSid = $parsed['accountSid'];
+        unset($parsed['accountSid']);
 
         /** @var BaseResponse<RecordingsJsonGetRecordingsJsonResponse> */
         $response = $this->client->request(

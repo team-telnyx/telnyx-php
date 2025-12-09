@@ -28,17 +28,17 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type ActionSpeakParamsShape = array{
  *   payload: string,
  *   voice: string,
- *   client_state?: string,
- *   command_id?: string,
+ *   clientState?: string,
+ *   commandID?: string,
  *   language?: Language|value-of<Language>,
- *   payload_type?: PayloadType|value-of<PayloadType>,
- *   service_level?: ServiceLevel|value-of<ServiceLevel>,
+ *   payloadType?: PayloadType|value-of<PayloadType>,
+ *   serviceLevel?: ServiceLevel|value-of<ServiceLevel>,
  *   stop?: string,
- *   voice_settings?: ElevenLabsVoiceSettings|array{
- *     type: value-of<Type>, api_key_ref?: string|null
+ *   voiceSettings?: ElevenLabsVoiceSettings|array{
+ *     type: value-of<Type>, apiKeyRef?: string|null
  *   }|TelnyxVoiceSettings|array{
  *     type: value-of<\Telnyx\Calls\Actions\TelnyxVoiceSettings\Type>,
- *     voice_speed?: float|null,
+ *     voiceSpeed?: float|null,
  *   }|AwsVoiceSettings|array{
  *     type: value-of<\Telnyx\Calls\Actions\AwsVoiceSettings\Type>
  *   },
@@ -75,14 +75,14 @@ final class ActionSpeakParams implements BaseModel
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Optional]
-    public ?string $client_state;
+    #[Optional('client_state')]
+    public ?string $clientState;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Optional]
-    public ?string $command_id;
+    #[Optional('command_id')]
+    public ?string $commandID;
 
     /**
      * The language you want spoken. This parameter is ignored when a `Polly.*` voice is specified.
@@ -95,18 +95,18 @@ final class ActionSpeakParams implements BaseModel
     /**
      * The type of the provided payload. The payload can either be plain text, or Speech Synthesis Markup Language (SSML).
      *
-     * @var value-of<PayloadType>|null $payload_type
+     * @var value-of<PayloadType>|null $payloadType
      */
-    #[Optional(enum: PayloadType::class)]
-    public ?string $payload_type;
+    #[Optional('payload_type', enum: PayloadType::class)]
+    public ?string $payloadType;
 
     /**
      * This parameter impacts speech quality, language options and payload types. When using `basic`, only the `en-US` language and payload type `text` are allowed.
      *
-     * @var value-of<ServiceLevel>|null $service_level
+     * @var value-of<ServiceLevel>|null $serviceLevel
      */
-    #[Optional(enum: ServiceLevel::class)]
-    public ?string $service_level;
+    #[Optional('service_level', enum: ServiceLevel::class)]
+    public ?string $serviceLevel;
 
     /**
      * When specified, it stops the current audio being played. Specify `current` to stop the current audio being played, and to play the next file in the queue. Specify `all` to stop the current audio file being played and to also clear all audio files from the queue.
@@ -117,8 +117,8 @@ final class ActionSpeakParams implements BaseModel
     /**
      * The settings associated with the voice selected.
      */
-    #[Optional(union: VoiceSettings::class)]
-    public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|null $voice_settings;
+    #[Optional('voice_settings', union: VoiceSettings::class)]
+    public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|null $voiceSettings;
 
     /**
      * `new ActionSpeakParams()` is missing required properties by the API.
@@ -145,40 +145,40 @@ final class ActionSpeakParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Language|value-of<Language> $language
-     * @param PayloadType|value-of<PayloadType> $payload_type
-     * @param ServiceLevel|value-of<ServiceLevel> $service_level
+     * @param PayloadType|value-of<PayloadType> $payloadType
+     * @param ServiceLevel|value-of<ServiceLevel> $serviceLevel
      * @param ElevenLabsVoiceSettings|array{
-     *   type: value-of<Type>, api_key_ref?: string|null
+     *   type: value-of<Type>, apiKeyRef?: string|null
      * }|TelnyxVoiceSettings|array{
      *   type: value-of<TelnyxVoiceSettings\Type>,
-     *   voice_speed?: float|null,
+     *   voiceSpeed?: float|null,
      * }|AwsVoiceSettings|array{
      *   type: value-of<AwsVoiceSettings\Type>
-     * } $voice_settings
+     * } $voiceSettings
      */
     public static function with(
         string $payload,
         string $voice,
-        ?string $client_state = null,
-        ?string $command_id = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
         Language|string|null $language = null,
-        PayloadType|string|null $payload_type = null,
-        ServiceLevel|string|null $service_level = null,
+        PayloadType|string|null $payloadType = null,
+        ServiceLevel|string|null $serviceLevel = null,
         ?string $stop = null,
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|null $voice_settings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|null $voiceSettings = null,
     ): self {
         $obj = new self;
 
         $obj['payload'] = $payload;
         $obj['voice'] = $voice;
 
-        null !== $client_state && $obj['client_state'] = $client_state;
-        null !== $command_id && $obj['command_id'] = $command_id;
+        null !== $clientState && $obj['clientState'] = $clientState;
+        null !== $commandID && $obj['commandID'] = $commandID;
         null !== $language && $obj['language'] = $language;
-        null !== $payload_type && $obj['payload_type'] = $payload_type;
-        null !== $service_level && $obj['service_level'] = $service_level;
+        null !== $payloadType && $obj['payloadType'] = $payloadType;
+        null !== $serviceLevel && $obj['serviceLevel'] = $serviceLevel;
         null !== $stop && $obj['stop'] = $stop;
-        null !== $voice_settings && $obj['voice_settings'] = $voice_settings;
+        null !== $voiceSettings && $obj['voiceSettings'] = $voiceSettings;
 
         return $obj;
     }
@@ -221,7 +221,7 @@ final class ActionSpeakParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj['client_state'] = $clientState;
+        $obj['clientState'] = $clientState;
 
         return $obj;
     }
@@ -232,7 +232,7 @@ final class ActionSpeakParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj['command_id'] = $commandID;
+        $obj['commandID'] = $commandID;
 
         return $obj;
     }
@@ -258,7 +258,7 @@ final class ActionSpeakParams implements BaseModel
     public function withPayloadType(PayloadType|string $payloadType): self
     {
         $obj = clone $this;
-        $obj['payload_type'] = $payloadType;
+        $obj['payloadType'] = $payloadType;
 
         return $obj;
     }
@@ -271,7 +271,7 @@ final class ActionSpeakParams implements BaseModel
     public function withServiceLevel(ServiceLevel|string $serviceLevel): self
     {
         $obj = clone $this;
-        $obj['service_level'] = $serviceLevel;
+        $obj['serviceLevel'] = $serviceLevel;
 
         return $obj;
     }
@@ -291,10 +291,10 @@ final class ActionSpeakParams implements BaseModel
      * The settings associated with the voice selected.
      *
      * @param ElevenLabsVoiceSettings|array{
-     *   type: value-of<Type>, api_key_ref?: string|null
+     *   type: value-of<Type>, apiKeyRef?: string|null
      * }|TelnyxVoiceSettings|array{
      *   type: value-of<TelnyxVoiceSettings\Type>,
-     *   voice_speed?: float|null,
+     *   voiceSpeed?: float|null,
      * }|AwsVoiceSettings|array{
      *   type: value-of<AwsVoiceSettings\Type>
      * } $voiceSettings
@@ -303,7 +303,7 @@ final class ActionSpeakParams implements BaseModel
         ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings $voiceSettings,
     ): self {
         $obj = clone $this;
-        $obj['voice_settings'] = $voiceSettings;
+        $obj['voiceSettings'] = $voiceSettings;
 
         return $obj;
     }

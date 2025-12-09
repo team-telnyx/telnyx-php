@@ -29,7 +29,7 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
      * Create New Phone Number Campaign
      *
      * @param array{
-     *   campaignId: string, phoneNumber: string
+     *   campaignID: string, phoneNumber: string
      * }|PhoneNumberCampaignCreateParams $params
      *
      * @throws APIException
@@ -83,7 +83,7 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
      * Create New Phone Number Campaign
      *
      * @param array{
-     *   campaignId: string, phoneNumber: string
+     *   campaignID: string, phoneNumber: string
      * }|PhoneNumberCampaignUpdateParams $params
      *
      * @throws APIException
@@ -117,10 +117,10 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
      *
      * @param array{
      *   filter?: array{
-     *     tcr_brand_id?: string,
-     *     tcr_campaign_id?: string,
-     *     telnyx_brand_id?: string,
-     *     telnyx_campaign_id?: string,
+     *     tcrBrandID?: string,
+     *     tcrCampaignID?: string,
+     *     telnyxBrandID?: string,
+     *     telnyxCampaignID?: string,
      *   },
      *   page?: int,
      *   recordsPerPage?: int,

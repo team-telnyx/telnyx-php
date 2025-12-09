@@ -10,9 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type IssuedByShape = array{
- *   common_name?: string|null,
+ *   commonName?: string|null,
  *   organization?: string|null,
- *   organization_unit?: string|null,
+ *   organizationUnit?: string|null,
  * }
  */
 final class IssuedBy implements BaseModel
@@ -23,8 +23,8 @@ final class IssuedBy implements BaseModel
     /**
      * The common name of the entity the certificate was issued by.
      */
-    #[Optional]
-    public ?string $common_name;
+    #[Optional('common_name')]
+    public ?string $commonName;
 
     /**
      * The organization the certificate was issued by.
@@ -35,8 +35,8 @@ final class IssuedBy implements BaseModel
     /**
      * The organizational unit the certificate was issued by.
      */
-    #[Optional]
-    public ?string $organization_unit;
+    #[Optional('organization_unit')]
+    public ?string $organizationUnit;
 
     public function __construct()
     {
@@ -49,15 +49,15 @@ final class IssuedBy implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $common_name = null,
+        ?string $commonName = null,
         ?string $organization = null,
-        ?string $organization_unit = null,
+        ?string $organizationUnit = null,
     ): self {
         $obj = new self;
 
-        null !== $common_name && $obj['common_name'] = $common_name;
+        null !== $commonName && $obj['commonName'] = $commonName;
         null !== $organization && $obj['organization'] = $organization;
-        null !== $organization_unit && $obj['organization_unit'] = $organization_unit;
+        null !== $organizationUnit && $obj['organizationUnit'] = $organizationUnit;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class IssuedBy implements BaseModel
     public function withCommonName(string $commonName): self
     {
         $obj = clone $this;
-        $obj['common_name'] = $commonName;
+        $obj['commonName'] = $commonName;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class IssuedBy implements BaseModel
     public function withOrganizationUnit(string $organizationUnit): self
     {
         $obj = clone $this;
-        $obj['organization_unit'] = $organizationUnit;
+        $obj['organizationUnit'] = $organizationUnit;
 
         return $obj;
     }

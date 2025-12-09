@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\ShortCodesService::update()
  *
  * @phpstan-type ShortCodeUpdateParamsShape = array{
- *   messaging_profile_id: string, tags?: list<string>
+ *   messagingProfileID: string, tags?: list<string>
  * }
  */
 final class ShortCodeUpdateParams implements BaseModel
@@ -29,8 +29,8 @@ final class ShortCodeUpdateParams implements BaseModel
     /**
      * Unique identifier for a messaging profile.
      */
-    #[Required]
-    public string $messaging_profile_id;
+    #[Required('messaging_profile_id')]
+    public string $messagingProfileID;
 
     /** @var list<string>|null $tags */
     #[Optional(list: 'string')]
@@ -41,7 +41,7 @@ final class ShortCodeUpdateParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * ShortCodeUpdateParams::with(messaging_profile_id: ...)
+     * ShortCodeUpdateParams::with(messagingProfileID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -63,12 +63,12 @@ final class ShortCodeUpdateParams implements BaseModel
      * @param list<string> $tags
      */
     public static function with(
-        string $messaging_profile_id,
+        string $messagingProfileID,
         ?array $tags = null
     ): self {
         $obj = new self;
 
-        $obj['messaging_profile_id'] = $messaging_profile_id;
+        $obj['messagingProfileID'] = $messagingProfileID;
 
         null !== $tags && $obj['tags'] = $tags;
 
@@ -81,7 +81,7 @@ final class ShortCodeUpdateParams implements BaseModel
     public function withMessagingProfileID(string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj['messaging_profile_id'] = $messagingProfileID;
+        $obj['messagingProfileID'] = $messagingProfileID;
 
         return $obj;
     }

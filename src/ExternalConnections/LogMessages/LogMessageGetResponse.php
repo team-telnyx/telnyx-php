@@ -13,7 +13,7 @@ use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse\LogMessage\Sour
 
 /**
  * @phpstan-type LogMessageGetResponseShape = array{
- *   log_messages?: list<LogMessage>|null
+ *   logMessages?: list<LogMessage>|null
  * }
  */
 final class LogMessageGetResponse implements BaseModel
@@ -21,9 +21,9 @@ final class LogMessageGetResponse implements BaseModel
     /** @use SdkModel<LogMessageGetResponseShape> */
     use SdkModel;
 
-    /** @var list<LogMessage>|null $log_messages */
-    #[Optional(list: LogMessage::class)]
-    public ?array $log_messages;
+    /** @var list<LogMessage>|null $logMessages */
+    #[Optional('log_messages', list: LogMessage::class)]
+    public ?array $logMessages;
 
     public function __construct()
     {
@@ -41,13 +41,13 @@ final class LogMessageGetResponse implements BaseModel
      *   detail?: string|null,
      *   meta?: Meta|null,
      *   source?: Source|null,
-     * }> $log_messages
+     * }> $logMessages
      */
-    public static function with(?array $log_messages = null): self
+    public static function with(?array $logMessages = null): self
     {
         $obj = new self;
 
-        null !== $log_messages && $obj['log_messages'] = $log_messages;
+        null !== $logMessages && $obj['logMessages'] = $logMessages;
 
         return $obj;
     }
@@ -64,7 +64,7 @@ final class LogMessageGetResponse implements BaseModel
     public function withLogMessages(array $logMessages): self
     {
         $obj = clone $this;
-        $obj['log_messages'] = $logMessages;
+        $obj['logMessages'] = $logMessages;
 
         return $obj;
     }

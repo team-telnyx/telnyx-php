@@ -14,9 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * product configuration.
  *
  * @phpstan-type MessagingFeatureSetShape = array{
- *   domestic_two_way: bool,
- *   international_inbound: bool,
- *   international_outbound: bool,
+ *   domesticTwoWay: bool, internationalInbound: bool, internationalOutbound: bool
  * }
  */
 final class MessagingFeatureSet implements BaseModel
@@ -27,20 +25,20 @@ final class MessagingFeatureSet implements BaseModel
     /**
      * Send messages to and receive messages from numbers in the same country.
      */
-    #[Required]
-    public bool $domestic_two_way;
+    #[Required('domestic_two_way')]
+    public bool $domesticTwoWay;
 
     /**
      * Receive messages from numbers in other countries.
      */
-    #[Required]
-    public bool $international_inbound;
+    #[Required('international_inbound')]
+    public bool $internationalInbound;
 
     /**
      * Send messages to numbers in other countries.
      */
-    #[Required]
-    public bool $international_outbound;
+    #[Required('international_outbound')]
+    public bool $internationalOutbound;
 
     /**
      * `new MessagingFeatureSet()` is missing required properties by the API.
@@ -48,7 +46,7 @@ final class MessagingFeatureSet implements BaseModel
      * To enforce required parameters use
      * ```
      * MessagingFeatureSet::with(
-     *   domestic_two_way: ..., international_inbound: ..., international_outbound: ...
+     *   domesticTwoWay: ..., internationalInbound: ..., internationalOutbound: ...
      * )
      * ```
      *
@@ -72,15 +70,15 @@ final class MessagingFeatureSet implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        bool $domestic_two_way,
-        bool $international_inbound,
-        bool $international_outbound,
+        bool $domesticTwoWay,
+        bool $internationalInbound,
+        bool $internationalOutbound,
     ): self {
         $obj = new self;
 
-        $obj['domestic_two_way'] = $domestic_two_way;
-        $obj['international_inbound'] = $international_inbound;
-        $obj['international_outbound'] = $international_outbound;
+        $obj['domesticTwoWay'] = $domesticTwoWay;
+        $obj['internationalInbound'] = $internationalInbound;
+        $obj['internationalOutbound'] = $internationalOutbound;
 
         return $obj;
     }
@@ -91,7 +89,7 @@ final class MessagingFeatureSet implements BaseModel
     public function withDomesticTwoWay(bool $domesticTwoWay): self
     {
         $obj = clone $this;
-        $obj['domestic_two_way'] = $domesticTwoWay;
+        $obj['domesticTwoWay'] = $domesticTwoWay;
 
         return $obj;
     }
@@ -102,7 +100,7 @@ final class MessagingFeatureSet implements BaseModel
     public function withInternationalInbound(bool $internationalInbound): self
     {
         $obj = clone $this;
-        $obj['international_inbound'] = $internationalInbound;
+        $obj['internationalInbound'] = $internationalInbound;
 
         return $obj;
     }
@@ -113,7 +111,7 @@ final class MessagingFeatureSet implements BaseModel
     public function withInternationalOutbound(bool $internationalOutbound): self
     {
         $obj = clone $this;
-        $obj['international_outbound'] = $internationalOutbound;
+        $obj['internationalOutbound'] = $internationalOutbound;
 
         return $obj;
     }

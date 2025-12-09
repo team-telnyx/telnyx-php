@@ -46,10 +46,10 @@ final class InsightTemplateDetail implements BaseModel
      *
      * @param InsightTemplate|array{
      *   id: string,
-     *   created_at: \DateTimeInterface,
+     *   createdAt: \DateTimeInterface,
      *   instructions: string,
-     *   insight_type?: value-of<InsightType>|null,
-     *   json_schema?: mixed|string|null,
+     *   insightType?: value-of<InsightType>|null,
+     *   jsonSchema?: mixed|string|null,
      *   name?: string|null,
      *   webhook?: string|null,
      * } $data
@@ -66,10 +66,10 @@ final class InsightTemplateDetail implements BaseModel
     /**
      * @param InsightTemplate|array{
      *   id: string,
-     *   created_at: \DateTimeInterface,
+     *   createdAt: \DateTimeInterface,
      *   instructions: string,
-     *   insight_type?: value-of<InsightType>|null,
-     *   json_schema?: mixed|string|null,
+     *   insightType?: value-of<InsightType>|null,
+     *   jsonSchema?: mixed|string|null,
      *   name?: string|null,
      *   webhook?: string|null,
      * } $data

@@ -52,9 +52,9 @@ final class ActionsTest extends TestCase
         }
 
         $result = $this->client->addresses->actions->validate([
-            'country_code' => 'US',
-            'postal_code' => '78701',
-            'street_address' => '600 Congress Avenue',
+            'countryCode' => 'US',
+            'postalCode' => '78701',
+            'streetAddress' => '600 Congress Avenue',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -69,11 +69,11 @@ final class ActionsTest extends TestCase
         }
 
         $result = $this->client->addresses->actions->validate([
-            'country_code' => 'US',
-            'postal_code' => '78701',
-            'street_address' => '600 Congress Avenue',
-            'administrative_area' => 'TX',
-            'extended_address' => '14th Floor',
+            'countryCode' => 'US',
+            'postalCode' => '78701',
+            'streetAddress' => '600 Congress Avenue',
+            'administrativeArea' => 'TX',
+            'extendedAddress' => '14th Floor',
             'locality' => 'Austin',
         ]);
 

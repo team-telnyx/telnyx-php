@@ -22,10 +22,10 @@ use Telnyx\RoomParticipants\RoomParticipantListParams\Page;
  * @phpstan-type RoomParticipantListParamsShape = array{
  *   filter?: Filter|array{
  *     context?: string|null,
- *     date_joined_at?: DateJoinedAt|null,
- *     date_left_at?: DateLeftAt|null,
- *     date_updated_at?: DateUpdatedAt|null,
- *     session_id?: string|null,
+ *     dateJoinedAt?: DateJoinedAt|null,
+ *     dateLeftAt?: DateLeftAt|null,
+ *     dateUpdatedAt?: DateUpdatedAt|null,
+ *     sessionID?: string|null,
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
  * }
@@ -60,10 +60,10 @@ final class RoomParticipantListParams implements BaseModel
      *
      * @param Filter|array{
      *   context?: string|null,
-     *   date_joined_at?: DateJoinedAt|null,
-     *   date_left_at?: DateLeftAt|null,
-     *   date_updated_at?: DateUpdatedAt|null,
-     *   session_id?: string|null,
+     *   dateJoinedAt?: DateJoinedAt|null,
+     *   dateLeftAt?: DateLeftAt|null,
+     *   dateUpdatedAt?: DateUpdatedAt|null,
+     *   sessionID?: string|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      */
@@ -84,10 +84,10 @@ final class RoomParticipantListParams implements BaseModel
      *
      * @param Filter|array{
      *   context?: string|null,
-     *   date_joined_at?: DateJoinedAt|null,
-     *   date_left_at?: DateLeftAt|null,
-     *   date_updated_at?: DateUpdatedAt|null,
-     *   session_id?: string|null,
+     *   dateJoinedAt?: DateJoinedAt|null,
+     *   dateLeftAt?: DateLeftAt|null,
+     *   dateUpdatedAt?: DateUpdatedAt|null,
+     *   sessionID?: string|null,
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

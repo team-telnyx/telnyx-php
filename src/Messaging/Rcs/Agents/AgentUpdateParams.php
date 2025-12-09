@@ -15,9 +15,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Messaging\Rcs\AgentsService::update()
  *
  * @phpstan-type AgentUpdateParamsShape = array{
- *   profile_id?: string|null,
- *   webhook_failover_url?: string|null,
- *   webhook_url?: string|null,
+ *   profileID?: string|null,
+ *   webhookFailoverURL?: string|null,
+ *   webhookURL?: string|null,
  * }
  */
 final class AgentUpdateParams implements BaseModel
@@ -29,20 +29,20 @@ final class AgentUpdateParams implements BaseModel
     /**
      * Messaging profile ID associated with the RCS Agent.
      */
-    #[Optional(nullable: true)]
-    public ?string $profile_id;
+    #[Optional('profile_id', nullable: true)]
+    public ?string $profileID;
 
     /**
      * Failover URL to receive RCS events.
      */
-    #[Optional(nullable: true)]
-    public ?string $webhook_failover_url;
+    #[Optional('webhook_failover_url', nullable: true)]
+    public ?string $webhookFailoverURL;
 
     /**
      * URL to receive RCS events.
      */
-    #[Optional(nullable: true)]
-    public ?string $webhook_url;
+    #[Optional('webhook_url', nullable: true)]
+    public ?string $webhookURL;
 
     public function __construct()
     {
@@ -55,15 +55,15 @@ final class AgentUpdateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $profile_id = null,
-        ?string $webhook_failover_url = null,
-        ?string $webhook_url = null,
+        ?string $profileID = null,
+        ?string $webhookFailoverURL = null,
+        ?string $webhookURL = null,
     ): self {
         $obj = new self;
 
-        null !== $profile_id && $obj['profile_id'] = $profile_id;
-        null !== $webhook_failover_url && $obj['webhook_failover_url'] = $webhook_failover_url;
-        null !== $webhook_url && $obj['webhook_url'] = $webhook_url;
+        null !== $profileID && $obj['profileID'] = $profileID;
+        null !== $webhookFailoverURL && $obj['webhookFailoverURL'] = $webhookFailoverURL;
+        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
 
         return $obj;
     }
@@ -74,7 +74,7 @@ final class AgentUpdateParams implements BaseModel
     public function withProfileID(?string $profileID): self
     {
         $obj = clone $this;
-        $obj['profile_id'] = $profileID;
+        $obj['profileID'] = $profileID;
 
         return $obj;
     }
@@ -85,7 +85,7 @@ final class AgentUpdateParams implements BaseModel
     public function withWebhookFailoverURL(?string $webhookFailoverURL): self
     {
         $obj = clone $this;
-        $obj['webhook_failover_url'] = $webhookFailoverURL;
+        $obj['webhookFailoverURL'] = $webhookFailoverURL;
 
         return $obj;
     }
@@ -96,7 +96,7 @@ final class AgentUpdateParams implements BaseModel
     public function withWebhookURL(?string $webhookURL): self
     {
         $obj = clone $this;
-        $obj['webhook_url'] = $webhookURL;
+        $obj['webhookURL'] = $webhookURL;
 
         return $obj;
     }

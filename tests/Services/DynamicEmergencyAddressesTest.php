@@ -38,12 +38,12 @@ final class DynamicEmergencyAddressesTest extends TestCase
         }
 
         $result = $this->client->dynamicEmergencyAddresses->create([
-            'administrative_area' => 'TX',
-            'country_code' => 'US',
-            'house_number' => '600',
+            'administrativeArea' => 'TX',
+            'countryCode' => 'US',
+            'houseNumber' => '600',
             'locality' => 'Austin',
-            'postal_code' => '78701',
-            'street_name' => 'Congress',
+            'postalCode' => '78701',
+            'streetName' => 'Congress',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -58,17 +58,17 @@ final class DynamicEmergencyAddressesTest extends TestCase
         }
 
         $result = $this->client->dynamicEmergencyAddresses->create([
-            'administrative_area' => 'TX',
-            'country_code' => 'US',
-            'house_number' => '600',
+            'administrativeArea' => 'TX',
+            'countryCode' => 'US',
+            'houseNumber' => '600',
             'locality' => 'Austin',
-            'postal_code' => '78701',
-            'street_name' => 'Congress',
-            'extended_address' => 'extended_address',
-            'house_suffix' => 'house_suffix',
-            'street_post_directional' => 'street_post_directional',
-            'street_pre_directional' => 'street_pre_directional',
-            'street_suffix' => 'St',
+            'postalCode' => '78701',
+            'streetName' => 'Congress',
+            'extendedAddress' => 'extended_address',
+            'houseSuffix' => 'house_suffix',
+            'streetPostDirectional' => 'street_post_directional',
+            'streetPreDirectional' => 'street_pre_directional',
+            'streetSuffix' => 'St',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -40,8 +40,8 @@ final class PartnerCampaignListSharedByMeResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Record|array{
-     *   brandId: string,
-     *   campaignId: string,
+     *   brandID: string,
+     *   campaignID: string,
      *   usecase: string,
      *   createDate?: string|null,
      *   status?: string|null,
@@ -71,8 +71,8 @@ final class PartnerCampaignListSharedByMeResponse implements BaseModel
 
     /**
      * @param list<Record|array{
-     *   brandId: string,
-     *   campaignId: string,
+     *   brandID: string,
+     *   campaignID: string,
      *   usecase: string,
      *   createDate?: string|null,
      *   status?: string|null,

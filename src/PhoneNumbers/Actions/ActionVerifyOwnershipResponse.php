@@ -33,8 +33,8 @@ final class ActionVerifyOwnershipResponse implements BaseModel
      *
      * @param Data|array{
      *   found?: list<Found>|null,
-     *   not_found?: list<string>|null,
-     *   record_type?: string|null,
+     *   notFound?: list<string>|null,
+     *   recordType?: string|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -49,8 +49,8 @@ final class ActionVerifyOwnershipResponse implements BaseModel
     /**
      * @param Data|array{
      *   found?: list<Found>|null,
-     *   not_found?: list<string>|null,
-     *   record_type?: string|null,
+     *   notFound?: list<string>|null,
+     *   recordType?: string|null,
      * } $data
      */
     public function withData(Data|array $data): self

@@ -7,6 +7,7 @@ namespace Telnyx\Services\Reports;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams\AggregationType;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams\ProductBreakdown;
@@ -27,11 +28,11 @@ final class CdrUsageReportsService implements CdrUsageReportsContract
      * Generate and fetch voice usage report synchronously. This endpoint will both generate and fetch the voice report over a specified time period. No polling is necessary but the response may take up to a couple of minutes.
      *
      * @param array{
-     *   aggregation_type: 'NO_AGGREGATION'|'CONNECTION'|'TAG'|'BILLING_GROUP'|AggregationType,
-     *   product_breakdown: 'NO_BREAKDOWN'|'DID_VS_TOLL_FREE'|'COUNTRY'|'DID_VS_TOLL_FREE_PER_COUNTRY'|ProductBreakdown,
+     *   aggregationType: 'NO_AGGREGATION'|'CONNECTION'|'TAG'|'BILLING_GROUP'|AggregationType,
+     *   productBreakdown: 'NO_BREAKDOWN'|'DID_VS_TOLL_FREE'|'COUNTRY'|'DID_VS_TOLL_FREE_PER_COUNTRY'|ProductBreakdown,
      *   connections?: list<float>,
-     *   end_date?: string|\DateTimeInterface,
-     *   start_date?: string|\DateTimeInterface,
+     *   endDate?: string|\DateTimeInterface,
+     *   startDate?: string|\DateTimeInterface,
      * }|CdrUsageReportFetchSyncParams $params
      *
      * @throws APIException
@@ -49,7 +50,15 @@ final class CdrUsageReportsService implements CdrUsageReportsContract
         $response = $this->client->request(
             method: 'get',
             path: 'reports/cdr_usage_reports/sync',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'aggregationType' => 'aggregation_type',
+                    'productBreakdown' => 'product_breakdown',
+                    'endDate' => 'end_date',
+                    'startDate' => 'start_date',
+                ],
+            ),
             options: $options,
             convert: CdrUsageReportFetchSyncResponse::class,
         );

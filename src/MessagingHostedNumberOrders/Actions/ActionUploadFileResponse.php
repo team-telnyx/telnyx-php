@@ -36,9 +36,9 @@ final class ActionUploadFileResponse implements BaseModel
      *
      * @param MessagingHostedNumberOrder|array{
      *   id?: string|null,
-     *   messaging_profile_id?: string|null,
-     *   phone_numbers?: list<HostedNumber>|null,
-     *   record_type?: string|null,
+     *   messagingProfileID?: string|null,
+     *   phoneNumbers?: list<HostedNumber>|null,
+     *   recordType?: string|null,
      *   status?: value-of<Status>|null,
      * } $data
      */
@@ -55,9 +55,9 @@ final class ActionUploadFileResponse implements BaseModel
     /**
      * @param MessagingHostedNumberOrder|array{
      *   id?: string|null,
-     *   messaging_profile_id?: string|null,
-     *   phone_numbers?: list<HostedNumber>|null,
-     *   record_type?: string|null,
+     *   messagingProfileID?: string|null,
+     *   phoneNumbers?: list<HostedNumber>|null,
+     *   recordType?: string|null,
      *   status?: value-of<Status>|null,
      * } $data
      */

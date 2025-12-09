@@ -11,10 +11,10 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type ExternalVettingImportResponseShape = array{
  *   createDate?: string|null,
- *   evpId?: string|null,
+ *   evpID?: string|null,
  *   vettedDate?: string|null,
  *   vettingClass?: string|null,
- *   vettingId?: string|null,
+ *   vettingID?: string|null,
  *   vettingScore?: int|null,
  *   vettingToken?: string|null,
  * }
@@ -33,8 +33,8 @@ final class ExternalVettingImportResponse implements BaseModel
     /**
      * External vetting provider ID for the brand.
      */
-    #[Optional]
-    public ?string $evpId;
+    #[Optional('evpId')]
+    public ?string $evpID;
 
     /**
      * Vetting effective date. This is the date when vetting was completed, or the starting effective date in ISO 8601 format. If this date is missing, then the vetting was not complete or not valid.
@@ -51,8 +51,8 @@ final class ExternalVettingImportResponse implements BaseModel
     /**
      * Unique ID that identifies a vetting transaction performed by a vetting provider. This ID is provided by the vetting provider at time of vetting.
      */
-    #[Optional]
-    public ?string $vettingId;
+    #[Optional('vettingId')]
+    public ?string $vettingID;
 
     /**
      * Vetting score ranging from 0-100.
@@ -78,20 +78,20 @@ final class ExternalVettingImportResponse implements BaseModel
      */
     public static function with(
         ?string $createDate = null,
-        ?string $evpId = null,
+        ?string $evpID = null,
         ?string $vettedDate = null,
         ?string $vettingClass = null,
-        ?string $vettingId = null,
+        ?string $vettingID = null,
         ?int $vettingScore = null,
         ?string $vettingToken = null,
     ): self {
         $obj = new self;
 
         null !== $createDate && $obj['createDate'] = $createDate;
-        null !== $evpId && $obj['evpId'] = $evpId;
+        null !== $evpID && $obj['evpID'] = $evpID;
         null !== $vettedDate && $obj['vettedDate'] = $vettedDate;
         null !== $vettingClass && $obj['vettingClass'] = $vettingClass;
-        null !== $vettingId && $obj['vettingId'] = $vettingId;
+        null !== $vettingID && $obj['vettingID'] = $vettingID;
         null !== $vettingScore && $obj['vettingScore'] = $vettingScore;
         null !== $vettingToken && $obj['vettingToken'] = $vettingToken;
 
@@ -115,7 +115,7 @@ final class ExternalVettingImportResponse implements BaseModel
     public function withEvpID(string $evpID): self
     {
         $obj = clone $this;
-        $obj['evpId'] = $evpID;
+        $obj['evpID'] = $evpID;
 
         return $obj;
     }
@@ -148,7 +148,7 @@ final class ExternalVettingImportResponse implements BaseModel
     public function withVettingID(string $vettingID): self
     {
         $obj = clone $this;
-        $obj['vettingId'] = $vettingID;
+        $obj['vettingID'] = $vettingID;
 
         return $obj;
     }

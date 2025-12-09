@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Texml\Accounts\Recordings\JsonService::deleteRecordingSidJson()
  *
- * @phpstan-type JsonDeleteRecordingSidJsonParamsShape = array{account_sid: string}
+ * @phpstan-type JsonDeleteRecordingSidJsonParamsShape = array{accountSid: string}
  */
 final class JsonDeleteRecordingSidJsonParams implements BaseModel
 {
@@ -23,14 +23,14 @@ final class JsonDeleteRecordingSidJsonParams implements BaseModel
     use SdkParams;
 
     #[Required]
-    public string $account_sid;
+    public string $accountSid;
 
     /**
      * `new JsonDeleteRecordingSidJsonParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * JsonDeleteRecordingSidJsonParams::with(account_sid: ...)
+     * JsonDeleteRecordingSidJsonParams::with(accountSid: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -49,11 +49,11 @@ final class JsonDeleteRecordingSidJsonParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $account_sid): self
+    public static function with(string $accountSid): self
     {
         $obj = new self;
 
-        $obj['account_sid'] = $account_sid;
+        $obj['accountSid'] = $accountSid;
 
         return $obj;
     }
@@ -61,7 +61,7 @@ final class JsonDeleteRecordingSidJsonParams implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj['account_sid'] = $accountSid;
+        $obj['accountSid'] = $accountSid;
 
         return $obj;
     }

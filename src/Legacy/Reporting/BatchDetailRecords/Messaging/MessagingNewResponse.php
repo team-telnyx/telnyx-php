@@ -38,18 +38,18 @@ final class MessagingNewResponse implements BaseModel
      * @param MdrDetailReportResponse|array{
      *   id?: string|null,
      *   connections?: list<int>|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   directions?: list<value-of<Direction>>|null,
-     *   end_date?: \DateTimeInterface|null,
+     *   endDate?: \DateTimeInterface|null,
      *   filters?: list<Filter>|null,
      *   profiles?: list<string>|null,
-     *   record_type?: string|null,
-     *   record_types?: list<value-of<RecordType>>|null,
-     *   report_name?: string|null,
-     *   report_url?: string|null,
-     *   start_date?: \DateTimeInterface|null,
+     *   recordType?: string|null,
+     *   recordTypes?: list<value-of<RecordType>>|null,
+     *   reportName?: string|null,
+     *   reportURL?: string|null,
+     *   startDate?: \DateTimeInterface|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(
@@ -66,18 +66,18 @@ final class MessagingNewResponse implements BaseModel
      * @param MdrDetailReportResponse|array{
      *   id?: string|null,
      *   connections?: list<int>|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   directions?: list<value-of<Direction>>|null,
-     *   end_date?: \DateTimeInterface|null,
+     *   endDate?: \DateTimeInterface|null,
      *   filters?: list<Filter>|null,
      *   profiles?: list<string>|null,
-     *   record_type?: string|null,
-     *   record_types?: list<value-of<RecordType>>|null,
-     *   report_name?: string|null,
-     *   report_url?: string|null,
-     *   start_date?: \DateTimeInterface|null,
+     *   recordType?: string|null,
+     *   recordTypes?: list<value-of<RecordType>>|null,
+     *   reportName?: string|null,
+     *   reportURL?: string|null,
+     *   startDate?: \DateTimeInterface|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(MdrDetailReportResponse|array $data): self

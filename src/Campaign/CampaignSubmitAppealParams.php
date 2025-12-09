@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\CampaignService::submitAppeal()
  *
- * @phpstan-type CampaignSubmitAppealParamsShape = array{appeal_reason: string}
+ * @phpstan-type CampaignSubmitAppealParamsShape = array{appealReason: string}
  */
 final class CampaignSubmitAppealParams implements BaseModel
 {
@@ -25,15 +25,15 @@ final class CampaignSubmitAppealParams implements BaseModel
     /**
      * Detailed explanation of why the campaign should be reconsidered and what changes have been made to address the rejection reason.
      */
-    #[Required]
-    public string $appeal_reason;
+    #[Required('appeal_reason')]
+    public string $appealReason;
 
     /**
      * `new CampaignSubmitAppealParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * CampaignSubmitAppealParams::with(appeal_reason: ...)
+     * CampaignSubmitAppealParams::with(appealReason: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -52,11 +52,11 @@ final class CampaignSubmitAppealParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $appeal_reason): self
+    public static function with(string $appealReason): self
     {
         $obj = new self;
 
-        $obj['appeal_reason'] = $appeal_reason;
+        $obj['appealReason'] = $appealReason;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class CampaignSubmitAppealParams implements BaseModel
     public function withAppealReason(string $appealReason): self
     {
         $obj = clone $this;
-        $obj['appeal_reason'] = $appealReason;
+        $obj['appealReason'] = $appealReason;
 
         return $obj;
     }

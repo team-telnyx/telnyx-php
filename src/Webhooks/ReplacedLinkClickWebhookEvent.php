@@ -31,9 +31,9 @@ final class ReplacedLinkClickWebhookEvent implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Data|array{
-     *   message_id?: string|null,
-     *   record_type?: string|null,
-     *   time_clicked?: \DateTimeInterface|null,
+     *   messageID?: string|null,
+     *   recordType?: string|null,
+     *   timeClicked?: \DateTimeInterface|null,
      *   to?: string|null,
      *   url?: string|null,
      * } $data
@@ -49,9 +49,9 @@ final class ReplacedLinkClickWebhookEvent implements BaseModel
 
     /**
      * @param Data|array{
-     *   message_id?: string|null,
-     *   record_type?: string|null,
-     *   time_clicked?: \DateTimeInterface|null,
+     *   messageID?: string|null,
+     *   recordType?: string|null,
+     *   timeClicked?: \DateTimeInterface|null,
      *   to?: string|null,
      *   url?: string|null,
      * } $data

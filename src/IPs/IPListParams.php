@@ -18,7 +18,7 @@ use Telnyx\IPs\IPListParams\Page;
  *
  * @phpstan-type IPListParamsShape = array{
  *   filter?: Filter|array{
- *     connection_id?: string|null, ip_address?: string|null, port?: int|null
+ *     connectionID?: string|null, ipAddress?: string|null, port?: int|null
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
  * }
@@ -52,7 +52,7 @@ final class IPListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   connection_id?: string|null, ip_address?: string|null, port?: int|null
+     *   connectionID?: string|null, ipAddress?: string|null, port?: int|null
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      */
@@ -72,7 +72,7 @@ final class IPListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[connection_id], filter[ip_address], filter[port].
      *
      * @param Filter|array{
-     *   connection_id?: string|null, ip_address?: string|null, port?: int|null
+     *   connectionID?: string|null, ipAddress?: string|null, port?: int|null
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

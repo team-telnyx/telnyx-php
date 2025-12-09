@@ -38,21 +38,21 @@ final class PrivateWirelessGatewayListResponse implements BaseModel
      *
      * @param list<PrivateWirelessGateway|array{
      *   id?: string|null,
-     *   assigned_resources?: list<PwgAssignedResourcesSummary>|null,
-     *   created_at?: string|null,
-     *   ip_range?: string|null,
+     *   assignedResources?: list<PwgAssignedResourcesSummary>|null,
+     *   createdAt?: string|null,
+     *   ipRange?: string|null,
      *   name?: string|null,
-     *   network_id?: string|null,
-     *   record_type?: string|null,
-     *   region_code?: string|null,
+     *   networkID?: string|null,
+     *   recordType?: string|null,
+     *   regionCode?: string|null,
      *   status?: PrivateWirelessGatewayStatus|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -70,15 +70,15 @@ final class PrivateWirelessGatewayListResponse implements BaseModel
     /**
      * @param list<PrivateWirelessGateway|array{
      *   id?: string|null,
-     *   assigned_resources?: list<PwgAssignedResourcesSummary>|null,
-     *   created_at?: string|null,
-     *   ip_range?: string|null,
+     *   assignedResources?: list<PwgAssignedResourcesSummary>|null,
+     *   createdAt?: string|null,
+     *   ipRange?: string|null,
      *   name?: string|null,
-     *   network_id?: string|null,
-     *   record_type?: string|null,
-     *   region_code?: string|null,
+     *   networkID?: string|null,
+     *   recordType?: string|null,
+     *   regionCode?: string|null,
      *   status?: PrivateWirelessGatewayStatus|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -91,10 +91,10 @@ final class PrivateWirelessGatewayListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type RegulatoryRequirementShape = array{
- *   field_value?: string|null, requirement_id?: string|null
+ *   fieldValue?: string|null, requirementID?: string|null
  * }
  */
 final class RegulatoryRequirement implements BaseModel
@@ -18,11 +18,11 @@ final class RegulatoryRequirement implements BaseModel
     /** @use SdkModel<RegulatoryRequirementShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?string $field_value;
+    #[Optional('field_value')]
+    public ?string $fieldValue;
 
-    #[Optional]
-    public ?string $requirement_id;
+    #[Optional('requirement_id')]
+    public ?string $requirementID;
 
     public function __construct()
     {
@@ -35,13 +35,13 @@ final class RegulatoryRequirement implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $field_value = null,
-        ?string $requirement_id = null
+        ?string $fieldValue = null,
+        ?string $requirementID = null
     ): self {
         $obj = new self;
 
-        null !== $field_value && $obj['field_value'] = $field_value;
-        null !== $requirement_id && $obj['requirement_id'] = $requirement_id;
+        null !== $fieldValue && $obj['fieldValue'] = $fieldValue;
+        null !== $requirementID && $obj['requirementID'] = $requirementID;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class RegulatoryRequirement implements BaseModel
     public function withFieldValue(string $fieldValue): self
     {
         $obj = clone $this;
-        $obj['field_value'] = $fieldValue;
+        $obj['fieldValue'] = $fieldValue;
 
         return $obj;
     }
@@ -57,7 +57,7 @@ final class RegulatoryRequirement implements BaseModel
     public function withRequirementID(string $requirementID): self
     {
         $obj = clone $this;
-        $obj['requirement_id'] = $requirementID;
+        $obj['requirementID'] = $requirementID;
 
         return $obj;
     }

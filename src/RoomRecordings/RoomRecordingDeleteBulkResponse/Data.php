@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type DataShape = array{room_recordings?: int|null}
+ * @phpstan-type DataShape = array{roomRecordings?: int|null}
  */
 final class Data implements BaseModel
 {
@@ -19,8 +19,8 @@ final class Data implements BaseModel
     /**
      * Amount of room recordings affected.
      */
-    #[Optional]
-    public ?int $room_recordings;
+    #[Optional('room_recordings')]
+    public ?int $roomRecordings;
 
     public function __construct()
     {
@@ -32,11 +32,11 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?int $room_recordings = null): self
+    public static function with(?int $roomRecordings = null): self
     {
         $obj = new self;
 
-        null !== $room_recordings && $obj['room_recordings'] = $room_recordings;
+        null !== $roomRecordings && $obj['roomRecordings'] = $roomRecordings;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class Data implements BaseModel
     public function withRoomRecordings(int $roomRecordings): self
     {
         $obj = clone $this;
-        $obj['room_recordings'] = $roomRecordings;
+        $obj['roomRecordings'] = $roomRecordings;
 
         return $obj;
     }

@@ -35,7 +35,7 @@ final class RegisterTest extends TestCase
         }
 
         $result = $this->client->actions->register->create([
-            'registration_codes' => ['0000000001', '0000000002', '0000000003'],
+            'registrationCodes' => ['0000000001', '0000000002', '0000000003'],
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -50,8 +50,8 @@ final class RegisterTest extends TestCase
         }
 
         $result = $this->client->actions->register->create([
-            'registration_codes' => ['0000000001', '0000000002', '0000000003'],
-            'sim_card_group_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            'registrationCodes' => ['0000000001', '0000000002', '0000000003'],
+            'simCardGroupID' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
             'status' => 'standby',
             'tags' => ['personal', 'customers', 'active-customers'],
         ]);

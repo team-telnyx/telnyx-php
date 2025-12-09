@@ -24,12 +24,12 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Sort\Value
  *
  * @phpstan-type PhoneNumberBlockListParamsShape = array{
  *   filter?: Filter|array{
- *     activation_status?: value-of<ActivationStatus>|null,
- *     phone_number?: list<string>|null,
- *     portability_status?: value-of<PortabilityStatus>|null,
- *     porting_order_id?: list<string>|null,
+ *     activationStatus?: value-of<ActivationStatus>|null,
+ *     phoneNumber?: list<string>|null,
+ *     portabilityStatus?: value-of<PortabilityStatus>|null,
+ *     portingOrderID?: list<string>|null,
  *     status?: null|list<value-of<UnionMember1>>|value-of<UnionMember0>,
- *     support_key?: string|null|list<string>,
+ *     supportKey?: string|null|list<string>,
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
  *   sort?: Sort|array{value?: value-of<Value>|null},
@@ -70,12 +70,12 @@ final class PhoneNumberBlockListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   activation_status?: value-of<ActivationStatus>|null,
-     *   phone_number?: list<string>|null,
-     *   portability_status?: value-of<PortabilityStatus>|null,
-     *   porting_order_id?: list<string>|null,
+     *   activationStatus?: value-of<ActivationStatus>|null,
+     *   phoneNumber?: list<string>|null,
+     *   portabilityStatus?: value-of<PortabilityStatus>|null,
+     *   portingOrderID?: list<string>|null,
      *   status?: list<value-of<UnionMember1>>|value-of<UnionMember0>|null,
-     *   support_key?: string|list<string>|null,
+     *   supportKey?: string|list<string>|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      * @param Sort|array{value?: value-of<Value>|null} $sort
@@ -98,12 +98,12 @@ final class PhoneNumberBlockListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[porting_order_id], filter[support_key], filter[status], filter[phone_number], filter[activation_status], filter[portability_status].
      *
      * @param Filter|array{
-     *   activation_status?: value-of<ActivationStatus>|null,
-     *   phone_number?: list<string>|null,
-     *   portability_status?: value-of<PortabilityStatus>|null,
-     *   porting_order_id?: list<string>|null,
+     *   activationStatus?: value-of<ActivationStatus>|null,
+     *   phoneNumber?: list<string>|null,
+     *   portabilityStatus?: value-of<PortabilityStatus>|null,
+     *   portingOrderID?: list<string>|null,
      *   status?: list<value-of<UnionMember1>>|value-of<UnionMember0>|null,
-     *   support_key?: string|list<string>|null,
+     *   supportKey?: string|list<string>|null,
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

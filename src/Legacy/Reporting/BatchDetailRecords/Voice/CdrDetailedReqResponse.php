@@ -17,22 +17,22 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\FilterType;
  *
  * @phpstan-type CdrDetailedReqResponseShape = array{
  *   id?: string|null,
- *   call_types?: list<int>|null,
+ *   callTypes?: list<int>|null,
  *   connections?: list<int>|null,
- *   created_at?: string|null,
- *   end_time?: string|null,
+ *   createdAt?: string|null,
+ *   endTime?: string|null,
  *   filters?: list<Filter>|null,
- *   managed_accounts?: list<string>|null,
- *   record_type?: string|null,
- *   record_types?: list<int>|null,
- *   report_name?: string|null,
- *   report_url?: string|null,
+ *   managedAccounts?: list<string>|null,
+ *   recordType?: string|null,
+ *   recordTypes?: list<int>|null,
+ *   reportName?: string|null,
+ *   reportURL?: string|null,
  *   retry?: int|null,
  *   source?: string|null,
- *   start_time?: string|null,
+ *   startTime?: string|null,
  *   status?: int|null,
  *   timezone?: string|null,
- *   updated_at?: string|null,
+ *   updatedAt?: string|null,
  * }
  */
 final class CdrDetailedReqResponse implements BaseModel
@@ -49,10 +49,10 @@ final class CdrDetailedReqResponse implements BaseModel
     /**
      * List of call types (Inbound = 1, Outbound = 2).
      *
-     * @var list<int>|null $call_types
+     * @var list<int>|null $callTypes
      */
-    #[Optional(list: 'int')]
-    public ?array $call_types;
+    #[Optional('call_types', list: 'int')]
+    public ?array $callTypes;
 
     /**
      * List of connections.
@@ -65,14 +65,14 @@ final class CdrDetailedReqResponse implements BaseModel
     /**
      * Creation date of the report.
      */
-    #[Optional]
-    public ?string $created_at;
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
     /**
      * End time in ISO format.
      */
-    #[Optional]
-    public ?string $end_time;
+    #[Optional('end_time')]
+    public ?string $endTime;
 
     /**
      * List of filters.
@@ -85,33 +85,33 @@ final class CdrDetailedReqResponse implements BaseModel
     /**
      * List of managed accounts.
      *
-     * @var list<string>|null $managed_accounts
+     * @var list<string>|null $managedAccounts
      */
-    #[Optional(list: 'string')]
-    public ?array $managed_accounts;
+    #[Optional('managed_accounts', list: 'string')]
+    public ?array $managedAccounts;
 
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * List of record types (Complete = 1, Incomplete = 2, Errors = 3).
      *
-     * @var list<int>|null $record_types
+     * @var list<int>|null $recordTypes
      */
-    #[Optional(list: 'int')]
-    public ?array $record_types;
+    #[Optional('record_types', list: 'int')]
+    public ?array $recordTypes;
 
     /**
      * Name of the report.
      */
-    #[Optional]
-    public ?string $report_name;
+    #[Optional('report_name')]
+    public ?string $reportName;
 
     /**
      * URL to download the report.
      */
-    #[Optional]
-    public ?string $report_url;
+    #[Optional('report_url')]
+    public ?string $reportURL;
 
     /**
      * Number of retries.
@@ -128,8 +128,8 @@ final class CdrDetailedReqResponse implements BaseModel
     /**
      * Start time in ISO format.
      */
-    #[Optional]
-    public ?string $start_time;
+    #[Optional('start_time')]
+    public ?string $startTime;
 
     /**
      * Status of the report (Pending = 1, Complete = 2, Failed = 3, Expired = 4).
@@ -146,8 +146,8 @@ final class CdrDetailedReqResponse implements BaseModel
     /**
      * Last update date of the report.
      */
-    #[Optional]
-    public ?string $updated_at;
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     public function __construct()
     {
@@ -159,58 +159,58 @@ final class CdrDetailedReqResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<int> $call_types
+     * @param list<int> $callTypes
      * @param list<int> $connections
      * @param list<Filter|array{
-     *   billing_group?: string|null,
+     *   billingGroup?: string|null,
      *   cld?: string|null,
-     *   cld_filter?: value-of<CldFilter>|null,
+     *   cldFilter?: value-of<CldFilter>|null,
      *   cli?: string|null,
-     *   cli_filter?: value-of<CliFilter>|null,
-     *   filter_type?: value-of<FilterType>|null,
-     *   tags_list?: string|null,
+     *   cliFilter?: value-of<CliFilter>|null,
+     *   filterType?: value-of<FilterType>|null,
+     *   tagsList?: string|null,
      * }> $filters
-     * @param list<string> $managed_accounts
-     * @param list<int> $record_types
+     * @param list<string> $managedAccounts
+     * @param list<int> $recordTypes
      */
     public static function with(
         ?string $id = null,
-        ?array $call_types = null,
+        ?array $callTypes = null,
         ?array $connections = null,
-        ?string $created_at = null,
-        ?string $end_time = null,
+        ?string $createdAt = null,
+        ?string $endTime = null,
         ?array $filters = null,
-        ?array $managed_accounts = null,
-        ?string $record_type = null,
-        ?array $record_types = null,
-        ?string $report_name = null,
-        ?string $report_url = null,
+        ?array $managedAccounts = null,
+        ?string $recordType = null,
+        ?array $recordTypes = null,
+        ?string $reportName = null,
+        ?string $reportURL = null,
         ?int $retry = null,
         ?string $source = null,
-        ?string $start_time = null,
+        ?string $startTime = null,
         ?int $status = null,
         ?string $timezone = null,
-        ?string $updated_at = null,
+        ?string $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $call_types && $obj['call_types'] = $call_types;
+        null !== $callTypes && $obj['callTypes'] = $callTypes;
         null !== $connections && $obj['connections'] = $connections;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $end_time && $obj['end_time'] = $end_time;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $endTime && $obj['endTime'] = $endTime;
         null !== $filters && $obj['filters'] = $filters;
-        null !== $managed_accounts && $obj['managed_accounts'] = $managed_accounts;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $record_types && $obj['record_types'] = $record_types;
-        null !== $report_name && $obj['report_name'] = $report_name;
-        null !== $report_url && $obj['report_url'] = $report_url;
+        null !== $managedAccounts && $obj['managedAccounts'] = $managedAccounts;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $recordTypes && $obj['recordTypes'] = $recordTypes;
+        null !== $reportName && $obj['reportName'] = $reportName;
+        null !== $reportURL && $obj['reportURL'] = $reportURL;
         null !== $retry && $obj['retry'] = $retry;
         null !== $source && $obj['source'] = $source;
-        null !== $start_time && $obj['start_time'] = $start_time;
+        null !== $startTime && $obj['startTime'] = $startTime;
         null !== $status && $obj['status'] = $status;
         null !== $timezone && $obj['timezone'] = $timezone;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -234,7 +234,7 @@ final class CdrDetailedReqResponse implements BaseModel
     public function withCallTypes(array $callTypes): self
     {
         $obj = clone $this;
-        $obj['call_types'] = $callTypes;
+        $obj['callTypes'] = $callTypes;
 
         return $obj;
     }
@@ -258,7 +258,7 @@ final class CdrDetailedReqResponse implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -269,7 +269,7 @@ final class CdrDetailedReqResponse implements BaseModel
     public function withEndTime(string $endTime): self
     {
         $obj = clone $this;
-        $obj['end_time'] = $endTime;
+        $obj['endTime'] = $endTime;
 
         return $obj;
     }
@@ -278,13 +278,13 @@ final class CdrDetailedReqResponse implements BaseModel
      * List of filters.
      *
      * @param list<Filter|array{
-     *   billing_group?: string|null,
+     *   billingGroup?: string|null,
      *   cld?: string|null,
-     *   cld_filter?: value-of<CldFilter>|null,
+     *   cldFilter?: value-of<CldFilter>|null,
      *   cli?: string|null,
-     *   cli_filter?: value-of<CliFilter>|null,
-     *   filter_type?: value-of<FilterType>|null,
-     *   tags_list?: string|null,
+     *   cliFilter?: value-of<CliFilter>|null,
+     *   filterType?: value-of<FilterType>|null,
+     *   tagsList?: string|null,
      * }> $filters
      */
     public function withFilters(array $filters): self
@@ -303,7 +303,7 @@ final class CdrDetailedReqResponse implements BaseModel
     public function withManagedAccounts(array $managedAccounts): self
     {
         $obj = clone $this;
-        $obj['managed_accounts'] = $managedAccounts;
+        $obj['managedAccounts'] = $managedAccounts;
 
         return $obj;
     }
@@ -311,7 +311,7 @@ final class CdrDetailedReqResponse implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -324,7 +324,7 @@ final class CdrDetailedReqResponse implements BaseModel
     public function withRecordTypes(array $recordTypes): self
     {
         $obj = clone $this;
-        $obj['record_types'] = $recordTypes;
+        $obj['recordTypes'] = $recordTypes;
 
         return $obj;
     }
@@ -335,7 +335,7 @@ final class CdrDetailedReqResponse implements BaseModel
     public function withReportName(string $reportName): self
     {
         $obj = clone $this;
-        $obj['report_name'] = $reportName;
+        $obj['reportName'] = $reportName;
 
         return $obj;
     }
@@ -346,7 +346,7 @@ final class CdrDetailedReqResponse implements BaseModel
     public function withReportURL(string $reportURL): self
     {
         $obj = clone $this;
-        $obj['report_url'] = $reportURL;
+        $obj['reportURL'] = $reportURL;
 
         return $obj;
     }
@@ -379,7 +379,7 @@ final class CdrDetailedReqResponse implements BaseModel
     public function withStartTime(string $startTime): self
     {
         $obj = clone $this;
-        $obj['start_time'] = $startTime;
+        $obj['startTime'] = $startTime;
 
         return $obj;
     }
@@ -412,7 +412,7 @@ final class CdrDetailedReqResponse implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

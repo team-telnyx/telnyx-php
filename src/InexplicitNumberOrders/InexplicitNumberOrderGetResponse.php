@@ -33,13 +33,13 @@ final class InexplicitNumberOrderGetResponse implements BaseModel
      *
      * @param Data|array{
      *   id?: string|null,
-     *   billing_group_id?: string|null,
-     *   connection_id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   customer_reference?: string|null,
-     *   messaging_profile_id?: string|null,
-     *   ordering_groups?: list<OrderingGroup>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   billingGroupID?: string|null,
+     *   connectionID?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   customerReference?: string|null,
+     *   messagingProfileID?: string|null,
+     *   orderingGroups?: list<OrderingGroup>|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -54,13 +54,13 @@ final class InexplicitNumberOrderGetResponse implements BaseModel
     /**
      * @param Data|array{
      *   id?: string|null,
-     *   billing_group_id?: string|null,
-     *   connection_id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   customer_reference?: string|null,
-     *   messaging_profile_id?: string|null,
-     *   ordering_groups?: list<OrderingGroup>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   billingGroupID?: string|null,
+     *   connectionID?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   customerReference?: string|null,
+     *   messagingProfileID?: string|null,
+     *   orderingGroups?: list<OrderingGroup>|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(Data|array $data): self

@@ -21,9 +21,9 @@ use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Page;
  *
  * @phpstan-type PhoneNumberListParamsShape = array{
  *   filter?: Filter|array{
- *     civic_address_id?: CivicAddressID|null,
- *     location_id?: LocationID|null,
- *     phone_number?: PhoneNumber|null,
+ *     civicAddressID?: CivicAddressID|null,
+ *     locationID?: LocationID|null,
+ *     phoneNumber?: PhoneNumber|null,
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
  * }
@@ -57,9 +57,9 @@ final class PhoneNumberListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   civic_address_id?: CivicAddressID|null,
-     *   location_id?: LocationID|null,
-     *   phone_number?: PhoneNumber|null,
+     *   civicAddressID?: CivicAddressID|null,
+     *   locationID?: LocationID|null,
+     *   phoneNumber?: PhoneNumber|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      */
@@ -79,9 +79,9 @@ final class PhoneNumberListParams implements BaseModel
      * Filter parameter for phone numbers (deepObject style). Supports filtering by phone_number, civic_address_id, and location_id with eq/contains operations.
      *
      * @param Filter|array{
-     *   civic_address_id?: CivicAddressID|null,
-     *   location_id?: LocationID|null,
-     *   phone_number?: PhoneNumber|null,
+     *   civicAddressID?: CivicAddressID|null,
+     *   locationID?: LocationID|null,
+     *   phoneNumber?: PhoneNumber|null,
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

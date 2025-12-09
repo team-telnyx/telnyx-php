@@ -27,10 +27,10 @@ final class AvailablePhoneNumberBlocksService implements AvailablePhoneNumberBlo
      *
      * @param array{
      *   filter?: array{
-     *     country_code?: string,
+     *     countryCode?: string,
      *     locality?: string,
-     *     national_destination_code?: string,
-     *     phone_number_type?: 'local'|'toll_free'|'mobile'|'national'|'shared_cost'|PhoneNumberType,
+     *     nationalDestinationCode?: string,
+     *     phoneNumberType?: 'local'|'toll_free'|'mobile'|'national'|'shared_cost'|PhoneNumberType,
      *   },
      * }|AvailablePhoneNumberBlockListParams $params
      *

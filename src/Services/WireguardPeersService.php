@@ -31,7 +31,7 @@ final class WireguardPeersService implements WireguardPeersContract
      * Create a new WireGuard Peer. Current limitation of 5 peers per interface can be created.
      *
      * @param array{
-     *   wireguard_interface_id: string, public_key?: string
+     *   wireguardInterfaceID: string, publicKey?: string
      * }|WireguardPeerCreateParams $params
      *
      * @throws APIException
@@ -84,7 +84,7 @@ final class WireguardPeersService implements WireguardPeersContract
      *
      * Update the WireGuard peer.
      *
-     * @param array{public_key?: string}|WireguardPeerUpdateParams $params
+     * @param array{publicKey?: string}|WireguardPeerUpdateParams $params
      *
      * @throws APIException
      */
@@ -116,7 +116,7 @@ final class WireguardPeersService implements WireguardPeersContract
      * List all WireGuard peers.
      *
      * @param array{
-     *   filter?: array{wireguard_interface_id?: string},
+     *   filter?: array{wireguardInterfaceID?: string},
      *   page?: array{number?: int, size?: int},
      * }|WireguardPeerListParams $params
      *

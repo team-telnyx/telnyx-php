@@ -14,10 +14,10 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Data\Webhook\RecordType
  *
  * @phpstan-type WebhookShape = array{
  *   id?: string|null,
- *   event_type?: string|null,
- *   occurred_at?: \DateTimeInterface|null,
+ *   eventType?: string|null,
+ *   occurredAt?: \DateTimeInterface|null,
  *   payload?: mixed,
- *   record_type?: value-of<RecordType>|null,
+ *   recordType?: value-of<RecordType>|null,
  * }
  */
 final class Webhook implements BaseModel
@@ -34,14 +34,14 @@ final class Webhook implements BaseModel
     /**
      * The type of event being delivered.
      */
-    #[Optional]
-    public ?string $event_type;
+    #[Optional('event_type')]
+    public ?string $eventType;
 
     /**
      * ISO 8601 datetime of when the event occurred.
      */
-    #[Optional]
-    public ?\DateTimeInterface $occurred_at;
+    #[Optional('occurred_at')]
+    public ?\DateTimeInterface $occurredAt;
 
     #[Optional]
     public mixed $payload;
@@ -49,10 +49,10 @@ final class Webhook implements BaseModel
     /**
      * Identifies the type of the resource.
      *
-     * @var value-of<RecordType>|null $record_type
+     * @var value-of<RecordType>|null $recordType
      */
-    #[Optional(enum: RecordType::class)]
-    public ?string $record_type;
+    #[Optional('record_type', enum: RecordType::class)]
+    public ?string $recordType;
 
     public function __construct()
     {
@@ -64,22 +64,22 @@ final class Webhook implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $record_type
+     * @param RecordType|value-of<RecordType> $recordType
      */
     public static function with(
         ?string $id = null,
-        ?string $event_type = null,
-        ?\DateTimeInterface $occurred_at = null,
+        ?string $eventType = null,
+        ?\DateTimeInterface $occurredAt = null,
         mixed $payload = null,
-        RecordType|string|null $record_type = null,
+        RecordType|string|null $recordType = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $event_type && $obj['event_type'] = $event_type;
-        null !== $occurred_at && $obj['occurred_at'] = $occurred_at;
+        null !== $eventType && $obj['eventType'] = $eventType;
+        null !== $occurredAt && $obj['occurredAt'] = $occurredAt;
         null !== $payload && $obj['payload'] = $payload;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $recordType && $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class Webhook implements BaseModel
     public function withEventType(string $eventType): self
     {
         $obj = clone $this;
-        $obj['event_type'] = $eventType;
+        $obj['eventType'] = $eventType;
 
         return $obj;
     }
@@ -112,7 +112,7 @@ final class Webhook implements BaseModel
     public function withOccurredAt(\DateTimeInterface $occurredAt): self
     {
         $obj = clone $this;
-        $obj['occurred_at'] = $occurredAt;
+        $obj['occurredAt'] = $occurredAt;
 
         return $obj;
     }
@@ -133,7 +133,7 @@ final class Webhook implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

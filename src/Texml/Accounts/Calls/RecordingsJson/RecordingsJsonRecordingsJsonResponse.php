@@ -13,19 +13,19 @@ use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonRespo
 
 /**
  * @phpstan-type RecordingsJsonRecordingsJsonResponseShape = array{
- *   account_sid?: string|null,
- *   call_sid?: string|null,
+ *   accountSid?: string|null,
+ *   callSid?: string|null,
  *   channels?: null|1|2,
- *   conference_sid?: string|null,
- *   date_created?: \DateTimeInterface|null,
- *   date_updated?: \DateTimeInterface|null,
+ *   conferenceSid?: string|null,
+ *   dateCreated?: \DateTimeInterface|null,
+ *   dateUpdated?: \DateTimeInterface|null,
  *   duration?: string|null,
- *   error_code?: string|null,
+ *   errorCode?: string|null,
  *   price?: string|null,
- *   price_unit?: string|null,
+ *   priceUnit?: string|null,
  *   sid?: string|null,
  *   source?: value-of<Source>|null,
- *   start_time?: \DateTimeInterface|null,
+ *   startTime?: \DateTimeInterface|null,
  *   track?: value-of<Track>|null,
  *   uri?: string|null,
  * }
@@ -35,24 +35,24 @@ final class RecordingsJsonRecordingsJsonResponse implements BaseModel
     /** @use SdkModel<RecordingsJsonRecordingsJsonResponseShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?string $account_sid;
+    #[Optional('account_sid')]
+    public ?string $accountSid;
 
-    #[Optional]
-    public ?string $call_sid;
+    #[Optional('call_sid')]
+    public ?string $callSid;
 
     /** @var 1|2|null $channels */
     #[Optional(enum: Channels::class)]
     public ?int $channels;
 
-    #[Optional(nullable: true)]
-    public ?string $conference_sid;
+    #[Optional('conference_sid', nullable: true)]
+    public ?string $conferenceSid;
 
-    #[Optional]
-    public ?\DateTimeInterface $date_created;
+    #[Optional('date_created')]
+    public ?\DateTimeInterface $dateCreated;
 
-    #[Optional]
-    public ?\DateTimeInterface $date_updated;
+    #[Optional('date_updated')]
+    public ?\DateTimeInterface $dateUpdated;
 
     /**
      * The duration of this recording, given in seconds.
@@ -60,8 +60,8 @@ final class RecordingsJsonRecordingsJsonResponse implements BaseModel
     #[Optional(nullable: true)]
     public ?string $duration;
 
-    #[Optional(nullable: true)]
-    public ?string $error_code;
+    #[Optional('error_code', nullable: true)]
+    public ?string $errorCode;
 
     /**
      * The price of this recording, the currency is specified in the price_unit field.
@@ -72,8 +72,8 @@ final class RecordingsJsonRecordingsJsonResponse implements BaseModel
     /**
      * The unit in which the price is given.
      */
-    #[Optional(nullable: true)]
-    public ?string $price_unit;
+    #[Optional('price_unit', nullable: true)]
+    public ?string $priceUnit;
 
     /**
      * Identifier of a resource.
@@ -89,8 +89,8 @@ final class RecordingsJsonRecordingsJsonResponse implements BaseModel
     #[Optional(enum: Source::class)]
     public ?string $source;
 
-    #[Optional]
-    public ?\DateTimeInterface $start_time;
+    #[Optional('start_time')]
+    public ?\DateTimeInterface $startTime;
 
     /**
      * The audio track to record for the call. The default is `both`.
@@ -121,37 +121,37 @@ final class RecordingsJsonRecordingsJsonResponse implements BaseModel
      * @param Track|value-of<Track> $track
      */
     public static function with(
-        ?string $account_sid = null,
-        ?string $call_sid = null,
+        ?string $accountSid = null,
+        ?string $callSid = null,
         ?int $channels = null,
-        ?string $conference_sid = null,
-        ?\DateTimeInterface $date_created = null,
-        ?\DateTimeInterface $date_updated = null,
+        ?string $conferenceSid = null,
+        ?\DateTimeInterface $dateCreated = null,
+        ?\DateTimeInterface $dateUpdated = null,
         ?string $duration = null,
-        ?string $error_code = null,
+        ?string $errorCode = null,
         ?string $price = null,
-        ?string $price_unit = null,
+        ?string $priceUnit = null,
         ?string $sid = null,
         Source|string|null $source = null,
-        ?\DateTimeInterface $start_time = null,
+        ?\DateTimeInterface $startTime = null,
         Track|string|null $track = null,
         ?string $uri = null,
     ): self {
         $obj = new self;
 
-        null !== $account_sid && $obj['account_sid'] = $account_sid;
-        null !== $call_sid && $obj['call_sid'] = $call_sid;
+        null !== $accountSid && $obj['accountSid'] = $accountSid;
+        null !== $callSid && $obj['callSid'] = $callSid;
         null !== $channels && $obj['channels'] = $channels;
-        null !== $conference_sid && $obj['conference_sid'] = $conference_sid;
-        null !== $date_created && $obj['date_created'] = $date_created;
-        null !== $date_updated && $obj['date_updated'] = $date_updated;
+        null !== $conferenceSid && $obj['conferenceSid'] = $conferenceSid;
+        null !== $dateCreated && $obj['dateCreated'] = $dateCreated;
+        null !== $dateUpdated && $obj['dateUpdated'] = $dateUpdated;
         null !== $duration && $obj['duration'] = $duration;
-        null !== $error_code && $obj['error_code'] = $error_code;
+        null !== $errorCode && $obj['errorCode'] = $errorCode;
         null !== $price && $obj['price'] = $price;
-        null !== $price_unit && $obj['price_unit'] = $price_unit;
+        null !== $priceUnit && $obj['priceUnit'] = $priceUnit;
         null !== $sid && $obj['sid'] = $sid;
         null !== $source && $obj['source'] = $source;
-        null !== $start_time && $obj['start_time'] = $start_time;
+        null !== $startTime && $obj['startTime'] = $startTime;
         null !== $track && $obj['track'] = $track;
         null !== $uri && $obj['uri'] = $uri;
 
@@ -161,7 +161,7 @@ final class RecordingsJsonRecordingsJsonResponse implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj['account_sid'] = $accountSid;
+        $obj['accountSid'] = $accountSid;
 
         return $obj;
     }
@@ -169,7 +169,7 @@ final class RecordingsJsonRecordingsJsonResponse implements BaseModel
     public function withCallSid(string $callSid): self
     {
         $obj = clone $this;
-        $obj['call_sid'] = $callSid;
+        $obj['callSid'] = $callSid;
 
         return $obj;
     }
@@ -188,7 +188,7 @@ final class RecordingsJsonRecordingsJsonResponse implements BaseModel
     public function withConferenceSid(?string $conferenceSid): self
     {
         $obj = clone $this;
-        $obj['conference_sid'] = $conferenceSid;
+        $obj['conferenceSid'] = $conferenceSid;
 
         return $obj;
     }
@@ -196,7 +196,7 @@ final class RecordingsJsonRecordingsJsonResponse implements BaseModel
     public function withDateCreated(\DateTimeInterface $dateCreated): self
     {
         $obj = clone $this;
-        $obj['date_created'] = $dateCreated;
+        $obj['dateCreated'] = $dateCreated;
 
         return $obj;
     }
@@ -204,7 +204,7 @@ final class RecordingsJsonRecordingsJsonResponse implements BaseModel
     public function withDateUpdated(\DateTimeInterface $dateUpdated): self
     {
         $obj = clone $this;
-        $obj['date_updated'] = $dateUpdated;
+        $obj['dateUpdated'] = $dateUpdated;
 
         return $obj;
     }
@@ -223,7 +223,7 @@ final class RecordingsJsonRecordingsJsonResponse implements BaseModel
     public function withErrorCode(?string $errorCode): self
     {
         $obj = clone $this;
-        $obj['error_code'] = $errorCode;
+        $obj['errorCode'] = $errorCode;
 
         return $obj;
     }
@@ -245,7 +245,7 @@ final class RecordingsJsonRecordingsJsonResponse implements BaseModel
     public function withPriceUnit(?string $priceUnit): self
     {
         $obj = clone $this;
-        $obj['price_unit'] = $priceUnit;
+        $obj['priceUnit'] = $priceUnit;
 
         return $obj;
     }
@@ -277,7 +277,7 @@ final class RecordingsJsonRecordingsJsonResponse implements BaseModel
     public function withStartTime(\DateTimeInterface $startTime): self
     {
         $obj = clone $this;
-        $obj['start_time'] = $startTime;
+        $obj['startTime'] = $startTime;
 
         return $obj;
     }

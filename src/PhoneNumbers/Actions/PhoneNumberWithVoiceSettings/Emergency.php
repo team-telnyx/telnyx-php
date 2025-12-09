@@ -13,9 +13,9 @@ use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings\Emergency\Emergency
  * The emergency services settings for a phone number.
  *
  * @phpstan-type EmergencyShape = array{
- *   emergency_address_id?: string|null,
- *   emergency_enabled?: bool|null,
- *   emergency_status?: value-of<EmergencyStatus>|null,
+ *   emergencyAddressID?: string|null,
+ *   emergencyEnabled?: bool|null,
+ *   emergencyStatus?: value-of<EmergencyStatus>|null,
  * }
  */
 final class Emergency implements BaseModel
@@ -26,22 +26,22 @@ final class Emergency implements BaseModel
     /**
      * Identifies the address to be used with emergency services.
      */
-    #[Optional]
-    public ?string $emergency_address_id;
+    #[Optional('emergency_address_id')]
+    public ?string $emergencyAddressID;
 
     /**
      * Allows you to enable or disable emergency services on the phone number. In order to enable emergency services, you must also set an emergency_address_id.
      */
-    #[Optional]
-    public ?bool $emergency_enabled;
+    #[Optional('emergency_enabled')]
+    public ?bool $emergencyEnabled;
 
     /**
      * Represents the state of the number regarding emergency activation.
      *
-     * @var value-of<EmergencyStatus>|null $emergency_status
+     * @var value-of<EmergencyStatus>|null $emergencyStatus
      */
-    #[Optional(enum: EmergencyStatus::class)]
-    public ?string $emergency_status;
+    #[Optional('emergency_status', enum: EmergencyStatus::class)]
+    public ?string $emergencyStatus;
 
     public function __construct()
     {
@@ -53,18 +53,18 @@ final class Emergency implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param EmergencyStatus|value-of<EmergencyStatus> $emergency_status
+     * @param EmergencyStatus|value-of<EmergencyStatus> $emergencyStatus
      */
     public static function with(
-        ?string $emergency_address_id = null,
-        ?bool $emergency_enabled = null,
-        EmergencyStatus|string|null $emergency_status = null,
+        ?string $emergencyAddressID = null,
+        ?bool $emergencyEnabled = null,
+        EmergencyStatus|string|null $emergencyStatus = null,
     ): self {
         $obj = new self;
 
-        null !== $emergency_address_id && $obj['emergency_address_id'] = $emergency_address_id;
-        null !== $emergency_enabled && $obj['emergency_enabled'] = $emergency_enabled;
-        null !== $emergency_status && $obj['emergency_status'] = $emergency_status;
+        null !== $emergencyAddressID && $obj['emergencyAddressID'] = $emergencyAddressID;
+        null !== $emergencyEnabled && $obj['emergencyEnabled'] = $emergencyEnabled;
+        null !== $emergencyStatus && $obj['emergencyStatus'] = $emergencyStatus;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class Emergency implements BaseModel
     public function withEmergencyAddressID(string $emergencyAddressID): self
     {
         $obj = clone $this;
-        $obj['emergency_address_id'] = $emergencyAddressID;
+        $obj['emergencyAddressID'] = $emergencyAddressID;
 
         return $obj;
     }
@@ -86,7 +86,7 @@ final class Emergency implements BaseModel
     public function withEmergencyEnabled(bool $emergencyEnabled): self
     {
         $obj = clone $this;
-        $obj['emergency_enabled'] = $emergencyEnabled;
+        $obj['emergencyEnabled'] = $emergencyEnabled;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class Emergency implements BaseModel
         EmergencyStatus|string $emergencyStatus
     ): self {
         $obj = clone $this;
-        $obj['emergency_status'] = $emergencyStatus;
+        $obj['emergencyStatus'] = $emergencyStatus;
 
         return $obj;
     }

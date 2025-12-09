@@ -20,14 +20,14 @@ use Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\Track;
  * @see Telnyx\Services\Texml\Accounts\CallsService::streamsJson()
  *
  * @phpstan-type CallStreamsJsonParamsShape = array{
- *   account_sid: string,
- *   BidirectionalCodec?: \Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\BidirectionalCodec|value-of<\Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\BidirectionalCodec>,
- *   BidirectionalMode?: \Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\BidirectionalMode|value-of<\Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\BidirectionalMode>,
- *   Name?: string,
- *   StatusCallback?: string,
- *   StatusCallbackMethod?: \Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\StatusCallbackMethod|value-of<\Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\StatusCallbackMethod>,
- *   Track?: \Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\Track|value-of<\Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\Track>,
- *   Url?: string,
+ *   accountSid: string,
+ *   bidirectionalCodec?: BidirectionalCodec|value-of<BidirectionalCodec>,
+ *   bidirectionalMode?: BidirectionalMode|value-of<BidirectionalMode>,
+ *   name?: string,
+ *   statusCallback?: string,
+ *   statusCallbackMethod?: StatusCallbackMethod|value-of<StatusCallbackMethod>,
+ *   track?: Track|value-of<Track>,
+ *   url?: string,
  * }
  */
 final class CallStreamsJsonParams implements BaseModel
@@ -37,72 +37,64 @@ final class CallStreamsJsonParams implements BaseModel
     use SdkParams;
 
     #[Required]
-    public string $account_sid;
+    public string $accountSid;
 
     /**
      * Indicates codec for bidirectional streaming RTP payloads. Used only with stream_bidirectional_mode=rtp. Case sensitive.
      *
-     * @var value-of<BidirectionalCodec>|null $BidirectionalCodec
+     * @var value-of<BidirectionalCodec>|null $bidirectionalCodec
      */
-    #[Optional(
-        enum: BidirectionalCodec::class,
-    )]
-    public ?string $BidirectionalCodec;
+    #[Optional('BidirectionalCodec', enum: BidirectionalCodec::class)]
+    public ?string $bidirectionalCodec;
 
     /**
      * Configures method of bidirectional streaming (mp3, rtp).
      *
-     * @var value-of<BidirectionalMode>|null $BidirectionalMode
+     * @var value-of<BidirectionalMode>|null $bidirectionalMode
      */
-    #[Optional(
-        enum: BidirectionalMode::class,
-    )]
-    public ?string $BidirectionalMode;
+    #[Optional('BidirectionalMode', enum: BidirectionalMode::class)]
+    public ?string $bidirectionalMode;
 
     /**
      * The user specified name of Stream.
      */
-    #[Optional]
-    public ?string $Name;
+    #[Optional('Name')]
+    public ?string $name;
 
     /**
      * Url where status callbacks will be sent.
      */
-    #[Optional]
-    public ?string $StatusCallback;
+    #[Optional('StatusCallback')]
+    public ?string $statusCallback;
 
     /**
      * HTTP method used to send status callbacks.
      *
-     * @var value-of<StatusCallbackMethod>|null $StatusCallbackMethod
+     * @var value-of<StatusCallbackMethod>|null $statusCallbackMethod
      */
-    #[Optional(
-        enum: StatusCallbackMethod::class,
-    )]
-    public ?string $StatusCallbackMethod;
+    #[Optional('StatusCallbackMethod', enum: StatusCallbackMethod::class)]
+    public ?string $statusCallbackMethod;
 
     /**
      * Tracks to be included in the stream.
      *
-     * @var value-of<Track>|null $Track
+     * @var value-of<Track>|null $track
      */
-    #[Optional(
-        enum: Track::class
-    )]
-    public ?string $Track;
+    #[Optional('Track', enum: Track::class)]
+    public ?string $track;
 
     /**
      * The destination WebSocket address where the stream is going to be delivered.
      */
-    #[Optional]
-    public ?string $Url;
+    #[Optional('Url')]
+    public ?string $url;
 
     /**
      * `new CallStreamsJsonParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * CallStreamsJsonParams::with(account_sid: ...)
+     * CallStreamsJsonParams::with(accountSid: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -121,32 +113,32 @@ final class CallStreamsJsonParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BidirectionalCodec|value-of<BidirectionalCodec> $BidirectionalCodec
-     * @param BidirectionalMode|value-of<BidirectionalMode> $BidirectionalMode
-     * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $StatusCallbackMethod
-     * @param Track|value-of<Track> $Track
+     * @param BidirectionalCodec|value-of<BidirectionalCodec> $bidirectionalCodec
+     * @param BidirectionalMode|value-of<BidirectionalMode> $bidirectionalMode
+     * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $statusCallbackMethod
+     * @param Track|value-of<Track> $track
      */
     public static function with(
-        string $account_sid,
-        BidirectionalCodec|string|null $BidirectionalCodec = null,
-        BidirectionalMode|string|null $BidirectionalMode = null,
-        ?string $Name = null,
-        ?string $StatusCallback = null,
-        StatusCallbackMethod|string|null $StatusCallbackMethod = null,
-        Track|string|null $Track = null,
-        ?string $Url = null,
+        string $accountSid,
+        BidirectionalCodec|string|null $bidirectionalCodec = null,
+        BidirectionalMode|string|null $bidirectionalMode = null,
+        ?string $name = null,
+        ?string $statusCallback = null,
+        StatusCallbackMethod|string|null $statusCallbackMethod = null,
+        Track|string|null $track = null,
+        ?string $url = null,
     ): self {
         $obj = new self;
 
-        $obj['account_sid'] = $account_sid;
+        $obj['accountSid'] = $accountSid;
 
-        null !== $BidirectionalCodec && $obj['BidirectionalCodec'] = $BidirectionalCodec;
-        null !== $BidirectionalMode && $obj['BidirectionalMode'] = $BidirectionalMode;
-        null !== $Name && $obj['Name'] = $Name;
-        null !== $StatusCallback && $obj['StatusCallback'] = $StatusCallback;
-        null !== $StatusCallbackMethod && $obj['StatusCallbackMethod'] = $StatusCallbackMethod;
-        null !== $Track && $obj['Track'] = $Track;
-        null !== $Url && $obj['Url'] = $Url;
+        null !== $bidirectionalCodec && $obj['bidirectionalCodec'] = $bidirectionalCodec;
+        null !== $bidirectionalMode && $obj['bidirectionalMode'] = $bidirectionalMode;
+        null !== $name && $obj['name'] = $name;
+        null !== $statusCallback && $obj['statusCallback'] = $statusCallback;
+        null !== $statusCallbackMethod && $obj['statusCallbackMethod'] = $statusCallbackMethod;
+        null !== $track && $obj['track'] = $track;
+        null !== $url && $obj['url'] = $url;
 
         return $obj;
     }
@@ -154,7 +146,7 @@ final class CallStreamsJsonParams implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj['account_sid'] = $accountSid;
+        $obj['accountSid'] = $accountSid;
 
         return $obj;
     }
@@ -165,10 +157,10 @@ final class CallStreamsJsonParams implements BaseModel
      * @param BidirectionalCodec|value-of<BidirectionalCodec> $bidirectionalCodec
      */
     public function withBidirectionalCodec(
-        BidirectionalCodec|string $bidirectionalCodec,
+        BidirectionalCodec|string $bidirectionalCodec
     ): self {
         $obj = clone $this;
-        $obj['BidirectionalCodec'] = $bidirectionalCodec;
+        $obj['bidirectionalCodec'] = $bidirectionalCodec;
 
         return $obj;
     }
@@ -179,10 +171,10 @@ final class CallStreamsJsonParams implements BaseModel
      * @param BidirectionalMode|value-of<BidirectionalMode> $bidirectionalMode
      */
     public function withBidirectionalMode(
-        BidirectionalMode|string $bidirectionalMode,
+        BidirectionalMode|string $bidirectionalMode
     ): self {
         $obj = clone $this;
-        $obj['BidirectionalMode'] = $bidirectionalMode;
+        $obj['bidirectionalMode'] = $bidirectionalMode;
 
         return $obj;
     }
@@ -193,7 +185,7 @@ final class CallStreamsJsonParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj['Name'] = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -204,7 +196,7 @@ final class CallStreamsJsonParams implements BaseModel
     public function withStatusCallback(string $statusCallback): self
     {
         $obj = clone $this;
-        $obj['StatusCallback'] = $statusCallback;
+        $obj['statusCallback'] = $statusCallback;
 
         return $obj;
     }
@@ -215,10 +207,10 @@ final class CallStreamsJsonParams implements BaseModel
      * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $statusCallbackMethod
      */
     public function withStatusCallbackMethod(
-        StatusCallbackMethod|string $statusCallbackMethod,
+        StatusCallbackMethod|string $statusCallbackMethod
     ): self {
         $obj = clone $this;
-        $obj['StatusCallbackMethod'] = $statusCallbackMethod;
+        $obj['statusCallbackMethod'] = $statusCallbackMethod;
 
         return $obj;
     }
@@ -228,11 +220,10 @@ final class CallStreamsJsonParams implements BaseModel
      *
      * @param Track|value-of<Track> $track
      */
-    public function withTrack(
-        Track|string $track
-    ): self {
+    public function withTrack(Track|string $track): self
+    {
         $obj = clone $this;
-        $obj['Track'] = $track;
+        $obj['track'] = $track;
 
         return $obj;
     }
@@ -243,7 +234,7 @@ final class CallStreamsJsonParams implements BaseModel
     public function withURL(string $url): self
     {
         $obj = clone $this;
-        $obj['Url'] = $url;
+        $obj['url'] = $url;
 
         return $obj;
     }

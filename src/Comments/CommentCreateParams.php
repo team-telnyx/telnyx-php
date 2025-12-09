@@ -17,8 +17,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type CommentCreateParamsShape = array{
  *   body?: string,
- *   comment_record_id?: string,
- *   comment_record_type?: CommentRecordType|value-of<CommentRecordType>,
+ *   commentRecordID?: string,
+ *   commentRecordType?: CommentRecordType|value-of<CommentRecordType>,
  * }
  */
 final class CommentCreateParams implements BaseModel
@@ -30,12 +30,12 @@ final class CommentCreateParams implements BaseModel
     #[Optional]
     public ?string $body;
 
-    #[Optional]
-    public ?string $comment_record_id;
+    #[Optional('comment_record_id')]
+    public ?string $commentRecordID;
 
-    /** @var value-of<CommentRecordType>|null $comment_record_type */
-    #[Optional(enum: CommentRecordType::class)]
-    public ?string $comment_record_type;
+    /** @var value-of<CommentRecordType>|null $commentRecordType */
+    #[Optional('comment_record_type', enum: CommentRecordType::class)]
+    public ?string $commentRecordType;
 
     public function __construct()
     {
@@ -47,18 +47,18 @@ final class CommentCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CommentRecordType|value-of<CommentRecordType> $comment_record_type
+     * @param CommentRecordType|value-of<CommentRecordType> $commentRecordType
      */
     public static function with(
         ?string $body = null,
-        ?string $comment_record_id = null,
-        CommentRecordType|string|null $comment_record_type = null,
+        ?string $commentRecordID = null,
+        CommentRecordType|string|null $commentRecordType = null,
     ): self {
         $obj = new self;
 
         null !== $body && $obj['body'] = $body;
-        null !== $comment_record_id && $obj['comment_record_id'] = $comment_record_id;
-        null !== $comment_record_type && $obj['comment_record_type'] = $comment_record_type;
+        null !== $commentRecordID && $obj['commentRecordID'] = $commentRecordID;
+        null !== $commentRecordType && $obj['commentRecordType'] = $commentRecordType;
 
         return $obj;
     }
@@ -74,7 +74,7 @@ final class CommentCreateParams implements BaseModel
     public function withCommentRecordID(string $commentRecordID): self
     {
         $obj = clone $this;
-        $obj['comment_record_id'] = $commentRecordID;
+        $obj['commentRecordID'] = $commentRecordID;
 
         return $obj;
     }
@@ -86,7 +86,7 @@ final class CommentCreateParams implements BaseModel
         CommentRecordType|string $commentRecordType
     ): self {
         $obj = clone $this;
-        $obj['comment_record_type'] = $commentRecordType;
+        $obj['commentRecordType'] = $commentRecordType;
 
         return $obj;
     }

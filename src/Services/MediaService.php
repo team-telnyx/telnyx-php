@@ -51,7 +51,7 @@ final class MediaService implements MediaContract
      *
      * Updates a stored media file.
      *
-     * @param array{media_url?: string, ttl_secs?: int}|MediaUpdateParams $params
+     * @param array{mediaURL?: string, ttlSecs?: int}|MediaUpdateParams $params
      *
      * @throws APIException
      */
@@ -82,9 +82,7 @@ final class MediaService implements MediaContract
      *
      * Returns a list of stored media files.
      *
-     * @param array{
-     *   filter?: array{content_type?: list<string>}
-     * }|MediaListParams $params
+     * @param array{filter?: array{contentType?: list<string>}}|MediaListParams $params
      *
      * @throws APIException
      */
@@ -160,7 +158,7 @@ final class MediaService implements MediaContract
      * Upload media file to Telnyx so it can be used with other Telnyx services
      *
      * @param array{
-     *   media_url: string, media_name?: string, ttl_secs?: int
+     *   mediaURL: string, mediaName?: string, ttlSecs?: int
      * }|MediaUploadParams $params
      *
      * @throws APIException

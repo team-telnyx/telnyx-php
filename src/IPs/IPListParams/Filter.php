@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[connection_id], filter[ip_address], filter[port].
  *
  * @phpstan-type FilterShape = array{
- *   connection_id?: string|null, ip_address?: string|null, port?: int|null
+ *   connectionID?: string|null, ipAddress?: string|null, port?: int|null
  * }
  */
 final class Filter implements BaseModel
@@ -23,14 +23,14 @@ final class Filter implements BaseModel
     /**
      * ID of the IP Connection to which this IP should be attached.
      */
-    #[Optional]
-    public ?string $connection_id;
+    #[Optional('connection_id')]
+    public ?string $connectionID;
 
     /**
      * IP adddress represented by this resource.
      */
-    #[Optional]
-    public ?string $ip_address;
+    #[Optional('ip_address')]
+    public ?string $ipAddress;
 
     /**
      * Port to use when connecting to this IP.
@@ -49,14 +49,14 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $connection_id = null,
-        ?string $ip_address = null,
+        ?string $connectionID = null,
+        ?string $ipAddress = null,
         ?int $port = null
     ): self {
         $obj = new self;
 
-        null !== $connection_id && $obj['connection_id'] = $connection_id;
-        null !== $ip_address && $obj['ip_address'] = $ip_address;
+        null !== $connectionID && $obj['connectionID'] = $connectionID;
+        null !== $ipAddress && $obj['ipAddress'] = $ipAddress;
         null !== $port && $obj['port'] = $port;
 
         return $obj;
@@ -68,7 +68,7 @@ final class Filter implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj['connection_id'] = $connectionID;
+        $obj['connectionID'] = $connectionID;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class Filter implements BaseModel
     public function withIPAddress(string $ipAddress): self
     {
         $obj = clone $this;
-        $obj['ip_address'] = $ipAddress;
+        $obj['ipAddress'] = $ipAddress;
 
         return $obj;
     }

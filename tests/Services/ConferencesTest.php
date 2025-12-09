@@ -38,7 +38,7 @@ final class ConferencesTest extends TestCase
         }
 
         $result = $this->client->conferences->create([
-            'call_control_id' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+            'callControlID' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
             'name' => 'Business',
         ]);
 
@@ -54,18 +54,18 @@ final class ConferencesTest extends TestCase
         }
 
         $result = $this->client->conferences->create([
-            'call_control_id' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+            'callControlID' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
             'name' => 'Business',
-            'beep_enabled' => 'always',
-            'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
-            'comfort_noise' => false,
-            'command_id' => '891510ac-f3e4-11e8-af5b-de00688a4901',
-            'duration_minutes' => 5,
-            'hold_audio_url' => 'http://www.example.com/audio.wav',
-            'hold_media_name' => 'my_media_uploaded_to_media_storage_api',
-            'max_participants' => 250,
+            'beepEnabled' => 'always',
+            'clientState' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
+            'comfortNoise' => false,
+            'commandID' => '891510ac-f3e4-11e8-af5b-de00688a4901',
+            'durationMinutes' => 5,
+            'holdAudioURL' => 'http://www.example.com/audio.wav',
+            'holdMediaName' => 'my_media_uploaded_to_media_storage_api',
+            'maxParticipants' => 250,
             'region' => 'US',
-            'start_conference_on_create' => false,
+            'startConferenceOnCreate' => false,
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

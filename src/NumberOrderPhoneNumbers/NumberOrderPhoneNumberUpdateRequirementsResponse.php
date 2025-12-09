@@ -37,20 +37,20 @@ final class NumberOrderPhoneNumberUpdateRequirementsResponse implements BaseMode
      *
      * @param NumberOrderPhoneNumber|array{
      *   id?: string|null,
-     *   bundle_id?: string|null,
-     *   country_code?: string|null,
+     *   bundleID?: string|null,
+     *   countryCode?: string|null,
      *   deadline?: \DateTimeInterface|null,
-     *   is_block_number?: bool|null,
+     *   isBlockNumber?: bool|null,
      *   locality?: string|null,
-     *   order_request_id?: string|null,
-     *   phone_number?: string|null,
-     *   phone_number_type?: value-of<PhoneNumberType>|null,
-     *   record_type?: string|null,
-     *   regulatory_requirements?: list<SubNumberOrderRegulatoryRequirementWithValue>|null,
-     *   requirements_met?: bool|null,
-     *   requirements_status?: value-of<RequirementsStatus>|null,
+     *   orderRequestID?: string|null,
+     *   phoneNumber?: string|null,
+     *   phoneNumberType?: value-of<PhoneNumberType>|null,
+     *   recordType?: string|null,
+     *   regulatoryRequirements?: list<SubNumberOrderRegulatoryRequirementWithValue>|null,
+     *   requirementsMet?: bool|null,
+     *   requirementsStatus?: value-of<RequirementsStatus>|null,
      *   status?: value-of<Status>|null,
-     *   sub_number_order_id?: string|null,
+     *   subNumberOrderID?: string|null,
      * } $data
      */
     public static function with(NumberOrderPhoneNumber|array|null $data = null): self
@@ -65,20 +65,20 @@ final class NumberOrderPhoneNumberUpdateRequirementsResponse implements BaseMode
     /**
      * @param NumberOrderPhoneNumber|array{
      *   id?: string|null,
-     *   bundle_id?: string|null,
-     *   country_code?: string|null,
+     *   bundleID?: string|null,
+     *   countryCode?: string|null,
      *   deadline?: \DateTimeInterface|null,
-     *   is_block_number?: bool|null,
+     *   isBlockNumber?: bool|null,
      *   locality?: string|null,
-     *   order_request_id?: string|null,
-     *   phone_number?: string|null,
-     *   phone_number_type?: value-of<PhoneNumberType>|null,
-     *   record_type?: string|null,
-     *   regulatory_requirements?: list<SubNumberOrderRegulatoryRequirementWithValue>|null,
-     *   requirements_met?: bool|null,
-     *   requirements_status?: value-of<RequirementsStatus>|null,
+     *   orderRequestID?: string|null,
+     *   phoneNumber?: string|null,
+     *   phoneNumberType?: value-of<PhoneNumberType>|null,
+     *   recordType?: string|null,
+     *   regulatoryRequirements?: list<SubNumberOrderRegulatoryRequirementWithValue>|null,
+     *   requirementsMet?: bool|null,
+     *   requirementsStatus?: value-of<RequirementsStatus>|null,
      *   status?: value-of<Status>|null,
-     *   sub_number_order_id?: string|null,
+     *   subNumberOrderID?: string|null,
      * } $data
      */
     public function withData(NumberOrderPhoneNumber|array $data): self

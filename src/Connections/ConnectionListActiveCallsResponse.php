@@ -40,18 +40,18 @@ final class ConnectionListActiveCallsResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   call_control_id: string,
-     *   call_duration: int,
-     *   call_leg_id: string,
-     *   call_session_id: string,
-     *   client_state: string,
-     *   record_type: value-of<RecordType>,
+     *   callControlID: string,
+     *   callDuration: int,
+     *   callLegID: string,
+     *   callSessionID: string,
+     *   clientState: string,
+     *   recordType: value-of<RecordType>,
      * }> $data
      * @param Meta|array{
      *   cursors?: Cursors|null,
      *   next?: string|null,
      *   previous?: string|null,
-     *   total_items?: int|null,
+     *   totalItems?: int|null,
      * } $meta
      */
     public static function with(
@@ -68,12 +68,12 @@ final class ConnectionListActiveCallsResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   call_control_id: string,
-     *   call_duration: int,
-     *   call_leg_id: string,
-     *   call_session_id: string,
-     *   client_state: string,
-     *   record_type: value-of<RecordType>,
+     *   callControlID: string,
+     *   callDuration: int,
+     *   callLegID: string,
+     *   callSessionID: string,
+     *   clientState: string,
+     *   recordType: value-of<RecordType>,
      * }> $data
      */
     public function withData(array $data): self
@@ -89,7 +89,7 @@ final class ConnectionListActiveCallsResponse implements BaseModel
      *   cursors?: Cursors|null,
      *   next?: string|null,
      *   previous?: string|null,
-     *   total_items?: int|null,
+     *   totalItems?: int|null,
      * } $meta
      */
     public function withMeta(Meta|array $meta): self

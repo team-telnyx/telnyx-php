@@ -36,13 +36,13 @@ final class PhoneNumberBlockDeleteResponse implements BaseModel
      *
      * @param PortingPhoneNumberBlock|array{
      *   id?: string|null,
-     *   activation_ranges?: list<ActivationRange>|null,
-     *   country_code?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   phone_number_range?: PhoneNumberRange|null,
-     *   phone_number_type?: value-of<PhoneNumberType>|null,
-     *   record_type?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   activationRanges?: list<ActivationRange>|null,
+     *   countryCode?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   phoneNumberRange?: PhoneNumberRange|null,
+     *   phoneNumberType?: value-of<PhoneNumberType>|null,
+     *   recordType?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(
@@ -58,13 +58,13 @@ final class PhoneNumberBlockDeleteResponse implements BaseModel
     /**
      * @param PortingPhoneNumberBlock|array{
      *   id?: string|null,
-     *   activation_ranges?: list<ActivationRange>|null,
-     *   country_code?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   phone_number_range?: PhoneNumberRange|null,
-     *   phone_number_type?: value-of<PhoneNumberType>|null,
-     *   record_type?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   activationRanges?: list<ActivationRange>|null,
+     *   countryCode?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   phoneNumberRange?: PhoneNumberRange|null,
+     *   phoneNumberType?: value-of<PhoneNumberType>|null,
+     *   recordType?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(PortingPhoneNumberBlock|array $data): self

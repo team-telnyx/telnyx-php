@@ -52,9 +52,9 @@ final class AudioTest extends TestCase
         $result = $this->client->ai->audio->transcribe([
             'model' => 'distil-whisper/distil-large-v2',
             'file' => 'file',
-            'file_url' => 'https://example.com/file.mp3',
-            'response_format' => 'json',
-            'timestamp_granularities__' => 'segment',
+            'fileURL' => 'https://example.com/file.mp3',
+            'responseFormat' => 'json',
+            'timestampGranularities' => 'segment',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

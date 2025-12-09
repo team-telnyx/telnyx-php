@@ -86,17 +86,17 @@ final class MessagesTest extends TestCase
 
         $result = $this->client->messages->schedule([
             'to' => '+18445550001',
-            'auto_detect' => true,
+            'autoDetect' => true,
             'from' => '+18445550001',
-            'media_urls' => ['string'],
-            'messaging_profile_id' => 'abc85f64-5717-4562-b3fc-2c9600000000',
-            'send_at' => new \DateTimeImmutable('2019-01-23T18:30:00Z'),
+            'mediaURLs' => ['string'],
+            'messagingProfileID' => 'abc85f64-5717-4562-b3fc-2c9600000000',
+            'sendAt' => new \DateTimeImmutable('2019-01-23T18:30:00Z'),
             'subject' => 'From Telnyx!',
             'text' => 'Hello, World!',
             'type' => 'SMS',
-            'use_profile_webhooks' => true,
-            'webhook_failover_url' => 'https://backup.example.com/hooks',
-            'webhook_url' => 'http://example.com/webhooks',
+            'useProfileWebhooks' => true,
+            'webhookFailoverURL' => 'https://backup.example.com/hooks',
+            'webhookURL' => 'http://example.com/webhooks',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -125,17 +125,17 @@ final class MessagesTest extends TestCase
 
         $result = $this->client->messages->send([
             'to' => '+18445550001',
-            'auto_detect' => true,
+            'autoDetect' => true,
             'from' => '+18445550001',
-            'media_urls' => ['http://example.com'],
-            'messaging_profile_id' => 'abc85f64-5717-4562-b3fc-2c9600000000',
-            'send_at' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+            'mediaURLs' => ['http://example.com'],
+            'messagingProfileID' => 'abc85f64-5717-4562-b3fc-2c9600000000',
+            'sendAt' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
             'subject' => 'From Telnyx!',
             'text' => 'Hello, World!',
             'type' => 'MMS',
-            'use_profile_webhooks' => true,
-            'webhook_failover_url' => 'https://backup.example.com/hooks',
-            'webhook_url' => 'http://example.com/webhooks',
+            'useProfileWebhooks' => true,
+            'webhookFailoverURL' => 'https://backup.example.com/hooks',
+            'webhookURL' => 'http://example.com/webhooks',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -167,12 +167,12 @@ final class MessagesTest extends TestCase
         $result = $this->client->messages->sendGroupMms([
             'from' => '+13125551234',
             'to' => ['+18655551234', '+14155551234'],
-            'media_urls' => ['http://example.com'],
+            'mediaURLs' => ['http://example.com'],
             'subject' => 'From Telnyx!',
             'text' => 'Hello, World!',
-            'use_profile_webhooks' => true,
-            'webhook_failover_url' => 'https://backup.example.com/hooks',
-            'webhook_url' => 'http://example.com/webhooks',
+            'useProfileWebhooks' => true,
+            'webhookFailoverURL' => 'https://backup.example.com/hooks',
+            'webhookURL' => 'http://example.com/webhooks',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -204,14 +204,14 @@ final class MessagesTest extends TestCase
         $result = $this->client->messages->sendLongCode([
             'from' => '+18445550001',
             'to' => '+13125550002',
-            'auto_detect' => true,
-            'media_urls' => ['http://example.com'],
+            'autoDetect' => true,
+            'mediaURLs' => ['http://example.com'],
             'subject' => 'From Telnyx!',
             'text' => 'Hello, World!',
             'type' => 'MMS',
-            'use_profile_webhooks' => true,
-            'webhook_failover_url' => 'https://backup.example.com/hooks',
-            'webhook_url' => 'http://example.com/webhooks',
+            'useProfileWebhooks' => true,
+            'webhookFailoverURL' => 'https://backup.example.com/hooks',
+            'webhookURL' => 'http://example.com/webhooks',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -226,7 +226,7 @@ final class MessagesTest extends TestCase
         }
 
         $result = $this->client->messages->sendNumberPool([
-            'messaging_profile_id' => 'abc85f64-5717-4562-b3fc-2c9600000000',
+            'messagingProfileID' => 'abc85f64-5717-4562-b3fc-2c9600000000',
             'to' => '+13125550002',
         ]);
 
@@ -242,16 +242,16 @@ final class MessagesTest extends TestCase
         }
 
         $result = $this->client->messages->sendNumberPool([
-            'messaging_profile_id' => 'abc85f64-5717-4562-b3fc-2c9600000000',
+            'messagingProfileID' => 'abc85f64-5717-4562-b3fc-2c9600000000',
             'to' => '+13125550002',
-            'auto_detect' => true,
-            'media_urls' => ['http://example.com'],
+            'autoDetect' => true,
+            'mediaURLs' => ['http://example.com'],
             'subject' => 'From Telnyx!',
             'text' => 'Hello, World!',
             'type' => 'MMS',
-            'use_profile_webhooks' => true,
-            'webhook_failover_url' => 'https://backup.example.com/hooks',
-            'webhook_url' => 'http://example.com/webhooks',
+            'useProfileWebhooks' => true,
+            'webhookFailoverURL' => 'https://backup.example.com/hooks',
+            'webhookURL' => 'http://example.com/webhooks',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -283,14 +283,14 @@ final class MessagesTest extends TestCase
         $result = $this->client->messages->sendShortCode([
             'from' => '+18445550001',
             'to' => '+18445550001',
-            'auto_detect' => true,
-            'media_urls' => ['http://example.com'],
+            'autoDetect' => true,
+            'mediaURLs' => ['http://example.com'],
             'subject' => 'From Telnyx!',
             'text' => 'Hello, World!',
             'type' => 'MMS',
-            'use_profile_webhooks' => true,
-            'webhook_failover_url' => 'https://backup.example.com/hooks',
-            'webhook_url' => 'http://example.com/webhooks',
+            'useProfileWebhooks' => true,
+            'webhookFailoverURL' => 'https://backup.example.com/hooks',
+            'webhookURL' => 'http://example.com/webhooks',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

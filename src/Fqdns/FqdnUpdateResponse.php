@@ -31,13 +31,13 @@ final class FqdnUpdateResponse implements BaseModel
      *
      * @param Fqdn|array{
      *   id?: string|null,
-     *   connection_id?: string|null,
-     *   created_at?: string|null,
-     *   dns_record_type?: string|null,
+     *   connectionID?: string|null,
+     *   createdAt?: string|null,
+     *   dnsRecordType?: string|null,
      *   fqdn?: string|null,
      *   port?: int|null,
-     *   record_type?: string|null,
-     *   updated_at?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public static function with(Fqdn|array|null $data = null): self
@@ -52,13 +52,13 @@ final class FqdnUpdateResponse implements BaseModel
     /**
      * @param Fqdn|array{
      *   id?: string|null,
-     *   connection_id?: string|null,
-     *   created_at?: string|null,
-     *   dns_record_type?: string|null,
+     *   connectionID?: string|null,
+     *   createdAt?: string|null,
+     *   dnsRecordType?: string|null,
      *   fqdn?: string|null,
      *   port?: int|null,
-     *   record_type?: string|null,
-     *   updated_at?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public function withData(Fqdn|array $data): self

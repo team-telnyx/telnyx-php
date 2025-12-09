@@ -46,21 +46,19 @@ final class AvailablePhoneNumberListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   best_effort?: bool|null,
-     *   cost_information?: CostInformation|null,
+     *   bestEffort?: bool|null,
+     *   costInformation?: CostInformation|null,
      *   features?: list<Feature>|null,
-     *   phone_number?: string|null,
+     *   phoneNumber?: string|null,
      *   quickship?: bool|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   region_information?: list<RegionInformation>|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   regionInformation?: list<RegionInformation>|null,
      *   reservable?: bool|null,
-     *   vanity_format?: string|null,
+     *   vanityFormat?: string|null,
      * }> $data
-     * @param Meta|array{
-     *   best_effort_results?: int|null, total_results?: int|null
-     * } $meta
+     * @param Meta|array{bestEffortResults?: int|null, totalResults?: int|null} $meta
      * @param Metadata|array{
-     *   best_effort_results?: int|null, total_results?: int|null
+     *   bestEffortResults?: int|null, totalResults?: int|null
      * } $metadata
      */
     public static function with(
@@ -79,15 +77,15 @@ final class AvailablePhoneNumberListResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   best_effort?: bool|null,
-     *   cost_information?: CostInformation|null,
+     *   bestEffort?: bool|null,
+     *   costInformation?: CostInformation|null,
      *   features?: list<Feature>|null,
-     *   phone_number?: string|null,
+     *   phoneNumber?: string|null,
      *   quickship?: bool|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   region_information?: list<RegionInformation>|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   regionInformation?: list<RegionInformation>|null,
      *   reservable?: bool|null,
-     *   vanity_format?: string|null,
+     *   vanityFormat?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -99,9 +97,7 @@ final class AvailablePhoneNumberListResponse implements BaseModel
     }
 
     /**
-     * @param Meta|array{
-     *   best_effort_results?: int|null, total_results?: int|null
-     * } $meta
+     * @param Meta|array{bestEffortResults?: int|null, totalResults?: int|null} $meta
      */
     public function withMeta(Meta|array $meta): self
     {
@@ -113,7 +109,7 @@ final class AvailablePhoneNumberListResponse implements BaseModel
 
     /**
      * @param Metadata|array{
-     *   best_effort_results?: int|null, total_results?: int|null
+     *   bestEffortResults?: int|null, totalResults?: int|null
      * } $metadata
      */
     public function withMetadata(Metadata|array $metadata): self
