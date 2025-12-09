@@ -71,7 +71,7 @@ final class UserAddressesTest extends TestCase
             neighborhood: 'Ciudad de los deportes',
             phoneNumber: '+12125559000',
             postalCode: '78701',
-            skipAddressVerification: 'skip_address_verification',
+            skipAddressVerification: true,
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

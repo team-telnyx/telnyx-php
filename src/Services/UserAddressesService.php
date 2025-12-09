@@ -47,7 +47,7 @@ final class UserAddressesService implements UserAddressesContract
      * @param string $neighborhood The neighborhood of the user address. This field is not used for addresses in the US but is used for some international addresses.
      * @param string $phoneNumber the phone number associated with the user address
      * @param string $postalCode the postal code of the user address
-     * @param string $skipAddressVerification An optional boolean value specifying if verification of the address should be skipped or not. UserAddresses are generally used for shipping addresses, and failure to validate your shipping address will likely result in a failure to deliver SIM cards or other items ordered from Telnyx. Do not use this parameter unless you are sure that the address is correct even though it cannot be validated. If this is set to any value other than true, verification of the address will be attempted, and the user address will not be allowed if verification fails. If verification fails but suggested values are available that might make the address correct, they will be present in the response as well. If this value is set to true, then the verification will not be attempted. Defaults to false (verification will be performed).
+     * @param bool $skipAddressVerification An optional boolean value specifying if verification of the address should be skipped or not. UserAddresses are generally used for shipping addresses, and failure to validate your shipping address will likely result in a failure to deliver SIM cards or other items ordered from Telnyx. Do not use this parameter unless you are sure that the address is correct even though it cannot be validated. If this is set to any value other than true, verification of the address will be attempted, and the user address will not be allowed if verification fails. If verification fails but suggested values are available that might make the address correct, they will be present in the response as well. If this value is set to true, then the verification will not be attempted. Defaults to false (verification will be performed).
      *
      * @throws APIException
      */
@@ -65,7 +65,7 @@ final class UserAddressesService implements UserAddressesContract
         ?string $neighborhood = null,
         ?string $phoneNumber = null,
         ?string $postalCode = null,
-        string $skipAddressVerification = false,
+        bool $skipAddressVerification = false,
         ?RequestOptions $requestOptions = null,
     ): UserAddressNewResponse {
         $params = [
