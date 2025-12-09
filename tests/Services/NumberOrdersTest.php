@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\DefaultPagination;
 use Telnyx\NumberOrders\NumberOrderGetResponse;
+use Telnyx\NumberOrders\NumberOrderListResponse;
 use Telnyx\NumberOrders\NumberOrderNewResponse;
 use Telnyx\NumberOrders\NumberOrderUpdateResponse;
 use Tests\UnsupportedMockTests;
@@ -76,9 +77,14 @@ final class NumberOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->numberOrders->list();
+        $page = $this->client->numberOrders->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(NumberOrderListResponse::class, $item);
+        }
     }
 }

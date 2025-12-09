@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\DefaultPagination;
 use Telnyx\Porting\Events\EventGetResponse;
+use Telnyx\Porting\Events\EventListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -50,10 +51,15 @@ final class EventsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->porting->events->list();
+        $page = $this->client->porting->events->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(EventListResponse::class, $item);
+        }
     }
 
     #[Test]

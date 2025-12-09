@@ -9,6 +9,7 @@ use Telnyx\Client;
 use Telnyx\DefaultPaginationForLogMessages;
 use Telnyx\ExternalConnections\LogMessages\LogMessageDismissResponse;
 use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse;
+use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -49,10 +50,15 @@ final class LogMessagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->externalConnections->logMessages->list();
+        $page = $this->client->externalConnections->logMessages->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPaginationForLogMessages::class, $result);
+        $this->assertInstanceOf(DefaultPaginationForLogMessages::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(LogMessageListResponse::class, $item);
+        }
     }
 
     #[Test]

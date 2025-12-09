@@ -9,6 +9,7 @@ use Telnyx\Client;
 use Telnyx\DefaultPagination;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectDeleteResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse;
+use Telnyx\VirtualCrossConnects\VirtualCrossConnectListResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectNewResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectUpdateResponse;
 use Tests\UnsupportedMockTests;
@@ -112,10 +113,15 @@ final class VirtualCrossConnectsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->virtualCrossConnects->list();
+        $page = $this->client->virtualCrossConnects->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(VirtualCrossConnectListResponse::class, $item);
+        }
     }
 
     #[Test]

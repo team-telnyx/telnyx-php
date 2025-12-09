@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\DefaultPagination;
+use Telnyx\MobilePushCredentials\PushCredential;
 use Telnyx\MobilePushCredentials\PushCredentialResponse;
 use Tests\UnsupportedMockTests;
 
@@ -90,10 +91,15 @@ final class MobilePushCredentialsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->mobilePushCredentials->list();
+        $page = $this->client->mobilePushCredentials->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(PushCredential::class, $item);
+        }
     }
 
     #[Test]

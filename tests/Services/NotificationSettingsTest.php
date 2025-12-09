@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\DefaultPagination;
+use Telnyx\NotificationSettings\NotificationSetting;
 use Telnyx\NotificationSettings\NotificationSettingDeleteResponse;
 use Telnyx\NotificationSettings\NotificationSettingGetResponse;
 use Telnyx\NotificationSettings\NotificationSettingNewResponse;
@@ -65,10 +66,15 @@ final class NotificationSettingsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->notificationSettings->list();
+        $page = $this->client->notificationSettings->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(NotificationSetting::class, $item);
+        }
     }
 
     #[Test]

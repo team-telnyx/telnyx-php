@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\VerifyProfiles\MessageTemplate;
+use Telnyx\VerifyProfiles\VerifyProfile;
 use Telnyx\VerifyProfiles\VerifyProfileData;
 use Telnyx\VerifyProfiles\VerifyProfileGetTemplatesResponse;
 use Tests\UnsupportedMockTests;
@@ -117,10 +118,15 @@ final class VerifyProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->verifyProfiles->list();
+        $page = $this->client->verifyProfiles->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPagination::class, $result);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(VerifyProfile::class, $item);
+        }
     }
 
     #[Test]

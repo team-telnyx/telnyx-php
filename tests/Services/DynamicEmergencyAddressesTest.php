@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\DefaultPagination;
+use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddress;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressDeleteResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressGetResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressNewResponse;
@@ -97,10 +98,15 @@ final class DynamicEmergencyAddressesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->dynamicEmergencyAddresses->list();
+        $page = $this->client->dynamicEmergencyAddresses->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(DynamicEmergencyAddress::class, $item);
+        }
     }
 
     #[Test]

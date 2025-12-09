@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeResponse;
 use Telnyx\PartnerCampaigns\TelnyxDownstreamCampaign;
 use Telnyx\PerPagePaginationV2;
 use Tests\UnsupportedMockTests;
@@ -61,10 +62,15 @@ final class PartnerCampaignsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->partnerCampaigns->list();
+        $page = $this->client->partnerCampaigns->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PerPagePaginationV2::class, $result);
+        $this->assertInstanceOf(PerPagePaginationV2::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(TelnyxDownstreamCampaign::class, $item);
+        }
     }
 
     #[Test]
@@ -74,10 +80,18 @@ final class PartnerCampaignsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->partnerCampaigns->listSharedByMe();
+        $page = $this->client->partnerCampaigns->listSharedByMe();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PerPagePaginationV2::class, $result);
+        $this->assertInstanceOf(PerPagePaginationV2::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(
+                PartnerCampaignListSharedByMeResponse::class,
+                $item
+            );
+        }
     }
 
     #[Test]

@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\DefaultPagination;
+use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpoint;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointDeleteResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointGetResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointNewResponse;
@@ -95,10 +96,15 @@ final class DynamicEmergencyEndpointsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->dynamicEmergencyEndpoints->list();
+        $page = $this->client->dynamicEmergencyEndpoints->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(DynamicEmergencyEndpoint::class, $item);
+        }
     }
 
     #[Test]

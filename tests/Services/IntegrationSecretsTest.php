@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\IntegrationSecrets\IntegrationSecret;
 use Telnyx\IntegrationSecrets\IntegrationSecretNewResponse;
 use Tests\UnsupportedMockTests;
 
@@ -70,10 +71,15 @@ final class IntegrationSecretsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->integrationSecrets->list();
+        $page = $this->client->integrationSecrets->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPagination::class, $result);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(IntegrationSecret::class, $item);
+        }
     }
 
     #[Test]

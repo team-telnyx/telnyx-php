@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Legacy\Reporting\UsageReports\Messaging\MdrUsageReportResponseLegacy;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingDeleteResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingGetResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingNewResponse;
@@ -98,10 +99,15 @@ final class MessagingTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->legacy->reporting->usageReports->messaging->list();
+        $page = $this->client->legacy->reporting->usageReports->messaging->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PerPagePagination::class, $result);
+        $this->assertInstanceOf(PerPagePagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(MdrUsageReportResponseLegacy::class, $item);
+        }
     }
 
     #[Test]

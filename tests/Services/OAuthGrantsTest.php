@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\OAuthGrants\OAuthGrant;
 use Telnyx\OAuthGrants\OAuthGrantDeleteResponse;
 use Telnyx\OAuthGrants\OAuthGrantGetResponse;
 use Tests\UnsupportedMockTests;
@@ -51,10 +52,15 @@ final class OAuthGrantsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauthGrants->list();
+        $page = $this->client->oauthGrants->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPagination::class, $result);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(OAuthGrant::class, $item);
+        }
     }
 
     #[Test]

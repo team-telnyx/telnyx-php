@@ -9,6 +9,7 @@ use Telnyx\Client;
 use Telnyx\DefaultPagination;
 use Telnyx\ManagedAccounts\ManagedAccountGetAllocatableGlobalOutboundChannelsResponse;
 use Telnyx\ManagedAccounts\ManagedAccountGetResponse;
+use Telnyx\ManagedAccounts\ManagedAccountListResponse;
 use Telnyx\ManagedAccounts\ManagedAccountNewResponse;
 use Telnyx\ManagedAccounts\ManagedAccountUpdateGlobalChannelLimitResponse;
 use Telnyx\ManagedAccounts\ManagedAccountUpdateResponse;
@@ -99,10 +100,15 @@ final class ManagedAccountsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->managedAccounts->list();
+        $page = $this->client->managedAccounts->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(ManagedAccountListResponse::class, $item);
+        }
     }
 
     #[Test]

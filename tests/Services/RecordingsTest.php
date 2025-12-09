@@ -9,6 +9,7 @@ use Telnyx\Client;
 use Telnyx\DefaultPagination;
 use Telnyx\Recordings\RecordingDeleteResponse;
 use Telnyx\Recordings\RecordingGetResponse;
+use Telnyx\Recordings\RecordingResponseData;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -49,10 +50,15 @@ final class RecordingsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->recordings->list();
+        $page = $this->client->recordings->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(RecordingResponseData::class, $item);
+        }
     }
 
     #[Test]

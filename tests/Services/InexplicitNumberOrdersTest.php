@@ -9,6 +9,7 @@ use Telnyx\Client;
 use Telnyx\DefaultFlatPaginationForInexplicitNumberOrders;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderGetResponse;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderNewResponse;
+use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -109,12 +110,17 @@ final class InexplicitNumberOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->inexplicitNumberOrders->list();
+        $page = $this->client->inexplicitNumberOrders->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(
             DefaultFlatPaginationForInexplicitNumberOrders::class,
-            $result
+            $page
         );
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(InexplicitNumberOrderResponse::class, $item);
+        }
     }
 }

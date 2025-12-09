@@ -35,14 +35,19 @@ final class UsageReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->usageReports->list(
+        $page = $this->client->usageReports->list(
             dimensions: ['string'],
             metrics: ['string'],
             product: 'product'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPagination::class, $result);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertIsArray($item);
+        }
     }
 
     #[Test]
@@ -52,7 +57,7 @@ final class UsageReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->usageReports->list(
+        $page = $this->client->usageReports->list(
             dimensions: ['string'],
             metrics: ['string'],
             product: 'product',
@@ -69,7 +74,12 @@ final class UsageReportsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPagination::class, $result);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertIsArray($item);
+        }
     }
 
     #[Test]

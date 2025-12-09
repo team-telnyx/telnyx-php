@@ -10,6 +10,7 @@ use Telnyx\Number10dlc\Brand\AltBusinessIDType;
 use Telnyx\Number10dlc\Brand\BrandGetFeedbackResponse;
 use Telnyx\Number10dlc\Brand\BrandGetResponse;
 use Telnyx\Number10dlc\Brand\BrandIdentityStatus;
+use Telnyx\Number10dlc\Brand\BrandListResponse;
 use Telnyx\Number10dlc\Brand\EntityType;
 use Telnyx\Number10dlc\Brand\StockExchange;
 use Telnyx\Number10dlc\Brand\TelnyxBrand;
@@ -172,10 +173,15 @@ final class BrandTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->number10dlc->brand->list();
+        $page = $this->client->number10dlc->brand->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PerPagePaginationV2::class, $result);
+        $this->assertInstanceOf(PerPagePaginationV2::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(BrandListResponse::class, $item);
+        }
     }
 
     #[Test]

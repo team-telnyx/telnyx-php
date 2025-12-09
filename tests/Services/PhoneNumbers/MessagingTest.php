@@ -9,6 +9,7 @@ use Telnyx\Client;
 use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\Messaging\MessagingGetResponse;
 use Telnyx\PhoneNumbers\Messaging\MessagingUpdateResponse;
+use Telnyx\PhoneNumberWithMessagingSettings;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -62,9 +63,14 @@ final class MessagingTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->messaging->list();
+        $page = $this->client->phoneNumbers->messaging->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(PhoneNumberWithMessagingSettings::class, $item);
+        }
     }
 }
