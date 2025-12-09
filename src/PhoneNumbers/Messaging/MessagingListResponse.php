@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Messaging;
 
-use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberHealthMetrics;
+use Telnyx\PhoneNumbers\Messaging\MessagingListResponse\Meta;
 use Telnyx\PhoneNumberWithMessagingSettings;
 use Telnyx\PhoneNumberWithMessagingSettings\Features;
 use Telnyx\PhoneNumberWithMessagingSettings\RecordType;
@@ -16,7 +16,7 @@ use Telnyx\PhoneNumberWithMessagingSettings\Type;
 
 /**
  * @phpstan-type MessagingListResponseShape = array{
- *   data?: list<PhoneNumberWithMessagingSettings>|null, meta?: PaginationMeta|null
+ *   data?: list<PhoneNumberWithMessagingSettings>|null, meta?: Meta|null
  * }
  */
 final class MessagingListResponse implements BaseModel
@@ -29,7 +29,7 @@ final class MessagingListResponse implements BaseModel
     public ?array $data;
 
     #[Optional]
-    public ?PaginationMeta $meta;
+    public ?Meta $meta;
 
     public function __construct()
     {
@@ -56,16 +56,13 @@ final class MessagingListResponse implements BaseModel
      *   type?: value-of<Type>|null,
      *   updated_at?: \DateTimeInterface|null,
      * }> $data
-     * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     * @param Meta|array{
+     *   page_number: int, page_size: int, total_pages: int, total_results: int
      * } $meta
      */
     public static function with(
         ?array $data = null,
-        PaginationMeta|array|null $meta = null
+        Meta|array|null $meta = null
     ): self {
         $obj = new self;
 
@@ -101,14 +98,11 @@ final class MessagingListResponse implements BaseModel
     }
 
     /**
-     * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     * @param Meta|array{
+     *   page_number: int, page_size: int, total_pages: int, total_results: int
      * } $meta
      */
-    public function withMeta(PaginationMeta|array $meta): self
+    public function withMeta(Meta|array $meta): self
     {
         $obj = clone $this;
         $obj['meta'] = $meta;

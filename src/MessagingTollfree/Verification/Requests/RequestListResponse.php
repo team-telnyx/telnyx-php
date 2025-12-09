@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingTollfree\Verification\Requests;
 
-use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * A paginated response.
  *
  * @phpstan-type RequestListResponseShape = array{
- *   records?: list<VerificationRequestStatus>|null, total_records?: int|null
+ *   records: list<VerificationRequestStatus>, total_records: int
  * }
  */
 final class RequestListResponse implements BaseModel
@@ -23,17 +23,31 @@ final class RequestListResponse implements BaseModel
     /**
      * The records yielded by this request.
      *
-     * @var list<VerificationRequestStatus>|null $records
+     * @var list<VerificationRequestStatus> $records
      */
-    #[Optional(list: VerificationRequestStatus::class)]
-    public ?array $records;
+    #[Required(list: VerificationRequestStatus::class)]
+    public array $records;
 
     /**
      * The total amount of records for these query parameters.
      */
-    #[Optional]
-    public ?int $total_records;
+    #[Required]
+    public int $total_records;
 
+    /**
+     * `new RequestListResponse()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * RequestListResponse::with(records: ..., total_records: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new RequestListResponse)->withRecords(...)->withTotalRecords(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -85,13 +99,13 @@ final class RequestListResponse implements BaseModel
      * }> $records
      */
     public static function with(
-        ?array $records = null,
-        ?int $total_records = null
+        array $records = [],
+        int $total_records = 0
     ): self {
         $obj = new self;
 
-        null !== $records && $obj['records'] = $records;
-        null !== $total_records && $obj['total_records'] = $total_records;
+        $obj['records'] = $records;
+        $obj['total_records'] = $total_records;
 
         return $obj;
     }
