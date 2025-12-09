@@ -51,7 +51,7 @@ interface PhoneNumberCampaignsRawContract
      * @throws APIException
      */
     public function update(
-        string $phoneNumber,
+        string $phoneNumber_,
         array|PhoneNumberCampaignUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse;

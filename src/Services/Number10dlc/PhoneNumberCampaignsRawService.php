@@ -92,7 +92,7 @@ final class PhoneNumberCampaignsRawService implements PhoneNumberCampaignsRawCon
      * @throws APIException
      */
     public function update(
-        string $phoneNumber,
+        string $phoneNumber_,
         array|PhoneNumberCampaignUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse {
@@ -104,7 +104,7 @@ final class PhoneNumberCampaignsRawService implements PhoneNumberCampaignsRawCon
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
-            path: ['10dlc/phone_number_campaigns/%1$s', $phoneNumber],
+            path: ['10dlc/phone_number_campaigns/%1$s', $phoneNumber_],
             body: (object) $parsed,
             options: $options,
             convert: PhoneNumberCampaign::class,

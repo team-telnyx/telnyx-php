@@ -164,8 +164,8 @@ interface ActionsContract
     /**
      * @api
      *
-     * @param string $callControlID Unique identifier and token for controlling the call
-     * @param string $callControlID1 the Call Control ID of the call you want to bridge with, can't be used together with queue parameter or video_room_id parameter
+     * @param string $callControlID_ Unique identifier and token for controlling the call
+     * @param string $callControlID the Call Control ID of the call you want to bridge with, can't be used together with queue parameter or video_room_id parameter
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param 'none'|'both'|'self'|'opposite'|MuteDtmf $muteDtmf When enabled, DTMF tones are not passed to the call participant. The webhooks containing the DTMF information will be sent.
@@ -187,8 +187,8 @@ interface ActionsContract
      * @throws APIException
      */
     public function bridge(
+        string $callControlID_,
         string $callControlID,
-        string $callControlID1,
         ?string $clientState = null,
         ?string $commandID = null,
         string|MuteDtmf $muteDtmf = 'none',

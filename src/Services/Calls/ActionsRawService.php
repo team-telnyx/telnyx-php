@@ -214,7 +214,7 @@ final class ActionsRawService implements ActionsRawContract
      * - `call.bridged` for Leg A
      * - `call.bridged` for Leg B
      *
-     * @param string $callControlID Unique identifier and token for controlling the call
+     * @param string $callControlID_ Unique identifier and token for controlling the call
      * @param array{
      *   callControlID: string,
      *   clientState?: string,
@@ -241,7 +241,7 @@ final class ActionsRawService implements ActionsRawContract
      * @throws APIException
      */
     public function bridge(
-        string $callControlID,
+        string $callControlID_,
         array|ActionBridgeParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse {
@@ -253,7 +253,7 @@ final class ActionsRawService implements ActionsRawContract
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
-            path: ['calls/%1$s/actions/bridge', $callControlID],
+            path: ['calls/%1$s/actions/bridge', $callControlID_],
             body: (object) $parsed,
             options: $options,
             convert: ActionBridgeResponse::class,

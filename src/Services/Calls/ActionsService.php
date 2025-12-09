@@ -231,8 +231,8 @@ final class ActionsService implements ActionsContract
      * - `call.bridged` for Leg A
      * - `call.bridged` for Leg B
      *
-     * @param string $callControlID Unique identifier and token for controlling the call
-     * @param string $callControlID1 the Call Control ID of the call you want to bridge with, can't be used together with queue parameter or video_room_id parameter
+     * @param string $callControlID_ Unique identifier and token for controlling the call
+     * @param string $callControlID the Call Control ID of the call you want to bridge with, can't be used together with queue parameter or video_room_id parameter
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param 'none'|'both'|'self'|'opposite'|MuteDtmf $muteDtmf When enabled, DTMF tones are not passed to the call participant. The webhooks containing the DTMF information will be sent.
@@ -254,8 +254,8 @@ final class ActionsService implements ActionsContract
      * @throws APIException
      */
     public function bridge(
+        string $callControlID_,
         string $callControlID,
-        string $callControlID1,
         ?string $clientState = null,
         ?string $commandID = null,
         string|MuteDtmf $muteDtmf = 'none',
@@ -276,7 +276,7 @@ final class ActionsService implements ActionsContract
         ?RequestOptions $requestOptions = null,
     ): ActionBridgeResponse {
         $params = [
-            'callControlID' => $callControlID1,
+            'callControlID' => $callControlID,
             'clientState' => $clientState,
             'commandID' => $commandID,
             'muteDtmf' => $muteDtmf,
@@ -299,7 +299,7 @@ final class ActionsService implements ActionsContract
         $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->bridge($callControlID, params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->bridge($callControlID_, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

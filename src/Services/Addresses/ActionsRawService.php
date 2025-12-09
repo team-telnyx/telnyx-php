@@ -27,7 +27,7 @@ final class ActionsRawService implements ActionsRawContract
      *
      * Accepts this address suggestion as a new emergency address for Operator Connect and finishes the uploads of the numbers associated with it to Microsoft.
      *
-     * @param string $id the UUID of the address that should be accepted
+     * @param string $id_ the UUID of the address that should be accepted
      * @param array{id?: string}|ActionAcceptSuggestionsParams $params
      *
      * @return BaseResponse<ActionAcceptSuggestionsResponse>
@@ -35,7 +35,7 @@ final class ActionsRawService implements ActionsRawContract
      * @throws APIException
      */
     public function acceptSuggestions(
-        string $id,
+        string $id_,
         array|ActionAcceptSuggestionsParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse {
@@ -47,7 +47,7 @@ final class ActionsRawService implements ActionsRawContract
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
-            path: ['addresses/%1$s/actions/accept_suggestions', $id],
+            path: ['addresses/%1$s/actions/accept_suggestions', $id_],
             body: (object) $parsed,
             options: $options,
             convert: ActionAcceptSuggestionsResponse::class,
