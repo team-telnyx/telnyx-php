@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AccessIPAddressService::create()
  *
  * @phpstan-type AccessIPAddressCreateParamsShape = array{
- *   ip_address: string, description?: string
+ *   ipAddress: string, description?: string
  * }
  */
 final class AccessIPAddressCreateParams implements BaseModel
@@ -25,8 +25,8 @@ final class AccessIPAddressCreateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Required]
-    public string $ip_address;
+    #[Required('ip_address')]
+    public string $ipAddress;
 
     #[Optional]
     public ?string $description;
@@ -36,7 +36,7 @@ final class AccessIPAddressCreateParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * AccessIPAddressCreateParams::with(ip_address: ...)
+     * AccessIPAddressCreateParams::with(ipAddress: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -56,12 +56,12 @@ final class AccessIPAddressCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $ip_address,
+        string $ipAddress,
         ?string $description = null
     ): self {
         $obj = new self;
 
-        $obj['ip_address'] = $ip_address;
+        $obj['ipAddress'] = $ipAddress;
 
         null !== $description && $obj['description'] = $description;
 
@@ -71,7 +71,7 @@ final class AccessIPAddressCreateParams implements BaseModel
     public function withIPAddress(string $ipAddress): self
     {
         $obj = clone $this;
-        $obj['ip_address'] = $ipAddress;
+        $obj['ipAddress'] = $ipAddress;
 
         return $obj;
     }

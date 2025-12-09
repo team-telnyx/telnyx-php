@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type ConferenceListParticipantsParamsShape = array{
  *   filter?: Filter|array{
- *     muted?: bool|null, on_hold?: bool|null, whispering?: bool|null
+ *     muted?: bool|null, onHold?: bool|null, whispering?: bool|null
  *   },
  *   page?: Page|array{
  *     after?: string|null,
@@ -68,7 +68,7 @@ final class ConferenceListParticipantsParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   muted?: bool|null, on_hold?: bool|null, whispering?: bool|null
+     *   muted?: bool|null, onHold?: bool|null, whispering?: bool|null
      * } $filter
      * @param Page|array{
      *   after?: string|null,
@@ -97,7 +97,7 @@ final class ConferenceListParticipantsParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[muted], filter[on_hold], filter[whispering].
      *
      * @param Filter|array{
-     *   muted?: bool|null, on_hold?: bool|null, whispering?: bool|null
+     *   muted?: bool|null, onHold?: bool|null, whispering?: bool|null
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

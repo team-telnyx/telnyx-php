@@ -11,13 +11,13 @@ use Telnyx\Webhooks\ConferenceEndedWebhookEvent\Data1\Payload\Reason;
 
 /**
  * @phpstan-type PayloadShape = array{
- *   call_control_id?: string|null,
- *   call_leg_id?: string|null,
- *   call_session_id?: string|null,
- *   client_state?: string|null,
- *   conference_id?: string|null,
- *   connection_id?: string|null,
- *   occurred_at?: \DateTimeInterface|null,
+ *   callControlID?: string|null,
+ *   callLegID?: string|null,
+ *   callSessionID?: string|null,
+ *   clientState?: string|null,
+ *   conferenceID?: string|null,
+ *   connectionID?: string|null,
+ *   occurredAt?: \DateTimeInterface|null,
  *   reason?: value-of<Reason>|null,
  * }
  */
@@ -29,44 +29,44 @@ final class Payload implements BaseModel
     /**
      * Call ID used to issue commands via Call Control API.
      */
-    #[Optional]
-    public ?string $call_control_id;
+    #[Optional('call_control_id')]
+    public ?string $callControlID;
 
     /**
      * ID that is unique to the call and can be used to correlate webhook events.
      */
-    #[Optional]
-    public ?string $call_leg_id;
+    #[Optional('call_leg_id')]
+    public ?string $callLegID;
 
     /**
      * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
      */
-    #[Optional]
-    public ?string $call_session_id;
+    #[Optional('call_session_id')]
+    public ?string $callSessionID;
 
     /**
      * State received from a command.
      */
-    #[Optional]
-    public ?string $client_state;
+    #[Optional('client_state')]
+    public ?string $clientState;
 
     /**
      * Conference ID that the participant joined.
      */
-    #[Optional]
-    public ?string $conference_id;
+    #[Optional('conference_id')]
+    public ?string $conferenceID;
 
     /**
      * Call Control App ID (formerly Telnyx connection ID) used in the call.
      */
-    #[Optional]
-    public ?string $connection_id;
+    #[Optional('connection_id')]
+    public ?string $connectionID;
 
     /**
      * ISO 8601 datetime of when the event occurred.
      */
-    #[Optional]
-    public ?\DateTimeInterface $occurred_at;
+    #[Optional('occurred_at')]
+    public ?\DateTimeInterface $occurredAt;
 
     /**
      * Reason the conference ended.
@@ -89,24 +89,24 @@ final class Payload implements BaseModel
      * @param Reason|value-of<Reason> $reason
      */
     public static function with(
-        ?string $call_control_id = null,
-        ?string $call_leg_id = null,
-        ?string $call_session_id = null,
-        ?string $client_state = null,
-        ?string $conference_id = null,
-        ?string $connection_id = null,
-        ?\DateTimeInterface $occurred_at = null,
+        ?string $callControlID = null,
+        ?string $callLegID = null,
+        ?string $callSessionID = null,
+        ?string $clientState = null,
+        ?string $conferenceID = null,
+        ?string $connectionID = null,
+        ?\DateTimeInterface $occurredAt = null,
         Reason|string|null $reason = null,
     ): self {
         $obj = new self;
 
-        null !== $call_control_id && $obj['call_control_id'] = $call_control_id;
-        null !== $call_leg_id && $obj['call_leg_id'] = $call_leg_id;
-        null !== $call_session_id && $obj['call_session_id'] = $call_session_id;
-        null !== $client_state && $obj['client_state'] = $client_state;
-        null !== $conference_id && $obj['conference_id'] = $conference_id;
-        null !== $connection_id && $obj['connection_id'] = $connection_id;
-        null !== $occurred_at && $obj['occurred_at'] = $occurred_at;
+        null !== $callControlID && $obj['callControlID'] = $callControlID;
+        null !== $callLegID && $obj['callLegID'] = $callLegID;
+        null !== $callSessionID && $obj['callSessionID'] = $callSessionID;
+        null !== $clientState && $obj['clientState'] = $clientState;
+        null !== $conferenceID && $obj['conferenceID'] = $conferenceID;
+        null !== $connectionID && $obj['connectionID'] = $connectionID;
+        null !== $occurredAt && $obj['occurredAt'] = $occurredAt;
         null !== $reason && $obj['reason'] = $reason;
 
         return $obj;
@@ -118,7 +118,7 @@ final class Payload implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj['call_control_id'] = $callControlID;
+        $obj['callControlID'] = $callControlID;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class Payload implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj['call_leg_id'] = $callLegID;
+        $obj['callLegID'] = $callLegID;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class Payload implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj['call_session_id'] = $callSessionID;
+        $obj['callSessionID'] = $callSessionID;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class Payload implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj['client_state'] = $clientState;
+        $obj['clientState'] = $clientState;
 
         return $obj;
     }
@@ -162,7 +162,7 @@ final class Payload implements BaseModel
     public function withConferenceID(string $conferenceID): self
     {
         $obj = clone $this;
-        $obj['conference_id'] = $conferenceID;
+        $obj['conferenceID'] = $conferenceID;
 
         return $obj;
     }
@@ -173,7 +173,7 @@ final class Payload implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj['connection_id'] = $connectionID;
+        $obj['connectionID'] = $connectionID;
 
         return $obj;
     }
@@ -184,7 +184,7 @@ final class Payload implements BaseModel
     public function withOccurredAt(\DateTimeInterface $occurredAt): self
     {
         $obj = clone $this;
-        $obj['occurred_at'] = $occurredAt;
+        $obj['occurredAt'] = $occurredAt;
 
         return $obj;
     }

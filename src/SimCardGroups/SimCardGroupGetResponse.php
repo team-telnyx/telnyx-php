@@ -32,15 +32,15 @@ final class SimCardGroupGetResponse implements BaseModel
      *
      * @param SimCardGroup|array{
      *   id?: string|null,
-     *   consumed_data?: ConsumedData|null,
-     *   created_at?: string|null,
-     *   data_limit?: DataLimit|null,
+     *   consumedData?: ConsumedData|null,
+     *   createdAt?: string|null,
+     *   dataLimit?: DataLimit|null,
      *   default?: bool|null,
      *   name?: string|null,
-     *   private_wireless_gateway_id?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: string|null,
-     *   wireless_blocklist_id?: string|null,
+     *   privateWirelessGatewayID?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: string|null,
+     *   wirelessBlocklistID?: string|null,
      * } $data
      */
     public static function with(SimCardGroup|array|null $data = null): self
@@ -55,15 +55,15 @@ final class SimCardGroupGetResponse implements BaseModel
     /**
      * @param SimCardGroup|array{
      *   id?: string|null,
-     *   consumed_data?: ConsumedData|null,
-     *   created_at?: string|null,
-     *   data_limit?: DataLimit|null,
+     *   consumedData?: ConsumedData|null,
+     *   createdAt?: string|null,
+     *   dataLimit?: DataLimit|null,
      *   default?: bool|null,
      *   name?: string|null,
-     *   private_wireless_gateway_id?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: string|null,
-     *   wireless_blocklist_id?: string|null,
+     *   privateWirelessGatewayID?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: string|null,
+     *   wirelessBlocklistID?: string|null,
      * } $data
      */
     public function withData(SimCardGroup|array $data): self

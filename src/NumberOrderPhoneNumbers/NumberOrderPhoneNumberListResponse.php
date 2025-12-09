@@ -42,26 +42,26 @@ final class NumberOrderPhoneNumberListResponse implements BaseModel
      *
      * @param list<NumberOrderPhoneNumber|array{
      *   id?: string|null,
-     *   bundle_id?: string|null,
-     *   country_code?: string|null,
+     *   bundleID?: string|null,
+     *   countryCode?: string|null,
      *   deadline?: \DateTimeInterface|null,
-     *   is_block_number?: bool|null,
+     *   isBlockNumber?: bool|null,
      *   locality?: string|null,
-     *   order_request_id?: string|null,
-     *   phone_number?: string|null,
-     *   phone_number_type?: value-of<PhoneNumberType>|null,
-     *   record_type?: string|null,
-     *   regulatory_requirements?: list<SubNumberOrderRegulatoryRequirementWithValue>|null,
-     *   requirements_met?: bool|null,
-     *   requirements_status?: value-of<RequirementsStatus>|null,
+     *   orderRequestID?: string|null,
+     *   phoneNumber?: string|null,
+     *   phoneNumberType?: value-of<PhoneNumberType>|null,
+     *   recordType?: string|null,
+     *   regulatoryRequirements?: list<SubNumberOrderRegulatoryRequirementWithValue>|null,
+     *   requirementsMet?: bool|null,
+     *   requirementsStatus?: value-of<RequirementsStatus>|null,
      *   status?: value-of<Status>|null,
-     *   sub_number_order_id?: string|null,
+     *   subNumberOrderID?: string|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -79,20 +79,20 @@ final class NumberOrderPhoneNumberListResponse implements BaseModel
     /**
      * @param list<NumberOrderPhoneNumber|array{
      *   id?: string|null,
-     *   bundle_id?: string|null,
-     *   country_code?: string|null,
+     *   bundleID?: string|null,
+     *   countryCode?: string|null,
      *   deadline?: \DateTimeInterface|null,
-     *   is_block_number?: bool|null,
+     *   isBlockNumber?: bool|null,
      *   locality?: string|null,
-     *   order_request_id?: string|null,
-     *   phone_number?: string|null,
-     *   phone_number_type?: value-of<PhoneNumberType>|null,
-     *   record_type?: string|null,
-     *   regulatory_requirements?: list<SubNumberOrderRegulatoryRequirementWithValue>|null,
-     *   requirements_met?: bool|null,
-     *   requirements_status?: value-of<RequirementsStatus>|null,
+     *   orderRequestID?: string|null,
+     *   phoneNumber?: string|null,
+     *   phoneNumberType?: value-of<PhoneNumberType>|null,
+     *   recordType?: string|null,
+     *   regulatoryRequirements?: list<SubNumberOrderRegulatoryRequirementWithValue>|null,
+     *   requirementsMet?: bool|null,
+     *   requirementsStatus?: value-of<RequirementsStatus>|null,
      *   status?: value-of<Status>|null,
-     *   sub_number_order_id?: string|null,
+     *   subNumberOrderID?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -105,10 +105,10 @@ final class NumberOrderPhoneNumberListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

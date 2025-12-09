@@ -38,24 +38,24 @@ final class MigrationListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<MigrationParams|array{
-     *   source_id: string,
-     *   target_bucket_name: string,
-     *   target_region: string,
+     *   sourceID: string,
+     *   targetBucketName: string,
+     *   targetRegion: string,
      *   id?: string|null,
-     *   bytes_migrated?: int|null,
-     *   bytes_to_migrate?: int|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   bytesMigrated?: int|null,
+     *   bytesToMigrate?: int|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   eta?: \DateTimeInterface|null,
-     *   last_copy?: \DateTimeInterface|null,
+     *   lastCopy?: \DateTimeInterface|null,
      *   refresh?: bool|null,
      *   speed?: int|null,
      *   status?: value-of<Status>|null,
      * }> $data
      * @param PaginationMetaSimple|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -72,15 +72,15 @@ final class MigrationListResponse implements BaseModel
 
     /**
      * @param list<MigrationParams|array{
-     *   source_id: string,
-     *   target_bucket_name: string,
-     *   target_region: string,
+     *   sourceID: string,
+     *   targetBucketName: string,
+     *   targetRegion: string,
      *   id?: string|null,
-     *   bytes_migrated?: int|null,
-     *   bytes_to_migrate?: int|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   bytesMigrated?: int|null,
+     *   bytesToMigrate?: int|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   eta?: \DateTimeInterface|null,
-     *   last_copy?: \DateTimeInterface|null,
+     *   lastCopy?: \DateTimeInterface|null,
      *   refresh?: bool|null,
      *   speed?: int|null,
      *   status?: value-of<Status>|null,
@@ -96,10 +96,10 @@ final class MigrationListResponse implements BaseModel
 
     /**
      * @param PaginationMetaSimple|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMetaSimple|array $meta): self

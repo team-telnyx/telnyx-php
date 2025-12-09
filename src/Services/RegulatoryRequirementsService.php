@@ -29,10 +29,10 @@ final class RegulatoryRequirementsService implements RegulatoryRequirementsContr
      * @param array{
      *   filter?: array{
      *     action?: 'ordering'|'porting'|'action'|Action,
-     *     country_code?: string,
-     *     phone_number?: string,
-     *     phone_number_type?: 'local'|'toll_free'|'mobile'|'national'|'shared_cost'|PhoneNumberType,
-     *     requirement_group_id?: string,
+     *     countryCode?: string,
+     *     phoneNumber?: string,
+     *     phoneNumberType?: 'local'|'toll_free'|'mobile'|'national'|'shared_cost'|PhoneNumberType,
+     *     requirementGroupID?: string,
      *   },
      * }|RegulatoryRequirementRetrieveParams $params
      *

@@ -66,11 +66,11 @@ final class VerificationsService implements VerificationsContract
      * Trigger Call verification
      *
      * @param array{
-     *   phone_number: string,
-     *   verify_profile_id: string,
-     *   custom_code?: string|null,
+     *   phoneNumber: string,
+     *   verifyProfileID: string,
+     *   customCode?: string|null,
      *   extension?: string|null,
-     *   timeout_secs?: int,
+     *   timeoutSecs?: int,
      * }|VerificationTriggerCallParams $params
      *
      * @throws APIException
@@ -102,7 +102,7 @@ final class VerificationsService implements VerificationsContract
      * Trigger Flash call verification
      *
      * @param array{
-     *   phone_number: string, verify_profile_id: string, timeout_secs?: int
+     *   phoneNumber: string, verifyProfileID: string, timeoutSecs?: int
      * }|VerificationTriggerFlashcallParams $params
      *
      * @throws APIException
@@ -134,10 +134,10 @@ final class VerificationsService implements VerificationsContract
      * Trigger SMS verification
      *
      * @param array{
-     *   phone_number: string,
-     *   verify_profile_id: string,
-     *   custom_code?: string|null,
-     *   timeout_secs?: int,
+     *   phoneNumber: string,
+     *   verifyProfileID: string,
+     *   customCode?: string|null,
+     *   timeoutSecs?: int,
      * }|VerificationTriggerSMSParams $params
      *
      * @throws APIException

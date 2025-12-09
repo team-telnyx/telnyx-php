@@ -36,10 +36,10 @@ final class UploadsService implements UploadsContract
      * Creates a new Upload request to Microsoft teams with the included phone numbers. Only one of civic_address_id or location_id must be provided, not both. The maximum allowed phone numbers for the numbers_ids array is 1000.
      *
      * @param array{
-     *   number_ids: list<string>,
-     *   additional_usages?: list<'calling_user_assignment'|'first_party_app_assignment'|AdditionalUsage>,
-     *   civic_address_id?: string,
-     *   location_id?: string,
+     *   numberIDs: list<string>,
+     *   additionalUsages?: list<'calling_user_assignment'|'first_party_app_assignment'|AdditionalUsage>,
+     *   civicAddressID?: string,
+     *   locationID?: string,
      *   usage?: 'calling_user_assignment'|'first_party_app_assignment'|Usage,
      * }|UploadCreateParams $params
      *
@@ -106,9 +106,9 @@ final class UploadsService implements UploadsContract
      *
      * @param array{
      *   filter?: array{
-     *     civic_address_id?: array{eq?: string},
-     *     location_id?: array{eq?: string},
-     *     phone_number?: array{contains?: string, eq?: string},
+     *     civicAddressID?: array{eq?: string},
+     *     locationID?: array{eq?: string},
+     *     phoneNumber?: array{contains?: string, eq?: string},
      *     status?: array{
      *       eq?: list<'pending_upload'|'pending'|'in_progress'|'success'|'error'|Eq>
      *     },

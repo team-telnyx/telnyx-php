@@ -11,16 +11,16 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetResponse\Status
 
 /**
  * @phpstan-type ParticipantGetResponseShape = array{
- *   account_sid?: string|null,
- *   api_version?: string|null,
- *   call_sid?: string|null,
- *   call_sid_legacy?: string|null,
+ *   accountSid?: string|null,
+ *   apiVersion?: string|null,
+ *   callSid?: string|null,
+ *   callSidLegacy?: string|null,
  *   coaching?: bool|null,
- *   coaching_call_sid?: string|null,
- *   coaching_call_sid_legacy?: string|null,
- *   date_created?: string|null,
- *   date_updated?: string|null,
- *   end_conference_on_exit?: bool|null,
+ *   coachingCallSid?: string|null,
+ *   coachingCallSidLegacy?: string|null,
+ *   dateCreated?: string|null,
+ *   dateUpdated?: string|null,
+ *   endConferenceOnExit?: bool|null,
  *   hold?: bool|null,
  *   muted?: bool|null,
  *   status?: value-of<Status>|null,
@@ -35,26 +35,26 @@ final class ParticipantGetResponse implements BaseModel
     /**
      * The id of the account the resource belongs to.
      */
-    #[Optional]
-    public ?string $account_sid;
+    #[Optional('account_sid')]
+    public ?string $accountSid;
 
     /**
      * The version of the API that was used to make the request.
      */
-    #[Optional]
-    public ?string $api_version;
+    #[Optional('api_version')]
+    public ?string $apiVersion;
 
     /**
      * The identifier of this participant's call.
      */
-    #[Optional]
-    public ?string $call_sid;
+    #[Optional('call_sid')]
+    public ?string $callSid;
 
     /**
      * The identifier of this participant's call.
      */
-    #[Optional]
-    public ?string $call_sid_legacy;
+    #[Optional('call_sid_legacy')]
+    public ?string $callSidLegacy;
 
     /**
      * Whether the participant is coaching another call.
@@ -65,32 +65,32 @@ final class ParticipantGetResponse implements BaseModel
     /**
      * The identifier of the coached participant's call.
      */
-    #[Optional]
-    public ?string $coaching_call_sid;
+    #[Optional('coaching_call_sid')]
+    public ?string $coachingCallSid;
 
     /**
      * The identifier of the coached participant's call.
      */
-    #[Optional]
-    public ?string $coaching_call_sid_legacy;
+    #[Optional('coaching_call_sid_legacy')]
+    public ?string $coachingCallSidLegacy;
 
     /**
      * The timestamp of when the resource was created.
      */
-    #[Optional]
-    public ?string $date_created;
+    #[Optional('date_created')]
+    public ?string $dateCreated;
 
     /**
      * The timestamp of when the resource was last updated.
      */
-    #[Optional]
-    public ?string $date_updated;
+    #[Optional('date_updated')]
+    public ?string $dateUpdated;
 
     /**
      * Whether the conference ends when the participant leaves.
      */
-    #[Optional]
-    public ?bool $end_conference_on_exit;
+    #[Optional('end_conference_on_exit')]
+    public ?bool $endConferenceOnExit;
 
     /**
      * Whether the participant is on hold.
@@ -131,16 +131,16 @@ final class ParticipantGetResponse implements BaseModel
      * @param Status|value-of<Status> $status
      */
     public static function with(
-        ?string $account_sid = null,
-        ?string $api_version = null,
-        ?string $call_sid = null,
-        ?string $call_sid_legacy = null,
+        ?string $accountSid = null,
+        ?string $apiVersion = null,
+        ?string $callSid = null,
+        ?string $callSidLegacy = null,
         ?bool $coaching = null,
-        ?string $coaching_call_sid = null,
-        ?string $coaching_call_sid_legacy = null,
-        ?string $date_created = null,
-        ?string $date_updated = null,
-        ?bool $end_conference_on_exit = null,
+        ?string $coachingCallSid = null,
+        ?string $coachingCallSidLegacy = null,
+        ?string $dateCreated = null,
+        ?string $dateUpdated = null,
+        ?bool $endConferenceOnExit = null,
         ?bool $hold = null,
         ?bool $muted = null,
         Status|string|null $status = null,
@@ -148,16 +148,16 @@ final class ParticipantGetResponse implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $account_sid && $obj['account_sid'] = $account_sid;
-        null !== $api_version && $obj['api_version'] = $api_version;
-        null !== $call_sid && $obj['call_sid'] = $call_sid;
-        null !== $call_sid_legacy && $obj['call_sid_legacy'] = $call_sid_legacy;
+        null !== $accountSid && $obj['accountSid'] = $accountSid;
+        null !== $apiVersion && $obj['apiVersion'] = $apiVersion;
+        null !== $callSid && $obj['callSid'] = $callSid;
+        null !== $callSidLegacy && $obj['callSidLegacy'] = $callSidLegacy;
         null !== $coaching && $obj['coaching'] = $coaching;
-        null !== $coaching_call_sid && $obj['coaching_call_sid'] = $coaching_call_sid;
-        null !== $coaching_call_sid_legacy && $obj['coaching_call_sid_legacy'] = $coaching_call_sid_legacy;
-        null !== $date_created && $obj['date_created'] = $date_created;
-        null !== $date_updated && $obj['date_updated'] = $date_updated;
-        null !== $end_conference_on_exit && $obj['end_conference_on_exit'] = $end_conference_on_exit;
+        null !== $coachingCallSid && $obj['coachingCallSid'] = $coachingCallSid;
+        null !== $coachingCallSidLegacy && $obj['coachingCallSidLegacy'] = $coachingCallSidLegacy;
+        null !== $dateCreated && $obj['dateCreated'] = $dateCreated;
+        null !== $dateUpdated && $obj['dateUpdated'] = $dateUpdated;
+        null !== $endConferenceOnExit && $obj['endConferenceOnExit'] = $endConferenceOnExit;
         null !== $hold && $obj['hold'] = $hold;
         null !== $muted && $obj['muted'] = $muted;
         null !== $status && $obj['status'] = $status;
@@ -172,7 +172,7 @@ final class ParticipantGetResponse implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj['account_sid'] = $accountSid;
+        $obj['accountSid'] = $accountSid;
 
         return $obj;
     }
@@ -183,7 +183,7 @@ final class ParticipantGetResponse implements BaseModel
     public function withAPIVersion(string $apiVersion): self
     {
         $obj = clone $this;
-        $obj['api_version'] = $apiVersion;
+        $obj['apiVersion'] = $apiVersion;
 
         return $obj;
     }
@@ -194,7 +194,7 @@ final class ParticipantGetResponse implements BaseModel
     public function withCallSid(string $callSid): self
     {
         $obj = clone $this;
-        $obj['call_sid'] = $callSid;
+        $obj['callSid'] = $callSid;
 
         return $obj;
     }
@@ -205,7 +205,7 @@ final class ParticipantGetResponse implements BaseModel
     public function withCallSidLegacy(string $callSidLegacy): self
     {
         $obj = clone $this;
-        $obj['call_sid_legacy'] = $callSidLegacy;
+        $obj['callSidLegacy'] = $callSidLegacy;
 
         return $obj;
     }
@@ -227,7 +227,7 @@ final class ParticipantGetResponse implements BaseModel
     public function withCoachingCallSid(string $coachingCallSid): self
     {
         $obj = clone $this;
-        $obj['coaching_call_sid'] = $coachingCallSid;
+        $obj['coachingCallSid'] = $coachingCallSid;
 
         return $obj;
     }
@@ -239,7 +239,7 @@ final class ParticipantGetResponse implements BaseModel
         string $coachingCallSidLegacy
     ): self {
         $obj = clone $this;
-        $obj['coaching_call_sid_legacy'] = $coachingCallSidLegacy;
+        $obj['coachingCallSidLegacy'] = $coachingCallSidLegacy;
 
         return $obj;
     }
@@ -250,7 +250,7 @@ final class ParticipantGetResponse implements BaseModel
     public function withDateCreated(string $dateCreated): self
     {
         $obj = clone $this;
-        $obj['date_created'] = $dateCreated;
+        $obj['dateCreated'] = $dateCreated;
 
         return $obj;
     }
@@ -261,7 +261,7 @@ final class ParticipantGetResponse implements BaseModel
     public function withDateUpdated(string $dateUpdated): self
     {
         $obj = clone $this;
-        $obj['date_updated'] = $dateUpdated;
+        $obj['dateUpdated'] = $dateUpdated;
 
         return $obj;
     }
@@ -272,7 +272,7 @@ final class ParticipantGetResponse implements BaseModel
     public function withEndConferenceOnExit(bool $endConferenceOnExit): self
     {
         $obj = clone $this;
-        $obj['end_conference_on_exit'] = $endConferenceOnExit;
+        $obj['endConferenceOnExit'] = $endConferenceOnExit;
 
         return $obj;
     }

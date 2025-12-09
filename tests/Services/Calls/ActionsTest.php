@@ -86,7 +86,7 @@ final class ActionsTest extends TestCase
         $result = $this->client->calls->actions->bridge(
             'call_control_id',
             [
-                'call_control_id' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+                'callControlID' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
             ],
         );
 
@@ -104,24 +104,24 @@ final class ActionsTest extends TestCase
         $result = $this->client->calls->actions->bridge(
             'call_control_id',
             [
-                'call_control_id' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
-                'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
-                'command_id' => '891510ac-f3e4-11e8-af5b-de00688a4901',
-                'mute_dtmf' => 'opposite',
-                'park_after_unbridge' => 'self',
-                'play_ringtone' => true,
+                'callControlID' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+                'clientState' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
+                'commandID' => '891510ac-f3e4-11e8-af5b-de00688a4901',
+                'muteDtmf' => 'opposite',
+                'parkAfterUnbridge' => 'self',
+                'playRingtone' => true,
                 'queue' => 'support',
                 'record' => 'record-from-answer',
-                'record_channels' => 'single',
-                'record_custom_file_name' => 'my_recording_file_name',
-                'record_format' => 'wav',
-                'record_max_length' => 1000,
-                'record_timeout_secs' => 100,
-                'record_track' => 'outbound',
-                'record_trim' => 'trim-silence',
+                'recordChannels' => 'single',
+                'recordCustomFileName' => 'my_recording_file_name',
+                'recordFormat' => 'wav',
+                'recordMaxLength' => 1000,
+                'recordTimeoutSecs' => 100,
+                'recordTrack' => 'outbound',
+                'recordTrim' => 'trim-silence',
                 'ringtone' => 'pl',
-                'video_room_context' => 'Alice',
-                'video_room_id' => '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0',
+                'videoRoomContext' => 'Alice',
+                'videoRoomID' => '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0',
             ],
         );
 
@@ -138,7 +138,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->calls->actions->enqueue(
             'call_control_id',
-            ['queue_name' => 'support']
+            ['queueName' => 'support']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -155,12 +155,12 @@ final class ActionsTest extends TestCase
         $result = $this->client->calls->actions->enqueue(
             'call_control_id',
             [
-                'queue_name' => 'support',
-                'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
-                'command_id' => '891510ac-f3e4-11e8-af5b-de00688a4901',
-                'keep_after_hangup' => true,
-                'max_size' => 20,
-                'max_wait_time_secs' => 600,
+                'queueName' => 'support',
+                'clientState' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
+                'commandID' => '891510ac-f3e4-11e8-af5b-de00688a4901',
+                'keepAfterHangup' => true,
+                'maxSize' => 20,
+                'maxWaitTimeSecs' => 600,
             ],
         );
 
@@ -237,35 +237,35 @@ final class ActionsTest extends TestCase
                 'assistant' => [
                     'instructions' => 'You are a friendly voice assistant.',
                     'model' => 'Qwen/Qwen3-235B-A22B',
-                    'openai_api_key_ref' => 'my_openai_api_key',
+                    'openaiAPIKeyRef' => 'my_openai_api_key',
                     'tools' => [
                         [
-                            'book_appointment' => [
-                                'api_key_ref' => 'my_calcom_api_key',
-                                'event_type_id' => 0,
-                                'attendee_name' => 'attendee_name',
-                                'attendee_timezone' => 'attendee_timezone',
+                            'bookAppointment' => [
+                                'apiKeyRef' => 'my_calcom_api_key',
+                                'eventTypeID' => 0,
+                                'attendeeName' => 'attendee_name',
+                                'attendeeTimezone' => 'attendee_timezone',
                             ],
                             'type' => 'book_appointment',
                         ],
                     ],
                 ],
-                'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
-                'command_id' => '891510ac-f3e4-11e8-af5b-de00688a4901',
+                'clientState' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
+                'commandID' => '891510ac-f3e4-11e8-af5b-de00688a4901',
                 'greeting' => 'Hello, can you tell me your age and where you live?',
-                'interruption_settings' => ['enable' => true],
+                'interruptionSettings' => ['enable' => true],
                 'language' => GoogleTranscriptionLanguage::EN,
-                'message_history' => [
+                'messageHistory' => [
                     ['content' => 'Hello, what\'s your name?', 'role' => 'assistant'],
                     ['content' => 'Hello, I\'m John.', 'role' => 'user'],
                 ],
-                'send_message_history_updates' => true,
-                'send_partial_results' => true,
+                'sendMessageHistoryUpdates' => true,
+                'sendPartialResults' => true,
                 'transcription' => ['model' => 'distil-whisper/distil-large-v2'],
-                'user_response_timeout_ms' => 5000,
+                'userResponseTimeoutMs' => 5000,
                 'voice' => 'Telnyx.KokoroTTS.af',
-                'voice_settings' => [
-                    'type' => 'elevenlabs', 'api_key_ref' => 'my_elevenlabs_api_key',
+                'voiceSettings' => [
+                    'type' => 'elevenlabs', 'apiKeyRef' => 'my_elevenlabs_api_key',
                 ],
             ],
         );
@@ -318,21 +318,21 @@ final class ActionsTest extends TestCase
             [
                 'payload' => 'say this on call',
                 'voice' => 'male',
-                'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
-                'command_id' => '891510ac-f3e4-11e8-af5b-de00688a4901',
-                'inter_digit_timeout_millis' => 10000,
-                'invalid_payload' => 'say this on call',
+                'clientState' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
+                'commandID' => '891510ac-f3e4-11e8-af5b-de00688a4901',
+                'interDigitTimeoutMillis' => 10000,
+                'invalidPayload' => 'say this on call',
                 'language' => 'arb',
-                'maximum_digits' => 10,
-                'maximum_tries' => 3,
-                'minimum_digits' => 1,
-                'payload_type' => 'text',
-                'service_level' => 'premium',
-                'terminating_digit' => '#',
-                'timeout_millis' => 60000,
-                'valid_digits' => '123',
-                'voice_settings' => [
-                    'type' => 'elevenlabs', 'api_key_ref' => 'my_elevenlabs_api_key',
+                'maximumDigits' => 10,
+                'maximumTries' => 3,
+                'minimumDigits' => 1,
+                'payloadType' => 'text',
+                'serviceLevel' => 'premium',
+                'terminatingDigit' => '#',
+                'timeoutMillis' => 60000,
+                'validDigits' => '123',
+                'voiceSettings' => [
+                    'type' => 'elevenlabs', 'apiKeyRef' => 'my_elevenlabs_api_key',
                 ],
             ],
         );
@@ -392,7 +392,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->calls->actions->refer(
             'call_control_id',
-            ['sip_address' => 'sip:username@sip.non-telnyx-address.com'],
+            ['sipAddress' => 'sip:username@sip.non-telnyx-address.com'],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -409,16 +409,16 @@ final class ActionsTest extends TestCase
         $result = $this->client->calls->actions->refer(
             'call_control_id',
             [
-                'sip_address' => 'sip:username@sip.non-telnyx-address.com',
-                'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
-                'command_id' => '891510ac-f3e4-11e8-af5b-de00688a4901',
-                'custom_headers' => [
+                'sipAddress' => 'sip:username@sip.non-telnyx-address.com',
+                'clientState' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
+                'commandID' => '891510ac-f3e4-11e8-af5b-de00688a4901',
+                'customHeaders' => [
                     ['name' => 'head_1', 'value' => 'val_1'],
                     ['name' => 'head_2', 'value' => 'val_2'],
                 ],
-                'sip_auth_password' => 'sip_auth_password',
-                'sip_auth_username' => 'sip_auth_username',
-                'sip_headers' => [['name' => 'User-to-User', 'value' => 'value']],
+                'sipAuthPassword' => 'sip_auth_password',
+                'sipAuthUsername' => 'sip_auth_username',
+                'sipHeaders' => [['name' => 'User-to-User', 'value' => 'value']],
             ],
         );
 
@@ -453,8 +453,8 @@ final class ActionsTest extends TestCase
             'call_control_id',
             [
                 'cause' => 'USER_BUSY',
-                'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
-                'command_id' => '891510ac-f3e4-11e8-af5b-de00688a4901',
+                'clientState' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
+                'commandID' => '891510ac-f3e4-11e8-af5b-de00688a4901',
             ],
         );
 
@@ -505,9 +505,9 @@ final class ActionsTest extends TestCase
             'call_control_id',
             [
                 'digits' => '1www2WABCDw9',
-                'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
-                'command_id' => '891510ac-f3e4-11e8-af5b-de00688a4901',
-                'duration_millis' => 500,
+                'clientState' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
+                'commandID' => '891510ac-f3e4-11e8-af5b-de00688a4901',
+                'durationMillis' => 500,
             ],
         );
 
@@ -526,7 +526,7 @@ final class ActionsTest extends TestCase
             'call_control_id',
             [
                 'body' => '{"key": "value", "numValue": 100}',
-                'content_type' => 'application/json',
+                'contentType' => 'application/json',
             ],
         );
 
@@ -545,9 +545,9 @@ final class ActionsTest extends TestCase
             'call_control_id',
             [
                 'body' => '{"key": "value", "numValue": 100}',
-                'content_type' => 'application/json',
-                'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
-                'command_id' => '891510ac-f3e4-11e8-af5b-de00688a4901',
+                'contentType' => 'application/json',
+                'clientState' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
+                'commandID' => '891510ac-f3e4-11e8-af5b-de00688a4901',
             ],
         );
 
@@ -583,14 +583,14 @@ final class ActionsTest extends TestCase
             [
                 'payload' => 'Say this on the call',
                 'voice' => 'female',
-                'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
-                'command_id' => '891510ac-f3e4-11e8-af5b-de00688a4901',
+                'clientState' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
+                'commandID' => '891510ac-f3e4-11e8-af5b-de00688a4901',
                 'language' => 'arb',
-                'payload_type' => 'text',
-                'service_level' => 'basic',
+                'payloadType' => 'text',
+                'serviceLevel' => 'basic',
                 'stop' => 'current',
-                'voice_settings' => [
-                    'type' => 'elevenlabs', 'api_key_ref' => 'my_elevenlabs_api_key',
+                'voiceSettings' => [
+                    'type' => 'elevenlabs', 'apiKeyRef' => 'my_elevenlabs_api_key',
                 ],
             ],
         );
@@ -694,20 +694,20 @@ final class ActionsTest extends TestCase
             [
                 'channels' => 'single',
                 'format' => 'wav',
-                'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
-                'command_id' => '891510ac-f3e4-11e8-af5b-de00688a4901',
-                'custom_file_name' => 'my_recording_file_name',
-                'max_length' => 0,
-                'play_beep' => true,
-                'recording_track' => 'outbound',
-                'timeout_secs' => 0,
+                'clientState' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
+                'commandID' => '891510ac-f3e4-11e8-af5b-de00688a4901',
+                'customFileName' => 'my_recording_file_name',
+                'maxLength' => 0,
+                'playBeep' => true,
+                'recordingTrack' => 'outbound',
+                'timeoutSecs' => 0,
                 'transcription' => true,
-                'transcription_engine' => 'B',
-                'transcription_language' => 'en-US',
-                'transcription_max_speaker_count' => 4,
-                'transcription_min_speaker_count' => 4,
-                'transcription_profanity_filter' => true,
-                'transcription_speaker_diarization' => true,
+                'transcriptionEngine' => 'B',
+                'transcriptionLanguage' => 'en-US',
+                'transcriptionMaxSpeakerCount' => 4,
+                'transcriptionMinSpeakerCount' => 4,
+                'transcriptionProfanityFilter' => true,
+                'transcriptionSpeakerDiarization' => true,
                 'trim' => 'trim-silence',
             ],
         );
@@ -955,54 +955,54 @@ final class ActionsTest extends TestCase
             'call_control_id',
             [
                 'to' => '+18005550100 or sip:username@sip.telnyx.com',
-                'answering_machine_detection' => 'detect',
-                'answering_machine_detection_config' => [
-                    'after_greeting_silence_millis' => 1000,
-                    'between_words_silence_millis' => 1000,
-                    'greeting_duration_millis' => 1000,
-                    'greeting_silence_duration_millis' => 2000,
-                    'greeting_total_analysis_time_millis' => 50000,
-                    'initial_silence_millis' => 1000,
-                    'maximum_number_of_words' => 1000,
-                    'maximum_word_length_millis' => 2000,
-                    'silence_threshold' => 512,
-                    'total_analysis_time_millis' => 5000,
+                'answeringMachineDetection' => 'detect',
+                'answeringMachineDetectionConfig' => [
+                    'afterGreetingSilenceMillis' => 1000,
+                    'betweenWordsSilenceMillis' => 1000,
+                    'greetingDurationMillis' => 1000,
+                    'greetingSilenceDurationMillis' => 2000,
+                    'greetingTotalAnalysisTimeMillis' => 50000,
+                    'initialSilenceMillis' => 1000,
+                    'maximumNumberOfWords' => 1000,
+                    'maximumWordLengthMillis' => 2000,
+                    'silenceThreshold' => 512,
+                    'totalAnalysisTimeMillis' => 5000,
                 ],
-                'audio_url' => 'http://www.example.com/sounds/greeting.wav',
-                'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
-                'command_id' => '891510ac-f3e4-11e8-af5b-de00688a4901',
-                'custom_headers' => [
+                'audioURL' => 'http://www.example.com/sounds/greeting.wav',
+                'clientState' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
+                'commandID' => '891510ac-f3e4-11e8-af5b-de00688a4901',
+                'customHeaders' => [
                     ['name' => 'head_1', 'value' => 'val_1'],
                     ['name' => 'head_2', 'value' => 'val_2'],
                 ],
-                'early_media' => true,
+                'earlyMedia' => true,
                 'from' => '+18005550101',
-                'from_display_name' => 'Company Name',
-                'media_encryption' => 'SRTP',
-                'media_name' => 'my_media_uploaded_to_media_storage_api',
-                'mute_dtmf' => 'opposite',
-                'park_after_unbridge' => 'self',
+                'fromDisplayName' => 'Company Name',
+                'mediaEncryption' => 'SRTP',
+                'mediaName' => 'my_media_uploaded_to_media_storage_api',
+                'muteDtmf' => 'opposite',
+                'parkAfterUnbridge' => 'self',
                 'record' => 'record-from-answer',
-                'record_channels' => 'single',
-                'record_custom_file_name' => 'my_recording_file_name',
-                'record_format' => 'wav',
-                'record_max_length' => 1000,
-                'record_timeout_secs' => 100,
-                'record_track' => 'outbound',
-                'record_trim' => 'trim-silence',
-                'sip_auth_password' => 'password',
-                'sip_auth_username' => 'username',
-                'sip_headers' => [['name' => 'User-to-User', 'value' => 'value']],
-                'sip_region' => 'Canada',
-                'sip_transport_protocol' => 'TLS',
-                'sound_modifications' => [
+                'recordChannels' => 'single',
+                'recordCustomFileName' => 'my_recording_file_name',
+                'recordFormat' => 'wav',
+                'recordMaxLength' => 1000,
+                'recordTimeoutSecs' => 100,
+                'recordTrack' => 'outbound',
+                'recordTrim' => 'trim-silence',
+                'sipAuthPassword' => 'password',
+                'sipAuthUsername' => 'username',
+                'sipHeaders' => [['name' => 'User-to-User', 'value' => 'value']],
+                'sipRegion' => 'Canada',
+                'sipTransportProtocol' => 'TLS',
+                'soundModifications' => [
                     'octaves' => 0.1, 'pitch' => 0.8, 'semitone' => -2, 'track' => 'both',
                 ],
-                'target_leg_client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
-                'time_limit_secs' => 600,
-                'timeout_secs' => 60,
-                'webhook_url' => 'https://www.example.com/server-b/',
-                'webhook_url_method' => 'POST',
+                'targetLegClientState' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
+                'timeLimitSecs' => 600,
+                'timeoutSecs' => 60,
+                'webhookURL' => 'https://www.example.com/server-b/',
+                'webhookURLMethod' => 'POST',
             ],
         );
 
@@ -1019,7 +1019,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->calls->actions->updateClientState(
             'call_control_id',
-            ['client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d']
+            ['clientState' => 'aGF2ZSBhIG5pY2UgZGF5ID1d']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -1035,7 +1035,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->calls->actions->updateClientState(
             'call_control_id',
-            ['client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d']
+            ['clientState' => 'aGF2ZSBhIG5pY2UgZGF5ID1d']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

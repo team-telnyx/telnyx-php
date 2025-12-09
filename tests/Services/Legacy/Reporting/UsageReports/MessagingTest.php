@@ -43,7 +43,7 @@ final class MessagingTest extends TestCase
             ->reporting
             ->usageReports
             ->messaging
-            ->create(['aggregation_type' => 0])
+            ->create(['aggregationType' => 0])
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -64,9 +64,9 @@ final class MessagingTest extends TestCase
             ->usageReports
             ->messaging
             ->create([
-                'aggregation_type' => 0,
-                'end_time' => new \DateTimeImmutable('2020-01-02T00:00:00Z'),
-                'managed_accounts' => [
+                'aggregationType' => 0,
+                'endTime' => new \DateTimeImmutable('2020-01-02T00:00:00Z'),
+                'managedAccounts' => [
                     'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                     '6ba7b810-9dad-11d1-80b4-00c04fd430c8',
                 ],
@@ -74,8 +74,8 @@ final class MessagingTest extends TestCase
                     '3fa85f64-5717-4562-b3fc-2c963f66afa6',
                     '7d4e3f8a-9b2c-4e1d-8f5a-1a2b3c4d5e6f',
                 ],
-                'select_all_managed_accounts' => true,
-                'start_time' => new \DateTimeImmutable('2020-01-01T00:00:00Z'),
+                'selectAllManagedAccounts' => true,
+                'startTime' => new \DateTimeImmutable('2020-01-01T00:00:00Z'),
             ])
         ;
 

@@ -13,7 +13,7 @@ use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Filter\PortingOrderS
  * Consolidated filter parameter (deepObject style). Originally: filter[porting_order_status].
  *
  * @phpstan-type FilterShape = array{
- *   porting_order_status?: value-of<PortingOrderStatus>|null
+ *   portingOrderStatus?: value-of<PortingOrderStatus>|null
  * }
  */
 final class Filter implements BaseModel
@@ -24,10 +24,10 @@ final class Filter implements BaseModel
     /**
      * Filter results by porting order status.
      *
-     * @var value-of<PortingOrderStatus>|null $porting_order_status
+     * @var value-of<PortingOrderStatus>|null $portingOrderStatus
      */
-    #[Optional(enum: PortingOrderStatus::class)]
-    public ?string $porting_order_status;
+    #[Optional('porting_order_status', enum: PortingOrderStatus::class)]
+    public ?string $portingOrderStatus;
 
     public function __construct()
     {
@@ -39,14 +39,14 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortingOrderStatus|value-of<PortingOrderStatus> $porting_order_status
+     * @param PortingOrderStatus|value-of<PortingOrderStatus> $portingOrderStatus
      */
     public static function with(
-        PortingOrderStatus|string|null $porting_order_status = null
+        PortingOrderStatus|string|null $portingOrderStatus = null
     ): self {
         $obj = new self;
 
-        null !== $porting_order_status && $obj['porting_order_status'] = $porting_order_status;
+        null !== $portingOrderStatus && $obj['portingOrderStatus'] = $portingOrderStatus;
 
         return $obj;
     }
@@ -60,7 +60,7 @@ final class Filter implements BaseModel
         PortingOrderStatus|string $portingOrderStatus
     ): self {
         $obj = clone $this;
-        $obj['porting_order_status'] = $portingOrderStatus;
+        $obj['portingOrderStatus'] = $portingOrderStatus;
 
         return $obj;
     }

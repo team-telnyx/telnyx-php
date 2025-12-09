@@ -20,25 +20,25 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\FilterType;
  * @see Telnyx\Services\Legacy\Reporting\BatchDetailRecords\VoiceService::create()
  *
  * @phpstan-type VoiceCreateParamsShape = array{
- *   end_time: \DateTimeInterface,
- *   start_time: \DateTimeInterface,
- *   call_types?: list<int>,
+ *   endTime: \DateTimeInterface,
+ *   startTime: \DateTimeInterface,
+ *   callTypes?: list<int>,
  *   connections?: list<int>,
  *   fields?: list<string>,
  *   filters?: list<Filter|array{
- *     billing_group?: string|null,
+ *     billingGroup?: string|null,
  *     cld?: string|null,
- *     cld_filter?: value-of<CldFilter>|null,
+ *     cldFilter?: value-of<CldFilter>|null,
  *     cli?: string|null,
- *     cli_filter?: value-of<CliFilter>|null,
- *     filter_type?: value-of<FilterType>|null,
- *     tags_list?: string|null,
+ *     cliFilter?: value-of<CliFilter>|null,
+ *     filterType?: value-of<FilterType>|null,
+ *     tagsList?: string|null,
  *   }>,
- *   include_all_metadata?: bool,
- *   managed_accounts?: list<string>,
- *   record_types?: list<int>,
- *   report_name?: string,
- *   select_all_managed_accounts?: bool,
+ *   includeAllMetadata?: bool,
+ *   managedAccounts?: list<string>,
+ *   recordTypes?: list<int>,
+ *   reportName?: string,
+ *   selectAllManagedAccounts?: bool,
  *   source?: string,
  *   timezone?: string,
  * }
@@ -52,22 +52,22 @@ final class VoiceCreateParams implements BaseModel
     /**
      * End time in ISO format.
      */
-    #[Required]
-    public \DateTimeInterface $end_time;
+    #[Required('end_time')]
+    public \DateTimeInterface $endTime;
 
     /**
      * Start time in ISO format.
      */
-    #[Required]
-    public \DateTimeInterface $start_time;
+    #[Required('start_time')]
+    public \DateTimeInterface $startTime;
 
     /**
      * List of call types to filter by (Inbound = 1, Outbound = 2).
      *
-     * @var list<int>|null $call_types
+     * @var list<int>|null $callTypes
      */
-    #[Optional(list: 'int')]
-    public ?array $call_types;
+    #[Optional('call_types', list: 'int')]
+    public ?array $callTypes;
 
     /**
      * List of connections to filter by.
@@ -96,36 +96,36 @@ final class VoiceCreateParams implements BaseModel
     /**
      * Whether to include all metadata.
      */
-    #[Optional]
-    public ?bool $include_all_metadata;
+    #[Optional('include_all_metadata')]
+    public ?bool $includeAllMetadata;
 
     /**
      * List of managed accounts to include.
      *
-     * @var list<string>|null $managed_accounts
+     * @var list<string>|null $managedAccounts
      */
-    #[Optional(list: 'string')]
-    public ?array $managed_accounts;
+    #[Optional('managed_accounts', list: 'string')]
+    public ?array $managedAccounts;
 
     /**
      * List of record types to filter by (Complete = 1, Incomplete = 2, Errors = 3).
      *
-     * @var list<int>|null $record_types
+     * @var list<int>|null $recordTypes
      */
-    #[Optional(list: 'int')]
-    public ?array $record_types;
+    #[Optional('record_types', list: 'int')]
+    public ?array $recordTypes;
 
     /**
      * Name of the report.
      */
-    #[Optional]
-    public ?string $report_name;
+    #[Optional('report_name')]
+    public ?string $reportName;
 
     /**
      * Whether to select all managed accounts.
      */
-    #[Optional]
-    public ?bool $select_all_managed_accounts;
+    #[Optional('select_all_managed_accounts')]
+    public ?bool $selectAllManagedAccounts;
 
     /**
      * Source of the report. Valid values: calls (default), call-control, fax-api, webrtc.
@@ -144,7 +144,7 @@ final class VoiceCreateParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * VoiceCreateParams::with(end_time: ..., start_time: ...)
+     * VoiceCreateParams::with(endTime: ..., startTime: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -163,50 +163,50 @@ final class VoiceCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<int> $call_types
+     * @param list<int> $callTypes
      * @param list<int> $connections
      * @param list<string> $fields
      * @param list<Filter|array{
-     *   billing_group?: string|null,
+     *   billingGroup?: string|null,
      *   cld?: string|null,
-     *   cld_filter?: value-of<CldFilter>|null,
+     *   cldFilter?: value-of<CldFilter>|null,
      *   cli?: string|null,
-     *   cli_filter?: value-of<CliFilter>|null,
-     *   filter_type?: value-of<FilterType>|null,
-     *   tags_list?: string|null,
+     *   cliFilter?: value-of<CliFilter>|null,
+     *   filterType?: value-of<FilterType>|null,
+     *   tagsList?: string|null,
      * }> $filters
-     * @param list<string> $managed_accounts
-     * @param list<int> $record_types
+     * @param list<string> $managedAccounts
+     * @param list<int> $recordTypes
      */
     public static function with(
-        \DateTimeInterface $end_time,
-        \DateTimeInterface $start_time,
-        ?array $call_types = null,
+        \DateTimeInterface $endTime,
+        \DateTimeInterface $startTime,
+        ?array $callTypes = null,
         ?array $connections = null,
         ?array $fields = null,
         ?array $filters = null,
-        ?bool $include_all_metadata = null,
-        ?array $managed_accounts = null,
-        ?array $record_types = null,
-        ?string $report_name = null,
-        ?bool $select_all_managed_accounts = null,
+        ?bool $includeAllMetadata = null,
+        ?array $managedAccounts = null,
+        ?array $recordTypes = null,
+        ?string $reportName = null,
+        ?bool $selectAllManagedAccounts = null,
         ?string $source = null,
         ?string $timezone = null,
     ): self {
         $obj = new self;
 
-        $obj['end_time'] = $end_time;
-        $obj['start_time'] = $start_time;
+        $obj['endTime'] = $endTime;
+        $obj['startTime'] = $startTime;
 
-        null !== $call_types && $obj['call_types'] = $call_types;
+        null !== $callTypes && $obj['callTypes'] = $callTypes;
         null !== $connections && $obj['connections'] = $connections;
         null !== $fields && $obj['fields'] = $fields;
         null !== $filters && $obj['filters'] = $filters;
-        null !== $include_all_metadata && $obj['include_all_metadata'] = $include_all_metadata;
-        null !== $managed_accounts && $obj['managed_accounts'] = $managed_accounts;
-        null !== $record_types && $obj['record_types'] = $record_types;
-        null !== $report_name && $obj['report_name'] = $report_name;
-        null !== $select_all_managed_accounts && $obj['select_all_managed_accounts'] = $select_all_managed_accounts;
+        null !== $includeAllMetadata && $obj['includeAllMetadata'] = $includeAllMetadata;
+        null !== $managedAccounts && $obj['managedAccounts'] = $managedAccounts;
+        null !== $recordTypes && $obj['recordTypes'] = $recordTypes;
+        null !== $reportName && $obj['reportName'] = $reportName;
+        null !== $selectAllManagedAccounts && $obj['selectAllManagedAccounts'] = $selectAllManagedAccounts;
         null !== $source && $obj['source'] = $source;
         null !== $timezone && $obj['timezone'] = $timezone;
 
@@ -219,7 +219,7 @@ final class VoiceCreateParams implements BaseModel
     public function withEndTime(\DateTimeInterface $endTime): self
     {
         $obj = clone $this;
-        $obj['end_time'] = $endTime;
+        $obj['endTime'] = $endTime;
 
         return $obj;
     }
@@ -230,7 +230,7 @@ final class VoiceCreateParams implements BaseModel
     public function withStartTime(\DateTimeInterface $startTime): self
     {
         $obj = clone $this;
-        $obj['start_time'] = $startTime;
+        $obj['startTime'] = $startTime;
 
         return $obj;
     }
@@ -243,7 +243,7 @@ final class VoiceCreateParams implements BaseModel
     public function withCallTypes(array $callTypes): self
     {
         $obj = clone $this;
-        $obj['call_types'] = $callTypes;
+        $obj['callTypes'] = $callTypes;
 
         return $obj;
     }
@@ -278,13 +278,13 @@ final class VoiceCreateParams implements BaseModel
      * List of filters to apply.
      *
      * @param list<Filter|array{
-     *   billing_group?: string|null,
+     *   billingGroup?: string|null,
      *   cld?: string|null,
-     *   cld_filter?: value-of<CldFilter>|null,
+     *   cldFilter?: value-of<CldFilter>|null,
      *   cli?: string|null,
-     *   cli_filter?: value-of<CliFilter>|null,
-     *   filter_type?: value-of<FilterType>|null,
-     *   tags_list?: string|null,
+     *   cliFilter?: value-of<CliFilter>|null,
+     *   filterType?: value-of<FilterType>|null,
+     *   tagsList?: string|null,
      * }> $filters
      */
     public function withFilters(array $filters): self
@@ -301,7 +301,7 @@ final class VoiceCreateParams implements BaseModel
     public function withIncludeAllMetadata(bool $includeAllMetadata): self
     {
         $obj = clone $this;
-        $obj['include_all_metadata'] = $includeAllMetadata;
+        $obj['includeAllMetadata'] = $includeAllMetadata;
 
         return $obj;
     }
@@ -314,7 +314,7 @@ final class VoiceCreateParams implements BaseModel
     public function withManagedAccounts(array $managedAccounts): self
     {
         $obj = clone $this;
-        $obj['managed_accounts'] = $managedAccounts;
+        $obj['managedAccounts'] = $managedAccounts;
 
         return $obj;
     }
@@ -327,7 +327,7 @@ final class VoiceCreateParams implements BaseModel
     public function withRecordTypes(array $recordTypes): self
     {
         $obj = clone $this;
-        $obj['record_types'] = $recordTypes;
+        $obj['recordTypes'] = $recordTypes;
 
         return $obj;
     }
@@ -338,7 +338,7 @@ final class VoiceCreateParams implements BaseModel
     public function withReportName(string $reportName): self
     {
         $obj = clone $this;
-        $obj['report_name'] = $reportName;
+        $obj['reportName'] = $reportName;
 
         return $obj;
     }
@@ -350,7 +350,7 @@ final class VoiceCreateParams implements BaseModel
         bool $selectAllManagedAccounts
     ): self {
         $obj = clone $this;
-        $obj['select_all_managed_accounts'] = $selectAllManagedAccounts;
+        $obj['selectAllManagedAccounts'] = $selectAllManagedAccounts;
 
         return $obj;
     }

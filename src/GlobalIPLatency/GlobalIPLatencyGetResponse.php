@@ -36,10 +36,10 @@ final class GlobalIPLatencyGetResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   global_ip?: GlobalIP|null,
-     *   mean_latency?: MeanLatency|null,
-     *   percentile_latency?: PercentileLatency|null,
-     *   prober_location?: ProberLocation|null,
+     *   globalIP?: GlobalIP|null,
+     *   meanLatency?: MeanLatency|null,
+     *   percentileLatency?: PercentileLatency|null,
+     *   proberLocation?: ProberLocation|null,
      *   timestamp?: \DateTimeInterface|null,
      * }> $data
      */
@@ -54,10 +54,10 @@ final class GlobalIPLatencyGetResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   global_ip?: GlobalIP|null,
-     *   mean_latency?: MeanLatency|null,
-     *   percentile_latency?: PercentileLatency|null,
-     *   prober_location?: ProberLocation|null,
+     *   globalIP?: GlobalIP|null,
+     *   meanLatency?: MeanLatency|null,
+     *   percentileLatency?: PercentileLatency|null,
+     *   proberLocation?: ProberLocation|null,
      *   timestamp?: \DateTimeInterface|null,
      * }> $data
      */

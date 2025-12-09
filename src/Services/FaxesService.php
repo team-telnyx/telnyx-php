@@ -47,20 +47,20 @@ final class FaxesService implements FaxesContract
      * - `fax.failed`
      *
      * @param array{
-     *   connection_id: string,
+     *   connectionID: string,
      *   from: string,
      *   to: string,
-     *   client_state?: string,
-     *   from_display_name?: string,
-     *   media_name?: string,
-     *   media_url?: string,
+     *   clientState?: string,
+     *   fromDisplayName?: string,
+     *   mediaName?: string,
+     *   mediaURL?: string,
      *   monochrome?: bool,
-     *   preview_format?: 'pdf'|'tiff'|PreviewFormat,
+     *   previewFormat?: 'pdf'|'tiff'|PreviewFormat,
      *   quality?: 'normal'|'high'|'very_high'|'ultra_light'|'ultra_dark'|Quality,
-     *   store_media?: bool,
-     *   store_preview?: bool,
-     *   t38_enabled?: bool,
-     *   webhook_url?: string,
+     *   storeMedia?: bool,
+     *   storePreview?: bool,
+     *   t38Enabled?: bool,
+     *   webhookURL?: string,
      * }|FaxCreateParams $params
      *
      * @throws APIException
@@ -115,7 +115,7 @@ final class FaxesService implements FaxesContract
      *
      * @param array{
      *   filter?: array{
-     *     created_at?: array{
+     *     createdAt?: array{
      *       gt?: string|\DateTimeInterface,
      *       gte?: string|\DateTimeInterface,
      *       lt?: string|\DateTimeInterface,

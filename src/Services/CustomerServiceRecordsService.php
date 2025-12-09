@@ -33,20 +33,20 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
      * Create a new customer service record for the provided phone number.
      *
      * @param array{
-     *   phone_number: string,
-     *   additional_data?: array{
-     *     account_number?: string,
-     *     address_line_1?: string,
-     *     authorized_person_name?: string,
-     *     billing_phone_number?: string,
+     *   phoneNumber: string,
+     *   additionalData?: array{
+     *     accountNumber?: string,
+     *     addressLine1?: string,
+     *     authorizedPersonName?: string,
+     *     billingPhoneNumber?: string,
      *     city?: string,
-     *     customer_code?: string,
+     *     customerCode?: string,
      *     name?: string,
      *     pin?: string,
      *     state?: string,
-     *     zip_code?: string,
+     *     zipCode?: string,
      *   },
-     *   webhook_url?: string,
+     *   webhookURL?: string,
      * }|CustomerServiceRecordCreateParams $params
      *
      * @throws APIException
@@ -101,10 +101,10 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
      *
      * @param array{
      *   filter?: array{
-     *     created_at?: array{
+     *     createdAt?: array{
      *       gt?: string|\DateTimeInterface, lt?: string|\DateTimeInterface
      *     },
-     *     phone_number?: array{eq?: string, in?: list<string>},
+     *     phoneNumber?: array{eq?: string, in?: list<string>},
      *     status?: array{
      *       eq?: 'pending'|'completed'|'failed'|Eq,
      *       in?: list<'pending'|'completed'|'failed'|In>,
@@ -143,7 +143,7 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
      * Verify the coverage for a list of phone numbers.
      *
      * @param array{
-     *   phone_numbers: list<string>
+     *   phoneNumbers: list<string>
      * }|CustomerServiceRecordVerifyPhoneNumberCoverageParams $params
      *
      * @throws APIException

@@ -17,14 +17,14 @@ use Telnyx\OAuthClients\OAuthClientListParams\FilterClientType;
  * @see Telnyx\Services\OAuthClientsService::list()
  *
  * @phpstan-type OAuthClientListParamsShape = array{
- *   filter_allowed_grant_types__contains_?: FilterAllowedGrantTypesContains|value-of<FilterAllowedGrantTypesContains>,
- *   filter_client_id_?: string,
- *   filter_client_type_?: FilterClientType|value-of<FilterClientType>,
- *   filter_name_?: string,
- *   filter_name__contains_?: string,
- *   filter_verified_?: bool,
- *   page_number_?: int,
- *   page_size_?: int,
+ *   filterAllowedGrantTypesContains?: FilterAllowedGrantTypesContains|value-of<FilterAllowedGrantTypesContains>,
+ *   filterClientID?: string,
+ *   filterClientType?: FilterClientType|value-of<FilterClientType>,
+ *   filterName?: string,
+ *   filterNameContains?: string,
+ *   filterVerified?: bool,
+ *   pageNumber?: int,
+ *   pageSize?: int,
  * }
  */
 final class OAuthClientListParams implements BaseModel
@@ -36,54 +36,54 @@ final class OAuthClientListParams implements BaseModel
     /**
      * Filter by allowed grant type.
      *
-     * @var value-of<FilterAllowedGrantTypesContains>|null $filter_allowed_grant_types__contains_
+     * @var value-of<FilterAllowedGrantTypesContains>|null $filterAllowedGrantTypesContains
      */
     #[Optional(enum: FilterAllowedGrantTypesContains::class)]
-    public ?string $filter_allowed_grant_types__contains_;
+    public ?string $filterAllowedGrantTypesContains;
 
     /**
      * Filter by client ID.
      */
     #[Optional]
-    public ?string $filter_client_id_;
+    public ?string $filterClientID;
 
     /**
      * Filter by client type.
      *
-     * @var value-of<FilterClientType>|null $filter_client_type_
+     * @var value-of<FilterClientType>|null $filterClientType
      */
     #[Optional(enum: FilterClientType::class)]
-    public ?string $filter_client_type_;
+    public ?string $filterClientType;
 
     /**
      * Filter by exact client name.
      */
     #[Optional]
-    public ?string $filter_name_;
+    public ?string $filterName;
 
     /**
      * Filter by client name containing text.
      */
     #[Optional]
-    public ?string $filter_name__contains_;
+    public ?string $filterNameContains;
 
     /**
      * Filter by verification status.
      */
     #[Optional]
-    public ?bool $filter_verified_;
+    public ?bool $filterVerified;
 
     /**
      * Page number.
      */
     #[Optional]
-    public ?int $page_number_;
+    public ?int $pageNumber;
 
     /**
      * Number of results per page.
      */
     #[Optional]
-    public ?int $page_size_;
+    public ?int $pageSize;
 
     public function __construct()
     {
@@ -95,29 +95,29 @@ final class OAuthClientListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterAllowedGrantTypesContains|value-of<FilterAllowedGrantTypesContains> $filter_allowed_grant_types__contains_
-     * @param FilterClientType|value-of<FilterClientType> $filter_client_type_
+     * @param FilterAllowedGrantTypesContains|value-of<FilterAllowedGrantTypesContains> $filterAllowedGrantTypesContains
+     * @param FilterClientType|value-of<FilterClientType> $filterClientType
      */
     public static function with(
-        FilterAllowedGrantTypesContains|string|null $filter_allowed_grant_types__contains_ = null,
-        ?string $filter_client_id_ = null,
-        FilterClientType|string|null $filter_client_type_ = null,
-        ?string $filter_name_ = null,
-        ?string $filter_name__contains_ = null,
-        ?bool $filter_verified_ = null,
-        ?int $page_number_ = null,
-        ?int $page_size_ = null,
+        FilterAllowedGrantTypesContains|string|null $filterAllowedGrantTypesContains = null,
+        ?string $filterClientID = null,
+        FilterClientType|string|null $filterClientType = null,
+        ?string $filterName = null,
+        ?string $filterNameContains = null,
+        ?bool $filterVerified = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
     ): self {
         $obj = new self;
 
-        null !== $filter_allowed_grant_types__contains_ && $obj['filter_allowed_grant_types__contains_'] = $filter_allowed_grant_types__contains_;
-        null !== $filter_client_id_ && $obj['filter_client_id_'] = $filter_client_id_;
-        null !== $filter_client_type_ && $obj['filter_client_type_'] = $filter_client_type_;
-        null !== $filter_name_ && $obj['filter_name_'] = $filter_name_;
-        null !== $filter_name__contains_ && $obj['filter_name__contains_'] = $filter_name__contains_;
-        null !== $filter_verified_ && $obj['filter_verified_'] = $filter_verified_;
-        null !== $page_number_ && $obj['page_number_'] = $page_number_;
-        null !== $page_size_ && $obj['page_size_'] = $page_size_;
+        null !== $filterAllowedGrantTypesContains && $obj['filterAllowedGrantTypesContains'] = $filterAllowedGrantTypesContains;
+        null !== $filterClientID && $obj['filterClientID'] = $filterClientID;
+        null !== $filterClientType && $obj['filterClientType'] = $filterClientType;
+        null !== $filterName && $obj['filterName'] = $filterName;
+        null !== $filterNameContains && $obj['filterNameContains'] = $filterNameContains;
+        null !== $filterVerified && $obj['filterVerified'] = $filterVerified;
+        null !== $pageNumber && $obj['pageNumber'] = $pageNumber;
+        null !== $pageSize && $obj['pageSize'] = $pageSize;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class OAuthClientListParams implements BaseModel
         FilterAllowedGrantTypesContains|string $filterAllowedGrantTypesContains
     ): self {
         $obj = clone $this;
-        $obj['filter_allowed_grant_types__contains_'] = $filterAllowedGrantTypesContains;
+        $obj['filterAllowedGrantTypesContains'] = $filterAllowedGrantTypesContains;
 
         return $obj;
     }
@@ -142,7 +142,7 @@ final class OAuthClientListParams implements BaseModel
     public function withFilterClientID(string $filterClientID): self
     {
         $obj = clone $this;
-        $obj['filter_client_id_'] = $filterClientID;
+        $obj['filterClientID'] = $filterClientID;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class OAuthClientListParams implements BaseModel
         FilterClientType|string $filterClientType
     ): self {
         $obj = clone $this;
-        $obj['filter_client_type_'] = $filterClientType;
+        $obj['filterClientType'] = $filterClientType;
 
         return $obj;
     }
@@ -167,7 +167,7 @@ final class OAuthClientListParams implements BaseModel
     public function withFilterName(string $filterName): self
     {
         $obj = clone $this;
-        $obj['filter_name_'] = $filterName;
+        $obj['filterName'] = $filterName;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class OAuthClientListParams implements BaseModel
     public function withFilterNameContains(string $filterNameContains): self
     {
         $obj = clone $this;
-        $obj['filter_name__contains_'] = $filterNameContains;
+        $obj['filterNameContains'] = $filterNameContains;
 
         return $obj;
     }
@@ -189,7 +189,7 @@ final class OAuthClientListParams implements BaseModel
     public function withFilterVerified(bool $filterVerified): self
     {
         $obj = clone $this;
-        $obj['filter_verified_'] = $filterVerified;
+        $obj['filterVerified'] = $filterVerified;
 
         return $obj;
     }
@@ -200,7 +200,7 @@ final class OAuthClientListParams implements BaseModel
     public function withPageNumber(int $pageNumber): self
     {
         $obj = clone $this;
-        $obj['page_number_'] = $pageNumber;
+        $obj['pageNumber'] = $pageNumber;
 
         return $obj;
     }
@@ -211,7 +211,7 @@ final class OAuthClientListParams implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj['page_size_'] = $pageSize;
+        $obj['pageSize'] = $pageSize;
 
         return $obj;
     }

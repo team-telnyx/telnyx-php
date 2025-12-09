@@ -40,30 +40,30 @@ final class MessagingProfileListResponse implements BaseModel
      *
      * @param list<MessagingProfile|array{
      *   id?: string|null,
-     *   alpha_sender?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   daily_spend_limit?: string|null,
-     *   daily_spend_limit_enabled?: bool|null,
+     *   alphaSender?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   dailySpendLimit?: string|null,
+     *   dailySpendLimitEnabled?: bool|null,
      *   enabled?: bool|null,
-     *   health_webhook_url?: string|null,
-     *   mms_fall_back_to_sms?: bool|null,
-     *   mms_transcoding?: bool|null,
-     *   mobile_only?: bool|null,
+     *   healthWebhookURL?: string|null,
+     *   mmsFallBackToSMS?: bool|null,
+     *   mmsTranscoding?: bool|null,
+     *   mobileOnly?: bool|null,
      *   name?: string|null,
-     *   number_pool_settings?: NumberPoolSettings|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   redaction_enabled?: bool|null,
-     *   redaction_level?: int|null,
-     *   updated_at?: \DateTimeInterface|null,
-     *   url_shortener_settings?: URLShortenerSettings|null,
-     *   v1_secret?: string|null,
-     *   webhook_api_version?: value-of<WebhookAPIVersion>|null,
-     *   webhook_failover_url?: string|null,
-     *   webhook_url?: string|null,
-     *   whitelisted_destinations?: list<string>|null,
+     *   numberPoolSettings?: NumberPoolSettings|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   redactionEnabled?: bool|null,
+     *   redactionLevel?: int|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     *   urlShortenerSettings?: URLShortenerSettings|null,
+     *   v1Secret?: string|null,
+     *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
+     *   webhookFailoverURL?: string|null,
+     *   webhookURL?: string|null,
+     *   whitelistedDestinations?: list<string>|null,
      * }> $data
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public static function with(
@@ -81,27 +81,27 @@ final class MessagingProfileListResponse implements BaseModel
     /**
      * @param list<MessagingProfile|array{
      *   id?: string|null,
-     *   alpha_sender?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   daily_spend_limit?: string|null,
-     *   daily_spend_limit_enabled?: bool|null,
+     *   alphaSender?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   dailySpendLimit?: string|null,
+     *   dailySpendLimitEnabled?: bool|null,
      *   enabled?: bool|null,
-     *   health_webhook_url?: string|null,
-     *   mms_fall_back_to_sms?: bool|null,
-     *   mms_transcoding?: bool|null,
-     *   mobile_only?: bool|null,
+     *   healthWebhookURL?: string|null,
+     *   mmsFallBackToSMS?: bool|null,
+     *   mmsTranscoding?: bool|null,
+     *   mobileOnly?: bool|null,
      *   name?: string|null,
-     *   number_pool_settings?: NumberPoolSettings|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   redaction_enabled?: bool|null,
-     *   redaction_level?: int|null,
-     *   updated_at?: \DateTimeInterface|null,
-     *   url_shortener_settings?: URLShortenerSettings|null,
-     *   v1_secret?: string|null,
-     *   webhook_api_version?: value-of<WebhookAPIVersion>|null,
-     *   webhook_failover_url?: string|null,
-     *   webhook_url?: string|null,
-     *   whitelisted_destinations?: list<string>|null,
+     *   numberPoolSettings?: NumberPoolSettings|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   redactionEnabled?: bool|null,
+     *   redactionLevel?: int|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     *   urlShortenerSettings?: URLShortenerSettings|null,
+     *   v1Secret?: string|null,
+     *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
+     *   webhookFailoverURL?: string|null,
+     *   webhookURL?: string|null,
+     *   whitelistedDestinations?: list<string>|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -114,7 +114,7 @@ final class MessagingProfileListResponse implements BaseModel
 
     /**
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public function withMeta(Meta|array $meta): self

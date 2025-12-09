@@ -26,11 +26,11 @@ final class MobileNetworkOperatorsService implements MobileNetworkOperatorsContr
      *
      * @param array{
      *   filter?: array{
-     *     country_code?: string,
+     *     countryCode?: string,
      *     mcc?: string,
      *     mnc?: string,
-     *     name?: array{contains?: string, ends_with?: string, starts_with?: string},
-     *     network_preferences_enabled?: bool,
+     *     name?: array{contains?: string, endsWith?: string, startsWith?: string},
+     *     networkPreferencesEnabled?: bool,
      *     tadig?: string,
      *   },
      *   page?: array{number?: int, size?: int},

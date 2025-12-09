@@ -19,15 +19,15 @@ use Telnyx\Networks\InterfaceStatus;
  * @phpstan-type GlobalIPAssignmentUpdateParamsShape = array{
  *   body: Body|array{
  *     id?: string|null,
- *     created_at?: string|null,
- *     record_type?: string|null,
- *     updated_at?: string|null,
- *     global_ip_id?: string|null,
- *     is_announced?: bool|null,
- *     is_connected?: bool|null,
- *     is_in_maintenance?: bool|null,
+ *     createdAt?: string|null,
+ *     recordType?: string|null,
+ *     updatedAt?: string|null,
+ *     globalIPID?: string|null,
+ *     isAnnounced?: bool|null,
+ *     isConnected?: bool|null,
+ *     isInMaintenance?: bool|null,
  *     status?: value-of<InterfaceStatus>|null,
- *     wireguard_peer_id?: string|null,
+ *     wireguardPeerID?: string|null,
  *   },
  * }
  */
@@ -66,15 +66,15 @@ final class GlobalIPAssignmentUpdateParams implements BaseModel
      *
      * @param Body|array{
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: string|null,
-     *   global_ip_id?: string|null,
-     *   is_announced?: bool|null,
-     *   is_connected?: bool|null,
-     *   is_in_maintenance?: bool|null,
+     *   createdAt?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: string|null,
+     *   globalIPID?: string|null,
+     *   isAnnounced?: bool|null,
+     *   isConnected?: bool|null,
+     *   isInMaintenance?: bool|null,
      *   status?: value-of<InterfaceStatus>|null,
-     *   wireguard_peer_id?: string|null,
+     *   wireguardPeerID?: string|null,
      * } $body
      */
     public static function with(Body|array $body): self
@@ -89,15 +89,15 @@ final class GlobalIPAssignmentUpdateParams implements BaseModel
     /**
      * @param Body|array{
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: string|null,
-     *   global_ip_id?: string|null,
-     *   is_announced?: bool|null,
-     *   is_connected?: bool|null,
-     *   is_in_maintenance?: bool|null,
+     *   createdAt?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: string|null,
+     *   globalIPID?: string|null,
+     *   isAnnounced?: bool|null,
+     *   isConnected?: bool|null,
+     *   isInMaintenance?: bool|null,
      *   status?: value-of<InterfaceStatus>|null,
-     *   wireguard_peer_id?: string|null,
+     *   wireguardPeerID?: string|null,
      * } $body
      */
     public function withBody(Body|array $body): self

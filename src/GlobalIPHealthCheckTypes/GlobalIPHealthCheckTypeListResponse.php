@@ -34,9 +34,9 @@ final class GlobalIPHealthCheckTypeListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   health_check_params?: array<string,mixed>|null,
-     *   health_check_type?: string|null,
-     *   record_type?: string|null,
+     *   healthCheckParams?: array<string,mixed>|null,
+     *   healthCheckType?: string|null,
+     *   recordType?: string|null,
      * }> $data
      */
     public static function with(?array $data = null): self
@@ -50,9 +50,9 @@ final class GlobalIPHealthCheckTypeListResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   health_check_params?: array<string,mixed>|null,
-     *   health_check_type?: string|null,
-     *   record_type?: string|null,
+     *   healthCheckParams?: array<string,mixed>|null,
+     *   healthCheckType?: string|null,
+     *   recordType?: string|null,
      * }> $data
      */
     public function withData(array $data): self

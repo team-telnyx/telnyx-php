@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\RoomCreateParams;
 use Telnyx\Rooms\RoomGetResponse;
@@ -47,12 +48,12 @@ final class RoomsService implements RoomsContract
      * Synchronously create a Room.
      *
      * @param array{
-     *   enable_recording?: bool,
-     *   max_participants?: int,
-     *   unique_name?: string,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_event_url?: string,
-     *   webhook_timeout_secs?: int|null,
+     *   enableRecording?: bool,
+     *   maxParticipants?: int,
+     *   uniqueName?: string,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookEventURL?: string,
+     *   webhookTimeoutSecs?: int|null,
      * }|RoomCreateParams $params
      *
      * @throws APIException
@@ -83,7 +84,7 @@ final class RoomsService implements RoomsContract
      *
      * View a room.
      *
-     * @param array{include_sessions?: bool}|RoomRetrieveParams $params
+     * @param array{includeSessions?: bool}|RoomRetrieveParams $params
      *
      * @throws APIException
      */
@@ -101,7 +102,10 @@ final class RoomsService implements RoomsContract
         $response = $this->client->request(
             method: 'get',
             path: ['rooms/%1$s', $roomID],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['includeSessions' => 'include_sessions']
+            ),
             options: $options,
             convert: RoomGetResponse::class,
         );
@@ -115,12 +119,12 @@ final class RoomsService implements RoomsContract
      * Synchronously update a Room.
      *
      * @param array{
-     *   enable_recording?: bool,
-     *   max_participants?: int,
-     *   unique_name?: string,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_event_url?: string,
-     *   webhook_timeout_secs?: int|null,
+     *   enableRecording?: bool,
+     *   maxParticipants?: int,
+     *   uniqueName?: string,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookEventURL?: string,
+     *   webhookTimeoutSecs?: int|null,
      * }|RoomUpdateParams $params
      *
      * @throws APIException
@@ -154,19 +158,19 @@ final class RoomsService implements RoomsContract
      *
      * @param array{
      *   filter?: array{
-     *     date_created_at?: array{
+     *     dateCreatedAt?: array{
      *       eq?: string|\DateTimeInterface,
      *       gte?: string|\DateTimeInterface,
      *       lte?: string|\DateTimeInterface,
      *     },
-     *     date_updated_at?: array{
+     *     dateUpdatedAt?: array{
      *       eq?: string|\DateTimeInterface,
      *       gte?: string|\DateTimeInterface,
      *       lte?: string|\DateTimeInterface,
      *     },
-     *     unique_name?: string,
+     *     uniqueName?: string,
      *   },
-     *   include_sessions?: bool,
+     *   includeSessions?: bool,
      *   page?: array{number?: int, size?: int},
      * }|RoomListParams $params
      *
@@ -185,7 +189,10 @@ final class RoomsService implements RoomsContract
         $response = $this->client->request(
             method: 'get',
             path: 'rooms',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['includeSessions' => 'include_sessions']
+            ),
             options: $options,
             convert: RoomListResponse::class,
         );

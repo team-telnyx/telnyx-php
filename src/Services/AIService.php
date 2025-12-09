@@ -119,7 +119,7 @@ final class AIService implements AIContract
      * - Up to 100 MB
      *
      * @param array{
-     *   bucket: string, filename: string, system_prompt?: string
+     *   bucket: string, filename: string, systemPrompt?: string
      * }|AISummarizeParams $params
      *
      * @throws APIException

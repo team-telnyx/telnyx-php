@@ -39,11 +39,11 @@ final class WebhookDeliveryGetResponse implements BaseModel
      * @param Data|array{
      *   id?: string|null,
      *   attempts?: list<Attempt>|null,
-     *   finished_at?: \DateTimeInterface|null,
-     *   record_type?: string|null,
-     *   started_at?: \DateTimeInterface|null,
+     *   finishedAt?: \DateTimeInterface|null,
+     *   recordType?: string|null,
+     *   startedAt?: \DateTimeInterface|null,
      *   status?: value-of<Status>|null,
-     *   user_id?: string|null,
+     *   userID?: string|null,
      *   webhook?: Webhook|null,
      * } $data
      */
@@ -62,11 +62,11 @@ final class WebhookDeliveryGetResponse implements BaseModel
      * @param Data|array{
      *   id?: string|null,
      *   attempts?: list<Attempt>|null,
-     *   finished_at?: \DateTimeInterface|null,
-     *   record_type?: string|null,
-     *   started_at?: \DateTimeInterface|null,
+     *   finishedAt?: \DateTimeInterface|null,
+     *   recordType?: string|null,
+     *   startedAt?: \DateTimeInterface|null,
      *   status?: value-of<Status>|null,
-     *   user_id?: string|null,
+     *   userID?: string|null,
      *   webhook?: Webhook|null,
      * } $data
      */

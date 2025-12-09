@@ -13,11 +13,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   created_at?: \DateTimeInterface|null,
+ *   createdAt?: \DateTimeInterface|null,
  *   enabled?: bool|null,
  *   name?: string|null,
- *   notification_category?: string|null,
- *   updated_at?: \DateTimeInterface|null,
+ *   notificationCategory?: string|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class Data implements BaseModel
@@ -34,8 +34,8 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
     #[Optional]
     public ?bool $enabled;
@@ -46,14 +46,14 @@ final class Data implements BaseModel
     #[Optional]
     public ?string $name;
 
-    #[Optional]
-    public ?string $notification_category;
+    #[Optional('notification_category')]
+    public ?string $notificationCategory;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
     {
@@ -67,20 +67,20 @@ final class Data implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?\DateTimeInterface $created_at = null,
+        ?\DateTimeInterface $createdAt = null,
         ?bool $enabled = null,
         ?string $name = null,
-        ?string $notification_category = null,
-        ?\DateTimeInterface $updated_at = null,
+        ?string $notificationCategory = null,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
         null !== $enabled && $obj['enabled'] = $enabled;
         null !== $name && $obj['name'] = $name;
-        null !== $notification_category && $obj['notification_category'] = $notification_category;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $notificationCategory && $obj['notificationCategory'] = $notificationCategory;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -102,7 +102,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class Data implements BaseModel
     public function withNotificationCategory(string $notificationCategory): self
     {
         $obj = clone $this;
-        $obj['notification_category'] = $notificationCategory;
+        $obj['notificationCategory'] = $notificationCategory;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

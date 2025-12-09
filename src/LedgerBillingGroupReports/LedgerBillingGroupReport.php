@@ -13,12 +13,12 @@ use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReport\Status;
 /**
  * @phpstan-type LedgerBillingGroupReportShape = array{
  *   id?: string|null,
- *   created_at?: \DateTimeInterface|null,
- *   organization_id?: string|null,
- *   record_type?: value-of<RecordType>|null,
- *   report_url?: string|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   organizationID?: string|null,
+ *   recordType?: value-of<RecordType>|null,
+ *   reportURL?: string|null,
  *   status?: value-of<Status>|null,
- *   updated_at?: \DateTimeInterface|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class LedgerBillingGroupReport implements BaseModel
@@ -35,28 +35,28 @@ final class LedgerBillingGroupReport implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
     /**
      * Uniquely identifies the organization that owns the resource.
      */
-    #[Optional]
-    public ?string $organization_id;
+    #[Optional('organization_id')]
+    public ?string $organizationID;
 
     /**
      * Identifies the type of the resource.
      *
-     * @var value-of<RecordType>|null $record_type
+     * @var value-of<RecordType>|null $recordType
      */
-    #[Optional(enum: RecordType::class)]
-    public ?string $record_type;
+    #[Optional('record_type', enum: RecordType::class)]
+    public ?string $recordType;
 
     /**
      * External url of the ledger billing group report, if the status is complete.
      */
-    #[Optional(nullable: true)]
-    public ?string $report_url;
+    #[Optional('report_url', nullable: true)]
+    public ?string $reportURL;
 
     /**
      * Status of the ledger billing group report.
@@ -69,8 +69,8 @@ final class LedgerBillingGroupReport implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
     {
@@ -82,27 +82,27 @@ final class LedgerBillingGroupReport implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $record_type
+     * @param RecordType|value-of<RecordType> $recordType
      * @param Status|value-of<Status> $status
      */
     public static function with(
         ?string $id = null,
-        ?\DateTimeInterface $created_at = null,
-        ?string $organization_id = null,
-        RecordType|string|null $record_type = null,
-        ?string $report_url = null,
+        ?\DateTimeInterface $createdAt = null,
+        ?string $organizationID = null,
+        RecordType|string|null $recordType = null,
+        ?string $reportURL = null,
         Status|string|null $status = null,
-        ?\DateTimeInterface $updated_at = null,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $organization_id && $obj['organization_id'] = $organization_id;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $report_url && $obj['report_url'] = $report_url;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $organizationID && $obj['organizationID'] = $organizationID;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $reportURL && $obj['reportURL'] = $reportURL;
         null !== $status && $obj['status'] = $status;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class LedgerBillingGroupReport implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class LedgerBillingGroupReport implements BaseModel
     public function withOrganizationID(string $organizationID): self
     {
         $obj = clone $this;
-        $obj['organization_id'] = $organizationID;
+        $obj['organizationID'] = $organizationID;
 
         return $obj;
     }
@@ -148,7 +148,7 @@ final class LedgerBillingGroupReport implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class LedgerBillingGroupReport implements BaseModel
     public function withReportURL(?string $reportURL): self
     {
         $obj = clone $this;
-        $obj['report_url'] = $reportURL;
+        $obj['reportURL'] = $reportURL;
 
         return $obj;
     }
@@ -183,7 +183,7 @@ final class LedgerBillingGroupReport implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

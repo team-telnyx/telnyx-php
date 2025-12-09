@@ -36,7 +36,7 @@ final class SiprecTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->siprec->siprecSidJson(
             'siprec_sid',
-            ['account_sid' => 'account_sid', 'call_sid' => 'call_sid']
+            ['accountSid' => 'account_sid', 'callSid' => 'call_sid']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -53,9 +53,9 @@ final class SiprecTest extends TestCase
         $result = $this->client->texml->accounts->calls->siprec->siprecSidJson(
             'siprec_sid',
             [
-                'account_sid' => 'account_sid',
-                'call_sid' => 'call_sid',
-                'Status' => 'stopped',
+                'accountSid' => 'account_sid',
+                'callSid' => 'call_sid',
+                'status' => 'stopped',
             ],
         );
 

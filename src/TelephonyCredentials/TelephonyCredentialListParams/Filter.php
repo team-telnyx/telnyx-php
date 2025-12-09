@@ -13,8 +13,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type FilterShape = array{
  *   name?: string|null,
- *   resource_id?: string|null,
- *   sip_username?: string|null,
+ *   resourceID?: string|null,
+ *   sipUsername?: string|null,
  *   status?: string|null,
  *   tag?: string|null,
  * }
@@ -33,14 +33,14 @@ final class Filter implements BaseModel
     /**
      * Filter by resource_id.
      */
-    #[Optional]
-    public ?string $resource_id;
+    #[Optional('resource_id')]
+    public ?string $resourceID;
 
     /**
      * Filter by sip_username.
      */
-    #[Optional]
-    public ?string $sip_username;
+    #[Optional('sip_username')]
+    public ?string $sipUsername;
 
     /**
      * Filter by status.
@@ -66,16 +66,16 @@ final class Filter implements BaseModel
      */
     public static function with(
         ?string $name = null,
-        ?string $resource_id = null,
-        ?string $sip_username = null,
+        ?string $resourceID = null,
+        ?string $sipUsername = null,
         ?string $status = null,
         ?string $tag = null,
     ): self {
         $obj = new self;
 
         null !== $name && $obj['name'] = $name;
-        null !== $resource_id && $obj['resource_id'] = $resource_id;
-        null !== $sip_username && $obj['sip_username'] = $sip_username;
+        null !== $resourceID && $obj['resourceID'] = $resourceID;
+        null !== $sipUsername && $obj['sipUsername'] = $sipUsername;
         null !== $status && $obj['status'] = $status;
         null !== $tag && $obj['tag'] = $tag;
 
@@ -99,7 +99,7 @@ final class Filter implements BaseModel
     public function withResourceID(string $resourceID): self
     {
         $obj = clone $this;
-        $obj['resource_id'] = $resourceID;
+        $obj['resourceID'] = $resourceID;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class Filter implements BaseModel
     public function withSipUsername(string $sipUsername): self
     {
         $obj = clone $this;
-        $obj['sip_username'] = $sipUsername;
+        $obj['sipUsername'] = $sipUsername;
 
         return $obj;
     }

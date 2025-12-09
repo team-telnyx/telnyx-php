@@ -13,9 +13,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type VoiceConnectionNameShape = array{
  *   contains?: string|null,
- *   ends_with?: string|null,
+ *   endsWith?: string|null,
  *   eq?: string|null,
- *   starts_with?: string|null,
+ *   startsWith?: string|null,
  * }
  */
 final class VoiceConnectionName implements BaseModel
@@ -32,8 +32,8 @@ final class VoiceConnectionName implements BaseModel
     /**
      * Filter ends with connection name. Requires at least three characters.
      */
-    #[Optional]
-    public ?string $ends_with;
+    #[Optional('ends_with')]
+    public ?string $endsWith;
 
     /**
      * Filter by connection name.
@@ -44,8 +44,8 @@ final class VoiceConnectionName implements BaseModel
     /**
      * Filter starts with connection name. Requires at least three characters.
      */
-    #[Optional]
-    public ?string $starts_with;
+    #[Optional('starts_with')]
+    public ?string $startsWith;
 
     public function __construct()
     {
@@ -59,16 +59,16 @@ final class VoiceConnectionName implements BaseModel
      */
     public static function with(
         ?string $contains = null,
-        ?string $ends_with = null,
+        ?string $endsWith = null,
         ?string $eq = null,
-        ?string $starts_with = null,
+        ?string $startsWith = null,
     ): self {
         $obj = new self;
 
         null !== $contains && $obj['contains'] = $contains;
-        null !== $ends_with && $obj['ends_with'] = $ends_with;
+        null !== $endsWith && $obj['endsWith'] = $endsWith;
         null !== $eq && $obj['eq'] = $eq;
-        null !== $starts_with && $obj['starts_with'] = $starts_with;
+        null !== $startsWith && $obj['startsWith'] = $startsWith;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class VoiceConnectionName implements BaseModel
     public function withEndsWith(string $endsWith): self
     {
         $obj = clone $this;
-        $obj['ends_with'] = $endsWith;
+        $obj['endsWith'] = $endsWith;
 
         return $obj;
     }
@@ -112,7 +112,7 @@ final class VoiceConnectionName implements BaseModel
     public function withStartsWith(string $startsWith): self
     {
         $obj = clone $this;
-        $obj['starts_with'] = $startsWith;
+        $obj['startsWith'] = $startsWith;
 
         return $obj;
     }

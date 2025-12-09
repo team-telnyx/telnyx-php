@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * The contact information of the company.
  *
  * @phpstan-type ContactShape = array{
- *   email?: string|null, phone_number?: string|null
+ *   email?: string|null, phoneNumber?: string|null
  * }
  */
 final class Contact implements BaseModel
@@ -29,8 +29,8 @@ final class Contact implements BaseModel
     /**
      * The phone number of the contact.
      */
-    #[Optional]
-    public ?string $phone_number;
+    #[Optional('phone_number')]
+    public ?string $phoneNumber;
 
     public function __construct()
     {
@@ -44,12 +44,12 @@ final class Contact implements BaseModel
      */
     public static function with(
         ?string $email = null,
-        ?string $phone_number = null
+        ?string $phoneNumber = null
     ): self {
         $obj = new self;
 
         null !== $email && $obj['email'] = $email;
-        null !== $phone_number && $obj['phone_number'] = $phone_number;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class Contact implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }

@@ -11,12 +11,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   created_at: \DateTimeInterface,
+ *   createdAt: \DateTimeInterface,
  *   filename: string,
  *   status: string,
- *   error_reason?: string|null,
- *   last_embedded_at?: \DateTimeInterface|null,
- *   updated_at?: \DateTimeInterface|null,
+ *   errorReason?: string|null,
+ *   lastEmbeddedAt?: \DateTimeInterface|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class Data implements BaseModel
@@ -24,8 +24,8 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Required]
-    public \DateTimeInterface $created_at;
+    #[Required('created_at')]
+    public \DateTimeInterface $createdAt;
 
     #[Required]
     public string $filename;
@@ -33,21 +33,21 @@ final class Data implements BaseModel
     #[Required]
     public string $status;
 
-    #[Optional]
-    public ?string $error_reason;
+    #[Optional('error_reason')]
+    public ?string $errorReason;
 
-    #[Optional]
-    public ?\DateTimeInterface $last_embedded_at;
+    #[Optional('last_embedded_at')]
+    public ?\DateTimeInterface $lastEmbeddedAt;
 
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     /**
      * `new Data()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Data::with(created_at: ..., filename: ..., status: ...)
+     * Data::with(createdAt: ..., filename: ..., status: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -67,22 +67,22 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        \DateTimeInterface $created_at,
+        \DateTimeInterface $createdAt,
         string $filename,
         string $status,
-        ?string $error_reason = null,
-        ?\DateTimeInterface $last_embedded_at = null,
-        ?\DateTimeInterface $updated_at = null,
+        ?string $errorReason = null,
+        ?\DateTimeInterface $lastEmbeddedAt = null,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
         $obj = new self;
 
-        $obj['created_at'] = $created_at;
+        $obj['createdAt'] = $createdAt;
         $obj['filename'] = $filename;
         $obj['status'] = $status;
 
-        null !== $error_reason && $obj['error_reason'] = $error_reason;
-        null !== $last_embedded_at && $obj['last_embedded_at'] = $last_embedded_at;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $errorReason && $obj['errorReason'] = $errorReason;
+        null !== $lastEmbeddedAt && $obj['lastEmbeddedAt'] = $lastEmbeddedAt;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class Data implements BaseModel
     public function withErrorReason(string $errorReason): self
     {
         $obj = clone $this;
-        $obj['error_reason'] = $errorReason;
+        $obj['errorReason'] = $errorReason;
 
         return $obj;
     }
@@ -122,7 +122,7 @@ final class Data implements BaseModel
     public function withLastEmbeddedAt(\DateTimeInterface $lastEmbeddedAt): self
     {
         $obj = clone $this;
-        $obj['last_embedded_at'] = $lastEmbeddedAt;
+        $obj['lastEmbeddedAt'] = $lastEmbeddedAt;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

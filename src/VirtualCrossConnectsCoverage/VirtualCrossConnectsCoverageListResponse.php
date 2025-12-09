@@ -40,17 +40,17 @@ final class VirtualCrossConnectsCoverageListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   available_bandwidth?: list<float>|null,
-     *   cloud_provider?: value-of<CloudProvider>|null,
-     *   cloud_provider_region?: string|null,
+     *   availableBandwidth?: list<float>|null,
+     *   cloudProvider?: value-of<CloudProvider>|null,
+     *   cloudProviderRegion?: string|null,
      *   location?: Location|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -67,11 +67,11 @@ final class VirtualCrossConnectsCoverageListResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   available_bandwidth?: list<float>|null,
-     *   cloud_provider?: value-of<CloudProvider>|null,
-     *   cloud_provider_region?: string|null,
+     *   availableBandwidth?: list<float>|null,
+     *   cloudProvider?: value-of<CloudProvider>|null,
+     *   cloudProviderRegion?: string|null,
      *   location?: Location|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -84,10 +84,10 @@ final class VirtualCrossConnectsCoverageListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

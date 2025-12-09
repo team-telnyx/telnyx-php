@@ -16,11 +16,11 @@ use Telnyx\PortingOrderStatus\Value;
  *
  * @phpstan-type WebhookPortingOrderStatusChangedPayloadShape = array{
  *   id?: string|null,
- *   customer_reference?: string|null,
+ *   customerReference?: string|null,
  *   status?: PortingOrderStatus|null,
- *   support_key?: string|null,
- *   updated_at?: \DateTimeInterface|null,
- *   webhook_url?: string|null,
+ *   supportKey?: string|null,
+ *   updatedAt?: \DateTimeInterface|null,
+ *   webhookURL?: string|null,
  * }
  */
 final class WebhookPortingOrderStatusChangedPayload implements BaseModel
@@ -37,8 +37,8 @@ final class WebhookPortingOrderStatusChangedPayload implements BaseModel
     /**
      * Identifies the customer reference associated with the porting order.
      */
-    #[Optional]
-    public ?string $customer_reference;
+    #[Optional('customer_reference')]
+    public ?string $customerReference;
 
     /**
      * Porting order status.
@@ -49,20 +49,20 @@ final class WebhookPortingOrderStatusChangedPayload implements BaseModel
     /**
      * Identifies the support key associated with the porting order.
      */
-    #[Optional]
-    public ?string $support_key;
+    #[Optional('support_key')]
+    public ?string $supportKey;
 
     /**
      * ISO 8601 formatted date indicating when the porting order was moved.
      */
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     /**
      * The URL to send the webhook to.
      */
-    #[Optional]
-    public ?string $webhook_url;
+    #[Optional('webhook_url')]
+    public ?string $webhookURL;
 
     public function __construct()
     {
@@ -80,20 +80,20 @@ final class WebhookPortingOrderStatusChangedPayload implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $customer_reference = null,
+        ?string $customerReference = null,
         PortingOrderStatus|array|null $status = null,
-        ?string $support_key = null,
-        ?\DateTimeInterface $updated_at = null,
-        ?string $webhook_url = null,
+        ?string $supportKey = null,
+        ?\DateTimeInterface $updatedAt = null,
+        ?string $webhookURL = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
         null !== $status && $obj['status'] = $status;
-        null !== $support_key && $obj['support_key'] = $support_key;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
-        null !== $webhook_url && $obj['webhook_url'] = $webhook_url;
+        null !== $supportKey && $obj['supportKey'] = $supportKey;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class WebhookPortingOrderStatusChangedPayload implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }
@@ -141,7 +141,7 @@ final class WebhookPortingOrderStatusChangedPayload implements BaseModel
     public function withSupportKey(string $supportKey): self
     {
         $obj = clone $this;
-        $obj['support_key'] = $supportKey;
+        $obj['supportKey'] = $supportKey;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class WebhookPortingOrderStatusChangedPayload implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -163,7 +163,7 @@ final class WebhookPortingOrderStatusChangedPayload implements BaseModel
     public function withWebhookURL(string $webhookURL): self
     {
         $obj = clone $this;
-        $obj['webhook_url'] = $webhookURL;
+        $obj['webhookURL'] = $webhookURL;
 
         return $obj;
     }

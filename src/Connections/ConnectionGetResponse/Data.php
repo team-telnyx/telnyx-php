@@ -14,16 +14,16 @@ use Telnyx\CredentialConnections\AnchorsiteOverride;
  * @phpstan-type DataShape = array{
  *   id?: string|null,
  *   active?: bool|null,
- *   anchorsite_override?: value-of<AnchorsiteOverride>|null,
- *   connection_name?: string|null,
- *   created_at?: string|null,
- *   outbound_voice_profile_id?: string|null,
- *   record_type?: string|null,
+ *   anchorsiteOverride?: value-of<AnchorsiteOverride>|null,
+ *   connectionName?: string|null,
+ *   createdAt?: string|null,
+ *   outboundVoiceProfileID?: string|null,
+ *   recordType?: string|null,
  *   tags?: list<string>|null,
- *   updated_at?: string|null,
- *   webhook_api_version?: value-of<WebhookAPIVersion>|null,
- *   webhook_event_failover_url?: string|null,
- *   webhook_event_url?: string|null,
+ *   updatedAt?: string|null,
+ *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
+ *   webhookEventFailoverURL?: string|null,
+ *   webhookEventURL?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -46,31 +46,31 @@ final class Data implements BaseModel
     /**
      * `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
      *
-     * @var value-of<AnchorsiteOverride>|null $anchorsite_override
+     * @var value-of<AnchorsiteOverride>|null $anchorsiteOverride
      */
-    #[Optional(enum: AnchorsiteOverride::class)]
-    public ?string $anchorsite_override;
+    #[Optional('anchorsite_override', enum: AnchorsiteOverride::class)]
+    public ?string $anchorsiteOverride;
 
-    #[Optional]
-    public ?string $connection_name;
+    #[Optional('connection_name')]
+    public ?string $connectionName;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Optional]
-    public ?string $created_at;
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
     /**
      * Identifies the associated outbound voice profile.
      */
-    #[Optional]
-    public ?string $outbound_voice_profile_id;
+    #[Optional('outbound_voice_profile_id')]
+    public ?string $outboundVoiceProfileID;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * Tags associated with the connection.
@@ -83,28 +83,28 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Optional]
-    public ?string $updated_at;
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     /**
      * Determines which webhook format will be used, Telnyx API v1 or v2.
      *
-     * @var value-of<WebhookAPIVersion>|null $webhook_api_version
+     * @var value-of<WebhookAPIVersion>|null $webhookAPIVersion
      */
-    #[Optional(enum: WebhookAPIVersion::class)]
-    public ?string $webhook_api_version;
+    #[Optional('webhook_api_version', enum: WebhookAPIVersion::class)]
+    public ?string $webhookAPIVersion;
 
     /**
      * The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails.
      */
-    #[Optional(nullable: true)]
-    public ?string $webhook_event_failover_url;
+    #[Optional('webhook_event_failover_url', nullable: true)]
+    public ?string $webhookEventFailoverURL;
 
     /**
      * The URL where webhooks related to this connection will be sent.
      */
-    #[Optional(nullable: true)]
-    public ?string $webhook_event_url;
+    #[Optional('webhook_event_url', nullable: true)]
+    public ?string $webhookEventURL;
 
     public function __construct()
     {
@@ -116,38 +116,38 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsite_override
+     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
      * @param list<string> $tags
-     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhook_api_version
+     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion
      */
     public static function with(
         ?string $id = null,
         ?bool $active = null,
-        AnchorsiteOverride|string|null $anchorsite_override = null,
-        ?string $connection_name = null,
-        ?string $created_at = null,
-        ?string $outbound_voice_profile_id = null,
-        ?string $record_type = null,
+        AnchorsiteOverride|string|null $anchorsiteOverride = null,
+        ?string $connectionName = null,
+        ?string $createdAt = null,
+        ?string $outboundVoiceProfileID = null,
+        ?string $recordType = null,
         ?array $tags = null,
-        ?string $updated_at = null,
-        WebhookAPIVersion|string|null $webhook_api_version = null,
-        ?string $webhook_event_failover_url = null,
-        ?string $webhook_event_url = null,
+        ?string $updatedAt = null,
+        WebhookAPIVersion|string|null $webhookAPIVersion = null,
+        ?string $webhookEventFailoverURL = null,
+        ?string $webhookEventURL = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
         null !== $active && $obj['active'] = $active;
-        null !== $anchorsite_override && $obj['anchorsite_override'] = $anchorsite_override;
-        null !== $connection_name && $obj['connection_name'] = $connection_name;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $outbound_voice_profile_id && $obj['outbound_voice_profile_id'] = $outbound_voice_profile_id;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $anchorsiteOverride && $obj['anchorsiteOverride'] = $anchorsiteOverride;
+        null !== $connectionName && $obj['connectionName'] = $connectionName;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $outboundVoiceProfileID && $obj['outboundVoiceProfileID'] = $outboundVoiceProfileID;
+        null !== $recordType && $obj['recordType'] = $recordType;
         null !== $tags && $obj['tags'] = $tags;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
-        null !== $webhook_api_version && $obj['webhook_api_version'] = $webhook_api_version;
-        null !== $webhook_event_failover_url && $obj['webhook_event_failover_url'] = $webhook_event_failover_url;
-        null !== $webhook_event_url && $obj['webhook_event_url'] = $webhook_event_url;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $webhookAPIVersion && $obj['webhookAPIVersion'] = $webhookAPIVersion;
+        null !== $webhookEventFailoverURL && $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        null !== $webhookEventURL && $obj['webhookEventURL'] = $webhookEventURL;
 
         return $obj;
     }
@@ -183,7 +183,7 @@ final class Data implements BaseModel
         AnchorsiteOverride|string $anchorsiteOverride
     ): self {
         $obj = clone $this;
-        $obj['anchorsite_override'] = $anchorsiteOverride;
+        $obj['anchorsiteOverride'] = $anchorsiteOverride;
 
         return $obj;
     }
@@ -191,7 +191,7 @@ final class Data implements BaseModel
     public function withConnectionName(string $connectionName): self
     {
         $obj = clone $this;
-        $obj['connection_name'] = $connectionName;
+        $obj['connectionName'] = $connectionName;
 
         return $obj;
     }
@@ -202,7 +202,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -214,7 +214,7 @@ final class Data implements BaseModel
         string $outboundVoiceProfileID
     ): self {
         $obj = clone $this;
-        $obj['outbound_voice_profile_id'] = $outboundVoiceProfileID;
+        $obj['outboundVoiceProfileID'] = $outboundVoiceProfileID;
 
         return $obj;
     }
@@ -225,7 +225,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -249,7 +249,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -263,7 +263,7 @@ final class Data implements BaseModel
         WebhookAPIVersion|string $webhookAPIVersion
     ): self {
         $obj = clone $this;
-        $obj['webhook_api_version'] = $webhookAPIVersion;
+        $obj['webhookAPIVersion'] = $webhookAPIVersion;
 
         return $obj;
     }
@@ -275,7 +275,7 @@ final class Data implements BaseModel
         ?string $webhookEventFailoverURL
     ): self {
         $obj = clone $this;
-        $obj['webhook_event_failover_url'] = $webhookEventFailoverURL;
+        $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
 
         return $obj;
     }
@@ -286,7 +286,7 @@ final class Data implements BaseModel
     public function withWebhookEventURL(?string $webhookEventURL): self
     {
         $obj = clone $this;
-        $obj['webhook_event_url'] = $webhookEventURL;
+        $obj['webhookEventURL'] = $webhookEventURL;
 
         return $obj;
     }

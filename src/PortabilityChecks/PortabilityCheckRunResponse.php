@@ -32,11 +32,11 @@ final class PortabilityCheckRunResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   fast_portable?: bool|null,
-     *   not_portable_reason?: string|null,
-     *   phone_number?: string|null,
+     *   fastPortable?: bool|null,
+     *   notPortableReason?: string|null,
+     *   phoneNumber?: string|null,
      *   portable?: bool|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      * }> $data
      */
     public static function with(?array $data = null): self
@@ -50,11 +50,11 @@ final class PortabilityCheckRunResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   fast_portable?: bool|null,
-     *   not_portable_reason?: string|null,
-     *   phone_number?: string|null,
+     *   fastPortable?: bool|null,
+     *   notPortableReason?: string|null,
+     *   phoneNumber?: string|null,
      *   portable?: bool|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      * }> $data
      */
     public function withData(array $data): self

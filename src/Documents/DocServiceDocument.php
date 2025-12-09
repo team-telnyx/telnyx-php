@@ -14,16 +14,16 @@ use Telnyx\Documents\DocServiceDocument\Status;
 /**
  * @phpstan-type DocServiceDocumentShape = array{
  *   id?: string|null,
- *   av_scan_status?: value-of<AvScanStatus>|null,
- *   content_type?: string|null,
- *   created_at?: string|null,
- *   customer_reference?: string|null,
+ *   avScanStatus?: value-of<AvScanStatus>|null,
+ *   contentType?: string|null,
+ *   createdAt?: string|null,
+ *   customerReference?: string|null,
  *   filename?: string|null,
- *   record_type?: string|null,
+ *   recordType?: string|null,
  *   sha256?: string|null,
  *   size?: Size|null,
  *   status?: value-of<Status>|null,
- *   updated_at?: string|null,
+ *   updatedAt?: string|null,
  * }
  */
 final class DocServiceDocument implements BaseModel
@@ -40,28 +40,28 @@ final class DocServiceDocument implements BaseModel
     /**
      * The antivirus scan status of the document.
      *
-     * @var value-of<AvScanStatus>|null $av_scan_status
+     * @var value-of<AvScanStatus>|null $avScanStatus
      */
-    #[Optional(enum: AvScanStatus::class)]
-    public ?string $av_scan_status;
+    #[Optional('av_scan_status', enum: AvScanStatus::class)]
+    public ?string $avScanStatus;
 
     /**
      * The document's content_type.
      */
-    #[Optional]
-    public ?string $content_type;
+    #[Optional('content_type')]
+    public ?string $contentType;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Optional]
-    public ?string $created_at;
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
     /**
      * Optional reference string for customer tracking.
      */
-    #[Optional]
-    public ?string $customer_reference;
+    #[Optional('customer_reference')]
+    public ?string $customerReference;
 
     /**
      * The filename of the document.
@@ -72,8 +72,8 @@ final class DocServiceDocument implements BaseModel
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * The document's SHA256 hash provided for optional verification purposes.
@@ -98,8 +98,8 @@ final class DocServiceDocument implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Optional]
-    public ?string $updated_at;
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     public function __construct()
     {
@@ -111,36 +111,36 @@ final class DocServiceDocument implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AvScanStatus|value-of<AvScanStatus> $av_scan_status
+     * @param AvScanStatus|value-of<AvScanStatus> $avScanStatus
      * @param Size|array{amount?: int|null, unit?: string|null} $size
      * @param Status|value-of<Status> $status
      */
     public static function with(
         ?string $id = null,
-        AvScanStatus|string|null $av_scan_status = null,
-        ?string $content_type = null,
-        ?string $created_at = null,
-        ?string $customer_reference = null,
+        AvScanStatus|string|null $avScanStatus = null,
+        ?string $contentType = null,
+        ?string $createdAt = null,
+        ?string $customerReference = null,
         ?string $filename = null,
-        ?string $record_type = null,
+        ?string $recordType = null,
         ?string $sha256 = null,
         Size|array|null $size = null,
         Status|string|null $status = null,
-        ?string $updated_at = null,
+        ?string $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $av_scan_status && $obj['av_scan_status'] = $av_scan_status;
-        null !== $content_type && $obj['content_type'] = $content_type;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $avScanStatus && $obj['avScanStatus'] = $avScanStatus;
+        null !== $contentType && $obj['contentType'] = $contentType;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
         null !== $filename && $obj['filename'] = $filename;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $recordType && $obj['recordType'] = $recordType;
         null !== $sha256 && $obj['sha256'] = $sha256;
         null !== $size && $obj['size'] = $size;
         null !== $status && $obj['status'] = $status;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -164,7 +164,7 @@ final class DocServiceDocument implements BaseModel
     public function withAvScanStatus(AvScanStatus|string $avScanStatus): self
     {
         $obj = clone $this;
-        $obj['av_scan_status'] = $avScanStatus;
+        $obj['avScanStatus'] = $avScanStatus;
 
         return $obj;
     }
@@ -175,7 +175,7 @@ final class DocServiceDocument implements BaseModel
     public function withContentType(string $contentType): self
     {
         $obj = clone $this;
-        $obj['content_type'] = $contentType;
+        $obj['contentType'] = $contentType;
 
         return $obj;
     }
@@ -186,7 +186,7 @@ final class DocServiceDocument implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -197,7 +197,7 @@ final class DocServiceDocument implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }
@@ -219,7 +219,7 @@ final class DocServiceDocument implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -267,7 +267,7 @@ final class DocServiceDocument implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

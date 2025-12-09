@@ -22,14 +22,14 @@ use Telnyx\Core\Contracts\BaseModel;
  *   email: string,
  *   entityType: value-of<EntityType>,
  *   vertical: string,
- *   altBusinessId?: string|null,
- *   altBusinessIdType?: value-of<AltBusinessIDType>|null,
- *   brandId?: string|null,
+ *   altBusinessID?: string|null,
+ *   altBusinessIDType?: value-of<AltBusinessIDType>|null,
+ *   brandID?: string|null,
  *   businessContactEmail?: string|null,
  *   city?: string|null,
  *   companyName?: string|null,
  *   createdAt?: string|null,
- *   cspId?: string|null,
+ *   cspID?: string|null,
  *   ein?: string|null,
  *   failureReasons?: string|null,
  *   firstName?: string|null,
@@ -42,13 +42,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *   optionalAttributes?: OptionalAttributes|null,
  *   phone?: string|null,
  *   postalCode?: string|null,
- *   referenceId?: string|null,
+ *   referenceID?: string|null,
  *   state?: string|null,
  *   status?: value-of<Status>|null,
  *   stockExchange?: value-of<StockExchange>|null,
  *   stockSymbol?: string|null,
  *   street?: string|null,
- *   tcrBrandId?: string|null,
+ *   tcrBrandID?: string|null,
  *   universalEin?: string|null,
  *   updatedAt?: string|null,
  *   webhookFailoverURL?: string|null,
@@ -105,22 +105,22 @@ final class BrandGetResponse implements BaseModel
     /**
      * Alternate business identifier such as DUNS, LEI, or GIIN.
      */
-    #[Optional]
-    public ?string $altBusinessId;
+    #[Optional('altBusinessId')]
+    public ?string $altBusinessID;
 
     /**
      * An enumeration.
      *
-     * @var value-of<AltBusinessIDType>|null $altBusinessIdType
+     * @var value-of<AltBusinessIDType>|null $altBusinessIDType
      */
-    #[Optional(enum: AltBusinessIDType::class)]
-    public ?string $altBusinessIdType;
+    #[Optional('altBusinessIdType', enum: AltBusinessIDType::class)]
+    public ?string $altBusinessIDType;
 
     /**
      * Unique identifier assigned to the brand.
      */
-    #[Optional]
-    public ?string $brandId;
+    #[Optional('brandId')]
+    public ?string $brandID;
 
     /**
      * Business contact email.
@@ -151,8 +151,8 @@ final class BrandGetResponse implements BaseModel
     /**
      * Unique identifier assigned to the csp by the registry.
      */
-    #[Optional]
-    public ?string $cspId;
+    #[Optional('cspId')]
+    public ?string $cspID;
 
     /**
      * (Required for Non-profit) Government assigned corporate tax ID. EIN is 9-digits in U.S.
@@ -228,8 +228,8 @@ final class BrandGetResponse implements BaseModel
     /**
      * Unique identifier Telnyx assigned to the brand - the brandId.
      */
-    #[Optional]
-    public ?string $referenceId;
+    #[Optional('referenceId')]
+    public ?string $referenceID;
 
     /**
      * State. Must be 2 letters code for United States.
@@ -268,8 +268,8 @@ final class BrandGetResponse implements BaseModel
     /**
      * Unique identifier assigned to the brand by the registry.
      */
-    #[Optional]
-    public ?string $tcrBrandId;
+    #[Optional('tcrBrandId')]
+    public ?string $tcrBrandID;
 
     /**
      * Universal EIN of Brand, Read Only.
@@ -346,7 +346,7 @@ final class BrandGetResponse implements BaseModel
      *
      * @param BrandRelationship|value-of<BrandRelationship> $brandRelationship
      * @param EntityType|value-of<EntityType> $entityType
-     * @param AltBusinessIDType|value-of<AltBusinessIDType> $altBusinessIdType
+     * @param AltBusinessIDType|value-of<AltBusinessIDType> $altBusinessIDType
      * @param BrandIdentityStatus|value-of<BrandIdentityStatus> $identityStatus
      * @param OptionalAttributes|array{
      *   taxExemptStatus?: string|null
@@ -361,14 +361,14 @@ final class BrandGetResponse implements BaseModel
         string $email,
         EntityType|string $entityType,
         string $vertical,
-        ?string $altBusinessId = null,
-        AltBusinessIDType|string|null $altBusinessIdType = null,
-        ?string $brandId = null,
+        ?string $altBusinessID = null,
+        AltBusinessIDType|string|null $altBusinessIDType = null,
+        ?string $brandID = null,
         ?string $businessContactEmail = null,
         ?string $city = null,
         ?string $companyName = null,
         ?string $createdAt = null,
-        ?string $cspId = null,
+        ?string $cspID = null,
         ?string $ein = null,
         ?string $failureReasons = null,
         ?string $firstName = null,
@@ -381,13 +381,13 @@ final class BrandGetResponse implements BaseModel
         OptionalAttributes|array|null $optionalAttributes = null,
         ?string $phone = null,
         ?string $postalCode = null,
-        ?string $referenceId = null,
+        ?string $referenceID = null,
         ?string $state = null,
         Status|string|null $status = null,
         StockExchange|string|null $stockExchange = null,
         ?string $stockSymbol = null,
         ?string $street = null,
-        ?string $tcrBrandId = null,
+        ?string $tcrBrandID = null,
         ?string $universalEin = null,
         ?string $updatedAt = null,
         ?string $webhookFailoverURL = null,
@@ -404,14 +404,14 @@ final class BrandGetResponse implements BaseModel
         $obj['entityType'] = $entityType;
         $obj['vertical'] = $vertical;
 
-        null !== $altBusinessId && $obj['altBusinessId'] = $altBusinessId;
-        null !== $altBusinessIdType && $obj['altBusinessIdType'] = $altBusinessIdType;
-        null !== $brandId && $obj['brandId'] = $brandId;
+        null !== $altBusinessID && $obj['altBusinessID'] = $altBusinessID;
+        null !== $altBusinessIDType && $obj['altBusinessIDType'] = $altBusinessIDType;
+        null !== $brandID && $obj['brandID'] = $brandID;
         null !== $businessContactEmail && $obj['businessContactEmail'] = $businessContactEmail;
         null !== $city && $obj['city'] = $city;
         null !== $companyName && $obj['companyName'] = $companyName;
         null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $cspId && $obj['cspId'] = $cspId;
+        null !== $cspID && $obj['cspID'] = $cspID;
         null !== $ein && $obj['ein'] = $ein;
         null !== $failureReasons && $obj['failureReasons'] = $failureReasons;
         null !== $firstName && $obj['firstName'] = $firstName;
@@ -424,13 +424,13 @@ final class BrandGetResponse implements BaseModel
         null !== $optionalAttributes && $obj['optionalAttributes'] = $optionalAttributes;
         null !== $phone && $obj['phone'] = $phone;
         null !== $postalCode && $obj['postalCode'] = $postalCode;
-        null !== $referenceId && $obj['referenceId'] = $referenceId;
+        null !== $referenceID && $obj['referenceID'] = $referenceID;
         null !== $state && $obj['state'] = $state;
         null !== $status && $obj['status'] = $status;
         null !== $stockExchange && $obj['stockExchange'] = $stockExchange;
         null !== $stockSymbol && $obj['stockSymbol'] = $stockSymbol;
         null !== $street && $obj['street'] = $street;
-        null !== $tcrBrandId && $obj['tcrBrandId'] = $tcrBrandId;
+        null !== $tcrBrandID && $obj['tcrBrandID'] = $tcrBrandID;
         null !== $universalEin && $obj['universalEin'] = $universalEin;
         null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
         null !== $webhookFailoverURL && $obj['webhookFailoverURL'] = $webhookFailoverURL;
@@ -518,7 +518,7 @@ final class BrandGetResponse implements BaseModel
     public function withAltBusinessID(string $altBusinessID): self
     {
         $obj = clone $this;
-        $obj['altBusinessId'] = $altBusinessID;
+        $obj['altBusinessID'] = $altBusinessID;
 
         return $obj;
     }
@@ -532,7 +532,7 @@ final class BrandGetResponse implements BaseModel
         AltBusinessIDType|string $altBusinessIDType
     ): self {
         $obj = clone $this;
-        $obj['altBusinessIdType'] = $altBusinessIDType;
+        $obj['altBusinessIDType'] = $altBusinessIDType;
 
         return $obj;
     }
@@ -543,7 +543,7 @@ final class BrandGetResponse implements BaseModel
     public function withBrandID(string $brandID): self
     {
         $obj = clone $this;
-        $obj['brandId'] = $brandID;
+        $obj['brandID'] = $brandID;
 
         return $obj;
     }
@@ -600,7 +600,7 @@ final class BrandGetResponse implements BaseModel
     public function withCspID(string $cspID): self
     {
         $obj = clone $this;
-        $obj['cspId'] = $cspID;
+        $obj['cspID'] = $cspID;
 
         return $obj;
     }
@@ -749,7 +749,7 @@ final class BrandGetResponse implements BaseModel
     public function withReferenceID(string $referenceID): self
     {
         $obj = clone $this;
-        $obj['referenceId'] = $referenceID;
+        $obj['referenceID'] = $referenceID;
 
         return $obj;
     }
@@ -819,7 +819,7 @@ final class BrandGetResponse implements BaseModel
     public function withTcrBrandID(string $tcrBrandID): self
     {
         $obj = clone $this;
-        $obj['tcrBrandId'] = $tcrBrandID;
+        $obj['tcrBrandID'] = $tcrBrandID;
 
         return $obj;
     }

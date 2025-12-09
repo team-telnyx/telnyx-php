@@ -45,7 +45,7 @@ final class ParticipantsTest extends TestCase
             ->participants
             ->retrieve(
                 'call_sid_or_participant_label',
-                ['account_sid' => 'account_sid', 'conference_sid' => 'conference_sid'],
+                ['accountSid' => 'account_sid', 'conferenceSid' => 'conference_sid'],
             )
         ;
 
@@ -68,7 +68,7 @@ final class ParticipantsTest extends TestCase
             ->participants
             ->retrieve(
                 'call_sid_or_participant_label',
-                ['account_sid' => 'account_sid', 'conference_sid' => 'conference_sid'],
+                ['accountSid' => 'account_sid', 'conferenceSid' => 'conference_sid'],
             )
         ;
 
@@ -85,7 +85,7 @@ final class ParticipantsTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->participants->update(
             'call_sid_or_participant_label',
-            ['account_sid' => 'account_sid', 'conference_sid' => 'conference_sid'],
+            ['accountSid' => 'account_sid', 'conferenceSid' => 'conference_sid'],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -102,19 +102,19 @@ final class ParticipantsTest extends TestCase
         $result = $this->client->texml->accounts->conferences->participants->update(
             'call_sid_or_participant_label',
             [
-                'account_sid' => 'account_sid',
-                'conference_sid' => 'conference_sid',
-                'AnnounceMethod' => 'GET',
-                'AnnounceUrl' => 'https://www.example.com/announce.xml',
-                'BeepOnExit' => false,
-                'CallSidToCoach' => 'v3:9X2vxPDFY2RHSJ1EdMS0RHRksMTg7ldNxdjWbVr9zBjbGjGsSe-aiQ',
-                'Coaching' => false,
-                'EndConferenceOnExit' => false,
-                'Hold' => true,
-                'HoldMethod' => 'POST',
-                'HoldUrl' => 'HoldUrl',
-                'Muted' => true,
-                'WaitUrl' => 'https://www.example.com/wait_music.mp3',
+                'accountSid' => 'account_sid',
+                'conferenceSid' => 'conference_sid',
+                'announceMethod' => 'GET',
+                'announceURL' => 'https://www.example.com/announce.xml',
+                'beepOnExit' => false,
+                'callSidToCoach' => 'v3:9X2vxPDFY2RHSJ1EdMS0RHRksMTg7ldNxdjWbVr9zBjbGjGsSe-aiQ',
+                'coaching' => false,
+                'endConferenceOnExit' => false,
+                'hold' => true,
+                'holdMethod' => 'POST',
+                'holdURL' => 'HoldUrl',
+                'muted' => true,
+                'waitURL' => 'https://www.example.com/wait_music.mp3',
             ],
         );
 
@@ -131,7 +131,7 @@ final class ParticipantsTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->participants->delete(
             'call_sid_or_participant_label',
-            ['account_sid' => 'account_sid', 'conference_sid' => 'conference_sid'],
+            ['accountSid' => 'account_sid', 'conferenceSid' => 'conference_sid'],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -147,7 +147,7 @@ final class ParticipantsTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->participants->delete(
             'call_sid_or_participant_label',
-            ['account_sid' => 'account_sid', 'conference_sid' => 'conference_sid'],
+            ['accountSid' => 'account_sid', 'conferenceSid' => 'conference_sid'],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -167,7 +167,7 @@ final class ParticipantsTest extends TestCase
             ->accounts
             ->conferences
             ->participants
-            ->participants('conference_sid', ['account_sid' => 'account_sid'])
+            ->participants('conference_sid', ['accountSid' => 'account_sid'])
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -190,55 +190,55 @@ final class ParticipantsTest extends TestCase
             ->participants(
                 'conference_sid',
                 [
-                    'account_sid' => 'account_sid',
-                    'AmdStatusCallback' => 'https://www.example.com/amd_result',
-                    'AmdStatusCallbackMethod' => 'GET',
-                    'Beep' => 'onExit',
-                    'CallerId' => 'Info',
-                    'CallSidToCoach' => 'v3:9X2vxPDFY2RHSJ1EdMS0RHRksMTg7ldNxdjWbVr9zBjbGjGsSe-aiQ',
-                    'CancelPlaybackOnDetectMessageEnd' => false,
-                    'CancelPlaybackOnMachineDetection' => false,
-                    'Coaching' => false,
-                    'ConferenceRecord' => 'record-from-start',
-                    'ConferenceRecordingStatusCallback' => 'https://example.com/conference_recording_status_callback',
-                    'ConferenceRecordingStatusCallbackEvent' => 'in-progress completed failed absent',
-                    'ConferenceRecordingStatusCallbackMethod' => 'GET',
-                    'ConferenceRecordingTimeout' => 5,
-                    'ConferenceStatusCallback' => 'https://example.com/conference_status_callback',
-                    'ConferenceStatusCallbackEvent' => 'start end join leave',
-                    'ConferenceStatusCallbackMethod' => 'GET',
-                    'ConferenceTrim' => 'trim-silence',
-                    'CustomHeaders' => [
+                    'accountSid' => 'account_sid',
+                    'amdStatusCallback' => 'https://www.example.com/amd_result',
+                    'amdStatusCallbackMethod' => 'GET',
+                    'beep' => 'onExit',
+                    'callerID' => 'Info',
+                    'callSidToCoach' => 'v3:9X2vxPDFY2RHSJ1EdMS0RHRksMTg7ldNxdjWbVr9zBjbGjGsSe-aiQ',
+                    'cancelPlaybackOnDetectMessageEnd' => false,
+                    'cancelPlaybackOnMachineDetection' => false,
+                    'coaching' => false,
+                    'conferenceRecord' => 'record-from-start',
+                    'conferenceRecordingStatusCallback' => 'https://example.com/conference_recording_status_callback',
+                    'conferenceRecordingStatusCallbackEvent' => 'in-progress completed failed absent',
+                    'conferenceRecordingStatusCallbackMethod' => 'GET',
+                    'conferenceRecordingTimeout' => 5,
+                    'conferenceStatusCallback' => 'https://example.com/conference_status_callback',
+                    'conferenceStatusCallbackEvent' => 'start end join leave',
+                    'conferenceStatusCallbackMethod' => 'GET',
+                    'conferenceTrim' => 'trim-silence',
+                    'customHeaders' => [
                         ['name' => 'X-Custom-Header', 'value' => 'custom-value'],
                     ],
-                    'EarlyMedia' => true,
-                    'EndConferenceOnExit' => true,
-                    'From' => '+12065550200',
-                    'MachineDetection' => 'Enable',
-                    'MachineDetectionSilenceTimeout' => 2000,
-                    'MachineDetectionSpeechEndThreshold' => 2000,
-                    'MachineDetectionSpeechThreshold' => 2000,
-                    'MachineDetectionTimeout' => 1000,
-                    'MaxParticipants' => 30,
-                    'Muted' => true,
-                    'PreferredCodecs' => 'PCMA,PCMU',
-                    'Record' => false,
-                    'RecordingChannels' => 'dual',
-                    'RecordingStatusCallback' => 'https://example.com/recording_status_callback',
-                    'RecordingStatusCallbackEvent' => 'in-progress completed absent',
-                    'RecordingStatusCallbackMethod' => 'GET',
-                    'RecordingTrack' => 'inbound',
-                    'SipAuthPassword' => '1234',
-                    'SipAuthUsername' => 'user',
-                    'StartConferenceOnEnter' => false,
-                    'StatusCallback' => 'https://www.example.com/callback',
-                    'StatusCallbackEvent' => 'answered completed',
-                    'StatusCallbackMethod' => 'GET',
-                    'TimeLimit' => 30,
-                    'timeout_seconds' => 30,
-                    'To' => '+12065550100',
-                    'Trim' => 'trim-silence',
-                    'WaitUrl' => 'https://www.example.com/wait_music.mp3',
+                    'earlyMedia' => true,
+                    'endConferenceOnExit' => true,
+                    'from' => '+12065550200',
+                    'machineDetection' => 'Enable',
+                    'machineDetectionSilenceTimeout' => 2000,
+                    'machineDetectionSpeechEndThreshold' => 2000,
+                    'machineDetectionSpeechThreshold' => 2000,
+                    'machineDetectionTimeout' => 1000,
+                    'maxParticipants' => 30,
+                    'muted' => true,
+                    'preferredCodecs' => 'PCMA,PCMU',
+                    'record' => false,
+                    'recordingChannels' => 'dual',
+                    'recordingStatusCallback' => 'https://example.com/recording_status_callback',
+                    'recordingStatusCallbackEvent' => 'in-progress completed absent',
+                    'recordingStatusCallbackMethod' => 'GET',
+                    'recordingTrack' => 'inbound',
+                    'sipAuthPassword' => '1234',
+                    'sipAuthUsername' => 'user',
+                    'startConferenceOnEnter' => false,
+                    'statusCallback' => 'https://www.example.com/callback',
+                    'statusCallbackEvent' => 'answered completed',
+                    'statusCallbackMethod' => 'GET',
+                    'timeLimit' => 30,
+                    'timeoutSeconds' => 30,
+                    'to' => '+12065550100',
+                    'trim' => 'trim-silence',
+                    'waitURL' => 'https://www.example.com/wait_music.mp3',
                 ],
             )
         ;
@@ -260,10 +260,7 @@ final class ParticipantsTest extends TestCase
             ->accounts
             ->conferences
             ->participants
-            ->retrieveParticipants(
-                'conference_sid',
-                ['account_sid' => 'account_sid']
-            )
+            ->retrieveParticipants('conference_sid', ['accountSid' => 'account_sid'])
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -283,10 +280,7 @@ final class ParticipantsTest extends TestCase
             ->accounts
             ->conferences
             ->participants
-            ->retrieveParticipants(
-                'conference_sid',
-                ['account_sid' => 'account_sid']
-            )
+            ->retrieveParticipants('conference_sid', ['accountSid' => 'account_sid'])
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

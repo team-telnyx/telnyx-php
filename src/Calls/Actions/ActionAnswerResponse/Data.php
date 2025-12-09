@@ -9,9 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type DataShape = array{
- *   recording_id?: string|null, result?: string|null
- * }
+ * @phpstan-type DataShape = array{recordingID?: string|null, result?: string|null}
  */
 final class Data implements BaseModel
 {
@@ -21,8 +19,8 @@ final class Data implements BaseModel
     /**
      * The ID of the recording. Only present when the record parameter is set to record-from-answer.
      */
-    #[Optional]
-    public ?string $recording_id;
+    #[Optional('recording_id')]
+    public ?string $recordingID;
 
     #[Optional]
     public ?string $result;
@@ -38,12 +36,12 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $recording_id = null,
+        ?string $recordingID = null,
         ?string $result = null
     ): self {
         $obj = new self;
 
-        null !== $recording_id && $obj['recording_id'] = $recording_id;
+        null !== $recordingID && $obj['recordingID'] = $recordingID;
         null !== $result && $obj['result'] = $result;
 
         return $obj;
@@ -55,7 +53,7 @@ final class Data implements BaseModel
     public function withRecordingID(string $recordingID): self
     {
         $obj = clone $this;
-        $obj['recording_id'] = $recordingID;
+        $obj['recordingID'] = $recordingID;
 
         return $obj;
     }

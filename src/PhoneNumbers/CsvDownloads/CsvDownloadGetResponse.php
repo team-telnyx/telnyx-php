@@ -33,7 +33,7 @@ final class CsvDownloadGetResponse implements BaseModel
      *
      * @param list<CsvDownload|array{
      *   id?: string|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      *   status?: value-of<Status>|null,
      *   url?: string|null,
      * }> $data
@@ -50,7 +50,7 @@ final class CsvDownloadGetResponse implements BaseModel
     /**
      * @param list<CsvDownload|array{
      *   id?: string|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      *   status?: value-of<Status>|null,
      *   url?: string|null,
      * }> $data

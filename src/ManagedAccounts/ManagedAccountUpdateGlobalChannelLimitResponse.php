@@ -34,10 +34,10 @@ final class ManagedAccountUpdateGlobalChannelLimitResponse implements BaseModel
      *
      * @param Data|array{
      *   id?: string|null,
-     *   channel_limit?: int|null,
+     *   channelLimit?: int|null,
      *   email?: string|null,
-     *   manager_account_id?: string|null,
-     *   record_type?: string|null,
+     *   managerAccountID?: string|null,
+     *   recordType?: string|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -52,10 +52,10 @@ final class ManagedAccountUpdateGlobalChannelLimitResponse implements BaseModel
     /**
      * @param Data|array{
      *   id?: string|null,
-     *   channel_limit?: int|null,
+     *   channelLimit?: int|null,
      *   email?: string|null,
-     *   manager_account_id?: string|null,
-     *   record_type?: string|null,
+     *   managerAccountID?: string|null,
+     *   recordType?: string|null,
      * } $data
      */
     public function withData(Data|array $data): self

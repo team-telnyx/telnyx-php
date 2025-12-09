@@ -12,10 +12,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * High level health metrics about the number and it's messaging sending patterns.
  *
  * @phpstan-type NumberHealthMetricsShape = array{
- *   inbound_outbound_ratio: float,
- *   message_count: int,
- *   spam_ratio: float,
- *   success_ratio: float,
+ *   inboundOutboundRatio: float,
+ *   messageCount: int,
+ *   spamRatio: float,
+ *   successRatio: float,
  * }
  */
 final class NumberHealthMetrics implements BaseModel
@@ -26,26 +26,26 @@ final class NumberHealthMetrics implements BaseModel
     /**
      * The ratio of messages received to the number of messages sent.
      */
-    #[Required]
-    public float $inbound_outbound_ratio;
+    #[Required('inbound_outbound_ratio')]
+    public float $inboundOutboundRatio;
 
     /**
      * The number of messages analyzed for the health metrics.
      */
-    #[Required]
-    public int $message_count;
+    #[Required('message_count')]
+    public int $messageCount;
 
     /**
      * The ratio of messages blocked for spam to the number of messages attempted.
      */
-    #[Required]
-    public float $spam_ratio;
+    #[Required('spam_ratio')]
+    public float $spamRatio;
 
     /**
      * The ratio of messages sucessfully delivered to the number of messages attempted.
      */
-    #[Required]
-    public float $success_ratio;
+    #[Required('success_ratio')]
+    public float $successRatio;
 
     /**
      * `new NumberHealthMetrics()` is missing required properties by the API.
@@ -53,10 +53,10 @@ final class NumberHealthMetrics implements BaseModel
      * To enforce required parameters use
      * ```
      * NumberHealthMetrics::with(
-     *   inbound_outbound_ratio: ...,
-     *   message_count: ...,
-     *   spam_ratio: ...,
-     *   success_ratio: ...,
+     *   inboundOutboundRatio: ...,
+     *   messageCount: ...,
+     *   spamRatio: ...,
+     *   successRatio: ...,
      * )
      * ```
      *
@@ -81,17 +81,17 @@ final class NumberHealthMetrics implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        float $inbound_outbound_ratio,
-        int $message_count,
-        float $spam_ratio,
-        float $success_ratio,
+        float $inboundOutboundRatio,
+        int $messageCount,
+        float $spamRatio,
+        float $successRatio,
     ): self {
         $obj = new self;
 
-        $obj['inbound_outbound_ratio'] = $inbound_outbound_ratio;
-        $obj['message_count'] = $message_count;
-        $obj['spam_ratio'] = $spam_ratio;
-        $obj['success_ratio'] = $success_ratio;
+        $obj['inboundOutboundRatio'] = $inboundOutboundRatio;
+        $obj['messageCount'] = $messageCount;
+        $obj['spamRatio'] = $spamRatio;
+        $obj['successRatio'] = $successRatio;
 
         return $obj;
     }
@@ -102,7 +102,7 @@ final class NumberHealthMetrics implements BaseModel
     public function withInboundOutboundRatio(float $inboundOutboundRatio): self
     {
         $obj = clone $this;
-        $obj['inbound_outbound_ratio'] = $inboundOutboundRatio;
+        $obj['inboundOutboundRatio'] = $inboundOutboundRatio;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class NumberHealthMetrics implements BaseModel
     public function withMessageCount(int $messageCount): self
     {
         $obj = clone $this;
-        $obj['message_count'] = $messageCount;
+        $obj['messageCount'] = $messageCount;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class NumberHealthMetrics implements BaseModel
     public function withSpamRatio(float $spamRatio): self
     {
         $obj = clone $this;
-        $obj['spam_ratio'] = $spamRatio;
+        $obj['spamRatio'] = $spamRatio;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class NumberHealthMetrics implements BaseModel
     public function withSuccessRatio(float $successRatio): self
     {
         $obj = clone $this;
-        $obj['success_ratio'] = $successRatio;
+        $obj['successRatio'] = $successRatio;
 
         return $obj;
     }

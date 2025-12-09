@@ -15,18 +15,18 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[locality], filter[administrative_area], filter[country_code], filter[national_destination_code], filter[rate_center], filter[phone_number_type], filter[features], filter[limit], filter[best_effort], filter[quickship], filter[reservable], filter[exclude_held_numbers].
  *
  * @phpstan-type FilterShape = array{
- *   administrative_area?: string|null,
- *   best_effort?: bool|null,
- *   country_code?: string|null,
- *   exclude_held_numbers?: bool|null,
+ *   administrativeArea?: string|null,
+ *   bestEffort?: bool|null,
+ *   countryCode?: string|null,
+ *   excludeHeldNumbers?: bool|null,
  *   features?: list<value-of<Feature>>|null,
  *   limit?: int|null,
  *   locality?: string|null,
- *   national_destination_code?: string|null,
- *   phone_number?: PhoneNumber|null,
- *   phone_number_type?: value-of<PhoneNumberType>|null,
+ *   nationalDestinationCode?: string|null,
+ *   phoneNumber?: PhoneNumber|null,
+ *   phoneNumberType?: value-of<PhoneNumberType>|null,
  *   quickship?: bool|null,
- *   rate_center?: string|null,
+ *   rateCenter?: string|null,
  *   reservable?: bool|null,
  * }
  */
@@ -38,26 +38,26 @@ final class Filter implements BaseModel
     /**
      * Find numbers in a particular US state or CA province.
      */
-    #[Optional]
-    public ?string $administrative_area;
+    #[Optional('administrative_area')]
+    public ?string $administrativeArea;
 
     /**
      * Filter to determine if best effort results should be included. Only available in USA/CANADA.
      */
-    #[Optional]
-    public ?bool $best_effort;
+    #[Optional('best_effort')]
+    public ?bool $bestEffort;
 
     /**
      * Filter phone numbers by country.
      */
-    #[Optional]
-    public ?string $country_code;
+    #[Optional('country_code')]
+    public ?string $countryCode;
 
     /**
      * Filter to exclude phone numbers that are currently on hold/reserved for your account.
      */
-    #[Optional]
-    public ?bool $exclude_held_numbers;
+    #[Optional('exclude_held_numbers')]
+    public ?bool $excludeHeldNumbers;
 
     /**
      * Filter phone numbers with specific features.
@@ -82,22 +82,22 @@ final class Filter implements BaseModel
     /**
      * Filter by the national destination code of the number.
      */
-    #[Optional]
-    public ?string $national_destination_code;
+    #[Optional('national_destination_code')]
+    public ?string $nationalDestinationCode;
 
     /**
      * Filter phone numbers by pattern matching.
      */
-    #[Optional]
-    public ?PhoneNumber $phone_number;
+    #[Optional('phone_number')]
+    public ?PhoneNumber $phoneNumber;
 
     /**
      * Filter phone numbers by number type.
      *
-     * @var value-of<PhoneNumberType>|null $phone_number_type
+     * @var value-of<PhoneNumberType>|null $phoneNumberType
      */
-    #[Optional(enum: PhoneNumberType::class)]
-    public ?string $phone_number_type;
+    #[Optional('phone_number_type', enum: PhoneNumberType::class)]
+    public ?string $phoneNumberType;
 
     /**
      * Filter to exclude phone numbers that need additional time after to purchase to activate. Only applicable for +1 toll_free numbers.
@@ -108,8 +108,8 @@ final class Filter implements BaseModel
     /**
      * Filter phone numbers by rate center. This filter is only applicable to USA and Canada numbers.
      */
-    #[Optional]
-    public ?string $rate_center;
+    #[Optional('rate_center')]
+    public ?string $rateCenter;
 
     /**
      * Filter to ensure only numbers that can be reserved are included in the results.
@@ -129,39 +129,39 @@ final class Filter implements BaseModel
      *
      * @param list<Feature|value-of<Feature>> $features
      * @param PhoneNumber|array{
-     *   contains?: string|null, ends_with?: string|null, starts_with?: string|null
-     * } $phone_number
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phone_number_type
+     *   contains?: string|null, endsWith?: string|null, startsWith?: string|null
+     * } $phoneNumber
+     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
      */
     public static function with(
-        ?string $administrative_area = null,
-        ?bool $best_effort = null,
-        ?string $country_code = null,
-        ?bool $exclude_held_numbers = null,
+        ?string $administrativeArea = null,
+        ?bool $bestEffort = null,
+        ?string $countryCode = null,
+        ?bool $excludeHeldNumbers = null,
         ?array $features = null,
         ?int $limit = null,
         ?string $locality = null,
-        ?string $national_destination_code = null,
-        PhoneNumber|array|null $phone_number = null,
-        PhoneNumberType|string|null $phone_number_type = null,
+        ?string $nationalDestinationCode = null,
+        PhoneNumber|array|null $phoneNumber = null,
+        PhoneNumberType|string|null $phoneNumberType = null,
         ?bool $quickship = null,
-        ?string $rate_center = null,
+        ?string $rateCenter = null,
         ?bool $reservable = null,
     ): self {
         $obj = new self;
 
-        null !== $administrative_area && $obj['administrative_area'] = $administrative_area;
-        null !== $best_effort && $obj['best_effort'] = $best_effort;
-        null !== $country_code && $obj['country_code'] = $country_code;
-        null !== $exclude_held_numbers && $obj['exclude_held_numbers'] = $exclude_held_numbers;
+        null !== $administrativeArea && $obj['administrativeArea'] = $administrativeArea;
+        null !== $bestEffort && $obj['bestEffort'] = $bestEffort;
+        null !== $countryCode && $obj['countryCode'] = $countryCode;
+        null !== $excludeHeldNumbers && $obj['excludeHeldNumbers'] = $excludeHeldNumbers;
         null !== $features && $obj['features'] = $features;
         null !== $limit && $obj['limit'] = $limit;
         null !== $locality && $obj['locality'] = $locality;
-        null !== $national_destination_code && $obj['national_destination_code'] = $national_destination_code;
-        null !== $phone_number && $obj['phone_number'] = $phone_number;
-        null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
+        null !== $nationalDestinationCode && $obj['nationalDestinationCode'] = $nationalDestinationCode;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
+        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
         null !== $quickship && $obj['quickship'] = $quickship;
-        null !== $rate_center && $obj['rate_center'] = $rate_center;
+        null !== $rateCenter && $obj['rateCenter'] = $rateCenter;
         null !== $reservable && $obj['reservable'] = $reservable;
 
         return $obj;
@@ -173,7 +173,7 @@ final class Filter implements BaseModel
     public function withAdministrativeArea(string $administrativeArea): self
     {
         $obj = clone $this;
-        $obj['administrative_area'] = $administrativeArea;
+        $obj['administrativeArea'] = $administrativeArea;
 
         return $obj;
     }
@@ -184,7 +184,7 @@ final class Filter implements BaseModel
     public function withBestEffort(bool $bestEffort): self
     {
         $obj = clone $this;
-        $obj['best_effort'] = $bestEffort;
+        $obj['bestEffort'] = $bestEffort;
 
         return $obj;
     }
@@ -195,7 +195,7 @@ final class Filter implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj['country_code'] = $countryCode;
+        $obj['countryCode'] = $countryCode;
 
         return $obj;
     }
@@ -206,7 +206,7 @@ final class Filter implements BaseModel
     public function withExcludeHeldNumbers(bool $excludeHeldNumbers): self
     {
         $obj = clone $this;
-        $obj['exclude_held_numbers'] = $excludeHeldNumbers;
+        $obj['excludeHeldNumbers'] = $excludeHeldNumbers;
 
         return $obj;
     }
@@ -253,7 +253,7 @@ final class Filter implements BaseModel
         string $nationalDestinationCode
     ): self {
         $obj = clone $this;
-        $obj['national_destination_code'] = $nationalDestinationCode;
+        $obj['nationalDestinationCode'] = $nationalDestinationCode;
 
         return $obj;
     }
@@ -262,13 +262,13 @@ final class Filter implements BaseModel
      * Filter phone numbers by pattern matching.
      *
      * @param PhoneNumber|array{
-     *   contains?: string|null, ends_with?: string|null, starts_with?: string|null
+     *   contains?: string|null, endsWith?: string|null, startsWith?: string|null
      * } $phoneNumber
      */
     public function withPhoneNumber(PhoneNumber|array $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -282,7 +282,7 @@ final class Filter implements BaseModel
         PhoneNumberType|string $phoneNumberType
     ): self {
         $obj = clone $this;
-        $obj['phone_number_type'] = $phoneNumberType;
+        $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }
@@ -304,7 +304,7 @@ final class Filter implements BaseModel
     public function withRateCenter(string $rateCenter): self
     {
         $obj = clone $this;
-        $obj['rate_center'] = $rateCenter;
+        $obj['rateCenter'] = $rateCenter;
 
         return $obj;
     }

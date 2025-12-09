@@ -14,10 +14,10 @@ use Telnyx\PhoneNumbers\Voice\VoiceListParams\Filter\VoiceUsagePaymentMethod;
  * Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[connection_name], filter[customer_reference], filter[voice.usage_payment_method].
  *
  * @phpstan-type FilterShape = array{
- *   connection_name?: ConnectionName|null,
- *   customer_reference?: string|null,
- *   phone_number?: string|null,
- *   voice_usage_payment_method?: value-of<VoiceUsagePaymentMethod>|null,
+ *   connectionName?: ConnectionName|null,
+ *   customerReference?: string|null,
+ *   phoneNumber?: string|null,
+ *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
  * }
  */
 final class Filter implements BaseModel
@@ -28,32 +28,32 @@ final class Filter implements BaseModel
     /**
      * Filter by connection name pattern matching.
      */
-    #[Optional]
-    public ?ConnectionName $connection_name;
+    #[Optional('connection_name')]
+    public ?ConnectionName $connectionName;
 
     /**
      * Filter numbers via the customer_reference set.
      */
-    #[Optional]
-    public ?string $customer_reference;
+    #[Optional('customer_reference')]
+    public ?string $customerReference;
 
     /**
      * Filter by phone number. Requires at least three digits.
      *              Non-numerical characters will result in no values being returned.
      */
-    #[Optional]
-    public ?string $phone_number;
+    #[Optional('phone_number')]
+    public ?string $phoneNumber;
 
     /**
      * Filter by usage_payment_method.
      *
-     * @var value-of<VoiceUsagePaymentMethod>|null $voice_usage_payment_method
+     * @var value-of<VoiceUsagePaymentMethod>|null $voiceUsagePaymentMethod
      */
     #[Optional(
         'voice.usage_payment_method',
         enum: VoiceUsagePaymentMethod::class
     )]
-    public ?string $voice_usage_payment_method;
+    public ?string $voiceUsagePaymentMethod;
 
     public function __construct()
     {
@@ -65,21 +65,21 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ConnectionName|array{contains?: string|null} $connection_name
-     * @param VoiceUsagePaymentMethod|value-of<VoiceUsagePaymentMethod> $voice_usage_payment_method
+     * @param ConnectionName|array{contains?: string|null} $connectionName
+     * @param VoiceUsagePaymentMethod|value-of<VoiceUsagePaymentMethod> $voiceUsagePaymentMethod
      */
     public static function with(
-        ConnectionName|array|null $connection_name = null,
-        ?string $customer_reference = null,
-        ?string $phone_number = null,
-        VoiceUsagePaymentMethod|string|null $voice_usage_payment_method = null,
+        ConnectionName|array|null $connectionName = null,
+        ?string $customerReference = null,
+        ?string $phoneNumber = null,
+        VoiceUsagePaymentMethod|string|null $voiceUsagePaymentMethod = null,
     ): self {
         $obj = new self;
 
-        null !== $connection_name && $obj['connection_name'] = $connection_name;
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
-        null !== $phone_number && $obj['phone_number'] = $phone_number;
-        null !== $voice_usage_payment_method && $obj['voice_usage_payment_method'] = $voice_usage_payment_method;
+        null !== $connectionName && $obj['connectionName'] = $connectionName;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
+        null !== $voiceUsagePaymentMethod && $obj['voiceUsagePaymentMethod'] = $voiceUsagePaymentMethod;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class Filter implements BaseModel
         ConnectionName|array $connectionName
     ): self {
         $obj = clone $this;
-        $obj['connection_name'] = $connectionName;
+        $obj['connectionName'] = $connectionName;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class Filter implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class Filter implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class Filter implements BaseModel
         VoiceUsagePaymentMethod|string $voiceUsagePaymentMethod
     ): self {
         $obj = clone $this;
-        $obj['voice_usage_payment_method'] = $voiceUsagePaymentMethod;
+        $obj['voiceUsagePaymentMethod'] = $voiceUsagePaymentMethod;
 
         return $obj;
     }

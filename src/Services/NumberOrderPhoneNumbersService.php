@@ -52,7 +52,7 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
      * Get a list of phone numbers associated to orders.
      *
      * @param array{
-     *   filter?: array{country_code?: string}
+     *   filter?: array{countryCode?: string}
      * }|NumberOrderPhoneNumberListParams $params
      *
      * @throws APIException
@@ -84,7 +84,7 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
      * Update requirement group for a phone number order
      *
      * @param array{
-     *   requirement_group_id: string
+     *   requirementGroupID: string
      * }|NumberOrderPhoneNumberUpdateRequirementGroupParams $params
      *
      * @throws APIException
@@ -117,8 +117,8 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
      * Updates requirements for a single phone number within a number order.
      *
      * @param array{
-     *   regulatory_requirements?: list<array{
-     *     field_value?: string, requirement_id?: string
+     *   regulatoryRequirements?: list<array{
+     *     fieldValue?: string, requirementID?: string
      *   }>,
      * }|NumberOrderPhoneNumberUpdateRequirementsParams $params
      *

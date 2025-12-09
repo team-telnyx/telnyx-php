@@ -12,13 +12,13 @@ use Telnyx\Texml\Accounts\Calls\CallSiprecJsonResponse\Track;
 
 /**
  * @phpstan-type CallSiprecJsonResponseShape = array{
- *   account_sid?: string|null,
- *   call_sid?: string|null,
- *   date_created?: string|null,
- *   date_updated?: string|null,
- *   error_code?: string|null,
+ *   accountSid?: string|null,
+ *   callSid?: string|null,
+ *   dateCreated?: string|null,
+ *   dateUpdated?: string|null,
+ *   errorCode?: string|null,
  *   sid?: string|null,
- *   start_time?: string|null,
+ *   startTime?: string|null,
  *   status?: value-of<Status>|null,
  *   track?: value-of<Track>|null,
  *   uri?: string|null,
@@ -32,32 +32,32 @@ final class CallSiprecJsonResponse implements BaseModel
     /**
      * The id of the account the resource belongs to.
      */
-    #[Optional]
-    public ?string $account_sid;
+    #[Optional('account_sid')]
+    public ?string $accountSid;
 
     /**
      * The id of the call the resource belongs to.
      */
-    #[Optional]
-    public ?string $call_sid;
+    #[Optional('call_sid')]
+    public ?string $callSid;
 
     /**
      * The date and time the siprec session was created.
      */
-    #[Optional]
-    public ?string $date_created;
+    #[Optional('date_created')]
+    public ?string $dateCreated;
 
     /**
      * The date and time the siprec session was last updated.
      */
-    #[Optional]
-    public ?string $date_updated;
+    #[Optional('date_updated')]
+    public ?string $dateUpdated;
 
     /**
      * The error code of the siprec session.
      */
-    #[Optional]
-    public ?string $error_code;
+    #[Optional('error_code')]
+    public ?string $errorCode;
 
     /**
      * The SID of the siprec session.
@@ -68,8 +68,8 @@ final class CallSiprecJsonResponse implements BaseModel
     /**
      * The date and time the siprec session was started.
      */
-    #[Optional]
-    public ?string $start_time;
+    #[Optional('start_time')]
+    public ?string $startTime;
 
     /**
      * The status of the siprec session.
@@ -107,26 +107,26 @@ final class CallSiprecJsonResponse implements BaseModel
      * @param Track|value-of<Track> $track
      */
     public static function with(
-        ?string $account_sid = null,
-        ?string $call_sid = null,
-        ?string $date_created = null,
-        ?string $date_updated = null,
-        ?string $error_code = null,
+        ?string $accountSid = null,
+        ?string $callSid = null,
+        ?string $dateCreated = null,
+        ?string $dateUpdated = null,
+        ?string $errorCode = null,
         ?string $sid = null,
-        ?string $start_time = null,
+        ?string $startTime = null,
         Status|string|null $status = null,
         Track|string|null $track = null,
         ?string $uri = null,
     ): self {
         $obj = new self;
 
-        null !== $account_sid && $obj['account_sid'] = $account_sid;
-        null !== $call_sid && $obj['call_sid'] = $call_sid;
-        null !== $date_created && $obj['date_created'] = $date_created;
-        null !== $date_updated && $obj['date_updated'] = $date_updated;
-        null !== $error_code && $obj['error_code'] = $error_code;
+        null !== $accountSid && $obj['accountSid'] = $accountSid;
+        null !== $callSid && $obj['callSid'] = $callSid;
+        null !== $dateCreated && $obj['dateCreated'] = $dateCreated;
+        null !== $dateUpdated && $obj['dateUpdated'] = $dateUpdated;
+        null !== $errorCode && $obj['errorCode'] = $errorCode;
         null !== $sid && $obj['sid'] = $sid;
-        null !== $start_time && $obj['start_time'] = $start_time;
+        null !== $startTime && $obj['startTime'] = $startTime;
         null !== $status && $obj['status'] = $status;
         null !== $track && $obj['track'] = $track;
         null !== $uri && $obj['uri'] = $uri;
@@ -140,7 +140,7 @@ final class CallSiprecJsonResponse implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj['account_sid'] = $accountSid;
+        $obj['accountSid'] = $accountSid;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class CallSiprecJsonResponse implements BaseModel
     public function withCallSid(string $callSid): self
     {
         $obj = clone $this;
-        $obj['call_sid'] = $callSid;
+        $obj['callSid'] = $callSid;
 
         return $obj;
     }
@@ -162,7 +162,7 @@ final class CallSiprecJsonResponse implements BaseModel
     public function withDateCreated(string $dateCreated): self
     {
         $obj = clone $this;
-        $obj['date_created'] = $dateCreated;
+        $obj['dateCreated'] = $dateCreated;
 
         return $obj;
     }
@@ -173,7 +173,7 @@ final class CallSiprecJsonResponse implements BaseModel
     public function withDateUpdated(string $dateUpdated): self
     {
         $obj = clone $this;
-        $obj['date_updated'] = $dateUpdated;
+        $obj['dateUpdated'] = $dateUpdated;
 
         return $obj;
     }
@@ -184,7 +184,7 @@ final class CallSiprecJsonResponse implements BaseModel
     public function withErrorCode(string $errorCode): self
     {
         $obj = clone $this;
-        $obj['error_code'] = $errorCode;
+        $obj['errorCode'] = $errorCode;
 
         return $obj;
     }
@@ -206,7 +206,7 @@ final class CallSiprecJsonResponse implements BaseModel
     public function withStartTime(string $startTime): self
     {
         $obj = clone $this;
-        $obj['start_time'] = $startTime;
+        $obj['startTime'] = $startTime;
 
         return $obj;
     }

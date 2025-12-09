@@ -36,13 +36,13 @@ final class RequirementGetResponse implements BaseModel
      * @param Data|array{
      *   id?: string|null,
      *   action?: value-of<Action>|null,
-     *   country_code?: string|null,
-     *   created_at?: string|null,
+     *   countryCode?: string|null,
+     *   createdAt?: string|null,
      *   locality?: string|null,
-     *   phone_number_type?: value-of<PhoneNumberType>|null,
-     *   record_type?: string|null,
-     *   requirements_types?: list<DocReqsRequirementType>|null,
-     *   updated_at?: string|null,
+     *   phoneNumberType?: value-of<PhoneNumberType>|null,
+     *   recordType?: string|null,
+     *   requirementsTypes?: list<DocReqsRequirementType>|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -58,13 +58,13 @@ final class RequirementGetResponse implements BaseModel
      * @param Data|array{
      *   id?: string|null,
      *   action?: value-of<Action>|null,
-     *   country_code?: string|null,
-     *   created_at?: string|null,
+     *   countryCode?: string|null,
+     *   createdAt?: string|null,
      *   locality?: string|null,
-     *   phone_number_type?: value-of<PhoneNumberType>|null,
-     *   record_type?: string|null,
-     *   requirements_types?: list<DocReqsRequirementType>|null,
-     *   updated_at?: string|null,
+     *   phoneNumberType?: value-of<PhoneNumberType>|null,
+     *   recordType?: string|null,
+     *   requirementsTypes?: list<DocReqsRequirementType>|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public function withData(Data|array $data): self

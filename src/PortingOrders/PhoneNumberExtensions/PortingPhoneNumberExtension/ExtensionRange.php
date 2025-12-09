@@ -11,9 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Specifies the extension range for this porting phone number extension.
  *
- * @phpstan-type ExtensionRangeShape = array{
- *   end_at?: int|null, start_at?: int|null
- * }
+ * @phpstan-type ExtensionRangeShape = array{endAt?: int|null, startAt?: int|null}
  */
 final class ExtensionRange implements BaseModel
 {
@@ -23,14 +21,14 @@ final class ExtensionRange implements BaseModel
     /**
      * Specifies the end of the extension range for this porting phone number extension.
      */
-    #[Optional]
-    public ?int $end_at;
+    #[Optional('end_at')]
+    public ?int $endAt;
 
     /**
      * Specifies the start of the extension range for this porting phone number extension.
      */
-    #[Optional]
-    public ?int $start_at;
+    #[Optional('start_at')]
+    public ?int $startAt;
 
     public function __construct()
     {
@@ -42,12 +40,12 @@ final class ExtensionRange implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?int $end_at = null, ?int $start_at = null): self
+    public static function with(?int $endAt = null, ?int $startAt = null): self
     {
         $obj = new self;
 
-        null !== $end_at && $obj['end_at'] = $end_at;
-        null !== $start_at && $obj['start_at'] = $start_at;
+        null !== $endAt && $obj['endAt'] = $endAt;
+        null !== $startAt && $obj['startAt'] = $startAt;
 
         return $obj;
     }
@@ -58,7 +56,7 @@ final class ExtensionRange implements BaseModel
     public function withEndAt(int $endAt): self
     {
         $obj = clone $this;
-        $obj['end_at'] = $endAt;
+        $obj['endAt'] = $endAt;
 
         return $obj;
     }
@@ -69,7 +67,7 @@ final class ExtensionRange implements BaseModel
     public function withStartAt(int $startAt): self
     {
         $obj = clone $this;
-        $obj['start_at'] = $startAt;
+        $obj['startAt'] = $startAt;
 
         return $obj;
     }

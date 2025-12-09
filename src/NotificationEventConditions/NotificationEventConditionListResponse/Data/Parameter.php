@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ParameterShape = array{
- *   data_type?: string|null, name?: string|null, optional?: bool|null
+ *   dataType?: string|null, name?: string|null, optional?: bool|null
  * }
  */
 final class Parameter implements BaseModel
@@ -18,8 +18,8 @@ final class Parameter implements BaseModel
     /** @use SdkModel<ParameterShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?string $data_type;
+    #[Optional('data_type')]
+    public ?string $dataType;
 
     #[Optional]
     public ?string $name;
@@ -38,13 +38,13 @@ final class Parameter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $data_type = null,
+        ?string $dataType = null,
         ?string $name = null,
         ?bool $optional = null
     ): self {
         $obj = new self;
 
-        null !== $data_type && $obj['data_type'] = $data_type;
+        null !== $dataType && $obj['dataType'] = $dataType;
         null !== $name && $obj['name'] = $name;
         null !== $optional && $obj['optional'] = $optional;
 
@@ -54,7 +54,7 @@ final class Parameter implements BaseModel
     public function withDataType(string $dataType): self
     {
         $obj = clone $this;
-        $obj['data_type'] = $dataType;
+        $obj['dataType'] = $dataType;
 
         return $obj;
     }

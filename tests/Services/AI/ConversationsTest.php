@@ -126,10 +126,10 @@ final class ConversationsTest extends TestCase
                 'content' => 'content',
                 'metadata' => ['foo' => 'string'],
                 'name' => 'name',
-                'sent_at' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
-                'tool_call_id' => 'tool_call_id',
-                'tool_calls' => [['foo' => 'bar']],
-                'tool_choice' => 'string',
+                'sentAt' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+                'toolCallID' => 'tool_call_id',
+                'toolCalls' => [['foo' => 'bar']],
+                'toolChoice' => 'string',
             ],
         );
 

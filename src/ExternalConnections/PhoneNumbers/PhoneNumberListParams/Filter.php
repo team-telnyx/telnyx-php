@@ -15,9 +15,9 @@ use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Filter\PhoneNu
  * Filter parameter for phone numbers (deepObject style). Supports filtering by phone_number, civic_address_id, and location_id with eq/contains operations.
  *
  * @phpstan-type FilterShape = array{
- *   civic_address_id?: CivicAddressID|null,
- *   location_id?: LocationID|null,
- *   phone_number?: PhoneNumber|null,
+ *   civicAddressID?: CivicAddressID|null,
+ *   locationID?: LocationID|null,
+ *   phoneNumber?: PhoneNumber|null,
  * }
  */
 final class Filter implements BaseModel
@@ -25,14 +25,14 @@ final class Filter implements BaseModel
     /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?CivicAddressID $civic_address_id;
+    #[Optional('civic_address_id')]
+    public ?CivicAddressID $civicAddressID;
 
-    #[Optional]
-    public ?LocationID $location_id;
+    #[Optional('location_id')]
+    public ?LocationID $locationID;
 
-    #[Optional]
-    public ?PhoneNumber $phone_number;
+    #[Optional('phone_number')]
+    public ?PhoneNumber $phoneNumber;
 
     public function __construct()
     {
@@ -44,20 +44,20 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CivicAddressID|array{eq?: string|null} $civic_address_id
-     * @param LocationID|array{eq?: string|null} $location_id
-     * @param PhoneNumber|array{contains?: string|null, eq?: string|null} $phone_number
+     * @param CivicAddressID|array{eq?: string|null} $civicAddressID
+     * @param LocationID|array{eq?: string|null} $locationID
+     * @param PhoneNumber|array{contains?: string|null, eq?: string|null} $phoneNumber
      */
     public static function with(
-        CivicAddressID|array|null $civic_address_id = null,
-        LocationID|array|null $location_id = null,
-        PhoneNumber|array|null $phone_number = null,
+        CivicAddressID|array|null $civicAddressID = null,
+        LocationID|array|null $locationID = null,
+        PhoneNumber|array|null $phoneNumber = null,
     ): self {
         $obj = new self;
 
-        null !== $civic_address_id && $obj['civic_address_id'] = $civic_address_id;
-        null !== $location_id && $obj['location_id'] = $location_id;
-        null !== $phone_number && $obj['phone_number'] = $phone_number;
+        null !== $civicAddressID && $obj['civicAddressID'] = $civicAddressID;
+        null !== $locationID && $obj['locationID'] = $locationID;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class Filter implements BaseModel
         CivicAddressID|array $civicAddressID
     ): self {
         $obj = clone $this;
-        $obj['civic_address_id'] = $civicAddressID;
+        $obj['civicAddressID'] = $civicAddressID;
 
         return $obj;
     }
@@ -80,7 +80,7 @@ final class Filter implements BaseModel
     public function withLocationID(LocationID|array $locationID): self
     {
         $obj = clone $this;
-        $obj['location_id'] = $locationID;
+        $obj['locationID'] = $locationID;
 
         return $obj;
     }
@@ -91,7 +91,7 @@ final class Filter implements BaseModel
     public function withPhoneNumber(PhoneNumber|array $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }

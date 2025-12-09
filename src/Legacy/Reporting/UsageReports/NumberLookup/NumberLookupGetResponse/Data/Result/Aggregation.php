@@ -11,8 +11,8 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type AggregationShape = array{
  *   currency?: string|null,
- *   total_cost?: float|null,
- *   total_dips?: int|null,
+ *   totalCost?: float|null,
+ *   totalDips?: int|null,
  *   type?: string|null,
  * }
  */
@@ -30,14 +30,14 @@ final class Aggregation implements BaseModel
     /**
      * Total cost for this aggregation.
      */
-    #[Optional]
-    public ?float $total_cost;
+    #[Optional('total_cost')]
+    public ?float $totalCost;
 
     /**
      * Total number of lookups performed.
      */
-    #[Optional]
-    public ?int $total_dips;
+    #[Optional('total_dips')]
+    public ?int $totalDips;
 
     /**
      * Type of telco data lookup.
@@ -57,15 +57,15 @@ final class Aggregation implements BaseModel
      */
     public static function with(
         ?string $currency = null,
-        ?float $total_cost = null,
-        ?int $total_dips = null,
+        ?float $totalCost = null,
+        ?int $totalDips = null,
         ?string $type = null,
     ): self {
         $obj = new self;
 
         null !== $currency && $obj['currency'] = $currency;
-        null !== $total_cost && $obj['total_cost'] = $total_cost;
-        null !== $total_dips && $obj['total_dips'] = $total_dips;
+        null !== $totalCost && $obj['totalCost'] = $totalCost;
+        null !== $totalDips && $obj['totalDips'] = $totalDips;
         null !== $type && $obj['type'] = $type;
 
         return $obj;
@@ -88,7 +88,7 @@ final class Aggregation implements BaseModel
     public function withTotalCost(float $totalCost): self
     {
         $obj = clone $this;
-        $obj['total_cost'] = $totalCost;
+        $obj['totalCost'] = $totalCost;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class Aggregation implements BaseModel
     public function withTotalDips(int $totalDips): self
     {
         $obj = clone $this;
-        $obj['total_dips'] = $totalDips;
+        $obj['totalDips'] = $totalDips;
 
         return $obj;
     }

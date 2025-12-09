@@ -35,9 +35,9 @@ final class MessagingNumbersBulkUpdateNewResponse implements BaseModel
      *
      * @param Data|array{
      *   failed?: list<string>|null,
-     *   order_id?: string|null,
+     *   orderID?: string|null,
      *   pending?: list<string>|null,
-     *   record_type?: value-of<RecordType>|null,
+     *   recordType?: value-of<RecordType>|null,
      *   success?: list<string>|null,
      * } $data
      */
@@ -53,9 +53,9 @@ final class MessagingNumbersBulkUpdateNewResponse implements BaseModel
     /**
      * @param Data|array{
      *   failed?: list<string>|null,
-     *   order_id?: string|null,
+     *   orderID?: string|null,
      *   pending?: list<string>|null,
-     *   record_type?: value-of<RecordType>|null,
+     *   recordType?: value-of<RecordType>|null,
      *   success?: list<string>|null,
      * } $data
      */

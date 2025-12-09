@@ -33,15 +33,15 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
      * @param array{
      *   address: array{
      *     city: string,
-     *     country_code: string,
+     *     countryCode: string,
      *     state: string,
-     *     street_address: string,
-     *     zip_code: string,
-     *     extended_address?: string,
+     *     streetAddress: string,
+     *     zipCode: string,
+     *     extendedAddress?: string,
      *   },
-     *   company_name: string,
-     *   contact: array{email: string, phone_number: string},
-     *   logo: array{document_id: string},
+     *   companyName: string,
+     *   contact: array{email: string, phoneNumber: string},
+     *   logo: array{documentID: string},
      *   name: string,
      * }|LoaConfigurationCreateParams $params
      *
@@ -98,15 +98,15 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
      * @param array{
      *   address: array{
      *     city: string,
-     *     country_code: string,
+     *     countryCode: string,
      *     state: string,
-     *     street_address: string,
-     *     zip_code: string,
-     *     extended_address?: string,
+     *     streetAddress: string,
+     *     zipCode: string,
+     *     extendedAddress?: string,
      *   },
-     *   company_name: string,
-     *   contact: array{email: string, phone_number: string},
-     *   logo: array{document_id: string},
+     *   companyName: string,
+     *   contact: array{email: string, phoneNumber: string},
+     *   logo: array{documentID: string},
      *   name: string,
      * }|LoaConfigurationUpdateParams $params
      *
@@ -196,15 +196,15 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
      * @param array{
      *   address: array{
      *     city: string,
-     *     country_code: string,
+     *     countryCode: string,
      *     state: string,
-     *     street_address: string,
-     *     zip_code: string,
-     *     extended_address?: string,
+     *     streetAddress: string,
+     *     zipCode: string,
+     *     extendedAddress?: string,
      *   },
-     *   company_name: string,
-     *   contact: array{email: string, phone_number: string},
-     *   logo: array{document_id: string},
+     *   companyName: string,
+     *   contact: array{email: string, phoneNumber: string},
+     *   logo: array{documentID: string},
      *   name: string,
      * }|LoaConfigurationPreview0Params $params
      *

@@ -21,10 +21,10 @@ use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\ProberLocation;
 
 /**
  * @phpstan-type DataShape = array{
- *   global_ip?: GlobalIP|null,
- *   mean_latency?: MeanLatency|null,
- *   percentile_latency?: PercentileLatency|null,
- *   prober_location?: ProberLocation|null,
+ *   globalIP?: GlobalIP|null,
+ *   meanLatency?: MeanLatency|null,
+ *   percentileLatency?: PercentileLatency|null,
+ *   proberLocation?: ProberLocation|null,
  *   timestamp?: \DateTimeInterface|null,
  * }
  */
@@ -33,17 +33,17 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?GlobalIP $global_ip;
+    #[Optional('global_ip')]
+    public ?GlobalIP $globalIP;
 
-    #[Optional]
-    public ?MeanLatency $mean_latency;
+    #[Optional('mean_latency')]
+    public ?MeanLatency $meanLatency;
 
-    #[Optional]
-    public ?PercentileLatency $percentile_latency;
+    #[Optional('percentile_latency')]
+    public ?PercentileLatency $percentileLatency;
 
-    #[Optional]
-    public ?ProberLocation $prober_location;
+    #[Optional('prober_location')]
+    public ?ProberLocation $proberLocation;
 
     /**
      * The timestamp of the metric.
@@ -61,8 +61,8 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param GlobalIP|array{id?: string|null, ip_address?: string|null} $global_ip
-     * @param MeanLatency|array{amount?: float|null, unit?: string|null} $mean_latency
+     * @param GlobalIP|array{id?: string|null, ipAddress?: string|null} $globalIP
+     * @param MeanLatency|array{amount?: float|null, unit?: string|null} $meanLatency
      * @param PercentileLatency|array{
      *   p0?: _0|null,
      *   p100?: _100|null,
@@ -71,36 +71,36 @@ final class Data implements BaseModel
      *   p75?: _75|null,
      *   p90?: _90|null,
      *   p99?: _99|null,
-     * } $percentile_latency
+     * } $percentileLatency
      * @param ProberLocation|array{
      *   id?: string|null, lat?: float|null, lon?: float|null, name?: string|null
-     * } $prober_location
+     * } $proberLocation
      */
     public static function with(
-        GlobalIP|array|null $global_ip = null,
-        MeanLatency|array|null $mean_latency = null,
-        PercentileLatency|array|null $percentile_latency = null,
-        ProberLocation|array|null $prober_location = null,
+        GlobalIP|array|null $globalIP = null,
+        MeanLatency|array|null $meanLatency = null,
+        PercentileLatency|array|null $percentileLatency = null,
+        ProberLocation|array|null $proberLocation = null,
         ?\DateTimeInterface $timestamp = null,
     ): self {
         $obj = new self;
 
-        null !== $global_ip && $obj['global_ip'] = $global_ip;
-        null !== $mean_latency && $obj['mean_latency'] = $mean_latency;
-        null !== $percentile_latency && $obj['percentile_latency'] = $percentile_latency;
-        null !== $prober_location && $obj['prober_location'] = $prober_location;
+        null !== $globalIP && $obj['globalIP'] = $globalIP;
+        null !== $meanLatency && $obj['meanLatency'] = $meanLatency;
+        null !== $percentileLatency && $obj['percentileLatency'] = $percentileLatency;
+        null !== $proberLocation && $obj['proberLocation'] = $proberLocation;
         null !== $timestamp && $obj['timestamp'] = $timestamp;
 
         return $obj;
     }
 
     /**
-     * @param GlobalIP|array{id?: string|null, ip_address?: string|null} $globalIP
+     * @param GlobalIP|array{id?: string|null, ipAddress?: string|null} $globalIP
      */
     public function withGlobalIP(GlobalIP|array $globalIP): self
     {
         $obj = clone $this;
-        $obj['global_ip'] = $globalIP;
+        $obj['globalIP'] = $globalIP;
 
         return $obj;
     }
@@ -111,7 +111,7 @@ final class Data implements BaseModel
     public function withMeanLatency(MeanLatency|array $meanLatency): self
     {
         $obj = clone $this;
-        $obj['mean_latency'] = $meanLatency;
+        $obj['meanLatency'] = $meanLatency;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class Data implements BaseModel
         PercentileLatency|array $percentileLatency
     ): self {
         $obj = clone $this;
-        $obj['percentile_latency'] = $percentileLatency;
+        $obj['percentileLatency'] = $percentileLatency;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class Data implements BaseModel
         ProberLocation|array $proberLocation
     ): self {
         $obj = clone $this;
-        $obj['prober_location'] = $proberLocation;
+        $obj['proberLocation'] = $proberLocation;
 
         return $obj;
     }

@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ActivationSettingsShape = array{
- *   foc_datetime_requested?: \DateTimeInterface|null
+ *   focDatetimeRequested?: \DateTimeInterface|null
  * }
  */
 final class ActivationSettings implements BaseModel
@@ -21,8 +21,8 @@ final class ActivationSettings implements BaseModel
     /**
      * ISO 8601 formatted Date/Time requested for the FOC date.
      */
-    #[Optional]
-    public ?\DateTimeInterface $foc_datetime_requested;
+    #[Optional('foc_datetime_requested')]
+    public ?\DateTimeInterface $focDatetimeRequested;
 
     public function __construct()
     {
@@ -35,11 +35,11 @@ final class ActivationSettings implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?\DateTimeInterface $foc_datetime_requested = null
+        ?\DateTimeInterface $focDatetimeRequested = null
     ): self {
         $obj = new self;
 
-        null !== $foc_datetime_requested && $obj['foc_datetime_requested'] = $foc_datetime_requested;
+        null !== $focDatetimeRequested && $obj['focDatetimeRequested'] = $focDatetimeRequested;
 
         return $obj;
     }
@@ -51,7 +51,7 @@ final class ActivationSettings implements BaseModel
         \DateTimeInterface $focDatetimeRequested
     ): self {
         $obj = clone $this;
-        $obj['foc_datetime_requested'] = $focDatetimeRequested;
+        $obj['focDatetimeRequested'] = $focDatetimeRequested;
 
         return $obj;
     }

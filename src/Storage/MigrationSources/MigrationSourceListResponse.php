@@ -39,17 +39,17 @@ final class MigrationSourceListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<MigrationSourceParams|array{
-     *   bucket_name: string,
+     *   bucketName: string,
      *   provider: value-of<Provider>,
-     *   provider_auth: ProviderAuth,
+     *   providerAuth: ProviderAuth,
      *   id?: string|null,
-     *   source_region?: string|null,
+     *   sourceRegion?: string|null,
      * }> $data
      * @param PaginationMetaSimple|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -66,11 +66,11 @@ final class MigrationSourceListResponse implements BaseModel
 
     /**
      * @param list<MigrationSourceParams|array{
-     *   bucket_name: string,
+     *   bucketName: string,
      *   provider: value-of<Provider>,
-     *   provider_auth: ProviderAuth,
+     *   providerAuth: ProviderAuth,
      *   id?: string|null,
-     *   source_region?: string|null,
+     *   sourceRegion?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -83,10 +83,10 @@ final class MigrationSourceListResponse implements BaseModel
 
     /**
      * @param PaginationMetaSimple|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMetaSimple|array $meta): self

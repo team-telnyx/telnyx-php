@@ -35,10 +35,10 @@ final class SimCardOrderPreviewPreviewResponse implements BaseModel
      *
      * @param Data|array{
      *   quantity?: int|null,
-     *   record_type?: string|null,
-     *   shipping_cost?: ShippingCost|null,
-     *   sim_cards_cost?: SimCardsCost|null,
-     *   total_cost?: TotalCost|null,
+     *   recordType?: string|null,
+     *   shippingCost?: ShippingCost|null,
+     *   simCardsCost?: SimCardsCost|null,
+     *   totalCost?: TotalCost|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -53,10 +53,10 @@ final class SimCardOrderPreviewPreviewResponse implements BaseModel
     /**
      * @param Data|array{
      *   quantity?: int|null,
-     *   record_type?: string|null,
-     *   shipping_cost?: ShippingCost|null,
-     *   sim_cards_cost?: SimCardsCost|null,
-     *   total_cost?: TotalCost|null,
+     *   recordType?: string|null,
+     *   shippingCost?: ShippingCost|null,
+     *   simCardsCost?: SimCardsCost|null,
+     *   totalCost?: TotalCost|null,
      * } $data
      */
     public function withData(Data|array $data): self

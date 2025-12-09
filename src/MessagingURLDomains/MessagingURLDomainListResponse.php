@@ -39,12 +39,12 @@ final class MessagingURLDomainListResponse implements BaseModel
      *
      * @param list<Data|array{
      *   id?: string|null,
-     *   record_type?: string|null,
-     *   url_domain?: string|null,
-     *   use_case?: string|null,
+     *   recordType?: string|null,
+     *   urlDomain?: string|null,
+     *   useCase?: string|null,
      * }> $data
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public static function with(
@@ -62,9 +62,9 @@ final class MessagingURLDomainListResponse implements BaseModel
     /**
      * @param list<Data|array{
      *   id?: string|null,
-     *   record_type?: string|null,
-     *   url_domain?: string|null,
-     *   use_case?: string|null,
+     *   recordType?: string|null,
+     *   urlDomain?: string|null,
+     *   useCase?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -77,7 +77,7 @@ final class MessagingURLDomainListResponse implements BaseModel
 
     /**
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public function withMeta(Meta|array $meta): self

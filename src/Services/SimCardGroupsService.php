@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardGroupsContract;
 use Telnyx\Services\SimCardGroups\ActionsService;
@@ -41,7 +42,7 @@ final class SimCardGroupsService implements SimCardGroupsContract
      * Creates a new SIM card group object
      *
      * @param array{
-     *   name: string, data_limit?: array{amount?: string, unit?: string}
+     *   name: string, dataLimit?: array{amount?: string, unit?: string}
      * }|SimCardGroupCreateParams $params
      *
      * @throws APIException
@@ -72,7 +73,7 @@ final class SimCardGroupsService implements SimCardGroupsContract
      *
      * Returns the details regarding a specific SIM card group
      *
-     * @param array{include_iccids?: bool}|SimCardGroupRetrieveParams $params
+     * @param array{includeIccids?: bool}|SimCardGroupRetrieveParams $params
      *
      * @throws APIException
      */
@@ -90,7 +91,10 @@ final class SimCardGroupsService implements SimCardGroupsContract
         $response = $this->client->request(
             method: 'get',
             path: ['sim_card_groups/%1$s', $id],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['includeIccids' => 'include_iccids']
+            ),
             options: $options,
             convert: SimCardGroupGetResponse::class,
         );
@@ -104,7 +108,7 @@ final class SimCardGroupsService implements SimCardGroupsContract
      * Updates a SIM card group
      *
      * @param array{
-     *   data_limit?: array{amount?: string, unit?: string}, name?: string
+     *   dataLimit?: array{amount?: string, unit?: string}, name?: string
      * }|SimCardGroupUpdateParams $params
      *
      * @throws APIException
@@ -137,11 +141,11 @@ final class SimCardGroupsService implements SimCardGroupsContract
      * Get all SIM card groups belonging to the user that match the given filters.
      *
      * @param array{
-     *   filter_name_?: string,
-     *   filter_private_wireless_gateway_id_?: string,
-     *   filter_wireless_blocklist_id_?: string,
-     *   page_number_?: int,
-     *   page_size_?: int,
+     *   filterName?: string,
+     *   filterPrivateWirelessGatewayID?: string,
+     *   filterWirelessBlocklistID?: string,
+     *   pageNumber?: int,
+     *   pageSize?: int,
      * }|SimCardGroupListParams $params
      *
      * @throws APIException
@@ -159,7 +163,16 @@ final class SimCardGroupsService implements SimCardGroupsContract
         $response = $this->client->request(
             method: 'get',
             path: 'sim_card_groups',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'filterName' => 'filter[name]',
+                    'filterPrivateWirelessGatewayID' => 'filter[private_wireless_gateway_id]',
+                    'filterWirelessBlocklistID' => 'filter[wireless_blocklist_id]',
+                    'pageNumber' => 'page[number]',
+                    'pageSize' => 'page[size]',
+                ],
+            ),
             options: $options,
             convert: SimCardGroupListResponse::class,
         );

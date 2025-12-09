@@ -20,6 +20,7 @@ use Telnyx\Brand\Vertical;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BrandContract;
 use Telnyx\Services\Brand\ExternalVettingService;
@@ -127,8 +128,8 @@ final class BrandService implements BrandContract
      *   email: string,
      *   entityType: 'PRIVATE_PROFIT'|'PUBLIC_PROFIT'|'NON_PROFIT'|'GOVERNMENT'|EntityType,
      *   vertical: value-of<Vertical>,
-     *   altBusiness_id?: string,
-     *   altBusinessIdType?: 'NONE'|'DUNS'|'GIIN'|'LEI'|AltBusinessIDType,
+     *   altBusinessID?: string,
+     *   altBusinessIDType?: 'NONE'|'DUNS'|'GIIN'|'LEI'|AltBusinessIDType,
      *   businessContactEmail?: string,
      *   city?: string,
      *   companyName?: string,
@@ -179,7 +180,7 @@ final class BrandService implements BrandContract
      * This endpoint is used to list all brands associated with your organization.
      *
      * @param array{
-     *   brandId?: string,
+     *   brandID?: string,
      *   country?: string,
      *   displayName?: string,
      *   entityType?: string,
@@ -187,7 +188,7 @@ final class BrandService implements BrandContract
      *   recordsPerPage?: int,
      *   sort?: value-of<Sort>,
      *   state?: string,
-     *   tcrBrandId?: string,
+     *   tcrBrandID?: string,
      * }|BrandListParams $params
      *
      * @throws APIException
@@ -205,7 +206,10 @@ final class BrandService implements BrandContract
         $response = $this->client->request(
             method: 'get',
             path: '10dlc/brand',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['brandID' => 'brandId', 'tcrBrandID' => 'tcrBrandId']
+            ),
             options: $options,
             convert: BrandListResponse::class,
         );

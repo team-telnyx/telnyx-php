@@ -39,13 +39,13 @@ final class StorageListMigrationSourceCoverageResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   provider?: value-of<Provider>|null, source_region?: string|null
+     *   provider?: value-of<Provider>|null, sourceRegion?: string|null
      * }> $data
      * @param PaginationMetaSimple|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -62,7 +62,7 @@ final class StorageListMigrationSourceCoverageResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   provider?: value-of<Provider>|null, source_region?: string|null
+     *   provider?: value-of<Provider>|null, sourceRegion?: string|null
      * }> $data
      */
     public function withData(array $data): self
@@ -75,10 +75,10 @@ final class StorageListMigrationSourceCoverageResponse implements BaseModel
 
     /**
      * @param PaginationMetaSimple|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMetaSimple|array $meta): self

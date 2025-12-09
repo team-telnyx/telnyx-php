@@ -59,18 +59,18 @@ final class VerifyProfileListResponse implements BaseModel
      * @param list<VerifyProfile|array{
      *   id?: string|null,
      *   call?: Call|null,
-     *   created_at?: string|null,
+     *   createdAt?: string|null,
      *   flashcall?: Flashcall|null,
      *   language?: string|null,
      *   name?: string|null,
-     *   record_type?: value-of<RecordType>|null,
+     *   recordType?: value-of<RecordType>|null,
      *   sms?: SMS|null,
-     *   updated_at?: string|null,
-     *   webhook_failover_url?: string|null,
-     *   webhook_url?: string|null,
+     *   updatedAt?: string|null,
+     *   webhookFailoverURL?: string|null,
+     *   webhookURL?: string|null,
      * }> $data
      * @param VerifyMeta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public static function with(array $data, VerifyMeta|array $meta): self
@@ -87,15 +87,15 @@ final class VerifyProfileListResponse implements BaseModel
      * @param list<VerifyProfile|array{
      *   id?: string|null,
      *   call?: Call|null,
-     *   created_at?: string|null,
+     *   createdAt?: string|null,
      *   flashcall?: Flashcall|null,
      *   language?: string|null,
      *   name?: string|null,
-     *   record_type?: value-of<RecordType>|null,
+     *   recordType?: value-of<RecordType>|null,
      *   sms?: SMS|null,
-     *   updated_at?: string|null,
-     *   webhook_failover_url?: string|null,
-     *   webhook_url?: string|null,
+     *   updatedAt?: string|null,
+     *   webhookFailoverURL?: string|null,
+     *   webhookURL?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -108,7 +108,7 @@ final class VerifyProfileListResponse implements BaseModel
 
     /**
      * @param VerifyMeta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public function withMeta(VerifyMeta|array $meta): self

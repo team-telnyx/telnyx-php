@@ -28,7 +28,7 @@ final class SpeechToTextService implements SpeechToTextContract
      * Creates a new Speech to Text batch report request with the specified filters
      *
      * @param array{
-     *   end_date: string|\DateTimeInterface, start_date: string|\DateTimeInterface
+     *   endDate: string|\DateTimeInterface, startDate: string|\DateTimeInterface
      * }|SpeechToTextCreateParams $params
      *
      * @throws APIException

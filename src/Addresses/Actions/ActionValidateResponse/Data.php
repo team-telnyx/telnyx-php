@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   result: value-of<Result>,
  *   suggested: Suggested,
  *   errors?: list<APIError>|null,
- *   record_type?: string|null,
+ *   recordType?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -47,8 +47,8 @@ final class Data implements BaseModel
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * `new Data()` is missing required properties by the API.
@@ -76,12 +76,12 @@ final class Data implements BaseModel
      *
      * @param Result|value-of<Result> $result
      * @param Suggested|array{
-     *   administrative_area?: string|null,
-     *   country_code?: string|null,
-     *   extended_address?: string|null,
+     *   administrativeArea?: string|null,
+     *   countryCode?: string|null,
+     *   extendedAddress?: string|null,
      *   locality?: string|null,
-     *   postal_code?: string|null,
-     *   street_address?: string|null,
+     *   postalCode?: string|null,
+     *   streetAddress?: string|null,
      * } $suggested
      * @param list<APIError|array{
      *   code: string,
@@ -95,7 +95,7 @@ final class Data implements BaseModel
         Result|string $result,
         Suggested|array $suggested,
         ?array $errors = null,
-        ?string $record_type = null,
+        ?string $recordType = null,
     ): self {
         $obj = new self;
 
@@ -103,7 +103,7 @@ final class Data implements BaseModel
         $obj['suggested'] = $suggested;
 
         null !== $errors && $obj['errors'] = $errors;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $recordType && $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -125,12 +125,12 @@ final class Data implements BaseModel
      * Provides normalized address when available.
      *
      * @param Suggested|array{
-     *   administrative_area?: string|null,
-     *   country_code?: string|null,
-     *   extended_address?: string|null,
+     *   administrativeArea?: string|null,
+     *   countryCode?: string|null,
+     *   extendedAddress?: string|null,
      *   locality?: string|null,
-     *   postal_code?: string|null,
-     *   street_address?: string|null,
+     *   postalCode?: string|null,
+     *   streetAddress?: string|null,
      * } $suggested
      */
     public function withSuggested(Suggested|array $suggested): self
@@ -164,7 +164,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

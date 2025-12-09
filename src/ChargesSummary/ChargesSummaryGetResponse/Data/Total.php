@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type TotalShape = array{
  *   credits: string,
- *   existing_mrc: string,
- *   grand_total: string,
- *   ledger_adjustments: string,
- *   new_mrc: string,
- *   new_otc: string,
+ *   existingMrc: string,
+ *   grandTotal: string,
+ *   ledgerAdjustments: string,
+ *   newMrc: string,
+ *   newOtc: string,
  *   other: string,
  * }
  */
@@ -33,32 +33,32 @@ final class Total implements BaseModel
     /**
      * Total existing monthly recurring charges as decimal string.
      */
-    #[Required]
-    public string $existing_mrc;
+    #[Required('existing_mrc')]
+    public string $existingMrc;
 
     /**
      * Grand total of all charges as decimal string.
      */
-    #[Required]
-    public string $grand_total;
+    #[Required('grand_total')]
+    public string $grandTotal;
 
     /**
      * Ledger adjustments as decimal string.
      */
-    #[Required]
-    public string $ledger_adjustments;
+    #[Required('ledger_adjustments')]
+    public string $ledgerAdjustments;
 
     /**
      * Total new monthly recurring charges as decimal string.
      */
-    #[Required]
-    public string $new_mrc;
+    #[Required('new_mrc')]
+    public string $newMrc;
 
     /**
      * Total new one-time charges as decimal string.
      */
-    #[Required]
-    public string $new_otc;
+    #[Required('new_otc')]
+    public string $newOtc;
 
     /**
      * Other charges as decimal string.
@@ -73,11 +73,11 @@ final class Total implements BaseModel
      * ```
      * Total::with(
      *   credits: ...,
-     *   existing_mrc: ...,
-     *   grand_total: ...,
-     *   ledger_adjustments: ...,
-     *   new_mrc: ...,
-     *   new_otc: ...,
+     *   existingMrc: ...,
+     *   grandTotal: ...,
+     *   ledgerAdjustments: ...,
+     *   newMrc: ...,
+     *   newOtc: ...,
      *   other: ...,
      * )
      * ```
@@ -107,21 +107,21 @@ final class Total implements BaseModel
      */
     public static function with(
         string $credits,
-        string $existing_mrc,
-        string $grand_total,
-        string $ledger_adjustments,
-        string $new_mrc,
-        string $new_otc,
+        string $existingMrc,
+        string $grandTotal,
+        string $ledgerAdjustments,
+        string $newMrc,
+        string $newOtc,
         string $other,
     ): self {
         $obj = new self;
 
         $obj['credits'] = $credits;
-        $obj['existing_mrc'] = $existing_mrc;
-        $obj['grand_total'] = $grand_total;
-        $obj['ledger_adjustments'] = $ledger_adjustments;
-        $obj['new_mrc'] = $new_mrc;
-        $obj['new_otc'] = $new_otc;
+        $obj['existingMrc'] = $existingMrc;
+        $obj['grandTotal'] = $grandTotal;
+        $obj['ledgerAdjustments'] = $ledgerAdjustments;
+        $obj['newMrc'] = $newMrc;
+        $obj['newOtc'] = $newOtc;
         $obj['other'] = $other;
 
         return $obj;
@@ -144,7 +144,7 @@ final class Total implements BaseModel
     public function withExistingMrc(string $existingMrc): self
     {
         $obj = clone $this;
-        $obj['existing_mrc'] = $existingMrc;
+        $obj['existingMrc'] = $existingMrc;
 
         return $obj;
     }
@@ -155,7 +155,7 @@ final class Total implements BaseModel
     public function withGrandTotal(string $grandTotal): self
     {
         $obj = clone $this;
-        $obj['grand_total'] = $grandTotal;
+        $obj['grandTotal'] = $grandTotal;
 
         return $obj;
     }
@@ -166,7 +166,7 @@ final class Total implements BaseModel
     public function withLedgerAdjustments(string $ledgerAdjustments): self
     {
         $obj = clone $this;
-        $obj['ledger_adjustments'] = $ledgerAdjustments;
+        $obj['ledgerAdjustments'] = $ledgerAdjustments;
 
         return $obj;
     }
@@ -177,7 +177,7 @@ final class Total implements BaseModel
     public function withNewMrc(string $newMrc): self
     {
         $obj = clone $this;
-        $obj['new_mrc'] = $newMrc;
+        $obj['newMrc'] = $newMrc;
 
         return $obj;
     }
@@ -188,7 +188,7 @@ final class Total implements BaseModel
     public function withNewOtc(string $newOtc): self
     {
         $obj = clone $this;
-        $obj['new_otc'] = $newOtc;
+        $obj['newOtc'] = $newOtc;
 
         return $obj;
     }

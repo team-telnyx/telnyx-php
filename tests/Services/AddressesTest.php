@@ -38,12 +38,12 @@ final class AddressesTest extends TestCase
         }
 
         $result = $this->client->addresses->create([
-            'business_name' => 'Toy-O\'Kon',
-            'country_code' => 'US',
-            'first_name' => 'Alfred',
-            'last_name' => 'Foster',
+            'businessName' => 'Toy-O\'Kon',
+            'countryCode' => 'US',
+            'firstName' => 'Alfred',
+            'lastName' => 'Foster',
             'locality' => 'Austin',
-            'street_address' => '600 Congress Avenue',
+            'streetAddress' => '600 Congress Avenue',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -58,21 +58,21 @@ final class AddressesTest extends TestCase
         }
 
         $result = $this->client->addresses->create([
-            'business_name' => 'Toy-O\'Kon',
-            'country_code' => 'US',
-            'first_name' => 'Alfred',
-            'last_name' => 'Foster',
+            'businessName' => 'Toy-O\'Kon',
+            'countryCode' => 'US',
+            'firstName' => 'Alfred',
+            'lastName' => 'Foster',
             'locality' => 'Austin',
-            'street_address' => '600 Congress Avenue',
-            'address_book' => false,
-            'administrative_area' => 'TX',
+            'streetAddress' => '600 Congress Avenue',
+            'addressBook' => false,
+            'administrativeArea' => 'TX',
             'borough' => 'Guadalajara',
-            'customer_reference' => 'MY REF 001',
-            'extended_address' => '14th Floor',
+            'customerReference' => 'MY REF 001',
+            'extendedAddress' => '14th Floor',
             'neighborhood' => 'Ciudad de los deportes',
-            'phone_number' => '+12125559000',
-            'postal_code' => '78701',
-            'validate_address' => true,
+            'phoneNumber' => '+12125559000',
+            'postalCode' => '78701',
+            'validateAddress' => true,
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

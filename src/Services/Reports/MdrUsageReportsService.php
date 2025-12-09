@@ -7,6 +7,7 @@ namespace Telnyx\Services\Reports;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportCreateParams;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportCreateParams\AggregationType;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportDeleteResponse;
@@ -32,9 +33,9 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
      * Submit request for new new messaging usage report. This endpoint will pull and aggregate messaging data in specified time period.
      *
      * @param array{
-     *   aggregation_type: 'NO_AGGREGATION'|'PROFILE'|'TAGS'|AggregationType,
-     *   end_date: string|\DateTimeInterface,
-     *   start_date: string|\DateTimeInterface,
+     *   aggregationType: 'NO_AGGREGATION'|'PROFILE'|'TAGS'|AggregationType,
+     *   endDate: string|\DateTimeInterface,
+     *   startDate: string|\DateTimeInterface,
      *   profiles?: string,
      * }|MdrUsageReportCreateParams $params
      *
@@ -144,10 +145,10 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
      * Generate and fetch messaging usage report synchronously. This endpoint will both generate and fetch the messaging report over a specified time period. No polling is necessary but the response may take up to a couple of minutes.
      *
      * @param array{
-     *   aggregation_type: 'NO_AGGREGATION'|'PROFILE'|'TAGS'|MdrUsageReportFetchSyncParams\AggregationType,
-     *   end_date?: string|\DateTimeInterface,
+     *   aggregationType: 'NO_AGGREGATION'|'PROFILE'|'TAGS'|MdrUsageReportFetchSyncParams\AggregationType,
+     *   endDate?: string|\DateTimeInterface,
      *   profiles?: list<string>,
-     *   start_date?: string|\DateTimeInterface,
+     *   startDate?: string|\DateTimeInterface,
      * }|MdrUsageReportFetchSyncParams $params
      *
      * @throws APIException
@@ -165,7 +166,14 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
         $response = $this->client->request(
             method: 'get',
             path: 'reports/mdr_usage_reports/sync',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'aggregationType' => 'aggregation_type',
+                    'endDate' => 'end_date',
+                    'startDate' => 'start_date',
+                ],
+            ),
             options: $options,
             convert: MdrUsageReportFetchSyncResponse::class,
         );

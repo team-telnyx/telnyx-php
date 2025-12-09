@@ -25,8 +25,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *   from: string,
  *   text: string,
  *   to: string,
- *   conversation_metadata?: array<string,string|int|bool>,
- *   should_create_conversation?: bool,
+ *   conversationMetadata?: array<string,string|int|bool>,
+ *   shouldCreateConversation?: bool,
  * }
  */
 final class AssistantSendSMSParams implements BaseModel
@@ -44,12 +44,12 @@ final class AssistantSendSMSParams implements BaseModel
     #[Required]
     public string $to;
 
-    /** @var array<string,string|int|bool>|null $conversation_metadata */
-    #[Optional(map: ConversationMetadata::class)]
-    public ?array $conversation_metadata;
+    /** @var array<string,string|int|bool>|null $conversationMetadata */
+    #[Optional('conversation_metadata', map: ConversationMetadata::class)]
+    public ?array $conversationMetadata;
 
-    #[Optional]
-    public ?bool $should_create_conversation;
+    #[Optional('should_create_conversation')]
+    public ?bool $shouldCreateConversation;
 
     /**
      * `new AssistantSendSMSParams()` is missing required properties by the API.
@@ -75,14 +75,14 @@ final class AssistantSendSMSParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,string|int|bool> $conversation_metadata
+     * @param array<string,string|int|bool> $conversationMetadata
      */
     public static function with(
         string $from,
         string $text,
         string $to,
-        ?array $conversation_metadata = null,
-        ?bool $should_create_conversation = null,
+        ?array $conversationMetadata = null,
+        ?bool $shouldCreateConversation = null,
     ): self {
         $obj = new self;
 
@@ -90,8 +90,8 @@ final class AssistantSendSMSParams implements BaseModel
         $obj['text'] = $text;
         $obj['to'] = $to;
 
-        null !== $conversation_metadata && $obj['conversation_metadata'] = $conversation_metadata;
-        null !== $should_create_conversation && $obj['should_create_conversation'] = $should_create_conversation;
+        null !== $conversationMetadata && $obj['conversationMetadata'] = $conversationMetadata;
+        null !== $shouldCreateConversation && $obj['shouldCreateConversation'] = $shouldCreateConversation;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class AssistantSendSMSParams implements BaseModel
     public function withConversationMetadata(array $conversationMetadata): self
     {
         $obj = clone $this;
-        $obj['conversation_metadata'] = $conversationMetadata;
+        $obj['conversationMetadata'] = $conversationMetadata;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class AssistantSendSMSParams implements BaseModel
         bool $shouldCreateConversation
     ): self {
         $obj = clone $this;
-        $obj['should_create_conversation'] = $shouldCreateConversation;
+        $obj['shouldCreateConversation'] = $shouldCreateConversation;
 
         return $obj;
     }

@@ -35,11 +35,11 @@ final class RoomParticipantGetResponse implements BaseModel
      * @param RoomParticipant|array{
      *   id?: string|null,
      *   context?: string|null,
-     *   joined_at?: \DateTimeInterface|null,
-     *   left_at?: \DateTimeInterface|null,
-     *   record_type?: string|null,
-     *   session_id?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   joinedAt?: \DateTimeInterface|null,
+     *   leftAt?: \DateTimeInterface|null,
+     *   recordType?: string|null,
+     *   sessionID?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(RoomParticipant|array|null $data = null): self
@@ -55,11 +55,11 @@ final class RoomParticipantGetResponse implements BaseModel
      * @param RoomParticipant|array{
      *   id?: string|null,
      *   context?: string|null,
-     *   joined_at?: \DateTimeInterface|null,
-     *   left_at?: \DateTimeInterface|null,
-     *   record_type?: string|null,
-     *   session_id?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   joinedAt?: \DateTimeInterface|null,
+     *   leftAt?: \DateTimeInterface|null,
+     *   recordType?: string|null,
+     *   sessionID?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(RoomParticipant|array $data): self

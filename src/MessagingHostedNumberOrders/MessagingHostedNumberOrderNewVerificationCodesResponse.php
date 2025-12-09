@@ -49,10 +49,10 @@ final class MessagingHostedNumberOrderNewVerificationCodesResponse implements Ba
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   phone_number: string,
+     *   phoneNumber: string,
      *   error?: string|null,
      *   type?: value-of<Type>|null,
-     *   verification_code_id?: string|null,
+     *   verificationCodeID?: string|null,
      * }> $data
      */
     public static function with(array $data): self
@@ -66,10 +66,10 @@ final class MessagingHostedNumberOrderNewVerificationCodesResponse implements Ba
 
     /**
      * @param list<Data|array{
-     *   phone_number: string,
+     *   phoneNumber: string,
      *   error?: string|null,
      *   type?: value-of<Type>|null,
-     *   verification_code_id?: string|null,
+     *   verificationCodeID?: string|null,
      * }> $data
      */
     public function withData(array $data): self

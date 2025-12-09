@@ -59,20 +59,20 @@ final class AssistantsTest extends TestCase
             'model' => 'model',
             'name' => 'name',
             'description' => 'description',
-            'dynamic_variables' => ['foo' => 'bar'],
-            'dynamic_variables_webhook_url' => 'dynamic_variables_webhook_url',
-            'enabled_features' => [EnabledFeatures::TELEPHONY],
+            'dynamicVariables' => ['foo' => 'bar'],
+            'dynamicVariablesWebhookURL' => 'dynamic_variables_webhook_url',
+            'enabledFeatures' => [EnabledFeatures::TELEPHONY],
             'greeting' => 'greeting',
-            'insight_settings' => ['insight_group_id' => 'insight_group_id'],
-            'llm_api_key_ref' => 'llm_api_key_ref',
-            'messaging_settings' => [
-                'default_messaging_profile_id' => 'default_messaging_profile_id',
-                'delivery_status_webhook_url' => 'delivery_status_webhook_url',
+            'insightSettings' => ['insightGroupID' => 'insight_group_id'],
+            'llmAPIKeyRef' => 'llm_api_key_ref',
+            'messagingSettings' => [
+                'defaultMessagingProfileID' => 'default_messaging_profile_id',
+                'deliveryStatusWebhookURL' => 'delivery_status_webhook_url',
             ],
-            'privacy_settings' => ['data_retention' => true],
-            'telephony_settings' => [
-                'default_texml_app_id' => 'default_texml_app_id',
-                'supports_unauthenticated_web_calls' => true,
+            'privacySettings' => ['dataRetention' => true],
+            'telephonySettings' => [
+                'defaultTexmlAppID' => 'default_texml_app_id',
+                'supportsUnauthenticatedWebCalls' => true,
             ],
             'tools' => [
                 [
@@ -81,19 +81,19 @@ final class AssistantsTest extends TestCase
                         'description' => 'description',
                         'name' => 'name',
                         'url' => 'https://example.com/api/v1/function',
-                        'body_parameters' => [
+                        'bodyParameters' => [
                             'properties' => ['age' => 'bar', 'location' => 'bar'],
                             'required' => ['age', 'location'],
                             'type' => 'object',
                         ],
                         'headers' => [['name' => 'name', 'value' => 'value']],
                         'method' => 'GET',
-                        'path_parameters' => [
+                        'pathParameters' => [
                             'properties' => ['id' => 'bar'],
                             'required' => ['id'],
                             'type' => 'object',
                         ],
-                        'query_parameters' => [
+                        'queryParameters' => [
                             'properties' => ['page' => 'bar'],
                             'required' => ['page'],
                             'type' => 'object',
@@ -106,19 +106,19 @@ final class AssistantsTest extends TestCase
                 'model' => 'deepgram/flux',
                 'region' => 'region',
                 'settings' => [
-                    'eot_threshold' => 0,
-                    'eot_timeout_ms' => 0,
+                    'eotThreshold' => 0,
+                    'eotTimeoutMs' => 0,
                     'numerals' => true,
-                    'smart_format' => true,
+                    'smartFormat' => true,
                 ],
             ],
-            'voice_settings' => [
+            'voiceSettings' => [
                 'voice' => 'voice',
-                'api_key_ref' => 'api_key_ref',
-                'background_audio' => [
+                'apiKeyRef' => 'api_key_ref',
+                'backgroundAudio' => [
                     'type' => 'predefined_media', 'value' => 'silence',
                 ],
-                'voice_speed' => 0,
+                'voiceSpeed' => 0,
             ],
         ]);
 
@@ -189,7 +189,7 @@ final class AssistantsTest extends TestCase
             'assistant_id',
             [
                 'content' => 'Tell me a joke about cats',
-                'conversation_id' => '42b20469-1215-4a9a-8964-c36f66b406f4',
+                'conversationID' => '42b20469-1215-4a9a-8964-c36f66b406f4',
             ],
         );
 
@@ -208,7 +208,7 @@ final class AssistantsTest extends TestCase
             'assistant_id',
             [
                 'content' => 'Tell me a joke about cats',
-                'conversation_id' => '42b20469-1215-4a9a-8964-c36f66b406f4',
+                'conversationID' => '42b20469-1215-4a9a-8964-c36f66b406f4',
                 'name' => 'Charlie',
             ],
         );
@@ -251,7 +251,7 @@ final class AssistantsTest extends TestCase
         }
 
         $result = $this->client->ai->assistants->import([
-            'api_key_ref' => 'api_key_ref', 'provider' => 'elevenlabs',
+            'apiKeyRef' => 'api_key_ref', 'provider' => 'elevenlabs',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -266,7 +266,7 @@ final class AssistantsTest extends TestCase
         }
 
         $result = $this->client->ai->assistants->import([
-            'api_key_ref' => 'api_key_ref', 'provider' => 'elevenlabs',
+            'apiKeyRef' => 'api_key_ref', 'provider' => 'elevenlabs',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -302,8 +302,8 @@ final class AssistantsTest extends TestCase
                 'from' => 'from',
                 'text' => 'text',
                 'to' => 'to',
-                'conversation_metadata' => ['foo' => 'string'],
-                'should_create_conversation' => true,
+                'conversationMetadata' => ['foo' => 'string'],
+                'shouldCreateConversation' => true,
             ],
         );
 

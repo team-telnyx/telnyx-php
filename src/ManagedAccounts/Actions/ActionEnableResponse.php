@@ -34,18 +34,18 @@ final class ActionEnableResponse implements BaseModel
      *
      * @param ManagedAccount|array{
      *   id: string,
-     *   api_key: string,
-     *   api_token: string,
-     *   api_user: string,
-     *   created_at: string,
+     *   apiKey: string,
+     *   apiToken: string,
+     *   apiUser: string,
+     *   createdAt: string,
      *   email: string,
-     *   manager_account_id: string,
-     *   record_type: value-of<RecordType>,
-     *   updated_at: string,
+     *   managerAccountID: string,
+     *   recordType: value-of<RecordType>,
+     *   updatedAt: string,
      *   balance?: ManagedAccountBalance|null,
-     *   managed_account_allow_custom_pricing?: bool|null,
-     *   organization_name?: string|null,
-     *   rollup_billing?: bool|null,
+     *   managedAccountAllowCustomPricing?: bool|null,
+     *   organizationName?: string|null,
+     *   rollupBilling?: bool|null,
      * } $data
      */
     public static function with(ManagedAccount|array|null $data = null): self
@@ -60,18 +60,18 @@ final class ActionEnableResponse implements BaseModel
     /**
      * @param ManagedAccount|array{
      *   id: string,
-     *   api_key: string,
-     *   api_token: string,
-     *   api_user: string,
-     *   created_at: string,
+     *   apiKey: string,
+     *   apiToken: string,
+     *   apiUser: string,
+     *   createdAt: string,
      *   email: string,
-     *   manager_account_id: string,
-     *   record_type: value-of<RecordType>,
-     *   updated_at: string,
+     *   managerAccountID: string,
+     *   recordType: value-of<RecordType>,
+     *   updatedAt: string,
      *   balance?: ManagedAccountBalance|null,
-     *   managed_account_allow_custom_pricing?: bool|null,
-     *   organization_name?: string|null,
-     *   rollup_billing?: bool|null,
+     *   managedAccountAllowCustomPricing?: bool|null,
+     *   organizationName?: string|null,
+     *   rollupBilling?: bool|null,
      * } $data
      */
     public function withData(ManagedAccount|array $data): self

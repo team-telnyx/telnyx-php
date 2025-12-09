@@ -35,17 +35,17 @@ final class FaxApplicationNewResponse implements BaseModel
      * @param FaxApplication|array{
      *   id?: string|null,
      *   active?: bool|null,
-     *   anchorsite_override?: value-of<AnchorsiteOverride>|null,
-     *   application_name?: string|null,
-     *   created_at?: string|null,
+     *   anchorsiteOverride?: value-of<AnchorsiteOverride>|null,
+     *   applicationName?: string|null,
+     *   createdAt?: string|null,
      *   inbound?: Inbound|null,
      *   outbound?: Outbound|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      *   tags?: list<string>|null,
-     *   updated_at?: string|null,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_event_url?: string|null,
-     *   webhook_timeout_secs?: int|null,
+     *   updatedAt?: string|null,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookEventURL?: string|null,
+     *   webhookTimeoutSecs?: int|null,
      * } $data
      */
     public static function with(FaxApplication|array|null $data = null): self
@@ -61,17 +61,17 @@ final class FaxApplicationNewResponse implements BaseModel
      * @param FaxApplication|array{
      *   id?: string|null,
      *   active?: bool|null,
-     *   anchorsite_override?: value-of<AnchorsiteOverride>|null,
-     *   application_name?: string|null,
-     *   created_at?: string|null,
+     *   anchorsiteOverride?: value-of<AnchorsiteOverride>|null,
+     *   applicationName?: string|null,
+     *   createdAt?: string|null,
      *   inbound?: Inbound|null,
      *   outbound?: Outbound|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      *   tags?: list<string>|null,
-     *   updated_at?: string|null,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_event_url?: string|null,
-     *   webhook_timeout_secs?: int|null,
+     *   updatedAt?: string|null,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookEventURL?: string|null,
+     *   webhookTimeoutSecs?: int|null,
      * } $data
      */
     public function withData(FaxApplication|array $data): self

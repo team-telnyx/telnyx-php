@@ -41,11 +41,11 @@ final class AuthenticationProvidersTest extends TestCase
         $result = $this->client->authenticationProviders->create([
             'name' => 'Okta',
             'settings' => [
-                'idp_cert_fingerprint' => '13:38:C7:BB:C9:FF:4A:70:38:3A:E3:D9:5C:CD:DB:2E:50:1E:80:A7',
-                'idp_entity_id' => 'https://myorg.myidp.com/saml/metadata',
-                'idp_sso_target_url' => 'https://myorg.myidp.com/trust/saml2/http-post/sso',
+                'idpCertFingerprint' => '13:38:C7:BB:C9:FF:4A:70:38:3A:E3:D9:5C:CD:DB:2E:50:1E:80:A7',
+                'idpEntityID' => 'https://myorg.myidp.com/saml/metadata',
+                'idpSSOTargetURL' => 'https://myorg.myidp.com/trust/saml2/http-post/sso',
             ],
-            'short_name' => 'myorg',
+            'shortName' => 'myorg',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -62,14 +62,14 @@ final class AuthenticationProvidersTest extends TestCase
         $result = $this->client->authenticationProviders->create([
             'name' => 'Okta',
             'settings' => [
-                'idp_cert_fingerprint' => '13:38:C7:BB:C9:FF:4A:70:38:3A:E3:D9:5C:CD:DB:2E:50:1E:80:A7',
-                'idp_entity_id' => 'https://myorg.myidp.com/saml/metadata',
-                'idp_sso_target_url' => 'https://myorg.myidp.com/trust/saml2/http-post/sso',
-                'idp_cert_fingerprint_algorithm' => 'sha256',
+                'idpCertFingerprint' => '13:38:C7:BB:C9:FF:4A:70:38:3A:E3:D9:5C:CD:DB:2E:50:1E:80:A7',
+                'idpEntityID' => 'https://myorg.myidp.com/saml/metadata',
+                'idpSSOTargetURL' => 'https://myorg.myidp.com/trust/saml2/http-post/sso',
+                'idpCertFingerprintAlgorithm' => 'sha256',
             ],
-            'short_name' => 'myorg',
+            'shortName' => 'myorg',
             'active' => true,
-            'settings_url' => 'https://myorg.myidp.com/saml/metadata',
+            'settingsURL' => 'https://myorg.myidp.com/saml/metadata',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

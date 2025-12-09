@@ -39,20 +39,20 @@ final class UploadListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Upload|array{
-     *   available_usages?: list<value-of<AvailableUsage>>|null,
-     *   error_code?: string|null,
-     *   error_message?: string|null,
-     *   location_id?: string|null,
+     *   availableUsages?: list<value-of<AvailableUsage>>|null,
+     *   errorCode?: string|null,
+     *   errorMessage?: string|null,
+     *   locationID?: string|null,
      *   status?: value-of<Status>|null,
-     *   tenant_id?: string|null,
-     *   ticket_id?: string|null,
-     *   tn_upload_entries?: list<TnUploadEntry>|null,
+     *   tenantID?: string|null,
+     *   ticketID?: string|null,
+     *   tnUploadEntries?: list<TnUploadEntry>|null,
      * }> $data
      * @param ExternalVoiceIntegrationsPaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -69,14 +69,14 @@ final class UploadListResponse implements BaseModel
 
     /**
      * @param list<Upload|array{
-     *   available_usages?: list<value-of<AvailableUsage>>|null,
-     *   error_code?: string|null,
-     *   error_message?: string|null,
-     *   location_id?: string|null,
+     *   availableUsages?: list<value-of<AvailableUsage>>|null,
+     *   errorCode?: string|null,
+     *   errorMessage?: string|null,
+     *   locationID?: string|null,
      *   status?: value-of<Status>|null,
-     *   tenant_id?: string|null,
-     *   ticket_id?: string|null,
-     *   tn_upload_entries?: list<TnUploadEntry>|null,
+     *   tenantID?: string|null,
+     *   ticketID?: string|null,
+     *   tnUploadEntries?: list<TnUploadEntry>|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -89,10 +89,10 @@ final class UploadListResponse implements BaseModel
 
     /**
      * @param ExternalVoiceIntegrationsPaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(

@@ -53,27 +53,27 @@ final class VerifyProfilesTest extends TestCase
         $result = $this->client->verifyProfiles->create([
             'name' => 'Test Profile',
             'call' => [
-                'app_name' => 'Example Secure App',
-                'code_length' => 6,
-                'default_verification_timeout_secs' => 300,
-                'messaging_template_id' => '0abb5b4f-459f-445a-bfcd-488998b7572d',
-                'whitelisted_destinations' => ['US', 'CA'],
+                'appName' => 'Example Secure App',
+                'codeLength' => 6,
+                'defaultVerificationTimeoutSecs' => 300,
+                'messagingTemplateID' => '0abb5b4f-459f-445a-bfcd-488998b7572d',
+                'whitelistedDestinations' => ['US', 'CA'],
             ],
             'flashcall' => [
-                'default_verification_timeout_secs' => 300,
-                'whitelisted_destinations' => ['US', 'CA'],
+                'defaultVerificationTimeoutSecs' => 300,
+                'whitelistedDestinations' => ['US', 'CA'],
             ],
             'language' => 'en-US',
             'sms' => [
-                'whitelisted_destinations' => ['US', 'CA'],
-                'alpha_sender' => 'sqF',
-                'app_name' => 'Example Secure App',
-                'code_length' => 6,
-                'default_verification_timeout_secs' => 300,
-                'messaging_template_id' => '0abb5b4f-459f-445a-bfcd-488998b7572d',
+                'whitelistedDestinations' => ['US', 'CA'],
+                'alphaSender' => 'sqF',
+                'appName' => 'Example Secure App',
+                'codeLength' => 6,
+                'defaultVerificationTimeoutSecs' => 300,
+                'messagingTemplateID' => '0abb5b4f-459f-445a-bfcd-488998b7572d',
             ],
-            'webhook_failover_url' => 'http://example.com/webhook/failover',
-            'webhook_url' => 'http://example.com/webhook',
+            'webhookFailoverURL' => 'http://example.com/webhook/failover',
+            'webhookURL' => 'http://example.com/webhook',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

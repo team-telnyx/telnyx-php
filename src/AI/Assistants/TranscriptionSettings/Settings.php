@@ -10,10 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type SettingsShape = array{
- *   eot_threshold?: float|null,
- *   eot_timeout_ms?: int|null,
+ *   eotThreshold?: float|null,
+ *   eotTimeoutMs?: int|null,
  *   numerals?: bool|null,
- *   smart_format?: bool|null,
+ *   smartFormat?: bool|null,
  * }
  */
 final class Settings implements BaseModel
@@ -24,20 +24,20 @@ final class Settings implements BaseModel
     /**
      * Available only for deepgram/flux. Confidence required to trigger an end of turn. Higher values = more reliable turn detection but slightly increased latency.
      */
-    #[Optional]
-    public ?float $eot_threshold;
+    #[Optional('eot_threshold')]
+    public ?float $eotThreshold;
 
     /**
      * Available only for deepgram/flux. Maximum milliseconds of silence before forcing an end of turn, regardless of confidence.
      */
-    #[Optional]
-    public ?int $eot_timeout_ms;
+    #[Optional('eot_timeout_ms')]
+    public ?int $eotTimeoutMs;
 
     #[Optional]
     public ?bool $numerals;
 
-    #[Optional]
-    public ?bool $smart_format;
+    #[Optional('smart_format')]
+    public ?bool $smartFormat;
 
     public function __construct()
     {
@@ -50,17 +50,17 @@ final class Settings implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?float $eot_threshold = null,
-        ?int $eot_timeout_ms = null,
+        ?float $eotThreshold = null,
+        ?int $eotTimeoutMs = null,
         ?bool $numerals = null,
-        ?bool $smart_format = null,
+        ?bool $smartFormat = null,
     ): self {
         $obj = new self;
 
-        null !== $eot_threshold && $obj['eot_threshold'] = $eot_threshold;
-        null !== $eot_timeout_ms && $obj['eot_timeout_ms'] = $eot_timeout_ms;
+        null !== $eotThreshold && $obj['eotThreshold'] = $eotThreshold;
+        null !== $eotTimeoutMs && $obj['eotTimeoutMs'] = $eotTimeoutMs;
         null !== $numerals && $obj['numerals'] = $numerals;
-        null !== $smart_format && $obj['smart_format'] = $smart_format;
+        null !== $smartFormat && $obj['smartFormat'] = $smartFormat;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class Settings implements BaseModel
     public function withEotThreshold(float $eotThreshold): self
     {
         $obj = clone $this;
-        $obj['eot_threshold'] = $eotThreshold;
+        $obj['eotThreshold'] = $eotThreshold;
 
         return $obj;
     }
@@ -82,7 +82,7 @@ final class Settings implements BaseModel
     public function withEotTimeoutMs(int $eotTimeoutMs): self
     {
         $obj = clone $this;
-        $obj['eot_timeout_ms'] = $eotTimeoutMs;
+        $obj['eotTimeoutMs'] = $eotTimeoutMs;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class Settings implements BaseModel
     public function withSmartFormat(bool $smartFormat): self
     {
         $obj = clone $this;
-        $obj['smart_format'] = $smartFormat;
+        $obj['smartFormat'] = $smartFormat;
 
         return $obj;
     }

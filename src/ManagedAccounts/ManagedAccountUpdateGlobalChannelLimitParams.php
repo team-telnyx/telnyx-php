@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\ManagedAccountsService::updateGlobalChannelLimit()
  *
  * @phpstan-type ManagedAccountUpdateGlobalChannelLimitParamsShape = array{
- *   channel_limit?: int
+ *   channelLimit?: int
  * }
  */
 final class ManagedAccountUpdateGlobalChannelLimitParams implements BaseModel
@@ -27,8 +27,8 @@ final class ManagedAccountUpdateGlobalChannelLimitParams implements BaseModel
     /**
      * Integer value that indicates the number of allocatable global outbound channels that should be allocated to the managed account. Must be 0 or more. If the value is 0 then the account will have no usable channels and will not be able to perform outbound calling.
      */
-    #[Optional]
-    public ?int $channel_limit;
+    #[Optional('channel_limit')]
+    public ?int $channelLimit;
 
     public function __construct()
     {
@@ -40,11 +40,11 @@ final class ManagedAccountUpdateGlobalChannelLimitParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?int $channel_limit = null): self
+    public static function with(?int $channelLimit = null): self
     {
         $obj = new self;
 
-        null !== $channel_limit && $obj['channel_limit'] = $channel_limit;
+        null !== $channelLimit && $obj['channelLimit'] = $channelLimit;
 
         return $obj;
     }
@@ -55,7 +55,7 @@ final class ManagedAccountUpdateGlobalChannelLimitParams implements BaseModel
     public function withChannelLimit(int $channelLimit): self
     {
         $obj = clone $this;
-        $obj['channel_limit'] = $channelLimit;
+        $obj['channelLimit'] = $channelLimit;
 
         return $obj;
     }

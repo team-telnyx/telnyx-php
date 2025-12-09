@@ -24,15 +24,15 @@ use Telnyx\PortingOrders\PortingOrderListParams\Sort\Value;
  *
  * @phpstan-type PortingOrderListParamsShape = array{
  *   filter?: Filter|array{
- *     activation_settings?: ActivationSettings|null,
- *     customer_group_reference?: string|null,
- *     customer_reference?: string|null,
- *     end_user?: EndUser|null,
+ *     activationSettings?: ActivationSettings|null,
+ *     customerGroupReference?: string|null,
+ *     customerReference?: string|null,
+ *     endUser?: EndUser|null,
  *     misc?: Misc|null,
- *     parent_support_key?: string|null,
- *     phone_numbers?: PhoneNumbers|null,
+ *     parentSupportKey?: string|null,
+ *     phoneNumbers?: PhoneNumbers|null,
  *   },
- *   include_phone_numbers?: bool,
+ *   includePhoneNumbers?: bool,
  *   page?: Page|array{number?: int|null, size?: int|null},
  *   sort?: Sort|array{value?: value-of<Value>|null},
  * }
@@ -53,7 +53,7 @@ final class PortingOrderListParams implements BaseModel
      * Include the first 50 phone number objects in the results.
      */
     #[Optional]
-    public ?bool $include_phone_numbers;
+    public ?bool $includePhoneNumbers;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
@@ -78,27 +78,27 @@ final class PortingOrderListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   activation_settings?: ActivationSettings|null,
-     *   customer_group_reference?: string|null,
-     *   customer_reference?: string|null,
-     *   end_user?: EndUser|null,
+     *   activationSettings?: ActivationSettings|null,
+     *   customerGroupReference?: string|null,
+     *   customerReference?: string|null,
+     *   endUser?: EndUser|null,
      *   misc?: Misc|null,
-     *   parent_support_key?: string|null,
-     *   phone_numbers?: PhoneNumbers|null,
+     *   parentSupportKey?: string|null,
+     *   phoneNumbers?: PhoneNumbers|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      * @param Sort|array{value?: value-of<Value>|null} $sort
      */
     public static function with(
         Filter|array|null $filter = null,
-        ?bool $include_phone_numbers = null,
+        ?bool $includePhoneNumbers = null,
         Page|array|null $page = null,
         Sort|array|null $sort = null,
     ): self {
         $obj = new self;
 
         null !== $filter && $obj['filter'] = $filter;
-        null !== $include_phone_numbers && $obj['include_phone_numbers'] = $include_phone_numbers;
+        null !== $includePhoneNumbers && $obj['includePhoneNumbers'] = $includePhoneNumbers;
         null !== $page && $obj['page'] = $page;
         null !== $sort && $obj['sort'] = $sort;
 
@@ -109,13 +109,13 @@ final class PortingOrderListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[customer_reference], filter[customer_group_reference], filter[parent_support_key], filter[phone_numbers.country_code], filter[phone_numbers.carrier_name], filter[misc.type], filter[end_user.admin.entity_name], filter[end_user.admin.auth_person_name], filter[activation_settings.fast_port_eligible], filter[activation_settings.foc_datetime_requested][gt], filter[activation_settings.foc_datetime_requested][lt], filter[phone_numbers.phone_number][contains].
      *
      * @param Filter|array{
-     *   activation_settings?: ActivationSettings|null,
-     *   customer_group_reference?: string|null,
-     *   customer_reference?: string|null,
-     *   end_user?: EndUser|null,
+     *   activationSettings?: ActivationSettings|null,
+     *   customerGroupReference?: string|null,
+     *   customerReference?: string|null,
+     *   endUser?: EndUser|null,
      *   misc?: Misc|null,
-     *   parent_support_key?: string|null,
-     *   phone_numbers?: PhoneNumbers|null,
+     *   parentSupportKey?: string|null,
+     *   phoneNumbers?: PhoneNumbers|null,
      * } $filter
      */
     public function withFilter(Filter|array $filter): self
@@ -132,7 +132,7 @@ final class PortingOrderListParams implements BaseModel
     public function withIncludePhoneNumbers(bool $includePhoneNumbers): self
     {
         $obj = clone $this;
-        $obj['include_phone_numbers'] = $includePhoneNumbers;
+        $obj['includePhoneNumbers'] = $includePhoneNumbers;
 
         return $obj;
     }

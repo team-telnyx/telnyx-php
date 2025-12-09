@@ -13,17 +13,17 @@ use Telnyx\NotificationEventConditions\NotificationEventConditionListResponse\Da
 /**
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   allow_multiple_channels?: bool|null,
- *   associated_record_type?: value-of<AssociatedRecordType>|null,
+ *   allowMultipleChannels?: bool|null,
+ *   associatedRecordType?: value-of<AssociatedRecordType>|null,
  *   asynchronous?: bool|null,
- *   created_at?: \DateTimeInterface|null,
+ *   createdAt?: \DateTimeInterface|null,
  *   description?: string|null,
  *   enabled?: bool|null,
  *   name?: string|null,
- *   notification_event_id?: string|null,
+ *   notificationEventID?: string|null,
  *   parameters?: list<Parameter>|null,
- *   supported_channels?: list<string>|null,
- *   updated_at?: \DateTimeInterface|null,
+ *   supportedChannels?: list<string>|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class Data implements BaseModel
@@ -40,12 +40,12 @@ final class Data implements BaseModel
     /**
      * Dictates whether a notification channel id needs to be provided when creating a notficiation setting.
      */
-    #[Optional]
-    public ?bool $allow_multiple_channels;
+    #[Optional('allow_multiple_channels')]
+    public ?bool $allowMultipleChannels;
 
-    /** @var value-of<AssociatedRecordType>|null $associated_record_type */
-    #[Optional(enum: AssociatedRecordType::class)]
-    public ?string $associated_record_type;
+    /** @var value-of<AssociatedRecordType>|null $associatedRecordType */
+    #[Optional('associated_record_type', enum: AssociatedRecordType::class)]
+    public ?string $associatedRecordType;
 
     /**
      * Dictates whether a notification setting will take effect immediately.
@@ -56,8 +56,8 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
     #[Optional]
     public ?string $description;
@@ -68,8 +68,8 @@ final class Data implements BaseModel
     #[Optional]
     public ?string $name;
 
-    #[Optional]
-    public ?string $notification_event_id;
+    #[Optional('notification_event_id')]
+    public ?string $notificationEventID;
 
     /** @var list<Parameter>|null $parameters */
     #[Optional(list: Parameter::class)]
@@ -78,16 +78,16 @@ final class Data implements BaseModel
     /**
      * Dictates the supported notification channel types that can be emitted.
      *
-     * @var list<string>|null $supported_channels
+     * @var list<string>|null $supportedChannels
      */
-    #[Optional(list: 'string')]
-    public ?array $supported_channels;
+    #[Optional('supported_channels', list: 'string')]
+    public ?array $supportedChannels;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
     {
@@ -99,40 +99,40 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AssociatedRecordType|value-of<AssociatedRecordType> $associated_record_type
+     * @param AssociatedRecordType|value-of<AssociatedRecordType> $associatedRecordType
      * @param list<Parameter|array{
-     *   data_type?: string|null, name?: string|null, optional?: bool|null
+     *   dataType?: string|null, name?: string|null, optional?: bool|null
      * }> $parameters
-     * @param list<string> $supported_channels
+     * @param list<string> $supportedChannels
      */
     public static function with(
         ?string $id = null,
-        ?bool $allow_multiple_channels = null,
-        AssociatedRecordType|string|null $associated_record_type = null,
+        ?bool $allowMultipleChannels = null,
+        AssociatedRecordType|string|null $associatedRecordType = null,
         ?bool $asynchronous = null,
-        ?\DateTimeInterface $created_at = null,
+        ?\DateTimeInterface $createdAt = null,
         ?string $description = null,
         ?bool $enabled = null,
         ?string $name = null,
-        ?string $notification_event_id = null,
+        ?string $notificationEventID = null,
         ?array $parameters = null,
-        ?array $supported_channels = null,
-        ?\DateTimeInterface $updated_at = null,
+        ?array $supportedChannels = null,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $allow_multiple_channels && $obj['allow_multiple_channels'] = $allow_multiple_channels;
-        null !== $associated_record_type && $obj['associated_record_type'] = $associated_record_type;
+        null !== $allowMultipleChannels && $obj['allowMultipleChannels'] = $allowMultipleChannels;
+        null !== $associatedRecordType && $obj['associatedRecordType'] = $associatedRecordType;
         null !== $asynchronous && $obj['asynchronous'] = $asynchronous;
-        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
         null !== $description && $obj['description'] = $description;
         null !== $enabled && $obj['enabled'] = $enabled;
         null !== $name && $obj['name'] = $name;
-        null !== $notification_event_id && $obj['notification_event_id'] = $notification_event_id;
+        null !== $notificationEventID && $obj['notificationEventID'] = $notificationEventID;
         null !== $parameters && $obj['parameters'] = $parameters;
-        null !== $supported_channels && $obj['supported_channels'] = $supported_channels;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $supportedChannels && $obj['supportedChannels'] = $supportedChannels;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -154,7 +154,7 @@ final class Data implements BaseModel
     public function withAllowMultipleChannels(bool $allowMultipleChannels): self
     {
         $obj = clone $this;
-        $obj['allow_multiple_channels'] = $allowMultipleChannels;
+        $obj['allowMultipleChannels'] = $allowMultipleChannels;
 
         return $obj;
     }
@@ -166,7 +166,7 @@ final class Data implements BaseModel
         AssociatedRecordType|string $associatedRecordType
     ): self {
         $obj = clone $this;
-        $obj['associated_record_type'] = $associatedRecordType;
+        $obj['associatedRecordType'] = $associatedRecordType;
 
         return $obj;
     }
@@ -188,7 +188,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -220,14 +220,14 @@ final class Data implements BaseModel
     public function withNotificationEventID(string $notificationEventID): self
     {
         $obj = clone $this;
-        $obj['notification_event_id'] = $notificationEventID;
+        $obj['notificationEventID'] = $notificationEventID;
 
         return $obj;
     }
 
     /**
      * @param list<Parameter|array{
-     *   data_type?: string|null, name?: string|null, optional?: bool|null
+     *   dataType?: string|null, name?: string|null, optional?: bool|null
      * }> $parameters
      */
     public function withParameters(array $parameters): self
@@ -246,7 +246,7 @@ final class Data implements BaseModel
     public function withSupportedChannels(array $supportedChannels): self
     {
         $obj = clone $this;
-        $obj['supported_channels'] = $supportedChannels;
+        $obj['supportedChannels'] = $supportedChannels;
 
         return $obj;
     }
@@ -257,7 +257,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

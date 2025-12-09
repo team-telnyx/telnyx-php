@@ -12,14 +12,14 @@ use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentNewResponse\Data\
 /**
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   content_type?: string|null,
- *   created_at?: \DateTimeInterface|null,
- *   document_id?: string|null,
- *   document_type?: value-of<DocumentType>|null,
+ *   contentType?: string|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   documentID?: string|null,
+ *   documentType?: value-of<DocumentType>|null,
  *   filename?: string|null,
- *   porting_order_id?: string|null,
- *   record_type?: string|null,
- *   updated_at?: \DateTimeInterface|null,
+ *   portingOrderID?: string|null,
+ *   recordType?: string|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class Data implements BaseModel
@@ -36,28 +36,28 @@ final class Data implements BaseModel
     /**
      * The content type of the related document.
      */
-    #[Optional]
-    public ?string $content_type;
+    #[Optional('content_type')]
+    public ?string $contentType;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
     /**
      * Identifies the associated document.
      */
-    #[Optional]
-    public ?string $document_id;
+    #[Optional('document_id')]
+    public ?string $documentID;
 
     /**
      * Identifies the type of additional document.
      *
-     * @var value-of<DocumentType>|null $document_type
+     * @var value-of<DocumentType>|null $documentType
      */
-    #[Optional(enum: DocumentType::class)]
-    public ?string $document_type;
+    #[Optional('document_type', enum: DocumentType::class)]
+    public ?string $documentType;
 
     /**
      * The filename of the related document.
@@ -68,20 +68,20 @@ final class Data implements BaseModel
     /**
      * Identifies the associated porting order.
      */
-    #[Optional]
-    public ?string $porting_order_id;
+    #[Optional('porting_order_id')]
+    public ?string $portingOrderID;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
     {
@@ -93,30 +93,30 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DocumentType|value-of<DocumentType> $document_type
+     * @param DocumentType|value-of<DocumentType> $documentType
      */
     public static function with(
         ?string $id = null,
-        ?string $content_type = null,
-        ?\DateTimeInterface $created_at = null,
-        ?string $document_id = null,
-        DocumentType|string|null $document_type = null,
+        ?string $contentType = null,
+        ?\DateTimeInterface $createdAt = null,
+        ?string $documentID = null,
+        DocumentType|string|null $documentType = null,
         ?string $filename = null,
-        ?string $porting_order_id = null,
-        ?string $record_type = null,
-        ?\DateTimeInterface $updated_at = null,
+        ?string $portingOrderID = null,
+        ?string $recordType = null,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $content_type && $obj['content_type'] = $content_type;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $document_id && $obj['document_id'] = $document_id;
-        null !== $document_type && $obj['document_type'] = $document_type;
+        null !== $contentType && $obj['contentType'] = $contentType;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $documentID && $obj['documentID'] = $documentID;
+        null !== $documentType && $obj['documentType'] = $documentType;
         null !== $filename && $obj['filename'] = $filename;
-        null !== $porting_order_id && $obj['porting_order_id'] = $porting_order_id;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $portingOrderID && $obj['portingOrderID'] = $portingOrderID;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -138,7 +138,7 @@ final class Data implements BaseModel
     public function withContentType(string $contentType): self
     {
         $obj = clone $this;
-        $obj['content_type'] = $contentType;
+        $obj['contentType'] = $contentType;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class Data implements BaseModel
     public function withDocumentID(string $documentID): self
     {
         $obj = clone $this;
-        $obj['document_id'] = $documentID;
+        $obj['documentID'] = $documentID;
 
         return $obj;
     }
@@ -173,7 +173,7 @@ final class Data implements BaseModel
     public function withDocumentType(DocumentType|string $documentType): self
     {
         $obj = clone $this;
-        $obj['document_type'] = $documentType;
+        $obj['documentType'] = $documentType;
 
         return $obj;
     }
@@ -195,7 +195,7 @@ final class Data implements BaseModel
     public function withPortingOrderID(string $portingOrderID): self
     {
         $obj = clone $this;
-        $obj['porting_order_id'] = $portingOrderID;
+        $obj['portingOrderID'] = $portingOrderID;
 
         return $obj;
     }
@@ -206,7 +206,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -217,7 +217,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

@@ -43,24 +43,24 @@ final class ExternalConnectionListResponse implements BaseModel
      * @param list<ExternalConnection|array{
      *   id?: string|null,
      *   active?: bool|null,
-     *   created_at?: string|null,
-     *   credential_active?: bool|null,
-     *   external_sip_connection?: value-of<ExternalSipConnection>|null,
+     *   createdAt?: string|null,
+     *   credentialActive?: bool|null,
+     *   externalSipConnection?: value-of<ExternalSipConnection>|null,
      *   inbound?: Inbound|null,
      *   outbound?: Outbound|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      *   tags?: list<string>|null,
-     *   updated_at?: string|null,
-     *   webhook_api_version?: value-of<WebhookAPIVersion>|null,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_event_url?: string|null,
-     *   webhook_timeout_secs?: int|null,
+     *   updatedAt?: string|null,
+     *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookEventURL?: string|null,
+     *   webhookTimeoutSecs?: int|null,
      * }> $data
      * @param ExternalVoiceIntegrationsPaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -79,18 +79,18 @@ final class ExternalConnectionListResponse implements BaseModel
      * @param list<ExternalConnection|array{
      *   id?: string|null,
      *   active?: bool|null,
-     *   created_at?: string|null,
-     *   credential_active?: bool|null,
-     *   external_sip_connection?: value-of<ExternalSipConnection>|null,
+     *   createdAt?: string|null,
+     *   credentialActive?: bool|null,
+     *   externalSipConnection?: value-of<ExternalSipConnection>|null,
      *   inbound?: Inbound|null,
      *   outbound?: Outbound|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      *   tags?: list<string>|null,
-     *   updated_at?: string|null,
-     *   webhook_api_version?: value-of<WebhookAPIVersion>|null,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_event_url?: string|null,
-     *   webhook_timeout_secs?: int|null,
+     *   updatedAt?: string|null,
+     *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookEventURL?: string|null,
+     *   webhookTimeoutSecs?: int|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -103,10 +103,10 @@ final class ExternalConnectionListResponse implements BaseModel
 
     /**
      * @param ExternalVoiceIntegrationsPaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(

@@ -17,17 +17,17 @@ use Telnyx\Reports\ReportListWdrsParams\Page;
  *
  * @phpstan-type ReportListWdrsParamsShape = array{
  *   id?: string,
- *   end_date?: string,
+ *   endDate?: string,
  *   imsi?: string,
  *   mcc?: string,
  *   mnc?: string,
  *   page?: Page|array{number?: int|null, size?: int|null},
- *   phone_number?: string,
- *   sim_card_id?: string,
- *   sim_group_id?: string,
- *   sim_group_name?: string,
+ *   phoneNumber?: string,
+ *   simCardID?: string,
+ *   simGroupID?: string,
+ *   simGroupName?: string,
  *   sort?: list<string>,
- *   start_date?: string,
+ *   startDate?: string,
  * }
  */
 final class ReportListWdrsParams implements BaseModel
@@ -46,7 +46,7 @@ final class ReportListWdrsParams implements BaseModel
      * End date.
      */
     #[Optional]
-    public ?string $end_date;
+    public ?string $endDate;
 
     /**
      * International mobile subscriber identity.
@@ -76,25 +76,25 @@ final class ReportListWdrsParams implements BaseModel
      * Phone number.
      */
     #[Optional]
-    public ?string $phone_number;
+    public ?string $phoneNumber;
 
     /**
      * Sim card unique identifier.
      */
     #[Optional]
-    public ?string $sim_card_id;
+    public ?string $simCardID;
 
     /**
      * Sim group unique identifier.
      */
     #[Optional]
-    public ?string $sim_group_id;
+    public ?string $simGroupID;
 
     /**
      * Sim group name.
      */
     #[Optional]
-    public ?string $sim_group_name;
+    public ?string $simGroupName;
 
     /**
      * Field used to order the data. If no field is specified, default value is 'created_at'.
@@ -108,7 +108,7 @@ final class ReportListWdrsParams implements BaseModel
      * Start date.
      */
     #[Optional]
-    public ?string $start_date;
+    public ?string $startDate;
 
     public function __construct()
     {
@@ -125,32 +125,32 @@ final class ReportListWdrsParams implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $end_date = null,
+        ?string $endDate = null,
         ?string $imsi = null,
         ?string $mcc = null,
         ?string $mnc = null,
         Page|array|null $page = null,
-        ?string $phone_number = null,
-        ?string $sim_card_id = null,
-        ?string $sim_group_id = null,
-        ?string $sim_group_name = null,
+        ?string $phoneNumber = null,
+        ?string $simCardID = null,
+        ?string $simGroupID = null,
+        ?string $simGroupName = null,
         ?array $sort = null,
-        ?string $start_date = null,
+        ?string $startDate = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $end_date && $obj['end_date'] = $end_date;
+        null !== $endDate && $obj['endDate'] = $endDate;
         null !== $imsi && $obj['imsi'] = $imsi;
         null !== $mcc && $obj['mcc'] = $mcc;
         null !== $mnc && $obj['mnc'] = $mnc;
         null !== $page && $obj['page'] = $page;
-        null !== $phone_number && $obj['phone_number'] = $phone_number;
-        null !== $sim_card_id && $obj['sim_card_id'] = $sim_card_id;
-        null !== $sim_group_id && $obj['sim_group_id'] = $sim_group_id;
-        null !== $sim_group_name && $obj['sim_group_name'] = $sim_group_name;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
+        null !== $simCardID && $obj['simCardID'] = $simCardID;
+        null !== $simGroupID && $obj['simGroupID'] = $simGroupID;
+        null !== $simGroupName && $obj['simGroupName'] = $simGroupName;
         null !== $sort && $obj['sort'] = $sort;
-        null !== $start_date && $obj['start_date'] = $start_date;
+        null !== $startDate && $obj['startDate'] = $startDate;
 
         return $obj;
     }
@@ -172,7 +172,7 @@ final class ReportListWdrsParams implements BaseModel
     public function withEndDate(string $endDate): self
     {
         $obj = clone $this;
-        $obj['end_date'] = $endDate;
+        $obj['endDate'] = $endDate;
 
         return $obj;
     }
@@ -229,7 +229,7 @@ final class ReportListWdrsParams implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -240,7 +240,7 @@ final class ReportListWdrsParams implements BaseModel
     public function withSimCardID(string $simCardID): self
     {
         $obj = clone $this;
-        $obj['sim_card_id'] = $simCardID;
+        $obj['simCardID'] = $simCardID;
 
         return $obj;
     }
@@ -251,7 +251,7 @@ final class ReportListWdrsParams implements BaseModel
     public function withSimGroupID(string $simGroupID): self
     {
         $obj = clone $this;
-        $obj['sim_group_id'] = $simGroupID;
+        $obj['simGroupID'] = $simGroupID;
 
         return $obj;
     }
@@ -262,7 +262,7 @@ final class ReportListWdrsParams implements BaseModel
     public function withSimGroupName(string $simGroupName): self
     {
         $obj = clone $this;
-        $obj['sim_group_name'] = $simGroupName;
+        $obj['simGroupName'] = $simGroupName;
 
         return $obj;
     }
@@ -286,7 +286,7 @@ final class ReportListWdrsParams implements BaseModel
     public function withStartDate(string $startDate): self
     {
         $obj = clone $this;
-        $obj['start_date'] = $startDate;
+        $obj['startDate'] = $startDate;
 
         return $obj;
     }

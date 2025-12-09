@@ -37,14 +37,14 @@ final class LoaConfigurationNewResponse implements BaseModel
      * @param PortingLoaConfiguration|array{
      *   id?: string|null,
      *   address?: Address|null,
-     *   company_name?: string|null,
+     *   companyName?: string|null,
      *   contact?: Contact|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   logo?: Logo|null,
      *   name?: string|null,
-     *   organization_id?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   organizationID?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(
@@ -61,14 +61,14 @@ final class LoaConfigurationNewResponse implements BaseModel
      * @param PortingLoaConfiguration|array{
      *   id?: string|null,
      *   address?: Address|null,
-     *   company_name?: string|null,
+     *   companyName?: string|null,
      *   contact?: Contact|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   logo?: Logo|null,
      *   name?: string|null,
-     *   organization_id?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   organizationID?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(PortingLoaConfiguration|array $data): self

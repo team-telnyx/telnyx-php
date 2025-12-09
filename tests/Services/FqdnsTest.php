@@ -39,8 +39,8 @@ final class FqdnsTest extends TestCase
         }
 
         $result = $this->client->fqdns->create([
-            'connection_id' => '1516447646313612565',
-            'dns_record_type' => 'a',
+            'connectionID' => '1516447646313612565',
+            'dnsRecordType' => 'a',
             'fqdn' => 'example.com',
         ]);
 
@@ -56,8 +56,8 @@ final class FqdnsTest extends TestCase
         }
 
         $result = $this->client->fqdns->create([
-            'connection_id' => '1516447646313612565',
-            'dns_record_type' => 'a',
+            'connectionID' => '1516447646313612565',
+            'dnsRecordType' => 'a',
             'fqdn' => 'example.com',
             'port' => 8080,
         ]);

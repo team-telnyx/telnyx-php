@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type RegionInformationShape = array{
- *   region_name?: string|null, region_type?: string|null
+ *   regionName?: string|null, regionType?: string|null
  * }
  */
 final class RegionInformation implements BaseModel
@@ -18,11 +18,11 @@ final class RegionInformation implements BaseModel
     /** @use SdkModel<RegionInformationShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?string $region_name;
+    #[Optional('region_name')]
+    public ?string $regionName;
 
-    #[Optional]
-    public ?string $region_type;
+    #[Optional('region_type')]
+    public ?string $regionType;
 
     public function __construct()
     {
@@ -35,13 +35,13 @@ final class RegionInformation implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $region_name = null,
-        ?string $region_type = null
+        ?string $regionName = null,
+        ?string $regionType = null
     ): self {
         $obj = new self;
 
-        null !== $region_name && $obj['region_name'] = $region_name;
-        null !== $region_type && $obj['region_type'] = $region_type;
+        null !== $regionName && $obj['regionName'] = $regionName;
+        null !== $regionType && $obj['regionType'] = $regionType;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class RegionInformation implements BaseModel
     public function withRegionName(string $regionName): self
     {
         $obj = clone $this;
-        $obj['region_name'] = $regionName;
+        $obj['regionName'] = $regionName;
 
         return $obj;
     }
@@ -57,7 +57,7 @@ final class RegionInformation implements BaseModel
     public function withRegionType(string $regionType): self
     {
         $obj = clone $this;
-        $obj['region_type'] = $regionType;
+        $obj['regionType'] = $regionType;
 
         return $obj;
     }

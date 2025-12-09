@@ -37,7 +37,7 @@ final class ReportsTest extends TestCase
         }
 
         $result = $this->client->portouts->reports->create([
-            'params' => ['filters' => []], 'report_type' => 'export_portouts_csv',
+            'params' => ['filters' => []], 'reportType' => 'export_portouts_csv',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -54,19 +54,15 @@ final class ReportsTest extends TestCase
         $result = $this->client->portouts->reports->create([
             'params' => [
                 'filters' => [
-                    'created_at__gt' => new \DateTimeImmutable(
-                        '2019-12-27T18:11:19.117Z'
-                    ),
-                    'created_at__lt' => new \DateTimeImmutable(
-                        '2019-12-27T18:11:19.117Z'
-                    ),
-                    'customer_reference__in' => ['my-customer-reference'],
-                    'end_user_name' => 'McPortersen',
-                    'phone_numbers__overlaps' => ['+1234567890'],
-                    'status__in' => ['pending'],
+                    'createdAtGt' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+                    'createdAtLt' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+                    'customerReferenceIn' => ['my-customer-reference'],
+                    'endUserName' => 'McPortersen',
+                    'phoneNumbersOverlaps' => ['+1234567890'],
+                    'statusIn' => ['pending'],
                 ],
             ],
-            'report_type' => 'export_portouts_csv',
+            'reportType' => 'export_portouts_csv',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

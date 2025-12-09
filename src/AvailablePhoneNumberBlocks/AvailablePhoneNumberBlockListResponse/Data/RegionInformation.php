@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type RegionInformationShape = array{
- *   region_name?: string|null, region_type?: value-of<RegionType>|null
+ *   regionName?: string|null, regionType?: value-of<RegionType>|null
  * }
  */
 final class RegionInformation implements BaseModel
@@ -19,12 +19,12 @@ final class RegionInformation implements BaseModel
     /** @use SdkModel<RegionInformationShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?string $region_name;
+    #[Optional('region_name')]
+    public ?string $regionName;
 
-    /** @var value-of<RegionType>|null $region_type */
-    #[Optional(enum: RegionType::class)]
-    public ?string $region_type;
+    /** @var value-of<RegionType>|null $regionType */
+    #[Optional('region_type', enum: RegionType::class)]
+    public ?string $regionType;
 
     public function __construct()
     {
@@ -36,16 +36,16 @@ final class RegionInformation implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RegionType|value-of<RegionType> $region_type
+     * @param RegionType|value-of<RegionType> $regionType
      */
     public static function with(
-        ?string $region_name = null,
-        RegionType|string|null $region_type = null
+        ?string $regionName = null,
+        RegionType|string|null $regionType = null
     ): self {
         $obj = new self;
 
-        null !== $region_name && $obj['region_name'] = $region_name;
-        null !== $region_type && $obj['region_type'] = $region_type;
+        null !== $regionName && $obj['regionName'] = $regionName;
+        null !== $regionType && $obj['regionType'] = $regionType;
 
         return $obj;
     }
@@ -53,7 +53,7 @@ final class RegionInformation implements BaseModel
     public function withRegionName(string $regionName): self
     {
         $obj = clone $this;
-        $obj['region_name'] = $regionName;
+        $obj['regionName'] = $regionName;
 
         return $obj;
     }
@@ -64,7 +64,7 @@ final class RegionInformation implements BaseModel
     public function withRegionType(RegionType|string $regionType): self
     {
         $obj = clone $this;
-        $obj['region_type'] = $regionType;
+        $obj['regionType'] = $regionType;
 
         return $obj;
     }

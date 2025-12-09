@@ -12,7 +12,7 @@ use Telnyx\GlobalIPLatency\GlobalIPLatencyRetrieveParams\Filter\GlobalIPID\In;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in].
  *
- * @phpstan-type FilterShape = array{global_ip_id?: string|null|In}
+ * @phpstan-type FilterShape = array{globalIPID?: string|null|In}
  */
 final class Filter implements BaseModel
 {
@@ -22,8 +22,8 @@ final class Filter implements BaseModel
     /**
      * Filter by exact Global IP ID.
      */
-    #[Optional]
-    public string|In|null $global_ip_id;
+    #[Optional('global_ip_id')]
+    public string|In|null $globalIPID;
 
     public function __construct()
     {
@@ -35,13 +35,13 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param string|In|array{in?: string|null} $global_ip_id
+     * @param string|In|array{in?: string|null} $globalIPID
      */
-    public static function with(string|In|array|null $global_ip_id = null): self
+    public static function with(string|In|array|null $globalIPID = null): self
     {
         $obj = new self;
 
-        null !== $global_ip_id && $obj['global_ip_id'] = $global_ip_id;
+        null !== $globalIPID && $obj['globalIPID'] = $globalIPID;
 
         return $obj;
     }
@@ -51,10 +51,10 @@ final class Filter implements BaseModel
      *
      * @param string|In|array{in?: string|null} $globalIPID
      */
-    public function withGlobalIPID(string|In|array $globalIPID): self
+    public function withGlobalIpid(string|In|array $globalIPID): self
     {
         $obj = clone $this;
-        $obj['global_ip_id'] = $globalIPID;
+        $obj['globalIPID'] = $globalIPID;
 
         return $obj;
     }

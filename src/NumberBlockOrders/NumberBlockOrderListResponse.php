@@ -39,23 +39,23 @@ final class NumberBlockOrderListResponse implements BaseModel
      *
      * @param list<NumberBlockOrder|array{
      *   id?: string|null,
-     *   connection_id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   customer_reference?: string|null,
-     *   messaging_profile_id?: string|null,
-     *   phone_numbers_count?: int|null,
+     *   connectionID?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   customerReference?: string|null,
+     *   messagingProfileID?: string|null,
+     *   phoneNumbersCount?: int|null,
      *   range?: int|null,
-     *   record_type?: string|null,
-     *   requirements_met?: bool|null,
-     *   starting_number?: string|null,
+     *   recordType?: string|null,
+     *   requirementsMet?: bool|null,
+     *   startingNumber?: string|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -73,17 +73,17 @@ final class NumberBlockOrderListResponse implements BaseModel
     /**
      * @param list<NumberBlockOrder|array{
      *   id?: string|null,
-     *   connection_id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   customer_reference?: string|null,
-     *   messaging_profile_id?: string|null,
-     *   phone_numbers_count?: int|null,
+     *   connectionID?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   customerReference?: string|null,
+     *   messagingProfileID?: string|null,
+     *   phoneNumbersCount?: int|null,
      *   range?: int|null,
-     *   record_type?: string|null,
-     *   requirements_met?: bool|null,
-     *   starting_number?: string|null,
+     *   recordType?: string|null,
+     *   requirementsMet?: bool|null,
+     *   startingNumber?: string|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -96,10 +96,10 @@ final class NumberBlockOrderListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

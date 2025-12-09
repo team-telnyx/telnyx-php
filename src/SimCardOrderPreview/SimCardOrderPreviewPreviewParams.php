@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\SimCardOrderPreviewService::preview()
  *
  * @phpstan-type SimCardOrderPreviewPreviewParamsShape = array{
- *   address_id: string, quantity: int
+ *   addressID: string, quantity: int
  * }
  */
 final class SimCardOrderPreviewPreviewParams implements BaseModel
@@ -27,8 +27,8 @@ final class SimCardOrderPreviewPreviewParams implements BaseModel
     /**
      * Uniquely identifies the address for the order.
      */
-    #[Required]
-    public string $address_id;
+    #[Required('address_id')]
+    public string $addressID;
 
     /**
      * The amount of SIM cards that the user would like to purchase in the SIM card order.
@@ -41,7 +41,7 @@ final class SimCardOrderPreviewPreviewParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * SimCardOrderPreviewPreviewParams::with(address_id: ..., quantity: ...)
+     * SimCardOrderPreviewPreviewParams::with(addressID: ..., quantity: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -60,11 +60,11 @@ final class SimCardOrderPreviewPreviewParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $address_id, int $quantity): self
+    public static function with(string $addressID, int $quantity): self
     {
         $obj = new self;
 
-        $obj['address_id'] = $address_id;
+        $obj['addressID'] = $addressID;
         $obj['quantity'] = $quantity;
 
         return $obj;
@@ -76,7 +76,7 @@ final class SimCardOrderPreviewPreviewParams implements BaseModel
     public function withAddressID(string $addressID): self
     {
         $obj = clone $this;
-        $obj['address_id'] = $addressID;
+        $obj['addressID'] = $addressID;
 
         return $obj;
     }

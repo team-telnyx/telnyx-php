@@ -31,25 +31,25 @@ final class PercentileLatency implements BaseModel
     /** @use SdkModel<PercentileLatencyShape> */
     use SdkModel;
 
-    #[Optional]
+    #[Optional('0')]
     public ?_0 $p0;
 
-    #[Optional]
+    #[Optional('100')]
     public ?_100 $p100;
 
-    #[Optional]
+    #[Optional('25')]
     public ?_25 $p25;
 
-    #[Optional]
+    #[Optional('50')]
     public ?_50 $p50;
 
-    #[Optional]
+    #[Optional('75')]
     public ?_75 $p75;
 
-    #[Optional]
+    #[Optional('90')]
     public ?_90 $p90;
 
-    #[Optional]
+    #[Optional('99')]
     public ?_99 $p99;
 
     public function __construct()

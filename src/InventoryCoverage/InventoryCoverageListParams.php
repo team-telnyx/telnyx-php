@@ -21,14 +21,14 @@ use Telnyx\InventoryCoverage\InventoryCoverageListParams\Filter\PhoneNumberType;
  *
  * @phpstan-type InventoryCoverageListParamsShape = array{
  *   filter?: Filter|array{
- *     administrative_area?: string|null,
+ *     administrativeArea?: string|null,
  *     count?: bool|null,
- *     country_code?: value-of<CountryCode>|null,
+ *     countryCode?: value-of<CountryCode>|null,
  *     features?: list<value-of<Feature>>|null,
  *     groupBy?: value-of<GroupBy>|null,
  *     npa?: int|null,
  *     nxx?: int|null,
- *     phone_number_type?: value-of<PhoneNumberType>|null,
+ *     phoneNumberType?: value-of<PhoneNumberType>|null,
  *   },
  * }
  */
@@ -55,14 +55,14 @@ final class InventoryCoverageListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   administrative_area?: string|null,
+     *   administrativeArea?: string|null,
      *   count?: bool|null,
-     *   country_code?: value-of<CountryCode>|null,
+     *   countryCode?: value-of<CountryCode>|null,
      *   features?: list<value-of<Feature>>|null,
      *   groupBy?: value-of<GroupBy>|null,
      *   npa?: int|null,
      *   nxx?: int|null,
-     *   phone_number_type?: value-of<PhoneNumberType>|null,
+     *   phoneNumberType?: value-of<PhoneNumberType>|null,
      * } $filter
      */
     public static function with(Filter|array|null $filter = null): self
@@ -78,14 +78,14 @@ final class InventoryCoverageListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[npa], filter[nxx], filter[administrative_area], filter[phone_number_type], filter[country_code], filter[count], filter[features], filter[groupBy].
      *
      * @param Filter|array{
-     *   administrative_area?: string|null,
+     *   administrativeArea?: string|null,
      *   count?: bool|null,
-     *   country_code?: value-of<CountryCode>|null,
+     *   countryCode?: value-of<CountryCode>|null,
      *   features?: list<value-of<Feature>>|null,
      *   groupBy?: value-of<GroupBy>|null,
      *   npa?: int|null,
      *   nxx?: int|null,
-     *   phone_number_type?: value-of<PhoneNumberType>|null,
+     *   phoneNumberType?: value-of<PhoneNumberType>|null,
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

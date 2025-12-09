@@ -19,13 +19,13 @@ use Telnyx\Recordings\RecordingListParams\Page;
  *
  * @phpstan-type RecordingListParamsShape = array{
  *   filter?: Filter|array{
- *     call_leg_id?: string|null,
- *     call_session_id?: string|null,
- *     conference_id?: string|null,
- *     connection_id?: string|null,
- *     created_at?: CreatedAt|null,
+ *     callLegID?: string|null,
+ *     callSessionID?: string|null,
+ *     conferenceID?: string|null,
+ *     connectionID?: string|null,
+ *     createdAt?: CreatedAt|null,
  *     from?: string|null,
- *     sip_call_id?: string|null,
+ *     sipCallID?: string|null,
  *     to?: string|null,
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
@@ -60,13 +60,13 @@ final class RecordingListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   call_leg_id?: string|null,
-     *   call_session_id?: string|null,
-     *   conference_id?: string|null,
-     *   connection_id?: string|null,
-     *   created_at?: CreatedAt|null,
+     *   callLegID?: string|null,
+     *   callSessionID?: string|null,
+     *   conferenceID?: string|null,
+     *   connectionID?: string|null,
+     *   createdAt?: CreatedAt|null,
      *   from?: string|null,
-     *   sip_call_id?: string|null,
+     *   sipCallID?: string|null,
      *   to?: string|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
@@ -87,13 +87,13 @@ final class RecordingListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[conference_id], filter[created_at][gte], filter[created_at][lte], filter[call_leg_id], filter[call_session_id], filter[from], filter[to], filter[connection_id], filter[sip_call_id].
      *
      * @param Filter|array{
-     *   call_leg_id?: string|null,
-     *   call_session_id?: string|null,
-     *   conference_id?: string|null,
-     *   connection_id?: string|null,
-     *   created_at?: CreatedAt|null,
+     *   callLegID?: string|null,
+     *   callSessionID?: string|null,
+     *   conferenceID?: string|null,
+     *   connectionID?: string|null,
+     *   createdAt?: CreatedAt|null,
      *   from?: string|null,
-     *   sip_call_id?: string|null,
+     *   sipCallID?: string|null,
      *   to?: string|null,
      * } $filter
      */

@@ -12,9 +12,9 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type TargetShape = array{
  *   name: string,
- *   sip_address: string,
- *   sip_auth_password?: string|null,
- *   sip_auth_username?: string|null,
+ *   sipAddress: string,
+ *   sipAuthPassword?: string|null,
+ *   sipAuthUsername?: string|null,
  * }
  */
 final class Target implements BaseModel
@@ -31,27 +31,27 @@ final class Target implements BaseModel
     /**
      * The SIP URI to which the call will be referred.
      */
-    #[Required]
-    public string $sip_address;
+    #[Required('sip_address')]
+    public string $sipAddress;
 
     /**
      * SIP Authentication password used for SIP challenges.
      */
-    #[Optional]
-    public ?string $sip_auth_password;
+    #[Optional('sip_auth_password')]
+    public ?string $sipAuthPassword;
 
     /**
      * SIP Authentication username used for SIP challenges.
      */
-    #[Optional]
-    public ?string $sip_auth_username;
+    #[Optional('sip_auth_username')]
+    public ?string $sipAuthUsername;
 
     /**
      * `new Target()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Target::with(name: ..., sip_address: ...)
+     * Target::with(name: ..., sipAddress: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -72,17 +72,17 @@ final class Target implements BaseModel
      */
     public static function with(
         string $name,
-        string $sip_address,
-        ?string $sip_auth_password = null,
-        ?string $sip_auth_username = null,
+        string $sipAddress,
+        ?string $sipAuthPassword = null,
+        ?string $sipAuthUsername = null,
     ): self {
         $obj = new self;
 
         $obj['name'] = $name;
-        $obj['sip_address'] = $sip_address;
+        $obj['sipAddress'] = $sipAddress;
 
-        null !== $sip_auth_password && $obj['sip_auth_password'] = $sip_auth_password;
-        null !== $sip_auth_username && $obj['sip_auth_username'] = $sip_auth_username;
+        null !== $sipAuthPassword && $obj['sipAuthPassword'] = $sipAuthPassword;
+        null !== $sipAuthUsername && $obj['sipAuthUsername'] = $sipAuthUsername;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class Target implements BaseModel
     public function withSipAddress(string $sipAddress): self
     {
         $obj = clone $this;
-        $obj['sip_address'] = $sipAddress;
+        $obj['sipAddress'] = $sipAddress;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class Target implements BaseModel
     public function withSipAuthPassword(string $sipAuthPassword): self
     {
         $obj = clone $this;
-        $obj['sip_auth_password'] = $sipAuthPassword;
+        $obj['sipAuthPassword'] = $sipAuthPassword;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class Target implements BaseModel
     public function withSipAuthUsername(string $sipAuthUsername): self
     {
         $obj = clone $this;
-        $obj['sip_auth_username'] = $sipAuthUsername;
+        $obj['sipAuthUsername'] = $sipAuthUsername;
 
         return $obj;
     }

@@ -59,13 +59,13 @@ final class RecordingsService implements RecordingsContract
      *
      * @param array{
      *   filter?: array{
-     *     call_leg_id?: string,
-     *     call_session_id?: string,
-     *     conference_id?: string,
-     *     connection_id?: string,
-     *     created_at?: array{gte?: string, lte?: string},
+     *     callLegID?: string,
+     *     callSessionID?: string,
+     *     conferenceID?: string,
+     *     connectionID?: string,
+     *     createdAt?: array{gte?: string, lte?: string},
      *     from?: string,
-     *     sip_call_id?: string,
+     *     sipCallID?: string,
      *     to?: string,
      *   },
      *   page?: array{number?: int, size?: int},

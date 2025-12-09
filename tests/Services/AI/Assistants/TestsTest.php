@@ -78,9 +78,9 @@ final class TestsTest extends TestCase
                 ],
             ],
             'description' => 'description',
-            'max_duration_seconds' => 1,
-            'telnyx_conversation_channel' => TelnyxConversationChannel::WEB_CHAT,
-            'test_suite' => 'test_suite',
+            'maxDurationSeconds' => 1,
+            'telnyxConversationChannel' => TelnyxConversationChannel::WEB_CHAT,
+            'testSuite' => 'test_suite',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\OAuthClients\OAuthClientCreateParams;
 use Telnyx\OAuthClients\OAuthClientCreateParams\AllowedGrantType;
 use Telnyx\OAuthClients\OAuthClientCreateParams\ClientType;
@@ -34,15 +35,15 @@ final class OAuthClientsService implements OAuthClientsContract
      * Create a new OAuth client
      *
      * @param array{
-     *   allowed_grant_types: list<'client_credentials'|'authorization_code'|'refresh_token'|AllowedGrantType>,
-     *   allowed_scopes: list<string>,
-     *   client_type: 'public'|'confidential'|ClientType,
+     *   allowedGrantTypes: list<'client_credentials'|'authorization_code'|'refresh_token'|AllowedGrantType>,
+     *   allowedScopes: list<string>,
+     *   clientType: 'public'|'confidential'|ClientType,
      *   name: string,
-     *   logo_uri?: string,
-     *   policy_uri?: string,
-     *   redirect_uris?: list<string>,
-     *   require_pkce?: bool,
-     *   tos_uri?: string,
+     *   logoUri?: string,
+     *   policyUri?: string,
+     *   redirectUris?: list<string>,
+     *   requirePkce?: bool,
+     *   tosUri?: string,
      * }|OAuthClientCreateParams $params
      *
      * @throws APIException
@@ -96,14 +97,14 @@ final class OAuthClientsService implements OAuthClientsContract
      * Update an existing OAuth client
      *
      * @param array{
-     *   allowed_grant_types?: list<'client_credentials'|'authorization_code'|'refresh_token'|OAuthClientUpdateParams\AllowedGrantType>,
-     *   allowed_scopes?: list<string>,
-     *   logo_uri?: string,
+     *   allowedGrantTypes?: list<'client_credentials'|'authorization_code'|'refresh_token'|OAuthClientUpdateParams\AllowedGrantType>,
+     *   allowedScopes?: list<string>,
+     *   logoUri?: string,
      *   name?: string,
-     *   policy_uri?: string,
-     *   redirect_uris?: list<string>,
-     *   require_pkce?: bool,
-     *   tos_uri?: string,
+     *   policyUri?: string,
+     *   redirectUris?: list<string>,
+     *   requirePkce?: bool,
+     *   tosUri?: string,
      * }|OAuthClientUpdateParams $params
      *
      * @throws APIException
@@ -136,14 +137,14 @@ final class OAuthClientsService implements OAuthClientsContract
      * Retrieve a paginated list of OAuth clients for the authenticated user
      *
      * @param array{
-     *   filter_allowed_grant_types__contains_?: 'client_credentials'|'authorization_code'|'refresh_token'|FilterAllowedGrantTypesContains,
-     *   filter_client_id_?: string,
-     *   filter_client_type_?: 'confidential'|'public'|FilterClientType,
-     *   filter_name_?: string,
-     *   filter_name__contains_?: string,
-     *   filter_verified_?: bool,
-     *   page_number_?: int,
-     *   page_size_?: int,
+     *   filterAllowedGrantTypesContains?: 'client_credentials'|'authorization_code'|'refresh_token'|FilterAllowedGrantTypesContains,
+     *   filterClientID?: string,
+     *   filterClientType?: 'confidential'|'public'|FilterClientType,
+     *   filterName?: string,
+     *   filterNameContains?: string,
+     *   filterVerified?: bool,
+     *   pageNumber?: int,
+     *   pageSize?: int,
      * }|OAuthClientListParams $params
      *
      * @throws APIException
@@ -161,7 +162,19 @@ final class OAuthClientsService implements OAuthClientsContract
         $response = $this->client->request(
             method: 'get',
             path: 'oauth_clients',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'filterAllowedGrantTypesContains' => 'filter[allowed_grant_types][contains]',
+                    'filterClientID' => 'filter[client_id]',
+                    'filterClientType' => 'filter[client_type]',
+                    'filterName' => 'filter[name]',
+                    'filterNameContains' => 'filter[name][contains]',
+                    'filterVerified' => 'filter[verified]',
+                    'pageNumber' => 'page[number]',
+                    'pageSize' => 'page[size]',
+                ],
+            ),
             options: $options,
             convert: OAuthClientListResponse::class,
         );

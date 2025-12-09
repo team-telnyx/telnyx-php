@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type VerifiedNumberNewResponseShape = array{
- *   phone_number?: string|null, verification_method?: string|null
+ *   phoneNumber?: string|null, verificationMethod?: string|null
  * }
  */
 final class VerifiedNumberNewResponse implements BaseModel
@@ -18,11 +18,11 @@ final class VerifiedNumberNewResponse implements BaseModel
     /** @use SdkModel<VerifiedNumberNewResponseShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?string $phone_number;
+    #[Optional('phone_number')]
+    public ?string $phoneNumber;
 
-    #[Optional]
-    public ?string $verification_method;
+    #[Optional('verification_method')]
+    public ?string $verificationMethod;
 
     public function __construct()
     {
@@ -35,13 +35,13 @@ final class VerifiedNumberNewResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $phone_number = null,
-        ?string $verification_method = null
+        ?string $phoneNumber = null,
+        ?string $verificationMethod = null
     ): self {
         $obj = new self;
 
-        null !== $phone_number && $obj['phone_number'] = $phone_number;
-        null !== $verification_method && $obj['verification_method'] = $verification_method;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
+        null !== $verificationMethod && $obj['verificationMethod'] = $verificationMethod;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class VerifiedNumberNewResponse implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -57,7 +57,7 @@ final class VerifiedNumberNewResponse implements BaseModel
     public function withVerificationMethod(string $verificationMethod): self
     {
         $obj = clone $this;
-        $obj['verification_method'] = $verificationMethod;
+        $obj['verificationMethod'] = $verificationMethod;
 
         return $obj;
     }

@@ -40,16 +40,16 @@ final class CommentListResponse implements BaseModel
      * @param list<Data|array{
      *   id: string,
      *   body: string,
-     *   created_at: string,
-     *   user_id: string,
-     *   portout_id?: string|null,
-     *   record_type?: string|null,
+     *   createdAt: string,
+     *   userID: string,
+     *   portoutID?: string|null,
+     *   recordType?: string|null,
      * }> $data
      * @param Metadata|array{
-     *   page_number?: float|null,
-     *   page_size?: float|null,
-     *   total_pages?: float|null,
-     *   total_results?: float|null,
+     *   pageNumber?: float|null,
+     *   pageSize?: float|null,
+     *   totalPages?: float|null,
+     *   totalResults?: float|null,
      * } $meta
      */
     public static function with(
@@ -68,10 +68,10 @@ final class CommentListResponse implements BaseModel
      * @param list<Data|array{
      *   id: string,
      *   body: string,
-     *   created_at: string,
-     *   user_id: string,
-     *   portout_id?: string|null,
-     *   record_type?: string|null,
+     *   createdAt: string,
+     *   userID: string,
+     *   portoutID?: string|null,
+     *   recordType?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -84,10 +84,10 @@ final class CommentListResponse implements BaseModel
 
     /**
      * @param Metadata|array{
-     *   page_number?: float|null,
-     *   page_size?: float|null,
-     *   total_pages?: float|null,
-     *   total_results?: float|null,
+     *   pageNumber?: float|null,
+     *   pageSize?: float|null,
+     *   totalPages?: float|null,
+     *   totalResults?: float|null,
      * } $meta
      */
     public function withMeta(Metadata|array $meta): self

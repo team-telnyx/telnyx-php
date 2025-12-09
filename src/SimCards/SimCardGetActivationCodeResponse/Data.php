@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   activation_code?: string|null, record_type?: string|null
+ *   activationCode?: string|null, recordType?: string|null
  * }
  */
 final class Data implements BaseModel
@@ -21,11 +21,11 @@ final class Data implements BaseModel
     /**
      * Contents of the eSIM activation QR code.
      */
-    #[Optional]
-    public ?string $activation_code;
+    #[Optional('activation_code')]
+    public ?string $activationCode;
 
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     public function __construct()
     {
@@ -38,13 +38,13 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $activation_code = null,
-        ?string $record_type = null
+        ?string $activationCode = null,
+        ?string $recordType = null
     ): self {
         $obj = new self;
 
-        null !== $activation_code && $obj['activation_code'] = $activation_code;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $activationCode && $obj['activationCode'] = $activationCode;
+        null !== $recordType && $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -55,7 +55,7 @@ final class Data implements BaseModel
     public function withActivationCode(string $activationCode): self
     {
         $obj = clone $this;
-        $obj['activation_code'] = $activationCode;
+        $obj['activationCode'] = $activationCode;
 
         return $obj;
     }
@@ -63,7 +63,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

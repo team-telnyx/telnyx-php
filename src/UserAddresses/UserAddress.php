@@ -11,22 +11,22 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type UserAddressShape = array{
  *   id?: string|null,
- *   administrative_area?: string|null,
+ *   administrativeArea?: string|null,
  *   borough?: string|null,
- *   business_name?: string|null,
- *   country_code?: string|null,
- *   created_at?: string|null,
- *   customer_reference?: string|null,
- *   extended_address?: string|null,
- *   first_name?: string|null,
- *   last_name?: string|null,
+ *   businessName?: string|null,
+ *   countryCode?: string|null,
+ *   createdAt?: string|null,
+ *   customerReference?: string|null,
+ *   extendedAddress?: string|null,
+ *   firstName?: string|null,
+ *   lastName?: string|null,
  *   locality?: string|null,
  *   neighborhood?: string|null,
- *   phone_number?: string|null,
- *   postal_code?: string|null,
- *   record_type?: string|null,
- *   street_address?: string|null,
- *   updated_at?: string|null,
+ *   phoneNumber?: string|null,
+ *   postalCode?: string|null,
+ *   recordType?: string|null,
+ *   streetAddress?: string|null,
+ *   updatedAt?: string|null,
  * }
  */
 final class UserAddress implements BaseModel
@@ -43,8 +43,8 @@ final class UserAddress implements BaseModel
     /**
      * The locality of the user address. For US addresses, this corresponds to the state of the address.
      */
-    #[Optional]
-    public ?string $administrative_area;
+    #[Optional('administrative_area')]
+    public ?string $administrativeArea;
 
     /**
      * The borough of the user address. This field is not used for addresses in the US but is used for some international addresses.
@@ -55,44 +55,44 @@ final class UserAddress implements BaseModel
     /**
      * The business name associated with the user address.
      */
-    #[Optional]
-    public ?string $business_name;
+    #[Optional('business_name')]
+    public ?string $businessName;
 
     /**
      * The two-character (ISO 3166-1 alpha-2) country code of the user address.
      */
-    #[Optional]
-    public ?string $country_code;
+    #[Optional('country_code')]
+    public ?string $countryCode;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Optional]
-    public ?string $created_at;
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
     /**
      * A customer reference string for customer look ups.
      */
-    #[Optional]
-    public ?string $customer_reference;
+    #[Optional('customer_reference')]
+    public ?string $customerReference;
 
     /**
      * Additional street address information about the user address such as, but not limited to, unit number or apartment number.
      */
-    #[Optional]
-    public ?string $extended_address;
+    #[Optional('extended_address')]
+    public ?string $extendedAddress;
 
     /**
      * The first name associated with the user address.
      */
-    #[Optional]
-    public ?string $first_name;
+    #[Optional('first_name')]
+    public ?string $firstName;
 
     /**
      * The last name associated with the user address.
      */
-    #[Optional]
-    public ?string $last_name;
+    #[Optional('last_name')]
+    public ?string $lastName;
 
     /**
      * The locality of the user address. For US addresses, this corresponds to the city of the address.
@@ -109,32 +109,32 @@ final class UserAddress implements BaseModel
     /**
      * The phone number associated with the user address.
      */
-    #[Optional]
-    public ?string $phone_number;
+    #[Optional('phone_number')]
+    public ?string $phoneNumber;
 
     /**
      * The postal code of the user address.
      */
-    #[Optional]
-    public ?string $postal_code;
+    #[Optional('postal_code')]
+    public ?string $postalCode;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * The primary street address information about the user address.
      */
-    #[Optional]
-    public ?string $street_address;
+    #[Optional('street_address')]
+    public ?string $streetAddress;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Optional]
-    public ?string $updated_at;
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     public function __construct()
     {
@@ -148,42 +148,42 @@ final class UserAddress implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $administrative_area = null,
+        ?string $administrativeArea = null,
         ?string $borough = null,
-        ?string $business_name = null,
-        ?string $country_code = null,
-        ?string $created_at = null,
-        ?string $customer_reference = null,
-        ?string $extended_address = null,
-        ?string $first_name = null,
-        ?string $last_name = null,
+        ?string $businessName = null,
+        ?string $countryCode = null,
+        ?string $createdAt = null,
+        ?string $customerReference = null,
+        ?string $extendedAddress = null,
+        ?string $firstName = null,
+        ?string $lastName = null,
         ?string $locality = null,
         ?string $neighborhood = null,
-        ?string $phone_number = null,
-        ?string $postal_code = null,
-        ?string $record_type = null,
-        ?string $street_address = null,
-        ?string $updated_at = null,
+        ?string $phoneNumber = null,
+        ?string $postalCode = null,
+        ?string $recordType = null,
+        ?string $streetAddress = null,
+        ?string $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $administrative_area && $obj['administrative_area'] = $administrative_area;
+        null !== $administrativeArea && $obj['administrativeArea'] = $administrativeArea;
         null !== $borough && $obj['borough'] = $borough;
-        null !== $business_name && $obj['business_name'] = $business_name;
-        null !== $country_code && $obj['country_code'] = $country_code;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
-        null !== $extended_address && $obj['extended_address'] = $extended_address;
-        null !== $first_name && $obj['first_name'] = $first_name;
-        null !== $last_name && $obj['last_name'] = $last_name;
+        null !== $businessName && $obj['businessName'] = $businessName;
+        null !== $countryCode && $obj['countryCode'] = $countryCode;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
+        null !== $extendedAddress && $obj['extendedAddress'] = $extendedAddress;
+        null !== $firstName && $obj['firstName'] = $firstName;
+        null !== $lastName && $obj['lastName'] = $lastName;
         null !== $locality && $obj['locality'] = $locality;
         null !== $neighborhood && $obj['neighborhood'] = $neighborhood;
-        null !== $phone_number && $obj['phone_number'] = $phone_number;
-        null !== $postal_code && $obj['postal_code'] = $postal_code;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $street_address && $obj['street_address'] = $street_address;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
+        null !== $postalCode && $obj['postalCode'] = $postalCode;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $streetAddress && $obj['streetAddress'] = $streetAddress;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -205,7 +205,7 @@ final class UserAddress implements BaseModel
     public function withAdministrativeArea(string $administrativeArea): self
     {
         $obj = clone $this;
-        $obj['administrative_area'] = $administrativeArea;
+        $obj['administrativeArea'] = $administrativeArea;
 
         return $obj;
     }
@@ -227,7 +227,7 @@ final class UserAddress implements BaseModel
     public function withBusinessName(string $businessName): self
     {
         $obj = clone $this;
-        $obj['business_name'] = $businessName;
+        $obj['businessName'] = $businessName;
 
         return $obj;
     }
@@ -238,7 +238,7 @@ final class UserAddress implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj['country_code'] = $countryCode;
+        $obj['countryCode'] = $countryCode;
 
         return $obj;
     }
@@ -249,7 +249,7 @@ final class UserAddress implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -260,7 +260,7 @@ final class UserAddress implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }
@@ -271,7 +271,7 @@ final class UserAddress implements BaseModel
     public function withExtendedAddress(string $extendedAddress): self
     {
         $obj = clone $this;
-        $obj['extended_address'] = $extendedAddress;
+        $obj['extendedAddress'] = $extendedAddress;
 
         return $obj;
     }
@@ -282,7 +282,7 @@ final class UserAddress implements BaseModel
     public function withFirstName(string $firstName): self
     {
         $obj = clone $this;
-        $obj['first_name'] = $firstName;
+        $obj['firstName'] = $firstName;
 
         return $obj;
     }
@@ -293,7 +293,7 @@ final class UserAddress implements BaseModel
     public function withLastName(string $lastName): self
     {
         $obj = clone $this;
-        $obj['last_name'] = $lastName;
+        $obj['lastName'] = $lastName;
 
         return $obj;
     }
@@ -326,7 +326,7 @@ final class UserAddress implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -337,7 +337,7 @@ final class UserAddress implements BaseModel
     public function withPostalCode(string $postalCode): self
     {
         $obj = clone $this;
-        $obj['postal_code'] = $postalCode;
+        $obj['postalCode'] = $postalCode;
 
         return $obj;
     }
@@ -348,7 +348,7 @@ final class UserAddress implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -359,7 +359,7 @@ final class UserAddress implements BaseModel
     public function withStreetAddress(string $streetAddress): self
     {
         $obj = clone $this;
-        $obj['street_address'] = $streetAddress;
+        $obj['streetAddress'] = $streetAddress;
 
         return $obj;
     }
@@ -370,7 +370,7 @@ final class UserAddress implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

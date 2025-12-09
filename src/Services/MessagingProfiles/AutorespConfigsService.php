@@ -7,6 +7,7 @@ namespace Telnyx\Services\MessagingProfiles;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigCreateParams;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigCreateParams\Op;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigDeleteParams;
@@ -31,10 +32,10 @@ final class AutorespConfigsService implements AutorespConfigsContract
      * Create Auto-Reponse Setting
      *
      * @param array{
-     *   country_code: string,
+     *   countryCode: string,
      *   keywords: list<string>,
      *   op: 'start'|'stop'|'info'|Op,
-     *   resp_text?: string,
+     *   respText?: string,
      * }|AutorespConfigCreateParams $params
      *
      * @throws APIException
@@ -66,7 +67,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
      *
      * Get Auto-Response Setting
      *
-     * @param array{profile_id: string}|AutorespConfigRetrieveParams $params
+     * @param array{profileID: string}|AutorespConfigRetrieveParams $params
      *
      * @throws APIException
      */
@@ -79,8 +80,8 @@ final class AutorespConfigsService implements AutorespConfigsContract
             $params,
             $requestOptions,
         );
-        $profileID = $parsed['profile_id'];
-        unset($parsed['profile_id']);
+        $profileID = $parsed['profileID'];
+        unset($parsed['profileID']);
 
         /** @var BaseResponse<AutoRespConfigResponse> */
         $response = $this->client->request(
@@ -103,11 +104,11 @@ final class AutorespConfigsService implements AutorespConfigsContract
      * Update Auto-Response Setting
      *
      * @param array{
-     *   profile_id: string,
-     *   country_code: string,
+     *   profileID: string,
+     *   countryCode: string,
      *   keywords: list<string>,
      *   op: 'start'|'stop'|'info'|AutorespConfigUpdateParams\Op,
-     *   resp_text?: string,
+     *   respText?: string,
      * }|AutorespConfigUpdateParams $params
      *
      * @throws APIException
@@ -121,8 +122,8 @@ final class AutorespConfigsService implements AutorespConfigsContract
             $params,
             $requestOptions,
         );
-        $profileID = $parsed['profile_id'];
-        unset($parsed['profile_id']);
+        $profileID = $parsed['profileID'];
+        unset($parsed['profileID']);
 
         /** @var BaseResponse<AutoRespConfigResponse> */
         $response = $this->client->request(
@@ -132,7 +133,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
                 $profileID,
                 $autorespCfgID,
             ],
-            body: (object) array_diff_key($parsed, ['profile_id']),
+            body: (object) array_diff_key($parsed, ['profileID']),
             options: $options,
             convert: AutoRespConfigResponse::class,
         );
@@ -146,9 +147,9 @@ final class AutorespConfigsService implements AutorespConfigsContract
      * List Auto-Response Settings
      *
      * @param array{
-     *   country_code?: string,
-     *   created_at?: array{gte?: string, lte?: string},
-     *   updated_at?: array{gte?: string, lte?: string},
+     *   countryCode?: string,
+     *   createdAt?: array{gte?: string, lte?: string},
+     *   updatedAt?: array{gte?: string, lte?: string},
      * }|AutorespConfigListParams $params
      *
      * @throws APIException
@@ -167,7 +168,14 @@ final class AutorespConfigsService implements AutorespConfigsContract
         $response = $this->client->request(
             method: 'get',
             path: ['messaging_profiles/%1$s/autoresp_configs', $profileID],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'countryCode' => 'country_code',
+                    'createdAt' => 'created_at',
+                    'updatedAt' => 'updated_at',
+                ],
+            ),
             options: $options,
             convert: AutorespConfigListResponse::class,
         );
@@ -180,7 +188,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
      *
      * Delete Auto-Response Setting
      *
-     * @param array{profile_id: string}|AutorespConfigDeleteParams $params
+     * @param array{profileID: string}|AutorespConfigDeleteParams $params
      *
      * @throws APIException
      */
@@ -193,8 +201,8 @@ final class AutorespConfigsService implements AutorespConfigsContract
             $params,
             $requestOptions,
         );
-        $profileID = $parsed['profile_id'];
-        unset($parsed['profile_id']);
+        $profileID = $parsed['profileID'];
+        unset($parsed['profileID']);
 
         /** @var BaseResponse<string> */
         $response = $this->client->request(

@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type FromShape = array{
- *   agent_id?: string|null, agent_name?: string|null, carrier?: string|null
+ *   agentID?: string|null, agentName?: string|null, carrier?: string|null
  * }
  */
 final class From implements BaseModel
@@ -21,11 +21,11 @@ final class From implements BaseModel
     /**
      * agent ID.
      */
-    #[Optional]
-    public ?string $agent_id;
+    #[Optional('agent_id')]
+    public ?string $agentID;
 
-    #[Optional]
-    public ?string $agent_name;
+    #[Optional('agent_name')]
+    public ?string $agentName;
 
     #[Optional]
     public ?string $carrier;
@@ -41,14 +41,14 @@ final class From implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $agent_id = null,
-        ?string $agent_name = null,
+        ?string $agentID = null,
+        ?string $agentName = null,
         ?string $carrier = null
     ): self {
         $obj = new self;
 
-        null !== $agent_id && $obj['agent_id'] = $agent_id;
-        null !== $agent_name && $obj['agent_name'] = $agent_name;
+        null !== $agentID && $obj['agentID'] = $agentID;
+        null !== $agentName && $obj['agentName'] = $agentName;
         null !== $carrier && $obj['carrier'] = $carrier;
 
         return $obj;
@@ -60,7 +60,7 @@ final class From implements BaseModel
     public function withAgentID(string $agentID): self
     {
         $obj = clone $this;
-        $obj['agent_id'] = $agentID;
+        $obj['agentID'] = $agentID;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class From implements BaseModel
     public function withAgentName(string $agentName): self
     {
         $obj = clone $this;
-        $obj['agent_name'] = $agentName;
+        $obj['agentName'] = $agentName;
 
         return $obj;
     }

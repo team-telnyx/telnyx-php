@@ -37,13 +37,13 @@ final class ActivationJobGetResponse implements BaseModel
      *
      * @param PortingOrdersActivationJob|array{
      *   id?: string|null,
-     *   activate_at?: \DateTimeInterface|null,
-     *   activation_type?: value-of<ActivationType>|null,
-     *   activation_windows?: list<ActivationWindow>|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   record_type?: string|null,
+     *   activateAt?: \DateTimeInterface|null,
+     *   activationType?: value-of<ActivationType>|null,
+     *   activationWindows?: list<ActivationWindow>|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   recordType?: string|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(
@@ -59,13 +59,13 @@ final class ActivationJobGetResponse implements BaseModel
     /**
      * @param PortingOrdersActivationJob|array{
      *   id?: string|null,
-     *   activate_at?: \DateTimeInterface|null,
-     *   activation_type?: value-of<ActivationType>|null,
-     *   activation_windows?: list<ActivationWindow>|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   record_type?: string|null,
+     *   activateAt?: \DateTimeInterface|null,
+     *   activationType?: value-of<ActivationType>|null,
+     *   activationWindows?: list<ActivationWindow>|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   recordType?: string|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(PortingOrdersActivationJob|array $data): self

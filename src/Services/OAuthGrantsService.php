@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\OAuthGrants\OAuthGrantDeleteResponse;
 use Telnyx\OAuthGrants\OAuthGrantGetResponse;
 use Telnyx\OAuthGrants\OAuthGrantListParams;
@@ -48,7 +49,7 @@ final class OAuthGrantsService implements OAuthGrantsContract
      *
      * Retrieve a paginated list of OAuth grants for the authenticated user
      *
-     * @param array{page_number_?: int, page_size_?: int}|OAuthGrantListParams $params
+     * @param array{pageNumber?: int, pageSize?: int}|OAuthGrantListParams $params
      *
      * @throws APIException
      */
@@ -65,7 +66,10 @@ final class OAuthGrantsService implements OAuthGrantsContract
         $response = $this->client->request(
             method: 'get',
             path: 'oauth_grants',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: OAuthGrantListResponse::class,
         );

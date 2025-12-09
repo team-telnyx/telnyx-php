@@ -17,20 +17,20 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams\AdditionalDa
  * @see Telnyx\Services\CustomerServiceRecordsService::create()
  *
  * @phpstan-type CustomerServiceRecordCreateParamsShape = array{
- *   phone_number: string,
- *   additional_data?: AdditionalData|array{
- *     account_number?: string|null,
- *     address_line_1?: string|null,
- *     authorized_person_name?: string|null,
- *     billing_phone_number?: string|null,
+ *   phoneNumber: string,
+ *   additionalData?: AdditionalData|array{
+ *     accountNumber?: string|null,
+ *     addressLine1?: string|null,
+ *     authorizedPersonName?: string|null,
+ *     billingPhoneNumber?: string|null,
  *     city?: string|null,
- *     customer_code?: string|null,
+ *     customerCode?: string|null,
  *     name?: string|null,
  *     pin?: string|null,
  *     state?: string|null,
- *     zip_code?: string|null,
+ *     zipCode?: string|null,
  *   },
- *   webhook_url?: string,
+ *   webhookURL?: string,
  * }
  */
 final class CustomerServiceRecordCreateParams implements BaseModel
@@ -42,24 +42,24 @@ final class CustomerServiceRecordCreateParams implements BaseModel
     /**
      * A valid US phone number in E164 format.
      */
-    #[Required]
-    public string $phone_number;
+    #[Required('phone_number')]
+    public string $phoneNumber;
 
-    #[Optional]
-    public ?AdditionalData $additional_data;
+    #[Optional('additional_data')]
+    public ?AdditionalData $additionalData;
 
     /**
      * Callback URL to receive webhook notifications.
      */
-    #[Optional]
-    public ?string $webhook_url;
+    #[Optional('webhook_url')]
+    public ?string $webhookURL;
 
     /**
      * `new CustomerServiceRecordCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * CustomerServiceRecordCreateParams::with(phone_number: ...)
+     * CustomerServiceRecordCreateParams::with(phoneNumber: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -79,29 +79,29 @@ final class CustomerServiceRecordCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param AdditionalData|array{
-     *   account_number?: string|null,
-     *   address_line_1?: string|null,
-     *   authorized_person_name?: string|null,
-     *   billing_phone_number?: string|null,
+     *   accountNumber?: string|null,
+     *   addressLine1?: string|null,
+     *   authorizedPersonName?: string|null,
+     *   billingPhoneNumber?: string|null,
      *   city?: string|null,
-     *   customer_code?: string|null,
+     *   customerCode?: string|null,
      *   name?: string|null,
      *   pin?: string|null,
      *   state?: string|null,
-     *   zip_code?: string|null,
-     * } $additional_data
+     *   zipCode?: string|null,
+     * } $additionalData
      */
     public static function with(
-        string $phone_number,
-        AdditionalData|array|null $additional_data = null,
-        ?string $webhook_url = null,
+        string $phoneNumber,
+        AdditionalData|array|null $additionalData = null,
+        ?string $webhookURL = null,
     ): self {
         $obj = new self;
 
-        $obj['phone_number'] = $phone_number;
+        $obj['phoneNumber'] = $phoneNumber;
 
-        null !== $additional_data && $obj['additional_data'] = $additional_data;
-        null !== $webhook_url && $obj['webhook_url'] = $webhook_url;
+        null !== $additionalData && $obj['additionalData'] = $additionalData;
+        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
 
         return $obj;
     }
@@ -112,30 +112,30 @@ final class CustomerServiceRecordCreateParams implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
 
     /**
      * @param AdditionalData|array{
-     *   account_number?: string|null,
-     *   address_line_1?: string|null,
-     *   authorized_person_name?: string|null,
-     *   billing_phone_number?: string|null,
+     *   accountNumber?: string|null,
+     *   addressLine1?: string|null,
+     *   authorizedPersonName?: string|null,
+     *   billingPhoneNumber?: string|null,
      *   city?: string|null,
-     *   customer_code?: string|null,
+     *   customerCode?: string|null,
      *   name?: string|null,
      *   pin?: string|null,
      *   state?: string|null,
-     *   zip_code?: string|null,
+     *   zipCode?: string|null,
      * } $additionalData
      */
     public function withAdditionalData(
         AdditionalData|array $additionalData
     ): self {
         $obj = clone $this;
-        $obj['additional_data'] = $additionalData;
+        $obj['additionalData'] = $additionalData;
 
         return $obj;
     }
@@ -146,7 +146,7 @@ final class CustomerServiceRecordCreateParams implements BaseModel
     public function withWebhookURL(string $webhookURL): self
     {
         $obj = clone $this;
-        $obj['webhook_url'] = $webhookURL;
+        $obj['webhookURL'] = $webhookURL;
 
         return $obj;
     }

@@ -18,10 +18,10 @@ use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Sort;
  *
  * @phpstan-type PhoneNumberCampaignListParamsShape = array{
  *   filter?: Filter|array{
- *     tcr_brand_id?: string|null,
- *     tcr_campaign_id?: string|null,
- *     telnyx_brand_id?: string|null,
- *     telnyx_campaign_id?: string|null,
+ *     tcrBrandID?: string|null,
+ *     tcrCampaignID?: string|null,
+ *     telnyxBrandID?: string|null,
+ *     telnyxCampaignID?: string|null,
  *   },
  *   page?: int,
  *   recordsPerPage?: int,
@@ -65,10 +65,10 @@ final class PhoneNumberCampaignListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   tcr_brand_id?: string|null,
-     *   tcr_campaign_id?: string|null,
-     *   telnyx_brand_id?: string|null,
-     *   telnyx_campaign_id?: string|null,
+     *   tcrBrandID?: string|null,
+     *   tcrCampaignID?: string|null,
+     *   telnyxBrandID?: string|null,
+     *   telnyxCampaignID?: string|null,
      * } $filter
      * @param Sort|value-of<Sort> $sort
      */
@@ -92,10 +92,10 @@ final class PhoneNumberCampaignListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[telnyx_campaign_id], filter[telnyx_brand_id], filter[tcr_campaign_id], filter[tcr_brand_id].
      *
      * @param Filter|array{
-     *   tcr_brand_id?: string|null,
-     *   tcr_campaign_id?: string|null,
-     *   telnyx_brand_id?: string|null,
-     *   telnyx_campaign_id?: string|null,
+     *   tcrBrandID?: string|null,
+     *   tcrCampaignID?: string|null,
+     *   telnyxBrandID?: string|null,
+     *   telnyxCampaignID?: string|null,
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

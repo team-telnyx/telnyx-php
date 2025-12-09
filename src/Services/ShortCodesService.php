@@ -51,7 +51,7 @@ final class ShortCodesService implements ShortCodesContract
      * To add or update tags, include the tags field as an array of strings.
      *
      * @param array{
-     *   messaging_profile_id: string, tags?: list<string>
+     *   messagingProfileID: string, tags?: list<string>
      * }|ShortCodeUpdateParams $params
      *
      * @throws APIException
@@ -84,7 +84,7 @@ final class ShortCodesService implements ShortCodesContract
      * List short codes
      *
      * @param array{
-     *   filter?: array{messaging_profile_id?: string},
+     *   filter?: array{messagingProfileID?: string},
      *   page?: array{number?: int, size?: int},
      * }|ShortCodeListParams $params
      *

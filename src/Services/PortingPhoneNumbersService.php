@@ -27,7 +27,7 @@ final class PortingPhoneNumbersService implements PortingPhoneNumbersContract
      *
      * @param array{
      *   filter?: array{
-     *     porting_order_status?: 'draft'|'in-process'|'submitted'|'exception'|'foc-date-confirmed'|'cancel-pending'|'ported'|'cancelled'|PortingOrderStatus,
+     *     portingOrderStatus?: 'draft'|'in-process'|'submitted'|'exception'|'foc-date-confirmed'|'cancel-pending'|'ported'|'cancelled'|PortingOrderStatus,
      *   },
      *   page?: array{number?: int, size?: int},
      * }|PortingPhoneNumberListParams $params

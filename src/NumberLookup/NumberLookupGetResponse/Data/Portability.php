@@ -12,17 +12,17 @@ use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Portability\PortedStatus;
 /**
  * @phpstan-type PortabilityShape = array{
  *   altspid?: string|null,
- *   altspid_carrier_name?: string|null,
- *   altspid_carrier_type?: string|null,
+ *   altspidCarrierName?: string|null,
+ *   altspidCarrierType?: string|null,
  *   city?: string|null,
- *   line_type?: string|null,
+ *   lineType?: string|null,
  *   lrn?: string|null,
  *   ocn?: string|null,
- *   ported_date?: string|null,
- *   ported_status?: value-of<PortedStatus>|null,
+ *   portedDate?: string|null,
+ *   portedStatus?: value-of<PortedStatus>|null,
  *   spid?: string|null,
- *   spid_carrier_name?: string|null,
- *   spid_carrier_type?: string|null,
+ *   spidCarrierName?: string|null,
+ *   spidCarrierType?: string|null,
  *   state?: string|null,
  * }
  */
@@ -40,14 +40,14 @@ final class Portability implements BaseModel
     /**
      * Alternative service provider name.
      */
-    #[Optional]
-    public ?string $altspid_carrier_name;
+    #[Optional('altspid_carrier_name')]
+    public ?string $altspidCarrierName;
 
     /**
      * Alternative service provider type.
      */
-    #[Optional]
-    public ?string $altspid_carrier_type;
+    #[Optional('altspid_carrier_type')]
+    public ?string $altspidCarrierType;
 
     /**
      * City name extracted from the locality in the Local Exchange Routing Guide (LERG) database.
@@ -58,8 +58,8 @@ final class Portability implements BaseModel
     /**
      * Type of number.
      */
-    #[Optional]
-    public ?string $line_type;
+    #[Optional('line_type')]
+    public ?string $lineType;
 
     /**
      * Local Routing Number, if assigned to the requested phone number.
@@ -76,16 +76,16 @@ final class Portability implements BaseModel
     /**
      * ISO-formatted date when the requested phone number has been ported.
      */
-    #[Optional]
-    public ?string $ported_date;
+    #[Optional('ported_date')]
+    public ?string $portedDate;
 
     /**
      * Indicates whether or not the requested phone number has been ported.
      *
-     * @var value-of<PortedStatus>|null $ported_status
+     * @var value-of<PortedStatus>|null $portedStatus
      */
-    #[Optional(enum: PortedStatus::class)]
-    public ?string $ported_status;
+    #[Optional('ported_status', enum: PortedStatus::class)]
+    public ?string $portedStatus;
 
     /**
      * SPID (Service Provider ID).
@@ -96,14 +96,14 @@ final class Portability implements BaseModel
     /**
      * Service provider name.
      */
-    #[Optional]
-    public ?string $spid_carrier_name;
+    #[Optional('spid_carrier_name')]
+    public ?string $spidCarrierName;
 
     /**
      * Service provider type.
      */
-    #[Optional]
-    public ?string $spid_carrier_type;
+    #[Optional('spid_carrier_type')]
+    public ?string $spidCarrierType;
 
     #[Optional]
     public ?string $state;
@@ -118,37 +118,37 @@ final class Portability implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortedStatus|value-of<PortedStatus> $ported_status
+     * @param PortedStatus|value-of<PortedStatus> $portedStatus
      */
     public static function with(
         ?string $altspid = null,
-        ?string $altspid_carrier_name = null,
-        ?string $altspid_carrier_type = null,
+        ?string $altspidCarrierName = null,
+        ?string $altspidCarrierType = null,
         ?string $city = null,
-        ?string $line_type = null,
+        ?string $lineType = null,
         ?string $lrn = null,
         ?string $ocn = null,
-        ?string $ported_date = null,
-        PortedStatus|string|null $ported_status = null,
+        ?string $portedDate = null,
+        PortedStatus|string|null $portedStatus = null,
         ?string $spid = null,
-        ?string $spid_carrier_name = null,
-        ?string $spid_carrier_type = null,
+        ?string $spidCarrierName = null,
+        ?string $spidCarrierType = null,
         ?string $state = null,
     ): self {
         $obj = new self;
 
         null !== $altspid && $obj['altspid'] = $altspid;
-        null !== $altspid_carrier_name && $obj['altspid_carrier_name'] = $altspid_carrier_name;
-        null !== $altspid_carrier_type && $obj['altspid_carrier_type'] = $altspid_carrier_type;
+        null !== $altspidCarrierName && $obj['altspidCarrierName'] = $altspidCarrierName;
+        null !== $altspidCarrierType && $obj['altspidCarrierType'] = $altspidCarrierType;
         null !== $city && $obj['city'] = $city;
-        null !== $line_type && $obj['line_type'] = $line_type;
+        null !== $lineType && $obj['lineType'] = $lineType;
         null !== $lrn && $obj['lrn'] = $lrn;
         null !== $ocn && $obj['ocn'] = $ocn;
-        null !== $ported_date && $obj['ported_date'] = $ported_date;
-        null !== $ported_status && $obj['ported_status'] = $ported_status;
+        null !== $portedDate && $obj['portedDate'] = $portedDate;
+        null !== $portedStatus && $obj['portedStatus'] = $portedStatus;
         null !== $spid && $obj['spid'] = $spid;
-        null !== $spid_carrier_name && $obj['spid_carrier_name'] = $spid_carrier_name;
-        null !== $spid_carrier_type && $obj['spid_carrier_type'] = $spid_carrier_type;
+        null !== $spidCarrierName && $obj['spidCarrierName'] = $spidCarrierName;
+        null !== $spidCarrierType && $obj['spidCarrierType'] = $spidCarrierType;
         null !== $state && $obj['state'] = $state;
 
         return $obj;
@@ -171,7 +171,7 @@ final class Portability implements BaseModel
     public function withAltspidCarrierName(string $altspidCarrierName): self
     {
         $obj = clone $this;
-        $obj['altspid_carrier_name'] = $altspidCarrierName;
+        $obj['altspidCarrierName'] = $altspidCarrierName;
 
         return $obj;
     }
@@ -182,7 +182,7 @@ final class Portability implements BaseModel
     public function withAltspidCarrierType(string $altspidCarrierType): self
     {
         $obj = clone $this;
-        $obj['altspid_carrier_type'] = $altspidCarrierType;
+        $obj['altspidCarrierType'] = $altspidCarrierType;
 
         return $obj;
     }
@@ -204,7 +204,7 @@ final class Portability implements BaseModel
     public function withLineType(string $lineType): self
     {
         $obj = clone $this;
-        $obj['line_type'] = $lineType;
+        $obj['lineType'] = $lineType;
 
         return $obj;
     }
@@ -237,7 +237,7 @@ final class Portability implements BaseModel
     public function withPortedDate(string $portedDate): self
     {
         $obj = clone $this;
-        $obj['ported_date'] = $portedDate;
+        $obj['portedDate'] = $portedDate;
 
         return $obj;
     }
@@ -250,7 +250,7 @@ final class Portability implements BaseModel
     public function withPortedStatus(PortedStatus|string $portedStatus): self
     {
         $obj = clone $this;
-        $obj['ported_status'] = $portedStatus;
+        $obj['portedStatus'] = $portedStatus;
 
         return $obj;
     }
@@ -272,7 +272,7 @@ final class Portability implements BaseModel
     public function withSpidCarrierName(string $spidCarrierName): self
     {
         $obj = clone $this;
-        $obj['spid_carrier_name'] = $spidCarrierName;
+        $obj['spidCarrierName'] = $spidCarrierName;
 
         return $obj;
     }
@@ -283,7 +283,7 @@ final class Portability implements BaseModel
     public function withSpidCarrierType(string $spidCarrierType): self
     {
         $obj = clone $this;
-        $obj['spid_carrier_type'] = $spidCarrierType;
+        $obj['spidCarrierType'] = $spidCarrierType;
 
         return $obj;
     }

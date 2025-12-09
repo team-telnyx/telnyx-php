@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[wireguard_interface_id].
  *
- * @phpstan-type FilterShape = array{wireguard_interface_id?: string|null}
+ * @phpstan-type FilterShape = array{wireguardInterfaceID?: string|null}
  */
 final class Filter implements BaseModel
 {
@@ -21,8 +21,8 @@ final class Filter implements BaseModel
     /**
      * The id of the associated WireGuard interface to filter on.
      */
-    #[Optional]
-    public ?string $wireguard_interface_id;
+    #[Optional('wireguard_interface_id')]
+    public ?string $wireguardInterfaceID;
 
     public function __construct()
     {
@@ -34,11 +34,11 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $wireguard_interface_id = null): self
+    public static function with(?string $wireguardInterfaceID = null): self
     {
         $obj = new self;
 
-        null !== $wireguard_interface_id && $obj['wireguard_interface_id'] = $wireguard_interface_id;
+        null !== $wireguardInterfaceID && $obj['wireguardInterfaceID'] = $wireguardInterfaceID;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class Filter implements BaseModel
     public function withWireguardInterfaceID(string $wireguardInterfaceID): self
     {
         $obj = clone $this;
-        $obj['wireguard_interface_id'] = $wireguardInterfaceID;
+        $obj['wireguardInterfaceID'] = $wireguardInterfaceID;
 
         return $obj;
     }

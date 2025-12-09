@@ -37,11 +37,11 @@ final class SimCardDataUsageNotificationDeleteResponse implements BaseModel
      *
      * @param SimCardDataUsageNotification|array{
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   record_type?: string|null,
-     *   sim_card_id?: string|null,
+     *   createdAt?: string|null,
+     *   recordType?: string|null,
+     *   simCardID?: string|null,
      *   threshold?: Threshold|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public static function with(
@@ -59,11 +59,11 @@ final class SimCardDataUsageNotificationDeleteResponse implements BaseModel
      *
      * @param SimCardDataUsageNotification|array{
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   record_type?: string|null,
-     *   sim_card_id?: string|null,
+     *   createdAt?: string|null,
+     *   recordType?: string|null,
+     *   simCardID?: string|null,
      *   threshold?: Threshold|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public function withData(SimCardDataUsageNotification|array $data): self

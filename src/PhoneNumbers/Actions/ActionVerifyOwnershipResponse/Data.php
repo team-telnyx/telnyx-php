@@ -12,8 +12,8 @@ use Telnyx\PhoneNumbers\Actions\ActionVerifyOwnershipResponse\Data\Found;
 /**
  * @phpstan-type DataShape = array{
  *   found?: list<Found>|null,
- *   not_found?: list<string>|null,
- *   record_type?: string|null,
+ *   notFound?: list<string>|null,
+ *   recordType?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -32,16 +32,16 @@ final class Data implements BaseModel
     /**
      * Phone numbers that are not found in the account.
      *
-     * @var list<string>|null $not_found
+     * @var list<string>|null $notFound
      */
-    #[Optional(list: 'string')]
-    public ?array $not_found;
+    #[Optional('not_found', list: 'string')]
+    public ?array $notFound;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     public function __construct()
     {
@@ -53,19 +53,19 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Found|array{id?: string|null, number_val_e164?: string|null}> $found
-     * @param list<string> $not_found
+     * @param list<Found|array{id?: string|null, numberValE164?: string|null}> $found
+     * @param list<string> $notFound
      */
     public static function with(
         ?array $found = null,
-        ?array $not_found = null,
-        ?string $record_type = null
+        ?array $notFound = null,
+        ?string $recordType = null
     ): self {
         $obj = new self;
 
         null !== $found && $obj['found'] = $found;
-        null !== $not_found && $obj['not_found'] = $not_found;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $notFound && $obj['notFound'] = $notFound;
+        null !== $recordType && $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -73,7 +73,7 @@ final class Data implements BaseModel
     /**
      * The list of phone numbers which you own and are in an editable state.
      *
-     * @param list<Found|array{id?: string|null, number_val_e164?: string|null}> $found
+     * @param list<Found|array{id?: string|null, numberValE164?: string|null}> $found
      */
     public function withFound(array $found): self
     {
@@ -91,7 +91,7 @@ final class Data implements BaseModel
     public function withNotFound(array $notFound): self
     {
         $obj = clone $this;
-        $obj['not_found'] = $notFound;
+        $obj['notFound'] = $notFound;
 
         return $obj;
     }
@@ -102,7 +102,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

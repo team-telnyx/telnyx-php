@@ -29,26 +29,26 @@ final class MesssagesService implements MesssagesContract
      * Send an RCS message
      *
      * @param array{
-     *   agent_id: string,
-     *   agent_message: array{
-     *     content_message?: array{
-     *       content_info?: array<mixed>|RcsContentInfo,
-     *       rich_card?: array<mixed>,
+     *   agentID: string,
+     *   agentMessage: array{
+     *     contentMessage?: array{
+     *       contentInfo?: array<mixed>|RcsContentInfo,
+     *       richCard?: array<mixed>,
      *       suggestions?: list<mixed>,
      *       text?: string,
      *     },
-     *     event?: array{event_type?: 'TYPE_UNSPECIFIED'|'IS_TYPING'|'READ'|EventType},
-     *     expire_time?: string|\DateTimeInterface,
+     *     event?: array{eventType?: 'TYPE_UNSPECIFIED'|'IS_TYPING'|'READ'|EventType},
+     *     expireTime?: string|\DateTimeInterface,
      *     ttl?: string,
      *   }|RcsAgentMessage,
-     *   messaging_profile_id: string,
+     *   messagingProfileID: string,
      *   to: string,
-     *   mms_fallback?: array{
-     *     from?: string, media_urls?: list<string>, subject?: string, text?: string
+     *   mmsFallback?: array{
+     *     from?: string, mediaURLs?: list<string>, subject?: string, text?: string
      *   },
-     *   sms_fallback?: array{from?: string, text?: string},
+     *   smsFallback?: array{from?: string, text?: string},
      *   type?: 'RCS'|Type,
-     *   webhook_url?: string,
+     *   webhookURL?: string,
      * }|MesssageRcsParams $params
      *
      * @throws APIException

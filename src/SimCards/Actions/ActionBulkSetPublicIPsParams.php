@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\SimCards\ActionsService::bulkSetPublicIPs()
  *
  * @phpstan-type ActionBulkSetPublicIPsParamsShape = array{
- *   sim_card_ids: list<string>
+ *   simCardIDs: list<string>
  * }
  */
 final class ActionBulkSetPublicIPsParams implements BaseModel
@@ -25,16 +25,16 @@ final class ActionBulkSetPublicIPsParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var list<string> $sim_card_ids */
-    #[Required(list: 'string')]
-    public array $sim_card_ids;
+    /** @var list<string> $simCardIDs */
+    #[Required('sim_card_ids', list: 'string')]
+    public array $simCardIDs;
 
     /**
      * `new ActionBulkSetPublicIPsParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ActionBulkSetPublicIPsParams::with(sim_card_ids: ...)
+     * ActionBulkSetPublicIPsParams::with(simCardIDs: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -53,13 +53,13 @@ final class ActionBulkSetPublicIPsParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $sim_card_ids
+     * @param list<string> $simCardIDs
      */
-    public static function with(array $sim_card_ids): self
+    public static function with(array $simCardIDs): self
     {
         $obj = new self;
 
-        $obj['sim_card_ids'] = $sim_card_ids;
+        $obj['simCardIDs'] = $simCardIDs;
 
         return $obj;
     }
@@ -70,7 +70,7 @@ final class ActionBulkSetPublicIPsParams implements BaseModel
     public function withSimCardIDs(array $simCardIDs): self
     {
         $obj = clone $this;
-        $obj['sim_card_ids'] = $simCardIDs;
+        $obj['simCardIDs'] = $simCardIDs;
 
         return $obj;
     }

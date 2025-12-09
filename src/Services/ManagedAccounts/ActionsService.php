@@ -47,7 +47,7 @@ final class ActionsService implements ActionsContract
      *
      * Enables a managed account and its sub-users to use Telnyx services.
      *
-     * @param array{reenable_all_connections?: bool}|ActionEnableParams $params
+     * @param array{reenableAllConnections?: bool}|ActionEnableParams $params
      *
      * @throws APIException
      */

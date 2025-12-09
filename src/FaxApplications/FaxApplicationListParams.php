@@ -20,8 +20,7 @@ use Telnyx\FaxApplications\FaxApplicationListParams\Sort;
  *
  * @phpstan-type FaxApplicationListParamsShape = array{
  *   filter?: Filter|array{
- *     application_name?: ApplicationName|null,
- *     outbound_voice_profile_id?: string|null,
+ *     applicationName?: ApplicationName|null, outboundVoiceProfileID?: string|null
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
  *   sort?: Sort|value-of<Sort>,
@@ -75,8 +74,7 @@ final class FaxApplicationListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   application_name?: ApplicationName|null,
-     *   outbound_voice_profile_id?: string|null,
+     *   applicationName?: ApplicationName|null, outboundVoiceProfileID?: string|null
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      * @param Sort|value-of<Sort> $sort
@@ -99,8 +97,7 @@ final class FaxApplicationListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound_voice_profile_id].
      *
      * @param Filter|array{
-     *   application_name?: ApplicationName|null,
-     *   outbound_voice_profile_id?: string|null,
+     *   applicationName?: ApplicationName|null, outboundVoiceProfileID?: string|null
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

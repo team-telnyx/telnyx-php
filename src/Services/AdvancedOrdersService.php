@@ -31,14 +31,14 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
      * Create Advanced Order
      *
      * @param array{
-     *   area_code?: string,
+     *   areaCode?: string,
      *   comments?: string,
-     *   country_code?: string,
-     *   customer_reference?: string,
+     *   countryCode?: string,
+     *   customerReference?: string,
      *   features?: list<'sms'|'mms'|'voice'|'fax'|'emergency'|Feature>,
-     *   phone_number_type?: 'local'|'mobile'|'toll_free'|'shared_cost'|'national'|'landline'|PhoneNumberType,
+     *   phoneNumberType?: 'local'|'mobile'|'toll_free'|'shared_cost'|'national'|'landline'|PhoneNumberType,
      *   quantity?: int,
-     *   requirement_group_id?: string,
+     *   requirementGroupID?: string,
      * }|AdvancedOrderCreateParams $params
      *
      * @throws APIException
@@ -113,14 +113,14 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
      * Update Advanced Order
      *
      * @param array{
-     *   area_code?: string,
+     *   areaCode?: string,
      *   comments?: string,
-     *   country_code?: string,
-     *   customer_reference?: string,
+     *   countryCode?: string,
+     *   customerReference?: string,
      *   features?: list<'sms'|'mms'|'voice'|'fax'|'emergency'|AdvancedOrderUpdateRequirementGroupParams\Feature>,
-     *   phone_number_type?: 'local'|'mobile'|'toll_free'|'shared_cost'|'national'|'landline'|AdvancedOrderUpdateRequirementGroupParams\PhoneNumberType,
+     *   phoneNumberType?: 'local'|'mobile'|'toll_free'|'shared_cost'|'national'|'landline'|AdvancedOrderUpdateRequirementGroupParams\PhoneNumberType,
      *   quantity?: int,
-     *   requirement_group_id?: string,
+     *   requirementGroupID?: string,
      * }|AdvancedOrderUpdateRequirementGroupParams $params
      *
      * @throws APIException

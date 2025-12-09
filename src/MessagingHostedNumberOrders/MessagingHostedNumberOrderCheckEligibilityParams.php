@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\MessagingHostedNumberOrdersService::checkEligibility()
  *
  * @phpstan-type MessagingHostedNumberOrderCheckEligibilityParamsShape = array{
- *   phone_numbers: list<string>
+ *   phoneNumbers: list<string>
  * }
  */
 final class MessagingHostedNumberOrderCheckEligibilityParams implements BaseModel
@@ -27,17 +27,17 @@ final class MessagingHostedNumberOrderCheckEligibilityParams implements BaseMode
     /**
      * List of phone numbers to check eligibility.
      *
-     * @var list<string> $phone_numbers
+     * @var list<string> $phoneNumbers
      */
-    #[Required(list: 'string')]
-    public array $phone_numbers;
+    #[Required('phone_numbers', list: 'string')]
+    public array $phoneNumbers;
 
     /**
      * `new MessagingHostedNumberOrderCheckEligibilityParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * MessagingHostedNumberOrderCheckEligibilityParams::with(phone_numbers: ...)
+     * MessagingHostedNumberOrderCheckEligibilityParams::with(phoneNumbers: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -56,13 +56,13 @@ final class MessagingHostedNumberOrderCheckEligibilityParams implements BaseMode
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $phone_numbers
+     * @param list<string> $phoneNumbers
      */
-    public static function with(array $phone_numbers): self
+    public static function with(array $phoneNumbers): self
     {
         $obj = new self;
 
-        $obj['phone_numbers'] = $phone_numbers;
+        $obj['phoneNumbers'] = $phoneNumbers;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class MessagingHostedNumberOrderCheckEligibilityParams implements BaseMode
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj['phone_numbers'] = $phoneNumbers;
+        $obj['phoneNumbers'] = $phoneNumbers;
 
         return $obj;
     }

@@ -7,6 +7,7 @@ namespace Telnyx\Services\SimCardGroups;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardGroups\ActionsContract;
 use Telnyx\SimCardGroups\Actions\ActionGetResponse;
@@ -56,11 +57,11 @@ final class ActionsService implements ActionsContract
      * This API allows listing a paginated collection a SIM card group actions. It allows to explore a collection of existing asynchronous operation using specific filters.
      *
      * @param array{
-     *   filter_sim_card_group_id_?: string,
-     *   filter_status_?: 'in-progress'|'completed'|'failed'|FilterStatus,
-     *   filter_type_?: value-of<FilterType>,
-     *   page_number_?: int,
-     *   page_size_?: int,
+     *   filterSimCardGroupID?: string,
+     *   filterStatus?: 'in-progress'|'completed'|'failed'|FilterStatus,
+     *   filterType?: value-of<FilterType>,
+     *   pageNumber?: int,
+     *   pageSize?: int,
      * }|ActionListParams $params
      *
      * @throws APIException
@@ -78,7 +79,16 @@ final class ActionsService implements ActionsContract
         $response = $this->client->request(
             method: 'get',
             path: 'sim_card_group_actions',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'filterSimCardGroupID' => 'filter[sim_card_group_id]',
+                    'filterStatus' => 'filter[status]',
+                    'filterType' => 'filter[type]',
+                    'pageNumber' => 'page[number]',
+                    'pageSize' => 'page[size]',
+                ],
+            ),
             options: $options,
             convert: ActionListResponse::class,
         );
@@ -138,7 +148,7 @@ final class ActionsService implements ActionsContract
      * This action will asynchronously assign a provisioned Private Wireless Gateway to the SIM card group. Completing this operation defines that all SIM cards in the SIM card group will get their traffic controlled by the associated Private Wireless Gateway. This operation will also imply that new SIM cards assigned to a group will inherit its network definitions. If it's moved to a different group that doesn't have a Private Wireless Gateway, it'll use Telnyx's default mobile network configuration.
      *
      * @param array{
-     *   private_wireless_gateway_id: string
+     *   privateWirelessGatewayID: string
      * }|ActionSetPrivateWirelessGatewayParams $params
      *
      * @throws APIException
@@ -171,7 +181,7 @@ final class ActionsService implements ActionsContract
      * This action will asynchronously assign a Wireless Blocklist to all the SIMs in the SIM card group.
      *
      * @param array{
-     *   wireless_blocklist_id: string
+     *   wirelessBlocklistID: string
      * }|ActionSetWirelessBlocklistParams $params
      *
      * @throws APIException

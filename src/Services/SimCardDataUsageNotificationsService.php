@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardDataUsageNotificationsContract;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationCreateParams;
@@ -32,7 +33,7 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
      * Creates a new SIM card data usage notification.
      *
      * @param array{
-     *   sim_card_id: string, threshold: array{amount?: string, unit?: 'MB'|'GB'|Unit}
+     *   simCardID: string, threshold: array{amount?: string, unit?: 'MB'|'GB'|Unit}
      * }|SimCardDataUsageNotificationCreateParams $params
      *
      * @throws APIException
@@ -86,7 +87,7 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
      * Updates information for a SIM Card Data Usage Notification.
      *
      * @param array{
-     *   sim_card_id?: string,
+     *   simCardID?: string,
      *   threshold?: array{
      *     amount?: string,
      *     unit?: 'MB'|'GB'|SimCardDataUsageNotificationUpdateParams\Threshold\Unit,
@@ -123,7 +124,7 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
      * Lists a paginated collection of SIM card data usage notifications. It enables exploring the collection using specific filters.
      *
      * @param array{
-     *   filter_sim_card_id_?: string, page_number_?: int, page_size_?: int
+     *   filterSimCardID?: string, pageNumber?: int, pageSize?: int
      * }|SimCardDataUsageNotificationListParams $params
      *
      * @throws APIException
@@ -141,7 +142,14 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
         $response = $this->client->request(
             method: 'get',
             path: 'sim_card_data_usage_notifications',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'filterSimCardID' => 'filter[sim_card_id]',
+                    'pageNumber' => 'page[number]',
+                    'pageSize' => 'page[size]',
+                ],
+            ),
             options: $options,
             convert: SimCardDataUsageNotificationListResponse::class,
         );

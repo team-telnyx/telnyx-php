@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams\OrderingGroup\CountryISO;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams\OrderingGroup\Strategy;
@@ -30,25 +31,25 @@ final class InexplicitNumberOrdersService implements InexplicitNumberOrdersContr
      * Create an inexplicit number order to programmatically purchase phone numbers without specifying exact numbers.
      *
      * @param array{
-     *   ordering_groups: list<array{
-     *     count_requested: string,
-     *     country_iso: 'US'|'CA'|CountryISO,
-     *     phone_number_type: string,
-     *     administrative_area?: string,
-     *     exclude_held_numbers?: bool,
+     *   orderingGroups: list<array{
+     *     countRequested: string,
+     *     countryISO: 'US'|'CA'|CountryISO,
+     *     phoneNumberType: string,
+     *     administrativeArea?: string,
+     *     excludeHeldNumbers?: bool,
      *     features?: list<string>,
      *     locality?: string,
-     *     national_destination_code?: string,
-     *     phone_number?: array{
-     *       contains?: string, ends_with?: string, starts_with?: string
+     *     nationalDestinationCode?: string,
+     *     phoneNumber?: array{
+     *       contains?: string, endsWith?: string, startsWith?: string
      *     },
      *     quickship?: bool,
      *     strategy?: 'always'|'never'|Strategy,
      *   }>,
-     *   billing_group_id?: string,
-     *   connection_id?: string,
-     *   customer_reference?: string,
-     *   messaging_profile_id?: string,
+     *   billingGroupID?: string,
+     *   connectionID?: string,
+     *   customerReference?: string,
+     *   messagingProfileID?: string,
      * }|InexplicitNumberOrderCreateParams $params
      *
      * @throws APIException
@@ -102,7 +103,7 @@ final class InexplicitNumberOrdersService implements InexplicitNumberOrdersContr
      * Get a paginated list of inexplicit number orders.
      *
      * @param array{
-     *   page_number?: int, page_size?: int
+     *   pageNumber?: int, pageSize?: int
      * }|InexplicitNumberOrderListParams $params
      *
      * @throws APIException
@@ -120,7 +121,10 @@ final class InexplicitNumberOrdersService implements InexplicitNumberOrdersContr
         $response = $this->client->request(
             method: 'get',
             path: 'inexplicit_number_orders',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page_number', 'pageSize' => 'page_size']
+            ),
             options: $options,
             convert: InexplicitNumberOrderListResponse::class,
         );

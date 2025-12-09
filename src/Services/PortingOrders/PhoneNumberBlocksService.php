@@ -34,8 +34,8 @@ final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
      * Creates a new phone number block.
      *
      * @param array{
-     *   activation_ranges: list<array{end_at: string, start_at: string}>,
-     *   phone_number_range: array{end_at: string, start_at: string},
+     *   activationRanges: list<array{endAt: string, startAt: string}>,
+     *   phoneNumberRange: array{endAt: string, startAt: string},
      * }|PhoneNumberBlockCreateParams $params
      *
      * @throws APIException
@@ -69,12 +69,12 @@ final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
      *
      * @param array{
      *   filter?: array{
-     *     activation_status?: 'New'|'Pending'|'Conflict'|'Cancel Pending'|'Failed'|'Concurred'|'Activate RDY'|'Disconnect Pending'|'Concurrence Sent'|'Old'|'Sending'|'Active'|'Cancelled'|ActivationStatus,
-     *     phone_number?: list<string>,
-     *     portability_status?: 'pending'|'confirmed'|'provisional'|PortabilityStatus,
-     *     porting_order_id?: list<string>,
+     *     activationStatus?: 'New'|'Pending'|'Conflict'|'Cancel Pending'|'Failed'|'Concurred'|'Activate RDY'|'Disconnect Pending'|'Concurrence Sent'|'Old'|'Sending'|'Active'|'Cancelled'|ActivationStatus,
+     *     phoneNumber?: list<string>,
+     *     portabilityStatus?: 'pending'|'confirmed'|'provisional'|PortabilityStatus,
+     *     portingOrderID?: list<string>,
      *     status?: 'draft'|'in-process'|'submitted'|'exception'|'foc-date-confirmed'|'cancel-pending'|'ported'|'cancelled'|UnionMember0|list<'draft'|'in-process'|'submitted'|'exception'|'foc-date-confirmed'|'cancel-pending'|'ported'|'cancelled'|UnionMember1>,
-     *     support_key?: string|list<string>,
+     *     supportKey?: string|list<string>,
      *   },
      *   page?: array{number?: int, size?: int},
      *   sort?: array{value?: '-created_at'|'created_at'|Value},
@@ -109,7 +109,7 @@ final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
      *
      * Deletes a phone number block.
      *
-     * @param array{porting_order_id: string}|PhoneNumberBlockDeleteParams $params
+     * @param array{portingOrderID: string}|PhoneNumberBlockDeleteParams $params
      *
      * @throws APIException
      */
@@ -122,8 +122,8 @@ final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
             $params,
             $requestOptions,
         );
-        $portingOrderID = $parsed['porting_order_id'];
-        unset($parsed['porting_order_id']);
+        $portingOrderID = $parsed['portingOrderID'];
+        unset($parsed['portingOrderID']);
 
         /** @var BaseResponse<PhoneNumberBlockDeleteResponse> */
         $response = $this->client->request(

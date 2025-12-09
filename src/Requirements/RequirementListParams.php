@@ -22,8 +22,8 @@ use Telnyx\Requirements\RequirementListParams\Sort;
  * @phpstan-type RequirementListParamsShape = array{
  *   filter?: Filter|array{
  *     action?: value-of<Action>|null,
- *     country_code?: string|null,
- *     phone_number_type?: value-of<PhoneNumberType>|null,
+ *     countryCode?: string|null,
+ *     phoneNumberType?: value-of<PhoneNumberType>|null,
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
  *   sort?: list<Sort|value-of<Sort>>,
@@ -67,8 +67,8 @@ final class RequirementListParams implements BaseModel
      *
      * @param Filter|array{
      *   action?: value-of<Action>|null,
-     *   country_code?: string|null,
-     *   phone_number_type?: value-of<PhoneNumberType>|null,
+     *   countryCode?: string|null,
+     *   phoneNumberType?: value-of<PhoneNumberType>|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      * @param list<Sort|value-of<Sort>> $sort
@@ -92,8 +92,8 @@ final class RequirementListParams implements BaseModel
      *
      * @param Filter|array{
      *   action?: value-of<Action>|null,
-     *   country_code?: string|null,
-     *   phone_number_type?: value-of<PhoneNumberType>|null,
+     *   countryCode?: string|null,
+     *   phoneNumberType?: value-of<PhoneNumberType>|null,
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

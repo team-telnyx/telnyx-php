@@ -42,16 +42,14 @@ final class AvailablePhoneNumberBlockListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   cost_information?: CostInformation|null,
+     *   costInformation?: CostInformation|null,
      *   features?: list<Feature>|null,
      *   range?: int|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   region_information?: list<RegionInformation>|null,
-     *   starting_number?: string|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   regionInformation?: list<RegionInformation>|null,
+     *   startingNumber?: string|null,
      * }> $data
-     * @param Meta|array{
-     *   best_effort_results?: int|null, total_results?: int|null
-     * } $meta
+     * @param Meta|array{bestEffortResults?: int|null, totalResults?: int|null} $meta
      */
     public static function with(
         ?array $data = null,
@@ -67,12 +65,12 @@ final class AvailablePhoneNumberBlockListResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   cost_information?: CostInformation|null,
+     *   costInformation?: CostInformation|null,
      *   features?: list<Feature>|null,
      *   range?: int|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   region_information?: list<RegionInformation>|null,
-     *   starting_number?: string|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   regionInformation?: list<RegionInformation>|null,
+     *   startingNumber?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -84,9 +82,7 @@ final class AvailablePhoneNumberBlockListResponse implements BaseModel
     }
 
     /**
-     * @param Meta|array{
-     *   best_effort_results?: int|null, total_results?: int|null
-     * } $meta
+     * @param Meta|array{bestEffortResults?: int|null, totalResults?: int|null} $meta
      */
     public function withMeta(Meta|array $meta): self
     {

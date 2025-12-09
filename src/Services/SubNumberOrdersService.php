@@ -32,7 +32,7 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      * Get an existing sub number order.
      *
      * @param array{
-     *   filter?: array{include_phone_numbers?: bool}
+     *   filter?: array{includePhoneNumbers?: bool}
      * }|SubNumberOrderRetrieveParams $params
      *
      * @throws APIException
@@ -65,8 +65,8 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      * Updates a sub number order.
      *
      * @param array{
-     *   regulatory_requirements?: list<array{
-     *     field_value?: string, requirement_id?: string
+     *   regulatoryRequirements?: list<array{
+     *     fieldValue?: string, requirementID?: string
      *   }>,
      * }|SubNumberOrderUpdateParams $params
      *
@@ -101,10 +101,10 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      *
      * @param array{
      *   filter?: array{
-     *     country_code?: string,
-     *     order_request_id?: string,
-     *     phone_number_type?: string,
-     *     phone_numbers_count?: int,
+     *     countryCode?: string,
+     *     orderRequestID?: string,
+     *     phoneNumberType?: string,
+     *     phoneNumbersCount?: int,
      *     status?: string,
      *   },
      * }|SubNumberOrderListParams $params
@@ -160,7 +160,7 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      * Update requirement group for a sub number order
      *
      * @param array{
-     *   requirement_group_id: string
+     *   requirementGroupID: string
      * }|SubNumberOrderUpdateRequirementGroupParams $params
      *
      * @throws APIException

@@ -15,10 +15,10 @@ use Telnyx\Webhooks\CallForkStoppedWebhookEvent\Data\RecordType;
 /**
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   event_type?: value-of<EventType>|null,
- *   occurred_at?: \DateTimeInterface|null,
+ *   eventType?: value-of<EventType>|null,
+ *   occurredAt?: \DateTimeInterface|null,
  *   payload?: Payload|null,
- *   record_type?: value-of<RecordType>|null,
+ *   recordType?: value-of<RecordType>|null,
  * }
  */
 final class Data implements BaseModel
@@ -35,16 +35,16 @@ final class Data implements BaseModel
     /**
      * The type of event being delivered.
      *
-     * @var value-of<EventType>|null $event_type
+     * @var value-of<EventType>|null $eventType
      */
-    #[Optional(enum: EventType::class)]
-    public ?string $event_type;
+    #[Optional('event_type', enum: EventType::class)]
+    public ?string $eventType;
 
     /**
      * ISO 8601 datetime of when the event occurred.
      */
-    #[Optional]
-    public ?\DateTimeInterface $occurred_at;
+    #[Optional('occurred_at')]
+    public ?\DateTimeInterface $occurredAt;
 
     #[Optional]
     public ?Payload $payload;
@@ -52,10 +52,10 @@ final class Data implements BaseModel
     /**
      * Identifies the type of the resource.
      *
-     * @var value-of<RecordType>|null $record_type
+     * @var value-of<RecordType>|null $recordType
      */
-    #[Optional(enum: RecordType::class)]
-    public ?string $record_type;
+    #[Optional('record_type', enum: RecordType::class)]
+    public ?string $recordType;
 
     public function __construct()
     {
@@ -67,31 +67,31 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param EventType|value-of<EventType> $event_type
+     * @param EventType|value-of<EventType> $eventType
      * @param Payload|array{
-     *   call_control_id?: string|null,
-     *   call_leg_id?: string|null,
-     *   call_session_id?: string|null,
-     *   client_state?: string|null,
-     *   connection_id?: string|null,
-     *   stream_type?: value-of<StreamType>|null,
+     *   callControlID?: string|null,
+     *   callLegID?: string|null,
+     *   callSessionID?: string|null,
+     *   clientState?: string|null,
+     *   connectionID?: string|null,
+     *   streamType?: value-of<StreamType>|null,
      * } $payload
-     * @param RecordType|value-of<RecordType> $record_type
+     * @param RecordType|value-of<RecordType> $recordType
      */
     public static function with(
         ?string $id = null,
-        EventType|string|null $event_type = null,
-        ?\DateTimeInterface $occurred_at = null,
+        EventType|string|null $eventType = null,
+        ?\DateTimeInterface $occurredAt = null,
         Payload|array|null $payload = null,
-        RecordType|string|null $record_type = null,
+        RecordType|string|null $recordType = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $event_type && $obj['event_type'] = $event_type;
-        null !== $occurred_at && $obj['occurred_at'] = $occurred_at;
+        null !== $eventType && $obj['eventType'] = $eventType;
+        null !== $occurredAt && $obj['occurredAt'] = $occurredAt;
         null !== $payload && $obj['payload'] = $payload;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $recordType && $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class Data implements BaseModel
     public function withEventType(EventType|string $eventType): self
     {
         $obj = clone $this;
-        $obj['event_type'] = $eventType;
+        $obj['eventType'] = $eventType;
 
         return $obj;
     }
@@ -126,19 +126,19 @@ final class Data implements BaseModel
     public function withOccurredAt(\DateTimeInterface $occurredAt): self
     {
         $obj = clone $this;
-        $obj['occurred_at'] = $occurredAt;
+        $obj['occurredAt'] = $occurredAt;
 
         return $obj;
     }
 
     /**
      * @param Payload|array{
-     *   call_control_id?: string|null,
-     *   call_leg_id?: string|null,
-     *   call_session_id?: string|null,
-     *   client_state?: string|null,
-     *   connection_id?: string|null,
-     *   stream_type?: value-of<StreamType>|null,
+     *   callControlID?: string|null,
+     *   callLegID?: string|null,
+     *   callSessionID?: string|null,
+     *   clientState?: string|null,
+     *   connectionID?: string|null,
+     *   streamType?: value-of<StreamType>|null,
      * } $payload
      */
     public function withPayload(Payload|array $payload): self
@@ -157,7 +157,7 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

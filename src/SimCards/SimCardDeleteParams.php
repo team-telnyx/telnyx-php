@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\SimCardsService::delete()
  *
- * @phpstan-type SimCardDeleteParamsShape = array{report_lost?: bool}
+ * @phpstan-type SimCardDeleteParamsShape = array{reportLost?: bool}
  */
 final class SimCardDeleteParams implements BaseModel
 {
@@ -28,7 +28,7 @@ final class SimCardDeleteParams implements BaseModel
      * Enables deletion of disabled eSIMs that can't be uninstalled from a device. This is irreversible and the eSIM cannot be re-registered.
      */
     #[Optional]
-    public ?bool $report_lost;
+    public ?bool $reportLost;
 
     public function __construct()
     {
@@ -40,11 +40,11 @@ final class SimCardDeleteParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?bool $report_lost = null): self
+    public static function with(?bool $reportLost = null): self
     {
         $obj = new self;
 
-        null !== $report_lost && $obj['report_lost'] = $report_lost;
+        null !== $reportLost && $obj['reportLost'] = $reportLost;
 
         return $obj;
     }
@@ -55,7 +55,7 @@ final class SimCardDeleteParams implements BaseModel
     public function withReportLost(bool $reportLost): self
     {
         $obj = clone $this;
-        $obj['report_lost'] = $reportLost;
+        $obj['reportLost'] = $reportLost;
 
         return $obj;
     }

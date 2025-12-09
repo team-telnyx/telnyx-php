@@ -24,7 +24,7 @@ final class InsightsService implements InsightsContract
      *
      * Assign an insight to a group
      *
-     * @param array{group_id: string}|InsightAssignParams $params
+     * @param array{groupID: string}|InsightAssignParams $params
      *
      * @throws APIException
      */
@@ -37,8 +37,8 @@ final class InsightsService implements InsightsContract
             $params,
             $requestOptions,
         );
-        $groupID = $parsed['group_id'];
-        unset($parsed['group_id']);
+        $groupID = $parsed['groupID'];
+        unset($parsed['groupID']);
 
         /** @var BaseResponse<mixed> */
         $response = $this->client->request(
@@ -60,7 +60,7 @@ final class InsightsService implements InsightsContract
      *
      * Remove an insight from a group
      *
-     * @param array{group_id: string}|InsightDeleteUnassignParams $params
+     * @param array{groupID: string}|InsightDeleteUnassignParams $params
      *
      * @throws APIException
      */
@@ -73,8 +73,8 @@ final class InsightsService implements InsightsContract
             $params,
             $requestOptions,
         );
-        $groupID = $parsed['group_id'];
-        unset($parsed['group_id']);
+        $groupID = $parsed['groupID'];
+        unset($parsed['groupID']);
 
         /** @var BaseResponse<mixed> */
         $response = $this->client->request(

@@ -23,8 +23,8 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Sort\Value;
  *
  * @phpstan-type CustomerServiceRecordListParamsShape = array{
  *   filter?: Filter|array{
- *     created_at?: CreatedAt|null,
- *     phone_number?: PhoneNumber|null,
+ *     createdAt?: CreatedAt|null,
+ *     phoneNumber?: PhoneNumber|null,
  *     status?: Status|null,
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
@@ -66,8 +66,8 @@ final class CustomerServiceRecordListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   created_at?: CreatedAt|null,
-     *   phone_number?: PhoneNumber|null,
+     *   createdAt?: CreatedAt|null,
+     *   phoneNumber?: PhoneNumber|null,
      *   status?: Status|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
@@ -91,8 +91,8 @@ final class CustomerServiceRecordListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[phone_number][eq], filter[phone_number][in][], filter[status][eq], filter[status][in][], filter[created_at][lt], filter[created_at][gt].
      *
      * @param Filter|array{
-     *   created_at?: CreatedAt|null,
-     *   phone_number?: PhoneNumber|null,
+     *   createdAt?: CreatedAt|null,
+     *   phoneNumber?: PhoneNumber|null,
      *   status?: Status|null,
      * } $filter
      */

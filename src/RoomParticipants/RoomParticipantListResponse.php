@@ -40,17 +40,17 @@ final class RoomParticipantListResponse implements BaseModel
      * @param list<RoomParticipant|array{
      *   id?: string|null,
      *   context?: string|null,
-     *   joined_at?: \DateTimeInterface|null,
-     *   left_at?: \DateTimeInterface|null,
-     *   record_type?: string|null,
-     *   session_id?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   joinedAt?: \DateTimeInterface|null,
+     *   leftAt?: \DateTimeInterface|null,
+     *   recordType?: string|null,
+     *   sessionID?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -69,11 +69,11 @@ final class RoomParticipantListResponse implements BaseModel
      * @param list<RoomParticipant|array{
      *   id?: string|null,
      *   context?: string|null,
-     *   joined_at?: \DateTimeInterface|null,
-     *   left_at?: \DateTimeInterface|null,
-     *   record_type?: string|null,
-     *   session_id?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   joinedAt?: \DateTimeInterface|null,
+     *   leftAt?: \DateTimeInterface|null,
+     *   recordType?: string|null,
+     *   sessionID?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -86,10 +86,10 @@ final class RoomParticipantListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

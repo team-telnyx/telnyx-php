@@ -22,16 +22,16 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Calls\ActionsService::gather()
  *
  * @phpstan-type ActionGatherParamsShape = array{
- *   client_state?: string,
- *   command_id?: string,
- *   gather_id?: string,
- *   initial_timeout_millis?: int,
- *   inter_digit_timeout_millis?: int,
- *   maximum_digits?: int,
- *   minimum_digits?: int,
- *   terminating_digit?: string,
- *   timeout_millis?: int,
- *   valid_digits?: string,
+ *   clientState?: string,
+ *   commandID?: string,
+ *   gatherID?: string,
+ *   initialTimeoutMillis?: int,
+ *   interDigitTimeoutMillis?: int,
+ *   maximumDigits?: int,
+ *   minimumDigits?: int,
+ *   terminatingDigit?: string,
+ *   timeoutMillis?: int,
+ *   validDigits?: string,
  * }
  */
 final class ActionGatherParams implements BaseModel
@@ -43,62 +43,62 @@ final class ActionGatherParams implements BaseModel
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Optional]
-    public ?string $client_state;
+    #[Optional('client_state')]
+    public ?string $clientState;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Optional]
-    public ?string $command_id;
+    #[Optional('command_id')]
+    public ?string $commandID;
 
     /**
      * An id that will be sent back in the corresponding `call.gather.ended` webhook. Will be randomly generated if not specified.
      */
-    #[Optional]
-    public ?string $gather_id;
+    #[Optional('gather_id')]
+    public ?string $gatherID;
 
     /**
      * The number of milliseconds to wait for the first DTMF.
      */
-    #[Optional]
-    public ?int $initial_timeout_millis;
+    #[Optional('initial_timeout_millis')]
+    public ?int $initialTimeoutMillis;
 
     /**
      * The number of milliseconds to wait for input between digits.
      */
-    #[Optional]
-    public ?int $inter_digit_timeout_millis;
+    #[Optional('inter_digit_timeout_millis')]
+    public ?int $interDigitTimeoutMillis;
 
     /**
      * The maximum number of digits to fetch. This parameter has a maximum value of 128.
      */
-    #[Optional]
-    public ?int $maximum_digits;
+    #[Optional('maximum_digits')]
+    public ?int $maximumDigits;
 
     /**
      * The minimum number of digits to fetch. This parameter has a minimum value of 1.
      */
-    #[Optional]
-    public ?int $minimum_digits;
+    #[Optional('minimum_digits')]
+    public ?int $minimumDigits;
 
     /**
      * The digit used to terminate input if fewer than `maximum_digits` digits have been gathered.
      */
-    #[Optional]
-    public ?string $terminating_digit;
+    #[Optional('terminating_digit')]
+    public ?string $terminatingDigit;
 
     /**
      * The number of milliseconds to wait to complete the request.
      */
-    #[Optional]
-    public ?int $timeout_millis;
+    #[Optional('timeout_millis')]
+    public ?int $timeoutMillis;
 
     /**
      * A list of all digits accepted as valid.
      */
-    #[Optional]
-    public ?string $valid_digits;
+    #[Optional('valid_digits')]
+    public ?string $validDigits;
 
     public function __construct()
     {
@@ -111,29 +111,29 @@ final class ActionGatherParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $client_state = null,
-        ?string $command_id = null,
-        ?string $gather_id = null,
-        ?int $initial_timeout_millis = null,
-        ?int $inter_digit_timeout_millis = null,
-        ?int $maximum_digits = null,
-        ?int $minimum_digits = null,
-        ?string $terminating_digit = null,
-        ?int $timeout_millis = null,
-        ?string $valid_digits = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        ?string $gatherID = null,
+        ?int $initialTimeoutMillis = null,
+        ?int $interDigitTimeoutMillis = null,
+        ?int $maximumDigits = null,
+        ?int $minimumDigits = null,
+        ?string $terminatingDigit = null,
+        ?int $timeoutMillis = null,
+        ?string $validDigits = null,
     ): self {
         $obj = new self;
 
-        null !== $client_state && $obj['client_state'] = $client_state;
-        null !== $command_id && $obj['command_id'] = $command_id;
-        null !== $gather_id && $obj['gather_id'] = $gather_id;
-        null !== $initial_timeout_millis && $obj['initial_timeout_millis'] = $initial_timeout_millis;
-        null !== $inter_digit_timeout_millis && $obj['inter_digit_timeout_millis'] = $inter_digit_timeout_millis;
-        null !== $maximum_digits && $obj['maximum_digits'] = $maximum_digits;
-        null !== $minimum_digits && $obj['minimum_digits'] = $minimum_digits;
-        null !== $terminating_digit && $obj['terminating_digit'] = $terminating_digit;
-        null !== $timeout_millis && $obj['timeout_millis'] = $timeout_millis;
-        null !== $valid_digits && $obj['valid_digits'] = $valid_digits;
+        null !== $clientState && $obj['clientState'] = $clientState;
+        null !== $commandID && $obj['commandID'] = $commandID;
+        null !== $gatherID && $obj['gatherID'] = $gatherID;
+        null !== $initialTimeoutMillis && $obj['initialTimeoutMillis'] = $initialTimeoutMillis;
+        null !== $interDigitTimeoutMillis && $obj['interDigitTimeoutMillis'] = $interDigitTimeoutMillis;
+        null !== $maximumDigits && $obj['maximumDigits'] = $maximumDigits;
+        null !== $minimumDigits && $obj['minimumDigits'] = $minimumDigits;
+        null !== $terminatingDigit && $obj['terminatingDigit'] = $terminatingDigit;
+        null !== $timeoutMillis && $obj['timeoutMillis'] = $timeoutMillis;
+        null !== $validDigits && $obj['validDigits'] = $validDigits;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class ActionGatherParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj['client_state'] = $clientState;
+        $obj['clientState'] = $clientState;
 
         return $obj;
     }
@@ -155,7 +155,7 @@ final class ActionGatherParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj['command_id'] = $commandID;
+        $obj['commandID'] = $commandID;
 
         return $obj;
     }
@@ -166,7 +166,7 @@ final class ActionGatherParams implements BaseModel
     public function withGatherID(string $gatherID): self
     {
         $obj = clone $this;
-        $obj['gather_id'] = $gatherID;
+        $obj['gatherID'] = $gatherID;
 
         return $obj;
     }
@@ -177,7 +177,7 @@ final class ActionGatherParams implements BaseModel
     public function withInitialTimeoutMillis(int $initialTimeoutMillis): self
     {
         $obj = clone $this;
-        $obj['initial_timeout_millis'] = $initialTimeoutMillis;
+        $obj['initialTimeoutMillis'] = $initialTimeoutMillis;
 
         return $obj;
     }
@@ -189,7 +189,7 @@ final class ActionGatherParams implements BaseModel
         int $interDigitTimeoutMillis
     ): self {
         $obj = clone $this;
-        $obj['inter_digit_timeout_millis'] = $interDigitTimeoutMillis;
+        $obj['interDigitTimeoutMillis'] = $interDigitTimeoutMillis;
 
         return $obj;
     }
@@ -200,7 +200,7 @@ final class ActionGatherParams implements BaseModel
     public function withMaximumDigits(int $maximumDigits): self
     {
         $obj = clone $this;
-        $obj['maximum_digits'] = $maximumDigits;
+        $obj['maximumDigits'] = $maximumDigits;
 
         return $obj;
     }
@@ -211,7 +211,7 @@ final class ActionGatherParams implements BaseModel
     public function withMinimumDigits(int $minimumDigits): self
     {
         $obj = clone $this;
-        $obj['minimum_digits'] = $minimumDigits;
+        $obj['minimumDigits'] = $minimumDigits;
 
         return $obj;
     }
@@ -222,7 +222,7 @@ final class ActionGatherParams implements BaseModel
     public function withTerminatingDigit(string $terminatingDigit): self
     {
         $obj = clone $this;
-        $obj['terminating_digit'] = $terminatingDigit;
+        $obj['terminatingDigit'] = $terminatingDigit;
 
         return $obj;
     }
@@ -233,7 +233,7 @@ final class ActionGatherParams implements BaseModel
     public function withTimeoutMillis(int $timeoutMillis): self
     {
         $obj = clone $this;
-        $obj['timeout_millis'] = $timeoutMillis;
+        $obj['timeoutMillis'] = $timeoutMillis;
 
         return $obj;
     }
@@ -244,7 +244,7 @@ final class ActionGatherParams implements BaseModel
     public function withValidDigits(string $validDigits): self
     {
         $obj = clone $this;
-        $obj['valid_digits'] = $validDigits;
+        $obj['validDigits'] = $validDigits;
 
         return $obj;
     }

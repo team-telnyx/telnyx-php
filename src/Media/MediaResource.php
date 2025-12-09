@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type MediaResourceShape = array{
- *   content_type?: string|null,
- *   created_at?: string|null,
- *   expires_at?: string|null,
- *   media_name?: string|null,
- *   updated_at?: string|null,
+ *   contentType?: string|null,
+ *   createdAt?: string|null,
+ *   expiresAt?: string|null,
+ *   mediaName?: string|null,
+ *   updatedAt?: string|null,
  * }
  */
 final class MediaResource implements BaseModel
@@ -25,32 +25,32 @@ final class MediaResource implements BaseModel
     /**
      * Content type of the file.
      */
-    #[Optional]
-    public ?string $content_type;
+    #[Optional('content_type')]
+    public ?string $contentType;
 
     /**
      * ISO 8601 formatted date of when the media resource was created.
      */
-    #[Optional]
-    public ?string $created_at;
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
     /**
      * ISO 8601 formatted date of when the media resource will expire and be deleted.
      */
-    #[Optional]
-    public ?string $expires_at;
+    #[Optional('expires_at')]
+    public ?string $expiresAt;
 
     /**
      * Uniquely identifies a media resource.
      */
-    #[Optional]
-    public ?string $media_name;
+    #[Optional('media_name')]
+    public ?string $mediaName;
 
     /**
      * ISO 8601 formatted date of when the media resource was last updated.
      */
-    #[Optional]
-    public ?string $updated_at;
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     public function __construct()
     {
@@ -63,19 +63,19 @@ final class MediaResource implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $content_type = null,
-        ?string $created_at = null,
-        ?string $expires_at = null,
-        ?string $media_name = null,
-        ?string $updated_at = null,
+        ?string $contentType = null,
+        ?string $createdAt = null,
+        ?string $expiresAt = null,
+        ?string $mediaName = null,
+        ?string $updatedAt = null,
     ): self {
         $obj = new self;
 
-        null !== $content_type && $obj['content_type'] = $content_type;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $expires_at && $obj['expires_at'] = $expires_at;
-        null !== $media_name && $obj['media_name'] = $media_name;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $contentType && $obj['contentType'] = $contentType;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $expiresAt && $obj['expiresAt'] = $expiresAt;
+        null !== $mediaName && $obj['mediaName'] = $mediaName;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -86,7 +86,7 @@ final class MediaResource implements BaseModel
     public function withContentType(string $contentType): self
     {
         $obj = clone $this;
-        $obj['content_type'] = $contentType;
+        $obj['contentType'] = $contentType;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class MediaResource implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class MediaResource implements BaseModel
     public function withExpiresAt(string $expiresAt): self
     {
         $obj = clone $this;
-        $obj['expires_at'] = $expiresAt;
+        $obj['expiresAt'] = $expiresAt;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class MediaResource implements BaseModel
     public function withMediaName(string $mediaName): self
     {
         $obj = clone $this;
-        $obj['media_name'] = $mediaName;
+        $obj['mediaName'] = $mediaName;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class MediaResource implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

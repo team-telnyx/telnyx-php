@@ -12,15 +12,15 @@ use Telnyx\Storage\Migrations\MigrationParams\Status;
 
 /**
  * @phpstan-type MigrationParamsShape = array{
- *   source_id: string,
- *   target_bucket_name: string,
- *   target_region: string,
+ *   sourceID: string,
+ *   targetBucketName: string,
+ *   targetRegion: string,
  *   id?: string|null,
- *   bytes_migrated?: int|null,
- *   bytes_to_migrate?: int|null,
- *   created_at?: \DateTimeInterface|null,
+ *   bytesMigrated?: int|null,
+ *   bytesToMigrate?: int|null,
+ *   createdAt?: \DateTimeInterface|null,
  *   eta?: \DateTimeInterface|null,
- *   last_copy?: \DateTimeInterface|null,
+ *   lastCopy?: \DateTimeInterface|null,
  *   refresh?: bool|null,
  *   speed?: int|null,
  *   status?: value-of<Status>|null,
@@ -34,20 +34,20 @@ final class MigrationParams implements BaseModel
     /**
      * ID of the Migration Source from which to migrate data.
      */
-    #[Required]
-    public string $source_id;
+    #[Required('source_id')]
+    public string $sourceID;
 
     /**
      * Bucket name to migrate the data into. Will default to the same name as the `source_bucket_name`.
      */
-    #[Required]
-    public string $target_bucket_name;
+    #[Required('target_bucket_name')]
+    public string $targetBucketName;
 
     /**
      * Telnyx Cloud Storage region to migrate the data to.
      */
-    #[Required]
-    public string $target_region;
+    #[Required('target_region')]
+    public string $targetRegion;
 
     /**
      * Unique identifier for the data migration.
@@ -58,20 +58,20 @@ final class MigrationParams implements BaseModel
     /**
      * Total amount of data that has been succesfully migrated.
      */
-    #[Optional]
-    public ?int $bytes_migrated;
+    #[Optional('bytes_migrated')]
+    public ?int $bytesMigrated;
 
     /**
      * Total amount of data found in source bucket to migrate.
      */
-    #[Optional]
-    public ?int $bytes_to_migrate;
+    #[Optional('bytes_to_migrate')]
+    public ?int $bytesToMigrate;
 
     /**
      * Time when data migration was created.
      */
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
     /**
      * Estimated time the migration will complete.
@@ -82,8 +82,8 @@ final class MigrationParams implements BaseModel
     /**
      * Time when data migration was last copied from the source.
      */
-    #[Optional]
-    public ?\DateTimeInterface $last_copy;
+    #[Optional('last_copy')]
+    public ?\DateTimeInterface $lastCopy;
 
     /**
      * If true, will continue to poll the source bucket to ensure new data is continually migrated over.
@@ -110,9 +110,7 @@ final class MigrationParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * MigrationParams::with(
-     *   source_id: ..., target_bucket_name: ..., target_region: ...
-     * )
+     * MigrationParams::with(sourceID: ..., targetBucketName: ..., targetRegion: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -137,31 +135,31 @@ final class MigrationParams implements BaseModel
      * @param Status|value-of<Status> $status
      */
     public static function with(
-        string $source_id,
-        string $target_bucket_name,
-        string $target_region,
+        string $sourceID,
+        string $targetBucketName,
+        string $targetRegion,
         ?string $id = null,
-        ?int $bytes_migrated = null,
-        ?int $bytes_to_migrate = null,
-        ?\DateTimeInterface $created_at = null,
+        ?int $bytesMigrated = null,
+        ?int $bytesToMigrate = null,
+        ?\DateTimeInterface $createdAt = null,
         ?\DateTimeInterface $eta = null,
-        ?\DateTimeInterface $last_copy = null,
+        ?\DateTimeInterface $lastCopy = null,
         ?bool $refresh = null,
         ?int $speed = null,
         Status|string|null $status = null,
     ): self {
         $obj = new self;
 
-        $obj['source_id'] = $source_id;
-        $obj['target_bucket_name'] = $target_bucket_name;
-        $obj['target_region'] = $target_region;
+        $obj['sourceID'] = $sourceID;
+        $obj['targetBucketName'] = $targetBucketName;
+        $obj['targetRegion'] = $targetRegion;
 
         null !== $id && $obj['id'] = $id;
-        null !== $bytes_migrated && $obj['bytes_migrated'] = $bytes_migrated;
-        null !== $bytes_to_migrate && $obj['bytes_to_migrate'] = $bytes_to_migrate;
-        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $bytesMigrated && $obj['bytesMigrated'] = $bytesMigrated;
+        null !== $bytesToMigrate && $obj['bytesToMigrate'] = $bytesToMigrate;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
         null !== $eta && $obj['eta'] = $eta;
-        null !== $last_copy && $obj['last_copy'] = $last_copy;
+        null !== $lastCopy && $obj['lastCopy'] = $lastCopy;
         null !== $refresh && $obj['refresh'] = $refresh;
         null !== $speed && $obj['speed'] = $speed;
         null !== $status && $obj['status'] = $status;
@@ -175,7 +173,7 @@ final class MigrationParams implements BaseModel
     public function withSourceID(string $sourceID): self
     {
         $obj = clone $this;
-        $obj['source_id'] = $sourceID;
+        $obj['sourceID'] = $sourceID;
 
         return $obj;
     }
@@ -186,7 +184,7 @@ final class MigrationParams implements BaseModel
     public function withTargetBucketName(string $targetBucketName): self
     {
         $obj = clone $this;
-        $obj['target_bucket_name'] = $targetBucketName;
+        $obj['targetBucketName'] = $targetBucketName;
 
         return $obj;
     }
@@ -197,7 +195,7 @@ final class MigrationParams implements BaseModel
     public function withTargetRegion(string $targetRegion): self
     {
         $obj = clone $this;
-        $obj['target_region'] = $targetRegion;
+        $obj['targetRegion'] = $targetRegion;
 
         return $obj;
     }
@@ -219,7 +217,7 @@ final class MigrationParams implements BaseModel
     public function withBytesMigrated(int $bytesMigrated): self
     {
         $obj = clone $this;
-        $obj['bytes_migrated'] = $bytesMigrated;
+        $obj['bytesMigrated'] = $bytesMigrated;
 
         return $obj;
     }
@@ -230,7 +228,7 @@ final class MigrationParams implements BaseModel
     public function withBytesToMigrate(int $bytesToMigrate): self
     {
         $obj = clone $this;
-        $obj['bytes_to_migrate'] = $bytesToMigrate;
+        $obj['bytesToMigrate'] = $bytesToMigrate;
 
         return $obj;
     }
@@ -241,7 +239,7 @@ final class MigrationParams implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -263,7 +261,7 @@ final class MigrationParams implements BaseModel
     public function withLastCopy(\DateTimeInterface $lastCopy): self
     {
         $obj = clone $this;
-        $obj['last_copy'] = $lastCopy;
+        $obj['lastCopy'] = $lastCopy;
 
         return $obj;
     }

@@ -37,10 +37,10 @@ final class CallConversationInsightsGeneratedWebhookEvent implements BaseModel
      *
      * @param Data|array{
      *   id?: string|null,
-     *   event_type?: value-of<EventType>|null,
-     *   occurred_at?: \DateTimeInterface|null,
+     *   eventType?: value-of<EventType>|null,
+     *   occurredAt?: \DateTimeInterface|null,
      *   payload?: Payload|null,
-     *   record_type?: value-of<RecordType>|null,
+     *   recordType?: value-of<RecordType>|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -55,10 +55,10 @@ final class CallConversationInsightsGeneratedWebhookEvent implements BaseModel
     /**
      * @param Data|array{
      *   id?: string|null,
-     *   event_type?: value-of<EventType>|null,
-     *   occurred_at?: \DateTimeInterface|null,
+     *   eventType?: value-of<EventType>|null,
+     *   occurredAt?: \DateTimeInterface|null,
      *   payload?: Payload|null,
-     *   record_type?: value-of<RecordType>|null,
+     *   recordType?: value-of<RecordType>|null,
      * } $data
      */
     public function withData(Data|array $data): self

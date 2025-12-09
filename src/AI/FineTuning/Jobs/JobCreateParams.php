@@ -18,8 +18,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type JobCreateParamsShape = array{
  *   model: string,
- *   training_file: string,
- *   hyperparameters?: Hyperparameters|array{n_epochs?: int|null},
+ *   trainingFile: string,
+ *   hyperparameters?: Hyperparameters|array{nEpochs?: int|null},
  *   suffix?: string,
  * }
  */
@@ -38,8 +38,8 @@ final class JobCreateParams implements BaseModel
     /**
      * The storage bucket or object used for training.
      */
-    #[Required]
-    public string $training_file;
+    #[Required('training_file')]
+    public string $trainingFile;
 
     /**
      * The hyperparameters used for the fine-tuning job.
@@ -58,7 +58,7 @@ final class JobCreateParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * JobCreateParams::with(model: ..., training_file: ...)
+     * JobCreateParams::with(model: ..., trainingFile: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -77,18 +77,18 @@ final class JobCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Hyperparameters|array{n_epochs?: int|null} $hyperparameters
+     * @param Hyperparameters|array{nEpochs?: int|null} $hyperparameters
      */
     public static function with(
         string $model,
-        string $training_file,
+        string $trainingFile,
         Hyperparameters|array|null $hyperparameters = null,
         ?string $suffix = null,
     ): self {
         $obj = new self;
 
         $obj['model'] = $model;
-        $obj['training_file'] = $training_file;
+        $obj['trainingFile'] = $trainingFile;
 
         null !== $hyperparameters && $obj['hyperparameters'] = $hyperparameters;
         null !== $suffix && $obj['suffix'] = $suffix;
@@ -113,7 +113,7 @@ final class JobCreateParams implements BaseModel
     public function withTrainingFile(string $trainingFile): self
     {
         $obj = clone $this;
-        $obj['training_file'] = $trainingFile;
+        $obj['trainingFile'] = $trainingFile;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class JobCreateParams implements BaseModel
     /**
      * The hyperparameters used for the fine-tuning job.
      *
-     * @param Hyperparameters|array{n_epochs?: int|null} $hyperparameters
+     * @param Hyperparameters|array{nEpochs?: int|null} $hyperparameters
      */
     public function withHyperparameters(
         Hyperparameters|array $hyperparameters

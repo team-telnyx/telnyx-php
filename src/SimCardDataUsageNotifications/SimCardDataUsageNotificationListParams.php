@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\SimCardDataUsageNotificationsService::list()
  *
  * @phpstan-type SimCardDataUsageNotificationListParamsShape = array{
- *   filter_sim_card_id_?: string, page_number_?: int, page_size_?: int
+ *   filterSimCardID?: string, pageNumber?: int, pageSize?: int
  * }
  */
 final class SimCardDataUsageNotificationListParams implements BaseModel
@@ -28,19 +28,19 @@ final class SimCardDataUsageNotificationListParams implements BaseModel
      * A valid SIM card ID.
      */
     #[Optional]
-    public ?string $filter_sim_card_id_;
+    public ?string $filterSimCardID;
 
     /**
      * The page number to load.
      */
     #[Optional]
-    public ?int $page_number_;
+    public ?int $pageNumber;
 
     /**
      * The size of the page.
      */
     #[Optional]
-    public ?int $page_size_;
+    public ?int $pageSize;
 
     public function __construct()
     {
@@ -53,15 +53,15 @@ final class SimCardDataUsageNotificationListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $filter_sim_card_id_ = null,
-        ?int $page_number_ = null,
-        ?int $page_size_ = null,
+        ?string $filterSimCardID = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null
     ): self {
         $obj = new self;
 
-        null !== $filter_sim_card_id_ && $obj['filter_sim_card_id_'] = $filter_sim_card_id_;
-        null !== $page_number_ && $obj['page_number_'] = $page_number_;
-        null !== $page_size_ && $obj['page_size_'] = $page_size_;
+        null !== $filterSimCardID && $obj['filterSimCardID'] = $filterSimCardID;
+        null !== $pageNumber && $obj['pageNumber'] = $pageNumber;
+        null !== $pageSize && $obj['pageSize'] = $pageSize;
 
         return $obj;
     }
@@ -72,7 +72,7 @@ final class SimCardDataUsageNotificationListParams implements BaseModel
     public function withFilterSimCardID(string $filterSimCardID): self
     {
         $obj = clone $this;
-        $obj['filter_sim_card_id_'] = $filterSimCardID;
+        $obj['filterSimCardID'] = $filterSimCardID;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class SimCardDataUsageNotificationListParams implements BaseModel
     public function withPageNumber(int $pageNumber): self
     {
         $obj = clone $this;
-        $obj['page_number_'] = $pageNumber;
+        $obj['pageNumber'] = $pageNumber;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class SimCardDataUsageNotificationListParams implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj['page_size_'] = $pageSize;
+        $obj['pageSize'] = $pageSize;
 
         return $obj;
     }

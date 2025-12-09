@@ -14,9 +14,9 @@ use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListP
  * Consolidated filter parameter (deepObject style). Originally: filter[porting_order.status][in][], filter[porting_phone_number][in][], filter[user_bundle_id][in][].
  *
  * @phpstan-type FilterShape = array{
- *   porting_order?: PortingOrder|null,
- *   porting_phone_number?: list<string>|null,
- *   user_bundle_id?: list<string>|null,
+ *   portingOrder?: PortingOrder|null,
+ *   portingPhoneNumber?: list<string>|null,
+ *   userBundleID?: list<string>|null,
  * }
  */
 final class Filter implements BaseModel
@@ -24,24 +24,24 @@ final class Filter implements BaseModel
     /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?PortingOrder $porting_order;
+    #[Optional('porting_order')]
+    public ?PortingOrder $portingOrder;
 
     /**
      * Filter results by a list of porting phone number IDs.
      *
-     * @var list<string>|null $porting_phone_number
+     * @var list<string>|null $portingPhoneNumber
      */
-    #[Optional(list: 'string')]
-    public ?array $porting_phone_number;
+    #[Optional('porting_phone_number', list: 'string')]
+    public ?array $portingPhoneNumber;
 
     /**
      * Filter results by a list of user bundle IDs.
      *
-     * @var list<string>|null $user_bundle_id
+     * @var list<string>|null $userBundleID
      */
-    #[Optional(list: 'string')]
-    public ?array $user_bundle_id;
+    #[Optional('user_bundle_id', list: 'string')]
+    public ?array $userBundleID;
 
     public function __construct()
     {
@@ -53,20 +53,20 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortingOrder|array{status?: list<value-of<Status>>|null} $porting_order
-     * @param list<string> $porting_phone_number
-     * @param list<string> $user_bundle_id
+     * @param PortingOrder|array{status?: list<value-of<Status>>|null} $portingOrder
+     * @param list<string> $portingPhoneNumber
+     * @param list<string> $userBundleID
      */
     public static function with(
-        PortingOrder|array|null $porting_order = null,
-        ?array $porting_phone_number = null,
-        ?array $user_bundle_id = null,
+        PortingOrder|array|null $portingOrder = null,
+        ?array $portingPhoneNumber = null,
+        ?array $userBundleID = null,
     ): self {
         $obj = new self;
 
-        null !== $porting_order && $obj['porting_order'] = $porting_order;
-        null !== $porting_phone_number && $obj['porting_phone_number'] = $porting_phone_number;
-        null !== $user_bundle_id && $obj['user_bundle_id'] = $user_bundle_id;
+        null !== $portingOrder && $obj['portingOrder'] = $portingOrder;
+        null !== $portingPhoneNumber && $obj['portingPhoneNumber'] = $portingPhoneNumber;
+        null !== $userBundleID && $obj['userBundleID'] = $userBundleID;
 
         return $obj;
     }
@@ -77,7 +77,7 @@ final class Filter implements BaseModel
     public function withPortingOrder(PortingOrder|array $portingOrder): self
     {
         $obj = clone $this;
-        $obj['porting_order'] = $portingOrder;
+        $obj['portingOrder'] = $portingOrder;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class Filter implements BaseModel
     public function withPortingPhoneNumber(array $portingPhoneNumber): self
     {
         $obj = clone $this;
-        $obj['porting_phone_number'] = $portingPhoneNumber;
+        $obj['portingPhoneNumber'] = $portingPhoneNumber;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class Filter implements BaseModel
     public function withUserBundleID(array $userBundleID): self
     {
         $obj = clone $this;
-        $obj['user_bundle_id'] = $userBundleID;
+        $obj['userBundleID'] = $userBundleID;
 
         return $obj;
     }

@@ -36,18 +36,18 @@ final class CampaignGetSharingStatusResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param CampaignSharingStatus|array{
-     *   downstreamCnpId?: string|null,
+     *   downstreamCnpID?: string|null,
      *   sharedDate?: string|null,
      *   sharingStatus?: string|null,
      *   statusDate?: string|null,
-     *   upstreamCnpId?: string|null,
+     *   upstreamCnpID?: string|null,
      * } $sharedByMe
      * @param CampaignSharingStatus|array{
-     *   downstreamCnpId?: string|null,
+     *   downstreamCnpID?: string|null,
      *   sharedDate?: string|null,
      *   sharingStatus?: string|null,
      *   statusDate?: string|null,
-     *   upstreamCnpId?: string|null,
+     *   upstreamCnpID?: string|null,
      * } $sharedWithMe
      */
     public static function with(
@@ -64,11 +64,11 @@ final class CampaignGetSharingStatusResponse implements BaseModel
 
     /**
      * @param CampaignSharingStatus|array{
-     *   downstreamCnpId?: string|null,
+     *   downstreamCnpID?: string|null,
      *   sharedDate?: string|null,
      *   sharingStatus?: string|null,
      *   statusDate?: string|null,
-     *   upstreamCnpId?: string|null,
+     *   upstreamCnpID?: string|null,
      * } $sharedByMe
      */
     public function withSharedByMe(
@@ -82,11 +82,11 @@ final class CampaignGetSharingStatusResponse implements BaseModel
 
     /**
      * @param CampaignSharingStatus|array{
-     *   downstreamCnpId?: string|null,
+     *   downstreamCnpID?: string|null,
      *   sharedDate?: string|null,
      *   sharingStatus?: string|null,
      *   statusDate?: string|null,
-     *   upstreamCnpId?: string|null,
+     *   upstreamCnpID?: string|null,
      * } $sharedWithMe
      */
     public function withSharedWithMe(

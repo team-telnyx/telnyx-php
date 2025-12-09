@@ -33,15 +33,15 @@ final class PrivateWirelessGatewayNewResponse implements BaseModel
      *
      * @param PrivateWirelessGateway|array{
      *   id?: string|null,
-     *   assigned_resources?: list<PwgAssignedResourcesSummary>|null,
-     *   created_at?: string|null,
-     *   ip_range?: string|null,
+     *   assignedResources?: list<PwgAssignedResourcesSummary>|null,
+     *   createdAt?: string|null,
+     *   ipRange?: string|null,
      *   name?: string|null,
-     *   network_id?: string|null,
-     *   record_type?: string|null,
-     *   region_code?: string|null,
+     *   networkID?: string|null,
+     *   recordType?: string|null,
+     *   regionCode?: string|null,
      *   status?: PrivateWirelessGatewayStatus|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public static function with(PrivateWirelessGateway|array|null $data = null): self
@@ -56,15 +56,15 @@ final class PrivateWirelessGatewayNewResponse implements BaseModel
     /**
      * @param PrivateWirelessGateway|array{
      *   id?: string|null,
-     *   assigned_resources?: list<PwgAssignedResourcesSummary>|null,
-     *   created_at?: string|null,
-     *   ip_range?: string|null,
+     *   assignedResources?: list<PwgAssignedResourcesSummary>|null,
+     *   createdAt?: string|null,
+     *   ipRange?: string|null,
      *   name?: string|null,
-     *   network_id?: string|null,
-     *   record_type?: string|null,
-     *   region_code?: string|null,
+     *   networkID?: string|null,
+     *   recordType?: string|null,
+     *   regionCode?: string|null,
      *   status?: PrivateWirelessGatewayStatus|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public function withData(PrivateWirelessGateway|array $data): self

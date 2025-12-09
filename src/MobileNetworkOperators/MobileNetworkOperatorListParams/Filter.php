@@ -13,11 +13,11 @@ use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Filter\Name;
  * Consolidated filter parameter for mobile network operators (deepObject style). Originally: filter[name][starts_with], filter[name][contains], filter[name][ends_with], filter[country_code], filter[mcc], filter[mnc], filter[tadig], filter[network_preferences_enabled].
  *
  * @phpstan-type FilterShape = array{
- *   country_code?: string|null,
+ *   countryCode?: string|null,
  *   mcc?: string|null,
  *   mnc?: string|null,
  *   name?: Name|null,
- *   network_preferences_enabled?: bool|null,
+ *   networkPreferencesEnabled?: bool|null,
  *   tadig?: string|null,
  * }
  */
@@ -29,8 +29,8 @@ final class Filter implements BaseModel
     /**
      * Filter by exact country_code.
      */
-    #[Optional]
-    public ?string $country_code;
+    #[Optional('country_code')]
+    public ?string $countryCode;
 
     /**
      * Filter by exact MCC.
@@ -53,8 +53,8 @@ final class Filter implements BaseModel
     /**
      * Filter by network_preferences_enabled.
      */
-    #[Optional]
-    public ?bool $network_preferences_enabled;
+    #[Optional('network_preferences_enabled')]
+    public ?bool $networkPreferencesEnabled;
 
     /**
      * Filter by exact TADIG.
@@ -73,24 +73,24 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Name|array{
-     *   contains?: string|null, ends_with?: string|null, starts_with?: string|null
+     *   contains?: string|null, endsWith?: string|null, startsWith?: string|null
      * } $name
      */
     public static function with(
-        ?string $country_code = null,
+        ?string $countryCode = null,
         ?string $mcc = null,
         ?string $mnc = null,
         Name|array|null $name = null,
-        ?bool $network_preferences_enabled = null,
+        ?bool $networkPreferencesEnabled = null,
         ?string $tadig = null,
     ): self {
         $obj = new self;
 
-        null !== $country_code && $obj['country_code'] = $country_code;
+        null !== $countryCode && $obj['countryCode'] = $countryCode;
         null !== $mcc && $obj['mcc'] = $mcc;
         null !== $mnc && $obj['mnc'] = $mnc;
         null !== $name && $obj['name'] = $name;
-        null !== $network_preferences_enabled && $obj['network_preferences_enabled'] = $network_preferences_enabled;
+        null !== $networkPreferencesEnabled && $obj['networkPreferencesEnabled'] = $networkPreferencesEnabled;
         null !== $tadig && $obj['tadig'] = $tadig;
 
         return $obj;
@@ -102,7 +102,7 @@ final class Filter implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj['country_code'] = $countryCode;
+        $obj['countryCode'] = $countryCode;
 
         return $obj;
     }
@@ -133,7 +133,7 @@ final class Filter implements BaseModel
      * Advanced name filtering operations.
      *
      * @param Name|array{
-     *   contains?: string|null, ends_with?: string|null, starts_with?: string|null
+     *   contains?: string|null, endsWith?: string|null, startsWith?: string|null
      * } $name
      */
     public function withName(Name|array $name): self
@@ -151,7 +151,7 @@ final class Filter implements BaseModel
         bool $networkPreferencesEnabled
     ): self {
         $obj = clone $this;
-        $obj['network_preferences_enabled'] = $networkPreferencesEnabled;
+        $obj['networkPreferencesEnabled'] = $networkPreferencesEnabled;
 
         return $obj;
     }

@@ -30,9 +30,7 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
      * Creates a dynamic emergency endpoints.
      *
      * @param array{
-     *   callback_number: string,
-     *   caller_name: string,
-     *   dynamic_emergency_address_id: string,
+     *   callbackNumber: string, callerName: string, dynamicEmergencyAddressID: string
      * }|DynamicEmergencyEndpointCreateParams $params
      *
      * @throws APIException
@@ -87,7 +85,7 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
      *
      * @param array{
      *   filter?: array{
-     *     country_code?: string, status?: 'pending'|'activated'|'rejected'|Status
+     *     countryCode?: string, status?: 'pending'|'activated'|'rejected'|Status
      *   },
      *   page?: array{number?: int, size?: int},
      * }|DynamicEmergencyEndpointListParams $params

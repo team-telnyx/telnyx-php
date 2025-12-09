@@ -37,8 +37,7 @@ final class ReportsTest extends TestCase
         }
 
         $result = $this->client->porting->reports->create([
-            'params' => ['filters' => []],
-            'report_type' => 'export_porting_orders_csv',
+            'params' => ['filters' => []], 'reportType' => 'export_porting_orders_csv',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -55,17 +54,13 @@ final class ReportsTest extends TestCase
         $result = $this->client->porting->reports->create([
             'params' => [
                 'filters' => [
-                    'created_at__gt' => new \DateTimeImmutable(
-                        '2019-12-27T18:11:19.117Z'
-                    ),
-                    'created_at__lt' => new \DateTimeImmutable(
-                        '2019-12-27T18:11:19.117Z'
-                    ),
-                    'customer_reference__in' => ['my-customer-reference'],
-                    'status__in' => ['draft'],
+                    'createdAtGt' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+                    'createdAtLt' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+                    'customerReferenceIn' => ['my-customer-reference'],
+                    'statusIn' => ['draft'],
                 ],
             ],
-            'report_type' => 'export_porting_orders_csv',
+            'reportType' => 'export_porting_orders_csv',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

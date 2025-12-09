@@ -33,13 +33,13 @@ final class QueueGetResponse implements BaseModel
      *
      * @param Data|array{
      *   id: string,
-     *   average_wait_time_secs: int,
-     *   created_at: string,
-     *   current_size: int,
-     *   max_size: int,
+     *   averageWaitTimeSecs: int,
+     *   createdAt: string,
+     *   currentSize: int,
+     *   maxSize: int,
      *   name: string,
-     *   record_type: value-of<RecordType>,
-     *   updated_at: string,
+     *   recordType: value-of<RecordType>,
+     *   updatedAt: string,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -54,13 +54,13 @@ final class QueueGetResponse implements BaseModel
     /**
      * @param Data|array{
      *   id: string,
-     *   average_wait_time_secs: int,
-     *   created_at: string,
-     *   current_size: int,
-     *   max_size: int,
+     *   averageWaitTimeSecs: int,
+     *   createdAt: string,
+     *   currentSize: int,
+     *   maxSize: int,
      *   name: string,
-     *   record_type: value-of<RecordType>,
-     *   updated_at: string,
+     *   recordType: value-of<RecordType>,
+     *   updatedAt: string,
      * } $data
      */
     public function withData(Data|array $data): self

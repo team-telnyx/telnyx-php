@@ -9,6 +9,7 @@ use Telnyx\ChargesSummary\ChargesSummaryRetrieveParams;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ChargesSummaryContract;
 
@@ -25,7 +26,7 @@ final class ChargesSummaryService implements ChargesSummaryContract
      * Retrieve a summary of monthly charges for a specified date range. The date range cannot exceed 31 days.
      *
      * @param array{
-     *   end_date: string|\DateTimeInterface, start_date: string|\DateTimeInterface
+     *   endDate: string|\DateTimeInterface, startDate: string|\DateTimeInterface
      * }|ChargesSummaryRetrieveParams $params
      *
      * @throws APIException
@@ -43,7 +44,10 @@ final class ChargesSummaryService implements ChargesSummaryContract
         $response = $this->client->request(
             method: 'get',
             path: 'charges_summary',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['endDate' => 'end_date', 'startDate' => 'start_date']
+            ),
             options: $options,
             convert: ChargesSummaryGetResponse::class,
         );

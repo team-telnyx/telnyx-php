@@ -26,7 +26,7 @@ final class JsonService implements JsonContract
      * Permanently deletes a recording transcription.
      *
      * @param array{
-     *   account_sid: string
+     *   accountSid: string
      * }|JsonDeleteRecordingTranscriptionSidJsonParams $params
      *
      * @throws APIException
@@ -40,8 +40,8 @@ final class JsonService implements JsonContract
             $params,
             $requestOptions,
         );
-        $accountSid = $parsed['account_sid'];
-        unset($parsed['account_sid']);
+        $accountSid = $parsed['accountSid'];
+        unset($parsed['accountSid']);
 
         /** @var BaseResponse<mixed> */
         $response = $this->client->request(
@@ -64,7 +64,7 @@ final class JsonService implements JsonContract
      * Returns the recording transcription resource identified by its ID.
      *
      * @param array{
-     *   account_sid: string
+     *   accountSid: string
      * }|JsonRetrieveRecordingTranscriptionSidJsonParams $params
      *
      * @throws APIException
@@ -78,8 +78,8 @@ final class JsonService implements JsonContract
             $params,
             $requestOptions,
         );
-        $accountSid = $parsed['account_sid'];
-        unset($parsed['account_sid']);
+        $accountSid = $parsed['accountSid'];
+        unset($parsed['accountSid']);
 
         /** @var BaseResponse<JsonGetRecordingTranscriptionSidJsonResponse> */
         $response = $this->client->request(

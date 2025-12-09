@@ -13,12 +13,12 @@ use Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension\Exten
 /**
  * @phpstan-type PortingPhoneNumberExtensionShape = array{
  *   id?: string|null,
- *   activation_ranges?: list<ActivationRange>|null,
- *   created_at?: \DateTimeInterface|null,
- *   extension_range?: ExtensionRange|null,
- *   porting_phone_number_id?: string|null,
- *   record_type?: string|null,
- *   updated_at?: \DateTimeInterface|null,
+ *   activationRanges?: list<ActivationRange>|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   extensionRange?: ExtensionRange|null,
+ *   portingPhoneNumberID?: string|null,
+ *   recordType?: string|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class PortingPhoneNumberExtension implements BaseModel
@@ -35,40 +35,40 @@ final class PortingPhoneNumberExtension implements BaseModel
     /**
      * Specifies the activation ranges for this porting phone number extension. The activation range must be within the extension range and should not overlap with other activation ranges.
      *
-     * @var list<ActivationRange>|null $activation_ranges
+     * @var list<ActivationRange>|null $activationRanges
      */
-    #[Optional(list: ActivationRange::class)]
-    public ?array $activation_ranges;
+    #[Optional('activation_ranges', list: ActivationRange::class)]
+    public ?array $activationRanges;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
     /**
      * Specifies the extension range for this porting phone number extension.
      */
-    #[Optional]
-    public ?ExtensionRange $extension_range;
+    #[Optional('extension_range')]
+    public ?ExtensionRange $extensionRange;
 
     /**
      * Identifies the porting phone number associated with this porting phone number extension.
      */
-    #[Optional]
-    public ?string $porting_phone_number_id;
+    #[Optional('porting_phone_number_id')]
+    public ?string $portingPhoneNumberID;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * ISO 8601 formatted date indicating when the resource was last updated.
      */
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
     {
@@ -81,30 +81,30 @@ final class PortingPhoneNumberExtension implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<ActivationRange|array{
-     *   end_at?: int|null, start_at?: int|null
-     * }> $activation_ranges
+     *   endAt?: int|null, startAt?: int|null
+     * }> $activationRanges
      * @param ExtensionRange|array{
-     *   end_at?: int|null, start_at?: int|null
-     * } $extension_range
+     *   endAt?: int|null, startAt?: int|null
+     * } $extensionRange
      */
     public static function with(
         ?string $id = null,
-        ?array $activation_ranges = null,
-        ?\DateTimeInterface $created_at = null,
-        ExtensionRange|array|null $extension_range = null,
-        ?string $porting_phone_number_id = null,
-        ?string $record_type = null,
-        ?\DateTimeInterface $updated_at = null,
+        ?array $activationRanges = null,
+        ?\DateTimeInterface $createdAt = null,
+        ExtensionRange|array|null $extensionRange = null,
+        ?string $portingPhoneNumberID = null,
+        ?string $recordType = null,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $activation_ranges && $obj['activation_ranges'] = $activation_ranges;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $extension_range && $obj['extension_range'] = $extension_range;
-        null !== $porting_phone_number_id && $obj['porting_phone_number_id'] = $porting_phone_number_id;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $activationRanges && $obj['activationRanges'] = $activationRanges;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $extensionRange && $obj['extensionRange'] = $extensionRange;
+        null !== $portingPhoneNumberID && $obj['portingPhoneNumberID'] = $portingPhoneNumberID;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -124,13 +124,13 @@ final class PortingPhoneNumberExtension implements BaseModel
      * Specifies the activation ranges for this porting phone number extension. The activation range must be within the extension range and should not overlap with other activation ranges.
      *
      * @param list<ActivationRange|array{
-     *   end_at?: int|null, start_at?: int|null
+     *   endAt?: int|null, startAt?: int|null
      * }> $activationRanges
      */
     public function withActivationRanges(array $activationRanges): self
     {
         $obj = clone $this;
-        $obj['activation_ranges'] = $activationRanges;
+        $obj['activationRanges'] = $activationRanges;
 
         return $obj;
     }
@@ -141,7 +141,7 @@ final class PortingPhoneNumberExtension implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -150,14 +150,14 @@ final class PortingPhoneNumberExtension implements BaseModel
      * Specifies the extension range for this porting phone number extension.
      *
      * @param ExtensionRange|array{
-     *   end_at?: int|null, start_at?: int|null
+     *   endAt?: int|null, startAt?: int|null
      * } $extensionRange
      */
     public function withExtensionRange(
         ExtensionRange|array $extensionRange
     ): self {
         $obj = clone $this;
-        $obj['extension_range'] = $extensionRange;
+        $obj['extensionRange'] = $extensionRange;
 
         return $obj;
     }
@@ -168,7 +168,7 @@ final class PortingPhoneNumberExtension implements BaseModel
     public function withPortingPhoneNumberID(string $portingPhoneNumberID): self
     {
         $obj = clone $this;
-        $obj['porting_phone_number_id'] = $portingPhoneNumberID;
+        $obj['portingPhoneNumberID'] = $portingPhoneNumberID;
 
         return $obj;
     }
@@ -179,7 +179,7 @@ final class PortingPhoneNumberExtension implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -190,7 +190,7 @@ final class PortingPhoneNumberExtension implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

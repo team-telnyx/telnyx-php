@@ -33,9 +33,9 @@ final class ExternalConnectionUpdateLocationResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Data|array{
-     *   accepted_address_suggestions?: bool|null,
-     *   location_id?: string|null,
-     *   static_emergency_address_id?: string|null,
+     *   acceptedAddressSuggestions?: bool|null,
+     *   locationID?: string|null,
+     *   staticEmergencyAddressID?: string|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -49,9 +49,9 @@ final class ExternalConnectionUpdateLocationResponse implements BaseModel
 
     /**
      * @param Data|array{
-     *   accepted_address_suggestions?: bool|null,
-     *   location_id?: string|null,
-     *   static_emergency_address_id?: string|null,
+     *   acceptedAddressSuggestions?: bool|null,
+     *   locationID?: string|null,
+     *   staticEmergencyAddressID?: string|null,
      * } $data
      */
     public function withData(Data|array $data): self

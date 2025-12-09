@@ -7,6 +7,7 @@ namespace Telnyx\Services\SimCards;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCards\ActionsContract;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsParams;
@@ -61,9 +62,9 @@ final class ActionsService implements ActionsContract
      *
      * @param array{
      *   filter?: array{
-     *     action_type?: 'enable'|'enable_standby_sim_card'|'disable'|'set_standby'|'remove_public_ip'|'set_public_ip'|ActionType,
-     *     bulk_sim_card_action_id?: string,
-     *     sim_card_id?: string,
+     *     actionType?: 'enable'|'enable_standby_sim_card'|'disable'|'set_standby'|'remove_public_ip'|'set_public_ip'|ActionType,
+     *     bulkSimCardActionID?: string,
+     *     simCardID?: string,
      *     status?: 'in-progress'|'completed'|'failed'|Status,
      *   },
      *   page?: array{number?: int, size?: int},
@@ -98,7 +99,7 @@ final class ActionsService implements ActionsContract
      * This API triggers an asynchronous operation to set a public IP for each of the specified SIM cards.<br/>
      * For each SIM Card a SIM Card Action will be generated. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api/wireless/list-sim-card-actions) API.
      *
-     * @param array{sim_card_ids: list<string>}|ActionBulkSetPublicIPsParams $params
+     * @param array{simCardIDs: list<string>}|ActionBulkSetPublicIPsParams $params
      *
      * @throws APIException
      */
@@ -200,7 +201,7 @@ final class ActionsService implements ActionsContract
      *  The API will trigger an asynchronous operation called a SIM Card Action. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api/wireless/list-sim-card-actions) API. <br/><br/>
      *  Setting a Public IP to a SIM Card incurs a charge and will only succeed if the account has sufficient funds.
      *
-     * @param array{region_code?: string}|ActionSetPublicIPParams $params
+     * @param array{regionCode?: string}|ActionSetPublicIPParams $params
      *
      * @throws APIException
      */
@@ -218,7 +219,10 @@ final class ActionsService implements ActionsContract
         $response = $this->client->request(
             method: 'post',
             path: ['sim_cards/%1$s/actions/set_public_ip', $id],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['regionCode' => 'region_code']
+            ),
             options: $options,
             convert: ActionSetPublicIPResponse::class,
         );
@@ -256,7 +260,7 @@ final class ActionsService implements ActionsContract
      * It validates whether SIM card registration codes are valid or not.
      *
      * @param array{
-     *   registration_codes?: list<string>
+     *   registrationCodes?: list<string>
      * }|ActionValidateRegistrationCodesParams $params
      *
      * @throws APIException

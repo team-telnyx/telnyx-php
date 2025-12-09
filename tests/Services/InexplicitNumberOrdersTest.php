@@ -37,11 +37,11 @@ final class InexplicitNumberOrdersTest extends TestCase
         }
 
         $result = $this->client->inexplicitNumberOrders->create([
-            'ordering_groups' => [
+            'orderingGroups' => [
                 [
-                    'count_requested' => 'count_requested',
-                    'country_iso' => 'US',
-                    'phone_number_type' => 'phone_number_type',
+                    'countRequested' => 'count_requested',
+                    'countryISO' => 'US',
+                    'phoneNumberType' => 'phone_number_type',
                 ],
             ],
         ]);
@@ -58,29 +58,29 @@ final class InexplicitNumberOrdersTest extends TestCase
         }
 
         $result = $this->client->inexplicitNumberOrders->create([
-            'ordering_groups' => [
+            'orderingGroups' => [
                 [
-                    'count_requested' => 'count_requested',
-                    'country_iso' => 'US',
-                    'phone_number_type' => 'phone_number_type',
-                    'administrative_area' => 'administrative_area',
-                    'exclude_held_numbers' => true,
+                    'countRequested' => 'count_requested',
+                    'countryISO' => 'US',
+                    'phoneNumberType' => 'phone_number_type',
+                    'administrativeArea' => 'administrative_area',
+                    'excludeHeldNumbers' => true,
                     'features' => ['string'],
                     'locality' => 'locality',
-                    'national_destination_code' => 'national_destination_code',
-                    'phone_number' => [
+                    'nationalDestinationCode' => 'national_destination_code',
+                    'phoneNumber' => [
                         'contains' => 'contains',
-                        'ends_with' => 'ends_with',
-                        'starts_with' => 'starts_with',
+                        'endsWith' => 'ends_with',
+                        'startsWith' => 'starts_with',
                     ],
                     'quickship' => true,
                     'strategy' => 'always',
                 ],
             ],
-            'billing_group_id' => 'billing_group_id',
-            'connection_id' => 'connection_id',
-            'customer_reference' => 'customer_reference',
-            'messaging_profile_id' => 'messaging_profile_id',
+            'billingGroupID' => 'billing_group_id',
+            'connectionID' => 'connection_id',
+            'customerReference' => 'customer_reference',
+            'messagingProfileID' => 'messaging_profile_id',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

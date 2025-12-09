@@ -18,6 +18,7 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Conversion\MapOf;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CampaignContract;
 use Telnyx\Services\Campaign\OsrService;
@@ -75,7 +76,7 @@ final class CampaignService implements CampaignContract
      *   autoRenewal?: bool,
      *   helpMessage?: string,
      *   messageFlow?: string,
-     *   resellerId?: string,
+     *   resellerID?: string,
      *   sample1?: string,
      *   sample2?: string,
      *   sample3?: string,
@@ -115,7 +116,7 @@ final class CampaignService implements CampaignContract
      * Retrieve a list of campaigns associated with a supplied `brandId`.
      *
      * @param array{
-     *   brandId: string, page?: int, recordsPerPage?: int, sort?: value-of<Sort>
+     *   brandID: string, page?: int, recordsPerPage?: int, sort?: value-of<Sort>
      * }|CampaignListParams $params
      *
      * @throws APIException
@@ -133,7 +134,7 @@ final class CampaignService implements CampaignContract
         $response = $this->client->request(
             method: 'get',
             path: '10dlc/campaign',
-            query: $parsed,
+            query: Util::array_transform_keys($parsed, ['brandID' => 'brandId']),
             options: $options,
             convert: CampaignListResponse::class,
         );
@@ -260,7 +261,7 @@ final class CampaignService implements CampaignContract
      *
      * Submits an appeal for rejected native campaigns in TELNYX_FAILED or MNO_REJECTED status. The appeal is recorded for manual compliance team review and the campaign status is reset to TCR_ACCEPTED. Note: Appeal forwarding is handled manually to allow proper review before incurring upstream charges.
      *
-     * @param array{appeal_reason: string}|CampaignSubmitAppealParams $params
+     * @param array{appealReason: string}|CampaignSubmitAppealParams $params
      *
      * @throws APIException
      */

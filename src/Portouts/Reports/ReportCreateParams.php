@@ -18,7 +18,7 @@ use Telnyx\Portouts\Reports\ReportCreateParams\ReportType;
  *
  * @phpstan-type ReportCreateParamsShape = array{
  *   params: ExportPortoutsCsvReport|array{filters: Filters},
- *   report_type: ReportType|value-of<ReportType>,
+ *   reportType: ReportType|value-of<ReportType>,
  * }
  */
 final class ReportCreateParams implements BaseModel
@@ -36,17 +36,17 @@ final class ReportCreateParams implements BaseModel
     /**
      * Identifies the type of report.
      *
-     * @var value-of<ReportType> $report_type
+     * @var value-of<ReportType> $reportType
      */
-    #[Required(enum: ReportType::class)]
-    public string $report_type;
+    #[Required('report_type', enum: ReportType::class)]
+    public string $reportType;
 
     /**
      * `new ReportCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ReportCreateParams::with(params: ..., report_type: ...)
+     * ReportCreateParams::with(params: ..., reportType: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -66,16 +66,16 @@ final class ReportCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param ExportPortoutsCsvReport|array{filters: Filters} $params
-     * @param ReportType|value-of<ReportType> $report_type
+     * @param ReportType|value-of<ReportType> $reportType
      */
     public static function with(
         ExportPortoutsCsvReport|array $params,
-        ReportType|string $report_type
+        ReportType|string $reportType
     ): self {
         $obj = new self;
 
         $obj['params'] = $params;
-        $obj['report_type'] = $report_type;
+        $obj['reportType'] = $reportType;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class ReportCreateParams implements BaseModel
     public function withReportType(ReportType|string $reportType): self
     {
         $obj = clone $this;
-        $obj['report_type'] = $reportType;
+        $obj['reportType'] = $reportType;
 
         return $obj;
     }

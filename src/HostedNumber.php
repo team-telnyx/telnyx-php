@@ -12,8 +12,8 @@ use Telnyx\HostedNumber\Status;
 /**
  * @phpstan-type HostedNumberShape = array{
  *   id?: string|null,
- *   phone_number?: string|null,
- *   record_type?: string|null,
+ *   phoneNumber?: string|null,
+ *   recordType?: string|null,
  *   status?: value-of<Status>|null,
  * }
  */
@@ -31,11 +31,11 @@ final class HostedNumber implements BaseModel
     /**
      * The messaging hosted phone number (+E.164 format).
      */
-    #[Optional]
-    public ?string $phone_number;
+    #[Optional('phone_number')]
+    public ?string $phoneNumber;
 
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /** @var value-of<Status>|null $status */
     #[Optional(enum: Status::class)]
@@ -55,15 +55,15 @@ final class HostedNumber implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $phone_number = null,
-        ?string $record_type = null,
+        ?string $phoneNumber = null,
+        ?string $recordType = null,
         Status|string|null $status = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $phone_number && $obj['phone_number'] = $phone_number;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
+        null !== $recordType && $obj['recordType'] = $recordType;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -86,7 +86,7 @@ final class HostedNumber implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class HostedNumber implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

@@ -50,7 +50,7 @@ final class MessagingService implements MessagingContract
      * Update the messaging profile and/or messaging product of a phone number
      *
      * @param array{
-     *   messaging_product?: string, messaging_profile_id?: string
+     *   messagingProduct?: string, messagingProfileID?: string
      * }|MessagingUpdateParams $params
      *
      * @throws APIException

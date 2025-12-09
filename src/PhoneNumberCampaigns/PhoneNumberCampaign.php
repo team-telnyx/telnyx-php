@@ -12,16 +12,16 @@ use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign\AssignmentStatus;
 
 /**
  * @phpstan-type PhoneNumberCampaignShape = array{
- *   campaignId: string,
+ *   campaignID: string,
  *   createdAt: string,
  *   phoneNumber: string,
  *   updatedAt: string,
  *   assignmentStatus?: value-of<AssignmentStatus>|null,
- *   brandId?: string|null,
+ *   brandID?: string|null,
  *   failureReasons?: string|null,
- *   tcrBrandId?: string|null,
- *   tcrCampaignId?: string|null,
- *   telnyxCampaignId?: string|null,
+ *   tcrBrandID?: string|null,
+ *   tcrCampaignID?: string|null,
+ *   telnyxCampaignID?: string|null,
  * }
  */
 final class PhoneNumberCampaign implements BaseModel
@@ -32,8 +32,8 @@ final class PhoneNumberCampaign implements BaseModel
     /**
      * For shared campaigns, this is the TCR campaign ID, otherwise it is the campaign ID.
      */
-    #[Required]
-    public string $campaignId;
+    #[Required('campaignId')]
+    public string $campaignID;
 
     #[Required]
     public string $createdAt;
@@ -55,8 +55,8 @@ final class PhoneNumberCampaign implements BaseModel
     /**
      * Brand ID. Empty if the number is associated to a shared campaign.
      */
-    #[Optional]
-    public ?string $brandId;
+    #[Optional('brandId')]
+    public ?string $brandID;
 
     /**
      * Extra info about a failure to assign/unassign a number. Relevant only if the assignmentStatus is either FAILED_ASSIGNMENT or FAILED_UNASSIGNMENT.
@@ -67,20 +67,20 @@ final class PhoneNumberCampaign implements BaseModel
     /**
      * TCR's alphanumeric ID for the brand.
      */
-    #[Optional]
-    public ?string $tcrBrandId;
+    #[Optional('tcrBrandId')]
+    public ?string $tcrBrandID;
 
     /**
      * TCR's alphanumeric ID for the campaign.
      */
-    #[Optional]
-    public ?string $tcrCampaignId;
+    #[Optional('tcrCampaignId')]
+    public ?string $tcrCampaignID;
 
     /**
      * Campaign ID. Empty if the number is associated to a shared campaign.
      */
-    #[Optional]
-    public ?string $telnyxCampaignId;
+    #[Optional('telnyxCampaignId')]
+    public ?string $telnyxCampaignID;
 
     /**
      * `new PhoneNumberCampaign()` is missing required properties by the API.
@@ -88,7 +88,7 @@ final class PhoneNumberCampaign implements BaseModel
      * To enforce required parameters use
      * ```
      * PhoneNumberCampaign::with(
-     *   campaignId: ..., createdAt: ..., phoneNumber: ..., updatedAt: ...
+     *   campaignID: ..., createdAt: ..., phoneNumber: ..., updatedAt: ...
      * )
      * ```
      *
@@ -115,30 +115,30 @@ final class PhoneNumberCampaign implements BaseModel
      * @param AssignmentStatus|value-of<AssignmentStatus> $assignmentStatus
      */
     public static function with(
-        string $campaignId,
+        string $campaignID,
         string $createdAt,
         string $phoneNumber,
         string $updatedAt,
         AssignmentStatus|string|null $assignmentStatus = null,
-        ?string $brandId = null,
+        ?string $brandID = null,
         ?string $failureReasons = null,
-        ?string $tcrBrandId = null,
-        ?string $tcrCampaignId = null,
-        ?string $telnyxCampaignId = null,
+        ?string $tcrBrandID = null,
+        ?string $tcrCampaignID = null,
+        ?string $telnyxCampaignID = null,
     ): self {
         $obj = new self;
 
-        $obj['campaignId'] = $campaignId;
+        $obj['campaignID'] = $campaignID;
         $obj['createdAt'] = $createdAt;
         $obj['phoneNumber'] = $phoneNumber;
         $obj['updatedAt'] = $updatedAt;
 
         null !== $assignmentStatus && $obj['assignmentStatus'] = $assignmentStatus;
-        null !== $brandId && $obj['brandId'] = $brandId;
+        null !== $brandID && $obj['brandID'] = $brandID;
         null !== $failureReasons && $obj['failureReasons'] = $failureReasons;
-        null !== $tcrBrandId && $obj['tcrBrandId'] = $tcrBrandId;
-        null !== $tcrCampaignId && $obj['tcrCampaignId'] = $tcrCampaignId;
-        null !== $telnyxCampaignId && $obj['telnyxCampaignId'] = $telnyxCampaignId;
+        null !== $tcrBrandID && $obj['tcrBrandID'] = $tcrBrandID;
+        null !== $tcrCampaignID && $obj['tcrCampaignID'] = $tcrCampaignID;
+        null !== $telnyxCampaignID && $obj['telnyxCampaignID'] = $telnyxCampaignID;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class PhoneNumberCampaign implements BaseModel
     public function withCampaignID(string $campaignID): self
     {
         $obj = clone $this;
-        $obj['campaignId'] = $campaignID;
+        $obj['campaignID'] = $campaignID;
 
         return $obj;
     }
@@ -198,7 +198,7 @@ final class PhoneNumberCampaign implements BaseModel
     public function withBrandID(string $brandID): self
     {
         $obj = clone $this;
-        $obj['brandId'] = $brandID;
+        $obj['brandID'] = $brandID;
 
         return $obj;
     }
@@ -220,7 +220,7 @@ final class PhoneNumberCampaign implements BaseModel
     public function withTcrBrandID(string $tcrBrandID): self
     {
         $obj = clone $this;
-        $obj['tcrBrandId'] = $tcrBrandID;
+        $obj['tcrBrandID'] = $tcrBrandID;
 
         return $obj;
     }
@@ -231,7 +231,7 @@ final class PhoneNumberCampaign implements BaseModel
     public function withTcrCampaignID(string $tcrCampaignID): self
     {
         $obj = clone $this;
-        $obj['tcrCampaignId'] = $tcrCampaignID;
+        $obj['tcrCampaignID'] = $tcrCampaignID;
 
         return $obj;
     }
@@ -242,7 +242,7 @@ final class PhoneNumberCampaign implements BaseModel
     public function withTelnyxCampaignID(string $telnyxCampaignID): self
     {
         $obj = clone $this;
-        $obj['telnyxCampaignId'] = $telnyxCampaignID;
+        $obj['telnyxCampaignID'] = $telnyxCampaignID;
 
         return $obj;
     }

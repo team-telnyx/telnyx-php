@@ -34,11 +34,11 @@ final class RcListBulkCapabilitiesResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<RcsCapabilities|array{
-     *   agent_id?: string|null,
-     *   agent_name?: string|null,
+     *   agentID?: string|null,
+     *   agentName?: string|null,
      *   features?: list<string>|null,
-     *   phone_number?: string|null,
-     *   record_type?: value-of<RecordType>|null,
+     *   phoneNumber?: string|null,
+     *   recordType?: value-of<RecordType>|null,
      * }> $data
      */
     public static function with(?array $data = null): self
@@ -52,11 +52,11 @@ final class RcListBulkCapabilitiesResponse implements BaseModel
 
     /**
      * @param list<RcsCapabilities|array{
-     *   agent_id?: string|null,
-     *   agent_name?: string|null,
+     *   agentID?: string|null,
+     *   agentName?: string|null,
      *   features?: list<string>|null,
-     *   phone_number?: string|null,
-     *   record_type?: value-of<RecordType>|null,
+     *   phoneNumber?: string|null,
+     *   recordType?: value-of<RecordType>|null,
      * }> $data
      */
     public function withData(array $data): self

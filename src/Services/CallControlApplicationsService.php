@@ -41,27 +41,27 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      * Create a call control application.
      *
      * @param array{
-     *   application_name: string,
-     *   webhook_event_url: string,
+     *   applicationName: string,
+     *   webhookEventURL: string,
      *   active?: bool,
-     *   anchorsite_override?: value-of<AnchorsiteOverride>,
-     *   call_cost_in_webhooks?: bool,
-     *   dtmf_type?: 'RFC 2833'|'Inband'|'SIP INFO'|DtmfType,
-     *   first_command_timeout?: bool,
-     *   first_command_timeout_secs?: int,
+     *   anchorsiteOverride?: value-of<AnchorsiteOverride>,
+     *   callCostInWebhooks?: bool,
+     *   dtmfType?: 'RFC 2833'|'Inband'|'SIP INFO'|DtmfType,
+     *   firstCommandTimeout?: bool,
+     *   firstCommandTimeoutSecs?: int,
      *   inbound?: array{
-     *     channel_limit?: int,
-     *     shaken_stir_enabled?: bool,
-     *     sip_subdomain?: string,
-     *     sip_subdomain_receive_settings?: 'only_my_connections'|'from_anyone'|SipSubdomainReceiveSettings,
+     *     channelLimit?: int,
+     *     shakenStirEnabled?: bool,
+     *     sipSubdomain?: string,
+     *     sipSubdomainReceiveSettings?: 'only_my_connections'|'from_anyone'|SipSubdomainReceiveSettings,
      *   }|CallControlApplicationInbound,
      *   outbound?: array{
-     *     channel_limit?: int, outbound_voice_profile_id?: string
+     *     channelLimit?: int, outboundVoiceProfileID?: string
      *   }|CallControlApplicationOutbound,
-     *   redact_dtmf_debug_logging?: bool,
-     *   webhook_api_version?: '1'|'2'|WebhookAPIVersion,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_timeout_secs?: int|null,
+     *   redactDtmfDebugLogging?: bool,
+     *   webhookAPIVersion?: '1'|'2'|WebhookAPIVersion,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookTimeoutSecs?: int|null,
      * }|CallControlApplicationCreateParams $params
      *
      * @throws APIException
@@ -115,28 +115,28 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      * Updates settings of an existing call control application.
      *
      * @param array{
-     *   application_name: string,
-     *   webhook_event_url: string,
+     *   applicationName: string,
+     *   webhookEventURL: string,
      *   active?: bool,
-     *   anchorsite_override?: value-of<CallControlApplicationUpdateParams\AnchorsiteOverride>,
-     *   call_cost_in_webhooks?: bool,
-     *   dtmf_type?: 'RFC 2833'|'Inband'|'SIP INFO'|CallControlApplicationUpdateParams\DtmfType,
-     *   first_command_timeout?: bool,
-     *   first_command_timeout_secs?: int,
+     *   anchorsiteOverride?: value-of<CallControlApplicationUpdateParams\AnchorsiteOverride>,
+     *   callCostInWebhooks?: bool,
+     *   dtmfType?: 'RFC 2833'|'Inband'|'SIP INFO'|CallControlApplicationUpdateParams\DtmfType,
+     *   firstCommandTimeout?: bool,
+     *   firstCommandTimeoutSecs?: int,
      *   inbound?: array{
-     *     channel_limit?: int,
-     *     shaken_stir_enabled?: bool,
-     *     sip_subdomain?: string,
-     *     sip_subdomain_receive_settings?: 'only_my_connections'|'from_anyone'|SipSubdomainReceiveSettings,
+     *     channelLimit?: int,
+     *     shakenStirEnabled?: bool,
+     *     sipSubdomain?: string,
+     *     sipSubdomainReceiveSettings?: 'only_my_connections'|'from_anyone'|SipSubdomainReceiveSettings,
      *   }|CallControlApplicationInbound,
      *   outbound?: array{
-     *     channel_limit?: int, outbound_voice_profile_id?: string
+     *     channelLimit?: int, outboundVoiceProfileID?: string
      *   }|CallControlApplicationOutbound,
-     *   redact_dtmf_debug_logging?: bool,
+     *   redactDtmfDebugLogging?: bool,
      *   tags?: list<string>,
-     *   webhook_api_version?: '1'|'2'|CallControlApplicationUpdateParams\WebhookAPIVersion,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_timeout_secs?: int|null,
+     *   webhookAPIVersion?: '1'|'2'|CallControlApplicationUpdateParams\WebhookAPIVersion,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookTimeoutSecs?: int|null,
      * }|CallControlApplicationUpdateParams $params
      *
      * @throws APIException
@@ -170,17 +170,17 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      *
      * @param array{
      *   filter?: array{
-     *     application_name?: array{contains?: string},
-     *     application_session_id?: string,
-     *     connection_id?: string,
+     *     applicationName?: array{contains?: string},
+     *     applicationSessionID?: string,
+     *     connectionID?: string,
      *     failed?: bool,
      *     from?: string,
-     *     leg_id?: string,
+     *     legID?: string,
      *     name?: string,
-     *     occurred_at?: array{
+     *     occurredAt?: array{
      *       eq?: string, gt?: string, gte?: string, lt?: string, lte?: string
      *     },
-     *     'outbound.outbound_voice_profile_id'?: string,
+     *     outboundOutboundVoiceProfileID?: string,
      *     product?: 'call_control'|'fax'|'texml'|Product,
      *     status?: 'init'|'in_progress'|'completed'|Status,
      *     to?: string,

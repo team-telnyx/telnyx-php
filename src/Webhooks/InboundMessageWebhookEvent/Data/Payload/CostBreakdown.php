@@ -14,7 +14,7 @@ use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\Payload\CostBreakdown\Rate;
  * Detailed breakdown of the message cost components.
  *
  * @phpstan-type CostBreakdownShape = array{
- *   carrier_fee?: CarrierFee|null, rate?: Rate|null
+ *   carrierFee?: CarrierFee|null, rate?: Rate|null
  * }
  */
 final class CostBreakdown implements BaseModel
@@ -22,8 +22,8 @@ final class CostBreakdown implements BaseModel
     /** @use SdkModel<CostBreakdownShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?CarrierFee $carrier_fee;
+    #[Optional('carrier_fee')]
+    public ?CarrierFee $carrierFee;
 
     #[Optional]
     public ?Rate $rate;
@@ -40,16 +40,16 @@ final class CostBreakdown implements BaseModel
      *
      * @param CarrierFee|array{
      *   amount?: string|null, currency?: string|null
-     * } $carrier_fee
+     * } $carrierFee
      * @param Rate|array{amount?: string|null, currency?: string|null} $rate
      */
     public static function with(
-        CarrierFee|array|null $carrier_fee = null,
+        CarrierFee|array|null $carrierFee = null,
         Rate|array|null $rate = null
     ): self {
         $obj = new self;
 
-        null !== $carrier_fee && $obj['carrier_fee'] = $carrier_fee;
+        null !== $carrierFee && $obj['carrierFee'] = $carrierFee;
         null !== $rate && $obj['rate'] = $rate;
 
         return $obj;
@@ -63,7 +63,7 @@ final class CostBreakdown implements BaseModel
     public function withCarrierFee(CarrierFee|array $carrierFee): self
     {
         $obj = clone $this;
-        $obj['carrier_fee'] = $carrierFee;
+        $obj['carrierFee'] = $carrierFee;
 
         return $obj;
     }

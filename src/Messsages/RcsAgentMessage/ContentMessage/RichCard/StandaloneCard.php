@@ -17,9 +17,9 @@ use Telnyx\Messsages\RcsSuggestion;
  * Standalone card.
  *
  * @phpstan-type StandaloneCardShape = array{
- *   card_content: RcsCardContent,
- *   card_orientation: value-of<CardOrientation>,
- *   thumbnail_image_alignment: value-of<ThumbnailImageAlignment>,
+ *   cardContent: RcsCardContent,
+ *   cardOrientation: value-of<CardOrientation>,
+ *   thumbnailImageAlignment: value-of<ThumbnailImageAlignment>,
  * }
  */
 final class StandaloneCard implements BaseModel
@@ -27,24 +27,24 @@ final class StandaloneCard implements BaseModel
     /** @use SdkModel<StandaloneCardShape> */
     use SdkModel;
 
-    #[Required]
-    public RcsCardContent $card_content;
+    #[Required('card_content')]
+    public RcsCardContent $cardContent;
 
     /**
      * Orientation of the card.
      *
-     * @var value-of<CardOrientation> $card_orientation
+     * @var value-of<CardOrientation> $cardOrientation
      */
-    #[Required(enum: CardOrientation::class)]
-    public string $card_orientation;
+    #[Required('card_orientation', enum: CardOrientation::class)]
+    public string $cardOrientation;
 
     /**
      * Image preview alignment for standalone cards with horizontal layout.
      *
-     * @var value-of<ThumbnailImageAlignment> $thumbnail_image_alignment
+     * @var value-of<ThumbnailImageAlignment> $thumbnailImageAlignment
      */
-    #[Required(enum: ThumbnailImageAlignment::class)]
-    public string $thumbnail_image_alignment;
+    #[Required('thumbnail_image_alignment', enum: ThumbnailImageAlignment::class)]
+    public string $thumbnailImageAlignment;
 
     /**
      * `new StandaloneCard()` is missing required properties by the API.
@@ -52,7 +52,7 @@ final class StandaloneCard implements BaseModel
      * To enforce required parameters use
      * ```
      * StandaloneCard::with(
-     *   card_content: ..., card_orientation: ..., thumbnail_image_alignment: ...
+     *   cardContent: ..., cardOrientation: ..., thumbnailImageAlignment: ...
      * )
      * ```
      *
@@ -80,20 +80,20 @@ final class StandaloneCard implements BaseModel
      *   media?: Media|null,
      *   suggestions?: list<RcsSuggestion>|null,
      *   title?: string|null,
-     * } $card_content
-     * @param CardOrientation|value-of<CardOrientation> $card_orientation
-     * @param ThumbnailImageAlignment|value-of<ThumbnailImageAlignment> $thumbnail_image_alignment
+     * } $cardContent
+     * @param CardOrientation|value-of<CardOrientation> $cardOrientation
+     * @param ThumbnailImageAlignment|value-of<ThumbnailImageAlignment> $thumbnailImageAlignment
      */
     public static function with(
-        RcsCardContent|array $card_content,
-        CardOrientation|string $card_orientation,
-        ThumbnailImageAlignment|string $thumbnail_image_alignment,
+        RcsCardContent|array $cardContent,
+        CardOrientation|string $cardOrientation,
+        ThumbnailImageAlignment|string $thumbnailImageAlignment,
     ): self {
         $obj = new self;
 
-        $obj['card_content'] = $card_content;
-        $obj['card_orientation'] = $card_orientation;
-        $obj['thumbnail_image_alignment'] = $thumbnail_image_alignment;
+        $obj['cardContent'] = $cardContent;
+        $obj['cardOrientation'] = $cardOrientation;
+        $obj['thumbnailImageAlignment'] = $thumbnailImageAlignment;
 
         return $obj;
     }
@@ -109,7 +109,7 @@ final class StandaloneCard implements BaseModel
     public function withCardContent(RcsCardContent|array $cardContent): self
     {
         $obj = clone $this;
-        $obj['card_content'] = $cardContent;
+        $obj['cardContent'] = $cardContent;
 
         return $obj;
     }
@@ -123,7 +123,7 @@ final class StandaloneCard implements BaseModel
         CardOrientation|string $cardOrientation
     ): self {
         $obj = clone $this;
-        $obj['card_orientation'] = $cardOrientation;
+        $obj['cardOrientation'] = $cardOrientation;
 
         return $obj;
     }
@@ -137,7 +137,7 @@ final class StandaloneCard implements BaseModel
         ThumbnailImageAlignment|string $thumbnailImageAlignment
     ): self {
         $obj = clone $this;
-        $obj['thumbnail_image_alignment'] = $thumbnailImageAlignment;
+        $obj['thumbnailImageAlignment'] = $thumbnailImageAlignment;
 
         return $obj;
     }

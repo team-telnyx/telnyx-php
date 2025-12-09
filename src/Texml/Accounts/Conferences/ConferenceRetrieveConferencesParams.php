@@ -16,13 +16,13 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveConferencesParams\Status
  * @see Telnyx\Services\Texml\Accounts\ConferencesService::retrieveConferences()
  *
  * @phpstan-type ConferenceRetrieveConferencesParamsShape = array{
- *   DateCreated?: string,
- *   DateUpdated?: string,
- *   FriendlyName?: string,
- *   Page?: int,
- *   PageSize?: int,
- *   PageToken?: string,
- *   Status?: \Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveConferencesParams\Status|value-of<\Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveConferencesParams\Status>,
+ *   dateCreated?: string,
+ *   dateUpdated?: string,
+ *   friendlyName?: string,
+ *   page?: int,
+ *   pageSize?: int,
+ *   pageToken?: string,
+ *   status?: Status|value-of<Status>,
  * }
  */
 final class ConferenceRetrieveConferencesParams implements BaseModel
@@ -35,47 +35,45 @@ final class ConferenceRetrieveConferencesParams implements BaseModel
      * Filters conferences by the creation date. Expected format is YYYY-MM-DD. Also accepts inequality operators, e.g. DateCreated>=2023-05-22.
      */
     #[Optional]
-    public ?string $DateCreated;
+    public ?string $dateCreated;
 
     /**
      * Filters conferences by the time they were last updated. Expected format is YYYY-MM-DD. Also accepts inequality operators, e.g. DateUpdated>=2023-05-22.
      */
     #[Optional]
-    public ?string $DateUpdated;
+    public ?string $dateUpdated;
 
     /**
      * Filters conferences by their friendly name.
      */
     #[Optional]
-    public ?string $FriendlyName;
+    public ?string $friendlyName;
 
     /**
      * The number of the page to be displayed, zero-indexed, should be used in conjuction with PageToken.
      */
     #[Optional]
-    public ?int $Page;
+    public ?int $page;
 
     /**
      * The number of records to be displayed on a page.
      */
     #[Optional]
-    public ?int $PageSize;
+    public ?int $pageSize;
 
     /**
      * Used to request the next page of results.
      */
     #[Optional]
-    public ?string $PageToken;
+    public ?string $pageToken;
 
     /**
      * Filters conferences by status.
      *
-     * @var value-of<Status>|null $Status
+     * @var value-of<Status>|null $status
      */
-    #[Optional(
-        enum: Status::class,
-    )]
-    public ?string $Status;
+    #[Optional(enum: Status::class)]
+    public ?string $status;
 
     public function __construct()
     {
@@ -87,26 +85,26 @@ final class ConferenceRetrieveConferencesParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Status|value-of<Status> $Status
+     * @param Status|value-of<Status> $status
      */
     public static function with(
-        ?string $DateCreated = null,
-        ?string $DateUpdated = null,
-        ?string $FriendlyName = null,
-        ?int $Page = null,
-        ?int $PageSize = null,
-        ?string $PageToken = null,
-        Status|string|null $Status = null,
+        ?string $dateCreated = null,
+        ?string $dateUpdated = null,
+        ?string $friendlyName = null,
+        ?int $page = null,
+        ?int $pageSize = null,
+        ?string $pageToken = null,
+        Status|string|null $status = null,
     ): self {
         $obj = new self;
 
-        null !== $DateCreated && $obj['DateCreated'] = $DateCreated;
-        null !== $DateUpdated && $obj['DateUpdated'] = $DateUpdated;
-        null !== $FriendlyName && $obj['FriendlyName'] = $FriendlyName;
-        null !== $Page && $obj['Page'] = $Page;
-        null !== $PageSize && $obj['PageSize'] = $PageSize;
-        null !== $PageToken && $obj['PageToken'] = $PageToken;
-        null !== $Status && $obj['Status'] = $Status;
+        null !== $dateCreated && $obj['dateCreated'] = $dateCreated;
+        null !== $dateUpdated && $obj['dateUpdated'] = $dateUpdated;
+        null !== $friendlyName && $obj['friendlyName'] = $friendlyName;
+        null !== $page && $obj['page'] = $page;
+        null !== $pageSize && $obj['pageSize'] = $pageSize;
+        null !== $pageToken && $obj['pageToken'] = $pageToken;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
@@ -117,7 +115,7 @@ final class ConferenceRetrieveConferencesParams implements BaseModel
     public function withDateCreated(string $dateCreated): self
     {
         $obj = clone $this;
-        $obj['DateCreated'] = $dateCreated;
+        $obj['dateCreated'] = $dateCreated;
 
         return $obj;
     }
@@ -128,7 +126,7 @@ final class ConferenceRetrieveConferencesParams implements BaseModel
     public function withDateUpdated(string $dateUpdated): self
     {
         $obj = clone $this;
-        $obj['DateUpdated'] = $dateUpdated;
+        $obj['dateUpdated'] = $dateUpdated;
 
         return $obj;
     }
@@ -139,7 +137,7 @@ final class ConferenceRetrieveConferencesParams implements BaseModel
     public function withFriendlyName(string $friendlyName): self
     {
         $obj = clone $this;
-        $obj['FriendlyName'] = $friendlyName;
+        $obj['friendlyName'] = $friendlyName;
 
         return $obj;
     }
@@ -150,7 +148,7 @@ final class ConferenceRetrieveConferencesParams implements BaseModel
     public function withPage(int $page): self
     {
         $obj = clone $this;
-        $obj['Page'] = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }
@@ -161,7 +159,7 @@ final class ConferenceRetrieveConferencesParams implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj['PageSize'] = $pageSize;
+        $obj['pageSize'] = $pageSize;
 
         return $obj;
     }
@@ -172,7 +170,7 @@ final class ConferenceRetrieveConferencesParams implements BaseModel
     public function withPageToken(string $pageToken): self
     {
         $obj = clone $this;
-        $obj['PageToken'] = $pageToken;
+        $obj['pageToken'] = $pageToken;
 
         return $obj;
     }
@@ -182,11 +180,10 @@ final class ConferenceRetrieveConferencesParams implements BaseModel
      *
      * @param Status|value-of<Status> $status
      */
-    public function withStatus(
-        Status|string $status,
-    ): self {
+    public function withStatus(Status|string $status): self
+    {
         $obj = clone $this;
-        $obj['Status'] = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Legacy\Reporting\UsageReports\VoiceService::list()
  *
- * @phpstan-type VoiceListParamsShape = array{page?: int, per_page?: int}
+ * @phpstan-type VoiceListParamsShape = array{page?: int, perPage?: int}
  */
 final class VoiceListParams implements BaseModel
 {
@@ -32,7 +32,7 @@ final class VoiceListParams implements BaseModel
      * Size of the page.
      */
     #[Optional]
-    public ?int $per_page;
+    public ?int $perPage;
 
     public function __construct()
     {
@@ -44,12 +44,12 @@ final class VoiceListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?int $page = null, ?int $per_page = null): self
+    public static function with(?int $page = null, ?int $perPage = null): self
     {
         $obj = new self;
 
         null !== $page && $obj['page'] = $page;
-        null !== $per_page && $obj['per_page'] = $per_page;
+        null !== $perPage && $obj['perPage'] = $perPage;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class VoiceListParams implements BaseModel
     public function withPerPage(int $perPage): self
     {
         $obj = clone $this;
-        $obj['per_page'] = $perPage;
+        $obj['perPage'] = $perPage;
 
         return $obj;
     }

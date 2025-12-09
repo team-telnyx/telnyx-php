@@ -15,15 +15,15 @@ use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse\Data\RequirementsS
 
 /**
  * @phpstan-type DataShape = array{
- *   activation_status?: value-of<ActivationStatus>|null,
- *   phone_number?: string|null,
- *   phone_number_type?: value-of<PhoneNumberType>|null,
- *   portability_status?: value-of<PortabilityStatus>|null,
- *   porting_order_id?: string|null,
- *   porting_order_status?: value-of<PortingOrderStatus>|null,
- *   record_type?: string|null,
- *   requirements_status?: value-of<RequirementsStatus>|null,
- *   support_key?: string|null,
+ *   activationStatus?: value-of<ActivationStatus>|null,
+ *   phoneNumber?: string|null,
+ *   phoneNumberType?: value-of<PhoneNumberType>|null,
+ *   portabilityStatus?: value-of<PortabilityStatus>|null,
+ *   portingOrderID?: string|null,
+ *   portingOrderStatus?: value-of<PortingOrderStatus>|null,
+ *   recordType?: string|null,
+ *   requirementsStatus?: value-of<RequirementsStatus>|null,
+ *   supportKey?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -34,66 +34,66 @@ final class Data implements BaseModel
     /**
      * Activation status.
      *
-     * @var value-of<ActivationStatus>|null $activation_status
+     * @var value-of<ActivationStatus>|null $activationStatus
      */
-    #[Optional(enum: ActivationStatus::class)]
-    public ?string $activation_status;
+    #[Optional('activation_status', enum: ActivationStatus::class)]
+    public ?string $activationStatus;
 
     /**
      * E164 formatted phone number.
      */
-    #[Optional]
-    public ?string $phone_number;
+    #[Optional('phone_number')]
+    public ?string $phoneNumber;
 
     /**
      * The type of the phone number.
      *
-     * @var value-of<PhoneNumberType>|null $phone_number_type
+     * @var value-of<PhoneNumberType>|null $phoneNumberType
      */
-    #[Optional(enum: PhoneNumberType::class)]
-    public ?string $phone_number_type;
+    #[Optional('phone_number_type', enum: PhoneNumberType::class)]
+    public ?string $phoneNumberType;
 
     /**
      * Specifies whether Telnyx is able to confirm portability this number in the United States & Canada. International phone numbers are provisional by default.
      *
-     * @var value-of<PortabilityStatus>|null $portability_status
+     * @var value-of<PortabilityStatus>|null $portabilityStatus
      */
-    #[Optional(enum: PortabilityStatus::class)]
-    public ?string $portability_status;
+    #[Optional('portability_status', enum: PortabilityStatus::class)]
+    public ?string $portabilityStatus;
 
     /**
      * Identifies the associated port request.
      */
-    #[Optional]
-    public ?string $porting_order_id;
+    #[Optional('porting_order_id')]
+    public ?string $portingOrderID;
 
     /**
      * The current status of the porting order.
      *
-     * @var value-of<PortingOrderStatus>|null $porting_order_status
+     * @var value-of<PortingOrderStatus>|null $portingOrderStatus
      */
-    #[Optional(enum: PortingOrderStatus::class)]
-    public ?string $porting_order_status;
+    #[Optional('porting_order_status', enum: PortingOrderStatus::class)]
+    public ?string $portingOrderStatus;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * The current status of the requirements in a INTL porting order.
      *
-     * @var value-of<RequirementsStatus>|null $requirements_status
+     * @var value-of<RequirementsStatus>|null $requirementsStatus
      */
-    #[Optional(enum: RequirementsStatus::class)]
-    public ?string $requirements_status;
+    #[Optional('requirements_status', enum: RequirementsStatus::class)]
+    public ?string $requirementsStatus;
 
     /**
      * A key to reference this porting order when contacting Telnyx customer support.
      */
-    #[Optional]
-    public ?string $support_key;
+    #[Optional('support_key')]
+    public ?string $supportKey;
 
     public function __construct()
     {
@@ -105,34 +105,34 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ActivationStatus|value-of<ActivationStatus> $activation_status
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phone_number_type
-     * @param PortabilityStatus|value-of<PortabilityStatus> $portability_status
-     * @param PortingOrderStatus|value-of<PortingOrderStatus> $porting_order_status
-     * @param RequirementsStatus|value-of<RequirementsStatus> $requirements_status
+     * @param ActivationStatus|value-of<ActivationStatus> $activationStatus
+     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
+     * @param PortabilityStatus|value-of<PortabilityStatus> $portabilityStatus
+     * @param PortingOrderStatus|value-of<PortingOrderStatus> $portingOrderStatus
+     * @param RequirementsStatus|value-of<RequirementsStatus> $requirementsStatus
      */
     public static function with(
-        ActivationStatus|string|null $activation_status = null,
-        ?string $phone_number = null,
-        PhoneNumberType|string|null $phone_number_type = null,
-        PortabilityStatus|string|null $portability_status = null,
-        ?string $porting_order_id = null,
-        PortingOrderStatus|string|null $porting_order_status = null,
-        ?string $record_type = null,
-        RequirementsStatus|string|null $requirements_status = null,
-        ?string $support_key = null,
+        ActivationStatus|string|null $activationStatus = null,
+        ?string $phoneNumber = null,
+        PhoneNumberType|string|null $phoneNumberType = null,
+        PortabilityStatus|string|null $portabilityStatus = null,
+        ?string $portingOrderID = null,
+        PortingOrderStatus|string|null $portingOrderStatus = null,
+        ?string $recordType = null,
+        RequirementsStatus|string|null $requirementsStatus = null,
+        ?string $supportKey = null,
     ): self {
         $obj = new self;
 
-        null !== $activation_status && $obj['activation_status'] = $activation_status;
-        null !== $phone_number && $obj['phone_number'] = $phone_number;
-        null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
-        null !== $portability_status && $obj['portability_status'] = $portability_status;
-        null !== $porting_order_id && $obj['porting_order_id'] = $porting_order_id;
-        null !== $porting_order_status && $obj['porting_order_status'] = $porting_order_status;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $requirements_status && $obj['requirements_status'] = $requirements_status;
-        null !== $support_key && $obj['support_key'] = $support_key;
+        null !== $activationStatus && $obj['activationStatus'] = $activationStatus;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
+        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
+        null !== $portabilityStatus && $obj['portabilityStatus'] = $portabilityStatus;
+        null !== $portingOrderID && $obj['portingOrderID'] = $portingOrderID;
+        null !== $portingOrderStatus && $obj['portingOrderStatus'] = $portingOrderStatus;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $requirementsStatus && $obj['requirementsStatus'] = $requirementsStatus;
+        null !== $supportKey && $obj['supportKey'] = $supportKey;
 
         return $obj;
     }
@@ -146,7 +146,7 @@ final class Data implements BaseModel
         ActivationStatus|string $activationStatus
     ): self {
         $obj = clone $this;
-        $obj['activation_status'] = $activationStatus;
+        $obj['activationStatus'] = $activationStatus;
 
         return $obj;
     }
@@ -157,7 +157,7 @@ final class Data implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -171,7 +171,7 @@ final class Data implements BaseModel
         PhoneNumberType|string $phoneNumberType
     ): self {
         $obj = clone $this;
-        $obj['phone_number_type'] = $phoneNumberType;
+        $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }
@@ -185,7 +185,7 @@ final class Data implements BaseModel
         PortabilityStatus|string $portabilityStatus
     ): self {
         $obj = clone $this;
-        $obj['portability_status'] = $portabilityStatus;
+        $obj['portabilityStatus'] = $portabilityStatus;
 
         return $obj;
     }
@@ -196,7 +196,7 @@ final class Data implements BaseModel
     public function withPortingOrderID(string $portingOrderID): self
     {
         $obj = clone $this;
-        $obj['porting_order_id'] = $portingOrderID;
+        $obj['portingOrderID'] = $portingOrderID;
 
         return $obj;
     }
@@ -210,7 +210,7 @@ final class Data implements BaseModel
         PortingOrderStatus|string $portingOrderStatus
     ): self {
         $obj = clone $this;
-        $obj['porting_order_status'] = $portingOrderStatus;
+        $obj['portingOrderStatus'] = $portingOrderStatus;
 
         return $obj;
     }
@@ -221,7 +221,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -235,7 +235,7 @@ final class Data implements BaseModel
         RequirementsStatus|string $requirementsStatus
     ): self {
         $obj = clone $this;
-        $obj['requirements_status'] = $requirementsStatus;
+        $obj['requirementsStatus'] = $requirementsStatus;
 
         return $obj;
     }
@@ -246,7 +246,7 @@ final class Data implements BaseModel
     public function withSupportKey(string $supportKey): self
     {
         $obj = clone $this;
-        $obj['support_key'] = $supportKey;
+        $obj['supportKey'] = $supportKey;
 
         return $obj;
     }

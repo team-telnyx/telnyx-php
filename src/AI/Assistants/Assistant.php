@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type AssistantShape = array{
  *   instructions?: string|null,
  *   model?: string|null,
- *   openai_api_key_ref?: string|null,
+ *   openaiAPIKeyRef?: string|null,
  *   tools?: list<BookAppointment|CheckAvailability|WebhookTool|HangupTool|TransferTool|RetrievalTool>|null,
  * }
  */
@@ -42,8 +42,8 @@ final class Assistant implements BaseModel
     /**
      * This is necessary only if the model selected is from OpenAI. You would pass the `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) that refers to your OpenAI API Key. Warning: Free plans are unlikely to work with this integration.
      */
-    #[Optional]
-    public ?string $openai_api_key_ref;
+    #[Optional('openai_api_key_ref')]
+    public ?string $openaiAPIKeyRef;
 
     /**
      * The tools that the voice assistant can use.
@@ -64,10 +64,10 @@ final class Assistant implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<BookAppointment|array{
-     *   book_appointment: BookAppointment\BookAppointment,
+     *   bookAppointment: BookAppointment\BookAppointment,
      *   type?: 'book_appointment',
      * }|CheckAvailability|array{
-     *   check_availability: CheckAvailability\CheckAvailability,
+     *   checkAvailability: CheckAvailability\CheckAvailability,
      *   type?: 'check_availability',
      * }|WebhookTool|array{
      *   type: value-of<Type>, webhook: InferenceEmbeddingWebhookToolParams
@@ -85,14 +85,14 @@ final class Assistant implements BaseModel
     public static function with(
         ?string $instructions = null,
         ?string $model = null,
-        ?string $openai_api_key_ref = null,
+        ?string $openaiAPIKeyRef = null,
         ?array $tools = null,
     ): self {
         $obj = new self;
 
         null !== $instructions && $obj['instructions'] = $instructions;
         null !== $model && $obj['model'] = $model;
-        null !== $openai_api_key_ref && $obj['openai_api_key_ref'] = $openai_api_key_ref;
+        null !== $openaiAPIKeyRef && $obj['openaiAPIKeyRef'] = $openaiAPIKeyRef;
         null !== $tools && $obj['tools'] = $tools;
 
         return $obj;
@@ -126,7 +126,7 @@ final class Assistant implements BaseModel
     public function withOpenAIAPIKeyRef(string $openaiAPIKeyRef): self
     {
         $obj = clone $this;
-        $obj['openai_api_key_ref'] = $openaiAPIKeyRef;
+        $obj['openaiAPIKeyRef'] = $openaiAPIKeyRef;
 
         return $obj;
     }
@@ -135,10 +135,10 @@ final class Assistant implements BaseModel
      * The tools that the voice assistant can use.
      *
      * @param list<BookAppointment|array{
-     *   book_appointment: BookAppointment\BookAppointment,
+     *   bookAppointment: BookAppointment\BookAppointment,
      *   type?: 'book_appointment',
      * }|CheckAvailability|array{
-     *   check_availability: CheckAvailability\CheckAvailability,
+     *   checkAvailability: CheckAvailability\CheckAvailability,
      *   type?: 'check_availability',
      * }|WebhookTool|array{
      *   type: value-of<Type>, webhook: InferenceEmbeddingWebhookToolParams

@@ -24,11 +24,11 @@ use Telnyx\NotificationSettings\NotificationSettingListParams\Page;
  *
  * @phpstan-type NotificationSettingListParamsShape = array{
  *   filter?: Filter|array{
- *     associated_record_type?: AssociatedRecordType|null,
- *     channel_type_id?: ChannelTypeID|null,
- *     notification_channel?: NotificationChannel|null,
- *     notification_event_condition_id?: NotificationEventConditionID|null,
- *     notification_profile_id?: NotificationProfileID|null,
+ *     associatedRecordType?: AssociatedRecordType|null,
+ *     channelTypeID?: ChannelTypeID|null,
+ *     notificationChannel?: NotificationChannel|null,
+ *     notificationEventConditionID?: NotificationEventConditionID|null,
+ *     notificationProfileID?: NotificationProfileID|null,
  *     status?: Status|null,
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
@@ -63,11 +63,11 @@ final class NotificationSettingListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   associated_record_type?: AssociatedRecordType|null,
-     *   channel_type_id?: ChannelTypeID|null,
-     *   notification_channel?: NotificationChannel|null,
-     *   notification_event_condition_id?: NotificationEventConditionID|null,
-     *   notification_profile_id?: NotificationProfileID|null,
+     *   associatedRecordType?: AssociatedRecordType|null,
+     *   channelTypeID?: ChannelTypeID|null,
+     *   notificationChannel?: NotificationChannel|null,
+     *   notificationEventConditionID?: NotificationEventConditionID|null,
+     *   notificationProfileID?: NotificationProfileID|null,
      *   status?: Status|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
@@ -88,11 +88,11 @@ final class NotificationSettingListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[associated_record_type][eq], filter[channel_type_id][eq], filter[notification_profile_id][eq], filter[notification_channel][eq], filter[notification_event_condition_id][eq], filter[status][eq].
      *
      * @param Filter|array{
-     *   associated_record_type?: AssociatedRecordType|null,
-     *   channel_type_id?: ChannelTypeID|null,
-     *   notification_channel?: NotificationChannel|null,
-     *   notification_event_condition_id?: NotificationEventConditionID|null,
-     *   notification_profile_id?: NotificationProfileID|null,
+     *   associatedRecordType?: AssociatedRecordType|null,
+     *   channelTypeID?: ChannelTypeID|null,
+     *   notificationChannel?: NotificationChannel|null,
+     *   notificationEventConditionID?: NotificationEventConditionID|null,
+     *   notificationProfileID?: NotificationProfileID|null,
      *   status?: Status|null,
      * } $filter
      */

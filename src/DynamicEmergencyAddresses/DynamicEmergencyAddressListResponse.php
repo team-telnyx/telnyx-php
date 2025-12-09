@@ -39,29 +39,29 @@ final class DynamicEmergencyAddressListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<DynamicEmergencyAddress|array{
-     *   administrative_area: string,
-     *   country_code: value-of<CountryCode>,
-     *   house_number: string,
+     *   administrativeArea: string,
+     *   countryCode: value-of<CountryCode>,
+     *   houseNumber: string,
      *   locality: string,
-     *   postal_code: string,
-     *   street_name: string,
+     *   postalCode: string,
+     *   streetName: string,
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   extended_address?: string|null,
-     *   house_suffix?: string|null,
-     *   record_type?: string|null,
-     *   sip_geolocation_id?: string|null,
+     *   createdAt?: string|null,
+     *   extendedAddress?: string|null,
+     *   houseSuffix?: string|null,
+     *   recordType?: string|null,
+     *   sipGeolocationID?: string|null,
      *   status?: value-of<Status>|null,
-     *   street_post_directional?: string|null,
-     *   street_pre_directional?: string|null,
-     *   street_suffix?: string|null,
-     *   updated_at?: string|null,
+     *   streetPostDirectional?: string|null,
+     *   streetPreDirectional?: string|null,
+     *   streetSuffix?: string|null,
+     *   updatedAt?: string|null,
      * }> $data
      * @param Metadata|array{
-     *   page_number?: float|null,
-     *   page_size?: float|null,
-     *   total_pages?: float|null,
-     *   total_results?: float|null,
+     *   pageNumber?: float|null,
+     *   pageSize?: float|null,
+     *   totalPages?: float|null,
+     *   totalResults?: float|null,
      * } $meta
      */
     public static function with(
@@ -78,23 +78,23 @@ final class DynamicEmergencyAddressListResponse implements BaseModel
 
     /**
      * @param list<DynamicEmergencyAddress|array{
-     *   administrative_area: string,
-     *   country_code: value-of<CountryCode>,
-     *   house_number: string,
+     *   administrativeArea: string,
+     *   countryCode: value-of<CountryCode>,
+     *   houseNumber: string,
      *   locality: string,
-     *   postal_code: string,
-     *   street_name: string,
+     *   postalCode: string,
+     *   streetName: string,
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   extended_address?: string|null,
-     *   house_suffix?: string|null,
-     *   record_type?: string|null,
-     *   sip_geolocation_id?: string|null,
+     *   createdAt?: string|null,
+     *   extendedAddress?: string|null,
+     *   houseSuffix?: string|null,
+     *   recordType?: string|null,
+     *   sipGeolocationID?: string|null,
      *   status?: value-of<Status>|null,
-     *   street_post_directional?: string|null,
-     *   street_pre_directional?: string|null,
-     *   street_suffix?: string|null,
-     *   updated_at?: string|null,
+     *   streetPostDirectional?: string|null,
+     *   streetPreDirectional?: string|null,
+     *   streetSuffix?: string|null,
+     *   updatedAt?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -107,10 +107,10 @@ final class DynamicEmergencyAddressListResponse implements BaseModel
 
     /**
      * @param Metadata|array{
-     *   page_number?: float|null,
-     *   page_size?: float|null,
-     *   total_pages?: float|null,
-     *   total_results?: float|null,
+     *   pageNumber?: float|null,
+     *   pageSize?: float|null,
+     *   totalPages?: float|null,
+     *   totalResults?: float|null,
      * } $meta
      */
     public function withMeta(Metadata|array $meta): self

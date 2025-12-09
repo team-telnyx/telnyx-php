@@ -20,7 +20,7 @@ use Telnyx\OtaUpdates\OtaUpdateListParams\Page;
  *
  * @phpstan-type OtaUpdateListParamsShape = array{
  *   filter?: Filter|array{
- *     sim_card_id?: string|null,
+ *     simCardID?: string|null,
  *     status?: value-of<Status>|null,
  *     type?: value-of<Type>|null,
  *   },
@@ -56,7 +56,7 @@ final class OtaUpdateListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   sim_card_id?: string|null,
+     *   simCardID?: string|null,
      *   status?: value-of<Status>|null,
      *   type?: value-of<Type>|null,
      * } $filter
@@ -78,7 +78,7 @@ final class OtaUpdateListParams implements BaseModel
      * Consolidated filter parameter for OTA updates (deepObject style). Originally: filter[status], filter[sim_card_id], filter[type].
      *
      * @param Filter|array{
-     *   sim_card_id?: string|null,
+     *   simCardID?: string|null,
      *   status?: value-of<Status>|null,
      *   type?: value-of<Type>|null,
      * } $filter

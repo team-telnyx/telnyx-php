@@ -32,14 +32,14 @@ final class UploadRetryResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Upload|array{
-     *   available_usages?: list<value-of<AvailableUsage>>|null,
-     *   error_code?: string|null,
-     *   error_message?: string|null,
-     *   location_id?: string|null,
+     *   availableUsages?: list<value-of<AvailableUsage>>|null,
+     *   errorCode?: string|null,
+     *   errorMessage?: string|null,
+     *   locationID?: string|null,
      *   status?: value-of<Status>|null,
-     *   tenant_id?: string|null,
-     *   ticket_id?: string|null,
-     *   tn_upload_entries?: list<TnUploadEntry>|null,
+     *   tenantID?: string|null,
+     *   ticketID?: string|null,
+     *   tnUploadEntries?: list<TnUploadEntry>|null,
      * } $data
      */
     public static function with(Upload|array|null $data = null): self
@@ -53,14 +53,14 @@ final class UploadRetryResponse implements BaseModel
 
     /**
      * @param Upload|array{
-     *   available_usages?: list<value-of<AvailableUsage>>|null,
-     *   error_code?: string|null,
-     *   error_message?: string|null,
-     *   location_id?: string|null,
+     *   availableUsages?: list<value-of<AvailableUsage>>|null,
+     *   errorCode?: string|null,
+     *   errorMessage?: string|null,
+     *   locationID?: string|null,
      *   status?: value-of<Status>|null,
-     *   tenant_id?: string|null,
-     *   ticket_id?: string|null,
-     *   tn_upload_entries?: list<TnUploadEntry>|null,
+     *   tenantID?: string|null,
+     *   ticketID?: string|null,
+     *   tnUploadEntries?: list<TnUploadEntry>|null,
      * } $data
      */
     public function withData(Upload|array $data): self

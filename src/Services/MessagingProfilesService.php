@@ -48,30 +48,30 @@ final class MessagingProfilesService implements MessagingProfilesContract
      *
      * @param array{
      *   name: string,
-     *   whitelisted_destinations: list<string>,
-     *   alpha_sender?: string|null,
-     *   daily_spend_limit?: string,
-     *   daily_spend_limit_enabled?: bool,
+     *   whitelistedDestinations: list<string>,
+     *   alphaSender?: string|null,
+     *   dailySpendLimit?: string,
+     *   dailySpendLimitEnabled?: bool,
      *   enabled?: bool,
-     *   mms_fall_back_to_sms?: bool,
-     *   mms_transcoding?: bool,
-     *   mobile_only?: bool,
-     *   number_pool_settings?: array{
-     *     long_code_weight: float,
-     *     skip_unhealthy: bool,
-     *     toll_free_weight: float,
+     *   mmsFallBackToSMS?: bool,
+     *   mmsTranscoding?: bool,
+     *   mobileOnly?: bool,
+     *   numberPoolSettings?: array{
+     *     longCodeWeight: float,
+     *     skipUnhealthy: bool,
+     *     tollFreeWeight: float,
      *     geomatch?: bool,
-     *     sticky_sender?: bool,
+     *     stickySender?: bool,
      *   }|NumberPoolSettings|null,
-     *   url_shortener_settings?: array{
+     *   urlShortenerSettings?: array{
      *     domain: string,
      *     prefix?: string,
-     *     replace_blacklist_only?: bool,
-     *     send_webhooks?: bool,
+     *     replaceBlacklistOnly?: bool,
+     *     sendWebhooks?: bool,
      *   }|URLShortenerSettings|null,
-     *   webhook_api_version?: '1'|'2'|'2010-04-01'|WebhookAPIVersion,
-     *   webhook_failover_url?: string|null,
-     *   webhook_url?: string|null,
+     *   webhookAPIVersion?: '1'|'2'|'2010-04-01'|WebhookAPIVersion,
+     *   webhookFailoverURL?: string|null,
+     *   webhookURL?: string|null,
      * }|MessagingProfileCreateParams $params
      *
      * @throws APIException
@@ -125,32 +125,32 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * Update a messaging profile
      *
      * @param array{
-     *   alpha_sender?: string|null,
-     *   daily_spend_limit?: string,
-     *   daily_spend_limit_enabled?: bool,
+     *   alphaSender?: string|null,
+     *   dailySpendLimit?: string,
+     *   dailySpendLimitEnabled?: bool,
      *   enabled?: bool,
-     *   mms_fall_back_to_sms?: bool,
-     *   mms_transcoding?: bool,
-     *   mobile_only?: bool,
+     *   mmsFallBackToSMS?: bool,
+     *   mmsTranscoding?: bool,
+     *   mobileOnly?: bool,
      *   name?: string,
-     *   number_pool_settings?: array{
-     *     long_code_weight: float,
-     *     skip_unhealthy: bool,
-     *     toll_free_weight: float,
+     *   numberPoolSettings?: array{
+     *     longCodeWeight: float,
+     *     skipUnhealthy: bool,
+     *     tollFreeWeight: float,
      *     geomatch?: bool,
-     *     sticky_sender?: bool,
+     *     stickySender?: bool,
      *   }|NumberPoolSettings|null,
-     *   url_shortener_settings?: array{
+     *   urlShortenerSettings?: array{
      *     domain: string,
      *     prefix?: string,
-     *     replace_blacklist_only?: bool,
-     *     send_webhooks?: bool,
+     *     replaceBlacklistOnly?: bool,
+     *     sendWebhooks?: bool,
      *   }|URLShortenerSettings|null,
-     *   v1_secret?: string,
-     *   webhook_api_version?: '1'|'2'|'2010-04-01'|MessagingProfileUpdateParams\WebhookAPIVersion,
-     *   webhook_failover_url?: string|null,
-     *   webhook_url?: string|null,
-     *   whitelisted_destinations?: list<string>,
+     *   v1Secret?: string,
+     *   webhookAPIVersion?: '1'|'2'|'2010-04-01'|MessagingProfileUpdateParams\WebhookAPIVersion,
+     *   webhookFailoverURL?: string|null,
+     *   webhookURL?: string|null,
+     *   whitelistedDestinations?: list<string>,
      * }|MessagingProfileUpdateParams $params
      *
      * @throws APIException

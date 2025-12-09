@@ -48,12 +48,12 @@ final class ChargesSummaryGetResponse implements BaseModel
      *
      * @param Data|array{
      *   currency: string,
-     *   end_date: \DateTimeInterface,
-     *   start_date: \DateTimeInterface,
+     *   endDate: \DateTimeInterface,
+     *   startDate: \DateTimeInterface,
      *   summary: Summary,
      *   total: Total,
-     *   user_email: string,
-     *   user_id: string,
+     *   userEmail: string,
+     *   userID: string,
      * } $data
      */
     public static function with(Data|array $data): self
@@ -68,12 +68,12 @@ final class ChargesSummaryGetResponse implements BaseModel
     /**
      * @param Data|array{
      *   currency: string,
-     *   end_date: \DateTimeInterface,
-     *   start_date: \DateTimeInterface,
+     *   endDate: \DateTimeInterface,
+     *   startDate: \DateTimeInterface,
      *   summary: Summary,
      *   total: Total,
-     *   user_email: string,
-     *   user_id: string,
+     *   userEmail: string,
+     *   userID: string,
      * } $data
      */
     public function withData(Data|array $data): self

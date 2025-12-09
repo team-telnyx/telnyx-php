@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type CallerNameShape = array{
- *   caller_name?: string|null, error_code?: string|null
+ *   callerName?: string|null, errorCode?: string|null
  * }
  */
 final class CallerName implements BaseModel
@@ -21,14 +21,14 @@ final class CallerName implements BaseModel
     /**
      * The name of the requested phone number's owner as per the CNAM database.
      */
-    #[Optional]
-    public ?string $caller_name;
+    #[Optional('caller_name')]
+    public ?string $callerName;
 
     /**
      * A caller-name lookup specific error code, expressed as a stringified 5-digit integer.
      */
-    #[Optional]
-    public ?string $error_code;
+    #[Optional('error_code')]
+    public ?string $errorCode;
 
     public function __construct()
     {
@@ -41,13 +41,13 @@ final class CallerName implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $caller_name = null,
-        ?string $error_code = null
+        ?string $callerName = null,
+        ?string $errorCode = null
     ): self {
         $obj = new self;
 
-        null !== $caller_name && $obj['caller_name'] = $caller_name;
-        null !== $error_code && $obj['error_code'] = $error_code;
+        null !== $callerName && $obj['callerName'] = $callerName;
+        null !== $errorCode && $obj['errorCode'] = $errorCode;
 
         return $obj;
     }
@@ -58,7 +58,7 @@ final class CallerName implements BaseModel
     public function withCallerName(string $callerName): self
     {
         $obj = clone $this;
-        $obj['caller_name'] = $callerName;
+        $obj['callerName'] = $callerName;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class CallerName implements BaseModel
     public function withErrorCode(string $errorCode): self
     {
         $obj = clone $this;
-        $obj['error_code'] = $errorCode;
+        $obj['errorCode'] = $errorCode;
 
         return $obj;
     }

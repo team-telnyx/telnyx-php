@@ -30,7 +30,7 @@ final class ActionGatherUsingAIResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{conversation_id?: string|null, result?: string|null} $data
+     * @param Data|array{conversationID?: string|null, result?: string|null} $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -42,7 +42,7 @@ final class ActionGatherUsingAIResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{conversation_id?: string|null, result?: string|null} $data
+     * @param Data|array{conversationID?: string|null, result?: string|null} $data
      */
     public function withData(Data|array $data): self
     {

@@ -53,12 +53,12 @@ final class NumberOrderStatusUpdateWebhookEvent implements BaseModel
      *
      * @param Data|array{
      *   id: string,
-     *   event_type: string,
-     *   occurred_at: \DateTimeInterface,
+     *   eventType: string,
+     *   occurredAt: \DateTimeInterface,
      *   payload: NumberOrderWithPhoneNumbers,
-     *   record_type: string,
+     *   recordType: string,
      * } $data
-     * @param Meta|array{attempt: int, delivered_to: string} $meta
+     * @param Meta|array{attempt: int, deliveredTo: string} $meta
      */
     public static function with(Data|array $data, Meta|array $meta): self
     {
@@ -73,10 +73,10 @@ final class NumberOrderStatusUpdateWebhookEvent implements BaseModel
     /**
      * @param Data|array{
      *   id: string,
-     *   event_type: string,
-     *   occurred_at: \DateTimeInterface,
+     *   eventType: string,
+     *   occurredAt: \DateTimeInterface,
      *   payload: NumberOrderWithPhoneNumbers,
-     *   record_type: string,
+     *   recordType: string,
      * } $data
      */
     public function withData(Data|array $data): self
@@ -88,7 +88,7 @@ final class NumberOrderStatusUpdateWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Meta|array{attempt: int, delivered_to: string} $meta
+     * @param Meta|array{attempt: int, deliveredTo: string} $meta
      */
     public function withMeta(Meta|array $meta): self
     {

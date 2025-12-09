@@ -54,7 +54,7 @@ final class HandoffTool implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Handoff|array{
-     *   ai_assistants: list<AIAssistant>, voice_mode?: value-of<VoiceMode>|null
+     *   aiAssistants: list<AIAssistant>, voiceMode?: value-of<VoiceMode>|null
      * } $handoff
      * @param Type|value-of<Type> $type
      */
@@ -70,7 +70,7 @@ final class HandoffTool implements BaseModel
 
     /**
      * @param Handoff|array{
-     *   ai_assistants: list<AIAssistant>, voice_mode?: value-of<VoiceMode>|null
+     *   aiAssistants: list<AIAssistant>, voiceMode?: value-of<VoiceMode>|null
      * } $handoff
      */
     public function withHandoff(Handoff|array $handoff): self

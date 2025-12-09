@@ -55,7 +55,7 @@ final class Message implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param string|list<TextAndImageArray|array{
-     *   type: value-of<Type>, image_url?: string|null, text?: string|null
+     *   type: value-of<Type>, imageURL?: string|null, text?: string|null
      * }> $content
      * @param Role|value-of<Role> $role
      */
@@ -71,7 +71,7 @@ final class Message implements BaseModel
 
     /**
      * @param string|list<TextAndImageArray|array{
-     *   type: value-of<Type>, image_url?: string|null, text?: string|null
+     *   type: value-of<Type>, imageURL?: string|null, text?: string|null
      * }> $content
      */
     public function withContent(string|array $content): self

@@ -11,7 +11,7 @@ use Telnyx\Verifications\ByPhoneNumber\Actions\VerifyVerificationCodeResponse\Da
 
 /**
  * @phpstan-type DataShape = array{
- *   phone_number: string, response_code: value-of<ResponseCode>
+ *   phoneNumber: string, responseCode: value-of<ResponseCode>
  * }
  */
 final class Data implements BaseModel
@@ -22,23 +22,23 @@ final class Data implements BaseModel
     /**
      * +E164 formatted phone number.
      */
-    #[Required]
-    public string $phone_number;
+    #[Required('phone_number')]
+    public string $phoneNumber;
 
     /**
      * Identifies if the verification code has been accepted or rejected.
      *
-     * @var value-of<ResponseCode> $response_code
+     * @var value-of<ResponseCode> $responseCode
      */
-    #[Required(enum: ResponseCode::class)]
-    public string $response_code;
+    #[Required('response_code', enum: ResponseCode::class)]
+    public string $responseCode;
 
     /**
      * `new Data()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Data::with(phone_number: ..., response_code: ...)
+     * Data::with(phoneNumber: ..., responseCode: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -57,16 +57,16 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ResponseCode|value-of<ResponseCode> $response_code
+     * @param ResponseCode|value-of<ResponseCode> $responseCode
      */
     public static function with(
-        string $phone_number,
-        ResponseCode|string $response_code
+        string $phoneNumber,
+        ResponseCode|string $responseCode
     ): self {
         $obj = new self;
 
-        $obj['phone_number'] = $phone_number;
-        $obj['response_code'] = $response_code;
+        $obj['phoneNumber'] = $phoneNumber;
+        $obj['responseCode'] = $responseCode;
 
         return $obj;
     }
@@ -77,7 +77,7 @@ final class Data implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class Data implements BaseModel
     public function withResponseCode(ResponseCode|string $responseCode): self
     {
         $obj = clone $this;
-        $obj['response_code'] = $responseCode;
+        $obj['responseCode'] = $responseCode;
 
         return $obj;
     }

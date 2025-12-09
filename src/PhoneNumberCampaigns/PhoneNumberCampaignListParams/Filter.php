@@ -12,10 +12,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[telnyx_campaign_id], filter[telnyx_brand_id], filter[tcr_campaign_id], filter[tcr_brand_id].
  *
  * @phpstan-type FilterShape = array{
- *   tcr_brand_id?: string|null,
- *   tcr_campaign_id?: string|null,
- *   telnyx_brand_id?: string|null,
- *   telnyx_campaign_id?: string|null,
+ *   tcrBrandID?: string|null,
+ *   tcrCampaignID?: string|null,
+ *   telnyxBrandID?: string|null,
+ *   telnyxCampaignID?: string|null,
  * }
  */
 final class Filter implements BaseModel
@@ -26,26 +26,26 @@ final class Filter implements BaseModel
     /**
      * Filter results by the TCR Brand id.
      */
-    #[Optional]
-    public ?string $tcr_brand_id;
+    #[Optional('tcr_brand_id')]
+    public ?string $tcrBrandID;
 
     /**
      * Filter results by the TCR Campaign id.
      */
-    #[Optional]
-    public ?string $tcr_campaign_id;
+    #[Optional('tcr_campaign_id')]
+    public ?string $tcrCampaignID;
 
     /**
      * Filter results by the Telnyx Brand id.
      */
-    #[Optional]
-    public ?string $telnyx_brand_id;
+    #[Optional('telnyx_brand_id')]
+    public ?string $telnyxBrandID;
 
     /**
      * Filter results by the Telnyx Campaign id.
      */
-    #[Optional]
-    public ?string $telnyx_campaign_id;
+    #[Optional('telnyx_campaign_id')]
+    public ?string $telnyxCampaignID;
 
     public function __construct()
     {
@@ -58,17 +58,17 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $tcr_brand_id = null,
-        ?string $tcr_campaign_id = null,
-        ?string $telnyx_brand_id = null,
-        ?string $telnyx_campaign_id = null,
+        ?string $tcrBrandID = null,
+        ?string $tcrCampaignID = null,
+        ?string $telnyxBrandID = null,
+        ?string $telnyxCampaignID = null,
     ): self {
         $obj = new self;
 
-        null !== $tcr_brand_id && $obj['tcr_brand_id'] = $tcr_brand_id;
-        null !== $tcr_campaign_id && $obj['tcr_campaign_id'] = $tcr_campaign_id;
-        null !== $telnyx_brand_id && $obj['telnyx_brand_id'] = $telnyx_brand_id;
-        null !== $telnyx_campaign_id && $obj['telnyx_campaign_id'] = $telnyx_campaign_id;
+        null !== $tcrBrandID && $obj['tcrBrandID'] = $tcrBrandID;
+        null !== $tcrCampaignID && $obj['tcrCampaignID'] = $tcrCampaignID;
+        null !== $telnyxBrandID && $obj['telnyxBrandID'] = $telnyxBrandID;
+        null !== $telnyxCampaignID && $obj['telnyxCampaignID'] = $telnyxCampaignID;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class Filter implements BaseModel
     public function withTcrBrandID(string $tcrBrandID): self
     {
         $obj = clone $this;
-        $obj['tcr_brand_id'] = $tcrBrandID;
+        $obj['tcrBrandID'] = $tcrBrandID;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class Filter implements BaseModel
     public function withTcrCampaignID(string $tcrCampaignID): self
     {
         $obj = clone $this;
-        $obj['tcr_campaign_id'] = $tcrCampaignID;
+        $obj['tcrCampaignID'] = $tcrCampaignID;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class Filter implements BaseModel
     public function withTelnyxBrandID(string $telnyxBrandID): self
     {
         $obj = clone $this;
-        $obj['telnyx_brand_id'] = $telnyxBrandID;
+        $obj['telnyxBrandID'] = $telnyxBrandID;
 
         return $obj;
     }
@@ -112,7 +112,7 @@ final class Filter implements BaseModel
     public function withTelnyxCampaignID(string $telnyxCampaignID): self
     {
         $obj = clone $this;
-        $obj['telnyx_campaign_id'] = $telnyxCampaignID;
+        $obj['telnyxCampaignID'] = $telnyxCampaignID;
 
         return $obj;
     }

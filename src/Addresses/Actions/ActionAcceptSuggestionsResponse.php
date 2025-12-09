@@ -32,9 +32,7 @@ final class ActionAcceptSuggestionsResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Data|array{
-     *   id?: string|null,
-     *   accepted?: bool|null,
-     *   record_type?: value-of<RecordType>|null,
+     *   id?: string|null, accepted?: bool|null, recordType?: value-of<RecordType>|null
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -48,9 +46,7 @@ final class ActionAcceptSuggestionsResponse implements BaseModel
 
     /**
      * @param Data|array{
-     *   id?: string|null,
-     *   accepted?: bool|null,
-     *   record_type?: value-of<RecordType>|null,
+     *   id?: string|null, accepted?: bool|null, recordType?: value-of<RecordType>|null
      * } $data
      */
     public function withData(Data|array $data): self

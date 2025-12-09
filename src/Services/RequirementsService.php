@@ -53,8 +53,8 @@ final class RequirementsService implements RequirementsContract
      * @param array{
      *   filter?: array{
      *     action?: 'branded_calling'|'ordering'|'porting'|Action,
-     *     country_code?: string,
-     *     phone_number_type?: 'local'|'national'|'toll_free'|PhoneNumberType,
+     *     countryCode?: string,
+     *     phoneNumberType?: 'local'|'national'|'toll_free'|PhoneNumberType,
      *   },
      *   page?: array{number?: int, size?: int},
      *   sort?: list<'created_at'|'updated_at'|'country_code'|'phone_number_type'|'-created_at'|'-updated_at'|'-country_code'|'-phone_number_type'|Sort>,

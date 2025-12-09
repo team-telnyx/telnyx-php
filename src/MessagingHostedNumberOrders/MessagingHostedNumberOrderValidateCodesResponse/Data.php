@@ -12,7 +12,7 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesRe
 
 /**
  * @phpstan-type DataShape = array{
- *   order_id: string, phone_numbers: list<PhoneNumber>
+ *   orderID: string, phoneNumbers: list<PhoneNumber>
  * }
  */
 final class Data implements BaseModel
@@ -20,19 +20,19 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Required]
-    public string $order_id;
+    #[Required('order_id')]
+    public string $orderID;
 
-    /** @var list<PhoneNumber> $phone_numbers */
-    #[Required(list: PhoneNumber::class)]
-    public array $phone_numbers;
+    /** @var list<PhoneNumber> $phoneNumbers */
+    #[Required('phone_numbers', list: PhoneNumber::class)]
+    public array $phoneNumbers;
 
     /**
      * `new Data()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Data::with(order_id: ..., phone_numbers: ...)
+     * Data::with(orderID: ..., phoneNumbers: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -52,15 +52,15 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<PhoneNumber|array{
-     *   phone_number: string, status: value-of<Status>
-     * }> $phone_numbers
+     *   phoneNumber: string, status: value-of<Status>
+     * }> $phoneNumbers
      */
-    public static function with(string $order_id, array $phone_numbers): self
+    public static function with(string $orderID, array $phoneNumbers): self
     {
         $obj = new self;
 
-        $obj['order_id'] = $order_id;
-        $obj['phone_numbers'] = $phone_numbers;
+        $obj['orderID'] = $orderID;
+        $obj['phoneNumbers'] = $phoneNumbers;
 
         return $obj;
     }
@@ -68,20 +68,20 @@ final class Data implements BaseModel
     public function withOrderID(string $orderID): self
     {
         $obj = clone $this;
-        $obj['order_id'] = $orderID;
+        $obj['orderID'] = $orderID;
 
         return $obj;
     }
 
     /**
      * @param list<PhoneNumber|array{
-     *   phone_number: string, status: value-of<Status>
+     *   phoneNumber: string, status: value-of<Status>
      * }> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj['phone_numbers'] = $phoneNumbers;
+        $obj['phoneNumbers'] = $phoneNumbers;
 
         return $obj;
     }

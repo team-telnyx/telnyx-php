@@ -9,9 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ServiceShape = array{
- *   cost: string, cost_type: string, name: string
- * }
+ * @phpstan-type ServiceShape = array{cost: string, costType: string, name: string}
  */
 final class Service implements BaseModel
 {
@@ -27,8 +25,8 @@ final class Service implements BaseModel
     /**
      * Type of cost (MRC or OTC).
      */
-    #[Required]
-    public string $cost_type;
+    #[Required('cost_type')]
+    public string $costType;
 
     /**
      * Service name.
@@ -41,7 +39,7 @@ final class Service implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * Service::with(cost: ..., cost_type: ..., name: ...)
+     * Service::with(cost: ..., costType: ..., name: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -62,13 +60,13 @@ final class Service implements BaseModel
      */
     public static function with(
         string $cost,
-        string $cost_type,
+        string $costType,
         string $name
     ): self {
         $obj = new self;
 
         $obj['cost'] = $cost;
-        $obj['cost_type'] = $cost_type;
+        $obj['costType'] = $costType;
         $obj['name'] = $name;
 
         return $obj;
@@ -91,7 +89,7 @@ final class Service implements BaseModel
     public function withCostType(string $costType): self
     {
         $obj = clone $this;
-        $obj['cost_type'] = $costType;
+        $obj['costType'] = $costType;
 
         return $obj;
     }

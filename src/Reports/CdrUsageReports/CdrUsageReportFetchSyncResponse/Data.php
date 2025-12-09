@@ -14,17 +14,17 @@ use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncResponse\Data\Status;
 /**
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   aggregation_type?: value-of<AggregationType>|null,
+ *   aggregationType?: value-of<AggregationType>|null,
  *   connections?: list<int>|null,
- *   created_at?: \DateTimeInterface|null,
- *   end_time?: \DateTimeInterface|null,
- *   product_breakdown?: value-of<ProductBreakdown>|null,
- *   record_type?: string|null,
- *   report_url?: string|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   endTime?: \DateTimeInterface|null,
+ *   productBreakdown?: value-of<ProductBreakdown>|null,
+ *   recordType?: string|null,
+ *   reportURL?: string|null,
  *   result?: array<string,mixed>|null,
- *   start_time?: \DateTimeInterface|null,
+ *   startTime?: \DateTimeInterface|null,
  *   status?: value-of<Status>|null,
- *   updated_at?: \DateTimeInterface|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class Data implements BaseModel
@@ -38,43 +38,43 @@ final class Data implements BaseModel
     #[Optional]
     public ?string $id;
 
-    /** @var value-of<AggregationType>|null $aggregation_type */
-    #[Optional(enum: AggregationType::class)]
-    public ?string $aggregation_type;
+    /** @var value-of<AggregationType>|null $aggregationType */
+    #[Optional('aggregation_type', enum: AggregationType::class)]
+    public ?string $aggregationType;
 
     /** @var list<int>|null $connections */
     #[Optional(list: 'int')]
     public ?array $connections;
 
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
-    #[Optional]
-    public ?\DateTimeInterface $end_time;
+    #[Optional('end_time')]
+    public ?\DateTimeInterface $endTime;
 
-    /** @var value-of<ProductBreakdown>|null $product_breakdown */
-    #[Optional(enum: ProductBreakdown::class)]
-    public ?string $product_breakdown;
+    /** @var value-of<ProductBreakdown>|null $productBreakdown */
+    #[Optional('product_breakdown', enum: ProductBreakdown::class)]
+    public ?string $productBreakdown;
 
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
-    #[Optional]
-    public ?string $report_url;
+    #[Optional('report_url')]
+    public ?string $reportURL;
 
     /** @var array<string,mixed>|null $result */
     #[Optional(map: 'mixed')]
     public ?array $result;
 
-    #[Optional]
-    public ?\DateTimeInterface $start_time;
+    #[Optional('start_time')]
+    public ?\DateTimeInterface $startTime;
 
     /** @var value-of<Status>|null $status */
     #[Optional(enum: Status::class)]
     public ?string $status;
 
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
     {
@@ -86,40 +86,40 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AggregationType|value-of<AggregationType> $aggregation_type
+     * @param AggregationType|value-of<AggregationType> $aggregationType
      * @param list<int> $connections
-     * @param ProductBreakdown|value-of<ProductBreakdown> $product_breakdown
+     * @param ProductBreakdown|value-of<ProductBreakdown> $productBreakdown
      * @param array<string,mixed> $result
      * @param Status|value-of<Status> $status
      */
     public static function with(
         ?string $id = null,
-        AggregationType|string|null $aggregation_type = null,
+        AggregationType|string|null $aggregationType = null,
         ?array $connections = null,
-        ?\DateTimeInterface $created_at = null,
-        ?\DateTimeInterface $end_time = null,
-        ProductBreakdown|string|null $product_breakdown = null,
-        ?string $record_type = null,
-        ?string $report_url = null,
+        ?\DateTimeInterface $createdAt = null,
+        ?\DateTimeInterface $endTime = null,
+        ProductBreakdown|string|null $productBreakdown = null,
+        ?string $recordType = null,
+        ?string $reportURL = null,
         ?array $result = null,
-        ?\DateTimeInterface $start_time = null,
+        ?\DateTimeInterface $startTime = null,
         Status|string|null $status = null,
-        ?\DateTimeInterface $updated_at = null,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $aggregation_type && $obj['aggregation_type'] = $aggregation_type;
+        null !== $aggregationType && $obj['aggregationType'] = $aggregationType;
         null !== $connections && $obj['connections'] = $connections;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $end_time && $obj['end_time'] = $end_time;
-        null !== $product_breakdown && $obj['product_breakdown'] = $product_breakdown;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $report_url && $obj['report_url'] = $report_url;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $endTime && $obj['endTime'] = $endTime;
+        null !== $productBreakdown && $obj['productBreakdown'] = $productBreakdown;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $reportURL && $obj['reportURL'] = $reportURL;
         null !== $result && $obj['result'] = $result;
-        null !== $start_time && $obj['start_time'] = $start_time;
+        null !== $startTime && $obj['startTime'] = $startTime;
         null !== $status && $obj['status'] = $status;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -142,7 +142,7 @@ final class Data implements BaseModel
         AggregationType|string $aggregationType
     ): self {
         $obj = clone $this;
-        $obj['aggregation_type'] = $aggregationType;
+        $obj['aggregationType'] = $aggregationType;
 
         return $obj;
     }
@@ -161,7 +161,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -169,7 +169,7 @@ final class Data implements BaseModel
     public function withEndTime(\DateTimeInterface $endTime): self
     {
         $obj = clone $this;
-        $obj['end_time'] = $endTime;
+        $obj['endTime'] = $endTime;
 
         return $obj;
     }
@@ -181,7 +181,7 @@ final class Data implements BaseModel
         ProductBreakdown|string $productBreakdown
     ): self {
         $obj = clone $this;
-        $obj['product_breakdown'] = $productBreakdown;
+        $obj['productBreakdown'] = $productBreakdown;
 
         return $obj;
     }
@@ -189,7 +189,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -197,7 +197,7 @@ final class Data implements BaseModel
     public function withReportURL(string $reportURL): self
     {
         $obj = clone $this;
-        $obj['report_url'] = $reportURL;
+        $obj['reportURL'] = $reportURL;
 
         return $obj;
     }
@@ -216,7 +216,7 @@ final class Data implements BaseModel
     public function withStartTime(\DateTimeInterface $startTime): self
     {
         $obj = clone $this;
-        $obj['start_time'] = $startTime;
+        $obj['startTime'] = $startTime;
 
         return $obj;
     }
@@ -235,7 +235,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

@@ -36,7 +36,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->verifiedNumbers->actions->submitVerificationCode(
             '+15551234567',
-            ['verification_code' => '123456']
+            ['verificationCode' => '123456']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -52,7 +52,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->verifiedNumbers->actions->submitVerificationCode(
             '+15551234567',
-            ['verification_code' => '123456']
+            ['verificationCode' => '123456']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

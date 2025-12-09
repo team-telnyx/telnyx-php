@@ -35,11 +35,11 @@ final class SpeechToTextListResponse implements BaseModel
      *
      * @param list<SttDetailReportResponse|array{
      *   id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   download_link?: string|null,
-     *   end_date?: \DateTimeInterface|null,
-     *   record_type?: string|null,
-     *   start_date?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   downloadLink?: string|null,
+     *   endDate?: \DateTimeInterface|null,
+     *   recordType?: string|null,
+     *   startDate?: \DateTimeInterface|null,
      *   status?: value-of<Status>|null,
      * }> $data
      */
@@ -55,11 +55,11 @@ final class SpeechToTextListResponse implements BaseModel
     /**
      * @param list<SttDetailReportResponse|array{
      *   id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   download_link?: string|null,
-     *   end_date?: \DateTimeInterface|null,
-     *   record_type?: string|null,
-     *   start_date?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   downloadLink?: string|null,
+     *   endDate?: \DateTimeInterface|null,
+     *   recordType?: string|null,
+     *   startDate?: \DateTimeInterface|null,
      *   status?: value-of<Status>|null,
      * }> $data
      */

@@ -35,20 +35,20 @@ final class NumberOrderPhoneNumberUpdateRequirementGroupResponse implements Base
      *
      * @param Data|array{
      *   id?: string|null,
-     *   bundle_id?: string|null,
-     *   country_code?: string|null,
+     *   bundleID?: string|null,
+     *   countryCode?: string|null,
      *   deadline?: \DateTimeInterface|null,
-     *   is_block_number?: bool|null,
+     *   isBlockNumber?: bool|null,
      *   locality?: string|null,
-     *   order_request_id?: string|null,
-     *   phone_number?: string|null,
-     *   phone_number_type?: string|null,
-     *   record_type?: string|null,
-     *   regulatory_requirements?: list<RegulatoryRequirement>|null,
-     *   requirements_met?: bool|null,
-     *   requirements_status?: string|null,
+     *   orderRequestID?: string|null,
+     *   phoneNumber?: string|null,
+     *   phoneNumberType?: string|null,
+     *   recordType?: string|null,
+     *   regulatoryRequirements?: list<RegulatoryRequirement>|null,
+     *   requirementsMet?: bool|null,
+     *   requirementsStatus?: string|null,
      *   status?: string|null,
-     *   sub_number_order_id?: string|null,
+     *   subNumberOrderID?: string|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -63,20 +63,20 @@ final class NumberOrderPhoneNumberUpdateRequirementGroupResponse implements Base
     /**
      * @param Data|array{
      *   id?: string|null,
-     *   bundle_id?: string|null,
-     *   country_code?: string|null,
+     *   bundleID?: string|null,
+     *   countryCode?: string|null,
      *   deadline?: \DateTimeInterface|null,
-     *   is_block_number?: bool|null,
+     *   isBlockNumber?: bool|null,
      *   locality?: string|null,
-     *   order_request_id?: string|null,
-     *   phone_number?: string|null,
-     *   phone_number_type?: string|null,
-     *   record_type?: string|null,
-     *   regulatory_requirements?: list<RegulatoryRequirement>|null,
-     *   requirements_met?: bool|null,
-     *   requirements_status?: string|null,
+     *   orderRequestID?: string|null,
+     *   phoneNumber?: string|null,
+     *   phoneNumberType?: string|null,
+     *   recordType?: string|null,
+     *   regulatoryRequirements?: list<RegulatoryRequirement>|null,
+     *   requirementsMet?: bool|null,
+     *   requirementsStatus?: string|null,
      *   status?: string|null,
-     *   sub_number_order_id?: string|null,
+     *   subNumberOrderID?: string|null,
      * } $data
      */
     public function withData(Data|array $data): self

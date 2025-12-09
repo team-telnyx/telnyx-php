@@ -17,14 +17,14 @@ use Telnyx\Reports\ReportListMdrsResponse\Data\Status;
  *   cld?: string|null,
  *   cli?: string|null,
  *   cost?: string|null,
- *   created_at?: \DateTimeInterface|null,
+ *   createdAt?: \DateTimeInterface|null,
  *   currency?: value-of<Currency>|null,
  *   direction?: string|null,
- *   message_type?: value-of<MessageType>|null,
+ *   messageType?: value-of<MessageType>|null,
  *   parts?: float|null,
- *   profile_name?: string|null,
+ *   profileName?: string|null,
  *   rate?: string|null,
- *   record_type?: string|null,
+ *   recordType?: string|null,
  *   status?: value-of<Status>|null,
  * }
  */
@@ -60,8 +60,8 @@ final class Data implements BaseModel
     /**
      * Message sent time.
      */
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
     /**
      * Currency of the rate and cost.
@@ -80,10 +80,10 @@ final class Data implements BaseModel
     /**
      * Type of message.
      *
-     * @var value-of<MessageType>|null $message_type
+     * @var value-of<MessageType>|null $messageType
      */
-    #[Optional(enum: MessageType::class)]
-    public ?string $message_type;
+    #[Optional('message_type', enum: MessageType::class)]
+    public ?string $messageType;
 
     /**
      * Number of parts this message has. Max number of character is 160. If message contains more characters then that it will be broken down in multiple parts.
@@ -94,8 +94,8 @@ final class Data implements BaseModel
     /**
      * Configured profile name. New profiles can be created and configured on Telnyx portal.
      */
-    #[Optional]
-    public ?string $profile_name;
+    #[Optional('profile_name')]
+    public ?string $profileName;
 
     /**
      * Rate applied to the message.
@@ -103,8 +103,8 @@ final class Data implements BaseModel
     #[Optional]
     public ?string $rate;
 
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * Message status.
@@ -125,7 +125,7 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Currency|value-of<Currency> $currency
-     * @param MessageType|value-of<MessageType> $message_type
+     * @param MessageType|value-of<MessageType> $messageType
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -133,14 +133,14 @@ final class Data implements BaseModel
         ?string $cld = null,
         ?string $cli = null,
         ?string $cost = null,
-        ?\DateTimeInterface $created_at = null,
+        ?\DateTimeInterface $createdAt = null,
         Currency|string|null $currency = null,
         ?string $direction = null,
-        MessageType|string|null $message_type = null,
+        MessageType|string|null $messageType = null,
         ?float $parts = null,
-        ?string $profile_name = null,
+        ?string $profileName = null,
         ?string $rate = null,
-        ?string $record_type = null,
+        ?string $recordType = null,
         Status|string|null $status = null,
     ): self {
         $obj = new self;
@@ -149,14 +149,14 @@ final class Data implements BaseModel
         null !== $cld && $obj['cld'] = $cld;
         null !== $cli && $obj['cli'] = $cli;
         null !== $cost && $obj['cost'] = $cost;
-        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
         null !== $currency && $obj['currency'] = $currency;
         null !== $direction && $obj['direction'] = $direction;
-        null !== $message_type && $obj['message_type'] = $message_type;
+        null !== $messageType && $obj['messageType'] = $messageType;
         null !== $parts && $obj['parts'] = $parts;
-        null !== $profile_name && $obj['profile_name'] = $profile_name;
+        null !== $profileName && $obj['profileName'] = $profileName;
         null !== $rate && $obj['rate'] = $rate;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $recordType && $obj['recordType'] = $recordType;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -212,7 +212,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -249,7 +249,7 @@ final class Data implements BaseModel
     public function withMessageType(MessageType|string $messageType): self
     {
         $obj = clone $this;
-        $obj['message_type'] = $messageType;
+        $obj['messageType'] = $messageType;
 
         return $obj;
     }
@@ -271,7 +271,7 @@ final class Data implements BaseModel
     public function withProfileName(string $profileName): self
     {
         $obj = clone $this;
-        $obj['profile_name'] = $profileName;
+        $obj['profileName'] = $profileName;
 
         return $obj;
     }
@@ -290,7 +290,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

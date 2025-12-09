@@ -22,9 +22,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *   name: string,
  *   rubric: list<Rubric|array{criteria: string, name: string}>,
  *   description?: string,
- *   max_duration_seconds?: int,
- *   telnyx_conversation_channel?: TelnyxConversationChannel|value-of<TelnyxConversationChannel>,
- *   test_suite?: string,
+ *   maxDurationSeconds?: int,
+ *   telnyxConversationChannel?: TelnyxConversationChannel|value-of<TelnyxConversationChannel>,
+ *   testSuite?: string,
  * }
  */
 final class TestCreateParams implements BaseModel
@@ -68,22 +68,25 @@ final class TestCreateParams implements BaseModel
     /**
      * Maximum duration in seconds that the test conversation should run before timing out. If not specified, uses system default timeout.
      */
-    #[Optional]
-    public ?int $max_duration_seconds;
+    #[Optional('max_duration_seconds')]
+    public ?int $maxDurationSeconds;
 
     /**
      * The communication channel through which the test will be conducted. Determines how the assistant will receive and respond to test messages.
      *
-     * @var value-of<TelnyxConversationChannel>|null $telnyx_conversation_channel
+     * @var value-of<TelnyxConversationChannel>|null $telnyxConversationChannel
      */
-    #[Optional(enum: TelnyxConversationChannel::class)]
-    public ?string $telnyx_conversation_channel;
+    #[Optional(
+        'telnyx_conversation_channel',
+        enum: TelnyxConversationChannel::class
+    )]
+    public ?string $telnyxConversationChannel;
 
     /**
      * Optional test suite name to group related tests together. Useful for organizing tests by feature, team, or release cycle.
      */
-    #[Optional]
-    public ?string $test_suite;
+    #[Optional('test_suite')]
+    public ?string $testSuite;
 
     /**
      * `new TestCreateParams()` is missing required properties by the API.
@@ -116,7 +119,7 @@ final class TestCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Rubric|array{criteria: string, name: string}> $rubric
-     * @param TelnyxConversationChannel|value-of<TelnyxConversationChannel> $telnyx_conversation_channel
+     * @param TelnyxConversationChannel|value-of<TelnyxConversationChannel> $telnyxConversationChannel
      */
     public static function with(
         string $destination,
@@ -124,9 +127,9 @@ final class TestCreateParams implements BaseModel
         string $name,
         array $rubric,
         ?string $description = null,
-        ?int $max_duration_seconds = null,
-        TelnyxConversationChannel|string|null $telnyx_conversation_channel = null,
-        ?string $test_suite = null,
+        ?int $maxDurationSeconds = null,
+        TelnyxConversationChannel|string|null $telnyxConversationChannel = null,
+        ?string $testSuite = null,
     ): self {
         $obj = new self;
 
@@ -136,9 +139,9 @@ final class TestCreateParams implements BaseModel
         $obj['rubric'] = $rubric;
 
         null !== $description && $obj['description'] = $description;
-        null !== $max_duration_seconds && $obj['max_duration_seconds'] = $max_duration_seconds;
-        null !== $telnyx_conversation_channel && $obj['telnyx_conversation_channel'] = $telnyx_conversation_channel;
-        null !== $test_suite && $obj['test_suite'] = $test_suite;
+        null !== $maxDurationSeconds && $obj['maxDurationSeconds'] = $maxDurationSeconds;
+        null !== $telnyxConversationChannel && $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
+        null !== $testSuite && $obj['testSuite'] = $testSuite;
 
         return $obj;
     }
@@ -206,7 +209,7 @@ final class TestCreateParams implements BaseModel
     public function withMaxDurationSeconds(int $maxDurationSeconds): self
     {
         $obj = clone $this;
-        $obj['max_duration_seconds'] = $maxDurationSeconds;
+        $obj['maxDurationSeconds'] = $maxDurationSeconds;
 
         return $obj;
     }
@@ -220,7 +223,7 @@ final class TestCreateParams implements BaseModel
         TelnyxConversationChannel|string $telnyxConversationChannel
     ): self {
         $obj = clone $this;
-        $obj['telnyx_conversation_channel'] = $telnyxConversationChannel;
+        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
 
         return $obj;
     }
@@ -231,7 +234,7 @@ final class TestCreateParams implements BaseModel
     public function withTestSuite(string $testSuite): self
     {
         $obj = clone $this;
-        $obj['test_suite'] = $testSuite;
+        $obj['testSuite'] = $testSuite;
 
         return $obj;
     }

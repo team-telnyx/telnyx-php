@@ -13,10 +13,10 @@ use Telnyx\PortingOrders\Comments\CommentNewResponse\Data\UserType;
  * @phpstan-type DataShape = array{
  *   id?: string|null,
  *   body?: string|null,
- *   created_at?: \DateTimeInterface|null,
- *   porting_order_id?: string|null,
- *   record_type?: string|null,
- *   user_type?: value-of<UserType>|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   portingOrderID?: string|null,
+ *   recordType?: string|null,
+ *   userType?: value-of<UserType>|null,
  * }
  */
 final class Data implements BaseModel
@@ -36,25 +36,25 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
-    #[Optional]
-    public ?string $porting_order_id;
+    #[Optional('porting_order_id')]
+    public ?string $portingOrderID;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * Indicates whether this comment was created by a Telnyx Admin, user, or system.
      *
-     * @var value-of<UserType>|null $user_type
+     * @var value-of<UserType>|null $userType
      */
-    #[Optional(enum: UserType::class)]
-    public ?string $user_type;
+    #[Optional('user_type', enum: UserType::class)]
+    public ?string $userType;
 
     public function __construct()
     {
@@ -66,24 +66,24 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param UserType|value-of<UserType> $user_type
+     * @param UserType|value-of<UserType> $userType
      */
     public static function with(
         ?string $id = null,
         ?string $body = null,
-        ?\DateTimeInterface $created_at = null,
-        ?string $porting_order_id = null,
-        ?string $record_type = null,
-        UserType|string|null $user_type = null,
+        ?\DateTimeInterface $createdAt = null,
+        ?string $portingOrderID = null,
+        ?string $recordType = null,
+        UserType|string|null $userType = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
         null !== $body && $obj['body'] = $body;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $porting_order_id && $obj['porting_order_id'] = $porting_order_id;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $user_type && $obj['user_type'] = $user_type;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $portingOrderID && $obj['portingOrderID'] = $portingOrderID;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $userType && $obj['userType'] = $userType;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class Data implements BaseModel
     public function withPortingOrderID(string $portingOrderID): self
     {
         $obj = clone $this;
-        $obj['porting_order_id'] = $portingOrderID;
+        $obj['portingOrderID'] = $portingOrderID;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class Data implements BaseModel
     public function withUserType(UserType|string $userType): self
     {
         $obj = clone $this;
-        $obj['user_type'] = $userType;
+        $obj['userType'] = $userType;
 
         return $obj;
     }

@@ -36,7 +36,7 @@ final class ToolsTest extends TestCase
 
         $result = $this->client->ai->assistants->tools->test(
             'tool_id',
-            ['assistant_id' => 'assistant_id']
+            ['assistantID' => 'assistant_id']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -53,9 +53,9 @@ final class ToolsTest extends TestCase
         $result = $this->client->ai->assistants->tools->test(
             'tool_id',
             [
-                'assistant_id' => 'assistant_id',
+                'assistantID' => 'assistant_id',
                 'arguments' => ['foo' => 'bar'],
-                'dynamic_variables' => ['foo' => 'bar'],
+                'dynamicVariables' => ['foo' => 'bar'],
             ],
         );
 

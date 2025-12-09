@@ -7,6 +7,7 @@ namespace Telnyx\Services\Wireless;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Wireless\DetailRecordsReportsContract;
 use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportCreateParams;
@@ -29,7 +30,7 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
      * Asynchronously create a report containing Wireless Detail Records (WDRs) for the SIM cards that consumed wireless data in the given time period.
      *
      * @param array{
-     *   end_time?: string, start_time?: string
+     *   endTime?: string, startTime?: string
      * }|DetailRecordsReportCreateParams $params
      *
      * @throws APIException
@@ -83,7 +84,7 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
      * Returns the WDR Reports that match the given parameters.
      *
      * @param array{
-     *   page_number_?: int, page_size_?: int
+     *   pageNumber?: int, pageSize?: int
      * }|DetailRecordsReportListParams $params
      *
      * @throws APIException
@@ -101,7 +102,10 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
         $response = $this->client->request(
             method: 'get',
             path: 'wireless/detail_records_reports',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: DetailRecordsReportListResponse::class,
         );

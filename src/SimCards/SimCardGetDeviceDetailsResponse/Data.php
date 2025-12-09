@@ -10,12 +10,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   brand_name?: string|null,
- *   device_type?: string|null,
+ *   brandName?: string|null,
+ *   deviceType?: string|null,
  *   imei?: string|null,
- *   model_name?: string|null,
- *   operating_system?: string|null,
- *   record_type?: string|null,
+ *   modelName?: string|null,
+ *   operatingSystem?: string|null,
+ *   recordType?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -26,14 +26,14 @@ final class Data implements BaseModel
     /**
      * Brand of the device where the SIM card is being used in.
      */
-    #[Optional]
-    public ?string $brand_name;
+    #[Optional('brand_name')]
+    public ?string $brandName;
 
     /**
      * Type of the device where the SIM card is being used in.
      */
-    #[Optional]
-    public ?string $device_type;
+    #[Optional('device_type')]
+    public ?string $deviceType;
 
     /**
      * IMEI of the device where the SIM card is being used in.
@@ -44,17 +44,17 @@ final class Data implements BaseModel
     /**
      * Brand of the device where the SIM card is being used in.
      */
-    #[Optional]
-    public ?string $model_name;
+    #[Optional('model_name')]
+    public ?string $modelName;
 
     /**
      * Operating system of the device where the SIM card is being used in.
      */
-    #[Optional]
-    public ?string $operating_system;
+    #[Optional('operating_system')]
+    public ?string $operatingSystem;
 
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     public function __construct()
     {
@@ -67,21 +67,21 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $brand_name = null,
-        ?string $device_type = null,
+        ?string $brandName = null,
+        ?string $deviceType = null,
         ?string $imei = null,
-        ?string $model_name = null,
-        ?string $operating_system = null,
-        ?string $record_type = null,
+        ?string $modelName = null,
+        ?string $operatingSystem = null,
+        ?string $recordType = null,
     ): self {
         $obj = new self;
 
-        null !== $brand_name && $obj['brand_name'] = $brand_name;
-        null !== $device_type && $obj['device_type'] = $device_type;
+        null !== $brandName && $obj['brandName'] = $brandName;
+        null !== $deviceType && $obj['deviceType'] = $deviceType;
         null !== $imei && $obj['imei'] = $imei;
-        null !== $model_name && $obj['model_name'] = $model_name;
-        null !== $operating_system && $obj['operating_system'] = $operating_system;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $modelName && $obj['modelName'] = $modelName;
+        null !== $operatingSystem && $obj['operatingSystem'] = $operatingSystem;
+        null !== $recordType && $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class Data implements BaseModel
     public function withBrandName(string $brandName): self
     {
         $obj = clone $this;
-        $obj['brand_name'] = $brandName;
+        $obj['brandName'] = $brandName;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class Data implements BaseModel
     public function withDeviceType(string $deviceType): self
     {
         $obj = clone $this;
-        $obj['device_type'] = $deviceType;
+        $obj['deviceType'] = $deviceType;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class Data implements BaseModel
     public function withModelName(string $modelName): self
     {
         $obj = clone $this;
-        $obj['model_name'] = $modelName;
+        $obj['modelName'] = $modelName;
 
         return $obj;
     }
@@ -136,7 +136,7 @@ final class Data implements BaseModel
     public function withOperatingSystem(string $operatingSystem): self
     {
         $obj = clone $this;
-        $obj['operating_system'] = $operatingSystem;
+        $obj['operatingSystem'] = $operatingSystem;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

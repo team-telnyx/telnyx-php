@@ -18,7 +18,7 @@ use Telnyx\DocumentLinks\DocumentLinkListParams\Page;
  *
  * @phpstan-type DocumentLinkListParamsShape = array{
  *   filter?: Filter|array{
- *     linked_record_type?: string|null, linked_resource_id?: string|null
+ *     linkedRecordType?: string|null, linkedResourceID?: string|null
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
  * }
@@ -52,7 +52,7 @@ final class DocumentLinkListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   linked_record_type?: string|null, linked_resource_id?: string|null
+     *   linkedRecordType?: string|null, linkedResourceID?: string|null
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      */
@@ -72,7 +72,7 @@ final class DocumentLinkListParams implements BaseModel
      * Consolidated filter parameter for document links (deepObject style). Originally: filter[linked_record_type], filter[linked_resource_id].
      *
      * @param Filter|array{
-     *   linked_record_type?: string|null, linked_resource_id?: string|null
+     *   linkedRecordType?: string|null, linkedResourceID?: string|null
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

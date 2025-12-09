@@ -27,7 +27,7 @@ final class ActionsService implements ActionsContract
      * Synchronously create an Client Token to join a Room. Client Token is necessary to join a Telnyx Room. Client Token will expire after `token_ttl_secs`, a Refresh Token is also provided to refresh a Client Token, the Refresh Token expires after `refresh_token_ttl_secs`.
      *
      * @param array{
-     *   refresh_token_ttl_secs?: int, token_ttl_secs?: int
+     *   refreshTokenTtlSecs?: int, tokenTtlSecs?: int
      * }|ActionGenerateJoinClientTokenParams $params
      *
      * @throws APIException
@@ -60,7 +60,7 @@ final class ActionsService implements ActionsContract
      * Synchronously refresh an Client Token to join a Room. Client Token is necessary to join a Telnyx Room. Client Token will expire after `token_ttl_secs`.
      *
      * @param array{
-     *   refresh_token: string, token_ttl_secs?: int
+     *   refreshToken: string, tokenTtlSecs?: int
      * }|ActionRefreshClientTokenParams $params
      *
      * @throws APIException

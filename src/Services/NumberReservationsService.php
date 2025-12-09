@@ -39,15 +39,15 @@ final class NumberReservationsService implements NumberReservationsContract
      * Creates a Phone Number Reservation for multiple numbers.
      *
      * @param array{
-     *   customer_reference?: string,
-     *   phone_numbers?: list<array{
+     *   customerReference?: string,
+     *   phoneNumbers?: list<array{
      *     id?: string,
-     *     created_at?: string|\DateTimeInterface,
-     *     expired_at?: string|\DateTimeInterface,
-     *     phone_number?: string,
-     *     record_type?: string,
+     *     createdAt?: string|\DateTimeInterface,
+     *     expiredAt?: string|\DateTimeInterface,
+     *     phoneNumber?: string,
+     *     recordType?: string,
      *     status?: 'pending'|'success'|'failure'|Status,
-     *     updated_at?: string|\DateTimeInterface,
+     *     updatedAt?: string|\DateTimeInterface,
      *   }|ReservedPhoneNumber>,
      * }|NumberReservationCreateParams $params
      *
@@ -103,9 +103,9 @@ final class NumberReservationsService implements NumberReservationsContract
      *
      * @param array{
      *   filter?: array{
-     *     created_at?: array{gt?: string, lt?: string},
-     *     customer_reference?: string,
-     *     'phone_numbers.phone_number'?: string,
+     *     createdAt?: array{gt?: string, lt?: string},
+     *     customerReference?: string,
+     *     phoneNumbersPhoneNumber?: string,
      *     status?: string,
      *   },
      *   page?: array{number?: int, size?: int},

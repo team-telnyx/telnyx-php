@@ -34,12 +34,12 @@ final class NumberReservationGetResponse implements BaseModel
      *
      * @param NumberReservation|array{
      *   id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   customer_reference?: string|null,
-     *   phone_numbers?: list<ReservedPhoneNumber>|null,
-     *   record_type?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   customerReference?: string|null,
+     *   phoneNumbers?: list<ReservedPhoneNumber>|null,
+     *   recordType?: string|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(NumberReservation|array|null $data = null): self
@@ -54,12 +54,12 @@ final class NumberReservationGetResponse implements BaseModel
     /**
      * @param NumberReservation|array{
      *   id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   customer_reference?: string|null,
-     *   phone_numbers?: list<ReservedPhoneNumber>|null,
-     *   record_type?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   customerReference?: string|null,
+     *   phoneNumbers?: list<ReservedPhoneNumber>|null,
+     *   recordType?: string|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(NumberReservation|array $data): self

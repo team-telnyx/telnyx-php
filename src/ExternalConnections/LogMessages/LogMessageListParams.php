@@ -19,8 +19,7 @@ use Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Page;
  *
  * @phpstan-type LogMessageListParamsShape = array{
  *   filter?: Filter|array{
- *     external_connection_id?: string|null,
- *     telephone_number?: TelephoneNumber|null,
+ *     externalConnectionID?: string|null, telephoneNumber?: TelephoneNumber|null
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
  * }
@@ -54,7 +53,7 @@ final class LogMessageListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   external_connection_id?: string|null, telephone_number?: TelephoneNumber|null
+     *   externalConnectionID?: string|null, telephoneNumber?: TelephoneNumber|null
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      */
@@ -74,7 +73,7 @@ final class LogMessageListParams implements BaseModel
      * Filter parameter for log messages (deepObject style). Supports filtering by external_connection_id and telephone_number with eq/contains operations.
      *
      * @param Filter|array{
-     *   external_connection_id?: string|null, telephone_number?: TelephoneNumber|null
+     *   externalConnectionID?: string|null, telephoneNumber?: TelephoneNumber|null
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

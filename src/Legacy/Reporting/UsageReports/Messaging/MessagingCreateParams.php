@@ -16,12 +16,12 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Legacy\Reporting\UsageReports\MessagingService::create()
  *
  * @phpstan-type MessagingCreateParamsShape = array{
- *   aggregation_type: int,
- *   end_time?: \DateTimeInterface,
- *   managed_accounts?: list<string>,
+ *   aggregationType: int,
+ *   endTime?: \DateTimeInterface,
+ *   managedAccounts?: list<string>,
  *   profiles?: list<string>,
- *   select_all_managed_accounts?: bool,
- *   start_time?: \DateTimeInterface,
+ *   selectAllManagedAccounts?: bool,
+ *   startTime?: \DateTimeInterface,
  * }
  */
 final class MessagingCreateParams implements BaseModel
@@ -33,19 +33,19 @@ final class MessagingCreateParams implements BaseModel
     /**
      * Aggregation type: No aggregation = 0, By Messaging Profile = 1, By Tags = 2.
      */
-    #[Required]
-    public int $aggregation_type;
+    #[Required('aggregation_type')]
+    public int $aggregationType;
 
-    #[Optional]
-    public ?\DateTimeInterface $end_time;
+    #[Optional('end_time')]
+    public ?\DateTimeInterface $endTime;
 
     /**
      * List of managed accounts to include.
      *
-     * @var list<string>|null $managed_accounts
+     * @var list<string>|null $managedAccounts
      */
-    #[Optional(list: 'string')]
-    public ?array $managed_accounts;
+    #[Optional('managed_accounts', list: 'string')]
+    public ?array $managedAccounts;
 
     /**
      * List of messaging profile IDs to filter by.
@@ -55,18 +55,18 @@ final class MessagingCreateParams implements BaseModel
     #[Optional(list: 'string')]
     public ?array $profiles;
 
-    #[Optional]
-    public ?bool $select_all_managed_accounts;
+    #[Optional('select_all_managed_accounts')]
+    public ?bool $selectAllManagedAccounts;
 
-    #[Optional]
-    public ?\DateTimeInterface $start_time;
+    #[Optional('start_time')]
+    public ?\DateTimeInterface $startTime;
 
     /**
      * `new MessagingCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * MessagingCreateParams::with(aggregation_type: ...)
+     * MessagingCreateParams::with(aggregationType: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -85,26 +85,26 @@ final class MessagingCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $managed_accounts
+     * @param list<string> $managedAccounts
      * @param list<string> $profiles
      */
     public static function with(
-        int $aggregation_type,
-        ?\DateTimeInterface $end_time = null,
-        ?array $managed_accounts = null,
+        int $aggregationType,
+        ?\DateTimeInterface $endTime = null,
+        ?array $managedAccounts = null,
         ?array $profiles = null,
-        ?bool $select_all_managed_accounts = null,
-        ?\DateTimeInterface $start_time = null,
+        ?bool $selectAllManagedAccounts = null,
+        ?\DateTimeInterface $startTime = null,
     ): self {
         $obj = new self;
 
-        $obj['aggregation_type'] = $aggregation_type;
+        $obj['aggregationType'] = $aggregationType;
 
-        null !== $end_time && $obj['end_time'] = $end_time;
-        null !== $managed_accounts && $obj['managed_accounts'] = $managed_accounts;
+        null !== $endTime && $obj['endTime'] = $endTime;
+        null !== $managedAccounts && $obj['managedAccounts'] = $managedAccounts;
         null !== $profiles && $obj['profiles'] = $profiles;
-        null !== $select_all_managed_accounts && $obj['select_all_managed_accounts'] = $select_all_managed_accounts;
-        null !== $start_time && $obj['start_time'] = $start_time;
+        null !== $selectAllManagedAccounts && $obj['selectAllManagedAccounts'] = $selectAllManagedAccounts;
+        null !== $startTime && $obj['startTime'] = $startTime;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class MessagingCreateParams implements BaseModel
     public function withAggregationType(int $aggregationType): self
     {
         $obj = clone $this;
-        $obj['aggregation_type'] = $aggregationType;
+        $obj['aggregationType'] = $aggregationType;
 
         return $obj;
     }
@@ -123,7 +123,7 @@ final class MessagingCreateParams implements BaseModel
     public function withEndTime(\DateTimeInterface $endTime): self
     {
         $obj = clone $this;
-        $obj['end_time'] = $endTime;
+        $obj['endTime'] = $endTime;
 
         return $obj;
     }
@@ -136,7 +136,7 @@ final class MessagingCreateParams implements BaseModel
     public function withManagedAccounts(array $managedAccounts): self
     {
         $obj = clone $this;
-        $obj['managed_accounts'] = $managedAccounts;
+        $obj['managedAccounts'] = $managedAccounts;
 
         return $obj;
     }
@@ -158,7 +158,7 @@ final class MessagingCreateParams implements BaseModel
         bool $selectAllManagedAccounts
     ): self {
         $obj = clone $this;
-        $obj['select_all_managed_accounts'] = $selectAllManagedAccounts;
+        $obj['selectAllManagedAccounts'] = $selectAllManagedAccounts;
 
         return $obj;
     }
@@ -166,7 +166,7 @@ final class MessagingCreateParams implements BaseModel
     public function withStartTime(\DateTimeInterface $startTime): self
     {
         $obj = clone $this;
-        $obj['start_time'] = $startTime;
+        $obj['startTime'] = $startTime;
 
         return $obj;
     }

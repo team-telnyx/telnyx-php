@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\CampaignService::list()
  *
  * @phpstan-type CampaignListParamsShape = array{
- *   brandId: string, page?: int, recordsPerPage?: int, sort?: Sort|value-of<Sort>
+ *   brandID: string, page?: int, recordsPerPage?: int, sort?: Sort|value-of<Sort>
  * }
  */
 final class CampaignListParams implements BaseModel
@@ -27,7 +27,7 @@ final class CampaignListParams implements BaseModel
     use SdkParams;
 
     #[Required]
-    public string $brandId;
+    public string $brandID;
 
     /**
      * The 1-indexed page number to get. The default value is `1`.
@@ -54,7 +54,7 @@ final class CampaignListParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * CampaignListParams::with(brandId: ...)
+     * CampaignListParams::with(brandID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -76,14 +76,14 @@ final class CampaignListParams implements BaseModel
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
-        string $brandId,
+        string $brandID,
         ?int $page = null,
         ?int $recordsPerPage = null,
         Sort|string|null $sort = null,
     ): self {
         $obj = new self;
 
-        $obj['brandId'] = $brandId;
+        $obj['brandID'] = $brandID;
 
         null !== $page && $obj['page'] = $page;
         null !== $recordsPerPage && $obj['recordsPerPage'] = $recordsPerPage;
@@ -95,7 +95,7 @@ final class CampaignListParams implements BaseModel
     public function withBrandID(string $brandID): self
     {
         $obj = clone $this;
-        $obj['brandId'] = $brandID;
+        $obj['brandID'] = $brandID;
 
         return $obj;
     }

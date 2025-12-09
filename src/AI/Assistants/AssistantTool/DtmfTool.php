@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DtmfToolShape = array{
- *   send_dtmf: array<string,mixed>, type: value-of<Type>
+ *   sendDtmf: array<string,mixed>, type: value-of<Type>
  * }
  */
 final class DtmfTool implements BaseModel
@@ -19,9 +19,9 @@ final class DtmfTool implements BaseModel
     /** @use SdkModel<DtmfToolShape> */
     use SdkModel;
 
-    /** @var array<string,mixed> $send_dtmf */
-    #[Required(map: 'mixed')]
-    public array $send_dtmf;
+    /** @var array<string,mixed> $sendDtmf */
+    #[Required('send_dtmf', map: 'mixed')]
+    public array $sendDtmf;
 
     /** @var value-of<Type> $type */
     #[Required(enum: Type::class)]
@@ -32,7 +32,7 @@ final class DtmfTool implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * DtmfTool::with(send_dtmf: ..., type: ...)
+     * DtmfTool::with(sendDtmf: ..., type: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -51,14 +51,14 @@ final class DtmfTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,mixed> $send_dtmf
+     * @param array<string,mixed> $sendDtmf
      * @param Type|value-of<Type> $type
      */
-    public static function with(array $send_dtmf, Type|string $type): self
+    public static function with(array $sendDtmf, Type|string $type): self
     {
         $obj = new self;
 
-        $obj['send_dtmf'] = $send_dtmf;
+        $obj['sendDtmf'] = $sendDtmf;
         $obj['type'] = $type;
 
         return $obj;
@@ -70,7 +70,7 @@ final class DtmfTool implements BaseModel
     public function withSendDtmf(array $sendDtmf): self
     {
         $obj = clone $this;
-        $obj['send_dtmf'] = $sendDtmf;
+        $obj['sendDtmf'] = $sendDtmf;
 
         return $obj;
     }

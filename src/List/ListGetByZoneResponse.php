@@ -39,16 +39,16 @@ final class ListGetByZoneResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   number_of_channels?: int|null,
+     *   numberOfChannels?: int|null,
      *   numbers?: list<Number>|null,
-     *   zone_id?: string|null,
-     *   zone_name?: string|null,
+     *   zoneID?: string|null,
+     *   zoneName?: string|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -65,10 +65,10 @@ final class ListGetByZoneResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   number_of_channels?: int|null,
+     *   numberOfChannels?: int|null,
      *   numbers?: list<Number>|null,
-     *   zone_id?: string|null,
-     *   zone_name?: string|null,
+     *   zoneID?: string|null,
+     *   zoneName?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -81,10 +81,10 @@ final class ListGetByZoneResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

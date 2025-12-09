@@ -19,7 +19,7 @@ use Telnyx\TexmlApplications\TexmlApplicationListParams\Sort;
  *
  * @phpstan-type TexmlApplicationListParamsShape = array{
  *   filter?: Filter|array{
- *     friendly_name?: string|null, outbound_voice_profile_id?: string|null
+ *     friendlyName?: string|null, outboundVoiceProfileID?: string|null
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
  *   sort?: Sort|value-of<Sort>,
@@ -73,7 +73,7 @@ final class TexmlApplicationListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   friendly_name?: string|null, outbound_voice_profile_id?: string|null
+     *   friendlyName?: string|null, outboundVoiceProfileID?: string|null
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      * @param Sort|value-of<Sort> $sort
@@ -96,7 +96,7 @@ final class TexmlApplicationListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[outbound_voice_profile_id], filter[friendly_name].
      *
      * @param Filter|array{
-     *   friendly_name?: string|null, outbound_voice_profile_id?: string|null
+     *   friendlyName?: string|null, outboundVoiceProfileID?: string|null
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

@@ -17,7 +17,7 @@ use Telnyx\ShortCodes\ShortCodeListParams\Page;
  * @see Telnyx\Services\ShortCodesService::list()
  *
  * @phpstan-type ShortCodeListParamsShape = array{
- *   filter?: Filter|array{messaging_profile_id?: string|null},
+ *   filter?: Filter|array{messagingProfileID?: string|null},
  *   page?: Page|array{number?: int|null, size?: int|null},
  * }
  */
@@ -49,7 +49,7 @@ final class ShortCodeListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{messaging_profile_id?: string|null} $filter
+     * @param Filter|array{messagingProfileID?: string|null} $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      */
     public static function with(
@@ -67,7 +67,7 @@ final class ShortCodeListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[messaging_profile_id].
      *
-     * @param Filter|array{messaging_profile_id?: string|null} $filter
+     * @param Filter|array{messagingProfileID?: string|null} $filter
      */
     public function withFilter(Filter|array $filter): self
     {

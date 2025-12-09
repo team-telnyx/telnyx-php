@@ -10,9 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type MetaShape = array{
- *   external_connection_id?: string|null,
- *   telephone_number?: string|null,
- *   ticket_id?: string|null,
+ *   externalConnectionID?: string|null,
+ *   telephoneNumber?: string|null,
+ *   ticketID?: string|null,
  * }
  */
 final class Meta implements BaseModel
@@ -23,20 +23,20 @@ final class Meta implements BaseModel
     /**
      * The external connection the log message is associated with, if any.
      */
-    #[Optional]
-    public ?string $external_connection_id;
+    #[Optional('external_connection_id')]
+    public ?string $externalConnectionID;
 
     /**
      * The telephone number the log message is associated with, if any.
      */
-    #[Optional]
-    public ?string $telephone_number;
+    #[Optional('telephone_number')]
+    public ?string $telephoneNumber;
 
     /**
      * The ticket ID for an operation that generated the log message, if any.
      */
-    #[Optional]
-    public ?string $ticket_id;
+    #[Optional('ticket_id')]
+    public ?string $ticketID;
 
     public function __construct()
     {
@@ -49,15 +49,15 @@ final class Meta implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $external_connection_id = null,
-        ?string $telephone_number = null,
-        ?string $ticket_id = null,
+        ?string $externalConnectionID = null,
+        ?string $telephoneNumber = null,
+        ?string $ticketID = null,
     ): self {
         $obj = new self;
 
-        null !== $external_connection_id && $obj['external_connection_id'] = $external_connection_id;
-        null !== $telephone_number && $obj['telephone_number'] = $telephone_number;
-        null !== $ticket_id && $obj['ticket_id'] = $ticket_id;
+        null !== $externalConnectionID && $obj['externalConnectionID'] = $externalConnectionID;
+        null !== $telephoneNumber && $obj['telephoneNumber'] = $telephoneNumber;
+        null !== $ticketID && $obj['ticketID'] = $ticketID;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class Meta implements BaseModel
     public function withExternalConnectionID(string $externalConnectionID): self
     {
         $obj = clone $this;
-        $obj['external_connection_id'] = $externalConnectionID;
+        $obj['externalConnectionID'] = $externalConnectionID;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class Meta implements BaseModel
     public function withTelephoneNumber(string $telephoneNumber): self
     {
         $obj = clone $this;
-        $obj['telephone_number'] = $telephoneNumber;
+        $obj['telephoneNumber'] = $telephoneNumber;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class Meta implements BaseModel
     public function withTicketID(string $ticketID): self
     {
         $obj = clone $this;
-        $obj['ticket_id'] = $ticketID;
+        $obj['ticketID'] = $ticketID;
 
         return $obj;
     }

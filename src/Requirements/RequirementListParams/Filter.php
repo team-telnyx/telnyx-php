@@ -15,8 +15,8 @@ use Telnyx\Requirements\RequirementListParams\Filter\PhoneNumberType;
  *
  * @phpstan-type FilterShape = array{
  *   action?: value-of<Action>|null,
- *   country_code?: string|null,
- *   phone_number_type?: value-of<PhoneNumberType>|null,
+ *   countryCode?: string|null,
+ *   phoneNumberType?: value-of<PhoneNumberType>|null,
  * }
  */
 final class Filter implements BaseModel
@@ -35,16 +35,16 @@ final class Filter implements BaseModel
     /**
      * Filters results to those applying to a 2-character (ISO 3166-1 alpha-2) country code.
      */
-    #[Optional]
-    public ?string $country_code;
+    #[Optional('country_code')]
+    public ?string $countryCode;
 
     /**
      * Filters results to those applying to a specific phone_number_type.
      *
-     * @var value-of<PhoneNumberType>|null $phone_number_type
+     * @var value-of<PhoneNumberType>|null $phoneNumberType
      */
-    #[Optional(enum: PhoneNumberType::class)]
-    public ?string $phone_number_type;
+    #[Optional('phone_number_type', enum: PhoneNumberType::class)]
+    public ?string $phoneNumberType;
 
     public function __construct()
     {
@@ -57,18 +57,18 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Action|value-of<Action> $action
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phone_number_type
+     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
      */
     public static function with(
         Action|string|null $action = null,
-        ?string $country_code = null,
-        PhoneNumberType|string|null $phone_number_type = null,
+        ?string $countryCode = null,
+        PhoneNumberType|string|null $phoneNumberType = null,
     ): self {
         $obj = new self;
 
         null !== $action && $obj['action'] = $action;
-        null !== $country_code && $obj['country_code'] = $country_code;
-        null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
+        null !== $countryCode && $obj['countryCode'] = $countryCode;
+        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class Filter implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj['country_code'] = $countryCode;
+        $obj['countryCode'] = $countryCode;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class Filter implements BaseModel
         PhoneNumberType|string $phoneNumberType
     ): self {
         $obj = clone $this;
-        $obj['phone_number_type'] = $phoneNumberType;
+        $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }

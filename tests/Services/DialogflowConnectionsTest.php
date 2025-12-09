@@ -39,7 +39,7 @@ final class DialogflowConnectionsTest extends TestCase
         $result = $this->client->dialogflowConnections->create(
             'connection_id',
             [
-                'service_account' => [
+                'serviceAccount' => [
                     '0' => 'bar',
                     '1' => 'bar',
                     '2' => 'bar',
@@ -458,7 +458,7 @@ final class DialogflowConnectionsTest extends TestCase
         $result = $this->client->dialogflowConnections->create(
             'connection_id',
             [
-                'service_account' => [
+                'serviceAccount' => [
                     '0' => 'bar',
                     '1' => 'bar',
                     '2' => 'bar',
@@ -860,8 +860,8 @@ final class DialogflowConnectionsTest extends TestCase
                     '398' => 'bar',
                     '399' => 'bar',
                 ],
-                'conversation_profile_id' => 'a-VMHLWzTmKjiJw5S6O0-w',
-                'dialogflow_api' => 'cx',
+                'conversationProfileID' => 'a-VMHLWzTmKjiJw5S6O0-w',
+                'dialogflowAPI' => 'cx',
                 'environment' => 'development',
                 'location' => 'global',
             ],
@@ -894,7 +894,7 @@ final class DialogflowConnectionsTest extends TestCase
         $result = $this->client->dialogflowConnections->update(
             'connection_id',
             [
-                'service_account' => [
+                'serviceAccount' => [
                     '0' => 'bar',
                     '1' => 'bar',
                     '2' => 'bar',
@@ -1313,7 +1313,7 @@ final class DialogflowConnectionsTest extends TestCase
         $result = $this->client->dialogflowConnections->update(
             'connection_id',
             [
-                'service_account' => [
+                'serviceAccount' => [
                     '0' => 'bar',
                     '1' => 'bar',
                     '2' => 'bar',
@@ -1715,8 +1715,8 @@ final class DialogflowConnectionsTest extends TestCase
                     '398' => 'bar',
                     '399' => 'bar',
                 ],
-                'conversation_profile_id' => 'a-VMHLWzTmKjiJw5S6O0-w',
-                'dialogflow_api' => 'cx',
+                'conversationProfileID' => 'a-VMHLWzTmKjiJw5S6O0-w',
+                'dialogflowAPI' => 'cx',
                 'environment' => 'development',
                 'location' => 'global',
             ],

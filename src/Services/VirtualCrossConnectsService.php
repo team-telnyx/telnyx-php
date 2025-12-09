@@ -32,21 +32,21 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
      * Create a new Virtual Cross Connect.<br /><br />For AWS and GCE, you have the option of creating the primary connection first and the secondary connection later. You also have the option of disabling the primary and/or secondary connections at any time and later re-enabling them. With Azure, you do not have this option. Azure requires both the primary and secondary connections to be created at the same time and they can not be independantly disabled.
      *
      * @param array{
-     *   bgp_asn: float,
-     *   cloud_provider: 'aws'|'azure'|'gce'|CloudProvider,
-     *   cloud_provider_region: string,
-     *   network_id: string,
-     *   primary_cloud_account_id: string,
-     *   region_code: string,
-     *   bandwidth_mbps?: float,
+     *   bgpAsn: float,
+     *   cloudProvider: 'aws'|'azure'|'gce'|CloudProvider,
+     *   cloudProviderRegion: string,
+     *   networkID: string,
+     *   primaryCloudAccountID: string,
+     *   regionCode: string,
+     *   bandwidthMbps?: float,
      *   name?: string,
-     *   primary_bgp_key?: string,
-     *   primary_cloud_ip?: string,
-     *   primary_telnyx_ip?: string,
-     *   secondary_bgp_key?: string,
-     *   secondary_cloud_account_id?: string,
-     *   secondary_cloud_ip?: string,
-     *   secondary_telnyx_ip?: string,
+     *   primaryBgpKey?: string,
+     *   primaryCloudIP?: string,
+     *   primaryTelnyxIP?: string,
+     *   secondaryBgpKey?: string,
+     *   secondaryCloudAccountID?: string,
+     *   secondaryCloudIP?: string,
+     *   secondaryTelnyxIP?: string,
      * }|VirtualCrossConnectCreateParams $params
      *
      * @throws APIException
@@ -100,12 +100,12 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
      * Update the Virtual Cross Connect.<br /><br />Cloud IPs can only be patched during the `created` state, as GCE will only inform you of your generated IP once the pending connection requested has been accepted. Once the Virtual Cross Connect has moved to `provisioning`, the IPs can no longer be patched.<br /><br />Once the Virtual Cross Connect has moved to `provisioned` and you are ready to enable routing, you can toggle the routing announcements to `true`.
      *
      * @param array{
-     *   primary_cloud_ip?: string,
-     *   primary_enabled?: bool,
-     *   primary_routing_announcement?: bool,
-     *   secondary_cloud_ip?: string,
-     *   secondary_enabled?: bool,
-     *   secondary_routing_announcement?: bool,
+     *   primaryCloudIP?: string,
+     *   primaryEnabled?: bool,
+     *   primaryRoutingAnnouncement?: bool,
+     *   secondaryCloudIP?: string,
+     *   secondaryEnabled?: bool,
+     *   secondaryRoutingAnnouncement?: bool,
      * }|VirtualCrossConnectUpdateParams $params
      *
      * @throws APIException
@@ -138,7 +138,7 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
      * List all Virtual Cross Connects.
      *
      * @param array{
-     *   filter?: array{network_id?: string}, page?: array{number?: int, size?: int}
+     *   filter?: array{networkID?: string}, page?: array{number?: int, size?: int}
      * }|VirtualCrossConnectListParams $params
      *
      * @throws APIException

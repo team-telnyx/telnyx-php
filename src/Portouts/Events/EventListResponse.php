@@ -45,20 +45,20 @@ final class EventListResponse implements BaseModel
      *
      * @param list<Data|array{
      *   id?: string|null,
-     *   available_notification_methods?: list<value-of<AvailableNotificationMethod>>|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   event_type?: value-of<EventType>|null,
+     *   availableNotificationMethods?: list<value-of<AvailableNotificationMethod>>|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   eventType?: value-of<EventType>|null,
      *   payload?: WebhookPortoutStatusChangedPayload|WebhookPortoutNewCommentPayload|WebhookPortoutFocDateChangedPayload|null,
-     *   payload_status?: value-of<PayloadStatus>|null,
-     *   portout_id?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   payloadStatus?: value-of<PayloadStatus>|null,
+     *   portoutID?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -76,14 +76,14 @@ final class EventListResponse implements BaseModel
     /**
      * @param list<Data|array{
      *   id?: string|null,
-     *   available_notification_methods?: list<value-of<AvailableNotificationMethod>>|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   event_type?: value-of<EventType>|null,
+     *   availableNotificationMethods?: list<value-of<AvailableNotificationMethod>>|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   eventType?: value-of<EventType>|null,
      *   payload?: WebhookPortoutStatusChangedPayload|WebhookPortoutNewCommentPayload|WebhookPortoutFocDateChangedPayload|null,
-     *   payload_status?: value-of<PayloadStatus>|null,
-     *   portout_id?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   payloadStatus?: value-of<PayloadStatus>|null,
+     *   portoutID?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -96,10 +96,10 @@ final class EventListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

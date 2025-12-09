@@ -49,9 +49,9 @@ final class AgentsService implements AgentsContract
      * Modify an RCS agent
      *
      * @param array{
-     *   profile_id?: string|null,
-     *   webhook_failover_url?: string|null,
-     *   webhook_url?: string|null,
+     *   profileID?: string|null,
+     *   webhookFailoverURL?: string|null,
+     *   webhookURL?: string|null,
      * }|AgentUpdateParams $params
      *
      * @throws APIException

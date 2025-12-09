@@ -34,14 +34,14 @@ final class ActionCheckRegistrationStatusResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Data|array{
-     *   ip_address?: string|null,
-     *   last_registration?: string|null,
+     *   ipAddress?: string|null,
+     *   lastRegistration?: string|null,
      *   port?: int|null,
-     *   record_type?: string|null,
-     *   sip_username?: string|null,
+     *   recordType?: string|null,
+     *   sipUsername?: string|null,
      *   status?: value-of<Status>|null,
      *   transport?: string|null,
-     *   user_agent?: string|null,
+     *   userAgent?: string|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -55,14 +55,14 @@ final class ActionCheckRegistrationStatusResponse implements BaseModel
 
     /**
      * @param Data|array{
-     *   ip_address?: string|null,
-     *   last_registration?: string|null,
+     *   ipAddress?: string|null,
+     *   lastRegistration?: string|null,
      *   port?: int|null,
-     *   record_type?: string|null,
-     *   sip_username?: string|null,
+     *   recordType?: string|null,
+     *   sipUsername?: string|null,
      *   status?: value-of<Status>|null,
      *   transport?: string|null,
-     *   user_agent?: string|null,
+     *   userAgent?: string|null,
      * } $data
      */
     public function withData(Data|array $data): self

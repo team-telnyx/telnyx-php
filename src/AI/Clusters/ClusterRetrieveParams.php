@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\ClustersService::retrieve()
  *
  * @phpstan-type ClusterRetrieveParamsShape = array{
- *   show_subclusters?: bool, top_n_nodes?: int
+ *   showSubclusters?: bool, topNNodes?: int
  * }
  */
 final class ClusterRetrieveParams implements BaseModel
@@ -28,13 +28,13 @@ final class ClusterRetrieveParams implements BaseModel
      * Whether or not to include subclusters and their nodes in the response.
      */
     #[Optional]
-    public ?bool $show_subclusters;
+    public ?bool $showSubclusters;
 
     /**
      * The number of nodes in the cluster to return in the response. Nodes will be sorted by their centrality within the cluster.
      */
     #[Optional]
-    public ?int $top_n_nodes;
+    public ?int $topNNodes;
 
     public function __construct()
     {
@@ -47,13 +47,13 @@ final class ClusterRetrieveParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?bool $show_subclusters = null,
-        ?int $top_n_nodes = null
+        ?bool $showSubclusters = null,
+        ?int $topNNodes = null
     ): self {
         $obj = new self;
 
-        null !== $show_subclusters && $obj['show_subclusters'] = $show_subclusters;
-        null !== $top_n_nodes && $obj['top_n_nodes'] = $top_n_nodes;
+        null !== $showSubclusters && $obj['showSubclusters'] = $showSubclusters;
+        null !== $topNNodes && $obj['topNNodes'] = $topNNodes;
 
         return $obj;
     }
@@ -64,7 +64,7 @@ final class ClusterRetrieveParams implements BaseModel
     public function withShowSubclusters(bool $showSubclusters): self
     {
         $obj = clone $this;
-        $obj['show_subclusters'] = $showSubclusters;
+        $obj['showSubclusters'] = $showSubclusters;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class ClusterRetrieveParams implements BaseModel
     public function withTopNNodes(int $topNNodes): self
     {
         $obj = clone $this;
-        $obj['top_n_nodes'] = $topNNodes;
+        $obj['topNNodes'] = $topNNodes;
 
         return $obj;
     }

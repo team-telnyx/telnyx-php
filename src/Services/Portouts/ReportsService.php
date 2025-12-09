@@ -33,15 +33,15 @@ final class ReportsService implements ReportsContract
      * @param array{
      *   params: array{
      *     filters: array{
-     *       created_at__gt?: string|\DateTimeInterface,
-     *       created_at__lt?: string|\DateTimeInterface,
-     *       customer_reference__in?: list<string>,
-     *       end_user_name?: string,
-     *       phone_numbers__overlaps?: list<string>,
-     *       status__in?: list<mixed>,
+     *       createdAtGt?: string|\DateTimeInterface,
+     *       createdAtLt?: string|\DateTimeInterface,
+     *       customerReferenceIn?: list<string>,
+     *       endUserName?: string,
+     *       phoneNumbersOverlaps?: list<string>,
+     *       statusIn?: list<mixed>,
      *     },
      *   }|ExportPortoutsCsvReport,
-     *   report_type: 'export_portouts_csv'|ReportType,
+     *   reportType: 'export_portouts_csv'|ReportType,
      * }|ReportCreateParams $params
      *
      * @throws APIException
@@ -96,7 +96,7 @@ final class ReportsService implements ReportsContract
      *
      * @param array{
      *   filter?: array{
-     *     report_type?: 'export_portouts_csv'|ReportListParams\Filter\ReportType,
+     *     reportType?: 'export_portouts_csv'|ReportListParams\Filter\ReportType,
      *     status?: 'pending'|'completed'|Status,
      *   },
      *   page?: array{number?: int, size?: int},

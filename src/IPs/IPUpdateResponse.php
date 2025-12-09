@@ -31,12 +31,12 @@ final class IPUpdateResponse implements BaseModel
      *
      * @param IP|array{
      *   id?: string|null,
-     *   connection_id?: string|null,
-     *   created_at?: string|null,
-     *   ip_address?: string|null,
+     *   connectionID?: string|null,
+     *   createdAt?: string|null,
+     *   ipAddress?: string|null,
      *   port?: int|null,
-     *   record_type?: string|null,
-     *   updated_at?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public static function with(IP|array|null $data = null): self
@@ -51,12 +51,12 @@ final class IPUpdateResponse implements BaseModel
     /**
      * @param IP|array{
      *   id?: string|null,
-     *   connection_id?: string|null,
-     *   created_at?: string|null,
-     *   ip_address?: string|null,
+     *   connectionID?: string|null,
+     *   createdAt?: string|null,
+     *   ipAddress?: string|null,
      *   port?: int|null,
-     *   record_type?: string|null,
-     *   updated_at?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public function withData(IP|array $data): self

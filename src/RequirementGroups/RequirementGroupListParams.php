@@ -21,9 +21,9 @@ use Telnyx\RequirementGroups\RequirementGroupListParams\Filter\Status;
  * @phpstan-type RequirementGroupListParamsShape = array{
  *   filter?: Filter|array{
  *     action?: value-of<Action>|null,
- *     country_code?: string|null,
- *     customer_reference?: string|null,
- *     phone_number_type?: value-of<PhoneNumberType>|null,
+ *     countryCode?: string|null,
+ *     customerReference?: string|null,
+ *     phoneNumberType?: value-of<PhoneNumberType>|null,
  *     status?: value-of<Status>|null,
  *   },
  * }
@@ -52,9 +52,9 @@ final class RequirementGroupListParams implements BaseModel
      *
      * @param Filter|array{
      *   action?: value-of<Action>|null,
-     *   country_code?: string|null,
-     *   customer_reference?: string|null,
-     *   phone_number_type?: value-of<PhoneNumberType>|null,
+     *   countryCode?: string|null,
+     *   customerReference?: string|null,
+     *   phoneNumberType?: value-of<PhoneNumberType>|null,
      *   status?: value-of<Status>|null,
      * } $filter
      */
@@ -72,9 +72,9 @@ final class RequirementGroupListParams implements BaseModel
      *
      * @param Filter|array{
      *   action?: value-of<Action>|null,
-     *   country_code?: string|null,
-     *   customer_reference?: string|null,
-     *   phone_number_type?: value-of<PhoneNumberType>|null,
+     *   countryCode?: string|null,
+     *   customerReference?: string|null,
+     *   phoneNumberType?: value-of<PhoneNumberType>|null,
      *   status?: value-of<Status>|null,
      * } $filter
      */

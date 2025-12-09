@@ -27,26 +27,26 @@ use Telnyx\IPConnections\OutboundIP\T38ReinviteSource;
  * @phpstan-type IPConnectionShape = array{
  *   id?: string|null,
  *   active?: bool|null,
- *   anchorsite_override?: value-of<AnchorsiteOverride>|null,
- *   call_cost_in_webhooks?: bool|null,
- *   connection_name?: string|null,
- *   created_at?: string|null,
- *   default_on_hold_comfort_noise_enabled?: bool|null,
- *   dtmf_type?: value-of<DtmfType>|null,
- *   encode_contact_header_enabled?: bool|null,
- *   encrypted_media?: value-of<EncryptedMedia>|null,
+ *   anchorsiteOverride?: value-of<AnchorsiteOverride>|null,
+ *   callCostInWebhooks?: bool|null,
+ *   connectionName?: string|null,
+ *   createdAt?: string|null,
+ *   defaultOnHoldComfortNoiseEnabled?: bool|null,
+ *   dtmfType?: value-of<DtmfType>|null,
+ *   encodeContactHeaderEnabled?: bool|null,
+ *   encryptedMedia?: value-of<EncryptedMedia>|null,
  *   inbound?: InboundIP|null,
- *   onnet_t38_passthrough_enabled?: bool|null,
+ *   onnetT38PassthroughEnabled?: bool|null,
  *   outbound?: OutboundIP|null,
- *   record_type?: string|null,
- *   rtcp_settings?: ConnectionRtcpSettings|null,
+ *   recordType?: string|null,
+ *   rtcpSettings?: ConnectionRtcpSettings|null,
  *   tags?: list<string>|null,
- *   transport_protocol?: value-of<TransportProtocol>|null,
- *   updated_at?: string|null,
- *   webhook_api_version?: value-of<WebhookAPIVersion>|null,
- *   webhook_event_failover_url?: string|null,
- *   webhook_event_url?: string|null,
- *   webhook_timeout_secs?: int|null,
+ *   transportProtocol?: value-of<TransportProtocol>|null,
+ *   updatedAt?: string|null,
+ *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
+ *   webhookEventFailoverURL?: string|null,
+ *   webhookEventURL?: string|null,
+ *   webhookTimeoutSecs?: int|null,
  * }
  */
 final class IPConnection implements BaseModel
@@ -69,53 +69,53 @@ final class IPConnection implements BaseModel
     /**
      * `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
      *
-     * @var value-of<AnchorsiteOverride>|null $anchorsite_override
+     * @var value-of<AnchorsiteOverride>|null $anchorsiteOverride
      */
-    #[Optional(enum: AnchorsiteOverride::class)]
-    public ?string $anchorsite_override;
+    #[Optional('anchorsite_override', enum: AnchorsiteOverride::class)]
+    public ?string $anchorsiteOverride;
 
     /**
      * Specifies if call cost webhooks should be sent for this connection.
      */
-    #[Optional]
-    public ?bool $call_cost_in_webhooks;
+    #[Optional('call_cost_in_webhooks')]
+    public ?bool $callCostInWebhooks;
 
-    #[Optional]
-    public ?string $connection_name;
+    #[Optional('connection_name')]
+    public ?string $connectionName;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Optional]
-    public ?string $created_at;
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
     /**
      * When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
      */
-    #[Optional]
-    public ?bool $default_on_hold_comfort_noise_enabled;
+    #[Optional('default_on_hold_comfort_noise_enabled')]
+    public ?bool $defaultOnHoldComfortNoiseEnabled;
 
     /**
      * Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
      *
-     * @var value-of<DtmfType>|null $dtmf_type
+     * @var value-of<DtmfType>|null $dtmfType
      */
-    #[Optional(enum: DtmfType::class)]
-    public ?string $dtmf_type;
+    #[Optional('dtmf_type', enum: DtmfType::class)]
+    public ?string $dtmfType;
 
     /**
      * Encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios.
      */
-    #[Optional]
-    public ?bool $encode_contact_header_enabled;
+    #[Optional('encode_contact_header_enabled')]
+    public ?bool $encodeContactHeaderEnabled;
 
     /**
      * Enable use of SRTP for encryption. Cannot be set if the transport_portocol is TLS.
      *
-     * @var value-of<EncryptedMedia>|null $encrypted_media
+     * @var value-of<EncryptedMedia>|null $encryptedMedia
      */
-    #[Optional(enum: EncryptedMedia::class, nullable: true)]
-    public ?string $encrypted_media;
+    #[Optional('encrypted_media', enum: EncryptedMedia::class, nullable: true)]
+    public ?string $encryptedMedia;
 
     #[Optional]
     public ?InboundIP $inbound;
@@ -123,8 +123,8 @@ final class IPConnection implements BaseModel
     /**
      * Enable on-net T38 if you prefer the sender and receiver negotiating T38 directly if both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call depending on each leg's settings.
      */
-    #[Optional]
-    public ?bool $onnet_t38_passthrough_enabled;
+    #[Optional('onnet_t38_passthrough_enabled')]
+    public ?bool $onnetT38PassthroughEnabled;
 
     #[Optional]
     public ?OutboundIP $outbound;
@@ -132,11 +132,11 @@ final class IPConnection implements BaseModel
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
-    #[Optional]
-    public ?ConnectionRtcpSettings $rtcp_settings;
+    #[Optional('rtcp_settings')]
+    public ?ConnectionRtcpSettings $rtcpSettings;
 
     /**
      * Tags associated with the connection.
@@ -149,42 +149,42 @@ final class IPConnection implements BaseModel
     /**
      * One of UDP, TLS, or TCP. Applies only to connections with IP authentication or FQDN authentication.
      *
-     * @var value-of<TransportProtocol>|null $transport_protocol
+     * @var value-of<TransportProtocol>|null $transportProtocol
      */
-    #[Optional(enum: TransportProtocol::class)]
-    public ?string $transport_protocol;
+    #[Optional('transport_protocol', enum: TransportProtocol::class)]
+    public ?string $transportProtocol;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Optional]
-    public ?string $updated_at;
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     /**
      * Determines which webhook format will be used, Telnyx API v1 or v2.
      *
-     * @var value-of<WebhookAPIVersion>|null $webhook_api_version
+     * @var value-of<WebhookAPIVersion>|null $webhookAPIVersion
      */
-    #[Optional(enum: WebhookAPIVersion::class)]
-    public ?string $webhook_api_version;
+    #[Optional('webhook_api_version', enum: WebhookAPIVersion::class)]
+    public ?string $webhookAPIVersion;
 
     /**
      * The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
-    #[Optional(nullable: true)]
-    public ?string $webhook_event_failover_url;
+    #[Optional('webhook_event_failover_url', nullable: true)]
+    public ?string $webhookEventFailoverURL;
 
     /**
      * The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      */
-    #[Optional]
-    public ?string $webhook_event_url;
+    #[Optional('webhook_event_url')]
+    public ?string $webhookEventURL;
 
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    #[Optional(nullable: true)]
-    public ?int $webhook_timeout_secs;
+    #[Optional('webhook_timeout_secs', nullable: true)]
+    public ?int $webhookTimeoutSecs;
 
     public function __construct()
     {
@@ -196,100 +196,100 @@ final class IPConnection implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsite_override
-     * @param DtmfType|value-of<DtmfType> $dtmf_type
-     * @param EncryptedMedia|value-of<EncryptedMedia>|null $encrypted_media
+     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
+     * @param DtmfType|value-of<DtmfType> $dtmfType
+     * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
      * @param InboundIP|array{
-     *   ani_number_format?: value-of<AniNumberFormat>|null,
-     *   channel_limit?: int|null,
+     *   aniNumberFormat?: value-of<AniNumberFormat>|null,
+     *   channelLimit?: int|null,
      *   codecs?: list<string>|null,
-     *   default_primary_ip_id?: string|null,
-     *   default_routing_method?: value-of<DefaultRoutingMethod>|null,
-     *   default_secondary_ip_id?: string|null,
-     *   default_tertiary_ip_id?: string|null,
-     *   dnis_number_format?: value-of<DnisNumberFormat>|null,
-     *   generate_ringback_tone?: bool|null,
-     *   isup_headers_enabled?: bool|null,
-     *   prack_enabled?: bool|null,
-     *   shaken_stir_enabled?: bool|null,
-     *   sip_compact_headers_enabled?: bool|null,
-     *   sip_region?: value-of<SipRegion>|null,
-     *   sip_subdomain?: string|null,
-     *   sip_subdomain_receive_settings?: value-of<SipSubdomainReceiveSettings>|null,
-     *   timeout_1xx_secs?: int|null,
-     *   timeout_2xx_secs?: int|null,
+     *   defaultPrimaryIPID?: string|null,
+     *   defaultRoutingMethod?: value-of<DefaultRoutingMethod>|null,
+     *   defaultSecondaryIPID?: string|null,
+     *   defaultTertiaryIPID?: string|null,
+     *   dnisNumberFormat?: value-of<DnisNumberFormat>|null,
+     *   generateRingbackTone?: bool|null,
+     *   isupHeadersEnabled?: bool|null,
+     *   prackEnabled?: bool|null,
+     *   shakenStirEnabled?: bool|null,
+     *   sipCompactHeadersEnabled?: bool|null,
+     *   sipRegion?: value-of<SipRegion>|null,
+     *   sipSubdomain?: string|null,
+     *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
+     *   timeout1xxSecs?: int|null,
+     *   timeout2xxSecs?: int|null,
      * } $inbound
      * @param OutboundIP|array{
-     *   ani_override?: string|null,
-     *   ani_override_type?: value-of<AniOverrideType>|null,
-     *   call_parking_enabled?: bool|null,
-     *   channel_limit?: int|null,
-     *   generate_ringback_tone?: bool|null,
-     *   instant_ringback_enabled?: bool|null,
-     *   ip_authentication_method?: value-of<IPAuthenticationMethod>|null,
-     *   ip_authentication_token?: string|null,
+     *   aniOverride?: string|null,
+     *   aniOverrideType?: value-of<AniOverrideType>|null,
+     *   callParkingEnabled?: bool|null,
+     *   channelLimit?: int|null,
+     *   generateRingbackTone?: bool|null,
+     *   instantRingbackEnabled?: bool|null,
+     *   ipAuthenticationMethod?: value-of<IPAuthenticationMethod>|null,
+     *   ipAuthenticationToken?: string|null,
      *   localization?: string|null,
-     *   outbound_voice_profile_id?: string|null,
-     *   t38_reinvite_source?: value-of<T38ReinviteSource>|null,
-     *   tech_prefix?: string|null,
+     *   outboundVoiceProfileID?: string|null,
+     *   t38ReinviteSource?: value-of<T38ReinviteSource>|null,
+     *   techPrefix?: string|null,
      * } $outbound
      * @param ConnectionRtcpSettings|array{
-     *   capture_enabled?: bool|null,
+     *   captureEnabled?: bool|null,
      *   port?: value-of<Port>|null,
-     *   report_frequency_secs?: int|null,
-     * } $rtcp_settings
+     *   reportFrequencySecs?: int|null,
+     * } $rtcpSettings
      * @param list<string> $tags
-     * @param TransportProtocol|value-of<TransportProtocol> $transport_protocol
-     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhook_api_version
+     * @param TransportProtocol|value-of<TransportProtocol> $transportProtocol
+     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion
      */
     public static function with(
         ?string $id = null,
         ?bool $active = null,
-        AnchorsiteOverride|string|null $anchorsite_override = null,
-        ?bool $call_cost_in_webhooks = null,
-        ?string $connection_name = null,
-        ?string $created_at = null,
-        ?bool $default_on_hold_comfort_noise_enabled = null,
-        DtmfType|string|null $dtmf_type = null,
-        ?bool $encode_contact_header_enabled = null,
-        EncryptedMedia|string|null $encrypted_media = null,
+        AnchorsiteOverride|string|null $anchorsiteOverride = null,
+        ?bool $callCostInWebhooks = null,
+        ?string $connectionName = null,
+        ?string $createdAt = null,
+        ?bool $defaultOnHoldComfortNoiseEnabled = null,
+        DtmfType|string|null $dtmfType = null,
+        ?bool $encodeContactHeaderEnabled = null,
+        EncryptedMedia|string|null $encryptedMedia = null,
         InboundIP|array|null $inbound = null,
-        ?bool $onnet_t38_passthrough_enabled = null,
+        ?bool $onnetT38PassthroughEnabled = null,
         OutboundIP|array|null $outbound = null,
-        ?string $record_type = null,
-        ConnectionRtcpSettings|array|null $rtcp_settings = null,
+        ?string $recordType = null,
+        ConnectionRtcpSettings|array|null $rtcpSettings = null,
         ?array $tags = null,
-        TransportProtocol|string|null $transport_protocol = null,
-        ?string $updated_at = null,
-        WebhookAPIVersion|string|null $webhook_api_version = null,
-        ?string $webhook_event_failover_url = null,
-        ?string $webhook_event_url = null,
-        ?int $webhook_timeout_secs = null,
+        TransportProtocol|string|null $transportProtocol = null,
+        ?string $updatedAt = null,
+        WebhookAPIVersion|string|null $webhookAPIVersion = null,
+        ?string $webhookEventFailoverURL = null,
+        ?string $webhookEventURL = null,
+        ?int $webhookTimeoutSecs = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
         null !== $active && $obj['active'] = $active;
-        null !== $anchorsite_override && $obj['anchorsite_override'] = $anchorsite_override;
-        null !== $call_cost_in_webhooks && $obj['call_cost_in_webhooks'] = $call_cost_in_webhooks;
-        null !== $connection_name && $obj['connection_name'] = $connection_name;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $default_on_hold_comfort_noise_enabled && $obj['default_on_hold_comfort_noise_enabled'] = $default_on_hold_comfort_noise_enabled;
-        null !== $dtmf_type && $obj['dtmf_type'] = $dtmf_type;
-        null !== $encode_contact_header_enabled && $obj['encode_contact_header_enabled'] = $encode_contact_header_enabled;
-        null !== $encrypted_media && $obj['encrypted_media'] = $encrypted_media;
+        null !== $anchorsiteOverride && $obj['anchorsiteOverride'] = $anchorsiteOverride;
+        null !== $callCostInWebhooks && $obj['callCostInWebhooks'] = $callCostInWebhooks;
+        null !== $connectionName && $obj['connectionName'] = $connectionName;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $defaultOnHoldComfortNoiseEnabled && $obj['defaultOnHoldComfortNoiseEnabled'] = $defaultOnHoldComfortNoiseEnabled;
+        null !== $dtmfType && $obj['dtmfType'] = $dtmfType;
+        null !== $encodeContactHeaderEnabled && $obj['encodeContactHeaderEnabled'] = $encodeContactHeaderEnabled;
+        null !== $encryptedMedia && $obj['encryptedMedia'] = $encryptedMedia;
         null !== $inbound && $obj['inbound'] = $inbound;
-        null !== $onnet_t38_passthrough_enabled && $obj['onnet_t38_passthrough_enabled'] = $onnet_t38_passthrough_enabled;
+        null !== $onnetT38PassthroughEnabled && $obj['onnetT38PassthroughEnabled'] = $onnetT38PassthroughEnabled;
         null !== $outbound && $obj['outbound'] = $outbound;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $rtcp_settings && $obj['rtcp_settings'] = $rtcp_settings;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $rtcpSettings && $obj['rtcpSettings'] = $rtcpSettings;
         null !== $tags && $obj['tags'] = $tags;
-        null !== $transport_protocol && $obj['transport_protocol'] = $transport_protocol;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
-        null !== $webhook_api_version && $obj['webhook_api_version'] = $webhook_api_version;
-        null !== $webhook_event_failover_url && $obj['webhook_event_failover_url'] = $webhook_event_failover_url;
-        null !== $webhook_event_url && $obj['webhook_event_url'] = $webhook_event_url;
-        null !== $webhook_timeout_secs && $obj['webhook_timeout_secs'] = $webhook_timeout_secs;
+        null !== $transportProtocol && $obj['transportProtocol'] = $transportProtocol;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $webhookAPIVersion && $obj['webhookAPIVersion'] = $webhookAPIVersion;
+        null !== $webhookEventFailoverURL && $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        null !== $webhookEventURL && $obj['webhookEventURL'] = $webhookEventURL;
+        null !== $webhookTimeoutSecs && $obj['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
         return $obj;
     }
@@ -325,7 +325,7 @@ final class IPConnection implements BaseModel
         AnchorsiteOverride|string $anchorsiteOverride
     ): self {
         $obj = clone $this;
-        $obj['anchorsite_override'] = $anchorsiteOverride;
+        $obj['anchorsiteOverride'] = $anchorsiteOverride;
 
         return $obj;
     }
@@ -336,7 +336,7 @@ final class IPConnection implements BaseModel
     public function withCallCostInWebhooks(bool $callCostInWebhooks): self
     {
         $obj = clone $this;
-        $obj['call_cost_in_webhooks'] = $callCostInWebhooks;
+        $obj['callCostInWebhooks'] = $callCostInWebhooks;
 
         return $obj;
     }
@@ -344,7 +344,7 @@ final class IPConnection implements BaseModel
     public function withConnectionName(string $connectionName): self
     {
         $obj = clone $this;
-        $obj['connection_name'] = $connectionName;
+        $obj['connectionName'] = $connectionName;
 
         return $obj;
     }
@@ -355,7 +355,7 @@ final class IPConnection implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -367,7 +367,7 @@ final class IPConnection implements BaseModel
         bool $defaultOnHoldComfortNoiseEnabled
     ): self {
         $obj = clone $this;
-        $obj['default_on_hold_comfort_noise_enabled'] = $defaultOnHoldComfortNoiseEnabled;
+        $obj['defaultOnHoldComfortNoiseEnabled'] = $defaultOnHoldComfortNoiseEnabled;
 
         return $obj;
     }
@@ -380,7 +380,7 @@ final class IPConnection implements BaseModel
     public function withDtmfType(DtmfType|string $dtmfType): self
     {
         $obj = clone $this;
-        $obj['dtmf_type'] = $dtmfType;
+        $obj['dtmfType'] = $dtmfType;
 
         return $obj;
     }
@@ -392,7 +392,7 @@ final class IPConnection implements BaseModel
         bool $encodeContactHeaderEnabled
     ): self {
         $obj = clone $this;
-        $obj['encode_contact_header_enabled'] = $encodeContactHeaderEnabled;
+        $obj['encodeContactHeaderEnabled'] = $encodeContactHeaderEnabled;
 
         return $obj;
     }
@@ -406,31 +406,31 @@ final class IPConnection implements BaseModel
         EncryptedMedia|string|null $encryptedMedia
     ): self {
         $obj = clone $this;
-        $obj['encrypted_media'] = $encryptedMedia;
+        $obj['encryptedMedia'] = $encryptedMedia;
 
         return $obj;
     }
 
     /**
      * @param InboundIP|array{
-     *   ani_number_format?: value-of<AniNumberFormat>|null,
-     *   channel_limit?: int|null,
+     *   aniNumberFormat?: value-of<AniNumberFormat>|null,
+     *   channelLimit?: int|null,
      *   codecs?: list<string>|null,
-     *   default_primary_ip_id?: string|null,
-     *   default_routing_method?: value-of<DefaultRoutingMethod>|null,
-     *   default_secondary_ip_id?: string|null,
-     *   default_tertiary_ip_id?: string|null,
-     *   dnis_number_format?: value-of<DnisNumberFormat>|null,
-     *   generate_ringback_tone?: bool|null,
-     *   isup_headers_enabled?: bool|null,
-     *   prack_enabled?: bool|null,
-     *   shaken_stir_enabled?: bool|null,
-     *   sip_compact_headers_enabled?: bool|null,
-     *   sip_region?: value-of<SipRegion>|null,
-     *   sip_subdomain?: string|null,
-     *   sip_subdomain_receive_settings?: value-of<SipSubdomainReceiveSettings>|null,
-     *   timeout_1xx_secs?: int|null,
-     *   timeout_2xx_secs?: int|null,
+     *   defaultPrimaryIPID?: string|null,
+     *   defaultRoutingMethod?: value-of<DefaultRoutingMethod>|null,
+     *   defaultSecondaryIPID?: string|null,
+     *   defaultTertiaryIPID?: string|null,
+     *   dnisNumberFormat?: value-of<DnisNumberFormat>|null,
+     *   generateRingbackTone?: bool|null,
+     *   isupHeadersEnabled?: bool|null,
+     *   prackEnabled?: bool|null,
+     *   shakenStirEnabled?: bool|null,
+     *   sipCompactHeadersEnabled?: bool|null,
+     *   sipRegion?: value-of<SipRegion>|null,
+     *   sipSubdomain?: string|null,
+     *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
+     *   timeout1xxSecs?: int|null,
+     *   timeout2xxSecs?: int|null,
      * } $inbound
      */
     public function withInbound(InboundIP|array $inbound): self
@@ -448,25 +448,25 @@ final class IPConnection implements BaseModel
         bool $onnetT38PassthroughEnabled
     ): self {
         $obj = clone $this;
-        $obj['onnet_t38_passthrough_enabled'] = $onnetT38PassthroughEnabled;
+        $obj['onnetT38PassthroughEnabled'] = $onnetT38PassthroughEnabled;
 
         return $obj;
     }
 
     /**
      * @param OutboundIP|array{
-     *   ani_override?: string|null,
-     *   ani_override_type?: value-of<AniOverrideType>|null,
-     *   call_parking_enabled?: bool|null,
-     *   channel_limit?: int|null,
-     *   generate_ringback_tone?: bool|null,
-     *   instant_ringback_enabled?: bool|null,
-     *   ip_authentication_method?: value-of<IPAuthenticationMethod>|null,
-     *   ip_authentication_token?: string|null,
+     *   aniOverride?: string|null,
+     *   aniOverrideType?: value-of<AniOverrideType>|null,
+     *   callParkingEnabled?: bool|null,
+     *   channelLimit?: int|null,
+     *   generateRingbackTone?: bool|null,
+     *   instantRingbackEnabled?: bool|null,
+     *   ipAuthenticationMethod?: value-of<IPAuthenticationMethod>|null,
+     *   ipAuthenticationToken?: string|null,
      *   localization?: string|null,
-     *   outbound_voice_profile_id?: string|null,
-     *   t38_reinvite_source?: value-of<T38ReinviteSource>|null,
-     *   tech_prefix?: string|null,
+     *   outboundVoiceProfileID?: string|null,
+     *   t38ReinviteSource?: value-of<T38ReinviteSource>|null,
+     *   techPrefix?: string|null,
      * } $outbound
      */
     public function withOutbound(OutboundIP|array $outbound): self
@@ -483,23 +483,23 @@ final class IPConnection implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
 
     /**
      * @param ConnectionRtcpSettings|array{
-     *   capture_enabled?: bool|null,
+     *   captureEnabled?: bool|null,
      *   port?: value-of<Port>|null,
-     *   report_frequency_secs?: int|null,
+     *   reportFrequencySecs?: int|null,
      * } $rtcpSettings
      */
     public function withRtcpSettings(
         ConnectionRtcpSettings|array $rtcpSettings
     ): self {
         $obj = clone $this;
-        $obj['rtcp_settings'] = $rtcpSettings;
+        $obj['rtcpSettings'] = $rtcpSettings;
 
         return $obj;
     }
@@ -526,7 +526,7 @@ final class IPConnection implements BaseModel
         TransportProtocol|string $transportProtocol
     ): self {
         $obj = clone $this;
-        $obj['transport_protocol'] = $transportProtocol;
+        $obj['transportProtocol'] = $transportProtocol;
 
         return $obj;
     }
@@ -537,7 +537,7 @@ final class IPConnection implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -551,7 +551,7 @@ final class IPConnection implements BaseModel
         WebhookAPIVersion|string $webhookAPIVersion
     ): self {
         $obj = clone $this;
-        $obj['webhook_api_version'] = $webhookAPIVersion;
+        $obj['webhookAPIVersion'] = $webhookAPIVersion;
 
         return $obj;
     }
@@ -563,7 +563,7 @@ final class IPConnection implements BaseModel
         ?string $webhookEventFailoverURL
     ): self {
         $obj = clone $this;
-        $obj['webhook_event_failover_url'] = $webhookEventFailoverURL;
+        $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
 
         return $obj;
     }
@@ -574,7 +574,7 @@ final class IPConnection implements BaseModel
     public function withWebhookEventURL(string $webhookEventURL): self
     {
         $obj = clone $this;
-        $obj['webhook_event_url'] = $webhookEventURL;
+        $obj['webhookEventURL'] = $webhookEventURL;
 
         return $obj;
     }
@@ -585,7 +585,7 @@ final class IPConnection implements BaseModel
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
         $obj = clone $this;
-        $obj['webhook_timeout_secs'] = $webhookTimeoutSecs;
+        $obj['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
         return $obj;
     }

@@ -19,6 +19,7 @@ use Telnyx\BundlePricing\UserBundles\UserBundleRetrieveParams;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BundlePricing\UserBundlesContract;
 
@@ -35,9 +36,9 @@ final class UserBundlesService implements UserBundlesContract
      * Creates multiple user bundles for the user.
      *
      * @param array{
-     *   idempotency_key?: string,
-     *   items?: list<array{billing_bundle_id: string, quantity: int}>,
-     *   authorization_bearer?: string,
+     *   idempotencyKey?: string,
+     *   items?: list<array{billingBundleID: string, quantity: int}>,
+     *   authorizationBearer?: string,
      * }|UserBundleCreateParams $params
      *
      * @throws APIException
@@ -56,7 +57,10 @@ final class UserBundlesService implements UserBundlesContract
         $response = $this->client->request(
             method: 'post',
             path: 'bundle_pricing/user_bundles/bulk',
-            headers: array_intersect_key($parsed, array_keys($header_params)),
+            headers: Util::array_transform_keys(
+                array_intersect_key($parsed, array_keys($header_params)),
+                $header_params
+            ),
             body: (object) array_diff_key($parsed, array_keys($header_params)),
             options: $options,
             convert: UserBundleNewResponse::class,
@@ -70,7 +74,7 @@ final class UserBundlesService implements UserBundlesContract
      *
      * Retrieves a user bundle by its ID.
      *
-     * @param array{authorization_bearer?: string}|UserBundleRetrieveParams $params
+     * @param array{authorizationBearer?: string}|UserBundleRetrieveParams $params
      *
      * @throws APIException
      */
@@ -88,7 +92,10 @@ final class UserBundlesService implements UserBundlesContract
         $response = $this->client->request(
             method: 'get',
             path: ['bundle_pricing/user_bundles/%1$s', $userBundleID],
-            headers: $parsed,
+            headers: Util::array_transform_keys(
+                $parsed,
+                ['authorizationBearer' => 'authorization_bearer']
+            ),
             options: $options,
             convert: UserBundleGetResponse::class,
         );
@@ -102,9 +109,9 @@ final class UserBundlesService implements UserBundlesContract
      * Get a paginated list of user bundles.
      *
      * @param array{
-     *   filter?: array{country_iso?: list<string>, resource?: list<string>},
+     *   filter?: array{countryISO?: list<string>, resource?: list<string>},
      *   page?: array{number?: int, size?: int},
-     *   authorization_bearer?: string,
+     *   authorizationBearer?: string,
      * }|UserBundleListParams $params
      *
      * @throws APIException
@@ -127,7 +134,10 @@ final class UserBundlesService implements UserBundlesContract
             method: 'get',
             path: 'bundle_pricing/user_bundles',
             query: array_intersect_key($parsed, $query_params),
-            headers: $header_params,
+            headers: Util::array_transform_keys(
+                $header_params,
+                ['authorizationBearer' => 'authorization_bearer']
+            ),
             options: $options,
             convert: UserBundleListResponse::class,
         );
@@ -140,7 +150,7 @@ final class UserBundlesService implements UserBundlesContract
      *
      * Deactivates a user bundle by its ID.
      *
-     * @param array{authorization_bearer?: string}|UserBundleDeactivateParams $params
+     * @param array{authorizationBearer?: string}|UserBundleDeactivateParams $params
      *
      * @throws APIException
      */
@@ -158,7 +168,10 @@ final class UserBundlesService implements UserBundlesContract
         $response = $this->client->request(
             method: 'delete',
             path: ['bundle_pricing/user_bundles/%1$s', $userBundleID],
-            headers: $parsed,
+            headers: Util::array_transform_keys(
+                $parsed,
+                ['authorizationBearer' => 'authorization_bearer']
+            ),
             options: $options,
             convert: UserBundleDeactivateResponse::class,
         );
@@ -171,9 +184,7 @@ final class UserBundlesService implements UserBundlesContract
      *
      * Retrieves the resources of a user bundle by its ID.
      *
-     * @param array{
-     *   authorization_bearer?: string
-     * }|UserBundleListResourcesParams $params
+     * @param array{authorizationBearer?: string}|UserBundleListResourcesParams $params
      *
      * @throws APIException
      */
@@ -191,7 +202,10 @@ final class UserBundlesService implements UserBundlesContract
         $response = $this->client->request(
             method: 'get',
             path: ['bundle_pricing/user_bundles/%1$s/resources', $userBundleID],
-            headers: $parsed,
+            headers: Util::array_transform_keys(
+                $parsed,
+                ['authorizationBearer' => 'authorization_bearer']
+            ),
             options: $options,
             convert: UserBundleListResourcesResponse::class,
         );
@@ -205,8 +219,8 @@ final class UserBundlesService implements UserBundlesContract
      * Returns all user bundles that aren't in use.
      *
      * @param array{
-     *   filter?: array{country_iso?: list<string>, resource?: list<string>},
-     *   authorization_bearer?: string,
+     *   filter?: array{countryISO?: list<string>, resource?: list<string>},
+     *   authorizationBearer?: string,
      * }|UserBundleListUnusedParams $params
      *
      * @throws APIException
@@ -229,7 +243,10 @@ final class UserBundlesService implements UserBundlesContract
             method: 'get',
             path: 'bundle_pricing/user_bundles/unused',
             query: array_intersect_key($parsed, $query_params),
-            headers: $header_params,
+            headers: Util::array_transform_keys(
+                $header_params,
+                ['authorizationBearer' => 'authorization_bearer']
+            ),
             options: $options,
             convert: UserBundleListUnusedResponse::class,
         );

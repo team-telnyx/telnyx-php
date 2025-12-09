@@ -14,7 +14,7 @@ use Telnyx\Messsages\RcsContentInfo;
  * A media file within a rich card.
  *
  * @phpstan-type MediaShape = array{
- *   content_info?: RcsContentInfo|null, height?: value-of<Height>|null
+ *   contentInfo?: RcsContentInfo|null, height?: value-of<Height>|null
  * }
  */
 final class Media implements BaseModel
@@ -22,8 +22,8 @@ final class Media implements BaseModel
     /** @use SdkModel<MediaShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?RcsContentInfo $content_info;
+    #[Optional('content_info')]
+    public ?RcsContentInfo $contentInfo;
 
     /**
      * The height of the media within a rich card with a vertical layout. For a standalone card with horizontal layout, height is not customizable, and this field is ignored.
@@ -44,17 +44,17 @@ final class Media implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param RcsContentInfo|array{
-     *   file_url: string, force_refresh?: bool|null, thumbnail_url?: string|null
-     * } $content_info
+     *   fileURL: string, forceRefresh?: bool|null, thumbnailURL?: string|null
+     * } $contentInfo
      * @param Height|value-of<Height> $height
      */
     public static function with(
-        RcsContentInfo|array|null $content_info = null,
+        RcsContentInfo|array|null $contentInfo = null,
         Height|string|null $height = null
     ): self {
         $obj = new self;
 
-        null !== $content_info && $obj['content_info'] = $content_info;
+        null !== $contentInfo && $obj['contentInfo'] = $contentInfo;
         null !== $height && $obj['height'] = $height;
 
         return $obj;
@@ -62,13 +62,13 @@ final class Media implements BaseModel
 
     /**
      * @param RcsContentInfo|array{
-     *   file_url: string, force_refresh?: bool|null, thumbnail_url?: string|null
+     *   fileURL: string, forceRefresh?: bool|null, thumbnailURL?: string|null
      * } $contentInfo
      */
     public function withContentInfo(RcsContentInfo|array $contentInfo): self
     {
         $obj = clone $this;
-        $obj['content_info'] = $contentInfo;
+        $obj['contentInfo'] = $contentInfo;
 
         return $obj;
     }

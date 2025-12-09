@@ -39,17 +39,17 @@ final class NotificationChannelListResponse implements BaseModel
      *
      * @param list<NotificationChannel|array{
      *   id?: string|null,
-     *   channel_destination?: string|null,
-     *   channel_type_id?: value-of<ChannelTypeID>|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   notification_profile_id?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   channelDestination?: string|null,
+     *   channelTypeID?: value-of<ChannelTypeID>|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   notificationProfileID?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -67,11 +67,11 @@ final class NotificationChannelListResponse implements BaseModel
     /**
      * @param list<NotificationChannel|array{
      *   id?: string|null,
-     *   channel_destination?: string|null,
-     *   channel_type_id?: value-of<ChannelTypeID>|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   notification_profile_id?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   channelDestination?: string|null,
+     *   channelTypeID?: value-of<ChannelTypeID>|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   notificationProfileID?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -84,10 +84,10 @@ final class NotificationChannelListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

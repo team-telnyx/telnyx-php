@@ -31,12 +31,12 @@ final class InvoiceGetResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Data|array{
-     *   download_url?: string|null,
-     *   file_id?: string|null,
-     *   invoice_id?: string|null,
+     *   downloadURL?: string|null,
+     *   fileID?: string|null,
+     *   invoiceID?: string|null,
      *   paid?: bool|null,
-     *   period_end?: \DateTimeInterface|null,
-     *   period_start?: \DateTimeInterface|null,
+     *   periodEnd?: \DateTimeInterface|null,
+     *   periodStart?: \DateTimeInterface|null,
      *   url?: string|null,
      * } $data
      */
@@ -51,12 +51,12 @@ final class InvoiceGetResponse implements BaseModel
 
     /**
      * @param Data|array{
-     *   download_url?: string|null,
-     *   file_id?: string|null,
-     *   invoice_id?: string|null,
+     *   downloadURL?: string|null,
+     *   fileID?: string|null,
+     *   invoiceID?: string|null,
      *   paid?: bool|null,
-     *   period_end?: \DateTimeInterface|null,
-     *   period_start?: \DateTimeInterface|null,
+     *   periodEnd?: \DateTimeInterface|null,
+     *   periodStart?: \DateTimeInterface|null,
      *   url?: string|null,
      * } $data
      */

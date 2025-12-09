@@ -20,10 +20,10 @@ use Telnyx\RegulatoryRequirements\RegulatoryRequirementRetrieveParams\Filter\Pho
  * @phpstan-type RegulatoryRequirementRetrieveParamsShape = array{
  *   filter?: Filter|array{
  *     action?: value-of<Action>|null,
- *     country_code?: string|null,
- *     phone_number?: string|null,
- *     phone_number_type?: value-of<PhoneNumberType>|null,
- *     requirement_group_id?: string|null,
+ *     countryCode?: string|null,
+ *     phoneNumber?: string|null,
+ *     phoneNumberType?: value-of<PhoneNumberType>|null,
+ *     requirementGroupID?: string|null,
  *   },
  * }
  */
@@ -51,10 +51,10 @@ final class RegulatoryRequirementRetrieveParams implements BaseModel
      *
      * @param Filter|array{
      *   action?: value-of<Action>|null,
-     *   country_code?: string|null,
-     *   phone_number?: string|null,
-     *   phone_number_type?: value-of<PhoneNumberType>|null,
-     *   requirement_group_id?: string|null,
+     *   countryCode?: string|null,
+     *   phoneNumber?: string|null,
+     *   phoneNumberType?: value-of<PhoneNumberType>|null,
+     *   requirementGroupID?: string|null,
      * } $filter
      */
     public static function with(Filter|array|null $filter = null): self
@@ -71,10 +71,10 @@ final class RegulatoryRequirementRetrieveParams implements BaseModel
      *
      * @param Filter|array{
      *   action?: value-of<Action>|null,
-     *   country_code?: string|null,
-     *   phone_number?: string|null,
-     *   phone_number_type?: value-of<PhoneNumberType>|null,
-     *   requirement_group_id?: string|null,
+     *   countryCode?: string|null,
+     *   phoneNumber?: string|null,
+     *   phoneNumberType?: value-of<PhoneNumberType>|null,
+     *   requirementGroupID?: string|null,
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

@@ -22,8 +22,8 @@ use Telnyx\Documents\DocumentListParams\Sort;
  *
  * @phpstan-type DocumentListParamsShape = array{
  *   filter?: Filter|array{
- *     created_at?: CreatedAt|null,
- *     customer_reference?: CustomerReference|null,
+ *     createdAt?: CreatedAt|null,
+ *     customerReference?: CustomerReference|null,
  *     filename?: Filename|null,
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
@@ -67,8 +67,8 @@ final class DocumentListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   created_at?: CreatedAt|null,
-     *   customer_reference?: CustomerReference|null,
+     *   createdAt?: CreatedAt|null,
+     *   customerReference?: CustomerReference|null,
      *   filename?: Filename|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
@@ -92,8 +92,8 @@ final class DocumentListParams implements BaseModel
      * Consolidated filter parameter for documents (deepObject style). Originally: filter[filename][contains], filter[customer_reference][eq], filter[customer_reference][in][], filter[created_at][gt], filter[created_at][lt].
      *
      * @param Filter|array{
-     *   created_at?: CreatedAt|null,
-     *   customer_reference?: CustomerReference|null,
+     *   createdAt?: CreatedAt|null,
+     *   customerReference?: CustomerReference|null,
      *   filename?: Filename|null,
      * } $filter
      */

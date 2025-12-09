@@ -30,9 +30,9 @@ final class AdditionalDocumentsService implements AdditionalDocumentsContract
      * Creates a list of additional documents for a porting order.
      *
      * @param array{
-     *   additional_documents?: list<array{
-     *     document_id?: string,
-     *     document_type?: 'loa'|'invoice'|'csr'|'other'|DocumentType,
+     *   additionalDocuments?: list<array{
+     *     documentID?: string,
+     *     documentType?: 'loa'|'invoice'|'csr'|'other'|DocumentType,
      *   }>,
      * }|AdditionalDocumentCreateParams $params
      *
@@ -67,7 +67,7 @@ final class AdditionalDocumentsService implements AdditionalDocumentsContract
      *
      * @param array{
      *   filter?: array{
-     *     document_type?: list<'loa'|'invoice'|'csr'|'other'|AdditionalDocumentListParams\Filter\DocumentType>,
+     *     documentType?: list<'loa'|'invoice'|'csr'|'other'|AdditionalDocumentListParams\Filter\DocumentType>,
      *   },
      *   page?: array{number?: int, size?: int},
      *   sort?: array{value?: 'created_at'|'-created_at'|Value},

@@ -17,9 +17,9 @@ use Telnyx\DialogflowConnections\DialogflowConnectionUpdateParams\DialogflowAPI;
  * @see Telnyx\Services\DialogflowConnectionsService::update()
  *
  * @phpstan-type DialogflowConnectionUpdateParamsShape = array{
- *   service_account: array<string,mixed>,
- *   conversation_profile_id?: string,
- *   dialogflow_api?: DialogflowAPI|value-of<DialogflowAPI>,
+ *   serviceAccount: array<string,mixed>,
+ *   conversationProfileID?: string,
+ *   dialogflowAPI?: DialogflowAPI|value-of<DialogflowAPI>,
  *   environment?: string,
  *   location?: string,
  * }
@@ -33,24 +33,24 @@ final class DialogflowConnectionUpdateParams implements BaseModel
     /**
      * The JSON map to connect your Dialoglow account.
      *
-     * @var array<string,mixed> $service_account
+     * @var array<string,mixed> $serviceAccount
      */
-    #[Required(map: 'mixed')]
-    public array $service_account;
+    #[Required('service_account', map: 'mixed')]
+    public array $serviceAccount;
 
     /**
      * The id of a configured conversation profile on your Dialogflow account. (If you use Dialogflow CX, this param is required).
      */
-    #[Optional]
-    public ?string $conversation_profile_id;
+    #[Optional('conversation_profile_id')]
+    public ?string $conversationProfileID;
 
     /**
      * Determine which Dialogflow will be used.
      *
-     * @var value-of<DialogflowAPI>|null $dialogflow_api
+     * @var value-of<DialogflowAPI>|null $dialogflowAPI
      */
-    #[Optional(enum: DialogflowAPI::class)]
-    public ?string $dialogflow_api;
+    #[Optional('dialogflow_api', enum: DialogflowAPI::class)]
+    public ?string $dialogflowAPI;
 
     /**
      * Which Dialogflow environment will be used.
@@ -69,7 +69,7 @@ final class DialogflowConnectionUpdateParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * DialogflowConnectionUpdateParams::with(service_account: ...)
+     * DialogflowConnectionUpdateParams::with(serviceAccount: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -88,22 +88,22 @@ final class DialogflowConnectionUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,mixed> $service_account
-     * @param DialogflowAPI|value-of<DialogflowAPI> $dialogflow_api
+     * @param array<string,mixed> $serviceAccount
+     * @param DialogflowAPI|value-of<DialogflowAPI> $dialogflowAPI
      */
     public static function with(
-        array $service_account,
-        ?string $conversation_profile_id = null,
-        DialogflowAPI|string|null $dialogflow_api = null,
+        array $serviceAccount,
+        ?string $conversationProfileID = null,
+        DialogflowAPI|string|null $dialogflowAPI = null,
         ?string $environment = null,
         ?string $location = null,
     ): self {
         $obj = new self;
 
-        $obj['service_account'] = $service_account;
+        $obj['serviceAccount'] = $serviceAccount;
 
-        null !== $conversation_profile_id && $obj['conversation_profile_id'] = $conversation_profile_id;
-        null !== $dialogflow_api && $obj['dialogflow_api'] = $dialogflow_api;
+        null !== $conversationProfileID && $obj['conversationProfileID'] = $conversationProfileID;
+        null !== $dialogflowAPI && $obj['dialogflowAPI'] = $dialogflowAPI;
         null !== $environment && $obj['environment'] = $environment;
         null !== $location && $obj['location'] = $location;
 
@@ -118,7 +118,7 @@ final class DialogflowConnectionUpdateParams implements BaseModel
     public function withServiceAccount(array $serviceAccount): self
     {
         $obj = clone $this;
-        $obj['service_account'] = $serviceAccount;
+        $obj['serviceAccount'] = $serviceAccount;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class DialogflowConnectionUpdateParams implements BaseModel
         string $conversationProfileID
     ): self {
         $obj = clone $this;
-        $obj['conversation_profile_id'] = $conversationProfileID;
+        $obj['conversationProfileID'] = $conversationProfileID;
 
         return $obj;
     }
@@ -143,7 +143,7 @@ final class DialogflowConnectionUpdateParams implements BaseModel
     public function withDialogflowAPI(DialogflowAPI|string $dialogflowAPI): self
     {
         $obj = clone $this;
-        $obj['dialogflow_api'] = $dialogflowAPI;
+        $obj['dialogflowAPI'] = $dialogflowAPI;
 
         return $obj;
     }

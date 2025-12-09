@@ -13,12 +13,12 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfig\Op;
 /**
  * @phpstan-type AutoRespConfigShape = array{
  *   id: string,
- *   country_code: string,
- *   created_at: \DateTimeInterface,
+ *   countryCode: string,
+ *   createdAt: \DateTimeInterface,
  *   keywords: list<string>,
  *   op: value-of<Op>,
- *   updated_at: \DateTimeInterface,
- *   resp_text?: string|null,
+ *   updatedAt: \DateTimeInterface,
+ *   respText?: string|null,
  * }
  */
 final class AutoRespConfig implements BaseModel
@@ -29,11 +29,11 @@ final class AutoRespConfig implements BaseModel
     #[Required]
     public string $id;
 
-    #[Required]
-    public string $country_code;
+    #[Required('country_code')]
+    public string $countryCode;
 
-    #[Required]
-    public \DateTimeInterface $created_at;
+    #[Required('created_at')]
+    public \DateTimeInterface $createdAt;
 
     /** @var list<string> $keywords */
     #[Required(list: 'string')]
@@ -43,11 +43,11 @@ final class AutoRespConfig implements BaseModel
     #[Required(enum: Op::class)]
     public string $op;
 
-    #[Required]
-    public \DateTimeInterface $updated_at;
+    #[Required('updated_at')]
+    public \DateTimeInterface $updatedAt;
 
-    #[Optional]
-    public ?string $resp_text;
+    #[Optional('resp_text')]
+    public ?string $respText;
 
     /**
      * `new AutoRespConfig()` is missing required properties by the API.
@@ -56,11 +56,11 @@ final class AutoRespConfig implements BaseModel
      * ```
      * AutoRespConfig::with(
      *   id: ...,
-     *   country_code: ...,
-     *   created_at: ...,
+     *   countryCode: ...,
+     *   createdAt: ...,
      *   keywords: ...,
      *   op: ...,
-     *   updated_at: ...,
+     *   updatedAt: ...,
      * )
      * ```
      *
@@ -91,23 +91,23 @@ final class AutoRespConfig implements BaseModel
      */
     public static function with(
         string $id,
-        string $country_code,
-        \DateTimeInterface $created_at,
+        string $countryCode,
+        \DateTimeInterface $createdAt,
         array $keywords,
         Op|string $op,
-        \DateTimeInterface $updated_at,
-        ?string $resp_text = null,
+        \DateTimeInterface $updatedAt,
+        ?string $respText = null,
     ): self {
         $obj = new self;
 
         $obj['id'] = $id;
-        $obj['country_code'] = $country_code;
-        $obj['created_at'] = $created_at;
+        $obj['countryCode'] = $countryCode;
+        $obj['createdAt'] = $createdAt;
         $obj['keywords'] = $keywords;
         $obj['op'] = $op;
-        $obj['updated_at'] = $updated_at;
+        $obj['updatedAt'] = $updatedAt;
 
-        null !== $resp_text && $obj['resp_text'] = $resp_text;
+        null !== $respText && $obj['respText'] = $respText;
 
         return $obj;
     }
@@ -123,7 +123,7 @@ final class AutoRespConfig implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj['country_code'] = $countryCode;
+        $obj['countryCode'] = $countryCode;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class AutoRespConfig implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -161,7 +161,7 @@ final class AutoRespConfig implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -169,7 +169,7 @@ final class AutoRespConfig implements BaseModel
     public function withRespText(string $respText): self
     {
         $obj = clone $this;
-        $obj['resp_text'] = $respText;
+        $obj['respText'] = $respText;
 
         return $obj;
     }

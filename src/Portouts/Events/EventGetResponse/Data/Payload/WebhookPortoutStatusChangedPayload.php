@@ -14,14 +14,14 @@ use Telnyx\Portouts\Events\EventGetResponse\Data\Payload\WebhookPortoutStatusCha
  *
  * @phpstan-type WebhookPortoutStatusChangedPayloadShape = array{
  *   id?: string|null,
- *   attempted_pin?: string|null,
- *   carrier_name?: string|null,
- *   phone_numbers?: list<string>|null,
- *   rejection_reason?: string|null,
+ *   attemptedPin?: string|null,
+ *   carrierName?: string|null,
+ *   phoneNumbers?: list<string>|null,
+ *   rejectionReason?: string|null,
  *   spid?: string|null,
  *   status?: value-of<Status>|null,
- *   subscriber_name?: string|null,
- *   user_id?: string|null,
+ *   subscriberName?: string|null,
+ *   userID?: string|null,
  * }
  */
 final class WebhookPortoutStatusChangedPayload implements BaseModel
@@ -38,28 +38,28 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
     /**
      * The PIN that was attempted to be used to authorize the port out.
      */
-    #[Optional]
-    public ?string $attempted_pin;
+    #[Optional('attempted_pin')]
+    public ?string $attemptedPin;
 
     /**
      * Carrier the number will be ported out to.
      */
-    #[Optional]
-    public ?string $carrier_name;
+    #[Optional('carrier_name')]
+    public ?string $carrierName;
 
     /**
      * Phone numbers associated with this port-out order.
      *
-     * @var list<string>|null $phone_numbers
+     * @var list<string>|null $phoneNumbers
      */
-    #[Optional(list: 'string')]
-    public ?array $phone_numbers;
+    #[Optional('phone_numbers', list: 'string')]
+    public ?array $phoneNumbers;
 
     /**
      * The reason why the order is being rejected by the user. If the order is authorized, this field can be left null.
      */
-    #[Optional(nullable: true)]
-    public ?string $rejection_reason;
+    #[Optional('rejection_reason', nullable: true)]
+    public ?string $rejectionReason;
 
     /**
      * The new carrier SPID.
@@ -78,14 +78,14 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
     /**
      * The name of the port-out's end user.
      */
-    #[Optional]
-    public ?string $subscriber_name;
+    #[Optional('subscriber_name')]
+    public ?string $subscriberName;
 
     /**
      * Identifies the user that the port-out order belongs to.
      */
-    #[Optional]
-    public ?string $user_id;
+    #[Optional('user_id')]
+    public ?string $userID;
 
     public function __construct()
     {
@@ -97,31 +97,31 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $phone_numbers
+     * @param list<string> $phoneNumbers
      * @param Status|value-of<Status> $status
      */
     public static function with(
         ?string $id = null,
-        ?string $attempted_pin = null,
-        ?string $carrier_name = null,
-        ?array $phone_numbers = null,
-        ?string $rejection_reason = null,
+        ?string $attemptedPin = null,
+        ?string $carrierName = null,
+        ?array $phoneNumbers = null,
+        ?string $rejectionReason = null,
         ?string $spid = null,
         Status|string|null $status = null,
-        ?string $subscriber_name = null,
-        ?string $user_id = null,
+        ?string $subscriberName = null,
+        ?string $userID = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $attempted_pin && $obj['attempted_pin'] = $attempted_pin;
-        null !== $carrier_name && $obj['carrier_name'] = $carrier_name;
-        null !== $phone_numbers && $obj['phone_numbers'] = $phone_numbers;
-        null !== $rejection_reason && $obj['rejection_reason'] = $rejection_reason;
+        null !== $attemptedPin && $obj['attemptedPin'] = $attemptedPin;
+        null !== $carrierName && $obj['carrierName'] = $carrierName;
+        null !== $phoneNumbers && $obj['phoneNumbers'] = $phoneNumbers;
+        null !== $rejectionReason && $obj['rejectionReason'] = $rejectionReason;
         null !== $spid && $obj['spid'] = $spid;
         null !== $status && $obj['status'] = $status;
-        null !== $subscriber_name && $obj['subscriber_name'] = $subscriber_name;
-        null !== $user_id && $obj['user_id'] = $user_id;
+        null !== $subscriberName && $obj['subscriberName'] = $subscriberName;
+        null !== $userID && $obj['userID'] = $userID;
 
         return $obj;
     }
@@ -143,7 +143,7 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
     public function withAttemptedPin(string $attemptedPin): self
     {
         $obj = clone $this;
-        $obj['attempted_pin'] = $attemptedPin;
+        $obj['attemptedPin'] = $attemptedPin;
 
         return $obj;
     }
@@ -154,7 +154,7 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
     public function withCarrierName(string $carrierName): self
     {
         $obj = clone $this;
-        $obj['carrier_name'] = $carrierName;
+        $obj['carrierName'] = $carrierName;
 
         return $obj;
     }
@@ -167,7 +167,7 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj['phone_numbers'] = $phoneNumbers;
+        $obj['phoneNumbers'] = $phoneNumbers;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
     public function withRejectionReason(?string $rejectionReason): self
     {
         $obj = clone $this;
-        $obj['rejection_reason'] = $rejectionReason;
+        $obj['rejectionReason'] = $rejectionReason;
 
         return $obj;
     }
@@ -213,7 +213,7 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
     public function withSubscriberName(string $subscriberName): self
     {
         $obj = clone $this;
-        $obj['subscriber_name'] = $subscriberName;
+        $obj['subscriberName'] = $subscriberName;
 
         return $obj;
     }
@@ -224,7 +224,7 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj['user_id'] = $userID;
+        $obj['userID'] = $userID;
 
         return $obj;
     }

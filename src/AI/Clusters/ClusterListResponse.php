@@ -52,15 +52,15 @@ final class ClusterListResponse implements BaseModel
      *
      * @param list<Data|array{
      *   bucket: string,
-     *   created_at: \DateTimeInterface,
-     *   finished_at: \DateTimeInterface,
-     *   min_cluster_size: int,
-     *   min_subcluster_size: int,
+     *   createdAt: \DateTimeInterface,
+     *   finishedAt: \DateTimeInterface,
+     *   minClusterSize: int,
+     *   minSubclusterSize: int,
      *   status: value-of<TaskStatus>,
-     *   task_id: string,
+     *   taskID: string,
      * }> $data
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public static function with(array $data, Meta|array $meta): self
@@ -76,12 +76,12 @@ final class ClusterListResponse implements BaseModel
     /**
      * @param list<Data|array{
      *   bucket: string,
-     *   created_at: \DateTimeInterface,
-     *   finished_at: \DateTimeInterface,
-     *   min_cluster_size: int,
-     *   min_subcluster_size: int,
+     *   createdAt: \DateTimeInterface,
+     *   finishedAt: \DateTimeInterface,
+     *   minClusterSize: int,
+     *   minSubclusterSize: int,
      *   status: value-of<TaskStatus>,
-     *   task_id: string,
+     *   taskID: string,
      * }> $data
      */
     public function withData(array $data): self
@@ -94,7 +94,7 @@ final class ClusterListResponse implements BaseModel
 
     /**
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public function withMeta(Meta|array $meta): self

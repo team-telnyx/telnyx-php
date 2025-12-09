@@ -12,17 +12,17 @@ use Telnyx\NumberBlockOrders\NumberBlockOrder\Status;
 /**
  * @phpstan-type NumberBlockOrderShape = array{
  *   id?: string|null,
- *   connection_id?: string|null,
- *   created_at?: \DateTimeInterface|null,
- *   customer_reference?: string|null,
- *   messaging_profile_id?: string|null,
- *   phone_numbers_count?: int|null,
+ *   connectionID?: string|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   customerReference?: string|null,
+ *   messagingProfileID?: string|null,
+ *   phoneNumbersCount?: int|null,
  *   range?: int|null,
- *   record_type?: string|null,
- *   requirements_met?: bool|null,
- *   starting_number?: string|null,
+ *   recordType?: string|null,
+ *   requirementsMet?: bool|null,
+ *   startingNumber?: string|null,
  *   status?: value-of<Status>|null,
- *   updated_at?: \DateTimeInterface|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class NumberBlockOrder implements BaseModel
@@ -36,32 +36,32 @@ final class NumberBlockOrder implements BaseModel
     /**
      * Identifies the connection associated to all numbers in the phone number block.
      */
-    #[Optional]
-    public ?string $connection_id;
+    #[Optional('connection_id')]
+    public ?string $connectionID;
 
     /**
      * An ISO 8901 datetime string denoting when the number order was created.
      */
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
     /**
      * A customer reference string for customer look ups.
      */
-    #[Optional]
-    public ?string $customer_reference;
+    #[Optional('customer_reference')]
+    public ?string $customerReference;
 
     /**
      * Identifies the messaging profile associated to all numbers in the phone number block.
      */
-    #[Optional]
-    public ?string $messaging_profile_id;
+    #[Optional('messaging_profile_id')]
+    public ?string $messagingProfileID;
 
     /**
      * The count of phone numbers in the number order.
      */
-    #[Optional]
-    public ?int $phone_numbers_count;
+    #[Optional('phone_numbers_count')]
+    public ?int $phoneNumbersCount;
 
     /**
      * The phone number range included in the block.
@@ -69,20 +69,20 @@ final class NumberBlockOrder implements BaseModel
     #[Optional]
     public ?int $range;
 
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * True if all requirements are met for every phone number, false otherwise.
      */
-    #[Optional]
-    public ?bool $requirements_met;
+    #[Optional('requirements_met')]
+    public ?bool $requirementsMet;
 
     /**
      * Starting phone number block.
      */
-    #[Optional]
-    public ?string $starting_number;
+    #[Optional('starting_number')]
+    public ?string $startingNumber;
 
     /**
      * The status of the order.
@@ -95,8 +95,8 @@ final class NumberBlockOrder implements BaseModel
     /**
      * An ISO 8901 datetime string for when the number order was updated.
      */
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
     {
@@ -112,32 +112,32 @@ final class NumberBlockOrder implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $connection_id = null,
-        ?\DateTimeInterface $created_at = null,
-        ?string $customer_reference = null,
-        ?string $messaging_profile_id = null,
-        ?int $phone_numbers_count = null,
+        ?string $connectionID = null,
+        ?\DateTimeInterface $createdAt = null,
+        ?string $customerReference = null,
+        ?string $messagingProfileID = null,
+        ?int $phoneNumbersCount = null,
         ?int $range = null,
-        ?string $record_type = null,
-        ?bool $requirements_met = null,
-        ?string $starting_number = null,
+        ?string $recordType = null,
+        ?bool $requirementsMet = null,
+        ?string $startingNumber = null,
         Status|string|null $status = null,
-        ?\DateTimeInterface $updated_at = null,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $connection_id && $obj['connection_id'] = $connection_id;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
-        null !== $messaging_profile_id && $obj['messaging_profile_id'] = $messaging_profile_id;
-        null !== $phone_numbers_count && $obj['phone_numbers_count'] = $phone_numbers_count;
+        null !== $connectionID && $obj['connectionID'] = $connectionID;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
+        null !== $messagingProfileID && $obj['messagingProfileID'] = $messagingProfileID;
+        null !== $phoneNumbersCount && $obj['phoneNumbersCount'] = $phoneNumbersCount;
         null !== $range && $obj['range'] = $range;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $requirements_met && $obj['requirements_met'] = $requirements_met;
-        null !== $starting_number && $obj['starting_number'] = $starting_number;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $requirementsMet && $obj['requirementsMet'] = $requirementsMet;
+        null !== $startingNumber && $obj['startingNumber'] = $startingNumber;
         null !== $status && $obj['status'] = $status;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class NumberBlockOrder implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj['connection_id'] = $connectionID;
+        $obj['connectionID'] = $connectionID;
 
         return $obj;
     }
@@ -167,7 +167,7 @@ final class NumberBlockOrder implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class NumberBlockOrder implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }
@@ -189,7 +189,7 @@ final class NumberBlockOrder implements BaseModel
     public function withMessagingProfileID(string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj['messaging_profile_id'] = $messagingProfileID;
+        $obj['messagingProfileID'] = $messagingProfileID;
 
         return $obj;
     }
@@ -200,7 +200,7 @@ final class NumberBlockOrder implements BaseModel
     public function withPhoneNumbersCount(int $phoneNumbersCount): self
     {
         $obj = clone $this;
-        $obj['phone_numbers_count'] = $phoneNumbersCount;
+        $obj['phoneNumbersCount'] = $phoneNumbersCount;
 
         return $obj;
     }
@@ -219,7 +219,7 @@ final class NumberBlockOrder implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -230,7 +230,7 @@ final class NumberBlockOrder implements BaseModel
     public function withRequirementsMet(bool $requirementsMet): self
     {
         $obj = clone $this;
-        $obj['requirements_met'] = $requirementsMet;
+        $obj['requirementsMet'] = $requirementsMet;
 
         return $obj;
     }
@@ -241,7 +241,7 @@ final class NumberBlockOrder implements BaseModel
     public function withStartingNumber(string $startingNumber): self
     {
         $obj = clone $this;
-        $obj['starting_number'] = $startingNumber;
+        $obj['startingNumber'] = $startingNumber;
 
         return $obj;
     }
@@ -265,7 +265,7 @@ final class NumberBlockOrder implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

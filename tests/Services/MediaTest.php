@@ -103,7 +103,7 @@ final class MediaTest extends TestCase
         }
 
         $result = $this->client->media->upload([
-            'media_url' => 'http://www.example.com/audio.mp3',
+            'mediaURL' => 'http://www.example.com/audio.mp3',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -118,9 +118,9 @@ final class MediaTest extends TestCase
         }
 
         $result = $this->client->media->upload([
-            'media_url' => 'http://www.example.com/audio.mp3',
-            'media_name' => 'my-file',
-            'ttl_secs' => 86400,
+            'mediaURL' => 'http://www.example.com/audio.mp3',
+            'mediaName' => 'my-file',
+            'ttlSecs' => 86400,
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

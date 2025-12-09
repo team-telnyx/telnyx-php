@@ -41,23 +41,23 @@ final class NotificationEventConditionListResponse implements BaseModel
      *
      * @param list<Data|array{
      *   id?: string|null,
-     *   allow_multiple_channels?: bool|null,
-     *   associated_record_type?: value-of<AssociatedRecordType>|null,
+     *   allowMultipleChannels?: bool|null,
+     *   associatedRecordType?: value-of<AssociatedRecordType>|null,
      *   asynchronous?: bool|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   description?: string|null,
      *   enabled?: bool|null,
      *   name?: string|null,
-     *   notification_event_id?: string|null,
+     *   notificationEventID?: string|null,
      *   parameters?: list<Parameter>|null,
-     *   supported_channels?: list<string>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   supportedChannels?: list<string>|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -75,17 +75,17 @@ final class NotificationEventConditionListResponse implements BaseModel
     /**
      * @param list<Data|array{
      *   id?: string|null,
-     *   allow_multiple_channels?: bool|null,
-     *   associated_record_type?: value-of<AssociatedRecordType>|null,
+     *   allowMultipleChannels?: bool|null,
+     *   associatedRecordType?: value-of<AssociatedRecordType>|null,
      *   asynchronous?: bool|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   description?: string|null,
      *   enabled?: bool|null,
      *   name?: string|null,
-     *   notification_event_id?: string|null,
+     *   notificationEventID?: string|null,
      *   parameters?: list<Parameter>|null,
-     *   supported_channels?: list<string>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   supportedChannels?: list<string>|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -98,10 +98,10 @@ final class NotificationEventConditionListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

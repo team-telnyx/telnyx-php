@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type WellKnownGetProtectedResourceMetadataResponseShape = array{
- *   authorization_servers?: list<string>|null, resource?: string|null
+ *   authorizationServers?: list<string>|null, resource?: string|null
  * }
  */
 final class WellKnownGetProtectedResourceMetadataResponse implements BaseModel
@@ -21,10 +21,10 @@ final class WellKnownGetProtectedResourceMetadataResponse implements BaseModel
     /**
      * List of authorization server URLs.
      *
-     * @var list<string>|null $authorization_servers
+     * @var list<string>|null $authorizationServers
      */
-    #[Optional(list: 'string')]
-    public ?array $authorization_servers;
+    #[Optional('authorization_servers', list: 'string')]
+    public ?array $authorizationServers;
 
     /**
      * Protected resource URL.
@@ -42,15 +42,15 @@ final class WellKnownGetProtectedResourceMetadataResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $authorization_servers
+     * @param list<string> $authorizationServers
      */
     public static function with(
-        ?array $authorization_servers = null,
+        ?array $authorizationServers = null,
         ?string $resource = null
     ): self {
         $obj = new self;
 
-        null !== $authorization_servers && $obj['authorization_servers'] = $authorization_servers;
+        null !== $authorizationServers && $obj['authorizationServers'] = $authorizationServers;
         null !== $resource && $obj['resource'] = $resource;
 
         return $obj;
@@ -64,7 +64,7 @@ final class WellKnownGetProtectedResourceMetadataResponse implements BaseModel
     public function withAuthorizationServers(array $authorizationServers): self
     {
         $obj = clone $this;
-        $obj['authorization_servers'] = $authorizationServers;
+        $obj['authorizationServers'] = $authorizationServers;
 
         return $obj;
     }

@@ -18,12 +18,12 @@ use Telnyx\MessagingOptouts\MessagingOptoutListParams\Page;
  * @see Telnyx\Services\MessagingOptoutsService::list()
  *
  * @phpstan-type MessagingOptoutListParamsShape = array{
- *   created_at?: CreatedAt|array{
+ *   createdAt?: CreatedAt|array{
  *     gte?: \DateTimeInterface|null, lte?: \DateTimeInterface|null
  *   },
- *   filter?: Filter|array{from?: string|null, messaging_profile_id?: string|null},
+ *   filter?: Filter|array{from?: string|null, messagingProfileID?: string|null},
  *   page?: Page|array{number?: int|null, size?: int|null},
- *   redaction_enabled?: string,
+ *   redactionEnabled?: string,
  * }
  */
 final class MessagingOptoutListParams implements BaseModel
@@ -36,7 +36,7 @@ final class MessagingOptoutListParams implements BaseModel
      * Consolidated created_at parameter (deepObject style). Originally: created_at[gte], created_at[lte].
      */
     #[Optional]
-    public ?CreatedAt $created_at;
+    public ?CreatedAt $createdAt;
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[messaging_profile_id], filter[from].
@@ -54,7 +54,7 @@ final class MessagingOptoutListParams implements BaseModel
      * If receiving address (+E.164 formatted phone number) should be redacted.
      */
     #[Optional]
-    public ?string $redaction_enabled;
+    public ?string $redactionEnabled;
 
     public function __construct()
     {
@@ -68,24 +68,24 @@ final class MessagingOptoutListParams implements BaseModel
      *
      * @param CreatedAt|array{
      *   gte?: \DateTimeInterface|null, lte?: \DateTimeInterface|null
-     * } $created_at
+     * } $createdAt
      * @param Filter|array{
-     *   from?: string|null, messaging_profile_id?: string|null
+     *   from?: string|null, messagingProfileID?: string|null
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      */
     public static function with(
-        CreatedAt|array|null $created_at = null,
+        CreatedAt|array|null $createdAt = null,
         Filter|array|null $filter = null,
         Page|array|null $page = null,
-        ?string $redaction_enabled = null,
+        ?string $redactionEnabled = null,
     ): self {
         $obj = new self;
 
-        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
         null !== $filter && $obj['filter'] = $filter;
         null !== $page && $obj['page'] = $page;
-        null !== $redaction_enabled && $obj['redaction_enabled'] = $redaction_enabled;
+        null !== $redactionEnabled && $obj['redactionEnabled'] = $redactionEnabled;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class MessagingOptoutListParams implements BaseModel
     public function withCreatedAt(CreatedAt|array $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -109,7 +109,7 @@ final class MessagingOptoutListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[messaging_profile_id], filter[from].
      *
      * @param Filter|array{
-     *   from?: string|null, messaging_profile_id?: string|null
+     *   from?: string|null, messagingProfileID?: string|null
      * } $filter
      */
     public function withFilter(Filter|array $filter): self
@@ -139,7 +139,7 @@ final class MessagingOptoutListParams implements BaseModel
     public function withRedactionEnabled(string $redactionEnabled): self
     {
         $obj = clone $this;
-        $obj['redaction_enabled'] = $redactionEnabled;
+        $obj['redactionEnabled'] = $redactionEnabled;
 
         return $obj;
     }

@@ -38,14 +38,14 @@ final class MessagingOptoutListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   created_at?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   from?: string|null,
      *   keyword?: string|null,
-     *   messaging_profile_id?: string|null,
+     *   messagingProfileID?: string|null,
      *   to?: string|null,
      * }> $data
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public static function with(
@@ -62,10 +62,10 @@ final class MessagingOptoutListResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   created_at?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   from?: string|null,
      *   keyword?: string|null,
-     *   messaging_profile_id?: string|null,
+     *   messagingProfileID?: string|null,
      *   to?: string|null,
      * }> $data
      */
@@ -79,7 +79,7 @@ final class MessagingOptoutListResponse implements BaseModel
 
     /**
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public function withMeta(Meta|array $meta): self

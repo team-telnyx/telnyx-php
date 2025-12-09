@@ -36,7 +36,7 @@ final class PhoneNumberCampaignsTest extends TestCase
         }
 
         $result = $this->client->phoneNumberCampaigns->create([
-            'campaignId' => '4b300178-131c-d902-d54e-72d90ba1620j',
+            'campaignID' => '4b300178-131c-d902-d54e-72d90ba1620j',
             'phoneNumber' => '+18005550199',
         ]);
 
@@ -52,7 +52,7 @@ final class PhoneNumberCampaignsTest extends TestCase
         }
 
         $result = $this->client->phoneNumberCampaigns->create([
-            'campaignId' => '4b300178-131c-d902-d54e-72d90ba1620j',
+            'campaignID' => '4b300178-131c-d902-d54e-72d90ba1620j',
             'phoneNumber' => '+18005550199',
         ]);
 
@@ -83,7 +83,7 @@ final class PhoneNumberCampaignsTest extends TestCase
         $result = $this->client->phoneNumberCampaigns->update(
             'phoneNumber',
             [
-                'campaignId' => '4b300178-131c-d902-d54e-72d90ba1620j',
+                'campaignID' => '4b300178-131c-d902-d54e-72d90ba1620j',
                 'phoneNumber' => '+18005550199',
             ],
         );
@@ -102,7 +102,7 @@ final class PhoneNumberCampaignsTest extends TestCase
         $result = $this->client->phoneNumberCampaigns->update(
             'phoneNumber',
             [
-                'campaignId' => '4b300178-131c-d902-d54e-72d90ba1620j',
+                'campaignID' => '4b300178-131c-d902-d54e-72d90ba1620j',
                 'phoneNumber' => '+18005550199',
             ],
         );

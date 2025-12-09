@@ -13,7 +13,7 @@ use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetStatu
 /**
  * @phpstan-type PhoneNumberAssignmentByProfileGetStatusResponseShape = array{
  *   status: value-of<Status>,
- *   taskId: string,
+ *   taskID: string,
  *   createdAt?: \DateTimeInterface|null,
  *   updatedAt?: \DateTimeInterface|null,
  * }
@@ -31,8 +31,8 @@ final class PhoneNumberAssignmentByProfileGetStatusResponse implements BaseModel
     #[Required(enum: Status::class)]
     public string $status;
 
-    #[Required]
-    public string $taskId;
+    #[Required('taskId')]
+    public string $taskID;
 
     #[Optional]
     public ?\DateTimeInterface $createdAt;
@@ -45,7 +45,7 @@ final class PhoneNumberAssignmentByProfileGetStatusResponse implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * PhoneNumberAssignmentByProfileGetStatusResponse::with(status: ..., taskId: ...)
+     * PhoneNumberAssignmentByProfileGetStatusResponse::with(status: ..., taskID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -70,14 +70,14 @@ final class PhoneNumberAssignmentByProfileGetStatusResponse implements BaseModel
      */
     public static function with(
         Status|string $status,
-        string $taskId,
+        string $taskID,
         ?\DateTimeInterface $createdAt = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
         $obj = new self;
 
         $obj['status'] = $status;
-        $obj['taskId'] = $taskId;
+        $obj['taskID'] = $taskID;
 
         null !== $createdAt && $obj['createdAt'] = $createdAt;
         null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
@@ -101,7 +101,7 @@ final class PhoneNumberAssignmentByProfileGetStatusResponse implements BaseModel
     public function withTaskID(string $taskID): self
     {
         $obj = clone $this;
-        $obj['taskId'] = $taskID;
+        $obj['taskID'] = $taskID;
 
         return $obj;
     }

@@ -19,14 +19,14 @@ use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParam
  * @see Telnyx\Services\Texml\Accounts\Calls\RecordingsJsonService::recordingsJson()
  *
  * @phpstan-type RecordingsJsonRecordingsJsonParamsShape = array{
- *   account_sid: string,
- *   PlayBeep?: bool,
- *   RecordingChannels?: \Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParams\RecordingChannels|value-of<\Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParams\RecordingChannels>,
- *   RecordingStatusCallback?: string,
- *   RecordingStatusCallbackEvent?: string,
- *   RecordingStatusCallbackMethod?: \Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParams\RecordingStatusCallbackMethod|value-of<\Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParams\RecordingStatusCallbackMethod>,
- *   RecordingTrack?: \Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParams\RecordingTrack|value-of<\Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParams\RecordingTrack>,
- *   SendRecordingUrl?: bool,
+ *   accountSid: string,
+ *   playBeep?: bool,
+ *   recordingChannels?: RecordingChannels|value-of<RecordingChannels>,
+ *   recordingStatusCallback?: string,
+ *   recordingStatusCallbackEvent?: string,
+ *   recordingStatusCallbackMethod?: RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod>,
+ *   recordingTrack?: RecordingTrack|value-of<RecordingTrack>,
+ *   sendRecordingURL?: bool,
  * }
  */
 final class RecordingsJsonRecordingsJsonParams implements BaseModel
@@ -36,68 +36,65 @@ final class RecordingsJsonRecordingsJsonParams implements BaseModel
     use SdkParams;
 
     #[Required]
-    public string $account_sid;
+    public string $accountSid;
 
     /**
      * Whether to play a beep when recording is started.
      */
-    #[Optional]
-    public ?bool $PlayBeep;
+    #[Optional('PlayBeep')]
+    public ?bool $playBeep;
 
     /**
      * When `dual`, final audio file has the first leg on channel A, and the rest on channel B. `single` mixes both tracks into a single channel.
      *
-     * @var value-of<RecordingChannels>|null $RecordingChannels
+     * @var value-of<RecordingChannels>|null $recordingChannels
      */
-    #[Optional(
-        enum: RecordingChannels::class,
-    )]
-    public ?string $RecordingChannels;
+    #[Optional('RecordingChannels', enum: RecordingChannels::class)]
+    public ?string $recordingChannels;
 
     /**
      * Url where status callbacks will be sent.
      */
-    #[Optional]
-    public ?string $RecordingStatusCallback;
+    #[Optional('RecordingStatusCallback')]
+    public ?string $recordingStatusCallback;
 
     /**
      * The changes to the recording's state that should generate a call to `RecoridngStatusCallback`. Can be: `in-progress`, `completed` and `absent`. Separate multiple values with a space. Defaults to `completed`.
      */
-    #[Optional]
-    public ?string $RecordingStatusCallbackEvent;
+    #[Optional('RecordingStatusCallbackEvent')]
+    public ?string $recordingStatusCallbackEvent;
 
     /**
      * HTTP method used to send status callbacks.
      *
-     * @var value-of<RecordingStatusCallbackMethod>|null $RecordingStatusCallbackMethod
+     * @var value-of<RecordingStatusCallbackMethod>|null $recordingStatusCallbackMethod
      */
     #[Optional(
-        enum: RecordingStatusCallbackMethod::class,
+        'RecordingStatusCallbackMethod',
+        enum: RecordingStatusCallbackMethod::class
     )]
-    public ?string $RecordingStatusCallbackMethod;
+    public ?string $recordingStatusCallbackMethod;
 
     /**
      * The audio track to record for the call. The default is `both`.
      *
-     * @var value-of<RecordingTrack>|null $RecordingTrack
+     * @var value-of<RecordingTrack>|null $recordingTrack
      */
-    #[Optional(
-        enum: RecordingTrack::class,
-    )]
-    public ?string $RecordingTrack;
+    #[Optional('RecordingTrack', enum: RecordingTrack::class)]
+    public ?string $recordingTrack;
 
     /**
      * Whether to send RecordingUrl in webhooks.
      */
-    #[Optional]
-    public ?bool $SendRecordingUrl;
+    #[Optional('SendRecordingUrl')]
+    public ?bool $sendRecordingURL;
 
     /**
      * `new RecordingsJsonRecordingsJsonParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * RecordingsJsonRecordingsJsonParams::with(account_sid: ...)
+     * RecordingsJsonRecordingsJsonParams::with(accountSid: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -116,31 +113,31 @@ final class RecordingsJsonRecordingsJsonParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordingChannels|value-of<RecordingChannels> $RecordingChannels
-     * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod> $RecordingStatusCallbackMethod
-     * @param RecordingTrack|value-of<RecordingTrack> $RecordingTrack
+     * @param RecordingChannels|value-of<RecordingChannels> $recordingChannels
+     * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod> $recordingStatusCallbackMethod
+     * @param RecordingTrack|value-of<RecordingTrack> $recordingTrack
      */
     public static function with(
-        string $account_sid,
-        ?bool $PlayBeep = null,
-        RecordingChannels|string|null $RecordingChannels = null,
-        ?string $RecordingStatusCallback = null,
-        ?string $RecordingStatusCallbackEvent = null,
-        RecordingStatusCallbackMethod|string|null $RecordingStatusCallbackMethod = null,
-        RecordingTrack|string|null $RecordingTrack = null,
-        ?bool $SendRecordingUrl = null,
+        string $accountSid,
+        ?bool $playBeep = null,
+        RecordingChannels|string|null $recordingChannels = null,
+        ?string $recordingStatusCallback = null,
+        ?string $recordingStatusCallbackEvent = null,
+        RecordingStatusCallbackMethod|string|null $recordingStatusCallbackMethod = null,
+        RecordingTrack|string|null $recordingTrack = null,
+        ?bool $sendRecordingURL = null,
     ): self {
         $obj = new self;
 
-        $obj['account_sid'] = $account_sid;
+        $obj['accountSid'] = $accountSid;
 
-        null !== $PlayBeep && $obj['PlayBeep'] = $PlayBeep;
-        null !== $RecordingChannels && $obj['RecordingChannels'] = $RecordingChannels;
-        null !== $RecordingStatusCallback && $obj['RecordingStatusCallback'] = $RecordingStatusCallback;
-        null !== $RecordingStatusCallbackEvent && $obj['RecordingStatusCallbackEvent'] = $RecordingStatusCallbackEvent;
-        null !== $RecordingStatusCallbackMethod && $obj['RecordingStatusCallbackMethod'] = $RecordingStatusCallbackMethod;
-        null !== $RecordingTrack && $obj['RecordingTrack'] = $RecordingTrack;
-        null !== $SendRecordingUrl && $obj['SendRecordingUrl'] = $SendRecordingUrl;
+        null !== $playBeep && $obj['playBeep'] = $playBeep;
+        null !== $recordingChannels && $obj['recordingChannels'] = $recordingChannels;
+        null !== $recordingStatusCallback && $obj['recordingStatusCallback'] = $recordingStatusCallback;
+        null !== $recordingStatusCallbackEvent && $obj['recordingStatusCallbackEvent'] = $recordingStatusCallbackEvent;
+        null !== $recordingStatusCallbackMethod && $obj['recordingStatusCallbackMethod'] = $recordingStatusCallbackMethod;
+        null !== $recordingTrack && $obj['recordingTrack'] = $recordingTrack;
+        null !== $sendRecordingURL && $obj['sendRecordingURL'] = $sendRecordingURL;
 
         return $obj;
     }
@@ -148,7 +145,7 @@ final class RecordingsJsonRecordingsJsonParams implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj['account_sid'] = $accountSid;
+        $obj['accountSid'] = $accountSid;
 
         return $obj;
     }
@@ -159,7 +156,7 @@ final class RecordingsJsonRecordingsJsonParams implements BaseModel
     public function withPlayBeep(bool $playBeep): self
     {
         $obj = clone $this;
-        $obj['PlayBeep'] = $playBeep;
+        $obj['playBeep'] = $playBeep;
 
         return $obj;
     }
@@ -170,10 +167,10 @@ final class RecordingsJsonRecordingsJsonParams implements BaseModel
      * @param RecordingChannels|value-of<RecordingChannels> $recordingChannels
      */
     public function withRecordingChannels(
-        RecordingChannels|string $recordingChannels,
+        RecordingChannels|string $recordingChannels
     ): self {
         $obj = clone $this;
-        $obj['RecordingChannels'] = $recordingChannels;
+        $obj['recordingChannels'] = $recordingChannels;
 
         return $obj;
     }
@@ -185,7 +182,7 @@ final class RecordingsJsonRecordingsJsonParams implements BaseModel
         string $recordingStatusCallback
     ): self {
         $obj = clone $this;
-        $obj['RecordingStatusCallback'] = $recordingStatusCallback;
+        $obj['recordingStatusCallback'] = $recordingStatusCallback;
 
         return $obj;
     }
@@ -197,7 +194,7 @@ final class RecordingsJsonRecordingsJsonParams implements BaseModel
         string $recordingStatusCallbackEvent
     ): self {
         $obj = clone $this;
-        $obj['RecordingStatusCallbackEvent'] = $recordingStatusCallbackEvent;
+        $obj['recordingStatusCallbackEvent'] = $recordingStatusCallbackEvent;
 
         return $obj;
     }
@@ -208,10 +205,10 @@ final class RecordingsJsonRecordingsJsonParams implements BaseModel
      * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod> $recordingStatusCallbackMethod
      */
     public function withRecordingStatusCallbackMethod(
-        RecordingStatusCallbackMethod|string $recordingStatusCallbackMethod,
+        RecordingStatusCallbackMethod|string $recordingStatusCallbackMethod
     ): self {
         $obj = clone $this;
-        $obj['RecordingStatusCallbackMethod'] = $recordingStatusCallbackMethod;
+        $obj['recordingStatusCallbackMethod'] = $recordingStatusCallbackMethod;
 
         return $obj;
     }
@@ -222,10 +219,10 @@ final class RecordingsJsonRecordingsJsonParams implements BaseModel
      * @param RecordingTrack|value-of<RecordingTrack> $recordingTrack
      */
     public function withRecordingTrack(
-        RecordingTrack|string $recordingTrack,
+        RecordingTrack|string $recordingTrack
     ): self {
         $obj = clone $this;
-        $obj['RecordingTrack'] = $recordingTrack;
+        $obj['recordingTrack'] = $recordingTrack;
 
         return $obj;
     }
@@ -236,7 +233,7 @@ final class RecordingsJsonRecordingsJsonParams implements BaseModel
     public function withSendRecordingURL(bool $sendRecordingURL): self
     {
         $obj = clone $this;
-        $obj['SendRecordingUrl'] = $sendRecordingURL;
+        $obj['sendRecordingURL'] = $sendRecordingURL;
 
         return $obj;
     }

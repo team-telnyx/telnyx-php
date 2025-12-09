@@ -17,20 +17,20 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type RoomCompositionCreateParamsShape = array{
  *   format?: string|null,
  *   resolution?: string|null,
- *   session_id?: string|null,
- *   video_layout?: array<string,VideoRegion|array{
+ *   sessionID?: string|null,
+ *   videoLayout?: array<string,VideoRegion|array{
  *     height?: int|null,
- *     max_columns?: int|null,
- *     max_rows?: int|null,
- *     video_sources?: list<string>|null,
+ *     maxColumns?: int|null,
+ *     maxRows?: int|null,
+ *     videoSources?: list<string>|null,
  *     width?: int|null,
- *     x_pos?: int|null,
- *     y_pos?: int|null,
- *     z_pos?: int|null,
+ *     xPos?: int|null,
+ *     yPos?: int|null,
+ *     zPos?: int|null,
  *   }>,
- *   webhook_event_failover_url?: string|null,
- *   webhook_event_url?: string,
- *   webhook_timeout_secs?: int|null,
+ *   webhookEventFailoverURL?: string|null,
+ *   webhookEventURL?: string,
+ *   webhookTimeoutSecs?: int|null,
  * }
  */
 final class RoomCompositionCreateParams implements BaseModel
@@ -54,34 +54,34 @@ final class RoomCompositionCreateParams implements BaseModel
     /**
      * id of the room session associated with the room composition.
      */
-    #[Optional(nullable: true)]
-    public ?string $session_id;
+    #[Optional('session_id', nullable: true)]
+    public ?string $sessionID;
 
     /**
      * Describes the video layout of the room composition in terms of regions.
      *
-     * @var array<string,VideoRegion>|null $video_layout
+     * @var array<string,VideoRegion>|null $videoLayout
      */
-    #[Optional(map: VideoRegion::class)]
-    public ?array $video_layout;
+    #[Optional('video_layout', map: VideoRegion::class)]
+    public ?array $videoLayout;
 
     /**
      * The failover URL where webhooks related to this room composition will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
-    #[Optional(nullable: true)]
-    public ?string $webhook_event_failover_url;
+    #[Optional('webhook_event_failover_url', nullable: true)]
+    public ?string $webhookEventFailoverURL;
 
     /**
      * The URL where webhooks related to this room composition will be sent. Must include a scheme, such as 'https'.
      */
-    #[Optional]
-    public ?string $webhook_event_url;
+    #[Optional('webhook_event_url')]
+    public ?string $webhookEventURL;
 
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    #[Optional(nullable: true)]
-    public ?int $webhook_timeout_secs;
+    #[Optional('webhook_timeout_secs', nullable: true)]
+    public ?int $webhookTimeoutSecs;
 
     public function __construct()
     {
@@ -95,33 +95,33 @@ final class RoomCompositionCreateParams implements BaseModel
      *
      * @param array<string,VideoRegion|array{
      *   height?: int|null,
-     *   max_columns?: int|null,
-     *   max_rows?: int|null,
-     *   video_sources?: list<string>|null,
+     *   maxColumns?: int|null,
+     *   maxRows?: int|null,
+     *   videoSources?: list<string>|null,
      *   width?: int|null,
-     *   x_pos?: int|null,
-     *   y_pos?: int|null,
-     *   z_pos?: int|null,
-     * }> $video_layout
+     *   xPos?: int|null,
+     *   yPos?: int|null,
+     *   zPos?: int|null,
+     * }> $videoLayout
      */
     public static function with(
         ?string $format = null,
         ?string $resolution = null,
-        ?string $session_id = null,
-        ?array $video_layout = null,
-        ?string $webhook_event_failover_url = null,
-        ?string $webhook_event_url = null,
-        ?int $webhook_timeout_secs = null,
+        ?string $sessionID = null,
+        ?array $videoLayout = null,
+        ?string $webhookEventFailoverURL = null,
+        ?string $webhookEventURL = null,
+        ?int $webhookTimeoutSecs = null,
     ): self {
         $obj = new self;
 
         null !== $format && $obj['format'] = $format;
         null !== $resolution && $obj['resolution'] = $resolution;
-        null !== $session_id && $obj['session_id'] = $session_id;
-        null !== $video_layout && $obj['video_layout'] = $video_layout;
-        null !== $webhook_event_failover_url && $obj['webhook_event_failover_url'] = $webhook_event_failover_url;
-        null !== $webhook_event_url && $obj['webhook_event_url'] = $webhook_event_url;
-        null !== $webhook_timeout_secs && $obj['webhook_timeout_secs'] = $webhook_timeout_secs;
+        null !== $sessionID && $obj['sessionID'] = $sessionID;
+        null !== $videoLayout && $obj['videoLayout'] = $videoLayout;
+        null !== $webhookEventFailoverURL && $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        null !== $webhookEventURL && $obj['webhookEventURL'] = $webhookEventURL;
+        null !== $webhookTimeoutSecs && $obj['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
         return $obj;
     }
@@ -154,7 +154,7 @@ final class RoomCompositionCreateParams implements BaseModel
     public function withSessionID(?string $sessionID): self
     {
         $obj = clone $this;
-        $obj['session_id'] = $sessionID;
+        $obj['sessionID'] = $sessionID;
 
         return $obj;
     }
@@ -164,19 +164,19 @@ final class RoomCompositionCreateParams implements BaseModel
      *
      * @param array<string,VideoRegion|array{
      *   height?: int|null,
-     *   max_columns?: int|null,
-     *   max_rows?: int|null,
-     *   video_sources?: list<string>|null,
+     *   maxColumns?: int|null,
+     *   maxRows?: int|null,
+     *   videoSources?: list<string>|null,
      *   width?: int|null,
-     *   x_pos?: int|null,
-     *   y_pos?: int|null,
-     *   z_pos?: int|null,
+     *   xPos?: int|null,
+     *   yPos?: int|null,
+     *   zPos?: int|null,
      * }> $videoLayout
      */
     public function withVideoLayout(array $videoLayout): self
     {
         $obj = clone $this;
-        $obj['video_layout'] = $videoLayout;
+        $obj['videoLayout'] = $videoLayout;
 
         return $obj;
     }
@@ -188,7 +188,7 @@ final class RoomCompositionCreateParams implements BaseModel
         ?string $webhookEventFailoverURL
     ): self {
         $obj = clone $this;
-        $obj['webhook_event_failover_url'] = $webhookEventFailoverURL;
+        $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
 
         return $obj;
     }
@@ -199,7 +199,7 @@ final class RoomCompositionCreateParams implements BaseModel
     public function withWebhookEventURL(string $webhookEventURL): self
     {
         $obj = clone $this;
-        $obj['webhook_event_url'] = $webhookEventURL;
+        $obj['webhookEventURL'] = $webhookEventURL;
 
         return $obj;
     }
@@ -210,7 +210,7 @@ final class RoomCompositionCreateParams implements BaseModel
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
         $obj = clone $this;
-        $obj['webhook_timeout_secs'] = $webhookTimeoutSecs;
+        $obj['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
         return $obj;
     }

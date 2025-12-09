@@ -105,7 +105,7 @@ final class MessagingHostedNumberOrdersTest extends TestCase
         }
 
         $result = $this->client->messagingHostedNumberOrders->checkEligibility([
-            'phone_numbers' => ['string'],
+            'phoneNumbers' => ['string'],
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -123,7 +123,7 @@ final class MessagingHostedNumberOrdersTest extends TestCase
         }
 
         $result = $this->client->messagingHostedNumberOrders->checkEligibility([
-            'phone_numbers' => ['string'],
+            'phoneNumbers' => ['string'],
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -145,7 +145,7 @@ final class MessagingHostedNumberOrdersTest extends TestCase
             ->messagingHostedNumberOrders
             ->createVerificationCodes(
                 'id',
-                ['phone_numbers' => ['string'], 'verification_method' => 'sms']
+                ['phoneNumbers' => ['string'], 'verificationMethod' => 'sms']
             )
         ;
 
@@ -168,7 +168,7 @@ final class MessagingHostedNumberOrdersTest extends TestCase
             ->messagingHostedNumberOrders
             ->createVerificationCodes(
                 'id',
-                ['phone_numbers' => ['string'], 'verification_method' => 'sms']
+                ['phoneNumbers' => ['string'], 'verificationMethod' => 'sms']
             )
         ;
 
@@ -189,8 +189,8 @@ final class MessagingHostedNumberOrdersTest extends TestCase
         $result = $this->client->messagingHostedNumberOrders->validateCodes(
             'id',
             [
-                'verification_codes' => [
-                    ['code' => 'code', 'phone_number' => 'phone_number'],
+                'verificationCodes' => [
+                    ['code' => 'code', 'phoneNumber' => 'phone_number'],
                 ],
             ],
         );
@@ -212,8 +212,8 @@ final class MessagingHostedNumberOrdersTest extends TestCase
         $result = $this->client->messagingHostedNumberOrders->validateCodes(
             'id',
             [
-                'verification_codes' => [
-                    ['code' => 'code', 'phone_number' => 'phone_number'],
+                'verificationCodes' => [
+                    ['code' => 'code', 'phoneNumber' => 'phone_number'],
                 ],
             ],
         );

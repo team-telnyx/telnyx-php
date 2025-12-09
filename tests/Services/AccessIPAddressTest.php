@@ -36,7 +36,7 @@ final class AccessIPAddressTest extends TestCase
         }
 
         $result = $this->client->accessIPAddress->create([
-            'ip_address' => 'ip_address',
+            'ipAddress' => 'ip_address',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -51,7 +51,7 @@ final class AccessIPAddressTest extends TestCase
         }
 
         $result = $this->client->accessIPAddress->create([
-            'ip_address' => 'ip_address', 'description' => 'description',
+            'ipAddress' => 'ip_address', 'description' => 'description',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -25,7 +25,7 @@ final class GlobalIPUsageService implements GlobalIPUsageContract
      * Global IP Usage Metrics
      *
      * @param array{
-     *   filter?: array{global_ip_id?: string|array{in?: string}}
+     *   filter?: array{globalIPID?: string|array{in?: string}}
      * }|GlobalIPUsageRetrieveParams $params
      *
      * @throws APIException

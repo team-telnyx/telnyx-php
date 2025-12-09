@@ -59,16 +59,16 @@ final class PhoneNumberCampaignListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<PhoneNumberCampaign|array{
-     *   campaignId: string,
+     *   campaignID: string,
      *   createdAt: string,
      *   phoneNumber: string,
      *   updatedAt: string,
      *   assignmentStatus?: value-of<AssignmentStatus>|null,
-     *   brandId?: string|null,
+     *   brandID?: string|null,
      *   failureReasons?: string|null,
-     *   tcrBrandId?: string|null,
-     *   tcrCampaignId?: string|null,
-     *   telnyxCampaignId?: string|null,
+     *   tcrBrandID?: string|null,
+     *   tcrCampaignID?: string|null,
+     *   telnyxCampaignID?: string|null,
      * }> $records
      */
     public static function with(
@@ -95,16 +95,16 @@ final class PhoneNumberCampaignListResponse implements BaseModel
 
     /**
      * @param list<PhoneNumberCampaign|array{
-     *   campaignId: string,
+     *   campaignID: string,
      *   createdAt: string,
      *   phoneNumber: string,
      *   updatedAt: string,
      *   assignmentStatus?: value-of<AssignmentStatus>|null,
-     *   brandId?: string|null,
+     *   brandID?: string|null,
      *   failureReasons?: string|null,
-     *   tcrBrandId?: string|null,
-     *   tcrCampaignId?: string|null,
-     *   telnyxCampaignId?: string|null,
+     *   tcrBrandID?: string|null,
+     *   tcrCampaignID?: string|null,
+     *   telnyxCampaignID?: string|null,
      * }> $records
      */
     public function withRecords(array $records): self

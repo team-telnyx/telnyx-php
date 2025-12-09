@@ -29,10 +29,10 @@ final class PurchaseService implements PurchaseContract
      * @param array{
      *   amount: int,
      *   product?: string,
-     *   sim_card_group_id?: string,
+     *   simCardGroupID?: string,
      *   status?: 'enabled'|'disabled'|'standby'|Status,
      *   tags?: list<string>,
-     *   whitelabel_name?: string,
+     *   whitelabelName?: string,
      * }|PurchaseCreateParams $params
      *
      * @throws APIException

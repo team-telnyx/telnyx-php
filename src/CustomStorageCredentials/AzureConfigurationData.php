@@ -13,8 +13,8 @@ use Telnyx\CustomStorageCredentials\AzureConfigurationData\Backend;
 /**
  * @phpstan-type AzureConfigurationDataShape = array{
  *   backend: value-of<Backend>,
- *   account_key?: string|null,
- *   account_name?: string|null,
+ *   accountKey?: string|null,
+ *   accountName?: string|null,
  *   bucket?: string|null,
  * }
  */
@@ -34,14 +34,14 @@ final class AzureConfigurationData implements BaseModel
     /**
      * Azure Blob Storage account key.
      */
-    #[Optional]
-    public ?string $account_key;
+    #[Optional('account_key')]
+    public ?string $accountKey;
 
     /**
      * Azure Blob Storage account name.
      */
-    #[Optional]
-    public ?string $account_name;
+    #[Optional('account_name')]
+    public ?string $accountName;
 
     /**
      * Name of the bucket to be used to store recording files.
@@ -77,16 +77,16 @@ final class AzureConfigurationData implements BaseModel
      */
     public static function with(
         Backend|string $backend,
-        ?string $account_key = null,
-        ?string $account_name = null,
+        ?string $accountKey = null,
+        ?string $accountName = null,
         ?string $bucket = null,
     ): self {
         $obj = new self;
 
         $obj['backend'] = $backend;
 
-        null !== $account_key && $obj['account_key'] = $account_key;
-        null !== $account_name && $obj['account_name'] = $account_name;
+        null !== $accountKey && $obj['accountKey'] = $accountKey;
+        null !== $accountName && $obj['accountName'] = $accountName;
         null !== $bucket && $obj['bucket'] = $bucket;
 
         return $obj;
@@ -111,7 +111,7 @@ final class AzureConfigurationData implements BaseModel
     public function withAccountKey(string $accountKey): self
     {
         $obj = clone $this;
-        $obj['account_key'] = $accountKey;
+        $obj['accountKey'] = $accountKey;
 
         return $obj;
     }
@@ -122,7 +122,7 @@ final class AzureConfigurationData implements BaseModel
     public function withAccountName(string $accountName): self
     {
         $obj = clone $this;
-        $obj['account_name'] = $accountName;
+        $obj['accountName'] = $accountName;
 
         return $obj;
     }

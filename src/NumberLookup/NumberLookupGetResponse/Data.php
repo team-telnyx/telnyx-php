@@ -15,14 +15,14 @@ use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Portability\PortedStatus;
 
 /**
  * @phpstan-type DataShape = array{
- *   caller_name?: CallerName|null,
+ *   callerName?: CallerName|null,
  *   carrier?: Carrier|null,
- *   country_code?: string|null,
+ *   countryCode?: string|null,
  *   fraud?: string|null,
- *   national_format?: string|null,
- *   phone_number?: string|null,
+ *   nationalFormat?: string|null,
+ *   phoneNumber?: string|null,
  *   portability?: Portability|null,
- *   record_type?: string|null,
+ *   recordType?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -30,8 +30,8 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?CallerName $caller_name;
+    #[Optional('caller_name')]
+    public ?CallerName $callerName;
 
     #[Optional]
     public ?Carrier $carrier;
@@ -39,8 +39,8 @@ final class Data implements BaseModel
     /**
      * Region code that matches the specific country calling code.
      */
-    #[Optional]
-    public ?string $country_code;
+    #[Optional('country_code')]
+    public ?string $countryCode;
 
     /**
      * Unused.
@@ -51,14 +51,14 @@ final class Data implements BaseModel
     /**
      * Hyphen-separated national number, preceded by the national destination code (NDC), with a 0 prefix, if an NDC is found.
      */
-    #[Optional]
-    public ?string $national_format;
+    #[Optional('national_format')]
+    public ?string $nationalFormat;
 
     /**
      * E164-formatted phone number.
      */
-    #[Optional]
-    public ?string $phone_number;
+    #[Optional('phone_number')]
+    public ?string $phoneNumber;
 
     #[Optional]
     public ?Portability $portability;
@@ -66,8 +66,8 @@ final class Data implements BaseModel
     /**
      * Identifies the type of record.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     public function __construct()
     {
@@ -80,76 +80,76 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param CallerName|array{
-     *   caller_name?: string|null, error_code?: string|null
-     * } $caller_name
+     *   callerName?: string|null, errorCode?: string|null
+     * } $callerName
      * @param Carrier|array{
-     *   error_code?: string|null,
-     *   mobile_country_code?: string|null,
-     *   mobile_network_code?: string|null,
+     *   errorCode?: string|null,
+     *   mobileCountryCode?: string|null,
+     *   mobileNetworkCode?: string|null,
      *   name?: string|null,
-     *   normalized_carrier?: string|null,
+     *   normalizedCarrier?: string|null,
      *   type?: value-of<Type>|null,
      * } $carrier
      * @param Portability|array{
      *   altspid?: string|null,
-     *   altspid_carrier_name?: string|null,
-     *   altspid_carrier_type?: string|null,
+     *   altspidCarrierName?: string|null,
+     *   altspidCarrierType?: string|null,
      *   city?: string|null,
-     *   line_type?: string|null,
+     *   lineType?: string|null,
      *   lrn?: string|null,
      *   ocn?: string|null,
-     *   ported_date?: string|null,
-     *   ported_status?: value-of<PortedStatus>|null,
+     *   portedDate?: string|null,
+     *   portedStatus?: value-of<PortedStatus>|null,
      *   spid?: string|null,
-     *   spid_carrier_name?: string|null,
-     *   spid_carrier_type?: string|null,
+     *   spidCarrierName?: string|null,
+     *   spidCarrierType?: string|null,
      *   state?: string|null,
      * } $portability
      */
     public static function with(
-        CallerName|array|null $caller_name = null,
+        CallerName|array|null $callerName = null,
         Carrier|array|null $carrier = null,
-        ?string $country_code = null,
+        ?string $countryCode = null,
         ?string $fraud = null,
-        ?string $national_format = null,
-        ?string $phone_number = null,
+        ?string $nationalFormat = null,
+        ?string $phoneNumber = null,
         Portability|array|null $portability = null,
-        ?string $record_type = null,
+        ?string $recordType = null,
     ): self {
         $obj = new self;
 
-        null !== $caller_name && $obj['caller_name'] = $caller_name;
+        null !== $callerName && $obj['callerName'] = $callerName;
         null !== $carrier && $obj['carrier'] = $carrier;
-        null !== $country_code && $obj['country_code'] = $country_code;
+        null !== $countryCode && $obj['countryCode'] = $countryCode;
         null !== $fraud && $obj['fraud'] = $fraud;
-        null !== $national_format && $obj['national_format'] = $national_format;
-        null !== $phone_number && $obj['phone_number'] = $phone_number;
+        null !== $nationalFormat && $obj['nationalFormat'] = $nationalFormat;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
         null !== $portability && $obj['portability'] = $portability;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $recordType && $obj['recordType'] = $recordType;
 
         return $obj;
     }
 
     /**
      * @param CallerName|array{
-     *   caller_name?: string|null, error_code?: string|null
+     *   callerName?: string|null, errorCode?: string|null
      * } $callerName
      */
     public function withCallerName(CallerName|array $callerName): self
     {
         $obj = clone $this;
-        $obj['caller_name'] = $callerName;
+        $obj['callerName'] = $callerName;
 
         return $obj;
     }
 
     /**
      * @param Carrier|array{
-     *   error_code?: string|null,
-     *   mobile_country_code?: string|null,
-     *   mobile_network_code?: string|null,
+     *   errorCode?: string|null,
+     *   mobileCountryCode?: string|null,
+     *   mobileNetworkCode?: string|null,
      *   name?: string|null,
-     *   normalized_carrier?: string|null,
+     *   normalizedCarrier?: string|null,
      *   type?: value-of<Type>|null,
      * } $carrier
      */
@@ -167,7 +167,7 @@ final class Data implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj['country_code'] = $countryCode;
+        $obj['countryCode'] = $countryCode;
 
         return $obj;
     }
@@ -189,7 +189,7 @@ final class Data implements BaseModel
     public function withNationalFormat(string $nationalFormat): self
     {
         $obj = clone $this;
-        $obj['national_format'] = $nationalFormat;
+        $obj['nationalFormat'] = $nationalFormat;
 
         return $obj;
     }
@@ -200,7 +200,7 @@ final class Data implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -208,17 +208,17 @@ final class Data implements BaseModel
     /**
      * @param Portability|array{
      *   altspid?: string|null,
-     *   altspid_carrier_name?: string|null,
-     *   altspid_carrier_type?: string|null,
+     *   altspidCarrierName?: string|null,
+     *   altspidCarrierType?: string|null,
      *   city?: string|null,
-     *   line_type?: string|null,
+     *   lineType?: string|null,
      *   lrn?: string|null,
      *   ocn?: string|null,
-     *   ported_date?: string|null,
-     *   ported_status?: value-of<PortedStatus>|null,
+     *   portedDate?: string|null,
+     *   portedStatus?: value-of<PortedStatus>|null,
      *   spid?: string|null,
-     *   spid_carrier_name?: string|null,
-     *   spid_carrier_type?: string|null,
+     *   spidCarrierName?: string|null,
+     *   spidCarrierType?: string|null,
      *   state?: string|null,
      * } $portability
      */
@@ -236,7 +236,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

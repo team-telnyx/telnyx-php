@@ -7,6 +7,7 @@ namespace Telnyx\Services\PhoneNumbers;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\CsvFormat;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter\Status;
@@ -31,20 +32,20 @@ final class CsvDownloadsService implements CsvDownloadsContract
      * Create a CSV download
      *
      * @param array{
-     *   csv_format?: 'V1'|'V2'|CsvFormat,
+     *   csvFormat?: 'V1'|'V2'|CsvFormat,
      *   filter?: array{
-     *     billing_group_id?: string,
-     *     connection_id?: string,
-     *     customer_reference?: string,
-     *     emergency_address_id?: string,
-     *     has_bundle?: string,
-     *     phone_number?: string,
+     *     billingGroupID?: string,
+     *     connectionID?: string,
+     *     customerReference?: string,
+     *     emergencyAddressID?: string,
+     *     hasBundle?: string,
+     *     phoneNumber?: string,
      *     status?: 'purchase-pending'|'purchase-failed'|'port-pending'|'active'|'deleted'|'port-failed'|'emergency-only'|'ported-out'|'port-out-pending'|Status,
      *     tag?: string,
-     *     'voice.connection_name'?: array{
-     *       contains?: string, ends_with?: string, eq?: string, starts_with?: string
+     *     voiceConnectionName?: array{
+     *       contains?: string, endsWith?: string, eq?: string, startsWith?: string
      *     },
-     *     'voice.usage_payment_method'?: 'pay-per-minute'|'channel'|VoiceUsagePaymentMethod,
+     *     voiceUsagePaymentMethod?: 'pay-per-minute'|'channel'|VoiceUsagePaymentMethod,
      *   },
      * }|CsvDownloadCreateParams $params
      *
@@ -63,7 +64,7 @@ final class CsvDownloadsService implements CsvDownloadsContract
         $response = $this->client->request(
             method: 'post',
             path: 'phone_numbers/csv_downloads',
-            query: $parsed,
+            query: Util::array_transform_keys($parsed, ['csvFormat' => 'csv_format']),
             options: $options,
             convert: CsvDownloadNewResponse::class,
         );

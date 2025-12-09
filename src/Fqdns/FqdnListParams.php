@@ -18,8 +18,8 @@ use Telnyx\Fqdns\FqdnListParams\Page;
  *
  * @phpstan-type FqdnListParamsShape = array{
  *   filter?: Filter|array{
- *     connection_id?: string|null,
- *     dns_record_type?: string|null,
+ *     connectionID?: string|null,
+ *     dnsRecordType?: string|null,
  *     fqdn?: string|null,
  *     port?: int|null,
  *   },
@@ -55,8 +55,8 @@ final class FqdnListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   connection_id?: string|null,
-     *   dns_record_type?: string|null,
+     *   connectionID?: string|null,
+     *   dnsRecordType?: string|null,
      *   fqdn?: string|null,
      *   port?: int|null,
      * } $filter
@@ -78,8 +78,8 @@ final class FqdnListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[connection_id], filter[fqdn], filter[port], filter[dns_record_type].
      *
      * @param Filter|array{
-     *   connection_id?: string|null,
-     *   dns_record_type?: string|null,
+     *   connectionID?: string|null,
+     *   dnsRecordType?: string|null,
      *   fqdn?: string|null,
      *   port?: int|null,
      * } $filter

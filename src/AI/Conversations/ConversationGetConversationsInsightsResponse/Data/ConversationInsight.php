@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ConversationInsightShape = array{
- *   insight_id: string, result: string
+ *   insightID: string, result: string
  * }
  */
 final class ConversationInsight implements BaseModel
@@ -21,8 +21,8 @@ final class ConversationInsight implements BaseModel
     /**
      * Unique identifier for the insight configuration.
      */
-    #[Required]
-    public string $insight_id;
+    #[Required('insight_id')]
+    public string $insightID;
 
     /**
      * Insight result from the conversation. If the insight has a JSON schema, this will be stringified JSON object.
@@ -35,7 +35,7 @@ final class ConversationInsight implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * ConversationInsight::with(insight_id: ..., result: ...)
+     * ConversationInsight::with(insightID: ..., result: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -54,11 +54,11 @@ final class ConversationInsight implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $insight_id, string $result): self
+    public static function with(string $insightID, string $result): self
     {
         $obj = new self;
 
-        $obj['insight_id'] = $insight_id;
+        $obj['insightID'] = $insightID;
         $obj['result'] = $result;
 
         return $obj;
@@ -70,7 +70,7 @@ final class ConversationInsight implements BaseModel
     public function withInsightID(string $insightID): self
     {
         $obj = clone $this;
-        $obj['insight_id'] = $insightID;
+        $obj['insightID'] = $insightID;
 
         return $obj;
     }

@@ -46,7 +46,7 @@ final class VerifyVerificationCodeResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Data|array{
-     *   phone_number: string, response_code: value-of<ResponseCode>
+     *   phoneNumber: string, responseCode: value-of<ResponseCode>
      * } $data
      */
     public static function with(Data|array $data): self
@@ -60,7 +60,7 @@ final class VerifyVerificationCodeResponse implements BaseModel
 
     /**
      * @param Data|array{
-     *   phone_number: string, response_code: value-of<ResponseCode>
+     *   phoneNumber: string, responseCode: value-of<ResponseCode>
      * } $data
      */
     public function withData(Data|array $data): self

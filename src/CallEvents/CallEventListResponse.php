@@ -40,19 +40,19 @@ final class CallEventListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   call_leg_id: string,
-     *   call_session_id: string,
-     *   event_timestamp: string,
+     *   callLegID: string,
+     *   callSessionID: string,
+     *   eventTimestamp: string,
      *   metadata: mixed,
      *   name: string,
-     *   record_type: value-of<RecordType>,
+     *   recordType: value-of<RecordType>,
      *   type: value-of<Type>,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -69,12 +69,12 @@ final class CallEventListResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   call_leg_id: string,
-     *   call_session_id: string,
-     *   event_timestamp: string,
+     *   callLegID: string,
+     *   callSessionID: string,
+     *   eventTimestamp: string,
      *   metadata: mixed,
      *   name: string,
-     *   record_type: value-of<RecordType>,
+     *   recordType: value-of<RecordType>,
      *   type: value-of<Type>,
      * }> $data
      */
@@ -88,10 +88,10 @@ final class CallEventListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

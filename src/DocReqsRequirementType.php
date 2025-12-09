@@ -13,14 +13,14 @@ use Telnyx\DocReqsRequirementType\Type;
 /**
  * @phpstan-type DocReqsRequirementTypeShape = array{
  *   id?: string|null,
- *   acceptance_criteria?: AcceptanceCriteria|null,
- *   created_at?: string|null,
+ *   acceptanceCriteria?: AcceptanceCriteria|null,
+ *   createdAt?: string|null,
  *   description?: string|null,
  *   example?: string|null,
  *   name?: string|null,
- *   record_type?: string|null,
+ *   recordType?: string|null,
  *   type?: value-of<Type>|null,
- *   updated_at?: string|null,
+ *   updatedAt?: string|null,
  * }
  */
 final class DocReqsRequirementType implements BaseModel
@@ -37,14 +37,14 @@ final class DocReqsRequirementType implements BaseModel
     /**
      * Specifies objective criteria for acceptance.
      */
-    #[Optional]
-    public ?AcceptanceCriteria $acceptance_criteria;
+    #[Optional('acceptance_criteria')]
+    public ?AcceptanceCriteria $acceptanceCriteria;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Optional]
-    public ?string $created_at;
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
     /**
      * Describes the requirement type.
@@ -67,8 +67,8 @@ final class DocReqsRequirementType implements BaseModel
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * Defines the type of this requirement type.
@@ -81,8 +81,8 @@ final class DocReqsRequirementType implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was last updated.
      */
-    #[Optional]
-    public ?string $updated_at;
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     public function __construct()
     {
@@ -95,37 +95,37 @@ final class DocReqsRequirementType implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param AcceptanceCriteria|array{
-     *   acceptable_characters?: string|null,
-     *   acceptable_values?: list<string>|null,
-     *   locality_limit?: string|null,
-     *   max_length?: int|null,
-     *   min_length?: int|null,
-     *   time_limit?: string|null,
-     * } $acceptance_criteria
+     *   acceptableCharacters?: string|null,
+     *   acceptableValues?: list<string>|null,
+     *   localityLimit?: string|null,
+     *   maxLength?: int|null,
+     *   minLength?: int|null,
+     *   timeLimit?: string|null,
+     * } $acceptanceCriteria
      * @param Type|value-of<Type> $type
      */
     public static function with(
         ?string $id = null,
-        AcceptanceCriteria|array|null $acceptance_criteria = null,
-        ?string $created_at = null,
+        AcceptanceCriteria|array|null $acceptanceCriteria = null,
+        ?string $createdAt = null,
         ?string $description = null,
         ?string $example = null,
         ?string $name = null,
-        ?string $record_type = null,
+        ?string $recordType = null,
         Type|string|null $type = null,
-        ?string $updated_at = null,
+        ?string $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $acceptance_criteria && $obj['acceptance_criteria'] = $acceptance_criteria;
-        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $acceptanceCriteria && $obj['acceptanceCriteria'] = $acceptanceCriteria;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
         null !== $description && $obj['description'] = $description;
         null !== $example && $obj['example'] = $example;
         null !== $name && $obj['name'] = $name;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $recordType && $obj['recordType'] = $recordType;
         null !== $type && $obj['type'] = $type;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -145,19 +145,19 @@ final class DocReqsRequirementType implements BaseModel
      * Specifies objective criteria for acceptance.
      *
      * @param AcceptanceCriteria|array{
-     *   acceptable_characters?: string|null,
-     *   acceptable_values?: list<string>|null,
-     *   locality_limit?: string|null,
-     *   max_length?: int|null,
-     *   min_length?: int|null,
-     *   time_limit?: string|null,
+     *   acceptableCharacters?: string|null,
+     *   acceptableValues?: list<string>|null,
+     *   localityLimit?: string|null,
+     *   maxLength?: int|null,
+     *   minLength?: int|null,
+     *   timeLimit?: string|null,
      * } $acceptanceCriteria
      */
     public function withAcceptanceCriteria(
         AcceptanceCriteria|array $acceptanceCriteria
     ): self {
         $obj = clone $this;
-        $obj['acceptance_criteria'] = $acceptanceCriteria;
+        $obj['acceptanceCriteria'] = $acceptanceCriteria;
 
         return $obj;
     }
@@ -168,7 +168,7 @@ final class DocReqsRequirementType implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -212,7 +212,7 @@ final class DocReqsRequirementType implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -236,7 +236,7 @@ final class DocReqsRequirementType implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

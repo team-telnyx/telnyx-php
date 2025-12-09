@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\PhoneNumberAssignmentByProfileService::assign()
  *
  * @phpstan-type PhoneNumberAssignmentByProfileAssignParamsShape = array{
- *   messagingProfileId: string, campaignId?: string, tcrCampaignId?: string
+ *   messagingProfileID: string, campaignID?: string, tcrCampaignID?: string
  * }
  */
 final class PhoneNumberAssignmentByProfileAssignParams implements BaseModel
@@ -28,27 +28,27 @@ final class PhoneNumberAssignmentByProfileAssignParams implements BaseModel
     /**
      * The ID of the messaging profile that you want to link to the specified campaign.
      */
-    #[Required]
-    public string $messagingProfileId;
+    #[Required('messagingProfileId')]
+    public string $messagingProfileID;
 
     /**
      * The ID of the campaign you want to link to the specified messaging profile. If you supply this ID in the request, do not also include a tcrCampaignId.
      */
-    #[Optional]
-    public ?string $campaignId;
+    #[Optional('campaignId')]
+    public ?string $campaignID;
 
     /**
      * The TCR ID of the shared campaign you want to link to the specified messaging profile (for campaigns not created using Telnyx 10DLC services only). If you supply this ID in the request, do not also include a campaignId.
      */
-    #[Optional]
-    public ?string $tcrCampaignId;
+    #[Optional('tcrCampaignId')]
+    public ?string $tcrCampaignID;
 
     /**
      * `new PhoneNumberAssignmentByProfileAssignParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * PhoneNumberAssignmentByProfileAssignParams::with(messagingProfileId: ...)
+     * PhoneNumberAssignmentByProfileAssignParams::with(messagingProfileID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -68,16 +68,16 @@ final class PhoneNumberAssignmentByProfileAssignParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $messagingProfileId,
-        ?string $campaignId = null,
-        ?string $tcrCampaignId = null,
+        string $messagingProfileID,
+        ?string $campaignID = null,
+        ?string $tcrCampaignID = null,
     ): self {
         $obj = new self;
 
-        $obj['messagingProfileId'] = $messagingProfileId;
+        $obj['messagingProfileID'] = $messagingProfileID;
 
-        null !== $campaignId && $obj['campaignId'] = $campaignId;
-        null !== $tcrCampaignId && $obj['tcrCampaignId'] = $tcrCampaignId;
+        null !== $campaignID && $obj['campaignID'] = $campaignID;
+        null !== $tcrCampaignID && $obj['tcrCampaignID'] = $tcrCampaignID;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class PhoneNumberAssignmentByProfileAssignParams implements BaseModel
     public function withMessagingProfileID(string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj['messagingProfileId'] = $messagingProfileID;
+        $obj['messagingProfileID'] = $messagingProfileID;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class PhoneNumberAssignmentByProfileAssignParams implements BaseModel
     public function withCampaignID(string $campaignID): self
     {
         $obj = clone $this;
-        $obj['campaignId'] = $campaignID;
+        $obj['campaignID'] = $campaignID;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class PhoneNumberAssignmentByProfileAssignParams implements BaseModel
     public function withTcrCampaignID(string $tcrCampaignID): self
     {
         $obj = clone $this;
-        $obj['tcrCampaignId'] = $tcrCampaignID;
+        $obj['tcrCampaignID'] = $tcrCampaignID;
 
         return $obj;
     }

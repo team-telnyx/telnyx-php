@@ -9,9 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type FoundShape = array{
- *   id?: string|null, number_val_e164?: string|null
- * }
+ * @phpstan-type FoundShape = array{id?: string|null, numberValE164?: string|null}
  */
 final class Found implements BaseModel
 {
@@ -27,8 +25,8 @@ final class Found implements BaseModel
     /**
      * The phone number in E.164 format.
      */
-    #[Optional]
-    public ?string $number_val_e164;
+    #[Optional('number_val_e164')]
+    public ?string $numberValE164;
 
     public function __construct()
     {
@@ -42,12 +40,12 @@ final class Found implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $number_val_e164 = null
+        ?string $numberValE164 = null
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $number_val_e164 && $obj['number_val_e164'] = $number_val_e164;
+        null !== $numberValE164 && $obj['numberValE164'] = $numberValE164;
 
         return $obj;
     }
@@ -69,7 +67,7 @@ final class Found implements BaseModel
     public function withNumberValE164(string $numberValE164): self
     {
         $obj = clone $this;
-        $obj['number_val_e164'] = $numberValE164;
+        $obj['numberValE164'] = $numberValE164;
 
         return $obj;
     }

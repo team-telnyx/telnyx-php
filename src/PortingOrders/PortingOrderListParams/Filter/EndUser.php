@@ -31,7 +31,7 @@ final class EndUser implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Admin|array{
-     *   auth_person_name?: string|null, entity_name?: string|null
+     *   authPersonName?: string|null, entityName?: string|null
      * } $admin
      */
     public static function with(Admin|array|null $admin = null): self
@@ -45,7 +45,7 @@ final class EndUser implements BaseModel
 
     /**
      * @param Admin|array{
-     *   auth_person_name?: string|null, entity_name?: string|null
+     *   authPersonName?: string|null, entityName?: string|null
      * } $admin
      */
     public function withAdmin(Admin|array $admin): self

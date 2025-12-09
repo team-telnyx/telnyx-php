@@ -61,10 +61,10 @@ final class EmbeddingsService implements EmbeddingsContract
      * `article_url` and `heading`. These values will be returned by the `/v2/ai/embeddings/similarity-search` endpoint in the `loader_metadata` field.
      *
      * @param array{
-     *   bucket_name: string,
-     *   document_chunk_overlap_size?: int,
-     *   document_chunk_size?: int,
-     *   embedding_model?: 'thenlper/gte-large'|'intfloat/multilingual-e5-large'|EmbeddingModel,
+     *   bucketName: string,
+     *   documentChunkOverlapSize?: int,
+     *   documentChunkSize?: int,
+     *   embeddingModel?: 'thenlper/gte-large'|'intfloat/multilingual-e5-large'|EmbeddingModel,
      *   loader?: 'default'|'intercom'|Loader,
      * }|EmbeddingCreateParams $params
      *
@@ -162,7 +162,7 @@ final class EmbeddingsService implements EmbeddingsContract
      * `loader_metadata` field.
      *
      * @param array{
-     *   bucket_name: string, query: string, num_of_docs?: int
+     *   bucketName: string, query: string, numOfDocs?: int
      * }|EmbeddingSimilaritySearchParams $params
      *
      * @throws APIException
@@ -193,7 +193,7 @@ final class EmbeddingsService implements EmbeddingsContract
      *
      * Embed website content from a specified URL, including child pages up to 5 levels deep within the same domain. The process crawls and loads content from the main URL and its linked pages into a Telnyx Cloud Storage bucket. As soon as each webpage is added to the bucket, its content is immediately processed for embeddings, that can be used for [similarity search](https://developers.telnyx.com/api/inference/inference-embedding/post-embedding-similarity-search) and [clustering](https://developers.telnyx.com/docs/inference/clusters).
      *
-     * @param array{bucket_name: string, url: string}|EmbeddingURLParams $params
+     * @param array{bucketName: string, url: string}|EmbeddingURLParams $params
      *
      * @throws APIException
      */

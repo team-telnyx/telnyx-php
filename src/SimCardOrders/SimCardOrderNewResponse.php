@@ -35,13 +35,13 @@ final class SimCardOrderNewResponse implements BaseModel
      * @param SimCardOrder|array{
      *   id?: string|null,
      *   cost?: Cost|null,
-     *   created_at?: string|null,
-     *   order_address?: OrderAddress|null,
+     *   createdAt?: string|null,
+     *   orderAddress?: OrderAddress|null,
      *   quantity?: int|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      *   status?: value-of<Status>|null,
-     *   tracking_url?: string|null,
-     *   updated_at?: string|null,
+     *   trackingURL?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public static function with(SimCardOrder|array|null $data = null): self
@@ -57,13 +57,13 @@ final class SimCardOrderNewResponse implements BaseModel
      * @param SimCardOrder|array{
      *   id?: string|null,
      *   cost?: Cost|null,
-     *   created_at?: string|null,
-     *   order_address?: OrderAddress|null,
+     *   createdAt?: string|null,
+     *   orderAddress?: OrderAddress|null,
      *   quantity?: int|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      *   status?: value-of<Status>|null,
-     *   tracking_url?: string|null,
-     *   updated_at?: string|null,
+     *   trackingURL?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public function withData(SimCardOrder|array $data): self

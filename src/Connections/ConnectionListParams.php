@@ -20,9 +20,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type ConnectionListParamsShape = array{
  *   filter?: Filter|array{
- *     connection_name?: ConnectionName|null,
+ *     connectionName?: ConnectionName|null,
  *     fqdn?: string|null,
- *     outbound_voice_profile_id?: string|null,
+ *     outboundVoiceProfileID?: string|null,
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
  *   sort?: Sort|value-of<Sort>,
@@ -76,9 +76,9 @@ final class ConnectionListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   connection_name?: ConnectionName|null,
+     *   connectionName?: ConnectionName|null,
      *   fqdn?: string|null,
-     *   outbound_voice_profile_id?: string|null,
+     *   outboundVoiceProfileID?: string|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      * @param Sort|value-of<Sort> $sort
@@ -101,9 +101,9 @@ final class ConnectionListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[connection_name], filter[fqdn], filter[outbound_voice_profile_id], filter[outbound.outbound_voice_profile_id].
      *
      * @param Filter|array{
-     *   connection_name?: ConnectionName|null,
+     *   connectionName?: ConnectionName|null,
      *   fqdn?: string|null,
-     *   outbound_voice_profile_id?: string|null,
+     *   outboundVoiceProfileID?: string|null,
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

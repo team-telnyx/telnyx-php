@@ -14,10 +14,10 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type InsightTemplateShape = array{
  *   id: string,
- *   created_at: \DateTimeInterface,
+ *   createdAt: \DateTimeInterface,
  *   instructions: string,
- *   insight_type?: value-of<InsightType>|null,
- *   json_schema?: mixed|string|null,
+ *   insightType?: value-of<InsightType>|null,
+ *   jsonSchema?: mixed|string|null,
  *   name?: string|null,
  *   webhook?: string|null,
  * }
@@ -30,23 +30,23 @@ final class InsightTemplate implements BaseModel
     #[Required]
     public string $id;
 
-    #[Required]
-    public \DateTimeInterface $created_at;
+    #[Required('created_at')]
+    public \DateTimeInterface $createdAt;
 
     #[Required]
     public string $instructions;
 
-    /** @var value-of<InsightType>|null $insight_type */
-    #[Optional(enum: InsightType::class)]
-    public ?string $insight_type;
+    /** @var value-of<InsightType>|null $insightType */
+    #[Optional('insight_type', enum: InsightType::class)]
+    public ?string $insightType;
 
     /**
      * If specified, the output will follow the JSON schema.
      *
-     * @var mixed|string|null $json_schema
+     * @var mixed|string|null $jsonSchema
      */
-    #[Optional(union: JsonSchema::class)]
-    public mixed $json_schema;
+    #[Optional('json_schema', union: JsonSchema::class)]
+    public mixed $jsonSchema;
 
     #[Optional]
     public ?string $name;
@@ -59,7 +59,7 @@ final class InsightTemplate implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * InsightTemplate::with(id: ..., created_at: ..., instructions: ...)
+     * InsightTemplate::with(id: ..., createdAt: ..., instructions: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -78,26 +78,26 @@ final class InsightTemplate implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param InsightType|value-of<InsightType> $insight_type
-     * @param mixed|string $json_schema
+     * @param InsightType|value-of<InsightType> $insightType
+     * @param mixed|string $jsonSchema
      */
     public static function with(
         string $id,
-        \DateTimeInterface $created_at,
+        \DateTimeInterface $createdAt,
         string $instructions,
-        InsightType|string|null $insight_type = null,
-        mixed $json_schema = null,
+        InsightType|string|null $insightType = null,
+        mixed $jsonSchema = null,
         ?string $name = null,
         ?string $webhook = null,
     ): self {
         $obj = new self;
 
         $obj['id'] = $id;
-        $obj['created_at'] = $created_at;
+        $obj['createdAt'] = $createdAt;
         $obj['instructions'] = $instructions;
 
-        null !== $insight_type && $obj['insight_type'] = $insight_type;
-        null !== $json_schema && $obj['json_schema'] = $json_schema;
+        null !== $insightType && $obj['insightType'] = $insightType;
+        null !== $jsonSchema && $obj['jsonSchema'] = $jsonSchema;
         null !== $name && $obj['name'] = $name;
         null !== $webhook && $obj['webhook'] = $webhook;
 
@@ -115,7 +115,7 @@ final class InsightTemplate implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -134,7 +134,7 @@ final class InsightTemplate implements BaseModel
     public function withInsightType(InsightType|string $insightType): self
     {
         $obj = clone $this;
-        $obj['insight_type'] = $insightType;
+        $obj['insightType'] = $insightType;
 
         return $obj;
     }
@@ -147,7 +147,7 @@ final class InsightTemplate implements BaseModel
     public function withJsonSchema(mixed $jsonSchema): self
     {
         $obj = clone $this;
-        $obj['json_schema'] = $jsonSchema;
+        $obj['jsonSchema'] = $jsonSchema;
 
         return $obj;
     }

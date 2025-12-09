@@ -19,8 +19,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *   name: string,
  *   type: string,
  *   url: string,
- *   allowed_tools?: list<string>|null,
- *   api_key_ref?: string|null,
+ *   allowedTools?: list<string>|null,
+ *   apiKeyRef?: string|null,
  * }
  */
 final class McpServerCreateParams implements BaseModel
@@ -38,12 +38,12 @@ final class McpServerCreateParams implements BaseModel
     #[Required]
     public string $url;
 
-    /** @var list<string>|null $allowed_tools */
-    #[Optional(list: 'string', nullable: true)]
-    public ?array $allowed_tools;
+    /** @var list<string>|null $allowedTools */
+    #[Optional('allowed_tools', list: 'string', nullable: true)]
+    public ?array $allowedTools;
 
-    #[Optional(nullable: true)]
-    public ?string $api_key_ref;
+    #[Optional('api_key_ref', nullable: true)]
+    public ?string $apiKeyRef;
 
     /**
      * `new McpServerCreateParams()` is missing required properties by the API.
@@ -69,14 +69,14 @@ final class McpServerCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string>|null $allowed_tools
+     * @param list<string>|null $allowedTools
      */
     public static function with(
         string $name,
         string $type,
         string $url,
-        ?array $allowed_tools = null,
-        ?string $api_key_ref = null,
+        ?array $allowedTools = null,
+        ?string $apiKeyRef = null,
     ): self {
         $obj = new self;
 
@@ -84,8 +84,8 @@ final class McpServerCreateParams implements BaseModel
         $obj['type'] = $type;
         $obj['url'] = $url;
 
-        null !== $allowed_tools && $obj['allowed_tools'] = $allowed_tools;
-        null !== $api_key_ref && $obj['api_key_ref'] = $api_key_ref;
+        null !== $allowedTools && $obj['allowedTools'] = $allowedTools;
+        null !== $apiKeyRef && $obj['apiKeyRef'] = $apiKeyRef;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class McpServerCreateParams implements BaseModel
     public function withAllowedTools(?array $allowedTools): self
     {
         $obj = clone $this;
-        $obj['allowed_tools'] = $allowedTools;
+        $obj['allowedTools'] = $allowedTools;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class McpServerCreateParams implements BaseModel
     public function withAPIKeyRef(?string $apiKeyRef): self
     {
         $obj = clone $this;
-        $obj['api_key_ref'] = $apiKeyRef;
+        $obj['apiKeyRef'] = $apiKeyRef;
 
         return $obj;
     }

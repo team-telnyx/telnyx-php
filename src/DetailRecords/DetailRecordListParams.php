@@ -20,7 +20,7 @@ use Telnyx\DetailRecords\DetailRecordListParams\Page;
  *
  * @phpstan-type DetailRecordListParamsShape = array{
  *   filter?: Filter|array{
- *     record_type: value-of<RecordType>, date_range?: value-of<DateRange>|null
+ *     recordType: value-of<RecordType>, dateRange?: value-of<DateRange>|null
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
  *   sort?: list<string>,
@@ -63,7 +63,7 @@ final class DetailRecordListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   record_type: value-of<RecordType>, date_range?: value-of<DateRange>|null
+     *   recordType: value-of<RecordType>, dateRange?: value-of<DateRange>|null
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      * @param list<string> $sort
@@ -86,7 +86,7 @@ final class DetailRecordListParams implements BaseModel
      * Filter records on a given record attribute and value. <br/>Example: filter[status]=delivered. <br/>Required: filter[record_type] must be specified.
      *
      * @param Filter|array{
-     *   record_type: value-of<RecordType>, date_range?: value-of<DateRange>|null
+     *   recordType: value-of<RecordType>, dateRange?: value-of<DateRange>|null
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

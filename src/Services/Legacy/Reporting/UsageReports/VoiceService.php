@@ -7,6 +7,7 @@ namespace Telnyx\Services\Legacy\Reporting\UsageReports;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceCreateParams;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceDeleteResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceGetResponse;
@@ -29,13 +30,13 @@ final class VoiceService implements VoiceContract
      * Creates a new legacy usage V2 CDR report request with the specified filters
      *
      * @param array{
-     *   end_time: string|\DateTimeInterface,
-     *   start_time: string|\DateTimeInterface,
-     *   aggregation_type?: int,
+     *   endTime: string|\DateTimeInterface,
+     *   startTime: string|\DateTimeInterface,
+     *   aggregationType?: int,
      *   connections?: list<int>,
-     *   managed_accounts?: list<string>,
-     *   product_breakdown?: int,
-     *   select_all_managed_accounts?: bool,
+     *   managedAccounts?: list<string>,
+     *   productBreakdown?: int,
+     *   selectAllManagedAccounts?: bool,
      * }|VoiceCreateParams $params
      *
      * @throws APIException
@@ -89,7 +90,7 @@ final class VoiceService implements VoiceContract
      *
      * Fetch all previous requests for cdr usage reports.
      *
-     * @param array{page?: int, per_page?: int}|VoiceListParams $params
+     * @param array{page?: int, perPage?: int}|VoiceListParams $params
      *
      * @throws APIException
      */
@@ -106,7 +107,7 @@ final class VoiceService implements VoiceContract
         $response = $this->client->request(
             method: 'get',
             path: 'legacy/reporting/usage_reports/voice',
-            query: $parsed,
+            query: Util::array_transform_keys($parsed, ['perPage' => 'per_page']),
             options: $options,
             convert: VoiceListResponse::class,
         );

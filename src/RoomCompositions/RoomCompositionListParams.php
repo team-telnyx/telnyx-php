@@ -20,8 +20,8 @@ use Telnyx\RoomCompositions\RoomCompositionListParams\Page;
  *
  * @phpstan-type RoomCompositionListParamsShape = array{
  *   filter?: Filter|array{
- *     date_created_at?: DateCreatedAt|null,
- *     session_id?: string|null,
+ *     dateCreatedAt?: DateCreatedAt|null,
+ *     sessionID?: string|null,
  *     status?: value-of<Status>|null,
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
@@ -56,8 +56,8 @@ final class RoomCompositionListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   date_created_at?: DateCreatedAt|null,
-     *   session_id?: string|null,
+     *   dateCreatedAt?: DateCreatedAt|null,
+     *   sessionID?: string|null,
      *   status?: value-of<Status>|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
@@ -78,8 +78,8 @@ final class RoomCompositionListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[session_id], filter[status].
      *
      * @param Filter|array{
-     *   date_created_at?: DateCreatedAt|null,
-     *   session_id?: string|null,
+     *   dateCreatedAt?: DateCreatedAt|null,
+     *   sessionID?: string|null,
      *   status?: value-of<Status>|null,
      * } $filter
      */

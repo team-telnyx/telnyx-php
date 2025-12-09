@@ -13,8 +13,8 @@ use Telnyx\CustomStorageCredentials\S3ConfigurationData\Backend;
 /**
  * @phpstan-type S3ConfigurationDataShape = array{
  *   backend: value-of<Backend>,
- *   aws_access_key_id?: string|null,
- *   aws_secret_access_key?: string|null,
+ *   awsAccessKeyID?: string|null,
+ *   awsSecretAccessKey?: string|null,
  *   bucket?: string|null,
  *   region?: string|null,
  * }
@@ -35,14 +35,14 @@ final class S3ConfigurationData implements BaseModel
     /**
      * AWS credentials access key id.
      */
-    #[Optional]
-    public ?string $aws_access_key_id;
+    #[Optional('aws_access_key_id')]
+    public ?string $awsAccessKeyID;
 
     /**
      * AWS secret access key.
      */
-    #[Optional]
-    public ?string $aws_secret_access_key;
+    #[Optional('aws_secret_access_key')]
+    public ?string $awsSecretAccessKey;
 
     /**
      * Name of the bucket to be used to store recording files.
@@ -84,8 +84,8 @@ final class S3ConfigurationData implements BaseModel
      */
     public static function with(
         Backend|string $backend,
-        ?string $aws_access_key_id = null,
-        ?string $aws_secret_access_key = null,
+        ?string $awsAccessKeyID = null,
+        ?string $awsSecretAccessKey = null,
         ?string $bucket = null,
         ?string $region = null,
     ): self {
@@ -93,8 +93,8 @@ final class S3ConfigurationData implements BaseModel
 
         $obj['backend'] = $backend;
 
-        null !== $aws_access_key_id && $obj['aws_access_key_id'] = $aws_access_key_id;
-        null !== $aws_secret_access_key && $obj['aws_secret_access_key'] = $aws_secret_access_key;
+        null !== $awsAccessKeyID && $obj['awsAccessKeyID'] = $awsAccessKeyID;
+        null !== $awsSecretAccessKey && $obj['awsSecretAccessKey'] = $awsSecretAccessKey;
         null !== $bucket && $obj['bucket'] = $bucket;
         null !== $region && $obj['region'] = $region;
 
@@ -120,7 +120,7 @@ final class S3ConfigurationData implements BaseModel
     public function withAwsAccessKeyID(string $awsAccessKeyID): self
     {
         $obj = clone $this;
-        $obj['aws_access_key_id'] = $awsAccessKeyID;
+        $obj['awsAccessKeyID'] = $awsAccessKeyID;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class S3ConfigurationData implements BaseModel
     public function withAwsSecretAccessKey(string $awsSecretAccessKey): self
     {
         $obj = clone $this;
-        $obj['aws_secret_access_key'] = $awsSecretAccessKey;
+        $obj['awsSecretAccessKey'] = $awsSecretAccessKey;
 
         return $obj;
     }

@@ -44,22 +44,22 @@ final class JobListResponse implements BaseModel
      *
      * @param list<PhoneNumbersJob|array{
      *   id?: string|null,
-     *   created_at?: string|null,
+     *   createdAt?: string|null,
      *   etc?: \DateTimeInterface|null,
-     *   failed_operations?: list<FailedOperation>|null,
-     *   pending_operations?: list<PendingOperation>|null,
-     *   phone_numbers?: list<PhoneNumber>|null,
-     *   record_type?: string|null,
+     *   failedOperations?: list<FailedOperation>|null,
+     *   pendingOperations?: list<PendingOperation>|null,
+     *   phoneNumbers?: list<PhoneNumber>|null,
+     *   recordType?: string|null,
      *   status?: value-of<Status>|null,
-     *   successful_operations?: list<SuccessfulOperation>|null,
+     *   successfulOperations?: list<SuccessfulOperation>|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -77,16 +77,16 @@ final class JobListResponse implements BaseModel
     /**
      * @param list<PhoneNumbersJob|array{
      *   id?: string|null,
-     *   created_at?: string|null,
+     *   createdAt?: string|null,
      *   etc?: \DateTimeInterface|null,
-     *   failed_operations?: list<FailedOperation>|null,
-     *   pending_operations?: list<PendingOperation>|null,
-     *   phone_numbers?: list<PhoneNumber>|null,
-     *   record_type?: string|null,
+     *   failedOperations?: list<FailedOperation>|null,
+     *   pendingOperations?: list<PendingOperation>|null,
+     *   phoneNumbers?: list<PhoneNumber>|null,
+     *   recordType?: string|null,
      *   status?: value-of<Status>|null,
-     *   successful_operations?: list<SuccessfulOperation>|null,
+     *   successfulOperations?: list<SuccessfulOperation>|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -99,10 +99,10 @@ final class JobListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

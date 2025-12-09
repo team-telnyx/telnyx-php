@@ -11,9 +11,9 @@ use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonResponse\Status;
 
 /**
  * @phpstan-type StreamStreamingSidJsonResponseShape = array{
- *   account_sid?: string|null,
- *   call_sid?: string|null,
- *   date_updated?: \DateTimeInterface|null,
+ *   accountSid?: string|null,
+ *   callSid?: string|null,
+ *   dateUpdated?: \DateTimeInterface|null,
  *   sid?: string|null,
  *   status?: value-of<Status>|null,
  *   uri?: string|null,
@@ -24,14 +24,14 @@ final class StreamStreamingSidJsonResponse implements BaseModel
     /** @use SdkModel<StreamStreamingSidJsonResponseShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?string $account_sid;
+    #[Optional('account_sid')]
+    public ?string $accountSid;
 
-    #[Optional]
-    public ?string $call_sid;
+    #[Optional('call_sid')]
+    public ?string $callSid;
 
-    #[Optional]
-    public ?\DateTimeInterface $date_updated;
+    #[Optional('date_updated')]
+    public ?\DateTimeInterface $dateUpdated;
 
     /**
      * Identifier of a resource.
@@ -66,18 +66,18 @@ final class StreamStreamingSidJsonResponse implements BaseModel
      * @param Status|value-of<Status> $status
      */
     public static function with(
-        ?string $account_sid = null,
-        ?string $call_sid = null,
-        ?\DateTimeInterface $date_updated = null,
+        ?string $accountSid = null,
+        ?string $callSid = null,
+        ?\DateTimeInterface $dateUpdated = null,
         ?string $sid = null,
         Status|string|null $status = null,
         ?string $uri = null,
     ): self {
         $obj = new self;
 
-        null !== $account_sid && $obj['account_sid'] = $account_sid;
-        null !== $call_sid && $obj['call_sid'] = $call_sid;
-        null !== $date_updated && $obj['date_updated'] = $date_updated;
+        null !== $accountSid && $obj['accountSid'] = $accountSid;
+        null !== $callSid && $obj['callSid'] = $callSid;
+        null !== $dateUpdated && $obj['dateUpdated'] = $dateUpdated;
         null !== $sid && $obj['sid'] = $sid;
         null !== $status && $obj['status'] = $status;
         null !== $uri && $obj['uri'] = $uri;
@@ -88,7 +88,7 @@ final class StreamStreamingSidJsonResponse implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj['account_sid'] = $accountSid;
+        $obj['accountSid'] = $accountSid;
 
         return $obj;
     }
@@ -96,7 +96,7 @@ final class StreamStreamingSidJsonResponse implements BaseModel
     public function withCallSid(string $callSid): self
     {
         $obj = clone $this;
-        $obj['call_sid'] = $callSid;
+        $obj['callSid'] = $callSid;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class StreamStreamingSidJsonResponse implements BaseModel
     public function withDateUpdated(\DateTimeInterface $dateUpdated): self
     {
         $obj = clone $this;
-        $obj['date_updated'] = $dateUpdated;
+        $obj['dateUpdated'] = $dateUpdated;
 
         return $obj;
     }

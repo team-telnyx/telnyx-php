@@ -10,9 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   message_id?: string|null,
- *   record_type?: string|null,
- *   time_clicked?: \DateTimeInterface|null,
+ *   messageID?: string|null,
+ *   recordType?: string|null,
+ *   timeClicked?: \DateTimeInterface|null,
  *   to?: string|null,
  *   url?: string|null,
  * }
@@ -25,20 +25,20 @@ final class Data implements BaseModel
     /**
      * The message ID associated with the clicked link.
      */
-    #[Optional]
-    public ?string $message_id;
+    #[Optional('message_id')]
+    public ?string $messageID;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * ISO 8601 formatted date indicating when the message request was received.
      */
-    #[Optional]
-    public ?\DateTimeInterface $time_clicked;
+    #[Optional('time_clicked')]
+    public ?\DateTimeInterface $timeClicked;
 
     /**
      * Sending address (+E.164 formatted phone number, alphanumeric sender ID, or short code).
@@ -63,17 +63,17 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $message_id = null,
-        ?string $record_type = null,
-        ?\DateTimeInterface $time_clicked = null,
+        ?string $messageID = null,
+        ?string $recordType = null,
+        ?\DateTimeInterface $timeClicked = null,
         ?string $to = null,
         ?string $url = null,
     ): self {
         $obj = new self;
 
-        null !== $message_id && $obj['message_id'] = $message_id;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $time_clicked && $obj['time_clicked'] = $time_clicked;
+        null !== $messageID && $obj['messageID'] = $messageID;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $timeClicked && $obj['timeClicked'] = $timeClicked;
         null !== $to && $obj['to'] = $to;
         null !== $url && $obj['url'] = $url;
 
@@ -86,7 +86,7 @@ final class Data implements BaseModel
     public function withMessageID(string $messageID): self
     {
         $obj = clone $this;
-        $obj['message_id'] = $messageID;
+        $obj['messageID'] = $messageID;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class Data implements BaseModel
     public function withTimeClicked(\DateTimeInterface $timeClicked): self
     {
         $obj = clone $this;
-        $obj['time_clicked'] = $timeClicked;
+        $obj['timeClicked'] = $timeClicked;
 
         return $obj;
     }

@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\VerificationsService::triggerFlashcall()
  *
  * @phpstan-type VerificationTriggerFlashcallParamsShape = array{
- *   phone_number: string, verify_profile_id: string, timeout_secs?: int
+ *   phoneNumber: string, verifyProfileID: string, timeoutSecs?: int
  * }
  */
 final class VerificationTriggerFlashcallParams implements BaseModel
@@ -28,29 +28,27 @@ final class VerificationTriggerFlashcallParams implements BaseModel
     /**
      * +E164 formatted phone number.
      */
-    #[Required]
-    public string $phone_number;
+    #[Required('phone_number')]
+    public string $phoneNumber;
 
     /**
      * The identifier of the associated Verify profile.
      */
-    #[Required]
-    public string $verify_profile_id;
+    #[Required('verify_profile_id')]
+    public string $verifyProfileID;
 
     /**
      * The number of seconds the verification code is valid for.
      */
-    #[Optional]
-    public ?int $timeout_secs;
+    #[Optional('timeout_secs')]
+    public ?int $timeoutSecs;
 
     /**
      * `new VerificationTriggerFlashcallParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * VerificationTriggerFlashcallParams::with(
-     *   phone_number: ..., verify_profile_id: ...
-     * )
+     * VerificationTriggerFlashcallParams::with(phoneNumber: ..., verifyProfileID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -72,16 +70,16 @@ final class VerificationTriggerFlashcallParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $phone_number,
-        string $verify_profile_id,
-        ?int $timeout_secs = null
+        string $phoneNumber,
+        string $verifyProfileID,
+        ?int $timeoutSecs = null
     ): self {
         $obj = new self;
 
-        $obj['phone_number'] = $phone_number;
-        $obj['verify_profile_id'] = $verify_profile_id;
+        $obj['phoneNumber'] = $phoneNumber;
+        $obj['verifyProfileID'] = $verifyProfileID;
 
-        null !== $timeout_secs && $obj['timeout_secs'] = $timeout_secs;
+        null !== $timeoutSecs && $obj['timeoutSecs'] = $timeoutSecs;
 
         return $obj;
     }
@@ -92,7 +90,7 @@ final class VerificationTriggerFlashcallParams implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -103,7 +101,7 @@ final class VerificationTriggerFlashcallParams implements BaseModel
     public function withVerifyProfileID(string $verifyProfileID): self
     {
         $obj = clone $this;
-        $obj['verify_profile_id'] = $verifyProfileID;
+        $obj['verifyProfileID'] = $verifyProfileID;
 
         return $obj;
     }
@@ -114,7 +112,7 @@ final class VerificationTriggerFlashcallParams implements BaseModel
     public function withTimeoutSecs(int $timeoutSecs): self
     {
         $obj = clone $this;
-        $obj['timeout_secs'] = $timeoutSecs;
+        $obj['timeoutSecs'] = $timeoutSecs;
 
         return $obj;
     }

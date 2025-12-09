@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The logo of the LOA configuration.
  *
- * @phpstan-type LogoShape = array{document_id: string}
+ * @phpstan-type LogoShape = array{documentID: string}
  */
 final class Logo implements BaseModel
 {
@@ -21,15 +21,15 @@ final class Logo implements BaseModel
     /**
      * The document identification.
      */
-    #[Required]
-    public string $document_id;
+    #[Required('document_id')]
+    public string $documentID;
 
     /**
      * `new Logo()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Logo::with(document_id: ...)
+     * Logo::with(documentID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -48,11 +48,11 @@ final class Logo implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $document_id): self
+    public static function with(string $documentID): self
     {
         $obj = new self;
 
-        $obj['document_id'] = $document_id;
+        $obj['documentID'] = $documentID;
 
         return $obj;
     }
@@ -63,7 +63,7 @@ final class Logo implements BaseModel
     public function withDocumentID(string $documentID): self
     {
         $obj = clone $this;
-        $obj['document_id'] = $documentID;
+        $obj['documentID'] = $documentID;
 
         return $obj;
     }

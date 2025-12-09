@@ -34,14 +34,14 @@ final class NumberLookupGetResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Data|array{
-     *   caller_name?: CallerName|null,
+     *   callerName?: CallerName|null,
      *   carrier?: Carrier|null,
-     *   country_code?: string|null,
+     *   countryCode?: string|null,
      *   fraud?: string|null,
-     *   national_format?: string|null,
-     *   phone_number?: string|null,
+     *   nationalFormat?: string|null,
+     *   phoneNumber?: string|null,
      *   portability?: Portability|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -55,14 +55,14 @@ final class NumberLookupGetResponse implements BaseModel
 
     /**
      * @param Data|array{
-     *   caller_name?: CallerName|null,
+     *   callerName?: CallerName|null,
      *   carrier?: Carrier|null,
-     *   country_code?: string|null,
+     *   countryCode?: string|null,
      *   fraud?: string|null,
-     *   national_format?: string|null,
-     *   phone_number?: string|null,
+     *   nationalFormat?: string|null,
+     *   phoneNumber?: string|null,
      *   portability?: Portability|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      * } $data
      */
     public function withData(Data|array $data): self

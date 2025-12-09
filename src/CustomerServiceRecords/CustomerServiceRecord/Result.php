@@ -16,8 +16,8 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Result\Admin;
  * @phpstan-type ResultShape = array{
  *   address?: Address|null,
  *   admin?: Admin|null,
- *   associated_phone_numbers?: list<string>|null,
- *   carrier_name?: string|null,
+ *   associatedPhoneNumbers?: list<string>|null,
+ *   carrierName?: string|null,
  * }
  */
 final class Result implements BaseModel
@@ -40,16 +40,16 @@ final class Result implements BaseModel
     /**
      * The associated phone numbers of the customer service record.
      *
-     * @var list<string>|null $associated_phone_numbers
+     * @var list<string>|null $associatedPhoneNumbers
      */
-    #[Optional(list: 'string')]
-    public ?array $associated_phone_numbers;
+    #[Optional('associated_phone_numbers', list: 'string')]
+    public ?array $associatedPhoneNumbers;
 
     /**
      * The name of the carrier that the customer service record is for.
      */
-    #[Optional]
-    public ?string $carrier_name;
+    #[Optional('carrier_name')]
+    public ?string $carrierName;
 
     public function __construct()
     {
@@ -62,32 +62,32 @@ final class Result implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Address|array{
-     *   administrative_area?: string|null,
-     *   full_address?: string|null,
+     *   administrativeArea?: string|null,
+     *   fullAddress?: string|null,
      *   locality?: string|null,
-     *   postal_code?: string|null,
-     *   street_address?: string|null,
+     *   postalCode?: string|null,
+     *   streetAddress?: string|null,
      * } $address
      * @param Admin|array{
-     *   account_number?: string|null,
-     *   authorized_person_name?: string|null,
-     *   billing_phone_number?: string|null,
+     *   accountNumber?: string|null,
+     *   authorizedPersonName?: string|null,
+     *   billingPhoneNumber?: string|null,
      *   name?: string|null,
      * } $admin
-     * @param list<string> $associated_phone_numbers
+     * @param list<string> $associatedPhoneNumbers
      */
     public static function with(
         Address|array|null $address = null,
         Admin|array|null $admin = null,
-        ?array $associated_phone_numbers = null,
-        ?string $carrier_name = null,
+        ?array $associatedPhoneNumbers = null,
+        ?string $carrierName = null,
     ): self {
         $obj = new self;
 
         null !== $address && $obj['address'] = $address;
         null !== $admin && $obj['admin'] = $admin;
-        null !== $associated_phone_numbers && $obj['associated_phone_numbers'] = $associated_phone_numbers;
-        null !== $carrier_name && $obj['carrier_name'] = $carrier_name;
+        null !== $associatedPhoneNumbers && $obj['associatedPhoneNumbers'] = $associatedPhoneNumbers;
+        null !== $carrierName && $obj['carrierName'] = $carrierName;
 
         return $obj;
     }
@@ -96,11 +96,11 @@ final class Result implements BaseModel
      * The address of the customer service record.
      *
      * @param Address|array{
-     *   administrative_area?: string|null,
-     *   full_address?: string|null,
+     *   administrativeArea?: string|null,
+     *   fullAddress?: string|null,
      *   locality?: string|null,
-     *   postal_code?: string|null,
-     *   street_address?: string|null,
+     *   postalCode?: string|null,
+     *   streetAddress?: string|null,
      * } $address
      */
     public function withAddress(Address|array $address): self
@@ -115,9 +115,9 @@ final class Result implements BaseModel
      * The admin of the customer service record.
      *
      * @param Admin|array{
-     *   account_number?: string|null,
-     *   authorized_person_name?: string|null,
-     *   billing_phone_number?: string|null,
+     *   accountNumber?: string|null,
+     *   authorizedPersonName?: string|null,
+     *   billingPhoneNumber?: string|null,
      *   name?: string|null,
      * } $admin
      */
@@ -138,7 +138,7 @@ final class Result implements BaseModel
         array $associatedPhoneNumbers
     ): self {
         $obj = clone $this;
-        $obj['associated_phone_numbers'] = $associatedPhoneNumbers;
+        $obj['associatedPhoneNumbers'] = $associatedPhoneNumbers;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class Result implements BaseModel
     public function withCarrierName(string $carrierName): self
     {
         $obj = clone $this;
-        $obj['carrier_name'] = $carrierName;
+        $obj['carrierName'] = $carrierName;
 
         return $obj;
     }

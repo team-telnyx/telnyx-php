@@ -14,15 +14,15 @@ use Telnyx\Webhooks\CallAnsweredWebhookEvent\Data\Payload\State;
 
 /**
  * @phpstan-type PayloadShape = array{
- *   call_control_id?: string|null,
- *   call_leg_id?: string|null,
- *   call_session_id?: string|null,
- *   client_state?: string|null,
- *   connection_id?: string|null,
- *   custom_headers?: list<CustomSipHeader>|null,
+ *   callControlID?: string|null,
+ *   callLegID?: string|null,
+ *   callSessionID?: string|null,
+ *   clientState?: string|null,
+ *   connectionID?: string|null,
+ *   customHeaders?: list<CustomSipHeader>|null,
  *   from?: string|null,
- *   sip_headers?: list<SipHeader>|null,
- *   start_time?: \DateTimeInterface|null,
+ *   sipHeaders?: list<SipHeader>|null,
+ *   startTime?: \DateTimeInterface|null,
  *   state?: value-of<State>|null,
  *   tags?: list<string>|null,
  *   to?: string|null,
@@ -36,40 +36,40 @@ final class Payload implements BaseModel
     /**
      * Call ID used to issue commands via Call Control API.
      */
-    #[Optional]
-    public ?string $call_control_id;
+    #[Optional('call_control_id')]
+    public ?string $callControlID;
 
     /**
      * ID that is unique to the call and can be used to correlate webhook events.
      */
-    #[Optional]
-    public ?string $call_leg_id;
+    #[Optional('call_leg_id')]
+    public ?string $callLegID;
 
     /**
      * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
      */
-    #[Optional]
-    public ?string $call_session_id;
+    #[Optional('call_session_id')]
+    public ?string $callSessionID;
 
     /**
      * State received from a command.
      */
-    #[Optional]
-    public ?string $client_state;
+    #[Optional('client_state')]
+    public ?string $clientState;
 
     /**
      * Call Control App ID (formerly Telnyx connection ID) used in the call.
      */
-    #[Optional]
-    public ?string $connection_id;
+    #[Optional('connection_id')]
+    public ?string $connectionID;
 
     /**
      * Custom headers set on answer command.
      *
-     * @var list<CustomSipHeader>|null $custom_headers
+     * @var list<CustomSipHeader>|null $customHeaders
      */
-    #[Optional(list: CustomSipHeader::class)]
-    public ?array $custom_headers;
+    #[Optional('custom_headers', list: CustomSipHeader::class)]
+    public ?array $customHeaders;
 
     /**
      * Number or SIP URI placing the call.
@@ -80,16 +80,16 @@ final class Payload implements BaseModel
     /**
      * User-to-User and Diversion headers from sip invite.
      *
-     * @var list<SipHeader>|null $sip_headers
+     * @var list<SipHeader>|null $sipHeaders
      */
-    #[Optional(list: SipHeader::class)]
-    public ?array $sip_headers;
+    #[Optional('sip_headers', list: SipHeader::class)]
+    public ?array $sipHeaders;
 
     /**
      * ISO 8601 datetime of when the call started.
      */
-    #[Optional]
-    public ?\DateTimeInterface $start_time;
+    #[Optional('start_time')]
+    public ?\DateTimeInterface $startTime;
 
     /**
      * State received from a command.
@@ -123,36 +123,36 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<CustomSipHeader|array{name: string, value: string}> $custom_headers
-     * @param list<SipHeader|array{name: value-of<Name>, value: string}> $sip_headers
+     * @param list<CustomSipHeader|array{name: string, value: string}> $customHeaders
+     * @param list<SipHeader|array{name: value-of<Name>, value: string}> $sipHeaders
      * @param State|value-of<State> $state
      * @param list<string> $tags
      */
     public static function with(
-        ?string $call_control_id = null,
-        ?string $call_leg_id = null,
-        ?string $call_session_id = null,
-        ?string $client_state = null,
-        ?string $connection_id = null,
-        ?array $custom_headers = null,
+        ?string $callControlID = null,
+        ?string $callLegID = null,
+        ?string $callSessionID = null,
+        ?string $clientState = null,
+        ?string $connectionID = null,
+        ?array $customHeaders = null,
         ?string $from = null,
-        ?array $sip_headers = null,
-        ?\DateTimeInterface $start_time = null,
+        ?array $sipHeaders = null,
+        ?\DateTimeInterface $startTime = null,
         State|string|null $state = null,
         ?array $tags = null,
         ?string $to = null,
     ): self {
         $obj = new self;
 
-        null !== $call_control_id && $obj['call_control_id'] = $call_control_id;
-        null !== $call_leg_id && $obj['call_leg_id'] = $call_leg_id;
-        null !== $call_session_id && $obj['call_session_id'] = $call_session_id;
-        null !== $client_state && $obj['client_state'] = $client_state;
-        null !== $connection_id && $obj['connection_id'] = $connection_id;
-        null !== $custom_headers && $obj['custom_headers'] = $custom_headers;
+        null !== $callControlID && $obj['callControlID'] = $callControlID;
+        null !== $callLegID && $obj['callLegID'] = $callLegID;
+        null !== $callSessionID && $obj['callSessionID'] = $callSessionID;
+        null !== $clientState && $obj['clientState'] = $clientState;
+        null !== $connectionID && $obj['connectionID'] = $connectionID;
+        null !== $customHeaders && $obj['customHeaders'] = $customHeaders;
         null !== $from && $obj['from'] = $from;
-        null !== $sip_headers && $obj['sip_headers'] = $sip_headers;
-        null !== $start_time && $obj['start_time'] = $start_time;
+        null !== $sipHeaders && $obj['sipHeaders'] = $sipHeaders;
+        null !== $startTime && $obj['startTime'] = $startTime;
         null !== $state && $obj['state'] = $state;
         null !== $tags && $obj['tags'] = $tags;
         null !== $to && $obj['to'] = $to;
@@ -166,7 +166,7 @@ final class Payload implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj['call_control_id'] = $callControlID;
+        $obj['callControlID'] = $callControlID;
 
         return $obj;
     }
@@ -177,7 +177,7 @@ final class Payload implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj['call_leg_id'] = $callLegID;
+        $obj['callLegID'] = $callLegID;
 
         return $obj;
     }
@@ -188,7 +188,7 @@ final class Payload implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj['call_session_id'] = $callSessionID;
+        $obj['callSessionID'] = $callSessionID;
 
         return $obj;
     }
@@ -199,7 +199,7 @@ final class Payload implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj['client_state'] = $clientState;
+        $obj['clientState'] = $clientState;
 
         return $obj;
     }
@@ -210,7 +210,7 @@ final class Payload implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj['connection_id'] = $connectionID;
+        $obj['connectionID'] = $connectionID;
 
         return $obj;
     }
@@ -223,7 +223,7 @@ final class Payload implements BaseModel
     public function withCustomHeaders(array $customHeaders): self
     {
         $obj = clone $this;
-        $obj['custom_headers'] = $customHeaders;
+        $obj['customHeaders'] = $customHeaders;
 
         return $obj;
     }
@@ -247,7 +247,7 @@ final class Payload implements BaseModel
     public function withSipHeaders(array $sipHeaders): self
     {
         $obj = clone $this;
-        $obj['sip_headers'] = $sipHeaders;
+        $obj['sipHeaders'] = $sipHeaders;
 
         return $obj;
     }
@@ -258,7 +258,7 @@ final class Payload implements BaseModel
     public function withStartTime(\DateTimeInterface $startTime): self
     {
         $obj = clone $this;
-        $obj['start_time'] = $startTime;
+        $obj['startTime'] = $startTime;
 
         return $obj;
     }

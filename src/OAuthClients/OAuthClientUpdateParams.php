@@ -16,14 +16,14 @@ use Telnyx\OAuthClients\OAuthClientUpdateParams\AllowedGrantType;
  * @see Telnyx\Services\OAuthClientsService::update()
  *
  * @phpstan-type OAuthClientUpdateParamsShape = array{
- *   allowed_grant_types?: list<AllowedGrantType|value-of<AllowedGrantType>>,
- *   allowed_scopes?: list<string>,
- *   logo_uri?: string,
+ *   allowedGrantTypes?: list<AllowedGrantType|value-of<AllowedGrantType>>,
+ *   allowedScopes?: list<string>,
+ *   logoUri?: string,
  *   name?: string,
- *   policy_uri?: string,
- *   redirect_uris?: list<string>,
- *   require_pkce?: bool,
- *   tos_uri?: string,
+ *   policyUri?: string,
+ *   redirectUris?: list<string>,
+ *   requirePkce?: bool,
+ *   tosUri?: string,
  * }
  */
 final class OAuthClientUpdateParams implements BaseModel
@@ -35,24 +35,24 @@ final class OAuthClientUpdateParams implements BaseModel
     /**
      * List of allowed OAuth grant types.
      *
-     * @var list<value-of<AllowedGrantType>>|null $allowed_grant_types
+     * @var list<value-of<AllowedGrantType>>|null $allowedGrantTypes
      */
-    #[Optional(list: AllowedGrantType::class)]
-    public ?array $allowed_grant_types;
+    #[Optional('allowed_grant_types', list: AllowedGrantType::class)]
+    public ?array $allowedGrantTypes;
 
     /**
      * List of allowed OAuth scopes.
      *
-     * @var list<string>|null $allowed_scopes
+     * @var list<string>|null $allowedScopes
      */
-    #[Optional(list: 'string')]
-    public ?array $allowed_scopes;
+    #[Optional('allowed_scopes', list: 'string')]
+    public ?array $allowedScopes;
 
     /**
      * URL of the client logo.
      */
-    #[Optional]
-    public ?string $logo_uri;
+    #[Optional('logo_uri')]
+    public ?string $logoUri;
 
     /**
      * The name of the OAuth client.
@@ -63,28 +63,28 @@ final class OAuthClientUpdateParams implements BaseModel
     /**
      * URL of the client's privacy policy.
      */
-    #[Optional]
-    public ?string $policy_uri;
+    #[Optional('policy_uri')]
+    public ?string $policyUri;
 
     /**
      * List of redirect URIs.
      *
-     * @var list<string>|null $redirect_uris
+     * @var list<string>|null $redirectUris
      */
-    #[Optional(list: 'string')]
-    public ?array $redirect_uris;
+    #[Optional('redirect_uris', list: 'string')]
+    public ?array $redirectUris;
 
     /**
      * Whether PKCE (Proof Key for Code Exchange) is required for this client.
      */
-    #[Optional]
-    public ?bool $require_pkce;
+    #[Optional('require_pkce')]
+    public ?bool $requirePkce;
 
     /**
      * URL of the client's terms of service.
      */
-    #[Optional]
-    public ?string $tos_uri;
+    #[Optional('tos_uri')]
+    public ?string $tosUri;
 
     public function __construct()
     {
@@ -96,30 +96,30 @@ final class OAuthClientUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AllowedGrantType|value-of<AllowedGrantType>> $allowed_grant_types
-     * @param list<string> $allowed_scopes
-     * @param list<string> $redirect_uris
+     * @param list<AllowedGrantType|value-of<AllowedGrantType>> $allowedGrantTypes
+     * @param list<string> $allowedScopes
+     * @param list<string> $redirectUris
      */
     public static function with(
-        ?array $allowed_grant_types = null,
-        ?array $allowed_scopes = null,
-        ?string $logo_uri = null,
+        ?array $allowedGrantTypes = null,
+        ?array $allowedScopes = null,
+        ?string $logoUri = null,
         ?string $name = null,
-        ?string $policy_uri = null,
-        ?array $redirect_uris = null,
-        ?bool $require_pkce = null,
-        ?string $tos_uri = null,
+        ?string $policyUri = null,
+        ?array $redirectUris = null,
+        ?bool $requirePkce = null,
+        ?string $tosUri = null,
     ): self {
         $obj = new self;
 
-        null !== $allowed_grant_types && $obj['allowed_grant_types'] = $allowed_grant_types;
-        null !== $allowed_scopes && $obj['allowed_scopes'] = $allowed_scopes;
-        null !== $logo_uri && $obj['logo_uri'] = $logo_uri;
+        null !== $allowedGrantTypes && $obj['allowedGrantTypes'] = $allowedGrantTypes;
+        null !== $allowedScopes && $obj['allowedScopes'] = $allowedScopes;
+        null !== $logoUri && $obj['logoUri'] = $logoUri;
         null !== $name && $obj['name'] = $name;
-        null !== $policy_uri && $obj['policy_uri'] = $policy_uri;
-        null !== $redirect_uris && $obj['redirect_uris'] = $redirect_uris;
-        null !== $require_pkce && $obj['require_pkce'] = $require_pkce;
-        null !== $tos_uri && $obj['tos_uri'] = $tos_uri;
+        null !== $policyUri && $obj['policyUri'] = $policyUri;
+        null !== $redirectUris && $obj['redirectUris'] = $redirectUris;
+        null !== $requirePkce && $obj['requirePkce'] = $requirePkce;
+        null !== $tosUri && $obj['tosUri'] = $tosUri;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class OAuthClientUpdateParams implements BaseModel
     public function withAllowedGrantTypes(array $allowedGrantTypes): self
     {
         $obj = clone $this;
-        $obj['allowed_grant_types'] = $allowedGrantTypes;
+        $obj['allowedGrantTypes'] = $allowedGrantTypes;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class OAuthClientUpdateParams implements BaseModel
     public function withAllowedScopes(array $allowedScopes): self
     {
         $obj = clone $this;
-        $obj['allowed_scopes'] = $allowedScopes;
+        $obj['allowedScopes'] = $allowedScopes;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class OAuthClientUpdateParams implements BaseModel
     public function withLogoUri(string $logoUri): self
     {
         $obj = clone $this;
-        $obj['logo_uri'] = $logoUri;
+        $obj['logoUri'] = $logoUri;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class OAuthClientUpdateParams implements BaseModel
     public function withPolicyUri(string $policyUri): self
     {
         $obj = clone $this;
-        $obj['policy_uri'] = $policyUri;
+        $obj['policyUri'] = $policyUri;
 
         return $obj;
     }
@@ -191,7 +191,7 @@ final class OAuthClientUpdateParams implements BaseModel
     public function withRedirectUris(array $redirectUris): self
     {
         $obj = clone $this;
-        $obj['redirect_uris'] = $redirectUris;
+        $obj['redirectUris'] = $redirectUris;
 
         return $obj;
     }
@@ -202,7 +202,7 @@ final class OAuthClientUpdateParams implements BaseModel
     public function withRequirePkce(bool $requirePkce): self
     {
         $obj = clone $this;
-        $obj['require_pkce'] = $requirePkce;
+        $obj['requirePkce'] = $requirePkce;
 
         return $obj;
     }
@@ -213,7 +213,7 @@ final class OAuthClientUpdateParams implements BaseModel
     public function withTosUri(string $tosUri): self
     {
         $obj = clone $this;
-        $obj['tos_uri'] = $tosUri;
+        $obj['tosUri'] = $tosUri;
 
         return $obj;
     }

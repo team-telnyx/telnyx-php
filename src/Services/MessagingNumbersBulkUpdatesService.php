@@ -26,7 +26,7 @@ final class MessagingNumbersBulkUpdatesService implements MessagingNumbersBulkUp
      * Update the messaging profile of multiple phone numbers
      *
      * @param array{
-     *   messaging_profile_id: string, numbers: list<string>
+     *   messagingProfileID: string, numbers: list<string>
      * }|MessagingNumbersBulkUpdateCreateParams $params
      *
      * @throws APIException

@@ -11,13 +11,13 @@ use Telnyx\ExternalConnections\PhoneNumbers\ExternalConnectionPhoneNumber\Acquir
 
 /**
  * @phpstan-type ExternalConnectionPhoneNumberShape = array{
- *   acquired_capabilities?: list<value-of<AcquiredCapability>>|null,
- *   civic_address_id?: string|null,
- *   displayed_country_code?: string|null,
- *   location_id?: string|null,
- *   number_id?: string|null,
- *   telephone_number?: string|null,
- *   ticket_id?: string|null,
+ *   acquiredCapabilities?: list<value-of<AcquiredCapability>>|null,
+ *   civicAddressID?: string|null,
+ *   displayedCountryCode?: string|null,
+ *   locationID?: string|null,
+ *   numberID?: string|null,
+ *   telephoneNumber?: string|null,
+ *   ticketID?: string|null,
  * }
  */
 final class ExternalConnectionPhoneNumber implements BaseModel
@@ -25,45 +25,45 @@ final class ExternalConnectionPhoneNumber implements BaseModel
     /** @use SdkModel<ExternalConnectionPhoneNumberShape> */
     use SdkModel;
 
-    /** @var list<value-of<AcquiredCapability>>|null $acquired_capabilities */
-    #[Optional(list: AcquiredCapability::class)]
-    public ?array $acquired_capabilities;
+    /** @var list<value-of<AcquiredCapability>>|null $acquiredCapabilities */
+    #[Optional('acquired_capabilities', list: AcquiredCapability::class)]
+    public ?array $acquiredCapabilities;
 
     /**
      * Identifies the civic address assigned to the phone number.
      */
-    #[Optional]
-    public ?string $civic_address_id;
+    #[Optional('civic_address_id')]
+    public ?string $civicAddressID;
 
     /**
      * The iso country code that will be displayed to the user when they receive a call from this phone number.
      */
-    #[Optional]
-    public ?string $displayed_country_code;
+    #[Optional('displayed_country_code')]
+    public ?string $displayedCountryCode;
 
     /**
      * Identifies the location assigned to the phone number.
      */
-    #[Optional]
-    public ?string $location_id;
+    #[Optional('location_id')]
+    public ?string $locationID;
 
     /**
      * Phone number ID from the Telnyx API.
      */
-    #[Optional]
-    public ?string $number_id;
+    #[Optional('number_id')]
+    public ?string $numberID;
 
     /**
      * Phone number in E164 format.
      */
-    #[Optional]
-    public ?string $telephone_number;
+    #[Optional('telephone_number')]
+    public ?string $telephoneNumber;
 
     /**
      * Uniquely identifies the resource.
      */
-    #[Optional]
-    public ?string $ticket_id;
+    #[Optional('ticket_id')]
+    public ?string $ticketID;
 
     public function __construct()
     {
@@ -75,26 +75,26 @@ final class ExternalConnectionPhoneNumber implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AcquiredCapability|value-of<AcquiredCapability>> $acquired_capabilities
+     * @param list<AcquiredCapability|value-of<AcquiredCapability>> $acquiredCapabilities
      */
     public static function with(
-        ?array $acquired_capabilities = null,
-        ?string $civic_address_id = null,
-        ?string $displayed_country_code = null,
-        ?string $location_id = null,
-        ?string $number_id = null,
-        ?string $telephone_number = null,
-        ?string $ticket_id = null,
+        ?array $acquiredCapabilities = null,
+        ?string $civicAddressID = null,
+        ?string $displayedCountryCode = null,
+        ?string $locationID = null,
+        ?string $numberID = null,
+        ?string $telephoneNumber = null,
+        ?string $ticketID = null,
     ): self {
         $obj = new self;
 
-        null !== $acquired_capabilities && $obj['acquired_capabilities'] = $acquired_capabilities;
-        null !== $civic_address_id && $obj['civic_address_id'] = $civic_address_id;
-        null !== $displayed_country_code && $obj['displayed_country_code'] = $displayed_country_code;
-        null !== $location_id && $obj['location_id'] = $location_id;
-        null !== $number_id && $obj['number_id'] = $number_id;
-        null !== $telephone_number && $obj['telephone_number'] = $telephone_number;
-        null !== $ticket_id && $obj['ticket_id'] = $ticket_id;
+        null !== $acquiredCapabilities && $obj['acquiredCapabilities'] = $acquiredCapabilities;
+        null !== $civicAddressID && $obj['civicAddressID'] = $civicAddressID;
+        null !== $displayedCountryCode && $obj['displayedCountryCode'] = $displayedCountryCode;
+        null !== $locationID && $obj['locationID'] = $locationID;
+        null !== $numberID && $obj['numberID'] = $numberID;
+        null !== $telephoneNumber && $obj['telephoneNumber'] = $telephoneNumber;
+        null !== $ticketID && $obj['ticketID'] = $ticketID;
 
         return $obj;
     }
@@ -105,7 +105,7 @@ final class ExternalConnectionPhoneNumber implements BaseModel
     public function withAcquiredCapabilities(array $acquiredCapabilities): self
     {
         $obj = clone $this;
-        $obj['acquired_capabilities'] = $acquiredCapabilities;
+        $obj['acquiredCapabilities'] = $acquiredCapabilities;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class ExternalConnectionPhoneNumber implements BaseModel
     public function withCivicAddressID(string $civicAddressID): self
     {
         $obj = clone $this;
-        $obj['civic_address_id'] = $civicAddressID;
+        $obj['civicAddressID'] = $civicAddressID;
 
         return $obj;
     }
@@ -127,7 +127,7 @@ final class ExternalConnectionPhoneNumber implements BaseModel
     public function withDisplayedCountryCode(string $displayedCountryCode): self
     {
         $obj = clone $this;
-        $obj['displayed_country_code'] = $displayedCountryCode;
+        $obj['displayedCountryCode'] = $displayedCountryCode;
 
         return $obj;
     }
@@ -138,7 +138,7 @@ final class ExternalConnectionPhoneNumber implements BaseModel
     public function withLocationID(string $locationID): self
     {
         $obj = clone $this;
-        $obj['location_id'] = $locationID;
+        $obj['locationID'] = $locationID;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class ExternalConnectionPhoneNumber implements BaseModel
     public function withNumberID(string $numberID): self
     {
         $obj = clone $this;
-        $obj['number_id'] = $numberID;
+        $obj['numberID'] = $numberID;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class ExternalConnectionPhoneNumber implements BaseModel
     public function withTelephoneNumber(string $telephoneNumber): self
     {
         $obj = clone $this;
-        $obj['telephone_number'] = $telephoneNumber;
+        $obj['telephoneNumber'] = $telephoneNumber;
 
         return $obj;
     }
@@ -171,7 +171,7 @@ final class ExternalConnectionPhoneNumber implements BaseModel
     public function withTicketID(string $ticketID): self
     {
         $obj = clone $this;
-        $obj['ticket_id'] = $ticketID;
+        $obj['ticketID'] = $ticketID;
 
         return $obj;
     }

@@ -29,10 +29,10 @@ final class NumberBlockOrdersService implements NumberBlockOrdersContract
      *
      * @param array{
      *   range: int,
-     *   starting_number: string,
-     *   connection_id?: string,
-     *   customer_reference?: string,
-     *   messaging_profile_id?: string,
+     *   startingNumber: string,
+     *   connectionID?: string,
+     *   customerReference?: string,
+     *   messagingProfileID?: string,
      * }|NumberBlockOrderCreateParams $params
      *
      * @throws APIException
@@ -87,8 +87,8 @@ final class NumberBlockOrdersService implements NumberBlockOrdersContract
      *
      * @param array{
      *   filter?: array{
-     *     created_at?: array{gt?: string, lt?: string},
-     *     'phone_numbers.starting_number'?: string,
+     *     createdAt?: array{gt?: string, lt?: string},
+     *     phoneNumbersStartingNumber?: string,
      *     status?: string,
      *   },
      *   page?: array{number?: int, size?: int},

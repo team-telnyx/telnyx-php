@@ -30,9 +30,9 @@ final class AudioService implements AudioContract
      * @param array{
      *   model: 'distil-whisper/distil-large-v2'|'openai/whisper-large-v3-turbo'|Model,
      *   file?: string,
-     *   file_url?: string,
-     *   response_format?: 'json'|'verbose_json'|ResponseFormat,
-     *   timestamp_granularities__?: 'segment'|TimestampGranularities,
+     *   fileURL?: string,
+     *   responseFormat?: 'json'|'verbose_json'|ResponseFormat,
+     *   timestampGranularities?: 'segment'|TimestampGranularities,
      * }|AudioTranscribeParams $params
      *
      * @throws APIException

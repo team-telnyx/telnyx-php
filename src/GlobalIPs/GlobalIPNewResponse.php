@@ -32,11 +32,11 @@ final class GlobalIPNewResponse implements BaseModel
      *
      * @param Data|array{
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: string|null,
+     *   createdAt?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: string|null,
      *   description?: string|null,
-     *   ip_address?: string|null,
+     *   ipAddress?: string|null,
      *   name?: string|null,
      *   ports?: array<string,mixed>|null,
      * } $data
@@ -53,11 +53,11 @@ final class GlobalIPNewResponse implements BaseModel
     /**
      * @param Data|array{
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: string|null,
+     *   createdAt?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: string|null,
      *   description?: string|null,
-     *   ip_address?: string|null,
+     *   ipAddress?: string|null,
      *   name?: string|null,
      *   ports?: array<string,mixed>|null,
      * } $data

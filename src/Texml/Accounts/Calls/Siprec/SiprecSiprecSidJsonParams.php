@@ -17,9 +17,7 @@ use Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonParams\Status;
  * @see Telnyx\Services\Texml\Accounts\Calls\SiprecService::siprecSidJson()
  *
  * @phpstan-type SiprecSiprecSidJsonParamsShape = array{
- *   account_sid: string,
- *   call_sid: string,
- *   Status?: \Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonParams\Status|value-of<\Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonParams\Status>,
+ *   accountSid: string, callSid: string, status?: Status|value-of<Status>
  * }
  */
 final class SiprecSiprecSidJsonParams implements BaseModel
@@ -29,27 +27,25 @@ final class SiprecSiprecSidJsonParams implements BaseModel
     use SdkParams;
 
     #[Required]
-    public string $account_sid;
+    public string $accountSid;
 
     #[Required]
-    public string $call_sid;
+    public string $callSid;
 
     /**
      * The new status of the resource. Specifying `stopped` will end the siprec session.
      *
-     * @var value-of<Status>|null $Status
+     * @var value-of<Status>|null $status
      */
-    #[Optional(
-        enum: Status::class,
-    )]
-    public ?string $Status;
+    #[Optional('Status', enum: Status::class)]
+    public ?string $status;
 
     /**
      * `new SiprecSiprecSidJsonParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * SiprecSiprecSidJsonParams::with(account_sid: ..., call_sid: ...)
+     * SiprecSiprecSidJsonParams::with(accountSid: ..., callSid: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -68,19 +64,19 @@ final class SiprecSiprecSidJsonParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Status|value-of<Status> $Status
+     * @param Status|value-of<Status> $status
      */
     public static function with(
-        string $account_sid,
-        string $call_sid,
-        Status|string|null $Status = null,
+        string $accountSid,
+        string $callSid,
+        Status|string|null $status = null
     ): self {
         $obj = new self;
 
-        $obj['account_sid'] = $account_sid;
-        $obj['call_sid'] = $call_sid;
+        $obj['accountSid'] = $accountSid;
+        $obj['callSid'] = $callSid;
 
-        null !== $Status && $obj['Status'] = $Status;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
@@ -88,7 +84,7 @@ final class SiprecSiprecSidJsonParams implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj['account_sid'] = $accountSid;
+        $obj['accountSid'] = $accountSid;
 
         return $obj;
     }
@@ -96,7 +92,7 @@ final class SiprecSiprecSidJsonParams implements BaseModel
     public function withCallSid(string $callSid): self
     {
         $obj = clone $this;
-        $obj['call_sid'] = $callSid;
+        $obj['callSid'] = $callSid;
 
         return $obj;
     }
@@ -106,11 +102,10 @@ final class SiprecSiprecSidJsonParams implements BaseModel
      *
      * @param Status|value-of<Status> $status
      */
-    public function withStatus(
-        Status|string $status,
-    ): self {
+    public function withStatus(Status|string $status): self
+    {
         $obj = clone $this;
-        $obj['Status'] = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

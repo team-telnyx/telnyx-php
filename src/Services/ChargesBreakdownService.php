@@ -10,6 +10,7 @@ use Telnyx\ChargesBreakdown\ChargesBreakdownRetrieveParams\Format;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ChargesBreakdownContract;
 
@@ -26,8 +27,8 @@ final class ChargesBreakdownService implements ChargesBreakdownContract
      * Retrieve a detailed breakdown of monthly charges for phone numbers in a specified date range. The date range cannot exceed 31 days.
      *
      * @param array{
-     *   start_date: string|\DateTimeInterface,
-     *   end_date?: string|\DateTimeInterface,
+     *   startDate: string|\DateTimeInterface,
+     *   endDate?: string|\DateTimeInterface,
      *   format?: 'json'|'csv'|Format,
      * }|ChargesBreakdownRetrieveParams $params
      *
@@ -46,7 +47,10 @@ final class ChargesBreakdownService implements ChargesBreakdownContract
         $response = $this->client->request(
             method: 'get',
             path: 'charges_breakdown',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['startDate' => 'start_date', 'endDate' => 'end_date']
+            ),
             options: $options,
             convert: ChargesBreakdownGetResponse::class,
         );

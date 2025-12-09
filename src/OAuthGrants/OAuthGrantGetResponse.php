@@ -32,11 +32,11 @@ final class OAuthGrantGetResponse implements BaseModel
      *
      * @param OAuthGrant|array{
      *   id: string,
-     *   client_id: string,
-     *   created_at: \DateTimeInterface,
-     *   record_type: value-of<RecordType>,
+     *   clientID: string,
+     *   createdAt: \DateTimeInterface,
+     *   recordType: value-of<RecordType>,
      *   scopes: list<string>,
-     *   last_used_at?: \DateTimeInterface|null,
+     *   lastUsedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(OAuthGrant|array|null $data = null): self
@@ -51,11 +51,11 @@ final class OAuthGrantGetResponse implements BaseModel
     /**
      * @param OAuthGrant|array{
      *   id: string,
-     *   client_id: string,
-     *   created_at: \DateTimeInterface,
-     *   record_type: value-of<RecordType>,
+     *   clientID: string,
+     *   createdAt: \DateTimeInterface,
+     *   recordType: value-of<RecordType>,
      *   scopes: list<string>,
-     *   last_used_at?: \DateTimeInterface|null,
+     *   lastUsedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(OAuthGrant|array $data): self

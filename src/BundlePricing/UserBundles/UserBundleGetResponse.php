@@ -47,11 +47,11 @@ final class UserBundleGetResponse implements BaseModel
      * @param UserBundle|array{
      *   id: string,
      *   active: bool,
-     *   billing_bundle: BillingBundleSummary,
-     *   created_at: \DateTimeInterface,
+     *   billingBundle: BillingBundleSummary,
+     *   createdAt: \DateTimeInterface,
      *   resources: list<UserBundleResource>,
-     *   user_id: string,
-     *   updated_at?: \DateTimeInterface|null,
+     *   userID: string,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(UserBundle|array $data): self
@@ -67,11 +67,11 @@ final class UserBundleGetResponse implements BaseModel
      * @param UserBundle|array{
      *   id: string,
      *   active: bool,
-     *   billing_bundle: BillingBundleSummary,
-     *   created_at: \DateTimeInterface,
+     *   billingBundle: BillingBundleSummary,
+     *   createdAt: \DateTimeInterface,
      *   resources: list<UserBundleResource>,
-     *   user_id: string,
-     *   updated_at?: \DateTimeInterface|null,
+     *   userID: string,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(UserBundle|array $data): self

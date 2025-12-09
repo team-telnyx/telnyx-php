@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   created_at?: string|null,
- *   record_type?: string|null,
- *   updated_at?: string|null,
+ *   createdAt?: string|null,
+ *   recordType?: string|null,
+ *   updatedAt?: string|null,
  *   description?: string|null,
- *   ip_address?: string|null,
+ *   ipAddress?: string|null,
  *   name?: string|null,
  *   ports?: array<string,mixed>|null,
  * }
@@ -34,20 +34,20 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Optional]
-    public ?string $created_at;
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Optional]
-    public ?string $updated_at;
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     /**
      * A user specified description for the address.
@@ -58,8 +58,8 @@ final class Data implements BaseModel
     /**
      * The Global IP address.
      */
-    #[Optional]
-    public ?string $ip_address;
+    #[Optional('ip_address')]
+    public ?string $ipAddress;
 
     /**
      * A user specified name for the address.
@@ -89,22 +89,22 @@ final class Data implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $created_at = null,
-        ?string $record_type = null,
-        ?string $updated_at = null,
+        ?string $createdAt = null,
+        ?string $recordType = null,
+        ?string $updatedAt = null,
         ?string $description = null,
-        ?string $ip_address = null,
+        ?string $ipAddress = null,
         ?string $name = null,
         ?array $ports = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
         null !== $description && $obj['description'] = $description;
-        null !== $ip_address && $obj['ip_address'] = $ip_address;
+        null !== $ipAddress && $obj['ipAddress'] = $ipAddress;
         null !== $name && $obj['name'] = $name;
         null !== $ports && $obj['ports'] = $ports;
 
@@ -128,7 +128,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -150,7 +150,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -172,7 +172,7 @@ final class Data implements BaseModel
     public function withIPAddress(string $ipAddress): self
     {
         $obj = clone $this;
-        $obj['ip_address'] = $ipAddress;
+        $obj['ipAddress'] = $ipAddress;
 
         return $obj;
     }

@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\PortingOrdersService::retrieve()
  *
  * @phpstan-type PortingOrderRetrieveParamsShape = array{
- *   include_phone_numbers?: bool
+ *   includePhoneNumbers?: bool
  * }
  */
 final class PortingOrderRetrieveParams implements BaseModel
@@ -28,7 +28,7 @@ final class PortingOrderRetrieveParams implements BaseModel
      * Include the first 50 phone number objects in the results.
      */
     #[Optional]
-    public ?bool $include_phone_numbers;
+    public ?bool $includePhoneNumbers;
 
     public function __construct()
     {
@@ -40,11 +40,11 @@ final class PortingOrderRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?bool $include_phone_numbers = null): self
+    public static function with(?bool $includePhoneNumbers = null): self
     {
         $obj = new self;
 
-        null !== $include_phone_numbers && $obj['include_phone_numbers'] = $include_phone_numbers;
+        null !== $includePhoneNumbers && $obj['includePhoneNumbers'] = $includePhoneNumbers;
 
         return $obj;
     }
@@ -55,7 +55,7 @@ final class PortingOrderRetrieveParams implements BaseModel
     public function withIncludePhoneNumbers(bool $includePhoneNumbers): self
     {
         $obj = clone $this;
-        $obj['include_phone_numbers'] = $includePhoneNumbers;
+        $obj['includePhoneNumbers'] = $includePhoneNumbers;
 
         return $obj;
     }

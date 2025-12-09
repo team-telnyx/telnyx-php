@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\PortabilityChecksService::run()
  *
  * @phpstan-type PortabilityCheckRunParamsShape = array{
- *   phone_numbers?: list<string>
+ *   phoneNumbers?: list<string>
  * }
  */
 final class PortabilityCheckRunParams implements BaseModel
@@ -27,10 +27,10 @@ final class PortabilityCheckRunParams implements BaseModel
     /**
      * The list of +E.164 formatted phone numbers to check for portability.
      *
-     * @var list<string>|null $phone_numbers
+     * @var list<string>|null $phoneNumbers
      */
-    #[Optional(list: 'string')]
-    public ?array $phone_numbers;
+    #[Optional('phone_numbers', list: 'string')]
+    public ?array $phoneNumbers;
 
     public function __construct()
     {
@@ -42,13 +42,13 @@ final class PortabilityCheckRunParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $phone_numbers
+     * @param list<string> $phoneNumbers
      */
-    public static function with(?array $phone_numbers = null): self
+    public static function with(?array $phoneNumbers = null): self
     {
         $obj = new self;
 
-        null !== $phone_numbers && $obj['phone_numbers'] = $phone_numbers;
+        null !== $phoneNumbers && $obj['phoneNumbers'] = $phoneNumbers;
 
         return $obj;
     }
@@ -61,7 +61,7 @@ final class PortabilityCheckRunParams implements BaseModel
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj['phone_numbers'] = $phoneNumbers;
+        $obj['phoneNumbers'] = $phoneNumbers;
 
         return $obj;
     }

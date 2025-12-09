@@ -34,12 +34,12 @@ final class ActionShareResponse implements BaseModel
      * @param Data|array{
      *   id?: string|null,
      *   token?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   expires_at?: \DateTimeInterface|null,
-     *   expires_in_seconds?: int|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   expiresAt?: \DateTimeInterface|null,
+     *   expiresInSeconds?: int|null,
      *   permissions?: list<value-of<Permission>>|null,
-     *   porting_order_id?: string|null,
-     *   record_type?: string|null,
+     *   portingOrderID?: string|null,
+     *   recordType?: string|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -55,12 +55,12 @@ final class ActionShareResponse implements BaseModel
      * @param Data|array{
      *   id?: string|null,
      *   token?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   expires_at?: \DateTimeInterface|null,
-     *   expires_in_seconds?: int|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   expiresAt?: \DateTimeInterface|null,
+     *   expiresInSeconds?: int|null,
      *   permissions?: list<value-of<Permission>>|null,
-     *   porting_order_id?: string|null,
-     *   record_type?: string|null,
+     *   portingOrderID?: string|null,
+     *   recordType?: string|null,
      * } $data
      */
     public function withData(Data|array $data): self

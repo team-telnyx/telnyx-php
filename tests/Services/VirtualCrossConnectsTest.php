@@ -39,12 +39,12 @@ final class VirtualCrossConnectsTest extends TestCase
         }
 
         $result = $this->client->virtualCrossConnects->create([
-            'bgp_asn' => 1234,
-            'cloud_provider' => 'aws',
-            'cloud_provider_region' => 'us-east-1',
-            'network_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            'primary_cloud_account_id' => '123456789012',
-            'region_code' => 'ashburn-va',
+            'bgpAsn' => 1234,
+            'cloudProvider' => 'aws',
+            'cloudProviderRegion' => 'us-east-1',
+            'networkID' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            'primaryCloudAccountID' => '123456789012',
+            'regionCode' => 'ashburn-va',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -59,21 +59,21 @@ final class VirtualCrossConnectsTest extends TestCase
         }
 
         $result = $this->client->virtualCrossConnects->create([
-            'bgp_asn' => 1234,
-            'cloud_provider' => 'aws',
-            'cloud_provider_region' => 'us-east-1',
-            'network_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            'primary_cloud_account_id' => '123456789012',
-            'region_code' => 'ashburn-va',
-            'bandwidth_mbps' => 50,
+            'bgpAsn' => 1234,
+            'cloudProvider' => 'aws',
+            'cloudProviderRegion' => 'us-east-1',
+            'networkID' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            'primaryCloudAccountID' => '123456789012',
+            'regionCode' => 'ashburn-va',
+            'bandwidthMbps' => 50,
             'name' => 'test interface',
-            'primary_bgp_key' => 'yFV4wEPtPVPfDUGLWiyQzwga',
-            'primary_cloud_ip' => '169.254.0.2',
-            'primary_telnyx_ip' => '169.254.0.1',
-            'secondary_bgp_key' => 'ge1lONeK9RcA83uuWaw9DvZy',
-            'secondary_cloud_account_id' => '',
-            'secondary_cloud_ip' => '169.254.0.4',
-            'secondary_telnyx_ip' => '169.254.0.3',
+            'primaryBgpKey' => 'yFV4wEPtPVPfDUGLWiyQzwga',
+            'primaryCloudIP' => '169.254.0.2',
+            'primaryTelnyxIP' => '169.254.0.1',
+            'secondaryBgpKey' => 'ge1lONeK9RcA83uuWaw9DvZy',
+            'secondaryCloudAccountID' => '',
+            'secondaryCloudIP' => '169.254.0.4',
+            'secondaryTelnyxIP' => '169.254.0.3',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

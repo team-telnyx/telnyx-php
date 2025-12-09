@@ -16,9 +16,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\PortingOrdersService::create()
  *
  * @phpstan-type PortingOrderCreateParamsShape = array{
- *   phone_numbers: list<string>,
- *   customer_group_reference?: string,
- *   customer_reference?: string|null,
+ *   phoneNumbers: list<string>,
+ *   customerGroupReference?: string,
+ *   customerReference?: string|null,
  * }
  */
 final class PortingOrderCreateParams implements BaseModel
@@ -30,29 +30,29 @@ final class PortingOrderCreateParams implements BaseModel
     /**
      * The list of +E.164 formatted phone numbers.
      *
-     * @var list<string> $phone_numbers
+     * @var list<string> $phoneNumbers
      */
-    #[Required(list: 'string')]
-    public array $phone_numbers;
+    #[Required('phone_numbers', list: 'string')]
+    public array $phoneNumbers;
 
     /**
      * A customer-specified group reference for customer bookkeeping purposes.
      */
-    #[Optional]
-    public ?string $customer_group_reference;
+    #[Optional('customer_group_reference')]
+    public ?string $customerGroupReference;
 
     /**
      * A customer-specified reference number for customer bookkeeping purposes.
      */
-    #[Optional(nullable: true)]
-    public ?string $customer_reference;
+    #[Optional('customer_reference', nullable: true)]
+    public ?string $customerReference;
 
     /**
      * `new PortingOrderCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * PortingOrderCreateParams::with(phone_numbers: ...)
+     * PortingOrderCreateParams::with(phoneNumbers: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -71,19 +71,19 @@ final class PortingOrderCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $phone_numbers
+     * @param list<string> $phoneNumbers
      */
     public static function with(
-        array $phone_numbers,
-        ?string $customer_group_reference = null,
-        ?string $customer_reference = null,
+        array $phoneNumbers,
+        ?string $customerGroupReference = null,
+        ?string $customerReference = null,
     ): self {
         $obj = new self;
 
-        $obj['phone_numbers'] = $phone_numbers;
+        $obj['phoneNumbers'] = $phoneNumbers;
 
-        null !== $customer_group_reference && $obj['customer_group_reference'] = $customer_group_reference;
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $customerGroupReference && $obj['customerGroupReference'] = $customerGroupReference;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
 
         return $obj;
     }
@@ -96,7 +96,7 @@ final class PortingOrderCreateParams implements BaseModel
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj['phone_numbers'] = $phoneNumbers;
+        $obj['phoneNumbers'] = $phoneNumbers;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class PortingOrderCreateParams implements BaseModel
         string $customerGroupReference
     ): self {
         $obj = clone $this;
-        $obj['customer_group_reference'] = $customerGroupReference;
+        $obj['customerGroupReference'] = $customerGroupReference;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class PortingOrderCreateParams implements BaseModel
     public function withCustomerReference(?string $customerReference): self
     {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }

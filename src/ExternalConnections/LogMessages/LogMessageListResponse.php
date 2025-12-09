@@ -14,7 +14,7 @@ use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse\LogMessage\Sou
 
 /**
  * @phpstan-type LogMessageListResponseShape = array{
- *   log_messages?: list<LogMessage>|null,
+ *   logMessages?: list<LogMessage>|null,
  *   meta?: ExternalVoiceIntegrationsPaginationMeta|null,
  * }
  */
@@ -23,9 +23,9 @@ final class LogMessageListResponse implements BaseModel
     /** @use SdkModel<LogMessageListResponseShape> */
     use SdkModel;
 
-    /** @var list<LogMessage>|null $log_messages */
-    #[Optional(list: LogMessage::class)]
-    public ?array $log_messages;
+    /** @var list<LogMessage>|null $logMessages */
+    #[Optional('log_messages', list: LogMessage::class)]
+    public ?array $logMessages;
 
     #[Optional]
     public ?ExternalVoiceIntegrationsPaginationMeta $meta;
@@ -46,21 +46,21 @@ final class LogMessageListResponse implements BaseModel
      *   detail?: string|null,
      *   meta?: Meta|null,
      *   source?: Source|null,
-     * }> $log_messages
+     * }> $logMessages
      * @param ExternalVoiceIntegrationsPaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
-        ?array $log_messages = null,
+        ?array $logMessages = null,
         ExternalVoiceIntegrationsPaginationMeta|array|null $meta = null,
     ): self {
         $obj = new self;
 
-        null !== $log_messages && $obj['log_messages'] = $log_messages;
+        null !== $logMessages && $obj['logMessages'] = $logMessages;
         null !== $meta && $obj['meta'] = $meta;
 
         return $obj;
@@ -78,17 +78,17 @@ final class LogMessageListResponse implements BaseModel
     public function withLogMessages(array $logMessages): self
     {
         $obj = clone $this;
-        $obj['log_messages'] = $logMessages;
+        $obj['logMessages'] = $logMessages;
 
         return $obj;
     }
 
     /**
      * @param ExternalVoiceIntegrationsPaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(

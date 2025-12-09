@@ -27,36 +27,36 @@ use Telnyx\PhoneNumbers\Voice\UpdateVoiceSettings\UsagePaymentMethod;
  * @see Telnyx\Services\PhoneNumbers\JobsService::updateBatch()
  *
  * @phpstan-type JobUpdateBatchParamsShape = array{
- *   phone_numbers: list<string>,
+ *   phoneNumbers: list<string>,
  *   filter?: Filter|array{
- *     billing_group_id?: string|null,
- *     connection_id?: string|null,
- *     customer_reference?: string|null,
- *     emergency_address_id?: string|null,
- *     has_bundle?: string|null,
- *     phone_number?: string|null,
+ *     billingGroupID?: string|null,
+ *     connectionID?: string|null,
+ *     customerReference?: string|null,
+ *     emergencyAddressID?: string|null,
+ *     hasBundle?: string|null,
+ *     phoneNumber?: string|null,
  *     status?: value-of<Status>|null,
  *     tag?: string|null,
- *     voice_connection_name?: VoiceConnectionName|null,
- *     voice_usage_payment_method?: value-of<VoiceUsagePaymentMethod>|null,
+ *     voiceConnectionName?: VoiceConnectionName|null,
+ *     voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
  *   },
- *   billing_group_id?: string,
- *   connection_id?: string,
- *   customer_reference?: string,
- *   deletion_lock_enabled?: bool,
- *   external_pin?: string,
- *   hd_voice_enabled?: bool,
+ *   billingGroupID?: string,
+ *   connectionID?: string,
+ *   customerReference?: string,
+ *   deletionLockEnabled?: bool,
+ *   externalPin?: string,
+ *   hdVoiceEnabled?: bool,
  *   tags?: list<string>,
  *   voice?: UpdateVoiceSettings|array{
- *     call_forwarding?: CallForwarding|null,
- *     call_recording?: CallRecording|null,
- *     caller_id_name_enabled?: bool|null,
- *     cnam_listing?: CnamListing|null,
- *     inbound_call_screening?: value-of<InboundCallScreening>|null,
- *     media_features?: MediaFeatures|null,
- *     tech_prefix_enabled?: bool|null,
- *     translated_number?: string|null,
- *     usage_payment_method?: value-of<UsagePaymentMethod>|null,
+ *     callForwarding?: CallForwarding|null,
+ *     callRecording?: CallRecording|null,
+ *     callerIDNameEnabled?: bool|null,
+ *     cnamListing?: CnamListing|null,
+ *     inboundCallScreening?: value-of<InboundCallScreening>|null,
+ *     mediaFeatures?: MediaFeatures|null,
+ *     techPrefixEnabled?: bool|null,
+ *     translatedNumber?: string|null,
+ *     usagePaymentMethod?: value-of<UsagePaymentMethod>|null,
  *   },
  * }
  */
@@ -69,10 +69,10 @@ final class JobUpdateBatchParams implements BaseModel
     /**
      * Array of phone number ids and/or phone numbers in E164 format to update. This parameter is required if no filter parameters are provided. If you want to update specific numbers rather than all numbers matching a filter, you must use this parameter. Each item must be either a valid phone number ID or a phone number in E164 format (e.g., '+13127367254').
      *
-     * @var list<string> $phone_numbers
+     * @var list<string> $phoneNumbers
      */
-    #[Required(list: 'string')]
-    public array $phone_numbers;
+    #[Required('phone_numbers', list: 'string')]
+    public array $phoneNumbers;
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[has_bundle], filter[tag], filter[connection_id], filter[phone_number], filter[status], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference].
@@ -83,38 +83,38 @@ final class JobUpdateBatchParams implements BaseModel
     /**
      * Identifies the billing group associated with the phone number.
      */
-    #[Optional]
-    public ?string $billing_group_id;
+    #[Optional('billing_group_id')]
+    public ?string $billingGroupID;
 
     /**
      * Identifies the connection associated with the phone number.
      */
-    #[Optional]
-    public ?string $connection_id;
+    #[Optional('connection_id')]
+    public ?string $connectionID;
 
     /**
      * A customer reference string for customer look ups.
      */
-    #[Optional]
-    public ?string $customer_reference;
+    #[Optional('customer_reference')]
+    public ?string $customerReference;
 
     /**
      * Indicates whether to enable or disable the deletion lock on each phone number. When enabled, this prevents the phone number from being deleted via the API or Telnyx portal.
      */
-    #[Optional]
-    public ?bool $deletion_lock_enabled;
+    #[Optional('deletion_lock_enabled')]
+    public ?bool $deletionLockEnabled;
 
     /**
      * If someone attempts to port your phone number away from Telnyx and your phone number has an external PIN set, we will attempt to verify that you provided the correct external PIN to the winning carrier. Note that not all carriers cooperate with this security mechanism.
      */
-    #[Optional]
-    public ?string $external_pin;
+    #[Optional('external_pin')]
+    public ?string $externalPin;
 
     /**
      * Indicates whether to enable or disable HD Voice on each phone number. HD Voice is a paid feature and may not be available for all phone numbers, more details about it can be found in the Telnyx support documentation.
      */
-    #[Optional]
-    public ?bool $hd_voice_enabled;
+    #[Optional('hd_voice_enabled')]
+    public ?bool $hdVoiceEnabled;
 
     /**
      * A list of user-assigned tags to help organize phone numbers.
@@ -132,7 +132,7 @@ final class JobUpdateBatchParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * JobUpdateBatchParams::with(phone_numbers: ...)
+     * JobUpdateBatchParams::with(phoneNumbers: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -151,55 +151,55 @@ final class JobUpdateBatchParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $phone_numbers
+     * @param list<string> $phoneNumbers
      * @param Filter|array{
-     *   billing_group_id?: string|null,
-     *   connection_id?: string|null,
-     *   customer_reference?: string|null,
-     *   emergency_address_id?: string|null,
-     *   has_bundle?: string|null,
-     *   phone_number?: string|null,
+     *   billingGroupID?: string|null,
+     *   connectionID?: string|null,
+     *   customerReference?: string|null,
+     *   emergencyAddressID?: string|null,
+     *   hasBundle?: string|null,
+     *   phoneNumber?: string|null,
      *   status?: value-of<Status>|null,
      *   tag?: string|null,
-     *   voice_connection_name?: VoiceConnectionName|null,
-     *   voice_usage_payment_method?: value-of<VoiceUsagePaymentMethod>|null,
+     *   voiceConnectionName?: VoiceConnectionName|null,
+     *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
      * } $filter
      * @param list<string> $tags
      * @param UpdateVoiceSettings|array{
-     *   call_forwarding?: CallForwarding|null,
-     *   call_recording?: CallRecording|null,
-     *   caller_id_name_enabled?: bool|null,
-     *   cnam_listing?: CnamListing|null,
-     *   inbound_call_screening?: value-of<InboundCallScreening>|null,
-     *   media_features?: MediaFeatures|null,
-     *   tech_prefix_enabled?: bool|null,
-     *   translated_number?: string|null,
-     *   usage_payment_method?: value-of<UsagePaymentMethod>|null,
+     *   callForwarding?: CallForwarding|null,
+     *   callRecording?: CallRecording|null,
+     *   callerIDNameEnabled?: bool|null,
+     *   cnamListing?: CnamListing|null,
+     *   inboundCallScreening?: value-of<InboundCallScreening>|null,
+     *   mediaFeatures?: MediaFeatures|null,
+     *   techPrefixEnabled?: bool|null,
+     *   translatedNumber?: string|null,
+     *   usagePaymentMethod?: value-of<UsagePaymentMethod>|null,
      * } $voice
      */
     public static function with(
-        array $phone_numbers,
+        array $phoneNumbers,
         Filter|array|null $filter = null,
-        ?string $billing_group_id = null,
-        ?string $connection_id = null,
-        ?string $customer_reference = null,
-        ?bool $deletion_lock_enabled = null,
-        ?string $external_pin = null,
-        ?bool $hd_voice_enabled = null,
+        ?string $billingGroupID = null,
+        ?string $connectionID = null,
+        ?string $customerReference = null,
+        ?bool $deletionLockEnabled = null,
+        ?string $externalPin = null,
+        ?bool $hdVoiceEnabled = null,
         ?array $tags = null,
         UpdateVoiceSettings|array|null $voice = null,
     ): self {
         $obj = new self;
 
-        $obj['phone_numbers'] = $phone_numbers;
+        $obj['phoneNumbers'] = $phoneNumbers;
 
         null !== $filter && $obj['filter'] = $filter;
-        null !== $billing_group_id && $obj['billing_group_id'] = $billing_group_id;
-        null !== $connection_id && $obj['connection_id'] = $connection_id;
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
-        null !== $deletion_lock_enabled && $obj['deletion_lock_enabled'] = $deletion_lock_enabled;
-        null !== $external_pin && $obj['external_pin'] = $external_pin;
-        null !== $hd_voice_enabled && $obj['hd_voice_enabled'] = $hd_voice_enabled;
+        null !== $billingGroupID && $obj['billingGroupID'] = $billingGroupID;
+        null !== $connectionID && $obj['connectionID'] = $connectionID;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
+        null !== $deletionLockEnabled && $obj['deletionLockEnabled'] = $deletionLockEnabled;
+        null !== $externalPin && $obj['externalPin'] = $externalPin;
+        null !== $hdVoiceEnabled && $obj['hdVoiceEnabled'] = $hdVoiceEnabled;
         null !== $tags && $obj['tags'] = $tags;
         null !== $voice && $obj['voice'] = $voice;
 
@@ -214,7 +214,7 @@ final class JobUpdateBatchParams implements BaseModel
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj['phone_numbers'] = $phoneNumbers;
+        $obj['phoneNumbers'] = $phoneNumbers;
 
         return $obj;
     }
@@ -223,16 +223,16 @@ final class JobUpdateBatchParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[has_bundle], filter[tag], filter[connection_id], filter[phone_number], filter[status], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference].
      *
      * @param Filter|array{
-     *   billing_group_id?: string|null,
-     *   connection_id?: string|null,
-     *   customer_reference?: string|null,
-     *   emergency_address_id?: string|null,
-     *   has_bundle?: string|null,
-     *   phone_number?: string|null,
+     *   billingGroupID?: string|null,
+     *   connectionID?: string|null,
+     *   customerReference?: string|null,
+     *   emergencyAddressID?: string|null,
+     *   hasBundle?: string|null,
+     *   phoneNumber?: string|null,
      *   status?: value-of<Status>|null,
      *   tag?: string|null,
-     *   voice_connection_name?: VoiceConnectionName|null,
-     *   voice_usage_payment_method?: value-of<VoiceUsagePaymentMethod>|null,
+     *   voiceConnectionName?: VoiceConnectionName|null,
+     *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
      * } $filter
      */
     public function withFilter(Filter|array $filter): self
@@ -249,7 +249,7 @@ final class JobUpdateBatchParams implements BaseModel
     public function withBillingGroupID(string $billingGroupID): self
     {
         $obj = clone $this;
-        $obj['billing_group_id'] = $billingGroupID;
+        $obj['billingGroupID'] = $billingGroupID;
 
         return $obj;
     }
@@ -260,7 +260,7 @@ final class JobUpdateBatchParams implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj['connection_id'] = $connectionID;
+        $obj['connectionID'] = $connectionID;
 
         return $obj;
     }
@@ -271,7 +271,7 @@ final class JobUpdateBatchParams implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }
@@ -282,7 +282,7 @@ final class JobUpdateBatchParams implements BaseModel
     public function withDeletionLockEnabled(bool $deletionLockEnabled): self
     {
         $obj = clone $this;
-        $obj['deletion_lock_enabled'] = $deletionLockEnabled;
+        $obj['deletionLockEnabled'] = $deletionLockEnabled;
 
         return $obj;
     }
@@ -293,7 +293,7 @@ final class JobUpdateBatchParams implements BaseModel
     public function withExternalPin(string $externalPin): self
     {
         $obj = clone $this;
-        $obj['external_pin'] = $externalPin;
+        $obj['externalPin'] = $externalPin;
 
         return $obj;
     }
@@ -304,7 +304,7 @@ final class JobUpdateBatchParams implements BaseModel
     public function withHDVoiceEnabled(bool $hdVoiceEnabled): self
     {
         $obj = clone $this;
-        $obj['hd_voice_enabled'] = $hdVoiceEnabled;
+        $obj['hdVoiceEnabled'] = $hdVoiceEnabled;
 
         return $obj;
     }
@@ -324,15 +324,15 @@ final class JobUpdateBatchParams implements BaseModel
 
     /**
      * @param UpdateVoiceSettings|array{
-     *   call_forwarding?: CallForwarding|null,
-     *   call_recording?: CallRecording|null,
-     *   caller_id_name_enabled?: bool|null,
-     *   cnam_listing?: CnamListing|null,
-     *   inbound_call_screening?: value-of<InboundCallScreening>|null,
-     *   media_features?: MediaFeatures|null,
-     *   tech_prefix_enabled?: bool|null,
-     *   translated_number?: string|null,
-     *   usage_payment_method?: value-of<UsagePaymentMethod>|null,
+     *   callForwarding?: CallForwarding|null,
+     *   callRecording?: CallRecording|null,
+     *   callerIDNameEnabled?: bool|null,
+     *   cnamListing?: CnamListing|null,
+     *   inboundCallScreening?: value-of<InboundCallScreening>|null,
+     *   mediaFeatures?: MediaFeatures|null,
+     *   techPrefixEnabled?: bool|null,
+     *   translatedNumber?: string|null,
+     *   usagePaymentMethod?: value-of<UsagePaymentMethod>|null,
      * } $voice
      */
     public function withVoice(UpdateVoiceSettings|array $voice): self

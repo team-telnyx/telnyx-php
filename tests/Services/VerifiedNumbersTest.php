@@ -37,7 +37,7 @@ final class VerifiedNumbersTest extends TestCase
         }
 
         $result = $this->client->verifiedNumbers->create([
-            'phone_number' => '+15551234567', 'verification_method' => 'sms',
+            'phoneNumber' => '+15551234567', 'verificationMethod' => 'sms',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -52,8 +52,8 @@ final class VerifiedNumbersTest extends TestCase
         }
 
         $result = $this->client->verifiedNumbers->create([
-            'phone_number' => '+15551234567',
-            'verification_method' => 'sms',
+            'phoneNumber' => '+15551234567',
+            'verificationMethod' => 'sms',
             'extension' => 'ww243w1',
         ]);
 

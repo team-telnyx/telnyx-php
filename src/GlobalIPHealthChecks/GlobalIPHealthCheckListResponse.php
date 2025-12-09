@@ -39,18 +39,18 @@ final class GlobalIPHealthCheckListResponse implements BaseModel
      *
      * @param list<Data|array{
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: string|null,
-     *   global_ip_id?: string|null,
-     *   health_check_params?: array<string,mixed>|null,
-     *   health_check_type?: string|null,
+     *   createdAt?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: string|null,
+     *   globalIPID?: string|null,
+     *   healthCheckParams?: array<string,mixed>|null,
+     *   healthCheckType?: string|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -68,12 +68,12 @@ final class GlobalIPHealthCheckListResponse implements BaseModel
     /**
      * @param list<Data|array{
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: string|null,
-     *   global_ip_id?: string|null,
-     *   health_check_params?: array<string,mixed>|null,
-     *   health_check_type?: string|null,
+     *   createdAt?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: string|null,
+     *   globalIPID?: string|null,
+     *   healthCheckParams?: array<string,mixed>|null,
+     *   healthCheckType?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -86,10 +86,10 @@ final class GlobalIPHealthCheckListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\UsageReportsContract;
 use Telnyx\UsageReports\UsageReportGetOptionsParams;
@@ -31,15 +32,15 @@ final class UsageReportsService implements UsageReportsContract
      *   dimensions: list<string>,
      *   metrics: list<string>,
      *   product: string,
-     *   date_range?: string,
-     *   end_date?: string,
+     *   dateRange?: string,
+     *   endDate?: string,
      *   filter?: string,
      *   format?: 'csv'|'json'|Format,
-     *   managed_accounts?: bool,
+     *   managedAccounts?: bool,
      *   page?: array{number?: int, size?: int},
      *   sort?: list<string>,
-     *   start_date?: string,
-     *   authorization_bearer?: string,
+     *   startDate?: string,
+     *   authorizationBearer?: string,
      * }|UsageReportListParams $params
      *
      * @throws APIException
@@ -75,8 +76,19 @@ final class UsageReportsService implements UsageReportsContract
         $response = $this->client->request(
             method: 'get',
             path: 'usage_reports',
-            query: array_intersect_key($parsed, $query_params),
-            headers: $header_params,
+            query: Util::array_transform_keys(
+                array_intersect_key($parsed, $query_params),
+                [
+                    'dateRange' => 'date_range',
+                    'endDate' => 'end_date',
+                    'managedAccounts' => 'managed_accounts',
+                    'startDate' => 'start_date',
+                ],
+            ),
+            headers: Util::array_transform_keys(
+                $header_params,
+                ['authorizationBearer' => 'authorization_bearer']
+            ),
             options: $options,
             convert: UsageReportListResponse::class,
         );
@@ -90,7 +102,7 @@ final class UsageReportsService implements UsageReportsContract
      * Get the Usage Reports options for querying usage, including the products available and their respective metrics and dimensions
      *
      * @param array{
-     *   product?: string, authorization_bearer?: string
+     *   product?: string, authorizationBearer?: string
      * }|UsageReportGetOptionsParams $params
      *
      * @throws APIException
@@ -113,7 +125,10 @@ final class UsageReportsService implements UsageReportsContract
             method: 'get',
             path: 'usage_reports/options',
             query: array_intersect_key($parsed, $query_params),
-            headers: $header_params,
+            headers: Util::array_transform_keys(
+                $header_params,
+                ['authorizationBearer' => 'authorization_bearer']
+            ),
             options: $options,
             convert: UsageReportGetOptionsResponse::class,
         );

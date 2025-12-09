@@ -38,8 +38,8 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
      * Initiates phone number verification procedure. Supports DTMF extension dialing for voice calls to numbers behind IVR systems.
      *
      * @param array{
-     *   phone_number: string,
-     *   verification_method: 'sms'|'call'|VerificationMethod,
+     *   phoneNumber: string,
+     *   verificationMethod: 'sms'|'call'|VerificationMethod,
      *   extension?: string|null,
      * }|VerifiedNumberCreateParams $params
      *

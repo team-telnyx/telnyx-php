@@ -29,7 +29,7 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
      * Create a new Public Internet Gateway.
      *
      * @param array{
-     *   name?: string, network_id?: string, region_code?: string
+     *   name?: string, networkID?: string, regionCode?: string
      * }|PublicInternetGatewayCreateParams $params
      *
      * @throws APIException
@@ -83,7 +83,7 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
      * List all Public Internet Gateways.
      *
      * @param array{
-     *   filter?: array{network_id?: string}, page?: array{number?: int, size?: int}
+     *   filter?: array{networkID?: string}, page?: array{number?: int, size?: int}
      * }|PublicInternetGatewayListParams $params
      *
      * @throws APIException

@@ -12,14 +12,14 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type AdvancedOrderShape = array{
- *   area_code?: string|null,
+ *   areaCode?: string|null,
  *   comments?: string|null,
- *   country_code?: string|null,
- *   customer_reference?: string|null,
+ *   countryCode?: string|null,
+ *   customerReference?: string|null,
  *   features?: list<value-of<Feature>>|null,
- *   phone_number_type?: value-of<PhoneNumberType>|null,
+ *   phoneNumberType?: value-of<PhoneNumberType>|null,
  *   quantity?: int|null,
- *   requirement_group_id?: string|null,
+ *   requirementGroupID?: string|null,
  * }
  */
 final class AdvancedOrder implements BaseModel
@@ -27,25 +27,25 @@ final class AdvancedOrder implements BaseModel
     /** @use SdkModel<AdvancedOrderShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?string $area_code;
+    #[Optional('area_code')]
+    public ?string $areaCode;
 
     #[Optional]
     public ?string $comments;
 
-    #[Optional]
-    public ?string $country_code;
+    #[Optional('country_code')]
+    public ?string $countryCode;
 
-    #[Optional]
-    public ?string $customer_reference;
+    #[Optional('customer_reference')]
+    public ?string $customerReference;
 
     /** @var list<value-of<Feature>>|null $features */
     #[Optional(list: Feature::class)]
     public ?array $features;
 
-    /** @var value-of<PhoneNumberType>|null $phone_number_type */
-    #[Optional(enum: PhoneNumberType::class)]
-    public ?string $phone_number_type;
+    /** @var value-of<PhoneNumberType>|null $phoneNumberType */
+    #[Optional('phone_number_type', enum: PhoneNumberType::class)]
+    public ?string $phoneNumberType;
 
     #[Optional]
     public ?int $quantity;
@@ -53,8 +53,8 @@ final class AdvancedOrder implements BaseModel
     /**
      * The ID of the requirement group to associate with this advanced order.
      */
-    #[Optional]
-    public ?string $requirement_group_id;
+    #[Optional('requirement_group_id')]
+    public ?string $requirementGroupID;
 
     public function __construct()
     {
@@ -67,28 +67,28 @@ final class AdvancedOrder implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Feature|value-of<Feature>> $features
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phone_number_type
+     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
      */
     public static function with(
-        ?string $area_code = null,
+        ?string $areaCode = null,
         ?string $comments = null,
-        ?string $country_code = null,
-        ?string $customer_reference = null,
+        ?string $countryCode = null,
+        ?string $customerReference = null,
         ?array $features = null,
-        PhoneNumberType|string|null $phone_number_type = null,
+        PhoneNumberType|string|null $phoneNumberType = null,
         ?int $quantity = null,
-        ?string $requirement_group_id = null,
+        ?string $requirementGroupID = null,
     ): self {
         $obj = new self;
 
-        null !== $area_code && $obj['area_code'] = $area_code;
+        null !== $areaCode && $obj['areaCode'] = $areaCode;
         null !== $comments && $obj['comments'] = $comments;
-        null !== $country_code && $obj['country_code'] = $country_code;
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $countryCode && $obj['countryCode'] = $countryCode;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
         null !== $features && $obj['features'] = $features;
-        null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
+        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
         null !== $quantity && $obj['quantity'] = $quantity;
-        null !== $requirement_group_id && $obj['requirement_group_id'] = $requirement_group_id;
+        null !== $requirementGroupID && $obj['requirementGroupID'] = $requirementGroupID;
 
         return $obj;
     }
@@ -96,7 +96,7 @@ final class AdvancedOrder implements BaseModel
     public function withAreaCode(string $areaCode): self
     {
         $obj = clone $this;
-        $obj['area_code'] = $areaCode;
+        $obj['areaCode'] = $areaCode;
 
         return $obj;
     }
@@ -112,7 +112,7 @@ final class AdvancedOrder implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj['country_code'] = $countryCode;
+        $obj['countryCode'] = $countryCode;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class AdvancedOrder implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }
@@ -143,7 +143,7 @@ final class AdvancedOrder implements BaseModel
         PhoneNumberType|string $phoneNumberType
     ): self {
         $obj = clone $this;
-        $obj['phone_number_type'] = $phoneNumberType;
+        $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }
@@ -162,7 +162,7 @@ final class AdvancedOrder implements BaseModel
     public function withRequirementGroupID(string $requirementGroupID): self
     {
         $obj = clone $this;
-        $obj['requirement_group_id'] = $requirementGroupID;
+        $obj['requirementGroupID'] = $requirementGroupID;
 
         return $obj;
     }

@@ -54,14 +54,14 @@ final class UserBundleListResponse implements BaseModel
      * @param list<UserBundle|array{
      *   id: string,
      *   active: bool,
-     *   billing_bundle: BillingBundleSummary,
-     *   created_at: \DateTimeInterface,
+     *   billingBundle: BillingBundleSummary,
+     *   createdAt: \DateTimeInterface,
      *   resources: list<UserBundleResource>,
-     *   user_id: string,
-     *   updated_at?: \DateTimeInterface|null,
+     *   userID: string,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      * @param PaginationResponse|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public static function with(
@@ -80,11 +80,11 @@ final class UserBundleListResponse implements BaseModel
      * @param list<UserBundle|array{
      *   id: string,
      *   active: bool,
-     *   billing_bundle: BillingBundleSummary,
-     *   created_at: \DateTimeInterface,
+     *   billingBundle: BillingBundleSummary,
+     *   createdAt: \DateTimeInterface,
      *   resources: list<UserBundleResource>,
-     *   user_id: string,
-     *   updated_at?: \DateTimeInterface|null,
+     *   userID: string,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -97,7 +97,7 @@ final class UserBundleListResponse implements BaseModel
 
     /**
      * @param PaginationResponse|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public function withMeta(PaginationResponse|array $meta): self

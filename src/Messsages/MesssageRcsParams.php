@@ -21,24 +21,24 @@ use Telnyx\Messsages\RcsAgentMessage\Event;
  * @see Telnyx\Services\MesssagesService::rcs()
  *
  * @phpstan-type MesssageRcsParamsShape = array{
- *   agent_id: string,
- *   agent_message: RcsAgentMessage|array{
- *     content_message?: ContentMessage|null,
+ *   agentID: string,
+ *   agentMessage: RcsAgentMessage|array{
+ *     contentMessage?: ContentMessage|null,
  *     event?: Event|null,
- *     expire_time?: \DateTimeInterface|null,
+ *     expireTime?: \DateTimeInterface|null,
  *     ttl?: string|null,
  *   },
- *   messaging_profile_id: string,
+ *   messagingProfileID: string,
  *   to: string,
- *   mms_fallback?: MmsFallback|array{
+ *   mmsFallback?: MmsFallback|array{
  *     from?: string|null,
- *     media_urls?: list<string>|null,
+ *     mediaURLs?: list<string>|null,
  *     subject?: string|null,
  *     text?: string|null,
  *   },
- *   sms_fallback?: SMSFallback|array{from?: string|null, text?: string|null},
+ *   smsFallback?: SMSFallback|array{from?: string|null, text?: string|null},
  *   type?: Type|value-of<Type>,
- *   webhook_url?: string,
+ *   webhookURL?: string,
  * }
  */
 final class MesssageRcsParams implements BaseModel
@@ -50,17 +50,17 @@ final class MesssageRcsParams implements BaseModel
     /**
      * RCS Agent ID.
      */
-    #[Required]
-    public string $agent_id;
+    #[Required('agent_id')]
+    public string $agentID;
 
-    #[Required]
-    public RcsAgentMessage $agent_message;
+    #[Required('agent_message')]
+    public RcsAgentMessage $agentMessage;
 
     /**
      * A valid messaging profile ID.
      */
-    #[Required]
-    public string $messaging_profile_id;
+    #[Required('messaging_profile_id')]
+    public string $messagingProfileID;
 
     /**
      * Phone number in +E.164 format.
@@ -68,11 +68,11 @@ final class MesssageRcsParams implements BaseModel
     #[Required]
     public string $to;
 
-    #[Optional]
-    public ?MmsFallback $mms_fallback;
+    #[Optional('mms_fallback')]
+    public ?MmsFallback $mmsFallback;
 
-    #[Optional]
-    public ?SMSFallback $sms_fallback;
+    #[Optional('sms_fallback')]
+    public ?SMSFallback $smsFallback;
 
     /**
      * Message type - must be set to "RCS".
@@ -85,8 +85,8 @@ final class MesssageRcsParams implements BaseModel
     /**
      * The URL where webhooks related to this message will be sent.
      */
-    #[Optional]
-    public ?string $webhook_url;
+    #[Optional('webhook_url')]
+    public ?string $webhookURL;
 
     /**
      * `new MesssageRcsParams()` is missing required properties by the API.
@@ -94,7 +94,7 @@ final class MesssageRcsParams implements BaseModel
      * To enforce required parameters use
      * ```
      * MesssageRcsParams::with(
-     *   agent_id: ..., agent_message: ..., messaging_profile_id: ..., to: ...
+     *   agentID: ..., agentMessage: ..., messagingProfileID: ..., to: ...
      * )
      * ```
      *
@@ -119,41 +119,41 @@ final class MesssageRcsParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param RcsAgentMessage|array{
-     *   content_message?: ContentMessage|null,
+     *   contentMessage?: ContentMessage|null,
      *   event?: Event|null,
-     *   expire_time?: \DateTimeInterface|null,
+     *   expireTime?: \DateTimeInterface|null,
      *   ttl?: string|null,
-     * } $agent_message
+     * } $agentMessage
      * @param MmsFallback|array{
      *   from?: string|null,
-     *   media_urls?: list<string>|null,
+     *   mediaURLs?: list<string>|null,
      *   subject?: string|null,
      *   text?: string|null,
-     * } $mms_fallback
-     * @param SMSFallback|array{from?: string|null, text?: string|null} $sms_fallback
+     * } $mmsFallback
+     * @param SMSFallback|array{from?: string|null, text?: string|null} $smsFallback
      * @param Type|value-of<Type> $type
      */
     public static function with(
-        string $agent_id,
-        RcsAgentMessage|array $agent_message,
-        string $messaging_profile_id,
+        string $agentID,
+        RcsAgentMessage|array $agentMessage,
+        string $messagingProfileID,
         string $to,
-        MmsFallback|array|null $mms_fallback = null,
-        SMSFallback|array|null $sms_fallback = null,
+        MmsFallback|array|null $mmsFallback = null,
+        SMSFallback|array|null $smsFallback = null,
         Type|string|null $type = null,
-        ?string $webhook_url = null,
+        ?string $webhookURL = null,
     ): self {
         $obj = new self;
 
-        $obj['agent_id'] = $agent_id;
-        $obj['agent_message'] = $agent_message;
-        $obj['messaging_profile_id'] = $messaging_profile_id;
+        $obj['agentID'] = $agentID;
+        $obj['agentMessage'] = $agentMessage;
+        $obj['messagingProfileID'] = $messagingProfileID;
         $obj['to'] = $to;
 
-        null !== $mms_fallback && $obj['mms_fallback'] = $mms_fallback;
-        null !== $sms_fallback && $obj['sms_fallback'] = $sms_fallback;
+        null !== $mmsFallback && $obj['mmsFallback'] = $mmsFallback;
+        null !== $smsFallback && $obj['smsFallback'] = $smsFallback;
         null !== $type && $obj['type'] = $type;
-        null !== $webhook_url && $obj['webhook_url'] = $webhook_url;
+        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
 
         return $obj;
     }
@@ -164,23 +164,23 @@ final class MesssageRcsParams implements BaseModel
     public function withAgentID(string $agentID): self
     {
         $obj = clone $this;
-        $obj['agent_id'] = $agentID;
+        $obj['agentID'] = $agentID;
 
         return $obj;
     }
 
     /**
      * @param RcsAgentMessage|array{
-     *   content_message?: ContentMessage|null,
+     *   contentMessage?: ContentMessage|null,
      *   event?: Event|null,
-     *   expire_time?: \DateTimeInterface|null,
+     *   expireTime?: \DateTimeInterface|null,
      *   ttl?: string|null,
      * } $agentMessage
      */
     public function withAgentMessage(RcsAgentMessage|array $agentMessage): self
     {
         $obj = clone $this;
-        $obj['agent_message'] = $agentMessage;
+        $obj['agentMessage'] = $agentMessage;
 
         return $obj;
     }
@@ -191,7 +191,7 @@ final class MesssageRcsParams implements BaseModel
     public function withMessagingProfileID(string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj['messaging_profile_id'] = $messagingProfileID;
+        $obj['messagingProfileID'] = $messagingProfileID;
 
         return $obj;
     }
@@ -210,7 +210,7 @@ final class MesssageRcsParams implements BaseModel
     /**
      * @param MmsFallback|array{
      *   from?: string|null,
-     *   media_urls?: list<string>|null,
+     *   mediaURLs?: list<string>|null,
      *   subject?: string|null,
      *   text?: string|null,
      * } $mmsFallback
@@ -218,7 +218,7 @@ final class MesssageRcsParams implements BaseModel
     public function withMmsFallback(MmsFallback|array $mmsFallback): self
     {
         $obj = clone $this;
-        $obj['mms_fallback'] = $mmsFallback;
+        $obj['mmsFallback'] = $mmsFallback;
 
         return $obj;
     }
@@ -229,7 +229,7 @@ final class MesssageRcsParams implements BaseModel
     public function withSMSFallback(SMSFallback|array $smsFallback): self
     {
         $obj = clone $this;
-        $obj['sms_fallback'] = $smsFallback;
+        $obj['smsFallback'] = $smsFallback;
 
         return $obj;
     }
@@ -253,7 +253,7 @@ final class MesssageRcsParams implements BaseModel
     public function withWebhookURL(string $webhookURL): self
     {
         $obj = clone $this;
-        $obj['webhook_url'] = $webhookURL;
+        $obj['webhookURL'] = $webhookURL;
 
         return $obj;
     }

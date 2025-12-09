@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Specifies the phone number range for this associated phone number.
  *
  * @phpstan-type PhoneNumberRangeShape = array{
- *   end_at?: string|null, start_at?: string|null
+ *   endAt?: string|null, startAt?: string|null
  * }
  */
 final class PhoneNumberRange implements BaseModel
@@ -23,14 +23,14 @@ final class PhoneNumberRange implements BaseModel
     /**
      * Specifies the end of the phone number range for this associated phone number.
      */
-    #[Optional]
-    public ?string $end_at;
+    #[Optional('end_at')]
+    public ?string $endAt;
 
     /**
      * Specifies the start of the phone number range for this associated phone number.
      */
-    #[Optional]
-    public ?string $start_at;
+    #[Optional('start_at')]
+    public ?string $startAt;
 
     public function __construct()
     {
@@ -43,13 +43,13 @@ final class PhoneNumberRange implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $end_at = null,
-        ?string $start_at = null
+        ?string $endAt = null,
+        ?string $startAt = null
     ): self {
         $obj = new self;
 
-        null !== $end_at && $obj['end_at'] = $end_at;
-        null !== $start_at && $obj['start_at'] = $start_at;
+        null !== $endAt && $obj['endAt'] = $endAt;
+        null !== $startAt && $obj['startAt'] = $startAt;
 
         return $obj;
     }
@@ -60,7 +60,7 @@ final class PhoneNumberRange implements BaseModel
     public function withEndAt(string $endAt): self
     {
         $obj = clone $this;
-        $obj['end_at'] = $endAt;
+        $obj['endAt'] = $endAt;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class PhoneNumberRange implements BaseModel
     public function withStartAt(string $startAt): self
     {
         $obj = clone $this;
-        $obj['start_at'] = $startAt;
+        $obj['startAt'] = $startAt;
 
         return $obj;
     }

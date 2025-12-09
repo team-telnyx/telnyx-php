@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[network_id].
  *
- * @phpstan-type FilterShape = array{network_id?: string|null}
+ * @phpstan-type FilterShape = array{networkID?: string|null}
  */
 final class Filter implements BaseModel
 {
@@ -21,8 +21,8 @@ final class Filter implements BaseModel
     /**
      * The associated network id to filter on.
      */
-    #[Optional]
-    public ?string $network_id;
+    #[Optional('network_id')]
+    public ?string $networkID;
 
     public function __construct()
     {
@@ -34,11 +34,11 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $network_id = null): self
+    public static function with(?string $networkID = null): self
     {
         $obj = new self;
 
-        null !== $network_id && $obj['network_id'] = $network_id;
+        null !== $networkID && $obj['networkID'] = $networkID;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class Filter implements BaseModel
     public function withNetworkID(string $networkID): self
     {
         $obj = clone $this;
-        $obj['network_id'] = $networkID;
+        $obj['networkID'] = $networkID;
 
         return $obj;
     }

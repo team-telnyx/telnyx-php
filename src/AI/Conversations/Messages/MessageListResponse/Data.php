@@ -17,9 +17,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type DataShape = array{
  *   role: value-of<Role>,
  *   text: string,
- *   created_at?: \DateTimeInterface|null,
- *   sent_at?: \DateTimeInterface|null,
- *   tool_calls?: list<ToolCall>|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   sentAt?: \DateTimeInterface|null,
+ *   toolCalls?: list<ToolCall>|null,
  * }
  */
 final class Data implements BaseModel
@@ -44,22 +44,22 @@ final class Data implements BaseModel
     /**
      * The datetime the message was created on the conversation. This does not necesarily correspond to the time the message was sent. The best field to use to determine the time the end user experienced the message is `sent_at`.
      */
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
     /**
      * The datetime the message was sent to the end user.
      */
-    #[Optional]
-    public ?\DateTimeInterface $sent_at;
+    #[Optional('sent_at')]
+    public ?\DateTimeInterface $sentAt;
 
     /**
      * Optional tool calls made by the assistant.
      *
-     * @var list<ToolCall>|null $tool_calls
+     * @var list<ToolCall>|null $toolCalls
      */
-    #[Optional(list: ToolCall::class)]
-    public ?array $tool_calls;
+    #[Optional('tool_calls', list: ToolCall::class)]
+    public ?array $toolCalls;
 
     /**
      * `new Data()` is missing required properties by the API.
@@ -88,23 +88,23 @@ final class Data implements BaseModel
      * @param Role|value-of<Role> $role
      * @param list<ToolCall|array{
      *   id: string, function: Function1, type: value-of<Type>
-     * }> $tool_calls
+     * }> $toolCalls
      */
     public static function with(
         Role|string $role,
         string $text,
-        ?\DateTimeInterface $created_at = null,
-        ?\DateTimeInterface $sent_at = null,
-        ?array $tool_calls = null,
+        ?\DateTimeInterface $createdAt = null,
+        ?\DateTimeInterface $sentAt = null,
+        ?array $toolCalls = null,
     ): self {
         $obj = new self;
 
         $obj['role'] = $role;
         $obj['text'] = $text;
 
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $sent_at && $obj['sent_at'] = $sent_at;
-        null !== $tool_calls && $obj['tool_calls'] = $tool_calls;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $sentAt && $obj['sentAt'] = $sentAt;
+        null !== $toolCalls && $obj['toolCalls'] = $toolCalls;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -150,7 +150,7 @@ final class Data implements BaseModel
     public function withSentAt(\DateTimeInterface $sentAt): self
     {
         $obj = clone $this;
-        $obj['sent_at'] = $sentAt;
+        $obj['sentAt'] = $sentAt;
 
         return $obj;
     }
@@ -165,7 +165,7 @@ final class Data implements BaseModel
     public function withToolCalls(array $toolCalls): self
     {
         $obj = clone $this;
-        $obj['tool_calls'] = $toolCalls;
+        $obj['toolCalls'] = $toolCalls;
 
         return $obj;
     }

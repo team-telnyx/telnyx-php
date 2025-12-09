@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\SiprecConnectorsService::create()
  *
  * @phpstan-type SiprecConnectorCreateParamsShape = array{
- *   host: string, name: string, port: int, app_subdomain?: string
+ *   host: string, name: string, port: int, appSubdomain?: string
  * }
  */
 final class SiprecConnectorCreateParams implements BaseModel
@@ -46,8 +46,8 @@ final class SiprecConnectorCreateParams implements BaseModel
     /**
      * Subdomain to route the call when using Telnyx SRS (optional for non-Telnyx SRS).
      */
-    #[Optional]
-    public ?string $app_subdomain;
+    #[Optional('app_subdomain')]
+    public ?string $appSubdomain;
 
     /**
      * `new SiprecConnectorCreateParams()` is missing required properties by the API.
@@ -77,7 +77,7 @@ final class SiprecConnectorCreateParams implements BaseModel
         string $host,
         string $name,
         int $port,
-        ?string $app_subdomain = null
+        ?string $appSubdomain = null
     ): self {
         $obj = new self;
 
@@ -85,7 +85,7 @@ final class SiprecConnectorCreateParams implements BaseModel
         $obj['name'] = $name;
         $obj['port'] = $port;
 
-        null !== $app_subdomain && $obj['app_subdomain'] = $app_subdomain;
+        null !== $appSubdomain && $obj['appSubdomain'] = $appSubdomain;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class SiprecConnectorCreateParams implements BaseModel
     public function withAppSubdomain(string $appSubdomain): self
     {
         $obj = clone $this;
-        $obj['app_subdomain'] = $appSubdomain;
+        $obj['appSubdomain'] = $appSubdomain;
 
         return $obj;
     }

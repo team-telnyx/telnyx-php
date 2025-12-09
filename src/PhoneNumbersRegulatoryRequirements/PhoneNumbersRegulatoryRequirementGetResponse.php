@@ -40,17 +40,17 @@ final class PhoneNumbersRegulatoryRequirementGetResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   phone_number?: string|null,
-     *   phone_number_type?: string|null,
-     *   record_type?: string|null,
-     *   region_information?: list<RegionInformation>|null,
-     *   regulatory_requirements?: list<RegulatoryRequirement>|null,
+     *   phoneNumber?: string|null,
+     *   phoneNumberType?: string|null,
+     *   recordType?: string|null,
+     *   regionInformation?: list<RegionInformation>|null,
+     *   regulatoryRequirements?: list<RegulatoryRequirement>|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -67,11 +67,11 @@ final class PhoneNumbersRegulatoryRequirementGetResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   phone_number?: string|null,
-     *   phone_number_type?: string|null,
-     *   record_type?: string|null,
-     *   region_information?: list<RegionInformation>|null,
-     *   regulatory_requirements?: list<RegulatoryRequirement>|null,
+     *   phoneNumber?: string|null,
+     *   phoneNumberType?: string|null,
+     *   recordType?: string|null,
+     *   regionInformation?: list<RegionInformation>|null,
+     *   regulatoryRequirements?: list<RegulatoryRequirement>|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -84,10 +84,10 @@ final class PhoneNumbersRegulatoryRequirementGetResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

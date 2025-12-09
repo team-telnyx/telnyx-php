@@ -50,9 +50,7 @@ final class CanaryDeploy implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VersionConfig|array{
-     *   percentage: float, version_id: string
-     * }> $versions
+     * @param list<VersionConfig|array{percentage: float, versionID: string}> $versions
      */
     public static function with(array $versions): self
     {
@@ -66,9 +64,7 @@ final class CanaryDeploy implements BaseModel
     /**
      * List of version configurations.
      *
-     * @param list<VersionConfig|array{
-     *   percentage: float, version_id: string
-     * }> $versions
+     * @param list<VersionConfig|array{percentage: float, versionID: string}> $versions
      */
     public function withVersions(array $versions): self
     {

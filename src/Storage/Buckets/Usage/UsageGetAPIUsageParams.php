@@ -17,7 +17,7 @@ use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageParams\Filter;
  *
  * @phpstan-type UsageGetAPIUsageParamsShape = array{
  *   filter: Filter|array{
- *     end_time: \DateTimeInterface, start_time: \DateTimeInterface
+ *     endTime: \DateTimeInterface, startTime: \DateTimeInterface
  *   },
  * }
  */
@@ -58,7 +58,7 @@ final class UsageGetAPIUsageParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   end_time: \DateTimeInterface, start_time: \DateTimeInterface
+     *   endTime: \DateTimeInterface, startTime: \DateTimeInterface
      * } $filter
      */
     public static function with(Filter|array $filter): self
@@ -74,7 +74,7 @@ final class UsageGetAPIUsageParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[start_time], filter[end_time].
      *
      * @param Filter|array{
-     *   end_time: \DateTimeInterface, start_time: \DateTimeInterface
+     *   endTime: \DateTimeInterface, startTime: \DateTimeInterface
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

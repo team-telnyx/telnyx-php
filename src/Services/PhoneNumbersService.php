@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse;
 use Telnyx\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\PhoneNumbers\PhoneNumberListParams;
@@ -103,11 +104,11 @@ final class PhoneNumbersService implements PhoneNumbersContract
      * Update a phone number
      *
      * @param array{
-     *   billing_group_id?: string,
-     *   connection_id?: string,
-     *   customer_reference?: string,
-     *   external_pin?: string,
-     *   hd_voice_enabled?: bool,
+     *   billingGroupID?: string,
+     *   connectionID?: string,
+     *   customerReference?: string,
+     *   externalPin?: string,
+     *   hdVoiceEnabled?: bool,
      *   tags?: list<string>,
      * }|PhoneNumberUpdateParams $params
      *
@@ -142,23 +143,23 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *
      * @param array{
      *   filter?: array{
-     *     billing_group_id?: string,
-     *     connection_id?: string,
-     *     country_iso_alpha2?: string|list<string>,
-     *     customer_reference?: string,
-     *     emergency_address_id?: string,
-     *     number_type?: array{
+     *     billingGroupID?: string,
+     *     connectionID?: string,
+     *     countryISOAlpha2?: string|list<string>,
+     *     customerReference?: string,
+     *     emergencyAddressID?: string,
+     *     numberType?: array{
      *       eq?: 'local'|'national'|'toll_free'|'mobile'|'shared_cost'|Eq
      *     },
-     *     phone_number?: string,
+     *     phoneNumber?: string,
      *     source?: 'ported'|'purchased'|Source,
      *     status?: 'purchase-pending'|'purchase-failed'|'port-pending'|'active'|'deleted'|'port-failed'|'emergency-only'|'ported-out'|'port-out-pending'|Status,
      *     tag?: string,
-     *     'voice.connection_name'?: array{
-     *       contains?: string, ends_with?: string, eq?: string, starts_with?: string
+     *     voiceConnectionName?: array{
+     *       contains?: string, endsWith?: string, eq?: string, startsWith?: string
      *     },
-     *     'voice.usage_payment_method'?: 'pay-per-minute'|'channel'|VoiceUsagePaymentMethod,
-     *     without_tags?: 'true'|'false'|WithoutTags,
+     *     voiceUsagePaymentMethod?: 'pay-per-minute'|'channel'|VoiceUsagePaymentMethod,
+     *     withoutTags?: 'true'|'false'|WithoutTags,
      *   },
      *   page?: array{number?: int, size?: int},
      *   sort?: 'purchased_at'|'phone_number'|'connection_name'|'usage_payment_method'|Sort,
@@ -216,25 +217,25 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *
      * @param array{
      *   filter?: array{
-     *     billing_group_id?: string,
-     *     connection_id?: string,
-     *     country_iso_alpha2?: string|list<string>,
-     *     customer_reference?: string,
-     *     emergency_address_id?: string,
-     *     number_type?: array{
+     *     billingGroupID?: string,
+     *     connectionID?: string,
+     *     countryISOAlpha2?: string|list<string>,
+     *     customerReference?: string,
+     *     emergencyAddressID?: string,
+     *     numberType?: array{
      *       eq?: 'local'|'national'|'toll_free'|'mobile'|'shared_cost'|PhoneNumberSlimListParams\Filter\NumberType\Eq,
      *     },
-     *     phone_number?: string,
+     *     phoneNumber?: string,
      *     source?: 'ported'|'purchased'|PhoneNumberSlimListParams\Filter\Source,
      *     status?: 'purchase-pending'|'purchase-failed'|'port_pending'|'active'|'deleted'|'port-failed'|'emergency-only'|'ported-out'|'port-out-pending'|PhoneNumberSlimListParams\Filter\Status,
      *     tag?: string,
-     *     'voice.connection_name'?: array{
-     *       contains?: string, ends_with?: string, eq?: string, starts_with?: string
+     *     voiceConnectionName?: array{
+     *       contains?: string, endsWith?: string, eq?: string, startsWith?: string
      *     },
-     *     'voice.usage_payment_method'?: 'pay-per-minute'|'channel'|PhoneNumberSlimListParams\Filter\VoiceUsagePaymentMethod,
+     *     voiceUsagePaymentMethod?: 'pay-per-minute'|'channel'|PhoneNumberSlimListParams\Filter\VoiceUsagePaymentMethod,
      *   },
-     *   include_connection?: bool,
-     *   include_tags?: bool,
+     *   includeConnection?: bool,
+     *   includeTags?: bool,
      *   page?: array{number?: int, size?: int},
      *   sort?: 'purchased_at'|'phone_number'|'connection_name'|'usage_payment_method'|PhoneNumberSlimListParams\Sort,
      * }|PhoneNumberSlimListParams $params
@@ -254,7 +255,13 @@ final class PhoneNumbersService implements PhoneNumbersContract
         $response = $this->client->request(
             method: 'get',
             path: 'phone_numbers/slim',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'includeConnection' => 'include_connection',
+                    'includeTags' => 'include_tags',
+                ],
+            ),
             options: $options,
             convert: PhoneNumberSlimListResponse::class,
         );

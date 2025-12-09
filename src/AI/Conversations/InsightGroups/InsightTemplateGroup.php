@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type InsightTemplateGroupShape = array{
  *   id: string,
- *   created_at: \DateTimeInterface,
+ *   createdAt: \DateTimeInterface,
  *   name: string,
  *   description?: string|null,
  *   insights?: list<InsightTemplate>|null,
@@ -29,8 +29,8 @@ final class InsightTemplateGroup implements BaseModel
     #[Required]
     public string $id;
 
-    #[Required]
-    public \DateTimeInterface $created_at;
+    #[Required('created_at')]
+    public \DateTimeInterface $createdAt;
 
     #[Required]
     public string $name;
@@ -50,7 +50,7 @@ final class InsightTemplateGroup implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * InsightTemplateGroup::with(id: ..., created_at: ..., name: ...)
+     * InsightTemplateGroup::with(id: ..., createdAt: ..., name: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -71,17 +71,17 @@ final class InsightTemplateGroup implements BaseModel
      *
      * @param list<InsightTemplate|array{
      *   id: string,
-     *   created_at: \DateTimeInterface,
+     *   createdAt: \DateTimeInterface,
      *   instructions: string,
-     *   insight_type?: value-of<InsightType>|null,
-     *   json_schema?: mixed|string|null,
+     *   insightType?: value-of<InsightType>|null,
+     *   jsonSchema?: mixed|string|null,
      *   name?: string|null,
      *   webhook?: string|null,
      * }> $insights
      */
     public static function with(
         string $id,
-        \DateTimeInterface $created_at,
+        \DateTimeInterface $createdAt,
         string $name,
         ?string $description = null,
         ?array $insights = null,
@@ -90,7 +90,7 @@ final class InsightTemplateGroup implements BaseModel
         $obj = new self;
 
         $obj['id'] = $id;
-        $obj['created_at'] = $created_at;
+        $obj['createdAt'] = $createdAt;
         $obj['name'] = $name;
 
         null !== $description && $obj['description'] = $description;
@@ -111,7 +111,7 @@ final class InsightTemplateGroup implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -135,10 +135,10 @@ final class InsightTemplateGroup implements BaseModel
     /**
      * @param list<InsightTemplate|array{
      *   id: string,
-     *   created_at: \DateTimeInterface,
+     *   createdAt: \DateTimeInterface,
      *   instructions: string,
-     *   insight_type?: value-of<InsightType>|null,
-     *   json_schema?: mixed|string|null,
+     *   insightType?: value-of<InsightType>|null,
+     *   jsonSchema?: mixed|string|null,
      *   name?: string|null,
      *   webhook?: string|null,
      * }> $insights

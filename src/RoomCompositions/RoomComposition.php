@@ -13,24 +13,24 @@ use Telnyx\RoomCompositions\RoomComposition\Status;
 /**
  * @phpstan-type RoomCompositionShape = array{
  *   id?: string|null,
- *   completed_at?: \DateTimeInterface|null,
- *   created_at?: \DateTimeInterface|null,
- *   download_url?: string|null,
- *   duration_secs?: int|null,
- *   ended_at?: \DateTimeInterface|null,
+ *   completedAt?: \DateTimeInterface|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   downloadURL?: string|null,
+ *   durationSecs?: int|null,
+ *   endedAt?: \DateTimeInterface|null,
  *   format?: value-of<Format>|null,
- *   record_type?: string|null,
- *   room_id?: string|null,
- *   session_id?: string|null,
- *   size_mb?: float|null,
- *   started_at?: \DateTimeInterface|null,
+ *   recordType?: string|null,
+ *   roomID?: string|null,
+ *   sessionID?: string|null,
+ *   sizeMB?: float|null,
+ *   startedAt?: \DateTimeInterface|null,
  *   status?: value-of<Status>|null,
- *   updated_at?: \DateTimeInterface|null,
- *   user_id?: string|null,
- *   video_layout?: array<string,VideoRegion>|null,
- *   webhook_event_failover_url?: string|null,
- *   webhook_event_url?: string|null,
- *   webhook_timeout_secs?: int|null,
+ *   updatedAt?: \DateTimeInterface|null,
+ *   userID?: string|null,
+ *   videoLayout?: array<string,VideoRegion>|null,
+ *   webhookEventFailoverURL?: string|null,
+ *   webhookEventURL?: string|null,
+ *   webhookTimeoutSecs?: int|null,
  * }
  */
 final class RoomComposition implements BaseModel
@@ -47,32 +47,32 @@ final class RoomComposition implements BaseModel
     /**
      * ISO 8601 timestamp when the room composition has completed.
      */
-    #[Optional]
-    public ?\DateTimeInterface $completed_at;
+    #[Optional('completed_at')]
+    public ?\DateTimeInterface $completedAt;
 
     /**
      * ISO 8601 timestamp when the room composition was created.
      */
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
     /**
      * Url to download the composition.
      */
-    #[Optional]
-    public ?string $download_url;
+    #[Optional('download_url')]
+    public ?string $downloadURL;
 
     /**
      * Shows the room composition duration in seconds.
      */
-    #[Optional]
-    public ?int $duration_secs;
+    #[Optional('duration_secs')]
+    public ?int $durationSecs;
 
     /**
      * ISO 8601 timestamp when the room composition has ended.
      */
-    #[Optional]
-    public ?\DateTimeInterface $ended_at;
+    #[Optional('ended_at')]
+    public ?\DateTimeInterface $endedAt;
 
     /**
      * Shows format of the room composition.
@@ -82,32 +82,32 @@ final class RoomComposition implements BaseModel
     #[Optional(enum: Format::class)]
     public ?string $format;
 
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * Identify the room associated with the room composition.
      */
-    #[Optional]
-    public ?string $room_id;
+    #[Optional('room_id')]
+    public ?string $roomID;
 
     /**
      * Identify the room session associated with the room composition.
      */
-    #[Optional]
-    public ?string $session_id;
+    #[Optional('session_id')]
+    public ?string $sessionID;
 
     /**
      * Shows the room composition size in MB.
      */
-    #[Optional]
-    public ?float $size_mb;
+    #[Optional('size_mb')]
+    public ?float $sizeMB;
 
     /**
      * ISO 8601 timestamp when the room composition has stated.
      */
-    #[Optional]
-    public ?\DateTimeInterface $started_at;
+    #[Optional('started_at')]
+    public ?\DateTimeInterface $startedAt;
 
     /**
      * Shows the room composition status.
@@ -120,40 +120,40 @@ final class RoomComposition implements BaseModel
     /**
      * ISO 8601 timestamp when the room composition was updated.
      */
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     /**
      * Identify the user associated with the room composition.
      */
-    #[Optional]
-    public ?string $user_id;
+    #[Optional('user_id')]
+    public ?string $userID;
 
     /**
      * Describes the video layout of the room composition in terms of regions. Limited to 2 regions.
      *
-     * @var array<string,VideoRegion>|null $video_layout
+     * @var array<string,VideoRegion>|null $videoLayout
      */
-    #[Optional(map: VideoRegion::class)]
-    public ?array $video_layout;
+    #[Optional('video_layout', map: VideoRegion::class)]
+    public ?array $videoLayout;
 
     /**
      * The failover URL where webhooks related to this room composition will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
-    #[Optional(nullable: true)]
-    public ?string $webhook_event_failover_url;
+    #[Optional('webhook_event_failover_url', nullable: true)]
+    public ?string $webhookEventFailoverURL;
 
     /**
      * The URL where webhooks related to this room composition will be sent. Must include a scheme, such as 'https'.
      */
-    #[Optional]
-    public ?string $webhook_event_url;
+    #[Optional('webhook_event_url')]
+    public ?string $webhookEventURL;
 
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    #[Optional(nullable: true)]
-    public ?int $webhook_timeout_secs;
+    #[Optional('webhook_timeout_secs', nullable: true)]
+    public ?int $webhookTimeoutSecs;
 
     public function __construct()
     {
@@ -169,57 +169,57 @@ final class RoomComposition implements BaseModel
      * @param Status|value-of<Status> $status
      * @param array<string,VideoRegion|array{
      *   height?: int|null,
-     *   max_columns?: int|null,
-     *   max_rows?: int|null,
-     *   video_sources?: list<string>|null,
+     *   maxColumns?: int|null,
+     *   maxRows?: int|null,
+     *   videoSources?: list<string>|null,
      *   width?: int|null,
-     *   x_pos?: int|null,
-     *   y_pos?: int|null,
-     *   z_pos?: int|null,
-     * }> $video_layout
+     *   xPos?: int|null,
+     *   yPos?: int|null,
+     *   zPos?: int|null,
+     * }> $videoLayout
      */
     public static function with(
         ?string $id = null,
-        ?\DateTimeInterface $completed_at = null,
-        ?\DateTimeInterface $created_at = null,
-        ?string $download_url = null,
-        ?int $duration_secs = null,
-        ?\DateTimeInterface $ended_at = null,
+        ?\DateTimeInterface $completedAt = null,
+        ?\DateTimeInterface $createdAt = null,
+        ?string $downloadURL = null,
+        ?int $durationSecs = null,
+        ?\DateTimeInterface $endedAt = null,
         Format|string|null $format = null,
-        ?string $record_type = null,
-        ?string $room_id = null,
-        ?string $session_id = null,
-        ?float $size_mb = null,
-        ?\DateTimeInterface $started_at = null,
+        ?string $recordType = null,
+        ?string $roomID = null,
+        ?string $sessionID = null,
+        ?float $sizeMB = null,
+        ?\DateTimeInterface $startedAt = null,
         Status|string|null $status = null,
-        ?\DateTimeInterface $updated_at = null,
-        ?string $user_id = null,
-        ?array $video_layout = null,
-        ?string $webhook_event_failover_url = null,
-        ?string $webhook_event_url = null,
-        ?int $webhook_timeout_secs = null,
+        ?\DateTimeInterface $updatedAt = null,
+        ?string $userID = null,
+        ?array $videoLayout = null,
+        ?string $webhookEventFailoverURL = null,
+        ?string $webhookEventURL = null,
+        ?int $webhookTimeoutSecs = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $completed_at && $obj['completed_at'] = $completed_at;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $download_url && $obj['download_url'] = $download_url;
-        null !== $duration_secs && $obj['duration_secs'] = $duration_secs;
-        null !== $ended_at && $obj['ended_at'] = $ended_at;
+        null !== $completedAt && $obj['completedAt'] = $completedAt;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $downloadURL && $obj['downloadURL'] = $downloadURL;
+        null !== $durationSecs && $obj['durationSecs'] = $durationSecs;
+        null !== $endedAt && $obj['endedAt'] = $endedAt;
         null !== $format && $obj['format'] = $format;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $room_id && $obj['room_id'] = $room_id;
-        null !== $session_id && $obj['session_id'] = $session_id;
-        null !== $size_mb && $obj['size_mb'] = $size_mb;
-        null !== $started_at && $obj['started_at'] = $started_at;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $roomID && $obj['roomID'] = $roomID;
+        null !== $sessionID && $obj['sessionID'] = $sessionID;
+        null !== $sizeMB && $obj['sizeMB'] = $sizeMB;
+        null !== $startedAt && $obj['startedAt'] = $startedAt;
         null !== $status && $obj['status'] = $status;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
-        null !== $user_id && $obj['user_id'] = $user_id;
-        null !== $video_layout && $obj['video_layout'] = $video_layout;
-        null !== $webhook_event_failover_url && $obj['webhook_event_failover_url'] = $webhook_event_failover_url;
-        null !== $webhook_event_url && $obj['webhook_event_url'] = $webhook_event_url;
-        null !== $webhook_timeout_secs && $obj['webhook_timeout_secs'] = $webhook_timeout_secs;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $userID && $obj['userID'] = $userID;
+        null !== $videoLayout && $obj['videoLayout'] = $videoLayout;
+        null !== $webhookEventFailoverURL && $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        null !== $webhookEventURL && $obj['webhookEventURL'] = $webhookEventURL;
+        null !== $webhookTimeoutSecs && $obj['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
         return $obj;
     }
@@ -241,7 +241,7 @@ final class RoomComposition implements BaseModel
     public function withCompletedAt(\DateTimeInterface $completedAt): self
     {
         $obj = clone $this;
-        $obj['completed_at'] = $completedAt;
+        $obj['completedAt'] = $completedAt;
 
         return $obj;
     }
@@ -252,7 +252,7 @@ final class RoomComposition implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -263,7 +263,7 @@ final class RoomComposition implements BaseModel
     public function withDownloadURL(string $downloadURL): self
     {
         $obj = clone $this;
-        $obj['download_url'] = $downloadURL;
+        $obj['downloadURL'] = $downloadURL;
 
         return $obj;
     }
@@ -274,7 +274,7 @@ final class RoomComposition implements BaseModel
     public function withDurationSecs(int $durationSecs): self
     {
         $obj = clone $this;
-        $obj['duration_secs'] = $durationSecs;
+        $obj['durationSecs'] = $durationSecs;
 
         return $obj;
     }
@@ -285,7 +285,7 @@ final class RoomComposition implements BaseModel
     public function withEndedAt(\DateTimeInterface $endedAt): self
     {
         $obj = clone $this;
-        $obj['ended_at'] = $endedAt;
+        $obj['endedAt'] = $endedAt;
 
         return $obj;
     }
@@ -306,7 +306,7 @@ final class RoomComposition implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -317,7 +317,7 @@ final class RoomComposition implements BaseModel
     public function withRoomID(string $roomID): self
     {
         $obj = clone $this;
-        $obj['room_id'] = $roomID;
+        $obj['roomID'] = $roomID;
 
         return $obj;
     }
@@ -328,7 +328,7 @@ final class RoomComposition implements BaseModel
     public function withSessionID(string $sessionID): self
     {
         $obj = clone $this;
-        $obj['session_id'] = $sessionID;
+        $obj['sessionID'] = $sessionID;
 
         return $obj;
     }
@@ -339,7 +339,7 @@ final class RoomComposition implements BaseModel
     public function withSizeMB(float $sizeMB): self
     {
         $obj = clone $this;
-        $obj['size_mb'] = $sizeMB;
+        $obj['sizeMB'] = $sizeMB;
 
         return $obj;
     }
@@ -350,7 +350,7 @@ final class RoomComposition implements BaseModel
     public function withStartedAt(\DateTimeInterface $startedAt): self
     {
         $obj = clone $this;
-        $obj['started_at'] = $startedAt;
+        $obj['startedAt'] = $startedAt;
 
         return $obj;
     }
@@ -374,7 +374,7 @@ final class RoomComposition implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -385,7 +385,7 @@ final class RoomComposition implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj['user_id'] = $userID;
+        $obj['userID'] = $userID;
 
         return $obj;
     }
@@ -395,19 +395,19 @@ final class RoomComposition implements BaseModel
      *
      * @param array<string,VideoRegion|array{
      *   height?: int|null,
-     *   max_columns?: int|null,
-     *   max_rows?: int|null,
-     *   video_sources?: list<string>|null,
+     *   maxColumns?: int|null,
+     *   maxRows?: int|null,
+     *   videoSources?: list<string>|null,
      *   width?: int|null,
-     *   x_pos?: int|null,
-     *   y_pos?: int|null,
-     *   z_pos?: int|null,
+     *   xPos?: int|null,
+     *   yPos?: int|null,
+     *   zPos?: int|null,
      * }> $videoLayout
      */
     public function withVideoLayout(array $videoLayout): self
     {
         $obj = clone $this;
-        $obj['video_layout'] = $videoLayout;
+        $obj['videoLayout'] = $videoLayout;
 
         return $obj;
     }
@@ -419,7 +419,7 @@ final class RoomComposition implements BaseModel
         ?string $webhookEventFailoverURL
     ): self {
         $obj = clone $this;
-        $obj['webhook_event_failover_url'] = $webhookEventFailoverURL;
+        $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
 
         return $obj;
     }
@@ -430,7 +430,7 @@ final class RoomComposition implements BaseModel
     public function withWebhookEventURL(string $webhookEventURL): self
     {
         $obj = clone $this;
-        $obj['webhook_event_url'] = $webhookEventURL;
+        $obj['webhookEventURL'] = $webhookEventURL;
 
         return $obj;
     }
@@ -441,7 +441,7 @@ final class RoomComposition implements BaseModel
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
         $obj = clone $this;
-        $obj['webhook_timeout_secs'] = $webhookTimeoutSecs;
+        $obj['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
         return $obj;
     }

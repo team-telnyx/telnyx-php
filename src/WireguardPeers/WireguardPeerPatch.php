@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type WireguardPeerPatchShape = array{public_key?: string|null}
+ * @phpstan-type WireguardPeerPatchShape = array{publicKey?: string|null}
  */
 final class WireguardPeerPatch implements BaseModel
 {
@@ -19,8 +19,8 @@ final class WireguardPeerPatch implements BaseModel
     /**
      * The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
      */
-    #[Optional]
-    public ?string $public_key;
+    #[Optional('public_key')]
+    public ?string $publicKey;
 
     public function __construct()
     {
@@ -32,11 +32,11 @@ final class WireguardPeerPatch implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $public_key = null): self
+    public static function with(?string $publicKey = null): self
     {
         $obj = new self;
 
-        null !== $public_key && $obj['public_key'] = $public_key;
+        null !== $publicKey && $obj['publicKey'] = $publicKey;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class WireguardPeerPatch implements BaseModel
     public function withPublicKey(string $publicKey): self
     {
         $obj = clone $this;
-        $obj['public_key'] = $publicKey;
+        $obj['publicKey'] = $publicKey;
 
         return $obj;
     }

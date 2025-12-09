@@ -18,15 +18,15 @@ use Telnyx\OAuthClients\OAuthClientCreateParams\ClientType;
  * @see Telnyx\Services\OAuthClientsService::create()
  *
  * @phpstan-type OAuthClientCreateParamsShape = array{
- *   allowed_grant_types: list<AllowedGrantType|value-of<AllowedGrantType>>,
- *   allowed_scopes: list<string>,
- *   client_type: ClientType|value-of<ClientType>,
+ *   allowedGrantTypes: list<AllowedGrantType|value-of<AllowedGrantType>>,
+ *   allowedScopes: list<string>,
+ *   clientType: ClientType|value-of<ClientType>,
  *   name: string,
- *   logo_uri?: string,
- *   policy_uri?: string,
- *   redirect_uris?: list<string>,
- *   require_pkce?: bool,
- *   tos_uri?: string,
+ *   logoUri?: string,
+ *   policyUri?: string,
+ *   redirectUris?: list<string>,
+ *   requirePkce?: bool,
+ *   tosUri?: string,
  * }
  */
 final class OAuthClientCreateParams implements BaseModel
@@ -38,26 +38,26 @@ final class OAuthClientCreateParams implements BaseModel
     /**
      * List of allowed OAuth grant types.
      *
-     * @var list<value-of<AllowedGrantType>> $allowed_grant_types
+     * @var list<value-of<AllowedGrantType>> $allowedGrantTypes
      */
-    #[Required(list: AllowedGrantType::class)]
-    public array $allowed_grant_types;
+    #[Required('allowed_grant_types', list: AllowedGrantType::class)]
+    public array $allowedGrantTypes;
 
     /**
      * List of allowed OAuth scopes.
      *
-     * @var list<string> $allowed_scopes
+     * @var list<string> $allowedScopes
      */
-    #[Required(list: 'string')]
-    public array $allowed_scopes;
+    #[Required('allowed_scopes', list: 'string')]
+    public array $allowedScopes;
 
     /**
      * OAuth client type.
      *
-     * @var value-of<ClientType> $client_type
+     * @var value-of<ClientType> $clientType
      */
-    #[Required(enum: ClientType::class)]
-    public string $client_type;
+    #[Required('client_type', enum: ClientType::class)]
+    public string $clientType;
 
     /**
      * The name of the OAuth client.
@@ -68,34 +68,34 @@ final class OAuthClientCreateParams implements BaseModel
     /**
      * URL of the client logo.
      */
-    #[Optional]
-    public ?string $logo_uri;
+    #[Optional('logo_uri')]
+    public ?string $logoUri;
 
     /**
      * URL of the client's privacy policy.
      */
-    #[Optional]
-    public ?string $policy_uri;
+    #[Optional('policy_uri')]
+    public ?string $policyUri;
 
     /**
      * List of redirect URIs (required for authorization_code flow).
      *
-     * @var list<string>|null $redirect_uris
+     * @var list<string>|null $redirectUris
      */
-    #[Optional(list: 'string')]
-    public ?array $redirect_uris;
+    #[Optional('redirect_uris', list: 'string')]
+    public ?array $redirectUris;
 
     /**
      * Whether PKCE (Proof Key for Code Exchange) is required for this client.
      */
-    #[Optional]
-    public ?bool $require_pkce;
+    #[Optional('require_pkce')]
+    public ?bool $requirePkce;
 
     /**
      * URL of the client's terms of service.
      */
-    #[Optional]
-    public ?string $tos_uri;
+    #[Optional('tos_uri')]
+    public ?string $tosUri;
 
     /**
      * `new OAuthClientCreateParams()` is missing required properties by the API.
@@ -103,7 +103,7 @@ final class OAuthClientCreateParams implements BaseModel
      * To enforce required parameters use
      * ```
      * OAuthClientCreateParams::with(
-     *   allowed_grant_types: ..., allowed_scopes: ..., client_type: ..., name: ...
+     *   allowedGrantTypes: ..., allowedScopes: ..., clientType: ..., name: ...
      * )
      * ```
      *
@@ -127,34 +127,34 @@ final class OAuthClientCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AllowedGrantType|value-of<AllowedGrantType>> $allowed_grant_types
-     * @param list<string> $allowed_scopes
-     * @param ClientType|value-of<ClientType> $client_type
-     * @param list<string> $redirect_uris
+     * @param list<AllowedGrantType|value-of<AllowedGrantType>> $allowedGrantTypes
+     * @param list<string> $allowedScopes
+     * @param ClientType|value-of<ClientType> $clientType
+     * @param list<string> $redirectUris
      */
     public static function with(
-        array $allowed_grant_types,
-        array $allowed_scopes,
-        ClientType|string $client_type,
+        array $allowedGrantTypes,
+        array $allowedScopes,
+        ClientType|string $clientType,
         string $name,
-        ?string $logo_uri = null,
-        ?string $policy_uri = null,
-        ?array $redirect_uris = null,
-        ?bool $require_pkce = null,
-        ?string $tos_uri = null,
+        ?string $logoUri = null,
+        ?string $policyUri = null,
+        ?array $redirectUris = null,
+        ?bool $requirePkce = null,
+        ?string $tosUri = null,
     ): self {
         $obj = new self;
 
-        $obj['allowed_grant_types'] = $allowed_grant_types;
-        $obj['allowed_scopes'] = $allowed_scopes;
-        $obj['client_type'] = $client_type;
+        $obj['allowedGrantTypes'] = $allowedGrantTypes;
+        $obj['allowedScopes'] = $allowedScopes;
+        $obj['clientType'] = $clientType;
         $obj['name'] = $name;
 
-        null !== $logo_uri && $obj['logo_uri'] = $logo_uri;
-        null !== $policy_uri && $obj['policy_uri'] = $policy_uri;
-        null !== $redirect_uris && $obj['redirect_uris'] = $redirect_uris;
-        null !== $require_pkce && $obj['require_pkce'] = $require_pkce;
-        null !== $tos_uri && $obj['tos_uri'] = $tos_uri;
+        null !== $logoUri && $obj['logoUri'] = $logoUri;
+        null !== $policyUri && $obj['policyUri'] = $policyUri;
+        null !== $redirectUris && $obj['redirectUris'] = $redirectUris;
+        null !== $requirePkce && $obj['requirePkce'] = $requirePkce;
+        null !== $tosUri && $obj['tosUri'] = $tosUri;
 
         return $obj;
     }
@@ -167,7 +167,7 @@ final class OAuthClientCreateParams implements BaseModel
     public function withAllowedGrantTypes(array $allowedGrantTypes): self
     {
         $obj = clone $this;
-        $obj['allowed_grant_types'] = $allowedGrantTypes;
+        $obj['allowedGrantTypes'] = $allowedGrantTypes;
 
         return $obj;
     }
@@ -180,7 +180,7 @@ final class OAuthClientCreateParams implements BaseModel
     public function withAllowedScopes(array $allowedScopes): self
     {
         $obj = clone $this;
-        $obj['allowed_scopes'] = $allowedScopes;
+        $obj['allowedScopes'] = $allowedScopes;
 
         return $obj;
     }
@@ -193,7 +193,7 @@ final class OAuthClientCreateParams implements BaseModel
     public function withClientType(ClientType|string $clientType): self
     {
         $obj = clone $this;
-        $obj['client_type'] = $clientType;
+        $obj['clientType'] = $clientType;
 
         return $obj;
     }
@@ -215,7 +215,7 @@ final class OAuthClientCreateParams implements BaseModel
     public function withLogoUri(string $logoUri): self
     {
         $obj = clone $this;
-        $obj['logo_uri'] = $logoUri;
+        $obj['logoUri'] = $logoUri;
 
         return $obj;
     }
@@ -226,7 +226,7 @@ final class OAuthClientCreateParams implements BaseModel
     public function withPolicyUri(string $policyUri): self
     {
         $obj = clone $this;
-        $obj['policy_uri'] = $policyUri;
+        $obj['policyUri'] = $policyUri;
 
         return $obj;
     }
@@ -239,7 +239,7 @@ final class OAuthClientCreateParams implements BaseModel
     public function withRedirectUris(array $redirectUris): self
     {
         $obj = clone $this;
-        $obj['redirect_uris'] = $redirectUris;
+        $obj['redirectUris'] = $redirectUris;
 
         return $obj;
     }
@@ -250,7 +250,7 @@ final class OAuthClientCreateParams implements BaseModel
     public function withRequirePkce(bool $requirePkce): self
     {
         $obj = clone $this;
-        $obj['require_pkce'] = $requirePkce;
+        $obj['requirePkce'] = $requirePkce;
 
         return $obj;
     }
@@ -261,7 +261,7 @@ final class OAuthClientCreateParams implements BaseModel
     public function withTosUri(string $tosUri): self
     {
         $obj = clone $this;
-        $obj['tos_uri'] = $tosUri;
+        $obj['tosUri'] = $tosUri;
 
         return $obj;
     }

@@ -12,17 +12,17 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateResponse\Status;
 
 /**
  * @phpstan-type ConferenceUpdateResponseShape = array{
- *   account_sid?: string|null,
- *   api_version?: string|null,
- *   call_sid_ending_conference?: string|null,
- *   date_created?: string|null,
- *   date_updated?: string|null,
- *   friendly_name?: string|null,
- *   reason_conference_ended?: value-of<ReasonConferenceEnded>|null,
+ *   accountSid?: string|null,
+ *   apiVersion?: string|null,
+ *   callSidEndingConference?: string|null,
+ *   dateCreated?: string|null,
+ *   dateUpdated?: string|null,
+ *   friendlyName?: string|null,
+ *   reasonConferenceEnded?: value-of<ReasonConferenceEnded>|null,
  *   region?: string|null,
  *   sid?: string|null,
  *   status?: value-of<Status>|null,
- *   subresource_uris?: array<string,mixed>|null,
+ *   subresourceUris?: array<string,mixed>|null,
  *   uri?: string|null,
  * }
  */
@@ -34,46 +34,46 @@ final class ConferenceUpdateResponse implements BaseModel
     /**
      * The id of the account the resource belongs to.
      */
-    #[Optional]
-    public ?string $account_sid;
+    #[Optional('account_sid')]
+    public ?string $accountSid;
 
     /**
      * The version of the API that was used to make the request.
      */
-    #[Optional]
-    public ?string $api_version;
+    #[Optional('api_version')]
+    public ?string $apiVersion;
 
     /**
      * Caller ID, if present.
      */
-    #[Optional]
-    public ?string $call_sid_ending_conference;
+    #[Optional('call_sid_ending_conference')]
+    public ?string $callSidEndingConference;
 
     /**
      * The timestamp of when the resource was created.
      */
-    #[Optional]
-    public ?string $date_created;
+    #[Optional('date_created')]
+    public ?string $dateCreated;
 
     /**
      * The timestamp of when the resource was last updated.
      */
-    #[Optional]
-    public ?string $date_updated;
+    #[Optional('date_updated')]
+    public ?string $dateUpdated;
 
     /**
      * A string that you assigned to describe this conference room.
      */
-    #[Optional]
-    public ?string $friendly_name;
+    #[Optional('friendly_name')]
+    public ?string $friendlyName;
 
     /**
      * The reason why a conference ended. When a conference is in progress, will be null.
      *
-     * @var value-of<ReasonConferenceEnded>|null $reason_conference_ended
+     * @var value-of<ReasonConferenceEnded>|null $reasonConferenceEnded
      */
-    #[Optional(enum: ReasonConferenceEnded::class)]
-    public ?string $reason_conference_ended;
+    #[Optional('reason_conference_ended', enum: ReasonConferenceEnded::class)]
+    public ?string $reasonConferenceEnded;
 
     /**
      * A string representing the region where the conference is hosted.
@@ -98,10 +98,10 @@ final class ConferenceUpdateResponse implements BaseModel
     /**
      * A list of related resources identified by their relative URIs.
      *
-     * @var array<string,mixed>|null $subresource_uris
+     * @var array<string,mixed>|null $subresourceUris
      */
-    #[Optional(map: 'mixed')]
-    public ?array $subresource_uris;
+    #[Optional('subresource_uris', map: 'mixed')]
+    public ?array $subresourceUris;
 
     /**
      * The relative URI for this conference.
@@ -119,37 +119,37 @@ final class ConferenceUpdateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ReasonConferenceEnded|value-of<ReasonConferenceEnded> $reason_conference_ended
+     * @param ReasonConferenceEnded|value-of<ReasonConferenceEnded> $reasonConferenceEnded
      * @param Status|value-of<Status> $status
-     * @param array<string,mixed> $subresource_uris
+     * @param array<string,mixed> $subresourceUris
      */
     public static function with(
-        ?string $account_sid = null,
-        ?string $api_version = null,
-        ?string $call_sid_ending_conference = null,
-        ?string $date_created = null,
-        ?string $date_updated = null,
-        ?string $friendly_name = null,
-        ReasonConferenceEnded|string|null $reason_conference_ended = null,
+        ?string $accountSid = null,
+        ?string $apiVersion = null,
+        ?string $callSidEndingConference = null,
+        ?string $dateCreated = null,
+        ?string $dateUpdated = null,
+        ?string $friendlyName = null,
+        ReasonConferenceEnded|string|null $reasonConferenceEnded = null,
         ?string $region = null,
         ?string $sid = null,
         Status|string|null $status = null,
-        ?array $subresource_uris = null,
+        ?array $subresourceUris = null,
         ?string $uri = null,
     ): self {
         $obj = new self;
 
-        null !== $account_sid && $obj['account_sid'] = $account_sid;
-        null !== $api_version && $obj['api_version'] = $api_version;
-        null !== $call_sid_ending_conference && $obj['call_sid_ending_conference'] = $call_sid_ending_conference;
-        null !== $date_created && $obj['date_created'] = $date_created;
-        null !== $date_updated && $obj['date_updated'] = $date_updated;
-        null !== $friendly_name && $obj['friendly_name'] = $friendly_name;
-        null !== $reason_conference_ended && $obj['reason_conference_ended'] = $reason_conference_ended;
+        null !== $accountSid && $obj['accountSid'] = $accountSid;
+        null !== $apiVersion && $obj['apiVersion'] = $apiVersion;
+        null !== $callSidEndingConference && $obj['callSidEndingConference'] = $callSidEndingConference;
+        null !== $dateCreated && $obj['dateCreated'] = $dateCreated;
+        null !== $dateUpdated && $obj['dateUpdated'] = $dateUpdated;
+        null !== $friendlyName && $obj['friendlyName'] = $friendlyName;
+        null !== $reasonConferenceEnded && $obj['reasonConferenceEnded'] = $reasonConferenceEnded;
         null !== $region && $obj['region'] = $region;
         null !== $sid && $obj['sid'] = $sid;
         null !== $status && $obj['status'] = $status;
-        null !== $subresource_uris && $obj['subresource_uris'] = $subresource_uris;
+        null !== $subresourceUris && $obj['subresourceUris'] = $subresourceUris;
         null !== $uri && $obj['uri'] = $uri;
 
         return $obj;
@@ -161,7 +161,7 @@ final class ConferenceUpdateResponse implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj['account_sid'] = $accountSid;
+        $obj['accountSid'] = $accountSid;
 
         return $obj;
     }
@@ -172,7 +172,7 @@ final class ConferenceUpdateResponse implements BaseModel
     public function withAPIVersion(string $apiVersion): self
     {
         $obj = clone $this;
-        $obj['api_version'] = $apiVersion;
+        $obj['apiVersion'] = $apiVersion;
 
         return $obj;
     }
@@ -184,7 +184,7 @@ final class ConferenceUpdateResponse implements BaseModel
         string $callSidEndingConference
     ): self {
         $obj = clone $this;
-        $obj['call_sid_ending_conference'] = $callSidEndingConference;
+        $obj['callSidEndingConference'] = $callSidEndingConference;
 
         return $obj;
     }
@@ -195,7 +195,7 @@ final class ConferenceUpdateResponse implements BaseModel
     public function withDateCreated(string $dateCreated): self
     {
         $obj = clone $this;
-        $obj['date_created'] = $dateCreated;
+        $obj['dateCreated'] = $dateCreated;
 
         return $obj;
     }
@@ -206,7 +206,7 @@ final class ConferenceUpdateResponse implements BaseModel
     public function withDateUpdated(string $dateUpdated): self
     {
         $obj = clone $this;
-        $obj['date_updated'] = $dateUpdated;
+        $obj['dateUpdated'] = $dateUpdated;
 
         return $obj;
     }
@@ -217,7 +217,7 @@ final class ConferenceUpdateResponse implements BaseModel
     public function withFriendlyName(string $friendlyName): self
     {
         $obj = clone $this;
-        $obj['friendly_name'] = $friendlyName;
+        $obj['friendlyName'] = $friendlyName;
 
         return $obj;
     }
@@ -231,7 +231,7 @@ final class ConferenceUpdateResponse implements BaseModel
         ReasonConferenceEnded|string $reasonConferenceEnded
     ): self {
         $obj = clone $this;
-        $obj['reason_conference_ended'] = $reasonConferenceEnded;
+        $obj['reasonConferenceEnded'] = $reasonConferenceEnded;
 
         return $obj;
     }
@@ -279,7 +279,7 @@ final class ConferenceUpdateResponse implements BaseModel
     public function withSubresourceUris(array $subresourceUris): self
     {
         $obj = clone $this;
-        $obj['subresource_uris'] = $subresourceUris;
+        $obj['subresourceUris'] = $subresourceUris;
 
         return $obj;
     }

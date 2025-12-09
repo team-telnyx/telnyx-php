@@ -35,15 +35,15 @@ final class NotificationSettingGetResponse implements BaseModel
      *
      * @param NotificationSetting|array{
      *   id?: string|null,
-     *   associated_record_type?: string|null,
-     *   associated_record_type_value?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   notification_channel_id?: string|null,
-     *   notification_event_condition_id?: string|null,
-     *   notification_profile_id?: string|null,
+     *   associatedRecordType?: string|null,
+     *   associatedRecordTypeValue?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   notificationChannelID?: string|null,
+     *   notificationEventConditionID?: string|null,
+     *   notificationProfileID?: string|null,
      *   parameters?: list<Parameter>|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(NotificationSetting|array|null $data = null): self
@@ -58,15 +58,15 @@ final class NotificationSettingGetResponse implements BaseModel
     /**
      * @param NotificationSetting|array{
      *   id?: string|null,
-     *   associated_record_type?: string|null,
-     *   associated_record_type_value?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   notification_channel_id?: string|null,
-     *   notification_event_condition_id?: string|null,
-     *   notification_profile_id?: string|null,
+     *   associatedRecordType?: string|null,
+     *   associatedRecordTypeValue?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   notificationChannelID?: string|null,
+     *   notificationEventConditionID?: string|null,
+     *   notificationProfileID?: string|null,
      *   parameters?: list<Parameter>|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(NotificationSetting|array $data): self

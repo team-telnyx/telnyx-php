@@ -54,8 +54,8 @@ final class ActionRequirementsTest extends TestCase
         $result = $this->client->portingOrders->actionRequirements->initiate(
             'id',
             [
-                'porting_order_id' => 'porting_order_id',
-                'params' => ['first_name' => 'John', 'last_name' => 'Doe'],
+                'portingOrderID' => 'porting_order_id',
+                'params' => ['firstName' => 'John', 'lastName' => 'Doe'],
             ],
         );
 
@@ -73,8 +73,8 @@ final class ActionRequirementsTest extends TestCase
         $result = $this->client->portingOrders->actionRequirements->initiate(
             'id',
             [
-                'porting_order_id' => 'porting_order_id',
-                'params' => ['first_name' => 'John', 'last_name' => 'Doe'],
+                'portingOrderID' => 'porting_order_id',
+                'params' => ['firstName' => 'John', 'lastName' => 'Doe'],
             ],
         );
 

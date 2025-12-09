@@ -27,7 +27,7 @@ final class AccessIPRangesService implements AccessIPRangesContract
      * Create new Access IP Range
      *
      * @param array{
-     *   cidr_block: string, description?: string
+     *   cidrBlock: string, description?: string
      * }|AccessIPRangeCreateParams $params
      *
      * @throws APIException
@@ -60,10 +60,10 @@ final class AccessIPRangesService implements AccessIPRangesContract
      *
      * @param array{
      *   filter?: array{
-     *     cidr_block?: string|array{
+     *     cidrBlock?: string|array{
      *       contains?: string, endswith?: string, startswith?: string
      *     },
-     *     created_at?: string|\DateTimeInterface|array{
+     *     createdAt?: string|\DateTimeInterface|array{
      *       gt?: string|\DateTimeInterface,
      *       gte?: string|\DateTimeInterface,
      *       lt?: string|\DateTimeInterface,

@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type CheckAvailabilityShape = array{
- *   check_availability: \Telnyx\AI\Assistants\Assistant\Tool\CheckAvailability\CheckAvailability,
+ *   checkAvailability: \Telnyx\AI\Assistants\Assistant\Tool\CheckAvailability\CheckAvailability,
  *   type?: 'check_availability',
  * }
  */
@@ -23,15 +23,15 @@ final class CheckAvailability implements BaseModel
     #[Required]
     public string $type = 'check_availability';
 
-    #[Required]
-    public CheckAvailability\CheckAvailability $check_availability;
+    #[Required('check_availability')]
+    public CheckAvailability\CheckAvailability $checkAvailability;
 
     /**
      * `new CheckAvailability()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * CheckAvailability::with(check_availability: ...)
+     * CheckAvailability::with(checkAvailability: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -51,29 +51,29 @@ final class CheckAvailability implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param CheckAvailability\CheckAvailability|array{
-     *   api_key_ref: string, event_type_id: int
-     * } $check_availability
+     *   apiKeyRef: string, eventTypeID: int
+     * } $checkAvailability
      */
     public static function with(
-        CheckAvailability\CheckAvailability|array $check_availability,
+        CheckAvailability\CheckAvailability|array $checkAvailability,
     ): self {
         $obj = new self;
 
-        $obj['check_availability'] = $check_availability;
+        $obj['checkAvailability'] = $checkAvailability;
 
         return $obj;
     }
 
     /**
      * @param CheckAvailability\CheckAvailability|array{
-     *   api_key_ref: string, event_type_id: int
+     *   apiKeyRef: string, eventTypeID: int
      * } $checkAvailability
      */
     public function withCheckAvailability(
         CheckAvailability\CheckAvailability|array $checkAvailability,
     ): self {
         $obj = clone $this;
-        $obj['check_availability'] = $checkAvailability;
+        $obj['checkAvailability'] = $checkAvailability;
 
         return $obj;
     }

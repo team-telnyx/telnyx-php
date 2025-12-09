@@ -30,7 +30,7 @@ final class CanaryDeploysService implements CanaryDeploysContract
      * percentages for A/B testing or gradual rollouts of assistant versions.
      *
      * @param array{
-     *   versions: list<array{percentage: float, version_id: string}|VersionConfig>
+     *   versions: list<array{percentage: float, versionID: string}|VersionConfig>
      * }|CanaryDeployCreateParams $params
      *
      * @throws APIException
@@ -91,7 +91,7 @@ final class CanaryDeploysService implements CanaryDeploysContract
      *   All old versions and percentages are replaces by new ones from this request.
      *
      * @param array{
-     *   versions: list<array{percentage: float, version_id: string}|VersionConfig>
+     *   versions: list<array{percentage: float, versionID: string}|VersionConfig>
      * }|CanaryDeployUpdateParams $params
      *
      * @throws APIException

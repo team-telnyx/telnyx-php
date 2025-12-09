@@ -31,7 +31,7 @@ final class UserTagListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Data|array{
-     *   number_tags?: list<string>|null, outbound_profile_tags?: list<string>|null
+     *   numberTags?: list<string>|null, outboundProfileTags?: list<string>|null
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -45,7 +45,7 @@ final class UserTagListResponse implements BaseModel
 
     /**
      * @param Data|array{
-     *   number_tags?: list<string>|null, outbound_profile_tags?: list<string>|null
+     *   numberTags?: list<string>|null, outboundProfileTags?: list<string>|null
      * } $data
      */
     public function withData(Data|array $data): self

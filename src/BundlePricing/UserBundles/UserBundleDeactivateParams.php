@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\BundlePricing\UserBundlesService::deactivate()
  *
  * @phpstan-type UserBundleDeactivateParamsShape = array{
- *   authorization_bearer?: string
+ *   authorizationBearer?: string
  * }
  */
 final class UserBundleDeactivateParams implements BaseModel
@@ -28,7 +28,7 @@ final class UserBundleDeactivateParams implements BaseModel
      * Authenticates the request with your Telnyx API V2 KEY.
      */
     #[Optional]
-    public ?string $authorization_bearer;
+    public ?string $authorizationBearer;
 
     public function __construct()
     {
@@ -40,11 +40,11 @@ final class UserBundleDeactivateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $authorization_bearer = null): self
+    public static function with(?string $authorizationBearer = null): self
     {
         $obj = new self;
 
-        null !== $authorization_bearer && $obj['authorization_bearer'] = $authorization_bearer;
+        null !== $authorizationBearer && $obj['authorizationBearer'] = $authorizationBearer;
 
         return $obj;
     }
@@ -55,7 +55,7 @@ final class UserBundleDeactivateParams implements BaseModel
     public function withAuthorizationBearer(string $authorizationBearer): self
     {
         $obj = clone $this;
-        $obj['authorization_bearer'] = $authorizationBearer;
+        $obj['authorizationBearer'] = $authorizationBearer;
 
         return $obj;
     }

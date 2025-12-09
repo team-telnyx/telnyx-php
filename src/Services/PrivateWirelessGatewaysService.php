@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayCreateParams;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayDeleteResponse;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayGetResponse;
@@ -29,7 +30,7 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
      * Asynchronously create a Private Wireless Gateway for SIM cards for a previously created network. This operation may take several minutes so you can check the Private Wireless Gateway status at the section Get a Private Wireless Gateway.
      *
      * @param array{
-     *   name: string, network_id: string, region_code?: string
+     *   name: string, networkID: string, regionCode?: string
      * }|PrivateWirelessGatewayCreateParams $params
      *
      * @throws APIException
@@ -83,13 +84,13 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
      * Get all Private Wireless Gateways belonging to the user.
      *
      * @param array{
-     *   filter_created_at_?: string,
-     *   filter_ip_range_?: string,
-     *   filter_name_?: string,
-     *   filter_region_code_?: string,
-     *   filter_updated_at_?: string,
-     *   page_number_?: int,
-     *   page_size_?: int,
+     *   filterCreatedAt?: string,
+     *   filterIPRange?: string,
+     *   filterName?: string,
+     *   filterRegionCode?: string,
+     *   filterUpdatedAt?: string,
+     *   pageNumber?: int,
+     *   pageSize?: int,
      * }|PrivateWirelessGatewayListParams $params
      *
      * @throws APIException
@@ -107,7 +108,18 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
         $response = $this->client->request(
             method: 'get',
             path: 'private_wireless_gateways',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'filterCreatedAt' => 'filter[created_at]',
+                    'filterIPRange' => 'filter[ip_range]',
+                    'filterName' => 'filter[name]',
+                    'filterRegionCode' => 'filter[region_code]',
+                    'filterUpdatedAt' => 'filter[updated_at]',
+                    'pageNumber' => 'page[number]',
+                    'pageSize' => 'page[size]',
+                ],
+            ),
             options: $options,
             convert: PrivateWirelessGatewayListResponse::class,
         );

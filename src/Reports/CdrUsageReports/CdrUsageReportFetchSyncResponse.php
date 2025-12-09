@@ -35,17 +35,17 @@ final class CdrUsageReportFetchSyncResponse implements BaseModel
      *
      * @param Data|array{
      *   id?: string|null,
-     *   aggregation_type?: value-of<AggregationType>|null,
+     *   aggregationType?: value-of<AggregationType>|null,
      *   connections?: list<int>|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   end_time?: \DateTimeInterface|null,
-     *   product_breakdown?: value-of<ProductBreakdown>|null,
-     *   record_type?: string|null,
-     *   report_url?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   endTime?: \DateTimeInterface|null,
+     *   productBreakdown?: value-of<ProductBreakdown>|null,
+     *   recordType?: string|null,
+     *   reportURL?: string|null,
      *   result?: array<string,mixed>|null,
-     *   start_time?: \DateTimeInterface|null,
+     *   startTime?: \DateTimeInterface|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -60,17 +60,17 @@ final class CdrUsageReportFetchSyncResponse implements BaseModel
     /**
      * @param Data|array{
      *   id?: string|null,
-     *   aggregation_type?: value-of<AggregationType>|null,
+     *   aggregationType?: value-of<AggregationType>|null,
      *   connections?: list<int>|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   end_time?: \DateTimeInterface|null,
-     *   product_breakdown?: value-of<ProductBreakdown>|null,
-     *   record_type?: string|null,
-     *   report_url?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   endTime?: \DateTimeInterface|null,
+     *   productBreakdown?: value-of<ProductBreakdown>|null,
+     *   recordType?: string|null,
+     *   reportURL?: string|null,
      *   result?: array<string,mixed>|null,
-     *   start_time?: \DateTimeInterface|null,
+     *   startTime?: \DateTimeInterface|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(Data|array $data): self

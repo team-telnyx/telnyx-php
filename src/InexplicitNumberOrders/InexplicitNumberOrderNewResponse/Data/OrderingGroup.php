@@ -13,23 +13,23 @@ use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderNewResponse\Data\Ordering
 
 /**
  * @phpstan-type OrderingGroupShape = array{
- *   administrative_area?: string|null,
- *   count_allocated?: int|null,
- *   count_requested?: int|null,
- *   country_iso?: string|null,
- *   created_at?: \DateTimeInterface|null,
- *   error_reason?: string|null,
- *   exclude_held_numbers?: bool|null,
- *   national_destination_code?: string|null,
+ *   administrativeArea?: string|null,
+ *   countAllocated?: int|null,
+ *   countRequested?: int|null,
+ *   countryISO?: string|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   errorReason?: string|null,
+ *   excludeHeldNumbers?: bool|null,
+ *   nationalDestinationCode?: string|null,
  *   orders?: list<Order>|null,
- *   phone_number_type?: string|null,
- *   phone_number_contains_?: string|null,
- *   phone_number_ends_with_?: string|null,
- *   phone_number_starts_with_?: string|null,
+ *   phoneNumberType?: string|null,
+ *   phoneNumberContains?: string|null,
+ *   phoneNumberEndsWith?: string|null,
+ *   phoneNumberStartsWith?: string|null,
  *   quickship?: bool|null,
  *   status?: value-of<Status>|null,
  *   strategy?: value-of<Strategy>|null,
- *   updated_at?: \DateTimeInterface|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class OrderingGroup implements BaseModel
@@ -40,50 +40,50 @@ final class OrderingGroup implements BaseModel
     /**
      * Filter for phone numbers in a given state / province.
      */
-    #[Optional]
-    public ?string $administrative_area;
+    #[Optional('administrative_area')]
+    public ?string $administrativeArea;
 
     /**
      * Quantity of phone numbers allocated.
      */
-    #[Optional]
-    public ?int $count_allocated;
+    #[Optional('count_allocated')]
+    public ?int $countAllocated;
 
     /**
      * Quantity of phone numbers requested.
      */
-    #[Optional]
-    public ?int $count_requested;
+    #[Optional('count_requested')]
+    public ?int $countRequested;
 
     /**
      * Country where you would like to purchase phone numbers.
      */
-    #[Optional]
-    public ?string $country_iso;
+    #[Optional('country_iso')]
+    public ?string $countryISO;
 
     /**
      * ISO 8601 formatted date indicating when the ordering group was created.
      */
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
     /**
      * Error reason if applicable.
      */
-    #[Optional]
-    public ?string $error_reason;
+    #[Optional('error_reason')]
+    public ?string $errorReason;
 
     /**
      * Filter to exclude phone numbers that are currently on hold/reserved for your account.
      */
-    #[Optional]
-    public ?bool $exclude_held_numbers;
+    #[Optional('exclude_held_numbers')]
+    public ?bool $excludeHeldNumbers;
 
     /**
      * Filter by area code.
      */
-    #[Optional]
-    public ?string $national_destination_code;
+    #[Optional('national_destination_code')]
+    public ?string $nationalDestinationCode;
 
     /**
      * Array of orders created to fulfill the inexplicit order.
@@ -96,26 +96,26 @@ final class OrderingGroup implements BaseModel
     /**
      * Number type.
      */
-    #[Optional]
-    public ?string $phone_number_type;
+    #[Optional('phone_number_type')]
+    public ?string $phoneNumberType;
 
     /**
      * Filter for phone numbers that contain the digits specified.
      */
     #[Optional('phone_number[contains]')]
-    public ?string $phone_number_contains_;
+    public ?string $phoneNumberContains;
 
     /**
      * Filter by the ending digits of the phone number.
      */
     #[Optional('phone_number[ends_with]')]
-    public ?string $phone_number_ends_with_;
+    public ?string $phoneNumberEndsWith;
 
     /**
      * Filter by the starting digits of the phone number.
      */
     #[Optional('phone_number[starts_with]')]
-    public ?string $phone_number_starts_with_;
+    public ?string $phoneNumberStartsWith;
 
     /**
      * Filter to exclude phone numbers that need additional time after to purchase to activate. Only applicable for +1 toll_free numbers.
@@ -142,8 +142,8 @@ final class OrderingGroup implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the ordering group was updated.
      */
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
     {
@@ -156,49 +156,49 @@ final class OrderingGroup implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Order|array{
-     *   number_order_id: string, sub_number_order_ids: list<string>
+     *   numberOrderID: string, subNumberOrderIDs: list<string>
      * }> $orders
      * @param Status|value-of<Status> $status
      * @param Strategy|value-of<Strategy> $strategy
      */
     public static function with(
-        ?string $administrative_area = null,
-        ?int $count_allocated = null,
-        ?int $count_requested = null,
-        ?string $country_iso = null,
-        ?\DateTimeInterface $created_at = null,
-        ?string $error_reason = null,
-        ?bool $exclude_held_numbers = null,
-        ?string $national_destination_code = null,
+        ?string $administrativeArea = null,
+        ?int $countAllocated = null,
+        ?int $countRequested = null,
+        ?string $countryISO = null,
+        ?\DateTimeInterface $createdAt = null,
+        ?string $errorReason = null,
+        ?bool $excludeHeldNumbers = null,
+        ?string $nationalDestinationCode = null,
         ?array $orders = null,
-        ?string $phone_number_type = null,
-        ?string $phone_number_contains_ = null,
-        ?string $phone_number_ends_with_ = null,
-        ?string $phone_number_starts_with_ = null,
+        ?string $phoneNumberType = null,
+        ?string $phoneNumberContains = null,
+        ?string $phoneNumberEndsWith = null,
+        ?string $phoneNumberStartsWith = null,
         ?bool $quickship = null,
         Status|string|null $status = null,
         Strategy|string|null $strategy = null,
-        ?\DateTimeInterface $updated_at = null,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
         $obj = new self;
 
-        null !== $administrative_area && $obj['administrative_area'] = $administrative_area;
-        null !== $count_allocated && $obj['count_allocated'] = $count_allocated;
-        null !== $count_requested && $obj['count_requested'] = $count_requested;
-        null !== $country_iso && $obj['country_iso'] = $country_iso;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $error_reason && $obj['error_reason'] = $error_reason;
-        null !== $exclude_held_numbers && $obj['exclude_held_numbers'] = $exclude_held_numbers;
-        null !== $national_destination_code && $obj['national_destination_code'] = $national_destination_code;
+        null !== $administrativeArea && $obj['administrativeArea'] = $administrativeArea;
+        null !== $countAllocated && $obj['countAllocated'] = $countAllocated;
+        null !== $countRequested && $obj['countRequested'] = $countRequested;
+        null !== $countryISO && $obj['countryISO'] = $countryISO;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $errorReason && $obj['errorReason'] = $errorReason;
+        null !== $excludeHeldNumbers && $obj['excludeHeldNumbers'] = $excludeHeldNumbers;
+        null !== $nationalDestinationCode && $obj['nationalDestinationCode'] = $nationalDestinationCode;
         null !== $orders && $obj['orders'] = $orders;
-        null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
-        null !== $phone_number_contains_ && $obj['phone_number_contains_'] = $phone_number_contains_;
-        null !== $phone_number_ends_with_ && $obj['phone_number_ends_with_'] = $phone_number_ends_with_;
-        null !== $phone_number_starts_with_ && $obj['phone_number_starts_with_'] = $phone_number_starts_with_;
+        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
+        null !== $phoneNumberContains && $obj['phoneNumberContains'] = $phoneNumberContains;
+        null !== $phoneNumberEndsWith && $obj['phoneNumberEndsWith'] = $phoneNumberEndsWith;
+        null !== $phoneNumberStartsWith && $obj['phoneNumberStartsWith'] = $phoneNumberStartsWith;
         null !== $quickship && $obj['quickship'] = $quickship;
         null !== $status && $obj['status'] = $status;
         null !== $strategy && $obj['strategy'] = $strategy;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -209,7 +209,7 @@ final class OrderingGroup implements BaseModel
     public function withAdministrativeArea(string $administrativeArea): self
     {
         $obj = clone $this;
-        $obj['administrative_area'] = $administrativeArea;
+        $obj['administrativeArea'] = $administrativeArea;
 
         return $obj;
     }
@@ -220,7 +220,7 @@ final class OrderingGroup implements BaseModel
     public function withCountAllocated(int $countAllocated): self
     {
         $obj = clone $this;
-        $obj['count_allocated'] = $countAllocated;
+        $obj['countAllocated'] = $countAllocated;
 
         return $obj;
     }
@@ -231,7 +231,7 @@ final class OrderingGroup implements BaseModel
     public function withCountRequested(int $countRequested): self
     {
         $obj = clone $this;
-        $obj['count_requested'] = $countRequested;
+        $obj['countRequested'] = $countRequested;
 
         return $obj;
     }
@@ -242,7 +242,7 @@ final class OrderingGroup implements BaseModel
     public function withCountryISO(string $countryISO): self
     {
         $obj = clone $this;
-        $obj['country_iso'] = $countryISO;
+        $obj['countryISO'] = $countryISO;
 
         return $obj;
     }
@@ -253,7 +253,7 @@ final class OrderingGroup implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -264,7 +264,7 @@ final class OrderingGroup implements BaseModel
     public function withErrorReason(string $errorReason): self
     {
         $obj = clone $this;
-        $obj['error_reason'] = $errorReason;
+        $obj['errorReason'] = $errorReason;
 
         return $obj;
     }
@@ -275,7 +275,7 @@ final class OrderingGroup implements BaseModel
     public function withExcludeHeldNumbers(bool $excludeHeldNumbers): self
     {
         $obj = clone $this;
-        $obj['exclude_held_numbers'] = $excludeHeldNumbers;
+        $obj['excludeHeldNumbers'] = $excludeHeldNumbers;
 
         return $obj;
     }
@@ -287,7 +287,7 @@ final class OrderingGroup implements BaseModel
         string $nationalDestinationCode
     ): self {
         $obj = clone $this;
-        $obj['national_destination_code'] = $nationalDestinationCode;
+        $obj['nationalDestinationCode'] = $nationalDestinationCode;
 
         return $obj;
     }
@@ -296,7 +296,7 @@ final class OrderingGroup implements BaseModel
      * Array of orders created to fulfill the inexplicit order.
      *
      * @param list<Order|array{
-     *   number_order_id: string, sub_number_order_ids: list<string>
+     *   numberOrderID: string, subNumberOrderIDs: list<string>
      * }> $orders
      */
     public function withOrders(array $orders): self
@@ -313,7 +313,7 @@ final class OrderingGroup implements BaseModel
     public function withPhoneNumberType(string $phoneNumberType): self
     {
         $obj = clone $this;
-        $obj['phone_number_type'] = $phoneNumberType;
+        $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }
@@ -324,7 +324,7 @@ final class OrderingGroup implements BaseModel
     public function withPhoneNumberContains(string $phoneNumberContains): self
     {
         $obj = clone $this;
-        $obj['phone_number_contains_'] = $phoneNumberContains;
+        $obj['phoneNumberContains'] = $phoneNumberContains;
 
         return $obj;
     }
@@ -335,7 +335,7 @@ final class OrderingGroup implements BaseModel
     public function withPhoneNumberEndsWith(string $phoneNumberEndsWith): self
     {
         $obj = clone $this;
-        $obj['phone_number_ends_with_'] = $phoneNumberEndsWith;
+        $obj['phoneNumberEndsWith'] = $phoneNumberEndsWith;
 
         return $obj;
     }
@@ -347,7 +347,7 @@ final class OrderingGroup implements BaseModel
         string $phoneNumberStartsWith
     ): self {
         $obj = clone $this;
-        $obj['phone_number_starts_with_'] = $phoneNumberStartsWith;
+        $obj['phoneNumberStartsWith'] = $phoneNumberStartsWith;
 
         return $obj;
     }
@@ -395,7 +395,7 @@ final class OrderingGroup implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

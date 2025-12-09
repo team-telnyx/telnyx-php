@@ -12,11 +12,11 @@ use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse
 
 /**
  * @phpstan-type DataShape = array{
- *   available_bandwidth?: list<float>|null,
- *   cloud_provider?: value-of<CloudProvider>|null,
- *   cloud_provider_region?: string|null,
+ *   availableBandwidth?: list<float>|null,
+ *   cloudProvider?: value-of<CloudProvider>|null,
+ *   cloudProviderRegion?: string|null,
  *   location?: Location|null,
- *   record_type?: string|null,
+ *   recordType?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -27,24 +27,24 @@ final class Data implements BaseModel
     /**
      * The available throughput in Megabits per Second (Mbps) for your Virtual Cross Connect.
      *
-     * @var list<float>|null $available_bandwidth
+     * @var list<float>|null $availableBandwidth
      */
-    #[Optional(list: 'float')]
-    public ?array $available_bandwidth;
+    #[Optional('available_bandwidth', list: 'float')]
+    public ?array $availableBandwidth;
 
     /**
      * The Virtual Private Cloud with which you would like to establish a cross connect.
      *
-     * @var value-of<CloudProvider>|null $cloud_provider
+     * @var value-of<CloudProvider>|null $cloudProvider
      */
-    #[Optional(enum: CloudProvider::class)]
-    public ?string $cloud_provider;
+    #[Optional('cloud_provider', enum: CloudProvider::class)]
+    public ?string $cloudProvider;
 
     /**
      * The region where your Virtual Private Cloud hosts are located. Should be identical to how the cloud provider names region, i.e. us-east-1 for AWS but Frankfurt for Azure.
      */
-    #[Optional]
-    public ?string $cloud_provider_region;
+    #[Optional('cloud_provider_region')]
+    public ?string $cloudProviderRegion;
 
     #[Optional]
     public ?Location $location;
@@ -52,8 +52,8 @@ final class Data implements BaseModel
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     public function __construct()
     {
@@ -65,8 +65,8 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<float> $available_bandwidth
-     * @param CloudProvider|value-of<CloudProvider> $cloud_provider
+     * @param list<float> $availableBandwidth
+     * @param CloudProvider|value-of<CloudProvider> $cloudProvider
      * @param Location|array{
      *   code?: string|null,
      *   name?: string|null,
@@ -76,19 +76,19 @@ final class Data implements BaseModel
      * } $location
      */
     public static function with(
-        ?array $available_bandwidth = null,
-        CloudProvider|string|null $cloud_provider = null,
-        ?string $cloud_provider_region = null,
+        ?array $availableBandwidth = null,
+        CloudProvider|string|null $cloudProvider = null,
+        ?string $cloudProviderRegion = null,
         Location|array|null $location = null,
-        ?string $record_type = null,
+        ?string $recordType = null,
     ): self {
         $obj = new self;
 
-        null !== $available_bandwidth && $obj['available_bandwidth'] = $available_bandwidth;
-        null !== $cloud_provider && $obj['cloud_provider'] = $cloud_provider;
-        null !== $cloud_provider_region && $obj['cloud_provider_region'] = $cloud_provider_region;
+        null !== $availableBandwidth && $obj['availableBandwidth'] = $availableBandwidth;
+        null !== $cloudProvider && $obj['cloudProvider'] = $cloudProvider;
+        null !== $cloudProviderRegion && $obj['cloudProviderRegion'] = $cloudProviderRegion;
         null !== $location && $obj['location'] = $location;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $recordType && $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class Data implements BaseModel
     public function withAvailableBandwidth(array $availableBandwidth): self
     {
         $obj = clone $this;
-        $obj['available_bandwidth'] = $availableBandwidth;
+        $obj['availableBandwidth'] = $availableBandwidth;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class Data implements BaseModel
     public function withCloudProvider(CloudProvider|string $cloudProvider): self
     {
         $obj = clone $this;
-        $obj['cloud_provider'] = $cloudProvider;
+        $obj['cloudProvider'] = $cloudProvider;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class Data implements BaseModel
     public function withCloudProviderRegion(string $cloudProviderRegion): self
     {
         $obj = clone $this;
-        $obj['cloud_provider_region'] = $cloudProviderRegion;
+        $obj['cloudProviderRegion'] = $cloudProviderRegion;
 
         return $obj;
     }
@@ -153,7 +153,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

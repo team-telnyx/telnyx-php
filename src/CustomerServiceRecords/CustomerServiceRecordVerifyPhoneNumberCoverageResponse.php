@@ -35,11 +35,11 @@ final class CustomerServiceRecordVerifyPhoneNumberCoverageResponse implements Ba
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   additional_data_required?: list<value-of<AdditionalDataRequired>>|null,
-     *   has_csr_coverage?: bool|null,
-     *   phone_number?: string|null,
+     *   additionalDataRequired?: list<value-of<AdditionalDataRequired>>|null,
+     *   hasCsrCoverage?: bool|null,
+     *   phoneNumber?: string|null,
      *   reason?: string|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      * }> $data
      */
     public static function with(?array $data = null): self
@@ -53,11 +53,11 @@ final class CustomerServiceRecordVerifyPhoneNumberCoverageResponse implements Ba
 
     /**
      * @param list<Data|array{
-     *   additional_data_required?: list<value-of<AdditionalDataRequired>>|null,
-     *   has_csr_coverage?: bool|null,
-     *   phone_number?: string|null,
+     *   additionalDataRequired?: list<value-of<AdditionalDataRequired>>|null,
+     *   hasCsrCoverage?: bool|null,
+     *   phoneNumber?: string|null,
      *   reason?: string|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      * }> $data
      */
     public function withData(array $data): self

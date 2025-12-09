@@ -61,29 +61,29 @@ final class VoiceService implements VoiceContract
      * Update a phone number with voice settings
      *
      * @param array{
-     *   call_forwarding?: array{
-     *     call_forwarding_enabled?: bool,
-     *     forwarding_type?: 'always'|'on-failure'|ForwardingType,
-     *     forwards_to?: string,
+     *   callForwarding?: array{
+     *     callForwardingEnabled?: bool,
+     *     forwardingType?: 'always'|'on-failure'|ForwardingType,
+     *     forwardsTo?: string,
      *   }|CallForwarding,
-     *   call_recording?: array{
-     *     inbound_call_recording_channels?: 'single'|'dual'|InboundCallRecordingChannels,
-     *     inbound_call_recording_enabled?: bool,
-     *     inbound_call_recording_format?: 'wav'|'mp3'|InboundCallRecordingFormat,
+     *   callRecording?: array{
+     *     inboundCallRecordingChannels?: 'single'|'dual'|InboundCallRecordingChannels,
+     *     inboundCallRecordingEnabled?: bool,
+     *     inboundCallRecordingFormat?: 'wav'|'mp3'|InboundCallRecordingFormat,
      *   }|CallRecording,
-     *   caller_id_name_enabled?: bool,
-     *   cnam_listing?: array{
-     *     cnam_listing_details?: string, cnam_listing_enabled?: bool
+     *   callerIDNameEnabled?: bool,
+     *   cnamListing?: array{
+     *     cnamListingDetails?: string, cnamListingEnabled?: bool
      *   }|CnamListing,
-     *   inbound_call_screening?: 'disabled'|'reject_calls'|'flag_calls'|InboundCallScreening,
-     *   media_features?: array{
-     *     accept_any_rtp_packets_enabled?: bool,
-     *     rtp_auto_adjust_enabled?: bool,
-     *     t38_fax_gateway_enabled?: bool,
+     *   inboundCallScreening?: 'disabled'|'reject_calls'|'flag_calls'|InboundCallScreening,
+     *   mediaFeatures?: array{
+     *     acceptAnyRtpPacketsEnabled?: bool,
+     *     rtpAutoAdjustEnabled?: bool,
+     *     t38FaxGatewayEnabled?: bool,
      *   }|MediaFeatures,
-     *   tech_prefix_enabled?: bool,
-     *   translated_number?: string,
-     *   usage_payment_method?: 'pay-per-minute'|'channel'|UsagePaymentMethod,
+     *   techPrefixEnabled?: bool,
+     *   translatedNumber?: string,
+     *   usagePaymentMethod?: 'pay-per-minute'|'channel'|UsagePaymentMethod,
      * }|VoiceUpdateParams $params
      *
      * @throws APIException
@@ -117,10 +117,10 @@ final class VoiceService implements VoiceContract
      *
      * @param array{
      *   filter?: array{
-     *     connection_name?: array{contains?: string},
-     *     customer_reference?: string,
-     *     phone_number?: string,
-     *     'voice.usage_payment_method'?: 'pay-per-minute'|'channel'|VoiceUsagePaymentMethod,
+     *     connectionName?: array{contains?: string},
+     *     customerReference?: string,
+     *     phoneNumber?: string,
+     *     voiceUsagePaymentMethod?: 'pay-per-minute'|'channel'|VoiceUsagePaymentMethod,
      *   },
      *   page?: array{number?: int, size?: int},
      *   sort?: 'purchased_at'|'phone_number'|'connection_name'|'usage_payment_method'|Sort,

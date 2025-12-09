@@ -34,12 +34,12 @@ final class SessionGetResponse implements BaseModel
      * @param RoomSession|array{
      *   id?: string|null,
      *   active?: bool|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   ended_at?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   endedAt?: \DateTimeInterface|null,
      *   participants?: list<RoomParticipant>|null,
-     *   record_type?: string|null,
-     *   room_id?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   recordType?: string|null,
+     *   roomID?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(RoomSession|array|null $data = null): self
@@ -55,12 +55,12 @@ final class SessionGetResponse implements BaseModel
      * @param RoomSession|array{
      *   id?: string|null,
      *   active?: bool|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   ended_at?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   endedAt?: \DateTimeInterface|null,
      *   participants?: list<RoomParticipant>|null,
-     *   record_type?: string|null,
-     *   room_id?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   recordType?: string|null,
+     *   roomID?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(RoomSession|array $data): self

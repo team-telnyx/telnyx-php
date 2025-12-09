@@ -17,8 +17,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\ChargesBreakdownService::retrieve()
  *
  * @phpstan-type ChargesBreakdownRetrieveParamsShape = array{
- *   start_date: \DateTimeInterface,
- *   end_date?: \DateTimeInterface,
+ *   startDate: \DateTimeInterface,
+ *   endDate?: \DateTimeInterface,
  *   format?: Format|value-of<Format>,
  * }
  */
@@ -32,13 +32,13 @@ final class ChargesBreakdownRetrieveParams implements BaseModel
      * Start date for the charges breakdown in ISO date format (YYYY-MM-DD).
      */
     #[Required]
-    public \DateTimeInterface $start_date;
+    public \DateTimeInterface $startDate;
 
     /**
      * End date for the charges breakdown in ISO date format (YYYY-MM-DD). If not provided, defaults to start_date + 1 month. The date is exclusive, data for the end_date itself is not included in the report. The interval between start_date and end_date cannot exceed 31 days.
      */
     #[Optional]
-    public ?\DateTimeInterface $end_date;
+    public ?\DateTimeInterface $endDate;
 
     /**
      * Response format.
@@ -53,7 +53,7 @@ final class ChargesBreakdownRetrieveParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * ChargesBreakdownRetrieveParams::with(start_date: ...)
+     * ChargesBreakdownRetrieveParams::with(startDate: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -75,15 +75,15 @@ final class ChargesBreakdownRetrieveParams implements BaseModel
      * @param Format|value-of<Format> $format
      */
     public static function with(
-        \DateTimeInterface $start_date,
-        ?\DateTimeInterface $end_date = null,
+        \DateTimeInterface $startDate,
+        ?\DateTimeInterface $endDate = null,
         Format|string|null $format = null,
     ): self {
         $obj = new self;
 
-        $obj['start_date'] = $start_date;
+        $obj['startDate'] = $startDate;
 
-        null !== $end_date && $obj['end_date'] = $end_date;
+        null !== $endDate && $obj['endDate'] = $endDate;
         null !== $format && $obj['format'] = $format;
 
         return $obj;
@@ -95,7 +95,7 @@ final class ChargesBreakdownRetrieveParams implements BaseModel
     public function withStartDate(\DateTimeInterface $startDate): self
     {
         $obj = clone $this;
-        $obj['start_date'] = $startDate;
+        $obj['startDate'] = $startDate;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class ChargesBreakdownRetrieveParams implements BaseModel
     public function withEndDate(\DateTimeInterface $endDate): self
     {
         $obj = clone $this;
-        $obj['end_date'] = $endDate;
+        $obj['endDate'] = $endDate;
 
         return $obj;
     }

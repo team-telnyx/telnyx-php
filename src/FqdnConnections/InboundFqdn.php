@@ -15,24 +15,24 @@ use Telnyx\FqdnConnections\InboundFqdn\SipSubdomainReceiveSettings;
 
 /**
  * @phpstan-type InboundFqdnShape = array{
- *   ani_number_format?: value-of<AniNumberFormat>|null,
- *   channel_limit?: int|null,
+ *   aniNumberFormat?: value-of<AniNumberFormat>|null,
+ *   channelLimit?: int|null,
  *   codecs?: list<string>|null,
- *   default_primary_fqdn_id?: string|null,
- *   default_routing_method?: value-of<DefaultRoutingMethod>|null,
- *   default_secondary_fqdn_id?: string|null,
- *   default_tertiary_fqdn_id?: string|null,
- *   dnis_number_format?: value-of<DnisNumberFormat>|null,
- *   generate_ringback_tone?: bool|null,
- *   isup_headers_enabled?: bool|null,
- *   prack_enabled?: bool|null,
- *   shaken_stir_enabled?: bool|null,
- *   sip_compact_headers_enabled?: bool|null,
- *   sip_region?: value-of<SipRegion>|null,
- *   sip_subdomain?: string|null,
- *   sip_subdomain_receive_settings?: value-of<SipSubdomainReceiveSettings>|null,
- *   timeout_1xx_secs?: int|null,
- *   timeout_2xx_secs?: int|null,
+ *   defaultPrimaryFqdnID?: string|null,
+ *   defaultRoutingMethod?: value-of<DefaultRoutingMethod>|null,
+ *   defaultSecondaryFqdnID?: string|null,
+ *   defaultTertiaryFqdnID?: string|null,
+ *   dnisNumberFormat?: value-of<DnisNumberFormat>|null,
+ *   generateRingbackTone?: bool|null,
+ *   isupHeadersEnabled?: bool|null,
+ *   prackEnabled?: bool|null,
+ *   shakenStirEnabled?: bool|null,
+ *   sipCompactHeadersEnabled?: bool|null,
+ *   sipRegion?: value-of<SipRegion>|null,
+ *   sipSubdomain?: string|null,
+ *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
+ *   timeout1xxSecs?: int|null,
+ *   timeout2xxSecs?: int|null,
  * }
  */
 final class InboundFqdn implements BaseModel
@@ -43,16 +43,16 @@ final class InboundFqdn implements BaseModel
     /**
      * This setting allows you to set the format with which the caller's number (ANI) is sent for inbound phone calls.
      *
-     * @var value-of<AniNumberFormat>|null $ani_number_format
+     * @var value-of<AniNumberFormat>|null $aniNumberFormat
      */
-    #[Optional(enum: AniNumberFormat::class)]
-    public ?string $ani_number_format;
+    #[Optional('ani_number_format', enum: AniNumberFormat::class)]
+    public ?string $aniNumberFormat;
 
     /**
      * When set, this will limit the total number of inbound calls to phone numbers associated with this connection.
      */
-    #[Optional(nullable: true)]
-    public ?int $channel_limit;
+    #[Optional('channel_limit', nullable: true)]
+    public ?int $channelLimit;
 
     /**
      * Defines the list of codecs that Telnyx will send for inbound calls to a specific number on your portal account, in priority order. This only works when the Connection the number is assigned to uses Media Handling mode: default. OPUS and H.264 codecs are available only when using TCP or TLS transport for SIP.
@@ -66,98 +66,105 @@ final class InboundFqdn implements BaseModel
      * The default primary FQDN to use for the number. Only settable if the connection is
      * of FQDN type. Value must be the ID of an FQDN set on the connection.
      */
-    #[Optional(nullable: true)]
-    public ?string $default_primary_fqdn_id;
+    #[Optional('default_primary_fqdn_id', nullable: true)]
+    public ?string $defaultPrimaryFqdnID;
 
     /**
      * Default routing method to be used when a number is associated with the connection. Must be one of the routing method types or null, other values are not allowed.
      *
-     * @var value-of<DefaultRoutingMethod>|null $default_routing_method
+     * @var value-of<DefaultRoutingMethod>|null $defaultRoutingMethod
      */
-    #[Optional(enum: DefaultRoutingMethod::class, nullable: true)]
-    public ?string $default_routing_method;
+    #[Optional(
+        'default_routing_method',
+        enum: DefaultRoutingMethod::class,
+        nullable: true
+    )]
+    public ?string $defaultRoutingMethod;
 
     /**
      * The default secondary FQDN to use for the number. Only settable if the connection is
      * of FQDN type. Value must be the ID of an FQDN set on the connection.
      */
-    #[Optional(nullable: true)]
-    public ?string $default_secondary_fqdn_id;
+    #[Optional('default_secondary_fqdn_id', nullable: true)]
+    public ?string $defaultSecondaryFqdnID;
 
     /**
      * The default tertiary FQDN to use for the number. Only settable if the connection is
      * of FQDN type. Value must be the ID of an FQDN set on the connection.
      */
-    #[Optional(nullable: true)]
-    public ?string $default_tertiary_fqdn_id;
+    #[Optional('default_tertiary_fqdn_id', nullable: true)]
+    public ?string $defaultTertiaryFqdnID;
 
-    /** @var value-of<DnisNumberFormat>|null $dnis_number_format */
-    #[Optional(enum: DnisNumberFormat::class)]
-    public ?string $dnis_number_format;
+    /** @var value-of<DnisNumberFormat>|null $dnisNumberFormat */
+    #[Optional('dnis_number_format', enum: DnisNumberFormat::class)]
+    public ?string $dnisNumberFormat;
 
     /**
      * Generate ringback tone through 183 session progress message with early media.
      */
-    #[Optional]
-    public ?bool $generate_ringback_tone;
+    #[Optional('generate_ringback_tone')]
+    public ?bool $generateRingbackTone;
 
     /**
      * When set, inbound phone calls will receive ISUP parameters via SIP headers. (Only when available and only when using TCP or TLS transport.).
      */
-    #[Optional]
-    public ?bool $isup_headers_enabled;
+    #[Optional('isup_headers_enabled')]
+    public ?bool $isupHeadersEnabled;
 
     /**
      * Enable PRACK messages as defined in RFC3262.
      */
-    #[Optional]
-    public ?bool $prack_enabled;
+    #[Optional('prack_enabled')]
+    public ?bool $prackEnabled;
 
     /**
      * When enabled the SIP Connection will receive the Identity header with Shaken/Stir data in the SIP INVITE message of inbound calls, even when using UDP transport.
      */
-    #[Optional]
-    public ?bool $shaken_stir_enabled;
+    #[Optional('shaken_stir_enabled')]
+    public ?bool $shakenStirEnabled;
 
     /**
      * Defaults to true.
      */
-    #[Optional]
-    public ?bool $sip_compact_headers_enabled;
+    #[Optional('sip_compact_headers_enabled')]
+    public ?bool $sipCompactHeadersEnabled;
 
     /**
      * Selects which `sip_region` to receive inbound calls from. If null, the default region (US) will be used.
      *
-     * @var value-of<SipRegion>|null $sip_region
+     * @var value-of<SipRegion>|null $sipRegion
      */
-    #[Optional(enum: SipRegion::class)]
-    public ?string $sip_region;
+    #[Optional('sip_region', enum: SipRegion::class)]
+    public ?string $sipRegion;
 
     /**
      * Specifies a subdomain that can be used to receive Inbound calls to a Connection, in the same way a phone number is used, from a SIP endpoint. Example: the subdomain "example.sip.telnyx.com" can be called from any SIP endpoint by using the SIP URI "sip:@example.sip.telnyx.com" where the user part can be any alphanumeric value. Please note TLS encrypted calls are not allowed for subdomain calls.
      */
-    #[Optional(nullable: true)]
-    public ?string $sip_subdomain;
+    #[Optional('sip_subdomain', nullable: true)]
+    public ?string $sipSubdomain;
 
     /**
      * This option can be enabled to receive calls from: "Anyone" (any SIP endpoint in the public Internet) or "Only my connections" (any connection assigned to the same Telnyx user).
      *
-     * @var value-of<SipSubdomainReceiveSettings>|null $sip_subdomain_receive_settings
+     * @var value-of<SipSubdomainReceiveSettings>|null $sipSubdomainReceiveSettings
      */
-    #[Optional(enum: SipSubdomainReceiveSettings::class)]
-    public ?string $sip_subdomain_receive_settings;
+    #[Optional(
+        'sip_subdomain_receive_settings',
+        enum: SipSubdomainReceiveSettings::class
+    )]
+    public ?string $sipSubdomainReceiveSettings;
 
     /**
      * Time(sec) before aborting if connection is not made.
      */
-    #[Optional]
-    public ?int $timeout_1xx_secs;
+    #[Optional('timeout_1xx_secs')]
+    public ?int $timeout1xxSecs;
 
     /**
      * Time(sec) before aborting if call is unanswered (min: 1, max: 600).
      */
-    #[Optional]
-    public ?int $timeout_2xx_secs;
+    #[Optional('timeout_2xx_secs')]
+    public ?int $timeout2xxSecs;
 
     public function __construct()
     {
@@ -169,53 +176,53 @@ final class InboundFqdn implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AniNumberFormat|value-of<AniNumberFormat> $ani_number_format
+     * @param AniNumberFormat|value-of<AniNumberFormat> $aniNumberFormat
      * @param list<string> $codecs
-     * @param DefaultRoutingMethod|value-of<DefaultRoutingMethod>|null $default_routing_method
-     * @param DnisNumberFormat|value-of<DnisNumberFormat> $dnis_number_format
-     * @param SipRegion|value-of<SipRegion> $sip_region
-     * @param SipSubdomainReceiveSettings|value-of<SipSubdomainReceiveSettings> $sip_subdomain_receive_settings
+     * @param DefaultRoutingMethod|value-of<DefaultRoutingMethod>|null $defaultRoutingMethod
+     * @param DnisNumberFormat|value-of<DnisNumberFormat> $dnisNumberFormat
+     * @param SipRegion|value-of<SipRegion> $sipRegion
+     * @param SipSubdomainReceiveSettings|value-of<SipSubdomainReceiveSettings> $sipSubdomainReceiveSettings
      */
     public static function with(
-        AniNumberFormat|string|null $ani_number_format = null,
-        ?int $channel_limit = null,
+        AniNumberFormat|string|null $aniNumberFormat = null,
+        ?int $channelLimit = null,
         ?array $codecs = null,
-        ?string $default_primary_fqdn_id = null,
-        DefaultRoutingMethod|string|null $default_routing_method = null,
-        ?string $default_secondary_fqdn_id = null,
-        ?string $default_tertiary_fqdn_id = null,
-        DnisNumberFormat|string|null $dnis_number_format = null,
-        ?bool $generate_ringback_tone = null,
-        ?bool $isup_headers_enabled = null,
-        ?bool $prack_enabled = null,
-        ?bool $shaken_stir_enabled = null,
-        ?bool $sip_compact_headers_enabled = null,
-        SipRegion|string|null $sip_region = null,
-        ?string $sip_subdomain = null,
-        SipSubdomainReceiveSettings|string|null $sip_subdomain_receive_settings = null,
-        ?int $timeout_1xx_secs = null,
-        ?int $timeout_2xx_secs = null,
+        ?string $defaultPrimaryFqdnID = null,
+        DefaultRoutingMethod|string|null $defaultRoutingMethod = null,
+        ?string $defaultSecondaryFqdnID = null,
+        ?string $defaultTertiaryFqdnID = null,
+        DnisNumberFormat|string|null $dnisNumberFormat = null,
+        ?bool $generateRingbackTone = null,
+        ?bool $isupHeadersEnabled = null,
+        ?bool $prackEnabled = null,
+        ?bool $shakenStirEnabled = null,
+        ?bool $sipCompactHeadersEnabled = null,
+        SipRegion|string|null $sipRegion = null,
+        ?string $sipSubdomain = null,
+        SipSubdomainReceiveSettings|string|null $sipSubdomainReceiveSettings = null,
+        ?int $timeout1xxSecs = null,
+        ?int $timeout2xxSecs = null,
     ): self {
         $obj = new self;
 
-        null !== $ani_number_format && $obj['ani_number_format'] = $ani_number_format;
-        null !== $channel_limit && $obj['channel_limit'] = $channel_limit;
+        null !== $aniNumberFormat && $obj['aniNumberFormat'] = $aniNumberFormat;
+        null !== $channelLimit && $obj['channelLimit'] = $channelLimit;
         null !== $codecs && $obj['codecs'] = $codecs;
-        null !== $default_primary_fqdn_id && $obj['default_primary_fqdn_id'] = $default_primary_fqdn_id;
-        null !== $default_routing_method && $obj['default_routing_method'] = $default_routing_method;
-        null !== $default_secondary_fqdn_id && $obj['default_secondary_fqdn_id'] = $default_secondary_fqdn_id;
-        null !== $default_tertiary_fqdn_id && $obj['default_tertiary_fqdn_id'] = $default_tertiary_fqdn_id;
-        null !== $dnis_number_format && $obj['dnis_number_format'] = $dnis_number_format;
-        null !== $generate_ringback_tone && $obj['generate_ringback_tone'] = $generate_ringback_tone;
-        null !== $isup_headers_enabled && $obj['isup_headers_enabled'] = $isup_headers_enabled;
-        null !== $prack_enabled && $obj['prack_enabled'] = $prack_enabled;
-        null !== $shaken_stir_enabled && $obj['shaken_stir_enabled'] = $shaken_stir_enabled;
-        null !== $sip_compact_headers_enabled && $obj['sip_compact_headers_enabled'] = $sip_compact_headers_enabled;
-        null !== $sip_region && $obj['sip_region'] = $sip_region;
-        null !== $sip_subdomain && $obj['sip_subdomain'] = $sip_subdomain;
-        null !== $sip_subdomain_receive_settings && $obj['sip_subdomain_receive_settings'] = $sip_subdomain_receive_settings;
-        null !== $timeout_1xx_secs && $obj['timeout_1xx_secs'] = $timeout_1xx_secs;
-        null !== $timeout_2xx_secs && $obj['timeout_2xx_secs'] = $timeout_2xx_secs;
+        null !== $defaultPrimaryFqdnID && $obj['defaultPrimaryFqdnID'] = $defaultPrimaryFqdnID;
+        null !== $defaultRoutingMethod && $obj['defaultRoutingMethod'] = $defaultRoutingMethod;
+        null !== $defaultSecondaryFqdnID && $obj['defaultSecondaryFqdnID'] = $defaultSecondaryFqdnID;
+        null !== $defaultTertiaryFqdnID && $obj['defaultTertiaryFqdnID'] = $defaultTertiaryFqdnID;
+        null !== $dnisNumberFormat && $obj['dnisNumberFormat'] = $dnisNumberFormat;
+        null !== $generateRingbackTone && $obj['generateRingbackTone'] = $generateRingbackTone;
+        null !== $isupHeadersEnabled && $obj['isupHeadersEnabled'] = $isupHeadersEnabled;
+        null !== $prackEnabled && $obj['prackEnabled'] = $prackEnabled;
+        null !== $shakenStirEnabled && $obj['shakenStirEnabled'] = $shakenStirEnabled;
+        null !== $sipCompactHeadersEnabled && $obj['sipCompactHeadersEnabled'] = $sipCompactHeadersEnabled;
+        null !== $sipRegion && $obj['sipRegion'] = $sipRegion;
+        null !== $sipSubdomain && $obj['sipSubdomain'] = $sipSubdomain;
+        null !== $sipSubdomainReceiveSettings && $obj['sipSubdomainReceiveSettings'] = $sipSubdomainReceiveSettings;
+        null !== $timeout1xxSecs && $obj['timeout1xxSecs'] = $timeout1xxSecs;
+        null !== $timeout2xxSecs && $obj['timeout2xxSecs'] = $timeout2xxSecs;
 
         return $obj;
     }
@@ -229,7 +236,7 @@ final class InboundFqdn implements BaseModel
         AniNumberFormat|string $aniNumberFormat
     ): self {
         $obj = clone $this;
-        $obj['ani_number_format'] = $aniNumberFormat;
+        $obj['aniNumberFormat'] = $aniNumberFormat;
 
         return $obj;
     }
@@ -240,7 +247,7 @@ final class InboundFqdn implements BaseModel
     public function withChannelLimit(?int $channelLimit): self
     {
         $obj = clone $this;
-        $obj['channel_limit'] = $channelLimit;
+        $obj['channelLimit'] = $channelLimit;
 
         return $obj;
     }
@@ -266,7 +273,7 @@ final class InboundFqdn implements BaseModel
         ?string $defaultPrimaryFqdnID
     ): self {
         $obj = clone $this;
-        $obj['default_primary_fqdn_id'] = $defaultPrimaryFqdnID;
+        $obj['defaultPrimaryFqdnID'] = $defaultPrimaryFqdnID;
 
         return $obj;
     }
@@ -280,7 +287,7 @@ final class InboundFqdn implements BaseModel
         DefaultRoutingMethod|string|null $defaultRoutingMethod
     ): self {
         $obj = clone $this;
-        $obj['default_routing_method'] = $defaultRoutingMethod;
+        $obj['defaultRoutingMethod'] = $defaultRoutingMethod;
 
         return $obj;
     }
@@ -293,7 +300,7 @@ final class InboundFqdn implements BaseModel
         ?string $defaultSecondaryFqdnID
     ): self {
         $obj = clone $this;
-        $obj['default_secondary_fqdn_id'] = $defaultSecondaryFqdnID;
+        $obj['defaultSecondaryFqdnID'] = $defaultSecondaryFqdnID;
 
         return $obj;
     }
@@ -306,7 +313,7 @@ final class InboundFqdn implements BaseModel
         ?string $defaultTertiaryFqdnID
     ): self {
         $obj = clone $this;
-        $obj['default_tertiary_fqdn_id'] = $defaultTertiaryFqdnID;
+        $obj['defaultTertiaryFqdnID'] = $defaultTertiaryFqdnID;
 
         return $obj;
     }
@@ -318,7 +325,7 @@ final class InboundFqdn implements BaseModel
         DnisNumberFormat|string $dnisNumberFormat
     ): self {
         $obj = clone $this;
-        $obj['dnis_number_format'] = $dnisNumberFormat;
+        $obj['dnisNumberFormat'] = $dnisNumberFormat;
 
         return $obj;
     }
@@ -329,7 +336,7 @@ final class InboundFqdn implements BaseModel
     public function withGenerateRingbackTone(bool $generateRingbackTone): self
     {
         $obj = clone $this;
-        $obj['generate_ringback_tone'] = $generateRingbackTone;
+        $obj['generateRingbackTone'] = $generateRingbackTone;
 
         return $obj;
     }
@@ -340,7 +347,7 @@ final class InboundFqdn implements BaseModel
     public function withIsupHeadersEnabled(bool $isupHeadersEnabled): self
     {
         $obj = clone $this;
-        $obj['isup_headers_enabled'] = $isupHeadersEnabled;
+        $obj['isupHeadersEnabled'] = $isupHeadersEnabled;
 
         return $obj;
     }
@@ -351,7 +358,7 @@ final class InboundFqdn implements BaseModel
     public function withPrackEnabled(bool $prackEnabled): self
     {
         $obj = clone $this;
-        $obj['prack_enabled'] = $prackEnabled;
+        $obj['prackEnabled'] = $prackEnabled;
 
         return $obj;
     }
@@ -362,7 +369,7 @@ final class InboundFqdn implements BaseModel
     public function withShakenStirEnabled(bool $shakenStirEnabled): self
     {
         $obj = clone $this;
-        $obj['shaken_stir_enabled'] = $shakenStirEnabled;
+        $obj['shakenStirEnabled'] = $shakenStirEnabled;
 
         return $obj;
     }
@@ -374,7 +381,7 @@ final class InboundFqdn implements BaseModel
         bool $sipCompactHeadersEnabled
     ): self {
         $obj = clone $this;
-        $obj['sip_compact_headers_enabled'] = $sipCompactHeadersEnabled;
+        $obj['sipCompactHeadersEnabled'] = $sipCompactHeadersEnabled;
 
         return $obj;
     }
@@ -387,7 +394,7 @@ final class InboundFqdn implements BaseModel
     public function withSipRegion(SipRegion|string $sipRegion): self
     {
         $obj = clone $this;
-        $obj['sip_region'] = $sipRegion;
+        $obj['sipRegion'] = $sipRegion;
 
         return $obj;
     }
@@ -398,7 +405,7 @@ final class InboundFqdn implements BaseModel
     public function withSipSubdomain(?string $sipSubdomain): self
     {
         $obj = clone $this;
-        $obj['sip_subdomain'] = $sipSubdomain;
+        $obj['sipSubdomain'] = $sipSubdomain;
 
         return $obj;
     }
@@ -412,7 +419,7 @@ final class InboundFqdn implements BaseModel
         SipSubdomainReceiveSettings|string $sipSubdomainReceiveSettings
     ): self {
         $obj = clone $this;
-        $obj['sip_subdomain_receive_settings'] = $sipSubdomainReceiveSettings;
+        $obj['sipSubdomainReceiveSettings'] = $sipSubdomainReceiveSettings;
 
         return $obj;
     }
@@ -423,7 +430,7 @@ final class InboundFqdn implements BaseModel
     public function withTimeout1xxSecs(int $timeout1xxSecs): self
     {
         $obj = clone $this;
-        $obj['timeout_1xx_secs'] = $timeout1xxSecs;
+        $obj['timeout1xxSecs'] = $timeout1xxSecs;
 
         return $obj;
     }
@@ -434,7 +441,7 @@ final class InboundFqdn implements BaseModel
     public function withTimeout2xxSecs(int $timeout2xxSecs): self
     {
         $obj = clone $this;
-        $obj['timeout_2xx_secs'] = $timeout2xxSecs;
+        $obj['timeout2xxSecs'] = $timeout2xxSecs;
 
         return $obj;
     }

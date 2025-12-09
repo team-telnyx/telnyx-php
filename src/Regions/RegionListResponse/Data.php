@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type DataShape = array{
  *   code?: string|null,
- *   created_at?: string|null,
+ *   createdAt?: string|null,
  *   name?: string|null,
- *   record_type?: string|null,
- *   supported_interfaces?: list<string>|null,
- *   updated_at?: string|null,
+ *   recordType?: string|null,
+ *   supportedInterfaces?: list<string>|null,
+ *   updatedAt?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -32,8 +32,8 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Optional]
-    public ?string $created_at;
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
     /**
      * A name for the region.
@@ -44,22 +44,22 @@ final class Data implements BaseModel
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * List of interface types supported in this region.
      *
-     * @var list<string>|null $supported_interfaces
+     * @var list<string>|null $supportedInterfaces
      */
-    #[Optional(list: 'string')]
-    public ?array $supported_interfaces;
+    #[Optional('supported_interfaces', list: 'string')]
+    public ?array $supportedInterfaces;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Optional]
-    public ?string $updated_at;
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     public function __construct()
     {
@@ -71,24 +71,24 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $supported_interfaces
+     * @param list<string> $supportedInterfaces
      */
     public static function with(
         ?string $code = null,
-        ?string $created_at = null,
+        ?string $createdAt = null,
         ?string $name = null,
-        ?string $record_type = null,
-        ?array $supported_interfaces = null,
-        ?string $updated_at = null,
+        ?string $recordType = null,
+        ?array $supportedInterfaces = null,
+        ?string $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $code && $obj['code'] = $code;
-        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
         null !== $name && $obj['name'] = $name;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $supported_interfaces && $obj['supported_interfaces'] = $supported_interfaces;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $supportedInterfaces && $obj['supportedInterfaces'] = $supportedInterfaces;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class Data implements BaseModel
     public function withSupportedInterfaces(array $supportedInterfaces): self
     {
         $obj = clone $this;
-        $obj['supported_interfaces'] = $supportedInterfaces;
+        $obj['supportedInterfaces'] = $supportedInterfaces;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

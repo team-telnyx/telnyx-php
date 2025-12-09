@@ -42,7 +42,7 @@ final class PortingOrdersTest extends TestCase
         }
 
         $result = $this->client->portingOrders->create([
-            'phone_numbers' => ['+13035550000', '+13035550001', '+13035550002'],
+            'phoneNumbers' => ['+13035550000', '+13035550001', '+13035550002'],
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -57,9 +57,9 @@ final class PortingOrdersTest extends TestCase
         }
 
         $result = $this->client->portingOrders->create([
-            'phone_numbers' => ['+13035550000', '+13035550001', '+13035550002'],
-            'customer_group_reference' => 'Group-456',
-            'customer_reference' => 'Acct 123abc',
+            'phoneNumbers' => ['+13035550000', '+13035550001', '+13035550002'],
+            'customerGroupReference' => 'Group-456',
+            'customerReference' => 'Acct 123abc',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

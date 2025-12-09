@@ -12,8 +12,8 @@ use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupGetResponse\Da
 /**
  * @phpstan-type ResultShape = array{
  *   aggregations?: list<Aggregation>|null,
- *   record_type?: string|null,
- *   user_id?: string|null,
+ *   recordType?: string|null,
+ *   userID?: string|null,
  * }
  */
 final class Result implements BaseModel
@@ -32,14 +32,14 @@ final class Result implements BaseModel
     /**
      * Record type identifier.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * User ID.
      */
-    #[Optional]
-    public ?string $user_id;
+    #[Optional('user_id')]
+    public ?string $userID;
 
     public function __construct()
     {
@@ -53,21 +53,21 @@ final class Result implements BaseModel
      *
      * @param list<Aggregation|array{
      *   currency?: string|null,
-     *   total_cost?: float|null,
-     *   total_dips?: int|null,
+     *   totalCost?: float|null,
+     *   totalDips?: int|null,
      *   type?: string|null,
      * }> $aggregations
      */
     public static function with(
         ?array $aggregations = null,
-        ?string $record_type = null,
-        ?string $user_id = null,
+        ?string $recordType = null,
+        ?string $userID = null
     ): self {
         $obj = new self;
 
         null !== $aggregations && $obj['aggregations'] = $aggregations;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $user_id && $obj['user_id'] = $user_id;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $userID && $obj['userID'] = $userID;
 
         return $obj;
     }
@@ -77,8 +77,8 @@ final class Result implements BaseModel
      *
      * @param list<Aggregation|array{
      *   currency?: string|null,
-     *   total_cost?: float|null,
-     *   total_dips?: int|null,
+     *   totalCost?: float|null,
+     *   totalDips?: int|null,
      *   type?: string|null,
      * }> $aggregations
      */
@@ -96,7 +96,7 @@ final class Result implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -107,7 +107,7 @@ final class Result implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj['user_id'] = $userID;
+        $obj['userID'] = $userID;
 
         return $obj;
     }

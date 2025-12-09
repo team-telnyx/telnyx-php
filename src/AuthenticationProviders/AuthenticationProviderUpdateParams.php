@@ -19,13 +19,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *   active?: bool,
  *   name?: string,
  *   settings?: Settings|array{
- *     idp_cert_fingerprint: string,
- *     idp_entity_id: string,
- *     idp_sso_target_url: string,
- *     idp_cert_fingerprint_algorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
+ *     idpCertFingerprint: string,
+ *     idpEntityID: string,
+ *     idpSSOTargetURL: string,
+ *     idpCertFingerprintAlgorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
  *   },
- *   settings_url?: string,
- *   short_name?: string,
+ *   settingsURL?: string,
+ *   shortName?: string,
  * }
  */
 final class AuthenticationProviderUpdateParams implements BaseModel
@@ -55,14 +55,14 @@ final class AuthenticationProviderUpdateParams implements BaseModel
     /**
      * The URL for the identity provider metadata file to populate the settings automatically. If the settings attribute is provided, that will be used instead.
      */
-    #[Optional]
-    public ?string $settings_url;
+    #[Optional('settings_url')]
+    public ?string $settingsURL;
 
     /**
      * The short name associated with the authentication provider. This must be unique and URL-friendly, as it's going to be part of the login URL.
      */
-    #[Optional]
-    public ?string $short_name;
+    #[Optional('short_name')]
+    public ?string $shortName;
 
     public function __construct()
     {
@@ -75,26 +75,26 @@ final class AuthenticationProviderUpdateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Settings|array{
-     *   idp_cert_fingerprint: string,
-     *   idp_entity_id: string,
-     *   idp_sso_target_url: string,
-     *   idp_cert_fingerprint_algorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
+     *   idpCertFingerprint: string,
+     *   idpEntityID: string,
+     *   idpSSOTargetURL: string,
+     *   idpCertFingerprintAlgorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
      * } $settings
      */
     public static function with(
         ?bool $active = null,
         ?string $name = null,
         Settings|array|null $settings = null,
-        ?string $settings_url = null,
-        ?string $short_name = null,
+        ?string $settingsURL = null,
+        ?string $shortName = null,
     ): self {
         $obj = new self;
 
         null !== $active && $obj['active'] = $active;
         null !== $name && $obj['name'] = $name;
         null !== $settings && $obj['settings'] = $settings;
-        null !== $settings_url && $obj['settings_url'] = $settings_url;
-        null !== $short_name && $obj['short_name'] = $short_name;
+        null !== $settingsURL && $obj['settingsURL'] = $settingsURL;
+        null !== $shortName && $obj['shortName'] = $shortName;
 
         return $obj;
     }
@@ -125,10 +125,10 @@ final class AuthenticationProviderUpdateParams implements BaseModel
      * The settings associated with the authentication provider.
      *
      * @param Settings|array{
-     *   idp_cert_fingerprint: string,
-     *   idp_entity_id: string,
-     *   idp_sso_target_url: string,
-     *   idp_cert_fingerprint_algorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
+     *   idpCertFingerprint: string,
+     *   idpEntityID: string,
+     *   idpSSOTargetURL: string,
+     *   idpCertFingerprintAlgorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
      * } $settings
      */
     public function withSettings(Settings|array $settings): self
@@ -145,7 +145,7 @@ final class AuthenticationProviderUpdateParams implements BaseModel
     public function withSettingsURL(string $settingsURL): self
     {
         $obj = clone $this;
-        $obj['settings_url'] = $settingsURL;
+        $obj['settingsURL'] = $settingsURL;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class AuthenticationProviderUpdateParams implements BaseModel
     public function withShortName(string $shortName): self
     {
         $obj = clone $this;
-        $obj['short_name'] = $shortName;
+        $obj['shortName'] = $shortName;
 
         return $obj;
     }

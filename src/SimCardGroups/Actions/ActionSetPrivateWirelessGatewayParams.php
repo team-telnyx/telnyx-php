@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\SimCardGroups\ActionsService::setPrivateWirelessGateway()
  *
  * @phpstan-type ActionSetPrivateWirelessGatewayParamsShape = array{
- *   private_wireless_gateway_id: string
+ *   privateWirelessGatewayID: string
  * }
  */
 final class ActionSetPrivateWirelessGatewayParams implements BaseModel
@@ -27,15 +27,15 @@ final class ActionSetPrivateWirelessGatewayParams implements BaseModel
     /**
      * The identification of the related Private Wireless Gateway resource.
      */
-    #[Required]
-    public string $private_wireless_gateway_id;
+    #[Required('private_wireless_gateway_id')]
+    public string $privateWirelessGatewayID;
 
     /**
      * `new ActionSetPrivateWirelessGatewayParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ActionSetPrivateWirelessGatewayParams::with(private_wireless_gateway_id: ...)
+     * ActionSetPrivateWirelessGatewayParams::with(privateWirelessGatewayID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -54,11 +54,11 @@ final class ActionSetPrivateWirelessGatewayParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $private_wireless_gateway_id): self
+    public static function with(string $privateWirelessGatewayID): self
     {
         $obj = new self;
 
-        $obj['private_wireless_gateway_id'] = $private_wireless_gateway_id;
+        $obj['privateWirelessGatewayID'] = $privateWirelessGatewayID;
 
         return $obj;
     }
@@ -70,7 +70,7 @@ final class ActionSetPrivateWirelessGatewayParams implements BaseModel
         string $privateWirelessGatewayID
     ): self {
         $obj = clone $this;
-        $obj['private_wireless_gateway_id'] = $privateWirelessGatewayID;
+        $obj['privateWirelessGatewayID'] = $privateWirelessGatewayID;
 
         return $obj;
     }

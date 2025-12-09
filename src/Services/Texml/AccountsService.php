@@ -7,6 +7,7 @@ namespace Telnyx\Services\Texml;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\AccountsContract;
 use Telnyx\Services\Texml\Accounts\CallsService;
@@ -57,7 +58,7 @@ final class AccountsService implements AccountsContract
      * Returns multiple recording resources for an account.
      *
      * @param array{
-     *   DateCreated?: string|\DateTimeInterface, Page?: int, PageSize?: int
+     *   dateCreated?: string|\DateTimeInterface, page?: int, pageSize?: int
      * }|AccountRetrieveRecordingsJsonParams $params
      *
      * @throws APIException
@@ -76,7 +77,14 @@ final class AccountsService implements AccountsContract
         $response = $this->client->request(
             method: 'get',
             path: ['texml/Accounts/%1$s/Recordings.json', $accountSid],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'dateCreated' => 'DateCreated',
+                    'page' => 'Page',
+                    'pageSize' => 'PageSize',
+                ],
+            ),
             options: $options,
             convert: AccountGetRecordingsJsonResponse::class,
         );
@@ -90,7 +98,7 @@ final class AccountsService implements AccountsContract
      * Returns multiple recording transcription resources for an account.
      *
      * @param array{
-     *   PageSize?: int, PageToken?: string
+     *   pageSize?: int, pageToken?: string
      * }|AccountRetrieveTranscriptionsJsonParams $params
      *
      * @throws APIException
@@ -109,7 +117,10 @@ final class AccountsService implements AccountsContract
         $response = $this->client->request(
             method: 'get',
             path: ['texml/Accounts/%1$s/Transcriptions.json', $accountSid],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageSize' => 'PageSize', 'pageToken' => 'PageToken']
+            ),
             options: $options,
             convert: AccountGetTranscriptionsJsonResponse::class,
         );

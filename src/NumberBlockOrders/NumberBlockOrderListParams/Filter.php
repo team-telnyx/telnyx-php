@@ -13,8 +13,8 @@ use Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Filter\CreatedAt;
  * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers.starting_number].
  *
  * @phpstan-type FilterShape = array{
- *   created_at?: CreatedAt|null,
- *   phone_numbers_starting_number?: string|null,
+ *   createdAt?: CreatedAt|null,
+ *   phoneNumbersStartingNumber?: string|null,
  *   status?: string|null,
  * }
  */
@@ -26,14 +26,14 @@ final class Filter implements BaseModel
     /**
      * Filter number block orders by date range.
      */
-    #[Optional]
-    public ?CreatedAt $created_at;
+    #[Optional('created_at')]
+    public ?CreatedAt $createdAt;
 
     /**
      * Filter number block  orders having these phone numbers.
      */
     #[Optional('phone_numbers.starting_number')]
-    public ?string $phone_numbers_starting_number;
+    public ?string $phoneNumbersStartingNumber;
 
     /**
      * Filter number block orders by status.
@@ -51,17 +51,17 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CreatedAt|array{gt?: string|null, lt?: string|null} $created_at
+     * @param CreatedAt|array{gt?: string|null, lt?: string|null} $createdAt
      */
     public static function with(
-        CreatedAt|array|null $created_at = null,
-        ?string $phone_numbers_starting_number = null,
+        CreatedAt|array|null $createdAt = null,
+        ?string $phoneNumbersStartingNumber = null,
         ?string $status = null,
     ): self {
         $obj = new self;
 
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $phone_numbers_starting_number && $obj['phone_numbers_starting_number'] = $phone_numbers_starting_number;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $phoneNumbersStartingNumber && $obj['phoneNumbersStartingNumber'] = $phoneNumbersStartingNumber;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -75,7 +75,7 @@ final class Filter implements BaseModel
     public function withCreatedAt(CreatedAt|array $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -87,7 +87,7 @@ final class Filter implements BaseModel
         string $phoneNumbersStartingNumber
     ): self {
         $obj = clone $this;
-        $obj['phone_numbers_starting_number'] = $phoneNumbersStartingNumber;
+        $obj['phoneNumbersStartingNumber'] = $phoneNumbersStartingNumber;
 
         return $obj;
     }

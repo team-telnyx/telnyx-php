@@ -15,8 +15,8 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter\S
  *
  * @phpstan-type FilterShape = array{
  *   id?: list<string>|null,
- *   action_type?: value-of<ActionType>|null,
- *   requirement_type_id?: string|null,
+ *   actionType?: value-of<ActionType>|null,
+ *   requirementTypeID?: string|null,
  *   status?: value-of<Status>|null,
  * }
  */
@@ -36,16 +36,16 @@ final class Filter implements BaseModel
     /**
      * Filter action requirements by action type.
      *
-     * @var value-of<ActionType>|null $action_type
+     * @var value-of<ActionType>|null $actionType
      */
-    #[Optional(enum: ActionType::class)]
-    public ?string $action_type;
+    #[Optional('action_type', enum: ActionType::class)]
+    public ?string $actionType;
 
     /**
      * Filter action requirements by requirement type ID.
      */
-    #[Optional]
-    public ?string $requirement_type_id;
+    #[Optional('requirement_type_id')]
+    public ?string $requirementTypeID;
 
     /**
      * Filter action requirements by status.
@@ -66,20 +66,20 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $id
-     * @param ActionType|value-of<ActionType> $action_type
+     * @param ActionType|value-of<ActionType> $actionType
      * @param Status|value-of<Status> $status
      */
     public static function with(
         ?array $id = null,
-        ActionType|string|null $action_type = null,
-        ?string $requirement_type_id = null,
+        ActionType|string|null $actionType = null,
+        ?string $requirementTypeID = null,
         Status|string|null $status = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $action_type && $obj['action_type'] = $action_type;
-        null !== $requirement_type_id && $obj['requirement_type_id'] = $requirement_type_id;
+        null !== $actionType && $obj['actionType'] = $actionType;
+        null !== $requirementTypeID && $obj['requirementTypeID'] = $requirementTypeID;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -106,7 +106,7 @@ final class Filter implements BaseModel
     public function withActionType(ActionType|string $actionType): self
     {
         $obj = clone $this;
-        $obj['action_type'] = $actionType;
+        $obj['actionType'] = $actionType;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class Filter implements BaseModel
     public function withRequirementTypeID(string $requirementTypeID): self
     {
         $obj = clone $this;
-        $obj['requirement_type_id'] = $requirementTypeID;
+        $obj['requirementTypeID'] = $requirementTypeID;
 
         return $obj;
     }

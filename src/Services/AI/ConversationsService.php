@@ -16,6 +16,7 @@ use Telnyx\AI\Conversations\ConversationUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\ConversationsContract;
 use Telnyx\Services\AI\Conversations\InsightGroupsService;
@@ -141,14 +142,14 @@ final class ConversationsService implements ConversationsContract
      *
      * @param array{
      *   id?: string,
-     *   created_at?: string,
-     *   last_message_at?: string,
+     *   createdAt?: string,
+     *   lastMessageAt?: string,
      *   limit?: int,
-     *   metadata__assistant_id?: string,
-     *   metadata__call_control_id?: string,
-     *   metadata__telnyx_agent_target?: string,
-     *   metadata__telnyx_conversation_channel?: string,
-     *   metadata__telnyx_end_user_target?: string,
+     *   metadataAssistantID?: string,
+     *   metadataCallControlID?: string,
+     *   metadataTelnyxAgentTarget?: string,
+     *   metadataTelnyxConversationChannel?: string,
+     *   metadataTelnyxEndUserTarget?: string,
      *   name?: string,
      *   or?: string,
      *   order?: string,
@@ -169,7 +170,18 @@ final class ConversationsService implements ConversationsContract
         $response = $this->client->request(
             method: 'get',
             path: 'ai/conversations',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'createdAt' => 'created_at',
+                    'lastMessageAt' => 'last_message_at',
+                    'metadataAssistantID' => 'metadata->assistant_id',
+                    'metadataCallControlID' => 'metadata->call_control_id',
+                    'metadataTelnyxAgentTarget' => 'metadata->telnyx_agent_target',
+                    'metadataTelnyxConversationChannel' => 'metadata->telnyx_conversation_channel',
+                    'metadataTelnyxEndUserTarget' => 'metadata->telnyx_end_user_target',
+                ],
+            ),
             options: $options,
             convert: ConversationListResponse::class,
         );
@@ -209,10 +221,10 @@ final class ConversationsService implements ConversationsContract
      *   content?: string,
      *   metadata?: array<string,mixed>,
      *   name?: string,
-     *   sent_at?: string|\DateTimeInterface,
-     *   tool_call_id?: string,
-     *   tool_calls?: list<array<string,mixed>>,
-     *   tool_choice?: mixed|string,
+     *   sentAt?: string|\DateTimeInterface,
+     *   toolCallID?: string,
+     *   toolCalls?: list<array<string,mixed>>,
+     *   toolChoice?: mixed|string,
      * }|ConversationAddMessageParams $params
      *
      * @throws APIException

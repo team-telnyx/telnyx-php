@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type BlackBoxTestShape = array{
- *   id?: string|null, record_type?: string|null, result?: float|null
+ *   id?: string|null, recordType?: string|null, result?: float|null
  * }
  */
 final class BlackBoxTest implements BaseModel
@@ -24,8 +24,8 @@ final class BlackBoxTest implements BaseModel
     #[Optional]
     public ?string $id;
 
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * The average result of the black box test over the last hour.
@@ -45,13 +45,13 @@ final class BlackBoxTest implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $record_type = null,
+        ?string $recordType = null,
         ?float $result = null
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $recordType && $obj['recordType'] = $recordType;
         null !== $result && $obj['result'] = $result;
 
         return $obj;
@@ -71,7 +71,7 @@ final class BlackBoxTest implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

@@ -39,28 +39,28 @@ final class OAuthClientListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<OAuthClient|array{
-     *   client_id: string,
-     *   client_type: value-of<ClientType>,
-     *   created_at: \DateTimeInterface,
+     *   clientID: string,
+     *   clientType: value-of<ClientType>,
+     *   createdAt: \DateTimeInterface,
      *   name: string,
-     *   org_id: string,
-     *   record_type: value-of<RecordType>,
-     *   require_pkce: bool,
-     *   updated_at: \DateTimeInterface,
-     *   user_id: string,
-     *   allowed_grant_types?: list<value-of<AllowedGrantType>>|null,
-     *   allowed_scopes?: list<string>|null,
-     *   client_secret?: string|null,
-     *   logo_uri?: string|null,
-     *   policy_uri?: string|null,
-     *   redirect_uris?: list<string>|null,
-     *   tos_uri?: string|null,
+     *   orgID: string,
+     *   recordType: value-of<RecordType>,
+     *   requirePkce: bool,
+     *   updatedAt: \DateTimeInterface,
+     *   userID: string,
+     *   allowedGrantTypes?: list<value-of<AllowedGrantType>>|null,
+     *   allowedScopes?: list<string>|null,
+     *   clientSecret?: string|null,
+     *   logoUri?: string|null,
+     *   policyUri?: string|null,
+     *   redirectUris?: list<string>|null,
+     *   tosUri?: string|null,
      * }> $data
      * @param PaginationMetaOAuth|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -77,22 +77,22 @@ final class OAuthClientListResponse implements BaseModel
 
     /**
      * @param list<OAuthClient|array{
-     *   client_id: string,
-     *   client_type: value-of<ClientType>,
-     *   created_at: \DateTimeInterface,
+     *   clientID: string,
+     *   clientType: value-of<ClientType>,
+     *   createdAt: \DateTimeInterface,
      *   name: string,
-     *   org_id: string,
-     *   record_type: value-of<RecordType>,
-     *   require_pkce: bool,
-     *   updated_at: \DateTimeInterface,
-     *   user_id: string,
-     *   allowed_grant_types?: list<value-of<AllowedGrantType>>|null,
-     *   allowed_scopes?: list<string>|null,
-     *   client_secret?: string|null,
-     *   logo_uri?: string|null,
-     *   policy_uri?: string|null,
-     *   redirect_uris?: list<string>|null,
-     *   tos_uri?: string|null,
+     *   orgID: string,
+     *   recordType: value-of<RecordType>,
+     *   requirePkce: bool,
+     *   updatedAt: \DateTimeInterface,
+     *   userID: string,
+     *   allowedGrantTypes?: list<value-of<AllowedGrantType>>|null,
+     *   allowedScopes?: list<string>|null,
+     *   clientSecret?: string|null,
+     *   logoUri?: string|null,
+     *   policyUri?: string|null,
+     *   redirectUris?: list<string>|null,
+     *   tosUri?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -105,10 +105,10 @@ final class OAuthClientListResponse implements BaseModel
 
     /**
      * @param PaginationMetaOAuth|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMetaOAuth|array $meta): self

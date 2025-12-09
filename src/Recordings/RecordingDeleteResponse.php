@@ -38,20 +38,20 @@ final class RecordingDeleteResponse implements BaseModel
      *
      * @param RecordingResponseData|array{
      *   id?: string|null,
-     *   call_control_id?: string|null,
-     *   call_leg_id?: string|null,
-     *   call_session_id?: string|null,
+     *   callControlID?: string|null,
+     *   callLegID?: string|null,
+     *   callSessionID?: string|null,
      *   channels?: value-of<Channels>|null,
-     *   conference_id?: string|null,
-     *   created_at?: string|null,
-     *   download_urls?: DownloadURLs|null,
-     *   duration_millis?: int|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   recording_ended_at?: string|null,
-     *   recording_started_at?: string|null,
+     *   conferenceID?: string|null,
+     *   createdAt?: string|null,
+     *   downloadURLs?: DownloadURLs|null,
+     *   durationMillis?: int|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   recordingEndedAt?: string|null,
+     *   recordingStartedAt?: string|null,
      *   source?: value-of<Source>|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public static function with(RecordingResponseData|array|null $data = null): self
@@ -66,20 +66,20 @@ final class RecordingDeleteResponse implements BaseModel
     /**
      * @param RecordingResponseData|array{
      *   id?: string|null,
-     *   call_control_id?: string|null,
-     *   call_leg_id?: string|null,
-     *   call_session_id?: string|null,
+     *   callControlID?: string|null,
+     *   callLegID?: string|null,
+     *   callSessionID?: string|null,
      *   channels?: value-of<Channels>|null,
-     *   conference_id?: string|null,
-     *   created_at?: string|null,
-     *   download_urls?: DownloadURLs|null,
-     *   duration_millis?: int|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   recording_ended_at?: string|null,
-     *   recording_started_at?: string|null,
+     *   conferenceID?: string|null,
+     *   createdAt?: string|null,
+     *   downloadURLs?: DownloadURLs|null,
+     *   durationMillis?: int|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   recordingEndedAt?: string|null,
+     *   recordingStartedAt?: string|null,
      *   source?: value-of<Source>|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public function withData(RecordingResponseData|array $data): self

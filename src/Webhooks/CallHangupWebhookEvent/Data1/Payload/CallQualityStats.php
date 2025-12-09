@@ -45,14 +45,14 @@ final class CallQualityStats implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Inbound|array{
-     *   jitter_max_variance?: string|null,
-     *   jitter_packet_count?: string|null,
+     *   jitterMaxVariance?: string|null,
+     *   jitterPacketCount?: string|null,
      *   mos?: string|null,
-     *   packet_count?: string|null,
-     *   skip_packet_count?: string|null,
+     *   packetCount?: string|null,
+     *   skipPacketCount?: string|null,
      * } $inbound
      * @param Outbound|array{
-     *   packet_count?: string|null, skip_packet_count?: string|null
+     *   packetCount?: string|null, skipPacketCount?: string|null
      * } $outbound
      */
     public static function with(
@@ -71,11 +71,11 @@ final class CallQualityStats implements BaseModel
      * Inbound call quality statistics.
      *
      * @param Inbound|array{
-     *   jitter_max_variance?: string|null,
-     *   jitter_packet_count?: string|null,
+     *   jitterMaxVariance?: string|null,
+     *   jitterPacketCount?: string|null,
      *   mos?: string|null,
-     *   packet_count?: string|null,
-     *   skip_packet_count?: string|null,
+     *   packetCount?: string|null,
+     *   skipPacketCount?: string|null,
      * } $inbound
      */
     public function withInbound(Inbound|array $inbound): self
@@ -90,7 +90,7 @@ final class CallQualityStats implements BaseModel
      * Outbound call quality statistics.
      *
      * @param Outbound|array{
-     *   packet_count?: string|null, skip_packet_count?: string|null
+     *   packetCount?: string|null, skipPacketCount?: string|null
      * } $outbound
      */
     public function withOutbound(Outbound|array $outbound): self

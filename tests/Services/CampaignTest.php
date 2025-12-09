@@ -65,7 +65,7 @@ final class CampaignTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->campaign->list(['brandId' => 'brandId']);
+        $result = $this->client->campaign->list(['brandID' => 'brandId']);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CampaignListResponse::class, $result);
@@ -79,7 +79,7 @@ final class CampaignTest extends TestCase
         }
 
         $result = $this->client->campaign->list([
-            'brandId' => 'brandId',
+            'brandID' => 'brandId',
             'page' => 0,
             'recordsPerPage' => 0,
             'sort' => 'assignedPhoneNumbersCount',
@@ -164,7 +164,7 @@ final class CampaignTest extends TestCase
         $result = $this->client->campaign->submitAppeal(
             '5eb13888-32b7-4cab-95e6-d834dde21d64',
             [
-                'appeal_reason' => 'The website has been updated to include the required privacy policy and terms of service.',
+                'appealReason' => 'The website has been updated to include the required privacy policy and terms of service.',
             ],
         );
 
@@ -182,7 +182,7 @@ final class CampaignTest extends TestCase
         $result = $this->client->campaign->submitAppeal(
             '5eb13888-32b7-4cab-95e6-d834dde21d64',
             [
-                'appeal_reason' => 'The website has been updated to include the required privacy policy and terms of service.',
+                'appealReason' => 'The website has been updated to include the required privacy policy and terms of service.',
             ],
         );
 

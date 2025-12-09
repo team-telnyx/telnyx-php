@@ -38,8 +38,8 @@ final class WireguardInterfacesTest extends TestCase
         }
 
         $result = $this->client->wireguardInterfaces->create([
-            'network_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            'region_code' => 'ashburn-va',
+            'networkID' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            'regionCode' => 'ashburn-va',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -54,9 +54,9 @@ final class WireguardInterfacesTest extends TestCase
         }
 
         $result = $this->client->wireguardInterfaces->create([
-            'network_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            'region_code' => 'ashburn-va',
-            'enable_sip_trunking' => false,
+            'networkID' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            'regionCode' => 'ashburn-va',
+            'enableSipTrunking' => false,
             'name' => 'test interface',
         ]);
 

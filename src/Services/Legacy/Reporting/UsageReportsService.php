@@ -7,6 +7,7 @@ namespace Telnyx\Services\Legacy\Reporting;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Legacy\Reporting\UsageReports\UsageReportGetSpeechToTextResponse;
 use Telnyx\Legacy\Reporting\UsageReports\UsageReportRetrieveSpeechToTextParams;
 use Telnyx\RequestOptions;
@@ -48,7 +49,7 @@ final class UsageReportsService implements UsageReportsContract
      * Generate and fetch speech to text usage report synchronously. This endpoint will both generate and fetch the speech to text report over a specified time period.
      *
      * @param array{
-     *   end_date?: string|\DateTimeInterface, start_date?: string|\DateTimeInterface
+     *   endDate?: string|\DateTimeInterface, startDate?: string|\DateTimeInterface
      * }|UsageReportRetrieveSpeechToTextParams $params
      *
      * @throws APIException
@@ -66,7 +67,10 @@ final class UsageReportsService implements UsageReportsContract
         $response = $this->client->request(
             method: 'get',
             path: 'legacy/reporting/usage_reports/speech_to_text',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['endDate' => 'end_date', 'startDate' => 'start_date']
+            ),
             options: $options,
             convert: UsageReportGetSpeechToTextResponse::class,
         );

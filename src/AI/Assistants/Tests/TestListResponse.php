@@ -64,19 +64,19 @@ final class TestListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<AssistantTest|array{
-     *   created_at: \DateTimeInterface,
+     *   createdAt: \DateTimeInterface,
      *   name: string,
      *   rubric: list<Rubric>,
-     *   telnyx_conversation_channel: value-of<TelnyxConversationChannel>,
-     *   test_id: string,
+     *   telnyxConversationChannel: value-of<TelnyxConversationChannel>,
+     *   testID: string,
      *   description?: string|null,
      *   destination?: string|null,
      *   instructions?: string|null,
-     *   max_duration_seconds?: int|null,
-     *   test_suite?: string|null,
+     *   maxDurationSeconds?: int|null,
+     *   testSuite?: string|null,
      * }> $data
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public static function with(array $data, Meta|array $meta): self
@@ -93,16 +93,16 @@ final class TestListResponse implements BaseModel
      * Array of assistant test objects for the current page.
      *
      * @param list<AssistantTest|array{
-     *   created_at: \DateTimeInterface,
+     *   createdAt: \DateTimeInterface,
      *   name: string,
      *   rubric: list<Rubric>,
-     *   telnyx_conversation_channel: value-of<TelnyxConversationChannel>,
-     *   test_id: string,
+     *   telnyxConversationChannel: value-of<TelnyxConversationChannel>,
+     *   testID: string,
      *   description?: string|null,
      *   destination?: string|null,
      *   instructions?: string|null,
-     *   max_duration_seconds?: int|null,
-     *   test_suite?: string|null,
+     *   maxDurationSeconds?: int|null,
+     *   testSuite?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -117,7 +117,7 @@ final class TestListResponse implements BaseModel
      * Pagination metadata including total counts and current page info.
      *
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public function withMeta(Meta|array $meta): self

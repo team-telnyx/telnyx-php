@@ -33,7 +33,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   productionMessageContent: string,
  *   useCase: value-of<UseCaseCategories>,
  *   useCaseSummary: string,
- *   verificationRequestId: string,
+ *   verificationRequestID: string,
  *   ageGatedContent?: bool|null,
  *   businessAddr2?: string|null,
  *   businessRegistrationCountry?: string|null,
@@ -47,7 +47,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   privacyPolicyURL?: string|null,
  *   termsAndConditionURL?: string|null,
  *   verificationStatus?: value-of<TfVerificationStatus>|null,
- *   webhookUrl?: string|null,
+ *   webhookURL?: string|null,
  * }
  */
 final class VerificationRequestEgress implements BaseModel
@@ -127,8 +127,8 @@ final class VerificationRequestEgress implements BaseModel
     #[Required]
     public string $useCaseSummary;
 
-    #[Required]
-    public string $verificationRequestId;
+    #[Required('verificationRequestId')]
+    public string $verificationRequestID;
 
     #[Optional]
     public ?bool $ageGatedContent;
@@ -179,8 +179,8 @@ final class VerificationRequestEgress implements BaseModel
     #[Optional(enum: TfVerificationStatus::class)]
     public ?string $verificationStatus;
 
-    #[Optional]
-    public ?string $webhookUrl;
+    #[Optional('webhookUrl')]
+    public ?string $webhookURL;
 
     /**
      * `new VerificationRequestEgress()` is missing required properties by the API.
@@ -208,7 +208,7 @@ final class VerificationRequestEgress implements BaseModel
      *   productionMessageContent: ...,
      *   useCase: ...,
      *   useCaseSummary: ...,
-     *   verificationRequestId: ...,
+     *   verificationRequestID: ...,
      * )
      * ```
      *
@@ -277,7 +277,7 @@ final class VerificationRequestEgress implements BaseModel
         string $productionMessageContent,
         UseCaseCategories|string $useCase,
         string $useCaseSummary,
-        string $verificationRequestId,
+        string $verificationRequestID,
         ?bool $ageGatedContent = null,
         ?string $businessAddr2 = null,
         ?string $businessRegistrationCountry = null,
@@ -291,7 +291,7 @@ final class VerificationRequestEgress implements BaseModel
         ?string $privacyPolicyURL = null,
         ?string $termsAndConditionURL = null,
         TfVerificationStatus|string|null $verificationStatus = null,
-        ?string $webhookUrl = null,
+        ?string $webhookURL = null,
     ): self {
         $obj = new self;
 
@@ -315,7 +315,7 @@ final class VerificationRequestEgress implements BaseModel
         $obj['productionMessageContent'] = $productionMessageContent;
         $obj['useCase'] = $useCase;
         $obj['useCaseSummary'] = $useCaseSummary;
-        $obj['verificationRequestId'] = $verificationRequestId;
+        $obj['verificationRequestID'] = $verificationRequestID;
 
         null !== $ageGatedContent && $obj['ageGatedContent'] = $ageGatedContent;
         null !== $businessAddr2 && $obj['businessAddr2'] = $businessAddr2;
@@ -330,7 +330,7 @@ final class VerificationRequestEgress implements BaseModel
         null !== $privacyPolicyURL && $obj['privacyPolicyURL'] = $privacyPolicyURL;
         null !== $termsAndConditionURL && $obj['termsAndConditionURL'] = $termsAndConditionURL;
         null !== $verificationStatus && $obj['verificationStatus'] = $verificationStatus;
-        null !== $webhookUrl && $obj['webhookUrl'] = $webhookUrl;
+        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
 
         return $obj;
     }
@@ -520,7 +520,7 @@ final class VerificationRequestEgress implements BaseModel
         string $verificationRequestID
     ): self {
         $obj = clone $this;
-        $obj['verificationRequestId'] = $verificationRequestID;
+        $obj['verificationRequestID'] = $verificationRequestID;
 
         return $obj;
     }
@@ -648,7 +648,7 @@ final class VerificationRequestEgress implements BaseModel
     public function withWebhookURL(string $webhookURL): self
     {
         $obj = clone $this;
-        $obj['webhookUrl'] = $webhookURL;
+        $obj['webhookURL'] = $webhookURL;
 
         return $obj;
     }

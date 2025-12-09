@@ -43,21 +43,21 @@ final class MessagingProfileListPhoneNumbersResponse implements BaseModel
      *
      * @param list<PhoneNumberWithMessagingSettings|array{
      *   id?: string|null,
-     *   country_code?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   eligible_messaging_products?: list<string>|null,
+     *   countryCode?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   eligibleMessagingProducts?: list<string>|null,
      *   features?: Features|null,
      *   health?: NumberHealthMetrics|null,
-     *   messaging_product?: string|null,
-     *   messaging_profile_id?: string|null,
-     *   phone_number?: string|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   traffic_type?: string|null,
+     *   messagingProduct?: string|null,
+     *   messagingProfileID?: string|null,
+     *   phoneNumber?: string|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   trafficType?: string|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public static function with(
@@ -75,18 +75,18 @@ final class MessagingProfileListPhoneNumbersResponse implements BaseModel
     /**
      * @param list<PhoneNumberWithMessagingSettings|array{
      *   id?: string|null,
-     *   country_code?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   eligible_messaging_products?: list<string>|null,
+     *   countryCode?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   eligibleMessagingProducts?: list<string>|null,
      *   features?: Features|null,
      *   health?: NumberHealthMetrics|null,
-     *   messaging_product?: string|null,
-     *   messaging_profile_id?: string|null,
-     *   phone_number?: string|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   traffic_type?: string|null,
+     *   messagingProduct?: string|null,
+     *   messagingProfileID?: string|null,
+     *   phoneNumber?: string|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   trafficType?: string|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -99,7 +99,7 @@ final class MessagingProfileListPhoneNumbersResponse implements BaseModel
 
     /**
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public function withMeta(Meta|array $meta): self

@@ -32,9 +32,9 @@ final class NetworkDeleteResponse implements BaseModel
      *
      * @param Data|array{
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: string|null,
+     *   createdAt?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: string|null,
      *   name?: string|null,
      * } $data
      */
@@ -50,9 +50,9 @@ final class NetworkDeleteResponse implements BaseModel
     /**
      * @param Data|array{
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: string|null,
+     *   createdAt?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: string|null,
      *   name?: string|null,
      * } $data
      */

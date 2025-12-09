@@ -33,19 +33,19 @@ final class SubNumberOrderGetResponse implements BaseModel
      *
      * @param SubNumberOrder|array{
      *   id?: string|null,
-     *   country_code?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   customer_reference?: string|null,
-     *   is_block_sub_number_order?: bool|null,
-     *   order_request_id?: string|null,
-     *   phone_number_type?: value-of<PhoneNumberType>|null,
-     *   phone_numbers_count?: int|null,
-     *   record_type?: string|null,
-     *   regulatory_requirements?: list<SubNumberOrderRegulatoryRequirement>|null,
-     *   requirements_met?: bool|null,
+     *   countryCode?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   customerReference?: string|null,
+     *   isBlockSubNumberOrder?: bool|null,
+     *   orderRequestID?: string|null,
+     *   phoneNumberType?: value-of<PhoneNumberType>|null,
+     *   phoneNumbersCount?: int|null,
+     *   recordType?: string|null,
+     *   regulatoryRequirements?: list<SubNumberOrderRegulatoryRequirement>|null,
+     *   requirementsMet?: bool|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
-     *   user_id?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     *   userID?: string|null,
      * } $data
      */
     public static function with(SubNumberOrder|array|null $data = null): self
@@ -60,19 +60,19 @@ final class SubNumberOrderGetResponse implements BaseModel
     /**
      * @param SubNumberOrder|array{
      *   id?: string|null,
-     *   country_code?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   customer_reference?: string|null,
-     *   is_block_sub_number_order?: bool|null,
-     *   order_request_id?: string|null,
-     *   phone_number_type?: value-of<PhoneNumberType>|null,
-     *   phone_numbers_count?: int|null,
-     *   record_type?: string|null,
-     *   regulatory_requirements?: list<SubNumberOrderRegulatoryRequirement>|null,
-     *   requirements_met?: bool|null,
+     *   countryCode?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   customerReference?: string|null,
+     *   isBlockSubNumberOrder?: bool|null,
+     *   orderRequestID?: string|null,
+     *   phoneNumberType?: value-of<PhoneNumberType>|null,
+     *   phoneNumbersCount?: int|null,
+     *   recordType?: string|null,
+     *   regulatoryRequirements?: list<SubNumberOrderRegulatoryRequirement>|null,
+     *   requirementsMet?: bool|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
-     *   user_id?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     *   userID?: string|null,
      * } $data
      */
     public function withData(SubNumberOrder|array $data): self

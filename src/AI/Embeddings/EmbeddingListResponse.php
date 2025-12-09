@@ -46,13 +46,13 @@ final class EmbeddingListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   created_at: \DateTimeInterface,
+     *   createdAt: \DateTimeInterface,
      *   status: value-of<BackgroundTaskStatus>,
-     *   task_id: string,
-     *   task_name: string,
-     *   user_id: string,
+     *   taskID: string,
+     *   taskName: string,
+     *   userID: string,
      *   bucket?: string|null,
-     *   finished_at?: \DateTimeInterface|null,
+     *   finishedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public static function with(array $data): self
@@ -66,13 +66,13 @@ final class EmbeddingListResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   created_at: \DateTimeInterface,
+     *   createdAt: \DateTimeInterface,
      *   status: value-of<BackgroundTaskStatus>,
-     *   task_id: string,
-     *   task_name: string,
-     *   user_id: string,
+     *   taskID: string,
+     *   taskName: string,
+     *   userID: string,
      *   bucket?: string|null,
-     *   finished_at?: \DateTimeInterface|null,
+     *   finishedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public function withData(array $data): self

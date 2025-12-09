@@ -25,7 +25,7 @@ final class PhoneNumbersRegulatoryRequirementsService implements PhoneNumbersReg
      * Retrieve regulatory requirements for a list of phone numbers
      *
      * @param array{
-     *   filter?: array{phone_number?: string}
+     *   filter?: array{phoneNumber?: string}
      * }|PhoneNumbersRegulatoryRequirementRetrieveParams $params
      *
      * @throws APIException

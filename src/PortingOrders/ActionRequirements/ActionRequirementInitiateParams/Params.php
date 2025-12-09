@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Required information for initiating the action requirement for AU ID verification.
  *
- * @phpstan-type ParamsShape = array{first_name: string, last_name: string}
+ * @phpstan-type ParamsShape = array{firstName: string, lastName: string}
  */
 final class Params implements BaseModel
 {
@@ -21,21 +21,21 @@ final class Params implements BaseModel
     /**
      * The first name of the person that will perform the verification flow.
      */
-    #[Required]
-    public string $first_name;
+    #[Required('first_name')]
+    public string $firstName;
 
     /**
      * The last name of the person that will perform the verification flow.
      */
-    #[Required]
-    public string $last_name;
+    #[Required('last_name')]
+    public string $lastName;
 
     /**
      * `new Params()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Params::with(first_name: ..., last_name: ...)
+     * Params::with(firstName: ..., lastName: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -54,12 +54,12 @@ final class Params implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $first_name, string $last_name): self
+    public static function with(string $firstName, string $lastName): self
     {
         $obj = new self;
 
-        $obj['first_name'] = $first_name;
-        $obj['last_name'] = $last_name;
+        $obj['firstName'] = $firstName;
+        $obj['lastName'] = $lastName;
 
         return $obj;
     }
@@ -70,7 +70,7 @@ final class Params implements BaseModel
     public function withFirstName(string $firstName): self
     {
         $obj = clone $this;
-        $obj['first_name'] = $firstName;
+        $obj['firstName'] = $firstName;
 
         return $obj;
     }
@@ -81,7 +81,7 @@ final class Params implements BaseModel
     public function withLastName(string $lastName): self
     {
         $obj = clone $this;
-        $obj['last_name'] = $lastName;
+        $obj['lastName'] = $lastName;
 
         return $obj;
     }

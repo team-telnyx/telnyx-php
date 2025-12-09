@@ -26,7 +26,7 @@ final class SiprecService implements SiprecContract
      * Updates siprec session identified by siprec_sid.
      *
      * @param array{
-     *   account_sid: string, call_sid: string, Status?: 'stopped'|Status
+     *   accountSid: string, callSid: string, status?: 'stopped'|Status
      * }|SiprecSiprecSidJsonParams $params
      *
      * @throws APIException
@@ -40,10 +40,10 @@ final class SiprecService implements SiprecContract
             $params,
             $requestOptions,
         );
-        $accountSid = $parsed['account_sid'];
-        unset($parsed['account_sid']);
-        $callSid = $parsed['call_sid'];
-        unset($parsed['call_sid']);
+        $accountSid = $parsed['accountSid'];
+        unset($parsed['accountSid']);
+        $callSid = $parsed['callSid'];
+        unset($parsed['callSid']);
 
         /** @var BaseResponse<SiprecSiprecSidJsonResponse> */
         $response = $this->client->request(
@@ -57,7 +57,7 @@ final class SiprecService implements SiprecContract
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
             body: (object) array_diff_key(
                 $parsed,
-                array_flip(['account_sid', 'call_sid'])
+                array_flip(['accountSid', 'callSid'])
             ),
             options: $options,
             convert: SiprecSiprecSidJsonResponse::class,

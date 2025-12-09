@@ -31,7 +31,7 @@ final class NumbersFeatureNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{features: list<string>, phone_number: string}> $data
+     * @param list<Data|array{features: list<string>, phoneNumber: string}> $data
      */
     public static function with(?array $data = null): self
     {
@@ -43,7 +43,7 @@ final class NumbersFeatureNewResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{features: list<string>, phone_number: string}> $data
+     * @param list<Data|array{features: list<string>, phoneNumber: string}> $data
      */
     public function withData(array $data): self
     {

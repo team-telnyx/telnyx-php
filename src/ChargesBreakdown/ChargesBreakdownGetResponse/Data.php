@@ -13,11 +13,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type DataShape = array{
  *   currency: string,
- *   end_date: \DateTimeInterface,
+ *   endDate: \DateTimeInterface,
  *   results: list<Result>,
- *   start_date: \DateTimeInterface,
- *   user_email: string,
- *   user_id: string,
+ *   startDate: \DateTimeInterface,
+ *   userEmail: string,
+ *   userID: string,
  * }
  */
 final class Data implements BaseModel
@@ -34,8 +34,8 @@ final class Data implements BaseModel
     /**
      * End date of the breakdown period.
      */
-    #[Required]
-    public \DateTimeInterface $end_date;
+    #[Required('end_date')]
+    public \DateTimeInterface $endDate;
 
     /**
      * List of phone number charge breakdowns.
@@ -48,20 +48,20 @@ final class Data implements BaseModel
     /**
      * Start date of the breakdown period.
      */
-    #[Required]
-    public \DateTimeInterface $start_date;
+    #[Required('start_date')]
+    public \DateTimeInterface $startDate;
 
     /**
      * User email address.
      */
-    #[Required]
-    public string $user_email;
+    #[Required('user_email')]
+    public string $userEmail;
 
     /**
      * User identifier.
      */
-    #[Required]
-    public string $user_id;
+    #[Required('user_id')]
+    public string $userID;
 
     /**
      * `new Data()` is missing required properties by the API.
@@ -70,11 +70,11 @@ final class Data implements BaseModel
      * ```
      * Data::with(
      *   currency: ...,
-     *   end_date: ...,
+     *   endDate: ...,
      *   results: ...,
-     *   start_date: ...,
-     *   user_email: ...,
-     *   user_id: ...,
+     *   startDate: ...,
+     *   userEmail: ...,
+     *   userID: ...,
      * )
      * ```
      *
@@ -101,29 +101,29 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Result|array{
-     *   charge_type: string,
-     *   service_owner_email: string,
-     *   service_owner_user_id: string,
+     *   chargeType: string,
+     *   serviceOwnerEmail: string,
+     *   serviceOwnerUserID: string,
      *   services: list<Service>,
      *   tn: string,
      * }> $results
      */
     public static function with(
         string $currency,
-        \DateTimeInterface $end_date,
+        \DateTimeInterface $endDate,
         array $results,
-        \DateTimeInterface $start_date,
-        string $user_email,
-        string $user_id,
+        \DateTimeInterface $startDate,
+        string $userEmail,
+        string $userID,
     ): self {
         $obj = new self;
 
         $obj['currency'] = $currency;
-        $obj['end_date'] = $end_date;
+        $obj['endDate'] = $endDate;
         $obj['results'] = $results;
-        $obj['start_date'] = $start_date;
-        $obj['user_email'] = $user_email;
-        $obj['user_id'] = $user_id;
+        $obj['startDate'] = $startDate;
+        $obj['userEmail'] = $userEmail;
+        $obj['userID'] = $userID;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class Data implements BaseModel
     public function withEndDate(\DateTimeInterface $endDate): self
     {
         $obj = clone $this;
-        $obj['end_date'] = $endDate;
+        $obj['endDate'] = $endDate;
 
         return $obj;
     }
@@ -154,9 +154,9 @@ final class Data implements BaseModel
      * List of phone number charge breakdowns.
      *
      * @param list<Result|array{
-     *   charge_type: string,
-     *   service_owner_email: string,
-     *   service_owner_user_id: string,
+     *   chargeType: string,
+     *   serviceOwnerEmail: string,
+     *   serviceOwnerUserID: string,
      *   services: list<Service>,
      *   tn: string,
      * }> $results
@@ -175,7 +175,7 @@ final class Data implements BaseModel
     public function withStartDate(\DateTimeInterface $startDate): self
     {
         $obj = clone $this;
-        $obj['start_date'] = $startDate;
+        $obj['startDate'] = $startDate;
 
         return $obj;
     }
@@ -186,7 +186,7 @@ final class Data implements BaseModel
     public function withUserEmail(string $userEmail): self
     {
         $obj = clone $this;
-        $obj['user_email'] = $userEmail;
+        $obj['userEmail'] = $userEmail;
 
         return $obj;
     }
@@ -197,7 +197,7 @@ final class Data implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj['user_id'] = $userID;
+        $obj['userID'] = $userID;
 
         return $obj;
     }

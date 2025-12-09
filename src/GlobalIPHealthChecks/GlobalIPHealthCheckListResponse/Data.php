@@ -11,12 +11,12 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   created_at?: string|null,
- *   record_type?: string|null,
- *   updated_at?: string|null,
- *   global_ip_id?: string|null,
- *   health_check_params?: array<string,mixed>|null,
- *   health_check_type?: string|null,
+ *   createdAt?: string|null,
+ *   recordType?: string|null,
+ *   updatedAt?: string|null,
+ *   globalIPID?: string|null,
+ *   healthCheckParams?: array<string,mixed>|null,
+ *   healthCheckType?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -33,40 +33,40 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Optional]
-    public ?string $created_at;
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Optional]
-    public ?string $updated_at;
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     /**
      * Global IP ID.
      */
-    #[Optional]
-    public ?string $global_ip_id;
+    #[Optional('global_ip_id')]
+    public ?string $globalIPID;
 
     /**
      * A Global IP health check params.
      *
-     * @var array<string,mixed>|null $health_check_params
+     * @var array<string,mixed>|null $healthCheckParams
      */
-    #[Optional(map: 'mixed')]
-    public ?array $health_check_params;
+    #[Optional('health_check_params', map: 'mixed')]
+    public ?array $healthCheckParams;
 
     /**
      * The Global IP health check type.
      */
-    #[Optional]
-    public ?string $health_check_type;
+    #[Optional('health_check_type')]
+    public ?string $healthCheckType;
 
     public function __construct()
     {
@@ -78,26 +78,26 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,mixed> $health_check_params
+     * @param array<string,mixed> $healthCheckParams
      */
     public static function with(
         ?string $id = null,
-        ?string $created_at = null,
-        ?string $record_type = null,
-        ?string $updated_at = null,
-        ?string $global_ip_id = null,
-        ?array $health_check_params = null,
-        ?string $health_check_type = null,
+        ?string $createdAt = null,
+        ?string $recordType = null,
+        ?string $updatedAt = null,
+        ?string $globalIPID = null,
+        ?array $healthCheckParams = null,
+        ?string $healthCheckType = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
-        null !== $global_ip_id && $obj['global_ip_id'] = $global_ip_id;
-        null !== $health_check_params && $obj['health_check_params'] = $health_check_params;
-        null !== $health_check_type && $obj['health_check_type'] = $health_check_type;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $globalIPID && $obj['globalIPID'] = $globalIPID;
+        null !== $healthCheckParams && $obj['healthCheckParams'] = $healthCheckParams;
+        null !== $healthCheckType && $obj['healthCheckType'] = $healthCheckType;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -141,7 +141,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -149,10 +149,10 @@ final class Data implements BaseModel
     /**
      * Global IP ID.
      */
-    public function withGlobalIPID(string $globalIPID): self
+    public function withGlobalIpid(string $globalIPID): self
     {
         $obj = clone $this;
-        $obj['global_ip_id'] = $globalIPID;
+        $obj['globalIPID'] = $globalIPID;
 
         return $obj;
     }
@@ -165,7 +165,7 @@ final class Data implements BaseModel
     public function withHealthCheckParams(array $healthCheckParams): self
     {
         $obj = clone $this;
-        $obj['health_check_params'] = $healthCheckParams;
+        $obj['healthCheckParams'] = $healthCheckParams;
 
         return $obj;
     }
@@ -176,7 +176,7 @@ final class Data implements BaseModel
     public function withHealthCheckType(string $healthCheckType): self
     {
         $obj = clone $this;
-        $obj['health_check_type'] = $healthCheckType;
+        $obj['healthCheckType'] = $healthCheckType;
 
         return $obj;
     }

@@ -16,7 +16,7 @@ use Telnyx\Messsages\RcsCardContent;
 
 /**
  * @phpstan-type RichCardShape = array{
- *   carousel_card?: CarouselCard|null, standalone_card?: StandaloneCard|null
+ *   carouselCard?: CarouselCard|null, standaloneCard?: StandaloneCard|null
  * }
  */
 final class RichCard implements BaseModel
@@ -27,14 +27,14 @@ final class RichCard implements BaseModel
     /**
      * Carousel of cards.
      */
-    #[Optional]
-    public ?CarouselCard $carousel_card;
+    #[Optional('carousel_card')]
+    public ?CarouselCard $carouselCard;
 
     /**
      * Standalone card.
      */
-    #[Optional]
-    public ?StandaloneCard $standalone_card;
+    #[Optional('standalone_card')]
+    public ?StandaloneCard $standaloneCard;
 
     public function __construct()
     {
@@ -47,22 +47,22 @@ final class RichCard implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param CarouselCard|array{
-     *   card_contents: list<RcsCardContent>, card_width: value-of<CardWidth>
-     * } $carousel_card
+     *   cardContents: list<RcsCardContent>, cardWidth: value-of<CardWidth>
+     * } $carouselCard
      * @param StandaloneCard|array{
-     *   card_content: RcsCardContent,
-     *   card_orientation: value-of<CardOrientation>,
-     *   thumbnail_image_alignment: value-of<ThumbnailImageAlignment>,
-     * } $standalone_card
+     *   cardContent: RcsCardContent,
+     *   cardOrientation: value-of<CardOrientation>,
+     *   thumbnailImageAlignment: value-of<ThumbnailImageAlignment>,
+     * } $standaloneCard
      */
     public static function with(
-        CarouselCard|array|null $carousel_card = null,
-        StandaloneCard|array|null $standalone_card = null,
+        CarouselCard|array|null $carouselCard = null,
+        StandaloneCard|array|null $standaloneCard = null,
     ): self {
         $obj = new self;
 
-        null !== $carousel_card && $obj['carousel_card'] = $carousel_card;
-        null !== $standalone_card && $obj['standalone_card'] = $standalone_card;
+        null !== $carouselCard && $obj['carouselCard'] = $carouselCard;
+        null !== $standaloneCard && $obj['standaloneCard'] = $standaloneCard;
 
         return $obj;
     }
@@ -71,13 +71,13 @@ final class RichCard implements BaseModel
      * Carousel of cards.
      *
      * @param CarouselCard|array{
-     *   card_contents: list<RcsCardContent>, card_width: value-of<CardWidth>
+     *   cardContents: list<RcsCardContent>, cardWidth: value-of<CardWidth>
      * } $carouselCard
      */
     public function withCarouselCard(CarouselCard|array $carouselCard): self
     {
         $obj = clone $this;
-        $obj['carousel_card'] = $carouselCard;
+        $obj['carouselCard'] = $carouselCard;
 
         return $obj;
     }
@@ -86,16 +86,16 @@ final class RichCard implements BaseModel
      * Standalone card.
      *
      * @param StandaloneCard|array{
-     *   card_content: RcsCardContent,
-     *   card_orientation: value-of<CardOrientation>,
-     *   thumbnail_image_alignment: value-of<ThumbnailImageAlignment>,
+     *   cardContent: RcsCardContent,
+     *   cardOrientation: value-of<CardOrientation>,
+     *   thumbnailImageAlignment: value-of<ThumbnailImageAlignment>,
      * } $standaloneCard
      */
     public function withStandaloneCard(
         StandaloneCard|array $standaloneCard
     ): self {
         $obj = clone $this;
-        $obj['standalone_card'] = $standaloneCard;
+        $obj['standaloneCard'] = $standaloneCard;
 
         return $obj;
     }

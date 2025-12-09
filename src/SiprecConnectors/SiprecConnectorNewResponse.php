@@ -45,13 +45,13 @@ final class SiprecConnectorNewResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Data|array{
-     *   app_subdomain?: string|null,
-     *   created_at?: string|null,
+     *   appSubdomain?: string|null,
+     *   createdAt?: string|null,
      *   host?: string|null,
      *   name?: string|null,
      *   port?: int|null,
-     *   record_type?: string|null,
-     *   updated_at?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public static function with(Data|array $data): self
@@ -65,13 +65,13 @@ final class SiprecConnectorNewResponse implements BaseModel
 
     /**
      * @param Data|array{
-     *   app_subdomain?: string|null,
-     *   created_at?: string|null,
+     *   appSubdomain?: string|null,
+     *   createdAt?: string|null,
      *   host?: string|null,
      *   name?: string|null,
      *   port?: int|null,
-     *   record_type?: string|null,
-     *   updated_at?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public function withData(Data|array $data): self

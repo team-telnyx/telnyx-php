@@ -31,7 +31,7 @@ final class IPsService implements IPsContract
      * Create a new IP object.
      *
      * @param array{
-     *   ip_address: string, connection_id?: string, port?: int
+     *   ipAddress: string, connectionID?: string, port?: int
      * }|IPCreateParams $params
      *
      * @throws APIException
@@ -85,7 +85,7 @@ final class IPsService implements IPsContract
      * Update the details of a specific IP.
      *
      * @param array{
-     *   ip_address: string, connection_id?: string, port?: int
+     *   ipAddress: string, connectionID?: string, port?: int
      * }|IPUpdateParams $params
      *
      * @throws APIException
@@ -118,7 +118,7 @@ final class IPsService implements IPsContract
      * Get all IPs belonging to the user that match the given filters.
      *
      * @param array{
-     *   filter?: array{connection_id?: string, ip_address?: string, port?: int},
+     *   filter?: array{connectionID?: string, ipAddress?: string, port?: int},
      *   page?: array{number?: int, size?: int},
      * }|IPListParams $params
      *

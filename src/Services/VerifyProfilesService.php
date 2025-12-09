@@ -34,27 +34,26 @@ final class VerifyProfilesService implements VerifyProfilesContract
      * @param array{
      *   name: string,
      *   call?: array{
-     *     app_name?: string,
-     *     code_length?: int,
-     *     default_verification_timeout_secs?: int,
-     *     messaging_template_id?: string,
-     *     whitelisted_destinations?: list<string>,
+     *     appName?: string,
+     *     codeLength?: int,
+     *     defaultVerificationTimeoutSecs?: int,
+     *     messagingTemplateID?: string,
+     *     whitelistedDestinations?: list<string>,
      *   },
      *   flashcall?: array{
-     *     default_verification_timeout_secs?: int,
-     *     whitelisted_destinations?: list<string>,
+     *     defaultVerificationTimeoutSecs?: int, whitelistedDestinations?: list<string>
      *   },
      *   language?: string,
      *   sms?: array{
-     *     whitelisted_destinations: list<string>,
-     *     alpha_sender?: string|null,
-     *     app_name?: string,
-     *     code_length?: int,
-     *     default_verification_timeout_secs?: int,
-     *     messaging_template_id?: string,
+     *     whitelistedDestinations: list<string>,
+     *     alphaSender?: string|null,
+     *     appName?: string,
+     *     codeLength?: int,
+     *     defaultVerificationTimeoutSecs?: int,
+     *     messagingTemplateID?: string,
      *   },
-     *   webhook_failover_url?: string,
-     *   webhook_url?: string,
+     *   webhookFailoverURL?: string,
+     *   webhookURL?: string,
      * }|VerifyProfileCreateParams $params
      *
      * @throws APIException
@@ -109,28 +108,27 @@ final class VerifyProfilesService implements VerifyProfilesContract
      *
      * @param array{
      *   call?: array{
-     *     app_name?: string,
-     *     code_length?: int,
-     *     default_verification_timeout_secs?: int,
-     *     messaging_template_id?: string,
-     *     whitelisted_destinations?: list<string>,
+     *     appName?: string,
+     *     codeLength?: int,
+     *     defaultVerificationTimeoutSecs?: int,
+     *     messagingTemplateID?: string,
+     *     whitelistedDestinations?: list<string>,
      *   },
      *   flashcall?: array{
-     *     default_verification_timeout_secs?: int,
-     *     whitelisted_destinations?: list<string>,
+     *     defaultVerificationTimeoutSecs?: int, whitelistedDestinations?: list<string>
      *   },
      *   language?: string,
      *   name?: string,
      *   sms?: array{
-     *     alpha_sender?: string|null,
-     *     app_name?: string,
-     *     code_length?: int,
-     *     default_verification_timeout_secs?: int,
-     *     messaging_template_id?: string,
-     *     whitelisted_destinations?: list<string>,
+     *     alphaSender?: string|null,
+     *     appName?: string,
+     *     codeLength?: int,
+     *     defaultVerificationTimeoutSecs?: int,
+     *     messagingTemplateID?: string,
+     *     whitelistedDestinations?: list<string>,
      *   },
-     *   webhook_failover_url?: string,
-     *   webhook_url?: string,
+     *   webhookFailoverURL?: string,
+     *   webhookURL?: string,
      * }|VerifyProfileUpdateParams $params
      *
      * @throws APIException

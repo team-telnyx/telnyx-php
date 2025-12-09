@@ -34,18 +34,18 @@ final class NumberOrderUpdateResponse implements BaseModel
      *
      * @param NumberOrderWithPhoneNumbers|array{
      *   id?: string|null,
-     *   billing_group_id?: string|null,
-     *   connection_id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   customer_reference?: string|null,
-     *   messaging_profile_id?: string|null,
-     *   phone_numbers?: list<PhoneNumber>|null,
-     *   phone_numbers_count?: int|null,
-     *   record_type?: string|null,
-     *   requirements_met?: bool|null,
+     *   billingGroupID?: string|null,
+     *   connectionID?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   customerReference?: string|null,
+     *   messagingProfileID?: string|null,
+     *   phoneNumbers?: list<PhoneNumber>|null,
+     *   phoneNumbersCount?: int|null,
+     *   recordType?: string|null,
+     *   requirementsMet?: bool|null,
      *   status?: value-of<Status>|null,
-     *   sub_number_orders_ids?: list<string>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   subNumberOrdersIDs?: list<string>|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(
@@ -61,18 +61,18 @@ final class NumberOrderUpdateResponse implements BaseModel
     /**
      * @param NumberOrderWithPhoneNumbers|array{
      *   id?: string|null,
-     *   billing_group_id?: string|null,
-     *   connection_id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   customer_reference?: string|null,
-     *   messaging_profile_id?: string|null,
-     *   phone_numbers?: list<PhoneNumber>|null,
-     *   phone_numbers_count?: int|null,
-     *   record_type?: string|null,
-     *   requirements_met?: bool|null,
+     *   billingGroupID?: string|null,
+     *   connectionID?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   customerReference?: string|null,
+     *   messagingProfileID?: string|null,
+     *   phoneNumbers?: list<PhoneNumber>|null,
+     *   phoneNumbersCount?: int|null,
+     *   recordType?: string|null,
+     *   requirementsMet?: bool|null,
      *   status?: value-of<Status>|null,
-     *   sub_number_orders_ids?: list<string>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   subNumberOrdersIDs?: list<string>|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(NumberOrderWithPhoneNumbers|array $data): self

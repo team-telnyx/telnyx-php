@@ -66,7 +66,7 @@ final class AITest extends TestCase
         $result = $this->client->ai->summarize([
             'bucket' => 'bucket',
             'filename' => 'filename',
-            'system_prompt' => 'system_prompt',
+            'systemPrompt' => 'system_prompt',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

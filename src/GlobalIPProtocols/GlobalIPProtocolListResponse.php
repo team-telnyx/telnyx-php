@@ -32,7 +32,7 @@ final class GlobalIPProtocolListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   code?: string|null, name?: string|null, record_type?: string|null
+     *   code?: string|null, name?: string|null, recordType?: string|null
      * }> $data
      */
     public static function with(?array $data = null): self
@@ -46,7 +46,7 @@ final class GlobalIPProtocolListResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   code?: string|null, name?: string|null, record_type?: string|null
+     *   code?: string|null, name?: string|null, recordType?: string|null
      * }> $data
      */
     public function withData(array $data): self

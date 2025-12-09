@@ -54,15 +54,15 @@ final class VerifiedNumberListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<VerifiedNumber|array{
-     *   phone_number?: string|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   verified_at?: string|null,
+     *   phoneNumber?: string|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   verifiedAt?: string|null,
      * }> $data
      * @param Meta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(array $data, Meta|array $meta): self
@@ -77,9 +77,9 @@ final class VerifiedNumberListResponse implements BaseModel
 
     /**
      * @param list<VerifiedNumber|array{
-     *   phone_number?: string|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   verified_at?: string|null,
+     *   phoneNumber?: string|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   verifiedAt?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -92,10 +92,10 @@ final class VerifiedNumberListResponse implements BaseModel
 
     /**
      * @param Meta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(Meta|array $meta): self

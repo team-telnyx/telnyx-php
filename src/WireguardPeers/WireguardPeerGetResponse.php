@@ -32,13 +32,13 @@ final class WireguardPeerGetResponse implements BaseModel
      *
      * @param Data|array{
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: string|null,
-     *   public_key?: string|null,
-     *   last_seen?: string|null,
-     *   private_key?: string|null,
-     *   wireguard_interface_id?: string|null,
+     *   createdAt?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: string|null,
+     *   publicKey?: string|null,
+     *   lastSeen?: string|null,
+     *   privateKey?: string|null,
+     *   wireguardInterfaceID?: string|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -53,13 +53,13 @@ final class WireguardPeerGetResponse implements BaseModel
     /**
      * @param Data|array{
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: string|null,
-     *   public_key?: string|null,
-     *   last_seen?: string|null,
-     *   private_key?: string|null,
-     *   wireguard_interface_id?: string|null,
+     *   createdAt?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: string|null,
+     *   publicKey?: string|null,
+     *   lastSeen?: string|null,
+     *   privateKey?: string|null,
+     *   wireguardInterfaceID?: string|null,
      * } $data
      */
     public function withData(Data|array $data): self

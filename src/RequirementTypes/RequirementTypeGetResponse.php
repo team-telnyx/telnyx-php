@@ -36,14 +36,14 @@ final class RequirementTypeGetResponse implements BaseModel
      *
      * @param DocReqsRequirementType|array{
      *   id?: string|null,
-     *   acceptance_criteria?: AcceptanceCriteria|null,
-     *   created_at?: string|null,
+     *   acceptanceCriteria?: AcceptanceCriteria|null,
+     *   createdAt?: string|null,
      *   description?: string|null,
      *   example?: string|null,
      *   name?: string|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public static function with(DocReqsRequirementType|array|null $data = null): self
@@ -58,14 +58,14 @@ final class RequirementTypeGetResponse implements BaseModel
     /**
      * @param DocReqsRequirementType|array{
      *   id?: string|null,
-     *   acceptance_criteria?: AcceptanceCriteria|null,
-     *   created_at?: string|null,
+     *   acceptanceCriteria?: AcceptanceCriteria|null,
+     *   createdAt?: string|null,
      *   description?: string|null,
      *   example?: string|null,
      *   name?: string|null,
-     *   record_type?: string|null,
+     *   recordType?: string|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public function withData(DocReqsRequirementType|array $data): self

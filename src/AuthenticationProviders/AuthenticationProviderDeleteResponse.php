@@ -35,13 +35,13 @@ final class AuthenticationProviderDeleteResponse implements BaseModel
      * @param AuthenticationProvider|array{
      *   id?: string|null,
      *   active?: bool|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   name?: string|null,
-     *   organization_id?: string|null,
-     *   record_type?: string|null,
+     *   organizationID?: string|null,
+     *   recordType?: string|null,
      *   settings?: Settings|null,
-     *   short_name?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   shortName?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(AuthenticationProvider|array|null $data = null): self
@@ -57,13 +57,13 @@ final class AuthenticationProviderDeleteResponse implements BaseModel
      * @param AuthenticationProvider|array{
      *   id?: string|null,
      *   active?: bool|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   name?: string|null,
-     *   organization_id?: string|null,
-     *   record_type?: string|null,
+     *   organizationID?: string|null,
+     *   recordType?: string|null,
      *   settings?: Settings|null,
-     *   short_name?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   shortName?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(AuthenticationProvider|array $data): self

@@ -40,26 +40,26 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      *
      * @param array{
      *   name: string,
-     *   billing_group_id?: string|null,
-     *   call_recording?: array{
-     *     call_recording_caller_phone_numbers?: list<string>,
-     *     call_recording_channels?: 'single'|'dual'|CallRecordingChannels,
-     *     call_recording_format?: 'wav'|'mp3'|CallRecordingFormat,
-     *     call_recording_type?: 'all'|'none'|'by_caller_phone_number'|CallRecordingType,
+     *   billingGroupID?: string|null,
+     *   callRecording?: array{
+     *     callRecordingCallerPhoneNumbers?: list<string>,
+     *     callRecordingChannels?: 'single'|'dual'|CallRecordingChannels,
+     *     callRecordingFormat?: 'wav'|'mp3'|CallRecordingFormat,
+     *     callRecordingType?: 'all'|'none'|'by_caller_phone_number'|CallRecordingType,
      *   }|OutboundCallRecording,
-     *   calling_window?: array{
-     *     calls_per_cld?: int, end_time?: string, start_time?: string
+     *   callingWindow?: array{
+     *     callsPerCld?: int, endTime?: string, startTime?: string
      *   },
-     *   concurrent_call_limit?: int|null,
-     *   daily_spend_limit?: string,
-     *   daily_spend_limit_enabled?: bool,
+     *   concurrentCallLimit?: int|null,
+     *   dailySpendLimit?: string,
+     *   dailySpendLimitEnabled?: bool,
      *   enabled?: bool,
-     *   max_destination_rate?: float,
-     *   service_plan?: 'global'|ServicePlan,
+     *   maxDestinationRate?: float,
+     *   servicePlan?: 'global'|ServicePlan,
      *   tags?: list<string>,
-     *   traffic_type?: 'conversational'|TrafficType,
-     *   usage_payment_method?: 'rate-deck'|UsagePaymentMethod,
-     *   whitelisted_destinations?: list<string>,
+     *   trafficType?: 'conversational'|TrafficType,
+     *   usagePaymentMethod?: 'rate-deck'|UsagePaymentMethod,
+     *   whitelistedDestinations?: list<string>,
      * }|OutboundVoiceProfileCreateParams $params
      *
      * @throws APIException
@@ -114,26 +114,26 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      *
      * @param array{
      *   name: string,
-     *   billing_group_id?: string|null,
-     *   call_recording?: array{
-     *     call_recording_caller_phone_numbers?: list<string>,
-     *     call_recording_channels?: 'single'|'dual'|CallRecordingChannels,
-     *     call_recording_format?: 'wav'|'mp3'|CallRecordingFormat,
-     *     call_recording_type?: 'all'|'none'|'by_caller_phone_number'|CallRecordingType,
+     *   billingGroupID?: string|null,
+     *   callRecording?: array{
+     *     callRecordingCallerPhoneNumbers?: list<string>,
+     *     callRecordingChannels?: 'single'|'dual'|CallRecordingChannels,
+     *     callRecordingFormat?: 'wav'|'mp3'|CallRecordingFormat,
+     *     callRecordingType?: 'all'|'none'|'by_caller_phone_number'|CallRecordingType,
      *   }|OutboundCallRecording,
-     *   calling_window?: array{
-     *     calls_per_cld?: int, end_time?: string, start_time?: string
+     *   callingWindow?: array{
+     *     callsPerCld?: int, endTime?: string, startTime?: string
      *   },
-     *   concurrent_call_limit?: int|null,
-     *   daily_spend_limit?: string,
-     *   daily_spend_limit_enabled?: bool,
+     *   concurrentCallLimit?: int|null,
+     *   dailySpendLimit?: string,
+     *   dailySpendLimitEnabled?: bool,
      *   enabled?: bool,
-     *   max_destination_rate?: float,
-     *   service_plan?: 'global'|ServicePlan,
+     *   maxDestinationRate?: float,
+     *   servicePlan?: 'global'|ServicePlan,
      *   tags?: list<string>,
-     *   traffic_type?: 'conversational'|TrafficType,
-     *   usage_payment_method?: 'rate-deck'|UsagePaymentMethod,
-     *   whitelisted_destinations?: list<string>,
+     *   trafficType?: 'conversational'|TrafficType,
+     *   usagePaymentMethod?: 'rate-deck'|UsagePaymentMethod,
+     *   whitelistedDestinations?: list<string>,
      * }|OutboundVoiceProfileUpdateParams $params
      *
      * @throws APIException

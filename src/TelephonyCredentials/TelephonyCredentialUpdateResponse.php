@@ -33,15 +33,15 @@ final class TelephonyCredentialUpdateResponse implements BaseModel
      *
      * @param TelephonyCredential|array{
      *   id?: string|null,
-     *   created_at?: string|null,
+     *   createdAt?: string|null,
      *   expired?: bool|null,
-     *   expires_at?: string|null,
+     *   expiresAt?: string|null,
      *   name?: string|null,
-     *   record_type?: string|null,
-     *   resource_id?: string|null,
-     *   sip_password?: string|null,
-     *   sip_username?: string|null,
-     *   updated_at?: string|null,
+     *   recordType?: string|null,
+     *   resourceID?: string|null,
+     *   sipPassword?: string|null,
+     *   sipUsername?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public static function with(TelephonyCredential|array|null $data = null): self
@@ -56,15 +56,15 @@ final class TelephonyCredentialUpdateResponse implements BaseModel
     /**
      * @param TelephonyCredential|array{
      *   id?: string|null,
-     *   created_at?: string|null,
+     *   createdAt?: string|null,
      *   expired?: bool|null,
-     *   expires_at?: string|null,
+     *   expiresAt?: string|null,
      *   name?: string|null,
-     *   record_type?: string|null,
-     *   resource_id?: string|null,
-     *   sip_password?: string|null,
-     *   sip_username?: string|null,
-     *   updated_at?: string|null,
+     *   recordType?: string|null,
+     *   resourceID?: string|null,
+     *   sipPassword?: string|null,
+     *   sipUsername?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public function withData(TelephonyCredential|array $data): self

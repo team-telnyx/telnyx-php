@@ -28,20 +28,20 @@ final class AvailablePhoneNumbersService implements AvailablePhoneNumbersContrac
      *
      * @param array{
      *   filter?: array{
-     *     administrative_area?: string,
-     *     best_effort?: bool,
-     *     country_code?: string,
-     *     exclude_held_numbers?: bool,
+     *     administrativeArea?: string,
+     *     bestEffort?: bool,
+     *     countryCode?: string,
+     *     excludeHeldNumbers?: bool,
      *     features?: list<'sms'|'mms'|'voice'|'fax'|'emergency'|'hd_voice'|'international_sms'|'local_calling'|Feature>,
      *     limit?: int,
      *     locality?: string,
-     *     national_destination_code?: string,
-     *     phone_number?: array{
-     *       contains?: string, ends_with?: string, starts_with?: string
+     *     nationalDestinationCode?: string,
+     *     phoneNumber?: array{
+     *       contains?: string, endsWith?: string, startsWith?: string
      *     },
-     *     phone_number_type?: 'local'|'toll_free'|'mobile'|'national'|'shared_cost'|PhoneNumberType,
+     *     phoneNumberType?: 'local'|'toll_free'|'mobile'|'national'|'shared_cost'|PhoneNumberType,
      *     quickship?: bool,
-     *     rate_center?: string,
+     *     rateCenter?: string,
      *     reservable?: bool,
      *   },
      * }|AvailablePhoneNumberListParams $params

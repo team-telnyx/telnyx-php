@@ -16,11 +16,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Addresses\ActionsService::validate()
  *
  * @phpstan-type ActionValidateParamsShape = array{
- *   country_code: string,
- *   postal_code: string,
- *   street_address: string,
- *   administrative_area?: string,
- *   extended_address?: string,
+ *   countryCode: string,
+ *   postalCode: string,
+ *   streetAddress: string,
+ *   administrativeArea?: string,
+ *   extendedAddress?: string,
  *   locality?: string,
  * }
  */
@@ -33,32 +33,32 @@ final class ActionValidateParams implements BaseModel
     /**
      * The two-character (ISO 3166-1 alpha-2) country code of the address.
      */
-    #[Required]
-    public string $country_code;
+    #[Required('country_code')]
+    public string $countryCode;
 
     /**
      * The postal code of the address.
      */
-    #[Required]
-    public string $postal_code;
+    #[Required('postal_code')]
+    public string $postalCode;
 
     /**
      * The primary street address information about the address.
      */
-    #[Required]
-    public string $street_address;
+    #[Required('street_address')]
+    public string $streetAddress;
 
     /**
      * The locality of the address. For US addresses, this corresponds to the state of the address.
      */
-    #[Optional]
-    public ?string $administrative_area;
+    #[Optional('administrative_area')]
+    public ?string $administrativeArea;
 
     /**
      * Additional street address information about the address such as, but not limited to, unit number or apartment number.
      */
-    #[Optional]
-    public ?string $extended_address;
+    #[Optional('extended_address')]
+    public ?string $extendedAddress;
 
     /**
      * The locality of the address. For US addresses, this corresponds to the city of the address.
@@ -72,7 +72,7 @@ final class ActionValidateParams implements BaseModel
      * To enforce required parameters use
      * ```
      * ActionValidateParams::with(
-     *   country_code: ..., postal_code: ..., street_address: ...
+     *   countryCode: ..., postalCode: ..., streetAddress: ...
      * )
      * ```
      *
@@ -96,21 +96,21 @@ final class ActionValidateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $country_code,
-        string $postal_code,
-        string $street_address,
-        ?string $administrative_area = null,
-        ?string $extended_address = null,
+        string $countryCode,
+        string $postalCode,
+        string $streetAddress,
+        ?string $administrativeArea = null,
+        ?string $extendedAddress = null,
         ?string $locality = null,
     ): self {
         $obj = new self;
 
-        $obj['country_code'] = $country_code;
-        $obj['postal_code'] = $postal_code;
-        $obj['street_address'] = $street_address;
+        $obj['countryCode'] = $countryCode;
+        $obj['postalCode'] = $postalCode;
+        $obj['streetAddress'] = $streetAddress;
 
-        null !== $administrative_area && $obj['administrative_area'] = $administrative_area;
-        null !== $extended_address && $obj['extended_address'] = $extended_address;
+        null !== $administrativeArea && $obj['administrativeArea'] = $administrativeArea;
+        null !== $extendedAddress && $obj['extendedAddress'] = $extendedAddress;
         null !== $locality && $obj['locality'] = $locality;
 
         return $obj;
@@ -122,7 +122,7 @@ final class ActionValidateParams implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj['country_code'] = $countryCode;
+        $obj['countryCode'] = $countryCode;
 
         return $obj;
     }
@@ -133,7 +133,7 @@ final class ActionValidateParams implements BaseModel
     public function withPostalCode(string $postalCode): self
     {
         $obj = clone $this;
-        $obj['postal_code'] = $postalCode;
+        $obj['postalCode'] = $postalCode;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class ActionValidateParams implements BaseModel
     public function withStreetAddress(string $streetAddress): self
     {
         $obj = clone $this;
-        $obj['street_address'] = $streetAddress;
+        $obj['streetAddress'] = $streetAddress;
 
         return $obj;
     }
@@ -155,7 +155,7 @@ final class ActionValidateParams implements BaseModel
     public function withAdministrativeArea(string $administrativeArea): self
     {
         $obj = clone $this;
-        $obj['administrative_area'] = $administrativeArea;
+        $obj['administrativeArea'] = $administrativeArea;
 
         return $obj;
     }
@@ -166,7 +166,7 @@ final class ActionValidateParams implements BaseModel
     public function withExtendedAddress(string $extendedAddress): self
     {
         $obj = clone $this;
-        $obj['extended_address'] = $extendedAddress;
+        $obj['extendedAddress'] = $extendedAddress;
 
         return $obj;
     }

@@ -40,23 +40,23 @@ final class MdrUsageReportListResponse implements BaseModel
      *
      * @param list<MdrUsageReport|array{
      *   id?: string|null,
-     *   aggregation_type?: value-of<AggregationType>|null,
+     *   aggregationType?: value-of<AggregationType>|null,
      *   connections?: list<int>|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   end_date?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   endDate?: \DateTimeInterface|null,
      *   profiles?: string|null,
-     *   record_type?: string|null,
-     *   report_url?: string|null,
+     *   recordType?: string|null,
+     *   reportURL?: string|null,
      *   result?: list<Result>|null,
-     *   start_date?: \DateTimeInterface|null,
+     *   startDate?: \DateTimeInterface|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      * @param PaginationMetaReporting|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -74,17 +74,17 @@ final class MdrUsageReportListResponse implements BaseModel
     /**
      * @param list<MdrUsageReport|array{
      *   id?: string|null,
-     *   aggregation_type?: value-of<AggregationType>|null,
+     *   aggregationType?: value-of<AggregationType>|null,
      *   connections?: list<int>|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   end_date?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   endDate?: \DateTimeInterface|null,
      *   profiles?: string|null,
-     *   record_type?: string|null,
-     *   report_url?: string|null,
+     *   recordType?: string|null,
+     *   reportURL?: string|null,
      *   result?: list<Result>|null,
-     *   start_date?: \DateTimeInterface|null,
+     *   startDate?: \DateTimeInterface|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -97,10 +97,10 @@ final class MdrUsageReportListResponse implements BaseModel
 
     /**
      * @param PaginationMetaReporting|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMetaReporting|array $meta): self

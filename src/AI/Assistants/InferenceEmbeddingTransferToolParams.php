@@ -15,8 +15,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type InferenceEmbeddingTransferToolParamsShape = array{
  *   from: string,
  *   targets: list<Target>,
- *   custom_headers?: list<CustomHeader>|null,
- *   warm_transfer_instructions?: string|null,
+ *   customHeaders?: list<CustomHeader>|null,
+ *   warmTransferInstructions?: string|null,
  * }
  */
 final class InferenceEmbeddingTransferToolParams implements BaseModel
@@ -41,16 +41,16 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
     /**
      * Custom headers to be added to the SIP INVITE for the transfer command.
      *
-     * @var list<CustomHeader>|null $custom_headers
+     * @var list<CustomHeader>|null $customHeaders
      */
-    #[Optional(list: CustomHeader::class)]
-    public ?array $custom_headers;
+    #[Optional('custom_headers', list: CustomHeader::class)]
+    public ?array $customHeaders;
 
     /**
      * Natural language instructions for your agent for how to provide context for the transfer recipient.
      */
-    #[Optional]
-    public ?string $warm_transfer_instructions;
+    #[Optional('warm_transfer_instructions')]
+    public ?string $warmTransferInstructions;
 
     /**
      * `new InferenceEmbeddingTransferToolParams()` is missing required properties by the API.
@@ -79,21 +79,21 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
      * @param list<Target|array{name?: string|null, to?: string|null}> $targets
      * @param list<CustomHeader|array{
      *   name?: string|null, value?: string|null
-     * }> $custom_headers
+     * }> $customHeaders
      */
     public static function with(
         string $from,
         array $targets,
-        ?array $custom_headers = null,
-        ?string $warm_transfer_instructions = null,
+        ?array $customHeaders = null,
+        ?string $warmTransferInstructions = null,
     ): self {
         $obj = new self;
 
         $obj['from'] = $from;
         $obj['targets'] = $targets;
 
-        null !== $custom_headers && $obj['custom_headers'] = $custom_headers;
-        null !== $warm_transfer_instructions && $obj['warm_transfer_instructions'] = $warm_transfer_instructions;
+        null !== $customHeaders && $obj['customHeaders'] = $customHeaders;
+        null !== $warmTransferInstructions && $obj['warmTransferInstructions'] = $warmTransferInstructions;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
     public function withCustomHeaders(array $customHeaders): self
     {
         $obj = clone $this;
-        $obj['custom_headers'] = $customHeaders;
+        $obj['customHeaders'] = $customHeaders;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
         string $warmTransferInstructions
     ): self {
         $obj = clone $this;
-        $obj['warm_transfer_instructions'] = $warmTransferInstructions;
+        $obj['warmTransferInstructions'] = $warmTransferInstructions;
 
         return $obj;
     }

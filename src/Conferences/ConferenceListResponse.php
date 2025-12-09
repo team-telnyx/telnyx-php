@@ -42,22 +42,22 @@ final class ConferenceListResponse implements BaseModel
      *
      * @param list<Conference|array{
      *   id: string,
-     *   created_at: string,
-     *   expires_at: string,
+     *   createdAt: string,
+     *   expiresAt: string,
      *   name: string,
-     *   record_type: value-of<RecordType>,
-     *   connection_id?: string|null,
-     *   end_reason?: value-of<EndReason>|null,
-     *   ended_by?: EndedBy|null,
+     *   recordType: value-of<RecordType>,
+     *   connectionID?: string|null,
+     *   endReason?: value-of<EndReason>|null,
+     *   endedBy?: EndedBy|null,
      *   region?: string|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -75,16 +75,16 @@ final class ConferenceListResponse implements BaseModel
     /**
      * @param list<Conference|array{
      *   id: string,
-     *   created_at: string,
-     *   expires_at: string,
+     *   createdAt: string,
+     *   expiresAt: string,
      *   name: string,
-     *   record_type: value-of<RecordType>,
-     *   connection_id?: string|null,
-     *   end_reason?: value-of<EndReason>|null,
-     *   ended_by?: EndedBy|null,
+     *   recordType: value-of<RecordType>,
+     *   connectionID?: string|null,
+     *   endReason?: value-of<EndReason>|null,
+     *   endedBy?: EndedBy|null,
      *   region?: string|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -97,10 +97,10 @@ final class ConferenceListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

@@ -39,7 +39,7 @@ final class SimCardDataUsageNotificationsTest extends TestCase
         }
 
         $result = $this->client->simCardDataUsageNotifications->create([
-            'sim_card_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58', 'threshold' => [],
+            'simCardID' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58', 'threshold' => [],
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -57,7 +57,7 @@ final class SimCardDataUsageNotificationsTest extends TestCase
         }
 
         $result = $this->client->simCardDataUsageNotifications->create([
-            'sim_card_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            'simCardID' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
             'threshold' => ['amount' => '2048.1', 'unit' => 'MB'],
         ]);
 

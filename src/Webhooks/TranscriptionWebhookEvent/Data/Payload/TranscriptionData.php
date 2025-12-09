@@ -12,9 +12,9 @@ use Telnyx\Webhooks\TranscriptionWebhookEvent\Data\Payload\TranscriptionData\Tra
 /**
  * @phpstan-type TranscriptionDataShape = array{
  *   confidence?: float|null,
- *   is_final?: bool|null,
+ *   isFinal?: bool|null,
  *   transcript?: string|null,
- *   transcription_track?: value-of<TranscriptionTrack>|null,
+ *   transcriptionTrack?: value-of<TranscriptionTrack>|null,
  * }
  */
 final class TranscriptionData implements BaseModel
@@ -31,8 +31,8 @@ final class TranscriptionData implements BaseModel
     /**
      * When false, it means that this is an interim result.
      */
-    #[Optional]
-    public ?bool $is_final;
+    #[Optional('is_final')]
+    public ?bool $isFinal;
 
     /**
      * Recognized text.
@@ -43,10 +43,10 @@ final class TranscriptionData implements BaseModel
     /**
      * Indicates which leg of the call has been transcribed. This is only available when `transcription_engine` is set to `B`.
      *
-     * @var value-of<TranscriptionTrack>|null $transcription_track
+     * @var value-of<TranscriptionTrack>|null $transcriptionTrack
      */
-    #[Optional(enum: TranscriptionTrack::class)]
-    public ?string $transcription_track;
+    #[Optional('transcription_track', enum: TranscriptionTrack::class)]
+    public ?string $transcriptionTrack;
 
     public function __construct()
     {
@@ -58,20 +58,20 @@ final class TranscriptionData implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param TranscriptionTrack|value-of<TranscriptionTrack> $transcription_track
+     * @param TranscriptionTrack|value-of<TranscriptionTrack> $transcriptionTrack
      */
     public static function with(
         ?float $confidence = null,
-        ?bool $is_final = null,
+        ?bool $isFinal = null,
         ?string $transcript = null,
-        TranscriptionTrack|string|null $transcription_track = null,
+        TranscriptionTrack|string|null $transcriptionTrack = null,
     ): self {
         $obj = new self;
 
         null !== $confidence && $obj['confidence'] = $confidence;
-        null !== $is_final && $obj['is_final'] = $is_final;
+        null !== $isFinal && $obj['isFinal'] = $isFinal;
         null !== $transcript && $obj['transcript'] = $transcript;
-        null !== $transcription_track && $obj['transcription_track'] = $transcription_track;
+        null !== $transcriptionTrack && $obj['transcriptionTrack'] = $transcriptionTrack;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class TranscriptionData implements BaseModel
     public function withIsFinal(bool $isFinal): self
     {
         $obj = clone $this;
-        $obj['is_final'] = $isFinal;
+        $obj['isFinal'] = $isFinal;
 
         return $obj;
     }
@@ -118,7 +118,7 @@ final class TranscriptionData implements BaseModel
         TranscriptionTrack|string $transcriptionTrack
     ): self {
         $obj = clone $this;
-        $obj['transcription_track'] = $transcriptionTrack;
+        $obj['transcriptionTrack'] = $transcriptionTrack;
 
         return $obj;
     }

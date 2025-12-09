@@ -11,8 +11,8 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type ToShape = array{
  *   carrier?: string|null,
- *   line_type?: string|null,
- *   phone_number?: string|null,
+ *   lineType?: string|null,
+ *   phoneNumber?: string|null,
  *   status?: string|null,
  * }
  */
@@ -24,11 +24,11 @@ final class To implements BaseModel
     #[Optional]
     public ?string $carrier;
 
-    #[Optional]
-    public ?string $line_type;
+    #[Optional('line_type')]
+    public ?string $lineType;
 
-    #[Optional]
-    public ?string $phone_number;
+    #[Optional('phone_number')]
+    public ?string $phoneNumber;
 
     #[Optional]
     public ?string $status;
@@ -45,15 +45,15 @@ final class To implements BaseModel
      */
     public static function with(
         ?string $carrier = null,
-        ?string $line_type = null,
-        ?string $phone_number = null,
+        ?string $lineType = null,
+        ?string $phoneNumber = null,
         ?string $status = null,
     ): self {
         $obj = new self;
 
         null !== $carrier && $obj['carrier'] = $carrier;
-        null !== $line_type && $obj['line_type'] = $line_type;
-        null !== $phone_number && $obj['phone_number'] = $phone_number;
+        null !== $lineType && $obj['lineType'] = $lineType;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -70,7 +70,7 @@ final class To implements BaseModel
     public function withLineType(string $lineType): self
     {
         $obj = clone $this;
-        $obj['line_type'] = $lineType;
+        $obj['lineType'] = $lineType;
 
         return $obj;
     }
@@ -78,7 +78,7 @@ final class To implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }

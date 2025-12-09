@@ -10,10 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   created_at?: \DateTimeInterface|null,
+ *   createdAt?: \DateTimeInterface|null,
  *   from?: string|null,
  *   keyword?: string|null,
- *   messaging_profile_id?: string|null,
+ *   messagingProfileID?: string|null,
  *   to?: string|null,
  * }
  */
@@ -25,8 +25,8 @@ final class Data implements BaseModel
     /**
      * The timestamp when the opt-out was created.
      */
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
     /**
      * Sending address (+E.164 formatted phone number, alphanumeric sender ID, or short code).
@@ -43,8 +43,8 @@ final class Data implements BaseModel
     /**
      * Unique identifier for a messaging profile.
      */
-    #[Optional(nullable: true)]
-    public ?string $messaging_profile_id;
+    #[Optional('messaging_profile_id', nullable: true)]
+    public ?string $messagingProfileID;
 
     /**
      * Receiving address (+E.164 formatted phone number or short code).
@@ -63,18 +63,18 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?\DateTimeInterface $created_at = null,
+        ?\DateTimeInterface $createdAt = null,
         ?string $from = null,
         ?string $keyword = null,
-        ?string $messaging_profile_id = null,
+        ?string $messagingProfileID = null,
         ?string $to = null,
     ): self {
         $obj = new self;
 
-        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
         null !== $from && $obj['from'] = $from;
         null !== $keyword && $obj['keyword'] = $keyword;
-        null !== $messaging_profile_id && $obj['messaging_profile_id'] = $messaging_profile_id;
+        null !== $messagingProfileID && $obj['messagingProfileID'] = $messagingProfileID;
         null !== $to && $obj['to'] = $to;
 
         return $obj;
@@ -86,7 +86,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class Data implements BaseModel
     public function withMessagingProfileID(?string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj['messaging_profile_id'] = $messagingProfileID;
+        $obj['messagingProfileID'] = $messagingProfileID;
 
         return $obj;
     }

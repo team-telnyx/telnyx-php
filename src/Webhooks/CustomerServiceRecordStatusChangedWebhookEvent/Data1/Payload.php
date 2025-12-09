@@ -12,9 +12,9 @@ use Telnyx\Webhooks\CustomerServiceRecordStatusChangedWebhookEvent\Data1\Payload
 /**
  * @phpstan-type PayloadShape = array{
  *   id?: string|null,
- *   phone_number?: string|null,
+ *   phoneNumber?: string|null,
  *   status?: value-of<Status>|null,
- *   updated_at?: \DateTimeInterface|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class Payload implements BaseModel
@@ -31,8 +31,8 @@ final class Payload implements BaseModel
     /**
      * The phone number of the customer service record.
      */
-    #[Optional]
-    public ?string $phone_number;
+    #[Optional('phone_number')]
+    public ?string $phoneNumber;
 
     /**
      * The status of the customer service record.
@@ -45,8 +45,8 @@ final class Payload implements BaseModel
     /**
      * ISO 8601 formatted date indicating the last time where the resource was updated.
      */
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
     {
@@ -62,16 +62,16 @@ final class Payload implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $phone_number = null,
+        ?string $phoneNumber = null,
         Status|string|null $status = null,
-        ?\DateTimeInterface $updated_at = null,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $phone_number && $obj['phone_number'] = $phone_number;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
         null !== $status && $obj['status'] = $status;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class Payload implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class Payload implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

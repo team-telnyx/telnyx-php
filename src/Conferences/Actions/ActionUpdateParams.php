@@ -18,11 +18,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Conferences\ActionsService::update()
  *
  * @phpstan-type ActionUpdateParamsShape = array{
- *   call_control_id: string,
- *   supervisor_role: SupervisorRole|value-of<SupervisorRole>,
- *   command_id?: string,
+ *   callControlID: string,
+ *   supervisorRole: SupervisorRole|value-of<SupervisorRole>,
+ *   commandID?: string,
  *   region?: Region|value-of<Region>,
- *   whisper_call_control_ids?: list<string>,
+ *   whisperCallControlIDs?: list<string>,
  * }
  */
 final class ActionUpdateParams implements BaseModel
@@ -34,22 +34,22 @@ final class ActionUpdateParams implements BaseModel
     /**
      * Unique identifier and token for controlling the call.
      */
-    #[Required]
-    public string $call_control_id;
+    #[Required('call_control_id')]
+    public string $callControlID;
 
     /**
      * Sets the participant as a supervisor for the conference. A conference can have multiple supervisors. "barge" means the supervisor enters the conference as a normal participant. This is the same as "none". "monitor" means the supervisor is muted but can hear all participants. "whisper" means that only the specified "whisper_call_control_ids" can hear the supervisor. Defaults to "none".
      *
-     * @var value-of<SupervisorRole> $supervisor_role
+     * @var value-of<SupervisorRole> $supervisorRole
      */
-    #[Required(enum: SupervisorRole::class)]
-    public string $supervisor_role;
+    #[Required('supervisor_role', enum: SupervisorRole::class)]
+    public string $supervisorRole;
 
     /**
      * Use this field to avoid execution of duplicate commands. Telnyx will ignore subsequent commands with the same `command_id` as one that has already been executed.
      */
-    #[Optional]
-    public ?string $command_id;
+    #[Optional('command_id')]
+    public ?string $commandID;
 
     /**
      * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
@@ -62,17 +62,17 @@ final class ActionUpdateParams implements BaseModel
     /**
      * Array of unique call_control_ids the supervisor can whisper to. If none provided, the supervisor will join the conference as a monitoring participant only.
      *
-     * @var list<string>|null $whisper_call_control_ids
+     * @var list<string>|null $whisperCallControlIDs
      */
-    #[Optional(list: 'string')]
-    public ?array $whisper_call_control_ids;
+    #[Optional('whisper_call_control_ids', list: 'string')]
+    public ?array $whisperCallControlIDs;
 
     /**
      * `new ActionUpdateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ActionUpdateParams::with(call_control_id: ..., supervisor_role: ...)
+     * ActionUpdateParams::with(callControlID: ..., supervisorRole: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -91,25 +91,25 @@ final class ActionUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SupervisorRole|value-of<SupervisorRole> $supervisor_role
+     * @param SupervisorRole|value-of<SupervisorRole> $supervisorRole
      * @param Region|value-of<Region> $region
-     * @param list<string> $whisper_call_control_ids
+     * @param list<string> $whisperCallControlIDs
      */
     public static function with(
-        string $call_control_id,
-        SupervisorRole|string $supervisor_role,
-        ?string $command_id = null,
+        string $callControlID,
+        SupervisorRole|string $supervisorRole,
+        ?string $commandID = null,
         Region|string|null $region = null,
-        ?array $whisper_call_control_ids = null,
+        ?array $whisperCallControlIDs = null,
     ): self {
         $obj = new self;
 
-        $obj['call_control_id'] = $call_control_id;
-        $obj['supervisor_role'] = $supervisor_role;
+        $obj['callControlID'] = $callControlID;
+        $obj['supervisorRole'] = $supervisorRole;
 
-        null !== $command_id && $obj['command_id'] = $command_id;
+        null !== $commandID && $obj['commandID'] = $commandID;
         null !== $region && $obj['region'] = $region;
-        null !== $whisper_call_control_ids && $obj['whisper_call_control_ids'] = $whisper_call_control_ids;
+        null !== $whisperCallControlIDs && $obj['whisperCallControlIDs'] = $whisperCallControlIDs;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class ActionUpdateParams implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj['call_control_id'] = $callControlID;
+        $obj['callControlID'] = $callControlID;
 
         return $obj;
     }
@@ -134,7 +134,7 @@ final class ActionUpdateParams implements BaseModel
         SupervisorRole|string $supervisorRole
     ): self {
         $obj = clone $this;
-        $obj['supervisor_role'] = $supervisorRole;
+        $obj['supervisorRole'] = $supervisorRole;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class ActionUpdateParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj['command_id'] = $commandID;
+        $obj['commandID'] = $commandID;
 
         return $obj;
     }
@@ -172,7 +172,7 @@ final class ActionUpdateParams implements BaseModel
         array $whisperCallControlIDs
     ): self {
         $obj = clone $this;
-        $obj['whisper_call_control_ids'] = $whisperCallControlIDs;
+        $obj['whisperCallControlIDs'] = $whisperCallControlIDs;
 
         return $obj;
     }

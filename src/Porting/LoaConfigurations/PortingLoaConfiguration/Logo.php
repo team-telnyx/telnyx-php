@@ -13,7 +13,7 @@ use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Logo\ContentType;
  * The logo to be used in the LOA.
  *
  * @phpstan-type LogoShape = array{
- *   content_type?: value-of<ContentType>|null, document_id?: string|null
+ *   contentType?: value-of<ContentType>|null, documentID?: string|null
  * }
  */
 final class Logo implements BaseModel
@@ -24,16 +24,16 @@ final class Logo implements BaseModel
     /**
      * The content type of the logo.
      *
-     * @var value-of<ContentType>|null $content_type
+     * @var value-of<ContentType>|null $contentType
      */
-    #[Optional(enum: ContentType::class)]
-    public ?string $content_type;
+    #[Optional('content_type', enum: ContentType::class)]
+    public ?string $contentType;
 
     /**
      * Identifies the document that contains the logo.
      */
-    #[Optional]
-    public ?string $document_id;
+    #[Optional('document_id')]
+    public ?string $documentID;
 
     public function __construct()
     {
@@ -45,16 +45,16 @@ final class Logo implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ContentType|value-of<ContentType> $content_type
+     * @param ContentType|value-of<ContentType> $contentType
      */
     public static function with(
-        ContentType|string|null $content_type = null,
-        ?string $document_id = null
+        ContentType|string|null $contentType = null,
+        ?string $documentID = null
     ): self {
         $obj = new self;
 
-        null !== $content_type && $obj['content_type'] = $content_type;
-        null !== $document_id && $obj['document_id'] = $document_id;
+        null !== $contentType && $obj['contentType'] = $contentType;
+        null !== $documentID && $obj['documentID'] = $documentID;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class Logo implements BaseModel
     public function withContentType(ContentType|string $contentType): self
     {
         $obj = clone $this;
-        $obj['content_type'] = $contentType;
+        $obj['contentType'] = $contentType;
 
         return $obj;
     }
@@ -78,7 +78,7 @@ final class Logo implements BaseModel
     public function withDocumentID(string $documentID): self
     {
         $obj = clone $this;
-        $obj['document_id'] = $documentID;
+        $obj['documentID'] = $documentID;
 
         return $obj;
     }

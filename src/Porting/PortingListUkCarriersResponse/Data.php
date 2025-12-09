@@ -11,12 +11,12 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   alternative_cupids?: list<string>|null,
- *   created_at?: \DateTimeInterface|null,
+ *   alternativeCupids?: list<string>|null,
+ *   createdAt?: \DateTimeInterface|null,
  *   cupid?: string|null,
  *   name?: string|null,
- *   record_type?: string|null,
- *   updated_at?: \DateTimeInterface|null,
+ *   recordType?: string|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class Data implements BaseModel
@@ -33,16 +33,16 @@ final class Data implements BaseModel
     /**
      * Alternative CUPIDs of the carrier.
      *
-     * @var list<string>|null $alternative_cupids
+     * @var list<string>|null $alternativeCupids
      */
-    #[Optional(list: 'string')]
-    public ?array $alternative_cupids;
+    #[Optional('alternative_cupids', list: 'string')]
+    public ?array $alternativeCupids;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
     /**
      * The CUPID of the carrier. This is a 3 digit number code that identifies the carrier in the UK.
@@ -59,14 +59,14 @@ final class Data implements BaseModel
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
     {
@@ -78,26 +78,26 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $alternative_cupids
+     * @param list<string> $alternativeCupids
      */
     public static function with(
         ?string $id = null,
-        ?array $alternative_cupids = null,
-        ?\DateTimeInterface $created_at = null,
+        ?array $alternativeCupids = null,
+        ?\DateTimeInterface $createdAt = null,
         ?string $cupid = null,
         ?string $name = null,
-        ?string $record_type = null,
-        ?\DateTimeInterface $updated_at = null,
+        ?string $recordType = null,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $alternative_cupids && $obj['alternative_cupids'] = $alternative_cupids;
-        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $alternativeCupids && $obj['alternativeCupids'] = $alternativeCupids;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
         null !== $cupid && $obj['cupid'] = $cupid;
         null !== $name && $obj['name'] = $name;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class Data implements BaseModel
     public function withAlternativeCupids(array $alternativeCupids): self
     {
         $obj = clone $this;
-        $obj['alternative_cupids'] = $alternativeCupids;
+        $obj['alternativeCupids'] = $alternativeCupids;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -165,7 +165,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -176,7 +176,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

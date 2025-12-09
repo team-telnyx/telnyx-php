@@ -53,7 +53,7 @@ final class InsightsTest extends TestCase
         $result = $this->client->ai->conversations->insights->create([
             'instructions' => 'instructions',
             'name' => 'name',
-            'json_schema' => 'string',
+            'jsonSchema' => 'string',
             'webhook' => 'webhook',
         ]);
 

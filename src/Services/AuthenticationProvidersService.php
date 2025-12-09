@@ -35,14 +35,14 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      * @param array{
      *   name: string,
      *   settings: array{
-     *     idp_cert_fingerprint: string,
-     *     idp_entity_id: string,
-     *     idp_sso_target_url: string,
-     *     idp_cert_fingerprint_algorithm?: 'sha1'|'sha256'|'sha384'|'sha512'|IdpCertFingerprintAlgorithm,
+     *     idpCertFingerprint: string,
+     *     idpEntityID: string,
+     *     idpSSOTargetURL: string,
+     *     idpCertFingerprintAlgorithm?: 'sha1'|'sha256'|'sha384'|'sha512'|IdpCertFingerprintAlgorithm,
      *   },
-     *   short_name: string,
+     *   shortName: string,
      *   active?: bool,
-     *   settings_url?: string,
+     *   settingsURL?: string,
      * }|AuthenticationProviderCreateParams $params
      *
      * @throws APIException
@@ -99,13 +99,13 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      *   active?: bool,
      *   name?: string,
      *   settings?: array{
-     *     idp_cert_fingerprint: string,
-     *     idp_entity_id: string,
-     *     idp_sso_target_url: string,
-     *     idp_cert_fingerprint_algorithm?: 'sha1'|'sha256'|'sha384'|'sha512'|IdpCertFingerprintAlgorithm,
+     *     idpCertFingerprint: string,
+     *     idpEntityID: string,
+     *     idpSSOTargetURL: string,
+     *     idpCertFingerprintAlgorithm?: 'sha1'|'sha256'|'sha384'|'sha512'|IdpCertFingerprintAlgorithm,
      *   },
-     *   settings_url?: string,
-     *   short_name?: string,
+     *   settingsURL?: string,
+     *   shortName?: string,
      * }|AuthenticationProviderUpdateParams $params
      *
      * @throws APIException

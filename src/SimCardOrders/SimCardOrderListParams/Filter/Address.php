@@ -11,12 +11,12 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type AddressShape = array{
  *   id?: string|null,
- *   administrative_area?: string|null,
- *   country_code?: string|null,
- *   extended_address?: string|null,
+ *   administrativeArea?: string|null,
+ *   countryCode?: string|null,
+ *   extendedAddress?: string|null,
  *   locality?: string|null,
- *   postal_code?: string|null,
- *   street_address?: string|null,
+ *   postalCode?: string|null,
+ *   streetAddress?: string|null,
  * }
  */
 final class Address implements BaseModel
@@ -33,20 +33,20 @@ final class Address implements BaseModel
     /**
      * Filter by state or province where the address is located.
      */
-    #[Optional]
-    public ?string $administrative_area;
+    #[Optional('administrative_area')]
+    public ?string $administrativeArea;
 
     /**
      * Filter by the mobile operator two-character (ISO 3166-1 alpha-2) origin country code.
      */
-    #[Optional]
-    public ?string $country_code;
+    #[Optional('country_code')]
+    public ?string $countryCode;
 
     /**
      * Returns entries with matching name of the supplemental field for address information.
      */
-    #[Optional]
-    public ?string $extended_address;
+    #[Optional('extended_address')]
+    public ?string $extendedAddress;
 
     /**
      * Filter by the name of the city where the address is located.
@@ -57,14 +57,14 @@ final class Address implements BaseModel
     /**
      * Filter by postal code for the address.
      */
-    #[Optional]
-    public ?string $postal_code;
+    #[Optional('postal_code')]
+    public ?string $postalCode;
 
     /**
      * Returns entries with matching name of the street where the address is located.
      */
-    #[Optional]
-    public ?string $street_address;
+    #[Optional('street_address')]
+    public ?string $streetAddress;
 
     public function __construct()
     {
@@ -78,22 +78,22 @@ final class Address implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $administrative_area = null,
-        ?string $country_code = null,
-        ?string $extended_address = null,
+        ?string $administrativeArea = null,
+        ?string $countryCode = null,
+        ?string $extendedAddress = null,
         ?string $locality = null,
-        ?string $postal_code = null,
-        ?string $street_address = null,
+        ?string $postalCode = null,
+        ?string $streetAddress = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $administrative_area && $obj['administrative_area'] = $administrative_area;
-        null !== $country_code && $obj['country_code'] = $country_code;
-        null !== $extended_address && $obj['extended_address'] = $extended_address;
+        null !== $administrativeArea && $obj['administrativeArea'] = $administrativeArea;
+        null !== $countryCode && $obj['countryCode'] = $countryCode;
+        null !== $extendedAddress && $obj['extendedAddress'] = $extendedAddress;
         null !== $locality && $obj['locality'] = $locality;
-        null !== $postal_code && $obj['postal_code'] = $postal_code;
-        null !== $street_address && $obj['street_address'] = $street_address;
+        null !== $postalCode && $obj['postalCode'] = $postalCode;
+        null !== $streetAddress && $obj['streetAddress'] = $streetAddress;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class Address implements BaseModel
     public function withAdministrativeArea(string $administrativeArea): self
     {
         $obj = clone $this;
-        $obj['administrative_area'] = $administrativeArea;
+        $obj['administrativeArea'] = $administrativeArea;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class Address implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj['country_code'] = $countryCode;
+        $obj['countryCode'] = $countryCode;
 
         return $obj;
     }
@@ -137,7 +137,7 @@ final class Address implements BaseModel
     public function withExtendedAddress(string $extendedAddress): self
     {
         $obj = clone $this;
-        $obj['extended_address'] = $extendedAddress;
+        $obj['extendedAddress'] = $extendedAddress;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class Address implements BaseModel
     public function withPostalCode(string $postalCode): self
     {
         $obj = clone $this;
-        $obj['postal_code'] = $postalCode;
+        $obj['postalCode'] = $postalCode;
 
         return $obj;
     }
@@ -170,7 +170,7 @@ final class Address implements BaseModel
     public function withStreetAddress(string $streetAddress): self
     {
         $obj = clone $this;
-        $obj['street_address'] = $streetAddress;
+        $obj['streetAddress'] = $streetAddress;
 
         return $obj;
     }

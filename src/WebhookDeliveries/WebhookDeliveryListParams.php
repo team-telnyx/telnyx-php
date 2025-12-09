@@ -24,9 +24,9 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Page;
  * @phpstan-type WebhookDeliveryListParamsShape = array{
  *   filter?: Filter|array{
  *     attempts?: Attempts|null,
- *     event_type?: string|null,
- *     finished_at?: FinishedAt|null,
- *     started_at?: StartedAt|null,
+ *     eventType?: string|null,
+ *     finishedAt?: FinishedAt|null,
+ *     startedAt?: StartedAt|null,
  *     status?: Status|null,
  *     webhook?: Webhook|null,
  *   },
@@ -63,9 +63,9 @@ final class WebhookDeliveryListParams implements BaseModel
      *
      * @param Filter|array{
      *   attempts?: Attempts|null,
-     *   event_type?: string|null,
-     *   finished_at?: FinishedAt|null,
-     *   started_at?: StartedAt|null,
+     *   eventType?: string|null,
+     *   finishedAt?: FinishedAt|null,
+     *   startedAt?: StartedAt|null,
      *   status?: Status|null,
      *   webhook?: Webhook|null,
      * } $filter
@@ -88,9 +88,9 @@ final class WebhookDeliveryListParams implements BaseModel
      *
      * @param Filter|array{
      *   attempts?: Attempts|null,
-     *   event_type?: string|null,
-     *   finished_at?: FinishedAt|null,
-     *   started_at?: StartedAt|null,
+     *   eventType?: string|null,
+     *   finishedAt?: FinishedAt|null,
+     *   startedAt?: StartedAt|null,
      *   status?: Status|null,
      *   webhook?: Webhook|null,
      * } $filter

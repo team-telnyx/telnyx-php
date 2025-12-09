@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\PhoneNumbers\ActionsService::verifyOwnership()
  *
  * @phpstan-type ActionVerifyOwnershipParamsShape = array{
- *   phone_numbers: list<string>
+ *   phoneNumbers: list<string>
  * }
  */
 final class ActionVerifyOwnershipParams implements BaseModel
@@ -27,17 +27,17 @@ final class ActionVerifyOwnershipParams implements BaseModel
     /**
      * Array of phone numbers to verify ownership for.
      *
-     * @var list<string> $phone_numbers
+     * @var list<string> $phoneNumbers
      */
-    #[Required(list: 'string')]
-    public array $phone_numbers;
+    #[Required('phone_numbers', list: 'string')]
+    public array $phoneNumbers;
 
     /**
      * `new ActionVerifyOwnershipParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ActionVerifyOwnershipParams::with(phone_numbers: ...)
+     * ActionVerifyOwnershipParams::with(phoneNumbers: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -56,13 +56,13 @@ final class ActionVerifyOwnershipParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $phone_numbers
+     * @param list<string> $phoneNumbers
      */
-    public static function with(array $phone_numbers): self
+    public static function with(array $phoneNumbers): self
     {
         $obj = new self;
 
-        $obj['phone_numbers'] = $phone_numbers;
+        $obj['phoneNumbers'] = $phoneNumbers;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class ActionVerifyOwnershipParams implements BaseModel
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj['phone_numbers'] = $phoneNumbers;
+        $obj['phoneNumbers'] = $phoneNumbers;
 
         return $obj;
     }

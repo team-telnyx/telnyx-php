@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type BookAppointmentShape = array{
- *   book_appointment: \Telnyx\AI\Assistants\Assistant\Tool\BookAppointment\BookAppointment,
+ *   bookAppointment: \Telnyx\AI\Assistants\Assistant\Tool\BookAppointment\BookAppointment,
  *   type?: 'book_appointment',
  * }
  */
@@ -23,15 +23,15 @@ final class BookAppointment implements BaseModel
     #[Required]
     public string $type = 'book_appointment';
 
-    #[Required]
-    public BookAppointment\BookAppointment $book_appointment;
+    #[Required('book_appointment')]
+    public BookAppointment\BookAppointment $bookAppointment;
 
     /**
      * `new BookAppointment()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * BookAppointment::with(book_appointment: ...)
+     * BookAppointment::with(bookAppointment: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -51,35 +51,35 @@ final class BookAppointment implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param BookAppointment\BookAppointment|array{
-     *   api_key_ref: string,
-     *   event_type_id: int,
-     *   attendee_name?: string|null,
-     *   attendee_timezone?: string|null,
-     * } $book_appointment
+     *   apiKeyRef: string,
+     *   eventTypeID: int,
+     *   attendeeName?: string|null,
+     *   attendeeTimezone?: string|null,
+     * } $bookAppointment
      */
     public static function with(
-        BookAppointment\BookAppointment|array $book_appointment,
+        BookAppointment\BookAppointment|array $bookAppointment,
     ): self {
         $obj = new self;
 
-        $obj['book_appointment'] = $book_appointment;
+        $obj['bookAppointment'] = $bookAppointment;
 
         return $obj;
     }
 
     /**
      * @param BookAppointment\BookAppointment|array{
-     *   api_key_ref: string,
-     *   event_type_id: int,
-     *   attendee_name?: string|null,
-     *   attendee_timezone?: string|null,
+     *   apiKeyRef: string,
+     *   eventTypeID: int,
+     *   attendeeName?: string|null,
+     *   attendeeTimezone?: string|null,
      * } $bookAppointment
      */
     public function withBookAppointment(
         BookAppointment\BookAppointment|array $bookAppointment,
     ): self {
         $obj = clone $this;
-        $obj['book_appointment'] = $bookAppointment;
+        $obj['bookAppointment'] = $bookAppointment;
 
         return $obj;
     }

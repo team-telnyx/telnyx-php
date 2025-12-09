@@ -45,10 +45,10 @@ final class IntegrationSecretNewResponse implements BaseModel
      *
      * @param IntegrationSecret|array{
      *   id: string,
-     *   created_at: \DateTimeInterface,
+     *   createdAt: \DateTimeInterface,
      *   identifier: string,
-     *   record_type: string,
-     *   updated_at?: \DateTimeInterface|null,
+     *   recordType: string,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(IntegrationSecret|array $data): self
@@ -63,10 +63,10 @@ final class IntegrationSecretNewResponse implements BaseModel
     /**
      * @param IntegrationSecret|array{
      *   id: string,
-     *   created_at: \DateTimeInterface,
+     *   createdAt: \DateTimeInterface,
      *   identifier: string,
-     *   record_type: string,
-     *   updated_at?: \DateTimeInterface|null,
+     *   recordType: string,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(IntegrationSecret|array $data): self

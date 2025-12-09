@@ -21,14 +21,14 @@ use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\P
  *
  * @phpstan-type VirtualCrossConnectsCoverageListParamsShape = array{
  *   filter?: Filter|array{
- *     cloud_provider?: value-of<CloudProvider>|null,
- *     cloud_provider_region?: string|null,
- *     location_code?: string|null,
- *     location_pop?: string|null,
- *     location_region?: string|null,
- *     location_site?: string|null,
+ *     cloudProvider?: value-of<CloudProvider>|null,
+ *     cloudProviderRegion?: string|null,
+ *     locationCode?: string|null,
+ *     locationPop?: string|null,
+ *     locationRegion?: string|null,
+ *     locationSite?: string|null,
  *   },
- *   filters?: Filters|array{available_bandwidth?: int|null|Contains},
+ *   filters?: Filters|array{availableBandwidth?: int|null|Contains},
  *   page?: Page|array{number?: int|null, size?: int|null},
  * }
  */
@@ -67,14 +67,14 @@ final class VirtualCrossConnectsCoverageListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   cloud_provider?: value-of<CloudProvider>|null,
-     *   cloud_provider_region?: string|null,
-     *   location_code?: string|null,
-     *   location_pop?: string|null,
-     *   location_region?: string|null,
-     *   location_site?: string|null,
+     *   cloudProvider?: value-of<CloudProvider>|null,
+     *   cloudProviderRegion?: string|null,
+     *   locationCode?: string|null,
+     *   locationPop?: string|null,
+     *   locationRegion?: string|null,
+     *   locationSite?: string|null,
      * } $filter
-     * @param Filters|array{available_bandwidth?: int|Contains|null} $filters
+     * @param Filters|array{availableBandwidth?: int|Contains|null} $filters
      * @param Page|array{number?: int|null, size?: int|null} $page
      */
     public static function with(
@@ -95,12 +95,12 @@ final class VirtualCrossConnectsCoverageListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[cloud_provider], filter[cloud_provider_region], filter[location.region], filter[location.site], filter[location.pop], filter[location.code].
      *
      * @param Filter|array{
-     *   cloud_provider?: value-of<CloudProvider>|null,
-     *   cloud_provider_region?: string|null,
-     *   location_code?: string|null,
-     *   location_pop?: string|null,
-     *   location_region?: string|null,
-     *   location_site?: string|null,
+     *   cloudProvider?: value-of<CloudProvider>|null,
+     *   cloudProviderRegion?: string|null,
+     *   locationCode?: string|null,
+     *   locationPop?: string|null,
+     *   locationRegion?: string|null,
+     *   locationSite?: string|null,
      * } $filter
      */
     public function withFilter(Filter|array $filter): self
@@ -114,7 +114,7 @@ final class VirtualCrossConnectsCoverageListParams implements BaseModel
     /**
      * Consolidated filters parameter (deepObject style). Originally: filters[available_bandwidth][contains].
      *
-     * @param Filters|array{available_bandwidth?: int|Contains|null} $filters
+     * @param Filters|array{availableBandwidth?: int|Contains|null} $filters
      */
     public function withFilters(Filters|array $filters): self
     {

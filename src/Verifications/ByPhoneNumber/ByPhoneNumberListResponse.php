@@ -55,18 +55,18 @@ final class ByPhoneNumberListResponse implements BaseModel
      *
      * @param list<Verification|array{
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   custom_code?: string|null,
-     *   phone_number?: string|null,
-     *   record_type?: value-of<RecordType>|null,
+     *   createdAt?: string|null,
+     *   customCode?: string|null,
+     *   phoneNumber?: string|null,
+     *   recordType?: value-of<RecordType>|null,
      *   status?: value-of<Status>|null,
-     *   timeout_secs?: int|null,
+     *   timeoutSecs?: int|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: string|null,
-     *   verify_profile_id?: string|null,
+     *   updatedAt?: string|null,
+     *   verifyProfileID?: string|null,
      * }> $data
      * @param VerifyMeta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public static function with(array $data, VerifyMeta|array $meta): self
@@ -82,15 +82,15 @@ final class ByPhoneNumberListResponse implements BaseModel
     /**
      * @param list<Verification|array{
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   custom_code?: string|null,
-     *   phone_number?: string|null,
-     *   record_type?: value-of<RecordType>|null,
+     *   createdAt?: string|null,
+     *   customCode?: string|null,
+     *   phoneNumber?: string|null,
+     *   recordType?: value-of<RecordType>|null,
      *   status?: value-of<Status>|null,
-     *   timeout_secs?: int|null,
+     *   timeoutSecs?: int|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: string|null,
-     *   verify_profile_id?: string|null,
+     *   updatedAt?: string|null,
+     *   verifyProfileID?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -103,7 +103,7 @@ final class ByPhoneNumberListResponse implements BaseModel
 
     /**
      * @param VerifyMeta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public function withMeta(VerifyMeta|array $meta): self

@@ -27,8 +27,8 @@ final class JobsService implements JobsContract
      *
      * @param array{
      *   model: string,
-     *   training_file: string,
-     *   hyperparameters?: array{n_epochs?: int},
+     *   trainingFile: string,
+     *   hyperparameters?: array{nEpochs?: int},
      *   suffix?: string,
      * }|JobCreateParams $params
      *

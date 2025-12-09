@@ -46,7 +46,7 @@ final class ParticipantsService implements ParticipantsContract
      * Gets conference participant resource
      *
      * @param array{
-     *   account_sid: string, conference_sid: string
+     *   accountSid: string, conferenceSid: string
      * }|ParticipantRetrieveParams $params
      *
      * @throws APIException
@@ -60,10 +60,10 @@ final class ParticipantsService implements ParticipantsContract
             $params,
             $requestOptions,
         );
-        $accountSid = $parsed['account_sid'];
-        unset($parsed['account_sid']);
-        $conferenceSid = $parsed['conference_sid'];
-        unset($parsed['conference_sid']);
+        $accountSid = $parsed['accountSid'];
+        unset($parsed['accountSid']);
+        $conferenceSid = $parsed['conferenceSid'];
+        unset($parsed['conferenceSid']);
 
         /** @var BaseResponse<ParticipantGetResponse> */
         $response = $this->client->request(
@@ -87,19 +87,19 @@ final class ParticipantsService implements ParticipantsContract
      * Updates a conference participant
      *
      * @param array{
-     *   account_sid: string,
-     *   conference_sid: string,
-     *   AnnounceMethod?: 'GET'|'POST'|AnnounceMethod,
-     *   AnnounceUrl?: string,
-     *   BeepOnExit?: bool,
-     *   CallSidToCoach?: string,
-     *   Coaching?: bool,
-     *   EndConferenceOnExit?: bool,
-     *   Hold?: bool,
-     *   HoldMethod?: 'GET'|'POST'|HoldMethod,
-     *   HoldUrl?: string,
-     *   Muted?: bool,
-     *   WaitUrl?: string,
+     *   accountSid: string,
+     *   conferenceSid: string,
+     *   announceMethod?: 'GET'|'POST'|AnnounceMethod,
+     *   announceURL?: string,
+     *   beepOnExit?: bool,
+     *   callSidToCoach?: string,
+     *   coaching?: bool,
+     *   endConferenceOnExit?: bool,
+     *   hold?: bool,
+     *   holdMethod?: 'GET'|'POST'|HoldMethod,
+     *   holdURL?: string,
+     *   muted?: bool,
+     *   waitURL?: string,
      * }|ParticipantUpdateParams $params
      *
      * @throws APIException
@@ -113,10 +113,10 @@ final class ParticipantsService implements ParticipantsContract
             $params,
             $requestOptions,
         );
-        $accountSid = $parsed['account_sid'];
-        unset($parsed['account_sid']);
-        $conferenceSid = $parsed['conference_sid'];
-        unset($parsed['conference_sid']);
+        $accountSid = $parsed['accountSid'];
+        unset($parsed['accountSid']);
+        $conferenceSid = $parsed['conferenceSid'];
+        unset($parsed['conferenceSid']);
 
         /** @var BaseResponse<ParticipantUpdateResponse> */
         $response = $this->client->request(
@@ -130,7 +130,7 @@ final class ParticipantsService implements ParticipantsContract
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
             body: (object) array_diff_key(
                 $parsed,
-                array_flip(['account_sid', 'conference_sid'])
+                array_flip(['accountSid', 'conferenceSid'])
             ),
             options: $options,
             convert: ParticipantUpdateResponse::class,
@@ -145,7 +145,7 @@ final class ParticipantsService implements ParticipantsContract
      * Deletes a conference participant
      *
      * @param array{
-     *   account_sid: string, conference_sid: string
+     *   accountSid: string, conferenceSid: string
      * }|ParticipantDeleteParams $params
      *
      * @throws APIException
@@ -159,10 +159,10 @@ final class ParticipantsService implements ParticipantsContract
             $params,
             $requestOptions,
         );
-        $accountSid = $parsed['account_sid'];
-        unset($parsed['account_sid']);
-        $conferenceSid = $parsed['conference_sid'];
-        unset($parsed['conference_sid']);
+        $accountSid = $parsed['accountSid'];
+        unset($parsed['accountSid']);
+        $conferenceSid = $parsed['conferenceSid'];
+        unset($parsed['conferenceSid']);
 
         /** @var BaseResponse<mixed> */
         $response = $this->client->request(
@@ -186,53 +186,53 @@ final class ParticipantsService implements ParticipantsContract
      * Dials a new conference participant
      *
      * @param array{
-     *   account_sid: string,
-     *   AmdStatusCallback?: string,
-     *   AmdStatusCallbackMethod?: 'GET'|'POST'|AmdStatusCallbackMethod,
-     *   Beep?: 'true'|'false'|'onEnter'|'onExit'|Beep,
-     *   CallerId?: string,
-     *   CallSidToCoach?: string,
-     *   CancelPlaybackOnDetectMessageEnd?: bool,
-     *   CancelPlaybackOnMachineDetection?: bool,
-     *   Coaching?: bool,
-     *   ConferenceRecord?: 'true'|'false'|'record-from-start'|'do-not-record'|ConferenceRecord,
-     *   ConferenceRecordingStatusCallback?: string,
-     *   ConferenceRecordingStatusCallbackEvent?: string,
-     *   ConferenceRecordingStatusCallbackMethod?: 'GET'|'POST'|ConferenceRecordingStatusCallbackMethod,
-     *   ConferenceRecordingTimeout?: int,
-     *   ConferenceStatusCallback?: string,
-     *   ConferenceStatusCallbackEvent?: string,
-     *   ConferenceStatusCallbackMethod?: 'GET'|'POST'|ConferenceStatusCallbackMethod,
-     *   ConferenceTrim?: 'trim-silence'|'do-not-trim'|ConferenceTrim,
-     *   CustomHeaders?: list<array{name: string, value: string}>,
-     *   EarlyMedia?: bool,
-     *   EndConferenceOnExit?: bool,
-     *   From?: string,
-     *   MachineDetection?: 'Enable'|'DetectMessageEnd'|MachineDetection,
-     *   MachineDetectionSilenceTimeout?: int,
-     *   MachineDetectionSpeechEndThreshold?: int,
-     *   MachineDetectionSpeechThreshold?: int,
-     *   MachineDetectionTimeout?: int,
-     *   MaxParticipants?: int,
-     *   Muted?: bool,
-     *   PreferredCodecs?: string,
-     *   Record?: bool,
-     *   RecordingChannels?: 'mono'|'dual'|RecordingChannels,
-     *   RecordingStatusCallback?: string,
-     *   RecordingStatusCallbackEvent?: string,
-     *   RecordingStatusCallbackMethod?: 'GET'|'POST'|RecordingStatusCallbackMethod,
-     *   RecordingTrack?: 'inbound'|'outbound'|'both'|RecordingTrack,
-     *   SipAuthPassword?: string,
-     *   SipAuthUsername?: string,
-     *   StartConferenceOnEnter?: bool,
-     *   StatusCallback?: string,
-     *   StatusCallbackEvent?: string,
-     *   StatusCallbackMethod?: 'GET'|'POST'|StatusCallbackMethod,
-     *   TimeLimit?: int,
-     *   timeout_seconds?: int,
-     *   To?: string,
-     *   Trim?: 'trim-silence'|'do-not-trim'|Trim,
-     *   WaitUrl?: string,
+     *   accountSid: string,
+     *   amdStatusCallback?: string,
+     *   amdStatusCallbackMethod?: 'GET'|'POST'|AmdStatusCallbackMethod,
+     *   beep?: 'true'|'false'|'onEnter'|'onExit'|Beep,
+     *   callerID?: string,
+     *   callSidToCoach?: string,
+     *   cancelPlaybackOnDetectMessageEnd?: bool,
+     *   cancelPlaybackOnMachineDetection?: bool,
+     *   coaching?: bool,
+     *   conferenceRecord?: 'true'|'false'|'record-from-start'|'do-not-record'|ConferenceRecord,
+     *   conferenceRecordingStatusCallback?: string,
+     *   conferenceRecordingStatusCallbackEvent?: string,
+     *   conferenceRecordingStatusCallbackMethod?: 'GET'|'POST'|ConferenceRecordingStatusCallbackMethod,
+     *   conferenceRecordingTimeout?: int,
+     *   conferenceStatusCallback?: string,
+     *   conferenceStatusCallbackEvent?: string,
+     *   conferenceStatusCallbackMethod?: 'GET'|'POST'|ConferenceStatusCallbackMethod,
+     *   conferenceTrim?: 'trim-silence'|'do-not-trim'|ConferenceTrim,
+     *   customHeaders?: list<array{name: string, value: string}>,
+     *   earlyMedia?: bool,
+     *   endConferenceOnExit?: bool,
+     *   from?: string,
+     *   machineDetection?: 'Enable'|'DetectMessageEnd'|MachineDetection,
+     *   machineDetectionSilenceTimeout?: int,
+     *   machineDetectionSpeechEndThreshold?: int,
+     *   machineDetectionSpeechThreshold?: int,
+     *   machineDetectionTimeout?: int,
+     *   maxParticipants?: int,
+     *   muted?: bool,
+     *   preferredCodecs?: string,
+     *   record?: bool,
+     *   recordingChannels?: 'mono'|'dual'|RecordingChannels,
+     *   recordingStatusCallback?: string,
+     *   recordingStatusCallbackEvent?: string,
+     *   recordingStatusCallbackMethod?: 'GET'|'POST'|RecordingStatusCallbackMethod,
+     *   recordingTrack?: 'inbound'|'outbound'|'both'|RecordingTrack,
+     *   sipAuthPassword?: string,
+     *   sipAuthUsername?: string,
+     *   startConferenceOnEnter?: bool,
+     *   statusCallback?: string,
+     *   statusCallbackEvent?: string,
+     *   statusCallbackMethod?: 'GET'|'POST'|StatusCallbackMethod,
+     *   timeLimit?: int,
+     *   timeoutSeconds?: int,
+     *   to?: string,
+     *   trim?: 'trim-silence'|'do-not-trim'|Trim,
+     *   waitURL?: string,
      * }|ParticipantParticipantsParams $params
      *
      * @throws APIException
@@ -246,8 +246,8 @@ final class ParticipantsService implements ParticipantsContract
             $params,
             $requestOptions,
         );
-        $accountSid = $parsed['account_sid'];
-        unset($parsed['account_sid']);
+        $accountSid = $parsed['accountSid'];
+        unset($parsed['accountSid']);
 
         /** @var BaseResponse<ParticipantParticipantsResponse> */
         $response = $this->client->request(
@@ -258,7 +258,7 @@ final class ParticipantsService implements ParticipantsContract
                 $conferenceSid,
             ],
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
-            body: (object) array_diff_key($parsed, ['account_sid']),
+            body: (object) array_diff_key($parsed, ['accountSid']),
             options: $options,
             convert: ParticipantParticipantsResponse::class,
         );
@@ -271,7 +271,7 @@ final class ParticipantsService implements ParticipantsContract
      *
      * Lists conference participants
      *
-     * @param array{account_sid: string}|ParticipantRetrieveParticipantsParams $params
+     * @param array{accountSid: string}|ParticipantRetrieveParticipantsParams $params
      *
      * @throws APIException
      */
@@ -284,8 +284,8 @@ final class ParticipantsService implements ParticipantsContract
             $params,
             $requestOptions,
         );
-        $accountSid = $parsed['account_sid'];
-        unset($parsed['account_sid']);
+        $accountSid = $parsed['accountSid'];
+        unset($parsed['accountSid']);
 
         /** @var BaseResponse<ParticipantGetParticipantsResponse> */
         $response = $this->client->request(

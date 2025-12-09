@@ -13,6 +13,7 @@ use Telnyx\AI\Assistants\Tests\TestUpdateParams;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\TestsContract;
 use Telnyx\Services\AI\Assistants\Tests\RunsService;
@@ -50,9 +51,9 @@ final class TestsService implements TestsContract
      *   name: string,
      *   rubric: list<array{criteria: string, name: string}>,
      *   description?: string,
-     *   max_duration_seconds?: int,
-     *   telnyx_conversation_channel?: 'phone_call'|'web_call'|'sms_chat'|'web_chat'|TelnyxConversationChannel,
-     *   test_suite?: string,
+     *   maxDurationSeconds?: int,
+     *   telnyxConversationChannel?: 'phone_call'|'web_call'|'sms_chat'|'web_chat'|TelnyxConversationChannel,
+     *   testSuite?: string,
      * }|TestCreateParams $params
      *
      * @throws APIException
@@ -109,11 +110,11 @@ final class TestsService implements TestsContract
      *   description?: string,
      *   destination?: string,
      *   instructions?: string,
-     *   max_duration_seconds?: int,
+     *   maxDurationSeconds?: int,
      *   name?: string,
      *   rubric?: list<array{criteria: string, name: string}>,
-     *   telnyx_conversation_channel?: 'phone_call'|'web_call'|'sms_chat'|'web_chat'|TelnyxConversationChannel,
-     *   test_suite?: string,
+     *   telnyxConversationChannel?: 'phone_call'|'web_call'|'sms_chat'|'web_chat'|TelnyxConversationChannel,
+     *   testSuite?: string,
      * }|TestUpdateParams $params
      *
      * @throws APIException
@@ -148,8 +149,8 @@ final class TestsService implements TestsContract
      * @param array{
      *   destination?: string,
      *   page?: array{number?: int, size?: int},
-     *   telnyx_conversation_channel?: string,
-     *   test_suite?: string,
+     *   telnyxConversationChannel?: string,
+     *   testSuite?: string,
      * }|TestListParams $params
      *
      * @throws APIException
@@ -167,7 +168,13 @@ final class TestsService implements TestsContract
         $response = $this->client->request(
             method: 'get',
             path: 'ai/assistants/tests',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'telnyxConversationChannel' => 'telnyx_conversation_channel',
+                    'testSuite' => 'test_suite',
+                ],
+            ),
             options: $options,
             convert: TestListResponse::class,
         );

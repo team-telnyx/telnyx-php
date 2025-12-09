@@ -12,13 +12,13 @@ use Telnyx\Wireless\DetailRecordsReports\WdrReport\Status;
 /**
  * @phpstan-type WdrReportShape = array{
  *   id?: string|null,
- *   created_at?: string|null,
- *   end_time?: string|null,
- *   record_type?: string|null,
- *   report_url?: string|null,
- *   start_time?: string|null,
+ *   createdAt?: string|null,
+ *   endTime?: string|null,
+ *   recordType?: string|null,
+ *   reportURL?: string|null,
+ *   startTime?: string|null,
  *   status?: value-of<Status>|null,
- *   updated_at?: string|null,
+ *   updatedAt?: string|null,
  * }
  */
 final class WdrReport implements BaseModel
@@ -35,29 +35,29 @@ final class WdrReport implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Optional]
-    public ?string $created_at;
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
     /**
      * ISO 8601 formatted date-time indicating the end time.
      */
-    #[Optional]
-    public ?string $end_time;
+    #[Optional('end_time')]
+    public ?string $endTime;
 
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * The URL where the report content, when generated, will be published to.
      */
-    #[Optional]
-    public ?string $report_url;
+    #[Optional('report_url')]
+    public ?string $reportURL;
 
     /**
      * ISO 8601 formatted date-time indicating the start time.
      */
-    #[Optional]
-    public ?string $start_time;
+    #[Optional('start_time')]
+    public ?string $startTime;
 
     /**
      * Indicates the status of the report, which is updated asynchronously.
@@ -70,8 +70,8 @@ final class WdrReport implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Optional]
-    public ?string $updated_at;
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     public function __construct()
     {
@@ -87,24 +87,24 @@ final class WdrReport implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $created_at = null,
-        ?string $end_time = null,
-        ?string $record_type = null,
-        ?string $report_url = null,
-        ?string $start_time = null,
+        ?string $createdAt = null,
+        ?string $endTime = null,
+        ?string $recordType = null,
+        ?string $reportURL = null,
+        ?string $startTime = null,
         Status|string|null $status = null,
-        ?string $updated_at = null,
+        ?string $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $end_time && $obj['end_time'] = $end_time;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $report_url && $obj['report_url'] = $report_url;
-        null !== $start_time && $obj['start_time'] = $start_time;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $endTime && $obj['endTime'] = $endTime;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $reportURL && $obj['reportURL'] = $reportURL;
+        null !== $startTime && $obj['startTime'] = $startTime;
         null !== $status && $obj['status'] = $status;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class WdrReport implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -137,7 +137,7 @@ final class WdrReport implements BaseModel
     public function withEndTime(string $endTime): self
     {
         $obj = clone $this;
-        $obj['end_time'] = $endTime;
+        $obj['endTime'] = $endTime;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class WdrReport implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class WdrReport implements BaseModel
     public function withReportURL(string $reportURL): self
     {
         $obj = clone $this;
-        $obj['report_url'] = $reportURL;
+        $obj['reportURL'] = $reportURL;
 
         return $obj;
     }
@@ -167,7 +167,7 @@ final class WdrReport implements BaseModel
     public function withStartTime(string $startTime): self
     {
         $obj = clone $this;
-        $obj['start_time'] = $startTime;
+        $obj['startTime'] = $startTime;
 
         return $obj;
     }
@@ -191,7 +191,7 @@ final class WdrReport implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

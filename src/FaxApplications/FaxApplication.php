@@ -16,17 +16,17 @@ use Telnyx\FaxApplications\FaxApplication\Outbound;
  * @phpstan-type FaxApplicationShape = array{
  *   id?: string|null,
  *   active?: bool|null,
- *   anchorsite_override?: value-of<AnchorsiteOverride>|null,
- *   application_name?: string|null,
- *   created_at?: string|null,
+ *   anchorsiteOverride?: value-of<AnchorsiteOverride>|null,
+ *   applicationName?: string|null,
+ *   createdAt?: string|null,
  *   inbound?: Inbound|null,
  *   outbound?: Outbound|null,
- *   record_type?: string|null,
+ *   recordType?: string|null,
  *   tags?: list<string>|null,
- *   updated_at?: string|null,
- *   webhook_event_failover_url?: string|null,
- *   webhook_event_url?: string|null,
- *   webhook_timeout_secs?: int|null,
+ *   updatedAt?: string|null,
+ *   webhookEventFailoverURL?: string|null,
+ *   webhookEventURL?: string|null,
+ *   webhookTimeoutSecs?: int|null,
  * }
  */
 final class FaxApplication implements BaseModel
@@ -49,22 +49,22 @@ final class FaxApplication implements BaseModel
     /**
      * `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
      *
-     * @var value-of<AnchorsiteOverride>|null $anchorsite_override
+     * @var value-of<AnchorsiteOverride>|null $anchorsiteOverride
      */
-    #[Optional(enum: AnchorsiteOverride::class)]
-    public ?string $anchorsite_override;
+    #[Optional('anchorsite_override', enum: AnchorsiteOverride::class)]
+    public ?string $anchorsiteOverride;
 
     /**
      * A user-assigned name to help manage the application.
      */
-    #[Optional]
-    public ?string $application_name;
+    #[Optional('application_name')]
+    public ?string $applicationName;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Optional]
-    public ?string $created_at;
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
     #[Optional]
     public ?Inbound $inbound;
@@ -75,8 +75,8 @@ final class FaxApplication implements BaseModel
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * Tags associated with the Fax Application.
@@ -89,26 +89,26 @@ final class FaxApplication implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Optional]
-    public ?string $updated_at;
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     /**
      * The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
-    #[Optional(nullable: true)]
-    public ?string $webhook_event_failover_url;
+    #[Optional('webhook_event_failover_url', nullable: true)]
+    public ?string $webhookEventFailoverURL;
 
     /**
      * The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      */
-    #[Optional]
-    public ?string $webhook_event_url;
+    #[Optional('webhook_event_url')]
+    public ?string $webhookEventURL;
 
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    #[Optional(nullable: true)]
-    public ?int $webhook_timeout_secs;
+    #[Optional('webhook_timeout_secs', nullable: true)]
+    public ?int $webhookTimeoutSecs;
 
     public function __construct()
     {
@@ -120,47 +120,47 @@ final class FaxApplication implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsite_override
+     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
      * @param Inbound|array{
-     *   channel_limit?: int|null,
-     *   sip_subdomain?: string|null,
-     *   sip_subdomain_receive_settings?: value-of<SipSubdomainReceiveSettings>|null,
+     *   channelLimit?: int|null,
+     *   sipSubdomain?: string|null,
+     *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
      * } $inbound
      * @param Outbound|array{
-     *   channel_limit?: int|null, outbound_voice_profile_id?: string|null
+     *   channelLimit?: int|null, outboundVoiceProfileID?: string|null
      * } $outbound
      * @param list<string> $tags
      */
     public static function with(
         ?string $id = null,
         ?bool $active = null,
-        AnchorsiteOverride|string|null $anchorsite_override = null,
-        ?string $application_name = null,
-        ?string $created_at = null,
+        AnchorsiteOverride|string|null $anchorsiteOverride = null,
+        ?string $applicationName = null,
+        ?string $createdAt = null,
         Inbound|array|null $inbound = null,
         Outbound|array|null $outbound = null,
-        ?string $record_type = null,
+        ?string $recordType = null,
         ?array $tags = null,
-        ?string $updated_at = null,
-        ?string $webhook_event_failover_url = null,
-        ?string $webhook_event_url = null,
-        ?int $webhook_timeout_secs = null,
+        ?string $updatedAt = null,
+        ?string $webhookEventFailoverURL = null,
+        ?string $webhookEventURL = null,
+        ?int $webhookTimeoutSecs = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
         null !== $active && $obj['active'] = $active;
-        null !== $anchorsite_override && $obj['anchorsite_override'] = $anchorsite_override;
-        null !== $application_name && $obj['application_name'] = $application_name;
-        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $anchorsiteOverride && $obj['anchorsiteOverride'] = $anchorsiteOverride;
+        null !== $applicationName && $obj['applicationName'] = $applicationName;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
         null !== $inbound && $obj['inbound'] = $inbound;
         null !== $outbound && $obj['outbound'] = $outbound;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $recordType && $obj['recordType'] = $recordType;
         null !== $tags && $obj['tags'] = $tags;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
-        null !== $webhook_event_failover_url && $obj['webhook_event_failover_url'] = $webhook_event_failover_url;
-        null !== $webhook_event_url && $obj['webhook_event_url'] = $webhook_event_url;
-        null !== $webhook_timeout_secs && $obj['webhook_timeout_secs'] = $webhook_timeout_secs;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $webhookEventFailoverURL && $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        null !== $webhookEventURL && $obj['webhookEventURL'] = $webhookEventURL;
+        null !== $webhookTimeoutSecs && $obj['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
         return $obj;
     }
@@ -196,7 +196,7 @@ final class FaxApplication implements BaseModel
         AnchorsiteOverride|string $anchorsiteOverride
     ): self {
         $obj = clone $this;
-        $obj['anchorsite_override'] = $anchorsiteOverride;
+        $obj['anchorsiteOverride'] = $anchorsiteOverride;
 
         return $obj;
     }
@@ -207,7 +207,7 @@ final class FaxApplication implements BaseModel
     public function withApplicationName(string $applicationName): self
     {
         $obj = clone $this;
-        $obj['application_name'] = $applicationName;
+        $obj['applicationName'] = $applicationName;
 
         return $obj;
     }
@@ -218,16 +218,16 @@ final class FaxApplication implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
 
     /**
      * @param Inbound|array{
-     *   channel_limit?: int|null,
-     *   sip_subdomain?: string|null,
-     *   sip_subdomain_receive_settings?: value-of<SipSubdomainReceiveSettings>|null,
+     *   channelLimit?: int|null,
+     *   sipSubdomain?: string|null,
+     *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
      * } $inbound
      */
     public function withInbound(Inbound|array $inbound): self
@@ -240,7 +240,7 @@ final class FaxApplication implements BaseModel
 
     /**
      * @param Outbound|array{
-     *   channel_limit?: int|null, outbound_voice_profile_id?: string|null
+     *   channelLimit?: int|null, outboundVoiceProfileID?: string|null
      * } $outbound
      */
     public function withOutbound(Outbound|array $outbound): self
@@ -257,7 +257,7 @@ final class FaxApplication implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -281,7 +281,7 @@ final class FaxApplication implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -293,7 +293,7 @@ final class FaxApplication implements BaseModel
         ?string $webhookEventFailoverURL
     ): self {
         $obj = clone $this;
-        $obj['webhook_event_failover_url'] = $webhookEventFailoverURL;
+        $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
 
         return $obj;
     }
@@ -304,7 +304,7 @@ final class FaxApplication implements BaseModel
     public function withWebhookEventURL(string $webhookEventURL): self
     {
         $obj = clone $this;
-        $obj['webhook_event_url'] = $webhookEventURL;
+        $obj['webhookEventURL'] = $webhookEventURL;
 
         return $obj;
     }
@@ -315,7 +315,7 @@ final class FaxApplication implements BaseModel
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
         $obj = clone $this;
-        $obj['webhook_timeout_secs'] = $webhookTimeoutSecs;
+        $obj['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
         return $obj;
     }

@@ -29,10 +29,10 @@ final class MigrationSourcesService implements MigrationSourcesContract
      * Create a source from which data can be migrated from.
      *
      * @param array{
-     *   bucket_name: string,
+     *   bucketName: string,
      *   provider: 'aws'|'telnyx'|Provider,
-     *   provider_auth: array{access_key?: string, secret_access_key?: string},
-     *   source_region?: string,
+     *   providerAuth: array{accessKey?: string, secretAccessKey?: string},
+     *   sourceRegion?: string,
      * }|MigrationSourceCreateParams $params
      *
      * @throws APIException

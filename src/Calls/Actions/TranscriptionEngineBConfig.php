@@ -13,8 +13,8 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type TranscriptionEngineBConfigShape = array{
  *   language?: value-of<TelnyxTranscriptionLanguage>|null,
- *   transcription_engine?: value-of<TranscriptionEngine>|null,
- *   transcription_model?: value-of<TranscriptionModel>|null,
+ *   transcriptionEngine?: value-of<TranscriptionEngine>|null,
+ *   transcriptionModel?: value-of<TranscriptionModel>|null,
  * }
  */
 final class TranscriptionEngineBConfig implements BaseModel
@@ -33,18 +33,18 @@ final class TranscriptionEngineBConfig implements BaseModel
     /**
      * Engine identifier for Telnyx transcription service.
      *
-     * @var value-of<TranscriptionEngine>|null $transcription_engine
+     * @var value-of<TranscriptionEngine>|null $transcriptionEngine
      */
-    #[Optional(enum: TranscriptionEngine::class)]
-    public ?string $transcription_engine;
+    #[Optional('transcription_engine', enum: TranscriptionEngine::class)]
+    public ?string $transcriptionEngine;
 
     /**
      * The model to use for transcription.
      *
-     * @var value-of<TranscriptionModel>|null $transcription_model
+     * @var value-of<TranscriptionModel>|null $transcriptionModel
      */
-    #[Optional(enum: TranscriptionModel::class)]
-    public ?string $transcription_model;
+    #[Optional('transcription_model', enum: TranscriptionModel::class)]
+    public ?string $transcriptionModel;
 
     public function __construct()
     {
@@ -57,19 +57,19 @@ final class TranscriptionEngineBConfig implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param TelnyxTranscriptionLanguage|value-of<TelnyxTranscriptionLanguage> $language
-     * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcription_engine
-     * @param TranscriptionModel|value-of<TranscriptionModel> $transcription_model
+     * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine
+     * @param TranscriptionModel|value-of<TranscriptionModel> $transcriptionModel
      */
     public static function with(
         TelnyxTranscriptionLanguage|string|null $language = null,
-        TranscriptionEngine|string|null $transcription_engine = null,
-        TranscriptionModel|string|null $transcription_model = null,
+        TranscriptionEngine|string|null $transcriptionEngine = null,
+        TranscriptionModel|string|null $transcriptionModel = null,
     ): self {
         $obj = new self;
 
         null !== $language && $obj['language'] = $language;
-        null !== $transcription_engine && $obj['transcription_engine'] = $transcription_engine;
-        null !== $transcription_model && $obj['transcription_model'] = $transcription_model;
+        null !== $transcriptionEngine && $obj['transcriptionEngine'] = $transcriptionEngine;
+        null !== $transcriptionModel && $obj['transcriptionModel'] = $transcriptionModel;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class TranscriptionEngineBConfig implements BaseModel
         TranscriptionEngine|string $transcriptionEngine
     ): self {
         $obj = clone $this;
-        $obj['transcription_engine'] = $transcriptionEngine;
+        $obj['transcriptionEngine'] = $transcriptionEngine;
 
         return $obj;
     }
@@ -111,7 +111,7 @@ final class TranscriptionEngineBConfig implements BaseModel
         TranscriptionModel|string $transcriptionModel
     ): self {
         $obj = clone $this;
-        $obj['transcription_model'] = $transcriptionModel;
+        $obj['transcriptionModel'] = $transcriptionModel;
 
         return $obj;
     }

@@ -31,17 +31,17 @@ final class CallEventsService implements CallEventsContract
      *
      * @param array{
      *   filter?: array{
-     *     application_name?: array{contains?: string},
-     *     application_session_id?: string,
-     *     connection_id?: string,
+     *     applicationName?: array{contains?: string},
+     *     applicationSessionID?: string,
+     *     connectionID?: string,
      *     failed?: bool,
      *     from?: string,
-     *     leg_id?: string,
+     *     legID?: string,
      *     name?: string,
-     *     occurred_at?: array{
+     *     occurredAt?: array{
      *       eq?: string, gt?: string, gte?: string, lt?: string, lte?: string
      *     },
-     *     'outbound.outbound_voice_profile_id'?: string,
+     *     outboundOutboundVoiceProfileID?: string,
      *     product?: 'call_control'|'fax'|'texml'|Product,
      *     status?: 'init'|'in_progress'|'completed'|Status,
      *     to?: string,

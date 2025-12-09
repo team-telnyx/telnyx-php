@@ -36,7 +36,7 @@ final class CanaryDeploysTest extends TestCase
 
         $result = $this->client->ai->assistants->canaryDeploys->create(
             'assistant_id',
-            ['versions' => [['percentage' => 1, 'version_id' => 'version_id']]],
+            ['versions' => [['percentage' => 1, 'versionID' => 'version_id']]],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -52,7 +52,7 @@ final class CanaryDeploysTest extends TestCase
 
         $result = $this->client->ai->assistants->canaryDeploys->create(
             'assistant_id',
-            ['versions' => [['percentage' => 1, 'version_id' => 'version_id']]],
+            ['versions' => [['percentage' => 1, 'versionID' => 'version_id']]],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -83,7 +83,7 @@ final class CanaryDeploysTest extends TestCase
 
         $result = $this->client->ai->assistants->canaryDeploys->update(
             'assistant_id',
-            ['versions' => [['percentage' => 1, 'version_id' => 'version_id']]],
+            ['versions' => [['percentage' => 1, 'versionID' => 'version_id']]],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -99,7 +99,7 @@ final class CanaryDeploysTest extends TestCase
 
         $result = $this->client->ai->assistants->canaryDeploys->update(
             'assistant_id',
-            ['versions' => [['percentage' => 1, 'version_id' => 'version_id']]],
+            ['versions' => [['percentage' => 1, 'versionID' => 'version_id']]],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

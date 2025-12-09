@@ -18,8 +18,8 @@ use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParam
  *
  * @phpstan-type AssociatedPhoneNumberCreateParamsShape = array{
  *   action: Action|value-of<Action>,
- *   phone_number_range: PhoneNumberRange|array{
- *     end_at?: string|null, start_at?: string|null
+ *   phoneNumberRange: PhoneNumberRange|array{
+ *     endAt?: string|null, startAt?: string|null
  *   },
  * }
  */
@@ -37,15 +37,15 @@ final class AssociatedPhoneNumberCreateParams implements BaseModel
     #[Required(enum: Action::class)]
     public string $action;
 
-    #[Required]
-    public PhoneNumberRange $phone_number_range;
+    #[Required('phone_number_range')]
+    public PhoneNumberRange $phoneNumberRange;
 
     /**
      * `new AssociatedPhoneNumberCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * AssociatedPhoneNumberCreateParams::with(action: ..., phone_number_range: ...)
+     * AssociatedPhoneNumberCreateParams::with(action: ..., phoneNumberRange: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -68,17 +68,17 @@ final class AssociatedPhoneNumberCreateParams implements BaseModel
      *
      * @param Action|value-of<Action> $action
      * @param PhoneNumberRange|array{
-     *   end_at?: string|null, start_at?: string|null
-     * } $phone_number_range
+     *   endAt?: string|null, startAt?: string|null
+     * } $phoneNumberRange
      */
     public static function with(
         Action|string $action,
-        PhoneNumberRange|array $phone_number_range
+        PhoneNumberRange|array $phoneNumberRange
     ): self {
         $obj = new self;
 
         $obj['action'] = $action;
-        $obj['phone_number_range'] = $phone_number_range;
+        $obj['phoneNumberRange'] = $phoneNumberRange;
 
         return $obj;
     }
@@ -98,14 +98,14 @@ final class AssociatedPhoneNumberCreateParams implements BaseModel
 
     /**
      * @param PhoneNumberRange|array{
-     *   end_at?: string|null, start_at?: string|null
+     *   endAt?: string|null, startAt?: string|null
      * } $phoneNumberRange
      */
     public function withPhoneNumberRange(
         PhoneNumberRange|array $phoneNumberRange
     ): self {
         $obj = clone $this;
-        $obj['phone_number_range'] = $phoneNumberRange;
+        $obj['phoneNumberRange'] = $phoneNumberRange;
 
         return $obj;
     }

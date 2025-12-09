@@ -11,11 +11,11 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverage
 
 /**
  * @phpstan-type DataShape = array{
- *   additional_data_required?: list<value-of<AdditionalDataRequired>>|null,
- *   has_csr_coverage?: bool|null,
- *   phone_number?: string|null,
+ *   additionalDataRequired?: list<value-of<AdditionalDataRequired>>|null,
+ *   hasCsrCoverage?: bool|null,
+ *   phoneNumber?: string|null,
  *   reason?: string|null,
- *   record_type?: string|null,
+ *   recordType?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -26,22 +26,22 @@ final class Data implements BaseModel
     /**
      * Additional data required to perform CSR for the phone number. Only returned if `has_csr_coverage` is true.
      *
-     * @var list<value-of<AdditionalDataRequired>>|null $additional_data_required
+     * @var list<value-of<AdditionalDataRequired>>|null $additionalDataRequired
      */
-    #[Optional(list: AdditionalDataRequired::class)]
-    public ?array $additional_data_required;
+    #[Optional('additional_data_required', list: AdditionalDataRequired::class)]
+    public ?array $additionalDataRequired;
 
     /**
      * Indicates whether the phone number is covered or not.
      */
-    #[Optional]
-    public ?bool $has_csr_coverage;
+    #[Optional('has_csr_coverage')]
+    public ?bool $hasCsrCoverage;
 
     /**
      * The phone number that is being verified.
      */
-    #[Optional]
-    public ?string $phone_number;
+    #[Optional('phone_number')]
+    public ?string $phoneNumber;
 
     /**
      * The reason why the phone number is not covered. Only returned if `has_csr_coverage` is false.
@@ -52,8 +52,8 @@ final class Data implements BaseModel
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     public function __construct()
     {
@@ -65,22 +65,22 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AdditionalDataRequired|value-of<AdditionalDataRequired>> $additional_data_required
+     * @param list<AdditionalDataRequired|value-of<AdditionalDataRequired>> $additionalDataRequired
      */
     public static function with(
-        ?array $additional_data_required = null,
-        ?bool $has_csr_coverage = null,
-        ?string $phone_number = null,
+        ?array $additionalDataRequired = null,
+        ?bool $hasCsrCoverage = null,
+        ?string $phoneNumber = null,
         ?string $reason = null,
-        ?string $record_type = null,
+        ?string $recordType = null,
     ): self {
         $obj = new self;
 
-        null !== $additional_data_required && $obj['additional_data_required'] = $additional_data_required;
-        null !== $has_csr_coverage && $obj['has_csr_coverage'] = $has_csr_coverage;
-        null !== $phone_number && $obj['phone_number'] = $phone_number;
+        null !== $additionalDataRequired && $obj['additionalDataRequired'] = $additionalDataRequired;
+        null !== $hasCsrCoverage && $obj['hasCsrCoverage'] = $hasCsrCoverage;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
         null !== $reason && $obj['reason'] = $reason;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $recordType && $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class Data implements BaseModel
         array $additionalDataRequired
     ): self {
         $obj = clone $this;
-        $obj['additional_data_required'] = $additionalDataRequired;
+        $obj['additionalDataRequired'] = $additionalDataRequired;
 
         return $obj;
     }
@@ -105,7 +105,7 @@ final class Data implements BaseModel
     public function withHasCsrCoverage(bool $hasCsrCoverage): self
     {
         $obj = clone $this;
-        $obj['has_csr_coverage'] = $hasCsrCoverage;
+        $obj['hasCsrCoverage'] = $hasCsrCoverage;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class Data implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -138,7 +138,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

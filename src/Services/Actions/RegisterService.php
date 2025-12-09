@@ -27,8 +27,8 @@ final class RegisterService implements RegisterContract
      * If <code>sim_card_group_id</code> is provided, the SIM cards will be associated with that group. Otherwise, the default group for the current user will be used.<br/><br/>
      *
      * @param array{
-     *   registration_codes: list<string>,
-     *   sim_card_group_id?: string,
+     *   registrationCodes: list<string>,
+     *   simCardGroupID?: string,
      *   status?: 'enabled'|'disabled'|'standby'|Status,
      *   tags?: list<string>,
      * }|RegisterCreateParams $params

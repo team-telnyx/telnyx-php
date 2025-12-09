@@ -16,9 +16,9 @@ use Telnyx\RequirementGroups\RequirementGroupListParams\Filter\Status;
  *
  * @phpstan-type FilterShape = array{
  *   action?: value-of<Action>|null,
- *   country_code?: string|null,
- *   customer_reference?: string|null,
- *   phone_number_type?: value-of<PhoneNumberType>|null,
+ *   countryCode?: string|null,
+ *   customerReference?: string|null,
+ *   phoneNumberType?: value-of<PhoneNumberType>|null,
  *   status?: value-of<Status>|null,
  * }
  */
@@ -38,22 +38,22 @@ final class Filter implements BaseModel
     /**
      * Filter requirement groups by country code (iso alpha 2).
      */
-    #[Optional]
-    public ?string $country_code;
+    #[Optional('country_code')]
+    public ?string $countryCode;
 
     /**
      * Filter requirement groups by customer reference.
      */
-    #[Optional]
-    public ?string $customer_reference;
+    #[Optional('customer_reference')]
+    public ?string $customerReference;
 
     /**
      * Filter requirement groups by phone number type.
      *
-     * @var value-of<PhoneNumberType>|null $phone_number_type
+     * @var value-of<PhoneNumberType>|null $phoneNumberType
      */
-    #[Optional(enum: PhoneNumberType::class)]
-    public ?string $phone_number_type;
+    #[Optional('phone_number_type', enum: PhoneNumberType::class)]
+    public ?string $phoneNumberType;
 
     /**
      * Filter requirement groups by status.
@@ -74,22 +74,22 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Action|value-of<Action> $action
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phone_number_type
+     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
      * @param Status|value-of<Status> $status
      */
     public static function with(
         Action|string|null $action = null,
-        ?string $country_code = null,
-        ?string $customer_reference = null,
-        PhoneNumberType|string|null $phone_number_type = null,
+        ?string $countryCode = null,
+        ?string $customerReference = null,
+        PhoneNumberType|string|null $phoneNumberType = null,
         Status|string|null $status = null,
     ): self {
         $obj = new self;
 
         null !== $action && $obj['action'] = $action;
-        null !== $country_code && $obj['country_code'] = $country_code;
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
-        null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
+        null !== $countryCode && $obj['countryCode'] = $countryCode;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
+        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -114,7 +114,7 @@ final class Filter implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj['country_code'] = $countryCode;
+        $obj['countryCode'] = $countryCode;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class Filter implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class Filter implements BaseModel
         PhoneNumberType|string $phoneNumberType
     ): self {
         $obj = clone $this;
-        $obj['phone_number_type'] = $phoneNumberType;
+        $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }

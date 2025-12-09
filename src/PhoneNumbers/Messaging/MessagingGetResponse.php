@@ -38,18 +38,18 @@ final class MessagingGetResponse implements BaseModel
      *
      * @param PhoneNumberWithMessagingSettings|array{
      *   id?: string|null,
-     *   country_code?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   eligible_messaging_products?: list<string>|null,
+     *   countryCode?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   eligibleMessagingProducts?: list<string>|null,
      *   features?: Features|null,
      *   health?: NumberHealthMetrics|null,
-     *   messaging_product?: string|null,
-     *   messaging_profile_id?: string|null,
-     *   phone_number?: string|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   traffic_type?: string|null,
+     *   messagingProduct?: string|null,
+     *   messagingProfileID?: string|null,
+     *   phoneNumber?: string|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   trafficType?: string|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(
@@ -65,18 +65,18 @@ final class MessagingGetResponse implements BaseModel
     /**
      * @param PhoneNumberWithMessagingSettings|array{
      *   id?: string|null,
-     *   country_code?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   eligible_messaging_products?: list<string>|null,
+     *   countryCode?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   eligibleMessagingProducts?: list<string>|null,
      *   features?: Features|null,
      *   health?: NumberHealthMetrics|null,
-     *   messaging_product?: string|null,
-     *   messaging_profile_id?: string|null,
-     *   phone_number?: string|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   traffic_type?: string|null,
+     *   messagingProduct?: string|null,
+     *   messagingProfileID?: string|null,
+     *   phoneNumber?: string|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   trafficType?: string|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(PhoneNumberWithMessagingSettings|array $data): self

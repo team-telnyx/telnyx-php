@@ -22,10 +22,10 @@ use Telnyx\ExternalConnections\ExternalConnectionListParams\Page;
  * @phpstan-type ExternalConnectionListParamsShape = array{
  *   filter?: Filter|array{
  *     id?: string|null,
- *     connection_name?: ConnectionName|null,
- *     created_at?: string|null,
- *     external_sip_connection?: value-of<ExternalSipConnection>|null,
- *     phone_number?: PhoneNumber|null,
+ *     connectionName?: ConnectionName|null,
+ *     createdAt?: string|null,
+ *     externalSipConnection?: value-of<ExternalSipConnection>|null,
+ *     phoneNumber?: PhoneNumber|null,
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
  * }
@@ -60,10 +60,10 @@ final class ExternalConnectionListParams implements BaseModel
      *
      * @param Filter|array{
      *   id?: string|null,
-     *   connection_name?: ConnectionName|null,
-     *   created_at?: string|null,
-     *   external_sip_connection?: value-of<ExternalSipConnection>|null,
-     *   phone_number?: PhoneNumber|null,
+     *   connectionName?: ConnectionName|null,
+     *   createdAt?: string|null,
+     *   externalSipConnection?: value-of<ExternalSipConnection>|null,
+     *   phoneNumber?: PhoneNumber|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      */
@@ -84,10 +84,10 @@ final class ExternalConnectionListParams implements BaseModel
      *
      * @param Filter|array{
      *   id?: string|null,
-     *   connection_name?: ConnectionName|null,
-     *   created_at?: string|null,
-     *   external_sip_connection?: value-of<ExternalSipConnection>|null,
-     *   phone_number?: PhoneNumber|null,
+     *   connectionName?: ConnectionName|null,
+     *   createdAt?: string|null,
+     *   externalSipConnection?: value-of<ExternalSipConnection>|null,
+     *   phoneNumber?: PhoneNumber|null,
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

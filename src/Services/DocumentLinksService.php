@@ -25,7 +25,7 @@ final class DocumentLinksService implements DocumentLinksContract
      * List all documents links ordered by created_at descending.
      *
      * @param array{
-     *   filter?: array{linked_record_type?: string, linked_resource_id?: string},
+     *   filter?: array{linkedRecordType?: string, linkedResourceID?: string},
      *   page?: array{number?: int, size?: int},
      * }|DocumentLinkListParams $params
      *

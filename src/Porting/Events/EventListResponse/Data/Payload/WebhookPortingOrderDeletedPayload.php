@@ -13,8 +13,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type WebhookPortingOrderDeletedPayloadShape = array{
  *   id?: string|null,
- *   customer_reference?: string|null,
- *   deleted_at?: \DateTimeInterface|null,
+ *   customerReference?: string|null,
+ *   deletedAt?: \DateTimeInterface|null,
  * }
  */
 final class WebhookPortingOrderDeletedPayload implements BaseModel
@@ -31,14 +31,14 @@ final class WebhookPortingOrderDeletedPayload implements BaseModel
     /**
      * Identifies the customer reference associated with the porting order.
      */
-    #[Optional]
-    public ?string $customer_reference;
+    #[Optional('customer_reference')]
+    public ?string $customerReference;
 
     /**
      * ISO 8601 formatted date indicating when the porting order was deleted.
      */
-    #[Optional]
-    public ?\DateTimeInterface $deleted_at;
+    #[Optional('deleted_at')]
+    public ?\DateTimeInterface $deletedAt;
 
     public function __construct()
     {
@@ -52,14 +52,14 @@ final class WebhookPortingOrderDeletedPayload implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $customer_reference = null,
-        ?\DateTimeInterface $deleted_at = null,
+        ?string $customerReference = null,
+        ?\DateTimeInterface $deletedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
-        null !== $deleted_at && $obj['deleted_at'] = $deleted_at;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
+        null !== $deletedAt && $obj['deletedAt'] = $deletedAt;
 
         return $obj;
     }
@@ -81,7 +81,7 @@ final class WebhookPortingOrderDeletedPayload implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class WebhookPortingOrderDeletedPayload implements BaseModel
     public function withDeletedAt(\DateTimeInterface $deletedAt): self
     {
         $obj = clone $this;
-        $obj['deleted_at'] = $deletedAt;
+        $obj['deletedAt'] = $deletedAt;
 
         return $obj;
     }

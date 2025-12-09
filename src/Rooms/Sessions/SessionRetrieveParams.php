@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Rooms\SessionsService::retrieve()
  *
- * @phpstan-type SessionRetrieveParamsShape = array{include_participants?: bool}
+ * @phpstan-type SessionRetrieveParamsShape = array{includeParticipants?: bool}
  */
 final class SessionRetrieveParams implements BaseModel
 {
@@ -26,7 +26,7 @@ final class SessionRetrieveParams implements BaseModel
      * To decide if room participants should be included in the response.
      */
     #[Optional]
-    public ?bool $include_participants;
+    public ?bool $includeParticipants;
 
     public function __construct()
     {
@@ -38,11 +38,11 @@ final class SessionRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?bool $include_participants = null): self
+    public static function with(?bool $includeParticipants = null): self
     {
         $obj = new self;
 
-        null !== $include_participants && $obj['include_participants'] = $include_participants;
+        null !== $includeParticipants && $obj['includeParticipants'] = $includeParticipants;
 
         return $obj;
     }
@@ -53,7 +53,7 @@ final class SessionRetrieveParams implements BaseModel
     public function withIncludeParticipants(bool $includeParticipants): self
     {
         $obj = clone $this;
-        $obj['include_participants'] = $includeParticipants;
+        $obj['includeParticipants'] = $includeParticipants;
 
         return $obj;
     }

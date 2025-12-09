@@ -16,10 +16,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Conferences\ActionsService::play()
  *
  * @phpstan-type ActionPlayParamsShape = array{
- *   audio_url?: string,
- *   call_control_ids?: list<string>,
+ *   audioURL?: string,
+ *   callControlIDs?: list<string>,
  *   loop?: string|int,
- *   media_name?: string,
+ *   mediaName?: string,
  *   region?: Region|value-of<Region>,
  * }
  */
@@ -32,16 +32,16 @@ final class ActionPlayParams implements BaseModel
     /**
      * The URL of a file to be played back in the conference. media_name and audio_url cannot be used together in one request.
      */
-    #[Optional]
-    public ?string $audio_url;
+    #[Optional('audio_url')]
+    public ?string $audioURL;
 
     /**
      * List of call control ids identifying participants the audio file should be played to. If not given, the audio file will be played to the entire conference.
      *
-     * @var list<string>|null $call_control_ids
+     * @var list<string>|null $callControlIDs
      */
-    #[Optional(list: 'string')]
-    public ?array $call_control_ids;
+    #[Optional('call_control_ids', list: 'string')]
+    public ?array $callControlIDs;
 
     /**
      * The number of times the audio file should be played. If supplied, the value must be an integer between 1 and 100, or the special string `infinity` for an endless loop.
@@ -52,8 +52,8 @@ final class ActionPlayParams implements BaseModel
     /**
      * The media_name of a file to be played back in the conference. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file.
      */
-    #[Optional]
-    public ?string $media_name;
+    #[Optional('media_name')]
+    public ?string $mediaName;
 
     /**
      * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
@@ -73,22 +73,22 @@ final class ActionPlayParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $call_control_ids
+     * @param list<string> $callControlIDs
      * @param Region|value-of<Region> $region
      */
     public static function with(
-        ?string $audio_url = null,
-        ?array $call_control_ids = null,
+        ?string $audioURL = null,
+        ?array $callControlIDs = null,
         string|int|null $loop = null,
-        ?string $media_name = null,
+        ?string $mediaName = null,
         Region|string|null $region = null,
     ): self {
         $obj = new self;
 
-        null !== $audio_url && $obj['audio_url'] = $audio_url;
-        null !== $call_control_ids && $obj['call_control_ids'] = $call_control_ids;
+        null !== $audioURL && $obj['audioURL'] = $audioURL;
+        null !== $callControlIDs && $obj['callControlIDs'] = $callControlIDs;
         null !== $loop && $obj['loop'] = $loop;
-        null !== $media_name && $obj['media_name'] = $media_name;
+        null !== $mediaName && $obj['mediaName'] = $mediaName;
         null !== $region && $obj['region'] = $region;
 
         return $obj;
@@ -100,7 +100,7 @@ final class ActionPlayParams implements BaseModel
     public function withAudioURL(string $audioURL): self
     {
         $obj = clone $this;
-        $obj['audio_url'] = $audioURL;
+        $obj['audioURL'] = $audioURL;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class ActionPlayParams implements BaseModel
     public function withCallControlIDs(array $callControlIDs): self
     {
         $obj = clone $this;
-        $obj['call_control_ids'] = $callControlIDs;
+        $obj['callControlIDs'] = $callControlIDs;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class ActionPlayParams implements BaseModel
     public function withMediaName(string $mediaName): self
     {
         $obj = clone $this;
-        $obj['media_name'] = $mediaName;
+        $obj['mediaName'] = $mediaName;
 
         return $obj;
     }

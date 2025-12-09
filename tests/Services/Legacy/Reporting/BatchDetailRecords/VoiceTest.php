@@ -45,8 +45,8 @@ final class VoiceTest extends TestCase
             ->batchDetailRecords
             ->voice
             ->create([
-                'end_time' => new \DateTimeImmutable('2024-02-12T23:59:59Z'),
-                'start_time' => new \DateTimeImmutable('2024-02-01T00:00:00Z'),
+                'endTime' => new \DateTimeImmutable('2024-02-12T23:59:59Z'),
+                'startTime' => new \DateTimeImmutable('2024-02-01T00:00:00Z'),
             ])
         ;
 
@@ -68,30 +68,30 @@ final class VoiceTest extends TestCase
             ->batchDetailRecords
             ->voice
             ->create([
-                'end_time' => new \DateTimeImmutable('2024-02-12T23:59:59Z'),
-                'start_time' => new \DateTimeImmutable('2024-02-01T00:00:00Z'),
-                'call_types' => [1, 2],
+                'endTime' => new \DateTimeImmutable('2024-02-12T23:59:59Z'),
+                'startTime' => new \DateTimeImmutable('2024-02-01T00:00:00Z'),
+                'callTypes' => [1, 2],
                 'connections' => [123, 456],
                 'fields' => ['call_leg_id', 'start_time', 'end_time'],
                 'filters' => [
                     [
-                        'billing_group' => 'adfaa016-f921-4b6c-97bb-e4c1dad231c5',
+                        'billingGroup' => 'adfaa016-f921-4b6c-97bb-e4c1dad231c5',
                         'cld' => '+13129457420',
-                        'cld_filter' => 'contains',
+                        'cldFilter' => 'contains',
                         'cli' => '+13129457420',
-                        'cli_filter' => 'contains',
-                        'filter_type' => 'and',
-                        'tags_list' => 'tag1',
+                        'cliFilter' => 'contains',
+                        'filterType' => 'and',
+                        'tagsList' => 'tag1',
                     ],
                 ],
-                'include_all_metadata' => true,
-                'managed_accounts' => [
+                'includeAllMetadata' => true,
+                'managedAccounts' => [
                     'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                     '6ba7b810-9dad-11d1-80b4-00c04fd430c8',
                 ],
-                'record_types' => [1, 2],
-                'report_name' => 'My CDR Report',
-                'select_all_managed_accounts' => false,
+                'recordTypes' => [1, 2],
+                'reportName' => 'My CDR Report',
+                'selectAllManagedAccounts' => false,
                 'source' => 'calls',
                 'timezone' => 'UTC',
             ])

@@ -61,9 +61,9 @@ final class ReleasesService implements ReleasesContract
      *
      * @param array{
      *   filter?: array{
-     *     civic_address_id?: array{eq?: string},
-     *     location_id?: array{eq?: string},
-     *     phone_number?: array{contains?: string, eq?: string},
+     *     civicAddressID?: array{eq?: string},
+     *     locationID?: array{eq?: string},
+     *     phoneNumber?: array{contains?: string, eq?: string},
      *     status?: array{
      *       eq?: list<'pending_upload'|'pending'|'in_progress'|'complete'|'failed'|'expired'|'unknown'|Eq>,
      *     },

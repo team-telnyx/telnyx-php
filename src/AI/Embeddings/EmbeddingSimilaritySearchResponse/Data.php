@@ -25,7 +25,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * }.
  *
  * @phpstan-type DataShape = array{
- *   distance: float, document_chunk: string, metadata: Metadata
+ *   distance: float, documentChunk: string, metadata: Metadata
  * }
  */
 final class Data implements BaseModel
@@ -36,8 +36,8 @@ final class Data implements BaseModel
     #[Required]
     public float $distance;
 
-    #[Required]
-    public string $document_chunk;
+    #[Required('document_chunk')]
+    public string $documentChunk;
 
     #[Required]
     public Metadata $metadata;
@@ -47,7 +47,7 @@ final class Data implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * Data::with(distance: ..., document_chunk: ..., metadata: ...)
+     * Data::with(distance: ..., documentChunk: ..., metadata: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -72,18 +72,18 @@ final class Data implements BaseModel
      *   filename: string,
      *   source: string,
      *   certainty?: float|null,
-     *   loader_metadata?: array<string,mixed>|null,
+     *   loaderMetadata?: array<string,mixed>|null,
      * } $metadata
      */
     public static function with(
         float $distance,
-        string $document_chunk,
+        string $documentChunk,
         Metadata|array $metadata
     ): self {
         $obj = new self;
 
         $obj['distance'] = $distance;
-        $obj['document_chunk'] = $document_chunk;
+        $obj['documentChunk'] = $documentChunk;
         $obj['metadata'] = $metadata;
 
         return $obj;
@@ -100,7 +100,7 @@ final class Data implements BaseModel
     public function withDocumentChunk(string $documentChunk): self
     {
         $obj = clone $this;
-        $obj['document_chunk'] = $documentChunk;
+        $obj['documentChunk'] = $documentChunk;
 
         return $obj;
     }
@@ -112,7 +112,7 @@ final class Data implements BaseModel
      *   filename: string,
      *   source: string,
      *   certainty?: float|null,
-     *   loader_metadata?: array<string,mixed>|null,
+     *   loaderMetadata?: array<string,mixed>|null,
      * } $metadata
      */
     public function withMetadata(Metadata|array $metadata): self

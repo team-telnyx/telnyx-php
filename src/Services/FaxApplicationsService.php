@@ -34,19 +34,19 @@ final class FaxApplicationsService implements FaxApplicationsContract
      * Creates a new Fax Application based on the parameters sent in the request. The application name and webhook URL are required. Once created, you can assign phone numbers to your application using the `/phone_numbers` endpoint.
      *
      * @param array{
-     *   application_name: string,
-     *   webhook_event_url: string,
+     *   applicationName: string,
+     *   webhookEventURL: string,
      *   active?: bool,
-     *   anchorsite_override?: value-of<AnchorsiteOverride>,
+     *   anchorsiteOverride?: value-of<AnchorsiteOverride>,
      *   inbound?: array{
-     *     channel_limit?: int,
-     *     sip_subdomain?: string,
-     *     sip_subdomain_receive_settings?: 'only_my_connections'|'from_anyone'|SipSubdomainReceiveSettings,
+     *     channelLimit?: int,
+     *     sipSubdomain?: string,
+     *     sipSubdomainReceiveSettings?: 'only_my_connections'|'from_anyone'|SipSubdomainReceiveSettings,
      *   },
-     *   outbound?: array{channel_limit?: int, outbound_voice_profile_id?: string},
+     *   outbound?: array{channelLimit?: int, outboundVoiceProfileID?: string},
      *   tags?: list<string>,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_timeout_secs?: int|null,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookTimeoutSecs?: int|null,
      * }|FaxApplicationCreateParams $params
      *
      * @throws APIException
@@ -100,20 +100,20 @@ final class FaxApplicationsService implements FaxApplicationsContract
      * Updates settings of an existing Fax Application based on the parameters of the request.
      *
      * @param array{
-     *   application_name: string,
-     *   webhook_event_url: string,
+     *   applicationName: string,
+     *   webhookEventURL: string,
      *   active?: bool,
-     *   anchorsite_override?: value-of<AnchorsiteOverride>,
-     *   fax_email_recipient?: string|null,
+     *   anchorsiteOverride?: value-of<AnchorsiteOverride>,
+     *   faxEmailRecipient?: string|null,
      *   inbound?: array{
-     *     channel_limit?: int,
-     *     sip_subdomain?: string,
-     *     sip_subdomain_receive_settings?: 'only_my_connections'|'from_anyone'|FaxApplicationUpdateParams\Inbound\SipSubdomainReceiveSettings,
+     *     channelLimit?: int,
+     *     sipSubdomain?: string,
+     *     sipSubdomainReceiveSettings?: 'only_my_connections'|'from_anyone'|FaxApplicationUpdateParams\Inbound\SipSubdomainReceiveSettings,
      *   },
-     *   outbound?: array{channel_limit?: int, outbound_voice_profile_id?: string},
+     *   outbound?: array{channelLimit?: int, outboundVoiceProfileID?: string},
      *   tags?: list<string>,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_timeout_secs?: int|null,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookTimeoutSecs?: int|null,
      * }|FaxApplicationUpdateParams $params
      *
      * @throws APIException
@@ -147,8 +147,7 @@ final class FaxApplicationsService implements FaxApplicationsContract
      *
      * @param array{
      *   filter?: array{
-     *     application_name?: array{contains?: string},
-     *     outbound_voice_profile_id?: string,
+     *     applicationName?: array{contains?: string}, outboundVoiceProfileID?: string
      *   },
      *   page?: array{number?: int, size?: int},
      *   sort?: 'created_at'|'application_name'|'active'|Sort,

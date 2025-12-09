@@ -44,7 +44,7 @@ final class ClusterComputeResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{task_id: string} $data
+     * @param Data|array{taskID: string} $data
      */
     public static function with(Data|array $data): self
     {
@@ -56,7 +56,7 @@ final class ClusterComputeResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{task_id: string} $data
+     * @param Data|array{taskID: string} $data
      */
     public function withData(Data|array $data): self
     {

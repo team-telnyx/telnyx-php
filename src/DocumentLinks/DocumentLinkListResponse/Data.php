@@ -11,12 +11,12 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   created_at?: string|null,
- *   document_id?: string|null,
- *   linked_record_type?: string|null,
- *   linked_resource_id?: string|null,
- *   record_type?: string|null,
- *   updated_at?: string|null,
+ *   createdAt?: string|null,
+ *   documentID?: string|null,
+ *   linkedRecordType?: string|null,
+ *   linkedResourceID?: string|null,
+ *   recordType?: string|null,
+ *   updatedAt?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -33,38 +33,38 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Optional]
-    public ?string $created_at;
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
     /**
      * Identifies the associated document.
      */
-    #[Optional]
-    public ?string $document_id;
+    #[Optional('document_id')]
+    public ?string $documentID;
 
     /**
      * The linked resource's record type.
      */
-    #[Optional]
-    public ?string $linked_record_type;
+    #[Optional('linked_record_type')]
+    public ?string $linkedRecordType;
 
     /**
      * Identifies the linked resource.
      */
-    #[Optional]
-    public ?string $linked_resource_id;
+    #[Optional('linked_resource_id')]
+    public ?string $linkedResourceID;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Optional]
-    public ?string $updated_at;
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     public function __construct()
     {
@@ -78,22 +78,22 @@ final class Data implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $created_at = null,
-        ?string $document_id = null,
-        ?string $linked_record_type = null,
-        ?string $linked_resource_id = null,
-        ?string $record_type = null,
-        ?string $updated_at = null,
+        ?string $createdAt = null,
+        ?string $documentID = null,
+        ?string $linkedRecordType = null,
+        ?string $linkedResourceID = null,
+        ?string $recordType = null,
+        ?string $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $document_id && $obj['document_id'] = $document_id;
-        null !== $linked_record_type && $obj['linked_record_type'] = $linked_record_type;
-        null !== $linked_resource_id && $obj['linked_resource_id'] = $linked_resource_id;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $documentID && $obj['documentID'] = $documentID;
+        null !== $linkedRecordType && $obj['linkedRecordType'] = $linkedRecordType;
+        null !== $linkedResourceID && $obj['linkedResourceID'] = $linkedResourceID;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class Data implements BaseModel
     public function withDocumentID(string $documentID): self
     {
         $obj = clone $this;
-        $obj['document_id'] = $documentID;
+        $obj['documentID'] = $documentID;
 
         return $obj;
     }
@@ -137,7 +137,7 @@ final class Data implements BaseModel
     public function withLinkedRecordType(string $linkedRecordType): self
     {
         $obj = clone $this;
-        $obj['linked_record_type'] = $linkedRecordType;
+        $obj['linkedRecordType'] = $linkedRecordType;
 
         return $obj;
     }
@@ -148,7 +148,7 @@ final class Data implements BaseModel
     public function withLinkedResourceID(string $linkedResourceID): self
     {
         $obj = clone $this;
-        $obj['linked_resource_id'] = $linkedResourceID;
+        $obj['linkedResourceID'] = $linkedResourceID;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -170,7 +170,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

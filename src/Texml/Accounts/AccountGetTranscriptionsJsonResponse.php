@@ -13,11 +13,11 @@ use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse\Transcription\Sta
 /**
  * @phpstan-type AccountGetTranscriptionsJsonResponseShape = array{
  *   end?: int|null,
- *   first_page_uri?: string|null,
- *   next_page_uri?: string|null,
+ *   firstPageUri?: string|null,
+ *   nextPageUri?: string|null,
  *   page?: int|null,
- *   page_size?: int|null,
- *   previous_page_uri?: string|null,
+ *   pageSize?: int|null,
+ *   previousPageUri?: string|null,
  *   start?: int|null,
  *   transcriptions?: list<Transcription>|null,
  *   uri?: string|null,
@@ -37,14 +37,14 @@ final class AccountGetTranscriptionsJsonResponse implements BaseModel
     /**
      * Relative uri to the first page of the query results.
      */
-    #[Optional]
-    public ?string $first_page_uri;
+    #[Optional('first_page_uri')]
+    public ?string $firstPageUri;
 
     /**
      * Relative uri to the next page of the query results.
      */
-    #[Optional]
-    public ?string $next_page_uri;
+    #[Optional('next_page_uri')]
+    public ?string $nextPageUri;
 
     /**
      * Current page number, zero-indexed.
@@ -55,14 +55,14 @@ final class AccountGetTranscriptionsJsonResponse implements BaseModel
     /**
      * The number of items on the page.
      */
-    #[Optional]
-    public ?int $page_size;
+    #[Optional('page_size')]
+    public ?int $pageSize;
 
     /**
      * Relative uri to the previous page of the query results.
      */
-    #[Optional]
-    public ?string $previous_page_uri;
+    #[Optional('previous_page_uri')]
+    public ?string $previousPageUri;
 
     /**
      * The number of the first element on the page, zero-indexed.
@@ -91,26 +91,26 @@ final class AccountGetTranscriptionsJsonResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Transcription|array{
-     *   account_sid?: string|null,
-     *   api_version?: string|null,
-     *   call_sid?: string|null,
-     *   date_created?: \DateTimeInterface|null,
-     *   date_updated?: \DateTimeInterface|null,
+     *   accountSid?: string|null,
+     *   apiVersion?: string|null,
+     *   callSid?: string|null,
+     *   dateCreated?: \DateTimeInterface|null,
+     *   dateUpdated?: \DateTimeInterface|null,
      *   duration?: string|null,
-     *   recording_sid?: string|null,
+     *   recordingSid?: string|null,
      *   sid?: string|null,
      *   status?: value-of<Status>|null,
-     *   transcription_text?: string|null,
+     *   transcriptionText?: string|null,
      *   uri?: string|null,
      * }> $transcriptions
      */
     public static function with(
         ?int $end = null,
-        ?string $first_page_uri = null,
-        ?string $next_page_uri = null,
+        ?string $firstPageUri = null,
+        ?string $nextPageUri = null,
         ?int $page = null,
-        ?int $page_size = null,
-        ?string $previous_page_uri = null,
+        ?int $pageSize = null,
+        ?string $previousPageUri = null,
         ?int $start = null,
         ?array $transcriptions = null,
         ?string $uri = null,
@@ -118,11 +118,11 @@ final class AccountGetTranscriptionsJsonResponse implements BaseModel
         $obj = new self;
 
         null !== $end && $obj['end'] = $end;
-        null !== $first_page_uri && $obj['first_page_uri'] = $first_page_uri;
-        null !== $next_page_uri && $obj['next_page_uri'] = $next_page_uri;
+        null !== $firstPageUri && $obj['firstPageUri'] = $firstPageUri;
+        null !== $nextPageUri && $obj['nextPageUri'] = $nextPageUri;
         null !== $page && $obj['page'] = $page;
-        null !== $page_size && $obj['page_size'] = $page_size;
-        null !== $previous_page_uri && $obj['previous_page_uri'] = $previous_page_uri;
+        null !== $pageSize && $obj['pageSize'] = $pageSize;
+        null !== $previousPageUri && $obj['previousPageUri'] = $previousPageUri;
         null !== $start && $obj['start'] = $start;
         null !== $transcriptions && $obj['transcriptions'] = $transcriptions;
         null !== $uri && $obj['uri'] = $uri;
@@ -147,7 +147,7 @@ final class AccountGetTranscriptionsJsonResponse implements BaseModel
     public function withFirstPageUri(string $firstPageUri): self
     {
         $obj = clone $this;
-        $obj['first_page_uri'] = $firstPageUri;
+        $obj['firstPageUri'] = $firstPageUri;
 
         return $obj;
     }
@@ -158,7 +158,7 @@ final class AccountGetTranscriptionsJsonResponse implements BaseModel
     public function withNextPageUri(string $nextPageUri): self
     {
         $obj = clone $this;
-        $obj['next_page_uri'] = $nextPageUri;
+        $obj['nextPageUri'] = $nextPageUri;
 
         return $obj;
     }
@@ -180,7 +180,7 @@ final class AccountGetTranscriptionsJsonResponse implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj['page_size'] = $pageSize;
+        $obj['pageSize'] = $pageSize;
 
         return $obj;
     }
@@ -191,7 +191,7 @@ final class AccountGetTranscriptionsJsonResponse implements BaseModel
     public function withPreviousPageUri(string $previousPageUri): self
     {
         $obj = clone $this;
-        $obj['previous_page_uri'] = $previousPageUri;
+        $obj['previousPageUri'] = $previousPageUri;
 
         return $obj;
     }
@@ -209,16 +209,16 @@ final class AccountGetTranscriptionsJsonResponse implements BaseModel
 
     /**
      * @param list<Transcription|array{
-     *   account_sid?: string|null,
-     *   api_version?: string|null,
-     *   call_sid?: string|null,
-     *   date_created?: \DateTimeInterface|null,
-     *   date_updated?: \DateTimeInterface|null,
+     *   accountSid?: string|null,
+     *   apiVersion?: string|null,
+     *   callSid?: string|null,
+     *   dateCreated?: \DateTimeInterface|null,
+     *   dateUpdated?: \DateTimeInterface|null,
      *   duration?: string|null,
-     *   recording_sid?: string|null,
+     *   recordingSid?: string|null,
      *   sid?: string|null,
      *   status?: value-of<Status>|null,
-     *   transcription_text?: string|null,
+     *   transcriptionText?: string|null,
      *   uri?: string|null,
      * }> $transcriptions
      */

@@ -13,8 +13,8 @@ use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filte
  * Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in], filter[global_ip_assignment_id][in].
  *
  * @phpstan-type FilterShape = array{
- *   global_ip_assignment_id?: string|null|In,
- *   global_ip_id?: string|null|\Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filter\GlobalIPID\In,
+ *   globalIPAssignmentID?: string|null|In,
+ *   globalIPID?: string|null|\Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filter\GlobalIPID\In,
  * }
  */
 final class Filter implements BaseModel
@@ -25,14 +25,14 @@ final class Filter implements BaseModel
     /**
      * Filter by exact Global IP Assignment ID.
      */
-    #[Optional]
-    public string|In|null $global_ip_assignment_id;
+    #[Optional('global_ip_assignment_id')]
+    public string|In|null $globalIPAssignmentID;
 
     /**
      * Filter by exact Global IP ID.
      */
-    #[Optional]
-    public string|Filter\GlobalIPID\In|null $global_ip_id;
+    #[Optional('global_ip_id')]
+    public string|Filter\GlobalIPID\In|null $globalIPID;
 
     public function __construct()
     {
@@ -44,19 +44,19 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param string|In|array{in?: string|null} $global_ip_assignment_id
+     * @param string|In|array{in?: string|null} $globalIPAssignmentID
      * @param string|Filter\GlobalIPID\In|array{
      *   in?: string|null
-     * } $global_ip_id
+     * } $globalIPID
      */
     public static function with(
-        string|In|array|null $global_ip_assignment_id = null,
-        string|Filter\GlobalIPID\In|array|null $global_ip_id = null,
+        string|In|array|null $globalIPAssignmentID = null,
+        string|Filter\GlobalIPID\In|array|null $globalIPID = null,
     ): self {
         $obj = new self;
 
-        null !== $global_ip_assignment_id && $obj['global_ip_assignment_id'] = $global_ip_assignment_id;
-        null !== $global_ip_id && $obj['global_ip_id'] = $global_ip_id;
+        null !== $globalIPAssignmentID && $obj['globalIPAssignmentID'] = $globalIPAssignmentID;
+        null !== $globalIPID && $obj['globalIPID'] = $globalIPID;
 
         return $obj;
     }
@@ -70,7 +70,7 @@ final class Filter implements BaseModel
         string|In|array $globalIPAssignmentID
     ): self {
         $obj = clone $this;
-        $obj['global_ip_assignment_id'] = $globalIPAssignmentID;
+        $obj['globalIPAssignmentID'] = $globalIPAssignmentID;
 
         return $obj;
     }
@@ -82,11 +82,11 @@ final class Filter implements BaseModel
      *   in?: string|null
      * } $globalIPID
      */
-    public function withGlobalIPID(
+    public function withGlobalIpid(
         string|Filter\GlobalIPID\In|array $globalIPID,
     ): self {
         $obj = clone $this;
-        $obj['global_ip_id'] = $globalIPID;
+        $obj['globalIPID'] = $globalIPID;
 
         return $obj;
     }

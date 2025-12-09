@@ -38,9 +38,9 @@ final class OAuthClientsTest extends TestCase
         }
 
         $result = $this->client->oauthClients->create([
-            'allowed_grant_types' => ['client_credentials'],
-            'allowed_scopes' => ['admin'],
-            'client_type' => 'public',
+            'allowedGrantTypes' => ['client_credentials'],
+            'allowedScopes' => ['admin'],
+            'clientType' => 'public',
             'name' => 'My OAuth client',
         ]);
 
@@ -56,15 +56,15 @@ final class OAuthClientsTest extends TestCase
         }
 
         $result = $this->client->oauthClients->create([
-            'allowed_grant_types' => ['client_credentials'],
-            'allowed_scopes' => ['admin'],
-            'client_type' => 'public',
+            'allowedGrantTypes' => ['client_credentials'],
+            'allowedScopes' => ['admin'],
+            'clientType' => 'public',
             'name' => 'My OAuth client',
-            'logo_uri' => 'https://example.com',
-            'policy_uri' => 'https://example.com',
-            'redirect_uris' => ['https://example.com'],
-            'require_pkce' => true,
-            'tos_uri' => 'https://example.com',
+            'logoUri' => 'https://example.com',
+            'policyUri' => 'https://example.com',
+            'redirectUris' => ['https://example.com'],
+            'requirePkce' => true,
+            'tosUri' => 'https://example.com',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

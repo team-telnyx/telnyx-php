@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type DataShape = array{features: list<string>, phone_number: string}
+ * @phpstan-type DataShape = array{features: list<string>, phoneNumber: string}
  */
 final class Data implements BaseModel
 {
@@ -20,15 +20,15 @@ final class Data implements BaseModel
     #[Required(list: 'string')]
     public array $features;
 
-    #[Required]
-    public string $phone_number;
+    #[Required('phone_number')]
+    public string $phoneNumber;
 
     /**
      * `new Data()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Data::with(features: ..., phone_number: ...)
+     * Data::with(features: ..., phoneNumber: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -49,12 +49,12 @@ final class Data implements BaseModel
      *
      * @param list<string> $features
      */
-    public static function with(array $features, string $phone_number): self
+    public static function with(array $features, string $phoneNumber): self
     {
         $obj = new self;
 
         $obj['features'] = $features;
-        $obj['phone_number'] = $phone_number;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -73,7 +73,7 @@ final class Data implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }

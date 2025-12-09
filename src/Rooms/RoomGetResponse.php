@@ -31,17 +31,17 @@ final class RoomGetResponse implements BaseModel
      *
      * @param Room|array{
      *   id?: string|null,
-     *   active_session_id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   enable_recording?: bool|null,
-     *   max_participants?: int|null,
-     *   record_type?: string|null,
+     *   activeSessionID?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   enableRecording?: bool|null,
+     *   maxParticipants?: int|null,
+     *   recordType?: string|null,
      *   sessions?: list<RoomSession>|null,
-     *   unique_name?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_event_url?: string|null,
-     *   webhook_timeout_secs?: int|null,
+     *   uniqueName?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookEventURL?: string|null,
+     *   webhookTimeoutSecs?: int|null,
      * } $data
      */
     public static function with(Room|array|null $data = null): self
@@ -56,17 +56,17 @@ final class RoomGetResponse implements BaseModel
     /**
      * @param Room|array{
      *   id?: string|null,
-     *   active_session_id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   enable_recording?: bool|null,
-     *   max_participants?: int|null,
-     *   record_type?: string|null,
+     *   activeSessionID?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   enableRecording?: bool|null,
+     *   maxParticipants?: int|null,
+     *   recordType?: string|null,
      *   sessions?: list<RoomSession>|null,
-     *   unique_name?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_event_url?: string|null,
-     *   webhook_timeout_secs?: int|null,
+     *   uniqueName?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookEventURL?: string|null,
+     *   webhookTimeoutSecs?: int|null,
      * } $data
      */
     public function withData(Room|array $data): self

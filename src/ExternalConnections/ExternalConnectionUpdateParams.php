@@ -19,14 +19,14 @@ use Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Outbound;
  *
  * @phpstan-type ExternalConnectionUpdateParamsShape = array{
  *   outbound: Outbound|array{
- *     outbound_voice_profile_id: string, channel_limit?: int|null
+ *     outboundVoiceProfileID: string, channelLimit?: int|null
  *   },
  *   active?: bool,
- *   inbound?: Inbound|array{channel_limit?: int|null},
+ *   inbound?: Inbound|array{channelLimit?: int|null},
  *   tags?: list<string>,
- *   webhook_event_failover_url?: string|null,
- *   webhook_event_url?: string,
- *   webhook_timeout_secs?: int|null,
+ *   webhookEventFailoverURL?: string|null,
+ *   webhookEventURL?: string,
+ *   webhookTimeoutSecs?: int|null,
  * }
  */
 final class ExternalConnectionUpdateParams implements BaseModel
@@ -58,20 +58,20 @@ final class ExternalConnectionUpdateParams implements BaseModel
     /**
      * The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
-    #[Optional(nullable: true)]
-    public ?string $webhook_event_failover_url;
+    #[Optional('webhook_event_failover_url', nullable: true)]
+    public ?string $webhookEventFailoverURL;
 
     /**
      * The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      */
-    #[Optional]
-    public ?string $webhook_event_url;
+    #[Optional('webhook_event_url')]
+    public ?string $webhookEventURL;
 
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    #[Optional(nullable: true)]
-    public ?int $webhook_timeout_secs;
+    #[Optional('webhook_timeout_secs', nullable: true)]
+    public ?int $webhookTimeoutSecs;
 
     /**
      * `new ExternalConnectionUpdateParams()` is missing required properties by the API.
@@ -98,9 +98,9 @@ final class ExternalConnectionUpdateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Outbound|array{
-     *   outbound_voice_profile_id: string, channel_limit?: int|null
+     *   outboundVoiceProfileID: string, channelLimit?: int|null
      * } $outbound
-     * @param Inbound|array{channel_limit?: int|null} $inbound
+     * @param Inbound|array{channelLimit?: int|null} $inbound
      * @param list<string> $tags
      */
     public static function with(
@@ -108,9 +108,9 @@ final class ExternalConnectionUpdateParams implements BaseModel
         ?bool $active = null,
         Inbound|array|null $inbound = null,
         ?array $tags = null,
-        ?string $webhook_event_failover_url = null,
-        ?string $webhook_event_url = null,
-        ?int $webhook_timeout_secs = null,
+        ?string $webhookEventFailoverURL = null,
+        ?string $webhookEventURL = null,
+        ?int $webhookTimeoutSecs = null,
     ): self {
         $obj = new self;
 
@@ -119,16 +119,16 @@ final class ExternalConnectionUpdateParams implements BaseModel
         null !== $active && $obj['active'] = $active;
         null !== $inbound && $obj['inbound'] = $inbound;
         null !== $tags && $obj['tags'] = $tags;
-        null !== $webhook_event_failover_url && $obj['webhook_event_failover_url'] = $webhook_event_failover_url;
-        null !== $webhook_event_url && $obj['webhook_event_url'] = $webhook_event_url;
-        null !== $webhook_timeout_secs && $obj['webhook_timeout_secs'] = $webhook_timeout_secs;
+        null !== $webhookEventFailoverURL && $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        null !== $webhookEventURL && $obj['webhookEventURL'] = $webhookEventURL;
+        null !== $webhookTimeoutSecs && $obj['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
         return $obj;
     }
 
     /**
      * @param Outbound|array{
-     *   outbound_voice_profile_id: string, channel_limit?: int|null
+     *   outboundVoiceProfileID: string, channelLimit?: int|null
      * } $outbound
      */
     public function withOutbound(Outbound|array $outbound): self
@@ -151,7 +151,7 @@ final class ExternalConnectionUpdateParams implements BaseModel
     }
 
     /**
-     * @param Inbound|array{channel_limit?: int|null} $inbound
+     * @param Inbound|array{channelLimit?: int|null} $inbound
      */
     public function withInbound(Inbound|array $inbound): self
     {
@@ -181,7 +181,7 @@ final class ExternalConnectionUpdateParams implements BaseModel
         ?string $webhookEventFailoverURL
     ): self {
         $obj = clone $this;
-        $obj['webhook_event_failover_url'] = $webhookEventFailoverURL;
+        $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
 
         return $obj;
     }
@@ -192,7 +192,7 @@ final class ExternalConnectionUpdateParams implements BaseModel
     public function withWebhookEventURL(string $webhookEventURL): self
     {
         $obj = clone $this;
-        $obj['webhook_event_url'] = $webhookEventURL;
+        $obj['webhookEventURL'] = $webhookEventURL;
 
         return $obj;
     }
@@ -203,7 +203,7 @@ final class ExternalConnectionUpdateParams implements BaseModel
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
         $obj = clone $this;
-        $obj['webhook_timeout_secs'] = $webhookTimeoutSecs;
+        $obj['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
         return $obj;
     }

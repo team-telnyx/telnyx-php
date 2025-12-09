@@ -32,7 +32,7 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      * Create a Global IP assignment.
      *
      * @param array{
-     *   global_ip_id?: string, is_in_maintenance?: bool, wireguard_peer_id?: string
+     *   globalIPID?: string, isInMaintenance?: bool, wireguardPeerID?: string
      * }|GlobalIPAssignmentCreateParams $params
      *
      * @throws APIException
@@ -86,24 +86,26 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      * Update a Global IP assignment.
      *
      * @param array{
-     *   id?: string,
-     *   created_at?: string,
-     *   record_type?: string,
-     *   updated_at?: string,
-     *   global_ip_id?: string,
-     *   is_announced?: bool,
-     *   is_connected?: bool,
-     *   is_in_maintenance?: bool,
-     *   status?: 'created'|'provisioning'|'provisioned'|'deleting'|InterfaceStatus,
-     *   wireguard_peer_id?: string,
-     * } $params
+     *   body: array{
+     *     id?: string,
+     *     createdAt?: string,
+     *     recordType?: string,
+     *     updatedAt?: string,
+     *     globalIPID?: string,
+     *     isAnnounced?: bool,
+     *     isConnected?: bool,
+     *     isInMaintenance?: bool,
+     *     status?: 'created'|'provisioning'|'provisioned'|'deleting'|InterfaceStatus,
+     *     wireguardPeerID?: string,
+     *   },
+     * }|GlobalIPAssignmentUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|GlobalIPAssignmentUpdateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): GlobalIPAssignmentUpdateResponse {
         [$parsed, $options] = GlobalIPAssignmentUpdateParams::parseRequest(
             $params,

@@ -35,13 +35,13 @@ final class RecordingTranscriptionGetResponse implements BaseModel
      *
      * @param RecordingTranscription|array{
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   duration_millis?: int|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   recording_id?: string|null,
+     *   createdAt?: string|null,
+     *   durationMillis?: int|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   recordingID?: string|null,
      *   status?: value-of<Status>|null,
-     *   transcription_text?: string|null,
-     *   updated_at?: string|null,
+     *   transcriptionText?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public static function with(RecordingTranscription|array|null $data = null): self
@@ -56,13 +56,13 @@ final class RecordingTranscriptionGetResponse implements BaseModel
     /**
      * @param RecordingTranscription|array{
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   duration_millis?: int|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   recording_id?: string|null,
+     *   createdAt?: string|null,
+     *   durationMillis?: int|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   recordingID?: string|null,
      *   status?: value-of<Status>|null,
-     *   transcription_text?: string|null,
-     *   updated_at?: string|null,
+     *   transcriptionText?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public function withData(RecordingTranscription|array $data): self

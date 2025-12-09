@@ -11,9 +11,9 @@ use Telnyx\Seti\SetiGetBlackBoxTestResultsResponse\Data\BlackBoxTest;
 
 /**
  * @phpstan-type DataShape = array{
- *   black_box_tests?: list<BlackBoxTest>|null,
+ *   blackBoxTests?: list<BlackBoxTest>|null,
  *   product?: string|null,
- *   record_type?: string|null,
+ *   recordType?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -21,9 +21,9 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    /** @var list<BlackBoxTest>|null $black_box_tests */
-    #[Optional(list: BlackBoxTest::class)]
-    public ?array $black_box_tests;
+    /** @var list<BlackBoxTest>|null $blackBoxTests */
+    #[Optional('black_box_tests', list: BlackBoxTest::class)]
+    public ?array $blackBoxTests;
 
     /**
      * The product associated with the black box test group.
@@ -31,8 +31,8 @@ final class Data implements BaseModel
     #[Optional]
     public ?string $product;
 
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     public function __construct()
     {
@@ -45,32 +45,32 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<BlackBoxTest|array{
-     *   id?: string|null, record_type?: string|null, result?: float|null
-     * }> $black_box_tests
+     *   id?: string|null, recordType?: string|null, result?: float|null
+     * }> $blackBoxTests
      */
     public static function with(
-        ?array $black_box_tests = null,
+        ?array $blackBoxTests = null,
         ?string $product = null,
-        ?string $record_type = null,
+        ?string $recordType = null,
     ): self {
         $obj = new self;
 
-        null !== $black_box_tests && $obj['black_box_tests'] = $black_box_tests;
+        null !== $blackBoxTests && $obj['blackBoxTests'] = $blackBoxTests;
         null !== $product && $obj['product'] = $product;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $recordType && $obj['recordType'] = $recordType;
 
         return $obj;
     }
 
     /**
      * @param list<BlackBoxTest|array{
-     *   id?: string|null, record_type?: string|null, result?: float|null
+     *   id?: string|null, recordType?: string|null, result?: float|null
      * }> $blackBoxTests
      */
     public function withBlackBoxTests(array $blackBoxTests): self
     {
         $obj = clone $this;
-        $obj['black_box_tests'] = $blackBoxTests;
+        $obj['blackBoxTests'] = $blackBoxTests;
 
         return $obj;
     }
@@ -89,7 +89,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

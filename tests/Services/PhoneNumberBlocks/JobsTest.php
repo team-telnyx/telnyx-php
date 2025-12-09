@@ -63,7 +63,7 @@ final class JobsTest extends TestCase
         }
 
         $result = $this->client->phoneNumberBlocks->jobs->deletePhoneNumberBlock([
-            'phone_number_block_id' => 'f3946371-7199-4261-9c3d-81a0d7935146',
+            'phoneNumberBlockID' => 'f3946371-7199-4261-9c3d-81a0d7935146',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -78,7 +78,7 @@ final class JobsTest extends TestCase
         }
 
         $result = $this->client->phoneNumberBlocks->jobs->deletePhoneNumberBlock([
-            'phone_number_block_id' => 'f3946371-7199-4261-9c3d-81a0d7935146',
+            'phoneNumberBlockID' => 'f3946371-7199-4261-9c3d-81a0d7935146',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

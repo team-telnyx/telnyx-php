@@ -29,20 +29,20 @@ final class UserAddressesService implements UserAddressesContract
      * Creates a user address.
      *
      * @param array{
-     *   business_name: string,
-     *   country_code: string,
-     *   first_name: string,
-     *   last_name: string,
+     *   businessName: string,
+     *   countryCode: string,
+     *   firstName: string,
+     *   lastName: string,
      *   locality: string,
-     *   street_address: string,
-     *   administrative_area?: string,
+     *   streetAddress: string,
+     *   administrativeArea?: string,
      *   borough?: string,
-     *   customer_reference?: string,
-     *   extended_address?: string,
+     *   customerReference?: string,
+     *   extendedAddress?: string,
      *   neighborhood?: string,
-     *   phone_number?: string,
-     *   postal_code?: string,
-     *   skip_address_verification?: string,
+     *   phoneNumber?: string,
+     *   postalCode?: string,
+     *   skipAddressVerification?: string,
      * }|UserAddressCreateParams $params
      *
      * @throws APIException
@@ -97,8 +97,8 @@ final class UserAddressesService implements UserAddressesContract
      *
      * @param array{
      *   filter?: array{
-     *     customer_reference?: array{contains?: string, eq?: string},
-     *     street_address?: array{contains?: string},
+     *     customerReference?: array{contains?: string, eq?: string},
+     *     streetAddress?: array{contains?: string},
      *   },
      *   page?: array{number?: int, size?: int},
      *   sort?: 'created_at'|'first_name'|'last_name'|'business_name'|'street_address'|Sort,

@@ -40,30 +40,30 @@ final class RoomCompositionListResponse implements BaseModel
      *
      * @param list<RoomComposition|array{
      *   id?: string|null,
-     *   completed_at?: \DateTimeInterface|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   download_url?: string|null,
-     *   duration_secs?: int|null,
-     *   ended_at?: \DateTimeInterface|null,
+     *   completedAt?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   downloadURL?: string|null,
+     *   durationSecs?: int|null,
+     *   endedAt?: \DateTimeInterface|null,
      *   format?: value-of<Format>|null,
-     *   record_type?: string|null,
-     *   room_id?: string|null,
-     *   session_id?: string|null,
-     *   size_mb?: float|null,
-     *   started_at?: \DateTimeInterface|null,
+     *   recordType?: string|null,
+     *   roomID?: string|null,
+     *   sessionID?: string|null,
+     *   sizeMB?: float|null,
+     *   startedAt?: \DateTimeInterface|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
-     *   user_id?: string|null,
-     *   video_layout?: array<string,VideoRegion>|null,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_event_url?: string|null,
-     *   webhook_timeout_secs?: int|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     *   userID?: string|null,
+     *   videoLayout?: array<string,VideoRegion>|null,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookEventURL?: string|null,
+     *   webhookTimeoutSecs?: int|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -81,24 +81,24 @@ final class RoomCompositionListResponse implements BaseModel
     /**
      * @param list<RoomComposition|array{
      *   id?: string|null,
-     *   completed_at?: \DateTimeInterface|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   download_url?: string|null,
-     *   duration_secs?: int|null,
-     *   ended_at?: \DateTimeInterface|null,
+     *   completedAt?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   downloadURL?: string|null,
+     *   durationSecs?: int|null,
+     *   endedAt?: \DateTimeInterface|null,
      *   format?: value-of<Format>|null,
-     *   record_type?: string|null,
-     *   room_id?: string|null,
-     *   session_id?: string|null,
-     *   size_mb?: float|null,
-     *   started_at?: \DateTimeInterface|null,
+     *   recordType?: string|null,
+     *   roomID?: string|null,
+     *   sessionID?: string|null,
+     *   sizeMB?: float|null,
+     *   startedAt?: \DateTimeInterface|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
-     *   user_id?: string|null,
-     *   video_layout?: array<string,VideoRegion>|null,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_event_url?: string|null,
-     *   webhook_timeout_secs?: int|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     *   userID?: string|null,
+     *   videoLayout?: array<string,VideoRegion>|null,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookEventURL?: string|null,
+     *   webhookTimeoutSecs?: int|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -111,10 +111,10 @@ final class RoomCompositionListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

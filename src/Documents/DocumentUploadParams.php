@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\DocumentsService::upload()
  *
  * @phpstan-type DocumentUploadParamsShape = array{
- *   url: string, customer_reference?: string, filename?: string, file: string
+ *   url: string, customerReference?: string, filename?: string, file: string
  * }
  */
 final class DocumentUploadParams implements BaseModel
@@ -34,8 +34,8 @@ final class DocumentUploadParams implements BaseModel
     /**
      * A customer reference string for customer look ups.
      */
-    #[Optional]
-    public ?string $customer_reference;
+    #[Optional('customer_reference')]
+    public ?string $customerReference;
 
     /**
      * The filename of the document.
@@ -76,7 +76,7 @@ final class DocumentUploadParams implements BaseModel
     public static function with(
         string $url,
         string $file,
-        ?string $customer_reference = null,
+        ?string $customerReference = null,
         ?string $filename = null,
     ): self {
         $obj = new self;
@@ -84,7 +84,7 @@ final class DocumentUploadParams implements BaseModel
         $obj['url'] = $url;
         $obj['file'] = $file;
 
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
         null !== $filename && $obj['filename'] = $filename;
 
         return $obj;
@@ -107,7 +107,7 @@ final class DocumentUploadParams implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }

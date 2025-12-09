@@ -12,18 +12,18 @@ use Telnyx\Webhooks\FaxDeliveredWebhookEvent\Payload\Status;
 
 /**
  * @phpstan-type PayloadShape = array{
- *   call_duration_secs?: int|null,
- *   client_state?: string|null,
- *   connection_id?: string|null,
+ *   callDurationSecs?: int|null,
+ *   clientState?: string|null,
+ *   connectionID?: string|null,
  *   direction?: value-of<Direction>|null,
- *   fax_id?: string|null,
+ *   faxID?: string|null,
  *   from?: string|null,
- *   media_name?: string|null,
- *   original_media_url?: string|null,
- *   page_count?: int|null,
+ *   mediaName?: string|null,
+ *   originalMediaURL?: string|null,
+ *   pageCount?: int|null,
  *   status?: value-of<Status>|null,
  *   to?: string|null,
- *   user_id?: string|null,
+ *   userID?: string|null,
  * }
  */
 final class Payload implements BaseModel
@@ -34,20 +34,20 @@ final class Payload implements BaseModel
     /**
      * The duration of the call in seconds.
      */
-    #[Optional]
-    public ?int $call_duration_secs;
+    #[Optional('call_duration_secs')]
+    public ?int $callDurationSecs;
 
     /**
      * State received from a command.
      */
-    #[Optional]
-    public ?string $client_state;
+    #[Optional('client_state')]
+    public ?string $clientState;
 
     /**
      * The ID of the connection used to send the fax.
      */
-    #[Optional]
-    public ?string $connection_id;
+    #[Optional('connection_id')]
+    public ?string $connectionID;
 
     /**
      * The direction of the fax.
@@ -60,8 +60,8 @@ final class Payload implements BaseModel
     /**
      * Identifies the fax.
      */
-    #[Optional]
-    public ?string $fax_id;
+    #[Optional('fax_id')]
+    public ?string $faxID;
 
     /**
      * The phone number, in E.164 format, the fax will be sent from.
@@ -72,20 +72,20 @@ final class Payload implements BaseModel
     /**
      * The media_name used for the fax's media. Must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. media_name and media_url/contents can't be submitted together.
      */
-    #[Optional]
-    public ?string $media_name;
+    #[Optional('media_name')]
+    public ?string $mediaName;
 
     /**
      * The original URL to the PDF used for the fax's media. If media_name was supplied, this is omitted.
      */
-    #[Optional]
-    public ?string $original_media_url;
+    #[Optional('original_media_url')]
+    public ?string $originalMediaURL;
 
     /**
      * Number of transferred pages.
      */
-    #[Optional]
-    public ?int $page_count;
+    #[Optional('page_count')]
+    public ?int $pageCount;
 
     /**
      * The status of the fax.
@@ -104,8 +104,8 @@ final class Payload implements BaseModel
     /**
      * Identifier of the user to whom the fax belongs.
      */
-    #[Optional]
-    public ?string $user_id;
+    #[Optional('user_id')]
+    public ?string $userID;
 
     public function __construct()
     {
@@ -121,33 +121,33 @@ final class Payload implements BaseModel
      * @param Status|value-of<Status> $status
      */
     public static function with(
-        ?int $call_duration_secs = null,
-        ?string $client_state = null,
-        ?string $connection_id = null,
+        ?int $callDurationSecs = null,
+        ?string $clientState = null,
+        ?string $connectionID = null,
         Direction|string|null $direction = null,
-        ?string $fax_id = null,
+        ?string $faxID = null,
         ?string $from = null,
-        ?string $media_name = null,
-        ?string $original_media_url = null,
-        ?int $page_count = null,
+        ?string $mediaName = null,
+        ?string $originalMediaURL = null,
+        ?int $pageCount = null,
         Status|string|null $status = null,
         ?string $to = null,
-        ?string $user_id = null,
+        ?string $userID = null,
     ): self {
         $obj = new self;
 
-        null !== $call_duration_secs && $obj['call_duration_secs'] = $call_duration_secs;
-        null !== $client_state && $obj['client_state'] = $client_state;
-        null !== $connection_id && $obj['connection_id'] = $connection_id;
+        null !== $callDurationSecs && $obj['callDurationSecs'] = $callDurationSecs;
+        null !== $clientState && $obj['clientState'] = $clientState;
+        null !== $connectionID && $obj['connectionID'] = $connectionID;
         null !== $direction && $obj['direction'] = $direction;
-        null !== $fax_id && $obj['fax_id'] = $fax_id;
+        null !== $faxID && $obj['faxID'] = $faxID;
         null !== $from && $obj['from'] = $from;
-        null !== $media_name && $obj['media_name'] = $media_name;
-        null !== $original_media_url && $obj['original_media_url'] = $original_media_url;
-        null !== $page_count && $obj['page_count'] = $page_count;
+        null !== $mediaName && $obj['mediaName'] = $mediaName;
+        null !== $originalMediaURL && $obj['originalMediaURL'] = $originalMediaURL;
+        null !== $pageCount && $obj['pageCount'] = $pageCount;
         null !== $status && $obj['status'] = $status;
         null !== $to && $obj['to'] = $to;
-        null !== $user_id && $obj['user_id'] = $user_id;
+        null !== $userID && $obj['userID'] = $userID;
 
         return $obj;
     }
@@ -158,7 +158,7 @@ final class Payload implements BaseModel
     public function withCallDurationSecs(int $callDurationSecs): self
     {
         $obj = clone $this;
-        $obj['call_duration_secs'] = $callDurationSecs;
+        $obj['callDurationSecs'] = $callDurationSecs;
 
         return $obj;
     }
@@ -169,7 +169,7 @@ final class Payload implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj['client_state'] = $clientState;
+        $obj['clientState'] = $clientState;
 
         return $obj;
     }
@@ -180,7 +180,7 @@ final class Payload implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj['connection_id'] = $connectionID;
+        $obj['connectionID'] = $connectionID;
 
         return $obj;
     }
@@ -204,7 +204,7 @@ final class Payload implements BaseModel
     public function withFaxID(string $faxID): self
     {
         $obj = clone $this;
-        $obj['fax_id'] = $faxID;
+        $obj['faxID'] = $faxID;
 
         return $obj;
     }
@@ -226,7 +226,7 @@ final class Payload implements BaseModel
     public function withMediaName(string $mediaName): self
     {
         $obj = clone $this;
-        $obj['media_name'] = $mediaName;
+        $obj['mediaName'] = $mediaName;
 
         return $obj;
     }
@@ -237,7 +237,7 @@ final class Payload implements BaseModel
     public function withOriginalMediaURL(string $originalMediaURL): self
     {
         $obj = clone $this;
-        $obj['original_media_url'] = $originalMediaURL;
+        $obj['originalMediaURL'] = $originalMediaURL;
 
         return $obj;
     }
@@ -248,7 +248,7 @@ final class Payload implements BaseModel
     public function withPageCount(int $pageCount): self
     {
         $obj = clone $this;
-        $obj['page_count'] = $pageCount;
+        $obj['pageCount'] = $pageCount;
 
         return $obj;
     }
@@ -283,7 +283,7 @@ final class Payload implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj['user_id'] = $userID;
+        $obj['userID'] = $userID;
 
         return $obj;
     }

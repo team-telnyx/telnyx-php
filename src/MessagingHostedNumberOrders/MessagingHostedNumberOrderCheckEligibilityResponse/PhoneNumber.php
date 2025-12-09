@@ -13,8 +13,8 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilit
  * @phpstan-type PhoneNumberShape = array{
  *   detail?: string|null,
  *   eligible?: bool|null,
- *   eligible_status?: value-of<EligibleStatus>|null,
- *   phone_number?: string|null,
+ *   eligibleStatus?: value-of<EligibleStatus>|null,
+ *   phoneNumber?: string|null,
  * }
  */
 final class PhoneNumber implements BaseModel
@@ -37,16 +37,16 @@ final class PhoneNumber implements BaseModel
     /**
      * The eligibility status of the phone number.
      *
-     * @var value-of<EligibleStatus>|null $eligible_status
+     * @var value-of<EligibleStatus>|null $eligibleStatus
      */
-    #[Optional(enum: EligibleStatus::class)]
-    public ?string $eligible_status;
+    #[Optional('eligible_status', enum: EligibleStatus::class)]
+    public ?string $eligibleStatus;
 
     /**
      * The phone number in e164 format.
      */
-    #[Optional]
-    public ?string $phone_number;
+    #[Optional('phone_number')]
+    public ?string $phoneNumber;
 
     public function __construct()
     {
@@ -58,20 +58,20 @@ final class PhoneNumber implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param EligibleStatus|value-of<EligibleStatus> $eligible_status
+     * @param EligibleStatus|value-of<EligibleStatus> $eligibleStatus
      */
     public static function with(
         ?string $detail = null,
         ?bool $eligible = null,
-        EligibleStatus|string|null $eligible_status = null,
-        ?string $phone_number = null,
+        EligibleStatus|string|null $eligibleStatus = null,
+        ?string $phoneNumber = null,
     ): self {
         $obj = new self;
 
         null !== $detail && $obj['detail'] = $detail;
         null !== $eligible && $obj['eligible'] = $eligible;
-        null !== $eligible_status && $obj['eligible_status'] = $eligible_status;
-        null !== $phone_number && $obj['phone_number'] = $phone_number;
+        null !== $eligibleStatus && $obj['eligibleStatus'] = $eligibleStatus;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -107,7 +107,7 @@ final class PhoneNumber implements BaseModel
         EligibleStatus|string $eligibleStatus
     ): self {
         $obj = clone $this;
-        $obj['eligible_status'] = $eligibleStatus;
+        $obj['eligibleStatus'] = $eligibleStatus;
 
         return $obj;
     }
@@ -118,7 +118,7 @@ final class PhoneNumber implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }

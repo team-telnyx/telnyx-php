@@ -11,10 +11,10 @@ use Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonResponse\Status;
 
 /**
  * @phpstan-type SiprecSiprecSidJsonResponseShape = array{
- *   account_sid?: string|null,
- *   call_sid?: string|null,
- *   date_updated?: string|null,
- *   error_code?: string|null,
+ *   accountSid?: string|null,
+ *   callSid?: string|null,
+ *   dateUpdated?: string|null,
+ *   errorCode?: string|null,
  *   sid?: string|null,
  *   status?: value-of<Status>|null,
  *   uri?: string|null,
@@ -28,26 +28,26 @@ final class SiprecSiprecSidJsonResponse implements BaseModel
     /**
      * The id of the account the resource belongs to.
      */
-    #[Optional]
-    public ?string $account_sid;
+    #[Optional('account_sid')]
+    public ?string $accountSid;
 
     /**
      * The id of the call the resource belongs to.
      */
-    #[Optional]
-    public ?string $call_sid;
+    #[Optional('call_sid')]
+    public ?string $callSid;
 
     /**
      * The date and time the siprec session was last updated.
      */
-    #[Optional]
-    public ?string $date_updated;
+    #[Optional('date_updated')]
+    public ?string $dateUpdated;
 
     /**
      * The error code of the siprec session.
      */
-    #[Optional]
-    public ?string $error_code;
+    #[Optional('error_code')]
+    public ?string $errorCode;
 
     /**
      * The SID of the siprec session.
@@ -82,20 +82,20 @@ final class SiprecSiprecSidJsonResponse implements BaseModel
      * @param Status|value-of<Status> $status
      */
     public static function with(
-        ?string $account_sid = null,
-        ?string $call_sid = null,
-        ?string $date_updated = null,
-        ?string $error_code = null,
+        ?string $accountSid = null,
+        ?string $callSid = null,
+        ?string $dateUpdated = null,
+        ?string $errorCode = null,
         ?string $sid = null,
         Status|string|null $status = null,
         ?string $uri = null,
     ): self {
         $obj = new self;
 
-        null !== $account_sid && $obj['account_sid'] = $account_sid;
-        null !== $call_sid && $obj['call_sid'] = $call_sid;
-        null !== $date_updated && $obj['date_updated'] = $date_updated;
-        null !== $error_code && $obj['error_code'] = $error_code;
+        null !== $accountSid && $obj['accountSid'] = $accountSid;
+        null !== $callSid && $obj['callSid'] = $callSid;
+        null !== $dateUpdated && $obj['dateUpdated'] = $dateUpdated;
+        null !== $errorCode && $obj['errorCode'] = $errorCode;
         null !== $sid && $obj['sid'] = $sid;
         null !== $status && $obj['status'] = $status;
         null !== $uri && $obj['uri'] = $uri;
@@ -109,7 +109,7 @@ final class SiprecSiprecSidJsonResponse implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj['account_sid'] = $accountSid;
+        $obj['accountSid'] = $accountSid;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class SiprecSiprecSidJsonResponse implements BaseModel
     public function withCallSid(string $callSid): self
     {
         $obj = clone $this;
-        $obj['call_sid'] = $callSid;
+        $obj['callSid'] = $callSid;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class SiprecSiprecSidJsonResponse implements BaseModel
     public function withDateUpdated(string $dateUpdated): self
     {
         $obj = clone $this;
-        $obj['date_updated'] = $dateUpdated;
+        $obj['dateUpdated'] = $dateUpdated;
 
         return $obj;
     }
@@ -142,7 +142,7 @@ final class SiprecSiprecSidJsonResponse implements BaseModel
     public function withErrorCode(string $errorCode): self
     {
         $obj = clone $this;
-        $obj['error_code'] = $errorCode;
+        $obj['errorCode'] = $errorCode;
 
         return $obj;
     }

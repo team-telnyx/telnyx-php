@@ -45,12 +45,12 @@ final class EmbeddingResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Data|array{
-     *   created_at?: string|null,
-     *   finished_at?: string|null,
+     *   createdAt?: string|null,
+     *   finishedAt?: string|null,
      *   status?: string|null,
-     *   task_id?: string|null,
-     *   task_name?: string|null,
-     *   user_id?: string|null,
+     *   taskID?: string|null,
+     *   taskName?: string|null,
+     *   userID?: string|null,
      * } $data
      */
     public static function with(Data|array $data): self
@@ -64,12 +64,12 @@ final class EmbeddingResponse implements BaseModel
 
     /**
      * @param Data|array{
-     *   created_at?: string|null,
-     *   finished_at?: string|null,
+     *   createdAt?: string|null,
+     *   finishedAt?: string|null,
      *   status?: string|null,
-     *   task_id?: string|null,
-     *   task_name?: string|null,
-     *   user_id?: string|null,
+     *   taskID?: string|null,
+     *   taskName?: string|null,
+     *   userID?: string|null,
      * } $data
      */
     public function withData(Data|array $data): self

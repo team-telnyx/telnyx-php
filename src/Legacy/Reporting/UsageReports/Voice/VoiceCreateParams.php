@@ -16,13 +16,13 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Legacy\Reporting\UsageReports\VoiceService::create()
  *
  * @phpstan-type VoiceCreateParamsShape = array{
- *   end_time: \DateTimeInterface,
- *   start_time: \DateTimeInterface,
- *   aggregation_type?: int,
+ *   endTime: \DateTimeInterface,
+ *   startTime: \DateTimeInterface,
+ *   aggregationType?: int,
  *   connections?: list<int>,
- *   managed_accounts?: list<string>,
- *   product_breakdown?: int,
- *   select_all_managed_accounts?: bool,
+ *   managedAccounts?: list<string>,
+ *   productBreakdown?: int,
+ *   selectAllManagedAccounts?: bool,
  * }
  */
 final class VoiceCreateParams implements BaseModel
@@ -34,20 +34,20 @@ final class VoiceCreateParams implements BaseModel
     /**
      * End time in ISO format.
      */
-    #[Required]
-    public \DateTimeInterface $end_time;
+    #[Required('end_time')]
+    public \DateTimeInterface $endTime;
 
     /**
      * Start time in ISO format.
      */
-    #[Required]
-    public \DateTimeInterface $start_time;
+    #[Required('start_time')]
+    public \DateTimeInterface $startTime;
 
     /**
      * Aggregation type: All = 0, By Connections = 1, By Tags = 2, By Billing Group = 3.
      */
-    #[Optional]
-    public ?int $aggregation_type;
+    #[Optional('aggregation_type')]
+    public ?int $aggregationType;
 
     /**
      * List of connections to filter by.
@@ -60,29 +60,29 @@ final class VoiceCreateParams implements BaseModel
     /**
      * List of managed accounts to include.
      *
-     * @var list<string>|null $managed_accounts
+     * @var list<string>|null $managedAccounts
      */
-    #[Optional(list: 'string')]
-    public ?array $managed_accounts;
+    #[Optional('managed_accounts', list: 'string')]
+    public ?array $managedAccounts;
 
     /**
      * Product breakdown type: No breakdown = 0, DID vs Toll-free = 1, Country = 2, DID vs Toll-free per Country = 3.
      */
-    #[Optional]
-    public ?int $product_breakdown;
+    #[Optional('product_breakdown')]
+    public ?int $productBreakdown;
 
     /**
      * Whether to select all managed accounts.
      */
-    #[Optional]
-    public ?bool $select_all_managed_accounts;
+    #[Optional('select_all_managed_accounts')]
+    public ?bool $selectAllManagedAccounts;
 
     /**
      * `new VoiceCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * VoiceCreateParams::with(end_time: ..., start_time: ...)
+     * VoiceCreateParams::with(endTime: ..., startTime: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -102,27 +102,27 @@ final class VoiceCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<int> $connections
-     * @param list<string> $managed_accounts
+     * @param list<string> $managedAccounts
      */
     public static function with(
-        \DateTimeInterface $end_time,
-        \DateTimeInterface $start_time,
-        ?int $aggregation_type = null,
+        \DateTimeInterface $endTime,
+        \DateTimeInterface $startTime,
+        ?int $aggregationType = null,
         ?array $connections = null,
-        ?array $managed_accounts = null,
-        ?int $product_breakdown = null,
-        ?bool $select_all_managed_accounts = null,
+        ?array $managedAccounts = null,
+        ?int $productBreakdown = null,
+        ?bool $selectAllManagedAccounts = null,
     ): self {
         $obj = new self;
 
-        $obj['end_time'] = $end_time;
-        $obj['start_time'] = $start_time;
+        $obj['endTime'] = $endTime;
+        $obj['startTime'] = $startTime;
 
-        null !== $aggregation_type && $obj['aggregation_type'] = $aggregation_type;
+        null !== $aggregationType && $obj['aggregationType'] = $aggregationType;
         null !== $connections && $obj['connections'] = $connections;
-        null !== $managed_accounts && $obj['managed_accounts'] = $managed_accounts;
-        null !== $product_breakdown && $obj['product_breakdown'] = $product_breakdown;
-        null !== $select_all_managed_accounts && $obj['select_all_managed_accounts'] = $select_all_managed_accounts;
+        null !== $managedAccounts && $obj['managedAccounts'] = $managedAccounts;
+        null !== $productBreakdown && $obj['productBreakdown'] = $productBreakdown;
+        null !== $selectAllManagedAccounts && $obj['selectAllManagedAccounts'] = $selectAllManagedAccounts;
 
         return $obj;
     }
@@ -133,7 +133,7 @@ final class VoiceCreateParams implements BaseModel
     public function withEndTime(\DateTimeInterface $endTime): self
     {
         $obj = clone $this;
-        $obj['end_time'] = $endTime;
+        $obj['endTime'] = $endTime;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class VoiceCreateParams implements BaseModel
     public function withStartTime(\DateTimeInterface $startTime): self
     {
         $obj = clone $this;
-        $obj['start_time'] = $startTime;
+        $obj['startTime'] = $startTime;
 
         return $obj;
     }
@@ -155,7 +155,7 @@ final class VoiceCreateParams implements BaseModel
     public function withAggregationType(int $aggregationType): self
     {
         $obj = clone $this;
-        $obj['aggregation_type'] = $aggregationType;
+        $obj['aggregationType'] = $aggregationType;
 
         return $obj;
     }
@@ -181,7 +181,7 @@ final class VoiceCreateParams implements BaseModel
     public function withManagedAccounts(array $managedAccounts): self
     {
         $obj = clone $this;
-        $obj['managed_accounts'] = $managedAccounts;
+        $obj['managedAccounts'] = $managedAccounts;
 
         return $obj;
     }
@@ -192,7 +192,7 @@ final class VoiceCreateParams implements BaseModel
     public function withProductBreakdown(int $productBreakdown): self
     {
         $obj = clone $this;
-        $obj['product_breakdown'] = $productBreakdown;
+        $obj['productBreakdown'] = $productBreakdown;
 
         return $obj;
     }
@@ -204,7 +204,7 @@ final class VoiceCreateParams implements BaseModel
         bool $selectAllManagedAccounts
     ): self {
         $obj = clone $this;
-        $obj['select_all_managed_accounts'] = $selectAllManagedAccounts;
+        $obj['selectAllManagedAccounts'] = $selectAllManagedAccounts;
 
         return $obj;
     }

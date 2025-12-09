@@ -85,22 +85,22 @@ final class PortoutsService implements PortoutsContract
      *
      * @param array{
      *   filter?: array{
-     *     carrier_name?: string,
-     *     country_code?: string,
-     *     country_code_in?: list<string>,
-     *     foc_date?: string|\DateTimeInterface,
-     *     inserted_at?: array{
+     *     carrierName?: string,
+     *     countryCode?: string,
+     *     countryCodeIn?: list<string>,
+     *     focDate?: string|\DateTimeInterface,
+     *     insertedAt?: array{
      *       gte?: string|\DateTimeInterface, lte?: string|\DateTimeInterface
      *     },
-     *     phone_number?: string,
+     *     phoneNumber?: string,
      *     pon?: string,
-     *     ported_out_at?: array{
+     *     portedOutAt?: array{
      *       gte?: string|\DateTimeInterface, lte?: string|\DateTimeInterface
      *     },
      *     spid?: string,
      *     status?: 'pending'|'authorized'|'ported'|'rejected'|'rejected-pending'|'canceled'|Status,
-     *     status_in?: list<'pending'|'authorized'|'ported'|'rejected'|'rejected-pending'|'canceled'|StatusIn>,
-     *     support_key?: string,
+     *     statusIn?: list<'pending'|'authorized'|'ported'|'rejected'|'rejected-pending'|'canceled'|StatusIn>,
+     *     supportKey?: string,
      *   },
      *   page?: array{number?: int, size?: int},
      * }|PortoutListParams $params
@@ -168,7 +168,7 @@ final class PortoutsService implements PortoutsContract
      *
      * @param PortoutUpdateStatusParams\Status|value-of<PortoutUpdateStatusParams\Status> $status
      * @param array{
-     *   id: string, reason: string, host_messaging?: bool
+     *   id: string, reason: string, hostMessaging?: bool
      * }|PortoutUpdateStatusParams $params
      *
      * @throws APIException

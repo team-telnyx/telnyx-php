@@ -8,8 +8,8 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams;
+use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\Type;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListParams;
-use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Filter\Type;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListResponse;
 use Telnyx\MobilePushCredentials\PushCredentialResponse;
 use Telnyx\RequestOptions;
@@ -27,11 +27,19 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
      *
      * Creates a new mobile push credential
      *
+     * @param array{
+     *   alias: string,
+     *   certificate: string,
+     *   privateKey: string,
+     *   type: 'android'|Type,
+     *   projectAccountJsonFile: array<string,mixed>,
+     * }|MobilePushCredentialCreateParams $params
+     *
      * @throws APIException
      */
     public function create(
-        mixed $params,
-        ?RequestOptions $requestOptions = null
+        array|MobilePushCredentialCreateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): PushCredentialResponse {
         [$parsed, $options] = MobilePushCredentialCreateParams::parseRequest(
             $params,
@@ -78,7 +86,10 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
      * List mobile push credentials
      *
      * @param array{
-     *   filter?: array{alias?: string, type?: 'ios'|'android'|Type},
+     *   filter?: array{
+     *     alias?: string,
+     *     type?: 'ios'|'android'|MobilePushCredentialListParams\Filter\Type,
+     *   },
      *   page?: array{number?: int, size?: int},
      * }|MobilePushCredentialListParams $params
      *

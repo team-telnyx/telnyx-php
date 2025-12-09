@@ -12,16 +12,16 @@ use Telnyx\Messsages\RcsAgentMessage\Event\EventType;
 /**
  * RCS Event to send to the recipient.
  *
- * @phpstan-type EventShape = array{event_type?: value-of<EventType>|null}
+ * @phpstan-type EventShape = array{eventType?: value-of<EventType>|null}
  */
 final class Event implements BaseModel
 {
     /** @use SdkModel<EventShape> */
     use SdkModel;
 
-    /** @var value-of<EventType>|null $event_type */
-    #[Optional(enum: EventType::class)]
-    public ?string $event_type;
+    /** @var value-of<EventType>|null $eventType */
+    #[Optional('event_type', enum: EventType::class)]
+    public ?string $eventType;
 
     public function __construct()
     {
@@ -33,13 +33,13 @@ final class Event implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param EventType|value-of<EventType> $event_type
+     * @param EventType|value-of<EventType> $eventType
      */
-    public static function with(EventType|string|null $event_type = null): self
+    public static function with(EventType|string|null $eventType = null): self
     {
         $obj = new self;
 
-        null !== $event_type && $obj['event_type'] = $event_type;
+        null !== $eventType && $obj['eventType'] = $eventType;
 
         return $obj;
     }
@@ -50,7 +50,7 @@ final class Event implements BaseModel
     public function withEventType(EventType|string $eventType): self
     {
         $obj = clone $this;
-        $obj['event_type'] = $eventType;
+        $obj['eventType'] = $eventType;
 
         return $obj;
     }

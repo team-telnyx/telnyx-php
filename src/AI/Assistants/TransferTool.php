@@ -55,8 +55,8 @@ final class TransferTool implements BaseModel
      * @param InferenceEmbeddingTransferToolParams|array{
      *   from: string,
      *   targets: list<Target>,
-     *   custom_headers?: list<CustomHeader>|null,
-     *   warm_transfer_instructions?: string|null,
+     *   customHeaders?: list<CustomHeader>|null,
+     *   warmTransferInstructions?: string|null,
      * } $transfer
      * @param Type|value-of<Type> $type
      */
@@ -76,8 +76,8 @@ final class TransferTool implements BaseModel
      * @param InferenceEmbeddingTransferToolParams|array{
      *   from: string,
      *   targets: list<Target>,
-     *   custom_headers?: list<CustomHeader>|null,
-     *   warm_transfer_instructions?: string|null,
+     *   customHeaders?: list<CustomHeader>|null,
+     *   warmTransferInstructions?: string|null,
      * } $transfer
      */
     public function withTransfer(

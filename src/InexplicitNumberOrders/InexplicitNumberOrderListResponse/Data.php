@@ -15,13 +15,13 @@ use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderListResponse\Data\Orderin
 /**
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   billing_group_id?: string|null,
- *   connection_id?: string|null,
- *   created_at?: \DateTimeInterface|null,
- *   customer_reference?: string|null,
- *   messaging_profile_id?: string|null,
- *   ordering_groups?: list<OrderingGroup>|null,
- *   updated_at?: \DateTimeInterface|null,
+ *   billingGroupID?: string|null,
+ *   connectionID?: string|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   customerReference?: string|null,
+ *   messagingProfileID?: string|null,
+ *   orderingGroups?: list<OrderingGroup>|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class Data implements BaseModel
@@ -38,42 +38,42 @@ final class Data implements BaseModel
     /**
      * Billing group id to apply to phone numbers that are purchased.
      */
-    #[Optional]
-    public ?string $billing_group_id;
+    #[Optional('billing_group_id')]
+    public ?string $billingGroupID;
 
     /**
      * Connection id to apply to phone numbers that are purchased.
      */
-    #[Optional]
-    public ?string $connection_id;
+    #[Optional('connection_id')]
+    public ?string $connectionID;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
     /**
      * Reference label for the customer.
      */
-    #[Optional]
-    public ?string $customer_reference;
+    #[Optional('customer_reference')]
+    public ?string $customerReference;
 
     /**
      * Messaging profile id to apply to phone numbers that are purchased.
      */
-    #[Optional]
-    public ?string $messaging_profile_id;
+    #[Optional('messaging_profile_id')]
+    public ?string $messagingProfileID;
 
-    /** @var list<OrderingGroup>|null $ordering_groups */
-    #[Optional(list: OrderingGroup::class)]
-    public ?array $ordering_groups;
+    /** @var list<OrderingGroup>|null $orderingGroups */
+    #[Optional('ordering_groups', list: OrderingGroup::class)]
+    public ?array $orderingGroups;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
     {
@@ -86,45 +86,45 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<OrderingGroup|array{
-     *   administrative_area?: string|null,
-     *   count_allocated?: int|null,
-     *   count_requested?: int|null,
-     *   country_iso?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   error_reason?: string|null,
-     *   exclude_held_numbers?: bool|null,
-     *   national_destination_code?: string|null,
+     *   administrativeArea?: string|null,
+     *   countAllocated?: int|null,
+     *   countRequested?: int|null,
+     *   countryISO?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   errorReason?: string|null,
+     *   excludeHeldNumbers?: bool|null,
+     *   nationalDestinationCode?: string|null,
      *   orders?: list<Order>|null,
-     *   phone_number_type?: string|null,
-     *   phone_number_contains_?: string|null,
-     *   phone_number_ends_with_?: string|null,
-     *   phone_number_starts_with_?: string|null,
+     *   phoneNumberType?: string|null,
+     *   phoneNumberContains?: string|null,
+     *   phoneNumberEndsWith?: string|null,
+     *   phoneNumberStartsWith?: string|null,
      *   quickship?: bool|null,
      *   status?: value-of<Status>|null,
      *   strategy?: value-of<Strategy>|null,
-     *   updated_at?: \DateTimeInterface|null,
-     * }> $ordering_groups
+     *   updatedAt?: \DateTimeInterface|null,
+     * }> $orderingGroups
      */
     public static function with(
         ?string $id = null,
-        ?string $billing_group_id = null,
-        ?string $connection_id = null,
-        ?\DateTimeInterface $created_at = null,
-        ?string $customer_reference = null,
-        ?string $messaging_profile_id = null,
-        ?array $ordering_groups = null,
-        ?\DateTimeInterface $updated_at = null,
+        ?string $billingGroupID = null,
+        ?string $connectionID = null,
+        ?\DateTimeInterface $createdAt = null,
+        ?string $customerReference = null,
+        ?string $messagingProfileID = null,
+        ?array $orderingGroups = null,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $billing_group_id && $obj['billing_group_id'] = $billing_group_id;
-        null !== $connection_id && $obj['connection_id'] = $connection_id;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
-        null !== $messaging_profile_id && $obj['messaging_profile_id'] = $messaging_profile_id;
-        null !== $ordering_groups && $obj['ordering_groups'] = $ordering_groups;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $billingGroupID && $obj['billingGroupID'] = $billingGroupID;
+        null !== $connectionID && $obj['connectionID'] = $connectionID;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
+        null !== $messagingProfileID && $obj['messagingProfileID'] = $messagingProfileID;
+        null !== $orderingGroups && $obj['orderingGroups'] = $orderingGroups;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -146,7 +146,7 @@ final class Data implements BaseModel
     public function withBillingGroupID(string $billingGroupID): self
     {
         $obj = clone $this;
-        $obj['billing_group_id'] = $billingGroupID;
+        $obj['billingGroupID'] = $billingGroupID;
 
         return $obj;
     }
@@ -157,7 +157,7 @@ final class Data implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj['connection_id'] = $connectionID;
+        $obj['connectionID'] = $connectionID;
 
         return $obj;
     }
@@ -168,7 +168,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -179,7 +179,7 @@ final class Data implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }
@@ -190,36 +190,36 @@ final class Data implements BaseModel
     public function withMessagingProfileID(string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj['messaging_profile_id'] = $messagingProfileID;
+        $obj['messagingProfileID'] = $messagingProfileID;
 
         return $obj;
     }
 
     /**
      * @param list<OrderingGroup|array{
-     *   administrative_area?: string|null,
-     *   count_allocated?: int|null,
-     *   count_requested?: int|null,
-     *   country_iso?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   error_reason?: string|null,
-     *   exclude_held_numbers?: bool|null,
-     *   national_destination_code?: string|null,
+     *   administrativeArea?: string|null,
+     *   countAllocated?: int|null,
+     *   countRequested?: int|null,
+     *   countryISO?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   errorReason?: string|null,
+     *   excludeHeldNumbers?: bool|null,
+     *   nationalDestinationCode?: string|null,
      *   orders?: list<Order>|null,
-     *   phone_number_type?: string|null,
-     *   phone_number_contains_?: string|null,
-     *   phone_number_ends_with_?: string|null,
-     *   phone_number_starts_with_?: string|null,
+     *   phoneNumberType?: string|null,
+     *   phoneNumberContains?: string|null,
+     *   phoneNumberEndsWith?: string|null,
+     *   phoneNumberStartsWith?: string|null,
      *   quickship?: bool|null,
      *   status?: value-of<Status>|null,
      *   strategy?: value-of<Strategy>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $orderingGroups
      */
     public function withOrderingGroups(array $orderingGroups): self
     {
         $obj = clone $this;
-        $obj['ordering_groups'] = $orderingGroups;
+        $obj['orderingGroups'] = $orderingGroups;
 
         return $obj;
     }
@@ -230,7 +230,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

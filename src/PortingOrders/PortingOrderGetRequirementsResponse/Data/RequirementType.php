@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type RequirementTypeShape = array{
  *   id?: string|null,
- *   acceptance_criteria?: array<string,mixed>|null,
+ *   acceptanceCriteria?: array<string,mixed>|null,
  *   description?: string|null,
  *   example?: string|null,
  *   name?: string|null,
@@ -34,10 +34,10 @@ final class RequirementType implements BaseModel
     /**
      * The acceptance criteria for the requirement type.
      *
-     * @var array<string,mixed>|null $acceptance_criteria
+     * @var array<string,mixed>|null $acceptanceCriteria
      */
-    #[Optional(map: 'mixed')]
-    public ?array $acceptance_criteria;
+    #[Optional('acceptance_criteria', map: 'mixed')]
+    public ?array $acceptanceCriteria;
 
     /**
      * A description of the requirement type.
@@ -73,11 +73,11 @@ final class RequirementType implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,mixed> $acceptance_criteria
+     * @param array<string,mixed> $acceptanceCriteria
      */
     public static function with(
         ?string $id = null,
-        ?array $acceptance_criteria = null,
+        ?array $acceptanceCriteria = null,
         ?string $description = null,
         ?string $example = null,
         ?string $name = null,
@@ -86,7 +86,7 @@ final class RequirementType implements BaseModel
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $acceptance_criteria && $obj['acceptance_criteria'] = $acceptance_criteria;
+        null !== $acceptanceCriteria && $obj['acceptanceCriteria'] = $acceptanceCriteria;
         null !== $description && $obj['description'] = $description;
         null !== $example && $obj['example'] = $example;
         null !== $name && $obj['name'] = $name;
@@ -114,7 +114,7 @@ final class RequirementType implements BaseModel
     public function withAcceptanceCriteria(array $acceptanceCriteria): self
     {
         $obj = clone $this;
-        $obj['acceptance_criteria'] = $acceptanceCriteria;
+        $obj['acceptanceCriteria'] = $acceptanceCriteria;
 
         return $obj;
     }

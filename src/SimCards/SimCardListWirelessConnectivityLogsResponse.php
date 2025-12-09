@@ -41,28 +41,28 @@ final class SimCardListWirelessConnectivityLogsResponse implements BaseModel
      * @param list<Data|array{
      *   id?: int|null,
      *   apn?: string|null,
-     *   cell_id?: string|null,
-     *   created_at?: string|null,
+     *   cellID?: string|null,
+     *   createdAt?: string|null,
      *   imei?: string|null,
      *   imsi?: string|null,
      *   ipv4?: string|null,
      *   ipv6?: string|null,
-     *   last_seen?: string|null,
-     *   log_type?: value-of<LogType>|null,
-     *   mobile_country_code?: string|null,
-     *   mobile_network_code?: string|null,
-     *   radio_access_technology?: string|null,
-     *   record_type?: string|null,
-     *   sim_card_id?: string|null,
-     *   start_time?: string|null,
+     *   lastSeen?: string|null,
+     *   logType?: value-of<LogType>|null,
+     *   mobileCountryCode?: string|null,
+     *   mobileNetworkCode?: string|null,
+     *   radioAccessTechnology?: string|null,
+     *   recordType?: string|null,
+     *   simCardID?: string|null,
+     *   startTime?: string|null,
      *   state?: string|null,
-     *   stop_time?: string|null,
+     *   stopTime?: string|null,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -81,22 +81,22 @@ final class SimCardListWirelessConnectivityLogsResponse implements BaseModel
      * @param list<Data|array{
      *   id?: int|null,
      *   apn?: string|null,
-     *   cell_id?: string|null,
-     *   created_at?: string|null,
+     *   cellID?: string|null,
+     *   createdAt?: string|null,
      *   imei?: string|null,
      *   imsi?: string|null,
      *   ipv4?: string|null,
      *   ipv6?: string|null,
-     *   last_seen?: string|null,
-     *   log_type?: value-of<LogType>|null,
-     *   mobile_country_code?: string|null,
-     *   mobile_network_code?: string|null,
-     *   radio_access_technology?: string|null,
-     *   record_type?: string|null,
-     *   sim_card_id?: string|null,
-     *   start_time?: string|null,
+     *   lastSeen?: string|null,
+     *   logType?: value-of<LogType>|null,
+     *   mobileCountryCode?: string|null,
+     *   mobileNetworkCode?: string|null,
+     *   radioAccessTechnology?: string|null,
+     *   recordType?: string|null,
+     *   simCardID?: string|null,
+     *   startTime?: string|null,
      *   state?: string|null,
-     *   stop_time?: string|null,
+     *   stopTime?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -109,10 +109,10 @@ final class SimCardListWirelessConnectivityLogsResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

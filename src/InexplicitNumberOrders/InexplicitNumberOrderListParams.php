@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\InexplicitNumberOrdersService::list()
  *
  * @phpstan-type InexplicitNumberOrderListParamsShape = array{
- *   page_number?: int, page_size?: int
+ *   pageNumber?: int, pageSize?: int
  * }
  */
 final class InexplicitNumberOrderListParams implements BaseModel
@@ -28,13 +28,13 @@ final class InexplicitNumberOrderListParams implements BaseModel
      * The page number to load.
      */
     #[Optional]
-    public ?int $page_number;
+    public ?int $pageNumber;
 
     /**
      * The size of the page.
      */
     #[Optional]
-    public ?int $page_size;
+    public ?int $pageSize;
 
     public function __construct()
     {
@@ -47,13 +47,13 @@ final class InexplicitNumberOrderListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?int $page_number = null,
-        ?int $page_size = null
+        ?int $pageNumber = null,
+        ?int $pageSize = null
     ): self {
         $obj = new self;
 
-        null !== $page_number && $obj['page_number'] = $page_number;
-        null !== $page_size && $obj['page_size'] = $page_size;
+        null !== $pageNumber && $obj['pageNumber'] = $pageNumber;
+        null !== $pageSize && $obj['pageSize'] = $pageSize;
 
         return $obj;
     }
@@ -64,7 +64,7 @@ final class InexplicitNumberOrderListParams implements BaseModel
     public function withPageNumber(int $pageNumber): self
     {
         $obj = clone $this;
-        $obj['page_number'] = $pageNumber;
+        $obj['pageNumber'] = $pageNumber;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class InexplicitNumberOrderListParams implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj['page_size'] = $pageSize;
+        $obj['pageSize'] = $pageSize;
 
         return $obj;
     }

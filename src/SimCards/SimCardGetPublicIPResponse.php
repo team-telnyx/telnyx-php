@@ -32,13 +32,13 @@ final class SimCardGetPublicIPResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Data|array{
-     *   created_at?: string|null,
+     *   createdAt?: string|null,
      *   ip?: string|null,
-     *   record_type?: string|null,
-     *   region_code?: string|null,
-     *   sim_card_id?: string|null,
+     *   recordType?: string|null,
+     *   regionCode?: string|null,
+     *   simCardID?: string|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -52,13 +52,13 @@ final class SimCardGetPublicIPResponse implements BaseModel
 
     /**
      * @param Data|array{
-     *   created_at?: string|null,
+     *   createdAt?: string|null,
      *   ip?: string|null,
-     *   record_type?: string|null,
-     *   region_code?: string|null,
-     *   sim_card_id?: string|null,
+     *   recordType?: string|null,
+     *   regionCode?: string|null,
+     *   simCardID?: string|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public function withData(Data|array $data): self

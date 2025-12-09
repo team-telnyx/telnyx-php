@@ -37,8 +37,8 @@ final class GlobalIPAssignmentHealthGetResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   global_ip?: GlobalIP|null,
-     *   global_ip_assignment?: GlobalIPAssignment|null,
+     *   globalIP?: GlobalIP|null,
+     *   globalIPAssignment?: GlobalIPAssignment|null,
      *   health?: Health|null,
      *   timestamp?: \DateTimeInterface|null,
      * }> $data
@@ -54,8 +54,8 @@ final class GlobalIPAssignmentHealthGetResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   global_ip?: GlobalIP|null,
-     *   global_ip_assignment?: GlobalIPAssignment|null,
+     *   globalIP?: GlobalIP|null,
+     *   globalIPAssignment?: GlobalIPAssignment|null,
      *   health?: Health|null,
      *   timestamp?: \DateTimeInterface|null,
      * }> $data

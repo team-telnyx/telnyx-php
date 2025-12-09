@@ -17,17 +17,17 @@ use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressCreateParams\Country
  * @see Telnyx\Services\DynamicEmergencyAddressesService::create()
  *
  * @phpstan-type DynamicEmergencyAddressCreateParamsShape = array{
- *   administrative_area: string,
- *   country_code: CountryCode|value-of<CountryCode>,
- *   house_number: string,
+ *   administrativeArea: string,
+ *   countryCode: CountryCode|value-of<CountryCode>,
+ *   houseNumber: string,
  *   locality: string,
- *   postal_code: string,
- *   street_name: string,
- *   extended_address?: string,
- *   house_suffix?: string,
- *   street_post_directional?: string,
- *   street_pre_directional?: string,
- *   street_suffix?: string,
+ *   postalCode: string,
+ *   streetName: string,
+ *   extendedAddress?: string,
+ *   houseSuffix?: string,
+ *   streetPostDirectional?: string,
+ *   streetPreDirectional?: string,
+ *   streetSuffix?: string,
  * }
  */
 final class DynamicEmergencyAddressCreateParams implements BaseModel
@@ -36,39 +36,39 @@ final class DynamicEmergencyAddressCreateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Required]
-    public string $administrative_area;
+    #[Required('administrative_area')]
+    public string $administrativeArea;
 
-    /** @var value-of<CountryCode> $country_code */
-    #[Required(enum: CountryCode::class)]
-    public string $country_code;
+    /** @var value-of<CountryCode> $countryCode */
+    #[Required('country_code', enum: CountryCode::class)]
+    public string $countryCode;
 
-    #[Required]
-    public string $house_number;
+    #[Required('house_number')]
+    public string $houseNumber;
 
     #[Required]
     public string $locality;
 
-    #[Required]
-    public string $postal_code;
+    #[Required('postal_code')]
+    public string $postalCode;
 
-    #[Required]
-    public string $street_name;
+    #[Required('street_name')]
+    public string $streetName;
 
-    #[Optional]
-    public ?string $extended_address;
+    #[Optional('extended_address')]
+    public ?string $extendedAddress;
 
-    #[Optional]
-    public ?string $house_suffix;
+    #[Optional('house_suffix')]
+    public ?string $houseSuffix;
 
-    #[Optional]
-    public ?string $street_post_directional;
+    #[Optional('street_post_directional')]
+    public ?string $streetPostDirectional;
 
-    #[Optional]
-    public ?string $street_pre_directional;
+    #[Optional('street_pre_directional')]
+    public ?string $streetPreDirectional;
 
-    #[Optional]
-    public ?string $street_suffix;
+    #[Optional('street_suffix')]
+    public ?string $streetSuffix;
 
     /**
      * `new DynamicEmergencyAddressCreateParams()` is missing required properties by the API.
@@ -76,12 +76,12 @@ final class DynamicEmergencyAddressCreateParams implements BaseModel
      * To enforce required parameters use
      * ```
      * DynamicEmergencyAddressCreateParams::with(
-     *   administrative_area: ...,
-     *   country_code: ...,
-     *   house_number: ...,
+     *   administrativeArea: ...,
+     *   countryCode: ...,
+     *   houseNumber: ...,
      *   locality: ...,
-     *   postal_code: ...,
-     *   street_name: ...,
+     *   postalCode: ...,
+     *   streetName: ...,
      * )
      * ```
      *
@@ -107,35 +107,35 @@ final class DynamicEmergencyAddressCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CountryCode|value-of<CountryCode> $country_code
+     * @param CountryCode|value-of<CountryCode> $countryCode
      */
     public static function with(
-        string $administrative_area,
-        CountryCode|string $country_code,
-        string $house_number,
+        string $administrativeArea,
+        CountryCode|string $countryCode,
+        string $houseNumber,
         string $locality,
-        string $postal_code,
-        string $street_name,
-        ?string $extended_address = null,
-        ?string $house_suffix = null,
-        ?string $street_post_directional = null,
-        ?string $street_pre_directional = null,
-        ?string $street_suffix = null,
+        string $postalCode,
+        string $streetName,
+        ?string $extendedAddress = null,
+        ?string $houseSuffix = null,
+        ?string $streetPostDirectional = null,
+        ?string $streetPreDirectional = null,
+        ?string $streetSuffix = null,
     ): self {
         $obj = new self;
 
-        $obj['administrative_area'] = $administrative_area;
-        $obj['country_code'] = $country_code;
-        $obj['house_number'] = $house_number;
+        $obj['administrativeArea'] = $administrativeArea;
+        $obj['countryCode'] = $countryCode;
+        $obj['houseNumber'] = $houseNumber;
         $obj['locality'] = $locality;
-        $obj['postal_code'] = $postal_code;
-        $obj['street_name'] = $street_name;
+        $obj['postalCode'] = $postalCode;
+        $obj['streetName'] = $streetName;
 
-        null !== $extended_address && $obj['extended_address'] = $extended_address;
-        null !== $house_suffix && $obj['house_suffix'] = $house_suffix;
-        null !== $street_post_directional && $obj['street_post_directional'] = $street_post_directional;
-        null !== $street_pre_directional && $obj['street_pre_directional'] = $street_pre_directional;
-        null !== $street_suffix && $obj['street_suffix'] = $street_suffix;
+        null !== $extendedAddress && $obj['extendedAddress'] = $extendedAddress;
+        null !== $houseSuffix && $obj['houseSuffix'] = $houseSuffix;
+        null !== $streetPostDirectional && $obj['streetPostDirectional'] = $streetPostDirectional;
+        null !== $streetPreDirectional && $obj['streetPreDirectional'] = $streetPreDirectional;
+        null !== $streetSuffix && $obj['streetSuffix'] = $streetSuffix;
 
         return $obj;
     }
@@ -143,7 +143,7 @@ final class DynamicEmergencyAddressCreateParams implements BaseModel
     public function withAdministrativeArea(string $administrativeArea): self
     {
         $obj = clone $this;
-        $obj['administrative_area'] = $administrativeArea;
+        $obj['administrativeArea'] = $administrativeArea;
 
         return $obj;
     }
@@ -154,7 +154,7 @@ final class DynamicEmergencyAddressCreateParams implements BaseModel
     public function withCountryCode(CountryCode|string $countryCode): self
     {
         $obj = clone $this;
-        $obj['country_code'] = $countryCode;
+        $obj['countryCode'] = $countryCode;
 
         return $obj;
     }
@@ -162,7 +162,7 @@ final class DynamicEmergencyAddressCreateParams implements BaseModel
     public function withHouseNumber(string $houseNumber): self
     {
         $obj = clone $this;
-        $obj['house_number'] = $houseNumber;
+        $obj['houseNumber'] = $houseNumber;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class DynamicEmergencyAddressCreateParams implements BaseModel
     public function withPostalCode(string $postalCode): self
     {
         $obj = clone $this;
-        $obj['postal_code'] = $postalCode;
+        $obj['postalCode'] = $postalCode;
 
         return $obj;
     }
@@ -186,7 +186,7 @@ final class DynamicEmergencyAddressCreateParams implements BaseModel
     public function withStreetName(string $streetName): self
     {
         $obj = clone $this;
-        $obj['street_name'] = $streetName;
+        $obj['streetName'] = $streetName;
 
         return $obj;
     }
@@ -194,7 +194,7 @@ final class DynamicEmergencyAddressCreateParams implements BaseModel
     public function withExtendedAddress(string $extendedAddress): self
     {
         $obj = clone $this;
-        $obj['extended_address'] = $extendedAddress;
+        $obj['extendedAddress'] = $extendedAddress;
 
         return $obj;
     }
@@ -202,7 +202,7 @@ final class DynamicEmergencyAddressCreateParams implements BaseModel
     public function withHouseSuffix(string $houseSuffix): self
     {
         $obj = clone $this;
-        $obj['house_suffix'] = $houseSuffix;
+        $obj['houseSuffix'] = $houseSuffix;
 
         return $obj;
     }
@@ -211,7 +211,7 @@ final class DynamicEmergencyAddressCreateParams implements BaseModel
         string $streetPostDirectional
     ): self {
         $obj = clone $this;
-        $obj['street_post_directional'] = $streetPostDirectional;
+        $obj['streetPostDirectional'] = $streetPostDirectional;
 
         return $obj;
     }
@@ -219,7 +219,7 @@ final class DynamicEmergencyAddressCreateParams implements BaseModel
     public function withStreetPreDirectional(string $streetPreDirectional): self
     {
         $obj = clone $this;
-        $obj['street_pre_directional'] = $streetPreDirectional;
+        $obj['streetPreDirectional'] = $streetPreDirectional;
 
         return $obj;
     }
@@ -227,7 +227,7 @@ final class DynamicEmergencyAddressCreateParams implements BaseModel
     public function withStreetSuffix(string $streetSuffix): self
     {
         $obj = clone $this;
-        $obj['street_suffix'] = $streetSuffix;
+        $obj['streetSuffix'] = $streetSuffix;
 
         return $obj;
     }

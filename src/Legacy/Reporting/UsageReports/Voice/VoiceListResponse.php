@@ -39,23 +39,23 @@ final class VoiceListResponse implements BaseModel
      *
      * @param list<CdrUsageReportResponseLegacy|array{
      *   id?: string|null,
-     *   aggregation_type?: int|null,
+     *   aggregationType?: int|null,
      *   connections?: list<string>|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   end_time?: \DateTimeInterface|null,
-     *   product_breakdown?: int|null,
-     *   record_type?: string|null,
-     *   report_url?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   endTime?: \DateTimeInterface|null,
+     *   productBreakdown?: int|null,
+     *   recordType?: string|null,
+     *   reportURL?: string|null,
      *   result?: mixed,
-     *   start_time?: \DateTimeInterface|null,
+     *   startTime?: \DateTimeInterface|null,
      *   status?: int|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      * @param StandardPaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -73,17 +73,17 @@ final class VoiceListResponse implements BaseModel
     /**
      * @param list<CdrUsageReportResponseLegacy|array{
      *   id?: string|null,
-     *   aggregation_type?: int|null,
+     *   aggregationType?: int|null,
      *   connections?: list<string>|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   end_time?: \DateTimeInterface|null,
-     *   product_breakdown?: int|null,
-     *   record_type?: string|null,
-     *   report_url?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   endTime?: \DateTimeInterface|null,
+     *   productBreakdown?: int|null,
+     *   recordType?: string|null,
+     *   reportURL?: string|null,
      *   result?: mixed,
-     *   start_time?: \DateTimeInterface|null,
+     *   startTime?: \DateTimeInterface|null,
      *   status?: int|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -96,10 +96,10 @@ final class VoiceListResponse implements BaseModel
 
     /**
      * @param StandardPaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(StandardPaginationMeta|array $meta): self

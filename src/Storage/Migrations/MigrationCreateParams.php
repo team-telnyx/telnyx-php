@@ -16,9 +16,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Storage\MigrationsService::create()
  *
  * @phpstan-type MigrationCreateParamsShape = array{
- *   source_id: string,
- *   target_bucket_name: string,
- *   target_region: string,
+ *   sourceID: string,
+ *   targetBucketName: string,
+ *   targetRegion: string,
  *   refresh?: bool,
  * }
  */
@@ -31,20 +31,20 @@ final class MigrationCreateParams implements BaseModel
     /**
      * ID of the Migration Source from which to migrate data.
      */
-    #[Required]
-    public string $source_id;
+    #[Required('source_id')]
+    public string $sourceID;
 
     /**
      * Bucket name to migrate the data into. Will default to the same name as the `source_bucket_name`.
      */
-    #[Required]
-    public string $target_bucket_name;
+    #[Required('target_bucket_name')]
+    public string $targetBucketName;
 
     /**
      * Telnyx Cloud Storage region to migrate the data to.
      */
-    #[Required]
-    public string $target_region;
+    #[Required('target_region')]
+    public string $targetRegion;
 
     /**
      * If true, will continue to poll the source bucket to ensure new data is continually migrated over.
@@ -58,7 +58,7 @@ final class MigrationCreateParams implements BaseModel
      * To enforce required parameters use
      * ```
      * MigrationCreateParams::with(
-     *   source_id: ..., target_bucket_name: ..., target_region: ...
+     *   sourceID: ..., targetBucketName: ..., targetRegion: ...
      * )
      * ```
      *
@@ -82,16 +82,16 @@ final class MigrationCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $source_id,
-        string $target_bucket_name,
-        string $target_region,
+        string $sourceID,
+        string $targetBucketName,
+        string $targetRegion,
         ?bool $refresh = null,
     ): self {
         $obj = new self;
 
-        $obj['source_id'] = $source_id;
-        $obj['target_bucket_name'] = $target_bucket_name;
-        $obj['target_region'] = $target_region;
+        $obj['sourceID'] = $sourceID;
+        $obj['targetBucketName'] = $targetBucketName;
+        $obj['targetRegion'] = $targetRegion;
 
         null !== $refresh && $obj['refresh'] = $refresh;
 
@@ -104,7 +104,7 @@ final class MigrationCreateParams implements BaseModel
     public function withSourceID(string $sourceID): self
     {
         $obj = clone $this;
-        $obj['source_id'] = $sourceID;
+        $obj['sourceID'] = $sourceID;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class MigrationCreateParams implements BaseModel
     public function withTargetBucketName(string $targetBucketName): self
     {
         $obj = clone $this;
-        $obj['target_bucket_name'] = $targetBucketName;
+        $obj['targetBucketName'] = $targetBucketName;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class MigrationCreateParams implements BaseModel
     public function withTargetRegion(string $targetRegion): self
     {
         $obj = clone $this;
-        $obj['target_region'] = $targetRegion;
+        $obj['targetRegion'] = $targetRegion;
 
         return $obj;
     }

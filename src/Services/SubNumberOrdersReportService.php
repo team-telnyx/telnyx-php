@@ -27,11 +27,11 @@ final class SubNumberOrdersReportService implements SubNumberOrdersReportContrac
      * Create a CSV report for sub number orders. The report will be generated asynchronously and can be downloaded once complete.
      *
      * @param array{
-     *   country_code?: string,
-     *   created_at_gt?: string|\DateTimeInterface,
-     *   created_at_lt?: string|\DateTimeInterface,
-     *   customer_reference?: string,
-     *   order_request_id?: string,
+     *   countryCode?: string,
+     *   createdAtGt?: string|\DateTimeInterface,
+     *   createdAtLt?: string|\DateTimeInterface,
+     *   customerReference?: string,
+     *   orderRequestID?: string,
      *   status?: 'pending'|'success'|'failure'|Status,
      * }|SubNumberOrdersReportCreateParams $params
      *

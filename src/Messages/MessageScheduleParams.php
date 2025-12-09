@@ -22,17 +22,17 @@ use Telnyx\Messages\MessageScheduleParams\Type;
  *
  * @phpstan-type MessageScheduleParamsShape = array{
  *   to: string,
- *   auto_detect?: bool,
+ *   autoDetect?: bool,
  *   from?: string,
- *   media_urls?: list<string>,
- *   messaging_profile_id?: string,
- *   send_at?: \DateTimeInterface,
+ *   mediaURLs?: list<string>,
+ *   messagingProfileID?: string,
+ *   sendAt?: \DateTimeInterface,
  *   subject?: string,
  *   text?: string,
  *   type?: Type|value-of<Type>,
- *   use_profile_webhooks?: bool,
- *   webhook_failover_url?: string,
- *   webhook_url?: string,
+ *   useProfileWebhooks?: bool,
+ *   webhookFailoverURL?: string,
+ *   webhookURL?: string,
  * }
  */
 final class MessageScheduleParams implements BaseModel
@@ -50,8 +50,8 @@ final class MessageScheduleParams implements BaseModel
     /**
      * Automatically detect if an SMS message is unusually long and exceeds a recommended limit of message parts.
      */
-    #[Optional]
-    public ?bool $auto_detect;
+    #[Optional('auto_detect')]
+    public ?bool $autoDetect;
 
     /**
      * Sending address (+E.164 formatted phone number, alphanumeric sender ID, or short code).
@@ -66,24 +66,24 @@ final class MessageScheduleParams implements BaseModel
      *
      * **Required for MMS**
      *
-     * @var list<string>|null $media_urls
+     * @var list<string>|null $mediaURLs
      */
-    #[Optional(list: 'string')]
-    public ?array $media_urls;
+    #[Optional('media_urls', list: 'string')]
+    public ?array $mediaURLs;
 
     /**
      * Unique identifier for a messaging profile.
      *
      * **Required if sending via number pool or with an alphanumeric sender ID.**
      */
-    #[Optional]
-    public ?string $messaging_profile_id;
+    #[Optional('messaging_profile_id')]
+    public ?string $messagingProfileID;
 
     /**
      * ISO 8601 formatted date indicating when to send the message - accurate up till a minute.
      */
-    #[Optional]
-    public ?\DateTimeInterface $send_at;
+    #[Optional('send_at')]
+    public ?\DateTimeInterface $sendAt;
 
     /**
      * Subject of multimedia message.
@@ -110,20 +110,20 @@ final class MessageScheduleParams implements BaseModel
     /**
      * If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
      */
-    #[Optional]
-    public ?bool $use_profile_webhooks;
+    #[Optional('use_profile_webhooks')]
+    public ?bool $useProfileWebhooks;
 
     /**
      * The failover URL where webhooks related to this message will be sent if sending to the primary URL fails.
      */
-    #[Optional]
-    public ?string $webhook_failover_url;
+    #[Optional('webhook_failover_url')]
+    public ?string $webhookFailoverURL;
 
     /**
      * The URL where webhooks related to this message will be sent.
      */
-    #[Optional]
-    public ?string $webhook_url;
+    #[Optional('webhook_url')]
+    public ?string $webhookURL;
 
     /**
      * `new MessageScheduleParams()` is missing required properties by the API.
@@ -149,38 +149,38 @@ final class MessageScheduleParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $media_urls
+     * @param list<string> $mediaURLs
      * @param Type|value-of<Type> $type
      */
     public static function with(
         string $to,
-        ?bool $auto_detect = null,
+        ?bool $autoDetect = null,
         ?string $from = null,
-        ?array $media_urls = null,
-        ?string $messaging_profile_id = null,
-        ?\DateTimeInterface $send_at = null,
+        ?array $mediaURLs = null,
+        ?string $messagingProfileID = null,
+        ?\DateTimeInterface $sendAt = null,
         ?string $subject = null,
         ?string $text = null,
         Type|string|null $type = null,
-        ?bool $use_profile_webhooks = null,
-        ?string $webhook_failover_url = null,
-        ?string $webhook_url = null,
+        ?bool $useProfileWebhooks = null,
+        ?string $webhookFailoverURL = null,
+        ?string $webhookURL = null,
     ): self {
         $obj = new self;
 
         $obj['to'] = $to;
 
-        null !== $auto_detect && $obj['auto_detect'] = $auto_detect;
+        null !== $autoDetect && $obj['autoDetect'] = $autoDetect;
         null !== $from && $obj['from'] = $from;
-        null !== $media_urls && $obj['media_urls'] = $media_urls;
-        null !== $messaging_profile_id && $obj['messaging_profile_id'] = $messaging_profile_id;
-        null !== $send_at && $obj['send_at'] = $send_at;
+        null !== $mediaURLs && $obj['mediaURLs'] = $mediaURLs;
+        null !== $messagingProfileID && $obj['messagingProfileID'] = $messagingProfileID;
+        null !== $sendAt && $obj['sendAt'] = $sendAt;
         null !== $subject && $obj['subject'] = $subject;
         null !== $text && $obj['text'] = $text;
         null !== $type && $obj['type'] = $type;
-        null !== $use_profile_webhooks && $obj['use_profile_webhooks'] = $use_profile_webhooks;
-        null !== $webhook_failover_url && $obj['webhook_failover_url'] = $webhook_failover_url;
-        null !== $webhook_url && $obj['webhook_url'] = $webhook_url;
+        null !== $useProfileWebhooks && $obj['useProfileWebhooks'] = $useProfileWebhooks;
+        null !== $webhookFailoverURL && $obj['webhookFailoverURL'] = $webhookFailoverURL;
+        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
 
         return $obj;
     }
@@ -202,7 +202,7 @@ final class MessageScheduleParams implements BaseModel
     public function withAutoDetect(bool $autoDetect): self
     {
         $obj = clone $this;
-        $obj['auto_detect'] = $autoDetect;
+        $obj['autoDetect'] = $autoDetect;
 
         return $obj;
     }
@@ -230,7 +230,7 @@ final class MessageScheduleParams implements BaseModel
     public function withMediaURLs(array $mediaURLs): self
     {
         $obj = clone $this;
-        $obj['media_urls'] = $mediaURLs;
+        $obj['mediaURLs'] = $mediaURLs;
 
         return $obj;
     }
@@ -243,7 +243,7 @@ final class MessageScheduleParams implements BaseModel
     public function withMessagingProfileID(string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj['messaging_profile_id'] = $messagingProfileID;
+        $obj['messagingProfileID'] = $messagingProfileID;
 
         return $obj;
     }
@@ -254,7 +254,7 @@ final class MessageScheduleParams implements BaseModel
     public function withSendAt(\DateTimeInterface $sendAt): self
     {
         $obj = clone $this;
-        $obj['send_at'] = $sendAt;
+        $obj['sendAt'] = $sendAt;
 
         return $obj;
     }
@@ -302,7 +302,7 @@ final class MessageScheduleParams implements BaseModel
     public function withUseProfileWebhooks(bool $useProfileWebhooks): self
     {
         $obj = clone $this;
-        $obj['use_profile_webhooks'] = $useProfileWebhooks;
+        $obj['useProfileWebhooks'] = $useProfileWebhooks;
 
         return $obj;
     }
@@ -313,7 +313,7 @@ final class MessageScheduleParams implements BaseModel
     public function withWebhookFailoverURL(string $webhookFailoverURL): self
     {
         $obj = clone $this;
-        $obj['webhook_failover_url'] = $webhookFailoverURL;
+        $obj['webhookFailoverURL'] = $webhookFailoverURL;
 
         return $obj;
     }
@@ -324,7 +324,7 @@ final class MessageScheduleParams implements BaseModel
     public function withWebhookURL(string $webhookURL): self
     {
         $obj = clone $this;
-        $obj['webhook_url'] = $webhookURL;
+        $obj['webhookURL'] = $webhookURL;
 
         return $obj;
     }

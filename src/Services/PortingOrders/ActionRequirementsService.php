@@ -32,8 +32,8 @@ final class ActionRequirementsService implements ActionRequirementsContract
      * @param array{
      *   filter?: array{
      *     id?: list<string>,
-     *     action_type?: 'au_id_verification'|ActionType,
-     *     requirement_type_id?: string,
+     *     actionType?: 'au_id_verification'|ActionType,
+     *     requirementTypeID?: string,
      *     status?: 'created'|'pending'|'completed'|'cancelled'|'failed'|Status,
      *   },
      *   page?: array{number?: int, size?: int},
@@ -72,7 +72,7 @@ final class ActionRequirementsService implements ActionRequirementsContract
      * Initiates a specific action requirement for a porting order.
      *
      * @param array{
-     *   porting_order_id: string, params: array{first_name: string, last_name: string}
+     *   portingOrderID: string, params: array{firstName: string, lastName: string}
      * }|ActionRequirementInitiateParams $params
      *
      * @throws APIException
@@ -86,8 +86,8 @@ final class ActionRequirementsService implements ActionRequirementsContract
             $params,
             $requestOptions,
         );
-        $portingOrderID = $parsed['porting_order_id'];
-        unset($parsed['porting_order_id']);
+        $portingOrderID = $parsed['portingOrderID'];
+        unset($parsed['portingOrderID']);
 
         /** @var BaseResponse<ActionRequirementInitiateResponse> */
         $response = $this->client->request(
@@ -97,7 +97,7 @@ final class ActionRequirementsService implements ActionRequirementsContract
                 $portingOrderID,
                 $id,
             ],
-            body: (object) array_diff_key($parsed, ['porting_order_id']),
+            body: (object) array_diff_key($parsed, ['portingOrderID']),
             options: $options,
             convert: ActionRequirementInitiateResponse::class,
         );

@@ -35,16 +35,16 @@ final class ConnectionGetResponse implements BaseModel
      * @param Data|array{
      *   id?: string|null,
      *   active?: bool|null,
-     *   anchorsite_override?: value-of<AnchorsiteOverride>|null,
-     *   connection_name?: string|null,
-     *   created_at?: string|null,
-     *   outbound_voice_profile_id?: string|null,
-     *   record_type?: string|null,
+     *   anchorsiteOverride?: value-of<AnchorsiteOverride>|null,
+     *   connectionName?: string|null,
+     *   createdAt?: string|null,
+     *   outboundVoiceProfileID?: string|null,
+     *   recordType?: string|null,
      *   tags?: list<string>|null,
-     *   updated_at?: string|null,
-     *   webhook_api_version?: value-of<WebhookAPIVersion>|null,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_event_url?: string|null,
+     *   updatedAt?: string|null,
+     *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookEventURL?: string|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -60,16 +60,16 @@ final class ConnectionGetResponse implements BaseModel
      * @param Data|array{
      *   id?: string|null,
      *   active?: bool|null,
-     *   anchorsite_override?: value-of<AnchorsiteOverride>|null,
-     *   connection_name?: string|null,
-     *   created_at?: string|null,
-     *   outbound_voice_profile_id?: string|null,
-     *   record_type?: string|null,
+     *   anchorsiteOverride?: value-of<AnchorsiteOverride>|null,
+     *   connectionName?: string|null,
+     *   createdAt?: string|null,
+     *   outboundVoiceProfileID?: string|null,
+     *   recordType?: string|null,
      *   tags?: list<string>|null,
-     *   updated_at?: string|null,
-     *   webhook_api_version?: value-of<WebhookAPIVersion>|null,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_event_url?: string|null,
+     *   updatedAt?: string|null,
+     *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookEventURL?: string|null,
      * } $data
      */
     public function withData(Data|array $data): self

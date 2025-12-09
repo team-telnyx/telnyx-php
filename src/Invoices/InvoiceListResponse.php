@@ -38,18 +38,18 @@ final class InvoiceListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   file_id?: string|null,
-     *   invoice_id?: string|null,
+     *   fileID?: string|null,
+     *   invoiceID?: string|null,
      *   paid?: bool|null,
-     *   period_end?: \DateTimeInterface|null,
-     *   period_start?: \DateTimeInterface|null,
+     *   periodEnd?: \DateTimeInterface|null,
+     *   periodStart?: \DateTimeInterface|null,
      *   url?: string|null,
      * }> $data
      * @param Meta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -66,11 +66,11 @@ final class InvoiceListResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   file_id?: string|null,
-     *   invoice_id?: string|null,
+     *   fileID?: string|null,
+     *   invoiceID?: string|null,
      *   paid?: bool|null,
-     *   period_end?: \DateTimeInterface|null,
-     *   period_start?: \DateTimeInterface|null,
+     *   periodEnd?: \DateTimeInterface|null,
+     *   periodStart?: \DateTimeInterface|null,
      *   url?: string|null,
      * }> $data
      */
@@ -84,10 +84,10 @@ final class InvoiceListResponse implements BaseModel
 
     /**
      * @param Meta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(Meta|array $meta): self

@@ -31,7 +31,7 @@ final class FqdnsService implements FqdnsContract
      * Create a new FQDN object.
      *
      * @param array{
-     *   connection_id: string, dns_record_type: string, fqdn: string, port?: int|null
+     *   connectionID: string, dnsRecordType: string, fqdn: string, port?: int|null
      * }|FqdnCreateParams $params
      *
      * @throws APIException
@@ -85,10 +85,7 @@ final class FqdnsService implements FqdnsContract
      * Update the details of a specific FQDN.
      *
      * @param array{
-     *   connection_id?: string,
-     *   dns_record_type?: string,
-     *   fqdn?: string,
-     *   port?: int|null,
+     *   connectionID?: string, dnsRecordType?: string, fqdn?: string, port?: int|null
      * }|FqdnUpdateParams $params
      *
      * @throws APIException
@@ -122,7 +119,7 @@ final class FqdnsService implements FqdnsContract
      *
      * @param array{
      *   filter?: array{
-     *     connection_id?: string, dns_record_type?: string, fqdn?: string, port?: int
+     *     connectionID?: string, dnsRecordType?: string, fqdn?: string, port?: int
      *   },
      *   page?: array{number?: int, size?: int},
      * }|FqdnListParams $params

@@ -62,7 +62,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *
      * Asynchronously update settings of the phone number associated with the given external connection.
      *
-     * @param array{id: string, location_id?: string}|PhoneNumberUpdateParams $params
+     * @param array{id: string, locationID?: string}|PhoneNumberUpdateParams $params
      *
      * @throws APIException
      */
@@ -99,9 +99,9 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *
      * @param array{
      *   filter?: array{
-     *     civic_address_id?: array{eq?: string},
-     *     location_id?: array{eq?: string},
-     *     phone_number?: array{contains?: string, eq?: string},
+     *     civicAddressID?: array{eq?: string},
+     *     locationID?: array{eq?: string},
+     *     phoneNumber?: array{contains?: string, eq?: string},
      *   },
      *   page?: array{number?: int, size?: int},
      * }|PhoneNumberListParams $params

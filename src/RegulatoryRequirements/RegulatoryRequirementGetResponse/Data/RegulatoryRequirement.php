@@ -12,10 +12,10 @@ use Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse\Data\Regulato
 /**
  * @phpstan-type RegulatoryRequirementShape = array{
  *   id?: string|null,
- *   acceptance_criteria?: AcceptanceCriteria|null,
+ *   acceptanceCriteria?: AcceptanceCriteria|null,
  *   description?: string|null,
  *   example?: string|null,
- *   field_type?: string|null,
+ *   fieldType?: string|null,
  *   name?: string|null,
  * }
  */
@@ -27,8 +27,8 @@ final class RegulatoryRequirement implements BaseModel
     #[Optional]
     public ?string $id;
 
-    #[Optional]
-    public ?AcceptanceCriteria $acceptance_criteria;
+    #[Optional('acceptance_criteria')]
+    public ?AcceptanceCriteria $acceptanceCriteria;
 
     #[Optional]
     public ?string $description;
@@ -36,8 +36,8 @@ final class RegulatoryRequirement implements BaseModel
     #[Optional]
     public ?string $example;
 
-    #[Optional]
-    public ?string $field_type;
+    #[Optional('field_type')]
+    public ?string $fieldType;
 
     #[Optional]
     public ?string $name;
@@ -53,31 +53,31 @@ final class RegulatoryRequirement implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param AcceptanceCriteria|array{
-     *   acceptable_characters?: string|null,
-     *   acceptable_values?: list<string>|null,
-     *   case_sensitive?: string|null,
-     *   locality_limit?: string|null,
-     *   max_length?: string|null,
-     *   min_length?: string|null,
+     *   acceptableCharacters?: string|null,
+     *   acceptableValues?: list<string>|null,
+     *   caseSensitive?: string|null,
+     *   localityLimit?: string|null,
+     *   maxLength?: string|null,
+     *   minLength?: string|null,
      *   regex?: string|null,
-     *   time_limit?: string|null,
-     * } $acceptance_criteria
+     *   timeLimit?: string|null,
+     * } $acceptanceCriteria
      */
     public static function with(
         ?string $id = null,
-        AcceptanceCriteria|array|null $acceptance_criteria = null,
+        AcceptanceCriteria|array|null $acceptanceCriteria = null,
         ?string $description = null,
         ?string $example = null,
-        ?string $field_type = null,
+        ?string $fieldType = null,
         ?string $name = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $acceptance_criteria && $obj['acceptance_criteria'] = $acceptance_criteria;
+        null !== $acceptanceCriteria && $obj['acceptanceCriteria'] = $acceptanceCriteria;
         null !== $description && $obj['description'] = $description;
         null !== $example && $obj['example'] = $example;
-        null !== $field_type && $obj['field_type'] = $field_type;
+        null !== $fieldType && $obj['fieldType'] = $fieldType;
         null !== $name && $obj['name'] = $name;
 
         return $obj;
@@ -93,21 +93,21 @@ final class RegulatoryRequirement implements BaseModel
 
     /**
      * @param AcceptanceCriteria|array{
-     *   acceptable_characters?: string|null,
-     *   acceptable_values?: list<string>|null,
-     *   case_sensitive?: string|null,
-     *   locality_limit?: string|null,
-     *   max_length?: string|null,
-     *   min_length?: string|null,
+     *   acceptableCharacters?: string|null,
+     *   acceptableValues?: list<string>|null,
+     *   caseSensitive?: string|null,
+     *   localityLimit?: string|null,
+     *   maxLength?: string|null,
+     *   minLength?: string|null,
      *   regex?: string|null,
-     *   time_limit?: string|null,
+     *   timeLimit?: string|null,
      * } $acceptanceCriteria
      */
     public function withAcceptanceCriteria(
         AcceptanceCriteria|array $acceptanceCriteria
     ): self {
         $obj = clone $this;
-        $obj['acceptance_criteria'] = $acceptanceCriteria;
+        $obj['acceptanceCriteria'] = $acceptanceCriteria;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class RegulatoryRequirement implements BaseModel
     public function withFieldType(string $fieldType): self
     {
         $obj = clone $this;
-        $obj['field_type'] = $fieldType;
+        $obj['fieldType'] = $fieldType;
 
         return $obj;
     }

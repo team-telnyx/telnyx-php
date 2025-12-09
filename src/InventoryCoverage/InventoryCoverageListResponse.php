@@ -41,18 +41,18 @@ final class InventoryCoverageListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   administrative_area?: string|null,
-     *   advance_requirements?: bool|null,
+     *   administrativeArea?: string|null,
+     *   advanceRequirements?: bool|null,
      *   count?: int|null,
-     *   coverage_type?: value-of<CoverageType>|null,
+     *   coverageType?: value-of<CoverageType>|null,
      *   group?: string|null,
-     *   group_type?: string|null,
-     *   number_range?: int|null,
-     *   number_type?: value-of<NumberType>|null,
-     *   phone_number_type?: value-of<PhoneNumberType>|null,
-     *   record_type?: string|null,
+     *   groupType?: string|null,
+     *   numberRange?: int|null,
+     *   numberType?: value-of<NumberType>|null,
+     *   phoneNumberType?: value-of<PhoneNumberType>|null,
+     *   recordType?: string|null,
      * }> $data
-     * @param Meta|array{total_results?: int|null} $meta
+     * @param Meta|array{totalResults?: int|null} $meta
      */
     public static function with(
         ?array $data = null,
@@ -68,16 +68,16 @@ final class InventoryCoverageListResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   administrative_area?: string|null,
-     *   advance_requirements?: bool|null,
+     *   administrativeArea?: string|null,
+     *   advanceRequirements?: bool|null,
      *   count?: int|null,
-     *   coverage_type?: value-of<CoverageType>|null,
+     *   coverageType?: value-of<CoverageType>|null,
      *   group?: string|null,
-     *   group_type?: string|null,
-     *   number_range?: int|null,
-     *   number_type?: value-of<NumberType>|null,
-     *   phone_number_type?: value-of<PhoneNumberType>|null,
-     *   record_type?: string|null,
+     *   groupType?: string|null,
+     *   numberRange?: int|null,
+     *   numberType?: value-of<NumberType>|null,
+     *   phoneNumberType?: value-of<PhoneNumberType>|null,
+     *   recordType?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -89,7 +89,7 @@ final class InventoryCoverageListResponse implements BaseModel
     }
 
     /**
-     * @param Meta|array{total_results?: int|null} $meta
+     * @param Meta|array{totalResults?: int|null} $meta
      */
     public function withMeta(Meta|array $meta): self
     {

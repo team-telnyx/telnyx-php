@@ -17,11 +17,11 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op;
  * @see Telnyx\Services\MessagingProfiles\AutorespConfigsService::update()
  *
  * @phpstan-type AutorespConfigUpdateParamsShape = array{
- *   profile_id: string,
- *   country_code: string,
+ *   profileID: string,
+ *   countryCode: string,
  *   keywords: list<string>,
  *   op: Op|value-of<Op>,
- *   resp_text?: string,
+ *   respText?: string,
  * }
  */
 final class AutorespConfigUpdateParams implements BaseModel
@@ -31,10 +31,10 @@ final class AutorespConfigUpdateParams implements BaseModel
     use SdkParams;
 
     #[Required]
-    public string $profile_id;
+    public string $profileID;
 
-    #[Required]
-    public string $country_code;
+    #[Required('country_code')]
+    public string $countryCode;
 
     /** @var list<string> $keywords */
     #[Required(list: 'string')]
@@ -44,8 +44,8 @@ final class AutorespConfigUpdateParams implements BaseModel
     #[Required(enum: Op::class)]
     public string $op;
 
-    #[Optional]
-    public ?string $resp_text;
+    #[Optional('resp_text')]
+    public ?string $respText;
 
     /**
      * `new AutorespConfigUpdateParams()` is missing required properties by the API.
@@ -53,7 +53,7 @@ final class AutorespConfigUpdateParams implements BaseModel
      * To enforce required parameters use
      * ```
      * AutorespConfigUpdateParams::with(
-     *   profile_id: ..., country_code: ..., keywords: ..., op: ...
+     *   profileID: ..., countryCode: ..., keywords: ..., op: ...
      * )
      * ```
      *
@@ -81,20 +81,20 @@ final class AutorespConfigUpdateParams implements BaseModel
      * @param Op|value-of<Op> $op
      */
     public static function with(
-        string $profile_id,
-        string $country_code,
+        string $profileID,
+        string $countryCode,
         array $keywords,
         Op|string $op,
-        ?string $resp_text = null,
+        ?string $respText = null,
     ): self {
         $obj = new self;
 
-        $obj['profile_id'] = $profile_id;
-        $obj['country_code'] = $country_code;
+        $obj['profileID'] = $profileID;
+        $obj['countryCode'] = $countryCode;
         $obj['keywords'] = $keywords;
         $obj['op'] = $op;
 
-        null !== $resp_text && $obj['resp_text'] = $resp_text;
+        null !== $respText && $obj['respText'] = $respText;
 
         return $obj;
     }
@@ -102,7 +102,7 @@ final class AutorespConfigUpdateParams implements BaseModel
     public function withProfileID(string $profileID): self
     {
         $obj = clone $this;
-        $obj['profile_id'] = $profileID;
+        $obj['profileID'] = $profileID;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class AutorespConfigUpdateParams implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj['country_code'] = $countryCode;
+        $obj['countryCode'] = $countryCode;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class AutorespConfigUpdateParams implements BaseModel
     public function withRespText(string $respText): self
     {
         $obj = clone $this;
-        $obj['resp_text'] = $respText;
+        $obj['respText'] = $respText;
 
         return $obj;
     }

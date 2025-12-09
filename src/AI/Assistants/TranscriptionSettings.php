@@ -61,10 +61,10 @@ final class TranscriptionSettings implements BaseModel
      *
      * @param Model|value-of<Model> $model
      * @param Settings|array{
-     *   eot_threshold?: float|null,
-     *   eot_timeout_ms?: int|null,
+     *   eotThreshold?: float|null,
+     *   eotTimeoutMs?: int|null,
      *   numerals?: bool|null,
-     *   smart_format?: bool|null,
+     *   smartFormat?: bool|null,
      * } $settings
      */
     public static function with(
@@ -123,10 +123,10 @@ final class TranscriptionSettings implements BaseModel
 
     /**
      * @param Settings|array{
-     *   eot_threshold?: float|null,
-     *   eot_timeout_ms?: int|null,
+     *   eotThreshold?: float|null,
+     *   eotTimeoutMs?: int|null,
      *   numerals?: bool|null,
-     *   smart_format?: bool|null,
+     *   smartFormat?: bool|null,
      * } $settings
      */
     public function withSettings(Settings|array $settings): self

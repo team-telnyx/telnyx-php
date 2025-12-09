@@ -55,15 +55,15 @@ final class AutorespConfigListResponse implements BaseModel
      *
      * @param list<AutoRespConfig|array{
      *   id: string,
-     *   country_code: string,
-     *   created_at: \DateTimeInterface,
+     *   countryCode: string,
+     *   createdAt: \DateTimeInterface,
      *   keywords: list<string>,
      *   op: value-of<Op>,
-     *   updated_at: \DateTimeInterface,
-     *   resp_text?: string|null,
+     *   updatedAt: \DateTimeInterface,
+     *   respText?: string|null,
      * }> $data
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public static function with(array $data, Meta|array $meta): self
@@ -79,12 +79,12 @@ final class AutorespConfigListResponse implements BaseModel
     /**
      * @param list<AutoRespConfig|array{
      *   id: string,
-     *   country_code: string,
-     *   created_at: \DateTimeInterface,
+     *   countryCode: string,
+     *   createdAt: \DateTimeInterface,
      *   keywords: list<string>,
      *   op: value-of<Op>,
-     *   updated_at: \DateTimeInterface,
-     *   resp_text?: string|null,
+     *   updatedAt: \DateTimeInterface,
+     *   respText?: string|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -97,7 +97,7 @@ final class AutorespConfigListResponse implements BaseModel
 
     /**
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public function withMeta(Meta|array $meta): self

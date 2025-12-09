@@ -50,8 +50,8 @@ final class ActionsTest extends TestCase
         $result = $this->client->conferences->actions->update(
             'id',
             [
-                'call_control_id' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
-                'supervisor_role' => 'whisper',
+                'callControlID' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+                'supervisorRole' => 'whisper',
             ],
         );
 
@@ -69,11 +69,11 @@ final class ActionsTest extends TestCase
         $result = $this->client->conferences->actions->update(
             'id',
             [
-                'call_control_id' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
-                'supervisor_role' => 'whisper',
-                'command_id' => '891510ac-f3e4-11e8-af5b-de00688a4901',
+                'callControlID' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+                'supervisorRole' => 'whisper',
+                'commandID' => '891510ac-f3e4-11e8-af5b-de00688a4901',
                 'region' => 'US',
-                'whisper_call_control_ids' => [
+                'whisperCallControlIDs' => [
                     'v2:Sg1xxxQ_U3ixxxyXT_VDNI3xxxazZdg6Vxxxs4-GNYxxxVaJPOhFMRQ',
                     'v2:qqpb0mmvd-ovhhBr0BUQQn0fld5jIboaaX3-De0DkqXHzbf8d75xkw',
                 ],
@@ -107,7 +107,7 @@ final class ActionsTest extends TestCase
         $result = $this->client->conferences->actions->join(
             'id',
             [
-                'call_control_id' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+                'callControlID' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
             ],
         );
 
@@ -125,20 +125,20 @@ final class ActionsTest extends TestCase
         $result = $this->client->conferences->actions->join(
             'id',
             [
-                'call_control_id' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
-                'beep_enabled' => 'always',
-                'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
-                'command_id' => '891510ac-f3e4-11e8-af5b-de00688a4901',
-                'end_conference_on_exit' => true,
+                'callControlID' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+                'beepEnabled' => 'always',
+                'clientState' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
+                'commandID' => '891510ac-f3e4-11e8-af5b-de00688a4901',
+                'endConferenceOnExit' => true,
                 'hold' => true,
-                'hold_audio_url' => 'http://www.example.com/audio.wav',
-                'hold_media_name' => 'my_media_uploaded_to_media_storage_api',
+                'holdAudioURL' => 'http://www.example.com/audio.wav',
+                'holdMediaName' => 'my_media_uploaded_to_media_storage_api',
                 'mute' => true,
                 'region' => 'US',
-                'soft_end_conference_on_exit' => true,
-                'start_conference_on_enter' => true,
-                'supervisor_role' => 'whisper',
-                'whisper_call_control_ids' => [
+                'softEndConferenceOnExit' => true,
+                'startConferenceOnEnter' => true,
+                'supervisorRole' => 'whisper',
+                'whisperCallControlIDs' => [
                     'v2:Sg1xxxQ_U3ixxxyXT_VDNI3xxxazZdg6Vxxxs4-GNYxxxVaJPOhFMRQ',
                     'v2:qqpb0mmvd-ovhhBr0BUQQn0fld5jIboaaX3-De0DkqXHzbf8d75xkw',
                 ],
@@ -158,7 +158,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->leave(
             'id',
-            ['call_control_id' => 'c46e06d7-b78f-4b13-96b6-c576af9640ff']
+            ['callControlID' => 'c46e06d7-b78f-4b13-96b6-c576af9640ff']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -175,9 +175,9 @@ final class ActionsTest extends TestCase
         $result = $this->client->conferences->actions->leave(
             'id',
             [
-                'call_control_id' => 'c46e06d7-b78f-4b13-96b6-c576af9640ff',
-                'beep_enabled' => 'never',
-                'command_id' => '891510ac-f3e4-11e8-af5b-de00688a4901',
+                'callControlID' => 'c46e06d7-b78f-4b13-96b6-c576af9640ff',
+                'beepEnabled' => 'never',
+                'commandID' => '891510ac-f3e4-11e8-af5b-de00688a4901',
                 'region' => 'US',
             ],
         );
@@ -265,9 +265,9 @@ final class ActionsTest extends TestCase
             'id',
             [
                 'format' => 'wav',
-                'command_id' => '891510ac-f3e4-11e8-af5b-de00688a4901',
-                'custom_file_name' => 'my_recording_file_name',
-                'play_beep' => true,
+                'commandID' => '891510ac-f3e4-11e8-af5b-de00688a4901',
+                'customFileName' => 'my_recording_file_name',
+                'playBeep' => true,
                 'region' => 'US',
                 'trim' => 'trim-silence',
             ],
@@ -318,15 +318,15 @@ final class ActionsTest extends TestCase
             [
                 'payload' => 'Say this to participants',
                 'voice' => 'female',
-                'call_control_ids' => [
+                'callControlIDs' => [
                     'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
                 ],
-                'command_id' => '891510ac-f3e4-11e8-af5b-de00688a4901',
+                'commandID' => '891510ac-f3e4-11e8-af5b-de00688a4901',
                 'language' => 'en-US',
-                'payload_type' => 'text',
+                'payloadType' => 'text',
                 'region' => 'US',
-                'voice_settings' => [
-                    'type' => 'elevenlabs', 'api_key_ref' => 'my_elevenlabs_api_key',
+                'voiceSettings' => [
+                    'type' => 'elevenlabs', 'apiKeyRef' => 'my_elevenlabs_api_key',
                 ],
             ],
         );
@@ -358,7 +358,7 @@ final class ActionsTest extends TestCase
         $result = $this->client->conferences->actions->unhold(
             'id',
             [
-                'call_control_ids' => [
+                'callControlIDs' => [
                     'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
                 ],
             ],
@@ -378,7 +378,7 @@ final class ActionsTest extends TestCase
         $result = $this->client->conferences->actions->unhold(
             'id',
             [
-                'call_control_ids' => [
+                'callControlIDs' => [
                     'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
                 ],
                 'region' => 'US',

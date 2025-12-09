@@ -44,23 +44,23 @@ final class MobileVoiceConnectionListResponse implements BaseModel
      * @param list<Data|array{
      *   id?: string|null,
      *   active?: bool|null,
-     *   connection_name?: string|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   connectionName?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   inbound?: Inbound|null,
      *   outbound?: Outbound|null,
-     *   record_type?: value-of<RecordType>|null,
+     *   recordType?: value-of<RecordType>|null,
      *   tags?: list<string>|null,
-     *   updated_at?: \DateTimeInterface|null,
-     *   webhook_api_version?: value-of<WebhookAPIVersion>|null,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_event_url?: string|null,
-     *   webhook_timeout_secs?: int|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookEventURL?: string|null,
+     *   webhookTimeoutSecs?: int|null,
      * }> $data
      * @param Meta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -79,17 +79,17 @@ final class MobileVoiceConnectionListResponse implements BaseModel
      * @param list<Data|array{
      *   id?: string|null,
      *   active?: bool|null,
-     *   connection_name?: string|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   connectionName?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   inbound?: Inbound|null,
      *   outbound?: Outbound|null,
-     *   record_type?: value-of<RecordType>|null,
+     *   recordType?: value-of<RecordType>|null,
      *   tags?: list<string>|null,
-     *   updated_at?: \DateTimeInterface|null,
-     *   webhook_api_version?: value-of<WebhookAPIVersion>|null,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_event_url?: string|null,
-     *   webhook_timeout_secs?: int|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookEventURL?: string|null,
+     *   webhookTimeoutSecs?: int|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -102,10 +102,10 @@ final class MobileVoiceConnectionListResponse implements BaseModel
 
     /**
      * @param Meta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(Meta|array $meta): self

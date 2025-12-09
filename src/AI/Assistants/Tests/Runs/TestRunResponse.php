@@ -17,18 +17,18 @@ use Telnyx\Core\Contracts\BaseModel;
  * status, timing, logs, and detailed evaluation results.
  *
  * @phpstan-type TestRunResponseShape = array{
- *   created_at: \DateTimeInterface,
- *   run_id: string,
+ *   createdAt: \DateTimeInterface,
+ *   runID: string,
  *   status: value-of<TestStatus>,
- *   test_id: string,
- *   triggered_by: string,
- *   completed_at?: \DateTimeInterface|null,
- *   conversation_id?: string|null,
- *   conversation_insights_id?: string|null,
- *   detail_status?: list<DetailStatus>|null,
+ *   testID: string,
+ *   triggeredBy: string,
+ *   completedAt?: \DateTimeInterface|null,
+ *   conversationID?: string|null,
+ *   conversationInsightsID?: string|null,
+ *   detailStatus?: list<DetailStatus>|null,
  *   logs?: string|null,
- *   test_suite_run_id?: string|null,
- *   updated_at?: \DateTimeInterface|null,
+ *   testSuiteRunID?: string|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class TestRunResponse implements BaseModel
@@ -39,14 +39,14 @@ final class TestRunResponse implements BaseModel
     /**
      * Timestamp when the test run was created and queued.
      */
-    #[Required]
-    public \DateTimeInterface $created_at;
+    #[Required('created_at')]
+    public \DateTimeInterface $createdAt;
 
     /**
      * Unique identifier for this specific test run execution.
      */
-    #[Required]
-    public string $run_id;
+    #[Required('run_id')]
+    public string $runID;
 
     /**
      * Represents the lifecycle of a test:
@@ -65,40 +65,40 @@ final class TestRunResponse implements BaseModel
     /**
      * Identifier of the assistant test that was executed.
      */
-    #[Required]
-    public string $test_id;
+    #[Required('test_id')]
+    public string $testID;
 
     /**
      * How this test run was initiated (manual, scheduled, or API).
      */
-    #[Required]
-    public string $triggered_by;
+    #[Required('triggered_by')]
+    public string $triggeredBy;
 
     /**
      * Timestamp when the test run finished execution.
      */
-    #[Optional]
-    public ?\DateTimeInterface $completed_at;
+    #[Optional('completed_at')]
+    public ?\DateTimeInterface $completedAt;
 
     /**
      * Identifier of the conversation created during test execution.
      */
-    #[Optional]
-    public ?string $conversation_id;
+    #[Optional('conversation_id')]
+    public ?string $conversationID;
 
     /**
      * Identifier for conversation analysis and insights data.
      */
-    #[Optional]
-    public ?string $conversation_insights_id;
+    #[Optional('conversation_insights_id')]
+    public ?string $conversationInsightsID;
 
     /**
      * Detailed evaluation results for each rubric criteria. Name is name of the criteria from the rubric and status is the result of the evaluation. This list will have a result for every criteria in the rubric section.
      *
-     * @var list<DetailStatus>|null $detail_status
+     * @var list<DetailStatus>|null $detailStatus
      */
-    #[Optional(list: DetailStatus::class)]
-    public ?array $detail_status;
+    #[Optional('detail_status', list: DetailStatus::class)]
+    public ?array $detailStatus;
 
     /**
      * Detailed execution logs and debug information.
@@ -109,14 +109,14 @@ final class TestRunResponse implements BaseModel
     /**
      * Identifier linking this run to a test suite execution batch.
      */
-    #[Optional]
-    public ?string $test_suite_run_id;
+    #[Optional('test_suite_run_id')]
+    public ?string $testSuiteRunID;
 
     /**
      * Timestamp of the last update to this test run.
      */
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     /**
      * `new TestRunResponse()` is missing required properties by the API.
@@ -124,7 +124,7 @@ final class TestRunResponse implements BaseModel
      * To enforce required parameters use
      * ```
      * TestRunResponse::with(
-     *   created_at: ..., run_id: ..., status: ..., test_id: ..., triggered_by: ...
+     *   createdAt: ..., runID: ..., status: ..., testID: ..., triggeredBy: ...
      * )
      * ```
      *
@@ -152,37 +152,37 @@ final class TestRunResponse implements BaseModel
      * @param TestStatus|value-of<TestStatus> $status
      * @param list<DetailStatus|array{
      *   name: string, status: value-of<TestStatus>
-     * }> $detail_status
+     * }> $detailStatus
      */
     public static function with(
-        \DateTimeInterface $created_at,
-        string $run_id,
+        \DateTimeInterface $createdAt,
+        string $runID,
         TestStatus|string $status,
-        string $test_id,
-        string $triggered_by,
-        ?\DateTimeInterface $completed_at = null,
-        ?string $conversation_id = null,
-        ?string $conversation_insights_id = null,
-        ?array $detail_status = null,
+        string $testID,
+        string $triggeredBy,
+        ?\DateTimeInterface $completedAt = null,
+        ?string $conversationID = null,
+        ?string $conversationInsightsID = null,
+        ?array $detailStatus = null,
         ?string $logs = null,
-        ?string $test_suite_run_id = null,
-        ?\DateTimeInterface $updated_at = null,
+        ?string $testSuiteRunID = null,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
         $obj = new self;
 
-        $obj['created_at'] = $created_at;
-        $obj['run_id'] = $run_id;
+        $obj['createdAt'] = $createdAt;
+        $obj['runID'] = $runID;
         $obj['status'] = $status;
-        $obj['test_id'] = $test_id;
-        $obj['triggered_by'] = $triggered_by;
+        $obj['testID'] = $testID;
+        $obj['triggeredBy'] = $triggeredBy;
 
-        null !== $completed_at && $obj['completed_at'] = $completed_at;
-        null !== $conversation_id && $obj['conversation_id'] = $conversation_id;
-        null !== $conversation_insights_id && $obj['conversation_insights_id'] = $conversation_insights_id;
-        null !== $detail_status && $obj['detail_status'] = $detail_status;
+        null !== $completedAt && $obj['completedAt'] = $completedAt;
+        null !== $conversationID && $obj['conversationID'] = $conversationID;
+        null !== $conversationInsightsID && $obj['conversationInsightsID'] = $conversationInsightsID;
+        null !== $detailStatus && $obj['detailStatus'] = $detailStatus;
         null !== $logs && $obj['logs'] = $logs;
-        null !== $test_suite_run_id && $obj['test_suite_run_id'] = $test_suite_run_id;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $testSuiteRunID && $obj['testSuiteRunID'] = $testSuiteRunID;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -193,7 +193,7 @@ final class TestRunResponse implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -204,7 +204,7 @@ final class TestRunResponse implements BaseModel
     public function withRunID(string $runID): self
     {
         $obj = clone $this;
-        $obj['run_id'] = $runID;
+        $obj['runID'] = $runID;
 
         return $obj;
     }
@@ -234,7 +234,7 @@ final class TestRunResponse implements BaseModel
     public function withTestID(string $testID): self
     {
         $obj = clone $this;
-        $obj['test_id'] = $testID;
+        $obj['testID'] = $testID;
 
         return $obj;
     }
@@ -245,7 +245,7 @@ final class TestRunResponse implements BaseModel
     public function withTriggeredBy(string $triggeredBy): self
     {
         $obj = clone $this;
-        $obj['triggered_by'] = $triggeredBy;
+        $obj['triggeredBy'] = $triggeredBy;
 
         return $obj;
     }
@@ -256,7 +256,7 @@ final class TestRunResponse implements BaseModel
     public function withCompletedAt(\DateTimeInterface $completedAt): self
     {
         $obj = clone $this;
-        $obj['completed_at'] = $completedAt;
+        $obj['completedAt'] = $completedAt;
 
         return $obj;
     }
@@ -267,7 +267,7 @@ final class TestRunResponse implements BaseModel
     public function withConversationID(string $conversationID): self
     {
         $obj = clone $this;
-        $obj['conversation_id'] = $conversationID;
+        $obj['conversationID'] = $conversationID;
 
         return $obj;
     }
@@ -279,7 +279,7 @@ final class TestRunResponse implements BaseModel
         string $conversationInsightsID
     ): self {
         $obj = clone $this;
-        $obj['conversation_insights_id'] = $conversationInsightsID;
+        $obj['conversationInsightsID'] = $conversationInsightsID;
 
         return $obj;
     }
@@ -294,7 +294,7 @@ final class TestRunResponse implements BaseModel
     public function withDetailStatus(array $detailStatus): self
     {
         $obj = clone $this;
-        $obj['detail_status'] = $detailStatus;
+        $obj['detailStatus'] = $detailStatus;
 
         return $obj;
     }
@@ -316,7 +316,7 @@ final class TestRunResponse implements BaseModel
     public function withTestSuiteRunID(string $testSuiteRunID): self
     {
         $obj = clone $this;
-        $obj['test_suite_run_id'] = $testSuiteRunID;
+        $obj['testSuiteRunID'] = $testSuiteRunID;
 
         return $obj;
     }
@@ -327,7 +327,7 @@ final class TestRunResponse implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

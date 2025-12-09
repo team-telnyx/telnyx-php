@@ -16,8 +16,8 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCreateVerificat
  * @see Telnyx\Services\MessagingHostedNumberOrdersService::createVerificationCodes()
  *
  * @phpstan-type MessagingHostedNumberOrderCreateVerificationCodesParamsShape = array{
- *   phone_numbers: list<string>,
- *   verification_method: VerificationMethod|value-of<VerificationMethod>,
+ *   phoneNumbers: list<string>,
+ *   verificationMethod: VerificationMethod|value-of<VerificationMethod>,
  * }
  */
 final class MessagingHostedNumberOrderCreateVerificationCodesParams implements BaseModel
@@ -26,13 +26,13 @@ final class MessagingHostedNumberOrderCreateVerificationCodesParams implements B
     use SdkModel;
     use SdkParams;
 
-    /** @var list<string> $phone_numbers */
-    #[Required(list: 'string')]
-    public array $phone_numbers;
+    /** @var list<string> $phoneNumbers */
+    #[Required('phone_numbers', list: 'string')]
+    public array $phoneNumbers;
 
-    /** @var value-of<VerificationMethod> $verification_method */
-    #[Required(enum: VerificationMethod::class)]
-    public string $verification_method;
+    /** @var value-of<VerificationMethod> $verificationMethod */
+    #[Required('verification_method', enum: VerificationMethod::class)]
+    public string $verificationMethod;
 
     /**
      * `new MessagingHostedNumberOrderCreateVerificationCodesParams()` is missing required properties by the API.
@@ -40,7 +40,7 @@ final class MessagingHostedNumberOrderCreateVerificationCodesParams implements B
      * To enforce required parameters use
      * ```
      * MessagingHostedNumberOrderCreateVerificationCodesParams::with(
-     *   phone_numbers: ..., verification_method: ...
+     *   phoneNumbers: ..., verificationMethod: ...
      * )
      * ```
      *
@@ -62,17 +62,17 @@ final class MessagingHostedNumberOrderCreateVerificationCodesParams implements B
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $phone_numbers
-     * @param VerificationMethod|value-of<VerificationMethod> $verification_method
+     * @param list<string> $phoneNumbers
+     * @param VerificationMethod|value-of<VerificationMethod> $verificationMethod
      */
     public static function with(
-        array $phone_numbers,
-        VerificationMethod|string $verification_method
+        array $phoneNumbers,
+        VerificationMethod|string $verificationMethod
     ): self {
         $obj = new self;
 
-        $obj['phone_numbers'] = $phone_numbers;
-        $obj['verification_method'] = $verification_method;
+        $obj['phoneNumbers'] = $phoneNumbers;
+        $obj['verificationMethod'] = $verificationMethod;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class MessagingHostedNumberOrderCreateVerificationCodesParams implements B
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj['phone_numbers'] = $phoneNumbers;
+        $obj['phoneNumbers'] = $phoneNumbers;
 
         return $obj;
     }
@@ -95,7 +95,7 @@ final class MessagingHostedNumberOrderCreateVerificationCodesParams implements B
         VerificationMethod|string $verificationMethod
     ): self {
         $obj = clone $this;
-        $obj['verification_method'] = $verificationMethod;
+        $obj['verificationMethod'] = $verificationMethod;
 
         return $obj;
     }

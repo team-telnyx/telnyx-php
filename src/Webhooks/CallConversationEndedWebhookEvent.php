@@ -35,11 +35,11 @@ final class CallConversationEndedWebhookEvent implements BaseModel
      *
      * @param Data|array{
      *   id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   event_type?: value-of<EventType>|null,
-     *   occurred_at?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   eventType?: value-of<EventType>|null,
+     *   occurredAt?: \DateTimeInterface|null,
      *   payload?: Payload|null,
-     *   record_type?: value-of<RecordType>|null,
+     *   recordType?: value-of<RecordType>|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -54,11 +54,11 @@ final class CallConversationEndedWebhookEvent implements BaseModel
     /**
      * @param Data|array{
      *   id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   event_type?: value-of<EventType>|null,
-     *   occurred_at?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   eventType?: value-of<EventType>|null,
+     *   occurredAt?: \DateTimeInterface|null,
      *   payload?: Payload|null,
-     *   record_type?: value-of<RecordType>|null,
+     *   recordType?: value-of<RecordType>|null,
      * } $data
      */
     public function withData(Data|array $data): self

@@ -37,9 +37,9 @@ final class MigrationsTest extends TestCase
         }
 
         $result = $this->client->storage->migrations->create([
-            'source_id' => 'source_id',
-            'target_bucket_name' => 'target_bucket_name',
-            'target_region' => 'target_region',
+            'sourceID' => 'source_id',
+            'targetBucketName' => 'target_bucket_name',
+            'targetRegion' => 'target_region',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -54,9 +54,9 @@ final class MigrationsTest extends TestCase
         }
 
         $result = $this->client->storage->migrations->create([
-            'source_id' => 'source_id',
-            'target_bucket_name' => 'target_bucket_name',
-            'target_region' => 'target_region',
+            'sourceID' => 'source_id',
+            'targetBucketName' => 'target_bucket_name',
+            'targetRegion' => 'target_region',
             'refresh' => true,
         ]);
 

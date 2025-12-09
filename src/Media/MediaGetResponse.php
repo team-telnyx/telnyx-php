@@ -30,11 +30,11 @@ final class MediaGetResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param MediaResource|array{
-     *   content_type?: string|null,
-     *   created_at?: string|null,
-     *   expires_at?: string|null,
-     *   media_name?: string|null,
-     *   updated_at?: string|null,
+     *   contentType?: string|null,
+     *   createdAt?: string|null,
+     *   expiresAt?: string|null,
+     *   mediaName?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public static function with(MediaResource|array|null $data = null): self
@@ -48,11 +48,11 @@ final class MediaGetResponse implements BaseModel
 
     /**
      * @param MediaResource|array{
-     *   content_type?: string|null,
-     *   created_at?: string|null,
-     *   expires_at?: string|null,
-     *   media_name?: string|null,
-     *   updated_at?: string|null,
+     *   contentType?: string|null,
+     *   createdAt?: string|null,
+     *   expiresAt?: string|null,
+     *   mediaName?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public function withData(MediaResource|array $data): self

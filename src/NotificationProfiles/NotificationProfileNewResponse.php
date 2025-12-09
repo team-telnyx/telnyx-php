@@ -36,9 +36,9 @@ final class NotificationProfileNewResponse implements BaseModel
      *
      * @param NotificationProfile|array{
      *   id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   name?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(NotificationProfile|array|null $data = null): self
@@ -55,9 +55,9 @@ final class NotificationProfileNewResponse implements BaseModel
      *
      * @param NotificationProfile|array{
      *   id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   name?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(NotificationProfile|array $data): self

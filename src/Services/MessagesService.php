@@ -96,17 +96,17 @@ final class MessagesService implements MessagesContract
      *
      * @param array{
      *   to: string,
-     *   auto_detect?: bool,
+     *   autoDetect?: bool,
      *   from?: string,
-     *   media_urls?: list<string>,
-     *   messaging_profile_id?: string,
-     *   send_at?: string|\DateTimeInterface,
+     *   mediaURLs?: list<string>,
+     *   messagingProfileID?: string,
+     *   sendAt?: string|\DateTimeInterface,
      *   subject?: string,
      *   text?: string,
      *   type?: 'SMS'|'MMS'|Type,
-     *   use_profile_webhooks?: bool,
-     *   webhook_failover_url?: string,
-     *   webhook_url?: string,
+     *   useProfileWebhooks?: bool,
+     *   webhookFailoverURL?: string,
+     *   webhookURL?: string,
      * }|MessageScheduleParams $params
      *
      * @throws APIException
@@ -143,17 +143,17 @@ final class MessagesService implements MessagesContract
      *
      * @param array{
      *   to: string,
-     *   auto_detect?: bool,
+     *   autoDetect?: bool,
      *   from?: string,
-     *   media_urls?: list<string>,
-     *   messaging_profile_id?: string,
-     *   send_at?: string|\DateTimeInterface|null,
+     *   mediaURLs?: list<string>,
+     *   messagingProfileID?: string,
+     *   sendAt?: string|\DateTimeInterface|null,
      *   subject?: string,
      *   text?: string,
      *   type?: 'SMS'|'MMS'|MessageSendParams\Type,
-     *   use_profile_webhooks?: bool,
-     *   webhook_failover_url?: string,
-     *   webhook_url?: string,
+     *   useProfileWebhooks?: bool,
+     *   webhookFailoverURL?: string,
+     *   webhookURL?: string,
      * }|MessageSendParams $params
      *
      * @throws APIException
@@ -187,12 +187,12 @@ final class MessagesService implements MessagesContract
      * @param array{
      *   from: string,
      *   to: list<string>,
-     *   media_urls?: list<string>,
+     *   mediaURLs?: list<string>,
      *   subject?: string,
      *   text?: string,
-     *   use_profile_webhooks?: bool,
-     *   webhook_failover_url?: string,
-     *   webhook_url?: string,
+     *   useProfileWebhooks?: bool,
+     *   webhookFailoverURL?: string,
+     *   webhookURL?: string,
      * }|MessageSendGroupMmsParams $params
      *
      * @throws APIException
@@ -226,14 +226,14 @@ final class MessagesService implements MessagesContract
      * @param array{
      *   from: string,
      *   to: string,
-     *   auto_detect?: bool,
-     *   media_urls?: list<string>,
+     *   autoDetect?: bool,
+     *   mediaURLs?: list<string>,
      *   subject?: string,
      *   text?: string,
      *   type?: 'SMS'|'MMS'|MessageSendLongCodeParams\Type,
-     *   use_profile_webhooks?: bool,
-     *   webhook_failover_url?: string,
-     *   webhook_url?: string,
+     *   useProfileWebhooks?: bool,
+     *   webhookFailoverURL?: string,
+     *   webhookURL?: string,
      * }|MessageSendLongCodeParams $params
      *
      * @throws APIException
@@ -265,16 +265,16 @@ final class MessagesService implements MessagesContract
      * Send a message using number pool
      *
      * @param array{
-     *   messaging_profile_id: string,
+     *   messagingProfileID: string,
      *   to: string,
-     *   auto_detect?: bool,
-     *   media_urls?: list<string>,
+     *   autoDetect?: bool,
+     *   mediaURLs?: list<string>,
      *   subject?: string,
      *   text?: string,
      *   type?: 'SMS'|'MMS'|MessageSendNumberPoolParams\Type,
-     *   use_profile_webhooks?: bool,
-     *   webhook_failover_url?: string,
-     *   webhook_url?: string,
+     *   useProfileWebhooks?: bool,
+     *   webhookFailoverURL?: string,
+     *   webhookURL?: string,
      * }|MessageSendNumberPoolParams $params
      *
      * @throws APIException
@@ -308,14 +308,14 @@ final class MessagesService implements MessagesContract
      * @param array{
      *   from: string,
      *   to: string,
-     *   auto_detect?: bool,
-     *   media_urls?: list<string>,
+     *   autoDetect?: bool,
+     *   mediaURLs?: list<string>,
      *   subject?: string,
      *   text?: string,
      *   type?: 'SMS'|'MMS'|MessageSendShortCodeParams\Type,
-     *   use_profile_webhooks?: bool,
-     *   webhook_failover_url?: string,
-     *   webhook_url?: string,
+     *   useProfileWebhooks?: bool,
+     *   webhookFailoverURL?: string,
+     *   webhookURL?: string,
      * }|MessageSendShortCodeParams $params
      *
      * @throws APIException

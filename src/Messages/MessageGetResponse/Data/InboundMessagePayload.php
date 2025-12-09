@@ -27,31 +27,31 @@ use Telnyx\Messages\MessagingError\Source;
  * @phpstan-type InboundMessagePayloadShape = array{
  *   id?: string|null,
  *   cc?: list<Cc>|null,
- *   completed_at?: \DateTimeInterface|null,
+ *   completedAt?: \DateTimeInterface|null,
  *   cost?: Cost|null,
- *   cost_breakdown?: CostBreakdown|null,
+ *   costBreakdown?: CostBreakdown|null,
  *   direction?: value-of<Direction>|null,
  *   encoding?: string|null,
  *   errors?: list<MessagingError>|null,
  *   from?: From|null,
  *   media?: list<Media>|null,
- *   messaging_profile_id?: string|null,
- *   organization_id?: string|null,
+ *   messagingProfileID?: string|null,
+ *   organizationID?: string|null,
  *   parts?: int|null,
- *   received_at?: \DateTimeInterface|null,
- *   record_type?: value-of<RecordType>|null,
- *   sent_at?: \DateTimeInterface|null,
+ *   receivedAt?: \DateTimeInterface|null,
+ *   recordType?: value-of<RecordType>|null,
+ *   sentAt?: \DateTimeInterface|null,
  *   subject?: string|null,
  *   tags?: list<string>|null,
- *   tcr_campaign_billable?: bool|null,
- *   tcr_campaign_id?: string|null,
- *   tcr_campaign_registered?: string|null,
+ *   tcrCampaignBillable?: bool|null,
+ *   tcrCampaignID?: string|null,
+ *   tcrCampaignRegistered?: string|null,
  *   text?: string|null,
  *   to?: list<To>|null,
  *   type?: value-of<Type>|null,
- *   valid_until?: \DateTimeInterface|null,
- *   webhook_failover_url?: string|null,
- *   webhook_url?: string|null,
+ *   validUntil?: \DateTimeInterface|null,
+ *   webhookFailoverURL?: string|null,
+ *   webhookURL?: string|null,
  * }
  */
 final class InboundMessagePayload implements BaseModel
@@ -72,8 +72,8 @@ final class InboundMessagePayload implements BaseModel
     /**
      * Not used for inbound messages.
      */
-    #[Optional(nullable: true)]
-    public ?\DateTimeInterface $completed_at;
+    #[Optional('completed_at', nullable: true)]
+    public ?\DateTimeInterface $completedAt;
 
     #[Optional(nullable: true)]
     public ?Cost $cost;
@@ -81,8 +81,8 @@ final class InboundMessagePayload implements BaseModel
     /**
      * Detailed breakdown of the message cost components.
      */
-    #[Optional(nullable: true)]
-    public ?CostBreakdown $cost_breakdown;
+    #[Optional('cost_breakdown', nullable: true)]
+    public ?CostBreakdown $costBreakdown;
 
     /**
      * The direction of the message. Inbound messages are sent to you whereas outbound messages are sent from you.
@@ -116,14 +116,14 @@ final class InboundMessagePayload implements BaseModel
     /**
      * Unique identifier for a messaging profile.
      */
-    #[Optional]
-    public ?string $messaging_profile_id;
+    #[Optional('messaging_profile_id')]
+    public ?string $messagingProfileID;
 
     /**
      * Unique identifier for a messaging profile.
      */
-    #[Optional]
-    public ?string $organization_id;
+    #[Optional('organization_id')]
+    public ?string $organizationID;
 
     /**
      * Number of parts into which the message's body must be split.
@@ -134,22 +134,22 @@ final class InboundMessagePayload implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the message request was received.
      */
-    #[Optional]
-    public ?\DateTimeInterface $received_at;
+    #[Optional('received_at')]
+    public ?\DateTimeInterface $receivedAt;
 
     /**
      * Identifies the type of the resource.
      *
-     * @var value-of<RecordType>|null $record_type
+     * @var value-of<RecordType>|null $recordType
      */
-    #[Optional(enum: RecordType::class)]
-    public ?string $record_type;
+    #[Optional('record_type', enum: RecordType::class)]
+    public ?string $recordType;
 
     /**
      * Not used for inbound messages.
      */
-    #[Optional(nullable: true)]
-    public ?\DateTimeInterface $sent_at;
+    #[Optional('sent_at', nullable: true)]
+    public ?\DateTimeInterface $sentAt;
 
     /**
      * Message subject.
@@ -168,20 +168,20 @@ final class InboundMessagePayload implements BaseModel
     /**
      * Indicates whether the TCR campaign is billable.
      */
-    #[Optional]
-    public ?bool $tcr_campaign_billable;
+    #[Optional('tcr_campaign_billable')]
+    public ?bool $tcrCampaignBillable;
 
     /**
      * The Campaign Registry (TCR) campaign ID associated with the message.
      */
-    #[Optional(nullable: true)]
-    public ?string $tcr_campaign_id;
+    #[Optional('tcr_campaign_id', nullable: true)]
+    public ?string $tcrCampaignID;
 
     /**
      * The registration status of the TCR campaign.
      */
-    #[Optional(nullable: true)]
-    public ?string $tcr_campaign_registered;
+    #[Optional('tcr_campaign_registered', nullable: true)]
+    public ?string $tcrCampaignRegistered;
 
     /**
      * Message body (i.e., content) as a non-empty string.
@@ -206,20 +206,20 @@ final class InboundMessagePayload implements BaseModel
     /**
      * Not used for inbound messages.
      */
-    #[Optional(nullable: true)]
-    public ?\DateTimeInterface $valid_until;
+    #[Optional('valid_until', nullable: true)]
+    public ?\DateTimeInterface $validUntil;
 
     /**
      * The failover URL where webhooks related to this message will be sent if sending to the primary URL fails.
      */
-    #[Optional(nullable: true)]
-    public ?string $webhook_failover_url;
+    #[Optional('webhook_failover_url', nullable: true)]
+    public ?string $webhookFailoverURL;
 
     /**
      * The URL where webhooks related to this message will be sent.
      */
-    #[Optional(nullable: true)]
-    public ?string $webhook_url;
+    #[Optional('webhook_url', nullable: true)]
+    public ?string $webhookURL;
 
     public function __construct()
     {
@@ -233,14 +233,14 @@ final class InboundMessagePayload implements BaseModel
      *
      * @param list<Cc|array{
      *   carrier?: string|null,
-     *   line_type?: value-of<LineType>|null,
-     *   phone_number?: string|null,
+     *   lineType?: value-of<LineType>|null,
+     *   phoneNumber?: string|null,
      *   status?: value-of<Status>|null,
      * }> $cc
      * @param Cost|array{amount?: string|null, currency?: string|null}|null $cost
      * @param CostBreakdown|array{
-     *   carrier_fee?: CarrierFee|null, rate?: Rate|null
-     * }|null $cost_breakdown
+     *   carrierFee?: CarrierFee|null, rate?: Rate|null
+     * }|null $costBreakdown
      * @param Direction|value-of<Direction> $direction
      * @param list<MessagingError|array{
      *   code: string,
@@ -251,22 +251,22 @@ final class InboundMessagePayload implements BaseModel
      * }> $errors
      * @param From|array{
      *   carrier?: string|null,
-     *   line_type?: value-of<From\LineType>|null,
-     *   phone_number?: string|null,
+     *   lineType?: value-of<From\LineType>|null,
+     *   phoneNumber?: string|null,
      *   status?: value-of<From\Status>|null,
      * } $from
      * @param list<Media|array{
-     *   content_type?: string|null,
-     *   hash_sha256?: string|null,
+     *   contentType?: string|null,
+     *   hashSha256?: string|null,
      *   size?: int|null,
      *   url?: string|null,
      * }> $media
-     * @param RecordType|value-of<RecordType> $record_type
+     * @param RecordType|value-of<RecordType> $recordType
      * @param list<string> $tags
      * @param list<To|array{
      *   carrier?: string|null,
-     *   line_type?: value-of<To\LineType>|null,
-     *   phone_number?: string|null,
+     *   lineType?: value-of<To\LineType>|null,
+     *   phoneNumber?: string|null,
      *   status?: value-of<To\Status>|null,
      * }> $to
      * @param Type|value-of<Type> $type
@@ -274,61 +274,61 @@ final class InboundMessagePayload implements BaseModel
     public static function with(
         ?string $id = null,
         ?array $cc = null,
-        ?\DateTimeInterface $completed_at = null,
+        ?\DateTimeInterface $completedAt = null,
         Cost|array|null $cost = null,
-        CostBreakdown|array|null $cost_breakdown = null,
+        CostBreakdown|array|null $costBreakdown = null,
         Direction|string|null $direction = null,
         ?string $encoding = null,
         ?array $errors = null,
         From|array|null $from = null,
         ?array $media = null,
-        ?string $messaging_profile_id = null,
-        ?string $organization_id = null,
+        ?string $messagingProfileID = null,
+        ?string $organizationID = null,
         ?int $parts = null,
-        ?\DateTimeInterface $received_at = null,
-        RecordType|string|null $record_type = null,
-        ?\DateTimeInterface $sent_at = null,
+        ?\DateTimeInterface $receivedAt = null,
+        RecordType|string|null $recordType = null,
+        ?\DateTimeInterface $sentAt = null,
         ?string $subject = null,
         ?array $tags = null,
-        ?bool $tcr_campaign_billable = null,
-        ?string $tcr_campaign_id = null,
-        ?string $tcr_campaign_registered = null,
+        ?bool $tcrCampaignBillable = null,
+        ?string $tcrCampaignID = null,
+        ?string $tcrCampaignRegistered = null,
         ?string $text = null,
         ?array $to = null,
         Type|string|null $type = null,
-        ?\DateTimeInterface $valid_until = null,
-        ?string $webhook_failover_url = null,
-        ?string $webhook_url = null,
+        ?\DateTimeInterface $validUntil = null,
+        ?string $webhookFailoverURL = null,
+        ?string $webhookURL = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
         null !== $cc && $obj['cc'] = $cc;
-        null !== $completed_at && $obj['completed_at'] = $completed_at;
+        null !== $completedAt && $obj['completedAt'] = $completedAt;
         null !== $cost && $obj['cost'] = $cost;
-        null !== $cost_breakdown && $obj['cost_breakdown'] = $cost_breakdown;
+        null !== $costBreakdown && $obj['costBreakdown'] = $costBreakdown;
         null !== $direction && $obj['direction'] = $direction;
         null !== $encoding && $obj['encoding'] = $encoding;
         null !== $errors && $obj['errors'] = $errors;
         null !== $from && $obj['from'] = $from;
         null !== $media && $obj['media'] = $media;
-        null !== $messaging_profile_id && $obj['messaging_profile_id'] = $messaging_profile_id;
-        null !== $organization_id && $obj['organization_id'] = $organization_id;
+        null !== $messagingProfileID && $obj['messagingProfileID'] = $messagingProfileID;
+        null !== $organizationID && $obj['organizationID'] = $organizationID;
         null !== $parts && $obj['parts'] = $parts;
-        null !== $received_at && $obj['received_at'] = $received_at;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $sent_at && $obj['sent_at'] = $sent_at;
+        null !== $receivedAt && $obj['receivedAt'] = $receivedAt;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $sentAt && $obj['sentAt'] = $sentAt;
         null !== $subject && $obj['subject'] = $subject;
         null !== $tags && $obj['tags'] = $tags;
-        null !== $tcr_campaign_billable && $obj['tcr_campaign_billable'] = $tcr_campaign_billable;
-        null !== $tcr_campaign_id && $obj['tcr_campaign_id'] = $tcr_campaign_id;
-        null !== $tcr_campaign_registered && $obj['tcr_campaign_registered'] = $tcr_campaign_registered;
+        null !== $tcrCampaignBillable && $obj['tcrCampaignBillable'] = $tcrCampaignBillable;
+        null !== $tcrCampaignID && $obj['tcrCampaignID'] = $tcrCampaignID;
+        null !== $tcrCampaignRegistered && $obj['tcrCampaignRegistered'] = $tcrCampaignRegistered;
         null !== $text && $obj['text'] = $text;
         null !== $to && $obj['to'] = $to;
         null !== $type && $obj['type'] = $type;
-        null !== $valid_until && $obj['valid_until'] = $valid_until;
-        null !== $webhook_failover_url && $obj['webhook_failover_url'] = $webhook_failover_url;
-        null !== $webhook_url && $obj['webhook_url'] = $webhook_url;
+        null !== $validUntil && $obj['validUntil'] = $validUntil;
+        null !== $webhookFailoverURL && $obj['webhookFailoverURL'] = $webhookFailoverURL;
+        null !== $webhookURL && $obj['webhookURL'] = $webhookURL;
 
         return $obj;
     }
@@ -347,8 +347,8 @@ final class InboundMessagePayload implements BaseModel
     /**
      * @param list<Cc|array{
      *   carrier?: string|null,
-     *   line_type?: value-of<LineType>|null,
-     *   phone_number?: string|null,
+     *   lineType?: value-of<LineType>|null,
+     *   phoneNumber?: string|null,
      *   status?: value-of<Status>|null,
      * }> $cc
      */
@@ -366,7 +366,7 @@ final class InboundMessagePayload implements BaseModel
     public function withCompletedAt(?\DateTimeInterface $completedAt): self
     {
         $obj = clone $this;
-        $obj['completed_at'] = $completedAt;
+        $obj['completedAt'] = $completedAt;
 
         return $obj;
     }
@@ -386,14 +386,14 @@ final class InboundMessagePayload implements BaseModel
      * Detailed breakdown of the message cost components.
      *
      * @param CostBreakdown|array{
-     *   carrier_fee?: CarrierFee|null, rate?: Rate|null
+     *   carrierFee?: CarrierFee|null, rate?: Rate|null
      * }|null $costBreakdown
      */
     public function withCostBreakdown(
         CostBreakdown|array|null $costBreakdown
     ): self {
         $obj = clone $this;
-        $obj['cost_breakdown'] = $costBreakdown;
+        $obj['costBreakdown'] = $costBreakdown;
 
         return $obj;
     }
@@ -444,8 +444,8 @@ final class InboundMessagePayload implements BaseModel
     /**
      * @param From|array{
      *   carrier?: string|null,
-     *   line_type?: value-of<From\LineType>|null,
-     *   phone_number?: string|null,
+     *   lineType?: value-of<From\LineType>|null,
+     *   phoneNumber?: string|null,
      *   status?: value-of<From\Status>|null,
      * } $from
      */
@@ -459,8 +459,8 @@ final class InboundMessagePayload implements BaseModel
 
     /**
      * @param list<Media|array{
-     *   content_type?: string|null,
-     *   hash_sha256?: string|null,
+     *   contentType?: string|null,
+     *   hashSha256?: string|null,
      *   size?: int|null,
      *   url?: string|null,
      * }> $media
@@ -479,7 +479,7 @@ final class InboundMessagePayload implements BaseModel
     public function withMessagingProfileID(string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj['messaging_profile_id'] = $messagingProfileID;
+        $obj['messagingProfileID'] = $messagingProfileID;
 
         return $obj;
     }
@@ -490,7 +490,7 @@ final class InboundMessagePayload implements BaseModel
     public function withOrganizationID(string $organizationID): self
     {
         $obj = clone $this;
-        $obj['organization_id'] = $organizationID;
+        $obj['organizationID'] = $organizationID;
 
         return $obj;
     }
@@ -512,7 +512,7 @@ final class InboundMessagePayload implements BaseModel
     public function withReceivedAt(\DateTimeInterface $receivedAt): self
     {
         $obj = clone $this;
-        $obj['received_at'] = $receivedAt;
+        $obj['receivedAt'] = $receivedAt;
 
         return $obj;
     }
@@ -525,7 +525,7 @@ final class InboundMessagePayload implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -536,7 +536,7 @@ final class InboundMessagePayload implements BaseModel
     public function withSentAt(?\DateTimeInterface $sentAt): self
     {
         $obj = clone $this;
-        $obj['sent_at'] = $sentAt;
+        $obj['sentAt'] = $sentAt;
 
         return $obj;
     }
@@ -571,7 +571,7 @@ final class InboundMessagePayload implements BaseModel
     public function withTcrCampaignBillable(bool $tcrCampaignBillable): self
     {
         $obj = clone $this;
-        $obj['tcr_campaign_billable'] = $tcrCampaignBillable;
+        $obj['tcrCampaignBillable'] = $tcrCampaignBillable;
 
         return $obj;
     }
@@ -582,7 +582,7 @@ final class InboundMessagePayload implements BaseModel
     public function withTcrCampaignID(?string $tcrCampaignID): self
     {
         $obj = clone $this;
-        $obj['tcr_campaign_id'] = $tcrCampaignID;
+        $obj['tcrCampaignID'] = $tcrCampaignID;
 
         return $obj;
     }
@@ -594,7 +594,7 @@ final class InboundMessagePayload implements BaseModel
         ?string $tcrCampaignRegistered
     ): self {
         $obj = clone $this;
-        $obj['tcr_campaign_registered'] = $tcrCampaignRegistered;
+        $obj['tcrCampaignRegistered'] = $tcrCampaignRegistered;
 
         return $obj;
     }
@@ -615,8 +615,8 @@ final class InboundMessagePayload implements BaseModel
     /**
      * @param list<To|array{
      *   carrier?: string|null,
-     *   line_type?: value-of<To\LineType>|null,
-     *   phone_number?: string|null,
+     *   lineType?: value-of<To\LineType>|null,
+     *   phoneNumber?: string|null,
      *   status?: value-of<To\Status>|null,
      * }> $to
      */
@@ -647,7 +647,7 @@ final class InboundMessagePayload implements BaseModel
     public function withValidUntil(?\DateTimeInterface $validUntil): self
     {
         $obj = clone $this;
-        $obj['valid_until'] = $validUntil;
+        $obj['validUntil'] = $validUntil;
 
         return $obj;
     }
@@ -658,7 +658,7 @@ final class InboundMessagePayload implements BaseModel
     public function withWebhookFailoverURL(?string $webhookFailoverURL): self
     {
         $obj = clone $this;
-        $obj['webhook_failover_url'] = $webhookFailoverURL;
+        $obj['webhookFailoverURL'] = $webhookFailoverURL;
 
         return $obj;
     }
@@ -669,7 +669,7 @@ final class InboundMessagePayload implements BaseModel
     public function withWebhookURL(?string $webhookURL): self
     {
         $obj = clone $this;
-        $obj['webhook_url'] = $webhookURL;
+        $obj['webhookURL'] = $webhookURL;
 
         return $obj;
     }

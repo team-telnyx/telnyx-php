@@ -33,15 +33,15 @@ final class DynamicEmergencyEndpointDeleteResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param DynamicEmergencyEndpoint|array{
-     *   callback_number: string,
-     *   caller_name: string,
-     *   dynamic_emergency_address_id: string,
+     *   callbackNumber: string,
+     *   callerName: string,
+     *   dynamicEmergencyAddressID: string,
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   record_type?: string|null,
-     *   sip_from_id?: string|null,
+     *   createdAt?: string|null,
+     *   recordType?: string|null,
+     *   sipFromID?: string|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public static function with(
@@ -56,15 +56,15 @@ final class DynamicEmergencyEndpointDeleteResponse implements BaseModel
 
     /**
      * @param DynamicEmergencyEndpoint|array{
-     *   callback_number: string,
-     *   caller_name: string,
-     *   dynamic_emergency_address_id: string,
+     *   callbackNumber: string,
+     *   callerName: string,
+     *   dynamicEmergencyAddressID: string,
      *   id?: string|null,
-     *   created_at?: string|null,
-     *   record_type?: string|null,
-     *   sip_from_id?: string|null,
+     *   createdAt?: string|null,
+     *   recordType?: string|null,
+     *   sipFromID?: string|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: string|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public function withData(DynamicEmergencyEndpoint|array $data): self

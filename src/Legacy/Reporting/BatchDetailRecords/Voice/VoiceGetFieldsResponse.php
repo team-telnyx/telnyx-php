@@ -12,10 +12,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * Available CDR report fields grouped by category.
  *
  * @phpstan-type VoiceGetFieldsResponseShape = array{
- *   Billing?: list<string>|null,
- *   Interaction_Data?: list<string>|null,
- *   Number_Information?: list<string>|null,
- *   Telephony_Data?: list<string>|null,
+ *   billing?: list<string>|null,
+ *   interactionData?: list<string>|null,
+ *   numberInformation?: list<string>|null,
+ *   telephonyData?: list<string>|null,
  * }
  */
 final class VoiceGetFieldsResponse implements BaseModel
@@ -26,34 +26,34 @@ final class VoiceGetFieldsResponse implements BaseModel
     /**
      * Cost and billing related information.
      *
-     * @var list<string>|null $Billing
+     * @var list<string>|null $billing
      */
-    #[Optional(list: 'string')]
-    public ?array $Billing;
+    #[Optional('Billing', list: 'string')]
+    public ?array $billing;
 
     /**
      * Fields related to call interaction and basic call information.
      *
-     * @var list<string>|null $Interaction_Data
+     * @var list<string>|null $interactionData
      */
     #[Optional('Interaction Data', list: 'string')]
-    public ?array $Interaction_Data;
+    public ?array $interactionData;
 
     /**
      * Geographic and routing information for phone numbers.
      *
-     * @var list<string>|null $Number_Information
+     * @var list<string>|null $numberInformation
      */
     #[Optional('Number Information', list: 'string')]
-    public ?array $Number_Information;
+    public ?array $numberInformation;
 
     /**
      * Technical telephony and call control information.
      *
-     * @var list<string>|null $Telephony_Data
+     * @var list<string>|null $telephonyData
      */
     #[Optional('Telephony Data', list: 'string')]
-    public ?array $Telephony_Data;
+    public ?array $telephonyData;
 
     public function __construct()
     {
@@ -65,23 +65,23 @@ final class VoiceGetFieldsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $Billing
-     * @param list<string> $Interaction_Data
-     * @param list<string> $Number_Information
-     * @param list<string> $Telephony_Data
+     * @param list<string> $billing
+     * @param list<string> $interactionData
+     * @param list<string> $numberInformation
+     * @param list<string> $telephonyData
      */
     public static function with(
-        ?array $Billing = null,
-        ?array $Interaction_Data = null,
-        ?array $Number_Information = null,
-        ?array $Telephony_Data = null,
+        ?array $billing = null,
+        ?array $interactionData = null,
+        ?array $numberInformation = null,
+        ?array $telephonyData = null,
     ): self {
         $obj = new self;
 
-        null !== $Billing && $obj['Billing'] = $Billing;
-        null !== $Interaction_Data && $obj['Interaction_Data'] = $Interaction_Data;
-        null !== $Number_Information && $obj['Number_Information'] = $Number_Information;
-        null !== $Telephony_Data && $obj['Telephony_Data'] = $Telephony_Data;
+        null !== $billing && $obj['billing'] = $billing;
+        null !== $interactionData && $obj['interactionData'] = $interactionData;
+        null !== $numberInformation && $obj['numberInformation'] = $numberInformation;
+        null !== $telephonyData && $obj['telephonyData'] = $telephonyData;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class VoiceGetFieldsResponse implements BaseModel
     public function withBilling(array $billing): self
     {
         $obj = clone $this;
-        $obj['Billing'] = $billing;
+        $obj['billing'] = $billing;
 
         return $obj;
     }
@@ -107,7 +107,7 @@ final class VoiceGetFieldsResponse implements BaseModel
     public function withInteractionData(array $interactionData): self
     {
         $obj = clone $this;
-        $obj['Interaction_Data'] = $interactionData;
+        $obj['interactionData'] = $interactionData;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class VoiceGetFieldsResponse implements BaseModel
     public function withNumberInformation(array $numberInformation): self
     {
         $obj = clone $this;
-        $obj['Number_Information'] = $numberInformation;
+        $obj['numberInformation'] = $numberInformation;
 
         return $obj;
     }
@@ -133,7 +133,7 @@ final class VoiceGetFieldsResponse implements BaseModel
     public function withTelephonyData(array $telephonyData): self
     {
         $obj = clone $this;
-        $obj['Telephony_Data'] = $telephonyData;
+        $obj['telephonyData'] = $telephonyData;
 
         return $obj;
     }

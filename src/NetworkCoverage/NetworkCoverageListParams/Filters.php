@@ -15,7 +15,7 @@ use Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters\AvailableServices\C
  * Consolidated filters parameter (deepObject style). Originally: filters[available_services][contains].
  *
  * @phpstan-type FiltersShape = array{
- *   available_services?: null|Contains|value-of<AvailableService>
+ *   availableServices?: null|Contains|value-of<AvailableService>
  * }
  */
 final class Filters implements BaseModel
@@ -26,10 +26,10 @@ final class Filters implements BaseModel
     /**
      * Filter by exact available service match.
      *
-     * @var Contains|value-of<AvailableService>|null $available_services
+     * @var Contains|value-of<AvailableService>|null $availableServices
      */
-    #[Optional(union: AvailableServices::class)]
-    public Contains|string|null $available_services;
+    #[Optional('available_services', union: AvailableServices::class)]
+    public Contains|string|null $availableServices;
 
     public function __construct()
     {
@@ -43,14 +43,14 @@ final class Filters implements BaseModel
      *
      * @param AvailableService|Contains|array{
      *   contains?: value-of<AvailableService>|null
-     * }|value-of<AvailableService> $available_services
+     * }|value-of<AvailableService> $availableServices
      */
     public static function with(
-        AvailableService|Contains|array|string|null $available_services = null
+        AvailableService|Contains|array|string|null $availableServices = null
     ): self {
         $obj = new self;
 
-        null !== $available_services && $obj['available_services'] = $available_services;
+        null !== $availableServices && $obj['availableServices'] = $availableServices;
 
         return $obj;
     }
@@ -66,7 +66,7 @@ final class Filters implements BaseModel
         AvailableService|Contains|array|string $availableServices
     ): self {
         $obj = clone $this;
-        $obj['available_services'] = $availableServices;
+        $obj['availableServices'] = $availableServices;
 
         return $obj;
     }

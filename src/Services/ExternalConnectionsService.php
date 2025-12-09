@@ -71,14 +71,14 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      * Creates a new External Connection based on the parameters sent in the request. The external_sip_connection and outbound voice profile id are required. Once created, you can assign phone numbers to your application using the `/phone_numbers` endpoint.
      *
      * @param array{
-     *   external_sip_connection: 'zoom'|ExternalSipConnection,
-     *   outbound: array{channel_limit?: int, outbound_voice_profile_id?: string},
+     *   externalSipConnection: 'zoom'|ExternalSipConnection,
+     *   outbound: array{channelLimit?: int, outboundVoiceProfileID?: string},
      *   active?: bool,
-     *   inbound?: array{outbound_voice_profile_id: string, channel_limit?: int},
+     *   inbound?: array{outboundVoiceProfileID: string, channelLimit?: int},
      *   tags?: list<string>,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_event_url?: string,
-     *   webhook_timeout_secs?: int|null,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookEventURL?: string,
+     *   webhookTimeoutSecs?: int|null,
      * }|ExternalConnectionCreateParams $params
      *
      * @throws APIException
@@ -132,13 +132,13 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      * Updates settings of an existing External Connection based on the parameters of the request.
      *
      * @param array{
-     *   outbound: array{outbound_voice_profile_id: string, channel_limit?: int},
+     *   outbound: array{outboundVoiceProfileID: string, channelLimit?: int},
      *   active?: bool,
-     *   inbound?: array{channel_limit?: int},
+     *   inbound?: array{channelLimit?: int},
      *   tags?: list<string>,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_event_url?: string,
-     *   webhook_timeout_secs?: int|null,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookEventURL?: string,
+     *   webhookTimeoutSecs?: int|null,
      * }|ExternalConnectionUpdateParams $params
      *
      * @throws APIException
@@ -173,10 +173,10 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      * @param array{
      *   filter?: array{
      *     id?: string,
-     *     connection_name?: array{contains?: string},
-     *     created_at?: string,
-     *     external_sip_connection?: 'zoom'|'operator_connect'|ExternalConnectionListParams\Filter\ExternalSipConnection,
-     *     phone_number?: array{contains?: string},
+     *     connectionName?: array{contains?: string},
+     *     createdAt?: string,
+     *     externalSipConnection?: 'zoom'|'operator_connect'|ExternalConnectionListParams\Filter\ExternalSipConnection,
+     *     phoneNumber?: array{contains?: string},
      *   },
      *   page?: array{number?: int, size?: int},
      * }|ExternalConnectionListParams $params
@@ -232,7 +232,7 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      * Update a location's static emergency address
      *
      * @param array{
-     *   id: string, static_emergency_address_id: string
+     *   id: string, staticEmergencyAddressID: string
      * }|ExternalConnectionUpdateLocationParams $params
      *
      * @throws APIException

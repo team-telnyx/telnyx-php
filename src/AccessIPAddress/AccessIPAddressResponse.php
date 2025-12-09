@@ -12,13 +12,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type AccessIPAddressResponseShape = array{
  *   id: string,
- *   ip_address: string,
+ *   ipAddress: string,
  *   source: string,
  *   status: value-of<CloudflareSyncStatus>,
- *   user_id: string,
- *   created_at?: \DateTimeInterface|null,
+ *   userID: string,
+ *   createdAt?: \DateTimeInterface|null,
  *   description?: string|null,
- *   updated_at?: \DateTimeInterface|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class AccessIPAddressResponse implements BaseModel
@@ -29,8 +29,8 @@ final class AccessIPAddressResponse implements BaseModel
     #[Required]
     public string $id;
 
-    #[Required]
-    public string $ip_address;
+    #[Required('ip_address')]
+    public string $ipAddress;
 
     #[Required]
     public string $source;
@@ -43,17 +43,17 @@ final class AccessIPAddressResponse implements BaseModel
     #[Required(enum: CloudflareSyncStatus::class)]
     public string $status;
 
-    #[Required]
-    public string $user_id;
+    #[Required('user_id')]
+    public string $userID;
 
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
     #[Optional]
     public ?string $description;
 
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     /**
      * `new AccessIPAddressResponse()` is missing required properties by the API.
@@ -61,7 +61,7 @@ final class AccessIPAddressResponse implements BaseModel
      * To enforce required parameters use
      * ```
      * AccessIPAddressResponse::with(
-     *   id: ..., ip_address: ..., source: ..., status: ..., user_id: ...
+     *   id: ..., ipAddress: ..., source: ..., status: ..., userID: ...
      * )
      * ```
      *
@@ -90,25 +90,25 @@ final class AccessIPAddressResponse implements BaseModel
      */
     public static function with(
         string $id,
-        string $ip_address,
+        string $ipAddress,
         string $source,
         CloudflareSyncStatus|string $status,
-        string $user_id,
-        ?\DateTimeInterface $created_at = null,
+        string $userID,
+        ?\DateTimeInterface $createdAt = null,
         ?string $description = null,
-        ?\DateTimeInterface $updated_at = null,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
         $obj = new self;
 
         $obj['id'] = $id;
-        $obj['ip_address'] = $ip_address;
+        $obj['ipAddress'] = $ipAddress;
         $obj['source'] = $source;
         $obj['status'] = $status;
-        $obj['user_id'] = $user_id;
+        $obj['userID'] = $userID;
 
-        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
         null !== $description && $obj['description'] = $description;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class AccessIPAddressResponse implements BaseModel
     public function withIPAddress(string $ipAddress): self
     {
         $obj = clone $this;
-        $obj['ip_address'] = $ipAddress;
+        $obj['ipAddress'] = $ipAddress;
 
         return $obj;
     }
@@ -153,7 +153,7 @@ final class AccessIPAddressResponse implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj['user_id'] = $userID;
+        $obj['userID'] = $userID;
 
         return $obj;
     }
@@ -161,7 +161,7 @@ final class AccessIPAddressResponse implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -177,7 +177,7 @@ final class AccessIPAddressResponse implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

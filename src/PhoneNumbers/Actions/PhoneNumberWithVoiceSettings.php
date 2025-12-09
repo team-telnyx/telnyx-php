@@ -22,19 +22,19 @@ use Telnyx\PhoneNumbers\Voice\MediaFeatures;
 /**
  * @phpstan-type PhoneNumberWithVoiceSettingsShape = array{
  *   id?: string|null,
- *   call_forwarding?: CallForwarding|null,
- *   call_recording?: CallRecording|null,
- *   cnam_listing?: CnamListing|null,
- *   connection_id?: string|null,
- *   customer_reference?: string|null,
+ *   callForwarding?: CallForwarding|null,
+ *   callRecording?: CallRecording|null,
+ *   cnamListing?: CnamListing|null,
+ *   connectionID?: string|null,
+ *   customerReference?: string|null,
  *   emergency?: Emergency|null,
- *   inbound_call_screening?: value-of<InboundCallScreening>|null,
- *   media_features?: MediaFeatures|null,
- *   phone_number?: string|null,
- *   record_type?: string|null,
- *   tech_prefix_enabled?: bool|null,
- *   translated_number?: string|null,
- *   usage_payment_method?: value-of<UsagePaymentMethod>|null,
+ *   inboundCallScreening?: value-of<InboundCallScreening>|null,
+ *   mediaFeatures?: MediaFeatures|null,
+ *   phoneNumber?: string|null,
+ *   recordType?: string|null,
+ *   techPrefixEnabled?: bool|null,
+ *   translatedNumber?: string|null,
+ *   usagePaymentMethod?: value-of<UsagePaymentMethod>|null,
  * }
  */
 final class PhoneNumberWithVoiceSettings implements BaseModel
@@ -51,32 +51,32 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
     /**
      * The call forwarding settings for a phone number.
      */
-    #[Optional]
-    public ?CallForwarding $call_forwarding;
+    #[Optional('call_forwarding')]
+    public ?CallForwarding $callForwarding;
 
     /**
      * The call recording settings for a phone number.
      */
-    #[Optional]
-    public ?CallRecording $call_recording;
+    #[Optional('call_recording')]
+    public ?CallRecording $callRecording;
 
     /**
      * The CNAM listing settings for a phone number.
      */
-    #[Optional]
-    public ?CnamListing $cnam_listing;
+    #[Optional('cnam_listing')]
+    public ?CnamListing $cnamListing;
 
     /**
      * Identifies the connection associated with this phone number.
      */
-    #[Optional]
-    public ?string $connection_id;
+    #[Optional('connection_id')]
+    public ?string $connectionID;
 
     /**
      * A customer reference string for customer look ups.
      */
-    #[Optional]
-    public ?string $customer_reference;
+    #[Optional('customer_reference')]
+    public ?string $customerReference;
 
     /**
      * The emergency services settings for a phone number.
@@ -87,48 +87,48 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
     /**
      * The inbound_call_screening setting is a phone number configuration option variable that allows users to configure their settings to block or flag fraudulent calls. It can be set to disabled, reject_calls, or flag_calls. This feature has an additional per-number monthly cost associated with it.
      *
-     * @var value-of<InboundCallScreening>|null $inbound_call_screening
+     * @var value-of<InboundCallScreening>|null $inboundCallScreening
      */
-    #[Optional(enum: InboundCallScreening::class)]
-    public ?string $inbound_call_screening;
+    #[Optional('inbound_call_screening', enum: InboundCallScreening::class)]
+    public ?string $inboundCallScreening;
 
     /**
      * The media features settings for a phone number.
      */
-    #[Optional]
-    public ?MediaFeatures $media_features;
+    #[Optional('media_features')]
+    public ?MediaFeatures $mediaFeatures;
 
     /**
      * The phone number in +E164 format.
      */
-    #[Optional]
-    public ?string $phone_number;
+    #[Optional('phone_number')]
+    public ?string $phoneNumber;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * Controls whether a tech prefix is enabled for this phone number.
      */
-    #[Optional]
-    public ?bool $tech_prefix_enabled;
+    #[Optional('tech_prefix_enabled')]
+    public ?bool $techPrefixEnabled;
 
     /**
      * This field allows you to rewrite the destination number of an inbound call before the call is routed to you. The value of this field may be any alphanumeric value, and the value will replace the number originally dialed.
      */
-    #[Optional]
-    public ?string $translated_number;
+    #[Optional('translated_number')]
+    public ?string $translatedNumber;
 
     /**
      * Controls whether a number is billed per minute or uses your concurrent channels.
      *
-     * @var value-of<UsagePaymentMethod>|null $usage_payment_method
+     * @var value-of<UsagePaymentMethod>|null $usagePaymentMethod
      */
-    #[Optional(enum: UsagePaymentMethod::class)]
-    public ?string $usage_payment_method;
+    #[Optional('usage_payment_method', enum: UsagePaymentMethod::class)]
+    public ?string $usagePaymentMethod;
 
     public function __construct()
     {
@@ -141,63 +141,63 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param CallForwarding|array{
-     *   call_forwarding_enabled?: bool|null,
-     *   forwarding_type?: value-of<ForwardingType>|null,
-     *   forwards_to?: string|null,
-     * } $call_forwarding
+     *   callForwardingEnabled?: bool|null,
+     *   forwardingType?: value-of<ForwardingType>|null,
+     *   forwardsTo?: string|null,
+     * } $callForwarding
      * @param CallRecording|array{
-     *   inbound_call_recording_channels?: value-of<InboundCallRecordingChannels>|null,
-     *   inbound_call_recording_enabled?: bool|null,
-     *   inbound_call_recording_format?: value-of<InboundCallRecordingFormat>|null,
-     * } $call_recording
+     *   inboundCallRecordingChannels?: value-of<InboundCallRecordingChannels>|null,
+     *   inboundCallRecordingEnabled?: bool|null,
+     *   inboundCallRecordingFormat?: value-of<InboundCallRecordingFormat>|null,
+     * } $callRecording
      * @param CnamListing|array{
-     *   cnam_listing_details?: string|null, cnam_listing_enabled?: bool|null
-     * } $cnam_listing
+     *   cnamListingDetails?: string|null, cnamListingEnabled?: bool|null
+     * } $cnamListing
      * @param Emergency|array{
-     *   emergency_address_id?: string|null,
-     *   emergency_enabled?: bool|null,
-     *   emergency_status?: value-of<EmergencyStatus>|null,
+     *   emergencyAddressID?: string|null,
+     *   emergencyEnabled?: bool|null,
+     *   emergencyStatus?: value-of<EmergencyStatus>|null,
      * } $emergency
-     * @param InboundCallScreening|value-of<InboundCallScreening> $inbound_call_screening
+     * @param InboundCallScreening|value-of<InboundCallScreening> $inboundCallScreening
      * @param MediaFeatures|array{
-     *   accept_any_rtp_packets_enabled?: bool|null,
-     *   rtp_auto_adjust_enabled?: bool|null,
-     *   t38_fax_gateway_enabled?: bool|null,
-     * } $media_features
-     * @param UsagePaymentMethod|value-of<UsagePaymentMethod> $usage_payment_method
+     *   acceptAnyRtpPacketsEnabled?: bool|null,
+     *   rtpAutoAdjustEnabled?: bool|null,
+     *   t38FaxGatewayEnabled?: bool|null,
+     * } $mediaFeatures
+     * @param UsagePaymentMethod|value-of<UsagePaymentMethod> $usagePaymentMethod
      */
     public static function with(
         ?string $id = null,
-        CallForwarding|array|null $call_forwarding = null,
-        CallRecording|array|null $call_recording = null,
-        CnamListing|array|null $cnam_listing = null,
-        ?string $connection_id = null,
-        ?string $customer_reference = null,
+        CallForwarding|array|null $callForwarding = null,
+        CallRecording|array|null $callRecording = null,
+        CnamListing|array|null $cnamListing = null,
+        ?string $connectionID = null,
+        ?string $customerReference = null,
         Emergency|array|null $emergency = null,
-        InboundCallScreening|string|null $inbound_call_screening = null,
-        MediaFeatures|array|null $media_features = null,
-        ?string $phone_number = null,
-        ?string $record_type = null,
-        ?bool $tech_prefix_enabled = null,
-        ?string $translated_number = null,
-        UsagePaymentMethod|string|null $usage_payment_method = null,
+        InboundCallScreening|string|null $inboundCallScreening = null,
+        MediaFeatures|array|null $mediaFeatures = null,
+        ?string $phoneNumber = null,
+        ?string $recordType = null,
+        ?bool $techPrefixEnabled = null,
+        ?string $translatedNumber = null,
+        UsagePaymentMethod|string|null $usagePaymentMethod = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $call_forwarding && $obj['call_forwarding'] = $call_forwarding;
-        null !== $call_recording && $obj['call_recording'] = $call_recording;
-        null !== $cnam_listing && $obj['cnam_listing'] = $cnam_listing;
-        null !== $connection_id && $obj['connection_id'] = $connection_id;
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
+        null !== $callForwarding && $obj['callForwarding'] = $callForwarding;
+        null !== $callRecording && $obj['callRecording'] = $callRecording;
+        null !== $cnamListing && $obj['cnamListing'] = $cnamListing;
+        null !== $connectionID && $obj['connectionID'] = $connectionID;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
         null !== $emergency && $obj['emergency'] = $emergency;
-        null !== $inbound_call_screening && $obj['inbound_call_screening'] = $inbound_call_screening;
-        null !== $media_features && $obj['media_features'] = $media_features;
-        null !== $phone_number && $obj['phone_number'] = $phone_number;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $tech_prefix_enabled && $obj['tech_prefix_enabled'] = $tech_prefix_enabled;
-        null !== $translated_number && $obj['translated_number'] = $translated_number;
-        null !== $usage_payment_method && $obj['usage_payment_method'] = $usage_payment_method;
+        null !== $inboundCallScreening && $obj['inboundCallScreening'] = $inboundCallScreening;
+        null !== $mediaFeatures && $obj['mediaFeatures'] = $mediaFeatures;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $techPrefixEnabled && $obj['techPrefixEnabled'] = $techPrefixEnabled;
+        null !== $translatedNumber && $obj['translatedNumber'] = $translatedNumber;
+        null !== $usagePaymentMethod && $obj['usagePaymentMethod'] = $usagePaymentMethod;
 
         return $obj;
     }
@@ -217,16 +217,16 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
      * The call forwarding settings for a phone number.
      *
      * @param CallForwarding|array{
-     *   call_forwarding_enabled?: bool|null,
-     *   forwarding_type?: value-of<ForwardingType>|null,
-     *   forwards_to?: string|null,
+     *   callForwardingEnabled?: bool|null,
+     *   forwardingType?: value-of<ForwardingType>|null,
+     *   forwardsTo?: string|null,
      * } $callForwarding
      */
     public function withCallForwarding(
         CallForwarding|array $callForwarding
     ): self {
         $obj = clone $this;
-        $obj['call_forwarding'] = $callForwarding;
+        $obj['callForwarding'] = $callForwarding;
 
         return $obj;
     }
@@ -235,15 +235,15 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
      * The call recording settings for a phone number.
      *
      * @param CallRecording|array{
-     *   inbound_call_recording_channels?: value-of<InboundCallRecordingChannels>|null,
-     *   inbound_call_recording_enabled?: bool|null,
-     *   inbound_call_recording_format?: value-of<InboundCallRecordingFormat>|null,
+     *   inboundCallRecordingChannels?: value-of<InboundCallRecordingChannels>|null,
+     *   inboundCallRecordingEnabled?: bool|null,
+     *   inboundCallRecordingFormat?: value-of<InboundCallRecordingFormat>|null,
      * } $callRecording
      */
     public function withCallRecording(CallRecording|array $callRecording): self
     {
         $obj = clone $this;
-        $obj['call_recording'] = $callRecording;
+        $obj['callRecording'] = $callRecording;
 
         return $obj;
     }
@@ -252,13 +252,13 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
      * The CNAM listing settings for a phone number.
      *
      * @param CnamListing|array{
-     *   cnam_listing_details?: string|null, cnam_listing_enabled?: bool|null
+     *   cnamListingDetails?: string|null, cnamListingEnabled?: bool|null
      * } $cnamListing
      */
     public function withCnamListing(CnamListing|array $cnamListing): self
     {
         $obj = clone $this;
-        $obj['cnam_listing'] = $cnamListing;
+        $obj['cnamListing'] = $cnamListing;
 
         return $obj;
     }
@@ -269,7 +269,7 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj['connection_id'] = $connectionID;
+        $obj['connectionID'] = $connectionID;
 
         return $obj;
     }
@@ -280,7 +280,7 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }
@@ -289,9 +289,9 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
      * The emergency services settings for a phone number.
      *
      * @param Emergency|array{
-     *   emergency_address_id?: string|null,
-     *   emergency_enabled?: bool|null,
-     *   emergency_status?: value-of<EmergencyStatus>|null,
+     *   emergencyAddressID?: string|null,
+     *   emergencyEnabled?: bool|null,
+     *   emergencyStatus?: value-of<EmergencyStatus>|null,
      * } $emergency
      */
     public function withEmergency(Emergency|array $emergency): self
@@ -311,7 +311,7 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
         InboundCallScreening|string $inboundCallScreening
     ): self {
         $obj = clone $this;
-        $obj['inbound_call_screening'] = $inboundCallScreening;
+        $obj['inboundCallScreening'] = $inboundCallScreening;
 
         return $obj;
     }
@@ -320,15 +320,15 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
      * The media features settings for a phone number.
      *
      * @param MediaFeatures|array{
-     *   accept_any_rtp_packets_enabled?: bool|null,
-     *   rtp_auto_adjust_enabled?: bool|null,
-     *   t38_fax_gateway_enabled?: bool|null,
+     *   acceptAnyRtpPacketsEnabled?: bool|null,
+     *   rtpAutoAdjustEnabled?: bool|null,
+     *   t38FaxGatewayEnabled?: bool|null,
      * } $mediaFeatures
      */
     public function withMediaFeatures(MediaFeatures|array $mediaFeatures): self
     {
         $obj = clone $this;
-        $obj['media_features'] = $mediaFeatures;
+        $obj['mediaFeatures'] = $mediaFeatures;
 
         return $obj;
     }
@@ -339,7 +339,7 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -350,7 +350,7 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -361,7 +361,7 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
     public function withTechPrefixEnabled(bool $techPrefixEnabled): self
     {
         $obj = clone $this;
-        $obj['tech_prefix_enabled'] = $techPrefixEnabled;
+        $obj['techPrefixEnabled'] = $techPrefixEnabled;
 
         return $obj;
     }
@@ -372,7 +372,7 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
     public function withTranslatedNumber(string $translatedNumber): self
     {
         $obj = clone $this;
-        $obj['translated_number'] = $translatedNumber;
+        $obj['translatedNumber'] = $translatedNumber;
 
         return $obj;
     }
@@ -386,7 +386,7 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
         UsagePaymentMethod|string $usagePaymentMethod
     ): self {
         $obj = clone $this;
-        $obj['usage_payment_method'] = $usagePaymentMethod;
+        $obj['usagePaymentMethod'] = $usagePaymentMethod;
 
         return $obj;
     }

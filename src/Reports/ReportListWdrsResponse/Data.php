@@ -18,19 +18,19 @@ use Telnyx\Reports\ReportListWdrsResponse\Data\UplinkData;
  * @phpstan-type DataShape = array{
  *   id?: string|null,
  *   cost?: Cost|null,
- *   created_at?: \DateTimeInterface|null,
- *   downlink_data?: DownlinkData|null,
- *   duration_seconds?: float|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   downlinkData?: DownlinkData|null,
+ *   durationSeconds?: float|null,
  *   imsi?: string|null,
  *   mcc?: string|null,
  *   mnc?: string|null,
- *   phone_number?: string|null,
+ *   phoneNumber?: string|null,
  *   rate?: Rate|null,
- *   record_type?: string|null,
- *   sim_card_id?: string|null,
- *   sim_group_id?: string|null,
- *   sim_group_name?: string|null,
- *   uplink_data?: UplinkData|null,
+ *   recordType?: string|null,
+ *   simCardID?: string|null,
+ *   simGroupID?: string|null,
+ *   simGroupName?: string|null,
+ *   uplinkData?: UplinkData|null,
  * }
  */
 final class Data implements BaseModel
@@ -50,17 +50,17 @@ final class Data implements BaseModel
     /**
      * Record created time.
      */
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
-    #[Optional]
-    public ?DownlinkData $downlink_data;
+    #[Optional('downlink_data')]
+    public ?DownlinkData $downlinkData;
 
     /**
      * Session duration in seconds.
      */
-    #[Optional]
-    public ?float $duration_seconds;
+    #[Optional('duration_seconds')]
+    public ?float $durationSeconds;
 
     /**
      * International mobile subscriber identity.
@@ -83,35 +83,35 @@ final class Data implements BaseModel
     /**
      * Phone number.
      */
-    #[Optional]
-    public ?string $phone_number;
+    #[Optional('phone_number')]
+    public ?string $phoneNumber;
 
     #[Optional]
     public ?Rate $rate;
 
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * Sim card unique identifier.
      */
-    #[Optional]
-    public ?string $sim_card_id;
+    #[Optional('sim_card_id')]
+    public ?string $simCardID;
 
     /**
      * Sim group unique identifier.
      */
-    #[Optional]
-    public ?string $sim_group_id;
+    #[Optional('sim_group_id')]
+    public ?string $simGroupID;
 
     /**
      * Defined sim group name.
      */
-    #[Optional]
-    public ?string $sim_group_name;
+    #[Optional('sim_group_name')]
+    public ?string $simGroupName;
 
-    #[Optional]
-    public ?UplinkData $uplink_data;
+    #[Optional('uplink_data')]
+    public ?UplinkData $uplinkData;
 
     public function __construct()
     {
@@ -128,7 +128,7 @@ final class Data implements BaseModel
      * } $cost
      * @param DownlinkData|array{
      *   amount?: float|null, unit?: value-of<Unit>|null
-     * } $downlink_data
+     * } $downlinkData
      * @param Rate|array{
      *   amount?: string|null,
      *   currency?: value-of<Rate\Currency>|null,
@@ -136,42 +136,42 @@ final class Data implements BaseModel
      * @param UplinkData|array{
      *   amount?: float|null,
      *   unit?: value-of<UplinkData\Unit>|null,
-     * } $uplink_data
+     * } $uplinkData
      */
     public static function with(
         ?string $id = null,
         Cost|array|null $cost = null,
-        ?\DateTimeInterface $created_at = null,
-        DownlinkData|array|null $downlink_data = null,
-        ?float $duration_seconds = null,
+        ?\DateTimeInterface $createdAt = null,
+        DownlinkData|array|null $downlinkData = null,
+        ?float $durationSeconds = null,
         ?string $imsi = null,
         ?string $mcc = null,
         ?string $mnc = null,
-        ?string $phone_number = null,
+        ?string $phoneNumber = null,
         Rate|array|null $rate = null,
-        ?string $record_type = null,
-        ?string $sim_card_id = null,
-        ?string $sim_group_id = null,
-        ?string $sim_group_name = null,
-        UplinkData|array|null $uplink_data = null,
+        ?string $recordType = null,
+        ?string $simCardID = null,
+        ?string $simGroupID = null,
+        ?string $simGroupName = null,
+        UplinkData|array|null $uplinkData = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
         null !== $cost && $obj['cost'] = $cost;
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $downlink_data && $obj['downlink_data'] = $downlink_data;
-        null !== $duration_seconds && $obj['duration_seconds'] = $duration_seconds;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $downlinkData && $obj['downlinkData'] = $downlinkData;
+        null !== $durationSeconds && $obj['durationSeconds'] = $durationSeconds;
         null !== $imsi && $obj['imsi'] = $imsi;
         null !== $mcc && $obj['mcc'] = $mcc;
         null !== $mnc && $obj['mnc'] = $mnc;
-        null !== $phone_number && $obj['phone_number'] = $phone_number;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
         null !== $rate && $obj['rate'] = $rate;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $sim_card_id && $obj['sim_card_id'] = $sim_card_id;
-        null !== $sim_group_id && $obj['sim_group_id'] = $sim_group_id;
-        null !== $sim_group_name && $obj['sim_group_name'] = $sim_group_name;
-        null !== $uplink_data && $obj['uplink_data'] = $uplink_data;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $simCardID && $obj['simCardID'] = $simCardID;
+        null !== $simGroupID && $obj['simGroupID'] = $simGroupID;
+        null !== $simGroupName && $obj['simGroupName'] = $simGroupName;
+        null !== $uplinkData && $obj['uplinkData'] = $uplinkData;
 
         return $obj;
     }
@@ -206,7 +206,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -219,7 +219,7 @@ final class Data implements BaseModel
     public function withDownlinkData(DownlinkData|array $downlinkData): self
     {
         $obj = clone $this;
-        $obj['downlink_data'] = $downlinkData;
+        $obj['downlinkData'] = $downlinkData;
 
         return $obj;
     }
@@ -230,7 +230,7 @@ final class Data implements BaseModel
     public function withDurationSeconds(float $durationSeconds): self
     {
         $obj = clone $this;
-        $obj['duration_seconds'] = $durationSeconds;
+        $obj['durationSeconds'] = $durationSeconds;
 
         return $obj;
     }
@@ -274,7 +274,7 @@ final class Data implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -296,7 +296,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -307,7 +307,7 @@ final class Data implements BaseModel
     public function withSimCardID(string $simCardID): self
     {
         $obj = clone $this;
-        $obj['sim_card_id'] = $simCardID;
+        $obj['simCardID'] = $simCardID;
 
         return $obj;
     }
@@ -318,7 +318,7 @@ final class Data implements BaseModel
     public function withSimGroupID(string $simGroupID): self
     {
         $obj = clone $this;
-        $obj['sim_group_id'] = $simGroupID;
+        $obj['simGroupID'] = $simGroupID;
 
         return $obj;
     }
@@ -329,7 +329,7 @@ final class Data implements BaseModel
     public function withSimGroupName(string $simGroupName): self
     {
         $obj = clone $this;
-        $obj['sim_group_name'] = $simGroupName;
+        $obj['simGroupName'] = $simGroupName;
 
         return $obj;
     }
@@ -343,7 +343,7 @@ final class Data implements BaseModel
     public function withUplinkData(UplinkData|array $uplinkData): self
     {
         $obj = clone $this;
-        $obj['uplink_data'] = $uplinkData;
+        $obj['uplinkData'] = $uplinkData;
 
         return $obj;
     }

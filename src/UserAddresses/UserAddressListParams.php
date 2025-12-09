@@ -21,8 +21,8 @@ use Telnyx\UserAddresses\UserAddressListParams\Sort;
  *
  * @phpstan-type UserAddressListParamsShape = array{
  *   filter?: Filter|array{
- *     customer_reference?: CustomerReference|null,
- *     street_address?: StreetAddress|null,
+ *     customerReference?: CustomerReference|null,
+ *     streetAddress?: StreetAddress|null,
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
  *   sort?: Sort|value-of<Sort>,
@@ -76,8 +76,7 @@ final class UserAddressListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   customer_reference?: CustomerReference|null,
-     *   street_address?: StreetAddress|null,
+     *   customerReference?: CustomerReference|null, streetAddress?: StreetAddress|null
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
      * @param Sort|value-of<Sort> $sort
@@ -100,8 +99,7 @@ final class UserAddressListParams implements BaseModel
      * Consolidated filter parameter (deepObject style). Originally: filter[customer_reference][eq], filter[customer_reference][contains], filter[street_address][contains].
      *
      * @param Filter|array{
-     *   customer_reference?: CustomerReference|null,
-     *   street_address?: StreetAddress|null,
+     *   customerReference?: CustomerReference|null, streetAddress?: StreetAddress|null
      * } $filter
      */
     public function withFilter(Filter|array $filter): self

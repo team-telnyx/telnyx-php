@@ -11,9 +11,9 @@ use Telnyx\Messaging\Rcs\RcInviteTestNumberResponse\Data\RecordType;
 
 /**
  * @phpstan-type DataShape = array{
- *   agent_id?: string|null,
- *   phone_number?: string|null,
- *   record_type?: value-of<RecordType>|null,
+ *   agentID?: string|null,
+ *   phoneNumber?: string|null,
+ *   recordType?: value-of<RecordType>|null,
  *   status?: string|null,
  * }
  */
@@ -25,22 +25,22 @@ final class Data implements BaseModel
     /**
      * RCS agent ID.
      */
-    #[Optional]
-    public ?string $agent_id;
+    #[Optional('agent_id')]
+    public ?string $agentID;
 
     /**
      * Phone number that was invited for testing.
      */
-    #[Optional]
-    public ?string $phone_number;
+    #[Optional('phone_number')]
+    public ?string $phoneNumber;
 
     /**
      * Identifies the type of the resource.
      *
-     * @var value-of<RecordType>|null $record_type
+     * @var value-of<RecordType>|null $recordType
      */
-    #[Optional(enum: RecordType::class)]
-    public ?string $record_type;
+    #[Optional('record_type', enum: RecordType::class)]
+    public ?string $recordType;
 
     /**
      * Status of the test number invitation.
@@ -58,19 +58,19 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $record_type
+     * @param RecordType|value-of<RecordType> $recordType
      */
     public static function with(
-        ?string $agent_id = null,
-        ?string $phone_number = null,
-        RecordType|string|null $record_type = null,
+        ?string $agentID = null,
+        ?string $phoneNumber = null,
+        RecordType|string|null $recordType = null,
         ?string $status = null,
     ): self {
         $obj = new self;
 
-        null !== $agent_id && $obj['agent_id'] = $agent_id;
-        null !== $phone_number && $obj['phone_number'] = $phone_number;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $agentID && $obj['agentID'] = $agentID;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
+        null !== $recordType && $obj['recordType'] = $recordType;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -82,7 +82,7 @@ final class Data implements BaseModel
     public function withAgentID(string $agentID): self
     {
         $obj = clone $this;
-        $obj['agent_id'] = $agentID;
+        $obj['agentID'] = $agentID;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class Data implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

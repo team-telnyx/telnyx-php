@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Calls\ActionsService::stopPlayback()
  *
  * @phpstan-type ActionStopPlaybackParamsShape = array{
- *   client_state?: string, command_id?: string, overlay?: bool, stop?: string
+ *   clientState?: string, commandID?: string, overlay?: bool, stop?: string
  * }
  */
 final class ActionStopPlaybackParams implements BaseModel
@@ -31,14 +31,14 @@ final class ActionStopPlaybackParams implements BaseModel
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Optional]
-    public ?string $client_state;
+    #[Optional('client_state')]
+    public ?string $clientState;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Optional]
-    public ?string $command_id;
+    #[Optional('command_id')]
+    public ?string $commandID;
 
     /**
      * When enabled, it stops the audio being played in the overlay queue.
@@ -63,15 +63,15 @@ final class ActionStopPlaybackParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $client_state = null,
-        ?string $command_id = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
         ?bool $overlay = null,
         ?string $stop = null,
     ): self {
         $obj = new self;
 
-        null !== $client_state && $obj['client_state'] = $client_state;
-        null !== $command_id && $obj['command_id'] = $command_id;
+        null !== $clientState && $obj['clientState'] = $clientState;
+        null !== $commandID && $obj['commandID'] = $commandID;
         null !== $overlay && $obj['overlay'] = $overlay;
         null !== $stop && $obj['stop'] = $stop;
 
@@ -84,7 +84,7 @@ final class ActionStopPlaybackParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj['client_state'] = $clientState;
+        $obj['clientState'] = $clientState;
 
         return $obj;
     }
@@ -95,7 +95,7 @@ final class ActionStopPlaybackParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj['command_id'] = $commandID;
+        $obj['commandID'] = $commandID;
 
         return $obj;
     }

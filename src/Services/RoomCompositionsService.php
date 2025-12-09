@@ -32,20 +32,20 @@ final class RoomCompositionsService implements RoomCompositionsContract
      * @param array{
      *   format?: string|null,
      *   resolution?: string|null,
-     *   session_id?: string|null,
-     *   video_layout?: array<string,array{
+     *   sessionID?: string|null,
+     *   videoLayout?: array<string,array{
      *     height?: int|null,
-     *     max_columns?: int|null,
-     *     max_rows?: int|null,
-     *     video_sources?: list<string>,
+     *     maxColumns?: int|null,
+     *     maxRows?: int|null,
+     *     videoSources?: list<string>,
      *     width?: int|null,
-     *     x_pos?: int|null,
-     *     y_pos?: int|null,
-     *     z_pos?: int|null,
+     *     xPos?: int|null,
+     *     yPos?: int|null,
+     *     zPos?: int|null,
      *   }|VideoRegion>,
-     *   webhook_event_failover_url?: string|null,
-     *   webhook_event_url?: string,
-     *   webhook_timeout_secs?: int|null,
+     *   webhookEventFailoverURL?: string|null,
+     *   webhookEventURL?: string,
+     *   webhookTimeoutSecs?: int|null,
      * }|RoomCompositionCreateParams $params
      *
      * @throws APIException
@@ -100,12 +100,12 @@ final class RoomCompositionsService implements RoomCompositionsContract
      *
      * @param array{
      *   filter?: array{
-     *     date_created_at?: array{
+     *     dateCreatedAt?: array{
      *       eq?: string|\DateTimeInterface,
      *       gte?: string|\DateTimeInterface,
      *       lte?: string|\DateTimeInterface,
      *     },
-     *     session_id?: string,
+     *     sessionID?: string,
      *     status?: 'completed'|'processing'|'enqueued'|Status,
      *   },
      *   page?: array{number?: int, size?: int},

@@ -38,9 +38,9 @@ final class DynamicEmergencyEndpointsTest extends TestCase
         }
 
         $result = $this->client->dynamicEmergencyEndpoints->create([
-            'callback_number' => '+13125550000',
-            'caller_name' => 'Jane Doe Desk Phone',
-            'dynamic_emergency_address_id' => '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0',
+            'callbackNumber' => '+13125550000',
+            'callerName' => 'Jane Doe Desk Phone',
+            'dynamicEmergencyAddressID' => '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -58,9 +58,9 @@ final class DynamicEmergencyEndpointsTest extends TestCase
         }
 
         $result = $this->client->dynamicEmergencyEndpoints->create([
-            'callback_number' => '+13125550000',
-            'caller_name' => 'Jane Doe Desk Phone',
-            'dynamic_emergency_address_id' => '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0',
+            'callbackNumber' => '+13125550000',
+            'callerName' => 'Jane Doe Desk Phone',
+            'dynamicEmergencyAddressID' => '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

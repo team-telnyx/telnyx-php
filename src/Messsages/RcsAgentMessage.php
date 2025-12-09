@@ -14,9 +14,9 @@ use Telnyx\Messsages\RcsAgentMessage\Event\EventType;
 
 /**
  * @phpstan-type RcsAgentMessageShape = array{
- *   content_message?: ContentMessage|null,
+ *   contentMessage?: ContentMessage|null,
  *   event?: Event|null,
- *   expire_time?: \DateTimeInterface|null,
+ *   expireTime?: \DateTimeInterface|null,
  *   ttl?: string|null,
  * }
  */
@@ -25,8 +25,8 @@ final class RcsAgentMessage implements BaseModel
     /** @use SdkModel<RcsAgentMessageShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?ContentMessage $content_message;
+    #[Optional('content_message')]
+    public ?ContentMessage $contentMessage;
 
     /**
      * RCS Event to send to the recipient.
@@ -37,8 +37,8 @@ final class RcsAgentMessage implements BaseModel
     /**
      * Timestamp in UTC of when this message is considered expired.
      */
-    #[Optional]
-    public ?\DateTimeInterface $expire_time;
+    #[Optional('expire_time')]
+    public ?\DateTimeInterface $expireTime;
 
     /**
      * Duration in seconds ending with 's'.
@@ -57,24 +57,24 @@ final class RcsAgentMessage implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param ContentMessage|array{
-     *   content_info?: RcsContentInfo|null,
-     *   rich_card?: RichCard|null,
+     *   contentInfo?: RcsContentInfo|null,
+     *   richCard?: RichCard|null,
      *   suggestions?: list<RcsSuggestion>|null,
      *   text?: string|null,
-     * } $content_message
-     * @param Event|array{event_type?: value-of<EventType>|null} $event
+     * } $contentMessage
+     * @param Event|array{eventType?: value-of<EventType>|null} $event
      */
     public static function with(
-        ContentMessage|array|null $content_message = null,
+        ContentMessage|array|null $contentMessage = null,
         Event|array|null $event = null,
-        ?\DateTimeInterface $expire_time = null,
+        ?\DateTimeInterface $expireTime = null,
         ?string $ttl = null,
     ): self {
         $obj = new self;
 
-        null !== $content_message && $obj['content_message'] = $content_message;
+        null !== $contentMessage && $obj['contentMessage'] = $contentMessage;
         null !== $event && $obj['event'] = $event;
-        null !== $expire_time && $obj['expire_time'] = $expire_time;
+        null !== $expireTime && $obj['expireTime'] = $expireTime;
         null !== $ttl && $obj['ttl'] = $ttl;
 
         return $obj;
@@ -82,8 +82,8 @@ final class RcsAgentMessage implements BaseModel
 
     /**
      * @param ContentMessage|array{
-     *   content_info?: RcsContentInfo|null,
-     *   rich_card?: RichCard|null,
+     *   contentInfo?: RcsContentInfo|null,
+     *   richCard?: RichCard|null,
      *   suggestions?: list<RcsSuggestion>|null,
      *   text?: string|null,
      * } $contentMessage
@@ -92,7 +92,7 @@ final class RcsAgentMessage implements BaseModel
         ContentMessage|array $contentMessage
     ): self {
         $obj = clone $this;
-        $obj['content_message'] = $contentMessage;
+        $obj['contentMessage'] = $contentMessage;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class RcsAgentMessage implements BaseModel
     /**
      * RCS Event to send to the recipient.
      *
-     * @param Event|array{event_type?: value-of<EventType>|null} $event
+     * @param Event|array{eventType?: value-of<EventType>|null} $event
      */
     public function withEvent(Event|array $event): self
     {
@@ -116,7 +116,7 @@ final class RcsAgentMessage implements BaseModel
     public function withExpireTime(\DateTimeInterface $expireTime): self
     {
         $obj = clone $this;
-        $obj['expire_time'] = $expireTime;
+        $obj['expireTime'] = $expireTime;
 
         return $obj;
     }

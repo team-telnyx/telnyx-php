@@ -7,6 +7,7 @@ namespace Telnyx\Services\MessagingTollfree\Verification;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestCreateParams;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestListParams;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestListResponse;
@@ -66,7 +67,7 @@ final class RequestsService implements RequestsContract
      *   optInKeywords?: string|null,
      *   privacyPolicyURL?: string|null,
      *   termsAndConditionURL?: string|null,
-     *   webhookUrl?: string,
+     *   webhookURL?: string,
      * }|RequestCreateParams $params
      *
      * @throws APIException
@@ -151,7 +152,7 @@ final class RequestsService implements RequestsContract
      *   optInKeywords?: string|null,
      *   privacyPolicyURL?: string|null,
      *   termsAndConditionURL?: string|null,
-     *   webhookUrl?: string,
+     *   webhookURL?: string,
      * }|RequestUpdateParams $params
      *
      * @throws APIException
@@ -185,10 +186,10 @@ final class RequestsService implements RequestsContract
      *
      * @param array{
      *   page: int,
-     *   page_size: int,
-     *   date_end?: string|\DateTimeInterface,
-     *   date_start?: string|\DateTimeInterface,
-     *   phone_number?: string,
+     *   pageSize: int,
+     *   dateEnd?: string|\DateTimeInterface,
+     *   dateStart?: string|\DateTimeInterface,
+     *   phoneNumber?: string,
      *   status?: value-of<TfVerificationStatus>,
      * }|RequestListParams $params
      *
@@ -207,7 +208,15 @@ final class RequestsService implements RequestsContract
         $response = $this->client->request(
             method: 'get',
             path: 'messaging_tollfree/verification/requests',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'pageSize' => 'page_size',
+                    'dateEnd' => 'date_end',
+                    'dateStart' => 'date_start',
+                    'phoneNumber' => 'phone_number',
+                ],
+            ),
             options: $options,
             convert: RequestListResponse::class,
         );

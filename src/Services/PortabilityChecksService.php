@@ -24,7 +24,7 @@ final class PortabilityChecksService implements PortabilityChecksContract
      *
      * Runs a portability check, returning the results immediately.
      *
-     * @param array{phone_numbers?: list<string>}|PortabilityCheckRunParams $params
+     * @param array{phoneNumbers?: list<string>}|PortabilityCheckRunParams $params
      *
      * @throws APIException
      */

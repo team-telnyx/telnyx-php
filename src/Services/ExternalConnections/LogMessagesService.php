@@ -50,8 +50,8 @@ final class LogMessagesService implements LogMessagesContract
      *
      * @param array{
      *   filter?: array{
-     *     external_connection_id?: string,
-     *     telephone_number?: array{contains?: string, eq?: string},
+     *     externalConnectionID?: string,
+     *     telephoneNumber?: array{contains?: string, eq?: string},
      *   },
      *   page?: array{number?: int, size?: int},
      * }|LogMessageListParams $params

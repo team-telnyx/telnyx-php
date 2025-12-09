@@ -15,10 +15,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type DataShape = array{
  *   id: string,
  *   active: bool,
- *   bundle_limits: list<BundleLimit>,
- *   cost_code: string,
- *   created_at: \DateTimeInterface,
- *   is_public: bool,
+ *   bundleLimits: list<BundleLimit>,
+ *   costCode: string,
+ *   createdAt: \DateTimeInterface,
+ *   isPublic: bool,
  *   name: string,
  *   slug?: string|null,
  * }
@@ -40,27 +40,27 @@ final class Data implements BaseModel
     #[Required]
     public bool $active;
 
-    /** @var list<BundleLimit> $bundle_limits */
-    #[Required(list: BundleLimit::class)]
-    public array $bundle_limits;
+    /** @var list<BundleLimit> $bundleLimits */
+    #[Required('bundle_limits', list: BundleLimit::class)]
+    public array $bundleLimits;
 
     /**
      * Bundle's cost code, this is used to identify the bundle in the billing system.
      */
-    #[Required]
-    public string $cost_code;
+    #[Required('cost_code')]
+    public string $costCode;
 
     /**
      * Date the bundle was created.
      */
-    #[Required]
-    public \DateTimeInterface $created_at;
+    #[Required('created_at')]
+    public \DateTimeInterface $createdAt;
 
     /**
      * Available to all customers or only to specific customers.
      */
-    #[Required]
-    public bool $is_public;
+    #[Required('is_public')]
+    public bool $isPublic;
 
     /**
      * Bundle's name, this is used to identify the bundle in the UI.
@@ -82,10 +82,10 @@ final class Data implements BaseModel
      * Data::with(
      *   id: ...,
      *   active: ...,
-     *   bundle_limits: ...,
-     *   cost_code: ...,
-     *   created_at: ...,
-     *   is_public: ...,
+     *   bundleLimits: ...,
+     *   costCode: ...,
+     *   createdAt: ...,
+     *   isPublic: ...,
      *   name: ...,
      * )
      * ```
@@ -115,27 +115,27 @@ final class Data implements BaseModel
      *
      * @param list<BundleLimit|array{
      *   id: string,
-     *   created_at: \DateTimeInterface,
+     *   createdAt: \DateTimeInterface,
      *   metric: string,
      *   service: string,
-     *   updated_at: \DateTimeInterface,
-     *   billing_service?: string|null,
+     *   updatedAt: \DateTimeInterface,
+     *   billingService?: string|null,
      *   country?: string|null,
-     *   country_code?: int|null,
-     *   country_iso?: string|null,
+     *   countryCode?: int|null,
+     *   countryISO?: string|null,
      *   direction?: value-of<Direction>|null,
      *   limit?: int|null,
      *   rate?: string|null,
      *   types?: list<string>|null,
-     * }> $bundle_limits
+     * }> $bundleLimits
      */
     public static function with(
         string $id,
         bool $active,
-        array $bundle_limits,
-        string $cost_code,
-        \DateTimeInterface $created_at,
-        bool $is_public,
+        array $bundleLimits,
+        string $costCode,
+        \DateTimeInterface $createdAt,
+        bool $isPublic,
         string $name,
         ?string $slug = null,
     ): self {
@@ -143,10 +143,10 @@ final class Data implements BaseModel
 
         $obj['id'] = $id;
         $obj['active'] = $active;
-        $obj['bundle_limits'] = $bundle_limits;
-        $obj['cost_code'] = $cost_code;
-        $obj['created_at'] = $created_at;
-        $obj['is_public'] = $is_public;
+        $obj['bundleLimits'] = $bundleLimits;
+        $obj['costCode'] = $costCode;
+        $obj['createdAt'] = $createdAt;
+        $obj['isPublic'] = $isPublic;
         $obj['name'] = $name;
 
         null !== $slug && $obj['slug'] = $slug;
@@ -179,14 +179,14 @@ final class Data implements BaseModel
     /**
      * @param list<BundleLimit|array{
      *   id: string,
-     *   created_at: \DateTimeInterface,
+     *   createdAt: \DateTimeInterface,
      *   metric: string,
      *   service: string,
-     *   updated_at: \DateTimeInterface,
-     *   billing_service?: string|null,
+     *   updatedAt: \DateTimeInterface,
+     *   billingService?: string|null,
      *   country?: string|null,
-     *   country_code?: int|null,
-     *   country_iso?: string|null,
+     *   countryCode?: int|null,
+     *   countryISO?: string|null,
      *   direction?: value-of<Direction>|null,
      *   limit?: int|null,
      *   rate?: string|null,
@@ -196,7 +196,7 @@ final class Data implements BaseModel
     public function withBundleLimits(array $bundleLimits): self
     {
         $obj = clone $this;
-        $obj['bundle_limits'] = $bundleLimits;
+        $obj['bundleLimits'] = $bundleLimits;
 
         return $obj;
     }
@@ -207,7 +207,7 @@ final class Data implements BaseModel
     public function withCostCode(string $costCode): self
     {
         $obj = clone $this;
-        $obj['cost_code'] = $costCode;
+        $obj['costCode'] = $costCode;
 
         return $obj;
     }
@@ -218,7 +218,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -229,7 +229,7 @@ final class Data implements BaseModel
     public function withIsPublic(bool $isPublic): self
     {
         $obj = clone $this;
-        $obj['is_public'] = $isPublic;
+        $obj['isPublic'] = $isPublic;
 
         return $obj;
     }

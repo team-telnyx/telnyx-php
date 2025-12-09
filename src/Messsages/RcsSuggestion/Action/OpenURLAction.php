@@ -17,7 +17,7 @@ use Telnyx\Messsages\RcsSuggestion\Action\OpenURLAction\WebviewViewMode;
  * @phpstan-type OpenURLActionShape = array{
  *   application: value-of<Application>,
  *   url: string,
- *   webview_view_mode: value-of<WebviewViewMode>,
+ *   webviewViewMode: value-of<WebviewViewMode>,
  *   description?: string|null,
  * }
  */
@@ -37,9 +37,9 @@ final class OpenURLAction implements BaseModel
     #[Required]
     public string $url;
 
-    /** @var value-of<WebviewViewMode> $webview_view_mode */
-    #[Required(enum: WebviewViewMode::class)]
-    public string $webview_view_mode;
+    /** @var value-of<WebviewViewMode> $webviewViewMode */
+    #[Required('webview_view_mode', enum: WebviewViewMode::class)]
+    public string $webviewViewMode;
 
     /**
      * Accessbility description for webview.
@@ -52,7 +52,7 @@ final class OpenURLAction implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * OpenURLAction::with(application: ..., url: ..., webview_view_mode: ...)
+     * OpenURLAction::with(application: ..., url: ..., webviewViewMode: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -75,19 +75,19 @@ final class OpenURLAction implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Application|value-of<Application> $application
-     * @param WebviewViewMode|value-of<WebviewViewMode> $webview_view_mode
+     * @param WebviewViewMode|value-of<WebviewViewMode> $webviewViewMode
      */
     public static function with(
         Application|string $application,
         string $url,
-        WebviewViewMode|string $webview_view_mode,
+        WebviewViewMode|string $webviewViewMode,
         ?string $description = null,
     ): self {
         $obj = new self;
 
         $obj['application'] = $application;
         $obj['url'] = $url;
-        $obj['webview_view_mode'] = $webview_view_mode;
+        $obj['webviewViewMode'] = $webviewViewMode;
 
         null !== $description && $obj['description'] = $description;
 
@@ -122,7 +122,7 @@ final class OpenURLAction implements BaseModel
         WebviewViewMode|string $webviewViewMode
     ): self {
         $obj = clone $this;
-        $obj['webview_view_mode'] = $webviewViewMode;
+        $obj['webviewViewMode'] = $webviewViewMode;
 
         return $obj;
     }

@@ -32,17 +32,17 @@ final class CallGetResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Data|array{
-     *   call_control_id: string,
-     *   call_leg_id: string,
-     *   call_session_id: string,
-     *   connection_id: string,
-     *   enqueued_at: string,
+     *   callControlID: string,
+     *   callLegID: string,
+     *   callSessionID: string,
+     *   connectionID: string,
+     *   enqueuedAt: string,
      *   from: string,
-     *   queue_id: string,
-     *   queue_position: int,
-     *   record_type: value-of<RecordType>,
+     *   queueID: string,
+     *   queuePosition: int,
+     *   recordType: value-of<RecordType>,
      *   to: string,
-     *   wait_time_secs: int,
+     *   waitTimeSecs: int,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -56,17 +56,17 @@ final class CallGetResponse implements BaseModel
 
     /**
      * @param Data|array{
-     *   call_control_id: string,
-     *   call_leg_id: string,
-     *   call_session_id: string,
-     *   connection_id: string,
-     *   enqueued_at: string,
+     *   callControlID: string,
+     *   callLegID: string,
+     *   callSessionID: string,
+     *   connectionID: string,
+     *   enqueuedAt: string,
      *   from: string,
-     *   queue_id: string,
-     *   queue_position: int,
-     *   record_type: value-of<RecordType>,
+     *   queueID: string,
+     *   queuePosition: int,
+     *   recordType: value-of<RecordType>,
      *   to: string,
-     *   wait_time_secs: int,
+     *   waitTimeSecs: int,
      * } $data
      */
     public function withData(Data|array $data): self

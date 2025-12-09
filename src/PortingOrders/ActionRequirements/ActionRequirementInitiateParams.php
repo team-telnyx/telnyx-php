@@ -16,8 +16,8 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams\Para
  * @see Telnyx\Services\PortingOrders\ActionRequirementsService::initiate()
  *
  * @phpstan-type ActionRequirementInitiateParamsShape = array{
- *   porting_order_id: string,
- *   params: Params|array{first_name: string, last_name: string},
+ *   portingOrderID: string,
+ *   params: Params|array{firstName: string, lastName: string},
  * }
  */
 final class ActionRequirementInitiateParams implements BaseModel
@@ -27,7 +27,7 @@ final class ActionRequirementInitiateParams implements BaseModel
     use SdkParams;
 
     #[Required]
-    public string $porting_order_id;
+    public string $portingOrderID;
 
     /**
      * Required information for initiating the action requirement for AU ID verification.
@@ -40,7 +40,7 @@ final class ActionRequirementInitiateParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * ActionRequirementInitiateParams::with(porting_order_id: ..., params: ...)
+     * ActionRequirementInitiateParams::with(portingOrderID: ..., params: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -59,15 +59,15 @@ final class ActionRequirementInitiateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Params|array{first_name: string, last_name: string} $params
+     * @param Params|array{firstName: string, lastName: string} $params
      */
     public static function with(
-        string $porting_order_id,
+        string $portingOrderID,
         Params|array $params
     ): self {
         $obj = new self;
 
-        $obj['porting_order_id'] = $porting_order_id;
+        $obj['portingOrderID'] = $portingOrderID;
         $obj['params'] = $params;
 
         return $obj;
@@ -76,7 +76,7 @@ final class ActionRequirementInitiateParams implements BaseModel
     public function withPortingOrderID(string $portingOrderID): self
     {
         $obj = clone $this;
-        $obj['porting_order_id'] = $portingOrderID;
+        $obj['portingOrderID'] = $portingOrderID;
 
         return $obj;
     }
@@ -84,7 +84,7 @@ final class ActionRequirementInitiateParams implements BaseModel
     /**
      * Required information for initiating the action requirement for AU ID verification.
      *
-     * @param Params|array{first_name: string, last_name: string} $params
+     * @param Params|array{firstName: string, lastName: string} $params
      */
     public function withParams(Params|array $params): self
     {

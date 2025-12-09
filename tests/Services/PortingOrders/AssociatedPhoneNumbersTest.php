@@ -38,7 +38,7 @@ final class AssociatedPhoneNumbersTest extends TestCase
 
         $result = $this->client->portingOrders->associatedPhoneNumbers->create(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            ['action' => 'keep', 'phone_number_range' => []],
+            ['action' => 'keep', 'phoneNumberRange' => []],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -56,8 +56,8 @@ final class AssociatedPhoneNumbersTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             [
                 'action' => 'keep',
-                'phone_number_range' => [
-                    'end_at' => '+441234567899', 'start_at' => '+441234567890',
+                'phoneNumberRange' => [
+                    'endAt' => '+441234567899', 'startAt' => '+441234567890',
                 ],
             ],
         );
@@ -91,7 +91,7 @@ final class AssociatedPhoneNumbersTest extends TestCase
 
         $result = $this->client->portingOrders->associatedPhoneNumbers->delete(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            ['porting_order_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+            ['portingOrderID' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -110,7 +110,7 @@ final class AssociatedPhoneNumbersTest extends TestCase
 
         $result = $this->client->portingOrders->associatedPhoneNumbers->delete(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            ['porting_order_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+            ['portingOrderID' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

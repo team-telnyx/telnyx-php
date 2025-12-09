@@ -14,8 +14,7 @@ use Telnyx\UserAddresses\UserAddressListParams\Filter\StreetAddress;
  * Consolidated filter parameter (deepObject style). Originally: filter[customer_reference][eq], filter[customer_reference][contains], filter[street_address][contains].
  *
  * @phpstan-type FilterShape = array{
- *   customer_reference?: CustomerReference|null,
- *   street_address?: StreetAddress|null,
+ *   customerReference?: CustomerReference|null, streetAddress?: StreetAddress|null
  * }
  */
 final class Filter implements BaseModel
@@ -26,14 +25,14 @@ final class Filter implements BaseModel
     /**
      * Filter user addresses via the customer reference. Supports both exact matching (eq) and partial matching (contains). Matching is not case-sensitive.
      */
-    #[Optional]
-    public ?CustomerReference $customer_reference;
+    #[Optional('customer_reference')]
+    public ?CustomerReference $customerReference;
 
     /**
      * Filter user addresses via street address. Supports partial matching (contains). Matching is not case-sensitive.
      */
-    #[Optional]
-    public ?StreetAddress $street_address;
+    #[Optional('street_address')]
+    public ?StreetAddress $streetAddress;
 
     public function __construct()
     {
@@ -47,17 +46,17 @@ final class Filter implements BaseModel
      *
      * @param CustomerReference|array{
      *   contains?: string|null, eq?: string|null
-     * } $customer_reference
-     * @param StreetAddress|array{contains?: string|null} $street_address
+     * } $customerReference
+     * @param StreetAddress|array{contains?: string|null} $streetAddress
      */
     public static function with(
-        CustomerReference|array|null $customer_reference = null,
-        StreetAddress|array|null $street_address = null,
+        CustomerReference|array|null $customerReference = null,
+        StreetAddress|array|null $streetAddress = null,
     ): self {
         $obj = new self;
 
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
-        null !== $street_address && $obj['street_address'] = $street_address;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
+        null !== $streetAddress && $obj['streetAddress'] = $streetAddress;
 
         return $obj;
     }
@@ -73,7 +72,7 @@ final class Filter implements BaseModel
         CustomerReference|array $customerReference
     ): self {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }
@@ -86,7 +85,7 @@ final class Filter implements BaseModel
     public function withStreetAddress(StreetAddress|array $streetAddress): self
     {
         $obj = clone $this;
-        $obj['street_address'] = $streetAddress;
+        $obj['streetAddress'] = $streetAddress;
 
         return $obj;
     }

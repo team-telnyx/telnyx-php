@@ -14,10 +14,10 @@ use Telnyx\NumberOrders\PhoneNumber;
 /**
  * @phpstan-type Data1Shape = array{
  *   id: string,
- *   event_type: string,
- *   occurred_at: \DateTimeInterface,
+ *   eventType: string,
+ *   occurredAt: \DateTimeInterface,
  *   payload: NumberOrderWithPhoneNumbers,
- *   record_type: string,
+ *   recordType: string,
  * }
  */
 final class Data1 implements BaseModel
@@ -34,14 +34,14 @@ final class Data1 implements BaseModel
     /**
      * The type of event being sent.
      */
-    #[Required]
-    public string $event_type;
+    #[Required('event_type')]
+    public string $eventType;
 
     /**
      * ISO 8601 timestamp of when the event occurred.
      */
-    #[Required]
-    public \DateTimeInterface $occurred_at;
+    #[Required('occurred_at')]
+    public \DateTimeInterface $occurredAt;
 
     #[Required]
     public NumberOrderWithPhoneNumbers $payload;
@@ -49,8 +49,8 @@ final class Data1 implements BaseModel
     /**
      * Type of record.
      */
-    #[Required]
-    public string $record_type;
+    #[Required('record_type')]
+    public string $recordType;
 
     /**
      * `new Data1()` is missing required properties by the API.
@@ -58,7 +58,7 @@ final class Data1 implements BaseModel
      * To enforce required parameters use
      * ```
      * Data1::with(
-     *   id: ..., event_type: ..., occurred_at: ..., payload: ..., record_type: ...
+     *   id: ..., eventType: ..., occurredAt: ..., payload: ..., recordType: ...
      * )
      * ```
      *
@@ -85,34 +85,34 @@ final class Data1 implements BaseModel
      *
      * @param NumberOrderWithPhoneNumbers|array{
      *   id?: string|null,
-     *   billing_group_id?: string|null,
-     *   connection_id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   customer_reference?: string|null,
-     *   messaging_profile_id?: string|null,
-     *   phone_numbers?: list<PhoneNumber>|null,
-     *   phone_numbers_count?: int|null,
-     *   record_type?: string|null,
-     *   requirements_met?: bool|null,
+     *   billingGroupID?: string|null,
+     *   connectionID?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   customerReference?: string|null,
+     *   messagingProfileID?: string|null,
+     *   phoneNumbers?: list<PhoneNumber>|null,
+     *   phoneNumbersCount?: int|null,
+     *   recordType?: string|null,
+     *   requirementsMet?: bool|null,
      *   status?: value-of<Status>|null,
-     *   sub_number_orders_ids?: list<string>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   subNumberOrdersIDs?: list<string>|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $payload
      */
     public static function with(
         string $id,
-        string $event_type,
-        \DateTimeInterface $occurred_at,
+        string $eventType,
+        \DateTimeInterface $occurredAt,
         NumberOrderWithPhoneNumbers|array $payload,
-        string $record_type,
+        string $recordType,
     ): self {
         $obj = new self;
 
         $obj['id'] = $id;
-        $obj['event_type'] = $event_type;
-        $obj['occurred_at'] = $occurred_at;
+        $obj['eventType'] = $eventType;
+        $obj['occurredAt'] = $occurredAt;
         $obj['payload'] = $payload;
-        $obj['record_type'] = $record_type;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -134,7 +134,7 @@ final class Data1 implements BaseModel
     public function withEventType(string $eventType): self
     {
         $obj = clone $this;
-        $obj['event_type'] = $eventType;
+        $obj['eventType'] = $eventType;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class Data1 implements BaseModel
     public function withOccurredAt(\DateTimeInterface $occurredAt): self
     {
         $obj = clone $this;
-        $obj['occurred_at'] = $occurredAt;
+        $obj['occurredAt'] = $occurredAt;
 
         return $obj;
     }
@@ -153,18 +153,18 @@ final class Data1 implements BaseModel
     /**
      * @param NumberOrderWithPhoneNumbers|array{
      *   id?: string|null,
-     *   billing_group_id?: string|null,
-     *   connection_id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   customer_reference?: string|null,
-     *   messaging_profile_id?: string|null,
-     *   phone_numbers?: list<PhoneNumber>|null,
-     *   phone_numbers_count?: int|null,
-     *   record_type?: string|null,
-     *   requirements_met?: bool|null,
+     *   billingGroupID?: string|null,
+     *   connectionID?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   customerReference?: string|null,
+     *   messagingProfileID?: string|null,
+     *   phoneNumbers?: list<PhoneNumber>|null,
+     *   phoneNumbersCount?: int|null,
+     *   recordType?: string|null,
+     *   requirementsMet?: bool|null,
      *   status?: value-of<Status>|null,
-     *   sub_number_orders_ids?: list<string>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   subNumberOrdersIDs?: list<string>|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $payload
      */
     public function withPayload(
@@ -182,7 +182,7 @@ final class Data1 implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

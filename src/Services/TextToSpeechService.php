@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TextToSpeechContract;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams;
@@ -60,7 +61,7 @@ final class TextToSpeechService implements TextToSpeechContract
      * Returns a list of voices that can be used with the text to speech commands.
      *
      * @param array{
-     *   elevenlabs_api_key_ref?: string,
+     *   elevenlabsAPIKeyRef?: string,
      *   provider?: 'aws'|'azure'|'elevenlabs'|'telnyx'|Provider,
      * }|TextToSpeechListVoicesParams $params
      *
@@ -79,7 +80,10 @@ final class TextToSpeechService implements TextToSpeechContract
         $response = $this->client->request(
             method: 'get',
             path: 'text-to-speech/voices',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['elevenlabsAPIKeyRef' => 'elevenlabs_api_key_ref']
+            ),
             options: $options,
             convert: TextToSpeechListVoicesResponse::class,
         );

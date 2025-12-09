@@ -37,11 +37,11 @@ final class NotificationChannelGetResponse implements BaseModel
      *
      * @param NotificationChannel|array{
      *   id?: string|null,
-     *   channel_destination?: string|null,
-     *   channel_type_id?: value-of<ChannelTypeID>|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   notification_profile_id?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   channelDestination?: string|null,
+     *   channelTypeID?: value-of<ChannelTypeID>|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   notificationProfileID?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(NotificationChannel|array|null $data = null): self
@@ -58,11 +58,11 @@ final class NotificationChannelGetResponse implements BaseModel
      *
      * @param NotificationChannel|array{
      *   id?: string|null,
-     *   channel_destination?: string|null,
-     *   channel_type_id?: value-of<ChannelTypeID>|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   notification_profile_id?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   channelDestination?: string|null,
+     *   channelTypeID?: value-of<ChannelTypeID>|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   notificationProfileID?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(NotificationChannel|array $data): self

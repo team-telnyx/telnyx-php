@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\ManagedAccounts\ManagedAccountCreateParams;
 use Telnyx\ManagedAccounts\ManagedAccountGetAllocatableGlobalOutboundChannelsResponse;
 use Telnyx\ManagedAccounts\ManagedAccountGetResponse;
@@ -43,11 +44,11 @@ final class ManagedAccountsService implements ManagedAccountsContract
      * Create a new managed account owned by the authenticated user. You need to be explictly approved by Telnyx in order to become a manager account.
      *
      * @param array{
-     *   business_name: string,
+     *   businessName: string,
      *   email?: string,
-     *   managed_account_allow_custom_pricing?: bool,
+     *   managedAccountAllowCustomPricing?: bool,
      *   password?: string,
-     *   rollup_billing?: bool,
+     *   rollupBilling?: bool,
      * }|ManagedAccountCreateParams $params
      *
      * @throws APIException
@@ -101,7 +102,7 @@ final class ManagedAccountsService implements ManagedAccountsContract
      * Update a single managed account.
      *
      * @param array{
-     *   managed_account_allow_custom_pricing?: bool
+     *   managedAccountAllowCustomPricing?: bool
      * }|ManagedAccountUpdateParams $params
      *
      * @throws APIException
@@ -136,9 +137,9 @@ final class ManagedAccountsService implements ManagedAccountsContract
      * @param array{
      *   filter?: array{
      *     email?: array{contains?: string, eq?: string},
-     *     organization_name?: array{contains?: string, eq?: string},
+     *     organizationName?: array{contains?: string, eq?: string},
      *   },
-     *   include_cancelled_accounts?: bool,
+     *   includeCancelledAccounts?: bool,
      *   page?: array{number?: int, size?: int},
      *   sort?: 'created_at'|'email'|Sort,
      * }|ManagedAccountListParams $params
@@ -158,7 +159,10 @@ final class ManagedAccountsService implements ManagedAccountsContract
         $response = $this->client->request(
             method: 'get',
             path: 'managed_accounts',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['includeCancelledAccounts' => 'include_cancelled_accounts']
+            ),
             options: $options,
             convert: ManagedAccountListResponse::class,
         );
@@ -193,7 +197,7 @@ final class ManagedAccountsService implements ManagedAccountsContract
      * Update the amount of allocatable global outbound channels allocated to a specific managed account.
      *
      * @param array{
-     *   channel_limit?: int
+     *   channelLimit?: int
      * }|ManagedAccountUpdateGlobalChannelLimitParams $params
      *
      * @throws APIException

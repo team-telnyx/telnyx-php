@@ -35,12 +35,12 @@ final class PhoneNumberExtensionDeleteResponse implements BaseModel
      *
      * @param PortingPhoneNumberExtension|array{
      *   id?: string|null,
-     *   activation_ranges?: list<ActivationRange>|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   extension_range?: ExtensionRange|null,
-     *   porting_phone_number_id?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   activationRanges?: list<ActivationRange>|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   extensionRange?: ExtensionRange|null,
+     *   portingPhoneNumberID?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(
@@ -56,12 +56,12 @@ final class PhoneNumberExtensionDeleteResponse implements BaseModel
     /**
      * @param PortingPhoneNumberExtension|array{
      *   id?: string|null,
-     *   activation_ranges?: list<ActivationRange>|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   extension_range?: ExtensionRange|null,
-     *   porting_phone_number_id?: string|null,
-     *   record_type?: string|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   activationRanges?: list<ActivationRange>|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   extensionRange?: ExtensionRange|null,
+     *   portingPhoneNumberID?: string|null,
+     *   recordType?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(PortingPhoneNumberExtension|array $data): self

@@ -11,8 +11,8 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type LocalShape = array{
  *   features?: list<string>|null,
- *   full_pstn_replacement?: bool|null,
- *   international_sms?: bool|null,
+ *   fullPstnReplacement?: bool|null,
+ *   internationalSMS?: bool|null,
  *   p2p?: bool|null,
  *   quickship?: bool|null,
  *   reservable?: bool|null,
@@ -27,11 +27,11 @@ final class Local implements BaseModel
     #[Optional(list: 'string')]
     public ?array $features;
 
-    #[Optional]
-    public ?bool $full_pstn_replacement;
+    #[Optional('full_pstn_replacement')]
+    public ?bool $fullPstnReplacement;
 
-    #[Optional]
-    public ?bool $international_sms;
+    #[Optional('international_sms')]
+    public ?bool $internationalSMS;
 
     #[Optional]
     public ?bool $p2p;
@@ -56,8 +56,8 @@ final class Local implements BaseModel
      */
     public static function with(
         ?array $features = null,
-        ?bool $full_pstn_replacement = null,
-        ?bool $international_sms = null,
+        ?bool $fullPstnReplacement = null,
+        ?bool $internationalSMS = null,
         ?bool $p2p = null,
         ?bool $quickship = null,
         ?bool $reservable = null,
@@ -65,8 +65,8 @@ final class Local implements BaseModel
         $obj = new self;
 
         null !== $features && $obj['features'] = $features;
-        null !== $full_pstn_replacement && $obj['full_pstn_replacement'] = $full_pstn_replacement;
-        null !== $international_sms && $obj['international_sms'] = $international_sms;
+        null !== $fullPstnReplacement && $obj['fullPstnReplacement'] = $fullPstnReplacement;
+        null !== $internationalSMS && $obj['internationalSMS'] = $internationalSMS;
         null !== $p2p && $obj['p2p'] = $p2p;
         null !== $quickship && $obj['quickship'] = $quickship;
         null !== $reservable && $obj['reservable'] = $reservable;
@@ -88,7 +88,7 @@ final class Local implements BaseModel
     public function withFullPstnReplacement(bool $fullPstnReplacement): self
     {
         $obj = clone $this;
-        $obj['full_pstn_replacement'] = $fullPstnReplacement;
+        $obj['fullPstnReplacement'] = $fullPstnReplacement;
 
         return $obj;
     }
@@ -96,7 +96,7 @@ final class Local implements BaseModel
     public function withInternationalSMS(bool $internationalSMS): self
     {
         $obj = clone $this;
-        $obj['international_sms'] = $internationalSMS;
+        $obj['internationalSMS'] = $internationalSMS;
 
         return $obj;
     }

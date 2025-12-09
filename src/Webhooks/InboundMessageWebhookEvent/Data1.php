@@ -23,10 +23,10 @@ use Telnyx\Webhooks\InboundMessageWebhookEvent\Data1\RecordType;
 /**
  * @phpstan-type Data1Shape = array{
  *   id?: string|null,
- *   event_type?: value-of<EventType>|null,
- *   occurred_at?: \DateTimeInterface|null,
+ *   eventType?: value-of<EventType>|null,
+ *   occurredAt?: \DateTimeInterface|null,
  *   payload?: Payload|null,
- *   record_type?: value-of<RecordType>|null,
+ *   recordType?: value-of<RecordType>|null,
  * }
  */
 final class Data1 implements BaseModel
@@ -43,16 +43,16 @@ final class Data1 implements BaseModel
     /**
      * The type of event being delivered.
      *
-     * @var value-of<EventType>|null $event_type
+     * @var value-of<EventType>|null $eventType
      */
-    #[Optional(enum: EventType::class)]
-    public ?string $event_type;
+    #[Optional('event_type', enum: EventType::class)]
+    public ?string $eventType;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Optional]
-    public ?\DateTimeInterface $occurred_at;
+    #[Optional('occurred_at')]
+    public ?\DateTimeInterface $occurredAt;
 
     #[Optional]
     public ?Payload $payload;
@@ -60,10 +60,10 @@ final class Data1 implements BaseModel
     /**
      * Identifies the type of the resource.
      *
-     * @var value-of<RecordType>|null $record_type
+     * @var value-of<RecordType>|null $recordType
      */
-    #[Optional(enum: RecordType::class)]
-    public ?string $record_type;
+    #[Optional('record_type', enum: RecordType::class)]
+    public ?string $recordType;
 
     public function __construct()
     {
@@ -75,52 +75,52 @@ final class Data1 implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param EventType|value-of<EventType> $event_type
+     * @param EventType|value-of<EventType> $eventType
      * @param Payload|array{
      *   id?: string|null,
      *   cc?: list<Cc>|null,
-     *   completed_at?: \DateTimeInterface|null,
+     *   completedAt?: \DateTimeInterface|null,
      *   cost?: Cost|null,
-     *   cost_breakdown?: CostBreakdown|null,
+     *   costBreakdown?: CostBreakdown|null,
      *   direction?: value-of<Direction>|null,
      *   encoding?: string|null,
      *   errors?: list<MessagingError>|null,
      *   from?: From|null,
      *   media?: list<Media>|null,
-     *   messaging_profile_id?: string|null,
-     *   organization_id?: string|null,
+     *   messagingProfileID?: string|null,
+     *   organizationID?: string|null,
      *   parts?: int|null,
-     *   received_at?: \DateTimeInterface|null,
-     *   record_type?: value-of<Payload\RecordType>|null,
-     *   sent_at?: \DateTimeInterface|null,
+     *   receivedAt?: \DateTimeInterface|null,
+     *   recordType?: value-of<Payload\RecordType>|null,
+     *   sentAt?: \DateTimeInterface|null,
      *   subject?: string|null,
      *   tags?: list<string>|null,
-     *   tcr_campaign_billable?: bool|null,
-     *   tcr_campaign_id?: string|null,
-     *   tcr_campaign_registered?: string|null,
+     *   tcrCampaignBillable?: bool|null,
+     *   tcrCampaignID?: string|null,
+     *   tcrCampaignRegistered?: string|null,
      *   text?: string|null,
      *   to?: list<To>|null,
      *   type?: value-of<Type>|null,
-     *   valid_until?: \DateTimeInterface|null,
-     *   webhook_failover_url?: string|null,
-     *   webhook_url?: string|null,
+     *   validUntil?: \DateTimeInterface|null,
+     *   webhookFailoverURL?: string|null,
+     *   webhookURL?: string|null,
      * } $payload
-     * @param RecordType|value-of<RecordType> $record_type
+     * @param RecordType|value-of<RecordType> $recordType
      */
     public static function with(
         ?string $id = null,
-        EventType|string|null $event_type = null,
-        ?\DateTimeInterface $occurred_at = null,
+        EventType|string|null $eventType = null,
+        ?\DateTimeInterface $occurredAt = null,
         Payload|array|null $payload = null,
-        RecordType|string|null $record_type = null,
+        RecordType|string|null $recordType = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $event_type && $obj['event_type'] = $event_type;
-        null !== $occurred_at && $obj['occurred_at'] = $occurred_at;
+        null !== $eventType && $obj['eventType'] = $eventType;
+        null !== $occurredAt && $obj['occurredAt'] = $occurredAt;
         null !== $payload && $obj['payload'] = $payload;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $recordType && $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class Data1 implements BaseModel
     public function withEventType(EventType|string $eventType): self
     {
         $obj = clone $this;
-        $obj['event_type'] = $eventType;
+        $obj['eventType'] = $eventType;
 
         return $obj;
     }
@@ -155,7 +155,7 @@ final class Data1 implements BaseModel
     public function withOccurredAt(\DateTimeInterface $occurredAt): self
     {
         $obj = clone $this;
-        $obj['occurred_at'] = $occurredAt;
+        $obj['occurredAt'] = $occurredAt;
 
         return $obj;
     }
@@ -164,31 +164,31 @@ final class Data1 implements BaseModel
      * @param Payload|array{
      *   id?: string|null,
      *   cc?: list<Cc>|null,
-     *   completed_at?: \DateTimeInterface|null,
+     *   completedAt?: \DateTimeInterface|null,
      *   cost?: Cost|null,
-     *   cost_breakdown?: CostBreakdown|null,
+     *   costBreakdown?: CostBreakdown|null,
      *   direction?: value-of<Direction>|null,
      *   encoding?: string|null,
      *   errors?: list<MessagingError>|null,
      *   from?: From|null,
      *   media?: list<Media>|null,
-     *   messaging_profile_id?: string|null,
-     *   organization_id?: string|null,
+     *   messagingProfileID?: string|null,
+     *   organizationID?: string|null,
      *   parts?: int|null,
-     *   received_at?: \DateTimeInterface|null,
-     *   record_type?: value-of<Payload\RecordType>|null,
-     *   sent_at?: \DateTimeInterface|null,
+     *   receivedAt?: \DateTimeInterface|null,
+     *   recordType?: value-of<Payload\RecordType>|null,
+     *   sentAt?: \DateTimeInterface|null,
      *   subject?: string|null,
      *   tags?: list<string>|null,
-     *   tcr_campaign_billable?: bool|null,
-     *   tcr_campaign_id?: string|null,
-     *   tcr_campaign_registered?: string|null,
+     *   tcrCampaignBillable?: bool|null,
+     *   tcrCampaignID?: string|null,
+     *   tcrCampaignRegistered?: string|null,
      *   text?: string|null,
      *   to?: list<To>|null,
      *   type?: value-of<Type>|null,
-     *   valid_until?: \DateTimeInterface|null,
-     *   webhook_failover_url?: string|null,
-     *   webhook_url?: string|null,
+     *   validUntil?: \DateTimeInterface|null,
+     *   webhookFailoverURL?: string|null,
+     *   webhookURL?: string|null,
      * } $payload
      */
     public function withPayload(Payload|array $payload): self
@@ -207,7 +207,7 @@ final class Data1 implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

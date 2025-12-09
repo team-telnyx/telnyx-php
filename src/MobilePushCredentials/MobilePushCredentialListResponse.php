@@ -42,18 +42,18 @@ final class MobilePushCredentialListResponse implements BaseModel
      *   id: string,
      *   alias: string,
      *   certificate: string,
-     *   created_at: \DateTimeInterface,
-     *   private_key: string,
-     *   project_account_json_file: array<string,mixed>,
-     *   record_type: string,
+     *   createdAt: \DateTimeInterface,
+     *   privateKey: string,
+     *   projectAccountJsonFile: array<string,mixed>,
+     *   recordType: string,
      *   type: string,
-     *   updated_at: \DateTimeInterface,
+     *   updatedAt: \DateTimeInterface,
      * }> $data
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -73,12 +73,12 @@ final class MobilePushCredentialListResponse implements BaseModel
      *   id: string,
      *   alias: string,
      *   certificate: string,
-     *   created_at: \DateTimeInterface,
-     *   private_key: string,
-     *   project_account_json_file: array<string,mixed>,
-     *   record_type: string,
+     *   createdAt: \DateTimeInterface,
+     *   privateKey: string,
+     *   projectAccountJsonFile: array<string,mixed>,
+     *   recordType: string,
      *   type: string,
-     *   updated_at: \DateTimeInterface,
+     *   updatedAt: \DateTimeInterface,
      * }> $data
      */
     public function withData(array $data): self
@@ -91,10 +91,10 @@ final class MobilePushCredentialListResponse implements BaseModel
 
     /**
      * @param PaginationMeta|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMeta|array $meta): self

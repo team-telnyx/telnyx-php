@@ -33,10 +33,10 @@ final class ManagedAccountGetAllocatableGlobalOutboundChannelsResponse implement
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Data|array{
-     *   allocatable_global_outbound_channels?: int|null,
-     *   managed_account_allow_custom_pricing?: bool|null,
-     *   record_type?: string|null,
-     *   total_global_channels_allocated?: int|null,
+     *   allocatableGlobalOutboundChannels?: int|null,
+     *   managedAccountAllowCustomPricing?: bool|null,
+     *   recordType?: string|null,
+     *   totalGlobalChannelsAllocated?: int|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -50,10 +50,10 @@ final class ManagedAccountGetAllocatableGlobalOutboundChannelsResponse implement
 
     /**
      * @param Data|array{
-     *   allocatable_global_outbound_channels?: int|null,
-     *   managed_account_allow_custom_pricing?: bool|null,
-     *   record_type?: string|null,
-     *   total_global_channels_allocated?: int|null,
+     *   allocatableGlobalOutboundChannels?: int|null,
+     *   managedAccountAllowCustomPricing?: bool|null,
+     *   recordType?: string|null,
+     *   totalGlobalChannelsAllocated?: int|null,
      * } $data
      */
     public function withData(Data|array $data): self

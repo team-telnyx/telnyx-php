@@ -11,14 +11,14 @@ use Telnyx\CredentialConnections\Actions\ActionCheckRegistrationStatusResponse\D
 
 /**
  * @phpstan-type DataShape = array{
- *   ip_address?: string|null,
- *   last_registration?: string|null,
+ *   ipAddress?: string|null,
+ *   lastRegistration?: string|null,
  *   port?: int|null,
- *   record_type?: string|null,
- *   sip_username?: string|null,
+ *   recordType?: string|null,
+ *   sipUsername?: string|null,
  *   status?: value-of<Status>|null,
  *   transport?: string|null,
- *   user_agent?: string|null,
+ *   userAgent?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -29,14 +29,14 @@ final class Data implements BaseModel
     /**
      * The ip used during the SIP connection.
      */
-    #[Optional]
-    public ?string $ip_address;
+    #[Optional('ip_address')]
+    public ?string $ipAddress;
 
     /**
      * ISO 8601 formatted date indicating when the resource was last updated.
      */
-    #[Optional]
-    public ?string $last_registration;
+    #[Optional('last_registration')]
+    public ?string $lastRegistration;
 
     /**
      * The port of the SIP connection.
@@ -47,14 +47,14 @@ final class Data implements BaseModel
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * The user name of the SIP connection.
      */
-    #[Optional]
-    public ?string $sip_username;
+    #[Optional('sip_username')]
+    public ?string $sipUsername;
 
     /**
      * The current registration status of your SIP connection.
@@ -73,8 +73,8 @@ final class Data implements BaseModel
     /**
      * The user agent of the SIP connection.
      */
-    #[Optional]
-    public ?string $user_agent;
+    #[Optional('user_agent')]
+    public ?string $userAgent;
 
     public function __construct()
     {
@@ -89,25 +89,25 @@ final class Data implements BaseModel
      * @param Status|value-of<Status> $status
      */
     public static function with(
-        ?string $ip_address = null,
-        ?string $last_registration = null,
+        ?string $ipAddress = null,
+        ?string $lastRegistration = null,
         ?int $port = null,
-        ?string $record_type = null,
-        ?string $sip_username = null,
+        ?string $recordType = null,
+        ?string $sipUsername = null,
         Status|string|null $status = null,
         ?string $transport = null,
-        ?string $user_agent = null,
+        ?string $userAgent = null,
     ): self {
         $obj = new self;
 
-        null !== $ip_address && $obj['ip_address'] = $ip_address;
-        null !== $last_registration && $obj['last_registration'] = $last_registration;
+        null !== $ipAddress && $obj['ipAddress'] = $ipAddress;
+        null !== $lastRegistration && $obj['lastRegistration'] = $lastRegistration;
         null !== $port && $obj['port'] = $port;
-        null !== $record_type && $obj['record_type'] = $record_type;
-        null !== $sip_username && $obj['sip_username'] = $sip_username;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $sipUsername && $obj['sipUsername'] = $sipUsername;
         null !== $status && $obj['status'] = $status;
         null !== $transport && $obj['transport'] = $transport;
-        null !== $user_agent && $obj['user_agent'] = $user_agent;
+        null !== $userAgent && $obj['userAgent'] = $userAgent;
 
         return $obj;
     }
@@ -118,7 +118,7 @@ final class Data implements BaseModel
     public function withIPAddress(string $ipAddress): self
     {
         $obj = clone $this;
-        $obj['ip_address'] = $ipAddress;
+        $obj['ipAddress'] = $ipAddress;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class Data implements BaseModel
     public function withLastRegistration(string $lastRegistration): self
     {
         $obj = clone $this;
-        $obj['last_registration'] = $lastRegistration;
+        $obj['lastRegistration'] = $lastRegistration;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -162,7 +162,7 @@ final class Data implements BaseModel
     public function withSipUsername(string $sipUsername): self
     {
         $obj = clone $this;
-        $obj['sip_username'] = $sipUsername;
+        $obj['sipUsername'] = $sipUsername;
 
         return $obj;
     }
@@ -197,7 +197,7 @@ final class Data implements BaseModel
     public function withUserAgent(string $userAgent): self
     {
         $obj = clone $this;
-        $obj['user_agent'] = $userAgent;
+        $obj['userAgent'] = $userAgent;
 
         return $obj;
     }

@@ -33,11 +33,11 @@ final class RegionListResponse implements BaseModel
      *
      * @param list<Data|array{
      *   code?: string|null,
-     *   created_at?: string|null,
+     *   createdAt?: string|null,
      *   name?: string|null,
-     *   record_type?: string|null,
-     *   supported_interfaces?: list<string>|null,
-     *   updated_at?: string|null,
+     *   recordType?: string|null,
+     *   supportedInterfaces?: list<string>|null,
+     *   updatedAt?: string|null,
      * }> $data
      */
     public static function with(?array $data = null): self
@@ -52,11 +52,11 @@ final class RegionListResponse implements BaseModel
     /**
      * @param list<Data|array{
      *   code?: string|null,
-     *   created_at?: string|null,
+     *   createdAt?: string|null,
      *   name?: string|null,
-     *   record_type?: string|null,
-     *   supported_interfaces?: list<string>|null,
-     *   updated_at?: string|null,
+     *   recordType?: string|null,
+     *   supportedInterfaces?: list<string>|null,
+     *   updatedAt?: string|null,
      * }> $data
      */
     public function withData(array $data): self

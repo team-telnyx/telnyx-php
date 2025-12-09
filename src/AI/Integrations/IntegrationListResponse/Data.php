@@ -12,10 +12,10 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type DataShape = array{
  *   id: string,
- *   available_tools: list<string>,
+ *   availableTools: list<string>,
  *   description: string,
- *   display_name: string,
- *   logo_url: string,
+ *   displayName: string,
+ *   logoURL: string,
  *   name: string,
  *   status: value-of<Status>,
  * }
@@ -28,18 +28,18 @@ final class Data implements BaseModel
     #[Required]
     public string $id;
 
-    /** @var list<string> $available_tools */
-    #[Required(list: 'string')]
-    public array $available_tools;
+    /** @var list<string> $availableTools */
+    #[Required('available_tools', list: 'string')]
+    public array $availableTools;
 
     #[Required]
     public string $description;
 
-    #[Required]
-    public string $display_name;
+    #[Required('display_name')]
+    public string $displayName;
 
-    #[Required]
-    public string $logo_url;
+    #[Required('logo_url')]
+    public string $logoURL;
 
     #[Required]
     public string $name;
@@ -55,10 +55,10 @@ final class Data implements BaseModel
      * ```
      * Data::with(
      *   id: ...,
-     *   available_tools: ...,
+     *   availableTools: ...,
      *   description: ...,
-     *   display_name: ...,
-     *   logo_url: ...,
+     *   displayName: ...,
+     *   logoURL: ...,
      *   name: ...,
      *   status: ...,
      * )
@@ -87,25 +87,25 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $available_tools
+     * @param list<string> $availableTools
      * @param Status|value-of<Status> $status
      */
     public static function with(
         string $id,
-        array $available_tools,
+        array $availableTools,
         string $description,
-        string $display_name,
-        string $logo_url,
+        string $displayName,
+        string $logoURL,
         string $name,
         Status|string $status,
     ): self {
         $obj = new self;
 
         $obj['id'] = $id;
-        $obj['available_tools'] = $available_tools;
+        $obj['availableTools'] = $availableTools;
         $obj['description'] = $description;
-        $obj['display_name'] = $display_name;
-        $obj['logo_url'] = $logo_url;
+        $obj['displayName'] = $displayName;
+        $obj['logoURL'] = $logoURL;
         $obj['name'] = $name;
         $obj['status'] = $status;
 
@@ -126,7 +126,7 @@ final class Data implements BaseModel
     public function withAvailableTools(array $availableTools): self
     {
         $obj = clone $this;
-        $obj['available_tools'] = $availableTools;
+        $obj['availableTools'] = $availableTools;
 
         return $obj;
     }
@@ -142,7 +142,7 @@ final class Data implements BaseModel
     public function withDisplayName(string $displayName): self
     {
         $obj = clone $this;
-        $obj['display_name'] = $displayName;
+        $obj['displayName'] = $displayName;
 
         return $obj;
     }
@@ -150,7 +150,7 @@ final class Data implements BaseModel
     public function withLogoURL(string $logoURL): self
     {
         $obj = clone $this;
-        $obj['logo_url'] = $logoURL;
+        $obj['logoURL'] = $logoURL;
 
         return $obj;
     }

@@ -38,7 +38,7 @@ final class CustomerServiceRecordsTest extends TestCase
         }
 
         $result = $this->client->customerServiceRecords->create([
-            'phone_number' => '+13035553000',
+            'phoneNumber' => '+13035553000',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -53,20 +53,20 @@ final class CustomerServiceRecordsTest extends TestCase
         }
 
         $result = $this->client->customerServiceRecords->create([
-            'phone_number' => '+13035553000',
-            'additional_data' => [
-                'account_number' => '123456789',
-                'address_line_1' => '123 Main St',
-                'authorized_person_name' => 'John Doe',
-                'billing_phone_number' => '+12065551212',
+            'phoneNumber' => '+13035553000',
+            'additionalData' => [
+                'accountNumber' => '123456789',
+                'addressLine1' => '123 Main St',
+                'authorizedPersonName' => 'John Doe',
+                'billingPhoneNumber' => '+12065551212',
                 'city' => 'New York',
-                'customer_code' => '123456789',
+                'customerCode' => '123456789',
                 'name' => 'Entity Inc.',
                 'pin' => '1234',
                 'state' => 'NY',
-                'zip_code' => '10001',
+                'zipCode' => '10001',
             ],
-            'webhook_url' => 'https://example.com/webhook',
+            'webhookURL' => 'https://example.com/webhook',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -109,7 +109,7 @@ final class CustomerServiceRecordsTest extends TestCase
         }
 
         $result = $this->client->customerServiceRecords->verifyPhoneNumberCoverage([
-            'phone_numbers' => ['+13035553000'],
+            'phoneNumbers' => ['+13035553000'],
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -127,7 +127,7 @@ final class CustomerServiceRecordsTest extends TestCase
         }
 
         $result = $this->client->customerServiceRecords->verifyPhoneNumberCoverage([
-            'phone_numbers' => ['+13035553000'],
+            'phoneNumbers' => ['+13035553000'],
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

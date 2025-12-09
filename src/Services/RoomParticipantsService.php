@@ -50,22 +50,22 @@ final class RoomParticipantsService implements RoomParticipantsContract
      * @param array{
      *   filter?: array{
      *     context?: string,
-     *     date_joined_at?: array{
+     *     dateJoinedAt?: array{
      *       eq?: string|\DateTimeInterface,
      *       gte?: string|\DateTimeInterface,
      *       lte?: string|\DateTimeInterface,
      *     },
-     *     date_left_at?: array{
+     *     dateLeftAt?: array{
      *       eq?: string|\DateTimeInterface,
      *       gte?: string|\DateTimeInterface,
      *       lte?: string|\DateTimeInterface,
      *     },
-     *     date_updated_at?: array{
+     *     dateUpdatedAt?: array{
      *       eq?: string|\DateTimeInterface,
      *       gte?: string|\DateTimeInterface,
      *       lte?: string|\DateTimeInterface,
      *     },
-     *     session_id?: string,
+     *     sessionID?: string,
      *   },
      *   page?: array{number?: int, size?: int},
      * }|RoomParticipantListParams $params

@@ -53,7 +53,7 @@ final class SimCardGroupsTest extends TestCase
 
         $result = $this->client->simCardGroups->create([
             'name' => 'My Test Group',
-            'data_limit' => ['amount' => '2048.1', 'unit' => 'MB'],
+            'dataLimit' => ['amount' => '2048.1', 'unit' => 'MB'],
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

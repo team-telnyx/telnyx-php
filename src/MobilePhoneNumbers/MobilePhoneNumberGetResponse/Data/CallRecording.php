@@ -12,9 +12,9 @@ use Telnyx\MobilePhoneNumbers\MobilePhoneNumberGetResponse\Data\CallRecording\In
 
 /**
  * @phpstan-type CallRecordingShape = array{
- *   inbound_call_recording_channels?: value-of<InboundCallRecordingChannels>|null,
- *   inbound_call_recording_enabled?: bool|null,
- *   inbound_call_recording_format?: value-of<InboundCallRecordingFormat>|null,
+ *   inboundCallRecordingChannels?: value-of<InboundCallRecordingChannels>|null,
+ *   inboundCallRecordingEnabled?: bool|null,
+ *   inboundCallRecordingFormat?: value-of<InboundCallRecordingFormat>|null,
  * }
  */
 final class CallRecording implements BaseModel
@@ -22,18 +22,22 @@ final class CallRecording implements BaseModel
     /** @use SdkModel<CallRecordingShape> */
     use SdkModel;
 
-    /**
-     * @var value-of<InboundCallRecordingChannels>|null $inbound_call_recording_channels
-     */
-    #[Optional(enum: InboundCallRecordingChannels::class)]
-    public ?string $inbound_call_recording_channels;
+    /** @var value-of<InboundCallRecordingChannels>|null $inboundCallRecordingChannels */
+    #[Optional(
+        'inbound_call_recording_channels',
+        enum: InboundCallRecordingChannels::class
+    )]
+    public ?string $inboundCallRecordingChannels;
 
-    #[Optional]
-    public ?bool $inbound_call_recording_enabled;
+    #[Optional('inbound_call_recording_enabled')]
+    public ?bool $inboundCallRecordingEnabled;
 
-    /** @var value-of<InboundCallRecordingFormat>|null $inbound_call_recording_format */
-    #[Optional(enum: InboundCallRecordingFormat::class)]
-    public ?string $inbound_call_recording_format;
+    /** @var value-of<InboundCallRecordingFormat>|null $inboundCallRecordingFormat */
+    #[Optional(
+        'inbound_call_recording_format',
+        enum: InboundCallRecordingFormat::class
+    )]
+    public ?string $inboundCallRecordingFormat;
 
     public function __construct()
     {
@@ -45,19 +49,19 @@ final class CallRecording implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param InboundCallRecordingChannels|value-of<InboundCallRecordingChannels> $inbound_call_recording_channels
-     * @param InboundCallRecordingFormat|value-of<InboundCallRecordingFormat> $inbound_call_recording_format
+     * @param InboundCallRecordingChannels|value-of<InboundCallRecordingChannels> $inboundCallRecordingChannels
+     * @param InboundCallRecordingFormat|value-of<InboundCallRecordingFormat> $inboundCallRecordingFormat
      */
     public static function with(
-        InboundCallRecordingChannels|string|null $inbound_call_recording_channels = null,
-        ?bool $inbound_call_recording_enabled = null,
-        InboundCallRecordingFormat|string|null $inbound_call_recording_format = null,
+        InboundCallRecordingChannels|string|null $inboundCallRecordingChannels = null,
+        ?bool $inboundCallRecordingEnabled = null,
+        InboundCallRecordingFormat|string|null $inboundCallRecordingFormat = null,
     ): self {
         $obj = new self;
 
-        null !== $inbound_call_recording_channels && $obj['inbound_call_recording_channels'] = $inbound_call_recording_channels;
-        null !== $inbound_call_recording_enabled && $obj['inbound_call_recording_enabled'] = $inbound_call_recording_enabled;
-        null !== $inbound_call_recording_format && $obj['inbound_call_recording_format'] = $inbound_call_recording_format;
+        null !== $inboundCallRecordingChannels && $obj['inboundCallRecordingChannels'] = $inboundCallRecordingChannels;
+        null !== $inboundCallRecordingEnabled && $obj['inboundCallRecordingEnabled'] = $inboundCallRecordingEnabled;
+        null !== $inboundCallRecordingFormat && $obj['inboundCallRecordingFormat'] = $inboundCallRecordingFormat;
 
         return $obj;
     }
@@ -69,7 +73,7 @@ final class CallRecording implements BaseModel
         InboundCallRecordingChannels|string $inboundCallRecordingChannels
     ): self {
         $obj = clone $this;
-        $obj['inbound_call_recording_channels'] = $inboundCallRecordingChannels;
+        $obj['inboundCallRecordingChannels'] = $inboundCallRecordingChannels;
 
         return $obj;
     }
@@ -78,7 +82,7 @@ final class CallRecording implements BaseModel
         bool $inboundCallRecordingEnabled
     ): self {
         $obj = clone $this;
-        $obj['inbound_call_recording_enabled'] = $inboundCallRecordingEnabled;
+        $obj['inboundCallRecordingEnabled'] = $inboundCallRecordingEnabled;
 
         return $obj;
     }
@@ -90,7 +94,7 @@ final class CallRecording implements BaseModel
         InboundCallRecordingFormat|string $inboundCallRecordingFormat
     ): self {
         $obj = clone $this;
-        $obj['inbound_call_recording_format'] = $inboundCallRecordingFormat;
+        $obj['inboundCallRecordingFormat'] = $inboundCallRecordingFormat;
 
         return $obj;
     }

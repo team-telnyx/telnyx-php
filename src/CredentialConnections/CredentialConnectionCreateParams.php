@@ -23,54 +23,54 @@ use Telnyx\CredentialConnections\CredentialOutbound\T38ReinviteSource;
  * @see Telnyx\Services\CredentialConnectionsService::create()
  *
  * @phpstan-type CredentialConnectionCreateParamsShape = array{
- *   connection_name: string,
+ *   connectionName: string,
  *   password: string,
- *   user_name: string,
+ *   userName: string,
  *   active?: bool,
- *   anchorsite_override?: AnchorsiteOverride|value-of<AnchorsiteOverride>,
- *   android_push_credential_id?: string|null,
- *   call_cost_in_webhooks?: bool,
- *   default_on_hold_comfort_noise_enabled?: bool,
- *   dtmf_type?: DtmfType|value-of<DtmfType>,
- *   encode_contact_header_enabled?: bool,
- *   encrypted_media?: null|EncryptedMedia|value-of<EncryptedMedia>,
+ *   anchorsiteOverride?: AnchorsiteOverride|value-of<AnchorsiteOverride>,
+ *   androidPushCredentialID?: string|null,
+ *   callCostInWebhooks?: bool,
+ *   defaultOnHoldComfortNoiseEnabled?: bool,
+ *   dtmfType?: DtmfType|value-of<DtmfType>,
+ *   encodeContactHeaderEnabled?: bool,
+ *   encryptedMedia?: null|EncryptedMedia|value-of<EncryptedMedia>,
  *   inbound?: CredentialInbound|array{
- *     ani_number_format?: value-of<AniNumberFormat>|null,
- *     channel_limit?: int|null,
+ *     aniNumberFormat?: value-of<AniNumberFormat>|null,
+ *     channelLimit?: int|null,
  *     codecs?: list<string>|null,
- *     dnis_number_format?: value-of<DnisNumberFormat>|null,
- *     generate_ringback_tone?: bool|null,
- *     isup_headers_enabled?: bool|null,
- *     prack_enabled?: bool|null,
- *     shaken_stir_enabled?: bool|null,
- *     sip_compact_headers_enabled?: bool|null,
- *     timeout_1xx_secs?: int|null,
- *     timeout_2xx_secs?: int|null,
+ *     dnisNumberFormat?: value-of<DnisNumberFormat>|null,
+ *     generateRingbackTone?: bool|null,
+ *     isupHeadersEnabled?: bool|null,
+ *     prackEnabled?: bool|null,
+ *     shakenStirEnabled?: bool|null,
+ *     sipCompactHeadersEnabled?: bool|null,
+ *     timeout1xxSecs?: int|null,
+ *     timeout2xxSecs?: int|null,
  *   },
- *   ios_push_credential_id?: string|null,
- *   onnet_t38_passthrough_enabled?: bool,
+ *   iosPushCredentialID?: string|null,
+ *   onnetT38PassthroughEnabled?: bool,
  *   outbound?: CredentialOutbound|array{
- *     ani_override?: string|null,
- *     ani_override_type?: value-of<AniOverrideType>|null,
- *     call_parking_enabled?: bool|null,
- *     channel_limit?: int|null,
- *     generate_ringback_tone?: bool|null,
- *     instant_ringback_enabled?: bool|null,
+ *     aniOverride?: string|null,
+ *     aniOverrideType?: value-of<AniOverrideType>|null,
+ *     callParkingEnabled?: bool|null,
+ *     channelLimit?: int|null,
+ *     generateRingbackTone?: bool|null,
+ *     instantRingbackEnabled?: bool|null,
  *     localization?: string|null,
- *     outbound_voice_profile_id?: string|null,
- *     t38_reinvite_source?: value-of<T38ReinviteSource>|null,
+ *     outboundVoiceProfileID?: string|null,
+ *     t38ReinviteSource?: value-of<T38ReinviteSource>|null,
  *   },
- *   rtcp_settings?: ConnectionRtcpSettings|array{
- *     capture_enabled?: bool|null,
+ *   rtcpSettings?: ConnectionRtcpSettings|array{
+ *     captureEnabled?: bool|null,
  *     port?: value-of<Port>|null,
- *     report_frequency_secs?: int|null,
+ *     reportFrequencySecs?: int|null,
  *   },
- *   sip_uri_calling_preference?: SipUriCallingPreference|value-of<SipUriCallingPreference>,
+ *   sipUriCallingPreference?: SipUriCallingPreference|value-of<SipUriCallingPreference>,
  *   tags?: list<string>,
- *   webhook_api_version?: WebhookAPIVersion|value-of<WebhookAPIVersion>,
- *   webhook_event_failover_url?: string|null,
- *   webhook_event_url?: string,
- *   webhook_timeout_secs?: int|null,
+ *   webhookAPIVersion?: WebhookAPIVersion|value-of<WebhookAPIVersion>,
+ *   webhookEventFailoverURL?: string|null,
+ *   webhookEventURL?: string,
+ *   webhookTimeoutSecs?: int|null,
  * }
  */
 final class CredentialConnectionCreateParams implements BaseModel
@@ -82,8 +82,8 @@ final class CredentialConnectionCreateParams implements BaseModel
     /**
      * A user-assigned name to help manage the connection.
      */
-    #[Required]
-    public string $connection_name;
+    #[Required('connection_name')]
+    public string $connectionName;
 
     /**
      * The password to be used as part of the credentials. Must be 8 to 128 characters long.
@@ -94,8 +94,8 @@ final class CredentialConnectionCreateParams implements BaseModel
     /**
      * The user name to be used as part of the credentials. Must be 4-32 characters long and alphanumeric values only (no spaces or special characters).
      */
-    #[Required]
-    public string $user_name;
+    #[Required('user_name')]
+    public string $userName;
 
     /**
      * Defaults to true.
@@ -106,50 +106,50 @@ final class CredentialConnectionCreateParams implements BaseModel
     /**
      * `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
      *
-     * @var value-of<AnchorsiteOverride>|null $anchorsite_override
+     * @var value-of<AnchorsiteOverride>|null $anchorsiteOverride
      */
-    #[Optional(enum: AnchorsiteOverride::class)]
-    public ?string $anchorsite_override;
+    #[Optional('anchorsite_override', enum: AnchorsiteOverride::class)]
+    public ?string $anchorsiteOverride;
 
     /**
      * The uuid of the push credential for Android.
      */
-    #[Optional(nullable: true)]
-    public ?string $android_push_credential_id;
+    #[Optional('android_push_credential_id', nullable: true)]
+    public ?string $androidPushCredentialID;
 
     /**
      * Specifies if call cost webhooks should be sent for this connection.
      */
-    #[Optional]
-    public ?bool $call_cost_in_webhooks;
+    #[Optional('call_cost_in_webhooks')]
+    public ?bool $callCostInWebhooks;
 
     /**
      * When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
      */
-    #[Optional]
-    public ?bool $default_on_hold_comfort_noise_enabled;
+    #[Optional('default_on_hold_comfort_noise_enabled')]
+    public ?bool $defaultOnHoldComfortNoiseEnabled;
 
     /**
      * Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
      *
-     * @var value-of<DtmfType>|null $dtmf_type
+     * @var value-of<DtmfType>|null $dtmfType
      */
-    #[Optional(enum: DtmfType::class)]
-    public ?string $dtmf_type;
+    #[Optional('dtmf_type', enum: DtmfType::class)]
+    public ?string $dtmfType;
 
     /**
      * Encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios.
      */
-    #[Optional]
-    public ?bool $encode_contact_header_enabled;
+    #[Optional('encode_contact_header_enabled')]
+    public ?bool $encodeContactHeaderEnabled;
 
     /**
      * Enable use of SRTP for encryption. Cannot be set if the transport_portocol is TLS.
      *
-     * @var value-of<EncryptedMedia>|null $encrypted_media
+     * @var value-of<EncryptedMedia>|null $encryptedMedia
      */
-    #[Optional(enum: EncryptedMedia::class, nullable: true)]
-    public ?string $encrypted_media;
+    #[Optional('encrypted_media', enum: EncryptedMedia::class, nullable: true)]
+    public ?string $encryptedMedia;
 
     #[Optional]
     public ?CredentialInbound $inbound;
@@ -157,28 +157,31 @@ final class CredentialConnectionCreateParams implements BaseModel
     /**
      * The uuid of the push credential for Ios.
      */
-    #[Optional(nullable: true)]
-    public ?string $ios_push_credential_id;
+    #[Optional('ios_push_credential_id', nullable: true)]
+    public ?string $iosPushCredentialID;
 
     /**
      * Enable on-net T38 if you prefer the sender and receiver negotiating T38 directly if both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call depending on each leg's settings.
      */
-    #[Optional]
-    public ?bool $onnet_t38_passthrough_enabled;
+    #[Optional('onnet_t38_passthrough_enabled')]
+    public ?bool $onnetT38PassthroughEnabled;
 
     #[Optional]
     public ?CredentialOutbound $outbound;
 
-    #[Optional]
-    public ?ConnectionRtcpSettings $rtcp_settings;
+    #[Optional('rtcp_settings')]
+    public ?ConnectionRtcpSettings $rtcpSettings;
 
     /**
      * This feature enables inbound SIP URI calls to your Credential Auth Connection. If enabled for all (unrestricted) then anyone who calls the SIP URI <your-username>@telnyx.com will be connected to your Connection. You can also choose to allow only calls that are originated on any Connections under your account (internal).
      *
-     * @var value-of<SipUriCallingPreference>|null $sip_uri_calling_preference
+     * @var value-of<SipUriCallingPreference>|null $sipUriCallingPreference
      */
-    #[Optional(enum: SipUriCallingPreference::class)]
-    public ?string $sip_uri_calling_preference;
+    #[Optional(
+        'sip_uri_calling_preference',
+        enum: SipUriCallingPreference::class
+    )]
+    public ?string $sipUriCallingPreference;
 
     /**
      * Tags associated with the connection.
@@ -191,28 +194,28 @@ final class CredentialConnectionCreateParams implements BaseModel
     /**
      * Determines which webhook format will be used, Telnyx API v1, v2 or texml. Note - texml can only be set when the outbound object parameter call_parking_enabled is included and set to true.
      *
-     * @var value-of<WebhookAPIVersion>|null $webhook_api_version
+     * @var value-of<WebhookAPIVersion>|null $webhookAPIVersion
      */
-    #[Optional(enum: WebhookAPIVersion::class)]
-    public ?string $webhook_api_version;
+    #[Optional('webhook_api_version', enum: WebhookAPIVersion::class)]
+    public ?string $webhookAPIVersion;
 
     /**
      * The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
-    #[Optional(nullable: true)]
-    public ?string $webhook_event_failover_url;
+    #[Optional('webhook_event_failover_url', nullable: true)]
+    public ?string $webhookEventFailoverURL;
 
     /**
      * The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      */
-    #[Optional]
-    public ?string $webhook_event_url;
+    #[Optional('webhook_event_url')]
+    public ?string $webhookEventURL;
 
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    #[Optional(nullable: true)]
-    public ?int $webhook_timeout_secs;
+    #[Optional('webhook_timeout_secs', nullable: true)]
+    public ?int $webhookTimeoutSecs;
 
     /**
      * `new CredentialConnectionCreateParams()` is missing required properties by the API.
@@ -220,7 +223,7 @@ final class CredentialConnectionCreateParams implements BaseModel
      * To enforce required parameters use
      * ```
      * CredentialConnectionCreateParams::with(
-     *   connection_name: ..., password: ..., user_name: ...
+     *   connectionName: ..., password: ..., userName: ...
      * )
      * ```
      *
@@ -243,91 +246,91 @@ final class CredentialConnectionCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsite_override
-     * @param DtmfType|value-of<DtmfType> $dtmf_type
-     * @param EncryptedMedia|value-of<EncryptedMedia>|null $encrypted_media
+     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
+     * @param DtmfType|value-of<DtmfType> $dtmfType
+     * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
      * @param CredentialInbound|array{
-     *   ani_number_format?: value-of<AniNumberFormat>|null,
-     *   channel_limit?: int|null,
+     *   aniNumberFormat?: value-of<AniNumberFormat>|null,
+     *   channelLimit?: int|null,
      *   codecs?: list<string>|null,
-     *   dnis_number_format?: value-of<DnisNumberFormat>|null,
-     *   generate_ringback_tone?: bool|null,
-     *   isup_headers_enabled?: bool|null,
-     *   prack_enabled?: bool|null,
-     *   shaken_stir_enabled?: bool|null,
-     *   sip_compact_headers_enabled?: bool|null,
-     *   timeout_1xx_secs?: int|null,
-     *   timeout_2xx_secs?: int|null,
+     *   dnisNumberFormat?: value-of<DnisNumberFormat>|null,
+     *   generateRingbackTone?: bool|null,
+     *   isupHeadersEnabled?: bool|null,
+     *   prackEnabled?: bool|null,
+     *   shakenStirEnabled?: bool|null,
+     *   sipCompactHeadersEnabled?: bool|null,
+     *   timeout1xxSecs?: int|null,
+     *   timeout2xxSecs?: int|null,
      * } $inbound
      * @param CredentialOutbound|array{
-     *   ani_override?: string|null,
-     *   ani_override_type?: value-of<AniOverrideType>|null,
-     *   call_parking_enabled?: bool|null,
-     *   channel_limit?: int|null,
-     *   generate_ringback_tone?: bool|null,
-     *   instant_ringback_enabled?: bool|null,
+     *   aniOverride?: string|null,
+     *   aniOverrideType?: value-of<AniOverrideType>|null,
+     *   callParkingEnabled?: bool|null,
+     *   channelLimit?: int|null,
+     *   generateRingbackTone?: bool|null,
+     *   instantRingbackEnabled?: bool|null,
      *   localization?: string|null,
-     *   outbound_voice_profile_id?: string|null,
-     *   t38_reinvite_source?: value-of<T38ReinviteSource>|null,
+     *   outboundVoiceProfileID?: string|null,
+     *   t38ReinviteSource?: value-of<T38ReinviteSource>|null,
      * } $outbound
      * @param ConnectionRtcpSettings|array{
-     *   capture_enabled?: bool|null,
+     *   captureEnabled?: bool|null,
      *   port?: value-of<Port>|null,
-     *   report_frequency_secs?: int|null,
-     * } $rtcp_settings
-     * @param SipUriCallingPreference|value-of<SipUriCallingPreference> $sip_uri_calling_preference
+     *   reportFrequencySecs?: int|null,
+     * } $rtcpSettings
+     * @param SipUriCallingPreference|value-of<SipUriCallingPreference> $sipUriCallingPreference
      * @param list<string> $tags
-     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhook_api_version
+     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion
      */
     public static function with(
-        string $connection_name,
+        string $connectionName,
         string $password,
-        string $user_name,
+        string $userName,
         ?bool $active = null,
-        AnchorsiteOverride|string|null $anchorsite_override = null,
-        ?string $android_push_credential_id = null,
-        ?bool $call_cost_in_webhooks = null,
-        ?bool $default_on_hold_comfort_noise_enabled = null,
-        DtmfType|string|null $dtmf_type = null,
-        ?bool $encode_contact_header_enabled = null,
-        EncryptedMedia|string|null $encrypted_media = null,
+        AnchorsiteOverride|string|null $anchorsiteOverride = null,
+        ?string $androidPushCredentialID = null,
+        ?bool $callCostInWebhooks = null,
+        ?bool $defaultOnHoldComfortNoiseEnabled = null,
+        DtmfType|string|null $dtmfType = null,
+        ?bool $encodeContactHeaderEnabled = null,
+        EncryptedMedia|string|null $encryptedMedia = null,
         CredentialInbound|array|null $inbound = null,
-        ?string $ios_push_credential_id = null,
-        ?bool $onnet_t38_passthrough_enabled = null,
+        ?string $iosPushCredentialID = null,
+        ?bool $onnetT38PassthroughEnabled = null,
         CredentialOutbound|array|null $outbound = null,
-        ConnectionRtcpSettings|array|null $rtcp_settings = null,
-        SipUriCallingPreference|string|null $sip_uri_calling_preference = null,
+        ConnectionRtcpSettings|array|null $rtcpSettings = null,
+        SipUriCallingPreference|string|null $sipUriCallingPreference = null,
         ?array $tags = null,
-        WebhookAPIVersion|string|null $webhook_api_version = null,
-        ?string $webhook_event_failover_url = null,
-        ?string $webhook_event_url = null,
-        ?int $webhook_timeout_secs = null,
+        WebhookAPIVersion|string|null $webhookAPIVersion = null,
+        ?string $webhookEventFailoverURL = null,
+        ?string $webhookEventURL = null,
+        ?int $webhookTimeoutSecs = null,
     ): self {
         $obj = new self;
 
-        $obj['connection_name'] = $connection_name;
+        $obj['connectionName'] = $connectionName;
         $obj['password'] = $password;
-        $obj['user_name'] = $user_name;
+        $obj['userName'] = $userName;
 
         null !== $active && $obj['active'] = $active;
-        null !== $anchorsite_override && $obj['anchorsite_override'] = $anchorsite_override;
-        null !== $android_push_credential_id && $obj['android_push_credential_id'] = $android_push_credential_id;
-        null !== $call_cost_in_webhooks && $obj['call_cost_in_webhooks'] = $call_cost_in_webhooks;
-        null !== $default_on_hold_comfort_noise_enabled && $obj['default_on_hold_comfort_noise_enabled'] = $default_on_hold_comfort_noise_enabled;
-        null !== $dtmf_type && $obj['dtmf_type'] = $dtmf_type;
-        null !== $encode_contact_header_enabled && $obj['encode_contact_header_enabled'] = $encode_contact_header_enabled;
-        null !== $encrypted_media && $obj['encrypted_media'] = $encrypted_media;
+        null !== $anchorsiteOverride && $obj['anchorsiteOverride'] = $anchorsiteOverride;
+        null !== $androidPushCredentialID && $obj['androidPushCredentialID'] = $androidPushCredentialID;
+        null !== $callCostInWebhooks && $obj['callCostInWebhooks'] = $callCostInWebhooks;
+        null !== $defaultOnHoldComfortNoiseEnabled && $obj['defaultOnHoldComfortNoiseEnabled'] = $defaultOnHoldComfortNoiseEnabled;
+        null !== $dtmfType && $obj['dtmfType'] = $dtmfType;
+        null !== $encodeContactHeaderEnabled && $obj['encodeContactHeaderEnabled'] = $encodeContactHeaderEnabled;
+        null !== $encryptedMedia && $obj['encryptedMedia'] = $encryptedMedia;
         null !== $inbound && $obj['inbound'] = $inbound;
-        null !== $ios_push_credential_id && $obj['ios_push_credential_id'] = $ios_push_credential_id;
-        null !== $onnet_t38_passthrough_enabled && $obj['onnet_t38_passthrough_enabled'] = $onnet_t38_passthrough_enabled;
+        null !== $iosPushCredentialID && $obj['iosPushCredentialID'] = $iosPushCredentialID;
+        null !== $onnetT38PassthroughEnabled && $obj['onnetT38PassthroughEnabled'] = $onnetT38PassthroughEnabled;
         null !== $outbound && $obj['outbound'] = $outbound;
-        null !== $rtcp_settings && $obj['rtcp_settings'] = $rtcp_settings;
-        null !== $sip_uri_calling_preference && $obj['sip_uri_calling_preference'] = $sip_uri_calling_preference;
+        null !== $rtcpSettings && $obj['rtcpSettings'] = $rtcpSettings;
+        null !== $sipUriCallingPreference && $obj['sipUriCallingPreference'] = $sipUriCallingPreference;
         null !== $tags && $obj['tags'] = $tags;
-        null !== $webhook_api_version && $obj['webhook_api_version'] = $webhook_api_version;
-        null !== $webhook_event_failover_url && $obj['webhook_event_failover_url'] = $webhook_event_failover_url;
-        null !== $webhook_event_url && $obj['webhook_event_url'] = $webhook_event_url;
-        null !== $webhook_timeout_secs && $obj['webhook_timeout_secs'] = $webhook_timeout_secs;
+        null !== $webhookAPIVersion && $obj['webhookAPIVersion'] = $webhookAPIVersion;
+        null !== $webhookEventFailoverURL && $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        null !== $webhookEventURL && $obj['webhookEventURL'] = $webhookEventURL;
+        null !== $webhookTimeoutSecs && $obj['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
         return $obj;
     }
@@ -338,7 +341,7 @@ final class CredentialConnectionCreateParams implements BaseModel
     public function withConnectionName(string $connectionName): self
     {
         $obj = clone $this;
-        $obj['connection_name'] = $connectionName;
+        $obj['connectionName'] = $connectionName;
 
         return $obj;
     }
@@ -360,7 +363,7 @@ final class CredentialConnectionCreateParams implements BaseModel
     public function withUserName(string $userName): self
     {
         $obj = clone $this;
-        $obj['user_name'] = $userName;
+        $obj['userName'] = $userName;
 
         return $obj;
     }
@@ -385,7 +388,7 @@ final class CredentialConnectionCreateParams implements BaseModel
         AnchorsiteOverride|string $anchorsiteOverride
     ): self {
         $obj = clone $this;
-        $obj['anchorsite_override'] = $anchorsiteOverride;
+        $obj['anchorsiteOverride'] = $anchorsiteOverride;
 
         return $obj;
     }
@@ -397,7 +400,7 @@ final class CredentialConnectionCreateParams implements BaseModel
         ?string $androidPushCredentialID
     ): self {
         $obj = clone $this;
-        $obj['android_push_credential_id'] = $androidPushCredentialID;
+        $obj['androidPushCredentialID'] = $androidPushCredentialID;
 
         return $obj;
     }
@@ -408,7 +411,7 @@ final class CredentialConnectionCreateParams implements BaseModel
     public function withCallCostInWebhooks(bool $callCostInWebhooks): self
     {
         $obj = clone $this;
-        $obj['call_cost_in_webhooks'] = $callCostInWebhooks;
+        $obj['callCostInWebhooks'] = $callCostInWebhooks;
 
         return $obj;
     }
@@ -420,7 +423,7 @@ final class CredentialConnectionCreateParams implements BaseModel
         bool $defaultOnHoldComfortNoiseEnabled
     ): self {
         $obj = clone $this;
-        $obj['default_on_hold_comfort_noise_enabled'] = $defaultOnHoldComfortNoiseEnabled;
+        $obj['defaultOnHoldComfortNoiseEnabled'] = $defaultOnHoldComfortNoiseEnabled;
 
         return $obj;
     }
@@ -433,7 +436,7 @@ final class CredentialConnectionCreateParams implements BaseModel
     public function withDtmfType(DtmfType|string $dtmfType): self
     {
         $obj = clone $this;
-        $obj['dtmf_type'] = $dtmfType;
+        $obj['dtmfType'] = $dtmfType;
 
         return $obj;
     }
@@ -445,7 +448,7 @@ final class CredentialConnectionCreateParams implements BaseModel
         bool $encodeContactHeaderEnabled
     ): self {
         $obj = clone $this;
-        $obj['encode_contact_header_enabled'] = $encodeContactHeaderEnabled;
+        $obj['encodeContactHeaderEnabled'] = $encodeContactHeaderEnabled;
 
         return $obj;
     }
@@ -459,24 +462,24 @@ final class CredentialConnectionCreateParams implements BaseModel
         EncryptedMedia|string|null $encryptedMedia
     ): self {
         $obj = clone $this;
-        $obj['encrypted_media'] = $encryptedMedia;
+        $obj['encryptedMedia'] = $encryptedMedia;
 
         return $obj;
     }
 
     /**
      * @param CredentialInbound|array{
-     *   ani_number_format?: value-of<AniNumberFormat>|null,
-     *   channel_limit?: int|null,
+     *   aniNumberFormat?: value-of<AniNumberFormat>|null,
+     *   channelLimit?: int|null,
      *   codecs?: list<string>|null,
-     *   dnis_number_format?: value-of<DnisNumberFormat>|null,
-     *   generate_ringback_tone?: bool|null,
-     *   isup_headers_enabled?: bool|null,
-     *   prack_enabled?: bool|null,
-     *   shaken_stir_enabled?: bool|null,
-     *   sip_compact_headers_enabled?: bool|null,
-     *   timeout_1xx_secs?: int|null,
-     *   timeout_2xx_secs?: int|null,
+     *   dnisNumberFormat?: value-of<DnisNumberFormat>|null,
+     *   generateRingbackTone?: bool|null,
+     *   isupHeadersEnabled?: bool|null,
+     *   prackEnabled?: bool|null,
+     *   shakenStirEnabled?: bool|null,
+     *   sipCompactHeadersEnabled?: bool|null,
+     *   timeout1xxSecs?: int|null,
+     *   timeout2xxSecs?: int|null,
      * } $inbound
      */
     public function withInbound(CredentialInbound|array $inbound): self
@@ -493,7 +496,7 @@ final class CredentialConnectionCreateParams implements BaseModel
     public function withIosPushCredentialID(?string $iosPushCredentialID): self
     {
         $obj = clone $this;
-        $obj['ios_push_credential_id'] = $iosPushCredentialID;
+        $obj['iosPushCredentialID'] = $iosPushCredentialID;
 
         return $obj;
     }
@@ -505,22 +508,22 @@ final class CredentialConnectionCreateParams implements BaseModel
         bool $onnetT38PassthroughEnabled
     ): self {
         $obj = clone $this;
-        $obj['onnet_t38_passthrough_enabled'] = $onnetT38PassthroughEnabled;
+        $obj['onnetT38PassthroughEnabled'] = $onnetT38PassthroughEnabled;
 
         return $obj;
     }
 
     /**
      * @param CredentialOutbound|array{
-     *   ani_override?: string|null,
-     *   ani_override_type?: value-of<AniOverrideType>|null,
-     *   call_parking_enabled?: bool|null,
-     *   channel_limit?: int|null,
-     *   generate_ringback_tone?: bool|null,
-     *   instant_ringback_enabled?: bool|null,
+     *   aniOverride?: string|null,
+     *   aniOverrideType?: value-of<AniOverrideType>|null,
+     *   callParkingEnabled?: bool|null,
+     *   channelLimit?: int|null,
+     *   generateRingbackTone?: bool|null,
+     *   instantRingbackEnabled?: bool|null,
      *   localization?: string|null,
-     *   outbound_voice_profile_id?: string|null,
-     *   t38_reinvite_source?: value-of<T38ReinviteSource>|null,
+     *   outboundVoiceProfileID?: string|null,
+     *   t38ReinviteSource?: value-of<T38ReinviteSource>|null,
      * } $outbound
      */
     public function withOutbound(CredentialOutbound|array $outbound): self
@@ -533,16 +536,16 @@ final class CredentialConnectionCreateParams implements BaseModel
 
     /**
      * @param ConnectionRtcpSettings|array{
-     *   capture_enabled?: bool|null,
+     *   captureEnabled?: bool|null,
      *   port?: value-of<Port>|null,
-     *   report_frequency_secs?: int|null,
+     *   reportFrequencySecs?: int|null,
      * } $rtcpSettings
      */
     public function withRtcpSettings(
         ConnectionRtcpSettings|array $rtcpSettings
     ): self {
         $obj = clone $this;
-        $obj['rtcp_settings'] = $rtcpSettings;
+        $obj['rtcpSettings'] = $rtcpSettings;
 
         return $obj;
     }
@@ -556,7 +559,7 @@ final class CredentialConnectionCreateParams implements BaseModel
         SipUriCallingPreference|string $sipUriCallingPreference
     ): self {
         $obj = clone $this;
-        $obj['sip_uri_calling_preference'] = $sipUriCallingPreference;
+        $obj['sipUriCallingPreference'] = $sipUriCallingPreference;
 
         return $obj;
     }
@@ -583,7 +586,7 @@ final class CredentialConnectionCreateParams implements BaseModel
         WebhookAPIVersion|string $webhookAPIVersion
     ): self {
         $obj = clone $this;
-        $obj['webhook_api_version'] = $webhookAPIVersion;
+        $obj['webhookAPIVersion'] = $webhookAPIVersion;
 
         return $obj;
     }
@@ -595,7 +598,7 @@ final class CredentialConnectionCreateParams implements BaseModel
         ?string $webhookEventFailoverURL
     ): self {
         $obj = clone $this;
-        $obj['webhook_event_failover_url'] = $webhookEventFailoverURL;
+        $obj['webhookEventFailoverURL'] = $webhookEventFailoverURL;
 
         return $obj;
     }
@@ -606,7 +609,7 @@ final class CredentialConnectionCreateParams implements BaseModel
     public function withWebhookEventURL(string $webhookEventURL): self
     {
         $obj = clone $this;
-        $obj['webhook_event_url'] = $webhookEventURL;
+        $obj['webhookEventURL'] = $webhookEventURL;
 
         return $obj;
     }
@@ -617,7 +620,7 @@ final class CredentialConnectionCreateParams implements BaseModel
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
         $obj = clone $this;
-        $obj['webhook_timeout_secs'] = $webhookTimeoutSecs;
+        $obj['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
         return $obj;
     }

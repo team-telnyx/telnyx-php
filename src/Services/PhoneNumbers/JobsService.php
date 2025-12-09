@@ -102,7 +102,7 @@ final class JobsService implements JobsContract
      *
      * Creates a new background job to delete a batch of numbers. At most one thousand numbers can be updated per API call.
      *
-     * @param array{phone_numbers: list<string>}|JobDeleteBatchParams $params
+     * @param array{phoneNumbers: list<string>}|JobDeleteBatchParams $params
      *
      * @throws APIException
      */
@@ -133,52 +133,52 @@ final class JobsService implements JobsContract
      * Creates a new background job to update a batch of numbers. At most one thousand numbers can be updated per API call. At least one of the updateable fields must be submitted. IMPORTANT: You must either specify filters (using the filter parameters) or specific phone numbers (using the phone_numbers parameter in the request body). If you specify filters, ALL phone numbers that match the given filters (up to 1000 at a time) will be updated. If you want to update only specific numbers, you must use the phone_numbers parameter in the request body. When using the phone_numbers parameter, ensure you follow the correct format as shown in the example (either phone number IDs or phone numbers in E164 format).
      *
      * @param array{
-     *   phone_numbers: list<string>,
+     *   phoneNumbers: list<string>,
      *   filter?: array{
-     *     billing_group_id?: string,
-     *     connection_id?: string,
-     *     customer_reference?: string,
-     *     emergency_address_id?: string,
-     *     has_bundle?: string,
-     *     phone_number?: string,
+     *     billingGroupID?: string,
+     *     connectionID?: string,
+     *     customerReference?: string,
+     *     emergencyAddressID?: string,
+     *     hasBundle?: string,
+     *     phoneNumber?: string,
      *     status?: 'purchase-pending'|'purchase-failed'|'port-pending'|'active'|'deleted'|'port-failed'|'emergency-only'|'ported-out'|'port-out-pending'|Status,
      *     tag?: string,
-     *     'voice.connection_name'?: array{
-     *       contains?: string, ends_with?: string, eq?: string, starts_with?: string
+     *     voiceConnectionName?: array{
+     *       contains?: string, endsWith?: string, eq?: string, startsWith?: string
      *     },
-     *     'voice.usage_payment_method'?: 'pay-per-minute'|'channel'|VoiceUsagePaymentMethod,
+     *     voiceUsagePaymentMethod?: 'pay-per-minute'|'channel'|VoiceUsagePaymentMethod,
      *   },
-     *   billing_group_id?: string,
-     *   connection_id?: string,
-     *   customer_reference?: string,
-     *   deletion_lock_enabled?: bool,
-     *   external_pin?: string,
-     *   hd_voice_enabled?: bool,
+     *   billingGroupID?: string,
+     *   connectionID?: string,
+     *   customerReference?: string,
+     *   deletionLockEnabled?: bool,
+     *   externalPin?: string,
+     *   hdVoiceEnabled?: bool,
      *   tags?: list<string>,
      *   voice?: array{
-     *     call_forwarding?: array{
-     *       call_forwarding_enabled?: bool,
-     *       forwarding_type?: 'always'|'on-failure'|ForwardingType,
-     *       forwards_to?: string,
+     *     callForwarding?: array{
+     *       callForwardingEnabled?: bool,
+     *       forwardingType?: 'always'|'on-failure'|ForwardingType,
+     *       forwardsTo?: string,
      *     }|CallForwarding,
-     *     call_recording?: array{
-     *       inbound_call_recording_channels?: 'single'|'dual'|InboundCallRecordingChannels,
-     *       inbound_call_recording_enabled?: bool,
-     *       inbound_call_recording_format?: 'wav'|'mp3'|InboundCallRecordingFormat,
+     *     callRecording?: array{
+     *       inboundCallRecordingChannels?: 'single'|'dual'|InboundCallRecordingChannels,
+     *       inboundCallRecordingEnabled?: bool,
+     *       inboundCallRecordingFormat?: 'wav'|'mp3'|InboundCallRecordingFormat,
      *     }|CallRecording,
-     *     caller_id_name_enabled?: bool,
-     *     cnam_listing?: array{
-     *       cnam_listing_details?: string, cnam_listing_enabled?: bool
+     *     callerIDNameEnabled?: bool,
+     *     cnamListing?: array{
+     *       cnamListingDetails?: string, cnamListingEnabled?: bool
      *     }|CnamListing,
-     *     inbound_call_screening?: 'disabled'|'reject_calls'|'flag_calls'|InboundCallScreening,
-     *     media_features?: array{
-     *       accept_any_rtp_packets_enabled?: bool,
-     *       rtp_auto_adjust_enabled?: bool,
-     *       t38_fax_gateway_enabled?: bool,
+     *     inboundCallScreening?: 'disabled'|'reject_calls'|'flag_calls'|InboundCallScreening,
+     *     mediaFeatures?: array{
+     *       acceptAnyRtpPacketsEnabled?: bool,
+     *       rtpAutoAdjustEnabled?: bool,
+     *       t38FaxGatewayEnabled?: bool,
      *     }|MediaFeatures,
-     *     tech_prefix_enabled?: bool,
-     *     translated_number?: string,
-     *     usage_payment_method?: 'pay-per-minute'|'channel'|UsagePaymentMethod,
+     *     techPrefixEnabled?: bool,
+     *     translatedNumber?: string,
+     *     usagePaymentMethod?: 'pay-per-minute'|'channel'|UsagePaymentMethod,
      *   },
      * }|JobUpdateBatchParams $params
      *
@@ -213,9 +213,9 @@ final class JobsService implements JobsContract
      * Creates a background job to update the emergency settings of a collection of phone numbers. At most one thousand numbers can be updated per API call.
      *
      * @param array{
-     *   emergency_enabled: bool,
-     *   phone_numbers: list<string>,
-     *   emergency_address_id?: string|null,
+     *   emergencyEnabled: bool,
+     *   phoneNumbers: list<string>,
+     *   emergencyAddressID?: string|null,
      * }|JobUpdateEmergencySettingsBatchParams $params
      *
      * @throws APIException

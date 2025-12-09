@@ -10,9 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type StopRecordingRequestShape = array{
- *   client_state?: string|null,
- *   command_id?: string|null,
- *   recording_id?: string|null,
+ *   clientState?: string|null, commandID?: string|null, recordingID?: string|null
  * }
  */
 final class StopRecordingRequest implements BaseModel
@@ -23,20 +21,20 @@ final class StopRecordingRequest implements BaseModel
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Optional]
-    public ?string $client_state;
+    #[Optional('client_state')]
+    public ?string $clientState;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Optional]
-    public ?string $command_id;
+    #[Optional('command_id')]
+    public ?string $commandID;
 
     /**
      * Uniquely identifies the resource.
      */
-    #[Optional]
-    public ?string $recording_id;
+    #[Optional('recording_id')]
+    public ?string $recordingID;
 
     public function __construct()
     {
@@ -49,15 +47,15 @@ final class StopRecordingRequest implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $client_state = null,
-        ?string $command_id = null,
-        ?string $recording_id = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        ?string $recordingID = null,
     ): self {
         $obj = new self;
 
-        null !== $client_state && $obj['client_state'] = $client_state;
-        null !== $command_id && $obj['command_id'] = $command_id;
-        null !== $recording_id && $obj['recording_id'] = $recording_id;
+        null !== $clientState && $obj['clientState'] = $clientState;
+        null !== $commandID && $obj['commandID'] = $commandID;
+        null !== $recordingID && $obj['recordingID'] = $recordingID;
 
         return $obj;
     }
@@ -68,7 +66,7 @@ final class StopRecordingRequest implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj['client_state'] = $clientState;
+        $obj['clientState'] = $clientState;
 
         return $obj;
     }
@@ -79,7 +77,7 @@ final class StopRecordingRequest implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj['command_id'] = $commandID;
+        $obj['commandID'] = $commandID;
 
         return $obj;
     }
@@ -90,7 +88,7 @@ final class StopRecordingRequest implements BaseModel
     public function withRecordingID(string $recordingID): self
     {
         $obj = clone $this;
-        $obj['recording_id'] = $recordingID;
+        $obj['recordingID'] = $recordingID;
 
         return $obj;
     }

@@ -51,17 +51,17 @@ final class BillingBundleListResponse implements BaseModel
      *
      * @param list<BillingBundleSummary|array{
      *   id: string,
-     *   cost_code: string,
-     *   created_at: \DateTimeInterface,
-     *   is_public: bool,
+     *   costCode: string,
+     *   createdAt: \DateTimeInterface,
+     *   isPublic: bool,
      *   name: string,
      *   currency?: string|null,
-     *   mrc_price?: float|null,
+     *   mrcPrice?: float|null,
      *   slug?: string|null,
      *   specs?: list<string>|null,
      * }> $data
      * @param PaginationResponse|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public static function with(
@@ -79,12 +79,12 @@ final class BillingBundleListResponse implements BaseModel
     /**
      * @param list<BillingBundleSummary|array{
      *   id: string,
-     *   cost_code: string,
-     *   created_at: \DateTimeInterface,
-     *   is_public: bool,
+     *   costCode: string,
+     *   createdAt: \DateTimeInterface,
+     *   isPublic: bool,
      *   name: string,
      *   currency?: string|null,
-     *   mrc_price?: float|null,
+     *   mrcPrice?: float|null,
      *   slug?: string|null,
      *   specs?: list<string>|null,
      * }> $data
@@ -99,7 +99,7 @@ final class BillingBundleListResponse implements BaseModel
 
     /**
      * @param PaginationResponse|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public function withMeta(PaginationResponse|array $meta): self

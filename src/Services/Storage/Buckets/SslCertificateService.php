@@ -27,7 +27,7 @@ final class SslCertificateService implements SslCertificateContract
      * Uploads an SSL certificate and its matching secret so that you can use Telnyx's storage as your CDN.
      *
      * @param array{
-     *   certificate?: string, private_key?: string
+     *   certificate?: string, privateKey?: string
      * }|SslCertificateCreateParams $params
      *
      * @throws APIException

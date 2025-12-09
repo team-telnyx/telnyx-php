@@ -37,16 +37,16 @@ final class UsageGetBucketUsageResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|array{
-     *   num_objects?: int|null,
+     *   numObjects?: int|null,
      *   size?: int|null,
-     *   size_kb?: int|null,
+     *   sizeKB?: int|null,
      *   timestamp?: \DateTimeInterface|null,
      * }> $data
      * @param PaginationMetaSimple|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -63,9 +63,9 @@ final class UsageGetBucketUsageResponse implements BaseModel
 
     /**
      * @param list<Data|array{
-     *   num_objects?: int|null,
+     *   numObjects?: int|null,
      *   size?: int|null,
-     *   size_kb?: int|null,
+     *   sizeKB?: int|null,
      *   timestamp?: \DateTimeInterface|null,
      * }> $data
      */
@@ -79,10 +79,10 @@ final class UsageGetBucketUsageResponse implements BaseModel
 
     /**
      * @param PaginationMetaSimple|array{
-     *   page_number?: int|null,
-     *   page_size?: int|null,
-     *   total_pages?: int|null,
-     *   total_results?: int|null,
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMetaSimple|array $meta): self

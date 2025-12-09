@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Calls\ActionsService::updateClientState()
  *
- * @phpstan-type ActionUpdateClientStateParamsShape = array{client_state: string}
+ * @phpstan-type ActionUpdateClientStateParamsShape = array{clientState: string}
  */
 final class ActionUpdateClientStateParams implements BaseModel
 {
@@ -25,15 +25,15 @@ final class ActionUpdateClientStateParams implements BaseModel
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Required]
-    public string $client_state;
+    #[Required('client_state')]
+    public string $clientState;
 
     /**
      * `new ActionUpdateClientStateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ActionUpdateClientStateParams::with(client_state: ...)
+     * ActionUpdateClientStateParams::with(clientState: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -52,11 +52,11 @@ final class ActionUpdateClientStateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $client_state): self
+    public static function with(string $clientState): self
     {
         $obj = new self;
 
-        $obj['client_state'] = $client_state;
+        $obj['clientState'] = $clientState;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class ActionUpdateClientStateParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj['client_state'] = $clientState;
+        $obj['clientState'] = $clientState;
 
         return $obj;
     }

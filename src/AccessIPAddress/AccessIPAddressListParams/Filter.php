@@ -13,9 +13,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[ip_source], filter[ip_address], filter[created_at]. Supports complex bracket operations for dynamic filtering.
  *
  * @phpstan-type FilterShape = array{
- *   created_at?: null|\DateTimeInterface|DateRangeFilter,
- *   ip_address?: string|null,
- *   ip_source?: string|null,
+ *   createdAt?: null|\DateTimeInterface|DateRangeFilter,
+ *   ipAddress?: string|null,
+ *   ipSource?: string|null,
  * }
  */
 final class Filter implements BaseModel
@@ -26,20 +26,20 @@ final class Filter implements BaseModel
     /**
      * Filter by exact creation date-time.
      */
-    #[Optional]
-    public \DateTimeInterface|DateRangeFilter|null $created_at;
+    #[Optional('created_at')]
+    public \DateTimeInterface|DateRangeFilter|null $createdAt;
 
     /**
      * Filter by IP address.
      */
-    #[Optional]
-    public ?string $ip_address;
+    #[Optional('ip_address')]
+    public ?string $ipAddress;
 
     /**
      * Filter by IP source.
      */
-    #[Optional]
-    public ?string $ip_source;
+    #[Optional('ip_source')]
+    public ?string $ipSource;
 
     public function __construct()
     {
@@ -56,18 +56,18 @@ final class Filter implements BaseModel
      *   gte?: \DateTimeInterface|null,
      *   lt?: \DateTimeInterface|null,
      *   lte?: \DateTimeInterface|null,
-     * } $created_at
+     * } $createdAt
      */
     public static function with(
-        \DateTimeInterface|DateRangeFilter|array|null $created_at = null,
-        ?string $ip_address = null,
-        ?string $ip_source = null,
+        \DateTimeInterface|DateRangeFilter|array|null $createdAt = null,
+        ?string $ipAddress = null,
+        ?string $ipSource = null,
     ): self {
         $obj = new self;
 
-        null !== $created_at && $obj['created_at'] = $created_at;
-        null !== $ip_address && $obj['ip_address'] = $ip_address;
-        null !== $ip_source && $obj['ip_source'] = $ip_source;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
+        null !== $ipAddress && $obj['ipAddress'] = $ipAddress;
+        null !== $ipSource && $obj['ipSource'] = $ipSource;
 
         return $obj;
     }
@@ -86,7 +86,7 @@ final class Filter implements BaseModel
         \DateTimeInterface|DateRangeFilter|array $createdAt
     ): self {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class Filter implements BaseModel
     public function withIPAddress(string $ipAddress): self
     {
         $obj = clone $this;
-        $obj['ip_address'] = $ipAddress;
+        $obj['ipAddress'] = $ipAddress;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class Filter implements BaseModel
     public function withIPSource(string $ipSource): self
     {
         $obj = clone $this;
-        $obj['ip_source'] = $ipSource;
+        $obj['ipSource'] = $ipSource;
 
         return $obj;
     }

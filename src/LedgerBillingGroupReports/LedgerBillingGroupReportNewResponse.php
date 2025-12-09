@@ -35,12 +35,12 @@ final class LedgerBillingGroupReportNewResponse implements BaseModel
      *
      * @param LedgerBillingGroupReport|array{
      *   id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   organization_id?: string|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   report_url?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   organizationID?: string|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   reportURL?: string|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(
@@ -56,12 +56,12 @@ final class LedgerBillingGroupReportNewResponse implements BaseModel
     /**
      * @param LedgerBillingGroupReport|array{
      *   id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   organization_id?: string|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   report_url?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   organizationID?: string|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   reportURL?: string|null,
      *   status?: value-of<Status>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(LedgerBillingGroupReport|array $data): self

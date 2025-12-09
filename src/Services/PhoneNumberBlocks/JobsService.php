@@ -89,9 +89,7 @@ final class JobsService implements JobsContract
      *
      * Creates a new background job to delete all the phone numbers associated with the given block. We will only consider the phone number block as deleted after all phone numbers associated with it are removed, so multiple executions of this job may be necessary in case some of the phone numbers present errors during the deletion process.
      *
-     * @param array{
-     *   phone_number_block_id: string
-     * }|JobDeletePhoneNumberBlockParams $params
+     * @param array{phoneNumberBlockID: string}|JobDeletePhoneNumberBlockParams $params
      *
      * @throws APIException
      */

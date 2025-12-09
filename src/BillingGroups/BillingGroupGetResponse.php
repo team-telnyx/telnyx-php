@@ -32,12 +32,12 @@ final class BillingGroupGetResponse implements BaseModel
      *
      * @param BillingGroup|array{
      *   id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   deleted_at?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   deletedAt?: \DateTimeInterface|null,
      *   name?: string|null,
-     *   organization_id?: string|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   organizationID?: string|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(BillingGroup|array|null $data = null): self
@@ -52,12 +52,12 @@ final class BillingGroupGetResponse implements BaseModel
     /**
      * @param BillingGroup|array{
      *   id?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   deleted_at?: \DateTimeInterface|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   deletedAt?: \DateTimeInterface|null,
      *   name?: string|null,
-     *   organization_id?: string|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   organizationID?: string|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(BillingGroup|array $data): self

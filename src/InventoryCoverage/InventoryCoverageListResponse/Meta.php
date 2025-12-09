@@ -9,15 +9,15 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type MetaShape = array{total_results?: int|null}
+ * @phpstan-type MetaShape = array{totalResults?: int|null}
  */
 final class Meta implements BaseModel
 {
     /** @use SdkModel<MetaShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?int $total_results;
+    #[Optional('total_results')]
+    public ?int $totalResults;
 
     public function __construct()
     {
@@ -29,11 +29,11 @@ final class Meta implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?int $total_results = null): self
+    public static function with(?int $totalResults = null): self
     {
         $obj = new self;
 
-        null !== $total_results && $obj['total_results'] = $total_results;
+        null !== $totalResults && $obj['totalResults'] = $totalResults;
 
         return $obj;
     }
@@ -41,7 +41,7 @@ final class Meta implements BaseModel
     public function withTotalResults(int $totalResults): self
     {
         $obj = clone $this;
-        $obj['total_results'] = $totalResults;
+        $obj['totalResults'] = $totalResults;
 
         return $obj;
     }

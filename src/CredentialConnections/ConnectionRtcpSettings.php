@@ -11,9 +11,9 @@ use Telnyx\CredentialConnections\ConnectionRtcpSettings\Port;
 
 /**
  * @phpstan-type ConnectionRtcpSettingsShape = array{
- *   capture_enabled?: bool|null,
+ *   captureEnabled?: bool|null,
  *   port?: value-of<Port>|null,
- *   report_frequency_secs?: int|null,
+ *   reportFrequencySecs?: int|null,
  * }
  */
 final class ConnectionRtcpSettings implements BaseModel
@@ -24,8 +24,8 @@ final class ConnectionRtcpSettings implements BaseModel
     /**
      * BETA - Enable the capture and storage of RTCP messages to create QoS reports on the Telnyx Mission Control Portal.
      */
-    #[Optional]
-    public ?bool $capture_enabled;
+    #[Optional('capture_enabled')]
+    public ?bool $captureEnabled;
 
     /**
      * RTCP port by default is rtp+1, it can also be set to rtcp-mux.
@@ -38,8 +38,8 @@ final class ConnectionRtcpSettings implements BaseModel
     /**
      * RTCP reports are sent to customers based on the frequency set. Frequency is in seconds and it can be set to values from 5 to 3000 seconds.
      */
-    #[Optional]
-    public ?int $report_frequency_secs;
+    #[Optional('report_frequency_secs')]
+    public ?int $reportFrequencySecs;
 
     public function __construct()
     {
@@ -54,15 +54,15 @@ final class ConnectionRtcpSettings implements BaseModel
      * @param Port|value-of<Port> $port
      */
     public static function with(
-        ?bool $capture_enabled = null,
+        ?bool $captureEnabled = null,
         Port|string|null $port = null,
-        ?int $report_frequency_secs = null,
+        ?int $reportFrequencySecs = null,
     ): self {
         $obj = new self;
 
-        null !== $capture_enabled && $obj['capture_enabled'] = $capture_enabled;
+        null !== $captureEnabled && $obj['captureEnabled'] = $captureEnabled;
         null !== $port && $obj['port'] = $port;
-        null !== $report_frequency_secs && $obj['report_frequency_secs'] = $report_frequency_secs;
+        null !== $reportFrequencySecs && $obj['reportFrequencySecs'] = $reportFrequencySecs;
 
         return $obj;
     }
@@ -73,7 +73,7 @@ final class ConnectionRtcpSettings implements BaseModel
     public function withCaptureEnabled(bool $captureEnabled): self
     {
         $obj = clone $this;
-        $obj['capture_enabled'] = $captureEnabled;
+        $obj['captureEnabled'] = $captureEnabled;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class ConnectionRtcpSettings implements BaseModel
     public function withReportFrequencySecs(int $reportFrequencySecs): self
     {
         $obj = clone $this;
-        $obj['report_frequency_secs'] = $reportFrequencySecs;
+        $obj['reportFrequencySecs'] = $reportFrequencySecs;
 
         return $obj;
     }

@@ -38,7 +38,7 @@ final class EmbeddingsTest extends TestCase
         }
 
         $result = $this->client->ai->embeddings->create([
-            'bucket_name' => 'bucket_name',
+            'bucketName' => 'bucket_name',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -53,10 +53,10 @@ final class EmbeddingsTest extends TestCase
         }
 
         $result = $this->client->ai->embeddings->create([
-            'bucket_name' => 'bucket_name',
-            'document_chunk_overlap_size' => 0,
-            'document_chunk_size' => 0,
-            'embedding_model' => 'thenlper/gte-large',
+            'bucketName' => 'bucket_name',
+            'documentChunkOverlapSize' => 0,
+            'documentChunkSize' => 0,
+            'embeddingModel' => 'thenlper/gte-large',
             'loader' => 'default',
         ]);
 
@@ -98,7 +98,7 @@ final class EmbeddingsTest extends TestCase
         }
 
         $result = $this->client->ai->embeddings->similaritySearch([
-            'bucket_name' => 'bucket_name', 'query' => 'query',
+            'bucketName' => 'bucket_name', 'query' => 'query',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -113,7 +113,7 @@ final class EmbeddingsTest extends TestCase
         }
 
         $result = $this->client->ai->embeddings->similaritySearch([
-            'bucket_name' => 'bucket_name', 'query' => 'query', 'num_of_docs' => 0,
+            'bucketName' => 'bucket_name', 'query' => 'query', 'numOfDocs' => 0,
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -128,7 +128,7 @@ final class EmbeddingsTest extends TestCase
         }
 
         $result = $this->client->ai->embeddings->url([
-            'bucket_name' => 'bucket_name', 'url' => 'url',
+            'bucketName' => 'bucket_name', 'url' => 'url',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -143,7 +143,7 @@ final class EmbeddingsTest extends TestCase
         }
 
         $result = $this->client->ai->embeddings->url([
-            'bucket_name' => 'bucket_name', 'url' => 'url',
+            'bucketName' => 'bucket_name', 'url' => 'url',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -37,7 +37,7 @@ final class SimCardOrdersTest extends TestCase
         }
 
         $result = $this->client->simCardOrders->create([
-            'address_id' => '1293384261075731499', 'quantity' => 23,
+            'addressID' => '1293384261075731499', 'quantity' => 23,
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -52,7 +52,7 @@ final class SimCardOrdersTest extends TestCase
         }
 
         $result = $this->client->simCardOrders->create([
-            'address_id' => '1293384261075731499', 'quantity' => 23,
+            'addressID' => '1293384261075731499', 'quantity' => 23,
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

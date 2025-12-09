@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type InboundShape = array{channel_limit?: int|null}
+ * @phpstan-type InboundShape = array{channelLimit?: int|null}
  */
 final class Inbound implements BaseModel
 {
@@ -19,8 +19,8 @@ final class Inbound implements BaseModel
     /**
      * When set, this will limit the number of concurrent inbound calls to phone numbers associated with this connection.
      */
-    #[Optional]
-    public ?int $channel_limit;
+    #[Optional('channel_limit')]
+    public ?int $channelLimit;
 
     public function __construct()
     {
@@ -32,11 +32,11 @@ final class Inbound implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?int $channel_limit = null): self
+    public static function with(?int $channelLimit = null): self
     {
         $obj = new self;
 
-        null !== $channel_limit && $obj['channel_limit'] = $channel_limit;
+        null !== $channelLimit && $obj['channelLimit'] = $channelLimit;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class Inbound implements BaseModel
     public function withChannelLimit(int $channelLimit): self
     {
         $obj = clone $this;
-        $obj['channel_limit'] = $channelLimit;
+        $obj['channelLimit'] = $channelLimit;
 
         return $obj;
     }

@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Texml\AccountsService::retrieveTranscriptionsJson()
  *
  * @phpstan-type AccountRetrieveTranscriptionsJsonParamsShape = array{
- *   PageSize?: int, PageToken?: string
+ *   pageSize?: int, pageToken?: string
  * }
  */
 final class AccountRetrieveTranscriptionsJsonParams implements BaseModel
@@ -28,13 +28,13 @@ final class AccountRetrieveTranscriptionsJsonParams implements BaseModel
      * The number of records to be displayed on a page.
      */
     #[Optional]
-    public ?int $PageSize;
+    public ?int $pageSize;
 
     /**
      * Used to request the next page of results.
      */
     #[Optional]
-    public ?string $PageToken;
+    public ?string $pageToken;
 
     public function __construct()
     {
@@ -47,13 +47,13 @@ final class AccountRetrieveTranscriptionsJsonParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?int $PageSize = null,
-        ?string $PageToken = null
+        ?int $pageSize = null,
+        ?string $pageToken = null
     ): self {
         $obj = new self;
 
-        null !== $PageSize && $obj['PageSize'] = $PageSize;
-        null !== $PageToken && $obj['PageToken'] = $PageToken;
+        null !== $pageSize && $obj['pageSize'] = $pageSize;
+        null !== $pageToken && $obj['pageToken'] = $pageToken;
 
         return $obj;
     }
@@ -64,7 +64,7 @@ final class AccountRetrieveTranscriptionsJsonParams implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj['PageSize'] = $pageSize;
+        $obj['pageSize'] = $pageSize;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class AccountRetrieveTranscriptionsJsonParams implements BaseModel
     public function withPageToken(string $pageToken): self
     {
         $obj = clone $this;
-        $obj['PageToken'] = $pageToken;
+        $obj['pageToken'] = $pageToken;
 
         return $obj;
     }

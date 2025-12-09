@@ -27,7 +27,7 @@ final class UsageService implements UsageContract
      *
      * @param array{
      *   filter: array{
-     *     end_time: string|\DateTimeInterface, start_time: string|\DateTimeInterface
+     *     endTime: string|\DateTimeInterface, startTime: string|\DateTimeInterface
      *   },
      * }|UsageGetAPIUsageParams $params
      *

@@ -16,9 +16,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Conferences\ActionsService::hold()
  *
  * @phpstan-type ActionHoldParamsShape = array{
- *   audio_url?: string,
- *   call_control_ids?: list<string>,
- *   media_name?: string,
+ *   audioURL?: string,
+ *   callControlIDs?: list<string>,
+ *   mediaName?: string,
  *   region?: Region|value-of<Region>,
  * }
  */
@@ -31,22 +31,22 @@ final class ActionHoldParams implements BaseModel
     /**
      * The URL of a file to be played to the participants when they are put on hold. media_name and audio_url cannot be used together in one request.
      */
-    #[Optional]
-    public ?string $audio_url;
+    #[Optional('audio_url')]
+    public ?string $audioURL;
 
     /**
      * List of unique identifiers and tokens for controlling the call. When empty all participants will be placed on hold.
      *
-     * @var list<string>|null $call_control_ids
+     * @var list<string>|null $callControlIDs
      */
-    #[Optional(list: 'string')]
-    public ?array $call_control_ids;
+    #[Optional('call_control_ids', list: 'string')]
+    public ?array $callControlIDs;
 
     /**
      * The media_name of a file to be played to the participants when they are put on hold. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file.
      */
-    #[Optional]
-    public ?string $media_name;
+    #[Optional('media_name')]
+    public ?string $mediaName;
 
     /**
      * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
@@ -66,20 +66,20 @@ final class ActionHoldParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $call_control_ids
+     * @param list<string> $callControlIDs
      * @param Region|value-of<Region> $region
      */
     public static function with(
-        ?string $audio_url = null,
-        ?array $call_control_ids = null,
-        ?string $media_name = null,
+        ?string $audioURL = null,
+        ?array $callControlIDs = null,
+        ?string $mediaName = null,
         Region|string|null $region = null,
     ): self {
         $obj = new self;
 
-        null !== $audio_url && $obj['audio_url'] = $audio_url;
-        null !== $call_control_ids && $obj['call_control_ids'] = $call_control_ids;
-        null !== $media_name && $obj['media_name'] = $media_name;
+        null !== $audioURL && $obj['audioURL'] = $audioURL;
+        null !== $callControlIDs && $obj['callControlIDs'] = $callControlIDs;
+        null !== $mediaName && $obj['mediaName'] = $mediaName;
         null !== $region && $obj['region'] = $region;
 
         return $obj;
@@ -91,7 +91,7 @@ final class ActionHoldParams implements BaseModel
     public function withAudioURL(string $audioURL): self
     {
         $obj = clone $this;
-        $obj['audio_url'] = $audioURL;
+        $obj['audioURL'] = $audioURL;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class ActionHoldParams implements BaseModel
     public function withCallControlIDs(array $callControlIDs): self
     {
         $obj = clone $this;
-        $obj['call_control_ids'] = $callControlIDs;
+        $obj['callControlIDs'] = $callControlIDs;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class ActionHoldParams implements BaseModel
     public function withMediaName(string $mediaName): self
     {
         $obj = clone $this;
-        $obj['media_name'] = $mediaName;
+        $obj['mediaName'] = $mediaName;
 
         return $obj;
     }

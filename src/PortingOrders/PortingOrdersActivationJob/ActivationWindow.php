@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ActivationWindowShape = array{
- *   end_at?: \DateTimeInterface|null, start_at?: \DateTimeInterface|null
+ *   endAt?: \DateTimeInterface|null, startAt?: \DateTimeInterface|null
  * }
  */
 final class ActivationWindow implements BaseModel
@@ -21,14 +21,14 @@ final class ActivationWindow implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the activation window ends.
      */
-    #[Optional]
-    public ?\DateTimeInterface $end_at;
+    #[Optional('end_at')]
+    public ?\DateTimeInterface $endAt;
 
     /**
      * ISO 8601 formatted date indicating when the activation window starts.
      */
-    #[Optional]
-    public ?\DateTimeInterface $start_at;
+    #[Optional('start_at')]
+    public ?\DateTimeInterface $startAt;
 
     public function __construct()
     {
@@ -41,13 +41,13 @@ final class ActivationWindow implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?\DateTimeInterface $end_at = null,
-        ?\DateTimeInterface $start_at = null
+        ?\DateTimeInterface $endAt = null,
+        ?\DateTimeInterface $startAt = null
     ): self {
         $obj = new self;
 
-        null !== $end_at && $obj['end_at'] = $end_at;
-        null !== $start_at && $obj['start_at'] = $start_at;
+        null !== $endAt && $obj['endAt'] = $endAt;
+        null !== $startAt && $obj['startAt'] = $startAt;
 
         return $obj;
     }
@@ -58,7 +58,7 @@ final class ActivationWindow implements BaseModel
     public function withEndAt(\DateTimeInterface $endAt): self
     {
         $obj = clone $this;
-        $obj['end_at'] = $endAt;
+        $obj['endAt'] = $endAt;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class ActivationWindow implements BaseModel
     public function withStartAt(\DateTimeInterface $startAt): self
     {
         $obj = clone $this;
-        $obj['start_at'] = $startAt;
+        $obj['startAt'] = $startAt;
 
         return $obj;
     }

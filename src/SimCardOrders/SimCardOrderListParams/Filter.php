@@ -16,9 +16,9 @@ use Telnyx\SimCardOrders\SimCardOrderListParams\Filter\Cost;
  * @phpstan-type FilterShape = array{
  *   address?: Address|null,
  *   cost?: Cost|null,
- *   created_at?: \DateTimeInterface|null,
+ *   createdAt?: \DateTimeInterface|null,
  *   quantity?: int|null,
- *   updated_at?: \DateTimeInterface|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class Filter implements BaseModel
@@ -35,8 +35,8 @@ final class Filter implements BaseModel
     /**
      * Filter by ISO 8601 formatted date-time string matching resource creation date-time.
      */
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
     /**
      * Filter orders by how many SIM cards were ordered.
@@ -47,8 +47,8 @@ final class Filter implements BaseModel
     /**
      * Filter by ISO 8601 formatted date-time string matching resource last update date-time.
      */
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
     {
@@ -62,29 +62,29 @@ final class Filter implements BaseModel
      *
      * @param Address|array{
      *   id?: string|null,
-     *   administrative_area?: string|null,
-     *   country_code?: string|null,
-     *   extended_address?: string|null,
+     *   administrativeArea?: string|null,
+     *   countryCode?: string|null,
+     *   extendedAddress?: string|null,
      *   locality?: string|null,
-     *   postal_code?: string|null,
-     *   street_address?: string|null,
+     *   postalCode?: string|null,
+     *   streetAddress?: string|null,
      * } $address
      * @param Cost|array{amount?: string|null, currency?: string|null} $cost
      */
     public static function with(
         Address|array|null $address = null,
         Cost|array|null $cost = null,
-        ?\DateTimeInterface $created_at = null,
+        ?\DateTimeInterface $createdAt = null,
         ?int $quantity = null,
-        ?\DateTimeInterface $updated_at = null,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $address && $obj['address'] = $address;
         null !== $cost && $obj['cost'] = $cost;
-        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
         null !== $quantity && $obj['quantity'] = $quantity;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -92,12 +92,12 @@ final class Filter implements BaseModel
     /**
      * @param Address|array{
      *   id?: string|null,
-     *   administrative_area?: string|null,
-     *   country_code?: string|null,
-     *   extended_address?: string|null,
+     *   administrativeArea?: string|null,
+     *   countryCode?: string|null,
+     *   extendedAddress?: string|null,
      *   locality?: string|null,
-     *   postal_code?: string|null,
-     *   street_address?: string|null,
+     *   postalCode?: string|null,
+     *   streetAddress?: string|null,
      * } $address
      */
     public function withAddress(Address|array $address): self
@@ -125,7 +125,7 @@ final class Filter implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -147,7 +147,7 @@ final class Filter implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

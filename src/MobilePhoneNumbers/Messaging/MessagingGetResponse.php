@@ -35,16 +35,16 @@ final class MessagingGetResponse implements BaseModel
      *
      * @param Data|array{
      *   id?: string|null,
-     *   country_code?: string|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   countryCode?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   features?: Features|null,
-     *   messaging_product?: string|null,
-     *   messaging_profile_id?: string|null,
-     *   phone_number?: string|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   traffic_type?: string|null,
+     *   messagingProduct?: string|null,
+     *   messagingProfileID?: string|null,
+     *   phoneNumber?: string|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   trafficType?: string|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -59,16 +59,16 @@ final class MessagingGetResponse implements BaseModel
     /**
      * @param Data|array{
      *   id?: string|null,
-     *   country_code?: string|null,
-     *   created_at?: \DateTimeInterface|null,
+     *   countryCode?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
      *   features?: Features|null,
-     *   messaging_product?: string|null,
-     *   messaging_profile_id?: string|null,
-     *   phone_number?: string|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   traffic_type?: string|null,
+     *   messagingProduct?: string|null,
+     *   messagingProfileID?: string|null,
+     *   phoneNumber?: string|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   trafficType?: string|null,
      *   type?: value-of<Type>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
     public function withData(Data|array $data): self

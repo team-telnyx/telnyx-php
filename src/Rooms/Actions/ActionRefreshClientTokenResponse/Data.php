@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   token?: string|null, token_expires_at?: \DateTimeInterface|null
+ *   token?: string|null, tokenExpiresAt?: \DateTimeInterface|null
  * }
  */
 final class Data implements BaseModel
@@ -24,8 +24,8 @@ final class Data implements BaseModel
     /**
      * ISO 8601 timestamp when the token expires.
      */
-    #[Optional]
-    public ?\DateTimeInterface $token_expires_at;
+    #[Optional('token_expires_at')]
+    public ?\DateTimeInterface $tokenExpiresAt;
 
     public function __construct()
     {
@@ -39,12 +39,12 @@ final class Data implements BaseModel
      */
     public static function with(
         ?string $token = null,
-        ?\DateTimeInterface $token_expires_at = null
+        ?\DateTimeInterface $tokenExpiresAt = null
     ): self {
         $obj = new self;
 
         null !== $token && $obj['token'] = $token;
-        null !== $token_expires_at && $obj['token_expires_at'] = $token_expires_at;
+        null !== $tokenExpiresAt && $obj['tokenExpiresAt'] = $tokenExpiresAt;
 
         return $obj;
     }
@@ -63,7 +63,7 @@ final class Data implements BaseModel
     public function withTokenExpiresAt(\DateTimeInterface $tokenExpiresAt): self
     {
         $obj = clone $this;
-        $obj['token_expires_at'] = $tokenExpiresAt;
+        $obj['tokenExpiresAt'] = $tokenExpiresAt;
 
         return $obj;
     }

@@ -11,6 +11,7 @@ use Telnyx\BundlePricing\BillingBundles\BillingBundleRetrieveParams;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BundlePricing\BillingBundlesContract;
 
@@ -26,7 +27,7 @@ final class BillingBundlesService implements BillingBundlesContract
      *
      * Get a single bundle by ID.
      *
-     * @param array{authorization_bearer?: string}|BillingBundleRetrieveParams $params
+     * @param array{authorizationBearer?: string}|BillingBundleRetrieveParams $params
      *
      * @throws APIException
      */
@@ -44,7 +45,10 @@ final class BillingBundlesService implements BillingBundlesContract
         $response = $this->client->request(
             method: 'get',
             path: ['bundle_pricing/billing_bundles/%1$s', $bundleID],
-            headers: $parsed,
+            headers: Util::array_transform_keys(
+                $parsed,
+                ['authorizationBearer' => 'authorization_bearer']
+            ),
             options: $options,
             convert: BillingBundleGetResponse::class,
         );
@@ -58,9 +62,9 @@ final class BillingBundlesService implements BillingBundlesContract
      * Get all allowed bundles.
      *
      * @param array{
-     *   filter?: array{country_iso?: list<string>, resource?: list<string>},
+     *   filter?: array{countryISO?: list<string>, resource?: list<string>},
      *   page?: array{number?: int, size?: int},
-     *   authorization_bearer?: string,
+     *   authorizationBearer?: string,
      * }|BillingBundleListParams $params
      *
      * @throws APIException
@@ -83,7 +87,10 @@ final class BillingBundlesService implements BillingBundlesContract
             method: 'get',
             path: 'bundle_pricing/billing_bundles',
             query: array_intersect_key($parsed, $query_params),
-            headers: $header_params,
+            headers: Util::array_transform_keys(
+                $header_params,
+                ['authorizationBearer' => 'authorization_bearer']
+            ),
             options: $options,
             convert: BillingBundleListResponse::class,
         );

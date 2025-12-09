@@ -36,21 +36,21 @@ final class PortingOrderEndUser implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param PortingOrderEndUserAdmin|array{
-     *   account_number?: string|null,
-     *   auth_person_name?: string|null,
-     *   billing_phone_number?: string|null,
-     *   business_identifier?: string|null,
-     *   entity_name?: string|null,
-     *   pin_passcode?: string|null,
-     *   tax_identifier?: string|null,
+     *   accountNumber?: string|null,
+     *   authPersonName?: string|null,
+     *   billingPhoneNumber?: string|null,
+     *   businessIdentifier?: string|null,
+     *   entityName?: string|null,
+     *   pinPasscode?: string|null,
+     *   taxIdentifier?: string|null,
      * } $admin
      * @param PortingOrderEndUserLocation|array{
-     *   administrative_area?: string|null,
-     *   country_code?: string|null,
-     *   extended_address?: string|null,
+     *   administrativeArea?: string|null,
+     *   countryCode?: string|null,
+     *   extendedAddress?: string|null,
      *   locality?: string|null,
-     *   postal_code?: string|null,
-     *   street_address?: string|null,
+     *   postalCode?: string|null,
+     *   streetAddress?: string|null,
      * } $location
      */
     public static function with(
@@ -67,13 +67,13 @@ final class PortingOrderEndUser implements BaseModel
 
     /**
      * @param PortingOrderEndUserAdmin|array{
-     *   account_number?: string|null,
-     *   auth_person_name?: string|null,
-     *   billing_phone_number?: string|null,
-     *   business_identifier?: string|null,
-     *   entity_name?: string|null,
-     *   pin_passcode?: string|null,
-     *   tax_identifier?: string|null,
+     *   accountNumber?: string|null,
+     *   authPersonName?: string|null,
+     *   billingPhoneNumber?: string|null,
+     *   businessIdentifier?: string|null,
+     *   entityName?: string|null,
+     *   pinPasscode?: string|null,
+     *   taxIdentifier?: string|null,
      * } $admin
      */
     public function withAdmin(PortingOrderEndUserAdmin|array $admin): self
@@ -86,12 +86,12 @@ final class PortingOrderEndUser implements BaseModel
 
     /**
      * @param PortingOrderEndUserLocation|array{
-     *   administrative_area?: string|null,
-     *   country_code?: string|null,
-     *   extended_address?: string|null,
+     *   administrativeArea?: string|null,
+     *   countryCode?: string|null,
+     *   extendedAddress?: string|null,
      *   locality?: string|null,
-     *   postal_code?: string|null,
-     *   street_address?: string|null,
+     *   postalCode?: string|null,
+     *   streetAddress?: string|null,
      * } $location
      */
     public function withLocation(

@@ -39,17 +39,17 @@ final class ShortCodeListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<ShortCode|array{
-     *   messaging_profile_id: string|null,
+     *   messagingProfileID: string|null,
      *   id?: string|null,
-     *   country_code?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   short_code?: string|null,
+     *   countryCode?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   shortCode?: string|null,
      *   tags?: list<string>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public static function with(
@@ -66,14 +66,14 @@ final class ShortCodeListResponse implements BaseModel
 
     /**
      * @param list<ShortCode|array{
-     *   messaging_profile_id: string|null,
+     *   messagingProfileID: string|null,
      *   id?: string|null,
-     *   country_code?: string|null,
-     *   created_at?: \DateTimeInterface|null,
-     *   record_type?: value-of<RecordType>|null,
-     *   short_code?: string|null,
+     *   countryCode?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   shortCode?: string|null,
      *   tags?: list<string>|null,
-     *   updated_at?: \DateTimeInterface|null,
+     *   updatedAt?: \DateTimeInterface|null,
      * }> $data
      */
     public function withData(array $data): self
@@ -86,7 +86,7 @@ final class ShortCodeListResponse implements BaseModel
 
     /**
      * @param Meta|array{
-     *   page_number: int, page_size: int, total_pages: int, total_results: int
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
     public function withMeta(Meta|array $meta): self

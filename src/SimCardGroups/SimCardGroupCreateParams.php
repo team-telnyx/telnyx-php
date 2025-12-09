@@ -18,7 +18,7 @@ use Telnyx\SimCardGroups\SimCardGroupCreateParams\DataLimit;
  *
  * @phpstan-type SimCardGroupCreateParamsShape = array{
  *   name: string,
- *   data_limit?: DataLimit|array{amount?: string|null, unit?: string|null},
+ *   dataLimit?: DataLimit|array{amount?: string|null, unit?: string|null},
  * }
  */
 final class SimCardGroupCreateParams implements BaseModel
@@ -36,8 +36,8 @@ final class SimCardGroupCreateParams implements BaseModel
     /**
      * Upper limit on the amount of data the SIM cards, within the group, can use.
      */
-    #[Optional]
-    public ?DataLimit $data_limit;
+    #[Optional('data_limit')]
+    public ?DataLimit $dataLimit;
 
     /**
      * `new SimCardGroupCreateParams()` is missing required properties by the API.
@@ -63,17 +63,17 @@ final class SimCardGroupCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DataLimit|array{amount?: string|null, unit?: string|null} $data_limit
+     * @param DataLimit|array{amount?: string|null, unit?: string|null} $dataLimit
      */
     public static function with(
         string $name,
-        DataLimit|array|null $data_limit = null
+        DataLimit|array|null $dataLimit = null
     ): self {
         $obj = new self;
 
         $obj['name'] = $name;
 
-        null !== $data_limit && $obj['data_limit'] = $data_limit;
+        null !== $dataLimit && $obj['dataLimit'] = $dataLimit;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class SimCardGroupCreateParams implements BaseModel
     public function withDataLimit(DataLimit|array $dataLimit): self
     {
         $obj = clone $this;
-        $obj['data_limit'] = $dataLimit;
+        $obj['dataLimit'] = $dataLimit;
 
         return $obj;
     }

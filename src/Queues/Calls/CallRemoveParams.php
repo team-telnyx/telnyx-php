@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Queues\CallsService::remove()
  *
- * @phpstan-type CallRemoveParamsShape = array{queue_name: string}
+ * @phpstan-type CallRemoveParamsShape = array{queueName: string}
  */
 final class CallRemoveParams implements BaseModel
 {
@@ -23,14 +23,14 @@ final class CallRemoveParams implements BaseModel
     use SdkParams;
 
     #[Required]
-    public string $queue_name;
+    public string $queueName;
 
     /**
      * `new CallRemoveParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * CallRemoveParams::with(queue_name: ...)
+     * CallRemoveParams::with(queueName: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -49,11 +49,11 @@ final class CallRemoveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $queue_name): self
+    public static function with(string $queueName): self
     {
         $obj = new self;
 
-        $obj['queue_name'] = $queue_name;
+        $obj['queueName'] = $queueName;
 
         return $obj;
     }
@@ -61,7 +61,7 @@ final class CallRemoveParams implements BaseModel
     public function withQueueName(string $queueName): self
     {
         $obj = clone $this;
-        $obj['queue_name'] = $queueName;
+        $obj['queueName'] = $queueName;
 
         return $obj;
     }

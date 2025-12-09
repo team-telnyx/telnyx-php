@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Texml\AccountsService::retrieveRecordingsJson()
  *
  * @phpstan-type AccountRetrieveRecordingsJsonParamsShape = array{
- *   DateCreated?: \DateTimeInterface, Page?: int, PageSize?: int
+ *   dateCreated?: \DateTimeInterface, page?: int, pageSize?: int
  * }
  */
 final class AccountRetrieveRecordingsJsonParams implements BaseModel
@@ -28,19 +28,19 @@ final class AccountRetrieveRecordingsJsonParams implements BaseModel
      * Filters recording by the creation date. Expected format is ISO8601 date or date-time, ie. {YYYY}-{MM}-{DD} or {YYYY}-{MM}-{DD}T{hh}:{mm}:{ss}Z. Also accepts inequality operators, e.g. DateCreated>=2023-05-22.
      */
     #[Optional]
-    public ?\DateTimeInterface $DateCreated;
+    public ?\DateTimeInterface $dateCreated;
 
     /**
      * The number of the page to be displayed, zero-indexed, should be used in conjuction with PageToken.
      */
     #[Optional]
-    public ?int $Page;
+    public ?int $page;
 
     /**
      * The number of records to be displayed on a page.
      */
     #[Optional]
-    public ?int $PageSize;
+    public ?int $pageSize;
 
     public function __construct()
     {
@@ -53,15 +53,15 @@ final class AccountRetrieveRecordingsJsonParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?\DateTimeInterface $DateCreated = null,
-        ?int $Page = null,
-        ?int $PageSize = null,
+        ?\DateTimeInterface $dateCreated = null,
+        ?int $page = null,
+        ?int $pageSize = null,
     ): self {
         $obj = new self;
 
-        null !== $DateCreated && $obj['DateCreated'] = $DateCreated;
-        null !== $Page && $obj['Page'] = $Page;
-        null !== $PageSize && $obj['PageSize'] = $PageSize;
+        null !== $dateCreated && $obj['dateCreated'] = $dateCreated;
+        null !== $page && $obj['page'] = $page;
+        null !== $pageSize && $obj['pageSize'] = $pageSize;
 
         return $obj;
     }
@@ -72,7 +72,7 @@ final class AccountRetrieveRecordingsJsonParams implements BaseModel
     public function withDateCreated(\DateTimeInterface $dateCreated): self
     {
         $obj = clone $this;
-        $obj['DateCreated'] = $dateCreated;
+        $obj['dateCreated'] = $dateCreated;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class AccountRetrieveRecordingsJsonParams implements BaseModel
     public function withPage(int $page): self
     {
         $obj = clone $this;
-        $obj['Page'] = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class AccountRetrieveRecordingsJsonParams implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj['PageSize'] = $pageSize;
+        $obj['pageSize'] = $pageSize;
 
         return $obj;
     }

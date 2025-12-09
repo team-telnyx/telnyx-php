@@ -28,7 +28,7 @@ final class CallsService implements CallsContract
      *
      * Retrieve an existing call from an existing queue
      *
-     * @param array{queue_name: string}|CallRetrieveParams $params
+     * @param array{queueName: string}|CallRetrieveParams $params
      *
      * @throws APIException
      */
@@ -41,8 +41,8 @@ final class CallsService implements CallsContract
             $params,
             $requestOptions,
         );
-        $queueName = $parsed['queue_name'];
-        unset($parsed['queue_name']);
+        $queueName = $parsed['queueName'];
+        unset($parsed['queueName']);
 
         /** @var BaseResponse<CallGetResponse> */
         $response = $this->client->request(
@@ -60,9 +60,7 @@ final class CallsService implements CallsContract
      *
      * Update queued call's keep_after_hangup flag
      *
-     * @param array{
-     *   queue_name: string, keep_after_hangup?: bool
-     * }|CallUpdateParams $params
+     * @param array{queueName: string, keepAfterHangup?: bool}|CallUpdateParams $params
      *
      * @throws APIException
      */
@@ -75,14 +73,14 @@ final class CallsService implements CallsContract
             $params,
             $requestOptions,
         );
-        $queueName = $parsed['queue_name'];
-        unset($parsed['queue_name']);
+        $queueName = $parsed['queueName'];
+        unset($parsed['queueName']);
 
         /** @var BaseResponse<mixed> */
         $response = $this->client->request(
             method: 'patch',
             path: ['queues/%1$s/calls/%2$s', $queueName, $callControlID],
-            body: (object) array_diff_key($parsed, ['queue_name']),
+            body: (object) array_diff_key($parsed, ['queueName']),
             options: $options,
             convert: null,
         );
@@ -130,7 +128,7 @@ final class CallsService implements CallsContract
      *
      * Removes an inactive call from a queue. If the call is no longer active, use this command to remove it from the queue.
      *
-     * @param array{queue_name: string}|CallRemoveParams $params
+     * @param array{queueName: string}|CallRemoveParams $params
      *
      * @throws APIException
      */
@@ -143,8 +141,8 @@ final class CallsService implements CallsContract
             $params,
             $requestOptions,
         );
-        $queueName = $parsed['queue_name'];
-        unset($parsed['queue_name']);
+        $queueName = $parsed['queueName'];
+        unset($parsed['queueName']);
 
         /** @var BaseResponse<mixed> */
         $response = $this->client->request(

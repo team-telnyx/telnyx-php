@@ -20,10 +20,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type PurchaseCreateParamsShape = array{
  *   amount: int,
  *   product?: string,
- *   sim_card_group_id?: string,
+ *   simCardGroupID?: string,
  *   status?: Status|value-of<Status>,
  *   tags?: list<string>,
- *   whitelabel_name?: string,
+ *   whitelabelName?: string,
  * }
  */
 final class PurchaseCreateParams implements BaseModel
@@ -47,8 +47,8 @@ final class PurchaseCreateParams implements BaseModel
     /**
      * The group SIMCardGroup identification. This attribute can be <code>null</code> when it's present in an associated resource.
      */
-    #[Optional]
-    public ?string $sim_card_group_id;
+    #[Optional('sim_card_group_id')]
+    public ?string $simCardGroupID;
 
     /**
      * Status on which the SIM cards will be set after being successfully registered.
@@ -69,8 +69,8 @@ final class PurchaseCreateParams implements BaseModel
     /**
      * Service Provider Name (SPN) for the Whitelabel eSIM product. It will be displayed as the mobile service name by operating systems of smartphones. This parameter must only contain letters, numbers and whitespaces.
      */
-    #[Optional]
-    public ?string $whitelabel_name;
+    #[Optional('whitelabel_name')]
+    public ?string $whitelabelName;
 
     /**
      * `new PurchaseCreateParams()` is missing required properties by the API.
@@ -102,20 +102,20 @@ final class PurchaseCreateParams implements BaseModel
     public static function with(
         int $amount,
         ?string $product = null,
-        ?string $sim_card_group_id = null,
+        ?string $simCardGroupID = null,
         Status|string|null $status = null,
         ?array $tags = null,
-        ?string $whitelabel_name = null,
+        ?string $whitelabelName = null,
     ): self {
         $obj = new self;
 
         $obj['amount'] = $amount;
 
         null !== $product && $obj['product'] = $product;
-        null !== $sim_card_group_id && $obj['sim_card_group_id'] = $sim_card_group_id;
+        null !== $simCardGroupID && $obj['simCardGroupID'] = $simCardGroupID;
         null !== $status && $obj['status'] = $status;
         null !== $tags && $obj['tags'] = $tags;
-        null !== $whitelabel_name && $obj['whitelabel_name'] = $whitelabel_name;
+        null !== $whitelabelName && $obj['whitelabelName'] = $whitelabelName;
 
         return $obj;
     }
@@ -148,7 +148,7 @@ final class PurchaseCreateParams implements BaseModel
     public function withSimCardGroupID(string $simCardGroupID): self
     {
         $obj = clone $this;
-        $obj['sim_card_group_id'] = $simCardGroupID;
+        $obj['simCardGroupID'] = $simCardGroupID;
 
         return $obj;
     }
@@ -185,7 +185,7 @@ final class PurchaseCreateParams implements BaseModel
     public function withWhitelabelName(string $whitelabelName): self
     {
         $obj = clone $this;
-        $obj['whitelabel_name'] = $whitelabelName;
+        $obj['whitelabelName'] = $whitelabelName;
 
         return $obj;
     }

@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Legacy\Reporting\UsageReportsService::retrieveSpeechToText()
  *
  * @phpstan-type UsageReportRetrieveSpeechToTextParamsShape = array{
- *   end_date?: \DateTimeInterface, start_date?: \DateTimeInterface
+ *   endDate?: \DateTimeInterface, startDate?: \DateTimeInterface
  * }
  */
 final class UsageReportRetrieveSpeechToTextParams implements BaseModel
@@ -25,10 +25,10 @@ final class UsageReportRetrieveSpeechToTextParams implements BaseModel
     use SdkParams;
 
     #[Optional]
-    public ?\DateTimeInterface $end_date;
+    public ?\DateTimeInterface $endDate;
 
     #[Optional]
-    public ?\DateTimeInterface $start_date;
+    public ?\DateTimeInterface $startDate;
 
     public function __construct()
     {
@@ -41,13 +41,13 @@ final class UsageReportRetrieveSpeechToTextParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?\DateTimeInterface $end_date = null,
-        ?\DateTimeInterface $start_date = null
+        ?\DateTimeInterface $endDate = null,
+        ?\DateTimeInterface $startDate = null
     ): self {
         $obj = new self;
 
-        null !== $end_date && $obj['end_date'] = $end_date;
-        null !== $start_date && $obj['start_date'] = $start_date;
+        null !== $endDate && $obj['endDate'] = $endDate;
+        null !== $startDate && $obj['startDate'] = $startDate;
 
         return $obj;
     }
@@ -55,7 +55,7 @@ final class UsageReportRetrieveSpeechToTextParams implements BaseModel
     public function withEndDate(\DateTimeInterface $endDate): self
     {
         $obj = clone $this;
-        $obj['end_date'] = $endDate;
+        $obj['endDate'] = $endDate;
 
         return $obj;
     }
@@ -63,7 +63,7 @@ final class UsageReportRetrieveSpeechToTextParams implements BaseModel
     public function withStartDate(\DateTimeInterface $startDate): self
     {
         $obj = clone $this;
-        $obj['start_date'] = $startDate;
+        $obj['startDate'] = $startDate;
 
         return $obj;
     }

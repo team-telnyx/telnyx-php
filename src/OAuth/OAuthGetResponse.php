@@ -32,13 +32,13 @@ final class OAuthGetResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Data|array{
-     *   client_id?: string|null,
-     *   logo_uri?: string|null,
+     *   clientID?: string|null,
+     *   logoUri?: string|null,
      *   name?: string|null,
-     *   policy_uri?: string|null,
-     *   redirect_uri?: string|null,
-     *   requested_scopes?: list<RequestedScope>|null,
-     *   tos_uri?: string|null,
+     *   policyUri?: string|null,
+     *   redirectUri?: string|null,
+     *   requestedScopes?: list<RequestedScope>|null,
+     *   tosUri?: string|null,
      *   verified?: bool|null,
      * } $data
      */
@@ -53,13 +53,13 @@ final class OAuthGetResponse implements BaseModel
 
     /**
      * @param Data|array{
-     *   client_id?: string|null,
-     *   logo_uri?: string|null,
+     *   clientID?: string|null,
+     *   logoUri?: string|null,
      *   name?: string|null,
-     *   policy_uri?: string|null,
-     *   redirect_uri?: string|null,
-     *   requested_scopes?: list<RequestedScope>|null,
-     *   tos_uri?: string|null,
+     *   policyUri?: string|null,
+     *   redirectUri?: string|null,
+     *   requestedScopes?: list<RequestedScope>|null,
+     *   tosUri?: string|null,
      *   verified?: bool|null,
      * } $data
      */

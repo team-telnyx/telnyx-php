@@ -20,23 +20,23 @@ use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams\OrderingGrou
  * @see Telnyx\Services\InexplicitNumberOrdersService::create()
  *
  * @phpstan-type InexplicitNumberOrderCreateParamsShape = array{
- *   ordering_groups: list<OrderingGroup|array{
- *     count_requested: string,
- *     country_iso: value-of<CountryISO>,
- *     phone_number_type: string,
- *     administrative_area?: string|null,
- *     exclude_held_numbers?: bool|null,
+ *   orderingGroups: list<OrderingGroup|array{
+ *     countRequested: string,
+ *     countryISO: value-of<CountryISO>,
+ *     phoneNumberType: string,
+ *     administrativeArea?: string|null,
+ *     excludeHeldNumbers?: bool|null,
  *     features?: list<string>|null,
  *     locality?: string|null,
- *     national_destination_code?: string|null,
- *     phone_number?: PhoneNumber|null,
+ *     nationalDestinationCode?: string|null,
+ *     phoneNumber?: PhoneNumber|null,
  *     quickship?: bool|null,
  *     strategy?: value-of<Strategy>|null,
  *   }>,
- *   billing_group_id?: string,
- *   connection_id?: string,
- *   customer_reference?: string,
- *   messaging_profile_id?: string,
+ *   billingGroupID?: string,
+ *   connectionID?: string,
+ *   customerReference?: string,
+ *   messagingProfileID?: string,
  * }
  */
 final class InexplicitNumberOrderCreateParams implements BaseModel
@@ -48,41 +48,41 @@ final class InexplicitNumberOrderCreateParams implements BaseModel
     /**
      * Group(s) of numbers to order. You can have multiple ordering_groups objects added to a single request.
      *
-     * @var list<OrderingGroup> $ordering_groups
+     * @var list<OrderingGroup> $orderingGroups
      */
-    #[Required(list: OrderingGroup::class)]
-    public array $ordering_groups;
+    #[Required('ordering_groups', list: OrderingGroup::class)]
+    public array $orderingGroups;
 
     /**
      * Billing group id to apply to phone numbers that are purchased.
      */
-    #[Optional]
-    public ?string $billing_group_id;
+    #[Optional('billing_group_id')]
+    public ?string $billingGroupID;
 
     /**
      * Connection id to apply to phone numbers that are purchased.
      */
-    #[Optional]
-    public ?string $connection_id;
+    #[Optional('connection_id')]
+    public ?string $connectionID;
 
     /**
      * Reference label for the customer.
      */
-    #[Optional]
-    public ?string $customer_reference;
+    #[Optional('customer_reference')]
+    public ?string $customerReference;
 
     /**
      * Messaging profile id to apply to phone numbers that are purchased.
      */
-    #[Optional]
-    public ?string $messaging_profile_id;
+    #[Optional('messaging_profile_id')]
+    public ?string $messagingProfileID;
 
     /**
      * `new InexplicitNumberOrderCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * InexplicitNumberOrderCreateParams::with(ordering_groups: ...)
+     * InexplicitNumberOrderCreateParams::with(orderingGroups: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -102,34 +102,34 @@ final class InexplicitNumberOrderCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<OrderingGroup|array{
-     *   count_requested: string,
-     *   country_iso: value-of<CountryISO>,
-     *   phone_number_type: string,
-     *   administrative_area?: string|null,
-     *   exclude_held_numbers?: bool|null,
+     *   countRequested: string,
+     *   countryISO: value-of<CountryISO>,
+     *   phoneNumberType: string,
+     *   administrativeArea?: string|null,
+     *   excludeHeldNumbers?: bool|null,
      *   features?: list<string>|null,
      *   locality?: string|null,
-     *   national_destination_code?: string|null,
-     *   phone_number?: PhoneNumber|null,
+     *   nationalDestinationCode?: string|null,
+     *   phoneNumber?: PhoneNumber|null,
      *   quickship?: bool|null,
      *   strategy?: value-of<Strategy>|null,
-     * }> $ordering_groups
+     * }> $orderingGroups
      */
     public static function with(
-        array $ordering_groups,
-        ?string $billing_group_id = null,
-        ?string $connection_id = null,
-        ?string $customer_reference = null,
-        ?string $messaging_profile_id = null,
+        array $orderingGroups,
+        ?string $billingGroupID = null,
+        ?string $connectionID = null,
+        ?string $customerReference = null,
+        ?string $messagingProfileID = null,
     ): self {
         $obj = new self;
 
-        $obj['ordering_groups'] = $ordering_groups;
+        $obj['orderingGroups'] = $orderingGroups;
 
-        null !== $billing_group_id && $obj['billing_group_id'] = $billing_group_id;
-        null !== $connection_id && $obj['connection_id'] = $connection_id;
-        null !== $customer_reference && $obj['customer_reference'] = $customer_reference;
-        null !== $messaging_profile_id && $obj['messaging_profile_id'] = $messaging_profile_id;
+        null !== $billingGroupID && $obj['billingGroupID'] = $billingGroupID;
+        null !== $connectionID && $obj['connectionID'] = $connectionID;
+        null !== $customerReference && $obj['customerReference'] = $customerReference;
+        null !== $messagingProfileID && $obj['messagingProfileID'] = $messagingProfileID;
 
         return $obj;
     }
@@ -138,15 +138,15 @@ final class InexplicitNumberOrderCreateParams implements BaseModel
      * Group(s) of numbers to order. You can have multiple ordering_groups objects added to a single request.
      *
      * @param list<OrderingGroup|array{
-     *   count_requested: string,
-     *   country_iso: value-of<CountryISO>,
-     *   phone_number_type: string,
-     *   administrative_area?: string|null,
-     *   exclude_held_numbers?: bool|null,
+     *   countRequested: string,
+     *   countryISO: value-of<CountryISO>,
+     *   phoneNumberType: string,
+     *   administrativeArea?: string|null,
+     *   excludeHeldNumbers?: bool|null,
      *   features?: list<string>|null,
      *   locality?: string|null,
-     *   national_destination_code?: string|null,
-     *   phone_number?: PhoneNumber|null,
+     *   nationalDestinationCode?: string|null,
+     *   phoneNumber?: PhoneNumber|null,
      *   quickship?: bool|null,
      *   strategy?: value-of<Strategy>|null,
      * }> $orderingGroups
@@ -154,7 +154,7 @@ final class InexplicitNumberOrderCreateParams implements BaseModel
     public function withOrderingGroups(array $orderingGroups): self
     {
         $obj = clone $this;
-        $obj['ordering_groups'] = $orderingGroups;
+        $obj['orderingGroups'] = $orderingGroups;
 
         return $obj;
     }
@@ -165,7 +165,7 @@ final class InexplicitNumberOrderCreateParams implements BaseModel
     public function withBillingGroupID(string $billingGroupID): self
     {
         $obj = clone $this;
-        $obj['billing_group_id'] = $billingGroupID;
+        $obj['billingGroupID'] = $billingGroupID;
 
         return $obj;
     }
@@ -176,7 +176,7 @@ final class InexplicitNumberOrderCreateParams implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj['connection_id'] = $connectionID;
+        $obj['connectionID'] = $connectionID;
 
         return $obj;
     }
@@ -187,7 +187,7 @@ final class InexplicitNumberOrderCreateParams implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj['customer_reference'] = $customerReference;
+        $obj['customerReference'] = $customerReference;
 
         return $obj;
     }
@@ -198,7 +198,7 @@ final class InexplicitNumberOrderCreateParams implements BaseModel
     public function withMessagingProfileID(string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj['messaging_profile_id'] = $messagingProfileID;
+        $obj['messagingProfileID'] = $messagingProfileID;
 
         return $obj;
     }

@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\PublicInternetGatewaysService::create()
  *
  * @phpstan-type PublicInternetGatewayCreateParamsShape = array{
- *   name?: string, network_id?: string, region_code?: string
+ *   name?: string, networkID?: string, regionCode?: string
  * }
  */
 final class PublicInternetGatewayCreateParams implements BaseModel
@@ -33,14 +33,14 @@ final class PublicInternetGatewayCreateParams implements BaseModel
     /**
      * The id of the network associated with the interface.
      */
-    #[Optional]
-    public ?string $network_id;
+    #[Optional('network_id')]
+    public ?string $networkID;
 
     /**
      * The region interface is deployed to.
      */
-    #[Optional]
-    public ?string $region_code;
+    #[Optional('region_code')]
+    public ?string $regionCode;
 
     public function __construct()
     {
@@ -54,14 +54,14 @@ final class PublicInternetGatewayCreateParams implements BaseModel
      */
     public static function with(
         ?string $name = null,
-        ?string $network_id = null,
-        ?string $region_code = null
+        ?string $networkID = null,
+        ?string $regionCode = null
     ): self {
         $obj = new self;
 
         null !== $name && $obj['name'] = $name;
-        null !== $network_id && $obj['network_id'] = $network_id;
-        null !== $region_code && $obj['region_code'] = $region_code;
+        null !== $networkID && $obj['networkID'] = $networkID;
+        null !== $regionCode && $obj['regionCode'] = $regionCode;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class PublicInternetGatewayCreateParams implements BaseModel
     public function withNetworkID(string $networkID): self
     {
         $obj = clone $this;
-        $obj['network_id'] = $networkID;
+        $obj['networkID'] = $networkID;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class PublicInternetGatewayCreateParams implements BaseModel
     public function withRegionCode(string $regionCode): self
     {
         $obj = clone $this;
-        $obj['region_code'] = $regionCode;
+        $obj['regionCode'] = $regionCode;
 
         return $obj;
     }

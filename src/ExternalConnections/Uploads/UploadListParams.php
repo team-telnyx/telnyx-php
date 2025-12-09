@@ -22,9 +22,9 @@ use Telnyx\ExternalConnections\Uploads\UploadListParams\Page;
  *
  * @phpstan-type UploadListParamsShape = array{
  *   filter?: Filter|array{
- *     civic_address_id?: CivicAddressID|null,
- *     location_id?: LocationID|null,
- *     phone_number?: PhoneNumber|null,
+ *     civicAddressID?: CivicAddressID|null,
+ *     locationID?: LocationID|null,
+ *     phoneNumber?: PhoneNumber|null,
  *     status?: Status|null,
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
@@ -59,9 +59,9 @@ final class UploadListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   civic_address_id?: CivicAddressID|null,
-     *   location_id?: LocationID|null,
-     *   phone_number?: PhoneNumber|null,
+     *   civicAddressID?: CivicAddressID|null,
+     *   locationID?: LocationID|null,
+     *   phoneNumber?: PhoneNumber|null,
      *   status?: Status|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
@@ -82,9 +82,9 @@ final class UploadListParams implements BaseModel
      * Filter parameter for uploads (deepObject style). Supports filtering by status, civic_address_id, location_id, and phone_number with eq/contains operations.
      *
      * @param Filter|array{
-     *   civic_address_id?: CivicAddressID|null,
-     *   location_id?: LocationID|null,
-     *   phone_number?: PhoneNumber|null,
+     *   civicAddressID?: CivicAddressID|null,
+     *   locationID?: LocationID|null,
+     *   phoneNumber?: PhoneNumber|null,
      *   status?: Status|null,
      * } $filter
      */

@@ -12,9 +12,9 @@ use Telnyx\MessagingHostedNumberOrder\Status;
 /**
  * @phpstan-type MessagingHostedNumberOrderShape = array{
  *   id?: string|null,
- *   messaging_profile_id?: string|null,
- *   phone_numbers?: list<HostedNumber>|null,
- *   record_type?: string|null,
+ *   messagingProfileID?: string|null,
+ *   phoneNumbers?: list<HostedNumber>|null,
+ *   recordType?: string|null,
  *   status?: value-of<Status>|null,
  * }
  */
@@ -32,18 +32,18 @@ final class MessagingHostedNumberOrder implements BaseModel
     /**
      * Automatically associate the number with this messaging profile ID when the order is complete.
      */
-    #[Optional(nullable: true)]
-    public ?string $messaging_profile_id;
+    #[Optional('messaging_profile_id', nullable: true)]
+    public ?string $messagingProfileID;
 
-    /** @var list<HostedNumber>|null $phone_numbers */
-    #[Optional(list: HostedNumber::class)]
-    public ?array $phone_numbers;
+    /** @var list<HostedNumber>|null $phoneNumbers */
+    #[Optional('phone_numbers', list: HostedNumber::class)]
+    public ?array $phoneNumbers;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Optional]
-    public ?string $record_type;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /** @var value-of<Status>|null $status */
     #[Optional(enum: Status::class)]
@@ -61,25 +61,25 @@ final class MessagingHostedNumberOrder implements BaseModel
      *
      * @param list<HostedNumber|array{
      *   id?: string|null,
-     *   phone_number?: string|null,
-     *   record_type?: string|null,
+     *   phoneNumber?: string|null,
+     *   recordType?: string|null,
      *   status?: value-of<HostedNumber\Status>|null,
-     * }> $phone_numbers
+     * }> $phoneNumbers
      * @param Status|value-of<Status> $status
      */
     public static function with(
         ?string $id = null,
-        ?string $messaging_profile_id = null,
-        ?array $phone_numbers = null,
-        ?string $record_type = null,
+        ?string $messagingProfileID = null,
+        ?array $phoneNumbers = null,
+        ?string $recordType = null,
         Status|string|null $status = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $messaging_profile_id && $obj['messaging_profile_id'] = $messaging_profile_id;
-        null !== $phone_numbers && $obj['phone_numbers'] = $phone_numbers;
-        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $messagingProfileID && $obj['messagingProfileID'] = $messagingProfileID;
+        null !== $phoneNumbers && $obj['phoneNumbers'] = $phoneNumbers;
+        null !== $recordType && $obj['recordType'] = $recordType;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -102,7 +102,7 @@ final class MessagingHostedNumberOrder implements BaseModel
     public function withMessagingProfileID(?string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj['messaging_profile_id'] = $messagingProfileID;
+        $obj['messagingProfileID'] = $messagingProfileID;
 
         return $obj;
     }
@@ -110,15 +110,15 @@ final class MessagingHostedNumberOrder implements BaseModel
     /**
      * @param list<HostedNumber|array{
      *   id?: string|null,
-     *   phone_number?: string|null,
-     *   record_type?: string|null,
+     *   phoneNumber?: string|null,
+     *   recordType?: string|null,
      *   status?: value-of<HostedNumber\Status>|null,
      * }> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj['phone_numbers'] = $phoneNumbers;
+        $obj['phoneNumbers'] = $phoneNumbers;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class MessagingHostedNumberOrder implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

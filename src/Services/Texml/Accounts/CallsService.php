@@ -7,6 +7,7 @@ namespace Telnyx\Services\Texml\Accounts;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\CallsContract;
 use Telnyx\Services\Texml\Accounts\Calls\RecordingsJsonService;
@@ -82,7 +83,7 @@ final class CallsService implements CallsContract
      *
      * Returns an individual call identified by its CallSid. This endpoint is eventually consistent.
      *
-     * @param array{account_sid: string}|CallRetrieveParams $params
+     * @param array{accountSid: string}|CallRetrieveParams $params
      *
      * @throws APIException
      */
@@ -95,8 +96,8 @@ final class CallsService implements CallsContract
             $params,
             $requestOptions,
         );
-        $accountSid = $parsed['account_sid'];
-        unset($parsed['account_sid']);
+        $accountSid = $parsed['accountSid'];
+        unset($parsed['accountSid']);
 
         /** @var BaseResponse<CallGetResponse> */
         $response = $this->client->request(
@@ -115,15 +116,15 @@ final class CallsService implements CallsContract
      * Update TeXML call. Please note that the keys present in the payload MUST BE formatted in CamelCase as specified in the example.
      *
      * @param array{
-     *   account_sid: string,
-     *   FallbackMethod?: 'GET'|'POST'|FallbackMethod,
-     *   FallbackUrl?: string,
-     *   Method?: 'GET'|'POST'|Method,
-     *   Status?: string,
-     *   StatusCallback?: string,
-     *   StatusCallbackMethod?: 'GET'|'POST'|StatusCallbackMethod,
-     *   Texml?: string,
-     *   Url?: string,
+     *   accountSid: string,
+     *   fallbackMethod?: 'GET'|'POST'|FallbackMethod,
+     *   fallbackURL?: string,
+     *   method?: 'GET'|'POST'|Method,
+     *   status?: string,
+     *   statusCallback?: string,
+     *   statusCallbackMethod?: 'GET'|'POST'|StatusCallbackMethod,
+     *   texml?: string,
+     *   url?: string,
      * }|CallUpdateParams $params
      *
      * @throws APIException
@@ -137,15 +138,15 @@ final class CallsService implements CallsContract
             $params,
             $requestOptions,
         );
-        $accountSid = $parsed['account_sid'];
-        unset($parsed['account_sid']);
+        $accountSid = $parsed['accountSid'];
+        unset($parsed['accountSid']);
 
         /** @var BaseResponse<CallUpdateResponse> */
         $response = $this->client->request(
             method: 'post',
             path: ['texml/Accounts/%1$s/Calls/%2$s', $accountSid, $callSid],
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
-            body: (object) array_diff_key($parsed, ['account_sid']),
+            body: (object) array_diff_key($parsed, ['accountSid']),
             options: $options,
             convert: CallUpdateResponse::class,
         );
@@ -159,41 +160,41 @@ final class CallsService implements CallsContract
      * Initiate an outbound TeXML call. Telnyx will request TeXML from the XML Request URL configured for the connection in the Mission Control Portal.
      *
      * @param array{
-     *   ApplicationSid: string,
-     *   From: string,
-     *   To: string,
-     *   AsyncAmd?: bool,
-     *   AsyncAmdStatusCallback?: string,
-     *   AsyncAmdStatusCallbackMethod?: 'GET'|'POST'|AsyncAmdStatusCallbackMethod,
-     *   CallerId?: string,
-     *   CancelPlaybackOnDetectMessageEnd?: bool,
-     *   CancelPlaybackOnMachineDetection?: bool,
-     *   CustomHeaders?: list<array{name: string, value: string}>,
-     *   DetectionMode?: 'Premium'|'Regular'|DetectionMode,
-     *   FallbackUrl?: string,
-     *   MachineDetection?: 'Enable'|'Disable'|'DetectMessageEnd'|MachineDetection,
-     *   MachineDetectionSilenceTimeout?: int,
-     *   MachineDetectionSpeechEndThreshold?: int,
-     *   MachineDetectionSpeechThreshold?: int,
-     *   MachineDetectionTimeout?: int,
-     *   PreferredCodecs?: string,
-     *   Record?: bool,
-     *   RecordingChannels?: 'mono'|'dual'|RecordingChannels,
-     *   RecordingStatusCallback?: string,
-     *   RecordingStatusCallbackEvent?: string,
-     *   RecordingStatusCallbackMethod?: 'GET'|'POST'|RecordingStatusCallbackMethod,
-     *   RecordingTimeout?: int,
-     *   RecordingTrack?: 'inbound'|'outbound'|'both'|RecordingTrack,
-     *   SendRecordingUrl?: bool,
-     *   SipAuthPassword?: string,
-     *   SipAuthUsername?: string,
-     *   SipRegion?: 'US'|'Europe'|'Canada'|'Australia'|'Middle East'|SipRegion,
-     *   StatusCallback?: string,
-     *   StatusCallbackEvent?: 'initiated'|'ringing'|'answered'|'completed'|StatusCallbackEvent,
-     *   StatusCallbackMethod?: 'GET'|'POST'|CallCallsParams\StatusCallbackMethod,
-     *   Trim?: 'trim-silence'|'do-not-trim'|Trim,
-     *   Url?: string,
-     *   UrlMethod?: 'GET'|'POST'|URLMethod,
+     *   applicationSid: string,
+     *   from: string,
+     *   to: string,
+     *   asyncAmd?: bool,
+     *   asyncAmdStatusCallback?: string,
+     *   asyncAmdStatusCallbackMethod?: 'GET'|'POST'|AsyncAmdStatusCallbackMethod,
+     *   callerID?: string,
+     *   cancelPlaybackOnDetectMessageEnd?: bool,
+     *   cancelPlaybackOnMachineDetection?: bool,
+     *   customHeaders?: list<array{name: string, value: string}>,
+     *   detectionMode?: 'Premium'|'Regular'|DetectionMode,
+     *   fallbackURL?: string,
+     *   machineDetection?: 'Enable'|'Disable'|'DetectMessageEnd'|MachineDetection,
+     *   machineDetectionSilenceTimeout?: int,
+     *   machineDetectionSpeechEndThreshold?: int,
+     *   machineDetectionSpeechThreshold?: int,
+     *   machineDetectionTimeout?: int,
+     *   preferredCodecs?: string,
+     *   record?: bool,
+     *   recordingChannels?: 'mono'|'dual'|RecordingChannels,
+     *   recordingStatusCallback?: string,
+     *   recordingStatusCallbackEvent?: string,
+     *   recordingStatusCallbackMethod?: 'GET'|'POST'|RecordingStatusCallbackMethod,
+     *   recordingTimeout?: int,
+     *   recordingTrack?: 'inbound'|'outbound'|'both'|RecordingTrack,
+     *   sendRecordingURL?: bool,
+     *   sipAuthPassword?: string,
+     *   sipAuthUsername?: string,
+     *   sipRegion?: 'US'|'Europe'|'Canada'|'Australia'|'Middle East'|SipRegion,
+     *   statusCallback?: string,
+     *   statusCallbackEvent?: 'initiated'|'ringing'|'answered'|'completed'|StatusCallbackEvent,
+     *   statusCallbackMethod?: 'GET'|'POST'|CallCallsParams\StatusCallbackMethod,
+     *   trim?: 'trim-silence'|'do-not-trim'|Trim,
+     *   url?: string,
+     *   urlMethod?: 'GET'|'POST'|URLMethod,
      * }|CallCallsParams $params
      *
      * @throws APIException
@@ -226,18 +227,18 @@ final class CallsService implements CallsContract
      * Returns multiple call resouces for an account. This endpoint is eventually consistent.
      *
      * @param array{
-     *   EndTime?: string,
-     *   EndTime_gt?: string,
-     *   EndTime_lt?: string,
-     *   From?: string,
-     *   Page?: int,
-     *   PageSize?: int,
-     *   PageToken?: string,
-     *   StartTime?: string,
-     *   StartTime_gt?: string,
-     *   StartTime_lt?: string,
-     *   Status?: 'canceled'|'completed'|'failed'|'busy'|'no-answer'|Status,
-     *   To?: string,
+     *   endTime?: string,
+     *   endTimeGt?: string,
+     *   endTimeLt?: string,
+     *   from?: string,
+     *   page?: int,
+     *   pageSize?: int,
+     *   pageToken?: string,
+     *   startTime?: string,
+     *   startTimeGt?: string,
+     *   startTimeLt?: string,
+     *   status?: 'canceled'|'completed'|'failed'|'busy'|'no-answer'|Status,
+     *   to?: string,
      * }|CallRetrieveCallsParams $params
      *
      * @throws APIException
@@ -256,7 +257,23 @@ final class CallsService implements CallsContract
         $response = $this->client->request(
             method: 'get',
             path: ['texml/Accounts/%1$s/Calls', $accountSid],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'endTime' => 'EndTime',
+                    'endTimeGt' => 'EndTime_gt',
+                    'endTimeLt' => 'EndTime_lt',
+                    'from' => 'From',
+                    'page' => 'Page',
+                    'pageSize' => 'PageSize',
+                    'pageToken' => 'PageToken',
+                    'startTime' => 'StartTime',
+                    'startTimeGt' => 'StartTime_gt',
+                    'startTimeLt' => 'StartTime_lt',
+                    'status' => 'Status',
+                    'to' => 'To',
+                ],
+            ),
             options: $options,
             convert: CallGetCallsResponse::class,
         );
@@ -270,16 +287,16 @@ final class CallsService implements CallsContract
      * Starts siprec session with specified parameters for call idientified by call_sid.
      *
      * @param array{
-     *   account_sid: string,
-     *   ConnectorName?: string,
-     *   IncludeMetadataCustomHeaders?: bool,
-     *   Name?: string,
-     *   Secure?: bool,
-     *   SessionTimeoutSecs?: int,
-     *   SipTransport?: 'udp'|'tcp'|'tls'|SipTransport,
-     *   StatusCallback?: string,
-     *   StatusCallbackMethod?: 'GET'|'POST'|CallSiprecJsonParams\StatusCallbackMethod,
-     *   Track?: 'both_tracks'|'inbound_track'|'outbound_track'|Track,
+     *   accountSid: string,
+     *   connectorName?: string,
+     *   includeMetadataCustomHeaders?: bool,
+     *   name?: string,
+     *   secure?: bool,
+     *   sessionTimeoutSecs?: int,
+     *   sipTransport?: 'udp'|'tcp'|'tls'|SipTransport,
+     *   statusCallback?: string,
+     *   statusCallbackMethod?: 'GET'|'POST'|CallSiprecJsonParams\StatusCallbackMethod,
+     *   track?: 'both_tracks'|'inbound_track'|'outbound_track'|Track,
      * }|CallSiprecJsonParams $params
      *
      * @throws APIException
@@ -293,8 +310,8 @@ final class CallsService implements CallsContract
             $params,
             $requestOptions,
         );
-        $accountSid = $parsed['account_sid'];
-        unset($parsed['account_sid']);
+        $accountSid = $parsed['accountSid'];
+        unset($parsed['accountSid']);
 
         /** @var BaseResponse<CallSiprecJsonResponse> */
         $response = $this->client->request(
@@ -303,7 +320,7 @@ final class CallsService implements CallsContract
                 'texml/Accounts/%1$s/Calls/%2$s/Siprec.json', $accountSid, $callSid,
             ],
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
-            body: (object) array_diff_key($parsed, ['account_sid']),
+            body: (object) array_diff_key($parsed, ['accountSid']),
             options: $options,
             convert: CallSiprecJsonResponse::class,
         );
@@ -317,14 +334,14 @@ final class CallsService implements CallsContract
      * Starts streaming media from a call to a specific WebSocket address.
      *
      * @param array{
-     *   account_sid: string,
-     *   BidirectionalCodec?: 'PCMU'|'PCMA'|'G722'|BidirectionalCodec,
-     *   BidirectionalMode?: 'mp3'|'rtp'|BidirectionalMode,
-     *   Name?: string,
-     *   StatusCallback?: string,
-     *   StatusCallbackMethod?: 'GET'|'POST'|CallStreamsJsonParams\StatusCallbackMethod,
-     *   Track?: 'inbound_track'|'outbound_track'|'both_tracks'|CallStreamsJsonParams\Track,
-     *   Url?: string,
+     *   accountSid: string,
+     *   bidirectionalCodec?: 'PCMU'|'PCMA'|'G722'|BidirectionalCodec,
+     *   bidirectionalMode?: 'mp3'|'rtp'|BidirectionalMode,
+     *   name?: string,
+     *   statusCallback?: string,
+     *   statusCallbackMethod?: 'GET'|'POST'|CallStreamsJsonParams\StatusCallbackMethod,
+     *   track?: 'inbound_track'|'outbound_track'|'both_tracks'|CallStreamsJsonParams\Track,
+     *   url?: string,
      * }|CallStreamsJsonParams $params
      *
      * @throws APIException
@@ -338,8 +355,8 @@ final class CallsService implements CallsContract
             $params,
             $requestOptions,
         );
-        $accountSid = $parsed['account_sid'];
-        unset($parsed['account_sid']);
+        $accountSid = $parsed['accountSid'];
+        unset($parsed['accountSid']);
 
         /** @var BaseResponse<CallStreamsJsonResponse> */
         $response = $this->client->request(
@@ -348,7 +365,7 @@ final class CallsService implements CallsContract
                 'texml/Accounts/%1$s/Calls/%2$s/Streams.json', $accountSid, $callSid,
             ],
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
-            body: (object) array_diff_key($parsed, ['account_sid']),
+            body: (object) array_diff_key($parsed, ['accountSid']),
             options: $options,
             convert: CallStreamsJsonResponse::class,
         );

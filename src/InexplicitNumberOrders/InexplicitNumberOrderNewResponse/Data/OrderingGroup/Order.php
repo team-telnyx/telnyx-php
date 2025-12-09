@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type OrderShape = array{
- *   number_order_id: string, sub_number_order_ids: list<string>
+ *   numberOrderID: string, subNumberOrderIDs: list<string>
  * }
  */
 final class Order implements BaseModel
@@ -21,23 +21,23 @@ final class Order implements BaseModel
     /**
      * ID of the main number order.
      */
-    #[Required]
-    public string $number_order_id;
+    #[Required('number_order_id')]
+    public string $numberOrderID;
 
     /**
      * Array of sub number order IDs.
      *
-     * @var list<string> $sub_number_order_ids
+     * @var list<string> $subNumberOrderIDs
      */
-    #[Required(list: 'string')]
-    public array $sub_number_order_ids;
+    #[Required('sub_number_order_ids', list: 'string')]
+    public array $subNumberOrderIDs;
 
     /**
      * `new Order()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Order::with(number_order_id: ..., sub_number_order_ids: ...)
+     * Order::with(numberOrderID: ..., subNumberOrderIDs: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -56,16 +56,16 @@ final class Order implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $sub_number_order_ids
+     * @param list<string> $subNumberOrderIDs
      */
     public static function with(
-        string $number_order_id,
-        array $sub_number_order_ids
+        string $numberOrderID,
+        array $subNumberOrderIDs
     ): self {
         $obj = new self;
 
-        $obj['number_order_id'] = $number_order_id;
-        $obj['sub_number_order_ids'] = $sub_number_order_ids;
+        $obj['numberOrderID'] = $numberOrderID;
+        $obj['subNumberOrderIDs'] = $subNumberOrderIDs;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class Order implements BaseModel
     public function withNumberOrderID(string $numberOrderID): self
     {
         $obj = clone $this;
-        $obj['number_order_id'] = $numberOrderID;
+        $obj['numberOrderID'] = $numberOrderID;
 
         return $obj;
     }
@@ -89,7 +89,7 @@ final class Order implements BaseModel
     public function withSubNumberOrderIDs(array $subNumberOrderIDs): self
     {
         $obj = clone $this;
-        $obj['sub_number_order_ids'] = $subNumberOrderIDs;
+        $obj['subNumberOrderIDs'] = $subNumberOrderIDs;
 
         return $obj;
     }

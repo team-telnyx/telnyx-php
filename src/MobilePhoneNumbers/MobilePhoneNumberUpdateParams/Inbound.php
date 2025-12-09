@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type InboundShape = array{interception_app_id?: string|null}
+ * @phpstan-type InboundShape = array{interceptionAppID?: string|null}
  */
 final class Inbound implements BaseModel
 {
@@ -19,8 +19,8 @@ final class Inbound implements BaseModel
     /**
      * The ID of the CallControl or TeXML Application that will intercept inbound calls.
      */
-    #[Optional(nullable: true)]
-    public ?string $interception_app_id;
+    #[Optional('interception_app_id', nullable: true)]
+    public ?string $interceptionAppID;
 
     public function __construct()
     {
@@ -32,11 +32,11 @@ final class Inbound implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $interception_app_id = null): self
+    public static function with(?string $interceptionAppID = null): self
     {
         $obj = new self;
 
-        null !== $interception_app_id && $obj['interception_app_id'] = $interception_app_id;
+        null !== $interceptionAppID && $obj['interceptionAppID'] = $interceptionAppID;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class Inbound implements BaseModel
     public function withInterceptionAppID(?string $interceptionAppID): self
     {
         $obj = clone $this;
-        $obj['interception_app_id'] = $interceptionAppID;
+        $obj['interceptionAppID'] = $interceptionAppID;
 
         return $obj;
     }
