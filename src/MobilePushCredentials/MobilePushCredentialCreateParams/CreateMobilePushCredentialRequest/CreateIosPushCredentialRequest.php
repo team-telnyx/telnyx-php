@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type IosShape = array{
+ * @phpstan-type CreateIosPushCredentialRequestShape = array{
  *   alias: string, certificate: string, privateKey: string, type?: 'ios'
  * }
  */
-final class Ios implements BaseModel
+final class CreateIosPushCredentialRequest implements BaseModel
 {
-    /** @use SdkModel<IosShape> */
+    /** @use SdkModel<CreateIosPushCredentialRequestShape> */
     use SdkModel;
 
     /**
@@ -45,17 +45,22 @@ final class Ios implements BaseModel
     public string $privateKey;
 
     /**
-     * `new Ios()` is missing required properties by the API.
+     * `new CreateIosPushCredentialRequest()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Ios::with(alias: ..., certificate: ..., privateKey: ...)
+     * CreateIosPushCredentialRequest::with(
+     *   alias: ..., certificate: ..., privateKey: ...
+     * )
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Ios)->withAlias(...)->withCertificate(...)->withPrivateKey(...)
+     * (new CreateIosPushCredentialRequest)
+     *   ->withAlias(...)
+     *   ->withCertificate(...)
+     *   ->withPrivateKey(...)
      * ```
      */
     public function __construct()

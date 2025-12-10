@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\Function1;
+namespace Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;

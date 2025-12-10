@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ComparativeShape = array{
+ * @phpstan-type ComparativeLineShape = array{
  *   alias: string,
  *   existingThisMonth: MonthDetail,
  *   name: string,
@@ -18,9 +18,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *   type?: 'comparative',
  * }
  */
-final class Comparative implements BaseModel
+final class ComparativeLine implements BaseModel
 {
-    /** @use SdkModel<ComparativeShape> */
+    /** @use SdkModel<ComparativeLineShape> */
     use SdkModel;
 
     /** @var 'comparative' $type */
@@ -46,11 +46,11 @@ final class Comparative implements BaseModel
     public MonthDetail $newThisMonth;
 
     /**
-     * `new Comparative()` is missing required properties by the API.
+     * `new ComparativeLine()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Comparative::with(
+     * ComparativeLine::with(
      *   alias: ..., existingThisMonth: ..., name: ..., newThisMonth: ...
      * )
      * ```
@@ -58,7 +58,7 @@ final class Comparative implements BaseModel
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Comparative)
+     * (new ComparativeLine)
      *   ->withAlias(...)
      *   ->withExistingThisMonth(...)
      *   ->withName(...)

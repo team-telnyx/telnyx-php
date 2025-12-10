@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type SendDtmfShape = array{
+ * @phpstan-type DtmfToolShape = array{
  *   sendDtmf: array<string,mixed>, type?: 'send_dtmf'
  * }
  */
-final class SendDtmf implements BaseModel
+final class DtmfTool implements BaseModel
 {
-    /** @use SdkModel<SendDtmfShape> */
+    /** @use SdkModel<DtmfToolShape> */
     use SdkModel;
 
     /** @var 'send_dtmf' $type */
@@ -27,17 +27,17 @@ final class SendDtmf implements BaseModel
     public array $sendDtmf;
 
     /**
-     * `new SendDtmf()` is missing required properties by the API.
+     * `new DtmfTool()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * SendDtmf::with(sendDtmf: ...)
+     * DtmfTool::with(sendDtmf: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new SendDtmf)->withSendDtmf(...)
+     * (new DtmfTool)->withSendDtmf(...)
      * ```
      */
     public function __construct()

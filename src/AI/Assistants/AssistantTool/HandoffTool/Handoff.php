@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Assistants\AssistantTool\Handoff;
+namespace Telnyx\AI\Assistants\AssistantTool\HandoffTool;
 
-use Telnyx\AI\Assistants\AssistantTool\Handoff\Handoff\AIAssistant;
-use Telnyx\AI\Assistants\AssistantTool\Handoff\Handoff\VoiceMode;
+use Telnyx\AI\Assistants\AssistantTool\HandoffTool\Handoff\AIAssistant;
+use Telnyx\AI\Assistants\AssistantTool\HandoffTool\Handoff\VoiceMode;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;

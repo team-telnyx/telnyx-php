@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Assistant\Tool;
 
+use Telnyx\AI\Assistants\Assistant\Tool\BookAppointmentTool\BookAppointment;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type BookAppointmentShape = array{
- *   bookAppointment: \Telnyx\AI\Assistants\Assistant\Tool\BookAppointment\BookAppointment,
- *   type?: 'book_appointment',
+ * @phpstan-type BookAppointmentToolShape = array{
+ *   bookAppointment: BookAppointment, type?: 'book_appointment'
  * }
  */
-final class BookAppointment implements BaseModel
+final class BookAppointmentTool implements BaseModel
 {
-    /** @use SdkModel<BookAppointmentShape> */
+    /** @use SdkModel<BookAppointmentToolShape> */
     use SdkModel;
 
     /** @var 'book_appointment' $type */
@@ -24,20 +24,20 @@ final class BookAppointment implements BaseModel
     public string $type = 'book_appointment';
 
     #[Required('book_appointment')]
-    public BookAppointment\BookAppointment $bookAppointment;
+    public BookAppointment $bookAppointment;
 
     /**
-     * `new BookAppointment()` is missing required properties by the API.
+     * `new BookAppointmentTool()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * BookAppointment::with(bookAppointment: ...)
+     * BookAppointmentTool::with(bookAppointment: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new BookAppointment)->withBookAppointment(...)
+     * (new BookAppointmentTool)->withBookAppointment(...)
      * ```
      */
     public function __construct()
@@ -50,16 +50,15 @@ final class BookAppointment implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BookAppointment\BookAppointment|array{
+     * @param BookAppointment|array{
      *   apiKeyRef: string,
      *   eventTypeID: int,
      *   attendeeName?: string|null,
      *   attendeeTimezone?: string|null,
      * } $bookAppointment
      */
-    public static function with(
-        BookAppointment\BookAppointment|array $bookAppointment,
-    ): self {
+    public static function with(BookAppointment|array $bookAppointment): self
+    {
         $self = new self;
 
         $self['bookAppointment'] = $bookAppointment;
@@ -68,7 +67,7 @@ final class BookAppointment implements BaseModel
     }
 
     /**
-     * @param BookAppointment\BookAppointment|array{
+     * @param BookAppointment|array{
      *   apiKeyRef: string,
      *   eventTypeID: int,
      *   attendeeName?: string|null,
@@ -76,7 +75,7 @@ final class BookAppointment implements BaseModel
      * } $bookAppointment
      */
     public function withBookAppointment(
-        BookAppointment\BookAppointment|array $bookAppointment,
+        BookAppointment|array $bookAppointment
     ): self {
         $self = clone $this;
         $self['bookAppointment'] = $bookAppointment;

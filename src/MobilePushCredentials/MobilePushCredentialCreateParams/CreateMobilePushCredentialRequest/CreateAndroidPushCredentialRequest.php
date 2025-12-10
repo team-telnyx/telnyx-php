@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type AndroidShape = array{
+ * @phpstan-type CreateAndroidPushCredentialRequestShape = array{
  *   alias: string, projectAccountJsonFile: array<string,mixed>, type?: 'android'
  * }
  */
-final class Android implements BaseModel
+final class CreateAndroidPushCredentialRequest implements BaseModel
 {
-    /** @use SdkModel<AndroidShape> */
+    /** @use SdkModel<CreateAndroidPushCredentialRequestShape> */
     use SdkModel;
 
     /**
@@ -41,17 +41,21 @@ final class Android implements BaseModel
     public array $projectAccountJsonFile;
 
     /**
-     * `new Android()` is missing required properties by the API.
+     * `new CreateAndroidPushCredentialRequest()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Android::with(alias: ..., projectAccountJsonFile: ...)
+     * CreateAndroidPushCredentialRequest::with(
+     *   alias: ..., projectAccountJsonFile: ...
+     * )
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Android)->withAlias(...)->withProjectAccountJsonFile(...)
+     * (new CreateAndroidPushCredentialRequest)
+     *   ->withAlias(...)
+     *   ->withProjectAccountJsonFile(...)
      * ```
      */
     public function __construct()

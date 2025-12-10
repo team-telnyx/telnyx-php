@@ -4,21 +4,20 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\AssistantTool;
 
-use Telnyx\AI\Assistants\AssistantTool\Refer\Refer\CustomHeader;
-use Telnyx\AI\Assistants\AssistantTool\Refer\Refer\SipHeader;
-use Telnyx\AI\Assistants\AssistantTool\Refer\Refer\Target;
+use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer;
+use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\CustomHeader;
+use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\SipHeader;
+use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\Target;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ReferShape = array{
- *   refer: \Telnyx\AI\Assistants\AssistantTool\Refer\Refer, type?: 'refer'
- * }
+ * @phpstan-type SipReferToolShape = array{refer: Refer, type?: 'refer'}
  */
-final class Refer implements BaseModel
+final class SipReferTool implements BaseModel
 {
-    /** @use SdkModel<ReferShape> */
+    /** @use SdkModel<SipReferToolShape> */
     use SdkModel;
 
     /** @var 'refer' $type */
@@ -26,20 +25,20 @@ final class Refer implements BaseModel
     public string $type = 'refer';
 
     #[Required]
-    public Refer\Refer $refer;
+    public Refer $refer;
 
     /**
-     * `new Refer()` is missing required properties by the API.
+     * `new SipReferTool()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Refer::with(refer: ...)
+     * SipReferTool::with(refer: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Refer)->withRefer(...)
+     * (new SipReferTool)->withRefer(...)
      * ```
      */
     public function __construct()
@@ -52,15 +51,14 @@ final class Refer implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Refer\Refer|array{
+     * @param Refer|array{
      *   targets: list<Target>,
      *   customHeaders?: list<CustomHeader>|null,
      *   sipHeaders?: list<SipHeader>|null,
      * } $refer
      */
-    public static function with(
-        Refer\Refer|array $refer
-    ): self {
+    public static function with(Refer|array $refer): self
+    {
         $self = new self;
 
         $self['refer'] = $refer;
@@ -69,15 +67,14 @@ final class Refer implements BaseModel
     }
 
     /**
-     * @param Refer\Refer|array{
+     * @param Refer|array{
      *   targets: list<Target>,
      *   customHeaders?: list<CustomHeader>|null,
      *   sipHeaders?: list<SipHeader>|null,
      * } $refer
      */
-    public function withRefer(
-        Refer\Refer|array $refer
-    ): self {
+    public function withRefer(Refer|array $refer): self
+    {
         $self = clone $this;
         $self['refer'] = $refer;
 

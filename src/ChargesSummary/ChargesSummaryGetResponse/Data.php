@@ -6,8 +6,8 @@ namespace Telnyx\ChargesSummary\ChargesSummaryGetResponse;
 
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary;
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Adjustment;
-use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\Comparative;
-use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\Simple;
+use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\ComparativeLine;
+use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\SimpleLine;
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Total;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -105,7 +105,7 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Summary|array{
-     *   adjustments: list<Adjustment>, lines: list<Comparative|Simple>
+     *   adjustments: list<Adjustment>, lines: list<ComparativeLine|SimpleLine>
      * } $summary
      * @param Total|array{
      *   credits: string,
@@ -174,7 +174,7 @@ final class Data implements BaseModel
 
     /**
      * @param Summary|array{
-     *   adjustments: list<Adjustment>, lines: list<Comparative|Simple>
+     *   adjustments: list<Adjustment>, lines: list<ComparativeLine|SimpleLine>
      * } $summary
      */
     public function withSummary(Summary|array $summary): self

@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type SimpleShape = array{
+ * @phpstan-type SimpleLineShape = array{
  *   alias: string, amount: string, name: string, quantity: int, type?: 'simple'
  * }
  */
-final class Simple implements BaseModel
+final class SimpleLine implements BaseModel
 {
-    /** @use SdkModel<SimpleShape> */
+    /** @use SdkModel<SimpleLineShape> */
     use SdkModel;
 
     /** @var 'simple' $type */
@@ -47,17 +47,21 @@ final class Simple implements BaseModel
     public int $quantity;
 
     /**
-     * `new Simple()` is missing required properties by the API.
+     * `new SimpleLine()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Simple::with(alias: ..., amount: ..., name: ..., quantity: ...)
+     * SimpleLine::with(alias: ..., amount: ..., name: ..., quantity: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Simple)->withAlias(...)->withAmount(...)->withName(...)->withQuantity(...)
+     * (new SimpleLine)
+     *   ->withAlias(...)
+     *   ->withAmount(...)
+     *   ->withName(...)
+     *   ->withQuantity(...)
      * ```
      */
     public function __construct()

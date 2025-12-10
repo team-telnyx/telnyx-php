@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary;
 
-use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\Comparative;
-use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\Simple;
+use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\ComparativeLine;
+use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\SimpleLine;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
@@ -24,6 +24,8 @@ final class Line implements ConverterSource
      */
     public static function variants(): array
     {
-        return ['comparative' => Comparative::class, 'simple' => Simple::class];
+        return [
+            'comparative' => ComparativeLine::class, 'simple' => SimpleLine::class,
+        ];
     }
 }

@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\Assistant\Tool;
-use Telnyx\AI\Assistants\Assistant\Tool\BookAppointment;
-use Telnyx\AI\Assistants\Assistant\Tool\CheckAvailability;
+use Telnyx\AI\Assistants\Assistant\Tool\BookAppointmentTool;
+use Telnyx\AI\Assistants\Assistant\Tool\BookAppointmentTool\BookAppointment;
+use Telnyx\AI\Assistants\Assistant\Tool\CheckAvailabilityTool;
+use Telnyx\AI\Assistants\Assistant\Tool\CheckAvailabilityTool\CheckAvailability;
 use Telnyx\AI\Assistants\WebhookTool\Type;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
@@ -19,7 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   instructions?: string|null,
  *   model?: string|null,
  *   openaiAPIKeyRef?: string|null,
- *   tools?: list<BookAppointment|CheckAvailability|WebhookTool|HangupTool|TransferTool|RetrievalTool>|null,
+ *   tools?: list<BookAppointmentTool|CheckAvailabilityTool|WebhookTool|HangupTool|TransferTool|RetrievalTool>|null,
  * }
  */
 final class Assistant implements BaseModel
@@ -48,7 +50,7 @@ final class Assistant implements BaseModel
     /**
      * The tools that the voice assistant can use.
      *
-     * @var list<BookAppointment|CheckAvailability|WebhookTool|HangupTool|TransferTool|RetrievalTool>|null $tools
+     * @var list<BookAppointmentTool|CheckAvailabilityTool|WebhookTool|HangupTool|TransferTool|RetrievalTool>|null $tools
      */
     #[Optional(list: Tool::class)]
     public ?array $tools;
@@ -63,12 +65,10 @@ final class Assistant implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<BookAppointment|array{
-     *   bookAppointment: BookAppointment\BookAppointment,
-     *   type?: 'book_appointment',
-     * }|CheckAvailability|array{
-     *   checkAvailability: CheckAvailability\CheckAvailability,
-     *   type?: 'check_availability',
+     * @param list<BookAppointmentTool|array{
+     *   bookAppointment: BookAppointment, type?: 'book_appointment'
+     * }|CheckAvailabilityTool|array{
+     *   checkAvailability: CheckAvailability, type?: 'check_availability'
      * }|WebhookTool|array{
      *   type: value-of<Type>, webhook: InferenceEmbeddingWebhookToolParams
      * }|HangupTool|array{
@@ -134,12 +134,10 @@ final class Assistant implements BaseModel
     /**
      * The tools that the voice assistant can use.
      *
-     * @param list<BookAppointment|array{
-     *   bookAppointment: BookAppointment\BookAppointment,
-     *   type?: 'book_appointment',
-     * }|CheckAvailability|array{
-     *   checkAvailability: CheckAvailability\CheckAvailability,
-     *   type?: 'check_availability',
+     * @param list<BookAppointmentTool|array{
+     *   bookAppointment: BookAppointment, type?: 'book_appointment'
+     * }|CheckAvailabilityTool|array{
+     *   checkAvailability: CheckAvailability, type?: 'check_availability'
      * }|WebhookTool|array{
      *   type: value-of<Type>, webhook: InferenceEmbeddingWebhookToolParams
      * }|HangupTool|array{

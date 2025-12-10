@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\Versions;
 
 use Telnyx\AI\Assistants\AssistantTool;
-use Telnyx\AI\Assistants\AssistantTool\Handoff;
-use Telnyx\AI\Assistants\AssistantTool\Refer;
-use Telnyx\AI\Assistants\AssistantTool\SendDtmf;
+use Telnyx\AI\Assistants\AssistantTool\DtmfTool;
+use Telnyx\AI\Assistants\AssistantTool\HandoffTool;
+use Telnyx\AI\Assistants\AssistantTool\HandoffTool\Handoff;
+use Telnyx\AI\Assistants\AssistantTool\SipReferTool;
+use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer;
 use Telnyx\AI\Assistants\EnabledFeatures;
 use Telnyx\AI\Assistants\HangupTool;
 use Telnyx\AI\Assistants\HangupToolParams;
@@ -48,7 +50,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   name?: string|null,
  *   privacySettings?: PrivacySettings|null,
  *   telephonySettings?: TelephonySettings|null,
- *   tools?: list<WebhookTool|RetrievalTool|Handoff|HangupTool|TransferTool|Refer|SendDtmf>|null,
+ *   tools?: list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool>|null,
  *   transcription?: TranscriptionSettings|null,
  *   voiceSettings?: VoiceSettings|null,
  * }
@@ -121,7 +123,7 @@ final class UpdateAssistant implements BaseModel
     /**
      * The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
      *
-     * @var list<WebhookTool|RetrievalTool|Handoff|HangupTool|TransferTool|Refer|SendDtmf>|null $tools
+     * @var list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool>|null $tools
      */
     #[Optional(list: AssistantTool::class)]
     public ?array $tools;
@@ -158,17 +160,15 @@ final class UpdateAssistant implements BaseModel
      * }|RetrievalTool|array{
      *   retrieval: InferenceEmbeddingBucketIDs,
      *   type: value-of<RetrievalTool\Type>,
-     * }|Handoff|array{
-     *   handoff: Handoff\Handoff, type?: 'handoff'
-     * }|HangupTool|array{
+     * }|HandoffTool|array{handoff: Handoff, type?: 'handoff'}|HangupTool|array{
      *   hangup: HangupToolParams,
      *   type: value-of<HangupTool\Type>,
      * }|TransferTool|array{
      *   transfer: InferenceEmbeddingTransferToolParams,
      *   type: value-of<TransferTool\Type>,
-     * }|Refer|array{
-     *   refer: Refer\Refer, type?: 'refer'
-     * }|SendDtmf|array{sendDtmf: array<string,mixed>, type?: 'send_dtmf'}> $tools
+     * }|SipReferTool|array{refer: Refer, type?: 'refer'}|DtmfTool|array{
+     *   sendDtmf: array<string,mixed>, type?: 'send_dtmf'
+     * }> $tools
      * @param TranscriptionSettings|array{
      *   language?: string|null,
      *   model?: value-of<Model>|null,
@@ -379,17 +379,15 @@ final class UpdateAssistant implements BaseModel
      * }|RetrievalTool|array{
      *   retrieval: InferenceEmbeddingBucketIDs,
      *   type: value-of<RetrievalTool\Type>,
-     * }|Handoff|array{
-     *   handoff: Handoff\Handoff, type?: 'handoff'
-     * }|HangupTool|array{
+     * }|HandoffTool|array{handoff: Handoff, type?: 'handoff'}|HangupTool|array{
      *   hangup: HangupToolParams,
      *   type: value-of<HangupTool\Type>,
      * }|TransferTool|array{
      *   transfer: InferenceEmbeddingTransferToolParams,
      *   type: value-of<TransferTool\Type>,
-     * }|Refer|array{
-     *   refer: Refer\Refer, type?: 'refer'
-     * }|SendDtmf|array{sendDtmf: array<string,mixed>, type?: 'send_dtmf'}> $tools
+     * }|SipReferTool|array{refer: Refer, type?: 'refer'}|DtmfTool|array{
+     *   sendDtmf: array<string,mixed>, type?: 'send_dtmf'
+     * }> $tools
      */
     public function withTools(array $tools): self
     {

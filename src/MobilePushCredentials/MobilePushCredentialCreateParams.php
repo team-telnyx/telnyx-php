@@ -9,8 +9,8 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest;
-use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest\Android;
-use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest\Ios;
+use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest\CreateAndroidPushCredentialRequest;
+use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest\CreateIosPushCredentialRequest;
 
 /**
  * Creates a new mobile push credential.
@@ -18,9 +18,9 @@ use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePu
  * @see Telnyx\Services\MobilePushCredentialsService::create()
  *
  * @phpstan-type MobilePushCredentialCreateParamsShape = array{
- *   createMobilePushCredentialRequest: Ios|array{
+ *   createMobilePushCredentialRequest: CreateIosPushCredentialRequest|array{
  *     alias: string, certificate: string, privateKey: string, type?: 'ios'
- *   }|Android|array{
+ *   }|CreateAndroidPushCredentialRequest|array{
  *     alias: string, projectAccountJsonFile: array<string,mixed>, type?: 'android'
  *   },
  * }
@@ -32,7 +32,7 @@ final class MobilePushCredentialCreateParams implements BaseModel
     use SdkParams;
 
     #[Required(union: CreateMobilePushCredentialRequest::class)]
-    public Ios|Android $createMobilePushCredentialRequest;
+    public CreateIosPushCredentialRequest|CreateAndroidPushCredentialRequest $createMobilePushCredentialRequest;
 
     /**
      * `new MobilePushCredentialCreateParams()` is missing required properties by the API.
@@ -59,14 +59,14 @@ final class MobilePushCredentialCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Ios|array{
+     * @param CreateIosPushCredentialRequest|array{
      *   alias: string, certificate: string, privateKey: string, type?: 'ios'
-     * }|Android|array{
+     * }|CreateAndroidPushCredentialRequest|array{
      *   alias: string, projectAccountJsonFile: array<string,mixed>, type?: 'android'
      * } $createMobilePushCredentialRequest
      */
     public static function with(
-        Ios|array|Android $createMobilePushCredentialRequest
+        CreateIosPushCredentialRequest|array|CreateAndroidPushCredentialRequest $createMobilePushCredentialRequest,
     ): self {
         $self = new self;
 
@@ -76,14 +76,14 @@ final class MobilePushCredentialCreateParams implements BaseModel
     }
 
     /**
-     * @param Ios|array{
+     * @param CreateIosPushCredentialRequest|array{
      *   alias: string, certificate: string, privateKey: string, type?: 'ios'
-     * }|Android|array{
+     * }|CreateAndroidPushCredentialRequest|array{
      *   alias: string, projectAccountJsonFile: array<string,mixed>, type?: 'android'
      * } $createMobilePushCredentialRequest
      */
     public function withCreateMobilePushCredentialRequest(
-        Ios|array|Android $createMobilePushCredentialRequest
+        CreateIosPushCredentialRequest|array|CreateAndroidPushCredentialRequest $createMobilePushCredentialRequest,
     ): self {
         $self = clone $this;
         $self['createMobilePushCredentialRequest'] = $createMobilePushCredentialRequest;

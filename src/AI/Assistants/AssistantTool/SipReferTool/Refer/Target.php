@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Assistants\AssistantTool\Refer\Refer;
+namespace Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;

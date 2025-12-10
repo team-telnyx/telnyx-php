@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Assistants\AssistantTool\Refer\Refer\SipHeader;
+namespace Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\SipHeader;
 
 enum Name: string
 {

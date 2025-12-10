@@ -2,25 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Assistants\AssistantTool\Refer\Refer;
+namespace Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer;
 
-use Telnyx\AI\Assistants\AssistantTool\Refer\Refer\SipHeader\Name;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type SipHeaderShape = array{
- *   name?: value-of<Name>|null, value?: string|null
- * }
+ * @phpstan-type CustomHeaderShape = array{name?: string|null, value?: string|null}
  */
-final class SipHeader implements BaseModel
+final class CustomHeader implements BaseModel
 {
-    /** @use SdkModel<SipHeaderShape> */
+    /** @use SdkModel<CustomHeaderShape> */
     use SdkModel;
 
-    /** @var value-of<Name>|null $name */
-    #[Optional(enum: Name::class)]
+    #[Optional]
     public ?string $name;
 
     /**
@@ -38,13 +34,9 @@ final class SipHeader implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param Name|value-of<Name> $name
      */
-    public static function with(
-        Name|string|null $name = null,
-        ?string $value = null
-    ): self {
+    public static function with(?string $name = null, ?string $value = null): self
+    {
         $self = new self;
 
         null !== $name && $self['name'] = $name;
@@ -53,10 +45,7 @@ final class SipHeader implements BaseModel
         return $self;
     }
 
-    /**
-     * @param Name|value-of<Name> $name
-     */
-    public function withName(Name|string $name): self
+    public function withName(string $name): self
     {
         $self = clone $this;
         $self['name'] = $name;
