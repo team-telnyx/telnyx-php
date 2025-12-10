@@ -12,7 +12,6 @@ use Telnyx\Core\Conversion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 use Telnyx\Core\Conversion\ListOf;
-use Telnyx\Core\Conversion\MapOf;
 use Telnyx\Core\Util;
 
 /**
@@ -33,7 +32,7 @@ final class DefaultFlatPaginationTopLevelArray implements BaseModel, BasePage
     use SdkPage;
 
     /** @var list<TItem>|null $items */
-    #[Optional(list: new MapOf('mixed'))]
+    #[Optional(list: 'mixed')]
     public ?array $items;
 
     /**
@@ -61,17 +60,8 @@ final class DefaultFlatPaginationTopLevelArray implements BaseModel, BasePage
             return;
         }
 
-        // @phpstan-ignore-next-line argument.type
-        self::__unserialize($this->parsedBody);
-
-        if ($this->offsetGet('items')) {
-            $acc = Conversion::coerce(
-                new ListOf($convert),
-                value: $this->offsetGet('items')
-            );
-            // @phpstan-ignore-next-line
-            $this->offsetSet('items', $acc);
-        }
+        // @phpstan-ignore-next-line assign.propertyType
+        $this->items = Conversion::coerce(new ListOf($convert), value: $parsedBody);
     }
 
     /** @return list<TItem> */
@@ -95,6 +85,7 @@ final class DefaultFlatPaginationTopLevelArray implements BaseModel, BasePage
      *   RequestOptions,
      * }|null
      */
+    // @phpstan-ignore-next-line return.unusedType
     public function nextRequest(): ?array
     {
         /** @var int */

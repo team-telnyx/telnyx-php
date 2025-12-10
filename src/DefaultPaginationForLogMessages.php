@@ -12,7 +12,6 @@ use Telnyx\Core\Conversion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 use Telnyx\Core\Conversion\ListOf;
-use Telnyx\Core\Conversion\MapOf;
 use Telnyx\DefaultPaginationForLogMessages\Meta;
 
 /**
@@ -33,7 +32,7 @@ final class DefaultPaginationForLogMessages implements BaseModel, BasePage
     use SdkPage;
 
     /** @var list<TItem>|null $logMessages */
-    #[Optional('log_messages', list: new MapOf('mixed'))]
+    #[Optional(list: 'mixed')]
     public ?array $logMessages;
 
     #[Optional]
@@ -67,13 +66,10 @@ final class DefaultPaginationForLogMessages implements BaseModel, BasePage
         // @phpstan-ignore-next-line argument.type
         self::__unserialize($this->parsedBody);
 
-        if ($this->offsetGet('logMessages')) {
-            $acc = Conversion::coerce(
-                new ListOf($convert),
-                value: $this->offsetGet('logMessages')
-            );
+        if (is_array($items = $this->offsetGet('logMessages'))) {
+            $parsed = Conversion::coerce(new ListOf($convert), value: $items);
             // @phpstan-ignore-next-line
-            $this->offsetSet('logMessages', $acc);
+            $this->offsetSet('logMessages', value: $parsed);
         }
     }
 

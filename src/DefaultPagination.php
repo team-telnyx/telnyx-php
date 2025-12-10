@@ -12,7 +12,6 @@ use Telnyx\Core\Conversion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 use Telnyx\Core\Conversion\ListOf;
-use Telnyx\Core\Conversion\MapOf;
 use Telnyx\DefaultPagination\Meta;
 
 /**
@@ -33,7 +32,7 @@ final class DefaultPagination implements BaseModel, BasePage
     use SdkPage;
 
     /** @var list<TItem>|null $data */
-    #[Optional(list: new MapOf('mixed'))]
+    #[Optional(list: 'mixed')]
     public ?array $data;
 
     #[Optional]
@@ -67,13 +66,10 @@ final class DefaultPagination implements BaseModel, BasePage
         // @phpstan-ignore-next-line argument.type
         self::__unserialize($this->parsedBody);
 
-        if ($this->offsetGet('data')) {
-            $acc = Conversion::coerce(
-                new ListOf($convert),
-                value: $this->offsetGet('data')
-            );
+        if (is_array($items = $this->offsetGet('data'))) {
+            $parsed = Conversion::coerce(new ListOf($convert), value: $items);
             // @phpstan-ignore-next-line
-            $this->offsetSet('data', $acc);
+            $this->offsetSet('data', value: $parsed);
         }
     }
 

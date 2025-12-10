@@ -7,6 +7,7 @@ namespace Telnyx;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Discovery\Psr18ClientDiscovery;
 use Telnyx\Core\BaseClient;
+use Telnyx\Core\Util;
 use Telnyx\Services\AccessIPAddressService;
 use Telnyx\Services\AccessIPRangesService;
 use Telnyx\Services\ActionsService;
@@ -963,9 +964,9 @@ class Client extends BaseClient
                 'User-Agent' => sprintf('telnyx/PHP %s', '0.0.1'),
                 'X-Stainless-Lang' => 'php',
                 'X-Stainless-Package-Version' => '0.0.1',
-                'X-Stainless-OS' => $this->getNormalizedOS(),
-                'X-Stainless-Arch' => $this->getNormalizedArchitecture(),
-                'X-Stainless-Runtime' => 'php',
+                'X-Stainless-Arch' => Util::machtype(),
+                'X-Stainless-OS' => Util::ostype(),
+                'X-Stainless-Runtime' => php_sapi_name(),
                 'X-Stainless-Runtime-Version' => phpversion(),
             ],
             // x-release-please-end
