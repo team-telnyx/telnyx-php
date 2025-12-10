@@ -7,7 +7,7 @@ namespace Telnyx\AI\Clusters;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\PhoneNumberAssignmentByProfile\TaskStatus;
+use Telnyx\Messaging10dlc\PhoneNumberAssignmentByProfile\TaskStatus;
 
 /**
  * @phpstan-type ClusterListResponseShape = array{
