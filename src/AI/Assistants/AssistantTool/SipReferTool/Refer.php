@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Assistants\AssistantTool\Refer;
+namespace Telnyx\AI\Assistants\AssistantTool\SipReferTool;
 
-use Telnyx\AI\Assistants\AssistantTool\Refer\Refer\CustomHeader;
-use Telnyx\AI\Assistants\AssistantTool\Refer\Refer\SipHeader;
-use Telnyx\AI\Assistants\AssistantTool\Refer\Refer\SipHeader\Name;
-use Telnyx\AI\Assistants\AssistantTool\Refer\Refer\Target;
+use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\CustomHeader;
+use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\SipHeader;
+use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\SipHeader\Name;
+use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\Target;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;

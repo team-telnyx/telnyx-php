@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Assistants\AssistantTool\Handoff\Handoff;
+namespace Telnyx\AI\Assistants\AssistantTool\HandoffTool\Handoff;
 
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;

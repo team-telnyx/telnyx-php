@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Chat\ChatCreateCompletionParams;
 
-use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\Function1;
+use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\Retrieval;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
@@ -24,6 +24,9 @@ final class Tool implements ConverterSource
      */
     public static function variants(): array
     {
-        return ['function' => Function1::class, 'retrieval' => Retrieval::class];
+        return [
+            'function' => ChatCompletionToolParam::class,
+            'retrieval' => Retrieval::class,
+        ];
     }
 }

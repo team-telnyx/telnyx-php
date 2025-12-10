@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\AI\Assistants\AssistantTool\Handoff;
-use Telnyx\AI\Assistants\AssistantTool\Refer;
-use Telnyx\AI\Assistants\AssistantTool\SendDtmf;
+use Telnyx\AI\Assistants\AssistantTool\DtmfTool;
+use Telnyx\AI\Assistants\AssistantTool\HandoffTool;
+use Telnyx\AI\Assistants\AssistantTool\SipReferTool;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
@@ -31,11 +31,11 @@ final class AssistantTool implements ConverterSource
         return [
             'webhook' => WebhookTool::class,
             'retrieval' => RetrievalTool::class,
-            'handoff' => Handoff::class,
+            'handoff' => HandoffTool::class,
             'hangup' => HangupTool::class,
             'transfer' => TransferTool::class,
-            'refer' => Refer::class,
-            'send_dtmf' => SendDtmf::class,
+            'refer' => SipReferTool::class,
+            'send_dtmf' => DtmfTool::class,
         ];
     }
 }

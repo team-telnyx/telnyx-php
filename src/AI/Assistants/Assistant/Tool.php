@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Assistant;
 
-use Telnyx\AI\Assistants\Assistant\Tool\BookAppointment;
-use Telnyx\AI\Assistants\Assistant\Tool\CheckAvailability;
+use Telnyx\AI\Assistants\Assistant\Tool\BookAppointmentTool;
+use Telnyx\AI\Assistants\Assistant\Tool\CheckAvailabilityTool;
 use Telnyx\AI\Assistants\HangupTool;
 use Telnyx\AI\Assistants\RetrievalTool;
 use Telnyx\AI\Assistants\TransferTool;
@@ -29,8 +29,8 @@ final class Tool implements ConverterSource
     public static function variants(): array
     {
         return [
-            'book_appointment' => BookAppointment::class,
-            'check_availability' => CheckAvailability::class,
+            'book_appointment' => BookAppointmentTool::class,
+            'check_availability' => CheckAvailabilityTool::class,
             'webhook' => WebhookTool::class,
             'hangup' => HangupTool::class,
             'transfer' => TransferTool::class,

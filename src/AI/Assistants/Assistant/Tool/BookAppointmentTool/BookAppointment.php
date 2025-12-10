@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Assistants\Assistant\Tool\BookAppointment;
+namespace Telnyx\AI\Assistants\Assistant\Tool\BookAppointmentTool;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;

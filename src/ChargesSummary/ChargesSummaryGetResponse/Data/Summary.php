@@ -6,8 +6,8 @@ namespace Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data;
 
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Adjustment;
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line;
-use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\Comparative;
-use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\Simple;
+use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\ComparativeLine;
+use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\SimpleLine;
 use Telnyx\ChargesSummary\MonthDetail;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type SummaryShape = array{
- *   adjustments: list<Adjustment>, lines: list<Comparative|Simple>
+ *   adjustments: list<Adjustment>, lines: list<ComparativeLine|SimpleLine>
  * }
  */
 final class Summary implements BaseModel
@@ -34,7 +34,7 @@ final class Summary implements BaseModel
     /**
      * List of charge summary lines.
      *
-     * @var list<Comparative|Simple> $lines
+     * @var list<ComparativeLine|SimpleLine> $lines
      */
     #[Required(list: Line::class)]
     public array $lines;
@@ -66,13 +66,13 @@ final class Summary implements BaseModel
      * @param list<Adjustment|array{
      *   amount: string, description: string, eventDate: string
      * }> $adjustments
-     * @param list<Comparative|array{
+     * @param list<ComparativeLine|array{
      *   alias: string,
      *   existingThisMonth: MonthDetail,
      *   name: string,
      *   newThisMonth: MonthDetail,
      *   type?: 'comparative',
-     * }|Simple|array{
+     * }|SimpleLine|array{
      *   alias: string, amount: string, name: string, quantity: int, type?: 'simple'
      * }> $lines
      */
@@ -104,13 +104,13 @@ final class Summary implements BaseModel
     /**
      * List of charge summary lines.
      *
-     * @param list<Comparative|array{
+     * @param list<ComparativeLine|array{
      *   alias: string,
      *   existingThisMonth: MonthDetail,
      *   name: string,
      *   newThisMonth: MonthDetail,
      *   type?: 'comparative',
-     * }|Simple|array{
+     * }|SimpleLine|array{
      *   alias: string, amount: string, name: string, quantity: int, type?: 'simple'
      * }> $lines
      */

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Calls\Actions;
 
 use Telnyx\AI\Assistants\Assistant;
-use Telnyx\AI\Assistants\Assistant\Tool\BookAppointment;
-use Telnyx\AI\Assistants\Assistant\Tool\CheckAvailability;
+use Telnyx\AI\Assistants\Assistant\Tool\BookAppointmentTool;
+use Telnyx\AI\Assistants\Assistant\Tool\CheckAvailabilityTool;
 use Telnyx\AI\Assistants\HangupTool;
 use Telnyx\AI\Assistants\RetrievalTool;
 use Telnyx\AI\Assistants\TransferTool;
@@ -41,7 +41,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *     instructions?: string|null,
  *     model?: string|null,
  *     openaiAPIKeyRef?: string|null,
- *     tools?: list<BookAppointment|CheckAvailability|WebhookTool|HangupTool|TransferTool|RetrievalTool>|null,
+ *     tools?: list<BookAppointmentTool|CheckAvailabilityTool|WebhookTool|HangupTool|TransferTool|RetrievalTool>|null,
  *   },
  *   clientState?: string,
  *   commandID?: string,
@@ -197,7 +197,7 @@ final class ActionGatherUsingAIParams implements BaseModel
      *   instructions?: string|null,
      *   model?: string|null,
      *   openaiAPIKeyRef?: string|null,
-     *   tools?: list<BookAppointment|CheckAvailability|WebhookTool|HangupTool|TransferTool|RetrievalTool>|null,
+     *   tools?: list<BookAppointmentTool|CheckAvailabilityTool|WebhookTool|HangupTool|TransferTool|RetrievalTool>|null,
      * } $assistant
      * @param InterruptionSettings|array{enable?: bool|null} $interruptionSettings
      * @param GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage> $language
@@ -271,7 +271,7 @@ final class ActionGatherUsingAIParams implements BaseModel
      *   instructions?: string|null,
      *   model?: string|null,
      *   openaiAPIKeyRef?: string|null,
-     *   tools?: list<BookAppointment|CheckAvailability|WebhookTool|HangupTool|TransferTool|RetrievalTool>|null,
+     *   tools?: list<BookAppointmentTool|CheckAvailabilityTool|WebhookTool|HangupTool|TransferTool|RetrievalTool>|null,
      * } $assistant
      */
     public function withAssistant(Assistant|array $assistant): self

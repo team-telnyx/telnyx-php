@@ -7,8 +7,8 @@ namespace Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
-use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest\Android;
-use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest\Ios;
+use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest\CreateAndroidPushCredentialRequest;
+use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest\CreateIosPushCredentialRequest;
 
 final class CreateMobilePushCredentialRequest implements ConverterSource
 {
@@ -24,6 +24,9 @@ final class CreateMobilePushCredentialRequest implements ConverterSource
      */
     public static function variants(): array
     {
-        return ['ios' => Ios::class, 'android' => Android::class];
+        return [
+            'ios' => CreateIosPushCredentialRequest::class,
+            'android' => CreateAndroidPushCredentialRequest::class,
+        ];
     }
 }
