@@ -12,6 +12,7 @@ use Telnyx\Number10dlc\Brand\BrandGetSMSOtpStatusResponse;
 use Telnyx\Number10dlc\Brand\BrandIdentityStatus;
 use Telnyx\Number10dlc\Brand\BrandListParams\Sort;
 use Telnyx\Number10dlc\Brand\BrandListResponse;
+use Telnyx\Number10dlc\Brand\BrandTriggerSMSOtpResponse;
 use Telnyx\Number10dlc\Brand\EntityType;
 use Telnyx\Number10dlc\Brand\StockExchange;
 use Telnyx\Number10dlc\Brand\TelnyxBrand;
@@ -230,4 +231,34 @@ interface BrandContract
         string $brandID,
         ?RequestOptions $requestOptions = null
     ): TelnyxBrand;
+
+    /**
+     * @api
+     *
+     * @param string $brandID The Brand ID for which to trigger the OTP
+     * @param string $pinSMS SMS message template to send the OTP. Must include `@OTP_PIN@` placeholder which will be replaced with the actual PIN
+     * @param string $successSMS SMS message to send upon successful OTP verification
+     *
+     * @throws APIException
+     */
+    public function triggerSMSOtp(
+        string $brandID,
+        string $pinSMS,
+        string $successSMS,
+        ?RequestOptions $requestOptions = null,
+    ): BrandTriggerSMSOtpResponse;
+
+    /**
+     * @api
+     *
+     * @param string $brandID The Brand ID for which to verify the OTP
+     * @param string $otpPin The OTP PIN received via SMS
+     *
+     * @throws APIException
+     */
+    public function verifySMSOtp(
+        string $brandID,
+        string $otpPin,
+        ?RequestOptions $requestOptions = null
+    ): mixed;
 }

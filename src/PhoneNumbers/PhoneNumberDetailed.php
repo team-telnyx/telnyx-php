@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\PhoneNumbers;
 
 use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\PhoneNumberDetailed\EmergencyStatus;
@@ -15,7 +16,17 @@ use Telnyx\PhoneNumbers\PhoneNumberDetailed\Status;
 
 /**
  * @phpstan-type PhoneNumberDetailedShape = array{
- *   id?: string|null,
+ *   id: string,
+ *   countryISOAlpha2: string,
+ *   createdAt: \DateTimeInterface,
+ *   deletionLockEnabled: bool,
+ *   externalPin: string|null,
+ *   phoneNumber: string,
+ *   phoneNumberType: value-of<PhoneNumberType>,
+ *   purchasedAt: string,
+ *   recordType: string,
+ *   status: value-of<Status>,
+ *   tags: list<string>,
  *   billingGroupID?: string|null,
  *   callForwardingEnabled?: bool|null,
  *   callRecordingEnabled?: bool|null,
@@ -23,25 +34,15 @@ use Telnyx\PhoneNumbers\PhoneNumberDetailed\Status;
  *   cnamListingEnabled?: bool|null,
  *   connectionID?: string|null,
  *   connectionName?: string|null,
- *   countryISOAlpha2?: string|null,
- *   createdAt?: string|null,
  *   customerReference?: string|null,
- *   deletionLockEnabled?: bool|null,
  *   emergencyAddressID?: string|null,
  *   emergencyEnabled?: bool|null,
  *   emergencyStatus?: value-of<EmergencyStatus>|null,
- *   externalPin?: string|null,
  *   inboundCallScreening?: value-of<InboundCallScreening>|null,
  *   messagingProfileID?: string|null,
  *   messagingProfileName?: string|null,
- *   phoneNumber?: string|null,
- *   phoneNumberType?: value-of<PhoneNumberType>|null,
- *   purchasedAt?: string|null,
- *   recordType?: string|null,
  *   sourceType?: value-of<SourceType>|null,
- *   status?: value-of<Status>|null,
  *   t38FaxGatewayEnabled?: bool|null,
- *   tags?: list<string>|null,
  * }
  */
 final class PhoneNumberDetailed implements BaseModel
@@ -52,13 +53,80 @@ final class PhoneNumberDetailed implements BaseModel
     /**
      * Identifies the resource.
      */
-    #[Optional]
-    public ?string $id;
+    #[Required]
+    public string $id;
+
+    /**
+     * The ISO 3166-1 alpha-2 country code of the phone number.
+     */
+    #[Required('country_iso_alpha2')]
+    public string $countryISOAlpha2;
+
+    /**
+     * ISO 8601 formatted date indicating when the resource was created.
+     */
+    #[Required('created_at')]
+    public \DateTimeInterface $createdAt;
+
+    /**
+     * Indicates whether deletion lock is enabled for this number. When enabled, this prevents the phone number from being deleted via the API or Telnyx portal.
+     */
+    #[Required('deletion_lock_enabled')]
+    public bool $deletionLockEnabled;
+
+    /**
+     * If someone attempts to port your phone number away from Telnyx and your phone number has an external PIN set, Telnyx will attempt to verify that you provided the correct external PIN to the winning carrier. Note that not all carriers cooperate with this security mechanism.
+     */
+    #[Required('external_pin')]
+    public ?string $externalPin;
+
+    /**
+     * The +E.164-formatted phone number associated with this record.
+     */
+    #[Required('phone_number')]
+    public string $phoneNumber;
+
+    /**
+     * The phone number's type.
+     * Note: For numbers purchased prior to July 2023 or when fetching a number's details immediately after a purchase completes, the legacy values `tollfree`, `shortcode` or `longcode` may be returned instead.
+     *
+     * @var value-of<PhoneNumberType> $phoneNumberType
+     */
+    #[Required('phone_number_type', enum: PhoneNumberType::class)]
+    public string $phoneNumberType;
+
+    /**
+     * ISO 8601 formatted date indicating when the resource was purchased.
+     */
+    #[Required('purchased_at')]
+    public string $purchasedAt;
+
+    /**
+     * Identifies the type of the resource.
+     */
+    #[Required('record_type')]
+    public string $recordType;
+
+    /**
+     * The phone number's current status.
+     *
+     * @var value-of<Status> $status
+     */
+    #[Required(enum: Status::class)]
+    public string $status;
+
+    /**
+     * A list of user-assigned tags to help manage the phone number.
+     *
+     * @var list<string> $tags
+     */
+    #[Required(list: 'string')]
+    public array $tags;
 
     /**
      * Identifies the billing group associated with the phone number.
      */
-    #[Optional('billing_group_id')]
+    #[Optional('billing_group_id', nullable: true)]
     public ?string $billingGroupID;
 
     /**
@@ -88,43 +156,25 @@ final class PhoneNumberDetailed implements BaseModel
     /**
      * Identifies the connection associated with the phone number.
      */
-    #[Optional('connection_id')]
+    #[Optional('connection_id', nullable: true)]
     public ?string $connectionID;
 
     /**
      * The user-assigned name of the connection to be associated with this phone number.
      */
-    #[Optional('connection_name')]
+    #[Optional('connection_name', nullable: true)]
     public ?string $connectionName;
-
-    /**
-     * The ISO 3166-1 alpha-2 country code of the phone number.
-     */
-    #[Optional('country_iso_alpha2')]
-    public ?string $countryISOAlpha2;
-
-    /**
-     * ISO 8601 formatted date indicating when the resource was created.
-     */
-    #[Optional('created_at')]
-    public ?string $createdAt;
 
     /**
      * A customer reference string for customer look ups.
      */
-    #[Optional('customer_reference')]
+    #[Optional('customer_reference', nullable: true)]
     public ?string $customerReference;
-
-    /**
-     * Indicates whether deletion lock is enabled for this number. When enabled, this prevents the phone number from being deleted via the API or Telnyx portal.
-     */
-    #[Optional('deletion_lock_enabled')]
-    public ?bool $deletionLockEnabled;
 
     /**
      * Identifies the emergency address associated with the phone number.
      */
-    #[Optional('emergency_address_id')]
+    #[Optional('emergency_address_id', nullable: true)]
     public ?string $emergencyAddressID;
 
     /**
@@ -142,12 +192,6 @@ final class PhoneNumberDetailed implements BaseModel
     public ?string $emergencyStatus;
 
     /**
-     * If someone attempts to port your phone number away from Telnyx and your phone number has an external PIN set, Telnyx will attempt to verify that you provided the correct external PIN to the winning carrier. Note that not all carriers cooperate with this security mechanism.
-     */
-    #[Optional('external_pin')]
-    public ?string $externalPin;
-
-    /**
      * The inbound_call_screening setting is a phone number configuration option variable that allows users to configure their settings to block or flag fraudulent calls. It can be set to disabled, reject_calls, or flag_calls. This feature has an additional per-number monthly cost associated with it.
      *
      * @var value-of<InboundCallScreening>|null $inboundCallScreening
@@ -158,41 +202,14 @@ final class PhoneNumberDetailed implements BaseModel
     /**
      * Identifies the messaging profile associated with the phone number.
      */
-    #[Optional('messaging_profile_id')]
+    #[Optional('messaging_profile_id', nullable: true)]
     public ?string $messagingProfileID;
 
     /**
      * The name of the messaging profile associated with the phone number.
      */
-    #[Optional('messaging_profile_name')]
+    #[Optional('messaging_profile_name', nullable: true)]
     public ?string $messagingProfileName;
-
-    /**
-     * The +E.164-formatted phone number associated with this record.
-     */
-    #[Optional('phone_number')]
-    public ?string $phoneNumber;
-
-    /**
-     * The phone number's type.
-     * Note: For numbers purchased prior to July 2023 or when fetching a number's details immediately after a purchase completes, the legacy values `tollfree`, `shortcode` or `longcode` may be returned instead.
-     *
-     * @var value-of<PhoneNumberType>|null $phoneNumberType
-     */
-    #[Optional('phone_number_type', enum: PhoneNumberType::class)]
-    public ?string $phoneNumberType;
-
-    /**
-     * ISO 8601 formatted date indicating when the resource was purchased.
-     */
-    #[Optional('purchased_at')]
-    public ?string $purchasedAt;
-
-    /**
-     * Identifies the type of the resource.
-     */
-    #[Optional('record_type')]
-    public ?string $recordType;
 
     /**
      * Indicates if the phone number was purchased or ported in. For some numbers this information may not be available.
@@ -203,27 +220,48 @@ final class PhoneNumberDetailed implements BaseModel
     public ?string $sourceType;
 
     /**
-     * The phone number's current status.
-     *
-     * @var value-of<Status>|null $status
-     */
-    #[Optional(enum: Status::class)]
-    public ?string $status;
-
-    /**
      * Indicates whether T38 Fax Gateway for inbound calls to this number.
      */
     #[Optional('t38_fax_gateway_enabled')]
     public ?bool $t38FaxGatewayEnabled;
 
     /**
-     * A list of user-assigned tags to help manage the phone number.
+     * `new PhoneNumberDetailed()` is missing required properties by the API.
      *
-     * @var list<string>|null $tags
+     * To enforce required parameters use
+     * ```
+     * PhoneNumberDetailed::with(
+     *   id: ...,
+     *   countryISOAlpha2: ...,
+     *   createdAt: ...,
+     *   deletionLockEnabled: ...,
+     *   externalPin: ...,
+     *   phoneNumber: ...,
+     *   phoneNumberType: ...,
+     *   purchasedAt: ...,
+     *   recordType: ...,
+     *   status: ...,
+     *   tags: ...,
+     * )
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new PhoneNumberDetailed)
+     *   ->withID(...)
+     *   ->withCountryISOAlpha2(...)
+     *   ->withCreatedAt(...)
+     *   ->withDeletionLockEnabled(...)
+     *   ->withExternalPin(...)
+     *   ->withPhoneNumber(...)
+     *   ->withPhoneNumberType(...)
+     *   ->withPurchasedAt(...)
+     *   ->withRecordType(...)
+     *   ->withStatus(...)
+     *   ->withTags(...)
+     * ```
      */
-    #[Optional(list: 'string')]
-    public ?array $tags;
-
     public function __construct()
     {
         $this->initialize();
@@ -234,15 +272,25 @@ final class PhoneNumberDetailed implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param EmergencyStatus|value-of<EmergencyStatus> $emergencyStatus
-     * @param InboundCallScreening|value-of<InboundCallScreening> $inboundCallScreening
      * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
-     * @param SourceType|value-of<SourceType>|null $sourceType
      * @param Status|value-of<Status> $status
      * @param list<string> $tags
+     * @param EmergencyStatus|value-of<EmergencyStatus> $emergencyStatus
+     * @param InboundCallScreening|value-of<InboundCallScreening> $inboundCallScreening
+     * @param SourceType|value-of<SourceType>|null $sourceType
      */
     public static function with(
-        ?string $id = null,
+        string $id,
+        string $countryISOAlpha2,
+        \DateTimeInterface $createdAt,
+        bool $deletionLockEnabled,
+        ?string $externalPin,
+        string $phoneNumber,
+        PhoneNumberType|string $phoneNumberType,
+        string $purchasedAt,
+        string $recordType,
+        Status|string $status,
+        array $tags,
         ?string $billingGroupID = null,
         ?bool $callForwardingEnabled = null,
         ?bool $callRecordingEnabled = null,
@@ -250,29 +298,30 @@ final class PhoneNumberDetailed implements BaseModel
         ?bool $cnamListingEnabled = null,
         ?string $connectionID = null,
         ?string $connectionName = null,
-        ?string $countryISOAlpha2 = null,
-        ?string $createdAt = null,
         ?string $customerReference = null,
-        ?bool $deletionLockEnabled = null,
         ?string $emergencyAddressID = null,
         ?bool $emergencyEnabled = null,
         EmergencyStatus|string|null $emergencyStatus = null,
-        ?string $externalPin = null,
         InboundCallScreening|string|null $inboundCallScreening = null,
         ?string $messagingProfileID = null,
         ?string $messagingProfileName = null,
-        ?string $phoneNumber = null,
-        PhoneNumberType|string|null $phoneNumberType = null,
-        ?string $purchasedAt = null,
-        ?string $recordType = null,
         SourceType|string|null $sourceType = null,
-        Status|string|null $status = null,
         ?bool $t38FaxGatewayEnabled = null,
-        ?array $tags = null,
     ): self {
         $self = new self;
 
-        null !== $id && $self['id'] = $id;
+        $self['id'] = $id;
+        $self['countryISOAlpha2'] = $countryISOAlpha2;
+        $self['createdAt'] = $createdAt;
+        $self['deletionLockEnabled'] = $deletionLockEnabled;
+        $self['externalPin'] = $externalPin;
+        $self['phoneNumber'] = $phoneNumber;
+        $self['phoneNumberType'] = $phoneNumberType;
+        $self['purchasedAt'] = $purchasedAt;
+        $self['recordType'] = $recordType;
+        $self['status'] = $status;
+        $self['tags'] = $tags;
+
         null !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
         null !== $callForwardingEnabled && $self['callForwardingEnabled'] = $callForwardingEnabled;
         null !== $callRecordingEnabled && $self['callRecordingEnabled'] = $callRecordingEnabled;
@@ -280,25 +329,15 @@ final class PhoneNumberDetailed implements BaseModel
         null !== $cnamListingEnabled && $self['cnamListingEnabled'] = $cnamListingEnabled;
         null !== $connectionID && $self['connectionID'] = $connectionID;
         null !== $connectionName && $self['connectionName'] = $connectionName;
-        null !== $countryISOAlpha2 && $self['countryISOAlpha2'] = $countryISOAlpha2;
-        null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $customerReference && $self['customerReference'] = $customerReference;
-        null !== $deletionLockEnabled && $self['deletionLockEnabled'] = $deletionLockEnabled;
         null !== $emergencyAddressID && $self['emergencyAddressID'] = $emergencyAddressID;
         null !== $emergencyEnabled && $self['emergencyEnabled'] = $emergencyEnabled;
         null !== $emergencyStatus && $self['emergencyStatus'] = $emergencyStatus;
-        null !== $externalPin && $self['externalPin'] = $externalPin;
         null !== $inboundCallScreening && $self['inboundCallScreening'] = $inboundCallScreening;
         null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
         null !== $messagingProfileName && $self['messagingProfileName'] = $messagingProfileName;
-        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
-        null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
-        null !== $purchasedAt && $self['purchasedAt'] = $purchasedAt;
-        null !== $recordType && $self['recordType'] = $recordType;
         null !== $sourceType && $self['sourceType'] = $sourceType;
-        null !== $status && $self['status'] = $status;
         null !== $t38FaxGatewayEnabled && $self['t38FaxGatewayEnabled'] = $t38FaxGatewayEnabled;
-        null !== $tags && $self['tags'] = $tags;
 
         return $self;
     }
@@ -315,9 +354,127 @@ final class PhoneNumberDetailed implements BaseModel
     }
 
     /**
+     * The ISO 3166-1 alpha-2 country code of the phone number.
+     */
+    public function withCountryISOAlpha2(string $countryISOAlpha2): self
+    {
+        $self = clone $this;
+        $self['countryISOAlpha2'] = $countryISOAlpha2;
+
+        return $self;
+    }
+
+    /**
+     * ISO 8601 formatted date indicating when the resource was created.
+     */
+    public function withCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
+
+        return $self;
+    }
+
+    /**
+     * Indicates whether deletion lock is enabled for this number. When enabled, this prevents the phone number from being deleted via the API or Telnyx portal.
+     */
+    public function withDeletionLockEnabled(bool $deletionLockEnabled): self
+    {
+        $self = clone $this;
+        $self['deletionLockEnabled'] = $deletionLockEnabled;
+
+        return $self;
+    }
+
+    /**
+     * If someone attempts to port your phone number away from Telnyx and your phone number has an external PIN set, Telnyx will attempt to verify that you provided the correct external PIN to the winning carrier. Note that not all carriers cooperate with this security mechanism.
+     */
+    public function withExternalPin(?string $externalPin): self
+    {
+        $self = clone $this;
+        $self['externalPin'] = $externalPin;
+
+        return $self;
+    }
+
+    /**
+     * The +E.164-formatted phone number associated with this record.
+     */
+    public function withPhoneNumber(string $phoneNumber): self
+    {
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
+
+        return $self;
+    }
+
+    /**
+     * The phone number's type.
+     * Note: For numbers purchased prior to July 2023 or when fetching a number's details immediately after a purchase completes, the legacy values `tollfree`, `shortcode` or `longcode` may be returned instead.
+     *
+     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
+     */
+    public function withPhoneNumberType(
+        PhoneNumberType|string $phoneNumberType
+    ): self {
+        $self = clone $this;
+        $self['phoneNumberType'] = $phoneNumberType;
+
+        return $self;
+    }
+
+    /**
+     * ISO 8601 formatted date indicating when the resource was purchased.
+     */
+    public function withPurchasedAt(string $purchasedAt): self
+    {
+        $self = clone $this;
+        $self['purchasedAt'] = $purchasedAt;
+
+        return $self;
+    }
+
+    /**
+     * Identifies the type of the resource.
+     */
+    public function withRecordType(string $recordType): self
+    {
+        $self = clone $this;
+        $self['recordType'] = $recordType;
+
+        return $self;
+    }
+
+    /**
+     * The phone number's current status.
+     *
+     * @param Status|value-of<Status> $status
+     */
+    public function withStatus(Status|string $status): self
+    {
+        $self = clone $this;
+        $self['status'] = $status;
+
+        return $self;
+    }
+
+    /**
+     * A list of user-assigned tags to help manage the phone number.
+     *
+     * @param list<string> $tags
+     */
+    public function withTags(array $tags): self
+    {
+        $self = clone $this;
+        $self['tags'] = $tags;
+
+        return $self;
+    }
+
+    /**
      * Identifies the billing group associated with the phone number.
      */
-    public function withBillingGroupID(string $billingGroupID): self
+    public function withBillingGroupID(?string $billingGroupID): self
     {
         $self = clone $this;
         $self['billingGroupID'] = $billingGroupID;
@@ -372,7 +529,7 @@ final class PhoneNumberDetailed implements BaseModel
     /**
      * Identifies the connection associated with the phone number.
      */
-    public function withConnectionID(string $connectionID): self
+    public function withConnectionID(?string $connectionID): self
     {
         $self = clone $this;
         $self['connectionID'] = $connectionID;
@@ -383,7 +540,7 @@ final class PhoneNumberDetailed implements BaseModel
     /**
      * The user-assigned name of the connection to be associated with this phone number.
      */
-    public function withConnectionName(string $connectionName): self
+    public function withConnectionName(?string $connectionName): self
     {
         $self = clone $this;
         $self['connectionName'] = $connectionName;
@@ -392,31 +549,9 @@ final class PhoneNumberDetailed implements BaseModel
     }
 
     /**
-     * The ISO 3166-1 alpha-2 country code of the phone number.
-     */
-    public function withCountryISOAlpha2(string $countryISOAlpha2): self
-    {
-        $self = clone $this;
-        $self['countryISOAlpha2'] = $countryISOAlpha2;
-
-        return $self;
-    }
-
-    /**
-     * ISO 8601 formatted date indicating when the resource was created.
-     */
-    public function withCreatedAt(string $createdAt): self
-    {
-        $self = clone $this;
-        $self['createdAt'] = $createdAt;
-
-        return $self;
-    }
-
-    /**
      * A customer reference string for customer look ups.
      */
-    public function withCustomerReference(string $customerReference): self
+    public function withCustomerReference(?string $customerReference): self
     {
         $self = clone $this;
         $self['customerReference'] = $customerReference;
@@ -425,20 +560,9 @@ final class PhoneNumberDetailed implements BaseModel
     }
 
     /**
-     * Indicates whether deletion lock is enabled for this number. When enabled, this prevents the phone number from being deleted via the API or Telnyx portal.
-     */
-    public function withDeletionLockEnabled(bool $deletionLockEnabled): self
-    {
-        $self = clone $this;
-        $self['deletionLockEnabled'] = $deletionLockEnabled;
-
-        return $self;
-    }
-
-    /**
      * Identifies the emergency address associated with the phone number.
      */
-    public function withEmergencyAddressID(string $emergencyAddressID): self
+    public function withEmergencyAddressID(?string $emergencyAddressID): self
     {
         $self = clone $this;
         $self['emergencyAddressID'] = $emergencyAddressID;
@@ -472,17 +596,6 @@ final class PhoneNumberDetailed implements BaseModel
     }
 
     /**
-     * If someone attempts to port your phone number away from Telnyx and your phone number has an external PIN set, Telnyx will attempt to verify that you provided the correct external PIN to the winning carrier. Note that not all carriers cooperate with this security mechanism.
-     */
-    public function withExternalPin(string $externalPin): self
-    {
-        $self = clone $this;
-        $self['externalPin'] = $externalPin;
-
-        return $self;
-    }
-
-    /**
      * The inbound_call_screening setting is a phone number configuration option variable that allows users to configure their settings to block or flag fraudulent calls. It can be set to disabled, reject_calls, or flag_calls. This feature has an additional per-number monthly cost associated with it.
      *
      * @param InboundCallScreening|value-of<InboundCallScreening> $inboundCallScreening
@@ -499,7 +612,7 @@ final class PhoneNumberDetailed implements BaseModel
     /**
      * Identifies the messaging profile associated with the phone number.
      */
-    public function withMessagingProfileID(string $messagingProfileID): self
+    public function withMessagingProfileID(?string $messagingProfileID): self
     {
         $self = clone $this;
         $self['messagingProfileID'] = $messagingProfileID;
@@ -510,58 +623,11 @@ final class PhoneNumberDetailed implements BaseModel
     /**
      * The name of the messaging profile associated with the phone number.
      */
-    public function withMessagingProfileName(string $messagingProfileName): self
-    {
-        $self = clone $this;
-        $self['messagingProfileName'] = $messagingProfileName;
-
-        return $self;
-    }
-
-    /**
-     * The +E.164-formatted phone number associated with this record.
-     */
-    public function withPhoneNumber(string $phoneNumber): self
-    {
-        $self = clone $this;
-        $self['phoneNumber'] = $phoneNumber;
-
-        return $self;
-    }
-
-    /**
-     * The phone number's type.
-     * Note: For numbers purchased prior to July 2023 or when fetching a number's details immediately after a purchase completes, the legacy values `tollfree`, `shortcode` or `longcode` may be returned instead.
-     *
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
-     */
-    public function withPhoneNumberType(
-        PhoneNumberType|string $phoneNumberType
+    public function withMessagingProfileName(
+        ?string $messagingProfileName
     ): self {
         $self = clone $this;
-        $self['phoneNumberType'] = $phoneNumberType;
-
-        return $self;
-    }
-
-    /**
-     * ISO 8601 formatted date indicating when the resource was purchased.
-     */
-    public function withPurchasedAt(string $purchasedAt): self
-    {
-        $self = clone $this;
-        $self['purchasedAt'] = $purchasedAt;
-
-        return $self;
-    }
-
-    /**
-     * Identifies the type of the resource.
-     */
-    public function withRecordType(string $recordType): self
-    {
-        $self = clone $this;
-        $self['recordType'] = $recordType;
+        $self['messagingProfileName'] = $messagingProfileName;
 
         return $self;
     }
@@ -580,38 +646,12 @@ final class PhoneNumberDetailed implements BaseModel
     }
 
     /**
-     * The phone number's current status.
-     *
-     * @param Status|value-of<Status> $status
-     */
-    public function withStatus(Status|string $status): self
-    {
-        $self = clone $this;
-        $self['status'] = $status;
-
-        return $self;
-    }
-
-    /**
      * Indicates whether T38 Fax Gateway for inbound calls to this number.
      */
     public function withT38FaxGatewayEnabled(bool $t38FaxGatewayEnabled): self
     {
         $self = clone $this;
         $self['t38FaxGatewayEnabled'] = $t38FaxGatewayEnabled;
-
-        return $self;
-    }
-
-    /**
-     * A list of user-assigned tags to help manage the phone number.
-     *
-     * @param list<string> $tags
-     */
-    public function withTags(array $tags): self
-    {
-        $self = clone $this;
-        $self['tags'] = $tags;
 
         return $self;
     }

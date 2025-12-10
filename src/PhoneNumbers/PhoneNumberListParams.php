@@ -15,6 +15,7 @@ use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\Status;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\VoiceConnectionName;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\VoiceUsagePaymentMethod;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\WithoutTags;
+use Telnyx\PhoneNumbers\PhoneNumberListParams\HandleMessagingProfileError;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Page;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Sort;
 
@@ -39,6 +40,7 @@ use Telnyx\PhoneNumbers\PhoneNumberListParams\Sort;
  *     voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
  *     withoutTags?: value-of<WithoutTags>|null,
  *   },
+ *   handleMessagingProfileError?: HandleMessagingProfileError|value-of<HandleMessagingProfileError>,
  *   page?: Page|array{number?: int|null, size?: int|null},
  *   sort?: Sort|value-of<Sort>,
  * }
@@ -54,6 +56,14 @@ final class PhoneNumberListParams implements BaseModel
      */
     #[Optional]
     public ?Filter $filter;
+
+    /**
+     * Although it is an infrequent occurrence, due to the highly distributed nature of the Telnyx platform, it is possible that there will be an issue when loading in Messaging Profile information. As such, when this parameter is set to `true` and an error in fetching this information occurs, messaging profile related fields will be omitted in the response and an error message will be included instead of returning a 503 error.
+     *
+     * @var value-of<HandleMessagingProfileError>|null $handleMessagingProfileError
+     */
+    #[Optional(enum: HandleMessagingProfileError::class)]
+    public ?string $handleMessagingProfileError;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
@@ -94,17 +104,20 @@ final class PhoneNumberListParams implements BaseModel
      *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
      *   withoutTags?: value-of<WithoutTags>|null,
      * } $filter
+     * @param HandleMessagingProfileError|value-of<HandleMessagingProfileError> $handleMessagingProfileError
      * @param Page|array{number?: int|null, size?: int|null} $page
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
         Filter|array|null $filter = null,
+        HandleMessagingProfileError|string|null $handleMessagingProfileError = null,
         Page|array|null $page = null,
         Sort|string|null $sort = null,
     ): self {
         $self = new self;
 
         null !== $filter && $self['filter'] = $filter;
+        null !== $handleMessagingProfileError && $self['handleMessagingProfileError'] = $handleMessagingProfileError;
         null !== $page && $self['page'] = $page;
         null !== $sort && $self['sort'] = $sort;
 
@@ -134,6 +147,20 @@ final class PhoneNumberListParams implements BaseModel
     {
         $self = clone $this;
         $self['filter'] = $filter;
+
+        return $self;
+    }
+
+    /**
+     * Although it is an infrequent occurrence, due to the highly distributed nature of the Telnyx platform, it is possible that there will be an issue when loading in Messaging Profile information. As such, when this parameter is set to `true` and an error in fetching this information occurs, messaging profile related fields will be omitted in the response and an error message will be included instead of returning a 503 error.
+     *
+     * @param HandleMessagingProfileError|value-of<HandleMessagingProfileError> $handleMessagingProfileError
+     */
+    public function withHandleMessagingProfileError(
+        HandleMessagingProfileError|string $handleMessagingProfileError
+    ): self {
+        $self = clone $this;
+        $self['handleMessagingProfileError'] = $handleMessagingProfileError;
 
         return $self;
     }

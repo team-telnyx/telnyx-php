@@ -13,7 +13,10 @@ use Telnyx\Number10dlc\Brand\BrandGetSMSOtpStatusResponse;
 use Telnyx\Number10dlc\Brand\BrandListParams;
 use Telnyx\Number10dlc\Brand\BrandListResponse;
 use Telnyx\Number10dlc\Brand\BrandRetrieveSMSOtpStatusParams;
+use Telnyx\Number10dlc\Brand\BrandTriggerSMSOtpParams;
+use Telnyx\Number10dlc\Brand\BrandTriggerSMSOtpResponse;
 use Telnyx\Number10dlc\Brand\BrandUpdateParams;
+use Telnyx\Number10dlc\Brand\BrandVerifySMSOtpParams;
 use Telnyx\Number10dlc\Brand\TelnyxBrand;
 use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
@@ -137,5 +140,37 @@ interface BrandRawContract
     public function revet(
         string $brandID,
         ?RequestOptions $requestOptions = null
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $brandID The Brand ID for which to trigger the OTP
+     * @param array<mixed>|BrandTriggerSMSOtpParams $params
+     *
+     * @return BaseResponse<BrandTriggerSMSOtpResponse>
+     *
+     * @throws APIException
+     */
+    public function triggerSMSOtp(
+        string $brandID,
+        array|BrandTriggerSMSOtpParams $params,
+        ?RequestOptions $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $brandID The Brand ID for which to verify the OTP
+     * @param array<mixed>|BrandVerifySMSOtpParams $params
+     *
+     * @return BaseResponse<mixed>
+     *
+     * @throws APIException
+     */
+    public function verifySMSOtp(
+        string $brandID,
+        array|BrandVerifySMSOtpParams $params,
+        ?RequestOptions $requestOptions = null,
     ): BaseResponse;
 }

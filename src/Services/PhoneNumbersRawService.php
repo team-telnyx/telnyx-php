@@ -18,6 +18,7 @@ use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\Source;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\Status;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\VoiceUsagePaymentMethod;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\WithoutTags;
+use Telnyx\PhoneNumbers\PhoneNumberListParams\HandleMessagingProfileError;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Sort;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListParams;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListResponse;
@@ -122,6 +123,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
      *     voiceUsagePaymentMethod?: 'pay-per-minute'|'channel'|VoiceUsagePaymentMethod,
      *     withoutTags?: 'true'|'false'|WithoutTags,
      *   },
+     *   handleMessagingProfileError?: 'true'|'false'|HandleMessagingProfileError,
      *   page?: array{number?: int, size?: int},
      *   sort?: 'purchased_at'|'phone_number'|'connection_name'|'usage_payment_method'|Sort,
      * }|PhoneNumberListParams $params
@@ -143,7 +145,10 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
         return $this->client->request(
             method: 'get',
             path: 'phone_numbers',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['handleMessagingProfileError' => 'handle_messaging_profile_error'],
+            ),
             options: $options,
             convert: PhoneNumberDetailed::class,
             page: DefaultPagination::class,

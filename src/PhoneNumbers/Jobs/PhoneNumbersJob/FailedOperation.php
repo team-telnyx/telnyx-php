@@ -48,11 +48,11 @@ final class FailedOperation implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<JobError|array{
-     *   code: string,
-     *   title: string,
+     *   code?: string|null,
      *   detail?: string|null,
      *   meta?: Meta|null,
      *   source?: Source|null,
+     *   title?: string|null,
      * }> $errors
      */
     public static function with(
@@ -82,11 +82,11 @@ final class FailedOperation implements BaseModel
 
     /**
      * @param list<JobError|array{
-     *   code: string,
-     *   title: string,
+     *   code?: string|null,
      *   detail?: string|null,
      *   meta?: Meta|null,
      *   source?: Source|null,
+     *   title?: string|null,
      * }> $errors
      */
     public function withErrors(array $errors): self

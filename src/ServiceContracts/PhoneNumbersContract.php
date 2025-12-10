@@ -14,6 +14,7 @@ use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\Source;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\Status;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\VoiceUsagePaymentMethod;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\WithoutTags;
+use Telnyx\PhoneNumbers\PhoneNumberListParams\HandleMessagingProfileError;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Sort;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListResponse;
 use Telnyx\PhoneNumbers\PhoneNumberUpdateResponse;
@@ -79,6 +80,7 @@ interface PhoneNumbersContract
      *   voiceUsagePaymentMethod?: 'pay-per-minute'|'channel'|VoiceUsagePaymentMethod,
      *   withoutTags?: 'true'|'false'|WithoutTags,
      * } $filter Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[phone_number], filter[status], filter[country_iso_alpha2], filter[connection_id], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference], filter[number_type], filter[source]
+     * @param 'true'|'false'|HandleMessagingProfileError $handleMessagingProfileError Although it is an infrequent occurrence, due to the highly distributed nature of the Telnyx platform, it is possible that there will be an issue when loading in Messaging Profile information. As such, when this parameter is set to `true` and an error in fetching this information occurs, messaging profile related fields will be omitted in the response and an error message will be included instead of returning a 503 error.
      * @param array{
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
@@ -90,6 +92,7 @@ interface PhoneNumbersContract
      */
     public function list(
         ?array $filter = null,
+        string|HandleMessagingProfileError $handleMessagingProfileError = 'false',
         ?array $page = null,
         string|Sort|null $sort = null,
         ?RequestOptions $requestOptions = null,

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\PhoneNumberBlocks\Jobs;
 
 use Telnyx\Core\Attributes\Optional;
-use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumberBlocks\Jobs\JobError\Meta;
@@ -13,11 +12,11 @@ use Telnyx\PhoneNumberBlocks\Jobs\JobError\Source;
 
 /**
  * @phpstan-type JobErrorShape = array{
- *   code: string,
- *   title: string,
+ *   code?: string|null,
  *   detail?: string|null,
  *   meta?: Meta|null,
  *   source?: Source|null,
+ *   title?: string|null,
  * }
  */
 final class JobError implements BaseModel
@@ -25,11 +24,8 @@ final class JobError implements BaseModel
     /** @use SdkModel<JobErrorShape> */
     use SdkModel;
 
-    #[Required]
-    public string $code;
-
-    #[Required]
-    public string $title;
+    #[Optional]
+    public ?string $code;
 
     #[Optional]
     public ?string $detail;
@@ -40,20 +36,9 @@ final class JobError implements BaseModel
     #[Optional]
     public ?Source $source;
 
-    /**
-     * `new JobError()` is missing required properties by the API.
-     *
-     * To enforce required parameters use
-     * ```
-     * JobError::with(code: ..., title: ...)
-     * ```
-     *
-     * Otherwise ensure the following setters are called
-     *
-     * ```
-     * (new JobError)->withCode(...)->withTitle(...)
-     * ```
-     */
+    #[Optional]
+    public ?string $title;
+
     public function __construct()
     {
         $this->initialize();
@@ -68,20 +53,19 @@ final class JobError implements BaseModel
      * @param Source|array{parameter?: string|null, pointer?: string|null} $source
      */
     public static function with(
-        string $code,
-        string $title,
+        ?string $code = null,
         ?string $detail = null,
         Meta|array|null $meta = null,
         Source|array|null $source = null,
+        ?string $title = null,
     ): self {
         $self = new self;
 
-        $self['code'] = $code;
-        $self['title'] = $title;
-
+        null !== $code && $self['code'] = $code;
         null !== $detail && $self['detail'] = $detail;
         null !== $meta && $self['meta'] = $meta;
         null !== $source && $self['source'] = $source;
+        null !== $title && $self['title'] = $title;
 
         return $self;
     }
@@ -90,14 +74,6 @@ final class JobError implements BaseModel
     {
         $self = clone $this;
         $self['code'] = $code;
-
-        return $self;
-    }
-
-    public function withTitle(string $title): self
-    {
-        $self = clone $this;
-        $self['title'] = $title;
 
         return $self;
     }
@@ -128,6 +104,14 @@ final class JobError implements BaseModel
     {
         $self = clone $this;
         $self['source'] = $source;
+
+        return $self;
+    }
+
+    public function withTitle(string $title): self
+    {
+        $self = clone $this;
+        $self['title'] = $title;
 
         return $self;
     }
