@@ -7,9 +7,10 @@ namespace Telnyx\Services\PortingOrders;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobGetResponse;
-use Telnyx\PortingOrders\ActivationJobs\ActivationJobListResponse;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobUpdateResponse;
+use Telnyx\PortingOrders\PortingOrdersActivationJob;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\ActivationJobsContract;
 
@@ -86,13 +87,15 @@ final class ActivationJobsService implements ActivationJobsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
+     * @return DefaultPagination<PortingOrdersActivationJob>
+     *
      * @throws APIException
      */
     public function list(
         string $id,
         ?array $page = null,
         ?RequestOptions $requestOptions = null
-    ): ActivationJobListResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(['page' => $page]);
 
         // @phpstan-ignore-next-line argument.type

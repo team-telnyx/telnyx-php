@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI\Conversations;
 
-use Telnyx\AI\Conversations\InsightGroups\InsightGroupGetInsightGroupsResponse;
 use Telnyx\AI\Conversations\InsightGroups\InsightGroupInsightGroupsParams;
 use Telnyx\AI\Conversations\InsightGroups\InsightGroupRetrieveInsightGroupsParams;
 use Telnyx\AI\Conversations\InsightGroups\InsightGroupUpdateParams;
+use Telnyx\AI\Conversations\InsightGroups\InsightTemplateGroup;
 use Telnyx\AI\Conversations\InsightGroups\InsightTemplateGroupDetail;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\InsightGroupsRawContract;
 
@@ -143,10 +145,10 @@ final class InsightGroupsRawService implements InsightGroupsRawContract
      * Get all insight groups
      *
      * @param array{
-     *   page?: array{number?: int, size?: int}
+     *   pageNumber?: int, pageSize?: int
      * }|InsightGroupRetrieveInsightGroupsParams $params
      *
-     * @return BaseResponse<InsightGroupGetInsightGroupsResponse>
+     * @return BaseResponse<DefaultFlatPagination<InsightTemplateGroup>>
      *
      * @throws APIException
      */
@@ -163,9 +165,13 @@ final class InsightGroupsRawService implements InsightGroupsRawContract
         return $this->client->request(
             method: 'get',
             path: 'ai/conversations/insight-groups',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
-            convert: InsightGroupGetInsightGroupsResponse::class,
+            convert: InsightTemplateGroup::class,
+            page: DefaultFlatPagination::class,
         );
     }
 }

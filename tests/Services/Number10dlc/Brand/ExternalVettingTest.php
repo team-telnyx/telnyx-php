@@ -6,8 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingExternalVettingResponse;
-use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingUpdateExternalVettingResponse;
+use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingImportsResponse;
+use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingOrderResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -29,126 +29,86 @@ final class ExternalVettingTest extends TestCase
     }
 
     #[Test]
-    public function testExternalVetting(): void
+    public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this
-            ->client
-            ->number10dlc
-            ->brand
-            ->externalVetting
-            ->externalVetting(
-                'brandId',
-                evpID: 'evpId',
-                vettingClass: 'vettingClass'
-            )
-        ;
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            ExternalVettingExternalVettingResponse::class,
-            $result
+        $result = $this->client->number10dlc->brand->externalVetting->list(
+            'brandId'
         );
-    }
-
-    #[Test]
-    public function testExternalVettingWithOptionalParams(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
-        $result = $this
-            ->client
-            ->number10dlc
-            ->brand
-            ->externalVetting
-            ->externalVetting(
-                'brandId',
-                evpID: 'evpId',
-                vettingClass: 'vettingClass'
-            )
-        ;
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            ExternalVettingExternalVettingResponse::class,
-            $result
-        );
-    }
-
-    #[Test]
-    public function testRetrieveExternalVetting(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
-        $result = $this
-            ->client
-            ->number10dlc
-            ->brand
-            ->externalVetting
-            ->retrieveExternalVetting('brandId')
-        ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsList($result);
     }
 
     #[Test]
-    public function testUpdateExternalVetting(): void
+    public function testImports(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this
-            ->client
-            ->number10dlc
-            ->brand
-            ->externalVetting
-            ->updateExternalVetting(
-                'brandId',
-                evpID: 'evpId',
-                vettingID: 'vettingId'
-            )
-        ;
+        $result = $this->client->number10dlc->brand->externalVetting->imports(
+            'brandId',
+            evpID: 'evpId',
+            vettingID: 'vettingId'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            ExternalVettingUpdateExternalVettingResponse::class,
-            $result
-        );
+        $this->assertInstanceOf(ExternalVettingImportsResponse::class, $result);
     }
 
     #[Test]
-    public function testUpdateExternalVettingWithOptionalParams(): void
+    public function testImportsWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this
-            ->client
-            ->number10dlc
-            ->brand
-            ->externalVetting
-            ->updateExternalVetting(
-                'brandId',
-                evpID: 'evpId',
-                vettingID: 'vettingId',
-                vettingToken: 'vettingToken',
-            )
-        ;
+        $result = $this->client->number10dlc->brand->externalVetting->imports(
+            'brandId',
+            evpID: 'evpId',
+            vettingID: 'vettingId',
+            vettingToken: 'vettingToken',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            ExternalVettingUpdateExternalVettingResponse::class,
-            $result
+        $this->assertInstanceOf(ExternalVettingImportsResponse::class, $result);
+    }
+
+    #[Test]
+    public function testOrder(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->number10dlc->brand->externalVetting->order(
+            'brandId',
+            evpID: 'evpId',
+            vettingClass: 'vettingClass'
         );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ExternalVettingOrderResponse::class, $result);
+    }
+
+    #[Test]
+    public function testOrderWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->number10dlc->brand->externalVetting->order(
+            'brandId',
+            evpID: 'evpId',
+            vettingClass: 'vettingClass'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ExternalVettingOrderResponse::class, $result);
     }
 }

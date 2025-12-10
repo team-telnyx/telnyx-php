@@ -7,10 +7,11 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardOrdersContract;
+use Telnyx\SimCardOrders\SimCardOrder;
 use Telnyx\SimCardOrders\SimCardOrderGetResponse;
-use Telnyx\SimCardOrders\SimCardOrderListResponse;
 use Telnyx\SimCardOrders\SimCardOrderNewResponse;
 
 final class SimCardOrdersService implements SimCardOrdersContract
@@ -78,16 +79,15 @@ final class SimCardOrdersService implements SimCardOrdersContract
      * Get all SIM card orders according to filters.
      *
      * @param array{
-     *   address?: array{
-     *     id?: string,
-     *     administrativeArea?: string,
-     *     countryCode?: string,
-     *     extendedAddress?: string,
-     *     locality?: string,
-     *     postalCode?: string,
-     *     streetAddress?: string,
-     *   },
-     *   cost?: array{amount?: string, currency?: string},
+     *   addressAdministrativeArea?: string,
+     *   addressCountryCode?: string,
+     *   addressExtendedAddress?: string,
+     *   addressID?: string,
+     *   addressLocality?: string,
+     *   addressPostalCode?: string,
+     *   addressStreetAddress?: string,
+     *   costAmount?: string,
+     *   costCurrency?: string,
      *   createdAt?: string|\DateTimeInterface,
      *   quantity?: int,
      *   updatedAt?: string|\DateTimeInterface,
@@ -96,13 +96,15 @@ final class SimCardOrdersService implements SimCardOrdersContract
      *   number?: int, size?: int
      * } $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
      *
+     * @return DefaultPagination<SimCardOrder>
+     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): SimCardOrderListResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
         // @phpstan-ignore-next-line argument.type

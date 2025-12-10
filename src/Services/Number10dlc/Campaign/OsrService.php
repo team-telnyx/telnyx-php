@@ -33,12 +33,12 @@ final class OsrService implements OsrContract
      *
      * @throws APIException
      */
-    public function retrieveAttributes(
+    public function getAttributes(
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): array {
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->retrieveAttributes($campaignID, requestOptions: $requestOptions);
+        $response = $this->raw->getAttributes($campaignID, requestOptions: $requestOptions);
 
         return $response->parse();
     }

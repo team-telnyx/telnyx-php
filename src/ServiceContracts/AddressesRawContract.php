@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Addresses\Address;
 use Telnyx\Addresses\AddressCreateParams;
 use Telnyx\Addresses\AddressDeleteResponse;
 use Telnyx\Addresses\AddressGetResponse;
 use Telnyx\Addresses\AddressListParams;
-use Telnyx\Addresses\AddressListResponse;
 use Telnyx\Addresses\AddressNewResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
 interface AddressesRawContract
@@ -49,7 +50,7 @@ interface AddressesRawContract
      *
      * @param array<mixed>|AddressListParams $params
      *
-     * @return BaseResponse<AddressListResponse>
+     * @return BaseResponse<DefaultPagination<Address>>
      *
      * @throws APIException
      */

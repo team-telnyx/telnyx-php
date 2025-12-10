@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VirtualCrossConnectsRawContract;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectCreateParams;
@@ -33,15 +34,15 @@ final class VirtualCrossConnectsRawService implements VirtualCrossConnectsRawCon
      * Create a new Virtual Cross Connect.<br /><br />For AWS and GCE, you have the option of creating the primary connection first and the secondary connection later. You also have the option of disabling the primary and/or secondary connections at any time and later re-enabling them. With Azure, you do not have this option. Azure requires both the primary and secondary connections to be created at the same time and they can not be independantly disabled.
      *
      * @param array{
-     *   bgpAsn: float,
-     *   cloudProvider: 'aws'|'azure'|'gce'|CloudProvider,
-     *   cloudProviderRegion: string,
-     *   networkID: string,
-     *   primaryCloudAccountID: string,
      *   regionCode: string,
      *   bandwidthMbps?: float,
+     *   bgpAsn?: float,
+     *   cloudProvider?: 'aws'|'azure'|'gce'|CloudProvider,
+     *   cloudProviderRegion?: string,
      *   name?: string,
+     *   networkID?: string,
      *   primaryBgpKey?: string,
+     *   primaryCloudAccountID?: string,
      *   primaryCloudIP?: string,
      *   primaryTelnyxIP?: string,
      *   secondaryBgpKey?: string,
@@ -145,7 +146,7 @@ final class VirtualCrossConnectsRawService implements VirtualCrossConnectsRawCon
      *   filter?: array{networkID?: string}, page?: array{number?: int, size?: int}
      * }|VirtualCrossConnectListParams $params
      *
-     * @return BaseResponse<VirtualCrossConnectListResponse>
+     * @return BaseResponse<DefaultPagination<VirtualCrossConnectListResponse>>
      *
      * @throws APIException
      */
@@ -165,6 +166,7 @@ final class VirtualCrossConnectsRawService implements VirtualCrossConnectsRawCon
             query: $parsed,
             options: $options,
             convert: VirtualCrossConnectListResponse::class,
+            page: DefaultPagination::class,
         );
     }
 

@@ -9,9 +9,9 @@ namespace Telnyx\MessagingProfiles\MessagingProfileCreateParams;
  */
 enum WebhookAPIVersion: string
 {
-    case _1 = '1';
+    case V1 = '1';
 
-    case _2 = '2';
+    case V2 = '2';
 
-    case _2010_04_01 = '2010-04-01';
+    case V2010_04_01 = '2010-04-01';
 }

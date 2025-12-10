@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\AI\Conversations;
 
-use Telnyx\AI\Conversations\InsightGroups\InsightGroupGetInsightGroupsResponse;
 use Telnyx\AI\Conversations\InsightGroups\InsightGroupInsightGroupsParams;
 use Telnyx\AI\Conversations\InsightGroups\InsightGroupRetrieveInsightGroupsParams;
 use Telnyx\AI\Conversations\InsightGroups\InsightGroupUpdateParams;
+use Telnyx\AI\Conversations\InsightGroups\InsightTemplateGroup;
 use Telnyx\AI\Conversations\InsightGroups\InsightTemplateGroupDetail;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 interface InsightGroupsRawContract
@@ -78,7 +79,7 @@ interface InsightGroupsRawContract
      *
      * @param array<mixed>|InsightGroupRetrieveInsightGroupsParams $params
      *
-     * @return BaseResponse<InsightGroupGetInsightGroupsResponse>
+     * @return BaseResponse<DefaultFlatPagination<InsightTemplateGroup>>
      *
      * @throws APIException
      */

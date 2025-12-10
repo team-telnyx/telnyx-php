@@ -27,13 +27,13 @@ final class Number10dlcTest extends TestCase
     }
 
     #[Test]
-    public function testRetrieve(): void
+    public function testGetEnum(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->number10dlc->retrieve('mno');
+        $result = $this->client->number10dlc->getEnum('mno');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNotNull($result);

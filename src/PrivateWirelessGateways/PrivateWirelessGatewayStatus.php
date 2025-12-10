@@ -26,13 +26,13 @@ final class PrivateWirelessGatewayStatus implements BaseModel
     /**
      * This attribute is an [error code](https://developers.telnyx.com/api/errors) related to the failure reason.
      */
-    #[Optional('error_code')]
+    #[Optional('error_code', nullable: true)]
     public ?string $errorCode;
 
     /**
      * This attribute provides a human-readable explanation of why a failure happened.
      */
-    #[Optional('error_description')]
+    #[Optional('error_description', nullable: true)]
     public ?string $errorDescription;
 
     /**
@@ -78,7 +78,7 @@ final class PrivateWirelessGatewayStatus implements BaseModel
     /**
      * This attribute is an [error code](https://developers.telnyx.com/api/errors) related to the failure reason.
      */
-    public function withErrorCode(string $errorCode): self
+    public function withErrorCode(?string $errorCode): self
     {
         $self = clone $this;
         $self['errorCode'] = $errorCode;
@@ -89,7 +89,7 @@ final class PrivateWirelessGatewayStatus implements BaseModel
     /**
      * This attribute provides a human-readable explanation of why a failure happened.
      */
-    public function withErrorDescription(string $errorDescription): self
+    public function withErrorDescription(?string $errorDescription): self
     {
         $self = clone $this;
         $self['errorDescription'] = $errorDescription;

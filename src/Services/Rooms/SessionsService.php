@@ -7,11 +7,11 @@ namespace Telnyx\Services\Rooms;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
-use Telnyx\Rooms\Sessions\SessionGetParticipantsResponse;
+use Telnyx\RoomParticipant;
+use Telnyx\Rooms\RoomSession;
 use Telnyx\Rooms\Sessions\SessionGetResponse;
-use Telnyx\Rooms\Sessions\SessionList0Response;
-use Telnyx\Rooms\Sessions\SessionList1Response;
 use Telnyx\ServiceContracts\Rooms\SessionsContract;
 use Telnyx\Services\Rooms\Sessions\ActionsService;
 
@@ -78,6 +78,8 @@ final class SessionsService implements SessionsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
+     * @return DefaultPagination<RoomSession>
+     *
      * @throws APIException
      */
     public function list0(
@@ -85,7 +87,7 @@ final class SessionsService implements SessionsContract
         ?bool $includeParticipants = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): SessionList0Response {
+    ): DefaultPagination {
         $params = Util::removeNulls(
             [
                 'filter' => $filter,
@@ -117,6 +119,8 @@ final class SessionsService implements SessionsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
+     * @return DefaultPagination<RoomSession>
+     *
      * @throws APIException
      */
     public function list1(
@@ -125,7 +129,7 @@ final class SessionsService implements SessionsContract
         ?bool $includeParticipants = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): SessionList1Response {
+    ): DefaultPagination {
         $params = Util::removeNulls(
             [
                 'filter' => $filter,
@@ -156,6 +160,8 @@ final class SessionsService implements SessionsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
+     * @return DefaultPagination<RoomParticipant>
+     *
      * @throws APIException
      */
     public function retrieveParticipants(
@@ -163,7 +169,7 @@ final class SessionsService implements SessionsContract
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): SessionGetParticipantsResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
         // @phpstan-ignore-next-line argument.type

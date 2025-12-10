@@ -56,10 +56,7 @@ final class ReportListMdrsResponse implements BaseModel
      *   status?: value-of<Status>|null,
      * }> $data
      * @param PaginationMetaReporting|array{
-     *   pageNumber?: int|null,
-     *   pageSize?: int|null,
-     *   totalPages?: int|null,
-     *   totalResults?: int|null,
+     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
      * } $meta
      */
     public static function with(
@@ -101,10 +98,7 @@ final class ReportListMdrsResponse implements BaseModel
 
     /**
      * @param PaginationMetaReporting|array{
-     *   pageNumber?: int|null,
-     *   pageSize?: int|null,
-     *   totalPages?: int|null,
-     *   totalResults?: int|null,
+     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
      * } $meta
      */
     public function withMeta(PaginationMetaReporting|array $meta): self

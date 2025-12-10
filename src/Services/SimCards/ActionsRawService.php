@@ -8,6 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCards\ActionsRawContract;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsParams;
@@ -18,13 +19,13 @@ use Telnyx\SimCards\Actions\ActionGetResponse;
 use Telnyx\SimCards\Actions\ActionListParams;
 use Telnyx\SimCards\Actions\ActionListParams\Filter\ActionType;
 use Telnyx\SimCards\Actions\ActionListParams\Filter\Status;
-use Telnyx\SimCards\Actions\ActionListResponse;
 use Telnyx\SimCards\Actions\ActionRemovePublicIPResponse;
 use Telnyx\SimCards\Actions\ActionSetPublicIPParams;
 use Telnyx\SimCards\Actions\ActionSetPublicIPResponse;
 use Telnyx\SimCards\Actions\ActionSetStandbyResponse;
 use Telnyx\SimCards\Actions\ActionValidateRegistrationCodesParams;
 use Telnyx\SimCards\Actions\ActionValidateRegistrationCodesResponse;
+use Telnyx\SimCards\Actions\SimCardAction;
 
 final class ActionsRawService implements ActionsRawContract
 {
@@ -73,7 +74,7 @@ final class ActionsRawService implements ActionsRawContract
      *   page?: array{number?: int, size?: int},
      * }|ActionListParams $params
      *
-     * @return BaseResponse<ActionListResponse>
+     * @return BaseResponse<DefaultPagination<SimCardAction>>
      *
      * @throws APIException
      */
@@ -92,7 +93,8 @@ final class ActionsRawService implements ActionsRawContract
             path: 'sim_card_actions',
             query: $parsed,
             options: $options,
-            convert: ActionListResponse::class,
+            convert: SimCardAction::class,
+            page: DefaultPagination::class,
         );
     }
 

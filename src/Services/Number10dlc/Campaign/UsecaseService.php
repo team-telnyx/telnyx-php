@@ -33,14 +33,14 @@ final class UsecaseService implements UsecaseContract
      *
      * @throws APIException
      */
-    public function retrieveCost(
+    public function getCost(
         string $usecase,
         ?RequestOptions $requestOptions = null
     ): UsecaseGetCostResponse {
         $params = Util::removeNulls(['usecase' => $usecase]);
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->retrieveCost(params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->getCost(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

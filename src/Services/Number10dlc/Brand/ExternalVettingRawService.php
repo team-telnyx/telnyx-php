@@ -8,11 +8,11 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Conversion\ListOf;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingExternalVettingParams;
-use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingExternalVettingResponse;
-use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingGetExternalVettingResponseItem;
-use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingUpdateExternalVettingParams;
-use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingUpdateExternalVettingResponse;
+use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingImportsParams;
+use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingImportsResponse;
+use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingListResponseItem;
+use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingOrderParams;
+use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingOrderResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Number10dlc\Brand\ExternalVettingRawContract;
 
@@ -27,46 +27,13 @@ final class ExternalVettingRawService implements ExternalVettingRawContract
     /**
      * @api
      *
-     * Order new external vetting for a brand
-     *
-     * @param array{
-     *   evpID: string, vettingClass: string
-     * }|ExternalVettingExternalVettingParams $params
-     *
-     * @return BaseResponse<ExternalVettingExternalVettingResponse>
-     *
-     * @throws APIException
-     */
-    public function externalVetting(
-        string $brandID,
-        array|ExternalVettingExternalVettingParams $params,
-        ?RequestOptions $requestOptions = null,
-    ): BaseResponse {
-        [$parsed, $options] = ExternalVettingExternalVettingParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
-            method: 'post',
-            path: ['10dlc/brand/%1$s/externalVetting', $brandID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ExternalVettingExternalVettingResponse::class,
-        );
-    }
-
-    /**
-     * @api
-     *
      * Get list of valid external vetting record for a given brand
      *
-     * @return BaseResponse<list<ExternalVettingGetExternalVettingResponseItem>>
+     * @return BaseResponse<list<ExternalVettingListResponseItem>>
      *
      * @throws APIException
      */
-    public function retrieveExternalVetting(
+    public function list(
         string $brandID,
         ?RequestOptions $requestOptions = null
     ): BaseResponse {
@@ -75,7 +42,7 @@ final class ExternalVettingRawService implements ExternalVettingRawContract
             method: 'get',
             path: ['10dlc/brand/%1$s/externalVetting', $brandID],
             options: $requestOptions,
-            convert: new ListOf(ExternalVettingGetExternalVettingResponseItem::class),
+            convert: new ListOf(ExternalVettingListResponseItem::class),
         );
     }
 
@@ -88,18 +55,18 @@ final class ExternalVettingRawService implements ExternalVettingRawContract
      *
      * @param array{
      *   evpID: string, vettingID: string, vettingToken?: string
-     * }|ExternalVettingUpdateExternalVettingParams $params
+     * }|ExternalVettingImportsParams $params
      *
-     * @return BaseResponse<ExternalVettingUpdateExternalVettingResponse>
+     * @return BaseResponse<ExternalVettingImportsResponse>
      *
      * @throws APIException
      */
-    public function updateExternalVetting(
+    public function imports(
         string $brandID,
-        array|ExternalVettingUpdateExternalVettingParams $params,
+        array|ExternalVettingImportsParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse {
-        [$parsed, $options] = ExternalVettingUpdateExternalVettingParams::parseRequest(
+        [$parsed, $options] = ExternalVettingImportsParams::parseRequest(
             $params,
             $requestOptions,
         );
@@ -110,7 +77,40 @@ final class ExternalVettingRawService implements ExternalVettingRawContract
             path: ['10dlc/brand/%1$s/externalVetting', $brandID],
             body: (object) $parsed,
             options: $options,
-            convert: ExternalVettingUpdateExternalVettingResponse::class,
+            convert: ExternalVettingImportsResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Order new external vetting for a brand
+     *
+     * @param array{
+     *   evpID: string, vettingClass: string
+     * }|ExternalVettingOrderParams $params
+     *
+     * @return BaseResponse<ExternalVettingOrderResponse>
+     *
+     * @throws APIException
+     */
+    public function order(
+        string $brandID,
+        array|ExternalVettingOrderParams $params,
+        ?RequestOptions $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = ExternalVettingOrderParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: ['10dlc/brand/%1$s/externalVetting', $brandID],
+            body: (object) $parsed,
+            options: $options,
+            convert: ExternalVettingOrderResponse::class,
         );
     }
 }

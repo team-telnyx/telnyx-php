@@ -7,17 +7,17 @@ namespace Telnyx\Webhooks\InboundMessageWebhookEvent;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\InboundMessagePayload;
+use Telnyx\InboundMessagePayload\Cc;
+use Telnyx\InboundMessagePayload\Cost;
+use Telnyx\InboundMessagePayload\CostBreakdown;
+use Telnyx\InboundMessagePayload\Direction;
+use Telnyx\InboundMessagePayload\From;
+use Telnyx\InboundMessagePayload\Media;
+use Telnyx\InboundMessagePayload\To;
+use Telnyx\InboundMessagePayload\Type;
 use Telnyx\Messages\MessagingError;
 use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\EventType;
-use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\Payload;
-use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\Payload\Cc;
-use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\Payload\Cost;
-use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\Payload\CostBreakdown;
-use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\Payload\Direction;
-use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\Payload\From;
-use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\Payload\Media;
-use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\Payload\To;
-use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\Payload\Type;
 use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\RecordType;
 
 /**
@@ -25,7 +25,7 @@ use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\RecordType;
  *   id?: string|null,
  *   eventType?: value-of<EventType>|null,
  *   occurredAt?: \DateTimeInterface|null,
- *   payload?: Payload|null,
+ *   payload?: InboundMessagePayload|null,
  *   recordType?: value-of<RecordType>|null,
  * }
  */
@@ -55,7 +55,7 @@ final class Data implements BaseModel
     public ?\DateTimeInterface $occurredAt;
 
     #[Optional]
-    public ?Payload $payload;
+    public ?InboundMessagePayload $payload;
 
     /**
      * Identifies the type of the resource.
@@ -76,7 +76,7 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param EventType|value-of<EventType> $eventType
-     * @param Payload|array{
+     * @param InboundMessagePayload|array{
      *   id?: string|null,
      *   cc?: list<Cc>|null,
      *   completedAt?: \DateTimeInterface|null,
@@ -91,7 +91,7 @@ final class Data implements BaseModel
      *   organizationID?: string|null,
      *   parts?: int|null,
      *   receivedAt?: \DateTimeInterface|null,
-     *   recordType?: value-of<Payload\RecordType>|null,
+     *   recordType?: value-of<InboundMessagePayload\RecordType>|null,
      *   sentAt?: \DateTimeInterface|null,
      *   subject?: string|null,
      *   tags?: list<string>|null,
@@ -111,7 +111,7 @@ final class Data implements BaseModel
         ?string $id = null,
         EventType|string|null $eventType = null,
         ?\DateTimeInterface $occurredAt = null,
-        Payload|array|null $payload = null,
+        InboundMessagePayload|array|null $payload = null,
         RecordType|string|null $recordType = null,
     ): self {
         $self = new self;
@@ -161,7 +161,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param Payload|array{
+     * @param InboundMessagePayload|array{
      *   id?: string|null,
      *   cc?: list<Cc>|null,
      *   completedAt?: \DateTimeInterface|null,
@@ -176,7 +176,7 @@ final class Data implements BaseModel
      *   organizationID?: string|null,
      *   parts?: int|null,
      *   receivedAt?: \DateTimeInterface|null,
-     *   recordType?: value-of<Payload\RecordType>|null,
+     *   recordType?: value-of<InboundMessagePayload\RecordType>|null,
      *   sentAt?: \DateTimeInterface|null,
      *   subject?: string|null,
      *   tags?: list<string>|null,
@@ -191,7 +191,7 @@ final class Data implements BaseModel
      *   webhookURL?: string|null,
      * } $payload
      */
-    public function withPayload(Payload|array $payload): self
+    public function withPayload(InboundMessagePayload|array $payload): self
     {
         $self = clone $this;
         $self['payload'] = $payload;

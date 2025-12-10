@@ -6,11 +6,11 @@ namespace Telnyx\ServiceContracts\Number10dlc;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Number10dlc\PhoneNumberCampaigns\PhoneNumberCampaign;
 use Telnyx\Number10dlc\PhoneNumberCampaigns\PhoneNumberCampaignCreateParams;
 use Telnyx\Number10dlc\PhoneNumberCampaigns\PhoneNumberCampaignListParams;
-use Telnyx\Number10dlc\PhoneNumberCampaigns\PhoneNumberCampaignListResponse;
 use Telnyx\Number10dlc\PhoneNumberCampaigns\PhoneNumberCampaignUpdateParams;
-use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign;
+use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 
 interface PhoneNumberCampaignsRawContract
@@ -51,7 +51,7 @@ interface PhoneNumberCampaignsRawContract
      * @throws APIException
      */
     public function update(
-        string $phoneNumber_,
+        string $campaignPhoneNumber,
         array|PhoneNumberCampaignUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse;
@@ -61,7 +61,7 @@ interface PhoneNumberCampaignsRawContract
      *
      * @param array<mixed>|PhoneNumberCampaignListParams $params
      *
-     * @return BaseResponse<PhoneNumberCampaignListResponse>
+     * @return BaseResponse<PerPagePaginationV2<PhoneNumberCampaign>>
      *
      * @throws APIException
      */

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\Number10dlc;
 
-use Telnyx\Campaign\TelnyxCampaignCsp;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Number10dlc\CampaignBuilder\CampaignBuilderCampaignBuilderParams;
+use Telnyx\Number10dlc\Campaign\TelnyxCampaignCsp;
+use Telnyx\Number10dlc\CampaignBuilder\CampaignBuilderSubmitParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Number10dlc\CampaignBuilderRawContract;
 
@@ -61,17 +61,17 @@ final class CampaignBuilderRawService implements CampaignBuilderRawContract
      *   termsAndConditionsLink?: string,
      *   webhookFailoverURL?: string,
      *   webhookURL?: string,
-     * }|CampaignBuilderCampaignBuilderParams $params
+     * }|CampaignBuilderSubmitParams $params
      *
      * @return BaseResponse<TelnyxCampaignCsp>
      *
      * @throws APIException
      */
-    public function campaignBuilder(
-        array|CampaignBuilderCampaignBuilderParams $params,
+    public function submit(
+        array|CampaignBuilderSubmitParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse {
-        [$parsed, $options] = CampaignBuilderCampaignBuilderParams::parseRequest(
+        [$parsed, $options] = CampaignBuilderSubmitParams::parseRequest(
             $params,
             $requestOptions,
         );

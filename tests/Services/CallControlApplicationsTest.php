@@ -5,12 +5,13 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\CallControlApplications\CallControlApplication;
 use Telnyx\CallControlApplications\CallControlApplicationDeleteResponse;
 use Telnyx\CallControlApplications\CallControlApplicationGetResponse;
-use Telnyx\CallControlApplications\CallControlApplicationListResponse;
 use Telnyx\CallControlApplications\CallControlApplicationNewResponse;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateResponse;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -164,10 +165,15 @@ final class CallControlApplicationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->callControlApplications->list();
+        $page = $this->client->callControlApplications->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CallControlApplicationListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(CallControlApplication::class, $item);
+        }
     }
 
     #[Test]

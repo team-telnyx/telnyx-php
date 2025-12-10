@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\Number10dlc;
 
-use Telnyx\Campaign\TelnyxCampaignCsp;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\Number10dlc\Campaign\TelnyxCampaignCsp;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Number10dlc\CampaignBuilderContract;
 use Telnyx\Services\Number10dlc\CampaignBuilder\BrandService;
@@ -76,7 +76,7 @@ final class CampaignBuilderService implements CampaignBuilderContract
      *
      * @throws APIException
      */
-    public function campaignBuilder(
+    public function submit(
         string $brandID,
         string $description,
         string $usecase,
@@ -155,7 +155,7 @@ final class CampaignBuilderService implements CampaignBuilderContract
         );
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->campaignBuilder(params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->submit(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

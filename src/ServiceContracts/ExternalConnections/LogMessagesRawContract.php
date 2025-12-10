@@ -6,6 +6,7 @@ namespace Telnyx\ServiceContracts\ExternalConnections;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPaginationForLogMessages;
 use Telnyx\ExternalConnections\LogMessages\LogMessageDismissResponse;
 use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListParams;
@@ -33,7 +34,7 @@ interface LogMessagesRawContract
      *
      * @param array<mixed>|LogMessageListParams $params
      *
-     * @return BaseResponse<LogMessageListResponse>
+     * @return BaseResponse<DefaultPaginationForLogMessages<LogMessageListResponse>>
      *
      * @throws APIException
      */

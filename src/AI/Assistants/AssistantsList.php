@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\AI\Assistants\AssistantTool\DtmfTool;
-use Telnyx\AI\Assistants\AssistantTool\HandoffTool;
-use Telnyx\AI\Assistants\AssistantTool\SipReferTool;
+use Telnyx\AI\Assistants\AssistantTool\Handoff;
+use Telnyx\AI\Assistants\AssistantTool\Refer;
+use Telnyx\AI\Assistants\AssistantTool\SendDtmf;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -64,7 +64,7 @@ final class AssistantsList implements BaseModel
      *   messagingSettings?: MessagingSettings|null,
      *   privacySettings?: PrivacySettings|null,
      *   telephonySettings?: TelephonySettings|null,
-     *   tools?: list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool>|null,
+     *   tools?: list<WebhookTool|RetrievalTool|Handoff|HangupTool|TransferTool|Refer|SendDtmf>|null,
      *   transcription?: TranscriptionSettings|null,
      *   voiceSettings?: VoiceSettings|null,
      * }> $data
@@ -96,7 +96,7 @@ final class AssistantsList implements BaseModel
      *   messagingSettings?: MessagingSettings|null,
      *   privacySettings?: PrivacySettings|null,
      *   telephonySettings?: TelephonySettings|null,
-     *   tools?: list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool>|null,
+     *   tools?: list<WebhookTool|RetrievalTool|Handoff|HangupTool|TransferTool|Refer|SendDtmf>|null,
      *   transcription?: TranscriptionSettings|null,
      *   voiceSettings?: VoiceSettings|null,
      * }> $data

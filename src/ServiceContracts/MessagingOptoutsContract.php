@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\MessagingOptouts\MessagingOptoutListResponse;
 use Telnyx\RequestOptions;
 
@@ -24,6 +25,8 @@ interface MessagingOptoutsContract
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param string $redactionEnabled If receiving address (+E.164 formatted phone number) should be redacted
      *
+     * @return DefaultPagination<MessagingOptoutListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -32,5 +35,5 @@ interface MessagingOptoutsContract
         ?array $page = null,
         ?string $redactionEnabled = null,
         ?RequestOptions $requestOptions = null,
-    ): MessagingOptoutListResponse;
+    ): DefaultPagination;
 }

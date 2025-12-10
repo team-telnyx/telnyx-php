@@ -7,8 +7,8 @@ namespace Telnyx\Services\Number10dlc\CampaignBuilder;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Number10dlc\CampaignBuilder\Brand\BrandGetResponse;
-use Telnyx\Number10dlc\CampaignBuilder\Brand\BrandRetrieveParams;
+use Telnyx\Number10dlc\CampaignBuilder\Brand\BrandQualifyByUsecaseParams;
+use Telnyx\Number10dlc\CampaignBuilder\Brand\BrandQualifyByUsecaseResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Number10dlc\CampaignBuilder\BrandRawContract;
 
@@ -25,18 +25,18 @@ final class BrandRawService implements BrandRawContract
      *
      * This endpoint allows you to see whether or not the supplied brand is suitable for your desired campaign use case.
      *
-     * @param array{brandID: string}|BrandRetrieveParams $params
+     * @param array{brandID: string}|BrandQualifyByUsecaseParams $params
      *
-     * @return BaseResponse<BrandGetResponse>
+     * @return BaseResponse<BrandQualifyByUsecaseResponse>
      *
      * @throws APIException
      */
-    public function retrieve(
+    public function qualifyByUsecase(
         string $usecase,
-        array|BrandRetrieveParams $params,
+        array|BrandQualifyByUsecaseParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse {
-        [$parsed, $options] = BrandRetrieveParams::parseRequest(
+        [$parsed, $options] = BrandQualifyByUsecaseParams::parseRequest(
             $params,
             $requestOptions,
         );
@@ -50,7 +50,7 @@ final class BrandRawService implements BrandRawContract
                 '10dlc/campaignBuilder/brand/%1$s/usecase/%2$s', $brandID, $usecase,
             ],
             options: $options,
-            convert: BrandGetResponse::class,
+            convert: BrandQualifyByUsecaseResponse::class,
         );
     }
 }

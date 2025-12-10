@@ -7,14 +7,14 @@ namespace Telnyx\MessagingProfiles\AutorespConfigs;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\MessagingPaginationMeta;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfig\Op;
-use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListResponse\Meta;
 
 /**
  * List of Auto-Response Settings.
  *
  * @phpstan-type AutorespConfigListResponseShape = array{
- *   data: list<AutoRespConfig>, meta: Meta
+ *   data: list<AutoRespConfig>, meta: MessagingPaginationMeta
  * }
  */
 final class AutorespConfigListResponse implements BaseModel
@@ -27,7 +27,7 @@ final class AutorespConfigListResponse implements BaseModel
     public array $data;
 
     #[Required]
-    public Meta $meta;
+    public MessagingPaginationMeta $meta;
 
     /**
      * `new AutorespConfigListResponse()` is missing required properties by the API.
@@ -62,12 +62,14 @@ final class AutorespConfigListResponse implements BaseModel
      *   updatedAt: \DateTimeInterface,
      *   respText?: string|null,
      * }> $data
-     * @param Meta|array{
+     * @param MessagingPaginationMeta|array{
      *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
-    public static function with(array $data, Meta|array $meta): self
-    {
+    public static function with(
+        array $data,
+        MessagingPaginationMeta|array $meta
+    ): self {
         $self = new self;
 
         $self['data'] = $data;
@@ -96,11 +98,11 @@ final class AutorespConfigListResponse implements BaseModel
     }
 
     /**
-     * @param Meta|array{
+     * @param MessagingPaginationMeta|array{
      *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
      * } $meta
      */
-    public function withMeta(Meta|array $meta): self
+    public function withMeta(MessagingPaginationMeta|array $meta): self
     {
         $self = clone $this;
         $self['meta'] = $meta;

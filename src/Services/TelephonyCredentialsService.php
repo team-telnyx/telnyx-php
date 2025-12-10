@@ -7,11 +7,12 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TelephonyCredentialsContract;
+use Telnyx\TelephonyCredentials\TelephonyCredential;
 use Telnyx\TelephonyCredentials\TelephonyCredentialDeleteResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialGetResponse;
-use Telnyx\TelephonyCredentials\TelephonyCredentialListResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialNewResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialUpdateResponse;
 
@@ -133,13 +134,15 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
+     * @return DefaultPagination<TelephonyCredential>
+     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): TelephonyCredentialListResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
         // @phpstan-ignore-next-line argument.type

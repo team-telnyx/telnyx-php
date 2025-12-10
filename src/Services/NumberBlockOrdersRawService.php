@@ -7,10 +7,11 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\NumberBlockOrders\NumberBlockOrder;
 use Telnyx\NumberBlockOrders\NumberBlockOrderCreateParams;
 use Telnyx\NumberBlockOrders\NumberBlockOrderGetResponse;
 use Telnyx\NumberBlockOrders\NumberBlockOrderListParams;
-use Telnyx\NumberBlockOrders\NumberBlockOrderListResponse;
 use Telnyx\NumberBlockOrders\NumberBlockOrderNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumberBlockOrdersRawContract;
@@ -97,7 +98,7 @@ final class NumberBlockOrdersRawService implements NumberBlockOrdersRawContract
      *   page?: array{number?: int, size?: int},
      * }|NumberBlockOrderListParams $params
      *
-     * @return BaseResponse<NumberBlockOrderListResponse>
+     * @return BaseResponse<DefaultPagination<NumberBlockOrder>>
      *
      * @throws APIException
      */
@@ -116,7 +117,8 @@ final class NumberBlockOrdersRawService implements NumberBlockOrdersRawContract
             path: 'number_block_orders',
             query: $parsed,
             options: $options,
-            convert: NumberBlockOrderListResponse::class,
+            convert: NumberBlockOrder::class,
+            page: DefaultPagination::class,
         );
     }
 }

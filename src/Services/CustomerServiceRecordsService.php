@@ -7,13 +7,14 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\CustomerServiceRecords\CustomerServiceRecord;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordGetResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\Status\Eq;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\Status\In;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Sort\Value;
-use Telnyx\CustomerServiceRecords\CustomerServiceRecordListResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordNewResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageResponse;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CustomerServiceRecordsContract;
 
@@ -115,6 +116,8 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
      *   value?: 'created_at'|'-created_at'|Value
      * } $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
+     * @return DefaultPagination<CustomerServiceRecord>
+     *
      * @throws APIException
      */
     public function list(
@@ -122,7 +125,7 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
         ?array $page = null,
         ?array $sort = null,
         ?RequestOptions $requestOptions = null,
-    ): CustomerServiceRecordListResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(
             ['filter' => $filter, 'page' => $page, 'sort' => $sort]
         );

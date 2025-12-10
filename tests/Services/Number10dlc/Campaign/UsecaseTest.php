@@ -28,13 +28,13 @@ final class UsecaseTest extends TestCase
     }
 
     #[Test]
-    public function testRetrieveCost(): void
+    public function testGetCost(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->number10dlc->campaign->usecase->retrieveCost(
+        $result = $this->client->number10dlc->campaign->usecase->getCost(
             usecase: 'usecase'
         );
 
@@ -43,13 +43,13 @@ final class UsecaseTest extends TestCase
     }
 
     #[Test]
-    public function testRetrieveCostWithOptionalParams(): void
+    public function testGetCostWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->number10dlc->campaign->usecase->retrieveCost(
+        $result = $this->client->number10dlc->campaign->usecase->getCost(
             usecase: 'usecase'
         );
 

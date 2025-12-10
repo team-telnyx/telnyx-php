@@ -6,8 +6,8 @@ namespace Telnyx\ServiceContracts\Number10dlc\CampaignBuilder;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Number10dlc\CampaignBuilder\Brand\BrandGetResponse;
-use Telnyx\Number10dlc\CampaignBuilder\Brand\BrandRetrieveParams;
+use Telnyx\Number10dlc\CampaignBuilder\Brand\BrandQualifyByUsecaseParams;
+use Telnyx\Number10dlc\CampaignBuilder\Brand\BrandQualifyByUsecaseResponse;
 use Telnyx\RequestOptions;
 
 interface BrandRawContract
@@ -15,15 +15,15 @@ interface BrandRawContract
     /**
      * @api
      *
-     * @param array<mixed>|BrandRetrieveParams $params
+     * @param array<mixed>|BrandQualifyByUsecaseParams $params
      *
-     * @return BaseResponse<BrandGetResponse>
+     * @return BaseResponse<BrandQualifyByUsecaseResponse>
      *
      * @throws APIException
      */
-    public function retrieve(
+    public function qualifyByUsecase(
         string $usecase,
-        array|BrandRetrieveParams $params,
+        array|BrandQualifyByUsecaseParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse;
 }

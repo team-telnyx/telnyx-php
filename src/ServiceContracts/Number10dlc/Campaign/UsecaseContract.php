@@ -15,7 +15,7 @@ interface UsecaseContract
      *
      * @throws APIException
      */
-    public function retrieveCost(
+    public function getCost(
         string $usecase,
         ?RequestOptions $requestOptions = null
     ): UsecaseGetCostResponse;

@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\OutboundVoiceProfiles\OutboundCallRecording;
 use Telnyx\OutboundVoiceProfiles\OutboundCallRecording\CallRecordingChannels;
 use Telnyx\OutboundVoiceProfiles\OutboundCallRecording\CallRecordingFormat;
 use Telnyx\OutboundVoiceProfiles\OutboundCallRecording\CallRecordingType;
+use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileDeleteResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileGetResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Sort;
-use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileNewResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateResponse;
 use Telnyx\OutboundVoiceProfiles\ServicePlan;
@@ -148,6 +149,8 @@ interface OutboundVoiceProfilesContract
      *   </li>
      * </ul> <br/>
      *
+     * @return DefaultPagination<OutboundVoiceProfile>
+     *
      * @throws APIException
      */
     public function list(
@@ -155,7 +158,7 @@ interface OutboundVoiceProfilesContract
         ?array $page = null,
         string|Sort $sort = '-created_at',
         ?RequestOptions $requestOptions = null,
-    ): OutboundVoiceProfileListResponse;
+    ): DefaultPagination;
 
     /**
      * @api

@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\BillingGroups\BillingGroup;
 use Telnyx\BillingGroups\BillingGroupCreateParams;
 use Telnyx\BillingGroups\BillingGroupDeleteResponse;
 use Telnyx\BillingGroups\BillingGroupGetResponse;
 use Telnyx\BillingGroups\BillingGroupListParams;
-use Telnyx\BillingGroups\BillingGroupListResponse;
 use Telnyx\BillingGroups\BillingGroupNewResponse;
 use Telnyx\BillingGroups\BillingGroupUpdateParams;
 use Telnyx\BillingGroups\BillingGroupUpdateResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 interface BillingGroupsRawContract
@@ -67,7 +68,7 @@ interface BillingGroupsRawContract
      *
      * @param array<mixed>|BillingGroupListParams $params
      *
-     * @return BaseResponse<BillingGroupListResponse>
+     * @return BaseResponse<DefaultFlatPagination<BillingGroup>>
      *
      * @throws APIException
      */

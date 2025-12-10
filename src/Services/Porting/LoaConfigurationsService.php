@@ -7,10 +7,11 @@ namespace Telnyx\Services\Porting;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationGetResponse;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationListResponse;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationNewResponse;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateResponse;
+use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Porting\LoaConfigurationsContract;
 
@@ -151,12 +152,14 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
+     * @return DefaultPagination<PortingLoaConfiguration>
+     *
      * @throws APIException
      */
     public function list(
         ?array $page = null,
         ?RequestOptions $requestOptions = null
-    ): LoaConfigurationListResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(['page' => $page]);
 
         // @phpstan-ignore-next-line argument.type

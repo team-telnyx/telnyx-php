@@ -6,11 +6,12 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
+use Telnyx\UserAddresses\UserAddress;
 use Telnyx\UserAddresses\UserAddressCreateParams;
 use Telnyx\UserAddresses\UserAddressGetResponse;
 use Telnyx\UserAddresses\UserAddressListParams;
-use Telnyx\UserAddresses\UserAddressListResponse;
 use Telnyx\UserAddresses\UserAddressNewResponse;
 
 interface UserAddressesRawContract
@@ -48,7 +49,7 @@ interface UserAddressesRawContract
      *
      * @param array<mixed>|UserAddressListParams $params
      *
-     * @return BaseResponse<UserAddressListResponse>
+     * @return BaseResponse<DefaultPagination<UserAddress>>
      *
      * @throws APIException
      */

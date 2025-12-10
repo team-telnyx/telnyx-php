@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Tests\Runs;
 
-use Telnyx\AI\Assistants\Tests\Runs\RunListParams\Page;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -16,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\Assistants\Tests\RunsService::list()
  *
  * @phpstan-type RunListParamsShape = array{
- *   page?: Page|array{number?: int|null, size?: int|null}, status?: string
+ *   pageNumber?: int, pageSize?: int, status?: string
  * }
  */
 final class RunListParams implements BaseModel
@@ -25,11 +24,11 @@ final class RunListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     */
     #[Optional]
-    public ?Page $page;
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
 
     /**
      * Filter runs by execution status (pending, running, completed, failed, timeout).
@@ -46,30 +45,33 @@ final class RunListParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param Page|array{number?: int|null, size?: int|null} $page
      */
     public static function with(
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         ?string $status = null
     ): self {
         $self = new self;
 
-        null !== $page && $self['page'] = $page;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
         null !== $status && $self['status'] = $status;
 
         return $self;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     *
-     * @param Page|array{number?: int|null, size?: int|null} $page
-     */
-    public function withPage(Page|array $page): self
+    public function withPageNumber(int $pageNumber): self
     {
         $self = clone $this;
-        $self['page'] = $page;
+        $self['pageNumber'] = $pageNumber;
+
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
         return $self;
     }

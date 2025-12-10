@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\AuthenticationProviders;
 
-use Telnyx\AuthenticationProviders\AuthenticationProviderListParams\Page;
 use Telnyx\AuthenticationProviders\AuthenticationProviderListParams\Sort;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
@@ -17,8 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AuthenticationProvidersService::list()
  *
  * @phpstan-type AuthenticationProviderListParamsShape = array{
- *   page?: Page|array{number?: int|null, size?: int|null},
- *   sort?: Sort|value-of<Sort>,
+ *   pageNumber?: int, pageSize?: int, sort?: Sort|value-of<Sort>
  * }
  */
 final class AuthenticationProviderListParams implements BaseModel
@@ -27,11 +25,11 @@ final class AuthenticationProviderListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
-     */
     #[Optional]
-    public ?Page $page;
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
 
     /**
      * Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code>-</code> prefix.<br/><br/>
@@ -61,30 +59,34 @@ final class AuthenticationProviderListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         Sort|string|null $sort = null
     ): self {
         $self = new self;
 
-        null !== $page && $self['page'] = $page;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
         null !== $sort && $self['sort'] = $sort;
 
         return $self;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
-     *
-     * @param Page|array{number?: int|null, size?: int|null} $page
-     */
-    public function withPage(Page|array $page): self
+    public function withPageNumber(int $pageNumber): self
     {
         $self = clone $this;
-        $self['page'] = $page;
+        $self['pageNumber'] = $pageNumber;
+
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
         return $self;
     }

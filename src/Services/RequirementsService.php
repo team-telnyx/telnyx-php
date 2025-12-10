@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\Requirements\RequirementGetResponse;
 use Telnyx\Requirements\RequirementListParams\Filter\Action;
@@ -64,6 +65,8 @@ final class RequirementsService implements RequirementsContract
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param list<'created_at'|'updated_at'|'country_code'|'phone_number_type'|'-created_at'|'-updated_at'|'-country_code'|'-phone_number_type'|Sort> $sort Consolidated sort parameter for requirements (deepObject style). Originally: sort[]
      *
+     * @return DefaultPagination<RequirementListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -71,7 +74,7 @@ final class RequirementsService implements RequirementsContract
         ?array $page = null,
         ?array $sort = null,
         ?RequestOptions $requestOptions = null,
-    ): RequirementListResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(
             ['filter' => $filter, 'page' => $page, 'sort' => $sort]
         );

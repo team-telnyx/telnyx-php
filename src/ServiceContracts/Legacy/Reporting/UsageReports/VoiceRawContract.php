@@ -6,12 +6,13 @@ namespace Telnyx\ServiceContracts\Legacy\Reporting\UsageReports;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Legacy\Reporting\UsageReports\Voice\CdrUsageReportResponseLegacy;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceCreateParams;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceDeleteResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceGetResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceListParams;
-use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceListResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceNewResponse;
+use Telnyx\PerPagePagination;
 use Telnyx\RequestOptions;
 
 interface VoiceRawContract
@@ -47,7 +48,7 @@ interface VoiceRawContract
      *
      * @param array<mixed>|VoiceListParams $params
      *
-     * @return BaseResponse<VoiceListResponse>
+     * @return BaseResponse<PerPagePagination<CdrUsageReportResponseLegacy>>
      *
      * @throws APIException
      */

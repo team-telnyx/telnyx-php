@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\MobileVoiceConnections\MobileVoiceConnection;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams\WebhookAPIVersion;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionDeleteResponse;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionGetResponse;
-use Telnyx\MobileVoiceConnections\MobileVoiceConnectionListResponse;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionNewResponse;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateResponse;
 use Telnyx\RequestOptions;
@@ -83,6 +84,8 @@ interface MobileVoiceConnectionsContract
      * @param int $pageSize The size of the page
      * @param string $sort Sort by field (e.g., created_at, connection_name, active). Prefix with - for descending order.
      *
+     * @return DefaultFlatPagination<MobileVoiceConnection>
+     *
      * @throws APIException
      */
     public function list(
@@ -91,7 +94,7 @@ interface MobileVoiceConnectionsContract
         ?int $pageSize = null,
         ?string $sort = null,
         ?RequestOptions $requestOptions = null,
-    ): MobileVoiceConnectionListResponse;
+    ): DefaultFlatPagination;
 
     /**
      * @api

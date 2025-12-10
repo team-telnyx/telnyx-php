@@ -12,7 +12,9 @@ use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings\Port;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
+use Telnyx\DefaultPagination;
 use Telnyx\IPConnections\InboundIP;
+use Telnyx\IPConnections\IPConnection;
 use Telnyx\IPConnections\IPConnectionCreateParams\Inbound\AniNumberFormat;
 use Telnyx\IPConnections\IPConnectionCreateParams\Inbound\DefaultRoutingMethod;
 use Telnyx\IPConnections\IPConnectionCreateParams\Inbound\DnisNumberFormat;
@@ -23,7 +25,6 @@ use Telnyx\IPConnections\IPConnectionCreateParams\WebhookAPIVersion;
 use Telnyx\IPConnections\IPConnectionDeleteResponse;
 use Telnyx\IPConnections\IPConnectionGetResponse;
 use Telnyx\IPConnections\IPConnectionListParams\Sort;
-use Telnyx\IPConnections\IPConnectionListResponse;
 use Telnyx\IPConnections\IPConnectionNewResponse;
 use Telnyx\IPConnections\IPConnectionUpdateResponse;
 use Telnyx\IPConnections\OutboundIP;
@@ -326,6 +327,8 @@ final class IPConnectionsService implements IPConnectionsContract
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
+     * @return DefaultPagination<IPConnection>
+     *
      * @throws APIException
      */
     public function list(
@@ -333,7 +336,7 @@ final class IPConnectionsService implements IPConnectionsContract
         ?array $page = null,
         string|Sort $sort = 'created_at',
         ?RequestOptions $requestOptions = null,
-    ): IPConnectionListResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(
             ['filter' => $filter, 'page' => $page, 'sort' => $sort]
         );

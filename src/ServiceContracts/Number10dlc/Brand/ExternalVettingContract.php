@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Number10dlc\Brand;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingExternalVettingResponse;
-use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingGetExternalVettingResponseItem;
-use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingUpdateExternalVettingResponse;
+use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingImportsResponse;
+use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingListResponseItem;
+use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingOrderResponse;
 use Telnyx\RequestOptions;
 
 interface ExternalVettingContract
@@ -15,26 +15,11 @@ interface ExternalVettingContract
     /**
      * @api
      *
-     * @param string $evpID external vetting provider ID for the brand
-     * @param string $vettingClass identifies the vetting classification
+     * @return list<ExternalVettingListResponseItem>
      *
      * @throws APIException
      */
-    public function externalVetting(
-        string $brandID,
-        string $evpID,
-        string $vettingClass,
-        ?RequestOptions $requestOptions = null,
-    ): ExternalVettingExternalVettingResponse;
-
-    /**
-     * @api
-     *
-     * @return list<ExternalVettingGetExternalVettingResponseItem>
-     *
-     * @throws APIException
-     */
-    public function retrieveExternalVetting(
+    public function list(
         string $brandID,
         ?RequestOptions $requestOptions = null
     ): array;
@@ -48,11 +33,26 @@ interface ExternalVettingContract
      *
      * @throws APIException
      */
-    public function updateExternalVetting(
+    public function imports(
         string $brandID,
         string $evpID,
         string $vettingID,
         ?string $vettingToken = null,
         ?RequestOptions $requestOptions = null,
-    ): ExternalVettingUpdateExternalVettingResponse;
+    ): ExternalVettingImportsResponse;
+
+    /**
+     * @api
+     *
+     * @param string $evpID external vetting provider ID for the brand
+     * @param string $vettingClass identifies the vetting classification
+     *
+     * @throws APIException
+     */
+    public function order(
+        string $brandID,
+        string $evpID,
+        string $vettingClass,
+        ?RequestOptions $requestOptions = null,
+    ): ExternalVettingOrderResponse;
 }

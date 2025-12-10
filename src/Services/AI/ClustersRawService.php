@@ -15,6 +15,7 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\ClustersRawContract;
 
@@ -67,9 +68,9 @@ final class ClustersRawService implements ClustersRawContract
      *
      * List all clusters
      *
-     * @param array{page?: array{number?: int, size?: int}}|ClusterListParams $params
+     * @param array{pageNumber?: int, pageSize?: int}|ClusterListParams $params
      *
-     * @return BaseResponse<ClusterListResponse>
+     * @return BaseResponse<DefaultFlatPagination<ClusterListResponse>>
      *
      * @throws APIException
      */
@@ -86,9 +87,13 @@ final class ClustersRawService implements ClustersRawContract
         return $this->client->request(
             method: 'get',
             path: 'ai/clusters',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: ClusterListResponse::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

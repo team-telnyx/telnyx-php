@@ -27,13 +27,13 @@ final class OsrTest extends TestCase
     }
 
     #[Test]
-    public function testRetrieveAttributes(): void
+    public function testGetAttributes(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->number10dlc->campaign->osr->retrieveAttributes(
+        $result = $this->client->number10dlc->campaign->osr->getAttributes(
             'campaignId'
         );
 

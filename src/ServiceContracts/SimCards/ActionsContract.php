@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\SimCards;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsResponse;
 use Telnyx\SimCards\Actions\ActionDisableResponse;
@@ -12,11 +13,11 @@ use Telnyx\SimCards\Actions\ActionEnableResponse;
 use Telnyx\SimCards\Actions\ActionGetResponse;
 use Telnyx\SimCards\Actions\ActionListParams\Filter\ActionType;
 use Telnyx\SimCards\Actions\ActionListParams\Filter\Status;
-use Telnyx\SimCards\Actions\ActionListResponse;
 use Telnyx\SimCards\Actions\ActionRemovePublicIPResponse;
 use Telnyx\SimCards\Actions\ActionSetPublicIPResponse;
 use Telnyx\SimCards\Actions\ActionSetStandbyResponse;
 use Telnyx\SimCards\Actions\ActionValidateRegistrationCodesResponse;
+use Telnyx\SimCards\Actions\SimCardAction;
 
 interface ActionsContract
 {
@@ -45,13 +46,15 @@ interface ActionsContract
      *   number?: int, size?: int
      * } $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
      *
+     * @return DefaultPagination<SimCardAction>
+     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): ActionListResponse;
+    ): DefaultPagination;
 
     /**
      * @api

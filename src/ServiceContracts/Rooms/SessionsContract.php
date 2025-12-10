@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Rooms;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
-use Telnyx\Rooms\Sessions\SessionGetParticipantsResponse;
+use Telnyx\RoomParticipant;
+use Telnyx\Rooms\RoomSession;
 use Telnyx\Rooms\Sessions\SessionGetResponse;
-use Telnyx\Rooms\Sessions\SessionList0Response;
-use Telnyx\Rooms\Sessions\SessionList1Response;
 
 interface SessionsContract
 {
@@ -42,6 +42,8 @@ interface SessionsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
+     * @return DefaultPagination<RoomSession>
+     *
      * @throws APIException
      */
     public function list0(
@@ -49,7 +51,7 @@ interface SessionsContract
         ?bool $includeParticipants = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): SessionList0Response;
+    ): DefaultPagination;
 
     /**
      * @api
@@ -66,6 +68,8 @@ interface SessionsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
+     * @return DefaultPagination<RoomSession>
+     *
      * @throws APIException
      */
     public function list1(
@@ -74,7 +78,7 @@ interface SessionsContract
         ?bool $includeParticipants = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): SessionList1Response;
+    ): DefaultPagination;
 
     /**
      * @api
@@ -90,6 +94,8 @@ interface SessionsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
+     * @return DefaultPagination<RoomParticipant>
+     *
      * @throws APIException
      */
     public function retrieveParticipants(
@@ -97,5 +103,5 @@ interface SessionsContract
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): SessionGetParticipantsResponse;
+    ): DefaultPagination;
 }

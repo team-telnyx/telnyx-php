@@ -6,9 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse;
+use Telnyx\PhoneNumbers\PhoneNumberDetailed;
 use Telnyx\PhoneNumbers\PhoneNumberGetResponse;
-use Telnyx\PhoneNumbers\PhoneNumberListResponse;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListResponse;
 use Telnyx\PhoneNumbers\PhoneNumberUpdateResponse;
 use Tests\UnsupportedMockTests;
@@ -64,10 +65,15 @@ final class PhoneNumbersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->list();
+        $page = $this->client->phoneNumbers->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PhoneNumberListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(PhoneNumberDetailed::class, $item);
+        }
     }
 
     #[Test]
@@ -90,9 +96,14 @@ final class PhoneNumbersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->slimList();
+        $page = $this->client->phoneNumbers->slimList();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PhoneNumberSlimListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(PhoneNumberSlimListResponse::class, $item);
+        }
     }
 }

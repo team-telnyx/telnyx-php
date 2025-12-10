@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\CustomerServiceRecords\CustomerServiceRecord;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordGetResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\Status\Eq;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\Status\In;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Sort\Value;
-use Telnyx\CustomerServiceRecords\CustomerServiceRecordListResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordNewResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageResponse;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
 interface CustomerServiceRecordsContract
@@ -75,6 +76,8 @@ interface CustomerServiceRecordsContract
      *   value?: 'created_at'|'-created_at'|Value
      * } $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
+     * @return DefaultPagination<CustomerServiceRecord>
+     *
      * @throws APIException
      */
     public function list(
@@ -82,7 +85,7 @@ interface CustomerServiceRecordsContract
         ?array $page = null,
         ?array $sort = null,
         ?RequestOptions $requestOptions = null,
-    ): CustomerServiceRecordListResponse;
+    ): DefaultPagination;
 
     /**
      * @api

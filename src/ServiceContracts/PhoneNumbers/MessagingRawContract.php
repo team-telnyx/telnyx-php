@@ -6,11 +6,12 @@ namespace Telnyx\ServiceContracts\PhoneNumbers;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\Messaging\MessagingGetResponse;
 use Telnyx\PhoneNumbers\Messaging\MessagingListParams;
-use Telnyx\PhoneNumbers\Messaging\MessagingListResponse;
 use Telnyx\PhoneNumbers\Messaging\MessagingUpdateParams;
 use Telnyx\PhoneNumbers\Messaging\MessagingUpdateResponse;
+use Telnyx\PhoneNumberWithMessagingSettings;
 use Telnyx\RequestOptions;
 
 interface MessagingRawContract
@@ -50,7 +51,7 @@ interface MessagingRawContract
      *
      * @param array<mixed>|MessagingListParams $params
      *
-     * @return BaseResponse<MessagingListResponse>
+     * @return BaseResponse<DefaultPagination<PhoneNumberWithMessagingSettings>>
      *
      * @throws APIException
      */

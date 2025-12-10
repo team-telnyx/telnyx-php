@@ -7,9 +7,10 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\PrivateWirelessGateways\PrivateWirelessGateway;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayDeleteResponse;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayGetResponse;
-use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayListResponse;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PrivateWirelessGatewaysContract;
@@ -88,6 +89,8 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
      *
+     * @return DefaultFlatPagination<PrivateWirelessGateway>
+     *
      * @throws APIException
      */
     public function list(
@@ -99,7 +102,7 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
         int $pageNumber = 1,
         int $pageSize = 20,
         ?RequestOptions $requestOptions = null,
-    ): PrivateWirelessGatewayListResponse {
+    ): DefaultFlatPagination {
         $params = Util::removeNulls(
             [
                 'filterCreatedAt' => $filterCreatedAt,

@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
+use Telnyx\WirelessBlocklists\WirelessBlocklist;
 use Telnyx\WirelessBlocklists\WirelessBlocklistCreateParams\Type;
 use Telnyx\WirelessBlocklists\WirelessBlocklistDeleteResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistGetResponse;
-use Telnyx\WirelessBlocklists\WirelessBlocklistListResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistNewResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateResponse;
 
@@ -68,6 +69,8 @@ interface WirelessBlocklistsContract
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
      *
+     * @return DefaultFlatPagination<WirelessBlocklist>
+     *
      * @throws APIException
      */
     public function list(
@@ -77,7 +80,7 @@ interface WirelessBlocklistsContract
         int $pageNumber = 1,
         int $pageSize = 20,
         ?RequestOptions $requestOptions = null,
-    ): WirelessBlocklistListResponse;
+    ): DefaultFlatPagination;
 
     /**
      * @api

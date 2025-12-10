@@ -8,14 +8,15 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardDataUsageNotificationsRawContract;
+use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotification;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationCreateParams;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationCreateParams\Threshold\Unit;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationDeleteResponse;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationGetResponse;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationListParams;
-use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationListResponse;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationNewResponse;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParams;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateResponse;
@@ -89,7 +90,7 @@ final class SimCardDataUsageNotificationsRawService implements SimCardDataUsageN
      *
      * Updates information for a SIM Card Data Usage Notification.
      *
-     * @param string $id identifies the resource
+     * @param string $simCardDataUsageNotificationID identifies the resource
      * @param array{
      *   simCardID?: string,
      *   threshold?: array{
@@ -103,7 +104,7 @@ final class SimCardDataUsageNotificationsRawService implements SimCardDataUsageN
      * @throws APIException
      */
     public function update(
-        string $id,
+        string $simCardDataUsageNotificationID,
         array|SimCardDataUsageNotificationUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse {
@@ -115,7 +116,10 @@ final class SimCardDataUsageNotificationsRawService implements SimCardDataUsageN
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
-            path: ['sim_card_data_usage_notifications/%1$s', $id],
+            path: [
+                'sim_card_data_usage_notifications/%1$s',
+                $simCardDataUsageNotificationID,
+            ],
             body: (object) $parsed,
             options: $options,
             convert: SimCardDataUsageNotificationUpdateResponse::class,
@@ -131,7 +135,7 @@ final class SimCardDataUsageNotificationsRawService implements SimCardDataUsageN
      *   filterSimCardID?: string, pageNumber?: int, pageSize?: int
      * }|SimCardDataUsageNotificationListParams $params
      *
-     * @return BaseResponse<SimCardDataUsageNotificationListResponse>
+     * @return BaseResponse<DefaultFlatPagination<SimCardDataUsageNotification>>
      *
      * @throws APIException
      */
@@ -157,7 +161,8 @@ final class SimCardDataUsageNotificationsRawService implements SimCardDataUsageN
                 ],
             ),
             options: $options,
-            convert: SimCardDataUsageNotificationListResponse::class,
+            convert: SimCardDataUsageNotification::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

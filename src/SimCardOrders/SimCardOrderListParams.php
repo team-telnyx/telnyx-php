@@ -9,8 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCardOrders\SimCardOrderListParams\Filter;
-use Telnyx\SimCardOrders\SimCardOrderListParams\Filter\Address;
-use Telnyx\SimCardOrders\SimCardOrderListParams\Filter\Cost;
 use Telnyx\SimCardOrders\SimCardOrderListParams\Page;
 
 /**
@@ -20,8 +18,15 @@ use Telnyx\SimCardOrders\SimCardOrderListParams\Page;
  *
  * @phpstan-type SimCardOrderListParamsShape = array{
  *   filter?: Filter|array{
- *     address?: Address|null,
- *     cost?: Cost|null,
+ *     addressAdministrativeArea?: string|null,
+ *     addressCountryCode?: string|null,
+ *     addressExtendedAddress?: string|null,
+ *     addressID?: string|null,
+ *     addressLocality?: string|null,
+ *     addressPostalCode?: string|null,
+ *     addressStreetAddress?: string|null,
+ *     costAmount?: string|null,
+ *     costCurrency?: string|null,
  *     createdAt?: \DateTimeInterface|null,
  *     quantity?: int|null,
  *     updatedAt?: \DateTimeInterface|null,
@@ -58,8 +63,15 @@ final class SimCardOrderListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{
-     *   address?: Address|null,
-     *   cost?: Cost|null,
+     *   addressAdministrativeArea?: string|null,
+     *   addressCountryCode?: string|null,
+     *   addressExtendedAddress?: string|null,
+     *   addressID?: string|null,
+     *   addressLocality?: string|null,
+     *   addressPostalCode?: string|null,
+     *   addressStreetAddress?: string|null,
+     *   costAmount?: string|null,
+     *   costCurrency?: string|null,
      *   createdAt?: \DateTimeInterface|null,
      *   quantity?: int|null,
      *   updatedAt?: \DateTimeInterface|null,
@@ -82,8 +94,15 @@ final class SimCardOrderListParams implements BaseModel
      * Consolidated filter parameter for SIM card orders (deepObject style). Originally: filter[created_at], filter[updated_at], filter[quantity], filter[cost.amount], filter[cost.currency], filter[address.id], filter[address.street_address], filter[address.extended_address], filter[address.locality], filter[address.administrative_area], filter[address.country_code], filter[address.postal_code].
      *
      * @param Filter|array{
-     *   address?: Address|null,
-     *   cost?: Cost|null,
+     *   addressAdministrativeArea?: string|null,
+     *   addressCountryCode?: string|null,
+     *   addressExtendedAddress?: string|null,
+     *   addressID?: string|null,
+     *   addressLocality?: string|null,
+     *   addressPostalCode?: string|null,
+     *   addressStreetAddress?: string|null,
+     *   costAmount?: string|null,
+     *   costCurrency?: string|null,
      *   createdAt?: \DateTimeInterface|null,
      *   quantity?: int|null,
      *   updatedAt?: \DateTimeInterface|null,

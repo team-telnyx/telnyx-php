@@ -7,9 +7,9 @@ namespace Telnyx\Services\Number10dlc\Brand;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingExternalVettingResponse;
-use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingGetExternalVettingResponseItem;
-use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingUpdateExternalVettingResponse;
+use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingImportsResponse;
+use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingListResponseItem;
+use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingOrderResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Number10dlc\Brand\ExternalVettingContract;
 
@@ -31,44 +31,18 @@ final class ExternalVettingService implements ExternalVettingContract
     /**
      * @api
      *
-     * Order new external vetting for a brand
-     *
-     * @param string $evpID external vetting provider ID for the brand
-     * @param string $vettingClass identifies the vetting classification
-     *
-     * @throws APIException
-     */
-    public function externalVetting(
-        string $brandID,
-        string $evpID,
-        string $vettingClass,
-        ?RequestOptions $requestOptions = null,
-    ): ExternalVettingExternalVettingResponse {
-        $params = Util::removeNulls(
-            ['evpID' => $evpID, 'vettingClass' => $vettingClass]
-        );
-
-        // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->externalVetting($brandID, params: $params, requestOptions: $requestOptions);
-
-        return $response->parse();
-    }
-
-    /**
-     * @api
-     *
      * Get list of valid external vetting record for a given brand
      *
-     * @return list<ExternalVettingGetExternalVettingResponseItem>
+     * @return list<ExternalVettingListResponseItem>
      *
      * @throws APIException
      */
-    public function retrieveExternalVetting(
+    public function list(
         string $brandID,
         ?RequestOptions $requestOptions = null
     ): array {
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->retrieveExternalVetting($brandID, requestOptions: $requestOptions);
+        $response = $this->raw->list($brandID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -86,13 +60,13 @@ final class ExternalVettingService implements ExternalVettingContract
      *
      * @throws APIException
      */
-    public function updateExternalVetting(
+    public function imports(
         string $brandID,
         string $evpID,
         string $vettingID,
         ?string $vettingToken = null,
         ?RequestOptions $requestOptions = null,
-    ): ExternalVettingUpdateExternalVettingResponse {
+    ): ExternalVettingImportsResponse {
         $params = Util::removeNulls(
             [
                 'evpID' => $evpID,
@@ -102,7 +76,33 @@ final class ExternalVettingService implements ExternalVettingContract
         );
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->updateExternalVetting($brandID, params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->imports($brandID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Order new external vetting for a brand
+     *
+     * @param string $evpID external vetting provider ID for the brand
+     * @param string $vettingClass identifies the vetting classification
+     *
+     * @throws APIException
+     */
+    public function order(
+        string $brandID,
+        string $evpID,
+        string $vettingClass,
+        ?RequestOptions $requestOptions = null,
+    ): ExternalVettingOrderResponse {
+        $params = Util::removeNulls(
+            ['evpID' => $evpID, 'vettingClass' => $vettingClass]
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->order($brandID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

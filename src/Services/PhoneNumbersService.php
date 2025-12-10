@@ -7,7 +7,9 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse;
+use Telnyx\PhoneNumbers\PhoneNumberDetailed;
 use Telnyx\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\NumberType\Eq;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\Source;
@@ -15,7 +17,6 @@ use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\Status;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\VoiceUsagePaymentMethod;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\WithoutTags;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Sort;
-use Telnyx\PhoneNumbers\PhoneNumberListResponse;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListResponse;
 use Telnyx\PhoneNumbers\PhoneNumberUpdateResponse;
 use Telnyx\RequestOptions;
@@ -102,7 +103,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *
      * Update a phone number
      *
-     * @param string $id identifies the resource
+     * @param string $phoneNumberID identifies the resource
      * @param string $billingGroupID identifies the billing group associated with the phone number
      * @param string $connectionID identifies the connection associated with the phone number
      * @param string $customerReference a customer reference string for customer look ups
@@ -113,7 +114,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
      * @throws APIException
      */
     public function update(
-        string $id,
+        string $phoneNumberID,
         ?string $billingGroupID = null,
         ?string $connectionID = null,
         ?string $customerReference = null,
@@ -134,7 +135,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
         );
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->update($phoneNumberID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -168,6 +169,8 @@ final class PhoneNumbersService implements PhoneNumbersContract
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param 'purchased_at'|'phone_number'|'connection_name'|'usage_payment_method'|Sort $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
      *
+     * @return DefaultPagination<PhoneNumberDetailed>
+     *
      * @throws APIException
      */
     public function list(
@@ -175,7 +178,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
         ?array $page = null,
         string|Sort|null $sort = null,
         ?RequestOptions $requestOptions = null,
-    ): PhoneNumberListResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(
             ['filter' => $filter, 'page' => $page, 'sort' => $sort]
         );
@@ -235,6 +238,8 @@ final class PhoneNumbersService implements PhoneNumbersContract
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param 'purchased_at'|'phone_number'|'connection_name'|'usage_payment_method'|\Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Sort $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
      *
+     * @return DefaultPagination<PhoneNumberSlimListResponse>
+     *
      * @throws APIException
      */
     public function slimList(
@@ -244,7 +249,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
         ?array $page = null,
         string|\Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Sort|null $sort = null,
         ?RequestOptions $requestOptions = null,
-    ): PhoneNumberSlimListResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(
             [
                 'filter' => $filter,

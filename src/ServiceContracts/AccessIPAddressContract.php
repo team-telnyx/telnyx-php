@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
-use Telnyx\AccessIPAddress\AccessIPAddressListResponse;
 use Telnyx\AccessIPAddress\AccessIPAddressResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 interface AccessIPAddressContract
@@ -45,17 +45,17 @@ interface AccessIPAddressContract
      *   ipAddress?: string,
      *   ipSource?: string,
      * } $filter Consolidated filter parameter (deepObject style). Originally: filter[ip_source], filter[ip_address], filter[created_at]. Supports complex bracket operations for dynamic filtering.
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return DefaultFlatPagination<AccessIPAddressResponse>
      *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
-        ?array $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         ?RequestOptions $requestOptions = null,
-    ): AccessIPAddressListResponse;
+    ): DefaultFlatPagination;
 
     /**
      * @api

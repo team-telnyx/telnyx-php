@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WebhookDeliveriesRawContract;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse;
@@ -63,7 +64,7 @@ final class WebhookDeliveriesRawService implements WebhookDeliveriesRawContract
      *   page?: array{number?: int, size?: int},
      * }|WebhookDeliveryListParams $params
      *
-     * @return BaseResponse<WebhookDeliveryListResponse>
+     * @return BaseResponse<DefaultPagination<WebhookDeliveryListResponse>>
      *
      * @throws APIException
      */
@@ -83,6 +84,7 @@ final class WebhookDeliveriesRawService implements WebhookDeliveriesRawContract
             query: $parsed,
             options: $options,
             convert: WebhookDeliveryListResponse::class,
+            page: DefaultPagination::class,
         );
     }
 }

@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WireguardPeersRawContract;
 use Telnyx\WireguardPeers\WireguardPeerCreateParams;
@@ -124,7 +125,7 @@ final class WireguardPeersRawService implements WireguardPeersRawContract
      *   page?: array{number?: int, size?: int},
      * }|WireguardPeerListParams $params
      *
-     * @return BaseResponse<WireguardPeerListResponse>
+     * @return BaseResponse<DefaultPagination<WireguardPeerListResponse>>
      *
      * @throws APIException
      */
@@ -144,6 +145,7 @@ final class WireguardPeersRawService implements WireguardPeersRawContract
             query: $parsed,
             options: $options,
             convert: WireguardPeerListResponse::class,
+            page: DefaultPagination::class,
         );
     }
 
