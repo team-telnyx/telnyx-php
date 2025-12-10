@@ -8,7 +8,12 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\Porting\Events\EventGetResponse;
 use Telnyx\Porting\Events\EventListParams\Filter\Type;
-use Telnyx\Porting\Events\EventListResponse;
+use Telnyx\Porting\Events\EventListResponse\PortingEventDeletedPayload;
+use Telnyx\Porting\Events\EventListResponse\PortingEventMessagingChangedPayload;
+use Telnyx\Porting\Events\EventListResponse\PortingEventNewCommentEvent;
+use Telnyx\Porting\Events\EventListResponse\PortingEventSplitEvent;
+use Telnyx\Porting\Events\EventListResponse\PortingEventStatusChangedEvent;
+use Telnyx\Porting\Events\EventListResponse\PortingEventWithoutWebhook;
 use Telnyx\RequestOptions;
 
 interface EventsContract
@@ -39,7 +44,7 @@ interface EventsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return DefaultPagination<EventListResponse>
+     * @return DefaultPagination<PortingEventDeletedPayload|PortingEventMessagingChangedPayload|PortingEventStatusChangedEvent|PortingEventNewCommentEvent|PortingEventSplitEvent|PortingEventWithoutWebhook,>
      *
      * @throws APIException
      */

@@ -179,7 +179,9 @@ final class DocumentsService implements DocumentsContract
      *
      * Upload a document.<br /><br />Uploaded files must be linked to a service within 30 minutes or they will be automatically deleted.
      *
-     * @param array<string,mixed> $document
+     * @param array{
+     *   customerReference?: string, file?: string, filename?: string, url?: string
+     * } $document
      *
      * @throws APIException
      */
@@ -200,7 +202,9 @@ final class DocumentsService implements DocumentsContract
      *
      * Upload a document.<br /><br />Uploaded files must be linked to a service within 30 minutes or they will be automatically deleted.
      *
-     * @param array<string,mixed> $document
+     * @param array{
+     *   customerReference?: string, file?: string, filename?: string, url?: string
+     * } $document
      *
      * @throws APIException
      */

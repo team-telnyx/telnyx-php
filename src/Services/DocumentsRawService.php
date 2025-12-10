@@ -208,7 +208,11 @@ final class DocumentsRawService implements DocumentsRawContract
      *
      * Upload a document.<br /><br />Uploaded files must be linked to a service within 30 minutes or they will be automatically deleted.
      *
-     * @param array{document: array<string,mixed>}|DocumentUploadParams $params
+     * @param array{
+     *   document: array{
+     *     customerReference?: string, file?: string, filename?: string, url?: string
+     *   },
+     * }|DocumentUploadParams $params
      *
      * @return BaseResponse<DocumentUploadResponse>
      *
@@ -238,7 +242,11 @@ final class DocumentsRawService implements DocumentsRawContract
      *
      * Upload a document.<br /><br />Uploaded files must be linked to a service within 30 minutes or they will be automatically deleted.
      *
-     * @param array{document: array<string,mixed>}|DocumentUploadJsonParams $params
+     * @param array{
+     *   document: array{
+     *     customerReference?: string, file?: string, filename?: string, url?: string
+     *   },
+     * }|DocumentUploadJsonParams $params
      *
      * @return BaseResponse<DocumentUploadJsonResponse>
      *
