@@ -8,8 +8,6 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
-use Telnyx\PortingOrders\PortingOrder;
 use Telnyx\PortingOrders\PortingOrderCreateParams;
 use Telnyx\PortingOrders\PortingOrderDocuments;
 use Telnyx\PortingOrders\PortingOrderEndUser;
@@ -22,6 +20,7 @@ use Telnyx\PortingOrders\PortingOrderGetResponse;
 use Telnyx\PortingOrders\PortingOrderGetSubRequestResponse;
 use Telnyx\PortingOrders\PortingOrderListParams;
 use Telnyx\PortingOrders\PortingOrderListParams\Sort\Value;
+use Telnyx\PortingOrders\PortingOrderListResponse;
 use Telnyx\PortingOrders\PortingOrderMisc;
 use Telnyx\PortingOrders\PortingOrderMisc\RemainingNumbersAction;
 use Telnyx\PortingOrders\PortingOrderNewResponse;
@@ -210,7 +209,7 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
      *   },
      * }|PortingOrderListParams $params
      *
-     * @return BaseResponse<DefaultPagination<PortingOrder>>
+     * @return BaseResponse<PortingOrderListResponse>
      *
      * @throws APIException
      */
@@ -232,8 +231,7 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
                 ['includePhoneNumbers' => 'include_phone_numbers']
             ),
             options: $options,
-            convert: PortingOrder::class,
-            page: DefaultPagination::class,
+            convert: PortingOrderListResponse::class,
         );
     }
 
@@ -354,7 +352,7 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
      *   page?: array{number?: int, size?: int}
      * }|PortingOrderRetrieveRequirementsParams $params
      *
-     * @return BaseResponse<DefaultPagination<PortingOrderGetRequirementsResponse>>
+     * @return BaseResponse<PortingOrderGetRequirementsResponse>
      *
      * @throws APIException
      */
@@ -375,7 +373,6 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
             query: $parsed,
             options: $options,
             convert: PortingOrderGetRequirementsResponse::class,
-            page: DefaultPagination::class,
         );
     }
 

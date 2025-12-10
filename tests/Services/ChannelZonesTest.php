@@ -8,7 +8,6 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\ChannelZones\ChannelZoneListResponse;
 use Telnyx\ChannelZones\ChannelZoneUpdateResponse;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -68,14 +67,9 @@ final class ChannelZonesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->channelZones->list();
+        $result = $this->client->channelZones->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(ChannelZoneListResponse::class, $item);
-        }
+        $this->assertInstanceOf(ChannelZoneListResponse::class, $result);
     }
 }

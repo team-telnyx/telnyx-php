@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
-use Telnyx\VerifiedNumbers\VerifiedNumber;
 use Telnyx\VerifiedNumbers\VerifiedNumberCreateParams\VerificationMethod;
 use Telnyx\VerifiedNumbers\VerifiedNumberDataWrapper;
+use Telnyx\VerifiedNumbers\VerifiedNumberListResponse;
 use Telnyx\VerifiedNumbers\VerifiedNumberNewResponse;
 
 interface VerifiedNumbersContract
@@ -44,15 +43,16 @@ interface VerifiedNumbersContract
     /**
      * @api
      *
-     * @return DefaultFlatPagination<VerifiedNumber>
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Use page[size] and page[number] in the query string. Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
-        ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination;
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null
+    ): VerifiedNumberListResponse;
 
     /**
      * @api

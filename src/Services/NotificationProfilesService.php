@@ -7,10 +7,9 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
-use Telnyx\NotificationProfiles\NotificationProfile;
 use Telnyx\NotificationProfiles\NotificationProfileDeleteResponse;
 use Telnyx\NotificationProfiles\NotificationProfileGetResponse;
+use Telnyx\NotificationProfiles\NotificationProfileListResponse;
 use Telnyx\NotificationProfiles\NotificationProfileNewResponse;
 use Telnyx\NotificationProfiles\NotificationProfileUpdateResponse;
 use Telnyx\RequestOptions;
@@ -76,20 +75,20 @@ final class NotificationProfilesService implements NotificationProfilesContract
      *
      * Update a notification profile.
      *
-     * @param string $notificationProfileID the id of the resource
+     * @param string $id the id of the resource
      * @param string $name a human readable name
      *
      * @throws APIException
      */
     public function update(
-        string $notificationProfileID,
+        string $id,
         ?string $name = null,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): NotificationProfileUpdateResponse {
         $params = Util::removeNulls(['name' => $name]);
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->update($notificationProfileID, params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -103,14 +102,12 @@ final class NotificationProfilesService implements NotificationProfilesContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return DefaultPagination<NotificationProfile>
-     *
      * @throws APIException
      */
     public function list(
         ?array $page = null,
         ?RequestOptions $requestOptions = null
-    ): DefaultPagination {
+    ): NotificationProfileListResponse {
         $params = Util::removeNulls(['page' => $page]);
 
         // @phpstan-ignore-next-line argument.type

@@ -6,10 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
-use Telnyx\RoomParticipant;
-use Telnyx\Rooms\RoomSession;
+use Telnyx\Rooms\Sessions\SessionGetParticipantsResponse;
 use Telnyx\Rooms\Sessions\SessionGetResponse;
+use Telnyx\Rooms\Sessions\SessionList0Response;
+use Telnyx\Rooms\Sessions\SessionList1Response;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -52,15 +52,10 @@ final class SessionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->rooms->sessions->list0();
+        $result = $this->client->rooms->sessions->list0();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(RoomSession::class, $item);
-        }
+        $this->assertInstanceOf(SessionList0Response::class, $result);
     }
 
     #[Test]
@@ -70,17 +65,12 @@ final class SessionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->rooms->sessions->list1(
+        $result = $this->client->rooms->sessions->list1(
             '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(RoomSession::class, $item);
-        }
+        $this->assertInstanceOf(SessionList1Response::class, $result);
     }
 
     #[Test]
@@ -90,16 +80,11 @@ final class SessionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->rooms->sessions->retrieveParticipants(
+        $result = $this->client->rooms->sessions->retrieveParticipants(
             '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(RoomParticipant::class, $item);
-        }
+        $this->assertInstanceOf(SessionGetParticipantsResponse::class, $result);
     }
 }

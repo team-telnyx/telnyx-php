@@ -7,13 +7,12 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardDataUsageNotificationsContract;
-use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotification;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationCreateParams\Threshold\Unit;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationDeleteResponse;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationGetResponse;
+use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationListResponse;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationNewResponse;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateResponse;
 
@@ -83,7 +82,7 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
      *
      * Updates information for a SIM Card Data Usage Notification.
      *
-     * @param string $simCardDataUsageNotificationID identifies the resource
+     * @param string $id identifies the resource
      * @param string $simCardID the identification UUID of the related SIM card resource
      * @param array{
      *   amount?: string,
@@ -93,7 +92,7 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
      * @throws APIException
      */
     public function update(
-        string $simCardDataUsageNotificationID,
+        string $id,
         ?string $simCardID = null,
         ?array $threshold = null,
         ?RequestOptions $requestOptions = null,
@@ -103,7 +102,7 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
         );
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->update($simCardDataUsageNotificationID, params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -117,8 +116,6 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
      *
-     * @return DefaultFlatPagination<SimCardDataUsageNotification>
-     *
      * @throws APIException
      */
     public function list(
@@ -126,7 +123,7 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
         int $pageNumber = 1,
         int $pageSize = 20,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination {
+    ): SimCardDataUsageNotificationListResponse {
         $params = Util::removeNulls(
             [
                 'filterSimCardID' => $filterSimCardID,

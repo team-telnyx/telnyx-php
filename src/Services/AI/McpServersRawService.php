@@ -7,15 +7,15 @@ namespace Telnyx\Services\AI;
 use Telnyx\AI\McpServers\McpServerCreateParams;
 use Telnyx\AI\McpServers\McpServerGetResponse;
 use Telnyx\AI\McpServers\McpServerListParams;
-use Telnyx\AI\McpServers\McpServerListResponse;
+use Telnyx\AI\McpServers\McpServerListResponseItem;
 use Telnyx\AI\McpServers\McpServerNewResponse;
 use Telnyx\AI\McpServers\McpServerUpdateParams;
 use Telnyx\AI\McpServers\McpServerUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
+use Telnyx\Core\Conversion\ListOf;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPaginationTopLevelArray;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\McpServersRawContract;
 
@@ -133,7 +133,7 @@ final class McpServersRawService implements McpServersRawContract
      *   pageNumber?: int, pageSize?: int, type?: string, url?: string
      * }|McpServerListParams $params
      *
-     * @return BaseResponse<DefaultFlatPaginationTopLevelArray<McpServerListResponse>>
+     * @return BaseResponse<list<McpServerListResponseItem>>
      *
      * @throws APIException
      */
@@ -155,8 +155,7 @@ final class McpServersRawService implements McpServersRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: McpServerListResponse::class,
-            page: DefaultFlatPaginationTopLevelArray::class,
+            convert: new ListOf(McpServerListResponseItem::class),
         );
     }
 

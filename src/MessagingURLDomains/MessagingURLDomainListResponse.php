@@ -7,13 +7,12 @@ namespace Telnyx\MessagingURLDomains;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\MessagingURLDomains\MessagingURLDomainListResponse\Data;
+use Telnyx\MessagingURLDomains\MessagingURLDomainListResponse\Meta;
 
 /**
  * @phpstan-type MessagingURLDomainListResponseShape = array{
- *   id?: string|null,
- *   recordType?: string|null,
- *   urlDomain?: string|null,
- *   useCase?: string|null,
+ *   data?: list<Data>|null, meta?: Meta|null
  * }
  */
 final class MessagingURLDomainListResponse implements BaseModel
@@ -21,17 +20,12 @@ final class MessagingURLDomainListResponse implements BaseModel
     /** @use SdkModel<MessagingURLDomainListResponseShape> */
     use SdkModel;
 
+    /** @var list<Data>|null $data */
+    #[Optional(list: Data::class)]
+    public ?array $data;
+
     #[Optional]
-    public ?string $id;
-
-    #[Optional('record_type')]
-    public ?string $recordType;
-
-    #[Optional('url_domain')]
-    public ?string $urlDomain;
-
-    #[Optional('use_case')]
-    public ?string $useCase;
+    public ?Meta $meta;
 
     public function __construct()
     {
@@ -42,51 +36,54 @@ final class MessagingURLDomainListResponse implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param list<Data|array{
+     *   id?: string|null,
+     *   recordType?: string|null,
+     *   urlDomain?: string|null,
+     *   useCase?: string|null,
+     * }> $data
+     * @param Meta|array{
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
+     * } $meta
      */
     public static function with(
-        ?string $id = null,
-        ?string $recordType = null,
-        ?string $urlDomain = null,
-        ?string $useCase = null,
+        ?array $data = null,
+        Meta|array|null $meta = null
     ): self {
         $self = new self;
 
-        null !== $id && $self['id'] = $id;
-        null !== $recordType && $self['recordType'] = $recordType;
-        null !== $urlDomain && $self['urlDomain'] = $urlDomain;
-        null !== $useCase && $self['useCase'] = $useCase;
+        null !== $data && $self['data'] = $data;
+        null !== $meta && $self['meta'] = $meta;
 
         return $self;
     }
 
-    public function withID(string $id): self
+    /**
+     * @param list<Data|array{
+     *   id?: string|null,
+     *   recordType?: string|null,
+     *   urlDomain?: string|null,
+     *   useCase?: string|null,
+     * }> $data
+     */
+    public function withData(array $data): self
     {
         $self = clone $this;
-        $self['id'] = $id;
+        $self['data'] = $data;
 
         return $self;
     }
 
-    public function withRecordType(string $recordType): self
+    /**
+     * @param Meta|array{
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
+     * } $meta
+     */
+    public function withMeta(Meta|array $meta): self
     {
         $self = clone $this;
-        $self['recordType'] = $recordType;
-
-        return $self;
-    }
-
-    public function withURLDomain(string $urlDomain): self
-    {
-        $self = clone $this;
-        $self['urlDomain'] = $urlDomain;
-
-        return $self;
-    }
-
-    public function withUseCase(string $useCase): self
-    {
-        $self = clone $this;
-        $self['useCase'] = $useCase;
+        $self['meta'] = $meta;
 
         return $self;
     }

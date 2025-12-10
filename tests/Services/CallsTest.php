@@ -133,7 +133,7 @@ final class CallsTest extends TestCase
             ],
             streamBidirectionalCodec: StreamBidirectionalCodec::G722,
             streamBidirectionalMode: StreamBidirectionalMode::RTP,
-            streamBidirectionalSamplingRate: StreamBidirectionalSamplingRate::RATE_16000,
+            streamBidirectionalSamplingRate: StreamBidirectionalSamplingRate::_16000,
             streamBidirectionalTargetLegs: StreamBidirectionalTargetLegs::BOTH,
             streamCodec: StreamCodec::PCMA,
             streamEstablishBeforeCallOriginate: true,

@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\BundlePricing;
 
-use Telnyx\BundlePricing\UserBundles\UserBundle;
 use Telnyx\BundlePricing\UserBundles\UserBundleDeactivateResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleGetResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleListResourcesResponse;
+use Telnyx\BundlePricing\UserBundles\UserBundleListResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleNewResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BundlePricing\UserBundlesContract;
 
@@ -101,8 +100,6 @@ final class UserBundlesService implements UserBundlesContract
      * } $page Query param: Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param string $authorizationBearer Header param: Authenticates the request with your Telnyx API V2 KEY
      *
-     * @return DefaultPagination<UserBundle>
-     *
      * @throws APIException
      */
     public function list(
@@ -110,7 +107,7 @@ final class UserBundlesService implements UserBundlesContract
         ?array $page = null,
         ?string $authorizationBearer = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): UserBundleListResponse {
         $params = Util::removeNulls(
             [
                 'filter' => $filter,

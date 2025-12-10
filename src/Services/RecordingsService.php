@@ -7,10 +7,9 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
 use Telnyx\Recordings\RecordingDeleteResponse;
 use Telnyx\Recordings\RecordingGetResponse;
-use Telnyx\Recordings\RecordingResponseData;
+use Telnyx\Recordings\RecordingListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\RecordingsContract;
 use Telnyx\Services\Recordings\ActionsService;
@@ -74,15 +73,13 @@ final class RecordingsService implements RecordingsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return DefaultPagination<RecordingResponseData>
-     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): RecordingListResponse {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
         // @phpstan-ignore-next-line argument.type

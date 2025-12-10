@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Number10dlc;
 
+use Telnyx\Campaign\TelnyxCampaignCsp;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Number10dlc\Campaign\CampaignDeactivateResponse;
+use Telnyx\Number10dlc\Campaign\CampaignDeleteResponse;
 use Telnyx\Number10dlc\Campaign\CampaignGetMnoMetadataResponse;
 use Telnyx\Number10dlc\Campaign\CampaignGetSharingStatusResponse;
 use Telnyx\Number10dlc\Campaign\CampaignListParams;
@@ -14,8 +15,6 @@ use Telnyx\Number10dlc\Campaign\CampaignListResponse;
 use Telnyx\Number10dlc\Campaign\CampaignSubmitAppealParams;
 use Telnyx\Number10dlc\Campaign\CampaignSubmitAppealResponse;
 use Telnyx\Number10dlc\Campaign\CampaignUpdateParams;
-use Telnyx\Number10dlc\Campaign\TelnyxCampaignCsp;
-use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 
 interface CampaignRawContract
@@ -52,12 +51,24 @@ interface CampaignRawContract
      *
      * @param array<mixed>|CampaignListParams $params
      *
-     * @return BaseResponse<PerPagePaginationV2<CampaignListResponse>>
+     * @return BaseResponse<CampaignListResponse>
      *
      * @throws APIException
      */
     public function list(
         array|CampaignListParams $params,
+        ?RequestOptions $requestOptions = null
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @return BaseResponse<CampaignDeleteResponse>
+     *
+     * @throws APIException
+     */
+    public function delete(
+        string $campaignID,
         ?RequestOptions $requestOptions = null
     ): BaseResponse;
 
@@ -71,18 +82,6 @@ interface CampaignRawContract
      * @throws APIException
      */
     public function acceptSharing(
-        string $campaignID,
-        ?RequestOptions $requestOptions = null
-    ): BaseResponse;
-
-    /**
-     * @api
-     *
-     * @return BaseResponse<CampaignDeactivateResponse>
-     *
-     * @throws APIException
-     */
-    public function deactivate(
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): BaseResponse;

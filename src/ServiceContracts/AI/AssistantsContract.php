@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts\AI;
 
 use Telnyx\AI\Assistants\AssistantChatResponse;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
-use Telnyx\AI\Assistants\AssistantImportsParams\Provider;
+use Telnyx\AI\Assistants\AssistantImportParams\Provider;
 use Telnyx\AI\Assistants\AssistantSendSMSResponse;
 use Telnyx\AI\Assistants\AssistantsList;
 use Telnyx\AI\Assistants\AssistantTool;
@@ -18,7 +18,6 @@ use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
 use Telnyx\AI\Assistants\TranscriptionSettings\Model;
-use Telnyx\AI\Assistants\TranscriptionSettingsConfig;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -53,7 +52,7 @@ interface AssistantsContract
      *     eotTimeoutMs?: int,
      *     numerals?: bool,
      *     smartFormat?: bool,
-     *   }|TranscriptionSettingsConfig,
+     *   },
      * }|TranscriptionSettings $transcription
      * @param array{
      *   voice: string,
@@ -127,7 +126,7 @@ interface AssistantsContract
      *     eotTimeoutMs?: int,
      *     numerals?: bool,
      *     smartFormat?: bool,
-     *   }|TranscriptionSettingsConfig,
+     *   },
      * }|TranscriptionSettings $transcription
      * @param array{
      *   voice: string,
@@ -224,7 +223,7 @@ interface AssistantsContract
      *
      * @throws APIException
      */
-    public function imports(
+    public function import(
         string $apiKeyRef,
         string|Provider $provider,
         ?RequestOptions $requestOptions = null,

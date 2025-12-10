@@ -13,8 +13,11 @@ use Telnyx\Calls\Actions\ActionAnswerParams\RecordTrim;
 use Telnyx\Calls\Actions\ActionAnswerParams\StreamTrack;
 use Telnyx\Calls\Actions\ActionAnswerParams\WebhookURLMethod;
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngine;
+use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Azure;
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\DeepgramNova2Config;
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\DeepgramNova3Config;
+use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Google;
+use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Telnyx;
 use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Calls\SipHeader;
 use Telnyx\Calls\SipHeader\Name;
@@ -73,7 +76,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *     clientState?: string|null,
  *     commandID?: string|null,
  *     transcriptionEngine?: value-of<TranscriptionEngine>|null,
- *     transcriptionEngineConfig?: null|TranscriptionEngineGoogleConfig|TranscriptionEngineTelnyxConfig|DeepgramNova2Config|DeepgramNova3Config|TranscriptionEngineAzureConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig,
+ *     transcriptionEngineConfig?: null|Google|Telnyx|DeepgramNova2Config|DeepgramNova3Config|Azure|TranscriptionEngineAConfig|TranscriptionEngineBConfig,
  *     transcriptionTracks?: string|null,
  *   },
  *   webhookURL?: string,
@@ -306,7 +309,7 @@ final class ActionAnswerParams implements BaseModel
      *   clientState?: string|null,
      *   commandID?: string|null,
      *   transcriptionEngine?: value-of<TranscriptionEngine>|null,
-     *   transcriptionEngineConfig?: TranscriptionEngineGoogleConfig|TranscriptionEngineTelnyxConfig|DeepgramNova2Config|DeepgramNova3Config|TranscriptionEngineAzureConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null,
+     *   transcriptionEngineConfig?: Google|Telnyx|DeepgramNova2Config|DeepgramNova3Config|Azure|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null,
      *   transcriptionTracks?: string|null,
      * } $transcriptionConfig
      * @param WebhookURLMethod|value-of<WebhookURLMethod> $webhookURLMethod
@@ -668,7 +671,7 @@ final class ActionAnswerParams implements BaseModel
      *   clientState?: string|null,
      *   commandID?: string|null,
      *   transcriptionEngine?: value-of<TranscriptionEngine>|null,
-     *   transcriptionEngineConfig?: TranscriptionEngineGoogleConfig|TranscriptionEngineTelnyxConfig|DeepgramNova2Config|DeepgramNova3Config|TranscriptionEngineAzureConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null,
+     *   transcriptionEngineConfig?: Google|Telnyx|DeepgramNova2Config|DeepgramNova3Config|Azure|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null,
      *   transcriptionTracks?: string|null,
      * } $transcriptionConfig
      */

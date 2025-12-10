@@ -6,11 +6,10 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
-use Telnyx\OAuthGrants\OAuthGrant;
 use Telnyx\OAuthGrants\OAuthGrantDeleteResponse;
 use Telnyx\OAuthGrants\OAuthGrantGetResponse;
 use Telnyx\OAuthGrants\OAuthGrantListParams;
+use Telnyx\OAuthGrants\OAuthGrantListResponse;
 use Telnyx\RequestOptions;
 
 interface OAuthGrantsRawContract
@@ -34,7 +33,7 @@ interface OAuthGrantsRawContract
      *
      * @param array<mixed>|OAuthGrantListParams $params
      *
-     * @return BaseResponse<DefaultFlatPagination<OAuthGrant>>
+     * @return BaseResponse<OAuthGrantListResponse>
      *
      * @throws APIException
      */

@@ -101,7 +101,7 @@ interface ActionsRawContract
     /**
      * @api
      *
-     * @param string $callControlIDToBridge Unique identifier and token for controlling the call
+     * @param string $callControlID_ Unique identifier and token for controlling the call
      * @param array<mixed>|ActionBridgeParams $params
      *
      * @return BaseResponse<ActionBridgeResponse>
@@ -109,7 +109,7 @@ interface ActionsRawContract
      * @throws APIException
      */
     public function bridge(
-        string $callControlIDToBridge,
+        string $callControlID_,
         array|ActionBridgeParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse;

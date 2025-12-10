@@ -7,10 +7,9 @@ namespace Telnyx\Services\Messaging\Rcs;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\Messaging\Rcs\Agents\AgentListParams;
+use Telnyx\Messaging\Rcs\Agents\AgentListResponse;
 use Telnyx\Messaging\Rcs\Agents\AgentUpdateParams;
-use Telnyx\RcsAgents\RcsAgent;
 use Telnyx\RcsAgents\RcsAgentResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging\Rcs\AgentsRawContract;
@@ -90,7 +89,7 @@ final class AgentsRawService implements AgentsRawContract
      *
      * @param array{page?: array{number?: int, size?: int}}|AgentListParams $params
      *
-     * @return BaseResponse<DefaultPagination<RcsAgent>>
+     * @return BaseResponse<AgentListResponse>
      *
      * @throws APIException
      */
@@ -109,8 +108,7 @@ final class AgentsRawService implements AgentsRawContract
             path: 'messaging/rcs/agents',
             query: $parsed,
             options: $options,
-            convert: RcsAgent::class,
-            page: DefaultPagination::class,
+            convert: AgentListResponse::class,
         );
     }
 }

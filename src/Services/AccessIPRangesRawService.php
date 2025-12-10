@@ -7,11 +7,10 @@ namespace Telnyx\Services;
 use Telnyx\AccessIPRanges\AccessIPRange;
 use Telnyx\AccessIPRanges\AccessIPRangeCreateParams;
 use Telnyx\AccessIPRanges\AccessIPRangeListParams;
+use Telnyx\AccessIPRanges\AccessIPRangeListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AccessIPRangesRawContract;
 
@@ -72,11 +71,10 @@ final class AccessIPRangesRawService implements AccessIPRangesRawContract
      *       lte?: string|\DateTimeInterface,
      *     },
      *   },
-     *   pageNumber?: int,
-     *   pageSize?: int,
+     *   page?: array{number?: int, size?: int},
      * }|AccessIPRangeListParams $params
      *
-     * @return BaseResponse<DefaultFlatPagination<AccessIPRange>>
+     * @return BaseResponse<AccessIPRangeListResponse>
      *
      * @throws APIException
      */
@@ -93,13 +91,9 @@ final class AccessIPRangesRawService implements AccessIPRangesRawContract
         return $this->client->request(
             method: 'get',
             path: 'access_ip_ranges',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
-            convert: AccessIPRange::class,
-            page: DefaultFlatPagination::class,
+            convert: AccessIPRangeListResponse::class,
         );
     }
 

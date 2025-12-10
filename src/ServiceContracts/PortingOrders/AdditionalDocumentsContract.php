@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\AdditionalDocument\DocumentType;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Sort\Value;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListResponse;
@@ -44,8 +43,6 @@ interface AdditionalDocumentsContract
      *   value?: 'created_at'|'-created_at'|Value
      * } $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
-     * @return DefaultPagination<AdditionalDocumentListResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -54,7 +51,7 @@ interface AdditionalDocumentsContract
         ?array $page = null,
         ?array $sort = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): AdditionalDocumentListResponse;
 
     /**
      * @api

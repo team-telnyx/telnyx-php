@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\NetworkCoverage\NetworkCoverageListParams;
 use Telnyx\NetworkCoverage\NetworkCoverageListResponse;
 use Telnyx\RequestOptions;
@@ -18,7 +17,7 @@ interface NetworkCoverageRawContract
      *
      * @param array<mixed>|NetworkCoverageListParams $params
      *
-     * @return BaseResponse<DefaultPagination<NetworkCoverageListResponse>>
+     * @return BaseResponse<NetworkCoverageListResponse>
      *
      * @throws APIException
      */

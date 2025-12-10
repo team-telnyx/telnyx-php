@@ -88,16 +88,7 @@ abstract class BaseClient
     }
 
     /** @return array<string,string> */
-    protected function authHeaders(): array
-    {
-        return [...$this->bearerAuth(), ...$this->oauthClientAuth()];
-    }
-
-    /** @return array<string,string> */
-    abstract protected function bearerAuth(): array;
-
-    /** @return array<string,string> */
-    abstract protected function oauthClientAuth(): array;
+    abstract protected function authHeaders(): array;
 
     /**
      * @internal

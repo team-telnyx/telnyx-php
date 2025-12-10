@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
-use Telnyx\Addresses\Address;
 use Telnyx\Addresses\AddressCreateParams;
 use Telnyx\Addresses\AddressDeleteResponse;
 use Telnyx\Addresses\AddressGetResponse;
 use Telnyx\Addresses\AddressListParams;
 use Telnyx\Addresses\AddressListParams\Sort;
+use Telnyx\Addresses\AddressListResponse;
 use Telnyx\Addresses\AddressNewResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AddressesRawContract;
 
@@ -112,7 +111,7 @@ final class AddressesRawService implements AddressesRawContract
      *   sort?: 'created_at'|'first_name'|'last_name'|'business_name'|'street_address'|Sort,
      * }|AddressListParams $params
      *
-     * @return BaseResponse<DefaultPagination<Address>>
+     * @return BaseResponse<AddressListResponse>
      *
      * @throws APIException
      */
@@ -131,8 +130,7 @@ final class AddressesRawService implements AddressesRawContract
             path: 'addresses',
             query: $parsed,
             options: $options,
-            convert: Address::class,
-            page: DefaultPagination::class,
+            convert: AddressListResponse::class,
         );
     }
 

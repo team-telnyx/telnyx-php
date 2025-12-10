@@ -8,14 +8,13 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPaginationForInexplicitNumberOrders;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams\OrderingGroup\CountryISO;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams\OrderingGroup\Strategy;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderGetResponse;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderListParams;
+use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderListResponse;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderNewResponse;
-use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\InexplicitNumberOrdersRawContract;
 
@@ -110,7 +109,7 @@ final class InexplicitNumberOrdersRawService implements InexplicitNumberOrdersRa
      *   pageNumber?: int, pageSize?: int
      * }|InexplicitNumberOrderListParams $params
      *
-     * @return BaseResponse<DefaultFlatPaginationForInexplicitNumberOrders<InexplicitNumberOrderResponse,>,>
+     * @return BaseResponse<InexplicitNumberOrderListResponse>
      *
      * @throws APIException
      */
@@ -132,8 +131,7 @@ final class InexplicitNumberOrdersRawService implements InexplicitNumberOrdersRa
                 ['pageNumber' => 'page_number', 'pageSize' => 'page_size']
             ),
             options: $options,
-            convert: InexplicitNumberOrderResponse::class,
-            page: DefaultFlatPaginationForInexplicitNumberOrders::class,
+            convert: InexplicitNumberOrderListResponse::class,
         );
     }
 }

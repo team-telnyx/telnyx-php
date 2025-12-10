@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace Telnyx\Number10dlc\Brand;
 
+use Telnyx\Brand\AltBusinessIDType;
+use Telnyx\Brand\BrandIdentityStatus;
+use Telnyx\Brand\EntityType;
+use Telnyx\Brand\StockExchange;
+use Telnyx\Brand\TelnyxBrand\BrandRelationship;
+use Telnyx\Brand\TelnyxBrand\OptionalAttributes;
+use Telnyx\Brand\TelnyxBrand\Status;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Number10dlc\Brand\TelnyxBrand\BrandRelationship;
-use Telnyx\Number10dlc\Brand\TelnyxBrand\OptionalAttributes;
-use Telnyx\Number10dlc\Brand\TelnyxBrand\Status;
 
 /**
  * Telnyx-specific extensions to The Campaign Registry's `Brand` type.

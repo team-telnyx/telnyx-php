@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   productBreakdown?: int|null,
  *   recordType?: string|null,
  *   reportURL?: string|null,
- *   result?: array<string,mixed>|null,
+ *   result?: mixed,
  *   startTime?: \DateTimeInterface|null,
  *   status?: int|null,
  *   updatedAt?: \DateTimeInterface|null,
@@ -65,9 +65,8 @@ final class CdrUsageReportResponseLegacy implements BaseModel
     #[Optional('report_url')]
     public ?string $reportURL;
 
-    /** @var array<string,mixed>|null $result */
-    #[Optional(map: 'mixed')]
-    public ?array $result;
+    #[Optional]
+    public mixed $result;
 
     #[Optional('start_time')]
     public ?\DateTimeInterface $startTime;
@@ -92,7 +91,6 @@ final class CdrUsageReportResponseLegacy implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $connections
-     * @param array<string,mixed> $result
      */
     public static function with(
         ?string $id = null,
@@ -103,7 +101,7 @@ final class CdrUsageReportResponseLegacy implements BaseModel
         ?int $productBreakdown = null,
         ?string $recordType = null,
         ?string $reportURL = null,
-        ?array $result = null,
+        mixed $result = null,
         ?\DateTimeInterface $startTime = null,
         ?int $status = null,
         ?\DateTimeInterface $updatedAt = null,
@@ -202,10 +200,7 @@ final class CdrUsageReportResponseLegacy implements BaseModel
         return $self;
     }
 
-    /**
-     * @param array<string,mixed> $result
-     */
-    public function withResult(array $result): self
+    public function withResult(mixed $result): self
     {
         $self = clone $this;
         $self['result'] = $result;

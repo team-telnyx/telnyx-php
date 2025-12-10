@@ -5,8 +5,8 @@ namespace Tests\Services\Number10dlc;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\Campaign\TelnyxCampaignCsp;
 use Telnyx\Client;
-use Telnyx\Number10dlc\Campaign\TelnyxCampaignCsp;
 use Tests\UnsupportedMockTests;
 
 /**

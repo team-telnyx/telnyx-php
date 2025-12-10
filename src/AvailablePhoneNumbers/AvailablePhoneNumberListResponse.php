@@ -9,16 +9,15 @@ use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\CostInfor
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\Feature;
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\RecordType;
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\RegionInformation;
-use Telnyx\AvailablePhoneNumbersMetadata;
+use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Meta;
+use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Metadata;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type AvailablePhoneNumberListResponseShape = array{
- *   data?: list<Data>|null,
- *   meta?: AvailablePhoneNumbersMetadata|null,
- *   metadata?: AvailablePhoneNumbersMetadata|null,
+ *   data?: list<Data>|null, meta?: Meta|null, metadata?: Metadata|null
  * }
  */
 final class AvailablePhoneNumberListResponse implements BaseModel
@@ -31,10 +30,10 @@ final class AvailablePhoneNumberListResponse implements BaseModel
     public ?array $data;
 
     #[Optional]
-    public ?AvailablePhoneNumbersMetadata $meta;
+    public ?Meta $meta;
 
     #[Optional]
-    public ?AvailablePhoneNumbersMetadata $metadata;
+    public ?Metadata $metadata;
 
     public function __construct()
     {
@@ -57,17 +56,15 @@ final class AvailablePhoneNumberListResponse implements BaseModel
      *   reservable?: bool|null,
      *   vanityFormat?: string|null,
      * }> $data
-     * @param AvailablePhoneNumbersMetadata|array{
-     *   bestEffortResults?: int|null, totalResults?: int|null
-     * } $meta
-     * @param AvailablePhoneNumbersMetadata|array{
+     * @param Meta|array{bestEffortResults?: int|null, totalResults?: int|null} $meta
+     * @param Metadata|array{
      *   bestEffortResults?: int|null, totalResults?: int|null
      * } $metadata
      */
     public static function with(
         ?array $data = null,
-        AvailablePhoneNumbersMetadata|array|null $meta = null,
-        AvailablePhoneNumbersMetadata|array|null $metadata = null,
+        Meta|array|null $meta = null,
+        Metadata|array|null $metadata = null
     ): self {
         $self = new self;
 
@@ -100,11 +97,9 @@ final class AvailablePhoneNumberListResponse implements BaseModel
     }
 
     /**
-     * @param AvailablePhoneNumbersMetadata|array{
-     *   bestEffortResults?: int|null, totalResults?: int|null
-     * } $meta
+     * @param Meta|array{bestEffortResults?: int|null, totalResults?: int|null} $meta
      */
-    public function withMeta(AvailablePhoneNumbersMetadata|array $meta): self
+    public function withMeta(Meta|array $meta): self
     {
         $self = clone $this;
         $self['meta'] = $meta;
@@ -113,13 +108,12 @@ final class AvailablePhoneNumberListResponse implements BaseModel
     }
 
     /**
-     * @param AvailablePhoneNumbersMetadata|array{
+     * @param Metadata|array{
      *   bestEffortResults?: int|null, totalResults?: int|null
      * } $metadata
      */
-    public function withMetadata(
-        AvailablePhoneNumbersMetadata|array $metadata
-    ): self {
+    public function withMetadata(Metadata|array $metadata): self
+    {
         $self = clone $this;
         $self['metadata'] = $metadata;
 

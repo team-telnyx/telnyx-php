@@ -6,11 +6,10 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
-use Telnyx\OAuthClients\OAuthClient;
 use Telnyx\OAuthClients\OAuthClientCreateParams;
 use Telnyx\OAuthClients\OAuthClientGetResponse;
 use Telnyx\OAuthClients\OAuthClientListParams;
+use Telnyx\OAuthClients\OAuthClientListResponse;
 use Telnyx\OAuthClients\OAuthClientNewResponse;
 use Telnyx\OAuthClients\OAuthClientUpdateParams;
 use Telnyx\OAuthClients\OAuthClientUpdateResponse;
@@ -67,7 +66,7 @@ interface OAuthClientsRawContract
      *
      * @param array<mixed>|OAuthClientListParams $params
      *
-     * @return BaseResponse<DefaultFlatPagination<OAuthClient>>
+     * @return BaseResponse<OAuthClientListResponse>
      *
      * @throws APIException
      */

@@ -6,8 +6,8 @@ namespace Telnyx\ServiceContracts\AI\Assistants;
 
 use Telnyx\AI\Assistants\Tests\AssistantTest;
 use Telnyx\AI\Assistants\Tests\TelnyxConversationChannel;
+use Telnyx\AI\Assistants\Tests\TestListResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 interface TestsContract
@@ -83,21 +83,21 @@ interface TestsContract
      * @api
      *
      * @param string $destination Filter tests by destination (phone number, webhook URL, etc.)
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param string $telnyxConversationChannel Filter tests by communication channel (e.g., 'web_chat', 'sms')
      * @param string $testSuite Filter tests by test suite name
-     *
-     * @return DefaultFlatPagination<AssistantTest>
      *
      * @throws APIException
      */
     public function list(
         ?string $destination = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        ?array $page = null,
         ?string $telnyxConversationChannel = null,
         ?string $testSuite = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination;
+    ): TestListResponse;
 
     /**
      * @api

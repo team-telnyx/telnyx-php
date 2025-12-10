@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 namespace Telnyx\VirtualCrossConnectsCoverage;
 
+use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse\CloudProvider;
-use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse\Location;
+use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse\Data;
+use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse\Data\CloudProvider;
+use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse\Data\Location;
 
 /**
  * @phpstan-type VirtualCrossConnectsCoverageListResponseShape = array{
- *   availableBandwidth?: list<float>|null,
- *   cloudProvider?: value-of<CloudProvider>|null,
- *   cloudProviderRegion?: string|null,
- *   location?: Location|null,
- *   recordType?: string|null,
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class VirtualCrossConnectsCoverageListResponse implements BaseModel
@@ -24,36 +22,12 @@ final class VirtualCrossConnectsCoverageListResponse implements BaseModel
     /** @use SdkModel<VirtualCrossConnectsCoverageListResponseShape> */
     use SdkModel;
 
-    /**
-     * The available throughput in Megabits per Second (Mbps) for your Virtual Cross Connect.
-     *
-     * @var list<float>|null $availableBandwidth
-     */
-    #[Optional('available_bandwidth', list: 'float')]
-    public ?array $availableBandwidth;
-
-    /**
-     * The Virtual Private Cloud with which you would like to establish a cross connect.
-     *
-     * @var value-of<CloudProvider>|null $cloudProvider
-     */
-    #[Optional('cloud_provider', enum: CloudProvider::class)]
-    public ?string $cloudProvider;
-
-    /**
-     * The region where your Virtual Private Cloud hosts are located. Should be identical to how the cloud provider names region, i.e. us-east-1 for AWS but Frankfurt for Azure.
-     */
-    #[Optional('cloud_provider_region')]
-    public ?string $cloudProviderRegion;
+    /** @var list<Data>|null $data */
+    #[Optional(list: Data::class)]
+    public ?array $data;
 
     #[Optional]
-    public ?Location $location;
-
-    /**
-     * Identifies the type of the resource.
-     */
-    #[Optional('record_type')]
-    public ?string $recordType;
+    public ?PaginationMeta $meta;
 
     public function __construct()
     {
@@ -65,95 +39,61 @@ final class VirtualCrossConnectsCoverageListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<float> $availableBandwidth
-     * @param CloudProvider|value-of<CloudProvider> $cloudProvider
-     * @param Location|array{
-     *   code?: string|null,
-     *   name?: string|null,
-     *   pop?: string|null,
-     *   region?: string|null,
-     *   site?: string|null,
-     * } $location
+     * @param list<Data|array{
+     *   availableBandwidth?: list<float>|null,
+     *   cloudProvider?: value-of<CloudProvider>|null,
+     *   cloudProviderRegion?: string|null,
+     *   location?: Location|null,
+     *   recordType?: string|null,
+     * }> $data
+     * @param PaginationMeta|array{
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
+     * } $meta
      */
     public static function with(
-        ?array $availableBandwidth = null,
-        CloudProvider|string|null $cloudProvider = null,
-        ?string $cloudProviderRegion = null,
-        Location|array|null $location = null,
-        ?string $recordType = null,
+        ?array $data = null,
+        PaginationMeta|array|null $meta = null
     ): self {
         $self = new self;
 
-        null !== $availableBandwidth && $self['availableBandwidth'] = $availableBandwidth;
-        null !== $cloudProvider && $self['cloudProvider'] = $cloudProvider;
-        null !== $cloudProviderRegion && $self['cloudProviderRegion'] = $cloudProviderRegion;
-        null !== $location && $self['location'] = $location;
-        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $data && $self['data'] = $data;
+        null !== $meta && $self['meta'] = $meta;
 
         return $self;
     }
 
     /**
-     * The available throughput in Megabits per Second (Mbps) for your Virtual Cross Connect.
-     *
-     * @param list<float> $availableBandwidth
+     * @param list<Data|array{
+     *   availableBandwidth?: list<float>|null,
+     *   cloudProvider?: value-of<CloudProvider>|null,
+     *   cloudProviderRegion?: string|null,
+     *   location?: Location|null,
+     *   recordType?: string|null,
+     * }> $data
      */
-    public function withAvailableBandwidth(array $availableBandwidth): self
+    public function withData(array $data): self
     {
         $self = clone $this;
-        $self['availableBandwidth'] = $availableBandwidth;
+        $self['data'] = $data;
 
         return $self;
     }
 
     /**
-     * The Virtual Private Cloud with which you would like to establish a cross connect.
-     *
-     * @param CloudProvider|value-of<CloudProvider> $cloudProvider
+     * @param PaginationMeta|array{
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
+     * } $meta
      */
-    public function withCloudProvider(CloudProvider|string $cloudProvider): self
+    public function withMeta(PaginationMeta|array $meta): self
     {
         $self = clone $this;
-        $self['cloudProvider'] = $cloudProvider;
-
-        return $self;
-    }
-
-    /**
-     * The region where your Virtual Private Cloud hosts are located. Should be identical to how the cloud provider names region, i.e. us-east-1 for AWS but Frankfurt for Azure.
-     */
-    public function withCloudProviderRegion(string $cloudProviderRegion): self
-    {
-        $self = clone $this;
-        $self['cloudProviderRegion'] = $cloudProviderRegion;
-
-        return $self;
-    }
-
-    /**
-     * @param Location|array{
-     *   code?: string|null,
-     *   name?: string|null,
-     *   pop?: string|null,
-     *   region?: string|null,
-     *   site?: string|null,
-     * } $location
-     */
-    public function withLocation(Location|array $location): self
-    {
-        $self = clone $this;
-        $self['location'] = $location;
-
-        return $self;
-    }
-
-    /**
-     * Identifies the type of the resource.
-     */
-    public function withRecordType(string $recordType): self
-    {
-        $self = clone $this;
-        $self['recordType'] = $recordType;
+        $self['meta'] = $meta;
 
         return $self;
     }

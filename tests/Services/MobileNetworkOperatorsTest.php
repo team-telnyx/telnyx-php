@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
 use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListResponse;
 use Tests\UnsupportedMockTests;
 
@@ -35,14 +34,9 @@ final class MobileNetworkOperatorsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->mobileNetworkOperators->list();
+        $result = $this->client->mobileNetworkOperators->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(MobileNetworkOperatorListResponse::class, $item);
-        }
+        $this->assertInstanceOf(MobileNetworkOperatorListResponse::class, $result);
     }
 }

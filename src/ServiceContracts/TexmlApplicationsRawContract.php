@@ -6,13 +6,12 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
-use Telnyx\TexmlApplications\TexmlApplication;
 use Telnyx\TexmlApplications\TexmlApplicationCreateParams;
 use Telnyx\TexmlApplications\TexmlApplicationDeleteResponse;
 use Telnyx\TexmlApplications\TexmlApplicationGetResponse;
 use Telnyx\TexmlApplications\TexmlApplicationListParams;
+use Telnyx\TexmlApplications\TexmlApplicationListResponse;
 use Telnyx\TexmlApplications\TexmlApplicationNewResponse;
 use Telnyx\TexmlApplications\TexmlApplicationUpdateParams;
 use Telnyx\TexmlApplications\TexmlApplicationUpdateResponse;
@@ -68,7 +67,7 @@ interface TexmlApplicationsRawContract
      *
      * @param array<mixed>|TexmlApplicationListParams $params
      *
-     * @return BaseResponse<DefaultPagination<TexmlApplication>>
+     * @return BaseResponse<TexmlApplicationListResponse>
      *
      * @throws APIException
      */

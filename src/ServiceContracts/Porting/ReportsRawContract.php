@@ -6,11 +6,10 @@ namespace Telnyx\ServiceContracts\Porting;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\Porting\Reports\PortingReport;
 use Telnyx\Porting\Reports\ReportCreateParams;
 use Telnyx\Porting\Reports\ReportGetResponse;
 use Telnyx\Porting\Reports\ReportListParams;
+use Telnyx\Porting\Reports\ReportListResponse;
 use Telnyx\Porting\Reports\ReportNewResponse;
 use Telnyx\RequestOptions;
 
@@ -49,7 +48,7 @@ interface ReportsRawContract
      *
      * @param array<mixed>|ReportListParams $params
      *
-     * @return BaseResponse<DefaultPagination<PortingReport>>
+     * @return BaseResponse<ReportListResponse>
      *
      * @throws APIException
      */

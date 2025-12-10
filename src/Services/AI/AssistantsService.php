@@ -6,7 +6,7 @@ namespace Telnyx\Services\AI;
 
 use Telnyx\AI\Assistants\AssistantChatResponse;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
-use Telnyx\AI\Assistants\AssistantImportsParams\Provider;
+use Telnyx\AI\Assistants\AssistantImportParams\Provider;
 use Telnyx\AI\Assistants\AssistantSendSMSResponse;
 use Telnyx\AI\Assistants\AssistantsList;
 use Telnyx\AI\Assistants\AssistantTool;
@@ -18,7 +18,6 @@ use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
 use Telnyx\AI\Assistants\TranscriptionSettings\Model;
-use Telnyx\AI\Assistants\TranscriptionSettingsConfig;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
@@ -106,7 +105,7 @@ final class AssistantsService implements AssistantsContract
      *     eotTimeoutMs?: int,
      *     numerals?: bool,
      *     smartFormat?: bool,
-     *   }|TranscriptionSettingsConfig,
+     *   },
      * }|TranscriptionSettings $transcription
      * @param array{
      *   voice: string,
@@ -224,7 +223,7 @@ final class AssistantsService implements AssistantsContract
      *     eotTimeoutMs?: int,
      *     numerals?: bool,
      *     smartFormat?: bool,
-     *   }|TranscriptionSettingsConfig,
+     *   },
      * }|TranscriptionSettings $transcription
      * @param array{
      *   voice: string,
@@ -392,7 +391,7 @@ final class AssistantsService implements AssistantsContract
      *
      * @throws APIException
      */
-    public function imports(
+    public function import(
         string $apiKeyRef,
         string|Provider $provider,
         ?RequestOptions $requestOptions = null,
@@ -402,7 +401,7 @@ final class AssistantsService implements AssistantsContract
         );
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->imports(params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->import(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

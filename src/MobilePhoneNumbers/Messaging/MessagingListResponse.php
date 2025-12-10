@@ -7,24 +7,15 @@ namespace Telnyx\MobilePhoneNumbers\Messaging;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\MessagingFeatureSet;
-use Telnyx\MobilePhoneNumbers\Messaging\MessagingListResponse\Features;
-use Telnyx\MobilePhoneNumbers\Messaging\MessagingListResponse\RecordType;
-use Telnyx\MobilePhoneNumbers\Messaging\MessagingListResponse\Type;
+use Telnyx\MobilePhoneNumbers\Messaging\MessagingListResponse\Data;
+use Telnyx\MobilePhoneNumbers\Messaging\MessagingListResponse\Data\Features;
+use Telnyx\MobilePhoneNumbers\Messaging\MessagingListResponse\Data\RecordType;
+use Telnyx\MobilePhoneNumbers\Messaging\MessagingListResponse\Data\Type;
+use Telnyx\MobilePhoneNumbers\Messaging\MessagingListResponse\Meta;
 
 /**
  * @phpstan-type MessagingListResponseShape = array{
- *   id?: string|null,
- *   countryCode?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   features?: Features|null,
- *   messagingProduct?: string|null,
- *   messagingProfileID?: string|null,
- *   phoneNumber?: string|null,
- *   recordType?: value-of<RecordType>|null,
- *   trafficType?: string|null,
- *   type?: value-of<Type>|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   data?: list<Data>|null, meta?: Meta|null
  * }
  */
 final class MessagingListResponse implements BaseModel
@@ -32,72 +23,12 @@ final class MessagingListResponse implements BaseModel
     /** @use SdkModel<MessagingListResponseShape> */
     use SdkModel;
 
-    /**
-     * Identifies the type of resource.
-     */
-    #[Optional]
-    public ?string $id;
-
-    /**
-     * ISO 3166-1 alpha-2 country code.
-     */
-    #[Optional('country_code')]
-    public ?string $countryCode;
-
-    /**
-     * ISO 8601 formatted date indicating when the resource was created.
-     */
-    #[Optional('created_at')]
-    public ?\DateTimeInterface $createdAt;
+    /** @var list<Data>|null $data */
+    #[Optional(list: Data::class)]
+    public ?array $data;
 
     #[Optional]
-    public ?Features $features;
-
-    /**
-     * The messaging product that the number is registered to use.
-     */
-    #[Optional('messaging_product')]
-    public ?string $messagingProduct;
-
-    /**
-     * Unique identifier for a messaging profile.
-     */
-    #[Optional('messaging_profile_id', nullable: true)]
-    public ?string $messagingProfileID;
-
-    /**
-     * +E.164 formatted phone number.
-     */
-    #[Optional('phone_number')]
-    public ?string $phoneNumber;
-
-    /**
-     * Identifies the type of the resource.
-     *
-     * @var value-of<RecordType>|null $recordType
-     */
-    #[Optional('record_type', enum: RecordType::class)]
-    public ?string $recordType;
-
-    /**
-     * The messaging traffic or use case for which the number is currently configured.
-     */
-    #[Optional('traffic_type')]
-    public ?string $trafficType;
-
-    /**
-     * The type of the phone number.
-     *
-     * @var value-of<Type>|null $type
-     */
-    #[Optional(enum: Type::class)]
-    public ?string $type;
-
-    /**
-     * ISO 8601 formatted date indicating when the resource was updated.
-     */
-    #[Optional('updated_at')]
-    public ?\DateTimeInterface $updatedAt;
+    public ?Meta $meta;
 
     public function __construct()
     {
@@ -109,161 +40,67 @@ final class MessagingListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Features|array{sms?: MessagingFeatureSet|null} $features
-     * @param RecordType|value-of<RecordType> $recordType
-     * @param Type|value-of<Type> $type
+     * @param list<Data|array{
+     *   id?: string|null,
+     *   countryCode?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   features?: Features|null,
+     *   messagingProduct?: string|null,
+     *   messagingProfileID?: string|null,
+     *   phoneNumber?: string|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   trafficType?: string|null,
+     *   type?: value-of<Type>|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     * }> $data
+     * @param Meta|array{
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
+     * } $meta
      */
     public static function with(
-        ?string $id = null,
-        ?string $countryCode = null,
-        ?\DateTimeInterface $createdAt = null,
-        Features|array|null $features = null,
-        ?string $messagingProduct = null,
-        ?string $messagingProfileID = null,
-        ?string $phoneNumber = null,
-        RecordType|string|null $recordType = null,
-        ?string $trafficType = null,
-        Type|string|null $type = null,
-        ?\DateTimeInterface $updatedAt = null,
+        ?array $data = null,
+        Meta|array|null $meta = null
     ): self {
         $self = new self;
 
-        null !== $id && $self['id'] = $id;
-        null !== $countryCode && $self['countryCode'] = $countryCode;
-        null !== $createdAt && $self['createdAt'] = $createdAt;
-        null !== $features && $self['features'] = $features;
-        null !== $messagingProduct && $self['messagingProduct'] = $messagingProduct;
-        null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
-        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
-        null !== $recordType && $self['recordType'] = $recordType;
-        null !== $trafficType && $self['trafficType'] = $trafficType;
-        null !== $type && $self['type'] = $type;
-        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $data && $self['data'] = $data;
+        null !== $meta && $self['meta'] = $meta;
 
         return $self;
     }
 
     /**
-     * Identifies the type of resource.
+     * @param list<Data|array{
+     *   id?: string|null,
+     *   countryCode?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   features?: Features|null,
+     *   messagingProduct?: string|null,
+     *   messagingProfileID?: string|null,
+     *   phoneNumber?: string|null,
+     *   recordType?: value-of<RecordType>|null,
+     *   trafficType?: string|null,
+     *   type?: value-of<Type>|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     * }> $data
      */
-    public function withID(string $id): self
+    public function withData(array $data): self
     {
         $self = clone $this;
-        $self['id'] = $id;
+        $self['data'] = $data;
 
         return $self;
     }
 
     /**
-     * ISO 3166-1 alpha-2 country code.
+     * @param Meta|array{
+     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
+     * } $meta
      */
-    public function withCountryCode(string $countryCode): self
+    public function withMeta(Meta|array $meta): self
     {
         $self = clone $this;
-        $self['countryCode'] = $countryCode;
-
-        return $self;
-    }
-
-    /**
-     * ISO 8601 formatted date indicating when the resource was created.
-     */
-    public function withCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $self = clone $this;
-        $self['createdAt'] = $createdAt;
-
-        return $self;
-    }
-
-    /**
-     * @param Features|array{sms?: MessagingFeatureSet|null} $features
-     */
-    public function withFeatures(Features|array $features): self
-    {
-        $self = clone $this;
-        $self['features'] = $features;
-
-        return $self;
-    }
-
-    /**
-     * The messaging product that the number is registered to use.
-     */
-    public function withMessagingProduct(string $messagingProduct): self
-    {
-        $self = clone $this;
-        $self['messagingProduct'] = $messagingProduct;
-
-        return $self;
-    }
-
-    /**
-     * Unique identifier for a messaging profile.
-     */
-    public function withMessagingProfileID(?string $messagingProfileID): self
-    {
-        $self = clone $this;
-        $self['messagingProfileID'] = $messagingProfileID;
-
-        return $self;
-    }
-
-    /**
-     * +E.164 formatted phone number.
-     */
-    public function withPhoneNumber(string $phoneNumber): self
-    {
-        $self = clone $this;
-        $self['phoneNumber'] = $phoneNumber;
-
-        return $self;
-    }
-
-    /**
-     * Identifies the type of the resource.
-     *
-     * @param RecordType|value-of<RecordType> $recordType
-     */
-    public function withRecordType(RecordType|string $recordType): self
-    {
-        $self = clone $this;
-        $self['recordType'] = $recordType;
-
-        return $self;
-    }
-
-    /**
-     * The messaging traffic or use case for which the number is currently configured.
-     */
-    public function withTrafficType(string $trafficType): self
-    {
-        $self = clone $this;
-        $self['trafficType'] = $trafficType;
-
-        return $self;
-    }
-
-    /**
-     * The type of the phone number.
-     *
-     * @param Type|value-of<Type> $type
-     */
-    public function withType(Type|string $type): self
-    {
-        $self = clone $this;
-        $self['type'] = $type;
-
-        return $self;
-    }
-
-    /**
-     * ISO 8601 formatted date indicating when the resource was updated.
-     */
-    public function withUpdatedAt(\DateTimeInterface $updatedAt): self
-    {
-        $self = clone $this;
-        $self['updatedAt'] = $updatedAt;
+        $self['meta'] = $meta;
 
         return $self;
     }

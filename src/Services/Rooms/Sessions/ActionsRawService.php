@@ -10,7 +10,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\Sessions\Actions\ActionEndResponse;
 use Telnyx\Rooms\Sessions\Actions\ActionKickParams;
-use Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants\AllParticipants;
+use Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants\UnionMember0;
 use Telnyx\Rooms\Sessions\Actions\ActionKickResponse;
 use Telnyx\Rooms\Sessions\Actions\ActionMuteParams;
 use Telnyx\Rooms\Sessions\Actions\ActionMuteResponse;
@@ -57,7 +57,7 @@ final class ActionsRawService implements ActionsRawContract
      *
      * @param string $roomSessionID the unique identifier of a room session
      * @param array{
-     *   exclude?: list<string>, participants?: 'all'|AllParticipants|list<string>
+     *   exclude?: list<string>, participants?: 'all'|UnionMember0|list<string>
      * }|ActionKickParams $params
      *
      * @return BaseResponse<ActionKickResponse>
@@ -92,7 +92,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param string $roomSessionID the unique identifier of a room session
      * @param array{
      *   exclude?: list<string>,
-     *   participants?: 'all'|ActionMuteParams\Participants\AllParticipants|list<string>,
+     *   participants?: 'all'|ActionMuteParams\Participants\UnionMember0|list<string>,
      * }|ActionMuteParams $params
      *
      * @return BaseResponse<ActionMuteResponse>
@@ -127,7 +127,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param string $roomSessionID the unique identifier of a room session
      * @param array{
      *   exclude?: list<string>,
-     *   participants?: 'all'|ActionUnmuteParams\Participants\AllParticipants|list<string>,
+     *   participants?: 'all'|ActionUnmuteParams\Participants\UnionMember0|list<string>,
      * }|ActionUnmuteParams $params
      *
      * @return BaseResponse<ActionUnmuteResponse>

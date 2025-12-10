@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\VerifyProfiles\MessageTemplate;
-use Telnyx\VerifyProfiles\VerifyProfile;
 use Telnyx\VerifyProfiles\VerifyProfileData;
 use Telnyx\VerifyProfiles\VerifyProfileGetTemplatesResponse;
+use Telnyx\VerifyProfiles\VerifyProfileListResponse;
 
 interface VerifyProfilesContract
 {
@@ -104,17 +103,17 @@ interface VerifyProfilesContract
      * @param array{
      *   name?: string
      * } $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
-     *
-     * @return DefaultFlatPagination<VerifyProfile>
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination;
+    ): VerifyProfileListResponse;
 
     /**
      * @api

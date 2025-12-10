@@ -7,13 +7,12 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\ExternalConnections\ExternalConnection;
 use Telnyx\ExternalConnections\ExternalConnectionCreateParams;
 use Telnyx\ExternalConnections\ExternalConnectionCreateParams\ExternalSipConnection;
 use Telnyx\ExternalConnections\ExternalConnectionDeleteResponse;
 use Telnyx\ExternalConnections\ExternalConnectionGetResponse;
 use Telnyx\ExternalConnections\ExternalConnectionListParams;
+use Telnyx\ExternalConnections\ExternalConnectionListResponse;
 use Telnyx\ExternalConnections\ExternalConnectionNewResponse;
 use Telnyx\ExternalConnections\ExternalConnectionUpdateLocationParams;
 use Telnyx\ExternalConnections\ExternalConnectionUpdateLocationResponse;
@@ -149,7 +148,7 @@ final class ExternalConnectionsRawService implements ExternalConnectionsRawContr
      *   page?: array{number?: int, size?: int},
      * }|ExternalConnectionListParams $params
      *
-     * @return BaseResponse<DefaultPagination<ExternalConnection>>
+     * @return BaseResponse<ExternalConnectionListResponse>
      *
      * @throws APIException
      */
@@ -168,8 +167,7 @@ final class ExternalConnectionsRawService implements ExternalConnectionsRawContr
             path: 'external_connections',
             query: $parsed,
             options: $options,
-            convert: ExternalConnection::class,
-            page: DefaultPagination::class,
+            convert: ExternalConnectionListResponse::class,
         );
     }
 

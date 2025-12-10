@@ -8,13 +8,13 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
-use Telnyx\RoomParticipant;
-use Telnyx\Rooms\RoomSession;
+use Telnyx\Rooms\Sessions\SessionGetParticipantsResponse;
 use Telnyx\Rooms\Sessions\SessionGetResponse;
 use Telnyx\Rooms\Sessions\SessionList0Params;
+use Telnyx\Rooms\Sessions\SessionList0Response;
 use Telnyx\Rooms\Sessions\SessionList1Params;
+use Telnyx\Rooms\Sessions\SessionList1Response;
 use Telnyx\Rooms\Sessions\SessionRetrieveParams;
 use Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams;
 use Telnyx\ServiceContracts\Rooms\SessionsRawContract;
@@ -79,7 +79,7 @@ final class SessionsRawService implements SessionsRawContract
      *   page?: array{number?: int, size?: int},
      * }|SessionList0Params $params
      *
-     * @return BaseResponse<DefaultPagination<RoomSession>>
+     * @return BaseResponse<SessionList0Response>
      *
      * @throws APIException
      */
@@ -101,8 +101,7 @@ final class SessionsRawService implements SessionsRawContract
                 ['includeParticipants' => 'include_participants']
             ),
             options: $options,
-            convert: RoomSession::class,
-            page: DefaultPagination::class,
+            convert: SessionList0Response::class,
         );
     }
 
@@ -123,7 +122,7 @@ final class SessionsRawService implements SessionsRawContract
      *   page?: array{number?: int, size?: int},
      * }|SessionList1Params $params
      *
-     * @return BaseResponse<DefaultPagination<RoomSession>>
+     * @return BaseResponse<SessionList1Response>
      *
      * @throws APIException
      */
@@ -146,8 +145,7 @@ final class SessionsRawService implements SessionsRawContract
                 ['includeParticipants' => 'include_participants']
             ),
             options: $options,
-            convert: RoomSession::class,
-            page: DefaultPagination::class,
+            convert: SessionList1Response::class,
         );
     }
 
@@ -167,7 +165,7 @@ final class SessionsRawService implements SessionsRawContract
      *   page?: array{number?: int, size?: int},
      * }|SessionRetrieveParticipantsParams $params
      *
-     * @return BaseResponse<DefaultPagination<RoomParticipant>>
+     * @return BaseResponse<SessionGetParticipantsResponse>
      *
      * @throws APIException
      */
@@ -187,8 +185,7 @@ final class SessionsRawService implements SessionsRawContract
             path: ['room_sessions/%1$s/participants', $roomSessionID],
             query: $parsed,
             options: $options,
-            convert: RoomParticipant::class,
-            page: DefaultPagination::class,
+            convert: SessionGetParticipantsResponse::class,
         );
     }
 }

@@ -6,7 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPaginationForMessagingTollfree;
+use Telnyx\MessagingTollfree\Verification\Requests\RequestListResponse;
 use Telnyx\MessagingTollfree\Verification\Requests\TfVerificationStatus;
 use Telnyx\MessagingTollfree\Verification\Requests\TollFreeVerificationEntityType;
 use Telnyx\MessagingTollfree\Verification\Requests\UseCaseCategories;
@@ -53,7 +53,7 @@ final class RequestsTest extends TestCase
             businessZip: '78701',
             corporateWebsite: 'http://example.com',
             isvReseller: 'isvReseller',
-            messageVolume: Volume::V_100000,
+            messageVolume: Volume::_100_000,
             optInWorkflow: 'User signs into the Telnyx portal, enters a number and is prompted to select whether they want to use 2FA verification for security purposes. If they\'ve opted in a confirmation message is sent out to the handset',
             optInWorkflowImageURLs: [
                 ['url' => 'https://telnyx.com/sign-up'],
@@ -63,7 +63,7 @@ final class RequestsTest extends TestCase
                 ['phoneNumber' => '+18773554398'], ['phoneNumber' => '+18773554399'],
             ],
             productionMessageContent: 'Your Telnyx OTP is XXXX',
-            useCase: UseCaseCategories::TWO_FA,
+            useCase: UseCaseCategories::_2_FA,
             useCaseSummary: 'This is a use case where Telnyx sends out 2FA codes to portal users to verify their identity in order to sign into the portal',
         );
 
@@ -91,7 +91,7 @@ final class RequestsTest extends TestCase
             businessZip: '78701',
             corporateWebsite: 'http://example.com',
             isvReseller: 'isvReseller',
-            messageVolume: Volume::V_100000,
+            messageVolume: Volume::_100_000,
             optInWorkflow: 'User signs into the Telnyx portal, enters a number and is prompted to select whether they want to use 2FA verification for security purposes. If they\'ve opted in a confirmation message is sent out to the handset',
             optInWorkflowImageURLs: [
                 ['url' => 'https://telnyx.com/sign-up'],
@@ -101,7 +101,7 @@ final class RequestsTest extends TestCase
                 ['phoneNumber' => '+18773554398'], ['phoneNumber' => '+18773554399'],
             ],
             productionMessageContent: 'Your Telnyx OTP is XXXX',
-            useCase: UseCaseCategories::TWO_FA,
+            useCase: UseCaseCategories::_2_FA,
             useCaseSummary: 'This is a use case where Telnyx sends out 2FA codes to portal users to verify their identity in order to sign into the portal',
             ageGatedContent: true,
             businessAddr2: '14th Floor',
@@ -162,7 +162,7 @@ final class RequestsTest extends TestCase
             businessZip: '78701',
             corporateWebsite: 'http://example.com',
             isvReseller: 'isvReseller',
-            messageVolume: Volume::V_100000,
+            messageVolume: Volume::_100_000,
             optInWorkflow: 'User signs into the Telnyx portal, enters a number and is prompted to select whether they want to use 2FA verification for security purposes. If they\'ve opted in a confirmation message is sent out to the handset',
             optInWorkflowImageURLs: [
                 ['url' => 'https://telnyx.com/sign-up'],
@@ -172,7 +172,7 @@ final class RequestsTest extends TestCase
                 ['phoneNumber' => '+18773554398'], ['phoneNumber' => '+18773554399'],
             ],
             productionMessageContent: 'Your Telnyx OTP is XXXX',
-            useCase: UseCaseCategories::TWO_FA,
+            useCase: UseCaseCategories::_2_FA,
             useCaseSummary: 'This is a use case where Telnyx sends out 2FA codes to portal users to verify their identity in order to sign into the portal',
         );
 
@@ -201,7 +201,7 @@ final class RequestsTest extends TestCase
             businessZip: '78701',
             corporateWebsite: 'http://example.com',
             isvReseller: 'isvReseller',
-            messageVolume: Volume::V_100000,
+            messageVolume: Volume::_100_000,
             optInWorkflow: 'User signs into the Telnyx portal, enters a number and is prompted to select whether they want to use 2FA verification for security purposes. If they\'ve opted in a confirmation message is sent out to the handset',
             optInWorkflowImageURLs: [
                 ['url' => 'https://telnyx.com/sign-up'],
@@ -211,7 +211,7 @@ final class RequestsTest extends TestCase
                 ['phoneNumber' => '+18773554398'], ['phoneNumber' => '+18773554399'],
             ],
             productionMessageContent: 'Your Telnyx OTP is XXXX',
-            useCase: UseCaseCategories::TWO_FA,
+            useCase: UseCaseCategories::_2_FA,
             useCaseSummary: 'This is a use case where Telnyx sends out 2FA codes to portal users to verify their identity in order to sign into the portal',
             ageGatedContent: true,
             businessAddr2: '14th Floor',
@@ -239,21 +239,13 @@ final class RequestsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->messagingTollfree->verification->requests->list(
+        $result = $this->client->messagingTollfree->verification->requests->list(
             page: 1,
             pageSize: 1
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            DefaultPaginationForMessagingTollfree::class,
-            $page
-        );
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(VerificationRequestStatus::class, $item);
-        }
+        $this->assertInstanceOf(RequestListResponse::class, $result);
     }
 
     #[Test]
@@ -263,7 +255,7 @@ final class RequestsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->messagingTollfree->verification->requests->list(
+        $result = $this->client->messagingTollfree->verification->requests->list(
             page: 1,
             pageSize: 1,
             dateEnd: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
@@ -273,15 +265,7 @@ final class RequestsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            DefaultPaginationForMessagingTollfree::class,
-            $page
-        );
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(VerificationRequestStatus::class, $item);
-        }
+        $this->assertInstanceOf(RequestListResponse::class, $result);
     }
 
     #[Test]

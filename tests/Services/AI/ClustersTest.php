@@ -9,7 +9,6 @@ use Telnyx\AI\Clusters\ClusterComputeResponse;
 use Telnyx\AI\Clusters\ClusterGetResponse;
 use Telnyx\AI\Clusters\ClusterListResponse;
 use Telnyx\Client;
-use Telnyx\DefaultFlatPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -50,15 +49,10 @@ final class ClustersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->ai->clusters->list();
+        $result = $this->client->ai->clusters->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(ClusterListResponse::class, $item);
-        }
+        $this->assertInstanceOf(ClusterListResponse::class, $result);
     }
 
     #[Test]

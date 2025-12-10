@@ -5,14 +5,13 @@ namespace Tests\Services\Number10dlc;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\Campaign\TelnyxCampaignCsp;
 use Telnyx\Client;
-use Telnyx\Number10dlc\Campaign\CampaignDeactivateResponse;
+use Telnyx\Number10dlc\Campaign\CampaignDeleteResponse;
 use Telnyx\Number10dlc\Campaign\CampaignGetMnoMetadataResponse;
 use Telnyx\Number10dlc\Campaign\CampaignGetSharingStatusResponse;
 use Telnyx\Number10dlc\Campaign\CampaignListResponse;
 use Telnyx\Number10dlc\Campaign\CampaignSubmitAppealResponse;
-use Telnyx\Number10dlc\Campaign\TelnyxCampaignCsp;
-use Telnyx\PerPagePaginationV2;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -66,15 +65,10 @@ final class CampaignTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->number10dlc->campaign->list(brandID: 'brandId');
+        $result = $this->client->number10dlc->campaign->list(brandID: 'brandId');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PerPagePaginationV2::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(CampaignListResponse::class, $item);
-        }
+        $this->assertInstanceOf(CampaignListResponse::class, $result);
     }
 
     #[Test]
@@ -84,7 +78,7 @@ final class CampaignTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->number10dlc->campaign->list(
+        $result = $this->client->number10dlc->campaign->list(
             brandID: 'brandId',
             page: 0,
             recordsPerPage: 0,
@@ -92,12 +86,20 @@ final class CampaignTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PerPagePaginationV2::class, $page);
+        $this->assertInstanceOf(CampaignListResponse::class, $result);
+    }
 
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(CampaignListResponse::class, $item);
+    #[Test]
+    public function testDelete(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
         }
+
+        $result = $this->client->number10dlc->campaign->delete('campaignId');
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CampaignDeleteResponse::class, $result);
     }
 
     #[Test]
@@ -111,19 +113,6 @@ final class CampaignTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsArray($result);
-    }
-
-    #[Test]
-    public function testDeactivate(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
-        $result = $this->client->number10dlc->campaign->deactivate('campaignId');
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CampaignDeactivateResponse::class, $result);
     }
 
     #[Test]

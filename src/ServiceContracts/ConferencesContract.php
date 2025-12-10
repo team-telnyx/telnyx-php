@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
-use Telnyx\Conferences\Conference;
 use Telnyx\Conferences\ConferenceCreateParams\BeepEnabled;
 use Telnyx\Conferences\ConferenceCreateParams\Region;
 use Telnyx\Conferences\ConferenceGetResponse;
@@ -12,9 +11,9 @@ use Telnyx\Conferences\ConferenceListParams\Filter\Product;
 use Telnyx\Conferences\ConferenceListParams\Filter\Status;
 use Telnyx\Conferences\ConferenceListParams\Filter\Type;
 use Telnyx\Conferences\ConferenceListParticipantsResponse;
+use Telnyx\Conferences\ConferenceListResponse;
 use Telnyx\Conferences\ConferenceNewResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
 interface ConferencesContract
@@ -92,8 +91,6 @@ interface ConferencesContract
      * } $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      * @param 'Australia'|'Europe'|'Middle East'|'US'|\Telnyx\Conferences\ConferenceListParams\Region $region Region where the conference data is located
      *
-     * @return DefaultPagination<Conference>
-     *
      * @throws APIException
      */
     public function list(
@@ -101,7 +98,7 @@ interface ConferencesContract
         ?array $page = null,
         string|\Telnyx\Conferences\ConferenceListParams\Region|null $region = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): ConferenceListResponse;
 
     /**
      * @api
@@ -115,8 +112,6 @@ interface ConferencesContract
      * } $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      * @param 'Australia'|'Europe'|'Middle East'|'US'|\Telnyx\Conferences\ConferenceListParticipantsParams\Region $region Region where the conference data is located
      *
-     * @return DefaultPagination<ConferenceListParticipantsResponse>
-     *
      * @throws APIException
      */
     public function listParticipants(
@@ -125,5 +120,5 @@ interface ConferencesContract
         ?array $page = null,
         string|\Telnyx\Conferences\ConferenceListParticipantsParams\Region|null $region = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): ConferenceListParticipantsResponse;
 }

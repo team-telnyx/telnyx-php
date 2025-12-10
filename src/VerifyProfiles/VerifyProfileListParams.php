@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\VerifyProfiles\VerifyProfileListParams\Filter;
+use Telnyx\VerifyProfiles\VerifyProfileListParams\Page;
 
 /**
  * Gets a paginated list of Verify profiles.
@@ -16,7 +17,8 @@ use Telnyx\VerifyProfiles\VerifyProfileListParams\Filter;
  * @see Telnyx\Services\VerifyProfilesService::list()
  *
  * @phpstan-type VerifyProfileListParamsShape = array{
- *   filter?: Filter|array{name?: string|null}, pageNumber?: int, pageSize?: int
+ *   filter?: Filter|array{name?: string|null},
+ *   page?: Page|array{number?: int|null, size?: int|null},
  * }
  */
 final class VerifyProfileListParams implements BaseModel
@@ -31,11 +33,11 @@ final class VerifyProfileListParams implements BaseModel
     #[Optional]
     public ?Filter $filter;
 
+    /**
+     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
+     */
     #[Optional]
-    public ?int $pageNumber;
-
-    #[Optional]
-    public ?int $pageSize;
+    public ?Page $page;
 
     public function __construct()
     {
@@ -48,17 +50,16 @@ final class VerifyProfileListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|array{name?: string|null} $filter
+     * @param Page|array{number?: int|null, size?: int|null} $page
      */
     public static function with(
         Filter|array|null $filter = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null
+        Page|array|null $page = null
     ): self {
         $self = new self;
 
         null !== $filter && $self['filter'] = $filter;
-        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
-        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $page && $self['page'] = $page;
 
         return $self;
     }
@@ -76,18 +77,15 @@ final class VerifyProfileListParams implements BaseModel
         return $self;
     }
 
-    public function withPageNumber(int $pageNumber): self
+    /**
+     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
+     *
+     * @param Page|array{number?: int|null, size?: int|null} $page
+     */
+    public function withPage(Page|array $page): self
     {
         $self = clone $this;
-        $self['pageNumber'] = $pageNumber;
-
-        return $self;
-    }
-
-    public function withPageSize(int $pageSize): self
-    {
-        $self = clone $this;
-        $self['pageSize'] = $pageSize;
+        $self['page'] = $page;
 
         return $self;
     }

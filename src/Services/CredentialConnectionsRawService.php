@@ -10,7 +10,6 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings\Port;
-use Telnyx\CredentialConnections\CredentialConnection;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\SipUriCallingPreference;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\WebhookAPIVersion;
@@ -18,6 +17,7 @@ use Telnyx\CredentialConnections\CredentialConnectionDeleteResponse;
 use Telnyx\CredentialConnections\CredentialConnectionGetResponse;
 use Telnyx\CredentialConnections\CredentialConnectionListParams;
 use Telnyx\CredentialConnections\CredentialConnectionListParams\Sort;
+use Telnyx\CredentialConnections\CredentialConnectionListResponse;
 use Telnyx\CredentialConnections\CredentialConnectionNewResponse;
 use Telnyx\CredentialConnections\CredentialConnectionUpdateParams;
 use Telnyx\CredentialConnections\CredentialConnectionUpdateResponse;
@@ -29,7 +29,6 @@ use Telnyx\CredentialConnections\CredentialOutbound\AniOverrideType;
 use Telnyx\CredentialConnections\CredentialOutbound\T38ReinviteSource;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CredentialConnectionsRawContract;
 
@@ -240,7 +239,7 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
      *   sort?: 'created_at'|'connection_name'|'active'|Sort,
      * }|CredentialConnectionListParams $params
      *
-     * @return BaseResponse<DefaultPagination<CredentialConnection>>
+     * @return BaseResponse<CredentialConnectionListResponse>
      *
      * @throws APIException
      */
@@ -259,8 +258,7 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
             path: 'credential_connections',
             query: $parsed,
             options: $options,
-            convert: CredentialConnection::class,
-            page: DefaultPagination::class,
+            convert: CredentialConnectionListResponse::class,
         );
     }
 

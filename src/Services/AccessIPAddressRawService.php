@@ -6,12 +6,11 @@ namespace Telnyx\Services;
 
 use Telnyx\AccessIPAddress\AccessIPAddressCreateParams;
 use Telnyx\AccessIPAddress\AccessIPAddressListParams;
+use Telnyx\AccessIPAddress\AccessIPAddressListResponse;
 use Telnyx\AccessIPAddress\AccessIPAddressResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AccessIPAddressRawContract;
 
@@ -93,11 +92,10 @@ final class AccessIPAddressRawService implements AccessIPAddressRawContract
      *     ipAddress?: string,
      *     ipSource?: string,
      *   },
-     *   pageNumber?: int,
-     *   pageSize?: int,
+     *   page?: array{number?: int, size?: int},
      * }|AccessIPAddressListParams $params
      *
-     * @return BaseResponse<DefaultFlatPagination<AccessIPAddressResponse>>
+     * @return BaseResponse<AccessIPAddressListResponse>
      *
      * @throws APIException
      */
@@ -114,13 +112,9 @@ final class AccessIPAddressRawService implements AccessIPAddressRawContract
         return $this->client->request(
             method: 'get',
             path: 'access_ip_address',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
-            convert: AccessIPAddressResponse::class,
-            page: DefaultFlatPagination::class,
+            convert: AccessIPAddressListResponse::class,
         );
     }
 

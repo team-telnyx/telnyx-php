@@ -6,7 +6,7 @@ namespace Telnyx\Addresses;
 
 use Telnyx\Addresses\AddressListParams\Filter;
 use Telnyx\Addresses\AddressListParams\Filter\AddressBook;
-use Telnyx\Addresses\AddressListParams\Filter\CustomerReference\CustomerReferenceMatcher;
+use Telnyx\Addresses\AddressListParams\Filter\CustomerReference\UnionMember1;
 use Telnyx\Addresses\AddressListParams\Filter\StreetAddress;
 use Telnyx\Addresses\AddressListParams\Page;
 use Telnyx\Addresses\AddressListParams\Sort;
@@ -23,7 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type AddressListParamsShape = array{
  *   filter?: Filter|array{
  *     addressBook?: AddressBook|null,
- *     customerReference?: string|null|CustomerReferenceMatcher,
+ *     customerReference?: string|null|UnionMember1,
  *     streetAddress?: StreetAddress|null,
  *     usedAsEmergency?: string|null,
  *   },
@@ -80,7 +80,7 @@ final class AddressListParams implements BaseModel
      *
      * @param Filter|array{
      *   addressBook?: AddressBook|null,
-     *   customerReference?: string|CustomerReferenceMatcher|null,
+     *   customerReference?: string|UnionMember1|null,
      *   streetAddress?: StreetAddress|null,
      *   usedAsEmergency?: string|null,
      * } $filter
@@ -106,7 +106,7 @@ final class AddressListParams implements BaseModel
      *
      * @param Filter|array{
      *   addressBook?: AddressBook|null,
-     *   customerReference?: string|CustomerReferenceMatcher|null,
+     *   customerReference?: string|UnionMember1|null,
      *   streetAddress?: StreetAddress|null,
      *   usedAsEmergency?: string|null,
      * } $filter

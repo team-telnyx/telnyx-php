@@ -7,24 +7,15 @@ namespace Telnyx\WebhookDeliveries;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Attempt;
-use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Attempt\HTTP;
-use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Status;
-use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Webhook;
-use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Webhook\RecordType;
+use Telnyx\Storage\Buckets\Usage\PaginationMetaSimple;
+use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Data;
+use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Data\Attempt;
+use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Data\Status;
+use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Data\Webhook;
 
 /**
- * Record of all attempts to deliver a webhook.
- *
  * @phpstan-type WebhookDeliveryListResponseShape = array{
- *   id?: string|null,
- *   attempts?: list<Attempt>|null,
- *   finishedAt?: \DateTimeInterface|null,
- *   recordType?: string|null,
- *   startedAt?: \DateTimeInterface|null,
- *   status?: value-of<Status>|null,
- *   userID?: string|null,
- *   webhook?: Webhook|null,
+ *   data?: list<Data>|null, meta?: PaginationMetaSimple|null
  * }
  */
 final class WebhookDeliveryListResponse implements BaseModel
@@ -32,57 +23,12 @@ final class WebhookDeliveryListResponse implements BaseModel
     /** @use SdkModel<WebhookDeliveryListResponseShape> */
     use SdkModel;
 
-    /**
-     * Uniquely identifies the webhook_delivery record.
-     */
+    /** @var list<Data>|null $data */
+    #[Optional(list: Data::class)]
+    public ?array $data;
+
     #[Optional]
-    public ?string $id;
-
-    /**
-     * Detailed delivery attempts, ordered by most recent.
-     *
-     * @var list<Attempt>|null $attempts
-     */
-    #[Optional(list: Attempt::class)]
-    public ?array $attempts;
-
-    /**
-     * ISO 8601 timestamp indicating when the last webhook response has been received.
-     */
-    #[Optional('finished_at')]
-    public ?\DateTimeInterface $finishedAt;
-
-    /**
-     * Identifies the type of the resource.
-     */
-    #[Optional('record_type')]
-    public ?string $recordType;
-
-    /**
-     * ISO 8601 timestamp indicating when the first request attempt was initiated.
-     */
-    #[Optional('started_at')]
-    public ?\DateTimeInterface $startedAt;
-
-    /**
-     * Delivery status: 'delivered' when successfuly delivered or 'failed' if all attempts have failed.
-     *
-     * @var value-of<Status>|null $status
-     */
-    #[Optional(enum: Status::class)]
-    public ?string $status;
-
-    /**
-     * Uniquely identifies the user that owns the webhook_delivery record.
-     */
-    #[Optional('user_id')]
-    public ?string $userID;
-
-    /**
-     * Original webhook JSON data. Payload fields vary according to event type.
-     */
-    #[Optional]
-    public ?Webhook $webhook;
+    public ?PaginationMetaSimple $meta;
 
     public function __construct()
     {
@@ -94,148 +40,67 @@ final class WebhookDeliveryListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Attempt|array{
-     *   errors?: list<int>|null,
-     *   finishedAt?: \DateTimeInterface|null,
-     *   http?: HTTP|null,
-     *   startedAt?: \DateTimeInterface|null,
-     *   status?: value-of<Attempt\Status>|null,
-     * }> $attempts
-     * @param Status|value-of<Status> $status
-     * @param Webhook|array{
+     * @param list<Data|array{
      *   id?: string|null,
-     *   eventType?: string|null,
-     *   occurredAt?: \DateTimeInterface|null,
-     *   payload?: array<string,mixed>|null,
-     *   recordType?: value-of<RecordType>|null,
-     * } $webhook
+     *   attempts?: list<Attempt>|null,
+     *   finishedAt?: \DateTimeInterface|null,
+     *   recordType?: string|null,
+     *   startedAt?: \DateTimeInterface|null,
+     *   status?: value-of<Status>|null,
+     *   userID?: string|null,
+     *   webhook?: Webhook|null,
+     * }> $data
+     * @param PaginationMetaSimple|array{
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
+     * } $meta
      */
     public static function with(
-        ?string $id = null,
-        ?array $attempts = null,
-        ?\DateTimeInterface $finishedAt = null,
-        ?string $recordType = null,
-        ?\DateTimeInterface $startedAt = null,
-        Status|string|null $status = null,
-        ?string $userID = null,
-        Webhook|array|null $webhook = null,
+        ?array $data = null,
+        PaginationMetaSimple|array|null $meta = null
     ): self {
         $self = new self;
 
-        null !== $id && $self['id'] = $id;
-        null !== $attempts && $self['attempts'] = $attempts;
-        null !== $finishedAt && $self['finishedAt'] = $finishedAt;
-        null !== $recordType && $self['recordType'] = $recordType;
-        null !== $startedAt && $self['startedAt'] = $startedAt;
-        null !== $status && $self['status'] = $status;
-        null !== $userID && $self['userID'] = $userID;
-        null !== $webhook && $self['webhook'] = $webhook;
+        null !== $data && $self['data'] = $data;
+        null !== $meta && $self['meta'] = $meta;
 
         return $self;
     }
 
     /**
-     * Uniquely identifies the webhook_delivery record.
-     */
-    public function withID(string $id): self
-    {
-        $self = clone $this;
-        $self['id'] = $id;
-
-        return $self;
-    }
-
-    /**
-     * Detailed delivery attempts, ordered by most recent.
-     *
-     * @param list<Attempt|array{
-     *   errors?: list<int>|null,
-     *   finishedAt?: \DateTimeInterface|null,
-     *   http?: HTTP|null,
-     *   startedAt?: \DateTimeInterface|null,
-     *   status?: value-of<Attempt\Status>|null,
-     * }> $attempts
-     */
-    public function withAttempts(array $attempts): self
-    {
-        $self = clone $this;
-        $self['attempts'] = $attempts;
-
-        return $self;
-    }
-
-    /**
-     * ISO 8601 timestamp indicating when the last webhook response has been received.
-     */
-    public function withFinishedAt(\DateTimeInterface $finishedAt): self
-    {
-        $self = clone $this;
-        $self['finishedAt'] = $finishedAt;
-
-        return $self;
-    }
-
-    /**
-     * Identifies the type of the resource.
-     */
-    public function withRecordType(string $recordType): self
-    {
-        $self = clone $this;
-        $self['recordType'] = $recordType;
-
-        return $self;
-    }
-
-    /**
-     * ISO 8601 timestamp indicating when the first request attempt was initiated.
-     */
-    public function withStartedAt(\DateTimeInterface $startedAt): self
-    {
-        $self = clone $this;
-        $self['startedAt'] = $startedAt;
-
-        return $self;
-    }
-
-    /**
-     * Delivery status: 'delivered' when successfuly delivered or 'failed' if all attempts have failed.
-     *
-     * @param Status|value-of<Status> $status
-     */
-    public function withStatus(Status|string $status): self
-    {
-        $self = clone $this;
-        $self['status'] = $status;
-
-        return $self;
-    }
-
-    /**
-     * Uniquely identifies the user that owns the webhook_delivery record.
-     */
-    public function withUserID(string $userID): self
-    {
-        $self = clone $this;
-        $self['userID'] = $userID;
-
-        return $self;
-    }
-
-    /**
-     * Original webhook JSON data. Payload fields vary according to event type.
-     *
-     * @param Webhook|array{
+     * @param list<Data|array{
      *   id?: string|null,
-     *   eventType?: string|null,
-     *   occurredAt?: \DateTimeInterface|null,
-     *   payload?: array<string,mixed>|null,
-     *   recordType?: value-of<RecordType>|null,
-     * } $webhook
+     *   attempts?: list<Attempt>|null,
+     *   finishedAt?: \DateTimeInterface|null,
+     *   recordType?: string|null,
+     *   startedAt?: \DateTimeInterface|null,
+     *   status?: value-of<Status>|null,
+     *   userID?: string|null,
+     *   webhook?: Webhook|null,
+     * }> $data
      */
-    public function withWebhook(Webhook|array $webhook): self
+    public function withData(array $data): self
     {
         $self = clone $this;
-        $self['webhook'] = $webhook;
+        $self['data'] = $data;
+
+        return $self;
+    }
+
+    /**
+     * @param PaginationMetaSimple|array{
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
+     * } $meta
+     */
+    public function withMeta(PaginationMetaSimple|array $meta): self
+    {
+        $self = clone $this;
+        $self['meta'] = $meta;
 
         return $self;
     }

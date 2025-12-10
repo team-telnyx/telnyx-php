@@ -6,16 +6,14 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultFlatPagination;
-use Telnyx\DefaultPagination;
 use Telnyx\SimCards\SimCardDeleteResponse;
 use Telnyx\SimCards\SimCardGetActivationCodeResponse;
 use Telnyx\SimCards\SimCardGetDeviceDetailsResponse;
 use Telnyx\SimCards\SimCardGetPublicIPResponse;
 use Telnyx\SimCards\SimCardGetResponse;
+use Telnyx\SimCards\SimCardListResponse;
 use Telnyx\SimCards\SimCardListWirelessConnectivityLogsResponse;
 use Telnyx\SimCards\SimCardUpdateResponse;
-use Telnyx\SimpleSimCard;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -73,15 +71,10 @@ final class SimCardsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->simCards->list();
+        $result = $this->client->simCards->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(SimpleSimCard::class, $item);
-        }
+        $this->assertInstanceOf(SimCardListResponse::class, $result);
     }
 
     #[Test]
@@ -151,19 +144,14 @@ final class SimCardsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->simCards->listWirelessConnectivityLogs(
+        $result = $this->client->simCards->listWirelessConnectivityLogs(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(
-                SimCardListWirelessConnectivityLogsResponse::class,
-                $item
-            );
-        }
+        $this->assertInstanceOf(
+            SimCardListWirelessConnectivityLogsResponse::class,
+            $result
+        );
     }
 }

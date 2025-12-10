@@ -6,11 +6,10 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
-use Telnyx\RoomParticipant;
 use Telnyx\RoomParticipants\RoomParticipantGetResponse;
 use Telnyx\RoomParticipants\RoomParticipantListParams;
+use Telnyx\RoomParticipants\RoomParticipantListResponse;
 
 interface RoomParticipantsRawContract
 {
@@ -33,7 +32,7 @@ interface RoomParticipantsRawContract
      *
      * @param array<mixed>|RoomParticipantListParams $params
      *
-     * @return BaseResponse<DefaultPagination<RoomParticipant>>
+     * @return BaseResponse<RoomParticipantListResponse>
      *
      * @throws APIException
      */

@@ -12,9 +12,7 @@ use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings\Port;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
-use Telnyx\DefaultPagination;
 use Telnyx\IPConnections\InboundIP;
-use Telnyx\IPConnections\IPConnection;
 use Telnyx\IPConnections\IPConnectionCreateParams;
 use Telnyx\IPConnections\IPConnectionCreateParams\Inbound\AniNumberFormat;
 use Telnyx\IPConnections\IPConnectionCreateParams\Inbound\DefaultRoutingMethod;
@@ -27,6 +25,7 @@ use Telnyx\IPConnections\IPConnectionDeleteResponse;
 use Telnyx\IPConnections\IPConnectionGetResponse;
 use Telnyx\IPConnections\IPConnectionListParams;
 use Telnyx\IPConnections\IPConnectionListParams\Sort;
+use Telnyx\IPConnections\IPConnectionListResponse;
 use Telnyx\IPConnections\IPConnectionNewResponse;
 use Telnyx\IPConnections\IPConnectionUpdateParams;
 use Telnyx\IPConnections\IPConnectionUpdateResponse;
@@ -257,7 +256,7 @@ final class IPConnectionsRawService implements IPConnectionsRawContract
      *   sort?: 'created_at'|'connection_name'|'active'|Sort,
      * }|IPConnectionListParams $params
      *
-     * @return BaseResponse<DefaultPagination<IPConnection>>
+     * @return BaseResponse<IPConnectionListResponse>
      *
      * @throws APIException
      */
@@ -276,8 +275,7 @@ final class IPConnectionsRawService implements IPConnectionsRawContract
             path: 'ip_connections',
             query: $parsed,
             options: $options,
-            convert: IPConnection::class,
-            page: DefaultPagination::class,
+            convert: IPConnectionListResponse::class,
         );
     }
 

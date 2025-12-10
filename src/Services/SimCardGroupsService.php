@@ -7,7 +7,6 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardGroupsContract;
 use Telnyx\Services\SimCardGroups\ActionsService;
@@ -124,8 +123,6 @@ final class SimCardGroupsService implements SimCardGroupsContract
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
      *
-     * @return DefaultFlatPagination<SimCardGroupListResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -135,7 +132,7 @@ final class SimCardGroupsService implements SimCardGroupsContract
         int $pageNumber = 1,
         int $pageSize = 20,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination {
+    ): SimCardGroupListResponse {
         $params = Util::removeNulls(
             [
                 'filterName' => $filterName,
