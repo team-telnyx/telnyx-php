@@ -146,16 +146,8 @@ final class RoomsRawService implements RoomsRawContract
      *
      * @param array{
      *   filter?: array{
-     *     dateCreatedAt?: array{
-     *       eq?: string|\DateTimeInterface,
-     *       gte?: string|\DateTimeInterface,
-     *       lte?: string|\DateTimeInterface,
-     *     },
-     *     dateUpdatedAt?: array{
-     *       eq?: string|\DateTimeInterface,
-     *       gte?: string|\DateTimeInterface,
-     *       lte?: string|\DateTimeInterface,
-     *     },
+     *     dateCreatedAt?: array{eq?: string, gte?: string, lte?: string},
+     *     dateUpdatedAt?: array{eq?: string, gte?: string, lte?: string},
      *     uniqueName?: string,
      *   },
      *   includeSessions?: bool,

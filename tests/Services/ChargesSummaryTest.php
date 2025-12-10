@@ -35,8 +35,8 @@ final class ChargesSummaryTest extends TestCase
         }
 
         $result = $this->client->chargesSummary->retrieve(
-            endDate: new \DateTimeImmutable('2025-06-01'),
-            startDate: new \DateTimeImmutable('2025-05-01'),
+            endDate: '2025-06-01',
+            startDate: '2025-05-01'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -51,8 +51,8 @@ final class ChargesSummaryTest extends TestCase
         }
 
         $result = $this->client->chargesSummary->retrieve(
-            endDate: new \DateTimeImmutable('2025-06-01'),
-            startDate: new \DateTimeImmutable('2025-05-01'),
+            endDate: '2025-06-01',
+            startDate: '2025-05-01'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

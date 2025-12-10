@@ -30,9 +30,9 @@ final class NumberLookupRawService implements NumberLookupRawContract
      *
      * @param array{
      *   aggregationType?: 'ALL'|'BY_ORGANIZATION_MEMBER'|AggregationType,
-     *   endDate?: string|\DateTimeInterface,
+     *   endDate?: string,
      *   managedAccounts?: list<string>,
-     *   startDate?: string|\DateTimeInterface,
+     *   startDate?: string,
      * }|NumberLookupCreateParams $params
      *
      * @return BaseResponse<NumberLookupNewResponse>

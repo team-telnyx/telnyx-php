@@ -70,21 +70,9 @@ final class SessionsRawService implements SessionsRawContract
      * @param array{
      *   filter?: array{
      *     active?: bool,
-     *     dateCreatedAt?: array{
-     *       eq?: string|\DateTimeInterface,
-     *       gte?: string|\DateTimeInterface,
-     *       lte?: string|\DateTimeInterface,
-     *     },
-     *     dateEndedAt?: array{
-     *       eq?: string|\DateTimeInterface,
-     *       gte?: string|\DateTimeInterface,
-     *       lte?: string|\DateTimeInterface,
-     *     },
-     *     dateUpdatedAt?: array{
-     *       eq?: string|\DateTimeInterface,
-     *       gte?: string|\DateTimeInterface,
-     *       lte?: string|\DateTimeInterface,
-     *     },
+     *     dateCreatedAt?: array{eq?: string, gte?: string, lte?: string},
+     *     dateEndedAt?: array{eq?: string, gte?: string, lte?: string},
+     *     dateUpdatedAt?: array{eq?: string, gte?: string, lte?: string},
      *     roomID?: string,
      *   },
      *   includeParticipants?: bool,
@@ -127,21 +115,9 @@ final class SessionsRawService implements SessionsRawContract
      * @param array{
      *   filter?: array{
      *     active?: bool,
-     *     dateCreatedAt?: array{
-     *       eq?: string|\DateTimeInterface,
-     *       gte?: string|\DateTimeInterface,
-     *       lte?: string|\DateTimeInterface,
-     *     },
-     *     dateEndedAt?: array{
-     *       eq?: string|\DateTimeInterface,
-     *       gte?: string|\DateTimeInterface,
-     *       lte?: string|\DateTimeInterface,
-     *     },
-     *     dateUpdatedAt?: array{
-     *       eq?: string|\DateTimeInterface,
-     *       gte?: string|\DateTimeInterface,
-     *       lte?: string|\DateTimeInterface,
-     *     },
+     *     dateCreatedAt?: array{eq?: string, gte?: string, lte?: string},
+     *     dateEndedAt?: array{eq?: string, gte?: string, lte?: string},
+     *     dateUpdatedAt?: array{eq?: string, gte?: string, lte?: string},
      *   },
      *   includeParticipants?: bool,
      *   page?: array{number?: int, size?: int},
@@ -184,21 +160,9 @@ final class SessionsRawService implements SessionsRawContract
      * @param array{
      *   filter?: array{
      *     context?: string,
-     *     dateJoinedAt?: array{
-     *       eq?: string|\DateTimeInterface,
-     *       gte?: string|\DateTimeInterface,
-     *       lte?: string|\DateTimeInterface,
-     *     },
-     *     dateLeftAt?: array{
-     *       eq?: string|\DateTimeInterface,
-     *       gte?: string|\DateTimeInterface,
-     *       lte?: string|\DateTimeInterface,
-     *     },
-     *     dateUpdatedAt?: array{
-     *       eq?: string|\DateTimeInterface,
-     *       gte?: string|\DateTimeInterface,
-     *       lte?: string|\DateTimeInterface,
-     *     },
+     *     dateJoinedAt?: array{eq?: string, gte?: string, lte?: string},
+     *     dateLeftAt?: array{eq?: string, gte?: string, lte?: string},
+     *     dateUpdatedAt?: array{eq?: string, gte?: string, lte?: string},
      *   },
      *   page?: array{number?: int, size?: int},
      * }|SessionRetrieveParticipantsParams $params

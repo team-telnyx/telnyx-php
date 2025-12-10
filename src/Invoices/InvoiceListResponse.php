@@ -13,8 +13,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *   fileID?: string|null,
  *   invoiceID?: string|null,
  *   paid?: bool|null,
- *   periodEnd?: \DateTimeInterface|null,
- *   periodStart?: \DateTimeInterface|null,
+ *   periodEnd?: string|null,
+ *   periodStart?: string|null,
  *   url?: string|null,
  * }
  */
@@ -33,10 +33,10 @@ final class InvoiceListResponse implements BaseModel
     public ?bool $paid;
 
     #[Optional('period_end')]
-    public ?\DateTimeInterface $periodEnd;
+    public ?string $periodEnd;
 
     #[Optional('period_start')]
-    public ?\DateTimeInterface $periodStart;
+    public ?string $periodStart;
 
     #[Optional]
     public ?string $url;
@@ -55,8 +55,8 @@ final class InvoiceListResponse implements BaseModel
         ?string $fileID = null,
         ?string $invoiceID = null,
         ?bool $paid = null,
-        ?\DateTimeInterface $periodEnd = null,
-        ?\DateTimeInterface $periodStart = null,
+        ?string $periodEnd = null,
+        ?string $periodStart = null,
         ?string $url = null,
     ): self {
         $self = new self;
@@ -95,7 +95,7 @@ final class InvoiceListResponse implements BaseModel
         return $self;
     }
 
-    public function withPeriodEnd(\DateTimeInterface $periodEnd): self
+    public function withPeriodEnd(string $periodEnd): self
     {
         $self = clone $this;
         $self['periodEnd'] = $periodEnd;
@@ -103,7 +103,7 @@ final class InvoiceListResponse implements BaseModel
         return $self;
     }
 
-    public function withPeriodStart(\DateTimeInterface $periodStart): self
+    public function withPeriodStart(string $periodStart): self
     {
         $self = clone $this;
         $self['periodStart'] = $periodStart;

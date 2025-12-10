@@ -31,15 +31,15 @@ final class ChargesBreakdownService implements ChargesBreakdownContract
      *
      * Retrieve a detailed breakdown of monthly charges for phone numbers in a specified date range. The date range cannot exceed 31 days.
      *
-     * @param string|\DateTimeInterface $startDate Start date for the charges breakdown in ISO date format (YYYY-MM-DD)
-     * @param string|\DateTimeInterface $endDate End date for the charges breakdown in ISO date format (YYYY-MM-DD). If not provided, defaults to start_date + 1 month. The date is exclusive, data for the end_date itself is not included in the report. The interval between start_date and end_date cannot exceed 31 days.
+     * @param string $startDate Start date for the charges breakdown in ISO date format (YYYY-MM-DD)
+     * @param string $endDate End date for the charges breakdown in ISO date format (YYYY-MM-DD). If not provided, defaults to start_date + 1 month. The date is exclusive, data for the end_date itself is not included in the report. The interval between start_date and end_date cannot exceed 31 days.
      * @param 'json'|'csv'|Format $format Response format
      *
      * @throws APIException
      */
     public function retrieve(
-        string|\DateTimeInterface $startDate,
-        string|\DateTimeInterface|null $endDate = null,
+        string $startDate,
+        ?string $endDate = null,
         string|Format $format = 'json',
         ?RequestOptions $requestOptions = null,
     ): ChargesBreakdownGetResponse {

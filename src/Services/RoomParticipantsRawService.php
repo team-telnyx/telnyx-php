@@ -54,21 +54,9 @@ final class RoomParticipantsRawService implements RoomParticipantsRawContract
      * @param array{
      *   filter?: array{
      *     context?: string,
-     *     dateJoinedAt?: array{
-     *       eq?: string|\DateTimeInterface,
-     *       gte?: string|\DateTimeInterface,
-     *       lte?: string|\DateTimeInterface,
-     *     },
-     *     dateLeftAt?: array{
-     *       eq?: string|\DateTimeInterface,
-     *       gte?: string|\DateTimeInterface,
-     *       lte?: string|\DateTimeInterface,
-     *     },
-     *     dateUpdatedAt?: array{
-     *       eq?: string|\DateTimeInterface,
-     *       gte?: string|\DateTimeInterface,
-     *       lte?: string|\DateTimeInterface,
-     *     },
+     *     dateJoinedAt?: array{eq?: string, gte?: string, lte?: string},
+     *     dateLeftAt?: array{eq?: string, gte?: string, lte?: string},
+     *     dateUpdatedAt?: array{eq?: string, gte?: string, lte?: string},
      *     sessionID?: string,
      *   },
      *   page?: array{number?: int, size?: int},

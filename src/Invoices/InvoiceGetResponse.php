@@ -35,8 +35,8 @@ final class InvoiceGetResponse implements BaseModel
      *   fileID?: string|null,
      *   invoiceID?: string|null,
      *   paid?: bool|null,
-     *   periodEnd?: \DateTimeInterface|null,
-     *   periodStart?: \DateTimeInterface|null,
+     *   periodEnd?: string|null,
+     *   periodStart?: string|null,
      *   url?: string|null,
      * } $data
      */
@@ -55,8 +55,8 @@ final class InvoiceGetResponse implements BaseModel
      *   fileID?: string|null,
      *   invoiceID?: string|null,
      *   paid?: bool|null,
-     *   periodEnd?: \DateTimeInterface|null,
-     *   periodStart?: \DateTimeInterface|null,
+     *   periodEnd?: string|null,
+     *   periodStart?: string|null,
      *   url?: string|null,
      * } $data
      */

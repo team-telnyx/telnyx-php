@@ -48,10 +48,10 @@ final class UserBundleDeactivateResponse implements BaseModel
      *   id: string,
      *   active: bool,
      *   billingBundle: BillingBundleSummary,
-     *   createdAt: \DateTimeInterface,
+     *   createdAt: string,
      *   resources: list<UserBundleResource>,
      *   userID: string,
-     *   updatedAt?: \DateTimeInterface|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public static function with(UserBundle|array $data): self
@@ -68,10 +68,10 @@ final class UserBundleDeactivateResponse implements BaseModel
      *   id: string,
      *   active: bool,
      *   billingBundle: BillingBundleSummary,
-     *   createdAt: \DateTimeInterface,
+     *   createdAt: string,
      *   resources: list<UserBundleResource>,
      *   userID: string,
-     *   updatedAt?: \DateTimeInterface|null,
+     *   updatedAt?: string|null,
      * } $data
      */
     public function withData(UserBundle|array $data): self

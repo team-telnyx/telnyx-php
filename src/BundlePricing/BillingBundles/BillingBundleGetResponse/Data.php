@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   active: bool,
  *   bundleLimits: list<BundleLimit>,
  *   costCode: string,
- *   createdAt: \DateTimeInterface,
+ *   createdAt: string,
  *   isPublic: bool,
  *   name: string,
  *   slug?: string|null,
@@ -54,7 +54,7 @@ final class Data implements BaseModel
      * Date the bundle was created.
      */
     #[Required('created_at')]
-    public \DateTimeInterface $createdAt;
+    public string $createdAt;
 
     /**
      * Available to all customers or only to specific customers.
@@ -115,10 +115,10 @@ final class Data implements BaseModel
      *
      * @param list<BundleLimit|array{
      *   id: string,
-     *   createdAt: \DateTimeInterface,
+     *   createdAt: string,
      *   metric: string,
      *   service: string,
-     *   updatedAt: \DateTimeInterface,
+     *   updatedAt: string,
      *   billingService?: string|null,
      *   country?: string|null,
      *   countryCode?: int|null,
@@ -134,7 +134,7 @@ final class Data implements BaseModel
         bool $active,
         array $bundleLimits,
         string $costCode,
-        \DateTimeInterface $createdAt,
+        string $createdAt,
         bool $isPublic,
         string $name,
         ?string $slug = null,
@@ -179,10 +179,10 @@ final class Data implements BaseModel
     /**
      * @param list<BundleLimit|array{
      *   id: string,
-     *   createdAt: \DateTimeInterface,
+     *   createdAt: string,
      *   metric: string,
      *   service: string,
-     *   updatedAt: \DateTimeInterface,
+     *   updatedAt: string,
      *   billingService?: string|null,
      *   country?: string|null,
      *   countryCode?: int|null,
@@ -215,7 +215,7 @@ final class Data implements BaseModel
     /**
      * Date the bundle was created.
      */
-    public function withCreatedAt(\DateTimeInterface $createdAt): self
+    public function withCreatedAt(string $createdAt): self
     {
         $self = clone $this;
         $self['createdAt'] = $createdAt;

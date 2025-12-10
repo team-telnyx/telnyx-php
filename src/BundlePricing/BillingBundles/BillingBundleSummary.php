@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type BillingBundleSummaryShape = array{
  *   id: string,
  *   costCode: string,
- *   createdAt: \DateTimeInterface,
+ *   createdAt: string,
  *   isPublic: bool,
  *   name: string,
  *   currency?: string|null,
@@ -43,7 +43,7 @@ final class BillingBundleSummary implements BaseModel
      * Date the bundle was created.
      */
     #[Required('created_at')]
-    public \DateTimeInterface $createdAt;
+    public string $createdAt;
 
     /**
      * Available to all customers or only to specific customers.
@@ -115,7 +115,7 @@ final class BillingBundleSummary implements BaseModel
     public static function with(
         string $id,
         string $costCode,
-        \DateTimeInterface $createdAt,
+        string $createdAt,
         bool $isPublic,
         string $name,
         ?string $currency = null,
@@ -164,7 +164,7 @@ final class BillingBundleSummary implements BaseModel
     /**
      * Date the bundle was created.
      */
-    public function withCreatedAt(\DateTimeInterface $createdAt): self
+    public function withCreatedAt(string $createdAt): self
     {
         $self = clone $this;
         $self['createdAt'] = $createdAt;

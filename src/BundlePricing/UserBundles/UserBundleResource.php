@@ -12,10 +12,10 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type UserBundleResourceShape = array{
  *   id: string,
- *   createdAt: \DateTimeInterface,
+ *   createdAt: string,
  *   resource: string,
  *   resourceType: string,
- *   updatedAt?: \DateTimeInterface|null,
+ *   updatedAt?: string|null,
  * }
  */
 final class UserBundleResource implements BaseModel
@@ -33,7 +33,7 @@ final class UserBundleResource implements BaseModel
      * Date the resource was created.
      */
     #[Required('created_at')]
-    public \DateTimeInterface $createdAt;
+    public string $createdAt;
 
     /**
      * The resource itself (usually a phone number).
@@ -51,7 +51,7 @@ final class UserBundleResource implements BaseModel
      * Date the resource was last updated.
      */
     #[Optional('updated_at', nullable: true)]
-    public ?\DateTimeInterface $updatedAt;
+    public ?string $updatedAt;
 
     /**
      * `new UserBundleResource()` is missing required properties by the API.
@@ -85,10 +85,10 @@ final class UserBundleResource implements BaseModel
      */
     public static function with(
         string $id,
-        \DateTimeInterface $createdAt,
+        string $createdAt,
         string $resource,
         string $resourceType,
-        ?\DateTimeInterface $updatedAt = null,
+        ?string $updatedAt = null,
     ): self {
         $self = new self;
 
@@ -116,7 +116,7 @@ final class UserBundleResource implements BaseModel
     /**
      * Date the resource was created.
      */
-    public function withCreatedAt(\DateTimeInterface $createdAt): self
+    public function withCreatedAt(string $createdAt): self
     {
         $self = clone $this;
         $self['createdAt'] = $createdAt;
@@ -149,7 +149,7 @@ final class UserBundleResource implements BaseModel
     /**
      * Date the resource was last updated.
      */
-    public function withUpdatedAt(?\DateTimeInterface $updatedAt): self
+    public function withUpdatedAt(?string $updatedAt): self
     {
         $self = clone $this;
         $self['updatedAt'] = $updatedAt;

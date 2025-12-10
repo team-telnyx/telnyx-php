@@ -49,10 +49,10 @@ final class UserBundleNewResponse implements BaseModel
      *   id: string,
      *   active: bool,
      *   billingBundle: BillingBundleSummary,
-     *   createdAt: \DateTimeInterface,
+     *   createdAt: string,
      *   resources: list<UserBundleResource>,
      *   userID: string,
-     *   updatedAt?: \DateTimeInterface|null,
+     *   updatedAt?: string|null,
      * }> $data
      */
     public static function with(array $data): self
@@ -69,10 +69,10 @@ final class UserBundleNewResponse implements BaseModel
      *   id: string,
      *   active: bool,
      *   billingBundle: BillingBundleSummary,
-     *   createdAt: \DateTimeInterface,
+     *   createdAt: string,
      *   resources: list<UserBundleResource>,
      *   userID: string,
-     *   updatedAt?: \DateTimeInterface|null,
+     *   updatedAt?: string|null,
      * }> $data
      */
     public function withData(array $data): self

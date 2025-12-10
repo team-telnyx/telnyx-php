@@ -104,11 +104,7 @@ final class RoomCompositionsRawService implements RoomCompositionsRawContract
      *
      * @param array{
      *   filter?: array{
-     *     dateCreatedAt?: array{
-     *       eq?: string|\DateTimeInterface,
-     *       gte?: string|\DateTimeInterface,
-     *       lte?: string|\DateTimeInterface,
-     *     },
+     *     dateCreatedAt?: array{eq?: string, gte?: string, lte?: string},
      *     sessionID?: string,
      *     status?: 'completed'|'processing'|'enqueued'|Status,
      *   },

@@ -13,10 +13,10 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type BundleLimitShape = array{
  *   id: string,
- *   createdAt: \DateTimeInterface,
+ *   createdAt: string,
  *   metric: string,
  *   service: string,
- *   updatedAt: \DateTimeInterface,
+ *   updatedAt: string,
  *   billingService?: string|null,
  *   country?: string|null,
  *   countryCode?: int|null,
@@ -36,7 +36,7 @@ final class BundleLimit implements BaseModel
     public string $id;
 
     #[Required('created_at')]
-    public \DateTimeInterface $createdAt;
+    public string $createdAt;
 
     #[Required]
     public string $metric;
@@ -45,7 +45,7 @@ final class BundleLimit implements BaseModel
     public string $service;
 
     #[Required('updated_at')]
-    public \DateTimeInterface $updatedAt;
+    public string $updatedAt;
 
     #[Optional('billing_service')]
     public ?string $billingService;
@@ -118,10 +118,10 @@ final class BundleLimit implements BaseModel
      */
     public static function with(
         string $id,
-        \DateTimeInterface $createdAt,
+        string $createdAt,
         string $metric,
         string $service,
-        \DateTimeInterface $updatedAt,
+        string $updatedAt,
         ?string $billingService = null,
         ?string $country = null,
         ?int $countryCode = null,
@@ -159,7 +159,7 @@ final class BundleLimit implements BaseModel
         return $self;
     }
 
-    public function withCreatedAt(\DateTimeInterface $createdAt): self
+    public function withCreatedAt(string $createdAt): self
     {
         $self = clone $this;
         $self['createdAt'] = $createdAt;
@@ -183,7 +183,7 @@ final class BundleLimit implements BaseModel
         return $self;
     }
 
-    public function withUpdatedAt(\DateTimeInterface $updatedAt): self
+    public function withUpdatedAt(string $updatedAt): self
     {
         $self = clone $this;
         $self['updatedAt'] = $updatedAt;

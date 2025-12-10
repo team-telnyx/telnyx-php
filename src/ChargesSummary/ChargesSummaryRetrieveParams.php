@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\ChargesSummaryService::retrieve()
  *
  * @phpstan-type ChargesSummaryRetrieveParamsShape = array{
- *   endDate: \DateTimeInterface, startDate: \DateTimeInterface
+ *   endDate: string, startDate: string
  * }
  */
 final class ChargesSummaryRetrieveParams implements BaseModel
@@ -28,13 +28,13 @@ final class ChargesSummaryRetrieveParams implements BaseModel
      * End date for the charges summary in ISO date format (YYYY-MM-DD). The date is exclusive, data for the end_date itself is not included in the report. The interval between start_date and end_date cannot exceed 31 days.
      */
     #[Required]
-    public \DateTimeInterface $endDate;
+    public string $endDate;
 
     /**
      * Start date for the charges summary in ISO date format (YYYY-MM-DD).
      */
     #[Required]
-    public \DateTimeInterface $startDate;
+    public string $startDate;
 
     /**
      * `new ChargesSummaryRetrieveParams()` is missing required properties by the API.
@@ -60,10 +60,8 @@ final class ChargesSummaryRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(
-        \DateTimeInterface $endDate,
-        \DateTimeInterface $startDate
-    ): self {
+    public static function with(string $endDate, string $startDate): self
+    {
         $self = new self;
 
         $self['endDate'] = $endDate;
@@ -75,7 +73,7 @@ final class ChargesSummaryRetrieveParams implements BaseModel
     /**
      * End date for the charges summary in ISO date format (YYYY-MM-DD). The date is exclusive, data for the end_date itself is not included in the report. The interval between start_date and end_date cannot exceed 31 days.
      */
-    public function withEndDate(\DateTimeInterface $endDate): self
+    public function withEndDate(string $endDate): self
     {
         $self = clone $this;
         $self['endDate'] = $endDate;
@@ -86,7 +84,7 @@ final class ChargesSummaryRetrieveParams implements BaseModel
     /**
      * Start date for the charges summary in ISO date format (YYYY-MM-DD).
      */
-    public function withStartDate(\DateTimeInterface $startDate): self
+    public function withStartDate(string $startDate): self
     {
         $self = clone $this;
         $self['startDate'] = $startDate;

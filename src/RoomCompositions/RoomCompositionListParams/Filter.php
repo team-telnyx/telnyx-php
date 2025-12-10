@@ -52,9 +52,7 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param DateCreatedAt|array{
-     *   eq?: \DateTimeInterface|null,
-     *   gte?: \DateTimeInterface|null,
-     *   lte?: \DateTimeInterface|null,
+     *   eq?: string|null, gte?: string|null, lte?: string|null
      * } $dateCreatedAt
      * @param Status|value-of<Status> $status
      */
@@ -74,9 +72,7 @@ final class Filter implements BaseModel
 
     /**
      * @param DateCreatedAt|array{
-     *   eq?: \DateTimeInterface|null,
-     *   gte?: \DateTimeInterface|null,
-     *   lte?: \DateTimeInterface|null,
+     *   eq?: string|null, gte?: string|null, lte?: string|null
      * } $dateCreatedAt
      */
     public function withDateCreatedAt(DateCreatedAt|array $dateCreatedAt): self

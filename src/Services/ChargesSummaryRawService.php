@@ -27,7 +27,7 @@ final class ChargesSummaryRawService implements ChargesSummaryRawContract
      * Retrieve a summary of monthly charges for a specified date range. The date range cannot exceed 31 days.
      *
      * @param array{
-     *   endDate: string|\DateTimeInterface, startDate: string|\DateTimeInterface
+     *   endDate: string, startDate: string
      * }|ChargesSummaryRetrieveParams $params
      *
      * @return BaseResponse<ChargesSummaryGetResponse>

@@ -10,9 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DateCreatedAtShape = array{
- *   eq?: \DateTimeInterface|null,
- *   gte?: \DateTimeInterface|null,
- *   lte?: \DateTimeInterface|null,
+ *   eq?: string|null, gte?: string|null, lte?: string|null
  * }
  */
 final class DateCreatedAt implements BaseModel
@@ -24,19 +22,19 @@ final class DateCreatedAt implements BaseModel
      * ISO 8601 date for filtering room compositions created on that date.
      */
     #[Optional]
-    public ?\DateTimeInterface $eq;
+    public ?string $eq;
 
     /**
      * ISO 8601 date for filtering room compositions created on or after that date.
      */
     #[Optional]
-    public ?\DateTimeInterface $gte;
+    public ?string $gte;
 
     /**
      * ISO 8601 date for filtering room compositions created on or before that date.
      */
     #[Optional]
-    public ?\DateTimeInterface $lte;
+    public ?string $lte;
 
     public function __construct()
     {
@@ -49,9 +47,9 @@ final class DateCreatedAt implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?\DateTimeInterface $eq = null,
-        ?\DateTimeInterface $gte = null,
-        ?\DateTimeInterface $lte = null,
+        ?string $eq = null,
+        ?string $gte = null,
+        ?string $lte = null
     ): self {
         $self = new self;
 
@@ -65,7 +63,7 @@ final class DateCreatedAt implements BaseModel
     /**
      * ISO 8601 date for filtering room compositions created on that date.
      */
-    public function withEq(\DateTimeInterface $eq): self
+    public function withEq(string $eq): self
     {
         $self = clone $this;
         $self['eq'] = $eq;
@@ -76,7 +74,7 @@ final class DateCreatedAt implements BaseModel
     /**
      * ISO 8601 date for filtering room compositions created on or after that date.
      */
-    public function withGte(\DateTimeInterface $gte): self
+    public function withGte(string $gte): self
     {
         $self = clone $this;
         $self['gte'] = $gte;
@@ -87,7 +85,7 @@ final class DateCreatedAt implements BaseModel
     /**
      * ISO 8601 date for filtering room compositions created on or before that date.
      */
-    public function withLte(\DateTimeInterface $lte): self
+    public function withLte(string $lte): self
     {
         $self = clone $this;
         $self['lte'] = $lte;

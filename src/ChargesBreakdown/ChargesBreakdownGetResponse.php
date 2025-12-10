@@ -47,9 +47,9 @@ final class ChargesBreakdownGetResponse implements BaseModel
      *
      * @param Data|array{
      *   currency: string,
-     *   endDate: \DateTimeInterface,
+     *   endDate: string,
      *   results: list<Result>,
-     *   startDate: \DateTimeInterface,
+     *   startDate: string,
      *   userEmail: string,
      *   userID: string,
      * } $data
@@ -66,9 +66,9 @@ final class ChargesBreakdownGetResponse implements BaseModel
     /**
      * @param Data|array{
      *   currency: string,
-     *   endDate: \DateTimeInterface,
+     *   endDate: string,
      *   results: list<Result>,
-     *   startDate: \DateTimeInterface,
+     *   startDate: string,
      *   userEmail: string,
      *   userID: string,
      * } $data

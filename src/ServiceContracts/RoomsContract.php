@@ -78,16 +78,8 @@ interface RoomsContract
      * @api
      *
      * @param array{
-     *   dateCreatedAt?: array{
-     *     eq?: string|\DateTimeInterface,
-     *     gte?: string|\DateTimeInterface,
-     *     lte?: string|\DateTimeInterface,
-     *   },
-     *   dateUpdatedAt?: array{
-     *     eq?: string|\DateTimeInterface,
-     *     gte?: string|\DateTimeInterface,
-     *     lte?: string|\DateTimeInterface,
-     *   },
+     *   dateCreatedAt?: array{eq?: string, gte?: string, lte?: string},
+     *   dateUpdatedAt?: array{eq?: string, gte?: string, lte?: string},
      *   uniqueName?: string,
      * } $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[unique_name]
      * @param bool $includeSessions to decide if room sessions should be included in the response

@@ -102,7 +102,7 @@ final class ConferencesRawService implements ConferencesRawContract
                 'texml/Accounts/%1$s/Conferences/%2$s', $accountSid, $conferenceSid,
             ],
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
-            body: (object) array_diff_key($parsed, ['accountSid']),
+            body: (object) array_diff_key($parsed, array_flip(['accountSid'])),
             options: $options,
             convert: ConferenceUpdateResponse::class,
         );

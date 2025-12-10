@@ -64,11 +64,7 @@ interface RoomCompositionsContract
      * @api
      *
      * @param array{
-     *   dateCreatedAt?: array{
-     *     eq?: string|\DateTimeInterface,
-     *     gte?: string|\DateTimeInterface,
-     *     lte?: string|\DateTimeInterface,
-     *   },
+     *   dateCreatedAt?: array{eq?: string, gte?: string, lte?: string},
      *   sessionID?: string,
      *   status?: 'completed'|'processing'|'enqueued'|Status,
      * } $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[session_id], filter[status]

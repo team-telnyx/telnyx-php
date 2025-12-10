@@ -48,10 +48,10 @@ final class UserBundleListResourcesResponse implements BaseModel
      *
      * @param list<UserBundleResource|array{
      *   id: string,
-     *   createdAt: \DateTimeInterface,
+     *   createdAt: string,
      *   resource: string,
      *   resourceType: string,
-     *   updatedAt?: \DateTimeInterface|null,
+     *   updatedAt?: string|null,
      * }> $data
      */
     public static function with(array $data): self
@@ -66,10 +66,10 @@ final class UserBundleListResourcesResponse implements BaseModel
     /**
      * @param list<UserBundleResource|array{
      *   id: string,
-     *   createdAt: \DateTimeInterface,
+     *   createdAt: string,
      *   resource: string,
      *   resourceType: string,
-     *   updatedAt?: \DateTimeInterface|null,
+     *   updatedAt?: string|null,
      * }> $data
      */
     public function withData(array $data): self

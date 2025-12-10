@@ -227,7 +227,7 @@ final class ExternalConnectionsRawService implements ExternalConnectionsRawContr
         return $this->client->request(
             method: 'patch',
             path: ['external_connections/%1$s/locations/%2$s', $id, $locationID],
-            body: (object) array_diff_key($parsed, ['id']),
+            body: (object) array_diff_key($parsed, array_flip(['id'])),
             options: $options,
             convert: ExternalConnectionUpdateLocationResponse::class,
         );

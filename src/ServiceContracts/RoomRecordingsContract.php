@@ -29,16 +29,8 @@ interface RoomRecordingsContract
      * @api
      *
      * @param array{
-     *   dateEndedAt?: array{
-     *     eq?: string|\DateTimeInterface,
-     *     gte?: string|\DateTimeInterface,
-     *     lte?: string|\DateTimeInterface,
-     *   },
-     *   dateStartedAt?: array{
-     *     eq?: string|\DateTimeInterface,
-     *     gte?: string|\DateTimeInterface,
-     *     lte?: string|\DateTimeInterface,
-     *   },
+     *   dateEndedAt?: array{eq?: string, gte?: string, lte?: string},
+     *   dateStartedAt?: array{eq?: string, gte?: string, lte?: string},
      *   durationSecs?: int,
      *   participantID?: string,
      *   roomID?: string,
@@ -76,16 +68,8 @@ interface RoomRecordingsContract
      * @api
      *
      * @param array{
-     *   dateEndedAt?: array{
-     *     eq?: string|\DateTimeInterface,
-     *     gte?: string|\DateTimeInterface,
-     *     lte?: string|\DateTimeInterface,
-     *   },
-     *   dateStartedAt?: array{
-     *     eq?: string|\DateTimeInterface,
-     *     gte?: string|\DateTimeInterface,
-     *     lte?: string|\DateTimeInterface,
-     *   },
+     *   dateEndedAt?: array{eq?: string, gte?: string, lte?: string},
+     *   dateStartedAt?: array{eq?: string, gte?: string, lte?: string},
      *   durationSecs?: int,
      *   participantID?: string,
      *   roomID?: string,

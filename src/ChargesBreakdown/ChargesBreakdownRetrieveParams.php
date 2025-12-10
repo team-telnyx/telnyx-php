@@ -17,9 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\ChargesBreakdownService::retrieve()
  *
  * @phpstan-type ChargesBreakdownRetrieveParamsShape = array{
- *   startDate: \DateTimeInterface,
- *   endDate?: \DateTimeInterface,
- *   format?: Format|value-of<Format>,
+ *   startDate: string, endDate?: string, format?: Format|value-of<Format>
  * }
  */
 final class ChargesBreakdownRetrieveParams implements BaseModel
@@ -32,13 +30,13 @@ final class ChargesBreakdownRetrieveParams implements BaseModel
      * Start date for the charges breakdown in ISO date format (YYYY-MM-DD).
      */
     #[Required]
-    public \DateTimeInterface $startDate;
+    public string $startDate;
 
     /**
      * End date for the charges breakdown in ISO date format (YYYY-MM-DD). If not provided, defaults to start_date + 1 month. The date is exclusive, data for the end_date itself is not included in the report. The interval between start_date and end_date cannot exceed 31 days.
      */
     #[Optional]
-    public ?\DateTimeInterface $endDate;
+    public ?string $endDate;
 
     /**
      * Response format.
@@ -75,9 +73,9 @@ final class ChargesBreakdownRetrieveParams implements BaseModel
      * @param Format|value-of<Format> $format
      */
     public static function with(
-        \DateTimeInterface $startDate,
-        ?\DateTimeInterface $endDate = null,
-        Format|string|null $format = null,
+        string $startDate,
+        ?string $endDate = null,
+        Format|string|null $format = null
     ): self {
         $self = new self;
 
@@ -92,7 +90,7 @@ final class ChargesBreakdownRetrieveParams implements BaseModel
     /**
      * Start date for the charges breakdown in ISO date format (YYYY-MM-DD).
      */
-    public function withStartDate(\DateTimeInterface $startDate): self
+    public function withStartDate(string $startDate): self
     {
         $self = clone $this;
         $self['startDate'] = $startDate;
@@ -103,7 +101,7 @@ final class ChargesBreakdownRetrieveParams implements BaseModel
     /**
      * End date for the charges breakdown in ISO date format (YYYY-MM-DD). If not provided, defaults to start_date + 1 month. The date is exclusive, data for the end_date itself is not included in the report. The interval between start_date and end_date cannot exceed 31 days.
      */
-    public function withEndDate(\DateTimeInterface $endDate): self
+    public function withEndDate(string $endDate): self
     {
         $self = clone $this;
         $self['endDate'] = $endDate;

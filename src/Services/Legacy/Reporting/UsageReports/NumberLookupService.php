@@ -34,17 +34,17 @@ final class NumberLookupService implements NumberLookupContract
      * Submit a new telco data usage report
      *
      * @param 'ALL'|'BY_ORGANIZATION_MEMBER'|AggregationType $aggregationType Type of aggregation for the report
-     * @param string|\DateTimeInterface $endDate End date for the usage report
+     * @param string $endDate End date for the usage report
      * @param list<string> $managedAccounts List of managed accounts to include in the report
-     * @param string|\DateTimeInterface $startDate Start date for the usage report
+     * @param string $startDate Start date for the usage report
      *
      * @throws APIException
      */
     public function create(
         string|AggregationType|null $aggregationType = null,
-        string|\DateTimeInterface|null $endDate = null,
+        ?string $endDate = null,
         ?array $managedAccounts = null,
-        string|\DateTimeInterface|null $startDate = null,
+        ?string $startDate = null,
         ?RequestOptions $requestOptions = null,
     ): NumberLookupNewResponse {
         $params = [

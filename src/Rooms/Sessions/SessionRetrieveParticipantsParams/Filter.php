@@ -52,19 +52,13 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param DateJoinedAt|array{
-     *   eq?: \DateTimeInterface|null,
-     *   gte?: \DateTimeInterface|null,
-     *   lte?: \DateTimeInterface|null,
+     *   eq?: string|null, gte?: string|null, lte?: string|null
      * } $dateJoinedAt
      * @param DateLeftAt|array{
-     *   eq?: \DateTimeInterface|null,
-     *   gte?: \DateTimeInterface|null,
-     *   lte?: \DateTimeInterface|null,
+     *   eq?: string|null, gte?: string|null, lte?: string|null
      * } $dateLeftAt
      * @param DateUpdatedAt|array{
-     *   eq?: \DateTimeInterface|null,
-     *   gte?: \DateTimeInterface|null,
-     *   lte?: \DateTimeInterface|null,
+     *   eq?: string|null, gte?: string|null, lte?: string|null
      * } $dateUpdatedAt
      */
     public static function with(
@@ -96,9 +90,7 @@ final class Filter implements BaseModel
 
     /**
      * @param DateJoinedAt|array{
-     *   eq?: \DateTimeInterface|null,
-     *   gte?: \DateTimeInterface|null,
-     *   lte?: \DateTimeInterface|null,
+     *   eq?: string|null, gte?: string|null, lte?: string|null
      * } $dateJoinedAt
      */
     public function withDateJoinedAt(DateJoinedAt|array $dateJoinedAt): self
@@ -111,9 +103,7 @@ final class Filter implements BaseModel
 
     /**
      * @param DateLeftAt|array{
-     *   eq?: \DateTimeInterface|null,
-     *   gte?: \DateTimeInterface|null,
-     *   lte?: \DateTimeInterface|null,
+     *   eq?: string|null, gte?: string|null, lte?: string|null
      * } $dateLeftAt
      */
     public function withDateLeftAt(DateLeftAt|array $dateLeftAt): self
@@ -126,9 +116,7 @@ final class Filter implements BaseModel
 
     /**
      * @param DateUpdatedAt|array{
-     *   eq?: \DateTimeInterface|null,
-     *   gte?: \DateTimeInterface|null,
-     *   lte?: \DateTimeInterface|null,
+     *   eq?: string|null, gte?: string|null, lte?: string|null
      * } $dateUpdatedAt
      */
     public function withDateUpdatedAt(DateUpdatedAt|array $dateUpdatedAt): self
