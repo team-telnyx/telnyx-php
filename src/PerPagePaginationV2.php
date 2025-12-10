@@ -13,7 +13,6 @@ use Telnyx\Core\Conversion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 use Telnyx\Core\Conversion\ListOf;
-use Telnyx\Core\Conversion\MapOf;
 
 /**
  * @phpstan-type PerPagePaginationV2Shape = array{
@@ -33,7 +32,7 @@ final class PerPagePaginationV2 implements BaseModel, BasePage
     use SdkPage;
 
     /** @var list<TItem>|null $records */
-    #[Optional(list: new MapOf('mixed'))]
+    #[Optional(list: 'mixed')]
     public ?array $records;
 
     #[Required]
@@ -70,13 +69,10 @@ final class PerPagePaginationV2 implements BaseModel, BasePage
         // @phpstan-ignore-next-line argument.type
         self::__unserialize($this->parsedBody);
 
-        if ($this->offsetGet('records')) {
-            $acc = Conversion::coerce(
-                new ListOf($convert),
-                value: $this->offsetGet('records')
-            );
+        if (is_array($items = $this->offsetGet('records'))) {
+            $parsed = Conversion::coerce(new ListOf($convert), value: $items);
             // @phpstan-ignore-next-line
-            $this->offsetSet('records', $acc);
+            $this->offsetSet('records', value: $parsed);
         }
     }
 
