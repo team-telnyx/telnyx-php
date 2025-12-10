@@ -18,7 +18,10 @@ use Telnyx\Number10dlc\Brand\BrandListParams;
 use Telnyx\Number10dlc\Brand\BrandListParams\Sort;
 use Telnyx\Number10dlc\Brand\BrandListResponse;
 use Telnyx\Number10dlc\Brand\BrandRetrieveSMSOtpStatusParams;
+use Telnyx\Number10dlc\Brand\BrandTriggerSMSOtpParams;
+use Telnyx\Number10dlc\Brand\BrandTriggerSMSOtpResponse;
 use Telnyx\Number10dlc\Brand\BrandUpdateParams;
+use Telnyx\Number10dlc\Brand\BrandVerifySMSOtpParams;
 use Telnyx\Number10dlc\Brand\EntityType;
 use Telnyx\Number10dlc\Brand\StockExchange;
 use Telnyx\Number10dlc\Brand\TelnyxBrand;
@@ -349,6 +352,101 @@ final class BrandRawService implements BrandRawContract
             path: ['10dlc/brand/%1$s/revet', $brandID],
             options: $requestOptions,
             convert: TelnyxBrand::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Trigger or re-trigger an SMS OTP (One-Time Password) for Sole Proprietor brand verification.
+     *
+     * **Important Notes:**
+     *
+     * * Only allowed for Sole Proprietor (`SOLE_PROPRIETOR`) brands
+     * * Triggers generation of a one-time password sent to the `mobilePhone` number in the brand's profile
+     * * Campaigns cannot be created until OTP verification is complete
+     * * US/CA numbers only for real OTPs; mock brands can use non-US/CA numbers for testing
+     * * Returns a `referenceId` that can be used to check OTP status via the GET `/10dlc/brand/smsOtp/{referenceId}` endpoint
+     *
+     * **Use Cases:**
+     *
+     * * Initial OTP trigger after Sole Proprietor brand creation
+     * * Re-triggering OTP if the user didn't receive or needs a new code
+     *
+     * @param string $brandID The Brand ID for which to trigger the OTP
+     * @param array{
+     *   pinSMS: string, successSMS: string
+     * }|BrandTriggerSMSOtpParams $params
+     *
+     * @return BaseResponse<BrandTriggerSMSOtpResponse>
+     *
+     * @throws APIException
+     */
+    public function triggerSMSOtp(
+        string $brandID,
+        array|BrandTriggerSMSOtpParams $params,
+        ?RequestOptions $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = BrandTriggerSMSOtpParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: ['10dlc/brand/%1$s/smsOtp', $brandID],
+            body: (object) $parsed,
+            options: $options,
+            convert: BrandTriggerSMSOtpResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Verify the SMS OTP (One-Time Password) for Sole Proprietor brand verification.
+     *
+     * **Verification Flow:**
+     *
+     * 1. User receives OTP via SMS after triggering
+     * 2. User submits the OTP pin through this endpoint
+     * 3. Upon successful verification:
+     *    - A `BRAND_OTP_VERIFIED` webhook event is sent to the CSP
+     *    - The brand's `identityStatus` changes to `VERIFIED`
+     *    - Campaigns can now be created for this brand
+     *
+     * **Error Handling:**
+     *
+     * Provides proper error responses for:
+     * * Invalid OTP pins
+     * * Expired OTPs
+     * * OTP verification failures
+     *
+     * @param string $brandID The Brand ID for which to verify the OTP
+     * @param array{otpPin: string}|BrandVerifySMSOtpParams $params
+     *
+     * @return BaseResponse<mixed>
+     *
+     * @throws APIException
+     */
+    public function verifySMSOtp(
+        string $brandID,
+        array|BrandVerifySMSOtpParams $params,
+        ?RequestOptions $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = BrandVerifySMSOtpParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'put',
+            path: ['10dlc/brand/%1$s/smsOtp', $brandID],
+            body: (object) $parsed,
+            options: $options,
+            convert: null,
         );
     }
 }

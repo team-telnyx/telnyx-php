@@ -14,6 +14,7 @@ use Telnyx\Number10dlc\Brand\BrandGetSMSOtpStatusResponse;
 use Telnyx\Number10dlc\Brand\BrandIdentityStatus;
 use Telnyx\Number10dlc\Brand\BrandListParams\Sort;
 use Telnyx\Number10dlc\Brand\BrandListResponse;
+use Telnyx\Number10dlc\Brand\BrandTriggerSMSOtpResponse;
 use Telnyx\Number10dlc\Brand\EntityType;
 use Telnyx\Number10dlc\Brand\StockExchange;
 use Telnyx\Number10dlc\Brand\TelnyxBrand;
@@ -407,6 +408,85 @@ final class BrandService implements BrandContract
     ): TelnyxBrand {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->revet($brandID, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Trigger or re-trigger an SMS OTP (One-Time Password) for Sole Proprietor brand verification.
+     *
+     * **Important Notes:**
+     *
+     * * Only allowed for Sole Proprietor (`SOLE_PROPRIETOR`) brands
+     * * Triggers generation of a one-time password sent to the `mobilePhone` number in the brand's profile
+     * * Campaigns cannot be created until OTP verification is complete
+     * * US/CA numbers only for real OTPs; mock brands can use non-US/CA numbers for testing
+     * * Returns a `referenceId` that can be used to check OTP status via the GET `/10dlc/brand/smsOtp/{referenceId}` endpoint
+     *
+     * **Use Cases:**
+     *
+     * * Initial OTP trigger after Sole Proprietor brand creation
+     * * Re-triggering OTP if the user didn't receive or needs a new code
+     *
+     * @param string $brandID The Brand ID for which to trigger the OTP
+     * @param string $pinSMS SMS message template to send the OTP. Must include `@OTP_PIN@` placeholder which will be replaced with the actual PIN
+     * @param string $successSMS SMS message to send upon successful OTP verification
+     *
+     * @throws APIException
+     */
+    public function triggerSMSOtp(
+        string $brandID,
+        string $pinSMS,
+        string $successSMS,
+        ?RequestOptions $requestOptions = null,
+    ): BrandTriggerSMSOtpResponse {
+        $params = Util::removeNulls(
+            ['pinSMS' => $pinSMS, 'successSMS' => $successSMS]
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->triggerSMSOtp($brandID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Verify the SMS OTP (One-Time Password) for Sole Proprietor brand verification.
+     *
+     * **Verification Flow:**
+     *
+     * 1. User receives OTP via SMS after triggering
+     * 2. User submits the OTP pin through this endpoint
+     * 3. Upon successful verification:
+     *    - A `BRAND_OTP_VERIFIED` webhook event is sent to the CSP
+     *    - The brand's `identityStatus` changes to `VERIFIED`
+     *    - Campaigns can now be created for this brand
+     *
+     * **Error Handling:**
+     *
+     * Provides proper error responses for:
+     * * Invalid OTP pins
+     * * Expired OTPs
+     * * OTP verification failures
+     *
+     * @param string $brandID The Brand ID for which to verify the OTP
+     * @param string $otpPin The OTP PIN received via SMS
+     *
+     * @throws APIException
+     */
+    public function verifySMSOtp(
+        string $brandID,
+        string $otpPin,
+        ?RequestOptions $requestOptions = null
+    ): mixed {
+        $params = Util::removeNulls(['otpPin' => $otpPin]);
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->verifySMSOtp($brandID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

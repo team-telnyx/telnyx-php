@@ -12,6 +12,7 @@ use Telnyx\Number10dlc\Brand\BrandGetResponse;
 use Telnyx\Number10dlc\Brand\BrandGetSMSOtpStatusResponse;
 use Telnyx\Number10dlc\Brand\BrandIdentityStatus;
 use Telnyx\Number10dlc\Brand\BrandListResponse;
+use Telnyx\Number10dlc\Brand\BrandTriggerSMSOtpResponse;
 use Telnyx\Number10dlc\Brand\EntityType;
 use Telnyx\Number10dlc\Brand\StockExchange;
 use Telnyx\Number10dlc\Brand\TelnyxBrand;
@@ -250,5 +251,71 @@ final class BrandTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(TelnyxBrand::class, $result);
+    }
+
+    #[Test]
+    public function testTriggerSMSOtp(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->number10dlc->brand->triggerSMSOtp(
+            '4b20019b-043a-78f8-0657-b3be3f4b4002',
+            pinSMS: 'Your PIN is @OTP_PIN@',
+            successSMS: 'Verification successful!',
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(BrandTriggerSMSOtpResponse::class, $result);
+    }
+
+    #[Test]
+    public function testTriggerSMSOtpWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->number10dlc->brand->triggerSMSOtp(
+            '4b20019b-043a-78f8-0657-b3be3f4b4002',
+            pinSMS: 'Your PIN is @OTP_PIN@',
+            successSMS: 'Verification successful!',
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(BrandTriggerSMSOtpResponse::class, $result);
+    }
+
+    #[Test]
+    public function testVerifySMSOtp(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->number10dlc->brand->verifySMSOtp(
+            '4b20019b-043a-78f8-0657-b3be3f4b4002',
+            otpPin: '123456'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
+    }
+
+    #[Test]
+    public function testVerifySMSOtpWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->number10dlc->brand->verifySMSOtp(
+            '4b20019b-043a-78f8-0657-b3be3f4b4002',
+            otpPin: '123456'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 }
