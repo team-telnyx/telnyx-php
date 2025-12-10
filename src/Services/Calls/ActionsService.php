@@ -82,6 +82,7 @@ use Telnyx\Calls\StreamBidirectionalTargetLegs;
 use Telnyx\Calls\StreamCodec;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Calls\ActionsContract;
 
@@ -184,36 +185,36 @@ final class ActionsService implements ActionsContract
         string|WebhookURLMethod $webhookURLMethod = 'POST',
         ?RequestOptions $requestOptions = null,
     ): ActionAnswerResponse {
-        $params = [
-            'billingGroupID' => $billingGroupID,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'customHeaders' => $customHeaders,
-            'preferredCodecs' => $preferredCodecs,
-            'record' => $record,
-            'recordChannels' => $recordChannels,
-            'recordCustomFileName' => $recordCustomFileName,
-            'recordFormat' => $recordFormat,
-            'recordMaxLength' => $recordMaxLength,
-            'recordTimeoutSecs' => $recordTimeoutSecs,
-            'recordTrack' => $recordTrack,
-            'recordTrim' => $recordTrim,
-            'sendSilenceWhenIdle' => $sendSilenceWhenIdle,
-            'sipHeaders' => $sipHeaders,
-            'soundModifications' => $soundModifications,
-            'streamBidirectionalCodec' => $streamBidirectionalCodec,
-            'streamBidirectionalMode' => $streamBidirectionalMode,
-            'streamBidirectionalTargetLegs' => $streamBidirectionalTargetLegs,
-            'streamCodec' => $streamCodec,
-            'streamTrack' => $streamTrack,
-            'streamURL' => $streamURL,
-            'transcription' => $transcription,
-            'transcriptionConfig' => $transcriptionConfig,
-            'webhookURL' => $webhookURL,
-            'webhookURLMethod' => $webhookURLMethod,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'billingGroupID' => $billingGroupID,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'customHeaders' => $customHeaders,
+                'preferredCodecs' => $preferredCodecs,
+                'record' => $record,
+                'recordChannels' => $recordChannels,
+                'recordCustomFileName' => $recordCustomFileName,
+                'recordFormat' => $recordFormat,
+                'recordMaxLength' => $recordMaxLength,
+                'recordTimeoutSecs' => $recordTimeoutSecs,
+                'recordTrack' => $recordTrack,
+                'recordTrim' => $recordTrim,
+                'sendSilenceWhenIdle' => $sendSilenceWhenIdle,
+                'sipHeaders' => $sipHeaders,
+                'soundModifications' => $soundModifications,
+                'streamBidirectionalCodec' => $streamBidirectionalCodec,
+                'streamBidirectionalMode' => $streamBidirectionalMode,
+                'streamBidirectionalTargetLegs' => $streamBidirectionalTargetLegs,
+                'streamCodec' => $streamCodec,
+                'streamTrack' => $streamTrack,
+                'streamURL' => $streamURL,
+                'transcription' => $transcription,
+                'transcriptionConfig' => $transcriptionConfig,
+                'webhookURL' => $webhookURL,
+                'webhookURLMethod' => $webhookURLMethod,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->answer($callControlID, params: $params, requestOptions: $requestOptions);
@@ -275,28 +276,28 @@ final class ActionsService implements ActionsContract
         ?string $videoRoomID = null,
         ?RequestOptions $requestOptions = null,
     ): ActionBridgeResponse {
-        $params = [
-            'callControlIDToBridgeWith' => $callControlIDToBridgeWith,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'muteDtmf' => $muteDtmf,
-            'parkAfterUnbridge' => $parkAfterUnbridge,
-            'playRingtone' => $playRingtone,
-            'queue' => $queue,
-            'record' => $record,
-            'recordChannels' => $recordChannels,
-            'recordCustomFileName' => $recordCustomFileName,
-            'recordFormat' => $recordFormat,
-            'recordMaxLength' => $recordMaxLength,
-            'recordTimeoutSecs' => $recordTimeoutSecs,
-            'recordTrack' => $recordTrack,
-            'recordTrim' => $recordTrim,
-            'ringtone' => $ringtone,
-            'videoRoomContext' => $videoRoomContext,
-            'videoRoomID' => $videoRoomID,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'callControlIDToBridgeWith' => $callControlIDToBridgeWith,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'muteDtmf' => $muteDtmf,
+                'parkAfterUnbridge' => $parkAfterUnbridge,
+                'playRingtone' => $playRingtone,
+                'queue' => $queue,
+                'record' => $record,
+                'recordChannels' => $recordChannels,
+                'recordCustomFileName' => $recordCustomFileName,
+                'recordFormat' => $recordFormat,
+                'recordMaxLength' => $recordMaxLength,
+                'recordTimeoutSecs' => $recordTimeoutSecs,
+                'recordTrack' => $recordTrack,
+                'recordTrim' => $recordTrim,
+                'ringtone' => $ringtone,
+                'videoRoomContext' => $videoRoomContext,
+                'videoRoomID' => $videoRoomID,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->bridge($callControlIDToBridge, params: $params, requestOptions: $requestOptions);
@@ -329,16 +330,16 @@ final class ActionsService implements ActionsContract
         ?int $maxWaitTimeSecs = null,
         ?RequestOptions $requestOptions = null,
     ): ActionEnqueueResponse {
-        $params = [
-            'queueName' => $queueName,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'keepAfterHangup' => $keepAfterHangup,
-            'maxSize' => $maxSize,
-            'maxWaitTimeSecs' => $maxWaitTimeSecs,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'queueName' => $queueName,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'keepAfterHangup' => $keepAfterHangup,
+                'maxSize' => $maxSize,
+                'maxWaitTimeSecs' => $maxWaitTimeSecs,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->enqueue($callControlID, params: $params, requestOptions: $requestOptions);
@@ -386,20 +387,20 @@ final class ActionsService implements ActionsContract
         string $validDigits = '0123456789#*',
         ?RequestOptions $requestOptions = null,
     ): ActionGatherResponse {
-        $params = [
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'gatherID' => $gatherID,
-            'initialTimeoutMillis' => $initialTimeoutMillis,
-            'interDigitTimeoutMillis' => $interDigitTimeoutMillis,
-            'maximumDigits' => $maximumDigits,
-            'minimumDigits' => $minimumDigits,
-            'terminatingDigit' => $terminatingDigit,
-            'timeoutMillis' => $timeoutMillis,
-            'validDigits' => $validDigits,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'gatherID' => $gatherID,
+                'initialTimeoutMillis' => $initialTimeoutMillis,
+                'interDigitTimeoutMillis' => $interDigitTimeoutMillis,
+                'maximumDigits' => $maximumDigits,
+                'minimumDigits' => $minimumDigits,
+                'terminatingDigit' => $terminatingDigit,
+                'timeoutMillis' => $timeoutMillis,
+                'validDigits' => $validDigits,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->gather($callControlID, params: $params, requestOptions: $requestOptions);
@@ -474,24 +475,24 @@ final class ActionsService implements ActionsContract
         ?array $voiceSettings = null,
         ?RequestOptions $requestOptions = null,
     ): ActionGatherUsingAIResponse {
-        $params = [
-            'parameters' => $parameters,
-            'assistant' => $assistant,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'greeting' => $greeting,
-            'interruptionSettings' => $interruptionSettings,
-            'language' => $language,
-            'messageHistory' => $messageHistory,
-            'sendMessageHistoryUpdates' => $sendMessageHistoryUpdates,
-            'sendPartialResults' => $sendPartialResults,
-            'transcription' => $transcription,
-            'userResponseTimeoutMs' => $userResponseTimeoutMs,
-            'voice' => $voice,
-            'voiceSettings' => $voiceSettings,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'parameters' => $parameters,
+                'assistant' => $assistant,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'greeting' => $greeting,
+                'interruptionSettings' => $interruptionSettings,
+                'language' => $language,
+                'messageHistory' => $messageHistory,
+                'sendMessageHistoryUpdates' => $sendMessageHistoryUpdates,
+                'sendPartialResults' => $sendPartialResults,
+                'transcription' => $transcription,
+                'userResponseTimeoutMs' => $userResponseTimeoutMs,
+                'voice' => $voice,
+                'voiceSettings' => $voiceSettings,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->gatherUsingAI($callControlID, params: $params, requestOptions: $requestOptions);
@@ -547,23 +548,23 @@ final class ActionsService implements ActionsContract
         string $validDigits = '0123456789#*',
         ?RequestOptions $requestOptions = null,
     ): ActionGatherUsingAudioResponse {
-        $params = [
-            'audioURL' => $audioURL,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'interDigitTimeoutMillis' => $interDigitTimeoutMillis,
-            'invalidAudioURL' => $invalidAudioURL,
-            'invalidMediaName' => $invalidMediaName,
-            'maximumDigits' => $maximumDigits,
-            'maximumTries' => $maximumTries,
-            'mediaName' => $mediaName,
-            'minimumDigits' => $minimumDigits,
-            'terminatingDigit' => $terminatingDigit,
-            'timeoutMillis' => $timeoutMillis,
-            'validDigits' => $validDigits,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'audioURL' => $audioURL,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'interDigitTimeoutMillis' => $interDigitTimeoutMillis,
+                'invalidAudioURL' => $invalidAudioURL,
+                'invalidMediaName' => $invalidMediaName,
+                'maximumDigits' => $maximumDigits,
+                'maximumTries' => $maximumTries,
+                'mediaName' => $mediaName,
+                'minimumDigits' => $minimumDigits,
+                'terminatingDigit' => $terminatingDigit,
+                'timeoutMillis' => $timeoutMillis,
+                'validDigits' => $validDigits,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->gatherUsingAudio($callControlID, params: $params, requestOptions: $requestOptions);
@@ -633,26 +634,26 @@ final class ActionsService implements ActionsContract
         ?array $voiceSettings = null,
         ?RequestOptions $requestOptions = null,
     ): ActionGatherUsingSpeakResponse {
-        $params = [
-            'payload' => $payload,
-            'voice' => $voice,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'interDigitTimeoutMillis' => $interDigitTimeoutMillis,
-            'invalidPayload' => $invalidPayload,
-            'language' => $language,
-            'maximumDigits' => $maximumDigits,
-            'maximumTries' => $maximumTries,
-            'minimumDigits' => $minimumDigits,
-            'payloadType' => $payloadType,
-            'serviceLevel' => $serviceLevel,
-            'terminatingDigit' => $terminatingDigit,
-            'timeoutMillis' => $timeoutMillis,
-            'validDigits' => $validDigits,
-            'voiceSettings' => $voiceSettings,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'payload' => $payload,
+                'voice' => $voice,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'interDigitTimeoutMillis' => $interDigitTimeoutMillis,
+                'invalidPayload' => $invalidPayload,
+                'language' => $language,
+                'maximumDigits' => $maximumDigits,
+                'maximumTries' => $maximumTries,
+                'minimumDigits' => $minimumDigits,
+                'payloadType' => $payloadType,
+                'serviceLevel' => $serviceLevel,
+                'terminatingDigit' => $terminatingDigit,
+                'timeoutMillis' => $timeoutMillis,
+                'validDigits' => $validDigits,
+                'voiceSettings' => $voiceSettings,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->gatherUsingSpeak($callControlID, params: $params, requestOptions: $requestOptions);
@@ -682,9 +683,9 @@ final class ActionsService implements ActionsContract
         ?string $commandID = null,
         ?RequestOptions $requestOptions = null,
     ): ActionHangupResponse {
-        $params = ['clientState' => $clientState, 'commandID' => $commandID];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['clientState' => $clientState, 'commandID' => $commandID]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->hangup($callControlID, params: $params, requestOptions: $requestOptions);
@@ -709,9 +710,9 @@ final class ActionsService implements ActionsContract
         ?string $commandID = null,
         ?RequestOptions $requestOptions = null,
     ): ActionLeaveQueueResponse {
-        $params = ['clientState' => $clientState, 'commandID' => $commandID];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['clientState' => $clientState, 'commandID' => $commandID]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->leaveQueue($callControlID, params: $params, requestOptions: $requestOptions);
@@ -742,13 +743,13 @@ final class ActionsService implements ActionsContract
         ?string $recordingID = null,
         ?RequestOptions $requestOptions = null,
     ): ActionPauseRecordingResponse {
-        $params = [
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'recordingID' => $recordingID,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'recordingID' => $recordingID,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->pauseRecording($callControlID, params: $params, requestOptions: $requestOptions);
@@ -793,17 +794,17 @@ final class ActionsService implements ActionsContract
         ?array $sipHeaders = null,
         ?RequestOptions $requestOptions = null,
     ): ActionReferResponse {
-        $params = [
-            'sipAddress' => $sipAddress,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'customHeaders' => $customHeaders,
-            'sipAuthPassword' => $sipAuthPassword,
-            'sipAuthUsername' => $sipAuthUsername,
-            'sipHeaders' => $sipHeaders,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'sipAddress' => $sipAddress,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'customHeaders' => $customHeaders,
+                'sipAuthPassword' => $sipAuthPassword,
+                'sipAuthUsername' => $sipAuthUsername,
+                'sipHeaders' => $sipHeaders,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->refer($callControlID, params: $params, requestOptions: $requestOptions);
@@ -834,13 +835,13 @@ final class ActionsService implements ActionsContract
         ?string $commandID = null,
         ?RequestOptions $requestOptions = null,
     ): ActionRejectResponse {
-        $params = [
-            'cause' => $cause,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'cause' => $cause,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->reject($callControlID, params: $params, requestOptions: $requestOptions);
@@ -871,13 +872,13 @@ final class ActionsService implements ActionsContract
         ?string $recordingID = null,
         ?RequestOptions $requestOptions = null,
     ): ActionResumeRecordingResponse {
-        $params = [
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'recordingID' => $recordingID,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'recordingID' => $recordingID,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->resumeRecording($callControlID, params: $params, requestOptions: $requestOptions);
@@ -910,14 +911,14 @@ final class ActionsService implements ActionsContract
         int $durationMillis = 250,
         ?RequestOptions $requestOptions = null,
     ): ActionSendDtmfResponse {
-        $params = [
-            'digits' => $digits,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'durationMillis' => $durationMillis,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'digits' => $digits,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'durationMillis' => $durationMillis,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->sendDtmf($callControlID, params: $params, requestOptions: $requestOptions);
@@ -950,14 +951,14 @@ final class ActionsService implements ActionsContract
         ?string $commandID = null,
         ?RequestOptions $requestOptions = null,
     ): ActionSendSipInfoResponse {
-        $params = [
-            'body' => $body,
-            'contentType' => $contentType,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'body' => $body,
+                'contentType' => $contentType,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->sendSipInfo($callControlID, params: $params, requestOptions: $requestOptions);
@@ -1011,19 +1012,19 @@ final class ActionsService implements ActionsContract
         ?array $voiceSettings = null,
         ?RequestOptions $requestOptions = null,
     ): ActionSpeakResponse {
-        $params = [
-            'payload' => $payload,
-            'voice' => $voice,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'language' => $language,
-            'payloadType' => $payloadType,
-            'serviceLevel' => $serviceLevel,
-            'stop' => $stop,
-            'voiceSettings' => $voiceSettings,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'payload' => $payload,
+                'voice' => $voice,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'language' => $language,
+                'payloadType' => $payloadType,
+                'serviceLevel' => $serviceLevel,
+                'stop' => $stop,
+                'voiceSettings' => $voiceSettings,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->speak($callControlID, params: $params, requestOptions: $requestOptions);
@@ -1077,18 +1078,18 @@ final class ActionsService implements ActionsContract
         ?array $voiceSettings = null,
         ?RequestOptions $requestOptions = null,
     ): ActionStartAIAssistantResponse {
-        $params = [
-            'assistant' => $assistant,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'greeting' => $greeting,
-            'interruptionSettings' => $interruptionSettings,
-            'transcription' => $transcription,
-            'voice' => $voice,
-            'voiceSettings' => $voiceSettings,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'assistant' => $assistant,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'greeting' => $greeting,
+                'interruptionSettings' => $interruptionSettings,
+                'transcription' => $transcription,
+                'voice' => $voice,
+                'voiceSettings' => $voiceSettings,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->startAIAssistant($callControlID, params: $params, requestOptions: $requestOptions);
@@ -1127,15 +1128,15 @@ final class ActionsService implements ActionsContract
         ?string $tx = null,
         ?RequestOptions $requestOptions = null,
     ): ActionStartForkingResponse {
-        $params = [
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'rx' => $rx,
-            'streamType' => $streamType,
-            'tx' => $tx,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'rx' => $rx,
+                'streamType' => $streamType,
+                'tx' => $tx,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->startForking($callControlID, params: $params, requestOptions: $requestOptions);
@@ -1171,15 +1172,15 @@ final class ActionsService implements ActionsContract
         ?array $noiseSuppressionEngineConfig = null,
         ?RequestOptions $requestOptions = null,
     ): ActionStartNoiseSuppressionResponse {
-        $params = [
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'direction' => $direction,
-            'noiseSuppressionEngine' => $noiseSuppressionEngine,
-            'noiseSuppressionEngineConfig' => $noiseSuppressionEngineConfig,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'direction' => $direction,
+                'noiseSuppressionEngine' => $noiseSuppressionEngine,
+                'noiseSuppressionEngineConfig' => $noiseSuppressionEngineConfig,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->startNoiseSuppression($callControlID, params: $params, requestOptions: $requestOptions);
@@ -1233,21 +1234,21 @@ final class ActionsService implements ActionsContract
         string $targetLegs = 'self',
         ?RequestOptions $requestOptions = null,
     ): ActionStartPlaybackResponse {
-        $params = [
-            'audioType' => $audioType,
-            'audioURL' => $audioURL,
-            'cacheAudio' => $cacheAudio,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'loop' => $loop,
-            'mediaName' => $mediaName,
-            'overlay' => $overlay,
-            'playbackContent' => $playbackContent,
-            'stop' => $stop,
-            'targetLegs' => $targetLegs,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'audioType' => $audioType,
+                'audioURL' => $audioURL,
+                'cacheAudio' => $cacheAudio,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'loop' => $loop,
+                'mediaName' => $mediaName,
+                'overlay' => $overlay,
+                'playbackContent' => $playbackContent,
+                'stop' => $stop,
+                'targetLegs' => $targetLegs,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->startPlayback($callControlID, params: $params, requestOptions: $requestOptions);
@@ -1308,27 +1309,27 @@ final class ActionsService implements ActionsContract
         string|Trim|null $trim = null,
         ?RequestOptions $requestOptions = null,
     ): ActionStartRecordingResponse {
-        $params = [
-            'channels' => $channels,
-            'format' => $format,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'customFileName' => $customFileName,
-            'maxLength' => $maxLength,
-            'playBeep' => $playBeep,
-            'recordingTrack' => $recordingTrack,
-            'timeoutSecs' => $timeoutSecs,
-            'transcription' => $transcription,
-            'transcriptionEngine' => $transcriptionEngine,
-            'transcriptionLanguage' => $transcriptionLanguage,
-            'transcriptionMaxSpeakerCount' => $transcriptionMaxSpeakerCount,
-            'transcriptionMinSpeakerCount' => $transcriptionMinSpeakerCount,
-            'transcriptionProfanityFilter' => $transcriptionProfanityFilter,
-            'transcriptionSpeakerDiarization' => $transcriptionSpeakerDiarization,
-            'trim' => $trim,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'channels' => $channels,
+                'format' => $format,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'customFileName' => $customFileName,
+                'maxLength' => $maxLength,
+                'playBeep' => $playBeep,
+                'recordingTrack' => $recordingTrack,
+                'timeoutSecs' => $timeoutSecs,
+                'transcription' => $transcription,
+                'transcriptionEngine' => $transcriptionEngine,
+                'transcriptionLanguage' => $transcriptionLanguage,
+                'transcriptionMaxSpeakerCount' => $transcriptionMaxSpeakerCount,
+                'transcriptionMinSpeakerCount' => $transcriptionMinSpeakerCount,
+                'transcriptionProfanityFilter' => $transcriptionProfanityFilter,
+                'transcriptionSpeakerDiarization' => $transcriptionSpeakerDiarization,
+                'trim' => $trim,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->startRecording($callControlID, params: $params, requestOptions: $requestOptions);
@@ -1369,17 +1370,17 @@ final class ActionsService implements ActionsContract
         string|SiprecTrack $siprecTrack = 'both_tracks',
         ?RequestOptions $requestOptions = null,
     ): ActionStartSiprecResponse {
-        $params = [
-            'clientState' => $clientState,
-            'connectorName' => $connectorName,
-            'includeMetadataCustomHeaders' => $includeMetadataCustomHeaders,
-            'secure' => $secure,
-            'sessionTimeoutSecs' => $sessionTimeoutSecs,
-            'sipTransport' => $sipTransport,
-            'siprecTrack' => $siprecTrack,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'clientState' => $clientState,
+                'connectorName' => $connectorName,
+                'includeMetadataCustomHeaders' => $includeMetadataCustomHeaders,
+                'secure' => $secure,
+                'sessionTimeoutSecs' => $sessionTimeoutSecs,
+                'sipTransport' => $sipTransport,
+                'siprecTrack' => $siprecTrack,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->startSiprec($callControlID, params: $params, requestOptions: $requestOptions);
@@ -1426,21 +1427,21 @@ final class ActionsService implements ActionsContract
         ?string $streamURL = null,
         ?RequestOptions $requestOptions = null,
     ): ActionStartStreamingResponse {
-        $params = [
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'dialogflowConfig' => $dialogflowConfig,
-            'enableDialogflow' => $enableDialogflow,
-            'streamBidirectionalCodec' => $streamBidirectionalCodec,
-            'streamBidirectionalMode' => $streamBidirectionalMode,
-            'streamBidirectionalSamplingRate' => $streamBidirectionalSamplingRate,
-            'streamBidirectionalTargetLegs' => $streamBidirectionalTargetLegs,
-            'streamCodec' => $streamCodec,
-            'streamTrack' => $streamTrack,
-            'streamURL' => $streamURL,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'dialogflowConfig' => $dialogflowConfig,
+                'enableDialogflow' => $enableDialogflow,
+                'streamBidirectionalCodec' => $streamBidirectionalCodec,
+                'streamBidirectionalMode' => $streamBidirectionalMode,
+                'streamBidirectionalSamplingRate' => $streamBidirectionalSamplingRate,
+                'streamBidirectionalTargetLegs' => $streamBidirectionalTargetLegs,
+                'streamCodec' => $streamCodec,
+                'streamTrack' => $streamTrack,
+                'streamURL' => $streamURL,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->startStreaming($callControlID, params: $params, requestOptions: $requestOptions);
@@ -1475,15 +1476,15 @@ final class ActionsService implements ActionsContract
         string $transcriptionTracks = 'inbound',
         ?RequestOptions $requestOptions = null,
     ): ActionStartTranscriptionResponse {
-        $params = [
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'transcriptionEngine' => $transcriptionEngine,
-            'transcriptionEngineConfig' => $transcriptionEngineConfig,
-            'transcriptionTracks' => $transcriptionTracks,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'transcriptionEngine' => $transcriptionEngine,
+                'transcriptionEngineConfig' => $transcriptionEngineConfig,
+                'transcriptionTracks' => $transcriptionTracks,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->startTranscription($callControlID, params: $params, requestOptions: $requestOptions);
@@ -1508,9 +1509,9 @@ final class ActionsService implements ActionsContract
         ?string $commandID = null,
         ?RequestOptions $requestOptions = null,
     ): ActionStopAIAssistantResponse {
-        $params = ['clientState' => $clientState, 'commandID' => $commandID];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['clientState' => $clientState, 'commandID' => $commandID]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->stopAIAssistant($callControlID, params: $params, requestOptions: $requestOptions);
@@ -1541,13 +1542,13 @@ final class ActionsService implements ActionsContract
         string|\Telnyx\Calls\Actions\ActionStopForkingParams\StreamType $streamType = 'raw',
         ?RequestOptions $requestOptions = null,
     ): ActionStopForkingResponse {
-        $params = [
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'streamType' => $streamType,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'streamType' => $streamType,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->stopForking($callControlID, params: $params, requestOptions: $requestOptions);
@@ -1576,9 +1577,9 @@ final class ActionsService implements ActionsContract
         ?string $commandID = null,
         ?RequestOptions $requestOptions = null,
     ): ActionStopGatherResponse {
-        $params = ['clientState' => $clientState, 'commandID' => $commandID];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['clientState' => $clientState, 'commandID' => $commandID]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->stopGather($callControlID, params: $params, requestOptions: $requestOptions);
@@ -1603,9 +1604,9 @@ final class ActionsService implements ActionsContract
         ?string $commandID = null,
         ?RequestOptions $requestOptions = null,
     ): ActionStopNoiseSuppressionResponse {
-        $params = ['clientState' => $clientState, 'commandID' => $commandID];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['clientState' => $clientState, 'commandID' => $commandID]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->stopNoiseSuppression($callControlID, params: $params, requestOptions: $requestOptions);
@@ -1638,14 +1639,14 @@ final class ActionsService implements ActionsContract
         string $stop = 'all',
         ?RequestOptions $requestOptions = null,
     ): ActionStopPlaybackResponse {
-        $params = [
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'overlay' => $overlay,
-            'stop' => $stop,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'overlay' => $overlay,
+                'stop' => $stop,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->stopPlayback($callControlID, params: $params, requestOptions: $requestOptions);
@@ -1676,13 +1677,13 @@ final class ActionsService implements ActionsContract
         ?string $recordingID = null,
         ?RequestOptions $requestOptions = null,
     ): ActionStopRecordingResponse {
-        $params = [
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'recordingID' => $recordingID,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'recordingID' => $recordingID,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->stopRecording($callControlID, params: $params, requestOptions: $requestOptions);
@@ -1711,9 +1712,9 @@ final class ActionsService implements ActionsContract
         ?string $commandID = null,
         ?RequestOptions $requestOptions = null,
     ): ActionStopSiprecResponse {
-        $params = ['clientState' => $clientState, 'commandID' => $commandID];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['clientState' => $clientState, 'commandID' => $commandID]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->stopSiprec($callControlID, params: $params, requestOptions: $requestOptions);
@@ -1744,13 +1745,13 @@ final class ActionsService implements ActionsContract
         ?string $streamID = null,
         ?RequestOptions $requestOptions = null,
     ): ActionStopStreamingResponse {
-        $params = [
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'streamID' => $streamID,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'streamID' => $streamID,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->stopStreaming($callControlID, params: $params, requestOptions: $requestOptions);
@@ -1775,9 +1776,9 @@ final class ActionsService implements ActionsContract
         ?string $commandID = null,
         ?RequestOptions $requestOptions = null,
     ): ActionStopTranscriptionResponse {
-        $params = ['clientState' => $clientState, 'commandID' => $commandID];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['clientState' => $clientState, 'commandID' => $commandID]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->stopTranscription($callControlID, params: $params, requestOptions: $requestOptions);
@@ -1800,7 +1801,7 @@ final class ActionsService implements ActionsContract
         string|\Telnyx\Calls\Actions\ActionSwitchSupervisorRoleParams\Role $role,
         ?RequestOptions $requestOptions = null,
     ): ActionSwitchSupervisorRoleResponse {
-        $params = ['role' => $role];
+        $params = Util::removeNulls(['role' => $role]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->switchSupervisorRole($callControlID, params: $params, requestOptions: $requestOptions);
@@ -1914,43 +1915,43 @@ final class ActionsService implements ActionsContract
         string|\Telnyx\Calls\Actions\ActionTransferParams\WebhookURLMethod $webhookURLMethod = 'POST',
         ?RequestOptions $requestOptions = null,
     ): ActionTransferResponse {
-        $params = [
-            'to' => $to,
-            'answeringMachineDetection' => $answeringMachineDetection,
-            'answeringMachineDetectionConfig' => $answeringMachineDetectionConfig,
-            'audioURL' => $audioURL,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'customHeaders' => $customHeaders,
-            'earlyMedia' => $earlyMedia,
-            'from' => $from,
-            'fromDisplayName' => $fromDisplayName,
-            'mediaEncryption' => $mediaEncryption,
-            'mediaName' => $mediaName,
-            'muteDtmf' => $muteDtmf,
-            'parkAfterUnbridge' => $parkAfterUnbridge,
-            'record' => $record,
-            'recordChannels' => $recordChannels,
-            'recordCustomFileName' => $recordCustomFileName,
-            'recordFormat' => $recordFormat,
-            'recordMaxLength' => $recordMaxLength,
-            'recordTimeoutSecs' => $recordTimeoutSecs,
-            'recordTrack' => $recordTrack,
-            'recordTrim' => $recordTrim,
-            'sipAuthPassword' => $sipAuthPassword,
-            'sipAuthUsername' => $sipAuthUsername,
-            'sipHeaders' => $sipHeaders,
-            'sipRegion' => $sipRegion,
-            'sipTransportProtocol' => $sipTransportProtocol,
-            'soundModifications' => $soundModifications,
-            'targetLegClientState' => $targetLegClientState,
-            'timeLimitSecs' => $timeLimitSecs,
-            'timeoutSecs' => $timeoutSecs,
-            'webhookURL' => $webhookURL,
-            'webhookURLMethod' => $webhookURLMethod,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'to' => $to,
+                'answeringMachineDetection' => $answeringMachineDetection,
+                'answeringMachineDetectionConfig' => $answeringMachineDetectionConfig,
+                'audioURL' => $audioURL,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'customHeaders' => $customHeaders,
+                'earlyMedia' => $earlyMedia,
+                'from' => $from,
+                'fromDisplayName' => $fromDisplayName,
+                'mediaEncryption' => $mediaEncryption,
+                'mediaName' => $mediaName,
+                'muteDtmf' => $muteDtmf,
+                'parkAfterUnbridge' => $parkAfterUnbridge,
+                'record' => $record,
+                'recordChannels' => $recordChannels,
+                'recordCustomFileName' => $recordCustomFileName,
+                'recordFormat' => $recordFormat,
+                'recordMaxLength' => $recordMaxLength,
+                'recordTimeoutSecs' => $recordTimeoutSecs,
+                'recordTrack' => $recordTrack,
+                'recordTrim' => $recordTrim,
+                'sipAuthPassword' => $sipAuthPassword,
+                'sipAuthUsername' => $sipAuthUsername,
+                'sipHeaders' => $sipHeaders,
+                'sipRegion' => $sipRegion,
+                'sipTransportProtocol' => $sipTransportProtocol,
+                'soundModifications' => $soundModifications,
+                'targetLegClientState' => $targetLegClientState,
+                'timeLimitSecs' => $timeLimitSecs,
+                'timeoutSecs' => $timeoutSecs,
+                'webhookURL' => $webhookURL,
+                'webhookURLMethod' => $webhookURLMethod,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->transfer($callControlID, params: $params, requestOptions: $requestOptions);
@@ -1973,7 +1974,7 @@ final class ActionsService implements ActionsContract
         string $clientState,
         ?RequestOptions $requestOptions = null,
     ): ActionUpdateClientStateResponse {
-        $params = ['clientState' => $clientState];
+        $params = Util::removeNulls(['clientState' => $clientState]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->updateClientState($callControlID, params: $params, requestOptions: $requestOptions);

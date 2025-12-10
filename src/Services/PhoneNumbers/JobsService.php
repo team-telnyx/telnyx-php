@@ -6,6 +6,7 @@ namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\Jobs\JobDeleteBatchResponse;
 use Telnyx\PhoneNumbers\Jobs\JobGetResponse;
@@ -85,9 +86,9 @@ final class JobsService implements JobsContract
         string|Sort|null $sort = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['filter' => $filter, 'page' => $page, 'sort' => $sort]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -108,7 +109,7 @@ final class JobsService implements JobsContract
         array $phoneNumbers,
         ?RequestOptions $requestOptions = null
     ): JobDeleteBatchResponse {
-        $params = ['phoneNumbers' => $phoneNumbers];
+        $params = Util::removeNulls(['phoneNumbers' => $phoneNumbers]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->deleteBatch(params: $params, requestOptions: $requestOptions);
@@ -184,20 +185,20 @@ final class JobsService implements JobsContract
         ?array $voice = null,
         ?RequestOptions $requestOptions = null,
     ): JobUpdateBatchResponse {
-        $params = [
-            'phoneNumbers' => $phoneNumbers,
-            'filter' => $filter,
-            'billingGroupID' => $billingGroupID,
-            'connectionID' => $connectionID,
-            'customerReference' => $customerReference,
-            'deletionLockEnabled' => $deletionLockEnabled,
-            'externalPin' => $externalPin,
-            'hdVoiceEnabled' => $hdVoiceEnabled,
-            'tags' => $tags,
-            'voice' => $voice,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'phoneNumbers' => $phoneNumbers,
+                'filter' => $filter,
+                'billingGroupID' => $billingGroupID,
+                'connectionID' => $connectionID,
+                'customerReference' => $customerReference,
+                'deletionLockEnabled' => $deletionLockEnabled,
+                'externalPin' => $externalPin,
+                'hdVoiceEnabled' => $hdVoiceEnabled,
+                'tags' => $tags,
+                'voice' => $voice,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->updateBatch(params: $params, requestOptions: $requestOptions);
@@ -222,13 +223,13 @@ final class JobsService implements JobsContract
         ?string $emergencyAddressID = null,
         ?RequestOptions $requestOptions = null,
     ): JobUpdateEmergencySettingsBatchResponse {
-        $params = [
-            'emergencyEnabled' => $emergencyEnabled,
-            'phoneNumbers' => $phoneNumbers,
-            'emergencyAddressID' => $emergencyAddressID,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'emergencyEnabled' => $emergencyEnabled,
+                'phoneNumbers' => $phoneNumbers,
+                'emergencyAddressID' => $emergencyAddressID,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->updateEmergencySettingsBatch(params: $params, requestOptions: $requestOptions);

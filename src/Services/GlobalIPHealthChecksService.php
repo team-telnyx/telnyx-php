@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckDeleteResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckGetResponse;
@@ -46,13 +47,13 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
         ?string $healthCheckType = null,
         ?RequestOptions $requestOptions = null,
     ): GlobalIPHealthCheckNewResponse {
-        $params = [
-            'globalIPID' => $globalIPID,
-            'healthCheckParams' => $healthCheckParams,
-            'healthCheckType' => $healthCheckType,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'globalIPID' => $globalIPID,
+                'healthCheckParams' => $healthCheckParams,
+                'healthCheckType' => $healthCheckType,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -96,9 +97,7 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
         ?array $page = null,
         ?RequestOptions $requestOptions = null
     ): DefaultPagination {
-        $params = ['page' => $page];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

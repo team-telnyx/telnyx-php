@@ -6,6 +6,7 @@ namespace Telnyx\Services\Rooms\Sessions;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\Sessions\Actions\ActionEndResponse;
 use Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants\AllParticipants;
@@ -65,9 +66,9 @@ final class ActionsService implements ActionsContract
         string|AllParticipants|array|null $participants = null,
         ?RequestOptions $requestOptions = null,
     ): ActionKickResponse {
-        $params = ['exclude' => $exclude, 'participants' => $participants];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['exclude' => $exclude, 'participants' => $participants]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->kick($roomSessionID, params: $params, requestOptions: $requestOptions);
@@ -92,9 +93,9 @@ final class ActionsService implements ActionsContract
         string|\Telnyx\Rooms\Sessions\Actions\ActionMuteParams\Participants\AllParticipants|array|null $participants = null,
         ?RequestOptions $requestOptions = null,
     ): ActionMuteResponse {
-        $params = ['exclude' => $exclude, 'participants' => $participants];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['exclude' => $exclude, 'participants' => $participants]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->mute($roomSessionID, params: $params, requestOptions: $requestOptions);
@@ -119,9 +120,9 @@ final class ActionsService implements ActionsContract
         string|\Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants\AllParticipants|array|null $participants = null,
         ?RequestOptions $requestOptions = null,
     ): ActionUnmuteResponse {
-        $params = ['exclude' => $exclude, 'participants' => $participants];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['exclude' => $exclude, 'participants' => $participants]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->unmute($roomSessionID, params: $params, requestOptions: $requestOptions);

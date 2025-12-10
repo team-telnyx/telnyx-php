@@ -8,6 +8,7 @@ use Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployResponse;
 use Telnyx\AI\Assistants\CanaryDeploys\VersionConfig;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\CanaryDeploysContract;
 
@@ -45,7 +46,7 @@ final class CanaryDeploysService implements CanaryDeploysContract
         array $versions,
         ?RequestOptions $requestOptions = null
     ): CanaryDeployResponse {
-        $params = ['versions' => $versions];
+        $params = Util::removeNulls(['versions' => $versions]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($assistantID, params: $params, requestOptions: $requestOptions);
@@ -92,7 +93,7 @@ final class CanaryDeploysService implements CanaryDeploysContract
         array $versions,
         ?RequestOptions $requestOptions = null
     ): CanaryDeployResponse {
-        $params = ['versions' => $versions];
+        $params = Util::removeNulls(['versions' => $versions]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($assistantID, params: $params, requestOptions: $requestOptions);

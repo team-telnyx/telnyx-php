@@ -6,6 +6,7 @@ namespace Telnyx\Services\Legacy\Reporting\BatchDetailRecords;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SpeechToTextDeleteResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SpeechToTextGetResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SpeechToTextListResponse;
@@ -43,7 +44,9 @@ final class SpeechToTextService implements SpeechToTextContract
         string|\DateTimeInterface $startDate,
         ?RequestOptions $requestOptions = null,
     ): SpeechToTextNewResponse {
-        $params = ['endDate' => $endDate, 'startDate' => $startDate];
+        $params = Util::removeNulls(
+            ['endDate' => $endDate, 'startDate' => $startDate]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);

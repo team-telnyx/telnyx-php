@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\MessagingOptouts\MessagingOptoutListResponse;
 use Telnyx\RequestOptions;
@@ -53,14 +54,14 @@ final class MessagingOptoutsService implements MessagingOptoutsContract
         ?string $redactionEnabled = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = [
-            'createdAt' => $createdAt,
-            'filter' => $filter,
-            'page' => $page,
-            'redactionEnabled' => $redactionEnabled,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'createdAt' => $createdAt,
+                'filter' => $filter,
+                'page' => $page,
+                'redactionEnabled' => $redactionEnabled,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

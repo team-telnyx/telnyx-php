@@ -6,6 +6,7 @@ namespace Telnyx\Services\Number10dlc;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Number10dlc\Campaign\TelnyxCampaignCsp;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Number10dlc\CampaignBuilderContract;
@@ -113,45 +114,45 @@ final class CampaignBuilderService implements CampaignBuilderContract
         ?string $webhookURL = null,
         ?RequestOptions $requestOptions = null,
     ): TelnyxCampaignCsp {
-        $params = [
-            'brandID' => $brandID,
-            'description' => $description,
-            'usecase' => $usecase,
-            'ageGated' => $ageGated,
-            'autoRenewal' => $autoRenewal,
-            'directLending' => $directLending,
-            'embeddedLink' => $embeddedLink,
-            'embeddedLinkSample' => $embeddedLinkSample,
-            'embeddedPhone' => $embeddedPhone,
-            'helpKeywords' => $helpKeywords,
-            'helpMessage' => $helpMessage,
-            'messageFlow' => $messageFlow,
-            'mnoIDs' => $mnoIDs,
-            'numberPool' => $numberPool,
-            'optinKeywords' => $optinKeywords,
-            'optinMessage' => $optinMessage,
-            'optoutKeywords' => $optoutKeywords,
-            'optoutMessage' => $optoutMessage,
-            'privacyPolicyLink' => $privacyPolicyLink,
-            'referenceID' => $referenceID,
-            'resellerID' => $resellerID,
-            'sample1' => $sample1,
-            'sample2' => $sample2,
-            'sample3' => $sample3,
-            'sample4' => $sample4,
-            'sample5' => $sample5,
-            'subscriberHelp' => $subscriberHelp,
-            'subscriberOptin' => $subscriberOptin,
-            'subscriberOptout' => $subscriberOptout,
-            'subUsecases' => $subUsecases,
-            'tag' => $tag,
-            'termsAndConditions' => $termsAndConditions,
-            'termsAndConditionsLink' => $termsAndConditionsLink,
-            'webhookFailoverURL' => $webhookFailoverURL,
-            'webhookURL' => $webhookURL,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'brandID' => $brandID,
+                'description' => $description,
+                'usecase' => $usecase,
+                'ageGated' => $ageGated,
+                'autoRenewal' => $autoRenewal,
+                'directLending' => $directLending,
+                'embeddedLink' => $embeddedLink,
+                'embeddedLinkSample' => $embeddedLinkSample,
+                'embeddedPhone' => $embeddedPhone,
+                'helpKeywords' => $helpKeywords,
+                'helpMessage' => $helpMessage,
+                'messageFlow' => $messageFlow,
+                'mnoIDs' => $mnoIDs,
+                'numberPool' => $numberPool,
+                'optinKeywords' => $optinKeywords,
+                'optinMessage' => $optinMessage,
+                'optoutKeywords' => $optoutKeywords,
+                'optoutMessage' => $optoutMessage,
+                'privacyPolicyLink' => $privacyPolicyLink,
+                'referenceID' => $referenceID,
+                'resellerID' => $resellerID,
+                'sample1' => $sample1,
+                'sample2' => $sample2,
+                'sample3' => $sample3,
+                'sample4' => $sample4,
+                'sample5' => $sample5,
+                'subscriberHelp' => $subscriberHelp,
+                'subscriberOptin' => $subscriberOptin,
+                'subscriberOptout' => $subscriberOptout,
+                'subUsecases' => $subUsecases,
+                'tag' => $tag,
+                'termsAndConditions' => $termsAndConditions,
+                'termsAndConditionsLink' => $termsAndConditionsLink,
+                'webhookFailoverURL' => $webhookFailoverURL,
+                'webhookURL' => $webhookURL,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->submit(params: $params, requestOptions: $requestOptions);

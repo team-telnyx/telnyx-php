@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\NotificationProfiles\NotificationProfile;
 use Telnyx\NotificationProfiles\NotificationProfileDeleteResponse;
@@ -43,9 +44,7 @@ final class NotificationProfilesService implements NotificationProfilesContract
         ?string $name = null,
         ?RequestOptions $requestOptions = null
     ): NotificationProfileNewResponse {
-        $params = ['name' => $name];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['name' => $name]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -87,9 +86,7 @@ final class NotificationProfilesService implements NotificationProfilesContract
         ?string $name = null,
         ?RequestOptions $requestOptions = null,
     ): NotificationProfileUpdateResponse {
-        $params = ['name' => $name];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['name' => $name]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($notificationProfileID, params: $params, requestOptions: $requestOptions);
@@ -114,9 +111,7 @@ final class NotificationProfilesService implements NotificationProfilesContract
         ?array $page = null,
         ?RequestOptions $requestOptions = null
     ): DefaultPagination {
-        $params = ['page' => $page];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

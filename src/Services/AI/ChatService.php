@@ -9,6 +9,7 @@ use Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Role;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\ToolChoice;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\ChatContract;
 
@@ -93,33 +94,33 @@ final class ChatService implements ChatContract
         bool $useBeamSearch = false,
         ?RequestOptions $requestOptions = null,
     ): array {
-        $params = [
-            'messages' => $messages,
-            'apiKeyRef' => $apiKeyRef,
-            'bestOf' => $bestOf,
-            'earlyStopping' => $earlyStopping,
-            'frequencyPenalty' => $frequencyPenalty,
-            'guidedChoice' => $guidedChoice,
-            'guidedJson' => $guidedJson,
-            'guidedRegex' => $guidedRegex,
-            'lengthPenalty' => $lengthPenalty,
-            'logprobs' => $logprobs,
-            'maxTokens' => $maxTokens,
-            'minP' => $minP,
-            'model' => $model,
-            'n' => $n,
-            'presencePenalty' => $presencePenalty,
-            'responseFormat' => $responseFormat,
-            'stream' => $stream,
-            'temperature' => $temperature,
-            'toolChoice' => $toolChoice,
-            'tools' => $tools,
-            'topLogprobs' => $topLogprobs,
-            'topP' => $topP,
-            'useBeamSearch' => $useBeamSearch,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'messages' => $messages,
+                'apiKeyRef' => $apiKeyRef,
+                'bestOf' => $bestOf,
+                'earlyStopping' => $earlyStopping,
+                'frequencyPenalty' => $frequencyPenalty,
+                'guidedChoice' => $guidedChoice,
+                'guidedJson' => $guidedJson,
+                'guidedRegex' => $guidedRegex,
+                'lengthPenalty' => $lengthPenalty,
+                'logprobs' => $logprobs,
+                'maxTokens' => $maxTokens,
+                'minP' => $minP,
+                'model' => $model,
+                'n' => $n,
+                'presencePenalty' => $presencePenalty,
+                'responseFormat' => $responseFormat,
+                'stream' => $stream,
+                'temperature' => $temperature,
+                'toolChoice' => $toolChoice,
+                'tools' => $tools,
+                'topLogprobs' => $topLogprobs,
+                'topP' => $topP,
+                'useBeamSearch' => $useBeamSearch,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->createCompletion(params: $params, requestOptions: $requestOptions);

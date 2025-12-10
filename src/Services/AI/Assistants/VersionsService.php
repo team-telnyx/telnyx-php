@@ -18,6 +18,7 @@ use Telnyx\AI\Assistants\TranscriptionSettingsConfig;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\VersionsContract;
 
@@ -53,11 +54,9 @@ final class VersionsService implements VersionsContract
         ?bool $includeMcpServers = null,
         ?RequestOptions $requestOptions = null,
     ): InferenceEmbedding {
-        $params = [
-            'assistantID' => $assistantID, 'includeMcpServers' => $includeMcpServers,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['assistantID' => $assistantID, 'includeMcpServers' => $includeMcpServers]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($versionID, params: $params, requestOptions: $requestOptions);
@@ -133,27 +132,27 @@ final class VersionsService implements VersionsContract
         array|VoiceSettings|null $voiceSettings = null,
         ?RequestOptions $requestOptions = null,
     ): InferenceEmbedding {
-        $params = [
-            'assistantID' => $assistantID,
-            'description' => $description,
-            'dynamicVariables' => $dynamicVariables,
-            'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL,
-            'enabledFeatures' => $enabledFeatures,
-            'greeting' => $greeting,
-            'insightSettings' => $insightSettings,
-            'instructions' => $instructions,
-            'llmAPIKeyRef' => $llmAPIKeyRef,
-            'messagingSettings' => $messagingSettings,
-            'model' => $model,
-            'name' => $name,
-            'privacySettings' => $privacySettings,
-            'telephonySettings' => $telephonySettings,
-            'tools' => $tools,
-            'transcription' => $transcription,
-            'voiceSettings' => $voiceSettings,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'assistantID' => $assistantID,
+                'description' => $description,
+                'dynamicVariables' => $dynamicVariables,
+                'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL,
+                'enabledFeatures' => $enabledFeatures,
+                'greeting' => $greeting,
+                'insightSettings' => $insightSettings,
+                'instructions' => $instructions,
+                'llmAPIKeyRef' => $llmAPIKeyRef,
+                'messagingSettings' => $messagingSettings,
+                'model' => $model,
+                'name' => $name,
+                'privacySettings' => $privacySettings,
+                'telephonySettings' => $telephonySettings,
+                'tools' => $tools,
+                'transcription' => $transcription,
+                'voiceSettings' => $voiceSettings,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($versionID, params: $params, requestOptions: $requestOptions);
@@ -190,7 +189,7 @@ final class VersionsService implements VersionsContract
         string $assistantID,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = ['assistantID' => $assistantID];
+        $params = Util::removeNulls(['assistantID' => $assistantID]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($versionID, params: $params, requestOptions: $requestOptions);
@@ -210,7 +209,7 @@ final class VersionsService implements VersionsContract
         string $assistantID,
         ?RequestOptions $requestOptions = null,
     ): InferenceEmbedding {
-        $params = ['assistantID' => $assistantID];
+        $params = Util::removeNulls(['assistantID' => $assistantID]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->promote($versionID, params: $params, requestOptions: $requestOptions);

@@ -10,6 +10,7 @@ use Telnyx\AI\Audio\AudioTranscribeParams\TimestampGranularities;
 use Telnyx\AI\Audio\AudioTranscribeResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\AudioContract;
 
@@ -49,15 +50,15 @@ final class AudioService implements AudioContract
         string|TimestampGranularities|null $timestampGranularities = null,
         ?RequestOptions $requestOptions = null,
     ): AudioTranscribeResponse {
-        $params = [
-            'model' => $model,
-            'file' => $file,
-            'fileURL' => $fileURL,
-            'responseFormat' => $responseFormat,
-            'timestampGranularities' => $timestampGranularities,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'model' => $model,
+                'file' => $file,
+                'fileURL' => $fileURL,
+                'responseFormat' => $responseFormat,
+                'timestampGranularities' => $timestampGranularities,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->transcribe(params: $params, requestOptions: $requestOptions);

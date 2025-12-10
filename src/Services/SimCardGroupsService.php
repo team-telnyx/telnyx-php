@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardGroupsContract;
@@ -54,9 +55,7 @@ final class SimCardGroupsService implements SimCardGroupsContract
         ?array $dataLimit = null,
         ?RequestOptions $requestOptions = null,
     ): SimCardGroupNewResponse {
-        $params = ['name' => $name, 'dataLimit' => $dataLimit];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['name' => $name, 'dataLimit' => $dataLimit]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -79,9 +78,7 @@ final class SimCardGroupsService implements SimCardGroupsContract
         bool $includeIccids = false,
         ?RequestOptions $requestOptions = null,
     ): SimCardGroupGetResponse {
-        $params = ['includeIccids' => $includeIccids];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['includeIccids' => $includeIccids]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, params: $params, requestOptions: $requestOptions);
@@ -108,9 +105,7 @@ final class SimCardGroupsService implements SimCardGroupsContract
         ?string $name = null,
         ?RequestOptions $requestOptions = null,
     ): SimCardGroupUpdateResponse {
-        $params = ['dataLimit' => $dataLimit, 'name' => $name];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['dataLimit' => $dataLimit, 'name' => $name]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
@@ -141,15 +136,15 @@ final class SimCardGroupsService implements SimCardGroupsContract
         int $pageSize = 20,
         ?RequestOptions $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = [
-            'filterName' => $filterName,
-            'filterPrivateWirelessGatewayID' => $filterPrivateWirelessGatewayID,
-            'filterWirelessBlocklistID' => $filterWirelessBlocklistID,
-            'pageNumber' => $pageNumber,
-            'pageSize' => $pageSize,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'filterName' => $filterName,
+                'filterPrivateWirelessGatewayID' => $filterPrivateWirelessGatewayID,
+                'filterWirelessBlocklistID' => $filterWirelessBlocklistID,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

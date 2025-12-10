@@ -6,6 +6,7 @@ namespace Telnyx\Services\Number10dlc\CampaignBuilder;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Number10dlc\CampaignBuilder\Brand\BrandQualifyByUsecaseResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Number10dlc\CampaignBuilder\BrandContract;
@@ -37,7 +38,7 @@ final class BrandService implements BrandContract
         string $brandID,
         ?RequestOptions $requestOptions = null
     ): BrandQualifyByUsecaseResponse {
-        $params = ['brandID' => $brandID];
+        $params = Util::removeNulls(['brandID' => $brandID]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->qualifyByUsecase($usecase, params: $params, requestOptions: $requestOptions);

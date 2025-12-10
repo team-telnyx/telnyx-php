@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\ExternalConnections\ExternalConnection;
 use Telnyx\ExternalConnections\ExternalConnectionDeleteResponse;
@@ -94,18 +95,18 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
         ?int $webhookTimeoutSecs = null,
         ?RequestOptions $requestOptions = null,
     ): ExternalConnectionNewResponse {
-        $params = [
-            'externalSipConnection' => $externalSipConnection,
-            'outbound' => $outbound,
-            'active' => $active,
-            'inbound' => $inbound,
-            'tags' => $tags,
-            'webhookEventFailoverURL' => $webhookEventFailoverURL,
-            'webhookEventURL' => $webhookEventURL,
-            'webhookTimeoutSecs' => $webhookTimeoutSecs,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'externalSipConnection' => $externalSipConnection,
+                'outbound' => $outbound,
+                'active' => $active,
+                'inbound' => $inbound,
+                'tags' => $tags,
+                'webhookEventFailoverURL' => $webhookEventFailoverURL,
+                'webhookEventURL' => $webhookEventURL,
+                'webhookTimeoutSecs' => $webhookTimeoutSecs,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -159,17 +160,17 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
         ?int $webhookTimeoutSecs = null,
         ?RequestOptions $requestOptions = null,
     ): ExternalConnectionUpdateResponse {
-        $params = [
-            'outbound' => $outbound,
-            'active' => $active,
-            'inbound' => $inbound,
-            'tags' => $tags,
-            'webhookEventFailoverURL' => $webhookEventFailoverURL,
-            'webhookEventURL' => $webhookEventURL,
-            'webhookTimeoutSecs' => $webhookTimeoutSecs,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'outbound' => $outbound,
+                'active' => $active,
+                'inbound' => $inbound,
+                'tags' => $tags,
+                'webhookEventFailoverURL' => $webhookEventFailoverURL,
+                'webhookEventURL' => $webhookEventURL,
+                'webhookTimeoutSecs' => $webhookTimeoutSecs,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
@@ -202,9 +203,7 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = ['filter' => $filter, 'page' => $page];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -248,9 +247,9 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
         string $staticEmergencyAddressID,
         ?RequestOptions $requestOptions = null,
     ): ExternalConnectionUpdateLocationResponse {
-        $params = [
-            'id' => $id, 'staticEmergencyAddressID' => $staticEmergencyAddressID,
-        ];
+        $params = Util::removeNulls(
+            ['id' => $id, 'staticEmergencyAddressID' => $staticEmergencyAddressID]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->updateLocation($locationID, params: $params, requestOptions: $requestOptions);

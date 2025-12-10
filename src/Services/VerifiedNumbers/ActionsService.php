@@ -6,6 +6,7 @@ namespace Telnyx\Services\VerifiedNumbers;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerifiedNumbers\ActionsContract;
 use Telnyx\VerifiedNumbers\VerifiedNumberDataWrapper;
@@ -39,7 +40,7 @@ final class ActionsService implements ActionsContract
         string $verificationCode,
         ?RequestOptions $requestOptions = null,
     ): VerifiedNumberDataWrapper {
-        $params = ['verificationCode' => $verificationCode];
+        $params = Util::removeNulls(['verificationCode' => $verificationCode]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->submitVerificationCode($phoneNumber, params: $params, requestOptions: $requestOptions);

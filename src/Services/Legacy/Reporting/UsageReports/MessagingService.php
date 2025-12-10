@@ -6,6 +6,7 @@ namespace Telnyx\Services\Legacy\Reporting\UsageReports;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MdrUsageReportResponseLegacy;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingDeleteResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingGetResponse;
@@ -49,16 +50,16 @@ final class MessagingService implements MessagingContract
         string|\DateTimeInterface|null $startTime = null,
         ?RequestOptions $requestOptions = null,
     ): MessagingNewResponse {
-        $params = [
-            'aggregationType' => $aggregationType,
-            'endTime' => $endTime,
-            'managedAccounts' => $managedAccounts,
-            'profiles' => $profiles,
-            'selectAllManagedAccounts' => $selectAllManagedAccounts,
-            'startTime' => $startTime,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'aggregationType' => $aggregationType,
+                'endTime' => $endTime,
+                'managedAccounts' => $managedAccounts,
+                'profiles' => $profiles,
+                'selectAllManagedAccounts' => $selectAllManagedAccounts,
+                'startTime' => $startTime,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -100,9 +101,7 @@ final class MessagingService implements MessagingContract
         int $perPage = 20,
         ?RequestOptions $requestOptions = null
     ): PerPagePagination {
-        $params = ['page' => $page, 'perPage' => $perPage];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['page' => $page, 'perPage' => $perPage]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

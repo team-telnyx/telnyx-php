@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberGetResponse;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListResponse;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementGroupResponse;
@@ -62,9 +63,7 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
         ?array $filter = null,
         ?RequestOptions $requestOptions = null
     ): NumberOrderPhoneNumberListResponse {
-        $params = ['filter' => $filter];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['filter' => $filter]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -87,7 +86,7 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
         string $requirementGroupID,
         ?RequestOptions $requestOptions = null,
     ): NumberOrderPhoneNumberUpdateRequirementGroupResponse {
-        $params = ['requirementGroupID' => $requirementGroupID];
+        $params = Util::removeNulls(['requirementGroupID' => $requirementGroupID]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->updateRequirementGroup($id, params: $params, requestOptions: $requestOptions);
@@ -112,9 +111,9 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
         ?array $regulatoryRequirements = null,
         ?RequestOptions $requestOptions = null,
     ): NumberOrderPhoneNumberUpdateRequirementsResponse {
-        $params = ['regulatoryRequirements' => $regulatoryRequirements];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['regulatoryRequirements' => $regulatoryRequirements]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->updateRequirements($numberOrderPhoneNumberID, params: $params, requestOptions: $requestOptions);

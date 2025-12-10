@@ -205,7 +205,7 @@ final class JobsRawService implements JobsRawContract
         return $this->client->request(
             method: 'post',
             path: 'phone_numbers/jobs/update_phone_numbers',
-            query: array_diff_key($parsed, $query_params),
+            query: array_intersect_key($parsed, $query_params),
             body: (object) array_diff_key($parsed, $query_params),
             options: $options,
             convert: JobUpdateBatchResponse::class,

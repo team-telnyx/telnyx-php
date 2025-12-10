@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Messages\MessageCancelScheduledResponse;
 use Telnyx\Messages\MessageGetResponse;
 use Telnyx\Messages\MessageScheduleParams\Type;
@@ -125,22 +126,22 @@ final class MessagesService implements MessagesContract
         ?string $webhookURL = null,
         ?RequestOptions $requestOptions = null,
     ): MessageScheduleResponse {
-        $params = [
-            'to' => $to,
-            'autoDetect' => $autoDetect,
-            'from' => $from,
-            'mediaURLs' => $mediaURLs,
-            'messagingProfileID' => $messagingProfileID,
-            'sendAt' => $sendAt,
-            'subject' => $subject,
-            'text' => $text,
-            'type' => $type,
-            'useProfileWebhooks' => $useProfileWebhooks,
-            'webhookFailoverURL' => $webhookFailoverURL,
-            'webhookURL' => $webhookURL,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'to' => $to,
+                'autoDetect' => $autoDetect,
+                'from' => $from,
+                'mediaURLs' => $mediaURLs,
+                'messagingProfileID' => $messagingProfileID,
+                'sendAt' => $sendAt,
+                'subject' => $subject,
+                'text' => $text,
+                'type' => $type,
+                'useProfileWebhooks' => $useProfileWebhooks,
+                'webhookFailoverURL' => $webhookFailoverURL,
+                'webhookURL' => $webhookURL,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->schedule(params: $params, requestOptions: $requestOptions);
@@ -195,22 +196,22 @@ final class MessagesService implements MessagesContract
         ?string $webhookURL = null,
         ?RequestOptions $requestOptions = null,
     ): MessageSendResponse {
-        $params = [
-            'to' => $to,
-            'autoDetect' => $autoDetect,
-            'from' => $from,
-            'mediaURLs' => $mediaURLs,
-            'messagingProfileID' => $messagingProfileID,
-            'sendAt' => $sendAt,
-            'subject' => $subject,
-            'text' => $text,
-            'type' => $type,
-            'useProfileWebhooks' => $useProfileWebhooks,
-            'webhookFailoverURL' => $webhookFailoverURL,
-            'webhookURL' => $webhookURL,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'to' => $to,
+                'autoDetect' => $autoDetect,
+                'from' => $from,
+                'mediaURLs' => $mediaURLs,
+                'messagingProfileID' => $messagingProfileID,
+                'sendAt' => $sendAt,
+                'subject' => $subject,
+                'text' => $text,
+                'type' => $type,
+                'useProfileWebhooks' => $useProfileWebhooks,
+                'webhookFailoverURL' => $webhookFailoverURL,
+                'webhookURL' => $webhookURL,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->send(params: $params, requestOptions: $requestOptions);
@@ -245,18 +246,18 @@ final class MessagesService implements MessagesContract
         ?string $webhookURL = null,
         ?RequestOptions $requestOptions = null,
     ): MessageSendGroupMmsResponse {
-        $params = [
-            'from' => $from,
-            'to' => $to,
-            'mediaURLs' => $mediaURLs,
-            'subject' => $subject,
-            'text' => $text,
-            'useProfileWebhooks' => $useProfileWebhooks,
-            'webhookFailoverURL' => $webhookFailoverURL,
-            'webhookURL' => $webhookURL,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'from' => $from,
+                'to' => $to,
+                'mediaURLs' => $mediaURLs,
+                'subject' => $subject,
+                'text' => $text,
+                'useProfileWebhooks' => $useProfileWebhooks,
+                'webhookFailoverURL' => $webhookFailoverURL,
+                'webhookURL' => $webhookURL,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->sendGroupMms(params: $params, requestOptions: $requestOptions);
@@ -299,20 +300,20 @@ final class MessagesService implements MessagesContract
         ?string $webhookURL = null,
         ?RequestOptions $requestOptions = null,
     ): MessageSendLongCodeResponse {
-        $params = [
-            'from' => $from,
-            'to' => $to,
-            'autoDetect' => $autoDetect,
-            'mediaURLs' => $mediaURLs,
-            'subject' => $subject,
-            'text' => $text,
-            'type' => $type,
-            'useProfileWebhooks' => $useProfileWebhooks,
-            'webhookFailoverURL' => $webhookFailoverURL,
-            'webhookURL' => $webhookURL,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'from' => $from,
+                'to' => $to,
+                'autoDetect' => $autoDetect,
+                'mediaURLs' => $mediaURLs,
+                'subject' => $subject,
+                'text' => $text,
+                'type' => $type,
+                'useProfileWebhooks' => $useProfileWebhooks,
+                'webhookFailoverURL' => $webhookFailoverURL,
+                'webhookURL' => $webhookURL,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->sendLongCode(params: $params, requestOptions: $requestOptions);
@@ -355,20 +356,20 @@ final class MessagesService implements MessagesContract
         ?string $webhookURL = null,
         ?RequestOptions $requestOptions = null,
     ): MessageSendNumberPoolResponse {
-        $params = [
-            'messagingProfileID' => $messagingProfileID,
-            'to' => $to,
-            'autoDetect' => $autoDetect,
-            'mediaURLs' => $mediaURLs,
-            'subject' => $subject,
-            'text' => $text,
-            'type' => $type,
-            'useProfileWebhooks' => $useProfileWebhooks,
-            'webhookFailoverURL' => $webhookFailoverURL,
-            'webhookURL' => $webhookURL,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'messagingProfileID' => $messagingProfileID,
+                'to' => $to,
+                'autoDetect' => $autoDetect,
+                'mediaURLs' => $mediaURLs,
+                'subject' => $subject,
+                'text' => $text,
+                'type' => $type,
+                'useProfileWebhooks' => $useProfileWebhooks,
+                'webhookFailoverURL' => $webhookFailoverURL,
+                'webhookURL' => $webhookURL,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->sendNumberPool(params: $params, requestOptions: $requestOptions);
@@ -411,20 +412,20 @@ final class MessagesService implements MessagesContract
         ?string $webhookURL = null,
         ?RequestOptions $requestOptions = null,
     ): MessageSendShortCodeResponse {
-        $params = [
-            'from' => $from,
-            'to' => $to,
-            'autoDetect' => $autoDetect,
-            'mediaURLs' => $mediaURLs,
-            'subject' => $subject,
-            'text' => $text,
-            'type' => $type,
-            'useProfileWebhooks' => $useProfileWebhooks,
-            'webhookFailoverURL' => $webhookFailoverURL,
-            'webhookURL' => $webhookURL,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'from' => $from,
+                'to' => $to,
+                'autoDetect' => $autoDetect,
+                'mediaURLs' => $mediaURLs,
+                'subject' => $subject,
+                'text' => $text,
+                'type' => $type,
+                'useProfileWebhooks' => $useProfileWebhooks,
+                'webhookFailoverURL' => $webhookFailoverURL,
+                'webhookURL' => $webhookURL,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->sendShortCode(params: $params, requestOptions: $requestOptions);

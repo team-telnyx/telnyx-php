@@ -6,6 +6,7 @@ namespace Telnyx\Services\Texml\Accounts;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\ConferencesContract;
 use Telnyx\Services\Texml\Accounts\Conferences\ParticipantsService;
@@ -53,7 +54,7 @@ final class ConferencesService implements ConferencesContract
         string $accountSid,
         ?RequestOptions $requestOptions = null,
     ): ConferenceGetResponse {
-        $params = ['accountSid' => $accountSid];
+        $params = Util::removeNulls(['accountSid' => $accountSid]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($conferenceSid, params: $params, requestOptions: $requestOptions);
@@ -82,14 +83,14 @@ final class ConferencesService implements ConferencesContract
         ?string $status = null,
         ?RequestOptions $requestOptions = null,
     ): ConferenceUpdateResponse {
-        $params = [
-            'accountSid' => $accountSid,
-            'announceMethod' => $announceMethod,
-            'announceURL' => $announceURL,
-            'status' => $status,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'accountSid' => $accountSid,
+                'announceMethod' => $announceMethod,
+                'announceURL' => $announceURL,
+                'status' => $status,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($conferenceSid, params: $params, requestOptions: $requestOptions);
@@ -124,17 +125,17 @@ final class ConferencesService implements ConferencesContract
         string|Status|null $status = null,
         ?RequestOptions $requestOptions = null,
     ): ConferenceGetConferencesResponse {
-        $params = [
-            'dateCreated' => $dateCreated,
-            'dateUpdated' => $dateUpdated,
-            'friendlyName' => $friendlyName,
-            'page' => $page,
-            'pageSize' => $pageSize,
-            'pageToken' => $pageToken,
-            'status' => $status,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'dateCreated' => $dateCreated,
+                'dateUpdated' => $dateUpdated,
+                'friendlyName' => $friendlyName,
+                'page' => $page,
+                'pageSize' => $pageSize,
+                'pageToken' => $pageToken,
+                'status' => $status,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveConferences($accountSid, params: $params, requestOptions: $requestOptions);
@@ -157,7 +158,7 @@ final class ConferencesService implements ConferencesContract
         string $accountSid,
         ?RequestOptions $requestOptions = null,
     ): ConferenceGetRecordingsResponse {
-        $params = ['accountSid' => $accountSid];
+        $params = Util::removeNulls(['accountSid' => $accountSid]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveRecordings($conferenceSid, params: $params, requestOptions: $requestOptions);
@@ -180,7 +181,7 @@ final class ConferencesService implements ConferencesContract
         string $accountSid,
         ?RequestOptions $requestOptions = null,
     ): ConferenceGetRecordingsJsonResponse {
-        $params = ['accountSid' => $accountSid];
+        $params = Util::removeNulls(['accountSid' => $accountSid]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveRecordingsJson($conferenceSid, params: $params, requestOptions: $requestOptions);

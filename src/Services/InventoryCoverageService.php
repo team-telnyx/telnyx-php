@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\InventoryCoverage\InventoryCoverageListParams\Filter\CountryCode;
 use Telnyx\InventoryCoverage\InventoryCoverageListParams\Filter\Feature;
 use Telnyx\InventoryCoverage\InventoryCoverageListParams\Filter\GroupBy;
@@ -51,9 +52,7 @@ final class InventoryCoverageService implements InventoryCoverageContract
         ?array $filter = null,
         ?RequestOptions $requestOptions = null
     ): InventoryCoverageListResponse {
-        $params = ['filter' => $filter];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['filter' => $filter]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

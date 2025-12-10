@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerificationsContract;
 use Telnyx\Services\Verifications\ActionsService;
@@ -80,15 +81,15 @@ final class VerificationsService implements VerificationsContract
         ?int $timeoutSecs = null,
         ?RequestOptions $requestOptions = null,
     ): CreateVerificationResponse {
-        $params = [
-            'phoneNumber' => $phoneNumber,
-            'verifyProfileID' => $verifyProfileID,
-            'customCode' => $customCode,
-            'extension' => $extension,
-            'timeoutSecs' => $timeoutSecs,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'phoneNumber' => $phoneNumber,
+                'verifyProfileID' => $verifyProfileID,
+                'customCode' => $customCode,
+                'extension' => $extension,
+                'timeoutSecs' => $timeoutSecs,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->triggerCall(params: $params, requestOptions: $requestOptions);
@@ -113,13 +114,13 @@ final class VerificationsService implements VerificationsContract
         ?int $timeoutSecs = null,
         ?RequestOptions $requestOptions = null,
     ): CreateVerificationResponse {
-        $params = [
-            'phoneNumber' => $phoneNumber,
-            'verifyProfileID' => $verifyProfileID,
-            'timeoutSecs' => $timeoutSecs,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'phoneNumber' => $phoneNumber,
+                'verifyProfileID' => $verifyProfileID,
+                'timeoutSecs' => $timeoutSecs,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->triggerFlashcall(params: $params, requestOptions: $requestOptions);
@@ -146,14 +147,14 @@ final class VerificationsService implements VerificationsContract
         ?int $timeoutSecs = null,
         ?RequestOptions $requestOptions = null,
     ): CreateVerificationResponse {
-        $params = [
-            'phoneNumber' => $phoneNumber,
-            'verifyProfileID' => $verifyProfileID,
-            'customCode' => $customCode,
-            'timeoutSecs' => $timeoutSecs,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'phoneNumber' => $phoneNumber,
+                'verifyProfileID' => $verifyProfileID,
+                'customCode' => $customCode,
+                'timeoutSecs' => $timeoutSecs,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->triggerSMS(params: $params, requestOptions: $requestOptions);

@@ -6,6 +6,7 @@ namespace Telnyx\Services\MessagingTollfree\Verification;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPaginationForMessagingTollfree;
 use Telnyx\MessagingTollfree\Verification\Requests\TfPhoneNumber;
 use Telnyx\MessagingTollfree\Verification\Requests\TfVerificationStatus;
@@ -112,42 +113,42 @@ final class RequestsService implements RequestsContract
         ?string $webhookURL = null,
         ?RequestOptions $requestOptions = null,
     ): VerificationRequestEgress {
-        $params = [
-            'additionalInformation' => $additionalInformation,
-            'businessAddr1' => $businessAddr1,
-            'businessCity' => $businessCity,
-            'businessContactEmail' => $businessContactEmail,
-            'businessContactFirstName' => $businessContactFirstName,
-            'businessContactLastName' => $businessContactLastName,
-            'businessContactPhone' => $businessContactPhone,
-            'businessName' => $businessName,
-            'businessState' => $businessState,
-            'businessZip' => $businessZip,
-            'corporateWebsite' => $corporateWebsite,
-            'isvReseller' => $isvReseller,
-            'messageVolume' => $messageVolume,
-            'optInWorkflow' => $optInWorkflow,
-            'optInWorkflowImageURLs' => $optInWorkflowImageURLs,
-            'phoneNumbers' => $phoneNumbers,
-            'productionMessageContent' => $productionMessageContent,
-            'useCase' => $useCase,
-            'useCaseSummary' => $useCaseSummary,
-            'ageGatedContent' => $ageGatedContent,
-            'businessAddr2' => $businessAddr2,
-            'businessRegistrationCountry' => $businessRegistrationCountry,
-            'businessRegistrationNumber' => $businessRegistrationNumber,
-            'businessRegistrationType' => $businessRegistrationType,
-            'doingBusinessAs' => $doingBusinessAs,
-            'entityType' => $entityType,
-            'helpMessageResponse' => $helpMessageResponse,
-            'optInConfirmationResponse' => $optInConfirmationResponse,
-            'optInKeywords' => $optInKeywords,
-            'privacyPolicyURL' => $privacyPolicyURL,
-            'termsAndConditionURL' => $termsAndConditionURL,
-            'webhookURL' => $webhookURL,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'additionalInformation' => $additionalInformation,
+                'businessAddr1' => $businessAddr1,
+                'businessCity' => $businessCity,
+                'businessContactEmail' => $businessContactEmail,
+                'businessContactFirstName' => $businessContactFirstName,
+                'businessContactLastName' => $businessContactLastName,
+                'businessContactPhone' => $businessContactPhone,
+                'businessName' => $businessName,
+                'businessState' => $businessState,
+                'businessZip' => $businessZip,
+                'corporateWebsite' => $corporateWebsite,
+                'isvReseller' => $isvReseller,
+                'messageVolume' => $messageVolume,
+                'optInWorkflow' => $optInWorkflow,
+                'optInWorkflowImageURLs' => $optInWorkflowImageURLs,
+                'phoneNumbers' => $phoneNumbers,
+                'productionMessageContent' => $productionMessageContent,
+                'useCase' => $useCase,
+                'useCaseSummary' => $useCaseSummary,
+                'ageGatedContent' => $ageGatedContent,
+                'businessAddr2' => $businessAddr2,
+                'businessRegistrationCountry' => $businessRegistrationCountry,
+                'businessRegistrationNumber' => $businessRegistrationNumber,
+                'businessRegistrationType' => $businessRegistrationType,
+                'doingBusinessAs' => $doingBusinessAs,
+                'entityType' => $entityType,
+                'helpMessageResponse' => $helpMessageResponse,
+                'optInConfirmationResponse' => $optInConfirmationResponse,
+                'optInKeywords' => $optInKeywords,
+                'privacyPolicyURL' => $privacyPolicyURL,
+                'termsAndConditionURL' => $termsAndConditionURL,
+                'webhookURL' => $webhookURL,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -252,42 +253,42 @@ final class RequestsService implements RequestsContract
         ?string $webhookURL = null,
         ?RequestOptions $requestOptions = null,
     ): VerificationRequestEgress {
-        $params = [
-            'additionalInformation' => $additionalInformation,
-            'businessAddr1' => $businessAddr1,
-            'businessCity' => $businessCity,
-            'businessContactEmail' => $businessContactEmail,
-            'businessContactFirstName' => $businessContactFirstName,
-            'businessContactLastName' => $businessContactLastName,
-            'businessContactPhone' => $businessContactPhone,
-            'businessName' => $businessName,
-            'businessState' => $businessState,
-            'businessZip' => $businessZip,
-            'corporateWebsite' => $corporateWebsite,
-            'isvReseller' => $isvReseller,
-            'messageVolume' => $messageVolume,
-            'optInWorkflow' => $optInWorkflow,
-            'optInWorkflowImageURLs' => $optInWorkflowImageURLs,
-            'phoneNumbers' => $phoneNumbers,
-            'productionMessageContent' => $productionMessageContent,
-            'useCase' => $useCase,
-            'useCaseSummary' => $useCaseSummary,
-            'ageGatedContent' => $ageGatedContent,
-            'businessAddr2' => $businessAddr2,
-            'businessRegistrationCountry' => $businessRegistrationCountry,
-            'businessRegistrationNumber' => $businessRegistrationNumber,
-            'businessRegistrationType' => $businessRegistrationType,
-            'doingBusinessAs' => $doingBusinessAs,
-            'entityType' => $entityType,
-            'helpMessageResponse' => $helpMessageResponse,
-            'optInConfirmationResponse' => $optInConfirmationResponse,
-            'optInKeywords' => $optInKeywords,
-            'privacyPolicyURL' => $privacyPolicyURL,
-            'termsAndConditionURL' => $termsAndConditionURL,
-            'webhookURL' => $webhookURL,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'additionalInformation' => $additionalInformation,
+                'businessAddr1' => $businessAddr1,
+                'businessCity' => $businessCity,
+                'businessContactEmail' => $businessContactEmail,
+                'businessContactFirstName' => $businessContactFirstName,
+                'businessContactLastName' => $businessContactLastName,
+                'businessContactPhone' => $businessContactPhone,
+                'businessName' => $businessName,
+                'businessState' => $businessState,
+                'businessZip' => $businessZip,
+                'corporateWebsite' => $corporateWebsite,
+                'isvReseller' => $isvReseller,
+                'messageVolume' => $messageVolume,
+                'optInWorkflow' => $optInWorkflow,
+                'optInWorkflowImageURLs' => $optInWorkflowImageURLs,
+                'phoneNumbers' => $phoneNumbers,
+                'productionMessageContent' => $productionMessageContent,
+                'useCase' => $useCase,
+                'useCaseSummary' => $useCaseSummary,
+                'ageGatedContent' => $ageGatedContent,
+                'businessAddr2' => $businessAddr2,
+                'businessRegistrationCountry' => $businessRegistrationCountry,
+                'businessRegistrationNumber' => $businessRegistrationNumber,
+                'businessRegistrationType' => $businessRegistrationType,
+                'doingBusinessAs' => $doingBusinessAs,
+                'entityType' => $entityType,
+                'helpMessageResponse' => $helpMessageResponse,
+                'optInConfirmationResponse' => $optInConfirmationResponse,
+                'optInKeywords' => $optInKeywords,
+                'privacyPolicyURL' => $privacyPolicyURL,
+                'termsAndConditionURL' => $termsAndConditionURL,
+                'webhookURL' => $webhookURL,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
@@ -319,16 +320,16 @@ final class RequestsService implements RequestsContract
         string|TfVerificationStatus|null $status = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultPaginationForMessagingTollfree {
-        $params = [
-            'page' => $page,
-            'pageSize' => $pageSize,
-            'dateEnd' => $dateEnd,
-            'dateStart' => $dateStart,
-            'phoneNumber' => $phoneNumber,
-            'status' => $status,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'page' => $page,
+                'pageSize' => $pageSize,
+                'dateEnd' => $dateEnd,
+                'dateStart' => $dateStart,
+                'phoneNumber' => $phoneNumber,
+                'status' => $status,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

@@ -8,6 +8,7 @@ use Telnyx\AI\Assistants\Tests\AssistantTest;
 use Telnyx\AI\Assistants\Tests\TelnyxConversationChannel;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\TestsContract;
@@ -70,18 +71,18 @@ final class TestsService implements TestsContract
         ?string $testSuite = null,
         ?RequestOptions $requestOptions = null,
     ): AssistantTest {
-        $params = [
-            'destination' => $destination,
-            'instructions' => $instructions,
-            'name' => $name,
-            'rubric' => $rubric,
-            'description' => $description,
-            'maxDurationSeconds' => $maxDurationSeconds,
-            'telnyxConversationChannel' => $telnyxConversationChannel,
-            'testSuite' => $testSuite,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'destination' => $destination,
+                'instructions' => $instructions,
+                'name' => $name,
+                'rubric' => $rubric,
+                'description' => $description,
+                'maxDurationSeconds' => $maxDurationSeconds,
+                'telnyxConversationChannel' => $telnyxConversationChannel,
+                'testSuite' => $testSuite,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -136,18 +137,18 @@ final class TestsService implements TestsContract
         ?string $testSuite = null,
         ?RequestOptions $requestOptions = null,
     ): AssistantTest {
-        $params = [
-            'description' => $description,
-            'destination' => $destination,
-            'instructions' => $instructions,
-            'maxDurationSeconds' => $maxDurationSeconds,
-            'name' => $name,
-            'rubric' => $rubric,
-            'telnyxConversationChannel' => $telnyxConversationChannel,
-            'testSuite' => $testSuite,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'description' => $description,
+                'destination' => $destination,
+                'instructions' => $instructions,
+                'maxDurationSeconds' => $maxDurationSeconds,
+                'name' => $name,
+                'rubric' => $rubric,
+                'telnyxConversationChannel' => $telnyxConversationChannel,
+                'testSuite' => $testSuite,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($testID, params: $params, requestOptions: $requestOptions);
@@ -176,15 +177,15 @@ final class TestsService implements TestsContract
         ?string $testSuite = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = [
-            'destination' => $destination,
-            'pageNumber' => $pageNumber,
-            'pageSize' => $pageSize,
-            'telnyxConversationChannel' => $telnyxConversationChannel,
-            'testSuite' => $testSuite,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'destination' => $destination,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+                'telnyxConversationChannel' => $telnyxConversationChannel,
+                'testSuite' => $testSuite,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

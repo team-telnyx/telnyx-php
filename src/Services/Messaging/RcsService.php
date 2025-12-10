@@ -6,6 +6,7 @@ namespace Telnyx\Services\Messaging;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Messaging\Rcs\RcGetCapabilitiesResponse;
 use Telnyx\Messaging\Rcs\RcInviteTestNumberResponse;
 use Telnyx\Messaging\Rcs\RcListBulkCapabilitiesResponse;
@@ -49,7 +50,7 @@ final class RcsService implements RcsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): RcInviteTestNumberResponse {
-        $params = ['id' => $id];
+        $params = Util::removeNulls(['id' => $id]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->inviteTestNumber($phoneNumber, params: $params, requestOptions: $requestOptions);
@@ -72,7 +73,9 @@ final class RcsService implements RcsContract
         array $phoneNumbers,
         ?RequestOptions $requestOptions = null
     ): RcListBulkCapabilitiesResponse {
-        $params = ['agentID' => $agentID, 'phoneNumbers' => $phoneNumbers];
+        $params = Util::removeNulls(
+            ['agentID' => $agentID, 'phoneNumbers' => $phoneNumbers]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listBulkCapabilities(params: $params, requestOptions: $requestOptions);
@@ -95,7 +98,7 @@ final class RcsService implements RcsContract
         string $agentID,
         ?RequestOptions $requestOptions = null
     ): RcGetCapabilitiesResponse {
-        $params = ['agentID' => $agentID];
+        $params = Util::removeNulls(['agentID' => $agentID]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveCapabilities($phoneNumber, params: $params, requestOptions: $requestOptions);

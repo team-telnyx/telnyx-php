@@ -8,6 +8,7 @@ use Telnyx\Addresses\Actions\ActionAcceptSuggestionsResponse;
 use Telnyx\Addresses\Actions\ActionValidateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Addresses\ActionsContract;
 
@@ -41,9 +42,7 @@ final class ActionsService implements ActionsContract
         ?string $id = null,
         ?RequestOptions $requestOptions = null,
     ): ActionAcceptSuggestionsResponse {
-        $params = ['id' => $id];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['id' => $id]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->acceptSuggestions($addressUuid, params: $params, requestOptions: $requestOptions);
@@ -74,16 +73,16 @@ final class ActionsService implements ActionsContract
         ?string $locality = null,
         ?RequestOptions $requestOptions = null,
     ): ActionValidateResponse {
-        $params = [
-            'countryCode' => $countryCode,
-            'postalCode' => $postalCode,
-            'streetAddress' => $streetAddress,
-            'administrativeArea' => $administrativeArea,
-            'extendedAddress' => $extendedAddress,
-            'locality' => $locality,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'countryCode' => $countryCode,
+                'postalCode' => $postalCode,
+                'streetAddress' => $streetAddress,
+                'administrativeArea' => $administrativeArea,
+                'extendedAddress' => $extendedAddress,
+                'locality' => $locality,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->validate(params: $params, requestOptions: $requestOptions);

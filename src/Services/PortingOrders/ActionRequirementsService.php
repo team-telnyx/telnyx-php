@@ -6,6 +6,7 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter\ActionType;
@@ -60,9 +61,9 @@ final class ActionRequirementsService implements ActionRequirementsContract
         ?array $sort = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['filter' => $filter, 'page' => $page, 'sort' => $sort]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($portingOrderID, params: $params, requestOptions: $requestOptions);
@@ -89,7 +90,9 @@ final class ActionRequirementsService implements ActionRequirementsContract
         array $params,
         ?RequestOptions $requestOptions = null,
     ): ActionRequirementInitiateResponse {
-        $params1 = ['portingOrderID' => $portingOrderID, 'params' => $params];
+        $params1 = Util::removeNulls(
+            ['portingOrderID' => $portingOrderID, 'params' => $params]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->initiate($id, params: $params1, requestOptions: $requestOptions);

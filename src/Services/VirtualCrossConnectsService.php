@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VirtualCrossConnectsContract;
@@ -72,25 +73,25 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
         ?string $secondaryTelnyxIP = null,
         ?RequestOptions $requestOptions = null,
     ): VirtualCrossConnectNewResponse {
-        $params = [
-            'regionCode' => $regionCode,
-            'bandwidthMbps' => $bandwidthMbps,
-            'bgpAsn' => $bgpAsn,
-            'cloudProvider' => $cloudProvider,
-            'cloudProviderRegion' => $cloudProviderRegion,
-            'name' => $name,
-            'networkID' => $networkID,
-            'primaryBgpKey' => $primaryBgpKey,
-            'primaryCloudAccountID' => $primaryCloudAccountID,
-            'primaryCloudIP' => $primaryCloudIP,
-            'primaryTelnyxIP' => $primaryTelnyxIP,
-            'secondaryBgpKey' => $secondaryBgpKey,
-            'secondaryCloudAccountID' => $secondaryCloudAccountID,
-            'secondaryCloudIP' => $secondaryCloudIP,
-            'secondaryTelnyxIP' => $secondaryTelnyxIP,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'regionCode' => $regionCode,
+                'bandwidthMbps' => $bandwidthMbps,
+                'bgpAsn' => $bgpAsn,
+                'cloudProvider' => $cloudProvider,
+                'cloudProviderRegion' => $cloudProviderRegion,
+                'name' => $name,
+                'networkID' => $networkID,
+                'primaryBgpKey' => $primaryBgpKey,
+                'primaryCloudAccountID' => $primaryCloudAccountID,
+                'primaryCloudIP' => $primaryCloudIP,
+                'primaryTelnyxIP' => $primaryTelnyxIP,
+                'secondaryBgpKey' => $secondaryBgpKey,
+                'secondaryCloudAccountID' => $secondaryCloudAccountID,
+                'secondaryCloudIP' => $secondaryCloudIP,
+                'secondaryTelnyxIP' => $secondaryTelnyxIP,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -142,16 +143,16 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
         ?bool $secondaryRoutingAnnouncement = null,
         ?RequestOptions $requestOptions = null,
     ): VirtualCrossConnectUpdateResponse {
-        $params = [
-            'primaryCloudIP' => $primaryCloudIP,
-            'primaryEnabled' => $primaryEnabled,
-            'primaryRoutingAnnouncement' => $primaryRoutingAnnouncement,
-            'secondaryCloudIP' => $secondaryCloudIP,
-            'secondaryEnabled' => $secondaryEnabled,
-            'secondaryRoutingAnnouncement' => $secondaryRoutingAnnouncement,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'primaryCloudIP' => $primaryCloudIP,
+                'primaryEnabled' => $primaryEnabled,
+                'primaryRoutingAnnouncement' => $primaryRoutingAnnouncement,
+                'secondaryCloudIP' => $secondaryCloudIP,
+                'secondaryEnabled' => $secondaryEnabled,
+                'secondaryRoutingAnnouncement' => $secondaryRoutingAnnouncement,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
@@ -180,9 +181,7 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = ['filter' => $filter, 'page' => $page];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TexmlContract;
 use Telnyx\Services\Texml\AccountsService;
@@ -54,7 +55,7 @@ final class TexmlService implements TexmlContract
         string $value,
         ?RequestOptions $requestOptions = null
     ): TexmlSecretsResponse {
-        $params = ['name' => $name, 'value' => $value];
+        $params = Util::removeNulls(['name' => $name, 'value' => $value]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->secrets(params: $params, requestOptions: $requestOptions);

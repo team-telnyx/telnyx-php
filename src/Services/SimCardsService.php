@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
@@ -63,12 +64,12 @@ final class SimCardsService implements SimCardsContract
         bool $includeSimCardGroup = false,
         ?RequestOptions $requestOptions = null,
     ): SimCardGetResponse {
-        $params = [
-            'includePinPukCodes' => $includePinPukCodes,
-            'includeSimCardGroup' => $includeSimCardGroup,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'includePinPukCodes' => $includePinPukCodes,
+                'includeSimCardGroup' => $includeSimCardGroup,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, params: $params, requestOptions: $requestOptions);
@@ -104,15 +105,15 @@ final class SimCardsService implements SimCardsContract
         ?array $tags = null,
         ?RequestOptions $requestOptions = null,
     ): SimCardUpdateResponse {
-        $params = [
-            'authorizedImeis' => $authorizedImeis,
-            'dataLimit' => $dataLimit,
-            'simCardGroupID' => $simCardGroupID,
-            'status' => $status,
-            'tags' => $tags,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'authorizedImeis' => $authorizedImeis,
+                'dataLimit' => $dataLimit,
+                'simCardGroupID' => $simCardGroupID,
+                'status' => $status,
+                'tags' => $tags,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($simCardID, params: $params, requestOptions: $requestOptions);
@@ -149,15 +150,15 @@ final class SimCardsService implements SimCardsContract
         string|Sort|null $sort = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = [
-            'filter' => $filter,
-            'filterSimCardGroupID' => $filterSimCardGroupID,
-            'includeSimCardGroup' => $includeSimCardGroup,
-            'page' => $page,
-            'sort' => $sort,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'filter' => $filter,
+                'filterSimCardGroupID' => $filterSimCardGroupID,
+                'includeSimCardGroup' => $includeSimCardGroup,
+                'page' => $page,
+                'sort' => $sort,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -182,9 +183,7 @@ final class SimCardsService implements SimCardsContract
         bool $reportLost = false,
         ?RequestOptions $requestOptions = null
     ): SimCardDeleteResponse {
-        $params = ['reportLost' => $reportLost];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['reportLost' => $reportLost]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, params: $params, requestOptions: $requestOptions);
@@ -269,9 +268,9 @@ final class SimCardsService implements SimCardsContract
         int $pageSize = 20,
         ?RequestOptions $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listWirelessConnectivityLogs($id, params: $params, requestOptions: $requestOptions);

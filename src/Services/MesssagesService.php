@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Messsages\MesssageRcsParams\Type;
 use Telnyx\Messsages\MesssageRcsResponse;
 use Telnyx\Messsages\RcsAgentMessage;
@@ -186,18 +187,18 @@ final class MesssagesService implements MesssagesContract
         ?string $webhookURL = null,
         ?RequestOptions $requestOptions = null,
     ): MesssageRcsResponse {
-        $params = [
-            'agentID' => $agentID,
-            'agentMessage' => $agentMessage,
-            'messagingProfileID' => $messagingProfileID,
-            'to' => $to,
-            'mmsFallback' => $mmsFallback,
-            'smsFallback' => $smsFallback,
-            'type' => $type,
-            'webhookURL' => $webhookURL,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'agentID' => $agentID,
+                'agentMessage' => $agentMessage,
+                'messagingProfileID' => $messagingProfileID,
+                'to' => $to,
+                'mmsFallback' => $mmsFallback,
+                'smsFallback' => $smsFallback,
+                'type' => $type,
+                'webhookURL' => $webhookURL,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->rcs(params: $params, requestOptions: $requestOptions);

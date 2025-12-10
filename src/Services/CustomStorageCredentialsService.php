@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Backend;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialGetResponse;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialNewResponse;
@@ -45,7 +46,9 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
         array $configuration,
         ?RequestOptions $requestOptions = null,
     ): CustomStorageCredentialNewResponse {
-        $params = ['backend' => $backend, 'configuration' => $configuration];
+        $params = Util::removeNulls(
+            ['backend' => $backend, 'configuration' => $configuration]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($connectionID, params: $params, requestOptions: $requestOptions);
@@ -89,7 +92,9 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
         array $configuration,
         ?RequestOptions $requestOptions = null,
     ): CustomStorageCredentialUpdateResponse {
-        $params = ['backend' => $backend, 'configuration' => $configuration];
+        $params = Util::removeNulls(
+            ['backend' => $backend, 'configuration' => $configuration]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($connectionID, params: $params, requestOptions: $requestOptions);

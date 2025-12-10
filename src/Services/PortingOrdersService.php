@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\PortingOrder;
 use Telnyx\PortingOrders\PortingOrderDocuments;
@@ -130,13 +131,13 @@ final class PortingOrdersService implements PortingOrdersContract
         ?string $customerReference = null,
         ?RequestOptions $requestOptions = null,
     ): PortingOrderNewResponse {
-        $params = [
-            'phoneNumbers' => $phoneNumbers,
-            'customerGroupReference' => $customerGroupReference,
-            'customerReference' => $customerReference,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'phoneNumbers' => $phoneNumbers,
+                'customerGroupReference' => $customerGroupReference,
+                'customerReference' => $customerReference,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -159,9 +160,9 @@ final class PortingOrdersService implements PortingOrdersContract
         bool $includePhoneNumbers = true,
         ?RequestOptions $requestOptions = null,
     ): PortingOrderGetResponse {
-        $params = ['includePhoneNumbers' => $includePhoneNumbers];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['includePhoneNumbers' => $includePhoneNumbers]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, params: $params, requestOptions: $requestOptions);
@@ -243,22 +244,22 @@ final class PortingOrdersService implements PortingOrdersContract
         ?string $webhookURL = null,
         ?RequestOptions $requestOptions = null,
     ): PortingOrderUpdateResponse {
-        $params = [
-            'activationSettings' => $activationSettings,
-            'customerGroupReference' => $customerGroupReference,
-            'customerReference' => $customerReference,
-            'documents' => $documents,
-            'endUser' => $endUser,
-            'messaging' => $messaging,
-            'misc' => $misc,
-            'phoneNumberConfiguration' => $phoneNumberConfiguration,
-            'requirementGroupID' => $requirementGroupID,
-            'requirements' => $requirements,
-            'userFeedback' => $userFeedback,
-            'webhookURL' => $webhookURL,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'activationSettings' => $activationSettings,
+                'customerGroupReference' => $customerGroupReference,
+                'customerReference' => $customerReference,
+                'documents' => $documents,
+                'endUser' => $endUser,
+                'messaging' => $messaging,
+                'misc' => $misc,
+                'phoneNumberConfiguration' => $phoneNumberConfiguration,
+                'requirementGroupID' => $requirementGroupID,
+                'requirements' => $requirements,
+                'userFeedback' => $userFeedback,
+                'webhookURL' => $webhookURL,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
@@ -306,14 +307,14 @@ final class PortingOrdersService implements PortingOrdersContract
         ?array $sort = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = [
-            'filter' => $filter,
-            'includePhoneNumbers' => $includePhoneNumbers,
-            'page' => $page,
-            'sort' => $sort,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'filter' => $filter,
+                'includePhoneNumbers' => $includePhoneNumbers,
+                'page' => $page,
+                'sort' => $sort,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -390,9 +391,7 @@ final class PortingOrdersService implements PortingOrdersContract
         ?string $loaConfigurationID = null,
         ?RequestOptions $requestOptions = null,
     ): string {
-        $params = ['loaConfigurationID' => $loaConfigurationID];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['loaConfigurationID' => $loaConfigurationID]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveLoaTemplate($id, params: $params, requestOptions: $requestOptions);
@@ -419,9 +418,7 @@ final class PortingOrdersService implements PortingOrdersContract
         ?array $page = null,
         ?RequestOptions $requestOptions = null
     ): DefaultPagination {
-        $params = ['page' => $page];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveRequirements($id, params: $params, requestOptions: $requestOptions);

@@ -6,6 +6,7 @@ namespace Telnyx\Services\Legacy\Reporting\UsageReports;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\CdrUsageReportResponseLegacy;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceDeleteResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceGetResponse;
@@ -54,17 +55,17 @@ final class VoiceService implements VoiceContract
         ?bool $selectAllManagedAccounts = null,
         ?RequestOptions $requestOptions = null,
     ): VoiceNewResponse {
-        $params = [
-            'endTime' => $endTime,
-            'startTime' => $startTime,
-            'aggregationType' => $aggregationType,
-            'connections' => $connections,
-            'managedAccounts' => $managedAccounts,
-            'productBreakdown' => $productBreakdown,
-            'selectAllManagedAccounts' => $selectAllManagedAccounts,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'endTime' => $endTime,
+                'startTime' => $startTime,
+                'aggregationType' => $aggregationType,
+                'connections' => $connections,
+                'managedAccounts' => $managedAccounts,
+                'productBreakdown' => $productBreakdown,
+                'selectAllManagedAccounts' => $selectAllManagedAccounts,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -106,9 +107,7 @@ final class VoiceService implements VoiceContract
         int $perPage = 20,
         ?RequestOptions $requestOptions = null
     ): PerPagePagination {
-        $params = ['page' => $page, 'perPage' => $perPage];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['page' => $page, 'perPage' => $perPage]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

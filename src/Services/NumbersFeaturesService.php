@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\NumbersFeatures\NumbersFeatureNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumbersFeaturesContract;
@@ -38,7 +39,7 @@ final class NumbersFeaturesService implements NumbersFeaturesContract
         array $phoneNumbers,
         ?RequestOptions $requestOptions = null
     ): NumbersFeatureNewResponse {
-        $params = ['phoneNumbers' => $phoneNumbers];
+        $params = Util::removeNulls(['phoneNumbers' => $phoneNumbers]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);

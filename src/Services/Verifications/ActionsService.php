@@ -6,6 +6,7 @@ namespace Telnyx\Services\Verifications;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Verifications\ActionsContract;
 use Telnyx\Verifications\Actions\ActionVerifyParams\Status;
@@ -43,9 +44,7 @@ final class ActionsService implements ActionsContract
         string|Status|null $status = null,
         ?RequestOptions $requestOptions = null,
     ): VerifyVerificationCodeResponse {
-        $params = ['code' => $code, 'status' => $status];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['code' => $code, 'status' => $status]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->verify($verificationID, params: $params, requestOptions: $requestOptions);

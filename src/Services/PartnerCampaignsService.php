@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Number10dlc\Campaign\CampaignSharingStatus;
 use Telnyx\PartnerCampaigns\PartnerCampaignListParams\Sort;
 use Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeResponse;
@@ -62,11 +63,9 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
         ?string $webhookURL = null,
         ?RequestOptions $requestOptions = null,
     ): TelnyxDownstreamCampaign {
-        $params = [
-            'webhookFailoverURL' => $webhookFailoverURL, 'webhookURL' => $webhookURL,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['webhookFailoverURL' => $webhookFailoverURL, 'webhookURL' => $webhookURL]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($campaignID, params: $params, requestOptions: $requestOptions);
@@ -95,11 +94,9 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
         string|Sort $sort = '-createdAt',
         ?RequestOptions $requestOptions = null,
     ): PerPagePaginationV2 {
-        $params = [
-            'page' => $page, 'recordsPerPage' => $recordsPerPage, 'sort' => $sort,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['page' => $page, 'recordsPerPage' => $recordsPerPage, 'sort' => $sort]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -128,9 +125,9 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
         int $recordsPerPage = 10,
         ?RequestOptions $requestOptions = null,
     ): PerPagePaginationV2 {
-        $params = ['page' => $page, 'recordsPerPage' => $recordsPerPage];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['page' => $page, 'recordsPerPage' => $recordsPerPage]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listSharedByMe(params: $params, requestOptions: $requestOptions);

@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Media\MediaGetResponse;
 use Telnyx\Media\MediaListResponse;
 use Telnyx\Media\MediaUpdateResponse;
@@ -64,9 +65,9 @@ final class MediaService implements MediaContract
         ?int $ttlSecs = null,
         ?RequestOptions $requestOptions = null,
     ): MediaUpdateResponse {
-        $params = ['mediaURL' => $mediaURL, 'ttlSecs' => $ttlSecs];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['mediaURL' => $mediaURL, 'ttlSecs' => $ttlSecs]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($mediaName, params: $params, requestOptions: $requestOptions);
@@ -89,9 +90,7 @@ final class MediaService implements MediaContract
         ?array $filter = null,
         ?RequestOptions $requestOptions = null
     ): MediaListResponse {
-        $params = ['filter' => $filter];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['filter' => $filter]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -154,11 +153,13 @@ final class MediaService implements MediaContract
         ?int $ttlSecs = null,
         ?RequestOptions $requestOptions = null,
     ): MediaUploadResponse {
-        $params = [
-            'mediaURL' => $mediaURL, 'mediaName' => $mediaName, 'ttlSecs' => $ttlSecs,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'mediaURL' => $mediaURL,
+                'mediaName' => $mediaName,
+                'ttlSecs' => $ttlSecs,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->upload(params: $params, requestOptions: $requestOptions);

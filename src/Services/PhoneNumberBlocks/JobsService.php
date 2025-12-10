@@ -6,6 +6,7 @@ namespace Telnyx\Services\PhoneNumberBlocks;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumberBlocks\Jobs\Job;
 use Telnyx\PhoneNumberBlocks\Jobs\JobDeletePhoneNumberBlockResponse;
@@ -74,9 +75,9 @@ final class JobsService implements JobsContract
         string|Sort|null $sort = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['filter' => $filter, 'page' => $page, 'sort' => $sort]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -95,7 +96,7 @@ final class JobsService implements JobsContract
         string $phoneNumberBlockID,
         ?RequestOptions $requestOptions = null
     ): JobDeletePhoneNumberBlockResponse {
-        $params = ['phoneNumberBlockID' => $phoneNumberBlockID];
+        $params = Util::removeNulls(['phoneNumberBlockID' => $phoneNumberBlockID]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->deletePhoneNumberBlock(params: $params, requestOptions: $requestOptions);

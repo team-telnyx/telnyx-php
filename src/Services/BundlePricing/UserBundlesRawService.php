@@ -55,17 +55,20 @@ final class UserBundlesRawService implements UserBundlesRawContract
             $params,
             $requestOptions,
         );
-        $header_params = ['authorization_bearer' => 'authorization_bearer'];
+        $header_params = ['authorizationBearer' => 'authorization_bearer'];
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'bundle_pricing/user_bundles/bulk',
             headers: Util::array_transform_keys(
-                array_intersect_key($parsed, array_keys($header_params)),
-                $header_params
+                array_intersect_key($parsed, array_flip(array_keys($header_params))),
+                $header_params,
             ),
-            body: (object) array_diff_key($parsed, array_keys($header_params)),
+            body: (object) array_diff_key(
+                $parsed,
+                array_flip(array_keys($header_params))
+            ),
             options: $options,
             convert: UserBundleNewResponse::class,
         );

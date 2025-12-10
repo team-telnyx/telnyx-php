@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Reports\ReportListMdrsParams\Direction;
 use Telnyx\Reports\ReportListMdrsParams\MessageType;
@@ -73,19 +74,19 @@ final class ReportsService implements ReportsContract
         string|Status|null $status = null,
         ?RequestOptions $requestOptions = null,
     ): ReportListMdrsResponse {
-        $params = [
-            'id' => $id,
-            'cld' => $cld,
-            'cli' => $cli,
-            'direction' => $direction,
-            'endDate' => $endDate,
-            'messageType' => $messageType,
-            'profile' => $profile,
-            'startDate' => $startDate,
-            'status' => $status,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'id' => $id,
+                'cld' => $cld,
+                'cli' => $cli,
+                'direction' => $direction,
+                'endDate' => $endDate,
+                'messageType' => $messageType,
+                'profile' => $profile,
+                'startDate' => $startDate,
+                'status' => $status,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listMdrs(params: $params, requestOptions: $requestOptions);
@@ -130,23 +131,23 @@ final class ReportsService implements ReportsContract
         ?string $startDate = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = [
-            'id' => $id,
-            'endDate' => $endDate,
-            'imsi' => $imsi,
-            'mcc' => $mcc,
-            'mnc' => $mnc,
-            'pageNumber' => $pageNumber,
-            'pageSize' => $pageSize,
-            'phoneNumber' => $phoneNumber,
-            'simCardID' => $simCardID,
-            'simGroupID' => $simGroupID,
-            'simGroupName' => $simGroupName,
-            'sort' => $sort,
-            'startDate' => $startDate,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'id' => $id,
+                'endDate' => $endDate,
+                'imsi' => $imsi,
+                'mcc' => $mcc,
+                'mnc' => $mnc,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+                'phoneNumber' => $phoneNumber,
+                'simCardID' => $simCardID,
+                'simGroupID' => $simGroupID,
+                'simGroupName' => $simGroupName,
+                'sort' => $sort,
+                'startDate' => $startDate,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listWdrs(params: $params, requestOptions: $requestOptions);

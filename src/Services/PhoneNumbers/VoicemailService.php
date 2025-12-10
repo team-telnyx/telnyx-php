@@ -6,6 +6,7 @@ namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailGetResponse;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailNewResponse;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailUpdateResponse;
@@ -44,9 +45,7 @@ final class VoicemailService implements VoicemailContract
         ?string $pin = null,
         ?RequestOptions $requestOptions = null,
     ): VoicemailNewResponse {
-        $params = ['enabled' => $enabled, 'pin' => $pin];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['enabled' => $enabled, 'pin' => $pin]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($phoneNumberID, params: $params, requestOptions: $requestOptions);
@@ -90,9 +89,7 @@ final class VoicemailService implements VoicemailContract
         ?string $pin = null,
         ?RequestOptions $requestOptions = null,
     ): VoicemailUpdateResponse {
-        $params = ['enabled' => $enabled, 'pin' => $pin];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['enabled' => $enabled, 'pin' => $pin]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($phoneNumberID, params: $params, requestOptions: $requestOptions);

@@ -6,6 +6,7 @@ namespace Telnyx\Services\Messages;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Messages\Rcs\RcGenerateDeeplinkResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messages\RcsContract;
@@ -42,9 +43,9 @@ final class RcsService implements RcsContract
         ?string $phoneNumber = null,
         ?RequestOptions $requestOptions = null,
     ): RcGenerateDeeplinkResponse {
-        $params = ['body' => $body, 'phoneNumber' => $phoneNumber];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['body' => $body, 'phoneNumber' => $phoneNumber]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->generateDeeplink($agentID, params: $params, requestOptions: $requestOptions);

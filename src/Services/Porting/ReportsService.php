@@ -6,6 +6,7 @@ namespace Telnyx\Services\Porting;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport;
 use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport\Filters\StatusIn;
@@ -54,7 +55,9 @@ final class ReportsService implements ReportsContract
         string|\Telnyx\Porting\Reports\ReportCreateParams\ReportType $reportType,
         ?RequestOptions $requestOptions = null,
     ): ReportNewResponse {
-        $params1 = ['params' => $params, 'reportType' => $reportType];
+        $params1 = Util::removeNulls(
+            ['params' => $params, 'reportType' => $reportType]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params1, requestOptions: $requestOptions);
@@ -103,9 +106,7 @@ final class ReportsService implements ReportsContract
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = ['filter' => $filter, 'page' => $page];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

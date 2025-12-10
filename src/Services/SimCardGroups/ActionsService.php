@@ -6,6 +6,7 @@ namespace Telnyx\Services\SimCardGroups;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardGroups\ActionsContract;
@@ -75,15 +76,15 @@ final class ActionsService implements ActionsContract
         int $pageSize = 20,
         ?RequestOptions $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = [
-            'filterSimCardGroupID' => $filterSimCardGroupID,
-            'filterStatus' => $filterStatus,
-            'filterType' => $filterType,
-            'pageNumber' => $pageNumber,
-            'pageSize' => $pageSize,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'filterSimCardGroupID' => $filterSimCardGroupID,
+                'filterStatus' => $filterStatus,
+                'filterType' => $filterType,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -144,7 +145,9 @@ final class ActionsService implements ActionsContract
         string $privateWirelessGatewayID,
         ?RequestOptions $requestOptions = null,
     ): ActionSetPrivateWirelessGatewayResponse {
-        $params = ['privateWirelessGatewayID' => $privateWirelessGatewayID];
+        $params = Util::removeNulls(
+            ['privateWirelessGatewayID' => $privateWirelessGatewayID]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->setPrivateWirelessGateway($id, params: $params, requestOptions: $requestOptions);
@@ -167,7 +170,9 @@ final class ActionsService implements ActionsContract
         string $wirelessBlocklistID,
         ?RequestOptions $requestOptions = null,
     ): ActionSetWirelessBlocklistResponse {
-        $params = ['wirelessBlocklistID' => $wirelessBlocklistID];
+        $params = Util::removeNulls(
+            ['wirelessBlocklistID' => $wirelessBlocklistID]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->setWirelessBlocklist($id, params: $params, requestOptions: $requestOptions);

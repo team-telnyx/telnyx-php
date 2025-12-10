@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SubNumberOrdersContract;
 use Telnyx\SubNumberOrders\SubNumberOrderCancelResponse;
@@ -46,9 +47,7 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
         ?array $filter = null,
         ?RequestOptions $requestOptions = null,
     ): SubNumberOrderGetResponse {
-        $params = ['filter' => $filter];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['filter' => $filter]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($subNumberOrderID, params: $params, requestOptions: $requestOptions);
@@ -73,9 +72,9 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
         ?array $regulatoryRequirements = null,
         ?RequestOptions $requestOptions = null,
     ): SubNumberOrderUpdateResponse {
-        $params = ['regulatoryRequirements' => $regulatoryRequirements];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['regulatoryRequirements' => $regulatoryRequirements]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($subNumberOrderID, params: $params, requestOptions: $requestOptions);
@@ -102,9 +101,7 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
         ?array $filter = null,
         ?RequestOptions $requestOptions = null
     ): SubNumberOrderListResponse {
-        $params = ['filter' => $filter];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['filter' => $filter]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -146,7 +143,7 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
         string $requirementGroupID,
         ?RequestOptions $requestOptions = null,
     ): SubNumberOrderUpdateRequirementGroupResponse {
-        $params = ['requirementGroupID' => $requirementGroupID];
+        $params = Util::removeNulls(['requirementGroupID' => $requirementGroupID]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->updateRequirementGroup($id, params: $params, requestOptions: $requestOptions);

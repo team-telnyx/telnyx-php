@@ -8,6 +8,7 @@ use Telnyx\AI\FineTuning\Jobs\FineTuningJob;
 use Telnyx\AI\FineTuning\Jobs\JobListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\FineTuning\JobsContract;
 
@@ -47,14 +48,14 @@ final class JobsService implements JobsContract
         ?string $suffix = null,
         ?RequestOptions $requestOptions = null,
     ): FineTuningJob {
-        $params = [
-            'model' => $model,
-            'trainingFile' => $trainingFile,
-            'hyperparameters' => $hyperparameters,
-            'suffix' => $suffix,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'model' => $model,
+                'trainingFile' => $trainingFile,
+                'hyperparameters' => $hyperparameters,
+                'suffix' => $suffix,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);

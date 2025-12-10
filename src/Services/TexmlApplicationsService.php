@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\DefaultPagination;
@@ -82,25 +83,25 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
         string|VoiceMethod $voiceMethod = 'post',
         ?RequestOptions $requestOptions = null,
     ): TexmlApplicationNewResponse {
-        $params = [
-            'friendlyName' => $friendlyName,
-            'voiceURL' => $voiceURL,
-            'active' => $active,
-            'anchorsiteOverride' => $anchorsiteOverride,
-            'callCostInWebhooks' => $callCostInWebhooks,
-            'dtmfType' => $dtmfType,
-            'firstCommandTimeout' => $firstCommandTimeout,
-            'firstCommandTimeoutSecs' => $firstCommandTimeoutSecs,
-            'inbound' => $inbound,
-            'outbound' => $outbound,
-            'statusCallback' => $statusCallback,
-            'statusCallbackMethod' => $statusCallbackMethod,
-            'tags' => $tags,
-            'voiceFallbackURL' => $voiceFallbackURL,
-            'voiceMethod' => $voiceMethod,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'friendlyName' => $friendlyName,
+                'voiceURL' => $voiceURL,
+                'active' => $active,
+                'anchorsiteOverride' => $anchorsiteOverride,
+                'callCostInWebhooks' => $callCostInWebhooks,
+                'dtmfType' => $dtmfType,
+                'firstCommandTimeout' => $firstCommandTimeout,
+                'firstCommandTimeoutSecs' => $firstCommandTimeoutSecs,
+                'inbound' => $inbound,
+                'outbound' => $outbound,
+                'statusCallback' => $statusCallback,
+                'statusCallbackMethod' => $statusCallbackMethod,
+                'tags' => $tags,
+                'voiceFallbackURL' => $voiceFallbackURL,
+                'voiceMethod' => $voiceMethod,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -175,25 +176,25 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
         string|\Telnyx\TexmlApplications\TexmlApplicationUpdateParams\VoiceMethod $voiceMethod = 'post',
         ?RequestOptions $requestOptions = null,
     ): TexmlApplicationUpdateResponse {
-        $params = [
-            'friendlyName' => $friendlyName,
-            'voiceURL' => $voiceURL,
-            'active' => $active,
-            'anchorsiteOverride' => $anchorsiteOverride,
-            'callCostInWebhooks' => $callCostInWebhooks,
-            'dtmfType' => $dtmfType,
-            'firstCommandTimeout' => $firstCommandTimeout,
-            'firstCommandTimeoutSecs' => $firstCommandTimeoutSecs,
-            'inbound' => $inbound,
-            'outbound' => $outbound,
-            'statusCallback' => $statusCallback,
-            'statusCallbackMethod' => $statusCallbackMethod,
-            'tags' => $tags,
-            'voiceFallbackURL' => $voiceFallbackURL,
-            'voiceMethod' => $voiceMethod,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'friendlyName' => $friendlyName,
+                'voiceURL' => $voiceURL,
+                'active' => $active,
+                'anchorsiteOverride' => $anchorsiteOverride,
+                'callCostInWebhooks' => $callCostInWebhooks,
+                'dtmfType' => $dtmfType,
+                'firstCommandTimeout' => $firstCommandTimeout,
+                'firstCommandTimeoutSecs' => $firstCommandTimeoutSecs,
+                'inbound' => $inbound,
+                'outbound' => $outbound,
+                'statusCallback' => $statusCallback,
+                'statusCallbackMethod' => $statusCallbackMethod,
+                'tags' => $tags,
+                'voiceFallbackURL' => $voiceFallbackURL,
+                'voiceMethod' => $voiceMethod,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
@@ -235,9 +236,9 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
         string|Sort $sort = 'created_at',
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['filter' => $filter, 'page' => $page, 'sort' => $sort]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

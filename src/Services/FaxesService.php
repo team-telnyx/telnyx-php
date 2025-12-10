@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Faxes\Fax;
 use Telnyx\Faxes\FaxCreateParams\PreviewFormat;
@@ -84,24 +85,24 @@ final class FaxesService implements FaxesContract
         ?string $webhookURL = null,
         ?RequestOptions $requestOptions = null,
     ): FaxNewResponse {
-        $params = [
-            'connectionID' => $connectionID,
-            'from' => $from,
-            'to' => $to,
-            'clientState' => $clientState,
-            'fromDisplayName' => $fromDisplayName,
-            'mediaName' => $mediaName,
-            'mediaURL' => $mediaURL,
-            'monochrome' => $monochrome,
-            'previewFormat' => $previewFormat,
-            'quality' => $quality,
-            'storeMedia' => $storeMedia,
-            'storePreview' => $storePreview,
-            't38Enabled' => $t38Enabled,
-            'webhookURL' => $webhookURL,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'connectionID' => $connectionID,
+                'from' => $from,
+                'to' => $to,
+                'clientState' => $clientState,
+                'fromDisplayName' => $fromDisplayName,
+                'mediaName' => $mediaName,
+                'mediaURL' => $mediaURL,
+                'monochrome' => $monochrome,
+                'previewFormat' => $previewFormat,
+                'quality' => $quality,
+                'storeMedia' => $storeMedia,
+                'storePreview' => $storePreview,
+                't38Enabled' => $t38Enabled,
+                'webhookURL' => $webhookURL,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -155,11 +156,13 @@ final class FaxesService implements FaxesContract
         ?int $pageSize = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = [
-            'filter' => $filter, 'pageNumber' => $pageNumber, 'pageSize' => $pageSize,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'filter' => $filter,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

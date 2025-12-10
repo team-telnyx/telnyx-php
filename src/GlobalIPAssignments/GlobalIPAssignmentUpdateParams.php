@@ -32,7 +32,7 @@ final class GlobalIPAssignmentUpdateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Required('globalIpAssignmentUpdateRequest')]
+    #[Required]
     public GlobalIPAssignmentUpdateRequest $globalIPAssignmentUpdateRequest;
 
     /**

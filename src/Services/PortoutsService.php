@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\Portouts\PortoutDetails;
 use Telnyx\Portouts\PortoutGetResponse;
@@ -114,9 +115,7 @@ final class PortoutsService implements PortoutsContract
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = ['filter' => $filter, 'page' => $page];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -141,9 +140,7 @@ final class PortoutsService implements PortoutsContract
         ?array $filter = null,
         ?RequestOptions $requestOptions = null,
     ): PortoutListRejectionCodesResponse {
-        $params = ['filter' => $filter];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['filter' => $filter]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listRejectionCodes($portoutID, params: $params, requestOptions: $requestOptions);
@@ -170,11 +167,9 @@ final class PortoutsService implements PortoutsContract
         bool $hostMessaging = false,
         ?RequestOptions $requestOptions = null,
     ): PortoutUpdateStatusResponse {
-        $params = [
-            'id' => $id, 'reason' => $reason, 'hostMessaging' => $hostMessaging,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['id' => $id, 'reason' => $reason, 'hostMessaging' => $hostMessaging]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->updateStatus($status, params: $params, requestOptions: $requestOptions);

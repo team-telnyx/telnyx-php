@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\RequirementGroups\RequirementGroup;
 use Telnyx\RequirementGroups\RequirementGroupListParams\Filter\Action;
@@ -50,15 +51,15 @@ final class RequirementGroupsService implements RequirementGroupsContract
         ?array $regulatoryRequirements = null,
         ?RequestOptions $requestOptions = null,
     ): RequirementGroup {
-        $params = [
-            'action' => $action,
-            'countryCode' => $countryCode,
-            'phoneNumberType' => $phoneNumberType,
-            'customerReference' => $customerReference,
-            'regulatoryRequirements' => $regulatoryRequirements,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'action' => $action,
+                'countryCode' => $countryCode,
+                'phoneNumberType' => $phoneNumberType,
+                'customerReference' => $customerReference,
+                'regulatoryRequirements' => $regulatoryRequirements,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -104,12 +105,12 @@ final class RequirementGroupsService implements RequirementGroupsContract
         ?array $regulatoryRequirements = null,
         ?RequestOptions $requestOptions = null,
     ): RequirementGroup {
-        $params = [
-            'customerReference' => $customerReference,
-            'regulatoryRequirements' => $regulatoryRequirements,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'customerReference' => $customerReference,
+                'regulatoryRequirements' => $regulatoryRequirements,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
@@ -138,9 +139,7 @@ final class RequirementGroupsService implements RequirementGroupsContract
         ?array $filter = null,
         ?RequestOptions $requestOptions = null
     ): array {
-        $params = ['filter' => $filter];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['filter' => $filter]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

@@ -6,6 +6,7 @@ namespace Telnyx\Services\Number10dlc\Brand;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingImportsResponse;
 use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingListResponseItem;
 use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingOrderResponse;
@@ -66,13 +67,13 @@ final class ExternalVettingService implements ExternalVettingContract
         ?string $vettingToken = null,
         ?RequestOptions $requestOptions = null,
     ): ExternalVettingImportsResponse {
-        $params = [
-            'evpID' => $evpID,
-            'vettingID' => $vettingID,
-            'vettingToken' => $vettingToken,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'evpID' => $evpID,
+                'vettingID' => $vettingID,
+                'vettingToken' => $vettingToken,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->imports($brandID, params: $params, requestOptions: $requestOptions);
@@ -96,7 +97,9 @@ final class ExternalVettingService implements ExternalVettingContract
         string $vettingClass,
         ?RequestOptions $requestOptions = null,
     ): ExternalVettingOrderResponse {
-        $params = ['evpID' => $evpID, 'vettingClass' => $vettingClass];
+        $params = Util::removeNulls(
+            ['evpID' => $evpID, 'vettingClass' => $vettingClass]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->order($brandID, params: $params, requestOptions: $requestOptions);

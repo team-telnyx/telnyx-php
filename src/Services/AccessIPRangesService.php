@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\AccessIPRanges\AccessIPRange;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AccessIPRangesContract;
@@ -38,9 +39,9 @@ final class AccessIPRangesService implements AccessIPRangesContract
         ?string $description = null,
         ?RequestOptions $requestOptions = null,
     ): AccessIPRange {
-        $params = ['cidrBlock' => $cidrBlock, 'description' => $description];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['cidrBlock' => $cidrBlock, 'description' => $description]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -75,11 +76,13 @@ final class AccessIPRangesService implements AccessIPRangesContract
         ?int $pageSize = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = [
-            'filter' => $filter, 'pageNumber' => $pageNumber, 'pageSize' => $pageSize,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'filter' => $filter,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

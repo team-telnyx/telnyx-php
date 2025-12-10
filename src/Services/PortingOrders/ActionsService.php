@@ -6,6 +6,7 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\PortingOrders\Actions\ActionActivateResponse;
 use Telnyx\PortingOrders\Actions\ActionCancelResponse;
 use Telnyx\PortingOrders\Actions\ActionConfirmResponse;
@@ -103,11 +104,9 @@ final class ActionsService implements ActionsContract
         string|Permissions|null $permissions = null,
         ?RequestOptions $requestOptions = null,
     ): ActionShareResponse {
-        $params = [
-            'expiresInSeconds' => $expiresInSeconds, 'permissions' => $permissions,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['expiresInSeconds' => $expiresInSeconds, 'permissions' => $permissions]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->share($id, params: $params, requestOptions: $requestOptions);

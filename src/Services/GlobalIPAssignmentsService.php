@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignment;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentDeleteResponse;
@@ -87,9 +88,9 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
         array $globalIPAssignmentUpdateRequest,
         ?RequestOptions $requestOptions = null,
     ): GlobalIPAssignmentUpdateResponse {
-        $params = [
-            'globalIPAssignmentUpdateRequest' => $globalIPAssignmentUpdateRequest,
-        ];
+        $params = Util::removeNulls(
+            ['globalIPAssignmentUpdateRequest' => $globalIPAssignmentUpdateRequest]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($globalIPAssignmentID, params: $params, requestOptions: $requestOptions);
@@ -114,9 +115,7 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
         ?array $page = null,
         ?RequestOptions $requestOptions = null
     ): DefaultPagination {
-        $params = ['page' => $page];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

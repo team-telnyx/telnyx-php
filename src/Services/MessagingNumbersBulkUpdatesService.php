@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateGetResponse;
 use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateNewResponse;
 use Telnyx\RequestOptions;
@@ -44,9 +45,9 @@ final class MessagingNumbersBulkUpdatesService implements MessagingNumbersBulkUp
         array $numbers,
         ?RequestOptions $requestOptions = null,
     ): MessagingNumbersBulkUpdateNewResponse {
-        $params = [
-            'messagingProfileID' => $messagingProfileID, 'numbers' => $numbers,
-        ];
+        $params = Util::removeNulls(
+            ['messagingProfileID' => $messagingProfileID, 'numbers' => $numbers]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
