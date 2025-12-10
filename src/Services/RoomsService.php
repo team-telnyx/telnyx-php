@@ -7,9 +7,10 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
+use Telnyx\Rooms\Room;
 use Telnyx\Rooms\RoomGetResponse;
-use Telnyx\Rooms\RoomListResponse;
 use Telnyx\Rooms\RoomNewResponse;
 use Telnyx\Rooms\RoomUpdateResponse;
 use Telnyx\ServiceContracts\RoomsContract;
@@ -163,6 +164,8 @@ final class RoomsService implements RoomsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
+     * @return DefaultPagination<Room>
+     *
      * @throws APIException
      */
     public function list(
@@ -170,7 +173,7 @@ final class RoomsService implements RoomsContract
         ?bool $includeSessions = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): RoomListResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(
             [
                 'filter' => $filter,

@@ -7,16 +7,17 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\OutboundVoiceProfiles\OutboundCallRecording;
 use Telnyx\OutboundVoiceProfiles\OutboundCallRecording\CallRecordingChannels;
 use Telnyx\OutboundVoiceProfiles\OutboundCallRecording\CallRecordingFormat;
 use Telnyx\OutboundVoiceProfiles\OutboundCallRecording\CallRecordingType;
+use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileCreateParams;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileDeleteResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileGetResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Sort;
-use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileNewResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateParams;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateResponse;
@@ -175,7 +176,7 @@ final class OutboundVoiceProfilesRawService implements OutboundVoiceProfilesRawC
      *   sort?: value-of<Sort>,
      * }|OutboundVoiceProfileListParams $params
      *
-     * @return BaseResponse<OutboundVoiceProfileListResponse>
+     * @return BaseResponse<DefaultPagination<OutboundVoiceProfile>>
      *
      * @throws APIException
      */
@@ -194,7 +195,8 @@ final class OutboundVoiceProfilesRawService implements OutboundVoiceProfilesRawC
             path: 'outbound_voice_profiles',
             query: $parsed,
             options: $options,
-            convert: OutboundVoiceProfileListResponse::class,
+            convert: OutboundVoiceProfile::class,
+            page: DefaultPagination::class,
         );
     }
 

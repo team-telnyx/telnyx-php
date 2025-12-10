@@ -7,6 +7,8 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardsContract;
 use Telnyx\Services\SimCards\ActionsService;
@@ -17,12 +19,12 @@ use Telnyx\SimCards\SimCardGetPublicIPResponse;
 use Telnyx\SimCards\SimCardGetResponse;
 use Telnyx\SimCards\SimCardListParams\Filter\Status;
 use Telnyx\SimCards\SimCardListParams\Sort;
-use Telnyx\SimCards\SimCardListResponse;
 use Telnyx\SimCards\SimCardListWirelessConnectivityLogsResponse;
 use Telnyx\SimCards\SimCardUpdateParams\DataLimit\Unit;
 use Telnyx\SimCards\SimCardUpdateResponse;
 use Telnyx\SimCardStatus;
 use Telnyx\SimCardStatus\Value;
+use Telnyx\SimpleSimCard;
 
 final class SimCardsService implements SimCardsContract
 {
@@ -80,7 +82,7 @@ final class SimCardsService implements SimCardsContract
      *
      * Updates SIM card data
      *
-     * @param string $id identifies the SIM
+     * @param string $simCardID identifies the SIM
      * @param list<string>|null $authorizedImeis list of IMEIs authorized to use a given SIM card
      * @param array{
      *   amount?: string, unit?: 'MB'|'GB'|Unit
@@ -95,7 +97,7 @@ final class SimCardsService implements SimCardsContract
      * @throws APIException
      */
     public function update(
-        string $id,
+        string $simCardID,
         ?array $authorizedImeis = null,
         ?array $dataLimit = null,
         ?string $simCardGroupID = null,
@@ -114,7 +116,7 @@ final class SimCardsService implements SimCardsContract
         );
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->update($simCardID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -136,6 +138,8 @@ final class SimCardsService implements SimCardsContract
      * } $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
      * @param 'current_billing_period_consumed_data.amount'|'-current_billing_period_consumed_data.amount'|Sort $sort Sorts SIM cards by the given field. Defaults to ascending order unless field is prefixed with a minus sign.
      *
+     * @return DefaultPagination<SimpleSimCard>
+     *
      * @throws APIException
      */
     public function list(
@@ -145,7 +149,7 @@ final class SimCardsService implements SimCardsContract
         ?array $page = null,
         string|Sort|null $sort = null,
         ?RequestOptions $requestOptions = null,
-    ): SimCardListResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(
             [
                 'filter' => $filter,
@@ -254,6 +258,8 @@ final class SimCardsService implements SimCardsContract
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
      *
+     * @return DefaultFlatPagination<SimCardListWirelessConnectivityLogsResponse>
+     *
      * @throws APIException
      */
     public function listWirelessConnectivityLogs(
@@ -261,7 +267,7 @@ final class SimCardsService implements SimCardsContract
         int $pageNumber = 1,
         int $pageSize = 20,
         ?RequestOptions $requestOptions = null,
-    ): SimCardListWirelessConnectivityLogsResponse {
+    ): DefaultFlatPagination {
         $params = Util::removeNulls(
             ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
         );

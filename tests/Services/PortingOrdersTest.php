@@ -6,12 +6,13 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
+use Telnyx\PortingOrders\PortingOrder;
 use Telnyx\PortingOrders\PortingOrderGetAllowedFocWindowsResponse;
 use Telnyx\PortingOrders\PortingOrderGetExceptionTypesResponse;
 use Telnyx\PortingOrders\PortingOrderGetRequirementsResponse;
 use Telnyx\PortingOrders\PortingOrderGetResponse;
 use Telnyx\PortingOrders\PortingOrderGetSubRequestResponse;
-use Telnyx\PortingOrders\PortingOrderListResponse;
 use Telnyx\PortingOrders\PortingOrderNewResponse;
 use Telnyx\PortingOrders\PortingOrderUpdateResponse;
 use Tests\UnsupportedMockTests;
@@ -103,10 +104,15 @@ final class PortingOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->portingOrders->list();
+        $page = $this->client->portingOrders->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PortingOrderListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(PortingOrder::class, $item);
+        }
     }
 
     #[Test]
@@ -180,15 +186,20 @@ final class PortingOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->portingOrders->retrieveRequirements(
+        $page = $this->client->portingOrders->retrieveRequirements(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            PortingOrderGetRequirementsResponse::class,
-            $result
-        );
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(
+                PortingOrderGetRequirementsResponse::class,
+                $item
+            );
+        }
     }
 
     #[Test]

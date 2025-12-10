@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\VoiceSettings;
 
-use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\UnionMember0;
-use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\UnionMember1;
-use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\UnionMember2;
+use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\MediaName;
+use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\MediaURL;
+use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\PredefinedMedia;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
@@ -18,11 +18,20 @@ final class BackgroundAudio implements ConverterSource
 {
     use SdkUnion;
 
+    public static function discriminator(): string
+    {
+        return 'type';
+    }
+
     /**
      * @return list<string|Converter|ConverterSource>|array<string,string|Converter|ConverterSource>
      */
     public static function variants(): array
     {
-        return [UnionMember0::class, UnionMember1::class, UnionMember2::class];
+        return [
+            'predefined_media' => PredefinedMedia::class,
+            'media_url' => MediaURL::class,
+            'media_name' => MediaName::class,
+        ];
     }
 }

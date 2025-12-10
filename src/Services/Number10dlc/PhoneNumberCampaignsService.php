@@ -7,9 +7,9 @@ namespace Telnyx\Services\Number10dlc;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\Number10dlc\PhoneNumberCampaigns\PhoneNumberCampaign;
 use Telnyx\Number10dlc\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Sort;
-use Telnyx\Number10dlc\PhoneNumberCampaigns\PhoneNumberCampaignListResponse;
-use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign;
+use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Number10dlc\PhoneNumberCampaignsContract;
 
@@ -81,7 +81,7 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
      * @throws APIException
      */
     public function update(
-        string $phoneNumber_,
+        string $campaignPhoneNumber,
         string $campaignID,
         string $phoneNumber,
         ?RequestOptions $requestOptions = null,
@@ -91,7 +91,7 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
         );
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->update($phoneNumber_, params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->update($campaignPhoneNumber, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -109,6 +109,8 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
      * } $filter Consolidated filter parameter (deepObject style). Originally: filter[telnyx_campaign_id], filter[telnyx_brand_id], filter[tcr_campaign_id], filter[tcr_brand_id]
      * @param 'assignmentStatus'|'-assignmentStatus'|'createdAt'|'-createdAt'|'phoneNumber'|'-phoneNumber'|Sort $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
      *
+     * @return PerPagePaginationV2<PhoneNumberCampaign>
+     *
      * @throws APIException
      */
     public function list(
@@ -117,7 +119,7 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
         int $recordsPerPage = 20,
         string|Sort $sort = '-createdAt',
         ?RequestOptions $requestOptions = null,
-    ): PhoneNumberCampaignListResponse {
+    ): PerPagePaginationV2 {
         $params = Util::removeNulls(
             [
                 'filter' => $filter,

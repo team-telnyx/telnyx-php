@@ -4,15 +4,18 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Number10dlc;
 
-use Telnyx\Brand\TelnyxBrand;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Number10dlc\Brand\BrandCreateParams;
 use Telnyx\Number10dlc\Brand\BrandGetFeedbackResponse;
 use Telnyx\Number10dlc\Brand\BrandGetResponse;
+use Telnyx\Number10dlc\Brand\BrandGetSMSOtpStatusResponse;
 use Telnyx\Number10dlc\Brand\BrandListParams;
 use Telnyx\Number10dlc\Brand\BrandListResponse;
+use Telnyx\Number10dlc\Brand\BrandRetrieveSMSOtpStatusParams;
 use Telnyx\Number10dlc\Brand\BrandUpdateParams;
+use Telnyx\Number10dlc\Brand\TelnyxBrand;
+use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 
 interface BrandRawContract
@@ -63,7 +66,7 @@ interface BrandRawContract
      *
      * @param array<mixed>|BrandListParams $params
      *
-     * @return BaseResponse<BrandListResponse>
+     * @return BaseResponse<PerPagePaginationV2<BrandListResponse>>
      *
      * @throws APIException
      */
@@ -106,6 +109,22 @@ interface BrandRawContract
     public function resend2faEmail(
         string $brandID,
         ?RequestOptions $requestOptions = null
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $referenceID The reference ID returned when the OTP was initially triggered
+     * @param array<mixed>|BrandRetrieveSMSOtpStatusParams $params
+     *
+     * @return BaseResponse<BrandGetSMSOtpStatusResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveSMSOtpStatus(
+        string $referenceID,
+        array|BrandRetrieveSMSOtpStatusParams $params,
+        ?RequestOptions $requestOptions = null,
     ): BaseResponse;
 
     /**

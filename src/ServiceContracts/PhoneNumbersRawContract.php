@@ -6,10 +6,11 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse;
+use Telnyx\PhoneNumbers\PhoneNumberDetailed;
 use Telnyx\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\PhoneNumbers\PhoneNumberListParams;
-use Telnyx\PhoneNumbers\PhoneNumberListResponse;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListParams;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListResponse;
 use Telnyx\PhoneNumbers\PhoneNumberUpdateParams;
@@ -35,7 +36,7 @@ interface PhoneNumbersRawContract
     /**
      * @api
      *
-     * @param string $id identifies the resource
+     * @param string $phoneNumberID identifies the resource
      * @param array<mixed>|PhoneNumberUpdateParams $params
      *
      * @return BaseResponse<PhoneNumberUpdateResponse>
@@ -43,7 +44,7 @@ interface PhoneNumbersRawContract
      * @throws APIException
      */
     public function update(
-        string $id,
+        string $phoneNumberID,
         array|PhoneNumberUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse;
@@ -53,7 +54,7 @@ interface PhoneNumbersRawContract
      *
      * @param array<mixed>|PhoneNumberListParams $params
      *
-     * @return BaseResponse<PhoneNumberListResponse>
+     * @return BaseResponse<DefaultPagination<PhoneNumberDetailed>>
      *
      * @throws APIException
      */
@@ -81,7 +82,7 @@ interface PhoneNumbersRawContract
      *
      * @param array<mixed>|PhoneNumberSlimListParams $params
      *
-     * @return BaseResponse<PhoneNumberSlimListResponse>
+     * @return BaseResponse<DefaultPagination<PhoneNumberSlimListResponse>>
      *
      * @throws APIException
      */

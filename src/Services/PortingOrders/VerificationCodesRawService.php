@@ -7,6 +7,7 @@ namespace Telnyx\Services\PortingOrders;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Sort\Value;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListResponse;
@@ -37,7 +38,7 @@ final class VerificationCodesRawService implements VerificationCodesRawContract
      *   sort?: array{value?: 'created_at'|'-created_at'|Value},
      * }|VerificationCodeListParams $params
      *
-     * @return BaseResponse<VerificationCodeListResponse>
+     * @return BaseResponse<DefaultPagination<VerificationCodeListResponse>>
      *
      * @throws APIException
      */
@@ -58,6 +59,7 @@ final class VerificationCodesRawService implements VerificationCodesRawContract
             query: $parsed,
             options: $options,
             convert: VerificationCodeListResponse::class,
+            page: DefaultPagination::class,
         );
     }
 

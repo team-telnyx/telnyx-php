@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\Versions;
 
 use Telnyx\AI\Assistants\AssistantTool;
-use Telnyx\AI\Assistants\AssistantTool\DtmfTool;
-use Telnyx\AI\Assistants\AssistantTool\HandoffTool;
-use Telnyx\AI\Assistants\AssistantTool\HandoffTool\Handoff;
-use Telnyx\AI\Assistants\AssistantTool\SipReferTool;
-use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer;
+use Telnyx\AI\Assistants\AssistantTool\Handoff;
+use Telnyx\AI\Assistants\AssistantTool\Refer;
+use Telnyx\AI\Assistants\AssistantTool\SendDtmf;
 use Telnyx\AI\Assistants\EnabledFeatures;
 use Telnyx\AI\Assistants\HangupTool;
 use Telnyx\AI\Assistants\HangupToolParams;
@@ -23,12 +21,12 @@ use Telnyx\AI\Assistants\RetrievalTool;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
 use Telnyx\AI\Assistants\TranscriptionSettings\Model;
-use Telnyx\AI\Assistants\TranscriptionSettings\Settings;
+use Telnyx\AI\Assistants\TranscriptionSettingsConfig;
 use Telnyx\AI\Assistants\TransferTool;
 use Telnyx\AI\Assistants\VoiceSettings;
-use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\UnionMember0;
-use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\UnionMember1;
-use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\UnionMember2;
+use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\MediaName;
+use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\MediaURL;
+use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\PredefinedMedia;
 use Telnyx\AI\Assistants\WebhookTool;
 use Telnyx\AI\Assistants\WebhookTool\Type;
 use Telnyx\Core\Attributes\Optional;
@@ -67,32 +65,28 @@ use Telnyx\Core\Contracts\BaseModel;
  *   }|RetrievalTool|array{
  *     retrieval: InferenceEmbeddingBucketIDs,
  *     type: value-of<\Telnyx\AI\Assistants\RetrievalTool\Type>,
- *   }|HandoffTool|array{
- *     handoff: Handoff,
- *     type: value-of<\Telnyx\AI\Assistants\AssistantTool\HandoffTool\Type>,
+ *   }|Handoff|array{
+ *     handoff: \Telnyx\AI\Assistants\AssistantTool\Handoff\Handoff,
+ *     type?: 'handoff',
  *   }|HangupTool|array{
  *     hangup: HangupToolParams,
  *     type: value-of<\Telnyx\AI\Assistants\HangupTool\Type>,
  *   }|TransferTool|array{
  *     transfer: InferenceEmbeddingTransferToolParams,
  *     type: value-of<\Telnyx\AI\Assistants\TransferTool\Type>,
- *   }|SipReferTool|array{
- *     refer: Refer,
- *     type: value-of<\Telnyx\AI\Assistants\AssistantTool\SipReferTool\Type>,
- *   }|DtmfTool|array{
- *     sendDtmf: array<string,mixed>,
- *     type: value-of<\Telnyx\AI\Assistants\AssistantTool\DtmfTool\Type>,
- *   }>,
+ *   }|Refer|array{
+ *     refer: \Telnyx\AI\Assistants\AssistantTool\Refer\Refer, type?: 'refer'
+ *   }|SendDtmf|array{sendDtmf: array<string,mixed>, type?: 'send_dtmf'}>,
  *   transcription?: TranscriptionSettings|array{
  *     language?: string|null,
  *     model?: value-of<Model>|null,
  *     region?: string|null,
- *     settings?: Settings|null,
+ *     settings?: TranscriptionSettingsConfig|null,
  *   },
  *   voiceSettings?: VoiceSettings|array{
  *     voice: string,
  *     apiKeyRef?: string|null,
- *     backgroundAudio?: null|UnionMember0|UnionMember1|UnionMember2,
+ *     backgroundAudio?: null|PredefinedMedia|MediaURL|MediaName,
  *     voiceSpeed?: float|null,
  *   },
  * }
@@ -169,7 +163,7 @@ final class VersionUpdateParams implements BaseModel
     /**
      * The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
      *
-     * @var list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool>|null $tools
+     * @var list<WebhookTool|RetrievalTool|Handoff|HangupTool|TransferTool|Refer|SendDtmf>|null $tools
      */
     #[Optional(list: AssistantTool::class)]
     public ?array $tools;
@@ -220,32 +214,27 @@ final class VersionUpdateParams implements BaseModel
      * }|RetrievalTool|array{
      *   retrieval: InferenceEmbeddingBucketIDs,
      *   type: value-of<RetrievalTool\Type>,
-     * }|HandoffTool|array{
-     *   handoff: Handoff,
-     *   type: value-of<HandoffTool\Type>,
+     * }|Handoff|array{
+     *   handoff: Handoff\Handoff, type?: 'handoff'
      * }|HangupTool|array{
      *   hangup: HangupToolParams,
      *   type: value-of<HangupTool\Type>,
      * }|TransferTool|array{
      *   transfer: InferenceEmbeddingTransferToolParams,
      *   type: value-of<TransferTool\Type>,
-     * }|SipReferTool|array{
-     *   refer: Refer,
-     *   type: value-of<SipReferTool\Type>,
-     * }|DtmfTool|array{
-     *   sendDtmf: array<string,mixed>,
-     *   type: value-of<DtmfTool\Type>,
-     * }> $tools
+     * }|Refer|array{
+     *   refer: Refer\Refer, type?: 'refer'
+     * }|SendDtmf|array{sendDtmf: array<string,mixed>, type?: 'send_dtmf'}> $tools
      * @param TranscriptionSettings|array{
      *   language?: string|null,
      *   model?: value-of<Model>|null,
      *   region?: string|null,
-     *   settings?: Settings|null,
+     *   settings?: TranscriptionSettingsConfig|null,
      * } $transcription
      * @param VoiceSettings|array{
      *   voice: string,
      *   apiKeyRef?: string|null,
-     *   backgroundAudio?: UnionMember0|UnionMember1|UnionMember2|null,
+     *   backgroundAudio?: PredefinedMedia|MediaURL|MediaName|null,
      *   voiceSpeed?: float|null,
      * } $voiceSettings
      */
@@ -457,22 +446,17 @@ final class VersionUpdateParams implements BaseModel
      * }|RetrievalTool|array{
      *   retrieval: InferenceEmbeddingBucketIDs,
      *   type: value-of<RetrievalTool\Type>,
-     * }|HandoffTool|array{
-     *   handoff: Handoff,
-     *   type: value-of<HandoffTool\Type>,
+     * }|Handoff|array{
+     *   handoff: Handoff\Handoff, type?: 'handoff'
      * }|HangupTool|array{
      *   hangup: HangupToolParams,
      *   type: value-of<HangupTool\Type>,
      * }|TransferTool|array{
      *   transfer: InferenceEmbeddingTransferToolParams,
      *   type: value-of<TransferTool\Type>,
-     * }|SipReferTool|array{
-     *   refer: Refer,
-     *   type: value-of<SipReferTool\Type>,
-     * }|DtmfTool|array{
-     *   sendDtmf: array<string,mixed>,
-     *   type: value-of<DtmfTool\Type>,
-     * }> $tools
+     * }|Refer|array{
+     *   refer: Refer\Refer, type?: 'refer'
+     * }|SendDtmf|array{sendDtmf: array<string,mixed>, type?: 'send_dtmf'}> $tools
      */
     public function withTools(array $tools): self
     {
@@ -487,7 +471,7 @@ final class VersionUpdateParams implements BaseModel
      *   language?: string|null,
      *   model?: value-of<Model>|null,
      *   region?: string|null,
-     *   settings?: Settings|null,
+     *   settings?: TranscriptionSettingsConfig|null,
      * } $transcription
      */
     public function withTranscription(
@@ -503,7 +487,7 @@ final class VersionUpdateParams implements BaseModel
      * @param VoiceSettings|array{
      *   voice: string,
      *   apiKeyRef?: string|null,
-     *   backgroundAudio?: UnionMember0|UnionMember1|UnionMember2|null,
+     *   backgroundAudio?: PredefinedMedia|MediaURL|MediaName|null,
      *   voiceSpeed?: float|null,
      * } $voiceSettings
      */

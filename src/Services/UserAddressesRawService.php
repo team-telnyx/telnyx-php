@@ -7,13 +7,14 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\UserAddressesRawContract;
+use Telnyx\UserAddresses\UserAddress;
 use Telnyx\UserAddresses\UserAddressCreateParams;
 use Telnyx\UserAddresses\UserAddressGetResponse;
 use Telnyx\UserAddresses\UserAddressListParams;
 use Telnyx\UserAddresses\UserAddressListParams\Sort;
-use Telnyx\UserAddresses\UserAddressListResponse;
 use Telnyx\UserAddresses\UserAddressNewResponse;
 
 final class UserAddressesRawService implements UserAddressesRawContract
@@ -107,7 +108,7 @@ final class UserAddressesRawService implements UserAddressesRawContract
      *   sort?: 'created_at'|'first_name'|'last_name'|'business_name'|'street_address'|Sort,
      * }|UserAddressListParams $params
      *
-     * @return BaseResponse<UserAddressListResponse>
+     * @return BaseResponse<DefaultPagination<UserAddress>>
      *
      * @throws APIException
      */
@@ -126,7 +127,8 @@ final class UserAddressesRawService implements UserAddressesRawContract
             path: 'user_addresses',
             query: $parsed,
             options: $options,
-            convert: UserAddressListResponse::class,
+            convert: UserAddress::class,
+            page: DefaultPagination::class,
         );
     }
 }

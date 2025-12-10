@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\SimCardGroups\SimCardGroupDeleteResponse;
 use Telnyx\SimCardGroups\SimCardGroupGetResponse;
@@ -71,6 +72,8 @@ interface SimCardGroupsContract
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
      *
+     * @return DefaultFlatPagination<SimCardGroupListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -80,7 +83,7 @@ interface SimCardGroupsContract
         int $pageNumber = 1,
         int $pageSize = 20,
         ?RequestOptions $requestOptions = null,
-    ): SimCardGroupListResponse;
+    ): DefaultFlatPagination;
 
     /**
      * @api

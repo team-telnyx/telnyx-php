@@ -7,12 +7,12 @@ namespace Telnyx\Services\Number10dlc;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Number10dlc\PhoneNumberCampaigns\PhoneNumberCampaign;
 use Telnyx\Number10dlc\PhoneNumberCampaigns\PhoneNumberCampaignCreateParams;
 use Telnyx\Number10dlc\PhoneNumberCampaigns\PhoneNumberCampaignListParams;
 use Telnyx\Number10dlc\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Sort;
-use Telnyx\Number10dlc\PhoneNumberCampaigns\PhoneNumberCampaignListResponse;
 use Telnyx\Number10dlc\PhoneNumberCampaigns\PhoneNumberCampaignUpdateParams;
-use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign;
+use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Number10dlc\PhoneNumberCampaignsRawContract;
 
@@ -92,7 +92,7 @@ final class PhoneNumberCampaignsRawService implements PhoneNumberCampaignsRawCon
      * @throws APIException
      */
     public function update(
-        string $phoneNumber_,
+        string $campaignPhoneNumber,
         array|PhoneNumberCampaignUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse {
@@ -104,7 +104,7 @@ final class PhoneNumberCampaignsRawService implements PhoneNumberCampaignsRawCon
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
-            path: ['10dlc/phone_number_campaigns/%1$s', $phoneNumber_],
+            path: ['10dlc/phone_number_campaigns/%1$s', $campaignPhoneNumber],
             body: (object) $parsed,
             options: $options,
             convert: PhoneNumberCampaign::class,
@@ -128,7 +128,7 @@ final class PhoneNumberCampaignsRawService implements PhoneNumberCampaignsRawCon
      *   sort?: value-of<Sort>,
      * }|PhoneNumberCampaignListParams $params
      *
-     * @return BaseResponse<PhoneNumberCampaignListResponse>
+     * @return BaseResponse<PerPagePaginationV2<PhoneNumberCampaign>>
      *
      * @throws APIException
      */
@@ -147,7 +147,8 @@ final class PhoneNumberCampaignsRawService implements PhoneNumberCampaignsRawCon
             path: '10dlc/phone_number_campaigns',
             query: $parsed,
             options: $options,
-            convert: PhoneNumberCampaignListResponse::class,
+            convert: PhoneNumberCampaign::class,
+            page: PerPagePaginationV2::class,
         );
     }
 

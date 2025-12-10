@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type InsightUpdateParamsShape = array{
  *   instructions?: string,
- *   jsonSchema?: mixed|string,
+ *   jsonSchema?: string|array<string,mixed>,
  *   name?: string,
  *   webhook?: string,
  * }
@@ -31,9 +31,9 @@ final class InsightUpdateParams implements BaseModel
     #[Optional]
     public ?string $instructions;
 
-    /** @var mixed|string|null $jsonSchema */
+    /** @var string|array<string,mixed>|null $jsonSchema */
     #[Optional('json_schema', union: JsonSchema::class)]
-    public mixed $jsonSchema;
+    public string|array|null $jsonSchema;
 
     #[Optional]
     public ?string $name;
@@ -51,11 +51,11 @@ final class InsightUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param mixed|string $jsonSchema
+     * @param string|array<string,mixed> $jsonSchema
      */
     public static function with(
         ?string $instructions = null,
-        mixed $jsonSchema = null,
+        string|array|null $jsonSchema = null,
         ?string $name = null,
         ?string $webhook = null,
     ): self {
@@ -78,9 +78,9 @@ final class InsightUpdateParams implements BaseModel
     }
 
     /**
-     * @param mixed|string $jsonSchema
+     * @param string|array<string,mixed> $jsonSchema
      */
-    public function withJsonSchema(mixed $jsonSchema): self
+    public function withJsonSchema(string|array $jsonSchema): self
     {
         $self = clone $this;
         $self['jsonSchema'] = $jsonSchema;

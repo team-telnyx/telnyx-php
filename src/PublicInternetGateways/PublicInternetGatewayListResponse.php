@@ -4,16 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\PublicInternetGateways;
 
-use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Networks\InterfaceStatus;
-use Telnyx\PublicInternetGateways\PublicInternetGatewayListResponse\Data;
 
 /**
  * @phpstan-type PublicInternetGatewayListResponseShape = array{
- *   data?: list<Data>|null, meta?: PaginationMeta|null
+ *   id?: string|null,
+ *   createdAt?: string|null,
+ *   recordType?: string|null,
+ *   updatedAt?: string|null,
+ *   name?: string|null,
+ *   networkID?: string|null,
+ *   status?: value-of<InterfaceStatus>|null,
+ *   publicIP?: string|null,
+ *   regionCode?: string|null,
  * }
  */
 final class PublicInternetGatewayListResponse implements BaseModel
@@ -21,12 +27,61 @@ final class PublicInternetGatewayListResponse implements BaseModel
     /** @use SdkModel<PublicInternetGatewayListResponseShape> */
     use SdkModel;
 
-    /** @var list<Data>|null $data */
-    #[Optional(list: Data::class)]
-    public ?array $data;
-
+    /**
+     * Identifies the resource.
+     */
     #[Optional]
-    public ?PaginationMeta $meta;
+    public ?string $id;
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was created.
+     */
+    #[Optional('created_at')]
+    public ?string $createdAt;
+
+    /**
+     * Identifies the type of the resource.
+     */
+    #[Optional('record_type')]
+    public ?string $recordType;
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was updated.
+     */
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
+
+    /**
+     * A user specified name for the interface.
+     */
+    #[Optional]
+    public ?string $name;
+
+    /**
+     * The id of the network associated with the interface.
+     */
+    #[Optional('network_id')]
+    public ?string $networkID;
+
+    /**
+     * The current status of the interface deployment.
+     *
+     * @var value-of<InterfaceStatus>|null $status
+     */
+    #[Optional(enum: InterfaceStatus::class)]
+    public ?string $status;
+
+    /**
+     * The publically accessible ip for this interface.
+     */
+    #[Optional('public_ip')]
+    public ?string $publicIP;
+
+    /**
+     * The region interface is deployed to.
+     */
+    #[Optional('region_code')]
+    public ?string $regionCode;
 
     public function __construct()
     {
@@ -38,69 +93,131 @@ final class PublicInternetGatewayListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     *   name?: string|null,
-     *   networkID?: string|null,
-     *   status?: value-of<InterfaceStatus>|null,
-     *   publicIP?: string|null,
-     *   regionCode?: string|null,
-     * }> $data
-     * @param PaginationMeta|array{
-     *   pageNumber?: int|null,
-     *   pageSize?: int|null,
-     *   totalPages?: int|null,
-     *   totalResults?: int|null,
-     * } $meta
+     * @param InterfaceStatus|value-of<InterfaceStatus> $status
      */
     public static function with(
-        ?array $data = null,
-        PaginationMeta|array|null $meta = null
+        ?string $id = null,
+        ?string $createdAt = null,
+        ?string $recordType = null,
+        ?string $updatedAt = null,
+        ?string $name = null,
+        ?string $networkID = null,
+        InterfaceStatus|string|null $status = null,
+        ?string $publicIP = null,
+        ?string $regionCode = null,
     ): self {
         $self = new self;
 
-        null !== $data && $self['data'] = $data;
-        null !== $meta && $self['meta'] = $meta;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $name && $self['name'] = $name;
+        null !== $networkID && $self['networkID'] = $networkID;
+        null !== $status && $self['status'] = $status;
+        null !== $publicIP && $self['publicIP'] = $publicIP;
+        null !== $regionCode && $self['regionCode'] = $regionCode;
 
         return $self;
     }
 
     /**
-     * @param list<Data|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     *   name?: string|null,
-     *   networkID?: string|null,
-     *   status?: value-of<InterfaceStatus>|null,
-     *   publicIP?: string|null,
-     *   regionCode?: string|null,
-     * }> $data
+     * Identifies the resource.
      */
-    public function withData(array $data): self
+    public function withID(string $id): self
     {
         $self = clone $this;
-        $self['data'] = $data;
+        $self['id'] = $id;
 
         return $self;
     }
 
     /**
-     * @param PaginationMeta|array{
-     *   pageNumber?: int|null,
-     *   pageSize?: int|null,
-     *   totalPages?: int|null,
-     *   totalResults?: int|null,
-     * } $meta
+     * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    public function withMeta(PaginationMeta|array $meta): self
+    public function withCreatedAt(string $createdAt): self
     {
         $self = clone $this;
-        $self['meta'] = $meta;
+        $self['createdAt'] = $createdAt;
+
+        return $self;
+    }
+
+    /**
+     * Identifies the type of the resource.
+     */
+    public function withRecordType(string $recordType): self
+    {
+        $self = clone $this;
+        $self['recordType'] = $recordType;
+
+        return $self;
+    }
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was updated.
+     */
+    public function withUpdatedAt(string $updatedAt): self
+    {
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
+
+        return $self;
+    }
+
+    /**
+     * A user specified name for the interface.
+     */
+    public function withName(string $name): self
+    {
+        $self = clone $this;
+        $self['name'] = $name;
+
+        return $self;
+    }
+
+    /**
+     * The id of the network associated with the interface.
+     */
+    public function withNetworkID(string $networkID): self
+    {
+        $self = clone $this;
+        $self['networkID'] = $networkID;
+
+        return $self;
+    }
+
+    /**
+     * The current status of the interface deployment.
+     *
+     * @param InterfaceStatus|value-of<InterfaceStatus> $status
+     */
+    public function withStatus(InterfaceStatus|string $status): self
+    {
+        $self = clone $this;
+        $self['status'] = $status;
+
+        return $self;
+    }
+
+    /**
+     * The publically accessible ip for this interface.
+     */
+    public function withPublicIP(string $publicIP): self
+    {
+        $self = clone $this;
+        $self['publicIP'] = $publicIP;
+
+        return $self;
+    }
+
+    /**
+     * The region interface is deployed to.
+     */
+    public function withRegionCode(string $regionCode): self
+    {
+        $self = clone $this;
+        $self['regionCode'] = $regionCode;
 
         return $self;
     }

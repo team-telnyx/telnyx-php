@@ -8,6 +8,8 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardsRawContract;
 use Telnyx\SimCards\SimCardDeleteParams;
@@ -19,7 +21,6 @@ use Telnyx\SimCards\SimCardGetResponse;
 use Telnyx\SimCards\SimCardListParams;
 use Telnyx\SimCards\SimCardListParams\Filter\Status;
 use Telnyx\SimCards\SimCardListParams\Sort;
-use Telnyx\SimCards\SimCardListResponse;
 use Telnyx\SimCards\SimCardListWirelessConnectivityLogsParams;
 use Telnyx\SimCards\SimCardListWirelessConnectivityLogsResponse;
 use Telnyx\SimCards\SimCardRetrieveParams;
@@ -28,6 +29,7 @@ use Telnyx\SimCards\SimCardUpdateParams\DataLimit\Unit;
 use Telnyx\SimCards\SimCardUpdateResponse;
 use Telnyx\SimCardStatus;
 use Telnyx\SimCardStatus\Value;
+use Telnyx\SimpleSimCard;
 
 final class SimCardsRawService implements SimCardsRawContract
 {
@@ -82,7 +84,7 @@ final class SimCardsRawService implements SimCardsRawContract
      *
      * Updates SIM card data
      *
-     * @param string $id identifies the SIM
+     * @param string $simCardID identifies the SIM
      * @param array{
      *   authorizedImeis?: list<string>|null,
      *   dataLimit?: array{amount?: string, unit?: 'MB'|'GB'|Unit},
@@ -99,7 +101,7 @@ final class SimCardsRawService implements SimCardsRawContract
      * @throws APIException
      */
     public function update(
-        string $id,
+        string $simCardID,
         array|SimCardUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse {
@@ -111,7 +113,7 @@ final class SimCardsRawService implements SimCardsRawContract
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
-            path: ['sim_cards/%1$s', $id],
+            path: ['sim_cards/%1$s', $simCardID],
             body: (object) $parsed,
             options: $options,
             convert: SimCardUpdateResponse::class,
@@ -135,7 +137,7 @@ final class SimCardsRawService implements SimCardsRawContract
      *   sort?: value-of<Sort>,
      * }|SimCardListParams $params
      *
-     * @return BaseResponse<SimCardListResponse>
+     * @return BaseResponse<DefaultPagination<SimpleSimCard>>
      *
      * @throws APIException
      */
@@ -160,7 +162,8 @@ final class SimCardsRawService implements SimCardsRawContract
                 ],
             ),
             options: $options,
-            convert: SimCardListResponse::class,
+            convert: SimpleSimCard::class,
+            page: DefaultPagination::class,
         );
     }
 
@@ -284,7 +287,7 @@ final class SimCardsRawService implements SimCardsRawContract
      *   pageNumber?: int, pageSize?: int
      * }|SimCardListWirelessConnectivityLogsParams $params
      *
-     * @return BaseResponse<SimCardListWirelessConnectivityLogsResponse>
+     * @return BaseResponse<DefaultFlatPagination<SimCardListWirelessConnectivityLogsResponse,>,>
      *
      * @throws APIException
      */
@@ -308,6 +311,7 @@ final class SimCardsRawService implements SimCardsRawContract
             ),
             options: $options,
             convert: SimCardListWirelessConnectivityLogsResponse::class,
+            page: DefaultFlatPagination::class,
         );
     }
 }

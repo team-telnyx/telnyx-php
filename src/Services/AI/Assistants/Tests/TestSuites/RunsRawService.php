@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\Services\AI\Assistants\Tests\TestSuites;
 
 use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse;
-use Telnyx\AI\Assistants\Tests\TestSuites\Runs\PaginatedTestRunList;
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\RunListParams;
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\RunTriggerParams;
 use Telnyx\Client;
@@ -13,6 +12,7 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Conversion\ListOf;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\Tests\TestSuites\RunsRawContract;
 
@@ -30,12 +30,10 @@ final class RunsRawService implements RunsRawContract
      * Retrieves paginated history of test runs for a specific test suite with filtering options
      *
      * @param array{
-     *   page?: array{number?: int, size?: int},
-     *   status?: string,
-     *   testSuiteRunID?: string,
+     *   pageNumber?: int, pageSize?: int, status?: string, testSuiteRunID?: string
      * }|RunListParams $params
      *
-     * @return BaseResponse<PaginatedTestRunList>
+     * @return BaseResponse<DefaultFlatPagination<TestRunResponse>>
      *
      * @throws APIException
      */
@@ -55,10 +53,15 @@ final class RunsRawService implements RunsRawContract
             path: ['ai/assistants/tests/test-suites/%1$s/runs', $suiteName],
             query: Util::array_transform_keys(
                 $parsed,
-                ['testSuiteRunID' => 'test_suite_run_id']
+                [
+                    'pageNumber' => 'page[number]',
+                    'pageSize' => 'page[size]',
+                    'testSuiteRunID' => 'test_suite_run_id',
+                ],
             ),
             options: $options,
-            convert: PaginatedTestRunList::class,
+            convert: TestRunResponse::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

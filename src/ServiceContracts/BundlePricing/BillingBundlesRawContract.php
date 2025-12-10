@@ -6,10 +6,11 @@ namespace Telnyx\ServiceContracts\BundlePricing;
 
 use Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleListParams;
-use Telnyx\BundlePricing\BillingBundles\BillingBundleListResponse;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleRetrieveParams;
+use Telnyx\BundlePricing\BillingBundles\BillingBundleSummary;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
 interface BillingBundlesRawContract
@@ -35,7 +36,7 @@ interface BillingBundlesRawContract
      *
      * @param array<mixed>|BillingBundleListParams $params
      *
-     * @return BaseResponse<BillingBundleListResponse>
+     * @return BaseResponse<DefaultPagination<BillingBundleSummary>>
      *
      * @throws APIException
      */

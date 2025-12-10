@@ -245,7 +245,7 @@ final class MessageCancelScheduledResponse implements BaseModel
      *   code: string,
      *   title: string,
      *   detail?: string|null,
-     *   meta?: mixed,
+     *   meta?: array<string,mixed>|null,
      *   source?: Source|null,
      * }> $errors
      * @param From|array{
@@ -427,7 +427,7 @@ final class MessageCancelScheduledResponse implements BaseModel
      *   code: string,
      *   title: string,
      *   detail?: string|null,
-     *   meta?: mixed,
+     *   meta?: array<string,mixed>|null,
      *   source?: Source|null,
      * }> $errors
      */

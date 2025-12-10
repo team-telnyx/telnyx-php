@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\AI\Conversations;
 
-use Telnyx\AI\Conversations\InsightGroups\InsightGroupGetInsightGroupsResponse;
+use Telnyx\AI\Conversations\InsightGroups\InsightTemplateGroup;
 use Telnyx\AI\Conversations\InsightGroups\InsightTemplateGroupDetail;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 interface InsightGroupsContract
@@ -65,14 +66,13 @@ interface InsightGroupsContract
     /**
      * @api
      *
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @return DefaultFlatPagination<InsightTemplateGroup>
      *
      * @throws APIException
      */
     public function retrieveInsightGroups(
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null
-    ): InsightGroupGetInsightGroupsResponse;
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        ?RequestOptions $requestOptions = null,
+    ): DefaultFlatPagination;
 }

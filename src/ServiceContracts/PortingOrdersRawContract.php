@@ -6,6 +6,8 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\PortingOrders\PortingOrder;
 use Telnyx\PortingOrders\PortingOrderCreateParams;
 use Telnyx\PortingOrders\PortingOrderGetAllowedFocWindowsResponse;
 use Telnyx\PortingOrders\PortingOrderGetExceptionTypesResponse;
@@ -13,7 +15,6 @@ use Telnyx\PortingOrders\PortingOrderGetRequirementsResponse;
 use Telnyx\PortingOrders\PortingOrderGetResponse;
 use Telnyx\PortingOrders\PortingOrderGetSubRequestResponse;
 use Telnyx\PortingOrders\PortingOrderListParams;
-use Telnyx\PortingOrders\PortingOrderListResponse;
 use Telnyx\PortingOrders\PortingOrderNewResponse;
 use Telnyx\PortingOrders\PortingOrderRetrieveLoaTemplateParams;
 use Telnyx\PortingOrders\PortingOrderRetrieveParams;
@@ -75,7 +76,7 @@ interface PortingOrdersRawContract
      *
      * @param array<mixed>|PortingOrderListParams $params
      *
-     * @return BaseResponse<PortingOrderListResponse>
+     * @return BaseResponse<DefaultPagination<PortingOrder>>
      *
      * @throws APIException
      */
@@ -145,7 +146,7 @@ interface PortingOrdersRawContract
      * @param string $id Porting Order id
      * @param array<mixed>|PortingOrderRetrieveRequirementsParams $params
      *
-     * @return BaseResponse<PortingOrderGetRequirementsResponse>
+     * @return BaseResponse<DefaultPagination<PortingOrderGetRequirementsResponse>>
      *
      * @throws APIException
      */

@@ -6,6 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\Requirements\RequirementGetResponse;
 use Telnyx\Requirements\RequirementListParams;
@@ -32,7 +33,7 @@ interface RequirementsRawContract
      *
      * @param array<mixed>|RequirementListParams $params
      *
-     * @return BaseResponse<RequirementListResponse>
+     * @return BaseResponse<DefaultPagination<RequirementListResponse>>
      *
      * @throws APIException
      */

@@ -8,6 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\MessagingOptouts\MessagingOptoutListParams;
 use Telnyx\MessagingOptouts\MessagingOptoutListResponse;
 use Telnyx\RequestOptions;
@@ -35,7 +36,7 @@ final class MessagingOptoutsRawService implements MessagingOptoutsRawContract
      *   redactionEnabled?: string,
      * }|MessagingOptoutListParams $params
      *
-     * @return BaseResponse<MessagingOptoutListResponse>
+     * @return BaseResponse<DefaultPagination<MessagingOptoutListResponse>>
      *
      * @throws APIException
      */
@@ -60,6 +61,7 @@ final class MessagingOptoutsRawService implements MessagingOptoutsRawContract
             ),
             options: $options,
             convert: MessagingOptoutListResponse::class,
+            page: DefaultPagination::class,
         );
     }
 }

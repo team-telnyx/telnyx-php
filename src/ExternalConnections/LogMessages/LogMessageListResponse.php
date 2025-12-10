@@ -5,17 +5,19 @@ declare(strict_types=1);
 namespace Telnyx\ExternalConnections\LogMessages;
 
 use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\ExternalConnections\ExternalVoiceIntegrationsPaginationMeta;
-use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse\LogMessage;
-use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse\LogMessage\Meta;
-use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse\LogMessage\Source;
+use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse\Meta;
+use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse\Source;
 
 /**
  * @phpstan-type LogMessageListResponseShape = array{
- *   logMessages?: list<LogMessage>|null,
- *   meta?: ExternalVoiceIntegrationsPaginationMeta|null,
+ *   code: string,
+ *   title: string,
+ *   detail?: string|null,
+ *   meta?: Meta|null,
+ *   source?: Source|null,
  * }
  */
 final class LogMessageListResponse implements BaseModel
@@ -23,13 +25,35 @@ final class LogMessageListResponse implements BaseModel
     /** @use SdkModel<LogMessageListResponseShape> */
     use SdkModel;
 
-    /** @var list<LogMessage>|null $logMessages */
-    #[Optional('log_messages', list: LogMessage::class)]
-    public ?array $logMessages;
+    #[Required]
+    public string $code;
+
+    #[Required]
+    public string $title;
 
     #[Optional]
-    public ?ExternalVoiceIntegrationsPaginationMeta $meta;
+    public ?string $detail;
 
+    #[Optional]
+    public ?Meta $meta;
+
+    #[Optional]
+    public ?Source $source;
+
+    /**
+     * `new LogMessageListResponse()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * LogMessageListResponse::with(code: ..., title: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new LogMessageListResponse)->withCode(...)->withTitle(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -40,62 +64,78 @@ final class LogMessageListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<LogMessage|array{
-     *   code: string,
-     *   title: string,
-     *   detail?: string|null,
-     *   meta?: Meta|null,
-     *   source?: Source|null,
-     * }> $logMessages
-     * @param ExternalVoiceIntegrationsPaginationMeta|array{
-     *   pageNumber?: int|null,
-     *   pageSize?: int|null,
-     *   totalPages?: int|null,
-     *   totalResults?: int|null,
+     * @param Meta|array{
+     *   externalConnectionID?: string|null,
+     *   telephoneNumber?: string|null,
+     *   ticketID?: string|null,
      * } $meta
+     * @param Source|array{pointer?: string|null} $source
      */
     public static function with(
-        ?array $logMessages = null,
-        ExternalVoiceIntegrationsPaginationMeta|array|null $meta = null,
+        string $code,
+        string $title,
+        ?string $detail = null,
+        Meta|array|null $meta = null,
+        Source|array|null $source = null,
     ): self {
         $self = new self;
 
-        null !== $logMessages && $self['logMessages'] = $logMessages;
+        $self['code'] = $code;
+        $self['title'] = $title;
+
+        null !== $detail && $self['detail'] = $detail;
         null !== $meta && $self['meta'] = $meta;
+        null !== $source && $self['source'] = $source;
 
         return $self;
     }
 
-    /**
-     * @param list<LogMessage|array{
-     *   code: string,
-     *   title: string,
-     *   detail?: string|null,
-     *   meta?: Meta|null,
-     *   source?: Source|null,
-     * }> $logMessages
-     */
-    public function withLogMessages(array $logMessages): self
+    public function withCode(string $code): self
     {
         $self = clone $this;
-        $self['logMessages'] = $logMessages;
+        $self['code'] = $code;
+
+        return $self;
+    }
+
+    public function withTitle(string $title): self
+    {
+        $self = clone $this;
+        $self['title'] = $title;
+
+        return $self;
+    }
+
+    public function withDetail(string $detail): self
+    {
+        $self = clone $this;
+        $self['detail'] = $detail;
 
         return $self;
     }
 
     /**
-     * @param ExternalVoiceIntegrationsPaginationMeta|array{
-     *   pageNumber?: int|null,
-     *   pageSize?: int|null,
-     *   totalPages?: int|null,
-     *   totalResults?: int|null,
+     * @param Meta|array{
+     *   externalConnectionID?: string|null,
+     *   telephoneNumber?: string|null,
+     *   ticketID?: string|null,
      * } $meta
      */
-    public function withMeta(
-        ExternalVoiceIntegrationsPaginationMeta|array $meta
-    ): self {
+    public function withMeta(Meta|array $meta): self
+    {
         $self = clone $this;
         $self['meta'] = $meta;
+
+        return $self;
+    }
+
+    /**
+     * @param Source|array{pointer?: string|null} $source
+     */
+    public function withSource(Source|array $source): self
+    {
+        $self = clone $this;
+        $self['source'] = $source;
 
         return $self;
     }

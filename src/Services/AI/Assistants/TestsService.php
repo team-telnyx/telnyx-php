@@ -6,10 +6,10 @@ namespace Telnyx\Services\AI\Assistants;
 
 use Telnyx\AI\Assistants\Tests\AssistantTest;
 use Telnyx\AI\Assistants\Tests\TelnyxConversationChannel;
-use Telnyx\AI\Assistants\Tests\TestListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\TestsContract;
 use Telnyx\Services\AI\Assistants\Tests\RunsService;
@@ -162,25 +162,26 @@ final class TestsService implements TestsContract
      * Retrieves a paginated list of assistant tests with optional filtering capabilities
      *
      * @param string $destination Filter tests by destination (phone number, webhook URL, etc.)
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param string $telnyxConversationChannel Filter tests by communication channel (e.g., 'web_chat', 'sms')
      * @param string $testSuite Filter tests by test suite name
+     *
+     * @return DefaultFlatPagination<AssistantTest>
      *
      * @throws APIException
      */
     public function list(
         ?string $destination = null,
-        ?array $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         ?string $telnyxConversationChannel = null,
         ?string $testSuite = null,
         ?RequestOptions $requestOptions = null,
-    ): TestListResponse {
+    ): DefaultFlatPagination {
         $params = Util::removeNulls(
             [
                 'destination' => $destination,
-                'page' => $page,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
                 'telnyxConversationChannel' => $telnyxConversationChannel,
                 'testSuite' => $testSuite,
             ],

@@ -7,8 +7,9 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Filter\Type;
-use Telnyx\MobilePushCredentials\MobilePushCredentialListResponse;
+use Telnyx\MobilePushCredentials\PushCredential;
 use Telnyx\MobilePushCredentials\PushCredentialResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MobilePushCredentialsContract;
@@ -33,29 +34,17 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
      *
      * Creates a new mobile push credential
      *
-     * @param string $alias Alias to uniquely identify the credential
-     * @param string $certificate Certificate as received from APNs
-     * @param string $privateKey Corresponding private key to the certificate as received from APNs
-     * @param 'android'|\Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\Type $type Type of mobile push credential. Should be <code>android</code> here
-     * @param array<string,mixed> $projectAccountJsonFile Private key file in JSON format
+     * @param array<string,mixed> $createMobilePushCredentialRequest
      *
      * @throws APIException
      */
     public function create(
-        string $alias,
-        string $certificate,
-        string $privateKey,
-        string|\Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\Type $type,
-        array $projectAccountJsonFile,
+        array $createMobilePushCredentialRequest,
         ?RequestOptions $requestOptions = null,
     ): PushCredentialResponse {
         $params = Util::removeNulls(
             [
-                'alias' => $alias,
-                'certificate' => $certificate,
-                'privateKey' => $privateKey,
-                'type' => $type,
-                'projectAccountJsonFile' => $projectAccountJsonFile,
+                'createMobilePushCredentialRequest' => $createMobilePushCredentialRequest,
             ],
         );
 
@@ -96,13 +85,15 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
+     * @return DefaultPagination<PushCredential>
+     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): MobilePushCredentialListResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
         // @phpstan-ignore-next-line argument.type

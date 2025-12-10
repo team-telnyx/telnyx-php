@@ -7,11 +7,12 @@ namespace Telnyx\InexplicitNumberOrders;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderNewResponse\Data;
-use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderNewResponse\Data\OrderingGroup;
+use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderResponse\OrderingGroup;
 
 /**
- * @phpstan-type InexplicitNumberOrderNewResponseShape = array{data?: Data|null}
+ * @phpstan-type InexplicitNumberOrderNewResponseShape = array{
+ *   data?: InexplicitNumberOrderResponse|null
+ * }
  */
 final class InexplicitNumberOrderNewResponse implements BaseModel
 {
@@ -19,7 +20,7 @@ final class InexplicitNumberOrderNewResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?InexplicitNumberOrderResponse $data;
 
     public function __construct()
     {
@@ -31,7 +32,7 @@ final class InexplicitNumberOrderNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
+     * @param InexplicitNumberOrderResponse|array{
      *   id?: string|null,
      *   billingGroupID?: string|null,
      *   connectionID?: string|null,
@@ -42,8 +43,9 @@ final class InexplicitNumberOrderNewResponse implements BaseModel
      *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
-    public static function with(Data|array|null $data = null): self
-    {
+    public static function with(
+        InexplicitNumberOrderResponse|array|null $data = null
+    ): self {
         $self = new self;
 
         null !== $data && $self['data'] = $data;
@@ -52,7 +54,7 @@ final class InexplicitNumberOrderNewResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
+     * @param InexplicitNumberOrderResponse|array{
      *   id?: string|null,
      *   billingGroupID?: string|null,
      *   connectionID?: string|null,
@@ -63,7 +65,7 @@ final class InexplicitNumberOrderNewResponse implements BaseModel
      *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
-    public function withData(Data|array $data): self
+    public function withData(InexplicitNumberOrderResponse|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

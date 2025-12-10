@@ -32,20 +32,20 @@ final class ActionsService implements ActionsContract
      *
      * Accepts this address suggestion as a new emergency address for Operator Connect and finishes the uploads of the numbers associated with it to Microsoft.
      *
-     * @param string $id_ the UUID of the address that should be accepted
+     * @param string $addressUuid the UUID of the address that should be accepted
      * @param string $id the ID of the address
      *
      * @throws APIException
      */
     public function acceptSuggestions(
-        string $id_,
+        string $addressUuid,
         ?string $id = null,
-        ?RequestOptions $requestOptions = null
+        ?RequestOptions $requestOptions = null,
     ): ActionAcceptSuggestionsResponse {
         $params = Util::removeNulls(['id' => $id]);
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->acceptSuggestions($id_, params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->acceptSuggestions($addressUuid, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumber;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberGetResponse;
-use Telnyx\MobilePhoneNumbers\MobilePhoneNumberListResponse;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallForwarding\ForwardingType;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallRecording\InboundCallRecordingChannels;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallRecording\InboundCallRecordingFormat;
@@ -74,11 +75,13 @@ interface MobilePhoneNumbersContract
      * @param int $pageNumber The page number to load
      * @param int $pageSize The size of the page
      *
+     * @return DefaultFlatPagination<MobilePhoneNumber>
+     *
      * @throws APIException
      */
     public function list(
         ?int $pageNumber = null,
         ?int $pageSize = null,
         ?RequestOptions $requestOptions = null,
-    ): MobilePhoneNumberListResponse;
+    ): DefaultFlatPagination;
 }

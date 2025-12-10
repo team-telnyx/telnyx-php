@@ -7,13 +7,14 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\NotificationChannels\NotificationChannel;
 use Telnyx\NotificationChannels\NotificationChannelCreateParams;
 use Telnyx\NotificationChannels\NotificationChannelCreateParams\ChannelTypeID;
 use Telnyx\NotificationChannels\NotificationChannelDeleteResponse;
 use Telnyx\NotificationChannels\NotificationChannelGetResponse;
 use Telnyx\NotificationChannels\NotificationChannelListParams;
 use Telnyx\NotificationChannels\NotificationChannelListParams\Filter\AssociatedRecordType\Eq;
-use Telnyx\NotificationChannels\NotificationChannelListResponse;
 use Telnyx\NotificationChannels\NotificationChannelNewResponse;
 use Telnyx\NotificationChannels\NotificationChannelUpdateParams;
 use Telnyx\NotificationChannels\NotificationChannelUpdateResponse;
@@ -91,7 +92,7 @@ final class NotificationChannelsRawService implements NotificationChannelsRawCon
      *
      * Update a notification channel.
      *
-     * @param string $id the id of the resource
+     * @param string $notificationChannelID the id of the resource
      * @param array{
      *   channelDestination?: string,
      *   channelTypeID?: 'sms'|'voice'|'email'|'webhook'|NotificationChannelUpdateParams\ChannelTypeID,
@@ -103,7 +104,7 @@ final class NotificationChannelsRawService implements NotificationChannelsRawCon
      * @throws APIException
      */
     public function update(
-        string $id,
+        string $notificationChannelID,
         array|NotificationChannelUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse {
@@ -115,7 +116,7 @@ final class NotificationChannelsRawService implements NotificationChannelsRawCon
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
-            path: ['notification_channels/%1$s', $id],
+            path: ['notification_channels/%1$s', $notificationChannelID],
             body: (object) $parsed,
             options: $options,
             convert: NotificationChannelUpdateResponse::class,
@@ -143,7 +144,7 @@ final class NotificationChannelsRawService implements NotificationChannelsRawCon
      *   page?: array{number?: int, size?: int},
      * }|NotificationChannelListParams $params
      *
-     * @return BaseResponse<NotificationChannelListResponse>
+     * @return BaseResponse<DefaultPagination<NotificationChannel>>
      *
      * @throws APIException
      */
@@ -162,7 +163,8 @@ final class NotificationChannelsRawService implements NotificationChannelsRawCon
             path: 'notification_channels',
             query: $parsed,
             options: $options,
-            convert: NotificationChannelListResponse::class,
+            convert: NotificationChannel::class,
+            page: DefaultPagination::class,
         );
     }
 

@@ -9,7 +9,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\Sessions\Actions\ActionEndResponse;
-use Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants\UnionMember0;
+use Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants\AllParticipants;
 use Telnyx\Rooms\Sessions\Actions\ActionKickResponse;
 use Telnyx\Rooms\Sessions\Actions\ActionMuteResponse;
 use Telnyx\Rooms\Sessions\Actions\ActionUnmuteResponse;
@@ -56,14 +56,14 @@ final class ActionsService implements ActionsContract
      *
      * @param string $roomSessionID the unique identifier of a room session
      * @param list<string> $exclude list of participant id to exclude from the action
-     * @param 'all'|UnionMember0|list<string> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
+     * @param 'all'|AllParticipants|list<string> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
      *
      * @throws APIException
      */
     public function kick(
         string $roomSessionID,
         ?array $exclude = null,
-        string|UnionMember0|array|null $participants = null,
+        string|AllParticipants|array|null $participants = null,
         ?RequestOptions $requestOptions = null,
     ): ActionKickResponse {
         $params = Util::removeNulls(
@@ -83,14 +83,14 @@ final class ActionsService implements ActionsContract
      *
      * @param string $roomSessionID the unique identifier of a room session
      * @param list<string> $exclude list of participant id to exclude from the action
-     * @param 'all'|\Telnyx\Rooms\Sessions\Actions\ActionMuteParams\Participants\UnionMember0|list<string> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
+     * @param 'all'|\Telnyx\Rooms\Sessions\Actions\ActionMuteParams\Participants\AllParticipants|list<string> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
      *
      * @throws APIException
      */
     public function mute(
         string $roomSessionID,
         ?array $exclude = null,
-        string|\Telnyx\Rooms\Sessions\Actions\ActionMuteParams\Participants\UnionMember0|array|null $participants = null,
+        string|\Telnyx\Rooms\Sessions\Actions\ActionMuteParams\Participants\AllParticipants|array|null $participants = null,
         ?RequestOptions $requestOptions = null,
     ): ActionMuteResponse {
         $params = Util::removeNulls(
@@ -110,14 +110,14 @@ final class ActionsService implements ActionsContract
      *
      * @param string $roomSessionID the unique identifier of a room session
      * @param list<string> $exclude list of participant id to exclude from the action
-     * @param 'all'|\Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants\UnionMember0|list<string> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
+     * @param 'all'|\Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants\AllParticipants|list<string> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
      *
      * @throws APIException
      */
     public function unmute(
         string $roomSessionID,
         ?array $exclude = null,
-        string|\Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants\UnionMember0|array|null $participants = null,
+        string|\Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants\AllParticipants|array|null $participants = null,
         ?RequestOptions $requestOptions = null,
     ): ActionUnmuteResponse {
         $params = Util::removeNulls(

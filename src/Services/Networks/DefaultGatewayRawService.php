@@ -27,7 +27,7 @@ final class DefaultGatewayRawService implements DefaultGatewayRawContract
      *
      * Create Default Gateway.
      *
-     * @param string $id identifies the resource
+     * @param string $networkIdentifier identifies the resource
      * @param array{wireguardPeerID?: string}|DefaultGatewayCreateParams $params
      *
      * @return BaseResponse<DefaultGatewayNewResponse>
@@ -35,7 +35,7 @@ final class DefaultGatewayRawService implements DefaultGatewayRawContract
      * @throws APIException
      */
     public function create(
-        string $id,
+        string $networkIdentifier,
         array|DefaultGatewayCreateParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse {
@@ -47,7 +47,7 @@ final class DefaultGatewayRawService implements DefaultGatewayRawContract
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
-            path: ['networks/%1$s/default_gateway', $id],
+            path: ['networks/%1$s/default_gateway', $networkIdentifier],
             body: (object) $parsed,
             options: $options,
             convert: DefaultGatewayNewResponse::class,

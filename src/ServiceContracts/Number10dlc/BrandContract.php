@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Number10dlc;
 
-use Telnyx\Brand\AltBusinessIDType;
-use Telnyx\Brand\BrandIdentityStatus;
-use Telnyx\Brand\EntityType;
-use Telnyx\Brand\StockExchange;
-use Telnyx\Brand\TelnyxBrand;
-use Telnyx\Brand\Vertical;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Number10dlc\Brand\AltBusinessIDType;
 use Telnyx\Number10dlc\Brand\BrandGetFeedbackResponse;
 use Telnyx\Number10dlc\Brand\BrandGetResponse;
+use Telnyx\Number10dlc\Brand\BrandGetSMSOtpStatusResponse;
+use Telnyx\Number10dlc\Brand\BrandIdentityStatus;
 use Telnyx\Number10dlc\Brand\BrandListParams\Sort;
 use Telnyx\Number10dlc\Brand\BrandListResponse;
+use Telnyx\Number10dlc\Brand\EntityType;
+use Telnyx\Number10dlc\Brand\StockExchange;
+use Telnyx\Number10dlc\Brand\TelnyxBrand;
+use Telnyx\Number10dlc\Brand\Vertical;
+use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 
 interface BrandContract
@@ -158,6 +160,8 @@ interface BrandContract
      * @param 'assignedCampaignsCount'|'-assignedCampaignsCount'|'brandId'|'-brandId'|'createdAt'|'-createdAt'|'displayName'|'-displayName'|'identityStatus'|'-identityStatus'|'status'|'-status'|'tcrBrandId'|'-tcrBrandId'|Sort $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
      * @param string $tcrBrandID Filter results by the TCR Brand id
      *
+     * @return PerPagePaginationV2<BrandListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -171,7 +175,7 @@ interface BrandContract
         ?string $state = null,
         ?string $tcrBrandID = null,
         ?RequestOptions $requestOptions = null,
-    ): BrandListResponse;
+    ): PerPagePaginationV2;
 
     /**
      * @api
@@ -202,6 +206,20 @@ interface BrandContract
         string $brandID,
         ?RequestOptions $requestOptions = null
     ): mixed;
+
+    /**
+     * @api
+     *
+     * @param string $referenceID The reference ID returned when the OTP was initially triggered
+     * @param string $brandID Filter by Brand ID for easier lookup in portal applications
+     *
+     * @throws APIException
+     */
+    public function retrieveSMSOtpStatus(
+        string $referenceID,
+        ?string $brandID = null,
+        ?RequestOptions $requestOptions = null,
+    ): BrandGetSMSOtpStatusResponse;
 
     /**
      * @api

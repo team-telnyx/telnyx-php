@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\AccessIPRanges\AccessIPRange;
-use Telnyx\AccessIPRanges\AccessIPRangeListResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 interface AccessIPRangesContract
@@ -36,17 +36,17 @@ interface AccessIPRangesContract
      *     lte?: string|\DateTimeInterface,
      *   },
      * } $filter Consolidated filter parameter (deepObject style). Originally: filter[cidr_block], filter[cidr_block][startswith], filter[cidr_block][endswith], filter[cidr_block][contains], filter[created_at]. Supports complex bracket operations for dynamic filtering.
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return DefaultFlatPagination<AccessIPRange>
      *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
-        ?array $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         ?RequestOptions $requestOptions = null,
-    ): AccessIPRangeListResponse;
+    ): DefaultFlatPagination;
 
     /**
      * @api

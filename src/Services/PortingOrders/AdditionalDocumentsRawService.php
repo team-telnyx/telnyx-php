@@ -7,6 +7,7 @@ namespace Telnyx\Services\PortingOrders;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\AdditionalDocument\DocumentType;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentDeleteParams;
@@ -76,7 +77,7 @@ final class AdditionalDocumentsRawService implements AdditionalDocumentsRawContr
      *   sort?: array{value?: 'created_at'|'-created_at'|Value},
      * }|AdditionalDocumentListParams $params
      *
-     * @return BaseResponse<AdditionalDocumentListResponse>
+     * @return BaseResponse<DefaultPagination<AdditionalDocumentListResponse>>
      *
      * @throws APIException
      */
@@ -97,6 +98,7 @@ final class AdditionalDocumentsRawService implements AdditionalDocumentsRawContr
             query: $parsed,
             options: $options,
             convert: AdditionalDocumentListResponse::class,
+            page: DefaultPagination::class,
         );
     }
 

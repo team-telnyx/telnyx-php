@@ -6,6 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\Reports\ReportListMdrsParams;
 use Telnyx\Reports\ReportListMdrsResponse;
 use Telnyx\Reports\ReportListWdrsParams;
@@ -33,7 +34,7 @@ interface ReportsRawContract
      *
      * @param array<mixed>|ReportListWdrsParams $params
      *
-     * @return BaseResponse<ReportListWdrsResponse>
+     * @return BaseResponse<DefaultFlatPagination<ReportListWdrsResponse>>
      *
      * @throws APIException
      */

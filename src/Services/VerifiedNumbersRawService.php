@@ -7,13 +7,15 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerifiedNumbersRawContract;
+use Telnyx\VerifiedNumbers\VerifiedNumber;
 use Telnyx\VerifiedNumbers\VerifiedNumberCreateParams;
 use Telnyx\VerifiedNumbers\VerifiedNumberCreateParams\VerificationMethod;
 use Telnyx\VerifiedNumbers\VerifiedNumberDataWrapper;
 use Telnyx\VerifiedNumbers\VerifiedNumberListParams;
-use Telnyx\VerifiedNumbers\VerifiedNumberListResponse;
 use Telnyx\VerifiedNumbers\VerifiedNumberNewResponse;
 
 final class VerifiedNumbersRawService implements VerifiedNumbersRawContract
@@ -87,11 +89,9 @@ final class VerifiedNumbersRawService implements VerifiedNumbersRawContract
      *
      * Gets a paginated list of Verified Numbers.
      *
-     * @param array{
-     *   page?: array{number?: int, size?: int}
-     * }|VerifiedNumberListParams $params
+     * @param array{pageNumber?: int, pageSize?: int}|VerifiedNumberListParams $params
      *
-     * @return BaseResponse<VerifiedNumberListResponse>
+     * @return BaseResponse<DefaultFlatPagination<VerifiedNumber>>
      *
      * @throws APIException
      */
@@ -108,9 +108,13 @@ final class VerifiedNumbersRawService implements VerifiedNumbersRawContract
         return $this->client->request(
             method: 'get',
             path: 'verified_numbers',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
-            convert: VerifiedNumberListResponse::class,
+            convert: VerifiedNumber::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

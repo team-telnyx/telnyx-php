@@ -8,12 +8,13 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\MobileVoiceConnections\MobileVoiceConnection;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams\WebhookAPIVersion;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionDeleteResponse;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionGetResponse;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionListParams;
-use Telnyx\MobileVoiceConnections\MobileVoiceConnectionListResponse;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionNewResponse;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateResponse;
@@ -146,7 +147,7 @@ final class MobileVoiceConnectionsRawService implements MobileVoiceConnectionsRa
      *   sort?: string,
      * }|MobileVoiceConnectionListParams $params
      *
-     * @return BaseResponse<MobileVoiceConnectionListResponse>
+     * @return BaseResponse<DefaultFlatPagination<MobileVoiceConnection>>
      *
      * @throws APIException
      */
@@ -172,7 +173,8 @@ final class MobileVoiceConnectionsRawService implements MobileVoiceConnectionsRa
                 ],
             ),
             options: $options,
-            convert: MobileVoiceConnectionListResponse::class,
+            convert: MobileVoiceConnection::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

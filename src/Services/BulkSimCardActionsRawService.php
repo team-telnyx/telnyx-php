@@ -12,6 +12,7 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BulkSimCardActionsRawContract;
 
@@ -58,7 +59,7 @@ final class BulkSimCardActionsRawService implements BulkSimCardActionsRawContrac
      *   pageSize?: int,
      * }|BulkSimCardActionListParams $params
      *
-     * @return BaseResponse<BulkSimCardActionListResponse>
+     * @return BaseResponse<DefaultFlatPagination<BulkSimCardActionListResponse>>
      *
      * @throws APIException
      */
@@ -85,6 +86,7 @@ final class BulkSimCardActionsRawService implements BulkSimCardActionsRawContrac
             ),
             options: $options,
             convert: BulkSimCardActionListResponse::class,
+            page: DefaultFlatPagination::class,
         );
     }
 }

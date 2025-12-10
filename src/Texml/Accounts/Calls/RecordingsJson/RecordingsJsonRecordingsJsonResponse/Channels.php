@@ -6,7 +6,7 @@ namespace Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJso
 
 enum Channels: int
 {
-    case _1 = 1;
+    case CHANNEL_1 = 1;
 
-    case _2 = 2;
+    case CHANNEL_2 = 2;
 }
