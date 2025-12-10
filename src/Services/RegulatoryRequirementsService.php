@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse;
 use Telnyx\RegulatoryRequirements\RegulatoryRequirementRetrieveParams\Filter\Action;
 use Telnyx\RegulatoryRequirements\RegulatoryRequirementRetrieveParams\Filter\PhoneNumberType;
@@ -46,9 +47,7 @@ final class RegulatoryRequirementsService implements RegulatoryRequirementsContr
         ?array $filter = null,
         ?RequestOptions $requestOptions = null
     ): RegulatoryRequirementGetResponse {
-        $params = ['filter' => $filter];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['filter' => $filter]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve(params: $params, requestOptions: $requestOptions);

@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\DefaultPagination;
 use Telnyx\FaxApplications\FaxApplication;
@@ -66,19 +67,19 @@ final class FaxApplicationsService implements FaxApplicationsContract
         ?int $webhookTimeoutSecs = null,
         ?RequestOptions $requestOptions = null,
     ): FaxApplicationNewResponse {
-        $params = [
-            'applicationName' => $applicationName,
-            'webhookEventURL' => $webhookEventURL,
-            'active' => $active,
-            'anchorsiteOverride' => $anchorsiteOverride,
-            'inbound' => $inbound,
-            'outbound' => $outbound,
-            'tags' => $tags,
-            'webhookEventFailoverURL' => $webhookEventFailoverURL,
-            'webhookTimeoutSecs' => $webhookTimeoutSecs,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'applicationName' => $applicationName,
+                'webhookEventURL' => $webhookEventURL,
+                'active' => $active,
+                'anchorsiteOverride' => $anchorsiteOverride,
+                'inbound' => $inbound,
+                'outbound' => $outbound,
+                'tags' => $tags,
+                'webhookEventFailoverURL' => $webhookEventFailoverURL,
+                'webhookTimeoutSecs' => $webhookTimeoutSecs,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -142,20 +143,20 @@ final class FaxApplicationsService implements FaxApplicationsContract
         ?int $webhookTimeoutSecs = null,
         ?RequestOptions $requestOptions = null,
     ): FaxApplicationUpdateResponse {
-        $params = [
-            'applicationName' => $applicationName,
-            'webhookEventURL' => $webhookEventURL,
-            'active' => $active,
-            'anchorsiteOverride' => $anchorsiteOverride,
-            'faxEmailRecipient' => $faxEmailRecipient,
-            'inbound' => $inbound,
-            'outbound' => $outbound,
-            'tags' => $tags,
-            'webhookEventFailoverURL' => $webhookEventFailoverURL,
-            'webhookTimeoutSecs' => $webhookTimeoutSecs,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'applicationName' => $applicationName,
+                'webhookEventURL' => $webhookEventURL,
+                'active' => $active,
+                'anchorsiteOverride' => $anchorsiteOverride,
+                'faxEmailRecipient' => $faxEmailRecipient,
+                'inbound' => $inbound,
+                'outbound' => $outbound,
+                'tags' => $tags,
+                'webhookEventFailoverURL' => $webhookEventFailoverURL,
+                'webhookTimeoutSecs' => $webhookTimeoutSecs,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
@@ -197,9 +198,9 @@ final class FaxApplicationsService implements FaxApplicationsContract
         string|Sort $sort = 'created_at',
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['filter' => $filter, 'page' => $page, 'sort' => $sort]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

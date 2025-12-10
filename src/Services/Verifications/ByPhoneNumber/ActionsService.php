@@ -6,6 +6,7 @@ namespace Telnyx\Services\Verifications\ByPhoneNumber;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Verifications\ByPhoneNumber\ActionsContract;
 use Telnyx\Verifications\ByPhoneNumber\Actions\VerifyVerificationCodeResponse;
@@ -42,7 +43,9 @@ final class ActionsService implements ActionsContract
         string $verifyProfileID,
         ?RequestOptions $requestOptions = null,
     ): VerifyVerificationCodeResponse {
-        $params = ['code' => $code, 'verifyProfileID' => $verifyProfileID];
+        $params = Util::removeNulls(
+            ['code' => $code, 'verifyProfileID' => $verifyProfileID]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->verify($phoneNumber, params: $params, requestOptions: $requestOptions);

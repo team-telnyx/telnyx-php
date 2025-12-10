@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings\Port;
@@ -131,30 +132,30 @@ final class IPConnectionsService implements IPConnectionsContract
         ?int $webhookTimeoutSecs = null,
         ?RequestOptions $requestOptions = null,
     ): IPConnectionNewResponse {
-        $params = [
-            'active' => $active,
-            'anchorsiteOverride' => $anchorsiteOverride,
-            'androidPushCredentialID' => $androidPushCredentialID,
-            'callCostInWebhooks' => $callCostInWebhooks,
-            'connectionName' => $connectionName,
-            'defaultOnHoldComfortNoiseEnabled' => $defaultOnHoldComfortNoiseEnabled,
-            'dtmfType' => $dtmfType,
-            'encodeContactHeaderEnabled' => $encodeContactHeaderEnabled,
-            'encryptedMedia' => $encryptedMedia,
-            'inbound' => $inbound,
-            'iosPushCredentialID' => $iosPushCredentialID,
-            'onnetT38PassthroughEnabled' => $onnetT38PassthroughEnabled,
-            'outbound' => $outbound,
-            'rtcpSettings' => $rtcpSettings,
-            'tags' => $tags,
-            'transportProtocol' => $transportProtocol,
-            'webhookAPIVersion' => $webhookAPIVersion,
-            'webhookEventFailoverURL' => $webhookEventFailoverURL,
-            'webhookEventURL' => $webhookEventURL,
-            'webhookTimeoutSecs' => $webhookTimeoutSecs,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'active' => $active,
+                'anchorsiteOverride' => $anchorsiteOverride,
+                'androidPushCredentialID' => $androidPushCredentialID,
+                'callCostInWebhooks' => $callCostInWebhooks,
+                'connectionName' => $connectionName,
+                'defaultOnHoldComfortNoiseEnabled' => $defaultOnHoldComfortNoiseEnabled,
+                'dtmfType' => $dtmfType,
+                'encodeContactHeaderEnabled' => $encodeContactHeaderEnabled,
+                'encryptedMedia' => $encryptedMedia,
+                'inbound' => $inbound,
+                'iosPushCredentialID' => $iosPushCredentialID,
+                'onnetT38PassthroughEnabled' => $onnetT38PassthroughEnabled,
+                'outbound' => $outbound,
+                'rtcpSettings' => $rtcpSettings,
+                'tags' => $tags,
+                'transportProtocol' => $transportProtocol,
+                'webhookAPIVersion' => $webhookAPIVersion,
+                'webhookEventFailoverURL' => $webhookEventFailoverURL,
+                'webhookEventURL' => $webhookEventURL,
+                'webhookTimeoutSecs' => $webhookTimeoutSecs,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -269,30 +270,30 @@ final class IPConnectionsService implements IPConnectionsContract
         ?int $webhookTimeoutSecs = null,
         ?RequestOptions $requestOptions = null,
     ): IPConnectionUpdateResponse {
-        $params = [
-            'active' => $active,
-            'anchorsiteOverride' => $anchorsiteOverride,
-            'androidPushCredentialID' => $androidPushCredentialID,
-            'callCostInWebhooks' => $callCostInWebhooks,
-            'connectionName' => $connectionName,
-            'defaultOnHoldComfortNoiseEnabled' => $defaultOnHoldComfortNoiseEnabled,
-            'dtmfType' => $dtmfType,
-            'encodeContactHeaderEnabled' => $encodeContactHeaderEnabled,
-            'encryptedMedia' => $encryptedMedia,
-            'inbound' => $inbound,
-            'iosPushCredentialID' => $iosPushCredentialID,
-            'onnetT38PassthroughEnabled' => $onnetT38PassthroughEnabled,
-            'outbound' => $outbound,
-            'rtcpSettings' => $rtcpSettings,
-            'tags' => $tags,
-            'transportProtocol' => $transportProtocol,
-            'webhookAPIVersion' => $webhookAPIVersion,
-            'webhookEventFailoverURL' => $webhookEventFailoverURL,
-            'webhookEventURL' => $webhookEventURL,
-            'webhookTimeoutSecs' => $webhookTimeoutSecs,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'active' => $active,
+                'anchorsiteOverride' => $anchorsiteOverride,
+                'androidPushCredentialID' => $androidPushCredentialID,
+                'callCostInWebhooks' => $callCostInWebhooks,
+                'connectionName' => $connectionName,
+                'defaultOnHoldComfortNoiseEnabled' => $defaultOnHoldComfortNoiseEnabled,
+                'dtmfType' => $dtmfType,
+                'encodeContactHeaderEnabled' => $encodeContactHeaderEnabled,
+                'encryptedMedia' => $encryptedMedia,
+                'inbound' => $inbound,
+                'iosPushCredentialID' => $iosPushCredentialID,
+                'onnetT38PassthroughEnabled' => $onnetT38PassthroughEnabled,
+                'outbound' => $outbound,
+                'rtcpSettings' => $rtcpSettings,
+                'tags' => $tags,
+                'transportProtocol' => $transportProtocol,
+                'webhookAPIVersion' => $webhookAPIVersion,
+                'webhookEventFailoverURL' => $webhookEventFailoverURL,
+                'webhookEventURL' => $webhookEventURL,
+                'webhookTimeoutSecs' => $webhookTimeoutSecs,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
@@ -336,9 +337,9 @@ final class IPConnectionsService implements IPConnectionsContract
         string|Sort $sort = 'created_at',
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['filter' => $filter, 'page' => $page, 'sort' => $sort]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

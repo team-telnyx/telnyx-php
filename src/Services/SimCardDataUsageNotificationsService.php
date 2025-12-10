@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardDataUsageNotificationsContract;
@@ -48,7 +49,9 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
         array $threshold,
         ?RequestOptions $requestOptions = null
     ): SimCardDataUsageNotificationNewResponse {
-        $params = ['simCardID' => $simCardID, 'threshold' => $threshold];
+        $params = Util::removeNulls(
+            ['simCardID' => $simCardID, 'threshold' => $threshold]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -95,9 +98,9 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
         ?array $threshold = null,
         ?RequestOptions $requestOptions = null,
     ): SimCardDataUsageNotificationUpdateResponse {
-        $params = ['simCardID' => $simCardID, 'threshold' => $threshold];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['simCardID' => $simCardID, 'threshold' => $threshold]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($simCardDataUsageNotificationID, params: $params, requestOptions: $requestOptions);
@@ -124,13 +127,13 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
         int $pageSize = 20,
         ?RequestOptions $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = [
-            'filterSimCardID' => $filterSimCardID,
-            'pageNumber' => $pageNumber,
-            'pageSize' => $pageSize,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'filterSimCardID' => $filterSimCardID,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

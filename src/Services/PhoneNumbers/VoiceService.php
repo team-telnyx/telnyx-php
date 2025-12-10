@@ -6,6 +6,7 @@ namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings;
 use Telnyx\PhoneNumbers\Voice\CallForwarding;
@@ -103,19 +104,19 @@ final class VoiceService implements VoiceContract
         string|UsagePaymentMethod $usagePaymentMethod = 'pay-per-minute',
         ?RequestOptions $requestOptions = null,
     ): VoiceUpdateResponse {
-        $params = [
-            'callForwarding' => $callForwarding,
-            'callRecording' => $callRecording,
-            'callerIDNameEnabled' => $callerIDNameEnabled,
-            'cnamListing' => $cnamListing,
-            'inboundCallScreening' => $inboundCallScreening,
-            'mediaFeatures' => $mediaFeatures,
-            'techPrefixEnabled' => $techPrefixEnabled,
-            'translatedNumber' => $translatedNumber,
-            'usagePaymentMethod' => $usagePaymentMethod,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'callForwarding' => $callForwarding,
+                'callRecording' => $callRecording,
+                'callerIDNameEnabled' => $callerIDNameEnabled,
+                'cnamListing' => $cnamListing,
+                'inboundCallScreening' => $inboundCallScreening,
+                'mediaFeatures' => $mediaFeatures,
+                'techPrefixEnabled' => $techPrefixEnabled,
+                'translatedNumber' => $translatedNumber,
+                'usagePaymentMethod' => $usagePaymentMethod,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
@@ -149,9 +150,9 @@ final class VoiceService implements VoiceContract
         string|Sort|null $sort = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['filter' => $filter, 'page' => $page, 'sort' => $sort]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

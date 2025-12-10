@@ -9,6 +9,7 @@ use Telnyx\AI\Assistants\ScheduledEvents\ScheduledPhoneCallEventResponse;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledSMSEventResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\ScheduledEventsContract;
@@ -52,16 +53,16 @@ final class ScheduledEventsService implements ScheduledEventsContract
         ?string $text = null,
         ?RequestOptions $requestOptions = null,
     ): ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse {
-        $params = [
-            'scheduledAtFixedDatetime' => $scheduledAtFixedDatetime,
-            'telnyxAgentTarget' => $telnyxAgentTarget,
-            'telnyxConversationChannel' => $telnyxConversationChannel,
-            'telnyxEndUserTarget' => $telnyxEndUserTarget,
-            'conversationMetadata' => $conversationMetadata,
-            'text' => $text,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'scheduledAtFixedDatetime' => $scheduledAtFixedDatetime,
+                'telnyxAgentTarget' => $telnyxAgentTarget,
+                'telnyxConversationChannel' => $telnyxConversationChannel,
+                'telnyxEndUserTarget' => $telnyxEndUserTarget,
+                'conversationMetadata' => $conversationMetadata,
+                'text' => $text,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($assistantID, params: $params, requestOptions: $requestOptions);
@@ -81,7 +82,7 @@ final class ScheduledEventsService implements ScheduledEventsContract
         string $assistantID,
         ?RequestOptions $requestOptions = null
     ): ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse {
-        $params = ['assistantID' => $assistantID];
+        $params = Util::removeNulls(['assistantID' => $assistantID]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($eventID, params: $params, requestOptions: $requestOptions);
@@ -109,15 +110,15 @@ final class ScheduledEventsService implements ScheduledEventsContract
         string|\DateTimeInterface|null $toDate = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = [
-            'conversationChannel' => $conversationChannel,
-            'fromDate' => $fromDate,
-            'pageNumber' => $pageNumber,
-            'pageSize' => $pageSize,
-            'toDate' => $toDate,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'conversationChannel' => $conversationChannel,
+                'fromDate' => $fromDate,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+                'toDate' => $toDate,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($assistantID, params: $params, requestOptions: $requestOptions);
@@ -137,7 +138,7 @@ final class ScheduledEventsService implements ScheduledEventsContract
         string $assistantID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        $params = ['assistantID' => $assistantID];
+        $params = Util::removeNulls(['assistantID' => $assistantID]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($eventID, params: $params, requestOptions: $requestOptions);

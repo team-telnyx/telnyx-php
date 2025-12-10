@@ -6,6 +6,7 @@ namespace Telnyx\Services\Queues;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\Queues\Calls\CallGetResponse;
 use Telnyx\Queues\Calls\CallListResponse;
@@ -42,7 +43,7 @@ final class CallsService implements CallsContract
         string $queueName,
         ?RequestOptions $requestOptions = null,
     ): CallGetResponse {
-        $params = ['queueName' => $queueName];
+        $params = Util::removeNulls(['queueName' => $queueName]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($callControlID, params: $params, requestOptions: $requestOptions);
@@ -67,11 +68,9 @@ final class CallsService implements CallsContract
         ?bool $keepAfterHangup = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = [
-            'queueName' => $queueName, 'keepAfterHangup' => $keepAfterHangup,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['queueName' => $queueName, 'keepAfterHangup' => $keepAfterHangup]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($callControlID, params: $params, requestOptions: $requestOptions);
@@ -98,9 +97,7 @@ final class CallsService implements CallsContract
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = ['page' => $page];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($queueName, params: $params, requestOptions: $requestOptions);
@@ -123,7 +120,7 @@ final class CallsService implements CallsContract
         string $queueName,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = ['queueName' => $queueName];
+        $params = Util::removeNulls(['queueName' => $queueName]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->remove($callControlID, params: $params, requestOptions: $requestOptions);

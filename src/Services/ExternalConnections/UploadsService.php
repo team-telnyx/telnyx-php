@@ -6,6 +6,7 @@ namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\ExternalConnections\Uploads\Upload;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams\AdditionalUsage;
@@ -57,15 +58,15 @@ final class UploadsService implements UploadsContract
         string|Usage|null $usage = null,
         ?RequestOptions $requestOptions = null,
     ): UploadNewResponse {
-        $params = [
-            'numberIDs' => $numberIDs,
-            'additionalUsages' => $additionalUsages,
-            'civicAddressID' => $civicAddressID,
-            'locationID' => $locationID,
-            'usage' => $usage,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'numberIDs' => $numberIDs,
+                'additionalUsages' => $additionalUsages,
+                'civicAddressID' => $civicAddressID,
+                'locationID' => $locationID,
+                'usage' => $usage,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($id, params: $params, requestOptions: $requestOptions);
@@ -88,7 +89,7 @@ final class UploadsService implements UploadsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): UploadGetResponse {
-        $params = ['id' => $id];
+        $params = Util::removeNulls(['id' => $id]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($ticketID, params: $params, requestOptions: $requestOptions);
@@ -124,9 +125,7 @@ final class UploadsService implements UploadsContract
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = ['filter' => $filter, 'page' => $page];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($id, params: $params, requestOptions: $requestOptions);
@@ -187,7 +186,7 @@ final class UploadsService implements UploadsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): UploadRetryResponse {
-        $params = ['id' => $id];
+        $params = Util::removeNulls(['id' => $id]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retry($ticketID, params: $params, requestOptions: $requestOptions);

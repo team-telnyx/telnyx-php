@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TextToSpeechContract;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesParams\Provider;
@@ -49,7 +50,7 @@ final class TextToSpeechService implements TextToSpeechContract
         string $voice,
         ?RequestOptions $requestOptions = null
     ): string {
-        $params = ['text' => $text, 'voice' => $voice];
+        $params = Util::removeNulls(['text' => $text, 'voice' => $voice]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->generateSpeech(params: $params, requestOptions: $requestOptions);
@@ -72,11 +73,9 @@ final class TextToSpeechService implements TextToSpeechContract
         string|Provider|null $provider = null,
         ?RequestOptions $requestOptions = null,
     ): TextToSpeechListVoicesResponse {
-        $params = [
-            'elevenlabsAPIKeyRef' => $elevenlabsAPIKeyRef, 'provider' => $provider,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['elevenlabsAPIKeyRef' => $elevenlabsAPIKeyRef, 'provider' => $provider]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listVoices(params: $params, requestOptions: $requestOptions);

@@ -6,6 +6,7 @@ namespace Telnyx\Services\MessagingProfiles;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigCreateParams\Op;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListResponse;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfigResponse;
@@ -45,14 +46,14 @@ final class AutorespConfigsService implements AutorespConfigsContract
         ?string $respText = null,
         ?RequestOptions $requestOptions = null,
     ): AutoRespConfigResponse {
-        $params = [
-            'countryCode' => $countryCode,
-            'keywords' => $keywords,
-            'op' => $op,
-            'respText' => $respText,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'countryCode' => $countryCode,
+                'keywords' => $keywords,
+                'op' => $op,
+                'respText' => $respText,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($profileID, params: $params, requestOptions: $requestOptions);
@@ -72,7 +73,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
         string $profileID,
         ?RequestOptions $requestOptions = null,
     ): AutoRespConfigResponse {
-        $params = ['profileID' => $profileID];
+        $params = Util::removeNulls(['profileID' => $profileID]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($autorespCfgID, params: $params, requestOptions: $requestOptions);
@@ -103,15 +104,15 @@ final class AutorespConfigsService implements AutorespConfigsContract
         ?string $respText = null,
         ?RequestOptions $requestOptions = null,
     ): AutoRespConfigResponse {
-        $params = [
-            'profileID' => $profileID,
-            'countryCode' => $countryCode,
-            'keywords' => $keywords,
-            'op' => $op,
-            'respText' => $respText,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'profileID' => $profileID,
+                'countryCode' => $countryCode,
+                'keywords' => $keywords,
+                'op' => $op,
+                'respText' => $respText,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($autorespCfgID, params: $params, requestOptions: $requestOptions);
@@ -140,13 +141,13 @@ final class AutorespConfigsService implements AutorespConfigsContract
         ?array $updatedAt = null,
         ?RequestOptions $requestOptions = null,
     ): AutorespConfigListResponse {
-        $params = [
-            'countryCode' => $countryCode,
-            'createdAt' => $createdAt,
-            'updatedAt' => $updatedAt,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'countryCode' => $countryCode,
+                'createdAt' => $createdAt,
+                'updatedAt' => $updatedAt,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($profileID, params: $params, requestOptions: $requestOptions);
@@ -166,7 +167,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
         string $profileID,
         ?RequestOptions $requestOptions = null,
     ): string {
-        $params = ['profileID' => $profileID];
+        $params = Util::removeNulls(['profileID' => $profileID]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($autorespCfgID, params: $params, requestOptions: $requestOptions);

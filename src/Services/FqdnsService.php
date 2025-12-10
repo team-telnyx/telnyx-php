@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\Fqdns\Fqdn;
 use Telnyx\Fqdns\FqdnDeleteResponse;
@@ -49,14 +50,14 @@ final class FqdnsService implements FqdnsContract
         ?int $port = 5060,
         ?RequestOptions $requestOptions = null,
     ): FqdnNewResponse {
-        $params = [
-            'connectionID' => $connectionID,
-            'dnsRecordType' => $dnsRecordType,
-            'fqdn' => $fqdn,
-            'port' => $port,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'connectionID' => $connectionID,
+                'dnsRecordType' => $dnsRecordType,
+                'fqdn' => $fqdn,
+                'port' => $port,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -104,14 +105,14 @@ final class FqdnsService implements FqdnsContract
         ?int $port = 5060,
         ?RequestOptions $requestOptions = null,
     ): FqdnUpdateResponse {
-        $params = [
-            'connectionID' => $connectionID,
-            'dnsRecordType' => $dnsRecordType,
-            'fqdn' => $fqdn,
-            'port' => $port,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'connectionID' => $connectionID,
+                'dnsRecordType' => $dnsRecordType,
+                'fqdn' => $fqdn,
+                'port' => $port,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
@@ -140,9 +141,7 @@ final class FqdnsService implements FqdnsContract
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = ['filter' => $filter, 'page' => $page];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

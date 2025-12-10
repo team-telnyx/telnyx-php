@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WirelessBlocklistValuesContract;
 use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListParams\Type;
@@ -39,7 +40,7 @@ final class WirelessBlocklistValuesService implements WirelessBlocklistValuesCon
         string|Type $type,
         ?RequestOptions $requestOptions = null
     ): WirelessBlocklistValueListResponse {
-        $params = ['type' => $type];
+        $params = Util::removeNulls(['type' => $type]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

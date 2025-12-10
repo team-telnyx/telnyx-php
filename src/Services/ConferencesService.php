@@ -15,6 +15,7 @@ use Telnyx\Conferences\ConferenceListParams\Filter\Type;
 use Telnyx\Conferences\ConferenceListParticipantsResponse;
 use Telnyx\Conferences\ConferenceNewResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ConferencesContract;
@@ -85,22 +86,22 @@ final class ConferencesService implements ConferencesContract
         ?bool $startConferenceOnCreate = null,
         ?RequestOptions $requestOptions = null,
     ): ConferenceNewResponse {
-        $params = [
-            'callControlID' => $callControlID,
-            'name' => $name,
-            'beepEnabled' => $beepEnabled,
-            'clientState' => $clientState,
-            'comfortNoise' => $comfortNoise,
-            'commandID' => $commandID,
-            'durationMinutes' => $durationMinutes,
-            'holdAudioURL' => $holdAudioURL,
-            'holdMediaName' => $holdMediaName,
-            'maxParticipants' => $maxParticipants,
-            'region' => $region,
-            'startConferenceOnCreate' => $startConferenceOnCreate,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'callControlID' => $callControlID,
+                'name' => $name,
+                'beepEnabled' => $beepEnabled,
+                'clientState' => $clientState,
+                'comfortNoise' => $comfortNoise,
+                'commandID' => $commandID,
+                'durationMinutes' => $durationMinutes,
+                'holdAudioURL' => $holdAudioURL,
+                'holdMediaName' => $holdMediaName,
+                'maxParticipants' => $maxParticipants,
+                'region' => $region,
+                'startConferenceOnCreate' => $startConferenceOnCreate,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -123,9 +124,7 @@ final class ConferencesService implements ConferencesContract
         string|\Telnyx\Conferences\ConferenceRetrieveParams\Region|null $region = null,
         ?RequestOptions $requestOptions = null,
     ): ConferenceGetResponse {
-        $params = ['region' => $region];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['region' => $region]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, params: $params, requestOptions: $requestOptions);
@@ -170,9 +169,9 @@ final class ConferencesService implements ConferencesContract
         string|\Telnyx\Conferences\ConferenceListParams\Region|null $region = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = ['filter' => $filter, 'page' => $page, 'region' => $region];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['filter' => $filter, 'page' => $page, 'region' => $region]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -205,9 +204,9 @@ final class ConferencesService implements ConferencesContract
         string|\Telnyx\Conferences\ConferenceListParticipantsParams\Region|null $region = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = ['filter' => $filter, 'page' => $page, 'region' => $region];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['filter' => $filter, 'page' => $page, 'region' => $region]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listParticipants($conferenceID, params: $params, requestOptions: $requestOptions);

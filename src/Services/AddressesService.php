@@ -11,6 +11,7 @@ use Telnyx\Addresses\AddressListParams\Sort;
 use Telnyx\Addresses\AddressNewResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AddressesContract;
@@ -78,25 +79,25 @@ final class AddressesService implements AddressesContract
         bool $validateAddress = true,
         ?RequestOptions $requestOptions = null,
     ): AddressNewResponse {
-        $params = [
-            'businessName' => $businessName,
-            'countryCode' => $countryCode,
-            'firstName' => $firstName,
-            'lastName' => $lastName,
-            'locality' => $locality,
-            'streetAddress' => $streetAddress,
-            'addressBook' => $addressBook,
-            'administrativeArea' => $administrativeArea,
-            'borough' => $borough,
-            'customerReference' => $customerReference,
-            'extendedAddress' => $extendedAddress,
-            'neighborhood' => $neighborhood,
-            'phoneNumber' => $phoneNumber,
-            'postalCode' => $postalCode,
-            'validateAddress' => $validateAddress,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'businessName' => $businessName,
+                'countryCode' => $countryCode,
+                'firstName' => $firstName,
+                'lastName' => $lastName,
+                'locality' => $locality,
+                'streetAddress' => $streetAddress,
+                'addressBook' => $addressBook,
+                'administrativeArea' => $administrativeArea,
+                'borough' => $borough,
+                'customerReference' => $customerReference,
+                'extendedAddress' => $extendedAddress,
+                'neighborhood' => $neighborhood,
+                'phoneNumber' => $phoneNumber,
+                'postalCode' => $postalCode,
+                'validateAddress' => $validateAddress,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -160,9 +161,9 @@ final class AddressesService implements AddressesContract
         string|Sort $sort = 'created_at',
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['filter' => $filter, 'page' => $page, 'sort' => $sort]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

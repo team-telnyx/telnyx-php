@@ -6,6 +6,7 @@ namespace Telnyx\Services\Texml\Accounts\Calls;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Calls\RecordingsJsonContract;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonGetRecordingsJsonResponse;
@@ -58,18 +59,18 @@ final class RecordingsJsonService implements RecordingsJsonContract
         bool $sendRecordingURL = true,
         ?RequestOptions $requestOptions = null,
     ): RecordingsJsonRecordingsJsonResponse {
-        $params = [
-            'accountSid' => $accountSid,
-            'playBeep' => $playBeep,
-            'recordingChannels' => $recordingChannels,
-            'recordingStatusCallback' => $recordingStatusCallback,
-            'recordingStatusCallbackEvent' => $recordingStatusCallbackEvent,
-            'recordingStatusCallbackMethod' => $recordingStatusCallbackMethod,
-            'recordingTrack' => $recordingTrack,
-            'sendRecordingURL' => $sendRecordingURL,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'accountSid' => $accountSid,
+                'playBeep' => $playBeep,
+                'recordingChannels' => $recordingChannels,
+                'recordingStatusCallback' => $recordingStatusCallback,
+                'recordingStatusCallbackEvent' => $recordingStatusCallbackEvent,
+                'recordingStatusCallbackMethod' => $recordingStatusCallbackMethod,
+                'recordingTrack' => $recordingTrack,
+                'sendRecordingURL' => $sendRecordingURL,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->recordingsJson($callSid, params: $params, requestOptions: $requestOptions);
@@ -92,7 +93,7 @@ final class RecordingsJsonService implements RecordingsJsonContract
         string $accountSid,
         ?RequestOptions $requestOptions = null
     ): RecordingsJsonGetRecordingsJsonResponse {
-        $params = ['accountSid' => $accountSid];
+        $params = Util::removeNulls(['accountSid' => $accountSid]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveRecordingsJson($callSid, params: $params, requestOptions: $requestOptions);

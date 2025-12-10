@@ -6,6 +6,7 @@ namespace Telnyx\Services\Wireless;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Wireless\DetailRecordsReportsContract;
 use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportDeleteResponse;
@@ -43,9 +44,9 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
         ?string $startTime = null,
         ?RequestOptions $requestOptions = null,
     ): DetailRecordsReportNewResponse {
-        $params = ['endTime' => $endTime, 'startTime' => $startTime];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['endTime' => $endTime, 'startTime' => $startTime]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -87,9 +88,9 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
         int $pageSize = 20,
         ?RequestOptions $requestOptions = null,
     ): DetailRecordsReportListResponse {
-        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

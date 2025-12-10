@@ -6,6 +6,7 @@ namespace Telnyx\Services\Texml;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\CallsContract;
 use Telnyx\Texml\Calls\CallInitiateParams\AsyncAmdStatusCallbackMethod;
@@ -67,18 +68,18 @@ final class CallsService implements CallsContract
         ?string $url = null,
         ?RequestOptions $requestOptions = null,
     ): CallUpdateResponse {
-        $params = [
-            'fallbackMethod' => $fallbackMethod,
-            'fallbackURL' => $fallbackURL,
-            'method' => $method,
-            'status' => $status,
-            'statusCallback' => $statusCallback,
-            'statusCallbackMethod' => $statusCallbackMethod,
-            'texml' => $texml,
-            'url' => $url,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'fallbackMethod' => $fallbackMethod,
+                'fallbackURL' => $fallbackURL,
+                'method' => $method,
+                'status' => $status,
+                'statusCallback' => $statusCallback,
+                'statusCallbackMethod' => $statusCallbackMethod,
+                'texml' => $texml,
+                'url' => $url,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($callSid, params: $params, requestOptions: $requestOptions);
@@ -161,41 +162,41 @@ final class CallsService implements CallsContract
         string|URLMethod $urlMethod = 'POST',
         ?RequestOptions $requestOptions = null,
     ): CallInitiateResponse {
-        $params = [
-            'from' => $from,
-            'to' => $to,
-            'asyncAmd' => $asyncAmd,
-            'asyncAmdStatusCallback' => $asyncAmdStatusCallback,
-            'asyncAmdStatusCallbackMethod' => $asyncAmdStatusCallbackMethod,
-            'callerID' => $callerID,
-            'cancelPlaybackOnDetectMessageEnd' => $cancelPlaybackOnDetectMessageEnd,
-            'cancelPlaybackOnMachineDetection' => $cancelPlaybackOnMachineDetection,
-            'detectionMode' => $detectionMode,
-            'fallbackURL' => $fallbackURL,
-            'machineDetection' => $machineDetection,
-            'machineDetectionSilenceTimeout' => $machineDetectionSilenceTimeout,
-            'machineDetectionSpeechEndThreshold' => $machineDetectionSpeechEndThreshold,
-            'machineDetectionSpeechThreshold' => $machineDetectionSpeechThreshold,
-            'machineDetectionTimeout' => $machineDetectionTimeout,
-            'preferredCodecs' => $preferredCodecs,
-            'record' => $record,
-            'recordingChannels' => $recordingChannels,
-            'recordingStatusCallback' => $recordingStatusCallback,
-            'recordingStatusCallbackEvent' => $recordingStatusCallbackEvent,
-            'recordingStatusCallbackMethod' => $recordingStatusCallbackMethod,
-            'recordingTimeout' => $recordingTimeout,
-            'recordingTrack' => $recordingTrack,
-            'sipAuthPassword' => $sipAuthPassword,
-            'sipAuthUsername' => $sipAuthUsername,
-            'statusCallback' => $statusCallback,
-            'statusCallbackEvent' => $statusCallbackEvent,
-            'statusCallbackMethod' => $statusCallbackMethod,
-            'trim' => $trim,
-            'url' => $url,
-            'urlMethod' => $urlMethod,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'from' => $from,
+                'to' => $to,
+                'asyncAmd' => $asyncAmd,
+                'asyncAmdStatusCallback' => $asyncAmdStatusCallback,
+                'asyncAmdStatusCallbackMethod' => $asyncAmdStatusCallbackMethod,
+                'callerID' => $callerID,
+                'cancelPlaybackOnDetectMessageEnd' => $cancelPlaybackOnDetectMessageEnd,
+                'cancelPlaybackOnMachineDetection' => $cancelPlaybackOnMachineDetection,
+                'detectionMode' => $detectionMode,
+                'fallbackURL' => $fallbackURL,
+                'machineDetection' => $machineDetection,
+                'machineDetectionSilenceTimeout' => $machineDetectionSilenceTimeout,
+                'machineDetectionSpeechEndThreshold' => $machineDetectionSpeechEndThreshold,
+                'machineDetectionSpeechThreshold' => $machineDetectionSpeechThreshold,
+                'machineDetectionTimeout' => $machineDetectionTimeout,
+                'preferredCodecs' => $preferredCodecs,
+                'record' => $record,
+                'recordingChannels' => $recordingChannels,
+                'recordingStatusCallback' => $recordingStatusCallback,
+                'recordingStatusCallbackEvent' => $recordingStatusCallbackEvent,
+                'recordingStatusCallbackMethod' => $recordingStatusCallbackMethod,
+                'recordingTimeout' => $recordingTimeout,
+                'recordingTrack' => $recordingTrack,
+                'sipAuthPassword' => $sipAuthPassword,
+                'sipAuthUsername' => $sipAuthUsername,
+                'statusCallback' => $statusCallback,
+                'statusCallbackEvent' => $statusCallbackEvent,
+                'statusCallbackMethod' => $statusCallbackMethod,
+                'trim' => $trim,
+                'url' => $url,
+                'urlMethod' => $urlMethod,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->initiate($applicationID, params: $params, requestOptions: $requestOptions);

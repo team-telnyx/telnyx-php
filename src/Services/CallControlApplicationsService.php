@@ -21,6 +21,7 @@ use Telnyx\CallControlApplications\CallControlApplicationOutbound;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CallControlApplicationsContract;
@@ -86,24 +87,24 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
         ?int $webhookTimeoutSecs = null,
         ?RequestOptions $requestOptions = null,
     ): CallControlApplicationNewResponse {
-        $params = [
-            'applicationName' => $applicationName,
-            'webhookEventURL' => $webhookEventURL,
-            'active' => $active,
-            'anchorsiteOverride' => $anchorsiteOverride,
-            'callCostInWebhooks' => $callCostInWebhooks,
-            'dtmfType' => $dtmfType,
-            'firstCommandTimeout' => $firstCommandTimeout,
-            'firstCommandTimeoutSecs' => $firstCommandTimeoutSecs,
-            'inbound' => $inbound,
-            'outbound' => $outbound,
-            'redactDtmfDebugLogging' => $redactDtmfDebugLogging,
-            'webhookAPIVersion' => $webhookAPIVersion,
-            'webhookEventFailoverURL' => $webhookEventFailoverURL,
-            'webhookTimeoutSecs' => $webhookTimeoutSecs,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'applicationName' => $applicationName,
+                'webhookEventURL' => $webhookEventURL,
+                'active' => $active,
+                'anchorsiteOverride' => $anchorsiteOverride,
+                'callCostInWebhooks' => $callCostInWebhooks,
+                'dtmfType' => $dtmfType,
+                'firstCommandTimeout' => $firstCommandTimeout,
+                'firstCommandTimeoutSecs' => $firstCommandTimeoutSecs,
+                'inbound' => $inbound,
+                'outbound' => $outbound,
+                'redactDtmfDebugLogging' => $redactDtmfDebugLogging,
+                'webhookAPIVersion' => $webhookAPIVersion,
+                'webhookEventFailoverURL' => $webhookEventFailoverURL,
+                'webhookTimeoutSecs' => $webhookTimeoutSecs,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -180,25 +181,25 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
         ?int $webhookTimeoutSecs = null,
         ?RequestOptions $requestOptions = null,
     ): CallControlApplicationUpdateResponse {
-        $params = [
-            'applicationName' => $applicationName,
-            'webhookEventURL' => $webhookEventURL,
-            'active' => $active,
-            'anchorsiteOverride' => $anchorsiteOverride,
-            'callCostInWebhooks' => $callCostInWebhooks,
-            'dtmfType' => $dtmfType,
-            'firstCommandTimeout' => $firstCommandTimeout,
-            'firstCommandTimeoutSecs' => $firstCommandTimeoutSecs,
-            'inbound' => $inbound,
-            'outbound' => $outbound,
-            'redactDtmfDebugLogging' => $redactDtmfDebugLogging,
-            'tags' => $tags,
-            'webhookAPIVersion' => $webhookAPIVersion,
-            'webhookEventFailoverURL' => $webhookEventFailoverURL,
-            'webhookTimeoutSecs' => $webhookTimeoutSecs,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'applicationName' => $applicationName,
+                'webhookEventURL' => $webhookEventURL,
+                'active' => $active,
+                'anchorsiteOverride' => $anchorsiteOverride,
+                'callCostInWebhooks' => $callCostInWebhooks,
+                'dtmfType' => $dtmfType,
+                'firstCommandTimeout' => $firstCommandTimeout,
+                'firstCommandTimeoutSecs' => $firstCommandTimeoutSecs,
+                'inbound' => $inbound,
+                'outbound' => $outbound,
+                'redactDtmfDebugLogging' => $redactDtmfDebugLogging,
+                'tags' => $tags,
+                'webhookAPIVersion' => $webhookAPIVersion,
+                'webhookEventFailoverURL' => $webhookEventFailoverURL,
+                'webhookTimeoutSecs' => $webhookTimeoutSecs,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
@@ -254,9 +255,9 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
         string|Sort $sort = 'created_at',
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['filter' => $filter, 'page' => $page, 'sort' => $sort]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

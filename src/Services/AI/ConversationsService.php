@@ -11,6 +11,7 @@ use Telnyx\AI\Conversations\ConversationListResponse;
 use Telnyx\AI\Conversations\ConversationUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\ConversationsContract;
 use Telnyx\Services\AI\Conversations\InsightGroupsService;
@@ -64,9 +65,7 @@ final class ConversationsService implements ConversationsContract
         ?string $name = null,
         ?RequestOptions $requestOptions = null,
     ): Conversation {
-        $params = ['metadata' => $metadata, 'name' => $name];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['metadata' => $metadata, 'name' => $name]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -108,9 +107,7 @@ final class ConversationsService implements ConversationsContract
         ?array $metadata = null,
         ?RequestOptions $requestOptions = null,
     ): ConversationUpdateResponse {
-        $params = ['metadata' => $metadata];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['metadata' => $metadata]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($conversationID, params: $params, requestOptions: $requestOptions);
@@ -153,22 +150,22 @@ final class ConversationsService implements ConversationsContract
         ?string $order = null,
         ?RequestOptions $requestOptions = null,
     ): ConversationListResponse {
-        $params = [
-            'id' => $id,
-            'createdAt' => $createdAt,
-            'lastMessageAt' => $lastMessageAt,
-            'limit' => $limit,
-            'metadataAssistantID' => $metadataAssistantID,
-            'metadataCallControlID' => $metadataCallControlID,
-            'metadataTelnyxAgentTarget' => $metadataTelnyxAgentTarget,
-            'metadataTelnyxConversationChannel' => $metadataTelnyxConversationChannel,
-            'metadataTelnyxEndUserTarget' => $metadataTelnyxEndUserTarget,
-            'name' => $name,
-            'or' => $or,
-            'order' => $order,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'id' => $id,
+                'createdAt' => $createdAt,
+                'lastMessageAt' => $lastMessageAt,
+                'limit' => $limit,
+                'metadataAssistantID' => $metadataAssistantID,
+                'metadataCallControlID' => $metadataCallControlID,
+                'metadataTelnyxAgentTarget' => $metadataTelnyxAgentTarget,
+                'metadataTelnyxConversationChannel' => $metadataTelnyxConversationChannel,
+                'metadataTelnyxEndUserTarget' => $metadataTelnyxEndUserTarget,
+                'name' => $name,
+                'or' => $or,
+                'order' => $order,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -219,18 +216,18 @@ final class ConversationsService implements ConversationsContract
         string|array|null $toolChoice = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = [
-            'role' => $role,
-            'content' => $content,
-            'metadata' => $metadata,
-            'name' => $name,
-            'sentAt' => $sentAt,
-            'toolCallID' => $toolCallID,
-            'toolCalls' => $toolCalls,
-            'toolChoice' => $toolChoice,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'role' => $role,
+                'content' => $content,
+                'metadata' => $metadata,
+                'name' => $name,
+                'sentAt' => $sentAt,
+                'toolCallID' => $toolCallID,
+                'toolCalls' => $toolCalls,
+                'toolChoice' => $toolChoice,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->addMessage($conversationID, params: $params, requestOptions: $requestOptions);

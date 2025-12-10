@@ -13,6 +13,7 @@ use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateResponse;
 use Telnyx\AuthenticationProviders\Settings\IdpCertFingerprintAlgorithm;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AuthenticationProvidersContract;
@@ -58,15 +59,15 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
         ?string $settingsURL = null,
         ?RequestOptions $requestOptions = null,
     ): AuthenticationProviderNewResponse {
-        $params = [
-            'name' => $name,
-            'settings' => $settings,
-            'shortName' => $shortName,
-            'active' => $active,
-            'settingsURL' => $settingsURL,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'name' => $name,
+                'settings' => $settings,
+                'shortName' => $shortName,
+                'active' => $active,
+                'settingsURL' => $settingsURL,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -121,15 +122,15 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
         ?string $shortName = null,
         ?RequestOptions $requestOptions = null,
     ): AuthenticationProviderUpdateResponse {
-        $params = [
-            'active' => $active,
-            'name' => $name,
-            'settings' => $settings,
-            'settingsURL' => $settingsURL,
-            'shortName' => $shortName,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'active' => $active,
+                'name' => $name,
+                'settings' => $settings,
+                'settingsURL' => $settingsURL,
+                'shortName' => $shortName,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
@@ -164,11 +165,9 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
         string|Sort $sort = '-created_at',
         ?RequestOptions $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = [
-            'pageNumber' => $pageNumber, 'pageSize' => $pageSize, 'sort' => $sort,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize, 'sort' => $sort]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

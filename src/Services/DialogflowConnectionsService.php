@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DialogflowConnections\DialogflowConnectionCreateParams\DialogflowAPI;
 use Telnyx\DialogflowConnections\DialogflowConnectionGetResponse;
 use Telnyx\DialogflowConnections\DialogflowConnectionNewResponse;
@@ -51,15 +52,15 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
         ?string $location = null,
         ?RequestOptions $requestOptions = null,
     ): DialogflowConnectionNewResponse {
-        $params = [
-            'serviceAccount' => $serviceAccount,
-            'conversationProfileID' => $conversationProfileID,
-            'dialogflowAPI' => $dialogflowAPI,
-            'environment' => $environment,
-            'location' => $location,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'serviceAccount' => $serviceAccount,
+                'conversationProfileID' => $conversationProfileID,
+                'dialogflowAPI' => $dialogflowAPI,
+                'environment' => $environment,
+                'location' => $location,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($connectionID, params: $params, requestOptions: $requestOptions);
@@ -109,15 +110,15 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
         ?string $location = null,
         ?RequestOptions $requestOptions = null,
     ): DialogflowConnectionUpdateResponse {
-        $params = [
-            'serviceAccount' => $serviceAccount,
-            'conversationProfileID' => $conversationProfileID,
-            'dialogflowAPI' => $dialogflowAPI,
-            'environment' => $environment,
-            'location' => $location,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'serviceAccount' => $serviceAccount,
+                'conversationProfileID' => $conversationProfileID,
+                'dialogflowAPI' => $dialogflowAPI,
+                'environment' => $environment,
+                'location' => $location,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($connectionID, params: $params, requestOptions: $requestOptions);

@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\MessagingProfiles\MessagingProfile;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
@@ -102,24 +103,24 @@ final class MessagingProfilesService implements MessagingProfilesContract
         ?string $webhookURL = '',
         ?RequestOptions $requestOptions = null,
     ): MessagingProfileNewResponse {
-        $params = [
-            'name' => $name,
-            'whitelistedDestinations' => $whitelistedDestinations,
-            'alphaSender' => $alphaSender,
-            'dailySpendLimit' => $dailySpendLimit,
-            'dailySpendLimitEnabled' => $dailySpendLimitEnabled,
-            'enabled' => $enabled,
-            'mmsFallBackToSMS' => $mmsFallBackToSMS,
-            'mmsTranscoding' => $mmsTranscoding,
-            'mobileOnly' => $mobileOnly,
-            'numberPoolSettings' => $numberPoolSettings,
-            'urlShortenerSettings' => $urlShortenerSettings,
-            'webhookAPIVersion' => $webhookAPIVersion,
-            'webhookFailoverURL' => $webhookFailoverURL,
-            'webhookURL' => $webhookURL,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'name' => $name,
+                'whitelistedDestinations' => $whitelistedDestinations,
+                'alphaSender' => $alphaSender,
+                'dailySpendLimit' => $dailySpendLimit,
+                'dailySpendLimitEnabled' => $dailySpendLimitEnabled,
+                'enabled' => $enabled,
+                'mmsFallBackToSMS' => $mmsFallBackToSMS,
+                'mmsTranscoding' => $mmsTranscoding,
+                'mobileOnly' => $mobileOnly,
+                'numberPoolSettings' => $numberPoolSettings,
+                'urlShortenerSettings' => $urlShortenerSettings,
+                'webhookAPIVersion' => $webhookAPIVersion,
+                'webhookFailoverURL' => $webhookFailoverURL,
+                'webhookURL' => $webhookURL,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -212,25 +213,25 @@ final class MessagingProfilesService implements MessagingProfilesContract
         ?array $whitelistedDestinations = null,
         ?RequestOptions $requestOptions = null,
     ): MessagingProfileUpdateResponse {
-        $params = [
-            'alphaSender' => $alphaSender,
-            'dailySpendLimit' => $dailySpendLimit,
-            'dailySpendLimitEnabled' => $dailySpendLimitEnabled,
-            'enabled' => $enabled,
-            'mmsFallBackToSMS' => $mmsFallBackToSMS,
-            'mmsTranscoding' => $mmsTranscoding,
-            'mobileOnly' => $mobileOnly,
-            'name' => $name,
-            'numberPoolSettings' => $numberPoolSettings,
-            'urlShortenerSettings' => $urlShortenerSettings,
-            'v1Secret' => $v1Secret,
-            'webhookAPIVersion' => $webhookAPIVersion,
-            'webhookFailoverURL' => $webhookFailoverURL,
-            'webhookURL' => $webhookURL,
-            'whitelistedDestinations' => $whitelistedDestinations,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'alphaSender' => $alphaSender,
+                'dailySpendLimit' => $dailySpendLimit,
+                'dailySpendLimitEnabled' => $dailySpendLimitEnabled,
+                'enabled' => $enabled,
+                'mmsFallBackToSMS' => $mmsFallBackToSMS,
+                'mmsTranscoding' => $mmsTranscoding,
+                'mobileOnly' => $mobileOnly,
+                'name' => $name,
+                'numberPoolSettings' => $numberPoolSettings,
+                'urlShortenerSettings' => $urlShortenerSettings,
+                'v1Secret' => $v1Secret,
+                'webhookAPIVersion' => $webhookAPIVersion,
+                'webhookFailoverURL' => $webhookFailoverURL,
+                'webhookURL' => $webhookURL,
+                'whitelistedDestinations' => $whitelistedDestinations,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($messagingProfileID, params: $params, requestOptions: $requestOptions);
@@ -259,9 +260,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = ['filter' => $filter, 'page' => $page];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -307,9 +306,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = ['page' => $page];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listPhoneNumbers($messagingProfileID, params: $params, requestOptions: $requestOptions);
@@ -336,9 +333,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = ['page' => $page];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listShortCodes($messagingProfileID, params: $params, requestOptions: $requestOptions);

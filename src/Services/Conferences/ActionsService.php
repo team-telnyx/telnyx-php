@@ -27,6 +27,7 @@ use Telnyx\Conferences\Actions\ActionUpdateParams\Region;
 use Telnyx\Conferences\Actions\ActionUpdateParams\SupervisorRole;
 use Telnyx\Conferences\Actions\ActionUpdateResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Conferences\ActionsContract;
 
@@ -68,15 +69,15 @@ final class ActionsService implements ActionsContract
         ?array $whisperCallControlIDs = null,
         ?RequestOptions $requestOptions = null,
     ): ActionUpdateResponse {
-        $params = [
-            'callControlID' => $callControlID,
-            'supervisorRole' => $supervisorRole,
-            'commandID' => $commandID,
-            'region' => $region,
-            'whisperCallControlIDs' => $whisperCallControlIDs,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'callControlID' => $callControlID,
+                'supervisorRole' => $supervisorRole,
+                'commandID' => $commandID,
+                'region' => $region,
+                'whisperCallControlIDs' => $whisperCallControlIDs,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
@@ -105,14 +106,14 @@ final class ActionsService implements ActionsContract
         string|\Telnyx\Conferences\Actions\ActionHoldParams\Region|null $region = null,
         ?RequestOptions $requestOptions = null,
     ): ActionHoldResponse {
-        $params = [
-            'audioURL' => $audioURL,
-            'callControlIDs' => $callControlIDs,
-            'mediaName' => $mediaName,
-            'region' => $region,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'audioURL' => $audioURL,
+                'callControlIDs' => $callControlIDs,
+                'mediaName' => $mediaName,
+                'region' => $region,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->hold($id, params: $params, requestOptions: $requestOptions);
@@ -166,24 +167,24 @@ final class ActionsService implements ActionsContract
         ?array $whisperCallControlIDs = null,
         ?RequestOptions $requestOptions = null,
     ): ActionJoinResponse {
-        $params = [
-            'callControlID' => $callControlID,
-            'beepEnabled' => $beepEnabled,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'endConferenceOnExit' => $endConferenceOnExit,
-            'hold' => $hold,
-            'holdAudioURL' => $holdAudioURL,
-            'holdMediaName' => $holdMediaName,
-            'mute' => $mute,
-            'region' => $region,
-            'softEndConferenceOnExit' => $softEndConferenceOnExit,
-            'startConferenceOnEnter' => $startConferenceOnEnter,
-            'supervisorRole' => $supervisorRole,
-            'whisperCallControlIDs' => $whisperCallControlIDs,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'callControlID' => $callControlID,
+                'beepEnabled' => $beepEnabled,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'endConferenceOnExit' => $endConferenceOnExit,
+                'hold' => $hold,
+                'holdAudioURL' => $holdAudioURL,
+                'holdMediaName' => $holdMediaName,
+                'mute' => $mute,
+                'region' => $region,
+                'softEndConferenceOnExit' => $softEndConferenceOnExit,
+                'startConferenceOnEnter' => $startConferenceOnEnter,
+                'supervisorRole' => $supervisorRole,
+                'whisperCallControlIDs' => $whisperCallControlIDs,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->join($id, params: $params, requestOptions: $requestOptions);
@@ -216,14 +217,14 @@ final class ActionsService implements ActionsContract
         string|\Telnyx\Conferences\Actions\ActionLeaveParams\Region|null $region = null,
         ?RequestOptions $requestOptions = null,
     ): ActionLeaveResponse {
-        $params = [
-            'callControlID' => $callControlID,
-            'beepEnabled' => $beepEnabled,
-            'commandID' => $commandID,
-            'region' => $region,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'callControlID' => $callControlID,
+                'beepEnabled' => $beepEnabled,
+                'commandID' => $commandID,
+                'region' => $region,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->leave($id, params: $params, requestOptions: $requestOptions);
@@ -248,9 +249,9 @@ final class ActionsService implements ActionsContract
         string|\Telnyx\Conferences\Actions\ActionMuteParams\Region|null $region = null,
         ?RequestOptions $requestOptions = null,
     ): ActionMuteResponse {
-        $params = ['callControlIDs' => $callControlIDs, 'region' => $region];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['callControlIDs' => $callControlIDs, 'region' => $region]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->mute($id, params: $params, requestOptions: $requestOptions);
@@ -281,15 +282,15 @@ final class ActionsService implements ActionsContract
         string|\Telnyx\Conferences\Actions\ActionPlayParams\Region|null $region = null,
         ?RequestOptions $requestOptions = null,
     ): ActionPlayResponse {
-        $params = [
-            'audioURL' => $audioURL,
-            'callControlIDs' => $callControlIDs,
-            'loop' => $loop,
-            'mediaName' => $mediaName,
-            'region' => $region,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'audioURL' => $audioURL,
+                'callControlIDs' => $callControlIDs,
+                'loop' => $loop,
+                'mediaName' => $mediaName,
+                'region' => $region,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->play($id, params: $params, requestOptions: $requestOptions);
@@ -316,13 +317,13 @@ final class ActionsService implements ActionsContract
         string|\Telnyx\Conferences\Actions\ActionRecordPauseParams\Region|null $region = null,
         ?RequestOptions $requestOptions = null,
     ): ActionRecordPauseResponse {
-        $params = [
-            'commandID' => $commandID,
-            'recordingID' => $recordingID,
-            'region' => $region,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'commandID' => $commandID,
+                'recordingID' => $recordingID,
+                'region' => $region,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->recordPause($id, params: $params, requestOptions: $requestOptions);
@@ -349,13 +350,13 @@ final class ActionsService implements ActionsContract
         string|\Telnyx\Conferences\Actions\ActionRecordResumeParams\Region|null $region = null,
         ?RequestOptions $requestOptions = null,
     ): ActionRecordResumeResponse {
-        $params = [
-            'commandID' => $commandID,
-            'recordingID' => $recordingID,
-            'region' => $region,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'commandID' => $commandID,
+                'recordingID' => $recordingID,
+                'region' => $region,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->recordResume($id, params: $params, requestOptions: $requestOptions);
@@ -392,16 +393,16 @@ final class ActionsService implements ActionsContract
         string|Trim|null $trim = null,
         ?RequestOptions $requestOptions = null,
     ): ActionRecordStartResponse {
-        $params = [
-            'format' => $format,
-            'commandID' => $commandID,
-            'customFileName' => $customFileName,
-            'playBeep' => $playBeep,
-            'region' => $region,
-            'trim' => $trim,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'format' => $format,
+                'commandID' => $commandID,
+                'customFileName' => $customFileName,
+                'playBeep' => $playBeep,
+                'region' => $region,
+                'trim' => $trim,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->recordStart($id, params: $params, requestOptions: $requestOptions);
@@ -434,14 +435,14 @@ final class ActionsService implements ActionsContract
         string|\Telnyx\Conferences\Actions\ActionRecordStopParams\Region|null $region = null,
         ?RequestOptions $requestOptions = null,
     ): ActionRecordStopResponse {
-        $params = [
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'recordingID' => $recordingID,
-            'region' => $region,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'recordingID' => $recordingID,
+                'region' => $region,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->recordStop($id, params: $params, requestOptions: $requestOptions);
@@ -488,18 +489,18 @@ final class ActionsService implements ActionsContract
         ?array $voiceSettings = null,
         ?RequestOptions $requestOptions = null,
     ): ActionSpeakResponse {
-        $params = [
-            'payload' => $payload,
-            'voice' => $voice,
-            'callControlIDs' => $callControlIDs,
-            'commandID' => $commandID,
-            'language' => $language,
-            'payloadType' => $payloadType,
-            'region' => $region,
-            'voiceSettings' => $voiceSettings,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'payload' => $payload,
+                'voice' => $voice,
+                'callControlIDs' => $callControlIDs,
+                'commandID' => $commandID,
+                'language' => $language,
+                'payloadType' => $payloadType,
+                'region' => $region,
+                'voiceSettings' => $voiceSettings,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->speak($id, params: $params, requestOptions: $requestOptions);
@@ -524,9 +525,9 @@ final class ActionsService implements ActionsContract
         string|\Telnyx\Conferences\Actions\ActionStopParams\Region|null $region = null,
         ?RequestOptions $requestOptions = null,
     ): ActionStopResponse {
-        $params = ['callControlIDs' => $callControlIDs, 'region' => $region];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['callControlIDs' => $callControlIDs, 'region' => $region]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->stop($id, params: $params, requestOptions: $requestOptions);
@@ -551,9 +552,9 @@ final class ActionsService implements ActionsContract
         string|\Telnyx\Conferences\Actions\ActionUnholdParams\Region|null $region = null,
         ?RequestOptions $requestOptions = null,
     ): ActionUnholdResponse {
-        $params = ['callControlIDs' => $callControlIDs, 'region' => $region];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['callControlIDs' => $callControlIDs, 'region' => $region]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->unhold($id, params: $params, requestOptions: $requestOptions);
@@ -578,9 +579,9 @@ final class ActionsService implements ActionsContract
         string|\Telnyx\Conferences\Actions\ActionUnmuteParams\Region|null $region = null,
         ?RequestOptions $requestOptions = null,
     ): ActionUnmuteResponse {
-        $params = ['callControlIDs' => $callControlIDs, 'region' => $region];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['callControlIDs' => $callControlIDs, 'region' => $region]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->unmute($id, params: $params, requestOptions: $requestOptions);

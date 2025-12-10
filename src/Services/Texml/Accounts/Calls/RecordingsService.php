@@ -6,6 +6,7 @@ namespace Telnyx\Services\Texml\Accounts\Calls;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Calls\RecordingsContract;
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonParams\Status;
@@ -45,11 +46,9 @@ final class RecordingsService implements RecordingsContract
         string|Status|null $status = null,
         ?RequestOptions $requestOptions = null,
     ): RecordingRecordingSidJsonResponse {
-        $params = [
-            'accountSid' => $accountSid, 'callSid' => $callSid, 'status' => $status,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['accountSid' => $accountSid, 'callSid' => $callSid, 'status' => $status]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->recordingSidJson($recordingSid, params: $params, requestOptions: $requestOptions);

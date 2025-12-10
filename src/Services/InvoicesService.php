@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Invoices\InvoiceGetResponse;
 use Telnyx\Invoices\InvoiceListParams\Sort;
@@ -44,9 +45,7 @@ final class InvoicesService implements InvoicesContract
         string|Action|null $action = null,
         ?RequestOptions $requestOptions = null,
     ): InvoiceGetResponse {
-        $params = ['action' => $action];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['action' => $action]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, params: $params, requestOptions: $requestOptions);
@@ -71,11 +70,9 @@ final class InvoicesService implements InvoicesContract
         string|Sort|null $sort = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = [
-            'pageNumber' => $pageNumber, 'pageSize' => $pageSize, 'sort' => $sort,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize, 'sort' => $sort]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

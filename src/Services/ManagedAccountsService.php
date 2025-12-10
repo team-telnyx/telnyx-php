@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\ManagedAccounts\ManagedAccountGetAllocatableGlobalOutboundChannelsResponse;
 use Telnyx\ManagedAccounts\ManagedAccountGetResponse;
@@ -60,15 +61,15 @@ final class ManagedAccountsService implements ManagedAccountsContract
         ?bool $rollupBilling = null,
         ?RequestOptions $requestOptions = null,
     ): ManagedAccountNewResponse {
-        $params = [
-            'businessName' => $businessName,
-            'email' => $email,
-            'managedAccountAllowCustomPricing' => $managedAccountAllowCustomPricing,
-            'password' => $password,
-            'rollupBilling' => $rollupBilling,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'businessName' => $businessName,
+                'email' => $email,
+                'managedAccountAllowCustomPricing' => $managedAccountAllowCustomPricing,
+                'password' => $password,
+                'rollupBilling' => $rollupBilling,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -110,11 +111,9 @@ final class ManagedAccountsService implements ManagedAccountsContract
         ?bool $managedAccountAllowCustomPricing = null,
         ?RequestOptions $requestOptions = null,
     ): ManagedAccountUpdateResponse {
-        $params = [
-            'managedAccountAllowCustomPricing' => $managedAccountAllowCustomPricing,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['managedAccountAllowCustomPricing' => $managedAccountAllowCustomPricing]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
@@ -159,14 +158,14 @@ final class ManagedAccountsService implements ManagedAccountsContract
         string|Sort $sort = 'created_at',
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = [
-            'filter' => $filter,
-            'includeCancelledAccounts' => $includeCancelledAccounts,
-            'page' => $page,
-            'sort' => $sort,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'filter' => $filter,
+                'includeCancelledAccounts' => $includeCancelledAccounts,
+                'page' => $page,
+                'sort' => $sort,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -205,9 +204,7 @@ final class ManagedAccountsService implements ManagedAccountsContract
         ?int $channelLimit = null,
         ?RequestOptions $requestOptions = null
     ): ManagedAccountUpdateGlobalChannelLimitResponse {
-        $params = ['channelLimit' => $channelLimit];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['channelLimit' => $channelLimit]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->updateGlobalChannelLimit($id, params: $params, requestOptions: $requestOptions);

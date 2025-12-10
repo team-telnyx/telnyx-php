@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WirelessBlocklistsContract;
@@ -48,7 +49,9 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
         array $values,
         ?RequestOptions $requestOptions = null,
     ): WirelessBlocklistNewResponse {
-        $params = ['name' => $name, 'type' => $type, 'values' => $values];
+        $params = Util::removeNulls(
+            ['name' => $name, 'type' => $type, 'values' => $values]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -92,9 +95,9 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
         ?array $values = null,
         ?RequestOptions $requestOptions = null,
     ): WirelessBlocklistUpdateResponse {
-        $params = ['name' => $name, 'type' => $type, 'values' => $values];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['name' => $name, 'type' => $type, 'values' => $values]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update(params: $params, requestOptions: $requestOptions);
@@ -125,15 +128,15 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
         int $pageSize = 20,
         ?RequestOptions $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = [
-            'filterName' => $filterName,
-            'filterType' => $filterType,
-            'filterValues' => $filterValues,
-            'pageNumber' => $pageNumber,
-            'pageSize' => $pageSize,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'filterName' => $filterName,
+                'filterType' => $filterType,
+                'filterValues' => $filterValues,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

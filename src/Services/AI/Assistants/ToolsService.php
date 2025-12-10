@@ -7,6 +7,7 @@ namespace Telnyx\Services\AI\Assistants;
 use Telnyx\AI\Assistants\Tools\ToolTestResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\ToolsContract;
 
@@ -44,13 +45,13 @@ final class ToolsService implements ToolsContract
         ?array $dynamicVariables = null,
         ?RequestOptions $requestOptions = null,
     ): ToolTestResponse {
-        $params = [
-            'assistantID' => $assistantID,
-            'arguments' => $arguments,
-            'dynamicVariables' => $dynamicVariables,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'assistantID' => $assistantID,
+                'arguments' => $arguments,
+                'dynamicVariables' => $dynamicVariables,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->test($toolID, params: $params, requestOptions: $requestOptions);

@@ -8,6 +8,7 @@ use Telnyx\Actions\Purchase\PurchaseCreateParams\Status;
 use Telnyx\Actions\Purchase\PurchaseNewResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Actions\PurchaseContract;
 
@@ -50,16 +51,16 @@ final class PurchaseService implements PurchaseContract
         ?string $whitelabelName = null,
         ?RequestOptions $requestOptions = null,
     ): PurchaseNewResponse {
-        $params = [
-            'amount' => $amount,
-            'product' => $product,
-            'simCardGroupID' => $simCardGroupID,
-            'status' => $status,
-            'tags' => $tags,
-            'whitelabelName' => $whitelabelName,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'amount' => $amount,
+                'product' => $product,
+                'simCardGroupID' => $simCardGroupID,
+                'status' => $status,
+                'tags' => $tags,
+                'whitelabelName' => $whitelabelName,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);

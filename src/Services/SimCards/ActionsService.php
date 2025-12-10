@@ -6,6 +6,7 @@ namespace Telnyx\Services\SimCards;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCards\ActionsContract;
@@ -79,9 +80,7 @@ final class ActionsService implements ActionsContract
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = ['filter' => $filter, 'page' => $page];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -103,7 +102,7 @@ final class ActionsService implements ActionsContract
         array $simCardIDs,
         ?RequestOptions $requestOptions = null
     ): ActionBulkSetPublicIPsResponse {
-        $params = ['simCardIDs' => $simCardIDs];
+        $params = Util::removeNulls(['simCardIDs' => $simCardIDs]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->bulkSetPublicIPs(params: $params, requestOptions: $requestOptions);
@@ -189,9 +188,7 @@ final class ActionsService implements ActionsContract
         ?string $regionCode = null,
         ?RequestOptions $requestOptions = null,
     ): ActionSetPublicIPResponse {
-        $params = ['regionCode' => $regionCode];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['regionCode' => $regionCode]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->setPublicIP($id, params: $params, requestOptions: $requestOptions);
@@ -233,9 +230,7 @@ final class ActionsService implements ActionsContract
         ?array $registrationCodes = null,
         ?RequestOptions $requestOptions = null
     ): ActionValidateRegistrationCodesResponse {
-        $params = ['registrationCodes' => $registrationCodes];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['registrationCodes' => $registrationCodes]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->validateRegistrationCodes(params: $params, requestOptions: $requestOptions);

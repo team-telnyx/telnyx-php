@@ -11,6 +11,7 @@ use Telnyx\Comments\CommentListResponse;
 use Telnyx\Comments\CommentMarkAsReadResponse;
 use Telnyx\Comments\CommentNewResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CommentsContract;
 
@@ -44,13 +45,13 @@ final class CommentsService implements CommentsContract
         string|\Telnyx\Comments\CommentCreateParams\CommentRecordType|null $commentRecordType = null,
         ?RequestOptions $requestOptions = null,
     ): CommentNewResponse {
-        $params = [
-            'body' => $body,
-            'commentRecordID' => $commentRecordID,
-            'commentRecordType' => $commentRecordType,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'body' => $body,
+                'commentRecordID' => $commentRecordID,
+                'commentRecordType' => $commentRecordType,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -93,9 +94,7 @@ final class CommentsService implements CommentsContract
         ?array $filter = null,
         ?RequestOptions $requestOptions = null
     ): CommentListResponse {
-        $params = ['filter' => $filter];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['filter' => $filter]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

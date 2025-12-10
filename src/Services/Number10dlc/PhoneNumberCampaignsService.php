@@ -6,6 +6,7 @@ namespace Telnyx\Services\Number10dlc;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Number10dlc\PhoneNumberCampaigns\PhoneNumberCampaign;
 use Telnyx\Number10dlc\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Sort;
 use Telnyx\PerPagePaginationV2;
@@ -42,7 +43,9 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
         string $phoneNumber,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberCampaign {
-        $params = ['campaignID' => $campaignID, 'phoneNumber' => $phoneNumber];
+        $params = Util::removeNulls(
+            ['campaignID' => $campaignID, 'phoneNumber' => $phoneNumber]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -83,7 +86,9 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
         string $phoneNumber,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberCampaign {
-        $params = ['campaignID' => $campaignID, 'phoneNumber' => $phoneNumber];
+        $params = Util::removeNulls(
+            ['campaignID' => $campaignID, 'phoneNumber' => $phoneNumber]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($campaignPhoneNumber, params: $params, requestOptions: $requestOptions);
@@ -115,14 +120,14 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
         string|Sort $sort = '-createdAt',
         ?RequestOptions $requestOptions = null,
     ): PerPagePaginationV2 {
-        $params = [
-            'filter' => $filter,
-            'page' => $page,
-            'recordsPerPage' => $recordsPerPage,
-            'sort' => $sort,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'filter' => $filter,
+                'page' => $page,
+                'recordsPerPage' => $recordsPerPage,
+                'sort' => $sort,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

@@ -6,6 +6,7 @@ namespace Telnyx\Services\Reports;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams\AggregationType;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams\ProductBreakdown;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncResponse;
@@ -46,15 +47,15 @@ final class CdrUsageReportsService implements CdrUsageReportsContract
         string|\DateTimeInterface|null $startDate = null,
         ?RequestOptions $requestOptions = null,
     ): CdrUsageReportFetchSyncResponse {
-        $params = [
-            'aggregationType' => $aggregationType,
-            'productBreakdown' => $productBreakdown,
-            'connections' => $connections,
-            'endDate' => $endDate,
-            'startDate' => $startDate,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'aggregationType' => $aggregationType,
+                'productBreakdown' => $productBreakdown,
+                'connections' => $connections,
+                'endDate' => $endDate,
+                'startDate' => $startDate,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->fetchSync(params: $params, requestOptions: $requestOptions);

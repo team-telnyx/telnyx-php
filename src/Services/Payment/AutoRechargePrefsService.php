@@ -6,6 +6,7 @@ namespace Telnyx\Services\Payment;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefListResponse;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateParams\Preference;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateResponse;
@@ -47,15 +48,15 @@ final class AutoRechargePrefsService implements AutoRechargePrefsContract
         ?string $thresholdAmount = null,
         ?RequestOptions $requestOptions = null,
     ): AutoRechargePrefUpdateResponse {
-        $params = [
-            'enabled' => $enabled,
-            'invoiceEnabled' => $invoiceEnabled,
-            'preference' => $preference,
-            'rechargeAmount' => $rechargeAmount,
-            'thresholdAmount' => $thresholdAmount,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'enabled' => $enabled,
+                'invoiceEnabled' => $invoiceEnabled,
+                'preference' => $preference,
+                'rechargeAmount' => $rechargeAmount,
+                'thresholdAmount' => $thresholdAmount,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update(params: $params, requestOptions: $requestOptions);

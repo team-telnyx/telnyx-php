@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\AccessIPAddress\AccessIPAddressResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AccessIPAddressContract;
@@ -38,9 +39,9 @@ final class AccessIPAddressService implements AccessIPAddressContract
         ?string $description = null,
         ?RequestOptions $requestOptions = null,
     ): AccessIPAddressResponse {
-        $params = ['ipAddress' => $ipAddress, 'description' => $description];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['ipAddress' => $ipAddress, 'description' => $description]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -91,11 +92,13 @@ final class AccessIPAddressService implements AccessIPAddressContract
         ?int $pageSize = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = [
-            'filter' => $filter, 'pageNumber' => $pageNumber, 'pageSize' => $pageSize,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'filter' => $filter,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

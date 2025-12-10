@@ -12,6 +12,7 @@ use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleNewResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BundlePricing\UserBundlesContract;
@@ -48,13 +49,13 @@ final class UserBundlesService implements UserBundlesContract
         ?string $authorizationBearer = null,
         ?RequestOptions $requestOptions = null,
     ): UserBundleNewResponse {
-        $params = [
-            'idempotencyKey' => $idempotencyKey,
-            'items' => $items,
-            'authorizationBearer' => $authorizationBearer,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'idempotencyKey' => $idempotencyKey,
+                'items' => $items,
+                'authorizationBearer' => $authorizationBearer,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -77,9 +78,9 @@ final class UserBundlesService implements UserBundlesContract
         ?string $authorizationBearer = null,
         ?RequestOptions $requestOptions = null,
     ): UserBundleGetResponse {
-        $params = ['authorizationBearer' => $authorizationBearer];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['authorizationBearer' => $authorizationBearer]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($userBundleID, params: $params, requestOptions: $requestOptions);
@@ -110,13 +111,13 @@ final class UserBundlesService implements UserBundlesContract
         ?string $authorizationBearer = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = [
-            'filter' => $filter,
-            'page' => $page,
-            'authorizationBearer' => $authorizationBearer,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'filter' => $filter,
+                'page' => $page,
+                'authorizationBearer' => $authorizationBearer,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -139,9 +140,9 @@ final class UserBundlesService implements UserBundlesContract
         ?string $authorizationBearer = null,
         ?RequestOptions $requestOptions = null,
     ): UserBundleDeactivateResponse {
-        $params = ['authorizationBearer' => $authorizationBearer];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['authorizationBearer' => $authorizationBearer]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->deactivate($userBundleID, params: $params, requestOptions: $requestOptions);
@@ -164,9 +165,9 @@ final class UserBundlesService implements UserBundlesContract
         ?string $authorizationBearer = null,
         ?RequestOptions $requestOptions = null,
     ): UserBundleListResourcesResponse {
-        $params = ['authorizationBearer' => $authorizationBearer];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['authorizationBearer' => $authorizationBearer]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listResources($userBundleID, params: $params, requestOptions: $requestOptions);
@@ -191,11 +192,9 @@ final class UserBundlesService implements UserBundlesContract
         ?string $authorizationBearer = null,
         ?RequestOptions $requestOptions = null,
     ): UserBundleListUnusedResponse {
-        $params = [
-            'filter' => $filter, 'authorizationBearer' => $authorizationBearer,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['filter' => $filter, 'authorizationBearer' => $authorizationBearer]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listUnused(params: $params, requestOptions: $requestOptions);

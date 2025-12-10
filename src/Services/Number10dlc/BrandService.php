@@ -6,6 +6,7 @@ namespace Telnyx\Services\Number10dlc;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Number10dlc\Brand\AltBusinessIDType;
 use Telnyx\Number10dlc\Brand\BrandGetFeedbackResponse;
 use Telnyx\Number10dlc\Brand\BrandGetResponse;
@@ -102,34 +103,34 @@ final class BrandService implements BrandContract
         ?string $website = null,
         ?RequestOptions $requestOptions = null,
     ): TelnyxBrand {
-        $params = [
-            'country' => $country,
-            'displayName' => $displayName,
-            'email' => $email,
-            'entityType' => $entityType,
-            'vertical' => $vertical,
-            'businessContactEmail' => $businessContactEmail,
-            'city' => $city,
-            'companyName' => $companyName,
-            'ein' => $ein,
-            'firstName' => $firstName,
-            'ipAddress' => $ipAddress,
-            'isReseller' => $isReseller,
-            'lastName' => $lastName,
-            'mobilePhone' => $mobilePhone,
-            'mock' => $mock,
-            'phone' => $phone,
-            'postalCode' => $postalCode,
-            'state' => $state,
-            'stockExchange' => $stockExchange,
-            'stockSymbol' => $stockSymbol,
-            'street' => $street,
-            'webhookFailoverURL' => $webhookFailoverURL,
-            'webhookURL' => $webhookURL,
-            'website' => $website,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'country' => $country,
+                'displayName' => $displayName,
+                'email' => $email,
+                'entityType' => $entityType,
+                'vertical' => $vertical,
+                'businessContactEmail' => $businessContactEmail,
+                'city' => $city,
+                'companyName' => $companyName,
+                'ein' => $ein,
+                'firstName' => $firstName,
+                'ipAddress' => $ipAddress,
+                'isReseller' => $isReseller,
+                'lastName' => $lastName,
+                'mobilePhone' => $mobilePhone,
+                'mock' => $mock,
+                'phone' => $phone,
+                'postalCode' => $postalCode,
+                'state' => $state,
+                'stockExchange' => $stockExchange,
+                'stockSymbol' => $stockSymbol,
+                'street' => $street,
+                'webhookFailoverURL' => $webhookFailoverURL,
+                'webhookURL' => $webhookURL,
+                'website' => $website,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -217,35 +218,35 @@ final class BrandService implements BrandContract
         ?string $website = null,
         ?RequestOptions $requestOptions = null,
     ): TelnyxBrand {
-        $params = [
-            'country' => $country,
-            'displayName' => $displayName,
-            'email' => $email,
-            'entityType' => $entityType,
-            'vertical' => $vertical,
-            'altBusinessID' => $altBusinessID,
-            'altBusinessIDType' => $altBusinessIDType,
-            'businessContactEmail' => $businessContactEmail,
-            'city' => $city,
-            'companyName' => $companyName,
-            'ein' => $ein,
-            'firstName' => $firstName,
-            'identityStatus' => $identityStatus,
-            'ipAddress' => $ipAddress,
-            'isReseller' => $isReseller,
-            'lastName' => $lastName,
-            'phone' => $phone,
-            'postalCode' => $postalCode,
-            'state' => $state,
-            'stockExchange' => $stockExchange,
-            'stockSymbol' => $stockSymbol,
-            'street' => $street,
-            'webhookFailoverURL' => $webhookFailoverURL,
-            'webhookURL' => $webhookURL,
-            'website' => $website,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'country' => $country,
+                'displayName' => $displayName,
+                'email' => $email,
+                'entityType' => $entityType,
+                'vertical' => $vertical,
+                'altBusinessID' => $altBusinessID,
+                'altBusinessIDType' => $altBusinessIDType,
+                'businessContactEmail' => $businessContactEmail,
+                'city' => $city,
+                'companyName' => $companyName,
+                'ein' => $ein,
+                'firstName' => $firstName,
+                'identityStatus' => $identityStatus,
+                'ipAddress' => $ipAddress,
+                'isReseller' => $isReseller,
+                'lastName' => $lastName,
+                'phone' => $phone,
+                'postalCode' => $postalCode,
+                'state' => $state,
+                'stockExchange' => $stockExchange,
+                'stockSymbol' => $stockSymbol,
+                'street' => $street,
+                'webhookFailoverURL' => $webhookFailoverURL,
+                'webhookURL' => $webhookURL,
+                'website' => $website,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($brandID, params: $params, requestOptions: $requestOptions);
@@ -279,19 +280,19 @@ final class BrandService implements BrandContract
         ?string $tcrBrandID = null,
         ?RequestOptions $requestOptions = null,
     ): PerPagePaginationV2 {
-        $params = [
-            'brandID' => $brandID,
-            'country' => $country,
-            'displayName' => $displayName,
-            'entityType' => $entityType,
-            'page' => $page,
-            'recordsPerPage' => $recordsPerPage,
-            'sort' => $sort,
-            'state' => $state,
-            'tcrBrandID' => $tcrBrandID,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'brandID' => $brandID,
+                'country' => $country,
+                'displayName' => $displayName,
+                'entityType' => $entityType,
+                'page' => $page,
+                'recordsPerPage' => $recordsPerPage,
+                'sort' => $sort,
+                'state' => $state,
+                'tcrBrandID' => $tcrBrandID,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

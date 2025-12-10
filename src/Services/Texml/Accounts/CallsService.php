@@ -6,6 +6,7 @@ namespace Telnyx\Services\Texml\Accounts;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\CallsContract;
 use Telnyx\Services\Texml\Accounts\Calls\RecordingsJsonService;
@@ -91,7 +92,7 @@ final class CallsService implements CallsContract
         string $accountSid,
         ?RequestOptions $requestOptions = null
     ): CallGetResponse {
-        $params = ['accountSid' => $accountSid];
+        $params = Util::removeNulls(['accountSid' => $accountSid]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($callSid, params: $params, requestOptions: $requestOptions);
@@ -130,19 +131,19 @@ final class CallsService implements CallsContract
         ?string $url = null,
         ?RequestOptions $requestOptions = null,
     ): CallUpdateResponse {
-        $params = [
-            'accountSid' => $accountSid,
-            'fallbackMethod' => $fallbackMethod,
-            'fallbackURL' => $fallbackURL,
-            'method' => $method,
-            'status' => $status,
-            'statusCallback' => $statusCallback,
-            'statusCallbackMethod' => $statusCallbackMethod,
-            'texml' => $texml,
-            'url' => $url,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'accountSid' => $accountSid,
+                'fallbackMethod' => $fallbackMethod,
+                'fallbackURL' => $fallbackURL,
+                'method' => $method,
+                'status' => $status,
+                'statusCallback' => $statusCallback,
+                'statusCallbackMethod' => $statusCallbackMethod,
+                'texml' => $texml,
+                'url' => $url,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($callSid, params: $params, requestOptions: $requestOptions);
@@ -235,45 +236,45 @@ final class CallsService implements CallsContract
         string|URLMethod $urlMethod = 'POST',
         ?RequestOptions $requestOptions = null,
     ): CallCallsResponse {
-        $params = [
-            'applicationSid' => $applicationSid,
-            'from' => $from,
-            'to' => $to,
-            'asyncAmd' => $asyncAmd,
-            'asyncAmdStatusCallback' => $asyncAmdStatusCallback,
-            'asyncAmdStatusCallbackMethod' => $asyncAmdStatusCallbackMethod,
-            'callerID' => $callerID,
-            'cancelPlaybackOnDetectMessageEnd' => $cancelPlaybackOnDetectMessageEnd,
-            'cancelPlaybackOnMachineDetection' => $cancelPlaybackOnMachineDetection,
-            'customHeaders' => $customHeaders,
-            'detectionMode' => $detectionMode,
-            'fallbackURL' => $fallbackURL,
-            'machineDetection' => $machineDetection,
-            'machineDetectionSilenceTimeout' => $machineDetectionSilenceTimeout,
-            'machineDetectionSpeechEndThreshold' => $machineDetectionSpeechEndThreshold,
-            'machineDetectionSpeechThreshold' => $machineDetectionSpeechThreshold,
-            'machineDetectionTimeout' => $machineDetectionTimeout,
-            'preferredCodecs' => $preferredCodecs,
-            'record' => $record,
-            'recordingChannels' => $recordingChannels,
-            'recordingStatusCallback' => $recordingStatusCallback,
-            'recordingStatusCallbackEvent' => $recordingStatusCallbackEvent,
-            'recordingStatusCallbackMethod' => $recordingStatusCallbackMethod,
-            'recordingTimeout' => $recordingTimeout,
-            'recordingTrack' => $recordingTrack,
-            'sendRecordingURL' => $sendRecordingURL,
-            'sipAuthPassword' => $sipAuthPassword,
-            'sipAuthUsername' => $sipAuthUsername,
-            'sipRegion' => $sipRegion,
-            'statusCallback' => $statusCallback,
-            'statusCallbackEvent' => $statusCallbackEvent,
-            'statusCallbackMethod' => $statusCallbackMethod,
-            'trim' => $trim,
-            'url' => $url,
-            'urlMethod' => $urlMethod,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'applicationSid' => $applicationSid,
+                'from' => $from,
+                'to' => $to,
+                'asyncAmd' => $asyncAmd,
+                'asyncAmdStatusCallback' => $asyncAmdStatusCallback,
+                'asyncAmdStatusCallbackMethod' => $asyncAmdStatusCallbackMethod,
+                'callerID' => $callerID,
+                'cancelPlaybackOnDetectMessageEnd' => $cancelPlaybackOnDetectMessageEnd,
+                'cancelPlaybackOnMachineDetection' => $cancelPlaybackOnMachineDetection,
+                'customHeaders' => $customHeaders,
+                'detectionMode' => $detectionMode,
+                'fallbackURL' => $fallbackURL,
+                'machineDetection' => $machineDetection,
+                'machineDetectionSilenceTimeout' => $machineDetectionSilenceTimeout,
+                'machineDetectionSpeechEndThreshold' => $machineDetectionSpeechEndThreshold,
+                'machineDetectionSpeechThreshold' => $machineDetectionSpeechThreshold,
+                'machineDetectionTimeout' => $machineDetectionTimeout,
+                'preferredCodecs' => $preferredCodecs,
+                'record' => $record,
+                'recordingChannels' => $recordingChannels,
+                'recordingStatusCallback' => $recordingStatusCallback,
+                'recordingStatusCallbackEvent' => $recordingStatusCallbackEvent,
+                'recordingStatusCallbackMethod' => $recordingStatusCallbackMethod,
+                'recordingTimeout' => $recordingTimeout,
+                'recordingTrack' => $recordingTrack,
+                'sendRecordingURL' => $sendRecordingURL,
+                'sipAuthPassword' => $sipAuthPassword,
+                'sipAuthUsername' => $sipAuthUsername,
+                'sipRegion' => $sipRegion,
+                'statusCallback' => $statusCallback,
+                'statusCallbackEvent' => $statusCallbackEvent,
+                'statusCallbackMethod' => $statusCallbackMethod,
+                'trim' => $trim,
+                'url' => $url,
+                'urlMethod' => $urlMethod,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->calls($accountSid, params: $params, requestOptions: $requestOptions);
@@ -318,22 +319,22 @@ final class CallsService implements CallsContract
         ?string $to = null,
         ?RequestOptions $requestOptions = null,
     ): CallGetCallsResponse {
-        $params = [
-            'endTime' => $endTime,
-            'endTimeGt' => $endTimeGt,
-            'endTimeLt' => $endTimeLt,
-            'from' => $from,
-            'page' => $page,
-            'pageSize' => $pageSize,
-            'pageToken' => $pageToken,
-            'startTime' => $startTime,
-            'startTimeGt' => $startTimeGt,
-            'startTimeLt' => $startTimeLt,
-            'status' => $status,
-            'to' => $to,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'endTime' => $endTime,
+                'endTimeGt' => $endTimeGt,
+                'endTimeLt' => $endTimeLt,
+                'from' => $from,
+                'page' => $page,
+                'pageSize' => $pageSize,
+                'pageToken' => $pageToken,
+                'startTime' => $startTime,
+                'startTimeGt' => $startTimeGt,
+                'startTimeLt' => $startTimeLt,
+                'status' => $status,
+                'to' => $to,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveCalls($accountSid, params: $params, requestOptions: $requestOptions);
@@ -374,20 +375,20 @@ final class CallsService implements CallsContract
         string|Track|null $track = null,
         ?RequestOptions $requestOptions = null,
     ): CallSiprecJsonResponse {
-        $params = [
-            'accountSid' => $accountSid,
-            'connectorName' => $connectorName,
-            'includeMetadataCustomHeaders' => $includeMetadataCustomHeaders,
-            'name' => $name,
-            'secure' => $secure,
-            'sessionTimeoutSecs' => $sessionTimeoutSecs,
-            'sipTransport' => $sipTransport,
-            'statusCallback' => $statusCallback,
-            'statusCallbackMethod' => $statusCallbackMethod,
-            'track' => $track,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'accountSid' => $accountSid,
+                'connectorName' => $connectorName,
+                'includeMetadataCustomHeaders' => $includeMetadataCustomHeaders,
+                'name' => $name,
+                'secure' => $secure,
+                'sessionTimeoutSecs' => $sessionTimeoutSecs,
+                'sipTransport' => $sipTransport,
+                'statusCallback' => $statusCallback,
+                'statusCallbackMethod' => $statusCallbackMethod,
+                'track' => $track,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->siprecJson($callSid, params: $params, requestOptions: $requestOptions);
@@ -424,18 +425,18 @@ final class CallsService implements CallsContract
         ?string $url = null,
         ?RequestOptions $requestOptions = null,
     ): CallStreamsJsonResponse {
-        $params = [
-            'accountSid' => $accountSid,
-            'bidirectionalCodec' => $bidirectionalCodec,
-            'bidirectionalMode' => $bidirectionalMode,
-            'name' => $name,
-            'statusCallback' => $statusCallback,
-            'statusCallbackMethod' => $statusCallbackMethod,
-            'track' => $track,
-            'url' => $url,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'accountSid' => $accountSid,
+                'bidirectionalCodec' => $bidirectionalCodec,
+                'bidirectionalMode' => $bidirectionalMode,
+                'name' => $name,
+                'statusCallback' => $statusCallback,
+                'statusCallbackMethod' => $statusCallbackMethod,
+                'track' => $track,
+                'url' => $url,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->streamsJson($callSid, params: $params, requestOptions: $requestOptions);

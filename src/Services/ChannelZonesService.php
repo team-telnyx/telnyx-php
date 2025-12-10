@@ -8,6 +8,7 @@ use Telnyx\ChannelZones\ChannelZoneListResponse;
 use Telnyx\ChannelZones\ChannelZoneUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ChannelZonesContract;
@@ -42,7 +43,7 @@ final class ChannelZonesService implements ChannelZonesContract
         int $channels,
         ?RequestOptions $requestOptions = null
     ): ChannelZoneUpdateResponse {
-        $params = ['channels' => $channels];
+        $params = Util::removeNulls(['channels' => $channels]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($channelZoneID, params: $params, requestOptions: $requestOptions);
@@ -67,9 +68,7 @@ final class ChannelZonesService implements ChannelZonesContract
         ?array $page = null,
         ?RequestOptions $requestOptions = null
     ): DefaultPagination {
-        $params = ['page' => $page];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

@@ -22,6 +22,7 @@ use Telnyx\AI\Assistants\TranscriptionSettingsConfig;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\AssistantsContract;
 use Telnyx\Services\AI\Assistants\CanaryDeploysService;
@@ -135,26 +136,26 @@ final class AssistantsService implements AssistantsContract
         array|VoiceSettings|null $voiceSettings = null,
         ?RequestOptions $requestOptions = null,
     ): InferenceEmbedding {
-        $params = [
-            'instructions' => $instructions,
-            'model' => $model,
-            'name' => $name,
-            'description' => $description,
-            'dynamicVariables' => $dynamicVariables,
-            'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL,
-            'enabledFeatures' => $enabledFeatures,
-            'greeting' => $greeting,
-            'insightSettings' => $insightSettings,
-            'llmAPIKeyRef' => $llmAPIKeyRef,
-            'messagingSettings' => $messagingSettings,
-            'privacySettings' => $privacySettings,
-            'telephonySettings' => $telephonySettings,
-            'tools' => $tools,
-            'transcription' => $transcription,
-            'voiceSettings' => $voiceSettings,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'instructions' => $instructions,
+                'model' => $model,
+                'name' => $name,
+                'description' => $description,
+                'dynamicVariables' => $dynamicVariables,
+                'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL,
+                'enabledFeatures' => $enabledFeatures,
+                'greeting' => $greeting,
+                'insightSettings' => $insightSettings,
+                'llmAPIKeyRef' => $llmAPIKeyRef,
+                'messagingSettings' => $messagingSettings,
+                'privacySettings' => $privacySettings,
+                'telephonySettings' => $telephonySettings,
+                'tools' => $tools,
+                'transcription' => $transcription,
+                'voiceSettings' => $voiceSettings,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -177,14 +178,14 @@ final class AssistantsService implements AssistantsContract
         ?string $to = null,
         ?RequestOptions $requestOptions = null,
     ): InferenceEmbedding {
-        $params = [
-            'callControlID' => $callControlID,
-            'fetchDynamicVariablesFromWebhook' => $fetchDynamicVariablesFromWebhook,
-            'from' => $from,
-            'to' => $to,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'callControlID' => $callControlID,
+                'fetchDynamicVariablesFromWebhook' => $fetchDynamicVariablesFromWebhook,
+                'from' => $from,
+                'to' => $to,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($assistantID, params: $params, requestOptions: $requestOptions);
@@ -255,27 +256,27 @@ final class AssistantsService implements AssistantsContract
         array|VoiceSettings|null $voiceSettings = null,
         ?RequestOptions $requestOptions = null,
     ): InferenceEmbedding {
-        $params = [
-            'description' => $description,
-            'dynamicVariables' => $dynamicVariables,
-            'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL,
-            'enabledFeatures' => $enabledFeatures,
-            'greeting' => $greeting,
-            'insightSettings' => $insightSettings,
-            'instructions' => $instructions,
-            'llmAPIKeyRef' => $llmAPIKeyRef,
-            'messagingSettings' => $messagingSettings,
-            'model' => $model,
-            'name' => $name,
-            'privacySettings' => $privacySettings,
-            'promoteToMain' => $promoteToMain,
-            'telephonySettings' => $telephonySettings,
-            'tools' => $tools,
-            'transcription' => $transcription,
-            'voiceSettings' => $voiceSettings,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'description' => $description,
+                'dynamicVariables' => $dynamicVariables,
+                'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL,
+                'enabledFeatures' => $enabledFeatures,
+                'greeting' => $greeting,
+                'insightSettings' => $insightSettings,
+                'instructions' => $instructions,
+                'llmAPIKeyRef' => $llmAPIKeyRef,
+                'messagingSettings' => $messagingSettings,
+                'model' => $model,
+                'name' => $name,
+                'privacySettings' => $privacySettings,
+                'promoteToMain' => $promoteToMain,
+                'telephonySettings' => $telephonySettings,
+                'tools' => $tools,
+                'transcription' => $transcription,
+                'voiceSettings' => $voiceSettings,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($assistantID, params: $params, requestOptions: $requestOptions);
@@ -333,13 +334,13 @@ final class AssistantsService implements AssistantsContract
         ?string $name = null,
         ?RequestOptions $requestOptions = null,
     ): AssistantChatResponse {
-        $params = [
-            'content' => $content,
-            'conversationID' => $conversationID,
-            'name' => $name,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'content' => $content,
+                'conversationID' => $conversationID,
+                'name' => $name,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->chat($assistantID, params: $params, requestOptions: $requestOptions);
@@ -396,7 +397,9 @@ final class AssistantsService implements AssistantsContract
         string|Provider $provider,
         ?RequestOptions $requestOptions = null,
     ): AssistantsList {
-        $params = ['apiKeyRef' => $apiKeyRef, 'provider' => $provider];
+        $params = Util::removeNulls(
+            ['apiKeyRef' => $apiKeyRef, 'provider' => $provider]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->imports(params: $params, requestOptions: $requestOptions);
@@ -427,15 +430,15 @@ final class AssistantsService implements AssistantsContract
         ?bool $shouldCreateConversation = null,
         ?RequestOptions $requestOptions = null,
     ): AssistantSendSMSResponse {
-        $params = [
-            'from' => $from,
-            'text' => $text,
-            'to' => $to,
-            'conversationMetadata' => $conversationMetadata,
-            'shouldCreateConversation' => $shouldCreateConversation,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'from' => $from,
+                'text' => $text,
+                'to' => $to,
+                'conversationMetadata' => $conversationMetadata,
+                'shouldCreateConversation' => $shouldCreateConversation,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->sendSMS($assistantID, params: $params, requestOptions: $requestOptions);

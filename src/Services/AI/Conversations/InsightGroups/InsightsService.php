@@ -6,6 +6,7 @@ namespace Telnyx\Services\AI\Conversations\InsightGroups;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\InsightGroups\InsightsContract;
 
@@ -39,7 +40,7 @@ final class InsightsService implements InsightsContract
         string $groupID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        $params = ['groupID' => $groupID];
+        $params = Util::removeNulls(['groupID' => $groupID]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->assign($insightID, params: $params, requestOptions: $requestOptions);
@@ -62,7 +63,7 @@ final class InsightsService implements InsightsContract
         string $groupID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        $params = ['groupID' => $groupID];
+        $params = Util::removeNulls(['groupID' => $groupID]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->deleteUnassign($insightID, params: $params, requestOptions: $requestOptions);

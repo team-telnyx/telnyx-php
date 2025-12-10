@@ -105,7 +105,7 @@ final class GlobalIPAssignmentsRawService implements GlobalIPAssignmentsRawContr
         return $this->client->request(
             method: 'patch',
             path: ['global_ip_assignments/%1$s', $globalIPAssignmentID],
-            body: (object) $parsed['globalIpAssignmentUpdateRequest'],
+            body: (object) $parsed['globalIPAssignmentUpdateRequest'],
             options: $options,
             convert: GlobalIPAssignmentUpdateResponse::class,
         );

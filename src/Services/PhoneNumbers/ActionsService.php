@@ -6,6 +6,7 @@ namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\PhoneNumbers\Actions\ActionChangeBundleStatusResponse;
 use Telnyx\PhoneNumbers\Actions\ActionEnableEmergencyResponse;
 use Telnyx\PhoneNumbers\Actions\ActionVerifyOwnershipResponse;
@@ -42,7 +43,7 @@ final class ActionsService implements ActionsContract
         string $bundleID,
         ?RequestOptions $requestOptions = null
     ): ActionChangeBundleStatusResponse {
-        $params = ['bundleID' => $bundleID];
+        $params = Util::removeNulls(['bundleID' => $bundleID]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->changeBundleStatus($id, params: $params, requestOptions: $requestOptions);
@@ -67,10 +68,12 @@ final class ActionsService implements ActionsContract
         bool $emergencyEnabled,
         ?RequestOptions $requestOptions = null,
     ): ActionEnableEmergencyResponse {
-        $params = [
-            'emergencyAddressID' => $emergencyAddressID,
-            'emergencyEnabled' => $emergencyEnabled,
-        ];
+        $params = Util::removeNulls(
+            [
+                'emergencyAddressID' => $emergencyAddressID,
+                'emergencyEnabled' => $emergencyEnabled,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->enableEmergency($id, params: $params, requestOptions: $requestOptions);
@@ -91,7 +94,7 @@ final class ActionsService implements ActionsContract
         array $phoneNumbers,
         ?RequestOptions $requestOptions = null
     ): ActionVerifyOwnershipResponse {
-        $params = ['phoneNumbers' => $phoneNumbers];
+        $params = Util::removeNulls(['phoneNumbers' => $phoneNumbers]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->verifyOwnership(params: $params, requestOptions: $requestOptions);

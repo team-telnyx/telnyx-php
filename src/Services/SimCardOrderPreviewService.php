@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardOrderPreviewContract;
 use Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse;
@@ -40,7 +41,9 @@ final class SimCardOrderPreviewService implements SimCardOrderPreviewContract
         int $quantity,
         ?RequestOptions $requestOptions = null
     ): SimCardOrderPreviewPreviewResponse {
-        $params = ['addressID' => $addressID, 'quantity' => $quantity];
+        $params = Util::removeNulls(
+            ['addressID' => $addressID, 'quantity' => $quantity]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->preview(params: $params, requestOptions: $requestOptions);

@@ -6,6 +6,7 @@ namespace Telnyx\Services\Legacy\Reporting;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Legacy\Reporting\UsageReports\UsageReportGetSpeechToTextResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\UsageReportsContract;
@@ -58,9 +59,9 @@ final class UsageReportsService implements UsageReportsContract
         string|\DateTimeInterface|null $startDate = null,
         ?RequestOptions $requestOptions = null,
     ): UsageReportGetSpeechToTextResponse {
-        $params = ['endDate' => $endDate, 'startDate' => $startDate];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['endDate' => $endDate, 'startDate' => $startDate]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveSpeechToText(params: $params, requestOptions: $requestOptions);

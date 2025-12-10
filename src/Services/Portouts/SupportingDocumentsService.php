@@ -6,6 +6,7 @@ namespace Telnyx\Services\Portouts;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document\Type;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentListResponse;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentNewResponse;
@@ -44,9 +45,7 @@ final class SupportingDocumentsService implements SupportingDocumentsContract
         ?array $documents = null,
         ?RequestOptions $requestOptions = null
     ): SupportingDocumentNewResponse {
-        $params = ['documents' => $documents];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['documents' => $documents]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($id, params: $params, requestOptions: $requestOptions);

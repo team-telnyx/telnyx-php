@@ -6,6 +6,7 @@ namespace Telnyx\Services\Texml\Accounts\Transcriptions;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Transcriptions\JsonContract;
 use Telnyx\Texml\Accounts\Transcriptions\Json\JsonGetRecordingTranscriptionSidJsonResponse;
@@ -40,7 +41,7 @@ final class JsonService implements JsonContract
         string $accountSid,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = ['accountSid' => $accountSid];
+        $params = Util::removeNulls(['accountSid' => $accountSid]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->deleteRecordingTranscriptionSidJson($recordingTranscriptionSid, params: $params, requestOptions: $requestOptions);
@@ -63,7 +64,7 @@ final class JsonService implements JsonContract
         string $accountSid,
         ?RequestOptions $requestOptions = null,
     ): JsonGetRecordingTranscriptionSidJsonResponse {
-        $params = ['accountSid' => $accountSid];
+        $params = Util::removeNulls(['accountSid' => $accountSid]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveRecordingTranscriptionSidJson($recordingTranscriptionSid, params: $params, requestOptions: $requestOptions);

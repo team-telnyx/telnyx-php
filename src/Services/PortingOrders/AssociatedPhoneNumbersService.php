@@ -6,6 +6,7 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberDeleteResponse;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams\Filter\Action;
@@ -47,7 +48,9 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
         array $phoneNumberRange,
         ?RequestOptions $requestOptions = null,
     ): AssociatedPhoneNumberNewResponse {
-        $params = ['action' => $action, 'phoneNumberRange' => $phoneNumberRange];
+        $params = Util::removeNulls(
+            ['action' => $action, 'phoneNumberRange' => $phoneNumberRange]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($portingOrderID, params: $params, requestOptions: $requestOptions);
@@ -82,9 +85,9 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
         ?array $sort = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['filter' => $filter, 'page' => $page, 'sort' => $sort]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($portingOrderID, params: $params, requestOptions: $requestOptions);
@@ -107,7 +110,7 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
         string $portingOrderID,
         ?RequestOptions $requestOptions = null
     ): AssociatedPhoneNumberDeleteResponse {
-        $params = ['portingOrderID' => $portingOrderID];
+        $params = Util::removeNulls(['portingOrderID' => $portingOrderID]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, params: $params, requestOptions: $requestOptions);

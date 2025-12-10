@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\MessagingHostedNumberOrder;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityResponse;
@@ -55,12 +56,12 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
         ?array $phoneNumbers = null,
         ?RequestOptions $requestOptions = null,
     ): MessagingHostedNumberOrderNewResponse {
-        $params = [
-            'messagingProfileID' => $messagingProfileID,
-            'phoneNumbers' => $phoneNumbers,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'messagingProfileID' => $messagingProfileID,
+                'phoneNumbers' => $phoneNumbers,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -104,9 +105,7 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
         ?array $page = null,
         ?RequestOptions $requestOptions = null
     ): DefaultPagination {
-        $params = ['page' => $page];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -146,7 +145,7 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
         array $phoneNumbers,
         ?RequestOptions $requestOptions = null
     ): MessagingHostedNumberOrderCheckEligibilityResponse {
-        $params = ['phoneNumbers' => $phoneNumbers];
+        $params = Util::removeNulls(['phoneNumbers' => $phoneNumbers]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->checkEligibility(params: $params, requestOptions: $requestOptions);
@@ -171,10 +170,12 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
         string|VerificationMethod $verificationMethod,
         ?RequestOptions $requestOptions = null,
     ): MessagingHostedNumberOrderNewVerificationCodesResponse {
-        $params = [
-            'phoneNumbers' => $phoneNumbers,
-            'verificationMethod' => $verificationMethod,
-        ];
+        $params = Util::removeNulls(
+            [
+                'phoneNumbers' => $phoneNumbers,
+                'verificationMethod' => $verificationMethod,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->createVerificationCodes($id, params: $params, requestOptions: $requestOptions);
@@ -197,7 +198,7 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
         array $verificationCodes,
         ?RequestOptions $requestOptions = null
     ): MessagingHostedNumberOrderValidateCodesResponse {
-        $params = ['verificationCodes' => $verificationCodes];
+        $params = Util::removeNulls(['verificationCodes' => $verificationCodes]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->validateCodes($id, params: $params, requestOptions: $requestOptions);

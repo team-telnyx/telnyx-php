@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\OAuth\OAuthGetJwksResponse;
 use Telnyx\OAuth\OAuthGetResponse;
 use Telnyx\OAuth\OAuthGrantsResponse;
@@ -68,7 +69,9 @@ final class OAuthService implements OAuthContract
         string $consentToken,
         ?RequestOptions $requestOptions = null
     ): OAuthGrantsResponse {
-        $params = ['allowed' => $allowed, 'consentToken' => $consentToken];
+        $params = Util::removeNulls(
+            ['allowed' => $allowed, 'consentToken' => $consentToken]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->grants(params: $params, requestOptions: $requestOptions);
@@ -89,7 +92,7 @@ final class OAuthService implements OAuthContract
         string $token,
         ?RequestOptions $requestOptions = null
     ): OAuthIntrospectResponse {
-        $params = ['token' => $token];
+        $params = Util::removeNulls(['token' => $token]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->introspect(params: $params, requestOptions: $requestOptions);
@@ -126,19 +129,19 @@ final class OAuthService implements OAuthContract
         ?string $tosUri = null,
         ?RequestOptions $requestOptions = null,
     ): OAuthRegisterResponse {
-        $params = [
-            'clientName' => $clientName,
-            'grantTypes' => $grantTypes,
-            'logoUri' => $logoUri,
-            'policyUri' => $policyUri,
-            'redirectUris' => $redirectUris,
-            'responseTypes' => $responseTypes,
-            'scope' => $scope,
-            'tokenEndpointAuthMethod' => $tokenEndpointAuthMethod,
-            'tosUri' => $tosUri,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'clientName' => $clientName,
+                'grantTypes' => $grantTypes,
+                'logoUri' => $logoUri,
+                'policyUri' => $policyUri,
+                'redirectUris' => $redirectUris,
+                'responseTypes' => $responseTypes,
+                'scope' => $scope,
+                'tokenEndpointAuthMethod' => $tokenEndpointAuthMethod,
+                'tosUri' => $tosUri,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->register(params: $params, requestOptions: $requestOptions);
@@ -171,17 +174,17 @@ final class OAuthService implements OAuthContract
         ?string $state = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = [
-            'clientID' => $clientID,
-            'redirectUri' => $redirectUri,
-            'responseType' => $responseType,
-            'codeChallenge' => $codeChallenge,
-            'codeChallengeMethod' => $codeChallengeMethod,
-            'scope' => $scope,
-            'state' => $state,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'clientID' => $clientID,
+                'redirectUri' => $redirectUri,
+                'responseType' => $responseType,
+                'codeChallenge' => $codeChallenge,
+                'codeChallengeMethod' => $codeChallengeMethod,
+                'scope' => $scope,
+                'state' => $state,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveAuthorize(params: $params, requestOptions: $requestOptions);
@@ -232,18 +235,18 @@ final class OAuthService implements OAuthContract
         ?string $scope = null,
         ?RequestOptions $requestOptions = null,
     ): OAuthTokenResponse {
-        $params = [
-            'grantType' => $grantType,
-            'clientID' => $clientID,
-            'clientSecret' => $clientSecret,
-            'code' => $code,
-            'codeVerifier' => $codeVerifier,
-            'redirectUri' => $redirectUri,
-            'refreshToken' => $refreshToken,
-            'scope' => $scope,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'grantType' => $grantType,
+                'clientID' => $clientID,
+                'clientSecret' => $clientSecret,
+                'code' => $code,
+                'codeVerifier' => $codeVerifier,
+                'redirectUri' => $redirectUri,
+                'refreshToken' => $refreshToken,
+                'scope' => $scope,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->token(params: $params, requestOptions: $requestOptions);

@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileAssignResponse;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetStatusResponse;
@@ -45,13 +46,13 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
         ?string $tcrCampaignID = null,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberAssignmentByProfileAssignResponse {
-        $params = [
-            'messagingProfileID' => $messagingProfileID,
-            'campaignID' => $campaignID,
-            'tcrCampaignID' => $tcrCampaignID,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'messagingProfileID' => $messagingProfileID,
+                'campaignID' => $campaignID,
+                'tcrCampaignID' => $tcrCampaignID,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->assign(params: $params, requestOptions: $requestOptions);
@@ -72,9 +73,9 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
         int $recordsPerPage = 20,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberAssignmentByProfileListPhoneNumberStatusResponse {
-        $params = ['page' => $page, 'recordsPerPage' => $recordsPerPage];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['page' => $page, 'recordsPerPage' => $recordsPerPage]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listPhoneNumberStatus($taskID, params: $params, requestOptions: $requestOptions);
@@ -95,9 +96,9 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
         int $recordsPerPage = 20,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse {
-        $params = ['page' => $page, 'recordsPerPage' => $recordsPerPage];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['page' => $page, 'recordsPerPage' => $recordsPerPage]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrievePhoneNumberStatus($taskID, params: $params, requestOptions: $requestOptions);

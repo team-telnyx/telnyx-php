@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SubNumberOrdersReportContract;
 use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportCreateParams\Status;
@@ -50,16 +51,16 @@ final class SubNumberOrdersReportService implements SubNumberOrdersReportContrac
         string|Status|null $status = null,
         ?RequestOptions $requestOptions = null,
     ): SubNumberOrdersReportNewResponse {
-        $params = [
-            'countryCode' => $countryCode,
-            'createdAtGt' => $createdAtGt,
-            'createdAtLt' => $createdAtLt,
-            'customerReference' => $customerReference,
-            'orderRequestID' => $orderRequestID,
-            'status' => $status,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'countryCode' => $countryCode,
+                'createdAtGt' => $createdAtGt,
+                'createdAtLt' => $createdAtLt,
+                'customerReference' => $customerReference,
+                'orderRequestID' => $orderRequestID,
+                'status' => $status,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);

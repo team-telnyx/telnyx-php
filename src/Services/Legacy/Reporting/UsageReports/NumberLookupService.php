@@ -6,6 +6,7 @@ namespace Telnyx\Services\Legacy\Reporting\UsageReports;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams\AggregationType;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupGetResponse;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupListResponse;
@@ -47,14 +48,14 @@ final class NumberLookupService implements NumberLookupContract
         ?string $startDate = null,
         ?RequestOptions $requestOptions = null,
     ): NumberLookupNewResponse {
-        $params = [
-            'aggregationType' => $aggregationType,
-            'endDate' => $endDate,
-            'managedAccounts' => $managedAccounts,
-            'startDate' => $startDate,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'aggregationType' => $aggregationType,
+                'endDate' => $endDate,
+                'managedAccounts' => $managedAccounts,
+                'startDate' => $startDate,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);

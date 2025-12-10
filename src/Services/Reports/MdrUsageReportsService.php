@@ -6,6 +6,7 @@ namespace Telnyx\Services\Reports;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReport;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportCreateParams\AggregationType;
@@ -47,14 +48,14 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
         ?string $profiles = null,
         ?RequestOptions $requestOptions = null,
     ): MdrUsageReportNewResponse {
-        $params = [
-            'aggregationType' => $aggregationType,
-            'endDate' => $endDate,
-            'startDate' => $startDate,
-            'profiles' => $profiles,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'aggregationType' => $aggregationType,
+                'endDate' => $endDate,
+                'startDate' => $startDate,
+                'profiles' => $profiles,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -93,9 +94,9 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
         ?int $pageSize = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -137,14 +138,14 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
         string|\DateTimeInterface|null $startDate = null,
         ?RequestOptions $requestOptions = null,
     ): MdrUsageReportFetchSyncResponse {
-        $params = [
-            'aggregationType' => $aggregationType,
-            'endDate' => $endDate,
-            'profiles' => $profiles,
-            'startDate' => $startDate,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'aggregationType' => $aggregationType,
+                'endDate' => $endDate,
+                'profiles' => $profiles,
+                'startDate' => $startDate,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->fetchSync(params: $params, requestOptions: $requestOptions);

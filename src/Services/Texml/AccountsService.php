@@ -6,6 +6,7 @@ namespace Telnyx\Services\Texml;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\AccountsContract;
 use Telnyx\Services\Texml\Accounts\CallsService;
@@ -73,11 +74,9 @@ final class AccountsService implements AccountsContract
         ?int $pageSize = null,
         ?RequestOptions $requestOptions = null,
     ): AccountGetRecordingsJsonResponse {
-        $params = [
-            'dateCreated' => $dateCreated, 'page' => $page, 'pageSize' => $pageSize,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['dateCreated' => $dateCreated, 'page' => $page, 'pageSize' => $pageSize]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveRecordingsJson($accountSid, params: $params, requestOptions: $requestOptions);
@@ -102,9 +101,9 @@ final class AccountsService implements AccountsContract
         ?string $pageToken = null,
         ?RequestOptions $requestOptions = null,
     ): AccountGetTranscriptionsJsonResponse {
-        $params = ['pageSize' => $pageSize, 'pageToken' => $pageToken];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['pageSize' => $pageSize, 'pageToken' => $pageToken]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveTranscriptionsJson($accountSid, params: $params, requestOptions: $requestOptions);

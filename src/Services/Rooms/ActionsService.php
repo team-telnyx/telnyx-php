@@ -6,6 +6,7 @@ namespace Telnyx\Services\Rooms;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\Actions\ActionGenerateJoinClientTokenResponse;
 use Telnyx\Rooms\Actions\ActionRefreshClientTokenResponse;
@@ -43,12 +44,12 @@ final class ActionsService implements ActionsContract
         int $tokenTtlSecs = 600,
         ?RequestOptions $requestOptions = null,
     ): ActionGenerateJoinClientTokenResponse {
-        $params = [
-            'refreshTokenTtlSecs' => $refreshTokenTtlSecs,
-            'tokenTtlSecs' => $tokenTtlSecs,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'refreshTokenTtlSecs' => $refreshTokenTtlSecs,
+                'tokenTtlSecs' => $tokenTtlSecs,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->generateJoinClientToken($roomID, params: $params, requestOptions: $requestOptions);
@@ -72,11 +73,9 @@ final class ActionsService implements ActionsContract
         int $tokenTtlSecs = 600,
         ?RequestOptions $requestOptions = null,
     ): ActionRefreshClientTokenResponse {
-        $params = [
-            'refreshToken' => $refreshToken, 'tokenTtlSecs' => $tokenTtlSecs,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['refreshToken' => $refreshToken, 'tokenTtlSecs' => $tokenTtlSecs]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->refreshClientToken($roomID, params: $params, requestOptions: $requestOptions);

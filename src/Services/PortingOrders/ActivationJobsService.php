@@ -6,6 +6,7 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobGetResponse;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobUpdateResponse;
@@ -43,7 +44,7 @@ final class ActivationJobsService implements ActivationJobsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ActivationJobGetResponse {
-        $params = ['id' => $id];
+        $params = Util::removeNulls(['id' => $id]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($activationJobID, params: $params, requestOptions: $requestOptions);
@@ -68,9 +69,7 @@ final class ActivationJobsService implements ActivationJobsContract
         string|\DateTimeInterface|null $activateAt = null,
         ?RequestOptions $requestOptions = null,
     ): ActivationJobUpdateResponse {
-        $params = ['id' => $id, 'activateAt' => $activateAt];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['id' => $id, 'activateAt' => $activateAt]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($activationJobID, params: $params, requestOptions: $requestOptions);
@@ -97,9 +96,7 @@ final class ActivationJobsService implements ActivationJobsContract
         ?array $page = null,
         ?RequestOptions $requestOptions = null
     ): DefaultPagination {
-        $params = ['page' => $page];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($id, params: $params, requestOptions: $requestOptions);

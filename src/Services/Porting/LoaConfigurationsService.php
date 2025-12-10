@@ -6,6 +6,7 @@ namespace Telnyx\Services\Porting;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationGetResponse;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationNewResponse;
@@ -59,13 +60,15 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
         string $name,
         ?RequestOptions $requestOptions = null,
     ): LoaConfigurationNewResponse {
-        $params = [
-            'address' => $address,
-            'companyName' => $companyName,
-            'contact' => $contact,
-            'logo' => $logo,
-            'name' => $name,
-        ];
+        $params = Util::removeNulls(
+            [
+                'address' => $address,
+                'companyName' => $companyName,
+                'contact' => $contact,
+                'logo' => $logo,
+                'name' => $name,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -124,13 +127,15 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
         string $name,
         ?RequestOptions $requestOptions = null,
     ): LoaConfigurationUpdateResponse {
-        $params = [
-            'address' => $address,
-            'companyName' => $companyName,
-            'contact' => $contact,
-            'logo' => $logo,
-            'name' => $name,
-        ];
+        $params = Util::removeNulls(
+            [
+                'address' => $address,
+                'companyName' => $companyName,
+                'contact' => $contact,
+                'logo' => $logo,
+                'name' => $name,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
@@ -155,9 +160,7 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
         ?array $page = null,
         ?RequestOptions $requestOptions = null
     ): DefaultPagination {
-        $params = ['page' => $page];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -214,13 +217,15 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
         string $name,
         ?RequestOptions $requestOptions = null,
     ): string {
-        $params = [
-            'address' => $address,
-            'companyName' => $companyName,
-            'contact' => $contact,
-            'logo' => $logo,
-            'name' => $name,
-        ];
+        $params = Util::removeNulls(
+            [
+                'address' => $address,
+                'companyName' => $companyName,
+                'contact' => $contact,
+                'logo' => $logo,
+                'name' => $name,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->preview0(params: $params, requestOptions: $requestOptions);

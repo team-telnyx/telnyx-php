@@ -12,6 +12,7 @@ use Telnyx\AI\Embeddings\EmbeddingResponse;
 use Telnyx\AI\Embeddings\EmbeddingSimilaritySearchResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\EmbeddingsContract;
 use Telnyx\Services\AI\Embeddings\BucketsService;
@@ -74,15 +75,15 @@ final class EmbeddingsService implements EmbeddingsContract
         string|Loader $loader = 'default',
         ?RequestOptions $requestOptions = null,
     ): EmbeddingResponse {
-        $params = [
-            'bucketName' => $bucketName,
-            'documentChunkOverlapSize' => $documentChunkOverlapSize,
-            'documentChunkSize' => $documentChunkSize,
-            'embeddingModel' => $embeddingModel,
-            'loader' => $loader,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'bucketName' => $bucketName,
+                'documentChunkOverlapSize' => $documentChunkOverlapSize,
+                'documentChunkSize' => $documentChunkSize,
+                'embeddingModel' => $embeddingModel,
+                'loader' => $loader,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -125,9 +126,7 @@ final class EmbeddingsService implements EmbeddingsContract
         array $status = ['processing', 'queued'],
         ?RequestOptions $requestOptions = null,
     ): EmbeddingListResponse {
-        $params = ['status' => $status];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['status' => $status]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -156,11 +155,13 @@ final class EmbeddingsService implements EmbeddingsContract
         int $numOfDocs = 3,
         ?RequestOptions $requestOptions = null,
     ): EmbeddingSimilaritySearchResponse {
-        $params = [
-            'bucketName' => $bucketName, 'query' => $query, 'numOfDocs' => $numOfDocs,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'bucketName' => $bucketName,
+                'query' => $query,
+                'numOfDocs' => $numOfDocs,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->similaritySearch(params: $params, requestOptions: $requestOptions);
@@ -183,7 +184,7 @@ final class EmbeddingsService implements EmbeddingsContract
         string $url,
         ?RequestOptions $requestOptions = null
     ): EmbeddingResponse {
-        $params = ['bucketName' => $bucketName, 'url' => $url];
+        $params = Util::removeNulls(['bucketName' => $bucketName, 'url' => $url]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->url(params: $params, requestOptions: $requestOptions);

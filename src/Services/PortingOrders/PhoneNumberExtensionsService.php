@@ -6,6 +6,7 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionDeleteResponse;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams\Sort\Value;
@@ -50,11 +51,13 @@ final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContrac
         string $portingPhoneNumberID,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberExtensionNewResponse {
-        $params = [
-            'activationRanges' => $activationRanges,
-            'extensionRange' => $extensionRange,
-            'portingPhoneNumberID' => $portingPhoneNumberID,
-        ];
+        $params = Util::removeNulls(
+            [
+                'activationRanges' => $activationRanges,
+                'extensionRange' => $extensionRange,
+                'portingPhoneNumberID' => $portingPhoneNumberID,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($portingOrderID, params: $params, requestOptions: $requestOptions);
@@ -89,9 +92,9 @@ final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContrac
         ?array $sort = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['filter' => $filter, 'page' => $page, 'sort' => $sort]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($portingOrderID, params: $params, requestOptions: $requestOptions);
@@ -114,7 +117,7 @@ final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContrac
         string $portingOrderID,
         ?RequestOptions $requestOptions = null
     ): PhoneNumberExtensionDeleteResponse {
-        $params = ['portingOrderID' => $portingOrderID];
+        $params = Util::removeNulls(['portingOrderID' => $portingOrderID]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, params: $params, requestOptions: $requestOptions);

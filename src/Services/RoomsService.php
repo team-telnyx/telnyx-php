@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\Room;
@@ -66,16 +67,16 @@ final class RoomsService implements RoomsContract
         ?int $webhookTimeoutSecs = null,
         ?RequestOptions $requestOptions = null,
     ): RoomNewResponse {
-        $params = [
-            'enableRecording' => $enableRecording,
-            'maxParticipants' => $maxParticipants,
-            'uniqueName' => $uniqueName,
-            'webhookEventFailoverURL' => $webhookEventFailoverURL,
-            'webhookEventURL' => $webhookEventURL,
-            'webhookTimeoutSecs' => $webhookTimeoutSecs,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'enableRecording' => $enableRecording,
+                'maxParticipants' => $maxParticipants,
+                'uniqueName' => $uniqueName,
+                'webhookEventFailoverURL' => $webhookEventFailoverURL,
+                'webhookEventURL' => $webhookEventURL,
+                'webhookTimeoutSecs' => $webhookTimeoutSecs,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -98,9 +99,7 @@ final class RoomsService implements RoomsContract
         ?bool $includeSessions = null,
         ?RequestOptions $requestOptions = null,
     ): RoomGetResponse {
-        $params = ['includeSessions' => $includeSessions];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['includeSessions' => $includeSessions]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($roomID, params: $params, requestOptions: $requestOptions);
@@ -133,16 +132,16 @@ final class RoomsService implements RoomsContract
         ?int $webhookTimeoutSecs = null,
         ?RequestOptions $requestOptions = null,
     ): RoomUpdateResponse {
-        $params = [
-            'enableRecording' => $enableRecording,
-            'maxParticipants' => $maxParticipants,
-            'uniqueName' => $uniqueName,
-            'webhookEventFailoverURL' => $webhookEventFailoverURL,
-            'webhookEventURL' => $webhookEventURL,
-            'webhookTimeoutSecs' => $webhookTimeoutSecs,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'enableRecording' => $enableRecording,
+                'maxParticipants' => $maxParticipants,
+                'uniqueName' => $uniqueName,
+                'webhookEventFailoverURL' => $webhookEventFailoverURL,
+                'webhookEventURL' => $webhookEventURL,
+                'webhookTimeoutSecs' => $webhookTimeoutSecs,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($roomID, params: $params, requestOptions: $requestOptions);
@@ -175,13 +174,13 @@ final class RoomsService implements RoomsContract
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultPagination {
-        $params = [
-            'filter' => $filter,
-            'includeSessions' => $includeSessions,
-            'page' => $page,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'filter' => $filter,
+                'includeSessions' => $includeSessions,
+                'page' => $page,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

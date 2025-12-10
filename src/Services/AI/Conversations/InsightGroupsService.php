@@ -8,6 +8,7 @@ use Telnyx\AI\Conversations\InsightGroups\InsightTemplateGroup;
 use Telnyx\AI\Conversations\InsightGroups\InsightTemplateGroupDetail;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\InsightGroupsContract;
@@ -69,11 +70,9 @@ final class InsightGroupsService implements InsightGroupsContract
         ?string $webhook = null,
         ?RequestOptions $requestOptions = null,
     ): InsightTemplateGroupDetail {
-        $params = [
-            'description' => $description, 'name' => $name, 'webhook' => $webhook,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['description' => $description, 'name' => $name, 'webhook' => $webhook]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($groupID, params: $params, requestOptions: $requestOptions);
@@ -113,11 +112,9 @@ final class InsightGroupsService implements InsightGroupsContract
         string $webhook = '',
         ?RequestOptions $requestOptions = null,
     ): InsightTemplateGroupDetail {
-        $params = [
-            'name' => $name, 'description' => $description, 'webhook' => $webhook,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['name' => $name, 'description' => $description, 'webhook' => $webhook]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->insightGroups(params: $params, requestOptions: $requestOptions);
@@ -139,9 +136,9 @@ final class InsightGroupsService implements InsightGroupsContract
         ?int $pageSize = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveInsightGroups(params: $params, requestOptions: $requestOptions);
