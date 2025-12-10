@@ -6,9 +6,9 @@ namespace Telnyx\ServiceContracts\MessagingTollfree\Verification;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPaginationForMessagingTollfree;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestCreateParams;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestListParams;
+use Telnyx\MessagingTollfree\Verification\Requests\RequestListResponse;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestUpdateParams;
 use Telnyx\MessagingTollfree\Verification\Requests\VerificationRequestEgress;
 use Telnyx\MessagingTollfree\Verification\Requests\VerificationRequestStatus;
@@ -62,7 +62,7 @@ interface RequestsRawContract
      *
      * @param array<mixed>|RequestListParams $params
      *
-     * @return BaseResponse<DefaultPaginationForMessagingTollfree<VerificationRequestStatus,>,>
+     * @return BaseResponse<RequestListResponse>
      *
      * @throws APIException
      */

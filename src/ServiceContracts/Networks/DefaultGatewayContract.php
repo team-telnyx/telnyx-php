@@ -15,13 +15,13 @@ interface DefaultGatewayContract
     /**
      * @api
      *
-     * @param string $networkIdentifier identifies the resource
+     * @param string $id identifies the resource
      * @param string $wireguardPeerID wireguard peer ID
      *
      * @throws APIException
      */
     public function create(
-        string $networkIdentifier,
+        string $id,
         ?string $wireguardPeerID = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultGatewayNewResponse;

@@ -7,7 +7,6 @@ namespace Telnyx\Services\ExternalConnections;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse;
 use Telnyx\ExternalConnections\Releases\ReleaseListParams;
 use Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter\Status\Eq;
@@ -75,7 +74,7 @@ final class ReleasesRawService implements ReleasesRawContract
      *   page?: array{number?: int, size?: int},
      * }|ReleaseListParams $params
      *
-     * @return BaseResponse<DefaultPagination<ReleaseListResponse>>
+     * @return BaseResponse<ReleaseListResponse>
      *
      * @throws APIException
      */
@@ -96,7 +95,6 @@ final class ReleasesRawService implements ReleasesRawContract
             query: $parsed,
             options: $options,
             convert: ReleaseListResponse::class,
-            page: DefaultPagination::class,
         );
     }
 }

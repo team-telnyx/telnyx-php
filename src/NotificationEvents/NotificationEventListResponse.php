@@ -4,20 +4,15 @@ declare(strict_types=1);
 
 namespace Telnyx\NotificationEvents;
 
+use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\NotificationEvents\NotificationEventListResponse\Data;
 
 /**
- * An object representing the available notifications.
- *
  * @phpstan-type NotificationEventListResponseShape = array{
- *   id?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   enabled?: bool|null,
- *   name?: string|null,
- *   notificationCategory?: string|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class NotificationEventListResponse implements BaseModel
@@ -25,35 +20,12 @@ final class NotificationEventListResponse implements BaseModel
     /** @use SdkModel<NotificationEventListResponseShape> */
     use SdkModel;
 
-    /**
-     * A UUID.
-     */
-    #[Optional]
-    public ?string $id;
-
-    /**
-     * ISO 8601 formatted date indicating when the resource was created.
-     */
-    #[Optional('created_at')]
-    public ?\DateTimeInterface $createdAt;
+    /** @var list<Data>|null $data */
+    #[Optional(list: Data::class)]
+    public ?array $data;
 
     #[Optional]
-    public ?bool $enabled;
-
-    /**
-     * A human readable name.
-     */
-    #[Optional]
-    public ?string $name;
-
-    #[Optional('notification_category')]
-    public ?string $notificationCategory;
-
-    /**
-     * ISO 8601 formatted date indicating when the resource was updated.
-     */
-    #[Optional('updated_at')]
-    public ?\DateTimeInterface $updatedAt;
+    public ?PaginationMeta $meta;
 
     public function __construct()
     {
@@ -64,83 +36,64 @@ final class NotificationEventListResponse implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param list<Data|array{
+     *   id?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   enabled?: bool|null,
+     *   name?: string|null,
+     *   notificationCategory?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     * }> $data
+     * @param PaginationMeta|array{
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
+     * } $meta
      */
     public static function with(
-        ?string $id = null,
-        ?\DateTimeInterface $createdAt = null,
-        ?bool $enabled = null,
-        ?string $name = null,
-        ?string $notificationCategory = null,
-        ?\DateTimeInterface $updatedAt = null,
+        ?array $data = null,
+        PaginationMeta|array|null $meta = null
     ): self {
         $self = new self;
 
-        null !== $id && $self['id'] = $id;
-        null !== $createdAt && $self['createdAt'] = $createdAt;
-        null !== $enabled && $self['enabled'] = $enabled;
-        null !== $name && $self['name'] = $name;
-        null !== $notificationCategory && $self['notificationCategory'] = $notificationCategory;
-        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $data && $self['data'] = $data;
+        null !== $meta && $self['meta'] = $meta;
 
         return $self;
     }
 
     /**
-     * A UUID.
+     * @param list<Data|array{
+     *   id?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   enabled?: bool|null,
+     *   name?: string|null,
+     *   notificationCategory?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     * }> $data
      */
-    public function withID(string $id): self
+    public function withData(array $data): self
     {
         $self = clone $this;
-        $self['id'] = $id;
+        $self['data'] = $data;
 
         return $self;
     }
 
     /**
-     * ISO 8601 formatted date indicating when the resource was created.
+     * @param PaginationMeta|array{
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
+     * } $meta
      */
-    public function withCreatedAt(\DateTimeInterface $createdAt): self
+    public function withMeta(PaginationMeta|array $meta): self
     {
         $self = clone $this;
-        $self['createdAt'] = $createdAt;
-
-        return $self;
-    }
-
-    public function withEnabled(bool $enabled): self
-    {
-        $self = clone $this;
-        $self['enabled'] = $enabled;
-
-        return $self;
-    }
-
-    /**
-     * A human readable name.
-     */
-    public function withName(string $name): self
-    {
-        $self = clone $this;
-        $self['name'] = $name;
-
-        return $self;
-    }
-
-    public function withNotificationCategory(string $notificationCategory): self
-    {
-        $self = clone $this;
-        $self['notificationCategory'] = $notificationCategory;
-
-        return $self;
-    }
-
-    /**
-     * ISO 8601 formatted date indicating when the resource was updated.
-     */
-    public function withUpdatedAt(\DateTimeInterface $updatedAt): self
-    {
-        $self = clone $this;
-        $self['updatedAt'] = $updatedAt;
+        $self['meta'] = $meta;
 
         return $self;
     }

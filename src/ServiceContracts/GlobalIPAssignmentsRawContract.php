@@ -6,11 +6,11 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\GlobalIPAssignments\GlobalIPAssignment;
+use Telnyx\GlobalIPAssignments\GlobalIPAssignmentCreateParams;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentDeleteResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentGetResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListParams;
+use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentNewResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateResponse;
@@ -21,12 +21,15 @@ interface GlobalIPAssignmentsRawContract
     /**
      * @api
      *
+     * @param array<mixed>|GlobalIPAssignmentCreateParams $params
+     *
      * @return BaseResponse<GlobalIPAssignmentNewResponse>
      *
      * @throws APIException
      */
     public function create(
-        ?RequestOptions $requestOptions = null
+        array|GlobalIPAssignmentCreateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -46,7 +49,7 @@ interface GlobalIPAssignmentsRawContract
     /**
      * @api
      *
-     * @param string $globalIPAssignmentID identifies the resource
+     * @param string $id identifies the resource
      * @param array<mixed>|GlobalIPAssignmentUpdateParams $params
      *
      * @return BaseResponse<GlobalIPAssignmentUpdateResponse>
@@ -54,7 +57,7 @@ interface GlobalIPAssignmentsRawContract
      * @throws APIException
      */
     public function update(
-        string $globalIPAssignmentID,
+        string $id,
         array|GlobalIPAssignmentUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse;
@@ -64,7 +67,7 @@ interface GlobalIPAssignmentsRawContract
      *
      * @param array<mixed>|GlobalIPAssignmentListParams $params
      *
-     * @return BaseResponse<DefaultPagination<GlobalIPAssignment>>
+     * @return BaseResponse<GlobalIPAssignmentListResponse>
      *
      * @throws APIException
      */

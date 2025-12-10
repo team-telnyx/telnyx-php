@@ -6,11 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\Legacy\Reporting\UsageReports\Voice\CdrUsageReportResponseLegacy;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceDeleteResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceGetResponse;
+use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceListResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceNewResponse;
-use Telnyx\PerPagePagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -93,15 +92,10 @@ final class VoiceTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->legacy->reporting->usageReports->voice->list();
+        $result = $this->client->legacy->reporting->usageReports->voice->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PerPagePagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(CdrUsageReportResponseLegacy::class, $item);
-        }
+        $this->assertInstanceOf(VoiceListResponse::class, $result);
     }
 
     #[Test]

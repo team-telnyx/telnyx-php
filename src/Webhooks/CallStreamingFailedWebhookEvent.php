@@ -7,14 +7,13 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\CallStreamingFailed\EventType;
-use Telnyx\Webhooks\CallStreamingFailed\Payload;
-use Telnyx\Webhooks\CallStreamingFailed\RecordType;
+use Telnyx\Webhooks\CallStreamingFailedWebhookEvent\Data;
+use Telnyx\Webhooks\CallStreamingFailedWebhookEvent\Data\EventType;
+use Telnyx\Webhooks\CallStreamingFailedWebhookEvent\Data\Payload;
+use Telnyx\Webhooks\CallStreamingFailedWebhookEvent\Data\RecordType;
 
 /**
- * @phpstan-type CallStreamingFailedWebhookEventShape = array{
- *   data?: CallStreamingFailed|null
- * }
+ * @phpstan-type CallStreamingFailedWebhookEventShape = array{data?: Data|null}
  */
 final class CallStreamingFailedWebhookEvent implements BaseModel
 {
@@ -22,7 +21,7 @@ final class CallStreamingFailedWebhookEvent implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?CallStreamingFailed $data;
+    public ?Data $data;
 
     public function __construct()
     {
@@ -34,7 +33,7 @@ final class CallStreamingFailedWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CallStreamingFailed|array{
+     * @param Data|array{
      *   id?: string|null,
      *   eventType?: value-of<EventType>|null,
      *   occurredAt?: \DateTimeInterface|null,
@@ -42,7 +41,7 @@ final class CallStreamingFailedWebhookEvent implements BaseModel
      *   recordType?: value-of<RecordType>|null,
      * } $data
      */
-    public static function with(CallStreamingFailed|array|null $data = null): self
+    public static function with(Data|array|null $data = null): self
     {
         $self = new self;
 
@@ -52,7 +51,7 @@ final class CallStreamingFailedWebhookEvent implements BaseModel
     }
 
     /**
-     * @param CallStreamingFailed|array{
+     * @param Data|array{
      *   id?: string|null,
      *   eventType?: value-of<EventType>|null,
      *   occurredAt?: \DateTimeInterface|null,
@@ -60,7 +59,7 @@ final class CallStreamingFailedWebhookEvent implements BaseModel
      *   recordType?: value-of<RecordType>|null,
      * } $data
      */
-    public function withData(CallStreamingFailed|array $data): self
+    public function withData(Data|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

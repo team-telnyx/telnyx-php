@@ -7,9 +7,9 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\InboundMessagePayload;
 use Telnyx\Webhooks\InboundMessageWebhookEvent\Data;
 use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\EventType;
+use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\Payload;
 use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\RecordType;
 
 /**
@@ -37,7 +37,7 @@ final class InboundMessageWebhookEvent implements BaseModel
      *   id?: string|null,
      *   eventType?: value-of<EventType>|null,
      *   occurredAt?: \DateTimeInterface|null,
-     *   payload?: InboundMessagePayload|null,
+     *   payload?: Payload|null,
      *   recordType?: value-of<RecordType>|null,
      * } $data
      */
@@ -55,7 +55,7 @@ final class InboundMessageWebhookEvent implements BaseModel
      *   id?: string|null,
      *   eventType?: value-of<EventType>|null,
      *   occurredAt?: \DateTimeInterface|null,
-     *   payload?: InboundMessagePayload|null,
+     *   payload?: Payload|null,
      *   recordType?: value-of<RecordType>|null,
      * } $data
      */

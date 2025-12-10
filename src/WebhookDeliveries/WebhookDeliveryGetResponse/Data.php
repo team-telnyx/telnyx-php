@@ -106,7 +106,7 @@ final class Data implements BaseModel
      *   id?: string|null,
      *   eventType?: string|null,
      *   occurredAt?: \DateTimeInterface|null,
-     *   payload?: array<string,mixed>|null,
+     *   payload?: mixed,
      *   recordType?: value-of<RecordType>|null,
      * } $webhook
      */
@@ -228,7 +228,7 @@ final class Data implements BaseModel
      *   id?: string|null,
      *   eventType?: string|null,
      *   occurredAt?: \DateTimeInterface|null,
-     *   payload?: array<string,mixed>|null,
+     *   payload?: mixed,
      *   recordType?: value-of<RecordType>|null,
      * } $webhook
      */

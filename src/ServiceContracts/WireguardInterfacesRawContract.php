@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\WireguardInterfaces\WireguardInterfaceCreateParams;
 use Telnyx\WireguardInterfaces\WireguardInterfaceDeleteResponse;
@@ -50,7 +49,7 @@ interface WireguardInterfacesRawContract
      *
      * @param array<mixed>|WireguardInterfaceListParams $params
      *
-     * @return BaseResponse<DefaultPagination<WireguardInterfaceListResponse>>
+     * @return BaseResponse<WireguardInterfaceListResponse>
      *
      * @throws APIException
      */

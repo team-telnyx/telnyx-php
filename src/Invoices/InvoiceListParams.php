@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Invoices\InvoiceListParams\Page;
 use Telnyx\Invoices\InvoiceListParams\Sort;
 
 /**
@@ -16,7 +17,8 @@ use Telnyx\Invoices\InvoiceListParams\Sort;
  * @see Telnyx\Services\InvoicesService::list()
  *
  * @phpstan-type InvoiceListParamsShape = array{
- *   pageNumber?: int, pageSize?: int, sort?: Sort|value-of<Sort>
+ *   page?: Page|array{number?: int|null, size?: int|null},
+ *   sort?: Sort|value-of<Sort>,
  * }
  */
 final class InvoiceListParams implements BaseModel
@@ -25,11 +27,11 @@ final class InvoiceListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
+    /**
+     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
+     */
     #[Optional]
-    public ?int $pageNumber;
-
-    #[Optional]
-    public ?int $pageSize;
+    public ?Page $page;
 
     /**
      * Specifies the sort order for results.
@@ -49,34 +51,30 @@ final class InvoiceListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Page|array{number?: int|null, size?: int|null} $page
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        Page|array|null $page = null,
         Sort|string|null $sort = null
     ): self {
         $self = new self;
 
-        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
-        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $page && $self['page'] = $page;
         null !== $sort && $self['sort'] = $sort;
 
         return $self;
     }
 
-    public function withPageNumber(int $pageNumber): self
+    /**
+     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
+     *
+     * @param Page|array{number?: int|null, size?: int|null} $page
+     */
+    public function withPage(Page|array $page): self
     {
         $self = clone $this;
-        $self['pageNumber'] = $pageNumber;
-
-        return $self;
-    }
-
-    public function withPageSize(int $pageSize): self
-    {
-        $self = clone $this;
-        $self['pageSize'] = $pageSize;
+        $self['page'] = $page;
 
         return $self;
     }

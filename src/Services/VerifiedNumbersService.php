@@ -7,13 +7,12 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerifiedNumbersContract;
 use Telnyx\Services\VerifiedNumbers\ActionsService;
-use Telnyx\VerifiedNumbers\VerifiedNumber;
 use Telnyx\VerifiedNumbers\VerifiedNumberCreateParams\VerificationMethod;
 use Telnyx\VerifiedNumbers\VerifiedNumberDataWrapper;
+use Telnyx\VerifiedNumbers\VerifiedNumberListResponse;
 use Telnyx\VerifiedNumbers\VerifiedNumberNewResponse;
 
 final class VerifiedNumbersService implements VerifiedNumbersContract
@@ -91,18 +90,17 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
      *
      * Gets a paginated list of Verified Numbers.
      *
-     * @return DefaultFlatPagination<VerifiedNumber>
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Use page[size] and page[number] in the query string. Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
-        ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
-        );
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null
+    ): VerifiedNumberListResponse {
+        $params = Util::removeNulls(['page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

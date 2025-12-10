@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams;
@@ -21,7 +20,7 @@ interface ActionRequirementsRawContract
      * @param string $portingOrderID The ID of the porting order
      * @param array<mixed>|ActionRequirementListParams $params
      *
-     * @return BaseResponse<DefaultPagination<ActionRequirementListResponse>>
+     * @return BaseResponse<ActionRequirementListResponse>
      *
      * @throws APIException
      */

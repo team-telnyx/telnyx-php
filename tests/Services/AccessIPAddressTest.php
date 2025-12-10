@@ -5,9 +5,9 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AccessIPAddress\AccessIPAddressListResponse;
 use Telnyx\AccessIPAddress\AccessIPAddressResponse;
 use Telnyx\Client;
-use Telnyx\DefaultFlatPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -77,15 +77,10 @@ final class AccessIPAddressTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->accessIPAddress->list();
+        $result = $this->client->accessIPAddress->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(AccessIPAddressResponse::class, $item);
-        }
+        $this->assertInstanceOf(AccessIPAddressListResponse::class, $result);
     }
 
     #[Test]

@@ -7,11 +7,10 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
-use Telnyx\Faxes\Fax;
 use Telnyx\Faxes\FaxCreateParams\PreviewFormat;
 use Telnyx\Faxes\FaxCreateParams\Quality;
 use Telnyx\Faxes\FaxGetResponse;
+use Telnyx\Faxes\FaxListResponse;
 use Telnyx\Faxes\FaxNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\FaxesContract;
@@ -145,24 +144,18 @@ final class FaxesService implements FaxesContract
      *   from?: array{eq?: string},
      *   to?: array{eq?: string},
      * } $filter Consolidated filter parameter (deepObject style). Originally: filter[created_at][gte], filter[created_at][gt], filter[created_at][lte], filter[created_at][lt], filter[direction][eq], filter[from][eq], filter[to][eq]
-     *
-     * @return DefaultFlatPagination<Fax>
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated pagination parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-            ],
-        );
+    ): FaxListResponse {
+        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

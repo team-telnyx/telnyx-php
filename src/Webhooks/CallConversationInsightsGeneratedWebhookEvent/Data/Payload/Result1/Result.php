@@ -7,7 +7,6 @@ namespace Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data\Pay
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
-use Telnyx\Core\Conversion\MapOf;
 
 /**
  * The result of the insight.
@@ -21,6 +20,6 @@ final class Result implements ConverterSource
      */
     public static function variants(): array
     {
-        return [new MapOf('mixed'), 'string'];
+        return ['mixed', 'string'];
     }
 }

@@ -7,8 +7,6 @@ namespace Telnyx\Services\PhoneNumbers;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings;
 use Telnyx\PhoneNumbers\Voice\CallForwarding;
 use Telnyx\PhoneNumbers\Voice\CallForwarding\ForwardingType;
 use Telnyx\PhoneNumbers\Voice\CallRecording;
@@ -20,6 +18,7 @@ use Telnyx\PhoneNumbers\Voice\VoiceGetResponse;
 use Telnyx\PhoneNumbers\Voice\VoiceListParams;
 use Telnyx\PhoneNumbers\Voice\VoiceListParams\Filter\VoiceUsagePaymentMethod;
 use Telnyx\PhoneNumbers\Voice\VoiceListParams\Sort;
+use Telnyx\PhoneNumbers\Voice\VoiceListResponse;
 use Telnyx\PhoneNumbers\Voice\VoiceUpdateParams;
 use Telnyx\PhoneNumbers\Voice\VoiceUpdateParams\InboundCallScreening;
 use Telnyx\PhoneNumbers\Voice\VoiceUpdateParams\UsagePaymentMethod;
@@ -131,7 +130,7 @@ final class VoiceRawService implements VoiceRawContract
      *   sort?: 'purchased_at'|'phone_number'|'connection_name'|'usage_payment_method'|Sort,
      * }|VoiceListParams $params
      *
-     * @return BaseResponse<DefaultPagination<PhoneNumberWithVoiceSettings>>
+     * @return BaseResponse<VoiceListResponse>
      *
      * @throws APIException
      */
@@ -150,8 +149,7 @@ final class VoiceRawService implements VoiceRawContract
             path: 'phone_numbers/voice',
             query: $parsed,
             options: $options,
-            convert: PhoneNumberWithVoiceSettings::class,
-            page: DefaultPagination::class,
+            convert: VoiceListResponse::class,
         );
     }
 }

@@ -6,11 +6,10 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\NumberBlockOrders\NumberBlockOrder;
 use Telnyx\NumberBlockOrders\NumberBlockOrderCreateParams;
 use Telnyx\NumberBlockOrders\NumberBlockOrderGetResponse;
 use Telnyx\NumberBlockOrders\NumberBlockOrderListParams;
+use Telnyx\NumberBlockOrders\NumberBlockOrderListResponse;
 use Telnyx\NumberBlockOrders\NumberBlockOrderNewResponse;
 use Telnyx\RequestOptions;
 
@@ -49,7 +48,7 @@ interface NumberBlockOrdersRawContract
      *
      * @param array<mixed>|NumberBlockOrderListParams $params
      *
-     * @return BaseResponse<DefaultPagination<NumberBlockOrder>>
+     * @return BaseResponse<NumberBlockOrderListResponse>
      *
      * @throws APIException
      */

@@ -10,7 +10,6 @@ use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BulkSimCardActionsContract;
 
@@ -57,8 +56,6 @@ final class BulkSimCardActionsService implements BulkSimCardActionsContract
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
      *
-     * @return DefaultFlatPagination<BulkSimCardActionListResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -66,7 +63,7 @@ final class BulkSimCardActionsService implements BulkSimCardActionsContract
         int $pageNumber = 1,
         int $pageSize = 20,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination {
+    ): BulkSimCardActionListResponse {
         $params = Util::removeNulls(
             [
                 'filterActionType' => $filterActionType,

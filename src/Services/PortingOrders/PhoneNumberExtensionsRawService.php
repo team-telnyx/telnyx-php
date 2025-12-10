@@ -7,14 +7,13 @@ namespace Telnyx\Services\PortingOrders;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionDeleteParams;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionDeleteResponse;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams\Sort\Value;
+use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListResponse;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionNewResponse;
-use Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\PhoneNumberExtensionsRawContract;
 
@@ -74,7 +73,7 @@ final class PhoneNumberExtensionsRawService implements PhoneNumberExtensionsRawC
      *   sort?: array{value?: '-created_at'|'created_at'|Value},
      * }|PhoneNumberExtensionListParams $params
      *
-     * @return BaseResponse<DefaultPagination<PortingPhoneNumberExtension>>
+     * @return BaseResponse<PhoneNumberExtensionListResponse>
      *
      * @throws APIException
      */
@@ -94,8 +93,7 @@ final class PhoneNumberExtensionsRawService implements PhoneNumberExtensionsRawC
             path: ['porting_orders/%1$s/phone_number_extensions', $portingOrderID],
             query: $parsed,
             options: $options,
-            convert: PortingPhoneNumberExtension::class,
-            page: DefaultPagination::class,
+            convert: PhoneNumberExtensionListResponse::class,
         );
     }
 

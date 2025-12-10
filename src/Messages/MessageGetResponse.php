@@ -7,8 +7,7 @@ namespace Telnyx\Messages;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\InboundMessagePayload;
-use Telnyx\Messages\MessageGetResponse\Data;
+use Telnyx\Messages\MessageGetResponse\Data\InboundMessagePayload;
 use Telnyx\Messages\OutboundMessagePayload\Cc;
 use Telnyx\Messages\OutboundMessagePayload\Cost;
 use Telnyx\Messages\OutboundMessagePayload\CostBreakdown;
@@ -29,7 +28,7 @@ final class MessageGetResponse implements BaseModel
     /** @use SdkModel<MessageGetResponseShape> */
     use SdkModel;
 
-    #[Optional(union: Data::class)]
+    #[Optional]
     public OutboundMessagePayload|InboundMessagePayload|null $data;
 
     public function __construct()

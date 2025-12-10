@@ -7,13 +7,12 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpoint;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointCreateParams;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointDeleteResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointGetResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams\Filter\Status;
+use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DynamicEmergencyEndpointsRawContract;
@@ -94,7 +93,7 @@ final class DynamicEmergencyEndpointsRawService implements DynamicEmergencyEndpo
      *   page?: array{number?: int, size?: int},
      * }|DynamicEmergencyEndpointListParams $params
      *
-     * @return BaseResponse<DefaultPagination<DynamicEmergencyEndpoint>>
+     * @return BaseResponse<DynamicEmergencyEndpointListResponse>
      *
      * @throws APIException
      */
@@ -113,8 +112,7 @@ final class DynamicEmergencyEndpointsRawService implements DynamicEmergencyEndpo
             path: 'dynamic_emergency_endpoints',
             query: $parsed,
             options: $options,
-            convert: DynamicEmergencyEndpoint::class,
-            page: DefaultPagination::class,
+            convert: DynamicEmergencyEndpointListResponse::class,
         );
     }
 

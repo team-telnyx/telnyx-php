@@ -7,20 +7,19 @@ namespace Telnyx\Services\PhoneNumbers;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\Jobs\JobDeleteBatchParams;
 use Telnyx\PhoneNumbers\Jobs\JobDeleteBatchResponse;
 use Telnyx\PhoneNumbers\Jobs\JobGetResponse;
 use Telnyx\PhoneNumbers\Jobs\JobListParams;
 use Telnyx\PhoneNumbers\Jobs\JobListParams\Filter\Type;
 use Telnyx\PhoneNumbers\Jobs\JobListParams\Sort;
+use Telnyx\PhoneNumbers\Jobs\JobListResponse;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams\Filter\Status;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams\Filter\VoiceUsagePaymentMethod;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchResponse;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateEmergencySettingsBatchParams;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateEmergencySettingsBatchResponse;
-use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob;
 use Telnyx\PhoneNumbers\Voice\CallForwarding;
 use Telnyx\PhoneNumbers\Voice\CallForwarding\ForwardingType;
 use Telnyx\PhoneNumbers\Voice\CallRecording;
@@ -78,7 +77,7 @@ final class JobsRawService implements JobsRawContract
      *   sort?: 'created_at'|Sort,
      * }|JobListParams $params
      *
-     * @return BaseResponse<DefaultPagination<PhoneNumbersJob>>
+     * @return BaseResponse<JobListResponse>
      *
      * @throws APIException
      */
@@ -97,8 +96,7 @@ final class JobsRawService implements JobsRawContract
             path: 'phone_numbers/jobs',
             query: $parsed,
             options: $options,
-            convert: PhoneNumbersJob::class,
-            page: DefaultPagination::class,
+            convert: JobListResponse::class,
         );
     }
 

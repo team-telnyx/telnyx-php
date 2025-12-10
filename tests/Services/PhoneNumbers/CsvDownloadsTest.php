@@ -6,9 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
-use Telnyx\PhoneNumbers\CsvDownloads\CsvDownload;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadGetResponse;
+use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadListResponse;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadNewResponse;
 use Tests\UnsupportedMockTests;
 
@@ -63,14 +62,9 @@ final class CsvDownloadsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->phoneNumbers->csvDownloads->list();
+        $result = $this->client->phoneNumbers->csvDownloads->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(CsvDownload::class, $item);
-        }
+        $this->assertInstanceOf(CsvDownloadListResponse::class, $result);
     }
 }

@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\Services\BundlePricing;
 
 use Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse;
-use Telnyx\BundlePricing\BillingBundles\BillingBundleSummary;
+use Telnyx\BundlePricing\BillingBundles\BillingBundleListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BundlePricing\BillingBundlesContract;
 
@@ -66,8 +65,6 @@ final class BillingBundlesService implements BillingBundlesContract
      * } $page Query param: Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param string $authorizationBearer Header param: Authenticates the request with your Telnyx API V2 KEY
      *
-     * @return DefaultPagination<BillingBundleSummary>
-     *
      * @throws APIException
      */
     public function list(
@@ -75,7 +72,7 @@ final class BillingBundlesService implements BillingBundlesContract
         ?array $page = null,
         ?string $authorizationBearer = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): BillingBundleListResponse {
         $params = Util::removeNulls(
             [
                 'filter' => $filter,

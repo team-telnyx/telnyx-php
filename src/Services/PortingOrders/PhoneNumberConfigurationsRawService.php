@@ -7,7 +7,6 @@ namespace Telnyx\Services\PortingOrders;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreateParams;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Filter\PortingOrder\Status;
@@ -76,7 +75,7 @@ final class PhoneNumberConfigurationsRawService implements PhoneNumberConfigurat
      *   sort?: array{value?: 'created_at'|'-created_at'|Value},
      * }|PhoneNumberConfigurationListParams $params
      *
-     * @return BaseResponse<DefaultPagination<PhoneNumberConfigurationListResponse>>
+     * @return BaseResponse<PhoneNumberConfigurationListResponse>
      *
      * @throws APIException
      */
@@ -96,7 +95,6 @@ final class PhoneNumberConfigurationsRawService implements PhoneNumberConfigurat
             query: $parsed,
             options: $options,
             convert: PhoneNumberConfigurationListResponse::class,
-            page: DefaultPagination::class,
         );
     }
 }

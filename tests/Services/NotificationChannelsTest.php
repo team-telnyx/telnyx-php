@@ -6,10 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
-use Telnyx\NotificationChannels\NotificationChannel;
 use Telnyx\NotificationChannels\NotificationChannelDeleteResponse;
 use Telnyx\NotificationChannels\NotificationChannelGetResponse;
+use Telnyx\NotificationChannels\NotificationChannelListResponse;
 use Telnyx\NotificationChannels\NotificationChannelNewResponse;
 use Telnyx\NotificationChannels\NotificationChannelUpdateResponse;
 use Tests\UnsupportedMockTests;
@@ -82,15 +81,10 @@ final class NotificationChannelsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->notificationChannels->list();
+        $result = $this->client->notificationChannels->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(NotificationChannel::class, $item);
-        }
+        $this->assertInstanceOf(NotificationChannelListResponse::class, $result);
     }
 
     #[Test]

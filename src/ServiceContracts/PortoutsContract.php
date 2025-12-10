@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\Portouts\PortoutDetails;
 use Telnyx\Portouts\PortoutGetResponse;
 use Telnyx\Portouts\PortoutListParams\Filter\Status;
 use Telnyx\Portouts\PortoutListParams\Filter\StatusIn;
 use Telnyx\Portouts\PortoutListRejectionCodesResponse;
+use Telnyx\Portouts\PortoutListResponse;
 use Telnyx\Portouts\PortoutUpdateStatusResponse;
 use Telnyx\RequestOptions;
 
@@ -53,15 +52,13 @@ interface PortoutsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return DefaultPagination<PortoutDetails>
-     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): PortoutListResponse;
 
     /**
      * @api

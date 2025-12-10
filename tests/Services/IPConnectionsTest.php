@@ -6,10 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
-use Telnyx\IPConnections\IPConnection;
 use Telnyx\IPConnections\IPConnectionDeleteResponse;
 use Telnyx\IPConnections\IPConnectionGetResponse;
+use Telnyx\IPConnections\IPConnectionListResponse;
 use Telnyx\IPConnections\IPConnectionNewResponse;
 use Telnyx\IPConnections\IPConnectionUpdateResponse;
 use Tests\UnsupportedMockTests;
@@ -78,15 +77,10 @@ final class IPConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->ipConnections->list();
+        $result = $this->client->ipConnections->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(IPConnection::class, $item);
-        }
+        $this->assertInstanceOf(IPConnectionListResponse::class, $result);
     }
 
     #[Test]

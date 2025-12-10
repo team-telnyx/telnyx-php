@@ -7,13 +7,12 @@ namespace Telnyx\Services\Porting;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
 use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport;
 use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport\Filters\StatusIn;
-use Telnyx\Porting\Reports\PortingReport;
 use Telnyx\Porting\Reports\ReportGetResponse;
 use Telnyx\Porting\Reports\ReportListParams\Filter\ReportType;
 use Telnyx\Porting\Reports\ReportListParams\Filter\Status;
+use Telnyx\Porting\Reports\ReportListResponse;
 use Telnyx\Porting\Reports\ReportNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Porting\ReportsContract;
@@ -97,15 +96,13 @@ final class ReportsService implements ReportsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return DefaultPagination<PortingReport>
-     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): ReportListResponse {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
         // @phpstan-ignore-next-line argument.type

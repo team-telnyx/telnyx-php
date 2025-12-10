@@ -14,7 +14,6 @@ use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
 use Telnyx\AI\Assistants\TranscriptionSettings\Model;
-use Telnyx\AI\Assistants\TranscriptionSettingsConfig;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -71,7 +70,7 @@ interface VersionsContract
      *     eotTimeoutMs?: int,
      *     numerals?: bool,
      *     smartFormat?: bool,
-     *   }|TranscriptionSettingsConfig,
+     *   },
      * }|TranscriptionSettings $transcription Body param:
      * @param array{
      *   voice: string,

@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\ExternalConnections;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\ExternalConnections\PhoneNumbers\ExternalConnectionPhoneNumber;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberGetResponse;
+use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListResponse;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberUpdateResponse;
 use Telnyx\RequestOptions;
 
@@ -56,8 +55,6 @@ interface PhoneNumbersContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return DefaultPagination<ExternalConnectionPhoneNumber>
-     *
      * @throws APIException
      */
     public function list(
@@ -65,5 +62,5 @@ interface PhoneNumbersContract
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): PhoneNumberListResponse;
 }

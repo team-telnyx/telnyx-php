@@ -7,13 +7,12 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\Documents\DocServiceDocument;
 use Telnyx\Documents\DocumentDeleteResponse;
 use Telnyx\Documents\DocumentGenerateDownloadLinkResponse;
 use Telnyx\Documents\DocumentGetResponse;
 use Telnyx\Documents\DocumentListParams;
 use Telnyx\Documents\DocumentListParams\Sort;
+use Telnyx\Documents\DocumentListResponse;
 use Telnyx\Documents\DocumentUpdateParams;
 use Telnyx\Documents\DocumentUpdateResponse;
 use Telnyx\Documents\DocumentUploadJsonParams;
@@ -60,7 +59,7 @@ final class DocumentsRawService implements DocumentsRawContract
      *
      * Update a document.
      *
-     * @param string $documentID identifies the resource
+     * @param string $id identifies the resource
      * @param array{
      *   customerReference?: string, filename?: string
      * }|DocumentUpdateParams $params
@@ -70,7 +69,7 @@ final class DocumentsRawService implements DocumentsRawContract
      * @throws APIException
      */
     public function update(
-        string $documentID,
+        string $id,
         array|DocumentUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse {
@@ -82,7 +81,7 @@ final class DocumentsRawService implements DocumentsRawContract
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
-            path: ['documents/%1$s', $documentID],
+            path: ['documents/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: DocumentUpdateResponse::class,
@@ -106,7 +105,7 @@ final class DocumentsRawService implements DocumentsRawContract
      *   sort?: list<'filename'|'created_at'|'updated_at'|'-filename'|'-created_at'|'-updated_at'|Sort>,
      * }|DocumentListParams $params
      *
-     * @return BaseResponse<DefaultPagination<DocServiceDocument>>
+     * @return BaseResponse<DocumentListResponse>
      *
      * @throws APIException
      */
@@ -125,8 +124,7 @@ final class DocumentsRawService implements DocumentsRawContract
             path: 'documents',
             query: $parsed,
             options: $options,
-            convert: DocServiceDocument::class,
-            page: DefaultPagination::class,
+            convert: DocumentListResponse::class,
         );
     }
 
@@ -173,7 +171,7 @@ final class DocumentsRawService implements DocumentsRawContract
         return $this->client->request(
             method: 'get',
             path: ['documents/%1$s/download', $id],
-            headers: ['Accept' => 'application/octet-stream'],
+            headers: ['Accept' => '*'],
             options: $requestOptions,
             convert: 'string',
         );
@@ -208,7 +206,9 @@ final class DocumentsRawService implements DocumentsRawContract
      *
      * Upload a document.<br /><br />Uploaded files must be linked to a service within 30 minutes or they will be automatically deleted.
      *
-     * @param array{document: array<string,mixed>}|DocumentUploadParams $params
+     * @param array{
+     *   url: string, customerReference?: string, filename?: string, file: string
+     * }|DocumentUploadParams $params
      *
      * @return BaseResponse<DocumentUploadResponse>
      *
@@ -227,7 +227,7 @@ final class DocumentsRawService implements DocumentsRawContract
         return $this->client->request(
             method: 'post',
             path: 'documents?content-type=multipart',
-            body: (object) $parsed['document'],
+            body: (object) $parsed,
             options: $options,
             convert: DocumentUploadResponse::class,
         );
@@ -238,7 +238,9 @@ final class DocumentsRawService implements DocumentsRawContract
      *
      * Upload a document.<br /><br />Uploaded files must be linked to a service within 30 minutes or they will be automatically deleted.
      *
-     * @param array{document: array<string,mixed>}|DocumentUploadJsonParams $params
+     * @param array{
+     *   url: string, customerReference?: string, filename?: string, file: string
+     * }|DocumentUploadJsonParams $params
      *
      * @return BaseResponse<DocumentUploadJsonResponse>
      *
@@ -257,7 +259,7 @@ final class DocumentsRawService implements DocumentsRawContract
         return $this->client->request(
             method: 'post',
             path: 'documents',
-            body: (object) $parsed['document'],
+            body: (object) $parsed,
             options: $options,
             convert: DocumentUploadJsonResponse::class,
         );

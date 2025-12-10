@@ -7,18 +7,17 @@ namespace Telnyx\MobilePhoneNumbers;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\MobilePhoneNumbers\MobilePhoneNumber\CallForwarding;
-use Telnyx\MobilePhoneNumbers\MobilePhoneNumber\CallRecording;
-use Telnyx\MobilePhoneNumbers\MobilePhoneNumber\CnamListing;
-use Telnyx\MobilePhoneNumbers\MobilePhoneNumber\Inbound;
-use Telnyx\MobilePhoneNumbers\MobilePhoneNumber\InboundCallScreening;
-use Telnyx\MobilePhoneNumbers\MobilePhoneNumber\NoiseSuppression;
-use Telnyx\MobilePhoneNumbers\MobilePhoneNumber\Outbound;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateResponse\Data;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateResponse\Data\CallForwarding;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateResponse\Data\CallRecording;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateResponse\Data\CnamListing;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateResponse\Data\Inbound;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateResponse\Data\InboundCallScreening;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateResponse\Data\NoiseSuppression;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateResponse\Data\Outbound;
 
 /**
- * @phpstan-type MobilePhoneNumberUpdateResponseShape = array{
- *   data?: MobilePhoneNumber|null
- * }
+ * @phpstan-type MobilePhoneNumberUpdateResponseShape = array{data?: Data|null}
  */
 final class MobilePhoneNumberUpdateResponse implements BaseModel
 {
@@ -26,7 +25,7 @@ final class MobilePhoneNumberUpdateResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?MobilePhoneNumber $data;
+    public ?Data $data;
 
     public function __construct()
     {
@@ -38,7 +37,7 @@ final class MobilePhoneNumberUpdateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MobilePhoneNumber|array{
+     * @param Data|array{
      *   id?: string|null,
      *   callForwarding?: CallForwarding|null,
      *   callRecording?: CallRecording|null,
@@ -63,7 +62,7 @@ final class MobilePhoneNumberUpdateResponse implements BaseModel
      *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
-    public static function with(MobilePhoneNumber|array|null $data = null): self
+    public static function with(Data|array|null $data = null): self
     {
         $self = new self;
 
@@ -73,7 +72,7 @@ final class MobilePhoneNumberUpdateResponse implements BaseModel
     }
 
     /**
-     * @param MobilePhoneNumber|array{
+     * @param Data|array{
      *   id?: string|null,
      *   callForwarding?: CallForwarding|null,
      *   callRecording?: CallRecording|null,
@@ -98,7 +97,7 @@ final class MobilePhoneNumberUpdateResponse implements BaseModel
      *   updatedAt?: \DateTimeInterface|null,
      * } $data
      */
-    public function withData(MobilePhoneNumber|array $data): self
+    public function withData(Data|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

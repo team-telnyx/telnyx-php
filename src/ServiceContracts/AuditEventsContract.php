@@ -7,7 +7,6 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\AuditEvents\AuditEventListParams\Sort;
 use Telnyx\AuditEvents\AuditEventListResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
 interface AuditEventsContract
@@ -24,8 +23,6 @@ interface AuditEventsContract
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param 'asc'|'desc'|Sort $sort set the order of the results by the creation date
      *
-     * @return DefaultPagination<AuditEventListResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -33,5 +30,5 @@ interface AuditEventsContract
         ?array $page = null,
         string|Sort|null $sort = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): AuditEventListResponse;
 }

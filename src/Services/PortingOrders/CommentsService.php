@@ -7,7 +7,6 @@ namespace Telnyx\Services\PortingOrders;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\Comments\CommentListResponse;
 use Telnyx\PortingOrders\Comments\CommentNewResponse;
 use Telnyx\RequestOptions;
@@ -60,15 +59,13 @@ final class CommentsService implements CommentsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return DefaultPagination<CommentListResponse>
-     *
      * @throws APIException
      */
     public function list(
         string $id,
         ?array $page = null,
         ?RequestOptions $requestOptions = null
-    ): DefaultPagination {
+    ): CommentListResponse {
         $params = Util::removeNulls(['page' => $page]);
 
         // @phpstan-ignore-next-line argument.type

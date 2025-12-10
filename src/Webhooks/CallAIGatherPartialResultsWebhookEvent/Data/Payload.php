@@ -19,7 +19,7 @@ use Telnyx\Webhooks\CallAIGatherPartialResultsWebhookEvent\Data\Payload\MessageH
  *   connectionID?: string|null,
  *   from?: string|null,
  *   messageHistory?: list<MessageHistory>|null,
- *   partialResults?: array<string,mixed>|null,
+ *   partialResults?: mixed,
  *   to?: string|null,
  * }
  */
@@ -74,11 +74,9 @@ final class Payload implements BaseModel
 
     /**
      * The partial result of the AI gather, its type depends of the `parameters` provided in the command.
-     *
-     * @var array<string,mixed>|null $partialResults
      */
-    #[Optional('partial_results', map: 'mixed')]
-    public ?array $partialResults;
+    #[Optional('partial_results')]
+    public mixed $partialResults;
 
     /**
      * Destination number or SIP URI of the call.
@@ -99,7 +97,6 @@ final class Payload implements BaseModel
      * @param list<MessageHistory|array{
      *   content?: string|null, role?: value-of<Role>|null
      * }> $messageHistory
-     * @param array<string,mixed> $partialResults
      */
     public static function with(
         ?string $callControlID = null,
@@ -109,7 +106,7 @@ final class Payload implements BaseModel
         ?string $connectionID = null,
         ?string $from = null,
         ?array $messageHistory = null,
-        ?array $partialResults = null,
+        mixed $partialResults = null,
         ?string $to = null,
     ): self {
         $self = new self;
@@ -210,10 +207,8 @@ final class Payload implements BaseModel
 
     /**
      * The partial result of the AI gather, its type depends of the `parameters` provided in the command.
-     *
-     * @param array<string,mixed> $partialResults
      */
-    public function withPartialResults(array $partialResults): self
+    public function withPartialResults(mixed $partialResults): self
     {
         $self = clone $this;
         $self['partialResults'] = $partialResults;

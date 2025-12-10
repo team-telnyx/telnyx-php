@@ -8,12 +8,12 @@ use Telnyx\AI\Assistants\Tests\AssistantTest;
 use Telnyx\AI\Assistants\Tests\TelnyxConversationChannel;
 use Telnyx\AI\Assistants\Tests\TestCreateParams;
 use Telnyx\AI\Assistants\Tests\TestListParams;
+use Telnyx\AI\Assistants\Tests\TestListResponse;
 use Telnyx\AI\Assistants\Tests\TestUpdateParams;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\TestsRawContract;
 
@@ -133,13 +133,12 @@ final class TestsRawService implements TestsRawContract
      *
      * @param array{
      *   destination?: string,
-     *   pageNumber?: int,
-     *   pageSize?: int,
+     *   page?: array{number?: int, size?: int},
      *   telnyxConversationChannel?: string,
      *   testSuite?: string,
      * }|TestListParams $params
      *
-     * @return BaseResponse<DefaultFlatPagination<AssistantTest>>
+     * @return BaseResponse<TestListResponse>
      *
      * @throws APIException
      */
@@ -159,15 +158,12 @@ final class TestsRawService implements TestsRawContract
             query: Util::array_transform_keys(
                 $parsed,
                 [
-                    'pageNumber' => 'page[number]',
-                    'pageSize' => 'page[size]',
                     'telnyxConversationChannel' => 'telnyx_conversation_channel',
                     'testSuite' => 'test_suite',
                 ],
             ),
             options: $options,
-            convert: AssistantTest::class,
-            page: DefaultFlatPagination::class,
+            convert: TestListResponse::class,
         );
     }
 

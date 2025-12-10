@@ -74,7 +74,7 @@ final class InsightTemplateGroup implements BaseModel
      *   createdAt: \DateTimeInterface,
      *   instructions: string,
      *   insightType?: value-of<InsightType>|null,
-     *   jsonSchema?: string|array<string,mixed>|null,
+     *   jsonSchema?: mixed|string|null,
      *   name?: string|null,
      *   webhook?: string|null,
      * }> $insights
@@ -138,7 +138,7 @@ final class InsightTemplateGroup implements BaseModel
      *   createdAt: \DateTimeInterface,
      *   instructions: string,
      *   insightType?: value-of<InsightType>|null,
-     *   jsonSchema?: string|array<string,mixed>|null,
+     *   jsonSchema?: mixed|string|null,
      *   name?: string|null,
      *   webhook?: string|null,
      * }> $insights

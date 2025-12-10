@@ -7,13 +7,12 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
-use Telnyx\RoomCompositions\RoomComposition;
 use Telnyx\RoomCompositions\RoomCompositionCreateParams;
 use Telnyx\RoomCompositions\RoomCompositionGetResponse;
 use Telnyx\RoomCompositions\RoomCompositionListParams;
 use Telnyx\RoomCompositions\RoomCompositionListParams\Filter\Status;
+use Telnyx\RoomCompositions\RoomCompositionListResponse;
 use Telnyx\RoomCompositions\RoomCompositionNewResponse;
 use Telnyx\RoomCompositions\VideoRegion;
 use Telnyx\ServiceContracts\RoomCompositionsRawContract;
@@ -111,7 +110,7 @@ final class RoomCompositionsRawService implements RoomCompositionsRawContract
      *   page?: array{number?: int, size?: int},
      * }|RoomCompositionListParams $params
      *
-     * @return BaseResponse<DefaultPagination<RoomComposition>>
+     * @return BaseResponse<RoomCompositionListResponse>
      *
      * @throws APIException
      */
@@ -130,8 +129,7 @@ final class RoomCompositionsRawService implements RoomCompositionsRawContract
             path: 'room_compositions',
             query: $parsed,
             options: $options,
-            convert: RoomComposition::class,
-            page: DefaultPagination::class,
+            convert: RoomCompositionListResponse::class,
         );
     }
 

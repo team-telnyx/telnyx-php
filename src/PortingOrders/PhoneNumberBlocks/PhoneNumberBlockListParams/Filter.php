@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\ActivationStatus;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\PortabilityStatus;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\PortingOrderSingleStatus;
+use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\UnionMember0;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\UnionMember1;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\SupportKey;
 
@@ -22,7 +22,7 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Sup
  *   phoneNumber?: list<string>|null,
  *   portabilityStatus?: value-of<PortabilityStatus>|null,
  *   portingOrderID?: list<string>|null,
- *   status?: null|list<value-of<UnionMember1>>|value-of<PortingOrderSingleStatus>,
+ *   status?: null|list<value-of<UnionMember1>>|value-of<UnionMember0>,
  *   supportKey?: string|null|list<string>,
  * }
  */
@@ -66,7 +66,7 @@ final class Filter implements BaseModel
     /**
      * Filter porting orders by status(es). Originally: filter[status], filter[status][in][].
      *
-     * @var list<value-of<UnionMember1>>|value-of<PortingOrderSingleStatus>|null $status
+     * @var list<value-of<UnionMember1>>|value-of<UnionMember0>|null $status
      */
     #[Optional(union: Status::class)]
     public array|string|null $status;
@@ -93,7 +93,7 @@ final class Filter implements BaseModel
      * @param list<string> $phoneNumber
      * @param PortabilityStatus|value-of<PortabilityStatus> $portabilityStatus
      * @param list<string> $portingOrderID
-     * @param PortingOrderSingleStatus|list<UnionMember1|value-of<UnionMember1>>|value-of<PortingOrderSingleStatus> $status
+     * @param UnionMember0|list<UnionMember1|value-of<UnionMember1>>|value-of<UnionMember0> $status
      * @param string|list<string> $supportKey
      */
     public static function with(
@@ -101,7 +101,7 @@ final class Filter implements BaseModel
         ?array $phoneNumber = null,
         PortabilityStatus|string|null $portabilityStatus = null,
         ?array $portingOrderID = null,
-        PortingOrderSingleStatus|array|string|null $status = null,
+        UnionMember0|array|string|null $status = null,
         string|array|null $supportKey = null,
     ): self {
         $self = new self;
@@ -173,11 +173,10 @@ final class Filter implements BaseModel
     /**
      * Filter porting orders by status(es). Originally: filter[status], filter[status][in][].
      *
-     * @param PortingOrderSingleStatus|list<UnionMember1|value-of<UnionMember1>>|value-of<PortingOrderSingleStatus> $status
+     * @param UnionMember0|list<UnionMember1|value-of<UnionMember1>>|value-of<UnionMember0> $status
      */
-    public function withStatus(
-        PortingOrderSingleStatus|array|string $status
-    ): self {
+    public function withStatus(UnionMember0|array|string $status): self
+    {
         $self = clone $this;
         $self['status'] = $status;
 

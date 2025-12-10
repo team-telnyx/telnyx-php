@@ -57,7 +57,10 @@ final class VoiceListResponse implements BaseModel
      *   updatedAt?: string|null,
      * }> $data
      * @param BatchCsvPaginationMeta|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -103,7 +106,10 @@ final class VoiceListResponse implements BaseModel
 
     /**
      * @param BatchCsvPaginationMeta|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(BatchCsvPaginationMeta|array $meta): self

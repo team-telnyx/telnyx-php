@@ -7,8 +7,7 @@ namespace Telnyx\Services\Messaging\Rcs;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
-use Telnyx\RcsAgents\RcsAgent;
+use Telnyx\Messaging\Rcs\Agents\AgentListResponse;
 use Telnyx\RcsAgents\RcsAgentResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging\Rcs\AgentsContract;
@@ -89,14 +88,12 @@ final class AgentsService implements AgentsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return DefaultPagination<RcsAgent>
-     *
      * @throws APIException
      */
     public function list(
         ?array $page = null,
         ?RequestOptions $requestOptions = null
-    ): DefaultPagination {
+    ): AgentListResponse {
         $params = Util::removeNulls(['page' => $page]);
 
         // @phpstan-ignore-next-line argument.type

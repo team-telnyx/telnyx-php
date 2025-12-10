@@ -6,14 +6,12 @@ namespace Telnyx\Services\AI\Conversations;
 
 use Telnyx\AI\Conversations\Insights\InsightCreateParams;
 use Telnyx\AI\Conversations\Insights\InsightListParams;
-use Telnyx\AI\Conversations\Insights\InsightTemplate;
+use Telnyx\AI\Conversations\Insights\InsightListResponse;
 use Telnyx\AI\Conversations\Insights\InsightTemplateDetail;
 use Telnyx\AI\Conversations\Insights\InsightUpdateParams;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\InsightsRawContract;
 
@@ -33,7 +31,7 @@ final class InsightsRawService implements InsightsRawContract
      * @param array{
      *   instructions: string,
      *   name: string,
-     *   jsonSchema?: string|array<string,mixed>,
+     *   jsonSchema?: mixed|string,
      *   webhook?: string,
      * }|InsightCreateParams $params
      *
@@ -92,7 +90,7 @@ final class InsightsRawService implements InsightsRawContract
      * @param string $insightID The ID of the insight
      * @param array{
      *   instructions?: string,
-     *   jsonSchema?: string|array<string,mixed>,
+     *   jsonSchema?: mixed|string,
      *   name?: string,
      *   webhook?: string,
      * }|InsightUpdateParams $params
@@ -126,9 +124,9 @@ final class InsightsRawService implements InsightsRawContract
      *
      * Get all insights
      *
-     * @param array{pageNumber?: int, pageSize?: int}|InsightListParams $params
+     * @param array{page?: array{number?: int, size?: int}}|InsightListParams $params
      *
-     * @return BaseResponse<DefaultFlatPagination<InsightTemplate>>
+     * @return BaseResponse<InsightListResponse>
      *
      * @throws APIException
      */
@@ -145,13 +143,9 @@ final class InsightsRawService implements InsightsRawContract
         return $this->client->request(
             method: 'get',
             path: 'ai/conversations/insights',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
-            convert: InsightTemplate::class,
-            page: DefaultFlatPagination::class,
+            convert: InsightListResponse::class,
         );
     }
 

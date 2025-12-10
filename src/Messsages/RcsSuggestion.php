@@ -49,7 +49,7 @@ final class RcsSuggestion implements BaseModel
      *   fallbackURL?: string|null,
      *   openURLAction?: OpenURLAction|null,
      *   postbackData?: string|null,
-     *   shareLocationAction?: array<string,mixed>|null,
+     *   shareLocationAction?: mixed,
      *   text?: string|null,
      *   viewLocationAction?: ViewLocationAction|null,
      * } $action
@@ -76,7 +76,7 @@ final class RcsSuggestion implements BaseModel
      *   fallbackURL?: string|null,
      *   openURLAction?: OpenURLAction|null,
      *   postbackData?: string|null,
-     *   shareLocationAction?: array<string,mixed>|null,
+     *   shareLocationAction?: mixed,
      *   text?: string|null,
      *   viewLocationAction?: ViewLocationAction|null,
      * } $action

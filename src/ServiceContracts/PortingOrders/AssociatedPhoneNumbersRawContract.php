@@ -6,13 +6,12 @@ namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberDeleteParams;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberDeleteResponse;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams;
+use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListResponse;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberNewResponse;
-use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber;
 use Telnyx\RequestOptions;
 
 interface AssociatedPhoneNumbersRawContract
@@ -39,7 +38,7 @@ interface AssociatedPhoneNumbersRawContract
      * @param string $portingOrderID Identifies the Porting Order associated with the phone numbers
      * @param array<mixed>|AssociatedPhoneNumberListParams $params
      *
-     * @return BaseResponse<DefaultPagination<PortingAssociatedPhoneNumber>>
+     * @return BaseResponse<AssociatedPhoneNumberListResponse>
      *
      * @throws APIException
      */

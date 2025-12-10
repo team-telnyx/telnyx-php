@@ -7,7 +7,6 @@ namespace Telnyx\AI\Conversations\ConversationAddMessageParams;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
-use Telnyx\Core\Conversion\MapOf;
 
 final class ToolChoice implements ConverterSource
 {
@@ -18,6 +17,6 @@ final class ToolChoice implements ConverterSource
      */
     public static function variants(): array
     {
-        return ['string', new MapOf('mixed')];
+        return ['string', 'mixed'];
     }
 }

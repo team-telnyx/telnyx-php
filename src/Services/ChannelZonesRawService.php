@@ -11,7 +11,6 @@ use Telnyx\ChannelZones\ChannelZoneUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ChannelZonesRawContract;
 
@@ -64,7 +63,7 @@ final class ChannelZonesRawService implements ChannelZonesRawContract
      *   page?: array{number?: int, size?: int}
      * }|ChannelZoneListParams $params
      *
-     * @return BaseResponse<DefaultPagination<ChannelZoneListResponse>>
+     * @return BaseResponse<ChannelZoneListResponse>
      *
      * @throws APIException
      */
@@ -84,7 +83,6 @@ final class ChannelZonesRawService implements ChannelZonesRawContract
             query: $parsed,
             options: $options,
             convert: ChannelZoneListResponse::class,
-            page: DefaultPagination::class,
         );
     }
 }

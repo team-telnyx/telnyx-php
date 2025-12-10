@@ -7,6 +7,7 @@ namespace Telnyx\GlobalIPAssignments;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Networks\InterfaceStatus;
 
 /**
  * @phpstan-type GlobalIPAssignmentShape = array{
@@ -14,6 +15,12 @@ use Telnyx\Core\Contracts\BaseModel;
  *   createdAt?: string|null,
  *   recordType?: string|null,
  *   updatedAt?: string|null,
+ *   globalIPID?: string|null,
+ *   isAnnounced?: bool|null,
+ *   isConnected?: bool|null,
+ *   isInMaintenance?: bool|null,
+ *   status?: value-of<InterfaceStatus>|null,
+ *   wireguardPeerID?: string|null,
  * }
  */
 final class GlobalIPAssignment implements BaseModel
@@ -45,6 +52,44 @@ final class GlobalIPAssignment implements BaseModel
     #[Optional('updated_at')]
     public ?string $updatedAt;
 
+    /**
+     * Global IP ID.
+     */
+    #[Optional('global_ip_id')]
+    public ?string $globalIPID;
+
+    /**
+     * Status of BGP announcement.
+     */
+    #[Optional('is_announced')]
+    public ?bool $isAnnounced;
+
+    /**
+     * Wireguard peer is connected.
+     */
+    #[Optional('is_connected')]
+    public ?bool $isConnected;
+
+    /**
+     * Enable/disable BGP announcement.
+     */
+    #[Optional('is_in_maintenance')]
+    public ?bool $isInMaintenance;
+
+    /**
+     * The current status of the interface deployment.
+     *
+     * @var value-of<InterfaceStatus>|null $status
+     */
+    #[Optional(enum: InterfaceStatus::class)]
+    public ?string $status;
+
+    /**
+     * Wireguard peer ID.
+     */
+    #[Optional('wireguard_peer_id')]
+    public ?string $wireguardPeerID;
+
     public function __construct()
     {
         $this->initialize();
@@ -54,12 +99,20 @@ final class GlobalIPAssignment implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param InterfaceStatus|value-of<InterfaceStatus> $status
      */
     public static function with(
         ?string $id = null,
         ?string $createdAt = null,
         ?string $recordType = null,
         ?string $updatedAt = null,
+        ?string $globalIPID = null,
+        ?bool $isAnnounced = null,
+        ?bool $isConnected = null,
+        ?bool $isInMaintenance = null,
+        InterfaceStatus|string|null $status = null,
+        ?string $wireguardPeerID = null,
     ): self {
         $self = new self;
 
@@ -67,6 +120,12 @@ final class GlobalIPAssignment implements BaseModel
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $globalIPID && $self['globalIPID'] = $globalIPID;
+        null !== $isAnnounced && $self['isAnnounced'] = $isAnnounced;
+        null !== $isConnected && $self['isConnected'] = $isConnected;
+        null !== $isInMaintenance && $self['isInMaintenance'] = $isInMaintenance;
+        null !== $status && $self['status'] = $status;
+        null !== $wireguardPeerID && $self['wireguardPeerID'] = $wireguardPeerID;
 
         return $self;
     }
@@ -111,6 +170,74 @@ final class GlobalIPAssignment implements BaseModel
     {
         $self = clone $this;
         $self['updatedAt'] = $updatedAt;
+
+        return $self;
+    }
+
+    /**
+     * Global IP ID.
+     */
+    public function withGlobalIpid(string $globalIPID): self
+    {
+        $self = clone $this;
+        $self['globalIPID'] = $globalIPID;
+
+        return $self;
+    }
+
+    /**
+     * Status of BGP announcement.
+     */
+    public function withIsAnnounced(bool $isAnnounced): self
+    {
+        $self = clone $this;
+        $self['isAnnounced'] = $isAnnounced;
+
+        return $self;
+    }
+
+    /**
+     * Wireguard peer is connected.
+     */
+    public function withIsConnected(bool $isConnected): self
+    {
+        $self = clone $this;
+        $self['isConnected'] = $isConnected;
+
+        return $self;
+    }
+
+    /**
+     * Enable/disable BGP announcement.
+     */
+    public function withIsInMaintenance(bool $isInMaintenance): self
+    {
+        $self = clone $this;
+        $self['isInMaintenance'] = $isInMaintenance;
+
+        return $self;
+    }
+
+    /**
+     * The current status of the interface deployment.
+     *
+     * @param InterfaceStatus|value-of<InterfaceStatus> $status
+     */
+    public function withStatus(InterfaceStatus|string $status): self
+    {
+        $self = clone $this;
+        $self['status'] = $status;
+
+        return $self;
+    }
+
+    /**
+     * Wireguard peer ID.
+     */
+    public function withWireguardPeerID(string $wireguardPeerID): self
+    {
+        $self = clone $this;
+        $self['wireguardPeerID'] = $wireguardPeerID;
 
         return $self;
     }

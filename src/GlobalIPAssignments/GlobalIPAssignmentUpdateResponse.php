@@ -7,6 +7,7 @@ namespace Telnyx\GlobalIPAssignments;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Networks\InterfaceStatus;
 
 /**
  * @phpstan-type GlobalIPAssignmentUpdateResponseShape = array{
@@ -36,6 +37,12 @@ final class GlobalIPAssignmentUpdateResponse implements BaseModel
      *   createdAt?: string|null,
      *   recordType?: string|null,
      *   updatedAt?: string|null,
+     *   globalIPID?: string|null,
+     *   isAnnounced?: bool|null,
+     *   isConnected?: bool|null,
+     *   isInMaintenance?: bool|null,
+     *   status?: value-of<InterfaceStatus>|null,
+     *   wireguardPeerID?: string|null,
      * } $data
      */
     public static function with(GlobalIPAssignment|array|null $data = null): self
@@ -53,6 +60,12 @@ final class GlobalIPAssignmentUpdateResponse implements BaseModel
      *   createdAt?: string|null,
      *   recordType?: string|null,
      *   updatedAt?: string|null,
+     *   globalIPID?: string|null,
+     *   isAnnounced?: bool|null,
+     *   isConnected?: bool|null,
+     *   isInMaintenance?: bool|null,
+     *   status?: value-of<InterfaceStatus>|null,
+     *   wireguardPeerID?: string|null,
      * } $data
      */
     public function withData(GlobalIPAssignment|array $data): self
