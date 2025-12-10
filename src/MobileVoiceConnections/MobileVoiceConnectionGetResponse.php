@@ -7,14 +7,15 @@ namespace Telnyx\MobileVoiceConnections;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\MobileVoiceConnections\MobileVoiceConnectionGetResponse\Data;
-use Telnyx\MobileVoiceConnections\MobileVoiceConnectionGetResponse\Data\Inbound;
-use Telnyx\MobileVoiceConnections\MobileVoiceConnectionGetResponse\Data\Outbound;
-use Telnyx\MobileVoiceConnections\MobileVoiceConnectionGetResponse\Data\RecordType;
-use Telnyx\MobileVoiceConnections\MobileVoiceConnectionGetResponse\Data\WebhookAPIVersion;
+use Telnyx\MobileVoiceConnections\MobileVoiceConnection\Inbound;
+use Telnyx\MobileVoiceConnections\MobileVoiceConnection\Outbound;
+use Telnyx\MobileVoiceConnections\MobileVoiceConnection\RecordType;
+use Telnyx\MobileVoiceConnections\MobileVoiceConnection\WebhookAPIVersion;
 
 /**
- * @phpstan-type MobileVoiceConnectionGetResponseShape = array{data?: Data|null}
+ * @phpstan-type MobileVoiceConnectionGetResponseShape = array{
+ *   data?: MobileVoiceConnection|null
+ * }
  */
 final class MobileVoiceConnectionGetResponse implements BaseModel
 {
@@ -22,7 +23,7 @@ final class MobileVoiceConnectionGetResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?MobileVoiceConnection $data;
 
     public function __construct()
     {
@@ -34,7 +35,7 @@ final class MobileVoiceConnectionGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
+     * @param MobileVoiceConnection|array{
      *   id?: string|null,
      *   active?: bool|null,
      *   connectionName?: string|null,
@@ -50,7 +51,7 @@ final class MobileVoiceConnectionGetResponse implements BaseModel
      *   webhookTimeoutSecs?: int|null,
      * } $data
      */
-    public static function with(Data|array|null $data = null): self
+    public static function with(MobileVoiceConnection|array|null $data = null): self
     {
         $self = new self;
 
@@ -60,7 +61,7 @@ final class MobileVoiceConnectionGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
+     * @param MobileVoiceConnection|array{
      *   id?: string|null,
      *   active?: bool|null,
      *   connectionName?: string|null,
@@ -76,7 +77,7 @@ final class MobileVoiceConnectionGetResponse implements BaseModel
      *   webhookTimeoutSecs?: int|null,
      * } $data
      */
-    public function withData(Data|array $data): self
+    public function withData(MobileVoiceConnection|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

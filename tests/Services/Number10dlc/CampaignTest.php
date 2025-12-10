@@ -5,13 +5,14 @@ namespace Tests\Services\Number10dlc;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Telnyx\Campaign\TelnyxCampaignCsp;
 use Telnyx\Client;
-use Telnyx\Number10dlc\Campaign\CampaignAppealResponse;
-use Telnyx\Number10dlc\Campaign\CampaignDeleteResponse;
+use Telnyx\Number10dlc\Campaign\CampaignDeactivateResponse;
 use Telnyx\Number10dlc\Campaign\CampaignGetMnoMetadataResponse;
-use Telnyx\Number10dlc\Campaign\CampaignGetSharingResponse;
+use Telnyx\Number10dlc\Campaign\CampaignGetSharingStatusResponse;
 use Telnyx\Number10dlc\Campaign\CampaignListResponse;
+use Telnyx\Number10dlc\Campaign\CampaignSubmitAppealResponse;
+use Telnyx\Number10dlc\Campaign\TelnyxCampaignCsp;
+use Telnyx\PerPagePaginationV2;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -65,10 +66,15 @@ final class CampaignTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->number10dlc->campaign->list(brandID: 'brandId');
+        $page = $this->client->number10dlc->campaign->list(brandID: 'brandId');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CampaignListResponse::class, $result);
+        $this->assertInstanceOf(PerPagePaginationV2::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(CampaignListResponse::class, $item);
+        }
     }
 
     #[Test]
@@ -78,7 +84,7 @@ final class CampaignTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->number10dlc->campaign->list(
+        $page = $this->client->number10dlc->campaign->list(
             brandID: 'brandId',
             page: 0,
             recordsPerPage: 0,
@@ -86,62 +92,48 @@ final class CampaignTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CampaignListResponse::class, $result);
+        $this->assertInstanceOf(PerPagePaginationV2::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(CampaignListResponse::class, $item);
+        }
     }
 
     #[Test]
-    public function testDelete(): void
+    public function testAcceptSharing(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->number10dlc->campaign->delete('campaignId');
+        $result = $this->client->number10dlc->campaign->acceptSharing('C26F1KLZN');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CampaignDeleteResponse::class, $result);
+        $this->assertIsArray($result);
     }
 
     #[Test]
-    public function testAppeal(): void
+    public function testDeactivate(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->number10dlc->campaign->appeal(
-            '5eb13888-32b7-4cab-95e6-d834dde21d64',
-            appealReason: 'The website has been updated to include the required privacy policy and terms of service.',
-        );
+        $result = $this->client->number10dlc->campaign->deactivate('campaignId');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CampaignAppealResponse::class, $result);
+        $this->assertInstanceOf(CampaignDeactivateResponse::class, $result);
     }
 
     #[Test]
-    public function testAppealWithOptionalParams(): void
+    public function testGetMnoMetadata(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->number10dlc->campaign->appeal(
-            '5eb13888-32b7-4cab-95e6-d834dde21d64',
-            appealReason: 'The website has been updated to include the required privacy policy and terms of service.',
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CampaignAppealResponse::class, $result);
-    }
-
-    #[Test]
-    public function testRetrieveMnoMetadata(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
-        $result = $this->client->number10dlc->campaign->retrieveMnoMetadata(
+        $result = $this->client->number10dlc->campaign->getMnoMetadata(
             'campaignId'
         );
 
@@ -150,13 +142,13 @@ final class CampaignTest extends TestCase
     }
 
     #[Test]
-    public function testRetrieveOperationStatus(): void
+    public function testGetOperationStatus(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->number10dlc->campaign->retrieveOperationStatus(
+        $result = $this->client->number10dlc->campaign->getOperationStatus(
             'campaignId'
         );
 
@@ -165,17 +157,49 @@ final class CampaignTest extends TestCase
     }
 
     #[Test]
-    public function testRetrieveSharing(): void
+    public function testGetSharingStatus(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->number10dlc->campaign->retrieveSharing(
+        $result = $this->client->number10dlc->campaign->getSharingStatus(
             'campaignId'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CampaignGetSharingResponse::class, $result);
+        $this->assertInstanceOf(CampaignGetSharingStatusResponse::class, $result);
+    }
+
+    #[Test]
+    public function testSubmitAppeal(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->number10dlc->campaign->submitAppeal(
+            '5eb13888-32b7-4cab-95e6-d834dde21d64',
+            appealReason: 'The website has been updated to include the required privacy policy and terms of service.',
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CampaignSubmitAppealResponse::class, $result);
+    }
+
+    #[Test]
+    public function testSubmitAppealWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->number10dlc->campaign->submitAppeal(
+            '5eb13888-32b7-4cab-95e6-d834dde21d64',
+            appealReason: 'The website has been updated to include the required privacy policy and terms of service.',
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CampaignSubmitAppealResponse::class, $result);
     }
 }

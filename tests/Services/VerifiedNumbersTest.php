@@ -6,8 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\VerifiedNumbers\VerifiedNumber;
 use Telnyx\VerifiedNumbers\VerifiedNumberDataWrapper;
-use Telnyx\VerifiedNumbers\VerifiedNumberListResponse;
 use Telnyx\VerifiedNumbers\VerifiedNumberNewResponse;
 use Tests\UnsupportedMockTests;
 
@@ -82,10 +83,15 @@ final class VerifiedNumbersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->verifiedNumbers->list();
+        $page = $this->client->verifiedNumbers->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(VerifiedNumberListResponse::class, $result);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(VerifiedNumber::class, $item);
+        }
     }
 
     #[Test]

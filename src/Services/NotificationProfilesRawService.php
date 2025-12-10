@@ -7,11 +7,12 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\NotificationProfiles\NotificationProfile;
 use Telnyx\NotificationProfiles\NotificationProfileCreateParams;
 use Telnyx\NotificationProfiles\NotificationProfileDeleteResponse;
 use Telnyx\NotificationProfiles\NotificationProfileGetResponse;
 use Telnyx\NotificationProfiles\NotificationProfileListParams;
-use Telnyx\NotificationProfiles\NotificationProfileListResponse;
 use Telnyx\NotificationProfiles\NotificationProfileNewResponse;
 use Telnyx\NotificationProfiles\NotificationProfileUpdateParams;
 use Telnyx\NotificationProfiles\NotificationProfileUpdateResponse;
@@ -85,7 +86,7 @@ final class NotificationProfilesRawService implements NotificationProfilesRawCon
      *
      * Update a notification profile.
      *
-     * @param string $id the id of the resource
+     * @param string $notificationProfileID the id of the resource
      * @param array{name?: string}|NotificationProfileUpdateParams $params
      *
      * @return BaseResponse<NotificationProfileUpdateResponse>
@@ -93,7 +94,7 @@ final class NotificationProfilesRawService implements NotificationProfilesRawCon
      * @throws APIException
      */
     public function update(
-        string $id,
+        string $notificationProfileID,
         array|NotificationProfileUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse {
@@ -105,7 +106,7 @@ final class NotificationProfilesRawService implements NotificationProfilesRawCon
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
-            path: ['notification_profiles/%1$s', $id],
+            path: ['notification_profiles/%1$s', $notificationProfileID],
             body: (object) $parsed,
             options: $options,
             convert: NotificationProfileUpdateResponse::class,
@@ -121,7 +122,7 @@ final class NotificationProfilesRawService implements NotificationProfilesRawCon
      *   page?: array{number?: int, size?: int}
      * }|NotificationProfileListParams $params
      *
-     * @return BaseResponse<NotificationProfileListResponse>
+     * @return BaseResponse<DefaultPagination<NotificationProfile>>
      *
      * @throws APIException
      */
@@ -140,7 +141,8 @@ final class NotificationProfilesRawService implements NotificationProfilesRawCon
             path: 'notification_profiles',
             query: $parsed,
             options: $options,
-            convert: NotificationProfileListResponse::class,
+            convert: NotificationProfile::class,
+            page: DefaultPagination::class,
         );
     }
 

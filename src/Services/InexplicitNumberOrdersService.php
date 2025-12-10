@@ -7,11 +7,12 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPaginationForInexplicitNumberOrders;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams\OrderingGroup\CountryISO;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams\OrderingGroup\Strategy;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderGetResponse;
-use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderListResponse;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderNewResponse;
+use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\InexplicitNumberOrdersContract;
 
@@ -108,13 +109,15 @@ final class InexplicitNumberOrdersService implements InexplicitNumberOrdersContr
      * @param int $pageNumber The page number to load
      * @param int $pageSize The size of the page
      *
+     * @return DefaultFlatPaginationForInexplicitNumberOrders<InexplicitNumberOrderResponse,>
+     *
      * @throws APIException
      */
     public function list(
         int $pageNumber = 1,
         int $pageSize = 20,
         ?RequestOptions $requestOptions = null,
-    ): InexplicitNumberOrderListResponse {
+    ): DefaultFlatPaginationForInexplicitNumberOrders {
         $params = Util::removeNulls(
             ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
         );

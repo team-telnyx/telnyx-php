@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
+use Telnyx\CallControlApplications\CallControlApplication;
 use Telnyx\CallControlApplications\CallControlApplicationCreateParams;
 use Telnyx\CallControlApplications\CallControlApplicationCreateParams\AnchorsiteOverride;
 use Telnyx\CallControlApplications\CallControlApplicationCreateParams\DtmfType;
@@ -17,7 +18,6 @@ use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter\Produ
 use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter\Status;
 use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter\Type;
 use Telnyx\CallControlApplications\CallControlApplicationListParams\Sort;
-use Telnyx\CallControlApplications\CallControlApplicationListResponse;
 use Telnyx\CallControlApplications\CallControlApplicationNewResponse;
 use Telnyx\CallControlApplications\CallControlApplicationOutbound;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateParams;
@@ -25,6 +25,7 @@ use Telnyx\CallControlApplications\CallControlApplicationUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CallControlApplicationsRawContract;
 
@@ -196,7 +197,7 @@ final class CallControlApplicationsRawService implements CallControlApplications
      *   sort?: 'created_at'|'connection_name'|'active'|Sort,
      * }|CallControlApplicationListParams $params
      *
-     * @return BaseResponse<CallControlApplicationListResponse>
+     * @return BaseResponse<DefaultPagination<CallControlApplication>>
      *
      * @throws APIException
      */
@@ -215,7 +216,8 @@ final class CallControlApplicationsRawService implements CallControlApplications
             path: 'call_control_applications',
             query: $parsed,
             options: $options,
-            convert: CallControlApplicationListResponse::class,
+            convert: CallControlApplication::class,
+            page: DefaultPagination::class,
         );
     }
 

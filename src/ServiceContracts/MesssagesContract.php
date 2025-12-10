@@ -58,7 +58,7 @@ interface MesssagesContract
      *                 description?: string,
      *               },
      *               postbackData?: string,
-     *               shareLocationAction?: mixed,
+     *               shareLocationAction?: array<string,mixed>,
      *               text?: string,
      *               viewLocationAction?: array{
      *                 label?: string,
@@ -98,7 +98,7 @@ interface MesssagesContract
      *                 description?: string,
      *               },
      *               postbackData?: string,
-     *               shareLocationAction?: mixed,
+     *               shareLocationAction?: array<string,mixed>,
      *               text?: string,
      *               viewLocationAction?: array{
      *                 label?: string,
@@ -131,7 +131,7 @@ interface MesssagesContract
      *           description?: string,
      *         },
      *         postbackData?: string,
-     *         shareLocationAction?: mixed,
+     *         shareLocationAction?: array<string,mixed>,
      *         text?: string,
      *         viewLocationAction?: array{
      *           label?: string,

@@ -8,10 +8,11 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\OAuthGrants\OAuthGrant;
 use Telnyx\OAuthGrants\OAuthGrantDeleteResponse;
 use Telnyx\OAuthGrants\OAuthGrantGetResponse;
 use Telnyx\OAuthGrants\OAuthGrantListParams;
-use Telnyx\OAuthGrants\OAuthGrantListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\OAuthGrantsRawContract;
 
@@ -54,7 +55,7 @@ final class OAuthGrantsRawService implements OAuthGrantsRawContract
      *
      * @param array{pageNumber?: int, pageSize?: int}|OAuthGrantListParams $params
      *
-     * @return BaseResponse<OAuthGrantListResponse>
+     * @return BaseResponse<DefaultFlatPagination<OAuthGrant>>
      *
      * @throws APIException
      */
@@ -76,7 +77,8 @@ final class OAuthGrantsRawService implements OAuthGrantsRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: OAuthGrantListResponse::class,
+            convert: OAuthGrant::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

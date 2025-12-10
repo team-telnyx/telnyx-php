@@ -6,9 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
+use Telnyx\NotificationProfiles\NotificationProfile;
 use Telnyx\NotificationProfiles\NotificationProfileDeleteResponse;
 use Telnyx\NotificationProfiles\NotificationProfileGetResponse;
-use Telnyx\NotificationProfiles\NotificationProfileListResponse;
 use Telnyx\NotificationProfiles\NotificationProfileNewResponse;
 use Telnyx\NotificationProfiles\NotificationProfileUpdateResponse;
 use Tests\UnsupportedMockTests;
@@ -81,10 +82,15 @@ final class NotificationProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->notificationProfiles->list();
+        $page = $this->client->notificationProfiles->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(NotificationProfileListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(NotificationProfile::class, $item);
+        }
     }
 
     #[Test]

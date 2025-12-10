@@ -16,7 +16,7 @@ interface OsrContract
      *
      * @throws APIException
      */
-    public function retrieveAttributes(
+    public function getAttributes(
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): array;

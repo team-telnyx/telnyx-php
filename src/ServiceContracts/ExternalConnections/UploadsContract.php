@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\ExternalConnections;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\ExternalConnections\Uploads\Upload;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams\AdditionalUsage;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams\Usage;
 use Telnyx\ExternalConnections\Uploads\UploadGetResponse;
 use Telnyx\ExternalConnections\Uploads\UploadListParams\Filter\Status\Eq;
-use Telnyx\ExternalConnections\Uploads\UploadListResponse;
 use Telnyx\ExternalConnections\Uploads\UploadNewResponse;
 use Telnyx\ExternalConnections\Uploads\UploadPendingCountResponse;
 use Telnyx\ExternalConnections\Uploads\UploadRefreshStatusResponse;
@@ -70,6 +71,8 @@ interface UploadsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
+     * @return DefaultPagination<Upload>
+     *
      * @throws APIException
      */
     public function list(
@@ -77,7 +80,7 @@ interface UploadsContract
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): UploadListResponse;
+    ): DefaultPagination;
 
     /**
      * @api

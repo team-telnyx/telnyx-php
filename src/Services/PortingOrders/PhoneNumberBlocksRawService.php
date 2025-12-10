@@ -7,17 +7,18 @@ namespace Telnyx\Services\PortingOrders;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockDeleteParams;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockDeleteResponse;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\ActivationStatus;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\PortabilityStatus;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\UnionMember0;
+use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\PortingOrderSingleStatus;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\UnionMember1;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Sort\Value;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListResponse;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockNewResponse;
+use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\PhoneNumberBlocksRawContract;
 
@@ -76,14 +77,14 @@ final class PhoneNumberBlocksRawService implements PhoneNumberBlocksRawContract
      *     phoneNumber?: list<string>,
      *     portabilityStatus?: 'pending'|'confirmed'|'provisional'|PortabilityStatus,
      *     portingOrderID?: list<string>,
-     *     status?: 'draft'|'in-process'|'submitted'|'exception'|'foc-date-confirmed'|'cancel-pending'|'ported'|'cancelled'|UnionMember0|list<'draft'|'in-process'|'submitted'|'exception'|'foc-date-confirmed'|'cancel-pending'|'ported'|'cancelled'|UnionMember1>,
+     *     status?: 'draft'|'in-process'|'submitted'|'exception'|'foc-date-confirmed'|'cancel-pending'|'ported'|'cancelled'|PortingOrderSingleStatus|list<'draft'|'in-process'|'submitted'|'exception'|'foc-date-confirmed'|'cancel-pending'|'ported'|'cancelled'|UnionMember1>,
      *     supportKey?: string|list<string>,
      *   },
      *   page?: array{number?: int, size?: int},
      *   sort?: array{value?: '-created_at'|'created_at'|Value},
      * }|PhoneNumberBlockListParams $params
      *
-     * @return BaseResponse<PhoneNumberBlockListResponse>
+     * @return BaseResponse<DefaultPagination<PortingPhoneNumberBlock>>
      *
      * @throws APIException
      */
@@ -103,7 +104,8 @@ final class PhoneNumberBlocksRawService implements PhoneNumberBlocksRawContract
             path: ['porting_orders/%1$s/phone_number_blocks', $portingOrderID],
             query: $parsed,
             options: $options,
-            convert: PhoneNumberBlockListResponse::class,
+            convert: PortingPhoneNumberBlock::class,
+            page: DefaultPagination::class,
         );
     }
 

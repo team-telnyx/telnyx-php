@@ -17,7 +17,7 @@ interface ActionsRawContract
     /**
      * @api
      *
-     * @param string $id_ the UUID of the address that should be accepted
+     * @param string $addressUuid the UUID of the address that should be accepted
      * @param array<mixed>|ActionAcceptSuggestionsParams $params
      *
      * @return BaseResponse<ActionAcceptSuggestionsResponse>
@@ -25,7 +25,7 @@ interface ActionsRawContract
      * @throws APIException
      */
     public function acceptSuggestions(
-        string $id_,
+        string $addressUuid,
         array|ActionAcceptSuggestionsParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse;

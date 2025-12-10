@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   createdAt: \DateTimeInterface,
  *   instructions: string,
  *   insightType?: value-of<InsightType>|null,
- *   jsonSchema?: mixed|string|null,
+ *   jsonSchema?: string|null|array<string,mixed>,
  *   name?: string|null,
  *   webhook?: string|null,
  * }
@@ -43,10 +43,10 @@ final class InsightTemplate implements BaseModel
     /**
      * If specified, the output will follow the JSON schema.
      *
-     * @var mixed|string|null $jsonSchema
+     * @var string|array<string,mixed>|null $jsonSchema
      */
     #[Optional('json_schema', union: JsonSchema::class)]
-    public mixed $jsonSchema;
+    public string|array|null $jsonSchema;
 
     #[Optional]
     public ?string $name;
@@ -79,14 +79,14 @@ final class InsightTemplate implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param InsightType|value-of<InsightType> $insightType
-     * @param mixed|string $jsonSchema
+     * @param string|array<string,mixed> $jsonSchema
      */
     public static function with(
         string $id,
         \DateTimeInterface $createdAt,
         string $instructions,
         InsightType|string|null $insightType = null,
-        mixed $jsonSchema = null,
+        string|array|null $jsonSchema = null,
         ?string $name = null,
         ?string $webhook = null,
     ): self {
@@ -142,9 +142,9 @@ final class InsightTemplate implements BaseModel
     /**
      * If specified, the output will follow the JSON schema.
      *
-     * @param mixed|string $jsonSchema
+     * @param string|array<string,mixed> $jsonSchema
      */
-    public function withJsonSchema(mixed $jsonSchema): self
+    public function withJsonSchema(string|array $jsonSchema): self
     {
         $self = clone $this;
         $self['jsonSchema'] = $jsonSchema;

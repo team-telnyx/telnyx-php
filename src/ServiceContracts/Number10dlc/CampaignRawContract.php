@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Number10dlc;
 
-use Telnyx\Campaign\TelnyxCampaignCsp;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Number10dlc\Campaign\CampaignAppealParams;
-use Telnyx\Number10dlc\Campaign\CampaignAppealResponse;
-use Telnyx\Number10dlc\Campaign\CampaignDeleteResponse;
+use Telnyx\Number10dlc\Campaign\CampaignDeactivateResponse;
 use Telnyx\Number10dlc\Campaign\CampaignGetMnoMetadataResponse;
-use Telnyx\Number10dlc\Campaign\CampaignGetSharingResponse;
+use Telnyx\Number10dlc\Campaign\CampaignGetSharingStatusResponse;
 use Telnyx\Number10dlc\Campaign\CampaignListParams;
 use Telnyx\Number10dlc\Campaign\CampaignListResponse;
+use Telnyx\Number10dlc\Campaign\CampaignSubmitAppealParams;
+use Telnyx\Number10dlc\Campaign\CampaignSubmitAppealResponse;
 use Telnyx\Number10dlc\Campaign\CampaignUpdateParams;
+use Telnyx\Number10dlc\Campaign\TelnyxCampaignCsp;
+use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 
 interface CampaignRawContract
@@ -51,7 +52,7 @@ interface CampaignRawContract
      *
      * @param array<mixed>|CampaignListParams $params
      *
-     * @return BaseResponse<CampaignListResponse>
+     * @return BaseResponse<PerPagePaginationV2<CampaignListResponse>>
      *
      * @throws APIException
      */
@@ -63,11 +64,13 @@ interface CampaignRawContract
     /**
      * @api
      *
-     * @return BaseResponse<CampaignDeleteResponse>
+     * @param string $campaignID TCR's ID for the campaign to import
+     *
+     * @return BaseResponse<array<string,mixed>>
      *
      * @throws APIException
      */
-    public function delete(
+    public function acceptSharing(
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): BaseResponse;
@@ -75,17 +78,13 @@ interface CampaignRawContract
     /**
      * @api
      *
-     * @param string $campaignID The Telnyx campaign identifier
-     * @param array<mixed>|CampaignAppealParams $params
-     *
-     * @return BaseResponse<CampaignAppealResponse>
+     * @return BaseResponse<CampaignDeactivateResponse>
      *
      * @throws APIException
      */
-    public function appeal(
+    public function deactivate(
         string $campaignID,
-        array|CampaignAppealParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -97,7 +96,7 @@ interface CampaignRawContract
      *
      * @throws APIException
      */
-    public function retrieveMnoMetadata(
+    public function getMnoMetadata(
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): BaseResponse;
@@ -109,7 +108,7 @@ interface CampaignRawContract
      *
      * @throws APIException
      */
-    public function retrieveOperationStatus(
+    public function getOperationStatus(
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): BaseResponse;
@@ -119,12 +118,28 @@ interface CampaignRawContract
      *
      * @param string $campaignID ID of the campaign in question
      *
-     * @return BaseResponse<CampaignGetSharingResponse>
+     * @return BaseResponse<CampaignGetSharingStatusResponse>
      *
      * @throws APIException
      */
-    public function retrieveSharing(
+    public function getSharingStatus(
         string $campaignID,
         ?RequestOptions $requestOptions = null
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $campaignID The Telnyx campaign identifier
+     * @param array<mixed>|CampaignSubmitAppealParams $params
+     *
+     * @return BaseResponse<CampaignSubmitAppealResponse>
+     *
+     * @throws APIException
+     */
+    public function submitAppeal(
+        string $campaignID,
+        array|CampaignSubmitAppealParams $params,
+        ?RequestOptions $requestOptions = null,
     ): BaseResponse;
 }

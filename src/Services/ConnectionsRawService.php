@@ -13,6 +13,7 @@ use Telnyx\Connections\ConnectionListParams\Sort;
 use Telnyx\Connections\ConnectionListResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ConnectionsRawContract;
 
@@ -63,7 +64,7 @@ final class ConnectionsRawService implements ConnectionsRawContract
      *   sort?: 'created_at'|'connection_name'|'active'|Sort,
      * }|ConnectionListParams $params
      *
-     * @return BaseResponse<ConnectionListResponse>
+     * @return BaseResponse<DefaultPagination<ConnectionListResponse>>
      *
      * @throws APIException
      */
@@ -83,6 +84,7 @@ final class ConnectionsRawService implements ConnectionsRawContract
             query: $parsed,
             options: $options,
             convert: ConnectionListResponse::class,
+            page: DefaultPagination::class,
         );
     }
 
@@ -98,7 +100,7 @@ final class ConnectionsRawService implements ConnectionsRawContract
      *   },
      * }|ConnectionListActiveCallsParams $params
      *
-     * @return BaseResponse<ConnectionListActiveCallsResponse>
+     * @return BaseResponse<DefaultPagination<ConnectionListActiveCallsResponse>>
      *
      * @throws APIException
      */
@@ -119,6 +121,7 @@ final class ConnectionsRawService implements ConnectionsRawContract
             query: $parsed,
             options: $options,
             convert: ConnectionListActiveCallsResponse::class,
+            page: DefaultPagination::class,
         );
     }
 }

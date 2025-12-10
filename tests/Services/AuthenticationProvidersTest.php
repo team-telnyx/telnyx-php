@@ -5,12 +5,13 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AuthenticationProviders\AuthenticationProvider;
 use Telnyx\AuthenticationProviders\AuthenticationProviderDeleteResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderGetResponse;
-use Telnyx\AuthenticationProviders\AuthenticationProviderListResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderNewResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateResponse;
 use Telnyx\Client;
+use Telnyx\DefaultFlatPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -112,10 +113,15 @@ final class AuthenticationProvidersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->authenticationProviders->list();
+        $page = $this->client->authenticationProviders->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(AuthenticationProviderListResponse::class, $result);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(AuthenticationProvider::class, $item);
+        }
     }
 
     #[Test]

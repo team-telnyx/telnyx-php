@@ -6,8 +6,8 @@ namespace Telnyx\ServiceContracts\Number10dlc\Campaign;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Number10dlc\Campaign\Usecase\UsecaseGetCostParams;
 use Telnyx\Number10dlc\Campaign\Usecase\UsecaseGetCostResponse;
-use Telnyx\Number10dlc\Campaign\Usecase\UsecaseRetrieveCostParams;
 use Telnyx\RequestOptions;
 
 interface UsecaseRawContract
@@ -15,14 +15,14 @@ interface UsecaseRawContract
     /**
      * @api
      *
-     * @param array<mixed>|UsecaseRetrieveCostParams $params
+     * @param array<mixed>|UsecaseGetCostParams $params
      *
      * @return BaseResponse<UsecaseGetCostResponse>
      *
      * @throws APIException
      */
-    public function retrieveCost(
-        array|UsecaseRetrieveCostParams $params,
-        ?RequestOptions $requestOptions = null,
+    public function getCost(
+        array|UsecaseGetCostParams $params,
+        ?RequestOptions $requestOptions = null
     ): BaseResponse;
 }

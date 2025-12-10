@@ -6,6 +6,7 @@ namespace Telnyx\ServiceContracts\Portouts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\Portouts\Events\EventGetResponse;
 use Telnyx\Portouts\Events\EventListParams;
 use Telnyx\Portouts\Events\EventListResponse;
@@ -32,7 +33,7 @@ interface EventsRawContract
      *
      * @param array<mixed>|EventListParams $params
      *
-     * @return BaseResponse<EventListResponse>
+     * @return BaseResponse<DefaultPagination<EventListResponse>>
      *
      * @throws APIException
      */

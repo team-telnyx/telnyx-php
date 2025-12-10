@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
 use Telnyx\WireguardInterfaces\WireguardInterfaceDeleteResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceGetResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceListResponse;
@@ -38,8 +39,7 @@ final class WireguardInterfacesTest extends TestCase
         }
 
         $result = $this->client->wireguardInterfaces->create(
-            networkID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            regionCode: 'ashburn-va',
+            regionCode: 'ashburn-va'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -54,10 +54,10 @@ final class WireguardInterfacesTest extends TestCase
         }
 
         $result = $this->client->wireguardInterfaces->create(
-            networkID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
             regionCode: 'ashburn-va',
             enableSipTrunking: false,
             name: 'test interface',
+            networkID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -86,10 +86,15 @@ final class WireguardInterfacesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->wireguardInterfaces->list();
+        $page = $this->client->wireguardInterfaces->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(WireguardInterfaceListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(WireguardInterfaceListResponse::class, $item);
+        }
     }
 
     #[Test]

@@ -5,8 +5,8 @@ namespace Tests\Services\Number10dlc;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Telnyx\Campaign\TelnyxCampaignCsp;
 use Telnyx\Client;
+use Telnyx\Number10dlc\Campaign\TelnyxCampaignCsp;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -28,13 +28,13 @@ final class CampaignBuilderTest extends TestCase
     }
 
     #[Test]
-    public function testCampaignBuilder(): void
+    public function testSubmit(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->number10dlc->campaignBuilder->campaignBuilder(
+        $result = $this->client->number10dlc->campaignBuilder->submit(
             brandID: 'brandId',
             description: 'description',
             usecase: 'usecase'
@@ -45,13 +45,13 @@ final class CampaignBuilderTest extends TestCase
     }
 
     #[Test]
-    public function testCampaignBuilderWithOptionalParams(): void
+    public function testSubmitWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->number10dlc->campaignBuilder->campaignBuilder(
+        $result = $this->client->number10dlc->campaignBuilder->submit(
             brandID: 'brandId',
             description: 'description',
             usecase: 'usecase',

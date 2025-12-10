@@ -7,13 +7,14 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddress;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressCreateParams;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressCreateParams\CountryCode;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressDeleteResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressGetResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Filter\Status;
-use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DynamicEmergencyAddressesRawContract;
@@ -104,7 +105,7 @@ final class DynamicEmergencyAddressesRawService implements DynamicEmergencyAddre
      *   page?: array{number?: int, size?: int},
      * }|DynamicEmergencyAddressListParams $params
      *
-     * @return BaseResponse<DynamicEmergencyAddressListResponse>
+     * @return BaseResponse<DefaultPagination<DynamicEmergencyAddress>>
      *
      * @throws APIException
      */
@@ -123,7 +124,8 @@ final class DynamicEmergencyAddressesRawService implements DynamicEmergencyAddre
             path: 'dynamic_emergency_addresses',
             query: $parsed,
             options: $options,
-            convert: DynamicEmergencyAddressListResponse::class,
+            convert: DynamicEmergencyAddress::class,
+            page: DefaultPagination::class,
         );
     }
 

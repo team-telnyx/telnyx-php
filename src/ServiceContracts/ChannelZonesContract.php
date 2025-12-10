@@ -7,6 +7,7 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\ChannelZones\ChannelZoneListResponse;
 use Telnyx\ChannelZones\ChannelZoneUpdateResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
 interface ChannelZonesContract
@@ -32,10 +33,12 @@ interface ChannelZonesContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
+     * @return DefaultPagination<ChannelZoneListResponse>
+     *
      * @throws APIException
      */
     public function list(
         ?array $page = null,
         ?RequestOptions $requestOptions = null
-    ): ChannelZoneListResponse;
+    ): DefaultPagination;
 }

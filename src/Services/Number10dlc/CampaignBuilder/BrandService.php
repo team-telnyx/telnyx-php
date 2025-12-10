@@ -7,7 +7,7 @@ namespace Telnyx\Services\Number10dlc\CampaignBuilder;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\Number10dlc\CampaignBuilder\Brand\BrandGetResponse;
+use Telnyx\Number10dlc\CampaignBuilder\Brand\BrandQualifyByUsecaseResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Number10dlc\CampaignBuilder\BrandContract;
 
@@ -33,15 +33,15 @@ final class BrandService implements BrandContract
      *
      * @throws APIException
      */
-    public function retrieve(
+    public function qualifyByUsecase(
         string $usecase,
         string $brandID,
         ?RequestOptions $requestOptions = null
-    ): BrandGetResponse {
+    ): BrandQualifyByUsecaseResponse {
         $params = Util::removeNulls(['brandID' => $brandID]);
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->retrieve($usecase, params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->qualifyByUsecase($usecase, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

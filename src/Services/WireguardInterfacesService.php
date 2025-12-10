@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WireguardInterfacesContract;
 use Telnyx\WireguardInterfaces\WireguardInterfaceDeleteResponse;
@@ -34,26 +35,26 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
      *
      * Create a new WireGuard Interface. Current limitation of 10 interfaces per user can be created.
      *
-     * @param string $networkID the id of the network associated with the interface
      * @param string $regionCode the region the interface should be deployed to
      * @param bool $enableSipTrunking enable SIP traffic forwarding over VPN interface
      * @param string $name a user specified name for the interface
+     * @param string $networkID the id of the network associated with the interface
      *
      * @throws APIException
      */
     public function create(
-        string $networkID,
         string $regionCode,
         ?bool $enableSipTrunking = null,
         ?string $name = null,
+        ?string $networkID = null,
         ?RequestOptions $requestOptions = null,
     ): WireguardInterfaceNewResponse {
         $params = Util::removeNulls(
             [
-                'networkID' => $networkID,
                 'regionCode' => $regionCode,
                 'enableSipTrunking' => $enableSipTrunking,
                 'name' => $name,
+                'networkID' => $networkID,
             ],
         );
 
@@ -94,13 +95,15 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
+     * @return DefaultPagination<WireguardInterfaceListResponse>
+     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): WireguardInterfaceListResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
         // @phpstan-ignore-next-line argument.type

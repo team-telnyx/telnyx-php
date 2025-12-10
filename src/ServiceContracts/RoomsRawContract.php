@@ -6,11 +6,12 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
+use Telnyx\Rooms\Room;
 use Telnyx\Rooms\RoomCreateParams;
 use Telnyx\Rooms\RoomGetResponse;
 use Telnyx\Rooms\RoomListParams;
-use Telnyx\Rooms\RoomListResponse;
 use Telnyx\Rooms\RoomNewResponse;
 use Telnyx\Rooms\RoomRetrieveParams;
 use Telnyx\Rooms\RoomUpdateParams;
@@ -69,7 +70,7 @@ interface RoomsRawContract
      *
      * @param array<mixed>|RoomListParams $params
      *
-     * @return BaseResponse<RoomListResponse>
+     * @return BaseResponse<DefaultPagination<Room>>
      *
      * @throws APIException
      */

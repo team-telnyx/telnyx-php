@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Filter\AssociatedRecordType\Eq;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListResponse;
 use Telnyx\RequestOptions;
@@ -30,11 +31,13 @@ interface NotificationEventConditionsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
+     * @return DefaultPagination<NotificationEventConditionListResponse>
+     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): NotificationEventConditionListResponse;
+    ): DefaultPagination;
 }

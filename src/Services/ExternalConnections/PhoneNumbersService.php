@@ -7,8 +7,9 @@ namespace Telnyx\Services\ExternalConnections;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
+use Telnyx\ExternalConnections\PhoneNumbers\ExternalConnectionPhoneNumber;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberGetResponse;
-use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListResponse;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ExternalConnections\PhoneNumbersContract;
@@ -91,6 +92,8 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
+     * @return DefaultPagination<ExternalConnectionPhoneNumber>
+     *
      * @throws APIException
      */
     public function list(
@@ -98,7 +101,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): PhoneNumberListResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
         // @phpstan-ignore-next-line argument.type

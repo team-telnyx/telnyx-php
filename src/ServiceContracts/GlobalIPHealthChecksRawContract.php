@@ -6,6 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckCreateParams;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckDeleteResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckGetResponse;
@@ -49,7 +50,7 @@ interface GlobalIPHealthChecksRawContract
      *
      * @param array<mixed>|GlobalIPHealthCheckListParams $params
      *
-     * @return BaseResponse<GlobalIPHealthCheckListResponse>
+     * @return BaseResponse<DefaultPagination<GlobalIPHealthCheckListResponse>>
      *
      * @throws APIException
      */

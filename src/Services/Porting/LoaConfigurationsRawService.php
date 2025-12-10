@@ -7,14 +7,15 @@ namespace Telnyx\Services\Porting;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationGetResponse;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationListParams;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationListResponse;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationNewResponse;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateResponse;
+use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Porting\LoaConfigurationsRawContract;
 
@@ -147,7 +148,7 @@ final class LoaConfigurationsRawService implements LoaConfigurationsRawContract
      *   page?: array{number?: int, size?: int}
      * }|LoaConfigurationListParams $params
      *
-     * @return BaseResponse<LoaConfigurationListResponse>
+     * @return BaseResponse<DefaultPagination<PortingLoaConfiguration>>
      *
      * @throws APIException
      */
@@ -166,7 +167,8 @@ final class LoaConfigurationsRawService implements LoaConfigurationsRawContract
             path: 'porting/loa_configurations',
             query: $parsed,
             options: $options,
-            convert: LoaConfigurationListResponse::class,
+            convert: PortingLoaConfiguration::class,
+            page: DefaultPagination::class,
         );
     }
 

@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PhoneNumbers;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\PhoneNumbers\CsvDownloads\CsvDownload;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\CsvFormat;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter\Status;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter\VoiceUsagePaymentMethod;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadGetResponse;
-use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadListResponse;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadNewResponse;
 use Telnyx\RequestOptions;
 
@@ -61,10 +62,12 @@ interface CsvDownloadsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
+     * @return DefaultPagination<CsvDownload>
+     *
      * @throws APIException
      */
     public function list(
         ?array $page = null,
         ?RequestOptions $requestOptions = null
-    ): CsvDownloadListResponse;
+    ): DefaultPagination;
 }

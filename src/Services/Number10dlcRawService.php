@@ -7,9 +7,9 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Number10dlc\Number10dlcGetResponse;
-use Telnyx\Number10dlc\Number10dlcGetResponse\EnumPaginatedResponse;
-use Telnyx\Number10dlc\Number10dlcRetrieveParams\Endpoint;
+use Telnyx\Number10dlc\Number10dlcGetEnumParams\Endpoint;
+use Telnyx\Number10dlc\Number10dlcGetEnumResponse;
+use Telnyx\Number10dlc\Number10dlcGetEnumResponse\EnumPaginatedResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Number10dlcRawContract;
 
@@ -32,7 +32,7 @@ final class Number10dlcRawService implements Number10dlcRawContract
      *
      * @throws APIException
      */
-    public function retrieve(
+    public function getEnum(
         Endpoint|string $endpoint,
         ?RequestOptions $requestOptions = null
     ): BaseResponse {
@@ -41,7 +41,7 @@ final class Number10dlcRawService implements Number10dlcRawContract
             method: 'get',
             path: ['10dlc/enum/%1$s', $endpoint],
             options: $requestOptions,
-            convert: Number10dlcGetResponse::class,
+            convert: Number10dlcGetEnumResponse::class,
         );
     }
 }

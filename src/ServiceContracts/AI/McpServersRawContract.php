@@ -7,12 +7,13 @@ namespace Telnyx\ServiceContracts\AI;
 use Telnyx\AI\McpServers\McpServerCreateParams;
 use Telnyx\AI\McpServers\McpServerGetResponse;
 use Telnyx\AI\McpServers\McpServerListParams;
-use Telnyx\AI\McpServers\McpServerListResponseItem;
+use Telnyx\AI\McpServers\McpServerListResponse;
 use Telnyx\AI\McpServers\McpServerNewResponse;
 use Telnyx\AI\McpServers\McpServerUpdateParams;
 use Telnyx\AI\McpServers\McpServerUpdateResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPaginationTopLevelArray;
 use Telnyx\RequestOptions;
 
 interface McpServersRawContract
@@ -63,7 +64,7 @@ interface McpServersRawContract
      *
      * @param array<mixed>|McpServerListParams $params
      *
-     * @return BaseResponse<list<McpServerListResponseItem>>
+     * @return BaseResponse<DefaultFlatPaginationTopLevelArray<McpServerListResponse>>
      *
      * @throws APIException
      */

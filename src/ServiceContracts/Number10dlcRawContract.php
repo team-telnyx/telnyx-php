@@ -6,8 +6,8 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Number10dlc\Number10dlcGetResponse\EnumPaginatedResponse;
-use Telnyx\Number10dlc\Number10dlcRetrieveParams\Endpoint;
+use Telnyx\Number10dlc\Number10dlcGetEnumParams\Endpoint;
+use Telnyx\Number10dlc\Number10dlcGetEnumResponse\EnumPaginatedResponse;
 use Telnyx\RequestOptions;
 
 interface Number10dlcRawContract
@@ -21,7 +21,7 @@ interface Number10dlcRawContract
      *
      * @throws APIException
      */
-    public function retrieve(
+    public function getEnum(
         Endpoint|string $endpoint,
         ?RequestOptions $requestOptions = null
     ): BaseResponse;

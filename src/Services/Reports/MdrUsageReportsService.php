@@ -7,11 +7,12 @@ namespace Telnyx\Services\Reports;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\Reports\MdrUsageReports\MdrUsageReport;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportCreateParams\AggregationType;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportDeleteResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportGetResponse;
-use Telnyx\Reports\MdrUsageReports\MdrUsageReportListResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Reports\MdrUsageReportsContract;
@@ -84,17 +85,18 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
      *
      * Fetch all messaging usage reports. Usage reports are aggregated messaging data for specified time period and breakdown
      *
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @return DefaultFlatPagination<MdrUsageReport>
      *
      * @throws APIException
      */
     public function list(
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null
-    ): MdrUsageReportListResponse {
-        $params = Util::removeNulls(['page' => $page]);
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        ?RequestOptions $requestOptions = null,
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
+            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

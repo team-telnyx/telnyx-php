@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\NotificationEvents\NotificationEventListParams;
 use Telnyx\NotificationEvents\NotificationEventListResponse;
 use Telnyx\RequestOptions;
@@ -29,7 +30,7 @@ final class NotificationEventsRawService implements NotificationEventsRawContrac
      *   page?: array{number?: int, size?: int}
      * }|NotificationEventListParams $params
      *
-     * @return BaseResponse<NotificationEventListResponse>
+     * @return BaseResponse<DefaultPagination<NotificationEventListResponse>>
      *
      * @throws APIException
      */
@@ -49,6 +50,7 @@ final class NotificationEventsRawService implements NotificationEventsRawContrac
             query: $parsed,
             options: $options,
             convert: NotificationEventListResponse::class,
+            page: DefaultPagination::class,
         );
     }
 }

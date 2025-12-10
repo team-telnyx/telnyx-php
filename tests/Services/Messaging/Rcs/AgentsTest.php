@@ -6,7 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\Messaging\Rcs\Agents\AgentListResponse;
+use Telnyx\DefaultPagination;
+use Telnyx\RcsAgents\RcsAgent;
 use Telnyx\RcsAgents\RcsAgentResponse;
 use Tests\UnsupportedMockTests;
 
@@ -61,9 +62,14 @@ final class AgentsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messaging->rcs->agents->list();
+        $page = $this->client->messaging->rcs->agents->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(AgentListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(RcsAgent::class, $item);
+        }
     }
 }

@@ -7,10 +7,11 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
+use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpoint;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointDeleteResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointGetResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams\Filter\Status;
-use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DynamicEmergencyEndpointsContract;
@@ -90,13 +91,15 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
+     * @return DefaultPagination<DynamicEmergencyEndpoint>
+     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): DynamicEmergencyEndpointListResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
         // @phpstan-ignore-next-line argument.type

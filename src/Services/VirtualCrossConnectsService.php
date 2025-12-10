@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VirtualCrossConnectsContract;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectCreateParams\CloudProvider;
@@ -36,15 +37,15 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
      *
      * Create a new Virtual Cross Connect.<br /><br />For AWS and GCE, you have the option of creating the primary connection first and the secondary connection later. You also have the option of disabling the primary and/or secondary connections at any time and later re-enabling them. With Azure, you do not have this option. Azure requires both the primary and secondary connections to be created at the same time and they can not be independantly disabled.
      *
+     * @param string $regionCode the region the interface should be deployed to
+     * @param float $bandwidthMbps The desired throughput in Megabits per Second (Mbps) for your Virtual Cross Connect.<br /><br />The available bandwidths can be found using the /virtual_cross_connect_regions endpoint.
      * @param float $bgpAsn The Border Gateway Protocol (BGP) Autonomous System Number (ASN). If null, value will be assigned by Telnyx.
      * @param 'aws'|'azure'|'gce'|CloudProvider $cloudProvider the Virtual Private Cloud with which you would like to establish a cross connect
      * @param string $cloudProviderRegion The region where your Virtual Private Cloud hosts are located.<br /><br />The available regions can be found using the /virtual_cross_connect_regions endpoint.
-     * @param string $networkID the id of the network associated with the interface
-     * @param string $primaryCloudAccountID The identifier for your Virtual Private Cloud. The number will be different based upon your Cloud provider.
-     * @param string $regionCode the region the interface should be deployed to
-     * @param float $bandwidthMbps The desired throughput in Megabits per Second (Mbps) for your Virtual Cross Connect.<br /><br />The available bandwidths can be found using the /virtual_cross_connect_regions endpoint.
      * @param string $name a user specified name for the interface
+     * @param string $networkID the id of the network associated with the interface
      * @param string $primaryBgpKey the authentication key for BGP peer configuration
+     * @param string $primaryCloudAccountID The identifier for your Virtual Private Cloud. The number will be different based upon your Cloud provider.
      * @param string $primaryCloudIP The IP address assigned for your side of the Virtual Cross Connect.<br /><br />If none is provided, one will be generated for you.<br /><br />This value should be null for GCE as Google will only inform you of your assigned IP once the connection has been accepted.
      * @param string $primaryTelnyxIP The IP address assigned to the Telnyx side of the Virtual Cross Connect.<br /><br />If none is provided, one will be generated for you.<br /><br />This value should be null for GCE as Google will only inform you of your assigned IP once the connection has been accepted.
      * @param string $secondaryBgpKey the authentication key for BGP peer configuration
@@ -55,15 +56,15 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
      * @throws APIException
      */
     public function create(
-        float $bgpAsn,
-        string|CloudProvider $cloudProvider,
-        string $cloudProviderRegion,
-        string $networkID,
-        string $primaryCloudAccountID,
         string $regionCode,
         ?float $bandwidthMbps = null,
+        ?float $bgpAsn = null,
+        string|CloudProvider|null $cloudProvider = null,
+        ?string $cloudProviderRegion = null,
         ?string $name = null,
+        ?string $networkID = null,
         ?string $primaryBgpKey = null,
+        ?string $primaryCloudAccountID = null,
         ?string $primaryCloudIP = null,
         ?string $primaryTelnyxIP = null,
         ?string $secondaryBgpKey = null,
@@ -74,15 +75,15 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
     ): VirtualCrossConnectNewResponse {
         $params = Util::removeNulls(
             [
+                'regionCode' => $regionCode,
+                'bandwidthMbps' => $bandwidthMbps,
                 'bgpAsn' => $bgpAsn,
                 'cloudProvider' => $cloudProvider,
                 'cloudProviderRegion' => $cloudProviderRegion,
-                'networkID' => $networkID,
-                'primaryCloudAccountID' => $primaryCloudAccountID,
-                'regionCode' => $regionCode,
-                'bandwidthMbps' => $bandwidthMbps,
                 'name' => $name,
+                'networkID' => $networkID,
                 'primaryBgpKey' => $primaryBgpKey,
+                'primaryCloudAccountID' => $primaryCloudAccountID,
                 'primaryCloudIP' => $primaryCloudIP,
                 'primaryTelnyxIP' => $primaryTelnyxIP,
                 'secondaryBgpKey' => $secondaryBgpKey,
@@ -171,13 +172,15 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
+     * @return DefaultPagination<VirtualCrossConnectListResponse>
+     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): VirtualCrossConnectListResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
         // @phpstan-ignore-next-line argument.type

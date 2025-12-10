@@ -6,8 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
+use Telnyx\Rooms\Room;
 use Telnyx\Rooms\RoomGetResponse;
-use Telnyx\Rooms\RoomListResponse;
 use Telnyx\Rooms\RoomNewResponse;
 use Telnyx\Rooms\RoomUpdateResponse;
 use Tests\UnsupportedMockTests;
@@ -80,10 +81,15 @@ final class RoomsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->rooms->list();
+        $page = $this->client->rooms->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(RoomListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(Room::class, $item);
+        }
     }
 
     #[Test]

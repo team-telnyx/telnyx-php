@@ -8,7 +8,7 @@ use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 use Telnyx\Core\Conversion\ListOf;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\UnionMember0;
+use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\PortingOrderSingleStatus;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\UnionMember1;
 
 /**
@@ -23,6 +23,6 @@ final class Status implements ConverterSource
      */
     public static function variants(): array
     {
-        return [UnionMember0::class, new ListOf(UnionMember1::class)];
+        return [PortingOrderSingleStatus::class, new ListOf(UnionMember1::class)];
     }
 }

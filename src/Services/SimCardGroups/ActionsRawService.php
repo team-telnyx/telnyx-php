@@ -8,19 +8,20 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardGroups\ActionsRawContract;
 use Telnyx\SimCardGroups\Actions\ActionGetResponse;
 use Telnyx\SimCardGroups\Actions\ActionListParams;
 use Telnyx\SimCardGroups\Actions\ActionListParams\FilterStatus;
 use Telnyx\SimCardGroups\Actions\ActionListParams\FilterType;
-use Telnyx\SimCardGroups\Actions\ActionListResponse;
 use Telnyx\SimCardGroups\Actions\ActionRemovePrivateWirelessGatewayResponse;
 use Telnyx\SimCardGroups\Actions\ActionRemoveWirelessBlocklistResponse;
 use Telnyx\SimCardGroups\Actions\ActionSetPrivateWirelessGatewayParams;
 use Telnyx\SimCardGroups\Actions\ActionSetPrivateWirelessGatewayResponse;
 use Telnyx\SimCardGroups\Actions\ActionSetWirelessBlocklistParams;
 use Telnyx\SimCardGroups\Actions\ActionSetWirelessBlocklistResponse;
+use Telnyx\SimCardGroups\Actions\SimCardGroupAction;
 
 final class ActionsRawService implements ActionsRawContract
 {
@@ -67,7 +68,7 @@ final class ActionsRawService implements ActionsRawContract
      *   pageSize?: int,
      * }|ActionListParams $params
      *
-     * @return BaseResponse<ActionListResponse>
+     * @return BaseResponse<DefaultFlatPagination<SimCardGroupAction>>
      *
      * @throws APIException
      */
@@ -95,7 +96,8 @@ final class ActionsRawService implements ActionsRawContract
                 ],
             ),
             options: $options,
-            convert: ActionListResponse::class,
+            convert: SimCardGroupAction::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

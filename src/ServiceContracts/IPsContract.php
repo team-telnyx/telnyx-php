@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\IPs\IP;
 use Telnyx\IPs\IPDeleteResponse;
 use Telnyx\IPs\IPGetResponse;
-use Telnyx\IPs\IPListResponse;
 use Telnyx\IPs\IPNewResponse;
 use Telnyx\IPs\IPUpdateResponse;
 use Telnyx\RequestOptions;
@@ -70,13 +71,15 @@ interface IPsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
+     * @return DefaultPagination<IP>
+     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): IPListResponse;
+    ): DefaultPagination;
 
     /**
      * @api

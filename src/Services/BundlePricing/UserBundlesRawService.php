@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\BundlePricing;
 
+use Telnyx\BundlePricing\UserBundles\UserBundle;
 use Telnyx\BundlePricing\UserBundles\UserBundleCreateParams;
 use Telnyx\BundlePricing\UserBundles\UserBundleDeactivateParams;
 use Telnyx\BundlePricing\UserBundles\UserBundleDeactivateResponse;
@@ -11,7 +12,6 @@ use Telnyx\BundlePricing\UserBundles\UserBundleGetResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleListParams;
 use Telnyx\BundlePricing\UserBundles\UserBundleListResourcesParams;
 use Telnyx\BundlePricing\UserBundles\UserBundleListResourcesResponse;
-use Telnyx\BundlePricing\UserBundles\UserBundleListResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedParams;
 use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleNewResponse;
@@ -20,6 +20,7 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BundlePricing\UserBundlesRawContract;
 
@@ -119,7 +120,7 @@ final class UserBundlesRawService implements UserBundlesRawContract
      *   authorizationBearer?: string,
      * }|UserBundleListParams $params
      *
-     * @return BaseResponse<UserBundleListResponse>
+     * @return BaseResponse<DefaultPagination<UserBundle>>
      *
      * @throws APIException
      */
@@ -146,7 +147,8 @@ final class UserBundlesRawService implements UserBundlesRawContract
                 ['authorizationBearer' => 'authorization_bearer']
             ),
             options: $options,
-            convert: UserBundleListResponse::class,
+            convert: UserBundle::class,
+            page: DefaultPagination::class,
         );
     }
 

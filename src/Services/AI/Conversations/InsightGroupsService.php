@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI\Conversations;
 
-use Telnyx\AI\Conversations\InsightGroups\InsightGroupGetInsightGroupsResponse;
+use Telnyx\AI\Conversations\InsightGroups\InsightTemplateGroup;
 use Telnyx\AI\Conversations\InsightGroups\InsightTemplateGroupDetail;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\InsightGroupsContract;
 use Telnyx\Services\AI\Conversations\InsightGroups\InsightsService;
@@ -126,17 +127,18 @@ final class InsightGroupsService implements InsightGroupsContract
      *
      * Get all insight groups
      *
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @return DefaultFlatPagination<InsightTemplateGroup>
      *
      * @throws APIException
      */
     public function retrieveInsightGroups(
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null
-    ): InsightGroupGetInsightGroupsResponse {
-        $params = Util::removeNulls(['page' => $page]);
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        ?RequestOptions $requestOptions = null,
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
+            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveInsightGroups(params: $params, requestOptions: $requestOptions);

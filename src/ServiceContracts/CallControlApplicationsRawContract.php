@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\CallControlApplications\CallControlApplication;
 use Telnyx\CallControlApplications\CallControlApplicationCreateParams;
 use Telnyx\CallControlApplications\CallControlApplicationDeleteResponse;
 use Telnyx\CallControlApplications\CallControlApplicationGetResponse;
 use Telnyx\CallControlApplications\CallControlApplicationListParams;
-use Telnyx\CallControlApplications\CallControlApplicationListResponse;
 use Telnyx\CallControlApplications\CallControlApplicationNewResponse;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateParams;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
 interface CallControlApplicationsRawContract
@@ -67,7 +68,7 @@ interface CallControlApplicationsRawContract
      *
      * @param array<mixed>|CallControlApplicationListParams $params
      *
-     * @return BaseResponse<CallControlApplicationListResponse>
+     * @return BaseResponse<DefaultPagination<CallControlApplication>>
      *
      * @throws APIException
      */

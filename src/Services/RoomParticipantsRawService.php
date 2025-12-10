@@ -7,10 +7,11 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
+use Telnyx\RoomParticipant;
 use Telnyx\RoomParticipants\RoomParticipantGetResponse;
 use Telnyx\RoomParticipants\RoomParticipantListParams;
-use Telnyx\RoomParticipants\RoomParticipantListResponse;
 use Telnyx\ServiceContracts\RoomParticipantsRawContract;
 
 final class RoomParticipantsRawService implements RoomParticipantsRawContract
@@ -61,7 +62,7 @@ final class RoomParticipantsRawService implements RoomParticipantsRawContract
      *   page?: array{number?: int, size?: int},
      * }|RoomParticipantListParams $params
      *
-     * @return BaseResponse<RoomParticipantListResponse>
+     * @return BaseResponse<DefaultPagination<RoomParticipant>>
      *
      * @throws APIException
      */
@@ -80,7 +81,8 @@ final class RoomParticipantsRawService implements RoomParticipantsRawContract
             path: 'room_participants',
             query: $parsed,
             options: $options,
-            convert: RoomParticipantListResponse::class,
+            convert: RoomParticipant::class,
+            page: DefaultPagination::class,
         );
     }
 }

@@ -7,15 +7,17 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerifyProfilesRawContract;
 use Telnyx\VerifyProfiles\MessageTemplate;
+use Telnyx\VerifyProfiles\VerifyProfile;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams;
 use Telnyx\VerifyProfiles\VerifyProfileCreateTemplateParams;
 use Telnyx\VerifyProfiles\VerifyProfileData;
 use Telnyx\VerifyProfiles\VerifyProfileGetTemplatesResponse;
 use Telnyx\VerifyProfiles\VerifyProfileListParams;
-use Telnyx\VerifyProfiles\VerifyProfileListResponse;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateParams;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateTemplateParams;
 
@@ -165,10 +167,10 @@ final class VerifyProfilesRawService implements VerifyProfilesRawContract
      * Gets a paginated list of Verify profiles.
      *
      * @param array{
-     *   filter?: array{name?: string}, page?: array{number?: int, size?: int}
+     *   filter?: array{name?: string}, pageNumber?: int, pageSize?: int
      * }|VerifyProfileListParams $params
      *
-     * @return BaseResponse<VerifyProfileListResponse>
+     * @return BaseResponse<DefaultFlatPagination<VerifyProfile>>
      *
      * @throws APIException
      */
@@ -185,9 +187,13 @@ final class VerifyProfilesRawService implements VerifyProfilesRawContract
         return $this->client->request(
             method: 'get',
             path: 'verify_profiles',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
-            convert: VerifyProfileListResponse::class,
+            convert: VerifyProfile::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

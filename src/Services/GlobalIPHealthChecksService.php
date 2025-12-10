@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckDeleteResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckGetResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListResponse;
@@ -88,12 +89,14 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
+     * @return DefaultPagination<GlobalIPHealthCheckListResponse>
+     *
      * @throws APIException
      */
     public function list(
         ?array $page = null,
         ?RequestOptions $requestOptions = null
-    ): GlobalIPHealthCheckListResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(['page' => $page]);
 
         // @phpstan-ignore-next-line argument.type

@@ -6,8 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
+use Telnyx\Portouts\Reports\PortoutReport;
 use Telnyx\Portouts\Reports\ReportGetResponse;
-use Telnyx\Portouts\Reports\ReportListResponse;
 use Telnyx\Portouts\Reports\ReportNewResponse;
 use Tests\UnsupportedMockTests;
 
@@ -92,9 +93,14 @@ final class ReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->portouts->reports->list();
+        $page = $this->client->portouts->reports->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ReportListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(PortoutReport::class, $item);
+        }
     }
 }

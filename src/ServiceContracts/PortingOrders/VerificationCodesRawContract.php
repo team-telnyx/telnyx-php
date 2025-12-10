@@ -6,6 +6,7 @@ namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListResponse;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeSendParams;
@@ -21,7 +22,7 @@ interface VerificationCodesRawContract
      * @param string $id Porting Order id
      * @param array<mixed>|VerificationCodeListParams $params
      *
-     * @return BaseResponse<VerificationCodeListResponse>
+     * @return BaseResponse<DefaultPagination<VerificationCodeListResponse>>
      *
      * @throws APIException
      */

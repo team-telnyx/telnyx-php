@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\Number10dlc;
 
-use Telnyx\Campaign\TelnyxCampaignCsp;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\Number10dlc\Campaign\CampaignAppealResponse;
-use Telnyx\Number10dlc\Campaign\CampaignDeleteResponse;
+use Telnyx\Number10dlc\Campaign\CampaignDeactivateResponse;
 use Telnyx\Number10dlc\Campaign\CampaignGetMnoMetadataResponse;
-use Telnyx\Number10dlc\Campaign\CampaignGetSharingResponse;
+use Telnyx\Number10dlc\Campaign\CampaignGetSharingStatusResponse;
 use Telnyx\Number10dlc\Campaign\CampaignListParams\Sort;
 use Telnyx\Number10dlc\Campaign\CampaignListResponse;
+use Telnyx\Number10dlc\Campaign\CampaignSubmitAppealResponse;
+use Telnyx\Number10dlc\Campaign\TelnyxCampaignCsp;
+use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Number10dlc\CampaignContract;
 use Telnyx\Services\Number10dlc\Campaign\OsrService;
@@ -128,6 +129,8 @@ final class CampaignService implements CampaignContract
      * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
      * @param 'assignedPhoneNumbersCount'|'-assignedPhoneNumbersCount'|'campaignId'|'-campaignId'|'createdAt'|'-createdAt'|'status'|'-status'|'tcrCampaignId'|'-tcrCampaignId'|Sort $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
      *
+     * @return PerPagePaginationV2<CampaignListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -136,7 +139,7 @@ final class CampaignService implements CampaignContract
         int $recordsPerPage = 10,
         string|Sort $sort = '-createdAt',
         ?RequestOptions $requestOptions = null,
-    ): CampaignListResponse {
+    ): PerPagePaginationV2 {
         $params = Util::removeNulls(
             [
                 'brandID' => $brandID,
@@ -155,16 +158,94 @@ final class CampaignService implements CampaignContract
     /**
      * @api
      *
+     * Manually accept a campaign shared with Telnyx
+     *
+     * @param string $campaignID TCR's ID for the campaign to import
+     *
+     * @return array<string,mixed>
+     *
+     * @throws APIException
+     */
+    public function acceptSharing(
+        string $campaignID,
+        ?RequestOptions $requestOptions = null
+    ): array {
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->acceptSharing($campaignID, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
      * Terminate a campaign. Note that once deactivated, a campaign cannot be restored.
      *
      * @throws APIException
      */
-    public function delete(
+    public function deactivate(
         string $campaignID,
         ?RequestOptions $requestOptions = null
-    ): CampaignDeleteResponse {
+    ): CampaignDeactivateResponse {
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->delete($campaignID, requestOptions: $requestOptions);
+        $response = $this->raw->deactivate($campaignID, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Get the campaign metadata for each MNO it was submitted to.
+     *
+     * @param string $campaignID ID of the campaign in question
+     *
+     * @throws APIException
+     */
+    public function getMnoMetadata(
+        string $campaignID,
+        ?RequestOptions $requestOptions = null
+    ): CampaignGetMnoMetadataResponse {
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->getMnoMetadata($campaignID, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Retrieve campaign's operation status at MNO level.
+     *
+     * @return array<string,mixed>
+     *
+     * @throws APIException
+     */
+    public function getOperationStatus(
+        string $campaignID,
+        ?RequestOptions $requestOptions = null
+    ): array {
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->getOperationStatus($campaignID, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Get Sharing Status
+     *
+     * @param string $campaignID ID of the campaign in question
+     *
+     * @throws APIException
+     */
+    public function getSharingStatus(
+        string $campaignID,
+        ?RequestOptions $requestOptions = null
+    ): CampaignGetSharingStatusResponse {
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->getSharingStatus($campaignID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -179,72 +260,15 @@ final class CampaignService implements CampaignContract
      *
      * @throws APIException
      */
-    public function appeal(
+    public function submitAppeal(
         string $campaignID,
         string $appealReason,
         ?RequestOptions $requestOptions = null,
-    ): CampaignAppealResponse {
+    ): CampaignSubmitAppealResponse {
         $params = Util::removeNulls(['appealReason' => $appealReason]);
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->appeal($campaignID, params: $params, requestOptions: $requestOptions);
-
-        return $response->parse();
-    }
-
-    /**
-     * @api
-     *
-     * Get the campaign metadata for each MNO it was submitted to.
-     *
-     * @param string $campaignID ID of the campaign in question
-     *
-     * @throws APIException
-     */
-    public function retrieveMnoMetadata(
-        string $campaignID,
-        ?RequestOptions $requestOptions = null
-    ): CampaignGetMnoMetadataResponse {
-        // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->retrieveMnoMetadata($campaignID, requestOptions: $requestOptions);
-
-        return $response->parse();
-    }
-
-    /**
-     * @api
-     *
-     * Retrieve campaign's operation status at MNO level.
-     *
-     * @return array<string,mixed>
-     *
-     * @throws APIException
-     */
-    public function retrieveOperationStatus(
-        string $campaignID,
-        ?RequestOptions $requestOptions = null
-    ): array {
-        // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->retrieveOperationStatus($campaignID, requestOptions: $requestOptions);
-
-        return $response->parse();
-    }
-
-    /**
-     * @api
-     *
-     * Get Sharing Status
-     *
-     * @param string $campaignID ID of the campaign in question
-     *
-     * @throws APIException
-     */
-    public function retrieveSharing(
-        string $campaignID,
-        ?RequestOptions $requestOptions = null
-    ): CampaignGetSharingResponse {
-        // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->retrieveSharing($campaignID, requestOptions: $requestOptions);
+        $response = $this->raw->submitAppeal($campaignID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

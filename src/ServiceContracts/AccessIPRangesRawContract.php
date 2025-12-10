@@ -7,9 +7,9 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\AccessIPRanges\AccessIPRange;
 use Telnyx\AccessIPRanges\AccessIPRangeCreateParams;
 use Telnyx\AccessIPRanges\AccessIPRangeListParams;
-use Telnyx\AccessIPRanges\AccessIPRangeListResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 interface AccessIPRangesRawContract
@@ -33,7 +33,7 @@ interface AccessIPRangesRawContract
      *
      * @param array<mixed>|AccessIPRangeListParams $params
      *
-     * @return BaseResponse<AccessIPRangeListResponse>
+     * @return BaseResponse<DefaultFlatPagination<AccessIPRange>>
      *
      * @throws APIException
      */

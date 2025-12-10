@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
+use Telnyx\UserAddresses\UserAddress;
 use Telnyx\UserAddresses\UserAddressGetResponse;
 use Telnyx\UserAddresses\UserAddressListParams\Sort;
-use Telnyx\UserAddresses\UserAddressListResponse;
 use Telnyx\UserAddresses\UserAddressNewResponse;
 
 interface UserAddressesContract
@@ -86,6 +87,8 @@ interface UserAddressesContract
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
+     * @return DefaultPagination<UserAddress>
+     *
      * @throws APIException
      */
     public function list(
@@ -93,5 +96,5 @@ interface UserAddressesContract
         ?array $page = null,
         string|Sort $sort = 'created_at',
         ?RequestOptions $requestOptions = null,
-    ): UserAddressListResponse;
+    ): DefaultPagination;
 }

@@ -208,7 +208,7 @@ final class ConversationsRawService implements ConversationsRawContract
      *   sentAt?: string|\DateTimeInterface,
      *   toolCallID?: string,
      *   toolCalls?: list<array<string,mixed>>,
-     *   toolChoice?: mixed|string,
+     *   toolChoice?: string|array<string,mixed>,
      * }|ConversationAddMessageParams $params
      *
      * @return BaseResponse<mixed>

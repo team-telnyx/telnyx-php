@@ -4,21 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\Number10dlc;
 
-use Telnyx\Campaign\TelnyxCampaignCsp;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Conversion\MapOf;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\Number10dlc\Campaign\CampaignAppealParams;
-use Telnyx\Number10dlc\Campaign\CampaignAppealResponse;
-use Telnyx\Number10dlc\Campaign\CampaignDeleteResponse;
+use Telnyx\Number10dlc\Campaign\CampaignDeactivateResponse;
 use Telnyx\Number10dlc\Campaign\CampaignGetMnoMetadataResponse;
-use Telnyx\Number10dlc\Campaign\CampaignGetSharingResponse;
+use Telnyx\Number10dlc\Campaign\CampaignGetSharingStatusResponse;
 use Telnyx\Number10dlc\Campaign\CampaignListParams;
 use Telnyx\Number10dlc\Campaign\CampaignListParams\Sort;
 use Telnyx\Number10dlc\Campaign\CampaignListResponse;
+use Telnyx\Number10dlc\Campaign\CampaignSubmitAppealParams;
+use Telnyx\Number10dlc\Campaign\CampaignSubmitAppealResponse;
 use Telnyx\Number10dlc\Campaign\CampaignUpdateParams;
+use Telnyx\Number10dlc\Campaign\TelnyxCampaignCsp;
+use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Number10dlc\CampaignRawContract;
 
@@ -104,7 +105,7 @@ final class CampaignRawService implements CampaignRawContract
      *   brandID: string, page?: int, recordsPerPage?: int, sort?: value-of<Sort>
      * }|CampaignListParams $params
      *
-     * @return BaseResponse<CampaignListResponse>
+     * @return BaseResponse<PerPagePaginationV2<CampaignListResponse>>
      *
      * @throws APIException
      */
@@ -124,6 +125,31 @@ final class CampaignRawService implements CampaignRawContract
             query: Util::array_transform_keys($parsed, ['brandID' => 'brandId']),
             options: $options,
             convert: CampaignListResponse::class,
+            page: PerPagePaginationV2::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Manually accept a campaign shared with Telnyx
+     *
+     * @param string $campaignID TCR's ID for the campaign to import
+     *
+     * @return BaseResponse<array<string,mixed>>
+     *
+     * @throws APIException
+     */
+    public function acceptSharing(
+        string $campaignID,
+        ?RequestOptions $requestOptions = null
+    ): BaseResponse {
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: ['10dlc/campaign/acceptSharing/%1$s', $campaignID],
+            options: $requestOptions,
+            convert: new MapOf('mixed'),
         );
     }
 
@@ -132,11 +158,11 @@ final class CampaignRawService implements CampaignRawContract
      *
      * Terminate a campaign. Note that once deactivated, a campaign cannot be restored.
      *
-     * @return BaseResponse<CampaignDeleteResponse>
+     * @return BaseResponse<CampaignDeactivateResponse>
      *
      * @throws APIException
      */
-    public function delete(
+    public function deactivate(
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): BaseResponse {
@@ -145,39 +171,7 @@ final class CampaignRawService implements CampaignRawContract
             method: 'delete',
             path: ['10dlc/campaign/%1$s', $campaignID],
             options: $requestOptions,
-            convert: CampaignDeleteResponse::class,
-        );
-    }
-
-    /**
-     * @api
-     *
-     * Submits an appeal for rejected native campaigns in TELNYX_FAILED or MNO_REJECTED status. The appeal is recorded for manual compliance team review and the campaign status is reset to TCR_ACCEPTED. Note: Appeal forwarding is handled manually to allow proper review before incurring upstream charges.
-     *
-     * @param string $campaignID The Telnyx campaign identifier
-     * @param array{appealReason: string}|CampaignAppealParams $params
-     *
-     * @return BaseResponse<CampaignAppealResponse>
-     *
-     * @throws APIException
-     */
-    public function appeal(
-        string $campaignID,
-        array|CampaignAppealParams $params,
-        ?RequestOptions $requestOptions = null,
-    ): BaseResponse {
-        [$parsed, $options] = CampaignAppealParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
-            method: 'post',
-            path: ['10dlc/campaign/%1$s/appeal', $campaignID],
-            body: (object) $parsed,
-            options: $options,
-            convert: CampaignAppealResponse::class,
+            convert: CampaignDeactivateResponse::class,
         );
     }
 
@@ -192,7 +186,7 @@ final class CampaignRawService implements CampaignRawContract
      *
      * @throws APIException
      */
-    public function retrieveMnoMetadata(
+    public function getMnoMetadata(
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): BaseResponse {
@@ -214,7 +208,7 @@ final class CampaignRawService implements CampaignRawContract
      *
      * @throws APIException
      */
-    public function retrieveOperationStatus(
+    public function getOperationStatus(
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): BaseResponse {
@@ -234,11 +228,11 @@ final class CampaignRawService implements CampaignRawContract
      *
      * @param string $campaignID ID of the campaign in question
      *
-     * @return BaseResponse<CampaignGetSharingResponse>
+     * @return BaseResponse<CampaignGetSharingStatusResponse>
      *
      * @throws APIException
      */
-    public function retrieveSharing(
+    public function getSharingStatus(
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): BaseResponse {
@@ -247,7 +241,39 @@ final class CampaignRawService implements CampaignRawContract
             method: 'get',
             path: ['10dlc/campaign/%1$s/sharing', $campaignID],
             options: $requestOptions,
-            convert: CampaignGetSharingResponse::class,
+            convert: CampaignGetSharingStatusResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Submits an appeal for rejected native campaigns in TELNYX_FAILED or MNO_REJECTED status. The appeal is recorded for manual compliance team review and the campaign status is reset to TCR_ACCEPTED. Note: Appeal forwarding is handled manually to allow proper review before incurring upstream charges.
+     *
+     * @param string $campaignID The Telnyx campaign identifier
+     * @param array{appealReason: string}|CampaignSubmitAppealParams $params
+     *
+     * @return BaseResponse<CampaignSubmitAppealResponse>
+     *
+     * @throws APIException
+     */
+    public function submitAppeal(
+        string $campaignID,
+        array|CampaignSubmitAppealParams $params,
+        ?RequestOptions $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = CampaignSubmitAppealParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: ['10dlc/campaign/%1$s/appeal', $campaignID],
+            body: (object) $parsed,
+            options: $options,
+            convert: CampaignSubmitAppealResponse::class,
         );
     }
 }

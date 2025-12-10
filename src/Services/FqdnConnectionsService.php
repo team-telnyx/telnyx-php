@@ -12,10 +12,11 @@ use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings\Port;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
+use Telnyx\DefaultPagination;
+use Telnyx\FqdnConnections\FqdnConnection;
 use Telnyx\FqdnConnections\FqdnConnectionDeleteResponse;
 use Telnyx\FqdnConnections\FqdnConnectionGetResponse;
 use Telnyx\FqdnConnections\FqdnConnectionListParams\Sort;
-use Telnyx\FqdnConnections\FqdnConnectionListResponse;
 use Telnyx\FqdnConnections\FqdnConnectionNewResponse;
 use Telnyx\FqdnConnections\FqdnConnectionUpdateResponse;
 use Telnyx\FqdnConnections\InboundFqdn;
@@ -340,6 +341,8 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
+     * @return DefaultPagination<FqdnConnection>
+     *
      * @throws APIException
      */
     public function list(
@@ -347,7 +350,7 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
         ?array $page = null,
         string|Sort $sort = 'created_at',
         ?RequestOptions $requestOptions = null,
-    ): FqdnConnectionListResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(
             ['filter' => $filter, 'page' => $page, 'sort' => $sort]
         );

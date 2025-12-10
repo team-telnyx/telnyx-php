@@ -4,18 +4,21 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\Number10dlc;
 
-use Telnyx\Brand\AltBusinessIDType;
-use Telnyx\Brand\BrandIdentityStatus;
-use Telnyx\Brand\EntityType;
-use Telnyx\Brand\StockExchange;
-use Telnyx\Brand\TelnyxBrand;
-use Telnyx\Brand\Vertical;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\Number10dlc\Brand\AltBusinessIDType;
+use Telnyx\Number10dlc\Brand\BrandGetFeedbackResponse;
 use Telnyx\Number10dlc\Brand\BrandGetResponse;
+use Telnyx\Number10dlc\Brand\BrandGetSMSOtpStatusResponse;
+use Telnyx\Number10dlc\Brand\BrandIdentityStatus;
 use Telnyx\Number10dlc\Brand\BrandListParams\Sort;
 use Telnyx\Number10dlc\Brand\BrandListResponse;
+use Telnyx\Number10dlc\Brand\EntityType;
+use Telnyx\Number10dlc\Brand\StockExchange;
+use Telnyx\Number10dlc\Brand\TelnyxBrand;
+use Telnyx\Number10dlc\Brand\Vertical;
+use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Number10dlc\BrandContract;
 use Telnyx\Services\Number10dlc\Brand\ExternalVettingService;
@@ -262,6 +265,8 @@ final class BrandService implements BrandContract
      * @param 'assignedCampaignsCount'|'-assignedCampaignsCount'|'brandId'|'-brandId'|'createdAt'|'-createdAt'|'displayName'|'-displayName'|'identityStatus'|'-identityStatus'|'status'|'-status'|'tcrBrandId'|'-tcrBrandId'|Sort $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
      * @param string $tcrBrandID Filter results by the TCR Brand id
      *
+     * @return PerPagePaginationV2<BrandListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -275,7 +280,7 @@ final class BrandService implements BrandContract
         ?string $state = null,
         ?string $tcrBrandID = null,
         ?RequestOptions $requestOptions = null,
-    ): BrandListResponse {
+    ): PerPagePaginationV2 {
         $params = Util::removeNulls(
             [
                 'brandID' => $brandID,
@@ -316,16 +321,75 @@ final class BrandService implements BrandContract
     /**
      * @api
      *
+     * Get feedback about a brand by ID. This endpoint can be used after creating or revetting
+     * a brand.
+     *
+     * Possible values for `.category[].id`:
+     *
+     * * `TAX_ID` - Data mismatch related to tax id and its associated properties.
+     * * `STOCK_SYMBOL` - Non public entity registered as a public for profit entity or
+     *   the stock information mismatch.
+     * * `GOVERNMENT_ENTITY` - Non government entity registered as a government entity.
+     *   Must be a U.S. government entity.
+     * * `NONPROFIT` - Not a recognized non-profit entity. No IRS tax-exempt status
+     *   found.
+     * * `OTHERS` - Details of the data misrepresentation if any.
+     *
+     * @throws APIException
+     */
+    public function getFeedback(
+        string $brandID,
+        ?RequestOptions $requestOptions = null
+    ): BrandGetFeedbackResponse {
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->getFeedback($brandID, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
      * Resend brand 2FA email
      *
      * @throws APIException
      */
-    public function _2faEmail(
+    public function resend2faEmail(
         string $brandID,
         ?RequestOptions $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->_2faEmail($brandID, requestOptions: $requestOptions);
+        $response = $this->raw->resend2faEmail($brandID, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Query the status of an SMS OTP (One-Time Password) for Sole Proprietor brand verification.
+     *
+     * This endpoint allows you to check the delivery and verification status of an OTP sent during the Sole Proprietor brand verification process. You can query by either:
+     *
+     * * `referenceId` - The reference ID returned when the OTP was initially triggered
+     * * `brandId` - Query parameter for portal users to look up OTP status by Brand ID
+     *
+     * The response includes delivery status, verification dates, and detailed delivery information.
+     *
+     * @param string $referenceID The reference ID returned when the OTP was initially triggered
+     * @param string $brandID Filter by Brand ID for easier lookup in portal applications
+     *
+     * @throws APIException
+     */
+    public function retrieveSMSOtpStatus(
+        string $referenceID,
+        ?string $brandID = null,
+        ?RequestOptions $requestOptions = null,
+    ): BrandGetSMSOtpStatusResponse {
+        $params = Util::removeNulls(['brandID' => $brandID]);
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveSMSOtpStatus($referenceID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -337,12 +401,12 @@ final class BrandService implements BrandContract
      *
      * @throws APIException
      */
-    public function updateRevet(
+    public function revet(
         string $brandID,
         ?RequestOptions $requestOptions = null
     ): TelnyxBrand {
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->updateRevet($brandID, requestOptions: $requestOptions);
+        $response = $this->raw->revet($brandID, requestOptions: $requestOptions);
 
         return $response->parse();
     }

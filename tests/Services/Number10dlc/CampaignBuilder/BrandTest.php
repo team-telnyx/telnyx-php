@@ -6,7 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\Number10dlc\CampaignBuilder\Brand\BrandGetResponse;
+use Telnyx\Number10dlc\CampaignBuilder\Brand\BrandQualifyByUsecaseResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -28,34 +28,40 @@ final class BrandTest extends TestCase
     }
 
     #[Test]
-    public function testRetrieve(): void
+    public function testQualifyByUsecase(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->number10dlc->campaignBuilder->brand->retrieve(
-            'usecase',
-            brandID: 'brandId'
-        );
+        $result = $this
+            ->client
+            ->number10dlc
+            ->campaignBuilder
+            ->brand
+            ->qualifyByUsecase('usecase', brandID: 'brandId')
+        ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(BrandGetResponse::class, $result);
+        $this->assertInstanceOf(BrandQualifyByUsecaseResponse::class, $result);
     }
 
     #[Test]
-    public function testRetrieveWithOptionalParams(): void
+    public function testQualifyByUsecaseWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->number10dlc->campaignBuilder->brand->retrieve(
-            'usecase',
-            brandID: 'brandId'
-        );
+        $result = $this
+            ->client
+            ->number10dlc
+            ->campaignBuilder
+            ->brand
+            ->qualifyByUsecase('usecase', brandID: 'brandId')
+        ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(BrandGetResponse::class, $result);
+        $this->assertInstanceOf(BrandQualifyByUsecaseResponse::class, $result);
     }
 }

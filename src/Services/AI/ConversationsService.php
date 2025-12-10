@@ -200,7 +200,7 @@ final class ConversationsService implements ConversationsContract
      * @param string $conversationID The ID of the conversation
      * @param array<string,mixed> $metadata
      * @param list<array<string,mixed>> $toolCalls
-     * @param mixed|string $toolChoice
+     * @param string|array<string,mixed> $toolChoice
      *
      * @throws APIException
      */
@@ -213,7 +213,7 @@ final class ConversationsService implements ConversationsContract
         string|\DateTimeInterface|null $sentAt = null,
         ?string $toolCallID = null,
         ?array $toolCalls = null,
-        mixed $toolChoice = null,
+        string|array|null $toolChoice = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
         $params = Util::removeNulls(
