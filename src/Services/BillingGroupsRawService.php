@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
-use Telnyx\BillingGroups\BillingGroup;
 use Telnyx\BillingGroups\BillingGroupCreateParams;
 use Telnyx\BillingGroups\BillingGroupDeleteResponse;
 use Telnyx\BillingGroups\BillingGroupGetResponse;
 use Telnyx\BillingGroups\BillingGroupListParams;
+use Telnyx\BillingGroups\BillingGroupListResponse;
 use Telnyx\BillingGroups\BillingGroupNewResponse;
 use Telnyx\BillingGroups\BillingGroupUpdateParams;
 use Telnyx\BillingGroups\BillingGroupUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BillingGroupsRawContract;
 
@@ -119,9 +117,11 @@ final class BillingGroupsRawService implements BillingGroupsRawContract
      *
      * List all billing groups
      *
-     * @param array{pageNumber?: int, pageSize?: int}|BillingGroupListParams $params
+     * @param array{
+     *   page?: array{number?: int, size?: int}
+     * }|BillingGroupListParams $params
      *
-     * @return BaseResponse<DefaultFlatPagination<BillingGroup>>
+     * @return BaseResponse<BillingGroupListResponse>
      *
      * @throws APIException
      */
@@ -138,13 +138,9 @@ final class BillingGroupsRawService implements BillingGroupsRawContract
         return $this->client->request(
             method: 'get',
             path: 'billing_groups',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
-            convert: BillingGroup::class,
-            page: DefaultFlatPagination::class,
+            convert: BillingGroupListResponse::class,
         );
     }
 

@@ -6,13 +6,12 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
-use Telnyx\WirelessBlocklists\WirelessBlocklist;
 use Telnyx\WirelessBlocklists\WirelessBlocklistCreateParams;
 use Telnyx\WirelessBlocklists\WirelessBlocklistDeleteResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistGetResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistListParams;
+use Telnyx\WirelessBlocklists\WirelessBlocklistListResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistNewResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams;
 use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateResponse;
@@ -66,7 +65,7 @@ interface WirelessBlocklistsRawContract
      *
      * @param array<mixed>|WirelessBlocklistListParams $params
      *
-     * @return BaseResponse<DefaultFlatPagination<WirelessBlocklist>>
+     * @return BaseResponse<WirelessBlocklistListResponse>
      *
      * @throws APIException
      */

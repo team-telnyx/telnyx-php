@@ -6,10 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultFlatPagination;
-use Telnyx\PrivateWirelessGateways\PrivateWirelessGateway;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayDeleteResponse;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayGetResponse;
+use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayListResponse;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayNewResponse;
 use Tests\UnsupportedMockTests;
 
@@ -86,15 +85,10 @@ final class PrivateWirelessGatewaysTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->privateWirelessGateways->list();
+        $result = $this->client->privateWirelessGateways->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(PrivateWirelessGateway::class, $item);
-        }
+        $this->assertInstanceOf(PrivateWirelessGatewayListResponse::class, $result);
     }
 
     #[Test]

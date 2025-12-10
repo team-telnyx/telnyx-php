@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
-use Telnyx\IntegrationSecrets\IntegrationSecret;
 use Telnyx\IntegrationSecrets\IntegrationSecretListParams\Filter\Type;
+use Telnyx\IntegrationSecrets\IntegrationSecretListResponse;
 use Telnyx\IntegrationSecrets\IntegrationSecretNewResponse;
 use Telnyx\RequestOptions;
 
@@ -39,17 +38,17 @@ interface IntegrationSecretsContract
      * @param array{
      *   type?: 'bearer'|'basic'|Type
      * } $filter Consolidated filter parameter (deepObject style). Originally: filter[type]
-     *
-     * @return DefaultFlatPagination<IntegrationSecret>
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination;
+    ): IntegrationSecretListResponse;
 
     /**
      * @api

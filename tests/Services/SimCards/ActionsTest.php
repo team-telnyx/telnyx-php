@@ -6,16 +6,15 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsResponse;
 use Telnyx\SimCards\Actions\ActionDisableResponse;
 use Telnyx\SimCards\Actions\ActionEnableResponse;
 use Telnyx\SimCards\Actions\ActionGetResponse;
+use Telnyx\SimCards\Actions\ActionListResponse;
 use Telnyx\SimCards\Actions\ActionRemovePublicIPResponse;
 use Telnyx\SimCards\Actions\ActionSetPublicIPResponse;
 use Telnyx\SimCards\Actions\ActionSetStandbyResponse;
 use Telnyx\SimCards\Actions\ActionValidateRegistrationCodesResponse;
-use Telnyx\SimCards\Actions\SimCardAction;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -58,15 +57,10 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->simCards->actions->list();
+        $result = $this->client->simCards->actions->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(SimCardAction::class, $item);
-        }
+        $this->assertInstanceOf(ActionListResponse::class, $result);
     }
 
     #[Test]

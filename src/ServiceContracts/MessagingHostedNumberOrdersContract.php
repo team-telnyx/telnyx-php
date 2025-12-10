@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\MessagingHostedNumberOrder;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCreateVerificationCodesParams\VerificationMethod;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderDeleteResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderGetResponse;
+use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderListResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesResponse;
@@ -51,14 +50,12 @@ interface MessagingHostedNumberOrdersContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return DefaultPagination<MessagingHostedNumberOrder>
-     *
      * @throws APIException
      */
     public function list(
         ?array $page = null,
         ?RequestOptions $requestOptions = null
-    ): DefaultPagination;
+    ): MessagingHostedNumberOrderListResponse;
 
     /**
      * @api

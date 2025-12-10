@@ -7,10 +7,9 @@ namespace Telnyx\Services\ExternalConnections;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\ExternalConnections\PhoneNumbers\ExternalConnectionPhoneNumber;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams;
+use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListResponse;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberRetrieveParams;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberUpdateParams;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberUpdateResponse;
@@ -111,7 +110,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
      *   page?: array{number?: int, size?: int},
      * }|PhoneNumberListParams $params
      *
-     * @return BaseResponse<DefaultPagination<ExternalConnectionPhoneNumber>>
+     * @return BaseResponse<PhoneNumberListResponse>
      *
      * @throws APIException
      */
@@ -131,8 +130,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
             path: ['external_connections/%1$s/phone_numbers', $id],
             query: $parsed,
             options: $options,
-            convert: ExternalConnectionPhoneNumber::class,
-            page: DefaultPagination::class,
+            convert: PhoneNumberListResponse::class,
         );
     }
 }

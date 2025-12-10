@@ -13,7 +13,6 @@ use Telnyx\AI\Clusters\ClusterListResponse;
 use Telnyx\AI\Clusters\ClusterRetrieveParams;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 interface ClustersRawContract
@@ -38,7 +37,7 @@ interface ClustersRawContract
      *
      * @param array<mixed>|ClusterListParams $params
      *
-     * @return BaseResponse<DefaultFlatPagination<ClusterListResponse>>
+     * @return BaseResponse<ClusterListResponse>
      *
      * @throws APIException
      */

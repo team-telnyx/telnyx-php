@@ -6,11 +6,11 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\UsageReports\UsageReportGetOptionsParams;
 use Telnyx\UsageReports\UsageReportGetOptionsResponse;
 use Telnyx\UsageReports\UsageReportListParams;
+use Telnyx\UsageReports\UsageReportListResponse;
 
 interface UsageReportsRawContract
 {
@@ -19,7 +19,7 @@ interface UsageReportsRawContract
      *
      * @param array<mixed>|UsageReportListParams $params
      *
-     * @return BaseResponse<DefaultFlatPagination<array<string,mixed>>>
+     * @return BaseResponse<UsageReportListResponse>
      *
      * @throws APIException
      */

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\ScheduledEvents;
 
+use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventListParams\Page;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -17,8 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type ScheduledEventListParamsShape = array{
  *   conversationChannel?: ConversationChannelType|value-of<ConversationChannelType>,
  *   fromDate?: \DateTimeInterface,
- *   pageNumber?: int,
- *   pageSize?: int,
+ *   page?: Page|array{number?: int|null, size?: int|null},
  *   toDate?: \DateTimeInterface,
  * }
  */
@@ -35,11 +35,11 @@ final class ScheduledEventListParams implements BaseModel
     #[Optional]
     public ?\DateTimeInterface $fromDate;
 
+    /**
+     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
+     */
     #[Optional]
-    public ?int $pageNumber;
-
-    #[Optional]
-    public ?int $pageSize;
+    public ?Page $page;
 
     #[Optional]
     public ?\DateTimeInterface $toDate;
@@ -55,20 +55,19 @@ final class ScheduledEventListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param ConversationChannelType|value-of<ConversationChannelType> $conversationChannel
+     * @param Page|array{number?: int|null, size?: int|null} $page
      */
     public static function with(
         ConversationChannelType|string|null $conversationChannel = null,
         ?\DateTimeInterface $fromDate = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        Page|array|null $page = null,
         ?\DateTimeInterface $toDate = null,
     ): self {
         $self = new self;
 
         null !== $conversationChannel && $self['conversationChannel'] = $conversationChannel;
         null !== $fromDate && $self['fromDate'] = $fromDate;
-        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
-        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $page && $self['page'] = $page;
         null !== $toDate && $self['toDate'] = $toDate;
 
         return $self;
@@ -94,18 +93,15 @@ final class ScheduledEventListParams implements BaseModel
         return $self;
     }
 
-    public function withPageNumber(int $pageNumber): self
+    /**
+     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
+     *
+     * @param Page|array{number?: int|null, size?: int|null} $page
+     */
+    public function withPage(Page|array $page): self
     {
         $self = clone $this;
-        $self['pageNumber'] = $pageNumber;
-
-        return $self;
-    }
-
-    public function withPageSize(int $pageSize): self
-    {
-        $self = clone $this;
-        $self['pageSize'] = $pageSize;
+        $self['page'] = $page;
 
         return $self;
     }

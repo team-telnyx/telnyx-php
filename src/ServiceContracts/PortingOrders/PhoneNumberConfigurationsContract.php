@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Filter\PortingOrder\Status;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Sort\Value;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListResponse;
@@ -45,8 +44,6 @@ interface PhoneNumberConfigurationsContract
      *   value?: 'created_at'|'-created_at'|Value
      * } $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
-     * @return DefaultPagination<PhoneNumberConfigurationListResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -54,5 +51,5 @@ interface PhoneNumberConfigurationsContract
         ?array $page = null,
         ?array $sort = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): PhoneNumberConfigurationListResponse;
 }

@@ -6,15 +6,14 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\VerifyProfiles\MessageTemplate;
-use Telnyx\VerifyProfiles\VerifyProfile;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams;
 use Telnyx\VerifyProfiles\VerifyProfileCreateTemplateParams;
 use Telnyx\VerifyProfiles\VerifyProfileData;
 use Telnyx\VerifyProfiles\VerifyProfileGetTemplatesResponse;
 use Telnyx\VerifyProfiles\VerifyProfileListParams;
+use Telnyx\VerifyProfiles\VerifyProfileListResponse;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateParams;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateTemplateParams;
 
@@ -69,7 +68,7 @@ interface VerifyProfilesRawContract
      *
      * @param array<mixed>|VerifyProfileListParams $params
      *
-     * @return BaseResponse<DefaultFlatPagination<VerifyProfile>>
+     * @return BaseResponse<VerifyProfileListResponse>
      *
      * @throws APIException
      */

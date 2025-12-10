@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\Comments\CommentCreateParams;
 use Telnyx\PortingOrders\Comments\CommentListParams;
 use Telnyx\PortingOrders\Comments\CommentListResponse;
@@ -37,7 +36,7 @@ interface CommentsRawContract
      * @param string $id Porting Order id
      * @param array<mixed>|CommentListParams $params
      *
-     * @return BaseResponse<DefaultPagination<CommentListResponse>>
+     * @return BaseResponse<CommentListResponse>
      *
      * @throws APIException
      */

@@ -16,7 +16,7 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Webhook\RecordType;
  *   id?: string|null,
  *   eventType?: string|null,
  *   occurredAt?: \DateTimeInterface|null,
- *   payload?: array<string,mixed>|null,
+ *   payload?: mixed,
  *   recordType?: value-of<RecordType>|null,
  * }
  */
@@ -43,9 +43,8 @@ final class Webhook implements BaseModel
     #[Optional('occurred_at')]
     public ?\DateTimeInterface $occurredAt;
 
-    /** @var array<string,mixed>|null $payload */
-    #[Optional(map: 'mixed')]
-    public ?array $payload;
+    #[Optional]
+    public mixed $payload;
 
     /**
      * Identifies the type of the resource.
@@ -65,14 +64,13 @@ final class Webhook implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,mixed> $payload
      * @param RecordType|value-of<RecordType> $recordType
      */
     public static function with(
         ?string $id = null,
         ?string $eventType = null,
         ?\DateTimeInterface $occurredAt = null,
-        ?array $payload = null,
+        mixed $payload = null,
         RecordType|string|null $recordType = null,
     ): self {
         $self = new self;
@@ -119,10 +117,7 @@ final class Webhook implements BaseModel
         return $self;
     }
 
-    /**
-     * @param array<string,mixed> $payload
-     */
-    public function withPayload(array $payload): self
+    public function withPayload(mixed $payload): self
     {
         $self = clone $this;
         $self['payload'] = $payload;

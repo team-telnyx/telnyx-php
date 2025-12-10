@@ -5,18 +5,17 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\MessagingProfiles\MessagingProfile;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
 use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
 use Telnyx\MessagingProfiles\MessagingProfileGetResponse;
+use Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersResponse;
+use Telnyx\MessagingProfiles\MessagingProfileListResponse;
+use Telnyx\MessagingProfiles\MessagingProfileListShortCodesResponse;
 use Telnyx\MessagingProfiles\MessagingProfileNewResponse;
 use Telnyx\MessagingProfiles\MessagingProfileUpdateResponse;
 use Telnyx\MessagingProfiles\NumberPoolSettings;
 use Telnyx\MessagingProfiles\URLShortenerSettings;
-use Telnyx\PhoneNumberWithMessagingSettings;
 use Telnyx\RequestOptions;
-use Telnyx\ShortCode;
 
 interface MessagingProfilesContract
 {
@@ -82,19 +81,19 @@ interface MessagingProfilesContract
     /**
      * @api
      *
-     * @param string $messagingProfileID The id of the messaging profile to retrieve
+     * @param string $id The id of the messaging profile to retrieve
      *
      * @throws APIException
      */
     public function retrieve(
-        string $messagingProfileID,
+        string $id,
         ?RequestOptions $requestOptions = null
     ): MessagingProfileGetResponse;
 
     /**
      * @api
      *
-     * @param string $messagingProfileID The id of the messaging profile to retrieve
+     * @param string $id The id of the messaging profile to retrieve
      * @param string|null $alphaSender the alphanumeric sender ID to use when sending to destinations that require an alphanumeric sender ID
      * @param string $dailySpendLimit the maximum amount of money (in USD) that can be spent by this profile before midnight UTC
      * @param bool $dailySpendLimitEnabled whether to enforce the value configured by `daily_spend_limit`
@@ -137,7 +136,7 @@ interface MessagingProfilesContract
      * @throws APIException
      */
     public function update(
-        string $messagingProfileID,
+        string $id,
         ?string $alphaSender = null,
         ?string $dailySpendLimit = null,
         ?bool $dailySpendLimitEnabled = null,
@@ -166,61 +165,55 @@ interface MessagingProfilesContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return DefaultPagination<MessagingProfile>
-     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): MessagingProfileListResponse;
 
     /**
      * @api
      *
-     * @param string $messagingProfileID The id of the messaging profile to retrieve
+     * @param string $id The id of the messaging profile to retrieve
      *
      * @throws APIException
      */
     public function delete(
-        string $messagingProfileID,
+        string $id,
         ?RequestOptions $requestOptions = null
     ): MessagingProfileDeleteResponse;
 
     /**
      * @api
      *
-     * @param string $messagingProfileID The id of the messaging profile to retrieve
+     * @param string $id The id of the messaging profile to retrieve
      * @param array{
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
-     *
-     * @return DefaultPagination<PhoneNumberWithMessagingSettings>
      *
      * @throws APIException
      */
     public function listPhoneNumbers(
-        string $messagingProfileID,
+        string $id,
         ?array $page = null,
-        ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+        ?RequestOptions $requestOptions = null
+    ): MessagingProfileListPhoneNumbersResponse;
 
     /**
      * @api
      *
-     * @param string $messagingProfileID The id of the messaging profile to retrieve
+     * @param string $id The id of the messaging profile to retrieve
      * @param array{
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return DefaultPagination<ShortCode>
-     *
      * @throws APIException
      */
     public function listShortCodes(
-        string $messagingProfileID,
+        string $id,
         ?array $page = null,
-        ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+        ?RequestOptions $requestOptions = null
+    ): MessagingProfileListShortCodesResponse;
 }

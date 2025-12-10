@@ -9,7 +9,6 @@ use Telnyx\CallEvents\CallEventListParams\Filter\Status;
 use Telnyx\CallEvents\CallEventListParams\Filter\Type;
 use Telnyx\CallEvents\CallEventListResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
 interface CallEventsContract
@@ -38,13 +37,11 @@ interface CallEventsContract
      *   after?: string, before?: string, limit?: int, number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      *
-     * @return DefaultPagination<CallEventListResponse>
-     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): CallEventListResponse;
 }

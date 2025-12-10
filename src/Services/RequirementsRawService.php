@@ -7,7 +7,6 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\Requirements\RequirementGetResponse;
 use Telnyx\Requirements\RequirementListParams;
@@ -64,7 +63,7 @@ final class RequirementsRawService implements RequirementsRawContract
      *   sort?: list<'created_at'|'updated_at'|'country_code'|'phone_number_type'|'-created_at'|'-updated_at'|'-country_code'|'-phone_number_type'|Sort>,
      * }|RequirementListParams $params
      *
-     * @return BaseResponse<DefaultPagination<RequirementListResponse>>
+     * @return BaseResponse<RequirementListResponse>
      *
      * @throws APIException
      */
@@ -84,7 +83,6 @@ final class RequirementsRawService implements RequirementsRawContract
             query: $parsed,
             options: $options,
             convert: RequirementListResponse::class,
-            page: DefaultPagination::class,
         );
     }
 }

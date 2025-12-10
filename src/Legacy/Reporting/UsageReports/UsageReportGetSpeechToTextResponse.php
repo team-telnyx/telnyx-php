@@ -9,18 +9,15 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type UsageReportGetSpeechToTextResponseShape = array{
- *   data?: array<string,mixed>|null
- * }
+ * @phpstan-type UsageReportGetSpeechToTextResponseShape = array{data?: mixed}
  */
 final class UsageReportGetSpeechToTextResponse implements BaseModel
 {
     /** @use SdkModel<UsageReportGetSpeechToTextResponseShape> */
     use SdkModel;
 
-    /** @var array<string,mixed>|null $data */
-    #[Optional(map: 'mixed')]
-    public ?array $data;
+    #[Optional]
+    public mixed $data;
 
     public function __construct()
     {
@@ -31,10 +28,8 @@ final class UsageReportGetSpeechToTextResponse implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param array<string,mixed> $data
      */
-    public static function with(?array $data = null): self
+    public static function with(mixed $data = null): self
     {
         $self = new self;
 
@@ -43,10 +38,7 @@ final class UsageReportGetSpeechToTextResponse implements BaseModel
         return $self;
     }
 
-    /**
-     * @param array<string,mixed> $data
-     */
-    public function withData(array $data): self
+    public function withData(mixed $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

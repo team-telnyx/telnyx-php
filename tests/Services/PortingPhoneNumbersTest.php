@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse;
 use Tests\UnsupportedMockTests;
 
@@ -35,14 +34,9 @@ final class PortingPhoneNumbersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->portingPhoneNumbers->list();
+        $result = $this->client->portingPhoneNumbers->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(PortingPhoneNumberListResponse::class, $item);
-        }
+        $this->assertInstanceOf(PortingPhoneNumberListResponse::class, $result);
     }
 }

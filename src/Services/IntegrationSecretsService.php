@@ -7,9 +7,8 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
-use Telnyx\IntegrationSecrets\IntegrationSecret;
 use Telnyx\IntegrationSecrets\IntegrationSecretListParams\Filter\Type;
+use Telnyx\IntegrationSecrets\IntegrationSecretListResponse;
 use Telnyx\IntegrationSecrets\IntegrationSecretNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\IntegrationSecretsContract;
@@ -74,24 +73,18 @@ final class IntegrationSecretsService implements IntegrationSecretsContract
      * @param array{
      *   type?: 'bearer'|'basic'|Type
      * } $filter Consolidated filter parameter (deepObject style). Originally: filter[type]
-     *
-     * @return DefaultFlatPagination<IntegrationSecret>
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-            ],
-        );
+    ): IntegrationSecretListResponse {
+        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\ExternalConnections\ExternalConnection;
 use Telnyx\ExternalConnections\ExternalConnectionDeleteResponse;
 use Telnyx\ExternalConnections\ExternalConnectionGetResponse;
 use Telnyx\ExternalConnections\ExternalConnectionListParams\Filter\ExternalSipConnection;
+use Telnyx\ExternalConnections\ExternalConnectionListResponse;
 use Telnyx\ExternalConnections\ExternalConnectionNewResponse;
 use Telnyx\ExternalConnections\ExternalConnectionUpdateLocationResponse;
 use Telnyx\ExternalConnections\ExternalConnectionUpdateResponse;
@@ -95,15 +94,13 @@ interface ExternalConnectionsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return DefaultPagination<ExternalConnection>
-     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): ExternalConnectionListResponse;
 
     /**
      * @api

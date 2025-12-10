@@ -6,11 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\AI\McpServers\McpServerGetResponse;
-use Telnyx\AI\McpServers\McpServerListResponse;
 use Telnyx\AI\McpServers\McpServerNewResponse;
 use Telnyx\AI\McpServers\McpServerUpdateResponse;
 use Telnyx\Client;
-use Telnyx\DefaultFlatPaginationTopLevelArray;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -100,15 +98,10 @@ final class McpServersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->ai->mcpServers->list();
+        $result = $this->client->ai->mcpServers->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPaginationTopLevelArray::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(McpServerListResponse::class, $item);
-        }
+        $this->assertIsList($result);
     }
 
     #[Test]

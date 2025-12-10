@@ -7,12 +7,11 @@ namespace Telnyx\Services\ExternalConnections;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
-use Telnyx\ExternalConnections\Uploads\Upload;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams\AdditionalUsage;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams\Usage;
 use Telnyx\ExternalConnections\Uploads\UploadGetResponse;
 use Telnyx\ExternalConnections\Uploads\UploadListParams\Filter\Status\Eq;
+use Telnyx\ExternalConnections\Uploads\UploadListResponse;
 use Telnyx\ExternalConnections\Uploads\UploadNewResponse;
 use Telnyx\ExternalConnections\Uploads\UploadPendingCountResponse;
 use Telnyx\ExternalConnections\Uploads\UploadRefreshStatusResponse;
@@ -115,8 +114,6 @@ final class UploadsService implements UploadsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return DefaultPagination<Upload>
-     *
      * @throws APIException
      */
     public function list(
@@ -124,7 +121,7 @@ final class UploadsService implements UploadsContract
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): UploadListResponse {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
         // @phpstan-ignore-next-line argument.type

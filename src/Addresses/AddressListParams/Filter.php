@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Addresses\AddressListParams;
 
 use Telnyx\Addresses\AddressListParams\Filter\AddressBook;
-use Telnyx\Addresses\AddressListParams\Filter\CustomerReference\CustomerReferenceMatcher;
+use Telnyx\Addresses\AddressListParams\Filter\CustomerReference\UnionMember1;
 use Telnyx\Addresses\AddressListParams\Filter\StreetAddress;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type FilterShape = array{
  *   addressBook?: AddressBook|null,
- *   customerReference?: string|null|CustomerReferenceMatcher,
+ *   customerReference?: string|null|UnionMember1,
  *   streetAddress?: StreetAddress|null,
  *   usedAsEmergency?: string|null,
  * }
@@ -33,7 +33,7 @@ final class Filter implements BaseModel
      * If present, addresses with <code>customer_reference</code> containing the given value will be returned. Matching is not case-sensitive.
      */
     #[Optional('customer_reference')]
-    public string|CustomerReferenceMatcher|null $customerReference;
+    public string|UnionMember1|null $customerReference;
 
     #[Optional('street_address')]
     public ?StreetAddress $streetAddress;
@@ -55,14 +55,14 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param AddressBook|array{eq?: string|null} $addressBook
-     * @param string|CustomerReferenceMatcher|array{
+     * @param string|UnionMember1|array{
      *   contains?: string|null, eq?: string|null
      * } $customerReference
      * @param StreetAddress|array{contains?: string|null} $streetAddress
      */
     public static function with(
         AddressBook|array|null $addressBook = null,
-        string|CustomerReferenceMatcher|array|null $customerReference = null,
+        string|UnionMember1|array|null $customerReference = null,
         StreetAddress|array|null $streetAddress = null,
         ?string $usedAsEmergency = null,
     ): self {
@@ -90,12 +90,12 @@ final class Filter implements BaseModel
     /**
      * If present, addresses with <code>customer_reference</code> containing the given value will be returned. Matching is not case-sensitive.
      *
-     * @param string|CustomerReferenceMatcher|array{
+     * @param string|UnionMember1|array{
      *   contains?: string|null, eq?: string|null
      * } $customerReference
      */
     public function withCustomerReference(
-        string|CustomerReferenceMatcher|array $customerReference
+        string|UnionMember1|array $customerReference
     ): self {
         $self = clone $this;
         $self['customerReference'] = $customerReference;

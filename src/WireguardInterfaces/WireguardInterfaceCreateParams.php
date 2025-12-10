@@ -16,10 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\WireguardInterfacesService::create()
  *
  * @phpstan-type WireguardInterfaceCreateParamsShape = array{
- *   regionCode: string,
- *   enableSipTrunking?: bool,
- *   name?: string,
- *   networkID?: string,
+ *   networkID: string, regionCode: string, enableSipTrunking?: bool, name?: string
  * }
  */
 final class WireguardInterfaceCreateParams implements BaseModel
@@ -27,6 +24,12 @@ final class WireguardInterfaceCreateParams implements BaseModel
     /** @use SdkModel<WireguardInterfaceCreateParamsShape> */
     use SdkModel;
     use SdkParams;
+
+    /**
+     * The id of the network associated with the interface.
+     */
+    #[Required('network_id')]
+    public string $networkID;
 
     /**
      * The region the interface should be deployed to.
@@ -47,23 +50,17 @@ final class WireguardInterfaceCreateParams implements BaseModel
     public ?string $name;
 
     /**
-     * The id of the network associated with the interface.
-     */
-    #[Optional('network_id')]
-    public ?string $networkID;
-
-    /**
      * `new WireguardInterfaceCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * WireguardInterfaceCreateParams::with(regionCode: ...)
+     * WireguardInterfaceCreateParams::with(networkID: ..., regionCode: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new WireguardInterfaceCreateParams)->withRegionCode(...)
+     * (new WireguardInterfaceCreateParams)->withNetworkID(...)->withRegionCode(...)
      * ```
      */
     public function __construct()
@@ -77,18 +74,29 @@ final class WireguardInterfaceCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
+        string $networkID,
         string $regionCode,
         ?bool $enableSipTrunking = null,
         ?string $name = null,
-        ?string $networkID = null,
     ): self {
         $self = new self;
 
+        $self['networkID'] = $networkID;
         $self['regionCode'] = $regionCode;
 
         null !== $enableSipTrunking && $self['enableSipTrunking'] = $enableSipTrunking;
         null !== $name && $self['name'] = $name;
-        null !== $networkID && $self['networkID'] = $networkID;
+
+        return $self;
+    }
+
+    /**
+     * The id of the network associated with the interface.
+     */
+    public function withNetworkID(string $networkID): self
+    {
+        $self = clone $this;
+        $self['networkID'] = $networkID;
 
         return $self;
     }
@@ -122,17 +130,6 @@ final class WireguardInterfaceCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['name'] = $name;
-
-        return $self;
-    }
-
-    /**
-     * The id of the network associated with the interface.
-     */
-    public function withNetworkID(string $networkID): self
-    {
-        $self = clone $this;
-        $self['networkID'] = $networkID;
 
         return $self;
     }

@@ -105,7 +105,7 @@ interface ConversationsContract
      * @param string $conversationID The ID of the conversation
      * @param array<string,mixed> $metadata
      * @param list<array<string,mixed>> $toolCalls
-     * @param string|array<string,mixed> $toolChoice
+     * @param mixed|string $toolChoice
      *
      * @throws APIException
      */
@@ -118,7 +118,7 @@ interface ConversationsContract
         string|\DateTimeInterface|null $sentAt = null,
         ?string $toolCallID = null,
         ?array $toolCalls = null,
-        string|array|null $toolChoice = null,
+        mixed $toolChoice = null,
         ?RequestOptions $requestOptions = null,
     ): mixed;
 

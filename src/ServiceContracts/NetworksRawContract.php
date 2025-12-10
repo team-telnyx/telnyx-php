@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\Networks\NetworkCreateParams;
 use Telnyx\Networks\NetworkDeleteResponse;
 use Telnyx\Networks\NetworkGetResponse;
@@ -52,7 +51,7 @@ interface NetworksRawContract
     /**
      * @api
      *
-     * @param string $networkID identifies the resource
+     * @param string $id identifies the resource
      * @param array<mixed>|NetworkUpdateParams $params
      *
      * @return BaseResponse<NetworkUpdateResponse>
@@ -60,7 +59,7 @@ interface NetworksRawContract
      * @throws APIException
      */
     public function update(
-        string $networkID,
+        string $id,
         array|NetworkUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse;
@@ -70,7 +69,7 @@ interface NetworksRawContract
      *
      * @param array<mixed>|NetworkListParams $params
      *
-     * @return BaseResponse<DefaultPagination<NetworkListResponse>>
+     * @return BaseResponse<NetworkListResponse>
      *
      * @throws APIException
      */
@@ -99,7 +98,7 @@ interface NetworksRawContract
      * @param string $id identifies the resource
      * @param array<mixed>|NetworkListInterfacesParams $params
      *
-     * @return BaseResponse<DefaultPagination<NetworkListInterfacesResponse>>
+     * @return BaseResponse<NetworkListInterfacesResponse>
      *
      * @throws APIException
      */

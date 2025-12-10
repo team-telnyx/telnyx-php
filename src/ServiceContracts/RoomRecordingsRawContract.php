@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams;
 use Telnyx\RoomRecordings\RoomRecordingDeleteBulkResponse;
@@ -35,7 +34,7 @@ interface RoomRecordingsRawContract
      *
      * @param array<mixed>|RoomRecordingListParams $params
      *
-     * @return BaseResponse<DefaultPagination<RoomRecordingListResponse>>
+     * @return BaseResponse<RoomRecordingListResponse>
      *
      * @throws APIException
      */

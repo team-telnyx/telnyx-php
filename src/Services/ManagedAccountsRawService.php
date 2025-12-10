@@ -8,7 +8,6 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
 use Telnyx\ManagedAccounts\ManagedAccountCreateParams;
 use Telnyx\ManagedAccounts\ManagedAccountGetAllocatableGlobalOutboundChannelsResponse;
 use Telnyx\ManagedAccounts\ManagedAccountGetResponse;
@@ -140,7 +139,7 @@ final class ManagedAccountsRawService implements ManagedAccountsRawContract
      *   sort?: 'created_at'|'email'|Sort,
      * }|ManagedAccountListParams $params
      *
-     * @return BaseResponse<DefaultPagination<ManagedAccountListResponse>>
+     * @return BaseResponse<ManagedAccountListResponse>
      *
      * @throws APIException
      */
@@ -163,7 +162,6 @@ final class ManagedAccountsRawService implements ManagedAccountsRawContract
             ),
             options: $options,
             convert: ManagedAccountListResponse::class,
-            page: DefaultPagination::class,
         );
     }
 

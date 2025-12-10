@@ -7,13 +7,12 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerifyProfilesContract;
 use Telnyx\VerifyProfiles\MessageTemplate;
-use Telnyx\VerifyProfiles\VerifyProfile;
 use Telnyx\VerifyProfiles\VerifyProfileData;
 use Telnyx\VerifyProfiles\VerifyProfileGetTemplatesResponse;
+use Telnyx\VerifyProfiles\VerifyProfileListResponse;
 
 final class VerifyProfilesService implements VerifyProfilesContract
 {
@@ -167,24 +166,18 @@ final class VerifyProfilesService implements VerifyProfilesContract
      * @param array{
      *   name?: string
      * } $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
-     *
-     * @return DefaultFlatPagination<VerifyProfile>
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-            ],
-        );
+    ): VerifyProfileListResponse {
+        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

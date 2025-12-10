@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListResponse;
 use Telnyx\RequestOptions;
 
@@ -26,13 +25,11 @@ interface MobileNetworkOperatorsContract
      *   number?: int, size?: int
      * } $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return DefaultPagination<MobileNetworkOperatorListResponse>
-     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): MobileNetworkOperatorListResponse;
 }

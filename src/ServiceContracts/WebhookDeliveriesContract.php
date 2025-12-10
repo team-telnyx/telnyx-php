@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\Status\Eq;
@@ -40,13 +39,11 @@ interface WebhookDeliveriesContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return DefaultPagination<WebhookDeliveryListResponse>
-     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): WebhookDeliveryListResponse;
 }

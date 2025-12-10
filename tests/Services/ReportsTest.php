@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\Reports\ReportListMdrsResponse;
 use Telnyx\Reports\ReportListWdrsResponse;
 use Tests\UnsupportedMockTests;
@@ -49,14 +48,9 @@ final class ReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->reports->listWdrs();
+        $result = $this->client->reports->listWdrs();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(ReportListWdrsResponse::class, $item);
-        }
+        $this->assertInstanceOf(ReportListWdrsResponse::class, $result);
     }
 }

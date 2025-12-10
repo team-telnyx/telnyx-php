@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\AI;
 
 use Telnyx\AI\McpServers\McpServerGetResponse;
-use Telnyx\AI\McpServers\McpServerListResponse;
+use Telnyx\AI\McpServers\McpServerListResponseItem;
 use Telnyx\AI\McpServers\McpServerNewResponse;
 use Telnyx\AI\McpServers\McpServerUpdateResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPaginationTopLevelArray;
 use Telnyx\RequestOptions;
 
 interface McpServersContract
@@ -62,7 +61,7 @@ interface McpServersContract
     /**
      * @api
      *
-     * @return DefaultFlatPaginationTopLevelArray<McpServerListResponse>
+     * @return list<McpServerListResponseItem>
      *
      * @throws APIException
      */
@@ -72,7 +71,7 @@ interface McpServersContract
         ?string $type = null,
         ?string $url = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPaginationTopLevelArray;
+    ): array;
 
     /**
      * @api

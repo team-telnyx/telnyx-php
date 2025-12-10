@@ -6,12 +6,11 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\ExternalConnections\ExternalConnection;
 use Telnyx\ExternalConnections\ExternalConnectionCreateParams;
 use Telnyx\ExternalConnections\ExternalConnectionDeleteResponse;
 use Telnyx\ExternalConnections\ExternalConnectionGetResponse;
 use Telnyx\ExternalConnections\ExternalConnectionListParams;
+use Telnyx\ExternalConnections\ExternalConnectionListResponse;
 use Telnyx\ExternalConnections\ExternalConnectionNewResponse;
 use Telnyx\ExternalConnections\ExternalConnectionUpdateLocationParams;
 use Telnyx\ExternalConnections\ExternalConnectionUpdateLocationResponse;
@@ -70,7 +69,7 @@ interface ExternalConnectionsRawContract
      *
      * @param array<mixed>|ExternalConnectionListParams $params
      *
-     * @return BaseResponse<DefaultPagination<ExternalConnection>>
+     * @return BaseResponse<ExternalConnectionListResponse>
      *
      * @throws APIException
      */

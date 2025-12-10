@@ -7,12 +7,11 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
-use Telnyx\Portouts\PortoutDetails;
 use Telnyx\Portouts\PortoutGetResponse;
 use Telnyx\Portouts\PortoutListParams\Filter\Status;
 use Telnyx\Portouts\PortoutListParams\Filter\StatusIn;
 use Telnyx\Portouts\PortoutListRejectionCodesResponse;
+use Telnyx\Portouts\PortoutListResponse;
 use Telnyx\Portouts\PortoutUpdateStatusResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortoutsContract;
@@ -106,15 +105,13 @@ final class PortoutsService implements PortoutsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return DefaultPagination<PortoutDetails>
-     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): PortoutListResponse {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
         // @phpstan-ignore-next-line argument.type

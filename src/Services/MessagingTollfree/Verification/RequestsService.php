@@ -7,7 +7,7 @@ namespace Telnyx\Services\MessagingTollfree\Verification;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPaginationForMessagingTollfree;
+use Telnyx\MessagingTollfree\Verification\Requests\RequestListResponse;
 use Telnyx\MessagingTollfree\Verification\Requests\TfPhoneNumber;
 use Telnyx\MessagingTollfree\Verification\Requests\TfVerificationStatus;
 use Telnyx\MessagingTollfree\Verification\Requests\TollFreeVerificationEntityType;
@@ -307,8 +307,6 @@ final class RequestsService implements RequestsContract
      *         This value is automatically clamped if the provided value is too large
      * @param 'Verified'|'Rejected'|'Waiting For Vendor'|'Waiting For Customer'|'Waiting For Telnyx'|'In Progress'|TfVerificationStatus $status Tollfree verification status
      *
-     * @return DefaultPaginationForMessagingTollfree<VerificationRequestStatus>
-     *
      * @throws APIException
      */
     public function list(
@@ -319,7 +317,7 @@ final class RequestsService implements RequestsContract
         ?string $phoneNumber = null,
         string|TfVerificationStatus|null $status = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPaginationForMessagingTollfree {
+    ): RequestListResponse {
         $params = Util::removeNulls(
             [
                 'page' => $page,

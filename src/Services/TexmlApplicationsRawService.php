@@ -9,10 +9,8 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\DtmfType;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TexmlApplicationsRawContract;
-use Telnyx\TexmlApplications\TexmlApplication;
 use Telnyx\TexmlApplications\TexmlApplicationCreateParams;
 use Telnyx\TexmlApplications\TexmlApplicationCreateParams\Inbound\SipSubdomainReceiveSettings;
 use Telnyx\TexmlApplications\TexmlApplicationCreateParams\StatusCallbackMethod;
@@ -21,6 +19,7 @@ use Telnyx\TexmlApplications\TexmlApplicationDeleteResponse;
 use Telnyx\TexmlApplications\TexmlApplicationGetResponse;
 use Telnyx\TexmlApplications\TexmlApplicationListParams;
 use Telnyx\TexmlApplications\TexmlApplicationListParams\Sort;
+use Telnyx\TexmlApplications\TexmlApplicationListResponse;
 use Telnyx\TexmlApplications\TexmlApplicationNewResponse;
 use Telnyx\TexmlApplications\TexmlApplicationUpdateParams;
 use Telnyx\TexmlApplications\TexmlApplicationUpdateResponse;
@@ -172,7 +171,7 @@ final class TexmlApplicationsRawService implements TexmlApplicationsRawContract
      *   sort?: 'created_at'|'friendly_name'|'active'|Sort,
      * }|TexmlApplicationListParams $params
      *
-     * @return BaseResponse<DefaultPagination<TexmlApplication>>
+     * @return BaseResponse<TexmlApplicationListResponse>
      *
      * @throws APIException
      */
@@ -191,8 +190,7 @@ final class TexmlApplicationsRawService implements TexmlApplicationsRawContract
             path: 'texml_applications',
             query: $parsed,
             options: $options,
-            convert: TexmlApplication::class,
-            page: DefaultPagination::class,
+            convert: TexmlApplicationListResponse::class,
         );
     }
 

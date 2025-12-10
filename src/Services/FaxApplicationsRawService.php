@@ -8,14 +8,13 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
-use Telnyx\DefaultPagination;
-use Telnyx\FaxApplications\FaxApplication;
 use Telnyx\FaxApplications\FaxApplicationCreateParams;
 use Telnyx\FaxApplications\FaxApplicationCreateParams\Inbound\SipSubdomainReceiveSettings;
 use Telnyx\FaxApplications\FaxApplicationDeleteResponse;
 use Telnyx\FaxApplications\FaxApplicationGetResponse;
 use Telnyx\FaxApplications\FaxApplicationListParams;
 use Telnyx\FaxApplications\FaxApplicationListParams\Sort;
+use Telnyx\FaxApplications\FaxApplicationListResponse;
 use Telnyx\FaxApplications\FaxApplicationNewResponse;
 use Telnyx\FaxApplications\FaxApplicationUpdateParams;
 use Telnyx\FaxApplications\FaxApplicationUpdateResponse;
@@ -158,7 +157,7 @@ final class FaxApplicationsRawService implements FaxApplicationsRawContract
      *   sort?: 'created_at'|'application_name'|'active'|Sort,
      * }|FaxApplicationListParams $params
      *
-     * @return BaseResponse<DefaultPagination<FaxApplication>>
+     * @return BaseResponse<FaxApplicationListResponse>
      *
      * @throws APIException
      */
@@ -177,8 +176,7 @@ final class FaxApplicationsRawService implements FaxApplicationsRawContract
             path: 'fax_applications',
             query: $parsed,
             options: $options,
-            convert: FaxApplication::class,
-            page: DefaultPagination::class,
+            convert: FaxApplicationListResponse::class,
         );
     }
 

@@ -36,7 +36,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Calls\ActionsService::gatherUsingAI()
  *
  * @phpstan-type ActionGatherUsingAIParamsShape = array{
- *   parameters: array<string,mixed>,
+ *   parameters: mixed,
  *   assistant?: Assistant|array{
  *     instructions?: string|null,
  *     model?: string|null,
@@ -74,11 +74,9 @@ final class ActionGatherUsingAIParams implements BaseModel
 
     /**
      * The parameters described as a JSON Schema object that needs to be gathered by the voice assistant. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
-     *
-     * @var array<string,mixed> $parameters
      */
-    #[Required(map: 'mixed')]
-    public array $parameters;
+    #[Required]
+    public mixed $parameters;
 
     /**
      * Assistant configuration including choice of LLM, custom instructions, and tools.
@@ -192,7 +190,6 @@ final class ActionGatherUsingAIParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,mixed> $parameters
      * @param Assistant|array{
      *   instructions?: string|null,
      *   model?: string|null,
@@ -215,7 +212,7 @@ final class ActionGatherUsingAIParams implements BaseModel
      * } $voiceSettings
      */
     public static function with(
-        array $parameters,
+        mixed $parameters,
         Assistant|array|null $assistant = null,
         ?string $clientState = null,
         ?string $commandID = null,
@@ -253,10 +250,8 @@ final class ActionGatherUsingAIParams implements BaseModel
 
     /**
      * The parameters described as a JSON Schema object that needs to be gathered by the voice assistant. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
-     *
-     * @param array<string,mixed> $parameters
      */
-    public function withParameters(array $parameters): self
+    public function withParameters(mixed $parameters): self
     {
         $self = clone $this;
         $self['parameters'] = $parameters;

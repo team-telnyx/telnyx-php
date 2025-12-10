@@ -76,7 +76,7 @@ final class Data implements BaseModel
      *   connectionID?: string|null,
      *   from?: string|null,
      *   messageHistory?: list<MessageHistory>|null,
-     *   partialResults?: array<string,mixed>|null,
+     *   partialResults?: mixed,
      *   to?: string|null,
      * } $payload
      * @param RecordType|value-of<RecordType> $recordType
@@ -143,7 +143,7 @@ final class Data implements BaseModel
      *   connectionID?: string|null,
      *   from?: string|null,
      *   messageHistory?: list<MessageHistory>|null,
-     *   partialResults?: array<string,mixed>|null,
+     *   partialResults?: mixed,
      *   to?: string|null,
      * } $payload
      */

@@ -6,10 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
-use Telnyx\GlobalIPAssignments\GlobalIPAssignment;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentDeleteResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentGetResponse;
+use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentNewResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateResponse;
 use Tests\UnsupportedMockTests;
@@ -69,7 +68,7 @@ final class GlobalIPAssignmentsTest extends TestCase
 
         $result = $this->client->globalIPAssignments->update(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            globalIPAssignmentUpdateRequest: [],
+            body: []
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -85,7 +84,10 @@ final class GlobalIPAssignmentsTest extends TestCase
 
         $result = $this->client->globalIPAssignments->update(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            globalIPAssignmentUpdateRequest: [],
+            body: [
+                'globalIPID' => 'a836125b-20b6-452e-9c03-2653f09c7ed7',
+                'wireguardPeerID' => 'e66c496d-4a85-423b-8b2a-8e63fac20320',
+            ],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -99,15 +101,10 @@ final class GlobalIPAssignmentsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->globalIPAssignments->list();
+        $result = $this->client->globalIPAssignments->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(GlobalIPAssignment::class, $item);
-        }
+        $this->assertInstanceOf(GlobalIPAssignmentListResponse::class, $result);
     }
 
     #[Test]

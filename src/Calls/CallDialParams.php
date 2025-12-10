@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace Telnyx\Calls;
 
 use Telnyx\Calls\Actions\TranscriptionEngineAConfig;
-use Telnyx\Calls\Actions\TranscriptionEngineAzureConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineBConfig;
-use Telnyx\Calls\Actions\TranscriptionEngineGoogleConfig;
-use Telnyx\Calls\Actions\TranscriptionEngineTelnyxConfig;
 use Telnyx\Calls\Actions\TranscriptionStartRequest;
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngine;
+use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Azure;
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\DeepgramNova2Config;
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\DeepgramNova3Config;
+use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Google;
+use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Telnyx;
 use Telnyx\Calls\CallDialParams\AnsweringMachineDetection;
 use Telnyx\Calls\CallDialParams\AnsweringMachineDetectionConfig;
 use Telnyx\Calls\CallDialParams\ConferenceConfig;
@@ -140,7 +140,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *     clientState?: string|null,
  *     commandID?: string|null,
  *     transcriptionEngine?: value-of<TranscriptionEngine>|null,
- *     transcriptionEngineConfig?: null|TranscriptionEngineGoogleConfig|TranscriptionEngineTelnyxConfig|DeepgramNova2Config|DeepgramNova3Config|TranscriptionEngineAzureConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig,
+ *     transcriptionEngineConfig?: null|Google|Telnyx|DeepgramNova2Config|DeepgramNova3Config|Azure|TranscriptionEngineAConfig|TranscriptionEngineBConfig,
  *     transcriptionTracks?: string|null,
  *   },
  *   webhookURL?: string,
@@ -598,7 +598,7 @@ final class CallDialParams implements BaseModel
      *   clientState?: string|null,
      *   commandID?: string|null,
      *   transcriptionEngine?: value-of<TranscriptionEngine>|null,
-     *   transcriptionEngineConfig?: TranscriptionEngineGoogleConfig|TranscriptionEngineTelnyxConfig|DeepgramNova2Config|DeepgramNova3Config|TranscriptionEngineAzureConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null,
+     *   transcriptionEngineConfig?: Google|Telnyx|DeepgramNova2Config|DeepgramNova3Config|Azure|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null,
      *   transcriptionTracks?: string|null,
      * } $transcriptionConfig
      * @param WebhookURLMethod|value-of<WebhookURLMethod> $webhookURLMethod
@@ -1352,7 +1352,7 @@ final class CallDialParams implements BaseModel
      *   clientState?: string|null,
      *   commandID?: string|null,
      *   transcriptionEngine?: value-of<TranscriptionEngine>|null,
-     *   transcriptionEngineConfig?: TranscriptionEngineGoogleConfig|TranscriptionEngineTelnyxConfig|DeepgramNova2Config|DeepgramNova3Config|TranscriptionEngineAzureConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null,
+     *   transcriptionEngineConfig?: Google|Telnyx|DeepgramNova2Config|DeepgramNova3Config|Azure|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null,
      *   transcriptionTracks?: string|null,
      * } $transcriptionConfig
      */

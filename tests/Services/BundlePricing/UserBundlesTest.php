@@ -5,14 +5,13 @@ namespace Tests\Services\BundlePricing;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Telnyx\BundlePricing\UserBundles\UserBundle;
 use Telnyx\BundlePricing\UserBundles\UserBundleDeactivateResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleGetResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleListResourcesResponse;
+use Telnyx\BundlePricing\UserBundles\UserBundleListResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleNewResponse;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -68,15 +67,10 @@ final class UserBundlesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->bundlePricing->userBundles->list();
+        $result = $this->client->bundlePricing->userBundles->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(UserBundle::class, $item);
-        }
+        $this->assertInstanceOf(UserBundleListResponse::class, $result);
     }
 
     #[Test]

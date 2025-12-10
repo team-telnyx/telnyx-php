@@ -7,15 +7,14 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
 use Telnyx\OutboundVoiceProfiles\OutboundCallRecording;
 use Telnyx\OutboundVoiceProfiles\OutboundCallRecording\CallRecordingChannels;
 use Telnyx\OutboundVoiceProfiles\OutboundCallRecording\CallRecordingFormat;
 use Telnyx\OutboundVoiceProfiles\OutboundCallRecording\CallRecordingType;
-use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileDeleteResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileGetResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Sort;
+use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileNewResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateResponse;
 use Telnyx\OutboundVoiceProfiles\ServicePlan;
@@ -226,8 +225,6 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      *   </li>
      * </ul> <br/>
      *
-     * @return DefaultPagination<OutboundVoiceProfile>
-     *
      * @throws APIException
      */
     public function list(
@@ -235,7 +232,7 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
         ?array $page = null,
         string|Sort $sort = '-created_at',
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): OutboundVoiceProfileListResponse {
         $params = Util::removeNulls(
             ['filter' => $filter, 'page' => $page, 'sort' => $sort]
         );

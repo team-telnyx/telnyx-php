@@ -6,14 +6,13 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\CustomerServiceRecords\CustomerServiceRecord;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordGetResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams;
+use Telnyx\CustomerServiceRecords\CustomerServiceRecordListResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordNewResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageParams;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageResponse;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
 interface CustomerServiceRecordsRawContract
@@ -51,7 +50,7 @@ interface CustomerServiceRecordsRawContract
      *
      * @param array<mixed>|CustomerServiceRecordListParams $params
      *
-     * @return BaseResponse<DefaultPagination<CustomerServiceRecord>>
+     * @return BaseResponse<CustomerServiceRecordListResponse>
      *
      * @throws APIException
      */

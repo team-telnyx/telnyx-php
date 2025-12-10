@@ -6,9 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
-use Telnyx\SimCardOrders\SimCardOrder;
 use Telnyx\SimCardOrders\SimCardOrderGetResponse;
+use Telnyx\SimCardOrders\SimCardOrderListResponse;
 use Telnyx\SimCardOrders\SimCardOrderNewResponse;
 use Tests\UnsupportedMockTests;
 
@@ -84,14 +83,9 @@ final class SimCardOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->simCardOrders->list();
+        $result = $this->client->simCardOrders->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(SimCardOrder::class, $item);
-        }
+        $this->assertInstanceOf(SimCardOrderListResponse::class, $result);
     }
 }

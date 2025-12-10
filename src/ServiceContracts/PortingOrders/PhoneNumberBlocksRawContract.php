@@ -6,13 +6,12 @@ namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockDeleteParams;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockDeleteResponse;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams;
+use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListResponse;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockNewResponse;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock;
 use Telnyx\RequestOptions;
 
 interface PhoneNumberBlocksRawContract
@@ -39,7 +38,7 @@ interface PhoneNumberBlocksRawContract
      * @param string $portingOrderID Identifies the Porting Order associated with the phone number blocks
      * @param array<mixed>|PhoneNumberBlockListParams $params
      *
-     * @return BaseResponse<DefaultPagination<PortingPhoneNumberBlock>>
+     * @return BaseResponse<PhoneNumberBlockListResponse>
      *
      * @throws APIException
      */

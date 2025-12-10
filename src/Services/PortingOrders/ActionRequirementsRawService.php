@@ -7,7 +7,6 @@ namespace Telnyx\Services\PortingOrders;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams;
@@ -45,7 +44,7 @@ final class ActionRequirementsRawService implements ActionRequirementsRawContrac
      *   },
      * }|ActionRequirementListParams $params
      *
-     * @return BaseResponse<DefaultPagination<ActionRequirementListResponse>>
+     * @return BaseResponse<ActionRequirementListResponse>
      *
      * @throws APIException
      */
@@ -66,7 +65,6 @@ final class ActionRequirementsRawService implements ActionRequirementsRawContrac
             query: $parsed,
             options: $options,
             convert: ActionRequirementListResponse::class,
-            page: DefaultPagination::class,
         );
     }
 

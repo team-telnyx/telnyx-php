@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Legacy\Reporting\UsageReports;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Legacy\Reporting\UsageReports\Messaging\MdrUsageReportResponseLegacy;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingDeleteResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingGetResponse;
+use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingListResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingNewResponse;
-use Telnyx\PerPagePagination;
 use Telnyx\RequestOptions;
 
 interface MessagingContract
@@ -49,15 +48,13 @@ interface MessagingContract
      * @param int $page Page number
      * @param int $perPage Size of the page
      *
-     * @return PerPagePagination<MdrUsageReportResponseLegacy>
-     *
      * @throws APIException
      */
     public function list(
         int $page = 1,
         int $perPage = 20,
         ?RequestOptions $requestOptions = null
-    ): PerPagePagination;
+    ): MessagingListResponse;
 
     /**
      * @api

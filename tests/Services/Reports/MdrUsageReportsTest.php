@@ -6,11 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultFlatPagination;
-use Telnyx\Reports\MdrUsageReports\MdrUsageReport;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportDeleteResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportGetResponse;
+use Telnyx\Reports\MdrUsageReports\MdrUsageReportListResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportNewResponse;
 use Tests\UnsupportedMockTests;
 
@@ -89,15 +88,10 @@ final class MdrUsageReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->reports->mdrUsageReports->list();
+        $result = $this->client->reports->mdrUsageReports->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(MdrUsageReport::class, $item);
-        }
+        $this->assertInstanceOf(MdrUsageReportListResponse::class, $result);
     }
 
     #[Test]

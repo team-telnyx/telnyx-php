@@ -8,7 +8,6 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\Reports\ReportListMdrsParams;
 use Telnyx\Reports\ReportListMdrsParams\Direction;
 use Telnyx\Reports\ReportListMdrsParams\MessageType;
@@ -85,8 +84,7 @@ final class ReportsRawService implements ReportsRawContract
      *   imsi?: string,
      *   mcc?: string,
      *   mnc?: string,
-     *   pageNumber?: int,
-     *   pageSize?: int,
+     *   page?: array{number?: int, size?: int},
      *   phoneNumber?: string,
      *   simCardID?: string,
      *   simGroupID?: string,
@@ -95,7 +93,7 @@ final class ReportsRawService implements ReportsRawContract
      *   startDate?: string,
      * }|ReportListWdrsParams $params
      *
-     * @return BaseResponse<DefaultFlatPagination<ReportListWdrsResponse>>
+     * @return BaseResponse<ReportListWdrsResponse>
      *
      * @throws APIException
      */
@@ -116,8 +114,6 @@ final class ReportsRawService implements ReportsRawContract
                 $parsed,
                 [
                     'endDate' => 'end_date',
-                    'pageNumber' => 'page[number]',
-                    'pageSize' => 'page[size]',
                     'phoneNumber' => 'phone_number',
                     'simCardID' => 'sim_card_id',
                     'simGroupID' => 'sim_group_id',
@@ -127,7 +123,6 @@ final class ReportsRawService implements ReportsRawContract
             ),
             options: $options,
             convert: ReportListWdrsResponse::class,
-            page: DefaultFlatPagination::class,
         );
     }
 }

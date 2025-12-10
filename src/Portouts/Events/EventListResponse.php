@@ -4,28 +4,21 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\Events;
 
+use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Portouts\Events\EventListResponse\AvailableNotificationMethod;
-use Telnyx\Portouts\Events\EventListResponse\EventType;
-use Telnyx\Portouts\Events\EventListResponse\Payload\WebhookPortoutFocDateChangedPayload;
-use Telnyx\Portouts\Events\EventListResponse\Payload\WebhookPortoutNewCommentPayload;
-use Telnyx\Portouts\Events\EventListResponse\Payload\WebhookPortoutStatusChangedPayload;
-use Telnyx\Portouts\Events\EventListResponse\Payload\WebhookPortoutStatusChangedPayload\Status;
-use Telnyx\Portouts\Events\EventListResponse\PayloadStatus;
+use Telnyx\Portouts\Events\EventListResponse\Data;
+use Telnyx\Portouts\Events\EventListResponse\Data\AvailableNotificationMethod;
+use Telnyx\Portouts\Events\EventListResponse\Data\EventType;
+use Telnyx\Portouts\Events\EventListResponse\Data\Payload\WebhookPortoutFocDateChangedPayload;
+use Telnyx\Portouts\Events\EventListResponse\Data\Payload\WebhookPortoutNewCommentPayload;
+use Telnyx\Portouts\Events\EventListResponse\Data\Payload\WebhookPortoutStatusChangedPayload;
+use Telnyx\Portouts\Events\EventListResponse\Data\PayloadStatus;
 
 /**
  * @phpstan-type EventListResponseShape = array{
- *   id?: string|null,
- *   availableNotificationMethods?: list<value-of<AvailableNotificationMethod>>|null,
- *   createdAt?: \DateTimeInterface|null,
- *   eventType?: value-of<EventType>|null,
- *   payload?: null|WebhookPortoutStatusChangedPayload|WebhookPortoutNewCommentPayload|WebhookPortoutFocDateChangedPayload,
- *   payloadStatus?: value-of<PayloadStatus>|null,
- *   portoutID?: string|null,
- *   recordType?: string|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class EventListResponse implements BaseModel
@@ -33,68 +26,12 @@ final class EventListResponse implements BaseModel
     /** @use SdkModel<EventListResponseShape> */
     use SdkModel;
 
-    /**
-     * Uniquely identifies the event.
-     */
+    /** @var list<Data>|null $data */
+    #[Optional(list: Data::class)]
+    public ?array $data;
+
     #[Optional]
-    public ?string $id;
-
-    /**
-     * Indicates the notification methods used.
-     *
-     * @var list<value-of<AvailableNotificationMethod>>|null $availableNotificationMethods
-     */
-    #[Optional(
-        'available_notification_methods',
-        list: AvailableNotificationMethod::class
-    )]
-    public ?array $availableNotificationMethods;
-
-    /**
-     * ISO 8601 formatted date indicating when the resource was created.
-     */
-    #[Optional('created_at')]
-    public ?\DateTimeInterface $createdAt;
-
-    /**
-     * Identifies the event type.
-     *
-     * @var value-of<EventType>|null $eventType
-     */
-    #[Optional('event_type', enum: EventType::class)]
-    public ?string $eventType;
-
-    /**
-     * The webhook payload for the portout.status_changed event.
-     */
-    #[Optional]
-    public WebhookPortoutStatusChangedPayload|WebhookPortoutNewCommentPayload|WebhookPortoutFocDateChangedPayload|null $payload;
-
-    /**
-     * The status of the payload generation.
-     *
-     * @var value-of<PayloadStatus>|null $payloadStatus
-     */
-    #[Optional('payload_status', enum: PayloadStatus::class)]
-    public ?string $payloadStatus;
-
-    /**
-     * Identifies the port-out order associated with the event.
-     */
-    #[Optional('portout_id')]
-    public ?string $portoutID;
-
-    /**
-     * Identifies the type of the resource.
-     */
-    #[Optional('record_type')]
-    public ?string $recordType;
-
-    /**
-     * ISO 8601 formatted date indicating when the resource was updated.
-     */
-    #[Optional('updated_at')]
-    public ?\DateTimeInterface $updatedAt;
+    public ?PaginationMeta $meta;
 
     public function __construct()
     {
@@ -106,176 +43,69 @@ final class EventListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AvailableNotificationMethod|value-of<AvailableNotificationMethod>> $availableNotificationMethods
-     * @param EventType|value-of<EventType> $eventType
-     * @param WebhookPortoutStatusChangedPayload|array{
+     * @param list<Data|array{
      *   id?: string|null,
-     *   attemptedPin?: string|null,
-     *   carrierName?: string|null,
-     *   phoneNumbers?: list<string>|null,
-     *   rejectionReason?: string|null,
-     *   spid?: string|null,
-     *   status?: value-of<Status>|null,
-     *   subscriberName?: string|null,
-     *   userID?: string|null,
-     * }|WebhookPortoutNewCommentPayload|array{
-     *   id?: string|null,
-     *   comment?: string|null,
+     *   availableNotificationMethods?: list<value-of<AvailableNotificationMethod>>|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   eventType?: value-of<EventType>|null,
+     *   payload?: WebhookPortoutStatusChangedPayload|WebhookPortoutNewCommentPayload|WebhookPortoutFocDateChangedPayload|null,
+     *   payloadStatus?: value-of<PayloadStatus>|null,
      *   portoutID?: string|null,
-     *   userID?: string|null,
-     * }|WebhookPortoutFocDateChangedPayload|array{
-     *   id?: string|null, focDate?: \DateTimeInterface|null, userID?: string|null
-     * } $payload
-     * @param PayloadStatus|value-of<PayloadStatus> $payloadStatus
+     *   recordType?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     * }> $data
+     * @param PaginationMeta|array{
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
+     * } $meta
      */
     public static function with(
-        ?string $id = null,
-        ?array $availableNotificationMethods = null,
-        ?\DateTimeInterface $createdAt = null,
-        EventType|string|null $eventType = null,
-        WebhookPortoutStatusChangedPayload|array|WebhookPortoutNewCommentPayload|WebhookPortoutFocDateChangedPayload|null $payload = null,
-        PayloadStatus|string|null $payloadStatus = null,
-        ?string $portoutID = null,
-        ?string $recordType = null,
-        ?\DateTimeInterface $updatedAt = null,
+        ?array $data = null,
+        PaginationMeta|array|null $meta = null
     ): self {
         $self = new self;
 
-        null !== $id && $self['id'] = $id;
-        null !== $availableNotificationMethods && $self['availableNotificationMethods'] = $availableNotificationMethods;
-        null !== $createdAt && $self['createdAt'] = $createdAt;
-        null !== $eventType && $self['eventType'] = $eventType;
-        null !== $payload && $self['payload'] = $payload;
-        null !== $payloadStatus && $self['payloadStatus'] = $payloadStatus;
-        null !== $portoutID && $self['portoutID'] = $portoutID;
-        null !== $recordType && $self['recordType'] = $recordType;
-        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $data && $self['data'] = $data;
+        null !== $meta && $self['meta'] = $meta;
 
         return $self;
     }
 
     /**
-     * Uniquely identifies the event.
-     */
-    public function withID(string $id): self
-    {
-        $self = clone $this;
-        $self['id'] = $id;
-
-        return $self;
-    }
-
-    /**
-     * Indicates the notification methods used.
-     *
-     * @param list<AvailableNotificationMethod|value-of<AvailableNotificationMethod>> $availableNotificationMethods
-     */
-    public function withAvailableNotificationMethods(
-        array $availableNotificationMethods
-    ): self {
-        $self = clone $this;
-        $self['availableNotificationMethods'] = $availableNotificationMethods;
-
-        return $self;
-    }
-
-    /**
-     * ISO 8601 formatted date indicating when the resource was created.
-     */
-    public function withCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $self = clone $this;
-        $self['createdAt'] = $createdAt;
-
-        return $self;
-    }
-
-    /**
-     * Identifies the event type.
-     *
-     * @param EventType|value-of<EventType> $eventType
-     */
-    public function withEventType(EventType|string $eventType): self
-    {
-        $self = clone $this;
-        $self['eventType'] = $eventType;
-
-        return $self;
-    }
-
-    /**
-     * The webhook payload for the portout.status_changed event.
-     *
-     * @param WebhookPortoutStatusChangedPayload|array{
+     * @param list<Data|array{
      *   id?: string|null,
-     *   attemptedPin?: string|null,
-     *   carrierName?: string|null,
-     *   phoneNumbers?: list<string>|null,
-     *   rejectionReason?: string|null,
-     *   spid?: string|null,
-     *   status?: value-of<Status>|null,
-     *   subscriberName?: string|null,
-     *   userID?: string|null,
-     * }|WebhookPortoutNewCommentPayload|array{
-     *   id?: string|null,
-     *   comment?: string|null,
+     *   availableNotificationMethods?: list<value-of<AvailableNotificationMethod>>|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   eventType?: value-of<EventType>|null,
+     *   payload?: WebhookPortoutStatusChangedPayload|WebhookPortoutNewCommentPayload|WebhookPortoutFocDateChangedPayload|null,
+     *   payloadStatus?: value-of<PayloadStatus>|null,
      *   portoutID?: string|null,
-     *   userID?: string|null,
-     * }|WebhookPortoutFocDateChangedPayload|array{
-     *   id?: string|null, focDate?: \DateTimeInterface|null, userID?: string|null
-     * } $payload
+     *   recordType?: string|null,
+     *   updatedAt?: \DateTimeInterface|null,
+     * }> $data
      */
-    public function withPayload(
-        WebhookPortoutStatusChangedPayload|array|WebhookPortoutNewCommentPayload|WebhookPortoutFocDateChangedPayload $payload,
-    ): self {
+    public function withData(array $data): self
+    {
         $self = clone $this;
-        $self['payload'] = $payload;
+        $self['data'] = $data;
 
         return $self;
     }
 
     /**
-     * The status of the payload generation.
-     *
-     * @param PayloadStatus|value-of<PayloadStatus> $payloadStatus
+     * @param PaginationMeta|array{
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
+     * } $meta
      */
-    public function withPayloadStatus(PayloadStatus|string $payloadStatus): self
+    public function withMeta(PaginationMeta|array $meta): self
     {
         $self = clone $this;
-        $self['payloadStatus'] = $payloadStatus;
-
-        return $self;
-    }
-
-    /**
-     * Identifies the port-out order associated with the event.
-     */
-    public function withPortoutID(string $portoutID): self
-    {
-        $self = clone $this;
-        $self['portoutID'] = $portoutID;
-
-        return $self;
-    }
-
-    /**
-     * Identifies the type of the resource.
-     */
-    public function withRecordType(string $recordType): self
-    {
-        $self = clone $this;
-        $self['recordType'] = $recordType;
-
-        return $self;
-    }
-
-    /**
-     * ISO 8601 formatted date indicating when the resource was updated.
-     */
-    public function withUpdatedAt(\DateTimeInterface $updatedAt): self
-    {
-        $self = clone $this;
-        $self['updatedAt'] = $updatedAt;
+        $self['meta'] = $meta;
 
         return $self;
     }

@@ -6,14 +6,13 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
-use Telnyx\MessagingProfiles\MessagingProfile;
 use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
 use Telnyx\MessagingProfiles\MessagingProfileGetResponse;
+use Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersResponse;
+use Telnyx\MessagingProfiles\MessagingProfileListResponse;
+use Telnyx\MessagingProfiles\MessagingProfileListShortCodesResponse;
 use Telnyx\MessagingProfiles\MessagingProfileNewResponse;
 use Telnyx\MessagingProfiles\MessagingProfileUpdateResponse;
-use Telnyx\PhoneNumberWithMessagingSettings;
-use Telnyx\ShortCode;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -126,15 +125,10 @@ final class MessagingProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->messagingProfiles->list();
+        $result = $this->client->messagingProfiles->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(MessagingProfile::class, $item);
-        }
+        $this->assertInstanceOf(MessagingProfileListResponse::class, $result);
     }
 
     #[Test]
@@ -159,17 +153,15 @@ final class MessagingProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->messagingProfiles->listPhoneNumbers(
+        $result = $this->client->messagingProfiles->listPhoneNumbers(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(PhoneNumberWithMessagingSettings::class, $item);
-        }
+        $this->assertInstanceOf(
+            MessagingProfileListPhoneNumbersResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -179,16 +171,14 @@ final class MessagingProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->messagingProfiles->listShortCodes(
+        $result = $this->client->messagingProfiles->listShortCodes(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(ShortCode::class, $item);
-        }
+        $this->assertInstanceOf(
+            MessagingProfileListShortCodesResponse::class,
+            $result
+        );
     }
 }

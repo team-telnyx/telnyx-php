@@ -76,7 +76,7 @@ final class MesssagesService implements MesssagesContract
      *                 description?: string,
      *               },
      *               postbackData?: string,
-     *               shareLocationAction?: array<string,mixed>,
+     *               shareLocationAction?: mixed,
      *               text?: string,
      *               viewLocationAction?: array{
      *                 label?: string,
@@ -116,7 +116,7 @@ final class MesssagesService implements MesssagesContract
      *                 description?: string,
      *               },
      *               postbackData?: string,
-     *               shareLocationAction?: array<string,mixed>,
+     *               shareLocationAction?: mixed,
      *               text?: string,
      *               viewLocationAction?: array{
      *                 label?: string,
@@ -149,7 +149,7 @@ final class MesssagesService implements MesssagesContract
      *           description?: string,
      *         },
      *         postbackData?: string,
-     *         shareLocationAction?: array<string,mixed>,
+     *         shareLocationAction?: mixed,
      *         text?: string,
      *         viewLocationAction?: array{
      *           label?: string,

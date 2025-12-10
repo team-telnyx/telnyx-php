@@ -6,8 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
-use Telnyx\MobilePushCredentials\PushCredential;
+use Telnyx\MobilePushCredentials\MobilePushCredentialListResponse;
 use Telnyx\MobilePushCredentials\PushCredentialResponse;
 use Tests\UnsupportedMockTests;
 
@@ -37,12 +36,11 @@ final class MobilePushCredentialsTest extends TestCase
         }
 
         $result = $this->client->mobilePushCredentials->create(
-            createMobilePushCredentialRequest: [
-                'alias' => 'LucyIosCredential',
-                'certificate' => '-----BEGIN CERTIFICATE----- MIIGVDCCBTKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END CERTIFICATE-----',
-                'privateKey' => '-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END RSA PRIVATE KEY-----',
-                'type' => 'ios',
-            ],
+            alias: 'LucyAndroidCredential',
+            certificate: '-----BEGIN CERTIFICATE----- MIIGVDCCBTKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END CERTIFICATE-----',
+            privateKey: '-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END RSA PRIVATE KEY-----',
+            type: 'android',
+            projectAccountJsonFile: ['private_key' => 'bar', 'client_email' => 'bar'],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -57,12 +55,11 @@ final class MobilePushCredentialsTest extends TestCase
         }
 
         $result = $this->client->mobilePushCredentials->create(
-            createMobilePushCredentialRequest: [
-                'alias' => 'LucyIosCredential',
-                'certificate' => '-----BEGIN CERTIFICATE----- MIIGVDCCBTKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END CERTIFICATE-----',
-                'privateKey' => '-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END RSA PRIVATE KEY-----',
-                'type' => 'ios',
-            ],
+            alias: 'LucyAndroidCredential',
+            certificate: '-----BEGIN CERTIFICATE----- MIIGVDCCBTKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END CERTIFICATE-----',
+            privateKey: '-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END RSA PRIVATE KEY-----',
+            type: 'android',
+            projectAccountJsonFile: ['private_key' => 'bar', 'client_email' => 'bar'],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -91,15 +88,10 @@ final class MobilePushCredentialsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->mobilePushCredentials->list();
+        $result = $this->client->mobilePushCredentials->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(PushCredential::class, $item);
-        }
+        $this->assertInstanceOf(MobilePushCredentialListResponse::class, $result);
     }
 
     #[Test]

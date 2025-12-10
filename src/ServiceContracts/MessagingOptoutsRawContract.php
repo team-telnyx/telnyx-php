@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\MessagingOptouts\MessagingOptoutListParams;
 use Telnyx\MessagingOptouts\MessagingOptoutListResponse;
 use Telnyx\RequestOptions;
@@ -18,7 +17,7 @@ interface MessagingOptoutsRawContract
      *
      * @param array<mixed>|MessagingOptoutListParams $params
      *
-     * @return BaseResponse<DefaultPagination<MessagingOptoutListResponse>>
+     * @return BaseResponse<MessagingOptoutListResponse>
      *
      * @throws APIException
      */

@@ -7,15 +7,12 @@ namespace Telnyx\Invoices;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Invoices\InvoiceListResponse\Data;
+use Telnyx\Invoices\InvoiceListResponse\Meta;
 
 /**
  * @phpstan-type InvoiceListResponseShape = array{
- *   fileID?: string|null,
- *   invoiceID?: string|null,
- *   paid?: bool|null,
- *   periodEnd?: string|null,
- *   periodStart?: string|null,
- *   url?: string|null,
+ *   data?: list<Data>|null, meta?: Meta|null
  * }
  */
 final class InvoiceListResponse implements BaseModel
@@ -23,23 +20,12 @@ final class InvoiceListResponse implements BaseModel
     /** @use SdkModel<InvoiceListResponseShape> */
     use SdkModel;
 
-    #[Optional('file_id')]
-    public ?string $fileID;
-
-    #[Optional('invoice_id')]
-    public ?string $invoiceID;
+    /** @var list<Data>|null $data */
+    #[Optional(list: Data::class)]
+    public ?array $data;
 
     #[Optional]
-    public ?bool $paid;
-
-    #[Optional('period_end')]
-    public ?string $periodEnd;
-
-    #[Optional('period_start')]
-    public ?string $periodStart;
-
-    #[Optional]
-    public ?string $url;
+    public ?Meta $meta;
 
     public function __construct()
     {
@@ -50,71 +36,64 @@ final class InvoiceListResponse implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param list<Data|array{
+     *   fileID?: string|null,
+     *   invoiceID?: string|null,
+     *   paid?: bool|null,
+     *   periodEnd?: string|null,
+     *   periodStart?: string|null,
+     *   url?: string|null,
+     * }> $data
+     * @param Meta|array{
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
+     * } $meta
      */
     public static function with(
-        ?string $fileID = null,
-        ?string $invoiceID = null,
-        ?bool $paid = null,
-        ?string $periodEnd = null,
-        ?string $periodStart = null,
-        ?string $url = null,
+        ?array $data = null,
+        Meta|array|null $meta = null
     ): self {
         $self = new self;
 
-        null !== $fileID && $self['fileID'] = $fileID;
-        null !== $invoiceID && $self['invoiceID'] = $invoiceID;
-        null !== $paid && $self['paid'] = $paid;
-        null !== $periodEnd && $self['periodEnd'] = $periodEnd;
-        null !== $periodStart && $self['periodStart'] = $periodStart;
-        null !== $url && $self['url'] = $url;
+        null !== $data && $self['data'] = $data;
+        null !== $meta && $self['meta'] = $meta;
 
         return $self;
     }
 
-    public function withFileID(string $fileID): self
+    /**
+     * @param list<Data|array{
+     *   fileID?: string|null,
+     *   invoiceID?: string|null,
+     *   paid?: bool|null,
+     *   periodEnd?: string|null,
+     *   periodStart?: string|null,
+     *   url?: string|null,
+     * }> $data
+     */
+    public function withData(array $data): self
     {
         $self = clone $this;
-        $self['fileID'] = $fileID;
+        $self['data'] = $data;
 
         return $self;
     }
 
-    public function withInvoiceID(string $invoiceID): self
+    /**
+     * @param Meta|array{
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
+     * } $meta
+     */
+    public function withMeta(Meta|array $meta): self
     {
         $self = clone $this;
-        $self['invoiceID'] = $invoiceID;
-
-        return $self;
-    }
-
-    public function withPaid(bool $paid): self
-    {
-        $self = clone $this;
-        $self['paid'] = $paid;
-
-        return $self;
-    }
-
-    public function withPeriodEnd(string $periodEnd): self
-    {
-        $self = clone $this;
-        $self['periodEnd'] = $periodEnd;
-
-        return $self;
-    }
-
-    public function withPeriodStart(string $periodStart): self
-    {
-        $self = clone $this;
-        $self['periodStart'] = $periodStart;
-
-        return $self;
-    }
-
-    public function withURL(string $url): self
-    {
-        $self = clone $this;
-        $self['url'] = $url;
+        $self['meta'] = $meta;
 
         return $self;
     }

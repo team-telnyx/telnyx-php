@@ -6,8 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\UsageReports\UsageReportGetOptionsResponse;
+use Telnyx\UsageReports\UsageReportListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,19 +35,14 @@ final class UsageReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->usageReports->list(
+        $result = $this->client->usageReports->list(
             dimensions: ['string'],
             metrics: ['string'],
             product: 'product'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertIsArray($item);
-        }
+        $this->assertInstanceOf(UsageReportListResponse::class, $result);
     }
 
     #[Test]
@@ -57,7 +52,7 @@ final class UsageReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->usageReports->list(
+        $result = $this->client->usageReports->list(
             dimensions: ['string'],
             metrics: ['string'],
             product: 'product',
@@ -66,20 +61,14 @@ final class UsageReportsTest extends TestCase
             filter: 'filter',
             format: 'csv',
             managedAccounts: true,
-            pageNumber: 0,
-            pageSize: 0,
+            page: ['number' => 1, 'size' => 5000],
             sort: ['string'],
             startDate: 'start_date',
             authorizationBearer: 'authorization_bearer',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertIsArray($item);
-        }
+        $this->assertInstanceOf(UsageReportListResponse::class, $result);
     }
 
     #[Test]

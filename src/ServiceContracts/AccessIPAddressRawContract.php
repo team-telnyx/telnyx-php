@@ -6,10 +6,10 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\AccessIPAddress\AccessIPAddressCreateParams;
 use Telnyx\AccessIPAddress\AccessIPAddressListParams;
+use Telnyx\AccessIPAddress\AccessIPAddressListResponse;
 use Telnyx\AccessIPAddress\AccessIPAddressResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 interface AccessIPAddressRawContract
@@ -45,7 +45,7 @@ interface AccessIPAddressRawContract
      *
      * @param array<mixed>|AccessIPAddressListParams $params
      *
-     * @return BaseResponse<DefaultFlatPagination<AccessIPAddressResponse>>
+     * @return BaseResponse<AccessIPAddressListResponse>
      *
      * @throws APIException
      */

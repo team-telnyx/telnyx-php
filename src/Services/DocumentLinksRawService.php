@@ -7,7 +7,6 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\DocumentLinks\DocumentLinkListParams;
 use Telnyx\DocumentLinks\DocumentLinkListResponse;
 use Telnyx\RequestOptions;
@@ -31,7 +30,7 @@ final class DocumentLinksRawService implements DocumentLinksRawContract
      *   page?: array{number?: int, size?: int},
      * }|DocumentLinkListParams $params
      *
-     * @return BaseResponse<DefaultPagination<DocumentLinkListResponse>>
+     * @return BaseResponse<DocumentLinkListResponse>
      *
      * @throws APIException
      */
@@ -51,7 +50,6 @@ final class DocumentLinksRawService implements DocumentLinksRawContract
             query: $parsed,
             options: $options,
             convert: DocumentLinkListResponse::class,
-            page: DefaultPagination::class,
         );
     }
 }

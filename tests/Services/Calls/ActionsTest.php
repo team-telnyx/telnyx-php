@@ -85,7 +85,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->calls->actions->bridge(
             'call_control_id',
-            callControlIDToBridgeWith: 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+            callControlID: 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -101,7 +101,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->calls->actions->bridge(
             'call_control_id',
-            callControlIDToBridgeWith: 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+            callControlID: 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
             clientState: 'aGF2ZSBhIG5pY2UgZGF5ID1d',
             commandID: '891510ac-f3e4-11e8-af5b-de00688a4901',
             muteDtmf: 'opposite',
@@ -184,7 +184,18 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->calls->actions->gatherUsingAI(
             'call_control_id',
-            parameters: ['properties' => 'bar', 'required' => 'bar', 'type' => 'bar'],
+            parameters: [
+                'properties' => [
+                    'age' => [
+                        'description' => 'The age of the customer.', 'type' => 'integer',
+                    ],
+                    'location' => [
+                        'description' => 'The location of the customer.', 'type' => 'string',
+                    ],
+                ],
+                'required' => ['age', 'location'],
+                'type' => 'object',
+            ],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -200,7 +211,18 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->calls->actions->gatherUsingAI(
             'call_control_id',
-            parameters: ['properties' => 'bar', 'required' => 'bar', 'type' => 'bar'],
+            parameters: [
+                'properties' => [
+                    'age' => [
+                        'description' => 'The age of the customer.', 'type' => 'integer',
+                    ],
+                    'location' => [
+                        'description' => 'The location of the customer.', 'type' => 'string',
+                    ],
+                ],
+                'required' => ['age', 'location'],
+                'type' => 'object',
+            ],
             assistant: [
                 'instructions' => 'You are a friendly voice assistant.',
                 'model' => 'Qwen/Qwen3-235B-A22B',

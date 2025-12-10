@@ -6,12 +6,11 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
-use Telnyx\SimCardOrders\SimCardOrder;
 use Telnyx\SimCardOrders\SimCardOrderCreateParams;
 use Telnyx\SimCardOrders\SimCardOrderGetResponse;
 use Telnyx\SimCardOrders\SimCardOrderListParams;
+use Telnyx\SimCardOrders\SimCardOrderListResponse;
 use Telnyx\SimCardOrders\SimCardOrderNewResponse;
 
 interface SimCardOrdersRawContract
@@ -49,7 +48,7 @@ interface SimCardOrdersRawContract
      *
      * @param array<mixed>|SimCardOrderListParams $params
      *
-     * @return BaseResponse<DefaultPagination<SimCardOrder>>
+     * @return BaseResponse<SimCardOrderListResponse>
      *
      * @throws APIException
      */

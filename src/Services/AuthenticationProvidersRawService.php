@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
-use Telnyx\AuthenticationProviders\AuthenticationProvider;
 use Telnyx\AuthenticationProviders\AuthenticationProviderCreateParams;
 use Telnyx\AuthenticationProviders\AuthenticationProviderDeleteResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderGetResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderListParams;
 use Telnyx\AuthenticationProviders\AuthenticationProviderListParams\Sort;
+use Telnyx\AuthenticationProviders\AuthenticationProviderListResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderNewResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateParams;
 use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateResponse;
@@ -17,8 +17,6 @@ use Telnyx\AuthenticationProviders\Settings\IdpCertFingerprintAlgorithm;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AuthenticationProvidersRawContract;
 
@@ -144,10 +142,10 @@ final class AuthenticationProvidersRawService implements AuthenticationProviders
      * Returns a list of your SSO authentication providers.
      *
      * @param array{
-     *   pageNumber?: int, pageSize?: int, sort?: value-of<Sort>
+     *   page?: array{number?: int, size?: int}, sort?: value-of<Sort>
      * }|AuthenticationProviderListParams $params
      *
-     * @return BaseResponse<DefaultFlatPagination<AuthenticationProvider>>
+     * @return BaseResponse<AuthenticationProviderListResponse>
      *
      * @throws APIException
      */
@@ -164,13 +162,9 @@ final class AuthenticationProvidersRawService implements AuthenticationProviders
         return $this->client->request(
             method: 'get',
             path: 'authentication_providers',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
-            convert: AuthenticationProvider::class,
-            page: DefaultFlatPagination::class,
+            convert: AuthenticationProviderListResponse::class,
         );
     }
 

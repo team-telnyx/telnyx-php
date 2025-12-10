@@ -8,15 +8,14 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WirelessBlocklistsRawContract;
-use Telnyx\WirelessBlocklists\WirelessBlocklist;
 use Telnyx\WirelessBlocklists\WirelessBlocklistCreateParams;
 use Telnyx\WirelessBlocklists\WirelessBlocklistCreateParams\Type;
 use Telnyx\WirelessBlocklists\WirelessBlocklistDeleteResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistGetResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistListParams;
+use Telnyx\WirelessBlocklists\WirelessBlocklistListResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistNewResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams;
 use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateResponse;
@@ -132,7 +131,7 @@ final class WirelessBlocklistsRawService implements WirelessBlocklistsRawContrac
      *   pageSize?: int,
      * }|WirelessBlocklistListParams $params
      *
-     * @return BaseResponse<DefaultFlatPagination<WirelessBlocklist>>
+     * @return BaseResponse<WirelessBlocklistListResponse>
      *
      * @throws APIException
      */
@@ -160,8 +159,7 @@ final class WirelessBlocklistsRawService implements WirelessBlocklistsRawContrac
                 ],
             ),
             options: $options,
-            convert: WirelessBlocklist::class,
-            page: DefaultFlatPagination::class,
+            convert: WirelessBlocklistListResponse::class,
         );
     }
 

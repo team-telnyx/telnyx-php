@@ -245,7 +245,7 @@ final class OutboundMessagePayload implements BaseModel
      *   code: string,
      *   title: string,
      *   detail?: string|null,
-     *   meta?: array<string,mixed>|null,
+     *   meta?: mixed,
      *   source?: Source|null,
      * }> $errors
      * @param From|array{
@@ -427,7 +427,7 @@ final class OutboundMessagePayload implements BaseModel
      *   code: string,
      *   title: string,
      *   detail?: string|null,
-     *   meta?: array<string,mixed>|null,
+     *   meta?: mixed,
      *   source?: Source|null,
      * }> $errors
      */

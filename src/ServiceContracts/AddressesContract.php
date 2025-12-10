@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
-use Telnyx\Addresses\Address;
 use Telnyx\Addresses\AddressDeleteResponse;
 use Telnyx\Addresses\AddressGetResponse;
 use Telnyx\Addresses\AddressListParams\Sort;
+use Telnyx\Addresses\AddressListResponse;
 use Telnyx\Addresses\AddressNewResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
 interface AddressesContract
@@ -92,8 +91,6 @@ interface AddressesContract
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
-     * @return DefaultPagination<Address>
-     *
      * @throws APIException
      */
     public function list(
@@ -101,7 +98,7 @@ interface AddressesContract
         ?array $page = null,
         string|Sort $sort = 'created_at',
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): AddressListResponse;
 
     /**
      * @api

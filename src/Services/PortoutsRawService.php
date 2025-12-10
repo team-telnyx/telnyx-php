@@ -7,14 +7,13 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\Portouts\PortoutDetails;
 use Telnyx\Portouts\PortoutGetResponse;
 use Telnyx\Portouts\PortoutListParams;
 use Telnyx\Portouts\PortoutListParams\Filter\Status;
 use Telnyx\Portouts\PortoutListParams\Filter\StatusIn;
 use Telnyx\Portouts\PortoutListRejectionCodesParams;
 use Telnyx\Portouts\PortoutListRejectionCodesResponse;
+use Telnyx\Portouts\PortoutListResponse;
 use Telnyx\Portouts\PortoutUpdateStatusParams;
 use Telnyx\Portouts\PortoutUpdateStatusResponse;
 use Telnyx\RequestOptions;
@@ -79,7 +78,7 @@ final class PortoutsRawService implements PortoutsRawContract
      *   page?: array{number?: int, size?: int},
      * }|PortoutListParams $params
      *
-     * @return BaseResponse<DefaultPagination<PortoutDetails>>
+     * @return BaseResponse<PortoutListResponse>
      *
      * @throws APIException
      */
@@ -98,8 +97,7 @@ final class PortoutsRawService implements PortoutsRawContract
             path: 'portouts',
             query: $parsed,
             options: $options,
-            convert: PortoutDetails::class,
-            page: DefaultPagination::class,
+            convert: PortoutListResponse::class,
         );
     }
 

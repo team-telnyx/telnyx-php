@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\SimCardGroups\SimCardGroupCreateParams;
 use Telnyx\SimCardGroups\SimCardGroupDeleteResponse;
@@ -71,7 +70,7 @@ interface SimCardGroupsRawContract
      *
      * @param array<mixed>|SimCardGroupListParams $params
      *
-     * @return BaseResponse<DefaultFlatPagination<SimCardGroupListResponse>>
+     * @return BaseResponse<SimCardGroupListResponse>
      *
      * @throws APIException
      */

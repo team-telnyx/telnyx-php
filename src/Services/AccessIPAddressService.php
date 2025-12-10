@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
+use Telnyx\AccessIPAddress\AccessIPAddressListResponse;
 use Telnyx\AccessIPAddress\AccessIPAddressResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AccessIPAddressContract;
 
@@ -81,24 +81,18 @@ final class AccessIPAddressService implements AccessIPAddressContract
      *   ipAddress?: string,
      *   ipSource?: string,
      * } $filter Consolidated filter parameter (deepObject style). Originally: filter[ip_source], filter[ip_address], filter[created_at]. Supports complex bracket operations for dynamic filtering.
-     *
-     * @return DefaultFlatPagination<AccessIPAddressResponse>
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-            ],
-        );
+    ): AccessIPAddressListResponse {
+        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

@@ -9,7 +9,6 @@ use Telnyx\Connections\ConnectionListActiveCallsResponse;
 use Telnyx\Connections\ConnectionListParams\Sort;
 use Telnyx\Connections\ConnectionListResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
 interface ConnectionsContract
@@ -50,8 +49,6 @@ interface ConnectionsContract
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
-     * @return DefaultPagination<ConnectionListResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -59,7 +56,7 @@ interface ConnectionsContract
         ?array $page = null,
         string|Sort $sort = 'created_at',
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): ConnectionListResponse;
 
     /**
      * @api
@@ -69,13 +66,11 @@ interface ConnectionsContract
      *   after?: string, before?: string, limit?: int, number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      *
-     * @return DefaultPagination<ConnectionListActiveCallsResponse>
-     *
      * @throws APIException
      */
     public function listActiveCalls(
         string $connectionID,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): ConnectionListActiveCallsResponse;
 }

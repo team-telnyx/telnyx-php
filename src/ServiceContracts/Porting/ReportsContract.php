@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Porting;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport;
 use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport\Filters\StatusIn;
-use Telnyx\Porting\Reports\PortingReport;
 use Telnyx\Porting\Reports\ReportGetResponse;
 use Telnyx\Porting\Reports\ReportListParams\Filter\ReportType;
 use Telnyx\Porting\Reports\ReportListParams\Filter\Status;
+use Telnyx\Porting\Reports\ReportListResponse;
 use Telnyx\Porting\Reports\ReportNewResponse;
 use Telnyx\RequestOptions;
 
@@ -61,13 +60,11 @@ interface ReportsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return DefaultPagination<PortingReport>
-     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): ReportListResponse;
 }

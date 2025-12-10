@@ -6,20 +6,19 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\MessagingProfiles\MessagingProfile;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams;
 use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
 use Telnyx\MessagingProfiles\MessagingProfileGetResponse;
 use Telnyx\MessagingProfiles\MessagingProfileListParams;
 use Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersParams;
+use Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersResponse;
+use Telnyx\MessagingProfiles\MessagingProfileListResponse;
 use Telnyx\MessagingProfiles\MessagingProfileListShortCodesParams;
+use Telnyx\MessagingProfiles\MessagingProfileListShortCodesResponse;
 use Telnyx\MessagingProfiles\MessagingProfileNewResponse;
 use Telnyx\MessagingProfiles\MessagingProfileUpdateParams;
 use Telnyx\MessagingProfiles\MessagingProfileUpdateResponse;
-use Telnyx\PhoneNumberWithMessagingSettings;
 use Telnyx\RequestOptions;
-use Telnyx\ShortCode;
 
 interface MessagingProfilesRawContract
 {
@@ -40,21 +39,21 @@ interface MessagingProfilesRawContract
     /**
      * @api
      *
-     * @param string $messagingProfileID The id of the messaging profile to retrieve
+     * @param string $id The id of the messaging profile to retrieve
      *
      * @return BaseResponse<MessagingProfileGetResponse>
      *
      * @throws APIException
      */
     public function retrieve(
-        string $messagingProfileID,
+        string $id,
         ?RequestOptions $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
-     * @param string $messagingProfileID The id of the messaging profile to retrieve
+     * @param string $id The id of the messaging profile to retrieve
      * @param array<mixed>|MessagingProfileUpdateParams $params
      *
      * @return BaseResponse<MessagingProfileUpdateResponse>
@@ -62,7 +61,7 @@ interface MessagingProfilesRawContract
      * @throws APIException
      */
     public function update(
-        string $messagingProfileID,
+        string $id,
         array|MessagingProfileUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse;
@@ -72,7 +71,7 @@ interface MessagingProfilesRawContract
      *
      * @param array<mixed>|MessagingProfileListParams $params
      *
-     * @return BaseResponse<DefaultPagination<MessagingProfile>>
+     * @return BaseResponse<MessagingProfileListResponse>
      *
      * @throws APIException
      */
@@ -84,29 +83,29 @@ interface MessagingProfilesRawContract
     /**
      * @api
      *
-     * @param string $messagingProfileID The id of the messaging profile to retrieve
+     * @param string $id The id of the messaging profile to retrieve
      *
      * @return BaseResponse<MessagingProfileDeleteResponse>
      *
      * @throws APIException
      */
     public function delete(
-        string $messagingProfileID,
+        string $id,
         ?RequestOptions $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
-     * @param string $messagingProfileID The id of the messaging profile to retrieve
+     * @param string $id The id of the messaging profile to retrieve
      * @param array<mixed>|MessagingProfileListPhoneNumbersParams $params
      *
-     * @return BaseResponse<DefaultPagination<PhoneNumberWithMessagingSettings>>
+     * @return BaseResponse<MessagingProfileListPhoneNumbersResponse>
      *
      * @throws APIException
      */
     public function listPhoneNumbers(
-        string $messagingProfileID,
+        string $id,
         array|MessagingProfileListPhoneNumbersParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse;
@@ -114,15 +113,15 @@ interface MessagingProfilesRawContract
     /**
      * @api
      *
-     * @param string $messagingProfileID The id of the messaging profile to retrieve
+     * @param string $id The id of the messaging profile to retrieve
      * @param array<mixed>|MessagingProfileListShortCodesParams $params
      *
-     * @return BaseResponse<DefaultPagination<ShortCode>>
+     * @return BaseResponse<MessagingProfileListShortCodesResponse>
      *
      * @throws APIException
      */
     public function listShortCodes(
-        string $messagingProfileID,
+        string $id,
         array|MessagingProfileListShortCodesParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse;

@@ -7,7 +7,6 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse;
 use Telnyx\OtaUpdates\OtaUpdateListParams;
 use Telnyx\OtaUpdates\OtaUpdateListParams\Filter\Status;
@@ -62,7 +61,7 @@ final class OtaUpdatesRawService implements OtaUpdatesRawContract
      *   page?: array{number?: int, size?: int},
      * }|OtaUpdateListParams $params
      *
-     * @return BaseResponse<DefaultPagination<OtaUpdateListResponse>>
+     * @return BaseResponse<OtaUpdateListResponse>
      *
      * @throws APIException
      */
@@ -82,7 +81,6 @@ final class OtaUpdatesRawService implements OtaUpdatesRawContract
             query: $parsed,
             options: $options,
             convert: OtaUpdateListResponse::class,
-            page: DefaultPagination::class,
         );
     }
 }

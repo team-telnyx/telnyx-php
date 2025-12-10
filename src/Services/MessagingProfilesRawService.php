@@ -7,24 +7,23 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\MessagingProfiles\MessagingProfile;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
 use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
 use Telnyx\MessagingProfiles\MessagingProfileGetResponse;
 use Telnyx\MessagingProfiles\MessagingProfileListParams;
 use Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersParams;
+use Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersResponse;
+use Telnyx\MessagingProfiles\MessagingProfileListResponse;
 use Telnyx\MessagingProfiles\MessagingProfileListShortCodesParams;
+use Telnyx\MessagingProfiles\MessagingProfileListShortCodesResponse;
 use Telnyx\MessagingProfiles\MessagingProfileNewResponse;
 use Telnyx\MessagingProfiles\MessagingProfileUpdateParams;
 use Telnyx\MessagingProfiles\MessagingProfileUpdateResponse;
 use Telnyx\MessagingProfiles\NumberPoolSettings;
 use Telnyx\MessagingProfiles\URLShortenerSettings;
-use Telnyx\PhoneNumberWithMessagingSettings;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingProfilesRawContract;
-use Telnyx\ShortCode;
 
 final class MessagingProfilesRawService implements MessagingProfilesRawContract
 {
@@ -95,20 +94,20 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      *
      * Retrieve a messaging profile
      *
-     * @param string $messagingProfileID The id of the messaging profile to retrieve
+     * @param string $id The id of the messaging profile to retrieve
      *
      * @return BaseResponse<MessagingProfileGetResponse>
      *
      * @throws APIException
      */
     public function retrieve(
-        string $messagingProfileID,
+        string $id,
         ?RequestOptions $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
-            path: ['messaging_profiles/%1$s', $messagingProfileID],
+            path: ['messaging_profiles/%1$s', $id],
             options: $requestOptions,
             convert: MessagingProfileGetResponse::class,
         );
@@ -119,7 +118,7 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      *
      * Update a messaging profile
      *
-     * @param string $messagingProfileID The id of the messaging profile to retrieve
+     * @param string $id The id of the messaging profile to retrieve
      * @param array{
      *   alphaSender?: string|null,
      *   dailySpendLimit?: string,
@@ -154,7 +153,7 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      * @throws APIException
      */
     public function update(
-        string $messagingProfileID,
+        string $id,
         array|MessagingProfileUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse {
@@ -166,7 +165,7 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
-            path: ['messaging_profiles/%1$s', $messagingProfileID],
+            path: ['messaging_profiles/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: MessagingProfileUpdateResponse::class,
@@ -182,7 +181,7 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      *   filter?: array{name?: string}, page?: array{number?: int, size?: int}
      * }|MessagingProfileListParams $params
      *
-     * @return BaseResponse<DefaultPagination<MessagingProfile>>
+     * @return BaseResponse<MessagingProfileListResponse>
      *
      * @throws APIException
      */
@@ -201,8 +200,7 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
             path: 'messaging_profiles',
             query: $parsed,
             options: $options,
-            convert: MessagingProfile::class,
-            page: DefaultPagination::class,
+            convert: MessagingProfileListResponse::class,
         );
     }
 
@@ -211,20 +209,20 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      *
      * Delete a messaging profile
      *
-     * @param string $messagingProfileID The id of the messaging profile to retrieve
+     * @param string $id The id of the messaging profile to retrieve
      *
      * @return BaseResponse<MessagingProfileDeleteResponse>
      *
      * @throws APIException
      */
     public function delete(
-        string $messagingProfileID,
+        string $id,
         ?RequestOptions $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
-            path: ['messaging_profiles/%1$s', $messagingProfileID],
+            path: ['messaging_profiles/%1$s', $id],
             options: $requestOptions,
             convert: MessagingProfileDeleteResponse::class,
         );
@@ -235,17 +233,17 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      *
      * List phone numbers associated with a messaging profile
      *
-     * @param string $messagingProfileID The id of the messaging profile to retrieve
+     * @param string $id The id of the messaging profile to retrieve
      * @param array{
      *   page?: array{number?: int, size?: int}
      * }|MessagingProfileListPhoneNumbersParams $params
      *
-     * @return BaseResponse<DefaultPagination<PhoneNumberWithMessagingSettings>>
+     * @return BaseResponse<MessagingProfileListPhoneNumbersResponse>
      *
      * @throws APIException
      */
     public function listPhoneNumbers(
-        string $messagingProfileID,
+        string $id,
         array|MessagingProfileListPhoneNumbersParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse {
@@ -257,11 +255,10 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
-            path: ['messaging_profiles/%1$s/phone_numbers', $messagingProfileID],
+            path: ['messaging_profiles/%1$s/phone_numbers', $id],
             query: $parsed,
             options: $options,
-            convert: PhoneNumberWithMessagingSettings::class,
-            page: DefaultPagination::class,
+            convert: MessagingProfileListPhoneNumbersResponse::class,
         );
     }
 
@@ -270,17 +267,17 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      *
      * List short codes associated with a messaging profile
      *
-     * @param string $messagingProfileID The id of the messaging profile to retrieve
+     * @param string $id The id of the messaging profile to retrieve
      * @param array{
      *   page?: array{number?: int, size?: int}
      * }|MessagingProfileListShortCodesParams $params
      *
-     * @return BaseResponse<DefaultPagination<ShortCode>>
+     * @return BaseResponse<MessagingProfileListShortCodesResponse>
      *
      * @throws APIException
      */
     public function listShortCodes(
-        string $messagingProfileID,
+        string $id,
         array|MessagingProfileListShortCodesParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse {
@@ -292,11 +289,10 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
-            path: ['messaging_profiles/%1$s/short_codes', $messagingProfileID],
+            path: ['messaging_profiles/%1$s/short_codes', $id],
             query: $parsed,
             options: $options,
-            convert: ShortCode::class,
-            page: DefaultPagination::class,
+            convert: MessagingProfileListShortCodesResponse::class,
         );
     }
 }
