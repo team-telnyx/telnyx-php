@@ -137,11 +137,7 @@ final class DocumentsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->documents->upload(
-            document: [
-                'url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-            ],
-        );
+        $result = $this->client->documents->upload(document: []);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(DocumentUploadResponse::class, $result);
@@ -156,9 +152,10 @@ final class DocumentsTest extends TestCase
 
         $result = $this->client->documents->upload(
             document: [
-                'url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
                 'customerReference' => 'MY REF 001',
+                'file' => 'ZXhhbXBsZSBvZiBlbmNvZGVkIGNvbnRlbnQ=',
                 'filename' => 'test-document.pdf',
+                'url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
             ],
         );
 
@@ -173,11 +170,7 @@ final class DocumentsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->documents->uploadJson(
-            document: [
-                'url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-            ],
-        );
+        $result = $this->client->documents->uploadJson(document: []);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(DocumentUploadJsonResponse::class, $result);
@@ -192,9 +185,10 @@ final class DocumentsTest extends TestCase
 
         $result = $this->client->documents->uploadJson(
             document: [
-                'url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
                 'customerReference' => 'MY REF 001',
+                'file' => 'ZXhhbXBsZSBvZiBlbmNvZGVkIGNvbnRlbnQ=',
                 'filename' => 'test-document.pdf',
+                'url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
             ],
         );
 

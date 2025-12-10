@@ -8,8 +8,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Documents\DocumentUploadParams\Document\DocServiceDocumentUploadInline;
-use Telnyx\Documents\DocumentUploadParams\Document\DocServiceDocumentUploadURL;
+use Telnyx\Documents\DocumentUploadParams\Document;
 
 /**
  * Upload a document.<br /><br />Uploaded files must be linked to a service within 30 minutes or they will be automatically deleted.
@@ -17,10 +16,11 @@ use Telnyx\Documents\DocumentUploadParams\Document\DocServiceDocumentUploadURL;
  * @see Telnyx\Services\DocumentsService::upload()
  *
  * @phpstan-type DocumentUploadParamsShape = array{
- *   document: DocServiceDocumentUploadURL|array{
- *     url: string, customerReference?: string|null, filename?: string|null
- *   }|DocServiceDocumentUploadInline|array{
- *     file: string, customerReference?: string|null, filename?: string|null
+ *   document: Document|array{
+ *     customerReference?: string|null,
+ *     file?: string|null,
+ *     filename?: string|null,
+ *     url?: string|null,
  *   },
  * }
  */
@@ -31,7 +31,7 @@ final class DocumentUploadParams implements BaseModel
     use SdkParams;
 
     #[Required]
-    public DocServiceDocumentUploadURL|DocServiceDocumentUploadInline $document;
+    public Document $document;
 
     /**
      * `new DocumentUploadParams()` is missing required properties by the API.
@@ -57,15 +57,15 @@ final class DocumentUploadParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DocServiceDocumentUploadURL|array{
-     *   url: string, customerReference?: string|null, filename?: string|null
-     * }|DocServiceDocumentUploadInline|array{
-     *   file: string, customerReference?: string|null, filename?: string|null
+     * @param Document|array{
+     *   customerReference?: string|null,
+     *   file?: string|null,
+     *   filename?: string|null,
+     *   url?: string|null,
      * } $document
      */
-    public static function with(
-        DocServiceDocumentUploadURL|array|DocServiceDocumentUploadInline $document
-    ): self {
+    public static function with(Document|array $document): self
+    {
         $self = new self;
 
         $self['document'] = $document;
@@ -74,15 +74,15 @@ final class DocumentUploadParams implements BaseModel
     }
 
     /**
-     * @param DocServiceDocumentUploadURL|array{
-     *   url: string, customerReference?: string|null, filename?: string|null
-     * }|DocServiceDocumentUploadInline|array{
-     *   file: string, customerReference?: string|null, filename?: string|null
+     * @param Document|array{
+     *   customerReference?: string|null,
+     *   file?: string|null,
+     *   filename?: string|null,
+     *   url?: string|null,
      * } $document
      */
-    public function withDocument(
-        DocServiceDocumentUploadURL|array|DocServiceDocumentUploadInline $document
-    ): self {
+    public function withDocument(Document|array $document): self
+    {
         $self = clone $this;
         $self['document'] = $document;
 

@@ -12,6 +12,12 @@ use Telnyx\Porting\Events\EventGetResponse;
 use Telnyx\Porting\Events\EventListParams;
 use Telnyx\Porting\Events\EventListParams\Filter\Type;
 use Telnyx\Porting\Events\EventListResponse;
+use Telnyx\Porting\Events\EventListResponse\PortingEventDeletedPayload;
+use Telnyx\Porting\Events\EventListResponse\PortingEventMessagingChangedPayload;
+use Telnyx\Porting\Events\EventListResponse\PortingEventNewCommentEvent;
+use Telnyx\Porting\Events\EventListResponse\PortingEventSplitEvent;
+use Telnyx\Porting\Events\EventListResponse\PortingEventStatusChangedEvent;
+use Telnyx\Porting\Events\EventListResponse\PortingEventWithoutWebhook;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Porting\EventsRawContract;
 
@@ -63,7 +69,7 @@ final class EventsRawService implements EventsRawContract
      *   page?: array{number?: int, size?: int},
      * }|EventListParams $params
      *
-     * @return BaseResponse<DefaultPagination<EventListResponse>>
+     * @return BaseResponse<DefaultPagination<PortingEventDeletedPayload|PortingEventMessagingChangedPayload|PortingEventStatusChangedEvent|PortingEventNewCommentEvent|PortingEventSplitEvent|PortingEventWithoutWebhook,>,>
      *
      * @throws APIException
      */

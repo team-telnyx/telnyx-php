@@ -111,7 +111,9 @@ interface DocumentsContract
     /**
      * @api
      *
-     * @param array<string,mixed> $document
+     * @param array{
+     *   customerReference?: string, file?: string, filename?: string, url?: string
+     * } $document
      *
      * @throws APIException
      */
@@ -123,7 +125,9 @@ interface DocumentsContract
     /**
      * @api
      *
-     * @param array<string,mixed> $document
+     * @param array{
+     *   customerReference?: string, file?: string, filename?: string, url?: string
+     * } $document
      *
      * @throws APIException
      */
