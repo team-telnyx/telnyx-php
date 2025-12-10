@@ -54,7 +54,7 @@ final class BucketsRawService implements BucketsRawContract
             path: [
                 'storage/buckets/%1$s/%2$s/presigned_url', $bucketName, $objectName,
             ],
-            body: (object) array_diff_key($parsed, ['bucketName']),
+            body: (object) array_diff_key($parsed, array_flip(['bucketName'])),
             options: $options,
             convert: BucketNewPresignedURLResponse::class,
         );

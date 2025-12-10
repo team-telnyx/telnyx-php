@@ -137,7 +137,7 @@ final class AutorespConfigsRawService implements AutorespConfigsRawContract
                 $profileID,
                 $autorespCfgID,
             ],
-            body: (object) array_diff_key($parsed, ['profileID']),
+            body: (object) array_diff_key($parsed, array_flip(['profileID'])),
             options: $options,
             convert: AutoRespConfigResponse::class,
         );

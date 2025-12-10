@@ -134,7 +134,7 @@ final class VersionsRawService implements VersionsRawContract
         return $this->client->request(
             method: 'post',
             path: ['ai/assistants/%1$s/versions/%2$s', $assistantID, $versionID],
-            body: (object) array_diff_key($parsed, ['assistantID']),
+            body: (object) array_diff_key($parsed, array_flip(['assistantID'])),
             options: $options,
             convert: InferenceEmbedding::class,
         );

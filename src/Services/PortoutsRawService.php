@@ -167,7 +167,7 @@ final class PortoutsRawService implements PortoutsRawContract
         return $this->client->request(
             method: 'patch',
             path: ['portouts/%1$s/%2$s', $id, $status],
-            body: (object) array_diff_key($parsed, ['id']),
+            body: (object) array_diff_key($parsed, array_flip(['id'])),
             options: $options,
             convert: PortoutUpdateStatusResponse::class,
         );

@@ -57,7 +57,7 @@ final class Data implements BaseModel
      * @param BillingBundleSummary|array{
      *   id: string,
      *   costCode: string,
-     *   createdAt: \DateTimeInterface,
+     *   createdAt: string,
      *   isPublic: bool,
      *   name: string,
      *   currency?: string|null,
@@ -83,7 +83,7 @@ final class Data implements BaseModel
      * @param BillingBundleSummary|array{
      *   id: string,
      *   costCode: string,
-     *   createdAt: \DateTimeInterface,
+     *   createdAt: string,
      *   isPublic: bool,
      *   name: string,
      *   currency?: string|null,

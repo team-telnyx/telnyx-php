@@ -52,7 +52,7 @@ final class ToolsRawService implements ToolsRawContract
         return $this->client->request(
             method: 'post',
             path: ['ai/assistants/%1$s/tools/%2$s/test', $assistantID, $toolID],
-            body: (object) array_diff_key($parsed, ['assistantID']),
+            body: (object) array_diff_key($parsed, array_flip(['assistantID'])),
             options: $options,
             convert: ToolTestResponse::class,
         );

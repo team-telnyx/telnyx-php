@@ -13,9 +13,9 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type DataShape = array{
  *   currency: string,
- *   endDate: \DateTimeInterface,
+ *   endDate: string,
  *   results: list<Result>,
- *   startDate: \DateTimeInterface,
+ *   startDate: string,
  *   userEmail: string,
  *   userID: string,
  * }
@@ -35,7 +35,7 @@ final class Data implements BaseModel
      * End date of the breakdown period.
      */
     #[Required('end_date')]
-    public \DateTimeInterface $endDate;
+    public string $endDate;
 
     /**
      * List of phone number charge breakdowns.
@@ -49,7 +49,7 @@ final class Data implements BaseModel
      * Start date of the breakdown period.
      */
     #[Required('start_date')]
-    public \DateTimeInterface $startDate;
+    public string $startDate;
 
     /**
      * User email address.
@@ -110,9 +110,9 @@ final class Data implements BaseModel
      */
     public static function with(
         string $currency,
-        \DateTimeInterface $endDate,
+        string $endDate,
         array $results,
-        \DateTimeInterface $startDate,
+        string $startDate,
         string $userEmail,
         string $userID,
     ): self {
@@ -142,7 +142,7 @@ final class Data implements BaseModel
     /**
      * End date of the breakdown period.
      */
-    public function withEndDate(\DateTimeInterface $endDate): self
+    public function withEndDate(string $endDate): self
     {
         $self = clone $this;
         $self['endDate'] = $endDate;
@@ -172,7 +172,7 @@ final class Data implements BaseModel
     /**
      * Start date of the breakdown period.
      */
-    public function withStartDate(\DateTimeInterface $startDate): self
+    public function withStartDate(string $startDate): self
     {
         $self = clone $this;
         $self['startDate'] = $startDate;

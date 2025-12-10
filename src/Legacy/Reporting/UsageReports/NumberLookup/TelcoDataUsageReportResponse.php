@@ -15,12 +15,12 @@ use Telnyx\Core\Contracts\BaseModel;
  *   id?: string|null,
  *   aggregationType?: string|null,
  *   createdAt?: \DateTimeInterface|null,
- *   endDate?: \DateTimeInterface|null,
+ *   endDate?: string|null,
  *   managedAccounts?: list<string>|null,
  *   recordType?: string|null,
  *   reportURL?: string|null,
  *   result?: list<TelcoDataUsageRecord>|null,
- *   startDate?: \DateTimeInterface|null,
+ *   startDate?: string|null,
  *   status?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
  * }
@@ -52,7 +52,7 @@ final class TelcoDataUsageReportResponse implements BaseModel
      * End date of the report period.
      */
     #[Optional('end_date')]
-    public ?\DateTimeInterface $endDate;
+    public ?string $endDate;
 
     /**
      * List of managed account IDs included in the report.
@@ -86,7 +86,7 @@ final class TelcoDataUsageReportResponse implements BaseModel
      * Start date of the report period.
      */
     #[Optional('start_date')]
-    public ?\DateTimeInterface $startDate;
+    public ?string $startDate;
 
     /**
      * Current status of the report.
@@ -121,12 +121,12 @@ final class TelcoDataUsageReportResponse implements BaseModel
         ?string $id = null,
         ?string $aggregationType = null,
         ?\DateTimeInterface $createdAt = null,
-        ?\DateTimeInterface $endDate = null,
+        ?string $endDate = null,
         ?array $managedAccounts = null,
         ?string $recordType = null,
         ?string $reportURL = null,
         ?array $result = null,
-        ?\DateTimeInterface $startDate = null,
+        ?string $startDate = null,
         ?string $status = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
@@ -183,7 +183,7 @@ final class TelcoDataUsageReportResponse implements BaseModel
     /**
      * End date of the report period.
      */
-    public function withEndDate(\DateTimeInterface $endDate): self
+    public function withEndDate(string $endDate): self
     {
         $self = clone $this;
         $self['endDate'] = $endDate;
@@ -246,7 +246,7 @@ final class TelcoDataUsageReportResponse implements BaseModel
     /**
      * Start date of the report period.
      */
-    public function withStartDate(\DateTimeInterface $startDate): self
+    public function withStartDate(string $startDate): self
     {
         $self = clone $this;
         $self['startDate'] = $startDate;

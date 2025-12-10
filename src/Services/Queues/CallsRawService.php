@@ -86,7 +86,7 @@ final class CallsRawService implements CallsRawContract
         return $this->client->request(
             method: 'patch',
             path: ['queues/%1$s/calls/%2$s', $queueName, $callControlID],
-            body: (object) array_diff_key($parsed, ['queueName']),
+            body: (object) array_diff_key($parsed, array_flip(['queueName'])),
             options: $options,
             convert: null,
         );

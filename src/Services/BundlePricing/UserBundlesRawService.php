@@ -241,7 +241,7 @@ final class UserBundlesRawService implements UserBundlesRawContract
             $params,
             $requestOptions,
         );
-        $query_params = ['filter'];
+        $query_params = array_flip(['filter']);
 
         /** @var array<string,string> */
         $header_params = array_diff_key($parsed, $query_params);

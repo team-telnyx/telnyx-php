@@ -82,14 +82,10 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param DateEndedAt|array{
-     *   eq?: \DateTimeInterface|null,
-     *   gte?: \DateTimeInterface|null,
-     *   lte?: \DateTimeInterface|null,
+     *   eq?: string|null, gte?: string|null, lte?: string|null
      * } $dateEndedAt
      * @param DateStartedAt|array{
-     *   eq?: \DateTimeInterface|null,
-     *   gte?: \DateTimeInterface|null,
-     *   lte?: \DateTimeInterface|null,
+     *   eq?: string|null, gte?: string|null, lte?: string|null
      * } $dateStartedAt
      */
     public static function with(
@@ -118,9 +114,7 @@ final class Filter implements BaseModel
 
     /**
      * @param DateEndedAt|array{
-     *   eq?: \DateTimeInterface|null,
-     *   gte?: \DateTimeInterface|null,
-     *   lte?: \DateTimeInterface|null,
+     *   eq?: string|null, gte?: string|null, lte?: string|null
      * } $dateEndedAt
      */
     public function withDateEndedAt(DateEndedAt|array $dateEndedAt): self
@@ -133,9 +127,7 @@ final class Filter implements BaseModel
 
     /**
      * @param DateStartedAt|array{
-     *   eq?: \DateTimeInterface|null,
-     *   gte?: \DateTimeInterface|null,
-     *   lte?: \DateTimeInterface|null,
+     *   eq?: string|null, gte?: string|null, lte?: string|null
      * } $dateStartedAt
      */
     public function withDateStartedAt(DateStartedAt|array $dateStartedAt): self

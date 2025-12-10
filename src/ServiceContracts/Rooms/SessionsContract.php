@@ -32,21 +32,9 @@ interface SessionsContract
      *
      * @param array{
      *   active?: bool,
-     *   dateCreatedAt?: array{
-     *     eq?: string|\DateTimeInterface,
-     *     gte?: string|\DateTimeInterface,
-     *     lte?: string|\DateTimeInterface,
-     *   },
-     *   dateEndedAt?: array{
-     *     eq?: string|\DateTimeInterface,
-     *     gte?: string|\DateTimeInterface,
-     *     lte?: string|\DateTimeInterface,
-     *   },
-     *   dateUpdatedAt?: array{
-     *     eq?: string|\DateTimeInterface,
-     *     gte?: string|\DateTimeInterface,
-     *     lte?: string|\DateTimeInterface,
-     *   },
+     *   dateCreatedAt?: array{eq?: string, gte?: string, lte?: string},
+     *   dateEndedAt?: array{eq?: string, gte?: string, lte?: string},
+     *   dateUpdatedAt?: array{eq?: string, gte?: string, lte?: string},
      *   roomID?: string,
      * } $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[room_id], filter[active]
      * @param bool $includeParticipants to decide if room participants should be included in the response
@@ -71,21 +59,9 @@ interface SessionsContract
      * @param string $roomID the unique identifier of a room
      * @param array{
      *   active?: bool,
-     *   dateCreatedAt?: array{
-     *     eq?: string|\DateTimeInterface,
-     *     gte?: string|\DateTimeInterface,
-     *     lte?: string|\DateTimeInterface,
-     *   },
-     *   dateEndedAt?: array{
-     *     eq?: string|\DateTimeInterface,
-     *     gte?: string|\DateTimeInterface,
-     *     lte?: string|\DateTimeInterface,
-     *   },
-     *   dateUpdatedAt?: array{
-     *     eq?: string|\DateTimeInterface,
-     *     gte?: string|\DateTimeInterface,
-     *     lte?: string|\DateTimeInterface,
-     *   },
+     *   dateCreatedAt?: array{eq?: string, gte?: string, lte?: string},
+     *   dateEndedAt?: array{eq?: string, gte?: string, lte?: string},
+     *   dateUpdatedAt?: array{eq?: string, gte?: string, lte?: string},
      * } $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[active]
      * @param bool $includeParticipants to decide if room participants should be included in the response
      * @param array{
@@ -110,21 +86,9 @@ interface SessionsContract
      * @param string $roomSessionID the unique identifier of a room session
      * @param array{
      *   context?: string,
-     *   dateJoinedAt?: array{
-     *     eq?: string|\DateTimeInterface,
-     *     gte?: string|\DateTimeInterface,
-     *     lte?: string|\DateTimeInterface,
-     *   },
-     *   dateLeftAt?: array{
-     *     eq?: string|\DateTimeInterface,
-     *     gte?: string|\DateTimeInterface,
-     *     lte?: string|\DateTimeInterface,
-     *   },
-     *   dateUpdatedAt?: array{
-     *     eq?: string|\DateTimeInterface,
-     *     gte?: string|\DateTimeInterface,
-     *     lte?: string|\DateTimeInterface,
-     *   },
+     *   dateJoinedAt?: array{eq?: string, gte?: string, lte?: string},
+     *   dateLeftAt?: array{eq?: string, gte?: string, lte?: string},
+     *   dateUpdatedAt?: array{eq?: string, gte?: string, lte?: string},
      * } $filter Consolidated filter parameter (deepObject style). Originally: filter[date_joined_at][eq], filter[date_joined_at][gte], filter[date_joined_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_left_at][eq], filter[date_left_at][gte], filter[date_left_at][lte], filter[context]
      * @param array{
      *   number?: int, size?: int

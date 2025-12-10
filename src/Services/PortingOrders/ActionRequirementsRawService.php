@@ -104,7 +104,7 @@ final class ActionRequirementsRawService implements ActionRequirementsRawContrac
                 $portingOrderID,
                 $id,
             ],
-            body: (object) array_diff_key($parsed, ['portingOrderID']),
+            body: (object) array_diff_key($parsed, array_flip(['portingOrderID'])),
             options: $options,
             convert: ActionRequirementInitiateResponse::class,
         );

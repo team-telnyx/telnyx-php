@@ -90,7 +90,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
             path: [
                 'external_connections/%1$s/phone_numbers/%2$s', $id, $phoneNumberID,
             ],
-            body: (object) array_diff_key($parsed, ['id']),
+            body: (object) array_diff_key($parsed, array_flip(['id'])),
             options: $options,
             convert: PhoneNumberUpdateResponse::class,
         );

@@ -48,8 +48,8 @@ final class ChargesSummaryGetResponse implements BaseModel
      *
      * @param Data|array{
      *   currency: string,
-     *   endDate: \DateTimeInterface,
-     *   startDate: \DateTimeInterface,
+     *   endDate: string,
+     *   startDate: string,
      *   summary: Summary,
      *   total: Total,
      *   userEmail: string,
@@ -68,8 +68,8 @@ final class ChargesSummaryGetResponse implements BaseModel
     /**
      * @param Data|array{
      *   currency: string,
-     *   endDate: \DateTimeInterface,
-     *   startDate: \DateTimeInterface,
+     *   endDate: string,
+     *   startDate: string,
      *   summary: Summary,
      *   total: Total,
      *   userEmail: string,

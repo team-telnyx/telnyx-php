@@ -88,7 +88,7 @@ final class ActivationJobsRawService implements ActivationJobsRawContract
         return $this->client->request(
             method: 'patch',
             path: ['porting_orders/%1$s/activation_jobs/%2$s', $id, $activationJobID],
-            body: (object) array_diff_key($parsed, ['id']),
+            body: (object) array_diff_key($parsed, array_flip(['id'])),
             options: $options,
             convert: ActivationJobUpdateResponse::class,
         );

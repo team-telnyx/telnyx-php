@@ -28,9 +28,7 @@ final class ChargesBreakdownRawService implements ChargesBreakdownRawContract
      * Retrieve a detailed breakdown of monthly charges for phone numbers in a specified date range. The date range cannot exceed 31 days.
      *
      * @param array{
-     *   startDate: string|\DateTimeInterface,
-     *   endDate?: string|\DateTimeInterface,
-     *   format?: 'json'|'csv'|Format,
+     *   startDate: string, endDate?: string, format?: 'json'|'csv'|Format
      * }|ChargesBreakdownRetrieveParams $params
      *
      * @return BaseResponse<ChargesBreakdownGetResponse>

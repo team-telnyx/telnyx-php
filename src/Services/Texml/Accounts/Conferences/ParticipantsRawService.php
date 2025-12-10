@@ -265,7 +265,7 @@ final class ParticipantsRawService implements ParticipantsRawContract
                 $conferenceSid,
             ],
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
-            body: (object) array_diff_key($parsed, ['accountSid']),
+            body: (object) array_diff_key($parsed, array_flip(['accountSid'])),
             options: $options,
             convert: ParticipantParticipantsResponse::class,
         );

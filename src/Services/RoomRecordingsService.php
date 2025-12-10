@@ -53,16 +53,8 @@ final class RoomRecordingsService implements RoomRecordingsContract
      * View a list of room recordings.
      *
      * @param array{
-     *   dateEndedAt?: array{
-     *     eq?: string|\DateTimeInterface,
-     *     gte?: string|\DateTimeInterface,
-     *     lte?: string|\DateTimeInterface,
-     *   },
-     *   dateStartedAt?: array{
-     *     eq?: string|\DateTimeInterface,
-     *     gte?: string|\DateTimeInterface,
-     *     lte?: string|\DateTimeInterface,
-     *   },
+     *   dateEndedAt?: array{eq?: string, gte?: string, lte?: string},
+     *   dateStartedAt?: array{eq?: string, gte?: string, lte?: string},
      *   durationSecs?: int,
      *   participantID?: string,
      *   roomID?: string,
@@ -118,16 +110,8 @@ final class RoomRecordingsService implements RoomRecordingsContract
      * Delete several room recordings in a bulk.
      *
      * @param array{
-     *   dateEndedAt?: array{
-     *     eq?: string|\DateTimeInterface,
-     *     gte?: string|\DateTimeInterface,
-     *     lte?: string|\DateTimeInterface,
-     *   },
-     *   dateStartedAt?: array{
-     *     eq?: string|\DateTimeInterface,
-     *     gte?: string|\DateTimeInterface,
-     *     lte?: string|\DateTimeInterface,
-     *   },
+     *   dateEndedAt?: array{eq?: string, gte?: string, lte?: string},
+     *   dateStartedAt?: array{eq?: string, gte?: string, lte?: string},
      *   durationSecs?: int,
      *   participantID?: string,
      *   roomID?: string,

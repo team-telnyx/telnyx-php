@@ -35,7 +35,7 @@ final class ChargesBreakdownTest extends TestCase
         }
 
         $result = $this->client->chargesBreakdown->retrieve(
-            startDate: new \DateTimeImmutable('2025-05-01')
+            startDate: '2025-05-01'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -50,9 +50,9 @@ final class ChargesBreakdownTest extends TestCase
         }
 
         $result = $this->client->chargesBreakdown->retrieve(
-            startDate: new \DateTimeImmutable('2025-05-01'),
-            endDate: new \DateTimeImmutable('2025-06-01'),
-            format: 'json',
+            startDate: '2025-05-01',
+            endDate: '2025-06-01',
+            format: 'json'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

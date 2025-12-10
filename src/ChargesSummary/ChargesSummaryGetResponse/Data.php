@@ -16,8 +16,8 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type DataShape = array{
  *   currency: string,
- *   endDate: \DateTimeInterface,
- *   startDate: \DateTimeInterface,
+ *   endDate: string,
+ *   startDate: string,
  *   summary: Summary,
  *   total: Total,
  *   userEmail: string,
@@ -39,13 +39,13 @@ final class Data implements BaseModel
      * End date of the summary period.
      */
     #[Required('end_date')]
-    public \DateTimeInterface $endDate;
+    public string $endDate;
 
     /**
      * Start date of the summary period.
      */
     #[Required('start_date')]
-    public \DateTimeInterface $startDate;
+    public string $startDate;
 
     #[Required]
     public Summary $summary;
@@ -119,8 +119,8 @@ final class Data implements BaseModel
      */
     public static function with(
         string $currency,
-        \DateTimeInterface $endDate,
-        \DateTimeInterface $startDate,
+        string $endDate,
+        string $startDate,
         Summary|array $summary,
         Total|array $total,
         string $userEmail,
@@ -153,7 +153,7 @@ final class Data implements BaseModel
     /**
      * End date of the summary period.
      */
-    public function withEndDate(\DateTimeInterface $endDate): self
+    public function withEndDate(string $endDate): self
     {
         $self = clone $this;
         $self['endDate'] = $endDate;
@@ -164,7 +164,7 @@ final class Data implements BaseModel
     /**
      * Start date of the summary period.
      */
-    public function withStartDate(\DateTimeInterface $startDate): self
+    public function withStartDate(string $startDate): self
     {
         $self = clone $this;
         $self['startDate'] = $startDate;

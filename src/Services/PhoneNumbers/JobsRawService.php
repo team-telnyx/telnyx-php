@@ -199,7 +199,7 @@ final class JobsRawService implements JobsRawContract
             $params,
             $requestOptions,
         );
-        $query_params = ['filter'];
+        $query_params = array_flip(['filter']);
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

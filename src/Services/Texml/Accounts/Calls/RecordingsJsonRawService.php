@@ -65,7 +65,7 @@ final class RecordingsJsonRawService implements RecordingsJsonRawContract
                 'texml/Accounts/%1$s/Calls/%2$s/Recordings.json', $accountSid, $callSid,
             ],
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
-            body: (object) array_diff_key($parsed, ['accountSid']),
+            body: (object) array_diff_key($parsed, array_flip(['accountSid'])),
             options: $options,
             convert: RecordingsJsonRecordingsJsonResponse::class,
         );

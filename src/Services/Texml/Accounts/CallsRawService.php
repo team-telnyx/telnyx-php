@@ -121,7 +121,7 @@ final class CallsRawService implements CallsRawContract
             method: 'post',
             path: ['texml/Accounts/%1$s/Calls/%2$s', $accountSid, $callSid],
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
-            body: (object) array_diff_key($parsed, ['accountSid']),
+            body: (object) array_diff_key($parsed, array_flip(['accountSid'])),
             options: $options,
             convert: CallUpdateResponse::class,
         );
@@ -298,7 +298,7 @@ final class CallsRawService implements CallsRawContract
                 'texml/Accounts/%1$s/Calls/%2$s/Siprec.json', $accountSid, $callSid,
             ],
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
-            body: (object) array_diff_key($parsed, ['accountSid']),
+            body: (object) array_diff_key($parsed, array_flip(['accountSid'])),
             options: $options,
             convert: CallSiprecJsonResponse::class,
         );
@@ -344,7 +344,7 @@ final class CallsRawService implements CallsRawContract
                 'texml/Accounts/%1$s/Calls/%2$s/Streams.json', $accountSid, $callSid,
             ],
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
-            body: (object) array_diff_key($parsed, ['accountSid']),
+            body: (object) array_diff_key($parsed, array_flip(['accountSid'])),
             options: $options,
             convert: CallStreamsJsonResponse::class,
         );

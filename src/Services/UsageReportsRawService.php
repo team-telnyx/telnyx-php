@@ -124,7 +124,7 @@ final class UsageReportsRawService implements UsageReportsRawContract
             $params,
             $requestOptions,
         );
-        $query_params = ['product'];
+        $query_params = array_flip(['product']);
 
         /** @var array<string,string> */
         $header_params = array_diff_key($parsed, $query_params);

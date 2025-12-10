@@ -17,9 +17,9 @@ use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams\A
  *
  * @phpstan-type NumberLookupCreateParamsShape = array{
  *   aggregationType?: AggregationType|value-of<AggregationType>,
- *   endDate?: \DateTimeInterface,
+ *   endDate?: string,
  *   managedAccounts?: list<string>,
- *   startDate?: \DateTimeInterface,
+ *   startDate?: string,
  * }
  */
 final class NumberLookupCreateParams implements BaseModel
@@ -40,7 +40,7 @@ final class NumberLookupCreateParams implements BaseModel
      * End date for the usage report.
      */
     #[Optional]
-    public ?\DateTimeInterface $endDate;
+    public ?string $endDate;
 
     /**
      * List of managed accounts to include in the report.
@@ -54,7 +54,7 @@ final class NumberLookupCreateParams implements BaseModel
      * Start date for the usage report.
      */
     #[Optional]
-    public ?\DateTimeInterface $startDate;
+    public ?string $startDate;
 
     public function __construct()
     {
@@ -71,9 +71,9 @@ final class NumberLookupCreateParams implements BaseModel
      */
     public static function with(
         AggregationType|string|null $aggregationType = null,
-        ?\DateTimeInterface $endDate = null,
+        ?string $endDate = null,
         ?array $managedAccounts = null,
-        ?\DateTimeInterface $startDate = null,
+        ?string $startDate = null,
     ): self {
         $self = new self;
 
@@ -102,7 +102,7 @@ final class NumberLookupCreateParams implements BaseModel
     /**
      * End date for the usage report.
      */
-    public function withEndDate(\DateTimeInterface $endDate): self
+    public function withEndDate(string $endDate): self
     {
         $self = clone $this;
         $self['endDate'] = $endDate;
@@ -126,7 +126,7 @@ final class NumberLookupCreateParams implements BaseModel
     /**
      * Start date for the usage report.
      */
-    public function withStartDate(\DateTimeInterface $startDate): self
+    public function withStartDate(string $startDate): self
     {
         $self = clone $this;
         $self['startDate'] = $startDate;

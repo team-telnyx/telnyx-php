@@ -29,21 +29,9 @@ interface RoomParticipantsContract
      *
      * @param array{
      *   context?: string,
-     *   dateJoinedAt?: array{
-     *     eq?: string|\DateTimeInterface,
-     *     gte?: string|\DateTimeInterface,
-     *     lte?: string|\DateTimeInterface,
-     *   },
-     *   dateLeftAt?: array{
-     *     eq?: string|\DateTimeInterface,
-     *     gte?: string|\DateTimeInterface,
-     *     lte?: string|\DateTimeInterface,
-     *   },
-     *   dateUpdatedAt?: array{
-     *     eq?: string|\DateTimeInterface,
-     *     gte?: string|\DateTimeInterface,
-     *     lte?: string|\DateTimeInterface,
-     *   },
+     *   dateJoinedAt?: array{eq?: string, gte?: string, lte?: string},
+     *   dateLeftAt?: array{eq?: string, gte?: string, lte?: string},
+     *   dateUpdatedAt?: array{eq?: string, gte?: string, lte?: string},
      *   sessionID?: string,
      * } $filter Consolidated filter parameter (deepObject style). Originally: filter[date_joined_at][eq], filter[date_joined_at][gte], filter[date_joined_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_left_at][eq], filter[date_left_at][gte], filter[date_left_at][lte], filter[context], filter[session_id]
      * @param array{
