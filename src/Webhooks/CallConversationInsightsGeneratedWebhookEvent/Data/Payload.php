@@ -91,7 +91,7 @@ final class Payload implements BaseModel
      *
      * @param CallingPartyType|value-of<CallingPartyType> $callingPartyType
      * @param list<Result|array{
-     *   insightID?: string|null, result?: string|array<string,mixed>|null
+     *   insightID?: string|null, result?: mixed|string|null
      * }> $results
      */
     public static function with(
@@ -202,7 +202,7 @@ final class Payload implements BaseModel
      * Array of insight results being generated for the call.
      *
      * @param list<Result|array{
-     *   insightID?: string|null, result?: string|array<string,mixed>|null
+     *   insightID?: string|null, result?: mixed|string|null
      * }> $results
      */
     public function withResults(array $results): self

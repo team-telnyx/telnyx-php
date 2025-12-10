@@ -6,13 +6,13 @@ namespace Telnyx\ServiceContracts\Rooms;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
-use Telnyx\RoomParticipant;
-use Telnyx\Rooms\RoomSession;
+use Telnyx\Rooms\Sessions\SessionGetParticipantsResponse;
 use Telnyx\Rooms\Sessions\SessionGetResponse;
 use Telnyx\Rooms\Sessions\SessionList0Params;
+use Telnyx\Rooms\Sessions\SessionList0Response;
 use Telnyx\Rooms\Sessions\SessionList1Params;
+use Telnyx\Rooms\Sessions\SessionList1Response;
 use Telnyx\Rooms\Sessions\SessionRetrieveParams;
 use Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams;
 
@@ -39,7 +39,7 @@ interface SessionsRawContract
      *
      * @param array<mixed>|SessionList0Params $params
      *
-     * @return BaseResponse<DefaultPagination<RoomSession>>
+     * @return BaseResponse<SessionList0Response>
      *
      * @throws APIException
      */
@@ -54,7 +54,7 @@ interface SessionsRawContract
      * @param string $roomID the unique identifier of a room
      * @param array<mixed>|SessionList1Params $params
      *
-     * @return BaseResponse<DefaultPagination<RoomSession>>
+     * @return BaseResponse<SessionList1Response>
      *
      * @throws APIException
      */
@@ -70,7 +70,7 @@ interface SessionsRawContract
      * @param string $roomSessionID the unique identifier of a room session
      * @param array<mixed>|SessionRetrieveParticipantsParams $params
      *
-     * @return BaseResponse<DefaultPagination<RoomParticipant>>
+     * @return BaseResponse<SessionGetParticipantsResponse>
      *
      * @throws APIException
      */

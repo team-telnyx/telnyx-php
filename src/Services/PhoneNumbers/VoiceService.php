@@ -7,8 +7,6 @@ namespace Telnyx\Services\PhoneNumbers;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
-use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings;
 use Telnyx\PhoneNumbers\Voice\CallForwarding;
 use Telnyx\PhoneNumbers\Voice\CallForwarding\ForwardingType;
 use Telnyx\PhoneNumbers\Voice\CallRecording;
@@ -19,6 +17,7 @@ use Telnyx\PhoneNumbers\Voice\MediaFeatures;
 use Telnyx\PhoneNumbers\Voice\VoiceGetResponse;
 use Telnyx\PhoneNumbers\Voice\VoiceListParams\Filter\VoiceUsagePaymentMethod;
 use Telnyx\PhoneNumbers\Voice\VoiceListParams\Sort;
+use Telnyx\PhoneNumbers\Voice\VoiceListResponse;
 use Telnyx\PhoneNumbers\Voice\VoiceUpdateParams\InboundCallScreening;
 use Telnyx\PhoneNumbers\Voice\VoiceUpdateParams\UsagePaymentMethod;
 use Telnyx\PhoneNumbers\Voice\VoiceUpdateResponse;
@@ -140,8 +139,6 @@ final class VoiceService implements VoiceContract
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param 'purchased_at'|'phone_number'|'connection_name'|'usage_payment_method'|Sort $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
      *
-     * @return DefaultPagination<PhoneNumberWithVoiceSettings>
-     *
      * @throws APIException
      */
     public function list(
@@ -149,7 +146,7 @@ final class VoiceService implements VoiceContract
         ?array $page = null,
         string|Sort|null $sort = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): VoiceListResponse {
         $params = Util::removeNulls(
             ['filter' => $filter, 'page' => $page, 'sort' => $sort]
         );

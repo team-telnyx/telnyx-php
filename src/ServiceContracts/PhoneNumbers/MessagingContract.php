@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PhoneNumbers;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\Messaging\MessagingGetResponse;
+use Telnyx\PhoneNumbers\Messaging\MessagingListResponse;
 use Telnyx\PhoneNumbers\Messaging\MessagingUpdateResponse;
-use Telnyx\PhoneNumberWithMessagingSettings;
 use Telnyx\RequestOptions;
 
 interface MessagingContract
@@ -55,12 +54,10 @@ interface MessagingContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return DefaultPagination<PhoneNumberWithMessagingSettings>
-     *
      * @throws APIException
      */
     public function list(
         ?array $page = null,
         ?RequestOptions $requestOptions = null
-    ): DefaultPagination;
+    ): MessagingListResponse;
 }

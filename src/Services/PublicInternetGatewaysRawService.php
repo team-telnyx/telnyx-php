@@ -7,7 +7,6 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayCreateParams;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayDeleteResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayGetResponse;
@@ -90,7 +89,7 @@ final class PublicInternetGatewaysRawService implements PublicInternetGatewaysRa
      *   filter?: array{networkID?: string}, page?: array{number?: int, size?: int}
      * }|PublicInternetGatewayListParams $params
      *
-     * @return BaseResponse<DefaultPagination<PublicInternetGatewayListResponse>>
+     * @return BaseResponse<PublicInternetGatewayListResponse>
      *
      * @throws APIException
      */
@@ -110,7 +109,6 @@ final class PublicInternetGatewaysRawService implements PublicInternetGatewaysRa
             query: $parsed,
             options: $options,
             convert: PublicInternetGatewayListResponse::class,
-            page: DefaultPagination::class,
         );
     }
 

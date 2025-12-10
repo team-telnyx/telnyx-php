@@ -6,11 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
-use Telnyx\Documents\DocServiceDocument;
 use Telnyx\Documents\DocumentDeleteResponse;
 use Telnyx\Documents\DocumentGenerateDownloadLinkResponse;
 use Telnyx\Documents\DocumentGetResponse;
+use Telnyx\Documents\DocumentListResponse;
 use Telnyx\Documents\DocumentUpdateResponse;
 use Telnyx\Documents\DocumentUploadJsonResponse;
 use Telnyx\Documents\DocumentUploadResponse;
@@ -71,15 +70,10 @@ final class DocumentsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->documents->list();
+        $result = $this->client->documents->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(DocServiceDocument::class, $item);
-        }
+        $this->assertInstanceOf(DocumentListResponse::class, $result);
     }
 
     #[Test]
@@ -101,7 +95,7 @@ final class DocumentsTest extends TestCase
     public function testDownload(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism doesn\'t support application/octet-stream responses');
+            $this->markTestSkipped('Prism doesn\'t support * responses');
         }
 
         $result = $this->client->documents->download(
@@ -138,9 +132,8 @@ final class DocumentsTest extends TestCase
         }
 
         $result = $this->client->documents->upload(
-            document: [
-                'url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-            ],
+            url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+            file: 'ZXhhbXBsZSBvZiBlbmNvZGVkIGNvbnRlbnQ=',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -155,11 +148,10 @@ final class DocumentsTest extends TestCase
         }
 
         $result = $this->client->documents->upload(
-            document: [
-                'url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-                'customerReference' => 'MY REF 001',
-                'filename' => 'test-document.pdf',
-            ],
+            url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+            customerReference: 'MY REF 001',
+            filename: 'test-document.pdf',
+            file: 'ZXhhbXBsZSBvZiBlbmNvZGVkIGNvbnRlbnQ=',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -174,9 +166,8 @@ final class DocumentsTest extends TestCase
         }
 
         $result = $this->client->documents->uploadJson(
-            document: [
-                'url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-            ],
+            url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+            file: 'ZXhhbXBsZSBvZiBlbmNvZGVkIGNvbnRlbnQ=',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -191,11 +182,10 @@ final class DocumentsTest extends TestCase
         }
 
         $result = $this->client->documents->uploadJson(
-            document: [
-                'url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-                'customerReference' => 'MY REF 001',
-                'filename' => 'test-document.pdf',
-            ],
+            url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+            customerReference: 'MY REF 001',
+            filename: 'test-document.pdf',
+            file: 'ZXhhbXBsZSBvZiBlbmNvZGVkIGNvbnRlbnQ=',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

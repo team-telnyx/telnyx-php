@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\AI\Assistants;
 
 use Telnyx\AI\Assistants\ScheduledEvents\ConversationChannelType;
+use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventListResponse;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledPhoneCallEventResponse;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledSMSEventResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 interface ScheduledEventsContract
@@ -51,8 +51,9 @@ interface ScheduledEventsContract
      * @api
      *
      * @param 'phone_call'|'sms_chat'|ConversationChannelType $conversationChannel
-     *
-     * @return DefaultFlatPagination<ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse,>
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
@@ -60,11 +61,10 @@ interface ScheduledEventsContract
         string $assistantID,
         string|ConversationChannelType|null $conversationChannel = null,
         string|\DateTimeInterface|null $fromDate = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        ?array $page = null,
         string|\DateTimeInterface|null $toDate = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination;
+    ): ScheduledEventListResponse;
 
     /**
      * @api

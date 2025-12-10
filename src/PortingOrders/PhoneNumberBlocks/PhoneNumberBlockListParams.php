@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\ActivationStatus;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\PortabilityStatus;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\PortingOrderSingleStatus;
+use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\UnionMember0;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\UnionMember1;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Page;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Sort;
@@ -28,7 +28,7 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Sort\Value
  *     phoneNumber?: list<string>|null,
  *     portabilityStatus?: value-of<PortabilityStatus>|null,
  *     portingOrderID?: list<string>|null,
- *     status?: null|list<value-of<UnionMember1>>|value-of<PortingOrderSingleStatus>,
+ *     status?: null|list<value-of<UnionMember1>>|value-of<UnionMember0>,
  *     supportKey?: string|null|list<string>,
  *   },
  *   page?: Page|array{number?: int|null, size?: int|null},
@@ -74,7 +74,7 @@ final class PhoneNumberBlockListParams implements BaseModel
      *   phoneNumber?: list<string>|null,
      *   portabilityStatus?: value-of<PortabilityStatus>|null,
      *   portingOrderID?: list<string>|null,
-     *   status?: list<value-of<UnionMember1>>|value-of<PortingOrderSingleStatus>|null,
+     *   status?: list<value-of<UnionMember1>>|value-of<UnionMember0>|null,
      *   supportKey?: string|list<string>|null,
      * } $filter
      * @param Page|array{number?: int|null, size?: int|null} $page
@@ -102,7 +102,7 @@ final class PhoneNumberBlockListParams implements BaseModel
      *   phoneNumber?: list<string>|null,
      *   portabilityStatus?: value-of<PortabilityStatus>|null,
      *   portingOrderID?: list<string>|null,
-     *   status?: list<value-of<UnionMember1>>|value-of<PortingOrderSingleStatus>|null,
+     *   status?: list<value-of<UnionMember1>>|value-of<UnionMember0>|null,
      *   supportKey?: string|list<string>|null,
      * } $filter
      */

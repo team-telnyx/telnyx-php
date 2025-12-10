@@ -6,8 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\Number10dlc\PhoneNumberCampaigns\PhoneNumberCampaign;
-use Telnyx\PerPagePaginationV2;
+use Telnyx\Number10dlc\PhoneNumberCampaigns\PhoneNumberCampaignListResponse;
+use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -116,15 +116,10 @@ final class PhoneNumberCampaignsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->number10dlc->phoneNumberCampaigns->list();
+        $result = $this->client->number10dlc->phoneNumberCampaigns->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PerPagePaginationV2::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(PhoneNumberCampaign::class, $item);
-        }
+        $this->assertInstanceOf(PhoneNumberCampaignListResponse::class, $result);
     }
 
     #[Test]

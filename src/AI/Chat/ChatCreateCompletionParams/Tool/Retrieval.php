@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Telnyx\AI\Chat\ChatCreateCompletionParams\Tool;
 
 use Telnyx\AI\Assistants\InferenceEmbeddingBucketIDs;
+use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\Retrieval\Type;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type RetrievalShape = array{
- *   retrieval: InferenceEmbeddingBucketIDs, type?: 'retrieval'
+ *   retrieval: InferenceEmbeddingBucketIDs, type: value-of<Type>
  * }
  */
 final class Retrieval implements BaseModel
@@ -19,25 +20,25 @@ final class Retrieval implements BaseModel
     /** @use SdkModel<RetrievalShape> */
     use SdkModel;
 
-    /** @var 'retrieval' $type */
-    #[Required]
-    public string $type = 'retrieval';
-
     #[Required]
     public InferenceEmbeddingBucketIDs $retrieval;
+
+    /** @var value-of<Type> $type */
+    #[Required(enum: Type::class)]
+    public string $type;
 
     /**
      * `new Retrieval()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Retrieval::with(retrieval: ...)
+     * Retrieval::with(retrieval: ..., type: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Retrieval)->withRetrieval(...)
+     * (new Retrieval)->withRetrieval(...)->withType(...)
      * ```
      */
     public function __construct()
@@ -53,13 +54,16 @@ final class Retrieval implements BaseModel
      * @param InferenceEmbeddingBucketIDs|array{
      *   bucketIDs: list<string>, maxNumResults?: int|null
      * } $retrieval
+     * @param Type|value-of<Type> $type
      */
     public static function with(
-        InferenceEmbeddingBucketIDs|array $retrieval
+        InferenceEmbeddingBucketIDs|array $retrieval,
+        Type|string $type
     ): self {
         $self = new self;
 
         $self['retrieval'] = $retrieval;
+        $self['type'] = $type;
 
         return $self;
     }
@@ -74,6 +78,17 @@ final class Retrieval implements BaseModel
     ): self {
         $self = clone $this;
         $self['retrieval'] = $retrieval;
+
+        return $self;
+    }
+
+    /**
+     * @param Type|value-of<Type> $type
+     */
+    public function withType(Type|string $type): self
+    {
+        $self = clone $this;
+        $self['type'] = $type;
 
         return $self;
     }

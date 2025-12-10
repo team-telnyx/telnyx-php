@@ -5,18 +5,16 @@ namespace Tests\Services\Number10dlc;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\Brand\AltBusinessIDType;
+use Telnyx\Brand\BrandIdentityStatus;
+use Telnyx\Brand\EntityType;
+use Telnyx\Brand\StockExchange;
+use Telnyx\Brand\TelnyxBrand;
+use Telnyx\Brand\Vertical;
 use Telnyx\Client;
-use Telnyx\Number10dlc\Brand\AltBusinessIDType;
 use Telnyx\Number10dlc\Brand\BrandGetFeedbackResponse;
 use Telnyx\Number10dlc\Brand\BrandGetResponse;
-use Telnyx\Number10dlc\Brand\BrandGetSMSOtpStatusResponse;
-use Telnyx\Number10dlc\Brand\BrandIdentityStatus;
 use Telnyx\Number10dlc\Brand\BrandListResponse;
-use Telnyx\Number10dlc\Brand\EntityType;
-use Telnyx\Number10dlc\Brand\StockExchange;
-use Telnyx\Number10dlc\Brand\TelnyxBrand;
-use Telnyx\Number10dlc\Brand\Vertical;
-use Telnyx\PerPagePaginationV2;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -174,15 +172,10 @@ final class BrandTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->number10dlc->brand->list();
+        $result = $this->client->number10dlc->brand->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PerPagePaginationV2::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(BrandListResponse::class, $item);
-        }
+        $this->assertInstanceOf(BrandListResponse::class, $result);
     }
 
     #[Test]
@@ -222,21 +215,6 @@ final class BrandTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
-    }
-
-    #[Test]
-    public function testRetrieveSMSOtpStatus(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
-        $result = $this->client->number10dlc->brand->retrieveSMSOtpStatus(
-            'OTP4B2001'
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(BrandGetSMSOtpStatusResponse::class, $result);
     }
 
     #[Test]

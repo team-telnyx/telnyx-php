@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreateParams;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListResponse;
@@ -34,7 +33,7 @@ interface PhoneNumberConfigurationsRawContract
      *
      * @param array<mixed>|PhoneNumberConfigurationListParams $params
      *
-     * @return BaseResponse<DefaultPagination<PhoneNumberConfigurationListResponse>>
+     * @return BaseResponse<PhoneNumberConfigurationListResponse>
      *
      * @throws APIException
      */

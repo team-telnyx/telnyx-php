@@ -1,0 +1,52 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Telnyx\ServiceContracts\Number10dlc;
+
+use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Number10dlc\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileAssignResponse;
+use Telnyx\Number10dlc\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse;
+use Telnyx\Number10dlc\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetTaskStatusResponse;
+use Telnyx\RequestOptions;
+
+interface PhoneNumberAssignmentByProfileContract
+{
+    /**
+     * @api
+     *
+     * @param string $messagingProfileID the ID of the messaging profile that you want to link to the specified campaign
+     * @param string $campaignID The ID of the campaign you want to link to the specified messaging profile. If you supply this ID in the request, do not also include a tcrCampaignId.
+     * @param string $tcrCampaignID The TCR ID of the shared campaign you want to link to the specified messaging profile (for campaigns not created using Telnyx 10DLC services only). If you supply this ID in the request, do not also include a campaignId.
+     *
+     * @throws APIException
+     */
+    public function assign(
+        string $messagingProfileID,
+        ?string $campaignID = null,
+        ?string $tcrCampaignID = null,
+        ?RequestOptions $requestOptions = null,
+    ): PhoneNumberAssignmentByProfileAssignResponse;
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function getPhoneNumberStatus(
+        string $taskID,
+        int $page = 1,
+        int $recordsPerPage = 20,
+        ?RequestOptions $requestOptions = null,
+    ): PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse;
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function getTaskStatus(
+        string $taskID,
+        ?RequestOptions $requestOptions = null
+    ): PhoneNumberAssignmentByProfileGetTaskStatusResponse;
+}

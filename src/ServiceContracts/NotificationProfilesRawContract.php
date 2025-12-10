@@ -6,12 +6,11 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\NotificationProfiles\NotificationProfile;
 use Telnyx\NotificationProfiles\NotificationProfileCreateParams;
 use Telnyx\NotificationProfiles\NotificationProfileDeleteResponse;
 use Telnyx\NotificationProfiles\NotificationProfileGetResponse;
 use Telnyx\NotificationProfiles\NotificationProfileListParams;
+use Telnyx\NotificationProfiles\NotificationProfileListResponse;
 use Telnyx\NotificationProfiles\NotificationProfileNewResponse;
 use Telnyx\NotificationProfiles\NotificationProfileUpdateParams;
 use Telnyx\NotificationProfiles\NotificationProfileUpdateResponse;
@@ -50,7 +49,7 @@ interface NotificationProfilesRawContract
     /**
      * @api
      *
-     * @param string $notificationProfileID the id of the resource
+     * @param string $id the id of the resource
      * @param array<mixed>|NotificationProfileUpdateParams $params
      *
      * @return BaseResponse<NotificationProfileUpdateResponse>
@@ -58,7 +57,7 @@ interface NotificationProfilesRawContract
      * @throws APIException
      */
     public function update(
-        string $notificationProfileID,
+        string $id,
         array|NotificationProfileUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse;
@@ -68,7 +67,7 @@ interface NotificationProfilesRawContract
      *
      * @param array<mixed>|NotificationProfileListParams $params
      *
-     * @return BaseResponse<DefaultPagination<NotificationProfile>>
+     * @return BaseResponse<NotificationProfileListResponse>
      *
      * @throws APIException
      */

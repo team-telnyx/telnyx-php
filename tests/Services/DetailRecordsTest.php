@@ -6,7 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DetailRecords\DetailRecordListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -34,14 +34,9 @@ final class DetailRecordsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->detailRecords->list();
+        $result = $this->client->detailRecords->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertNotNull($item);
-        }
+        $this->assertInstanceOf(DetailRecordListResponse::class, $result);
     }
 }

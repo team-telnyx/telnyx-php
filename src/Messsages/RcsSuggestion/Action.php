@@ -24,7 +24,7 @@ use Telnyx\Messsages\RcsSuggestion\Action\ViewLocationAction\LatLong;
  *   fallbackURL?: string|null,
  *   openURLAction?: OpenURLAction|null,
  *   postbackData?: string|null,
- *   shareLocationAction?: array<string,mixed>|null,
+ *   shareLocationAction?: mixed,
  *   text?: string|null,
  *   viewLocationAction?: ViewLocationAction|null,
  * }
@@ -66,11 +66,9 @@ final class Action implements BaseModel
 
     /**
      * Opens the RCS app's location chooser so the user can pick a location to send back to the agent.
-     *
-     * @var array<string,mixed>|null $shareLocationAction
      */
-    #[Optional('share_location_action', map: 'mixed')]
-    public ?array $shareLocationAction;
+    #[Optional('share_location_action')]
+    public mixed $shareLocationAction;
 
     /**
      * Text that is shown in the suggested action. Maximum 25 characters.
@@ -107,7 +105,6 @@ final class Action implements BaseModel
      *   webviewViewMode: value-of<WebviewViewMode>,
      *   description?: string|null,
      * } $openURLAction
-     * @param array<string,mixed> $shareLocationAction
      * @param ViewLocationAction|array{
      *   label?: string|null, latLong?: LatLong|null, query?: string|null
      * } $viewLocationAction
@@ -118,7 +115,7 @@ final class Action implements BaseModel
         ?string $fallbackURL = null,
         OpenURLAction|array|null $openURLAction = null,
         ?string $postbackData = null,
-        ?array $shareLocationAction = null,
+        mixed $shareLocationAction = null,
         ?string $text = null,
         ViewLocationAction|array|null $viewLocationAction = null,
     ): self {
@@ -210,10 +207,8 @@ final class Action implements BaseModel
 
     /**
      * Opens the RCS app's location chooser so the user can pick a location to send back to the agent.
-     *
-     * @param array<string,mixed> $shareLocationAction
      */
-    public function withShareLocationAction(array $shareLocationAction): self
+    public function withShareLocationAction(mixed $shareLocationAction): self
     {
         $self = clone $this;
         $self['shareLocationAction'] = $shareLocationAction;

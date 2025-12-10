@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListResponse;
 use Tests\UnsupportedMockTests;
@@ -36,17 +35,12 @@ final class ActionRequirementsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->portingOrders->actionRequirements->list(
+        $result = $this->client->portingOrders->actionRequirements->list(
             'porting_order_id'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(ActionRequirementListResponse::class, $item);
-        }
+        $this->assertInstanceOf(ActionRequirementListResponse::class, $result);
     }
 
     #[Test]

@@ -6,13 +6,12 @@ namespace Telnyx\Services\BundlePricing;
 
 use Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleListParams;
+use Telnyx\BundlePricing\BillingBundles\BillingBundleListResponse;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleRetrieveParams;
-use Telnyx\BundlePricing\BillingBundles\BillingBundleSummary;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BundlePricing\BillingBundlesRawContract;
 
@@ -70,7 +69,7 @@ final class BillingBundlesRawService implements BillingBundlesRawContract
      *   authorizationBearer?: string,
      * }|BillingBundleListParams $params
      *
-     * @return BaseResponse<DefaultPagination<BillingBundleSummary>>
+     * @return BaseResponse<BillingBundleListResponse>
      *
      * @throws APIException
      */
@@ -97,8 +96,7 @@ final class BillingBundlesRawService implements BillingBundlesRawContract
                 ['authorizationBearer' => 'authorization_bearer']
             ),
             options: $options,
-            convert: BillingBundleSummary::class,
-            page: DefaultPagination::class,
+            convert: BillingBundleListResponse::class,
         );
     }
 }

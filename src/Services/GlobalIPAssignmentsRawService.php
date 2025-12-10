@@ -7,14 +7,15 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\GlobalIPAssignments\GlobalIPAssignment;
+use Telnyx\GlobalIPAssignments\GlobalIPAssignmentCreateParams;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentDeleteResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentGetResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListParams;
+use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentNewResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateResponse;
+use Telnyx\Networks\InterfaceStatus;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPAssignmentsRawContract;
 
@@ -31,17 +32,29 @@ final class GlobalIPAssignmentsRawService implements GlobalIPAssignmentsRawContr
      *
      * Create a Global IP assignment.
      *
+     * @param array{
+     *   globalIPID?: string, isInMaintenance?: bool, wireguardPeerID?: string
+     * }|GlobalIPAssignmentCreateParams $params
+     *
      * @return BaseResponse<GlobalIPAssignmentNewResponse>
      *
      * @throws APIException
      */
-    public function create(?RequestOptions $requestOptions = null): BaseResponse
-    {
+    public function create(
+        array|GlobalIPAssignmentCreateParams $params,
+        ?RequestOptions $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = GlobalIPAssignmentCreateParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'global_ip_assignments',
-            options: $requestOptions,
+            body: (object) $parsed,
+            options: $options,
             convert: GlobalIPAssignmentNewResponse::class,
         );
     }
@@ -75,14 +88,18 @@ final class GlobalIPAssignmentsRawService implements GlobalIPAssignmentsRawContr
      *
      * Update a Global IP assignment.
      *
-     * @param string $globalIPAssignmentID identifies the resource
+     * @param string $id identifies the resource
      * @param array{
-     *   globalIPAssignmentUpdateRequest: array{
+     *   body: array{
      *     id?: string,
      *     createdAt?: string,
      *     recordType?: string,
      *     updatedAt?: string,
      *     globalIPID?: string,
+     *     isAnnounced?: bool,
+     *     isConnected?: bool,
+     *     isInMaintenance?: bool,
+     *     status?: 'created'|'provisioning'|'provisioned'|'deleting'|InterfaceStatus,
      *     wireguardPeerID?: string,
      *   },
      * }|GlobalIPAssignmentUpdateParams $params
@@ -92,7 +109,7 @@ final class GlobalIPAssignmentsRawService implements GlobalIPAssignmentsRawContr
      * @throws APIException
      */
     public function update(
-        string $globalIPAssignmentID,
+        string $id,
         array|GlobalIPAssignmentUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse {
@@ -104,8 +121,8 @@ final class GlobalIPAssignmentsRawService implements GlobalIPAssignmentsRawContr
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
-            path: ['global_ip_assignments/%1$s', $globalIPAssignmentID],
-            body: (object) $parsed['globalIPAssignmentUpdateRequest'],
+            path: ['global_ip_assignments/%1$s', $id],
+            body: (object) $parsed['body'],
             options: $options,
             convert: GlobalIPAssignmentUpdateResponse::class,
         );
@@ -120,7 +137,7 @@ final class GlobalIPAssignmentsRawService implements GlobalIPAssignmentsRawContr
      *   page?: array{number?: int, size?: int}
      * }|GlobalIPAssignmentListParams $params
      *
-     * @return BaseResponse<DefaultPagination<GlobalIPAssignment>>
+     * @return BaseResponse<GlobalIPAssignmentListResponse>
      *
      * @throws APIException
      */
@@ -139,8 +156,7 @@ final class GlobalIPAssignmentsRawService implements GlobalIPAssignmentsRawContr
             path: 'global_ip_assignments',
             query: $parsed,
             options: $options,
-            convert: GlobalIPAssignment::class,
-            page: DefaultPagination::class,
+            convert: GlobalIPAssignmentListResponse::class,
         );
     }
 

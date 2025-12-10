@@ -7,14 +7,13 @@ namespace Telnyx\Services\ExternalConnections;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\ExternalConnections\Uploads\Upload;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams\AdditionalUsage;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams\Usage;
 use Telnyx\ExternalConnections\Uploads\UploadGetResponse;
 use Telnyx\ExternalConnections\Uploads\UploadListParams;
 use Telnyx\ExternalConnections\Uploads\UploadListParams\Filter\Status\Eq;
+use Telnyx\ExternalConnections\Uploads\UploadListResponse;
 use Telnyx\ExternalConnections\Uploads\UploadNewResponse;
 use Telnyx\ExternalConnections\Uploads\UploadPendingCountResponse;
 use Telnyx\ExternalConnections\Uploads\UploadRefreshStatusResponse;
@@ -121,7 +120,7 @@ final class UploadsRawService implements UploadsRawContract
      *   page?: array{number?: int, size?: int},
      * }|UploadListParams $params
      *
-     * @return BaseResponse<DefaultPagination<Upload>>
+     * @return BaseResponse<UploadListResponse>
      *
      * @throws APIException
      */
@@ -141,8 +140,7 @@ final class UploadsRawService implements UploadsRawContract
             path: ['external_connections/%1$s/uploads', $id],
             query: $parsed,
             options: $options,
-            convert: Upload::class,
-            page: DefaultPagination::class,
+            convert: UploadListResponse::class,
         );
     }
 

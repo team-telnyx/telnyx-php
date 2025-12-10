@@ -33,20 +33,20 @@ final class DefaultGatewayService implements DefaultGatewayContract
      *
      * Create Default Gateway.
      *
-     * @param string $networkIdentifier identifies the resource
+     * @param string $id identifies the resource
      * @param string $wireguardPeerID wireguard peer ID
      *
      * @throws APIException
      */
     public function create(
-        string $networkIdentifier,
+        string $id,
         ?string $wireguardPeerID = null,
         ?RequestOptions $requestOptions = null,
     ): DefaultGatewayNewResponse {
         $params = Util::removeNulls(['wireguardPeerID' => $wireguardPeerID]);
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->create($networkIdentifier, params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->create($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

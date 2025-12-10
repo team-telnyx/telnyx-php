@@ -232,8 +232,8 @@ final class ActionsService implements ActionsContract
      * - `call.bridged` for Leg A
      * - `call.bridged` for Leg B
      *
-     * @param string $callControlIDToBridge Unique identifier and token for controlling the call
-     * @param string $callControlIDToBridgeWith the Call Control ID of the call you want to bridge with, can't be used together with queue parameter or video_room_id parameter
+     * @param string $callControlID_ Unique identifier and token for controlling the call
+     * @param string $callControlID the Call Control ID of the call you want to bridge with, can't be used together with queue parameter or video_room_id parameter
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param 'none'|'both'|'self'|'opposite'|MuteDtmf $muteDtmf When enabled, DTMF tones are not passed to the call participant. The webhooks containing the DTMF information will be sent.
@@ -255,8 +255,8 @@ final class ActionsService implements ActionsContract
      * @throws APIException
      */
     public function bridge(
-        string $callControlIDToBridge,
-        string $callControlIDToBridgeWith,
+        string $callControlID_,
+        string $callControlID,
         ?string $clientState = null,
         ?string $commandID = null,
         string|MuteDtmf $muteDtmf = 'none',
@@ -278,7 +278,7 @@ final class ActionsService implements ActionsContract
     ): ActionBridgeResponse {
         $params = Util::removeNulls(
             [
-                'callControlIDToBridgeWith' => $callControlIDToBridgeWith,
+                'callControlID' => $callControlID,
                 'clientState' => $clientState,
                 'commandID' => $commandID,
                 'muteDtmf' => $muteDtmf,
@@ -300,7 +300,7 @@ final class ActionsService implements ActionsContract
         );
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->bridge($callControlIDToBridge, params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->bridge($callControlID_, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -423,7 +423,7 @@ final class ActionsService implements ActionsContract
      * - `call.ai_gather.message_history_updated` (if `send_message_history_updates` is set to `true`)
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<string,mixed> $parameters The parameters described as a JSON Schema object that needs to be gathered by the voice assistant. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format
+     * @param mixed $parameters The parameters described as a JSON Schema object that needs to be gathered by the voice assistant. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format
      * @param array{
      *   instructions?: string,
      *   model?: string,
@@ -459,7 +459,7 @@ final class ActionsService implements ActionsContract
      */
     public function gatherUsingAI(
         string $callControlID,
-        array $parameters,
+        mixed $parameters,
         ?array $assistant = null,
         ?string $clientState = null,
         ?string $commandID = null,

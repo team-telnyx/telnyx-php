@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio;
-use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\MediaName;
-use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\MediaURL;
-use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\PredefinedMedia;
-use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\PredefinedMedia\Value;
+use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\UnionMember0;
+use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\UnionMember0\Type;
+use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\UnionMember0\Value;
+use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\UnionMember1;
+use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\UnionMember2;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type VoiceSettingsShape = array{
  *   voice: string,
  *   apiKeyRef?: string|null,
- *   backgroundAudio?: null|PredefinedMedia|MediaURL|MediaName,
+ *   backgroundAudio?: null|UnionMember0|UnionMember1|UnionMember2,
  *   voiceSpeed?: float|null,
  * }
  */
@@ -43,8 +43,8 @@ final class VoiceSettings implements BaseModel
     /**
      * Optional background audio to play on the call. Use a predefined media bed, or supply a looped MP3 URL. If a media URL is chosen in the portal, customers can preview it before saving.
      */
-    #[Optional('background_audio', union: BackgroundAudio::class)]
-    public PredefinedMedia|MediaURL|MediaName|null $backgroundAudio;
+    #[Optional('background_audio')]
+    public UnionMember0|UnionMember1|UnionMember2|null $backgroundAudio;
 
     /**
      * The speed of the voice in the range [0.25, 2.0]. 1.0 is deafult speed. Larger numbers make the voice faster, smaller numbers make it slower. This is only applicable for Telnyx Natural voices.
@@ -76,16 +76,20 @@ final class VoiceSettings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PredefinedMedia|array{
-     *   type?: 'predefined_media', value: value-of<Value>
-     * }|MediaURL|array{type?: 'media_url', value: string}|MediaName|array{
-     *   type?: 'media_name', value: string
+     * @param UnionMember0|array{
+     *   type: value-of<Type>, value: value-of<Value>
+     * }|UnionMember1|array{
+     *   type: value-of<UnionMember1\Type>,
+     *   value: string,
+     * }|UnionMember2|array{
+     *   type: value-of<UnionMember2\Type>,
+     *   value: string,
      * } $backgroundAudio
      */
     public static function with(
         string $voice,
         ?string $apiKeyRef = null,
-        PredefinedMedia|array|MediaURL|MediaName|null $backgroundAudio = null,
+        UnionMember0|array|UnionMember1|UnionMember2|null $backgroundAudio = null,
         ?float $voiceSpeed = null,
     ): self {
         $self = new self;
@@ -125,14 +129,18 @@ final class VoiceSettings implements BaseModel
     /**
      * Optional background audio to play on the call. Use a predefined media bed, or supply a looped MP3 URL. If a media URL is chosen in the portal, customers can preview it before saving.
      *
-     * @param PredefinedMedia|array{
-     *   type?: 'predefined_media', value: value-of<Value>
-     * }|MediaURL|array{type?: 'media_url', value: string}|MediaName|array{
-     *   type?: 'media_name', value: string
+     * @param UnionMember0|array{
+     *   type: value-of<Type>, value: value-of<Value>
+     * }|UnionMember1|array{
+     *   type: value-of<UnionMember1\Type>,
+     *   value: string,
+     * }|UnionMember2|array{
+     *   type: value-of<UnionMember2\Type>,
+     *   value: string,
      * } $backgroundAudio
      */
     public function withBackgroundAudio(
-        PredefinedMedia|array|MediaURL|MediaName $backgroundAudio
+        UnionMember0|array|UnionMember1|UnionMember2 $backgroundAudio
     ): self {
         $self = clone $this;
         $self['backgroundAudio'] = $backgroundAudio;

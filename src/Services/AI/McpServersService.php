@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Telnyx\Services\AI;
 
 use Telnyx\AI\McpServers\McpServerGetResponse;
-use Telnyx\AI\McpServers\McpServerListResponse;
+use Telnyx\AI\McpServers\McpServerListResponseItem;
 use Telnyx\AI\McpServers\McpServerNewResponse;
 use Telnyx\AI\McpServers\McpServerUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPaginationTopLevelArray;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\McpServersContract;
 
@@ -123,7 +122,7 @@ final class McpServersService implements McpServersContract
      *
      * Retrieve a list of MCP servers.
      *
-     * @return DefaultFlatPaginationTopLevelArray<McpServerListResponse>
+     * @return list<McpServerListResponseItem>
      *
      * @throws APIException
      */
@@ -133,7 +132,7 @@ final class McpServersService implements McpServersContract
         ?string $type = null,
         ?string $url = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPaginationTopLevelArray {
+    ): array {
         $params = Util::removeNulls(
             [
                 'pageNumber' => $pageNumber,

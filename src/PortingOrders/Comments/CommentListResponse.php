@@ -4,19 +4,16 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\Comments;
 
+use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\PortingOrders\Comments\CommentListResponse\UserType;
+use Telnyx\PortingOrders\Comments\CommentListResponse\Data;
+use Telnyx\PortingOrders\Comments\CommentListResponse\Data\UserType;
 
 /**
  * @phpstan-type CommentListResponseShape = array{
- *   id?: string|null,
- *   body?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   portingOrderID?: string|null,
- *   recordType?: string|null,
- *   userType?: value-of<UserType>|null,
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class CommentListResponse implements BaseModel
@@ -24,37 +21,12 @@ final class CommentListResponse implements BaseModel
     /** @use SdkModel<CommentListResponseShape> */
     use SdkModel;
 
+    /** @var list<Data>|null $data */
+    #[Optional(list: Data::class)]
+    public ?array $data;
+
     #[Optional]
-    public ?string $id;
-
-    /**
-     * Body of comment.
-     */
-    #[Optional]
-    public ?string $body;
-
-    /**
-     * ISO 8601 formatted date indicating when the resource was created.
-     */
-    #[Optional('created_at')]
-    public ?\DateTimeInterface $createdAt;
-
-    #[Optional('porting_order_id')]
-    public ?string $portingOrderID;
-
-    /**
-     * Identifies the type of the resource.
-     */
-    #[Optional('record_type')]
-    public ?string $recordType;
-
-    /**
-     * Indicates whether this comment was created by a Telnyx Admin, user, or system.
-     *
-     * @var value-of<UserType>|null $userType
-     */
-    #[Optional('user_type', enum: UserType::class)]
-    public ?string $userType;
+    public ?PaginationMeta $meta;
 
     public function __construct()
     {
@@ -66,86 +38,63 @@ final class CommentListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param UserType|value-of<UserType> $userType
+     * @param list<Data|array{
+     *   id?: string|null,
+     *   body?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   portingOrderID?: string|null,
+     *   recordType?: string|null,
+     *   userType?: value-of<UserType>|null,
+     * }> $data
+     * @param PaginationMeta|array{
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
+     * } $meta
      */
     public static function with(
-        ?string $id = null,
-        ?string $body = null,
-        ?\DateTimeInterface $createdAt = null,
-        ?string $portingOrderID = null,
-        ?string $recordType = null,
-        UserType|string|null $userType = null,
+        ?array $data = null,
+        PaginationMeta|array|null $meta = null
     ): self {
         $self = new self;
 
-        null !== $id && $self['id'] = $id;
-        null !== $body && $self['body'] = $body;
-        null !== $createdAt && $self['createdAt'] = $createdAt;
-        null !== $portingOrderID && $self['portingOrderID'] = $portingOrderID;
-        null !== $recordType && $self['recordType'] = $recordType;
-        null !== $userType && $self['userType'] = $userType;
-
-        return $self;
-    }
-
-    public function withID(string $id): self
-    {
-        $self = clone $this;
-        $self['id'] = $id;
+        null !== $data && $self['data'] = $data;
+        null !== $meta && $self['meta'] = $meta;
 
         return $self;
     }
 
     /**
-     * Body of comment.
+     * @param list<Data|array{
+     *   id?: string|null,
+     *   body?: string|null,
+     *   createdAt?: \DateTimeInterface|null,
+     *   portingOrderID?: string|null,
+     *   recordType?: string|null,
+     *   userType?: value-of<UserType>|null,
+     * }> $data
      */
-    public function withBody(string $body): self
+    public function withData(array $data): self
     {
         $self = clone $this;
-        $self['body'] = $body;
+        $self['data'] = $data;
 
         return $self;
     }
 
     /**
-     * ISO 8601 formatted date indicating when the resource was created.
+     * @param PaginationMeta|array{
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
+     * } $meta
      */
-    public function withCreatedAt(\DateTimeInterface $createdAt): self
+    public function withMeta(PaginationMeta|array $meta): self
     {
         $self = clone $this;
-        $self['createdAt'] = $createdAt;
-
-        return $self;
-    }
-
-    public function withPortingOrderID(string $portingOrderID): self
-    {
-        $self = clone $this;
-        $self['portingOrderID'] = $portingOrderID;
-
-        return $self;
-    }
-
-    /**
-     * Identifies the type of the resource.
-     */
-    public function withRecordType(string $recordType): self
-    {
-        $self = clone $this;
-        $self['recordType'] = $recordType;
-
-        return $self;
-    }
-
-    /**
-     * Indicates whether this comment was created by a Telnyx Admin, user, or system.
-     *
-     * @param UserType|value-of<UserType> $userType
-     */
-    public function withUserType(UserType|string $userType): self
-    {
-        $self = clone $this;
-        $self['userType'] = $userType;
+        $self['meta'] = $meta;
 
         return $self;
     }

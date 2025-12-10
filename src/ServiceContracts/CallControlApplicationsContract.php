@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
-use Telnyx\CallControlApplications\CallControlApplication;
 use Telnyx\CallControlApplications\CallControlApplicationCreateParams\AnchorsiteOverride;
 use Telnyx\CallControlApplications\CallControlApplicationCreateParams\DtmfType;
 use Telnyx\CallControlApplications\CallControlApplicationCreateParams\WebhookAPIVersion;
@@ -16,11 +15,11 @@ use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter\Produ
 use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter\Status;
 use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter\Type;
 use Telnyx\CallControlApplications\CallControlApplicationListParams\Sort;
+use Telnyx\CallControlApplications\CallControlApplicationListResponse;
 use Telnyx\CallControlApplications\CallControlApplicationNewResponse;
 use Telnyx\CallControlApplications\CallControlApplicationOutbound;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
 interface CallControlApplicationsContract
@@ -167,8 +166,6 @@ interface CallControlApplicationsContract
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
-     * @return DefaultPagination<CallControlApplication>
-     *
      * @throws APIException
      */
     public function list(
@@ -176,7 +173,7 @@ interface CallControlApplicationsContract
         ?array $page = null,
         string|Sort $sort = 'created_at',
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): CallControlApplicationListResponse;
 
     /**
      * @api

@@ -7,7 +7,6 @@ namespace Telnyx;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\MapOf;
 use Telnyx\SimCardStatus\Value;
 use Telnyx\SimpleSimCard\CurrentBillingPeriodConsumedData;
 use Telnyx\SimpleSimCard\DataLimit;
@@ -29,7 +28,7 @@ use Telnyx\SimpleSimCard\Type;
  *   imsi?: string|null,
  *   msisdn?: string|null,
  *   recordType?: string|null,
- *   resourcesWithInProgressActions?: list<array<string,mixed>>|null,
+ *   resourcesWithInProgressActions?: list<mixed>|null,
  *   simCardGroupID?: string|null,
  *   status?: SimCardStatus|null,
  *   tags?: list<string>|null,
@@ -125,9 +124,9 @@ final class SimpleSimCard implements BaseModel
     /**
      * List of resources with actions in progress.
      *
-     * @var list<array<string,mixed>>|null $resourcesWithInProgressActions
+     * @var list<mixed>|null $resourcesWithInProgressActions
      */
-    #[Optional('resources_with_in_progress_actions', list: new MapOf('mixed'))]
+    #[Optional('resources_with_in_progress_actions', list: 'mixed')]
     public ?array $resourcesWithInProgressActions;
 
     /**
@@ -185,7 +184,7 @@ final class SimpleSimCard implements BaseModel
      *   amount?: string|null, unit?: value-of<Unit>|null
      * } $dataLimit
      * @param EsimInstallationStatus|value-of<EsimInstallationStatus>|null $esimInstallationStatus
-     * @param list<array<string,mixed>> $resourcesWithInProgressActions
+     * @param list<mixed> $resourcesWithInProgressActions
      * @param SimCardStatus|array{
      *   reason?: string|null, value?: value-of<Value>|null
      * } $status
@@ -386,7 +385,7 @@ final class SimpleSimCard implements BaseModel
     /**
      * List of resources with actions in progress.
      *
-     * @param list<array<string,mixed>> $resourcesWithInProgressActions
+     * @param list<mixed> $resourcesWithInProgressActions
      */
     public function withResourcesWithInProgressActions(
         array $resourcesWithInProgressActions

@@ -7,15 +7,14 @@ namespace Telnyx\Services\PortingOrders;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams\Action;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberDeleteParams;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberDeleteResponse;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams\Sort\Value;
+use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListResponse;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberNewResponse;
-use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\AssociatedPhoneNumbersRawContract;
 
@@ -77,7 +76,7 @@ final class AssociatedPhoneNumbersRawService implements AssociatedPhoneNumbersRa
      *   sort?: array{value?: '-created_at'|'created_at'|Value},
      * }|AssociatedPhoneNumberListParams $params
      *
-     * @return BaseResponse<DefaultPagination<PortingAssociatedPhoneNumber>>
+     * @return BaseResponse<AssociatedPhoneNumberListResponse>
      *
      * @throws APIException
      */
@@ -97,8 +96,7 @@ final class AssociatedPhoneNumbersRawService implements AssociatedPhoneNumbersRa
             path: ['porting_orders/%1$s/associated_phone_numbers', $portingOrderID],
             query: $parsed,
             options: $options,
-            convert: PortingAssociatedPhoneNumber::class,
-            page: DefaultPagination::class,
+            convert: AssociatedPhoneNumberListResponse::class,
         );
     }
 

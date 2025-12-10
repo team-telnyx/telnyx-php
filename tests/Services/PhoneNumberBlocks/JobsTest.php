@@ -6,10 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
-use Telnyx\PhoneNumberBlocks\Jobs\Job;
 use Telnyx\PhoneNumberBlocks\Jobs\JobDeletePhoneNumberBlockResponse;
 use Telnyx\PhoneNumberBlocks\Jobs\JobGetResponse;
+use Telnyx\PhoneNumberBlocks\Jobs\JobListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -50,15 +49,10 @@ final class JobsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->phoneNumberBlocks->jobs->list();
+        $result = $this->client->phoneNumberBlocks->jobs->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(Job::class, $item);
-        }
+        $this->assertInstanceOf(JobListResponse::class, $result);
     }
 
     #[Test]

@@ -7,7 +7,7 @@ namespace Telnyx\Services\Number10dlc\Brand;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingImportsResponse;
+use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingImportResponse;
 use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingListResponseItem;
 use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingOrderResponse;
 use Telnyx\RequestOptions;
@@ -60,13 +60,13 @@ final class ExternalVettingService implements ExternalVettingContract
      *
      * @throws APIException
      */
-    public function imports(
+    public function import(
         string $brandID,
         string $evpID,
         string $vettingID,
         ?string $vettingToken = null,
         ?RequestOptions $requestOptions = null,
-    ): ExternalVettingImportsResponse {
+    ): ExternalVettingImportResponse {
         $params = Util::removeNulls(
             [
                 'evpID' => $evpID,
@@ -76,7 +76,7 @@ final class ExternalVettingService implements ExternalVettingContract
         );
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->imports($brandID, params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->import($brandID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

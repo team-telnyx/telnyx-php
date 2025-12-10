@@ -9,13 +9,13 @@ namespace Telnyx\Calls;
  */
 enum StreamBidirectionalSamplingRate: int
 {
-    case RATE_8000 = 8000;
+    case _8000 = 8000;
 
-    case RATE_16000 = 16000;
+    case _16000 = 16000;
 
-    case RATE_22050 = 22050;
+    case _22050 = 22050;
 
-    case RATE_24000 = 24000;
+    case _24000 = 24000;
 
-    case RATE_48000 = 48000;
+    case _48000 = 48000;
 }

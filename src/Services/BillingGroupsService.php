@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
-use Telnyx\BillingGroups\BillingGroup;
 use Telnyx\BillingGroups\BillingGroupDeleteResponse;
 use Telnyx\BillingGroups\BillingGroupGetResponse;
+use Telnyx\BillingGroups\BillingGroupListResponse;
 use Telnyx\BillingGroups\BillingGroupNewResponse;
 use Telnyx\BillingGroups\BillingGroupUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BillingGroupsContract;
 
@@ -99,18 +98,17 @@ final class BillingGroupsService implements BillingGroupsContract
      *
      * List all billing groups
      *
-     * @return DefaultFlatPagination<BillingGroup>
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
     public function list(
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
-        ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
-        );
+        ?array $page = null,
+        ?RequestOptions $requestOptions = null
+    ): BillingGroupListResponse {
+        $params = Util::removeNulls(['page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

@@ -8,8 +8,6 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
-use Telnyx\OAuthClients\OAuthClient;
 use Telnyx\OAuthClients\OAuthClientCreateParams;
 use Telnyx\OAuthClients\OAuthClientCreateParams\AllowedGrantType;
 use Telnyx\OAuthClients\OAuthClientCreateParams\ClientType;
@@ -17,6 +15,7 @@ use Telnyx\OAuthClients\OAuthClientGetResponse;
 use Telnyx\OAuthClients\OAuthClientListParams;
 use Telnyx\OAuthClients\OAuthClientListParams\FilterAllowedGrantTypesContains;
 use Telnyx\OAuthClients\OAuthClientListParams\FilterClientType;
+use Telnyx\OAuthClients\OAuthClientListResponse;
 use Telnyx\OAuthClients\OAuthClientNewResponse;
 use Telnyx\OAuthClients\OAuthClientUpdateParams;
 use Telnyx\OAuthClients\OAuthClientUpdateResponse;
@@ -152,7 +151,7 @@ final class OAuthClientsRawService implements OAuthClientsRawContract
      *   pageSize?: int,
      * }|OAuthClientListParams $params
      *
-     * @return BaseResponse<DefaultFlatPagination<OAuthClient>>
+     * @return BaseResponse<OAuthClientListResponse>
      *
      * @throws APIException
      */
@@ -183,8 +182,7 @@ final class OAuthClientsRawService implements OAuthClientsRawContract
                 ],
             ),
             options: $options,
-            convert: OAuthClient::class,
-            page: DefaultFlatPagination::class,
+            convert: OAuthClientListResponse::class,
         );
     }
 

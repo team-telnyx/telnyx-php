@@ -11,7 +11,6 @@ use Telnyx\Connections\ConnectionListParams\Sort;
 use Telnyx\Connections\ConnectionListResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ConnectionsContract;
 
@@ -75,8 +74,6 @@ final class ConnectionsService implements ConnectionsContract
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
-     * @return DefaultPagination<ConnectionListResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -84,7 +81,7 @@ final class ConnectionsService implements ConnectionsContract
         ?array $page = null,
         string|Sort $sort = 'created_at',
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): ConnectionListResponse {
         $params = Util::removeNulls(
             ['filter' => $filter, 'page' => $page, 'sort' => $sort]
         );
@@ -105,15 +102,13 @@ final class ConnectionsService implements ConnectionsContract
      *   after?: string, before?: string, limit?: int, number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      *
-     * @return DefaultPagination<ConnectionListActiveCallsResponse>
-     *
      * @throws APIException
      */
     public function listActiveCalls(
         string $connectionID,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): ConnectionListActiveCallsResponse {
         $params = Util::removeNulls(['page' => $page]);
 
         // @phpstan-ignore-next-line argument.type

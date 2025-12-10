@@ -42,7 +42,10 @@ final class StorageListMigrationSourceCoverageResponse implements BaseModel
      *   provider?: value-of<Provider>|null, sourceRegion?: string|null
      * }> $data
      * @param PaginationMetaSimple|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public static function with(
@@ -72,7 +75,10 @@ final class StorageListMigrationSourceCoverageResponse implements BaseModel
 
     /**
      * @param PaginationMetaSimple|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
+     *   pageNumber?: int|null,
+     *   pageSize?: int|null,
+     *   totalPages?: int|null,
+     *   totalResults?: int|null,
      * } $meta
      */
     public function withMeta(PaginationMetaSimple|array $meta): self

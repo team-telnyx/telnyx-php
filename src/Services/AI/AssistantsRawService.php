@@ -8,8 +8,8 @@ use Telnyx\AI\Assistants\AssistantChatParams;
 use Telnyx\AI\Assistants\AssistantChatResponse;
 use Telnyx\AI\Assistants\AssistantCreateParams;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
-use Telnyx\AI\Assistants\AssistantImportsParams;
-use Telnyx\AI\Assistants\AssistantImportsParams\Provider;
+use Telnyx\AI\Assistants\AssistantImportParams;
+use Telnyx\AI\Assistants\AssistantImportParams\Provider;
 use Telnyx\AI\Assistants\AssistantRetrieveParams;
 use Telnyx\AI\Assistants\AssistantSendSMSParams;
 use Telnyx\AI\Assistants\AssistantSendSMSResponse;
@@ -24,7 +24,6 @@ use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
 use Telnyx\AI\Assistants\TranscriptionSettings\Model;
-use Telnyx\AI\Assistants\TranscriptionSettingsConfig;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
@@ -69,7 +68,12 @@ final class AssistantsRawService implements AssistantsRawContract
      *     language?: string,
      *     model?: 'deepgram/flux'|'deepgram/nova-3'|'deepgram/nova-2'|'azure/fast'|'distil-whisper/distil-large-v2'|'openai/whisper-large-v3-turbo'|Model,
      *     region?: string,
-     *     settings?: array<mixed>|TranscriptionSettingsConfig,
+     *     settings?: array{
+     *       eotThreshold?: float,
+     *       eotTimeoutMs?: int,
+     *       numerals?: bool,
+     *       smartFormat?: bool,
+     *     },
      *   }|TranscriptionSettings,
      *   voiceSettings?: array{
      *     voice: string,
@@ -173,7 +177,12 @@ final class AssistantsRawService implements AssistantsRawContract
      *     language?: string,
      *     model?: 'deepgram/flux'|'deepgram/nova-3'|'deepgram/nova-2'|'azure/fast'|'distil-whisper/distil-large-v2'|'openai/whisper-large-v3-turbo'|Model,
      *     region?: string,
-     *     settings?: array<mixed>|TranscriptionSettingsConfig,
+     *     settings?: array{
+     *       eotThreshold?: float,
+     *       eotTimeoutMs?: int,
+     *       numerals?: bool,
+     *       smartFormat?: bool,
+     *     },
      *   }|TranscriptionSettings,
      *   voiceSettings?: array{
      *     voice: string,
@@ -333,17 +342,17 @@ final class AssistantsRawService implements AssistantsRawContract
      *
      * @param array{
      *   apiKeyRef: string, provider: 'elevenlabs'|'vapi'|'retell'|Provider
-     * }|AssistantImportsParams $params
+     * }|AssistantImportParams $params
      *
      * @return BaseResponse<AssistantsList>
      *
      * @throws APIException
      */
-    public function imports(
-        array|AssistantImportsParams $params,
+    public function import(
+        array|AssistantImportParams $params,
         ?RequestOptions $requestOptions = null
     ): BaseResponse {
-        [$parsed, $options] = AssistantImportsParams::parseRequest(
+        [$parsed, $options] = AssistantImportParams::parseRequest(
             $params,
             $requestOptions,
         );

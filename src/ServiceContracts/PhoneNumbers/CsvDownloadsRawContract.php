@@ -6,11 +6,10 @@ namespace Telnyx\ServiceContracts\PhoneNumbers;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\PhoneNumbers\CsvDownloads\CsvDownload;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadGetResponse;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadListParams;
+use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadListResponse;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadNewResponse;
 use Telnyx\RequestOptions;
 
@@ -49,7 +48,7 @@ interface CsvDownloadsRawContract
      *
      * @param array<mixed>|CsvDownloadListParams $params
      *
-     * @return BaseResponse<DefaultPagination<CsvDownload>>
+     * @return BaseResponse<CsvDownloadListResponse>
      *
      * @throws APIException
      */

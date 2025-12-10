@@ -9,7 +9,7 @@ namespace Telnyx\MessagingTollfree\Verification\Requests;
  */
 enum UseCaseCategories: string
 {
-    case TWO_FA = '2FA';
+    case _2_FA = '2FA';
 
     case APP_NOTIFICATIONS = 'App Notifications';
 

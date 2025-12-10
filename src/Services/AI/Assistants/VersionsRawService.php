@@ -14,7 +14,6 @@ use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
 use Telnyx\AI\Assistants\TranscriptionSettings\Model;
-use Telnyx\AI\Assistants\TranscriptionSettingsConfig;
 use Telnyx\AI\Assistants\Versions\VersionDeleteParams;
 use Telnyx\AI\Assistants\Versions\VersionPromoteParams;
 use Telnyx\AI\Assistants\Versions\VersionRetrieveParams;
@@ -104,7 +103,12 @@ final class VersionsRawService implements VersionsRawContract
      *     language?: string,
      *     model?: 'deepgram/flux'|'deepgram/nova-3'|'deepgram/nova-2'|'azure/fast'|'distil-whisper/distil-large-v2'|'openai/whisper-large-v3-turbo'|Model,
      *     region?: string,
-     *     settings?: array<mixed>|TranscriptionSettingsConfig,
+     *     settings?: array{
+     *       eotThreshold?: float,
+     *       eotTimeoutMs?: int,
+     *       numerals?: bool,
+     *       smartFormat?: bool,
+     *     },
      *   }|TranscriptionSettings,
      *   voiceSettings?: array{
      *     voice: string,

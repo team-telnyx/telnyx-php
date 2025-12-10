@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace Telnyx\Number10dlc\Brand;
 
+use Telnyx\Brand\AltBusinessIDType;
+use Telnyx\Brand\BrandIdentityStatus;
+use Telnyx\Brand\EntityType;
+use Telnyx\Brand\StockExchange;
+use Telnyx\Brand\Vertical;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;

@@ -7,7 +7,6 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\MessagingURLDomains\MessagingURLDomainListParams;
 use Telnyx\MessagingURLDomains\MessagingURLDomainListResponse;
 use Telnyx\RequestOptions;
@@ -30,7 +29,7 @@ final class MessagingURLDomainsRawService implements MessagingURLDomainsRawContr
      *   page?: array{number?: int, size?: int}
      * }|MessagingURLDomainListParams $params
      *
-     * @return BaseResponse<DefaultPagination<MessagingURLDomainListResponse>>
+     * @return BaseResponse<MessagingURLDomainListResponse>
      *
      * @throws APIException
      */
@@ -50,7 +49,6 @@ final class MessagingURLDomainsRawService implements MessagingURLDomainsRawContr
             query: $parsed,
             options: $options,
             convert: MessagingURLDomainListResponse::class,
-            page: DefaultPagination::class,
         );
     }
 }

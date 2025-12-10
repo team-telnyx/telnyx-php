@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse;
 use Telnyx\OtaUpdates\OtaUpdateListParams;
 use Telnyx\OtaUpdates\OtaUpdateListResponse;
@@ -33,7 +32,7 @@ interface OtaUpdatesRawContract
      *
      * @param array<mixed>|OtaUpdateListParams $params
      *
-     * @return BaseResponse<DefaultPagination<OtaUpdateListResponse>>
+     * @return BaseResponse<OtaUpdateListResponse>
      *
      * @throws APIException
      */

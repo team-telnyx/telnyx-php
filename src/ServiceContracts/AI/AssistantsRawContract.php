@@ -8,7 +8,7 @@ use Telnyx\AI\Assistants\AssistantChatParams;
 use Telnyx\AI\Assistants\AssistantChatResponse;
 use Telnyx\AI\Assistants\AssistantCreateParams;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
-use Telnyx\AI\Assistants\AssistantImportsParams;
+use Telnyx\AI\Assistants\AssistantImportParams;
 use Telnyx\AI\Assistants\AssistantRetrieveParams;
 use Telnyx\AI\Assistants\AssistantSendSMSParams;
 use Telnyx\AI\Assistants\AssistantSendSMSResponse;
@@ -128,14 +128,14 @@ interface AssistantsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AssistantImportsParams $params
+     * @param array<mixed>|AssistantImportParams $params
      *
      * @return BaseResponse<AssistantsList>
      *
      * @throws APIException
      */
-    public function imports(
-        array|AssistantImportsParams $params,
+    public function import(
+        array|AssistantImportParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse;
 

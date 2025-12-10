@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPaginationForInexplicitNumberOrders;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams\OrderingGroup\CountryISO;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams\OrderingGroup\Strategy;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderGetResponse;
+use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderListResponse;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderNewResponse;
-use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderResponse;
 use Telnyx\RequestOptions;
 
 interface InexplicitNumberOrdersContract
@@ -67,13 +66,11 @@ interface InexplicitNumberOrdersContract
      * @param int $pageNumber The page number to load
      * @param int $pageSize The size of the page
      *
-     * @return DefaultFlatPaginationForInexplicitNumberOrders<InexplicitNumberOrderResponse,>
-     *
      * @throws APIException
      */
     public function list(
         int $pageNumber = 1,
         int $pageSize = 20,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPaginationForInexplicitNumberOrders;
+    ): InexplicitNumberOrderListResponse;
 }

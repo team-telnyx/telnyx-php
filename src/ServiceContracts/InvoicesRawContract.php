@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\Invoices\InvoiceGetResponse;
 use Telnyx\Invoices\InvoiceListParams;
 use Telnyx\Invoices\InvoiceListResponse;
@@ -36,7 +35,7 @@ interface InvoicesRawContract
      *
      * @param array<mixed>|InvoiceListParams $params
      *
-     * @return BaseResponse<DefaultFlatPagination<InvoiceListResponse>>
+     * @return BaseResponse<InvoiceListResponse>
      *
      * @throws APIException
      */

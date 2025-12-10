@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\Services\AI\Assistants\Tests\TestSuites;
 
 use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse;
+use Telnyx\AI\Assistants\Tests\TestSuites\Runs\PaginatedTestRunList;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\Tests\TestSuites\RunsContract;
 
@@ -32,25 +32,24 @@ final class RunsService implements RunsContract
      *
      * Retrieves paginated history of test runs for a specific test suite with filtering options
      *
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param string $status Filter runs by execution status (pending, running, completed, failed, timeout)
      * @param string $testSuiteRunID Filter runs by specific suite execution batch ID
-     *
-     * @return DefaultFlatPagination<TestRunResponse>
      *
      * @throws APIException
      */
     public function list(
         string $suiteName,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        ?array $page = null,
         ?string $status = null,
         ?string $testSuiteRunID = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination {
+    ): PaginatedTestRunList {
         $params = Util::removeNulls(
             [
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
+                'page' => $page,
                 'status' => $status,
                 'testSuiteRunID' => $testSuiteRunID,
             ],

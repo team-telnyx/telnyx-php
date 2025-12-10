@@ -7,13 +7,12 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\NotificationSettings\NotificationSetting;
 use Telnyx\NotificationSettings\NotificationSettingCreateParams;
 use Telnyx\NotificationSettings\NotificationSettingDeleteResponse;
 use Telnyx\NotificationSettings\NotificationSettingGetResponse;
 use Telnyx\NotificationSettings\NotificationSettingListParams;
 use Telnyx\NotificationSettings\NotificationSettingListParams\Filter\AssociatedRecordType\Eq;
+use Telnyx\NotificationSettings\NotificationSettingListResponse;
 use Telnyx\NotificationSettings\NotificationSettingNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NotificationSettingsRawContract;
@@ -106,7 +105,7 @@ final class NotificationSettingsRawService implements NotificationSettingsRawCon
      *   page?: array{number?: int, size?: int},
      * }|NotificationSettingListParams $params
      *
-     * @return BaseResponse<DefaultPagination<NotificationSetting>>
+     * @return BaseResponse<NotificationSettingListResponse>
      *
      * @throws APIException
      */
@@ -125,8 +124,7 @@ final class NotificationSettingsRawService implements NotificationSettingsRawCon
             path: 'notification_settings',
             query: $parsed,
             options: $options,
-            convert: NotificationSetting::class,
-            page: DefaultPagination::class,
+            convert: NotificationSettingListResponse::class,
         );
     }
 

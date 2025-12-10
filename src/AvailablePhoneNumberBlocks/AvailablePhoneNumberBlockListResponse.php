@@ -9,14 +9,14 @@ use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data
 use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data\Feature;
 use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data\RecordType;
 use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data\RegionInformation;
-use Telnyx\AvailablePhoneNumbersMetadata;
+use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Meta;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type AvailablePhoneNumberBlockListResponseShape = array{
- *   data?: list<Data>|null, meta?: AvailablePhoneNumbersMetadata|null
+ *   data?: list<Data>|null, meta?: Meta|null
  * }
  */
 final class AvailablePhoneNumberBlockListResponse implements BaseModel
@@ -29,7 +29,7 @@ final class AvailablePhoneNumberBlockListResponse implements BaseModel
     public ?array $data;
 
     #[Optional]
-    public ?AvailablePhoneNumbersMetadata $meta;
+    public ?Meta $meta;
 
     public function __construct()
     {
@@ -49,13 +49,11 @@ final class AvailablePhoneNumberBlockListResponse implements BaseModel
      *   regionInformation?: list<RegionInformation>|null,
      *   startingNumber?: string|null,
      * }> $data
-     * @param AvailablePhoneNumbersMetadata|array{
-     *   bestEffortResults?: int|null, totalResults?: int|null
-     * } $meta
+     * @param Meta|array{bestEffortResults?: int|null, totalResults?: int|null} $meta
      */
     public static function with(
         ?array $data = null,
-        AvailablePhoneNumbersMetadata|array|null $meta = null
+        Meta|array|null $meta = null
     ): self {
         $self = new self;
 
@@ -84,11 +82,9 @@ final class AvailablePhoneNumberBlockListResponse implements BaseModel
     }
 
     /**
-     * @param AvailablePhoneNumbersMetadata|array{
-     *   bestEffortResults?: int|null, totalResults?: int|null
-     * } $meta
+     * @param Meta|array{bestEffortResults?: int|null, totalResults?: int|null} $meta
      */
-    public function withMeta(AvailablePhoneNumbersMetadata|array $meta): self
+    public function withMeta(Meta|array $meta): self
     {
         $self = clone $this;
         $self['meta'] = $meta;

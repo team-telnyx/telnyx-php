@@ -7,7 +7,6 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\Reports\ReportListMdrsParams\Direction;
 use Telnyx\Reports\ReportListMdrsParams\MessageType;
 use Telnyx\Reports\ReportListMdrsParams\Status;
@@ -104,14 +103,15 @@ final class ReportsService implements ReportsContract
      * @param string $imsi International mobile subscriber identity
      * @param string $mcc Mobile country code
      * @param string $mnc Mobile network code
+     * @param array{
+     *   number?: int, size?: int
+     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param string $phoneNumber Phone number
      * @param string $simCardID Sim card unique identifier
      * @param string $simGroupID Sim group unique identifier
      * @param string $simGroupName Sim group name
      * @param list<string> $sort Field used to order the data. If no field is specified, default value is 'created_at'
      * @param string $startDate Start date
-     *
-     * @return DefaultFlatPagination<ReportListWdrsResponse>
      *
      * @throws APIException
      */
@@ -121,8 +121,7 @@ final class ReportsService implements ReportsContract
         ?string $imsi = null,
         ?string $mcc = null,
         ?string $mnc = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        ?array $page = null,
         ?string $phoneNumber = null,
         ?string $simCardID = null,
         ?string $simGroupID = null,
@@ -130,7 +129,7 @@ final class ReportsService implements ReportsContract
         array $sort = ['created_at'],
         ?string $startDate = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination {
+    ): ReportListWdrsResponse {
         $params = Util::removeNulls(
             [
                 'id' => $id,
@@ -138,8 +137,7 @@ final class ReportsService implements ReportsContract
                 'imsi' => $imsi,
                 'mcc' => $mcc,
                 'mnc' => $mnc,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
+                'page' => $page,
                 'phoneNumber' => $phoneNumber,
                 'simCardID' => $simCardID,
                 'simGroupID' => $simGroupID,

@@ -5,13 +5,15 @@ declare(strict_types=1);
 namespace Telnyx;
 
 use Telnyx\Core\Attributes\Optional;
-use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ConnectionsPaginationMetaShape = array{
- *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
+ *   totalPages?: int|null,
+ *   totalResults?: int|null,
  * }
  */
 final class ConnectionsPaginationMeta implements BaseModel
@@ -19,32 +21,18 @@ final class ConnectionsPaginationMeta implements BaseModel
     /** @use SdkModel<ConnectionsPaginationMetaShape> */
     use SdkModel;
 
-    #[Required('page_number')]
-    public int $pageNumber;
-
-    #[Required('total_pages')]
-    public int $totalPages;
+    #[Optional('page_number')]
+    public ?int $pageNumber;
 
     #[Optional('page_size')]
     public ?int $pageSize;
 
+    #[Optional('total_pages')]
+    public ?int $totalPages;
+
     #[Optional('total_results')]
     public ?int $totalResults;
 
-    /**
-     * `new ConnectionsPaginationMeta()` is missing required properties by the API.
-     *
-     * To enforce required parameters use
-     * ```
-     * ConnectionsPaginationMeta::with(pageNumber: ..., totalPages: ...)
-     * ```
-     *
-     * Otherwise ensure the following setters are called
-     *
-     * ```
-     * (new ConnectionsPaginationMeta)->withPageNumber(...)->withTotalPages(...)
-     * ```
-     */
     public function __construct()
     {
         $this->initialize();
@@ -56,17 +44,16 @@ final class ConnectionsPaginationMeta implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        int $pageNumber,
-        int $totalPages,
+        ?int $pageNumber = null,
         ?int $pageSize = null,
+        ?int $totalPages = null,
         ?int $totalResults = null,
     ): self {
         $self = new self;
 
-        $self['pageNumber'] = $pageNumber;
-        $self['totalPages'] = $totalPages;
-
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
         null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $totalPages && $self['totalPages'] = $totalPages;
         null !== $totalResults && $self['totalResults'] = $totalResults;
 
         return $self;
@@ -80,18 +67,18 @@ final class ConnectionsPaginationMeta implements BaseModel
         return $self;
     }
 
-    public function withTotalPages(int $totalPages): self
-    {
-        $self = clone $this;
-        $self['totalPages'] = $totalPages;
-
-        return $self;
-    }
-
     public function withPageSize(int $pageSize): self
     {
         $self = clone $this;
         $self['pageSize'] = $pageSize;
+
+        return $self;
+    }
+
+    public function withTotalPages(int $totalPages): self
+    {
+        $self = clone $this;
+        $self['totalPages'] = $totalPages;
 
         return $self;
     }

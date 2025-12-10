@@ -8,7 +8,8 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\GlobalIPAssignmentUpdateRequest;
+use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\Body;
+use Telnyx\Networks\InterfaceStatus;
 
 /**
  * Update a Global IP assignment.
@@ -16,12 +17,16 @@ use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\GlobalIPAssignment
  * @see Telnyx\Services\GlobalIPAssignmentsService::update()
  *
  * @phpstan-type GlobalIPAssignmentUpdateParamsShape = array{
- *   globalIPAssignmentUpdateRequest: GlobalIPAssignmentUpdateRequest|array{
+ *   body: Body|array{
  *     id?: string|null,
  *     createdAt?: string|null,
  *     recordType?: string|null,
  *     updatedAt?: string|null,
  *     globalIPID?: string|null,
+ *     isAnnounced?: bool|null,
+ *     isConnected?: bool|null,
+ *     isInMaintenance?: bool|null,
+ *     status?: value-of<InterfaceStatus>|null,
  *     wireguardPeerID?: string|null,
  *   },
  * }
@@ -33,20 +38,20 @@ final class GlobalIPAssignmentUpdateParams implements BaseModel
     use SdkParams;
 
     #[Required]
-    public GlobalIPAssignmentUpdateRequest $globalIPAssignmentUpdateRequest;
+    public Body $body;
 
     /**
      * `new GlobalIPAssignmentUpdateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * GlobalIPAssignmentUpdateParams::with(globalIPAssignmentUpdateRequest: ...)
+     * GlobalIPAssignmentUpdateParams::with(body: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new GlobalIPAssignmentUpdateParams)->withGlobalIPAssignmentUpdateRequest(...)
+     * (new GlobalIPAssignmentUpdateParams)->withBody(...)
      * ```
      */
     public function __construct()
@@ -59,40 +64,46 @@ final class GlobalIPAssignmentUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param GlobalIPAssignmentUpdateRequest|array{
+     * @param Body|array{
      *   id?: string|null,
      *   createdAt?: string|null,
      *   recordType?: string|null,
      *   updatedAt?: string|null,
      *   globalIPID?: string|null,
+     *   isAnnounced?: bool|null,
+     *   isConnected?: bool|null,
+     *   isInMaintenance?: bool|null,
+     *   status?: value-of<InterfaceStatus>|null,
      *   wireguardPeerID?: string|null,
-     * } $globalIPAssignmentUpdateRequest
+     * } $body
      */
-    public static function with(
-        GlobalIPAssignmentUpdateRequest|array $globalIPAssignmentUpdateRequest
-    ): self {
+    public static function with(Body|array $body): self
+    {
         $self = new self;
 
-        $self['globalIPAssignmentUpdateRequest'] = $globalIPAssignmentUpdateRequest;
+        $self['body'] = $body;
 
         return $self;
     }
 
     /**
-     * @param GlobalIPAssignmentUpdateRequest|array{
+     * @param Body|array{
      *   id?: string|null,
      *   createdAt?: string|null,
      *   recordType?: string|null,
      *   updatedAt?: string|null,
      *   globalIPID?: string|null,
+     *   isAnnounced?: bool|null,
+     *   isConnected?: bool|null,
+     *   isInMaintenance?: bool|null,
+     *   status?: value-of<InterfaceStatus>|null,
      *   wireguardPeerID?: string|null,
-     * } $globalIPAssignmentUpdateRequest
+     * } $body
      */
-    public function withGlobalIPAssignmentUpdateRequest(
-        GlobalIPAssignmentUpdateRequest|array $globalIPAssignmentUpdateRequest
-    ): self {
+    public function withBody(Body|array $body): self
+    {
         $self = clone $this;
-        $self['globalIPAssignmentUpdateRequest'] = $globalIPAssignmentUpdateRequest;
+        $self['body'] = $body;
 
         return $self;
     }

@@ -6,12 +6,11 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
-use Telnyx\VerifiedNumbers\VerifiedNumber;
 use Telnyx\VerifiedNumbers\VerifiedNumberCreateParams;
 use Telnyx\VerifiedNumbers\VerifiedNumberDataWrapper;
 use Telnyx\VerifiedNumbers\VerifiedNumberListParams;
+use Telnyx\VerifiedNumbers\VerifiedNumberListResponse;
 use Telnyx\VerifiedNumbers\VerifiedNumberNewResponse;
 
 interface VerifiedNumbersRawContract
@@ -49,7 +48,7 @@ interface VerifiedNumbersRawContract
      *
      * @param array<mixed>|VerifiedNumberListParams $params
      *
-     * @return BaseResponse<DefaultFlatPagination<VerifiedNumber>>
+     * @return BaseResponse<VerifiedNumberListResponse>
      *
      * @throws APIException
      */

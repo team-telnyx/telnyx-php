@@ -5,16 +5,15 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\SimCardGroups;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\SimCardGroups\Actions\ActionGetResponse;
 use Telnyx\SimCardGroups\Actions\ActionListParams\FilterStatus;
 use Telnyx\SimCardGroups\Actions\ActionListParams\FilterType;
+use Telnyx\SimCardGroups\Actions\ActionListResponse;
 use Telnyx\SimCardGroups\Actions\ActionRemovePrivateWirelessGatewayResponse;
 use Telnyx\SimCardGroups\Actions\ActionRemoveWirelessBlocklistResponse;
 use Telnyx\SimCardGroups\Actions\ActionSetPrivateWirelessGatewayResponse;
 use Telnyx\SimCardGroups\Actions\ActionSetWirelessBlocklistResponse;
-use Telnyx\SimCardGroups\Actions\SimCardGroupAction;
 
 interface ActionsContract
 {
@@ -39,8 +38,6 @@ interface ActionsContract
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
      *
-     * @return DefaultFlatPagination<SimCardGroupAction>
-     *
      * @throws APIException
      */
     public function list(
@@ -50,7 +47,7 @@ interface ActionsContract
         int $pageNumber = 1,
         int $pageSize = 20,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination;
+    ): ActionListResponse;
 
     /**
      * @api

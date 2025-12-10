@@ -8,12 +8,11 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
-use Telnyx\Rooms\Room;
 use Telnyx\Rooms\RoomCreateParams;
 use Telnyx\Rooms\RoomGetResponse;
 use Telnyx\Rooms\RoomListParams;
+use Telnyx\Rooms\RoomListResponse;
 use Telnyx\Rooms\RoomNewResponse;
 use Telnyx\Rooms\RoomRetrieveParams;
 use Telnyx\Rooms\RoomUpdateParams;
@@ -154,7 +153,7 @@ final class RoomsRawService implements RoomsRawContract
      *   page?: array{number?: int, size?: int},
      * }|RoomListParams $params
      *
-     * @return BaseResponse<DefaultPagination<Room>>
+     * @return BaseResponse<RoomListResponse>
      *
      * @throws APIException
      */
@@ -176,8 +175,7 @@ final class RoomsRawService implements RoomsRawContract
                 ['includeSessions' => 'include_sessions']
             ),
             options: $options,
-            convert: Room::class,
-            page: DefaultPagination::class,
+            convert: RoomListResponse::class,
         );
     }
 

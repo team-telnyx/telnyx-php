@@ -8,12 +8,11 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
-use Telnyx\PrivateWirelessGateways\PrivateWirelessGateway;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayCreateParams;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayDeleteResponse;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayGetResponse;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayListParams;
+use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayListResponse;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PrivateWirelessGatewaysRawContract;
@@ -97,7 +96,7 @@ final class PrivateWirelessGatewaysRawService implements PrivateWirelessGateways
      *   pageSize?: int,
      * }|PrivateWirelessGatewayListParams $params
      *
-     * @return BaseResponse<DefaultFlatPagination<PrivateWirelessGateway>>
+     * @return BaseResponse<PrivateWirelessGatewayListResponse>
      *
      * @throws APIException
      */
@@ -127,8 +126,7 @@ final class PrivateWirelessGatewaysRawService implements PrivateWirelessGateways
                 ],
             ),
             options: $options,
-            convert: PrivateWirelessGateway::class,
-            page: DefaultFlatPagination::class,
+            convert: PrivateWirelessGatewayListResponse::class,
         );
     }
 

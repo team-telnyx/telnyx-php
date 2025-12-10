@@ -4,24 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\Number10dlc;
 
+use Telnyx\Brand\AltBusinessIDType;
+use Telnyx\Brand\BrandIdentityStatus;
+use Telnyx\Brand\EntityType;
+use Telnyx\Brand\StockExchange;
+use Telnyx\Brand\TelnyxBrand;
+use Telnyx\Brand\Vertical;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\Number10dlc\Brand\AltBusinessIDType;
 use Telnyx\Number10dlc\Brand\BrandGetFeedbackResponse;
 use Telnyx\Number10dlc\Brand\BrandGetResponse;
-use Telnyx\Number10dlc\Brand\BrandGetSMSOtpStatusResponse;
-use Telnyx\Number10dlc\Brand\BrandIdentityStatus;
 use Telnyx\Number10dlc\Brand\BrandListParams\Sort;
 use Telnyx\Number10dlc\Brand\BrandListResponse;
-use Telnyx\Number10dlc\Brand\EntityType;
-use Telnyx\Number10dlc\Brand\StockExchange;
-use Telnyx\Number10dlc\Brand\TelnyxBrand;
-use Telnyx\Number10dlc\Brand\Vertical;
-use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Number10dlc\BrandContract;
 use Telnyx\Services\Number10dlc\Brand\ExternalVettingService;
+use Telnyx\Services\Number10dlc\Brand\SMSOtpService;
 
 final class BrandService implements BrandContract
 {
@@ -29,6 +28,11 @@ final class BrandService implements BrandContract
      * @api
      */
     public BrandRawService $raw;
+
+    /**
+     * @api
+     */
+    public SMSOtpService $smsOtp;
 
     /**
      * @api
@@ -41,6 +45,7 @@ final class BrandService implements BrandContract
     public function __construct(private Client $client)
     {
         $this->raw = new BrandRawService($client);
+        $this->smsOtp = new SMSOtpService($client);
         $this->externalVetting = new ExternalVettingService($client);
     }
 
@@ -52,7 +57,7 @@ final class BrandService implements BrandContract
      * @param string $country ISO2 2 characters country code. Example: US - United States
      * @param string $displayName display name, marketing name, or DBA name of the brand
      * @param string $email valid email address of brand support contact
-     * @param 'PRIVATE_PROFIT'|'PUBLIC_PROFIT'|'NON_PROFIT'|'GOVERNMENT'|EntityType $entityType Entity type behind the brand. This is the form of business establishment.
+     * @param 'PRIVATE_PROFIT'|'PUBLIC_PROFIT'|'NON_PROFIT'|'GOVERNMENT'|'SOLE_PROPRIETOR'|EntityType $entityType Entity type behind the brand. This is the form of business establishment.
      * @param 'REAL_ESTATE'|'HEALTHCARE'|'ENERGY'|'ENTERTAINMENT'|'RETAIL'|'AGRICULTURE'|'INSURANCE'|'EDUCATION'|'HOSPITALITY'|'FINANCIAL'|'GAMBLING'|'CONSTRUCTION'|'NGO'|'MANUFACTURING'|'GOVERNMENT'|'TECHNOLOGY'|'COMMUNICATION'|Vertical $vertical vertical or industry segment of the brand or campaign
      * @param string $businessContactEmail Business contact email.
      *
@@ -164,7 +169,7 @@ final class BrandService implements BrandContract
      * @param string $country ISO2 2 characters country code. Example: US - United States
      * @param string $displayName display or marketing name of the brand
      * @param string $email valid email address of brand support contact
-     * @param 'PRIVATE_PROFIT'|'PUBLIC_PROFIT'|'NON_PROFIT'|'GOVERNMENT'|EntityType $entityType Entity type behind the brand. This is the form of business establishment.
+     * @param 'PRIVATE_PROFIT'|'PUBLIC_PROFIT'|'NON_PROFIT'|'GOVERNMENT'|'SOLE_PROPRIETOR'|EntityType $entityType Entity type behind the brand. This is the form of business establishment.
      * @param 'REAL_ESTATE'|'HEALTHCARE'|'ENERGY'|'ENTERTAINMENT'|'RETAIL'|'AGRICULTURE'|'INSURANCE'|'EDUCATION'|'HOSPITALITY'|'FINANCIAL'|'GAMBLING'|'CONSTRUCTION'|'NGO'|'MANUFACTURING'|'GOVERNMENT'|'TECHNOLOGY'|'COMMUNICATION'|Vertical $vertical vertical or industry segment of the brand or campaign
      * @param string $altBusinessID Alternate business identifier such as DUNS, LEI, or GIIN
      * @param 'NONE'|'DUNS'|'GIIN'|'LEI'|AltBusinessIDType $altBusinessIDType an enumeration
@@ -265,8 +270,6 @@ final class BrandService implements BrandContract
      * @param 'assignedCampaignsCount'|'-assignedCampaignsCount'|'brandId'|'-brandId'|'createdAt'|'-createdAt'|'displayName'|'-displayName'|'identityStatus'|'-identityStatus'|'status'|'-status'|'tcrBrandId'|'-tcrBrandId'|Sort $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
      * @param string $tcrBrandID Filter results by the TCR Brand id
      *
-     * @return PerPagePaginationV2<BrandListResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -280,7 +283,7 @@ final class BrandService implements BrandContract
         ?string $state = null,
         ?string $tcrBrandID = null,
         ?RequestOptions $requestOptions = null,
-    ): PerPagePaginationV2 {
+    ): BrandListResponse {
         $params = Util::removeNulls(
             [
                 'brandID' => $brandID,
@@ -360,36 +363,6 @@ final class BrandService implements BrandContract
     ): mixed {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->resend2faEmail($brandID, requestOptions: $requestOptions);
-
-        return $response->parse();
-    }
-
-    /**
-     * @api
-     *
-     * Query the status of an SMS OTP (One-Time Password) for Sole Proprietor brand verification.
-     *
-     * This endpoint allows you to check the delivery and verification status of an OTP sent during the Sole Proprietor brand verification process. You can query by either:
-     *
-     * * `referenceId` - The reference ID returned when the OTP was initially triggered
-     * * `brandId` - Query parameter for portal users to look up OTP status by Brand ID
-     *
-     * The response includes delivery status, verification dates, and detailed delivery information.
-     *
-     * @param string $referenceID The reference ID returned when the OTP was initially triggered
-     * @param string $brandID Filter by Brand ID for easier lookup in portal applications
-     *
-     * @throws APIException
-     */
-    public function retrieveSMSOtpStatus(
-        string $referenceID,
-        ?string $brandID = null,
-        ?RequestOptions $requestOptions = null,
-    ): BrandGetSMSOtpStatusResponse {
-        $params = Util::removeNulls(['brandID' => $brandID]);
-
-        // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->retrieveSMSOtpStatus($referenceID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

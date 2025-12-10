@@ -6,12 +6,11 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\FaxApplications\FaxApplication;
 use Telnyx\FaxApplications\FaxApplicationCreateParams;
 use Telnyx\FaxApplications\FaxApplicationDeleteResponse;
 use Telnyx\FaxApplications\FaxApplicationGetResponse;
 use Telnyx\FaxApplications\FaxApplicationListParams;
+use Telnyx\FaxApplications\FaxApplicationListResponse;
 use Telnyx\FaxApplications\FaxApplicationNewResponse;
 use Telnyx\FaxApplications\FaxApplicationUpdateParams;
 use Telnyx\FaxApplications\FaxApplicationUpdateResponse;
@@ -68,7 +67,7 @@ interface FaxApplicationsRawContract
      *
      * @param array<mixed>|FaxApplicationListParams $params
      *
-     * @return BaseResponse<DefaultPagination<FaxApplication>>
+     * @return BaseResponse<FaxApplicationListResponse>
      *
      * @throws APIException
      */

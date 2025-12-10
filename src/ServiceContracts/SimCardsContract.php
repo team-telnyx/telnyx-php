@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\SimCards\SimCardDeleteResponse;
 use Telnyx\SimCards\SimCardGetActivationCodeResponse;
@@ -15,12 +13,12 @@ use Telnyx\SimCards\SimCardGetPublicIPResponse;
 use Telnyx\SimCards\SimCardGetResponse;
 use Telnyx\SimCards\SimCardListParams\Filter\Status;
 use Telnyx\SimCards\SimCardListParams\Sort;
+use Telnyx\SimCards\SimCardListResponse;
 use Telnyx\SimCards\SimCardListWirelessConnectivityLogsResponse;
 use Telnyx\SimCards\SimCardUpdateParams\DataLimit\Unit;
 use Telnyx\SimCards\SimCardUpdateResponse;
 use Telnyx\SimCardStatus;
 use Telnyx\SimCardStatus\Value;
-use Telnyx\SimpleSimCard;
 
 interface SimCardsContract
 {
@@ -43,7 +41,7 @@ interface SimCardsContract
     /**
      * @api
      *
-     * @param string $simCardID identifies the SIM
+     * @param string $id identifies the SIM
      * @param list<string>|null $authorizedImeis list of IMEIs authorized to use a given SIM card
      * @param array{
      *   amount?: string, unit?: 'MB'|'GB'|Unit
@@ -58,7 +56,7 @@ interface SimCardsContract
      * @throws APIException
      */
     public function update(
-        string $simCardID,
+        string $id,
         ?array $authorizedImeis = null,
         ?array $dataLimit = null,
         ?string $simCardGroupID = null,
@@ -82,8 +80,6 @@ interface SimCardsContract
      * } $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
      * @param 'current_billing_period_consumed_data.amount'|'-current_billing_period_consumed_data.amount'|Sort $sort Sorts SIM cards by the given field. Defaults to ascending order unless field is prefixed with a minus sign.
      *
-     * @return DefaultPagination<SimpleSimCard>
-     *
      * @throws APIException
      */
     public function list(
@@ -93,7 +89,7 @@ interface SimCardsContract
         ?array $page = null,
         string|Sort|null $sort = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): SimCardListResponse;
 
     /**
      * @api
@@ -152,8 +148,6 @@ interface SimCardsContract
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
      *
-     * @return DefaultFlatPagination<SimCardListWirelessConnectivityLogsResponse>
-     *
      * @throws APIException
      */
     public function listWirelessConnectivityLogs(
@@ -161,5 +155,5 @@ interface SimCardsContract
         int $pageNumber = 1,
         int $pageSize = 20,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination;
+    ): SimCardListWirelessConnectivityLogsResponse;
 }

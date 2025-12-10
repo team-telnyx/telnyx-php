@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListParams;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListResponse;
 use Telnyx\RequestOptions;
@@ -18,7 +17,7 @@ interface NotificationEventConditionsRawContract
      *
      * @param array<mixed>|NotificationEventConditionListParams $params
      *
-     * @return BaseResponse<DefaultPagination<NotificationEventConditionListResponse>>
+     * @return BaseResponse<NotificationEventConditionListResponse>
      *
      * @throws APIException
      */

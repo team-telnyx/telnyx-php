@@ -7,13 +7,12 @@ namespace Telnyx\Services\PortingOrders;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobGetResponse;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams;
+use Telnyx\PortingOrders\ActivationJobs\ActivationJobListResponse;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobRetrieveParams;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobUpdateParams;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobUpdateResponse;
-use Telnyx\PortingOrders\PortingOrdersActivationJob;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\ActivationJobsRawContract;
 
@@ -104,7 +103,7 @@ final class ActivationJobsRawService implements ActivationJobsRawContract
      *   page?: array{number?: int, size?: int}
      * }|ActivationJobListParams $params
      *
-     * @return BaseResponse<DefaultPagination<PortingOrdersActivationJob>>
+     * @return BaseResponse<ActivationJobListResponse>
      *
      * @throws APIException
      */
@@ -124,8 +123,7 @@ final class ActivationJobsRawService implements ActivationJobsRawContract
             path: ['porting_orders/%1$s/activation_jobs', $id],
             query: $parsed,
             options: $options,
-            convert: PortingOrdersActivationJob::class,
-            page: DefaultPagination::class,
+            convert: ActivationJobListResponse::class,
         );
     }
 }

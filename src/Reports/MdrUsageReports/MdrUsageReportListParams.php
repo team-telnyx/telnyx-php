@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Reports\MdrUsageReports\MdrUsageReportListParams\Page;
 
 /**
  * Fetch all messaging usage reports. Usage reports are aggregated messaging data for specified time period and breakdown.
@@ -15,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Reports\MdrUsageReportsService::list()
  *
  * @phpstan-type MdrUsageReportListParamsShape = array{
- *   pageNumber?: int, pageSize?: int
+ *   page?: Page|array{number?: int|null, size?: int|null}
  * }
  */
 final class MdrUsageReportListParams implements BaseModel
@@ -24,11 +25,11 @@ final class MdrUsageReportListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
+    /**
+     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
+     */
     #[Optional]
-    public ?int $pageNumber;
-
-    #[Optional]
-    public ?int $pageSize;
+    public ?Page $page;
 
     public function __construct()
     {
@@ -39,31 +40,27 @@ final class MdrUsageReportListParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Page|array{number?: int|null, size?: int|null} $page
      */
-    public static function with(
-        ?int $pageNumber = null,
-        ?int $pageSize = null
-    ): self {
+    public static function with(Page|array|null $page = null): self
+    {
         $self = new self;
 
-        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
-        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $page && $self['page'] = $page;
 
         return $self;
     }
 
-    public function withPageNumber(int $pageNumber): self
+    /**
+     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
+     *
+     * @param Page|array{number?: int|null, size?: int|null} $page
+     */
+    public function withPage(Page|array $page): self
     {
         $self = clone $this;
-        $self['pageNumber'] = $pageNumber;
-
-        return $self;
-    }
-
-    public function withPageSize(int $pageSize): self
-    {
-        $self = clone $this;
-        $self['pageSize'] = $pageSize;
+        $self['page'] = $page;
 
         return $self;
     }

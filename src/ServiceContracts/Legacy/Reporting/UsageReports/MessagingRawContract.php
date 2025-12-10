@@ -6,13 +6,12 @@ namespace Telnyx\ServiceContracts\Legacy\Reporting\UsageReports;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Legacy\Reporting\UsageReports\Messaging\MdrUsageReportResponseLegacy;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingCreateParams;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingDeleteResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingGetResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingListParams;
+use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingListResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingNewResponse;
-use Telnyx\PerPagePagination;
 use Telnyx\RequestOptions;
 
 interface MessagingRawContract
@@ -48,7 +47,7 @@ interface MessagingRawContract
      *
      * @param array<mixed>|MessagingListParams $params
      *
-     * @return BaseResponse<PerPagePagination<MdrUsageReportResponseLegacy>>
+     * @return BaseResponse<MessagingListResponse>
      *
      * @throws APIException
      */

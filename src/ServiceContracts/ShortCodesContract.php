@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
-use Telnyx\ShortCode;
 use Telnyx\ShortCodes\ShortCodeGetResponse;
+use Telnyx\ShortCodes\ShortCodeListResponse;
 use Telnyx\ShortCodes\ShortCodeUpdateResponse;
 
 interface ShortCodesContract
@@ -51,13 +50,11 @@ interface ShortCodesContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return DefaultPagination<ShortCode>
-     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): ShortCodeListResponse;
 }

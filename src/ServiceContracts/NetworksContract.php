@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\Networks\InterfaceStatus;
 use Telnyx\Networks\NetworkDeleteResponse;
 use Telnyx\Networks\NetworkGetResponse;
@@ -44,13 +43,13 @@ interface NetworksContract
     /**
      * @api
      *
-     * @param string $networkID identifies the resource
+     * @param string $id identifies the resource
      * @param string $name a user specified name for the network
      *
      * @throws APIException
      */
     public function update(
-        string $networkID,
+        string $id,
         string $name,
         ?RequestOptions $requestOptions = null
     ): NetworkUpdateResponse;
@@ -65,15 +64,13 @@ interface NetworksContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return DefaultPagination<NetworkListResponse>
-     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): NetworkListResponse;
 
     /**
      * @api
@@ -100,8 +97,6 @@ interface NetworksContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return DefaultPagination<NetworkListInterfacesResponse>
-     *
      * @throws APIException
      */
     public function listInterfaces(
@@ -109,5 +104,5 @@ interface NetworksContract
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): NetworkListInterfacesResponse;
 }
