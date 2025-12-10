@@ -6,9 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
+use Telnyx\ExternalConnections\ExternalConnection;
 use Telnyx\ExternalConnections\ExternalConnectionDeleteResponse;
 use Telnyx\ExternalConnections\ExternalConnectionGetResponse;
-use Telnyx\ExternalConnections\ExternalConnectionListResponse;
 use Telnyx\ExternalConnections\ExternalConnectionNewResponse;
 use Telnyx\ExternalConnections\ExternalConnectionUpdateLocationResponse;
 use Telnyx\ExternalConnections\ExternalConnectionUpdateResponse;
@@ -137,10 +138,15 @@ final class ExternalConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->externalConnections->list();
+        $page = $this->client->externalConnections->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ExternalConnectionListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(ExternalConnection::class, $item);
+        }
     }
 
     #[Test]

@@ -8,9 +8,10 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\DtmfType;
+use Telnyx\DefaultPagination;
+use Telnyx\TexmlApplications\TexmlApplication;
 use Telnyx\TexmlApplications\TexmlApplicationDeleteResponse;
 use Telnyx\TexmlApplications\TexmlApplicationGetResponse;
-use Telnyx\TexmlApplications\TexmlApplicationListResponse;
 use Telnyx\TexmlApplications\TexmlApplicationNewResponse;
 use Telnyx\TexmlApplications\TexmlApplicationUpdateResponse;
 use Tests\UnsupportedMockTests;
@@ -159,10 +160,15 @@ final class TexmlApplicationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->texmlApplications->list();
+        $page = $this->client->texmlApplications->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(TexmlApplicationListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(TexmlApplication::class, $item);
+        }
     }
 
     #[Test]

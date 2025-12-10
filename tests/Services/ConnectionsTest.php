@@ -9,6 +9,7 @@ use Telnyx\Client;
 use Telnyx\Connections\ConnectionGetResponse;
 use Telnyx\Connections\ConnectionListActiveCallsResponse;
 use Telnyx\Connections\ConnectionListResponse;
+use Telnyx\DefaultPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -49,10 +50,15 @@ final class ConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->connections->list();
+        $page = $this->client->connections->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ConnectionListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(ConnectionListResponse::class, $item);
+        }
     }
 
     #[Test]
@@ -62,11 +68,14 @@ final class ConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->connections->listActiveCalls(
-            '1293384261075731461'
-        );
+        $page = $this->client->connections->listActiveCalls('1293384261075731461');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ConnectionListActiveCallsResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(ConnectionListActiveCallsResponse::class, $item);
+        }
     }
 }

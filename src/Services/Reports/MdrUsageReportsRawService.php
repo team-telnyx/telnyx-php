@@ -8,6 +8,8 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\Reports\MdrUsageReports\MdrUsageReport;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportCreateParams;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportCreateParams\AggregationType;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportDeleteResponse;
@@ -15,7 +17,6 @@ use Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportGetResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportListParams;
-use Telnyx\Reports\MdrUsageReports\MdrUsageReportListResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Reports\MdrUsageReportsRawContract;
@@ -91,11 +92,9 @@ final class MdrUsageReportsRawService implements MdrUsageReportsRawContract
      *
      * Fetch all messaging usage reports. Usage reports are aggregated messaging data for specified time period and breakdown
      *
-     * @param array{
-     *   page?: array{number?: int, size?: int}
-     * }|MdrUsageReportListParams $params
+     * @param array{pageNumber?: int, pageSize?: int}|MdrUsageReportListParams $params
      *
-     * @return BaseResponse<MdrUsageReportListResponse>
+     * @return BaseResponse<DefaultFlatPagination<MdrUsageReport>>
      *
      * @throws APIException
      */
@@ -112,9 +111,13 @@ final class MdrUsageReportsRawService implements MdrUsageReportsRawContract
         return $this->client->request(
             method: 'get',
             path: 'reports/mdr_usage_reports',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
-            convert: MdrUsageReportListResponse::class,
+            convert: MdrUsageReport::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

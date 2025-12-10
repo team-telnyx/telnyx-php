@@ -7,11 +7,12 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
+use Telnyx\Documents\DocServiceDocument;
 use Telnyx\Documents\DocumentDeleteResponse;
 use Telnyx\Documents\DocumentGenerateDownloadLinkResponse;
 use Telnyx\Documents\DocumentGetResponse;
 use Telnyx\Documents\DocumentListParams\Sort;
-use Telnyx\Documents\DocumentListResponse;
 use Telnyx\Documents\DocumentUpdateResponse;
 use Telnyx\Documents\DocumentUploadJsonResponse;
 use Telnyx\Documents\DocumentUploadResponse;
@@ -57,14 +58,14 @@ final class DocumentsService implements DocumentsContract
      *
      * Update a document.
      *
-     * @param string $id identifies the resource
+     * @param string $documentID identifies the resource
      * @param string $customerReference optional reference string for customer tracking
      * @param string $filename the filename of the document
      *
      * @throws APIException
      */
     public function update(
-        string $id,
+        string $documentID,
         ?string $customerReference = null,
         ?string $filename = null,
         ?RequestOptions $requestOptions = null,
@@ -74,7 +75,7 @@ final class DocumentsService implements DocumentsContract
         );
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->update($documentID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -96,6 +97,8 @@ final class DocumentsService implements DocumentsContract
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param list<'filename'|'created_at'|'updated_at'|'-filename'|'-created_at'|'-updated_at'|Sort> $sort Consolidated sort parameter for documents (deepObject style). Originally: sort[]
      *
+     * @return DefaultPagination<DocServiceDocument>
+     *
      * @throws APIException
      */
     public function list(
@@ -103,7 +106,7 @@ final class DocumentsService implements DocumentsContract
         ?array $page = null,
         ?array $sort = null,
         ?RequestOptions $requestOptions = null,
-    ): DocumentListResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(
             ['filter' => $filter, 'page' => $page, 'sort' => $sort]
         );
@@ -176,28 +179,15 @@ final class DocumentsService implements DocumentsContract
      *
      * Upload a document.<br /><br />Uploaded files must be linked to a service within 30 minutes or they will be automatically deleted.
      *
-     * @param string $url if the file is already hosted publicly, you can provide a URL and have the documents service fetch it for you
-     * @param string $file the Base64 encoded contents of the file you are uploading
-     * @param string $customerReference a customer reference string for customer look ups
-     * @param string $filename the filename of the document
+     * @param array<string,mixed> $document
      *
      * @throws APIException
      */
     public function upload(
-        string $url,
-        string $file,
-        ?string $customerReference = null,
-        ?string $filename = null,
-        ?RequestOptions $requestOptions = null,
+        array $document,
+        ?RequestOptions $requestOptions = null
     ): DocumentUploadResponse {
-        $params = Util::removeNulls(
-            [
-                'url' => $url,
-                'customerReference' => $customerReference,
-                'filename' => $filename,
-                'file' => $file,
-            ],
-        );
+        $params = Util::removeNulls(['document' => $document]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->upload(params: $params, requestOptions: $requestOptions);
@@ -210,28 +200,15 @@ final class DocumentsService implements DocumentsContract
      *
      * Upload a document.<br /><br />Uploaded files must be linked to a service within 30 minutes or they will be automatically deleted.
      *
-     * @param string $url if the file is already hosted publicly, you can provide a URL and have the documents service fetch it for you
-     * @param string $file the Base64 encoded contents of the file you are uploading
-     * @param string $customerReference a customer reference string for customer look ups
-     * @param string $filename the filename of the document
+     * @param array<string,mixed> $document
      *
      * @throws APIException
      */
     public function uploadJson(
-        string $url,
-        string $file,
-        ?string $customerReference = null,
-        ?string $filename = null,
-        ?RequestOptions $requestOptions = null,
+        array $document,
+        ?RequestOptions $requestOptions = null
     ): DocumentUploadJsonResponse {
-        $params = Util::removeNulls(
-            [
-                'url' => $url,
-                'customerReference' => $customerReference,
-                'filename' => $filename,
-                'file' => $file,
-            ],
-        );
+        $params = Util::removeNulls(['document' => $document]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->uploadJson(params: $params, requestOptions: $requestOptions);

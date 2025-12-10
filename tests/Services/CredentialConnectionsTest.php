@@ -7,13 +7,14 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
+use Telnyx\CredentialConnections\CredentialConnection;
 use Telnyx\CredentialConnections\CredentialConnectionDeleteResponse;
 use Telnyx\CredentialConnections\CredentialConnectionGetResponse;
-use Telnyx\CredentialConnections\CredentialConnectionListResponse;
 use Telnyx\CredentialConnections\CredentialConnectionNewResponse;
 use Telnyx\CredentialConnections\CredentialConnectionUpdateResponse;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
+use Telnyx\DefaultPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -146,10 +147,15 @@ final class CredentialConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->credentialConnections->list();
+        $page = $this->client->credentialConnections->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CredentialConnectionListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(CredentialConnection::class, $item);
+        }
     }
 
     #[Test]

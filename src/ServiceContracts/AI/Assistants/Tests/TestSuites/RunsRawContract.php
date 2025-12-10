@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\AI\Assistants\Tests\TestSuites;
 
 use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse;
-use Telnyx\AI\Assistants\Tests\TestSuites\Runs\PaginatedTestRunList;
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\RunListParams;
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\RunTriggerParams;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 interface RunsRawContract
@@ -19,7 +19,7 @@ interface RunsRawContract
      *
      * @param array<mixed>|RunListParams $params
      *
-     * @return BaseResponse<PaginatedTestRunList>
+     * @return BaseResponse<DefaultFlatPagination<TestRunResponse>>
      *
      * @throws APIException
      */

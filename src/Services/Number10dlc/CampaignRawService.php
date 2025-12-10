@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\Number10dlc;
 
-use Telnyx\Campaign\TelnyxCampaignCsp;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Conversion\MapOf;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\Number10dlc\Campaign\CampaignDeleteResponse;
+use Telnyx\Number10dlc\Campaign\CampaignDeactivateResponse;
 use Telnyx\Number10dlc\Campaign\CampaignGetMnoMetadataResponse;
 use Telnyx\Number10dlc\Campaign\CampaignGetSharingStatusResponse;
 use Telnyx\Number10dlc\Campaign\CampaignListParams;
@@ -19,6 +18,8 @@ use Telnyx\Number10dlc\Campaign\CampaignListResponse;
 use Telnyx\Number10dlc\Campaign\CampaignSubmitAppealParams;
 use Telnyx\Number10dlc\Campaign\CampaignSubmitAppealResponse;
 use Telnyx\Number10dlc\Campaign\CampaignUpdateParams;
+use Telnyx\Number10dlc\Campaign\TelnyxCampaignCsp;
+use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Number10dlc\CampaignRawContract;
 
@@ -104,7 +105,7 @@ final class CampaignRawService implements CampaignRawContract
      *   brandID: string, page?: int, recordsPerPage?: int, sort?: value-of<Sort>
      * }|CampaignListParams $params
      *
-     * @return BaseResponse<CampaignListResponse>
+     * @return BaseResponse<PerPagePaginationV2<CampaignListResponse>>
      *
      * @throws APIException
      */
@@ -124,28 +125,7 @@ final class CampaignRawService implements CampaignRawContract
             query: Util::array_transform_keys($parsed, ['brandID' => 'brandId']),
             options: $options,
             convert: CampaignListResponse::class,
-        );
-    }
-
-    /**
-     * @api
-     *
-     * Terminate a campaign. Note that once deactivated, a campaign cannot be restored.
-     *
-     * @return BaseResponse<CampaignDeleteResponse>
-     *
-     * @throws APIException
-     */
-    public function delete(
-        string $campaignID,
-        ?RequestOptions $requestOptions = null
-    ): BaseResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
-            method: 'delete',
-            path: ['10dlc/campaign/%1$s', $campaignID],
-            options: $requestOptions,
-            convert: CampaignDeleteResponse::class,
+            page: PerPagePaginationV2::class,
         );
     }
 
@@ -170,6 +150,28 @@ final class CampaignRawService implements CampaignRawContract
             path: ['10dlc/campaign/acceptSharing/%1$s', $campaignID],
             options: $requestOptions,
             convert: new MapOf('mixed'),
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Terminate a campaign. Note that once deactivated, a campaign cannot be restored.
+     *
+     * @return BaseResponse<CampaignDeactivateResponse>
+     *
+     * @throws APIException
+     */
+    public function deactivate(
+        string $campaignID,
+        ?RequestOptions $requestOptions = null
+    ): BaseResponse {
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'delete',
+            path: ['10dlc/campaign/%1$s', $campaignID],
+            options: $requestOptions,
+            convert: CampaignDeactivateResponse::class,
         );
     }
 

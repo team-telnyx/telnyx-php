@@ -4,15 +4,19 @@ declare(strict_types=1);
 
 namespace Telnyx\DocumentLinks;
 
-use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\DocumentLinks\DocumentLinkListResponse\Data;
 
 /**
  * @phpstan-type DocumentLinkListResponseShape = array{
- *   data?: list<Data>|null, meta?: PaginationMeta|null
+ *   id?: string|null,
+ *   createdAt?: string|null,
+ *   documentID?: string|null,
+ *   linkedRecordType?: string|null,
+ *   linkedResourceID?: string|null,
+ *   recordType?: string|null,
+ *   updatedAt?: string|null,
  * }
  */
 final class DocumentLinkListResponse implements BaseModel
@@ -20,12 +24,47 @@ final class DocumentLinkListResponse implements BaseModel
     /** @use SdkModel<DocumentLinkListResponseShape> */
     use SdkModel;
 
-    /** @var list<Data>|null $data */
-    #[Optional(list: Data::class)]
-    public ?array $data;
-
+    /**
+     * Identifies the resource.
+     */
     #[Optional]
-    public ?PaginationMeta $meta;
+    public ?string $id;
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was created.
+     */
+    #[Optional('created_at')]
+    public ?string $createdAt;
+
+    /**
+     * Identifies the associated document.
+     */
+    #[Optional('document_id')]
+    public ?string $documentID;
+
+    /**
+     * The linked resource's record type.
+     */
+    #[Optional('linked_record_type')]
+    public ?string $linkedRecordType;
+
+    /**
+     * Identifies the linked resource.
+     */
+    #[Optional('linked_resource_id')]
+    public ?string $linkedResourceID;
+
+    /**
+     * Identifies the type of the resource.
+     */
+    #[Optional('record_type')]
+    public ?string $recordType;
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was updated.
+     */
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     public function __construct()
     {
@@ -36,66 +75,102 @@ final class DocumentLinkListResponse implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param list<Data|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   documentID?: string|null,
-     *   linkedRecordType?: string|null,
-     *   linkedResourceID?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     * }> $data
-     * @param PaginationMeta|array{
-     *   pageNumber?: int|null,
-     *   pageSize?: int|null,
-     *   totalPages?: int|null,
-     *   totalResults?: int|null,
-     * } $meta
      */
     public static function with(
-        ?array $data = null,
-        PaginationMeta|array|null $meta = null
+        ?string $id = null,
+        ?string $createdAt = null,
+        ?string $documentID = null,
+        ?string $linkedRecordType = null,
+        ?string $linkedResourceID = null,
+        ?string $recordType = null,
+        ?string $updatedAt = null,
     ): self {
         $self = new self;
 
-        null !== $data && $self['data'] = $data;
-        null !== $meta && $self['meta'] = $meta;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $documentID && $self['documentID'] = $documentID;
+        null !== $linkedRecordType && $self['linkedRecordType'] = $linkedRecordType;
+        null !== $linkedResourceID && $self['linkedResourceID'] = $linkedResourceID;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
         return $self;
     }
 
     /**
-     * @param list<Data|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   documentID?: string|null,
-     *   linkedRecordType?: string|null,
-     *   linkedResourceID?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     * }> $data
+     * Identifies the resource.
      */
-    public function withData(array $data): self
+    public function withID(string $id): self
     {
         $self = clone $this;
-        $self['data'] = $data;
+        $self['id'] = $id;
 
         return $self;
     }
 
     /**
-     * @param PaginationMeta|array{
-     *   pageNumber?: int|null,
-     *   pageSize?: int|null,
-     *   totalPages?: int|null,
-     *   totalResults?: int|null,
-     * } $meta
+     * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    public function withMeta(PaginationMeta|array $meta): self
+    public function withCreatedAt(string $createdAt): self
     {
         $self = clone $this;
-        $self['meta'] = $meta;
+        $self['createdAt'] = $createdAt;
+
+        return $self;
+    }
+
+    /**
+     * Identifies the associated document.
+     */
+    public function withDocumentID(string $documentID): self
+    {
+        $self = clone $this;
+        $self['documentID'] = $documentID;
+
+        return $self;
+    }
+
+    /**
+     * The linked resource's record type.
+     */
+    public function withLinkedRecordType(string $linkedRecordType): self
+    {
+        $self = clone $this;
+        $self['linkedRecordType'] = $linkedRecordType;
+
+        return $self;
+    }
+
+    /**
+     * Identifies the linked resource.
+     */
+    public function withLinkedResourceID(string $linkedResourceID): self
+    {
+        $self = clone $this;
+        $self['linkedResourceID'] = $linkedResourceID;
+
+        return $self;
+    }
+
+    /**
+     * Identifies the type of the resource.
+     */
+    public function withRecordType(string $recordType): self
+    {
+        $self = clone $this;
+        $self['recordType'] = $recordType;
+
+        return $self;
+    }
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was updated.
+     */
+    public function withUpdatedAt(string $updatedAt): self
+    {
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
         return $self;
     }

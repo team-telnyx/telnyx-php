@@ -6,6 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayCreateParams;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayDeleteResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayGetResponse;
@@ -49,7 +50,7 @@ interface PublicInternetGatewaysRawContract
      *
      * @param array<mixed>|PublicInternetGatewayListParams $params
      *
-     * @return BaseResponse<PublicInternetGatewayListResponse>
+     * @return BaseResponse<DefaultPagination<PublicInternetGatewayListResponse>>
      *
      * @throws APIException
      */

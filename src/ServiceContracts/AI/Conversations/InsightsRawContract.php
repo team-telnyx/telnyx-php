@@ -6,11 +6,12 @@ namespace Telnyx\ServiceContracts\AI\Conversations;
 
 use Telnyx\AI\Conversations\Insights\InsightCreateParams;
 use Telnyx\AI\Conversations\Insights\InsightListParams;
-use Telnyx\AI\Conversations\Insights\InsightListResponse;
+use Telnyx\AI\Conversations\Insights\InsightTemplate;
 use Telnyx\AI\Conversations\Insights\InsightTemplateDetail;
 use Telnyx\AI\Conversations\Insights\InsightUpdateParams;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 interface InsightsRawContract
@@ -64,7 +65,7 @@ interface InsightsRawContract
      *
      * @param array<mixed>|InsightListParams $params
      *
-     * @return BaseResponse<InsightListResponse>
+     * @return BaseResponse<DefaultFlatPagination<InsightTemplate>>
      *
      * @throws APIException
      */

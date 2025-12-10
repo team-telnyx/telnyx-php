@@ -7,11 +7,12 @@ namespace Telnyx\Services\PortingOrders;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberDeleteResponse;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams\Filter\Action;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams\Sort\Value;
-use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListResponse;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberNewResponse;
+use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\AssociatedPhoneNumbersContract;
 
@@ -73,6 +74,8 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
      *   value?: '-created_at'|'created_at'|Value
      * } $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
+     * @return DefaultPagination<PortingAssociatedPhoneNumber>
+     *
      * @throws APIException
      */
     public function list(
@@ -81,7 +84,7 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
         ?array $page = null,
         ?array $sort = null,
         ?RequestOptions $requestOptions = null,
-    ): AssociatedPhoneNumberListResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(
             ['filter' => $filter, 'page' => $page, 'sort' => $sort]
         );

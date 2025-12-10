@@ -7,8 +7,9 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
+use Telnyx\NumberBlockOrders\NumberBlockOrder;
 use Telnyx\NumberBlockOrders\NumberBlockOrderGetResponse;
-use Telnyx\NumberBlockOrders\NumberBlockOrderListResponse;
 use Telnyx\NumberBlockOrders\NumberBlockOrderNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumberBlockOrdersContract;
@@ -98,13 +99,15 @@ final class NumberBlockOrdersService implements NumberBlockOrdersContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
+     * @return DefaultPagination<NumberBlockOrder>
+     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): NumberBlockOrderListResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
         // @phpstan-ignore-next-line argument.type

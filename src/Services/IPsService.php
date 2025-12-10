@@ -7,9 +7,10 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
+use Telnyx\IPs\IP;
 use Telnyx\IPs\IPDeleteResponse;
 use Telnyx\IPs\IPGetResponse;
-use Telnyx\IPs\IPListResponse;
 use Telnyx\IPs\IPNewResponse;
 use Telnyx\IPs\IPUpdateResponse;
 use Telnyx\RequestOptions;
@@ -125,13 +126,15 @@ final class IPsService implements IPsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
+     * @return DefaultPagination<IP>
+     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): IPListResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
         // @phpstan-ignore-next-line argument.type

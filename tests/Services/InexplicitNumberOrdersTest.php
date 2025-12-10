@@ -6,9 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultFlatPaginationForInexplicitNumberOrders;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderGetResponse;
-use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderListResponse;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderNewResponse;
+use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -109,9 +110,17 @@ final class InexplicitNumberOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->inexplicitNumberOrders->list();
+        $page = $this->client->inexplicitNumberOrders->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(InexplicitNumberOrderListResponse::class, $result);
+        $this->assertInstanceOf(
+            DefaultFlatPaginationForInexplicitNumberOrders::class,
+            $page
+        );
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(InexplicitNumberOrderResponse::class, $item);
+        }
     }
 }

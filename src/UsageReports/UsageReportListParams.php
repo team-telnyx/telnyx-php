@@ -10,7 +10,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\UsageReports\UsageReportListParams\Format;
-use Telnyx\UsageReports\UsageReportListParams\Page;
 
 /**
  * Get Telnyx usage data by product, broken out by the specified dimensions.
@@ -26,7 +25,8 @@ use Telnyx\UsageReports\UsageReportListParams\Page;
  *   filter?: string,
  *   format?: Format|value-of<Format>,
  *   managedAccounts?: bool,
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   pageNumber?: int,
+ *   pageSize?: int,
  *   sort?: list<string>,
  *   startDate?: string,
  *   authorizationBearer?: string,
@@ -92,11 +92,11 @@ final class UsageReportListParams implements BaseModel
     #[Optional]
     public ?bool $managedAccounts;
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
-     */
     #[Optional]
-    public ?Page $page;
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
 
     /**
      * Specifies the sort order for results.
@@ -148,7 +148,6 @@ final class UsageReportListParams implements BaseModel
      * @param list<string> $dimensions
      * @param list<string> $metrics
      * @param Format|value-of<Format> $format
-     * @param Page|array{number?: int|null, size?: int|null} $page
      * @param list<string> $sort
      */
     public static function with(
@@ -160,7 +159,8 @@ final class UsageReportListParams implements BaseModel
         ?string $filter = null,
         Format|string|null $format = null,
         ?bool $managedAccounts = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         ?array $sort = null,
         ?string $startDate = null,
         ?string $authorizationBearer = null,
@@ -176,7 +176,8 @@ final class UsageReportListParams implements BaseModel
         null !== $filter && $self['filter'] = $filter;
         null !== $format && $self['format'] = $format;
         null !== $managedAccounts && $self['managedAccounts'] = $managedAccounts;
-        null !== $page && $self['page'] = $page;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
         null !== $sort && $self['sort'] = $sort;
         null !== $startDate && $self['startDate'] = $startDate;
         null !== $authorizationBearer && $self['authorizationBearer'] = $authorizationBearer;
@@ -278,15 +279,18 @@ final class UsageReportListParams implements BaseModel
         return $self;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
-     *
-     * @param Page|array{number?: int|null, size?: int|null} $page
-     */
-    public function withPage(Page|array $page): self
+    public function withPageNumber(int $pageNumber): self
     {
         $self = clone $this;
-        $self['page'] = $page;
+        $self['pageNumber'] = $pageNumber;
+
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
         return $self;
     }

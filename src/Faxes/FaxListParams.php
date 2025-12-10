@@ -13,7 +13,6 @@ use Telnyx\Faxes\FaxListParams\Filter\CreatedAt;
 use Telnyx\Faxes\FaxListParams\Filter\Direction;
 use Telnyx\Faxes\FaxListParams\Filter\From;
 use Telnyx\Faxes\FaxListParams\Filter\To;
-use Telnyx\Faxes\FaxListParams\Page;
 
 /**
  * View a list of faxes.
@@ -27,7 +26,8 @@ use Telnyx\Faxes\FaxListParams\Page;
  *     from?: From|null,
  *     to?: To|null,
  *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   pageNumber?: int,
+ *   pageSize?: int,
  * }
  */
 final class FaxListParams implements BaseModel
@@ -42,11 +42,11 @@ final class FaxListParams implements BaseModel
     #[Optional]
     public ?Filter $filter;
 
-    /**
-     * Consolidated pagination parameter (deepObject style). Originally: page[size], page[number].
-     */
     #[Optional]
-    public ?Page $page;
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
 
     public function __construct()
     {
@@ -64,16 +64,17 @@ final class FaxListParams implements BaseModel
      *   from?: From|null,
      *   to?: To|null,
      * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
      */
     public static function with(
         Filter|array|null $filter = null,
-        Page|array|null $page = null
+        ?int $pageNumber = null,
+        ?int $pageSize = null
     ): self {
         $self = new self;
 
         null !== $filter && $self['filter'] = $filter;
-        null !== $page && $self['page'] = $page;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
 
         return $self;
     }
@@ -96,15 +97,18 @@ final class FaxListParams implements BaseModel
         return $self;
     }
 
-    /**
-     * Consolidated pagination parameter (deepObject style). Originally: page[size], page[number].
-     *
-     * @param Page|array{number?: int|null, size?: int|null} $page
-     */
-    public function withPage(Page|array $page): self
+    public function withPageNumber(int $pageNumber): self
     {
         $self = clone $this;
-        $self['page'] = $page;
+        $self['pageNumber'] = $pageNumber;
+
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
         return $self;
     }

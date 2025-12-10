@@ -6,12 +6,13 @@ namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobGetResponse;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams;
-use Telnyx\PortingOrders\ActivationJobs\ActivationJobListResponse;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobRetrieveParams;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobUpdateParams;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobUpdateResponse;
+use Telnyx\PortingOrders\PortingOrdersActivationJob;
 use Telnyx\RequestOptions;
 
 interface ActivationJobsRawContract
@@ -54,7 +55,7 @@ interface ActivationJobsRawContract
      * @param string $id Porting Order id
      * @param array<mixed>|ActivationJobListParams $params
      *
-     * @return BaseResponse<ActivationJobListResponse>
+     * @return BaseResponse<DefaultPagination<PortingOrdersActivationJob>>
      *
      * @throws APIException
      */

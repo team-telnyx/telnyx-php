@@ -8,11 +8,12 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
+use Telnyx\DefaultPagination;
+use Telnyx\FaxApplications\FaxApplication;
 use Telnyx\FaxApplications\FaxApplicationCreateParams\Inbound\SipSubdomainReceiveSettings;
 use Telnyx\FaxApplications\FaxApplicationDeleteResponse;
 use Telnyx\FaxApplications\FaxApplicationGetResponse;
 use Telnyx\FaxApplications\FaxApplicationListParams\Sort;
-use Telnyx\FaxApplications\FaxApplicationListResponse;
 use Telnyx\FaxApplications\FaxApplicationNewResponse;
 use Telnyx\FaxApplications\FaxApplicationUpdateResponse;
 use Telnyx\RequestOptions;
@@ -187,6 +188,8 @@ final class FaxApplicationsService implements FaxApplicationsContract
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
+     * @return DefaultPagination<FaxApplication>
+     *
      * @throws APIException
      */
     public function list(
@@ -194,7 +197,7 @@ final class FaxApplicationsService implements FaxApplicationsContract
         ?array $page = null,
         string|Sort $sort = 'created_at',
         ?RequestOptions $requestOptions = null,
-    ): FaxApplicationListResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(
             ['filter' => $filter, 'page' => $page, 'sort' => $sort]
         );

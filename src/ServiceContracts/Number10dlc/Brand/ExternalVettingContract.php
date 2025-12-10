@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Number10dlc\Brand;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingImportResponse;
+use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingImportsResponse;
 use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingListResponseItem;
 use Telnyx\Number10dlc\Brand\ExternalVetting\ExternalVettingOrderResponse;
 use Telnyx\RequestOptions;
@@ -33,13 +33,13 @@ interface ExternalVettingContract
      *
      * @throws APIException
      */
-    public function import(
+    public function imports(
         string $brandID,
         string $evpID,
         string $vettingID,
         ?string $vettingToken = null,
         ?RequestOptions $requestOptions = null,
-    ): ExternalVettingImportResponse;
+    ): ExternalVettingImportsResponse;
 
     /**
      * @api

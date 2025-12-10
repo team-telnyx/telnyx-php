@@ -8,7 +8,9 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse;
+use Telnyx\PhoneNumbers\PhoneNumberDetailed;
 use Telnyx\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\PhoneNumbers\PhoneNumberListParams;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\NumberType\Eq;
@@ -17,7 +19,6 @@ use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\Status;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\VoiceUsagePaymentMethod;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\WithoutTags;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Sort;
-use Telnyx\PhoneNumbers\PhoneNumberListResponse;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListParams;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListResponse;
 use Telnyx\PhoneNumbers\PhoneNumberUpdateParams;
@@ -62,7 +63,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
      *
      * Update a phone number
      *
-     * @param string $id identifies the resource
+     * @param string $phoneNumberID identifies the resource
      * @param array{
      *   billingGroupID?: string,
      *   connectionID?: string,
@@ -77,7 +78,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
      * @throws APIException
      */
     public function update(
-        string $id,
+        string $phoneNumberID,
         array|PhoneNumberUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse {
@@ -89,7 +90,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
-            path: ['phone_numbers/%1$s', $id],
+            path: ['phone_numbers/%1$s', $phoneNumberID],
             body: (object) $parsed,
             options: $options,
             convert: PhoneNumberUpdateResponse::class,
@@ -125,7 +126,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
      *   sort?: 'purchased_at'|'phone_number'|'connection_name'|'usage_payment_method'|Sort,
      * }|PhoneNumberListParams $params
      *
-     * @return BaseResponse<PhoneNumberListResponse>
+     * @return BaseResponse<DefaultPagination<PhoneNumberDetailed>>
      *
      * @throws APIException
      */
@@ -144,7 +145,8 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
             path: 'phone_numbers',
             query: $parsed,
             options: $options,
-            convert: PhoneNumberListResponse::class,
+            convert: PhoneNumberDetailed::class,
+            page: DefaultPagination::class,
         );
     }
 
@@ -202,7 +204,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
      *   sort?: 'purchased_at'|'phone_number'|'connection_name'|'usage_payment_method'|PhoneNumberSlimListParams\Sort,
      * }|PhoneNumberSlimListParams $params
      *
-     * @return BaseResponse<PhoneNumberSlimListResponse>
+     * @return BaseResponse<DefaultPagination<PhoneNumberSlimListResponse>>
      *
      * @throws APIException
      */
@@ -228,6 +230,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
             ),
             options: $options,
             convert: PhoneNumberSlimListResponse::class,
+            page: DefaultPagination::class,
         );
     }
 }

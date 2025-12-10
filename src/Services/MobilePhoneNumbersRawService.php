@@ -8,9 +8,10 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumber;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberGetResponse;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberListParams;
-use Telnyx\MobilePhoneNumbers\MobilePhoneNumberListResponse;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallForwarding\ForwardingType;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallRecording\InboundCallRecordingChannels;
@@ -115,7 +116,7 @@ final class MobilePhoneNumbersRawService implements MobilePhoneNumbersRawContrac
      *   pageNumber?: int, pageSize?: int
      * }|MobilePhoneNumberListParams $params
      *
-     * @return BaseResponse<MobilePhoneNumberListResponse>
+     * @return BaseResponse<DefaultFlatPagination<MobilePhoneNumber>>
      *
      * @throws APIException
      */
@@ -137,7 +138,8 @@ final class MobilePhoneNumbersRawService implements MobilePhoneNumbersRawContrac
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: MobilePhoneNumberListResponse::class,
+            convert: MobilePhoneNumber::class,
+            page: DefaultFlatPagination::class,
         );
     }
 }

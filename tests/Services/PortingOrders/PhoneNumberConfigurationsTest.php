@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListResponse;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationNewResponse;
 use Tests\UnsupportedMockTests;
@@ -51,12 +52,17 @@ final class PhoneNumberConfigurationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->portingOrders->phoneNumberConfigurations->list();
+        $page = $this->client->portingOrders->phoneNumberConfigurations->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            PhoneNumberConfigurationListResponse::class,
-            $result
-        );
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(
+                PhoneNumberConfigurationListResponse::class,
+                $item
+            );
+        }
     }
 }

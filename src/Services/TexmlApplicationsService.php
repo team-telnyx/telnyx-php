@@ -9,15 +9,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\DtmfType;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TexmlApplicationsContract;
+use Telnyx\TexmlApplications\TexmlApplication;
 use Telnyx\TexmlApplications\TexmlApplicationCreateParams\Inbound\SipSubdomainReceiveSettings;
 use Telnyx\TexmlApplications\TexmlApplicationCreateParams\StatusCallbackMethod;
 use Telnyx\TexmlApplications\TexmlApplicationCreateParams\VoiceMethod;
 use Telnyx\TexmlApplications\TexmlApplicationDeleteResponse;
 use Telnyx\TexmlApplications\TexmlApplicationGetResponse;
 use Telnyx\TexmlApplications\TexmlApplicationListParams\Sort;
-use Telnyx\TexmlApplications\TexmlApplicationListResponse;
 use Telnyx\TexmlApplications\TexmlApplicationNewResponse;
 use Telnyx\TexmlApplications\TexmlApplicationUpdateResponse;
 
@@ -225,6 +226,8 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
+     * @return DefaultPagination<TexmlApplication>
+     *
      * @throws APIException
      */
     public function list(
@@ -232,7 +235,7 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
         ?array $page = null,
         string|Sort $sort = 'created_at',
         ?RequestOptions $requestOptions = null,
-    ): TexmlApplicationListResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(
             ['filter' => $filter, 'page' => $page, 'sort' => $sort]
         );

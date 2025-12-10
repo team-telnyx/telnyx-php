@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Portouts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\Portouts\Events\EventGetResponse;
 use Telnyx\Portouts\Events\EventListParams\Filter\EventType;
 use Telnyx\Portouts\Events\EventListResponse;
@@ -38,13 +39,15 @@ interface EventsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
+     * @return DefaultPagination<EventListResponse>
+     *
      * @throws APIException
      */
     public function list(
         ?array $filter = null,
         ?array $page = null,
         ?RequestOptions $requestOptions = null,
-    ): EventListResponse;
+    ): DefaultPagination;
 
     /**
      * @api

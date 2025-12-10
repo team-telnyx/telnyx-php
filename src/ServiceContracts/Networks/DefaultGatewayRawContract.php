@@ -17,7 +17,7 @@ interface DefaultGatewayRawContract
     /**
      * @api
      *
-     * @param string $id identifies the resource
+     * @param string $networkIdentifier identifies the resource
      * @param array<mixed>|DefaultGatewayCreateParams $params
      *
      * @return BaseResponse<DefaultGatewayNewResponse>
@@ -25,7 +25,7 @@ interface DefaultGatewayRawContract
      * @throws APIException
      */
     public function create(
-        string $id,
+        string $networkIdentifier,
         array|DefaultGatewayCreateParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse;

@@ -7,9 +7,10 @@ namespace Telnyx\Services\PhoneNumbers;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\Messaging\MessagingGetResponse;
-use Telnyx\PhoneNumbers\Messaging\MessagingListResponse;
 use Telnyx\PhoneNumbers\Messaging\MessagingUpdateResponse;
+use Telnyx\PhoneNumberWithMessagingSettings;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbers\MessagingContract;
 
@@ -93,12 +94,14 @@ final class MessagingService implements MessagingContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
+     * @return DefaultPagination<PhoneNumberWithMessagingSettings>
+     *
      * @throws APIException
      */
     public function list(
         ?array $page = null,
         ?RequestOptions $requestOptions = null
-    ): MessagingListResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(['page' => $page]);
 
         // @phpstan-ignore-next-line argument.type

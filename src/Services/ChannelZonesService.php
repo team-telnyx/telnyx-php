@@ -9,6 +9,7 @@ use Telnyx\ChannelZones\ChannelZoneUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ChannelZonesContract;
 
@@ -59,12 +60,14 @@ final class ChannelZonesService implements ChannelZonesContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
+     * @return DefaultPagination<ChannelZoneListResponse>
+     *
      * @throws APIException
      */
     public function list(
         ?array $page = null,
         ?RequestOptions $requestOptions = null
-    ): ChannelZoneListResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(['page' => $page]);
 
         // @phpstan-ignore-next-line argument.type

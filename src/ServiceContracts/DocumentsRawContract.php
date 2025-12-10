@@ -6,11 +6,12 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\Documents\DocServiceDocument;
 use Telnyx\Documents\DocumentDeleteResponse;
 use Telnyx\Documents\DocumentGenerateDownloadLinkResponse;
 use Telnyx\Documents\DocumentGetResponse;
 use Telnyx\Documents\DocumentListParams;
-use Telnyx\Documents\DocumentListResponse;
 use Telnyx\Documents\DocumentUpdateParams;
 use Telnyx\Documents\DocumentUpdateResponse;
 use Telnyx\Documents\DocumentUploadJsonParams;
@@ -38,7 +39,7 @@ interface DocumentsRawContract
     /**
      * @api
      *
-     * @param string $id identifies the resource
+     * @param string $documentID identifies the resource
      * @param array<mixed>|DocumentUpdateParams $params
      *
      * @return BaseResponse<DocumentUpdateResponse>
@@ -46,7 +47,7 @@ interface DocumentsRawContract
      * @throws APIException
      */
     public function update(
-        string $id,
+        string $documentID,
         array|DocumentUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse;
@@ -56,7 +57,7 @@ interface DocumentsRawContract
      *
      * @param array<mixed>|DocumentListParams $params
      *
-     * @return BaseResponse<DocumentListResponse>
+     * @return BaseResponse<DefaultPagination<DocServiceDocument>>
      *
      * @throws APIException
      */

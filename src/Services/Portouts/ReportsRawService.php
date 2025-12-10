@@ -7,13 +7,14 @@ namespace Telnyx\Services\Portouts;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\Portouts\Reports\ExportPortoutsCsvReport;
+use Telnyx\Portouts\Reports\PortoutReport;
 use Telnyx\Portouts\Reports\ReportCreateParams;
 use Telnyx\Portouts\Reports\ReportCreateParams\ReportType;
 use Telnyx\Portouts\Reports\ReportGetResponse;
 use Telnyx\Portouts\Reports\ReportListParams;
 use Telnyx\Portouts\Reports\ReportListParams\Filter\Status;
-use Telnyx\Portouts\Reports\ReportListResponse;
 use Telnyx\Portouts\Reports\ReportNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Portouts\ReportsRawContract;
@@ -105,7 +106,7 @@ final class ReportsRawService implements ReportsRawContract
      *   page?: array{number?: int, size?: int},
      * }|ReportListParams $params
      *
-     * @return BaseResponse<ReportListResponse>
+     * @return BaseResponse<DefaultPagination<PortoutReport>>
      *
      * @throws APIException
      */
@@ -124,7 +125,8 @@ final class ReportsRawService implements ReportsRawContract
             path: 'portouts/reports',
             query: $parsed,
             options: $options,
-            convert: ReportListResponse::class,
+            convert: PortoutReport::class,
+            page: DefaultPagination::class,
         );
     }
 }

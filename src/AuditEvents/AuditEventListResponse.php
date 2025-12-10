@@ -4,17 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\AuditEvents;
 
-use Telnyx\AuditEvents\AuditEventListResponse\Data;
-use Telnyx\AuditEvents\AuditEventListResponse\Data\Change;
-use Telnyx\AuditEvents\AuditEventListResponse\Data\ChangeMadeBy;
-use Telnyx\AuditEvents\AuditEventListResponse\Meta;
+use Telnyx\AuditEvents\AuditEventListResponse\Change;
+use Telnyx\AuditEvents\AuditEventListResponse\ChangeMadeBy;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type AuditEventListResponseShape = array{
- *   data?: list<Data>|null, meta?: Meta|null
+ *   id?: string|null,
+ *   alternateResourceID?: string|null,
+ *   changeMadeBy?: value-of<ChangeMadeBy>|null,
+ *   changeType?: string|null,
+ *   changes?: list<Change>|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   organizationID?: string|null,
+ *   recordType?: string|null,
+ *   resourceID?: string|null,
+ *   userID?: string|null,
  * }
  */
 final class AuditEventListResponse implements BaseModel
@@ -22,12 +29,69 @@ final class AuditEventListResponse implements BaseModel
     /** @use SdkModel<AuditEventListResponseShape> */
     use SdkModel;
 
-    /** @var list<Data>|null $data */
-    #[Optional(list: Data::class)]
-    public ?array $data;
-
+    /**
+     * Unique identifier for the audit log entry.
+     */
     #[Optional]
-    public ?Meta $meta;
+    public ?string $id;
+
+    /**
+     * An alternate identifier for a resource which may be considered unique enough to identify the resource but is not the primary identifier for the resource. For example, this field could be used to store the phone number value for a phone number when the primary database identifier is a separate distinct value.
+     */
+    #[Optional('alternate_resource_id', nullable: true)]
+    public ?string $alternateResourceID;
+
+    /**
+     * Indicates if the change was made by Telnyx on your behalf, the organization owner, a member of your organization, or in the case of managed accounts, the account manager.
+     *
+     * @var value-of<ChangeMadeBy>|null $changeMadeBy
+     */
+    #[Optional('change_made_by', enum: ChangeMadeBy::class)]
+    public ?string $changeMadeBy;
+
+    /**
+     * The type of change that occurred.
+     */
+    #[Optional('change_type')]
+    public ?string $changeType;
+
+    /**
+     * Details of the changes made to the resource.
+     *
+     * @var list<Change>|null $changes
+     */
+    #[Optional(list: Change::class, nullable: true)]
+    public ?array $changes;
+
+    /**
+     * ISO 8601 formatted date indicating when the change occurred.
+     */
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
+
+    /**
+     * Unique identifier for the organization that owns the resource.
+     */
+    #[Optional('organization_id')]
+    public ?string $organizationID;
+
+    /**
+     * The type of the resource being audited.
+     */
+    #[Optional('record_type')]
+    public ?string $recordType;
+
+    /**
+     * Unique identifier for the resource that was changed.
+     */
+    #[Optional('resource_id')]
+    public ?string $resourceID;
+
+    /**
+     * Unique identifier for the user who made the change.
+     */
+    #[Optional('user_id')]
+    public ?string $userID;
 
     public function __construct()
     {
@@ -39,71 +103,155 @@ final class AuditEventListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   id?: string|null,
-     *   alternateResourceID?: string|null,
-     *   changeMadeBy?: value-of<ChangeMadeBy>|null,
-     *   changeType?: string|null,
-     *   changes?: list<Change>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   organizationID?: string|null,
-     *   recordType?: string|null,
-     *   resourceID?: string|null,
-     *   userID?: string|null,
-     * }> $data
-     * @param Meta|array{
-     *   pageNumber?: int|null,
-     *   pageSize?: int|null,
-     *   totalPages?: int|null,
-     *   totalResults?: int|null,
-     * } $meta
+     * @param ChangeMadeBy|value-of<ChangeMadeBy> $changeMadeBy
+     * @param list<Change|array{
+     *   field?: string|null,
+     *   from?: string|float|bool|list<array<string,mixed>>|array<string,mixed>|null,
+     *   to?: string|float|bool|list<array<string,mixed>>|array<string,mixed>|null,
+     * }>|null $changes
      */
     public static function with(
-        ?array $data = null,
-        Meta|array|null $meta = null
+        ?string $id = null,
+        ?string $alternateResourceID = null,
+        ChangeMadeBy|string|null $changeMadeBy = null,
+        ?string $changeType = null,
+        ?array $changes = null,
+        ?\DateTimeInterface $createdAt = null,
+        ?string $organizationID = null,
+        ?string $recordType = null,
+        ?string $resourceID = null,
+        ?string $userID = null,
     ): self {
         $self = new self;
 
-        null !== $data && $self['data'] = $data;
-        null !== $meta && $self['meta'] = $meta;
+        null !== $id && $self['id'] = $id;
+        null !== $alternateResourceID && $self['alternateResourceID'] = $alternateResourceID;
+        null !== $changeMadeBy && $self['changeMadeBy'] = $changeMadeBy;
+        null !== $changeType && $self['changeType'] = $changeType;
+        null !== $changes && $self['changes'] = $changes;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $organizationID && $self['organizationID'] = $organizationID;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $resourceID && $self['resourceID'] = $resourceID;
+        null !== $userID && $self['userID'] = $userID;
 
         return $self;
     }
 
     /**
-     * @param list<Data|array{
-     *   id?: string|null,
-     *   alternateResourceID?: string|null,
-     *   changeMadeBy?: value-of<ChangeMadeBy>|null,
-     *   changeType?: string|null,
-     *   changes?: list<Change>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   organizationID?: string|null,
-     *   recordType?: string|null,
-     *   resourceID?: string|null,
-     *   userID?: string|null,
-     * }> $data
+     * Unique identifier for the audit log entry.
      */
-    public function withData(array $data): self
+    public function withID(string $id): self
     {
         $self = clone $this;
-        $self['data'] = $data;
+        $self['id'] = $id;
 
         return $self;
     }
 
     /**
-     * @param Meta|array{
-     *   pageNumber?: int|null,
-     *   pageSize?: int|null,
-     *   totalPages?: int|null,
-     *   totalResults?: int|null,
-     * } $meta
+     * An alternate identifier for a resource which may be considered unique enough to identify the resource but is not the primary identifier for the resource. For example, this field could be used to store the phone number value for a phone number when the primary database identifier is a separate distinct value.
      */
-    public function withMeta(Meta|array $meta): self
+    public function withAlternateResourceID(?string $alternateResourceID): self
     {
         $self = clone $this;
-        $self['meta'] = $meta;
+        $self['alternateResourceID'] = $alternateResourceID;
+
+        return $self;
+    }
+
+    /**
+     * Indicates if the change was made by Telnyx on your behalf, the organization owner, a member of your organization, or in the case of managed accounts, the account manager.
+     *
+     * @param ChangeMadeBy|value-of<ChangeMadeBy> $changeMadeBy
+     */
+    public function withChangeMadeBy(ChangeMadeBy|string $changeMadeBy): self
+    {
+        $self = clone $this;
+        $self['changeMadeBy'] = $changeMadeBy;
+
+        return $self;
+    }
+
+    /**
+     * The type of change that occurred.
+     */
+    public function withChangeType(string $changeType): self
+    {
+        $self = clone $this;
+        $self['changeType'] = $changeType;
+
+        return $self;
+    }
+
+    /**
+     * Details of the changes made to the resource.
+     *
+     * @param list<Change|array{
+     *   field?: string|null,
+     *   from?: string|float|bool|list<array<string,mixed>>|array<string,mixed>|null,
+     *   to?: string|float|bool|list<array<string,mixed>>|array<string,mixed>|null,
+     * }>|null $changes
+     */
+    public function withChanges(?array $changes): self
+    {
+        $self = clone $this;
+        $self['changes'] = $changes;
+
+        return $self;
+    }
+
+    /**
+     * ISO 8601 formatted date indicating when the change occurred.
+     */
+    public function withCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
+
+        return $self;
+    }
+
+    /**
+     * Unique identifier for the organization that owns the resource.
+     */
+    public function withOrganizationID(string $organizationID): self
+    {
+        $self = clone $this;
+        $self['organizationID'] = $organizationID;
+
+        return $self;
+    }
+
+    /**
+     * The type of the resource being audited.
+     */
+    public function withRecordType(string $recordType): self
+    {
+        $self = clone $this;
+        $self['recordType'] = $recordType;
+
+        return $self;
+    }
+
+    /**
+     * Unique identifier for the resource that was changed.
+     */
+    public function withResourceID(string $resourceID): self
+    {
+        $self = clone $this;
+        $self['resourceID'] = $resourceID;
+
+        return $self;
+    }
+
+    /**
+     * Unique identifier for the user who made the change.
+     */
+    public function withUserID(string $userID): self
+    {
+        $self = clone $this;
+        $self['userID'] = $userID;
 
         return $self;
     }

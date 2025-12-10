@@ -8,12 +8,13 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\Legacy\Reporting\UsageReports\Voice\CdrUsageReportResponseLegacy;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceCreateParams;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceDeleteResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceGetResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceListParams;
-use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceListResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceNewResponse;
+use Telnyx\PerPagePagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\UsageReports\VoiceRawContract;
 
@@ -93,7 +94,7 @@ final class VoiceRawService implements VoiceRawContract
      *
      * @param array{page?: int, perPage?: int}|VoiceListParams $params
      *
-     * @return BaseResponse<VoiceListResponse>
+     * @return BaseResponse<PerPagePagination<CdrUsageReportResponseLegacy>>
      *
      * @throws APIException
      */
@@ -112,7 +113,8 @@ final class VoiceRawService implements VoiceRawContract
             path: 'legacy/reporting/usage_reports/voice',
             query: Util::array_transform_keys($parsed, ['perPage' => 'per_page']),
             options: $options,
-            convert: VoiceListResponse::class,
+            convert: CdrUsageReportResponseLegacy::class,
+            page: PerPagePagination::class,
         );
     }
 

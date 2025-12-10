@@ -7,15 +7,16 @@ namespace Telnyx\Services\PhoneNumbers;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\Jobs\JobDeleteBatchResponse;
 use Telnyx\PhoneNumbers\Jobs\JobGetResponse;
 use Telnyx\PhoneNumbers\Jobs\JobListParams\Filter\Type;
 use Telnyx\PhoneNumbers\Jobs\JobListParams\Sort;
-use Telnyx\PhoneNumbers\Jobs\JobListResponse;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams\Filter\Status;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams\Filter\VoiceUsagePaymentMethod;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchResponse;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateEmergencySettingsBatchResponse;
+use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob;
 use Telnyx\PhoneNumbers\Voice\CallForwarding;
 use Telnyx\PhoneNumbers\Voice\CallForwarding\ForwardingType;
 use Telnyx\PhoneNumbers\Voice\CallRecording;
@@ -75,6 +76,8 @@ final class JobsService implements JobsContract
      * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param 'created_at'|Sort $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
      *
+     * @return DefaultPagination<PhoneNumbersJob>
+     *
      * @throws APIException
      */
     public function list(
@@ -82,7 +85,7 @@ final class JobsService implements JobsContract
         ?array $page = null,
         string|Sort|null $sort = null,
         ?RequestOptions $requestOptions = null,
-    ): JobListResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(
             ['filter' => $filter, 'page' => $page, 'sort' => $sort]
         );

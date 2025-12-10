@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\Networks\InterfaceStatus;
 use Telnyx\Networks\NetworkCreateParams;
 use Telnyx\Networks\NetworkDeleteResponse;
@@ -88,7 +89,7 @@ final class NetworksRawService implements NetworksRawContract
      *
      * Update a Network.
      *
-     * @param string $id identifies the resource
+     * @param string $networkID identifies the resource
      * @param array{name: string}|NetworkUpdateParams $params
      *
      * @return BaseResponse<NetworkUpdateResponse>
@@ -96,7 +97,7 @@ final class NetworksRawService implements NetworksRawContract
      * @throws APIException
      */
     public function update(
-        string $id,
+        string $networkID,
         array|NetworkUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse {
@@ -108,7 +109,7 @@ final class NetworksRawService implements NetworksRawContract
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
-            path: ['networks/%1$s', $id],
+            path: ['networks/%1$s', $networkID],
             body: (object) $parsed,
             options: $options,
             convert: NetworkUpdateResponse::class,
@@ -124,7 +125,7 @@ final class NetworksRawService implements NetworksRawContract
      *   filter?: array{name?: string}, page?: array{number?: int, size?: int}
      * }|NetworkListParams $params
      *
-     * @return BaseResponse<NetworkListResponse>
+     * @return BaseResponse<DefaultPagination<NetworkListResponse>>
      *
      * @throws APIException
      */
@@ -144,6 +145,7 @@ final class NetworksRawService implements NetworksRawContract
             query: $parsed,
             options: $options,
             convert: NetworkListResponse::class,
+            page: DefaultPagination::class,
         );
     }
 
@@ -186,7 +188,7 @@ final class NetworksRawService implements NetworksRawContract
      *   page?: array{number?: int, size?: int},
      * }|NetworkListInterfacesParams $params
      *
-     * @return BaseResponse<NetworkListInterfacesResponse>
+     * @return BaseResponse<DefaultPagination<NetworkListInterfacesResponse>>
      *
      * @throws APIException
      */
@@ -207,6 +209,7 @@ final class NetworksRawService implements NetworksRawContract
             query: $parsed,
             options: $options,
             convert: NetworkListInterfacesResponse::class,
+            page: DefaultPagination::class,
         );
     }
 }

@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Telnyx\NetworkCoverage;
 
-use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\NetworkCoverage\NetworkCoverageListResponse\Data;
-use Telnyx\NetworkCoverage\NetworkCoverageListResponse\Data\Location;
+use Telnyx\NetworkCoverage\NetworkCoverageListResponse\Location;
 
 /**
  * @phpstan-type NetworkCoverageListResponseShape = array{
- *   data?: list<Data>|null, meta?: PaginationMeta|null
+ *   availableServices?: list<value-of<AvailableService>>|null,
+ *   location?: Location|null,
+ *   recordType?: string|null,
  * }
  */
 final class NetworkCoverageListResponse implements BaseModel
@@ -21,12 +21,22 @@ final class NetworkCoverageListResponse implements BaseModel
     /** @use SdkModel<NetworkCoverageListResponseShape> */
     use SdkModel;
 
-    /** @var list<Data>|null $data */
-    #[Optional(list: Data::class)]
-    public ?array $data;
+    /**
+     * List of interface types supported in this region.
+     *
+     * @var list<value-of<AvailableService>>|null $availableServices
+     */
+    #[Optional('available_services', list: AvailableService::class)]
+    public ?array $availableServices;
 
     #[Optional]
-    public ?PaginationMeta $meta;
+    public ?Location $location;
+
+    /**
+     * Identifies the type of the resource.
+     */
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     public function __construct()
     {
@@ -38,57 +48,66 @@ final class NetworkCoverageListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   availableServices?: list<value-of<AvailableService>>|null,
-     *   location?: Location|null,
-     *   recordType?: string|null,
-     * }> $data
-     * @param PaginationMeta|array{
-     *   pageNumber?: int|null,
-     *   pageSize?: int|null,
-     *   totalPages?: int|null,
-     *   totalResults?: int|null,
-     * } $meta
+     * @param list<AvailableService|value-of<AvailableService>> $availableServices
+     * @param Location|array{
+     *   code?: string|null,
+     *   name?: string|null,
+     *   pop?: string|null,
+     *   region?: string|null,
+     *   site?: string|null,
+     * } $location
      */
     public static function with(
-        ?array $data = null,
-        PaginationMeta|array|null $meta = null
+        ?array $availableServices = null,
+        Location|array|null $location = null,
+        ?string $recordType = null,
     ): self {
         $self = new self;
 
-        null !== $data && $self['data'] = $data;
-        null !== $meta && $self['meta'] = $meta;
+        null !== $availableServices && $self['availableServices'] = $availableServices;
+        null !== $location && $self['location'] = $location;
+        null !== $recordType && $self['recordType'] = $recordType;
 
         return $self;
     }
 
     /**
-     * @param list<Data|array{
-     *   availableServices?: list<value-of<AvailableService>>|null,
-     *   location?: Location|null,
-     *   recordType?: string|null,
-     * }> $data
+     * List of interface types supported in this region.
+     *
+     * @param list<AvailableService|value-of<AvailableService>> $availableServices
      */
-    public function withData(array $data): self
+    public function withAvailableServices(array $availableServices): self
     {
         $self = clone $this;
-        $self['data'] = $data;
+        $self['availableServices'] = $availableServices;
 
         return $self;
     }
 
     /**
-     * @param PaginationMeta|array{
-     *   pageNumber?: int|null,
-     *   pageSize?: int|null,
-     *   totalPages?: int|null,
-     *   totalResults?: int|null,
-     * } $meta
+     * @param Location|array{
+     *   code?: string|null,
+     *   name?: string|null,
+     *   pop?: string|null,
+     *   region?: string|null,
+     *   site?: string|null,
+     * } $location
      */
-    public function withMeta(PaginationMeta|array $meta): self
+    public function withLocation(Location|array $location): self
     {
         $self = clone $this;
-        $self['meta'] = $meta;
+        $self['location'] = $location;
+
+        return $self;
+    }
+
+    /**
+     * Identifies the type of the resource.
+     */
+    public function withRecordType(string $recordType): self
+    {
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
         return $self;
     }

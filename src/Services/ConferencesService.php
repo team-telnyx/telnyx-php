@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Conferences\Conference;
 use Telnyx\Conferences\ConferenceCreateParams\BeepEnabled;
 use Telnyx\Conferences\ConferenceCreateParams\Region;
 use Telnyx\Conferences\ConferenceGetResponse;
@@ -12,10 +13,10 @@ use Telnyx\Conferences\ConferenceListParams\Filter\Product;
 use Telnyx\Conferences\ConferenceListParams\Filter\Status;
 use Telnyx\Conferences\ConferenceListParams\Filter\Type;
 use Telnyx\Conferences\ConferenceListParticipantsResponse;
-use Telnyx\Conferences\ConferenceListResponse;
 use Telnyx\Conferences\ConferenceNewResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ConferencesContract;
 use Telnyx\Services\Conferences\ActionsService;
@@ -158,6 +159,8 @@ final class ConferencesService implements ConferencesContract
      * } $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      * @param 'Australia'|'Europe'|'Middle East'|'US'|\Telnyx\Conferences\ConferenceListParams\Region $region Region where the conference data is located
      *
+     * @return DefaultPagination<Conference>
+     *
      * @throws APIException
      */
     public function list(
@@ -165,7 +168,7 @@ final class ConferencesService implements ConferencesContract
         ?array $page = null,
         string|\Telnyx\Conferences\ConferenceListParams\Region|null $region = null,
         ?RequestOptions $requestOptions = null,
-    ): ConferenceListResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(
             ['filter' => $filter, 'page' => $page, 'region' => $region]
         );
@@ -190,6 +193,8 @@ final class ConferencesService implements ConferencesContract
      * } $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      * @param 'Australia'|'Europe'|'Middle East'|'US'|\Telnyx\Conferences\ConferenceListParticipantsParams\Region $region Region where the conference data is located
      *
+     * @return DefaultPagination<ConferenceListParticipantsResponse>
+     *
      * @throws APIException
      */
     public function listParticipants(
@@ -198,7 +203,7 @@ final class ConferencesService implements ConferencesContract
         ?array $page = null,
         string|\Telnyx\Conferences\ConferenceListParticipantsParams\Region|null $region = null,
         ?RequestOptions $requestOptions = null,
-    ): ConferenceListParticipantsResponse {
+    ): DefaultPagination {
         $params = Util::removeNulls(
             ['filter' => $filter, 'page' => $page, 'region' => $region]
         );
