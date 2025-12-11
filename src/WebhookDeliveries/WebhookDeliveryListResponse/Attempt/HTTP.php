@@ -31,7 +31,7 @@ final class HTTP implements BaseModel
     /**
      * Response details, optional.
      */
-    #[Optional(nullable: true)]
+    #[Optional]
     public ?Response $response;
 
     public function __construct()
@@ -49,7 +49,7 @@ final class HTTP implements BaseModel
      * } $request
      * @param Response|array{
      *   body?: string|null, headers?: list<list<string>>|null, status?: int|null
-     * }|null $response
+     * } $response
      */
     public static function with(
         Request|array|null $request = null,
@@ -83,9 +83,9 @@ final class HTTP implements BaseModel
      *
      * @param Response|array{
      *   body?: string|null, headers?: list<list<string>>|null, status?: int|null
-     * }|null $response
+     * } $response
      */
-    public function withResponse(Response|array|null $response): self
+    public function withResponse(Response|array $response): self
     {
         $self = clone $this;
         $self['response'] = $response;
