@@ -10,13 +10,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type FunctionShape = array{
+ * @phpstan-type FunctionDefinitionShape = array{
  *   name: string, description?: string|null, parameters?: array<string,mixed>|null
  * }
  */
-final class Function_ implements BaseModel
+final class FunctionDefinition implements BaseModel
 {
-    /** @use SdkModel<FunctionShape> */
+    /** @use SdkModel<FunctionDefinitionShape> */
     use SdkModel;
 
     #[Required]
@@ -30,17 +30,17 @@ final class Function_ implements BaseModel
     public ?array $parameters;
 
     /**
-     * `new Function_()` is missing required properties by the API.
+     * `new FunctionDefinition()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Function_::with(name: ...)
+     * FunctionDefinition::with(name: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Function_)->withName(...)
+     * (new FunctionDefinition)->withName(...)
      * ```
      */
     public function __construct()

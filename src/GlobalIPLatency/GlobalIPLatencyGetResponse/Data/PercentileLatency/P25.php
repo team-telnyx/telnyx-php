@@ -9,21 +9,21 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type _0Shape = array{amount?: float|null, unit?: string|null}
+ * @phpstan-type P25Shape = array{amount?: float|null, unit?: string|null}
  */
-final class _0 implements BaseModel
+final class P25 implements BaseModel
 {
-    /** @use SdkModel<_0Shape> */
+    /** @use SdkModel<P25Shape> */
     use SdkModel;
 
     /**
-     * The minimum latency.
+     * The 25th percentile latency.
      */
     #[Optional]
     public ?float $amount;
 
     /**
-     * The unit of the minimum latency.
+     * The unit of the 25th percentile latency.
      */
     #[Optional]
     public ?string $unit;
@@ -49,7 +49,7 @@ final class _0 implements BaseModel
     }
 
     /**
-     * The minimum latency.
+     * The 25th percentile latency.
      */
     public function withAmount(float $amount): self
     {
@@ -60,7 +60,7 @@ final class _0 implements BaseModel
     }
 
     /**
-     * The unit of the minimum latency.
+     * The unit of the 25th percentile latency.
      */
     public function withUnit(string $unit): self
     {
