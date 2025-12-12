@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\List\ListGetAllResponse\Data;
+namespace Telnyx\List_\ListGetByZoneResponse\Data;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;

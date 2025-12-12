@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\List;
+namespace Telnyx\List_;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\List\ListGetAllResponse\Data;
-use Telnyx\List\ListGetAllResponse\Data\Number;
+use Telnyx\List_\ListGetAllResponse\Data;
+use Telnyx\List_\ListGetAllResponse\Data\Number;
 
 /**
  * @phpstan-type ListGetAllResponseShape = array{
