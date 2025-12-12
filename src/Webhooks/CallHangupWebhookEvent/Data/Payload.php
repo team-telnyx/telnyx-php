@@ -93,7 +93,7 @@ final class Payload implements BaseModel
     public ?string $from;
 
     /**
-     * The reason the call was ended (`call_rejected`, `normal_clearing`, `originator_cancel`, `timeout`, `time_limit`, `user_busy`, `not_found` or `unspecified`).
+     * The reason the call was ended (`call_rejected`, `normal_clearing`, `originator_cancel`, `timeout`, `time_limit`, `user_busy`, `not_found`, `no_answer` or `unspecified`).
      *
      * @var value-of<HangupCause>|null $hangupCause
      */
@@ -306,7 +306,7 @@ final class Payload implements BaseModel
     }
 
     /**
-     * The reason the call was ended (`call_rejected`, `normal_clearing`, `originator_cancel`, `timeout`, `time_limit`, `user_busy`, `not_found` or `unspecified`).
+     * The reason the call was ended (`call_rejected`, `normal_clearing`, `originator_cancel`, `timeout`, `time_limit`, `user_busy`, `not_found`, `no_answer` or `unspecified`).
      *
      * @param HangupCause|value-of<HangupCause> $hangupCause
      */

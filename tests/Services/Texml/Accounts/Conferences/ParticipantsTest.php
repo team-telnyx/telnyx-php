@@ -114,7 +114,7 @@ final class ParticipantsTest extends TestCase
             endConferenceOnExit: false,
             hold: true,
             holdMethod: 'POST',
-            holdURL: 'HoldUrl',
+            holdURL: 'https://www.example.com/hold-music.xml',
             muted: true,
             waitURL: 'https://www.example.com/wait_music.mp3',
         );

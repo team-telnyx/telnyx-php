@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\GlobalIP;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\MeanLatency;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\P0;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\P100;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\P25;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\P50;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\P75;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\P90;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\P99;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_0;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_100;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_25;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_50;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_75;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_90;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_99;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\ProberLocation;
 
 /**
@@ -64,13 +64,13 @@ final class Data implements BaseModel
      * @param GlobalIP|array{id?: string|null, ipAddress?: string|null} $globalIP
      * @param MeanLatency|array{amount?: float|null, unit?: string|null} $meanLatency
      * @param PercentileLatency|array{
-     *   p0?: P0|null,
-     *   p100?: P100|null,
-     *   p25?: P25|null,
-     *   p50?: P50|null,
-     *   p75?: P75|null,
-     *   p90?: P90|null,
-     *   p99?: P99|null,
+     *   p0?: _0|null,
+     *   p100?: _100|null,
+     *   p25?: _25|null,
+     *   p50?: _50|null,
+     *   p75?: _75|null,
+     *   p90?: _90|null,
+     *   p99?: _99|null,
      * } $percentileLatency
      * @param ProberLocation|array{
      *   id?: string|null, lat?: float|null, lon?: float|null, name?: string|null
@@ -118,13 +118,13 @@ final class Data implements BaseModel
 
     /**
      * @param PercentileLatency|array{
-     *   p0?: P0|null,
-     *   p100?: P100|null,
-     *   p25?: P25|null,
-     *   p50?: P50|null,
-     *   p75?: P75|null,
-     *   p90?: P90|null,
-     *   p99?: P99|null,
+     *   p0?: _0|null,
+     *   p100?: _100|null,
+     *   p25?: _25|null,
+     *   p50?: _50|null,
+     *   p75?: _75|null,
+     *   p90?: _90|null,
+     *   p99?: _99|null,
      * } $percentileLatency
      */
     public function withPercentileLatency(
