@@ -6,8 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\List\ListGetAllResponse;
-use Telnyx\List\ListGetByZoneResponse;
+use Telnyx\List_\ListGetAllResponse;
+use Telnyx\List_\ListGetByZoneResponse;
 use Tests\UnsupportedMockTests;
 
 /**

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\List\ListGetAllResponse;
-use Telnyx\List\ListGetByZoneResponse;
+use Telnyx\List_\ListGetAllResponse;
+use Telnyx\List_\ListGetByZoneResponse;
 use Telnyx\RequestOptions;
 
 interface ListContract

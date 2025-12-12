@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\List\ListGetAllResponse;
+namespace Telnyx\List_\ListGetByZoneResponse;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\List\ListGetAllResponse\Data\Number;
+use Telnyx\List_\ListGetByZoneResponse\Data\Number;
 
 /**
  * @phpstan-type DataShape = array{

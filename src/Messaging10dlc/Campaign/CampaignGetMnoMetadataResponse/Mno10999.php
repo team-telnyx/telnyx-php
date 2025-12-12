@@ -22,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   reqSubscriberOptout: bool,
  * }
  */
-final class mno_10999 implements BaseModel
+final class Mno10999 implements BaseModel
 {
     /** @use SdkModel<Mno10999Shape> */
     use SdkModel;
@@ -58,11 +58,11 @@ final class mno_10999 implements BaseModel
     public bool $reqSubscriberOptout;
 
     /**
-     * `new mno_10999()` is missing required properties by the API.
+     * `new Mno10999()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * mno_10999::with(
+     * Mno10999::with(
      *   minMsgSamples: ...,
      *   mno: ...,
      *   mnoReview: ...,
@@ -79,7 +79,7 @@ final class mno_10999 implements BaseModel
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new mno_10999)
+     * (new Mno10999)
      *   ->withMinMsgSamples(...)
      *   ->withMno(...)
      *   ->withMnoReview(...)

@@ -6,8 +6,8 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\List\ListGetAllResponse;
-use Telnyx\List\ListGetByZoneResponse;
+use Telnyx\List_\ListGetAllResponse;
+use Telnyx\List_\ListGetByZoneResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ListContract;
 
