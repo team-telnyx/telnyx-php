@@ -8,7 +8,6 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\DefaultPagination;
 use Telnyx\Portouts\Events\EventGetResponse;
-use Telnyx\Portouts\Events\EventListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -58,7 +57,7 @@ final class EventsTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(EventListResponse::class, $item);
+            $this->assertNotNull($item);
         }
     }
 

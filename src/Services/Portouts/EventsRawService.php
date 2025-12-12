@@ -12,6 +12,9 @@ use Telnyx\Portouts\Events\EventGetResponse;
 use Telnyx\Portouts\Events\EventListParams;
 use Telnyx\Portouts\Events\EventListParams\Filter\EventType;
 use Telnyx\Portouts\Events\EventListResponse;
+use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutFocDateChanged;
+use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutNewComment;
+use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutStatusChanged;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Portouts\EventsRawContract;
 
@@ -63,7 +66,7 @@ final class EventsRawService implements EventsRawContract
      *   page?: array{number?: int, size?: int},
      * }|EventListParams $params
      *
-     * @return BaseResponse<DefaultPagination<EventListResponse>>
+     * @return BaseResponse<DefaultPagination<WebhookPortoutStatusChanged|WebhookPortoutNewComment|WebhookPortoutFocDateChanged,>,>
      *
      * @throws APIException
      */

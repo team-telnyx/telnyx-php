@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Conversations\Messages\MessageListResponse\Data;
 
-use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall\Function1;
+use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall\CallFunction;
 use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall\Type;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ToolCallShape = array{
- *   id: string, function: Function1, type: value-of<Type>
+ *   id: string, function: CallFunction, type: value-of<Type>
  * }
  */
 final class ToolCall implements BaseModel
@@ -27,7 +27,7 @@ final class ToolCall implements BaseModel
     public string $id;
 
     #[Required]
-    public Function1 $function;
+    public CallFunction $function;
 
     /**
      * Type of the tool call.
@@ -61,12 +61,12 @@ final class ToolCall implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Function1|array{arguments: string, name: string} $function
+     * @param CallFunction|array{arguments: string, name: string} $function
      * @param Type|value-of<Type> $type
      */
     public static function with(
         string $id,
-        Function1|array $function,
+        CallFunction|array $function,
         Type|string $type
     ): self {
         $self = new self;
@@ -90,9 +90,9 @@ final class ToolCall implements BaseModel
     }
 
     /**
-     * @param Function1|array{arguments: string, name: string} $function
+     * @param CallFunction|array{arguments: string, name: string} $function
      */
-    public function withFunction(Function1|array $function): self
+    public function withFunction(CallFunction|array $function): self
     {
         $self = clone $this;
         $self['function'] = $function;
