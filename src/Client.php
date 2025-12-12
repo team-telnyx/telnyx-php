@@ -20,14 +20,11 @@ use Telnyx\Services\AvailablePhoneNumberBlocksService;
 use Telnyx\Services\AvailablePhoneNumbersService;
 use Telnyx\Services\BalanceService;
 use Telnyx\Services\BillingGroupsService;
-use Telnyx\Services\BrandService;
 use Telnyx\Services\BulkSimCardActionsService;
 use Telnyx\Services\BundlePricingService;
 use Telnyx\Services\CallControlApplicationsService;
 use Telnyx\Services\CallEventsService;
 use Telnyx\Services\CallsService;
-use Telnyx\Services\CampaignBuilderService;
-use Telnyx\Services\CampaignService;
 use Telnyx\Services\ChannelZonesService;
 use Telnyx\Services\ChargesBreakdownService;
 use Telnyx\Services\ChargesSummaryService;
@@ -44,7 +41,6 @@ use Telnyx\Services\DocumentLinksService;
 use Telnyx\Services\DocumentsService;
 use Telnyx\Services\DynamicEmergencyAddressesService;
 use Telnyx\Services\DynamicEmergencyEndpointsService;
-use Telnyx\Services\EnumService;
 use Telnyx\Services\ExternalConnectionsService;
 use Telnyx\Services\FaxApplicationsService;
 use Telnyx\Services\FaxesService;
@@ -73,6 +69,7 @@ use Telnyx\Services\ListService;
 use Telnyx\Services\ManagedAccountsService;
 use Telnyx\Services\MediaService;
 use Telnyx\Services\MessagesService;
+use Telnyx\Services\Messaging10dlcService;
 use Telnyx\Services\MessagingHostedNumberOrdersService;
 use Telnyx\Services\MessagingHostedNumbersService;
 use Telnyx\Services\MessagingNumbersBulkUpdatesService;
@@ -93,7 +90,6 @@ use Telnyx\Services\NotificationEventConditionsService;
 use Telnyx\Services\NotificationEventsService;
 use Telnyx\Services\NotificationProfilesService;
 use Telnyx\Services\NotificationSettingsService;
-use Telnyx\Services\Number10dlcService;
 use Telnyx\Services\NumberBlockOrdersService;
 use Telnyx\Services\NumberLookupService;
 use Telnyx\Services\NumberOrderPhoneNumbersService;
@@ -106,12 +102,8 @@ use Telnyx\Services\OAuthService;
 use Telnyx\Services\OperatorConnectService;
 use Telnyx\Services\OtaUpdatesService;
 use Telnyx\Services\OutboundVoiceProfilesService;
-use Telnyx\Services\PartnerCampaignService;
-use Telnyx\Services\PartnerCampaignsService;
 use Telnyx\Services\PaymentService;
-use Telnyx\Services\PhoneNumberAssignmentByProfileService;
 use Telnyx\Services\PhoneNumberBlocksService;
-use Telnyx\Services\PhoneNumberCampaignsService;
 use Telnyx\Services\PhoneNumbersRegulatoryRequirementsService;
 use Telnyx\Services\PhoneNumbersService;
 use Telnyx\Services\PortabilityChecksService;
@@ -642,11 +634,6 @@ class Client extends BaseClient
     /**
      * @api
      */
-    public PhoneNumberAssignmentByProfileService $phoneNumberAssignmentByProfile;
-
-    /**
-     * @api
-     */
     public PhoneNumberBlocksService $phoneNumberBlocks;
 
     /**
@@ -912,11 +899,6 @@ class Client extends BaseClient
     /**
      * @api
      */
-    public PartnerCampaignsService $partnerCampaigns;
-
-    /**
-     * @api
-     */
     public WellKnownService $wellKnown;
 
     /**
@@ -937,37 +919,7 @@ class Client extends BaseClient
     /**
      * @api
      */
-    public Number10dlcService $number10dlc;
-
-    /**
-     * @api
-     */
-    public BrandService $brand;
-
-    /**
-     * @api
-     */
-    public CampaignService $campaign;
-
-    /**
-     * @api
-     */
-    public CampaignBuilderService $campaignBuilder;
-
-    /**
-     * @api
-     */
-    public EnumService $enum;
-
-    /**
-     * @api
-     */
-    public PartnerCampaignService $partnerCampaign;
-
-    /**
-     * @api
-     */
-    public PhoneNumberCampaignsService $phoneNumberCampaigns;
+    public Messaging10dlcService $messaging10dlc;
 
     public function __construct(
         ?string $apiKey = null,
@@ -1100,7 +1052,6 @@ class Client extends BaseClient
         $this->otaUpdates = new OtaUpdatesService($this);
         $this->outboundVoiceProfiles = new OutboundVoiceProfilesService($this);
         $this->payment = new PaymentService($this);
-        $this->phoneNumberAssignmentByProfile = new PhoneNumberAssignmentByProfileService($this);
         $this->phoneNumberBlocks = new PhoneNumberBlocksService($this);
         $this->phoneNumbers = new PhoneNumbersService($this);
         $this->phoneNumbersRegulatoryRequirements = new PhoneNumbersRegulatoryRequirementsService($this);
@@ -1154,18 +1105,11 @@ class Client extends BaseClient
         $this->wireless = new WirelessService($this);
         $this->wirelessBlocklistValues = new WirelessBlocklistValuesService($this);
         $this->wirelessBlocklists = new WirelessBlocklistsService($this);
-        $this->partnerCampaigns = new PartnerCampaignsService($this);
         $this->wellKnown = new WellKnownService($this);
         $this->inexplicitNumberOrders = new InexplicitNumberOrdersService($this);
         $this->mobilePhoneNumbers = new MobilePhoneNumbersService($this);
         $this->mobileVoiceConnections = new MobileVoiceConnectionsService($this);
-        $this->number10dlc = new Number10dlcService($this);
-        $this->brand = new BrandService($this);
-        $this->campaign = new CampaignService($this);
-        $this->campaignBuilder = new CampaignBuilderService($this);
-        $this->enum = new EnumService($this);
-        $this->partnerCampaign = new PartnerCampaignService($this);
-        $this->phoneNumberCampaigns = new PhoneNumberCampaignsService($this);
+        $this->messaging10dlc = new Messaging10dlcService($this);
     }
 
     /** @return array<string,string> */
