@@ -15,22 +15,10 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ## Installation
 
-To use this package, install via Composer by adding the following to your application's `composer.json`:
-
 <!-- x-release-please-start-version -->
 
-```json
-{
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "git@github.com:team-telnyx/telnyx-php.git"
-    }
-  ],
-  "require": {
-    "telnyx/telnyx-php": "dev-main"
-  }
-}
+```
+composer require "telnyx/telnyx-php 0.0.1"
 ```
 
 <!-- x-release-please-end -->

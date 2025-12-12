@@ -8,7 +8,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\Portouts\Events\EventGetResponse;
 use Telnyx\Portouts\Events\EventListParams\Filter\EventType;
-use Telnyx\Portouts\Events\EventListResponse;
+use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutFocDateChanged;
+use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutNewComment;
+use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutStatusChanged;
 use Telnyx\RequestOptions;
 
 interface EventsContract
@@ -39,7 +41,7 @@ interface EventsContract
      *   number?: int, size?: int
      * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return DefaultPagination<EventListResponse>
+     * @return DefaultPagination<WebhookPortoutStatusChanged|WebhookPortoutNewComment|WebhookPortoutFocDateChanged,>
      *
      * @throws APIException
      */
