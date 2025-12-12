@@ -21,7 +21,6 @@ final class UnwrapWebhookEvent implements ConverterSource
             CallAIGatherEndedWebhookEvent::class,
             CallAIGatherMessageHistoryUpdatedWebhookEvent::class,
             CallAIGatherPartialResultsWebhookEvent::class,
-            CustomerServiceRecordStatusChangedWebhookEvent::class,
             CallAnsweredWebhookEvent::class,
             CallBridgedWebhookEvent::class,
             CallConversationEndedWebhookEvent::class,

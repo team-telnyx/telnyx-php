@@ -9,21 +9,21 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type P75Shape = array{amount?: float|null, unit?: string|null}
+ * @phpstan-type _90Shape = array{amount?: float|null, unit?: string|null}
  */
-final class P75 implements BaseModel
+final class _90 implements BaseModel
 {
-    /** @use SdkModel<P75Shape> */
+    /** @use SdkModel<_90Shape> */
     use SdkModel;
 
     /**
-     * The 75th percentile latency.
+     * The 90th percentile latency.
      */
     #[Optional]
     public ?float $amount;
 
     /**
-     * The unit of the 75th percentile latency.
+     * The unit of the 90th percentile latency.
      */
     #[Optional]
     public ?string $unit;
@@ -49,7 +49,7 @@ final class P75 implements BaseModel
     }
 
     /**
-     * The 75th percentile latency.
+     * The 90th percentile latency.
      */
     public function withAmount(float $amount): self
     {
@@ -60,7 +60,7 @@ final class P75 implements BaseModel
     }
 
     /**
-     * The unit of the 75th percentile latency.
+     * The unit of the 90th percentile latency.
      */
     public function withUnit(string $unit): self
     {
