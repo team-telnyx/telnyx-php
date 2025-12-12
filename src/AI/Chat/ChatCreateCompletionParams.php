@@ -12,7 +12,7 @@ use Telnyx\AI\Chat\ChatCreateCompletionParams\ResponseFormat;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\ResponseFormat\Type;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam;
-use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam\Function_;
+use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam\FunctionDefinition;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\Retrieval;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\ToolChoice;
 use Telnyx\Core\Attributes\Optional;
@@ -49,7 +49,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   temperature?: float,
  *   toolChoice?: ToolChoice|value-of<ToolChoice>,
  *   tools?: list<ChatCompletionToolParam|array{
- *     function: Function_, type?: 'function'
+ *     function: FunctionDefinition, type?: 'function'
  *   }|Retrieval|array{
  *     retrieval: InferenceEmbeddingBucketIDs, type?: 'retrieval'
  *   }>,
@@ -240,7 +240,7 @@ final class ChatCreateCompletionParams implements BaseModel
      * @param ResponseFormat|array{type: value-of<Type>} $responseFormat
      * @param ToolChoice|value-of<ToolChoice> $toolChoice
      * @param list<ChatCompletionToolParam|array{
-     *   function: Function_, type?: 'function'
+     *   function: FunctionDefinition, type?: 'function'
      * }|Retrieval|array{
      *   retrieval: InferenceEmbeddingBucketIDs, type?: 'retrieval'
      * }> $tools
@@ -524,7 +524,7 @@ final class ChatCreateCompletionParams implements BaseModel
      * The `function` tool type follows the same schema as the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat). The `retrieval` tool type is unique to Telnyx. You may pass a list of [embedded storage buckets](https://developers.telnyx.com/api/inference/inference-embedding/post-embedding) for retrieval-augmented generation.
      *
      * @param list<ChatCompletionToolParam|array{
-     *   function: Function_, type?: 'function'
+     *   function: FunctionDefinition, type?: 'function'
      * }|Retrieval|array{
      *   retrieval: InferenceEmbeddingBucketIDs, type?: 'retrieval'
      * }> $tools

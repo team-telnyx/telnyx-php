@@ -6,7 +6,7 @@ namespace Telnyx\AI\Conversations\Messages\MessageListResponse;
 
 use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\Role;
 use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall;
-use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall\Function_;
+use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall\CallFunction;
 use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall\Type;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -87,7 +87,7 @@ final class Data implements BaseModel
      *
      * @param Role|value-of<Role> $role
      * @param list<ToolCall|array{
-     *   id: string, function: Function_, type: value-of<Type>
+     *   id: string, function: CallFunction, type: value-of<Type>
      * }> $toolCalls
      */
     public static function with(
@@ -159,7 +159,7 @@ final class Data implements BaseModel
      * Optional tool calls made by the assistant.
      *
      * @param list<ToolCall|array{
-     *   id: string, function: Function_, type: value-of<Type>
+     *   id: string, function: CallFunction, type: value-of<Type>
      * }> $toolCalls
      */
     public function withToolCalls(array $toolCalls): self

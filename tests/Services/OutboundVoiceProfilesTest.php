@@ -66,8 +66,8 @@ final class OutboundVoiceProfilesTest extends TestCase
             ],
             callingWindow: [
                 'callsPerCld' => 5,
-                'endTime' => '18:11:19.117Z',
-                'startTime' => '18:11:19.117Z',
+                'endTime' => '20:00:00.00Z',
+                'startTime' => '08:00:00.00Z',
             ],
             concurrentCallLimit: 10,
             dailySpendLimit: '100.00',
@@ -135,8 +135,8 @@ final class OutboundVoiceProfilesTest extends TestCase
             ],
             callingWindow: [
                 'callsPerCld' => 5,
-                'endTime' => '18:11:19.117Z',
-                'startTime' => '18:11:19.117Z',
+                'endTime' => '20:00:00.00Z',
+                'startTime' => '08:00:00.00Z',
             ],
             concurrentCallLimit: 10,
             dailySpendLimit: '100.00',
