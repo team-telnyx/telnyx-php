@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Chat\ChatCreateCompletionParams\Tool;
 
-use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam\FunctionDefinition;
+use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam\Function1;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ChatCompletionToolParamShape = array{
- *   function: FunctionDefinition, type?: 'function'
+ *   function: Function1, type?: 'function'
  * }
  */
 final class ChatCompletionToolParam implements BaseModel
@@ -24,7 +24,7 @@ final class ChatCompletionToolParam implements BaseModel
     public string $type = 'function';
 
     #[Required]
-    public FunctionDefinition $function;
+    public Function1 $function;
 
     /**
      * `new ChatCompletionToolParam()` is missing required properties by the API.
@@ -50,11 +50,11 @@ final class ChatCompletionToolParam implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FunctionDefinition|array{
+     * @param Function1|array{
      *   name: string, description?: string|null, parameters?: array<string,mixed>|null
      * } $function
      */
-    public static function with(FunctionDefinition|array $function): self
+    public static function with(Function1|array $function): self
     {
         $self = new self;
 
@@ -64,11 +64,11 @@ final class ChatCompletionToolParam implements BaseModel
     }
 
     /**
-     * @param FunctionDefinition|array{
+     * @param Function1|array{
      *   name: string, description?: string|null, parameters?: array<string,mixed>|null
      * } $function
      */
-    public function withFunction(FunctionDefinition|array $function): self
+    public function withFunction(Function1|array $function): self
     {
         $self = clone $this;
         $self['function'] = $function;

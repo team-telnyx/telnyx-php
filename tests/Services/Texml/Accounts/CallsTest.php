@@ -113,7 +113,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->calls(
             'account_sid',
-            applicationSid: 'ApplicationSid',
+            applicationSid: 'example-app-sid',
             from: '+13120001234',
             to: '+13121230000',
         );
@@ -131,7 +131,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->calls(
             'account_sid',
-            applicationSid: 'ApplicationSid',
+            applicationSid: 'example-app-sid',
             from: '+13120001234',
             to: '+13121230000',
             asyncAmd: true,

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload;
 
 /**
- * The reason the call was ended (`call_rejected`, `normal_clearing`, `originator_cancel`, `timeout`, `time_limit`, `user_busy`, `not_found` or `unspecified`).
+ * The reason the call was ended (`call_rejected`, `normal_clearing`, `originator_cancel`, `timeout`, `time_limit`, `user_busy`, `not_found`, `no_answer` or `unspecified`).
  */
 enum HangupCause: string
 {
@@ -22,6 +22,8 @@ enum HangupCause: string
     case USER_BUSY = 'user_busy';
 
     case NOT_FOUND = 'not_found';
+
+    case NO_ANSWER = 'no_answer';
 
     case UNSPECIFIED = 'unspecified';
 }

@@ -7,23 +7,23 @@ namespace Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\P0;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\P100;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\P25;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\P50;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\P75;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\P90;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\P99;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_0;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_100;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_25;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_50;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_75;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_90;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_99;
 
 /**
  * @phpstan-type PercentileLatencyShape = array{
- *   p0?: P0|null,
- *   p100?: P100|null,
- *   p25?: P25|null,
- *   p50?: P50|null,
- *   p75?: P75|null,
- *   p90?: P90|null,
- *   p99?: P99|null,
+ *   p0?: _0|null,
+ *   p100?: _100|null,
+ *   p25?: _25|null,
+ *   p50?: _50|null,
+ *   p75?: _75|null,
+ *   p90?: _90|null,
+ *   p99?: _99|null,
  * }
  */
 final class PercentileLatency implements BaseModel
@@ -32,25 +32,25 @@ final class PercentileLatency implements BaseModel
     use SdkModel;
 
     #[Optional('0')]
-    public ?P0 $p0;
+    public ?_0 $p0;
 
     #[Optional('100')]
-    public ?P100 $p100;
+    public ?_100 $p100;
 
     #[Optional('25')]
-    public ?P25 $p25;
+    public ?_25 $p25;
 
     #[Optional('50')]
-    public ?P50 $p50;
+    public ?_50 $p50;
 
     #[Optional('75')]
-    public ?P75 $p75;
+    public ?_75 $p75;
 
     #[Optional('90')]
-    public ?P90 $p90;
+    public ?_90 $p90;
 
     #[Optional('99')]
-    public ?P99 $p99;
+    public ?_99 $p99;
 
     public function __construct()
     {
@@ -62,22 +62,22 @@ final class PercentileLatency implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param P0|array{amount?: float|null, unit?: string|null} $p0
-     * @param P100|array{amount?: float|null, unit?: string|null} $p100
-     * @param P25|array{amount?: float|null, unit?: string|null} $p25
-     * @param P50|array{amount?: float|null, unit?: string|null} $p50
-     * @param P75|array{amount?: float|null, unit?: string|null} $p75
-     * @param P90|array{amount?: float|null, unit?: string|null} $p90
-     * @param P99|array{amount?: float|null, unit?: string|null} $p99
+     * @param _0|array{amount?: float|null, unit?: string|null} $p0
+     * @param _100|array{amount?: float|null, unit?: string|null} $p100
+     * @param _25|array{amount?: float|null, unit?: string|null} $p25
+     * @param _50|array{amount?: float|null, unit?: string|null} $p50
+     * @param _75|array{amount?: float|null, unit?: string|null} $p75
+     * @param _90|array{amount?: float|null, unit?: string|null} $p90
+     * @param _99|array{amount?: float|null, unit?: string|null} $p99
      */
     public static function with(
-        P0|array|null $p0 = null,
-        P100|array|null $p100 = null,
-        P25|array|null $p25 = null,
-        P50|array|null $p50 = null,
-        P75|array|null $p75 = null,
-        P90|array|null $p90 = null,
-        P99|array|null $p99 = null,
+        _0|array|null $p0 = null,
+        _100|array|null $p100 = null,
+        _25|array|null $p25 = null,
+        _50|array|null $p50 = null,
+        _75|array|null $p75 = null,
+        _90|array|null $p90 = null,
+        _99|array|null $p99 = null,
     ): self {
         $self = new self;
 
@@ -93,9 +93,9 @@ final class PercentileLatency implements BaseModel
     }
 
     /**
-     * @param P0|array{amount?: float|null, unit?: string|null} $p0
+     * @param _0|array{amount?: float|null, unit?: string|null} $p0
      */
-    public function withP0(P0|array $p0): self
+    public function withP0(_0|array $p0): self
     {
         $self = clone $this;
         $self['p0'] = $p0;
@@ -104,9 +104,9 @@ final class PercentileLatency implements BaseModel
     }
 
     /**
-     * @param P100|array{amount?: float|null, unit?: string|null} $p100
+     * @param _100|array{amount?: float|null, unit?: string|null} $p100
      */
-    public function withP100(P100|array $p100): self
+    public function withP100(_100|array $p100): self
     {
         $self = clone $this;
         $self['p100'] = $p100;
@@ -115,9 +115,9 @@ final class PercentileLatency implements BaseModel
     }
 
     /**
-     * @param P25|array{amount?: float|null, unit?: string|null} $p25
+     * @param _25|array{amount?: float|null, unit?: string|null} $p25
      */
-    public function withP25(P25|array $p25): self
+    public function withP25(_25|array $p25): self
     {
         $self = clone $this;
         $self['p25'] = $p25;
@@ -126,9 +126,9 @@ final class PercentileLatency implements BaseModel
     }
 
     /**
-     * @param P50|array{amount?: float|null, unit?: string|null} $p50
+     * @param _50|array{amount?: float|null, unit?: string|null} $p50
      */
-    public function withP50(P50|array $p50): self
+    public function withP50(_50|array $p50): self
     {
         $self = clone $this;
         $self['p50'] = $p50;
@@ -137,9 +137,9 @@ final class PercentileLatency implements BaseModel
     }
 
     /**
-     * @param P75|array{amount?: float|null, unit?: string|null} $p75
+     * @param _75|array{amount?: float|null, unit?: string|null} $p75
      */
-    public function withP75(P75|array $p75): self
+    public function withP75(_75|array $p75): self
     {
         $self = clone $this;
         $self['p75'] = $p75;
@@ -148,9 +148,9 @@ final class PercentileLatency implements BaseModel
     }
 
     /**
-     * @param P90|array{amount?: float|null, unit?: string|null} $p90
+     * @param _90|array{amount?: float|null, unit?: string|null} $p90
      */
-    public function withP90(P90|array $p90): self
+    public function withP90(_90|array $p90): self
     {
         $self = clone $this;
         $self['p90'] = $p90;
@@ -159,9 +159,9 @@ final class PercentileLatency implements BaseModel
     }
 
     /**
-     * @param P99|array{amount?: float|null, unit?: string|null} $p99
+     * @param _99|array{amount?: float|null, unit?: string|null} $p99
      */
-    public function withP99(P99|array $p99): self
+    public function withP99(_99|array $p99): self
     {
         $self = clone $this;
         $self['p99'] = $p99;

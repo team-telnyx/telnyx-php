@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Queues\Calls;
 
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -22,6 +23,7 @@ use Telnyx\Queues\Calls\CallListResponse\RecordType;
  *   recordType: value-of<RecordType>,
  *   to: string,
  *   waitTimeSecs: int,
+ *   isAlive?: bool|null,
  * }
  */
 final class CallListResponse implements BaseModel
@@ -94,6 +96,12 @@ final class CallListResponse implements BaseModel
     public int $waitTimeSecs;
 
     /**
+     * Indicates whether the call is still active in the queue.
+     */
+    #[Optional('is_alive')]
+    public ?bool $isAlive;
+
+    /**
      * `new CallListResponse()` is missing required properties by the API.
      *
      * To enforce required parameters use
@@ -154,6 +162,7 @@ final class CallListResponse implements BaseModel
         RecordType|string $recordType,
         string $to,
         int $waitTimeSecs,
+        ?bool $isAlive = null,
     ): self {
         $self = new self;
 
@@ -168,6 +177,8 @@ final class CallListResponse implements BaseModel
         $self['recordType'] = $recordType;
         $self['to'] = $to;
         $self['waitTimeSecs'] = $waitTimeSecs;
+
+        null !== $isAlive && $self['isAlive'] = $isAlive;
 
         return $self;
     }
@@ -289,6 +300,17 @@ final class CallListResponse implements BaseModel
     {
         $self = clone $this;
         $self['waitTimeSecs'] = $waitTimeSecs;
+
+        return $self;
+    }
+
+    /**
+     * Indicates whether the call is still active in the queue.
+     */
+    public function withIsAlive(bool $isAlive): self
+    {
+        $self = clone $this;
+        $self['isAlive'] = $isAlive;
 
         return $self;
     }

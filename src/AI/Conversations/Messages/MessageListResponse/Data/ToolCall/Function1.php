@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type CallFunctionShape = array{arguments: string, name: string}
+ * @phpstan-type Function1Shape = array{arguments: string, name: string}
  */
-final class CallFunction implements BaseModel
+final class Function1 implements BaseModel
 {
-    /** @use SdkModel<CallFunctionShape> */
+    /** @use SdkModel<Function1Shape> */
     use SdkModel;
 
     /**
@@ -29,17 +29,17 @@ final class CallFunction implements BaseModel
     public string $name;
 
     /**
-     * `new CallFunction()` is missing required properties by the API.
+     * `new Function1()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * CallFunction::with(arguments: ..., name: ...)
+     * Function1::with(arguments: ..., name: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new CallFunction)->withArguments(...)->withName(...)
+     * (new Function1)->withArguments(...)->withName(...)
      * ```
      */
     public function __construct()

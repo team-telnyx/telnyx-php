@@ -43,6 +43,7 @@ final class CallGetResponse implements BaseModel
      *   recordType: value-of<RecordType>,
      *   to: string,
      *   waitTimeSecs: int,
+     *   isAlive?: bool|null,
      * } $data
      */
     public static function with(Data|array|null $data = null): self
@@ -67,6 +68,7 @@ final class CallGetResponse implements BaseModel
      *   recordType: value-of<RecordType>,
      *   to: string,
      *   waitTimeSecs: int,
+     *   isAlive?: bool|null,
      * } $data
      */
     public function withData(Data|array $data): self
