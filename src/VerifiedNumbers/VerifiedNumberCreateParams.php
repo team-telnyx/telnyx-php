@@ -19,7 +19,7 @@ use Telnyx\VerifiedNumbers\VerifiedNumberCreateParams\VerificationMethod;
  * @phpstan-type VerifiedNumberCreateParamsShape = array{
  *   phoneNumber: string,
  *   verificationMethod: VerificationMethod|value-of<VerificationMethod>,
- *   extension?: string|null,
+ *   extension?: string,
  * }
  */
 final class VerifiedNumberCreateParams implements BaseModel
@@ -42,7 +42,7 @@ final class VerifiedNumberCreateParams implements BaseModel
     /**
      * Optional DTMF extension sequence to dial after the call is answered. This parameter enables verification of phone numbers behind IVR systems that require extension dialing. Valid characters: digits 0-9, letters A-D, symbols * and #. Pauses: w = 0.5 second pause, W = 1 second pause. Maximum length: 50 characters. Only works with 'call' verification method.
      */
-    #[Optional(nullable: true)]
+    #[Optional]
     public ?string $extension;
 
     /**
@@ -113,7 +113,7 @@ final class VerifiedNumberCreateParams implements BaseModel
     /**
      * Optional DTMF extension sequence to dial after the call is answered. This parameter enables verification of phone numbers behind IVR systems that require extension dialing. Valid characters: digits 0-9, letters A-D, symbols * and #. Pauses: w = 0.5 second pause, W = 1 second pause. Maximum length: 50 characters. Only works with 'call' verification method.
      */
-    public function withExtension(?string $extension): self
+    public function withExtension(string $extension): self
     {
         $self = clone $this;
         $self['extension'] = $extension;

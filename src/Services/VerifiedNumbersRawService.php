@@ -34,7 +34,7 @@ final class VerifiedNumbersRawService implements VerifiedNumbersRawContract
      * @param array{
      *   phoneNumber: string,
      *   verificationMethod: 'sms'|'call'|VerificationMethod,
-     *   extension?: string|null,
+     *   extension?: string,
      * }|VerifiedNumberCreateParams $params
      *
      * @return BaseResponse<VerifiedNumberNewResponse>

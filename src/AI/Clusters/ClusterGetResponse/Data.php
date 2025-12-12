@@ -8,7 +8,7 @@ use Telnyx\AI\Clusters\RecursiveCluster;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Messaging10dlc\PhoneNumberAssignmentByProfile\TaskStatus;
+use Telnyx\PhoneNumberAssignmentByProfile\TaskStatus;
 
 /**
  * @phpstan-type DataShape = array{
