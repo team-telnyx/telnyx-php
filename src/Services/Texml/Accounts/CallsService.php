@@ -21,6 +21,7 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingTrack;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\SipRegion;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackEvent;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\SupervisingRole;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Trim;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\URLMethod;
 use Telnyx\Texml\Accounts\Calls\CallCallsResponse;
@@ -191,6 +192,8 @@ final class CallsService implements CallsContract
      * @param string $statusCallback URL destination for Telnyx to send status callback events to for the call
      * @param 'initiated'|'ringing'|'answered'|'completed'|StatusCallbackEvent $statusCallbackEvent The call events for which Telnyx should send a webhook. Multiple events can be defined when separated by a space.
      * @param 'GET'|'POST'|\Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackMethod $statusCallbackMethod HTTP request type used for `StatusCallback`
+     * @param string $superviseCallSid The call control ID of the existing call to supervise. When provided, the created leg will be added to the specified call in supervising mode. Status callbacks and action callbacks will NOT be sent for the supervising leg.
+     * @param 'barge'|'whisper'|'monitor'|SupervisingRole $supervisingRole The supervising role for the new leg. Determines the audio behavior: barge (hear both sides), whisper (only hear supervisor), monitor (hear both sides but supervisor muted). Default: barge
      * @param 'trim-silence'|'do-not-trim'|Trim $trim Whether to trim any leading and trailing silence from the recording. Defaults to `trim-silence`.
      * @param string $url the URL from which Telnyx will retrieve the TeXML call instructions
      * @param 'GET'|'POST'|URLMethod $urlMethod HTTP request type used for `Url`. The default value is inherited from TeXML Application setting.
@@ -231,6 +234,8 @@ final class CallsService implements CallsContract
         ?string $statusCallback = null,
         string|StatusCallbackEvent $statusCallbackEvent = 'completed',
         string|\Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackMethod $statusCallbackMethod = 'POST',
+        ?string $superviseCallSid = null,
+        string|SupervisingRole $supervisingRole = 'barge',
         string|Trim|null $trim = null,
         ?string $url = null,
         string|URLMethod $urlMethod = 'POST',
@@ -270,6 +275,8 @@ final class CallsService implements CallsContract
                 'statusCallback' => $statusCallback,
                 'statusCallbackEvent' => $statusCallbackEvent,
                 'statusCallbackMethod' => $statusCallbackMethod,
+                'superviseCallSid' => $superviseCallSid,
+                'supervisingRole' => $supervisingRole,
                 'trim' => $trim,
                 'url' => $url,
                 'urlMethod' => $urlMethod,
