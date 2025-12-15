@@ -24,7 +24,7 @@ final class MessagingNumbersBulkUpdatesRawService implements MessagingNumbersBul
     /**
      * @api
      *
-     * Update the messaging profile of multiple phone numbers
+     * Bulk update phone number profiles
      *
      * @param array{
      *   messagingProfileID: string, numbers: list<string>

@@ -99,7 +99,7 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
     /**
      * @api
      *
-     * Retrieve All Phone Number Campaigns
+     * List phone number campaigns
      *
      * @param array{
      *   tcrBrandID?: string,

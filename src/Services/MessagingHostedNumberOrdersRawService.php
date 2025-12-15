@@ -148,7 +148,7 @@ final class MessagingHostedNumberOrdersRawService implements MessagingHostedNumb
     /**
      * @api
      *
-     * Check eligibility of phone numbers for hosted messaging
+     * Check hosted messaging eligibility
      *
      * @param array{
      *   phoneNumbers: list<string>
