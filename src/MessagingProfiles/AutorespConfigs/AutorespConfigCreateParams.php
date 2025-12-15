@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigCreateParams\Op;
 
 /**
- * Create auto-response setting.
+ * Create Auto-Reponse Setting.
  *
  * @see Telnyx\Services\MessagingProfiles\AutorespConfigsService::create()
  *

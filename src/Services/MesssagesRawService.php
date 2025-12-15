@@ -15,6 +15,7 @@ use Telnyx\Messsages\MesssageWhatsappResponse;
 use Telnyx\Messsages\RcsAgentMessage;
 use Telnyx\Messsages\RcsAgentMessage\Event\EventType;
 use Telnyx\Messsages\RcsContentInfo;
+use Telnyx\Messsages\WhatsappMedia;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MesssagesRawContract;
 
@@ -88,7 +89,7 @@ final class MesssagesRawService implements MesssagesRawContract
      *   whatsappMessage: array{
      *     audio?: array{
      *       caption?: string, filename?: string, link?: string, voice?: bool
-     *     },
+     *     }|WhatsappMedia,
      *     bizOpaqueCallbackData?: string,
      *     contacts?: list<array{
      *       addresses?: list<array<mixed>>,
@@ -101,10 +102,10 @@ final class MesssagesRawService implements MesssagesRawContract
      *     }>,
      *     document?: array{
      *       caption?: string, filename?: string, link?: string, voice?: bool
-     *     },
+     *     }|WhatsappMedia,
      *     image?: array{
      *       caption?: string, filename?: string, link?: string, voice?: bool
-     *     },
+     *     }|WhatsappMedia,
      *     interactive?: array{
      *       action?: array{
      *         button?: string,
@@ -120,11 +121,11 @@ final class MesssagesRawService implements MesssagesRawContract
      *       body?: array{text?: string},
      *       footer?: array{text?: string},
      *       header?: array{
-     *         document?: array<mixed>,
-     *         image?: array<mixed>,
+     *         document?: array<mixed>|WhatsappMedia,
+     *         image?: array<mixed>|WhatsappMedia,
      *         subText?: string,
      *         text?: string,
-     *         video?: array<mixed>,
+     *         video?: array<mixed>|WhatsappMedia,
      *       },
      *       type?: 'cta_url'|'list'|'carousel'|'button'|'location_request_message'|MesssageWhatsappParams\WhatsappMessage\Interactive\Type,
      *     },
@@ -134,11 +135,11 @@ final class MesssagesRawService implements MesssagesRawContract
      *     reaction?: array{empji?: string, messageID?: string},
      *     sticker?: array{
      *       caption?: string, filename?: string, link?: string, voice?: bool
-     *     },
+     *     }|WhatsappMedia,
      *     type?: 'audio'|'document'|'image'|'sticker'|'video'|'interactive'|'location'|'template'|'reaction'|'contacts'|MesssageWhatsappParams\WhatsappMessage\Type,
      *     video?: array{
      *       caption?: string, filename?: string, link?: string, voice?: bool
-     *     },
+     *     }|WhatsappMedia,
      *   },
      *   type?: 'WHATSAPP'|MesssageWhatsappParams\Type,
      *   webhookURL?: string,

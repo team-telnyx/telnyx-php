@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Interactive\Action\Card\Header;
+namespace Telnyx\Messsages;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ImageShape = array{
+ * @phpstan-type WhatsappMediaShape = array{
  *   caption?: string|null,
  *   filename?: string|null,
  *   link?: string|null,
  *   voice?: bool|null,
  * }
  */
-final class Image implements BaseModel
+final class WhatsappMedia implements BaseModel
 {
-    /** @use SdkModel<ImageShape> */
+    /** @use SdkModel<WhatsappMediaShape> */
     use SdkModel;
 
     /**

@@ -12,7 +12,7 @@ use Telnyx\Messaging10dlc\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Fil
 use Telnyx\Messaging10dlc\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Sort;
 
 /**
- * List phone number campaigns.
+ * Retrieve All Phone Number Campaigns.
  *
  * @see Telnyx\Services\Messaging10dlc\PhoneNumberCampaignsService::list()
  *

@@ -7,17 +7,15 @@ namespace Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Interactive;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Interactive\Header\Document;
-use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Interactive\Header\Image;
-use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Interactive\Header\Video;
+use Telnyx\Messsages\WhatsappMedia;
 
 /**
  * @phpstan-type HeaderShape = array{
- *   document?: Document|null,
- *   image?: Image|null,
+ *   document?: WhatsappMedia|null,
+ *   image?: WhatsappMedia|null,
  *   subText?: string|null,
  *   text?: string|null,
- *   video?: Video|null,
+ *   video?: WhatsappMedia|null,
  * }
  */
 final class Header implements BaseModel
@@ -26,10 +24,10 @@ final class Header implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Document $document;
+    public ?WhatsappMedia $document;
 
     #[Optional]
-    public ?Image $image;
+    public ?WhatsappMedia $image;
 
     #[Optional('sub_text')]
     public ?string $subText;
@@ -41,7 +39,7 @@ final class Header implements BaseModel
     public ?string $text;
 
     #[Optional]
-    public ?Video $video;
+    public ?WhatsappMedia $video;
 
     public function __construct()
     {
@@ -53,19 +51,19 @@ final class Header implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Document|array{
+     * @param WhatsappMedia|array{
      *   caption?: string|null,
      *   filename?: string|null,
      *   link?: string|null,
      *   voice?: bool|null,
      * } $document
-     * @param Image|array{
+     * @param WhatsappMedia|array{
      *   caption?: string|null,
      *   filename?: string|null,
      *   link?: string|null,
      *   voice?: bool|null,
      * } $image
-     * @param Video|array{
+     * @param WhatsappMedia|array{
      *   caption?: string|null,
      *   filename?: string|null,
      *   link?: string|null,
@@ -73,11 +71,11 @@ final class Header implements BaseModel
      * } $video
      */
     public static function with(
-        Document|array|null $document = null,
-        Image|array|null $image = null,
+        WhatsappMedia|array|null $document = null,
+        WhatsappMedia|array|null $image = null,
         ?string $subText = null,
         ?string $text = null,
-        Video|array|null $video = null,
+        WhatsappMedia|array|null $video = null,
     ): self {
         $self = new self;
 
@@ -91,14 +89,14 @@ final class Header implements BaseModel
     }
 
     /**
-     * @param Document|array{
+     * @param WhatsappMedia|array{
      *   caption?: string|null,
      *   filename?: string|null,
      *   link?: string|null,
      *   voice?: bool|null,
      * } $document
      */
-    public function withDocument(Document|array $document): self
+    public function withDocument(WhatsappMedia|array $document): self
     {
         $self = clone $this;
         $self['document'] = $document;
@@ -107,14 +105,14 @@ final class Header implements BaseModel
     }
 
     /**
-     * @param Image|array{
+     * @param WhatsappMedia|array{
      *   caption?: string|null,
      *   filename?: string|null,
      *   link?: string|null,
      *   voice?: bool|null,
      * } $image
      */
-    public function withImage(Image|array $image): self
+    public function withImage(WhatsappMedia|array $image): self
     {
         $self = clone $this;
         $self['image'] = $image;
@@ -142,14 +140,14 @@ final class Header implements BaseModel
     }
 
     /**
-     * @param Video|array{
+     * @param WhatsappMedia|array{
      *   caption?: string|null,
      *   filename?: string|null,
      *   link?: string|null,
      *   voice?: bool|null,
      * } $video
      */
-    public function withVideo(Video|array $video): self
+    public function withVideo(WhatsappMedia|array $video): self
     {
         $self = clone $this;
         $self['video'] = $video;

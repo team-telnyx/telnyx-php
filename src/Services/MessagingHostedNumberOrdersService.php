@@ -135,7 +135,7 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
     /**
      * @api
      *
-     * Check hosted messaging eligibility
+     * Check eligibility of phone numbers for hosted messaging
      *
      * @param list<string> $phoneNumbers List of phone numbers to check eligibility
      *

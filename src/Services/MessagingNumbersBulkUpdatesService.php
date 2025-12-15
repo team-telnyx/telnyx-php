@@ -30,7 +30,7 @@ final class MessagingNumbersBulkUpdatesService implements MessagingNumbersBulkUp
     /**
      * @api
      *
-     * Bulk update phone number profiles
+     * Update the messaging profile of multiple phone numbers
      *
      * @param string $messagingProfileID Configure the messaging profile these phone numbers are assigned to:
      *

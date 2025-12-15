@@ -7,15 +7,14 @@ namespace Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Interactive\Action
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Interactive\Action\Card\Header\Image;
 use Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Interactive\Action\Card\Header\Type;
-use Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Interactive\Action\Card\Header\Video;
+use Telnyx\Messsages\WhatsappMedia;
 
 /**
  * @phpstan-type HeaderShape = array{
- *   image?: Image|null,
+ *   image?: WhatsappMedia|null,
  *   type?: value-of<\Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Interactive\Action\Card\Header\Type>|null,
- *   video?: Video|null,
+ *   video?: WhatsappMedia|null,
  * }
  */
 final class Header implements BaseModel
@@ -24,7 +23,7 @@ final class Header implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Image $image;
+    public ?WhatsappMedia $image;
 
     /**
      * @var value-of<Type>|null $type
@@ -35,7 +34,7 @@ final class Header implements BaseModel
     public ?string $type;
 
     #[Optional]
-    public ?Video $video;
+    public ?WhatsappMedia $video;
 
     public function __construct()
     {
@@ -47,14 +46,14 @@ final class Header implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Image|array{
+     * @param WhatsappMedia|array{
      *   caption?: string|null,
      *   filename?: string|null,
      *   link?: string|null,
      *   voice?: bool|null,
      * } $image
      * @param Type|value-of<Type> $type
-     * @param Video|array{
+     * @param WhatsappMedia|array{
      *   caption?: string|null,
      *   filename?: string|null,
      *   link?: string|null,
@@ -62,9 +61,9 @@ final class Header implements BaseModel
      * } $video
      */
     public static function with(
-        Image|array|null $image = null,
+        WhatsappMedia|array|null $image = null,
         Type|string|null $type = null,
-        Video|array|null $video = null,
+        WhatsappMedia|array|null $video = null,
     ): self {
         $self = new self;
 
@@ -76,14 +75,14 @@ final class Header implements BaseModel
     }
 
     /**
-     * @param Image|array{
+     * @param WhatsappMedia|array{
      *   caption?: string|null,
      *   filename?: string|null,
      *   link?: string|null,
      *   voice?: bool|null,
      * } $image
      */
-    public function withImage(Image|array $image): self
+    public function withImage(WhatsappMedia|array $image): self
     {
         $self = clone $this;
         $self['image'] = $image;
@@ -104,14 +103,14 @@ final class Header implements BaseModel
     }
 
     /**
-     * @param Video|array{
+     * @param WhatsappMedia|array{
      *   caption?: string|null,
      *   filename?: string|null,
      *   link?: string|null,
      *   voice?: bool|null,
      * } $video
      */
-    public function withVideo(Video|array $video): self
+    public function withVideo(WhatsappMedia|array $video): self
     {
         $self = clone $this;
         $self['video'] = $video;

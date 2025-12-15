@@ -31,7 +31,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
     /**
      * @api
      *
-     * Create auto-response setting
+     * Create Auto-Reponse Setting
      *
      * @param list<string> $keywords
      * @param 'start'|'stop'|'info'|Op $op

@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Upload hosted number document.
+ * Upload file required for a messaging hosted number order.
  *
  * @see Telnyx\Services\MessagingHostedNumberOrders\ActionsService::uploadFile()
  *

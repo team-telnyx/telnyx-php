@@ -30,7 +30,7 @@ final class AutorespConfigsRawService implements AutorespConfigsRawContract
     /**
      * @api
      *
-     * Create auto-response setting
+     * Create Auto-Reponse Setting
      *
      * @param array{
      *   countryCode: string,

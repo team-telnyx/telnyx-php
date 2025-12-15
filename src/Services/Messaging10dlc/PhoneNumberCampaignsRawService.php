@@ -114,7 +114,7 @@ final class PhoneNumberCampaignsRawService implements PhoneNumberCampaignsRawCon
     /**
      * @api
      *
-     * List phone number campaigns
+     * Retrieve All Phone Number Campaigns
      *
      * @param array{
      *   filter?: array{

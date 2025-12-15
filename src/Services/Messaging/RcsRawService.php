@@ -60,7 +60,7 @@ final class RcsRawService implements RcsRawContract
     /**
      * @api
      *
-     * Check RCS capabilities (batch)
+     * List RCS capabilities of a given batch of phone numbers
      *
      * @param array{
      *   agentID: string, phoneNumbers: list<string>
@@ -92,7 +92,7 @@ final class RcsRawService implements RcsRawContract
     /**
      * @api
      *
-     * Check RCS capabilities
+     * List RCS capabilities of a phone number
      *
      * @param string $phoneNumber Phone number in E164 format
      * @param array{agentID: string}|RcRetrieveCapabilitiesParams $params

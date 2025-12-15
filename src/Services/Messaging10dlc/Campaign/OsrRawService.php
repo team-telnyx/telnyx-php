@@ -22,7 +22,7 @@ final class OsrRawService implements OsrRawContract
     /**
      * @api
      *
-     * Get OSR campaign attributes
+     * Get My Osr Campaign Attributes
      *
      * @return BaseResponse<array<string,mixed>>
      *

@@ -10,9 +10,8 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Interactive\Action\Card\Action;
 use Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Interactive\Action\Card\Body;
 use Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Interactive\Action\Card\Header;
-use Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Interactive\Action\Card\Header\Image;
-use Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Interactive\Action\Card\Header\Video;
 use Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Interactive\Action\Card\Type;
+use Telnyx\Messsages\WhatsappMedia;
 
 /**
  * @phpstan-type CardShape = array{
@@ -62,9 +61,9 @@ final class Card implements BaseModel
      * } $action
      * @param Body|array{text?: string|null} $body
      * @param Header|array{
-     *   image?: Image|null,
+     *   image?: WhatsappMedia|null,
      *   type?: value-of<Header\Type>|null,
-     *   video?: Video|null,
+     *   video?: WhatsappMedia|null,
      * } $header
      * @param Type|value-of<Type> $type
      */
@@ -123,9 +122,9 @@ final class Card implements BaseModel
 
     /**
      * @param Header|array{
-     *   image?: Image|null,
+     *   image?: WhatsappMedia|null,
      *   type?: value-of<Header\Type>|null,
-     *   video?: Video|null,
+     *   video?: WhatsappMedia|null,
      * } $header
      */
     public function withHeader(Header|array $header): self
