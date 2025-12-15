@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Messsages\MesssageRcsParams\Type;
 use Telnyx\Messsages\MesssageRcsResponse;
+use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Interactive\Action\Button\Type;
+use Telnyx\Messsages\MesssageWhatsappResponse;
 use Telnyx\Messsages\RcsAgentMessage;
 use Telnyx\Messsages\RcsAgentMessage\ContentMessage\RichCard\CarouselCard\CardWidth;
 use Telnyx\Messsages\RcsAgentMessage\ContentMessage\RichCard\StandaloneCard\CardOrientation;
@@ -153,7 +154,7 @@ interface MesssagesContract
      *   from?: string, mediaURLs?: list<string>, subject?: string, text?: string
      * } $mmsFallback
      * @param array{from?: string, text?: string} $smsFallback
-     * @param 'RCS'|Type $type Message type - must be set to "RCS"
+     * @param 'RCS'|\Telnyx\Messsages\MesssageRcsParams\Type $type Message type - must be set to "RCS"
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
      * @throws APIException
@@ -165,8 +166,116 @@ interface MesssagesContract
         string $to,
         ?array $mmsFallback = null,
         ?array $smsFallback = null,
-        string|Type|null $type = null,
+        string|\Telnyx\Messsages\MesssageRcsParams\Type|null $type = null,
         ?string $webhookURL = null,
         ?RequestOptions $requestOptions = null,
     ): MesssageRcsResponse;
+
+    /**
+     * @api
+     *
+     * @param string $from Phone number in +E.164 format associated with Whatsapp account
+     * @param string $to Phone number in +E.164 format
+     * @param array{
+     *   audio?: array{
+     *     caption?: string, filename?: string, link?: string, voice?: bool
+     *   },
+     *   bizOpaqueCallbackData?: string,
+     *   contacts?: list<array{
+     *     addresses?: list<array{
+     *       city?: string,
+     *       country?: string,
+     *       countryCode?: string,
+     *       state?: string,
+     *       street?: string,
+     *       type?: string,
+     *       zip?: string,
+     *     }>,
+     *     birthday?: string,
+     *     emails?: list<array{email?: string, type?: string}>,
+     *     name?: string,
+     *     org?: array{company?: string, department?: string, title?: string},
+     *     phones?: list<array{phone?: string, type?: string, waID?: string}>,
+     *     urls?: list<array{type?: string, url?: string}>,
+     *   }>,
+     *   document?: array{
+     *     caption?: string, filename?: string, link?: string, voice?: bool
+     *   },
+     *   image?: array{
+     *     caption?: string, filename?: string, link?: string, voice?: bool
+     *   },
+     *   interactive?: array{
+     *     action?: array{
+     *       button?: string,
+     *       buttons?: list<array{
+     *         reply?: array{id?: string, title?: string}, type?: 'reply'|Type
+     *       }>,
+     *       cards?: list<array{
+     *         action?: array{catalogID?: string, productRetailerID?: string},
+     *         body?: array{text?: string},
+     *         cardIndex?: int,
+     *         header?: array{
+     *           image?: array{
+     *             caption?: string, filename?: string, link?: string, voice?: bool
+     *           },
+     *           type?: 'image'|'video'|\Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Interactive\Action\Card\Header\Type,
+     *           video?: array{
+     *             caption?: string, filename?: string, link?: string, voice?: bool
+     *           },
+     *         },
+     *         type?: 'cta_url'|\Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Interactive\Action\Card\Type,
+     *       }>,
+     *       catalogID?: string,
+     *       mode?: string,
+     *       name?: string,
+     *       parameters?: array{displayText?: string, url?: string},
+     *       productRetailerID?: string,
+     *       sections?: list<array{
+     *         productItems?: list<array{productRetailerID?: string}>,
+     *         rows?: list<array{id?: string, description?: string, title?: string}>,
+     *         title?: string,
+     *       }>,
+     *     },
+     *     body?: array{text?: string},
+     *     footer?: array{text?: string},
+     *     header?: array{
+     *       document?: array{
+     *         caption?: string, filename?: string, link?: string, voice?: bool
+     *       },
+     *       image?: array{
+     *         caption?: string, filename?: string, link?: string, voice?: bool
+     *       },
+     *       subText?: string,
+     *       text?: string,
+     *       video?: array{
+     *         caption?: string, filename?: string, link?: string, voice?: bool
+     *       },
+     *     },
+     *     type?: 'cta_url'|'list'|'carousel'|'button'|'location_request_message'|\Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Interactive\Type,
+     *   },
+     *   location?: array{
+     *     address?: string, latitude?: string, longitude?: string, name?: string
+     *   },
+     *   reaction?: array{empji?: string, messageID?: string},
+     *   sticker?: array{
+     *     caption?: string, filename?: string, link?: string, voice?: bool
+     *   },
+     *   type?: 'audio'|'document'|'image'|'sticker'|'video'|'interactive'|'location'|'template'|'reaction'|'contacts'|\Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Type,
+     *   video?: array{
+     *     caption?: string, filename?: string, link?: string, voice?: bool
+     *   },
+     * } $whatsappMessage
+     * @param 'WHATSAPP'|\Telnyx\Messsages\MesssageWhatsappParams\Type $type Message type - must be set to "WHATSAPP"
+     * @param string $webhookURL the URL where webhooks related to this message will be sent
+     *
+     * @throws APIException
+     */
+    public function whatsapp(
+        string $from,
+        string $to,
+        array $whatsappMessage,
+        string|\Telnyx\Messsages\MesssageWhatsappParams\Type|null $type = null,
+        ?string $webhookURL = null,
+        ?RequestOptions $requestOptions = null,
+    ): MesssageWhatsappResponse;
 }
