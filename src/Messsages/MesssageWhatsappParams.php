@@ -10,16 +10,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage;
-use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Audio;
 use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Contact;
-use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Document;
-use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Image;
 use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Interactive;
 use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Location;
 use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Reaction;
-use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Sticker;
 use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Type;
-use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Video;
 
 /**
  * Send a Whatsapp message.
@@ -30,17 +25,17 @@ use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Video;
  *   from: string,
  *   to: string,
  *   whatsappMessage: WhatsappMessage|array{
- *     audio?: Audio|null,
+ *     audio?: WhatsappMedia|null,
  *     bizOpaqueCallbackData?: string|null,
  *     contacts?: list<Contact>|null,
- *     document?: Document|null,
- *     image?: Image|null,
+ *     document?: WhatsappMedia|null,
+ *     image?: WhatsappMedia|null,
  *     interactive?: Interactive|null,
  *     location?: Location|null,
  *     reaction?: Reaction|null,
- *     sticker?: Sticker|null,
+ *     sticker?: WhatsappMedia|null,
  *     type?: value-of<Type>|null,
- *     video?: Video|null,
+ *     video?: WhatsappMedia|null,
  *   },
  *   type?: \Telnyx\Messsages\MesssageWhatsappParams\Type|value-of<\Telnyx\Messsages\MesssageWhatsappParams\Type>,
  *   webhookURL?: string,
@@ -109,17 +104,17 @@ final class MesssageWhatsappParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param WhatsappMessage|array{
-     *   audio?: Audio|null,
+     *   audio?: WhatsappMedia|null,
      *   bizOpaqueCallbackData?: string|null,
      *   contacts?: list<Contact>|null,
-     *   document?: Document|null,
-     *   image?: Image|null,
+     *   document?: WhatsappMedia|null,
+     *   image?: WhatsappMedia|null,
      *   interactive?: Interactive|null,
      *   location?: Location|null,
      *   reaction?: Reaction|null,
-     *   sticker?: Sticker|null,
+     *   sticker?: WhatsappMedia|null,
      *   type?: value-of<Type>|null,
-     *   video?: Video|null,
+     *   video?: WhatsappMedia|null,
      * } $whatsappMessage
      * @param MesssageWhatsappParams\Type|value-of<MesssageWhatsappParams\Type> $type
      */
@@ -166,17 +161,17 @@ final class MesssageWhatsappParams implements BaseModel
 
     /**
      * @param WhatsappMessage|array{
-     *   audio?: Audio|null,
+     *   audio?: WhatsappMedia|null,
      *   bizOpaqueCallbackData?: string|null,
      *   contacts?: list<Contact>|null,
-     *   document?: Document|null,
-     *   image?: Image|null,
+     *   document?: WhatsappMedia|null,
+     *   image?: WhatsappMedia|null,
      *   interactive?: Interactive|null,
      *   location?: Location|null,
      *   reaction?: Reaction|null,
-     *   sticker?: Sticker|null,
+     *   sticker?: WhatsappMedia|null,
      *   type?: value-of<Type>|null,
-     *   video?: Video|null,
+     *   video?: WhatsappMedia|null,
      * } $whatsappMessage
      */
     public function withWhatsappMessage(

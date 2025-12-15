@@ -7,15 +7,12 @@ namespace Telnyx\Messsages\MesssageWhatsappParams;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Audio;
 use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Contact;
 use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Contact\Address;
 use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Contact\Email;
 use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Contact\Org;
 use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Contact\Phone;
 use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Contact\URL;
-use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Document;
-use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Image;
 use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Interactive;
 use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Interactive\Action;
 use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Interactive\Body;
@@ -23,23 +20,22 @@ use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Interactive\Footer;
 use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Interactive\Header;
 use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Location;
 use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Reaction;
-use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Sticker;
 use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Type;
-use Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Video;
+use Telnyx\Messsages\WhatsappMedia;
 
 /**
  * @phpstan-type WhatsappMessageShape = array{
- *   audio?: Audio|null,
+ *   audio?: WhatsappMedia|null,
  *   bizOpaqueCallbackData?: string|null,
  *   contacts?: list<Contact>|null,
- *   document?: Document|null,
- *   image?: Image|null,
+ *   document?: WhatsappMedia|null,
+ *   image?: WhatsappMedia|null,
  *   interactive?: Interactive|null,
  *   location?: Location|null,
  *   reaction?: Reaction|null,
- *   sticker?: Sticker|null,
+ *   sticker?: WhatsappMedia|null,
  *   type?: value-of<\Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Type>|null,
- *   video?: Video|null,
+ *   video?: WhatsappMedia|null,
  * }
  */
 final class WhatsappMessage implements BaseModel
@@ -48,7 +44,7 @@ final class WhatsappMessage implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Audio $audio;
+    public ?WhatsappMedia $audio;
 
     /**
      * custom data to return with status update.
@@ -61,10 +57,10 @@ final class WhatsappMessage implements BaseModel
     public ?array $contacts;
 
     #[Optional]
-    public ?Document $document;
+    public ?WhatsappMedia $document;
 
     #[Optional]
-    public ?Image $image;
+    public ?WhatsappMedia $image;
 
     #[Optional]
     public ?Interactive $interactive;
@@ -76,7 +72,7 @@ final class WhatsappMessage implements BaseModel
     public ?Reaction $reaction;
 
     #[Optional]
-    public ?Sticker $sticker;
+    public ?WhatsappMedia $sticker;
 
     /**
      * @var value-of<Type>|null $type
@@ -87,7 +83,7 @@ final class WhatsappMessage implements BaseModel
     public ?string $type;
 
     #[Optional]
-    public ?Video $video;
+    public ?WhatsappMedia $video;
 
     public function __construct()
     {
@@ -99,7 +95,7 @@ final class WhatsappMessage implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Audio|array{
+     * @param WhatsappMedia|array{
      *   caption?: string|null,
      *   filename?: string|null,
      *   link?: string|null,
@@ -114,13 +110,13 @@ final class WhatsappMessage implements BaseModel
      *   phones?: list<Phone>|null,
      *   urls?: list<URL>|null,
      * }> $contacts
-     * @param Document|array{
+     * @param WhatsappMedia|array{
      *   caption?: string|null,
      *   filename?: string|null,
      *   link?: string|null,
      *   voice?: bool|null,
      * } $document
-     * @param Image|array{
+     * @param WhatsappMedia|array{
      *   caption?: string|null,
      *   filename?: string|null,
      *   link?: string|null,
@@ -140,14 +136,14 @@ final class WhatsappMessage implements BaseModel
      *   name?: string|null,
      * } $location
      * @param Reaction|array{empji?: string|null, messageID?: string|null} $reaction
-     * @param Sticker|array{
+     * @param WhatsappMedia|array{
      *   caption?: string|null,
      *   filename?: string|null,
      *   link?: string|null,
      *   voice?: bool|null,
      * } $sticker
      * @param Type|value-of<Type> $type
-     * @param Video|array{
+     * @param WhatsappMedia|array{
      *   caption?: string|null,
      *   filename?: string|null,
      *   link?: string|null,
@@ -155,17 +151,17 @@ final class WhatsappMessage implements BaseModel
      * } $video
      */
     public static function with(
-        Audio|array|null $audio = null,
+        WhatsappMedia|array|null $audio = null,
         ?string $bizOpaqueCallbackData = null,
         ?array $contacts = null,
-        Document|array|null $document = null,
-        Image|array|null $image = null,
+        WhatsappMedia|array|null $document = null,
+        WhatsappMedia|array|null $image = null,
         Interactive|array|null $interactive = null,
         Location|array|null $location = null,
         Reaction|array|null $reaction = null,
-        Sticker|array|null $sticker = null,
+        WhatsappMedia|array|null $sticker = null,
         Type|string|null $type = null,
-        Video|array|null $video = null,
+        WhatsappMedia|array|null $video = null,
     ): self {
         $self = new self;
 
@@ -185,14 +181,14 @@ final class WhatsappMessage implements BaseModel
     }
 
     /**
-     * @param Audio|array{
+     * @param WhatsappMedia|array{
      *   caption?: string|null,
      *   filename?: string|null,
      *   link?: string|null,
      *   voice?: bool|null,
      * } $audio
      */
-    public function withAudio(Audio|array $audio): self
+    public function withAudio(WhatsappMedia|array $audio): self
     {
         $self = clone $this;
         $self['audio'] = $audio;
@@ -232,14 +228,14 @@ final class WhatsappMessage implements BaseModel
     }
 
     /**
-     * @param Document|array{
+     * @param WhatsappMedia|array{
      *   caption?: string|null,
      *   filename?: string|null,
      *   link?: string|null,
      *   voice?: bool|null,
      * } $document
      */
-    public function withDocument(Document|array $document): self
+    public function withDocument(WhatsappMedia|array $document): self
     {
         $self = clone $this;
         $self['document'] = $document;
@@ -248,14 +244,14 @@ final class WhatsappMessage implements BaseModel
     }
 
     /**
-     * @param Image|array{
+     * @param WhatsappMedia|array{
      *   caption?: string|null,
      *   filename?: string|null,
      *   link?: string|null,
      *   voice?: bool|null,
      * } $image
      */
-    public function withImage(Image|array $image): self
+    public function withImage(WhatsappMedia|array $image): self
     {
         $self = clone $this;
         $self['image'] = $image;
@@ -308,14 +304,14 @@ final class WhatsappMessage implements BaseModel
     }
 
     /**
-     * @param Sticker|array{
+     * @param WhatsappMedia|array{
      *   caption?: string|null,
      *   filename?: string|null,
      *   link?: string|null,
      *   voice?: bool|null,
      * } $sticker
      */
-    public function withSticker(Sticker|array $sticker): self
+    public function withSticker(WhatsappMedia|array $sticker): self
     {
         $self = clone $this;
         $self['sticker'] = $sticker;
@@ -336,14 +332,14 @@ final class WhatsappMessage implements BaseModel
     }
 
     /**
-     * @param Video|array{
+     * @param WhatsappMedia|array{
      *   caption?: string|null,
      *   filename?: string|null,
      *   link?: string|null,
      *   voice?: bool|null,
      * } $video
      */
-    public function withVideo(Video|array $video): self
+    public function withVideo(WhatsappMedia|array $video): self
     {
         $self = clone $this;
         $self['video'] = $video;

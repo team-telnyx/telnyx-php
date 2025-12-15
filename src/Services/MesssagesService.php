@@ -21,6 +21,7 @@ use Telnyx\Messsages\RcsContentInfo;
 use Telnyx\Messsages\RcsSuggestion;
 use Telnyx\Messsages\RcsSuggestion\Action\OpenURLAction\Application;
 use Telnyx\Messsages\RcsSuggestion\Action\OpenURLAction\WebviewViewMode;
+use Telnyx\Messsages\WhatsappMedia;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MesssagesContract;
 
@@ -217,7 +218,7 @@ final class MesssagesService implements MesssagesContract
      * @param array{
      *   audio?: array{
      *     caption?: string, filename?: string, link?: string, voice?: bool
-     *   },
+     *   }|WhatsappMedia,
      *   bizOpaqueCallbackData?: string,
      *   contacts?: list<array{
      *     addresses?: list<array{
@@ -238,10 +239,10 @@ final class MesssagesService implements MesssagesContract
      *   }>,
      *   document?: array{
      *     caption?: string, filename?: string, link?: string, voice?: bool
-     *   },
+     *   }|WhatsappMedia,
      *   image?: array{
      *     caption?: string, filename?: string, link?: string, voice?: bool
-     *   },
+     *   }|WhatsappMedia,
      *   interactive?: array{
      *     action?: array{
      *       button?: string,
@@ -255,11 +256,11 @@ final class MesssagesService implements MesssagesContract
      *         header?: array{
      *           image?: array{
      *             caption?: string, filename?: string, link?: string, voice?: bool
-     *           },
+     *           }|WhatsappMedia,
      *           type?: 'image'|'video'|\Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Interactive\Action\Card\Header\Type,
      *           video?: array{
      *             caption?: string, filename?: string, link?: string, voice?: bool
-     *           },
+     *           }|WhatsappMedia,
      *         },
      *         type?: 'cta_url'|\Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Interactive\Action\Card\Type,
      *       }>,
@@ -279,15 +280,15 @@ final class MesssagesService implements MesssagesContract
      *     header?: array{
      *       document?: array{
      *         caption?: string, filename?: string, link?: string, voice?: bool
-     *       },
+     *       }|WhatsappMedia,
      *       image?: array{
      *         caption?: string, filename?: string, link?: string, voice?: bool
-     *       },
+     *       }|WhatsappMedia,
      *       subText?: string,
      *       text?: string,
      *       video?: array{
      *         caption?: string, filename?: string, link?: string, voice?: bool
-     *       },
+     *       }|WhatsappMedia,
      *     },
      *     type?: 'cta_url'|'list'|'carousel'|'button'|'location_request_message'|\Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Interactive\Type,
      *   },
@@ -297,11 +298,11 @@ final class MesssagesService implements MesssagesContract
      *   reaction?: array{empji?: string, messageID?: string},
      *   sticker?: array{
      *     caption?: string, filename?: string, link?: string, voice?: bool
-     *   },
+     *   }|WhatsappMedia,
      *   type?: 'audio'|'document'|'image'|'sticker'|'video'|'interactive'|'location'|'template'|'reaction'|'contacts'|\Telnyx\Messsages\MesssageWhatsappParams\WhatsappMessage\Type,
      *   video?: array{
      *     caption?: string, filename?: string, link?: string, voice?: bool
-     *   },
+     *   }|WhatsappMedia,
      * } $whatsappMessage
      * @param 'WHATSAPP'|\Telnyx\Messsages\MesssageWhatsappParams\Type $type Message type - must be set to "WHATSAPP"
      * @param string $webhookURL the URL where webhooks related to this message will be sent

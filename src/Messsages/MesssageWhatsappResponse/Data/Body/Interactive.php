@@ -15,10 +15,8 @@ use Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Interactive\Action\Secti
 use Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Interactive\Body;
 use Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Interactive\Footer;
 use Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Interactive\Header;
-use Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Interactive\Header\Document;
-use Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Interactive\Header\Image;
-use Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Interactive\Header\Video;
 use Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Interactive\Type;
+use Telnyx\Messsages\WhatsappMedia;
 
 /**
  * @phpstan-type InteractiveShape = array{
@@ -78,11 +76,11 @@ final class Interactive implements BaseModel
      * @param Body|array{text?: string|null} $body
      * @param Footer|array{text?: string|null} $footer
      * @param Header|array{
-     *   document?: Document|null,
-     *   image?: Image|null,
+     *   document?: WhatsappMedia|null,
+     *   image?: WhatsappMedia|null,
      *   subText?: string|null,
      *   text?: string|null,
-     *   video?: Video|null,
+     *   video?: WhatsappMedia|null,
      * } $header
      * @param Type|value-of<Type> $type
      */
@@ -149,11 +147,11 @@ final class Interactive implements BaseModel
 
     /**
      * @param Header|array{
-     *   document?: Document|null,
-     *   image?: Image|null,
+     *   document?: WhatsappMedia|null,
+     *   image?: WhatsappMedia|null,
      *   subText?: string|null,
      *   text?: string|null,
-     *   video?: Video|null,
+     *   video?: WhatsappMedia|null,
      * } $header
      */
     public function withHeader(Header|array $header): self

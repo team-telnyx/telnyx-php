@@ -8,20 +8,16 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messsages\MesssageWhatsappResponse\Data\Body;
-use Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Audio;
 use Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Contact;
-use Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Document;
-use Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Image;
 use Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Interactive;
 use Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Location;
 use Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Reaction;
-use Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Sticker;
 use Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Type;
-use Telnyx\Messsages\MesssageWhatsappResponse\Data\Body\Video;
 use Telnyx\Messsages\MesssageWhatsappResponse\Data\From;
 use Telnyx\Messsages\MesssageWhatsappResponse\Data\From\LineType;
 use Telnyx\Messsages\MesssageWhatsappResponse\Data\From\Status;
 use Telnyx\Messsages\MesssageWhatsappResponse\Data\To;
+use Telnyx\Messsages\WhatsappMedia;
 
 /**
  * @phpstan-type DataShape = array{
@@ -91,17 +87,17 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Body|array{
-     *   audio?: Audio|null,
+     *   audio?: WhatsappMedia|null,
      *   bizOpaqueCallbackData?: string|null,
      *   contacts?: list<Contact>|null,
-     *   document?: Document|null,
-     *   image?: Image|null,
+     *   document?: WhatsappMedia|null,
+     *   image?: WhatsappMedia|null,
      *   interactive?: Interactive|null,
      *   location?: Location|null,
      *   reaction?: Reaction|null,
-     *   sticker?: Sticker|null,
+     *   sticker?: WhatsappMedia|null,
      *   type?: value-of<Type>|null,
-     *   video?: Video|null,
+     *   video?: WhatsappMedia|null,
      * } $body
      * @param From|array{
      *   carrier?: string|null,
@@ -159,17 +155,17 @@ final class Data implements BaseModel
 
     /**
      * @param Body|array{
-     *   audio?: Audio|null,
+     *   audio?: WhatsappMedia|null,
      *   bizOpaqueCallbackData?: string|null,
      *   contacts?: list<Contact>|null,
-     *   document?: Document|null,
-     *   image?: Image|null,
+     *   document?: WhatsappMedia|null,
+     *   image?: WhatsappMedia|null,
      *   interactive?: Interactive|null,
      *   location?: Location|null,
      *   reaction?: Reaction|null,
-     *   sticker?: Sticker|null,
+     *   sticker?: WhatsappMedia|null,
      *   type?: value-of<Type>|null,
-     *   video?: Video|null,
+     *   video?: WhatsappMedia|null,
      * } $body
      */
     public function withBody(Body|array $body): self
