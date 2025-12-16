@@ -78,7 +78,6 @@ use Telnyx\Services\MessagingProfilesService;
 use Telnyx\Services\MessagingService;
 use Telnyx\Services\MessagingTollfreeService;
 use Telnyx\Services\MessagingURLDomainsService;
-use Telnyx\Services\MesssagesService;
 use Telnyx\Services\MobileNetworkOperatorsService;
 use Telnyx\Services\MobilePhoneNumbersService;
 use Telnyx\Services\MobilePushCredentialsService;
@@ -530,11 +529,6 @@ class Client extends BaseClient
      * @api
      */
     public MessagingURLDomainsService $messagingURLDomains;
-
-    /**
-     * @api
-     */
-    public MesssagesService $messsages;
 
     /**
      * @api
@@ -1032,7 +1026,6 @@ class Client extends BaseClient
         $this->messagingProfiles = new MessagingProfilesService($this);
         $this->messagingTollfree = new MessagingTollfreeService($this);
         $this->messagingURLDomains = new MessagingURLDomainsService($this);
-        $this->messsages = new MesssagesService($this);
         $this->mobileNetworkOperators = new MobileNetworkOperatorsService($this);
         $this->mobilePushCredentials = new MobilePushCredentialsService($this);
         $this->networkCoverage = new NetworkCoverageService($this);
