@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   id: string,
  *   ipAddress: string,
  *   source: string,
- *   status: value-of<CloudflareSyncStatus>,
+ *   status: CloudflareSyncStatus|value-of<CloudflareSyncStatus>,
  *   userID: string,
  *   createdAt?: \DateTimeInterface|null,
  *   description?: string|null,

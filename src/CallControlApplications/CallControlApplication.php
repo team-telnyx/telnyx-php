@@ -8,29 +8,31 @@ use Telnyx\CallControlApplications\CallControlApplication\AnchorsiteOverride;
 use Telnyx\CallControlApplications\CallControlApplication\DtmfType;
 use Telnyx\CallControlApplications\CallControlApplication\RecordType;
 use Telnyx\CallControlApplications\CallControlApplication\WebhookAPIVersion;
-use Telnyx\CallControlApplications\CallControlApplicationInbound\SipSubdomainReceiveSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type CallControlApplicationInboundShape from \Telnyx\CallControlApplications\CallControlApplicationInbound
+ * @phpstan-import-type CallControlApplicationOutboundShape from \Telnyx\CallControlApplications\CallControlApplicationOutbound
+ *
  * @phpstan-type CallControlApplicationShape = array{
  *   id?: string|null,
  *   active?: bool|null,
- *   anchorsiteOverride?: value-of<AnchorsiteOverride>|null,
+ *   anchorsiteOverride?: null|AnchorsiteOverride|value-of<AnchorsiteOverride>,
  *   applicationName?: string|null,
  *   callCostInWebhooks?: bool|null,
  *   createdAt?: string|null,
- *   dtmfType?: value-of<DtmfType>|null,
+ *   dtmfType?: null|DtmfType|value-of<DtmfType>,
  *   firstCommandTimeout?: bool|null,
  *   firstCommandTimeoutSecs?: int|null,
- *   inbound?: CallControlApplicationInbound|null,
- *   outbound?: CallControlApplicationOutbound|null,
- *   recordType?: value-of<RecordType>|null,
+ *   inbound?: null|CallControlApplicationInbound|CallControlApplicationInboundShape,
+ *   outbound?: null|CallControlApplicationOutbound|CallControlApplicationOutboundShape,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  *   redactDtmfDebugLogging?: bool|null,
  *   tags?: list<string>|null,
  *   updatedAt?: string|null,
- *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
+ *   webhookAPIVersion?: null|WebhookAPIVersion|value-of<WebhookAPIVersion>,
  *   webhookEventFailoverURL?: string|null,
  *   webhookEventURL?: string|null,
  *   webhookTimeoutSecs?: int|null,
@@ -161,15 +163,8 @@ final class CallControlApplication implements BaseModel
      *
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
      * @param DtmfType|value-of<DtmfType> $dtmfType
-     * @param CallControlApplicationInbound|array{
-     *   channelLimit?: int|null,
-     *   shakenStirEnabled?: bool|null,
-     *   sipSubdomain?: string|null,
-     *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
-     * } $inbound
-     * @param CallControlApplicationOutbound|array{
-     *   channelLimit?: int|null, outboundVoiceProfileID?: string|null
-     * } $outbound
+     * @param CallControlApplicationInboundShape $inbound
+     * @param CallControlApplicationOutboundShape $outbound
      * @param RecordType|value-of<RecordType> $recordType
      * @param list<string> $tags
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion
@@ -323,12 +318,7 @@ final class CallControlApplication implements BaseModel
     }
 
     /**
-     * @param CallControlApplicationInbound|array{
-     *   channelLimit?: int|null,
-     *   shakenStirEnabled?: bool|null,
-     *   sipSubdomain?: string|null,
-     *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
-     * } $inbound
+     * @param CallControlApplicationInboundShape $inbound
      */
     public function withInbound(
         CallControlApplicationInbound|array $inbound
@@ -340,9 +330,7 @@ final class CallControlApplication implements BaseModel
     }
 
     /**
-     * @param CallControlApplicationOutbound|array{
-     *   channelLimit?: int|null, outboundVoiceProfileID?: string|null
-     * } $outbound
+     * @param CallControlApplicationOutboundShape $outbound
      */
     public function withOutbound(
         CallControlApplicationOutbound|array $outbound

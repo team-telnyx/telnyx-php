@@ -12,14 +12,16 @@ use Telnyx\PortingOrders\PortingOrdersActivationJob\ActivationWindow;
 use Telnyx\PortingOrders\PortingOrdersActivationJob\Status;
 
 /**
+ * @phpstan-import-type ActivationWindowShape from \Telnyx\PortingOrders\PortingOrdersActivationJob\ActivationWindow
+ *
  * @phpstan-type PortingOrdersActivationJobShape = array{
  *   id?: string|null,
  *   activateAt?: \DateTimeInterface|null,
- *   activationType?: value-of<ActivationType>|null,
- *   activationWindows?: list<ActivationWindow>|null,
+ *   activationType?: null|ActivationType|value-of<ActivationType>,
+ *   activationWindows?: list<ActivationWindowShape>|null,
  *   createdAt?: \DateTimeInterface|null,
  *   recordType?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */
@@ -93,9 +95,7 @@ final class PortingOrdersActivationJob implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param ActivationType|value-of<ActivationType> $activationType
-     * @param list<ActivationWindow|array{
-     *   endAt?: \DateTimeInterface|null, startAt?: \DateTimeInterface|null
-     * }> $activationWindows
+     * @param list<ActivationWindowShape> $activationWindows
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -161,9 +161,7 @@ final class PortingOrdersActivationJob implements BaseModel
     /**
      * List of allowed activation windows for this activation job.
      *
-     * @param list<ActivationWindow|array{
-     *   endAt?: \DateTimeInterface|null, startAt?: \DateTimeInterface|null
-     * }> $activationWindows
+     * @param list<ActivationWindowShape> $activationWindows
      */
     public function withActivationWindows(array $activationWindows): self
     {

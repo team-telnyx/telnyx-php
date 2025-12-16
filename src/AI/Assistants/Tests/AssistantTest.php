@@ -17,11 +17,13 @@ use Telnyx\Core\Contracts\BaseModel;
  * scheduling, and metadata. Used when retrieving individual tests or
  * after creating/updating tests.
  *
+ * @phpstan-import-type RubricShape from \Telnyx\AI\Assistants\Tests\AssistantTest\Rubric
+ *
  * @phpstan-type AssistantTestShape = array{
  *   createdAt: \DateTimeInterface,
  *   name: string,
- *   rubric: list<Rubric>,
- *   telnyxConversationChannel: value-of<TelnyxConversationChannel>,
+ *   rubric: list<RubricShape>,
+ *   telnyxConversationChannel: TelnyxConversationChannel|value-of<TelnyxConversationChannel>,
  *   testID: string,
  *   description?: string|null,
  *   destination?: string|null,
@@ -137,7 +139,7 @@ final class AssistantTest implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Rubric|array{criteria: string, name: string}> $rubric
+     * @param list<RubricShape> $rubric
      * @param TelnyxConversationChannel|value-of<TelnyxConversationChannel> $telnyxConversationChannel
      */
     public static function with(
@@ -194,7 +196,7 @@ final class AssistantTest implements BaseModel
     /**
      * Evaluation criteria used to assess test performance.
      *
-     * @param list<Rubric|array{criteria: string, name: string}> $rubric
+     * @param list<RubricShape> $rubric
      */
     public function withRubric(array $rubric): self
     {

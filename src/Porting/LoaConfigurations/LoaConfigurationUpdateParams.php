@@ -17,18 +17,15 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo;
  *
  * @see Telnyx\Services\Porting\LoaConfigurationsService::update()
  *
+ * @phpstan-import-type AddressShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Address
+ * @phpstan-import-type ContactShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Contact
+ * @phpstan-import-type LogoShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo
+ *
  * @phpstan-type LoaConfigurationUpdateParamsShape = array{
- *   address: Address|array{
- *     city: string,
- *     countryCode: string,
- *     state: string,
- *     streetAddress: string,
- *     zipCode: string,
- *     extendedAddress?: string|null,
- *   },
+ *   address: AddressShape,
  *   companyName: string,
- *   contact: Contact|array{email: string, phoneNumber: string},
- *   logo: Logo|array{documentID: string},
+ *   contact: ContactShape,
+ *   logo: LogoShape,
  *   name: string,
  * }
  */
@@ -99,16 +96,9 @@ final class LoaConfigurationUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Address|array{
-     *   city: string,
-     *   countryCode: string,
-     *   state: string,
-     *   streetAddress: string,
-     *   zipCode: string,
-     *   extendedAddress?: string|null,
-     * } $address
-     * @param Contact|array{email: string, phoneNumber: string} $contact
-     * @param Logo|array{documentID: string} $logo
+     * @param AddressShape $address
+     * @param ContactShape $contact
+     * @param LogoShape $logo
      */
     public static function with(
         Address|array $address,
@@ -131,14 +121,7 @@ final class LoaConfigurationUpdateParams implements BaseModel
     /**
      * The address of the company.
      *
-     * @param Address|array{
-     *   city: string,
-     *   countryCode: string,
-     *   state: string,
-     *   streetAddress: string,
-     *   zipCode: string,
-     *   extendedAddress?: string|null,
-     * } $address
+     * @param AddressShape $address
      */
     public function withAddress(Address|array $address): self
     {
@@ -162,7 +145,7 @@ final class LoaConfigurationUpdateParams implements BaseModel
     /**
      * The contact information of the company.
      *
-     * @param Contact|array{email: string, phoneNumber: string} $contact
+     * @param ContactShape $contact
      */
     public function withContact(Contact|array $contact): self
     {
@@ -175,7 +158,7 @@ final class LoaConfigurationUpdateParams implements BaseModel
     /**
      * The logo of the LOA configuration.
      *
-     * @param Logo|array{documentID: string} $logo
+     * @param LogoShape $logo
      */
     public function withLogo(Logo|array $logo): self
     {

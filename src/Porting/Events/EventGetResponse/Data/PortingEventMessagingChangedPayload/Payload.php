@@ -8,15 +8,16 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventMessagingChangedPayload\Payload\Messaging;
-use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventMessagingChangedPayload\Payload\Messaging\MessagingPortStatus;
 
 /**
  * The webhook payload for the porting_order.messaging_changed event.
  *
+ * @phpstan-import-type MessagingShape from \Telnyx\Porting\Events\EventGetResponse\Data\PortingEventMessagingChangedPayload\Payload\Messaging
+ *
  * @phpstan-type PayloadShape = array{
  *   id?: string|null,
  *   customerReference?: string|null,
- *   messaging?: Messaging|null,
+ *   messaging?: null|Messaging|MessagingShape,
  *   supportKey?: string|null,
  * }
  */
@@ -59,12 +60,7 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Messaging|array{
-     *   enableMessaging?: bool|null,
-     *   messagingCapable?: bool|null,
-     *   messagingPortCompleted?: bool|null,
-     *   messagingPortStatus?: value-of<MessagingPortStatus>|null,
-     * } $messaging
+     * @param MessagingShape $messaging
      */
     public static function with(
         ?string $id = null,
@@ -107,12 +103,7 @@ final class Payload implements BaseModel
     /**
      * The messaging portability status of the porting order.
      *
-     * @param Messaging|array{
-     *   enableMessaging?: bool|null,
-     *   messagingCapable?: bool|null,
-     *   messagingPortCompleted?: bool|null,
-     *   messagingPortStatus?: value-of<MessagingPortStatus>|null,
-     * } $messaging
+     * @param MessagingShape $messaging
      */
     public function withMessaging(Messaging|array $messaging): self
     {

@@ -13,12 +13,14 @@ use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventDeletedPayload\Paylo
 use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventDeletedPayload\PayloadStatus;
 
 /**
+ * @phpstan-import-type PayloadShape from \Telnyx\Porting\Events\EventGetResponse\Data\PortingEventDeletedPayload\Payload
+ *
  * @phpstan-type PortingEventDeletedPayloadShape = array{
  *   id?: string|null,
- *   availableNotificationMethods?: list<value-of<AvailableNotificationMethod>>|null,
- *   eventType?: value-of<EventType>|null,
- *   payload?: Payload|null,
- *   payloadStatus?: value-of<PayloadStatus>|null,
+ *   availableNotificationMethods?: list<AvailableNotificationMethod|value-of<AvailableNotificationMethod>>|null,
+ *   eventType?: null|EventType|value-of<EventType>,
+ *   payload?: null|Payload|PayloadShape,
+ *   payloadStatus?: null|PayloadStatus|value-of<PayloadStatus>,
  *   portingOrderID?: string|null,
  * }
  */
@@ -81,14 +83,7 @@ final class PortingEventDeletedPayload implements BaseModel
      *
      * @param list<AvailableNotificationMethod|value-of<AvailableNotificationMethod>> $availableNotificationMethods
      * @param EventType|value-of<EventType> $eventType
-     * @param Payload|array{
-     *   id?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   customerReference?: string|null,
-     *   deletedAt?: \DateTimeInterface|null,
-     *   recordType?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $payload
+     * @param PayloadShape $payload
      * @param PayloadStatus|value-of<PayloadStatus> $payloadStatus
      */
     public static function with(
@@ -150,14 +145,7 @@ final class PortingEventDeletedPayload implements BaseModel
     }
 
     /**
-     * @param Payload|array{
-     *   id?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   customerReference?: string|null,
-     *   deletedAt?: \DateTimeInterface|null,
-     *   recordType?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $payload
+     * @param PayloadShape $payload
      */
     public function withPayload(Payload|array $payload): self
     {

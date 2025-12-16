@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\SimCardGroupsService::retrieve()
  *
- * @phpstan-type SimCardGroupRetrieveParamsShape = array{includeIccids?: bool}
+ * @phpstan-type SimCardGroupRetrieveParamsShape = array{includeIccids?: bool|null}
  */
 final class SimCardGroupRetrieveParams implements BaseModel
 {

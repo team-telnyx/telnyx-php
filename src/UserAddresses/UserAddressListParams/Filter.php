@@ -13,8 +13,12 @@ use Telnyx\UserAddresses\UserAddressListParams\Filter\StreetAddress;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[customer_reference][eq], filter[customer_reference][contains], filter[street_address][contains].
  *
+ * @phpstan-import-type CustomerReferenceShape from \Telnyx\UserAddresses\UserAddressListParams\Filter\CustomerReference
+ * @phpstan-import-type StreetAddressShape from \Telnyx\UserAddresses\UserAddressListParams\Filter\StreetAddress
+ *
  * @phpstan-type FilterShape = array{
- *   customerReference?: CustomerReference|null, streetAddress?: StreetAddress|null
+ *   customerReference?: null|CustomerReference|CustomerReferenceShape,
+ *   streetAddress?: null|StreetAddress|StreetAddressShape,
  * }
  */
 final class Filter implements BaseModel
@@ -44,10 +48,8 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CustomerReference|array{
-     *   contains?: string|null, eq?: string|null
-     * } $customerReference
-     * @param StreetAddress|array{contains?: string|null} $streetAddress
+     * @param CustomerReferenceShape $customerReference
+     * @param StreetAddressShape $streetAddress
      */
     public static function with(
         CustomerReference|array|null $customerReference = null,
@@ -64,9 +66,7 @@ final class Filter implements BaseModel
     /**
      * Filter user addresses via the customer reference. Supports both exact matching (eq) and partial matching (contains). Matching is not case-sensitive.
      *
-     * @param CustomerReference|array{
-     *   contains?: string|null, eq?: string|null
-     * } $customerReference
+     * @param CustomerReferenceShape $customerReference
      */
     public function withCustomerReference(
         CustomerReference|array $customerReference
@@ -80,7 +80,7 @@ final class Filter implements BaseModel
     /**
      * Filter user addresses via street address. Supports partial matching (contains). Matching is not case-sensitive.
      *
-     * @param StreetAddress|array{contains?: string|null} $streetAddress
+     * @param StreetAddressShape $streetAddress
      */
     public function withStreetAddress(StreetAddress|array $streetAddress): self
     {

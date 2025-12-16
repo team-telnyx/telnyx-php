@@ -8,11 +8,13 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ManagedAccounts\ManagedAccount;
-use Telnyx\ManagedAccounts\ManagedAccount\RecordType;
-use Telnyx\ManagedAccounts\ManagedAccountBalance;
 
 /**
- * @phpstan-type ActionDisableResponseShape = array{data?: ManagedAccount|null}
+ * @phpstan-import-type ManagedAccountShape from \Telnyx\ManagedAccounts\ManagedAccount
+ *
+ * @phpstan-type ActionDisableResponseShape = array{
+ *   data?: null|ManagedAccount|ManagedAccountShape
+ * }
  */
 final class ActionDisableResponse implements BaseModel
 {
@@ -32,21 +34,7 @@ final class ActionDisableResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ManagedAccount|array{
-     *   id: string,
-     *   apiKey: string,
-     *   apiToken: string,
-     *   apiUser: string,
-     *   createdAt: string,
-     *   email: string,
-     *   managerAccountID: string,
-     *   recordType: value-of<RecordType>,
-     *   updatedAt: string,
-     *   balance?: ManagedAccountBalance|null,
-     *   managedAccountAllowCustomPricing?: bool|null,
-     *   organizationName?: string|null,
-     *   rollupBilling?: bool|null,
-     * } $data
+     * @param ManagedAccountShape $data
      */
     public static function with(ManagedAccount|array|null $data = null): self
     {
@@ -58,21 +46,7 @@ final class ActionDisableResponse implements BaseModel
     }
 
     /**
-     * @param ManagedAccount|array{
-     *   id: string,
-     *   apiKey: string,
-     *   apiToken: string,
-     *   apiUser: string,
-     *   createdAt: string,
-     *   email: string,
-     *   managerAccountID: string,
-     *   recordType: value-of<RecordType>,
-     *   updatedAt: string,
-     *   balance?: ManagedAccountBalance|null,
-     *   managedAccountAllowCustomPricing?: bool|null,
-     *   organizationName?: string|null,
-     *   rollupBilling?: bool|null,
-     * } $data
+     * @param ManagedAccountShape $data
      */
     public function withData(ManagedAccount|array $data): self
     {

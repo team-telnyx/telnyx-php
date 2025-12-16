@@ -61,7 +61,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $id Porting Order id
-     * @param array<mixed>|ActionShareParams $params
+     * @param array<string,mixed>|ActionShareParams $params
      *
      * @return BaseResponse<ActionShareResponse>
      *

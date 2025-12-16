@@ -20,7 +20,7 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigCreateParams\Op;
  *   countryCode: string,
  *   keywords: list<string>,
  *   op: Op|value-of<Op>,
- *   respText?: string,
+ *   respText?: string|null,
  * }
  */
 final class AutorespConfigCreateParams implements BaseModel

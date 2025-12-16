@@ -9,11 +9,13 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\List_\ListGetByZoneResponse\Data;
-use Telnyx\List_\ListGetByZoneResponse\Data\Number;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\List_\ListGetByZoneResponse\Data
+ * @phpstan-import-type PaginationMetaShape from \Telnyx\AuthenticationProviders\PaginationMeta
+ *
  * @phpstan-type ListGetByZoneResponseShape = array{
- *   data?: list<Data>|null, meta?: PaginationMeta|null
+ *   data?: list<DataShape>|null, meta?: null|PaginationMeta|PaginationMetaShape
  * }
  */
 final class ListGetByZoneResponse implements BaseModel
@@ -38,15 +40,8 @@ final class ListGetByZoneResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   numberOfChannels?: int|null,
-     *   numbers?: list<Number>|null,
-     *   zoneID?: string|null,
-     *   zoneName?: string|null,
-     * }> $data
-     * @param PaginationMeta|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param list<DataShape> $data
+     * @param PaginationMetaShape $meta
      */
     public static function with(
         ?array $data = null,
@@ -61,12 +56,7 @@ final class ListGetByZoneResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   numberOfChannels?: int|null,
-     *   numbers?: list<Number>|null,
-     *   zoneID?: string|null,
-     *   zoneName?: string|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {
@@ -77,9 +67,7 @@ final class ListGetByZoneResponse implements BaseModel
     }
 
     /**
-     * @param PaginationMeta|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param PaginationMetaShape $meta
      */
     public function withMeta(PaginationMeta|array $meta): self
     {

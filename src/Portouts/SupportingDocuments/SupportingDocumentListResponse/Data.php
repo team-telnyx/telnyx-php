@@ -16,7 +16,7 @@ use Telnyx\Portouts\SupportingDocuments\SupportingDocumentListResponse\Data\Type
  *   documentID: string,
  *   portoutID: string,
  *   recordType: string,
- *   type: value-of<Type>,
+ *   type: Type|value-of<Type>,
  *   updatedAt: string,
  * }
  */

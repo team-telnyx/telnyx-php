@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Telnyx\BundlePricing\UserBundles;
 
-use Telnyx\BundlePricing\BillingBundles\BillingBundleSummary;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type UserBundleNewResponseShape = array{data: list<UserBundle>}
+ * @phpstan-import-type UserBundleShape from \Telnyx\BundlePricing\UserBundles\UserBundle
+ *
+ * @phpstan-type UserBundleNewResponseShape = array{data: list<UserBundleShape>}
  */
 final class UserBundleNewResponse implements BaseModel
 {
@@ -45,15 +46,7 @@ final class UserBundleNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<UserBundle|array{
-     *   id: string,
-     *   active: bool,
-     *   billingBundle: BillingBundleSummary,
-     *   createdAt: string,
-     *   resources: list<UserBundleResource>,
-     *   userID: string,
-     *   updatedAt?: string|null,
-     * }> $data
+     * @param list<UserBundleShape> $data
      */
     public static function with(array $data): self
     {
@@ -65,15 +58,7 @@ final class UserBundleNewResponse implements BaseModel
     }
 
     /**
-     * @param list<UserBundle|array{
-     *   id: string,
-     *   active: bool,
-     *   billingBundle: BillingBundleSummary,
-     *   createdAt: string,
-     *   resources: list<UserBundleResource>,
-     *   userID: string,
-     *   updatedAt?: string|null,
-     * }> $data
+     * @param list<UserBundleShape> $data
      */
     public function withData(array $data): self
     {

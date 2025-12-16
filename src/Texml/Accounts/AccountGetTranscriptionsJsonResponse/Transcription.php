@@ -19,7 +19,7 @@ use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse\Transcription\Sta
  *   duration?: string|null,
  *   recordingSid?: string|null,
  *   sid?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   transcriptionText?: string|null,
  *   uri?: string|null,
  * }

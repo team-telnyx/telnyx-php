@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\BundlePricing\BillingBundlesService::retrieve()
  *
  * @phpstan-type BillingBundleRetrieveParamsShape = array{
- *   authorizationBearer?: string
+ *   authorizationBearer?: string|null
  * }
  */
 final class BillingBundleRetrieveParams implements BaseModel

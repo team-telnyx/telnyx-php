@@ -7,13 +7,12 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\CallStreamingStopped\EventType;
-use Telnyx\Webhooks\CallStreamingStopped\Payload;
-use Telnyx\Webhooks\CallStreamingStopped\RecordType;
 
 /**
+ * @phpstan-import-type CallStreamingStoppedShape from \Telnyx\Webhooks\CallStreamingStopped
+ *
  * @phpstan-type StreamingStoppedWebhookEventShape = array{
- *   data?: CallStreamingStopped|null
+ *   data?: null|CallStreamingStopped|CallStreamingStoppedShape
  * }
  */
 final class StreamingStoppedWebhookEvent implements BaseModel
@@ -34,13 +33,7 @@ final class StreamingStoppedWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CallStreamingStopped|array{
-     *   id?: string|null,
-     *   eventType?: value-of<EventType>|null,
-     *   occurredAt?: \DateTimeInterface|null,
-     *   payload?: Payload|null,
-     *   recordType?: value-of<RecordType>|null,
-     * } $data
+     * @param CallStreamingStoppedShape $data
      */
     public static function with(CallStreamingStopped|array|null $data = null): self
     {
@@ -52,13 +45,7 @@ final class StreamingStoppedWebhookEvent implements BaseModel
     }
 
     /**
-     * @param CallStreamingStopped|array{
-     *   id?: string|null,
-     *   eventType?: value-of<EventType>|null,
-     *   occurredAt?: \DateTimeInterface|null,
-     *   payload?: Payload|null,
-     *   recordType?: value-of<RecordType>|null,
-     * } $data
+     * @param CallStreamingStoppedShape $data
      */
     public function withData(CallStreamingStopped|array $data): self
     {

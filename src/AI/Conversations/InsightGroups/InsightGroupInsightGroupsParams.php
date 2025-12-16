@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\Conversations\InsightGroupsService::insightGroups()
  *
  * @phpstan-type InsightGroupInsightGroupsParamsShape = array{
- *   name: string, description?: string, webhook?: string
+ *   name: string, description?: string|null, webhook?: string|null
  * }
  */
 final class InsightGroupInsightGroupsParams implements BaseModel

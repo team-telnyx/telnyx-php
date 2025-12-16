@@ -20,7 +20,7 @@ interface MessagingRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MessagingCreateParams $params
+     * @param array<string,mixed>|MessagingCreateParams $params
      *
      * @return BaseResponse<MessagingNewResponse>
      *
@@ -46,7 +46,7 @@ interface MessagingRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MessagingListParams $params
+     * @param array<string,mixed>|MessagingListParams $params
      *
      * @return BaseResponse<PerPagePagination<MdrUsageReportResponseLegacy>>
      *

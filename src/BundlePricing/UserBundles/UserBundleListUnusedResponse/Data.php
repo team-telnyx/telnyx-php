@@ -10,8 +10,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type BillingBundleSummaryShape from \Telnyx\BundlePricing\BillingBundles\BillingBundleSummary
+ *
  * @phpstan-type DataShape = array{
- *   billingBundle: BillingBundleSummary, userBundleIDs: list<string>
+ *   billingBundle: BillingBundleSummary|BillingBundleSummaryShape,
+ *   userBundleIDs: list<string>,
  * }
  */
 final class Data implements BaseModel
@@ -54,17 +57,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BillingBundleSummary|array{
-     *   id: string,
-     *   costCode: string,
-     *   createdAt: string,
-     *   isPublic: bool,
-     *   name: string,
-     *   currency?: string|null,
-     *   mrcPrice?: float|null,
-     *   slug?: string|null,
-     *   specs?: list<string>|null,
-     * } $billingBundle
+     * @param BillingBundleSummaryShape $billingBundle
      * @param list<string> $userBundleIDs
      */
     public static function with(
@@ -80,17 +73,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param BillingBundleSummary|array{
-     *   id: string,
-     *   costCode: string,
-     *   createdAt: string,
-     *   isPublic: bool,
-     *   name: string,
-     *   currency?: string|null,
-     *   mrcPrice?: float|null,
-     *   slug?: string|null,
-     *   specs?: list<string>|null,
-     * } $billingBundle
+     * @param BillingBundleSummaryShape $billingBundle
      */
     public function withBillingBundle(
         BillingBundleSummary|array $billingBundle

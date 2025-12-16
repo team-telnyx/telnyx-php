@@ -17,7 +17,7 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SttDetailReportRespo
  *   endDate?: \DateTimeInterface|null,
  *   recordType?: string|null,
  *   startDate?: \DateTimeInterface|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  * }
  */
 final class SttDetailReportResponse implements BaseModel

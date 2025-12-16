@@ -10,16 +10,18 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\CreatedAt;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\PhoneNumber;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\Status;
-use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\Status\Eq;
-use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\Status\In;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[phone_number][eq], filter[phone_number][in][], filter[status][eq], filter[status][in][], filter[created_at][lt], filter[created_at][gt].
  *
+ * @phpstan-import-type CreatedAtShape from \Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\CreatedAt
+ * @phpstan-import-type PhoneNumberShape from \Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\PhoneNumber
+ * @phpstan-import-type StatusShape from \Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\Status
+ *
  * @phpstan-type FilterShape = array{
- *   createdAt?: CreatedAt|null,
- *   phoneNumber?: PhoneNumber|null,
- *   status?: Status|null,
+ *   createdAt?: null|CreatedAt|CreatedAtShape,
+ *   phoneNumber?: null|PhoneNumber|PhoneNumberShape,
+ *   status?: null|Status|StatusShape,
  * }
  */
 final class Filter implements BaseModel
@@ -46,13 +48,9 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CreatedAt|array{
-     *   gt?: \DateTimeInterface|null, lt?: \DateTimeInterface|null
-     * } $createdAt
-     * @param PhoneNumber|array{eq?: string|null, in?: list<string>|null} $phoneNumber
-     * @param Status|array{
-     *   eq?: value-of<Eq>|null, in?: list<value-of<In>>|null
-     * } $status
+     * @param CreatedAtShape $createdAt
+     * @param PhoneNumberShape $phoneNumber
+     * @param StatusShape $status
      */
     public static function with(
         CreatedAt|array|null $createdAt = null,
@@ -69,9 +67,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param CreatedAt|array{
-     *   gt?: \DateTimeInterface|null, lt?: \DateTimeInterface|null
-     * } $createdAt
+     * @param CreatedAtShape $createdAt
      */
     public function withCreatedAt(CreatedAt|array $createdAt): self
     {
@@ -82,7 +78,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param PhoneNumber|array{eq?: string|null, in?: list<string>|null} $phoneNumber
+     * @param PhoneNumberShape $phoneNumber
      */
     public function withPhoneNumber(PhoneNumber|array $phoneNumber): self
     {
@@ -93,9 +89,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param Status|array{
-     *   eq?: value-of<Eq>|null, in?: list<value-of<In>>|null
-     * } $status
+     * @param StatusShape $status
      */
     public function withStatus(Status|array $status): self
     {

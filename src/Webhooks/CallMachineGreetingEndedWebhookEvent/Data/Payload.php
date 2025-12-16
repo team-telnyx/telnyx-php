@@ -17,7 +17,7 @@ use Telnyx\Webhooks\CallMachineGreetingEndedWebhookEvent\Data\Payload\Result;
  *   clientState?: string|null,
  *   connectionID?: string|null,
  *   from?: string|null,
- *   result?: value-of<Result>|null,
+ *   result?: null|Result|value-of<Result>,
  *   to?: string|null,
  * }
  */

@@ -11,7 +11,7 @@ use Telnyx\Texml\TexmlSecretsResponse\Data\Value;
 
 /**
  * @phpstan-type DataShape = array{
- *   name?: string|null, value?: value-of<Value>|null
+ *   name?: string|null, value?: null|Value|value-of<Value>
  * }
  */
 final class Data implements BaseModel

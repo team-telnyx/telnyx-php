@@ -14,14 +14,16 @@ use Telnyx\SimCardGroups\Actions\SimCardGroupAction\Type;
 /**
  * This object represents a SIM card group action request. It allows tracking the current status of an operation that impacts the SIM card group and SIM card in it.
  *
+ * @phpstan-import-type SettingsShape from \Telnyx\SimCardGroups\Actions\SimCardGroupAction\Settings
+ *
  * @phpstan-type SimCardGroupActionShape = array{
  *   id?: string|null,
  *   createdAt?: string|null,
  *   recordType?: string|null,
- *   settings?: Settings|null,
+ *   settings?: null|Settings|SettingsShape,
  *   simCardGroupID?: string|null,
- *   status?: value-of<Status>|null,
- *   type?: value-of<Type>|null,
+ *   status?: null|Status|value-of<Status>,
+ *   type?: null|Type|value-of<Type>,
  *   updatedAt?: string|null,
  * }
  */
@@ -85,7 +87,7 @@ final class SimCardGroupAction implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Settings|array{privateWirelessGatewayID?: string|null} $settings
+     * @param SettingsShape $settings
      * @param Status|value-of<Status> $status
      * @param Type|value-of<Type> $type
      */
@@ -146,7 +148,7 @@ final class SimCardGroupAction implements BaseModel
     /**
      * A JSON object representation of the action params.
      *
-     * @param Settings|array{privateWirelessGatewayID?: string|null} $settings
+     * @param SettingsShape $settings
      */
     public function withSettings(Settings|array $settings): self
     {

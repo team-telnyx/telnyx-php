@@ -7,11 +7,12 @@ namespace Telnyx\Wireless\DetailRecordsReports;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Wireless\DetailRecordsReports\WdrReport\Status;
 
 /**
+ * @phpstan-import-type WdrReportShape from \Telnyx\Wireless\DetailRecordsReports\WdrReport
+ *
  * @phpstan-type DetailRecordsReportDeleteResponseShape = array{
- *   data?: WdrReport|null
+ *   data?: null|WdrReport|WdrReportShape
  * }
  */
 final class DetailRecordsReportDeleteResponse implements BaseModel
@@ -32,16 +33,7 @@ final class DetailRecordsReportDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param WdrReport|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   endTime?: string|null,
-     *   recordType?: string|null,
-     *   reportURL?: string|null,
-     *   startTime?: string|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param WdrReportShape $data
      */
     public static function with(WdrReport|array|null $data = null): self
     {
@@ -53,16 +45,7 @@ final class DetailRecordsReportDeleteResponse implements BaseModel
     }
 
     /**
-     * @param WdrReport|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   endTime?: string|null,
-     *   recordType?: string|null,
-     *   reportURL?: string|null,
-     *   startTime?: string|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param WdrReportShape $data
      */
     public function withData(WdrReport|array $data): self
     {

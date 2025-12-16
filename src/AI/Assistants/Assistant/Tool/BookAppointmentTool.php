@@ -10,8 +10,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type BookAppointmentShape from \Telnyx\AI\Assistants\Assistant\Tool\BookAppointmentTool\BookAppointment
+ *
  * @phpstan-type BookAppointmentToolShape = array{
- *   bookAppointment: BookAppointment, type?: 'book_appointment'
+ *   bookAppointment: BookAppointment|BookAppointmentShape,
+ *   type: 'book_appointment',
  * }
  */
 final class BookAppointmentTool implements BaseModel
@@ -50,12 +53,7 @@ final class BookAppointmentTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BookAppointment|array{
-     *   apiKeyRef: string,
-     *   eventTypeID: int,
-     *   attendeeName?: string|null,
-     *   attendeeTimezone?: string|null,
-     * } $bookAppointment
+     * @param BookAppointmentShape $bookAppointment
      */
     public static function with(BookAppointment|array $bookAppointment): self
     {
@@ -67,12 +65,7 @@ final class BookAppointmentTool implements BaseModel
     }
 
     /**
-     * @param BookAppointment|array{
-     *   apiKeyRef: string,
-     *   eventTypeID: int,
-     *   attendeeName?: string|null,
-     *   attendeeTimezone?: string|null,
-     * } $bookAppointment
+     * @param BookAppointmentShape $bookAppointment
      */
     public function withBookAppointment(
         BookAppointment|array $bookAppointment

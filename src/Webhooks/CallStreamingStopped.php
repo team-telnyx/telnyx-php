@@ -12,12 +12,14 @@ use Telnyx\Webhooks\CallStreamingStopped\Payload;
 use Telnyx\Webhooks\CallStreamingStopped\RecordType;
 
 /**
+ * @phpstan-import-type PayloadShape from \Telnyx\Webhooks\CallStreamingStopped\Payload
+ *
  * @phpstan-type CallStreamingStoppedShape = array{
  *   id?: string|null,
- *   eventType?: value-of<EventType>|null,
+ *   eventType?: null|EventType|value-of<EventType>,
  *   occurredAt?: \DateTimeInterface|null,
- *   payload?: Payload|null,
- *   recordType?: value-of<RecordType>|null,
+ *   payload?: null|Payload|PayloadShape,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  * }
  */
 final class CallStreamingStopped implements BaseModel
@@ -67,14 +69,7 @@ final class CallStreamingStopped implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param EventType|value-of<EventType> $eventType
-     * @param Payload|array{
-     *   callControlID?: string|null,
-     *   callLegID?: string|null,
-     *   callSessionID?: string|null,
-     *   clientState?: string|null,
-     *   connectionID?: string|null,
-     *   streamURL?: string|null,
-     * } $payload
+     * @param PayloadShape $payload
      * @param RecordType|value-of<RecordType> $recordType
      */
     public static function with(
@@ -131,14 +126,7 @@ final class CallStreamingStopped implements BaseModel
     }
 
     /**
-     * @param Payload|array{
-     *   callControlID?: string|null,
-     *   callLegID?: string|null,
-     *   callSessionID?: string|null,
-     *   clientState?: string|null,
-     *   connectionID?: string|null,
-     *   streamURL?: string|null,
-     * } $payload
+     * @param PayloadShape $payload
      */
     public function withPayload(Payload|array $payload): self
     {

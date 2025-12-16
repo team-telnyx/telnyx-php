@@ -7,10 +7,13 @@ namespace Telnyx\Storage\Migrations;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Storage\Migrations\MigrationParams\Status;
 
 /**
- * @phpstan-type MigrationGetResponseShape = array{data?: MigrationParams|null}
+ * @phpstan-import-type MigrationParamsShape from \Telnyx\Storage\Migrations\MigrationParams
+ *
+ * @phpstan-type MigrationGetResponseShape = array{
+ *   data?: null|MigrationParams|MigrationParamsShape
+ * }
  */
 final class MigrationGetResponse implements BaseModel
 {
@@ -30,20 +33,7 @@ final class MigrationGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MigrationParams|array{
-     *   sourceID: string,
-     *   targetBucketName: string,
-     *   targetRegion: string,
-     *   id?: string|null,
-     *   bytesMigrated?: int|null,
-     *   bytesToMigrate?: int|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   eta?: \DateTimeInterface|null,
-     *   lastCopy?: \DateTimeInterface|null,
-     *   refresh?: bool|null,
-     *   speed?: int|null,
-     *   status?: value-of<Status>|null,
-     * } $data
+     * @param MigrationParamsShape $data
      */
     public static function with(MigrationParams|array|null $data = null): self
     {
@@ -55,20 +45,7 @@ final class MigrationGetResponse implements BaseModel
     }
 
     /**
-     * @param MigrationParams|array{
-     *   sourceID: string,
-     *   targetBucketName: string,
-     *   targetRegion: string,
-     *   id?: string|null,
-     *   bytesMigrated?: int|null,
-     *   bytesToMigrate?: int|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   eta?: \DateTimeInterface|null,
-     *   lastCopy?: \DateTimeInterface|null,
-     *   refresh?: bool|null,
-     *   speed?: int|null,
-     *   status?: value-of<Status>|null,
-     * } $data
+     * @param MigrationParamsShape $data
      */
     public function withData(MigrationParams|array $data): self
     {

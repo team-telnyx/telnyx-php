@@ -15,11 +15,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\RoomsService::create()
  *
  * @phpstan-type RoomCreateParamsShape = array{
- *   enableRecording?: bool,
- *   maxParticipants?: int,
- *   uniqueName?: string,
+ *   enableRecording?: bool|null,
+ *   maxParticipants?: int|null,
+ *   uniqueName?: string|null,
  *   webhookEventFailoverURL?: string|null,
- *   webhookEventURL?: string,
+ *   webhookEventURL?: string|null,
  *   webhookTimeoutSecs?: int|null,
  * }
  */

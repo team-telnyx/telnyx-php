@@ -19,7 +19,7 @@ interface DialogflowConnectionsRawContract
      * @api
      *
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control)
-     * @param array<mixed>|DialogflowConnectionCreateParams $params
+     * @param array<string,mixed>|DialogflowConnectionCreateParams $params
      *
      * @return BaseResponse<DialogflowConnectionNewResponse>
      *
@@ -49,7 +49,7 @@ interface DialogflowConnectionsRawContract
      * @api
      *
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control)
-     * @param array<mixed>|DialogflowConnectionUpdateParams $params
+     * @param array<string,mixed>|DialogflowConnectionUpdateParams $params
      *
      * @return BaseResponse<DialogflowConnectionUpdateResponse>
      *

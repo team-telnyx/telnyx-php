@@ -12,18 +12,20 @@ use Telnyx\Reports\MdrUsageReports\MdrUsageReport\Result;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReport\Status;
 
 /**
+ * @phpstan-import-type ResultShape from \Telnyx\Reports\MdrUsageReports\MdrUsageReport\Result
+ *
  * @phpstan-type MdrUsageReportShape = array{
  *   id?: string|null,
- *   aggregationType?: value-of<AggregationType>|null,
+ *   aggregationType?: null|AggregationType|value-of<AggregationType>,
  *   connections?: list<int>|null,
  *   createdAt?: \DateTimeInterface|null,
  *   endDate?: \DateTimeInterface|null,
  *   profiles?: string|null,
  *   recordType?: string|null,
  *   reportURL?: string|null,
- *   result?: list<Result>|null,
+ *   result?: list<ResultShape>|null,
  *   startDate?: \DateTimeInterface|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */
@@ -87,22 +89,7 @@ final class MdrUsageReport implements BaseModel
      *
      * @param AggregationType|value-of<AggregationType> $aggregationType
      * @param list<int> $connections
-     * @param list<Result|array{
-     *   carrierPassthroughFee?: string|null,
-     *   connection?: string|null,
-     *   cost?: string|null,
-     *   currency?: string|null,
-     *   delivered?: string|null,
-     *   direction?: string|null,
-     *   messageType?: string|null,
-     *   parts?: string|null,
-     *   product?: string|null,
-     *   profileID?: string|null,
-     *   received?: string|null,
-     *   sent?: string|null,
-     *   tags?: string|null,
-     *   tnType?: string|null,
-     * }> $result
+     * @param list<ResultShape> $result
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -212,22 +199,7 @@ final class MdrUsageReport implements BaseModel
     }
 
     /**
-     * @param list<Result|array{
-     *   carrierPassthroughFee?: string|null,
-     *   connection?: string|null,
-     *   cost?: string|null,
-     *   currency?: string|null,
-     *   delivered?: string|null,
-     *   direction?: string|null,
-     *   messageType?: string|null,
-     *   parts?: string|null,
-     *   product?: string|null,
-     *   profileID?: string|null,
-     *   received?: string|null,
-     *   sent?: string|null,
-     *   tags?: string|null,
-     *   tnType?: string|null,
-     * }> $result
+     * @param list<ResultShape> $result
      */
     public function withResult(array $result): self
     {

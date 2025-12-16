@@ -17,7 +17,7 @@ use Telnyx\Queues\QueueGetResponse\Data\RecordType;
  *   currentSize: int,
  *   maxSize: int,
  *   name: string,
- *   recordType: value-of<RecordType>,
+ *   recordType: RecordType|value-of<RecordType>,
  *   updatedAt: string,
  * }
  */

@@ -7,13 +7,12 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\CallStreamingFailed\EventType;
-use Telnyx\Webhooks\CallStreamingFailed\Payload;
-use Telnyx\Webhooks\CallStreamingFailed\RecordType;
 
 /**
+ * @phpstan-import-type CallStreamingFailedShape from \Telnyx\Webhooks\CallStreamingFailed
+ *
  * @phpstan-type CallStreamingFailedWebhookEventShape = array{
- *   data?: CallStreamingFailed|null
+ *   data?: null|CallStreamingFailed|CallStreamingFailedShape
  * }
  */
 final class CallStreamingFailedWebhookEvent implements BaseModel
@@ -34,13 +33,7 @@ final class CallStreamingFailedWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CallStreamingFailed|array{
-     *   id?: string|null,
-     *   eventType?: value-of<EventType>|null,
-     *   occurredAt?: \DateTimeInterface|null,
-     *   payload?: Payload|null,
-     *   recordType?: value-of<RecordType>|null,
-     * } $data
+     * @param CallStreamingFailedShape $data
      */
     public static function with(CallStreamingFailed|array|null $data = null): self
     {
@@ -52,13 +45,7 @@ final class CallStreamingFailedWebhookEvent implements BaseModel
     }
 
     /**
-     * @param CallStreamingFailed|array{
-     *   id?: string|null,
-     *   eventType?: value-of<EventType>|null,
-     *   occurredAt?: \DateTimeInterface|null,
-     *   payload?: Payload|null,
-     *   recordType?: value-of<RecordType>|null,
-     * } $data
+     * @param CallStreamingFailedShape $data
      */
     public function withData(CallStreamingFailed|array $data): self
     {

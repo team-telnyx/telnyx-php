@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Addresses\ActionsService::acceptSuggestions()
  *
- * @phpstan-type ActionAcceptSuggestionsParamsShape = array{id?: string}
+ * @phpstan-type ActionAcceptSuggestionsParamsShape = array{id?: string|null}
  */
 final class ActionAcceptSuggestionsParams implements BaseModel
 {

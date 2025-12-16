@@ -22,16 +22,16 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Calls\ActionsService::gather()
  *
  * @phpstan-type ActionGatherParamsShape = array{
- *   clientState?: string,
- *   commandID?: string,
- *   gatherID?: string,
- *   initialTimeoutMillis?: int,
- *   interDigitTimeoutMillis?: int,
- *   maximumDigits?: int,
- *   minimumDigits?: int,
- *   terminatingDigit?: string,
- *   timeoutMillis?: int,
- *   validDigits?: string,
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   gatherID?: string|null,
+ *   initialTimeoutMillis?: int|null,
+ *   interDigitTimeoutMillis?: int|null,
+ *   maximumDigits?: int|null,
+ *   minimumDigits?: int|null,
+ *   terminatingDigit?: string|null,
+ *   timeoutMillis?: int|null,
+ *   validDigits?: string|null,
  * }
  */
 final class ActionGatherParams implements BaseModel

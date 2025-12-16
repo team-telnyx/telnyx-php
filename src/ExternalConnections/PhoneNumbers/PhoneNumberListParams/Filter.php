@@ -14,10 +14,14 @@ use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Filter\PhoneNu
 /**
  * Filter parameter for phone numbers (deepObject style). Supports filtering by phone_number, civic_address_id, and location_id with eq/contains operations.
  *
+ * @phpstan-import-type CivicAddressIDShape from \Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Filter\CivicAddressID
+ * @phpstan-import-type LocationIDShape from \Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Filter\LocationID
+ * @phpstan-import-type PhoneNumberShape from \Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Filter\PhoneNumber
+ *
  * @phpstan-type FilterShape = array{
- *   civicAddressID?: CivicAddressID|null,
- *   locationID?: LocationID|null,
- *   phoneNumber?: PhoneNumber|null,
+ *   civicAddressID?: null|CivicAddressID|CivicAddressIDShape,
+ *   locationID?: null|LocationID|LocationIDShape,
+ *   phoneNumber?: null|PhoneNumber|PhoneNumberShape,
  * }
  */
 final class Filter implements BaseModel
@@ -44,9 +48,9 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CivicAddressID|array{eq?: string|null} $civicAddressID
-     * @param LocationID|array{eq?: string|null} $locationID
-     * @param PhoneNumber|array{contains?: string|null, eq?: string|null} $phoneNumber
+     * @param CivicAddressIDShape $civicAddressID
+     * @param LocationIDShape $locationID
+     * @param PhoneNumberShape $phoneNumber
      */
     public static function with(
         CivicAddressID|array|null $civicAddressID = null,
@@ -63,7 +67,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param CivicAddressID|array{eq?: string|null} $civicAddressID
+     * @param CivicAddressIDShape $civicAddressID
      */
     public function withCivicAddressID(
         CivicAddressID|array $civicAddressID
@@ -75,7 +79,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param LocationID|array{eq?: string|null} $locationID
+     * @param LocationIDShape $locationID
      */
     public function withLocationID(LocationID|array $locationID): self
     {
@@ -86,7 +90,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param PhoneNumber|array{contains?: string|null, eq?: string|null} $phoneNumber
+     * @param PhoneNumberShape $phoneNumber
      */
     public function withPhoneNumber(PhoneNumber|array $phoneNumber): self
     {

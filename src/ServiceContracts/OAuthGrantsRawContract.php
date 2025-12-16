@@ -32,7 +32,7 @@ interface OAuthGrantsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|OAuthGrantListParams $params
+     * @param array<string,mixed>|OAuthGrantListParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<OAuthGrant>>
      *

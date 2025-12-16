@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\PortoutsService::updateStatus()
  *
  * @phpstan-type PortoutUpdateStatusParamsShape = array{
- *   id: string, reason: string, hostMessaging?: bool
+ *   id: string, reason: string, hostMessaging?: bool|null
  * }
  */
 final class PortoutUpdateStatusParams implements BaseModel

@@ -12,6 +12,8 @@ use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderResponse\OrderingGroup\St
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderResponse\OrderingGroup\Strategy;
 
 /**
+ * @phpstan-import-type OrderShape from \Telnyx\InexplicitNumberOrders\InexplicitNumberOrderResponse\OrderingGroup\Order
+ *
  * @phpstan-type OrderingGroupShape = array{
  *   administrativeArea?: string|null,
  *   countAllocated?: int|null,
@@ -21,14 +23,14 @@ use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderResponse\OrderingGroup\St
  *   errorReason?: string|null,
  *   excludeHeldNumbers?: bool|null,
  *   nationalDestinationCode?: string|null,
- *   orders?: list<Order>|null,
+ *   orders?: list<OrderShape>|null,
  *   phoneNumberType?: string|null,
  *   phoneNumberContains?: string|null,
  *   phoneNumberEndsWith?: string|null,
  *   phoneNumberStartsWith?: string|null,
  *   quickship?: bool|null,
- *   status?: value-of<Status>|null,
- *   strategy?: value-of<Strategy>|null,
+ *   status?: null|Status|value-of<Status>,
+ *   strategy?: null|Strategy|value-of<Strategy>,
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */
@@ -155,9 +157,7 @@ final class OrderingGroup implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Order|array{
-     *   numberOrderID: string, subNumberOrderIDs: list<string>
-     * }> $orders
+     * @param list<OrderShape> $orders
      * @param Status|value-of<Status> $status
      * @param Strategy|value-of<Strategy> $strategy
      */
@@ -295,9 +295,7 @@ final class OrderingGroup implements BaseModel
     /**
      * Array of orders created to fulfill the inexplicit order.
      *
-     * @param list<Order|array{
-     *   numberOrderID: string, subNumberOrderIDs: list<string>
-     * }> $orders
+     * @param list<OrderShape> $orders
      */
     public function withOrders(array $orders): self
     {

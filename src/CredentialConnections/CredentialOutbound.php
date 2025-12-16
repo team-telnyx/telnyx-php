@@ -13,14 +13,14 @@ use Telnyx\CredentialConnections\CredentialOutbound\T38ReinviteSource;
 /**
  * @phpstan-type CredentialOutboundShape = array{
  *   aniOverride?: string|null,
- *   aniOverrideType?: value-of<AniOverrideType>|null,
+ *   aniOverrideType?: null|AniOverrideType|value-of<AniOverrideType>,
  *   callParkingEnabled?: bool|null,
  *   channelLimit?: int|null,
  *   generateRingbackTone?: bool|null,
  *   instantRingbackEnabled?: bool|null,
  *   localization?: string|null,
  *   outboundVoiceProfileID?: string|null,
- *   t38ReinviteSource?: value-of<T38ReinviteSource>|null,
+ *   t38ReinviteSource?: null|T38ReinviteSource|value-of<T38ReinviteSource>,
  * }
  */
 final class CredentialOutbound implements BaseModel

@@ -18,9 +18,9 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateParams\AnnounceMethod;
  *
  * @phpstan-type ConferenceUpdateParamsShape = array{
  *   accountSid: string,
- *   announceMethod?: AnnounceMethod|value-of<AnnounceMethod>,
- *   announceURL?: string,
- *   status?: string,
+ *   announceMethod?: null|AnnounceMethod|value-of<AnnounceMethod>,
+ *   announceURL?: string|null,
+ *   status?: string|null,
  * }
  */
 final class ConferenceUpdateParams implements BaseModel

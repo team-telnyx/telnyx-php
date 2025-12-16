@@ -7,14 +7,9 @@ namespace Telnyx\Messages;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Messages\MessagingError\Source;
 use Telnyx\Messages\OutboundMessagePayload\Cc;
-use Telnyx\Messages\OutboundMessagePayload\Cc\LineType;
-use Telnyx\Messages\OutboundMessagePayload\Cc\Status;
 use Telnyx\Messages\OutboundMessagePayload\Cost;
 use Telnyx\Messages\OutboundMessagePayload\CostBreakdown;
-use Telnyx\Messages\OutboundMessagePayload\CostBreakdown\CarrierFee;
-use Telnyx\Messages\OutboundMessagePayload\CostBreakdown\Rate;
 use Telnyx\Messages\OutboundMessagePayload\Direction;
 use Telnyx\Messages\OutboundMessagePayload\From;
 use Telnyx\Messages\OutboundMessagePayload\Media;
@@ -23,22 +18,30 @@ use Telnyx\Messages\OutboundMessagePayload\To;
 use Telnyx\Messages\OutboundMessagePayload\Type;
 
 /**
+ * @phpstan-import-type CcShape from \Telnyx\Messages\OutboundMessagePayload\Cc
+ * @phpstan-import-type CostShape from \Telnyx\Messages\OutboundMessagePayload\Cost
+ * @phpstan-import-type CostBreakdownShape from \Telnyx\Messages\OutboundMessagePayload\CostBreakdown
+ * @phpstan-import-type MessagingErrorShape from \Telnyx\Messages\MessagingError
+ * @phpstan-import-type FromShape from \Telnyx\Messages\OutboundMessagePayload\From
+ * @phpstan-import-type MediaShape from \Telnyx\Messages\OutboundMessagePayload\Media
+ * @phpstan-import-type ToShape from \Telnyx\Messages\OutboundMessagePayload\To
+ *
  * @phpstan-type OutboundMessagePayloadShape = array{
  *   id?: string|null,
- *   cc?: list<Cc>|null,
+ *   cc?: list<CcShape>|null,
  *   completedAt?: \DateTimeInterface|null,
- *   cost?: Cost|null,
- *   costBreakdown?: CostBreakdown|null,
- *   direction?: value-of<Direction>|null,
+ *   cost?: null|Cost|CostShape,
+ *   costBreakdown?: null|CostBreakdown|CostBreakdownShape,
+ *   direction?: null|Direction|value-of<Direction>,
  *   encoding?: string|null,
- *   errors?: list<MessagingError>|null,
- *   from?: From|null,
- *   media?: list<Media>|null,
+ *   errors?: list<MessagingErrorShape>|null,
+ *   from?: null|From|FromShape,
+ *   media?: list<MediaShape>|null,
  *   messagingProfileID?: string|null,
  *   organizationID?: string|null,
  *   parts?: int|null,
  *   receivedAt?: \DateTimeInterface|null,
- *   recordType?: value-of<RecordType>|null,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  *   sentAt?: \DateTimeInterface|null,
  *   subject?: string|null,
  *   tags?: list<string>|null,
@@ -46,8 +49,8 @@ use Telnyx\Messages\OutboundMessagePayload\Type;
  *   tcrCampaignID?: string|null,
  *   tcrCampaignRegistered?: string|null,
  *   text?: string|null,
- *   to?: list<To>|null,
- *   type?: value-of<Type>|null,
+ *   to?: list<ToShape>|null,
+ *   type?: null|Type|value-of<Type>,
  *   validUntil?: \DateTimeInterface|null,
  *   webhookFailoverURL?: string|null,
  *   webhookURL?: string|null,
@@ -230,43 +233,16 @@ final class OutboundMessagePayload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Cc|array{
-     *   carrier?: string|null,
-     *   lineType?: value-of<LineType>|null,
-     *   phoneNumber?: string|null,
-     *   status?: value-of<Status>|null,
-     * }> $cc
-     * @param Cost|array{amount?: string|null, currency?: string|null}|null $cost
-     * @param CostBreakdown|array{
-     *   carrierFee?: CarrierFee|null, rate?: Rate|null
-     * }|null $costBreakdown
+     * @param list<CcShape> $cc
+     * @param CostShape|null $cost
+     * @param CostBreakdownShape|null $costBreakdown
      * @param Direction|value-of<Direction> $direction
-     * @param list<MessagingError|array{
-     *   code: string,
-     *   title: string,
-     *   detail?: string|null,
-     *   meta?: array<string,mixed>|null,
-     *   source?: Source|null,
-     * }> $errors
-     * @param From|array{
-     *   carrier?: string|null,
-     *   lineType?: value-of<From\LineType>|null,
-     *   phoneNumber?: string|null,
-     * } $from
-     * @param list<Media|array{
-     *   contentType?: string|null,
-     *   sha256?: string|null,
-     *   size?: int|null,
-     *   url?: string|null,
-     * }> $media
+     * @param list<MessagingErrorShape> $errors
+     * @param FromShape $from
+     * @param list<MediaShape> $media
      * @param RecordType|value-of<RecordType> $recordType
      * @param list<string> $tags
-     * @param list<To|array{
-     *   carrier?: string|null,
-     *   lineType?: value-of<To\LineType>|null,
-     *   phoneNumber?: string|null,
-     *   status?: value-of<To\Status>|null,
-     * }> $to
+     * @param list<ToShape> $to
      * @param Type|value-of<Type> $type
      */
     public static function with(
@@ -343,12 +319,7 @@ final class OutboundMessagePayload implements BaseModel
     }
 
     /**
-     * @param list<Cc|array{
-     *   carrier?: string|null,
-     *   lineType?: value-of<LineType>|null,
-     *   phoneNumber?: string|null,
-     *   status?: value-of<Status>|null,
-     * }> $cc
+     * @param list<CcShape> $cc
      */
     public function withCc(array $cc): self
     {
@@ -370,7 +341,7 @@ final class OutboundMessagePayload implements BaseModel
     }
 
     /**
-     * @param Cost|array{amount?: string|null, currency?: string|null}|null $cost
+     * @param CostShape|null $cost
      */
     public function withCost(Cost|array|null $cost): self
     {
@@ -383,9 +354,7 @@ final class OutboundMessagePayload implements BaseModel
     /**
      * Detailed breakdown of the message cost components.
      *
-     * @param CostBreakdown|array{
-     *   carrierFee?: CarrierFee|null, rate?: Rate|null
-     * }|null $costBreakdown
+     * @param CostBreakdownShape|null $costBreakdown
      */
     public function withCostBreakdown(
         CostBreakdown|array|null $costBreakdown
@@ -423,13 +392,7 @@ final class OutboundMessagePayload implements BaseModel
     /**
      * These errors may point at addressees when referring to unsuccessful/unconfirmed delivery statuses.
      *
-     * @param list<MessagingError|array{
-     *   code: string,
-     *   title: string,
-     *   detail?: string|null,
-     *   meta?: array<string,mixed>|null,
-     *   source?: Source|null,
-     * }> $errors
+     * @param list<MessagingErrorShape> $errors
      */
     public function withErrors(array $errors): self
     {
@@ -440,11 +403,7 @@ final class OutboundMessagePayload implements BaseModel
     }
 
     /**
-     * @param From|array{
-     *   carrier?: string|null,
-     *   lineType?: value-of<From\LineType>|null,
-     *   phoneNumber?: string|null,
-     * } $from
+     * @param FromShape $from
      */
     public function withFrom(From|array $from): self
     {
@@ -455,12 +414,7 @@ final class OutboundMessagePayload implements BaseModel
     }
 
     /**
-     * @param list<Media|array{
-     *   contentType?: string|null,
-     *   sha256?: string|null,
-     *   size?: int|null,
-     *   url?: string|null,
-     * }> $media
+     * @param list<MediaShape> $media
      */
     public function withMedia(array $media): self
     {
@@ -610,12 +564,7 @@ final class OutboundMessagePayload implements BaseModel
     }
 
     /**
-     * @param list<To|array{
-     *   carrier?: string|null,
-     *   lineType?: value-of<To\LineType>|null,
-     *   phoneNumber?: string|null,
-     *   status?: value-of<To\Status>|null,
-     * }> $to
+     * @param list<ToShape> $to
      */
     public function withTo(array $to): self
     {

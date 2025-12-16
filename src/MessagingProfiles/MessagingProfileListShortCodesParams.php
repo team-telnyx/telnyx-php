@@ -15,8 +15,10 @@ use Telnyx\MessagingProfiles\MessagingProfileListShortCodesParams\Page;
  *
  * @see Telnyx\Services\MessagingProfilesService::listShortCodes()
  *
+ * @phpstan-import-type PageShape from \Telnyx\MessagingProfiles\MessagingProfileListShortCodesParams\Page
+ *
  * @phpstan-type MessagingProfileListShortCodesParamsShape = array{
- *   page?: Page|array{number?: int|null, size?: int|null}
+ *   page?: PageShape|null
  * }
  */
 final class MessagingProfileListShortCodesParams implements BaseModel
@@ -41,7 +43,7 @@ final class MessagingProfileListShortCodesParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public static function with(Page|array|null $page = null): self
     {
@@ -55,7 +57,7 @@ final class MessagingProfileListShortCodesParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

@@ -9,24 +9,15 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RequirementGroups\RequirementGroupListParams\Filter;
-use Telnyx\RequirementGroups\RequirementGroupListParams\Filter\Action;
-use Telnyx\RequirementGroups\RequirementGroupListParams\Filter\PhoneNumberType;
-use Telnyx\RequirementGroups\RequirementGroupListParams\Filter\Status;
 
 /**
  * List requirement groups.
  *
  * @see Telnyx\Services\RequirementGroupsService::list()
  *
- * @phpstan-type RequirementGroupListParamsShape = array{
- *   filter?: Filter|array{
- *     action?: value-of<Action>|null,
- *     countryCode?: string|null,
- *     customerReference?: string|null,
- *     phoneNumberType?: value-of<PhoneNumberType>|null,
- *     status?: value-of<Status>|null,
- *   },
- * }
+ * @phpstan-import-type FilterShape from \Telnyx\RequirementGroups\RequirementGroupListParams\Filter
+ *
+ * @phpstan-type RequirementGroupListParamsShape = array{filter?: FilterShape|null}
  */
 final class RequirementGroupListParams implements BaseModel
 {
@@ -50,13 +41,7 @@ final class RequirementGroupListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   action?: value-of<Action>|null,
-     *   countryCode?: string|null,
-     *   customerReference?: string|null,
-     *   phoneNumberType?: value-of<PhoneNumberType>|null,
-     *   status?: value-of<Status>|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public static function with(Filter|array|null $filter = null): self
     {
@@ -70,13 +55,7 @@ final class RequirementGroupListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[country_code], filter[phone_number_type], filter[action], filter[status], filter[customer_reference].
      *
-     * @param Filter|array{
-     *   action?: value-of<Action>|null,
-     *   countryCode?: string|null,
-     *   customerReference?: string|null,
-     *   phoneNumberType?: value-of<PhoneNumberType>|null,
-     *   status?: value-of<Status>|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

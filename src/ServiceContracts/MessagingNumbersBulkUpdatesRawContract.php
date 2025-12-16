@@ -16,7 +16,7 @@ interface MessagingNumbersBulkUpdatesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MessagingNumbersBulkUpdateCreateParams $params
+     * @param array<string,mixed>|MessagingNumbersBulkUpdateCreateParams $params
      *
      * @return BaseResponse<MessagingNumbersBulkUpdateNewResponse>
      *

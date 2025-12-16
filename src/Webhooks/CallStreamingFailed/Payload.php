@@ -8,10 +8,11 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallStreamingFailed\Payload\StreamParams;
-use Telnyx\Webhooks\CallStreamingFailed\Payload\StreamParams\Track;
 use Telnyx\Webhooks\CallStreamingFailed\Payload\StreamType;
 
 /**
+ * @phpstan-import-type StreamParamsShape from \Telnyx\Webhooks\CallStreamingFailed\Payload\StreamParams
+ *
  * @phpstan-type PayloadShape = array{
  *   callControlID?: string|null,
  *   callLegID?: string|null,
@@ -20,8 +21,8 @@ use Telnyx\Webhooks\CallStreamingFailed\Payload\StreamType;
  *   connectionID?: string|null,
  *   failureReason?: string|null,
  *   streamID?: string|null,
- *   streamParams?: StreamParams|null,
- *   streamType?: value-of<StreamType>|null,
+ *   streamParams?: null|StreamParams|StreamParamsShape,
+ *   streamType?: null|StreamType|value-of<StreamType>,
  * }
  */
 final class Payload implements BaseModel
@@ -95,9 +96,7 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param StreamParams|array{
-     *   streamURL?: string|null, track?: value-of<Track>|null
-     * } $streamParams
+     * @param StreamParamsShape $streamParams
      * @param StreamType|value-of<StreamType> $streamType
      */
     public static function with(
@@ -206,9 +205,7 @@ final class Payload implements BaseModel
     /**
      * Streaming parameters as they were originally given to the Call Control API.
      *
-     * @param StreamParams|array{
-     *   streamURL?: string|null, track?: value-of<Track>|null
-     * } $streamParams
+     * @param StreamParamsShape $streamParams
      */
     public function withStreamParams(StreamParams|array $streamParams): self
     {

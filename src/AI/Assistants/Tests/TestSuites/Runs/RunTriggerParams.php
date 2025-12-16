@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\Assistants\Tests\TestSuites\RunsService::trigger()
  *
- * @phpstan-type RunTriggerParamsShape = array{destinationVersionID?: string}
+ * @phpstan-type RunTriggerParamsShape = array{destinationVersionID?: string|null}
  */
 final class RunTriggerParams implements BaseModel
 {

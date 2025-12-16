@@ -10,7 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderType;
 
 /**
- * @phpstan-type MiscShape = array{type?: value-of<PortingOrderType>|null}
+ * @phpstan-type MiscShape = array{
+ *   type?: null|PortingOrderType|value-of<PortingOrderType>
+ * }
  */
 final class Misc implements BaseModel
 {

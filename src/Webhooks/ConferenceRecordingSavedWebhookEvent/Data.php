@@ -9,18 +9,16 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\ConferenceRecordingSavedWebhookEvent\Data\EventType;
 use Telnyx\Webhooks\ConferenceRecordingSavedWebhookEvent\Data\Payload;
-use Telnyx\Webhooks\ConferenceRecordingSavedWebhookEvent\Data\Payload\Channels;
-use Telnyx\Webhooks\ConferenceRecordingSavedWebhookEvent\Data\Payload\Format;
-use Telnyx\Webhooks\ConferenceRecordingSavedWebhookEvent\Data\Payload\PublicRecordingURLs;
-use Telnyx\Webhooks\ConferenceRecordingSavedWebhookEvent\Data\Payload\RecordingURLs;
 use Telnyx\Webhooks\ConferenceRecordingSavedWebhookEvent\Data\RecordType;
 
 /**
+ * @phpstan-import-type PayloadShape from \Telnyx\Webhooks\ConferenceRecordingSavedWebhookEvent\Data\Payload
+ *
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   eventType?: value-of<EventType>|null,
- *   payload?: Payload|null,
- *   recordType?: value-of<RecordType>|null,
+ *   eventType?: null|EventType|value-of<EventType>,
+ *   payload?: null|Payload|PayloadShape,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  * }
  */
 final class Data implements BaseModel
@@ -64,20 +62,7 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param EventType|value-of<EventType> $eventType
-     * @param Payload|array{
-     *   callControlID?: string|null,
-     *   callSessionID?: string|null,
-     *   channels?: value-of<Channels>|null,
-     *   clientState?: string|null,
-     *   conferenceID?: string|null,
-     *   connectionID?: string|null,
-     *   format?: value-of<Format>|null,
-     *   publicRecordingURLs?: PublicRecordingURLs|null,
-     *   recordingEndedAt?: \DateTimeInterface|null,
-     *   recordingID?: string|null,
-     *   recordingStartedAt?: \DateTimeInterface|null,
-     *   recordingURLs?: RecordingURLs|null,
-     * } $payload
+     * @param PayloadShape $payload
      * @param RecordType|value-of<RecordType> $recordType
      */
     public static function with(
@@ -121,20 +106,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param Payload|array{
-     *   callControlID?: string|null,
-     *   callSessionID?: string|null,
-     *   channels?: value-of<Channels>|null,
-     *   clientState?: string|null,
-     *   conferenceID?: string|null,
-     *   connectionID?: string|null,
-     *   format?: value-of<Format>|null,
-     *   publicRecordingURLs?: PublicRecordingURLs|null,
-     *   recordingEndedAt?: \DateTimeInterface|null,
-     *   recordingID?: string|null,
-     *   recordingStartedAt?: \DateTimeInterface|null,
-     *   recordingURLs?: RecordingURLs|null,
-     * } $payload
+     * @param PayloadShape $payload
      */
     public function withPayload(Payload|array $payload): self
     {

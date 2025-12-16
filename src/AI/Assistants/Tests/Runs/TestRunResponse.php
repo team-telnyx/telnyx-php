@@ -16,16 +16,18 @@ use Telnyx\Core\Contracts\BaseModel;
  * Provides comprehensive information about a test execution including
  * status, timing, logs, and detailed evaluation results.
  *
+ * @phpstan-import-type DetailStatusShape from \Telnyx\AI\Assistants\Tests\Runs\TestRunResponse\DetailStatus
+ *
  * @phpstan-type TestRunResponseShape = array{
  *   createdAt: \DateTimeInterface,
  *   runID: string,
- *   status: value-of<TestStatus>,
+ *   status: TestStatus|value-of<TestStatus>,
  *   testID: string,
  *   triggeredBy: string,
  *   completedAt?: \DateTimeInterface|null,
  *   conversationID?: string|null,
  *   conversationInsightsID?: string|null,
- *   detailStatus?: list<DetailStatus>|null,
+ *   detailStatus?: list<DetailStatusShape>|null,
  *   logs?: string|null,
  *   testSuiteRunID?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
@@ -150,9 +152,7 @@ final class TestRunResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param TestStatus|value-of<TestStatus> $status
-     * @param list<DetailStatus|array{
-     *   name: string, status: value-of<TestStatus>
-     * }> $detailStatus
+     * @param list<DetailStatusShape> $detailStatus
      */
     public static function with(
         \DateTimeInterface $createdAt,
@@ -287,9 +287,7 @@ final class TestRunResponse implements BaseModel
     /**
      * Detailed evaluation results for each rubric criteria. Name is name of the criteria from the rubric and status is the result of the evaluation. This list will have a result for every criteria in the rubric section.
      *
-     * @param list<DetailStatus|array{
-     *   name: string, status: value-of<TestStatus>
-     * }> $detailStatus
+     * @param list<DetailStatusShape> $detailStatus
      */
     public function withDetailStatus(array $detailStatus): self
     {

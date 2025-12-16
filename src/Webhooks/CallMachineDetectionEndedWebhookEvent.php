@@ -8,13 +8,12 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallMachineDetectionEndedWebhookEvent\Data;
-use Telnyx\Webhooks\CallMachineDetectionEndedWebhookEvent\Data\EventType;
-use Telnyx\Webhooks\CallMachineDetectionEndedWebhookEvent\Data\Payload;
-use Telnyx\Webhooks\CallMachineDetectionEndedWebhookEvent\Data\RecordType;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\Webhooks\CallMachineDetectionEndedWebhookEvent\Data
+ *
  * @phpstan-type CallMachineDetectionEndedWebhookEventShape = array{
- *   data?: Data|null
+ *   data?: null|Data|DataShape
  * }
  */
 final class CallMachineDetectionEndedWebhookEvent implements BaseModel
@@ -35,13 +34,7 @@ final class CallMachineDetectionEndedWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   id?: string|null,
-     *   eventType?: value-of<EventType>|null,
-     *   occurredAt?: \DateTimeInterface|null,
-     *   payload?: Payload|null,
-     *   recordType?: value-of<RecordType>|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -53,13 +46,7 @@ final class CallMachineDetectionEndedWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   id?: string|null,
-     *   eventType?: value-of<EventType>|null,
-     *   occurredAt?: \DateTimeInterface|null,
-     *   payload?: Payload|null,
-     *   recordType?: value-of<RecordType>|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

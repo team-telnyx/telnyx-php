@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\SimCards\ActionsService::setPublicIP()
  *
- * @phpstan-type ActionSetPublicIPParamsShape = array{regionCode?: string}
+ * @phpstan-type ActionSetPublicIPParamsShape = array{regionCode?: string|null}
  */
 final class ActionSetPublicIPParams implements BaseModel
 {

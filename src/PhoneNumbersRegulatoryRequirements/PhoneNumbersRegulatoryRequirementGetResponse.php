@@ -9,12 +9,13 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse\Data;
-use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse\Data\RegionInformation;
-use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse\Data\RegulatoryRequirement;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse\Data
+ * @phpstan-import-type PaginationMetaShape from \Telnyx\AuthenticationProviders\PaginationMeta
+ *
  * @phpstan-type PhoneNumbersRegulatoryRequirementGetResponseShape = array{
- *   data?: list<Data>|null, meta?: PaginationMeta|null
+ *   data?: list<DataShape>|null, meta?: null|PaginationMeta|PaginationMetaShape
  * }
  */
 final class PhoneNumbersRegulatoryRequirementGetResponse implements BaseModel
@@ -39,16 +40,8 @@ final class PhoneNumbersRegulatoryRequirementGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   phoneNumber?: string|null,
-     *   phoneNumberType?: string|null,
-     *   recordType?: string|null,
-     *   regionInformation?: list<RegionInformation>|null,
-     *   regulatoryRequirements?: list<RegulatoryRequirement>|null,
-     * }> $data
-     * @param PaginationMeta|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param list<DataShape> $data
+     * @param PaginationMetaShape $meta
      */
     public static function with(
         ?array $data = null,
@@ -63,13 +56,7 @@ final class PhoneNumbersRegulatoryRequirementGetResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   phoneNumber?: string|null,
-     *   phoneNumberType?: string|null,
-     *   recordType?: string|null,
-     *   regionInformation?: list<RegionInformation>|null,
-     *   regulatoryRequirements?: list<RegulatoryRequirement>|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {
@@ -80,9 +67,7 @@ final class PhoneNumbersRegulatoryRequirementGetResponse implements BaseModel
     }
 
     /**
-     * @param PaginationMeta|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param PaginationMetaShape $meta
      */
     public function withMeta(PaginationMeta|array $meta): self
     {

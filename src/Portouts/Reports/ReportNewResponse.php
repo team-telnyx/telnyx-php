@@ -7,11 +7,13 @@ namespace Telnyx\Portouts\Reports;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Portouts\Reports\PortoutReport\ReportType;
-use Telnyx\Portouts\Reports\PortoutReport\Status;
 
 /**
- * @phpstan-type ReportNewResponseShape = array{data?: PortoutReport|null}
+ * @phpstan-import-type PortoutReportShape from \Telnyx\Portouts\Reports\PortoutReport
+ *
+ * @phpstan-type ReportNewResponseShape = array{
+ *   data?: null|PortoutReport|PortoutReportShape
+ * }
  */
 final class ReportNewResponse implements BaseModel
 {
@@ -31,16 +33,7 @@ final class ReportNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortoutReport|array{
-     *   id?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   documentID?: string|null,
-     *   params?: ExportPortoutsCsvReport|null,
-     *   recordType?: string|null,
-     *   reportType?: value-of<ReportType>|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param PortoutReportShape $data
      */
     public static function with(PortoutReport|array|null $data = null): self
     {
@@ -52,16 +45,7 @@ final class ReportNewResponse implements BaseModel
     }
 
     /**
-     * @param PortoutReport|array{
-     *   id?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   documentID?: string|null,
-     *   params?: ExportPortoutsCsvReport|null,
-     *   recordType?: string|null,
-     *   reportType?: value-of<ReportType>|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param PortoutReportShape $data
      */
     public function withData(PortoutReport|array $data): self
     {

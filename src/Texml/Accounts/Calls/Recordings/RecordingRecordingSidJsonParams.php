@@ -17,7 +17,7 @@ use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonParams\Statu
  * @see Telnyx\Services\Texml\Accounts\Calls\RecordingsService::recordingSidJson()
  *
  * @phpstan-type RecordingRecordingSidJsonParamsShape = array{
- *   accountSid: string, callSid: string, status?: Status|value-of<Status>
+ *   accountSid: string, callSid: string, status?: null|Status|value-of<Status>
  * }
  */
 final class RecordingRecordingSidJsonParams implements BaseModel

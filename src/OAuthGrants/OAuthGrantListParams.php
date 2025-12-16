@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\OAuthGrantsService::list()
  *
  * @phpstan-type OAuthGrantListParamsShape = array{
- *   pageNumber?: int, pageSize?: int
+ *   pageNumber?: int|null, pageSize?: int|null
  * }
  */
 final class OAuthGrantListParams implements BaseModel

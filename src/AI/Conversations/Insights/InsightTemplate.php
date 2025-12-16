@@ -12,12 +12,14 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type JsonSchemaShape from \Telnyx\AI\Conversations\Insights\InsightTemplate\JsonSchema
+ *
  * @phpstan-type InsightTemplateShape = array{
  *   id: string,
  *   createdAt: \DateTimeInterface,
  *   instructions: string,
- *   insightType?: value-of<InsightType>|null,
- *   jsonSchema?: string|null|array<string,mixed>,
+ *   insightType?: null|InsightType|value-of<InsightType>,
+ *   jsonSchema?: JsonSchemaShape|null,
  *   name?: string|null,
  *   webhook?: string|null,
  * }
@@ -79,7 +81,7 @@ final class InsightTemplate implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param InsightType|value-of<InsightType> $insightType
-     * @param string|array<string,mixed> $jsonSchema
+     * @param JsonSchemaShape $jsonSchema
      */
     public static function with(
         string $id,
@@ -142,7 +144,7 @@ final class InsightTemplate implements BaseModel
     /**
      * If specified, the output will follow the JSON schema.
      *
-     * @param string|array<string,mixed> $jsonSchema
+     * @param JsonSchemaShape $jsonSchema
      */
     public function withJsonSchema(string|array $jsonSchema): self
     {

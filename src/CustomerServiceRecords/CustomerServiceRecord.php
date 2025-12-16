@@ -8,19 +8,19 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Result;
-use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Result\Address;
-use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Result\Admin;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Status;
 
 /**
+ * @phpstan-import-type ResultShape from \Telnyx\CustomerServiceRecords\CustomerServiceRecord\Result
+ *
  * @phpstan-type CustomerServiceRecordShape = array{
  *   id?: string|null,
  *   createdAt?: \DateTimeInterface|null,
  *   errorMessage?: string|null,
  *   phoneNumber?: string|null,
  *   recordType?: string|null,
- *   result?: Result|null,
- *   status?: value-of<Status>|null,
+ *   result?: null|Result|ResultShape,
+ *   status?: null|Status|value-of<Status>,
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */
@@ -89,12 +89,7 @@ final class CustomerServiceRecord implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Result|array{
-     *   address?: Address|null,
-     *   admin?: Admin|null,
-     *   associatedPhoneNumbers?: list<string>|null,
-     *   carrierName?: string|null,
-     * }|null $result
+     * @param ResultShape|null $result
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -179,12 +174,7 @@ final class CustomerServiceRecord implements BaseModel
     /**
      * The result of the CSR request. This field would be null in case of `pending` or `failed` status.
      *
-     * @param Result|array{
-     *   address?: Address|null,
-     *   admin?: Admin|null,
-     *   associatedPhoneNumbers?: list<string>|null,
-     *   carrierName?: string|null,
-     * }|null $result
+     * @param ResultShape|null $result
      */
     public function withResult(Result|array|null $result): self
     {

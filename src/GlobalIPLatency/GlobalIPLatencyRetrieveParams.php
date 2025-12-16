@@ -9,15 +9,16 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyRetrieveParams\Filter;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyRetrieveParams\Filter\GlobalIPID\In;
 
 /**
  * Global IP Latency Metrics.
  *
  * @see Telnyx\Services\GlobalIPLatencyService::retrieve()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\GlobalIPLatency\GlobalIPLatencyRetrieveParams\Filter
+ *
  * @phpstan-type GlobalIPLatencyRetrieveParamsShape = array{
- *   filter?: Filter|array{globalIPID?: string|null|In}
+ *   filter?: FilterShape|null
  * }
  */
 final class GlobalIPLatencyRetrieveParams implements BaseModel
@@ -42,7 +43,7 @@ final class GlobalIPLatencyRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{globalIPID?: string|In|null} $filter
+     * @param FilterShape $filter
      */
     public static function with(Filter|array|null $filter = null): self
     {
@@ -56,7 +57,7 @@ final class GlobalIPLatencyRetrieveParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in].
      *
-     * @param Filter|array{globalIPID?: string|In|null} $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

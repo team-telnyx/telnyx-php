@@ -10,6 +10,12 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
 use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest\CreateAndroidPushCredentialRequest;
 use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest\CreateIosPushCredentialRequest;
 
+/**
+ * @phpstan-import-type CreateIosPushCredentialRequestShape from \Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest\CreateIosPushCredentialRequest
+ * @phpstan-import-type CreateAndroidPushCredentialRequestShape from \Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest\CreateAndroidPushCredentialRequest
+ *
+ * @phpstan-type CreateMobilePushCredentialRequestShape = CreateIosPushCredentialRequestShape|CreateAndroidPushCredentialRequestShape
+ */
 final class CreateMobilePushCredentialRequest implements ConverterSource
 {
     use SdkUnion;

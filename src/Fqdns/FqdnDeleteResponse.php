@@ -9,7 +9,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type FqdnDeleteResponseShape = array{data?: Fqdn|null}
+ * @phpstan-import-type FqdnShape from \Telnyx\Fqdns\Fqdn
+ *
+ * @phpstan-type FqdnDeleteResponseShape = array{data?: null|Fqdn|FqdnShape}
  */
 final class FqdnDeleteResponse implements BaseModel
 {
@@ -29,16 +31,7 @@ final class FqdnDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Fqdn|array{
-     *   id?: string|null,
-     *   connectionID?: string|null,
-     *   createdAt?: string|null,
-     *   dnsRecordType?: string|null,
-     *   fqdn?: string|null,
-     *   port?: int|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param FqdnShape $data
      */
     public static function with(Fqdn|array|null $data = null): self
     {
@@ -50,16 +43,7 @@ final class FqdnDeleteResponse implements BaseModel
     }
 
     /**
-     * @param Fqdn|array{
-     *   id?: string|null,
-     *   connectionID?: string|null,
-     *   createdAt?: string|null,
-     *   dnsRecordType?: string|null,
-     *   fqdn?: string|null,
-     *   port?: int|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param FqdnShape $data
      */
     public function withData(Fqdn|array $data): self
     {

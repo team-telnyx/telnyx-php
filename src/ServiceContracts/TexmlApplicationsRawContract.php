@@ -22,7 +22,7 @@ interface TexmlApplicationsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|TexmlApplicationCreateParams $params
+     * @param array<string,mixed>|TexmlApplicationCreateParams $params
      *
      * @return BaseResponse<TexmlApplicationNewResponse>
      *
@@ -51,7 +51,7 @@ interface TexmlApplicationsRawContract
      * @api
      *
      * @param string $id identifies the resource
-     * @param array<mixed>|TexmlApplicationUpdateParams $params
+     * @param array<string,mixed>|TexmlApplicationUpdateParams $params
      *
      * @return BaseResponse<TexmlApplicationUpdateResponse>
      *
@@ -66,7 +66,7 @@ interface TexmlApplicationsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|TexmlApplicationListParams $params
+     * @param array<string,mixed>|TexmlApplicationListParams $params
      *
      * @return BaseResponse<DefaultPagination<TexmlApplication>>
      *

@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Wireless\DetailRecordsReportsService::list()
  *
  * @phpstan-type DetailRecordsReportListParamsShape = array{
- *   pageNumber?: int, pageSize?: int
+ *   pageNumber?: int|null, pageSize?: int|null
  * }
  */
 final class DetailRecordsReportListParams implements BaseModel

@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPProtocols\GlobalIPProtocolListResponse\Data;
 
 /**
- * @phpstan-type GlobalIPProtocolListResponseShape = array{data?: list<Data>|null}
+ * @phpstan-import-type DataShape from \Telnyx\GlobalIPProtocols\GlobalIPProtocolListResponse\Data
+ *
+ * @phpstan-type GlobalIPProtocolListResponseShape = array{
+ *   data?: list<DataShape>|null
+ * }
  */
 final class GlobalIPProtocolListResponse implements BaseModel
 {
@@ -31,9 +35,7 @@ final class GlobalIPProtocolListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   code?: string|null, name?: string|null, recordType?: string|null
-     * }> $data
+     * @param list<DataShape> $data
      */
     public static function with(?array $data = null): self
     {
@@ -45,9 +47,7 @@ final class GlobalIPProtocolListResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   code?: string|null, name?: string|null, recordType?: string|null
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {

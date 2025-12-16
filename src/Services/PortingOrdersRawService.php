@@ -131,8 +131,8 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
      *     invoice?: string|null, loa?: string|null
      *   }|PortingOrderDocuments,
      *   endUser?: array{
-     *     admin?: array<mixed>|PortingOrderEndUserAdmin,
-     *     location?: array<mixed>|PortingOrderEndUserLocation,
+     *     admin?: array<string,mixed>|PortingOrderEndUserAdmin,
+     *     location?: array<string,mixed>|PortingOrderEndUserLocation,
      *   }|PortingOrderEndUser,
      *   messaging?: array{enableMessaging?: bool},
      *   misc?: array{

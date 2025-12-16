@@ -11,12 +11,15 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type BillingBundleSummaryShape from \Telnyx\BundlePricing\BillingBundles\BillingBundleSummary
+ * @phpstan-import-type UserBundleResourceShape from \Telnyx\BundlePricing\UserBundles\UserBundleResource
+ *
  * @phpstan-type UserBundleShape = array{
  *   id: string,
  *   active: bool,
- *   billingBundle: BillingBundleSummary,
+ *   billingBundle: BillingBundleSummary|BillingBundleSummaryShape,
  *   createdAt: string,
- *   resources: list<UserBundleResource>,
+ *   resources: list<UserBundleResourceShape>,
  *   userID: string,
  *   updatedAt?: string|null,
  * }
@@ -100,24 +103,8 @@ final class UserBundle implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BillingBundleSummary|array{
-     *   id: string,
-     *   costCode: string,
-     *   createdAt: string,
-     *   isPublic: bool,
-     *   name: string,
-     *   currency?: string|null,
-     *   mrcPrice?: float|null,
-     *   slug?: string|null,
-     *   specs?: list<string>|null,
-     * } $billingBundle
-     * @param list<UserBundleResource|array{
-     *   id: string,
-     *   createdAt: string,
-     *   resource: string,
-     *   resourceType: string,
-     *   updatedAt?: string|null,
-     * }> $resources
+     * @param BillingBundleSummaryShape $billingBundle
+     * @param list<UserBundleResourceShape> $resources
      */
     public static function with(
         string $id,
@@ -165,17 +152,7 @@ final class UserBundle implements BaseModel
     }
 
     /**
-     * @param BillingBundleSummary|array{
-     *   id: string,
-     *   costCode: string,
-     *   createdAt: string,
-     *   isPublic: bool,
-     *   name: string,
-     *   currency?: string|null,
-     *   mrcPrice?: float|null,
-     *   slug?: string|null,
-     *   specs?: list<string>|null,
-     * } $billingBundle
+     * @param BillingBundleSummaryShape $billingBundle
      */
     public function withBillingBundle(
         BillingBundleSummary|array $billingBundle
@@ -198,13 +175,7 @@ final class UserBundle implements BaseModel
     }
 
     /**
-     * @param list<UserBundleResource|array{
-     *   id: string,
-     *   createdAt: string,
-     *   resource: string,
-     *   resourceType: string,
-     *   updatedAt?: string|null,
-     * }> $resources
+     * @param list<UserBundleResourceShape> $resources
      */
     public function withResources(array $resources): self
     {

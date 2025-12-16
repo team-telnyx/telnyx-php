@@ -22,7 +22,7 @@ interface RoomsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|RoomCreateParams $params
+     * @param array<string,mixed>|RoomCreateParams $params
      *
      * @return BaseResponse<RoomNewResponse>
      *
@@ -37,7 +37,7 @@ interface RoomsRawContract
      * @api
      *
      * @param string $roomID the unique identifier of a room
-     * @param array<mixed>|RoomRetrieveParams $params
+     * @param array<string,mixed>|RoomRetrieveParams $params
      *
      * @return BaseResponse<RoomGetResponse>
      *
@@ -53,7 +53,7 @@ interface RoomsRawContract
      * @api
      *
      * @param string $roomID the unique identifier of a room
-     * @param array<mixed>|RoomUpdateParams $params
+     * @param array<string,mixed>|RoomUpdateParams $params
      *
      * @return BaseResponse<RoomUpdateResponse>
      *
@@ -68,7 +68,7 @@ interface RoomsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|RoomListParams $params
+     * @param array<string,mixed>|RoomListParams $params
      *
      * @return BaseResponse<DefaultPagination<Room>>
      *

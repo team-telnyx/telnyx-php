@@ -16,7 +16,7 @@ use Telnyx\ShortCode\RecordType;
  *   id?: string|null,
  *   countryCode?: string|null,
  *   createdAt?: \DateTimeInterface|null,
- *   recordType?: value-of<RecordType>|null,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  *   shortCode?: string|null,
  *   tags?: list<string>|null,
  *   updatedAt?: \DateTimeInterface|null,

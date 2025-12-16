@@ -8,9 +8,6 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\PhoneNumbers\Voice\CallForwarding\ForwardingType;
-use Telnyx\PhoneNumbers\Voice\CallRecording\InboundCallRecordingChannels;
-use Telnyx\PhoneNumbers\Voice\CallRecording\InboundCallRecordingFormat;
 use Telnyx\PhoneNumbers\Voice\VoiceUpdateParams\InboundCallScreening;
 use Telnyx\PhoneNumbers\Voice\VoiceUpdateParams\UsagePaymentMethod;
 
@@ -19,30 +16,21 @@ use Telnyx\PhoneNumbers\Voice\VoiceUpdateParams\UsagePaymentMethod;
  *
  * @see Telnyx\Services\PhoneNumbers\VoiceService::update()
  *
+ * @phpstan-import-type CallForwardingShape from \Telnyx\PhoneNumbers\Voice\CallForwarding
+ * @phpstan-import-type CallRecordingShape from \Telnyx\PhoneNumbers\Voice\CallRecording
+ * @phpstan-import-type CnamListingShape from \Telnyx\PhoneNumbers\Voice\CnamListing
+ * @phpstan-import-type MediaFeaturesShape from \Telnyx\PhoneNumbers\Voice\MediaFeatures
+ *
  * @phpstan-type VoiceUpdateParamsShape = array{
- *   callForwarding?: CallForwarding|array{
- *     callForwardingEnabled?: bool|null,
- *     forwardingType?: value-of<ForwardingType>|null,
- *     forwardsTo?: string|null,
- *   },
- *   callRecording?: CallRecording|array{
- *     inboundCallRecordingChannels?: value-of<InboundCallRecordingChannels>|null,
- *     inboundCallRecordingEnabled?: bool|null,
- *     inboundCallRecordingFormat?: value-of<InboundCallRecordingFormat>|null,
- *   },
- *   callerIDNameEnabled?: bool,
- *   cnamListing?: CnamListing|array{
- *     cnamListingDetails?: string|null, cnamListingEnabled?: bool|null
- *   },
- *   inboundCallScreening?: InboundCallScreening|value-of<InboundCallScreening>,
- *   mediaFeatures?: MediaFeatures|array{
- *     acceptAnyRtpPacketsEnabled?: bool|null,
- *     rtpAutoAdjustEnabled?: bool|null,
- *     t38FaxGatewayEnabled?: bool|null,
- *   },
- *   techPrefixEnabled?: bool,
- *   translatedNumber?: string,
- *   usagePaymentMethod?: UsagePaymentMethod|value-of<UsagePaymentMethod>,
+ *   callForwarding?: CallForwardingShape|null,
+ *   callRecording?: CallRecordingShape|null,
+ *   callerIDNameEnabled?: bool|null,
+ *   cnamListing?: CnamListingShape|null,
+ *   inboundCallScreening?: null|InboundCallScreening|value-of<InboundCallScreening>,
+ *   mediaFeatures?: MediaFeaturesShape|null,
+ *   techPrefixEnabled?: bool|null,
+ *   translatedNumber?: string|null,
+ *   usagePaymentMethod?: null|UsagePaymentMethod|value-of<UsagePaymentMethod>,
  * }
  */
 final class VoiceUpdateParams implements BaseModel
@@ -119,25 +107,11 @@ final class VoiceUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CallForwarding|array{
-     *   callForwardingEnabled?: bool|null,
-     *   forwardingType?: value-of<ForwardingType>|null,
-     *   forwardsTo?: string|null,
-     * } $callForwarding
-     * @param CallRecording|array{
-     *   inboundCallRecordingChannels?: value-of<InboundCallRecordingChannels>|null,
-     *   inboundCallRecordingEnabled?: bool|null,
-     *   inboundCallRecordingFormat?: value-of<InboundCallRecordingFormat>|null,
-     * } $callRecording
-     * @param CnamListing|array{
-     *   cnamListingDetails?: string|null, cnamListingEnabled?: bool|null
-     * } $cnamListing
+     * @param CallForwardingShape $callForwarding
+     * @param CallRecordingShape $callRecording
+     * @param CnamListingShape $cnamListing
      * @param InboundCallScreening|value-of<InboundCallScreening> $inboundCallScreening
-     * @param MediaFeatures|array{
-     *   acceptAnyRtpPacketsEnabled?: bool|null,
-     *   rtpAutoAdjustEnabled?: bool|null,
-     *   t38FaxGatewayEnabled?: bool|null,
-     * } $mediaFeatures
+     * @param MediaFeaturesShape $mediaFeatures
      * @param UsagePaymentMethod|value-of<UsagePaymentMethod> $usagePaymentMethod
      */
     public static function with(
@@ -169,11 +143,7 @@ final class VoiceUpdateParams implements BaseModel
     /**
      * The call forwarding settings for a phone number.
      *
-     * @param CallForwarding|array{
-     *   callForwardingEnabled?: bool|null,
-     *   forwardingType?: value-of<ForwardingType>|null,
-     *   forwardsTo?: string|null,
-     * } $callForwarding
+     * @param CallForwardingShape $callForwarding
      */
     public function withCallForwarding(
         CallForwarding|array $callForwarding
@@ -187,11 +157,7 @@ final class VoiceUpdateParams implements BaseModel
     /**
      * The call recording settings for a phone number.
      *
-     * @param CallRecording|array{
-     *   inboundCallRecordingChannels?: value-of<InboundCallRecordingChannels>|null,
-     *   inboundCallRecordingEnabled?: bool|null,
-     *   inboundCallRecordingFormat?: value-of<InboundCallRecordingFormat>|null,
-     * } $callRecording
+     * @param CallRecordingShape $callRecording
      */
     public function withCallRecording(CallRecording|array $callRecording): self
     {
@@ -215,9 +181,7 @@ final class VoiceUpdateParams implements BaseModel
     /**
      * The CNAM listing settings for a phone number.
      *
-     * @param CnamListing|array{
-     *   cnamListingDetails?: string|null, cnamListingEnabled?: bool|null
-     * } $cnamListing
+     * @param CnamListingShape $cnamListing
      */
     public function withCnamListing(CnamListing|array $cnamListing): self
     {
@@ -244,11 +208,7 @@ final class VoiceUpdateParams implements BaseModel
     /**
      * The media features settings for a phone number.
      *
-     * @param MediaFeatures|array{
-     *   acceptAnyRtpPacketsEnabled?: bool|null,
-     *   rtpAutoAdjustEnabled?: bool|null,
-     *   t38FaxGatewayEnabled?: bool|null,
-     * } $mediaFeatures
+     * @param MediaFeaturesShape $mediaFeatures
      */
     public function withMediaFeatures(MediaFeatures|array $mediaFeatures): self
     {

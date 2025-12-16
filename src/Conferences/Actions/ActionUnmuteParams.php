@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Conferences\ActionsService::unmute()
  *
  * @phpstan-type ActionUnmuteParamsShape = array{
- *   callControlIDs?: list<string>, region?: Region|value-of<Region>
+ *   callControlIDs?: list<string>|null, region?: null|Region|value-of<Region>
  * }
  */
 final class ActionUnmuteParams implements BaseModel

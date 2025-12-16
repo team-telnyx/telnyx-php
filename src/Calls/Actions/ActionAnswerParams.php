@@ -12,12 +12,8 @@ use Telnyx\Calls\Actions\ActionAnswerParams\RecordTrack;
 use Telnyx\Calls\Actions\ActionAnswerParams\RecordTrim;
 use Telnyx\Calls\Actions\ActionAnswerParams\StreamTrack;
 use Telnyx\Calls\Actions\ActionAnswerParams\WebhookURLMethod;
-use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngine;
-use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\DeepgramNova2Config;
-use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\DeepgramNova3Config;
 use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Calls\SipHeader;
-use Telnyx\Calls\SipHeader\Name;
 use Telnyx\Calls\SoundModifications;
 use Telnyx\Calls\StreamBidirectionalCodec;
 use Telnyx\Calls\StreamBidirectionalMode;
@@ -40,44 +36,38 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Calls\ActionsService::answer()
  *
+ * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
+ * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
+ * @phpstan-import-type SoundModificationsShape from \Telnyx\Calls\SoundModifications
+ * @phpstan-import-type TranscriptionStartRequestShape from \Telnyx\Calls\Actions\TranscriptionStartRequest
+ *
  * @phpstan-type ActionAnswerParamsShape = array{
- *   billingGroupID?: string,
- *   clientState?: string,
- *   commandID?: string,
- *   customHeaders?: list<CustomSipHeader|array{name: string, value: string}>,
- *   preferredCodecs?: PreferredCodecs|value-of<PreferredCodecs>,
- *   record?: Record|value-of<Record>,
- *   recordChannels?: RecordChannels|value-of<RecordChannels>,
- *   recordCustomFileName?: string,
- *   recordFormat?: RecordFormat|value-of<RecordFormat>,
- *   recordMaxLength?: int,
- *   recordTimeoutSecs?: int,
- *   recordTrack?: RecordTrack|value-of<RecordTrack>,
- *   recordTrim?: RecordTrim|value-of<RecordTrim>,
- *   sendSilenceWhenIdle?: bool,
- *   sipHeaders?: list<SipHeader|array{name: value-of<Name>, value: string}>,
- *   soundModifications?: SoundModifications|array{
- *     octaves?: float|null,
- *     pitch?: float|null,
- *     semitone?: float|null,
- *     track?: string|null,
- *   },
- *   streamBidirectionalCodec?: StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
- *   streamBidirectionalMode?: StreamBidirectionalMode|value-of<StreamBidirectionalMode>,
- *   streamBidirectionalTargetLegs?: StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs>,
- *   streamCodec?: StreamCodec|value-of<StreamCodec>,
- *   streamTrack?: StreamTrack|value-of<StreamTrack>,
- *   streamURL?: string,
- *   transcription?: bool,
- *   transcriptionConfig?: TranscriptionStartRequest|array{
- *     clientState?: string|null,
- *     commandID?: string|null,
- *     transcriptionEngine?: value-of<TranscriptionEngine>|null,
- *     transcriptionEngineConfig?: null|TranscriptionEngineGoogleConfig|TranscriptionEngineTelnyxConfig|DeepgramNova2Config|DeepgramNova3Config|TranscriptionEngineAzureConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig,
- *     transcriptionTracks?: string|null,
- *   },
- *   webhookURL?: string,
- *   webhookURLMethod?: WebhookURLMethod|value-of<WebhookURLMethod>,
+ *   billingGroupID?: string|null,
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   customHeaders?: list<CustomSipHeaderShape>|null,
+ *   preferredCodecs?: null|PreferredCodecs|value-of<PreferredCodecs>,
+ *   record?: null|Record|value-of<Record>,
+ *   recordChannels?: null|RecordChannels|value-of<RecordChannels>,
+ *   recordCustomFileName?: string|null,
+ *   recordFormat?: null|RecordFormat|value-of<RecordFormat>,
+ *   recordMaxLength?: int|null,
+ *   recordTimeoutSecs?: int|null,
+ *   recordTrack?: null|RecordTrack|value-of<RecordTrack>,
+ *   recordTrim?: null|RecordTrim|value-of<RecordTrim>,
+ *   sendSilenceWhenIdle?: bool|null,
+ *   sipHeaders?: list<SipHeaderShape>|null,
+ *   soundModifications?: SoundModificationsShape|null,
+ *   streamBidirectionalCodec?: null|StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
+ *   streamBidirectionalMode?: null|StreamBidirectionalMode|value-of<StreamBidirectionalMode>,
+ *   streamBidirectionalTargetLegs?: null|StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs>,
+ *   streamCodec?: null|StreamCodec|value-of<StreamCodec>,
+ *   streamTrack?: null|StreamTrack|value-of<StreamTrack>,
+ *   streamURL?: string|null,
+ *   transcription?: bool|null,
+ *   transcriptionConfig?: TranscriptionStartRequestShape|null,
+ *   webhookURL?: string|null,
+ *   webhookURLMethod?: null|WebhookURLMethod|value-of<WebhookURLMethod>,
  * }
  */
 final class ActionAnswerParams implements BaseModel
@@ -283,32 +273,21 @@ final class ActionAnswerParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<CustomSipHeader|array{name: string, value: string}> $customHeaders
+     * @param list<CustomSipHeaderShape> $customHeaders
      * @param PreferredCodecs|value-of<PreferredCodecs> $preferredCodecs
      * @param Record|value-of<Record> $record
      * @param RecordChannels|value-of<RecordChannels> $recordChannels
      * @param RecordFormat|value-of<RecordFormat> $recordFormat
      * @param RecordTrack|value-of<RecordTrack> $recordTrack
      * @param RecordTrim|value-of<RecordTrim> $recordTrim
-     * @param list<SipHeader|array{name: value-of<Name>, value: string}> $sipHeaders
-     * @param SoundModifications|array{
-     *   octaves?: float|null,
-     *   pitch?: float|null,
-     *   semitone?: float|null,
-     *   track?: string|null,
-     * } $soundModifications
+     * @param list<SipHeaderShape> $sipHeaders
+     * @param SoundModificationsShape $soundModifications
      * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec> $streamBidirectionalCodec
      * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode> $streamBidirectionalMode
      * @param StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs> $streamBidirectionalTargetLegs
      * @param StreamCodec|value-of<StreamCodec> $streamCodec
      * @param StreamTrack|value-of<StreamTrack> $streamTrack
-     * @param TranscriptionStartRequest|array{
-     *   clientState?: string|null,
-     *   commandID?: string|null,
-     *   transcriptionEngine?: value-of<TranscriptionEngine>|null,
-     *   transcriptionEngineConfig?: TranscriptionEngineGoogleConfig|TranscriptionEngineTelnyxConfig|DeepgramNova2Config|DeepgramNova3Config|TranscriptionEngineAzureConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null,
-     *   transcriptionTracks?: string|null,
-     * } $transcriptionConfig
+     * @param TranscriptionStartRequestShape $transcriptionConfig
      * @param WebhookURLMethod|value-of<WebhookURLMethod> $webhookURLMethod
      */
     public static function with(
@@ -407,7 +386,7 @@ final class ActionAnswerParams implements BaseModel
     /**
      * Custom headers to be added to the SIP INVITE response.
      *
-     * @param list<CustomSipHeader|array{name: string, value: string}> $customHeaders
+     * @param list<CustomSipHeaderShape> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {
@@ -544,7 +523,7 @@ final class ActionAnswerParams implements BaseModel
     /**
      * SIP headers to be added to the SIP INVITE response. Currently only User-to-User header is supported.
      *
-     * @param list<SipHeader|array{name: value-of<Name>, value: string}> $sipHeaders
+     * @param list<SipHeaderShape> $sipHeaders
      */
     public function withSipHeaders(array $sipHeaders): self
     {
@@ -557,12 +536,7 @@ final class ActionAnswerParams implements BaseModel
     /**
      * Use this field to modify sound effects, for example adjust the pitch.
      *
-     * @param SoundModifications|array{
-     *   octaves?: float|null,
-     *   pitch?: float|null,
-     *   semitone?: float|null,
-     *   track?: string|null,
-     * } $soundModifications
+     * @param SoundModificationsShape $soundModifications
      */
     public function withSoundModifications(
         SoundModifications|array $soundModifications
@@ -664,13 +638,7 @@ final class ActionAnswerParams implements BaseModel
     }
 
     /**
-     * @param TranscriptionStartRequest|array{
-     *   clientState?: string|null,
-     *   commandID?: string|null,
-     *   transcriptionEngine?: value-of<TranscriptionEngine>|null,
-     *   transcriptionEngineConfig?: TranscriptionEngineGoogleConfig|TranscriptionEngineTelnyxConfig|DeepgramNova2Config|DeepgramNova3Config|TranscriptionEngineAzureConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null,
-     *   transcriptionTracks?: string|null,
-     * } $transcriptionConfig
+     * @param TranscriptionStartRequestShape $transcriptionConfig
      */
     public function withTranscriptionConfig(
         TranscriptionStartRequest|array $transcriptionConfig

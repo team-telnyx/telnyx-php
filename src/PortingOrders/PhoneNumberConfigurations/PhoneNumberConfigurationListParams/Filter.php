@@ -8,13 +8,14 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Filter\PortingOrder;
-use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Filter\PortingOrder\Status;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[porting_order.status][in][], filter[porting_phone_number][in][], filter[user_bundle_id][in][].
  *
+ * @phpstan-import-type PortingOrderShape from \Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Filter\PortingOrder
+ *
  * @phpstan-type FilterShape = array{
- *   portingOrder?: PortingOrder|null,
+ *   portingOrder?: null|PortingOrder|PortingOrderShape,
  *   portingPhoneNumber?: list<string>|null,
  *   userBundleID?: list<string>|null,
  * }
@@ -53,7 +54,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortingOrder|array{status?: list<value-of<Status>>|null} $portingOrder
+     * @param PortingOrderShape $portingOrder
      * @param list<string> $portingPhoneNumber
      * @param list<string> $userBundleID
      */
@@ -72,7 +73,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param PortingOrder|array{status?: list<value-of<Status>>|null} $portingOrder
+     * @param PortingOrderShape $portingOrder
      */
     public function withPortingOrder(PortingOrder|array $portingOrder): self
     {

@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Telnyx\Balance;
 
 use Telnyx\Balance\BalanceGetResponse\Data;
-use Telnyx\Balance\BalanceGetResponse\Data\RecordType;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type BalanceGetResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\Balance\BalanceGetResponse\Data
+ *
+ * @phpstan-type BalanceGetResponseShape = array{data?: null|Data|DataShape}
  */
 final class BalanceGetResponse implements BaseModel
 {
@@ -31,14 +32,7 @@ final class BalanceGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   availableCredit?: string|null,
-     *   balance?: string|null,
-     *   creditLimit?: string|null,
-     *   currency?: string|null,
-     *   pending?: string|null,
-     *   recordType?: value-of<RecordType>|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -50,14 +44,7 @@ final class BalanceGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   availableCredit?: string|null,
-     *   balance?: string|null,
-     *   creditLimit?: string|null,
-     *   currency?: string|null,
-     *   pending?: string|null,
-     *   recordType?: value-of<RecordType>|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

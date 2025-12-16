@@ -9,14 +9,17 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\GlobalIP;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\GlobalIPAssignment;
-use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\GlobalIPAssignment\WireguardPeer;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\Health;
 
 /**
+ * @phpstan-import-type GlobalIPShape from \Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\GlobalIP
+ * @phpstan-import-type GlobalIPAssignmentShape from \Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\GlobalIPAssignment
+ * @phpstan-import-type HealthShape from \Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\Health
+ *
  * @phpstan-type DataShape = array{
- *   globalIP?: GlobalIP|null,
- *   globalIPAssignment?: GlobalIPAssignment|null,
- *   health?: Health|null,
+ *   globalIP?: null|GlobalIP|GlobalIPShape,
+ *   globalIPAssignment?: null|GlobalIPAssignment|GlobalIPAssignmentShape,
+ *   health?: null|Health|HealthShape,
  *   timestamp?: \DateTimeInterface|null,
  * }
  */
@@ -50,13 +53,9 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param GlobalIP|array{id?: string|null, ipAddress?: string|null} $globalIP
-     * @param GlobalIPAssignment|array{
-     *   id?: string|null,
-     *   wireguardPeer?: WireguardPeer|null,
-     *   wireguardPeerID?: string|null,
-     * } $globalIPAssignment
-     * @param Health|array{fail?: float|null, pass?: float|null} $health
+     * @param GlobalIPShape $globalIP
+     * @param GlobalIPAssignmentShape $globalIPAssignment
+     * @param HealthShape $health
      */
     public static function with(
         GlobalIP|array|null $globalIP = null,
@@ -75,7 +74,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param GlobalIP|array{id?: string|null, ipAddress?: string|null} $globalIP
+     * @param GlobalIPShape $globalIP
      */
     public function withGlobalIP(GlobalIP|array $globalIP): self
     {
@@ -86,11 +85,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param GlobalIPAssignment|array{
-     *   id?: string|null,
-     *   wireguardPeer?: WireguardPeer|null,
-     *   wireguardPeerID?: string|null,
-     * } $globalIPAssignment
+     * @param GlobalIPAssignmentShape $globalIPAssignment
      */
     public function withGlobalIPAssignment(
         GlobalIPAssignment|array $globalIPAssignment
@@ -102,7 +97,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param Health|array{fail?: float|null, pass?: float|null} $health
+     * @param HealthShape $health
      */
     public function withHealth(Health|array $health): self
     {

@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Conferences\ActionsService::unhold()
  *
  * @phpstan-type ActionUnholdParamsShape = array{
- *   callControlIDs: list<string>, region?: Region|value-of<Region>
+ *   callControlIDs: list<string>, region?: null|Region|value-of<Region>
  * }
  */
 final class ActionUnholdParams implements BaseModel

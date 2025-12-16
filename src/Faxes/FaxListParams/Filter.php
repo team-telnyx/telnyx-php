@@ -15,11 +15,16 @@ use Telnyx\Faxes\FaxListParams\Filter\To;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[created_at][gte], filter[created_at][gt], filter[created_at][lte], filter[created_at][lt], filter[direction][eq], filter[from][eq], filter[to][eq].
  *
+ * @phpstan-import-type CreatedAtShape from \Telnyx\Faxes\FaxListParams\Filter\CreatedAt
+ * @phpstan-import-type DirectionShape from \Telnyx\Faxes\FaxListParams\Filter\Direction
+ * @phpstan-import-type FromShape from \Telnyx\Faxes\FaxListParams\Filter\From
+ * @phpstan-import-type ToShape from \Telnyx\Faxes\FaxListParams\Filter\To
+ *
  * @phpstan-type FilterShape = array{
- *   createdAt?: CreatedAt|null,
- *   direction?: Direction|null,
- *   from?: From|null,
- *   to?: To|null,
+ *   createdAt?: null|CreatedAt|CreatedAtShape,
+ *   direction?: null|Direction|DirectionShape,
+ *   from?: null|From|FromShape,
+ *   to?: null|To|ToShape,
  * }
  */
 final class Filter implements BaseModel
@@ -61,15 +66,10 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CreatedAt|array{
-     *   gt?: \DateTimeInterface|null,
-     *   gte?: \DateTimeInterface|null,
-     *   lt?: \DateTimeInterface|null,
-     *   lte?: \DateTimeInterface|null,
-     * } $createdAt
-     * @param Direction|array{eq?: string|null} $direction
-     * @param From|array{eq?: string|null} $from
-     * @param To|array{eq?: string|null} $to
+     * @param CreatedAtShape $createdAt
+     * @param DirectionShape $direction
+     * @param FromShape $from
+     * @param ToShape $to
      */
     public static function with(
         CreatedAt|array|null $createdAt = null,
@@ -90,12 +90,7 @@ final class Filter implements BaseModel
     /**
      * Date range filtering operations for fax creation timestamp.
      *
-     * @param CreatedAt|array{
-     *   gt?: \DateTimeInterface|null,
-     *   gte?: \DateTimeInterface|null,
-     *   lt?: \DateTimeInterface|null,
-     *   lte?: \DateTimeInterface|null,
-     * } $createdAt
+     * @param CreatedAtShape $createdAt
      */
     public function withCreatedAt(CreatedAt|array $createdAt): self
     {
@@ -108,7 +103,7 @@ final class Filter implements BaseModel
     /**
      * Direction filtering operations.
      *
-     * @param Direction|array{eq?: string|null} $direction
+     * @param DirectionShape $direction
      */
     public function withDirection(Direction|array $direction): self
     {
@@ -121,7 +116,7 @@ final class Filter implements BaseModel
     /**
      * From number filtering operations.
      *
-     * @param From|array{eq?: string|null} $from
+     * @param FromShape $from
      */
     public function withFrom(From|array $from): self
     {
@@ -134,7 +129,7 @@ final class Filter implements BaseModel
     /**
      * To number filtering operations.
      *
-     * @param To|array{eq?: string|null} $to
+     * @param ToShape $to
      */
     public function withTo(To|array $to): self
     {

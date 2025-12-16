@@ -15,15 +15,9 @@ use Telnyx\Queues\Calls\CallListParams\Page;
  *
  * @see Telnyx\Services\Queues\CallsService::list()
  *
- * @phpstan-type CallListParamsShape = array{
- *   page?: Page|array{
- *     after?: string|null,
- *     before?: string|null,
- *     limit?: int|null,
- *     number?: int|null,
- *     size?: int|null,
- *   },
- * }
+ * @phpstan-import-type PageShape from \Telnyx\Queues\Calls\CallListParams\Page
+ *
+ * @phpstan-type CallListParamsShape = array{page?: PageShape|null}
  */
 final class CallListParams implements BaseModel
 {
@@ -47,13 +41,7 @@ final class CallListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Page|array{
-     *   after?: string|null,
-     *   before?: string|null,
-     *   limit?: int|null,
-     *   number?: int|null,
-     *   size?: int|null,
-     * } $page
+     * @param PageShape $page
      */
     public static function with(Page|array|null $page = null): self
     {
@@ -67,13 +55,7 @@ final class CallListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number].
      *
-     * @param Page|array{
-     *   after?: string|null,
-     *   before?: string|null,
-     *   limit?: int|null,
-     *   number?: int|null,
-     *   size?: int|null,
-     * } $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

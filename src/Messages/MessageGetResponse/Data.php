@@ -10,6 +10,12 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
 use Telnyx\InboundMessagePayload;
 use Telnyx\Messages\OutboundMessagePayload;
 
+/**
+ * @phpstan-import-type OutboundMessagePayloadShape from \Telnyx\Messages\OutboundMessagePayload
+ * @phpstan-import-type InboundMessagePayloadShape from \Telnyx\InboundMessagePayload
+ *
+ * @phpstan-type DataShape = OutboundMessagePayloadShape|InboundMessagePayloadShape
+ */
 final class Data implements ConverterSource
 {
     use SdkUnion;

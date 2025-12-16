@@ -21,7 +21,7 @@ interface PhoneNumberBlocksRawContract
      * @api
      *
      * @param string $portingOrderID Identifies the Porting Order associated with the phone number block
-     * @param array<mixed>|PhoneNumberBlockCreateParams $params
+     * @param array<string,mixed>|PhoneNumberBlockCreateParams $params
      *
      * @return BaseResponse<PhoneNumberBlockNewResponse>
      *
@@ -37,7 +37,7 @@ interface PhoneNumberBlocksRawContract
      * @api
      *
      * @param string $portingOrderID Identifies the Porting Order associated with the phone number blocks
-     * @param array<mixed>|PhoneNumberBlockListParams $params
+     * @param array<string,mixed>|PhoneNumberBlockListParams $params
      *
      * @return BaseResponse<DefaultPagination<PortingPhoneNumberBlock>>
      *
@@ -53,7 +53,7 @@ interface PhoneNumberBlocksRawContract
      * @api
      *
      * @param string $id Identifies the phone number block to be deleted
-     * @param array<mixed>|PhoneNumberBlockDeleteParams $params
+     * @param array<string,mixed>|PhoneNumberBlockDeleteParams $params
      *
      * @return BaseResponse<PhoneNumberBlockDeleteResponse>
      *

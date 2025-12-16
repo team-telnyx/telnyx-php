@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Telnyx\Conferences;
 
-use Telnyx\Conferences\Conference\EndedBy;
-use Telnyx\Conferences\Conference\EndReason;
-use Telnyx\Conferences\Conference\RecordType;
-use Telnyx\Conferences\Conference\Status;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ConferenceGetResponseShape = array{data?: Conference|null}
+ * @phpstan-import-type ConferenceShape from \Telnyx\Conferences\Conference
+ *
+ * @phpstan-type ConferenceGetResponseShape = array{
+ *   data?: null|Conference|ConferenceShape
+ * }
  */
 final class ConferenceGetResponse implements BaseModel
 {
@@ -33,19 +33,7 @@ final class ConferenceGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Conference|array{
-     *   id: string,
-     *   createdAt: string,
-     *   expiresAt: string,
-     *   name: string,
-     *   recordType: value-of<RecordType>,
-     *   connectionID?: string|null,
-     *   endReason?: value-of<EndReason>|null,
-     *   endedBy?: EndedBy|null,
-     *   region?: string|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param ConferenceShape $data
      */
     public static function with(Conference|array|null $data = null): self
     {
@@ -57,19 +45,7 @@ final class ConferenceGetResponse implements BaseModel
     }
 
     /**
-     * @param Conference|array{
-     *   id: string,
-     *   createdAt: string,
-     *   expiresAt: string,
-     *   name: string,
-     *   recordType: value-of<RecordType>,
-     *   connectionID?: string|null,
-     *   endReason?: value-of<EndReason>|null,
-     *   endedBy?: EndedBy|null,
-     *   region?: string|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param ConferenceShape $data
      */
     public function withData(Conference|array $data): self
     {

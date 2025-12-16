@@ -17,7 +17,7 @@ use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonParams\Status;
  * @see Telnyx\Services\Texml\Accounts\Calls\StreamsService::streamingSidJson()
  *
  * @phpstan-type StreamStreamingSidJsonParamsShape = array{
- *   accountSid: string, callSid: string, status?: Status|value-of<Status>
+ *   accountSid: string, callSid: string, status?: null|Status|value-of<Status>
  * }
  */
 final class StreamStreamingSidJsonParams implements BaseModel

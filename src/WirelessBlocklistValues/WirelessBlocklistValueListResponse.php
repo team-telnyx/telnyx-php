@@ -14,8 +14,11 @@ use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data\Mcc;
 use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data\Plmn;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data
+ * @phpstan-import-type PaginationMetaShape from \Telnyx\AuthenticationProviders\PaginationMeta
+ *
  * @phpstan-type WirelessBlocklistValueListResponseShape = array{
- *   data?: null|list<Country>|list<Mcc>|list<Plmn>, meta?: PaginationMeta|null
+ *   data?: DataShape|null, meta?: null|PaginationMeta|PaginationMetaShape
  * }
  */
 final class WirelessBlocklistValueListResponse implements BaseModel
@@ -40,12 +43,8 @@ final class WirelessBlocklistValueListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Country|array{code: string, name: string}>|list<Mcc|array{
-     *   code: string, name: string
-     * }>|list<Plmn|array{code: string, name: string}> $data
-     * @param PaginationMeta|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param DataShape $data
+     * @param PaginationMetaShape $meta
      */
     public static function with(
         ?array $data = null,
@@ -60,9 +59,7 @@ final class WirelessBlocklistValueListResponse implements BaseModel
     }
 
     /**
-     * @param list<Country|array{code: string, name: string}>|list<Mcc|array{
-     *   code: string, name: string
-     * }>|list<Plmn|array{code: string, name: string}> $data
+     * @param DataShape $data
      */
     public function withData(array $data): self
     {
@@ -73,9 +70,7 @@ final class WirelessBlocklistValueListResponse implements BaseModel
     }
 
     /**
-     * @param PaginationMeta|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param PaginationMetaShape $meta
      */
     public function withMeta(PaginationMeta|array $meta): self
     {

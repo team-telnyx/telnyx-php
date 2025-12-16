@@ -13,9 +13,11 @@ use Telnyx\Portouts\Events\EventListParams\Filter\EventType;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[event_type], filter[portout_id], filter[created_at].
  *
+ * @phpstan-import-type CreatedAtShape from \Telnyx\Portouts\Events\EventListParams\Filter\CreatedAt
+ *
  * @phpstan-type FilterShape = array{
- *   createdAt?: CreatedAt|null,
- *   eventType?: value-of<EventType>|null,
+ *   createdAt?: null|CreatedAt|CreatedAtShape,
+ *   eventType?: null|EventType|value-of<EventType>,
  *   portoutID?: string|null,
  * }
  */
@@ -54,9 +56,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CreatedAt|array{
-     *   gte?: \DateTimeInterface|null, lte?: \DateTimeInterface|null
-     * } $createdAt
+     * @param CreatedAtShape $createdAt
      * @param EventType|value-of<EventType> $eventType
      */
     public static function with(
@@ -76,9 +76,7 @@ final class Filter implements BaseModel
     /**
      * Filter by created_at date range using nested operations.
      *
-     * @param CreatedAt|array{
-     *   gte?: \DateTimeInterface|null, lte?: \DateTimeInterface|null
-     * } $createdAt
+     * @param CreatedAtShape $createdAt
      */
     public function withCreatedAt(CreatedAt|array $createdAt): self
     {

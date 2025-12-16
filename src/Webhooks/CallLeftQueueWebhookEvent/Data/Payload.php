@@ -18,7 +18,7 @@ use Telnyx\Webhooks\CallLeftQueueWebhookEvent\Data\Payload\Reason;
  *   connectionID?: string|null,
  *   queue?: string|null,
  *   queuePosition?: int|null,
- *   reason?: value-of<Reason>|null,
+ *   reason?: null|Reason|value-of<Reason>,
  *   waitTimeSecs?: int|null,
  * }
  */

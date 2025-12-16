@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\PortingOrdersService::retrieve()
  *
  * @phpstan-type PortingOrderRetrieveParamsShape = array{
- *   includePhoneNumbers?: bool
+ *   includePhoneNumbers?: bool|null
  * }
  */
 final class PortingOrderRetrieveParams implements BaseModel

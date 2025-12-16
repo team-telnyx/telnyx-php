@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\BundlePricing\UserBundlesService::deactivate()
  *
  * @phpstan-type UserBundleDeactivateParamsShape = array{
- *   authorizationBearer?: string
+ *   authorizationBearer?: string|null
  * }
  */
 final class UserBundleDeactivateParams implements BaseModel

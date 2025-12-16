@@ -15,13 +15,13 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\PrivateWirelessGatewaysService::list()
  *
  * @phpstan-type PrivateWirelessGatewayListParamsShape = array{
- *   filterCreatedAt?: string,
- *   filterIPRange?: string,
- *   filterName?: string,
- *   filterRegionCode?: string,
- *   filterUpdatedAt?: string,
- *   pageNumber?: int,
- *   pageSize?: int,
+ *   filterCreatedAt?: string|null,
+ *   filterIPRange?: string|null,
+ *   filterName?: string|null,
+ *   filterRegionCode?: string|null,
+ *   filterUpdatedAt?: string|null,
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
  * }
  */
 final class PrivateWirelessGatewayListParams implements BaseModel

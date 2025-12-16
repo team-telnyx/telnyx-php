@@ -11,6 +11,11 @@ use Telnyx\Core\Conversion\ListOf;
 use Telnyx\Core\Conversion\MapOf;
 use Telnyx\Messaging10dlc\Messaging10dlcGetEnumResponse\EnumPaginatedResponse;
 
+/**
+ * @phpstan-import-type EnumPaginatedResponseShape from \Telnyx\Messaging10dlc\Messaging10dlcGetEnumResponse\EnumPaginatedResponse
+ *
+ * @phpstan-type Messaging10dlcGetEnumResponseShape = list<string>|list<array<string,mixed>>|EnumPaginatedResponseShape|array<string,mixed>|array<string,mixed>
+ */
 final class Messaging10dlcGetEnumResponse implements ConverterSource
 {
     use SdkUnion;

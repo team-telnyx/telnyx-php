@@ -27,42 +27,44 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\URLMethod;
  *
  * @see Telnyx\Services\Texml\Accounts\CallsService::calls()
  *
+ * @phpstan-import-type CustomHeaderShape from \Telnyx\Texml\Accounts\Calls\CallCallsParams\CustomHeader
+ *
  * @phpstan-type CallCallsParamsShape = array{
  *   applicationSid: string,
  *   from: string,
  *   to: string,
- *   asyncAmd?: bool,
- *   asyncAmdStatusCallback?: string,
- *   asyncAmdStatusCallbackMethod?: AsyncAmdStatusCallbackMethod|value-of<AsyncAmdStatusCallbackMethod>,
- *   callerID?: string,
- *   cancelPlaybackOnDetectMessageEnd?: bool,
- *   cancelPlaybackOnMachineDetection?: bool,
- *   customHeaders?: list<CustomHeader|array{name: string, value: string}>,
- *   detectionMode?: DetectionMode|value-of<DetectionMode>,
- *   fallbackURL?: string,
- *   machineDetection?: MachineDetection|value-of<MachineDetection>,
- *   machineDetectionSilenceTimeout?: int,
- *   machineDetectionSpeechEndThreshold?: int,
- *   machineDetectionSpeechThreshold?: int,
- *   machineDetectionTimeout?: int,
- *   preferredCodecs?: string,
- *   record?: bool,
- *   recordingChannels?: RecordingChannels|value-of<RecordingChannels>,
- *   recordingStatusCallback?: string,
- *   recordingStatusCallbackEvent?: string,
- *   recordingStatusCallbackMethod?: RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod>,
- *   recordingTimeout?: int,
- *   recordingTrack?: RecordingTrack|value-of<RecordingTrack>,
- *   sendRecordingURL?: bool,
- *   sipAuthPassword?: string,
- *   sipAuthUsername?: string,
- *   sipRegion?: SipRegion|value-of<SipRegion>,
- *   statusCallback?: string,
- *   statusCallbackEvent?: StatusCallbackEvent|value-of<StatusCallbackEvent>,
- *   statusCallbackMethod?: StatusCallbackMethod|value-of<StatusCallbackMethod>,
- *   trim?: Trim|value-of<Trim>,
- *   url?: string,
- *   urlMethod?: URLMethod|value-of<URLMethod>,
+ *   asyncAmd?: bool|null,
+ *   asyncAmdStatusCallback?: string|null,
+ *   asyncAmdStatusCallbackMethod?: null|AsyncAmdStatusCallbackMethod|value-of<AsyncAmdStatusCallbackMethod>,
+ *   callerID?: string|null,
+ *   cancelPlaybackOnDetectMessageEnd?: bool|null,
+ *   cancelPlaybackOnMachineDetection?: bool|null,
+ *   customHeaders?: list<CustomHeaderShape>|null,
+ *   detectionMode?: null|DetectionMode|value-of<DetectionMode>,
+ *   fallbackURL?: string|null,
+ *   machineDetection?: null|MachineDetection|value-of<MachineDetection>,
+ *   machineDetectionSilenceTimeout?: int|null,
+ *   machineDetectionSpeechEndThreshold?: int|null,
+ *   machineDetectionSpeechThreshold?: int|null,
+ *   machineDetectionTimeout?: int|null,
+ *   preferredCodecs?: string|null,
+ *   record?: bool|null,
+ *   recordingChannels?: null|RecordingChannels|value-of<RecordingChannels>,
+ *   recordingStatusCallback?: string|null,
+ *   recordingStatusCallbackEvent?: string|null,
+ *   recordingStatusCallbackMethod?: null|RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod>,
+ *   recordingTimeout?: int|null,
+ *   recordingTrack?: null|RecordingTrack|value-of<RecordingTrack>,
+ *   sendRecordingURL?: bool|null,
+ *   sipAuthPassword?: string|null,
+ *   sipAuthUsername?: string|null,
+ *   sipRegion?: null|SipRegion|value-of<SipRegion>,
+ *   statusCallback?: string|null,
+ *   statusCallbackEvent?: null|StatusCallbackEvent|value-of<StatusCallbackEvent>,
+ *   statusCallbackMethod?: null|StatusCallbackMethod|value-of<StatusCallbackMethod>,
+ *   trim?: null|Trim|value-of<Trim>,
+ *   url?: string|null,
+ *   urlMethod?: null|URLMethod|value-of<URLMethod>,
  * }
  */
 final class CallCallsParams implements BaseModel
@@ -336,7 +338,7 @@ final class CallCallsParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param AsyncAmdStatusCallbackMethod|value-of<AsyncAmdStatusCallbackMethod> $asyncAmdStatusCallbackMethod
-     * @param list<CustomHeader|array{name: string, value: string}> $customHeaders
+     * @param list<CustomHeaderShape> $customHeaders
      * @param DetectionMode|value-of<DetectionMode> $detectionMode
      * @param MachineDetection|value-of<MachineDetection> $machineDetection
      * @param RecordingChannels|value-of<RecordingChannels> $recordingChannels
@@ -535,7 +537,7 @@ final class CallCallsParams implements BaseModel
     /**
      * Custom HTTP headers to be sent with the call. Each header should be an object with 'name' and 'value' properties.
      *
-     * @param list<CustomHeader|array{name: string, value: string}> $customHeaders
+     * @param list<CustomHeaderShape> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {

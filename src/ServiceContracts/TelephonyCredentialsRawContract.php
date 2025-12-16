@@ -22,7 +22,7 @@ interface TelephonyCredentialsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|TelephonyCredentialCreateParams $params
+     * @param array<string,mixed>|TelephonyCredentialCreateParams $params
      *
      * @return BaseResponse<TelephonyCredentialNewResponse>
      *
@@ -51,7 +51,7 @@ interface TelephonyCredentialsRawContract
      * @api
      *
      * @param string $id identifies the resource
-     * @param array<mixed>|TelephonyCredentialUpdateParams $params
+     * @param array<string,mixed>|TelephonyCredentialUpdateParams $params
      *
      * @return BaseResponse<TelephonyCredentialUpdateResponse>
      *
@@ -66,7 +66,7 @@ interface TelephonyCredentialsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|TelephonyCredentialListParams $params
+     * @param array<string,mixed>|TelephonyCredentialListParams $params
      *
      * @return BaseResponse<DefaultPagination<TelephonyCredential>>
      *

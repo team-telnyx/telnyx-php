@@ -16,7 +16,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\TelephonyCredentialsService::create()
  *
  * @phpstan-type TelephonyCredentialCreateParamsShape = array{
- *   connectionID: string, expiresAt?: string, name?: string, tag?: string
+ *   connectionID: string,
+ *   expiresAt?: string|null,
+ *   name?: string|null,
+ *   tag?: string|null,
  * }
  */
 final class TelephonyCredentialCreateParams implements BaseModel

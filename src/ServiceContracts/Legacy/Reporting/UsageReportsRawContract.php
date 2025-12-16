@@ -15,7 +15,7 @@ interface UsageReportsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|UsageReportRetrieveSpeechToTextParams $params
+     * @param array<string,mixed>|UsageReportRetrieveSpeechToTextParams $params
      *
      * @return BaseResponse<UsageReportGetSpeechToTextResponse>
      *

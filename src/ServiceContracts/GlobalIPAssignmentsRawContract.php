@@ -47,7 +47,7 @@ interface GlobalIPAssignmentsRawContract
      * @api
      *
      * @param string $globalIPAssignmentID identifies the resource
-     * @param array<mixed>|GlobalIPAssignmentUpdateParams $params
+     * @param array<string,mixed>|GlobalIPAssignmentUpdateParams $params
      *
      * @return BaseResponse<GlobalIPAssignmentUpdateResponse>
      *
@@ -62,7 +62,7 @@ interface GlobalIPAssignmentsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|GlobalIPAssignmentListParams $params
+     * @param array<string,mixed>|GlobalIPAssignmentListParams $params
      *
      * @return BaseResponse<DefaultPagination<GlobalIPAssignment>>
      *

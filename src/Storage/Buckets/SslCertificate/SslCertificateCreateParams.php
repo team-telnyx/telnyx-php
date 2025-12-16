@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Storage\Buckets\SslCertificateService::create()
  *
  * @phpstan-type SslCertificateCreateParamsShape = array{
- *   certificate?: string, privateKey?: string
+ *   certificate?: string|null, privateKey?: string|null
  * }
  */
 final class SslCertificateCreateParams implements BaseModel

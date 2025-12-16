@@ -12,8 +12,10 @@ use Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Filter\CreatedAt;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers.starting_number].
  *
+ * @phpstan-import-type CreatedAtShape from \Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Filter\CreatedAt
+ *
  * @phpstan-type FilterShape = array{
- *   createdAt?: CreatedAt|null,
+ *   createdAt?: null|CreatedAt|CreatedAtShape,
  *   phoneNumbersStartingNumber?: string|null,
  *   status?: string|null,
  * }
@@ -51,7 +53,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CreatedAt|array{gt?: string|null, lt?: string|null} $createdAt
+     * @param CreatedAtShape $createdAt
      */
     public static function with(
         CreatedAt|array|null $createdAt = null,
@@ -70,7 +72,7 @@ final class Filter implements BaseModel
     /**
      * Filter number block orders by date range.
      *
-     * @param CreatedAt|array{gt?: string|null, lt?: string|null} $createdAt
+     * @param CreatedAtShape $createdAt
      */
     public function withCreatedAt(CreatedAt|array $createdAt): self
     {

@@ -11,7 +11,7 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverage
 
 /**
  * @phpstan-type DataShape = array{
- *   additionalDataRequired?: list<value-of<AdditionalDataRequired>>|null,
+ *   additionalDataRequired?: list<AdditionalDataRequired|value-of<AdditionalDataRequired>>|null,
  *   hasCsrCoverage?: bool|null,
  *   phoneNumber?: string|null,
  *   reason?: string|null,

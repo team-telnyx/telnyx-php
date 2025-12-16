@@ -11,7 +11,7 @@ use Telnyx\Storage\StorageListMigrationSourceCoverageResponse\Data\Provider;
 
 /**
  * @phpstan-type DataShape = array{
- *   provider?: value-of<Provider>|null, sourceRegion?: string|null
+ *   provider?: null|Provider|value-of<Provider>, sourceRegion?: string|null
  * }
  */
 final class Data implements BaseModel

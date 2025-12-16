@@ -23,7 +23,7 @@ interface SubNumberOrdersRawContract
      * @api
      *
      * @param string $subNumberOrderID the sub number order ID
-     * @param array<mixed>|SubNumberOrderRetrieveParams $params
+     * @param array<string,mixed>|SubNumberOrderRetrieveParams $params
      *
      * @return BaseResponse<SubNumberOrderGetResponse>
      *
@@ -39,7 +39,7 @@ interface SubNumberOrdersRawContract
      * @api
      *
      * @param string $subNumberOrderID the sub number order ID
-     * @param array<mixed>|SubNumberOrderUpdateParams $params
+     * @param array<string,mixed>|SubNumberOrderUpdateParams $params
      *
      * @return BaseResponse<SubNumberOrderUpdateResponse>
      *
@@ -54,7 +54,7 @@ interface SubNumberOrdersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|SubNumberOrderListParams $params
+     * @param array<string,mixed>|SubNumberOrderListParams $params
      *
      * @return BaseResponse<SubNumberOrderListResponse>
      *
@@ -83,7 +83,7 @@ interface SubNumberOrdersRawContract
      * @api
      *
      * @param string $id The ID of the sub number order
-     * @param array<mixed>|SubNumberOrderUpdateRequirementGroupParams $params
+     * @param array<string,mixed>|SubNumberOrderUpdateRequirementGroupParams $params
      *
      * @return BaseResponse<SubNumberOrderUpdateRequirementGroupResponse>
      *

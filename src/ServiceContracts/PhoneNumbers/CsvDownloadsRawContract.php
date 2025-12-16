@@ -19,7 +19,7 @@ interface CsvDownloadsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|CsvDownloadCreateParams $params
+     * @param array<string,mixed>|CsvDownloadCreateParams $params
      *
      * @return BaseResponse<CsvDownloadNewResponse>
      *
@@ -47,7 +47,7 @@ interface CsvDownloadsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|CsvDownloadListParams $params
+     * @param array<string,mixed>|CsvDownloadListParams $params
      *
      * @return BaseResponse<DefaultPagination<CsvDownload>>
      *

@@ -7,13 +7,13 @@ namespace Telnyx\VerifyProfiles;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\VerifyProfiles\VerifyProfile\Call;
-use Telnyx\VerifyProfiles\VerifyProfile\Flashcall;
-use Telnyx\VerifyProfiles\VerifyProfile\RecordType;
-use Telnyx\VerifyProfiles\VerifyProfile\SMS;
 
 /**
- * @phpstan-type VerifyProfileDataShape = array{data?: VerifyProfile|null}
+ * @phpstan-import-type VerifyProfileShape from \Telnyx\VerifyProfiles\VerifyProfile
+ *
+ * @phpstan-type VerifyProfileDataShape = array{
+ *   data?: null|VerifyProfile|VerifyProfileShape
+ * }
  */
 final class VerifyProfileData implements BaseModel
 {
@@ -33,19 +33,7 @@ final class VerifyProfileData implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param VerifyProfile|array{
-     *   id?: string|null,
-     *   call?: Call|null,
-     *   createdAt?: string|null,
-     *   flashcall?: Flashcall|null,
-     *   language?: string|null,
-     *   name?: string|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   sms?: SMS|null,
-     *   updatedAt?: string|null,
-     *   webhookFailoverURL?: string|null,
-     *   webhookURL?: string|null,
-     * } $data
+     * @param VerifyProfileShape $data
      */
     public static function with(VerifyProfile|array|null $data = null): self
     {
@@ -57,19 +45,7 @@ final class VerifyProfileData implements BaseModel
     }
 
     /**
-     * @param VerifyProfile|array{
-     *   id?: string|null,
-     *   call?: Call|null,
-     *   createdAt?: string|null,
-     *   flashcall?: Flashcall|null,
-     *   language?: string|null,
-     *   name?: string|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   sms?: SMS|null,
-     *   updatedAt?: string|null,
-     *   webhookFailoverURL?: string|null,
-     *   webhookURL?: string|null,
-     * } $data
+     * @param VerifyProfileShape $data
      */
     public function withData(VerifyProfile|array $data): self
     {

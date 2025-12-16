@@ -11,6 +11,9 @@ use Telnyx\MessagingProfiles\MessagingProfile\RecordType;
 use Telnyx\MessagingProfiles\MessagingProfile\WebhookAPIVersion;
 
 /**
+ * @phpstan-import-type NumberPoolSettingsShape from \Telnyx\MessagingProfiles\NumberPoolSettings
+ * @phpstan-import-type URLShortenerSettingsShape from \Telnyx\MessagingProfiles\URLShortenerSettings
+ *
  * @phpstan-type MessagingProfileShape = array{
  *   id?: string|null,
  *   alphaSender?: string|null,
@@ -23,14 +26,14 @@ use Telnyx\MessagingProfiles\MessagingProfile\WebhookAPIVersion;
  *   mmsTranscoding?: bool|null,
  *   mobileOnly?: bool|null,
  *   name?: string|null,
- *   numberPoolSettings?: NumberPoolSettings|null,
- *   recordType?: value-of<RecordType>|null,
+ *   numberPoolSettings?: null|NumberPoolSettings|NumberPoolSettingsShape,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  *   redactionEnabled?: bool|null,
  *   redactionLevel?: int|null,
  *   updatedAt?: \DateTimeInterface|null,
- *   urlShortenerSettings?: URLShortenerSettings|null,
+ *   urlShortenerSettings?: null|URLShortenerSettings|URLShortenerSettingsShape,
  *   v1Secret?: string|null,
- *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
+ *   webhookAPIVersion?: null|WebhookAPIVersion|value-of<WebhookAPIVersion>,
  *   webhookFailoverURL?: string|null,
  *   webhookURL?: string|null,
  *   whitelistedDestinations?: list<string>|null,
@@ -199,20 +202,9 @@ final class MessagingProfile implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param NumberPoolSettings|array{
-     *   longCodeWeight: float,
-     *   skipUnhealthy: bool,
-     *   tollFreeWeight: float,
-     *   geomatch?: bool|null,
-     *   stickySender?: bool|null,
-     * }|null $numberPoolSettings
+     * @param NumberPoolSettingsShape|null $numberPoolSettings
      * @param RecordType|value-of<RecordType> $recordType
-     * @param URLShortenerSettings|array{
-     *   domain: string,
-     *   prefix?: string|null,
-     *   replaceBlacklistOnly?: bool|null,
-     *   sendWebhooks?: bool|null,
-     * }|null $urlShortenerSettings
+     * @param URLShortenerSettingsShape|null $urlShortenerSettings
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion
      * @param list<string> $whitelistedDestinations
      */
@@ -397,13 +389,7 @@ final class MessagingProfile implements BaseModel
      *
      * To disable this feature, set the object field to `null`.
      *
-     * @param NumberPoolSettings|array{
-     *   longCodeWeight: float,
-     *   skipUnhealthy: bool,
-     *   tollFreeWeight: float,
-     *   geomatch?: bool|null,
-     *   stickySender?: bool|null,
-     * }|null $numberPoolSettings
+     * @param NumberPoolSettingsShape|null $numberPoolSettings
      */
     public function withNumberPoolSettings(
         NumberPoolSettings|array|null $numberPoolSettings
@@ -469,12 +455,7 @@ final class MessagingProfile implements BaseModel
      *
      * To disable this feature, set the object field to `null`.
      *
-     * @param URLShortenerSettings|array{
-     *   domain: string,
-     *   prefix?: string|null,
-     *   replaceBlacklistOnly?: bool|null,
-     *   sendWebhooks?: bool|null,
-     * }|null $urlShortenerSettings
+     * @param URLShortenerSettingsShape|null $urlShortenerSettings
      */
     public function withURLShortenerSettings(
         URLShortenerSettings|array|null $urlShortenerSettings

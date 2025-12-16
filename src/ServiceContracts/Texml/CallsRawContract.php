@@ -18,7 +18,7 @@ interface CallsRawContract
      * @api
      *
      * @param string $callSid the CallSid that identifies the call to update
-     * @param array<mixed>|CallUpdateParams $params
+     * @param array<string,mixed>|CallUpdateParams $params
      *
      * @return BaseResponse<CallUpdateResponse>
      *
@@ -34,7 +34,7 @@ interface CallsRawContract
      * @api
      *
      * @param string $applicationID the ID of the TeXML application used for the call
-     * @param array<mixed>|CallInitiateParams $params
+     * @param array<string,mixed>|CallInitiateParams $params
      *
      * @return BaseResponse<CallInitiateResponse>
      *

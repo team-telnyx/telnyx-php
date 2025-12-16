@@ -13,6 +13,8 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Sta
 
 /**
  * Filter porting orders by status(es). Originally: filter[status], filter[status][in][].
+ *
+ * @phpstan-type StatusShape = PortingOrderSingleStatus|list<UnionMember1|value-of<UnionMember1>>|value-of<PortingOrderSingleStatus>
  */
 final class Status implements ConverterSource
 {

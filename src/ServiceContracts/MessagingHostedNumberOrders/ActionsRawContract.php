@@ -16,7 +16,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $id identifies the type of resource
-     * @param array<mixed>|ActionUploadFileParams $params
+     * @param array<string,mixed>|ActionUploadFileParams $params
      *
      * @return BaseResponse<ActionUploadFileResponse>
      *

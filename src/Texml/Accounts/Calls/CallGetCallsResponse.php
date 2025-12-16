@@ -8,13 +8,12 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse\Call;
-use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse\Call\AnsweredBy;
-use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse\Call\Direction;
-use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse\Call\Status;
 
 /**
+ * @phpstan-import-type CallShape from \Telnyx\Texml\Accounts\Calls\CallGetCallsResponse\Call
+ *
  * @phpstan-type CallGetCallsResponseShape = array{
- *   calls?: list<Call>|null,
+ *   calls?: list<CallShape>|null,
  *   end?: int|null,
  *   firstPageUri?: string|null,
  *   nextPageUri?: string|null,
@@ -85,26 +84,7 @@ final class CallGetCallsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Call|array{
-     *   accountSid?: string|null,
-     *   answeredBy?: value-of<AnsweredBy>|null,
-     *   callerName?: string|null,
-     *   dateCreated?: string|null,
-     *   dateUpdated?: string|null,
-     *   direction?: value-of<Direction>|null,
-     *   duration?: string|null,
-     *   endTime?: string|null,
-     *   from?: string|null,
-     *   fromFormatted?: string|null,
-     *   price?: string|null,
-     *   priceUnit?: string|null,
-     *   sid?: string|null,
-     *   startTime?: string|null,
-     *   status?: value-of<Status>|null,
-     *   to?: string|null,
-     *   toFormatted?: string|null,
-     *   uri?: string|null,
-     * }> $calls
+     * @param list<CallShape> $calls
      */
     public static function with(
         ?array $calls = null,
@@ -131,26 +111,7 @@ final class CallGetCallsResponse implements BaseModel
     }
 
     /**
-     * @param list<Call|array{
-     *   accountSid?: string|null,
-     *   answeredBy?: value-of<AnsweredBy>|null,
-     *   callerName?: string|null,
-     *   dateCreated?: string|null,
-     *   dateUpdated?: string|null,
-     *   direction?: value-of<Direction>|null,
-     *   duration?: string|null,
-     *   endTime?: string|null,
-     *   from?: string|null,
-     *   fromFormatted?: string|null,
-     *   price?: string|null,
-     *   priceUnit?: string|null,
-     *   sid?: string|null,
-     *   startTime?: string|null,
-     *   status?: value-of<Status>|null,
-     *   to?: string|null,
-     *   toFormatted?: string|null,
-     *   uri?: string|null,
-     * }> $calls
+     * @param list<CallShape> $calls
      */
     public function withCalls(array $calls): self
     {

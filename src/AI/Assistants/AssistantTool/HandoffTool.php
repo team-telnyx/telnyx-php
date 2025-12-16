@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\AssistantTool;
 
 use Telnyx\AI\Assistants\AssistantTool\HandoffTool\Handoff;
-use Telnyx\AI\Assistants\AssistantTool\HandoffTool\Handoff\AIAssistant;
-use Telnyx\AI\Assistants\AssistantTool\HandoffTool\Handoff\VoiceMode;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -14,7 +12,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The handoff tool allows the assistant to hand off control of the conversation to another AI assistant. By default, this will happen transparently to the end user.
  *
- * @phpstan-type HandoffToolShape = array{handoff: Handoff, type?: 'handoff'}
+ * @phpstan-import-type HandoffShape from \Telnyx\AI\Assistants\AssistantTool\HandoffTool\Handoff
+ *
+ * @phpstan-type HandoffToolShape = array{
+ *   handoff: Handoff|HandoffShape, type: 'handoff'
+ * }
  */
 final class HandoffTool implements BaseModel
 {
@@ -52,9 +54,7 @@ final class HandoffTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Handoff|array{
-     *   aiAssistants: list<AIAssistant>, voiceMode?: value-of<VoiceMode>|null
-     * } $handoff
+     * @param HandoffShape $handoff
      */
     public static function with(Handoff|array $handoff): self
     {
@@ -66,9 +66,7 @@ final class HandoffTool implements BaseModel
     }
 
     /**
-     * @param Handoff|array{
-     *   aiAssistants: list<AIAssistant>, voiceMode?: value-of<VoiceMode>|null
-     * } $handoff
+     * @param HandoffShape $handoff
      */
     public function withHandoff(Handoff|array $handoff): self
     {

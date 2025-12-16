@@ -22,7 +22,7 @@ interface SimCardDataUsageNotificationsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|SimCardDataUsageNotificationCreateParams $params
+     * @param array<string,mixed>|SimCardDataUsageNotificationCreateParams $params
      *
      * @return BaseResponse<SimCardDataUsageNotificationNewResponse>
      *
@@ -51,7 +51,7 @@ interface SimCardDataUsageNotificationsRawContract
      * @api
      *
      * @param string $simCardDataUsageNotificationID identifies the resource
-     * @param array<mixed>|SimCardDataUsageNotificationUpdateParams $params
+     * @param array<string,mixed>|SimCardDataUsageNotificationUpdateParams $params
      *
      * @return BaseResponse<SimCardDataUsageNotificationUpdateResponse>
      *
@@ -66,7 +66,7 @@ interface SimCardDataUsageNotificationsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|SimCardDataUsageNotificationListParams $params
+     * @param array<string,mixed>|SimCardDataUsageNotificationListParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<SimCardDataUsageNotification>>
      *

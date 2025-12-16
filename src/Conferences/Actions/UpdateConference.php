@@ -14,9 +14,9 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type UpdateConferenceShape = array{
  *   callControlID: string,
- *   supervisorRole: value-of<SupervisorRole>,
+ *   supervisorRole: SupervisorRole|value-of<SupervisorRole>,
  *   commandID?: string|null,
- *   region?: value-of<Region>|null,
+ *   region?: null|Region|value-of<Region>,
  *   whisperCallControlIDs?: list<string>|null,
  * }
  */

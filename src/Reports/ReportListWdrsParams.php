@@ -15,19 +15,19 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\ReportsService::listWdrs()
  *
  * @phpstan-type ReportListWdrsParamsShape = array{
- *   id?: string,
- *   endDate?: string,
- *   imsi?: string,
- *   mcc?: string,
- *   mnc?: string,
- *   pageNumber?: int,
- *   pageSize?: int,
- *   phoneNumber?: string,
- *   simCardID?: string,
- *   simGroupID?: string,
- *   simGroupName?: string,
- *   sort?: list<string>,
- *   startDate?: string,
+ *   id?: string|null,
+ *   endDate?: string|null,
+ *   imsi?: string|null,
+ *   mcc?: string|null,
+ *   mnc?: string|null,
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
+ *   phoneNumber?: string|null,
+ *   simCardID?: string|null,
+ *   simGroupID?: string|null,
+ *   simGroupName?: string|null,
+ *   sort?: list<string>|null,
+ *   startDate?: string|null,
  * }
  */
 final class ReportListWdrsParams implements BaseModel

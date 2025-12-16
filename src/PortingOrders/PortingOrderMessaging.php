@@ -16,7 +16,7 @@ use Telnyx\PortingOrders\PortingOrderMessaging\MessagingPortStatus;
  *   enableMessaging?: bool|null,
  *   messagingCapable?: bool|null,
  *   messagingPortCompleted?: bool|null,
- *   messagingPortStatus?: value-of<MessagingPortStatus>|null,
+ *   messagingPortStatus?: null|MessagingPortStatus|value-of<MessagingPortStatus>,
  * }
  */
 final class PortingOrderMessaging implements BaseModel

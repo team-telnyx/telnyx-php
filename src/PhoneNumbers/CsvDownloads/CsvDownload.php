@@ -13,7 +13,7 @@ use Telnyx\PhoneNumbers\CsvDownloads\CsvDownload\Status;
  * @phpstan-type CsvDownloadShape = array{
  *   id?: string|null,
  *   recordType?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   url?: string|null,
  * }
  */

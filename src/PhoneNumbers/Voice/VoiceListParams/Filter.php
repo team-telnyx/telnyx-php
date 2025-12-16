@@ -13,11 +13,13 @@ use Telnyx\PhoneNumbers\Voice\VoiceListParams\Filter\VoiceUsagePaymentMethod;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[connection_name], filter[customer_reference], filter[voice.usage_payment_method].
  *
+ * @phpstan-import-type ConnectionNameShape from \Telnyx\PhoneNumbers\Voice\VoiceListParams\Filter\ConnectionName
+ *
  * @phpstan-type FilterShape = array{
- *   connectionName?: ConnectionName|null,
+ *   connectionName?: null|ConnectionName|ConnectionNameShape,
  *   customerReference?: string|null,
  *   phoneNumber?: string|null,
- *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
+ *   voiceUsagePaymentMethod?: null|VoiceUsagePaymentMethod|value-of<VoiceUsagePaymentMethod>,
  * }
  */
 final class Filter implements BaseModel
@@ -65,7 +67,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ConnectionName|array{contains?: string|null} $connectionName
+     * @param ConnectionNameShape $connectionName
      * @param VoiceUsagePaymentMethod|value-of<VoiceUsagePaymentMethod> $voiceUsagePaymentMethod
      */
     public static function with(
@@ -87,7 +89,7 @@ final class Filter implements BaseModel
     /**
      * Filter by connection name pattern matching.
      *
-     * @param ConnectionName|array{contains?: string|null} $connectionName
+     * @param ConnectionNameShape $connectionName
      */
     public function withConnectionName(
         ConnectionName|array $connectionName

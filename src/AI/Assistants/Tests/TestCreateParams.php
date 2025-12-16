@@ -16,15 +16,17 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\Assistants\TestsService::create()
  *
+ * @phpstan-import-type RubricShape from \Telnyx\AI\Assistants\Tests\TestCreateParams\Rubric
+ *
  * @phpstan-type TestCreateParamsShape = array{
  *   destination: string,
  *   instructions: string,
  *   name: string,
- *   rubric: list<Rubric|array{criteria: string, name: string}>,
- *   description?: string,
- *   maxDurationSeconds?: int,
- *   telnyxConversationChannel?: TelnyxConversationChannel|value-of<TelnyxConversationChannel>,
- *   testSuite?: string,
+ *   rubric: list<RubricShape>,
+ *   description?: string|null,
+ *   maxDurationSeconds?: int|null,
+ *   telnyxConversationChannel?: null|TelnyxConversationChannel|value-of<TelnyxConversationChannel>,
+ *   testSuite?: string|null,
  * }
  */
 final class TestCreateParams implements BaseModel
@@ -118,7 +120,7 @@ final class TestCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Rubric|array{criteria: string, name: string}> $rubric
+     * @param list<RubricShape> $rubric
      * @param TelnyxConversationChannel|value-of<TelnyxConversationChannel> $telnyxConversationChannel
      */
     public static function with(
@@ -182,7 +184,7 @@ final class TestCreateParams implements BaseModel
     /**
      * Evaluation criteria used to assess the assistant's performance. Each rubric item contains a name and specific criteria for evaluation.
      *
-     * @param list<Rubric|array{criteria: string, name: string}> $rubric
+     * @param list<RubricShape> $rubric
      */
     public function withRubric(array $rubric): self
     {

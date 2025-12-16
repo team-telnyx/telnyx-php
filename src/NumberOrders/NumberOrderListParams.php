@@ -9,7 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberOrders\NumberOrderListParams\Filter;
-use Telnyx\NumberOrders\NumberOrderListParams\Filter\CreatedAt;
 use Telnyx\NumberOrders\NumberOrderListParams\Page;
 
 /**
@@ -17,15 +16,11 @@ use Telnyx\NumberOrders\NumberOrderListParams\Page;
  *
  * @see Telnyx\Services\NumberOrdersService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\NumberOrders\NumberOrderListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\NumberOrders\NumberOrderListParams\Page
+ *
  * @phpstan-type NumberOrderListParamsShape = array{
- *   filter?: Filter|array{
- *     createdAt?: CreatedAt|null,
- *     customerReference?: string|null,
- *     phoneNumbersCount?: string|null,
- *     requirementsMet?: bool|null,
- *     status?: string|null,
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   filter?: FilterShape|null, page?: PageShape|null
  * }
  */
 final class NumberOrderListParams implements BaseModel
@@ -56,14 +51,8 @@ final class NumberOrderListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   createdAt?: CreatedAt|null,
-     *   customerReference?: string|null,
-     *   phoneNumbersCount?: string|null,
-     *   requirementsMet?: bool|null,
-     *   status?: string|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -80,13 +69,7 @@ final class NumberOrderListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers_count], filter[customer_reference], filter[requirements_met].
      *
-     * @param Filter|array{
-     *   createdAt?: CreatedAt|null,
-     *   customerReference?: string|null,
-     *   phoneNumbersCount?: string|null,
-     *   requirementsMet?: bool|null,
-     *   status?: string|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -99,7 +82,7 @@ final class NumberOrderListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

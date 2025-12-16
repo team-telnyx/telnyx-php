@@ -19,7 +19,7 @@ interface InvoicesRawContract
      * @api
      *
      * @param string $id Invoice UUID
-     * @param array<mixed>|InvoiceRetrieveParams $params
+     * @param array<string,mixed>|InvoiceRetrieveParams $params
      *
      * @return BaseResponse<InvoiceGetResponse>
      *
@@ -34,7 +34,7 @@ interface InvoicesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|InvoiceListParams $params
+     * @param array<string,mixed>|InvoiceListParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<InvoiceListResponse>>
      *

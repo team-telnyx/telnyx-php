@@ -15,17 +15,17 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Messaging10dlc\CampaignService::update()
  *
  * @phpstan-type CampaignUpdateParamsShape = array{
- *   autoRenewal?: bool,
- *   helpMessage?: string,
- *   messageFlow?: string,
- *   resellerID?: string,
- *   sample1?: string,
- *   sample2?: string,
- *   sample3?: string,
- *   sample4?: string,
- *   sample5?: string,
- *   webhookFailoverURL?: string,
- *   webhookURL?: string,
+ *   autoRenewal?: bool|null,
+ *   helpMessage?: string|null,
+ *   messageFlow?: string|null,
+ *   resellerID?: string|null,
+ *   sample1?: string|null,
+ *   sample2?: string|null,
+ *   sample3?: string|null,
+ *   sample4?: string|null,
+ *   sample5?: string|null,
+ *   webhookFailoverURL?: string|null,
+ *   webhookURL?: string|null,
  * }
  */
 final class CampaignUpdateParams implements BaseModel

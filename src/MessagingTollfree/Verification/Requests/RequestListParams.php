@@ -18,10 +18,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type RequestListParamsShape = array{
  *   page: int,
  *   pageSize: int,
- *   dateEnd?: \DateTimeInterface,
- *   dateStart?: \DateTimeInterface,
- *   phoneNumber?: string,
- *   status?: TfVerificationStatus|value-of<TfVerificationStatus>,
+ *   dateEnd?: \DateTimeInterface|null,
+ *   dateStart?: \DateTimeInterface|null,
+ *   phoneNumber?: string|null,
+ *   status?: null|TfVerificationStatus|value-of<TfVerificationStatus>,
  * }
  */
 final class RequestListParams implements BaseModel

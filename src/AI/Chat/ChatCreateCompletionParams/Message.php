@@ -6,15 +6,16 @@ namespace Telnyx\AI\Chat\ChatCreateCompletionParams;
 
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Content;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Content\TextAndImageArray;
-use Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Content\TextAndImageArray\Type;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Role;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type ContentShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Content
+ *
  * @phpstan-type MessageShape = array{
- *   content: string|list<TextAndImageArray>, role: value-of<Role>
+ *   content: ContentShape, role: Role|value-of<Role>
  * }
  */
 final class Message implements BaseModel
@@ -54,9 +55,7 @@ final class Message implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param string|list<TextAndImageArray|array{
-     *   type: value-of<Type>, imageURL?: string|null, text?: string|null
-     * }> $content
+     * @param ContentShape $content
      * @param Role|value-of<Role> $role
      */
     public static function with(string|array $content, Role|string $role): self
@@ -70,9 +69,7 @@ final class Message implements BaseModel
     }
 
     /**
-     * @param string|list<TextAndImageArray|array{
-     *   type: value-of<Type>, imageURL?: string|null, text?: string|null
-     * }> $content
+     * @param ContentShape $content
      */
     public function withContent(string|array $content): self
     {

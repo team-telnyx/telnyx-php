@@ -12,11 +12,13 @@ use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Filter\Name;
 /**
  * Consolidated filter parameter for mobile network operators (deepObject style). Originally: filter[name][starts_with], filter[name][contains], filter[name][ends_with], filter[country_code], filter[mcc], filter[mnc], filter[tadig], filter[network_preferences_enabled].
  *
+ * @phpstan-import-type NameShape from \Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Filter\Name
+ *
  * @phpstan-type FilterShape = array{
  *   countryCode?: string|null,
  *   mcc?: string|null,
  *   mnc?: string|null,
- *   name?: Name|null,
+ *   name?: null|Name|NameShape,
  *   networkPreferencesEnabled?: bool|null,
  *   tadig?: string|null,
  * }
@@ -72,9 +74,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Name|array{
-     *   contains?: string|null, endsWith?: string|null, startsWith?: string|null
-     * } $name
+     * @param NameShape $name
      */
     public static function with(
         ?string $countryCode = null,
@@ -132,9 +132,7 @@ final class Filter implements BaseModel
     /**
      * Advanced name filtering operations.
      *
-     * @param Name|array{
-     *   contains?: string|null, endsWith?: string|null, startsWith?: string|null
-     * } $name
+     * @param NameShape $name
      */
     public function withName(Name|array $name): self
     {

@@ -8,16 +8,17 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsResponse\Participant;
-use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsResponse\Participant\Status;
 
 /**
+ * @phpstan-import-type ParticipantShape from \Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsResponse\Participant
+ *
  * @phpstan-type ParticipantGetParticipantsResponseShape = array{
  *   end?: int|null,
  *   firstPageUri?: string|null,
  *   nextPageUri?: string|null,
  *   page?: int|null,
  *   pageSize?: int|null,
- *   participants?: list<Participant>|null,
+ *   participants?: list<ParticipantShape>|null,
  *   start?: int|null,
  *   uri?: string|null,
  * }
@@ -83,22 +84,7 @@ final class ParticipantGetParticipantsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Participant|array{
-     *   accountSid?: string|null,
-     *   apiVersion?: string|null,
-     *   callSid?: string|null,
-     *   callSidLegacy?: string|null,
-     *   coaching?: bool|null,
-     *   coachingCallSid?: string|null,
-     *   coachingCallSidLegacy?: string|null,
-     *   dateCreated?: string|null,
-     *   dateUpdated?: string|null,
-     *   endConferenceOnExit?: bool|null,
-     *   hold?: bool|null,
-     *   muted?: bool|null,
-     *   status?: value-of<Status>|null,
-     *   uri?: string|null,
-     * }> $participants
+     * @param list<ParticipantShape> $participants
      */
     public static function with(
         ?int $end = null,
@@ -180,22 +166,7 @@ final class ParticipantGetParticipantsResponse implements BaseModel
     }
 
     /**
-     * @param list<Participant|array{
-     *   accountSid?: string|null,
-     *   apiVersion?: string|null,
-     *   callSid?: string|null,
-     *   callSidLegacy?: string|null,
-     *   coaching?: bool|null,
-     *   coachingCallSid?: string|null,
-     *   coachingCallSidLegacy?: string|null,
-     *   dateCreated?: string|null,
-     *   dateUpdated?: string|null,
-     *   endConferenceOnExit?: bool|null,
-     *   hold?: bool|null,
-     *   muted?: bool|null,
-     *   status?: value-of<Status>|null,
-     *   uri?: string|null,
-     * }> $participants
+     * @param list<ParticipantShape> $participants
      */
     public function withParticipants(array $participants): self
     {

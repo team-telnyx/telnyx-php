@@ -18,10 +18,10 @@ use Telnyx\DialogflowConnections\DialogflowConnectionUpdateParams\DialogflowAPI;
  *
  * @phpstan-type DialogflowConnectionUpdateParamsShape = array{
  *   serviceAccount: array<string,mixed>,
- *   conversationProfileID?: string,
- *   dialogflowAPI?: DialogflowAPI|value-of<DialogflowAPI>,
- *   environment?: string,
- *   location?: string,
+ *   conversationProfileID?: string|null,
+ *   dialogflowAPI?: null|DialogflowAPI|value-of<DialogflowAPI>,
+ *   environment?: string|null,
+ *   location?: string|null,
  * }
  */
 final class DialogflowConnectionUpdateParams implements BaseModel

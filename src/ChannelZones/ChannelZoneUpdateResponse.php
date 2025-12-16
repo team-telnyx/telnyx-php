@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   channels: int,
  *   countries: list<string>,
  *   name: string,
- *   recordType: value-of<RecordType>,
+ *   recordType: RecordType|value-of<RecordType>,
  *   createdAt?: string|null,
  *   updatedAt?: string|null,
  * }

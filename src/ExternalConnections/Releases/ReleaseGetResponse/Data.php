@@ -11,11 +11,13 @@ use Telnyx\ExternalConnections\Releases\ReleaseGetResponse\Data\Status;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse\Data\TelephoneNumber;
 
 /**
+ * @phpstan-import-type TelephoneNumberShape from \Telnyx\ExternalConnections\Releases\ReleaseGetResponse\Data\TelephoneNumber
+ *
  * @phpstan-type DataShape = array{
  *   createdAt?: string|null,
  *   errorMessage?: string|null,
- *   status?: value-of<Status>|null,
- *   telephoneNumbers?: list<TelephoneNumber>|null,
+ *   status?: null|Status|value-of<Status>,
+ *   telephoneNumbers?: list<TelephoneNumberShape>|null,
  *   tenantID?: string|null,
  *   ticketID?: string|null,
  * }
@@ -69,9 +71,7 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Status|value-of<Status> $status
-     * @param list<TelephoneNumber|array{
-     *   numberID?: string|null, phoneNumber?: string|null
-     * }> $telephoneNumbers
+     * @param list<TelephoneNumberShape> $telephoneNumbers
      */
     public static function with(
         ?string $createdAt = null,
@@ -129,9 +129,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<TelephoneNumber|array{
-     *   numberID?: string|null, phoneNumber?: string|null
-     * }> $telephoneNumbers
+     * @param list<TelephoneNumberShape> $telephoneNumbers
      */
     public function withTelephoneNumbers(array $telephoneNumbers): self
     {

@@ -10,10 +10,12 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderListParams\Filter\PhoneNumbers\PhoneNumber;
 
 /**
+ * @phpstan-import-type PhoneNumberShape from \Telnyx\PortingOrders\PortingOrderListParams\Filter\PhoneNumbers\PhoneNumber
+ *
  * @phpstan-type PhoneNumbersShape = array{
  *   carrierName?: string|null,
  *   countryCode?: string|null,
- *   phoneNumber?: PhoneNumber|null,
+ *   phoneNumber?: null|PhoneNumber|PhoneNumberShape,
  * }
  */
 final class PhoneNumbers implements BaseModel
@@ -49,7 +51,7 @@ final class PhoneNumbers implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PhoneNumber|array{contains?: string|null} $phoneNumber
+     * @param PhoneNumberShape $phoneNumber
      */
     public static function with(
         ?string $carrierName = null,
@@ -90,7 +92,7 @@ final class PhoneNumbers implements BaseModel
     /**
      * Phone number pattern filtering operations.
      *
-     * @param PhoneNumber|array{contains?: string|null} $phoneNumber
+     * @param PhoneNumberShape $phoneNumber
      */
     public function withPhoneNumber(PhoneNumber|array $phoneNumber): self
     {

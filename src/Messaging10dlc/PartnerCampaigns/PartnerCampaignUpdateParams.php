@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Messaging10dlc\PartnerCampaignsService::update()
  *
  * @phpstan-type PartnerCampaignUpdateParamsShape = array{
- *   webhookFailoverURL?: string, webhookURL?: string
+ *   webhookFailoverURL?: string|null, webhookURL?: string|null
  * }
  */
 final class PartnerCampaignUpdateParams implements BaseModel

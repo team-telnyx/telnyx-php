@@ -14,7 +14,7 @@ use Telnyx\SimCards\SimCardListParams\Filter\Status;
  *
  * @phpstan-type FilterShape = array{
  *   iccid?: string|null,
- *   status?: list<value-of<Status>>|null,
+ *   status?: list<Status|value-of<Status>>|null,
  *   tags?: list<string>|null,
  * }
  */

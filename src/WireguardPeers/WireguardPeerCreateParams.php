@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\WireguardPeersService::create()
  *
  * @phpstan-type WireguardPeerCreateParamsShape = array{
- *   wireguardInterfaceID: string, publicKey?: string
+ *   wireguardInterfaceID: string, publicKey?: string|null
  * }
  */
 final class WireguardPeerCreateParams implements BaseModel

@@ -11,7 +11,7 @@ use Telnyx\PortingOrders\PortingOrderRequirement\FieldType;
 
 /**
  * @phpstan-type PortingOrderRequirementShape = array{
- *   fieldType?: value-of<FieldType>|null,
+ *   fieldType?: null|FieldType|value-of<FieldType>,
  *   fieldValue?: string|null,
  *   recordType?: string|null,
  *   requirementTypeID?: string|null,

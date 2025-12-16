@@ -14,7 +14,8 @@ use Telnyx\Portouts\Reports\ReportListParams\Filter\Status;
  * Consolidated filter parameter (deepObject style). Originally: filter[report_type], filter[status].
  *
  * @phpstan-type FilterShape = array{
- *   reportType?: value-of<ReportType>|null, status?: value-of<Status>|null
+ *   reportType?: null|ReportType|value-of<ReportType>,
+ *   status?: null|Status|value-of<Status>,
  * }
  */
 final class Filter implements BaseModel

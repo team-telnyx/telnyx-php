@@ -9,7 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type MediaGetResponseShape = array{data?: MediaResource|null}
+ * @phpstan-import-type MediaResourceShape from \Telnyx\Media\MediaResource
+ *
+ * @phpstan-type MediaGetResponseShape = array{
+ *   data?: null|MediaResource|MediaResourceShape
+ * }
  */
 final class MediaGetResponse implements BaseModel
 {
@@ -29,13 +33,7 @@ final class MediaGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MediaResource|array{
-     *   contentType?: string|null,
-     *   createdAt?: string|null,
-     *   expiresAt?: string|null,
-     *   mediaName?: string|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param MediaResourceShape $data
      */
     public static function with(MediaResource|array|null $data = null): self
     {
@@ -47,13 +45,7 @@ final class MediaGetResponse implements BaseModel
     }
 
     /**
-     * @param MediaResource|array{
-     *   contentType?: string|null,
-     *   createdAt?: string|null,
-     *   expiresAt?: string|null,
-     *   mediaName?: string|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param MediaResourceShape $data
      */
     public function withData(MediaResource|array $data): self
     {

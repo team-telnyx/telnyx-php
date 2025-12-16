@@ -16,7 +16,7 @@ use Telnyx\SimCards\SimCardGetPublicIPResponse\Data\Type;
  *   recordType?: string|null,
  *   regionCode?: string|null,
  *   simCardID?: string|null,
- *   type?: value-of<Type>|null,
+ *   type?: null|Type|value-of<Type>,
  *   updatedAt?: string|null,
  * }
  */

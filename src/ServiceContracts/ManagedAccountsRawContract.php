@@ -24,7 +24,7 @@ interface ManagedAccountsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ManagedAccountCreateParams $params
+     * @param array<string,mixed>|ManagedAccountCreateParams $params
      *
      * @return BaseResponse<ManagedAccountNewResponse>
      *
@@ -53,7 +53,7 @@ interface ManagedAccountsRawContract
      * @api
      *
      * @param string $id Managed Account User ID
-     * @param array<mixed>|ManagedAccountUpdateParams $params
+     * @param array<string,mixed>|ManagedAccountUpdateParams $params
      *
      * @return BaseResponse<ManagedAccountUpdateResponse>
      *
@@ -68,7 +68,7 @@ interface ManagedAccountsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ManagedAccountListParams $params
+     * @param array<string,mixed>|ManagedAccountListParams $params
      *
      * @return BaseResponse<DefaultPagination<ManagedAccountListResponse>>
      *
@@ -94,7 +94,7 @@ interface ManagedAccountsRawContract
      * @api
      *
      * @param string $id Managed Account User ID
-     * @param array<mixed>|ManagedAccountUpdateGlobalChannelLimitParams $params
+     * @param array<string,mixed>|ManagedAccountUpdateGlobalChannelLimitParams $params
      *
      * @return BaseResponse<ManagedAccountUpdateGlobalChannelLimitResponse>
      *

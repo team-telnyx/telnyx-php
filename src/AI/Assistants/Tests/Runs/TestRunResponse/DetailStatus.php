@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DetailStatusShape = array{
- *   name: string, status: value-of<TestStatus>
+ *   name: string, status: TestStatus|value-of<TestStatus>
  * }
  */
 final class DetailStatus implements BaseModel

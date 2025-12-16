@@ -12,8 +12,11 @@ use Telnyx\FaxApplications\FaxApplicationListParams\Filter\ApplicationName;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound_voice_profile_id].
  *
+ * @phpstan-import-type ApplicationNameShape from \Telnyx\FaxApplications\FaxApplicationListParams\Filter\ApplicationName
+ *
  * @phpstan-type FilterShape = array{
- *   applicationName?: ApplicationName|null, outboundVoiceProfileID?: string|null
+ *   applicationName?: null|ApplicationName|ApplicationNameShape,
+ *   outboundVoiceProfileID?: string|null,
  * }
  */
 final class Filter implements BaseModel
@@ -43,7 +46,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ApplicationName|array{contains?: string|null} $applicationName
+     * @param ApplicationNameShape $applicationName
      */
     public static function with(
         ApplicationName|array|null $applicationName = null,
@@ -60,7 +63,7 @@ final class Filter implements BaseModel
     /**
      * Application name filtering operations.
      *
-     * @param ApplicationName|array{contains?: string|null} $applicationName
+     * @param ApplicationNameShape $applicationName
      */
     public function withApplicationName(
         ApplicationName|array $applicationName

@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\FineTuning\Jobs;
 
-use Telnyx\AI\FineTuning\Jobs\FineTuningJob\Hyperparameters;
-use Telnyx\AI\FineTuning\Jobs\FineTuningJob\Status;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type JobListResponseShape = array{data: list<FineTuningJob>}
+ * @phpstan-import-type FineTuningJobShape from \Telnyx\AI\FineTuning\Jobs\FineTuningJob
+ *
+ * @phpstan-type JobListResponseShape = array{data: list<FineTuningJobShape>}
  */
 final class JobListResponse implements BaseModel
 {
@@ -46,17 +46,7 @@ final class JobListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<FineTuningJob|array{
-     *   id: string,
-     *   createdAt: int,
-     *   finishedAt: int|null,
-     *   hyperparameters: Hyperparameters,
-     *   model: string,
-     *   organizationID: string,
-     *   status: value-of<Status>,
-     *   trainedTokens: int|null,
-     *   trainingFile: string,
-     * }> $data
+     * @param list<FineTuningJobShape> $data
      */
     public static function with(array $data): self
     {
@@ -68,17 +58,7 @@ final class JobListResponse implements BaseModel
     }
 
     /**
-     * @param list<FineTuningJob|array{
-     *   id: string,
-     *   createdAt: int,
-     *   finishedAt: int|null,
-     *   hyperparameters: Hyperparameters,
-     *   model: string,
-     *   organizationID: string,
-     *   status: value-of<Status>,
-     *   trainedTokens: int|null,
-     *   trainingFile: string,
-     * }> $data
+     * @param list<FineTuningJobShape> $data
      */
     public function withData(array $data): self
     {

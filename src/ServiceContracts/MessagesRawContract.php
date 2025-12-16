@@ -55,7 +55,7 @@ interface MessagesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MessageScheduleParams $params
+     * @param array<string,mixed>|MessageScheduleParams $params
      *
      * @return BaseResponse<MessageScheduleResponse>
      *
@@ -69,7 +69,7 @@ interface MessagesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MessageSendParams $params
+     * @param array<string,mixed>|MessageSendParams $params
      *
      * @return BaseResponse<MessageSendResponse>
      *
@@ -83,7 +83,7 @@ interface MessagesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MessageSendGroupMmsParams $params
+     * @param array<string,mixed>|MessageSendGroupMmsParams $params
      *
      * @return BaseResponse<MessageSendGroupMmsResponse>
      *
@@ -97,7 +97,7 @@ interface MessagesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MessageSendLongCodeParams $params
+     * @param array<string,mixed>|MessageSendLongCodeParams $params
      *
      * @return BaseResponse<MessageSendLongCodeResponse>
      *
@@ -111,7 +111,7 @@ interface MessagesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MessageSendNumberPoolParams $params
+     * @param array<string,mixed>|MessageSendNumberPoolParams $params
      *
      * @return BaseResponse<MessageSendNumberPoolResponse>
      *
@@ -125,7 +125,7 @@ interface MessagesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MessageSendShortCodeParams $params
+     * @param array<string,mixed>|MessageSendShortCodeParams $params
      *
      * @return BaseResponse<MessageSendShortCodeResponse>
      *

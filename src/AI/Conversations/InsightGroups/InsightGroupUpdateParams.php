@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\Conversations\InsightGroupsService::update()
  *
  * @phpstan-type InsightGroupUpdateParamsShape = array{
- *   description?: string, name?: string, webhook?: string
+ *   description?: string|null, name?: string|null, webhook?: string|null
  * }
  */
 final class InsightGroupUpdateParams implements BaseModel

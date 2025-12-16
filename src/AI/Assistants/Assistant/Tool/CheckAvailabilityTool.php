@@ -10,8 +10,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type CheckAvailabilityShape from \Telnyx\AI\Assistants\Assistant\Tool\CheckAvailabilityTool\CheckAvailability
+ *
  * @phpstan-type CheckAvailabilityToolShape = array{
- *   checkAvailability: CheckAvailability, type?: 'check_availability'
+ *   checkAvailability: CheckAvailability|CheckAvailabilityShape,
+ *   type: 'check_availability',
  * }
  */
 final class CheckAvailabilityTool implements BaseModel
@@ -50,9 +53,7 @@ final class CheckAvailabilityTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CheckAvailability|array{
-     *   apiKeyRef: string, eventTypeID: int
-     * } $checkAvailability
+     * @param CheckAvailabilityShape $checkAvailability
      */
     public static function with(
         CheckAvailability|array $checkAvailability
@@ -65,9 +66,7 @@ final class CheckAvailabilityTool implements BaseModel
     }
 
     /**
-     * @param CheckAvailability|array{
-     *   apiKeyRef: string, eventTypeID: int
-     * } $checkAvailability
+     * @param CheckAvailabilityShape $checkAvailability
      */
     public function withCheckAvailability(
         CheckAvailability|array $checkAvailability

@@ -10,7 +10,6 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NetworkCoverage\NetworkCoverageListParams\Filter;
 use Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters;
-use Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters\AvailableServices\Contains;
 use Telnyx\NetworkCoverage\NetworkCoverageListParams\Page;
 
 /**
@@ -18,17 +17,12 @@ use Telnyx\NetworkCoverage\NetworkCoverageListParams\Page;
  *
  * @see Telnyx\Services\NetworkCoverageService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\NetworkCoverage\NetworkCoverageListParams\Filter
+ * @phpstan-import-type FiltersShape from \Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters
+ * @phpstan-import-type PageShape from \Telnyx\NetworkCoverage\NetworkCoverageListParams\Page
+ *
  * @phpstan-type NetworkCoverageListParamsShape = array{
- *   filter?: Filter|array{
- *     locationCode?: string|null,
- *     locationPop?: string|null,
- *     locationRegion?: string|null,
- *     locationSite?: string|null,
- *   },
- *   filters?: Filters|array{
- *     availableServices?: null|Contains|value-of<AvailableService>
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   filter?: FilterShape|null, filters?: FiltersShape|null, page?: PageShape|null
  * }
  */
 final class NetworkCoverageListParams implements BaseModel
@@ -65,16 +59,9 @@ final class NetworkCoverageListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   locationCode?: string|null,
-     *   locationPop?: string|null,
-     *   locationRegion?: string|null,
-     *   locationSite?: string|null,
-     * } $filter
-     * @param Filters|array{
-     *   availableServices?: Contains|value-of<AvailableService>|null
-     * } $filters
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param FiltersShape $filters
+     * @param PageShape $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -93,12 +80,7 @@ final class NetworkCoverageListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[location.region], filter[location.site], filter[location.pop], filter[location.code].
      *
-     * @param Filter|array{
-     *   locationCode?: string|null,
-     *   locationPop?: string|null,
-     *   locationRegion?: string|null,
-     *   locationSite?: string|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -111,9 +93,7 @@ final class NetworkCoverageListParams implements BaseModel
     /**
      * Consolidated filters parameter (deepObject style). Originally: filters[available_services][contains].
      *
-     * @param Filters|array{
-     *   availableServices?: Contains|value-of<AvailableService>|null
-     * } $filters
+     * @param FiltersShape $filters
      */
     public function withFilters(Filters|array $filters): self
     {
@@ -126,7 +106,7 @@ final class NetworkCoverageListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

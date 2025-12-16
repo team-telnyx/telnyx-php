@@ -10,8 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ManagedAccounts\ManagedAccountUpdateGlobalChannelLimitResponse\Data;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\ManagedAccounts\ManagedAccountUpdateGlobalChannelLimitResponse\Data
+ *
  * @phpstan-type ManagedAccountUpdateGlobalChannelLimitResponseShape = array{
- *   data?: Data|null
+ *   data?: null|Data|DataShape
  * }
  */
 final class ManagedAccountUpdateGlobalChannelLimitResponse implements BaseModel
@@ -32,13 +34,7 @@ final class ManagedAccountUpdateGlobalChannelLimitResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   id?: string|null,
-     *   channelLimit?: int|null,
-     *   email?: string|null,
-     *   managerAccountID?: string|null,
-     *   recordType?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -50,13 +46,7 @@ final class ManagedAccountUpdateGlobalChannelLimitResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   id?: string|null,
-     *   channelLimit?: int|null,
-     *   email?: string|null,
-     *   managerAccountID?: string|null,
-     *   recordType?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

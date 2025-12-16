@@ -16,13 +16,11 @@ use Telnyx\Networks\NetworkListInterfacesParams\Page;
  *
  * @see Telnyx\Services\NetworksService::listInterfaces()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\Networks\NetworkListInterfacesParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Networks\NetworkListInterfacesParams\Page
+ *
  * @phpstan-type NetworkListInterfacesParamsShape = array{
- *   filter?: Filter|array{
- *     name?: string|null,
- *     status?: value-of<InterfaceStatus>|null,
- *     type?: string|null,
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   filter?: FilterShape|null, page?: PageShape|null
  * }
  */
 final class NetworkListInterfacesParams implements BaseModel
@@ -53,12 +51,8 @@ final class NetworkListInterfacesParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   name?: string|null,
-     *   status?: value-of<InterfaceStatus>|null,
-     *   type?: string|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -75,11 +69,7 @@ final class NetworkListInterfacesParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[name], filter[type], filter[status].
      *
-     * @param Filter|array{
-     *   name?: string|null,
-     *   status?: value-of<InterfaceStatus>|null,
-     *   type?: string|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -92,7 +82,7 @@ final class NetworkListInterfacesParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

@@ -18,7 +18,7 @@ interface CivicAddressesRawContract
      * @api
      *
      * @param string $addressID identifies a civic address or a location
-     * @param array<mixed>|CivicAddressRetrieveParams $params
+     * @param array<string,mixed>|CivicAddressRetrieveParams $params
      *
      * @return BaseResponse<CivicAddressGetResponse>
      *
@@ -34,7 +34,7 @@ interface CivicAddressesRawContract
      * @api
      *
      * @param string $id identifies the resource
-     * @param array<mixed>|CivicAddressListParams $params
+     * @param array<string,mixed>|CivicAddressListParams $params
      *
      * @return BaseResponse<CivicAddressListResponse>
      *

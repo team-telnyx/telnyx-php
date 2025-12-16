@@ -9,7 +9,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type AddressGetResponseShape = array{data?: Address|null}
+ * @phpstan-import-type AddressShape from \Telnyx\Addresses\Address
+ *
+ * @phpstan-type AddressGetResponseShape = array{data?: null|Address|AddressShape}
  */
 final class AddressGetResponse implements BaseModel
 {
@@ -29,27 +31,7 @@ final class AddressGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Address|array{
-     *   id?: string|null,
-     *   addressBook?: bool|null,
-     *   administrativeArea?: string|null,
-     *   borough?: string|null,
-     *   businessName?: string|null,
-     *   countryCode?: string|null,
-     *   createdAt?: string|null,
-     *   customerReference?: string|null,
-     *   extendedAddress?: string|null,
-     *   firstName?: string|null,
-     *   lastName?: string|null,
-     *   locality?: string|null,
-     *   neighborhood?: string|null,
-     *   phoneNumber?: string|null,
-     *   postalCode?: string|null,
-     *   recordType?: string|null,
-     *   streetAddress?: string|null,
-     *   updatedAt?: string|null,
-     *   validateAddress?: bool|null,
-     * } $data
+     * @param AddressShape $data
      */
     public static function with(Address|array|null $data = null): self
     {
@@ -61,27 +43,7 @@ final class AddressGetResponse implements BaseModel
     }
 
     /**
-     * @param Address|array{
-     *   id?: string|null,
-     *   addressBook?: bool|null,
-     *   administrativeArea?: string|null,
-     *   borough?: string|null,
-     *   businessName?: string|null,
-     *   countryCode?: string|null,
-     *   createdAt?: string|null,
-     *   customerReference?: string|null,
-     *   extendedAddress?: string|null,
-     *   firstName?: string|null,
-     *   lastName?: string|null,
-     *   locality?: string|null,
-     *   neighborhood?: string|null,
-     *   phoneNumber?: string|null,
-     *   postalCode?: string|null,
-     *   recordType?: string|null,
-     *   streetAddress?: string|null,
-     *   updatedAt?: string|null,
-     *   validateAddress?: bool|null,
-     * } $data
+     * @param AddressShape $data
      */
     public function withData(Address|array $data): self
     {

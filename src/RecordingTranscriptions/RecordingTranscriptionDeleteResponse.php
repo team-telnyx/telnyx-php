@@ -7,12 +7,12 @@ namespace Telnyx\RecordingTranscriptions;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\RecordingTranscriptions\RecordingTranscription\RecordType;
-use Telnyx\RecordingTranscriptions\RecordingTranscription\Status;
 
 /**
+ * @phpstan-import-type RecordingTranscriptionShape from \Telnyx\RecordingTranscriptions\RecordingTranscription
+ *
  * @phpstan-type RecordingTranscriptionDeleteResponseShape = array{
- *   data?: RecordingTranscription|null
+ *   data?: null|RecordingTranscription|RecordingTranscriptionShape
  * }
  */
 final class RecordingTranscriptionDeleteResponse implements BaseModel
@@ -33,16 +33,7 @@ final class RecordingTranscriptionDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordingTranscription|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   durationMillis?: int|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   recordingID?: string|null,
-     *   status?: value-of<Status>|null,
-     *   transcriptionText?: string|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param RecordingTranscriptionShape $data
      */
     public static function with(RecordingTranscription|array|null $data = null): self
     {
@@ -54,16 +45,7 @@ final class RecordingTranscriptionDeleteResponse implements BaseModel
     }
 
     /**
-     * @param RecordingTranscription|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   durationMillis?: int|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   recordingID?: string|null,
-     *   status?: value-of<Status>|null,
-     *   transcriptionText?: string|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param RecordingTranscriptionShape $data
      */
     public function withData(RecordingTranscription|array $data): self
     {

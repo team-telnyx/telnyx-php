@@ -16,9 +16,9 @@ use Telnyx\NotificationChannels\NotificationChannelCreateParams\ChannelTypeID;
  * @see Telnyx\Services\NotificationChannelsService::create()
  *
  * @phpstan-type NotificationChannelCreateParamsShape = array{
- *   channelDestination?: string,
- *   channelTypeID?: ChannelTypeID|value-of<ChannelTypeID>,
- *   notificationProfileID?: string,
+ *   channelDestination?: string|null,
+ *   channelTypeID?: null|ChannelTypeID|value-of<ChannelTypeID>,
+ *   notificationProfileID?: string|null,
  * }
  */
 final class NotificationChannelCreateParams implements BaseModel

@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DialogflowConnections\DialogflowConnectionUpdateResponse\Data;
 
 /**
- * @phpstan-type DialogflowConnectionUpdateResponseShape = array{data: Data}
+ * @phpstan-import-type DataShape from \Telnyx\DialogflowConnections\DialogflowConnectionUpdateResponse\Data
+ *
+ * @phpstan-type DialogflowConnectionUpdateResponseShape = array{
+ *   data: Data|DataShape
+ * }
  */
 final class DialogflowConnectionUpdateResponse implements BaseModel
 {
@@ -44,13 +48,7 @@ final class DialogflowConnectionUpdateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   connectionID?: string|null,
-     *   conversationProfileID?: string|null,
-     *   environment?: string|null,
-     *   recordType?: string|null,
-     *   serviceAccount?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array $data): self
     {
@@ -62,13 +60,7 @@ final class DialogflowConnectionUpdateResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   connectionID?: string|null,
-     *   conversationProfileID?: string|null,
-     *   environment?: string|null,
-     *   recordType?: string|null,
-     *   serviceAccount?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

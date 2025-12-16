@@ -22,17 +22,17 @@ use Telnyx\Messages\MessageSendParams\Type;
  *
  * @phpstan-type MessageSendParamsShape = array{
  *   to: string,
- *   autoDetect?: bool,
- *   from?: string,
- *   mediaURLs?: list<string>,
- *   messagingProfileID?: string,
+ *   autoDetect?: bool|null,
+ *   from?: string|null,
+ *   mediaURLs?: list<string>|null,
+ *   messagingProfileID?: string|null,
  *   sendAt?: \DateTimeInterface|null,
- *   subject?: string,
- *   text?: string,
- *   type?: Type|value-of<Type>,
- *   useProfileWebhooks?: bool,
- *   webhookFailoverURL?: string,
- *   webhookURL?: string,
+ *   subject?: string|null,
+ *   text?: string|null,
+ *   type?: null|Type|value-of<Type>,
+ *   useProfileWebhooks?: bool|null,
+ *   webhookFailoverURL?: string|null,
+ *   webhookURL?: string|null,
  * }
  */
 final class MessageSendParams implements BaseModel

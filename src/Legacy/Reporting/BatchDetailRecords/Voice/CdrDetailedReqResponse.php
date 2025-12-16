@@ -8,12 +8,11 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\CldFilter;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\CliFilter;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\FilterType;
 
 /**
  * Response object for CDR detailed report.
+ *
+ * @phpstan-import-type FilterShape from \Telnyx\Legacy\Reporting\BatchDetailRecords\Filter
  *
  * @phpstan-type CdrDetailedReqResponseShape = array{
  *   id?: string|null,
@@ -21,7 +20,7 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\FilterType;
  *   connections?: list<int>|null,
  *   createdAt?: string|null,
  *   endTime?: string|null,
- *   filters?: list<Filter>|null,
+ *   filters?: list<FilterShape>|null,
  *   managedAccounts?: list<string>|null,
  *   recordType?: string|null,
  *   recordTypes?: list<int>|null,
@@ -161,15 +160,7 @@ final class CdrDetailedReqResponse implements BaseModel
      *
      * @param list<int> $callTypes
      * @param list<int> $connections
-     * @param list<Filter|array{
-     *   billingGroup?: string|null,
-     *   cld?: string|null,
-     *   cldFilter?: value-of<CldFilter>|null,
-     *   cli?: string|null,
-     *   cliFilter?: value-of<CliFilter>|null,
-     *   filterType?: value-of<FilterType>|null,
-     *   tagsList?: string|null,
-     * }> $filters
+     * @param list<FilterShape> $filters
      * @param list<string> $managedAccounts
      * @param list<int> $recordTypes
      */
@@ -277,15 +268,7 @@ final class CdrDetailedReqResponse implements BaseModel
     /**
      * List of filters.
      *
-     * @param list<Filter|array{
-     *   billingGroup?: string|null,
-     *   cld?: string|null,
-     *   cldFilter?: value-of<CldFilter>|null,
-     *   cli?: string|null,
-     *   cliFilter?: value-of<CliFilter>|null,
-     *   filterType?: value-of<FilterType>|null,
-     *   tagsList?: string|null,
-     * }> $filters
+     * @param list<FilterShape> $filters
      */
     public function withFilters(array $filters): self
     {

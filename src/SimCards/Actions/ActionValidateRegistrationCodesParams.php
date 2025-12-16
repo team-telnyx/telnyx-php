@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\SimCards\ActionsService::validateRegistrationCodes()
  *
  * @phpstan-type ActionValidateRegistrationCodesParamsShape = array{
- *   registrationCodes?: list<string>
+ *   registrationCodes?: list<string>|null
  * }
  */
 final class ActionValidateRegistrationCodesParams implements BaseModel

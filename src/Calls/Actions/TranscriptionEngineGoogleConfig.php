@@ -12,17 +12,19 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type SpeechContextShape from \Telnyx\Calls\Actions\TranscriptionEngineGoogleConfig\SpeechContext
+ *
  * @phpstan-type TranscriptionEngineGoogleConfigShape = array{
  *   enableSpeakerDiarization?: bool|null,
  *   hints?: list<string>|null,
  *   interimResults?: bool|null,
- *   language?: value-of<GoogleTranscriptionLanguage>|null,
+ *   language?: null|GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage>,
  *   maxSpeakerCount?: int|null,
  *   minSpeakerCount?: int|null,
- *   model?: value-of<Model>|null,
+ *   model?: null|Model|value-of<Model>,
  *   profanityFilter?: bool|null,
- *   speechContext?: list<SpeechContext>|null,
- *   transcriptionEngine?: value-of<TranscriptionEngine>|null,
+ *   speechContext?: list<SpeechContextShape>|null,
+ *   transcriptionEngine?: null|TranscriptionEngine|value-of<TranscriptionEngine>,
  *   useEnhanced?: bool|null,
  * }
  */
@@ -120,9 +122,7 @@ final class TranscriptionEngineGoogleConfig implements BaseModel
      * @param list<string> $hints
      * @param GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage> $language
      * @param Model|value-of<Model> $model
-     * @param list<SpeechContext|array{
-     *   boost?: float|null, phrases?: list<string>|null
-     * }> $speechContext
+     * @param list<SpeechContextShape> $speechContext
      * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine
      */
     public static function with(
@@ -254,9 +254,7 @@ final class TranscriptionEngineGoogleConfig implements BaseModel
     /**
      * Speech context to improve transcription accuracy.
      *
-     * @param list<SpeechContext|array{
-     *   boost?: float|null, phrases?: list<string>|null
-     * }> $speechContext
+     * @param list<SpeechContextShape> $speechContext
      */
     public function withSpeechContext(array $speechContext): self
     {

@@ -10,6 +10,8 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Networks\NetworkListInterfacesResponse\Region;
 
 /**
+ * @phpstan-import-type RegionShape from \Telnyx\Networks\NetworkListInterfacesResponse\Region
+ *
  * @phpstan-type NetworkListInterfacesResponseShape = array{
  *   id?: string|null,
  *   createdAt?: string|null,
@@ -17,8 +19,8 @@ use Telnyx\Networks\NetworkListInterfacesResponse\Region;
  *   updatedAt?: string|null,
  *   name?: string|null,
  *   networkID?: string|null,
- *   status?: value-of<InterfaceStatus>|null,
- *   region?: Region|null,
+ *   status?: null|InterfaceStatus|value-of<InterfaceStatus>,
+ *   region?: null|Region|RegionShape,
  *   regionCode?: string|null,
  *   type?: string|null,
  * }
@@ -98,9 +100,7 @@ final class NetworkListInterfacesResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param InterfaceStatus|value-of<InterfaceStatus> $status
-     * @param Region|array{
-     *   code?: string|null, name?: string|null, recordType?: string|null
-     * } $region
+     * @param RegionShape $region
      */
     public static function with(
         ?string $id = null,
@@ -210,9 +210,7 @@ final class NetworkListInterfacesResponse implements BaseModel
     }
 
     /**
-     * @param Region|array{
-     *   code?: string|null, name?: string|null, recordType?: string|null
-     * } $region
+     * @param RegionShape $region
      */
     public function withRegion(Region|array $region): self
     {

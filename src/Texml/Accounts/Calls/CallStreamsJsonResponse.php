@@ -16,7 +16,7 @@ use Telnyx\Texml\Accounts\Calls\CallStreamsJsonResponse\Status;
  *   dateUpdated?: \DateTimeInterface|null,
  *   name?: string|null,
  *   sid?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   uri?: string|null,
  * }
  */

@@ -7,11 +7,12 @@ namespace Telnyx\SimCardDataUsageNotifications;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotification\Threshold;
 
 /**
+ * @phpstan-import-type SimCardDataUsageNotificationShape from \Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotification
+ *
  * @phpstan-type SimCardDataUsageNotificationDeleteResponseShape = array{
- *   data?: SimCardDataUsageNotification|null
+ *   data?: null|SimCardDataUsageNotification|SimCardDataUsageNotificationShape
  * }
  */
 final class SimCardDataUsageNotificationDeleteResponse implements BaseModel
@@ -35,14 +36,7 @@ final class SimCardDataUsageNotificationDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SimCardDataUsageNotification|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   recordType?: string|null,
-     *   simCardID?: string|null,
-     *   threshold?: Threshold|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param SimCardDataUsageNotificationShape $data
      */
     public static function with(
         SimCardDataUsageNotification|array|null $data = null
@@ -57,14 +51,7 @@ final class SimCardDataUsageNotificationDeleteResponse implements BaseModel
     /**
      * The SIM card individual data usage notification information.
      *
-     * @param SimCardDataUsageNotification|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   recordType?: string|null,
-     *   simCardID?: string|null,
-     *   threshold?: Threshold|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param SimCardDataUsageNotificationShape $data
      */
     public function withData(SimCardDataUsageNotification|array $data): self
     {

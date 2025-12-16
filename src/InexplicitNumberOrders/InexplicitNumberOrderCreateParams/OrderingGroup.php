@@ -13,18 +13,20 @@ use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams\OrderingGrou
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams\OrderingGroup\Strategy;
 
 /**
+ * @phpstan-import-type PhoneNumberShape from \Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams\OrderingGroup\PhoneNumber
+ *
  * @phpstan-type OrderingGroupShape = array{
  *   countRequested: string,
- *   countryISO: value-of<CountryISO>,
+ *   countryISO: CountryISO|value-of<CountryISO>,
  *   phoneNumberType: string,
  *   administrativeArea?: string|null,
  *   excludeHeldNumbers?: bool|null,
  *   features?: list<string>|null,
  *   locality?: string|null,
  *   nationalDestinationCode?: string|null,
- *   phoneNumber?: PhoneNumber|null,
+ *   phoneNumber?: null|PhoneNumber|PhoneNumberShape,
  *   quickship?: bool|null,
- *   strategy?: value-of<Strategy>|null,
+ *   strategy?: null|Strategy|value-of<Strategy>,
  * }
  */
 final class OrderingGroup implements BaseModel
@@ -133,9 +135,7 @@ final class OrderingGroup implements BaseModel
      *
      * @param CountryISO|value-of<CountryISO> $countryISO
      * @param list<string> $features
-     * @param PhoneNumber|array{
-     *   contains?: string|null, endsWith?: string|null, startsWith?: string|null
-     * } $phoneNumber
+     * @param PhoneNumberShape $phoneNumber
      * @param Strategy|value-of<Strategy> $strategy
      */
     public static function with(
@@ -265,9 +265,7 @@ final class OrderingGroup implements BaseModel
     /**
      * Phone number search criteria.
      *
-     * @param PhoneNumber|array{
-     *   contains?: string|null, endsWith?: string|null, startsWith?: string|null
-     * } $phoneNumber
+     * @param PhoneNumberShape $phoneNumber
      */
     public function withPhoneNumber(PhoneNumber|array $phoneNumber): self
     {

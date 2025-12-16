@@ -13,13 +13,15 @@ use Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutFocDateChanged\Pa
 use Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutFocDateChanged\PayloadStatus;
 
 /**
+ * @phpstan-import-type PayloadShape from \Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutFocDateChanged\Payload
+ *
  * @phpstan-type WebhookPortoutFocDateChangedShape = array{
  *   id?: string|null,
- *   availableNotificationMethods?: list<value-of<AvailableNotificationMethod>>|null,
+ *   availableNotificationMethods?: list<AvailableNotificationMethod|value-of<AvailableNotificationMethod>>|null,
  *   createdAt?: \DateTimeInterface|null,
- *   eventType?: value-of<EventType>|null,
- *   payload?: Payload|null,
- *   payloadStatus?: value-of<PayloadStatus>|null,
+ *   eventType?: null|EventType|value-of<EventType>,
+ *   payload?: null|Payload|PayloadShape,
+ *   payloadStatus?: null|PayloadStatus|value-of<PayloadStatus>,
  *   portoutID?: string|null,
  *   recordType?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
@@ -105,9 +107,7 @@ final class WebhookPortoutFocDateChanged implements BaseModel
      *
      * @param list<AvailableNotificationMethod|value-of<AvailableNotificationMethod>> $availableNotificationMethods
      * @param EventType|value-of<EventType> $eventType
-     * @param Payload|array{
-     *   id?: string|null, focDate?: \DateTimeInterface|null, userID?: string|null
-     * } $payload
+     * @param PayloadShape $payload
      * @param PayloadStatus|value-of<PayloadStatus> $payloadStatus
      */
     public static function with(
@@ -188,9 +188,7 @@ final class WebhookPortoutFocDateChanged implements BaseModel
     /**
      * The webhook payload for the portout.foc_date_changed event.
      *
-     * @param Payload|array{
-     *   id?: string|null, focDate?: \DateTimeInterface|null, userID?: string|null
-     * } $payload
+     * @param PayloadShape $payload
      */
     public function withPayload(Payload|array $payload): self
     {

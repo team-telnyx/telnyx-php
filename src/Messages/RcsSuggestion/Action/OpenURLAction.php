@@ -15,9 +15,9 @@ use Telnyx\Messages\RcsSuggestion\Action\OpenURLAction\WebviewViewMode;
  * Opens the user's default web browser app to the specified URL.
  *
  * @phpstan-type OpenURLActionShape = array{
- *   application: value-of<Application>,
+ *   application: Application|value-of<Application>,
  *   url: string,
- *   webviewViewMode: value-of<WebviewViewMode>,
+ *   webviewViewMode: WebviewViewMode|value-of<WebviewViewMode>,
  *   description?: string|null,
  * }
  */

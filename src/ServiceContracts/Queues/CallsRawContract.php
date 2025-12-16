@@ -21,7 +21,7 @@ interface CallsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|CallRetrieveParams $params
+     * @param array<string,mixed>|CallRetrieveParams $params
      *
      * @return BaseResponse<CallGetResponse>
      *
@@ -37,7 +37,7 @@ interface CallsRawContract
      * @api
      *
      * @param string $callControlID Path param: Unique identifier and token for controlling the call
-     * @param array<mixed>|CallUpdateParams $params
+     * @param array<string,mixed>|CallUpdateParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -53,7 +53,7 @@ interface CallsRawContract
      * @api
      *
      * @param string $queueName Uniquely identifies the queue by name
-     * @param array<mixed>|CallListParams $params
+     * @param array<string,mixed>|CallListParams $params
      *
      * @return BaseResponse<DefaultPagination<CallListResponse>>
      *
@@ -69,7 +69,7 @@ interface CallsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|CallRemoveParams $params
+     * @param array<string,mixed>|CallRemoveParams $params
      *
      * @return BaseResponse<mixed>
      *

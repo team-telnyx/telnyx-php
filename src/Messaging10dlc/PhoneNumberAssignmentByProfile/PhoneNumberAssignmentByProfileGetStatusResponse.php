@@ -12,7 +12,7 @@ use Telnyx\Messaging10dlc\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentBy
 
 /**
  * @phpstan-type PhoneNumberAssignmentByProfileGetStatusResponseShape = array{
- *   status: value-of<Status>,
+ *   status: Status|value-of<Status>,
  *   taskID: string,
  *   createdAt?: \DateTimeInterface|null,
  *   updatedAt?: \DateTimeInterface|null,

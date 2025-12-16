@@ -6,19 +6,20 @@ namespace Telnyx\BulkSimCardActions\BulkSimCardActionGetResponse;
 
 use Telnyx\BulkSimCardActions\BulkSimCardActionGetResponse\Data\ActionType;
 use Telnyx\BulkSimCardActions\BulkSimCardActionGetResponse\Data\SimCardActionsSummary;
-use Telnyx\BulkSimCardActions\BulkSimCardActionGetResponse\Data\SimCardActionsSummary\Status;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type SimCardActionsSummaryShape from \Telnyx\BulkSimCardActions\BulkSimCardActionGetResponse\Data\SimCardActionsSummary
+ *
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   actionType?: value-of<ActionType>|null,
+ *   actionType?: null|ActionType|value-of<ActionType>,
  *   createdAt?: string|null,
  *   recordType?: string|null,
  *   settings?: array<string,mixed>|null,
- *   simCardActionsSummary?: list<SimCardActionsSummary>|null,
+ *   simCardActionsSummary?: list<SimCardActionsSummaryShape>|null,
  *   updatedAt?: string|null,
  * }
  */
@@ -83,9 +84,7 @@ final class Data implements BaseModel
      *
      * @param ActionType|value-of<ActionType> $actionType
      * @param array<string,mixed> $settings
-     * @param list<SimCardActionsSummary|array{
-     *   count?: int|null, status?: value-of<Status>|null
-     * }> $simCardActionsSummary
+     * @param list<SimCardActionsSummaryShape> $simCardActionsSummary
      */
     public static function with(
         ?string $id = null,
@@ -169,9 +168,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<SimCardActionsSummary|array{
-     *   count?: int|null, status?: value-of<Status>|null
-     * }> $simCardActionsSummary
+     * @param list<SimCardActionsSummaryShape> $simCardActionsSummary
      */
     public function withSimCardActionsSummary(
         array $simCardActionsSummary

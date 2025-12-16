@@ -10,17 +10,18 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\Events\EventListResponse\PortingEventNewCommentEvent\AvailableNotificationMethod;
 use Telnyx\Porting\Events\EventListResponse\PortingEventNewCommentEvent\EventType;
 use Telnyx\Porting\Events\EventListResponse\PortingEventNewCommentEvent\Payload;
-use Telnyx\Porting\Events\EventListResponse\PortingEventNewCommentEvent\Payload\Comment;
 use Telnyx\Porting\Events\EventListResponse\PortingEventNewCommentEvent\PayloadStatus;
 
 /**
+ * @phpstan-import-type PayloadShape from \Telnyx\Porting\Events\EventListResponse\PortingEventNewCommentEvent\Payload
+ *
  * @phpstan-type PortingEventNewCommentEventShape = array{
  *   id?: string|null,
- *   availableNotificationMethods?: list<value-of<AvailableNotificationMethod>>|null,
+ *   availableNotificationMethods?: list<AvailableNotificationMethod|value-of<AvailableNotificationMethod>>|null,
  *   createdAt?: \DateTimeInterface|null,
- *   eventType?: value-of<EventType>|null,
- *   payload?: Payload|null,
- *   payloadStatus?: value-of<PayloadStatus>|null,
+ *   eventType?: null|EventType|value-of<EventType>,
+ *   payload?: null|Payload|PayloadShape,
+ *   payloadStatus?: null|PayloadStatus|value-of<PayloadStatus>,
  *   portingOrderID?: string|null,
  *   recordType?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
@@ -106,9 +107,7 @@ final class PortingEventNewCommentEvent implements BaseModel
      *
      * @param list<AvailableNotificationMethod|value-of<AvailableNotificationMethod>> $availableNotificationMethods
      * @param EventType|value-of<EventType> $eventType
-     * @param Payload|array{
-     *   comment?: Comment|null, portingOrderID?: string|null, supportKey?: string|null
-     * } $payload
+     * @param PayloadShape $payload
      * @param PayloadStatus|value-of<PayloadStatus> $payloadStatus
      */
     public static function with(
@@ -189,9 +188,7 @@ final class PortingEventNewCommentEvent implements BaseModel
     /**
      * The webhook payload for the porting_order.new_comment event.
      *
-     * @param Payload|array{
-     *   comment?: Comment|null, portingOrderID?: string|null, supportKey?: string|null
-     * } $payload
+     * @param PayloadShape $payload
      */
     public function withPayload(Payload|array $payload): self
     {

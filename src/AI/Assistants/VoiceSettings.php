@@ -8,17 +8,18 @@ use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio;
 use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\MediaName;
 use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\MediaURL;
 use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\PredefinedMedia;
-use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\PredefinedMedia\Value;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type BackgroundAudioShape from \Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio
+ *
  * @phpstan-type VoiceSettingsShape = array{
  *   voice: string,
  *   apiKeyRef?: string|null,
- *   backgroundAudio?: null|PredefinedMedia|MediaURL|MediaName,
+ *   backgroundAudio?: null|BackgroundAudioShape|PredefinedMedia|MediaURL|MediaName,
  *   voiceSpeed?: float|null,
  * }
  */
@@ -76,11 +77,7 @@ final class VoiceSettings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PredefinedMedia|array{
-     *   type?: 'predefined_media', value: value-of<Value>
-     * }|MediaURL|array{type?: 'media_url', value: string}|MediaName|array{
-     *   type?: 'media_name', value: string
-     * } $backgroundAudio
+     * @param BackgroundAudioShape $backgroundAudio
      */
     public static function with(
         string $voice,
@@ -125,11 +122,7 @@ final class VoiceSettings implements BaseModel
     /**
      * Optional background audio to play on the call. Use a predefined media bed, or supply a looped MP3 URL. If a media URL is chosen in the portal, customers can preview it before saving.
      *
-     * @param PredefinedMedia|array{
-     *   type?: 'predefined_media', value: value-of<Value>
-     * }|MediaURL|array{type?: 'media_url', value: string}|MediaName|array{
-     *   type?: 'media_name', value: string
-     * } $backgroundAudio
+     * @param BackgroundAudioShape $backgroundAudio
      */
     public function withBackgroundAudio(
         PredefinedMedia|array|MediaURL|MediaName $backgroundAudio

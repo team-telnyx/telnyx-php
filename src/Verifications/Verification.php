@@ -17,10 +17,10 @@ use Telnyx\Verifications\Verification\Type;
  *   createdAt?: string|null,
  *   customCode?: string|null,
  *   phoneNumber?: string|null,
- *   recordType?: value-of<RecordType>|null,
- *   status?: value-of<Status>|null,
+ *   recordType?: null|RecordType|value-of<RecordType>,
+ *   status?: null|Status|value-of<Status>,
  *   timeoutSecs?: int|null,
- *   type?: value-of<Type>|null,
+ *   type?: null|Type|value-of<Type>,
  *   updatedAt?: string|null,
  *   verifyProfileID?: string|null,
  * }

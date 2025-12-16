@@ -9,6 +9,9 @@ use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 use Telnyx\Core\Conversion\MapOf;
 
+/**
+ * @phpstan-type ToolChoiceShape = string|array<string,mixed>
+ */
 final class ToolChoice implements ConverterSource
 {
     use SdkUnion;

@@ -18,7 +18,7 @@ interface RecordingsJsonRawContract
      * @api
      *
      * @param string $callSid path param: The CallSid that identifies the call to update
-     * @param array<mixed>|RecordingsJsonRecordingsJsonParams $params
+     * @param array<string,mixed>|RecordingsJsonRecordingsJsonParams $params
      *
      * @return BaseResponse<RecordingsJsonRecordingsJsonResponse>
      *
@@ -34,7 +34,7 @@ interface RecordingsJsonRawContract
      * @api
      *
      * @param string $callSid the CallSid that identifies the call to update
-     * @param array<mixed>|RecordingsJsonRetrieveRecordingsJsonParams $params
+     * @param array<string,mixed>|RecordingsJsonRetrieveRecordingsJsonParams $params
      *
      * @return BaseResponse<RecordingsJsonGetRecordingsJsonResponse>
      *

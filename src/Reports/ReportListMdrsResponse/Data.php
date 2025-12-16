@@ -18,14 +18,14 @@ use Telnyx\Reports\ReportListMdrsResponse\Data\Status;
  *   cli?: string|null,
  *   cost?: string|null,
  *   createdAt?: \DateTimeInterface|null,
- *   currency?: value-of<Currency>|null,
+ *   currency?: null|Currency|value-of<Currency>,
  *   direction?: string|null,
- *   messageType?: value-of<MessageType>|null,
+ *   messageType?: null|MessageType|value-of<MessageType>,
  *   parts?: float|null,
  *   profileName?: string|null,
  *   rate?: string|null,
  *   recordType?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  * }
  */
 final class Data implements BaseModel

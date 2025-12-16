@@ -11,7 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Success response with details about a push credential.
  *
- * @phpstan-type PushCredentialResponseShape = array{data?: PushCredential|null}
+ * @phpstan-import-type PushCredentialShape from \Telnyx\MobilePushCredentials\PushCredential
+ *
+ * @phpstan-type PushCredentialResponseShape = array{
+ *   data?: null|PushCredential|PushCredentialShape
+ * }
  */
 final class PushCredentialResponse implements BaseModel
 {
@@ -31,17 +35,7 @@ final class PushCredentialResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PushCredential|array{
-     *   id: string,
-     *   alias: string,
-     *   certificate: string,
-     *   createdAt: \DateTimeInterface,
-     *   privateKey: string,
-     *   projectAccountJsonFile: array<string,mixed>,
-     *   recordType: string,
-     *   type: string,
-     *   updatedAt: \DateTimeInterface,
-     * } $data
+     * @param PushCredentialShape $data
      */
     public static function with(PushCredential|array|null $data = null): self
     {
@@ -53,17 +47,7 @@ final class PushCredentialResponse implements BaseModel
     }
 
     /**
-     * @param PushCredential|array{
-     *   id: string,
-     *   alias: string,
-     *   certificate: string,
-     *   createdAt: \DateTimeInterface,
-     *   privateKey: string,
-     *   projectAccountJsonFile: array<string,mixed>,
-     *   recordType: string,
-     *   type: string,
-     *   updatedAt: \DateTimeInterface,
-     * } $data
+     * @param PushCredentialShape $data
      */
     public function withData(PushCredential|array $data): self
     {

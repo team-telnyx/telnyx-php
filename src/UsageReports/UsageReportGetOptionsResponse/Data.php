@@ -12,11 +12,13 @@ use Telnyx\UsageReports\UsageReportGetOptionsResponse\Data\RecordType;
 /**
  * An object following one of the schemas published in https://developers.telnyx.com/docs/api/v2/detail-records.
  *
+ * @phpstan-import-type RecordTypeShape from \Telnyx\UsageReports\UsageReportGetOptionsResponse\Data\RecordType
+ *
  * @phpstan-type DataShape = array{
  *   product?: string|null,
  *   productDimensions?: list<string>|null,
  *   productMetrics?: list<string>|null,
- *   recordTypes?: list<RecordType>|null,
+ *   recordTypes?: list<RecordTypeShape>|null,
  * }
  */
 final class Data implements BaseModel
@@ -66,11 +68,7 @@ final class Data implements BaseModel
      *
      * @param list<string> $productDimensions
      * @param list<string> $productMetrics
-     * @param list<RecordType|array{
-     *   productDimensions?: list<string>|null,
-     *   productMetrics?: list<string>|null,
-     *   recordType?: string|null,
-     * }> $recordTypes
+     * @param list<RecordTypeShape> $recordTypes
      */
     public static function with(
         ?string $product = null,
@@ -128,11 +126,7 @@ final class Data implements BaseModel
     /**
      * Subproducts if applicable.
      *
-     * @param list<RecordType|array{
-     *   productDimensions?: list<string>|null,
-     *   productMetrics?: list<string>|null,
-     *   recordType?: string|null,
-     * }> $recordTypes
+     * @param list<RecordTypeShape> $recordTypes
      */
     public function withRecordTypes(array $recordTypes): self
     {

@@ -15,7 +15,7 @@ use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayStatus\Value;
  * @phpstan-type PrivateWirelessGatewayStatusShape = array{
  *   errorCode?: string|null,
  *   errorDescription?: string|null,
- *   value?: value-of<Value>|null,
+ *   value?: null|Value|value-of<Value>,
  * }
  */
 final class PrivateWirelessGatewayStatus implements BaseModel

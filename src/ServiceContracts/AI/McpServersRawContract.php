@@ -21,7 +21,7 @@ interface McpServersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|McpServerCreateParams $params
+     * @param array<string,mixed>|McpServerCreateParams $params
      *
      * @return BaseResponse<McpServerNewResponse>
      *
@@ -47,7 +47,7 @@ interface McpServersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|McpServerUpdateParams $params
+     * @param array<string,mixed>|McpServerUpdateParams $params
      *
      * @return BaseResponse<McpServerUpdateResponse>
      *
@@ -62,7 +62,7 @@ interface McpServersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|McpServerListParams $params
+     * @param array<string,mixed>|McpServerListParams $params
      *
      * @return BaseResponse<DefaultFlatPaginationTopLevelArray<McpServerListResponse>>
      *

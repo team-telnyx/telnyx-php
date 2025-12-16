@@ -12,8 +12,10 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[ip_source], filter[ip_address], filter[created_at]. Supports complex bracket operations for dynamic filtering.
  *
+ * @phpstan-import-type CreatedAtShape from \Telnyx\AccessIPAddress\AccessIPAddressListParams\Filter\CreatedAt
+ *
  * @phpstan-type FilterShape = array{
- *   createdAt?: null|\DateTimeInterface|DateRangeFilter,
+ *   createdAt?: CreatedAtShape|null,
  *   ipAddress?: string|null,
  *   ipSource?: string|null,
  * }
@@ -51,12 +53,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param \DateTimeInterface|DateRangeFilter|array{
-     *   gt?: \DateTimeInterface|null,
-     *   gte?: \DateTimeInterface|null,
-     *   lt?: \DateTimeInterface|null,
-     *   lte?: \DateTimeInterface|null,
-     * } $createdAt
+     * @param CreatedAtShape $createdAt
      */
     public static function with(
         \DateTimeInterface|DateRangeFilter|array|null $createdAt = null,
@@ -75,12 +72,7 @@ final class Filter implements BaseModel
     /**
      * Filter by exact creation date-time.
      *
-     * @param \DateTimeInterface|DateRangeFilter|array{
-     *   gt?: \DateTimeInterface|null,
-     *   gte?: \DateTimeInterface|null,
-     *   lt?: \DateTimeInterface|null,
-     *   lte?: \DateTimeInterface|null,
-     * } $createdAt
+     * @param CreatedAtShape $createdAt
      */
     public function withCreatedAt(
         \DateTimeInterface|DateRangeFilter|array $createdAt

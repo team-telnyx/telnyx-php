@@ -33,7 +33,7 @@ interface JobsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|JobListParams $params
+     * @param array<string,mixed>|JobListParams $params
      *
      * @return BaseResponse<DefaultPagination<Job>>
      *
@@ -47,7 +47,7 @@ interface JobsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|JobDeletePhoneNumberBlockParams $params
+     * @param array<string,mixed>|JobDeletePhoneNumberBlockParams $params
      *
      * @return BaseResponse<JobDeletePhoneNumberBlockResponse>
      *

@@ -13,7 +13,7 @@ use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data\Category1\Categor
  * @phpstan-type Category1Shape = array{
  *   bytesReceived?: int|null,
  *   bytesSent?: int|null,
- *   category?: value-of<Category>|null,
+ *   category?: null|Category|value-of<Category>,
  *   ops?: int|null,
  *   successfulOps?: int|null,
  * }

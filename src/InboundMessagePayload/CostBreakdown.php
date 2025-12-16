@@ -13,8 +13,11 @@ use Telnyx\InboundMessagePayload\CostBreakdown\Rate;
 /**
  * Detailed breakdown of the message cost components.
  *
+ * @phpstan-import-type CarrierFeeShape from \Telnyx\InboundMessagePayload\CostBreakdown\CarrierFee
+ * @phpstan-import-type RateShape from \Telnyx\InboundMessagePayload\CostBreakdown\Rate
+ *
  * @phpstan-type CostBreakdownShape = array{
- *   carrierFee?: CarrierFee|null, rate?: Rate|null
+ *   carrierFee?: null|CarrierFee|CarrierFeeShape, rate?: null|Rate|RateShape
  * }
  */
 final class CostBreakdown implements BaseModel
@@ -38,10 +41,8 @@ final class CostBreakdown implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CarrierFee|array{
-     *   amount?: string|null, currency?: string|null
-     * } $carrierFee
-     * @param Rate|array{amount?: string|null, currency?: string|null} $rate
+     * @param CarrierFeeShape $carrierFee
+     * @param RateShape $rate
      */
     public static function with(
         CarrierFee|array|null $carrierFee = null,
@@ -56,9 +57,7 @@ final class CostBreakdown implements BaseModel
     }
 
     /**
-     * @param CarrierFee|array{
-     *   amount?: string|null, currency?: string|null
-     * } $carrierFee
+     * @param CarrierFeeShape $carrierFee
      */
     public function withCarrierFee(CarrierFee|array $carrierFee): self
     {
@@ -69,7 +68,7 @@ final class CostBreakdown implements BaseModel
     }
 
     /**
-     * @param Rate|array{amount?: string|null, currency?: string|null} $rate
+     * @param RateShape $rate
      */
     public function withRate(Rate|array $rate): self
     {

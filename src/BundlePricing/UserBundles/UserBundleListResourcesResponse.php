@@ -9,8 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type UserBundleResourceShape from \Telnyx\BundlePricing\UserBundles\UserBundleResource
+ *
  * @phpstan-type UserBundleListResourcesResponseShape = array{
- *   data: list<UserBundleResource>
+ *   data: list<UserBundleResourceShape>
  * }
  */
 final class UserBundleListResourcesResponse implements BaseModel
@@ -46,13 +48,7 @@ final class UserBundleListResourcesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<UserBundleResource|array{
-     *   id: string,
-     *   createdAt: string,
-     *   resource: string,
-     *   resourceType: string,
-     *   updatedAt?: string|null,
-     * }> $data
+     * @param list<UserBundleResourceShape> $data
      */
     public static function with(array $data): self
     {
@@ -64,13 +60,7 @@ final class UserBundleListResourcesResponse implements BaseModel
     }
 
     /**
-     * @param list<UserBundleResource|array{
-     *   id: string,
-     *   createdAt: string,
-     *   resource: string,
-     *   resourceType: string,
-     *   updatedAt?: string|null,
-     * }> $data
+     * @param list<UserBundleResourceShape> $data
      */
     public function withData(array $data): self
     {

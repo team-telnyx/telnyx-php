@@ -13,8 +13,11 @@ use Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\CallQualityStats\Outboun
 /**
  * Call quality statistics aggregated from the CHANNEL_HANGUP_COMPLETE event. Only includes metrics that are available (filters out nil values). Returns nil if no metrics are available.
  *
+ * @phpstan-import-type InboundShape from \Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\CallQualityStats\Inbound
+ * @phpstan-import-type OutboundShape from \Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\CallQualityStats\Outbound
+ *
  * @phpstan-type CallQualityStatsShape = array{
- *   inbound?: Inbound|null, outbound?: Outbound|null
+ *   inbound?: null|Inbound|InboundShape, outbound?: null|Outbound|OutboundShape
  * }
  */
 final class CallQualityStats implements BaseModel
@@ -44,16 +47,8 @@ final class CallQualityStats implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Inbound|array{
-     *   jitterMaxVariance?: string|null,
-     *   jitterPacketCount?: string|null,
-     *   mos?: string|null,
-     *   packetCount?: string|null,
-     *   skipPacketCount?: string|null,
-     * } $inbound
-     * @param Outbound|array{
-     *   packetCount?: string|null, skipPacketCount?: string|null
-     * } $outbound
+     * @param InboundShape $inbound
+     * @param OutboundShape $outbound
      */
     public static function with(
         Inbound|array|null $inbound = null,
@@ -70,13 +65,7 @@ final class CallQualityStats implements BaseModel
     /**
      * Inbound call quality statistics.
      *
-     * @param Inbound|array{
-     *   jitterMaxVariance?: string|null,
-     *   jitterPacketCount?: string|null,
-     *   mos?: string|null,
-     *   packetCount?: string|null,
-     *   skipPacketCount?: string|null,
-     * } $inbound
+     * @param InboundShape $inbound
      */
     public function withInbound(Inbound|array $inbound): self
     {
@@ -89,9 +78,7 @@ final class CallQualityStats implements BaseModel
     /**
      * Outbound call quality statistics.
      *
-     * @param Outbound|array{
-     *   packetCount?: string|null, skipPacketCount?: string|null
-     * } $outbound
+     * @param OutboundShape $outbound
      */
     public function withOutbound(Outbound|array $outbound): self
     {

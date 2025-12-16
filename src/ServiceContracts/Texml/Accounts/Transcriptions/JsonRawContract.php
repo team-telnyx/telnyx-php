@@ -17,7 +17,7 @@ interface JsonRawContract
      * @api
      *
      * @param string $recordingTranscriptionSid uniquely identifies the recording transcription by id
-     * @param array<mixed>|JsonDeleteRecordingTranscriptionSidJsonParams $params
+     * @param array<string,mixed>|JsonDeleteRecordingTranscriptionSidJsonParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -33,7 +33,7 @@ interface JsonRawContract
      * @api
      *
      * @param string $recordingTranscriptionSid uniquely identifies the recording transcription by id
-     * @param array<mixed>|JsonRetrieveRecordingTranscriptionSidJsonParams $params
+     * @param array<string,mixed>|JsonRetrieveRecordingTranscriptionSidJsonParams $params
      *
      * @return BaseResponse<JsonGetRecordingTranscriptionSidJsonResponse>
      *

@@ -8,15 +8,15 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\RcsCardContent\Media;
-use Telnyx\Messages\RcsCardContent\Media\Height;
-use Telnyx\Messages\RcsSuggestion\Action;
-use Telnyx\Messages\RcsSuggestion\Reply;
 
 /**
+ * @phpstan-import-type MediaShape from \Telnyx\Messages\RcsCardContent\Media
+ * @phpstan-import-type RcsSuggestionShape from \Telnyx\Messages\RcsSuggestion
+ *
  * @phpstan-type RcsCardContentShape = array{
  *   description?: string|null,
- *   media?: Media|null,
- *   suggestions?: list<RcsSuggestion>|null,
+ *   media?: null|Media|MediaShape,
+ *   suggestions?: list<RcsSuggestionShape>|null,
  *   title?: string|null,
  * }
  */
@@ -61,12 +61,8 @@ final class RcsCardContent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Media|array{
-     *   contentInfo?: RcsContentInfo|null, height?: value-of<Height>|null
-     * } $media
-     * @param list<RcsSuggestion|array{
-     *   action?: Action|null, reply?: Reply|null
-     * }> $suggestions
+     * @param MediaShape $media
+     * @param list<RcsSuggestionShape> $suggestions
      */
     public static function with(
         ?string $description = null,
@@ -98,9 +94,7 @@ final class RcsCardContent implements BaseModel
     /**
      * A media file within a rich card.
      *
-     * @param Media|array{
-     *   contentInfo?: RcsContentInfo|null, height?: value-of<Height>|null
-     * } $media
+     * @param MediaShape $media
      */
     public function withMedia(Media|array $media): self
     {
@@ -113,9 +107,7 @@ final class RcsCardContent implements BaseModel
     /**
      * List of suggestions to include in the card. Maximum 10 suggestions.
      *
-     * @param list<RcsSuggestion|array{
-     *   action?: Action|null, reply?: Reply|null
-     * }> $suggestions
+     * @param list<RcsSuggestionShape> $suggestions
      */
     public function withSuggestions(array $suggestions): self
     {

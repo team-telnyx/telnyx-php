@@ -10,9 +10,12 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\StandardPaginationMeta;
 
 /**
+ * @phpstan-import-type TelcoDataUsageReportResponseShape from \Telnyx\Legacy\Reporting\UsageReports\NumberLookup\TelcoDataUsageReportResponse
+ * @phpstan-import-type StandardPaginationMetaShape from \Telnyx\Legacy\Reporting\UsageReports\Messaging\StandardPaginationMeta
+ *
  * @phpstan-type NumberLookupListResponseShape = array{
- *   data?: list<TelcoDataUsageReportResponse>|null,
- *   meta?: StandardPaginationMeta|null,
+ *   data?: list<TelcoDataUsageReportResponseShape>|null,
+ *   meta?: null|StandardPaginationMeta|StandardPaginationMetaShape,
  * }
  */
 final class NumberLookupListResponse implements BaseModel
@@ -37,22 +40,8 @@ final class NumberLookupListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TelcoDataUsageReportResponse|array{
-     *   id?: string|null,
-     *   aggregationType?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   endDate?: string|null,
-     *   managedAccounts?: list<string>|null,
-     *   recordType?: string|null,
-     *   reportURL?: string|null,
-     *   result?: list<TelcoDataUsageRecord>|null,
-     *   startDate?: string|null,
-     *   status?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }> $data
-     * @param StandardPaginationMeta|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param list<TelcoDataUsageReportResponseShape> $data
+     * @param StandardPaginationMetaShape $meta
      */
     public static function with(
         ?array $data = null,
@@ -67,19 +56,7 @@ final class NumberLookupListResponse implements BaseModel
     }
 
     /**
-     * @param list<TelcoDataUsageReportResponse|array{
-     *   id?: string|null,
-     *   aggregationType?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   endDate?: string|null,
-     *   managedAccounts?: list<string>|null,
-     *   recordType?: string|null,
-     *   reportURL?: string|null,
-     *   result?: list<TelcoDataUsageRecord>|null,
-     *   startDate?: string|null,
-     *   status?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }> $data
+     * @param list<TelcoDataUsageReportResponseShape> $data
      */
     public function withData(array $data): self
     {
@@ -90,9 +67,7 @@ final class NumberLookupListResponse implements BaseModel
     }
 
     /**
-     * @param StandardPaginationMeta|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param StandardPaginationMetaShape $meta
      */
     public function withMeta(StandardPaginationMeta|array $meta): self
     {

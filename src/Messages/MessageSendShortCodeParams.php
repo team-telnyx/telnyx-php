@@ -19,14 +19,14 @@ use Telnyx\Messages\MessageSendShortCodeParams\Type;
  * @phpstan-type MessageSendShortCodeParamsShape = array{
  *   from: string,
  *   to: string,
- *   autoDetect?: bool,
- *   mediaURLs?: list<string>,
- *   subject?: string,
- *   text?: string,
- *   type?: Type|value-of<Type>,
- *   useProfileWebhooks?: bool,
- *   webhookFailoverURL?: string,
- *   webhookURL?: string,
+ *   autoDetect?: bool|null,
+ *   mediaURLs?: list<string>|null,
+ *   subject?: string|null,
+ *   text?: string|null,
+ *   type?: null|Type|value-of<Type>,
+ *   useProfileWebhooks?: bool|null,
+ *   webhookFailoverURL?: string|null,
+ *   webhookURL?: string|null,
  * }
  */
 final class MessageSendShortCodeParams implements BaseModel

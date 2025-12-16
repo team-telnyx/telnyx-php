@@ -16,7 +16,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $verificationID the identifier of the verification to retrieve
-     * @param array<mixed>|ActionVerifyParams $params
+     * @param array<string,mixed>|ActionVerifyParams $params
      *
      * @return BaseResponse<VerifyVerificationCodeResponse>
      *

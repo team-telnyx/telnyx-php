@@ -12,6 +12,9 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * A verification request as it comes out of the database.
  *
+ * @phpstan-import-type URLShape from \Telnyx\MessagingTollfree\Verification\Requests\URL
+ * @phpstan-import-type TfPhoneNumberShape from \Telnyx\MessagingTollfree\Verification\Requests\TfPhoneNumber
+ *
  * @phpstan-type VerificationRequestEgressShape = array{
  *   id: string,
  *   additionalInformation: string,
@@ -26,12 +29,12 @@ use Telnyx\Core\Contracts\BaseModel;
  *   businessZip: string,
  *   corporateWebsite: string,
  *   isvReseller: string,
- *   messageVolume: value-of<Volume>,
+ *   messageVolume: Volume|value-of<Volume>,
  *   optInWorkflow: string,
- *   optInWorkflowImageURLs: list<URL>,
- *   phoneNumbers: list<TfPhoneNumber>,
+ *   optInWorkflowImageURLs: list<URLShape>,
+ *   phoneNumbers: list<TfPhoneNumberShape>,
  *   productionMessageContent: string,
- *   useCase: value-of<UseCaseCategories>,
+ *   useCase: UseCaseCategories|value-of<UseCaseCategories>,
  *   useCaseSummary: string,
  *   verificationRequestID: string,
  *   ageGatedContent?: bool|null,
@@ -40,13 +43,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *   businessRegistrationNumber?: string|null,
  *   businessRegistrationType?: string|null,
  *   doingBusinessAs?: string|null,
- *   entityType?: value-of<TollFreeVerificationEntityType>|null,
+ *   entityType?: null|TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>,
  *   helpMessageResponse?: string|null,
  *   optInConfirmationResponse?: string|null,
  *   optInKeywords?: string|null,
  *   privacyPolicyURL?: string|null,
  *   termsAndConditionURL?: string|null,
- *   verificationStatus?: value-of<TfVerificationStatus>|null,
+ *   verificationStatus?: null|TfVerificationStatus|value-of<TfVerificationStatus>,
  *   webhookURL?: string|null,
  * }
  */
@@ -250,8 +253,8 @@ final class VerificationRequestEgress implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Volume|value-of<Volume> $messageVolume
-     * @param list<URL|array{url: string}> $optInWorkflowImageURLs
-     * @param list<TfPhoneNumber|array{phoneNumber: string}> $phoneNumbers
+     * @param list<URLShape> $optInWorkflowImageURLs
+     * @param list<TfPhoneNumberShape> $phoneNumbers
      * @param UseCaseCategories|value-of<UseCaseCategories> $useCase
      * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType> $entityType
      * @param TfVerificationStatus|value-of<TfVerificationStatus> $verificationStatus
@@ -464,7 +467,7 @@ final class VerificationRequestEgress implements BaseModel
     }
 
     /**
-     * @param list<URL|array{url: string}> $optInWorkflowImageURLs
+     * @param list<URLShape> $optInWorkflowImageURLs
      */
     public function withOptInWorkflowImageURLs(
         array $optInWorkflowImageURLs
@@ -476,7 +479,7 @@ final class VerificationRequestEgress implements BaseModel
     }
 
     /**
-     * @param list<TfPhoneNumber|array{phoneNumber: string}> $phoneNumbers
+     * @param list<TfPhoneNumberShape> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {

@@ -20,7 +20,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Calls\ActionsService::sendSipInfo()
  *
  * @phpstan-type ActionSendSipInfoParamsShape = array{
- *   body: string, contentType: string, clientState?: string, commandID?: string
+ *   body: string,
+ *   contentType: string,
+ *   clientState?: string|null,
+ *   commandID?: string|null,
  * }
  */
 final class ActionSendSipInfoParams implements BaseModel

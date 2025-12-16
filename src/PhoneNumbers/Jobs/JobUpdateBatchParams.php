@@ -10,54 +10,27 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams\Filter;
-use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams\Filter\Status;
-use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams\Filter\VoiceConnectionName;
-use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams\Filter\VoiceUsagePaymentMethod;
-use Telnyx\PhoneNumbers\Voice\CallForwarding;
-use Telnyx\PhoneNumbers\Voice\CallRecording;
-use Telnyx\PhoneNumbers\Voice\CnamListing;
-use Telnyx\PhoneNumbers\Voice\MediaFeatures;
 use Telnyx\PhoneNumbers\Voice\UpdateVoiceSettings;
-use Telnyx\PhoneNumbers\Voice\UpdateVoiceSettings\InboundCallScreening;
-use Telnyx\PhoneNumbers\Voice\UpdateVoiceSettings\UsagePaymentMethod;
 
 /**
  * Creates a new background job to update a batch of numbers. At most one thousand numbers can be updated per API call. At least one of the updateable fields must be submitted. IMPORTANT: You must either specify filters (using the filter parameters) or specific phone numbers (using the phone_numbers parameter in the request body). If you specify filters, ALL phone numbers that match the given filters (up to 1000 at a time) will be updated. If you want to update only specific numbers, you must use the phone_numbers parameter in the request body. When using the phone_numbers parameter, ensure you follow the correct format as shown in the example (either phone number IDs or phone numbers in E164 format).
  *
  * @see Telnyx\Services\PhoneNumbers\JobsService::updateBatch()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams\Filter
+ * @phpstan-import-type UpdateVoiceSettingsShape from \Telnyx\PhoneNumbers\Voice\UpdateVoiceSettings
+ *
  * @phpstan-type JobUpdateBatchParamsShape = array{
  *   phoneNumbers: list<string>,
- *   filter?: Filter|array{
- *     billingGroupID?: string|null,
- *     connectionID?: string|null,
- *     customerReference?: string|null,
- *     emergencyAddressID?: string|null,
- *     hasBundle?: string|null,
- *     phoneNumber?: string|null,
- *     status?: value-of<Status>|null,
- *     tag?: string|null,
- *     voiceConnectionName?: VoiceConnectionName|null,
- *     voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
- *   },
- *   billingGroupID?: string,
- *   connectionID?: string,
- *   customerReference?: string,
- *   deletionLockEnabled?: bool,
- *   externalPin?: string,
- *   hdVoiceEnabled?: bool,
- *   tags?: list<string>,
- *   voice?: UpdateVoiceSettings|array{
- *     callForwarding?: CallForwarding|null,
- *     callRecording?: CallRecording|null,
- *     callerIDNameEnabled?: bool|null,
- *     cnamListing?: CnamListing|null,
- *     inboundCallScreening?: value-of<InboundCallScreening>|null,
- *     mediaFeatures?: MediaFeatures|null,
- *     techPrefixEnabled?: bool|null,
- *     translatedNumber?: string|null,
- *     usagePaymentMethod?: value-of<UsagePaymentMethod>|null,
- *   },
+ *   filter?: FilterShape|null,
+ *   billingGroupID?: string|null,
+ *   connectionID?: string|null,
+ *   customerReference?: string|null,
+ *   deletionLockEnabled?: bool|null,
+ *   externalPin?: string|null,
+ *   hdVoiceEnabled?: bool|null,
+ *   tags?: list<string>|null,
+ *   voice?: UpdateVoiceSettingsShape|null,
  * }
  */
 final class JobUpdateBatchParams implements BaseModel
@@ -152,30 +125,9 @@ final class JobUpdateBatchParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $phoneNumbers
-     * @param Filter|array{
-     *   billingGroupID?: string|null,
-     *   connectionID?: string|null,
-     *   customerReference?: string|null,
-     *   emergencyAddressID?: string|null,
-     *   hasBundle?: string|null,
-     *   phoneNumber?: string|null,
-     *   status?: value-of<Status>|null,
-     *   tag?: string|null,
-     *   voiceConnectionName?: VoiceConnectionName|null,
-     *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
-     * } $filter
+     * @param FilterShape $filter
      * @param list<string> $tags
-     * @param UpdateVoiceSettings|array{
-     *   callForwarding?: CallForwarding|null,
-     *   callRecording?: CallRecording|null,
-     *   callerIDNameEnabled?: bool|null,
-     *   cnamListing?: CnamListing|null,
-     *   inboundCallScreening?: value-of<InboundCallScreening>|null,
-     *   mediaFeatures?: MediaFeatures|null,
-     *   techPrefixEnabled?: bool|null,
-     *   translatedNumber?: string|null,
-     *   usagePaymentMethod?: value-of<UsagePaymentMethod>|null,
-     * } $voice
+     * @param UpdateVoiceSettingsShape $voice
      */
     public static function with(
         array $phoneNumbers,
@@ -222,18 +174,7 @@ final class JobUpdateBatchParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[has_bundle], filter[tag], filter[connection_id], filter[phone_number], filter[status], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference].
      *
-     * @param Filter|array{
-     *   billingGroupID?: string|null,
-     *   connectionID?: string|null,
-     *   customerReference?: string|null,
-     *   emergencyAddressID?: string|null,
-     *   hasBundle?: string|null,
-     *   phoneNumber?: string|null,
-     *   status?: value-of<Status>|null,
-     *   tag?: string|null,
-     *   voiceConnectionName?: VoiceConnectionName|null,
-     *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -323,17 +264,7 @@ final class JobUpdateBatchParams implements BaseModel
     }
 
     /**
-     * @param UpdateVoiceSettings|array{
-     *   callForwarding?: CallForwarding|null,
-     *   callRecording?: CallRecording|null,
-     *   callerIDNameEnabled?: bool|null,
-     *   cnamListing?: CnamListing|null,
-     *   inboundCallScreening?: value-of<InboundCallScreening>|null,
-     *   mediaFeatures?: MediaFeatures|null,
-     *   techPrefixEnabled?: bool|null,
-     *   translatedNumber?: string|null,
-     *   usagePaymentMethod?: value-of<UsagePaymentMethod>|null,
-     * } $voice
+     * @param UpdateVoiceSettingsShape $voice
      */
     public function withVoice(UpdateVoiceSettings|array $voice): self
     {

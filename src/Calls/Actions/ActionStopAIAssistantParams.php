@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Calls\ActionsService::stopAIAssistant()
  *
  * @phpstan-type ActionStopAIAssistantParamsShape = array{
- *   clientState?: string, commandID?: string
+ *   clientState?: string|null, commandID?: string|null
  * }
  */
 final class ActionStopAIAssistantParams implements BaseModel

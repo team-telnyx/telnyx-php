@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\PublicInternetGatewaysService::create()
  *
  * @phpstan-type PublicInternetGatewayCreateParamsShape = array{
- *   name?: string, networkID?: string, regionCode?: string
+ *   name?: string|null, networkID?: string|null, regionCode?: string|null
  * }
  */
 final class PublicInternetGatewayCreateParams implements BaseModel

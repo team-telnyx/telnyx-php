@@ -20,9 +20,9 @@ use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams\ProductBreakdow
  * @phpstan-type CdrUsageReportFetchSyncParamsShape = array{
  *   aggregationType: AggregationType|value-of<AggregationType>,
  *   productBreakdown: ProductBreakdown|value-of<ProductBreakdown>,
- *   connections?: list<float>,
- *   endDate?: \DateTimeInterface,
- *   startDate?: \DateTimeInterface,
+ *   connections?: list<float>|null,
+ *   endDate?: \DateTimeInterface|null,
+ *   startDate?: \DateTimeInterface|null,
  * }
  */
 final class CdrUsageReportFetchSyncParams implements BaseModel

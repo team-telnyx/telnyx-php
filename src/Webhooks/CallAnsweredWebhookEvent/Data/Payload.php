@@ -6,24 +6,26 @@ namespace Telnyx\Webhooks\CallAnsweredWebhookEvent\Data;
 
 use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Calls\SipHeader;
-use Telnyx\Calls\SipHeader\Name;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallAnsweredWebhookEvent\Data\Payload\State;
 
 /**
+ * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
+ * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
+ *
  * @phpstan-type PayloadShape = array{
  *   callControlID?: string|null,
  *   callLegID?: string|null,
  *   callSessionID?: string|null,
  *   clientState?: string|null,
  *   connectionID?: string|null,
- *   customHeaders?: list<CustomSipHeader>|null,
+ *   customHeaders?: list<CustomSipHeaderShape>|null,
  *   from?: string|null,
- *   sipHeaders?: list<SipHeader>|null,
+ *   sipHeaders?: list<SipHeaderShape>|null,
  *   startTime?: \DateTimeInterface|null,
- *   state?: value-of<State>|null,
+ *   state?: null|State|value-of<State>,
  *   tags?: list<string>|null,
  *   to?: string|null,
  * }
@@ -123,8 +125,8 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<CustomSipHeader|array{name: string, value: string}> $customHeaders
-     * @param list<SipHeader|array{name: value-of<Name>, value: string}> $sipHeaders
+     * @param list<CustomSipHeaderShape> $customHeaders
+     * @param list<SipHeaderShape> $sipHeaders
      * @param State|value-of<State> $state
      * @param list<string> $tags
      */
@@ -218,7 +220,7 @@ final class Payload implements BaseModel
     /**
      * Custom headers set on answer command.
      *
-     * @param list<CustomSipHeader|array{name: string, value: string}> $customHeaders
+     * @param list<CustomSipHeaderShape> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {
@@ -242,7 +244,7 @@ final class Payload implements BaseModel
     /**
      * User-to-User and Diversion headers from sip invite.
      *
-     * @param list<SipHeader|array{name: value-of<Name>, value: string}> $sipHeaders
+     * @param list<SipHeaderShape> $sipHeaders
      */
     public function withSipHeaders(array $sipHeaders): self
     {

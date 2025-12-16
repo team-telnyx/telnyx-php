@@ -6,7 +6,6 @@ namespace Telnyx\Calls\Actions;
 
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant;
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings;
-use Telnyx\Calls\Actions\ElevenLabsVoiceSettings\Type;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -22,24 +21,20 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Calls\ActionsService::startAIAssistant()
  *
+ * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant
+ * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\InterruptionSettings
+ * @phpstan-import-type TranscriptionConfigShape from \Telnyx\Calls\Actions\TranscriptionConfig
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings
+ *
  * @phpstan-type ActionStartAIAssistantParamsShape = array{
- *   assistant?: Assistant|array{
- *     id?: string|null, instructions?: string|null, openaiAPIKeyRef?: string|null
- *   },
- *   clientState?: string,
- *   commandID?: string,
- *   greeting?: string,
- *   interruptionSettings?: InterruptionSettings|array{enable?: bool|null},
- *   transcription?: TranscriptionConfig|array{model?: string|null},
- *   voice?: string,
- *   voiceSettings?: ElevenLabsVoiceSettings|array{
- *     type: value-of<Type>, apiKeyRef?: string|null
- *   }|TelnyxVoiceSettings|array{
- *     type: value-of<\Telnyx\Calls\Actions\TelnyxVoiceSettings\Type>,
- *     voiceSpeed?: float|null,
- *   }|AwsVoiceSettings|array{
- *     type: value-of<\Telnyx\Calls\Actions\AwsVoiceSettings\Type>
- *   },
+ *   assistant?: AssistantShape|null,
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   greeting?: string|null,
+ *   interruptionSettings?: InterruptionSettingsShape|null,
+ *   transcription?: TranscriptionConfigShape|null,
+ *   voice?: string|null,
+ *   voiceSettings?: VoiceSettingsShape|null,
  * }
  */
 final class ActionStartAIAssistantParams implements BaseModel
@@ -112,19 +107,10 @@ final class ActionStartAIAssistantParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Assistant|array{
-     *   id?: string|null, instructions?: string|null, openaiAPIKeyRef?: string|null
-     * } $assistant
-     * @param InterruptionSettings|array{enable?: bool|null} $interruptionSettings
-     * @param TranscriptionConfig|array{model?: string|null} $transcription
-     * @param ElevenLabsVoiceSettings|array{
-     *   type: value-of<Type>, apiKeyRef?: string|null
-     * }|TelnyxVoiceSettings|array{
-     *   type: value-of<TelnyxVoiceSettings\Type>,
-     *   voiceSpeed?: float|null,
-     * }|AwsVoiceSettings|array{
-     *   type: value-of<AwsVoiceSettings\Type>
-     * } $voiceSettings
+     * @param AssistantShape $assistant
+     * @param InterruptionSettingsShape $interruptionSettings
+     * @param TranscriptionConfigShape $transcription
+     * @param VoiceSettingsShape $voiceSettings
      */
     public static function with(
         Assistant|array|null $assistant = null,
@@ -153,9 +139,7 @@ final class ActionStartAIAssistantParams implements BaseModel
     /**
      * AI Assistant configuration.
      *
-     * @param Assistant|array{
-     *   id?: string|null, instructions?: string|null, openaiAPIKeyRef?: string|null
-     * } $assistant
+     * @param AssistantShape $assistant
      */
     public function withAssistant(Assistant|array $assistant): self
     {
@@ -201,7 +185,7 @@ final class ActionStartAIAssistantParams implements BaseModel
     /**
      * Settings for handling user interruptions during assistant speech.
      *
-     * @param InterruptionSettings|array{enable?: bool|null} $interruptionSettings
+     * @param InterruptionSettingsShape $interruptionSettings
      */
     public function withInterruptionSettings(
         InterruptionSettings|array $interruptionSettings
@@ -215,7 +199,7 @@ final class ActionStartAIAssistantParams implements BaseModel
     /**
      * The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
      *
-     * @param TranscriptionConfig|array{model?: string|null} $transcription
+     * @param TranscriptionConfigShape $transcription
      */
     public function withTranscription(
         TranscriptionConfig|array $transcription
@@ -246,14 +230,7 @@ final class ActionStartAIAssistantParams implements BaseModel
     /**
      * The settings associated with the voice selected.
      *
-     * @param ElevenLabsVoiceSettings|array{
-     *   type: value-of<Type>, apiKeyRef?: string|null
-     * }|TelnyxVoiceSettings|array{
-     *   type: value-of<TelnyxVoiceSettings\Type>,
-     *   voiceSpeed?: float|null,
-     * }|AwsVoiceSettings|array{
-     *   type: value-of<AwsVoiceSettings\Type>
-     * } $voiceSettings
+     * @param VoiceSettingsShape $voiceSettings
      */
     public function withVoiceSettings(
         ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings $voiceSettings,

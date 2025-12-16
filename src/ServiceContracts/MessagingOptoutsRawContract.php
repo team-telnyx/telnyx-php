@@ -16,7 +16,7 @@ interface MessagingOptoutsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MessagingOptoutListParams $params
+     * @param array<string,mixed>|MessagingOptoutListParams $params
      *
      * @return BaseResponse<DefaultPagination<MessagingOptoutListResponse>>
      *

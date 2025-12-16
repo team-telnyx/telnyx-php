@@ -15,7 +15,7 @@ interface GlobalIPLatencyRawContract
     /**
      * @api
      *
-     * @param array<mixed>|GlobalIPLatencyRetrieveParams $params
+     * @param array<string,mixed>|GlobalIPLatencyRetrieveParams $params
      *
      * @return BaseResponse<GlobalIPLatencyGetResponse>
      *

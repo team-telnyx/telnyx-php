@@ -18,7 +18,7 @@ interface SiprecConnectorsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|SiprecConnectorCreateParams $params
+     * @param array<string,mixed>|SiprecConnectorCreateParams $params
      *
      * @return BaseResponse<SiprecConnectorNewResponse>
      *
@@ -47,7 +47,7 @@ interface SiprecConnectorsRawContract
      * @api
      *
      * @param string $connectorName uniquely identifies a SIPREC connector
-     * @param array<mixed>|SiprecConnectorUpdateParams $params
+     * @param array<string,mixed>|SiprecConnectorUpdateParams $params
      *
      * @return BaseResponse<SiprecConnectorUpdateResponse>
      *

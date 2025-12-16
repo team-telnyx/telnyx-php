@@ -23,13 +23,13 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Calls\ActionsService::startSiprec()
  *
  * @phpstan-type ActionStartSiprecParamsShape = array{
- *   clientState?: string,
- *   connectorName?: string,
- *   includeMetadataCustomHeaders?: bool,
- *   secure?: bool,
- *   sessionTimeoutSecs?: int,
- *   sipTransport?: SipTransport|value-of<SipTransport>,
- *   siprecTrack?: SiprecTrack|value-of<SiprecTrack>,
+ *   clientState?: string|null,
+ *   connectorName?: string|null,
+ *   includeMetadataCustomHeaders?: bool|null,
+ *   secure?: bool|null,
+ *   sessionTimeoutSecs?: int|null,
+ *   sipTransport?: null|SipTransport|value-of<SipTransport>,
+ *   siprecTrack?: null|SiprecTrack|value-of<SiprecTrack>,
  * }
  */
 final class ActionStartSiprecParams implements BaseModel

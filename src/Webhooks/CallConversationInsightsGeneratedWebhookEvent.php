@@ -8,13 +8,12 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data;
-use Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data\EventType;
-use Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data\Payload;
-use Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data\RecordType;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data
+ *
  * @phpstan-type CallConversationInsightsGeneratedWebhookEventShape = array{
- *   data?: Data|null
+ *   data?: null|Data|DataShape
  * }
  */
 final class CallConversationInsightsGeneratedWebhookEvent implements BaseModel
@@ -35,13 +34,7 @@ final class CallConversationInsightsGeneratedWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   id?: string|null,
-     *   eventType?: value-of<EventType>|null,
-     *   occurredAt?: \DateTimeInterface|null,
-     *   payload?: Payload|null,
-     *   recordType?: value-of<RecordType>|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -53,13 +46,7 @@ final class CallConversationInsightsGeneratedWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   id?: string|null,
-     *   eventType?: value-of<EventType>|null,
-     *   occurredAt?: \DateTimeInterface|null,
-     *   payload?: Payload|null,
-     *   recordType?: value-of<RecordType>|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

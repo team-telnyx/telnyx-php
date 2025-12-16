@@ -8,19 +8,19 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Attempt\HTTP;
-use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Attempt\HTTP\Request;
-use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Attempt\HTTP\Response;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Attempt\Status;
 
 /**
  * Webhook delivery attempt details.
  *
+ * @phpstan-import-type HTTPShape from \Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Attempt\HTTP
+ *
  * @phpstan-type AttemptShape = array{
  *   errors?: list<int>|null,
  *   finishedAt?: \DateTimeInterface|null,
- *   http?: HTTP|null,
+ *   http?: null|HTTP|HTTPShape,
  *   startedAt?: \DateTimeInterface|null,
- *   status?: value-of<\Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Attempt\Status>|null,
+ *   status?: null|\Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Attempt\Status|value-of<\Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Attempt\Status>,
  * }
  */
 final class Attempt implements BaseModel
@@ -73,7 +73,7 @@ final class Attempt implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<int> $errors
-     * @param HTTP|array{request?: Request|null, response?: Response|null} $http
+     * @param HTTPShape $http
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -121,7 +121,7 @@ final class Attempt implements BaseModel
     /**
      * HTTP request and response information.
      *
-     * @param HTTP|array{request?: Request|null, response?: Response|null} $http
+     * @param HTTPShape $http
      */
     public function withHTTP(HTTP|array $http): self
     {

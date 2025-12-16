@@ -7,11 +7,11 @@ namespace Telnyx\ExternalConnections\Uploads;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\ExternalConnections\Uploads\Upload\AvailableUsage;
-use Telnyx\ExternalConnections\Uploads\Upload\Status;
 
 /**
- * @phpstan-type UploadRetryResponseShape = array{data?: Upload|null}
+ * @phpstan-import-type UploadShape from \Telnyx\ExternalConnections\Uploads\Upload
+ *
+ * @phpstan-type UploadRetryResponseShape = array{data?: null|Upload|UploadShape}
  */
 final class UploadRetryResponse implements BaseModel
 {
@@ -31,16 +31,7 @@ final class UploadRetryResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Upload|array{
-     *   availableUsages?: list<value-of<AvailableUsage>>|null,
-     *   errorCode?: string|null,
-     *   errorMessage?: string|null,
-     *   locationID?: string|null,
-     *   status?: value-of<Status>|null,
-     *   tenantID?: string|null,
-     *   ticketID?: string|null,
-     *   tnUploadEntries?: list<TnUploadEntry>|null,
-     * } $data
+     * @param UploadShape $data
      */
     public static function with(Upload|array|null $data = null): self
     {
@@ -52,16 +43,7 @@ final class UploadRetryResponse implements BaseModel
     }
 
     /**
-     * @param Upload|array{
-     *   availableUsages?: list<value-of<AvailableUsage>>|null,
-     *   errorCode?: string|null,
-     *   errorMessage?: string|null,
-     *   locationID?: string|null,
-     *   status?: value-of<Status>|null,
-     *   tenantID?: string|null,
-     *   ticketID?: string|null,
-     *   tnUploadEntries?: list<TnUploadEntry>|null,
-     * } $data
+     * @param UploadShape $data
      */
     public function withData(Upload|array $data): self
     {

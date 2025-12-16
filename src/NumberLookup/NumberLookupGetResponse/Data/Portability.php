@@ -19,7 +19,7 @@ use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Portability\PortedStatus;
  *   lrn?: string|null,
  *   ocn?: string|null,
  *   portedDate?: string|null,
- *   portedStatus?: value-of<PortedStatus>|null,
+ *   portedStatus?: null|PortedStatus|value-of<PortedStatus>,
  *   spid?: string|null,
  *   spidCarrierName?: string|null,
  *   spidCarrierType?: string|null,

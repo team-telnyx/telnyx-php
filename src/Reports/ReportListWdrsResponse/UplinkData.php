@@ -11,7 +11,7 @@ use Telnyx\Reports\ReportListWdrsResponse\UplinkData\Unit;
 
 /**
  * @phpstan-type UplinkDataShape = array{
- *   amount?: float|null, unit?: value-of<Unit>|null
+ *   amount?: float|null, unit?: null|Unit|value-of<Unit>
  * }
  */
 final class UplinkData implements BaseModel

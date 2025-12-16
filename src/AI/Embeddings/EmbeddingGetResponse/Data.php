@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type DataShape = array{
  *   createdAt?: string|null,
  *   finishedAt?: string|null,
- *   status?: value-of<BackgroundTaskStatus>|null,
+ *   status?: null|BackgroundTaskStatus|value-of<BackgroundTaskStatus>,
  *   taskID?: string|null,
  *   taskName?: string|null,
  * }

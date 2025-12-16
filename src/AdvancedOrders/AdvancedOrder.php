@@ -16,8 +16,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *   comments?: string|null,
  *   countryCode?: string|null,
  *   customerReference?: string|null,
- *   features?: list<value-of<Feature>>|null,
- *   phoneNumberType?: value-of<PhoneNumberType>|null,
+ *   features?: list<Feature|value-of<Feature>>|null,
+ *   phoneNumberType?: null|PhoneNumberType|value-of<PhoneNumberType>,
  *   quantity?: int|null,
  *   requirementGroupID?: string|null,
  * }

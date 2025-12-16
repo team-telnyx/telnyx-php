@@ -12,7 +12,7 @@ use Telnyx\VerifiedNumbers\VerifiedNumber\RecordType;
 /**
  * @phpstan-type VerifiedNumberShape = array{
  *   phoneNumber?: string|null,
- *   recordType?: value-of<RecordType>|null,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  *   verifiedAt?: string|null,
  * }
  */

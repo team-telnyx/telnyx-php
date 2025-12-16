@@ -16,7 +16,7 @@ interface RecordingsRawContract
      * @api
      *
      * @param string $recordingSid path param: Uniquely identifies the recording by id
-     * @param array<mixed>|RecordingRecordingSidJsonParams $params
+     * @param array<string,mixed>|RecordingRecordingSidJsonParams $params
      *
      * @return BaseResponse<RecordingRecordingSidJsonResponse>
      *

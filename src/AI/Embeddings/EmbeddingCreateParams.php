@@ -38,10 +38,10 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type EmbeddingCreateParamsShape = array{
  *   bucketName: string,
- *   documentChunkOverlapSize?: int,
- *   documentChunkSize?: int,
- *   embeddingModel?: EmbeddingModel|value-of<EmbeddingModel>,
- *   loader?: Loader|value-of<Loader>,
+ *   documentChunkOverlapSize?: int|null,
+ *   documentChunkSize?: int|null,
+ *   embeddingModel?: null|EmbeddingModel|value-of<EmbeddingModel>,
+ *   loader?: null|Loader|value-of<Loader>,
  * }
  */
 final class EmbeddingCreateParams implements BaseModel

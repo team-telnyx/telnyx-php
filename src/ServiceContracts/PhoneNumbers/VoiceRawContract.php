@@ -34,7 +34,7 @@ interface VoiceRawContract
      * @api
      *
      * @param string $id identifies the resource
-     * @param array<mixed>|VoiceUpdateParams $params
+     * @param array<string,mixed>|VoiceUpdateParams $params
      *
      * @return BaseResponse<VoiceUpdateResponse>
      *
@@ -49,7 +49,7 @@ interface VoiceRawContract
     /**
      * @api
      *
-     * @param array<mixed>|VoiceListParams $params
+     * @param array<string,mixed>|VoiceListParams $params
      *
      * @return BaseResponse<DefaultPagination<PhoneNumberWithVoiceSettings>>
      *

@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\SimCardDataUsageNotificationsService::list()
  *
  * @phpstan-type SimCardDataUsageNotificationListParamsShape = array{
- *   filterSimCardID?: string, pageNumber?: int, pageSize?: int
+ *   filterSimCardID?: string|null, pageNumber?: int|null, pageSize?: int|null
  * }
  */
 final class SimCardDataUsageNotificationListParams implements BaseModel

@@ -14,7 +14,7 @@ use Telnyx\OAuth\OAuthTokenResponse\TokenType;
  * @phpstan-type OAuthTokenResponseShape = array{
  *   accessToken: string,
  *   expiresIn: int,
- *   tokenType: value-of<TokenType>,
+ *   tokenType: TokenType|value-of<TokenType>,
  *   refreshToken?: string|null,
  *   scope?: string|null,
  * }

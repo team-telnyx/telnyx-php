@@ -9,15 +9,16 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document;
-use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document\Type;
 
 /**
  * Creates a list of supporting documents on a portout request.
  *
  * @see Telnyx\Services\Portouts\SupportingDocumentsService::create()
  *
+ * @phpstan-import-type DocumentShape from \Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document
+ *
  * @phpstan-type SupportingDocumentCreateParamsShape = array{
- *   documents?: list<Document|array{documentID: string, type: value-of<Type>}>
+ *   documents?: list<DocumentShape>|null
  * }
  */
 final class SupportingDocumentCreateParams implements BaseModel
@@ -44,7 +45,7 @@ final class SupportingDocumentCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Document|array{documentID: string, type: value-of<Type>}> $documents
+     * @param list<DocumentShape> $documents
      */
     public static function with(?array $documents = null): self
     {
@@ -58,7 +59,7 @@ final class SupportingDocumentCreateParams implements BaseModel
     /**
      * List of supporting documents parameters.
      *
-     * @param list<Document|array{documentID: string, type: value-of<Type>}> $documents
+     * @param list<DocumentShape> $documents
      */
     public function withDocuments(array $documents): self
     {

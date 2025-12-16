@@ -23,7 +23,7 @@ use Telnyx\DetailRecords\DetailRecordListResponse\VerifyDetailRecord\VerifyChann
  *   updatedAt?: \DateTimeInterface|null,
  *   verificationStatus?: string|null,
  *   verifyChannelID?: string|null,
- *   verifyChannelType?: value-of<VerifyChannelType>|null,
+ *   verifyChannelType?: null|VerifyChannelType|value-of<VerifyChannelType>,
  *   verifyProfileID?: string|null,
  *   verifyUsageFee?: string|null,
  * }

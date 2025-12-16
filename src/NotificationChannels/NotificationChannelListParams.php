@@ -9,12 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NotificationChannels\NotificationChannelListParams\Filter;
-use Telnyx\NotificationChannels\NotificationChannelListParams\Filter\AssociatedRecordType;
-use Telnyx\NotificationChannels\NotificationChannelListParams\Filter\ChannelTypeID;
-use Telnyx\NotificationChannels\NotificationChannelListParams\Filter\NotificationChannel;
-use Telnyx\NotificationChannels\NotificationChannelListParams\Filter\NotificationEventConditionID;
-use Telnyx\NotificationChannels\NotificationChannelListParams\Filter\NotificationProfileID;
-use Telnyx\NotificationChannels\NotificationChannelListParams\Filter\Status;
 use Telnyx\NotificationChannels\NotificationChannelListParams\Page;
 
 /**
@@ -22,16 +16,11 @@ use Telnyx\NotificationChannels\NotificationChannelListParams\Page;
  *
  * @see Telnyx\Services\NotificationChannelsService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\NotificationChannels\NotificationChannelListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\NotificationChannels\NotificationChannelListParams\Page
+ *
  * @phpstan-type NotificationChannelListParamsShape = array{
- *   filter?: Filter|array{
- *     associatedRecordType?: AssociatedRecordType|null,
- *     channelTypeID?: ChannelTypeID|null,
- *     notificationChannel?: \Telnyx\NotificationChannels\NotificationChannelListParams\Filter\NotificationChannel|null,
- *     notificationEventConditionID?: NotificationEventConditionID|null,
- *     notificationProfileID?: NotificationProfileID|null,
- *     status?: Status|null,
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   filter?: FilterShape|null, page?: PageShape|null
  * }
  */
 final class NotificationChannelListParams implements BaseModel
@@ -62,15 +51,8 @@ final class NotificationChannelListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   associatedRecordType?: AssociatedRecordType|null,
-     *   channelTypeID?: ChannelTypeID|null,
-     *   notificationChannel?: NotificationChannel|null,
-     *   notificationEventConditionID?: NotificationEventConditionID|null,
-     *   notificationProfileID?: NotificationProfileID|null,
-     *   status?: Status|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -87,14 +69,7 @@ final class NotificationChannelListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[associated_record_type][eq], filter[channel_type_id][eq], filter[notification_profile_id][eq], filter[notification_channel][eq], filter[notification_event_condition_id][eq], filter[status][eq].
      *
-     * @param Filter|array{
-     *   associatedRecordType?: AssociatedRecordType|null,
-     *   channelTypeID?: ChannelTypeID|null,
-     *   notificationChannel?: NotificationChannel|null,
-     *   notificationEventConditionID?: NotificationEventConditionID|null,
-     *   notificationProfileID?: NotificationProfileID|null,
-     *   status?: Status|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -107,7 +82,7 @@ final class NotificationChannelListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

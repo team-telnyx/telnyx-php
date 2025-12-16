@@ -10,7 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Calls\CallInitiateResponse\Data;
 
 /**
- * @phpstan-type CallInitiateResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\Texml\Calls\CallInitiateResponse\Data
+ *
+ * @phpstan-type CallInitiateResponseShape = array{data?: null|Data|DataShape}
  */
 final class CallInitiateResponse implements BaseModel
 {
@@ -30,9 +32,7 @@ final class CallInitiateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   from?: string|null, status?: string|null, to?: string|null
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -44,9 +44,7 @@ final class CallInitiateResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   from?: string|null, status?: string|null, to?: string|null
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

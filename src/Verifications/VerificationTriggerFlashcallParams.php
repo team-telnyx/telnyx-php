@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\VerificationsService::triggerFlashcall()
  *
  * @phpstan-type VerificationTriggerFlashcallParamsShape = array{
- *   phoneNumber: string, verifyProfileID: string, timeoutSecs?: int
+ *   phoneNumber: string, verifyProfileID: string, timeoutSecs?: int|null
  * }
  */
 final class VerificationTriggerFlashcallParams implements BaseModel

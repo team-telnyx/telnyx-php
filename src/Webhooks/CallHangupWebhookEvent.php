@@ -8,12 +8,11 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallHangupWebhookEvent\Data;
-use Telnyx\Webhooks\CallHangupWebhookEvent\Data\EventType;
-use Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload;
-use Telnyx\Webhooks\CallHangupWebhookEvent\Data\RecordType;
 
 /**
- * @phpstan-type CallHangupWebhookEventShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\Webhooks\CallHangupWebhookEvent\Data
+ *
+ * @phpstan-type CallHangupWebhookEventShape = array{data?: null|Data|DataShape}
  */
 final class CallHangupWebhookEvent implements BaseModel
 {
@@ -33,13 +32,7 @@ final class CallHangupWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   id?: string|null,
-     *   eventType?: value-of<EventType>|null,
-     *   occurredAt?: \DateTimeInterface|null,
-     *   payload?: Payload|null,
-     *   recordType?: value-of<RecordType>|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -51,13 +44,7 @@ final class CallHangupWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   id?: string|null,
-     *   eventType?: value-of<EventType>|null,
-     *   occurredAt?: \DateTimeInterface|null,
-     *   payload?: Payload|null,
-     *   recordType?: value-of<RecordType>|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

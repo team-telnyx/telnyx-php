@@ -9,8 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OtaUpdates\OtaUpdateListParams\Filter;
-use Telnyx\OtaUpdates\OtaUpdateListParams\Filter\Status;
-use Telnyx\OtaUpdates\OtaUpdateListParams\Filter\Type;
 use Telnyx\OtaUpdates\OtaUpdateListParams\Page;
 
 /**
@@ -18,13 +16,11 @@ use Telnyx\OtaUpdates\OtaUpdateListParams\Page;
  *
  * @see Telnyx\Services\OtaUpdatesService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\OtaUpdates\OtaUpdateListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\OtaUpdates\OtaUpdateListParams\Page
+ *
  * @phpstan-type OtaUpdateListParamsShape = array{
- *   filter?: Filter|array{
- *     simCardID?: string|null,
- *     status?: value-of<Status>|null,
- *     type?: value-of<Type>|null,
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   filter?: FilterShape|null, page?: PageShape|null
  * }
  */
 final class OtaUpdateListParams implements BaseModel
@@ -55,12 +51,8 @@ final class OtaUpdateListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   simCardID?: string|null,
-     *   status?: value-of<Status>|null,
-     *   type?: value-of<Type>|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -77,11 +69,7 @@ final class OtaUpdateListParams implements BaseModel
     /**
      * Consolidated filter parameter for OTA updates (deepObject style). Originally: filter[status], filter[sim_card_id], filter[type].
      *
-     * @param Filter|array{
-     *   simCardID?: string|null,
-     *   status?: value-of<Status>|null,
-     *   type?: value-of<Type>|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -94,7 +82,7 @@ final class OtaUpdateListParams implements BaseModel
     /**
      * Consolidated pagination parameter (deepObject style). Originally: page[number], page[size].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

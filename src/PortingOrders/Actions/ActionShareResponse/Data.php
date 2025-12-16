@@ -16,7 +16,7 @@ use Telnyx\PortingOrders\Actions\ActionShareResponse\Data\Permission;
  *   createdAt?: \DateTimeInterface|null,
  *   expiresAt?: \DateTimeInterface|null,
  *   expiresInSeconds?: int|null,
- *   permissions?: list<value-of<Permission>>|null,
+ *   permissions?: list<Permission|value-of<Permission>>|null,
  *   portingOrderID?: string|null,
  *   recordType?: string|null,
  * }

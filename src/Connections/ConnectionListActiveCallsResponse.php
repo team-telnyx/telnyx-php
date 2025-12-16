@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   callLegID: string,
  *   callSessionID: string,
  *   clientState: string,
- *   recordType: value-of<RecordType>,
+ *   recordType: RecordType|value-of<RecordType>,
  * }
  */
 final class ConnectionListActiveCallsResponse implements BaseModel

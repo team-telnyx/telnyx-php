@@ -31,7 +31,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $id Managed Account User ID
-     * @param array<mixed>|ActionEnableParams $params
+     * @param array<string,mixed>|ActionEnableParams $params
      *
      * @return BaseResponse<ActionEnableResponse>
      *

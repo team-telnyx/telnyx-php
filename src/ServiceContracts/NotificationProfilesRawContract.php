@@ -22,7 +22,7 @@ interface NotificationProfilesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|NotificationProfileCreateParams $params
+     * @param array<string,mixed>|NotificationProfileCreateParams $params
      *
      * @return BaseResponse<NotificationProfileNewResponse>
      *
@@ -51,7 +51,7 @@ interface NotificationProfilesRawContract
      * @api
      *
      * @param string $notificationProfileID the id of the resource
-     * @param array<mixed>|NotificationProfileUpdateParams $params
+     * @param array<string,mixed>|NotificationProfileUpdateParams $params
      *
      * @return BaseResponse<NotificationProfileUpdateResponse>
      *
@@ -66,7 +66,7 @@ interface NotificationProfilesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|NotificationProfileListParams $params
+     * @param array<string,mixed>|NotificationProfileListParams $params
      *
      * @return BaseResponse<DefaultPagination<NotificationProfile>>
      *

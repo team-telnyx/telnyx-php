@@ -8,12 +8,13 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse\Data;
-use Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse\Data\ShippingCost;
-use Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse\Data\SimCardsCost;
-use Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse\Data\TotalCost;
 
 /**
- * @phpstan-type SimCardOrderPreviewPreviewResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse\Data
+ *
+ * @phpstan-type SimCardOrderPreviewPreviewResponseShape = array{
+ *   data?: null|Data|DataShape
+ * }
  */
 final class SimCardOrderPreviewPreviewResponse implements BaseModel
 {
@@ -33,13 +34,7 @@ final class SimCardOrderPreviewPreviewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   quantity?: int|null,
-     *   recordType?: string|null,
-     *   shippingCost?: ShippingCost|null,
-     *   simCardsCost?: SimCardsCost|null,
-     *   totalCost?: TotalCost|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -51,13 +46,7 @@ final class SimCardOrderPreviewPreviewResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   quantity?: int|null,
-     *   recordType?: string|null,
-     *   shippingCost?: ShippingCost|null,
-     *   simCardsCost?: SimCardsCost|null,
-     *   totalCost?: TotalCost|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\SimCardsService::listWirelessConnectivityLogs()
  *
  * @phpstan-type SimCardListWirelessConnectivityLogsParamsShape = array{
- *   pageNumber?: int, pageSize?: int
+ *   pageNumber?: int|null, pageSize?: int|null
  * }
  */
 final class SimCardListWirelessConnectivityLogsParams implements BaseModel

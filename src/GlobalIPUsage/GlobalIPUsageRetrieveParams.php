@@ -9,15 +9,16 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams\Filter;
-use Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams\Filter\GlobalIPID\In;
 
 /**
  * Global IP Usage Metrics.
  *
  * @see Telnyx\Services\GlobalIPUsageService::retrieve()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams\Filter
+ *
  * @phpstan-type GlobalIPUsageRetrieveParamsShape = array{
- *   filter?: Filter|array{globalIPID?: string|null|In}
+ *   filter?: FilterShape|null
  * }
  */
 final class GlobalIPUsageRetrieveParams implements BaseModel
@@ -42,7 +43,7 @@ final class GlobalIPUsageRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{globalIPID?: string|In|null} $filter
+     * @param FilterShape $filter
      */
     public static function with(Filter|array|null $filter = null): self
     {
@@ -56,7 +57,7 @@ final class GlobalIPUsageRetrieveParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in].
      *
-     * @param Filter|array{globalIPID?: string|In|null} $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

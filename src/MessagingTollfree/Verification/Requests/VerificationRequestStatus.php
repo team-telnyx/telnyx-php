@@ -12,6 +12,9 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * A verification request and its status, suitable for returning to users.
  *
+ * @phpstan-import-type URLShape from \Telnyx\MessagingTollfree\Verification\Requests\URL
+ * @phpstan-import-type TfPhoneNumberShape from \Telnyx\MessagingTollfree\Verification\Requests\TfPhoneNumber
+ *
  * @phpstan-type VerificationRequestStatusShape = array{
  *   id: string,
  *   additionalInformation: string,
@@ -26,14 +29,14 @@ use Telnyx\Core\Contracts\BaseModel;
  *   businessZip: string,
  *   corporateWebsite: string,
  *   isvReseller: string,
- *   messageVolume: value-of<Volume>,
+ *   messageVolume: Volume|value-of<Volume>,
  *   optInWorkflow: string,
- *   optInWorkflowImageURLs: list<URL>,
- *   phoneNumbers: list<TfPhoneNumber>,
+ *   optInWorkflowImageURLs: list<URLShape>,
+ *   phoneNumbers: list<TfPhoneNumberShape>,
  *   productionMessageContent: string,
- *   useCase: value-of<UseCaseCategories>,
+ *   useCase: UseCaseCategories|value-of<UseCaseCategories>,
  *   useCaseSummary: string,
- *   verificationStatus: value-of<TfVerificationStatus>,
+ *   verificationStatus: TfVerificationStatus|value-of<TfVerificationStatus>,
  *   ageGatedContent?: bool|null,
  *   businessAddr2?: string|null,
  *   businessRegistrationCountry?: string|null,
@@ -41,7 +44,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   businessRegistrationType?: string|null,
  *   createdAt?: \DateTimeInterface|null,
  *   doingBusinessAs?: string|null,
- *   entityType?: value-of<TollFreeVerificationEntityType>|null,
+ *   entityType?: null|TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>,
  *   helpMessageResponse?: string|null,
  *   optInConfirmationResponse?: string|null,
  *   optInKeywords?: string|null,
@@ -258,8 +261,8 @@ final class VerificationRequestStatus implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Volume|value-of<Volume> $messageVolume
-     * @param list<URL|array{url: string}> $optInWorkflowImageURLs
-     * @param list<TfPhoneNumber|array{phoneNumber: string}> $phoneNumbers
+     * @param list<URLShape> $optInWorkflowImageURLs
+     * @param list<TfPhoneNumberShape> $phoneNumbers
      * @param UseCaseCategories|value-of<UseCaseCategories> $useCase
      * @param TfVerificationStatus|value-of<TfVerificationStatus> $verificationStatus
      * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType> $entityType
@@ -476,7 +479,7 @@ final class VerificationRequestStatus implements BaseModel
     }
 
     /**
-     * @param list<URL|array{url: string}> $optInWorkflowImageURLs
+     * @param list<URLShape> $optInWorkflowImageURLs
      */
     public function withOptInWorkflowImageURLs(
         array $optInWorkflowImageURLs
@@ -488,7 +491,7 @@ final class VerificationRequestStatus implements BaseModel
     }
 
     /**
-     * @param list<TfPhoneNumber|array{phoneNumber: string}> $phoneNumbers
+     * @param list<TfPhoneNumberShape> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {

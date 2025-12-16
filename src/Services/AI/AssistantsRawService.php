@@ -69,7 +69,7 @@ final class AssistantsRawService implements AssistantsRawContract
      *     language?: string,
      *     model?: 'deepgram/flux'|'deepgram/nova-3'|'deepgram/nova-2'|'azure/fast'|'distil-whisper/distil-large-v2'|'openai/whisper-large-v3-turbo'|Model,
      *     region?: string,
-     *     settings?: array<mixed>|TranscriptionSettingsConfig,
+     *     settings?: array<string,mixed>|TranscriptionSettingsConfig,
      *   }|TranscriptionSettings,
      *   voiceSettings?: array{
      *     voice: string,
@@ -173,7 +173,7 @@ final class AssistantsRawService implements AssistantsRawContract
      *     language?: string,
      *     model?: 'deepgram/flux'|'deepgram/nova-3'|'deepgram/nova-2'|'azure/fast'|'distil-whisper/distil-large-v2'|'openai/whisper-large-v3-turbo'|Model,
      *     region?: string,
-     *     settings?: array<mixed>|TranscriptionSettingsConfig,
+     *     settings?: array<string,mixed>|TranscriptionSettingsConfig,
      *   }|TranscriptionSettings,
      *   voiceSettings?: array{
      *     voice: string,

@@ -11,11 +11,14 @@ use Telnyx\PhoneNumberBlocks\Jobs\JobError\Meta;
 use Telnyx\PhoneNumberBlocks\Jobs\JobError\Source;
 
 /**
+ * @phpstan-import-type MetaShape from \Telnyx\PhoneNumberBlocks\Jobs\JobError\Meta
+ * @phpstan-import-type SourceShape from \Telnyx\PhoneNumberBlocks\Jobs\JobError\Source
+ *
  * @phpstan-type JobErrorShape = array{
  *   code?: string|null,
  *   detail?: string|null,
- *   meta?: Meta|null,
- *   source?: Source|null,
+ *   meta?: null|Meta|MetaShape,
+ *   source?: null|Source|SourceShape,
  *   title?: string|null,
  * }
  */
@@ -49,8 +52,8 @@ final class JobError implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Meta|array{url?: string|null} $meta
-     * @param Source|array{parameter?: string|null, pointer?: string|null} $source
+     * @param MetaShape $meta
+     * @param SourceShape $source
      */
     public static function with(
         ?string $code = null,
@@ -87,7 +90,7 @@ final class JobError implements BaseModel
     }
 
     /**
-     * @param Meta|array{url?: string|null} $meta
+     * @param MetaShape $meta
      */
     public function withMeta(Meta|array $meta): self
     {
@@ -98,7 +101,7 @@ final class JobError implements BaseModel
     }
 
     /**
-     * @param Source|array{parameter?: string|null, pointer?: string|null} $source
+     * @param SourceShape $source
      */
     public function withSource(Source|array $source): self
     {

@@ -10,8 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyResponse\Data;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyResponse\Data
+ *
  * @phpstan-type VerificationCodeVerifyResponseShape = array{
- *   data?: list<Data>|null
+ *   data?: list<DataShape>|null
  * }
  */
 final class VerificationCodeVerifyResponse implements BaseModel
@@ -33,15 +35,7 @@ final class VerificationCodeVerifyResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   id?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   phoneNumber?: string|null,
-     *   portingOrderID?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     *   verified?: bool|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public static function with(?array $data = null): self
     {
@@ -53,15 +47,7 @@ final class VerificationCodeVerifyResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   id?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   phoneNumber?: string|null,
-     *   portingOrderID?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     *   verified?: bool|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {

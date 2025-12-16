@@ -30,7 +30,7 @@ interface RequirementTypesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|RequirementTypeListParams $params
+     * @param array<string,mixed>|RequirementTypeListParams $params
      *
      * @return BaseResponse<RequirementTypeListResponse>
      *

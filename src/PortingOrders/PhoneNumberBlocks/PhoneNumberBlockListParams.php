@@ -9,30 +9,20 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\ActivationStatus;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\PortabilityStatus;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\PortingOrderSingleStatus;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\UnionMember1;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Page;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Sort;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Sort\Value;
 
 /**
  * Returns a list of all phone number blocks of a porting order.
  *
  * @see Telnyx\Services\PortingOrders\PhoneNumberBlocksService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Page
+ * @phpstan-import-type SortShape from \Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Sort
+ *
  * @phpstan-type PhoneNumberBlockListParamsShape = array{
- *   filter?: Filter|array{
- *     activationStatus?: value-of<ActivationStatus>|null,
- *     phoneNumber?: list<string>|null,
- *     portabilityStatus?: value-of<PortabilityStatus>|null,
- *     portingOrderID?: list<string>|null,
- *     status?: null|list<value-of<UnionMember1>>|value-of<PortingOrderSingleStatus>,
- *     supportKey?: string|null|list<string>,
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
- *   sort?: Sort|array{value?: value-of<Value>|null},
+ *   filter?: FilterShape|null, page?: PageShape|null, sort?: SortShape|null
  * }
  */
 final class PhoneNumberBlockListParams implements BaseModel
@@ -69,16 +59,9 @@ final class PhoneNumberBlockListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   activationStatus?: value-of<ActivationStatus>|null,
-     *   phoneNumber?: list<string>|null,
-     *   portabilityStatus?: value-of<PortabilityStatus>|null,
-     *   portingOrderID?: list<string>|null,
-     *   status?: list<value-of<UnionMember1>>|value-of<PortingOrderSingleStatus>|null,
-     *   supportKey?: string|list<string>|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
-     * @param Sort|array{value?: value-of<Value>|null} $sort
+     * @param FilterShape $filter
+     * @param PageShape $page
+     * @param SortShape $sort
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -97,14 +80,7 @@ final class PhoneNumberBlockListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[porting_order_id], filter[support_key], filter[status], filter[phone_number], filter[activation_status], filter[portability_status].
      *
-     * @param Filter|array{
-     *   activationStatus?: value-of<ActivationStatus>|null,
-     *   phoneNumber?: list<string>|null,
-     *   portabilityStatus?: value-of<PortabilityStatus>|null,
-     *   portingOrderID?: list<string>|null,
-     *   status?: list<value-of<UnionMember1>>|value-of<PortingOrderSingleStatus>|null,
-     *   supportKey?: string|list<string>|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -117,7 +93,7 @@ final class PhoneNumberBlockListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {
@@ -130,7 +106,7 @@ final class PhoneNumberBlockListParams implements BaseModel
     /**
      * Consolidated sort parameter (deepObject style). Originally: sort[value].
      *
-     * @param Sort|array{value?: value-of<Value>|null} $sort
+     * @param SortShape $sort
      */
     public function withSort(Sort|array $sort): self
     {

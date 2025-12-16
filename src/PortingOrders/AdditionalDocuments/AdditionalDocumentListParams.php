@@ -9,20 +9,20 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Filter;
-use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Filter\DocumentType;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Page;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Sort;
-use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Sort\Value;
 
 /**
  * Returns a list of additional documents for a porting order.
  *
  * @see Telnyx\Services\PortingOrders\AdditionalDocumentsService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Page
+ * @phpstan-import-type SortShape from \Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Sort
+ *
  * @phpstan-type AdditionalDocumentListParamsShape = array{
- *   filter?: Filter|array{documentType?: list<value-of<DocumentType>>|null},
- *   page?: Page|array{number?: int|null, size?: int|null},
- *   sort?: Sort|array{value?: value-of<Value>|null},
+ *   filter?: FilterShape|null, page?: PageShape|null, sort?: SortShape|null
  * }
  */
 final class AdditionalDocumentListParams implements BaseModel
@@ -59,9 +59,9 @@ final class AdditionalDocumentListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{documentType?: list<value-of<DocumentType>>|null} $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
-     * @param Sort|array{value?: value-of<Value>|null} $sort
+     * @param FilterShape $filter
+     * @param PageShape $page
+     * @param SortShape $sort
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -80,7 +80,7 @@ final class AdditionalDocumentListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[document_type].
      *
-     * @param Filter|array{documentType?: list<value-of<DocumentType>>|null} $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -93,7 +93,7 @@ final class AdditionalDocumentListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {
@@ -106,7 +106,7 @@ final class AdditionalDocumentListParams implements BaseModel
     /**
      * Consolidated sort parameter (deepObject style). Originally: sort[value].
      *
-     * @param Sort|array{value?: value-of<Value>|null} $sort
+     * @param SortShape $sort
      */
     public function withSort(Sort|array $sort): self
     {

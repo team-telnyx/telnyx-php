@@ -10,13 +10,15 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OAuth\OAuthGetResponse\Data\RequestedScope;
 
 /**
+ * @phpstan-import-type RequestedScopeShape from \Telnyx\OAuth\OAuthGetResponse\Data\RequestedScope
+ *
  * @phpstan-type DataShape = array{
  *   clientID?: string|null,
  *   logoUri?: string|null,
  *   name?: string|null,
  *   policyUri?: string|null,
  *   redirectUri?: string|null,
- *   requestedScopes?: list<RequestedScope>|null,
+ *   requestedScopes?: list<RequestedScopeShape>|null,
  *   tosUri?: string|null,
  *   verified?: bool|null,
  * }
@@ -82,9 +84,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RequestedScope|array{
-     *   id?: string|null, description?: string|null, name?: string|null
-     * }> $requestedScopes
+     * @param list<RequestedScopeShape> $requestedScopes
      */
     public static function with(
         ?string $clientID = null,
@@ -166,9 +166,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<RequestedScope|array{
-     *   id?: string|null, description?: string|null, name?: string|null
-     * }> $requestedScopes
+     * @param list<RequestedScopeShape> $requestedScopes
      */
     public function withRequestedScopes(array $requestedScopes): self
     {

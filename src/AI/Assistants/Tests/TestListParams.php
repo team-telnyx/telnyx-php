@@ -15,11 +15,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\Assistants\TestsService::list()
  *
  * @phpstan-type TestListParamsShape = array{
- *   destination?: string,
- *   pageNumber?: int,
- *   pageSize?: int,
- *   telnyxConversationChannel?: string,
- *   testSuite?: string,
+ *   destination?: string|null,
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
+ *   telnyxConversationChannel?: string|null,
+ *   testSuite?: string|null,
  * }
  */
 final class TestListParams implements BaseModel

@@ -17,7 +17,7 @@ interface CommentsRawContract
      * @api
      *
      * @param string $id Portout id
-     * @param array<mixed>|CommentCreateParams $params
+     * @param array<string,mixed>|CommentCreateParams $params
      *
      * @return BaseResponse<CommentNewResponse>
      *

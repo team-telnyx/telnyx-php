@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\ClustersService::fetchGraph()
  *
- * @phpstan-type ClusterFetchGraphParamsShape = array{clusterID?: int}
+ * @phpstan-type ClusterFetchGraphParamsShape = array{clusterID?: int|null}
  */
 final class ClusterFetchGraphParams implements BaseModel
 {

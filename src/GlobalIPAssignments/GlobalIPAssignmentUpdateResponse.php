@@ -9,8 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type GlobalIPAssignmentShape from \Telnyx\GlobalIPAssignments\GlobalIPAssignment
+ *
  * @phpstan-type GlobalIPAssignmentUpdateResponseShape = array{
- *   data?: GlobalIPAssignment|null
+ *   data?: null|GlobalIPAssignment|GlobalIPAssignmentShape
  * }
  */
 final class GlobalIPAssignmentUpdateResponse implements BaseModel
@@ -31,12 +33,7 @@ final class GlobalIPAssignmentUpdateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param GlobalIPAssignment|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param GlobalIPAssignmentShape $data
      */
     public static function with(GlobalIPAssignment|array|null $data = null): self
     {
@@ -48,12 +45,7 @@ final class GlobalIPAssignmentUpdateResponse implements BaseModel
     }
 
     /**
-     * @param GlobalIPAssignment|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param GlobalIPAssignmentShape $data
      */
     public function withData(GlobalIPAssignment|array $data): self
     {

@@ -16,10 +16,10 @@ use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams\A
  * @see Telnyx\Services\Legacy\Reporting\UsageReports\NumberLookupService::create()
  *
  * @phpstan-type NumberLookupCreateParamsShape = array{
- *   aggregationType?: AggregationType|value-of<AggregationType>,
- *   endDate?: string,
- *   managedAccounts?: list<string>,
- *   startDate?: string,
+ *   aggregationType?: null|AggregationType|value-of<AggregationType>,
+ *   endDate?: string|null,
+ *   managedAccounts?: list<string>|null,
+ *   startDate?: string|null,
  * }
  */
 final class NumberLookupCreateParams implements BaseModel

@@ -16,7 +16,7 @@ use Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonResponse\Status;
  *   dateUpdated?: string|null,
  *   errorCode?: string|null,
  *   sid?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   uri?: string|null,
  * }
  */

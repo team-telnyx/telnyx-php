@@ -20,7 +20,7 @@ interface NotificationSettingsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|NotificationSettingCreateParams $params
+     * @param array<string,mixed>|NotificationSettingCreateParams $params
      *
      * @return BaseResponse<NotificationSettingNewResponse>
      *
@@ -48,7 +48,7 @@ interface NotificationSettingsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|NotificationSettingListParams $params
+     * @param array<string,mixed>|NotificationSettingListParams $params
      *
      * @return BaseResponse<DefaultPagination<NotificationSetting>>
      *

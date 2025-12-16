@@ -16,7 +16,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Messaging10dlc\PhoneNumberAssignmentByProfileService::assign()
  *
  * @phpstan-type PhoneNumberAssignmentByProfileAssignParamsShape = array{
- *   messagingProfileID: string, campaignID?: string, tcrCampaignID?: string
+ *   messagingProfileID: string,
+ *   campaignID?: string|null,
+ *   tcrCampaignID?: string|null,
  * }
  */
 final class PhoneNumberAssignmentByProfileAssignParams implements BaseModel

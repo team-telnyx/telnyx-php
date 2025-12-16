@@ -15,7 +15,7 @@ interface PurchaseRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PurchaseCreateParams $params
+     * @param array<string,mixed>|PurchaseCreateParams $params
      *
      * @return BaseResponse<PurchaseNewResponse>
      *

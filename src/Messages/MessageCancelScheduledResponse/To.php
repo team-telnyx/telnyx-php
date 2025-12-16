@@ -13,9 +13,9 @@ use Telnyx\Messages\MessageCancelScheduledResponse\To\Status;
 /**
  * @phpstan-type ToShape = array{
  *   carrier?: string|null,
- *   lineType?: value-of<LineType>|null,
+ *   lineType?: null|LineType|value-of<LineType>,
  *   phoneNumber?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  * }
  */
 final class To implements BaseModel

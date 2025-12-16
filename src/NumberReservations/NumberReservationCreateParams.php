@@ -8,24 +8,17 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\NumberReservations\ReservedPhoneNumber\Status;
 
 /**
  * Creates a Phone Number Reservation for multiple numbers.
  *
  * @see Telnyx\Services\NumberReservationsService::create()
  *
+ * @phpstan-import-type ReservedPhoneNumberShape from \Telnyx\NumberReservations\ReservedPhoneNumber
+ *
  * @phpstan-type NumberReservationCreateParamsShape = array{
- *   customerReference?: string,
- *   phoneNumbers?: list<ReservedPhoneNumber|array{
- *     id?: string|null,
- *     createdAt?: \DateTimeInterface|null,
- *     expiredAt?: \DateTimeInterface|null,
- *     phoneNumber?: string|null,
- *     recordType?: string|null,
- *     status?: value-of<Status>|null,
- *     updatedAt?: \DateTimeInterface|null,
- *   }>,
+ *   customerReference?: string|null,
+ *   phoneNumbers?: list<ReservedPhoneNumberShape>|null,
  * }
  */
 final class NumberReservationCreateParams implements BaseModel
@@ -54,15 +47,7 @@ final class NumberReservationCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ReservedPhoneNumber|array{
-     *   id?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   expiredAt?: \DateTimeInterface|null,
-     *   phoneNumber?: string|null,
-     *   recordType?: string|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }> $phoneNumbers
+     * @param list<ReservedPhoneNumberShape> $phoneNumbers
      */
     public static function with(
         ?string $customerReference = null,
@@ -88,15 +73,7 @@ final class NumberReservationCreateParams implements BaseModel
     }
 
     /**
-     * @param list<ReservedPhoneNumber|array{
-     *   id?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   expiredAt?: \DateTimeInterface|null,
-     *   phoneNumber?: string|null,
-     *   recordType?: string|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }> $phoneNumbers
+     * @param list<ReservedPhoneNumberShape> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {

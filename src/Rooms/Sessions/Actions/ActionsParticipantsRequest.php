@@ -11,9 +11,10 @@ use Telnyx\Rooms\Sessions\Actions\ActionsParticipantsRequest\Participants;
 use Telnyx\Rooms\Sessions\Actions\ActionsParticipantsRequest\Participants\AllParticipants;
 
 /**
+ * @phpstan-import-type ParticipantsShape from \Telnyx\Rooms\Sessions\Actions\ActionsParticipantsRequest\Participants
+ *
  * @phpstan-type ActionsParticipantsRequestShape = array{
- *   exclude?: list<string>|null,
- *   participants?: null|list<string>|value-of<AllParticipants>,
+ *   exclude?: list<string>|null, participants?: ParticipantsShape|null
  * }
  */
 final class ActionsParticipantsRequest implements BaseModel
@@ -48,7 +49,7 @@ final class ActionsParticipantsRequest implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $exclude
-     * @param AllParticipants|list<string>|value-of<AllParticipants> $participants
+     * @param ParticipantsShape $participants
      */
     public static function with(
         ?array $exclude = null,
@@ -78,7 +79,7 @@ final class ActionsParticipantsRequest implements BaseModel
     /**
      * Either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant.
      *
-     * @param AllParticipants|list<string>|value-of<AllParticipants> $participants
+     * @param ParticipantsShape $participants
      */
     public function withParticipants(
         AllParticipants|array|string $participants

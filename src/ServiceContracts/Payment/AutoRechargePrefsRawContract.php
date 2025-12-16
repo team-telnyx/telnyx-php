@@ -16,7 +16,7 @@ interface AutoRechargePrefsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AutoRechargePrefUpdateParams $params
+     * @param array<string,mixed>|AutoRechargePrefUpdateParams $params
      *
      * @return BaseResponse<AutoRechargePrefUpdateResponse>
      *

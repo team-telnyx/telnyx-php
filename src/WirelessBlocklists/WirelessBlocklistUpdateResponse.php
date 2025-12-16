@@ -7,11 +7,12 @@ namespace Telnyx\WirelessBlocklists;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\WirelessBlocklists\WirelessBlocklist\Type;
 
 /**
+ * @phpstan-import-type WirelessBlocklistShape from \Telnyx\WirelessBlocklists\WirelessBlocklist
+ *
  * @phpstan-type WirelessBlocklistUpdateResponseShape = array{
- *   data?: WirelessBlocklist|null
+ *   data?: null|WirelessBlocklist|WirelessBlocklistShape
  * }
  */
 final class WirelessBlocklistUpdateResponse implements BaseModel
@@ -32,15 +33,7 @@ final class WirelessBlocklistUpdateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param WirelessBlocklist|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   name?: string|null,
-     *   recordType?: string|null,
-     *   type?: value-of<Type>|null,
-     *   updatedAt?: string|null,
-     *   values?: list<string>|null,
-     * } $data
+     * @param WirelessBlocklistShape $data
      */
     public static function with(WirelessBlocklist|array|null $data = null): self
     {
@@ -52,15 +45,7 @@ final class WirelessBlocklistUpdateResponse implements BaseModel
     }
 
     /**
-     * @param WirelessBlocklist|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   name?: string|null,
-     *   recordType?: string|null,
-     *   type?: value-of<Type>|null,
-     *   updatedAt?: string|null,
-     *   values?: list<string>|null,
-     * } $data
+     * @param WirelessBlocklistShape $data
      */
     public function withData(WirelessBlocklist|array $data): self
     {

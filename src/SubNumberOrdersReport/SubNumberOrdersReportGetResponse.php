@@ -8,11 +8,13 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportGetResponse\Data;
-use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportGetResponse\Data\Filters;
-use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportGetResponse\Data\Status;
 
 /**
- * @phpstan-type SubNumberOrdersReportGetResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\SubNumberOrdersReport\SubNumberOrdersReportGetResponse\Data
+ *
+ * @phpstan-type SubNumberOrdersReportGetResponseShape = array{
+ *   data?: null|Data|DataShape
+ * }
  */
 final class SubNumberOrdersReportGetResponse implements BaseModel
 {
@@ -32,15 +34,7 @@ final class SubNumberOrdersReportGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   id?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   filters?: Filters|null,
-     *   orderType?: string|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     *   userID?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -52,15 +46,7 @@ final class SubNumberOrdersReportGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   id?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   filters?: Filters|null,
-     *   orderType?: string|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     *   userID?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

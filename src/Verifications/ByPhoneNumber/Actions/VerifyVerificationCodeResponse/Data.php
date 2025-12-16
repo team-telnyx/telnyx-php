@@ -11,7 +11,7 @@ use Telnyx\Verifications\ByPhoneNumber\Actions\VerifyVerificationCodeResponse\Da
 
 /**
  * @phpstan-type DataShape = array{
- *   phoneNumber: string, responseCode: value-of<ResponseCode>
+ *   phoneNumber: string, responseCode: ResponseCode|value-of<ResponseCode>
  * }
  */
 final class Data implements BaseModel

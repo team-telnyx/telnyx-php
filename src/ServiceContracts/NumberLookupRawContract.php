@@ -16,7 +16,7 @@ interface NumberLookupRawContract
      * @api
      *
      * @param string $phoneNumber The phone number to be looked up
-     * @param array<mixed>|NumberLookupRetrieveParams $params
+     * @param array<string,mixed>|NumberLookupRetrieveParams $params
      *
      * @return BaseResponse<NumberLookupGetResponse>
      *

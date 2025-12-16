@@ -6,15 +6,16 @@ namespace Telnyx\Comments;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Comments\CommentListResponse\Data;
-use Telnyx\Comments\CommentListResponse\Data\CommenterType;
-use Telnyx\Comments\CommentListResponse\Data\CommentRecordType;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\Comments\CommentListResponse\Data
+ * @phpstan-import-type PaginationMetaShape from \Telnyx\AuthenticationProviders\PaginationMeta
+ *
  * @phpstan-type CommentListResponseShape = array{
- *   data?: list<Data>|null, meta?: PaginationMeta|null
+ *   data?: list<DataShape>|null, meta?: null|PaginationMeta|PaginationMetaShape
  * }
  */
 final class CommentListResponse implements BaseModel
@@ -39,20 +40,8 @@ final class CommentListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   id?: string|null,
-     *   body?: string|null,
-     *   commentRecordID?: string|null,
-     *   commentRecordType?: value-of<CommentRecordType>|null,
-     *   commenter?: string|null,
-     *   commenterType?: value-of<CommenterType>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   readAt?: \DateTimeInterface|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }> $data
-     * @param PaginationMeta|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param list<DataShape> $data
+     * @param PaginationMetaShape $meta
      */
     public static function with(
         ?array $data = null,
@@ -67,17 +56,7 @@ final class CommentListResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   id?: string|null,
-     *   body?: string|null,
-     *   commentRecordID?: string|null,
-     *   commentRecordType?: value-of<CommentRecordType>|null,
-     *   commenter?: string|null,
-     *   commenterType?: value-of<CommenterType>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   readAt?: \DateTimeInterface|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {
@@ -88,9 +67,7 @@ final class CommentListResponse implements BaseModel
     }
 
     /**
-     * @param PaginationMeta|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param PaginationMetaShape $meta
      */
     public function withMeta(PaginationMeta|array $meta): self
     {

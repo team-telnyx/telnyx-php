@@ -15,7 +15,7 @@ interface PhoneNumbersRegulatoryRequirementsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PhoneNumbersRegulatoryRequirementRetrieveParams $params
+     * @param array<string,mixed>|PhoneNumbersRegulatoryRequirementRetrieveParams $params
      *
      * @return BaseResponse<PhoneNumbersRegulatoryRequirementGetResponse>
      *

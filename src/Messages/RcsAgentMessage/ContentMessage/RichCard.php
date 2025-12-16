@@ -8,15 +8,15 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\RcsAgentMessage\ContentMessage\RichCard\CarouselCard;
-use Telnyx\Messages\RcsAgentMessage\ContentMessage\RichCard\CarouselCard\CardWidth;
 use Telnyx\Messages\RcsAgentMessage\ContentMessage\RichCard\StandaloneCard;
-use Telnyx\Messages\RcsAgentMessage\ContentMessage\RichCard\StandaloneCard\CardOrientation;
-use Telnyx\Messages\RcsAgentMessage\ContentMessage\RichCard\StandaloneCard\ThumbnailImageAlignment;
-use Telnyx\Messages\RcsCardContent;
 
 /**
+ * @phpstan-import-type CarouselCardShape from \Telnyx\Messages\RcsAgentMessage\ContentMessage\RichCard\CarouselCard
+ * @phpstan-import-type StandaloneCardShape from \Telnyx\Messages\RcsAgentMessage\ContentMessage\RichCard\StandaloneCard
+ *
  * @phpstan-type RichCardShape = array{
- *   carouselCard?: CarouselCard|null, standaloneCard?: StandaloneCard|null
+ *   carouselCard?: null|CarouselCard|CarouselCardShape,
+ *   standaloneCard?: null|StandaloneCard|StandaloneCardShape,
  * }
  */
 final class RichCard implements BaseModel
@@ -46,14 +46,8 @@ final class RichCard implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CarouselCard|array{
-     *   cardContents: list<RcsCardContent>, cardWidth: value-of<CardWidth>
-     * } $carouselCard
-     * @param StandaloneCard|array{
-     *   cardContent: RcsCardContent,
-     *   cardOrientation: value-of<CardOrientation>,
-     *   thumbnailImageAlignment: value-of<ThumbnailImageAlignment>,
-     * } $standaloneCard
+     * @param CarouselCardShape $carouselCard
+     * @param StandaloneCardShape $standaloneCard
      */
     public static function with(
         CarouselCard|array|null $carouselCard = null,
@@ -70,9 +64,7 @@ final class RichCard implements BaseModel
     /**
      * Carousel of cards.
      *
-     * @param CarouselCard|array{
-     *   cardContents: list<RcsCardContent>, cardWidth: value-of<CardWidth>
-     * } $carouselCard
+     * @param CarouselCardShape $carouselCard
      */
     public function withCarouselCard(CarouselCard|array $carouselCard): self
     {
@@ -85,11 +77,7 @@ final class RichCard implements BaseModel
     /**
      * Standalone card.
      *
-     * @param StandaloneCard|array{
-     *   cardContent: RcsCardContent,
-     *   cardOrientation: value-of<CardOrientation>,
-     *   thumbnailImageAlignment: value-of<ThumbnailImageAlignment>,
-     * } $standaloneCard
+     * @param StandaloneCardShape $standaloneCard
      */
     public function withStandaloneCard(
         StandaloneCard|array $standaloneCard

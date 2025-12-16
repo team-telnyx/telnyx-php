@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\MobilePhoneNumbersService::list()
  *
  * @phpstan-type MobilePhoneNumberListParamsShape = array{
- *   pageNumber?: int, pageSize?: int
+ *   pageNumber?: int|null, pageSize?: int|null
  * }
  */
 final class MobilePhoneNumberListParams implements BaseModel

@@ -14,7 +14,7 @@ interface ActionsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ActionDeleteParams $params
+     * @param array<string,mixed>|ActionDeleteParams $params
      *
      * @return BaseResponse<mixed>
      *

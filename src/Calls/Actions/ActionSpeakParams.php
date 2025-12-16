@@ -8,7 +8,6 @@ use Telnyx\Calls\Actions\ActionSpeakParams\Language;
 use Telnyx\Calls\Actions\ActionSpeakParams\PayloadType;
 use Telnyx\Calls\Actions\ActionSpeakParams\ServiceLevel;
 use Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings;
-use Telnyx\Calls\Actions\ElevenLabsVoiceSettings\Type;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -25,23 +24,18 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Calls\ActionsService::speak()
  *
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings
+ *
  * @phpstan-type ActionSpeakParamsShape = array{
  *   payload: string,
  *   voice: string,
- *   clientState?: string,
- *   commandID?: string,
- *   language?: Language|value-of<Language>,
- *   payloadType?: PayloadType|value-of<PayloadType>,
- *   serviceLevel?: ServiceLevel|value-of<ServiceLevel>,
- *   stop?: string,
- *   voiceSettings?: ElevenLabsVoiceSettings|array{
- *     type: value-of<Type>, apiKeyRef?: string|null
- *   }|TelnyxVoiceSettings|array{
- *     type: value-of<\Telnyx\Calls\Actions\TelnyxVoiceSettings\Type>,
- *     voiceSpeed?: float|null,
- *   }|AwsVoiceSettings|array{
- *     type: value-of<\Telnyx\Calls\Actions\AwsVoiceSettings\Type>
- *   },
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   language?: null|Language|value-of<Language>,
+ *   payloadType?: null|PayloadType|value-of<PayloadType>,
+ *   serviceLevel?: null|ServiceLevel|value-of<ServiceLevel>,
+ *   stop?: string|null,
+ *   voiceSettings?: VoiceSettingsShape|null,
  * }
  */
 final class ActionSpeakParams implements BaseModel
@@ -147,14 +141,7 @@ final class ActionSpeakParams implements BaseModel
      * @param Language|value-of<Language> $language
      * @param PayloadType|value-of<PayloadType> $payloadType
      * @param ServiceLevel|value-of<ServiceLevel> $serviceLevel
-     * @param ElevenLabsVoiceSettings|array{
-     *   type: value-of<Type>, apiKeyRef?: string|null
-     * }|TelnyxVoiceSettings|array{
-     *   type: value-of<TelnyxVoiceSettings\Type>,
-     *   voiceSpeed?: float|null,
-     * }|AwsVoiceSettings|array{
-     *   type: value-of<AwsVoiceSettings\Type>
-     * } $voiceSettings
+     * @param VoiceSettingsShape $voiceSettings
      */
     public static function with(
         string $payload,
@@ -290,14 +277,7 @@ final class ActionSpeakParams implements BaseModel
     /**
      * The settings associated with the voice selected.
      *
-     * @param ElevenLabsVoiceSettings|array{
-     *   type: value-of<Type>, apiKeyRef?: string|null
-     * }|TelnyxVoiceSettings|array{
-     *   type: value-of<TelnyxVoiceSettings\Type>,
-     *   voiceSpeed?: float|null,
-     * }|AwsVoiceSettings|array{
-     *   type: value-of<AwsVoiceSettings\Type>
-     * } $voiceSettings
+     * @param VoiceSettingsShape $voiceSettings
      */
     public function withVoiceSettings(
         ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings $voiceSettings,

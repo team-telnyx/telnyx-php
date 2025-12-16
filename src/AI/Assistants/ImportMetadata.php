@@ -11,7 +11,8 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ImportMetadataShape = array{
- *   importID?: string|null, importProvider?: value-of<ImportProvider>|null
+ *   importID?: string|null,
+ *   importProvider?: null|ImportProvider|value-of<ImportProvider>,
  * }
  */
 final class ImportMetadata implements BaseModel

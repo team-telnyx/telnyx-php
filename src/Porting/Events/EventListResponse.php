@@ -14,6 +14,16 @@ use Telnyx\Porting\Events\EventListResponse\PortingEventSplitEvent;
 use Telnyx\Porting\Events\EventListResponse\PortingEventStatusChangedEvent;
 use Telnyx\Porting\Events\EventListResponse\PortingEventWithoutWebhook;
 
+/**
+ * @phpstan-import-type PortingEventDeletedPayloadShape from \Telnyx\Porting\Events\EventListResponse\PortingEventDeletedPayload
+ * @phpstan-import-type PortingEventMessagingChangedPayloadShape from \Telnyx\Porting\Events\EventListResponse\PortingEventMessagingChangedPayload
+ * @phpstan-import-type PortingEventStatusChangedEventShape from \Telnyx\Porting\Events\EventListResponse\PortingEventStatusChangedEvent
+ * @phpstan-import-type PortingEventNewCommentEventShape from \Telnyx\Porting\Events\EventListResponse\PortingEventNewCommentEvent
+ * @phpstan-import-type PortingEventSplitEventShape from \Telnyx\Porting\Events\EventListResponse\PortingEventSplitEvent
+ * @phpstan-import-type PortingEventWithoutWebhookShape from \Telnyx\Porting\Events\EventListResponse\PortingEventWithoutWebhook
+ *
+ * @phpstan-type EventListResponseShape = PortingEventDeletedPayloadShape|PortingEventMessagingChangedPayloadShape|PortingEventStatusChangedEventShape|PortingEventNewCommentEventShape|PortingEventSplitEventShape|PortingEventWithoutWebhookShape
+ */
 final class EventListResponse implements ConverterSource
 {
     use SdkUnion;

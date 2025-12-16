@@ -8,10 +8,11 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\Comments\CommentNewResponse\Data;
-use Telnyx\PortingOrders\Comments\CommentNewResponse\Data\UserType;
 
 /**
- * @phpstan-type CommentNewResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\PortingOrders\Comments\CommentNewResponse\Data
+ *
+ * @phpstan-type CommentNewResponseShape = array{data?: null|Data|DataShape}
  */
 final class CommentNewResponse implements BaseModel
 {
@@ -31,14 +32,7 @@ final class CommentNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   id?: string|null,
-     *   body?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   portingOrderID?: string|null,
-     *   recordType?: string|null,
-     *   userType?: value-of<UserType>|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -50,14 +44,7 @@ final class CommentNewResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   id?: string|null,
-     *   body?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   portingOrderID?: string|null,
-     *   recordType?: string|null,
-     *   userType?: value-of<UserType>|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

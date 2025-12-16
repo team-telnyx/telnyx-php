@@ -16,9 +16,12 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\PhoneNum
  *
  * @see Telnyx\Services\PortingOrders\PhoneNumberBlocksService::create()
  *
+ * @phpstan-import-type ActivationRangeShape from \Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\ActivationRange
+ * @phpstan-import-type PhoneNumberRangeShape from \Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\PhoneNumberRange
+ *
  * @phpstan-type PhoneNumberBlockCreateParamsShape = array{
- *   activationRanges: list<ActivationRange|array{endAt: string, startAt: string}>,
- *   phoneNumberRange: PhoneNumberRange|array{endAt: string, startAt: string},
+ *   activationRanges: list<ActivationRangeShape>,
+ *   phoneNumberRange: PhoneNumberRangeShape,
  * }
  */
 final class PhoneNumberBlockCreateParams implements BaseModel
@@ -64,10 +67,8 @@ final class PhoneNumberBlockCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ActivationRange|array{
-     *   endAt: string, startAt: string
-     * }> $activationRanges
-     * @param PhoneNumberRange|array{endAt: string, startAt: string} $phoneNumberRange
+     * @param list<ActivationRangeShape> $activationRanges
+     * @param PhoneNumberRangeShape $phoneNumberRange
      */
     public static function with(
         array $activationRanges,
@@ -84,9 +85,7 @@ final class PhoneNumberBlockCreateParams implements BaseModel
     /**
      * Specifies the activation ranges for this porting phone number block. The activation range must be within the block range and should not overlap with other activation ranges.
      *
-     * @param list<ActivationRange|array{
-     *   endAt: string, startAt: string
-     * }> $activationRanges
+     * @param list<ActivationRangeShape> $activationRanges
      */
     public function withActivationRanges(array $activationRanges): self
     {
@@ -97,7 +96,7 @@ final class PhoneNumberBlockCreateParams implements BaseModel
     }
 
     /**
-     * @param PhoneNumberRange|array{endAt: string, startAt: string} $phoneNumberRange
+     * @param PhoneNumberRangeShape $phoneNumberRange
      */
     public function withPhoneNumberRange(
         PhoneNumberRange|array $phoneNumberRange

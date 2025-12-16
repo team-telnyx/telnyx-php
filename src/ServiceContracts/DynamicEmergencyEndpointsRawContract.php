@@ -20,7 +20,7 @@ interface DynamicEmergencyEndpointsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|DynamicEmergencyEndpointCreateParams $params
+     * @param array<string,mixed>|DynamicEmergencyEndpointCreateParams $params
      *
      * @return BaseResponse<DynamicEmergencyEndpointNewResponse>
      *
@@ -48,7 +48,7 @@ interface DynamicEmergencyEndpointsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|DynamicEmergencyEndpointListParams $params
+     * @param array<string,mixed>|DynamicEmergencyEndpointListParams $params
      *
      * @return BaseResponse<DefaultPagination<DynamicEmergencyEndpoint>>
      *

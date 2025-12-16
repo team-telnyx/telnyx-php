@@ -22,7 +22,7 @@ interface AuthenticationProvidersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AuthenticationProviderCreateParams $params
+     * @param array<string,mixed>|AuthenticationProviderCreateParams $params
      *
      * @return BaseResponse<AuthenticationProviderNewResponse>
      *
@@ -51,7 +51,7 @@ interface AuthenticationProvidersRawContract
      * @api
      *
      * @param string $id identifies the resource
-     * @param array<mixed>|AuthenticationProviderUpdateParams $params
+     * @param array<string,mixed>|AuthenticationProviderUpdateParams $params
      *
      * @return BaseResponse<AuthenticationProviderUpdateResponse>
      *
@@ -66,7 +66,7 @@ interface AuthenticationProvidersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AuthenticationProviderListParams $params
+     * @param array<string,mixed>|AuthenticationProviderListParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<AuthenticationProvider>>
      *

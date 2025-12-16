@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   creditLimit?: string|null,
  *   currency?: string|null,
  *   pending?: string|null,
- *   recordType?: value-of<RecordType>|null,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  * }
  */
 final class Data implements BaseModel

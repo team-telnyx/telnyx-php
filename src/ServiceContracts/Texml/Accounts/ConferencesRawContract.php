@@ -24,7 +24,7 @@ interface ConferencesRawContract
      * @api
      *
      * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
-     * @param array<mixed>|ConferenceRetrieveParams $params
+     * @param array<string,mixed>|ConferenceRetrieveParams $params
      *
      * @return BaseResponse<ConferenceGetResponse>
      *
@@ -40,7 +40,7 @@ interface ConferencesRawContract
      * @api
      *
      * @param string $conferenceSid path param: The ConferenceSid that uniquely identifies a conference
-     * @param array<mixed>|ConferenceUpdateParams $params
+     * @param array<string,mixed>|ConferenceUpdateParams $params
      *
      * @return BaseResponse<ConferenceUpdateResponse>
      *
@@ -56,7 +56,7 @@ interface ConferencesRawContract
      * @api
      *
      * @param string $accountSid the id of the account the resource belongs to
-     * @param array<mixed>|ConferenceRetrieveConferencesParams $params
+     * @param array<string,mixed>|ConferenceRetrieveConferencesParams $params
      *
      * @return BaseResponse<ConferenceGetConferencesResponse>
      *
@@ -72,7 +72,7 @@ interface ConferencesRawContract
      * @api
      *
      * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
-     * @param array<mixed>|ConferenceRetrieveRecordingsParams $params
+     * @param array<string,mixed>|ConferenceRetrieveRecordingsParams $params
      *
      * @return BaseResponse<ConferenceGetRecordingsResponse>
      *
@@ -88,7 +88,7 @@ interface ConferencesRawContract
      * @api
      *
      * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
-     * @param array<mixed>|ConferenceRetrieveRecordingsJsonParams $params
+     * @param array<string,mixed>|ConferenceRetrieveRecordingsJsonParams $params
      *
      * @return BaseResponse<ConferenceGetRecordingsJsonResponse>
      *

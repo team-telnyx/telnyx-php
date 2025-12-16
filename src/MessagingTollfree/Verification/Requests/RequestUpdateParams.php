@@ -15,6 +15,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\MessagingTollfree\Verification\RequestsService::update()
  *
+ * @phpstan-import-type URLShape from \Telnyx\MessagingTollfree\Verification\Requests\URL
+ * @phpstan-import-type TfPhoneNumberShape from \Telnyx\MessagingTollfree\Verification\Requests\TfPhoneNumber
+ *
  * @phpstan-type RequestUpdateParamsShape = array{
  *   additionalInformation: string,
  *   businessAddr1: string,
@@ -30,13 +33,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *   isvReseller: string,
  *   messageVolume: Volume|value-of<Volume>,
  *   optInWorkflow: string,
- *   optInWorkflowImageURLs: list<URL|array{url: string}>,
- *   phoneNumbers: list<TfPhoneNumber|array{phoneNumber: string}>,
+ *   optInWorkflowImageURLs: list<URLShape>,
+ *   phoneNumbers: list<TfPhoneNumberShape>,
  *   productionMessageContent: string,
  *   useCase: UseCaseCategories|value-of<UseCaseCategories>,
  *   useCaseSummary: string,
- *   ageGatedContent?: bool,
- *   businessAddr2?: string,
+ *   ageGatedContent?: bool|null,
+ *   businessAddr2?: string|null,
  *   businessRegistrationCountry?: string|null,
  *   businessRegistrationNumber?: string|null,
  *   businessRegistrationType?: string|null,
@@ -47,7 +50,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   optInKeywords?: string|null,
  *   privacyPolicyURL?: string|null,
  *   termsAndConditionURL?: string|null,
- *   webhookURL?: string,
+ *   webhookURL?: string|null,
  * }
  */
 final class RequestUpdateParams implements BaseModel
@@ -322,8 +325,8 @@ final class RequestUpdateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Volume|value-of<Volume> $messageVolume
-     * @param list<URL|array{url: string}> $optInWorkflowImageURLs
-     * @param list<TfPhoneNumber|array{phoneNumber: string}> $phoneNumbers
+     * @param list<URLShape> $optInWorkflowImageURLs
+     * @param list<TfPhoneNumberShape> $phoneNumbers
      * @param UseCaseCategories|value-of<UseCaseCategories> $useCase
      * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null $entityType
      */
@@ -562,7 +565,7 @@ final class RequestUpdateParams implements BaseModel
     /**
      * Images showing the opt-in workflow.
      *
-     * @param list<URL|array{url: string}> $optInWorkflowImageURLs
+     * @param list<URLShape> $optInWorkflowImageURLs
      */
     public function withOptInWorkflowImageURLs(
         array $optInWorkflowImageURLs
@@ -576,7 +579,7 @@ final class RequestUpdateParams implements BaseModel
     /**
      * The phone numbers to request the verification of.
      *
-     * @param list<TfPhoneNumber|array{phoneNumber: string}> $phoneNumbers
+     * @param list<TfPhoneNumberShape> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {

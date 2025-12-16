@@ -15,12 +15,12 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\VirtualCrossConnectsService::update()
  *
  * @phpstan-type VirtualCrossConnectUpdateParamsShape = array{
- *   primaryCloudIP?: string,
- *   primaryEnabled?: bool,
- *   primaryRoutingAnnouncement?: bool,
- *   secondaryCloudIP?: string,
- *   secondaryEnabled?: bool,
- *   secondaryRoutingAnnouncement?: bool,
+ *   primaryCloudIP?: string|null,
+ *   primaryEnabled?: bool|null,
+ *   primaryRoutingAnnouncement?: bool|null,
+ *   secondaryCloudIP?: string|null,
+ *   secondaryEnabled?: bool|null,
+ *   secondaryRoutingAnnouncement?: bool|null,
  * }
  */
 final class VirtualCrossConnectUpdateParams implements BaseModel

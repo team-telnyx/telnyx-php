@@ -10,8 +10,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type FunctionShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam\Function_
+ *
  * @phpstan-type ChatCompletionToolParamShape = array{
- *   function: Function_, type?: 'function'
+ *   function: Function_|FunctionShape, type: 'function'
  * }
  */
 final class ChatCompletionToolParam implements BaseModel
@@ -50,9 +52,7 @@ final class ChatCompletionToolParam implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Function_|array{
-     *   name: string, description?: string|null, parameters?: array<string,mixed>|null
-     * } $function
+     * @param FunctionShape $function
      */
     public static function with(Function_|array $function): self
     {
@@ -64,9 +64,7 @@ final class ChatCompletionToolParam implements BaseModel
     }
 
     /**
-     * @param Function_|array{
-     *   name: string, description?: string|null, parameters?: array<string,mixed>|null
-     * } $function
+     * @param FunctionShape $function
      */
     public function withFunction(Function_|array $function): self
     {

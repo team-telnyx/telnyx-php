@@ -16,7 +16,7 @@ use Telnyx\RequirementGroups\RequirementGroup\RegulatoryRequirement\Status;
  *   fieldType?: string|null,
  *   fieldValue?: string|null,
  *   requirementID?: string|null,
- *   status?: value-of<\Telnyx\RequirementGroups\RequirementGroup\RegulatoryRequirement\Status>|null,
+ *   status?: null|\Telnyx\RequirementGroups\RequirementGroup\RegulatoryRequirement\Status|value-of<\Telnyx\RequirementGroups\RequirementGroup\RegulatoryRequirement\Status>,
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */

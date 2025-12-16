@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortabilityChecks\PortabilityCheckRunResponse\Data;
 
 /**
- * @phpstan-type PortabilityCheckRunResponseShape = array{data?: list<Data>|null}
+ * @phpstan-import-type DataShape from \Telnyx\PortabilityChecks\PortabilityCheckRunResponse\Data
+ *
+ * @phpstan-type PortabilityCheckRunResponseShape = array{
+ *   data?: list<DataShape>|null
+ * }
  */
 final class PortabilityCheckRunResponse implements BaseModel
 {
@@ -31,13 +35,7 @@ final class PortabilityCheckRunResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   fastPortable?: bool|null,
-     *   notPortableReason?: string|null,
-     *   phoneNumber?: string|null,
-     *   portable?: bool|null,
-     *   recordType?: string|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public static function with(?array $data = null): self
     {
@@ -49,13 +47,7 @@ final class PortabilityCheckRunResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   fastPortable?: bool|null,
-     *   notPortableReason?: string|null,
-     *   phoneNumber?: string|null,
-     *   portable?: bool|null,
-     *   recordType?: string|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {

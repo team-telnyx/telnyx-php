@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace Telnyx\AuthenticationProviders;
 
-use Telnyx\AuthenticationProviders\AuthenticationProvider\Settings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type AuthenticationProviderShape from \Telnyx\AuthenticationProviders\AuthenticationProvider
+ *
  * @phpstan-type AuthenticationProviderDeleteResponseShape = array{
- *   data?: AuthenticationProvider|null
+ *   data?: null|AuthenticationProvider|AuthenticationProviderShape
  * }
  */
 final class AuthenticationProviderDeleteResponse implements BaseModel
@@ -32,17 +33,7 @@ final class AuthenticationProviderDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AuthenticationProvider|array{
-     *   id?: string|null,
-     *   active?: bool|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   name?: string|null,
-     *   organizationID?: string|null,
-     *   recordType?: string|null,
-     *   settings?: Settings|null,
-     *   shortName?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param AuthenticationProviderShape $data
      */
     public static function with(AuthenticationProvider|array|null $data = null): self
     {
@@ -54,17 +45,7 @@ final class AuthenticationProviderDeleteResponse implements BaseModel
     }
 
     /**
-     * @param AuthenticationProvider|array{
-     *   id?: string|null,
-     *   active?: bool|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   name?: string|null,
-     *   organizationID?: string|null,
-     *   recordType?: string|null,
-     *   settings?: Settings|null,
-     *   shortName?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param AuthenticationProviderShape $data
      */
     public function withData(AuthenticationProvider|array $data): self
     {

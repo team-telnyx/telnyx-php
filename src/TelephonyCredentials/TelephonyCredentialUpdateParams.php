@@ -15,7 +15,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\TelephonyCredentialsService::update()
  *
  * @phpstan-type TelephonyCredentialUpdateParamsShape = array{
- *   connectionID?: string, expiresAt?: string, name?: string, tag?: string
+ *   connectionID?: string|null,
+ *   expiresAt?: string|null,
+ *   name?: string|null,
+ *   tag?: string|null,
  * }
  */
 final class TelephonyCredentialUpdateParams implements BaseModel

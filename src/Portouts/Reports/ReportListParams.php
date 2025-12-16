@@ -9,8 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\Reports\ReportListParams\Filter;
-use Telnyx\Portouts\Reports\ReportListParams\Filter\ReportType;
-use Telnyx\Portouts\Reports\ReportListParams\Filter\Status;
 use Telnyx\Portouts\Reports\ReportListParams\Page;
 
 /**
@@ -18,11 +16,11 @@ use Telnyx\Portouts\Reports\ReportListParams\Page;
  *
  * @see Telnyx\Services\Portouts\ReportsService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\Portouts\Reports\ReportListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Portouts\Reports\ReportListParams\Page
+ *
  * @phpstan-type ReportListParamsShape = array{
- *   filter?: Filter|array{
- *     reportType?: value-of<ReportType>|null, status?: value-of<Status>|null
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   filter?: FilterShape|null, page?: PageShape|null
  * }
  */
 final class ReportListParams implements BaseModel
@@ -53,10 +51,8 @@ final class ReportListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   reportType?: value-of<ReportType>|null, status?: value-of<Status>|null
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -73,9 +69,7 @@ final class ReportListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[report_type], filter[status].
      *
-     * @param Filter|array{
-     *   reportType?: value-of<ReportType>|null, status?: value-of<Status>|null
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -88,7 +82,7 @@ final class ReportListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

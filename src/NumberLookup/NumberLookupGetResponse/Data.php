@@ -9,19 +9,21 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data\CallerName;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Carrier;
-use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Carrier\Type;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Portability;
-use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Portability\PortedStatus;
 
 /**
+ * @phpstan-import-type CallerNameShape from \Telnyx\NumberLookup\NumberLookupGetResponse\Data\CallerName
+ * @phpstan-import-type CarrierShape from \Telnyx\NumberLookup\NumberLookupGetResponse\Data\Carrier
+ * @phpstan-import-type PortabilityShape from \Telnyx\NumberLookup\NumberLookupGetResponse\Data\Portability
+ *
  * @phpstan-type DataShape = array{
- *   callerName?: CallerName|null,
- *   carrier?: Carrier|null,
+ *   callerName?: null|CallerName|CallerNameShape,
+ *   carrier?: null|Carrier|CarrierShape,
  *   countryCode?: string|null,
  *   fraud?: string|null,
  *   nationalFormat?: string|null,
  *   phoneNumber?: string|null,
- *   portability?: Portability|null,
+ *   portability?: null|Portability|PortabilityShape,
  *   recordType?: string|null,
  * }
  */
@@ -79,32 +81,9 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CallerName|array{
-     *   callerName?: string|null, errorCode?: string|null
-     * } $callerName
-     * @param Carrier|array{
-     *   errorCode?: string|null,
-     *   mobileCountryCode?: string|null,
-     *   mobileNetworkCode?: string|null,
-     *   name?: string|null,
-     *   normalizedCarrier?: string|null,
-     *   type?: value-of<Type>|null,
-     * } $carrier
-     * @param Portability|array{
-     *   altspid?: string|null,
-     *   altspidCarrierName?: string|null,
-     *   altspidCarrierType?: string|null,
-     *   city?: string|null,
-     *   lineType?: string|null,
-     *   lrn?: string|null,
-     *   ocn?: string|null,
-     *   portedDate?: string|null,
-     *   portedStatus?: value-of<PortedStatus>|null,
-     *   spid?: string|null,
-     *   spidCarrierName?: string|null,
-     *   spidCarrierType?: string|null,
-     *   state?: string|null,
-     * } $portability
+     * @param CallerNameShape $callerName
+     * @param CarrierShape $carrier
+     * @param PortabilityShape $portability
      */
     public static function with(
         CallerName|array|null $callerName = null,
@@ -131,9 +110,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param CallerName|array{
-     *   callerName?: string|null, errorCode?: string|null
-     * } $callerName
+     * @param CallerNameShape $callerName
      */
     public function withCallerName(CallerName|array $callerName): self
     {
@@ -144,14 +121,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param Carrier|array{
-     *   errorCode?: string|null,
-     *   mobileCountryCode?: string|null,
-     *   mobileNetworkCode?: string|null,
-     *   name?: string|null,
-     *   normalizedCarrier?: string|null,
-     *   type?: value-of<Type>|null,
-     * } $carrier
+     * @param CarrierShape $carrier
      */
     public function withCarrier(Carrier|array $carrier): self
     {
@@ -206,21 +176,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param Portability|array{
-     *   altspid?: string|null,
-     *   altspidCarrierName?: string|null,
-     *   altspidCarrierType?: string|null,
-     *   city?: string|null,
-     *   lineType?: string|null,
-     *   lrn?: string|null,
-     *   ocn?: string|null,
-     *   portedDate?: string|null,
-     *   portedStatus?: value-of<PortedStatus>|null,
-     *   spid?: string|null,
-     *   spidCarrierName?: string|null,
-     *   spidCarrierType?: string|null,
-     *   state?: string|null,
-     * } $portability
+     * @param PortabilityShape $portability
      */
     public function withPortability(Portability|array $portability): self
     {

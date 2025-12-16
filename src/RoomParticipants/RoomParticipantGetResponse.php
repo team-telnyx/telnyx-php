@@ -10,8 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RoomParticipant;
 
 /**
+ * @phpstan-import-type RoomParticipantShape from \Telnyx\RoomParticipant
+ *
  * @phpstan-type RoomParticipantGetResponseShape = array{
- *   data?: RoomParticipant|null
+ *   data?: null|RoomParticipant|RoomParticipantShape
  * }
  */
 final class RoomParticipantGetResponse implements BaseModel
@@ -32,15 +34,7 @@ final class RoomParticipantGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RoomParticipant|array{
-     *   id?: string|null,
-     *   context?: string|null,
-     *   joinedAt?: \DateTimeInterface|null,
-     *   leftAt?: \DateTimeInterface|null,
-     *   recordType?: string|null,
-     *   sessionID?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param RoomParticipantShape $data
      */
     public static function with(RoomParticipant|array|null $data = null): self
     {
@@ -52,15 +46,7 @@ final class RoomParticipantGetResponse implements BaseModel
     }
 
     /**
-     * @param RoomParticipant|array{
-     *   id?: string|null,
-     *   context?: string|null,
-     *   joinedAt?: \DateTimeInterface|null,
-     *   leftAt?: \DateTimeInterface|null,
-     *   recordType?: string|null,
-     *   sessionID?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param RoomParticipantShape $data
      */
     public function withData(RoomParticipant|array $data): self
     {

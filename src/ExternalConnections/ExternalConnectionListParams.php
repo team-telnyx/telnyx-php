@@ -9,9 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\ExternalConnectionListParams\Filter;
-use Telnyx\ExternalConnections\ExternalConnectionListParams\Filter\ConnectionName;
-use Telnyx\ExternalConnections\ExternalConnectionListParams\Filter\ExternalSipConnection;
-use Telnyx\ExternalConnections\ExternalConnectionListParams\Filter\PhoneNumber;
 use Telnyx\ExternalConnections\ExternalConnectionListParams\Page;
 
 /**
@@ -19,15 +16,11 @@ use Telnyx\ExternalConnections\ExternalConnectionListParams\Page;
  *
  * @see Telnyx\Services\ExternalConnectionsService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\ExternalConnections\ExternalConnectionListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\ExternalConnections\ExternalConnectionListParams\Page
+ *
  * @phpstan-type ExternalConnectionListParamsShape = array{
- *   filter?: Filter|array{
- *     id?: string|null,
- *     connectionName?: ConnectionName|null,
- *     createdAt?: string|null,
- *     externalSipConnection?: value-of<ExternalSipConnection>|null,
- *     phoneNumber?: PhoneNumber|null,
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   filter?: FilterShape|null, page?: PageShape|null
  * }
  */
 final class ExternalConnectionListParams implements BaseModel
@@ -58,14 +51,8 @@ final class ExternalConnectionListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   id?: string|null,
-     *   connectionName?: ConnectionName|null,
-     *   createdAt?: string|null,
-     *   externalSipConnection?: value-of<ExternalSipConnection>|null,
-     *   phoneNumber?: PhoneNumber|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -82,13 +69,7 @@ final class ExternalConnectionListParams implements BaseModel
     /**
      * Filter parameter for external connections (deepObject style). Supports filtering by connection_name, external_sip_connection, id, created_at, and phone_number.
      *
-     * @param Filter|array{
-     *   id?: string|null,
-     *   connectionName?: ConnectionName|null,
-     *   createdAt?: string|null,
-     *   externalSipConnection?: value-of<ExternalSipConnection>|null,
-     *   phoneNumber?: PhoneNumber|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -101,7 +82,7 @@ final class ExternalConnectionListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

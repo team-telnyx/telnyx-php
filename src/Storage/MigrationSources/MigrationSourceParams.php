@@ -12,10 +12,12 @@ use Telnyx\Storage\MigrationSources\MigrationSourceParams\Provider;
 use Telnyx\Storage\MigrationSources\MigrationSourceParams\ProviderAuth;
 
 /**
+ * @phpstan-import-type ProviderAuthShape from \Telnyx\Storage\MigrationSources\MigrationSourceParams\ProviderAuth
+ *
  * @phpstan-type MigrationSourceParamsShape = array{
  *   bucketName: string,
- *   provider: value-of<Provider>,
- *   providerAuth: ProviderAuth,
+ *   provider: Provider|value-of<Provider>,
+ *   providerAuth: ProviderAuth|ProviderAuthShape,
  *   id?: string|null,
  *   sourceRegion?: string|null,
  * }
@@ -82,9 +84,7 @@ final class MigrationSourceParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Provider|value-of<Provider> $provider
-     * @param ProviderAuth|array{
-     *   accessKey?: string|null, secretAccessKey?: string|null
-     * } $providerAuth
+     * @param ProviderAuthShape $providerAuth
      */
     public static function with(
         string $bucketName,
@@ -130,9 +130,7 @@ final class MigrationSourceParams implements BaseModel
     }
 
     /**
-     * @param ProviderAuth|array{
-     *   accessKey?: string|null, secretAccessKey?: string|null
-     * } $providerAuth
+     * @param ProviderAuthShape $providerAuth
      */
     public function withProviderAuth(ProviderAuth|array $providerAuth): self
     {

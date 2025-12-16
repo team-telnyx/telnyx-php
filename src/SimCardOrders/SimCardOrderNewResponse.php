@@ -7,12 +7,13 @@ namespace Telnyx\SimCardOrders;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\SimCardOrders\SimCardOrder\Cost;
-use Telnyx\SimCardOrders\SimCardOrder\OrderAddress;
-use Telnyx\SimCardOrders\SimCardOrder\Status;
 
 /**
- * @phpstan-type SimCardOrderNewResponseShape = array{data?: SimCardOrder|null}
+ * @phpstan-import-type SimCardOrderShape from \Telnyx\SimCardOrders\SimCardOrder
+ *
+ * @phpstan-type SimCardOrderNewResponseShape = array{
+ *   data?: null|SimCardOrder|SimCardOrderShape
+ * }
  */
 final class SimCardOrderNewResponse implements BaseModel
 {
@@ -32,17 +33,7 @@ final class SimCardOrderNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SimCardOrder|array{
-     *   id?: string|null,
-     *   cost?: Cost|null,
-     *   createdAt?: string|null,
-     *   orderAddress?: OrderAddress|null,
-     *   quantity?: int|null,
-     *   recordType?: string|null,
-     *   status?: value-of<Status>|null,
-     *   trackingURL?: string|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param SimCardOrderShape $data
      */
     public static function with(SimCardOrder|array|null $data = null): self
     {
@@ -54,17 +45,7 @@ final class SimCardOrderNewResponse implements BaseModel
     }
 
     /**
-     * @param SimCardOrder|array{
-     *   id?: string|null,
-     *   cost?: Cost|null,
-     *   createdAt?: string|null,
-     *   orderAddress?: OrderAddress|null,
-     *   quantity?: int|null,
-     *   recordType?: string|null,
-     *   status?: value-of<Status>|null,
-     *   trackingURL?: string|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param SimCardOrderShape $data
      */
     public function withData(SimCardOrder|array $data): self
     {

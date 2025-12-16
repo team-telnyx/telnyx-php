@@ -7,12 +7,12 @@ namespace Telnyx\Storage\MigrationSources;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Storage\MigrationSources\MigrationSourceParams\Provider;
-use Telnyx\Storage\MigrationSources\MigrationSourceParams\ProviderAuth;
 
 /**
+ * @phpstan-import-type MigrationSourceParamsShape from \Telnyx\Storage\MigrationSources\MigrationSourceParams
+ *
  * @phpstan-type MigrationSourceGetResponseShape = array{
- *   data?: MigrationSourceParams|null
+ *   data?: null|MigrationSourceParams|MigrationSourceParamsShape
  * }
  */
 final class MigrationSourceGetResponse implements BaseModel
@@ -33,13 +33,7 @@ final class MigrationSourceGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MigrationSourceParams|array{
-     *   bucketName: string,
-     *   provider: value-of<Provider>,
-     *   providerAuth: ProviderAuth,
-     *   id?: string|null,
-     *   sourceRegion?: string|null,
-     * } $data
+     * @param MigrationSourceParamsShape $data
      */
     public static function with(MigrationSourceParams|array|null $data = null): self
     {
@@ -51,13 +45,7 @@ final class MigrationSourceGetResponse implements BaseModel
     }
 
     /**
-     * @param MigrationSourceParams|array{
-     *   bucketName: string,
-     *   provider: value-of<Provider>,
-     *   providerAuth: ProviderAuth,
-     *   id?: string|null,
-     *   sourceRegion?: string|null,
-     * } $data
+     * @param MigrationSourceParamsShape $data
      */
     public function withData(MigrationSourceParams|array $data): self
     {

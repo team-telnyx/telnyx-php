@@ -15,7 +15,7 @@ interface CdrUsageReportsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|CdrUsageReportFetchSyncParams $params
+     * @param array<string,mixed>|CdrUsageReportFetchSyncParams $params
      *
      * @return BaseResponse<CdrUsageReportFetchSyncResponse>
      *

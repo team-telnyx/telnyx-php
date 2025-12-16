@@ -8,6 +8,12 @@ use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 
+/**
+ * @phpstan-import-type ScheduledPhoneCallEventResponseShape from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledPhoneCallEventResponse
+ * @phpstan-import-type ScheduledSMSEventResponseShape from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledSMSEventResponse
+ *
+ * @phpstan-type ScheduledEventListResponseShape = ScheduledPhoneCallEventResponseShape|ScheduledSMSEventResponseShape
+ */
 final class ScheduledEventListResponse implements ConverterSource
 {
     use SdkUnion;

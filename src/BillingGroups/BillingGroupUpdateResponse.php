@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace Telnyx\BillingGroups;
 
-use Telnyx\BillingGroups\BillingGroup\RecordType;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type BillingGroupUpdateResponseShape = array{data?: BillingGroup|null}
+ * @phpstan-import-type BillingGroupShape from \Telnyx\BillingGroups\BillingGroup
+ *
+ * @phpstan-type BillingGroupUpdateResponseShape = array{
+ *   data?: null|BillingGroup|BillingGroupShape
+ * }
  */
 final class BillingGroupUpdateResponse implements BaseModel
 {
@@ -30,15 +33,7 @@ final class BillingGroupUpdateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BillingGroup|array{
-     *   id?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   deletedAt?: \DateTimeInterface|null,
-     *   name?: string|null,
-     *   organizationID?: string|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param BillingGroupShape $data
      */
     public static function with(BillingGroup|array|null $data = null): self
     {
@@ -50,15 +45,7 @@ final class BillingGroupUpdateResponse implements BaseModel
     }
 
     /**
-     * @param BillingGroup|array{
-     *   id?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   deletedAt?: \DateTimeInterface|null,
-     *   name?: string|null,
-     *   organizationID?: string|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param BillingGroupShape $data
      */
     public function withData(BillingGroup|array $data): self
     {

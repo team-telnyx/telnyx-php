@@ -17,7 +17,7 @@ interface MigrationsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MigrationCreateParams $params
+     * @param array<string,mixed>|MigrationCreateParams $params
      *
      * @return BaseResponse<MigrationNewResponse>
      *

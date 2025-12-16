@@ -5,15 +5,14 @@ declare(strict_types=1);
 namespace Telnyx\Addresses\Actions;
 
 use Telnyx\Addresses\Actions\ActionValidateResponse\Data;
-use Telnyx\Addresses\Actions\ActionValidateResponse\Data\Result;
-use Telnyx\Addresses\Actions\ActionValidateResponse\Data\Suggested;
-use Telnyx\APIError;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ActionValidateResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\Addresses\Actions\ActionValidateResponse\Data
+ *
+ * @phpstan-type ActionValidateResponseShape = array{data?: null|Data|DataShape}
  */
 final class ActionValidateResponse implements BaseModel
 {
@@ -33,12 +32,7 @@ final class ActionValidateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   result: value-of<Result>,
-     *   suggested: Suggested,
-     *   errors?: list<APIError>|null,
-     *   recordType?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -50,12 +44,7 @@ final class ActionValidateResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   result: value-of<Result>,
-     *   suggested: Suggested,
-     *   errors?: list<APIError>|null,
-     *   recordType?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

@@ -12,6 +12,8 @@ use Telnyx\Core\Conversion\MapOf;
 
 /**
  * The previous value of the field. Can be any JSON type.
+ *
+ * @phpstan-type FromShape = string|float|bool|list<array<string,mixed>>|array<string,mixed>
  */
 final class From implements ConverterSource
 {

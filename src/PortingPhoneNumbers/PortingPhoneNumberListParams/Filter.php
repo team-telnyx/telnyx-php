@@ -13,7 +13,7 @@ use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Filter\PortingOrderS
  * Consolidated filter parameter (deepObject style). Originally: filter[porting_order_status].
  *
  * @phpstan-type FilterShape = array{
- *   portingOrderStatus?: value-of<PortingOrderStatus>|null
+ *   portingOrderStatus?: null|PortingOrderStatus|value-of<PortingOrderStatus>
  * }
  */
 final class Filter implements BaseModel

@@ -17,13 +17,16 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Sup
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[porting_order_id], filter[support_key], filter[status], filter[phone_number], filter[activation_status], filter[portability_status].
  *
+ * @phpstan-import-type StatusShape from \Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status
+ * @phpstan-import-type SupportKeyShape from \Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\SupportKey
+ *
  * @phpstan-type FilterShape = array{
- *   activationStatus?: value-of<ActivationStatus>|null,
+ *   activationStatus?: null|ActivationStatus|value-of<ActivationStatus>,
  *   phoneNumber?: list<string>|null,
- *   portabilityStatus?: value-of<PortabilityStatus>|null,
+ *   portabilityStatus?: null|PortabilityStatus|value-of<PortabilityStatus>,
  *   portingOrderID?: list<string>|null,
- *   status?: null|list<value-of<UnionMember1>>|value-of<PortingOrderSingleStatus>,
- *   supportKey?: string|null|list<string>,
+ *   status?: StatusShape|null,
+ *   supportKey?: SupportKeyShape|null,
  * }
  */
 final class Filter implements BaseModel
@@ -93,8 +96,8 @@ final class Filter implements BaseModel
      * @param list<string> $phoneNumber
      * @param PortabilityStatus|value-of<PortabilityStatus> $portabilityStatus
      * @param list<string> $portingOrderID
-     * @param PortingOrderSingleStatus|list<UnionMember1|value-of<UnionMember1>>|value-of<PortingOrderSingleStatus> $status
-     * @param string|list<string> $supportKey
+     * @param StatusShape $status
+     * @param SupportKeyShape $supportKey
      */
     public static function with(
         ActivationStatus|string|null $activationStatus = null,
@@ -173,7 +176,7 @@ final class Filter implements BaseModel
     /**
      * Filter porting orders by status(es). Originally: filter[status], filter[status][in][].
      *
-     * @param PortingOrderSingleStatus|list<UnionMember1|value-of<UnionMember1>>|value-of<PortingOrderSingleStatus> $status
+     * @param StatusShape $status
      */
     public function withStatus(
         PortingOrderSingleStatus|array|string $status
@@ -187,7 +190,7 @@ final class Filter implements BaseModel
     /**
      * Filter results by support key(s). Originally: filter[support_key][eq], filter[support_key][in][].
      *
-     * @param string|list<string> $supportKey
+     * @param SupportKeyShape $supportKey
      */
     public function withSupportKey(string|array $supportKey): self
     {

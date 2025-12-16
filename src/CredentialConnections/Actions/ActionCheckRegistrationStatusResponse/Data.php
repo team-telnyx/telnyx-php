@@ -16,7 +16,7 @@ use Telnyx\CredentialConnections\Actions\ActionCheckRegistrationStatusResponse\D
  *   port?: int|null,
  *   recordType?: string|null,
  *   sipUsername?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   transport?: string|null,
  *   userAgent?: string|null,
  * }

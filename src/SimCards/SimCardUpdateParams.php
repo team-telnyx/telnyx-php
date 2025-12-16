@@ -9,23 +9,22 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCards\SimCardUpdateParams\DataLimit;
-use Telnyx\SimCards\SimCardUpdateParams\DataLimit\Unit;
 use Telnyx\SimCardStatus;
-use Telnyx\SimCardStatus\Value;
 
 /**
  * Updates SIM card data.
  *
  * @see Telnyx\Services\SimCardsService::update()
  *
+ * @phpstan-import-type DataLimitShape from \Telnyx\SimCards\SimCardUpdateParams\DataLimit
+ * @phpstan-import-type SimCardStatusShape from \Telnyx\SimCardStatus
+ *
  * @phpstan-type SimCardUpdateParamsShape = array{
  *   authorizedImeis?: list<string>|null,
- *   dataLimit?: DataLimit|array{amount?: string|null, unit?: value-of<Unit>|null},
- *   simCardGroupID?: string,
- *   status?: SimCardStatus|array{
- *     reason?: string|null, value?: value-of<Value>|null
- *   },
- *   tags?: list<string>,
+ *   dataLimit?: DataLimitShape|null,
+ *   simCardGroupID?: string|null,
+ *   status?: SimCardStatusShape|null,
+ *   tags?: list<string>|null,
  * }
  */
 final class SimCardUpdateParams implements BaseModel
@@ -76,12 +75,8 @@ final class SimCardUpdateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string>|null $authorizedImeis
-     * @param DataLimit|array{
-     *   amount?: string|null, unit?: value-of<Unit>|null
-     * } $dataLimit
-     * @param SimCardStatus|array{
-     *   reason?: string|null, value?: value-of<Value>|null
-     * } $status
+     * @param DataLimitShape $dataLimit
+     * @param SimCardStatusShape $status
      * @param list<string> $tags
      */
     public static function with(
@@ -118,9 +113,7 @@ final class SimCardUpdateParams implements BaseModel
     /**
      * The SIM card individual data limit configuration.
      *
-     * @param DataLimit|array{
-     *   amount?: string|null, unit?: value-of<Unit>|null
-     * } $dataLimit
+     * @param DataLimitShape $dataLimit
      */
     public function withDataLimit(DataLimit|array $dataLimit): self
     {
@@ -142,9 +135,7 @@ final class SimCardUpdateParams implements BaseModel
     }
 
     /**
-     * @param SimCardStatus|array{
-     *   reason?: string|null, value?: value-of<Value>|null
-     * } $status
+     * @param SimCardStatusShape $status
      */
     public function withStatus(SimCardStatus|array $status): self
     {

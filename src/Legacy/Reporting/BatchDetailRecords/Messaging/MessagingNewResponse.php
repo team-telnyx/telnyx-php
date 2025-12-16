@@ -7,14 +7,12 @@ namespace Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MdrDetailReportResponse\Direction;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MdrDetailReportResponse\RecordType;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MdrDetailReportResponse\Status;
 
 /**
+ * @phpstan-import-type MdrDetailReportResponseShape from \Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MdrDetailReportResponse
+ *
  * @phpstan-type MessagingNewResponseShape = array{
- *   data?: MdrDetailReportResponse|null
+ *   data?: null|MdrDetailReportResponse|MdrDetailReportResponseShape
  * }
  */
 final class MessagingNewResponse implements BaseModel
@@ -35,22 +33,7 @@ final class MessagingNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MdrDetailReportResponse|array{
-     *   id?: string|null,
-     *   connections?: list<int>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   directions?: list<value-of<Direction>>|null,
-     *   endDate?: \DateTimeInterface|null,
-     *   filters?: list<Filter>|null,
-     *   profiles?: list<string>|null,
-     *   recordType?: string|null,
-     *   recordTypes?: list<value-of<RecordType>>|null,
-     *   reportName?: string|null,
-     *   reportURL?: string|null,
-     *   startDate?: \DateTimeInterface|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param MdrDetailReportResponseShape $data
      */
     public static function with(
         MdrDetailReportResponse|array|null $data = null
@@ -63,22 +46,7 @@ final class MessagingNewResponse implements BaseModel
     }
 
     /**
-     * @param MdrDetailReportResponse|array{
-     *   id?: string|null,
-     *   connections?: list<int>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   directions?: list<value-of<Direction>>|null,
-     *   endDate?: \DateTimeInterface|null,
-     *   filters?: list<Filter>|null,
-     *   profiles?: list<string>|null,
-     *   recordType?: string|null,
-     *   recordTypes?: list<value-of<RecordType>>|null,
-     *   reportName?: string|null,
-     *   reportURL?: string|null,
-     *   startDate?: \DateTimeInterface|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param MdrDetailReportResponseShape $data
      */
     public function withData(MdrDetailReportResponse|array $data): self
     {

@@ -19,9 +19,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *   countryCode: string,
  *   postalCode: string,
  *   streetAddress: string,
- *   administrativeArea?: string,
- *   extendedAddress?: string,
- *   locality?: string,
+ *   administrativeArea?: string|null,
+ *   extendedAddress?: string|null,
+ *   locality?: string|null,
  * }
  */
 final class ActionValidateParams implements BaseModel

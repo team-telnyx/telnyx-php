@@ -14,22 +14,15 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\RoomCompositionsService::create()
  *
+ * @phpstan-import-type VideoRegionShape from \Telnyx\RoomCompositions\VideoRegion
+ *
  * @phpstan-type RoomCompositionCreateParamsShape = array{
  *   format?: string|null,
  *   resolution?: string|null,
  *   sessionID?: string|null,
- *   videoLayout?: array<string,VideoRegion|array{
- *     height?: int|null,
- *     maxColumns?: int|null,
- *     maxRows?: int|null,
- *     videoSources?: list<string>|null,
- *     width?: int|null,
- *     xPos?: int|null,
- *     yPos?: int|null,
- *     zPos?: int|null,
- *   }>,
+ *   videoLayout?: array<string,VideoRegionShape>|null,
  *   webhookEventFailoverURL?: string|null,
- *   webhookEventURL?: string,
+ *   webhookEventURL?: string|null,
  *   webhookTimeoutSecs?: int|null,
  * }
  */
@@ -93,16 +86,7 @@ final class RoomCompositionCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,VideoRegion|array{
-     *   height?: int|null,
-     *   maxColumns?: int|null,
-     *   maxRows?: int|null,
-     *   videoSources?: list<string>|null,
-     *   width?: int|null,
-     *   xPos?: int|null,
-     *   yPos?: int|null,
-     *   zPos?: int|null,
-     * }> $videoLayout
+     * @param array<string,VideoRegionShape> $videoLayout
      */
     public static function with(
         ?string $format = null,
@@ -162,16 +146,7 @@ final class RoomCompositionCreateParams implements BaseModel
     /**
      * Describes the video layout of the room composition in terms of regions.
      *
-     * @param array<string,VideoRegion|array{
-     *   height?: int|null,
-     *   maxColumns?: int|null,
-     *   maxRows?: int|null,
-     *   videoSources?: list<string>|null,
-     *   width?: int|null,
-     *   xPos?: int|null,
-     *   yPos?: int|null,
-     *   zPos?: int|null,
-     * }> $videoLayout
+     * @param array<string,VideoRegionShape> $videoLayout
      */
     public function withVideoLayout(array $videoLayout): self
     {

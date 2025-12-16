@@ -8,13 +8,16 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventNewCommentEvent\Payload\Comment;
-use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventNewCommentEvent\Payload\Comment\UserType;
 
 /**
  * The webhook payload for the porting_order.new_comment event.
  *
+ * @phpstan-import-type CommentShape from \Telnyx\Porting\Events\EventGetResponse\Data\PortingEventNewCommentEvent\Payload\Comment
+ *
  * @phpstan-type PayloadShape = array{
- *   comment?: Comment|null, portingOrderID?: string|null, supportKey?: string|null
+ *   comment?: null|Comment|CommentShape,
+ *   portingOrderID?: string|null,
+ *   supportKey?: string|null,
  * }
  */
 final class Payload implements BaseModel
@@ -50,13 +53,7 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Comment|array{
-     *   id?: string|null,
-     *   body?: string|null,
-     *   insertedAt?: \DateTimeInterface|null,
-     *   userID?: string|null,
-     *   userType?: value-of<UserType>|null,
-     * } $comment
+     * @param CommentShape $comment
      */
     public static function with(
         Comment|array|null $comment = null,
@@ -75,13 +72,7 @@ final class Payload implements BaseModel
     /**
      * The comment that was added to the porting order.
      *
-     * @param Comment|array{
-     *   id?: string|null,
-     *   body?: string|null,
-     *   insertedAt?: \DateTimeInterface|null,
-     *   userID?: string|null,
-     *   userType?: value-of<UserType>|null,
-     * } $comment
+     * @param CommentShape $comment
      */
     public function withComment(Comment|array $comment): self
     {

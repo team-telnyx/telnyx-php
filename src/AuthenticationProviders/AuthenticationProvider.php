@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace Telnyx\AuthenticationProviders;
 
 use Telnyx\AuthenticationProviders\AuthenticationProvider\Settings;
-use Telnyx\AuthenticationProviders\AuthenticationProvider\Settings\IdpCertFingerprintAlgorithm;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type SettingsShape from \Telnyx\AuthenticationProviders\AuthenticationProvider\Settings
+ *
  * @phpstan-type AuthenticationProviderShape = array{
  *   id?: string|null,
  *   active?: bool|null,
@@ -18,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   name?: string|null,
  *   organizationID?: string|null,
  *   recordType?: string|null,
- *   settings?: \Telnyx\AuthenticationProviders\AuthenticationProvider\Settings|null,
+ *   settings?: null|\Telnyx\AuthenticationProviders\AuthenticationProvider\Settings|SettingsShape,
  *   shortName?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
  * }
@@ -92,15 +93,7 @@ final class AuthenticationProvider implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Settings|array{
-     *   assertionConsumerServiceURL?: string|null,
-     *   idpCertFingerprint?: string|null,
-     *   idpCertFingerprintAlgorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
-     *   idpEntityID?: string|null,
-     *   idpSSOTargetURL?: string|null,
-     *   nameIdentifierFormat?: string|null,
-     *   serviceProviderEntityID?: string|null,
-     * } $settings
+     * @param SettingsShape $settings
      */
     public static function with(
         ?string $id = null,
@@ -197,15 +190,7 @@ final class AuthenticationProvider implements BaseModel
     /**
      * The settings associated with the authentication provider.
      *
-     * @param Settings|array{
-     *   assertionConsumerServiceURL?: string|null,
-     *   idpCertFingerprint?: string|null,
-     *   idpCertFingerprintAlgorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
-     *   idpEntityID?: string|null,
-     *   idpSSOTargetURL?: string|null,
-     *   nameIdentifierFormat?: string|null,
-     *   serviceProviderEntityID?: string|null,
-     * } $settings
+     * @param SettingsShape $settings
      */
     public function withSettings(
         Settings|array $settings,

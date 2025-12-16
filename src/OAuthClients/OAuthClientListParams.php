@@ -17,14 +17,14 @@ use Telnyx\OAuthClients\OAuthClientListParams\FilterClientType;
  * @see Telnyx\Services\OAuthClientsService::list()
  *
  * @phpstan-type OAuthClientListParamsShape = array{
- *   filterAllowedGrantTypesContains?: FilterAllowedGrantTypesContains|value-of<FilterAllowedGrantTypesContains>,
- *   filterClientID?: string,
- *   filterClientType?: FilterClientType|value-of<FilterClientType>,
- *   filterName?: string,
- *   filterNameContains?: string,
- *   filterVerified?: bool,
- *   pageNumber?: int,
- *   pageSize?: int,
+ *   filterAllowedGrantTypesContains?: null|FilterAllowedGrantTypesContains|value-of<FilterAllowedGrantTypesContains>,
+ *   filterClientID?: string|null,
+ *   filterClientType?: null|FilterClientType|value-of<FilterClientType>,
+ *   filterName?: string|null,
+ *   filterNameContains?: string|null,
+ *   filterVerified?: bool|null,
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
  * }
  */
 final class OAuthClientListParams implements BaseModel

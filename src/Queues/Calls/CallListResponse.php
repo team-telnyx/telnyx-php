@@ -20,7 +20,7 @@ use Telnyx\Queues\Calls\CallListResponse\RecordType;
  *   from: string,
  *   queueID: string,
  *   queuePosition: int,
- *   recordType: value-of<RecordType>,
+ *   recordType: RecordType|value-of<RecordType>,
  *   to: string,
  *   waitTimeSecs: int,
  *   isAlive?: bool|null,

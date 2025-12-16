@@ -7,14 +7,12 @@ namespace Telnyx\MobileVoiceConnections;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\MobileVoiceConnections\MobileVoiceConnection\Inbound;
-use Telnyx\MobileVoiceConnections\MobileVoiceConnection\Outbound;
-use Telnyx\MobileVoiceConnections\MobileVoiceConnection\RecordType;
-use Telnyx\MobileVoiceConnections\MobileVoiceConnection\WebhookAPIVersion;
 
 /**
+ * @phpstan-import-type MobileVoiceConnectionShape from \Telnyx\MobileVoiceConnections\MobileVoiceConnection
+ *
  * @phpstan-type MobileVoiceConnectionGetResponseShape = array{
- *   data?: MobileVoiceConnection|null
+ *   data?: null|MobileVoiceConnection|MobileVoiceConnectionShape
  * }
  */
 final class MobileVoiceConnectionGetResponse implements BaseModel
@@ -35,21 +33,7 @@ final class MobileVoiceConnectionGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MobileVoiceConnection|array{
-     *   id?: string|null,
-     *   active?: bool|null,
-     *   connectionName?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   inbound?: Inbound|null,
-     *   outbound?: Outbound|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   tags?: list<string>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
-     *   webhookEventFailoverURL?: string|null,
-     *   webhookEventURL?: string|null,
-     *   webhookTimeoutSecs?: int|null,
-     * } $data
+     * @param MobileVoiceConnectionShape $data
      */
     public static function with(MobileVoiceConnection|array|null $data = null): self
     {
@@ -61,21 +45,7 @@ final class MobileVoiceConnectionGetResponse implements BaseModel
     }
 
     /**
-     * @param MobileVoiceConnection|array{
-     *   id?: string|null,
-     *   active?: bool|null,
-     *   connectionName?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   inbound?: Inbound|null,
-     *   outbound?: Outbound|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   tags?: list<string>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
-     *   webhookEventFailoverURL?: string|null,
-     *   webhookEventURL?: string|null,
-     *   webhookTimeoutSecs?: int|null,
-     * } $data
+     * @param MobileVoiceConnectionShape $data
      */
     public function withData(MobileVoiceConnection|array $data): self
     {

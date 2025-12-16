@@ -8,17 +8,17 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording;
-use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording\Source;
-use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording\Status;
 
 /**
+ * @phpstan-import-type RecordingShape from \Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording
+ *
  * @phpstan-type ConferenceGetRecordingsResponseShape = array{
  *   end?: int|null,
  *   firstPageUri?: string|null,
  *   nextPageUri?: string|null,
  *   page?: int|null,
  *   pageSize?: int|null,
- *   recordings?: list<Recording>|null,
+ *   recordings?: list<RecordingShape>|null,
  *   start?: int|null,
  *   uri?: string|null,
  * }
@@ -84,23 +84,7 @@ final class ConferenceGetRecordingsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Recording|array{
-     *   accountSid?: string|null,
-     *   callSid?: string|null,
-     *   channels?: int|null,
-     *   conferenceSid?: string|null,
-     *   dateCreated?: string|null,
-     *   dateUpdated?: string|null,
-     *   duration?: int|null,
-     *   errorCode?: string|null,
-     *   mediaURL?: string|null,
-     *   sid?: string|null,
-     *   source?: value-of<Source>|null,
-     *   startTime?: string|null,
-     *   status?: value-of<Status>|null,
-     *   subresourceUris?: array<string,mixed>|null,
-     *   uri?: string|null,
-     * }> $recordings
+     * @param list<RecordingShape> $recordings
      */
     public static function with(
         ?int $end = null,
@@ -182,23 +166,7 @@ final class ConferenceGetRecordingsResponse implements BaseModel
     }
 
     /**
-     * @param list<Recording|array{
-     *   accountSid?: string|null,
-     *   callSid?: string|null,
-     *   channels?: int|null,
-     *   conferenceSid?: string|null,
-     *   dateCreated?: string|null,
-     *   dateUpdated?: string|null,
-     *   duration?: int|null,
-     *   errorCode?: string|null,
-     *   mediaURL?: string|null,
-     *   sid?: string|null,
-     *   source?: value-of<Source>|null,
-     *   startTime?: string|null,
-     *   status?: value-of<Status>|null,
-     *   subresourceUris?: array<string,mixed>|null,
-     *   uri?: string|null,
-     * }> $recordings
+     * @param list<RecordingShape> $recordings
      */
     public function withRecordings(array $recordings): self
     {

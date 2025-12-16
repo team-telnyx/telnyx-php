@@ -34,7 +34,7 @@ interface MessagingRawContract
      * @api
      *
      * @param string $id the phone number to update
-     * @param array<mixed>|MessagingUpdateParams $params
+     * @param array<string,mixed>|MessagingUpdateParams $params
      *
      * @return BaseResponse<MessagingUpdateResponse>
      *
@@ -49,7 +49,7 @@ interface MessagingRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MessagingListParams $params
+     * @param array<string,mixed>|MessagingListParams $params
      *
      * @return BaseResponse<DefaultPagination<PhoneNumberWithMessagingSettings>>
      *

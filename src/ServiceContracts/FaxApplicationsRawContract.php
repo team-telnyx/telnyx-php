@@ -22,7 +22,7 @@ interface FaxApplicationsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|FaxApplicationCreateParams $params
+     * @param array<string,mixed>|FaxApplicationCreateParams $params
      *
      * @return BaseResponse<FaxApplicationNewResponse>
      *
@@ -51,7 +51,7 @@ interface FaxApplicationsRawContract
      * @api
      *
      * @param string $id identifies the resource
-     * @param array<mixed>|FaxApplicationUpdateParams $params
+     * @param array<string,mixed>|FaxApplicationUpdateParams $params
      *
      * @return BaseResponse<FaxApplicationUpdateResponse>
      *
@@ -66,7 +66,7 @@ interface FaxApplicationsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|FaxApplicationListParams $params
+     * @param array<string,mixed>|FaxApplicationListParams $params
      *
      * @return BaseResponse<DefaultPagination<FaxApplication>>
      *

@@ -11,11 +11,14 @@ use Telnyx\Storage\Buckets\SslCertificate\SslCertificate\IssuedBy;
 use Telnyx\Storage\Buckets\SslCertificate\SslCertificate\IssuedTo;
 
 /**
+ * @phpstan-import-type IssuedByShape from \Telnyx\Storage\Buckets\SslCertificate\SslCertificate\IssuedBy
+ * @phpstan-import-type IssuedToShape from \Telnyx\Storage\Buckets\SslCertificate\SslCertificate\IssuedTo
+ *
  * @phpstan-type SslCertificateShape = array{
  *   id?: string|null,
  *   createdAt?: \DateTimeInterface|null,
- *   issuedBy?: IssuedBy|null,
- *   issuedTo?: IssuedTo|null,
+ *   issuedBy?: null|IssuedBy|IssuedByShape,
+ *   issuedTo?: null|IssuedTo|IssuedToShape,
  *   validFrom?: \DateTimeInterface|null,
  *   validTo?: \DateTimeInterface|null,
  * }
@@ -65,16 +68,8 @@ final class SslCertificate implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param IssuedBy|array{
-     *   commonName?: string|null,
-     *   organization?: string|null,
-     *   organizationUnit?: string|null,
-     * } $issuedBy
-     * @param IssuedTo|array{
-     *   commonName?: string|null,
-     *   organization?: string|null,
-     *   organizationUnit?: string|null,
-     * } $issuedTo
+     * @param IssuedByShape $issuedBy
+     * @param IssuedToShape $issuedTo
      */
     public static function with(
         ?string $id = null,
@@ -119,11 +114,7 @@ final class SslCertificate implements BaseModel
     }
 
     /**
-     * @param IssuedBy|array{
-     *   commonName?: string|null,
-     *   organization?: string|null,
-     *   organizationUnit?: string|null,
-     * } $issuedBy
+     * @param IssuedByShape $issuedBy
      */
     public function withIssuedBy(IssuedBy|array $issuedBy): self
     {
@@ -134,11 +125,7 @@ final class SslCertificate implements BaseModel
     }
 
     /**
-     * @param IssuedTo|array{
-     *   commonName?: string|null,
-     *   organization?: string|null,
-     *   organizationUnit?: string|null,
-     * } $issuedTo
+     * @param IssuedToShape $issuedTo
      */
     public function withIssuedTo(IssuedTo|array $issuedTo): self
     {

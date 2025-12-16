@@ -12,13 +12,15 @@ use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber\Pho
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber\PhoneNumberType;
 
 /**
+ * @phpstan-import-type PhoneNumberRangeShape from \Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber\PhoneNumberRange
+ *
  * @phpstan-type PortingAssociatedPhoneNumberShape = array{
  *   id?: string|null,
- *   action?: value-of<Action>|null,
+ *   action?: null|Action|value-of<Action>,
  *   countryCode?: string|null,
  *   createdAt?: \DateTimeInterface|null,
- *   phoneNumberRange?: PhoneNumberRange|null,
- *   phoneNumberType?: value-of<PhoneNumberType>|null,
+ *   phoneNumberRange?: null|PhoneNumberRange|PhoneNumberRangeShape,
+ *   phoneNumberType?: null|PhoneNumberType|value-of<PhoneNumberType>,
  *   portingOrderID?: string|null,
  *   recordType?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
@@ -98,9 +100,7 @@ final class PortingAssociatedPhoneNumber implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Action|value-of<Action> $action
-     * @param PhoneNumberRange|array{
-     *   endAt?: string|null, startAt?: string|null
-     * } $phoneNumberRange
+     * @param PhoneNumberRangeShape $phoneNumberRange
      * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
      */
     public static function with(
@@ -178,9 +178,7 @@ final class PortingAssociatedPhoneNumber implements BaseModel
     /**
      * Specifies the phone number range for this associated phone number.
      *
-     * @param PhoneNumberRange|array{
-     *   endAt?: string|null, startAt?: string|null
-     * } $phoneNumberRange
+     * @param PhoneNumberRangeShape $phoneNumberRange
      */
     public function withPhoneNumberRange(
         PhoneNumberRange|array $phoneNumberRange

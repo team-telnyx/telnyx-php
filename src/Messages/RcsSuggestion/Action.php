@@ -10,23 +10,25 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\RcsSuggestion\Action\CreateCalendarEventAction;
 use Telnyx\Messages\RcsSuggestion\Action\DialAction;
 use Telnyx\Messages\RcsSuggestion\Action\OpenURLAction;
-use Telnyx\Messages\RcsSuggestion\Action\OpenURLAction\Application;
-use Telnyx\Messages\RcsSuggestion\Action\OpenURLAction\WebviewViewMode;
 use Telnyx\Messages\RcsSuggestion\Action\ViewLocationAction;
-use Telnyx\Messages\RcsSuggestion\Action\ViewLocationAction\LatLong;
 
 /**
  * When tapped, initiates the corresponding native action on the device.
  *
+ * @phpstan-import-type CreateCalendarEventActionShape from \Telnyx\Messages\RcsSuggestion\Action\CreateCalendarEventAction
+ * @phpstan-import-type DialActionShape from \Telnyx\Messages\RcsSuggestion\Action\DialAction
+ * @phpstan-import-type OpenURLActionShape from \Telnyx\Messages\RcsSuggestion\Action\OpenURLAction
+ * @phpstan-import-type ViewLocationActionShape from \Telnyx\Messages\RcsSuggestion\Action\ViewLocationAction
+ *
  * @phpstan-type ActionShape = array{
- *   createCalendarEventAction?: CreateCalendarEventAction|null,
- *   dialAction?: DialAction|null,
+ *   createCalendarEventAction?: null|CreateCalendarEventAction|CreateCalendarEventActionShape,
+ *   dialAction?: null|DialAction|DialActionShape,
  *   fallbackURL?: string|null,
- *   openURLAction?: OpenURLAction|null,
+ *   openURLAction?: null|OpenURLAction|OpenURLActionShape,
  *   postbackData?: string|null,
  *   shareLocationAction?: array<string,mixed>|null,
  *   text?: string|null,
- *   viewLocationAction?: ViewLocationAction|null,
+ *   viewLocationAction?: null|ViewLocationAction|ViewLocationActionShape,
  * }
  */
 final class Action implements BaseModel
@@ -94,23 +96,11 @@ final class Action implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CreateCalendarEventAction|array{
-     *   description?: string|null,
-     *   endTime?: \DateTimeInterface|null,
-     *   startTime?: \DateTimeInterface|null,
-     *   title?: string|null,
-     * } $createCalendarEventAction
-     * @param DialAction|array{phoneNumber: string} $dialAction
-     * @param OpenURLAction|array{
-     *   application: value-of<Application>,
-     *   url: string,
-     *   webviewViewMode: value-of<WebviewViewMode>,
-     *   description?: string|null,
-     * } $openURLAction
+     * @param CreateCalendarEventActionShape $createCalendarEventAction
+     * @param DialActionShape $dialAction
+     * @param OpenURLActionShape $openURLAction
      * @param array<string,mixed> $shareLocationAction
-     * @param ViewLocationAction|array{
-     *   label?: string|null, latLong?: LatLong|null, query?: string|null
-     * } $viewLocationAction
+     * @param ViewLocationActionShape $viewLocationAction
      */
     public static function with(
         CreateCalendarEventAction|array|null $createCalendarEventAction = null,
@@ -139,12 +129,7 @@ final class Action implements BaseModel
     /**
      * Opens the user's default calendar app and starts the new calendar event flow with the agent-specified event data pre-filled.
      *
-     * @param CreateCalendarEventAction|array{
-     *   description?: string|null,
-     *   endTime?: \DateTimeInterface|null,
-     *   startTime?: \DateTimeInterface|null,
-     *   title?: string|null,
-     * } $createCalendarEventAction
+     * @param CreateCalendarEventActionShape $createCalendarEventAction
      */
     public function withCreateCalendarEventAction(
         CreateCalendarEventAction|array $createCalendarEventAction
@@ -158,7 +143,7 @@ final class Action implements BaseModel
     /**
      * Opens the user's default dialer app with the agent-specified phone number filled in.
      *
-     * @param DialAction|array{phoneNumber: string} $dialAction
+     * @param DialActionShape $dialAction
      */
     public function withDialAction(DialAction|array $dialAction): self
     {
@@ -182,12 +167,7 @@ final class Action implements BaseModel
     /**
      * Opens the user's default web browser app to the specified URL.
      *
-     * @param OpenURLAction|array{
-     *   application: value-of<Application>,
-     *   url: string,
-     *   webviewViewMode: value-of<WebviewViewMode>,
-     *   description?: string|null,
-     * } $openURLAction
+     * @param OpenURLActionShape $openURLAction
      */
     public function withOpenURLAction(OpenURLAction|array $openURLAction): self
     {
@@ -235,9 +215,7 @@ final class Action implements BaseModel
     /**
      * Opens the user's default map app and selects the agent-specified location.
      *
-     * @param ViewLocationAction|array{
-     *   label?: string|null, latLong?: LatLong|null, query?: string|null
-     * } $viewLocationAction
+     * @param ViewLocationActionShape $viewLocationAction
      */
     public function withViewLocationAction(
         ViewLocationAction|array $viewLocationAction

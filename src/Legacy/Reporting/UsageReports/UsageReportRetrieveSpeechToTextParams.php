@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Legacy\Reporting\UsageReportsService::retrieveSpeechToText()
  *
  * @phpstan-type UsageReportRetrieveSpeechToTextParamsShape = array{
- *   endDate?: \DateTimeInterface, startDate?: \DateTimeInterface
+ *   endDate?: \DateTimeInterface|null, startDate?: \DateTimeInterface|null
  * }
  */
 final class UsageReportRetrieveSpeechToTextParams implements BaseModel

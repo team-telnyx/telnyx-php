@@ -8,10 +8,11 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Verifications\ByPhoneNumber\Actions\VerifyVerificationCodeResponse\Data;
-use Telnyx\Verifications\ByPhoneNumber\Actions\VerifyVerificationCodeResponse\Data\ResponseCode;
 
 /**
- * @phpstan-type VerifyVerificationCodeResponseShape = array{data: Data}
+ * @phpstan-import-type DataShape from \Telnyx\Verifications\ByPhoneNumber\Actions\VerifyVerificationCodeResponse\Data
+ *
+ * @phpstan-type VerifyVerificationCodeResponseShape = array{data: Data|DataShape}
  */
 final class VerifyVerificationCodeResponse implements BaseModel
 {
@@ -45,9 +46,7 @@ final class VerifyVerificationCodeResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   phoneNumber: string, responseCode: value-of<ResponseCode>
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array $data): self
     {
@@ -59,9 +58,7 @@ final class VerifyVerificationCodeResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   phoneNumber: string, responseCode: value-of<ResponseCode>
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

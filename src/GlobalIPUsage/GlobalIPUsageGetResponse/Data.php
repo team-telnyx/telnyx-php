@@ -12,11 +12,15 @@ use Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse\Data\Received;
 use Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse\Data\Transmitted;
 
 /**
+ * @phpstan-import-type GlobalIPShape from \Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse\Data\GlobalIP
+ * @phpstan-import-type ReceivedShape from \Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse\Data\Received
+ * @phpstan-import-type TransmittedShape from \Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse\Data\Transmitted
+ *
  * @phpstan-type DataShape = array{
- *   globalIP?: GlobalIP|null,
- *   received?: Received|null,
+ *   globalIP?: null|GlobalIP|GlobalIPShape,
+ *   received?: null|Received|ReceivedShape,
  *   timestamp?: \DateTimeInterface|null,
- *   transmitted?: Transmitted|null,
+ *   transmitted?: null|Transmitted|TransmittedShape,
  * }
  */
 final class Data implements BaseModel
@@ -49,9 +53,9 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param GlobalIP|array{id?: string|null, ipAddress?: string|null} $globalIP
-     * @param Received|array{amount?: float|null, unit?: string|null} $received
-     * @param Transmitted|array{amount?: float|null, unit?: string|null} $transmitted
+     * @param GlobalIPShape $globalIP
+     * @param ReceivedShape $received
+     * @param TransmittedShape $transmitted
      */
     public static function with(
         GlobalIP|array|null $globalIP = null,
@@ -70,7 +74,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param GlobalIP|array{id?: string|null, ipAddress?: string|null} $globalIP
+     * @param GlobalIPShape $globalIP
      */
     public function withGlobalIP(GlobalIP|array $globalIP): self
     {
@@ -81,7 +85,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param Received|array{amount?: float|null, unit?: string|null} $received
+     * @param ReceivedShape $received
      */
     public function withReceived(Received|array $received): self
     {
@@ -103,7 +107,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param Transmitted|array{amount?: float|null, unit?: string|null} $transmitted
+     * @param TransmittedShape $transmitted
      */
     public function withTransmitted(Transmitted|array $transmitted): self
     {

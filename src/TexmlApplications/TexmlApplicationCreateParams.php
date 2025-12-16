@@ -12,7 +12,6 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\TexmlApplications\TexmlApplicationCreateParams\Inbound;
-use Telnyx\TexmlApplications\TexmlApplicationCreateParams\Inbound\SipSubdomainReceiveSettings;
 use Telnyx\TexmlApplications\TexmlApplicationCreateParams\Outbound;
 use Telnyx\TexmlApplications\TexmlApplicationCreateParams\StatusCallbackMethod;
 use Telnyx\TexmlApplications\TexmlApplicationCreateParams\VoiceMethod;
@@ -22,29 +21,25 @@ use Telnyx\TexmlApplications\TexmlApplicationCreateParams\VoiceMethod;
  *
  * @see Telnyx\Services\TexmlApplicationsService::create()
  *
+ * @phpstan-import-type InboundShape from \Telnyx\TexmlApplications\TexmlApplicationCreateParams\Inbound
+ * @phpstan-import-type OutboundShape from \Telnyx\TexmlApplications\TexmlApplicationCreateParams\Outbound
+ *
  * @phpstan-type TexmlApplicationCreateParamsShape = array{
  *   friendlyName: string,
  *   voiceURL: string,
- *   active?: bool,
- *   anchorsiteOverride?: AnchorsiteOverride|value-of<AnchorsiteOverride>,
- *   callCostInWebhooks?: bool,
- *   dtmfType?: DtmfType|value-of<DtmfType>,
- *   firstCommandTimeout?: bool,
- *   firstCommandTimeoutSecs?: int,
- *   inbound?: Inbound|array{
- *     channelLimit?: int|null,
- *     shakenStirEnabled?: bool|null,
- *     sipSubdomain?: string|null,
- *     sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
- *   },
- *   outbound?: Outbound|array{
- *     channelLimit?: int|null, outboundVoiceProfileID?: string|null
- *   },
- *   statusCallback?: string,
- *   statusCallbackMethod?: StatusCallbackMethod|value-of<StatusCallbackMethod>,
- *   tags?: list<string>,
- *   voiceFallbackURL?: string,
- *   voiceMethod?: VoiceMethod|value-of<VoiceMethod>,
+ *   active?: bool|null,
+ *   anchorsiteOverride?: null|AnchorsiteOverride|value-of<AnchorsiteOverride>,
+ *   callCostInWebhooks?: bool|null,
+ *   dtmfType?: null|DtmfType|value-of<DtmfType>,
+ *   firstCommandTimeout?: bool|null,
+ *   firstCommandTimeoutSecs?: int|null,
+ *   inbound?: InboundShape|null,
+ *   outbound?: OutboundShape|null,
+ *   statusCallback?: string|null,
+ *   statusCallbackMethod?: null|StatusCallbackMethod|value-of<StatusCallbackMethod>,
+ *   tags?: list<string>|null,
+ *   voiceFallbackURL?: string|null,
+ *   voiceMethod?: null|VoiceMethod|value-of<VoiceMethod>,
  * }
  */
 final class TexmlApplicationCreateParams implements BaseModel
@@ -173,15 +168,8 @@ final class TexmlApplicationCreateParams implements BaseModel
      *
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
      * @param DtmfType|value-of<DtmfType> $dtmfType
-     * @param Inbound|array{
-     *   channelLimit?: int|null,
-     *   shakenStirEnabled?: bool|null,
-     *   sipSubdomain?: string|null,
-     *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
-     * } $inbound
-     * @param Outbound|array{
-     *   channelLimit?: int|null, outboundVoiceProfileID?: string|null
-     * } $outbound
+     * @param InboundShape $inbound
+     * @param OutboundShape $outbound
      * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $statusCallbackMethod
      * @param list<string> $tags
      * @param VoiceMethod|value-of<VoiceMethod> $voiceMethod
@@ -320,12 +308,7 @@ final class TexmlApplicationCreateParams implements BaseModel
     }
 
     /**
-     * @param Inbound|array{
-     *   channelLimit?: int|null,
-     *   shakenStirEnabled?: bool|null,
-     *   sipSubdomain?: string|null,
-     *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
-     * } $inbound
+     * @param InboundShape $inbound
      */
     public function withInbound(Inbound|array $inbound): self
     {
@@ -336,9 +319,7 @@ final class TexmlApplicationCreateParams implements BaseModel
     }
 
     /**
-     * @param Outbound|array{
-     *   channelLimit?: int|null, outboundVoiceProfileID?: string|null
-     * } $outbound
+     * @param OutboundShape $outbound
      */
     public function withOutbound(Outbound|array $outbound): self
     {

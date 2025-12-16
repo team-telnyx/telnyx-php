@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\Comments;
 
 use Telnyx\Comments\CommentListParams\Filter;
-use Telnyx\Comments\CommentListParams\Filter\CommentRecordType;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -16,12 +15,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\CommentsService::list()
  *
- * @phpstan-type CommentListParamsShape = array{
- *   filter?: Filter|array{
- *     commentRecordID?: string|null,
- *     commentRecordType?: value-of<CommentRecordType>|null,
- *   },
- * }
+ * @phpstan-import-type FilterShape from \Telnyx\Comments\CommentListParams\Filter
+ *
+ * @phpstan-type CommentListParamsShape = array{filter?: FilterShape|null}
  */
 final class CommentListParams implements BaseModel
 {
@@ -45,10 +41,7 @@ final class CommentListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   commentRecordID?: string|null,
-     *   commentRecordType?: value-of<CommentRecordType>|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public static function with(Filter|array|null $filter = null): self
     {
@@ -62,10 +55,7 @@ final class CommentListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[comment_record_type], filter[comment_record_id].
      *
-     * @param Filter|array{
-     *   commentRecordID?: string|null,
-     *   commentRecordType?: value-of<CommentRecordType>|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

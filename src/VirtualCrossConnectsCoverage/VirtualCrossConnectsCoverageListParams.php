@@ -9,9 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filter;
-use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filter\CloudProvider;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filters;
-use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filters\AvailableBandwidth\Contains;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Page;
 
 /**
@@ -19,17 +17,12 @@ use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\P
  *
  * @see Telnyx\Services\VirtualCrossConnectsCoverageService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filter
+ * @phpstan-import-type FiltersShape from \Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filters
+ * @phpstan-import-type PageShape from \Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Page
+ *
  * @phpstan-type VirtualCrossConnectsCoverageListParamsShape = array{
- *   filter?: Filter|array{
- *     cloudProvider?: value-of<CloudProvider>|null,
- *     cloudProviderRegion?: string|null,
- *     locationCode?: string|null,
- *     locationPop?: string|null,
- *     locationRegion?: string|null,
- *     locationSite?: string|null,
- *   },
- *   filters?: Filters|array{availableBandwidth?: int|null|Contains},
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   filter?: FilterShape|null, filters?: FiltersShape|null, page?: PageShape|null
  * }
  */
 final class VirtualCrossConnectsCoverageListParams implements BaseModel
@@ -66,16 +59,9 @@ final class VirtualCrossConnectsCoverageListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   cloudProvider?: value-of<CloudProvider>|null,
-     *   cloudProviderRegion?: string|null,
-     *   locationCode?: string|null,
-     *   locationPop?: string|null,
-     *   locationRegion?: string|null,
-     *   locationSite?: string|null,
-     * } $filter
-     * @param Filters|array{availableBandwidth?: int|Contains|null} $filters
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param FiltersShape $filters
+     * @param PageShape $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -94,14 +80,7 @@ final class VirtualCrossConnectsCoverageListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[cloud_provider], filter[cloud_provider_region], filter[location.region], filter[location.site], filter[location.pop], filter[location.code].
      *
-     * @param Filter|array{
-     *   cloudProvider?: value-of<CloudProvider>|null,
-     *   cloudProviderRegion?: string|null,
-     *   locationCode?: string|null,
-     *   locationPop?: string|null,
-     *   locationRegion?: string|null,
-     *   locationSite?: string|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -114,7 +93,7 @@ final class VirtualCrossConnectsCoverageListParams implements BaseModel
     /**
      * Consolidated filters parameter (deepObject style). Originally: filters[available_bandwidth][contains].
      *
-     * @param Filters|array{availableBandwidth?: int|Contains|null} $filters
+     * @param FiltersShape $filters
      */
     public function withFilters(Filters|array $filters): self
     {
@@ -127,7 +106,7 @@ final class VirtualCrossConnectsCoverageListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

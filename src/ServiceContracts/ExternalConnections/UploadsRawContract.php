@@ -25,7 +25,7 @@ interface UploadsRawContract
      * @api
      *
      * @param string $id identifies the resource
-     * @param array<mixed>|UploadCreateParams $params
+     * @param array<string,mixed>|UploadCreateParams $params
      *
      * @return BaseResponse<UploadNewResponse>
      *
@@ -41,7 +41,7 @@ interface UploadsRawContract
      * @api
      *
      * @param string $ticketID Identifies an Upload request
-     * @param array<mixed>|UploadRetrieveParams $params
+     * @param array<string,mixed>|UploadRetrieveParams $params
      *
      * @return BaseResponse<UploadGetResponse>
      *
@@ -57,7 +57,7 @@ interface UploadsRawContract
      * @api
      *
      * @param string $id identifies the resource
-     * @param array<mixed>|UploadListParams $params
+     * @param array<string,mixed>|UploadListParams $params
      *
      * @return BaseResponse<DefaultPagination<Upload>>
      *
@@ -101,7 +101,7 @@ interface UploadsRawContract
      * @api
      *
      * @param string $ticketID Identifies an Upload request
-     * @param array<mixed>|UploadRetryParams $params
+     * @param array<string,mixed>|UploadRetryParams $params
      *
      * @return BaseResponse<UploadRetryResponse>
      *

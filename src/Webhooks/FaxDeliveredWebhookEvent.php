@@ -9,16 +9,16 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\FaxDeliveredWebhookEvent\EventType;
 use Telnyx\Webhooks\FaxDeliveredWebhookEvent\Payload;
-use Telnyx\Webhooks\FaxDeliveredWebhookEvent\Payload\Direction;
-use Telnyx\Webhooks\FaxDeliveredWebhookEvent\Payload\Status;
 use Telnyx\Webhooks\FaxDeliveredWebhookEvent\RecordType;
 
 /**
+ * @phpstan-import-type PayloadShape from \Telnyx\Webhooks\FaxDeliveredWebhookEvent\Payload
+ *
  * @phpstan-type FaxDeliveredWebhookEventShape = array{
  *   id?: string|null,
- *   eventType?: value-of<EventType>|null,
- *   payload?: Payload|null,
- *   recordType?: value-of<RecordType>|null,
+ *   eventType?: null|EventType|value-of<EventType>,
+ *   payload?: null|Payload|PayloadShape,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  * }
  */
 final class FaxDeliveredWebhookEvent implements BaseModel
@@ -62,20 +62,7 @@ final class FaxDeliveredWebhookEvent implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param EventType|value-of<EventType> $eventType
-     * @param Payload|array{
-     *   callDurationSecs?: int|null,
-     *   clientState?: string|null,
-     *   connectionID?: string|null,
-     *   direction?: value-of<Direction>|null,
-     *   faxID?: string|null,
-     *   from?: string|null,
-     *   mediaName?: string|null,
-     *   originalMediaURL?: string|null,
-     *   pageCount?: int|null,
-     *   status?: value-of<Status>|null,
-     *   to?: string|null,
-     *   userID?: string|null,
-     * } $payload
+     * @param PayloadShape $payload
      * @param RecordType|value-of<RecordType> $recordType
      */
     public static function with(
@@ -119,20 +106,7 @@ final class FaxDeliveredWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Payload|array{
-     *   callDurationSecs?: int|null,
-     *   clientState?: string|null,
-     *   connectionID?: string|null,
-     *   direction?: value-of<Direction>|null,
-     *   faxID?: string|null,
-     *   from?: string|null,
-     *   mediaName?: string|null,
-     *   originalMediaURL?: string|null,
-     *   pageCount?: int|null,
-     *   status?: value-of<Status>|null,
-     *   to?: string|null,
-     *   userID?: string|null,
-     * } $payload
+     * @param PayloadShape $payload
      */
     public function withPayload(Payload|array $payload): self
     {

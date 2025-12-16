@@ -35,7 +35,7 @@ interface CampaignRawContract
     /**
      * @api
      *
-     * @param array<mixed>|CampaignUpdateParams $params
+     * @param array<string,mixed>|CampaignUpdateParams $params
      *
      * @return BaseResponse<TelnyxCampaignCsp>
      *
@@ -50,7 +50,7 @@ interface CampaignRawContract
     /**
      * @api
      *
-     * @param array<mixed>|CampaignListParams $params
+     * @param array<string,mixed>|CampaignListParams $params
      *
      * @return BaseResponse<PerPagePaginationV2<CampaignListResponse>>
      *
@@ -131,7 +131,7 @@ interface CampaignRawContract
      * @api
      *
      * @param string $campaignID The Telnyx campaign identifier
-     * @param array<mixed>|CampaignSubmitAppealParams $params
+     * @param array<string,mixed>|CampaignSubmitAppealParams $params
      *
      * @return BaseResponse<CampaignSubmitAppealResponse>
      *

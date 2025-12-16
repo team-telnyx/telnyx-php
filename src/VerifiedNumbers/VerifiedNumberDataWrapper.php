@@ -7,10 +7,13 @@ namespace Telnyx\VerifiedNumbers;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\VerifiedNumbers\VerifiedNumber\RecordType;
 
 /**
- * @phpstan-type VerifiedNumberDataWrapperShape = array{data?: VerifiedNumber|null}
+ * @phpstan-import-type VerifiedNumberShape from \Telnyx\VerifiedNumbers\VerifiedNumber
+ *
+ * @phpstan-type VerifiedNumberDataWrapperShape = array{
+ *   data?: null|VerifiedNumber|VerifiedNumberShape
+ * }
  */
 final class VerifiedNumberDataWrapper implements BaseModel
 {
@@ -30,11 +33,7 @@ final class VerifiedNumberDataWrapper implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param VerifiedNumber|array{
-     *   phoneNumber?: string|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   verifiedAt?: string|null,
-     * } $data
+     * @param VerifiedNumberShape $data
      */
     public static function with(VerifiedNumber|array|null $data = null): self
     {
@@ -46,11 +45,7 @@ final class VerifiedNumberDataWrapper implements BaseModel
     }
 
     /**
-     * @param VerifiedNumber|array{
-     *   phoneNumber?: string|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   verifiedAt?: string|null,
-     * } $data
+     * @param VerifiedNumberShape $data
      */
     public function withData(VerifiedNumber|array $data): self
     {

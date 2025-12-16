@@ -14,7 +14,7 @@ use Telnyx\Webhooks\TranscriptionWebhookEvent\Data\Payload\TranscriptionData\Tra
  *   confidence?: float|null,
  *   isFinal?: bool|null,
  *   transcript?: string|null,
- *   transcriptionTrack?: value-of<TranscriptionTrack>|null,
+ *   transcriptionTrack?: null|TranscriptionTrack|value-of<TranscriptionTrack>,
  * }
  */
 final class TranscriptionData implements BaseModel

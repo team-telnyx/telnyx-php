@@ -12,7 +12,7 @@ use Telnyx\Messages\MessageCancelScheduledResponse\From\LineType;
 /**
  * @phpstan-type FromShape = array{
  *   carrier?: string|null,
- *   lineType?: value-of<LineType>|null,
+ *   lineType?: null|LineType|value-of<LineType>,
  *   phoneNumber?: string|null,
  * }
  */

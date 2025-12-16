@@ -11,8 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderGetAllowedFocWindowsResponse\Data;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\PortingOrders\PortingOrderGetAllowedFocWindowsResponse\Data
+ * @phpstan-import-type PaginationMetaShape from \Telnyx\AuthenticationProviders\PaginationMeta
+ *
  * @phpstan-type PortingOrderGetAllowedFocWindowsResponseShape = array{
- *   data?: list<Data>|null, meta?: PaginationMeta|null
+ *   data?: list<DataShape>|null, meta?: null|PaginationMeta|PaginationMetaShape
  * }
  */
 final class PortingOrderGetAllowedFocWindowsResponse implements BaseModel
@@ -37,14 +40,8 @@ final class PortingOrderGetAllowedFocWindowsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   endedAt?: \DateTimeInterface|null,
-     *   recordType?: string|null,
-     *   startedAt?: \DateTimeInterface|null,
-     * }> $data
-     * @param PaginationMeta|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param list<DataShape> $data
+     * @param PaginationMetaShape $meta
      */
     public static function with(
         ?array $data = null,
@@ -59,11 +56,7 @@ final class PortingOrderGetAllowedFocWindowsResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   endedAt?: \DateTimeInterface|null,
-     *   recordType?: string|null,
-     *   startedAt?: \DateTimeInterface|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {
@@ -74,9 +67,7 @@ final class PortingOrderGetAllowedFocWindowsResponse implements BaseModel
     }
 
     /**
-     * @param PaginationMeta|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param PaginationMetaShape $meta
      */
     public function withMeta(PaginationMeta|array $meta): self
     {

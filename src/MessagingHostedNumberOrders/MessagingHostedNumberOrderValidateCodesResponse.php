@@ -8,11 +8,12 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesResponse\Data;
-use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesResponse\Data\PhoneNumber;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesResponse\Data
+ *
  * @phpstan-type MessagingHostedNumberOrderValidateCodesResponseShape = array{
- *   data?: Data|null
+ *   data?: null|Data|DataShape
  * }
  */
 final class MessagingHostedNumberOrderValidateCodesResponse implements BaseModel
@@ -33,7 +34,7 @@ final class MessagingHostedNumberOrderValidateCodesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{orderID: string, phoneNumbers: list<PhoneNumber>} $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -45,7 +46,7 @@ final class MessagingHostedNumberOrderValidateCodesResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{orderID: string, phoneNumbers: list<PhoneNumber>} $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

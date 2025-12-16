@@ -7,14 +7,15 @@ namespace Telnyx\CustomStorageCredentials;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\CustomStorageCredentials\CustomStorageConfiguration\Backend;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialGetResponse\RecordType;
 
 /**
+ * @phpstan-import-type CustomStorageConfigurationShape from \Telnyx\CustomStorageCredentials\CustomStorageConfiguration
+ *
  * @phpstan-type CustomStorageCredentialGetResponseShape = array{
  *   connectionID: string,
- *   data: CustomStorageConfiguration,
- *   recordType: value-of<RecordType>,
+ *   data: CustomStorageConfiguration|CustomStorageConfigurationShape,
+ *   recordType: RecordType|value-of<RecordType>,
  * }
  */
 final class CustomStorageCredentialGetResponse implements BaseModel
@@ -68,10 +69,7 @@ final class CustomStorageCredentialGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CustomStorageConfiguration|array{
-     *   backend: value-of<Backend>,
-     *   configuration: GcsConfigurationData|S3ConfigurationData|AzureConfigurationData,
-     * } $data
+     * @param CustomStorageConfigurationShape $data
      * @param RecordType|value-of<RecordType> $recordType
      */
     public static function with(
@@ -100,10 +98,7 @@ final class CustomStorageCredentialGetResponse implements BaseModel
     }
 
     /**
-     * @param CustomStorageConfiguration|array{
-     *   backend: value-of<Backend>,
-     *   configuration: GcsConfigurationData|S3ConfigurationData|AzureConfigurationData,
-     * } $data
+     * @param CustomStorageConfigurationShape $data
      */
     public function withData(CustomStorageConfiguration|array $data): self
     {

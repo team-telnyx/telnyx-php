@@ -14,7 +14,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\Conversations\InsightsService::list()
  *
- * @phpstan-type InsightListParamsShape = array{pageNumber?: int, pageSize?: int}
+ * @phpstan-type InsightListParamsShape = array{
+ *   pageNumber?: int|null, pageSize?: int|null
+ * }
  */
 final class InsightListParams implements BaseModel
 {

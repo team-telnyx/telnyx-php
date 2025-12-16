@@ -7,13 +7,12 @@ namespace Telnyx\Porting\LoaConfigurations;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Address;
-use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Contact;
-use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Logo;
 
 /**
+ * @phpstan-import-type PortingLoaConfigurationShape from \Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration
+ *
  * @phpstan-type LoaConfigurationGetResponseShape = array{
- *   data?: PortingLoaConfiguration|null
+ *   data?: null|PortingLoaConfiguration|PortingLoaConfigurationShape
  * }
  */
 final class LoaConfigurationGetResponse implements BaseModel
@@ -34,18 +33,7 @@ final class LoaConfigurationGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortingLoaConfiguration|array{
-     *   id?: string|null,
-     *   address?: Address|null,
-     *   companyName?: string|null,
-     *   contact?: Contact|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   logo?: Logo|null,
-     *   name?: string|null,
-     *   organizationID?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param PortingLoaConfigurationShape $data
      */
     public static function with(
         PortingLoaConfiguration|array|null $data = null
@@ -58,18 +46,7 @@ final class LoaConfigurationGetResponse implements BaseModel
     }
 
     /**
-     * @param PortingLoaConfiguration|array{
-     *   id?: string|null,
-     *   address?: Address|null,
-     *   companyName?: string|null,
-     *   contact?: Contact|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   logo?: Logo|null,
-     *   name?: string|null,
-     *   organizationID?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param PortingLoaConfigurationShape $data
      */
     public function withData(PortingLoaConfiguration|array $data): self
     {

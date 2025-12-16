@@ -14,10 +14,14 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[customer_reference][eq], filter[customer_reference][contains], filter[used_as_emergency], filter[street_address][contains], filter[address_book][eq].
  *
+ * @phpstan-import-type AddressBookShape from \Telnyx\Addresses\AddressListParams\Filter\AddressBook
+ * @phpstan-import-type CustomerReferenceShape from \Telnyx\Addresses\AddressListParams\Filter\CustomerReference
+ * @phpstan-import-type StreetAddressShape from \Telnyx\Addresses\AddressListParams\Filter\StreetAddress
+ *
  * @phpstan-type FilterShape = array{
- *   addressBook?: AddressBook|null,
- *   customerReference?: string|null|CustomerReferenceMatcher,
- *   streetAddress?: StreetAddress|null,
+ *   addressBook?: null|AddressBook|AddressBookShape,
+ *   customerReference?: CustomerReferenceShape|null,
+ *   streetAddress?: null|StreetAddress|StreetAddressShape,
  *   usedAsEmergency?: string|null,
  * }
  */
@@ -54,11 +58,9 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AddressBook|array{eq?: string|null} $addressBook
-     * @param string|CustomerReferenceMatcher|array{
-     *   contains?: string|null, eq?: string|null
-     * } $customerReference
-     * @param StreetAddress|array{contains?: string|null} $streetAddress
+     * @param AddressBookShape $addressBook
+     * @param CustomerReferenceShape $customerReference
+     * @param StreetAddressShape $streetAddress
      */
     public static function with(
         AddressBook|array|null $addressBook = null,
@@ -77,7 +79,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param AddressBook|array{eq?: string|null} $addressBook
+     * @param AddressBookShape $addressBook
      */
     public function withAddressBook(AddressBook|array $addressBook): self
     {
@@ -90,9 +92,7 @@ final class Filter implements BaseModel
     /**
      * If present, addresses with <code>customer_reference</code> containing the given value will be returned. Matching is not case-sensitive.
      *
-     * @param string|CustomerReferenceMatcher|array{
-     *   contains?: string|null, eq?: string|null
-     * } $customerReference
+     * @param CustomerReferenceShape $customerReference
      */
     public function withCustomerReference(
         string|CustomerReferenceMatcher|array $customerReference
@@ -104,7 +104,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param StreetAddress|array{contains?: string|null} $streetAddress
+     * @param StreetAddressShape $streetAddress
      */
     public function withStreetAddress(StreetAddress|array $streetAddress): self
     {

@@ -9,7 +9,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type RcsAgentResponseShape = array{data?: RcsAgent|null}
+ * @phpstan-import-type RcsAgentShape from \Telnyx\RcsAgents\RcsAgent
+ *
+ * @phpstan-type RcsAgentResponseShape = array{data?: null|RcsAgent|RcsAgentShape}
  */
 final class RcsAgentResponse implements BaseModel
 {
@@ -29,17 +31,7 @@ final class RcsAgentResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RcsAgent|array{
-     *   agentID?: string|null,
-     *   agentName?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   enabled?: bool|null,
-     *   profileID?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     *   userID?: string|null,
-     *   webhookFailoverURL?: string|null,
-     *   webhookURL?: string|null,
-     * } $data
+     * @param RcsAgentShape $data
      */
     public static function with(RcsAgent|array|null $data = null): self
     {
@@ -51,17 +43,7 @@ final class RcsAgentResponse implements BaseModel
     }
 
     /**
-     * @param RcsAgent|array{
-     *   agentID?: string|null,
-     *   agentName?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   enabled?: bool|null,
-     *   profileID?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     *   userID?: string|null,
-     *   webhookFailoverURL?: string|null,
-     *   webhookURL?: string|null,
-     * } $data
+     * @param RcsAgentShape $data
      */
     public function withData(RcsAgent|array $data): self
     {

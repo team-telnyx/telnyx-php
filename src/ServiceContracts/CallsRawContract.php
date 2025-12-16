@@ -16,7 +16,7 @@ interface CallsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|CallDialParams $params
+     * @param array<string,mixed>|CallDialParams $params
      *
      * @return BaseResponse<CallDialResponse>
      *

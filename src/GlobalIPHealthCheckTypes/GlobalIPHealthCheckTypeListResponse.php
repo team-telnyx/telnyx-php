@@ -10,8 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPHealthCheckTypes\GlobalIPHealthCheckTypeListResponse\Data;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\GlobalIPHealthCheckTypes\GlobalIPHealthCheckTypeListResponse\Data
+ *
  * @phpstan-type GlobalIPHealthCheckTypeListResponseShape = array{
- *   data?: list<Data>|null
+ *   data?: list<DataShape>|null
  * }
  */
 final class GlobalIPHealthCheckTypeListResponse implements BaseModel
@@ -33,11 +35,7 @@ final class GlobalIPHealthCheckTypeListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   healthCheckParams?: array<string,mixed>|null,
-     *   healthCheckType?: string|null,
-     *   recordType?: string|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public static function with(?array $data = null): self
     {
@@ -49,11 +47,7 @@ final class GlobalIPHealthCheckTypeListResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   healthCheckParams?: array<string,mixed>|null,
-     *   healthCheckType?: string|null,
-     *   recordType?: string|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {

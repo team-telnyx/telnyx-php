@@ -9,26 +9,20 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter;
-use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter\ActionType;
-use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter\Status;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Page;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Sort;
-use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Sort\Value;
 
 /**
  * Returns a list of action requirements for a specific porting order.
  *
  * @see Telnyx\Services\PortingOrders\ActionRequirementsService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Page
+ * @phpstan-import-type SortShape from \Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Sort
+ *
  * @phpstan-type ActionRequirementListParamsShape = array{
- *   filter?: Filter|array{
- *     id?: list<string>|null,
- *     actionType?: value-of<ActionType>|null,
- *     requirementTypeID?: string|null,
- *     status?: value-of<Status>|null,
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
- *   sort?: Sort|array{value?: value-of<Value>|null},
+ *   filter?: FilterShape|null, page?: PageShape|null, sort?: SortShape|null
  * }
  */
 final class ActionRequirementListParams implements BaseModel
@@ -65,14 +59,9 @@ final class ActionRequirementListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   id?: list<string>|null,
-     *   actionType?: value-of<ActionType>|null,
-     *   requirementTypeID?: string|null,
-     *   status?: value-of<Status>|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
-     * @param Sort|array{value?: value-of<Value>|null} $sort
+     * @param FilterShape $filter
+     * @param PageShape $page
+     * @param SortShape $sort
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -91,12 +80,7 @@ final class ActionRequirementListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[id][in][], filter[requirement_type_id], filter[action_type], filter[status].
      *
-     * @param Filter|array{
-     *   id?: list<string>|null,
-     *   actionType?: value-of<ActionType>|null,
-     *   requirementTypeID?: string|null,
-     *   status?: value-of<Status>|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -109,7 +93,7 @@ final class ActionRequirementListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {
@@ -122,7 +106,7 @@ final class ActionRequirementListParams implements BaseModel
     /**
      * Consolidated sort parameter (deepObject style). Originally: sort[value].
      *
-     * @param Sort|array{value?: value-of<Value>|null} $sort
+     * @param SortShape $sort
      */
     public function withSort(Sort|array $sort): self
     {

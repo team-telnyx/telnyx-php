@@ -17,10 +17,10 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\FilterType;
  * @phpstan-type FilterShape = array{
  *   billingGroup?: string|null,
  *   cld?: string|null,
- *   cldFilter?: value-of<CldFilter>|null,
+ *   cldFilter?: null|CldFilter|value-of<CldFilter>,
  *   cli?: string|null,
- *   cliFilter?: value-of<CliFilter>|null,
- *   filterType?: value-of<FilterType>|null,
+ *   cliFilter?: null|CliFilter|value-of<CliFilter>,
+ *   filterType?: null|FilterType|value-of<FilterType>,
  *   tagsList?: string|null,
  * }
  */

@@ -9,8 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\Events\EventListParams\Filter;
-use Telnyx\Porting\Events\EventListParams\Filter\CreatedAt;
-use Telnyx\Porting\Events\EventListParams\Filter\Type;
 use Telnyx\Porting\Events\EventListParams\Page;
 
 /**
@@ -18,13 +16,11 @@ use Telnyx\Porting\Events\EventListParams\Page;
  *
  * @see Telnyx\Services\Porting\EventsService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\Porting\Events\EventListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Porting\Events\EventListParams\Page
+ *
  * @phpstan-type EventListParamsShape = array{
- *   filter?: Filter|array{
- *     createdAt?: CreatedAt|null,
- *     portingOrderID?: string|null,
- *     type?: value-of<Type>|null,
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   filter?: FilterShape|null, page?: PageShape|null
  * }
  */
 final class EventListParams implements BaseModel
@@ -55,12 +51,8 @@ final class EventListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   createdAt?: CreatedAt|null,
-     *   portingOrderID?: string|null,
-     *   type?: value-of<Type>|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -77,11 +69,7 @@ final class EventListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[type], filter[porting_order_id], filter[created_at][gte], filter[created_at][lte].
      *
-     * @param Filter|array{
-     *   createdAt?: CreatedAt|null,
-     *   portingOrderID?: string|null,
-     *   type?: value-of<Type>|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -94,7 +82,7 @@ final class EventListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

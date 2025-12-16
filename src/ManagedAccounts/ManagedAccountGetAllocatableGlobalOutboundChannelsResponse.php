@@ -10,8 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ManagedAccounts\ManagedAccountGetAllocatableGlobalOutboundChannelsResponse\Data;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\ManagedAccounts\ManagedAccountGetAllocatableGlobalOutboundChannelsResponse\Data
+ *
  * @phpstan-type ManagedAccountGetAllocatableGlobalOutboundChannelsResponseShape = array{
- *   data?: Data|null
+ *   data?: null|Data|DataShape
  * }
  */
 final class ManagedAccountGetAllocatableGlobalOutboundChannelsResponse implements BaseModel
@@ -32,12 +34,7 @@ final class ManagedAccountGetAllocatableGlobalOutboundChannelsResponse implement
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   allocatableGlobalOutboundChannels?: int|null,
-     *   managedAccountAllowCustomPricing?: bool|null,
-     *   recordType?: string|null,
-     *   totalGlobalChannelsAllocated?: int|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -49,12 +46,7 @@ final class ManagedAccountGetAllocatableGlobalOutboundChannelsResponse implement
     }
 
     /**
-     * @param Data|array{
-     *   allocatableGlobalOutboundChannels?: int|null,
-     *   managedAccountAllowCustomPricing?: bool|null,
-     *   recordType?: string|null,
-     *   totalGlobalChannelsAllocated?: int|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

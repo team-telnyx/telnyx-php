@@ -14,7 +14,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\ClustersService::list()
  *
- * @phpstan-type ClusterListParamsShape = array{pageNumber?: int, pageSize?: int}
+ * @phpstan-type ClusterListParamsShape = array{
+ *   pageNumber?: int|null, pageSize?: int|null
+ * }
  */
 final class ClusterListParams implements BaseModel
 {

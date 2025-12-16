@@ -7,13 +7,11 @@ namespace Telnyx\Faxes;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Faxes\Fax\Direction;
-use Telnyx\Faxes\Fax\Quality;
-use Telnyx\Faxes\Fax\RecordType;
-use Telnyx\Faxes\Fax\Status;
 
 /**
- * @phpstan-type FaxGetResponseShape = array{data?: Fax|null}
+ * @phpstan-import-type FaxShape from \Telnyx\Faxes\Fax
+ *
+ * @phpstan-type FaxGetResponseShape = array{data?: null|Fax|FaxShape}
  */
 final class FaxGetResponse implements BaseModel
 {
@@ -33,27 +31,7 @@ final class FaxGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Fax|array{
-     *   id?: string|null,
-     *   clientState?: string|null,
-     *   connectionID?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   direction?: value-of<Direction>|null,
-     *   from?: string|null,
-     *   fromDisplayName?: string|null,
-     *   mediaName?: string|null,
-     *   mediaURL?: string|null,
-     *   previewURL?: string|null,
-     *   quality?: value-of<Quality>|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   status?: value-of<Status>|null,
-     *   storeMedia?: bool|null,
-     *   storedMediaURL?: string|null,
-     *   to?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     *   webhookFailoverURL?: string|null,
-     *   webhookURL?: string|null,
-     * } $data
+     * @param FaxShape $data
      */
     public static function with(Fax|array|null $data = null): self
     {
@@ -65,27 +43,7 @@ final class FaxGetResponse implements BaseModel
     }
 
     /**
-     * @param Fax|array{
-     *   id?: string|null,
-     *   clientState?: string|null,
-     *   connectionID?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   direction?: value-of<Direction>|null,
-     *   from?: string|null,
-     *   fromDisplayName?: string|null,
-     *   mediaName?: string|null,
-     *   mediaURL?: string|null,
-     *   previewURL?: string|null,
-     *   quality?: value-of<Quality>|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   status?: value-of<Status>|null,
-     *   storeMedia?: bool|null,
-     *   storedMediaURL?: string|null,
-     *   to?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     *   webhookFailoverURL?: string|null,
-     *   webhookURL?: string|null,
-     * } $data
+     * @param FaxShape $data
      */
     public function withData(Fax|array $data): self
     {

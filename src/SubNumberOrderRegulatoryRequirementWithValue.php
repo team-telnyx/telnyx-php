@@ -11,7 +11,7 @@ use Telnyx\SubNumberOrderRegulatoryRequirementWithValue\FieldType;
 
 /**
  * @phpstan-type SubNumberOrderRegulatoryRequirementWithValueShape = array{
- *   fieldType?: value-of<FieldType>|null,
+ *   fieldType?: null|FieldType|value-of<FieldType>,
  *   fieldValue?: string|null,
  *   recordType?: string|null,
  *   requirementID?: string|null,

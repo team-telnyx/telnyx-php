@@ -21,7 +21,7 @@ interface ActivationJobsRawContract
      * @api
      *
      * @param string $activationJobID Activation Job Identifier
-     * @param array<mixed>|ActivationJobRetrieveParams $params
+     * @param array<string,mixed>|ActivationJobRetrieveParams $params
      *
      * @return BaseResponse<ActivationJobGetResponse>
      *
@@ -37,7 +37,7 @@ interface ActivationJobsRawContract
      * @api
      *
      * @param string $activationJobID Path param: Activation Job Identifier
-     * @param array<mixed>|ActivationJobUpdateParams $params
+     * @param array<string,mixed>|ActivationJobUpdateParams $params
      *
      * @return BaseResponse<ActivationJobUpdateResponse>
      *
@@ -53,7 +53,7 @@ interface ActivationJobsRawContract
      * @api
      *
      * @param string $id Porting Order id
-     * @param array<mixed>|ActivationJobListParams $params
+     * @param array<string,mixed>|ActivationJobListParams $params
      *
      * @return BaseResponse<DefaultPagination<PortingOrdersActivationJob>>
      *

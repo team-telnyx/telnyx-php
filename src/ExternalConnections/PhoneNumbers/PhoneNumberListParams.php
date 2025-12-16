@@ -9,9 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Filter;
-use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Filter\CivicAddressID;
-use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Filter\LocationID;
-use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Filter\PhoneNumber;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Page;
 
 /**
@@ -19,13 +16,11 @@ use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Page;
  *
  * @see Telnyx\Services\ExternalConnections\PhoneNumbersService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Page
+ *
  * @phpstan-type PhoneNumberListParamsShape = array{
- *   filter?: Filter|array{
- *     civicAddressID?: CivicAddressID|null,
- *     locationID?: LocationID|null,
- *     phoneNumber?: PhoneNumber|null,
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   filter?: FilterShape|null, page?: PageShape|null
  * }
  */
 final class PhoneNumberListParams implements BaseModel
@@ -56,12 +51,8 @@ final class PhoneNumberListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   civicAddressID?: CivicAddressID|null,
-     *   locationID?: LocationID|null,
-     *   phoneNumber?: PhoneNumber|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -78,11 +69,7 @@ final class PhoneNumberListParams implements BaseModel
     /**
      * Filter parameter for phone numbers (deepObject style). Supports filtering by phone_number, civic_address_id, and location_id with eq/contains operations.
      *
-     * @param Filter|array{
-     *   civicAddressID?: CivicAddressID|null,
-     *   locationID?: LocationID|null,
-     *   phoneNumber?: PhoneNumber|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -95,7 +82,7 @@ final class PhoneNumberListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

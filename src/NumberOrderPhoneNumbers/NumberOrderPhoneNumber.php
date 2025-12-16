@@ -11,9 +11,10 @@ use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumber\PhoneNumberType;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumber\RequirementsStatus;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumber\Status;
 use Telnyx\SubNumberOrderRegulatoryRequirementWithValue;
-use Telnyx\SubNumberOrderRegulatoryRequirementWithValue\FieldType;
 
 /**
+ * @phpstan-import-type SubNumberOrderRegulatoryRequirementWithValueShape from \Telnyx\SubNumberOrderRegulatoryRequirementWithValue
+ *
  * @phpstan-type NumberOrderPhoneNumberShape = array{
  *   id?: string|null,
  *   bundleID?: string|null,
@@ -23,12 +24,12 @@ use Telnyx\SubNumberOrderRegulatoryRequirementWithValue\FieldType;
  *   locality?: string|null,
  *   orderRequestID?: string|null,
  *   phoneNumber?: string|null,
- *   phoneNumberType?: value-of<PhoneNumberType>|null,
+ *   phoneNumberType?: null|PhoneNumberType|value-of<PhoneNumberType>,
  *   recordType?: string|null,
- *   regulatoryRequirements?: list<SubNumberOrderRegulatoryRequirementWithValue>|null,
+ *   regulatoryRequirements?: list<SubNumberOrderRegulatoryRequirementWithValueShape>|null,
  *   requirementsMet?: bool|null,
- *   requirementsStatus?: value-of<RequirementsStatus>|null,
- *   status?: value-of<Status>|null,
+ *   requirementsStatus?: null|RequirementsStatus|value-of<RequirementsStatus>,
+ *   status?: null|Status|value-of<Status>,
  *   subNumberOrderID?: string|null,
  * }
  */
@@ -113,12 +114,7 @@ final class NumberOrderPhoneNumber implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
-     * @param list<SubNumberOrderRegulatoryRequirementWithValue|array{
-     *   fieldType?: value-of<FieldType>|null,
-     *   fieldValue?: string|null,
-     *   recordType?: string|null,
-     *   requirementID?: string|null,
-     * }> $regulatoryRequirements
+     * @param list<SubNumberOrderRegulatoryRequirementWithValueShape> $regulatoryRequirements
      * @param RequirementsStatus|value-of<RequirementsStatus> $requirementsStatus
      * @param Status|value-of<Status> $status
      */
@@ -245,12 +241,7 @@ final class NumberOrderPhoneNumber implements BaseModel
     }
 
     /**
-     * @param list<SubNumberOrderRegulatoryRequirementWithValue|array{
-     *   fieldType?: value-of<FieldType>|null,
-     *   fieldValue?: string|null,
-     *   recordType?: string|null,
-     *   requirementID?: string|null,
-     * }> $regulatoryRequirements
+     * @param list<SubNumberOrderRegulatoryRequirementWithValueShape> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements

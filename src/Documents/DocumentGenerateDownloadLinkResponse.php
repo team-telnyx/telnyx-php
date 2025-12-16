@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Documents\DocumentGenerateDownloadLinkResponse\Data;
 
 /**
- * @phpstan-type DocumentGenerateDownloadLinkResponseShape = array{data: Data}
+ * @phpstan-import-type DataShape from \Telnyx\Documents\DocumentGenerateDownloadLinkResponse\Data
+ *
+ * @phpstan-type DocumentGenerateDownloadLinkResponseShape = array{
+ *   data: Data|DataShape
+ * }
  */
 final class DocumentGenerateDownloadLinkResponse implements BaseModel
 {
@@ -44,7 +48,7 @@ final class DocumentGenerateDownloadLinkResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{url: string} $data
+     * @param DataShape $data
      */
     public static function with(Data|array $data): self
     {
@@ -56,7 +60,7 @@ final class DocumentGenerateDownloadLinkResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{url: string} $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

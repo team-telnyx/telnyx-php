@@ -19,7 +19,7 @@ interface InexplicitNumberOrdersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|InexplicitNumberOrderCreateParams $params
+     * @param array<string,mixed>|InexplicitNumberOrderCreateParams $params
      *
      * @return BaseResponse<InexplicitNumberOrderNewResponse>
      *
@@ -47,7 +47,7 @@ interface InexplicitNumberOrdersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|InexplicitNumberOrderListParams $params
+     * @param array<string,mixed>|InexplicitNumberOrderListParams $params
      *
      * @return BaseResponse<DefaultFlatPaginationForInexplicitNumberOrders<InexplicitNumberOrderResponse,>,>
      *

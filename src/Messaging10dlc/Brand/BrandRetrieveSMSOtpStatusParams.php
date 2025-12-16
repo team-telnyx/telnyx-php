@@ -21,7 +21,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Messaging10dlc\BrandService::retrieveSMSOtpStatus()
  *
- * @phpstan-type BrandRetrieveSMSOtpStatusParamsShape = array{brandID?: string}
+ * @phpstan-type BrandRetrieveSMSOtpStatusParamsShape = array{
+ *   brandID?: string|null
+ * }
  */
 final class BrandRetrieveSMSOtpStatusParams implements BaseModel
 {

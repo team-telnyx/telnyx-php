@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\AuthenticationProviders;
 
-use Telnyx\AuthenticationProviders\Settings\IdpCertFingerprintAlgorithm;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -15,17 +14,14 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AuthenticationProvidersService::update()
  *
+ * @phpstan-import-type SettingsShape from \Telnyx\AuthenticationProviders\Settings
+ *
  * @phpstan-type AuthenticationProviderUpdateParamsShape = array{
- *   active?: bool,
- *   name?: string,
- *   settings?: Settings|array{
- *     idpCertFingerprint: string,
- *     idpEntityID: string,
- *     idpSSOTargetURL: string,
- *     idpCertFingerprintAlgorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
- *   },
- *   settingsURL?: string,
- *   shortName?: string,
+ *   active?: bool|null,
+ *   name?: string|null,
+ *   settings?: SettingsShape|null,
+ *   settingsURL?: string|null,
+ *   shortName?: string|null,
  * }
  */
 final class AuthenticationProviderUpdateParams implements BaseModel
@@ -74,12 +70,7 @@ final class AuthenticationProviderUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Settings|array{
-     *   idpCertFingerprint: string,
-     *   idpEntityID: string,
-     *   idpSSOTargetURL: string,
-     *   idpCertFingerprintAlgorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
-     * } $settings
+     * @param SettingsShape $settings
      */
     public static function with(
         ?bool $active = null,
@@ -124,12 +115,7 @@ final class AuthenticationProviderUpdateParams implements BaseModel
     /**
      * The settings associated with the authentication provider.
      *
-     * @param Settings|array{
-     *   idpCertFingerprint: string,
-     *   idpEntityID: string,
-     *   idpSSOTargetURL: string,
-     *   idpCertFingerprintAlgorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
-     * } $settings
+     * @param SettingsShape $settings
      */
     public function withSettings(Settings|array $settings): self
     {

@@ -21,7 +21,7 @@ interface ClustersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ClusterRetrieveParams $params
+     * @param array<string,mixed>|ClusterRetrieveParams $params
      *
      * @return BaseResponse<ClusterGetResponse>
      *
@@ -36,7 +36,7 @@ interface ClustersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ClusterListParams $params
+     * @param array<string,mixed>|ClusterListParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<ClusterListResponse>>
      *
@@ -62,7 +62,7 @@ interface ClustersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ClusterComputeParams $params
+     * @param array<string,mixed>|ClusterComputeParams $params
      *
      * @return BaseResponse<ClusterComputeResponse>
      *
@@ -76,7 +76,7 @@ interface ClustersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ClusterFetchGraphParams $params
+     * @param array<string,mixed>|ClusterFetchGraphParams $params
      *
      * @return BaseResponse<string>
      *

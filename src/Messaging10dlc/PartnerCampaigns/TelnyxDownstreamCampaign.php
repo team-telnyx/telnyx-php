@@ -19,7 +19,7 @@ use Telnyx\Messaging10dlc\PartnerCampaigns\TelnyxDownstreamCampaign\CampaignStat
  *   ageGated?: bool|null,
  *   assignedPhoneNumbersCount?: float|null,
  *   brandDisplayName?: string|null,
- *   campaignStatus?: value-of<CampaignStatus>|null,
+ *   campaignStatus?: null|CampaignStatus|value-of<CampaignStatus>,
  *   createdAt?: string|null,
  *   description?: string|null,
  *   directLending?: bool|null,

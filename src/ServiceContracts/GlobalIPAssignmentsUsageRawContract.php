@@ -15,7 +15,7 @@ interface GlobalIPAssignmentsUsageRawContract
     /**
      * @api
      *
-     * @param array<mixed>|GlobalIPAssignmentsUsageRetrieveParams $params
+     * @param array<string,mixed>|GlobalIPAssignmentsUsageRetrieveParams $params
      *
      * @return BaseResponse<GlobalIPAssignmentsUsageGetResponse>
      *

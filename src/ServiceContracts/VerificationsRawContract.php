@@ -32,7 +32,7 @@ interface VerificationsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|VerificationTriggerCallParams $params
+     * @param array<string,mixed>|VerificationTriggerCallParams $params
      *
      * @return BaseResponse<CreateVerificationResponse>
      *
@@ -46,7 +46,7 @@ interface VerificationsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|VerificationTriggerFlashcallParams $params
+     * @param array<string,mixed>|VerificationTriggerFlashcallParams $params
      *
      * @return BaseResponse<CreateVerificationResponse>
      *
@@ -60,7 +60,7 @@ interface VerificationsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|VerificationTriggerSMSParams $params
+     * @param array<string,mixed>|VerificationTriggerSMSParams $params
      *
      * @return BaseResponse<CreateVerificationResponse>
      *

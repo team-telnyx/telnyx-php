@@ -14,9 +14,9 @@ use Telnyx\PhoneNumbers\Voice\CallRecording\InboundCallRecordingFormat;
  * The call recording settings for a phone number.
  *
  * @phpstan-type CallRecordingShape = array{
- *   inboundCallRecordingChannels?: value-of<InboundCallRecordingChannels>|null,
+ *   inboundCallRecordingChannels?: null|InboundCallRecordingChannels|value-of<InboundCallRecordingChannels>,
  *   inboundCallRecordingEnabled?: bool|null,
- *   inboundCallRecordingFormat?: value-of<InboundCallRecordingFormat>|null,
+ *   inboundCallRecordingFormat?: null|InboundCallRecordingFormat|value-of<InboundCallRecordingFormat>,
  * }
  */
 final class CallRecording implements BaseModel

@@ -21,7 +21,7 @@ interface AssociatedPhoneNumbersRawContract
      * @api
      *
      * @param string $portingOrderID Identifies the Porting Order associated with the phone number
-     * @param array<mixed>|AssociatedPhoneNumberCreateParams $params
+     * @param array<string,mixed>|AssociatedPhoneNumberCreateParams $params
      *
      * @return BaseResponse<AssociatedPhoneNumberNewResponse>
      *
@@ -37,7 +37,7 @@ interface AssociatedPhoneNumbersRawContract
      * @api
      *
      * @param string $portingOrderID Identifies the Porting Order associated with the phone numbers
-     * @param array<mixed>|AssociatedPhoneNumberListParams $params
+     * @param array<string,mixed>|AssociatedPhoneNumberListParams $params
      *
      * @return BaseResponse<DefaultPagination<PortingAssociatedPhoneNumber>>
      *
@@ -53,7 +53,7 @@ interface AssociatedPhoneNumbersRawContract
      * @api
      *
      * @param string $id Identifies the associated phone number to be deleted
-     * @param array<mixed>|AssociatedPhoneNumberDeleteParams $params
+     * @param array<string,mixed>|AssociatedPhoneNumberDeleteParams $params
      *
      * @return BaseResponse<AssociatedPhoneNumberDeleteResponse>
      *

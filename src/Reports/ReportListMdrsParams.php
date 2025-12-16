@@ -18,15 +18,15 @@ use Telnyx\Reports\ReportListMdrsParams\Status;
  * @see Telnyx\Services\ReportsService::listMdrs()
  *
  * @phpstan-type ReportListMdrsParamsShape = array{
- *   id?: string,
- *   cld?: string,
- *   cli?: string,
- *   direction?: Direction|value-of<Direction>,
- *   endDate?: string,
- *   messageType?: MessageType|value-of<MessageType>,
- *   profile?: string,
- *   startDate?: string,
- *   status?: Status|value-of<Status>,
+ *   id?: string|null,
+ *   cld?: string|null,
+ *   cli?: string|null,
+ *   direction?: null|Direction|value-of<Direction>,
+ *   endDate?: string|null,
+ *   messageType?: null|MessageType|value-of<MessageType>,
+ *   profile?: string|null,
+ *   startDate?: string|null,
+ *   status?: null|Status|value-of<Status>,
  * }
  */
 final class ReportListMdrsParams implements BaseModel

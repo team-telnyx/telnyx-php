@@ -10,53 +10,48 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
-use Telnyx\CredentialConnections\ConnectionRtcpSettings\Port;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
-use Telnyx\FqdnConnections\InboundFqdn\AniNumberFormat;
-use Telnyx\FqdnConnections\InboundFqdn\DefaultRoutingMethod;
-use Telnyx\FqdnConnections\InboundFqdn\DnisNumberFormat;
-use Telnyx\FqdnConnections\InboundFqdn\SipRegion;
-use Telnyx\FqdnConnections\InboundFqdn\SipSubdomainReceiveSettings;
-use Telnyx\FqdnConnections\OutboundFqdn\AniOverrideType;
-use Telnyx\FqdnConnections\OutboundFqdn\IPAuthenticationMethod;
-use Telnyx\FqdnConnections\OutboundFqdn\T38ReinviteSource;
 
 /**
+ * @phpstan-import-type InboundFqdnShape from \Telnyx\FqdnConnections\InboundFqdn
+ * @phpstan-import-type OutboundFqdnShape from \Telnyx\FqdnConnections\OutboundFqdn
+ * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
+ *
  * @phpstan-type FqdnConnectionShape = array{
  *   connectionName: string,
  *   id?: string|null,
  *   active?: bool|null,
  *   adjustDtmfTimestamp?: bool|null,
- *   anchorsiteOverride?: value-of<AnchorsiteOverride>|null,
+ *   anchorsiteOverride?: null|AnchorsiteOverride|value-of<AnchorsiteOverride>,
  *   callCostEnabled?: bool|null,
  *   callCostInWebhooks?: bool|null,
  *   createdAt?: string|null,
  *   defaultOnHoldComfortNoiseEnabled?: bool|null,
- *   dtmfType?: value-of<DtmfType>|null,
+ *   dtmfType?: null|DtmfType|value-of<DtmfType>,
  *   encodeContactHeaderEnabled?: bool|null,
- *   encryptedMedia?: value-of<EncryptedMedia>|null,
+ *   encryptedMedia?: null|EncryptedMedia|value-of<EncryptedMedia>,
  *   ignoreDtmfDuration?: bool|null,
  *   ignoreMarkBit?: bool|null,
- *   inbound?: InboundFqdn|null,
+ *   inbound?: null|InboundFqdn|InboundFqdnShape,
  *   microsoftTeamsSbc?: bool|null,
  *   noiseSuppression?: bool|null,
  *   onnetT38PassthroughEnabled?: bool|null,
- *   outbound?: OutboundFqdn|null,
+ *   outbound?: null|OutboundFqdn|OutboundFqdnShape,
  *   password?: string|null,
  *   recordType?: string|null,
- *   rtcpSettings?: ConnectionRtcpSettings|null,
+ *   rtcpSettings?: null|ConnectionRtcpSettings|ConnectionRtcpSettingsShape,
  *   rtpPassCodecsOnStreamChange?: bool|null,
  *   sendNormalizedTimestamps?: bool|null,
  *   tags?: list<string>|null,
  *   thirdPartyControlEnabled?: bool|null,
- *   transportProtocol?: value-of<TransportProtocol>|null,
+ *   transportProtocol?: null|TransportProtocol|value-of<TransportProtocol>,
  *   txtName?: string|null,
  *   txtTtl?: int|null,
  *   txtValue?: string|null,
  *   updatedAt?: string|null,
  *   userName?: string|null,
- *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
+ *   webhookAPIVersion?: null|WebhookAPIVersion|value-of<WebhookAPIVersion>,
  *   webhookEventFailoverURL?: string|null,
  *   webhookEventURL?: string|null,
  *   webhookTimeoutSecs?: int|null,
@@ -313,48 +308,9 @@ final class FqdnConnection implements BaseModel
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
      * @param DtmfType|value-of<DtmfType> $dtmfType
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
-     * @param InboundFqdn|array{
-     *   aniNumberFormat?: value-of<AniNumberFormat>|null,
-     *   channelLimit?: int|null,
-     *   codecs?: list<string>|null,
-     *   defaultPrimaryFqdnID?: string|null,
-     *   defaultRoutingMethod?: value-of<DefaultRoutingMethod>|null,
-     *   defaultSecondaryFqdnID?: string|null,
-     *   defaultTertiaryFqdnID?: string|null,
-     *   dnisNumberFormat?: value-of<DnisNumberFormat>|null,
-     *   generateRingbackTone?: bool|null,
-     *   isupHeadersEnabled?: bool|null,
-     *   prackEnabled?: bool|null,
-     *   shakenStirEnabled?: bool|null,
-     *   sipCompactHeadersEnabled?: bool|null,
-     *   sipRegion?: value-of<SipRegion>|null,
-     *   sipSubdomain?: string|null,
-     *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
-     *   timeout1xxSecs?: int|null,
-     *   timeout2xxSecs?: int|null,
-     * } $inbound
-     * @param OutboundFqdn|array{
-     *   aniOverride?: string|null,
-     *   aniOverrideType?: value-of<AniOverrideType>|null,
-     *   callParkingEnabled?: bool|null,
-     *   channelLimit?: int|null,
-     *   encryptedMedia?: value-of<EncryptedMedia>|null,
-     *   generateRingbackTone?: bool|null,
-     *   instantRingbackEnabled?: bool|null,
-     *   ipAuthenticationMethod?: value-of<IPAuthenticationMethod>|null,
-     *   ipAuthenticationToken?: string|null,
-     *   localization?: string|null,
-     *   outboundVoiceProfileID?: string|null,
-     *   t38ReinviteSource?: value-of<T38ReinviteSource>|null,
-     *   techPrefix?: string|null,
-     *   timeout1xxSecs?: int|null,
-     *   timeout2xxSecs?: int|null,
-     * } $outbound
-     * @param ConnectionRtcpSettings|array{
-     *   captureEnabled?: bool|null,
-     *   port?: value-of<Port>|null,
-     *   reportFrequencySecs?: int|null,
-     * } $rtcpSettings
+     * @param InboundFqdnShape $inbound
+     * @param OutboundFqdnShape $outbound
+     * @param ConnectionRtcpSettingsShape $rtcpSettings
      * @param list<string> $tags
      * @param TransportProtocol|value-of<TransportProtocol> $transportProtocol
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion
@@ -605,26 +561,7 @@ final class FqdnConnection implements BaseModel
     }
 
     /**
-     * @param InboundFqdn|array{
-     *   aniNumberFormat?: value-of<AniNumberFormat>|null,
-     *   channelLimit?: int|null,
-     *   codecs?: list<string>|null,
-     *   defaultPrimaryFqdnID?: string|null,
-     *   defaultRoutingMethod?: value-of<DefaultRoutingMethod>|null,
-     *   defaultSecondaryFqdnID?: string|null,
-     *   defaultTertiaryFqdnID?: string|null,
-     *   dnisNumberFormat?: value-of<DnisNumberFormat>|null,
-     *   generateRingbackTone?: bool|null,
-     *   isupHeadersEnabled?: bool|null,
-     *   prackEnabled?: bool|null,
-     *   shakenStirEnabled?: bool|null,
-     *   sipCompactHeadersEnabled?: bool|null,
-     *   sipRegion?: value-of<SipRegion>|null,
-     *   sipSubdomain?: string|null,
-     *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
-     *   timeout1xxSecs?: int|null,
-     *   timeout2xxSecs?: int|null,
-     * } $inbound
+     * @param InboundFqdnShape $inbound
      */
     public function withInbound(InboundFqdn|array $inbound): self
     {
@@ -669,23 +606,7 @@ final class FqdnConnection implements BaseModel
     }
 
     /**
-     * @param OutboundFqdn|array{
-     *   aniOverride?: string|null,
-     *   aniOverrideType?: value-of<AniOverrideType>|null,
-     *   callParkingEnabled?: bool|null,
-     *   channelLimit?: int|null,
-     *   encryptedMedia?: value-of<EncryptedMedia>|null,
-     *   generateRingbackTone?: bool|null,
-     *   instantRingbackEnabled?: bool|null,
-     *   ipAuthenticationMethod?: value-of<IPAuthenticationMethod>|null,
-     *   ipAuthenticationToken?: string|null,
-     *   localization?: string|null,
-     *   outboundVoiceProfileID?: string|null,
-     *   t38ReinviteSource?: value-of<T38ReinviteSource>|null,
-     *   techPrefix?: string|null,
-     *   timeout1xxSecs?: int|null,
-     *   timeout2xxSecs?: int|null,
-     * } $outbound
+     * @param OutboundFqdnShape $outbound
      */
     public function withOutbound(OutboundFqdn|array $outbound): self
     {
@@ -718,11 +639,7 @@ final class FqdnConnection implements BaseModel
     }
 
     /**
-     * @param ConnectionRtcpSettings|array{
-     *   captureEnabled?: bool|null,
-     *   port?: value-of<Port>|null,
-     *   reportFrequencySecs?: int|null,
-     * } $rtcpSettings
+     * @param ConnectionRtcpSettingsShape $rtcpSettings
      */
     public function withRtcpSettings(
         ConnectionRtcpSettings|array $rtcpSettings

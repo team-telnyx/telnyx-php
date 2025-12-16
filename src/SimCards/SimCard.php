@@ -11,41 +11,45 @@ use Telnyx\Core\Conversion\MapOf;
 use Telnyx\SimCards\SimCard\CurrentBillingPeriodConsumedData;
 use Telnyx\SimCards\SimCard\CurrentDeviceLocation;
 use Telnyx\SimCards\SimCard\DataLimit;
-use Telnyx\SimCards\SimCard\DataLimit\Unit;
 use Telnyx\SimCards\SimCard\EsimInstallationStatus;
 use Telnyx\SimCards\SimCard\LiveDataSession;
 use Telnyx\SimCards\SimCard\PinPukCodes;
 use Telnyx\SimCards\SimCard\Type;
 use Telnyx\SimCardStatus;
-use Telnyx\SimCardStatus\Value;
 
 /**
+ * @phpstan-import-type CurrentBillingPeriodConsumedDataShape from \Telnyx\SimCards\SimCard\CurrentBillingPeriodConsumedData
+ * @phpstan-import-type CurrentDeviceLocationShape from \Telnyx\SimCards\SimCard\CurrentDeviceLocation
+ * @phpstan-import-type DataLimitShape from \Telnyx\SimCards\SimCard\DataLimit
+ * @phpstan-import-type PinPukCodesShape from \Telnyx\SimCards\SimCard\PinPukCodes
+ * @phpstan-import-type SimCardStatusShape from \Telnyx\SimCardStatus
+ *
  * @phpstan-type SimCardShape = array{
  *   id?: string|null,
  *   actionsInProgress?: bool|null,
  *   authorizedImeis?: list<string>|null,
  *   createdAt?: string|null,
- *   currentBillingPeriodConsumedData?: CurrentBillingPeriodConsumedData|null,
- *   currentDeviceLocation?: CurrentDeviceLocation|null,
+ *   currentBillingPeriodConsumedData?: null|CurrentBillingPeriodConsumedData|CurrentBillingPeriodConsumedDataShape,
+ *   currentDeviceLocation?: null|CurrentDeviceLocation|CurrentDeviceLocationShape,
  *   currentImei?: string|null,
  *   currentMcc?: string|null,
  *   currentMnc?: string|null,
- *   dataLimit?: DataLimit|null,
+ *   dataLimit?: null|DataLimit|DataLimitShape,
  *   eid?: string|null,
- *   esimInstallationStatus?: value-of<EsimInstallationStatus>|null,
+ *   esimInstallationStatus?: null|EsimInstallationStatus|value-of<EsimInstallationStatus>,
  *   iccid?: string|null,
  *   imsi?: string|null,
  *   ipv4?: string|null,
  *   ipv6?: string|null,
- *   liveDataSession?: value-of<LiveDataSession>|null,
+ *   liveDataSession?: null|LiveDataSession|value-of<LiveDataSession>,
  *   msisdn?: string|null,
- *   pinPukCodes?: PinPukCodes|null,
+ *   pinPukCodes?: null|PinPukCodes|PinPukCodesShape,
  *   recordType?: string|null,
  *   resourcesWithInProgressActions?: list<array<string,mixed>>|null,
  *   simCardGroupID?: string|null,
- *   status?: SimCardStatus|null,
+ *   status?: null|SimCardStatus|SimCardStatusShape,
  *   tags?: list<string>|null,
- *   type?: value-of<Type>|null,
+ *   type?: null|Type|value-of<Type>,
  *   updatedAt?: string|null,
  *   version?: string|null,
  * }
@@ -242,27 +246,14 @@ final class SimCard implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string>|null $authorizedImeis
-     * @param CurrentBillingPeriodConsumedData|array{
-     *   amount?: string|null, unit?: string|null
-     * } $currentBillingPeriodConsumedData
-     * @param CurrentDeviceLocation|array{
-     *   accuracy?: int|null,
-     *   accuracyUnit?: string|null,
-     *   latitude?: string|null,
-     *   longitude?: string|null,
-     * } $currentDeviceLocation
-     * @param DataLimit|array{
-     *   amount?: string|null, unit?: value-of<Unit>|null
-     * } $dataLimit
+     * @param CurrentBillingPeriodConsumedDataShape $currentBillingPeriodConsumedData
+     * @param CurrentDeviceLocationShape $currentDeviceLocation
+     * @param DataLimitShape $dataLimit
      * @param EsimInstallationStatus|value-of<EsimInstallationStatus>|null $esimInstallationStatus
      * @param LiveDataSession|value-of<LiveDataSession> $liveDataSession
-     * @param PinPukCodes|array{
-     *   pin1?: string|null, pin2?: string|null, puk1?: string|null, puk2?: string|null
-     * } $pinPukCodes
+     * @param PinPukCodesShape $pinPukCodes
      * @param list<array<string,mixed>> $resourcesWithInProgressActions
-     * @param SimCardStatus|array{
-     *   reason?: string|null, value?: value-of<Value>|null
-     * } $status
+     * @param SimCardStatusShape $status
      * @param list<string> $tags
      * @param Type|value-of<Type> $type
      */
@@ -377,9 +368,7 @@ final class SimCard implements BaseModel
     /**
      * The SIM card consumption so far in the current billing cycle.
      *
-     * @param CurrentBillingPeriodConsumedData|array{
-     *   amount?: string|null, unit?: string|null
-     * } $currentBillingPeriodConsumedData
+     * @param CurrentBillingPeriodConsumedDataShape $currentBillingPeriodConsumedData
      */
     public function withCurrentBillingPeriodConsumedData(
         CurrentBillingPeriodConsumedData|array $currentBillingPeriodConsumedData
@@ -393,12 +382,7 @@ final class SimCard implements BaseModel
     /**
      * Current physical location data of a given SIM card. Accuracy is given in meters.
      *
-     * @param CurrentDeviceLocation|array{
-     *   accuracy?: int|null,
-     *   accuracyUnit?: string|null,
-     *   latitude?: string|null,
-     *   longitude?: string|null,
-     * } $currentDeviceLocation
+     * @param CurrentDeviceLocationShape $currentDeviceLocation
      */
     public function withCurrentDeviceLocation(
         CurrentDeviceLocation|array $currentDeviceLocation
@@ -447,9 +431,7 @@ final class SimCard implements BaseModel
     /**
      * The SIM card individual data limit configuration.
      *
-     * @param DataLimit|array{
-     *   amount?: string|null, unit?: value-of<Unit>|null
-     * } $dataLimit
+     * @param DataLimitShape $dataLimit
      */
     public function withDataLimit(DataLimit|array $dataLimit): self
     {
@@ -558,9 +540,7 @@ final class SimCard implements BaseModel
     /**
      * PIN and PUK codes for the SIM card. Only available when include_pin_puk_codes=true is set in the request.
      *
-     * @param PinPukCodes|array{
-     *   pin1?: string|null, pin2?: string|null, puk1?: string|null, puk2?: string|null
-     * } $pinPukCodes
+     * @param PinPukCodesShape $pinPukCodes
      */
     public function withPinPukCodes(PinPukCodes|array $pinPukCodes): self
     {
@@ -604,9 +584,7 @@ final class SimCard implements BaseModel
     }
 
     /**
-     * @param SimCardStatus|array{
-     *   reason?: string|null, value?: value-of<Value>|null
-     * } $status
+     * @param SimCardStatusShape $status
      */
     public function withStatus(SimCardStatus|array $status): self
     {

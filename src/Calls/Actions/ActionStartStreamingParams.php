@@ -23,20 +23,20 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Calls\ActionsService::startStreaming()
  *
+ * @phpstan-import-type DialogflowConfigShape from \Telnyx\Calls\DialogflowConfig
+ *
  * @phpstan-type ActionStartStreamingParamsShape = array{
- *   clientState?: string,
- *   commandID?: string,
- *   dialogflowConfig?: DialogflowConfig|array{
- *     analyzeSentiment?: bool|null, partialAutomatedAgentReply?: bool|null
- *   },
- *   enableDialogflow?: bool,
- *   streamBidirectionalCodec?: StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
- *   streamBidirectionalMode?: StreamBidirectionalMode|value-of<StreamBidirectionalMode>,
- *   streamBidirectionalSamplingRate?: 8000|16000|22050|24000|48000,
- *   streamBidirectionalTargetLegs?: StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs>,
- *   streamCodec?: StreamCodec|value-of<StreamCodec>,
- *   streamTrack?: StreamTrack|value-of<StreamTrack>,
- *   streamURL?: string,
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   dialogflowConfig?: DialogflowConfigShape|null,
+ *   enableDialogflow?: bool|null,
+ *   streamBidirectionalCodec?: null|StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
+ *   streamBidirectionalMode?: null|StreamBidirectionalMode|value-of<StreamBidirectionalMode>,
+ *   streamBidirectionalSamplingRate?: null|8000|16000|22050|24000|48000,
+ *   streamBidirectionalTargetLegs?: null|StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs>,
+ *   streamCodec?: null|StreamCodec|value-of<StreamCodec>,
+ *   streamTrack?: null|StreamTrack|value-of<StreamTrack>,
+ *   streamURL?: string|null,
  * }
  */
 final class ActionStartStreamingParams implements BaseModel
@@ -139,9 +139,7 @@ final class ActionStartStreamingParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DialogflowConfig|array{
-     *   analyzeSentiment?: bool|null, partialAutomatedAgentReply?: bool|null
-     * } $dialogflowConfig
+     * @param DialogflowConfigShape $dialogflowConfig
      * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec> $streamBidirectionalCodec
      * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode> $streamBidirectionalMode
      * @param 8000|16000|22050|24000|48000 $streamBidirectionalSamplingRate
@@ -202,9 +200,7 @@ final class ActionStartStreamingParams implements BaseModel
     }
 
     /**
-     * @param DialogflowConfig|array{
-     *   analyzeSentiment?: bool|null, partialAutomatedAgentReply?: bool|null
-     * } $dialogflowConfig
+     * @param DialogflowConfigShape $dialogflowConfig
      */
     public function withDialogflowConfig(
         DialogflowConfig|array $dialogflowConfig

@@ -15,11 +15,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\WirelessBlocklistsService::list()
  *
  * @phpstan-type WirelessBlocklistListParamsShape = array{
- *   filterName?: string,
- *   filterType?: string,
- *   filterValues?: string,
- *   pageNumber?: int,
- *   pageSize?: int,
+ *   filterName?: string|null,
+ *   filterType?: string|null,
+ *   filterValues?: string|null,
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
  * }
  */
 final class WirelessBlocklistListParams implements BaseModel

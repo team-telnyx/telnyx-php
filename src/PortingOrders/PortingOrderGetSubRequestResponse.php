@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderGetSubRequestResponse\Data;
 
 /**
- * @phpstan-type PortingOrderGetSubRequestResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\PortingOrders\PortingOrderGetSubRequestResponse\Data
+ *
+ * @phpstan-type PortingOrderGetSubRequestResponseShape = array{
+ *   data?: null|Data|DataShape
+ * }
  */
 final class PortingOrderGetSubRequestResponse implements BaseModel
 {
@@ -30,7 +34,7 @@ final class PortingOrderGetSubRequestResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{portRequestID?: string|null, subRequestID?: string|null} $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -42,7 +46,7 @@ final class PortingOrderGetSubRequestResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{portRequestID?: string|null, subRequestID?: string|null} $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

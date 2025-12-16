@@ -15,7 +15,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\FqdnsService::update()
  *
  * @phpstan-type FqdnUpdateParamsShape = array{
- *   connectionID?: string, dnsRecordType?: string, fqdn?: string, port?: int|null
+ *   connectionID?: string|null,
+ *   dnsRecordType?: string|null,
+ *   fqdn?: string|null,
+ *   port?: int|null,
  * }
  */
 final class FqdnUpdateParams implements BaseModel

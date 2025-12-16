@@ -8,10 +8,13 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCards\SimCardGetPublicIPResponse\Data;
-use Telnyx\SimCards\SimCardGetPublicIPResponse\Data\Type;
 
 /**
- * @phpstan-type SimCardGetPublicIPResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\SimCards\SimCardGetPublicIPResponse\Data
+ *
+ * @phpstan-type SimCardGetPublicIPResponseShape = array{
+ *   data?: null|Data|DataShape
+ * }
  */
 final class SimCardGetPublicIPResponse implements BaseModel
 {
@@ -31,15 +34,7 @@ final class SimCardGetPublicIPResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   createdAt?: string|null,
-     *   ip?: string|null,
-     *   recordType?: string|null,
-     *   regionCode?: string|null,
-     *   simCardID?: string|null,
-     *   type?: value-of<Type>|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -51,15 +46,7 @@ final class SimCardGetPublicIPResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   createdAt?: string|null,
-     *   ip?: string|null,
-     *   recordType?: string|null,
-     *   regionCode?: string|null,
-     *   simCardID?: string|null,
-     *   type?: value-of<Type>|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

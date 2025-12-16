@@ -16,7 +16,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Conferences\ActionsService::recordResume()
  *
  * @phpstan-type ActionRecordResumeParamsShape = array{
- *   commandID?: string, recordingID?: string, region?: Region|value-of<Region>
+ *   commandID?: string|null,
+ *   recordingID?: string|null,
+ *   region?: null|Region|value-of<Region>,
  * }
  */
 final class ActionRecordResumeParams implements BaseModel

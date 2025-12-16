@@ -9,16 +9,16 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\FaxQueuedWebhookEvent\EventType;
 use Telnyx\Webhooks\FaxQueuedWebhookEvent\Payload;
-use Telnyx\Webhooks\FaxQueuedWebhookEvent\Payload\Direction;
-use Telnyx\Webhooks\FaxQueuedWebhookEvent\Payload\Status;
 use Telnyx\Webhooks\FaxQueuedWebhookEvent\RecordType;
 
 /**
+ * @phpstan-import-type PayloadShape from \Telnyx\Webhooks\FaxQueuedWebhookEvent\Payload
+ *
  * @phpstan-type FaxQueuedWebhookEventShape = array{
  *   id?: string|null,
- *   eventType?: value-of<EventType>|null,
- *   payload?: Payload|null,
- *   recordType?: value-of<RecordType>|null,
+ *   eventType?: null|EventType|value-of<EventType>,
+ *   payload?: null|Payload|PayloadShape,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  * }
  */
 final class FaxQueuedWebhookEvent implements BaseModel
@@ -62,18 +62,7 @@ final class FaxQueuedWebhookEvent implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param EventType|value-of<EventType> $eventType
-     * @param Payload|array{
-     *   clientState?: string|null,
-     *   connectionID?: string|null,
-     *   direction?: value-of<Direction>|null,
-     *   faxID?: string|null,
-     *   from?: string|null,
-     *   mediaName?: string|null,
-     *   originalMediaURL?: string|null,
-     *   status?: value-of<Status>|null,
-     *   to?: string|null,
-     *   userID?: string|null,
-     * } $payload
+     * @param PayloadShape $payload
      * @param RecordType|value-of<RecordType> $recordType
      */
     public static function with(
@@ -117,18 +106,7 @@ final class FaxQueuedWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Payload|array{
-     *   clientState?: string|null,
-     *   connectionID?: string|null,
-     *   direction?: value-of<Direction>|null,
-     *   faxID?: string|null,
-     *   from?: string|null,
-     *   mediaName?: string|null,
-     *   originalMediaURL?: string|null,
-     *   status?: value-of<Status>|null,
-     *   to?: string|null,
-     *   userID?: string|null,
-     * } $payload
+     * @param PayloadShape $payload
      */
     public function withPayload(Payload|array $payload): self
     {

@@ -22,9 +22,9 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording\
  *   errorCode?: string|null,
  *   mediaURL?: string|null,
  *   sid?: string|null,
- *   source?: value-of<Source>|null,
+ *   source?: null|Source|value-of<Source>,
  *   startTime?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   subresourceUris?: array<string,mixed>|null,
  *   uri?: string|null,
  * }

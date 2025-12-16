@@ -9,8 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type TelephonyCredentialShape from \Telnyx\TelephonyCredentials\TelephonyCredential
+ *
  * @phpstan-type TelephonyCredentialGetResponseShape = array{
- *   data?: TelephonyCredential|null
+ *   data?: null|TelephonyCredential|TelephonyCredentialShape
  * }
  */
 final class TelephonyCredentialGetResponse implements BaseModel
@@ -31,18 +33,7 @@ final class TelephonyCredentialGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param TelephonyCredential|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   expired?: bool|null,
-     *   expiresAt?: string|null,
-     *   name?: string|null,
-     *   recordType?: string|null,
-     *   resourceID?: string|null,
-     *   sipPassword?: string|null,
-     *   sipUsername?: string|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param TelephonyCredentialShape $data
      */
     public static function with(TelephonyCredential|array|null $data = null): self
     {
@@ -54,18 +45,7 @@ final class TelephonyCredentialGetResponse implements BaseModel
     }
 
     /**
-     * @param TelephonyCredential|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   expired?: bool|null,
-     *   expiresAt?: string|null,
-     *   name?: string|null,
-     *   recordType?: string|null,
-     *   resourceID?: string|null,
-     *   sipPassword?: string|null,
-     *   sipUsername?: string|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param TelephonyCredentialShape $data
      */
     public function withData(TelephonyCredential|array $data): self
     {

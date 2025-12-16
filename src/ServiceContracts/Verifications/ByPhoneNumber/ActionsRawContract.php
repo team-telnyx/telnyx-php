@@ -16,7 +16,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $phoneNumber +E164 formatted phone number
-     * @param array<mixed>|ActionVerifyParams $params
+     * @param array<string,mixed>|ActionVerifyParams $params
      *
      * @return BaseResponse<VerifyVerificationCodeResponse>
      *

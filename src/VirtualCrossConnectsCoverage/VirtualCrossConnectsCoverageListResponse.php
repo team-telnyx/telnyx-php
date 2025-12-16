@@ -11,11 +11,13 @@ use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse\Location;
 
 /**
+ * @phpstan-import-type LocationShape from \Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse\Location
+ *
  * @phpstan-type VirtualCrossConnectsCoverageListResponseShape = array{
  *   availableBandwidth?: list<float>|null,
- *   cloudProvider?: value-of<CloudProvider>|null,
+ *   cloudProvider?: null|CloudProvider|value-of<CloudProvider>,
  *   cloudProviderRegion?: string|null,
- *   location?: Location|null,
+ *   location?: null|Location|LocationShape,
  *   recordType?: string|null,
  * }
  */
@@ -67,13 +69,7 @@ final class VirtualCrossConnectsCoverageListResponse implements BaseModel
      *
      * @param list<float> $availableBandwidth
      * @param CloudProvider|value-of<CloudProvider> $cloudProvider
-     * @param Location|array{
-     *   code?: string|null,
-     *   name?: string|null,
-     *   pop?: string|null,
-     *   region?: string|null,
-     *   site?: string|null,
-     * } $location
+     * @param LocationShape $location
      */
     public static function with(
         ?array $availableBandwidth = null,
@@ -131,13 +127,7 @@ final class VirtualCrossConnectsCoverageListResponse implements BaseModel
     }
 
     /**
-     * @param Location|array{
-     *   code?: string|null,
-     *   name?: string|null,
-     *   pop?: string|null,
-     *   region?: string|null,
-     *   site?: string|null,
-     * } $location
+     * @param LocationShape $location
      */
     public function withLocation(Location|array $location): self
     {

@@ -9,7 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\FaxApplications\FaxApplicationListParams\Filter;
-use Telnyx\FaxApplications\FaxApplicationListParams\Filter\ApplicationName;
 use Telnyx\FaxApplications\FaxApplicationListParams\Page;
 use Telnyx\FaxApplications\FaxApplicationListParams\Sort;
 
@@ -18,12 +17,13 @@ use Telnyx\FaxApplications\FaxApplicationListParams\Sort;
  *
  * @see Telnyx\Services\FaxApplicationsService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\FaxApplications\FaxApplicationListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\FaxApplications\FaxApplicationListParams\Page
+ *
  * @phpstan-type FaxApplicationListParamsShape = array{
- *   filter?: Filter|array{
- *     applicationName?: ApplicationName|null, outboundVoiceProfileID?: string|null
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
- *   sort?: Sort|value-of<Sort>,
+ *   filter?: FilterShape|null,
+ *   page?: PageShape|null,
+ *   sort?: null|Sort|value-of<Sort>,
  * }
  */
 final class FaxApplicationListParams implements BaseModel
@@ -73,10 +73,8 @@ final class FaxApplicationListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   applicationName?: ApplicationName|null, outboundVoiceProfileID?: string|null
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
@@ -96,9 +94,7 @@ final class FaxApplicationListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound_voice_profile_id].
      *
-     * @param Filter|array{
-     *   applicationName?: ApplicationName|null, outboundVoiceProfileID?: string|null
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -111,7 +107,7 @@ final class FaxApplicationListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

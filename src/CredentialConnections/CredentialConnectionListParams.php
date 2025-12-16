@@ -9,7 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\CredentialConnectionListParams\Filter;
-use Telnyx\CredentialConnections\CredentialConnectionListParams\Filter\ConnectionName;
 use Telnyx\CredentialConnections\CredentialConnectionListParams\Page;
 use Telnyx\CredentialConnections\CredentialConnectionListParams\Sort;
 
@@ -18,14 +17,13 @@ use Telnyx\CredentialConnections\CredentialConnectionListParams\Sort;
  *
  * @see Telnyx\Services\CredentialConnectionsService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\CredentialConnections\CredentialConnectionListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\CredentialConnections\CredentialConnectionListParams\Page
+ *
  * @phpstan-type CredentialConnectionListParamsShape = array{
- *   filter?: Filter|array{
- *     connectionName?: ConnectionName|null,
- *     fqdn?: string|null,
- *     outboundVoiceProfileID?: string|null,
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
- *   sort?: Sort|value-of<Sort>,
+ *   filter?: FilterShape|null,
+ *   page?: PageShape|null,
+ *   sort?: null|Sort|value-of<Sort>,
  * }
  */
 final class CredentialConnectionListParams implements BaseModel
@@ -75,12 +73,8 @@ final class CredentialConnectionListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   connectionName?: ConnectionName|null,
-     *   fqdn?: string|null,
-     *   outboundVoiceProfileID?: string|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
@@ -100,11 +94,7 @@ final class CredentialConnectionListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[connection_name], filter[fqdn], filter[outbound_voice_profile_id], filter[outbound.outbound_voice_profile_id].
      *
-     * @param Filter|array{
-     *   connectionName?: ConnectionName|null,
-     *   fqdn?: string|null,
-     *   outboundVoiceProfileID?: string|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -117,7 +107,7 @@ final class CredentialConnectionListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

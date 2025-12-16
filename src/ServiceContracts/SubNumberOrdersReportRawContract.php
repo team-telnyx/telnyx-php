@@ -16,7 +16,7 @@ interface SubNumberOrdersReportRawContract
     /**
      * @api
      *
-     * @param array<mixed>|SubNumberOrdersReportCreateParams $params
+     * @param array<string,mixed>|SubNumberOrdersReportCreateParams $params
      *
      * @return BaseResponse<SubNumberOrdersReportNewResponse>
      *

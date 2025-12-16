@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type MediaNameShape = array{type?: 'media_name', value: string}
+ * @phpstan-type MediaNameShape = array{type: 'media_name', value: string}
  */
 final class MediaName implements BaseModel
 {

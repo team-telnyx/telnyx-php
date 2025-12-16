@@ -15,13 +15,13 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\McpServersService::update()
  *
  * @phpstan-type McpServerUpdateParamsShape = array{
- *   id?: string,
+ *   id?: string|null,
  *   allowedTools?: list<string>|null,
  *   apiKeyRef?: string|null,
- *   createdAt?: \DateTimeInterface,
- *   name?: string,
- *   type?: string,
- *   url?: string,
+ *   createdAt?: \DateTimeInterface|null,
+ *   name?: string|null,
+ *   type?: string|null,
+ *   url?: string|null,
  * }
  */
 final class McpServerUpdateParams implements BaseModel

@@ -10,8 +10,12 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse\Meta\Cursors;
 
 /**
+ * @phpstan-import-type CursorsShape from \Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse\Meta\Cursors
+ *
  * @phpstan-type MetaShape = array{
- *   cursors?: Cursors|null, next?: string|null, previous?: string|null
+ *   cursors?: null|Cursors|CursorsShape,
+ *   next?: string|null,
+ *   previous?: string|null,
  * }
  */
 final class Meta implements BaseModel
@@ -44,7 +48,7 @@ final class Meta implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Cursors|array{after?: string|null, before?: string|null} $cursors
+     * @param CursorsShape $cursors
      */
     public static function with(
         Cursors|array|null $cursors = null,
@@ -61,7 +65,7 @@ final class Meta implements BaseModel
     }
 
     /**
-     * @param Cursors|array{after?: string|null, before?: string|null} $cursors
+     * @param CursorsShape $cursors
      */
     public function withCursors(Cursors|array $cursors): self
     {

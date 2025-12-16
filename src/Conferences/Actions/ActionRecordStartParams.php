@@ -24,11 +24,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type ActionRecordStartParamsShape = array{
  *   format: Format|value-of<Format>,
- *   commandID?: string,
- *   customFileName?: string,
- *   playBeep?: bool,
- *   region?: Region|value-of<Region>,
- *   trim?: Trim|value-of<Trim>,
+ *   commandID?: string|null,
+ *   customFileName?: string|null,
+ *   playBeep?: bool|null,
+ *   region?: null|Region|value-of<Region>,
+ *   trim?: null|Trim|value-of<Trim>,
  * }
  */
 final class ActionRecordStartParams implements BaseModel

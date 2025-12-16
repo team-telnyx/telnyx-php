@@ -12,11 +12,13 @@ use Telnyx\Webhooks\ConferenceFloorChangedWebhookEvent\Payload;
 use Telnyx\Webhooks\ConferenceFloorChangedWebhookEvent\RecordType;
 
 /**
+ * @phpstan-import-type PayloadShape from \Telnyx\Webhooks\ConferenceFloorChangedWebhookEvent\Payload
+ *
  * @phpstan-type ConferenceFloorChangedWebhookEventShape = array{
  *   id?: string|null,
- *   eventType?: value-of<EventType>|null,
- *   payload?: Payload|null,
- *   recordType?: value-of<RecordType>|null,
+ *   eventType?: null|EventType|value-of<EventType>,
+ *   payload?: null|Payload|PayloadShape,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  * }
  */
 final class ConferenceFloorChangedWebhookEvent implements BaseModel
@@ -60,15 +62,7 @@ final class ConferenceFloorChangedWebhookEvent implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param EventType|value-of<EventType> $eventType
-     * @param Payload|array{
-     *   callControlID?: string|null,
-     *   callLegID?: string|null,
-     *   callSessionID?: string|null,
-     *   clientState?: string|null,
-     *   conferenceID?: string|null,
-     *   connectionID?: string|null,
-     *   occurredAt?: \DateTimeInterface|null,
-     * } $payload
+     * @param PayloadShape $payload
      * @param RecordType|value-of<RecordType> $recordType
      */
     public static function with(
@@ -112,15 +106,7 @@ final class ConferenceFloorChangedWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Payload|array{
-     *   callControlID?: string|null,
-     *   callLegID?: string|null,
-     *   callSessionID?: string|null,
-     *   clientState?: string|null,
-     *   conferenceID?: string|null,
-     *   connectionID?: string|null,
-     *   occurredAt?: \DateTimeInterface|null,
-     * } $payload
+     * @param PayloadShape $payload
      */
     public function withPayload(Payload|array $payload): self
     {

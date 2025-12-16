@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\SimCardsService::retrieve()
  *
  * @phpstan-type SimCardRetrieveParamsShape = array{
- *   includePinPukCodes?: bool, includeSimCardGroup?: bool
+ *   includePinPukCodes?: bool|null, includeSimCardGroup?: bool|null
  * }
  */
 final class SimCardRetrieveParams implements BaseModel

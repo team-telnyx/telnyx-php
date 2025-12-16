@@ -9,13 +9,14 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Reports\MdrUsageReports\PaginationMetaReporting;
 use Telnyx\Reports\ReportListMdrsResponse\Data;
-use Telnyx\Reports\ReportListMdrsResponse\Data\Currency;
-use Telnyx\Reports\ReportListMdrsResponse\Data\MessageType;
-use Telnyx\Reports\ReportListMdrsResponse\Data\Status;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\Reports\ReportListMdrsResponse\Data
+ * @phpstan-import-type PaginationMetaReportingShape from \Telnyx\Reports\MdrUsageReports\PaginationMetaReporting
+ *
  * @phpstan-type ReportListMdrsResponseShape = array{
- *   data?: list<Data>|null, meta?: PaginationMetaReporting|null
+ *   data?: list<DataShape>|null,
+ *   meta?: null|PaginationMetaReporting|PaginationMetaReportingShape,
  * }
  */
 final class ReportListMdrsResponse implements BaseModel
@@ -40,24 +41,8 @@ final class ReportListMdrsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   id?: string|null,
-     *   cld?: string|null,
-     *   cli?: string|null,
-     *   cost?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   currency?: value-of<Currency>|null,
-     *   direction?: string|null,
-     *   messageType?: value-of<MessageType>|null,
-     *   parts?: float|null,
-     *   profileName?: string|null,
-     *   rate?: string|null,
-     *   recordType?: string|null,
-     *   status?: value-of<Status>|null,
-     * }> $data
-     * @param PaginationMetaReporting|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param list<DataShape> $data
+     * @param PaginationMetaReportingShape $meta
      */
     public static function with(
         ?array $data = null,
@@ -72,21 +57,7 @@ final class ReportListMdrsResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   id?: string|null,
-     *   cld?: string|null,
-     *   cli?: string|null,
-     *   cost?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   currency?: value-of<Currency>|null,
-     *   direction?: string|null,
-     *   messageType?: value-of<MessageType>|null,
-     *   parts?: float|null,
-     *   profileName?: string|null,
-     *   rate?: string|null,
-     *   recordType?: string|null,
-     *   status?: value-of<Status>|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {
@@ -97,9 +68,7 @@ final class ReportListMdrsResponse implements BaseModel
     }
 
     /**
-     * @param PaginationMetaReporting|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param PaginationMetaReportingShape $meta
      */
     public function withMeta(PaginationMetaReporting|array $meta): self
     {

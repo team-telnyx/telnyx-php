@@ -6,20 +6,20 @@ namespace Telnyx\AI\Conversations\Messages\MessageListResponse;
 
 use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\Role;
 use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall;
-use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall\Function_;
-use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall\Type;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type ToolCallShape from \Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall
+ *
  * @phpstan-type DataShape = array{
- *   role: value-of<Role>,
+ *   role: Role|value-of<Role>,
  *   text: string,
  *   createdAt?: \DateTimeInterface|null,
  *   sentAt?: \DateTimeInterface|null,
- *   toolCalls?: list<ToolCall>|null,
+ *   toolCalls?: list<ToolCallShape>|null,
  * }
  */
 final class Data implements BaseModel
@@ -86,9 +86,7 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Role|value-of<Role> $role
-     * @param list<ToolCall|array{
-     *   id: string, function: Function_, type: value-of<Type>
-     * }> $toolCalls
+     * @param list<ToolCallShape> $toolCalls
      */
     public static function with(
         Role|string $role,
@@ -158,9 +156,7 @@ final class Data implements BaseModel
     /**
      * Optional tool calls made by the assistant.
      *
-     * @param list<ToolCall|array{
-     *   id: string, function: Function_, type: value-of<Type>
-     * }> $toolCalls
+     * @param list<ToolCallShape> $toolCalls
      */
     public function withToolCalls(array $toolCalls): self
     {

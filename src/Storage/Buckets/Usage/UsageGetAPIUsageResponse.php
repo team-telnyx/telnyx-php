@@ -8,11 +8,11 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data;
-use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data\Category1 as Category;
-use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data\Total;
 
 /**
- * @phpstan-type UsageGetAPIUsageResponseShape = array{data?: list<Data>|null}
+ * @phpstan-import-type DataShape from \Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data
+ *
+ * @phpstan-type UsageGetAPIUsageResponseShape = array{data?: list<DataShape>|null}
  */
 final class UsageGetAPIUsageResponse implements BaseModel
 {
@@ -33,11 +33,7 @@ final class UsageGetAPIUsageResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   categories?: list<Category>|null,
-     *   timestamp?: \DateTimeInterface|null,
-     *   total?: Total|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public static function with(?array $data = null): self
     {
@@ -49,11 +45,7 @@ final class UsageGetAPIUsageResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   categories?: list<Category>|null,
-     *   timestamp?: \DateTimeInterface|null,
-     *   total?: Total|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {

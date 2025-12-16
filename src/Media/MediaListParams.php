@@ -15,9 +15,9 @@ use Telnyx\Media\MediaListParams\Filter;
  *
  * @see Telnyx\Services\MediaService::list()
  *
- * @phpstan-type MediaListParamsShape = array{
- *   filter?: Filter|array{contentType?: list<string>|null}
- * }
+ * @phpstan-import-type FilterShape from \Telnyx\Media\MediaListParams\Filter
+ *
+ * @phpstan-type MediaListParamsShape = array{filter?: FilterShape|null}
  */
 final class MediaListParams implements BaseModel
 {
@@ -41,7 +41,7 @@ final class MediaListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{contentType?: list<string>|null} $filter
+     * @param FilterShape $filter
      */
     public static function with(Filter|array|null $filter = null): self
     {
@@ -55,7 +55,7 @@ final class MediaListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[content_type][].
      *
-     * @param Filter|array{contentType?: list<string>|null} $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

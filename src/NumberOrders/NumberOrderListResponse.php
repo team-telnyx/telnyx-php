@@ -11,6 +11,8 @@ use Telnyx\NumberOrders\NumberOrderListResponse\PhoneNumber;
 use Telnyx\NumberOrders\NumberOrderListResponse\Status;
 
 /**
+ * @phpstan-import-type PhoneNumberShape from \Telnyx\NumberOrders\NumberOrderListResponse\PhoneNumber
+ *
  * @phpstan-type NumberOrderListResponseShape = array{
  *   id?: string|null,
  *   billingGroupID?: string|null,
@@ -18,11 +20,11 @@ use Telnyx\NumberOrders\NumberOrderListResponse\Status;
  *   createdAt?: \DateTimeInterface|null,
  *   customerReference?: string|null,
  *   messagingProfileID?: string|null,
- *   phoneNumbers?: list<\Telnyx\NumberOrders\NumberOrderListResponse\PhoneNumber>|null,
+ *   phoneNumbers?: list<PhoneNumberShape>|null,
  *   phoneNumbersCount?: int|null,
  *   recordType?: string|null,
  *   requirementsMet?: bool|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   subNumberOrdersIDs?: list<string>|null,
  *   updatedAt?: \DateTimeInterface|null,
  * }
@@ -117,9 +119,7 @@ final class NumberOrderListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PhoneNumber|array{
-     *   id?: string|null, phoneNumber?: string|null
-     * }> $phoneNumbers
+     * @param list<PhoneNumberShape> $phoneNumbers
      * @param Status|value-of<Status> $status
      * @param list<string> $subNumberOrdersIDs
      */
@@ -221,9 +221,7 @@ final class NumberOrderListResponse implements BaseModel
     }
 
     /**
-     * @param list<PhoneNumber|array{
-     *   id?: string|null, phoneNumber?: string|null
-     * }> $phoneNumbers
+     * @param list<PhoneNumberShape> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {

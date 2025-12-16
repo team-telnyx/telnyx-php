@@ -8,6 +8,9 @@ use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 
+/**
+ * @phpstan-type LoopcountShape = string|int
+ */
 final class Loopcount implements ConverterSource
 {
     use SdkUnion;

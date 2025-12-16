@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Messaging10dlc\PhoneNumberAssignmentByProfileService::retrievePhoneNumberStatus()
  *
  * @phpstan-type PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParamsShape = array{
- *   page?: int, recordsPerPage?: int
+ *   page?: int|null, recordsPerPage?: int|null
  * }
  */
 final class PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParams implements BaseModel

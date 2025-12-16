@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type PortingOrderCreateParamsShape = array{
  *   phoneNumbers: list<string>,
- *   customerGroupReference?: string,
+ *   customerGroupReference?: string|null,
  *   customerReference?: string|null,
  * }
  */

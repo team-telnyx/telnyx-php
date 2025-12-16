@@ -19,7 +19,7 @@ interface ActionRequirementsRawContract
      * @api
      *
      * @param string $portingOrderID The ID of the porting order
-     * @param array<mixed>|ActionRequirementListParams $params
+     * @param array<string,mixed>|ActionRequirementListParams $params
      *
      * @return BaseResponse<DefaultPagination<ActionRequirementListResponse>>
      *
@@ -35,7 +35,7 @@ interface ActionRequirementsRawContract
      * @api
      *
      * @param string $id Path param: The ID of the action requirement
-     * @param array<mixed>|ActionRequirementInitiateParams $params
+     * @param array<string,mixed>|ActionRequirementInitiateParams $params
      *
      * @return BaseResponse<ActionRequirementInitiateResponse>
      *

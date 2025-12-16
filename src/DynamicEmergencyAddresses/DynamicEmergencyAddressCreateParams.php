@@ -23,11 +23,11 @@ use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressCreateParams\Country
  *   locality: string,
  *   postalCode: string,
  *   streetName: string,
- *   extendedAddress?: string,
- *   houseSuffix?: string,
- *   streetPostDirectional?: string,
- *   streetPreDirectional?: string,
- *   streetSuffix?: string,
+ *   extendedAddress?: string|null,
+ *   houseSuffix?: string|null,
+ *   streetPostDirectional?: string|null,
+ *   streetPreDirectional?: string|null,
+ *   streetSuffix?: string|null,
  * }
  */
 final class DynamicEmergencyAddressCreateParams implements BaseModel

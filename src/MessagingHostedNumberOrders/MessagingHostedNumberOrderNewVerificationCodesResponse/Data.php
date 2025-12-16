@@ -16,7 +16,7 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerification
  * @phpstan-type DataShape = array{
  *   phoneNumber: string,
  *   error?: string|null,
- *   type?: value-of<Type>|null,
+ *   type?: null|Type|value-of<Type>,
  *   verificationCodeID?: string|null,
  * }
  */

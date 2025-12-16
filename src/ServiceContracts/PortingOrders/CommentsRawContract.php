@@ -19,7 +19,7 @@ interface CommentsRawContract
      * @api
      *
      * @param string $id Porting Order id
-     * @param array<mixed>|CommentCreateParams $params
+     * @param array<string,mixed>|CommentCreateParams $params
      *
      * @return BaseResponse<CommentNewResponse>
      *
@@ -35,7 +35,7 @@ interface CommentsRawContract
      * @api
      *
      * @param string $id Porting Order id
-     * @param array<mixed>|CommentListParams $params
+     * @param array<string,mixed>|CommentListParams $params
      *
      * @return BaseResponse<DefaultPagination<CommentListResponse>>
      *

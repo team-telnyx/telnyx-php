@@ -19,7 +19,7 @@ interface RoomCompositionsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|RoomCompositionCreateParams $params
+     * @param array<string,mixed>|RoomCompositionCreateParams $params
      *
      * @return BaseResponse<RoomCompositionNewResponse>
      *
@@ -47,7 +47,7 @@ interface RoomCompositionsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|RoomCompositionListParams $params
+     * @param array<string,mixed>|RoomCompositionListParams $params
      *
      * @return BaseResponse<DefaultPagination<RoomComposition>>
      *

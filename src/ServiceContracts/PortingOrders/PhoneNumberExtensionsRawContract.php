@@ -21,7 +21,7 @@ interface PhoneNumberExtensionsRawContract
      * @api
      *
      * @param string $portingOrderID Identifies the Porting Order associated with the phone number extension
-     * @param array<mixed>|PhoneNumberExtensionCreateParams $params
+     * @param array<string,mixed>|PhoneNumberExtensionCreateParams $params
      *
      * @return BaseResponse<PhoneNumberExtensionNewResponse>
      *
@@ -37,7 +37,7 @@ interface PhoneNumberExtensionsRawContract
      * @api
      *
      * @param string $portingOrderID Identifies the Porting Order associated with the phone number extensions
-     * @param array<mixed>|PhoneNumberExtensionListParams $params
+     * @param array<string,mixed>|PhoneNumberExtensionListParams $params
      *
      * @return BaseResponse<DefaultPagination<PortingPhoneNumberExtension>>
      *
@@ -53,7 +53,7 @@ interface PhoneNumberExtensionsRawContract
      * @api
      *
      * @param string $id Identifies the phone number extension to be deleted
-     * @param array<mixed>|PhoneNumberExtensionDeleteParams $params
+     * @param array<string,mixed>|PhoneNumberExtensionDeleteParams $params
      *
      * @return BaseResponse<PhoneNumberExtensionDeleteResponse>
      *

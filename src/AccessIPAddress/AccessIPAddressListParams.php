@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\AccessIPAddress;
 
 use Telnyx\AccessIPAddress\AccessIPAddressListParams\Filter;
-use Telnyx\AccessIPAddress\AccessIPAddressListParams\Filter\CreatedAt\DateRangeFilter;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -16,14 +15,10 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AccessIPAddressService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\AccessIPAddress\AccessIPAddressListParams\Filter
+ *
  * @phpstan-type AccessIPAddressListParamsShape = array{
- *   filter?: Filter|array{
- *     createdAt?: null|\DateTimeInterface|DateRangeFilter,
- *     ipAddress?: string|null,
- *     ipSource?: string|null,
- *   },
- *   pageNumber?: int,
- *   pageSize?: int,
+ *   filter?: FilterShape|null, pageNumber?: int|null, pageSize?: int|null
  * }
  */
 final class AccessIPAddressListParams implements BaseModel
@@ -54,11 +49,7 @@ final class AccessIPAddressListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   createdAt?: \DateTimeInterface|DateRangeFilter|null,
-     *   ipAddress?: string|null,
-     *   ipSource?: string|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -77,11 +68,7 @@ final class AccessIPAddressListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[ip_source], filter[ip_address], filter[created_at]. Supports complex bracket operations for dynamic filtering.
      *
-     * @param Filter|array{
-     *   createdAt?: \DateTimeInterface|DateRangeFilter|null,
-     *   ipAddress?: string|null,
-     *   ipSource?: string|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

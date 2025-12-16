@@ -9,9 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SubNumberOrders\SubNumberOrder\PhoneNumberType;
 use Telnyx\SubNumberOrders\SubNumberOrder\Status;
-use Telnyx\SubNumberOrders\SubNumberOrderRegulatoryRequirement\FieldType;
 
 /**
+ * @phpstan-import-type SubNumberOrderRegulatoryRequirementShape from \Telnyx\SubNumberOrders\SubNumberOrderRegulatoryRequirement
+ *
  * @phpstan-type SubNumberOrderShape = array{
  *   id?: string|null,
  *   countryCode?: string|null,
@@ -19,12 +20,12 @@ use Telnyx\SubNumberOrders\SubNumberOrderRegulatoryRequirement\FieldType;
  *   customerReference?: string|null,
  *   isBlockSubNumberOrder?: bool|null,
  *   orderRequestID?: string|null,
- *   phoneNumberType?: value-of<PhoneNumberType>|null,
+ *   phoneNumberType?: null|PhoneNumberType|value-of<PhoneNumberType>,
  *   phoneNumbersCount?: int|null,
  *   recordType?: string|null,
- *   regulatoryRequirements?: list<SubNumberOrderRegulatoryRequirement>|null,
+ *   regulatoryRequirements?: list<SubNumberOrderRegulatoryRequirementShape>|null,
  *   requirementsMet?: bool|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   updatedAt?: \DateTimeInterface|null,
  *   userID?: string|null,
  * }
@@ -115,11 +116,7 @@ final class SubNumberOrder implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
-     * @param list<SubNumberOrderRegulatoryRequirement|array{
-     *   fieldType?: value-of<FieldType>|null,
-     *   recordType?: string|null,
-     *   requirementID?: string|null,
-     * }> $regulatoryRequirements
+     * @param list<SubNumberOrderRegulatoryRequirementShape> $regulatoryRequirements
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -247,11 +244,7 @@ final class SubNumberOrder implements BaseModel
     }
 
     /**
-     * @param list<SubNumberOrderRegulatoryRequirement|array{
-     *   fieldType?: value-of<FieldType>|null,
-     *   recordType?: string|null,
-     *   requirementID?: string|null,
-     * }> $regulatoryRequirements
+     * @param list<SubNumberOrderRegulatoryRequirementShape> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements

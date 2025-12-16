@@ -7,13 +7,12 @@ namespace Telnyx\PortingOrders\AssociatedPhoneNumbers;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber\Action;
-use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber\PhoneNumberRange;
-use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber\PhoneNumberType;
 
 /**
+ * @phpstan-import-type PortingAssociatedPhoneNumberShape from \Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber
+ *
  * @phpstan-type AssociatedPhoneNumberDeleteResponseShape = array{
- *   data?: PortingAssociatedPhoneNumber|null
+ *   data?: null|PortingAssociatedPhoneNumber|PortingAssociatedPhoneNumberShape
  * }
  */
 final class AssociatedPhoneNumberDeleteResponse implements BaseModel
@@ -34,17 +33,7 @@ final class AssociatedPhoneNumberDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortingAssociatedPhoneNumber|array{
-     *   id?: string|null,
-     *   action?: value-of<Action>|null,
-     *   countryCode?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   phoneNumberRange?: PhoneNumberRange|null,
-     *   phoneNumberType?: value-of<PhoneNumberType>|null,
-     *   portingOrderID?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param PortingAssociatedPhoneNumberShape $data
      */
     public static function with(
         PortingAssociatedPhoneNumber|array|null $data = null
@@ -57,17 +46,7 @@ final class AssociatedPhoneNumberDeleteResponse implements BaseModel
     }
 
     /**
-     * @param PortingAssociatedPhoneNumber|array{
-     *   id?: string|null,
-     *   action?: value-of<Action>|null,
-     *   countryCode?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   phoneNumberRange?: PhoneNumberRange|null,
-     *   phoneNumberType?: value-of<PhoneNumberType>|null,
-     *   portingOrderID?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param PortingAssociatedPhoneNumberShape $data
      */
     public function withData(PortingAssociatedPhoneNumber|array $data): self
     {

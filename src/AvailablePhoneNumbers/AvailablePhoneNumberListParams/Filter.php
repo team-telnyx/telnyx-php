@@ -14,17 +14,19 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[locality], filter[administrative_area], filter[country_code], filter[national_destination_code], filter[rate_center], filter[phone_number_type], filter[features], filter[limit], filter[best_effort], filter[quickship], filter[reservable], filter[exclude_held_numbers].
  *
+ * @phpstan-import-type PhoneNumberShape from \Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListParams\Filter\PhoneNumber
+ *
  * @phpstan-type FilterShape = array{
  *   administrativeArea?: string|null,
  *   bestEffort?: bool|null,
  *   countryCode?: string|null,
  *   excludeHeldNumbers?: bool|null,
- *   features?: list<value-of<Feature>>|null,
+ *   features?: list<Feature|value-of<Feature>>|null,
  *   limit?: int|null,
  *   locality?: string|null,
  *   nationalDestinationCode?: string|null,
- *   phoneNumber?: PhoneNumber|null,
- *   phoneNumberType?: value-of<PhoneNumberType>|null,
+ *   phoneNumber?: null|PhoneNumber|PhoneNumberShape,
+ *   phoneNumberType?: null|PhoneNumberType|value-of<PhoneNumberType>,
  *   quickship?: bool|null,
  *   rateCenter?: string|null,
  *   reservable?: bool|null,
@@ -128,9 +130,7 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Feature|value-of<Feature>> $features
-     * @param PhoneNumber|array{
-     *   contains?: string|null, endsWith?: string|null, startsWith?: string|null
-     * } $phoneNumber
+     * @param PhoneNumberShape $phoneNumber
      * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
      */
     public static function with(
@@ -261,9 +261,7 @@ final class Filter implements BaseModel
     /**
      * Filter phone numbers by pattern matching.
      *
-     * @param PhoneNumber|array{
-     *   contains?: string|null, endsWith?: string|null, startsWith?: string|null
-     * } $phoneNumber
+     * @param PhoneNumberShape $phoneNumber
      */
     public function withPhoneNumber(PhoneNumber|array $phoneNumber): self
     {

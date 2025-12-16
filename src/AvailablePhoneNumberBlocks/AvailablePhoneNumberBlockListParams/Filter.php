@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   countryCode?: string|null,
  *   locality?: string|null,
  *   nationalDestinationCode?: string|null,
- *   phoneNumberType?: value-of<PhoneNumberType>|null,
+ *   phoneNumberType?: null|PhoneNumberType|value-of<PhoneNumberType>,
  * }
  */
 final class Filter implements BaseModel

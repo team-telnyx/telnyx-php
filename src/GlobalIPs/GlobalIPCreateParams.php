@@ -15,7 +15,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\GlobalIPsService::create()
  *
  * @phpstan-type GlobalIPCreateParamsShape = array{
- *   description?: string, name?: string, ports?: array<string,mixed>
+ *   description?: string|null,
+ *   name?: string|null,
+ *   ports?: array<string,mixed>|null,
  * }
  */
 final class GlobalIPCreateParams implements BaseModel

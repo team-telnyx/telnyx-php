@@ -8,6 +8,9 @@ use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 
+/**
+ * @phpstan-type UnionMember3Shape = string|int|bool
+ */
 final class UnionMember3 implements ConverterSource
 {
     use SdkUnion;

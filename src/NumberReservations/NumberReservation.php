@@ -10,13 +10,15 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberReservations\NumberReservation\Status;
 
 /**
+ * @phpstan-import-type ReservedPhoneNumberShape from \Telnyx\NumberReservations\ReservedPhoneNumber
+ *
  * @phpstan-type NumberReservationShape = array{
  *   id?: string|null,
  *   createdAt?: \DateTimeInterface|null,
  *   customerReference?: string|null,
- *   phoneNumbers?: list<ReservedPhoneNumber>|null,
+ *   phoneNumbers?: list<ReservedPhoneNumberShape>|null,
  *   recordType?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */
@@ -71,15 +73,7 @@ final class NumberReservation implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ReservedPhoneNumber|array{
-     *   id?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   expiredAt?: \DateTimeInterface|null,
-     *   phoneNumber?: string|null,
-     *   recordType?: string|null,
-     *   status?: value-of<ReservedPhoneNumber\Status>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }> $phoneNumbers
+     * @param list<ReservedPhoneNumberShape> $phoneNumbers
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -135,15 +129,7 @@ final class NumberReservation implements BaseModel
     }
 
     /**
-     * @param list<ReservedPhoneNumber|array{
-     *   id?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   expiredAt?: \DateTimeInterface|null,
-     *   phoneNumber?: string|null,
-     *   recordType?: string|null,
-     *   status?: value-of<ReservedPhoneNumber\Status>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }> $phoneNumbers
+     * @param list<ReservedPhoneNumberShape> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {

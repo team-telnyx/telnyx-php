@@ -17,7 +17,7 @@ interface UsageReportsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|UsageReportListParams $params
+     * @param array<string,mixed>|UsageReportListParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<array<string,mixed>>>
      *
@@ -31,7 +31,7 @@ interface UsageReportsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|UsageReportGetOptionsParams $params
+     * @param array<string,mixed>|UsageReportGetOptionsParams $params
      *
      * @return BaseResponse<UsageReportGetOptionsResponse>
      *

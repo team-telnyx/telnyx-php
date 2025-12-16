@@ -16,9 +16,10 @@ use Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants\AllParticipants;
  *
  * @see Telnyx\Services\Rooms\Sessions\ActionsService::kick()
  *
+ * @phpstan-import-type ParticipantsShape from \Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants
+ *
  * @phpstan-type ActionKickParamsShape = array{
- *   exclude?: list<string>,
- *   participants?: AllParticipants|list<string>|value-of<AllParticipants>,
+ *   exclude?: list<string>|null, participants?: ParticipantsShape|null
  * }
  */
 final class ActionKickParams implements BaseModel
@@ -54,7 +55,7 @@ final class ActionKickParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $exclude
-     * @param AllParticipants|list<string>|value-of<AllParticipants> $participants
+     * @param ParticipantsShape $participants
      */
     public static function with(
         ?array $exclude = null,
@@ -84,7 +85,7 @@ final class ActionKickParams implements BaseModel
     /**
      * Either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant.
      *
-     * @param AllParticipants|list<string>|value-of<AllParticipants> $participants
+     * @param ParticipantsShape $participants
      */
     public function withParticipants(
         AllParticipants|array|string $participants

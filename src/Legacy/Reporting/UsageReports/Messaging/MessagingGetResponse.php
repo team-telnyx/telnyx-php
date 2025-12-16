@@ -9,8 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type MdrUsageReportResponseLegacyShape from \Telnyx\Legacy\Reporting\UsageReports\Messaging\MdrUsageReportResponseLegacy
+ *
  * @phpstan-type MessagingGetResponseShape = array{
- *   data?: MdrUsageReportResponseLegacy|null
+ *   data?: null|MdrUsageReportResponseLegacy|MdrUsageReportResponseLegacyShape
  * }
  */
 final class MessagingGetResponse implements BaseModel
@@ -34,20 +36,7 @@ final class MessagingGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MdrUsageReportResponseLegacy|array{
-     *   id?: string|null,
-     *   aggregationType?: int|null,
-     *   connections?: list<string>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   endTime?: \DateTimeInterface|null,
-     *   profiles?: list<string>|null,
-     *   recordType?: string|null,
-     *   reportURL?: string|null,
-     *   result?: array<string,mixed>|null,
-     *   startTime?: \DateTimeInterface|null,
-     *   status?: int|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param MdrUsageReportResponseLegacyShape $data
      */
     public static function with(
         MdrUsageReportResponseLegacy|array|null $data = null
@@ -62,20 +51,7 @@ final class MessagingGetResponse implements BaseModel
     /**
      * Legacy V2 MDR usage report response.
      *
-     * @param MdrUsageReportResponseLegacy|array{
-     *   id?: string|null,
-     *   aggregationType?: int|null,
-     *   connections?: list<string>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   endTime?: \DateTimeInterface|null,
-     *   profiles?: list<string>|null,
-     *   recordType?: string|null,
-     *   reportURL?: string|null,
-     *   result?: array<string,mixed>|null,
-     *   startTime?: \DateTimeInterface|null,
-     *   status?: int|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param MdrUsageReportResponseLegacyShape $data
      */
     public function withData(MdrUsageReportResponseLegacy|array $data): self
     {

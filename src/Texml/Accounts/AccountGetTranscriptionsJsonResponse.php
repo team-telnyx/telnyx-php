@@ -8,9 +8,10 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse\Transcription;
-use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse\Transcription\Status;
 
 /**
+ * @phpstan-import-type TranscriptionShape from \Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse\Transcription
+ *
  * @phpstan-type AccountGetTranscriptionsJsonResponseShape = array{
  *   end?: int|null,
  *   firstPageUri?: string|null,
@@ -19,7 +20,7 @@ use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse\Transcription\Sta
  *   pageSize?: int|null,
  *   previousPageUri?: string|null,
  *   start?: int|null,
- *   transcriptions?: list<Transcription>|null,
+ *   transcriptions?: list<TranscriptionShape>|null,
  *   uri?: string|null,
  * }
  */
@@ -90,19 +91,7 @@ final class AccountGetTranscriptionsJsonResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Transcription|array{
-     *   accountSid?: string|null,
-     *   apiVersion?: string|null,
-     *   callSid?: string|null,
-     *   dateCreated?: \DateTimeInterface|null,
-     *   dateUpdated?: \DateTimeInterface|null,
-     *   duration?: string|null,
-     *   recordingSid?: string|null,
-     *   sid?: string|null,
-     *   status?: value-of<Status>|null,
-     *   transcriptionText?: string|null,
-     *   uri?: string|null,
-     * }> $transcriptions
+     * @param list<TranscriptionShape> $transcriptions
      */
     public static function with(
         ?int $end = null,
@@ -208,19 +197,7 @@ final class AccountGetTranscriptionsJsonResponse implements BaseModel
     }
 
     /**
-     * @param list<Transcription|array{
-     *   accountSid?: string|null,
-     *   apiVersion?: string|null,
-     *   callSid?: string|null,
-     *   dateCreated?: \DateTimeInterface|null,
-     *   dateUpdated?: \DateTimeInterface|null,
-     *   duration?: string|null,
-     *   recordingSid?: string|null,
-     *   sid?: string|null,
-     *   status?: value-of<Status>|null,
-     *   transcriptionText?: string|null,
-     *   uri?: string|null,
-     * }> $transcriptions
+     * @param list<TranscriptionShape> $transcriptions
      */
     public function withTranscriptions(array $transcriptions): self
     {

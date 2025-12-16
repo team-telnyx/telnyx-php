@@ -14,7 +14,7 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfigCreate\Op;
  * @phpstan-type AutoRespConfigCreateShape = array{
  *   countryCode: string,
  *   keywords: list<string>,
- *   op: value-of<Op>,
+ *   op: Op|value-of<Op>,
  *   respText?: string|null,
  * }
  */

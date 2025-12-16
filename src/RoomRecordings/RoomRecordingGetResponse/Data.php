@@ -25,8 +25,8 @@ use Telnyx\RoomRecordings\RoomRecordingGetResponse\Data\Type;
  *   sessionID?: string|null,
  *   sizeMB?: float|null,
  *   startedAt?: \DateTimeInterface|null,
- *   status?: value-of<Status>|null,
- *   type?: value-of<Type>|null,
+ *   status?: null|Status|value-of<Status>,
+ *   type?: null|Type|value-of<Type>,
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */

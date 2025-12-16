@@ -8,11 +8,12 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageResponse\Data;
-use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageResponse\Data\AdditionalDataRequired;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageResponse\Data
+ *
  * @phpstan-type CustomerServiceRecordVerifyPhoneNumberCoverageResponseShape = array{
- *   data?: list<Data>|null
+ *   data?: list<DataShape>|null
  * }
  */
 final class CustomerServiceRecordVerifyPhoneNumberCoverageResponse implements BaseModel
@@ -34,13 +35,7 @@ final class CustomerServiceRecordVerifyPhoneNumberCoverageResponse implements Ba
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   additionalDataRequired?: list<value-of<AdditionalDataRequired>>|null,
-     *   hasCsrCoverage?: bool|null,
-     *   phoneNumber?: string|null,
-     *   reason?: string|null,
-     *   recordType?: string|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public static function with(?array $data = null): self
     {
@@ -52,13 +47,7 @@ final class CustomerServiceRecordVerifyPhoneNumberCoverageResponse implements Ba
     }
 
     /**
-     * @param list<Data|array{
-     *   additionalDataRequired?: list<value-of<AdditionalDataRequired>>|null,
-     *   hasCsrCoverage?: bool|null,
-     *   phoneNumber?: string|null,
-     *   reason?: string|null,
-     *   recordType?: string|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {

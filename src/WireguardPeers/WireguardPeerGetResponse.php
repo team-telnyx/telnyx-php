@@ -10,7 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WireguardPeers\WireguardPeerGetResponse\Data;
 
 /**
- * @phpstan-type WireguardPeerGetResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\WireguardPeers\WireguardPeerGetResponse\Data
+ *
+ * @phpstan-type WireguardPeerGetResponseShape = array{data?: null|Data|DataShape}
  */
 final class WireguardPeerGetResponse implements BaseModel
 {
@@ -30,16 +32,7 @@ final class WireguardPeerGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     *   publicKey?: string|null,
-     *   lastSeen?: string|null,
-     *   privateKey?: string|null,
-     *   wireguardInterfaceID?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -51,16 +44,7 @@ final class WireguardPeerGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     *   publicKey?: string|null,
-     *   lastSeen?: string|null,
-     *   privateKey?: string|null,
-     *   wireguardInterfaceID?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NotificationSettings\NotificationSettingListParams\Filter\Status\Eq;
 
 /**
- * @phpstan-type StatusShape = array{eq?: value-of<Eq>|null}
+ * @phpstan-type StatusShape = array{eq?: null|Eq|value-of<Eq>}
  */
 final class Status implements BaseModel
 {

@@ -15,7 +15,7 @@ interface TexmlRawContract
     /**
      * @api
      *
-     * @param array<mixed>|TexmlSecretsParams $params
+     * @param array<string,mixed>|TexmlSecretsParams $params
      *
      * @return BaseResponse<TexmlSecretsResponse>
      *

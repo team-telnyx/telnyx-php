@@ -15,15 +15,10 @@ use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\GlobalIPAssignment
  *
  * @see Telnyx\Services\GlobalIPAssignmentsService::update()
  *
+ * @phpstan-import-type GlobalIPAssignmentUpdateRequestShape from \Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\GlobalIPAssignmentUpdateRequest
+ *
  * @phpstan-type GlobalIPAssignmentUpdateParamsShape = array{
- *   globalIPAssignmentUpdateRequest: GlobalIPAssignmentUpdateRequest|array{
- *     id?: string|null,
- *     createdAt?: string|null,
- *     recordType?: string|null,
- *     updatedAt?: string|null,
- *     globalIPID?: string|null,
- *     wireguardPeerID?: string|null,
- *   },
+ *   globalIPAssignmentUpdateRequest: GlobalIPAssignmentUpdateRequestShape
  * }
  */
 final class GlobalIPAssignmentUpdateParams implements BaseModel
@@ -59,14 +54,7 @@ final class GlobalIPAssignmentUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param GlobalIPAssignmentUpdateRequest|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     *   globalIPID?: string|null,
-     *   wireguardPeerID?: string|null,
-     * } $globalIPAssignmentUpdateRequest
+     * @param GlobalIPAssignmentUpdateRequestShape $globalIPAssignmentUpdateRequest
      */
     public static function with(
         GlobalIPAssignmentUpdateRequest|array $globalIPAssignmentUpdateRequest
@@ -79,14 +67,7 @@ final class GlobalIPAssignmentUpdateParams implements BaseModel
     }
 
     /**
-     * @param GlobalIPAssignmentUpdateRequest|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     *   globalIPID?: string|null,
-     *   wireguardPeerID?: string|null,
-     * } $globalIPAssignmentUpdateRequest
+     * @param GlobalIPAssignmentUpdateRequestShape $globalIPAssignmentUpdateRequest
      */
     public function withGlobalIPAssignmentUpdateRequest(
         GlobalIPAssignmentUpdateRequest|array $globalIPAssignmentUpdateRequest

@@ -8,7 +8,6 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NotificationChannels\NotificationChannelListParams\Filter\AssociatedRecordType;
-use Telnyx\NotificationChannels\NotificationChannelListParams\Filter\AssociatedRecordType\Eq;
 use Telnyx\NotificationChannels\NotificationChannelListParams\Filter\ChannelTypeID;
 use Telnyx\NotificationChannels\NotificationChannelListParams\Filter\NotificationChannel;
 use Telnyx\NotificationChannels\NotificationChannelListParams\Filter\NotificationEventConditionID;
@@ -18,13 +17,20 @@ use Telnyx\NotificationChannels\NotificationChannelListParams\Filter\Status;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[associated_record_type][eq], filter[channel_type_id][eq], filter[notification_profile_id][eq], filter[notification_channel][eq], filter[notification_event_condition_id][eq], filter[status][eq].
  *
+ * @phpstan-import-type AssociatedRecordTypeShape from \Telnyx\NotificationChannels\NotificationChannelListParams\Filter\AssociatedRecordType
+ * @phpstan-import-type ChannelTypeIDShape from \Telnyx\NotificationChannels\NotificationChannelListParams\Filter\ChannelTypeID
+ * @phpstan-import-type NotificationChannelShape from \Telnyx\NotificationChannels\NotificationChannelListParams\Filter\NotificationChannel
+ * @phpstan-import-type NotificationEventConditionIDShape from \Telnyx\NotificationChannels\NotificationChannelListParams\Filter\NotificationEventConditionID
+ * @phpstan-import-type NotificationProfileIDShape from \Telnyx\NotificationChannels\NotificationChannelListParams\Filter\NotificationProfileID
+ * @phpstan-import-type StatusShape from \Telnyx\NotificationChannels\NotificationChannelListParams\Filter\Status
+ *
  * @phpstan-type FilterShape = array{
- *   associatedRecordType?: AssociatedRecordType|null,
- *   channelTypeID?: ChannelTypeID|null,
- *   notificationChannel?: NotificationChannel|null,
- *   notificationEventConditionID?: NotificationEventConditionID|null,
- *   notificationProfileID?: NotificationProfileID|null,
- *   status?: Status|null,
+ *   associatedRecordType?: null|AssociatedRecordType|AssociatedRecordTypeShape,
+ *   channelTypeID?: null|ChannelTypeID|ChannelTypeIDShape,
+ *   notificationChannel?: null|NotificationChannel|NotificationChannelShape,
+ *   notificationEventConditionID?: null|NotificationEventConditionID|NotificationEventConditionIDShape,
+ *   notificationProfileID?: null|NotificationProfileID|NotificationProfileIDShape,
+ *   status?: null|Status|StatusShape,
  * }
  */
 final class Filter implements BaseModel
@@ -60,18 +66,12 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AssociatedRecordType|array{eq?: value-of<Eq>|null} $associatedRecordType
-     * @param ChannelTypeID|array{
-     *   eq?: value-of<ChannelTypeID\Eq>|null,
-     * } $channelTypeID
-     * @param NotificationChannel|array{eq?: string|null} $notificationChannel
-     * @param NotificationEventConditionID|array{
-     *   eq?: string|null
-     * } $notificationEventConditionID
-     * @param NotificationProfileID|array{eq?: string|null} $notificationProfileID
-     * @param Status|array{
-     *   eq?: value-of<Status\Eq>|null,
-     * } $status
+     * @param AssociatedRecordTypeShape $associatedRecordType
+     * @param ChannelTypeIDShape $channelTypeID
+     * @param NotificationChannelShape $notificationChannel
+     * @param NotificationEventConditionIDShape $notificationEventConditionID
+     * @param NotificationProfileIDShape $notificationProfileID
+     * @param StatusShape $status
      */
     public static function with(
         AssociatedRecordType|array|null $associatedRecordType = null,
@@ -94,7 +94,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param AssociatedRecordType|array{eq?: value-of<Eq>|null} $associatedRecordType
+     * @param AssociatedRecordTypeShape $associatedRecordType
      */
     public function withAssociatedRecordType(
         AssociatedRecordType|array $associatedRecordType
@@ -106,9 +106,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param ChannelTypeID|array{
-     *   eq?: value-of<ChannelTypeID\Eq>|null,
-     * } $channelTypeID
+     * @param ChannelTypeIDShape $channelTypeID
      */
     public function withChannelTypeID(ChannelTypeID|array $channelTypeID): self
     {
@@ -119,7 +117,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param NotificationChannel|array{eq?: string|null} $notificationChannel
+     * @param NotificationChannelShape $notificationChannel
      */
     public function withNotificationChannel(
         NotificationChannel|array $notificationChannel
@@ -131,9 +129,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param NotificationEventConditionID|array{
-     *   eq?: string|null
-     * } $notificationEventConditionID
+     * @param NotificationEventConditionIDShape $notificationEventConditionID
      */
     public function withNotificationEventConditionID(
         NotificationEventConditionID|array $notificationEventConditionID
@@ -145,7 +141,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param NotificationProfileID|array{eq?: string|null} $notificationProfileID
+     * @param NotificationProfileIDShape $notificationProfileID
      */
     public function withNotificationProfileID(
         NotificationProfileID|array $notificationProfileID
@@ -157,9 +153,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param Status|array{
-     *   eq?: value-of<Status\Eq>|null,
-     * } $status
+     * @param StatusShape $status
      */
     public function withStatus(Status|array $status): self
     {

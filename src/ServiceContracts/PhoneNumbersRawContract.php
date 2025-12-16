@@ -37,7 +37,7 @@ interface PhoneNumbersRawContract
      * @api
      *
      * @param string $phoneNumberID identifies the resource
-     * @param array<mixed>|PhoneNumberUpdateParams $params
+     * @param array<string,mixed>|PhoneNumberUpdateParams $params
      *
      * @return BaseResponse<PhoneNumberUpdateResponse>
      *
@@ -52,7 +52,7 @@ interface PhoneNumbersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PhoneNumberListParams $params
+     * @param array<string,mixed>|PhoneNumberListParams $params
      *
      * @return BaseResponse<DefaultPagination<PhoneNumberDetailed>>
      *
@@ -80,7 +80,7 @@ interface PhoneNumbersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PhoneNumberSlimListParams $params
+     * @param array<string,mixed>|PhoneNumberSlimListParams $params
      *
      * @return BaseResponse<DefaultPagination<PhoneNumberSlimListResponse>>
      *

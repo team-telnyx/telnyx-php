@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\EmbeddingsService::similaritySearch()
  *
  * @phpstan-type EmbeddingSimilaritySearchParamsShape = array{
- *   bucketName: string, query: string, numOfDocs?: int
+ *   bucketName: string, query: string, numOfDocs?: int|null
  * }
  */
 final class EmbeddingSimilaritySearchParams implements BaseModel

@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\ClustersService::retrieve()
  *
  * @phpstan-type ClusterRetrieveParamsShape = array{
- *   showSubclusters?: bool, topNNodes?: int
+ *   showSubclusters?: bool|null, topNNodes?: int|null
  * }
  */
 final class ClusterRetrieveParams implements BaseModel

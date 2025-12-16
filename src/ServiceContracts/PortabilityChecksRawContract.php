@@ -15,7 +15,7 @@ interface PortabilityChecksRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PortabilityCheckRunParams $params
+     * @param array<string,mixed>|PortabilityCheckRunParams $params
      *
      * @return BaseResponse<PortabilityCheckRunResponse>
      *

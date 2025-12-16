@@ -11,12 +11,14 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type NodeShape from \Telnyx\AI\Clusters\RecursiveCluster\Node
+ *
  * @phpstan-type RecursiveClusterShape = array{
  *   clusterID: string,
  *   clusterSummary: string,
  *   totalNumberOfNodes: int,
  *   clusterHeader?: string|null,
- *   nodes?: list<Node>|null,
+ *   nodes?: list<NodeShape>|null,
  *   subclusters?: list<mixed>|null,
  * }
  */
@@ -74,7 +76,7 @@ final class RecursiveCluster implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Node|array{filename: string, text: string}> $nodes
+     * @param list<NodeShape> $nodes
      * @param list<mixed> $subclusters
      */
     public static function with(
@@ -131,7 +133,7 @@ final class RecursiveCluster implements BaseModel
     }
 
     /**
-     * @param list<Node|array{filename: string, text: string}> $nodes
+     * @param list<NodeShape> $nodes
      */
     public function withNodes(array $nodes): self
     {

@@ -10,31 +10,33 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\TexmlApplications\TexmlApplication\Inbound;
-use Telnyx\TexmlApplications\TexmlApplication\Inbound\SipSubdomainReceiveSettings;
 use Telnyx\TexmlApplications\TexmlApplication\Outbound;
 use Telnyx\TexmlApplications\TexmlApplication\StatusCallbackMethod;
 use Telnyx\TexmlApplications\TexmlApplication\VoiceMethod;
 
 /**
+ * @phpstan-import-type InboundShape from \Telnyx\TexmlApplications\TexmlApplication\Inbound
+ * @phpstan-import-type OutboundShape from \Telnyx\TexmlApplications\TexmlApplication\Outbound
+ *
  * @phpstan-type TexmlApplicationShape = array{
  *   id?: string|null,
  *   active?: bool|null,
- *   anchorsiteOverride?: value-of<AnchorsiteOverride>|null,
+ *   anchorsiteOverride?: null|AnchorsiteOverride|value-of<AnchorsiteOverride>,
  *   callCostInWebhooks?: bool|null,
  *   createdAt?: string|null,
- *   dtmfType?: value-of<DtmfType>|null,
+ *   dtmfType?: null|DtmfType|value-of<DtmfType>,
  *   firstCommandTimeout?: bool|null,
  *   firstCommandTimeoutSecs?: int|null,
  *   friendlyName?: string|null,
- *   inbound?: Inbound|null,
- *   outbound?: Outbound|null,
+ *   inbound?: null|Inbound|InboundShape,
+ *   outbound?: null|Outbound|OutboundShape,
  *   recordType?: string|null,
  *   statusCallback?: string|null,
- *   statusCallbackMethod?: value-of<StatusCallbackMethod>|null,
+ *   statusCallbackMethod?: null|StatusCallbackMethod|value-of<StatusCallbackMethod>,
  *   tags?: list<string>|null,
  *   updatedAt?: string|null,
  *   voiceFallbackURL?: string|null,
- *   voiceMethod?: value-of<VoiceMethod>|null,
+ *   voiceMethod?: null|VoiceMethod|value-of<VoiceMethod>,
  *   voiceURL?: string|null,
  * }
  */
@@ -173,15 +175,8 @@ final class TexmlApplication implements BaseModel
      *
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
      * @param DtmfType|value-of<DtmfType> $dtmfType
-     * @param Inbound|array{
-     *   channelLimit?: int|null,
-     *   shakenStirEnabled?: bool|null,
-     *   sipSubdomain?: string|null,
-     *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
-     * } $inbound
-     * @param Outbound|array{
-     *   channelLimit?: int|null, outboundVoiceProfileID?: string|null
-     * } $outbound
+     * @param InboundShape $inbound
+     * @param OutboundShape $outbound
      * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $statusCallbackMethod
      * @param list<string> $tags
      * @param VoiceMethod|value-of<VoiceMethod> $voiceMethod
@@ -338,12 +333,7 @@ final class TexmlApplication implements BaseModel
     }
 
     /**
-     * @param Inbound|array{
-     *   channelLimit?: int|null,
-     *   shakenStirEnabled?: bool|null,
-     *   sipSubdomain?: string|null,
-     *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
-     * } $inbound
+     * @param InboundShape $inbound
      */
     public function withInbound(Inbound|array $inbound): self
     {
@@ -354,9 +344,7 @@ final class TexmlApplication implements BaseModel
     }
 
     /**
-     * @param Outbound|array{
-     *   channelLimit?: int|null, outboundVoiceProfileID?: string|null
-     * } $outbound
+     * @param OutboundShape $outbound
      */
     public function withOutbound(Outbound|array $outbound): self
     {

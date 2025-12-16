@@ -15,7 +15,7 @@ interface ChargesBreakdownRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ChargesBreakdownRetrieveParams $params
+     * @param array<string,mixed>|ChargesBreakdownRetrieveParams $params
      *
      * @return BaseResponse<ChargesBreakdownGetResponse>
      *

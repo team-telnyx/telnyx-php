@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type AwsVoiceSettingsShape = array{type: value-of<Type>}
+ * @phpstan-type AwsVoiceSettingsShape = array{type: Type|value-of<Type>}
  */
 final class AwsVoiceSettings implements BaseModel
 {

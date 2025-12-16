@@ -16,7 +16,7 @@ use Telnyx\Webhooks\CallSpeakEndedWebhookEvent\Data\Payload\Status;
  *   callSessionID?: string|null,
  *   clientState?: string|null,
  *   connectionID?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  * }
  */
 final class Payload implements BaseModel

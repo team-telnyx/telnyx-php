@@ -34,7 +34,7 @@ interface MobilePhoneNumbersRawContract
      * @api
      *
      * @param string $id The ID of the mobile phone number
-     * @param array<mixed>|MobilePhoneNumberUpdateParams $params
+     * @param array<string,mixed>|MobilePhoneNumberUpdateParams $params
      *
      * @return BaseResponse<MobilePhoneNumberUpdateResponse>
      *
@@ -49,7 +49,7 @@ interface MobilePhoneNumbersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MobilePhoneNumberListParams $params
+     * @param array<string,mixed>|MobilePhoneNumberListParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<MobilePhoneNumber>>
      *

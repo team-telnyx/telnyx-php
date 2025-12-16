@@ -8,11 +8,14 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Storage\Buckets\Usage\PaginationMetaSimple;
-use Telnyx\Storage\Migrations\MigrationParams\Status;
 
 /**
+ * @phpstan-import-type MigrationParamsShape from \Telnyx\Storage\Migrations\MigrationParams
+ * @phpstan-import-type PaginationMetaSimpleShape from \Telnyx\Storage\Buckets\Usage\PaginationMetaSimple
+ *
  * @phpstan-type MigrationListResponseShape = array{
- *   data?: list<MigrationParams>|null, meta?: PaginationMetaSimple|null
+ *   data?: list<MigrationParamsShape>|null,
+ *   meta?: null|PaginationMetaSimple|PaginationMetaSimpleShape,
  * }
  */
 final class MigrationListResponse implements BaseModel
@@ -37,23 +40,8 @@ final class MigrationListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<MigrationParams|array{
-     *   sourceID: string,
-     *   targetBucketName: string,
-     *   targetRegion: string,
-     *   id?: string|null,
-     *   bytesMigrated?: int|null,
-     *   bytesToMigrate?: int|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   eta?: \DateTimeInterface|null,
-     *   lastCopy?: \DateTimeInterface|null,
-     *   refresh?: bool|null,
-     *   speed?: int|null,
-     *   status?: value-of<Status>|null,
-     * }> $data
-     * @param PaginationMetaSimple|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param list<MigrationParamsShape> $data
+     * @param PaginationMetaSimpleShape $meta
      */
     public static function with(
         ?array $data = null,
@@ -68,20 +56,7 @@ final class MigrationListResponse implements BaseModel
     }
 
     /**
-     * @param list<MigrationParams|array{
-     *   sourceID: string,
-     *   targetBucketName: string,
-     *   targetRegion: string,
-     *   id?: string|null,
-     *   bytesMigrated?: int|null,
-     *   bytesToMigrate?: int|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   eta?: \DateTimeInterface|null,
-     *   lastCopy?: \DateTimeInterface|null,
-     *   refresh?: bool|null,
-     *   speed?: int|null,
-     *   status?: value-of<Status>|null,
-     * }> $data
+     * @param list<MigrationParamsShape> $data
      */
     public function withData(array $data): self
     {
@@ -92,9 +67,7 @@ final class MigrationListResponse implements BaseModel
     }
 
     /**
-     * @param PaginationMetaSimple|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param PaginationMetaSimpleShape $meta
      */
     public function withMeta(PaginationMetaSimple|array $meta): self
     {

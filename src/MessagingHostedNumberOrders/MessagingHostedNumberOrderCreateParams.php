@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\MessagingHostedNumberOrdersService::create()
  *
  * @phpstan-type MessagingHostedNumberOrderCreateParamsShape = array{
- *   messagingProfileID?: string, phoneNumbers?: list<string>
+ *   messagingProfileID?: string|null, phoneNumbers?: list<string>|null
  * }
  */
 final class MessagingHostedNumberOrderCreateParams implements BaseModel

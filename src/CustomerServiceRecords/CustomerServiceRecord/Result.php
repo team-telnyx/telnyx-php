@@ -13,9 +13,12 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Result\Admin;
 /**
  * The result of the CSR request. This field would be null in case of `pending` or `failed` status.
  *
+ * @phpstan-import-type AddressShape from \Telnyx\CustomerServiceRecords\CustomerServiceRecord\Result\Address
+ * @phpstan-import-type AdminShape from \Telnyx\CustomerServiceRecords\CustomerServiceRecord\Result\Admin
+ *
  * @phpstan-type ResultShape = array{
- *   address?: Address|null,
- *   admin?: Admin|null,
+ *   address?: null|Address|AddressShape,
+ *   admin?: null|Admin|AdminShape,
  *   associatedPhoneNumbers?: list<string>|null,
  *   carrierName?: string|null,
  * }
@@ -61,19 +64,8 @@ final class Result implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Address|array{
-     *   administrativeArea?: string|null,
-     *   fullAddress?: string|null,
-     *   locality?: string|null,
-     *   postalCode?: string|null,
-     *   streetAddress?: string|null,
-     * } $address
-     * @param Admin|array{
-     *   accountNumber?: string|null,
-     *   authorizedPersonName?: string|null,
-     *   billingPhoneNumber?: string|null,
-     *   name?: string|null,
-     * } $admin
+     * @param AddressShape $address
+     * @param AdminShape $admin
      * @param list<string> $associatedPhoneNumbers
      */
     public static function with(
@@ -95,13 +87,7 @@ final class Result implements BaseModel
     /**
      * The address of the customer service record.
      *
-     * @param Address|array{
-     *   administrativeArea?: string|null,
-     *   fullAddress?: string|null,
-     *   locality?: string|null,
-     *   postalCode?: string|null,
-     *   streetAddress?: string|null,
-     * } $address
+     * @param AddressShape $address
      */
     public function withAddress(Address|array $address): self
     {
@@ -114,12 +100,7 @@ final class Result implements BaseModel
     /**
      * The admin of the customer service record.
      *
-     * @param Admin|array{
-     *   accountNumber?: string|null,
-     *   authorizedPersonName?: string|null,
-     *   billingPhoneNumber?: string|null,
-     *   name?: string|null,
-     * } $admin
+     * @param AdminShape $admin
      */
     public function withAdmin(Admin|array $admin): self
     {

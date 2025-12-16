@@ -20,7 +20,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $id identifies the resource
-     * @param array<mixed>|ActionChangeBundleStatusParams $params
+     * @param array<string,mixed>|ActionChangeBundleStatusParams $params
      *
      * @return BaseResponse<ActionChangeBundleStatusResponse>
      *
@@ -36,7 +36,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $id identifies the resource
-     * @param array<mixed>|ActionEnableEmergencyParams $params
+     * @param array<string,mixed>|ActionEnableEmergencyParams $params
      *
      * @return BaseResponse<ActionEnableEmergencyResponse>
      *
@@ -51,7 +51,7 @@ interface ActionsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ActionVerifyOwnershipParams $params
+     * @param array<string,mixed>|ActionVerifyOwnershipParams $params
      *
      * @return BaseResponse<ActionVerifyOwnershipResponse>
      *

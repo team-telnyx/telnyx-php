@@ -20,7 +20,7 @@ interface AdditionalDocumentsRawContract
      * @api
      *
      * @param string $id Porting Order id
-     * @param array<mixed>|AdditionalDocumentCreateParams $params
+     * @param array<string,mixed>|AdditionalDocumentCreateParams $params
      *
      * @return BaseResponse<AdditionalDocumentNewResponse>
      *
@@ -36,7 +36,7 @@ interface AdditionalDocumentsRawContract
      * @api
      *
      * @param string $id Porting Order id
-     * @param array<mixed>|AdditionalDocumentListParams $params
+     * @param array<string,mixed>|AdditionalDocumentListParams $params
      *
      * @return BaseResponse<DefaultPagination<AdditionalDocumentListResponse>>
      *
@@ -52,7 +52,7 @@ interface AdditionalDocumentsRawContract
      * @api
      *
      * @param string $additionalDocumentID additional document identification
-     * @param array<mixed>|AdditionalDocumentDeleteParams $params
+     * @param array<string,mixed>|AdditionalDocumentDeleteParams $params
      *
      * @return BaseResponse<mixed>
      *

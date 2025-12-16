@@ -12,7 +12,9 @@ use Telnyx\Portouts\PortoutListRejectionCodesParams\Filter\Code;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[code], filter[code][in].
  *
- * @phpstan-type FilterShape = array{code?: int|null|list<int>}
+ * @phpstan-import-type CodeShape from \Telnyx\Portouts\PortoutListRejectionCodesParams\Filter\Code
+ *
+ * @phpstan-type FilterShape = array{code?: CodeShape|null}
  */
 final class Filter implements BaseModel
 {
@@ -37,7 +39,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param int|list<int> $code
+     * @param CodeShape $code
      */
     public static function with(int|array|null $code = null): self
     {
@@ -51,7 +53,7 @@ final class Filter implements BaseModel
     /**
      * Filter rejections of a specific code.
      *
-     * @param int|list<int> $code
+     * @param CodeShape $code
      */
     public function withCode(int|array $code): self
     {

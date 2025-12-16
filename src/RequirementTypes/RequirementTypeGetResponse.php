@@ -8,12 +8,12 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DocReqsRequirementType;
-use Telnyx\DocReqsRequirementType\AcceptanceCriteria;
-use Telnyx\DocReqsRequirementType\Type;
 
 /**
+ * @phpstan-import-type DocReqsRequirementTypeShape from \Telnyx\DocReqsRequirementType
+ *
  * @phpstan-type RequirementTypeGetResponseShape = array{
- *   data?: DocReqsRequirementType|null
+ *   data?: null|DocReqsRequirementType|DocReqsRequirementTypeShape
  * }
  */
 final class RequirementTypeGetResponse implements BaseModel
@@ -34,17 +34,7 @@ final class RequirementTypeGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DocReqsRequirementType|array{
-     *   id?: string|null,
-     *   acceptanceCriteria?: AcceptanceCriteria|null,
-     *   createdAt?: string|null,
-     *   description?: string|null,
-     *   example?: string|null,
-     *   name?: string|null,
-     *   recordType?: string|null,
-     *   type?: value-of<Type>|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param DocReqsRequirementTypeShape $data
      */
     public static function with(DocReqsRequirementType|array|null $data = null): self
     {
@@ -56,17 +46,7 @@ final class RequirementTypeGetResponse implements BaseModel
     }
 
     /**
-     * @param DocReqsRequirementType|array{
-     *   id?: string|null,
-     *   acceptanceCriteria?: AcceptanceCriteria|null,
-     *   createdAt?: string|null,
-     *   description?: string|null,
-     *   example?: string|null,
-     *   name?: string|null,
-     *   recordType?: string|null,
-     *   type?: value-of<Type>|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param DocReqsRequirementTypeShape $data
      */
     public function withData(DocReqsRequirementType|array $data): self
     {

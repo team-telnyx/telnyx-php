@@ -16,7 +16,7 @@ interface LedgerBillingGroupReportsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|LedgerBillingGroupReportCreateParams $params
+     * @param array<string,mixed>|LedgerBillingGroupReportCreateParams $params
      *
      * @return BaseResponse<LedgerBillingGroupReportNewResponse>
      *

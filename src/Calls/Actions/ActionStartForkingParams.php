@@ -24,11 +24,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Calls\ActionsService::startForking()
  *
  * @phpstan-type ActionStartForkingParamsShape = array{
- *   clientState?: string,
- *   commandID?: string,
- *   rx?: string,
- *   streamType?: StreamType|value-of<StreamType>,
- *   tx?: string,
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   rx?: string|null,
+ *   streamType?: null|StreamType|value-of<StreamType>,
+ *   tx?: string|null,
  * }
  */
 final class ActionStartForkingParams implements BaseModel

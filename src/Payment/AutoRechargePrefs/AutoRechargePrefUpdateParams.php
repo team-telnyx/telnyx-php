@@ -16,11 +16,11 @@ use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateParams\Preference;
  * @see Telnyx\Services\Payment\AutoRechargePrefsService::update()
  *
  * @phpstan-type AutoRechargePrefUpdateParamsShape = array{
- *   enabled?: bool,
- *   invoiceEnabled?: bool,
- *   preference?: Preference|value-of<Preference>,
- *   rechargeAmount?: string,
- *   thresholdAmount?: string,
+ *   enabled?: bool|null,
+ *   invoiceEnabled?: bool|null,
+ *   preference?: null|Preference|value-of<Preference>,
+ *   rechargeAmount?: string|null,
+ *   thresholdAmount?: string|null,
  * }
  */
 final class AutoRechargePrefUpdateParams implements BaseModel

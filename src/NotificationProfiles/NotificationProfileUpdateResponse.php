@@ -9,8 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type NotificationProfileShape from \Telnyx\NotificationProfiles\NotificationProfile
+ *
  * @phpstan-type NotificationProfileUpdateResponseShape = array{
- *   data?: NotificationProfile|null
+ *   data?: null|NotificationProfile|NotificationProfileShape
  * }
  */
 final class NotificationProfileUpdateResponse implements BaseModel
@@ -34,12 +36,7 @@ final class NotificationProfileUpdateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param NotificationProfile|array{
-     *   id?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   name?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param NotificationProfileShape $data
      */
     public static function with(NotificationProfile|array|null $data = null): self
     {
@@ -53,12 +50,7 @@ final class NotificationProfileUpdateResponse implements BaseModel
     /**
      * A Collection of Notification Channels.
      *
-     * @param NotificationProfile|array{
-     *   id?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   name?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param NotificationProfileShape $data
      */
     public function withData(NotificationProfile|array $data): self
     {

@@ -16,7 +16,7 @@ use Telnyx\TextToSpeech\TextToSpeechListVoicesParams\Provider;
  * @see Telnyx\Services\TextToSpeechService::listVoices()
  *
  * @phpstan-type TextToSpeechListVoicesParamsShape = array{
- *   elevenlabsAPIKeyRef?: string, provider?: Provider|value-of<Provider>
+ *   elevenlabsAPIKeyRef?: string|null, provider?: null|Provider|value-of<Provider>
  * }
  */
 final class TextToSpeechListVoicesParams implements BaseModel

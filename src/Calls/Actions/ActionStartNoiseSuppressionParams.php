@@ -17,14 +17,14 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Calls\ActionsService::startNoiseSuppression()
  *
+ * @phpstan-import-type NoiseSuppressionEngineConfigShape from \Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\NoiseSuppressionEngineConfig
+ *
  * @phpstan-type ActionStartNoiseSuppressionParamsShape = array{
- *   clientState?: string,
- *   commandID?: string,
- *   direction?: Direction|value-of<Direction>,
- *   noiseSuppressionEngine?: NoiseSuppressionEngine|value-of<NoiseSuppressionEngine>,
- *   noiseSuppressionEngineConfig?: NoiseSuppressionEngineConfig|array{
- *     attenuationLimit?: int|null
- *   },
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   direction?: null|Direction|value-of<Direction>,
+ *   noiseSuppressionEngine?: null|NoiseSuppressionEngine|value-of<NoiseSuppressionEngine>,
+ *   noiseSuppressionEngineConfig?: NoiseSuppressionEngineConfigShape|null,
  * }
  */
 final class ActionStartNoiseSuppressionParams implements BaseModel
@@ -82,9 +82,7 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
      *
      * @param Direction|value-of<Direction> $direction
      * @param NoiseSuppressionEngine|value-of<NoiseSuppressionEngine> $noiseSuppressionEngine
-     * @param NoiseSuppressionEngineConfig|array{
-     *   attenuationLimit?: int|null
-     * } $noiseSuppressionEngineConfig
+     * @param NoiseSuppressionEngineConfigShape $noiseSuppressionEngineConfig
      */
     public static function with(
         ?string $clientState = null,
@@ -159,9 +157,7 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
     /**
      * Configuration parameters for noise suppression engines.
      *
-     * @param NoiseSuppressionEngineConfig|array{
-     *   attenuationLimit?: int|null
-     * } $noiseSuppressionEngineConfig
+     * @param NoiseSuppressionEngineConfigShape $noiseSuppressionEngineConfig
      */
     public function withNoiseSuppressionEngineConfig(
         NoiseSuppressionEngineConfig|array $noiseSuppressionEngineConfig

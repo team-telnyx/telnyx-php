@@ -17,7 +17,7 @@ interface AccessIPAddressRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AccessIPAddressCreateParams $params
+     * @param array<string,mixed>|AccessIPAddressCreateParams $params
      *
      * @return BaseResponse<AccessIPAddressResponse>
      *
@@ -43,7 +43,7 @@ interface AccessIPAddressRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AccessIPAddressListParams $params
+     * @param array<string,mixed>|AccessIPAddressListParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<AccessIPAddressResponse>>
      *

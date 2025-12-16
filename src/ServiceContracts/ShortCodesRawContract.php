@@ -34,7 +34,7 @@ interface ShortCodesRawContract
      * @api
      *
      * @param string $id The id of the short code
-     * @param array<mixed>|ShortCodeUpdateParams $params
+     * @param array<string,mixed>|ShortCodeUpdateParams $params
      *
      * @return BaseResponse<ShortCodeUpdateResponse>
      *
@@ -49,7 +49,7 @@ interface ShortCodesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ShortCodeListParams $params
+     * @param array<string,mixed>|ShortCodeListParams $params
      *
      * @return BaseResponse<DefaultPagination<ShortCode>>
      *

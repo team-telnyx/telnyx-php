@@ -21,7 +21,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Calls\ActionsService::reject()
  *
  * @phpstan-type ActionRejectParamsShape = array{
- *   cause: Cause|value-of<Cause>, clientState?: string, commandID?: string
+ *   cause: Cause|value-of<Cause>,
+ *   clientState?: string|null,
+ *   commandID?: string|null,
  * }
  */
 final class ActionRejectParams implements BaseModel

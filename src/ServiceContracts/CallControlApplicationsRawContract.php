@@ -22,7 +22,7 @@ interface CallControlApplicationsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|CallControlApplicationCreateParams $params
+     * @param array<string,mixed>|CallControlApplicationCreateParams $params
      *
      * @return BaseResponse<CallControlApplicationNewResponse>
      *
@@ -51,7 +51,7 @@ interface CallControlApplicationsRawContract
      * @api
      *
      * @param string $id identifies the resource
-     * @param array<mixed>|CallControlApplicationUpdateParams $params
+     * @param array<string,mixed>|CallControlApplicationUpdateParams $params
      *
      * @return BaseResponse<CallControlApplicationUpdateResponse>
      *
@@ -66,7 +66,7 @@ interface CallControlApplicationsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|CallControlApplicationListParams $params
+     * @param array<string,mixed>|CallControlApplicationListParams $params
      *
      * @return BaseResponse<DefaultPagination<CallControlApplication>>
      *

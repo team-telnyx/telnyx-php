@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\ExternalConnections\PhoneNumbersService::update()
  *
  * @phpstan-type PhoneNumberUpdateParamsShape = array{
- *   id: string, locationID?: string
+ *   id: string, locationID?: string|null
  * }
  */
 final class PhoneNumberUpdateParams implements BaseModel

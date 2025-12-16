@@ -8,12 +8,12 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CountryCoverage\CountryCoverageGetResponse\Data;
-use Telnyx\CountryCoverage\CountryCoverageGetResponse\Data\Local;
-use Telnyx\CountryCoverage\CountryCoverageGetResponse\Data\TollFree;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\CountryCoverage\CountryCoverageGetResponse\Data
+ *
  * @phpstan-type CountryCoverageGetResponseShape = array{
- *   data?: array<string,Data>|null
+ *   data?: array<string,DataShape>|null
  * }
  */
 final class CountryCoverageGetResponse implements BaseModel
@@ -35,23 +35,7 @@ final class CountryCoverageGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,Data|array{
-     *   code?: string|null,
-     *   features?: list<string>|null,
-     *   internationalSMS?: bool|null,
-     *   inventoryCoverage?: bool|null,
-     *   local?: Local|null,
-     *   mobile?: array<string,mixed>|null,
-     *   national?: array<string,mixed>|null,
-     *   numbers?: bool|null,
-     *   p2p?: bool|null,
-     *   phoneNumberType?: list<string>|null,
-     *   quickship?: bool|null,
-     *   region?: string|null,
-     *   reservable?: bool|null,
-     *   sharedCost?: array<string,mixed>|null,
-     *   tollFree?: TollFree|null,
-     * }> $data
+     * @param array<string,DataShape> $data
      */
     public static function with(?array $data = null): self
     {
@@ -63,23 +47,7 @@ final class CountryCoverageGetResponse implements BaseModel
     }
 
     /**
-     * @param array<string,Data|array{
-     *   code?: string|null,
-     *   features?: list<string>|null,
-     *   internationalSMS?: bool|null,
-     *   inventoryCoverage?: bool|null,
-     *   local?: Local|null,
-     *   mobile?: array<string,mixed>|null,
-     *   national?: array<string,mixed>|null,
-     *   numbers?: bool|null,
-     *   p2p?: bool|null,
-     *   phoneNumberType?: list<string>|null,
-     *   quickship?: bool|null,
-     *   region?: string|null,
-     *   reservable?: bool|null,
-     *   sharedCost?: array<string,mixed>|null,
-     *   tollFree?: TollFree|null,
-     * }> $data
+     * @param array<string,DataShape> $data
      */
     public function withData(array $data): self
     {

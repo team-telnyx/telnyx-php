@@ -15,7 +15,7 @@ interface CampaignBuilderRawContract
     /**
      * @api
      *
-     * @param array<mixed>|CampaignBuilderSubmitParams $params
+     * @param array<string,mixed>|CampaignBuilderSubmitParams $params
      *
      * @return BaseResponse<TelnyxCampaignCsp>
      *

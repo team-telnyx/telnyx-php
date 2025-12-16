@@ -15,15 +15,17 @@ use Telnyx\Messaging10dlc\Brand\TelnyxBrand\Status;
 /**
  * Telnyx-specific extensions to The Campaign Registry's `Brand` type.
  *
+ * @phpstan-import-type OptionalAttributesShape from \Telnyx\Messaging10dlc\Brand\TelnyxBrand\OptionalAttributes
+ *
  * @phpstan-type TelnyxBrandShape = array{
- *   brandRelationship: value-of<BrandRelationship>,
+ *   brandRelationship: BrandRelationship|value-of<BrandRelationship>,
  *   country: string,
  *   displayName: string,
  *   email: string,
- *   entityType: value-of<EntityType>,
+ *   entityType: EntityType|value-of<EntityType>,
  *   vertical: string,
  *   altBusinessID?: string|null,
- *   altBusinessIDType?: value-of<AltBusinessIDType>|null,
+ *   altBusinessIDType?: null|AltBusinessIDType|value-of<AltBusinessIDType>,
  *   brandID?: string|null,
  *   businessContactEmail?: string|null,
  *   city?: string|null,
@@ -33,19 +35,19 @@ use Telnyx\Messaging10dlc\Brand\TelnyxBrand\Status;
  *   ein?: string|null,
  *   failureReasons?: string|null,
  *   firstName?: string|null,
- *   identityStatus?: value-of<BrandIdentityStatus>|null,
+ *   identityStatus?: null|BrandIdentityStatus|value-of<BrandIdentityStatus>,
  *   ipAddress?: string|null,
  *   isReseller?: bool|null,
  *   lastName?: string|null,
  *   mobilePhone?: string|null,
  *   mock?: bool|null,
- *   optionalAttributes?: OptionalAttributes|null,
+ *   optionalAttributes?: null|OptionalAttributes|OptionalAttributesShape,
  *   phone?: string|null,
  *   postalCode?: string|null,
  *   referenceID?: string|null,
  *   state?: string|null,
- *   status?: value-of<Status>|null,
- *   stockExchange?: value-of<StockExchange>|null,
+ *   status?: null|Status|value-of<Status>,
+ *   stockExchange?: null|StockExchange|value-of<StockExchange>,
  *   stockSymbol?: string|null,
  *   street?: string|null,
  *   tcrBrandID?: string|null,
@@ -341,9 +343,7 @@ final class TelnyxBrand implements BaseModel
      * @param EntityType|value-of<EntityType> $entityType
      * @param AltBusinessIDType|value-of<AltBusinessIDType> $altBusinessIDType
      * @param BrandIdentityStatus|value-of<BrandIdentityStatus> $identityStatus
-     * @param OptionalAttributes|array{
-     *   taxExemptStatus?: string|null
-     * } $optionalAttributes
+     * @param OptionalAttributesShape $optionalAttributes
      * @param Status|value-of<Status> $status
      * @param StockExchange|value-of<StockExchange> $stockExchange
      */
@@ -699,9 +699,7 @@ final class TelnyxBrand implements BaseModel
     }
 
     /**
-     * @param OptionalAttributes|array{
-     *   taxExemptStatus?: string|null
-     * } $optionalAttributes
+     * @param OptionalAttributesShape $optionalAttributes
      */
     public function withOptionalAttributes(
         OptionalAttributes|array $optionalAttributes

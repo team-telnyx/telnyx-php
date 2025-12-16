@@ -8,32 +8,34 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\MapOf;
-use Telnyx\SimCardStatus\Value;
 use Telnyx\SimpleSimCard\CurrentBillingPeriodConsumedData;
 use Telnyx\SimpleSimCard\DataLimit;
-use Telnyx\SimpleSimCard\DataLimit\Unit;
 use Telnyx\SimpleSimCard\EsimInstallationStatus;
 use Telnyx\SimpleSimCard\Type;
 
 /**
+ * @phpstan-import-type CurrentBillingPeriodConsumedDataShape from \Telnyx\SimpleSimCard\CurrentBillingPeriodConsumedData
+ * @phpstan-import-type DataLimitShape from \Telnyx\SimpleSimCard\DataLimit
+ * @phpstan-import-type SimCardStatusShape from \Telnyx\SimCardStatus
+ *
  * @phpstan-type SimpleSimCardShape = array{
  *   id?: string|null,
  *   actionsInProgress?: bool|null,
  *   authorizedImeis?: list<string>|null,
  *   createdAt?: string|null,
- *   currentBillingPeriodConsumedData?: CurrentBillingPeriodConsumedData|null,
- *   dataLimit?: DataLimit|null,
+ *   currentBillingPeriodConsumedData?: null|CurrentBillingPeriodConsumedData|CurrentBillingPeriodConsumedDataShape,
+ *   dataLimit?: null|DataLimit|DataLimitShape,
  *   eid?: string|null,
- *   esimInstallationStatus?: value-of<EsimInstallationStatus>|null,
+ *   esimInstallationStatus?: null|EsimInstallationStatus|value-of<EsimInstallationStatus>,
  *   iccid?: string|null,
  *   imsi?: string|null,
  *   msisdn?: string|null,
  *   recordType?: string|null,
  *   resourcesWithInProgressActions?: list<array<string,mixed>>|null,
  *   simCardGroupID?: string|null,
- *   status?: SimCardStatus|null,
+ *   status?: null|SimCardStatus|SimCardStatusShape,
  *   tags?: list<string>|null,
- *   type?: value-of<Type>|null,
+ *   type?: null|Type|value-of<Type>,
  *   updatedAt?: string|null,
  *   version?: string|null,
  * }
@@ -178,17 +180,11 @@ final class SimpleSimCard implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string>|null $authorizedImeis
-     * @param CurrentBillingPeriodConsumedData|array{
-     *   amount?: string|null, unit?: string|null
-     * } $currentBillingPeriodConsumedData
-     * @param DataLimit|array{
-     *   amount?: string|null, unit?: value-of<Unit>|null
-     * } $dataLimit
+     * @param CurrentBillingPeriodConsumedDataShape $currentBillingPeriodConsumedData
+     * @param DataLimitShape $dataLimit
      * @param EsimInstallationStatus|value-of<EsimInstallationStatus>|null $esimInstallationStatus
      * @param list<array<string,mixed>> $resourcesWithInProgressActions
-     * @param SimCardStatus|array{
-     *   reason?: string|null, value?: value-of<Value>|null
-     * } $status
+     * @param SimCardStatusShape $status
      * @param list<string> $tags
      * @param Type|value-of<Type> $type
      */
@@ -287,9 +283,7 @@ final class SimpleSimCard implements BaseModel
     /**
      * The SIM card consumption so far in the current billing cycle.
      *
-     * @param CurrentBillingPeriodConsumedData|array{
-     *   amount?: string|null, unit?: string|null
-     * } $currentBillingPeriodConsumedData
+     * @param CurrentBillingPeriodConsumedDataShape $currentBillingPeriodConsumedData
      */
     public function withCurrentBillingPeriodConsumedData(
         CurrentBillingPeriodConsumedData|array $currentBillingPeriodConsumedData
@@ -303,9 +297,7 @@ final class SimpleSimCard implements BaseModel
     /**
      * The SIM card individual data limit configuration.
      *
-     * @param DataLimit|array{
-     *   amount?: string|null, unit?: value-of<Unit>|null
-     * } $dataLimit
+     * @param DataLimitShape $dataLimit
      */
     public function withDataLimit(DataLimit|array $dataLimit): self
     {
@@ -409,9 +401,7 @@ final class SimpleSimCard implements BaseModel
     }
 
     /**
-     * @param SimCardStatus|array{
-     *   reason?: string|null, value?: value-of<Value>|null
-     * } $status
+     * @param SimCardStatusShape $status
      */
     public function withStatus(SimCardStatus|array $status): self
     {

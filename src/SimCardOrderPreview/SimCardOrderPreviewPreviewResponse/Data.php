@@ -12,12 +12,16 @@ use Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse\Data\SimCardsC
 use Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse\Data\TotalCost;
 
 /**
+ * @phpstan-import-type ShippingCostShape from \Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse\Data\ShippingCost
+ * @phpstan-import-type SimCardsCostShape from \Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse\Data\SimCardsCost
+ * @phpstan-import-type TotalCostShape from \Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse\Data\TotalCost
+ *
  * @phpstan-type DataShape = array{
  *   quantity?: int|null,
  *   recordType?: string|null,
- *   shippingCost?: ShippingCost|null,
- *   simCardsCost?: SimCardsCost|null,
- *   totalCost?: TotalCost|null,
+ *   shippingCost?: null|ShippingCost|ShippingCostShape,
+ *   simCardsCost?: null|SimCardsCost|SimCardsCostShape,
+ *   totalCost?: null|TotalCost|TotalCostShape,
  * }
  */
 final class Data implements BaseModel
@@ -56,13 +60,9 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ShippingCost|array{
-     *   amount?: string|null, currency?: string|null
-     * } $shippingCost
-     * @param SimCardsCost|array{
-     *   amount?: string|null, currency?: string|null
-     * } $simCardsCost
-     * @param TotalCost|array{amount?: string|null, currency?: string|null} $totalCost
+     * @param ShippingCostShape $shippingCost
+     * @param SimCardsCostShape $simCardsCost
+     * @param TotalCostShape $totalCost
      */
     public static function with(
         ?int $quantity = null,
@@ -105,9 +105,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param ShippingCost|array{
-     *   amount?: string|null, currency?: string|null
-     * } $shippingCost
+     * @param ShippingCostShape $shippingCost
      */
     public function withShippingCost(ShippingCost|array $shippingCost): self
     {
@@ -118,9 +116,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param SimCardsCost|array{
-     *   amount?: string|null, currency?: string|null
-     * } $simCardsCost
+     * @param SimCardsCostShape $simCardsCost
      */
     public function withSimCardsCost(SimCardsCost|array $simCardsCost): self
     {
@@ -131,7 +127,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param TotalCost|array{amount?: string|null, currency?: string|null} $totalCost
+     * @param TotalCostShape $totalCost
      */
     public function withTotalCost(TotalCost|array $totalCost): self
     {

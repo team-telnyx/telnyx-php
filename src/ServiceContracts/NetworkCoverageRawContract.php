@@ -16,7 +16,7 @@ interface NetworkCoverageRawContract
     /**
      * @api
      *
-     * @param array<mixed>|NetworkCoverageListParams $params
+     * @param array<string,mixed>|NetworkCoverageListParams $params
      *
      * @return BaseResponse<DefaultPagination<NetworkCoverageListResponse>>
      *

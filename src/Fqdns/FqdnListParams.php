@@ -16,14 +16,11 @@ use Telnyx\Fqdns\FqdnListParams\Page;
  *
  * @see Telnyx\Services\FqdnsService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\Fqdns\FqdnListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Fqdns\FqdnListParams\Page
+ *
  * @phpstan-type FqdnListParamsShape = array{
- *   filter?: Filter|array{
- *     connectionID?: string|null,
- *     dnsRecordType?: string|null,
- *     fqdn?: string|null,
- *     port?: int|null,
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   filter?: FilterShape|null, page?: PageShape|null
  * }
  */
 final class FqdnListParams implements BaseModel
@@ -54,13 +51,8 @@ final class FqdnListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   connectionID?: string|null,
-     *   dnsRecordType?: string|null,
-     *   fqdn?: string|null,
-     *   port?: int|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -77,12 +69,7 @@ final class FqdnListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[connection_id], filter[fqdn], filter[port], filter[dns_record_type].
      *
-     * @param Filter|array{
-     *   connectionID?: string|null,
-     *   dnsRecordType?: string|null,
-     *   fqdn?: string|null,
-     *   port?: int|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -95,7 +82,7 @@ final class FqdnListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

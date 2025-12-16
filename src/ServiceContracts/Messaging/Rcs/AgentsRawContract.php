@@ -33,7 +33,7 @@ interface AgentsRawContract
      * @api
      *
      * @param string $id RCS agent ID
-     * @param array<mixed>|AgentUpdateParams $params
+     * @param array<string,mixed>|AgentUpdateParams $params
      *
      * @return BaseResponse<RcsAgentResponse>
      *
@@ -48,7 +48,7 @@ interface AgentsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AgentListParams $params
+     * @param array<string,mixed>|AgentListParams $params
      *
      * @return BaseResponse<DefaultPagination<RcsAgent>>
      *

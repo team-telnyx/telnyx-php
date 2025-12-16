@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\AuthenticationProviders;
 
-use Telnyx\AuthenticationProviders\Settings\IdpCertFingerprintAlgorithm;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -16,17 +15,14 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AuthenticationProvidersService::create()
  *
+ * @phpstan-import-type SettingsShape from \Telnyx\AuthenticationProviders\Settings
+ *
  * @phpstan-type AuthenticationProviderCreateParamsShape = array{
  *   name: string,
- *   settings: Settings|array{
- *     idpCertFingerprint: string,
- *     idpEntityID: string,
- *     idpSSOTargetURL: string,
- *     idpCertFingerprintAlgorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
- *   },
+ *   settings: SettingsShape,
  *   shortName: string,
- *   active?: bool,
- *   settingsURL?: string,
+ *   active?: bool|null,
+ *   settingsURL?: string|null,
  * }
  */
 final class AuthenticationProviderCreateParams implements BaseModel
@@ -94,12 +90,7 @@ final class AuthenticationProviderCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Settings|array{
-     *   idpCertFingerprint: string,
-     *   idpEntityID: string,
-     *   idpSSOTargetURL: string,
-     *   idpCertFingerprintAlgorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
-     * } $settings
+     * @param SettingsShape $settings
      */
     public static function with(
         string $name,
@@ -134,12 +125,7 @@ final class AuthenticationProviderCreateParams implements BaseModel
     /**
      * The settings associated with the authentication provider.
      *
-     * @param Settings|array{
-     *   idpCertFingerprint: string,
-     *   idpEntityID: string,
-     *   idpSSOTargetURL: string,
-     *   idpCertFingerprintAlgorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
-     * } $settings
+     * @param SettingsShape $settings
      */
     public function withSettings(Settings|array $settings): self
     {

@@ -10,8 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Seti\SetiGetBlackBoxTestResultsResponse\Data\BlackBoxTest;
 
 /**
+ * @phpstan-import-type BlackBoxTestShape from \Telnyx\Seti\SetiGetBlackBoxTestResultsResponse\Data\BlackBoxTest
+ *
  * @phpstan-type DataShape = array{
- *   blackBoxTests?: list<BlackBoxTest>|null,
+ *   blackBoxTests?: list<BlackBoxTestShape>|null,
  *   product?: string|null,
  *   recordType?: string|null,
  * }
@@ -44,9 +46,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<BlackBoxTest|array{
-     *   id?: string|null, recordType?: string|null, result?: float|null
-     * }> $blackBoxTests
+     * @param list<BlackBoxTestShape> $blackBoxTests
      */
     public static function with(
         ?array $blackBoxTests = null,
@@ -63,9 +63,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<BlackBoxTest|array{
-     *   id?: string|null, recordType?: string|null, result?: float|null
-     * }> $blackBoxTests
+     * @param list<BlackBoxTestShape> $blackBoxTests
      */
     public function withBlackBoxTests(array $blackBoxTests): self
     {

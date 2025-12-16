@@ -18,7 +18,7 @@ interface MobilePushCredentialsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MobilePushCredentialCreateParams $params
+     * @param array<string,mixed>|MobilePushCredentialCreateParams $params
      *
      * @return BaseResponse<PushCredentialResponse>
      *
@@ -46,7 +46,7 @@ interface MobilePushCredentialsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MobilePushCredentialListParams $params
+     * @param array<string,mixed>|MobilePushCredentialListParams $params
      *
      * @return BaseResponse<DefaultPagination<PushCredential>>
      *

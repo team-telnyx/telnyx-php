@@ -19,7 +19,7 @@ interface UserAddressesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|UserAddressCreateParams $params
+     * @param array<string,mixed>|UserAddressCreateParams $params
      *
      * @return BaseResponse<UserAddressNewResponse>
      *
@@ -47,7 +47,7 @@ interface UserAddressesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|UserAddressListParams $params
+     * @param array<string,mixed>|UserAddressListParams $params
      *
      * @return BaseResponse<DefaultPagination<UserAddress>>
      *

@@ -7,11 +7,12 @@ namespace Telnyx\NotificationChannels;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\NotificationChannels\NotificationChannel\ChannelTypeID;
 
 /**
+ * @phpstan-import-type NotificationChannelShape from \Telnyx\NotificationChannels\NotificationChannel
+ *
  * @phpstan-type NotificationChannelDeleteResponseShape = array{
- *   data?: NotificationChannel|null
+ *   data?: null|NotificationChannel|NotificationChannelShape
  * }
  */
 final class NotificationChannelDeleteResponse implements BaseModel
@@ -35,14 +36,7 @@ final class NotificationChannelDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param NotificationChannel|array{
-     *   id?: string|null,
-     *   channelDestination?: string|null,
-     *   channelTypeID?: value-of<ChannelTypeID>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   notificationProfileID?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param NotificationChannelShape $data
      */
     public static function with(NotificationChannel|array|null $data = null): self
     {
@@ -56,14 +50,7 @@ final class NotificationChannelDeleteResponse implements BaseModel
     /**
      * A Notification Channel.
      *
-     * @param NotificationChannel|array{
-     *   id?: string|null,
-     *   channelDestination?: string|null,
-     *   channelTypeID?: value-of<ChannelTypeID>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   notificationProfileID?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param NotificationChannelShape $data
      */
     public function withData(NotificationChannel|array $data): self
     {

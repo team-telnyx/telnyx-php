@@ -18,7 +18,7 @@ interface SpeechToTextRawContract
     /**
      * @api
      *
-     * @param array<mixed>|SpeechToTextCreateParams $params
+     * @param array<string,mixed>|SpeechToTextCreateParams $params
      *
      * @return BaseResponse<SpeechToTextNewResponse>
      *

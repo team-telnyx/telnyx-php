@@ -10,7 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document\Type;
 
 /**
- * @phpstan-type DocumentShape = array{documentID: string, type: value-of<Type>}
+ * @phpstan-type DocumentShape = array{
+ *   documentID: string, type: Type|value-of<Type>
+ * }
  */
 final class Document implements BaseModel
 {

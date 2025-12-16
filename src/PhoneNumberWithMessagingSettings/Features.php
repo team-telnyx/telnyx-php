@@ -10,8 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingFeatureSet;
 
 /**
+ * @phpstan-import-type MessagingFeatureSetShape from \Telnyx\MessagingFeatureSet
+ *
  * @phpstan-type FeaturesShape = array{
- *   mms?: MessagingFeatureSet|null, sms?: MessagingFeatureSet|null
+ *   mms?: null|MessagingFeatureSet|MessagingFeatureSetShape,
+ *   sms?: null|MessagingFeatureSet|MessagingFeatureSetShape,
  * }
  */
 final class Features implements BaseModel
@@ -45,12 +48,8 @@ final class Features implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MessagingFeatureSet|array{
-     *   domesticTwoWay: bool, internationalInbound: bool, internationalOutbound: bool
-     * }|null $mms
-     * @param MessagingFeatureSet|array{
-     *   domesticTwoWay: bool, internationalInbound: bool, internationalOutbound: bool
-     * }|null $sms
+     * @param MessagingFeatureSetShape|null $mms
+     * @param MessagingFeatureSetShape|null $sms
      */
     public static function with(
         MessagingFeatureSet|array|null $mms = null,
@@ -69,9 +68,7 @@ final class Features implements BaseModel
      * can vary depending on the characteristics the phone number, as well as its current
      * product configuration.
      *
-     * @param MessagingFeatureSet|array{
-     *   domesticTwoWay: bool, internationalInbound: bool, internationalOutbound: bool
-     * }|null $mms
+     * @param MessagingFeatureSetShape|null $mms
      */
     public function withMms(MessagingFeatureSet|array|null $mms): self
     {
@@ -86,9 +83,7 @@ final class Features implements BaseModel
      * can vary depending on the characteristics the phone number, as well as its current
      * product configuration.
      *
-     * @param MessagingFeatureSet|array{
-     *   domesticTwoWay: bool, internationalInbound: bool, internationalOutbound: bool
-     * }|null $sms
+     * @param MessagingFeatureSetShape|null $sms
      */
     public function withSMS(MessagingFeatureSet|array|null $sms): self
     {

@@ -8,12 +8,15 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport\Filters;
-use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport\Filters\StatusIn;
 
 /**
  * The parameters for generating a porting orders CSV report.
  *
- * @phpstan-type ExportPortingOrdersCsvReportShape = array{filters: Filters}
+ * @phpstan-import-type FiltersShape from \Telnyx\Porting\Reports\ExportPortingOrdersCsvReport\Filters
+ *
+ * @phpstan-type ExportPortingOrdersCsvReportShape = array{
+ *   filters: Filters|FiltersShape
+ * }
  */
 final class ExportPortingOrdersCsvReport implements BaseModel
 {
@@ -50,12 +53,7 @@ final class ExportPortingOrdersCsvReport implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filters|array{
-     *   createdAtGt?: \DateTimeInterface|null,
-     *   createdAtLt?: \DateTimeInterface|null,
-     *   customerReferenceIn?: list<string>|null,
-     *   statusIn?: list<value-of<StatusIn>>|null,
-     * } $filters
+     * @param FiltersShape $filters
      */
     public static function with(Filters|array $filters): self
     {
@@ -69,12 +67,7 @@ final class ExportPortingOrdersCsvReport implements BaseModel
     /**
      * The filters to apply to the export porting order CSV report.
      *
-     * @param Filters|array{
-     *   createdAtGt?: \DateTimeInterface|null,
-     *   createdAtLt?: \DateTimeInterface|null,
-     *   customerReferenceIn?: list<string>|null,
-     *   statusIn?: list<value-of<StatusIn>>|null,
-     * } $filters
+     * @param FiltersShape $filters
      */
     public function withFilters(Filters|array $filters): self
     {

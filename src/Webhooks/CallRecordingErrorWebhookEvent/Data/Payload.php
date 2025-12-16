@@ -16,7 +16,7 @@ use Telnyx\Webhooks\CallRecordingErrorWebhookEvent\Data\Payload\Reason;
  *   callSessionID?: string|null,
  *   clientState?: string|null,
  *   connectionID?: string|null,
- *   reason?: value-of<Reason>|null,
+ *   reason?: null|Reason|value-of<Reason>,
  * }
  */
 final class Payload implements BaseModel

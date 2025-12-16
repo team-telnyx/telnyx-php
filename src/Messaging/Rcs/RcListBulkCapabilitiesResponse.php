@@ -7,11 +7,12 @@ namespace Telnyx\Messaging\Rcs;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Messaging\Rcs\RcsCapabilities\RecordType;
 
 /**
+ * @phpstan-import-type RcsCapabilitiesShape from \Telnyx\Messaging\Rcs\RcsCapabilities
+ *
  * @phpstan-type RcListBulkCapabilitiesResponseShape = array{
- *   data?: list<RcsCapabilities>|null
+ *   data?: list<RcsCapabilitiesShape>|null
  * }
  */
 final class RcListBulkCapabilitiesResponse implements BaseModel
@@ -33,13 +34,7 @@ final class RcListBulkCapabilitiesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RcsCapabilities|array{
-     *   agentID?: string|null,
-     *   agentName?: string|null,
-     *   features?: list<string>|null,
-     *   phoneNumber?: string|null,
-     *   recordType?: value-of<RecordType>|null,
-     * }> $data
+     * @param list<RcsCapabilitiesShape> $data
      */
     public static function with(?array $data = null): self
     {
@@ -51,13 +46,7 @@ final class RcListBulkCapabilitiesResponse implements BaseModel
     }
 
     /**
-     * @param list<RcsCapabilities|array{
-     *   agentID?: string|null,
-     *   agentName?: string|null,
-     *   features?: list<string>|null,
-     *   phoneNumber?: string|null,
-     *   recordType?: value-of<RecordType>|null,
-     * }> $data
+     * @param list<RcsCapabilitiesShape> $data
      */
     public function withData(array $data): self
     {

@@ -15,10 +15,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\MobileVoiceConnectionsService::list()
  *
  * @phpstan-type MobileVoiceConnectionListParamsShape = array{
- *   filterConnectionNameContains?: string,
- *   pageNumber?: int,
- *   pageSize?: int,
- *   sort?: string,
+ *   filterConnectionNameContains?: string|null,
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
+ *   sort?: string|null,
  * }
  */
 final class MobileVoiceConnectionListParams implements BaseModel

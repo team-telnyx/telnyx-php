@@ -26,7 +26,7 @@ interface UserBundlesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|UserBundleCreateParams $params
+     * @param array<string,mixed>|UserBundleCreateParams $params
      *
      * @return BaseResponse<UserBundleNewResponse>
      *
@@ -41,7 +41,7 @@ interface UserBundlesRawContract
      * @api
      *
      * @param string $userBundleID user bundle's ID, this is used to identify the user bundle in the API
-     * @param array<mixed>|UserBundleRetrieveParams $params
+     * @param array<string,mixed>|UserBundleRetrieveParams $params
      *
      * @return BaseResponse<UserBundleGetResponse>
      *
@@ -56,7 +56,7 @@ interface UserBundlesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|UserBundleListParams $params
+     * @param array<string,mixed>|UserBundleListParams $params
      *
      * @return BaseResponse<DefaultPagination<UserBundle>>
      *
@@ -71,7 +71,7 @@ interface UserBundlesRawContract
      * @api
      *
      * @param string $userBundleID user bundle's ID, this is used to identify the user bundle in the API
-     * @param array<mixed>|UserBundleDeactivateParams $params
+     * @param array<string,mixed>|UserBundleDeactivateParams $params
      *
      * @return BaseResponse<UserBundleDeactivateResponse>
      *
@@ -87,7 +87,7 @@ interface UserBundlesRawContract
      * @api
      *
      * @param string $userBundleID user bundle's ID, this is used to identify the user bundle in the API
-     * @param array<mixed>|UserBundleListResourcesParams $params
+     * @param array<string,mixed>|UserBundleListResourcesParams $params
      *
      * @return BaseResponse<UserBundleListResourcesResponse>
      *
@@ -102,7 +102,7 @@ interface UserBundlesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|UserBundleListUnusedParams $params
+     * @param array<string,mixed>|UserBundleListUnusedParams $params
      *
      * @return BaseResponse<UserBundleListUnusedResponse>
      *

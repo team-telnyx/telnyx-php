@@ -10,7 +10,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ClusterComputeResponseShape = array{data: Data}
+ * @phpstan-import-type DataShape from \Telnyx\AI\Clusters\ClusterComputeResponse\Data
+ *
+ * @phpstan-type ClusterComputeResponseShape = array{data: Data|DataShape}
  */
 final class ClusterComputeResponse implements BaseModel
 {
@@ -44,7 +46,7 @@ final class ClusterComputeResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{taskID: string} $data
+     * @param DataShape $data
      */
     public static function with(Data|array $data): self
     {
@@ -56,7 +58,7 @@ final class ClusterComputeResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{taskID: string} $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

@@ -16,7 +16,7 @@ interface RcsRawContract
      * @api
      *
      * @param string $agentID RCS agent ID
-     * @param array<mixed>|RcGenerateDeeplinkParams $params
+     * @param array<string,mixed>|RcGenerateDeeplinkParams $params
      *
      * @return BaseResponse<RcGenerateDeeplinkResponse>
      *

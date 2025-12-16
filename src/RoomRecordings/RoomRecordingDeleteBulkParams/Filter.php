@@ -13,9 +13,12 @@ use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Filter\DateStartedAt;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[date_started_at][eq], filter[date_started_at][gte], filter[date_started_at][lte], filter[room_id], filter[participant_id], filter[session_id], filter[status], filter[type], filter[duration_secs].
  *
+ * @phpstan-import-type DateEndedAtShape from \Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Filter\DateEndedAt
+ * @phpstan-import-type DateStartedAtShape from \Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Filter\DateStartedAt
+ *
  * @phpstan-type FilterShape = array{
- *   dateEndedAt?: DateEndedAt|null,
- *   dateStartedAt?: DateStartedAt|null,
+ *   dateEndedAt?: null|DateEndedAt|DateEndedAtShape,
+ *   dateStartedAt?: null|DateStartedAt|DateStartedAtShape,
  *   durationSecs?: int|null,
  *   participantID?: string|null,
  *   roomID?: string|null,
@@ -81,12 +84,8 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DateEndedAt|array{
-     *   eq?: string|null, gte?: string|null, lte?: string|null
-     * } $dateEndedAt
-     * @param DateStartedAt|array{
-     *   eq?: string|null, gte?: string|null, lte?: string|null
-     * } $dateStartedAt
+     * @param DateEndedAtShape $dateEndedAt
+     * @param DateStartedAtShape $dateStartedAt
      */
     public static function with(
         DateEndedAt|array|null $dateEndedAt = null,
@@ -113,9 +112,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param DateEndedAt|array{
-     *   eq?: string|null, gte?: string|null, lte?: string|null
-     * } $dateEndedAt
+     * @param DateEndedAtShape $dateEndedAt
      */
     public function withDateEndedAt(DateEndedAt|array $dateEndedAt): self
     {
@@ -126,9 +123,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param DateStartedAt|array{
-     *   eq?: string|null, gte?: string|null, lte?: string|null
-     * } $dateStartedAt
+     * @param DateStartedAtShape $dateStartedAt
      */
     public function withDateStartedAt(DateStartedAt|array $dateStartedAt): self
     {

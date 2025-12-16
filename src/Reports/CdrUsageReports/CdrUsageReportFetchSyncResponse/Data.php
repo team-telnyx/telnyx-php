@@ -14,16 +14,16 @@ use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncResponse\Data\Status;
 /**
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   aggregationType?: value-of<AggregationType>|null,
+ *   aggregationType?: null|AggregationType|value-of<AggregationType>,
  *   connections?: list<int>|null,
  *   createdAt?: \DateTimeInterface|null,
  *   endTime?: \DateTimeInterface|null,
- *   productBreakdown?: value-of<ProductBreakdown>|null,
+ *   productBreakdown?: null|ProductBreakdown|value-of<ProductBreakdown>,
  *   recordType?: string|null,
  *   reportURL?: string|null,
  *   result?: array<string,mixed>|null,
  *   startTime?: \DateTimeInterface|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */

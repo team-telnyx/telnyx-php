@@ -11,20 +11,22 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledSMSEventResponse\ConversationMetadata
+ *
  * @phpstan-type ScheduledSMSEventResponseShape = array{
  *   assistantID: string,
  *   scheduledAtFixedDatetime: \DateTimeInterface,
  *   telnyxAgentTarget: string,
- *   telnyxConversationChannel: value-of<ConversationChannelType>,
+ *   telnyxConversationChannel: ConversationChannelType|value-of<ConversationChannelType>,
  *   telnyxEndUserTarget: string,
  *   text: string,
  *   conversationID?: string|null,
- *   conversationMetadata?: array<string,string|int|bool>|null,
+ *   conversationMetadata?: array<string,ConversationMetadataShape>|null,
  *   createdAt?: \DateTimeInterface|null,
  *   errors?: list<string>|null,
  *   retryCount?: int|null,
  *   scheduledEventID?: string|null,
- *   status?: value-of<EventStatus>|null,
+ *   status?: null|EventStatus|value-of<EventStatus>,
  * }
  */
 final class ScheduledSMSEventResponse implements BaseModel
@@ -116,7 +118,7 @@ final class ScheduledSMSEventResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param ConversationChannelType|value-of<ConversationChannelType> $telnyxConversationChannel
-     * @param array<string,string|int|bool> $conversationMetadata
+     * @param array<string,ConversationMetadataShape> $conversationMetadata
      * @param list<string> $errors
      * @param EventStatus|value-of<EventStatus> $status
      */
@@ -217,7 +219,7 @@ final class ScheduledSMSEventResponse implements BaseModel
     }
 
     /**
-     * @param array<string,string|int|bool> $conversationMetadata
+     * @param array<string,ConversationMetadataShape> $conversationMetadata
      */
     public function withConversationMetadata(array $conversationMetadata): self
     {

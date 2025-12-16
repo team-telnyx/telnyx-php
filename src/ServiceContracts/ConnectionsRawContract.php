@@ -33,7 +33,7 @@ interface ConnectionsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ConnectionListParams $params
+     * @param array<string,mixed>|ConnectionListParams $params
      *
      * @return BaseResponse<DefaultPagination<ConnectionListResponse>>
      *
@@ -48,7 +48,7 @@ interface ConnectionsRawContract
      * @api
      *
      * @param string $connectionID Telnyx connection id
-     * @param array<mixed>|ConnectionListActiveCallsParams $params
+     * @param array<string,mixed>|ConnectionListActiveCallsParams $params
      *
      * @return BaseResponse<DefaultPagination<ConnectionListActiveCallsResponse>>
      *

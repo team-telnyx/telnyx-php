@@ -16,7 +16,7 @@ interface MessagingURLDomainsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MessagingURLDomainListParams $params
+     * @param array<string,mixed>|MessagingURLDomainListParams $params
      *
      * @return BaseResponse<DefaultPagination<MessagingURLDomainListResponse>>
      *

@@ -8,11 +8,12 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementGroupResponse\Data;
-use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementGroupResponse\Data\RegulatoryRequirement;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementGroupResponse\Data
+ *
  * @phpstan-type NumberOrderPhoneNumberUpdateRequirementGroupResponseShape = array{
- *   data?: Data|null
+ *   data?: null|Data|DataShape
  * }
  */
 final class NumberOrderPhoneNumberUpdateRequirementGroupResponse implements BaseModel
@@ -33,23 +34,7 @@ final class NumberOrderPhoneNumberUpdateRequirementGroupResponse implements Base
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   id?: string|null,
-     *   bundleID?: string|null,
-     *   countryCode?: string|null,
-     *   deadline?: \DateTimeInterface|null,
-     *   isBlockNumber?: bool|null,
-     *   locality?: string|null,
-     *   orderRequestID?: string|null,
-     *   phoneNumber?: string|null,
-     *   phoneNumberType?: string|null,
-     *   recordType?: string|null,
-     *   regulatoryRequirements?: list<RegulatoryRequirement>|null,
-     *   requirementsMet?: bool|null,
-     *   requirementsStatus?: string|null,
-     *   status?: string|null,
-     *   subNumberOrderID?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -61,23 +46,7 @@ final class NumberOrderPhoneNumberUpdateRequirementGroupResponse implements Base
     }
 
     /**
-     * @param Data|array{
-     *   id?: string|null,
-     *   bundleID?: string|null,
-     *   countryCode?: string|null,
-     *   deadline?: \DateTimeInterface|null,
-     *   isBlockNumber?: bool|null,
-     *   locality?: string|null,
-     *   orderRequestID?: string|null,
-     *   phoneNumber?: string|null,
-     *   phoneNumberType?: string|null,
-     *   recordType?: string|null,
-     *   regulatoryRequirements?: list<RegulatoryRequirement>|null,
-     *   requirementsMet?: bool|null,
-     *   requirementsStatus?: string|null,
-     *   status?: string|null,
-     *   subNumberOrderID?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

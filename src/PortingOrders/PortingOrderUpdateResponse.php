@@ -7,14 +7,14 @@ namespace Telnyx\PortingOrders;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\PortingOrders\PortingOrder\AdditionalStep;
-use Telnyx\PortingOrders\PortingOrder\PhoneNumberType;
 use Telnyx\PortingOrders\PortingOrderUpdateResponse\Meta;
-use Telnyx\PortingOrderStatus;
 
 /**
+ * @phpstan-import-type PortingOrderShape from \Telnyx\PortingOrders\PortingOrder
+ * @phpstan-import-type MetaShape from \Telnyx\PortingOrders\PortingOrderUpdateResponse\Meta
+ *
  * @phpstan-type PortingOrderUpdateResponseShape = array{
- *   data?: PortingOrder|null, meta?: Meta|null
+ *   data?: null|PortingOrder|PortingOrderShape, meta?: null|Meta|MetaShape
  * }
  */
 final class PortingOrderUpdateResponse implements BaseModel
@@ -38,34 +38,8 @@ final class PortingOrderUpdateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortingOrder|array{
-     *   id?: string|null,
-     *   activationSettings?: PortingOrderActivationSettings|null,
-     *   additionalSteps?: list<value-of<AdditionalStep>>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   customerGroupReference?: string|null,
-     *   customerReference?: string|null,
-     *   description?: string|null,
-     *   documents?: PortingOrderDocuments|null,
-     *   endUser?: PortingOrderEndUser|null,
-     *   messaging?: PortingOrderMessaging|null,
-     *   misc?: PortingOrderMisc|null,
-     *   oldServiceProviderOcn?: string|null,
-     *   parentSupportKey?: string|null,
-     *   phoneNumberConfiguration?: PortingOrderPhoneNumberConfiguration|null,
-     *   phoneNumberType?: value-of<PhoneNumberType>|null,
-     *   portingPhoneNumbersCount?: int|null,
-     *   recordType?: string|null,
-     *   requirements?: list<PortingOrderRequirement>|null,
-     *   requirementsMet?: bool|null,
-     *   status?: PortingOrderStatus|null,
-     *   supportKey?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     *   userFeedback?: PortingOrderUserFeedback|null,
-     *   userID?: string|null,
-     *   webhookURL?: string|null,
-     * } $data
-     * @param Meta|array{phoneNumbersURL?: string|null} $meta
+     * @param PortingOrderShape $data
+     * @param MetaShape $meta
      */
     public static function with(
         PortingOrder|array|null $data = null,
@@ -80,33 +54,7 @@ final class PortingOrderUpdateResponse implements BaseModel
     }
 
     /**
-     * @param PortingOrder|array{
-     *   id?: string|null,
-     *   activationSettings?: PortingOrderActivationSettings|null,
-     *   additionalSteps?: list<value-of<AdditionalStep>>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   customerGroupReference?: string|null,
-     *   customerReference?: string|null,
-     *   description?: string|null,
-     *   documents?: PortingOrderDocuments|null,
-     *   endUser?: PortingOrderEndUser|null,
-     *   messaging?: PortingOrderMessaging|null,
-     *   misc?: PortingOrderMisc|null,
-     *   oldServiceProviderOcn?: string|null,
-     *   parentSupportKey?: string|null,
-     *   phoneNumberConfiguration?: PortingOrderPhoneNumberConfiguration|null,
-     *   phoneNumberType?: value-of<PhoneNumberType>|null,
-     *   portingPhoneNumbersCount?: int|null,
-     *   recordType?: string|null,
-     *   requirements?: list<PortingOrderRequirement>|null,
-     *   requirementsMet?: bool|null,
-     *   status?: PortingOrderStatus|null,
-     *   supportKey?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     *   userFeedback?: PortingOrderUserFeedback|null,
-     *   userID?: string|null,
-     *   webhookURL?: string|null,
-     * } $data
+     * @param PortingOrderShape $data
      */
     public function withData(PortingOrder|array $data): self
     {
@@ -117,7 +65,7 @@ final class PortingOrderUpdateResponse implements BaseModel
     }
 
     /**
-     * @param Meta|array{phoneNumbersURL?: string|null} $meta
+     * @param MetaShape $meta
      */
     public function withMeta(Meta|array $meta): self
     {

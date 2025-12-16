@@ -14,7 +14,7 @@ use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddress\Status;
 /**
  * @phpstan-type DynamicEmergencyAddressShape = array{
  *   administrativeArea: string,
- *   countryCode: value-of<CountryCode>,
+ *   countryCode: CountryCode|value-of<CountryCode>,
  *   houseNumber: string,
  *   locality: string,
  *   postalCode: string,
@@ -25,7 +25,7 @@ use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddress\Status;
  *   houseSuffix?: string|null,
  *   recordType?: string|null,
  *   sipGeolocationID?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   streetPostDirectional?: string|null,
  *   streetPreDirectional?: string|null,
  *   streetSuffix?: string|null,

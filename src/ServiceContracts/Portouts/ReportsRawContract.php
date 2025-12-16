@@ -19,7 +19,7 @@ interface ReportsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ReportCreateParams $params
+     * @param array<string,mixed>|ReportCreateParams $params
      *
      * @return BaseResponse<ReportNewResponse>
      *
@@ -47,7 +47,7 @@ interface ReportsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ReportListParams $params
+     * @param array<string,mixed>|ReportListParams $params
      *
      * @return BaseResponse<DefaultPagination<PortoutReport>>
      *

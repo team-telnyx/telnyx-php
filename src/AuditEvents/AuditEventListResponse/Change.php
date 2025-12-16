@@ -13,10 +13,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Details of the changes made to a resource.
  *
+ * @phpstan-import-type FromShape from \Telnyx\AuditEvents\AuditEventListResponse\Change\From
+ * @phpstan-import-type ToShape from \Telnyx\AuditEvents\AuditEventListResponse\Change\To
+ *
  * @phpstan-type ChangeShape = array{
- *   field?: string|null,
- *   from?: string|float|bool|null|list<array<string,mixed>>|array<string,mixed>,
- *   to?: string|float|bool|null|list<array<string,mixed>>|array<string,mixed>,
+ *   field?: string|null, from?: FromShape|null, to?: ToShape|null
  * }
  */
 final class Change implements BaseModel
@@ -56,8 +57,8 @@ final class Change implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param string|float|bool|list<array<string,mixed>>|array<string,mixed>|null $from
-     * @param string|float|bool|list<array<string,mixed>>|array<string,mixed>|null $to
+     * @param FromShape|null $from
+     * @param ToShape|null $to
      */
     public static function with(
         ?string $field = null,
@@ -87,7 +88,7 @@ final class Change implements BaseModel
     /**
      * The previous value of the field. Can be any JSON type.
      *
-     * @param string|float|bool|list<array<string,mixed>>|array<string,mixed>|null $from
+     * @param FromShape|null $from
      */
     public function withFrom(string|float|bool|array|null $from): self
     {
@@ -100,7 +101,7 @@ final class Change implements BaseModel
     /**
      * The new value of the field. Can be any JSON type.
      *
-     * @param string|float|bool|list<array<string,mixed>>|array<string,mixed>|null $to
+     * @param ToShape|null $to
      */
     public function withTo(string|float|bool|array|null $to): self
     {

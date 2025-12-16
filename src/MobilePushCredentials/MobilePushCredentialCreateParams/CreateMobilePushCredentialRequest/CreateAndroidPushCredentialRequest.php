@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type CreateAndroidPushCredentialRequestShape = array{
- *   alias: string, projectAccountJsonFile: array<string,mixed>, type?: 'android'
+ *   alias: string, projectAccountJsonFile: array<string,mixed>, type: 'android'
  * }
  */
 final class CreateAndroidPushCredentialRequest implements BaseModel

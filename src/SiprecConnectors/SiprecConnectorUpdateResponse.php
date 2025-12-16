@@ -10,7 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SiprecConnectors\SiprecConnectorUpdateResponse\Data;
 
 /**
- * @phpstan-type SiprecConnectorUpdateResponseShape = array{data: Data}
+ * @phpstan-import-type DataShape from \Telnyx\SiprecConnectors\SiprecConnectorUpdateResponse\Data
+ *
+ * @phpstan-type SiprecConnectorUpdateResponseShape = array{data: Data|DataShape}
  */
 final class SiprecConnectorUpdateResponse implements BaseModel
 {
@@ -44,15 +46,7 @@ final class SiprecConnectorUpdateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   appSubdomain?: string|null,
-     *   createdAt?: string|null,
-     *   host?: string|null,
-     *   name?: string|null,
-     *   port?: int|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array $data): self
     {
@@ -64,15 +58,7 @@ final class SiprecConnectorUpdateResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   appSubdomain?: string|null,
-     *   createdAt?: string|null,
-     *   host?: string|null,
-     *   name?: string|null,
-     *   port?: int|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

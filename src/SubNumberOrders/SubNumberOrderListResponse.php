@@ -8,12 +8,14 @@ use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\SubNumberOrders\SubNumberOrder\PhoneNumberType;
-use Telnyx\SubNumberOrders\SubNumberOrder\Status;
 
 /**
+ * @phpstan-import-type SubNumberOrderShape from \Telnyx\SubNumberOrders\SubNumberOrder
+ * @phpstan-import-type PaginationMetaShape from \Telnyx\AuthenticationProviders\PaginationMeta
+ *
  * @phpstan-type SubNumberOrderListResponseShape = array{
- *   data?: list<SubNumberOrder>|null, meta?: PaginationMeta|null
+ *   data?: list<SubNumberOrderShape>|null,
+ *   meta?: null|PaginationMeta|PaginationMetaShape,
  * }
  */
 final class SubNumberOrderListResponse implements BaseModel
@@ -38,25 +40,8 @@ final class SubNumberOrderListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SubNumberOrder|array{
-     *   id?: string|null,
-     *   countryCode?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   customerReference?: string|null,
-     *   isBlockSubNumberOrder?: bool|null,
-     *   orderRequestID?: string|null,
-     *   phoneNumberType?: value-of<PhoneNumberType>|null,
-     *   phoneNumbersCount?: int|null,
-     *   recordType?: string|null,
-     *   regulatoryRequirements?: list<SubNumberOrderRegulatoryRequirement>|null,
-     *   requirementsMet?: bool|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     *   userID?: string|null,
-     * }> $data
-     * @param PaginationMeta|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param list<SubNumberOrderShape> $data
+     * @param PaginationMetaShape $meta
      */
     public static function with(
         ?array $data = null,
@@ -71,22 +56,7 @@ final class SubNumberOrderListResponse implements BaseModel
     }
 
     /**
-     * @param list<SubNumberOrder|array{
-     *   id?: string|null,
-     *   countryCode?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   customerReference?: string|null,
-     *   isBlockSubNumberOrder?: bool|null,
-     *   orderRequestID?: string|null,
-     *   phoneNumberType?: value-of<PhoneNumberType>|null,
-     *   phoneNumbersCount?: int|null,
-     *   recordType?: string|null,
-     *   regulatoryRequirements?: list<SubNumberOrderRegulatoryRequirement>|null,
-     *   requirementsMet?: bool|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     *   userID?: string|null,
-     * }> $data
+     * @param list<SubNumberOrderShape> $data
      */
     public function withData(array $data): self
     {
@@ -97,9 +67,7 @@ final class SubNumberOrderListResponse implements BaseModel
     }
 
     /**
-     * @param PaginationMeta|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param PaginationMetaShape $meta
      */
     public function withMeta(PaginationMeta|array $meta): self
     {

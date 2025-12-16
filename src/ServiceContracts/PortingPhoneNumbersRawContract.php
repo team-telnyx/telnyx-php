@@ -16,7 +16,7 @@ interface PortingPhoneNumbersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PortingPhoneNumberListParams $params
+     * @param array<string,mixed>|PortingPhoneNumberListParams $params
      *
      * @return BaseResponse<DefaultPagination<PortingPhoneNumberListResponse>>
      *

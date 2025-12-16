@@ -16,13 +16,15 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\Assistants\ScheduledEventsService::create()
  *
+ * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventCreateParams\ConversationMetadata
+ *
  * @phpstan-type ScheduledEventCreateParamsShape = array{
  *   scheduledAtFixedDatetime: \DateTimeInterface,
  *   telnyxAgentTarget: string,
  *   telnyxConversationChannel: ConversationChannelType|value-of<ConversationChannelType>,
  *   telnyxEndUserTarget: string,
- *   conversationMetadata?: array<string,string|int|bool>,
- *   text?: string,
+ *   conversationMetadata?: array<string,ConversationMetadataShape>|null,
+ *   text?: string|null,
  * }
  */
 final class ScheduledEventCreateParams implements BaseModel
@@ -104,7 +106,7 @@ final class ScheduledEventCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param ConversationChannelType|value-of<ConversationChannelType> $telnyxConversationChannel
-     * @param array<string,string|int|bool> $conversationMetadata
+     * @param array<string,ConversationMetadataShape> $conversationMetadata
      */
     public static function with(
         \DateTimeInterface $scheduledAtFixedDatetime,
@@ -176,7 +178,7 @@ final class ScheduledEventCreateParams implements BaseModel
     /**
      * Metadata associated with the conversation. Telnyx provides several pieces of metadata, but customers can also add their own.
      *
-     * @param array<string,string|int|bool> $conversationMetadata
+     * @param array<string,ConversationMetadataShape> $conversationMetadata
      */
     public function withConversationMetadata(array $conversationMetadata): self
     {

@@ -11,6 +11,8 @@ use Telnyx\Core\Conversion\ListOf;
 
 /**
  * Filter results by support key(s). Originally: filter[support_key][eq], filter[support_key][in][].
+ *
+ * @phpstan-type SupportKeyShape = string|list<string>
  */
 final class SupportKey implements ConverterSource
 {

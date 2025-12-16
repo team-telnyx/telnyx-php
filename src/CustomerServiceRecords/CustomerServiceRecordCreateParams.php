@@ -16,21 +16,12 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams\AdditionalDa
  *
  * @see Telnyx\Services\CustomerServiceRecordsService::create()
  *
+ * @phpstan-import-type AdditionalDataShape from \Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams\AdditionalData
+ *
  * @phpstan-type CustomerServiceRecordCreateParamsShape = array{
  *   phoneNumber: string,
- *   additionalData?: AdditionalData|array{
- *     accountNumber?: string|null,
- *     addressLine1?: string|null,
- *     authorizedPersonName?: string|null,
- *     billingPhoneNumber?: string|null,
- *     city?: string|null,
- *     customerCode?: string|null,
- *     name?: string|null,
- *     pin?: string|null,
- *     state?: string|null,
- *     zipCode?: string|null,
- *   },
- *   webhookURL?: string,
+ *   additionalData?: AdditionalDataShape|null,
+ *   webhookURL?: string|null,
  * }
  */
 final class CustomerServiceRecordCreateParams implements BaseModel
@@ -78,18 +69,7 @@ final class CustomerServiceRecordCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AdditionalData|array{
-     *   accountNumber?: string|null,
-     *   addressLine1?: string|null,
-     *   authorizedPersonName?: string|null,
-     *   billingPhoneNumber?: string|null,
-     *   city?: string|null,
-     *   customerCode?: string|null,
-     *   name?: string|null,
-     *   pin?: string|null,
-     *   state?: string|null,
-     *   zipCode?: string|null,
-     * } $additionalData
+     * @param AdditionalDataShape $additionalData
      */
     public static function with(
         string $phoneNumber,
@@ -118,18 +98,7 @@ final class CustomerServiceRecordCreateParams implements BaseModel
     }
 
     /**
-     * @param AdditionalData|array{
-     *   accountNumber?: string|null,
-     *   addressLine1?: string|null,
-     *   authorizedPersonName?: string|null,
-     *   billingPhoneNumber?: string|null,
-     *   city?: string|null,
-     *   customerCode?: string|null,
-     *   name?: string|null,
-     *   pin?: string|null,
-     *   state?: string|null,
-     *   zipCode?: string|null,
-     * } $additionalData
+     * @param AdditionalDataShape $additionalData
      */
     public function withAdditionalData(
         AdditionalData|array $additionalData

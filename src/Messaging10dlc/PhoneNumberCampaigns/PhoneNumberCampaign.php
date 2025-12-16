@@ -16,7 +16,7 @@ use Telnyx\Messaging10dlc\PhoneNumberCampaigns\PhoneNumberCampaign\AssignmentSta
  *   createdAt: string,
  *   phoneNumber: string,
  *   updatedAt: string,
- *   assignmentStatus?: value-of<AssignmentStatus>|null,
+ *   assignmentStatus?: null|AssignmentStatus|value-of<AssignmentStatus>,
  *   brandID?: string|null,
  *   failureReasons?: string|null,
  *   tcrBrandID?: string|null,

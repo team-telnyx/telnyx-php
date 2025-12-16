@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\CallControlApplications;
 
-use Telnyx\CallControlApplications\CallControlApplicationInbound\SipSubdomainReceiveSettings;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateParams\AnchorsiteOverride;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateParams\DtmfType;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateParams\WebhookAPIVersion;
@@ -19,27 +18,23 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\CallControlApplicationsService::update()
  *
+ * @phpstan-import-type CallControlApplicationInboundShape from \Telnyx\CallControlApplications\CallControlApplicationInbound
+ * @phpstan-import-type CallControlApplicationOutboundShape from \Telnyx\CallControlApplications\CallControlApplicationOutbound
+ *
  * @phpstan-type CallControlApplicationUpdateParamsShape = array{
  *   applicationName: string,
  *   webhookEventURL: string,
- *   active?: bool,
- *   anchorsiteOverride?: AnchorsiteOverride|value-of<AnchorsiteOverride>,
- *   callCostInWebhooks?: bool,
- *   dtmfType?: DtmfType|value-of<DtmfType>,
- *   firstCommandTimeout?: bool,
- *   firstCommandTimeoutSecs?: int,
- *   inbound?: CallControlApplicationInbound|array{
- *     channelLimit?: int|null,
- *     shakenStirEnabled?: bool|null,
- *     sipSubdomain?: string|null,
- *     sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
- *   },
- *   outbound?: CallControlApplicationOutbound|array{
- *     channelLimit?: int|null, outboundVoiceProfileID?: string|null
- *   },
- *   redactDtmfDebugLogging?: bool,
- *   tags?: list<string>,
- *   webhookAPIVersion?: WebhookAPIVersion|value-of<WebhookAPIVersion>,
+ *   active?: bool|null,
+ *   anchorsiteOverride?: null|AnchorsiteOverride|value-of<AnchorsiteOverride>,
+ *   callCostInWebhooks?: bool|null,
+ *   dtmfType?: null|DtmfType|value-of<DtmfType>,
+ *   firstCommandTimeout?: bool|null,
+ *   firstCommandTimeoutSecs?: int|null,
+ *   inbound?: CallControlApplicationInboundShape|null,
+ *   outbound?: CallControlApplicationOutboundShape|null,
+ *   redactDtmfDebugLogging?: bool|null,
+ *   tags?: list<string>|null,
+ *   webhookAPIVersion?: null|WebhookAPIVersion|value-of<WebhookAPIVersion>,
  *   webhookEventFailoverURL?: string|null,
  *   webhookTimeoutSecs?: int|null,
  * }
@@ -172,15 +167,8 @@ final class CallControlApplicationUpdateParams implements BaseModel
      *
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
      * @param DtmfType|value-of<DtmfType> $dtmfType
-     * @param CallControlApplicationInbound|array{
-     *   channelLimit?: int|null,
-     *   shakenStirEnabled?: bool|null,
-     *   sipSubdomain?: string|null,
-     *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
-     * } $inbound
-     * @param CallControlApplicationOutbound|array{
-     *   channelLimit?: int|null, outboundVoiceProfileID?: string|null
-     * } $outbound
+     * @param CallControlApplicationInboundShape $inbound
+     * @param CallControlApplicationOutboundShape $outbound
      * @param list<string> $tags
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion
      */
@@ -318,12 +306,7 @@ final class CallControlApplicationUpdateParams implements BaseModel
     }
 
     /**
-     * @param CallControlApplicationInbound|array{
-     *   channelLimit?: int|null,
-     *   shakenStirEnabled?: bool|null,
-     *   sipSubdomain?: string|null,
-     *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
-     * } $inbound
+     * @param CallControlApplicationInboundShape $inbound
      */
     public function withInbound(
         CallControlApplicationInbound|array $inbound
@@ -335,9 +318,7 @@ final class CallControlApplicationUpdateParams implements BaseModel
     }
 
     /**
-     * @param CallControlApplicationOutbound|array{
-     *   channelLimit?: int|null, outboundVoiceProfileID?: string|null
-     * } $outbound
+     * @param CallControlApplicationOutboundShape $outbound
      */
     public function withOutbound(
         CallControlApplicationOutbound|array $outbound

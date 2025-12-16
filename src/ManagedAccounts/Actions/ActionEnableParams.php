@@ -14,7 +14,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\ManagedAccounts\ActionsService::enable()
  *
- * @phpstan-type ActionEnableParamsShape = array{reenableAllConnections?: bool}
+ * @phpstan-type ActionEnableParamsShape = array{
+ *   reenableAllConnections?: bool|null
+ * }
  */
 final class ActionEnableParams implements BaseModel
 {

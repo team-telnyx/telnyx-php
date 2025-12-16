@@ -10,8 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\Actions\ActionVerifyOwnershipResponse\Data\Found;
 
 /**
+ * @phpstan-import-type FoundShape from \Telnyx\PhoneNumbers\Actions\ActionVerifyOwnershipResponse\Data\Found
+ *
  * @phpstan-type DataShape = array{
- *   found?: list<Found>|null,
+ *   found?: list<FoundShape>|null,
  *   notFound?: list<string>|null,
  *   recordType?: string|null,
  * }
@@ -53,7 +55,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Found|array{id?: string|null, numberValE164?: string|null}> $found
+     * @param list<FoundShape> $found
      * @param list<string> $notFound
      */
     public static function with(
@@ -73,7 +75,7 @@ final class Data implements BaseModel
     /**
      * The list of phone numbers which you own and are in an editable state.
      *
-     * @param list<Found|array{id?: string|null, numberValE164?: string|null}> $found
+     * @param list<FoundShape> $found
      */
     public function withFound(array $found): self
     {

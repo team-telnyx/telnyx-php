@@ -17,7 +17,7 @@ use Telnyx\Porting\Events\EventListResponse\PortingEventNewCommentEvent\Payload\
  *   body?: string|null,
  *   insertedAt?: \DateTimeInterface|null,
  *   userID?: string|null,
- *   userType?: value-of<UserType>|null,
+ *   userType?: null|UserType|value-of<UserType>,
  * }
  */
 final class Comment implements BaseModel

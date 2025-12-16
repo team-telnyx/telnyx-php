@@ -17,18 +17,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\ConferencesService::listParticipants()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\Conferences\ConferenceListParticipantsParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Conferences\ConferenceListParticipantsParams\Page
+ *
  * @phpstan-type ConferenceListParticipantsParamsShape = array{
- *   filter?: Filter|array{
- *     muted?: bool|null, onHold?: bool|null, whispering?: bool|null
- *   },
- *   page?: Page|array{
- *     after?: string|null,
- *     before?: string|null,
- *     limit?: int|null,
- *     number?: int|null,
- *     size?: int|null,
- *   },
- *   region?: Region|value-of<Region>,
+ *   filter?: FilterShape|null,
+ *   page?: PageShape|null,
+ *   region?: null|Region|value-of<Region>,
  * }
  */
 final class ConferenceListParticipantsParams implements BaseModel
@@ -67,16 +62,8 @@ final class ConferenceListParticipantsParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   muted?: bool|null, onHold?: bool|null, whispering?: bool|null
-     * } $filter
-     * @param Page|array{
-     *   after?: string|null,
-     *   before?: string|null,
-     *   limit?: int|null,
-     *   number?: int|null,
-     *   size?: int|null,
-     * } $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      * @param Region|value-of<Region> $region
      */
     public static function with(
@@ -96,9 +83,7 @@ final class ConferenceListParticipantsParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[muted], filter[on_hold], filter[whispering].
      *
-     * @param Filter|array{
-     *   muted?: bool|null, onHold?: bool|null, whispering?: bool|null
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -111,13 +96,7 @@ final class ConferenceListParticipantsParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number].
      *
-     * @param Page|array{
-     *   after?: string|null,
-     *   before?: string|null,
-     *   limit?: int|null,
-     *   number?: int|null,
-     *   size?: int|null,
-     * } $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

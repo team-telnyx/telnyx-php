@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\LedgerBillingGroupReportsService::create()
  *
  * @phpstan-type LedgerBillingGroupReportCreateParamsShape = array{
- *   month?: int, year?: int
+ *   month?: int|null, year?: int|null
  * }
  */
 final class LedgerBillingGroupReportCreateParams implements BaseModel

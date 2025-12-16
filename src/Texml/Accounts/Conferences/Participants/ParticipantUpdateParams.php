@@ -20,17 +20,17 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateParams\HoldM
  * @phpstan-type ParticipantUpdateParamsShape = array{
  *   accountSid: string,
  *   conferenceSid: string,
- *   announceMethod?: AnnounceMethod|value-of<AnnounceMethod>,
- *   announceURL?: string,
- *   beepOnExit?: bool,
- *   callSidToCoach?: string,
- *   coaching?: bool,
- *   endConferenceOnExit?: bool,
- *   hold?: bool,
- *   holdMethod?: HoldMethod|value-of<HoldMethod>,
- *   holdURL?: string,
- *   muted?: bool,
- *   waitURL?: string,
+ *   announceMethod?: null|AnnounceMethod|value-of<AnnounceMethod>,
+ *   announceURL?: string|null,
+ *   beepOnExit?: bool|null,
+ *   callSidToCoach?: string|null,
+ *   coaching?: bool|null,
+ *   endConferenceOnExit?: bool|null,
+ *   hold?: bool|null,
+ *   holdMethod?: null|HoldMethod|value-of<HoldMethod>,
+ *   holdURL?: string|null,
+ *   muted?: bool|null,
+ *   waitURL?: string|null,
  * }
  */
 final class ParticipantUpdateParams implements BaseModel

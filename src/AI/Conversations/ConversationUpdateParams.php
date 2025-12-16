@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\ConversationsService::update()
  *
  * @phpstan-type ConversationUpdateParamsShape = array{
- *   metadata?: array<string,string>
+ *   metadata?: array<string,string>|null
  * }
  */
 final class ConversationUpdateParams implements BaseModel

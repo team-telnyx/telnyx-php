@@ -18,7 +18,7 @@ interface TestsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|TestCreateParams $params
+     * @param array<string,mixed>|TestCreateParams $params
      *
      * @return BaseResponse<AssistantTest>
      *
@@ -44,7 +44,7 @@ interface TestsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|TestUpdateParams $params
+     * @param array<string,mixed>|TestUpdateParams $params
      *
      * @return BaseResponse<AssistantTest>
      *
@@ -59,7 +59,7 @@ interface TestsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|TestListParams $params
+     * @param array<string,mixed>|TestListParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<AssistantTest>>
      *

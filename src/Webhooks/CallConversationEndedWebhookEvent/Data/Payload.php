@@ -15,7 +15,7 @@ use Telnyx\Webhooks\CallConversationEndedWebhookEvent\Data\Payload\CallingPartyT
  *   callControlID?: string|null,
  *   callLegID?: string|null,
  *   callSessionID?: string|null,
- *   callingPartyType?: value-of<CallingPartyType>|null,
+ *   callingPartyType?: null|CallingPartyType|value-of<CallingPartyType>,
  *   clientState?: string|null,
  *   connectionID?: string|null,
  *   conversationID?: string|null,

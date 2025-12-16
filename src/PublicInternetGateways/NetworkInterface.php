@@ -13,7 +13,7 @@ use Telnyx\Networks\InterfaceStatus;
  * @phpstan-type NetworkInterfaceShape = array{
  *   name?: string|null,
  *   networkID?: string|null,
- *   status?: value-of<InterfaceStatus>|null,
+ *   status?: null|InterfaceStatus|value-of<InterfaceStatus>,
  * }
  */
 final class NetworkInterface implements BaseModel

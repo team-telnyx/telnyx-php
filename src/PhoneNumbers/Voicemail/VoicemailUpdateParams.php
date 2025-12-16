@@ -14,7 +14,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\PhoneNumbers\VoicemailService::update()
  *
- * @phpstan-type VoicemailUpdateParamsShape = array{enabled?: bool, pin?: string}
+ * @phpstan-type VoicemailUpdateParamsShape = array{
+ *   enabled?: bool|null, pin?: string|null
+ * }
  */
 final class VoicemailUpdateParams implements BaseModel
 {

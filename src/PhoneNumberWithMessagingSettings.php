@@ -12,19 +12,22 @@ use Telnyx\PhoneNumberWithMessagingSettings\RecordType;
 use Telnyx\PhoneNumberWithMessagingSettings\Type;
 
 /**
+ * @phpstan-import-type FeaturesShape from \Telnyx\PhoneNumberWithMessagingSettings\Features
+ * @phpstan-import-type NumberHealthMetricsShape from \Telnyx\NumberHealthMetrics
+ *
  * @phpstan-type PhoneNumberWithMessagingSettingsShape = array{
  *   id?: string|null,
  *   countryCode?: string|null,
  *   createdAt?: \DateTimeInterface|null,
  *   eligibleMessagingProducts?: list<string>|null,
- *   features?: Features|null,
- *   health?: NumberHealthMetrics|null,
+ *   features?: null|Features|FeaturesShape,
+ *   health?: null|NumberHealthMetrics|NumberHealthMetricsShape,
  *   messagingProduct?: string|null,
  *   messagingProfileID?: string|null,
  *   phoneNumber?: string|null,
- *   recordType?: value-of<RecordType>|null,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  *   trafficType?: string|null,
- *   type?: value-of<Type>|null,
+ *   type?: null|Type|value-of<Type>,
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */
@@ -125,15 +128,8 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $eligibleMessagingProducts
-     * @param Features|array{
-     *   mms?: MessagingFeatureSet|null, sms?: MessagingFeatureSet|null
-     * } $features
-     * @param NumberHealthMetrics|array{
-     *   inboundOutboundRatio: float,
-     *   messageCount: int,
-     *   spamRatio: float,
-     *   successRatio: float,
-     * } $health
+     * @param FeaturesShape $features
+     * @param NumberHealthMetricsShape $health
      * @param RecordType|value-of<RecordType> $recordType
      * @param Type|value-of<Type> $type
      */
@@ -219,9 +215,7 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
     }
 
     /**
-     * @param Features|array{
-     *   mms?: MessagingFeatureSet|null, sms?: MessagingFeatureSet|null
-     * } $features
+     * @param FeaturesShape $features
      */
     public function withFeatures(Features|array $features): self
     {
@@ -234,12 +228,7 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
     /**
      * High level health metrics about the number and it's messaging sending patterns.
      *
-     * @param NumberHealthMetrics|array{
-     *   inboundOutboundRatio: float,
-     *   messageCount: int,
-     *   spamRatio: float,
-     *   successRatio: float,
-     * } $health
+     * @param NumberHealthMetricsShape $health
      */
     public function withHealth(NumberHealthMetrics|array $health): self
     {

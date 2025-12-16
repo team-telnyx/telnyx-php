@@ -17,13 +17,15 @@ use Telnyx\MessagingOptouts\MessagingOptoutListParams\Page;
  *
  * @see Telnyx\Services\MessagingOptoutsService::list()
  *
+ * @phpstan-import-type CreatedAtShape from \Telnyx\MessagingOptouts\MessagingOptoutListParams\CreatedAt
+ * @phpstan-import-type FilterShape from \Telnyx\MessagingOptouts\MessagingOptoutListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\MessagingOptouts\MessagingOptoutListParams\Page
+ *
  * @phpstan-type MessagingOptoutListParamsShape = array{
- *   createdAt?: CreatedAt|array{
- *     gte?: \DateTimeInterface|null, lte?: \DateTimeInterface|null
- *   },
- *   filter?: Filter|array{from?: string|null, messagingProfileID?: string|null},
- *   page?: Page|array{number?: int|null, size?: int|null},
- *   redactionEnabled?: string,
+ *   createdAt?: CreatedAtShape|null,
+ *   filter?: FilterShape|null,
+ *   page?: PageShape|null,
+ *   redactionEnabled?: string|null,
  * }
  */
 final class MessagingOptoutListParams implements BaseModel
@@ -66,13 +68,9 @@ final class MessagingOptoutListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CreatedAt|array{
-     *   gte?: \DateTimeInterface|null, lte?: \DateTimeInterface|null
-     * } $createdAt
-     * @param Filter|array{
-     *   from?: string|null, messagingProfileID?: string|null
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param CreatedAtShape $createdAt
+     * @param FilterShape $filter
+     * @param PageShape $page
      */
     public static function with(
         CreatedAt|array|null $createdAt = null,
@@ -93,9 +91,7 @@ final class MessagingOptoutListParams implements BaseModel
     /**
      * Consolidated created_at parameter (deepObject style). Originally: created_at[gte], created_at[lte].
      *
-     * @param CreatedAt|array{
-     *   gte?: \DateTimeInterface|null, lte?: \DateTimeInterface|null
-     * } $createdAt
+     * @param CreatedAtShape $createdAt
      */
     public function withCreatedAt(CreatedAt|array $createdAt): self
     {
@@ -108,9 +104,7 @@ final class MessagingOptoutListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[messaging_profile_id], filter[from].
      *
-     * @param Filter|array{
-     *   from?: string|null, messagingProfileID?: string|null
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -123,7 +117,7 @@ final class MessagingOptoutListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

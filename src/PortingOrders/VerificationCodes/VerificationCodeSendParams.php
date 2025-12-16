@@ -16,8 +16,8 @@ use Telnyx\PortingOrders\VerificationCodes\VerificationCodeSendParams\Verificati
  * @see Telnyx\Services\PortingOrders\VerificationCodesService::send()
  *
  * @phpstan-type VerificationCodeSendParamsShape = array{
- *   phoneNumbers?: list<string>,
- *   verificationMethod?: VerificationMethod|value-of<VerificationMethod>,
+ *   phoneNumbers?: list<string>|null,
+ *   verificationMethod?: null|VerificationMethod|value-of<VerificationMethod>,
  * }
  */
 final class VerificationCodeSendParams implements BaseModel

@@ -21,12 +21,14 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\AssistantsService::sendSMS()
  *
+ * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantSendSMSParams\ConversationMetadata
+ *
  * @phpstan-type AssistantSendSMSParamsShape = array{
  *   from: string,
  *   text: string,
  *   to: string,
- *   conversationMetadata?: array<string,string|int|bool>,
- *   shouldCreateConversation?: bool,
+ *   conversationMetadata?: array<string,ConversationMetadataShape>|null,
+ *   shouldCreateConversation?: bool|null,
  * }
  */
 final class AssistantSendSMSParams implements BaseModel
@@ -75,7 +77,7 @@ final class AssistantSendSMSParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,string|int|bool> $conversationMetadata
+     * @param array<string,ConversationMetadataShape> $conversationMetadata
      */
     public static function with(
         string $from,
@@ -121,7 +123,7 @@ final class AssistantSendSMSParams implements BaseModel
     }
 
     /**
-     * @param array<string,string|int|bool> $conversationMetadata
+     * @param array<string,ConversationMetadataShape> $conversationMetadata
      */
     public function withConversationMetadata(array $conversationMetadata): self
     {

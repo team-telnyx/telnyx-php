@@ -15,7 +15,7 @@ use Telnyx\Messaging\Rcs\RcsCapabilities\RecordType;
  *   agentName?: string|null,
  *   features?: list<string>|null,
  *   phoneNumber?: string|null,
- *   recordType?: value-of<RecordType>|null,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  * }
  */
 final class RcsCapabilities implements BaseModel

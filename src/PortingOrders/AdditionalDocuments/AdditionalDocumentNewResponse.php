@@ -8,10 +8,13 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentNewResponse\Data;
-use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentNewResponse\Data\DocumentType;
 
 /**
- * @phpstan-type AdditionalDocumentNewResponseShape = array{data?: list<Data>|null}
+ * @phpstan-import-type DataShape from \Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentNewResponse\Data
+ *
+ * @phpstan-type AdditionalDocumentNewResponseShape = array{
+ *   data?: list<DataShape>|null
+ * }
  */
 final class AdditionalDocumentNewResponse implements BaseModel
 {
@@ -32,17 +35,7 @@ final class AdditionalDocumentNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   id?: string|null,
-     *   contentType?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   documentID?: string|null,
-     *   documentType?: value-of<DocumentType>|null,
-     *   filename?: string|null,
-     *   portingOrderID?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public static function with(?array $data = null): self
     {
@@ -54,17 +47,7 @@ final class AdditionalDocumentNewResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   id?: string|null,
-     *   contentType?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   documentID?: string|null,
-     *   documentType?: value-of<DocumentType>|null,
-     *   filename?: string|null,
-     *   portingOrderID?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {

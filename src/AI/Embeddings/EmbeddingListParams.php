@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\EmbeddingsService::list()
  *
- * @phpstan-type EmbeddingListParamsShape = array{status?: list<string>}
+ * @phpstan-type EmbeddingListParamsShape = array{status?: list<string>|null}
  */
 final class EmbeddingListParams implements BaseModel
 {

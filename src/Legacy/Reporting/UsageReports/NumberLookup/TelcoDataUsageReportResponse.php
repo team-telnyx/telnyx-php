@@ -11,6 +11,8 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Telco data usage report response.
  *
+ * @phpstan-import-type TelcoDataUsageRecordShape from \Telnyx\Legacy\Reporting\UsageReports\NumberLookup\TelcoDataUsageRecord
+ *
  * @phpstan-type TelcoDataUsageReportResponseShape = array{
  *   id?: string|null,
  *   aggregationType?: string|null,
@@ -19,7 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   managedAccounts?: list<string>|null,
  *   recordType?: string|null,
  *   reportURL?: string|null,
- *   result?: list<TelcoDataUsageRecord>|null,
+ *   result?: list<TelcoDataUsageRecordShape>|null,
  *   startDate?: string|null,
  *   status?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
@@ -111,11 +113,7 @@ final class TelcoDataUsageReportResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $managedAccounts
-     * @param list<TelcoDataUsageRecord|array{
-     *   aggregations?: list<TelcoDataAggregation>|null,
-     *   recordType?: string|null,
-     *   userID?: string|null,
-     * }> $result
+     * @param list<TelcoDataUsageRecordShape> $result
      */
     public static function with(
         ?string $id = null,
@@ -229,11 +227,7 @@ final class TelcoDataUsageReportResponse implements BaseModel
     /**
      * Array of usage records.
      *
-     * @param list<TelcoDataUsageRecord|array{
-     *   aggregations?: list<TelcoDataAggregation>|null,
-     *   recordType?: string|null,
-     *   userID?: string|null,
-     * }> $result
+     * @param list<TelcoDataUsageRecordShape> $result
      */
     public function withResult(array $result): self
     {

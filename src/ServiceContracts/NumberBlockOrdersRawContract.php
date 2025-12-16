@@ -19,7 +19,7 @@ interface NumberBlockOrdersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|NumberBlockOrderCreateParams $params
+     * @param array<string,mixed>|NumberBlockOrderCreateParams $params
      *
      * @return BaseResponse<NumberBlockOrderNewResponse>
      *
@@ -47,7 +47,7 @@ interface NumberBlockOrdersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|NumberBlockOrderListParams $params
+     * @param array<string,mixed>|NumberBlockOrderListParams $params
      *
      * @return BaseResponse<DefaultPagination<NumberBlockOrder>>
      *

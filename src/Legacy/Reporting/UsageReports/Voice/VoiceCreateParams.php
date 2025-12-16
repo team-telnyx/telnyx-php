@@ -18,11 +18,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type VoiceCreateParamsShape = array{
  *   endTime: \DateTimeInterface,
  *   startTime: \DateTimeInterface,
- *   aggregationType?: int,
- *   connections?: list<int>,
- *   managedAccounts?: list<string>,
- *   productBreakdown?: int,
- *   selectAllManagedAccounts?: bool,
+ *   aggregationType?: int|null,
+ *   connections?: list<int>|null,
+ *   managedAccounts?: list<string>|null,
+ *   productBreakdown?: int|null,
+ *   selectAllManagedAccounts?: bool|null,
  * }
  */
 final class VoiceCreateParams implements BaseModel

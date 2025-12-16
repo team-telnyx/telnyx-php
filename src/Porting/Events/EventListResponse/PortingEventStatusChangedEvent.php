@@ -11,16 +11,17 @@ use Telnyx\Porting\Events\EventListResponse\PortingEventStatusChangedEvent\Avail
 use Telnyx\Porting\Events\EventListResponse\PortingEventStatusChangedEvent\EventType;
 use Telnyx\Porting\Events\EventListResponse\PortingEventStatusChangedEvent\Payload;
 use Telnyx\Porting\Events\EventListResponse\PortingEventStatusChangedEvent\PayloadStatus;
-use Telnyx\PortingOrderStatus;
 
 /**
+ * @phpstan-import-type PayloadShape from \Telnyx\Porting\Events\EventListResponse\PortingEventStatusChangedEvent\Payload
+ *
  * @phpstan-type PortingEventStatusChangedEventShape = array{
  *   id?: string|null,
- *   availableNotificationMethods?: list<value-of<AvailableNotificationMethod>>|null,
+ *   availableNotificationMethods?: list<AvailableNotificationMethod|value-of<AvailableNotificationMethod>>|null,
  *   createdAt?: \DateTimeInterface|null,
- *   eventType?: value-of<EventType>|null,
- *   payload?: Payload|null,
- *   payloadStatus?: value-of<PayloadStatus>|null,
+ *   eventType?: null|EventType|value-of<EventType>,
+ *   payload?: null|Payload|PayloadShape,
+ *   payloadStatus?: null|PayloadStatus|value-of<PayloadStatus>,
  *   portingOrderID?: string|null,
  *   recordType?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
@@ -106,14 +107,7 @@ final class PortingEventStatusChangedEvent implements BaseModel
      *
      * @param list<AvailableNotificationMethod|value-of<AvailableNotificationMethod>> $availableNotificationMethods
      * @param EventType|value-of<EventType> $eventType
-     * @param Payload|array{
-     *   id?: string|null,
-     *   customerReference?: string|null,
-     *   status?: PortingOrderStatus|null,
-     *   supportKey?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     *   webhookURL?: string|null,
-     * } $payload
+     * @param PayloadShape $payload
      * @param PayloadStatus|value-of<PayloadStatus> $payloadStatus
      */
     public static function with(
@@ -194,14 +188,7 @@ final class PortingEventStatusChangedEvent implements BaseModel
     /**
      * The webhook payload for the porting_order.status_changed event.
      *
-     * @param Payload|array{
-     *   id?: string|null,
-     *   customerReference?: string|null,
-     *   status?: PortingOrderStatus|null,
-     *   supportKey?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     *   webhookURL?: string|null,
-     * } $payload
+     * @param PayloadShape $payload
      */
     public function withPayload(Payload|array $payload): self
     {

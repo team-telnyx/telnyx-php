@@ -20,7 +20,7 @@ interface ScheduledEventsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ScheduledEventCreateParams $params
+     * @param array<string,mixed>|ScheduledEventCreateParams $params
      *
      * @return BaseResponse<ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse>
      *
@@ -35,7 +35,7 @@ interface ScheduledEventsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ScheduledEventRetrieveParams $params
+     * @param array<string,mixed>|ScheduledEventRetrieveParams $params
      *
      * @return BaseResponse<ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse>
      *
@@ -50,7 +50,7 @@ interface ScheduledEventsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ScheduledEventListParams $params
+     * @param array<string,mixed>|ScheduledEventListParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse,>,>
      *
@@ -65,7 +65,7 @@ interface ScheduledEventsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ScheduledEventDeleteParams $params
+     * @param array<string,mixed>|ScheduledEventDeleteParams $params
      *
      * @return BaseResponse<mixed>
      *

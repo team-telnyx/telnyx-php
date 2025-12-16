@@ -15,9 +15,9 @@ use Telnyx\PortingOrders\Comments\CommentListParams\Page;
  *
  * @see Telnyx\Services\PortingOrders\CommentsService::list()
  *
- * @phpstan-type CommentListParamsShape = array{
- *   page?: Page|array{number?: int|null, size?: int|null}
- * }
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\Comments\CommentListParams\Page
+ *
+ * @phpstan-type CommentListParamsShape = array{page?: PageShape|null}
  */
 final class CommentListParams implements BaseModel
 {
@@ -41,7 +41,7 @@ final class CommentListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public static function with(Page|array|null $page = null): self
     {
@@ -55,7 +55,7 @@ final class CommentListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

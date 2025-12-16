@@ -7,9 +7,10 @@ namespace Telnyx\Rooms;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\RoomParticipant;
 
 /**
+ * @phpstan-import-type RoomSessionShape from \Telnyx\Rooms\RoomSession
+ *
  * @phpstan-type RoomShape = array{
  *   id?: string|null,
  *   activeSessionID?: string|null,
@@ -17,7 +18,7 @@ use Telnyx\RoomParticipant;
  *   enableRecording?: bool|null,
  *   maxParticipants?: int|null,
  *   recordType?: string|null,
- *   sessions?: list<RoomSession>|null,
+ *   sessions?: list<RoomSessionShape>|null,
  *   uniqueName?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
  *   webhookEventFailoverURL?: string|null,
@@ -107,16 +108,7 @@ final class Room implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RoomSession|array{
-     *   id?: string|null,
-     *   active?: bool|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   endedAt?: \DateTimeInterface|null,
-     *   participants?: list<RoomParticipant>|null,
-     *   recordType?: string|null,
-     *   roomID?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }> $sessions
+     * @param list<RoomSessionShape> $sessions
      */
     public static function with(
         ?string $id = null,
@@ -214,16 +206,7 @@ final class Room implements BaseModel
     }
 
     /**
-     * @param list<RoomSession|array{
-     *   id?: string|null,
-     *   active?: bool|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   endedAt?: \DateTimeInterface|null,
-     *   participants?: list<RoomParticipant>|null,
-     *   recordType?: string|null,
-     *   roomID?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }> $sessions
+     * @param list<RoomSessionShape> $sessions
      */
     public function withSessions(array $sessions): self
     {

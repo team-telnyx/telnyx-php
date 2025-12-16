@@ -19,7 +19,7 @@ use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpoint\Status;
  *   createdAt?: string|null,
  *   recordType?: string|null,
  *   sipFromID?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   updatedAt?: string|null,
  * }
  */

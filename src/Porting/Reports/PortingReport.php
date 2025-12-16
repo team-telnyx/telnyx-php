@@ -7,19 +7,20 @@ namespace Telnyx\Porting\Reports;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport\Filters;
 use Telnyx\Porting\Reports\PortingReport\ReportType;
 use Telnyx\Porting\Reports\PortingReport\Status;
 
 /**
+ * @phpstan-import-type ExportPortingOrdersCsvReportShape from \Telnyx\Porting\Reports\ExportPortingOrdersCsvReport
+ *
  * @phpstan-type PortingReportShape = array{
  *   id?: string|null,
  *   createdAt?: \DateTimeInterface|null,
  *   documentID?: string|null,
- *   params?: ExportPortingOrdersCsvReport|null,
+ *   params?: null|ExportPortingOrdersCsvReport|ExportPortingOrdersCsvReportShape,
  *   recordType?: string|null,
- *   reportType?: value-of<ReportType>|null,
- *   status?: value-of<Status>|null,
+ *   reportType?: null|ReportType|value-of<ReportType>,
+ *   status?: null|Status|value-of<Status>,
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */
@@ -90,7 +91,7 @@ final class PortingReport implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExportPortingOrdersCsvReport|array{filters: Filters} $params
+     * @param ExportPortingOrdersCsvReportShape $params
      * @param ReportType|value-of<ReportType> $reportType
      * @param Status|value-of<Status> $status
      */
@@ -154,7 +155,7 @@ final class PortingReport implements BaseModel
     /**
      * The parameters for generating a porting orders CSV report.
      *
-     * @param ExportPortingOrdersCsvReport|array{filters: Filters} $params
+     * @param ExportPortingOrdersCsvReportShape $params
      */
     public function withParams(ExportPortingOrdersCsvReport|array $params): self
     {

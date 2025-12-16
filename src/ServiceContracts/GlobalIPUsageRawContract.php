@@ -15,7 +15,7 @@ interface GlobalIPUsageRawContract
     /**
      * @api
      *
-     * @param array<mixed>|GlobalIPUsageRetrieveParams $params
+     * @param array<string,mixed>|GlobalIPUsageRetrieveParams $params
      *
      * @return BaseResponse<GlobalIPUsageGetResponse>
      *

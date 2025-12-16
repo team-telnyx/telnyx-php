@@ -15,9 +15,10 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams\Para
  *
  * @see Telnyx\Services\PortingOrders\ActionRequirementsService::initiate()
  *
+ * @phpstan-import-type ParamsShape from \Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams\Params
+ *
  * @phpstan-type ActionRequirementInitiateParamsShape = array{
- *   portingOrderID: string,
- *   params: Params|array{firstName: string, lastName: string},
+ *   portingOrderID: string, params: ParamsShape
  * }
  */
 final class ActionRequirementInitiateParams implements BaseModel
@@ -59,7 +60,7 @@ final class ActionRequirementInitiateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Params|array{firstName: string, lastName: string} $params
+     * @param ParamsShape $params
      */
     public static function with(
         string $portingOrderID,
@@ -84,7 +85,7 @@ final class ActionRequirementInitiateParams implements BaseModel
     /**
      * Required information for initiating the action requirement for AU ID verification.
      *
-     * @param Params|array{firstName: string, lastName: string} $params
+     * @param ParamsShape $params
      */
     public function withParams(Params|array $params): self
     {

@@ -22,7 +22,7 @@ interface DetailRecordsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|DetailRecordListParams $params
+     * @param array<string,mixed>|DetailRecordListParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<MessageDetailRecord|ConferenceDetailRecord|ConferenceParticipantDetailRecord|AmdDetailRecord|VerifyDetailRecord|SimCardUsageDetailRecord|MediaStorageDetailRecord,>,>
      *

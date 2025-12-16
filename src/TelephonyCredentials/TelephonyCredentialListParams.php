@@ -16,15 +16,11 @@ use Telnyx\TelephonyCredentials\TelephonyCredentialListParams\Page;
  *
  * @see Telnyx\Services\TelephonyCredentialsService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\TelephonyCredentials\TelephonyCredentialListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\TelephonyCredentials\TelephonyCredentialListParams\Page
+ *
  * @phpstan-type TelephonyCredentialListParamsShape = array{
- *   filter?: Filter|array{
- *     name?: string|null,
- *     resourceID?: string|null,
- *     sipUsername?: string|null,
- *     status?: string|null,
- *     tag?: string|null,
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   filter?: FilterShape|null, page?: PageShape|null
  * }
  */
 final class TelephonyCredentialListParams implements BaseModel
@@ -55,14 +51,8 @@ final class TelephonyCredentialListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   name?: string|null,
-     *   resourceID?: string|null,
-     *   sipUsername?: string|null,
-     *   status?: string|null,
-     *   tag?: string|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -79,13 +69,7 @@ final class TelephonyCredentialListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[name], filter[status], filter[resource_id], filter[sip_username].
      *
-     * @param Filter|array{
-     *   name?: string|null,
-     *   resourceID?: string|null,
-     *   sipUsername?: string|null,
-     *   status?: string|null,
-     *   tag?: string|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -98,7 +82,7 @@ final class TelephonyCredentialListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

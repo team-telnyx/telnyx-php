@@ -9,67 +9,40 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\CredentialConnections\ConnectionRtcpSettings\Port;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\SipUriCallingPreference;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\WebhookAPIVersion;
-use Telnyx\CredentialConnections\CredentialInbound\AniNumberFormat;
-use Telnyx\CredentialConnections\CredentialInbound\DnisNumberFormat;
-use Telnyx\CredentialConnections\CredentialOutbound\AniOverrideType;
-use Telnyx\CredentialConnections\CredentialOutbound\T38ReinviteSource;
 
 /**
  * Creates a credential connection.
  *
  * @see Telnyx\Services\CredentialConnectionsService::create()
  *
+ * @phpstan-import-type CredentialInboundShape from \Telnyx\CredentialConnections\CredentialInbound
+ * @phpstan-import-type CredentialOutboundShape from \Telnyx\CredentialConnections\CredentialOutbound
+ * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
+ *
  * @phpstan-type CredentialConnectionCreateParamsShape = array{
  *   connectionName: string,
  *   password: string,
  *   userName: string,
- *   active?: bool,
- *   anchorsiteOverride?: AnchorsiteOverride|value-of<AnchorsiteOverride>,
+ *   active?: bool|null,
+ *   anchorsiteOverride?: null|AnchorsiteOverride|value-of<AnchorsiteOverride>,
  *   androidPushCredentialID?: string|null,
- *   callCostInWebhooks?: bool,
- *   defaultOnHoldComfortNoiseEnabled?: bool,
- *   dtmfType?: DtmfType|value-of<DtmfType>,
- *   encodeContactHeaderEnabled?: bool,
+ *   callCostInWebhooks?: bool|null,
+ *   defaultOnHoldComfortNoiseEnabled?: bool|null,
+ *   dtmfType?: null|DtmfType|value-of<DtmfType>,
+ *   encodeContactHeaderEnabled?: bool|null,
  *   encryptedMedia?: null|EncryptedMedia|value-of<EncryptedMedia>,
- *   inbound?: CredentialInbound|array{
- *     aniNumberFormat?: value-of<AniNumberFormat>|null,
- *     channelLimit?: int|null,
- *     codecs?: list<string>|null,
- *     dnisNumberFormat?: value-of<DnisNumberFormat>|null,
- *     generateRingbackTone?: bool|null,
- *     isupHeadersEnabled?: bool|null,
- *     prackEnabled?: bool|null,
- *     shakenStirEnabled?: bool|null,
- *     sipCompactHeadersEnabled?: bool|null,
- *     timeout1xxSecs?: int|null,
- *     timeout2xxSecs?: int|null,
- *   },
+ *   inbound?: CredentialInboundShape|null,
  *   iosPushCredentialID?: string|null,
- *   onnetT38PassthroughEnabled?: bool,
- *   outbound?: CredentialOutbound|array{
- *     aniOverride?: string|null,
- *     aniOverrideType?: value-of<AniOverrideType>|null,
- *     callParkingEnabled?: bool|null,
- *     channelLimit?: int|null,
- *     generateRingbackTone?: bool|null,
- *     instantRingbackEnabled?: bool|null,
- *     localization?: string|null,
- *     outboundVoiceProfileID?: string|null,
- *     t38ReinviteSource?: value-of<T38ReinviteSource>|null,
- *   },
- *   rtcpSettings?: ConnectionRtcpSettings|array{
- *     captureEnabled?: bool|null,
- *     port?: value-of<Port>|null,
- *     reportFrequencySecs?: int|null,
- *   },
- *   sipUriCallingPreference?: SipUriCallingPreference|value-of<SipUriCallingPreference>,
- *   tags?: list<string>,
- *   webhookAPIVersion?: WebhookAPIVersion|value-of<WebhookAPIVersion>,
+ *   onnetT38PassthroughEnabled?: bool|null,
+ *   outbound?: CredentialOutboundShape|null,
+ *   rtcpSettings?: ConnectionRtcpSettingsShape|null,
+ *   sipUriCallingPreference?: null|SipUriCallingPreference|value-of<SipUriCallingPreference>,
+ *   tags?: list<string>|null,
+ *   webhookAPIVersion?: null|WebhookAPIVersion|value-of<WebhookAPIVersion>,
  *   webhookEventFailoverURL?: string|null,
- *   webhookEventURL?: string,
+ *   webhookEventURL?: string|null,
  *   webhookTimeoutSecs?: int|null,
  * }
  */
@@ -249,35 +222,9 @@ final class CredentialConnectionCreateParams implements BaseModel
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
      * @param DtmfType|value-of<DtmfType> $dtmfType
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
-     * @param CredentialInbound|array{
-     *   aniNumberFormat?: value-of<AniNumberFormat>|null,
-     *   channelLimit?: int|null,
-     *   codecs?: list<string>|null,
-     *   dnisNumberFormat?: value-of<DnisNumberFormat>|null,
-     *   generateRingbackTone?: bool|null,
-     *   isupHeadersEnabled?: bool|null,
-     *   prackEnabled?: bool|null,
-     *   shakenStirEnabled?: bool|null,
-     *   sipCompactHeadersEnabled?: bool|null,
-     *   timeout1xxSecs?: int|null,
-     *   timeout2xxSecs?: int|null,
-     * } $inbound
-     * @param CredentialOutbound|array{
-     *   aniOverride?: string|null,
-     *   aniOverrideType?: value-of<AniOverrideType>|null,
-     *   callParkingEnabled?: bool|null,
-     *   channelLimit?: int|null,
-     *   generateRingbackTone?: bool|null,
-     *   instantRingbackEnabled?: bool|null,
-     *   localization?: string|null,
-     *   outboundVoiceProfileID?: string|null,
-     *   t38ReinviteSource?: value-of<T38ReinviteSource>|null,
-     * } $outbound
-     * @param ConnectionRtcpSettings|array{
-     *   captureEnabled?: bool|null,
-     *   port?: value-of<Port>|null,
-     *   reportFrequencySecs?: int|null,
-     * } $rtcpSettings
+     * @param CredentialInboundShape $inbound
+     * @param CredentialOutboundShape $outbound
+     * @param ConnectionRtcpSettingsShape $rtcpSettings
      * @param SipUriCallingPreference|value-of<SipUriCallingPreference> $sipUriCallingPreference
      * @param list<string> $tags
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion
@@ -468,19 +415,7 @@ final class CredentialConnectionCreateParams implements BaseModel
     }
 
     /**
-     * @param CredentialInbound|array{
-     *   aniNumberFormat?: value-of<AniNumberFormat>|null,
-     *   channelLimit?: int|null,
-     *   codecs?: list<string>|null,
-     *   dnisNumberFormat?: value-of<DnisNumberFormat>|null,
-     *   generateRingbackTone?: bool|null,
-     *   isupHeadersEnabled?: bool|null,
-     *   prackEnabled?: bool|null,
-     *   shakenStirEnabled?: bool|null,
-     *   sipCompactHeadersEnabled?: bool|null,
-     *   timeout1xxSecs?: int|null,
-     *   timeout2xxSecs?: int|null,
-     * } $inbound
+     * @param CredentialInboundShape $inbound
      */
     public function withInbound(CredentialInbound|array $inbound): self
     {
@@ -514,17 +449,7 @@ final class CredentialConnectionCreateParams implements BaseModel
     }
 
     /**
-     * @param CredentialOutbound|array{
-     *   aniOverride?: string|null,
-     *   aniOverrideType?: value-of<AniOverrideType>|null,
-     *   callParkingEnabled?: bool|null,
-     *   channelLimit?: int|null,
-     *   generateRingbackTone?: bool|null,
-     *   instantRingbackEnabled?: bool|null,
-     *   localization?: string|null,
-     *   outboundVoiceProfileID?: string|null,
-     *   t38ReinviteSource?: value-of<T38ReinviteSource>|null,
-     * } $outbound
+     * @param CredentialOutboundShape $outbound
      */
     public function withOutbound(CredentialOutbound|array $outbound): self
     {
@@ -535,11 +460,7 @@ final class CredentialConnectionCreateParams implements BaseModel
     }
 
     /**
-     * @param ConnectionRtcpSettings|array{
-     *   captureEnabled?: bool|null,
-     *   port?: value-of<Port>|null,
-     *   reportFrequencySecs?: int|null,
-     * } $rtcpSettings
+     * @param ConnectionRtcpSettingsShape $rtcpSettings
      */
     public function withRtcpSettings(
         ConnectionRtcpSettings|array $rtcpSettings

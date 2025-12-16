@@ -8,12 +8,13 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncResponse\Data;
-use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncResponse\Data\AggregationType;
-use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncResponse\Data\ProductBreakdown;
-use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncResponse\Data\Status;
 
 /**
- * @phpstan-type CdrUsageReportFetchSyncResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncResponse\Data
+ *
+ * @phpstan-type CdrUsageReportFetchSyncResponseShape = array{
+ *   data?: null|Data|DataShape
+ * }
  */
 final class CdrUsageReportFetchSyncResponse implements BaseModel
 {
@@ -33,20 +34,7 @@ final class CdrUsageReportFetchSyncResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   id?: string|null,
-     *   aggregationType?: value-of<AggregationType>|null,
-     *   connections?: list<int>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   endTime?: \DateTimeInterface|null,
-     *   productBreakdown?: value-of<ProductBreakdown>|null,
-     *   recordType?: string|null,
-     *   reportURL?: string|null,
-     *   result?: array<string,mixed>|null,
-     *   startTime?: \DateTimeInterface|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -58,20 +46,7 @@ final class CdrUsageReportFetchSyncResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   id?: string|null,
-     *   aggregationType?: value-of<AggregationType>|null,
-     *   connections?: list<int>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   endTime?: \DateTimeInterface|null,
-     *   productBreakdown?: value-of<ProductBreakdown>|null,
-     *   recordType?: string|null,
-     *   reportURL?: string|null,
-     *   result?: array<string,mixed>|null,
-     *   startTime?: \DateTimeInterface|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

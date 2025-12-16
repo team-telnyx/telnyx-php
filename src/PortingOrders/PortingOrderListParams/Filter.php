@@ -8,25 +8,26 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderListParams\Filter\ActivationSettings;
-use Telnyx\PortingOrders\PortingOrderListParams\Filter\ActivationSettings\FocDatetimeRequested;
 use Telnyx\PortingOrders\PortingOrderListParams\Filter\EndUser;
-use Telnyx\PortingOrders\PortingOrderListParams\Filter\EndUser\Admin;
 use Telnyx\PortingOrders\PortingOrderListParams\Filter\Misc;
 use Telnyx\PortingOrders\PortingOrderListParams\Filter\PhoneNumbers;
-use Telnyx\PortingOrders\PortingOrderListParams\Filter\PhoneNumbers\PhoneNumber;
-use Telnyx\PortingOrders\PortingOrderType;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[customer_reference], filter[customer_group_reference], filter[parent_support_key], filter[phone_numbers.country_code], filter[phone_numbers.carrier_name], filter[misc.type], filter[end_user.admin.entity_name], filter[end_user.admin.auth_person_name], filter[activation_settings.fast_port_eligible], filter[activation_settings.foc_datetime_requested][gt], filter[activation_settings.foc_datetime_requested][lt], filter[phone_numbers.phone_number][contains].
  *
+ * @phpstan-import-type ActivationSettingsShape from \Telnyx\PortingOrders\PortingOrderListParams\Filter\ActivationSettings
+ * @phpstan-import-type EndUserShape from \Telnyx\PortingOrders\PortingOrderListParams\Filter\EndUser
+ * @phpstan-import-type MiscShape from \Telnyx\PortingOrders\PortingOrderListParams\Filter\Misc
+ * @phpstan-import-type PhoneNumbersShape from \Telnyx\PortingOrders\PortingOrderListParams\Filter\PhoneNumbers
+ *
  * @phpstan-type FilterShape = array{
- *   activationSettings?: ActivationSettings|null,
+ *   activationSettings?: null|ActivationSettings|ActivationSettingsShape,
  *   customerGroupReference?: string|null,
  *   customerReference?: string|null,
- *   endUser?: EndUser|null,
- *   misc?: Misc|null,
+ *   endUser?: null|EndUser|EndUserShape,
+ *   misc?: null|Misc|MiscShape,
  *   parentSupportKey?: string|null,
- *   phoneNumbers?: PhoneNumbers|null,
+ *   phoneNumbers?: null|PhoneNumbers|PhoneNumbersShape,
  * }
  */
 final class Filter implements BaseModel
@@ -74,16 +75,10 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ActivationSettings|array{
-     *   fastPortEligible?: bool|null, focDatetimeRequested?: FocDatetimeRequested|null
-     * } $activationSettings
-     * @param EndUser|array{admin?: Admin|null} $endUser
-     * @param Misc|array{type?: value-of<PortingOrderType>|null} $misc
-     * @param PhoneNumbers|array{
-     *   carrierName?: string|null,
-     *   countryCode?: string|null,
-     *   phoneNumber?: PhoneNumber|null,
-     * } $phoneNumbers
+     * @param ActivationSettingsShape $activationSettings
+     * @param EndUserShape $endUser
+     * @param MiscShape $misc
+     * @param PhoneNumbersShape $phoneNumbers
      */
     public static function with(
         ActivationSettings|array|null $activationSettings = null,
@@ -108,9 +103,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param ActivationSettings|array{
-     *   fastPortEligible?: bool|null, focDatetimeRequested?: FocDatetimeRequested|null
-     * } $activationSettings
+     * @param ActivationSettingsShape $activationSettings
      */
     public function withActivationSettings(
         ActivationSettings|array $activationSettings
@@ -145,7 +138,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param EndUser|array{admin?: Admin|null} $endUser
+     * @param EndUserShape $endUser
      */
     public function withEndUser(EndUser|array $endUser): self
     {
@@ -156,7 +149,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param Misc|array{type?: value-of<PortingOrderType>|null} $misc
+     * @param MiscShape $misc
      */
     public function withMisc(Misc|array $misc): self
     {
@@ -178,11 +171,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param PhoneNumbers|array{
-     *   carrierName?: string|null,
-     *   countryCode?: string|null,
-     *   phoneNumber?: PhoneNumber|null,
-     * } $phoneNumbers
+     * @param PhoneNumbersShape $phoneNumbers
      */
     public function withPhoneNumbers(PhoneNumbers|array $phoneNumbers): self
     {

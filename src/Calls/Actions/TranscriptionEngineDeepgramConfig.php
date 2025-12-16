@@ -10,6 +10,12 @@ use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 
+/**
+ * @phpstan-import-type DeepgramNova2ConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineDeepgramConfig\DeepgramNova2Config
+ * @phpstan-import-type DeepgramNova3ConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineDeepgramConfig\DeepgramNova3Config
+ *
+ * @phpstan-type TranscriptionEngineDeepgramConfigShape = DeepgramNova2ConfigShape|DeepgramNova3ConfigShape
+ */
 final class TranscriptionEngineDeepgramConfig implements ConverterSource
 {
     use SdkUnion;

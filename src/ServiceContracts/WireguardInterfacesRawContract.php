@@ -20,7 +20,7 @@ interface WireguardInterfacesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|WireguardInterfaceCreateParams $params
+     * @param array<string,mixed>|WireguardInterfaceCreateParams $params
      *
      * @return BaseResponse<WireguardInterfaceNewResponse>
      *
@@ -48,7 +48,7 @@ interface WireguardInterfacesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|WireguardInterfaceListParams $params
+     * @param array<string,mixed>|WireguardInterfaceListParams $params
      *
      * @return BaseResponse<DefaultPagination<WireguardInterfaceListResponse>>
      *

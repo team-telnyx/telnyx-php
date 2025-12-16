@@ -8,25 +8,18 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\InboundMessagePayload;
-use Telnyx\InboundMessagePayload\Cc;
-use Telnyx\InboundMessagePayload\Cost;
-use Telnyx\InboundMessagePayload\CostBreakdown;
-use Telnyx\InboundMessagePayload\Direction;
-use Telnyx\InboundMessagePayload\From;
-use Telnyx\InboundMessagePayload\Media;
-use Telnyx\InboundMessagePayload\To;
-use Telnyx\InboundMessagePayload\Type;
-use Telnyx\Messages\MessagingError;
 use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\EventType;
 use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\RecordType;
 
 /**
+ * @phpstan-import-type InboundMessagePayloadShape from \Telnyx\InboundMessagePayload
+ *
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   eventType?: value-of<EventType>|null,
+ *   eventType?: null|EventType|value-of<EventType>,
  *   occurredAt?: \DateTimeInterface|null,
- *   payload?: InboundMessagePayload|null,
- *   recordType?: value-of<RecordType>|null,
+ *   payload?: null|InboundMessagePayload|InboundMessagePayloadShape,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  * }
  */
 final class Data implements BaseModel
@@ -76,35 +69,7 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param EventType|value-of<EventType> $eventType
-     * @param InboundMessagePayload|array{
-     *   id?: string|null,
-     *   cc?: list<Cc>|null,
-     *   completedAt?: \DateTimeInterface|null,
-     *   cost?: Cost|null,
-     *   costBreakdown?: CostBreakdown|null,
-     *   direction?: value-of<Direction>|null,
-     *   encoding?: string|null,
-     *   errors?: list<MessagingError>|null,
-     *   from?: From|null,
-     *   media?: list<Media>|null,
-     *   messagingProfileID?: string|null,
-     *   organizationID?: string|null,
-     *   parts?: int|null,
-     *   receivedAt?: \DateTimeInterface|null,
-     *   recordType?: value-of<InboundMessagePayload\RecordType>|null,
-     *   sentAt?: \DateTimeInterface|null,
-     *   subject?: string|null,
-     *   tags?: list<string>|null,
-     *   tcrCampaignBillable?: bool|null,
-     *   tcrCampaignID?: string|null,
-     *   tcrCampaignRegistered?: string|null,
-     *   text?: string|null,
-     *   to?: list<To>|null,
-     *   type?: value-of<Type>|null,
-     *   validUntil?: \DateTimeInterface|null,
-     *   webhookFailoverURL?: string|null,
-     *   webhookURL?: string|null,
-     * } $payload
+     * @param InboundMessagePayloadShape $payload
      * @param RecordType|value-of<RecordType> $recordType
      */
     public static function with(
@@ -161,35 +126,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param InboundMessagePayload|array{
-     *   id?: string|null,
-     *   cc?: list<Cc>|null,
-     *   completedAt?: \DateTimeInterface|null,
-     *   cost?: Cost|null,
-     *   costBreakdown?: CostBreakdown|null,
-     *   direction?: value-of<Direction>|null,
-     *   encoding?: string|null,
-     *   errors?: list<MessagingError>|null,
-     *   from?: From|null,
-     *   media?: list<Media>|null,
-     *   messagingProfileID?: string|null,
-     *   organizationID?: string|null,
-     *   parts?: int|null,
-     *   receivedAt?: \DateTimeInterface|null,
-     *   recordType?: value-of<InboundMessagePayload\RecordType>|null,
-     *   sentAt?: \DateTimeInterface|null,
-     *   subject?: string|null,
-     *   tags?: list<string>|null,
-     *   tcrCampaignBillable?: bool|null,
-     *   tcrCampaignID?: string|null,
-     *   tcrCampaignRegistered?: string|null,
-     *   text?: string|null,
-     *   to?: list<To>|null,
-     *   type?: value-of<Type>|null,
-     *   validUntil?: \DateTimeInterface|null,
-     *   webhookFailoverURL?: string|null,
-     *   webhookURL?: string|null,
-     * } $payload
+     * @param InboundMessagePayloadShape $payload
      */
     public function withPayload(InboundMessagePayload|array $payload): self
     {

@@ -7,15 +7,12 @@ namespace Telnyx\PhoneNumbers;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\PhoneNumbers\PhoneNumberDetailed\EmergencyStatus;
-use Telnyx\PhoneNumbers\PhoneNumberDetailed\InboundCallScreening;
-use Telnyx\PhoneNumbers\PhoneNumberDetailed\PhoneNumberType;
-use Telnyx\PhoneNumbers\PhoneNumberDetailed\SourceType;
-use Telnyx\PhoneNumbers\PhoneNumberDetailed\Status;
 
 /**
+ * @phpstan-import-type PhoneNumberDetailedShape from \Telnyx\PhoneNumbers\PhoneNumberDetailed
+ *
  * @phpstan-type PhoneNumberUpdateResponseShape = array{
- *   data?: PhoneNumberDetailed|null
+ *   data?: null|PhoneNumberDetailed|PhoneNumberDetailedShape
  * }
  */
 final class PhoneNumberUpdateResponse implements BaseModel
@@ -36,35 +33,7 @@ final class PhoneNumberUpdateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PhoneNumberDetailed|array{
-     *   id: string,
-     *   countryISOAlpha2: string,
-     *   createdAt: \DateTimeInterface,
-     *   deletionLockEnabled: bool,
-     *   externalPin: string|null,
-     *   phoneNumber: string,
-     *   phoneNumberType: value-of<PhoneNumberType>,
-     *   purchasedAt: string,
-     *   recordType: string,
-     *   status: value-of<Status>,
-     *   tags: list<string>,
-     *   billingGroupID?: string|null,
-     *   callForwardingEnabled?: bool|null,
-     *   callRecordingEnabled?: bool|null,
-     *   callerIDNameEnabled?: bool|null,
-     *   cnamListingEnabled?: bool|null,
-     *   connectionID?: string|null,
-     *   connectionName?: string|null,
-     *   customerReference?: string|null,
-     *   emergencyAddressID?: string|null,
-     *   emergencyEnabled?: bool|null,
-     *   emergencyStatus?: value-of<EmergencyStatus>|null,
-     *   inboundCallScreening?: value-of<InboundCallScreening>|null,
-     *   messagingProfileID?: string|null,
-     *   messagingProfileName?: string|null,
-     *   sourceType?: value-of<SourceType>|null,
-     *   t38FaxGatewayEnabled?: bool|null,
-     * } $data
+     * @param PhoneNumberDetailedShape $data
      */
     public static function with(PhoneNumberDetailed|array|null $data = null): self
     {
@@ -76,35 +45,7 @@ final class PhoneNumberUpdateResponse implements BaseModel
     }
 
     /**
-     * @param PhoneNumberDetailed|array{
-     *   id: string,
-     *   countryISOAlpha2: string,
-     *   createdAt: \DateTimeInterface,
-     *   deletionLockEnabled: bool,
-     *   externalPin: string|null,
-     *   phoneNumber: string,
-     *   phoneNumberType: value-of<PhoneNumberType>,
-     *   purchasedAt: string,
-     *   recordType: string,
-     *   status: value-of<Status>,
-     *   tags: list<string>,
-     *   billingGroupID?: string|null,
-     *   callForwardingEnabled?: bool|null,
-     *   callRecordingEnabled?: bool|null,
-     *   callerIDNameEnabled?: bool|null,
-     *   cnamListingEnabled?: bool|null,
-     *   connectionID?: string|null,
-     *   connectionName?: string|null,
-     *   customerReference?: string|null,
-     *   emergencyAddressID?: string|null,
-     *   emergencyEnabled?: bool|null,
-     *   emergencyStatus?: value-of<EmergencyStatus>|null,
-     *   inboundCallScreening?: value-of<InboundCallScreening>|null,
-     *   messagingProfileID?: string|null,
-     *   messagingProfileName?: string|null,
-     *   sourceType?: value-of<SourceType>|null,
-     *   t38FaxGatewayEnabled?: bool|null,
-     * } $data
+     * @param PhoneNumberDetailedShape $data
      */
     public function withData(PhoneNumberDetailed|array $data): self
     {

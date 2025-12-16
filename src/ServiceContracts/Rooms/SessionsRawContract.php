@@ -22,7 +22,7 @@ interface SessionsRawContract
      * @api
      *
      * @param string $roomSessionID the unique identifier of a room session
-     * @param array<mixed>|SessionRetrieveParams $params
+     * @param array<string,mixed>|SessionRetrieveParams $params
      *
      * @return BaseResponse<SessionGetResponse>
      *
@@ -37,7 +37,7 @@ interface SessionsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|SessionList0Params $params
+     * @param array<string,mixed>|SessionList0Params $params
      *
      * @return BaseResponse<DefaultPagination<RoomSession>>
      *
@@ -52,7 +52,7 @@ interface SessionsRawContract
      * @api
      *
      * @param string $roomID the unique identifier of a room
-     * @param array<mixed>|SessionList1Params $params
+     * @param array<string,mixed>|SessionList1Params $params
      *
      * @return BaseResponse<DefaultPagination<RoomSession>>
      *
@@ -68,7 +68,7 @@ interface SessionsRawContract
      * @api
      *
      * @param string $roomSessionID the unique identifier of a room session
-     * @param array<mixed>|SessionRetrieveParticipantsParams $params
+     * @param array<string,mixed>|SessionRetrieveParticipantsParams $params
      *
      * @return BaseResponse<DefaultPagination<RoomParticipant>>
      *

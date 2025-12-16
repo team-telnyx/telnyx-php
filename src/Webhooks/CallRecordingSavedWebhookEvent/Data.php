@@ -9,18 +9,17 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallRecordingSavedWebhookEvent\Data\EventType;
 use Telnyx\Webhooks\CallRecordingSavedWebhookEvent\Data\Payload;
-use Telnyx\Webhooks\CallRecordingSavedWebhookEvent\Data\Payload\Channels;
-use Telnyx\Webhooks\CallRecordingSavedWebhookEvent\Data\Payload\PublicRecordingURLs;
-use Telnyx\Webhooks\CallRecordingSavedWebhookEvent\Data\Payload\RecordingURLs;
 use Telnyx\Webhooks\CallRecordingSavedWebhookEvent\Data\RecordType;
 
 /**
+ * @phpstan-import-type PayloadShape from \Telnyx\Webhooks\CallRecordingSavedWebhookEvent\Data\Payload
+ *
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   eventType?: value-of<EventType>|null,
+ *   eventType?: null|EventType|value-of<EventType>,
  *   occurredAt?: \DateTimeInterface|null,
- *   payload?: Payload|null,
- *   recordType?: value-of<RecordType>|null,
+ *   payload?: null|Payload|PayloadShape,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  * }
  */
 final class Data implements BaseModel
@@ -70,17 +69,7 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param EventType|value-of<EventType> $eventType
-     * @param Payload|array{
-     *   callLegID?: string|null,
-     *   callSessionID?: string|null,
-     *   channels?: value-of<Channels>|null,
-     *   clientState?: string|null,
-     *   connectionID?: string|null,
-     *   publicRecordingURLs?: PublicRecordingURLs|null,
-     *   recordingEndedAt?: \DateTimeInterface|null,
-     *   recordingStartedAt?: \DateTimeInterface|null,
-     *   recordingURLs?: RecordingURLs|null,
-     * } $payload
+     * @param PayloadShape $payload
      * @param RecordType|value-of<RecordType> $recordType
      */
     public static function with(
@@ -137,17 +126,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param Payload|array{
-     *   callLegID?: string|null,
-     *   callSessionID?: string|null,
-     *   channels?: value-of<Channels>|null,
-     *   clientState?: string|null,
-     *   connectionID?: string|null,
-     *   publicRecordingURLs?: PublicRecordingURLs|null,
-     *   recordingEndedAt?: \DateTimeInterface|null,
-     *   recordingStartedAt?: \DateTimeInterface|null,
-     *   recordingURLs?: RecordingURLs|null,
-     * } $payload
+     * @param PayloadShape $payload
      */
     public function withPayload(Payload|array $payload): self
     {

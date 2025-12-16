@@ -28,54 +28,56 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams
  *
  * @see Telnyx\Services\Texml\Accounts\Conferences\ParticipantsService::participants()
  *
+ * @phpstan-import-type CustomHeaderShape from \Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\CustomHeader
+ *
  * @phpstan-type ParticipantParticipantsParamsShape = array{
  *   accountSid: string,
- *   amdStatusCallback?: string,
- *   amdStatusCallbackMethod?: AmdStatusCallbackMethod|value-of<AmdStatusCallbackMethod>,
- *   beep?: Beep|value-of<Beep>,
- *   callerID?: string,
- *   callSidToCoach?: string,
- *   cancelPlaybackOnDetectMessageEnd?: bool,
- *   cancelPlaybackOnMachineDetection?: bool,
- *   coaching?: bool,
- *   conferenceRecord?: ConferenceRecord|value-of<ConferenceRecord>,
- *   conferenceRecordingStatusCallback?: string,
- *   conferenceRecordingStatusCallbackEvent?: string,
- *   conferenceRecordingStatusCallbackMethod?: ConferenceRecordingStatusCallbackMethod|value-of<ConferenceRecordingStatusCallbackMethod>,
- *   conferenceRecordingTimeout?: int,
- *   conferenceStatusCallback?: string,
- *   conferenceStatusCallbackEvent?: string,
- *   conferenceStatusCallbackMethod?: ConferenceStatusCallbackMethod|value-of<ConferenceStatusCallbackMethod>,
- *   conferenceTrim?: ConferenceTrim|value-of<ConferenceTrim>,
- *   customHeaders?: list<CustomHeader|array{name: string, value: string}>,
- *   earlyMedia?: bool,
- *   endConferenceOnExit?: bool,
- *   from?: string,
- *   machineDetection?: MachineDetection|value-of<MachineDetection>,
- *   machineDetectionSilenceTimeout?: int,
- *   machineDetectionSpeechEndThreshold?: int,
- *   machineDetectionSpeechThreshold?: int,
- *   machineDetectionTimeout?: int,
- *   maxParticipants?: int,
- *   muted?: bool,
- *   preferredCodecs?: string,
- *   record?: bool,
- *   recordingChannels?: RecordingChannels|value-of<RecordingChannels>,
- *   recordingStatusCallback?: string,
- *   recordingStatusCallbackEvent?: string,
- *   recordingStatusCallbackMethod?: RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod>,
- *   recordingTrack?: RecordingTrack|value-of<RecordingTrack>,
- *   sipAuthPassword?: string,
- *   sipAuthUsername?: string,
- *   startConferenceOnEnter?: bool,
- *   statusCallback?: string,
- *   statusCallbackEvent?: string,
- *   statusCallbackMethod?: StatusCallbackMethod|value-of<StatusCallbackMethod>,
- *   timeLimit?: int,
- *   timeoutSeconds?: int,
- *   to?: string,
- *   trim?: Trim|value-of<Trim>,
- *   waitURL?: string,
+ *   amdStatusCallback?: string|null,
+ *   amdStatusCallbackMethod?: null|AmdStatusCallbackMethod|value-of<AmdStatusCallbackMethod>,
+ *   beep?: null|Beep|value-of<Beep>,
+ *   callerID?: string|null,
+ *   callSidToCoach?: string|null,
+ *   cancelPlaybackOnDetectMessageEnd?: bool|null,
+ *   cancelPlaybackOnMachineDetection?: bool|null,
+ *   coaching?: bool|null,
+ *   conferenceRecord?: null|ConferenceRecord|value-of<ConferenceRecord>,
+ *   conferenceRecordingStatusCallback?: string|null,
+ *   conferenceRecordingStatusCallbackEvent?: string|null,
+ *   conferenceRecordingStatusCallbackMethod?: null|ConferenceRecordingStatusCallbackMethod|value-of<ConferenceRecordingStatusCallbackMethod>,
+ *   conferenceRecordingTimeout?: int|null,
+ *   conferenceStatusCallback?: string|null,
+ *   conferenceStatusCallbackEvent?: string|null,
+ *   conferenceStatusCallbackMethod?: null|ConferenceStatusCallbackMethod|value-of<ConferenceStatusCallbackMethod>,
+ *   conferenceTrim?: null|ConferenceTrim|value-of<ConferenceTrim>,
+ *   customHeaders?: list<CustomHeaderShape>|null,
+ *   earlyMedia?: bool|null,
+ *   endConferenceOnExit?: bool|null,
+ *   from?: string|null,
+ *   machineDetection?: null|MachineDetection|value-of<MachineDetection>,
+ *   machineDetectionSilenceTimeout?: int|null,
+ *   machineDetectionSpeechEndThreshold?: int|null,
+ *   machineDetectionSpeechThreshold?: int|null,
+ *   machineDetectionTimeout?: int|null,
+ *   maxParticipants?: int|null,
+ *   muted?: bool|null,
+ *   preferredCodecs?: string|null,
+ *   record?: bool|null,
+ *   recordingChannels?: null|RecordingChannels|value-of<RecordingChannels>,
+ *   recordingStatusCallback?: string|null,
+ *   recordingStatusCallbackEvent?: string|null,
+ *   recordingStatusCallbackMethod?: null|RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod>,
+ *   recordingTrack?: null|RecordingTrack|value-of<RecordingTrack>,
+ *   sipAuthPassword?: string|null,
+ *   sipAuthUsername?: string|null,
+ *   startConferenceOnEnter?: bool|null,
+ *   statusCallback?: string|null,
+ *   statusCallbackEvent?: string|null,
+ *   statusCallbackMethod?: null|StatusCallbackMethod|value-of<StatusCallbackMethod>,
+ *   timeLimit?: int|null,
+ *   timeoutSeconds?: int|null,
+ *   to?: string|null,
+ *   trim?: null|Trim|value-of<Trim>,
+ *   waitURL?: string|null,
  * }
  */
 final class ParticipantParticipantsParams implements BaseModel
@@ -428,7 +430,7 @@ final class ParticipantParticipantsParams implements BaseModel
      * @param ConferenceRecordingStatusCallbackMethod|value-of<ConferenceRecordingStatusCallbackMethod> $conferenceRecordingStatusCallbackMethod
      * @param ConferenceStatusCallbackMethod|value-of<ConferenceStatusCallbackMethod> $conferenceStatusCallbackMethod
      * @param ConferenceTrim|value-of<ConferenceTrim> $conferenceTrim
-     * @param list<CustomHeader|array{name: string, value: string}> $customHeaders
+     * @param list<CustomHeaderShape> $customHeaders
      * @param MachineDetection|value-of<MachineDetection> $machineDetection
      * @param RecordingChannels|value-of<RecordingChannels> $recordingChannels
      * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod> $recordingStatusCallbackMethod
@@ -761,7 +763,7 @@ final class ParticipantParticipantsParams implements BaseModel
     /**
      * Custom HTTP headers to be sent with the call. Each header should be an object with 'name' and 'value' properties.
      *
-     * @param list<CustomHeader|array{name: string, value: string}> $customHeaders
+     * @param list<CustomHeaderShape> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {

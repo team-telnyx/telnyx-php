@@ -16,12 +16,12 @@ use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Data\PhoneNumberType;
  *   administrativeArea?: string|null,
  *   advanceRequirements?: bool|null,
  *   count?: int|null,
- *   coverageType?: value-of<CoverageType>|null,
+ *   coverageType?: null|CoverageType|value-of<CoverageType>,
  *   group?: string|null,
  *   groupType?: string|null,
  *   numberRange?: int|null,
- *   numberType?: value-of<NumberType>|null,
- *   phoneNumberType?: value-of<PhoneNumberType>|null,
+ *   numberType?: null|NumberType|value-of<NumberType>,
+ *   phoneNumberType?: null|PhoneNumberType|value-of<PhoneNumberType>,
  *   recordType?: string|null,
  * }
  */

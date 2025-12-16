@@ -17,15 +17,16 @@ use Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Outbound;
  *
  * @see Telnyx\Services\ExternalConnectionsService::update()
  *
+ * @phpstan-import-type OutboundShape from \Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Outbound
+ * @phpstan-import-type InboundShape from \Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Inbound
+ *
  * @phpstan-type ExternalConnectionUpdateParamsShape = array{
- *   outbound: Outbound|array{
- *     outboundVoiceProfileID: string, channelLimit?: int|null
- *   },
- *   active?: bool,
- *   inbound?: Inbound|array{channelLimit?: int|null},
- *   tags?: list<string>,
+ *   outbound: OutboundShape,
+ *   active?: bool|null,
+ *   inbound?: InboundShape|null,
+ *   tags?: list<string>|null,
  *   webhookEventFailoverURL?: string|null,
- *   webhookEventURL?: string,
+ *   webhookEventURL?: string|null,
  *   webhookTimeoutSecs?: int|null,
  * }
  */
@@ -97,10 +98,8 @@ final class ExternalConnectionUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Outbound|array{
-     *   outboundVoiceProfileID: string, channelLimit?: int|null
-     * } $outbound
-     * @param Inbound|array{channelLimit?: int|null} $inbound
+     * @param OutboundShape $outbound
+     * @param InboundShape $inbound
      * @param list<string> $tags
      */
     public static function with(
@@ -127,9 +126,7 @@ final class ExternalConnectionUpdateParams implements BaseModel
     }
 
     /**
-     * @param Outbound|array{
-     *   outboundVoiceProfileID: string, channelLimit?: int|null
-     * } $outbound
+     * @param OutboundShape $outbound
      */
     public function withOutbound(Outbound|array $outbound): self
     {
@@ -151,7 +148,7 @@ final class ExternalConnectionUpdateParams implements BaseModel
     }
 
     /**
-     * @param Inbound|array{channelLimit?: int|null} $inbound
+     * @param InboundShape $inbound
      */
     public function withInbound(Inbound|array $inbound): self
     {

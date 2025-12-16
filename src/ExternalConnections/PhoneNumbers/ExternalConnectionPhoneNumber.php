@@ -11,7 +11,7 @@ use Telnyx\ExternalConnections\PhoneNumbers\ExternalConnectionPhoneNumber\Acquir
 
 /**
  * @phpstan-type ExternalConnectionPhoneNumberShape = array{
- *   acquiredCapabilities?: list<value-of<AcquiredCapability>>|null,
+ *   acquiredCapabilities?: list<AcquiredCapability|value-of<AcquiredCapability>>|null,
  *   civicAddressID?: string|null,
  *   displayedCountryCode?: string|null,
  *   locationID?: string|null,

@@ -11,6 +11,10 @@ use Telnyx\GlobalIPLatency\GlobalIPLatencyRetrieveParams\Filter\GlobalIPID\In;
 
 /**
  * Filter by exact Global IP ID.
+ *
+ * @phpstan-import-type InShape from \Telnyx\GlobalIPLatency\GlobalIPLatencyRetrieveParams\Filter\GlobalIPID\In
+ *
+ * @phpstan-type GlobalIPIDShape = string|InShape
  */
 final class GlobalIPID implements ConverterSource
 {

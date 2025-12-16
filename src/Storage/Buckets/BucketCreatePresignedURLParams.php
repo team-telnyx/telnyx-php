@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Storage\BucketsService::createPresignedURL()
  *
  * @phpstan-type BucketCreatePresignedURLParamsShape = array{
- *   bucketName: string, ttl?: int
+ *   bucketName: string, ttl?: int|null
  * }
  */
 final class BucketCreatePresignedURLParams implements BaseModel

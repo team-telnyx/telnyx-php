@@ -15,7 +15,7 @@ use Telnyx\NotificationChannels\NotificationChannel\ChannelTypeID;
  * @phpstan-type NotificationChannelShape = array{
  *   id?: string|null,
  *   channelDestination?: string|null,
- *   channelTypeID?: value-of<ChannelTypeID>|null,
+ *   channelTypeID?: null|ChannelTypeID|value-of<ChannelTypeID>,
  *   createdAt?: \DateTimeInterface|null,
  *   notificationProfileID?: string|null,
  *   updatedAt?: \DateTimeInterface|null,

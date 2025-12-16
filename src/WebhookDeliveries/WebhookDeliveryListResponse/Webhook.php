@@ -17,7 +17,7 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Webhook\RecordType;
  *   eventType?: string|null,
  *   occurredAt?: \DateTimeInterface|null,
  *   payload?: array<string,mixed>|null,
- *   recordType?: value-of<RecordType>|null,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  * }
  */
 final class Webhook implements BaseModel

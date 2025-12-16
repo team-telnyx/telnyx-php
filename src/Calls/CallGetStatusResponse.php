@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Telnyx\Calls;
 
 use Telnyx\Calls\CallGetStatusResponse\Data;
-use Telnyx\Calls\CallGetStatusResponse\Data\RecordType;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type CallGetStatusResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\Calls\CallGetStatusResponse\Data
+ *
+ * @phpstan-type CallGetStatusResponseShape = array{data?: null|Data|DataShape}
  */
 final class CallGetStatusResponse implements BaseModel
 {
@@ -31,17 +32,7 @@ final class CallGetStatusResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   callControlID: string,
-     *   callLegID: string,
-     *   callSessionID: string,
-     *   isAlive: bool,
-     *   recordType: value-of<RecordType>,
-     *   callDuration?: int|null,
-     *   clientState?: string|null,
-     *   endTime?: string|null,
-     *   startTime?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -53,17 +44,7 @@ final class CallGetStatusResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   callControlID: string,
-     *   callLegID: string,
-     *   callSessionID: string,
-     *   isAlive: bool,
-     *   recordType: value-of<RecordType>,
-     *   callDuration?: int|null,
-     *   clientState?: string|null,
-     *   endTime?: string|null,
-     *   startTime?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Legacy\Reporting\UsageReports\VoiceService::list()
  *
- * @phpstan-type VoiceListParamsShape = array{page?: int, perPage?: int}
+ * @phpstan-type VoiceListParamsShape = array{page?: int|null, perPage?: int|null}
  */
 final class VoiceListParams implements BaseModel
 {

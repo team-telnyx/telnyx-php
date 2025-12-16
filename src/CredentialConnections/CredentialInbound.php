@@ -12,10 +12,10 @@ use Telnyx\CredentialConnections\CredentialInbound\DnisNumberFormat;
 
 /**
  * @phpstan-type CredentialInboundShape = array{
- *   aniNumberFormat?: value-of<AniNumberFormat>|null,
+ *   aniNumberFormat?: null|AniNumberFormat|value-of<AniNumberFormat>,
  *   channelLimit?: int|null,
  *   codecs?: list<string>|null,
- *   dnisNumberFormat?: value-of<DnisNumberFormat>|null,
+ *   dnisNumberFormat?: null|DnisNumberFormat|value-of<DnisNumberFormat>,
  *   generateRingbackTone?: bool|null,
  *   isupHeadersEnabled?: bool|null,
  *   prackEnabled?: bool|null,

@@ -23,7 +23,7 @@ interface ParticipantsRawContract
      * @api
      *
      * @param string $callSidOrParticipantLabel callSid or Label of the Participant to update
-     * @param array<mixed>|ParticipantRetrieveParams $params
+     * @param array<string,mixed>|ParticipantRetrieveParams $params
      *
      * @return BaseResponse<ParticipantGetResponse>
      *
@@ -39,7 +39,7 @@ interface ParticipantsRawContract
      * @api
      *
      * @param string $callSidOrParticipantLabel path param: CallSid or Label of the Participant to update
-     * @param array<mixed>|ParticipantUpdateParams $params
+     * @param array<string,mixed>|ParticipantUpdateParams $params
      *
      * @return BaseResponse<ParticipantUpdateResponse>
      *
@@ -55,7 +55,7 @@ interface ParticipantsRawContract
      * @api
      *
      * @param string $callSidOrParticipantLabel callSid or Label of the Participant to update
-     * @param array<mixed>|ParticipantDeleteParams $params
+     * @param array<string,mixed>|ParticipantDeleteParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -71,7 +71,7 @@ interface ParticipantsRawContract
      * @api
      *
      * @param string $conferenceSid path param: The ConferenceSid that uniquely identifies a conference
-     * @param array<mixed>|ParticipantParticipantsParams $params
+     * @param array<string,mixed>|ParticipantParticipantsParams $params
      *
      * @return BaseResponse<ParticipantParticipantsResponse>
      *
@@ -87,7 +87,7 @@ interface ParticipantsRawContract
      * @api
      *
      * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
-     * @param array<mixed>|ParticipantRetrieveParticipantsParams $params
+     * @param array<string,mixed>|ParticipantRetrieveParticipantsParams $params
      *
      * @return BaseResponse<ParticipantGetParticipantsResponse>
      *

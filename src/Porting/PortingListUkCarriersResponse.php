@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\PortingListUkCarriersResponse\Data;
 
 /**
- * @phpstan-type PortingListUkCarriersResponseShape = array{data?: list<Data>|null}
+ * @phpstan-import-type DataShape from \Telnyx\Porting\PortingListUkCarriersResponse\Data
+ *
+ * @phpstan-type PortingListUkCarriersResponseShape = array{
+ *   data?: list<DataShape>|null
+ * }
  */
 final class PortingListUkCarriersResponse implements BaseModel
 {
@@ -31,15 +35,7 @@ final class PortingListUkCarriersResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   id?: string|null,
-     *   alternativeCupids?: list<string>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   cupid?: string|null,
-     *   name?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public static function with(?array $data = null): self
     {
@@ -51,15 +47,7 @@ final class PortingListUkCarriersResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   id?: string|null,
-     *   alternativeCupids?: list<string>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   cupid?: string|null,
-     *   name?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {

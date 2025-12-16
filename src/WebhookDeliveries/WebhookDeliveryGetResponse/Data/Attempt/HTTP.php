@@ -13,8 +13,11 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt\HTTP\Respon
 /**
  * HTTP request and response information.
  *
+ * @phpstan-import-type RequestShape from \Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt\HTTP\Request
+ * @phpstan-import-type ResponseShape from \Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt\HTTP\Response
+ *
  * @phpstan-type HTTPShape = array{
- *   request?: Request|null, response?: Response|null
+ *   request?: null|Request|RequestShape, response?: null|Response|ResponseShape
  * }
  */
 final class HTTP implements BaseModel
@@ -44,12 +47,8 @@ final class HTTP implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Request|array{
-     *   headers?: list<list<string>>|null, url?: string|null
-     * } $request
-     * @param Response|array{
-     *   body?: string|null, headers?: list<list<string>>|null, status?: int|null
-     * } $response
+     * @param RequestShape $request
+     * @param ResponseShape $response
      */
     public static function with(
         Request|array|null $request = null,
@@ -66,9 +65,7 @@ final class HTTP implements BaseModel
     /**
      * Request details.
      *
-     * @param Request|array{
-     *   headers?: list<list<string>>|null, url?: string|null
-     * } $request
+     * @param RequestShape $request
      */
     public function withRequest(Request|array $request): self
     {
@@ -81,9 +78,7 @@ final class HTTP implements BaseModel
     /**
      * Response details, optional.
      *
-     * @param Response|array{
-     *   body?: string|null, headers?: list<list<string>>|null, status?: int|null
-     * } $response
+     * @param ResponseShape $response
      */
     public function withResponse(Response|array $response): self
     {

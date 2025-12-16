@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Wireless\WirelessGetRegionsResponse\Data;
 
 /**
- * @phpstan-type WirelessGetRegionsResponseShape = array{data?: list<Data>|null}
+ * @phpstan-import-type DataShape from \Telnyx\Wireless\WirelessGetRegionsResponse\Data
+ *
+ * @phpstan-type WirelessGetRegionsResponseShape = array{
+ *   data?: list<DataShape>|null
+ * }
  */
 final class WirelessGetRegionsResponse implements BaseModel
 {
@@ -31,12 +35,7 @@ final class WirelessGetRegionsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   code: string,
-     *   name: string,
-     *   insertedAt?: \DateTimeInterface|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public static function with(?array $data = null): self
     {
@@ -48,12 +47,7 @@ final class WirelessGetRegionsResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   code: string,
-     *   name: string,
-     *   insertedAt?: \DateTimeInterface|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {

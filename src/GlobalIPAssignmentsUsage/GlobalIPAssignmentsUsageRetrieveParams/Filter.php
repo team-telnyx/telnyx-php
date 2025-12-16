@@ -12,9 +12,12 @@ use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filte
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[global_ip_assignment_id][in], filter[global_ip_id][in].
  *
+ * @phpstan-import-type GlobalIPAssignmentIDShape from \Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filter\GlobalIPAssignmentID
+ * @phpstan-import-type GlobalIPIDShape from \Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filter\GlobalIPID
+ *
  * @phpstan-type FilterShape = array{
- *   globalIPAssignmentID?: string|null|In,
- *   globalIPID?: string|null|\Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filter\GlobalIPID\In,
+ *   globalIPAssignmentID?: GlobalIPAssignmentIDShape|null,
+ *   globalIPID?: GlobalIPIDShape|null,
  * }
  */
 final class Filter implements BaseModel
@@ -44,10 +47,8 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param string|In|array{in?: string|null} $globalIPAssignmentID
-     * @param string|Filter\GlobalIPID\In|array{
-     *   in?: string|null
-     * } $globalIPID
+     * @param GlobalIPAssignmentIDShape $globalIPAssignmentID
+     * @param GlobalIPIDShape $globalIPID
      */
     public static function with(
         string|In|array|null $globalIPAssignmentID = null,
@@ -64,7 +65,7 @@ final class Filter implements BaseModel
     /**
      * Filter by exact Global IP Assignment ID.
      *
-     * @param string|In|array{in?: string|null} $globalIPAssignmentID
+     * @param GlobalIPAssignmentIDShape $globalIPAssignmentID
      */
     public function withGlobalIPAssignmentID(
         string|In|array $globalIPAssignmentID
@@ -78,9 +79,7 @@ final class Filter implements BaseModel
     /**
      * Filter by exact Global IP ID.
      *
-     * @param string|Filter\GlobalIPID\In|array{
-     *   in?: string|null
-     * } $globalIPID
+     * @param GlobalIPIDShape $globalIPID
      */
     public function withGlobalIpid(
         string|Filter\GlobalIPID\In|array $globalIPID,

@@ -14,12 +14,15 @@ use Telnyx\ExternalConnections\ExternalConnectionListParams\Filter\PhoneNumber;
 /**
  * Filter parameter for external connections (deepObject style). Supports filtering by connection_name, external_sip_connection, id, created_at, and phone_number.
  *
+ * @phpstan-import-type ConnectionNameShape from \Telnyx\ExternalConnections\ExternalConnectionListParams\Filter\ConnectionName
+ * @phpstan-import-type PhoneNumberShape from \Telnyx\ExternalConnections\ExternalConnectionListParams\Filter\PhoneNumber
+ *
  * @phpstan-type FilterShape = array{
  *   id?: string|null,
- *   connectionName?: ConnectionName|null,
+ *   connectionName?: null|ConnectionName|ConnectionNameShape,
  *   createdAt?: string|null,
- *   externalSipConnection?: value-of<ExternalSipConnection>|null,
- *   phoneNumber?: PhoneNumber|null,
+ *   externalSipConnection?: null|ExternalSipConnection|value-of<ExternalSipConnection>,
+ *   phoneNumber?: null|PhoneNumber|PhoneNumberShape,
  * }
  */
 final class Filter implements BaseModel
@@ -66,9 +69,9 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ConnectionName|array{contains?: string|null} $connectionName
+     * @param ConnectionNameShape $connectionName
      * @param ExternalSipConnection|value-of<ExternalSipConnection> $externalSipConnection
-     * @param PhoneNumber|array{contains?: string|null} $phoneNumber
+     * @param PhoneNumberShape $phoneNumber
      */
     public static function with(
         ?string $id = null,
@@ -100,7 +103,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param ConnectionName|array{contains?: string|null} $connectionName
+     * @param ConnectionNameShape $connectionName
      */
     public function withConnectionName(
         ConnectionName|array $connectionName
@@ -139,7 +142,7 @@ final class Filter implements BaseModel
     /**
      * Phone number filter for connections. Note: Despite the 'contains' name, this requires a full E164 match per the original specification.
      *
-     * @param PhoneNumber|array{contains?: string|null} $phoneNumber
+     * @param PhoneNumberShape $phoneNumber
      */
     public function withPhoneNumber(PhoneNumber|array $phoneNumber): self
     {

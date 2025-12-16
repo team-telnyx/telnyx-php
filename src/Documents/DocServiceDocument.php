@@ -12,17 +12,19 @@ use Telnyx\Documents\DocServiceDocument\Size;
 use Telnyx\Documents\DocServiceDocument\Status;
 
 /**
+ * @phpstan-import-type SizeShape from \Telnyx\Documents\DocServiceDocument\Size
+ *
  * @phpstan-type DocServiceDocumentShape = array{
  *   id?: string|null,
- *   avScanStatus?: value-of<AvScanStatus>|null,
+ *   avScanStatus?: null|AvScanStatus|value-of<AvScanStatus>,
  *   contentType?: string|null,
  *   createdAt?: string|null,
  *   customerReference?: string|null,
  *   filename?: string|null,
  *   recordType?: string|null,
  *   sha256?: string|null,
- *   size?: Size|null,
- *   status?: value-of<Status>|null,
+ *   size?: null|Size|SizeShape,
+ *   status?: null|Status|value-of<Status>,
  *   updatedAt?: string|null,
  * }
  */
@@ -112,7 +114,7 @@ final class DocServiceDocument implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param AvScanStatus|value-of<AvScanStatus> $avScanStatus
-     * @param Size|array{amount?: int|null, unit?: string|null} $size
+     * @param SizeShape $size
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -238,7 +240,7 @@ final class DocServiceDocument implements BaseModel
     /**
      * Indicates the document's filesize.
      *
-     * @param Size|array{amount?: int|null, unit?: string|null} $size
+     * @param SizeShape $size
      */
     public function withSize(Size|array $size): self
     {

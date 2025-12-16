@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type MediaURLShape = array{type?: 'media_url', value: string}
+ * @phpstan-type MediaURLShape = array{type: 'media_url', value: string}
  */
 final class MediaURL implements BaseModel
 {

@@ -7,14 +7,14 @@ namespace Telnyx\RecordingTranscriptions;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\RecordingTranscriptions\RecordingTranscription\RecordType;
-use Telnyx\RecordingTranscriptions\RecordingTranscription\Status;
 use Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse\Meta;
-use Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse\Meta\Cursors;
 
 /**
+ * @phpstan-import-type RecordingTranscriptionShape from \Telnyx\RecordingTranscriptions\RecordingTranscription
+ * @phpstan-import-type MetaShape from \Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse\Meta
+ *
  * @phpstan-type RecordingTranscriptionListResponseShape = array{
- *   data?: list<RecordingTranscription>|null, meta?: Meta|null
+ *   data?: list<RecordingTranscriptionShape>|null, meta?: null|Meta|MetaShape
  * }
  */
 final class RecordingTranscriptionListResponse implements BaseModel
@@ -39,19 +39,8 @@ final class RecordingTranscriptionListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RecordingTranscription|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   durationMillis?: int|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   recordingID?: string|null,
-     *   status?: value-of<Status>|null,
-     *   transcriptionText?: string|null,
-     *   updatedAt?: string|null,
-     * }> $data
-     * @param Meta|array{
-     *   cursors?: Cursors|null, next?: string|null, previous?: string|null
-     * } $meta
+     * @param list<RecordingTranscriptionShape> $data
+     * @param MetaShape $meta
      */
     public static function with(
         ?array $data = null,
@@ -66,16 +55,7 @@ final class RecordingTranscriptionListResponse implements BaseModel
     }
 
     /**
-     * @param list<RecordingTranscription|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   durationMillis?: int|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   recordingID?: string|null,
-     *   status?: value-of<Status>|null,
-     *   transcriptionText?: string|null,
-     *   updatedAt?: string|null,
-     * }> $data
+     * @param list<RecordingTranscriptionShape> $data
      */
     public function withData(array $data): self
     {
@@ -86,9 +66,7 @@ final class RecordingTranscriptionListResponse implements BaseModel
     }
 
     /**
-     * @param Meta|array{
-     *   cursors?: Cursors|null, next?: string|null, previous?: string|null
-     * } $meta
+     * @param MetaShape $meta
      */
     public function withMeta(Meta|array $meta): self
     {

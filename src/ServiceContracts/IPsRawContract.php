@@ -22,7 +22,7 @@ interface IPsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|IPCreateParams $params
+     * @param array<string,mixed>|IPCreateParams $params
      *
      * @return BaseResponse<IPNewResponse>
      *
@@ -51,7 +51,7 @@ interface IPsRawContract
      * @api
      *
      * @param string $id identifies the type of resource
-     * @param array<mixed>|IPUpdateParams $params
+     * @param array<string,mixed>|IPUpdateParams $params
      *
      * @return BaseResponse<IPUpdateResponse>
      *
@@ -66,7 +66,7 @@ interface IPsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|IPListParams $params
+     * @param array<string,mixed>|IPListParams $params
      *
      * @return BaseResponse<DefaultPagination<IP>>
      *

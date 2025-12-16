@@ -10,11 +10,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type TranscriptionSettingsConfigShape from \Telnyx\AI\Assistants\TranscriptionSettingsConfig
+ *
  * @phpstan-type TranscriptionSettingsShape = array{
  *   language?: string|null,
- *   model?: value-of<Model>|null,
+ *   model?: null|Model|value-of<Model>,
  *   region?: string|null,
- *   settings?: TranscriptionSettingsConfig|null,
+ *   settings?: null|TranscriptionSettingsConfig|TranscriptionSettingsConfigShape,
  * }
  */
 final class TranscriptionSettings implements BaseModel
@@ -59,12 +61,7 @@ final class TranscriptionSettings implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Model|value-of<Model> $model
-     * @param TranscriptionSettingsConfig|array{
-     *   eotThreshold?: float|null,
-     *   eotTimeoutMs?: int|null,
-     *   numerals?: bool|null,
-     *   smartFormat?: bool|null,
-     * } $settings
+     * @param TranscriptionSettingsConfigShape $settings
      */
     public static function with(
         ?string $language = null,
@@ -121,12 +118,7 @@ final class TranscriptionSettings implements BaseModel
     }
 
     /**
-     * @param TranscriptionSettingsConfig|array{
-     *   eotThreshold?: float|null,
-     *   eotTimeoutMs?: int|null,
-     *   numerals?: bool|null,
-     *   smartFormat?: bool|null,
-     * } $settings
+     * @param TranscriptionSettingsConfigShape $settings
      */
     public function withSettings(
         TranscriptionSettingsConfig|array $settings

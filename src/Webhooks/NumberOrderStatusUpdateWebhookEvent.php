@@ -7,13 +7,15 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\NumberOrders\NumberOrderWithPhoneNumbers;
 use Telnyx\Webhooks\NumberOrderStatusUpdateWebhookEvent\Data;
 use Telnyx\Webhooks\NumberOrderStatusUpdateWebhookEvent\Meta;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\Webhooks\NumberOrderStatusUpdateWebhookEvent\Data
+ * @phpstan-import-type MetaShape from \Telnyx\Webhooks\NumberOrderStatusUpdateWebhookEvent\Meta
+ *
  * @phpstan-type NumberOrderStatusUpdateWebhookEventShape = array{
- *   data: Data, meta: Meta
+ *   data: Data|DataShape, meta: Meta|MetaShape
  * }
  */
 final class NumberOrderStatusUpdateWebhookEvent implements BaseModel
@@ -51,14 +53,8 @@ final class NumberOrderStatusUpdateWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   id: string,
-     *   eventType: string,
-     *   occurredAt: \DateTimeInterface,
-     *   payload: NumberOrderWithPhoneNumbers,
-     *   recordType: string,
-     * } $data
-     * @param Meta|array{attempt: int, deliveredTo: string} $meta
+     * @param DataShape $data
+     * @param MetaShape $meta
      */
     public static function with(Data|array $data, Meta|array $meta): self
     {
@@ -71,13 +67,7 @@ final class NumberOrderStatusUpdateWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   id: string,
-     *   eventType: string,
-     *   occurredAt: \DateTimeInterface,
-     *   payload: NumberOrderWithPhoneNumbers,
-     *   recordType: string,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {
@@ -88,7 +78,7 @@ final class NumberOrderStatusUpdateWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Meta|array{attempt: int, deliveredTo: string} $meta
+     * @param MetaShape $meta
      */
     public function withMeta(Meta|array $meta): self
     {

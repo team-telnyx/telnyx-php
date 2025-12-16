@@ -15,11 +15,11 @@ use Telnyx\RequirementGroups\RequirementGroupUpdateParams\RegulatoryRequirement;
  *
  * @see Telnyx\Services\RequirementGroupsService::update()
  *
+ * @phpstan-import-type RegulatoryRequirementShape from \Telnyx\RequirementGroups\RequirementGroupUpdateParams\RegulatoryRequirement
+ *
  * @phpstan-type RequirementGroupUpdateParamsShape = array{
- *   customerReference?: string,
- *   regulatoryRequirements?: list<RegulatoryRequirement|array{
- *     fieldValue?: string|null, requirementID?: string|null
- *   }>,
+ *   customerReference?: string|null,
+ *   regulatoryRequirements?: list<RegulatoryRequirementShape>|null,
  * }
  */
 final class RequirementGroupUpdateParams implements BaseModel
@@ -48,9 +48,7 @@ final class RequirementGroupUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RegulatoryRequirement|array{
-     *   fieldValue?: string|null, requirementID?: string|null
-     * }> $regulatoryRequirements
+     * @param list<RegulatoryRequirementShape> $regulatoryRequirements
      */
     public static function with(
         ?string $customerReference = null,
@@ -76,9 +74,7 @@ final class RequirementGroupUpdateParams implements BaseModel
     }
 
     /**
-     * @param list<RegulatoryRequirement|array{
-     *   fieldValue?: string|null, requirementID?: string|null
-     * }> $regulatoryRequirements
+     * @param list<RegulatoryRequirementShape> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements

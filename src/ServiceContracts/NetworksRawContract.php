@@ -24,7 +24,7 @@ interface NetworksRawContract
     /**
      * @api
      *
-     * @param array<mixed>|NetworkCreateParams $params
+     * @param array<string,mixed>|NetworkCreateParams $params
      *
      * @return BaseResponse<NetworkNewResponse>
      *
@@ -53,7 +53,7 @@ interface NetworksRawContract
      * @api
      *
      * @param string $networkID identifies the resource
-     * @param array<mixed>|NetworkUpdateParams $params
+     * @param array<string,mixed>|NetworkUpdateParams $params
      *
      * @return BaseResponse<NetworkUpdateResponse>
      *
@@ -68,7 +68,7 @@ interface NetworksRawContract
     /**
      * @api
      *
-     * @param array<mixed>|NetworkListParams $params
+     * @param array<string,mixed>|NetworkListParams $params
      *
      * @return BaseResponse<DefaultPagination<NetworkListResponse>>
      *
@@ -97,7 +97,7 @@ interface NetworksRawContract
      * @api
      *
      * @param string $id identifies the resource
-     * @param array<mixed>|NetworkListInterfacesParams $params
+     * @param array<string,mixed>|NetworkListInterfacesParams $params
      *
      * @return BaseResponse<DefaultPagination<NetworkListInterfacesResponse>>
      *

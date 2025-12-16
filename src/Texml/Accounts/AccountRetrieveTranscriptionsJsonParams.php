@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Texml\AccountsService::retrieveTranscriptionsJson()
  *
  * @phpstan-type AccountRetrieveTranscriptionsJsonParamsShape = array{
- *   pageSize?: int, pageToken?: string
+ *   pageSize?: int|null, pageToken?: string|null
  * }
  */
 final class AccountRetrieveTranscriptionsJsonParams implements BaseModel

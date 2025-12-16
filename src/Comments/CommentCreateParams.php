@@ -16,9 +16,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\CommentsService::create()
  *
  * @phpstan-type CommentCreateParamsShape = array{
- *   body?: string,
- *   commentRecordID?: string,
- *   commentRecordType?: CommentRecordType|value-of<CommentRecordType>,
+ *   body?: string|null,
+ *   commentRecordID?: string|null,
+ *   commentRecordType?: null|CommentRecordType|value-of<CommentRecordType>,
  * }
  */
 final class CommentCreateParams implements BaseModel

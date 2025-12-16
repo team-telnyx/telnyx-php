@@ -19,7 +19,7 @@ interface DetailRecordsReportsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|DetailRecordsReportCreateParams $params
+     * @param array<string,mixed>|DetailRecordsReportCreateParams $params
      *
      * @return BaseResponse<DetailRecordsReportNewResponse>
      *
@@ -47,7 +47,7 @@ interface DetailRecordsReportsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|DetailRecordsReportListParams $params
+     * @param array<string,mixed>|DetailRecordsReportListParams $params
      *
      * @return BaseResponse<DetailRecordsReportListResponse>
      *

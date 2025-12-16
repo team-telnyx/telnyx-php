@@ -20,7 +20,7 @@ interface PublicInternetGatewaysRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PublicInternetGatewayCreateParams $params
+     * @param array<string,mixed>|PublicInternetGatewayCreateParams $params
      *
      * @return BaseResponse<PublicInternetGatewayNewResponse>
      *
@@ -48,7 +48,7 @@ interface PublicInternetGatewaysRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PublicInternetGatewayListParams $params
+     * @param array<string,mixed>|PublicInternetGatewayListParams $params
      *
      * @return BaseResponse<DefaultPagination<PublicInternetGatewayListResponse>>
      *

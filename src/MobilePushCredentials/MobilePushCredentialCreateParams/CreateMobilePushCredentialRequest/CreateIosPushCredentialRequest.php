@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type CreateIosPushCredentialRequestShape = array{
- *   alias: string, certificate: string, privateKey: string, type?: 'ios'
+ *   alias: string, certificate: string, privateKey: string, type: 'ios'
  * }
  */
 final class CreateIosPushCredentialRequest implements BaseModel

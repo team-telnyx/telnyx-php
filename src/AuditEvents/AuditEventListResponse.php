@@ -11,12 +11,14 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type ChangeShape from \Telnyx\AuditEvents\AuditEventListResponse\Change
+ *
  * @phpstan-type AuditEventListResponseShape = array{
  *   id?: string|null,
  *   alternateResourceID?: string|null,
- *   changeMadeBy?: value-of<ChangeMadeBy>|null,
+ *   changeMadeBy?: null|ChangeMadeBy|value-of<ChangeMadeBy>,
  *   changeType?: string|null,
- *   changes?: list<Change>|null,
+ *   changes?: list<ChangeShape>|null,
  *   createdAt?: \DateTimeInterface|null,
  *   organizationID?: string|null,
  *   recordType?: string|null,
@@ -104,11 +106,7 @@ final class AuditEventListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param ChangeMadeBy|value-of<ChangeMadeBy> $changeMadeBy
-     * @param list<Change|array{
-     *   field?: string|null,
-     *   from?: string|float|bool|list<array<string,mixed>>|array<string,mixed>|null,
-     *   to?: string|float|bool|list<array<string,mixed>>|array<string,mixed>|null,
-     * }>|null $changes
+     * @param list<ChangeShape>|null $changes
      */
     public static function with(
         ?string $id = null,
@@ -187,11 +185,7 @@ final class AuditEventListResponse implements BaseModel
     /**
      * Details of the changes made to the resource.
      *
-     * @param list<Change|array{
-     *   field?: string|null,
-     *   from?: string|float|bool|list<array<string,mixed>>|array<string,mixed>|null,
-     *   to?: string|float|bool|list<array<string,mixed>>|array<string,mixed>|null,
-     * }>|null $changes
+     * @param list<ChangeShape>|null $changes
      */
     public function withChanges(?array $changes): self
     {

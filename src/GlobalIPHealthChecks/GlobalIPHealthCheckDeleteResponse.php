@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckDeleteResponse\Data;
 
 /**
- * @phpstan-type GlobalIPHealthCheckDeleteResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckDeleteResponse\Data
+ *
+ * @phpstan-type GlobalIPHealthCheckDeleteResponseShape = array{
+ *   data?: null|Data|DataShape
+ * }
  */
 final class GlobalIPHealthCheckDeleteResponse implements BaseModel
 {
@@ -30,15 +34,7 @@ final class GlobalIPHealthCheckDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     *   globalIPID?: string|null,
-     *   healthCheckParams?: array<string,mixed>|null,
-     *   healthCheckType?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -50,15 +46,7 @@ final class GlobalIPHealthCheckDeleteResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     *   globalIPID?: string|null,
-     *   healthCheckParams?: array<string,mixed>|null,
-     *   healthCheckType?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

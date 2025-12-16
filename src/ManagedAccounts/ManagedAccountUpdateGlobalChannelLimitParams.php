@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\ManagedAccountsService::updateGlobalChannelLimit()
  *
  * @phpstan-type ManagedAccountUpdateGlobalChannelLimitParamsShape = array{
- *   channelLimit?: int
+ *   channelLimit?: int|null
  * }
  */
 final class ManagedAccountUpdateGlobalChannelLimitParams implements BaseModel

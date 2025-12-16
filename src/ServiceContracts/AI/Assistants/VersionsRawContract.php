@@ -20,7 +20,7 @@ interface VersionsRawContract
      * @api
      *
      * @param string $versionID Path param:
-     * @param array<mixed>|VersionRetrieveParams $params
+     * @param array<string,mixed>|VersionRetrieveParams $params
      *
      * @return BaseResponse<InferenceEmbedding>
      *
@@ -36,7 +36,7 @@ interface VersionsRawContract
      * @api
      *
      * @param string $versionID Path param:
-     * @param array<mixed>|VersionUpdateParams $params
+     * @param array<string,mixed>|VersionUpdateParams $params
      *
      * @return BaseResponse<InferenceEmbedding>
      *
@@ -63,7 +63,7 @@ interface VersionsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|VersionDeleteParams $params
+     * @param array<string,mixed>|VersionDeleteParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -78,7 +78,7 @@ interface VersionsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|VersionPromoteParams $params
+     * @param array<string,mixed>|VersionPromoteParams $params
      *
      * @return BaseResponse<InferenceEmbedding>
      *

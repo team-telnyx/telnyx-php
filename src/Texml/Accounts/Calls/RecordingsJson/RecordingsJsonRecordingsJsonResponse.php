@@ -24,9 +24,9 @@ use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonRespo
  *   price?: string|null,
  *   priceUnit?: string|null,
  *   sid?: string|null,
- *   source?: value-of<Source>|null,
+ *   source?: null|Source|value-of<Source>,
  *   startTime?: \DateTimeInterface|null,
- *   track?: value-of<Track>|null,
+ *   track?: null|Track|value-of<Track>,
  *   uri?: string|null,
  * }
  */

@@ -22,7 +22,7 @@ interface ConferencesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ConferenceCreateParams $params
+     * @param array<string,mixed>|ConferenceCreateParams $params
      *
      * @return BaseResponse<ConferenceNewResponse>
      *
@@ -37,7 +37,7 @@ interface ConferencesRawContract
      * @api
      *
      * @param string $id Uniquely identifies the conference by id
-     * @param array<mixed>|ConferenceRetrieveParams $params
+     * @param array<string,mixed>|ConferenceRetrieveParams $params
      *
      * @return BaseResponse<ConferenceGetResponse>
      *
@@ -52,7 +52,7 @@ interface ConferencesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ConferenceListParams $params
+     * @param array<string,mixed>|ConferenceListParams $params
      *
      * @return BaseResponse<DefaultPagination<Conference>>
      *
@@ -67,7 +67,7 @@ interface ConferencesRawContract
      * @api
      *
      * @param string $conferenceID Uniquely identifies the conference by id
-     * @param array<mixed>|ConferenceListParticipantsParams $params
+     * @param array<string,mixed>|ConferenceListParticipantsParams $params
      *
      * @return BaseResponse<DefaultPagination<ConferenceListParticipantsResponse>>
      *

@@ -14,7 +14,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Rooms\SessionsService::retrieve()
  *
- * @phpstan-type SessionRetrieveParamsShape = array{includeParticipants?: bool}
+ * @phpstan-type SessionRetrieveParamsShape = array{
+ *   includeParticipants?: bool|null
+ * }
  */
 final class SessionRetrieveParams implements BaseModel
 {

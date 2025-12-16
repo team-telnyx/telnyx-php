@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\IPsService::update()
  *
  * @phpstan-type IPUpdateParamsShape = array{
- *   ipAddress: string, connectionID?: string, port?: int
+ *   ipAddress: string, connectionID?: string|null, port?: int|null
  * }
  */
 final class IPUpdateParams implements BaseModel

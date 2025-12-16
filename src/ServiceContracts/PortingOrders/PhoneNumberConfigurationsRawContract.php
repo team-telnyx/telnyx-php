@@ -18,7 +18,7 @@ interface PhoneNumberConfigurationsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PhoneNumberConfigurationCreateParams $params
+     * @param array<string,mixed>|PhoneNumberConfigurationCreateParams $params
      *
      * @return BaseResponse<PhoneNumberConfigurationNewResponse>
      *
@@ -32,7 +32,7 @@ interface PhoneNumberConfigurationsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PhoneNumberConfigurationListParams $params
+     * @param array<string,mixed>|PhoneNumberConfigurationListParams $params
      *
      * @return BaseResponse<DefaultPagination<PhoneNumberConfigurationListResponse>>
      *

@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Messages\RcsService::generateDeeplink()
  *
  * @phpstan-type RcGenerateDeeplinkParamsShape = array{
- *   body?: string, phoneNumber?: string
+ *   body?: string|null, phoneNumber?: string|null
  * }
  */
 final class RcGenerateDeeplinkParams implements BaseModel

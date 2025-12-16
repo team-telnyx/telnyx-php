@@ -7,23 +7,24 @@ namespace Telnyx\MobilePhoneNumbers\Messaging;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\MessagingFeatureSet;
 use Telnyx\MobilePhoneNumbers\Messaging\MessagingListResponse\Features;
 use Telnyx\MobilePhoneNumbers\Messaging\MessagingListResponse\RecordType;
 use Telnyx\MobilePhoneNumbers\Messaging\MessagingListResponse\Type;
 
 /**
+ * @phpstan-import-type FeaturesShape from \Telnyx\MobilePhoneNumbers\Messaging\MessagingListResponse\Features
+ *
  * @phpstan-type MessagingListResponseShape = array{
  *   id?: string|null,
  *   countryCode?: string|null,
  *   createdAt?: \DateTimeInterface|null,
- *   features?: Features|null,
+ *   features?: null|Features|FeaturesShape,
  *   messagingProduct?: string|null,
  *   messagingProfileID?: string|null,
  *   phoneNumber?: string|null,
- *   recordType?: value-of<RecordType>|null,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  *   trafficType?: string|null,
- *   type?: value-of<Type>|null,
+ *   type?: null|Type|value-of<Type>,
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */
@@ -109,7 +110,7 @@ final class MessagingListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Features|array{sms?: MessagingFeatureSet|null} $features
+     * @param FeaturesShape $features
      * @param RecordType|value-of<RecordType> $recordType
      * @param Type|value-of<Type> $type
      */
@@ -177,7 +178,7 @@ final class MessagingListResponse implements BaseModel
     }
 
     /**
-     * @param Features|array{sms?: MessagingFeatureSet|null} $features
+     * @param FeaturesShape $features
      */
     public function withFeatures(Features|array $features): self
     {

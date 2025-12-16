@@ -23,7 +23,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsRes
  *   endConferenceOnExit?: bool|null,
  *   hold?: bool|null,
  *   muted?: bool|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   uri?: string|null,
  * }
  */

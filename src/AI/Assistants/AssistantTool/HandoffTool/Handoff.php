@@ -12,8 +12,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type AIAssistantShape from \Telnyx\AI\Assistants\AssistantTool\HandoffTool\Handoff\AIAssistant
+ *
  * @phpstan-type HandoffShape = array{
- *   aiAssistants: list<AIAssistant>, voiceMode?: value-of<VoiceMode>|null
+ *   aiAssistants: list<AIAssistantShape>,
+ *   voiceMode?: null|VoiceMode|value-of<VoiceMode>,
  * }
  */
 final class Handoff implements BaseModel
@@ -61,7 +64,7 @@ final class Handoff implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AIAssistant|array{id: string, name: string}> $aiAssistants
+     * @param list<AIAssistantShape> $aiAssistants
      * @param VoiceMode|value-of<VoiceMode> $voiceMode
      */
     public static function with(
@@ -80,7 +83,7 @@ final class Handoff implements BaseModel
     /**
      * List of possible assistants that can receive a handoff.
      *
-     * @param list<AIAssistant|array{id: string, name: string}> $aiAssistants
+     * @param list<AIAssistantShape> $aiAssistants
      */
     public function withAIAssistants(array $aiAssistants): self
     {

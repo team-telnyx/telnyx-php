@@ -21,10 +21,10 @@ use Telnyx\OAuth\OAuthRetrieveAuthorizeParams\ResponseType;
  *   clientID: string,
  *   redirectUri: string,
  *   responseType: ResponseType|value-of<ResponseType>,
- *   codeChallenge?: string,
- *   codeChallengeMethod?: CodeChallengeMethod|value-of<CodeChallengeMethod>,
- *   scope?: string,
- *   state?: string,
+ *   codeChallenge?: string|null,
+ *   codeChallengeMethod?: null|CodeChallengeMethod|value-of<CodeChallengeMethod>,
+ *   scope?: string|null,
+ *   state?: string|null,
  * }
  */
 final class OAuthRetrieveAuthorizeParams implements BaseModel

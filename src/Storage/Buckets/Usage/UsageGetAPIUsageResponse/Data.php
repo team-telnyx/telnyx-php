@@ -7,15 +7,17 @@ namespace Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data\Category1;
-use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data\Category1\Category;
+use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data\Category1 as Category;
 use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data\Total;
 
 /**
+ * @phpstan-import-type Category1Shape from \Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data\Category1
+ * @phpstan-import-type TotalShape from \Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data\Total
+ *
  * @phpstan-type DataShape = array{
- *   categories?: list<Category1>|null,
+ *   categories?: list<Category1Shape>|null,
  *   timestamp?: \DateTimeInterface|null,
- *   total?: Total|null,
+ *   total?: null|Total|TotalShape,
  * }
  */
 final class Data implements BaseModel
@@ -23,8 +25,8 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    /** @var list<Category1>|null $categories */
-    #[Optional(list: Category1::class)]
+    /** @var list<Category>|null $categories */
+    #[Optional(list: Category::class)]
     public ?array $categories;
 
     /**
@@ -46,19 +48,8 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Category1|array{
-     *   bytesReceived?: int|null,
-     *   bytesSent?: int|null,
-     *   category?: value-of<Category>|null,
-     *   ops?: int|null,
-     *   successfulOps?: int|null,
-     * }> $categories
-     * @param Total|array{
-     *   bytesReceived?: int|null,
-     *   bytesSent?: int|null,
-     *   ops?: int|null,
-     *   successfulOps?: int|null,
-     * } $total
+     * @param list<Category1Shape> $categories
+     * @param TotalShape $total
      */
     public static function with(
         ?array $categories = null,
@@ -75,13 +66,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<Category1|array{
-     *   bytesReceived?: int|null,
-     *   bytesSent?: int|null,
-     *   category?: value-of<Category>|null,
-     *   ops?: int|null,
-     *   successfulOps?: int|null,
-     * }> $categories
+     * @param list<Category1Shape> $categories
      */
     public function withCategories(array $categories): self
     {
@@ -103,12 +88,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param Total|array{
-     *   bytesReceived?: int|null,
-     *   bytesSent?: int|null,
-     *   ops?: int|null,
-     *   successfulOps?: int|null,
-     * } $total
+     * @param TotalShape $total
      */
     public function withTotal(Total|array $total): self
     {

@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Storage\Buckets\BucketNewPresignedURLResponse\Content;
 
 /**
- * @phpstan-type BucketNewPresignedURLResponseShape = array{content?: Content|null}
+ * @phpstan-import-type ContentShape from \Telnyx\Storage\Buckets\BucketNewPresignedURLResponse\Content
+ *
+ * @phpstan-type BucketNewPresignedURLResponseShape = array{
+ *   content?: null|Content|ContentShape
+ * }
  */
 final class BucketNewPresignedURLResponse implements BaseModel
 {
@@ -30,11 +34,7 @@ final class BucketNewPresignedURLResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Content|array{
-     *   token?: string|null,
-     *   expiresAt?: \DateTimeInterface|null,
-     *   presignedURL?: string|null,
-     * } $content
+     * @param ContentShape $content
      */
     public static function with(Content|array|null $content = null): self
     {
@@ -46,11 +46,7 @@ final class BucketNewPresignedURLResponse implements BaseModel
     }
 
     /**
-     * @param Content|array{
-     *   token?: string|null,
-     *   expiresAt?: \DateTimeInterface|null,
-     *   presignedURL?: string|null,
-     * } $content
+     * @param ContentShape $content
      */
     public function withContent(Content|array $content): self
     {

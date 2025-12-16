@@ -19,7 +19,7 @@ interface CustomStorageCredentialsRawContract
      * @api
      *
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control, TeXML) or Sip connection resource
-     * @param array<mixed>|CustomStorageCredentialCreateParams $params
+     * @param array<string,mixed>|CustomStorageCredentialCreateParams $params
      *
      * @return BaseResponse<CustomStorageCredentialNewResponse>
      *
@@ -49,7 +49,7 @@ interface CustomStorageCredentialsRawContract
      * @api
      *
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control, TeXML) or Sip connection resource
-     * @param array<mixed>|CustomStorageCredentialUpdateParams $params
+     * @param array<string,mixed>|CustomStorageCredentialUpdateParams $params
      *
      * @return BaseResponse<CustomStorageCredentialUpdateResponse>
      *

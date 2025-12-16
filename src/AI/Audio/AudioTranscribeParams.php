@@ -20,10 +20,10 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type AudioTranscribeParamsShape = array{
  *   model: Model|value-of<Model>,
- *   file?: string,
- *   fileURL?: string,
- *   responseFormat?: ResponseFormat|value-of<ResponseFormat>,
- *   timestampGranularities?: TimestampGranularities|value-of<TimestampGranularities>,
+ *   file?: string|null,
+ *   fileURL?: string|null,
+ *   responseFormat?: null|ResponseFormat|value-of<ResponseFormat>,
+ *   timestampGranularities?: null|TimestampGranularities|value-of<TimestampGranularities>,
  * }
  */
 final class AudioTranscribeParams implements BaseModel

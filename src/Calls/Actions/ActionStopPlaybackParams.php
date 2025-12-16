@@ -19,7 +19,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Calls\ActionsService::stopPlayback()
  *
  * @phpstan-type ActionStopPlaybackParamsShape = array{
- *   clientState?: string, commandID?: string, overlay?: bool, stop?: string
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   overlay?: bool|null,
+ *   stop?: string|null,
  * }
  */
 final class ActionStopPlaybackParams implements BaseModel

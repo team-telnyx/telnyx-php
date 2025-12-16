@@ -15,14 +15,14 @@ use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse\RequirementsStatus
 
 /**
  * @phpstan-type PortingPhoneNumberListResponseShape = array{
- *   activationStatus?: value-of<ActivationStatus>|null,
+ *   activationStatus?: null|ActivationStatus|value-of<ActivationStatus>,
  *   phoneNumber?: string|null,
- *   phoneNumberType?: value-of<PhoneNumberType>|null,
- *   portabilityStatus?: value-of<PortabilityStatus>|null,
+ *   phoneNumberType?: null|PhoneNumberType|value-of<PhoneNumberType>,
+ *   portabilityStatus?: null|PortabilityStatus|value-of<PortabilityStatus>,
  *   portingOrderID?: string|null,
- *   portingOrderStatus?: value-of<PortingOrderStatus>|null,
+ *   portingOrderStatus?: null|PortingOrderStatus|value-of<PortingOrderStatus>,
  *   recordType?: string|null,
- *   requirementsStatus?: value-of<RequirementsStatus>|null,
+ *   requirementsStatus?: null|RequirementsStatus|value-of<RequirementsStatus>,
  *   supportKey?: string|null,
  * }
  */

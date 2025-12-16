@@ -8,11 +8,11 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse\Data;
-use Telnyx\ExternalConnections\Releases\ReleaseGetResponse\Data\Status;
-use Telnyx\ExternalConnections\Releases\ReleaseGetResponse\Data\TelephoneNumber;
 
 /**
- * @phpstan-type ReleaseGetResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\ExternalConnections\Releases\ReleaseGetResponse\Data
+ *
+ * @phpstan-type ReleaseGetResponseShape = array{data?: null|Data|DataShape}
  */
 final class ReleaseGetResponse implements BaseModel
 {
@@ -32,14 +32,7 @@ final class ReleaseGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   createdAt?: string|null,
-     *   errorMessage?: string|null,
-     *   status?: value-of<Status>|null,
-     *   telephoneNumbers?: list<TelephoneNumber>|null,
-     *   tenantID?: string|null,
-     *   ticketID?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -51,14 +44,7 @@ final class ReleaseGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   createdAt?: string|null,
-     *   errorMessage?: string|null,
-     *   status?: value-of<Status>|null,
-     *   telephoneNumbers?: list<TelephoneNumber>|null,
-     *   tenantID?: string|null,
-     *   ticketID?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

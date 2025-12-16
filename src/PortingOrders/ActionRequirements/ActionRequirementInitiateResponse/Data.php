@@ -18,9 +18,9 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse\Da
  *   cancelReason?: string|null,
  *   createdAt?: \DateTimeInterface|null,
  *   portingOrderID?: string|null,
- *   recordType?: value-of<RecordType>|null,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  *   requirementTypeID?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */

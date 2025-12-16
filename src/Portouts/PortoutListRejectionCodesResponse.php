@@ -10,8 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\PortoutListRejectionCodesResponse\Data;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\Portouts\PortoutListRejectionCodesResponse\Data
+ *
  * @phpstan-type PortoutListRejectionCodesResponseShape = array{
- *   data?: list<Data>|null
+ *   data?: list<DataShape>|null
  * }
  */
 final class PortoutListRejectionCodesResponse implements BaseModel
@@ -33,9 +35,7 @@ final class PortoutListRejectionCodesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   code?: int|null, description?: string|null, reasonRequired?: bool|null
-     * }> $data
+     * @param list<DataShape> $data
      */
     public static function with(?array $data = null): self
     {
@@ -47,9 +47,7 @@ final class PortoutListRejectionCodesResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   code?: int|null, description?: string|null, reasonRequired?: bool|null
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {

@@ -9,7 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Filter;
-use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Filter\Name;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Page;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Sort;
 
@@ -18,10 +17,13 @@ use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Sort;
  *
  * @see Telnyx\Services\OutboundVoiceProfilesService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Page
+ *
  * @phpstan-type OutboundVoiceProfileListParamsShape = array{
- *   filter?: Filter|array{name?: Name|null},
- *   page?: Page|array{number?: int|null, size?: int|null},
- *   sort?: Sort|value-of<Sort>,
+ *   filter?: FilterShape|null,
+ *   page?: PageShape|null,
+ *   sort?: null|Sort|value-of<Sort>,
  * }
  */
 final class OutboundVoiceProfileListParams implements BaseModel
@@ -71,8 +73,8 @@ final class OutboundVoiceProfileListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{name?: Name|null} $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
@@ -92,7 +94,7 @@ final class OutboundVoiceProfileListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[name][contains].
      *
-     * @param Filter|array{name?: Name|null} $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -105,7 +107,7 @@ final class OutboundVoiceProfileListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

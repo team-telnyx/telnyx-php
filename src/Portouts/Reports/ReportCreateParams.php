@@ -8,7 +8,6 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Portouts\Reports\ExportPortoutsCsvReport\Filters;
 use Telnyx\Portouts\Reports\ReportCreateParams\ReportType;
 
 /**
@@ -16,8 +15,10 @@ use Telnyx\Portouts\Reports\ReportCreateParams\ReportType;
  *
  * @see Telnyx\Services\Portouts\ReportsService::create()
  *
+ * @phpstan-import-type ExportPortoutsCsvReportShape from \Telnyx\Portouts\Reports\ExportPortoutsCsvReport
+ *
  * @phpstan-type ReportCreateParamsShape = array{
- *   params: ExportPortoutsCsvReport|array{filters: Filters},
+ *   params: ExportPortoutsCsvReportShape,
  *   reportType: ReportType|value-of<ReportType>,
  * }
  */
@@ -65,7 +66,7 @@ final class ReportCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExportPortoutsCsvReport|array{filters: Filters} $params
+     * @param ExportPortoutsCsvReportShape $params
      * @param ReportType|value-of<ReportType> $reportType
      */
     public static function with(
@@ -83,7 +84,7 @@ final class ReportCreateParams implements BaseModel
     /**
      * The parameters for generating a port-outs CSV report.
      *
-     * @param ExportPortoutsCsvReport|array{filters: Filters} $params
+     * @param ExportPortoutsCsvReportShape $params
      */
     public function withParams(ExportPortoutsCsvReport|array $params): self
     {

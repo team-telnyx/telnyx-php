@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type SipHeaderShape = array{
- *   name?: value-of<Name>|null, value?: string|null
+ *   name?: null|Name|value-of<Name>, value?: string|null
  * }
  */
 final class SipHeader implements BaseModel

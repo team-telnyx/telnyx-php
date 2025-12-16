@@ -8,10 +8,11 @@ use Telnyx\AI\Clusters\ClusterGetResponse\Data;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Messaging10dlc\PhoneNumberAssignmentByProfile\TaskStatus;
 
 /**
- * @phpstan-type ClusterGetResponseShape = array{data: Data}
+ * @phpstan-import-type DataShape from \Telnyx\AI\Clusters\ClusterGetResponse\Data
+ *
+ * @phpstan-type ClusterGetResponseShape = array{data: Data|DataShape}
  */
 final class ClusterGetResponse implements BaseModel
 {
@@ -45,9 +46,7 @@ final class ClusterGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   bucket: string, clusters: list<mixed>, status: value-of<TaskStatus>
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array $data): self
     {
@@ -59,9 +58,7 @@ final class ClusterGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   bucket: string, clusters: list<mixed>, status: value-of<TaskStatus>
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

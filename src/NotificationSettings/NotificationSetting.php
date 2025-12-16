@@ -11,6 +11,8 @@ use Telnyx\NotificationSettings\NotificationSetting\Parameter;
 use Telnyx\NotificationSettings\NotificationSetting\Status;
 
 /**
+ * @phpstan-import-type ParameterShape from \Telnyx\NotificationSettings\NotificationSetting\Parameter
+ *
  * @phpstan-type NotificationSettingShape = array{
  *   id?: string|null,
  *   associatedRecordType?: string|null,
@@ -19,8 +21,8 @@ use Telnyx\NotificationSettings\NotificationSetting\Status;
  *   notificationChannelID?: string|null,
  *   notificationEventConditionID?: string|null,
  *   notificationProfileID?: string|null,
- *   parameters?: list<Parameter>|null,
- *   status?: value-of<Status>|null,
+ *   parameters?: list<ParameterShape>|null,
+ *   status?: null|Status|value-of<Status>,
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */
@@ -93,9 +95,7 @@ final class NotificationSetting implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Parameter|array{
-     *   name?: string|null, value?: string|null
-     * }> $parameters
+     * @param list<ParameterShape> $parameters
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -202,9 +202,7 @@ final class NotificationSetting implements BaseModel
     }
 
     /**
-     * @param list<Parameter|array{
-     *   name?: string|null, value?: string|null
-     * }> $parameters
+     * @param list<ParameterShape> $parameters
      */
     public function withParameters(array $parameters): self
     {

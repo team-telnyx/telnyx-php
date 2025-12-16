@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace Telnyx\AvailablePhoneNumberBlocks;
 
 use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data;
-use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data\CostInformation;
-use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data\Feature;
-use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data\RecordType;
-use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data\RegionInformation;
 use Telnyx\AvailablePhoneNumbersMetadata;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data
+ * @phpstan-import-type AvailablePhoneNumbersMetadataShape from \Telnyx\AvailablePhoneNumbersMetadata
+ *
  * @phpstan-type AvailablePhoneNumberBlockListResponseShape = array{
- *   data?: list<Data>|null, meta?: AvailablePhoneNumbersMetadata|null
+ *   data?: list<DataShape>|null,
+ *   meta?: null|AvailablePhoneNumbersMetadata|AvailablePhoneNumbersMetadataShape,
  * }
  */
 final class AvailablePhoneNumberBlockListResponse implements BaseModel
@@ -41,17 +41,8 @@ final class AvailablePhoneNumberBlockListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   costInformation?: CostInformation|null,
-     *   features?: list<Feature>|null,
-     *   range?: int|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   regionInformation?: list<RegionInformation>|null,
-     *   startingNumber?: string|null,
-     * }> $data
-     * @param AvailablePhoneNumbersMetadata|array{
-     *   bestEffortResults?: int|null, totalResults?: int|null
-     * } $meta
+     * @param list<DataShape> $data
+     * @param AvailablePhoneNumbersMetadataShape $meta
      */
     public static function with(
         ?array $data = null,
@@ -66,14 +57,7 @@ final class AvailablePhoneNumberBlockListResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   costInformation?: CostInformation|null,
-     *   features?: list<Feature>|null,
-     *   range?: int|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   regionInformation?: list<RegionInformation>|null,
-     *   startingNumber?: string|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {
@@ -84,9 +68,7 @@ final class AvailablePhoneNumberBlockListResponse implements BaseModel
     }
 
     /**
-     * @param AvailablePhoneNumbersMetadata|array{
-     *   bestEffortResults?: int|null, totalResults?: int|null
-     * } $meta
+     * @param AvailablePhoneNumbersMetadataShape $meta
      */
     public function withMeta(AvailablePhoneNumbersMetadata|array $meta): self
     {

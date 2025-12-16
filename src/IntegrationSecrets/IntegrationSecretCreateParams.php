@@ -19,9 +19,9 @@ use Telnyx\IntegrationSecrets\IntegrationSecretCreateParams\Type;
  * @phpstan-type IntegrationSecretCreateParamsShape = array{
  *   identifier: string,
  *   type: Type|value-of<Type>,
- *   token?: string,
- *   password?: string,
- *   username?: string,
+ *   token?: string|null,
+ *   password?: string|null,
+ *   username?: string|null,
  * }
  */
 final class IntegrationSecretCreateParams implements BaseModel

@@ -17,8 +17,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type ToolTestParamsShape = array{
  *   assistantID: string,
- *   arguments?: array<string,mixed>,
- *   dynamicVariables?: array<string,mixed>,
+ *   arguments?: array<string,mixed>|null,
+ *   dynamicVariables?: array<string,mixed>|null,
  * }
  */
 final class ToolTestParams implements BaseModel

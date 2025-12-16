@@ -24,8 +24,10 @@ use Telnyx\Core\Contracts\BaseModel;
  *   }
  * }.
  *
+ * @phpstan-import-type MetadataShape from \Telnyx\AI\Embeddings\EmbeddingSimilaritySearchResponse\Data\Metadata
+ *
  * @phpstan-type DataShape = array{
- *   distance: float, documentChunk: string, metadata: Metadata
+ *   distance: float, documentChunk: string, metadata: Metadata|MetadataShape
  * }
  */
 final class Data implements BaseModel
@@ -66,14 +68,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Metadata|array{
-     *   checksum: string,
-     *   embedding: string,
-     *   filename: string,
-     *   source: string,
-     *   certainty?: float|null,
-     *   loaderMetadata?: array<string,mixed>|null,
-     * } $metadata
+     * @param MetadataShape $metadata
      */
     public static function with(
         float $distance,
@@ -106,14 +101,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param Metadata|array{
-     *   checksum: string,
-     *   embedding: string,
-     *   filename: string,
-     *   source: string,
-     *   certainty?: float|null,
-     *   loaderMetadata?: array<string,mixed>|null,
-     * } $metadata
+     * @param MetadataShape $metadata
      */
     public function withMetadata(Metadata|array $metadata): self
     {

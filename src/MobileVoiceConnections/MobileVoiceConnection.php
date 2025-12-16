@@ -13,17 +13,20 @@ use Telnyx\MobileVoiceConnections\MobileVoiceConnection\RecordType;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnection\WebhookAPIVersion;
 
 /**
+ * @phpstan-import-type InboundShape from \Telnyx\MobileVoiceConnections\MobileVoiceConnection\Inbound
+ * @phpstan-import-type OutboundShape from \Telnyx\MobileVoiceConnections\MobileVoiceConnection\Outbound
+ *
  * @phpstan-type MobileVoiceConnectionShape = array{
  *   id?: string|null,
  *   active?: bool|null,
  *   connectionName?: string|null,
  *   createdAt?: \DateTimeInterface|null,
- *   inbound?: Inbound|null,
- *   outbound?: Outbound|null,
- *   recordType?: value-of<RecordType>|null,
+ *   inbound?: null|Inbound|InboundShape,
+ *   outbound?: null|Outbound|OutboundShape,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  *   tags?: list<string>|null,
  *   updatedAt?: \DateTimeInterface|null,
- *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
+ *   webhookAPIVersion?: null|WebhookAPIVersion|value-of<WebhookAPIVersion>,
  *   webhookEventFailoverURL?: string|null,
  *   webhookEventURL?: string|null,
  *   webhookTimeoutSecs?: int|null,
@@ -120,10 +123,8 @@ final class MobileVoiceConnection implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Inbound|array{channelLimit?: int|null} $inbound
-     * @param Outbound|array{
-     *   channelLimit?: int|null, outboundVoiceProfileID?: string|null
-     * } $outbound
+     * @param InboundShape $inbound
+     * @param OutboundShape $outbound
      * @param RecordType|value-of<RecordType> $recordType
      * @param list<string> $tags
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion>|null $webhookAPIVersion
@@ -204,7 +205,7 @@ final class MobileVoiceConnection implements BaseModel
     }
 
     /**
-     * @param Inbound|array{channelLimit?: int|null} $inbound
+     * @param InboundShape $inbound
      */
     public function withInbound(Inbound|array $inbound): self
     {
@@ -215,9 +216,7 @@ final class MobileVoiceConnection implements BaseModel
     }
 
     /**
-     * @param Outbound|array{
-     *   channelLimit?: int|null, outboundVoiceProfileID?: string|null
-     * } $outbound
+     * @param OutboundShape $outbound
      */
     public function withOutbound(Outbound|array $outbound): self
     {

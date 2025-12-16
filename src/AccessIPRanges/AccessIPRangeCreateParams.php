@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AccessIPRangesService::create()
  *
  * @phpstan-type AccessIPRangeCreateParamsShape = array{
- *   cidrBlock: string, description?: string
+ *   cidrBlock: string, description?: string|null
  * }
  */
 final class AccessIPRangeCreateParams implements BaseModel

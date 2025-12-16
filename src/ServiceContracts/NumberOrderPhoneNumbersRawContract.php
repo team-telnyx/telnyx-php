@@ -34,7 +34,7 @@ interface NumberOrderPhoneNumbersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|NumberOrderPhoneNumberListParams $params
+     * @param array<string,mixed>|NumberOrderPhoneNumberListParams $params
      *
      * @return BaseResponse<NumberOrderPhoneNumberListResponse>
      *
@@ -49,7 +49,7 @@ interface NumberOrderPhoneNumbersRawContract
      * @api
      *
      * @param string $id The unique identifier of the number order phone number
-     * @param array<mixed>|NumberOrderPhoneNumberUpdateRequirementGroupParams $params
+     * @param array<string,mixed>|NumberOrderPhoneNumberUpdateRequirementGroupParams $params
      *
      * @return BaseResponse<NumberOrderPhoneNumberUpdateRequirementGroupResponse>
      *
@@ -65,7 +65,7 @@ interface NumberOrderPhoneNumbersRawContract
      * @api
      *
      * @param string $numberOrderPhoneNumberID the number order phone number ID
-     * @param array<mixed>|NumberOrderPhoneNumberUpdateRequirementsParams $params
+     * @param array<string,mixed>|NumberOrderPhoneNumberUpdateRequirementsParams $params
      *
      * @return BaseResponse<NumberOrderPhoneNumberUpdateRequirementsResponse>
      *

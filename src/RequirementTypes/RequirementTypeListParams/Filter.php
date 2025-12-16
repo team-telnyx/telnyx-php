@@ -12,7 +12,9 @@ use Telnyx\RequirementTypes\RequirementTypeListParams\Filter\Name;
 /**
  * Consolidated filter parameter for requirement types (deepObject style). Originally: filter[name].
  *
- * @phpstan-type FilterShape = array{name?: Name|null}
+ * @phpstan-import-type NameShape from \Telnyx\RequirementTypes\RequirementTypeListParams\Filter\Name
+ *
+ * @phpstan-type FilterShape = array{name?: null|Name|NameShape}
  */
 final class Filter implements BaseModel
 {
@@ -32,7 +34,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Name|array{contains?: string|null} $name
+     * @param NameShape $name
      */
     public static function with(Name|array|null $name = null): self
     {
@@ -44,7 +46,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param Name|array{contains?: string|null} $name
+     * @param NameShape $name
      */
     public function withName(Name|array $name): self
     {

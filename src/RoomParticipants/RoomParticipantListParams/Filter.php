@@ -14,11 +14,15 @@ use Telnyx\RoomParticipants\RoomParticipantListParams\Filter\DateUpdatedAt;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[date_joined_at][eq], filter[date_joined_at][gte], filter[date_joined_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_left_at][eq], filter[date_left_at][gte], filter[date_left_at][lte], filter[context], filter[session_id].
  *
+ * @phpstan-import-type DateJoinedAtShape from \Telnyx\RoomParticipants\RoomParticipantListParams\Filter\DateJoinedAt
+ * @phpstan-import-type DateLeftAtShape from \Telnyx\RoomParticipants\RoomParticipantListParams\Filter\DateLeftAt
+ * @phpstan-import-type DateUpdatedAtShape from \Telnyx\RoomParticipants\RoomParticipantListParams\Filter\DateUpdatedAt
+ *
  * @phpstan-type FilterShape = array{
  *   context?: string|null,
- *   dateJoinedAt?: DateJoinedAt|null,
- *   dateLeftAt?: DateLeftAt|null,
- *   dateUpdatedAt?: DateUpdatedAt|null,
+ *   dateJoinedAt?: null|DateJoinedAt|DateJoinedAtShape,
+ *   dateLeftAt?: null|DateLeftAt|DateLeftAtShape,
+ *   dateUpdatedAt?: null|DateUpdatedAt|DateUpdatedAtShape,
  *   sessionID?: string|null,
  * }
  */
@@ -58,15 +62,9 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DateJoinedAt|array{
-     *   eq?: string|null, gte?: string|null, lte?: string|null
-     * } $dateJoinedAt
-     * @param DateLeftAt|array{
-     *   eq?: string|null, gte?: string|null, lte?: string|null
-     * } $dateLeftAt
-     * @param DateUpdatedAt|array{
-     *   eq?: string|null, gte?: string|null, lte?: string|null
-     * } $dateUpdatedAt
+     * @param DateJoinedAtShape $dateJoinedAt
+     * @param DateLeftAtShape $dateLeftAt
+     * @param DateUpdatedAtShape $dateUpdatedAt
      */
     public static function with(
         ?string $context = null,
@@ -98,9 +96,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param DateJoinedAt|array{
-     *   eq?: string|null, gte?: string|null, lte?: string|null
-     * } $dateJoinedAt
+     * @param DateJoinedAtShape $dateJoinedAt
      */
     public function withDateJoinedAt(DateJoinedAt|array $dateJoinedAt): self
     {
@@ -111,9 +107,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param DateLeftAt|array{
-     *   eq?: string|null, gte?: string|null, lte?: string|null
-     * } $dateLeftAt
+     * @param DateLeftAtShape $dateLeftAt
      */
     public function withDateLeftAt(DateLeftAt|array $dateLeftAt): self
     {
@@ -124,9 +118,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param DateUpdatedAt|array{
-     *   eq?: string|null, gte?: string|null, lte?: string|null
-     * } $dateUpdatedAt
+     * @param DateUpdatedAtShape $dateUpdatedAt
      */
     public function withDateUpdatedAt(DateUpdatedAt|array $dateUpdatedAt): self
     {

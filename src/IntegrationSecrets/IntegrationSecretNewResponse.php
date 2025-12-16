@@ -9,7 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type IntegrationSecretNewResponseShape = array{data: IntegrationSecret}
+ * @phpstan-import-type IntegrationSecretShape from \Telnyx\IntegrationSecrets\IntegrationSecret
+ *
+ * @phpstan-type IntegrationSecretNewResponseShape = array{
+ *   data: IntegrationSecret|IntegrationSecretShape
+ * }
  */
 final class IntegrationSecretNewResponse implements BaseModel
 {
@@ -43,13 +47,7 @@ final class IntegrationSecretNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param IntegrationSecret|array{
-     *   id: string,
-     *   createdAt: \DateTimeInterface,
-     *   identifier: string,
-     *   recordType: string,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param IntegrationSecretShape $data
      */
     public static function with(IntegrationSecret|array $data): self
     {
@@ -61,13 +59,7 @@ final class IntegrationSecretNewResponse implements BaseModel
     }
 
     /**
-     * @param IntegrationSecret|array{
-     *   id: string,
-     *   createdAt: \DateTimeInterface,
-     *   identifier: string,
-     *   recordType: string,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param IntegrationSecretShape $data
      */
     public function withData(IntegrationSecret|array $data): self
     {

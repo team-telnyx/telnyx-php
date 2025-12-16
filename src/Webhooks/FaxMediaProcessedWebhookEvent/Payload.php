@@ -14,12 +14,12 @@ use Telnyx\Webhooks\FaxMediaProcessedWebhookEvent\Payload\Status;
  * @phpstan-type PayloadShape = array{
  *   clientState?: string|null,
  *   connectionID?: string|null,
- *   direction?: value-of<Direction>|null,
+ *   direction?: null|Direction|value-of<Direction>,
  *   faxID?: string|null,
  *   from?: string|null,
  *   mediaName?: string|null,
  *   originalMediaURL?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   to?: string|null,
  *   userID?: string|null,
  * }

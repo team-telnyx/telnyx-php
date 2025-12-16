@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\SiprecConnectorsService::update()
  *
  * @phpstan-type SiprecConnectorUpdateParamsShape = array{
- *   host: string, name: string, port: int, appSubdomain?: string
+ *   host: string, name: string, port: int, appSubdomain?: string|null
  * }
  */
 final class SiprecConnectorUpdateParams implements BaseModel

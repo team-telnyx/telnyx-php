@@ -14,11 +14,11 @@ use Telnyx\Porting\Events\EventListResponse\PortingEventWithoutWebhook\PayloadSt
 /**
  * @phpstan-type PortingEventWithoutWebhookShape = array{
  *   id?: string|null,
- *   availableNotificationMethods?: list<value-of<AvailableNotificationMethod>>|null,
+ *   availableNotificationMethods?: list<AvailableNotificationMethod|value-of<AvailableNotificationMethod>>|null,
  *   createdAt?: \DateTimeInterface|null,
- *   eventType?: value-of<EventType>|null,
+ *   eventType?: null|EventType|value-of<EventType>,
  *   payload?: null|null,
- *   payloadStatus?: value-of<PayloadStatus>|null,
+ *   payloadStatus?: null|PayloadStatus|value-of<PayloadStatus>,
  *   portingOrderID?: string|null,
  *   recordType?: string|null,
  *   updatedAt?: \DateTimeInterface|null,

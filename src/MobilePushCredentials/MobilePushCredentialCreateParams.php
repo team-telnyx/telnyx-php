@@ -17,12 +17,10 @@ use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePu
  *
  * @see Telnyx\Services\MobilePushCredentialsService::create()
  *
+ * @phpstan-import-type CreateMobilePushCredentialRequestShape from \Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest
+ *
  * @phpstan-type MobilePushCredentialCreateParamsShape = array{
- *   createMobilePushCredentialRequest: CreateIosPushCredentialRequest|array{
- *     alias: string, certificate: string, privateKey: string, type?: 'ios'
- *   }|CreateAndroidPushCredentialRequest|array{
- *     alias: string, projectAccountJsonFile: array<string,mixed>, type?: 'android'
- *   },
+ *   createMobilePushCredentialRequest: CreateMobilePushCredentialRequestShape
  * }
  */
 final class MobilePushCredentialCreateParams implements BaseModel
@@ -59,11 +57,7 @@ final class MobilePushCredentialCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CreateIosPushCredentialRequest|array{
-     *   alias: string, certificate: string, privateKey: string, type?: 'ios'
-     * }|CreateAndroidPushCredentialRequest|array{
-     *   alias: string, projectAccountJsonFile: array<string,mixed>, type?: 'android'
-     * } $createMobilePushCredentialRequest
+     * @param CreateMobilePushCredentialRequestShape $createMobilePushCredentialRequest
      */
     public static function with(
         CreateIosPushCredentialRequest|array|CreateAndroidPushCredentialRequest $createMobilePushCredentialRequest,
@@ -76,11 +70,7 @@ final class MobilePushCredentialCreateParams implements BaseModel
     }
 
     /**
-     * @param CreateIosPushCredentialRequest|array{
-     *   alias: string, certificate: string, privateKey: string, type?: 'ios'
-     * }|CreateAndroidPushCredentialRequest|array{
-     *   alias: string, projectAccountJsonFile: array<string,mixed>, type?: 'android'
-     * } $createMobilePushCredentialRequest
+     * @param CreateMobilePushCredentialRequestShape $createMobilePushCredentialRequest
      */
     public function withCreateMobilePushCredentialRequest(
         CreateIosPushCredentialRequest|array|CreateAndroidPushCredentialRequest $createMobilePushCredentialRequest,

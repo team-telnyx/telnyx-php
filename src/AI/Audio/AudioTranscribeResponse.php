@@ -11,8 +11,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type SegmentShape from \Telnyx\AI\Audio\AudioTranscribeResponse\Segment
+ *
  * @phpstan-type AudioTranscribeResponseShape = array{
- *   text: string, duration?: float|null, segments?: list<Segment>|null
+ *   text: string, duration?: float|null, segments?: list<SegmentShape>|null
  * }
  */
 final class AudioTranscribeResponse implements BaseModel
@@ -64,9 +66,7 @@ final class AudioTranscribeResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Segment|array{
-     *   id: float, end: float, start: float, text: string
-     * }> $segments
+     * @param list<SegmentShape> $segments
      */
     public static function with(
         string $text,
@@ -108,9 +108,7 @@ final class AudioTranscribeResponse implements BaseModel
     /**
      * Segments of the transcribed text and their corresponding details. This is only included if `response_format` is set to `verbose_json`.
      *
-     * @param list<Segment|array{
-     *   id: float, end: float, start: float, text: string
-     * }> $segments
+     * @param list<SegmentShape> $segments
      */
     public function withSegments(array $segments): self
     {

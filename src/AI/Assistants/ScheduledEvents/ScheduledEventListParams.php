@@ -15,11 +15,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\Assistants\ScheduledEventsService::list()
  *
  * @phpstan-type ScheduledEventListParamsShape = array{
- *   conversationChannel?: ConversationChannelType|value-of<ConversationChannelType>,
- *   fromDate?: \DateTimeInterface,
- *   pageNumber?: int,
- *   pageSize?: int,
- *   toDate?: \DateTimeInterface,
+ *   conversationChannel?: null|ConversationChannelType|value-of<ConversationChannelType>,
+ *   fromDate?: \DateTimeInterface|null,
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
+ *   toDate?: \DateTimeInterface|null,
  * }
  */
 final class ScheduledEventListParams implements BaseModel

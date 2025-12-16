@@ -15,11 +15,11 @@ use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
  *
  * @see Telnyx\Services\NumberOrdersService::update()
  *
+ * @phpstan-import-type UpdateRegulatoryRequirementShape from \Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement
+ *
  * @phpstan-type NumberOrderUpdateParamsShape = array{
- *   customerReference?: string,
- *   regulatoryRequirements?: list<UpdateRegulatoryRequirement|array{
- *     fieldValue?: string|null, requirementID?: string|null
- *   }>,
+ *   customerReference?: string|null,
+ *   regulatoryRequirements?: list<UpdateRegulatoryRequirementShape>|null,
  * }
  */
 final class NumberOrderUpdateParams implements BaseModel
@@ -51,9 +51,7 @@ final class NumberOrderUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<UpdateRegulatoryRequirement|array{
-     *   fieldValue?: string|null, requirementID?: string|null
-     * }> $regulatoryRequirements
+     * @param list<UpdateRegulatoryRequirementShape> $regulatoryRequirements
      */
     public static function with(
         ?string $customerReference = null,
@@ -79,9 +77,7 @@ final class NumberOrderUpdateParams implements BaseModel
     }
 
     /**
-     * @param list<UpdateRegulatoryRequirement|array{
-     *   fieldValue?: string|null, requirementID?: string|null
-     * }> $regulatoryRequirements
+     * @param list<UpdateRegulatoryRequirementShape> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements

@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace Telnyx\Comments;
 
 use Telnyx\Comments\CommentMarkAsReadResponse\Data;
-use Telnyx\Comments\CommentMarkAsReadResponse\Data\CommenterType;
-use Telnyx\Comments\CommentMarkAsReadResponse\Data\CommentRecordType;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type CommentMarkAsReadResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\Comments\CommentMarkAsReadResponse\Data
+ *
+ * @phpstan-type CommentMarkAsReadResponseShape = array{data?: null|Data|DataShape}
  */
 final class CommentMarkAsReadResponse implements BaseModel
 {
@@ -32,17 +32,7 @@ final class CommentMarkAsReadResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   id?: string|null,
-     *   body?: string|null,
-     *   commentRecordID?: string|null,
-     *   commentRecordType?: value-of<CommentRecordType>|null,
-     *   commenter?: string|null,
-     *   commenterType?: value-of<CommenterType>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   readAt?: \DateTimeInterface|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -54,17 +44,7 @@ final class CommentMarkAsReadResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   id?: string|null,
-     *   body?: string|null,
-     *   commentRecordID?: string|null,
-     *   commentRecordType?: value-of<CommentRecordType>|null,
-     *   commenter?: string|null,
-     *   commenterType?: value-of<CommenterType>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   readAt?: \DateTimeInterface|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

@@ -6,7 +6,6 @@ namespace Telnyx\AI\Assistants\AssistantTool\SipReferTool;
 
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\CustomHeader;
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\SipHeader;
-use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\SipHeader\Name;
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\Target;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -14,10 +13,14 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type TargetShape from \Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\Target
+ * @phpstan-import-type CustomHeaderShape from \Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\CustomHeader
+ * @phpstan-import-type SipHeaderShape from \Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\SipHeader
+ *
  * @phpstan-type ReferShape = array{
- *   targets: list<Target>,
- *   customHeaders?: list<CustomHeader>|null,
- *   sipHeaders?: list<SipHeader>|null,
+ *   targets: list<TargetShape>,
+ *   customHeaders?: list<CustomHeaderShape>|null,
+ *   sipHeaders?: list<SipHeaderShape>|null,
  * }
  */
 final class Refer implements BaseModel
@@ -73,18 +76,9 @@ final class Refer implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Target|array{
-     *   name: string,
-     *   sipAddress: string,
-     *   sipAuthPassword?: string|null,
-     *   sipAuthUsername?: string|null,
-     * }> $targets
-     * @param list<CustomHeader|array{
-     *   name?: string|null, value?: string|null
-     * }> $customHeaders
-     * @param list<SipHeader|array{
-     *   name?: value-of<Name>|null, value?: string|null
-     * }> $sipHeaders
+     * @param list<TargetShape> $targets
+     * @param list<CustomHeaderShape> $customHeaders
+     * @param list<SipHeaderShape> $sipHeaders
      */
     public static function with(
         array $targets,
@@ -104,12 +98,7 @@ final class Refer implements BaseModel
     /**
      * The different possible targets of the SIP refer. The assistant will be able to choose one of the targets to refer the call to.
      *
-     * @param list<Target|array{
-     *   name: string,
-     *   sipAddress: string,
-     *   sipAuthPassword?: string|null,
-     *   sipAuthUsername?: string|null,
-     * }> $targets
+     * @param list<TargetShape> $targets
      */
     public function withTargets(array $targets): self
     {
@@ -122,9 +111,7 @@ final class Refer implements BaseModel
     /**
      * Custom headers to be added to the SIP REFER.
      *
-     * @param list<CustomHeader|array{
-     *   name?: string|null, value?: string|null
-     * }> $customHeaders
+     * @param list<CustomHeaderShape> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {
@@ -137,9 +124,7 @@ final class Refer implements BaseModel
     /**
      * SIP headers to be added to the SIP REFER. Currently only User-to-User and Diversion headers are supported.
      *
-     * @param list<SipHeader|array{
-     *   name?: value-of<Name>|null, value?: string|null
-     * }> $sipHeaders
+     * @param list<SipHeaderShape> $sipHeaders
      */
     public function withSipHeaders(array $sipHeaders): self
     {

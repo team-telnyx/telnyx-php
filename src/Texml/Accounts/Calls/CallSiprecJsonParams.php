@@ -20,15 +20,15 @@ use Telnyx\Texml\Accounts\Calls\CallSiprecJsonParams\Track;
  *
  * @phpstan-type CallSiprecJsonParamsShape = array{
  *   accountSid: string,
- *   connectorName?: string,
- *   includeMetadataCustomHeaders?: bool,
- *   name?: string,
- *   secure?: bool,
- *   sessionTimeoutSecs?: int,
- *   sipTransport?: SipTransport|value-of<SipTransport>,
- *   statusCallback?: string,
- *   statusCallbackMethod?: StatusCallbackMethod|value-of<StatusCallbackMethod>,
- *   track?: Track|value-of<Track>,
+ *   connectorName?: string|null,
+ *   includeMetadataCustomHeaders?: bool|null,
+ *   name?: string|null,
+ *   secure?: bool|null,
+ *   sessionTimeoutSecs?: int|null,
+ *   sipTransport?: null|SipTransport|value-of<SipTransport>,
+ *   statusCallback?: string|null,
+ *   statusCallbackMethod?: null|StatusCallbackMethod|value-of<StatusCallbackMethod>,
+ *   track?: null|Track|value-of<Track>,
  * }
  */
 final class CallSiprecJsonParams implements BaseModel

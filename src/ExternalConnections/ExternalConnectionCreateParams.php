@@ -18,18 +18,17 @@ use Telnyx\ExternalConnections\ExternalConnectionCreateParams\Outbound;
  *
  * @see Telnyx\Services\ExternalConnectionsService::create()
  *
+ * @phpstan-import-type OutboundShape from \Telnyx\ExternalConnections\ExternalConnectionCreateParams\Outbound
+ * @phpstan-import-type InboundShape from \Telnyx\ExternalConnections\ExternalConnectionCreateParams\Inbound
+ *
  * @phpstan-type ExternalConnectionCreateParamsShape = array{
  *   externalSipConnection: ExternalSipConnection|value-of<ExternalSipConnection>,
- *   outbound: Outbound|array{
- *     channelLimit?: int|null, outboundVoiceProfileID?: string|null
- *   },
- *   active?: bool,
- *   inbound?: Inbound|array{
- *     outboundVoiceProfileID: string, channelLimit?: int|null
- *   },
- *   tags?: list<string>,
+ *   outbound: OutboundShape,
+ *   active?: bool|null,
+ *   inbound?: InboundShape|null,
+ *   tags?: list<string>|null,
  *   webhookEventFailoverURL?: string|null,
- *   webhookEventURL?: string,
+ *   webhookEventURL?: string|null,
  *   webhookTimeoutSecs?: int|null,
  * }
  */
@@ -111,13 +110,9 @@ final class ExternalConnectionCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Outbound|array{
-     *   channelLimit?: int|null, outboundVoiceProfileID?: string|null
-     * } $outbound
+     * @param OutboundShape $outbound
      * @param ExternalSipConnection|value-of<ExternalSipConnection> $externalSipConnection
-     * @param Inbound|array{
-     *   outboundVoiceProfileID: string, channelLimit?: int|null
-     * } $inbound
+     * @param InboundShape $inbound
      * @param list<string> $tags
      */
     public static function with(
@@ -160,9 +155,7 @@ final class ExternalConnectionCreateParams implements BaseModel
     }
 
     /**
-     * @param Outbound|array{
-     *   channelLimit?: int|null, outboundVoiceProfileID?: string|null
-     * } $outbound
+     * @param OutboundShape $outbound
      */
     public function withOutbound(Outbound|array $outbound): self
     {
@@ -184,9 +177,7 @@ final class ExternalConnectionCreateParams implements BaseModel
     }
 
     /**
-     * @param Inbound|array{
-     *   outboundVoiceProfileID: string, channelLimit?: int|null
-     * } $inbound
+     * @param InboundShape $inbound
      */
     public function withInbound(Inbound|array $inbound): self
     {

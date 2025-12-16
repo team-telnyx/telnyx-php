@@ -9,9 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Rooms\Sessions\SessionList1Params\Filter;
-use Telnyx\Rooms\Sessions\SessionList1Params\Filter\DateCreatedAt;
-use Telnyx\Rooms\Sessions\SessionList1Params\Filter\DateEndedAt;
-use Telnyx\Rooms\Sessions\SessionList1Params\Filter\DateUpdatedAt;
 use Telnyx\Rooms\Sessions\SessionList1Params\Page;
 
 /**
@@ -19,15 +16,13 @@ use Telnyx\Rooms\Sessions\SessionList1Params\Page;
  *
  * @see Telnyx\Services\Rooms\SessionsService::list1()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\Rooms\Sessions\SessionList1Params\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Rooms\Sessions\SessionList1Params\Page
+ *
  * @phpstan-type SessionList1ParamsShape = array{
- *   filter?: Filter|array{
- *     active?: bool|null,
- *     dateCreatedAt?: DateCreatedAt|null,
- *     dateEndedAt?: DateEndedAt|null,
- *     dateUpdatedAt?: DateUpdatedAt|null,
- *   },
- *   includeParticipants?: bool,
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   filter?: FilterShape|null,
+ *   includeParticipants?: bool|null,
+ *   page?: PageShape|null,
  * }
  */
 final class SessionList1Params implements BaseModel
@@ -64,13 +59,8 @@ final class SessionList1Params implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   active?: bool|null,
-     *   dateCreatedAt?: DateCreatedAt|null,
-     *   dateEndedAt?: DateEndedAt|null,
-     *   dateUpdatedAt?: DateUpdatedAt|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -89,12 +79,7 @@ final class SessionList1Params implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[active].
      *
-     * @param Filter|array{
-     *   active?: bool|null,
-     *   dateCreatedAt?: DateCreatedAt|null,
-     *   dateEndedAt?: DateEndedAt|null,
-     *   dateUpdatedAt?: DateUpdatedAt|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -118,7 +103,7 @@ final class SessionList1Params implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

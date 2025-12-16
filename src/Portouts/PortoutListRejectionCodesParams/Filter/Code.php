@@ -11,6 +11,8 @@ use Telnyx\Core\Conversion\ListOf;
 
 /**
  * Filter rejections of a specific code.
+ *
+ * @phpstan-type CodeShape = int|list<int>
  */
 final class Code implements ConverterSource
 {

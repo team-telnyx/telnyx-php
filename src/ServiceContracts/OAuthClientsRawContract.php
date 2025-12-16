@@ -21,7 +21,7 @@ interface OAuthClientsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|OAuthClientCreateParams $params
+     * @param array<string,mixed>|OAuthClientCreateParams $params
      *
      * @return BaseResponse<OAuthClientNewResponse>
      *
@@ -50,7 +50,7 @@ interface OAuthClientsRawContract
      * @api
      *
      * @param string $id OAuth client ID
-     * @param array<mixed>|OAuthClientUpdateParams $params
+     * @param array<string,mixed>|OAuthClientUpdateParams $params
      *
      * @return BaseResponse<OAuthClientUpdateResponse>
      *
@@ -65,7 +65,7 @@ interface OAuthClientsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|OAuthClientListParams $params
+     * @param array<string,mixed>|OAuthClientListParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<OAuthClient>>
      *

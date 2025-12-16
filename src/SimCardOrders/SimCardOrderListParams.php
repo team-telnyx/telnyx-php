@@ -16,22 +16,11 @@ use Telnyx\SimCardOrders\SimCardOrderListParams\Page;
  *
  * @see Telnyx\Services\SimCardOrdersService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\SimCardOrders\SimCardOrderListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\SimCardOrders\SimCardOrderListParams\Page
+ *
  * @phpstan-type SimCardOrderListParamsShape = array{
- *   filter?: Filter|array{
- *     addressAdministrativeArea?: string|null,
- *     addressCountryCode?: string|null,
- *     addressExtendedAddress?: string|null,
- *     addressID?: string|null,
- *     addressLocality?: string|null,
- *     addressPostalCode?: string|null,
- *     addressStreetAddress?: string|null,
- *     costAmount?: string|null,
- *     costCurrency?: string|null,
- *     createdAt?: \DateTimeInterface|null,
- *     quantity?: int|null,
- *     updatedAt?: \DateTimeInterface|null,
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   filter?: FilterShape|null, page?: PageShape|null
  * }
  */
 final class SimCardOrderListParams implements BaseModel
@@ -62,21 +51,8 @@ final class SimCardOrderListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   addressAdministrativeArea?: string|null,
-     *   addressCountryCode?: string|null,
-     *   addressExtendedAddress?: string|null,
-     *   addressID?: string|null,
-     *   addressLocality?: string|null,
-     *   addressPostalCode?: string|null,
-     *   addressStreetAddress?: string|null,
-     *   costAmount?: string|null,
-     *   costCurrency?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   quantity?: int|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -93,20 +69,7 @@ final class SimCardOrderListParams implements BaseModel
     /**
      * Consolidated filter parameter for SIM card orders (deepObject style). Originally: filter[created_at], filter[updated_at], filter[quantity], filter[cost.amount], filter[cost.currency], filter[address.id], filter[address.street_address], filter[address.extended_address], filter[address.locality], filter[address.administrative_area], filter[address.country_code], filter[address.postal_code].
      *
-     * @param Filter|array{
-     *   addressAdministrativeArea?: string|null,
-     *   addressCountryCode?: string|null,
-     *   addressExtendedAddress?: string|null,
-     *   addressID?: string|null,
-     *   addressLocality?: string|null,
-     *   addressPostalCode?: string|null,
-     *   addressStreetAddress?: string|null,
-     *   costAmount?: string|null,
-     *   costCurrency?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   quantity?: int|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -119,7 +82,7 @@ final class SimCardOrderListParams implements BaseModel
     /**
      * Consolidated pagination parameter (deepObject style). Originally: page[number], page[size].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

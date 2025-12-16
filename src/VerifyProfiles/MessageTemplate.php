@@ -9,8 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type VerifyProfileMessageTemplateResponseShape from \Telnyx\VerifyProfiles\VerifyProfileMessageTemplateResponse
+ *
  * @phpstan-type MessageTemplateShape = array{
- *   data?: VerifyProfileMessageTemplateResponse|null
+ *   data?: null|VerifyProfileMessageTemplateResponse|VerifyProfileMessageTemplateResponseShape,
  * }
  */
 final class MessageTemplate implements BaseModel
@@ -31,9 +33,7 @@ final class MessageTemplate implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param VerifyProfileMessageTemplateResponse|array{
-     *   id?: string|null, text?: string|null
-     * } $data
+     * @param VerifyProfileMessageTemplateResponseShape $data
      */
     public static function with(
         VerifyProfileMessageTemplateResponse|array|null $data = null
@@ -46,9 +46,7 @@ final class MessageTemplate implements BaseModel
     }
 
     /**
-     * @param VerifyProfileMessageTemplateResponse|array{
-     *   id?: string|null, text?: string|null
-     * } $data
+     * @param VerifyProfileMessageTemplateResponseShape $data
      */
     public function withData(
         VerifyProfileMessageTemplateResponse|array $data

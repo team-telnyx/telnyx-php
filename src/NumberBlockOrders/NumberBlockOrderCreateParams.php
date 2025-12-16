@@ -18,9 +18,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type NumberBlockOrderCreateParamsShape = array{
  *   range: int,
  *   startingNumber: string,
- *   connectionID?: string,
- *   customerReference?: string,
- *   messagingProfileID?: string,
+ *   connectionID?: string|null,
+ *   customerReference?: string|null,
+ *   messagingProfileID?: string|null,
  * }
  */
 final class NumberBlockOrderCreateParams implements BaseModel

@@ -20,7 +20,7 @@ interface AddressesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AddressCreateParams $params
+     * @param array<string,mixed>|AddressCreateParams $params
      *
      * @return BaseResponse<AddressNewResponse>
      *
@@ -48,7 +48,7 @@ interface AddressesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AddressListParams $params
+     * @param array<string,mixed>|AddressListParams $params
      *
      * @return BaseResponse<DefaultPagination<Address>>
      *

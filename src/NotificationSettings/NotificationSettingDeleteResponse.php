@@ -7,12 +7,12 @@ namespace Telnyx\NotificationSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\NotificationSettings\NotificationSetting\Parameter;
-use Telnyx\NotificationSettings\NotificationSetting\Status;
 
 /**
+ * @phpstan-import-type NotificationSettingShape from \Telnyx\NotificationSettings\NotificationSetting
+ *
  * @phpstan-type NotificationSettingDeleteResponseShape = array{
- *   data?: NotificationSetting|null
+ *   data?: null|NotificationSetting|NotificationSettingShape
  * }
  */
 final class NotificationSettingDeleteResponse implements BaseModel
@@ -33,18 +33,7 @@ final class NotificationSettingDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param NotificationSetting|array{
-     *   id?: string|null,
-     *   associatedRecordType?: string|null,
-     *   associatedRecordTypeValue?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   notificationChannelID?: string|null,
-     *   notificationEventConditionID?: string|null,
-     *   notificationProfileID?: string|null,
-     *   parameters?: list<Parameter>|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param NotificationSettingShape $data
      */
     public static function with(NotificationSetting|array|null $data = null): self
     {
@@ -56,18 +45,7 @@ final class NotificationSettingDeleteResponse implements BaseModel
     }
 
     /**
-     * @param NotificationSetting|array{
-     *   id?: string|null,
-     *   associatedRecordType?: string|null,
-     *   associatedRecordTypeValue?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   notificationChannelID?: string|null,
-     *   notificationEventConditionID?: string|null,
-     *   notificationProfileID?: string|null,
-     *   parameters?: list<Parameter>|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param NotificationSettingShape $data
      */
     public function withData(NotificationSetting|array $data): self
     {

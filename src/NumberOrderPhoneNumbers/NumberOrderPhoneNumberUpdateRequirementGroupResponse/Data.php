@@ -10,6 +10,8 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementGroupResponse\Data\RegulatoryRequirement;
 
 /**
+ * @phpstan-import-type RegulatoryRequirementShape from \Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementGroupResponse\Data\RegulatoryRequirement
+ *
  * @phpstan-type DataShape = array{
  *   id?: string|null,
  *   bundleID?: string|null,
@@ -21,7 +23,7 @@ use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementGroupR
  *   phoneNumber?: string|null,
  *   phoneNumberType?: string|null,
  *   recordType?: string|null,
- *   regulatoryRequirements?: list<RegulatoryRequirement>|null,
+ *   regulatoryRequirements?: list<RegulatoryRequirementShape>|null,
  *   requirementsMet?: bool|null,
  *   requirementsStatus?: string|null,
  *   status?: string|null,
@@ -89,12 +91,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RegulatoryRequirement|array{
-     *   fieldType?: string|null,
-     *   fieldValue?: string|null,
-     *   requirementID?: string|null,
-     *   status?: string|null,
-     * }> $regulatoryRequirements
+     * @param list<RegulatoryRequirementShape> $regulatoryRequirements
      */
     public static function with(
         ?string $id = null,
@@ -215,12 +212,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<RegulatoryRequirement|array{
-     *   fieldType?: string|null,
-     *   fieldValue?: string|null,
-     *   requirementID?: string|null,
-     *   status?: string|null,
-     * }> $regulatoryRequirements
+     * @param list<RegulatoryRequirementShape> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements

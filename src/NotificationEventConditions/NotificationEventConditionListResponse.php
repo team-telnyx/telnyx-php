@@ -11,17 +11,19 @@ use Telnyx\NotificationEventConditions\NotificationEventConditionListResponse\As
 use Telnyx\NotificationEventConditions\NotificationEventConditionListResponse\Parameter;
 
 /**
+ * @phpstan-import-type ParameterShape from \Telnyx\NotificationEventConditions\NotificationEventConditionListResponse\Parameter
+ *
  * @phpstan-type NotificationEventConditionListResponseShape = array{
  *   id?: string|null,
  *   allowMultipleChannels?: bool|null,
- *   associatedRecordType?: value-of<AssociatedRecordType>|null,
+ *   associatedRecordType?: null|AssociatedRecordType|value-of<AssociatedRecordType>,
  *   asynchronous?: bool|null,
  *   createdAt?: \DateTimeInterface|null,
  *   description?: string|null,
  *   enabled?: bool|null,
  *   name?: string|null,
  *   notificationEventID?: string|null,
- *   parameters?: list<Parameter>|null,
+ *   parameters?: list<ParameterShape>|null,
  *   supportedChannels?: list<string>|null,
  *   updatedAt?: \DateTimeInterface|null,
  * }
@@ -100,9 +102,7 @@ final class NotificationEventConditionListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param AssociatedRecordType|value-of<AssociatedRecordType> $associatedRecordType
-     * @param list<Parameter|array{
-     *   dataType?: string|null, name?: string|null, optional?: bool|null
-     * }> $parameters
+     * @param list<ParameterShape> $parameters
      * @param list<string> $supportedChannels
      */
     public static function with(
@@ -226,9 +226,7 @@ final class NotificationEventConditionListResponse implements BaseModel
     }
 
     /**
-     * @param list<Parameter|array{
-     *   dataType?: string|null, name?: string|null, optional?: bool|null
-     * }> $parameters
+     * @param list<ParameterShape> $parameters
      */
     public function withParameters(array $parameters): self
     {

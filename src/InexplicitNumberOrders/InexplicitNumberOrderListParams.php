@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\InexplicitNumberOrdersService::list()
  *
  * @phpstan-type InexplicitNumberOrderListParamsShape = array{
- *   pageNumber?: int, pageSize?: int
+ *   pageNumber?: int|null, pageSize?: int|null
  * }
  */
 final class InexplicitNumberOrderListParams implements BaseModel

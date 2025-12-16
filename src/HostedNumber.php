@@ -14,7 +14,7 @@ use Telnyx\HostedNumber\Status;
  *   id?: string|null,
  *   phoneNumber?: string|null,
  *   recordType?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  * }
  */
 final class HostedNumber implements BaseModel

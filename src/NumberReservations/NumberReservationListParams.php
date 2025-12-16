@@ -9,7 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberReservations\NumberReservationListParams\Filter;
-use Telnyx\NumberReservations\NumberReservationListParams\Filter\CreatedAt;
 use Telnyx\NumberReservations\NumberReservationListParams\Page;
 
 /**
@@ -17,14 +16,11 @@ use Telnyx\NumberReservations\NumberReservationListParams\Page;
  *
  * @see Telnyx\Services\NumberReservationsService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\NumberReservations\NumberReservationListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\NumberReservations\NumberReservationListParams\Page
+ *
  * @phpstan-type NumberReservationListParamsShape = array{
- *   filter?: Filter|array{
- *     createdAt?: CreatedAt|null,
- *     customerReference?: string|null,
- *     phoneNumbersPhoneNumber?: string|null,
- *     status?: string|null,
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   filter?: FilterShape|null, page?: PageShape|null
  * }
  */
 final class NumberReservationListParams implements BaseModel
@@ -55,13 +51,8 @@ final class NumberReservationListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   createdAt?: CreatedAt|null,
-     *   customerReference?: string|null,
-     *   phoneNumbersPhoneNumber?: string|null,
-     *   status?: string|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -78,12 +69,7 @@ final class NumberReservationListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers.phone_number], filter[customer_reference].
      *
-     * @param Filter|array{
-     *   createdAt?: CreatedAt|null,
-     *   customerReference?: string|null,
-     *   phoneNumbersPhoneNumber?: string|null,
-     *   status?: string|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -96,7 +82,7 @@ final class NumberReservationListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

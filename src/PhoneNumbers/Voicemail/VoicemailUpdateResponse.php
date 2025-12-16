@@ -9,8 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type VoicemailPrefResponseShape from \Telnyx\PhoneNumbers\Voicemail\VoicemailPrefResponse
+ *
  * @phpstan-type VoicemailUpdateResponseShape = array{
- *   data?: VoicemailPrefResponse|null
+ *   data?: null|VoicemailPrefResponse|VoicemailPrefResponseShape
  * }
  */
 final class VoicemailUpdateResponse implements BaseModel
@@ -31,7 +33,7 @@ final class VoicemailUpdateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param VoicemailPrefResponse|array{enabled?: bool|null, pin?: string|null} $data
+     * @param VoicemailPrefResponseShape $data
      */
     public static function with(VoicemailPrefResponse|array|null $data = null): self
     {
@@ -43,7 +45,7 @@ final class VoicemailUpdateResponse implements BaseModel
     }
 
     /**
-     * @param VoicemailPrefResponse|array{enabled?: bool|null, pin?: string|null} $data
+     * @param VoicemailPrefResponseShape $data
      */
     public function withData(VoicemailPrefResponse|array $data): self
     {

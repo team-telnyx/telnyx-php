@@ -14,7 +14,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\PhoneNumbers\VoicemailService::create()
  *
- * @phpstan-type VoicemailCreateParamsShape = array{enabled?: bool, pin?: string}
+ * @phpstan-type VoicemailCreateParamsShape = array{
+ *   enabled?: bool|null, pin?: string|null
+ * }
  */
 final class VoicemailCreateParams implements BaseModel
 {

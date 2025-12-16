@@ -14,16 +14,16 @@ use Telnyx\IPConnections\OutboundIP\T38ReinviteSource;
 /**
  * @phpstan-type OutboundIPShape = array{
  *   aniOverride?: string|null,
- *   aniOverrideType?: value-of<AniOverrideType>|null,
+ *   aniOverrideType?: null|AniOverrideType|value-of<AniOverrideType>,
  *   callParkingEnabled?: bool|null,
  *   channelLimit?: int|null,
  *   generateRingbackTone?: bool|null,
  *   instantRingbackEnabled?: bool|null,
- *   ipAuthenticationMethod?: value-of<IPAuthenticationMethod>|null,
+ *   ipAuthenticationMethod?: null|IPAuthenticationMethod|value-of<IPAuthenticationMethod>,
  *   ipAuthenticationToken?: string|null,
  *   localization?: string|null,
  *   outboundVoiceProfileID?: string|null,
- *   t38ReinviteSource?: value-of<T38ReinviteSource>|null,
+ *   t38ReinviteSource?: null|T38ReinviteSource|value-of<T38ReinviteSource>,
  *   techPrefix?: string|null,
  * }
  */

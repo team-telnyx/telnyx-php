@@ -9,17 +9,16 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\IntegrationSecrets\IntegrationSecretListParams\Filter;
-use Telnyx\IntegrationSecrets\IntegrationSecretListParams\Filter\Type;
 
 /**
  * Retrieve a list of all integration secrets configured by the user.
  *
  * @see Telnyx\Services\IntegrationSecretsService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\IntegrationSecrets\IntegrationSecretListParams\Filter
+ *
  * @phpstan-type IntegrationSecretListParamsShape = array{
- *   filter?: Filter|array{type?: value-of<Type>|null},
- *   pageNumber?: int,
- *   pageSize?: int,
+ *   filter?: FilterShape|null, pageNumber?: int|null, pageSize?: int|null
  * }
  */
 final class IntegrationSecretListParams implements BaseModel
@@ -50,7 +49,7 @@ final class IntegrationSecretListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{type?: value-of<Type>|null} $filter
+     * @param FilterShape $filter
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -69,7 +68,7 @@ final class IntegrationSecretListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[type].
      *
-     * @param Filter|array{type?: value-of<Type>|null} $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

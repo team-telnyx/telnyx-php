@@ -8,13 +8,13 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Verifications\Verification;
-use Telnyx\Verifications\Verification\RecordType;
-use Telnyx\Verifications\Verification\Status;
-use Telnyx\Verifications\Verification\Type;
 
 /**
+ * @phpstan-import-type VerificationShape from \Telnyx\Verifications\Verification
+ * @phpstan-import-type VerifyMetaShape from \Telnyx\Verifications\ByPhoneNumber\VerifyMeta
+ *
  * @phpstan-type ByPhoneNumberListResponseShape = array{
- *   data: list<Verification>, meta: VerifyMeta
+ *   data: list<VerificationShape>, meta: VerifyMeta|VerifyMetaShape
  * }
  */
 final class ByPhoneNumberListResponse implements BaseModel
@@ -53,21 +53,8 @@ final class ByPhoneNumberListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Verification|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   customCode?: string|null,
-     *   phoneNumber?: string|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   status?: value-of<Status>|null,
-     *   timeoutSecs?: int|null,
-     *   type?: value-of<Type>|null,
-     *   updatedAt?: string|null,
-     *   verifyProfileID?: string|null,
-     * }> $data
-     * @param VerifyMeta|array{
-     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
-     * } $meta
+     * @param list<VerificationShape> $data
+     * @param VerifyMetaShape $meta
      */
     public static function with(array $data, VerifyMeta|array $meta): self
     {
@@ -80,18 +67,7 @@ final class ByPhoneNumberListResponse implements BaseModel
     }
 
     /**
-     * @param list<Verification|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   customCode?: string|null,
-     *   phoneNumber?: string|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   status?: value-of<Status>|null,
-     *   timeoutSecs?: int|null,
-     *   type?: value-of<Type>|null,
-     *   updatedAt?: string|null,
-     *   verifyProfileID?: string|null,
-     * }> $data
+     * @param list<VerificationShape> $data
      */
     public function withData(array $data): self
     {
@@ -102,9 +78,7 @@ final class ByPhoneNumberListResponse implements BaseModel
     }
 
     /**
-     * @param VerifyMeta|array{
-     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
-     * } $meta
+     * @param VerifyMetaShape $meta
      */
     public function withMeta(VerifyMeta|array $meta): self
     {

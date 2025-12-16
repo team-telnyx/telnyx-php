@@ -16,7 +16,7 @@ use Telnyx\Messaging10dlc\PhoneNumberAssignmentByProfile\TaskStatus;
  *   finishedAt: \DateTimeInterface,
  *   minClusterSize: int,
  *   minSubclusterSize: int,
- *   status: value-of<TaskStatus>,
+ *   status: TaskStatus|value-of<TaskStatus>,
  *   taskID: string,
  * }
  */

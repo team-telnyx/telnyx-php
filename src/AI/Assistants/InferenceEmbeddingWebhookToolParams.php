@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\BodyParameters;
-use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\BodyParameters\Type;
 use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Header;
 use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Method;
 use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\PathParameters;
@@ -16,15 +15,20 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type BodyParametersShape from \Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\BodyParameters
+ * @phpstan-import-type HeaderShape from \Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Header
+ * @phpstan-import-type PathParametersShape from \Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\PathParameters
+ * @phpstan-import-type QueryParametersShape from \Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\QueryParameters
+ *
  * @phpstan-type InferenceEmbeddingWebhookToolParamsShape = array{
  *   description: string,
  *   name: string,
  *   url: string,
- *   bodyParameters?: BodyParameters|null,
- *   headers?: list<Header>|null,
- *   method?: value-of<Method>|null,
- *   pathParameters?: PathParameters|null,
- *   queryParameters?: QueryParameters|null,
+ *   bodyParameters?: null|BodyParameters|BodyParametersShape,
+ *   headers?: list<HeaderShape>|null,
+ *   method?: null|Method|value-of<Method>,
+ *   pathParameters?: null|PathParameters|PathParametersShape,
+ *   queryParameters?: null|QueryParameters|QueryParametersShape,
  * }
  */
 final class InferenceEmbeddingWebhookToolParams implements BaseModel
@@ -111,23 +115,11 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BodyParameters|array{
-     *   properties?: array<string,mixed>|null,
-     *   required?: list<string>|null,
-     *   type?: value-of<Type>|null,
-     * } $bodyParameters
-     * @param list<Header|array{name?: string|null, value?: string|null}> $headers
+     * @param BodyParametersShape $bodyParameters
+     * @param list<HeaderShape> $headers
      * @param Method|value-of<Method> $method
-     * @param PathParameters|array{
-     *   properties?: array<string,mixed>|null,
-     *   required?: list<string>|null,
-     *   type?: value-of<PathParameters\Type>|null,
-     * } $pathParameters
-     * @param QueryParameters|array{
-     *   properties?: array<string,mixed>|null,
-     *   required?: list<string>|null,
-     *   type?: value-of<QueryParameters\Type>|null,
-     * } $queryParameters
+     * @param PathParametersShape $pathParameters
+     * @param QueryParametersShape $queryParameters
      */
     public static function with(
         string $description,
@@ -190,11 +182,7 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
     /**
      * The body parameters the webhook tool accepts, described as a JSON Schema object. These parameters will be passed to the webhook as the body of the request. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
      *
-     * @param BodyParameters|array{
-     *   properties?: array<string,mixed>|null,
-     *   required?: list<string>|null,
-     *   type?: value-of<Type>|null,
-     * } $bodyParameters
+     * @param BodyParametersShape $bodyParameters
      */
     public function withBodyParameters(
         BodyParameters|array $bodyParameters
@@ -208,7 +196,7 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
     /**
      * The headers to be sent to the external tool.
      *
-     * @param list<Header|array{name?: string|null, value?: string|null}> $headers
+     * @param list<HeaderShape> $headers
      */
     public function withHeaders(array $headers): self
     {
@@ -234,11 +222,7 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
     /**
      * The path parameters the webhook tool accepts, described as a JSON Schema object. These parameters will be passed to the webhook as the path of the request if the URL contains a placeholder for a value. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
      *
-     * @param PathParameters|array{
-     *   properties?: array<string,mixed>|null,
-     *   required?: list<string>|null,
-     *   type?: value-of<PathParameters\Type>|null,
-     * } $pathParameters
+     * @param PathParametersShape $pathParameters
      */
     public function withPathParameters(
         PathParameters|array $pathParameters
@@ -252,11 +236,7 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
     /**
      * The query parameters the webhook tool accepts, described as a JSON Schema object. These parameters will be passed to the webhook as the query of the request. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
      *
-     * @param QueryParameters|array{
-     *   properties?: array<string,mixed>|null,
-     *   required?: list<string>|null,
-     *   type?: value-of<QueryParameters\Type>|null,
-     * } $queryParameters
+     * @param QueryParametersShape $queryParameters
      */
     public function withQueryParameters(
         QueryParameters|array $queryParameters

@@ -8,13 +8,12 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings;
-use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings\Emergency;
-use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings\InboundCallScreening;
-use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings\UsagePaymentMethod;
 
 /**
+ * @phpstan-import-type PhoneNumberWithVoiceSettingsShape from \Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings
+ *
  * @phpstan-type VoiceGetResponseShape = array{
- *   data?: PhoneNumberWithVoiceSettings|null
+ *   data?: null|PhoneNumberWithVoiceSettings|PhoneNumberWithVoiceSettingsShape
  * }
  */
 final class VoiceGetResponse implements BaseModel
@@ -35,22 +34,7 @@ final class VoiceGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PhoneNumberWithVoiceSettings|array{
-     *   id?: string|null,
-     *   callForwarding?: CallForwarding|null,
-     *   callRecording?: CallRecording|null,
-     *   cnamListing?: CnamListing|null,
-     *   connectionID?: string|null,
-     *   customerReference?: string|null,
-     *   emergency?: Emergency|null,
-     *   inboundCallScreening?: value-of<InboundCallScreening>|null,
-     *   mediaFeatures?: MediaFeatures|null,
-     *   phoneNumber?: string|null,
-     *   recordType?: string|null,
-     *   techPrefixEnabled?: bool|null,
-     *   translatedNumber?: string|null,
-     *   usagePaymentMethod?: value-of<UsagePaymentMethod>|null,
-     * } $data
+     * @param PhoneNumberWithVoiceSettingsShape $data
      */
     public static function with(
         PhoneNumberWithVoiceSettings|array|null $data = null
@@ -63,22 +47,7 @@ final class VoiceGetResponse implements BaseModel
     }
 
     /**
-     * @param PhoneNumberWithVoiceSettings|array{
-     *   id?: string|null,
-     *   callForwarding?: CallForwarding|null,
-     *   callRecording?: CallRecording|null,
-     *   cnamListing?: CnamListing|null,
-     *   connectionID?: string|null,
-     *   customerReference?: string|null,
-     *   emergency?: Emergency|null,
-     *   inboundCallScreening?: value-of<InboundCallScreening>|null,
-     *   mediaFeatures?: MediaFeatures|null,
-     *   phoneNumber?: string|null,
-     *   recordType?: string|null,
-     *   techPrefixEnabled?: bool|null,
-     *   translatedNumber?: string|null,
-     *   usagePaymentMethod?: value-of<UsagePaymentMethod>|null,
-     * } $data
+     * @param PhoneNumberWithVoiceSettingsShape $data
      */
     public function withData(PhoneNumberWithVoiceSettings|array $data): self
     {

@@ -6,10 +6,7 @@ namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\Assistant\Tool;
 use Telnyx\AI\Assistants\Assistant\Tool\BookAppointmentTool;
-use Telnyx\AI\Assistants\Assistant\Tool\BookAppointmentTool\BookAppointment;
 use Telnyx\AI\Assistants\Assistant\Tool\CheckAvailabilityTool;
-use Telnyx\AI\Assistants\Assistant\Tool\CheckAvailabilityTool\CheckAvailability;
-use Telnyx\AI\Assistants\WebhookTool\Type;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -17,11 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Assistant configuration including choice of LLM, custom instructions, and tools.
  *
+ * @phpstan-import-type ToolShape from \Telnyx\AI\Assistants\Assistant\Tool
+ *
  * @phpstan-type AssistantShape = array{
  *   instructions?: string|null,
  *   model?: string|null,
  *   openaiAPIKeyRef?: string|null,
- *   tools?: list<BookAppointmentTool|CheckAvailabilityTool|WebhookTool|HangupTool|TransferTool|RetrievalTool>|null,
+ *   tools?: list<ToolShape>|null,
  * }
  */
 final class Assistant implements BaseModel
@@ -65,22 +64,7 @@ final class Assistant implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<BookAppointmentTool|array{
-     *   bookAppointment: BookAppointment, type?: 'book_appointment'
-     * }|CheckAvailabilityTool|array{
-     *   checkAvailability: CheckAvailability, type?: 'check_availability'
-     * }|WebhookTool|array{
-     *   type: value-of<Type>, webhook: InferenceEmbeddingWebhookToolParams
-     * }|HangupTool|array{
-     *   hangup: HangupToolParams,
-     *   type: value-of<HangupTool\Type>,
-     * }|TransferTool|array{
-     *   transfer: InferenceEmbeddingTransferToolParams,
-     *   type: value-of<TransferTool\Type>,
-     * }|RetrievalTool|array{
-     *   retrieval: InferenceEmbeddingBucketIDs,
-     *   type: value-of<RetrievalTool\Type>,
-     * }> $tools
+     * @param list<ToolShape> $tools
      */
     public static function with(
         ?string $instructions = null,
@@ -134,22 +118,7 @@ final class Assistant implements BaseModel
     /**
      * The tools that the voice assistant can use.
      *
-     * @param list<BookAppointmentTool|array{
-     *   bookAppointment: BookAppointment, type?: 'book_appointment'
-     * }|CheckAvailabilityTool|array{
-     *   checkAvailability: CheckAvailability, type?: 'check_availability'
-     * }|WebhookTool|array{
-     *   type: value-of<Type>, webhook: InferenceEmbeddingWebhookToolParams
-     * }|HangupTool|array{
-     *   hangup: HangupToolParams,
-     *   type: value-of<HangupTool\Type>,
-     * }|TransferTool|array{
-     *   transfer: InferenceEmbeddingTransferToolParams,
-     *   type: value-of<TransferTool\Type>,
-     * }|RetrievalTool|array{
-     *   retrieval: InferenceEmbeddingBucketIDs,
-     *   type: value-of<RetrievalTool\Type>,
-     * }> $tools
+     * @param list<ToolShape> $tools
      */
     public function withTools(array $tools): self
     {

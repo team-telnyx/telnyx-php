@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DtmfToolShape = array{
- *   sendDtmf: array<string,mixed>, type?: 'send_dtmf'
+ *   sendDtmf: array<string,mixed>, type: 'send_dtmf'
  * }
  */
 final class DtmfTool implements BaseModel
