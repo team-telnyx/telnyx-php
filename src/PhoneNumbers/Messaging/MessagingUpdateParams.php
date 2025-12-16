@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\PhoneNumbers\MessagingService::update()
  *
  * @phpstan-type MessagingUpdateParamsShape = array{
- *   messagingProduct?: string, messagingProfileID?: string
+ *   messagingProduct?: string|null, messagingProfileID?: string|null
  * }
  */
 final class MessagingUpdateParams implements BaseModel

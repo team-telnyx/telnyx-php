@@ -23,7 +23,7 @@ interface SimCardGroupsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|SimCardGroupCreateParams $params
+     * @param array<string,mixed>|SimCardGroupCreateParams $params
      *
      * @return BaseResponse<SimCardGroupNewResponse>
      *
@@ -38,7 +38,7 @@ interface SimCardGroupsRawContract
      * @api
      *
      * @param string $id identifies the SIM group
-     * @param array<mixed>|SimCardGroupRetrieveParams $params
+     * @param array<string,mixed>|SimCardGroupRetrieveParams $params
      *
      * @return BaseResponse<SimCardGroupGetResponse>
      *
@@ -54,7 +54,7 @@ interface SimCardGroupsRawContract
      * @api
      *
      * @param string $id identifies the SIM group
-     * @param array<mixed>|SimCardGroupUpdateParams $params
+     * @param array<string,mixed>|SimCardGroupUpdateParams $params
      *
      * @return BaseResponse<SimCardGroupUpdateResponse>
      *
@@ -69,7 +69,7 @@ interface SimCardGroupsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|SimCardGroupListParams $params
+     * @param array<string,mixed>|SimCardGroupListParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<SimCardGroupListResponse>>
      *

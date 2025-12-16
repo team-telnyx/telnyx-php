@@ -10,7 +10,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type BucketGetResponseShape = array{data: list<Data>}
+ * @phpstan-import-type DataShape from \Telnyx\AI\Embeddings\Buckets\BucketGetResponse\Data
+ *
+ * @phpstan-type BucketGetResponseShape = array{data: list<DataShape>}
  */
 final class BucketGetResponse implements BaseModel
 {
@@ -45,14 +47,7 @@ final class BucketGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   createdAt: \DateTimeInterface,
-     *   filename: string,
-     *   status: string,
-     *   errorReason?: string|null,
-     *   lastEmbeddedAt?: \DateTimeInterface|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public static function with(array $data): self
     {
@@ -64,14 +59,7 @@ final class BucketGetResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   createdAt: \DateTimeInterface,
-     *   filename: string,
-     *   status: string,
-     *   errorReason?: string|null,
-     *   lastEmbeddedAt?: \DateTimeInterface|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {

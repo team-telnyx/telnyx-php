@@ -18,14 +18,14 @@ use Telnyx\RequirementGroups\RequirementGroupCreateParams\RegulatoryRequirement;
  *
  * @see Telnyx\Services\RequirementGroupsService::create()
  *
+ * @phpstan-import-type RegulatoryRequirementShape from \Telnyx\RequirementGroups\RequirementGroupCreateParams\RegulatoryRequirement
+ *
  * @phpstan-type RequirementGroupCreateParamsShape = array{
  *   action: Action|value-of<Action>,
  *   countryCode: string,
  *   phoneNumberType: PhoneNumberType|value-of<PhoneNumberType>,
- *   customerReference?: string,
- *   regulatoryRequirements?: list<RegulatoryRequirement|array{
- *     fieldValue?: string|null, requirementID?: string|null
- *   }>,
+ *   customerReference?: string|null,
+ *   regulatoryRequirements?: list<RegulatoryRequirementShape>|null,
  * }
  */
 final class RequirementGroupCreateParams implements BaseModel
@@ -86,9 +86,7 @@ final class RequirementGroupCreateParams implements BaseModel
      *
      * @param Action|value-of<Action> $action
      * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
-     * @param list<RegulatoryRequirement|array{
-     *   fieldValue?: string|null, requirementID?: string|null
-     * }> $regulatoryRequirements
+     * @param list<RegulatoryRequirementShape> $regulatoryRequirements
      */
     public static function with(
         Action|string $action,
@@ -152,9 +150,7 @@ final class RequirementGroupCreateParams implements BaseModel
     }
 
     /**
-     * @param list<RegulatoryRequirement|array{
-     *   fieldValue?: string|null, requirementID?: string|null
-     * }> $regulatoryRequirements
+     * @param list<RegulatoryRequirementShape> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements

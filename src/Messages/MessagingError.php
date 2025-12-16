@@ -11,12 +11,14 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\MessagingError\Source;
 
 /**
+ * @phpstan-import-type SourceShape from \Telnyx\Messages\MessagingError\Source
+ *
  * @phpstan-type MessagingErrorShape = array{
  *   code: string,
  *   title: string,
  *   detail?: string|null,
  *   meta?: array<string,mixed>|null,
- *   source?: Source|null,
+ *   source?: null|Source|SourceShape,
  * }
  */
 final class MessagingError implements BaseModel
@@ -65,7 +67,7 @@ final class MessagingError implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param array<string,mixed> $meta
-     * @param Source|array{parameter?: string|null, pointer?: string|null} $source
+     * @param SourceShape $source
      */
     public static function with(
         string $code,
@@ -122,7 +124,7 @@ final class MessagingError implements BaseModel
     }
 
     /**
-     * @param Source|array{parameter?: string|null, pointer?: string|null} $source
+     * @param SourceShape $source
      */
     public function withSource(Source|array $source): self
     {

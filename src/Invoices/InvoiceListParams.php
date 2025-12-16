@@ -16,7 +16,7 @@ use Telnyx\Invoices\InvoiceListParams\Sort;
  * @see Telnyx\Services\InvoicesService::list()
  *
  * @phpstan-type InvoiceListParamsShape = array{
- *   pageNumber?: int, pageSize?: int, sort?: Sort|value-of<Sort>
+ *   pageNumber?: int|null, pageSize?: int|null, sort?: null|Sort|value-of<Sort>
  * }
  */
 final class InvoiceListParams implements BaseModel

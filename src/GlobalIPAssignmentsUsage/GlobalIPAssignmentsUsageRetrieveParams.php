@@ -9,18 +9,16 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filter;
-use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filter\GlobalIPAssignmentID\In;
 
 /**
  * Global IP Assignment Usage Metrics.
  *
  * @see Telnyx\Services\GlobalIPAssignmentsUsageService::retrieve()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filter
+ *
  * @phpstan-type GlobalIPAssignmentsUsageRetrieveParamsShape = array{
- *   filter?: Filter|array{
- *     globalIPAssignmentID?: string|null|In,
- *     globalIPID?: string|null|\Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filter\GlobalIPID\In,
- *   },
+ *   filter?: FilterShape|null
  * }
  */
 final class GlobalIPAssignmentsUsageRetrieveParams implements BaseModel
@@ -45,10 +43,7 @@ final class GlobalIPAssignmentsUsageRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   globalIPAssignmentID?: string|In|null,
-     *   globalIPID?: string|Filter\GlobalIPID\In|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public static function with(Filter|array|null $filter = null): self
     {
@@ -62,10 +57,7 @@ final class GlobalIPAssignmentsUsageRetrieveParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[global_ip_assignment_id][in], filter[global_ip_id][in].
      *
-     * @param Filter|array{
-     *   globalIPAssignmentID?: string|In|null,
-     *   globalIPID?: string|Filter\GlobalIPID\In|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

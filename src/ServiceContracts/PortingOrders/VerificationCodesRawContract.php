@@ -20,7 +20,7 @@ interface VerificationCodesRawContract
      * @api
      *
      * @param string $id Porting Order id
-     * @param array<mixed>|VerificationCodeListParams $params
+     * @param array<string,mixed>|VerificationCodeListParams $params
      *
      * @return BaseResponse<DefaultPagination<VerificationCodeListResponse>>
      *
@@ -36,7 +36,7 @@ interface VerificationCodesRawContract
      * @api
      *
      * @param string $id Porting Order id
-     * @param array<mixed>|VerificationCodeSendParams $params
+     * @param array<string,mixed>|VerificationCodeSendParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -52,7 +52,7 @@ interface VerificationCodesRawContract
      * @api
      *
      * @param string $id Porting Order id
-     * @param array<mixed>|VerificationCodeVerifyParams $params
+     * @param array<string,mixed>|VerificationCodeVerifyParams $params
      *
      * @return BaseResponse<VerificationCodeVerifyResponse>
      *

@@ -15,7 +15,7 @@ interface ChargesSummaryRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ChargesSummaryRetrieveParams $params
+     * @param array<string,mixed>|ChargesSummaryRetrieveParams $params
      *
      * @return BaseResponse<ChargesSummaryGetResponse>
      *

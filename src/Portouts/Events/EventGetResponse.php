@@ -11,14 +11,12 @@ use Telnyx\Portouts\Events\EventGetResponse\Data;
 use Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutFocDateChanged;
 use Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutNewComment;
 use Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutStatusChanged;
-use Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutStatusChanged\AvailableNotificationMethod;
-use Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutStatusChanged\EventType;
-use Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutStatusChanged\Payload;
-use Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutStatusChanged\PayloadStatus;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\Portouts\Events\EventGetResponse\Data
+ *
  * @phpstan-type EventGetResponseShape = array{
- *   data?: null|WebhookPortoutStatusChanged|WebhookPortoutNewComment|WebhookPortoutFocDateChanged,
+ *   data?: null|DataShape|WebhookPortoutStatusChanged|WebhookPortoutNewComment|WebhookPortoutFocDateChanged,
  * }
  */
 final class EventGetResponse implements BaseModel
@@ -39,37 +37,7 @@ final class EventGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param WebhookPortoutStatusChanged|array{
-     *   id?: string|null,
-     *   availableNotificationMethods?: list<value-of<AvailableNotificationMethod>>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   eventType?: value-of<EventType>|null,
-     *   payload?: Payload|null,
-     *   payloadStatus?: value-of<PayloadStatus>|null,
-     *   portoutID?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }|WebhookPortoutNewComment|array{
-     *   id?: string|null,
-     *   availableNotificationMethods?: list<value-of<WebhookPortoutNewComment\AvailableNotificationMethod>>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   eventType?: value-of<WebhookPortoutNewComment\EventType>|null,
-     *   payload?: WebhookPortoutNewComment\Payload|null,
-     *   payloadStatus?: value-of<WebhookPortoutNewComment\PayloadStatus>|null,
-     *   portoutID?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }|WebhookPortoutFocDateChanged|array{
-     *   id?: string|null,
-     *   availableNotificationMethods?: list<value-of<WebhookPortoutFocDateChanged\AvailableNotificationMethod>>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   eventType?: value-of<WebhookPortoutFocDateChanged\EventType>|null,
-     *   payload?: WebhookPortoutFocDateChanged\Payload|null,
-     *   payloadStatus?: value-of<WebhookPortoutFocDateChanged\PayloadStatus>|null,
-     *   portoutID?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(
         WebhookPortoutStatusChanged|array|WebhookPortoutNewComment|WebhookPortoutFocDateChanged|null $data = null,
@@ -82,37 +50,7 @@ final class EventGetResponse implements BaseModel
     }
 
     /**
-     * @param WebhookPortoutStatusChanged|array{
-     *   id?: string|null,
-     *   availableNotificationMethods?: list<value-of<AvailableNotificationMethod>>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   eventType?: value-of<EventType>|null,
-     *   payload?: Payload|null,
-     *   payloadStatus?: value-of<PayloadStatus>|null,
-     *   portoutID?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }|WebhookPortoutNewComment|array{
-     *   id?: string|null,
-     *   availableNotificationMethods?: list<value-of<WebhookPortoutNewComment\AvailableNotificationMethod>>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   eventType?: value-of<WebhookPortoutNewComment\EventType>|null,
-     *   payload?: WebhookPortoutNewComment\Payload|null,
-     *   payloadStatus?: value-of<WebhookPortoutNewComment\PayloadStatus>|null,
-     *   portoutID?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }|WebhookPortoutFocDateChanged|array{
-     *   id?: string|null,
-     *   availableNotificationMethods?: list<value-of<WebhookPortoutFocDateChanged\AvailableNotificationMethod>>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   eventType?: value-of<WebhookPortoutFocDateChanged\EventType>|null,
-     *   payload?: WebhookPortoutFocDateChanged\Payload|null,
-     *   payloadStatus?: value-of<WebhookPortoutFocDateChanged\PayloadStatus>|null,
-     *   portoutID?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(
         WebhookPortoutStatusChanged|array|WebhookPortoutNewComment|WebhookPortoutFocDateChanged $data,

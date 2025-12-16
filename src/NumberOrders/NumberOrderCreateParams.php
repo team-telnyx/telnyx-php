@@ -15,16 +15,14 @@ use Telnyx\NumberOrders\NumberOrderCreateParams\PhoneNumber;
  *
  * @see Telnyx\Services\NumberOrdersService::create()
  *
+ * @phpstan-import-type PhoneNumberShape from \Telnyx\NumberOrders\NumberOrderCreateParams\PhoneNumber
+ *
  * @phpstan-type NumberOrderCreateParamsShape = array{
- *   billingGroupID?: string,
- *   connectionID?: string,
- *   customerReference?: string,
- *   messagingProfileID?: string,
- *   phoneNumbers?: list<\Telnyx\NumberOrders\NumberOrderCreateParams\PhoneNumber|array{
- *     phoneNumber: string,
- *     bundleID?: string|null,
- *     requirementGroupID?: string|null,
- *   }>,
+ *   billingGroupID?: string|null,
+ *   connectionID?: string|null,
+ *   customerReference?: string|null,
+ *   messagingProfileID?: string|null,
+ *   phoneNumbers?: list<PhoneNumberShape>|null,
  * }
  */
 final class NumberOrderCreateParams implements BaseModel
@@ -76,9 +74,7 @@ final class NumberOrderCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PhoneNumber|array{
-     *   phoneNumber: string, bundleID?: string|null, requirementGroupID?: string|null
-     * }> $phoneNumbers
+     * @param list<PhoneNumberShape> $phoneNumbers
      */
     public static function with(
         ?string $billingGroupID = null,
@@ -143,9 +139,7 @@ final class NumberOrderCreateParams implements BaseModel
     }
 
     /**
-     * @param list<PhoneNumber|array{
-     *   phoneNumber: string, bundleID?: string|null, requirementGroupID?: string|null
-     * }> $phoneNumbers
+     * @param list<PhoneNumberShape> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {

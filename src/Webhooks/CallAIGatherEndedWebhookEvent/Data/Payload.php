@@ -8,10 +8,11 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallAIGatherEndedWebhookEvent\Data\Payload\MessageHistory;
-use Telnyx\Webhooks\CallAIGatherEndedWebhookEvent\Data\Payload\MessageHistory\Role;
 use Telnyx\Webhooks\CallAIGatherEndedWebhookEvent\Data\Payload\Status;
 
 /**
+ * @phpstan-import-type MessageHistoryShape from \Telnyx\Webhooks\CallAIGatherEndedWebhookEvent\Data\Payload\MessageHistory
+ *
  * @phpstan-type PayloadShape = array{
  *   callControlID?: string|null,
  *   callLegID?: string|null,
@@ -19,9 +20,9 @@ use Telnyx\Webhooks\CallAIGatherEndedWebhookEvent\Data\Payload\Status;
  *   clientState?: string|null,
  *   connectionID?: string|null,
  *   from?: string|null,
- *   messageHistory?: list<MessageHistory>|null,
+ *   messageHistory?: list<MessageHistoryShape>|null,
  *   result?: array<string,mixed>|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   to?: string|null,
  * }
  */
@@ -106,9 +107,7 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<MessageHistory|array{
-     *   content?: string|null, role?: value-of<Role>|null
-     * }> $messageHistory
+     * @param list<MessageHistoryShape> $messageHistory
      * @param array<string,mixed> $result
      * @param Status|value-of<Status> $status
      */
@@ -209,9 +208,7 @@ final class Payload implements BaseModel
     /**
      * The history of the messages exchanged during the AI gather.
      *
-     * @param list<MessageHistory|array{
-     *   content?: string|null, role?: value-of<Role>|null
-     * }> $messageHistory
+     * @param list<MessageHistoryShape> $messageHistory
      */
     public function withMessageHistory(array $messageHistory): self
     {

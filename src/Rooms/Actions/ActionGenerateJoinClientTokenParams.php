@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Rooms\ActionsService::generateJoinClientToken()
  *
  * @phpstan-type ActionGenerateJoinClientTokenParamsShape = array{
- *   refreshTokenTtlSecs?: int, tokenTtlSecs?: int
+ *   refreshTokenTtlSecs?: int|null, tokenTtlSecs?: int|null
  * }
  */
 final class ActionGenerateJoinClientTokenParams implements BaseModel

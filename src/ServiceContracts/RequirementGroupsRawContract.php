@@ -17,7 +17,7 @@ interface RequirementGroupsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|RequirementGroupCreateParams $params
+     * @param array<string,mixed>|RequirementGroupCreateParams $params
      *
      * @return BaseResponse<RequirementGroup>
      *
@@ -46,7 +46,7 @@ interface RequirementGroupsRawContract
      * @api
      *
      * @param string $id ID of the requirement group
-     * @param array<mixed>|RequirementGroupUpdateParams $params
+     * @param array<string,mixed>|RequirementGroupUpdateParams $params
      *
      * @return BaseResponse<RequirementGroup>
      *
@@ -61,7 +61,7 @@ interface RequirementGroupsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|RequirementGroupListParams $params
+     * @param array<string,mixed>|RequirementGroupListParams $params
      *
      * @return BaseResponse<list<RequirementGroup>>
      *

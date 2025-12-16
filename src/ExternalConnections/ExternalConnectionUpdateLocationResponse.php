@@ -10,8 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\ExternalConnectionUpdateLocationResponse\Data;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\ExternalConnections\ExternalConnectionUpdateLocationResponse\Data
+ *
  * @phpstan-type ExternalConnectionUpdateLocationResponseShape = array{
- *   data?: Data|null
+ *   data?: null|Data|DataShape
  * }
  */
 final class ExternalConnectionUpdateLocationResponse implements BaseModel
@@ -32,11 +34,7 @@ final class ExternalConnectionUpdateLocationResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   acceptedAddressSuggestions?: bool|null,
-     *   locationID?: string|null,
-     *   staticEmergencyAddressID?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -48,11 +46,7 @@ final class ExternalConnectionUpdateLocationResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   acceptedAddressSuggestions?: bool|null,
-     *   locationID?: string|null,
-     *   staticEmergencyAddressID?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

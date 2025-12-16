@@ -9,7 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\CountryISOAlpha2;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\NumberType;
-use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\NumberType\Eq;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\Source;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\Status;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\VoiceConnectionName;
@@ -18,19 +17,23 @@ use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\VoiceUsagePaymentMethod
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[phone_number], filter[status], filter[country_iso_alpha2], filter[connection_id], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference], filter[number_type], filter[source].
  *
+ * @phpstan-import-type CountryISOAlpha2Shape from \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\CountryISOAlpha2
+ * @phpstan-import-type NumberTypeShape from \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\NumberType
+ * @phpstan-import-type VoiceConnectionNameShape from \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\VoiceConnectionName
+ *
  * @phpstan-type FilterShape = array{
  *   billingGroupID?: string|null,
  *   connectionID?: string|null,
- *   countryISOAlpha2?: string|null|list<string>,
+ *   countryISOAlpha2?: CountryISOAlpha2Shape|null,
  *   customerReference?: string|null,
  *   emergencyAddressID?: string|null,
- *   numberType?: NumberType|null,
+ *   numberType?: null|NumberType|NumberTypeShape,
  *   phoneNumber?: string|null,
- *   source?: value-of<Source>|null,
- *   status?: value-of<Status>|null,
+ *   source?: null|Source|value-of<Source>,
+ *   status?: null|Status|value-of<Status>,
  *   tag?: string|null,
- *   voiceConnectionName?: VoiceConnectionName|null,
- *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
+ *   voiceConnectionName?: null|VoiceConnectionName|VoiceConnectionNameShape,
+ *   voiceUsagePaymentMethod?: null|VoiceUsagePaymentMethod|value-of<VoiceUsagePaymentMethod>,
  * }
  */
 final class Filter implements BaseModel
@@ -132,16 +135,11 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param string|list<string> $countryISOAlpha2
-     * @param NumberType|array{eq?: value-of<Eq>|null} $numberType
+     * @param CountryISOAlpha2Shape $countryISOAlpha2
+     * @param NumberTypeShape $numberType
      * @param Source|value-of<Source> $source
      * @param Status|value-of<Status> $status
-     * @param VoiceConnectionName|array{
-     *   contains?: string|null,
-     *   endsWith?: string|null,
-     *   eq?: string|null,
-     *   startsWith?: string|null,
-     * } $voiceConnectionName
+     * @param VoiceConnectionNameShape $voiceConnectionName
      * @param VoiceUsagePaymentMethod|value-of<VoiceUsagePaymentMethod> $voiceUsagePaymentMethod
      */
     public static function with(
@@ -201,7 +199,7 @@ final class Filter implements BaseModel
     /**
      * Filter by phone number country ISO alpha-2 code. Can be a single value or an array of values.
      *
-     * @param string|list<string> $countryISOAlpha2
+     * @param CountryISOAlpha2Shape $countryISOAlpha2
      */
     public function withCountryISOAlpha2(string|array $countryISOAlpha2): self
     {
@@ -236,7 +234,7 @@ final class Filter implements BaseModel
     /**
      * Filter phone numbers by phone number type.
      *
-     * @param NumberType|array{eq?: value-of<Eq>|null} $numberType
+     * @param NumberTypeShape $numberType
      */
     public function withNumberType(NumberType|array $numberType): self
     {
@@ -298,12 +296,7 @@ final class Filter implements BaseModel
     /**
      * Filter by voice connection name pattern matching (requires include_connection param).
      *
-     * @param VoiceConnectionName|array{
-     *   contains?: string|null,
-     *   endsWith?: string|null,
-     *   eq?: string|null,
-     *   startsWith?: string|null,
-     * } $voiceConnectionName
+     * @param VoiceConnectionNameShape $voiceConnectionName
      */
     public function withVoiceConnectionName(
         VoiceConnectionName|array $voiceConnectionName

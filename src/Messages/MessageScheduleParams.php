@@ -22,17 +22,17 @@ use Telnyx\Messages\MessageScheduleParams\Type;
  *
  * @phpstan-type MessageScheduleParamsShape = array{
  *   to: string,
- *   autoDetect?: bool,
- *   from?: string,
- *   mediaURLs?: list<string>,
- *   messagingProfileID?: string,
- *   sendAt?: \DateTimeInterface,
- *   subject?: string,
- *   text?: string,
- *   type?: Type|value-of<Type>,
- *   useProfileWebhooks?: bool,
- *   webhookFailoverURL?: string,
- *   webhookURL?: string,
+ *   autoDetect?: bool|null,
+ *   from?: string|null,
+ *   mediaURLs?: list<string>|null,
+ *   messagingProfileID?: string|null,
+ *   sendAt?: \DateTimeInterface|null,
+ *   subject?: string|null,
+ *   text?: string|null,
+ *   type?: null|Type|value-of<Type>,
+ *   useProfileWebhooks?: bool|null,
+ *   webhookFailoverURL?: string|null,
+ *   webhookURL?: string|null,
  * }
  */
 final class MessageScheduleParams implements BaseModel

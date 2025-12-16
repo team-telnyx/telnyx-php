@@ -14,10 +14,14 @@ use Telnyx\Documents\DocumentListParams\Filter\Filename;
 /**
  * Consolidated filter parameter for documents (deepObject style). Originally: filter[filename][contains], filter[customer_reference][eq], filter[customer_reference][in][], filter[created_at][gt], filter[created_at][lt].
  *
+ * @phpstan-import-type CreatedAtShape from \Telnyx\Documents\DocumentListParams\Filter\CreatedAt
+ * @phpstan-import-type CustomerReferenceShape from \Telnyx\Documents\DocumentListParams\Filter\CustomerReference
+ * @phpstan-import-type FilenameShape from \Telnyx\Documents\DocumentListParams\Filter\Filename
+ *
  * @phpstan-type FilterShape = array{
- *   createdAt?: CreatedAt|null,
- *   customerReference?: CustomerReference|null,
- *   filename?: Filename|null,
+ *   createdAt?: null|CreatedAt|CreatedAtShape,
+ *   customerReference?: null|CustomerReference|CustomerReferenceShape,
+ *   filename?: null|Filename|FilenameShape,
  * }
  */
 final class Filter implements BaseModel
@@ -44,13 +48,9 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CreatedAt|array{
-     *   gt?: \DateTimeInterface|null, lt?: \DateTimeInterface|null
-     * } $createdAt
-     * @param CustomerReference|array{
-     *   eq?: string|null, in?: list<string>|null
-     * } $customerReference
-     * @param Filename|array{contains?: string|null} $filename
+     * @param CreatedAtShape $createdAt
+     * @param CustomerReferenceShape $customerReference
+     * @param FilenameShape $filename
      */
     public static function with(
         CreatedAt|array|null $createdAt = null,
@@ -67,9 +67,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param CreatedAt|array{
-     *   gt?: \DateTimeInterface|null, lt?: \DateTimeInterface|null
-     * } $createdAt
+     * @param CreatedAtShape $createdAt
      */
     public function withCreatedAt(CreatedAt|array $createdAt): self
     {
@@ -80,9 +78,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param CustomerReference|array{
-     *   eq?: string|null, in?: list<string>|null
-     * } $customerReference
+     * @param CustomerReferenceShape $customerReference
      */
     public function withCustomerReference(
         CustomerReference|array $customerReference
@@ -94,7 +90,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param Filename|array{contains?: string|null} $filename
+     * @param FilenameShape $filename
      */
     public function withFilename(Filename|array $filename): self
     {

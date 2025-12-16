@@ -21,7 +21,7 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op;
  *   countryCode: string,
  *   keywords: list<string>,
  *   op: Op|value-of<Op>,
- *   respText?: string,
+ *   respText?: string|null,
  * }
  */
 final class AutorespConfigUpdateParams implements BaseModel

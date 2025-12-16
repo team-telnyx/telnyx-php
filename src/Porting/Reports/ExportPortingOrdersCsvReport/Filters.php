@@ -16,7 +16,7 @@ use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport\Filters\StatusIn;
  *   createdAtGt?: \DateTimeInterface|null,
  *   createdAtLt?: \DateTimeInterface|null,
  *   customerReferenceIn?: list<string>|null,
- *   statusIn?: list<value-of<StatusIn>>|null,
+ *   statusIn?: list<StatusIn|value-of<StatusIn>>|null,
  * }
  */
 final class Filters implements BaseModel

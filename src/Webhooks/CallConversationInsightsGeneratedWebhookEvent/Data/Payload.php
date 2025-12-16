@@ -11,15 +11,17 @@ use Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data\Payload\C
 use Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data\Payload\Result1 as Result;
 
 /**
+ * @phpstan-import-type Result1Shape from \Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data\Payload\Result1
+ *
  * @phpstan-type PayloadShape = array{
  *   callControlID?: string|null,
  *   callLegID?: string|null,
  *   callSessionID?: string|null,
- *   callingPartyType?: value-of<CallingPartyType>|null,
+ *   callingPartyType?: null|CallingPartyType|value-of<CallingPartyType>,
  *   clientState?: string|null,
  *   connectionID?: string|null,
  *   insightGroupID?: string|null,
- *   results?: list<Result>|null,
+ *   results?: list<Result1Shape>|null,
  * }
  */
 final class Payload implements BaseModel
@@ -90,9 +92,7 @@ final class Payload implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param CallingPartyType|value-of<CallingPartyType> $callingPartyType
-     * @param list<Result|array{
-     *   insightID?: string|null, result?: string|array<string,mixed>|null
-     * }> $results
+     * @param list<Result1Shape> $results
      */
     public static function with(
         ?string $callControlID = null,
@@ -201,9 +201,7 @@ final class Payload implements BaseModel
     /**
      * Array of insight results being generated for the call.
      *
-     * @param list<Result|array{
-     *   insightID?: string|null, result?: string|array<string,mixed>|null
-     * }> $results
+     * @param list<Result1Shape> $results
      */
     public function withResults(array $results): self
     {

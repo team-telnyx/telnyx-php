@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\Assistants\Tests\RunsService::list()
  *
  * @phpstan-type RunListParamsShape = array{
- *   pageNumber?: int, pageSize?: int, status?: string
+ *   pageNumber?: int|null, pageSize?: int|null, status?: string|null
  * }
  */
 final class RunListParams implements BaseModel

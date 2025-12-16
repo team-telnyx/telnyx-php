@@ -10,19 +10,18 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventSplitEvent\AvailableNotificationMethod;
 use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventSplitEvent\EventType;
 use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventSplitEvent\Payload;
-use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventSplitEvent\Payload\From;
-use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventSplitEvent\Payload\PortingPhoneNumber;
-use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventSplitEvent\Payload\To;
 use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventSplitEvent\PayloadStatus;
 
 /**
+ * @phpstan-import-type PayloadShape from \Telnyx\Porting\Events\EventGetResponse\Data\PortingEventSplitEvent\Payload
+ *
  * @phpstan-type PortingEventSplitEventShape = array{
  *   id?: string|null,
- *   availableNotificationMethods?: list<value-of<AvailableNotificationMethod>>|null,
+ *   availableNotificationMethods?: list<AvailableNotificationMethod|value-of<AvailableNotificationMethod>>|null,
  *   createdAt?: \DateTimeInterface|null,
- *   eventType?: value-of<EventType>|null,
- *   payload?: Payload|null,
- *   payloadStatus?: value-of<PayloadStatus>|null,
+ *   eventType?: null|EventType|value-of<EventType>,
+ *   payload?: null|Payload|PayloadShape,
+ *   payloadStatus?: null|PayloadStatus|value-of<PayloadStatus>,
  *   portingOrderID?: string|null,
  *   recordType?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
@@ -108,11 +107,7 @@ final class PortingEventSplitEvent implements BaseModel
      *
      * @param list<AvailableNotificationMethod|value-of<AvailableNotificationMethod>> $availableNotificationMethods
      * @param EventType|value-of<EventType> $eventType
-     * @param Payload|array{
-     *   from?: From|null,
-     *   portingPhoneNumbers?: list<PortingPhoneNumber>|null,
-     *   to?: To|null,
-     * } $payload
+     * @param PayloadShape $payload
      * @param PayloadStatus|value-of<PayloadStatus> $payloadStatus
      */
     public static function with(
@@ -193,11 +188,7 @@ final class PortingEventSplitEvent implements BaseModel
     /**
      * The webhook payload for the porting_order.split event.
      *
-     * @param Payload|array{
-     *   from?: From|null,
-     *   portingPhoneNumbers?: list<PortingPhoneNumber>|null,
-     *   to?: To|null,
-     * } $payload
+     * @param PayloadShape $payload
      */
     public function withPayload(Payload|array $payload): self
     {

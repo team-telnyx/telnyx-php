@@ -10,12 +10,14 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type MonthDetailShape from \Telnyx\ChargesSummary\MonthDetail
+ *
  * @phpstan-type ComparativeLineShape = array{
  *   alias: string,
- *   existingThisMonth: MonthDetail,
+ *   existingThisMonth: MonthDetail|MonthDetailShape,
  *   name: string,
- *   newThisMonth: MonthDetail,
- *   type?: 'comparative',
+ *   newThisMonth: MonthDetail|MonthDetailShape,
+ *   type: 'comparative',
  * }
  */
 final class ComparativeLine implements BaseModel
@@ -75,12 +77,8 @@ final class ComparativeLine implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MonthDetail|array{
-     *   mrc: string, quantity: int, otc?: string|null
-     * } $existingThisMonth
-     * @param MonthDetail|array{
-     *   mrc: string, quantity: int, otc?: string|null
-     * } $newThisMonth
+     * @param MonthDetailShape $existingThisMonth
+     * @param MonthDetailShape $newThisMonth
      */
     public static function with(
         string $alias,
@@ -110,9 +108,7 @@ final class ComparativeLine implements BaseModel
     }
 
     /**
-     * @param MonthDetail|array{
-     *   mrc: string, quantity: int, otc?: string|null
-     * } $existingThisMonth
+     * @param MonthDetailShape $existingThisMonth
      */
     public function withExistingThisMonth(
         MonthDetail|array $existingThisMonth
@@ -135,9 +131,7 @@ final class ComparativeLine implements BaseModel
     }
 
     /**
-     * @param MonthDetail|array{
-     *   mrc: string, quantity: int, otc?: string|null
-     * } $newThisMonth
+     * @param MonthDetailShape $newThisMonth
      */
     public function withNewThisMonth(MonthDetail|array $newThisMonth): self
     {

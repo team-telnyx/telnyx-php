@@ -14,7 +14,7 @@ use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateResponse\Data\Prefere
  *   id?: string|null,
  *   enabled?: bool|null,
  *   invoiceEnabled?: bool|null,
- *   preference?: value-of<Preference>|null,
+ *   preference?: null|Preference|value-of<Preference>,
  *   rechargeAmount?: string|null,
  *   recordType?: string|null,
  *   thresholdAmount?: string|null,

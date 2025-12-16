@@ -7,11 +7,12 @@ namespace Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SttDetailReportResponse\Status;
 
 /**
+ * @phpstan-import-type SttDetailReportResponseShape from \Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SttDetailReportResponse
+ *
  * @phpstan-type SpeechToTextListResponseShape = array{
- *   data?: list<SttDetailReportResponse>|null
+ *   data?: list<SttDetailReportResponseShape>|null
  * }
  */
 final class SpeechToTextListResponse implements BaseModel
@@ -33,15 +34,7 @@ final class SpeechToTextListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SttDetailReportResponse|array{
-     *   id?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   downloadLink?: string|null,
-     *   endDate?: \DateTimeInterface|null,
-     *   recordType?: string|null,
-     *   startDate?: \DateTimeInterface|null,
-     *   status?: value-of<Status>|null,
-     * }> $data
+     * @param list<SttDetailReportResponseShape> $data
      */
     public static function with(?array $data = null): self
     {
@@ -53,15 +46,7 @@ final class SpeechToTextListResponse implements BaseModel
     }
 
     /**
-     * @param list<SttDetailReportResponse|array{
-     *   id?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   downloadLink?: string|null,
-     *   endDate?: \DateTimeInterface|null,
-     *   recordType?: string|null,
-     *   startDate?: \DateTimeInterface|null,
-     *   status?: value-of<Status>|null,
-     * }> $data
+     * @param list<SttDetailReportResponseShape> $data
      */
     public function withData(array $data): self
     {

@@ -42,7 +42,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $id Uniquely identifies the conference by id or name
-     * @param array<mixed>|ActionUpdateParams $params
+     * @param array<string,mixed>|ActionUpdateParams $params
      *
      * @return BaseResponse<ActionUpdateResponse>
      *
@@ -58,7 +58,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $id Uniquely identifies the conference by id or name
-     * @param array<mixed>|ActionHoldParams $params
+     * @param array<string,mixed>|ActionHoldParams $params
      *
      * @return BaseResponse<ActionHoldResponse>
      *
@@ -74,7 +74,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $id Uniquely identifies the conference by id or name
-     * @param array<mixed>|ActionJoinParams $params
+     * @param array<string,mixed>|ActionJoinParams $params
      *
      * @return BaseResponse<ActionJoinResponse>
      *
@@ -90,7 +90,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $id Uniquely identifies the conference by id or name
-     * @param array<mixed>|ActionLeaveParams $params
+     * @param array<string,mixed>|ActionLeaveParams $params
      *
      * @return BaseResponse<ActionLeaveResponse>
      *
@@ -106,7 +106,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $id Uniquely identifies the conference by id or name
-     * @param array<mixed>|ActionMuteParams $params
+     * @param array<string,mixed>|ActionMuteParams $params
      *
      * @return BaseResponse<ActionMuteResponse>
      *
@@ -122,7 +122,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $id Uniquely identifies the conference by id or name
-     * @param array<mixed>|ActionPlayParams $params
+     * @param array<string,mixed>|ActionPlayParams $params
      *
      * @return BaseResponse<ActionPlayResponse>
      *
@@ -138,7 +138,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $id Specifies the conference by id or name
-     * @param array<mixed>|ActionRecordPauseParams $params
+     * @param array<string,mixed>|ActionRecordPauseParams $params
      *
      * @return BaseResponse<ActionRecordPauseResponse>
      *
@@ -154,7 +154,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $id Specifies the conference by id or name
-     * @param array<mixed>|ActionRecordResumeParams $params
+     * @param array<string,mixed>|ActionRecordResumeParams $params
      *
      * @return BaseResponse<ActionRecordResumeResponse>
      *
@@ -170,7 +170,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $id Specifies the conference to record by id or name
-     * @param array<mixed>|ActionRecordStartParams $params
+     * @param array<string,mixed>|ActionRecordStartParams $params
      *
      * @return BaseResponse<ActionRecordStartResponse>
      *
@@ -186,7 +186,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $id Specifies the conference to stop the recording for by id or name
-     * @param array<mixed>|ActionRecordStopParams $params
+     * @param array<string,mixed>|ActionRecordStopParams $params
      *
      * @return BaseResponse<ActionRecordStopResponse>
      *
@@ -202,7 +202,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $id Specifies the conference by id or name
-     * @param array<mixed>|ActionSpeakParams $params
+     * @param array<string,mixed>|ActionSpeakParams $params
      *
      * @return BaseResponse<ActionSpeakResponse>
      *
@@ -218,7 +218,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $id Uniquely identifies the conference by id or name
-     * @param array<mixed>|ActionStopParams $params
+     * @param array<string,mixed>|ActionStopParams $params
      *
      * @return BaseResponse<ActionStopResponse>
      *
@@ -234,7 +234,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $id Uniquely identifies the conference by id or name
-     * @param array<mixed>|ActionUnholdParams $params
+     * @param array<string,mixed>|ActionUnholdParams $params
      *
      * @return BaseResponse<ActionUnholdResponse>
      *
@@ -250,7 +250,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $id Uniquely identifies the conference by id or name
-     * @param array<mixed>|ActionUnmuteParams $params
+     * @param array<string,mixed>|ActionUnmuteParams $params
      *
      * @return BaseResponse<ActionUnmuteResponse>
      *

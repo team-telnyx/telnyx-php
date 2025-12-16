@@ -7,19 +7,21 @@ namespace Telnyx\PrivateWirelessGateways;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayStatus\Value;
 
 /**
+ * @phpstan-import-type PwgAssignedResourcesSummaryShape from \Telnyx\PrivateWirelessGateways\PwgAssignedResourcesSummary
+ * @phpstan-import-type PrivateWirelessGatewayStatusShape from \Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayStatus
+ *
  * @phpstan-type PrivateWirelessGatewayShape = array{
  *   id?: string|null,
- *   assignedResources?: list<PwgAssignedResourcesSummary>|null,
+ *   assignedResources?: list<PwgAssignedResourcesSummaryShape>|null,
  *   createdAt?: string|null,
  *   ipRange?: string|null,
  *   name?: string|null,
  *   networkID?: string|null,
  *   recordType?: string|null,
  *   regionCode?: string|null,
- *   status?: PrivateWirelessGatewayStatus|null,
+ *   status?: null|PrivateWirelessGatewayStatus|PrivateWirelessGatewayStatusShape,
  *   updatedAt?: string|null,
  * }
  */
@@ -97,14 +99,8 @@ final class PrivateWirelessGateway implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PwgAssignedResourcesSummary|array{
-     *   count?: int|null, recordType?: string|null
-     * }> $assignedResources
-     * @param PrivateWirelessGatewayStatus|array{
-     *   errorCode?: string|null,
-     *   errorDescription?: string|null,
-     *   value?: value-of<Value>|null,
-     * } $status
+     * @param list<PwgAssignedResourcesSummaryShape> $assignedResources
+     * @param PrivateWirelessGatewayStatusShape $status
      */
     public static function with(
         ?string $id = null,
@@ -148,9 +144,7 @@ final class PrivateWirelessGateway implements BaseModel
     /**
      * A list of the resources that have been assigned to the Private Wireless Gateway.
      *
-     * @param list<PwgAssignedResourcesSummary|array{
-     *   count?: int|null, recordType?: string|null
-     * }> $assignedResources
+     * @param list<PwgAssignedResourcesSummaryShape> $assignedResources
      */
     public function withAssignedResources(array $assignedResources): self
     {
@@ -226,11 +220,7 @@ final class PrivateWirelessGateway implements BaseModel
     /**
      * The current status or failure details of the Private Wireless Gateway.
      *
-     * @param PrivateWirelessGatewayStatus|array{
-     *   errorCode?: string|null,
-     *   errorDescription?: string|null,
-     *   value?: value-of<Value>|null,
-     * } $status
+     * @param PrivateWirelessGatewayStatusShape $status
      */
     public function withStatus(PrivateWirelessGatewayStatus|array $status): self
     {

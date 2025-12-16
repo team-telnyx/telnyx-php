@@ -26,7 +26,7 @@ interface CallsRawContract
      * @api
      *
      * @param string $callSid the CallSid that identifies the call to update
-     * @param array<mixed>|CallRetrieveParams $params
+     * @param array<string,mixed>|CallRetrieveParams $params
      *
      * @return BaseResponse<CallGetResponse>
      *
@@ -42,7 +42,7 @@ interface CallsRawContract
      * @api
      *
      * @param string $callSid path param: The CallSid that identifies the call to update
-     * @param array<mixed>|CallUpdateParams $params
+     * @param array<string,mixed>|CallUpdateParams $params
      *
      * @return BaseResponse<CallUpdateResponse>
      *
@@ -58,7 +58,7 @@ interface CallsRawContract
      * @api
      *
      * @param string $accountSid the id of the account the resource belongs to
-     * @param array<mixed>|CallCallsParams $params
+     * @param array<string,mixed>|CallCallsParams $params
      *
      * @return BaseResponse<CallCallsResponse>
      *
@@ -74,7 +74,7 @@ interface CallsRawContract
      * @api
      *
      * @param string $accountSid the id of the account the resource belongs to
-     * @param array<mixed>|CallRetrieveCallsParams $params
+     * @param array<string,mixed>|CallRetrieveCallsParams $params
      *
      * @return BaseResponse<CallGetCallsResponse>
      *
@@ -90,7 +90,7 @@ interface CallsRawContract
      * @api
      *
      * @param string $callSid path param: The CallSid that identifies the call to update
-     * @param array<mixed>|CallSiprecJsonParams $params
+     * @param array<string,mixed>|CallSiprecJsonParams $params
      *
      * @return BaseResponse<CallSiprecJsonResponse>
      *
@@ -106,7 +106,7 @@ interface CallsRawContract
      * @api
      *
      * @param string $callSid path param: The CallSid that identifies the call to update
-     * @param array<mixed>|CallStreamsJsonParams $params
+     * @param array<string,mixed>|CallStreamsJsonParams $params
      *
      * @return BaseResponse<CallStreamsJsonResponse>
      *

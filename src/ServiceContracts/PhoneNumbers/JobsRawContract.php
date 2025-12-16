@@ -37,7 +37,7 @@ interface JobsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|JobListParams $params
+     * @param array<string,mixed>|JobListParams $params
      *
      * @return BaseResponse<DefaultPagination<PhoneNumbersJob>>
      *
@@ -51,7 +51,7 @@ interface JobsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|JobDeleteBatchParams $params
+     * @param array<string,mixed>|JobDeleteBatchParams $params
      *
      * @return BaseResponse<JobDeleteBatchResponse>
      *
@@ -65,7 +65,7 @@ interface JobsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|JobUpdateBatchParams $params
+     * @param array<string,mixed>|JobUpdateBatchParams $params
      *
      * @return BaseResponse<JobUpdateBatchResponse>
      *
@@ -79,7 +79,7 @@ interface JobsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|JobUpdateEmergencySettingsBatchParams $params
+     * @param array<string,mixed>|JobUpdateEmergencySettingsBatchParams $params
      *
      * @return BaseResponse<JobUpdateEmergencySettingsBatchResponse>
      *

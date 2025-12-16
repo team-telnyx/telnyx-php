@@ -7,13 +7,12 @@ namespace Telnyx\Requirements;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\DocReqsRequirementType;
 use Telnyx\Requirements\RequirementGetResponse\Data;
-use Telnyx\Requirements\RequirementGetResponse\Data\Action;
-use Telnyx\Requirements\RequirementGetResponse\Data\PhoneNumberType;
 
 /**
- * @phpstan-type RequirementGetResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\Requirements\RequirementGetResponse\Data
+ *
+ * @phpstan-type RequirementGetResponseShape = array{data?: null|Data|DataShape}
  */
 final class RequirementGetResponse implements BaseModel
 {
@@ -33,17 +32,7 @@ final class RequirementGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   id?: string|null,
-     *   action?: value-of<Action>|null,
-     *   countryCode?: string|null,
-     *   createdAt?: string|null,
-     *   locality?: string|null,
-     *   phoneNumberType?: value-of<PhoneNumberType>|null,
-     *   recordType?: string|null,
-     *   requirementsTypes?: list<DocReqsRequirementType>|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -55,17 +44,7 @@ final class RequirementGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   id?: string|null,
-     *   action?: value-of<Action>|null,
-     *   countryCode?: string|null,
-     *   createdAt?: string|null,
-     *   locality?: string|null,
-     *   phoneNumberType?: value-of<PhoneNumberType>|null,
-     *   recordType?: string|null,
-     *   requirementsTypes?: list<DocReqsRequirementType>|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

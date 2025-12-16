@@ -16,9 +16,12 @@ use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams\
  *
  * @see Telnyx\Services\PortingOrders\PhoneNumberExtensionsService::create()
  *
+ * @phpstan-import-type ActivationRangeShape from \Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams\ActivationRange
+ * @phpstan-import-type ExtensionRangeShape from \Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams\ExtensionRange
+ *
  * @phpstan-type PhoneNumberExtensionCreateParamsShape = array{
- *   activationRanges: list<ActivationRange|array{endAt: int, startAt: int}>,
- *   extensionRange: ExtensionRange|array{endAt: int, startAt: int},
+ *   activationRanges: list<ActivationRangeShape>,
+ *   extensionRange: ExtensionRangeShape,
  *   portingPhoneNumberID: string,
  * }
  */
@@ -74,8 +77,8 @@ final class PhoneNumberExtensionCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ActivationRange|array{endAt: int, startAt: int}> $activationRanges
-     * @param ExtensionRange|array{endAt: int, startAt: int} $extensionRange
+     * @param list<ActivationRangeShape> $activationRanges
+     * @param ExtensionRangeShape $extensionRange
      */
     public static function with(
         array $activationRanges,
@@ -94,7 +97,7 @@ final class PhoneNumberExtensionCreateParams implements BaseModel
     /**
      * Specifies the activation ranges for this porting phone number extension. The activation range must be within the extension range and should not overlap with other activation ranges.
      *
-     * @param list<ActivationRange|array{endAt: int, startAt: int}> $activationRanges
+     * @param list<ActivationRangeShape> $activationRanges
      */
     public function withActivationRanges(array $activationRanges): self
     {
@@ -105,7 +108,7 @@ final class PhoneNumberExtensionCreateParams implements BaseModel
     }
 
     /**
-     * @param ExtensionRange|array{endAt: int, startAt: int} $extensionRange
+     * @param ExtensionRangeShape $extensionRange
      */
     public function withExtensionRange(
         ExtensionRange|array $extensionRange

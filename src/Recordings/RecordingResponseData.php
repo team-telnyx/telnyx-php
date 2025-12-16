@@ -14,21 +14,23 @@ use Telnyx\Recordings\RecordingResponseData\Source;
 use Telnyx\Recordings\RecordingResponseData\Status;
 
 /**
+ * @phpstan-import-type DownloadURLsShape from \Telnyx\Recordings\RecordingResponseData\DownloadURLs
+ *
  * @phpstan-type RecordingResponseDataShape = array{
  *   id?: string|null,
  *   callControlID?: string|null,
  *   callLegID?: string|null,
  *   callSessionID?: string|null,
- *   channels?: value-of<Channels>|null,
+ *   channels?: null|Channels|value-of<Channels>,
  *   conferenceID?: string|null,
  *   createdAt?: string|null,
- *   downloadURLs?: DownloadURLs|null,
+ *   downloadURLs?: null|DownloadURLs|DownloadURLsShape,
  *   durationMillis?: int|null,
- *   recordType?: value-of<RecordType>|null,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  *   recordingEndedAt?: string|null,
  *   recordingStartedAt?: string|null,
- *   source?: value-of<Source>|null,
- *   status?: value-of<Status>|null,
+ *   source?: null|Source|value-of<Source>,
+ *   status?: null|Status|value-of<Status>,
  *   updatedAt?: string|null,
  * }
  */
@@ -142,7 +144,7 @@ final class RecordingResponseData implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Channels|value-of<Channels> $channels
-     * @param DownloadURLs|array{mp3?: string|null, wav?: string|null} $downloadURLs
+     * @param DownloadURLsShape $downloadURLs
      * @param RecordType|value-of<RecordType> $recordType
      * @param Source|value-of<Source> $source
      * @param Status|value-of<Status> $status
@@ -267,7 +269,7 @@ final class RecordingResponseData implements BaseModel
     /**
      * Links to download the recording files.
      *
-     * @param DownloadURLs|array{mp3?: string|null, wav?: string|null} $downloadURLs
+     * @param DownloadURLsShape $downloadURLs
      */
     public function withDownloadURLs(DownloadURLs|array $downloadURLs): self
     {

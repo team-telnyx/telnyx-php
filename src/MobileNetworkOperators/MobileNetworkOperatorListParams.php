@@ -9,7 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Filter;
-use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Filter\Name;
 use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Page;
 
 /**
@@ -17,16 +16,11 @@ use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Page;
  *
  * @see Telnyx\Services\MobileNetworkOperatorsService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Page
+ *
  * @phpstan-type MobileNetworkOperatorListParamsShape = array{
- *   filter?: Filter|array{
- *     countryCode?: string|null,
- *     mcc?: string|null,
- *     mnc?: string|null,
- *     name?: Name|null,
- *     networkPreferencesEnabled?: bool|null,
- *     tadig?: string|null,
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   filter?: FilterShape|null, page?: PageShape|null
  * }
  */
 final class MobileNetworkOperatorListParams implements BaseModel
@@ -57,15 +51,8 @@ final class MobileNetworkOperatorListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   countryCode?: string|null,
-     *   mcc?: string|null,
-     *   mnc?: string|null,
-     *   name?: Name|null,
-     *   networkPreferencesEnabled?: bool|null,
-     *   tadig?: string|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -82,14 +69,7 @@ final class MobileNetworkOperatorListParams implements BaseModel
     /**
      * Consolidated filter parameter for mobile network operators (deepObject style). Originally: filter[name][starts_with], filter[name][contains], filter[name][ends_with], filter[country_code], filter[mcc], filter[mnc], filter[tadig], filter[network_preferences_enabled].
      *
-     * @param Filter|array{
-     *   countryCode?: string|null,
-     *   mcc?: string|null,
-     *   mnc?: string|null,
-     *   name?: Name|null,
-     *   networkPreferencesEnabled?: bool|null,
-     *   tadig?: string|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -102,7 +82,7 @@ final class MobileNetworkOperatorListParams implements BaseModel
     /**
      * Consolidated pagination parameter (deepObject style). Originally: page[number], page[size].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

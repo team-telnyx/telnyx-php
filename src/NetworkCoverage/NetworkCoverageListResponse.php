@@ -10,9 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NetworkCoverage\NetworkCoverageListResponse\Location;
 
 /**
+ * @phpstan-import-type LocationShape from \Telnyx\NetworkCoverage\NetworkCoverageListResponse\Location
+ *
  * @phpstan-type NetworkCoverageListResponseShape = array{
- *   availableServices?: list<value-of<AvailableService>>|null,
- *   location?: Location|null,
+ *   availableServices?: list<AvailableService|value-of<AvailableService>>|null,
+ *   location?: null|Location|LocationShape,
  *   recordType?: string|null,
  * }
  */
@@ -49,13 +51,7 @@ final class NetworkCoverageListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<AvailableService|value-of<AvailableService>> $availableServices
-     * @param Location|array{
-     *   code?: string|null,
-     *   name?: string|null,
-     *   pop?: string|null,
-     *   region?: string|null,
-     *   site?: string|null,
-     * } $location
+     * @param LocationShape $location
      */
     public static function with(
         ?array $availableServices = null,
@@ -85,13 +81,7 @@ final class NetworkCoverageListResponse implements BaseModel
     }
 
     /**
-     * @param Location|array{
-     *   code?: string|null,
-     *   name?: string|null,
-     *   pop?: string|null,
-     *   region?: string|null,
-     *   site?: string|null,
-     * } $location
+     * @param LocationShape $location
      */
     public function withLocation(Location|array $location): self
     {

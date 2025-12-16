@@ -17,7 +17,7 @@ interface SupportingDocumentsRawContract
      * @api
      *
      * @param string $id Portout id
-     * @param array<mixed>|SupportingDocumentCreateParams $params
+     * @param array<string,mixed>|SupportingDocumentCreateParams $params
      *
      * @return BaseResponse<SupportingDocumentNewResponse>
      *

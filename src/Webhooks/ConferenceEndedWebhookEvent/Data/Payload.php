@@ -18,7 +18,7 @@ use Telnyx\Webhooks\ConferenceEndedWebhookEvent\Data\Payload\Reason;
  *   conferenceID?: string|null,
  *   connectionID?: string|null,
  *   occurredAt?: \DateTimeInterface|null,
- *   reason?: value-of<Reason>|null,
+ *   reason?: null|Reason|value-of<Reason>,
  * }
  */
 final class Payload implements BaseModel

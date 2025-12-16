@@ -14,7 +14,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Legacy\Reporting\UsageReports\MessagingService::list()
  *
- * @phpstan-type MessagingListParamsShape = array{page?: int, perPage?: int}
+ * @phpstan-type MessagingListParamsShape = array{
+ *   page?: int|null, perPage?: int|null
+ * }
  */
 final class MessagingListParams implements BaseModel
 {

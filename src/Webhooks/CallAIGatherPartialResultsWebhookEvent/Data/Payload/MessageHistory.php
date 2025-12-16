@@ -11,7 +11,7 @@ use Telnyx\Webhooks\CallAIGatherPartialResultsWebhookEvent\Data\Payload\MessageH
 
 /**
  * @phpstan-type MessageHistoryShape = array{
- *   content?: string|null, role?: value-of<Role>|null
+ *   content?: string|null, role?: null|Role|value-of<Role>
  * }
  */
 final class MessageHistory implements BaseModel

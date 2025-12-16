@@ -16,7 +16,7 @@ interface NotificationEventConditionsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|NotificationEventConditionListParams $params
+     * @param array<string,mixed>|NotificationEventConditionListParams $params
      *
      * @return BaseResponse<DefaultPagination<NotificationEventConditionListResponse>>
      *

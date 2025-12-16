@@ -10,7 +10,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ActionAnswerResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\Calls\Actions\ActionAnswerResponse\Data
+ *
+ * @phpstan-type ActionAnswerResponseShape = array{data?: null|Data|DataShape}
  */
 final class ActionAnswerResponse implements BaseModel
 {
@@ -30,7 +32,7 @@ final class ActionAnswerResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{recordingID?: string|null, result?: string|null} $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -42,7 +44,7 @@ final class ActionAnswerResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{recordingID?: string|null, result?: string|null} $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

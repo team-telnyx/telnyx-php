@@ -9,16 +9,17 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallSpeakEndedWebhookEvent\Data\EventType;
 use Telnyx\Webhooks\CallSpeakEndedWebhookEvent\Data\Payload;
-use Telnyx\Webhooks\CallSpeakEndedWebhookEvent\Data\Payload\Status;
 use Telnyx\Webhooks\CallSpeakEndedWebhookEvent\Data\RecordType;
 
 /**
+ * @phpstan-import-type PayloadShape from \Telnyx\Webhooks\CallSpeakEndedWebhookEvent\Data\Payload
+ *
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   eventType?: value-of<EventType>|null,
+ *   eventType?: null|EventType|value-of<EventType>,
  *   occurredAt?: \DateTimeInterface|null,
- *   payload?: Payload|null,
- *   recordType?: value-of<RecordType>|null,
+ *   payload?: null|Payload|PayloadShape,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  * }
  */
 final class Data implements BaseModel
@@ -68,14 +69,7 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param EventType|value-of<EventType> $eventType
-     * @param Payload|array{
-     *   callControlID?: string|null,
-     *   callLegID?: string|null,
-     *   callSessionID?: string|null,
-     *   clientState?: string|null,
-     *   connectionID?: string|null,
-     *   status?: value-of<Status>|null,
-     * } $payload
+     * @param PayloadShape $payload
      * @param RecordType|value-of<RecordType> $recordType
      */
     public static function with(
@@ -132,14 +126,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param Payload|array{
-     *   callControlID?: string|null,
-     *   callLegID?: string|null,
-     *   callSessionID?: string|null,
-     *   clientState?: string|null,
-     *   connectionID?: string|null,
-     *   status?: value-of<Status>|null,
-     * } $payload
+     * @param PayloadShape $payload
      */
     public function withPayload(Payload|array $payload): self
     {

@@ -14,7 +14,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\MediaService::update()
  *
- * @phpstan-type MediaUpdateParamsShape = array{mediaURL?: string, ttlSecs?: int}
+ * @phpstan-type MediaUpdateParamsShape = array{
+ *   mediaURL?: string|null, ttlSecs?: int|null
+ * }
  */
 final class MediaUpdateParams implements BaseModel
 {

@@ -20,7 +20,7 @@ interface RcsRawContract
      * @api
      *
      * @param string $phoneNumber Phone number in E164 format to invite for testing
-     * @param array<mixed>|RcInviteTestNumberParams $params
+     * @param array<string,mixed>|RcInviteTestNumberParams $params
      *
      * @return BaseResponse<RcInviteTestNumberResponse>
      *
@@ -35,7 +35,7 @@ interface RcsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|RcListBulkCapabilitiesParams $params
+     * @param array<string,mixed>|RcListBulkCapabilitiesParams $params
      *
      * @return BaseResponse<RcListBulkCapabilitiesResponse>
      *
@@ -50,7 +50,7 @@ interface RcsRawContract
      * @api
      *
      * @param string $phoneNumber Phone number in E164 format
-     * @param array<mixed>|RcRetrieveCapabilitiesParams $params
+     * @param array<string,mixed>|RcRetrieveCapabilitiesParams $params
      *
      * @return BaseResponse<RcGetCapabilitiesResponse>
      *

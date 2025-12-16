@@ -15,7 +15,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\McpServersService::list()
  *
  * @phpstan-type McpServerListParamsShape = array{
- *   pageNumber?: int, pageSize?: int, type?: string, url?: string
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
+ *   type?: string|null,
+ *   url?: string|null,
  * }
  */
 final class McpServerListParams implements BaseModel

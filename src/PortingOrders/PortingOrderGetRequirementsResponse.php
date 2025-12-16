@@ -11,12 +11,14 @@ use Telnyx\PortingOrders\PortingOrderGetRequirementsResponse\FieldType;
 use Telnyx\PortingOrders\PortingOrderGetRequirementsResponse\RequirementType;
 
 /**
+ * @phpstan-import-type RequirementTypeShape from \Telnyx\PortingOrders\PortingOrderGetRequirementsResponse\RequirementType
+ *
  * @phpstan-type PortingOrderGetRequirementsResponseShape = array{
- *   fieldType?: value-of<FieldType>|null,
+ *   fieldType?: null|FieldType|value-of<FieldType>,
  *   fieldValue?: string|null,
  *   recordType?: string|null,
  *   requirementStatus?: string|null,
- *   requirementType?: RequirementType|null,
+ *   requirementType?: null|RequirementType|RequirementTypeShape,
  * }
  */
 final class PortingOrderGetRequirementsResponse implements BaseModel
@@ -67,14 +69,7 @@ final class PortingOrderGetRequirementsResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param FieldType|value-of<FieldType> $fieldType
-     * @param RequirementType|array{
-     *   id?: string|null,
-     *   acceptanceCriteria?: array<string,mixed>|null,
-     *   description?: string|null,
-     *   example?: string|null,
-     *   name?: string|null,
-     *   type?: string|null,
-     * } $requirementType
+     * @param RequirementTypeShape $requirementType
      */
     public static function with(
         FieldType|string|null $fieldType = null,
@@ -143,14 +138,7 @@ final class PortingOrderGetRequirementsResponse implements BaseModel
     /**
      * Identifies the requirement type that meets this requirement.
      *
-     * @param RequirementType|array{
-     *   id?: string|null,
-     *   acceptanceCriteria?: array<string,mixed>|null,
-     *   description?: string|null,
-     *   example?: string|null,
-     *   name?: string|null,
-     *   type?: string|null,
-     * } $requirementType
+     * @param RequirementTypeShape $requirementType
      */
     public function withRequirementType(
         RequirementType|array $requirementType

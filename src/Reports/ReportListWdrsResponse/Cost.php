@@ -11,7 +11,7 @@ use Telnyx\Reports\ReportListWdrsResponse\Cost\Currency;
 
 /**
  * @phpstan-type CostShape = array{
- *   amount?: string|null, currency?: value-of<Currency>|null
+ *   amount?: string|null, currency?: null|Currency|value-of<Currency>
  * }
  */
 final class Cost implements BaseModel

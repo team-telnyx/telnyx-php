@@ -19,7 +19,7 @@ use Telnyx\Texml\Accounts\Transcriptions\Json\JsonGetRecordingTranscriptionSidJs
  *   duration?: string|null,
  *   recordingSid?: string|null,
  *   sid?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   transcriptionText?: string|null,
  *   uri?: string|null,
  * }

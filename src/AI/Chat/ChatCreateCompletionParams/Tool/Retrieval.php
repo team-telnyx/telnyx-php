@@ -10,8 +10,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type InferenceEmbeddingBucketIDsShape from \Telnyx\AI\Assistants\InferenceEmbeddingBucketIDs
+ *
  * @phpstan-type RetrievalShape = array{
- *   retrieval: InferenceEmbeddingBucketIDs, type?: 'retrieval'
+ *   retrieval: InferenceEmbeddingBucketIDs|InferenceEmbeddingBucketIDsShape,
+ *   type: 'retrieval',
  * }
  */
 final class Retrieval implements BaseModel
@@ -50,9 +53,7 @@ final class Retrieval implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param InferenceEmbeddingBucketIDs|array{
-     *   bucketIDs: list<string>, maxNumResults?: int|null
-     * } $retrieval
+     * @param InferenceEmbeddingBucketIDsShape $retrieval
      */
     public static function with(
         InferenceEmbeddingBucketIDs|array $retrieval
@@ -65,9 +66,7 @@ final class Retrieval implements BaseModel
     }
 
     /**
-     * @param InferenceEmbeddingBucketIDs|array{
-     *   bucketIDs: list<string>, maxNumResults?: int|null
-     * } $retrieval
+     * @param InferenceEmbeddingBucketIDsShape $retrieval
      */
     public function withRetrieval(
         InferenceEmbeddingBucketIDs|array $retrieval

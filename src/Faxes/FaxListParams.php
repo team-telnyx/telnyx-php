@@ -9,25 +9,16 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Faxes\FaxListParams\Filter;
-use Telnyx\Faxes\FaxListParams\Filter\CreatedAt;
-use Telnyx\Faxes\FaxListParams\Filter\Direction;
-use Telnyx\Faxes\FaxListParams\Filter\From;
-use Telnyx\Faxes\FaxListParams\Filter\To;
 
 /**
  * View a list of faxes.
  *
  * @see Telnyx\Services\FaxesService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\Faxes\FaxListParams\Filter
+ *
  * @phpstan-type FaxListParamsShape = array{
- *   filter?: Filter|array{
- *     createdAt?: CreatedAt|null,
- *     direction?: Direction|null,
- *     from?: From|null,
- *     to?: To|null,
- *   },
- *   pageNumber?: int,
- *   pageSize?: int,
+ *   filter?: FilterShape|null, pageNumber?: int|null, pageSize?: int|null
  * }
  */
 final class FaxListParams implements BaseModel
@@ -58,12 +49,7 @@ final class FaxListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   createdAt?: CreatedAt|null,
-     *   direction?: Direction|null,
-     *   from?: From|null,
-     *   to?: To|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -82,12 +68,7 @@ final class FaxListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[created_at][gte], filter[created_at][gt], filter[created_at][lte], filter[created_at][lt], filter[direction][eq], filter[from][eq], filter[to][eq].
      *
-     * @param Filter|array{
-     *   createdAt?: CreatedAt|null,
-     *   direction?: Direction|null,
-     *   from?: From|null,
-     *   to?: To|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

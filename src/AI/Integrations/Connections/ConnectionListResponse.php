@@ -10,7 +10,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ConnectionListResponseShape = array{data: list<Data>}
+ * @phpstan-import-type DataShape from \Telnyx\AI\Integrations\Connections\ConnectionListResponse\Data
+ *
+ * @phpstan-type ConnectionListResponseShape = array{data: list<DataShape>}
  */
 final class ConnectionListResponse implements BaseModel
 {
@@ -45,9 +47,7 @@ final class ConnectionListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   id: string, allowedTools: list<string>, integrationID: string
-     * }> $data
+     * @param list<DataShape> $data
      */
     public static function with(array $data): self
     {
@@ -59,9 +59,7 @@ final class ConnectionListResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   id: string, allowedTools: list<string>, integrationID: string
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {

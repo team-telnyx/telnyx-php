@@ -9,9 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type CampaignSharingStatusShape from \Telnyx\Messaging10dlc\Campaign\CampaignSharingStatus
+ *
  * @phpstan-type CampaignGetSharingStatusResponseShape = array{
- *   sharedByMe?: CampaignSharingStatus|null,
- *   sharedWithMe?: CampaignSharingStatus|null,
+ *   sharedByMe?: null|CampaignSharingStatus|CampaignSharingStatusShape,
+ *   sharedWithMe?: null|CampaignSharingStatus|CampaignSharingStatusShape,
  * }
  */
 final class CampaignGetSharingStatusResponse implements BaseModel
@@ -35,20 +37,8 @@ final class CampaignGetSharingStatusResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CampaignSharingStatus|array{
-     *   downstreamCnpID?: string|null,
-     *   sharedDate?: string|null,
-     *   sharingStatus?: string|null,
-     *   statusDate?: string|null,
-     *   upstreamCnpID?: string|null,
-     * } $sharedByMe
-     * @param CampaignSharingStatus|array{
-     *   downstreamCnpID?: string|null,
-     *   sharedDate?: string|null,
-     *   sharingStatus?: string|null,
-     *   statusDate?: string|null,
-     *   upstreamCnpID?: string|null,
-     * } $sharedWithMe
+     * @param CampaignSharingStatusShape $sharedByMe
+     * @param CampaignSharingStatusShape $sharedWithMe
      */
     public static function with(
         CampaignSharingStatus|array|null $sharedByMe = null,
@@ -63,13 +53,7 @@ final class CampaignGetSharingStatusResponse implements BaseModel
     }
 
     /**
-     * @param CampaignSharingStatus|array{
-     *   downstreamCnpID?: string|null,
-     *   sharedDate?: string|null,
-     *   sharingStatus?: string|null,
-     *   statusDate?: string|null,
-     *   upstreamCnpID?: string|null,
-     * } $sharedByMe
+     * @param CampaignSharingStatusShape $sharedByMe
      */
     public function withSharedByMe(
         CampaignSharingStatus|array $sharedByMe
@@ -81,13 +65,7 @@ final class CampaignGetSharingStatusResponse implements BaseModel
     }
 
     /**
-     * @param CampaignSharingStatus|array{
-     *   downstreamCnpID?: string|null,
-     *   sharedDate?: string|null,
-     *   sharingStatus?: string|null,
-     *   statusDate?: string|null,
-     *   upstreamCnpID?: string|null,
-     * } $sharedWithMe
+     * @param CampaignSharingStatusShape $sharedWithMe
      */
     public function withSharedWithMe(
         CampaignSharingStatus|array $sharedWithMe

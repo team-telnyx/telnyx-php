@@ -22,7 +22,7 @@ use Telnyx\DetailRecords\DetailRecordListResponse\AmdDetailRecord\Feature;
  *   connectionName?: string|null,
  *   cost?: string|null,
  *   currency?: string|null,
- *   feature?: value-of<Feature>|null,
+ *   feature?: null|Feature|value-of<Feature>,
  *   invokedAt?: \DateTimeInterface|null,
  *   isTelnyxBillable?: bool|null,
  *   rate?: string|null,

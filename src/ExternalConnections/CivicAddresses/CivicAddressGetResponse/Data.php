@@ -10,6 +10,8 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressGetResponse\Data\Location;
 
 /**
+ * @phpstan-import-type LocationShape from \Telnyx\ExternalConnections\CivicAddresses\CivicAddressGetResponse\Data\Location
+ *
  * @phpstan-type DataShape = array{
  *   id?: string|null,
  *   cityOrTown?: string|null,
@@ -21,7 +23,7 @@ use Telnyx\ExternalConnections\CivicAddresses\CivicAddressGetResponse\Data\Locat
  *   description?: string|null,
  *   houseNumber?: string|null,
  *   houseNumberSuffix?: string|null,
- *   locations?: list<Location>|null,
+ *   locations?: list<LocationShape>|null,
  *   postalOrZipCode?: string|null,
  *   recordType?: string|null,
  *   stateOrProvince?: string|null,
@@ -102,12 +104,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Location|array{
-     *   id?: string|null,
-     *   additionalInfo?: string|null,
-     *   description?: string|null,
-     *   isDefault?: bool|null,
-     * }> $locations
+     * @param list<LocationShape> $locations
      */
     public static function with(
         ?string $id = null,
@@ -236,12 +233,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<Location|array{
-     *   id?: string|null,
-     *   additionalInfo?: string|null,
-     *   description?: string|null,
-     *   isDefault?: bool|null,
-     * }> $locations
+     * @param list<LocationShape> $locations
      */
     public function withLocations(array $locations): self
     {

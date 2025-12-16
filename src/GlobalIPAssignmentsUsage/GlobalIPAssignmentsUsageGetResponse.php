@@ -8,14 +8,12 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse\Data;
-use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse\Data\GlobalIP;
-use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse\Data\GlobalIPAssignment;
-use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse\Data\Received;
-use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse\Data\Transmitted;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse\Data
+ *
  * @phpstan-type GlobalIPAssignmentsUsageGetResponseShape = array{
- *   data?: list<Data>|null
+ *   data?: list<DataShape>|null
  * }
  */
 final class GlobalIPAssignmentsUsageGetResponse implements BaseModel
@@ -37,13 +35,7 @@ final class GlobalIPAssignmentsUsageGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   globalIP?: GlobalIP|null,
-     *   globalIPAssignment?: GlobalIPAssignment|null,
-     *   received?: Received|null,
-     *   timestamp?: \DateTimeInterface|null,
-     *   transmitted?: Transmitted|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public static function with(?array $data = null): self
     {
@@ -55,13 +47,7 @@ final class GlobalIPAssignmentsUsageGetResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   globalIP?: GlobalIP|null,
-     *   globalIPAssignment?: GlobalIPAssignment|null,
-     *   received?: Received|null,
-     *   timestamp?: \DateTimeInterface|null,
-     *   transmitted?: Transmitted|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {

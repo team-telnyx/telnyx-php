@@ -9,7 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCards\SimCardListParams\Filter;
-use Telnyx\SimCards\SimCardListParams\Filter\Status;
 use Telnyx\SimCards\SimCardListParams\Page;
 use Telnyx\SimCards\SimCardListParams\Sort;
 
@@ -18,16 +17,15 @@ use Telnyx\SimCards\SimCardListParams\Sort;
  *
  * @see Telnyx\Services\SimCardsService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\SimCards\SimCardListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\SimCards\SimCardListParams\Page
+ *
  * @phpstan-type SimCardListParamsShape = array{
- *   filter?: Filter|array{
- *     iccid?: string|null,
- *     status?: list<value-of<Status>>|null,
- *     tags?: list<string>|null,
- *   },
- *   filterSimCardGroupID?: string,
- *   includeSimCardGroup?: bool,
- *   page?: Page|array{number?: int|null, size?: int|null},
- *   sort?: Sort|value-of<Sort>,
+ *   filter?: FilterShape|null,
+ *   filterSimCardGroupID?: string|null,
+ *   includeSimCardGroup?: bool|null,
+ *   page?: PageShape|null,
+ *   sort?: null|Sort|value-of<Sort>,
  * }
  */
 final class SimCardListParams implements BaseModel
@@ -78,12 +76,8 @@ final class SimCardListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   iccid?: string|null,
-     *   status?: list<value-of<Status>>|null,
-     *   tags?: list<string>|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
@@ -107,11 +101,7 @@ final class SimCardListParams implements BaseModel
     /**
      * Consolidated filter parameter for SIM cards (deepObject style). Originally: filter[tags], filter[iccid], filter[status].
      *
-     * @param Filter|array{
-     *   iccid?: string|null,
-     *   status?: list<value-of<Status>>|null,
-     *   tags?: list<string>|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -146,7 +136,7 @@ final class SimCardListParams implements BaseModel
     /**
      * Consolidated pagination parameter (deepObject style). Originally: page[number], page[size].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

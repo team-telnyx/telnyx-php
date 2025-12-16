@@ -15,7 +15,7 @@ interface BrandRawContract
     /**
      * @api
      *
-     * @param array<mixed>|BrandQualifyByUsecaseParams $params
+     * @param array<string,mixed>|BrandQualifyByUsecaseParams $params
      *
      * @return BaseResponse<BrandQualifyByUsecaseResponse>
      *

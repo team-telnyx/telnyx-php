@@ -29,7 +29,7 @@ interface SimCardsRawContract
      * @api
      *
      * @param string $id identifies the SIM
-     * @param array<mixed>|SimCardRetrieveParams $params
+     * @param array<string,mixed>|SimCardRetrieveParams $params
      *
      * @return BaseResponse<SimCardGetResponse>
      *
@@ -45,7 +45,7 @@ interface SimCardsRawContract
      * @api
      *
      * @param string $simCardID identifies the SIM
-     * @param array<mixed>|SimCardUpdateParams $params
+     * @param array<string,mixed>|SimCardUpdateParams $params
      *
      * @return BaseResponse<SimCardUpdateResponse>
      *
@@ -60,7 +60,7 @@ interface SimCardsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|SimCardListParams $params
+     * @param array<string,mixed>|SimCardListParams $params
      *
      * @return BaseResponse<DefaultPagination<SimpleSimCard>>
      *
@@ -75,7 +75,7 @@ interface SimCardsRawContract
      * @api
      *
      * @param string $id identifies the SIM
-     * @param array<mixed>|SimCardDeleteParams $params
+     * @param array<string,mixed>|SimCardDeleteParams $params
      *
      * @return BaseResponse<SimCardDeleteResponse>
      *
@@ -133,7 +133,7 @@ interface SimCardsRawContract
      * @api
      *
      * @param string $id identifies the SIM
-     * @param array<mixed>|SimCardListWirelessConnectivityLogsParams $params
+     * @param array<string,mixed>|SimCardListWirelessConnectivityLogsParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<SimCardListWirelessConnectivityLogsResponse,>,>
      *

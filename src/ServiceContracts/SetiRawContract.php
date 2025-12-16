@@ -15,7 +15,7 @@ interface SetiRawContract
     /**
      * @api
      *
-     * @param array<mixed>|SetiRetrieveBlackBoxTestResultsParams $params
+     * @param array<string,mixed>|SetiRetrieveBlackBoxTestResultsParams $params
      *
      * @return BaseResponse<SetiGetBlackBoxTestResultsResponse>
      *

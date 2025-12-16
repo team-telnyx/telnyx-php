@@ -7,12 +7,12 @@ namespace Telnyx\MessagingProfiles;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\MessagingProfiles\MessagingProfile\RecordType;
-use Telnyx\MessagingProfiles\MessagingProfile\WebhookAPIVersion;
 
 /**
+ * @phpstan-import-type MessagingProfileShape from \Telnyx\MessagingProfiles\MessagingProfile
+ *
  * @phpstan-type MessagingProfileDeleteResponseShape = array{
- *   data?: MessagingProfile|null
+ *   data?: null|MessagingProfile|MessagingProfileShape
  * }
  */
 final class MessagingProfileDeleteResponse implements BaseModel
@@ -33,30 +33,7 @@ final class MessagingProfileDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MessagingProfile|array{
-     *   id?: string|null,
-     *   alphaSender?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   dailySpendLimit?: string|null,
-     *   dailySpendLimitEnabled?: bool|null,
-     *   enabled?: bool|null,
-     *   healthWebhookURL?: string|null,
-     *   mmsFallBackToSMS?: bool|null,
-     *   mmsTranscoding?: bool|null,
-     *   mobileOnly?: bool|null,
-     *   name?: string|null,
-     *   numberPoolSettings?: NumberPoolSettings|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   redactionEnabled?: bool|null,
-     *   redactionLevel?: int|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     *   urlShortenerSettings?: URLShortenerSettings|null,
-     *   v1Secret?: string|null,
-     *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
-     *   webhookFailoverURL?: string|null,
-     *   webhookURL?: string|null,
-     *   whitelistedDestinations?: list<string>|null,
-     * } $data
+     * @param MessagingProfileShape $data
      */
     public static function with(MessagingProfile|array|null $data = null): self
     {
@@ -68,30 +45,7 @@ final class MessagingProfileDeleteResponse implements BaseModel
     }
 
     /**
-     * @param MessagingProfile|array{
-     *   id?: string|null,
-     *   alphaSender?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   dailySpendLimit?: string|null,
-     *   dailySpendLimitEnabled?: bool|null,
-     *   enabled?: bool|null,
-     *   healthWebhookURL?: string|null,
-     *   mmsFallBackToSMS?: bool|null,
-     *   mmsTranscoding?: bool|null,
-     *   mobileOnly?: bool|null,
-     *   name?: string|null,
-     *   numberPoolSettings?: NumberPoolSettings|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   redactionEnabled?: bool|null,
-     *   redactionLevel?: int|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     *   urlShortenerSettings?: URLShortenerSettings|null,
-     *   v1Secret?: string|null,
-     *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
-     *   webhookFailoverURL?: string|null,
-     *   webhookURL?: string|null,
-     *   whitelistedDestinations?: list<string>|null,
-     * } $data
+     * @param MessagingProfileShape $data
      */
     public function withData(MessagingProfile|array $data): self
     {

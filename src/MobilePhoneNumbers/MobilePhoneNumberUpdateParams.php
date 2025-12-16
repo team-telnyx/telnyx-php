@@ -9,10 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallForwarding;
-use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallForwarding\ForwardingType;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallRecording;
-use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallRecording\InboundCallRecordingChannels;
-use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallRecording\InboundCallRecordingFormat;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CnamListing;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\Inbound;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\InboundCallScreening;
@@ -23,28 +20,24 @@ use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\Outbound;
  *
  * @see Telnyx\Services\MobilePhoneNumbersService::update()
  *
+ * @phpstan-import-type CallForwardingShape from \Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallForwarding
+ * @phpstan-import-type CallRecordingShape from \Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallRecording
+ * @phpstan-import-type CnamListingShape from \Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CnamListing
+ * @phpstan-import-type InboundShape from \Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\Inbound
+ * @phpstan-import-type OutboundShape from \Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\Outbound
+ *
  * @phpstan-type MobilePhoneNumberUpdateParamsShape = array{
- *   callForwarding?: CallForwarding|array{
- *     callForwardingEnabled?: bool|null,
- *     forwardingType?: value-of<ForwardingType>|null,
- *     forwardsTo?: string|null,
- *   },
- *   callRecording?: CallRecording|array{
- *     inboundCallRecordingChannels?: value-of<InboundCallRecordingChannels>|null,
- *     inboundCallRecordingEnabled?: bool|null,
- *     inboundCallRecordingFormat?: value-of<InboundCallRecordingFormat>|null,
- *   },
- *   callerIDNameEnabled?: bool,
- *   cnamListing?: CnamListing|array{
- *     cnamListingDetails?: string|null, cnamListingEnabled?: bool|null
- *   },
+ *   callForwarding?: CallForwardingShape|null,
+ *   callRecording?: CallRecordingShape|null,
+ *   callerIDNameEnabled?: bool|null,
+ *   cnamListing?: CnamListingShape|null,
  *   connectionID?: string|null,
  *   customerReference?: string|null,
- *   inbound?: Inbound|array{interceptionAppID?: string|null},
- *   inboundCallScreening?: InboundCallScreening|value-of<InboundCallScreening>,
- *   noiseSuppression?: bool,
- *   outbound?: Outbound|array{interceptionAppID?: string|null},
- *   tags?: list<string>,
+ *   inbound?: InboundShape|null,
+ *   inboundCallScreening?: null|InboundCallScreening|value-of<InboundCallScreening>,
+ *   noiseSuppression?: bool|null,
+ *   outbound?: OutboundShape|null,
+ *   tags?: list<string>|null,
  * }
  */
 final class MobilePhoneNumberUpdateParams implements BaseModel
@@ -98,22 +91,12 @@ final class MobilePhoneNumberUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CallForwarding|array{
-     *   callForwardingEnabled?: bool|null,
-     *   forwardingType?: value-of<ForwardingType>|null,
-     *   forwardsTo?: string|null,
-     * } $callForwarding
-     * @param CallRecording|array{
-     *   inboundCallRecordingChannels?: value-of<InboundCallRecordingChannels>|null,
-     *   inboundCallRecordingEnabled?: bool|null,
-     *   inboundCallRecordingFormat?: value-of<InboundCallRecordingFormat>|null,
-     * } $callRecording
-     * @param CnamListing|array{
-     *   cnamListingDetails?: string|null, cnamListingEnabled?: bool|null
-     * } $cnamListing
-     * @param Inbound|array{interceptionAppID?: string|null} $inbound
+     * @param CallForwardingShape $callForwarding
+     * @param CallRecordingShape $callRecording
+     * @param CnamListingShape $cnamListing
+     * @param InboundShape $inbound
      * @param InboundCallScreening|value-of<InboundCallScreening> $inboundCallScreening
-     * @param Outbound|array{interceptionAppID?: string|null} $outbound
+     * @param OutboundShape $outbound
      * @param list<string> $tags
      */
     public static function with(
@@ -147,11 +130,7 @@ final class MobilePhoneNumberUpdateParams implements BaseModel
     }
 
     /**
-     * @param CallForwarding|array{
-     *   callForwardingEnabled?: bool|null,
-     *   forwardingType?: value-of<ForwardingType>|null,
-     *   forwardsTo?: string|null,
-     * } $callForwarding
+     * @param CallForwardingShape $callForwarding
      */
     public function withCallForwarding(
         CallForwarding|array $callForwarding
@@ -163,11 +142,7 @@ final class MobilePhoneNumberUpdateParams implements BaseModel
     }
 
     /**
-     * @param CallRecording|array{
-     *   inboundCallRecordingChannels?: value-of<InboundCallRecordingChannels>|null,
-     *   inboundCallRecordingEnabled?: bool|null,
-     *   inboundCallRecordingFormat?: value-of<InboundCallRecordingFormat>|null,
-     * } $callRecording
+     * @param CallRecordingShape $callRecording
      */
     public function withCallRecording(CallRecording|array $callRecording): self
     {
@@ -186,9 +161,7 @@ final class MobilePhoneNumberUpdateParams implements BaseModel
     }
 
     /**
-     * @param CnamListing|array{
-     *   cnamListingDetails?: string|null, cnamListingEnabled?: bool|null
-     * } $cnamListing
+     * @param CnamListingShape $cnamListing
      */
     public function withCnamListing(CnamListing|array $cnamListing): self
     {
@@ -215,7 +188,7 @@ final class MobilePhoneNumberUpdateParams implements BaseModel
     }
 
     /**
-     * @param Inbound|array{interceptionAppID?: string|null} $inbound
+     * @param InboundShape $inbound
      */
     public function withInbound(Inbound|array $inbound): self
     {
@@ -246,7 +219,7 @@ final class MobilePhoneNumberUpdateParams implements BaseModel
     }
 
     /**
-     * @param Outbound|array{interceptionAppID?: string|null} $outbound
+     * @param OutboundShape $outbound
      */
     public function withOutbound(Outbound|array $outbound): self
     {

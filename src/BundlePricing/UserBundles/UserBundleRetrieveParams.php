@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\BundlePricing\UserBundlesService::retrieve()
  *
  * @phpstan-type UserBundleRetrieveParamsShape = array{
- *   authorizationBearer?: string
+ *   authorizationBearer?: string|null
  * }
  */
 final class UserBundleRetrieveParams implements BaseModel

@@ -8,13 +8,12 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrdersActivationJob;
-use Telnyx\PortingOrders\PortingOrdersActivationJob\ActivationType;
-use Telnyx\PortingOrders\PortingOrdersActivationJob\ActivationWindow;
-use Telnyx\PortingOrders\PortingOrdersActivationJob\Status;
 
 /**
+ * @phpstan-import-type PortingOrdersActivationJobShape from \Telnyx\PortingOrders\PortingOrdersActivationJob
+ *
  * @phpstan-type ActivationJobUpdateResponseShape = array{
- *   data?: PortingOrdersActivationJob|null
+ *   data?: null|PortingOrdersActivationJob|PortingOrdersActivationJobShape
  * }
  */
 final class ActivationJobUpdateResponse implements BaseModel
@@ -35,16 +34,7 @@ final class ActivationJobUpdateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortingOrdersActivationJob|array{
-     *   id?: string|null,
-     *   activateAt?: \DateTimeInterface|null,
-     *   activationType?: value-of<ActivationType>|null,
-     *   activationWindows?: list<ActivationWindow>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   recordType?: string|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param PortingOrdersActivationJobShape $data
      */
     public static function with(
         PortingOrdersActivationJob|array|null $data = null
@@ -57,16 +47,7 @@ final class ActivationJobUpdateResponse implements BaseModel
     }
 
     /**
-     * @param PortingOrdersActivationJob|array{
-     *   id?: string|null,
-     *   activateAt?: \DateTimeInterface|null,
-     *   activationType?: value-of<ActivationType>|null,
-     *   activationWindows?: list<ActivationWindow>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   recordType?: string|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param PortingOrdersActivationJobShape $data
      */
     public function withData(PortingOrdersActivationJob|array $data): self
     {

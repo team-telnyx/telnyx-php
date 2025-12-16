@@ -9,8 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type CallControlCommandResultShape from \Telnyx\Calls\Actions\CallControlCommandResult
+ *
  * @phpstan-type ActionPauseRecordingResponseShape = array{
- *   data?: CallControlCommandResult|null
+ *   data?: null|CallControlCommandResult|CallControlCommandResultShape
  * }
  */
 final class ActionPauseRecordingResponse implements BaseModel
@@ -31,7 +33,7 @@ final class ActionPauseRecordingResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CallControlCommandResult|array{result?: string|null} $data
+     * @param CallControlCommandResultShape $data
      */
     public static function with(
         CallControlCommandResult|array|null $data = null
@@ -44,7 +46,7 @@ final class ActionPauseRecordingResponse implements BaseModel
     }
 
     /**
-     * @param CallControlCommandResult|array{result?: string|null} $data
+     * @param CallControlCommandResultShape $data
      */
     public function withData(CallControlCommandResult|array $data): self
     {

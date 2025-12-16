@@ -15,9 +15,9 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter\S
  *
  * @phpstan-type FilterShape = array{
  *   id?: list<string>|null,
- *   actionType?: value-of<ActionType>|null,
+ *   actionType?: null|ActionType|value-of<ActionType>,
  *   requirementTypeID?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  * }
  */
 final class Filter implements BaseModel

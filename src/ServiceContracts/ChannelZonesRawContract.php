@@ -19,7 +19,7 @@ interface ChannelZonesRawContract
      * @api
      *
      * @param string $channelZoneID Channel zone identifier
-     * @param array<mixed>|ChannelZoneUpdateParams $params
+     * @param array<string,mixed>|ChannelZoneUpdateParams $params
      *
      * @return BaseResponse<ChannelZoneUpdateResponse>
      *
@@ -34,7 +34,7 @@ interface ChannelZonesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ChannelZoneListParams $params
+     * @param array<string,mixed>|ChannelZoneListParams $params
      *
      * @return BaseResponse<DefaultPagination<ChannelZoneListResponse>>
      *

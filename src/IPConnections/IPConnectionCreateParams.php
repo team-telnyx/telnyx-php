@@ -10,79 +10,41 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
-use Telnyx\CredentialConnections\ConnectionRtcpSettings\Port;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
 use Telnyx\IPConnections\IPConnectionCreateParams\Inbound;
-use Telnyx\IPConnections\IPConnectionCreateParams\Inbound\AniNumberFormat;
-use Telnyx\IPConnections\IPConnectionCreateParams\Inbound\DefaultRoutingMethod;
-use Telnyx\IPConnections\IPConnectionCreateParams\Inbound\DnisNumberFormat;
-use Telnyx\IPConnections\IPConnectionCreateParams\Inbound\SipRegion;
-use Telnyx\IPConnections\IPConnectionCreateParams\Inbound\SipSubdomainReceiveSettings;
 use Telnyx\IPConnections\IPConnectionCreateParams\TransportProtocol;
 use Telnyx\IPConnections\IPConnectionCreateParams\WebhookAPIVersion;
-use Telnyx\IPConnections\OutboundIP\AniOverrideType;
-use Telnyx\IPConnections\OutboundIP\IPAuthenticationMethod;
-use Telnyx\IPConnections\OutboundIP\T38ReinviteSource;
 
 /**
  * Creates an IP connection.
  *
  * @see Telnyx\Services\IPConnectionsService::create()
  *
+ * @phpstan-import-type InboundShape from \Telnyx\IPConnections\IPConnectionCreateParams\Inbound
+ * @phpstan-import-type OutboundIPShape from \Telnyx\IPConnections\OutboundIP
+ * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
+ *
  * @phpstan-type IPConnectionCreateParamsShape = array{
- *   active?: bool,
- *   anchorsiteOverride?: AnchorsiteOverride|value-of<AnchorsiteOverride>,
+ *   active?: bool|null,
+ *   anchorsiteOverride?: null|AnchorsiteOverride|value-of<AnchorsiteOverride>,
  *   androidPushCredentialID?: string|null,
- *   callCostInWebhooks?: bool,
- *   connectionName?: string,
- *   defaultOnHoldComfortNoiseEnabled?: bool,
- *   dtmfType?: DtmfType|value-of<DtmfType>,
- *   encodeContactHeaderEnabled?: bool,
+ *   callCostInWebhooks?: bool|null,
+ *   connectionName?: string|null,
+ *   defaultOnHoldComfortNoiseEnabled?: bool|null,
+ *   dtmfType?: null|DtmfType|value-of<DtmfType>,
+ *   encodeContactHeaderEnabled?: bool|null,
  *   encryptedMedia?: null|EncryptedMedia|value-of<EncryptedMedia>,
- *   inbound?: Inbound|array{
- *     aniNumberFormat?: value-of<AniNumberFormat>|null,
- *     channelLimit?: int|null,
- *     codecs?: list<string>|null,
- *     defaultRoutingMethod?: value-of<DefaultRoutingMethod>|null,
- *     dnisNumberFormat?: value-of<DnisNumberFormat>|null,
- *     generateRingbackTone?: bool|null,
- *     isupHeadersEnabled?: bool|null,
- *     prackEnabled?: bool|null,
- *     shakenStirEnabled?: bool|null,
- *     sipCompactHeadersEnabled?: bool|null,
- *     sipRegion?: value-of<SipRegion>|null,
- *     sipSubdomain?: string|null,
- *     sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
- *     timeout1xxSecs?: int|null,
- *     timeout2xxSecs?: int|null,
- *   },
+ *   inbound?: InboundShape|null,
  *   iosPushCredentialID?: string|null,
- *   onnetT38PassthroughEnabled?: bool,
- *   outbound?: OutboundIP|array{
- *     aniOverride?: string|null,
- *     aniOverrideType?: value-of<AniOverrideType>|null,
- *     callParkingEnabled?: bool|null,
- *     channelLimit?: int|null,
- *     generateRingbackTone?: bool|null,
- *     instantRingbackEnabled?: bool|null,
- *     ipAuthenticationMethod?: value-of<IPAuthenticationMethod>|null,
- *     ipAuthenticationToken?: string|null,
- *     localization?: string|null,
- *     outboundVoiceProfileID?: string|null,
- *     t38ReinviteSource?: value-of<T38ReinviteSource>|null,
- *     techPrefix?: string|null,
- *   },
- *   rtcpSettings?: ConnectionRtcpSettings|array{
- *     captureEnabled?: bool|null,
- *     port?: value-of<Port>|null,
- *     reportFrequencySecs?: int|null,
- *   },
- *   tags?: list<string>,
- *   transportProtocol?: TransportProtocol|value-of<TransportProtocol>,
- *   webhookAPIVersion?: WebhookAPIVersion|value-of<WebhookAPIVersion>,
+ *   onnetT38PassthroughEnabled?: bool|null,
+ *   outbound?: OutboundIPShape|null,
+ *   rtcpSettings?: ConnectionRtcpSettingsShape|null,
+ *   tags?: list<string>|null,
+ *   transportProtocol?: null|TransportProtocol|value-of<TransportProtocol>,
+ *   webhookAPIVersion?: null|WebhookAPIVersion|value-of<WebhookAPIVersion>,
  *   webhookEventFailoverURL?: string|null,
- *   webhookEventURL?: string,
+ *   webhookEventURL?: string|null,
  *   webhookTimeoutSecs?: int|null,
  * }
  */
@@ -225,42 +187,9 @@ final class IPConnectionCreateParams implements BaseModel
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
      * @param DtmfType|value-of<DtmfType> $dtmfType
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
-     * @param Inbound|array{
-     *   aniNumberFormat?: value-of<AniNumberFormat>|null,
-     *   channelLimit?: int|null,
-     *   codecs?: list<string>|null,
-     *   defaultRoutingMethod?: value-of<DefaultRoutingMethod>|null,
-     *   dnisNumberFormat?: value-of<DnisNumberFormat>|null,
-     *   generateRingbackTone?: bool|null,
-     *   isupHeadersEnabled?: bool|null,
-     *   prackEnabled?: bool|null,
-     *   shakenStirEnabled?: bool|null,
-     *   sipCompactHeadersEnabled?: bool|null,
-     *   sipRegion?: value-of<SipRegion>|null,
-     *   sipSubdomain?: string|null,
-     *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
-     *   timeout1xxSecs?: int|null,
-     *   timeout2xxSecs?: int|null,
-     * } $inbound
-     * @param OutboundIP|array{
-     *   aniOverride?: string|null,
-     *   aniOverrideType?: value-of<AniOverrideType>|null,
-     *   callParkingEnabled?: bool|null,
-     *   channelLimit?: int|null,
-     *   generateRingbackTone?: bool|null,
-     *   instantRingbackEnabled?: bool|null,
-     *   ipAuthenticationMethod?: value-of<IPAuthenticationMethod>|null,
-     *   ipAuthenticationToken?: string|null,
-     *   localization?: string|null,
-     *   outboundVoiceProfileID?: string|null,
-     *   t38ReinviteSource?: value-of<T38ReinviteSource>|null,
-     *   techPrefix?: string|null,
-     * } $outbound
-     * @param ConnectionRtcpSettings|array{
-     *   captureEnabled?: bool|null,
-     *   port?: value-of<Port>|null,
-     *   reportFrequencySecs?: int|null,
-     * } $rtcpSettings
+     * @param InboundShape $inbound
+     * @param OutboundIPShape $outbound
+     * @param ConnectionRtcpSettingsShape $rtcpSettings
      * @param list<string> $tags
      * @param TransportProtocol|value-of<TransportProtocol> $transportProtocol
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion
@@ -421,23 +350,7 @@ final class IPConnectionCreateParams implements BaseModel
     }
 
     /**
-     * @param Inbound|array{
-     *   aniNumberFormat?: value-of<AniNumberFormat>|null,
-     *   channelLimit?: int|null,
-     *   codecs?: list<string>|null,
-     *   defaultRoutingMethod?: value-of<DefaultRoutingMethod>|null,
-     *   dnisNumberFormat?: value-of<DnisNumberFormat>|null,
-     *   generateRingbackTone?: bool|null,
-     *   isupHeadersEnabled?: bool|null,
-     *   prackEnabled?: bool|null,
-     *   shakenStirEnabled?: bool|null,
-     *   sipCompactHeadersEnabled?: bool|null,
-     *   sipRegion?: value-of<SipRegion>|null,
-     *   sipSubdomain?: string|null,
-     *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
-     *   timeout1xxSecs?: int|null,
-     *   timeout2xxSecs?: int|null,
-     * } $inbound
+     * @param InboundShape $inbound
      */
     public function withInbound(Inbound|array $inbound): self
     {
@@ -471,20 +384,7 @@ final class IPConnectionCreateParams implements BaseModel
     }
 
     /**
-     * @param OutboundIP|array{
-     *   aniOverride?: string|null,
-     *   aniOverrideType?: value-of<AniOverrideType>|null,
-     *   callParkingEnabled?: bool|null,
-     *   channelLimit?: int|null,
-     *   generateRingbackTone?: bool|null,
-     *   instantRingbackEnabled?: bool|null,
-     *   ipAuthenticationMethod?: value-of<IPAuthenticationMethod>|null,
-     *   ipAuthenticationToken?: string|null,
-     *   localization?: string|null,
-     *   outboundVoiceProfileID?: string|null,
-     *   t38ReinviteSource?: value-of<T38ReinviteSource>|null,
-     *   techPrefix?: string|null,
-     * } $outbound
+     * @param OutboundIPShape $outbound
      */
     public function withOutbound(OutboundIP|array $outbound): self
     {
@@ -495,11 +395,7 @@ final class IPConnectionCreateParams implements BaseModel
     }
 
     /**
-     * @param ConnectionRtcpSettings|array{
-     *   captureEnabled?: bool|null,
-     *   port?: value-of<Port>|null,
-     *   reportFrequencySecs?: int|null,
-     * } $rtcpSettings
+     * @param ConnectionRtcpSettingsShape $rtcpSettings
      */
     public function withRtcpSettings(
         ConnectionRtcpSettings|array $rtcpSettings

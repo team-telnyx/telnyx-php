@@ -8,12 +8,15 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\Reports\ExportPortoutsCsvReport\Filters;
-use Telnyx\Portouts\Reports\ExportPortoutsCsvReport\Filters\StatusIn;
 
 /**
  * The parameters for generating a port-outs CSV report.
  *
- * @phpstan-type ExportPortoutsCsvReportShape = array{filters: Filters}
+ * @phpstan-import-type FiltersShape from \Telnyx\Portouts\Reports\ExportPortoutsCsvReport\Filters
+ *
+ * @phpstan-type ExportPortoutsCsvReportShape = array{
+ *   filters: Filters|FiltersShape
+ * }
  */
 final class ExportPortoutsCsvReport implements BaseModel
 {
@@ -50,14 +53,7 @@ final class ExportPortoutsCsvReport implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filters|array{
-     *   createdAtGt?: \DateTimeInterface|null,
-     *   createdAtLt?: \DateTimeInterface|null,
-     *   customerReferenceIn?: list<string>|null,
-     *   endUserName?: string|null,
-     *   phoneNumbersOverlaps?: list<string>|null,
-     *   statusIn?: list<value-of<StatusIn>>|null,
-     * } $filters
+     * @param FiltersShape $filters
      */
     public static function with(Filters|array $filters): self
     {
@@ -71,14 +67,7 @@ final class ExportPortoutsCsvReport implements BaseModel
     /**
      * The filters to apply to the export port-out CSV report.
      *
-     * @param Filters|array{
-     *   createdAtGt?: \DateTimeInterface|null,
-     *   createdAtLt?: \DateTimeInterface|null,
-     *   customerReferenceIn?: list<string>|null,
-     *   endUserName?: string|null,
-     *   phoneNumbersOverlaps?: list<string>|null,
-     *   statusIn?: list<value-of<StatusIn>>|null,
-     * } $filters
+     * @param FiltersShape $filters
      */
     public function withFilters(Filters|array $filters): self
     {

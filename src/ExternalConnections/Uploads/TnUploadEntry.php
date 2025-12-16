@@ -14,13 +14,13 @@ use Telnyx\ExternalConnections\Uploads\TnUploadEntry\Status;
 /**
  * @phpstan-type TnUploadEntryShape = array{
  *   civicAddressID?: string|null,
- *   errorCode?: value-of<ErrorCode>|null,
+ *   errorCode?: null|ErrorCode|value-of<ErrorCode>,
  *   errorMessage?: string|null,
- *   internalStatus?: value-of<InternalStatus>|null,
+ *   internalStatus?: null|InternalStatus|value-of<InternalStatus>,
  *   locationID?: string|null,
  *   numberID?: string|null,
  *   phoneNumber?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  * }
  */
 final class TnUploadEntry implements BaseModel

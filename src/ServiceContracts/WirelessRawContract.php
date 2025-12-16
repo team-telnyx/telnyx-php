@@ -15,7 +15,7 @@ interface WirelessRawContract
     /**
      * @api
      *
-     * @param array<mixed>|WirelessRetrieveRegionsParams $params
+     * @param array<string,mixed>|WirelessRetrieveRegionsParams $params
      *
      * @return BaseResponse<WirelessGetRegionsResponse>
      *

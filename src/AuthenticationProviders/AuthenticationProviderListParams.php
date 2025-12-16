@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AuthenticationProvidersService::list()
  *
  * @phpstan-type AuthenticationProviderListParamsShape = array{
- *   pageNumber?: int, pageSize?: int, sort?: Sort|value-of<Sort>
+ *   pageNumber?: int|null, pageSize?: int|null, sort?: null|Sort|value-of<Sort>
  * }
  */
 final class AuthenticationProviderListParams implements BaseModel

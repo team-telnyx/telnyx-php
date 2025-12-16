@@ -17,11 +17,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type MessagingCreateParamsShape = array{
  *   aggregationType: int,
- *   endTime?: \DateTimeInterface,
- *   managedAccounts?: list<string>,
- *   profiles?: list<string>,
- *   selectAllManagedAccounts?: bool,
- *   startTime?: \DateTimeInterface,
+ *   endTime?: \DateTimeInterface|null,
+ *   managedAccounts?: list<string>|null,
+ *   profiles?: list<string>|null,
+ *   selectAllManagedAccounts?: bool|null,
+ *   startTime?: \DateTimeInterface|null,
  * }
  */
 final class MessagingCreateParams implements BaseModel

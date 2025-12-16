@@ -8,7 +8,6 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\PortingOrders\PortingOrderMisc\RemainingNumbersAction;
 use Telnyx\PortingOrders\PortingOrderUpdateParams\ActivationSettings;
 use Telnyx\PortingOrders\PortingOrderUpdateParams\Messaging;
 use Telnyx\PortingOrders\PortingOrderUpdateParams\Requirement;
@@ -22,40 +21,28 @@ use Telnyx\PortingOrders\PortingOrderUpdateParams\Requirement;
  *
  * @see Telnyx\Services\PortingOrdersService::update()
  *
+ * @phpstan-import-type ActivationSettingsShape from \Telnyx\PortingOrders\PortingOrderUpdateParams\ActivationSettings
+ * @phpstan-import-type PortingOrderDocumentsShape from \Telnyx\PortingOrders\PortingOrderDocuments
+ * @phpstan-import-type PortingOrderEndUserShape from \Telnyx\PortingOrders\PortingOrderEndUser
+ * @phpstan-import-type MessagingShape from \Telnyx\PortingOrders\PortingOrderUpdateParams\Messaging
+ * @phpstan-import-type PortingOrderMiscShape from \Telnyx\PortingOrders\PortingOrderMisc
+ * @phpstan-import-type PortingOrderPhoneNumberConfigurationShape from \Telnyx\PortingOrders\PortingOrderPhoneNumberConfiguration
+ * @phpstan-import-type RequirementShape from \Telnyx\PortingOrders\PortingOrderUpdateParams\Requirement
+ * @phpstan-import-type PortingOrderUserFeedbackShape from \Telnyx\PortingOrders\PortingOrderUserFeedback
+ *
  * @phpstan-type PortingOrderUpdateParamsShape = array{
- *   activationSettings?: ActivationSettings|array{
- *     focDatetimeRequested?: \DateTimeInterface|null
- *   },
- *   customerGroupReference?: string,
- *   customerReference?: string,
- *   documents?: PortingOrderDocuments|array{
- *     invoice?: string|null, loa?: string|null
- *   },
- *   endUser?: PortingOrderEndUser|array{
- *     admin?: PortingOrderEndUserAdmin|null,
- *     location?: PortingOrderEndUserLocation|null,
- *   },
- *   messaging?: Messaging|array{enableMessaging?: bool|null},
- *   misc?: null|PortingOrderMisc|array{
- *     newBillingPhoneNumber?: string|null,
- *     remainingNumbersAction?: value-of<RemainingNumbersAction>|null,
- *     type?: value-of<PortingOrderType>|null,
- *   },
- *   phoneNumberConfiguration?: PortingOrderPhoneNumberConfiguration|array{
- *     billingGroupID?: string|null,
- *     connectionID?: string|null,
- *     emergencyAddressID?: string|null,
- *     messagingProfileID?: string|null,
- *     tags?: list<string>|null,
- *   },
- *   requirementGroupID?: string,
- *   requirements?: list<Requirement|array{
- *     fieldValue: string, requirementTypeID: string
- *   }>,
- *   userFeedback?: PortingOrderUserFeedback|array{
- *     userComment?: string|null, userRating?: int|null
- *   },
- *   webhookURL?: string,
+ *   activationSettings?: ActivationSettingsShape|null,
+ *   customerGroupReference?: string|null,
+ *   customerReference?: string|null,
+ *   documents?: PortingOrderDocumentsShape|null,
+ *   endUser?: PortingOrderEndUserShape|null,
+ *   messaging?: MessagingShape|null,
+ *   misc?: PortingOrderMiscShape|null,
+ *   phoneNumberConfiguration?: PortingOrderPhoneNumberConfigurationShape|null,
+ *   requirementGroupID?: string|null,
+ *   requirements?: list<RequirementShape>|null,
+ *   userFeedback?: PortingOrderUserFeedbackShape|null,
+ *   webhookURL?: string|null,
  * }
  */
 final class PortingOrderUpdateParams implements BaseModel
@@ -121,35 +108,14 @@ final class PortingOrderUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ActivationSettings|array{
-     *   focDatetimeRequested?: \DateTimeInterface|null
-     * } $activationSettings
-     * @param PortingOrderDocuments|array{
-     *   invoice?: string|null, loa?: string|null
-     * } $documents
-     * @param PortingOrderEndUser|array{
-     *   admin?: PortingOrderEndUserAdmin|null,
-     *   location?: PortingOrderEndUserLocation|null,
-     * } $endUser
-     * @param Messaging|array{enableMessaging?: bool|null} $messaging
-     * @param PortingOrderMisc|array{
-     *   newBillingPhoneNumber?: string|null,
-     *   remainingNumbersAction?: value-of<RemainingNumbersAction>|null,
-     *   type?: value-of<PortingOrderType>|null,
-     * }|null $misc
-     * @param PortingOrderPhoneNumberConfiguration|array{
-     *   billingGroupID?: string|null,
-     *   connectionID?: string|null,
-     *   emergencyAddressID?: string|null,
-     *   messagingProfileID?: string|null,
-     *   tags?: list<string>|null,
-     * } $phoneNumberConfiguration
-     * @param list<Requirement|array{
-     *   fieldValue: string, requirementTypeID: string
-     * }> $requirements
-     * @param PortingOrderUserFeedback|array{
-     *   userComment?: string|null, userRating?: int|null
-     * } $userFeedback
+     * @param ActivationSettingsShape $activationSettings
+     * @param PortingOrderDocumentsShape $documents
+     * @param PortingOrderEndUserShape $endUser
+     * @param MessagingShape $messaging
+     * @param PortingOrderMiscShape|null $misc
+     * @param PortingOrderPhoneNumberConfigurationShape $phoneNumberConfiguration
+     * @param list<RequirementShape> $requirements
+     * @param PortingOrderUserFeedbackShape $userFeedback
      */
     public static function with(
         ActivationSettings|array|null $activationSettings = null,
@@ -184,9 +150,7 @@ final class PortingOrderUpdateParams implements BaseModel
     }
 
     /**
-     * @param ActivationSettings|array{
-     *   focDatetimeRequested?: \DateTimeInterface|null
-     * } $activationSettings
+     * @param ActivationSettingsShape $activationSettings
      */
     public function withActivationSettings(
         ActivationSettings|array $activationSettings
@@ -217,9 +181,7 @@ final class PortingOrderUpdateParams implements BaseModel
     /**
      * Can be specified directly or via the `requirement_group_id` parameter.
      *
-     * @param PortingOrderDocuments|array{
-     *   invoice?: string|null, loa?: string|null
-     * } $documents
+     * @param PortingOrderDocumentsShape $documents
      */
     public function withDocuments(PortingOrderDocuments|array $documents): self
     {
@@ -230,10 +192,7 @@ final class PortingOrderUpdateParams implements BaseModel
     }
 
     /**
-     * @param PortingOrderEndUser|array{
-     *   admin?: PortingOrderEndUserAdmin|null,
-     *   location?: PortingOrderEndUserLocation|null,
-     * } $endUser
+     * @param PortingOrderEndUserShape $endUser
      */
     public function withEndUser(PortingOrderEndUser|array $endUser): self
     {
@@ -244,7 +203,7 @@ final class PortingOrderUpdateParams implements BaseModel
     }
 
     /**
-     * @param Messaging|array{enableMessaging?: bool|null} $messaging
+     * @param MessagingShape $messaging
      */
     public function withMessaging(Messaging|array $messaging): self
     {
@@ -255,11 +214,7 @@ final class PortingOrderUpdateParams implements BaseModel
     }
 
     /**
-     * @param PortingOrderMisc|array{
-     *   newBillingPhoneNumber?: string|null,
-     *   remainingNumbersAction?: value-of<RemainingNumbersAction>|null,
-     *   type?: value-of<PortingOrderType>|null,
-     * }|null $misc
+     * @param PortingOrderMiscShape|null $misc
      */
     public function withMisc(PortingOrderMisc|array|null $misc): self
     {
@@ -270,13 +225,7 @@ final class PortingOrderUpdateParams implements BaseModel
     }
 
     /**
-     * @param PortingOrderPhoneNumberConfiguration|array{
-     *   billingGroupID?: string|null,
-     *   connectionID?: string|null,
-     *   emergencyAddressID?: string|null,
-     *   messagingProfileID?: string|null,
-     *   tags?: list<string>|null,
-     * } $phoneNumberConfiguration
+     * @param PortingOrderPhoneNumberConfigurationShape $phoneNumberConfiguration
      */
     public function withPhoneNumberConfiguration(
         PortingOrderPhoneNumberConfiguration|array $phoneNumberConfiguration
@@ -301,9 +250,7 @@ final class PortingOrderUpdateParams implements BaseModel
     /**
      * List of requirements for porting numbers.
      *
-     * @param list<Requirement|array{
-     *   fieldValue: string, requirementTypeID: string
-     * }> $requirements
+     * @param list<RequirementShape> $requirements
      */
     public function withRequirements(array $requirements): self
     {
@@ -314,9 +261,7 @@ final class PortingOrderUpdateParams implements BaseModel
     }
 
     /**
-     * @param PortingOrderUserFeedback|array{
-     *   userComment?: string|null, userRating?: int|null
-     * } $userFeedback
+     * @param PortingOrderUserFeedbackShape $userFeedback
      */
     public function withUserFeedback(
         PortingOrderUserFeedback|array $userFeedback

@@ -12,8 +12,10 @@ use Telnyx\OtaUpdates\OtaUpdateGetResponse\Data\Settings\MobileNetworkOperatorsP
 /**
  * A JSON object representation of the operation. The information present here will relate directly to the source of the OTA request.
  *
+ * @phpstan-import-type MobileNetworkOperatorsPreferenceShape from \Telnyx\OtaUpdates\OtaUpdateGetResponse\Data\Settings\MobileNetworkOperatorsPreference
+ *
  * @phpstan-type SettingsShape = array{
- *   mobileNetworkOperatorsPreferences?: list<MobileNetworkOperatorsPreference>|null,
+ *   mobileNetworkOperatorsPreferences?: list<MobileNetworkOperatorsPreferenceShape>|null,
  * }
  */
 final class Settings implements BaseModel
@@ -42,11 +44,7 @@ final class Settings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<MobileNetworkOperatorsPreference|array{
-     *   mobileNetworkOperatorID?: string|null,
-     *   mobileNetworkOperatorName?: string|null,
-     *   priority?: int|null,
-     * }> $mobileNetworkOperatorsPreferences
+     * @param list<MobileNetworkOperatorsPreferenceShape> $mobileNetworkOperatorsPreferences
      */
     public static function with(
         ?array $mobileNetworkOperatorsPreferences = null
@@ -61,11 +59,7 @@ final class Settings implements BaseModel
     /**
      * A list of mobile network operators and the priority that should be applied when the SIM is connecting to the network.
      *
-     * @param list<MobileNetworkOperatorsPreference|array{
-     *   mobileNetworkOperatorID?: string|null,
-     *   mobileNetworkOperatorName?: string|null,
-     *   priority?: int|null,
-     * }> $mobileNetworkOperatorsPreferences
+     * @param list<MobileNetworkOperatorsPreferenceShape> $mobileNetworkOperatorsPreferences
      */
     public function withMobileNetworkOperatorsPreferences(
         array $mobileNetworkOperatorsPreferences

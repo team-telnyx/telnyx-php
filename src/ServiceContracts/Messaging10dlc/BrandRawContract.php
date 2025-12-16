@@ -26,7 +26,7 @@ interface BrandRawContract
     /**
      * @api
      *
-     * @param array<mixed>|BrandCreateParams $params
+     * @param array<string,mixed>|BrandCreateParams $params
      *
      * @return BaseResponse<TelnyxBrand>
      *
@@ -52,7 +52,7 @@ interface BrandRawContract
     /**
      * @api
      *
-     * @param array<mixed>|BrandUpdateParams $params
+     * @param array<string,mixed>|BrandUpdateParams $params
      *
      * @return BaseResponse<TelnyxBrand>
      *
@@ -67,7 +67,7 @@ interface BrandRawContract
     /**
      * @api
      *
-     * @param array<mixed>|BrandListParams $params
+     * @param array<string,mixed>|BrandListParams $params
      *
      * @return BaseResponse<PerPagePaginationV2<BrandListResponse>>
      *
@@ -118,7 +118,7 @@ interface BrandRawContract
      * @api
      *
      * @param string $referenceID The reference ID returned when the OTP was initially triggered
-     * @param array<mixed>|BrandRetrieveSMSOtpStatusParams $params
+     * @param array<string,mixed>|BrandRetrieveSMSOtpStatusParams $params
      *
      * @return BaseResponse<BrandGetSMSOtpStatusResponse>
      *
@@ -146,7 +146,7 @@ interface BrandRawContract
      * @api
      *
      * @param string $brandID The Brand ID for which to trigger the OTP
-     * @param array<mixed>|BrandTriggerSMSOtpParams $params
+     * @param array<string,mixed>|BrandTriggerSMSOtpParams $params
      *
      * @return BaseResponse<BrandTriggerSMSOtpResponse>
      *
@@ -162,7 +162,7 @@ interface BrandRawContract
      * @api
      *
      * @param string $brandID The Brand ID for which to verify the OTP
-     * @param array<mixed>|BrandVerifySMSOtpParams $params
+     * @param array<string,mixed>|BrandVerifySMSOtpParams $params
      *
      * @return BaseResponse<mixed>
      *

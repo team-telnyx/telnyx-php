@@ -17,9 +17,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type WireguardInterfaceCreateParamsShape = array{
  *   regionCode: string,
- *   enableSipTrunking?: bool,
- *   name?: string,
- *   networkID?: string,
+ *   enableSipTrunking?: bool|null,
+ *   name?: string|null,
+ *   networkID?: string|null,
  * }
  */
 final class WireguardInterfaceCreateParams implements BaseModel

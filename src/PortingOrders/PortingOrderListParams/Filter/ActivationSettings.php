@@ -10,8 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderListParams\Filter\ActivationSettings\FocDatetimeRequested;
 
 /**
+ * @phpstan-import-type FocDatetimeRequestedShape from \Telnyx\PortingOrders\PortingOrderListParams\Filter\ActivationSettings\FocDatetimeRequested
+ *
  * @phpstan-type ActivationSettingsShape = array{
- *   fastPortEligible?: bool|null, focDatetimeRequested?: FocDatetimeRequested|null
+ *   fastPortEligible?: bool|null,
+ *   focDatetimeRequested?: null|FocDatetimeRequested|FocDatetimeRequestedShape,
  * }
  */
 final class ActivationSettings implements BaseModel
@@ -41,9 +44,7 @@ final class ActivationSettings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FocDatetimeRequested|array{
-     *   gt?: string|null, lt?: string|null
-     * } $focDatetimeRequested
+     * @param FocDatetimeRequestedShape $focDatetimeRequested
      */
     public static function with(
         ?bool $fastPortEligible = null,
@@ -71,9 +72,7 @@ final class ActivationSettings implements BaseModel
     /**
      * FOC datetime range filtering operations.
      *
-     * @param FocDatetimeRequested|array{
-     *   gt?: string|null, lt?: string|null
-     * } $focDatetimeRequested
+     * @param FocDatetimeRequestedShape $focDatetimeRequested
      */
     public function withFocDatetimeRequested(
         FocDatetimeRequested|array $focDatetimeRequested

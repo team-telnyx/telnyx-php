@@ -16,7 +16,7 @@ use Telnyx\Networks\InterfaceStatus;
  *   recordType?: string|null,
  *   updatedAt?: string|null,
  *   networkID?: string|null,
- *   status?: value-of<InterfaceStatus>|null,
+ *   status?: null|InterfaceStatus|value-of<InterfaceStatus>,
  *   wireguardPeerID?: string|null,
  * }
  */

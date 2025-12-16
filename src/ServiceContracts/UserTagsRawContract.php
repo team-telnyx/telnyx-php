@@ -15,7 +15,7 @@ interface UserTagsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|UserTagListParams $params
+     * @param array<string,mixed>|UserTagListParams $params
      *
      * @return BaseResponse<UserTagListResponse>
      *

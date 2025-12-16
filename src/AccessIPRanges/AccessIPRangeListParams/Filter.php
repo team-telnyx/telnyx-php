@@ -13,9 +13,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[cidr_block], filter[cidr_block][startswith], filter[cidr_block][endswith], filter[cidr_block][contains], filter[created_at]. Supports complex bracket operations for dynamic filtering.
  *
+ * @phpstan-import-type CidrBlockShape from \Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter\CidrBlock
+ * @phpstan-import-type CreatedAtShape from \Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter\CreatedAt
+ *
  * @phpstan-type FilterShape = array{
- *   cidrBlock?: string|null|CidrBlockPatternFilter,
- *   createdAt?: null|\DateTimeInterface|DateRangeFilter,
+ *   cidrBlock?: CidrBlockShape|null, createdAt?: CreatedAtShape|null
  * }
  */
 final class Filter implements BaseModel
@@ -45,15 +47,8 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param string|CidrBlockPatternFilter|array{
-     *   contains?: string|null, endswith?: string|null, startswith?: string|null
-     * } $cidrBlock
-     * @param \DateTimeInterface|DateRangeFilter|array{
-     *   gt?: \DateTimeInterface|null,
-     *   gte?: \DateTimeInterface|null,
-     *   lt?: \DateTimeInterface|null,
-     *   lte?: \DateTimeInterface|null,
-     * } $createdAt
+     * @param CidrBlockShape $cidrBlock
+     * @param CreatedAtShape $createdAt
      */
     public static function with(
         string|CidrBlockPatternFilter|array|null $cidrBlock = null,
@@ -70,9 +65,7 @@ final class Filter implements BaseModel
     /**
      * Filter by exact CIDR block match.
      *
-     * @param string|CidrBlockPatternFilter|array{
-     *   contains?: string|null, endswith?: string|null, startswith?: string|null
-     * } $cidrBlock
+     * @param CidrBlockShape $cidrBlock
      */
     public function withCidrBlock(
         string|CidrBlockPatternFilter|array $cidrBlock
@@ -86,12 +79,7 @@ final class Filter implements BaseModel
     /**
      * Filter by exact creation date-time.
      *
-     * @param \DateTimeInterface|DateRangeFilter|array{
-     *   gt?: \DateTimeInterface|null,
-     *   gte?: \DateTimeInterface|null,
-     *   lt?: \DateTimeInterface|null,
-     *   lte?: \DateTimeInterface|null,
-     * } $createdAt
+     * @param CreatedAtShape $createdAt
      */
     public function withCreatedAt(
         \DateTimeInterface|DateRangeFilter|array $createdAt

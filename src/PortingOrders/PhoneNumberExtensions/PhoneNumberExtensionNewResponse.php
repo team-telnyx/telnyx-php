@@ -7,12 +7,12 @@ namespace Telnyx\PortingOrders\PhoneNumberExtensions;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension\ActivationRange;
-use Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension\ExtensionRange;
 
 /**
+ * @phpstan-import-type PortingPhoneNumberExtensionShape from \Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension
+ *
  * @phpstan-type PhoneNumberExtensionNewResponseShape = array{
- *   data?: PortingPhoneNumberExtension|null
+ *   data?: null|PortingPhoneNumberExtension|PortingPhoneNumberExtensionShape
  * }
  */
 final class PhoneNumberExtensionNewResponse implements BaseModel
@@ -33,15 +33,7 @@ final class PhoneNumberExtensionNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortingPhoneNumberExtension|array{
-     *   id?: string|null,
-     *   activationRanges?: list<ActivationRange>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   extensionRange?: ExtensionRange|null,
-     *   portingPhoneNumberID?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param PortingPhoneNumberExtensionShape $data
      */
     public static function with(
         PortingPhoneNumberExtension|array|null $data = null
@@ -54,15 +46,7 @@ final class PhoneNumberExtensionNewResponse implements BaseModel
     }
 
     /**
-     * @param PortingPhoneNumberExtension|array{
-     *   id?: string|null,
-     *   activationRanges?: list<ActivationRange>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   extensionRange?: ExtensionRange|null,
-     *   portingPhoneNumberID?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param PortingPhoneNumberExtensionShape $data
      */
     public function withData(PortingPhoneNumberExtension|array $data): self
     {

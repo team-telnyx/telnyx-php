@@ -8,14 +8,15 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse\Data\RegulatoryRequirement;
-use Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse\Data\RegulatoryRequirement\AcceptanceCriteria;
 
 /**
+ * @phpstan-import-type RegulatoryRequirementShape from \Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse\Data\RegulatoryRequirement
+ *
  * @phpstan-type DataShape = array{
  *   action?: string|null,
  *   countryCode?: string|null,
  *   phoneNumberType?: string|null,
- *   regulatoryRequirements?: list<RegulatoryRequirement>|null,
+ *   regulatoryRequirements?: list<RegulatoryRequirementShape>|null,
  * }
  */
 final class Data implements BaseModel
@@ -46,14 +47,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RegulatoryRequirement|array{
-     *   id?: string|null,
-     *   acceptanceCriteria?: AcceptanceCriteria|null,
-     *   description?: string|null,
-     *   example?: string|null,
-     *   fieldType?: string|null,
-     *   name?: string|null,
-     * }> $regulatoryRequirements
+     * @param list<RegulatoryRequirementShape> $regulatoryRequirements
      */
     public static function with(
         ?string $action = null,
@@ -96,14 +90,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<RegulatoryRequirement|array{
-     *   id?: string|null,
-     *   acceptanceCriteria?: AcceptanceCriteria|null,
-     *   description?: string|null,
-     *   example?: string|null,
-     *   fieldType?: string|null,
-     *   name?: string|null,
-     * }> $regulatoryRequirements
+     * @param list<RegulatoryRequirementShape> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements

@@ -23,7 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AIService::summarize()
  *
  * @phpstan-type AISummarizeParamsShape = array{
- *   bucket: string, filename: string, systemPrompt?: string
+ *   bucket: string, filename: string, systemPrompt?: string|null
  * }
  */
 final class AISummarizeParams implements BaseModel

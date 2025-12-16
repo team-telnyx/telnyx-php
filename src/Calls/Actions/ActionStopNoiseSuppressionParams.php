@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Calls\ActionsService::stopNoiseSuppression()
  *
  * @phpstan-type ActionStopNoiseSuppressionParamsShape = array{
- *   clientState?: string, commandID?: string
+ *   clientState?: string|null, commandID?: string|null
  * }
  */
 final class ActionStopNoiseSuppressionParams implements BaseModel

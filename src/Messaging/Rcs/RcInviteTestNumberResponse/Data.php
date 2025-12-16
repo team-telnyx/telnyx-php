@@ -13,7 +13,7 @@ use Telnyx\Messaging\Rcs\RcInviteTestNumberResponse\Data\RecordType;
  * @phpstan-type DataShape = array{
  *   agentID?: string|null,
  *   phoneNumber?: string|null,
- *   recordType?: value-of<RecordType>|null,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  *   status?: string|null,
  * }
  */

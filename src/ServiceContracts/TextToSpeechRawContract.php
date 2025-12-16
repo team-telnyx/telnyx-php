@@ -16,7 +16,7 @@ interface TextToSpeechRawContract
     /**
      * @api
      *
-     * @param array<mixed>|TextToSpeechGenerateSpeechParams $params
+     * @param array<string,mixed>|TextToSpeechGenerateSpeechParams $params
      *
      * @return BaseResponse<string>
      *
@@ -30,7 +30,7 @@ interface TextToSpeechRawContract
     /**
      * @api
      *
-     * @param array<mixed>|TextToSpeechListVoicesParams $params
+     * @param array<string,mixed>|TextToSpeechListVoicesParams $params
      *
      * @return BaseResponse<TextToSpeechListVoicesResponse>
      *

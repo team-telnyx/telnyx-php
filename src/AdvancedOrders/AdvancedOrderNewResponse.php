@@ -18,12 +18,12 @@ use Telnyx\Core\Contracts\BaseModel;
  *   comments?: string|null,
  *   countryCode?: string|null,
  *   customerReference?: string|null,
- *   features?: list<value-of<Feature>>|null,
+ *   features?: list<Feature|value-of<Feature>>|null,
  *   orders?: list<string>|null,
- *   phoneNumberType?: list<value-of<PhoneNumberType>>|null,
+ *   phoneNumberType?: list<PhoneNumberType|value-of<PhoneNumberType>>|null,
  *   quantity?: int|null,
  *   requirementGroupID?: string|null,
- *   status?: list<value-of<Status>>|null,
+ *   status?: list<Status|value-of<Status>>|null,
  * }
  */
 final class AdvancedOrderNewResponse implements BaseModel

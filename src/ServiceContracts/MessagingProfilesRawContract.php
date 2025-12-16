@@ -26,7 +26,7 @@ interface MessagingProfilesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MessagingProfileCreateParams $params
+     * @param array<string,mixed>|MessagingProfileCreateParams $params
      *
      * @return BaseResponse<MessagingProfileNewResponse>
      *
@@ -55,7 +55,7 @@ interface MessagingProfilesRawContract
      * @api
      *
      * @param string $messagingProfileID The id of the messaging profile to retrieve
-     * @param array<mixed>|MessagingProfileUpdateParams $params
+     * @param array<string,mixed>|MessagingProfileUpdateParams $params
      *
      * @return BaseResponse<MessagingProfileUpdateResponse>
      *
@@ -70,7 +70,7 @@ interface MessagingProfilesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MessagingProfileListParams $params
+     * @param array<string,mixed>|MessagingProfileListParams $params
      *
      * @return BaseResponse<DefaultPagination<MessagingProfile>>
      *
@@ -99,7 +99,7 @@ interface MessagingProfilesRawContract
      * @api
      *
      * @param string $messagingProfileID The id of the messaging profile to retrieve
-     * @param array<mixed>|MessagingProfileListPhoneNumbersParams $params
+     * @param array<string,mixed>|MessagingProfileListPhoneNumbersParams $params
      *
      * @return BaseResponse<DefaultPagination<PhoneNumberWithMessagingSettings>>
      *
@@ -115,7 +115,7 @@ interface MessagingProfilesRawContract
      * @api
      *
      * @param string $messagingProfileID The id of the messaging profile to retrieve
-     * @param array<mixed>|MessagingProfileListShortCodesParams $params
+     * @param array<string,mixed>|MessagingProfileListShortCodesParams $params
      *
      * @return BaseResponse<DefaultPagination<ShortCode>>
      *

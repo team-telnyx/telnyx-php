@@ -15,10 +15,10 @@ use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreat
  *
  * @see Telnyx\Services\PortingOrders\PhoneNumberConfigurationsService::create()
  *
+ * @phpstan-import-type PhoneNumberConfigurationShape from \Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreateParams\PhoneNumberConfiguration
+ *
  * @phpstan-type PhoneNumberConfigurationCreateParamsShape = array{
- *   phoneNumberConfigurations?: list<PhoneNumberConfiguration|array{
- *     portingPhoneNumberID: string, userBundleID: string
- *   }>,
+ *   phoneNumberConfigurations?: list<PhoneNumberConfigurationShape>|null
  * }
  */
 final class PhoneNumberConfigurationCreateParams implements BaseModel
@@ -44,9 +44,7 @@ final class PhoneNumberConfigurationCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PhoneNumberConfiguration|array{
-     *   portingPhoneNumberID: string, userBundleID: string
-     * }> $phoneNumberConfigurations
+     * @param list<PhoneNumberConfigurationShape> $phoneNumberConfigurations
      */
     public static function with(?array $phoneNumberConfigurations = null): self
     {
@@ -58,9 +56,7 @@ final class PhoneNumberConfigurationCreateParams implements BaseModel
     }
 
     /**
-     * @param list<PhoneNumberConfiguration|array{
-     *   portingPhoneNumberID: string, userBundleID: string
-     * }> $phoneNumberConfigurations
+     * @param list<PhoneNumberConfigurationShape> $phoneNumberConfigurations
      */
     public function withPhoneNumberConfigurations(
         array $phoneNumberConfigurations

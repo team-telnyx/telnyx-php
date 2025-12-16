@@ -11,19 +11,24 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\Attempts;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\FinishedAt;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\StartedAt;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\Status;
-use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\Status\Eq;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\Webhook;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[status][eq], filter[event_type], filter[webhook][contains], filter[attempts][contains], filter[started_at][gte], filter[started_at][lte], filter[finished_at][gte], filter[finished_at][lte].
  *
+ * @phpstan-import-type AttemptsShape from \Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\Attempts
+ * @phpstan-import-type FinishedAtShape from \Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\FinishedAt
+ * @phpstan-import-type StartedAtShape from \Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\StartedAt
+ * @phpstan-import-type StatusShape from \Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\Status
+ * @phpstan-import-type WebhookShape from \Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\Webhook
+ *
  * @phpstan-type FilterShape = array{
- *   attempts?: Attempts|null,
+ *   attempts?: null|Attempts|AttemptsShape,
  *   eventType?: string|null,
- *   finishedAt?: FinishedAt|null,
- *   startedAt?: StartedAt|null,
- *   status?: Status|null,
- *   webhook?: Webhook|null,
+ *   finishedAt?: null|FinishedAt|FinishedAtShape,
+ *   startedAt?: null|StartedAt|StartedAtShape,
+ *   status?: null|Status|StatusShape,
+ *   webhook?: null|Webhook|WebhookShape,
  * }
  */
 final class Filter implements BaseModel
@@ -62,11 +67,11 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Attempts|array{contains?: string|null} $attempts
-     * @param FinishedAt|array{gte?: string|null, lte?: string|null} $finishedAt
-     * @param StartedAt|array{gte?: string|null, lte?: string|null} $startedAt
-     * @param Status|array{eq?: value-of<Eq>|null} $status
-     * @param Webhook|array{contains?: string|null} $webhook
+     * @param AttemptsShape $attempts
+     * @param FinishedAtShape $finishedAt
+     * @param StartedAtShape $startedAt
+     * @param StatusShape $status
+     * @param WebhookShape $webhook
      */
     public static function with(
         Attempts|array|null $attempts = null,
@@ -89,7 +94,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param Attempts|array{contains?: string|null} $attempts
+     * @param AttemptsShape $attempts
      */
     public function withAttempts(Attempts|array $attempts): self
     {
@@ -111,7 +116,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param FinishedAt|array{gte?: string|null, lte?: string|null} $finishedAt
+     * @param FinishedAtShape $finishedAt
      */
     public function withFinishedAt(FinishedAt|array $finishedAt): self
     {
@@ -122,7 +127,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param StartedAt|array{gte?: string|null, lte?: string|null} $startedAt
+     * @param StartedAtShape $startedAt
      */
     public function withStartedAt(StartedAt|array $startedAt): self
     {
@@ -133,7 +138,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param Status|array{eq?: value-of<Eq>|null} $status
+     * @param StatusShape $status
      */
     public function withStatus(Status|array $status): self
     {
@@ -144,7 +149,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param Webhook|array{contains?: string|null} $webhook
+     * @param WebhookShape $webhook
      */
     public function withWebhook(Webhook|array $webhook): self
     {

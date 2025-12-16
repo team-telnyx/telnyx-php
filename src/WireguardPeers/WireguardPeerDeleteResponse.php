@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WireguardPeers\WireguardPeerDeleteResponse\Data;
 
 /**
- * @phpstan-type WireguardPeerDeleteResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\WireguardPeers\WireguardPeerDeleteResponse\Data
+ *
+ * @phpstan-type WireguardPeerDeleteResponseShape = array{
+ *   data?: null|Data|DataShape
+ * }
  */
 final class WireguardPeerDeleteResponse implements BaseModel
 {
@@ -30,16 +34,7 @@ final class WireguardPeerDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     *   publicKey?: string|null,
-     *   lastSeen?: string|null,
-     *   privateKey?: string|null,
-     *   wireguardInterfaceID?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -51,16 +46,7 @@ final class WireguardPeerDeleteResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     *   publicKey?: string|null,
-     *   lastSeen?: string|null,
-     *   privateKey?: string|null,
-     *   wireguardInterfaceID?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

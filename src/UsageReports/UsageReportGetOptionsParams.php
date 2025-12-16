@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\UsageReportsService::getOptions()
  *
  * @phpstan-type UsageReportGetOptionsParamsShape = array{
- *   product?: string, authorizationBearer?: string
+ *   product?: string|null, authorizationBearer?: string|null
  * }
  */
 final class UsageReportGetOptionsParams implements BaseModel

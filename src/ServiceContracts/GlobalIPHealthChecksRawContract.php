@@ -20,7 +20,7 @@ interface GlobalIPHealthChecksRawContract
     /**
      * @api
      *
-     * @param array<mixed>|GlobalIPHealthCheckCreateParams $params
+     * @param array<string,mixed>|GlobalIPHealthCheckCreateParams $params
      *
      * @return BaseResponse<GlobalIPHealthCheckNewResponse>
      *
@@ -48,7 +48,7 @@ interface GlobalIPHealthChecksRawContract
     /**
      * @api
      *
-     * @param array<mixed>|GlobalIPHealthCheckListParams $params
+     * @param array<string,mixed>|GlobalIPHealthCheckListParams $params
      *
      * @return BaseResponse<DefaultPagination<GlobalIPHealthCheckListResponse>>
      *

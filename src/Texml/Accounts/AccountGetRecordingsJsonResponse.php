@@ -7,10 +7,10 @@ namespace Telnyx\Texml\Accounts;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody\Source;
-use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody\Status;
 
 /**
+ * @phpstan-import-type TexmlGetCallRecordingResponseBodyShape from \Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody
+ *
  * @phpstan-type AccountGetRecordingsJsonResponseShape = array{
  *   end?: int|null,
  *   firstPageUri?: string|null,
@@ -18,7 +18,7 @@ use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody\Status;
  *   page?: int|null,
  *   pageSize?: int|null,
  *   previousPageUri?: string|null,
- *   recordings?: list<TexmlGetCallRecordingResponseBody>|null,
+ *   recordings?: list<TexmlGetCallRecordingResponseBodyShape>|null,
  *   start?: int|null,
  *   uri?: string|null,
  * }
@@ -90,23 +90,7 @@ final class AccountGetRecordingsJsonResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TexmlGetCallRecordingResponseBody|array{
-     *   accountSid?: string|null,
-     *   callSid?: string|null,
-     *   channels?: 1|2|null,
-     *   conferenceSid?: string|null,
-     *   dateCreated?: \DateTimeInterface|null,
-     *   dateUpdated?: \DateTimeInterface|null,
-     *   duration?: string|null,
-     *   errorCode?: string|null,
-     *   mediaURL?: string|null,
-     *   sid?: string|null,
-     *   source?: value-of<Source>|null,
-     *   startTime?: \DateTimeInterface|null,
-     *   status?: value-of<Status>|null,
-     *   subresourcesUris?: TexmlRecordingSubresourcesUris|null,
-     *   uri?: string|null,
-     * }> $recordings
+     * @param list<TexmlGetCallRecordingResponseBodyShape> $recordings
      */
     public static function with(
         ?int $end = null,
@@ -201,23 +185,7 @@ final class AccountGetRecordingsJsonResponse implements BaseModel
     }
 
     /**
-     * @param list<TexmlGetCallRecordingResponseBody|array{
-     *   accountSid?: string|null,
-     *   callSid?: string|null,
-     *   channels?: 1|2|null,
-     *   conferenceSid?: string|null,
-     *   dateCreated?: \DateTimeInterface|null,
-     *   dateUpdated?: \DateTimeInterface|null,
-     *   duration?: string|null,
-     *   errorCode?: string|null,
-     *   mediaURL?: string|null,
-     *   sid?: string|null,
-     *   source?: value-of<Source>|null,
-     *   startTime?: \DateTimeInterface|null,
-     *   status?: value-of<Status>|null,
-     *   subresourcesUris?: TexmlRecordingSubresourcesUris|null,
-     *   uri?: string|null,
-     * }> $recordings
+     * @param list<TexmlGetCallRecordingResponseBodyShape> $recordings
      */
     public function withRecordings(array $recordings): self
     {

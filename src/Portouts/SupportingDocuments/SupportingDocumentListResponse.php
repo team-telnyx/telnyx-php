@@ -8,11 +8,12 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentListResponse\Data;
-use Telnyx\Portouts\SupportingDocuments\SupportingDocumentListResponse\Data\Type;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\Portouts\SupportingDocuments\SupportingDocumentListResponse\Data
+ *
  * @phpstan-type SupportingDocumentListResponseShape = array{
- *   data?: list<Data>|null
+ *   data?: list<DataShape>|null
  * }
  */
 final class SupportingDocumentListResponse implements BaseModel
@@ -34,15 +35,7 @@ final class SupportingDocumentListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   id: string,
-     *   createdAt: string,
-     *   documentID: string,
-     *   portoutID: string,
-     *   recordType: string,
-     *   type: value-of<Type>,
-     *   updatedAt: string,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public static function with(?array $data = null): self
     {
@@ -54,15 +47,7 @@ final class SupportingDocumentListResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   id: string,
-     *   createdAt: string,
-     *   documentID: string,
-     *   portoutID: string,
-     *   recordType: string,
-     *   type: value-of<Type>,
-     *   updatedAt: string,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {

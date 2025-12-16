@@ -9,7 +9,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type RoomUpdateResponseShape = array{data?: Room|null}
+ * @phpstan-import-type RoomShape from \Telnyx\Rooms\Room
+ *
+ * @phpstan-type RoomUpdateResponseShape = array{data?: null|Room|RoomShape}
  */
 final class RoomUpdateResponse implements BaseModel
 {
@@ -29,20 +31,7 @@ final class RoomUpdateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Room|array{
-     *   id?: string|null,
-     *   activeSessionID?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   enableRecording?: bool|null,
-     *   maxParticipants?: int|null,
-     *   recordType?: string|null,
-     *   sessions?: list<RoomSession>|null,
-     *   uniqueName?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     *   webhookEventFailoverURL?: string|null,
-     *   webhookEventURL?: string|null,
-     *   webhookTimeoutSecs?: int|null,
-     * } $data
+     * @param RoomShape $data
      */
     public static function with(Room|array|null $data = null): self
     {
@@ -54,20 +43,7 @@ final class RoomUpdateResponse implements BaseModel
     }
 
     /**
-     * @param Room|array{
-     *   id?: string|null,
-     *   activeSessionID?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   enableRecording?: bool|null,
-     *   maxParticipants?: int|null,
-     *   recordType?: string|null,
-     *   sessions?: list<RoomSession>|null,
-     *   uniqueName?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     *   webhookEventFailoverURL?: string|null,
-     *   webhookEventURL?: string|null,
-     *   webhookTimeoutSecs?: int|null,
-     * } $data
+     * @param RoomShape $data
      */
     public function withData(Room|array $data): self
     {

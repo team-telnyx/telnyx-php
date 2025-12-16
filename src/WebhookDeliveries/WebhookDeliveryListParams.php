@@ -9,11 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter;
-use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\Attempts;
-use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\FinishedAt;
-use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\StartedAt;
-use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\Status;
-use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\Webhook;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Page;
 
 /**
@@ -21,16 +16,11 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Page;
  *
  * @see Telnyx\Services\WebhookDeliveriesService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Page
+ *
  * @phpstan-type WebhookDeliveryListParamsShape = array{
- *   filter?: Filter|array{
- *     attempts?: Attempts|null,
- *     eventType?: string|null,
- *     finishedAt?: FinishedAt|null,
- *     startedAt?: StartedAt|null,
- *     status?: Status|null,
- *     webhook?: Webhook|null,
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   filter?: FilterShape|null, page?: PageShape|null
  * }
  */
 final class WebhookDeliveryListParams implements BaseModel
@@ -61,15 +51,8 @@ final class WebhookDeliveryListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   attempts?: Attempts|null,
-     *   eventType?: string|null,
-     *   finishedAt?: FinishedAt|null,
-     *   startedAt?: StartedAt|null,
-     *   status?: Status|null,
-     *   webhook?: Webhook|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -86,14 +69,7 @@ final class WebhookDeliveryListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[status][eq], filter[event_type], filter[webhook][contains], filter[attempts][contains], filter[started_at][gte], filter[started_at][lte], filter[finished_at][gte], filter[finished_at][lte].
      *
-     * @param Filter|array{
-     *   attempts?: Attempts|null,
-     *   eventType?: string|null,
-     *   finishedAt?: FinishedAt|null,
-     *   startedAt?: StartedAt|null,
-     *   status?: Status|null,
-     *   webhook?: Webhook|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -106,7 +82,7 @@ final class WebhookDeliveryListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

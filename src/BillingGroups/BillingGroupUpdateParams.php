@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\BillingGroupsService::update()
  *
- * @phpstan-type BillingGroupUpdateParamsShape = array{name?: string}
+ * @phpstan-type BillingGroupUpdateParamsShape = array{name?: string|null}
  */
 final class BillingGroupUpdateParams implements BaseModel
 {

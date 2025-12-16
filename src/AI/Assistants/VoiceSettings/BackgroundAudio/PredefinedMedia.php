@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type PredefinedMediaShape = array{
- *   type?: 'predefined_media', value: value-of<Value>
+ *   type: 'predefined_media', value: Value|value-of<Value>
  * }
  */
 final class PredefinedMedia implements BaseModel

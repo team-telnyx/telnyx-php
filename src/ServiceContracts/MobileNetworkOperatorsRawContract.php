@@ -16,7 +16,7 @@ interface MobileNetworkOperatorsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MobileNetworkOperatorListParams $params
+     * @param array<string,mixed>|MobileNetworkOperatorListParams $params
      *
      * @return BaseResponse<DefaultPagination<MobileNetworkOperatorListResponse>>
      *

@@ -13,10 +13,12 @@ use Telnyx\RoomCompositions\RoomCompositionListParams\Filter\Status;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[session_id], filter[status].
  *
+ * @phpstan-import-type DateCreatedAtShape from \Telnyx\RoomCompositions\RoomCompositionListParams\Filter\DateCreatedAt
+ *
  * @phpstan-type FilterShape = array{
- *   dateCreatedAt?: DateCreatedAt|null,
+ *   dateCreatedAt?: null|DateCreatedAt|DateCreatedAtShape,
  *   sessionID?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  * }
  */
 final class Filter implements BaseModel
@@ -51,9 +53,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DateCreatedAt|array{
-     *   eq?: string|null, gte?: string|null, lte?: string|null
-     * } $dateCreatedAt
+     * @param DateCreatedAtShape $dateCreatedAt
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -71,9 +71,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param DateCreatedAt|array{
-     *   eq?: string|null, gte?: string|null, lte?: string|null
-     * } $dateCreatedAt
+     * @param DateCreatedAtShape $dateCreatedAt
      */
     public function withDateCreatedAt(DateCreatedAt|array $dateCreatedAt): self
     {

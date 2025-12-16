@@ -16,7 +16,7 @@ interface SiprecRawContract
      * @api
      *
      * @param string $siprecSid path param: The SiprecSid that uniquely identifies the Sip Recording
-     * @param array<mixed>|SiprecSiprecSidJsonParams $params
+     * @param array<string,mixed>|SiprecSiprecSidJsonParams $params
      *
      * @return BaseResponse<SiprecSiprecSidJsonResponse>
      *

@@ -21,7 +21,7 @@ interface EmbeddingsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|EmbeddingCreateParams $params
+     * @param array<string,mixed>|EmbeddingCreateParams $params
      *
      * @return BaseResponse<EmbeddingResponse>
      *
@@ -47,7 +47,7 @@ interface EmbeddingsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|EmbeddingListParams $params
+     * @param array<string,mixed>|EmbeddingListParams $params
      *
      * @return BaseResponse<EmbeddingListResponse>
      *
@@ -61,7 +61,7 @@ interface EmbeddingsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|EmbeddingSimilaritySearchParams $params
+     * @param array<string,mixed>|EmbeddingSimilaritySearchParams $params
      *
      * @return BaseResponse<EmbeddingSimilaritySearchResponse>
      *
@@ -75,7 +75,7 @@ interface EmbeddingsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|EmbeddingURLParams $params
+     * @param array<string,mixed>|EmbeddingURLParams $params
      *
      * @return BaseResponse<EmbeddingResponse>
      *

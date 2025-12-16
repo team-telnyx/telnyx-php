@@ -8,6 +8,9 @@ use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 
+/**
+ * @phpstan-type ConversationMetadataShape = string|int|bool
+ */
 final class ConversationMetadata implements ConverterSource
 {
     use SdkUnion;

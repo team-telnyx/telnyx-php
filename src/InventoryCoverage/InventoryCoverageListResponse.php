@@ -8,14 +8,14 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Data;
-use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Data\CoverageType;
-use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Data\NumberType;
-use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Data\PhoneNumberType;
 use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Meta;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\InventoryCoverage\InventoryCoverageListResponse\Data
+ * @phpstan-import-type MetaShape from \Telnyx\InventoryCoverage\InventoryCoverageListResponse\Meta
+ *
  * @phpstan-type InventoryCoverageListResponseShape = array{
- *   data?: list<Data>|null, meta?: Meta|null
+ *   data?: list<DataShape>|null, meta?: null|Meta|MetaShape
  * }
  */
 final class InventoryCoverageListResponse implements BaseModel
@@ -40,19 +40,8 @@ final class InventoryCoverageListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   administrativeArea?: string|null,
-     *   advanceRequirements?: bool|null,
-     *   count?: int|null,
-     *   coverageType?: value-of<CoverageType>|null,
-     *   group?: string|null,
-     *   groupType?: string|null,
-     *   numberRange?: int|null,
-     *   numberType?: value-of<NumberType>|null,
-     *   phoneNumberType?: value-of<PhoneNumberType>|null,
-     *   recordType?: string|null,
-     * }> $data
-     * @param Meta|array{totalResults?: int|null} $meta
+     * @param list<DataShape> $data
+     * @param MetaShape $meta
      */
     public static function with(
         ?array $data = null,
@@ -67,18 +56,7 @@ final class InventoryCoverageListResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   administrativeArea?: string|null,
-     *   advanceRequirements?: bool|null,
-     *   count?: int|null,
-     *   coverageType?: value-of<CoverageType>|null,
-     *   group?: string|null,
-     *   groupType?: string|null,
-     *   numberRange?: int|null,
-     *   numberType?: value-of<NumberType>|null,
-     *   phoneNumberType?: value-of<PhoneNumberType>|null,
-     *   recordType?: string|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {
@@ -89,7 +67,7 @@ final class InventoryCoverageListResponse implements BaseModel
     }
 
     /**
-     * @param Meta|array{totalResults?: int|null} $meta
+     * @param MetaShape $meta
      */
     public function withMeta(Meta|array $meta): self
     {

@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\Tests\TestSuites\Runs;
 
 use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse;
-use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse\DetailStatus;
-use Telnyx\AI\Assistants\Tests\Runs\TestStatus;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -17,8 +15,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * Returns test run execution results with pagination support for
  * handling large numbers of test executions.
  *
+ * @phpstan-import-type TestRunResponseShape from \Telnyx\AI\Assistants\Tests\Runs\TestRunResponse
+ * @phpstan-import-type MetaShape from \Telnyx\AI\Assistants\Tests\TestSuites\Runs\Meta
+ *
  * @phpstan-type PaginatedTestRunListShape = array{
- *   data: list<TestRunResponse>, meta: Meta
+ *   data: list<TestRunResponseShape>, meta: Meta|MetaShape
  * }
  */
 final class PaginatedTestRunList implements BaseModel
@@ -64,23 +65,8 @@ final class PaginatedTestRunList implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TestRunResponse|array{
-     *   createdAt: \DateTimeInterface,
-     *   runID: string,
-     *   status: value-of<TestStatus>,
-     *   testID: string,
-     *   triggeredBy: string,
-     *   completedAt?: \DateTimeInterface|null,
-     *   conversationID?: string|null,
-     *   conversationInsightsID?: string|null,
-     *   detailStatus?: list<DetailStatus>|null,
-     *   logs?: string|null,
-     *   testSuiteRunID?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }> $data
-     * @param Meta|array{
-     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
-     * } $meta
+     * @param list<TestRunResponseShape> $data
+     * @param MetaShape $meta
      */
     public static function with(array $data, Meta|array $meta): self
     {
@@ -95,20 +81,7 @@ final class PaginatedTestRunList implements BaseModel
     /**
      * Array of test run objects for the current page.
      *
-     * @param list<TestRunResponse|array{
-     *   createdAt: \DateTimeInterface,
-     *   runID: string,
-     *   status: value-of<TestStatus>,
-     *   testID: string,
-     *   triggeredBy: string,
-     *   completedAt?: \DateTimeInterface|null,
-     *   conversationID?: string|null,
-     *   conversationInsightsID?: string|null,
-     *   detailStatus?: list<DetailStatus>|null,
-     *   logs?: string|null,
-     *   testSuiteRunID?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }> $data
+     * @param list<TestRunResponseShape> $data
      */
     public function withData(array $data): self
     {
@@ -121,9 +94,7 @@ final class PaginatedTestRunList implements BaseModel
     /**
      * Pagination metadata including total counts and current page info.
      *
-     * @param Meta|array{
-     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
-     * } $meta
+     * @param MetaShape $meta
      */
     public function withMeta(Meta|array $meta): self
     {

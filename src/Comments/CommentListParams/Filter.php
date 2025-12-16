@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type FilterShape = array{
  *   commentRecordID?: string|null,
- *   commentRecordType?: value-of<CommentRecordType>|null,
+ *   commentRecordType?: null|CommentRecordType|value-of<CommentRecordType>,
  * }
  */
 final class Filter implements BaseModel

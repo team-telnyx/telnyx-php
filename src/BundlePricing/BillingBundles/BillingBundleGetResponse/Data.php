@@ -5,17 +5,18 @@ declare(strict_types=1);
 namespace Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse;
 
 use Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse\Data\BundleLimit;
-use Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse\Data\BundleLimit\Direction;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type BundleLimitShape from \Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse\Data\BundleLimit
+ *
  * @phpstan-type DataShape = array{
  *   id: string,
  *   active: bool,
- *   bundleLimits: list<BundleLimit>,
+ *   bundleLimits: list<BundleLimitShape>,
  *   costCode: string,
  *   createdAt: string,
  *   isPublic: bool,
@@ -113,21 +114,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<BundleLimit|array{
-     *   id: string,
-     *   createdAt: string,
-     *   metric: string,
-     *   service: string,
-     *   updatedAt: string,
-     *   billingService?: string|null,
-     *   country?: string|null,
-     *   countryCode?: int|null,
-     *   countryISO?: string|null,
-     *   direction?: value-of<Direction>|null,
-     *   limit?: int|null,
-     *   rate?: string|null,
-     *   types?: list<string>|null,
-     * }> $bundleLimits
+     * @param list<BundleLimitShape> $bundleLimits
      */
     public static function with(
         string $id,
@@ -177,21 +164,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<BundleLimit|array{
-     *   id: string,
-     *   createdAt: string,
-     *   metric: string,
-     *   service: string,
-     *   updatedAt: string,
-     *   billingService?: string|null,
-     *   country?: string|null,
-     *   countryCode?: int|null,
-     *   countryISO?: string|null,
-     *   direction?: value-of<Direction>|null,
-     *   limit?: int|null,
-     *   rate?: string|null,
-     *   types?: list<string>|null,
-     * }> $bundleLimits
+     * @param list<BundleLimitShape> $bundleLimits
      */
     public function withBundleLimits(array $bundleLimits): self
     {

@@ -13,7 +13,7 @@ use Telnyx\FaxApplications\FaxApplicationCreateParams\Inbound\SipSubdomainReceiv
  * @phpstan-type InboundShape = array{
  *   channelLimit?: int|null,
  *   sipSubdomain?: string|null,
- *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
+ *   sipSubdomainReceiveSettings?: null|SipSubdomainReceiveSettings|value-of<SipSubdomainReceiveSettings>,
  * }
  */
 final class Inbound implements BaseModel

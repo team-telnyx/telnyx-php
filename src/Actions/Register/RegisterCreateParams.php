@@ -19,9 +19,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type RegisterCreateParamsShape = array{
  *   registrationCodes: list<string>,
- *   simCardGroupID?: string,
- *   status?: Status|value-of<Status>,
- *   tags?: list<string>,
+ *   simCardGroupID?: string|null,
+ *   status?: null|Status|value-of<Status>,
+ *   tags?: list<string>|null,
  * }
  */
 final class RegisterCreateParams implements BaseModel

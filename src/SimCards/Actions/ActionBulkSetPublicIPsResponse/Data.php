@@ -14,7 +14,7 @@ use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsResponse\Data\ActionType;
  *
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   actionType?: value-of<ActionType>|null,
+ *   actionType?: null|ActionType|value-of<ActionType>,
  *   createdAt?: string|null,
  *   recordType?: string|null,
  *   settings?: array<string,mixed>|null,

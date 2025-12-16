@@ -10,8 +10,12 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type MediaResourceShape from \Telnyx\Media\MediaResource
+ * @phpstan-import-type PaginationMetaShape from \Telnyx\AuthenticationProviders\PaginationMeta
+ *
  * @phpstan-type MediaListResponseShape = array{
- *   data?: list<MediaResource>|null, meta?: PaginationMeta|null
+ *   data?: list<MediaResourceShape>|null,
+ *   meta?: null|PaginationMeta|PaginationMetaShape,
  * }
  */
 final class MediaListResponse implements BaseModel
@@ -36,16 +40,8 @@ final class MediaListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<MediaResource|array{
-     *   contentType?: string|null,
-     *   createdAt?: string|null,
-     *   expiresAt?: string|null,
-     *   mediaName?: string|null,
-     *   updatedAt?: string|null,
-     * }> $data
-     * @param PaginationMeta|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param list<MediaResourceShape> $data
+     * @param PaginationMetaShape $meta
      */
     public static function with(
         ?array $data = null,
@@ -60,13 +56,7 @@ final class MediaListResponse implements BaseModel
     }
 
     /**
-     * @param list<MediaResource|array{
-     *   contentType?: string|null,
-     *   createdAt?: string|null,
-     *   expiresAt?: string|null,
-     *   mediaName?: string|null,
-     *   updatedAt?: string|null,
-     * }> $data
+     * @param list<MediaResourceShape> $data
      */
     public function withData(array $data): self
     {
@@ -77,9 +67,7 @@ final class MediaListResponse implements BaseModel
     }
 
     /**
-     * @param PaginationMeta|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param PaginationMetaShape $meta
      */
     public function withMeta(PaginationMeta|array $meta): self
     {

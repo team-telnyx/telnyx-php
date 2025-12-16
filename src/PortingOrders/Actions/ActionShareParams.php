@@ -16,7 +16,8 @@ use Telnyx\PortingOrders\Actions\ActionShareParams\Permissions;
  * @see Telnyx\Services\PortingOrders\ActionsService::share()
  *
  * @phpstan-type ActionShareParamsShape = array{
- *   expiresInSeconds?: int, permissions?: Permissions|value-of<Permissions>
+ *   expiresInSeconds?: int|null,
+ *   permissions?: null|Permissions|value-of<Permissions>,
  * }
  */
 final class ActionShareParams implements BaseModel

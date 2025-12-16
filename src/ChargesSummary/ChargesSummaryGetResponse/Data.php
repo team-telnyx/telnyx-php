@@ -5,21 +5,21 @@ declare(strict_types=1);
 namespace Telnyx\ChargesSummary\ChargesSummaryGetResponse;
 
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary;
-use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Adjustment;
-use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\ComparativeLine;
-use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\SimpleLine;
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Total;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type SummaryShape from \Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary
+ * @phpstan-import-type TotalShape from \Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Total
+ *
  * @phpstan-type DataShape = array{
  *   currency: string,
  *   endDate: string,
  *   startDate: string,
- *   summary: Summary,
- *   total: Total,
+ *   summary: Summary|SummaryShape,
+ *   total: Total|TotalShape,
  *   userEmail: string,
  *   userID: string,
  * }
@@ -104,18 +104,8 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Summary|array{
-     *   adjustments: list<Adjustment>, lines: list<ComparativeLine|SimpleLine>
-     * } $summary
-     * @param Total|array{
-     *   credits: string,
-     *   existingMrc: string,
-     *   grandTotal: string,
-     *   ledgerAdjustments: string,
-     *   newMrc: string,
-     *   newOtc: string,
-     *   other: string,
-     * } $total
+     * @param SummaryShape $summary
+     * @param TotalShape $total
      */
     public static function with(
         string $currency,
@@ -173,9 +163,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param Summary|array{
-     *   adjustments: list<Adjustment>, lines: list<ComparativeLine|SimpleLine>
-     * } $summary
+     * @param SummaryShape $summary
      */
     public function withSummary(Summary|array $summary): self
     {
@@ -186,15 +174,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param Total|array{
-     *   credits: string,
-     *   existingMrc: string,
-     *   grandTotal: string,
-     *   ledgerAdjustments: string,
-     *   newMrc: string,
-     *   newOtc: string,
-     *   other: string,
-     * } $total
+     * @param TotalShape $total
      */
     public function withTotal(Total|array $total): self
     {

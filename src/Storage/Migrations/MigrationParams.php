@@ -23,7 +23,7 @@ use Telnyx\Storage\Migrations\MigrationParams\Status;
  *   lastCopy?: \DateTimeInterface|null,
  *   refresh?: bool|null,
  *   speed?: int|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  * }
  */
 final class MigrationParams implements BaseModel

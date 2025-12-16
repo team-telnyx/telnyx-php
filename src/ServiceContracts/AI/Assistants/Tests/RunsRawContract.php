@@ -18,7 +18,7 @@ interface RunsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|RunRetrieveParams $params
+     * @param array<string,mixed>|RunRetrieveParams $params
      *
      * @return BaseResponse<TestRunResponse>
      *
@@ -33,7 +33,7 @@ interface RunsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|RunListParams $params
+     * @param array<string,mixed>|RunListParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<TestRunResponse>>
      *
@@ -48,7 +48,7 @@ interface RunsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|RunTriggerParams $params
+     * @param array<string,mixed>|RunTriggerParams $params
      *
      * @return BaseResponse<TestRunResponse>
      *

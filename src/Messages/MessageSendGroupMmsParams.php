@@ -18,12 +18,12 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type MessageSendGroupMmsParamsShape = array{
  *   from: string,
  *   to: list<string>,
- *   mediaURLs?: list<string>,
- *   subject?: string,
- *   text?: string,
- *   useProfileWebhooks?: bool,
- *   webhookFailoverURL?: string,
- *   webhookURL?: string,
+ *   mediaURLs?: list<string>|null,
+ *   subject?: string|null,
+ *   text?: string|null,
+ *   useProfileWebhooks?: bool|null,
+ *   webhookFailoverURL?: string|null,
+ *   webhookURL?: string|null,
  * }
  */
 final class MessageSendGroupMmsParams implements BaseModel

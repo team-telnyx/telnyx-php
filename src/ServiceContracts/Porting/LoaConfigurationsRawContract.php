@@ -22,7 +22,7 @@ interface LoaConfigurationsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|LoaConfigurationCreateParams $params
+     * @param array<string,mixed>|LoaConfigurationCreateParams $params
      *
      * @return BaseResponse<LoaConfigurationNewResponse>
      *
@@ -51,7 +51,7 @@ interface LoaConfigurationsRawContract
      * @api
      *
      * @param string $id identifies a LOA configuration
-     * @param array<mixed>|LoaConfigurationUpdateParams $params
+     * @param array<string,mixed>|LoaConfigurationUpdateParams $params
      *
      * @return BaseResponse<LoaConfigurationUpdateResponse>
      *
@@ -66,7 +66,7 @@ interface LoaConfigurationsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|LoaConfigurationListParams $params
+     * @param array<string,mixed>|LoaConfigurationListParams $params
      *
      * @return BaseResponse<DefaultPagination<PortingLoaConfiguration>>
      *
@@ -94,7 +94,7 @@ interface LoaConfigurationsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|LoaConfigurationPreview0Params $params
+     * @param array<string,mixed>|LoaConfigurationPreview0Params $params
      *
      * @return BaseResponse<string>
      *

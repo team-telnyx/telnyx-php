@@ -17,7 +17,7 @@ use Telnyx\Wireless\DetailRecordsReports\WdrReport\Status;
  *   recordType?: string|null,
  *   reportURL?: string|null,
  *   startTime?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   updatedAt?: string|null,
  * }
  */

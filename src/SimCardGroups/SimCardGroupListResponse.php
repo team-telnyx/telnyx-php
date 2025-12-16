@@ -10,11 +10,14 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCardGroups\SimCardGroupListResponse\DataLimit;
 
 /**
+ * @phpstan-import-type ConsumedDataShape from \Telnyx\SimCardGroups\ConsumedData
+ * @phpstan-import-type DataLimitShape from \Telnyx\SimCardGroups\SimCardGroupListResponse\DataLimit
+ *
  * @phpstan-type SimCardGroupListResponseShape = array{
  *   id?: string|null,
- *   consumedData?: ConsumedData|null,
+ *   consumedData?: null|ConsumedData|ConsumedDataShape,
  *   createdAt?: string|null,
- *   dataLimit?: DataLimit|null,
+ *   dataLimit?: null|DataLimit|DataLimitShape,
  *   default?: bool|null,
  *   name?: string|null,
  *   privateWirelessGatewayID?: string|null,
@@ -105,10 +108,8 @@ final class SimCardGroupListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ConsumedData|array{
-     *   amount?: string|null, unit?: string|null
-     * } $consumedData
-     * @param DataLimit|array{amount?: string|null, unit?: string|null} $dataLimit
+     * @param ConsumedDataShape $consumedData
+     * @param DataLimitShape $dataLimit
      */
     public static function with(
         ?string $id = null,
@@ -154,9 +155,7 @@ final class SimCardGroupListResponse implements BaseModel
     /**
      * Represents the amount of data consumed.
      *
-     * @param ConsumedData|array{
-     *   amount?: string|null, unit?: string|null
-     * } $consumedData
+     * @param ConsumedDataShape $consumedData
      */
     public function withConsumedData(ConsumedData|array $consumedData): self
     {
@@ -180,7 +179,7 @@ final class SimCardGroupListResponse implements BaseModel
     /**
      * Upper limit on the amount of data the SIM cards, within the group, can use.
      *
-     * @param DataLimit|array{amount?: string|null, unit?: string|null} $dataLimit
+     * @param DataLimitShape $dataLimit
      */
     public function withDataLimit(DataLimit|array $dataLimit): self
     {

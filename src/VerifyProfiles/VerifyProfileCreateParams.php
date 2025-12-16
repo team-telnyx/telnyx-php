@@ -18,30 +18,18 @@ use Telnyx\VerifyProfiles\VerifyProfileCreateParams\SMS;
  *
  * @see Telnyx\Services\VerifyProfilesService::create()
  *
+ * @phpstan-import-type CallShape from \Telnyx\VerifyProfiles\VerifyProfileCreateParams\Call
+ * @phpstan-import-type FlashcallShape from \Telnyx\VerifyProfiles\VerifyProfileCreateParams\Flashcall
+ * @phpstan-import-type SMSShape from \Telnyx\VerifyProfiles\VerifyProfileCreateParams\SMS
+ *
  * @phpstan-type VerifyProfileCreateParamsShape = array{
  *   name: string,
- *   call?: Call|array{
- *     appName?: string|null,
- *     codeLength?: int|null,
- *     defaultVerificationTimeoutSecs?: int|null,
- *     messagingTemplateID?: string|null,
- *     whitelistedDestinations?: list<string>|null,
- *   },
- *   flashcall?: Flashcall|array{
- *     defaultVerificationTimeoutSecs?: int|null,
- *     whitelistedDestinations?: list<string>|null,
- *   },
- *   language?: string,
- *   sms?: SMS|array{
- *     whitelistedDestinations: list<string>,
- *     alphaSender?: string|null,
- *     appName?: string|null,
- *     codeLength?: int|null,
- *     defaultVerificationTimeoutSecs?: int|null,
- *     messagingTemplateID?: string|null,
- *   },
- *   webhookFailoverURL?: string,
- *   webhookURL?: string,
+ *   call?: CallShape|null,
+ *   flashcall?: FlashcallShape|null,
+ *   language?: string|null,
+ *   sms?: SMSShape|null,
+ *   webhookFailoverURL?: string|null,
+ *   webhookURL?: string|null,
  * }
  */
 final class VerifyProfileCreateParams implements BaseModel
@@ -95,25 +83,9 @@ final class VerifyProfileCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Call|array{
-     *   appName?: string|null,
-     *   codeLength?: int|null,
-     *   defaultVerificationTimeoutSecs?: int|null,
-     *   messagingTemplateID?: string|null,
-     *   whitelistedDestinations?: list<string>|null,
-     * } $call
-     * @param Flashcall|array{
-     *   defaultVerificationTimeoutSecs?: int|null,
-     *   whitelistedDestinations?: list<string>|null,
-     * } $flashcall
-     * @param SMS|array{
-     *   whitelistedDestinations: list<string>,
-     *   alphaSender?: string|null,
-     *   appName?: string|null,
-     *   codeLength?: int|null,
-     *   defaultVerificationTimeoutSecs?: int|null,
-     *   messagingTemplateID?: string|null,
-     * } $sms
+     * @param CallShape $call
+     * @param FlashcallShape $flashcall
+     * @param SMSShape $sms
      */
     public static function with(
         string $name,
@@ -147,13 +119,7 @@ final class VerifyProfileCreateParams implements BaseModel
     }
 
     /**
-     * @param Call|array{
-     *   appName?: string|null,
-     *   codeLength?: int|null,
-     *   defaultVerificationTimeoutSecs?: int|null,
-     *   messagingTemplateID?: string|null,
-     *   whitelistedDestinations?: list<string>|null,
-     * } $call
+     * @param CallShape $call
      */
     public function withCall(Call|array $call): self
     {
@@ -164,10 +130,7 @@ final class VerifyProfileCreateParams implements BaseModel
     }
 
     /**
-     * @param Flashcall|array{
-     *   defaultVerificationTimeoutSecs?: int|null,
-     *   whitelistedDestinations?: list<string>|null,
-     * } $flashcall
+     * @param FlashcallShape $flashcall
      */
     public function withFlashcall(Flashcall|array $flashcall): self
     {
@@ -186,14 +149,7 @@ final class VerifyProfileCreateParams implements BaseModel
     }
 
     /**
-     * @param SMS|array{
-     *   whitelistedDestinations: list<string>,
-     *   alphaSender?: string|null,
-     *   appName?: string|null,
-     *   codeLength?: int|null,
-     *   defaultVerificationTimeoutSecs?: int|null,
-     *   messagingTemplateID?: string|null,
-     * } $sms
+     * @param SMSShape $sms
      */
     public function withSMS(SMS|array $sms): self
     {

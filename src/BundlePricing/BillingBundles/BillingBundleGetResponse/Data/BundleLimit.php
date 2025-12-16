@@ -21,7 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   country?: string|null,
  *   countryCode?: int|null,
  *   countryISO?: string|null,
- *   direction?: value-of<Direction>|null,
+ *   direction?: null|Direction|value-of<Direction>,
  *   limit?: int|null,
  *   rate?: string|null,
  *   types?: list<string>|null,

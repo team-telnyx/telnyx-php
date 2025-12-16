@@ -23,9 +23,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type ActionLeaveParamsShape = array{
  *   callControlID: string,
- *   beepEnabled?: BeepEnabled|value-of<BeepEnabled>,
- *   commandID?: string,
- *   region?: Region|value-of<Region>,
+ *   beepEnabled?: null|BeepEnabled|value-of<BeepEnabled>,
+ *   commandID?: string|null,
+ *   region?: null|Region|value-of<Region>,
  * }
  */
 final class ActionLeaveParams implements BaseModel

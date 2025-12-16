@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\DocumentsService::update()
  *
  * @phpstan-type DocumentUpdateParamsShape = array{
- *   customerReference?: string, filename?: string
+ *   customerReference?: string|null, filename?: string|null
  * }
  */
 final class DocumentUpdateParams implements BaseModel

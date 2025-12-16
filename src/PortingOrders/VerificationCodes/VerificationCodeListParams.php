@@ -11,17 +11,18 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Filter;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Page;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Sort;
-use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Sort\Value;
 
 /**
  * Returns a list of verification codes for a porting order.
  *
  * @see Telnyx\Services\PortingOrders\VerificationCodesService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Page
+ * @phpstan-import-type SortShape from \Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Sort
+ *
  * @phpstan-type VerificationCodeListParamsShape = array{
- *   filter?: Filter|array{verified?: bool|null},
- *   page?: Page|array{number?: int|null, size?: int|null},
- *   sort?: Sort|array{value?: value-of<Value>|null},
+ *   filter?: FilterShape|null, page?: PageShape|null, sort?: SortShape|null
  * }
  */
 final class VerificationCodeListParams implements BaseModel
@@ -58,9 +59,9 @@ final class VerificationCodeListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{verified?: bool|null} $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
-     * @param Sort|array{value?: value-of<Value>|null} $sort
+     * @param FilterShape $filter
+     * @param PageShape $page
+     * @param SortShape $sort
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -79,7 +80,7 @@ final class VerificationCodeListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[verified].
      *
-     * @param Filter|array{verified?: bool|null} $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -92,7 +93,7 @@ final class VerificationCodeListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {
@@ -105,7 +106,7 @@ final class VerificationCodeListParams implements BaseModel
     /**
      * Consolidated sort parameter (deepObject style). Originally: sort[value].
      *
-     * @param Sort|array{value?: value-of<Value>|null} $sort
+     * @param SortShape $sort
      */
     public function withSort(Sort|array $sort): self
     {

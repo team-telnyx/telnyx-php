@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Calls\ActionsService::stopSiprec()
  *
  * @phpstan-type ActionStopSiprecParamsShape = array{
- *   clientState?: string, commandID?: string
+ *   clientState?: string|null, commandID?: string|null
  * }
  */
 final class ActionStopSiprecParams implements BaseModel

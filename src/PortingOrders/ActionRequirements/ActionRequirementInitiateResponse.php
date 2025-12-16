@@ -8,11 +8,13 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse\Data;
-use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse\Data\RecordType;
-use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse\Data\Status;
 
 /**
- * @phpstan-type ActionRequirementInitiateResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse\Data
+ *
+ * @phpstan-type ActionRequirementInitiateResponseShape = array{
+ *   data?: null|Data|DataShape
+ * }
  */
 final class ActionRequirementInitiateResponse implements BaseModel
 {
@@ -32,18 +34,7 @@ final class ActionRequirementInitiateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   id?: string|null,
-     *   actionType?: string|null,
-     *   actionURL?: string|null,
-     *   cancelReason?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   portingOrderID?: string|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   requirementTypeID?: string|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -55,18 +46,7 @@ final class ActionRequirementInitiateResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   id?: string|null,
-     *   actionType?: string|null,
-     *   actionURL?: string|null,
-     *   cancelReason?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   portingOrderID?: string|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   requirementTypeID?: string|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

@@ -15,7 +15,7 @@ use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentNewResponse\Data\
  *   contentType?: string|null,
  *   createdAt?: \DateTimeInterface|null,
  *   documentID?: string|null,
- *   documentType?: value-of<DocumentType>|null,
+ *   documentType?: null|DocumentType|value-of<DocumentType>,
  *   filename?: string|null,
  *   portingOrderID?: string|null,
  *   recordType?: string|null,

@@ -8,13 +8,12 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data;
-use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\GlobalIP;
-use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\GlobalIPAssignment;
-use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\Health;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data
+ *
  * @phpstan-type GlobalIPAssignmentHealthGetResponseShape = array{
- *   data?: list<Data>|null
+ *   data?: list<DataShape>|null
  * }
  */
 final class GlobalIPAssignmentHealthGetResponse implements BaseModel
@@ -36,12 +35,7 @@ final class GlobalIPAssignmentHealthGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   globalIP?: GlobalIP|null,
-     *   globalIPAssignment?: GlobalIPAssignment|null,
-     *   health?: Health|null,
-     *   timestamp?: \DateTimeInterface|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public static function with(?array $data = null): self
     {
@@ -53,12 +47,7 @@ final class GlobalIPAssignmentHealthGetResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   globalIP?: GlobalIP|null,
-     *   globalIPAssignment?: GlobalIPAssignment|null,
-     *   health?: Health|null,
-     *   timestamp?: \DateTimeInterface|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {

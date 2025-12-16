@@ -11,6 +11,8 @@ use Telnyx\Core\Conversion\MapOf;
 
 /**
  * The result of the insight.
+ *
+ * @phpstan-type ResultShape = string|array<string,mixed>
  */
 final class Result implements ConverterSource
 {

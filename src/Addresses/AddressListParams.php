@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\Addresses;
 
 use Telnyx\Addresses\AddressListParams\Filter;
-use Telnyx\Addresses\AddressListParams\Filter\AddressBook;
-use Telnyx\Addresses\AddressListParams\Filter\CustomerReference\CustomerReferenceMatcher;
-use Telnyx\Addresses\AddressListParams\Filter\StreetAddress;
 use Telnyx\Addresses\AddressListParams\Page;
 use Telnyx\Addresses\AddressListParams\Sort;
 use Telnyx\Core\Attributes\Optional;
@@ -20,15 +17,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AddressesService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\Addresses\AddressListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Addresses\AddressListParams\Page
+ *
  * @phpstan-type AddressListParamsShape = array{
- *   filter?: Filter|array{
- *     addressBook?: AddressBook|null,
- *     customerReference?: string|null|CustomerReferenceMatcher,
- *     streetAddress?: StreetAddress|null,
- *     usedAsEmergency?: string|null,
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
- *   sort?: Sort|value-of<Sort>,
+ *   filter?: FilterShape|null,
+ *   page?: PageShape|null,
+ *   sort?: null|Sort|value-of<Sort>,
  * }
  */
 final class AddressListParams implements BaseModel
@@ -78,13 +73,8 @@ final class AddressListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   addressBook?: AddressBook|null,
-     *   customerReference?: string|CustomerReferenceMatcher|null,
-     *   streetAddress?: StreetAddress|null,
-     *   usedAsEmergency?: string|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
@@ -104,12 +94,7 @@ final class AddressListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[customer_reference][eq], filter[customer_reference][contains], filter[used_as_emergency], filter[street_address][contains], filter[address_book][eq].
      *
-     * @param Filter|array{
-     *   addressBook?: AddressBook|null,
-     *   customerReference?: string|CustomerReferenceMatcher|null,
-     *   streetAddress?: StreetAddress|null,
-     *   usedAsEmergency?: string|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -122,7 +107,7 @@ final class AddressListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

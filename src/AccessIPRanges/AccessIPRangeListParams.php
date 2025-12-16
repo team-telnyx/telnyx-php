@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\AccessIPRanges;
 
 use Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter;
-use Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter\CidrBlock\CidrBlockPatternFilter;
-use Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter\CreatedAt\DateRangeFilter;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -17,13 +15,10 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AccessIPRangesService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter
+ *
  * @phpstan-type AccessIPRangeListParamsShape = array{
- *   filter?: Filter|array{
- *     cidrBlock?: string|null|CidrBlockPatternFilter,
- *     createdAt?: null|\DateTimeInterface|DateRangeFilter,
- *   },
- *   pageNumber?: int,
- *   pageSize?: int,
+ *   filter?: FilterShape|null, pageNumber?: int|null, pageSize?: int|null
  * }
  */
 final class AccessIPRangeListParams implements BaseModel
@@ -54,10 +49,7 @@ final class AccessIPRangeListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   cidrBlock?: string|CidrBlockPatternFilter|null,
-     *   createdAt?: \DateTimeInterface|DateRangeFilter|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -76,10 +68,7 @@ final class AccessIPRangeListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[cidr_block], filter[cidr_block][startswith], filter[cidr_block][endswith], filter[cidr_block][contains], filter[created_at]. Supports complex bracket operations for dynamic filtering.
      *
-     * @param Filter|array{
-     *   cidrBlock?: string|CidrBlockPatternFilter|null,
-     *   createdAt?: \DateTimeInterface|DateRangeFilter|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

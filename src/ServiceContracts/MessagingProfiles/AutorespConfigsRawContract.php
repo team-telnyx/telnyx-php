@@ -20,7 +20,7 @@ interface AutorespConfigsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AutorespConfigCreateParams $params
+     * @param array<string,mixed>|AutorespConfigCreateParams $params
      *
      * @return BaseResponse<AutoRespConfigResponse>
      *
@@ -35,7 +35,7 @@ interface AutorespConfigsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AutorespConfigRetrieveParams $params
+     * @param array<string,mixed>|AutorespConfigRetrieveParams $params
      *
      * @return BaseResponse<AutoRespConfigResponse>
      *
@@ -51,7 +51,7 @@ interface AutorespConfigsRawContract
      * @api
      *
      * @param string $autorespCfgID Path param:
-     * @param array<mixed>|AutorespConfigUpdateParams $params
+     * @param array<string,mixed>|AutorespConfigUpdateParams $params
      *
      * @return BaseResponse<AutoRespConfigResponse>
      *
@@ -66,7 +66,7 @@ interface AutorespConfigsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AutorespConfigListParams $params
+     * @param array<string,mixed>|AutorespConfigListParams $params
      *
      * @return BaseResponse<AutorespConfigListResponse>
      *
@@ -81,7 +81,7 @@ interface AutorespConfigsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AutorespConfigDeleteParams $params
+     * @param array<string,mixed>|AutorespConfigDeleteParams $params
      *
      * @return BaseResponse<string>
      *

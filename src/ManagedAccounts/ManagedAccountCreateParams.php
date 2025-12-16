@@ -17,10 +17,10 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type ManagedAccountCreateParamsShape = array{
  *   businessName: string,
- *   email?: string,
- *   managedAccountAllowCustomPricing?: bool,
- *   password?: string,
- *   rollupBilling?: bool,
+ *   email?: string|null,
+ *   managedAccountAllowCustomPricing?: bool|null,
+ *   password?: string|null,
+ *   rollupBilling?: bool|null,
  * }
  */
 final class ManagedAccountCreateParams implements BaseModel

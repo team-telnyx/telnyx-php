@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Portouts\CommentsService::create()
  *
- * @phpstan-type CommentCreateParamsShape = array{body?: string}
+ * @phpstan-type CommentCreateParamsShape = array{body?: string|null}
  */
 final class CommentCreateParams implements BaseModel
 {

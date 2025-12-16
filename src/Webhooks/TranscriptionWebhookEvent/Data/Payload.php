@@ -8,16 +8,17 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\TranscriptionWebhookEvent\Data\Payload\TranscriptionData;
-use Telnyx\Webhooks\TranscriptionWebhookEvent\Data\Payload\TranscriptionData\TranscriptionTrack;
 
 /**
+ * @phpstan-import-type TranscriptionDataShape from \Telnyx\Webhooks\TranscriptionWebhookEvent\Data\Payload\TranscriptionData
+ *
  * @phpstan-type PayloadShape = array{
  *   callControlID?: string|null,
  *   callLegID?: string|null,
  *   callSessionID?: string|null,
  *   clientState?: string|null,
  *   connectionID?: string|null,
- *   transcriptionData?: TranscriptionData|null,
+ *   transcriptionData?: null|TranscriptionData|TranscriptionDataShape,
  * }
  */
 final class Payload implements BaseModel
@@ -68,12 +69,7 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param TranscriptionData|array{
-     *   confidence?: float|null,
-     *   isFinal?: bool|null,
-     *   transcript?: string|null,
-     *   transcriptionTrack?: value-of<TranscriptionTrack>|null,
-     * } $transcriptionData
+     * @param TranscriptionDataShape $transcriptionData
      */
     public static function with(
         ?string $callControlID = null,
@@ -151,12 +147,7 @@ final class Payload implements BaseModel
     }
 
     /**
-     * @param TranscriptionData|array{
-     *   confidence?: float|null,
-     *   isFinal?: bool|null,
-     *   transcript?: string|null,
-     *   transcriptionTrack?: value-of<TranscriptionTrack>|null,
-     * } $transcriptionData
+     * @param TranscriptionDataShape $transcriptionData
      */
     public function withTranscriptionData(
         TranscriptionData|array $transcriptionData

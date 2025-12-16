@@ -13,6 +13,12 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
 
 /**
  * The settings associated with the voice selected.
+ *
+ * @phpstan-import-type ElevenLabsVoiceSettingsShape from \Telnyx\Calls\Actions\ElevenLabsVoiceSettings
+ * @phpstan-import-type TelnyxVoiceSettingsShape from \Telnyx\Calls\Actions\TelnyxVoiceSettings
+ * @phpstan-import-type AwsVoiceSettingsShape from \Telnyx\Calls\Actions\AwsVoiceSettings
+ *
+ * @phpstan-type VoiceSettingsShape = ElevenLabsVoiceSettingsShape|TelnyxVoiceSettingsShape|AwsVoiceSettingsShape
  */
 final class VoiceSettings implements ConverterSource
 {

@@ -6,7 +6,6 @@ namespace Telnyx\Calls\Actions;
 
 use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Calls\SipHeader;
-use Telnyx\Calls\SipHeader\Name;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -24,14 +23,17 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Calls\ActionsService::refer()
  *
+ * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
+ * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
+ *
  * @phpstan-type ActionReferParamsShape = array{
  *   sipAddress: string,
- *   clientState?: string,
- *   commandID?: string,
- *   customHeaders?: list<CustomSipHeader|array{name: string, value: string}>,
- *   sipAuthPassword?: string,
- *   sipAuthUsername?: string,
- *   sipHeaders?: list<SipHeader|array{name: value-of<Name>, value: string}>,
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   customHeaders?: list<CustomSipHeaderShape>|null,
+ *   sipAuthPassword?: string|null,
+ *   sipAuthUsername?: string|null,
+ *   sipHeaders?: list<SipHeaderShape>|null,
  * }
  */
 final class ActionReferParams implements BaseModel
@@ -110,8 +112,8 @@ final class ActionReferParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<CustomSipHeader|array{name: string, value: string}> $customHeaders
-     * @param list<SipHeader|array{name: value-of<Name>, value: string}> $sipHeaders
+     * @param list<CustomSipHeaderShape> $customHeaders
+     * @param list<SipHeaderShape> $sipHeaders
      */
     public static function with(
         string $sipAddress,
@@ -172,7 +174,7 @@ final class ActionReferParams implements BaseModel
     /**
      * Custom headers to be added to the SIP INVITE.
      *
-     * @param list<CustomSipHeader|array{name: string, value: string}> $customHeaders
+     * @param list<CustomSipHeaderShape> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {
@@ -207,7 +209,7 @@ final class ActionReferParams implements BaseModel
     /**
      * SIP headers to be added to the request. Currently only User-to-User header is supported.
      *
-     * @param list<SipHeader|array{name: value-of<Name>, value: string}> $sipHeaders
+     * @param list<SipHeaderShape> $sipHeaders
      */
     public function withSipHeaders(array $sipHeaders): self
     {

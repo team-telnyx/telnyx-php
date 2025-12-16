@@ -10,8 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPAllowedPorts\GlobalIPAllowedPortListResponse\Data;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\GlobalIPAllowedPorts\GlobalIPAllowedPortListResponse\Data
+ *
  * @phpstan-type GlobalIPAllowedPortListResponseShape = array{
- *   data?: list<Data>|null
+ *   data?: list<DataShape>|null
  * }
  */
 final class GlobalIPAllowedPortListResponse implements BaseModel
@@ -33,14 +35,7 @@ final class GlobalIPAllowedPortListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   id?: string|null,
-     *   firstPort?: int|null,
-     *   lastPort?: int|null,
-     *   name?: string|null,
-     *   protocolCode?: string|null,
-     *   recordType?: string|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public static function with(?array $data = null): self
     {
@@ -52,14 +47,7 @@ final class GlobalIPAllowedPortListResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   id?: string|null,
-     *   firstPort?: int|null,
-     *   lastPort?: int|null,
-     *   name?: string|null,
-     *   protocolCode?: string|null,
-     *   recordType?: string|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {

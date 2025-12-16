@@ -9,41 +9,36 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
-use Telnyx\CredentialConnections\ConnectionRtcpSettings\Port;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
-use Telnyx\IPConnections\InboundIP\AniNumberFormat;
-use Telnyx\IPConnections\InboundIP\DefaultRoutingMethod;
-use Telnyx\IPConnections\InboundIP\DnisNumberFormat;
-use Telnyx\IPConnections\InboundIP\SipRegion;
-use Telnyx\IPConnections\InboundIP\SipSubdomainReceiveSettings;
 use Telnyx\IPConnections\IPConnection\TransportProtocol;
 use Telnyx\IPConnections\IPConnection\WebhookAPIVersion;
-use Telnyx\IPConnections\OutboundIP\AniOverrideType;
-use Telnyx\IPConnections\OutboundIP\IPAuthenticationMethod;
-use Telnyx\IPConnections\OutboundIP\T38ReinviteSource;
 
 /**
+ * @phpstan-import-type InboundIPShape from \Telnyx\IPConnections\InboundIP
+ * @phpstan-import-type OutboundIPShape from \Telnyx\IPConnections\OutboundIP
+ * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
+ *
  * @phpstan-type IPConnectionShape = array{
  *   id?: string|null,
  *   active?: bool|null,
- *   anchorsiteOverride?: value-of<AnchorsiteOverride>|null,
+ *   anchorsiteOverride?: null|AnchorsiteOverride|value-of<AnchorsiteOverride>,
  *   callCostInWebhooks?: bool|null,
  *   connectionName?: string|null,
  *   createdAt?: string|null,
  *   defaultOnHoldComfortNoiseEnabled?: bool|null,
- *   dtmfType?: value-of<DtmfType>|null,
+ *   dtmfType?: null|DtmfType|value-of<DtmfType>,
  *   encodeContactHeaderEnabled?: bool|null,
- *   encryptedMedia?: value-of<EncryptedMedia>|null,
- *   inbound?: InboundIP|null,
+ *   encryptedMedia?: null|EncryptedMedia|value-of<EncryptedMedia>,
+ *   inbound?: null|InboundIP|InboundIPShape,
  *   onnetT38PassthroughEnabled?: bool|null,
- *   outbound?: OutboundIP|null,
+ *   outbound?: null|OutboundIP|OutboundIPShape,
  *   recordType?: string|null,
- *   rtcpSettings?: ConnectionRtcpSettings|null,
+ *   rtcpSettings?: null|ConnectionRtcpSettings|ConnectionRtcpSettingsShape,
  *   tags?: list<string>|null,
- *   transportProtocol?: value-of<TransportProtocol>|null,
+ *   transportProtocol?: null|TransportProtocol|value-of<TransportProtocol>,
  *   updatedAt?: string|null,
- *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
+ *   webhookAPIVersion?: null|WebhookAPIVersion|value-of<WebhookAPIVersion>,
  *   webhookEventFailoverURL?: string|null,
  *   webhookEventURL?: string|null,
  *   webhookTimeoutSecs?: int|null,
@@ -199,45 +194,9 @@ final class IPConnection implements BaseModel
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
      * @param DtmfType|value-of<DtmfType> $dtmfType
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
-     * @param InboundIP|array{
-     *   aniNumberFormat?: value-of<AniNumberFormat>|null,
-     *   channelLimit?: int|null,
-     *   codecs?: list<string>|null,
-     *   defaultPrimaryIPID?: string|null,
-     *   defaultRoutingMethod?: value-of<DefaultRoutingMethod>|null,
-     *   defaultSecondaryIPID?: string|null,
-     *   defaultTertiaryIPID?: string|null,
-     *   dnisNumberFormat?: value-of<DnisNumberFormat>|null,
-     *   generateRingbackTone?: bool|null,
-     *   isupHeadersEnabled?: bool|null,
-     *   prackEnabled?: bool|null,
-     *   shakenStirEnabled?: bool|null,
-     *   sipCompactHeadersEnabled?: bool|null,
-     *   sipRegion?: value-of<SipRegion>|null,
-     *   sipSubdomain?: string|null,
-     *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
-     *   timeout1xxSecs?: int|null,
-     *   timeout2xxSecs?: int|null,
-     * } $inbound
-     * @param OutboundIP|array{
-     *   aniOverride?: string|null,
-     *   aniOverrideType?: value-of<AniOverrideType>|null,
-     *   callParkingEnabled?: bool|null,
-     *   channelLimit?: int|null,
-     *   generateRingbackTone?: bool|null,
-     *   instantRingbackEnabled?: bool|null,
-     *   ipAuthenticationMethod?: value-of<IPAuthenticationMethod>|null,
-     *   ipAuthenticationToken?: string|null,
-     *   localization?: string|null,
-     *   outboundVoiceProfileID?: string|null,
-     *   t38ReinviteSource?: value-of<T38ReinviteSource>|null,
-     *   techPrefix?: string|null,
-     * } $outbound
-     * @param ConnectionRtcpSettings|array{
-     *   captureEnabled?: bool|null,
-     *   port?: value-of<Port>|null,
-     *   reportFrequencySecs?: int|null,
-     * } $rtcpSettings
+     * @param InboundIPShape $inbound
+     * @param OutboundIPShape $outbound
+     * @param ConnectionRtcpSettingsShape $rtcpSettings
      * @param list<string> $tags
      * @param TransportProtocol|value-of<TransportProtocol> $transportProtocol
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion
@@ -412,26 +371,7 @@ final class IPConnection implements BaseModel
     }
 
     /**
-     * @param InboundIP|array{
-     *   aniNumberFormat?: value-of<AniNumberFormat>|null,
-     *   channelLimit?: int|null,
-     *   codecs?: list<string>|null,
-     *   defaultPrimaryIPID?: string|null,
-     *   defaultRoutingMethod?: value-of<DefaultRoutingMethod>|null,
-     *   defaultSecondaryIPID?: string|null,
-     *   defaultTertiaryIPID?: string|null,
-     *   dnisNumberFormat?: value-of<DnisNumberFormat>|null,
-     *   generateRingbackTone?: bool|null,
-     *   isupHeadersEnabled?: bool|null,
-     *   prackEnabled?: bool|null,
-     *   shakenStirEnabled?: bool|null,
-     *   sipCompactHeadersEnabled?: bool|null,
-     *   sipRegion?: value-of<SipRegion>|null,
-     *   sipSubdomain?: string|null,
-     *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
-     *   timeout1xxSecs?: int|null,
-     *   timeout2xxSecs?: int|null,
-     * } $inbound
+     * @param InboundIPShape $inbound
      */
     public function withInbound(InboundIP|array $inbound): self
     {
@@ -454,20 +394,7 @@ final class IPConnection implements BaseModel
     }
 
     /**
-     * @param OutboundIP|array{
-     *   aniOverride?: string|null,
-     *   aniOverrideType?: value-of<AniOverrideType>|null,
-     *   callParkingEnabled?: bool|null,
-     *   channelLimit?: int|null,
-     *   generateRingbackTone?: bool|null,
-     *   instantRingbackEnabled?: bool|null,
-     *   ipAuthenticationMethod?: value-of<IPAuthenticationMethod>|null,
-     *   ipAuthenticationToken?: string|null,
-     *   localization?: string|null,
-     *   outboundVoiceProfileID?: string|null,
-     *   t38ReinviteSource?: value-of<T38ReinviteSource>|null,
-     *   techPrefix?: string|null,
-     * } $outbound
+     * @param OutboundIPShape $outbound
      */
     public function withOutbound(OutboundIP|array $outbound): self
     {
@@ -489,11 +416,7 @@ final class IPConnection implements BaseModel
     }
 
     /**
-     * @param ConnectionRtcpSettings|array{
-     *   captureEnabled?: bool|null,
-     *   port?: value-of<Port>|null,
-     *   reportFrequencySecs?: int|null,
-     * } $rtcpSettings
+     * @param ConnectionRtcpSettingsShape $rtcpSettings
      */
     public function withRtcpSettings(
         ConnectionRtcpSettings|array $rtcpSettings

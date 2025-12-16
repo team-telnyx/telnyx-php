@@ -12,7 +12,7 @@ use Telnyx\CustomStorageCredentials\S3ConfigurationData\Backend;
 
 /**
  * @phpstan-type S3ConfigurationDataShape = array{
- *   backend: value-of<Backend>,
+ *   backend: Backend|value-of<Backend>,
  *   awsAccessKeyID?: string|null,
  *   awsSecretAccessKey?: string|null,
  *   bucket?: string|null,

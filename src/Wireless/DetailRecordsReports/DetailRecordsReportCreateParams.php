@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Wireless\DetailRecordsReportsService::create()
  *
  * @phpstan-type DetailRecordsReportCreateParamsShape = array{
- *   endTime?: string, startTime?: string
+ *   endTime?: string|null, startTime?: string|null
  * }
  */
 final class DetailRecordsReportCreateParams implements BaseModel

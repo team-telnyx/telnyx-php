@@ -86,7 +86,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionAnswerParams $params
+     * @param array<string,mixed>|ActionAnswerParams $params
      *
      * @return BaseResponse<ActionAnswerResponse>
      *
@@ -102,7 +102,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlIDToBridge Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionBridgeParams $params
+     * @param array<string,mixed>|ActionBridgeParams $params
      *
      * @return BaseResponse<ActionBridgeResponse>
      *
@@ -118,7 +118,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionEnqueueParams $params
+     * @param array<string,mixed>|ActionEnqueueParams $params
      *
      * @return BaseResponse<ActionEnqueueResponse>
      *
@@ -134,7 +134,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionGatherParams $params
+     * @param array<string,mixed>|ActionGatherParams $params
      *
      * @return BaseResponse<ActionGatherResponse>
      *
@@ -150,7 +150,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionGatherUsingAIParams $params
+     * @param array<string,mixed>|ActionGatherUsingAIParams $params
      *
      * @return BaseResponse<ActionGatherUsingAIResponse>
      *
@@ -166,7 +166,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionGatherUsingAudioParams $params
+     * @param array<string,mixed>|ActionGatherUsingAudioParams $params
      *
      * @return BaseResponse<ActionGatherUsingAudioResponse>
      *
@@ -182,7 +182,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionGatherUsingSpeakParams $params
+     * @param array<string,mixed>|ActionGatherUsingSpeakParams $params
      *
      * @return BaseResponse<ActionGatherUsingSpeakResponse>
      *
@@ -198,7 +198,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionHangupParams $params
+     * @param array<string,mixed>|ActionHangupParams $params
      *
      * @return BaseResponse<ActionHangupResponse>
      *
@@ -214,7 +214,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionLeaveQueueParams $params
+     * @param array<string,mixed>|ActionLeaveQueueParams $params
      *
      * @return BaseResponse<ActionLeaveQueueResponse>
      *
@@ -230,7 +230,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionPauseRecordingParams $params
+     * @param array<string,mixed>|ActionPauseRecordingParams $params
      *
      * @return BaseResponse<ActionPauseRecordingResponse>
      *
@@ -246,7 +246,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionReferParams $params
+     * @param array<string,mixed>|ActionReferParams $params
      *
      * @return BaseResponse<ActionReferResponse>
      *
@@ -262,7 +262,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionRejectParams $params
+     * @param array<string,mixed>|ActionRejectParams $params
      *
      * @return BaseResponse<ActionRejectResponse>
      *
@@ -278,7 +278,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionResumeRecordingParams $params
+     * @param array<string,mixed>|ActionResumeRecordingParams $params
      *
      * @return BaseResponse<ActionResumeRecordingResponse>
      *
@@ -294,7 +294,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionSendDtmfParams $params
+     * @param array<string,mixed>|ActionSendDtmfParams $params
      *
      * @return BaseResponse<ActionSendDtmfResponse>
      *
@@ -310,7 +310,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionSendSipInfoParams $params
+     * @param array<string,mixed>|ActionSendSipInfoParams $params
      *
      * @return BaseResponse<ActionSendSipInfoResponse>
      *
@@ -326,7 +326,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionSpeakParams $params
+     * @param array<string,mixed>|ActionSpeakParams $params
      *
      * @return BaseResponse<ActionSpeakResponse>
      *
@@ -342,7 +342,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionStartAIAssistantParams $params
+     * @param array<string,mixed>|ActionStartAIAssistantParams $params
      *
      * @return BaseResponse<ActionStartAIAssistantResponse>
      *
@@ -358,7 +358,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionStartForkingParams $params
+     * @param array<string,mixed>|ActionStartForkingParams $params
      *
      * @return BaseResponse<ActionStartForkingResponse>
      *
@@ -374,7 +374,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionStartNoiseSuppressionParams $params
+     * @param array<string,mixed>|ActionStartNoiseSuppressionParams $params
      *
      * @return BaseResponse<ActionStartNoiseSuppressionResponse>
      *
@@ -390,7 +390,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionStartPlaybackParams $params
+     * @param array<string,mixed>|ActionStartPlaybackParams $params
      *
      * @return BaseResponse<ActionStartPlaybackResponse>
      *
@@ -406,7 +406,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionStartRecordingParams $params
+     * @param array<string,mixed>|ActionStartRecordingParams $params
      *
      * @return BaseResponse<ActionStartRecordingResponse>
      *
@@ -422,7 +422,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionStartSiprecParams $params
+     * @param array<string,mixed>|ActionStartSiprecParams $params
      *
      * @return BaseResponse<ActionStartSiprecResponse>
      *
@@ -438,7 +438,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionStartStreamingParams $params
+     * @param array<string,mixed>|ActionStartStreamingParams $params
      *
      * @return BaseResponse<ActionStartStreamingResponse>
      *
@@ -454,7 +454,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionStartTranscriptionParams $params
+     * @param array<string,mixed>|ActionStartTranscriptionParams $params
      *
      * @return BaseResponse<ActionStartTranscriptionResponse>
      *
@@ -470,7 +470,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionStopAIAssistantParams $params
+     * @param array<string,mixed>|ActionStopAIAssistantParams $params
      *
      * @return BaseResponse<ActionStopAIAssistantResponse>
      *
@@ -486,7 +486,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionStopForkingParams $params
+     * @param array<string,mixed>|ActionStopForkingParams $params
      *
      * @return BaseResponse<ActionStopForkingResponse>
      *
@@ -502,7 +502,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionStopGatherParams $params
+     * @param array<string,mixed>|ActionStopGatherParams $params
      *
      * @return BaseResponse<ActionStopGatherResponse>
      *
@@ -518,7 +518,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionStopNoiseSuppressionParams $params
+     * @param array<string,mixed>|ActionStopNoiseSuppressionParams $params
      *
      * @return BaseResponse<ActionStopNoiseSuppressionResponse>
      *
@@ -534,7 +534,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionStopPlaybackParams $params
+     * @param array<string,mixed>|ActionStopPlaybackParams $params
      *
      * @return BaseResponse<ActionStopPlaybackResponse>
      *
@@ -550,7 +550,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionStopRecordingParams $params
+     * @param array<string,mixed>|ActionStopRecordingParams $params
      *
      * @return BaseResponse<ActionStopRecordingResponse>
      *
@@ -566,7 +566,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionStopSiprecParams $params
+     * @param array<string,mixed>|ActionStopSiprecParams $params
      *
      * @return BaseResponse<ActionStopSiprecResponse>
      *
@@ -582,7 +582,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionStopStreamingParams $params
+     * @param array<string,mixed>|ActionStopStreamingParams $params
      *
      * @return BaseResponse<ActionStopStreamingResponse>
      *
@@ -598,7 +598,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionStopTranscriptionParams $params
+     * @param array<string,mixed>|ActionStopTranscriptionParams $params
      *
      * @return BaseResponse<ActionStopTranscriptionResponse>
      *
@@ -614,7 +614,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionSwitchSupervisorRoleParams $params
+     * @param array<string,mixed>|ActionSwitchSupervisorRoleParams $params
      *
      * @return BaseResponse<ActionSwitchSupervisorRoleResponse>
      *
@@ -630,7 +630,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionTransferParams $params
+     * @param array<string,mixed>|ActionTransferParams $params
      *
      * @return BaseResponse<ActionTransferResponse>
      *
@@ -646,7 +646,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array<mixed>|ActionUpdateClientStateParams $params
+     * @param array<string,mixed>|ActionUpdateClientStateParams $params
      *
      * @return BaseResponse<ActionUpdateClientStateResponse>
      *

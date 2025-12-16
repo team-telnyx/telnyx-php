@@ -10,6 +10,11 @@ use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 use Telnyx\Core\Conversion\ListOf;
 
+/**
+ * @phpstan-import-type TextAndImageArrayShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Content\TextAndImageArray
+ *
+ * @phpstan-type ContentShape = string|list<TextAndImageArrayShape>
+ */
 final class Content implements ConverterSource
 {
     use SdkUnion;

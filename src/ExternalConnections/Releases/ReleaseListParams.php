@@ -9,10 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter;
-use Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter\CivicAddressID;
-use Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter\LocationID;
-use Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter\PhoneNumber;
-use Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter\Status;
 use Telnyx\ExternalConnections\Releases\ReleaseListParams\Page;
 
 /**
@@ -20,14 +16,11 @@ use Telnyx\ExternalConnections\Releases\ReleaseListParams\Page;
  *
  * @see Telnyx\Services\ExternalConnections\ReleasesService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\ExternalConnections\Releases\ReleaseListParams\Page
+ *
  * @phpstan-type ReleaseListParamsShape = array{
- *   filter?: Filter|array{
- *     civicAddressID?: CivicAddressID|null,
- *     locationID?: LocationID|null,
- *     phoneNumber?: PhoneNumber|null,
- *     status?: Status|null,
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   filter?: FilterShape|null, page?: PageShape|null
  * }
  */
 final class ReleaseListParams implements BaseModel
@@ -58,13 +51,8 @@ final class ReleaseListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   civicAddressID?: CivicAddressID|null,
-     *   locationID?: LocationID|null,
-     *   phoneNumber?: PhoneNumber|null,
-     *   status?: Status|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -81,12 +69,7 @@ final class ReleaseListParams implements BaseModel
     /**
      * Filter parameter for releases (deepObject style). Supports filtering by status, civic_address_id, location_id, and phone_number with eq/contains operations.
      *
-     * @param Filter|array{
-     *   civicAddressID?: CivicAddressID|null,
-     *   locationID?: LocationID|null,
-     *   phoneNumber?: PhoneNumber|null,
-     *   status?: Status|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -99,7 +82,7 @@ final class ReleaseListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

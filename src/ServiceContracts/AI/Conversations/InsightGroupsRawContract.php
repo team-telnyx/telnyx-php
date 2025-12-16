@@ -34,7 +34,7 @@ interface InsightGroupsRawContract
      * @api
      *
      * @param string $groupID The ID of the insight group
-     * @param array<mixed>|InsightGroupUpdateParams $params
+     * @param array<string,mixed>|InsightGroupUpdateParams $params
      *
      * @return BaseResponse<InsightTemplateGroupDetail>
      *
@@ -63,7 +63,7 @@ interface InsightGroupsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|InsightGroupInsightGroupsParams $params
+     * @param array<string,mixed>|InsightGroupInsightGroupsParams $params
      *
      * @return BaseResponse<InsightTemplateGroupDetail>
      *
@@ -77,7 +77,7 @@ interface InsightGroupsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|InsightGroupRetrieveInsightGroupsParams $params
+     * @param array<string,mixed>|InsightGroupRetrieveInsightGroupsParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<InsightTemplateGroup>>
      *

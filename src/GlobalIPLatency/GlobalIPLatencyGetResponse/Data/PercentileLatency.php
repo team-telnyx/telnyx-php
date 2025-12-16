@@ -16,14 +16,22 @@ use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_90
 use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_99;
 
 /**
+ * @phpstan-import-type _0Shape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_0
+ * @phpstan-import-type _100Shape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_100
+ * @phpstan-import-type _25Shape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_25
+ * @phpstan-import-type _50Shape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_50
+ * @phpstan-import-type _75Shape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_75
+ * @phpstan-import-type _90Shape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_90
+ * @phpstan-import-type _99Shape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_99
+ *
  * @phpstan-type PercentileLatencyShape = array{
- *   p0?: _0|null,
- *   p100?: _100|null,
- *   p25?: _25|null,
- *   p50?: _50|null,
- *   p75?: _75|null,
- *   p90?: _90|null,
- *   p99?: _99|null,
+ *   p0?: null|_0|_0Shape,
+ *   p100?: null|_100|_100Shape,
+ *   p25?: null|_25|_25Shape,
+ *   p50?: null|_50|_50Shape,
+ *   p75?: null|_75|_75Shape,
+ *   p90?: null|_90|_90Shape,
+ *   p99?: null|_99|_99Shape,
  * }
  */
 final class PercentileLatency implements BaseModel
@@ -62,13 +70,13 @@ final class PercentileLatency implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param _0|array{amount?: float|null, unit?: string|null} $p0
-     * @param _100|array{amount?: float|null, unit?: string|null} $p100
-     * @param _25|array{amount?: float|null, unit?: string|null} $p25
-     * @param _50|array{amount?: float|null, unit?: string|null} $p50
-     * @param _75|array{amount?: float|null, unit?: string|null} $p75
-     * @param _90|array{amount?: float|null, unit?: string|null} $p90
-     * @param _99|array{amount?: float|null, unit?: string|null} $p99
+     * @param _0Shape $p0
+     * @param _100Shape $p100
+     * @param _25Shape $p25
+     * @param _50Shape $p50
+     * @param _75Shape $p75
+     * @param _90Shape $p90
+     * @param _99Shape $p99
      */
     public static function with(
         _0|array|null $p0 = null,
@@ -93,7 +101,7 @@ final class PercentileLatency implements BaseModel
     }
 
     /**
-     * @param _0|array{amount?: float|null, unit?: string|null} $p0
+     * @param _0Shape $p0
      */
     public function withP0(_0|array $p0): self
     {
@@ -104,7 +112,7 @@ final class PercentileLatency implements BaseModel
     }
 
     /**
-     * @param _100|array{amount?: float|null, unit?: string|null} $p100
+     * @param _100Shape $p100
      */
     public function withP100(_100|array $p100): self
     {
@@ -115,7 +123,7 @@ final class PercentileLatency implements BaseModel
     }
 
     /**
-     * @param _25|array{amount?: float|null, unit?: string|null} $p25
+     * @param _25Shape $p25
      */
     public function withP25(_25|array $p25): self
     {
@@ -126,7 +134,7 @@ final class PercentileLatency implements BaseModel
     }
 
     /**
-     * @param _50|array{amount?: float|null, unit?: string|null} $p50
+     * @param _50Shape $p50
      */
     public function withP50(_50|array $p50): self
     {
@@ -137,7 +145,7 @@ final class PercentileLatency implements BaseModel
     }
 
     /**
-     * @param _75|array{amount?: float|null, unit?: string|null} $p75
+     * @param _75Shape $p75
      */
     public function withP75(_75|array $p75): self
     {
@@ -148,7 +156,7 @@ final class PercentileLatency implements BaseModel
     }
 
     /**
-     * @param _90|array{amount?: float|null, unit?: string|null} $p90
+     * @param _90Shape $p90
      */
     public function withP90(_90|array $p90): self
     {
@@ -159,7 +167,7 @@ final class PercentileLatency implements BaseModel
     }
 
     /**
-     * @param _99|array{amount?: float|null, unit?: string|null} $p99
+     * @param _99Shape $p99
      */
     public function withP99(_99|array $p99): self
     {

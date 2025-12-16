@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\BillingGroupsService::create()
  *
- * @phpstan-type BillingGroupCreateParamsShape = array{name?: string}
+ * @phpstan-type BillingGroupCreateParamsShape = array{name?: string|null}
  */
 final class BillingGroupCreateParams implements BaseModel
 {

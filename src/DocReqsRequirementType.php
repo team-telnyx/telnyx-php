@@ -11,15 +11,17 @@ use Telnyx\DocReqsRequirementType\AcceptanceCriteria;
 use Telnyx\DocReqsRequirementType\Type;
 
 /**
+ * @phpstan-import-type AcceptanceCriteriaShape from \Telnyx\DocReqsRequirementType\AcceptanceCriteria
+ *
  * @phpstan-type DocReqsRequirementTypeShape = array{
  *   id?: string|null,
- *   acceptanceCriteria?: AcceptanceCriteria|null,
+ *   acceptanceCriteria?: null|AcceptanceCriteria|AcceptanceCriteriaShape,
  *   createdAt?: string|null,
  *   description?: string|null,
  *   example?: string|null,
  *   name?: string|null,
  *   recordType?: string|null,
- *   type?: value-of<Type>|null,
+ *   type?: null|Type|value-of<Type>,
  *   updatedAt?: string|null,
  * }
  */
@@ -94,14 +96,7 @@ final class DocReqsRequirementType implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AcceptanceCriteria|array{
-     *   acceptableCharacters?: string|null,
-     *   acceptableValues?: list<string>|null,
-     *   localityLimit?: string|null,
-     *   maxLength?: int|null,
-     *   minLength?: int|null,
-     *   timeLimit?: string|null,
-     * } $acceptanceCriteria
+     * @param AcceptanceCriteriaShape $acceptanceCriteria
      * @param Type|value-of<Type> $type
      */
     public static function with(
@@ -144,14 +139,7 @@ final class DocReqsRequirementType implements BaseModel
     /**
      * Specifies objective criteria for acceptance.
      *
-     * @param AcceptanceCriteria|array{
-     *   acceptableCharacters?: string|null,
-     *   acceptableValues?: list<string>|null,
-     *   localityLimit?: string|null,
-     *   maxLength?: int|null,
-     *   minLength?: int|null,
-     *   timeLimit?: string|null,
-     * } $acceptanceCriteria
+     * @param AcceptanceCriteriaShape $acceptanceCriteria
      */
     public function withAcceptanceCriteria(
         AcceptanceCriteria|array $acceptanceCriteria

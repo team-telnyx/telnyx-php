@@ -31,7 +31,7 @@ interface BulkSimCardActionsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|BulkSimCardActionListParams $params
+     * @param array<string,mixed>|BulkSimCardActionListParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<BulkSimCardActionListResponse>>
      *

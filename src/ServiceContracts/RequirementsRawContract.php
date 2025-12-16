@@ -31,7 +31,7 @@ interface RequirementsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|RequirementListParams $params
+     * @param array<string,mixed>|RequirementListParams $params
      *
      * @return BaseResponse<DefaultPagination<RequirementListResponse>>
      *

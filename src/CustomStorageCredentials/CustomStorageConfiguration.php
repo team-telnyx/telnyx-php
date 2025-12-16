@@ -11,9 +11,11 @@ use Telnyx\CustomStorageCredentials\CustomStorageConfiguration\Backend;
 use Telnyx\CustomStorageCredentials\CustomStorageConfiguration\Configuration;
 
 /**
+ * @phpstan-import-type ConfigurationShape from \Telnyx\CustomStorageCredentials\CustomStorageConfiguration\Configuration
+ *
  * @phpstan-type CustomStorageConfigurationShape = array{
- *   backend: value-of<Backend>,
- *   configuration: GcsConfigurationData|S3ConfigurationData|AzureConfigurationData,
+ *   backend: Backend|value-of<Backend>,
+ *   configuration: GcsConfigurationData|S3ConfigurationData|AzureConfigurationData|ConfigurationShape,
  * }
  */
 final class CustomStorageConfiguration implements BaseModel
@@ -53,22 +55,7 @@ final class CustomStorageConfiguration implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Backend|value-of<Backend> $backend
-     * @param GcsConfigurationData|array{
-     *   backend: value-of<GcsConfigurationData\Backend>,
-     *   bucket?: string|null,
-     *   credentials?: string|null,
-     * }|S3ConfigurationData|array{
-     *   backend: value-of<S3ConfigurationData\Backend>,
-     *   awsAccessKeyID?: string|null,
-     *   awsSecretAccessKey?: string|null,
-     *   bucket?: string|null,
-     *   region?: string|null,
-     * }|AzureConfigurationData|array{
-     *   backend: value-of<AzureConfigurationData\Backend>,
-     *   accountKey?: string|null,
-     *   accountName?: string|null,
-     *   bucket?: string|null,
-     * } $configuration
+     * @param ConfigurationShape $configuration
      */
     public static function with(
         Backend|string $backend,
@@ -94,22 +81,7 @@ final class CustomStorageConfiguration implements BaseModel
     }
 
     /**
-     * @param GcsConfigurationData|array{
-     *   backend: value-of<GcsConfigurationData\Backend>,
-     *   bucket?: string|null,
-     *   credentials?: string|null,
-     * }|S3ConfigurationData|array{
-     *   backend: value-of<S3ConfigurationData\Backend>,
-     *   awsAccessKeyID?: string|null,
-     *   awsSecretAccessKey?: string|null,
-     *   bucket?: string|null,
-     *   region?: string|null,
-     * }|AzureConfigurationData|array{
-     *   backend: value-of<AzureConfigurationData\Backend>,
-     *   accountKey?: string|null,
-     *   accountName?: string|null,
-     *   bucket?: string|null,
-     * } $configuration
+     * @param ConfigurationShape $configuration
      */
     public function withConfiguration(
         GcsConfigurationData|array|S3ConfigurationData|AzureConfigurationData $configuration,

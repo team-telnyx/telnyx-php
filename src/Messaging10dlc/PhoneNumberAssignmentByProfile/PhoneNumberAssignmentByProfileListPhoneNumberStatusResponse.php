@@ -10,8 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messaging10dlc\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileListPhoneNumberStatusResponse\Record;
 
 /**
+ * @phpstan-import-type RecordShape from \Telnyx\Messaging10dlc\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileListPhoneNumberStatusResponse\Record
+ *
  * @phpstan-type PhoneNumberAssignmentByProfileListPhoneNumberStatusResponseShape = array{
- *   records: list<Record>
+ *   records: list<RecordShape>
  * }
  */
 final class PhoneNumberAssignmentByProfileListPhoneNumberStatusResponse implements BaseModel
@@ -48,9 +50,7 @@ final class PhoneNumberAssignmentByProfileListPhoneNumberStatusResponse implemen
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Record|array{
-     *   phoneNumber: string, status: string, taskID: string
-     * }> $records
+     * @param list<RecordShape> $records
      */
     public static function with(array $records): self
     {
@@ -62,9 +62,7 @@ final class PhoneNumberAssignmentByProfileListPhoneNumberStatusResponse implemen
     }
 
     /**
-     * @param list<Record|array{
-     *   phoneNumber: string, status: string, taskID: string
-     * }> $records
+     * @param list<RecordShape> $records
      */
     public function withRecords(array $records): self
     {

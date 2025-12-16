@@ -16,7 +16,7 @@ interface StreamsRawContract
      * @api
      *
      * @param string $streamingSid path param: Uniquely identifies the streaming by id
-     * @param array<mixed>|StreamStreamingSidJsonParams $params
+     * @param array<string,mixed>|StreamStreamingSidJsonParams $params
      *
      * @return BaseResponse<StreamStreamingSidJsonResponse>
      *

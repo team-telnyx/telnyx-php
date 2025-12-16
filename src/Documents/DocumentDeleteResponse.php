@@ -7,13 +7,12 @@ namespace Telnyx\Documents;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Documents\DocServiceDocument\AvScanStatus;
-use Telnyx\Documents\DocServiceDocument\Size;
-use Telnyx\Documents\DocServiceDocument\Status;
 
 /**
+ * @phpstan-import-type DocServiceDocumentShape from \Telnyx\Documents\DocServiceDocument
+ *
  * @phpstan-type DocumentDeleteResponseShape = array{
- *   data?: DocServiceDocument|null
+ *   data?: null|DocServiceDocument|DocServiceDocumentShape
  * }
  */
 final class DocumentDeleteResponse implements BaseModel
@@ -34,19 +33,7 @@ final class DocumentDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DocServiceDocument|array{
-     *   id?: string|null,
-     *   avScanStatus?: value-of<AvScanStatus>|null,
-     *   contentType?: string|null,
-     *   createdAt?: string|null,
-     *   customerReference?: string|null,
-     *   filename?: string|null,
-     *   recordType?: string|null,
-     *   sha256?: string|null,
-     *   size?: Size|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param DocServiceDocumentShape $data
      */
     public static function with(DocServiceDocument|array|null $data = null): self
     {
@@ -58,19 +45,7 @@ final class DocumentDeleteResponse implements BaseModel
     }
 
     /**
-     * @param DocServiceDocument|array{
-     *   id?: string|null,
-     *   avScanStatus?: value-of<AvScanStatus>|null,
-     *   contentType?: string|null,
-     *   createdAt?: string|null,
-     *   customerReference?: string|null,
-     *   filename?: string|null,
-     *   recordType?: string|null,
-     *   sha256?: string|null,
-     *   size?: Size|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param DocServiceDocumentShape $data
      */
     public function withData(DocServiceDocument|array $data): self
     {

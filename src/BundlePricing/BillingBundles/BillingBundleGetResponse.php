@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Telnyx\BundlePricing\BillingBundles;
 
 use Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse\Data;
-use Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse\Data\BundleLimit;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type BillingBundleGetResponseShape = array{data: Data}
+ * @phpstan-import-type DataShape from \Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse\Data
+ *
+ * @phpstan-type BillingBundleGetResponseShape = array{data: Data|DataShape}
  */
 final class BillingBundleGetResponse implements BaseModel
 {
@@ -45,16 +46,7 @@ final class BillingBundleGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   id: string,
-     *   active: bool,
-     *   bundleLimits: list<BundleLimit>,
-     *   costCode: string,
-     *   createdAt: string,
-     *   isPublic: bool,
-     *   name: string,
-     *   slug?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array $data): self
     {
@@ -66,16 +58,7 @@ final class BillingBundleGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   id: string,
-     *   active: bool,
-     *   bundleLimits: list<BundleLimit>,
-     *   costCode: string,
-     *   createdAt: string,
-     *   isPublic: bool,
-     *   name: string,
-     *   slug?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

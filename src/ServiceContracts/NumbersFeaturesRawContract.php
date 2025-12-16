@@ -15,7 +15,7 @@ interface NumbersFeaturesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|NumbersFeatureCreateParams $params
+     * @param array<string,mixed>|NumbersFeatureCreateParams $params
      *
      * @return BaseResponse<NumbersFeatureNewResponse>
      *

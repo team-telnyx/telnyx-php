@@ -8,11 +8,10 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberOrders\NumberOrderWithPhoneNumbers\Status;
-use Telnyx\NumberOrders\PhoneNumber\PhoneNumberType;
-use Telnyx\NumberOrders\PhoneNumber\RequirementsStatus;
-use Telnyx\SubNumberOrderRegulatoryRequirementWithValue;
 
 /**
+ * @phpstan-import-type PhoneNumberShape from \Telnyx\NumberOrders\PhoneNumber
+ *
  * @phpstan-type NumberOrderWithPhoneNumbersShape = array{
  *   id?: string|null,
  *   billingGroupID?: string|null,
@@ -20,11 +19,11 @@ use Telnyx\SubNumberOrderRegulatoryRequirementWithValue;
  *   createdAt?: \DateTimeInterface|null,
  *   customerReference?: string|null,
  *   messagingProfileID?: string|null,
- *   phoneNumbers?: list<PhoneNumber>|null,
+ *   phoneNumbers?: list<PhoneNumberShape>|null,
  *   phoneNumbersCount?: int|null,
  *   recordType?: string|null,
  *   requirementsMet?: bool|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   subNumberOrdersIDs?: list<string>|null,
  *   updatedAt?: \DateTimeInterface|null,
  * }
@@ -114,19 +113,7 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PhoneNumber|array{
-     *   id?: string|null,
-     *   bundleID?: string|null,
-     *   countryCode?: string|null,
-     *   countryISOAlpha2?: string|null,
-     *   phoneNumber?: string|null,
-     *   phoneNumberType?: value-of<PhoneNumberType>|null,
-     *   recordType?: string|null,
-     *   regulatoryRequirements?: list<SubNumberOrderRegulatoryRequirementWithValue>|null,
-     *   requirementsMet?: bool|null,
-     *   requirementsStatus?: value-of<RequirementsStatus>|null,
-     *   status?: value-of<PhoneNumber\Status>|null,
-     * }> $phoneNumbers
+     * @param list<PhoneNumberShape> $phoneNumbers
      * @param Status|value-of<Status> $status
      * @param list<string> $subNumberOrdersIDs
      */
@@ -228,19 +215,7 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
     }
 
     /**
-     * @param list<PhoneNumber|array{
-     *   id?: string|null,
-     *   bundleID?: string|null,
-     *   countryCode?: string|null,
-     *   countryISOAlpha2?: string|null,
-     *   phoneNumber?: string|null,
-     *   phoneNumberType?: value-of<PhoneNumberType>|null,
-     *   recordType?: string|null,
-     *   regulatoryRequirements?: list<SubNumberOrderRegulatoryRequirementWithValue>|null,
-     *   requirementsMet?: bool|null,
-     *   requirementsStatus?: value-of<RequirementsStatus>|null,
-     *   status?: value-of<PhoneNumber\Status>|null,
-     * }> $phoneNumbers
+     * @param list<PhoneNumberShape> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {

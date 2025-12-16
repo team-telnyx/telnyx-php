@@ -8,10 +8,13 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ShortCode;
-use Telnyx\ShortCode\RecordType;
 
 /**
- * @phpstan-type ShortCodeUpdateResponseShape = array{data?: ShortCode|null}
+ * @phpstan-import-type ShortCodeShape from \Telnyx\ShortCode
+ *
+ * @phpstan-type ShortCodeUpdateResponseShape = array{
+ *   data?: null|ShortCode|ShortCodeShape
+ * }
  */
 final class ShortCodeUpdateResponse implements BaseModel
 {
@@ -31,16 +34,7 @@ final class ShortCodeUpdateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ShortCode|array{
-     *   messagingProfileID: string|null,
-     *   id?: string|null,
-     *   countryCode?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   shortCode?: string|null,
-     *   tags?: list<string>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param ShortCodeShape $data
      */
     public static function with(ShortCode|array|null $data = null): self
     {
@@ -52,16 +46,7 @@ final class ShortCodeUpdateResponse implements BaseModel
     }
 
     /**
-     * @param ShortCode|array{
-     *   messagingProfileID: string|null,
-     *   id?: string|null,
-     *   countryCode?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   shortCode?: string|null,
-     *   tags?: list<string>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param ShortCodeShape $data
      */
     public function withData(ShortCode|array $data): self
     {

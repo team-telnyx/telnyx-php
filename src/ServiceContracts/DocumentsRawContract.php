@@ -40,7 +40,7 @@ interface DocumentsRawContract
      * @api
      *
      * @param string $documentID identifies the resource
-     * @param array<mixed>|DocumentUpdateParams $params
+     * @param array<string,mixed>|DocumentUpdateParams $params
      *
      * @return BaseResponse<DocumentUpdateResponse>
      *
@@ -55,7 +55,7 @@ interface DocumentsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|DocumentListParams $params
+     * @param array<string,mixed>|DocumentListParams $params
      *
      * @return BaseResponse<DefaultPagination<DocServiceDocument>>
      *
@@ -111,7 +111,7 @@ interface DocumentsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|DocumentUploadParams $params
+     * @param array<string,mixed>|DocumentUploadParams $params
      *
      * @return BaseResponse<DocumentUploadResponse>
      *
@@ -125,7 +125,7 @@ interface DocumentsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|DocumentUploadJsonParams $params
+     * @param array<string,mixed>|DocumentUploadJsonParams $params
      *
      * @return BaseResponse<DocumentUploadJsonResponse>
      *

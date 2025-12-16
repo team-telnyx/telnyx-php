@@ -5,15 +5,14 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\AssistantTool;
 
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer;
-use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\CustomHeader;
-use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\SipHeader;
-use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\Target;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type SipReferToolShape = array{refer: Refer, type?: 'refer'}
+ * @phpstan-import-type ReferShape from \Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer
+ *
+ * @phpstan-type SipReferToolShape = array{refer: Refer|ReferShape, type: 'refer'}
  */
 final class SipReferTool implements BaseModel
 {
@@ -51,11 +50,7 @@ final class SipReferTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Refer|array{
-     *   targets: list<Target>,
-     *   customHeaders?: list<CustomHeader>|null,
-     *   sipHeaders?: list<SipHeader>|null,
-     * } $refer
+     * @param ReferShape $refer
      */
     public static function with(Refer|array $refer): self
     {
@@ -67,11 +62,7 @@ final class SipReferTool implements BaseModel
     }
 
     /**
-     * @param Refer|array{
-     *   targets: list<Target>,
-     *   customHeaders?: list<CustomHeader>|null,
-     *   sipHeaders?: list<SipHeader>|null,
-     * } $refer
+     * @param ReferShape $refer
      */
     public function withRefer(Refer|array $refer): self
     {

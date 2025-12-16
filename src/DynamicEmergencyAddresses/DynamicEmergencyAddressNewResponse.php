@@ -7,12 +7,12 @@ namespace Telnyx\DynamicEmergencyAddresses;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddress\CountryCode;
-use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddress\Status;
 
 /**
+ * @phpstan-import-type DynamicEmergencyAddressShape from \Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddress
+ *
  * @phpstan-type DynamicEmergencyAddressNewResponseShape = array{
- *   data?: DynamicEmergencyAddress|null
+ *   data?: null|DynamicEmergencyAddress|DynamicEmergencyAddressShape
  * }
  */
 final class DynamicEmergencyAddressNewResponse implements BaseModel
@@ -33,25 +33,7 @@ final class DynamicEmergencyAddressNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DynamicEmergencyAddress|array{
-     *   administrativeArea: string,
-     *   countryCode: value-of<CountryCode>,
-     *   houseNumber: string,
-     *   locality: string,
-     *   postalCode: string,
-     *   streetName: string,
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   extendedAddress?: string|null,
-     *   houseSuffix?: string|null,
-     *   recordType?: string|null,
-     *   sipGeolocationID?: string|null,
-     *   status?: value-of<Status>|null,
-     *   streetPostDirectional?: string|null,
-     *   streetPreDirectional?: string|null,
-     *   streetSuffix?: string|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param DynamicEmergencyAddressShape $data
      */
     public static function with(
         DynamicEmergencyAddress|array|null $data = null
@@ -64,25 +46,7 @@ final class DynamicEmergencyAddressNewResponse implements BaseModel
     }
 
     /**
-     * @param DynamicEmergencyAddress|array{
-     *   administrativeArea: string,
-     *   countryCode: value-of<CountryCode>,
-     *   houseNumber: string,
-     *   locality: string,
-     *   postalCode: string,
-     *   streetName: string,
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   extendedAddress?: string|null,
-     *   houseSuffix?: string|null,
-     *   recordType?: string|null,
-     *   sipGeolocationID?: string|null,
-     *   status?: value-of<Status>|null,
-     *   streetPostDirectional?: string|null,
-     *   streetPreDirectional?: string|null,
-     *   streetSuffix?: string|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param DynamicEmergencyAddressShape $data
      */
     public function withData(DynamicEmergencyAddress|array $data): self
     {

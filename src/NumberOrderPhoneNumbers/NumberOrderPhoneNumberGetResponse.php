@@ -7,14 +7,12 @@ namespace Telnyx\NumberOrderPhoneNumbers;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumber\PhoneNumberType;
-use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumber\RequirementsStatus;
-use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumber\Status;
-use Telnyx\SubNumberOrderRegulatoryRequirementWithValue;
 
 /**
+ * @phpstan-import-type NumberOrderPhoneNumberShape from \Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumber
+ *
  * @phpstan-type NumberOrderPhoneNumberGetResponseShape = array{
- *   data?: NumberOrderPhoneNumber|null
+ *   data?: null|NumberOrderPhoneNumber|NumberOrderPhoneNumberShape
  * }
  */
 final class NumberOrderPhoneNumberGetResponse implements BaseModel
@@ -35,23 +33,7 @@ final class NumberOrderPhoneNumberGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param NumberOrderPhoneNumber|array{
-     *   id?: string|null,
-     *   bundleID?: string|null,
-     *   countryCode?: string|null,
-     *   deadline?: \DateTimeInterface|null,
-     *   isBlockNumber?: bool|null,
-     *   locality?: string|null,
-     *   orderRequestID?: string|null,
-     *   phoneNumber?: string|null,
-     *   phoneNumberType?: value-of<PhoneNumberType>|null,
-     *   recordType?: string|null,
-     *   regulatoryRequirements?: list<SubNumberOrderRegulatoryRequirementWithValue>|null,
-     *   requirementsMet?: bool|null,
-     *   requirementsStatus?: value-of<RequirementsStatus>|null,
-     *   status?: value-of<Status>|null,
-     *   subNumberOrderID?: string|null,
-     * } $data
+     * @param NumberOrderPhoneNumberShape $data
      */
     public static function with(NumberOrderPhoneNumber|array|null $data = null): self
     {
@@ -63,23 +45,7 @@ final class NumberOrderPhoneNumberGetResponse implements BaseModel
     }
 
     /**
-     * @param NumberOrderPhoneNumber|array{
-     *   id?: string|null,
-     *   bundleID?: string|null,
-     *   countryCode?: string|null,
-     *   deadline?: \DateTimeInterface|null,
-     *   isBlockNumber?: bool|null,
-     *   locality?: string|null,
-     *   orderRequestID?: string|null,
-     *   phoneNumber?: string|null,
-     *   phoneNumberType?: value-of<PhoneNumberType>|null,
-     *   recordType?: string|null,
-     *   regulatoryRequirements?: list<SubNumberOrderRegulatoryRequirementWithValue>|null,
-     *   requirementsMet?: bool|null,
-     *   requirementsStatus?: value-of<RequirementsStatus>|null,
-     *   status?: value-of<Status>|null,
-     *   subNumberOrderID?: string|null,
-     * } $data
+     * @param NumberOrderPhoneNumberShape $data
      */
     public function withData(NumberOrderPhoneNumber|array $data): self
     {

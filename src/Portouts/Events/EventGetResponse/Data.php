@@ -11,6 +11,13 @@ use Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutFocDateChanged;
 use Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutNewComment;
 use Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutStatusChanged;
 
+/**
+ * @phpstan-import-type WebhookPortoutStatusChangedShape from \Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutStatusChanged
+ * @phpstan-import-type WebhookPortoutNewCommentShape from \Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutNewComment
+ * @phpstan-import-type WebhookPortoutFocDateChangedShape from \Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutFocDateChanged
+ *
+ * @phpstan-type DataShape = WebhookPortoutStatusChangedShape|WebhookPortoutNewCommentShape|WebhookPortoutFocDateChangedShape
+ */
 final class Data implements ConverterSource
 {
     use SdkUnion;

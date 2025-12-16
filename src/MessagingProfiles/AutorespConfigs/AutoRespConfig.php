@@ -16,7 +16,7 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfig\Op;
  *   countryCode: string,
  *   createdAt: \DateTimeInterface,
  *   keywords: list<string>,
- *   op: value-of<Op>,
+ *   op: Op|value-of<Op>,
  *   updatedAt: \DateTimeInterface,
  *   respText?: string|null,
  * }

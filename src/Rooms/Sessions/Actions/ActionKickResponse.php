@@ -10,7 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Rooms\Sessions\Actions\ActionKickResponse\Data;
 
 /**
- * @phpstan-type ActionKickResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\Rooms\Sessions\Actions\ActionKickResponse\Data
+ *
+ * @phpstan-type ActionKickResponseShape = array{data?: null|Data|DataShape}
  */
 final class ActionKickResponse implements BaseModel
 {
@@ -30,7 +32,7 @@ final class ActionKickResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{result?: string|null} $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -42,7 +44,7 @@ final class ActionKickResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{result?: string|null} $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

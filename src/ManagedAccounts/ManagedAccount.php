@@ -11,6 +11,8 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ManagedAccounts\ManagedAccount\RecordType;
 
 /**
+ * @phpstan-import-type ManagedAccountBalanceShape from \Telnyx\ManagedAccounts\ManagedAccountBalance
+ *
  * @phpstan-type ManagedAccountShape = array{
  *   id: string,
  *   apiKey: string,
@@ -19,9 +21,9 @@ use Telnyx\ManagedAccounts\ManagedAccount\RecordType;
  *   createdAt: string,
  *   email: string,
  *   managerAccountID: string,
- *   recordType: value-of<RecordType>,
+ *   recordType: RecordType|value-of<RecordType>,
  *   updatedAt: string,
- *   balance?: ManagedAccountBalance|null,
+ *   balance?: null|ManagedAccountBalance|ManagedAccountBalanceShape,
  *   managedAccountAllowCustomPricing?: bool|null,
  *   organizationName?: string|null,
  *   rollupBilling?: bool|null,
@@ -153,13 +155,7 @@ final class ManagedAccount implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param RecordType|value-of<RecordType> $recordType
-     * @param ManagedAccountBalance|array{
-     *   availableCredit?: string|null,
-     *   balance?: string|null,
-     *   creditLimit?: string|null,
-     *   currency?: string|null,
-     *   recordType?: value-of<ManagedAccountBalance\RecordType>|null,
-     * } $balance
+     * @param ManagedAccountBalanceShape $balance
      */
     public static function with(
         string $id,
@@ -298,13 +294,7 @@ final class ManagedAccount implements BaseModel
     }
 
     /**
-     * @param ManagedAccountBalance|array{
-     *   availableCredit?: string|null,
-     *   balance?: string|null,
-     *   creditLimit?: string|null,
-     *   currency?: string|null,
-     *   recordType?: value-of<ManagedAccountBalance\RecordType>|null,
-     * } $balance
+     * @param ManagedAccountBalanceShape $balance
      */
     public function withBalance(ManagedAccountBalance|array $balance): self
     {

@@ -5,19 +5,20 @@ declare(strict_types=1);
 namespace Telnyx\AI\Conversations\InsightGroups;
 
 use Telnyx\AI\Conversations\Insights\InsightTemplate;
-use Telnyx\AI\Conversations\Insights\InsightTemplate\InsightType;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type InsightTemplateShape from \Telnyx\AI\Conversations\Insights\InsightTemplate
+ *
  * @phpstan-type InsightTemplateGroupShape = array{
  *   id: string,
  *   createdAt: \DateTimeInterface,
  *   name: string,
  *   description?: string|null,
- *   insights?: list<InsightTemplate>|null,
+ *   insights?: list<InsightTemplateShape>|null,
  *   webhook?: string|null,
  * }
  */
@@ -69,15 +70,7 @@ final class InsightTemplateGroup implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<InsightTemplate|array{
-     *   id: string,
-     *   createdAt: \DateTimeInterface,
-     *   instructions: string,
-     *   insightType?: value-of<InsightType>|null,
-     *   jsonSchema?: string|array<string,mixed>|null,
-     *   name?: string|null,
-     *   webhook?: string|null,
-     * }> $insights
+     * @param list<InsightTemplateShape> $insights
      */
     public static function with(
         string $id,
@@ -133,15 +126,7 @@ final class InsightTemplateGroup implements BaseModel
     }
 
     /**
-     * @param list<InsightTemplate|array{
-     *   id: string,
-     *   createdAt: \DateTimeInterface,
-     *   instructions: string,
-     *   insightType?: value-of<InsightType>|null,
-     *   jsonSchema?: string|array<string,mixed>|null,
-     *   name?: string|null,
-     *   webhook?: string|null,
-     * }> $insights
+     * @param list<InsightTemplateShape> $insights
      */
     public function withInsights(array $insights): self
     {

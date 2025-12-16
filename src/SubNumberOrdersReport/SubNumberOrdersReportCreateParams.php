@@ -16,12 +16,12 @@ use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportCreateParams\Status;
  * @see Telnyx\Services\SubNumberOrdersReportService::create()
  *
  * @phpstan-type SubNumberOrdersReportCreateParamsShape = array{
- *   countryCode?: string,
- *   createdAtGt?: \DateTimeInterface,
- *   createdAtLt?: \DateTimeInterface,
- *   customerReference?: string,
- *   orderRequestID?: string,
- *   status?: Status|value-of<Status>,
+ *   countryCode?: string|null,
+ *   createdAtGt?: \DateTimeInterface|null,
+ *   createdAtLt?: \DateTimeInterface|null,
+ *   customerReference?: string|null,
+ *   orderRequestID?: string|null,
+ *   status?: null|Status|value-of<Status>,
  * }
  */
 final class SubNumberOrdersReportCreateParams implements BaseModel

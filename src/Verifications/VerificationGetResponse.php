@@ -7,12 +7,13 @@ namespace Telnyx\Verifications;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Verifications\Verification\RecordType;
-use Telnyx\Verifications\Verification\Status;
-use Telnyx\Verifications\Verification\Type;
 
 /**
- * @phpstan-type VerificationGetResponseShape = array{data: Verification}
+ * @phpstan-import-type VerificationShape from \Telnyx\Verifications\Verification
+ *
+ * @phpstan-type VerificationGetResponseShape = array{
+ *   data: Verification|VerificationShape
+ * }
  */
 final class VerificationGetResponse implements BaseModel
 {
@@ -46,18 +47,7 @@ final class VerificationGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Verification|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   customCode?: string|null,
-     *   phoneNumber?: string|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   status?: value-of<Status>|null,
-     *   timeoutSecs?: int|null,
-     *   type?: value-of<Type>|null,
-     *   updatedAt?: string|null,
-     *   verifyProfileID?: string|null,
-     * } $data
+     * @param VerificationShape $data
      */
     public static function with(Verification|array $data): self
     {
@@ -69,18 +59,7 @@ final class VerificationGetResponse implements BaseModel
     }
 
     /**
-     * @param Verification|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   customCode?: string|null,
-     *   phoneNumber?: string|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   status?: value-of<Status>|null,
-     *   timeoutSecs?: int|null,
-     *   type?: value-of<Type>|null,
-     *   updatedAt?: string|null,
-     *   verifyProfileID?: string|null,
-     * } $data
+     * @param VerificationShape $data
      */
     public function withData(Verification|array $data): self
     {

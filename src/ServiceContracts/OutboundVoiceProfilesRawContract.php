@@ -22,7 +22,7 @@ interface OutboundVoiceProfilesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|OutboundVoiceProfileCreateParams $params
+     * @param array<string,mixed>|OutboundVoiceProfileCreateParams $params
      *
      * @return BaseResponse<OutboundVoiceProfileNewResponse>
      *
@@ -51,7 +51,7 @@ interface OutboundVoiceProfilesRawContract
      * @api
      *
      * @param string $id identifies the resource
-     * @param array<mixed>|OutboundVoiceProfileUpdateParams $params
+     * @param array<string,mixed>|OutboundVoiceProfileUpdateParams $params
      *
      * @return BaseResponse<OutboundVoiceProfileUpdateResponse>
      *
@@ -66,7 +66,7 @@ interface OutboundVoiceProfilesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|OutboundVoiceProfileListParams $params
+     * @param array<string,mixed>|OutboundVoiceProfileListParams $params
      *
      * @return BaseResponse<DefaultPagination<OutboundVoiceProfile>>
      *

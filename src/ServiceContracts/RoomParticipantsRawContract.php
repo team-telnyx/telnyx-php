@@ -31,7 +31,7 @@ interface RoomParticipantsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|RoomParticipantListParams $params
+     * @param array<string,mixed>|RoomParticipantListParams $params
      *
      * @return BaseResponse<DefaultPagination<RoomParticipant>>
      *

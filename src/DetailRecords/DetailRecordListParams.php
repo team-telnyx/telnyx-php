@@ -9,21 +9,19 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DetailRecords\DetailRecordListParams\Filter;
-use Telnyx\DetailRecords\DetailRecordListParams\Filter\DateRange;
-use Telnyx\DetailRecords\DetailRecordListParams\Filter\RecordType;
 
 /**
  * Search for any detail record across the Telnyx Platform.
  *
  * @see Telnyx\Services\DetailRecordsService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\DetailRecords\DetailRecordListParams\Filter
+ *
  * @phpstan-type DetailRecordListParamsShape = array{
- *   filter?: Filter|array{
- *     recordType: value-of<RecordType>, dateRange?: value-of<DateRange>|null
- *   },
- *   pageNumber?: int,
- *   pageSize?: int,
- *   sort?: list<string>,
+ *   filter?: FilterShape|null,
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
+ *   sort?: list<string>|null,
  * }
  */
 final class DetailRecordListParams implements BaseModel
@@ -62,9 +60,7 @@ final class DetailRecordListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   recordType: value-of<RecordType>, dateRange?: value-of<DateRange>|null
-     * } $filter
+     * @param FilterShape $filter
      * @param list<string> $sort
      */
     public static function with(
@@ -86,9 +82,7 @@ final class DetailRecordListParams implements BaseModel
     /**
      * Filter records on a given record attribute and value. <br/>Example: filter[status]=delivered. <br/>Required: filter[record_type] must be specified.
      *
-     * @param Filter|array{
-     *   recordType: value-of<RecordType>, dateRange?: value-of<DateRange>|null
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

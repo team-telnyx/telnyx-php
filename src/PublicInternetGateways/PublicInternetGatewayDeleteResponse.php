@@ -7,11 +7,14 @@ namespace Telnyx\PublicInternetGateways;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Networks\InterfaceStatus;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayDeleteResponse\Data;
 
 /**
- * @phpstan-type PublicInternetGatewayDeleteResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\PublicInternetGateways\PublicInternetGatewayDeleteResponse\Data
+ *
+ * @phpstan-type PublicInternetGatewayDeleteResponseShape = array{
+ *   data?: null|Data|DataShape
+ * }
  */
 final class PublicInternetGatewayDeleteResponse implements BaseModel
 {
@@ -31,17 +34,7 @@ final class PublicInternetGatewayDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     *   name?: string|null,
-     *   networkID?: string|null,
-     *   status?: value-of<InterfaceStatus>|null,
-     *   publicIP?: string|null,
-     *   regionCode?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -53,17 +46,7 @@ final class PublicInternetGatewayDeleteResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     *   name?: string|null,
-     *   networkID?: string|null,
-     *   status?: value-of<InterfaceStatus>|null,
-     *   publicIP?: string|null,
-     *   regionCode?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

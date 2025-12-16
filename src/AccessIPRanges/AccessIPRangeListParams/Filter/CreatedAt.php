@@ -11,6 +11,10 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
 
 /**
  * Filter by exact creation date-time.
+ *
+ * @phpstan-import-type DateRangeFilterShape from \Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter\CreatedAt\DateRangeFilter
+ *
+ * @phpstan-type CreatedAtShape = \DateTimeInterface|DateRangeFilterShape
  */
 final class CreatedAt implements ConverterSource
 {

@@ -11,17 +11,18 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams\Filter;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams\Page;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams\Sort;
-use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams\Sort\Value;
 
 /**
  * Returns a list of all phone number extensions of a porting order.
  *
  * @see Telnyx\Services\PortingOrders\PhoneNumberExtensionsService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams\Page
+ * @phpstan-import-type SortShape from \Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams\Sort
+ *
  * @phpstan-type PhoneNumberExtensionListParamsShape = array{
- *   filter?: Filter|array{portingPhoneNumberID?: string|null},
- *   page?: Page|array{number?: int|null, size?: int|null},
- *   sort?: Sort|array{value?: value-of<Value>|null},
+ *   filter?: FilterShape|null, page?: PageShape|null, sort?: SortShape|null
  * }
  */
 final class PhoneNumberExtensionListParams implements BaseModel
@@ -58,9 +59,9 @@ final class PhoneNumberExtensionListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{portingPhoneNumberID?: string|null} $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
-     * @param Sort|array{value?: value-of<Value>|null} $sort
+     * @param FilterShape $filter
+     * @param PageShape $page
+     * @param SortShape $sort
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -79,7 +80,7 @@ final class PhoneNumberExtensionListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[porting_phone_number_id].
      *
-     * @param Filter|array{portingPhoneNumberID?: string|null} $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -92,7 +93,7 @@ final class PhoneNumberExtensionListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {
@@ -105,7 +106,7 @@ final class PhoneNumberExtensionListParams implements BaseModel
     /**
      * Consolidated sort parameter (deepObject style). Originally: sort[value].
      *
-     * @param Sort|array{value?: value-of<Value>|null} $sort
+     * @param SortShape $sort
      */
     public function withSort(Sort|array $sort): self
     {

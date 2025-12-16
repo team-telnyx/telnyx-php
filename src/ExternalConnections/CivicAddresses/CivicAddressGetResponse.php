@@ -8,10 +8,11 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressGetResponse\Data;
-use Telnyx\ExternalConnections\CivicAddresses\CivicAddressGetResponse\Data\Location;
 
 /**
- * @phpstan-type CivicAddressGetResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\ExternalConnections\CivicAddresses\CivicAddressGetResponse\Data
+ *
+ * @phpstan-type CivicAddressGetResponseShape = array{data?: null|Data|DataShape}
  */
 final class CivicAddressGetResponse implements BaseModel
 {
@@ -31,24 +32,7 @@ final class CivicAddressGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   id?: string|null,
-     *   cityOrTown?: string|null,
-     *   cityOrTownAlias?: string|null,
-     *   companyName?: string|null,
-     *   country?: string|null,
-     *   countryOrDistrict?: string|null,
-     *   defaultLocationID?: string|null,
-     *   description?: string|null,
-     *   houseNumber?: string|null,
-     *   houseNumberSuffix?: string|null,
-     *   locations?: list<Location>|null,
-     *   postalOrZipCode?: string|null,
-     *   recordType?: string|null,
-     *   stateOrProvince?: string|null,
-     *   streetName?: string|null,
-     *   streetSuffix?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -60,24 +44,7 @@ final class CivicAddressGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   id?: string|null,
-     *   cityOrTown?: string|null,
-     *   cityOrTownAlias?: string|null,
-     *   companyName?: string|null,
-     *   country?: string|null,
-     *   countryOrDistrict?: string|null,
-     *   defaultLocationID?: string|null,
-     *   description?: string|null,
-     *   houseNumber?: string|null,
-     *   houseNumberSuffix?: string|null,
-     *   locations?: list<Location>|null,
-     *   postalOrZipCode?: string|null,
-     *   recordType?: string|null,
-     *   stateOrProvince?: string|null,
-     *   streetName?: string|null,
-     *   streetSuffix?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

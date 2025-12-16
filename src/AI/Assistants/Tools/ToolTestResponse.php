@@ -12,7 +12,9 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Response model for webhook tool test results.
  *
- * @phpstan-type ToolTestResponseShape = array{data: Data}
+ * @phpstan-import-type DataShape from \Telnyx\AI\Assistants\Tools\ToolTestResponse\Data
+ *
+ * @phpstan-type ToolTestResponseShape = array{data: Data|DataShape}
  */
 final class ToolTestResponse implements BaseModel
 {
@@ -49,13 +51,7 @@ final class ToolTestResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   contentType: string,
-     *   request: array<string,mixed>,
-     *   response: string,
-     *   statusCode: int,
-     *   success: bool,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array $data): self
     {
@@ -69,13 +65,7 @@ final class ToolTestResponse implements BaseModel
     /**
      * Response model for webhook tool test results.
      *
-     * @param Data|array{
-     *   contentType: string,
-     *   request: array<string,mixed>,
-     *   response: string,
-     *   statusCode: int,
-     *   success: bool,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

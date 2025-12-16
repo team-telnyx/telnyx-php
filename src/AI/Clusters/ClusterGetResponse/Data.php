@@ -12,7 +12,7 @@ use Telnyx\Messaging10dlc\PhoneNumberAssignmentByProfile\TaskStatus;
 
 /**
  * @phpstan-type DataShape = array{
- *   bucket: string, clusters: list<mixed>, status: value-of<TaskStatus>
+ *   bucket: string, clusters: list<mixed>, status: TaskStatus|value-of<TaskStatus>
  * }
  */
 final class Data implements BaseModel

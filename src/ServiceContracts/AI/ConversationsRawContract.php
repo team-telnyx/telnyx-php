@@ -22,7 +22,7 @@ interface ConversationsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ConversationCreateParams $params
+     * @param array<string,mixed>|ConversationCreateParams $params
      *
      * @return BaseResponse<Conversation>
      *
@@ -51,7 +51,7 @@ interface ConversationsRawContract
      * @api
      *
      * @param string $conversationID The ID of the conversation to update
-     * @param array<mixed>|ConversationUpdateParams $params
+     * @param array<string,mixed>|ConversationUpdateParams $params
      *
      * @return BaseResponse<ConversationUpdateResponse>
      *
@@ -66,7 +66,7 @@ interface ConversationsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ConversationListParams $params
+     * @param array<string,mixed>|ConversationListParams $params
      *
      * @return BaseResponse<ConversationListResponse>
      *
@@ -95,7 +95,7 @@ interface ConversationsRawContract
      * @api
      *
      * @param string $conversationID The ID of the conversation
-     * @param array<mixed>|ConversationAddMessageParams $params
+     * @param array<string,mixed>|ConversationAddMessageParams $params
      *
      * @return BaseResponse<mixed>
      *

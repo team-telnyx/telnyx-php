@@ -9,15 +9,17 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse\Data\RegionInformation;
 use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse\Data\RegulatoryRequirement;
-use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse\Data\RegulatoryRequirement\AcceptanceCriteria;
 
 /**
+ * @phpstan-import-type RegionInformationShape from \Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse\Data\RegionInformation
+ * @phpstan-import-type RegulatoryRequirementShape from \Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse\Data\RegulatoryRequirement
+ *
  * @phpstan-type DataShape = array{
  *   phoneNumber?: string|null,
  *   phoneNumberType?: string|null,
  *   recordType?: string|null,
- *   regionInformation?: list<RegionInformation>|null,
- *   regulatoryRequirements?: list<RegulatoryRequirement>|null,
+ *   regionInformation?: list<RegionInformationShape>|null,
+ *   regulatoryRequirements?: list<RegulatoryRequirementShape>|null,
  * }
  */
 final class Data implements BaseModel
@@ -52,18 +54,8 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RegionInformation|array{
-     *   regionName?: string|null, regionType?: string|null
-     * }> $regionInformation
-     * @param list<RegulatoryRequirement|array{
-     *   id?: string|null,
-     *   acceptanceCriteria?: AcceptanceCriteria|null,
-     *   description?: string|null,
-     *   example?: string|null,
-     *   fieldType?: string|null,
-     *   label?: string|null,
-     *   recordType?: string|null,
-     * }> $regulatoryRequirements
+     * @param list<RegionInformationShape> $regionInformation
+     * @param list<RegulatoryRequirementShape> $regulatoryRequirements
      */
     public static function with(
         ?string $phoneNumber = null,
@@ -108,9 +100,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<RegionInformation|array{
-     *   regionName?: string|null, regionType?: string|null
-     * }> $regionInformation
+     * @param list<RegionInformationShape> $regionInformation
      */
     public function withRegionInformation(array $regionInformation): self
     {
@@ -121,15 +111,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<RegulatoryRequirement|array{
-     *   id?: string|null,
-     *   acceptanceCriteria?: AcceptanceCriteria|null,
-     *   description?: string|null,
-     *   example?: string|null,
-     *   fieldType?: string|null,
-     *   label?: string|null,
-     *   recordType?: string|null,
-     * }> $regulatoryRequirements
+     * @param list<RegulatoryRequirementShape> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements

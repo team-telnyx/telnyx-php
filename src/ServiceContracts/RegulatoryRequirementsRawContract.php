@@ -15,7 +15,7 @@ interface RegulatoryRequirementsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|RegulatoryRequirementRetrieveParams $params
+     * @param array<string,mixed>|RegulatoryRequirementRetrieveParams $params
      *
      * @return BaseResponse<RegulatoryRequirementGetResponse>
      *

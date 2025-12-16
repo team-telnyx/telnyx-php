@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Telnyx\ChargesBreakdown;
 
 use Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse\Data;
-use Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse\Data\Result;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ChargesBreakdownGetResponseShape = array{data: Data}
+ * @phpstan-import-type DataShape from \Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse\Data
+ *
+ * @phpstan-type ChargesBreakdownGetResponseShape = array{data: Data|DataShape}
  */
 final class ChargesBreakdownGetResponse implements BaseModel
 {
@@ -45,14 +46,7 @@ final class ChargesBreakdownGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   currency: string,
-     *   endDate: string,
-     *   results: list<Result>,
-     *   startDate: string,
-     *   userEmail: string,
-     *   userID: string,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array $data): self
     {
@@ -64,14 +58,7 @@ final class ChargesBreakdownGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   currency: string,
-     *   endDate: string,
-     *   results: list<Result>,
-     *   startDate: string,
-     *   userEmail: string,
-     *   userID: string,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

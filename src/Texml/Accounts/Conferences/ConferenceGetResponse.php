@@ -18,10 +18,10 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceGetResponse\Status;
  *   dateCreated?: string|null,
  *   dateUpdated?: string|null,
  *   friendlyName?: string|null,
- *   reasonConferenceEnded?: value-of<ReasonConferenceEnded>|null,
+ *   reasonConferenceEnded?: null|ReasonConferenceEnded|value-of<ReasonConferenceEnded>,
  *   region?: string|null,
  *   sid?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   subresourceUris?: array<string,mixed>|null,
  *   uri?: string|null,
  * }

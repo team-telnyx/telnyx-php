@@ -12,12 +12,14 @@ use Telnyx\Recordings\RecordingListParams\Filter\CreatedAt;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[conference_id], filter[created_at][gte], filter[created_at][lte], filter[call_leg_id], filter[call_session_id], filter[from], filter[to], filter[connection_id], filter[sip_call_id].
  *
+ * @phpstan-import-type CreatedAtShape from \Telnyx\Recordings\RecordingListParams\Filter\CreatedAt
+ *
  * @phpstan-type FilterShape = array{
  *   callLegID?: string|null,
  *   callSessionID?: string|null,
  *   conferenceID?: string|null,
  *   connectionID?: string|null,
- *   createdAt?: CreatedAt|null,
+ *   createdAt?: null|CreatedAt|CreatedAtShape,
  *   from?: string|null,
  *   sipCallID?: string|null,
  *   to?: string|null,
@@ -83,7 +85,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CreatedAt|array{gte?: string|null, lte?: string|null} $createdAt
+     * @param CreatedAtShape $createdAt
      */
     public static function with(
         ?string $callLegID = null,
@@ -154,7 +156,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param CreatedAt|array{gte?: string|null, lte?: string|null} $createdAt
+     * @param CreatedAtShape $createdAt
      */
     public function withCreatedAt(CreatedAt|array $createdAt): self
     {

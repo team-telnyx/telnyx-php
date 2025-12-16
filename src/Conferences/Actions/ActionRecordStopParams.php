@@ -20,10 +20,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Conferences\ActionsService::recordStop()
  *
  * @phpstan-type ActionRecordStopParamsShape = array{
- *   clientState?: string,
- *   commandID?: string,
- *   recordingID?: string,
- *   region?: Region|value-of<Region>,
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   recordingID?: string|null,
+ *   region?: null|Region|value-of<Region>,
  * }
  */
 final class ActionRecordStopParams implements BaseModel

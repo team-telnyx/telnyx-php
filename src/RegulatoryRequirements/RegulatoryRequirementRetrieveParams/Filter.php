@@ -14,10 +14,10 @@ use Telnyx\RegulatoryRequirements\RegulatoryRequirementRetrieveParams\Filter\Pho
  * Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[requirement_group_id], filter[country_code], filter[phone_number_type], filter[action].
  *
  * @phpstan-type FilterShape = array{
- *   action?: value-of<Action>|null,
+ *   action?: null|Action|value-of<Action>,
  *   countryCode?: string|null,
  *   phoneNumber?: string|null,
- *   phoneNumberType?: value-of<PhoneNumberType>|null,
+ *   phoneNumberType?: null|PhoneNumberType|value-of<PhoneNumberType>,
  *   requirementGroupID?: string|null,
  * }
  */

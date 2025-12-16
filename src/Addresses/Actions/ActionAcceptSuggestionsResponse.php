@@ -5,13 +5,16 @@ declare(strict_types=1);
 namespace Telnyx\Addresses\Actions;
 
 use Telnyx\Addresses\Actions\ActionAcceptSuggestionsResponse\Data;
-use Telnyx\Addresses\Actions\ActionAcceptSuggestionsResponse\Data\RecordType;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ActionAcceptSuggestionsResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\Addresses\Actions\ActionAcceptSuggestionsResponse\Data
+ *
+ * @phpstan-type ActionAcceptSuggestionsResponseShape = array{
+ *   data?: null|Data|DataShape
+ * }
  */
 final class ActionAcceptSuggestionsResponse implements BaseModel
 {
@@ -31,9 +34,7 @@ final class ActionAcceptSuggestionsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   id?: string|null, accepted?: bool|null, recordType?: value-of<RecordType>|null
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -45,9 +46,7 @@ final class ActionAcceptSuggestionsResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   id?: string|null, accepted?: bool|null, recordType?: value-of<RecordType>|null
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

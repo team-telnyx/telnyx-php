@@ -8,15 +8,15 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberOrders\NumberOrderWithPhoneNumbers;
-use Telnyx\NumberOrders\NumberOrderWithPhoneNumbers\Status;
-use Telnyx\NumberOrders\PhoneNumber;
 
 /**
+ * @phpstan-import-type NumberOrderWithPhoneNumbersShape from \Telnyx\NumberOrders\NumberOrderWithPhoneNumbers
+ *
  * @phpstan-type DataShape = array{
  *   id: string,
  *   eventType: string,
  *   occurredAt: \DateTimeInterface,
- *   payload: NumberOrderWithPhoneNumbers,
+ *   payload: NumberOrderWithPhoneNumbers|NumberOrderWithPhoneNumbersShape,
  *   recordType: string,
  * }
  */
@@ -83,21 +83,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param NumberOrderWithPhoneNumbers|array{
-     *   id?: string|null,
-     *   billingGroupID?: string|null,
-     *   connectionID?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   customerReference?: string|null,
-     *   messagingProfileID?: string|null,
-     *   phoneNumbers?: list<PhoneNumber>|null,
-     *   phoneNumbersCount?: int|null,
-     *   recordType?: string|null,
-     *   requirementsMet?: bool|null,
-     *   status?: value-of<Status>|null,
-     *   subNumberOrdersIDs?: list<string>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $payload
+     * @param NumberOrderWithPhoneNumbersShape $payload
      */
     public static function with(
         string $id,
@@ -151,21 +137,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param NumberOrderWithPhoneNumbers|array{
-     *   id?: string|null,
-     *   billingGroupID?: string|null,
-     *   connectionID?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   customerReference?: string|null,
-     *   messagingProfileID?: string|null,
-     *   phoneNumbers?: list<PhoneNumber>|null,
-     *   phoneNumbersCount?: int|null,
-     *   recordType?: string|null,
-     *   requirementsMet?: bool|null,
-     *   status?: value-of<Status>|null,
-     *   subNumberOrdersIDs?: list<string>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $payload
+     * @param NumberOrderWithPhoneNumbersShape $payload
      */
     public function withPayload(
         NumberOrderWithPhoneNumbers|array $payload

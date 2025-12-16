@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\PortabilityChecksService::run()
  *
  * @phpstan-type PortabilityCheckRunParamsShape = array{
- *   phoneNumbers?: list<string>
+ *   phoneNumbers?: list<string>|null
  * }
  */
 final class PortabilityCheckRunParams implements BaseModel

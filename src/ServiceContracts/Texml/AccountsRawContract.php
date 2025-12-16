@@ -18,7 +18,7 @@ interface AccountsRawContract
      * @api
      *
      * @param string $accountSid the id of the account the resource belongs to
-     * @param array<mixed>|AccountRetrieveRecordingsJsonParams $params
+     * @param array<string,mixed>|AccountRetrieveRecordingsJsonParams $params
      *
      * @return BaseResponse<AccountGetRecordingsJsonResponse>
      *
@@ -34,7 +34,7 @@ interface AccountsRawContract
      * @api
      *
      * @param string $accountSid the id of the account the resource belongs to
-     * @param array<mixed>|AccountRetrieveTranscriptionsJsonParams $params
+     * @param array<string,mixed>|AccountRetrieveTranscriptionsJsonParams $params
      *
      * @return BaseResponse<AccountGetTranscriptionsJsonResponse>
      *

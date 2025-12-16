@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ElevenLabsVoiceSettingsShape = array{
- *   type: value-of<Type>, apiKeyRef?: string|null
+ *   type: Type|value-of<Type>, apiKeyRef?: string|null
  * }
  */
 final class ElevenLabsVoiceSettings implements BaseModel

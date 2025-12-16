@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace Telnyx\BundlePricing\UserBundles;
 
-use Telnyx\BundlePricing\BillingBundles\BillingBundleSummary;
 use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedResponse\Data;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type UserBundleListUnusedResponseShape = array{data: list<Data>}
+ * @phpstan-import-type DataShape from \Telnyx\BundlePricing\UserBundles\UserBundleListUnusedResponse\Data
+ *
+ * @phpstan-type UserBundleListUnusedResponseShape = array{data: list<DataShape>}
  */
 final class UserBundleListUnusedResponse implements BaseModel
 {
@@ -46,9 +47,7 @@ final class UserBundleListUnusedResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   billingBundle: BillingBundleSummary, userBundleIDs: list<string>
-     * }> $data
+     * @param list<DataShape> $data
      */
     public static function with(array $data): self
     {
@@ -60,9 +59,7 @@ final class UserBundleListUnusedResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   billingBundle: BillingBundleSummary, userBundleIDs: list<string>
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {

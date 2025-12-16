@@ -15,7 +15,7 @@ use Telnyx\ManagedAccounts\ManagedAccountBalance\RecordType;
  *   balance?: string|null,
  *   creditLimit?: string|null,
  *   currency?: string|null,
- *   recordType?: value-of<RecordType>|null,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  * }
  */
 final class ManagedAccountBalance implements BaseModel

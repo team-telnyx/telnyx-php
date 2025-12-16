@@ -19,7 +19,7 @@ use Telnyx\VerifiedNumbers\VerifiedNumberCreateParams\VerificationMethod;
  * @phpstan-type VerifiedNumberCreateParamsShape = array{
  *   phoneNumber: string,
  *   verificationMethod: VerificationMethod|value-of<VerificationMethod>,
- *   extension?: string,
+ *   extension?: string|null,
  * }
  */
 final class VerifiedNumberCreateParams implements BaseModel

@@ -7,14 +7,14 @@ namespace Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MdrDetailReportResponse\Direction;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MdrDetailReportResponse\RecordType;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MdrDetailReportResponse\Status;
 
 /**
+ * @phpstan-import-type MdrDetailReportResponseShape from \Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MdrDetailReportResponse
+ * @phpstan-import-type BatchCsvPaginationMetaShape from \Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\BatchCsvPaginationMeta
+ *
  * @phpstan-type MessagingListResponseShape = array{
- *   data?: list<MdrDetailReportResponse>|null, meta?: BatchCsvPaginationMeta|null
+ *   data?: list<MdrDetailReportResponseShape>|null,
+ *   meta?: null|BatchCsvPaginationMeta|BatchCsvPaginationMetaShape,
  * }
  */
 final class MessagingListResponse implements BaseModel
@@ -39,25 +39,8 @@ final class MessagingListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<MdrDetailReportResponse|array{
-     *   id?: string|null,
-     *   connections?: list<int>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   directions?: list<value-of<Direction>>|null,
-     *   endDate?: \DateTimeInterface|null,
-     *   filters?: list<Filter>|null,
-     *   profiles?: list<string>|null,
-     *   recordType?: string|null,
-     *   recordTypes?: list<value-of<RecordType>>|null,
-     *   reportName?: string|null,
-     *   reportURL?: string|null,
-     *   startDate?: \DateTimeInterface|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }> $data
-     * @param BatchCsvPaginationMeta|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param list<MdrDetailReportResponseShape> $data
+     * @param BatchCsvPaginationMetaShape $meta
      */
     public static function with(
         ?array $data = null,
@@ -72,22 +55,7 @@ final class MessagingListResponse implements BaseModel
     }
 
     /**
-     * @param list<MdrDetailReportResponse|array{
-     *   id?: string|null,
-     *   connections?: list<int>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   directions?: list<value-of<Direction>>|null,
-     *   endDate?: \DateTimeInterface|null,
-     *   filters?: list<Filter>|null,
-     *   profiles?: list<string>|null,
-     *   recordType?: string|null,
-     *   recordTypes?: list<value-of<RecordType>>|null,
-     *   reportName?: string|null,
-     *   reportURL?: string|null,
-     *   startDate?: \DateTimeInterface|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }> $data
+     * @param list<MdrDetailReportResponseShape> $data
      */
     public function withData(array $data): self
     {
@@ -98,9 +66,7 @@ final class MessagingListResponse implements BaseModel
     }
 
     /**
-     * @param BatchCsvPaginationMeta|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param BatchCsvPaginationMetaShape $meta
      */
     public function withMeta(BatchCsvPaginationMeta|array $meta): self
     {

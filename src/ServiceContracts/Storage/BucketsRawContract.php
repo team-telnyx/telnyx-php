@@ -16,7 +16,7 @@ interface BucketsRawContract
      * @api
      *
      * @param string $objectName Path param: The name of the object
-     * @param array<mixed>|BucketCreatePresignedURLParams $params
+     * @param array<string,mixed>|BucketCreatePresignedURLParams $params
      *
      * @return BaseResponse<BucketNewPresignedURLResponse>
      *

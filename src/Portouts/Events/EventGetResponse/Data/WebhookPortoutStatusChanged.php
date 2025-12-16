@@ -10,17 +10,18 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutStatusChanged\AvailableNotificationMethod;
 use Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutStatusChanged\EventType;
 use Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutStatusChanged\Payload;
-use Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutStatusChanged\Payload\Status;
 use Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutStatusChanged\PayloadStatus;
 
 /**
+ * @phpstan-import-type PayloadShape from \Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutStatusChanged\Payload
+ *
  * @phpstan-type WebhookPortoutStatusChangedShape = array{
  *   id?: string|null,
- *   availableNotificationMethods?: list<value-of<AvailableNotificationMethod>>|null,
+ *   availableNotificationMethods?: list<AvailableNotificationMethod|value-of<AvailableNotificationMethod>>|null,
  *   createdAt?: \DateTimeInterface|null,
- *   eventType?: value-of<EventType>|null,
- *   payload?: Payload|null,
- *   payloadStatus?: value-of<PayloadStatus>|null,
+ *   eventType?: null|EventType|value-of<EventType>,
+ *   payload?: null|Payload|PayloadShape,
+ *   payloadStatus?: null|PayloadStatus|value-of<PayloadStatus>,
  *   portoutID?: string|null,
  *   recordType?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
@@ -106,17 +107,7 @@ final class WebhookPortoutStatusChanged implements BaseModel
      *
      * @param list<AvailableNotificationMethod|value-of<AvailableNotificationMethod>> $availableNotificationMethods
      * @param EventType|value-of<EventType> $eventType
-     * @param Payload|array{
-     *   id?: string|null,
-     *   attemptedPin?: string|null,
-     *   carrierName?: string|null,
-     *   phoneNumbers?: list<string>|null,
-     *   rejectionReason?: string|null,
-     *   spid?: string|null,
-     *   status?: value-of<Status>|null,
-     *   subscriberName?: string|null,
-     *   userID?: string|null,
-     * } $payload
+     * @param PayloadShape $payload
      * @param PayloadStatus|value-of<PayloadStatus> $payloadStatus
      */
     public static function with(
@@ -197,17 +188,7 @@ final class WebhookPortoutStatusChanged implements BaseModel
     /**
      * The webhook payload for the portout.status_changed event.
      *
-     * @param Payload|array{
-     *   id?: string|null,
-     *   attemptedPin?: string|null,
-     *   carrierName?: string|null,
-     *   phoneNumbers?: list<string>|null,
-     *   rejectionReason?: string|null,
-     *   spid?: string|null,
-     *   status?: value-of<Status>|null,
-     *   subscriberName?: string|null,
-     *   userID?: string|null,
-     * } $payload
+     * @param PayloadShape $payload
      */
     public function withPayload(Payload|array $payload): self
     {

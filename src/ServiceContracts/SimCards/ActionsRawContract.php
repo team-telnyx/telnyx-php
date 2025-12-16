@@ -41,7 +41,7 @@ interface ActionsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ActionListParams $params
+     * @param array<string,mixed>|ActionListParams $params
      *
      * @return BaseResponse<DefaultPagination<SimCardAction>>
      *
@@ -55,7 +55,7 @@ interface ActionsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ActionBulkSetPublicIPsParams $params
+     * @param array<string,mixed>|ActionBulkSetPublicIPsParams $params
      *
      * @return BaseResponse<ActionBulkSetPublicIPsResponse>
      *
@@ -112,7 +112,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $id identifies the SIM
-     * @param array<mixed>|ActionSetPublicIPParams $params
+     * @param array<string,mixed>|ActionSetPublicIPParams $params
      *
      * @return BaseResponse<ActionSetPublicIPResponse>
      *
@@ -141,7 +141,7 @@ interface ActionsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ActionValidateRegistrationCodesParams $params
+     * @param array<string,mixed>|ActionValidateRegistrationCodesParams $params
      *
      * @return BaseResponse<ActionValidateRegistrationCodesResponse>
      *

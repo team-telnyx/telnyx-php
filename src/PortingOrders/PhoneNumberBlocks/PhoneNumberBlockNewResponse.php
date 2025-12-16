@@ -7,13 +7,12 @@ namespace Telnyx\PortingOrders\PhoneNumberBlocks;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock\ActivationRange;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock\PhoneNumberRange;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock\PhoneNumberType;
 
 /**
+ * @phpstan-import-type PortingPhoneNumberBlockShape from \Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock
+ *
  * @phpstan-type PhoneNumberBlockNewResponseShape = array{
- *   data?: PortingPhoneNumberBlock|null
+ *   data?: null|PortingPhoneNumberBlock|PortingPhoneNumberBlockShape
  * }
  */
 final class PhoneNumberBlockNewResponse implements BaseModel
@@ -34,16 +33,7 @@ final class PhoneNumberBlockNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortingPhoneNumberBlock|array{
-     *   id?: string|null,
-     *   activationRanges?: list<ActivationRange>|null,
-     *   countryCode?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   phoneNumberRange?: PhoneNumberRange|null,
-     *   phoneNumberType?: value-of<PhoneNumberType>|null,
-     *   recordType?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param PortingPhoneNumberBlockShape $data
      */
     public static function with(
         PortingPhoneNumberBlock|array|null $data = null
@@ -56,16 +46,7 @@ final class PhoneNumberBlockNewResponse implements BaseModel
     }
 
     /**
-     * @param PortingPhoneNumberBlock|array{
-     *   id?: string|null,
-     *   activationRanges?: list<ActivationRange>|null,
-     *   countryCode?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   phoneNumberRange?: PhoneNumberRange|null,
-     *   phoneNumberType?: value-of<PhoneNumberType>|null,
-     *   recordType?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param PortingPhoneNumberBlockShape $data
      */
     public function withData(PortingPhoneNumberBlock|array $data): self
     {

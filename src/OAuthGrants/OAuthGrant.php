@@ -15,7 +15,7 @@ use Telnyx\OAuthGrants\OAuthGrant\RecordType;
  *   id: string,
  *   clientID: string,
  *   createdAt: \DateTimeInterface,
- *   recordType: value-of<RecordType>,
+ *   recordType: RecordType|value-of<RecordType>,
  *   scopes: list<string>,
  *   lastUsedAt?: \DateTimeInterface|null,
  * }

@@ -10,8 +10,12 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Storage\Buckets\Usage\UsageGetBucketUsageResponse\Data;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\Storage\Buckets\Usage\UsageGetBucketUsageResponse\Data
+ * @phpstan-import-type PaginationMetaSimpleShape from \Telnyx\Storage\Buckets\Usage\PaginationMetaSimple
+ *
  * @phpstan-type UsageGetBucketUsageResponseShape = array{
- *   data?: list<Data>|null, meta?: PaginationMetaSimple|null
+ *   data?: list<DataShape>|null,
+ *   meta?: null|PaginationMetaSimple|PaginationMetaSimpleShape,
  * }
  */
 final class UsageGetBucketUsageResponse implements BaseModel
@@ -36,15 +40,8 @@ final class UsageGetBucketUsageResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   numObjects?: int|null,
-     *   size?: int|null,
-     *   sizeKB?: int|null,
-     *   timestamp?: \DateTimeInterface|null,
-     * }> $data
-     * @param PaginationMetaSimple|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param list<DataShape> $data
+     * @param PaginationMetaSimpleShape $meta
      */
     public static function with(
         ?array $data = null,
@@ -59,12 +56,7 @@ final class UsageGetBucketUsageResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   numObjects?: int|null,
-     *   size?: int|null,
-     *   sizeKB?: int|null,
-     *   timestamp?: \DateTimeInterface|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {
@@ -75,9 +67,7 @@ final class UsageGetBucketUsageResponse implements BaseModel
     }
 
     /**
-     * @param PaginationMetaSimple|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param PaginationMetaSimpleShape $meta
      */
     public function withMeta(PaginationMetaSimple|array $meta): self
     {

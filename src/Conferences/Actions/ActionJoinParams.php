@@ -25,19 +25,19 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type ActionJoinParamsShape = array{
  *   callControlID: string,
- *   beepEnabled?: BeepEnabled|value-of<BeepEnabled>,
- *   clientState?: string,
- *   commandID?: string,
- *   endConferenceOnExit?: bool,
- *   hold?: bool,
- *   holdAudioURL?: string,
- *   holdMediaName?: string,
- *   mute?: bool,
- *   region?: Region|value-of<Region>,
- *   softEndConferenceOnExit?: bool,
- *   startConferenceOnEnter?: bool,
- *   supervisorRole?: SupervisorRole|value-of<SupervisorRole>,
- *   whisperCallControlIDs?: list<string>,
+ *   beepEnabled?: null|BeepEnabled|value-of<BeepEnabled>,
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   endConferenceOnExit?: bool|null,
+ *   hold?: bool|null,
+ *   holdAudioURL?: string|null,
+ *   holdMediaName?: string|null,
+ *   mute?: bool|null,
+ *   region?: null|Region|value-of<Region>,
+ *   softEndConferenceOnExit?: bool|null,
+ *   startConferenceOnEnter?: bool|null,
+ *   supervisorRole?: null|SupervisorRole|value-of<SupervisorRole>,
+ *   whisperCallControlIDs?: list<string>|null,
  * }
  */
 final class ActionJoinParams implements BaseModel

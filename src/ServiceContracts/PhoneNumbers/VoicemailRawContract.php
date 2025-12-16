@@ -19,7 +19,7 @@ interface VoicemailRawContract
      * @api
      *
      * @param string $phoneNumberID the ID of the phone number
-     * @param array<mixed>|VoicemailCreateParams $params
+     * @param array<string,mixed>|VoicemailCreateParams $params
      *
      * @return BaseResponse<VoicemailNewResponse>
      *
@@ -49,7 +49,7 @@ interface VoicemailRawContract
      * @api
      *
      * @param string $phoneNumberID the ID of the phone number
-     * @param array<mixed>|VoicemailUpdateParams $params
+     * @param array<string,mixed>|VoicemailUpdateParams $params
      *
      * @return BaseResponse<VoicemailUpdateResponse>
      *

@@ -7,12 +7,12 @@ namespace Telnyx\LedgerBillingGroupReports;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReport\RecordType;
-use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReport\Status;
 
 /**
+ * @phpstan-import-type LedgerBillingGroupReportShape from \Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReport
+ *
  * @phpstan-type LedgerBillingGroupReportGetResponseShape = array{
- *   data?: LedgerBillingGroupReport|null
+ *   data?: null|LedgerBillingGroupReport|LedgerBillingGroupReportShape
  * }
  */
 final class LedgerBillingGroupReportGetResponse implements BaseModel
@@ -33,15 +33,7 @@ final class LedgerBillingGroupReportGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param LedgerBillingGroupReport|array{
-     *   id?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   organizationID?: string|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   reportURL?: string|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param LedgerBillingGroupReportShape $data
      */
     public static function with(
         LedgerBillingGroupReport|array|null $data = null
@@ -54,15 +46,7 @@ final class LedgerBillingGroupReportGetResponse implements BaseModel
     }
 
     /**
-     * @param LedgerBillingGroupReport|array{
-     *   id?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   organizationID?: string|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   reportURL?: string|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param LedgerBillingGroupReportShape $data
      */
     public function withData(LedgerBillingGroupReport|array $data): self
     {

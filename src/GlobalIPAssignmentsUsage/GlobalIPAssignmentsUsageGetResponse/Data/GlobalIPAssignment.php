@@ -10,9 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse\Data\GlobalIPAssignment\WireguardPeer;
 
 /**
+ * @phpstan-import-type WireguardPeerShape from \Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse\Data\GlobalIPAssignment\WireguardPeer
+ *
  * @phpstan-type GlobalIPAssignmentShape = array{
  *   id?: string|null,
- *   wireguardPeer?: WireguardPeer|null,
+ *   wireguardPeer?: null|WireguardPeer|WireguardPeerShape,
  *   wireguardPeerID?: string|null,
  * }
  */
@@ -46,9 +48,7 @@ final class GlobalIPAssignment implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param WireguardPeer|array{
-     *   ipAddress?: string|null, name?: string|null
-     * } $wireguardPeer
+     * @param WireguardPeerShape $wireguardPeer
      */
     public static function with(
         ?string $id = null,
@@ -76,9 +76,7 @@ final class GlobalIPAssignment implements BaseModel
     }
 
     /**
-     * @param WireguardPeer|array{
-     *   ipAddress?: string|null, name?: string|null
-     * } $wireguardPeer
+     * @param WireguardPeerShape $wireguardPeer
      */
     public function withWireguardPeer(WireguardPeer|array $wireguardPeer): self
     {

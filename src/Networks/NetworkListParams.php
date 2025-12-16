@@ -16,9 +16,11 @@ use Telnyx\Networks\NetworkListParams\Page;
  *
  * @see Telnyx\Services\NetworksService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\Networks\NetworkListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Networks\NetworkListParams\Page
+ *
  * @phpstan-type NetworkListParamsShape = array{
- *   filter?: Filter|array{name?: string|null},
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   filter?: FilterShape|null, page?: PageShape|null
  * }
  */
 final class NetworkListParams implements BaseModel
@@ -49,8 +51,8 @@ final class NetworkListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{name?: string|null} $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -67,7 +69,7 @@ final class NetworkListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[name].
      *
-     * @param Filter|array{name?: string|null} $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -80,7 +82,7 @@ final class NetworkListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

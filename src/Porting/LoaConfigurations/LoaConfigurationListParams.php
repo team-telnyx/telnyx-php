@@ -15,9 +15,9 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationListParams\Page;
  *
  * @see Telnyx\Services\Porting\LoaConfigurationsService::list()
  *
- * @phpstan-type LoaConfigurationListParamsShape = array{
- *   page?: Page|array{number?: int|null, size?: int|null}
- * }
+ * @phpstan-import-type PageShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationListParams\Page
+ *
+ * @phpstan-type LoaConfigurationListParamsShape = array{page?: PageShape|null}
  */
 final class LoaConfigurationListParams implements BaseModel
 {
@@ -41,7 +41,7 @@ final class LoaConfigurationListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public static function with(Page|array|null $page = null): self
     {
@@ -55,7 +55,7 @@ final class LoaConfigurationListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

@@ -9,12 +9,14 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DocReqsRequirementType;
-use Telnyx\DocReqsRequirementType\AcceptanceCriteria;
-use Telnyx\DocReqsRequirementType\Type;
 
 /**
+ * @phpstan-import-type DocReqsRequirementTypeShape from \Telnyx\DocReqsRequirementType
+ * @phpstan-import-type PaginationMetaShape from \Telnyx\AuthenticationProviders\PaginationMeta
+ *
  * @phpstan-type RequirementTypeListResponseShape = array{
- *   data?: list<DocReqsRequirementType>|null, meta?: PaginationMeta|null
+ *   data?: list<DocReqsRequirementTypeShape>|null,
+ *   meta?: null|PaginationMeta|PaginationMetaShape,
  * }
  */
 final class RequirementTypeListResponse implements BaseModel
@@ -39,20 +41,8 @@ final class RequirementTypeListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DocReqsRequirementType|array{
-     *   id?: string|null,
-     *   acceptanceCriteria?: AcceptanceCriteria|null,
-     *   createdAt?: string|null,
-     *   description?: string|null,
-     *   example?: string|null,
-     *   name?: string|null,
-     *   recordType?: string|null,
-     *   type?: value-of<Type>|null,
-     *   updatedAt?: string|null,
-     * }> $data
-     * @param PaginationMeta|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param list<DocReqsRequirementTypeShape> $data
+     * @param PaginationMetaShape $meta
      */
     public static function with(
         ?array $data = null,
@@ -67,17 +57,7 @@ final class RequirementTypeListResponse implements BaseModel
     }
 
     /**
-     * @param list<DocReqsRequirementType|array{
-     *   id?: string|null,
-     *   acceptanceCriteria?: AcceptanceCriteria|null,
-     *   createdAt?: string|null,
-     *   description?: string|null,
-     *   example?: string|null,
-     *   name?: string|null,
-     *   recordType?: string|null,
-     *   type?: value-of<Type>|null,
-     *   updatedAt?: string|null,
-     * }> $data
+     * @param list<DocReqsRequirementTypeShape> $data
      */
     public function withData(array $data): self
     {
@@ -88,9 +68,7 @@ final class RequirementTypeListResponse implements BaseModel
     }
 
     /**
-     * @param PaginationMeta|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param PaginationMetaShape $meta
      */
     public function withMeta(PaginationMeta|array $meta): self
     {

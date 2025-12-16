@@ -9,8 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Requirements\RequirementListParams\Filter;
-use Telnyx\Requirements\RequirementListParams\Filter\Action;
-use Telnyx\Requirements\RequirementListParams\Filter\PhoneNumberType;
 use Telnyx\Requirements\RequirementListParams\Page;
 use Telnyx\Requirements\RequirementListParams\Sort;
 
@@ -19,14 +17,13 @@ use Telnyx\Requirements\RequirementListParams\Sort;
  *
  * @see Telnyx\Services\RequirementsService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\Requirements\RequirementListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Requirements\RequirementListParams\Page
+ *
  * @phpstan-type RequirementListParamsShape = array{
- *   filter?: Filter|array{
- *     action?: value-of<Action>|null,
- *     countryCode?: string|null,
- *     phoneNumberType?: value-of<PhoneNumberType>|null,
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
- *   sort?: list<Sort|value-of<Sort>>,
+ *   filter?: FilterShape|null,
+ *   page?: PageShape|null,
+ *   sort?: list<Sort|value-of<Sort>>|null,
  * }
  */
 final class RequirementListParams implements BaseModel
@@ -65,12 +62,8 @@ final class RequirementListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   action?: value-of<Action>|null,
-     *   countryCode?: string|null,
-     *   phoneNumberType?: value-of<PhoneNumberType>|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      * @param list<Sort|value-of<Sort>> $sort
      */
     public static function with(
@@ -90,11 +83,7 @@ final class RequirementListParams implements BaseModel
     /**
      * Consolidated filter parameter for requirements (deepObject style). Originally: filter[country_code], filter[phone_number_type], filter[action].
      *
-     * @param Filter|array{
-     *   action?: value-of<Action>|null,
-     *   countryCode?: string|null,
-     *   phoneNumberType?: value-of<PhoneNumberType>|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -107,7 +96,7 @@ final class RequirementListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

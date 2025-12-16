@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\AssistantsService::chat()
  *
  * @phpstan-type AssistantChatParamsShape = array{
- *   content: string, conversationID: string, name?: string
+ *   content: string, conversationID: string, name?: string|null
  * }
  */
 final class AssistantChatParams implements BaseModel

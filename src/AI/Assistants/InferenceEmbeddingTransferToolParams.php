@@ -12,10 +12,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type TargetShape from \Telnyx\AI\Assistants\InferenceEmbeddingTransferToolParams\Target
+ * @phpstan-import-type CustomHeaderShape from \Telnyx\AI\Assistants\InferenceEmbeddingTransferToolParams\CustomHeader
+ *
  * @phpstan-type InferenceEmbeddingTransferToolParamsShape = array{
  *   from: string,
- *   targets: list<Target>,
- *   customHeaders?: list<CustomHeader>|null,
+ *   targets: list<TargetShape>,
+ *   customHeaders?: list<CustomHeaderShape>|null,
  *   warmTransferInstructions?: string|null,
  * }
  */
@@ -76,10 +79,8 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Target|array{name?: string|null, to?: string|null}> $targets
-     * @param list<CustomHeader|array{
-     *   name?: string|null, value?: string|null
-     * }> $customHeaders
+     * @param list<TargetShape> $targets
+     * @param list<CustomHeaderShape> $customHeaders
      */
     public static function with(
         string $from,
@@ -112,7 +113,7 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
     /**
      * The different possible targets of the transfer. The assistant will be able to choose one of the targets to transfer the call to.
      *
-     * @param list<Target|array{name?: string|null, to?: string|null}> $targets
+     * @param list<TargetShape> $targets
      */
     public function withTargets(array $targets): self
     {
@@ -125,9 +126,7 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
     /**
      * Custom headers to be added to the SIP INVITE for the transfer command.
      *
-     * @param list<CustomHeader|array{
-     *   name?: string|null, value?: string|null
-     * }> $customHeaders
+     * @param list<CustomHeaderShape> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {

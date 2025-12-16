@@ -8,21 +8,22 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse\Data\Settings;
-use Telnyx\OtaUpdates\OtaUpdateGetResponse\Data\Settings\MobileNetworkOperatorsPreference;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse\Data\Status;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse\Data\Type;
 
 /**
  * This object represents an Over the Air (OTA) update request. It allows tracking the current status of a operation that apply settings in a particular SIM card. <br/><br/>.
  *
+ * @phpstan-import-type SettingsShape from \Telnyx\OtaUpdates\OtaUpdateGetResponse\Data\Settings
+ *
  * @phpstan-type DataShape = array{
  *   id?: string|null,
  *   createdAt?: string|null,
  *   recordType?: string|null,
- *   settings?: Settings|null,
+ *   settings?: null|Settings|SettingsShape,
  *   simCardID?: string|null,
- *   status?: value-of<Status>|null,
- *   type?: value-of<Type>|null,
+ *   status?: null|Status|value-of<Status>,
+ *   type?: null|Type|value-of<Type>,
  *   updatedAt?: string|null,
  * }
  */
@@ -86,9 +87,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Settings|array{
-     *   mobileNetworkOperatorsPreferences?: list<MobileNetworkOperatorsPreference>|null,
-     * } $settings
+     * @param SettingsShape $settings
      * @param Status|value-of<Status> $status
      * @param Type|value-of<Type> $type
      */
@@ -149,9 +148,7 @@ final class Data implements BaseModel
     /**
      * A JSON object representation of the operation. The information present here will relate directly to the source of the OTA request.
      *
-     * @param Settings|array{
-     *   mobileNetworkOperatorsPreferences?: list<MobileNetworkOperatorsPreference>|null,
-     * } $settings
+     * @param SettingsShape $settings
      */
     public function withSettings(Settings|array $settings): self
     {

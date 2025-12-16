@@ -8,7 +8,6 @@ use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\Language;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\PayloadType;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\ServiceLevel;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings;
-use Telnyx\Calls\Actions\ElevenLabsVoiceSettings\Type;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -27,30 +26,25 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Calls\ActionsService::gatherUsingSpeak()
  *
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings
+ *
  * @phpstan-type ActionGatherUsingSpeakParamsShape = array{
  *   payload: string,
  *   voice: string,
- *   clientState?: string,
- *   commandID?: string,
- *   interDigitTimeoutMillis?: int,
- *   invalidPayload?: string,
- *   language?: Language|value-of<Language>,
- *   maximumDigits?: int,
- *   maximumTries?: int,
- *   minimumDigits?: int,
- *   payloadType?: PayloadType|value-of<PayloadType>,
- *   serviceLevel?: ServiceLevel|value-of<ServiceLevel>,
- *   terminatingDigit?: string,
- *   timeoutMillis?: int,
- *   validDigits?: string,
- *   voiceSettings?: ElevenLabsVoiceSettings|array{
- *     type: value-of<Type>, apiKeyRef?: string|null
- *   }|TelnyxVoiceSettings|array{
- *     type: value-of<\Telnyx\Calls\Actions\TelnyxVoiceSettings\Type>,
- *     voiceSpeed?: float|null,
- *   }|AwsVoiceSettings|array{
- *     type: value-of<\Telnyx\Calls\Actions\AwsVoiceSettings\Type>
- *   },
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   interDigitTimeoutMillis?: int|null,
+ *   invalidPayload?: string|null,
+ *   language?: null|Language|value-of<Language>,
+ *   maximumDigits?: int|null,
+ *   maximumTries?: int|null,
+ *   minimumDigits?: int|null,
+ *   payloadType?: null|PayloadType|value-of<PayloadType>,
+ *   serviceLevel?: null|ServiceLevel|value-of<ServiceLevel>,
+ *   terminatingDigit?: string|null,
+ *   timeoutMillis?: int|null,
+ *   validDigits?: string|null,
+ *   voiceSettings?: VoiceSettingsShape|null,
  * }
  */
 final class ActionGatherUsingSpeakParams implements BaseModel
@@ -198,14 +192,7 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      * @param Language|value-of<Language> $language
      * @param PayloadType|value-of<PayloadType> $payloadType
      * @param ServiceLevel|value-of<ServiceLevel> $serviceLevel
-     * @param ElevenLabsVoiceSettings|array{
-     *   type: value-of<Type>, apiKeyRef?: string|null
-     * }|TelnyxVoiceSettings|array{
-     *   type: value-of<TelnyxVoiceSettings\Type>,
-     *   voiceSpeed?: float|null,
-     * }|AwsVoiceSettings|array{
-     *   type: value-of<AwsVoiceSettings\Type>
-     * } $voiceSettings
+     * @param VoiceSettingsShape $voiceSettings
      */
     public static function with(
         string $payload,
@@ -433,14 +420,7 @@ final class ActionGatherUsingSpeakParams implements BaseModel
     /**
      * The settings associated with the voice selected.
      *
-     * @param ElevenLabsVoiceSettings|array{
-     *   type: value-of<Type>, apiKeyRef?: string|null
-     * }|TelnyxVoiceSettings|array{
-     *   type: value-of<TelnyxVoiceSettings\Type>,
-     *   voiceSpeed?: float|null,
-     * }|AwsVoiceSettings|array{
-     *   type: value-of<AwsVoiceSettings\Type>
-     * } $voiceSettings
+     * @param VoiceSettingsShape $voiceSettings
      */
     public function withVoiceSettings(
         ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings $voiceSettings,

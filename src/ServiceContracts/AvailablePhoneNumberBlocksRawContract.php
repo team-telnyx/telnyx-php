@@ -15,7 +15,7 @@ interface AvailablePhoneNumberBlocksRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AvailablePhoneNumberBlockListParams $params
+     * @param array<string,mixed>|AvailablePhoneNumberBlockListParams $params
      *
      * @return BaseResponse<AvailablePhoneNumberBlockListResponse>
      *

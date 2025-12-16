@@ -9,7 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Recordings\RecordingListParams\Filter;
-use Telnyx\Recordings\RecordingListParams\Filter\CreatedAt;
 use Telnyx\Recordings\RecordingListParams\Page;
 
 /**
@@ -17,18 +16,11 @@ use Telnyx\Recordings\RecordingListParams\Page;
  *
  * @see Telnyx\Services\RecordingsService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\Recordings\RecordingListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Recordings\RecordingListParams\Page
+ *
  * @phpstan-type RecordingListParamsShape = array{
- *   filter?: Filter|array{
- *     callLegID?: string|null,
- *     callSessionID?: string|null,
- *     conferenceID?: string|null,
- *     connectionID?: string|null,
- *     createdAt?: CreatedAt|null,
- *     from?: string|null,
- *     sipCallID?: string|null,
- *     to?: string|null,
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   filter?: FilterShape|null, page?: PageShape|null
  * }
  */
 final class RecordingListParams implements BaseModel
@@ -59,17 +51,8 @@ final class RecordingListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   callLegID?: string|null,
-     *   callSessionID?: string|null,
-     *   conferenceID?: string|null,
-     *   connectionID?: string|null,
-     *   createdAt?: CreatedAt|null,
-     *   from?: string|null,
-     *   sipCallID?: string|null,
-     *   to?: string|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -86,16 +69,7 @@ final class RecordingListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[conference_id], filter[created_at][gte], filter[created_at][lte], filter[call_leg_id], filter[call_session_id], filter[from], filter[to], filter[connection_id], filter[sip_call_id].
      *
-     * @param Filter|array{
-     *   callLegID?: string|null,
-     *   callSessionID?: string|null,
-     *   conferenceID?: string|null,
-     *   connectionID?: string|null,
-     *   createdAt?: CreatedAt|null,
-     *   from?: string|null,
-     *   sipCallID?: string|null,
-     *   to?: string|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -108,7 +82,7 @@ final class RecordingListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

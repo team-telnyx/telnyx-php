@@ -5,16 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Calls\Actions;
 
 use Telnyx\AI\Assistants\Assistant;
-use Telnyx\AI\Assistants\Assistant\Tool\BookAppointmentTool;
-use Telnyx\AI\Assistants\Assistant\Tool\CheckAvailabilityTool;
-use Telnyx\AI\Assistants\HangupTool;
-use Telnyx\AI\Assistants\RetrievalTool;
-use Telnyx\AI\Assistants\TransferTool;
-use Telnyx\AI\Assistants\WebhookTool;
 use Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory;
-use Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory\Role;
 use Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings;
-use Telnyx\Calls\Actions\ElevenLabsVoiceSettings\Type;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -35,35 +27,27 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Calls\ActionsService::gatherUsingAI()
  *
+ * @phpstan-import-type AssistantShape from \Telnyx\AI\Assistants\Assistant
+ * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\InterruptionSettings
+ * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory
+ * @phpstan-import-type TranscriptionConfigShape from \Telnyx\Calls\Actions\TranscriptionConfig
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings
+ *
  * @phpstan-type ActionGatherUsingAIParamsShape = array{
  *   parameters: array<string,mixed>,
- *   assistant?: Assistant|array{
- *     instructions?: string|null,
- *     model?: string|null,
- *     openaiAPIKeyRef?: string|null,
- *     tools?: list<BookAppointmentTool|CheckAvailabilityTool|WebhookTool|HangupTool|TransferTool|RetrievalTool>|null,
- *   },
- *   clientState?: string,
- *   commandID?: string,
- *   greeting?: string,
- *   interruptionSettings?: InterruptionSettings|array{enable?: bool|null},
- *   language?: GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage>,
- *   messageHistory?: list<MessageHistory|array{
- *     content?: string|null, role?: value-of<Role>|null
- *   }>,
- *   sendMessageHistoryUpdates?: bool,
- *   sendPartialResults?: bool,
- *   transcription?: TranscriptionConfig|array{model?: string|null},
- *   userResponseTimeoutMs?: int,
- *   voice?: string,
- *   voiceSettings?: ElevenLabsVoiceSettings|array{
- *     type: value-of<Type>, apiKeyRef?: string|null
- *   }|TelnyxVoiceSettings|array{
- *     type: value-of<\Telnyx\Calls\Actions\TelnyxVoiceSettings\Type>,
- *     voiceSpeed?: float|null,
- *   }|AwsVoiceSettings|array{
- *     type: value-of<\Telnyx\Calls\Actions\AwsVoiceSettings\Type>
- *   },
+ *   assistant?: AssistantShape|null,
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   greeting?: string|null,
+ *   interruptionSettings?: InterruptionSettingsShape|null,
+ *   language?: null|GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage>,
+ *   messageHistory?: list<MessageHistoryShape>|null,
+ *   sendMessageHistoryUpdates?: bool|null,
+ *   sendPartialResults?: bool|null,
+ *   transcription?: TranscriptionConfigShape|null,
+ *   userResponseTimeoutMs?: int|null,
+ *   voice?: string|null,
+ *   voiceSettings?: VoiceSettingsShape|null,
  * }
  */
 final class ActionGatherUsingAIParams implements BaseModel
@@ -193,26 +177,12 @@ final class ActionGatherUsingAIParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param array<string,mixed> $parameters
-     * @param Assistant|array{
-     *   instructions?: string|null,
-     *   model?: string|null,
-     *   openaiAPIKeyRef?: string|null,
-     *   tools?: list<BookAppointmentTool|CheckAvailabilityTool|WebhookTool|HangupTool|TransferTool|RetrievalTool>|null,
-     * } $assistant
-     * @param InterruptionSettings|array{enable?: bool|null} $interruptionSettings
+     * @param AssistantShape $assistant
+     * @param InterruptionSettingsShape $interruptionSettings
      * @param GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage> $language
-     * @param list<MessageHistory|array{
-     *   content?: string|null, role?: value-of<Role>|null
-     * }> $messageHistory
-     * @param TranscriptionConfig|array{model?: string|null} $transcription
-     * @param ElevenLabsVoiceSettings|array{
-     *   type: value-of<Type>, apiKeyRef?: string|null
-     * }|TelnyxVoiceSettings|array{
-     *   type: value-of<TelnyxVoiceSettings\Type>,
-     *   voiceSpeed?: float|null,
-     * }|AwsVoiceSettings|array{
-     *   type: value-of<AwsVoiceSettings\Type>
-     * } $voiceSettings
+     * @param list<MessageHistoryShape> $messageHistory
+     * @param TranscriptionConfigShape $transcription
+     * @param VoiceSettingsShape $voiceSettings
      */
     public static function with(
         array $parameters,
@@ -267,12 +237,7 @@ final class ActionGatherUsingAIParams implements BaseModel
     /**
      * Assistant configuration including choice of LLM, custom instructions, and tools.
      *
-     * @param Assistant|array{
-     *   instructions?: string|null,
-     *   model?: string|null,
-     *   openaiAPIKeyRef?: string|null,
-     *   tools?: list<BookAppointmentTool|CheckAvailabilityTool|WebhookTool|HangupTool|TransferTool|RetrievalTool>|null,
-     * } $assistant
+     * @param AssistantShape $assistant
      */
     public function withAssistant(Assistant|array $assistant): self
     {
@@ -318,7 +283,7 @@ final class ActionGatherUsingAIParams implements BaseModel
     /**
      * Settings for handling user interruptions during assistant speech.
      *
-     * @param InterruptionSettings|array{enable?: bool|null} $interruptionSettings
+     * @param InterruptionSettingsShape $interruptionSettings
      */
     public function withInterruptionSettings(
         InterruptionSettings|array $interruptionSettings
@@ -346,9 +311,7 @@ final class ActionGatherUsingAIParams implements BaseModel
     /**
      * The message history you want the voice assistant to be aware of, this can be useful to keep the context of the conversation, or to pass additional information to the voice assistant.
      *
-     * @param list<MessageHistory|array{
-     *   content?: string|null, role?: value-of<Role>|null
-     * }> $messageHistory
+     * @param list<MessageHistoryShape> $messageHistory
      */
     public function withMessageHistory(array $messageHistory): self
     {
@@ -384,7 +347,7 @@ final class ActionGatherUsingAIParams implements BaseModel
     /**
      * The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
      *
-     * @param TranscriptionConfig|array{model?: string|null} $transcription
+     * @param TranscriptionConfigShape $transcription
      */
     public function withTranscription(
         TranscriptionConfig|array $transcription
@@ -426,14 +389,7 @@ final class ActionGatherUsingAIParams implements BaseModel
     /**
      * The settings associated with the voice selected.
      *
-     * @param ElevenLabsVoiceSettings|array{
-     *   type: value-of<Type>, apiKeyRef?: string|null
-     * }|TelnyxVoiceSettings|array{
-     *   type: value-of<TelnyxVoiceSettings\Type>,
-     *   voiceSpeed?: float|null,
-     * }|AwsVoiceSettings|array{
-     *   type: value-of<AwsVoiceSettings\Type>
-     * } $voiceSettings
+     * @param VoiceSettingsShape $voiceSettings
      */
     public function withVoiceSettings(
         ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings $voiceSettings,

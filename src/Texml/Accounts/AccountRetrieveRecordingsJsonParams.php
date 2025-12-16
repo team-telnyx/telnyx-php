@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Texml\AccountsService::retrieveRecordingsJson()
  *
  * @phpstan-type AccountRetrieveRecordingsJsonParamsShape = array{
- *   dateCreated?: \DateTimeInterface, page?: int, pageSize?: int
+ *   dateCreated?: \DateTimeInterface|null, page?: int|null, pageSize?: int|null
  * }
  */
 final class AccountRetrieveRecordingsJsonParams implements BaseModel

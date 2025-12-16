@@ -8,10 +8,13 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefListResponse\Data;
-use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefListResponse\Data\Preference;
 
 /**
- * @phpstan-type AutoRechargePrefListResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefListResponse\Data
+ *
+ * @phpstan-type AutoRechargePrefListResponseShape = array{
+ *   data?: null|Data|DataShape
+ * }
  */
 final class AutoRechargePrefListResponse implements BaseModel
 {
@@ -31,15 +34,7 @@ final class AutoRechargePrefListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   id?: string|null,
-     *   enabled?: bool|null,
-     *   invoiceEnabled?: bool|null,
-     *   preference?: value-of<Preference>|null,
-     *   rechargeAmount?: string|null,
-     *   recordType?: string|null,
-     *   thresholdAmount?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -51,15 +46,7 @@ final class AutoRechargePrefListResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   id?: string|null,
-     *   enabled?: bool|null,
-     *   invoiceEnabled?: bool|null,
-     *   preference?: value-of<Preference>|null,
-     *   rechargeAmount?: string|null,
-     *   recordType?: string|null,
-     *   thresholdAmount?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

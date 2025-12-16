@@ -10,7 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPs\GlobalIPGetResponse\Data;
 
 /**
- * @phpstan-type GlobalIPGetResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\GlobalIPs\GlobalIPGetResponse\Data
+ *
+ * @phpstan-type GlobalIPGetResponseShape = array{data?: null|Data|DataShape}
  */
 final class GlobalIPGetResponse implements BaseModel
 {
@@ -30,16 +32,7 @@ final class GlobalIPGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     *   description?: string|null,
-     *   ipAddress?: string|null,
-     *   name?: string|null,
-     *   ports?: array<string,mixed>|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -51,16 +44,7 @@ final class GlobalIPGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     *   description?: string|null,
-     *   ipAddress?: string|null,
-     *   name?: string|null,
-     *   ports?: array<string,mixed>|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

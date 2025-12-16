@@ -7,12 +7,14 @@ namespace Telnyx\WireguardInterfaces;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Networks\InterfaceStatus;
 use Telnyx\WireguardInterfaces\WireguardInterfaceGetResponse\Data;
-use Telnyx\WireguardInterfaces\WireguardInterfaceGetResponse\Data\Region;
 
 /**
- * @phpstan-type WireguardInterfaceGetResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\WireguardInterfaces\WireguardInterfaceGetResponse\Data
+ *
+ * @phpstan-type WireguardInterfaceGetResponseShape = array{
+ *   data?: null|Data|DataShape
+ * }
  */
 final class WireguardInterfaceGetResponse implements BaseModel
 {
@@ -32,20 +34,7 @@ final class WireguardInterfaceGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     *   name?: string|null,
-     *   networkID?: string|null,
-     *   status?: value-of<InterfaceStatus>|null,
-     *   enableSipTrunking?: bool|null,
-     *   endpoint?: string|null,
-     *   publicKey?: string|null,
-     *   region?: Region|null,
-     *   regionCode?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -57,20 +46,7 @@ final class WireguardInterfaceGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     *   name?: string|null,
-     *   networkID?: string|null,
-     *   status?: value-of<InterfaceStatus>|null,
-     *   enableSipTrunking?: bool|null,
-     *   endpoint?: string|null,
-     *   publicKey?: string|null,
-     *   region?: Region|null,
-     *   regionCode?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

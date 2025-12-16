@@ -16,10 +16,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Conferences\ActionsService::hold()
  *
  * @phpstan-type ActionHoldParamsShape = array{
- *   audioURL?: string,
- *   callControlIDs?: list<string>,
- *   mediaName?: string,
- *   region?: Region|value-of<Region>,
+ *   audioURL?: string|null,
+ *   callControlIDs?: list<string>|null,
+ *   mediaName?: string|null,
+ *   region?: null|Region|value-of<Region>,
  * }
  */
 final class ActionHoldParams implements BaseModel

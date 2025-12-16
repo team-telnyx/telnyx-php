@@ -31,7 +31,7 @@ interface WebhookDeliveriesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|WebhookDeliveryListParams $params
+     * @param array<string,mixed>|WebhookDeliveryListParams $params
      *
      * @return BaseResponse<DefaultPagination<WebhookDeliveryListResponse>>
      *

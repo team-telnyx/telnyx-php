@@ -10,7 +10,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type EmbeddingGetResponseShape = array{data: Data}
+ * @phpstan-import-type DataShape from \Telnyx\AI\Embeddings\EmbeddingGetResponse\Data
+ *
+ * @phpstan-type EmbeddingGetResponseShape = array{data: Data|DataShape}
  */
 final class EmbeddingGetResponse implements BaseModel
 {
@@ -44,13 +46,7 @@ final class EmbeddingGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   createdAt?: string|null,
-     *   finishedAt?: string|null,
-     *   status?: value-of<BackgroundTaskStatus>|null,
-     *   taskID?: string|null,
-     *   taskName?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array $data): self
     {
@@ -62,13 +58,7 @@ final class EmbeddingGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   createdAt?: string|null,
-     *   finishedAt?: string|null,
-     *   status?: value-of<BackgroundTaskStatus>|null,
-     *   taskID?: string|null,
-     *   taskName?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

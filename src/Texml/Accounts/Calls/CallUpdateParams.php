@@ -20,14 +20,14 @@ use Telnyx\Texml\Accounts\Calls\CallUpdateParams\StatusCallbackMethod;
  *
  * @phpstan-type CallUpdateParamsShape = array{
  *   accountSid: string,
- *   fallbackMethod?: FallbackMethod|value-of<FallbackMethod>,
- *   fallbackURL?: string,
- *   method?: Method|value-of<Method>,
- *   status?: string,
- *   statusCallback?: string,
- *   statusCallbackMethod?: StatusCallbackMethod|value-of<StatusCallbackMethod>,
- *   texml?: string,
- *   url?: string,
+ *   fallbackMethod?: null|FallbackMethod|value-of<FallbackMethod>,
+ *   fallbackURL?: string|null,
+ *   method?: null|Method|value-of<Method>,
+ *   status?: string|null,
+ *   statusCallback?: string|null,
+ *   statusCallbackMethod?: null|StatusCallbackMethod|value-of<StatusCallbackMethod>,
+ *   texml?: string|null,
+ *   url?: string|null,
  * }
  */
 final class CallUpdateParams implements BaseModel

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type TelnyxVoiceSettingsShape = array{
- *   type: value-of<Type>, voiceSpeed?: float|null
+ *   type: Type|value-of<Type>, voiceSpeed?: float|null
  * }
  */
 final class TelnyxVoiceSettings implements BaseModel

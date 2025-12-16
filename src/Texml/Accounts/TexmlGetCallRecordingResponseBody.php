@@ -12,6 +12,8 @@ use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody\Source;
 use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody\Status;
 
 /**
+ * @phpstan-import-type TexmlRecordingSubresourcesUrisShape from \Telnyx\Texml\Accounts\TexmlRecordingSubresourcesUris
+ *
  * @phpstan-type TexmlGetCallRecordingResponseBodyShape = array{
  *   accountSid?: string|null,
  *   callSid?: string|null,
@@ -23,10 +25,10 @@ use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody\Status;
  *   errorCode?: string|null,
  *   mediaURL?: string|null,
  *   sid?: string|null,
- *   source?: value-of<Source>|null,
+ *   source?: null|Source|value-of<Source>,
  *   startTime?: \DateTimeInterface|null,
- *   status?: value-of<Status>|null,
- *   subresourcesUris?: TexmlRecordingSubresourcesUris|null,
+ *   status?: null|Status|value-of<Status>,
+ *   subresourcesUris?: null|TexmlRecordingSubresourcesUris|TexmlRecordingSubresourcesUrisShape,
  *   uri?: string|null,
  * }
  */
@@ -112,9 +114,7 @@ final class TexmlGetCallRecordingResponseBody implements BaseModel
      * @param 1|2 $channels
      * @param Source|value-of<Source> $source
      * @param Status|value-of<Status> $status
-     * @param TexmlRecordingSubresourcesUris|array{
-     *   transcriptions?: string|null
-     * } $subresourcesUris
+     * @param TexmlRecordingSubresourcesUrisShape $subresourcesUris
      */
     public static function with(
         ?string $accountSid = null,
@@ -278,9 +278,7 @@ final class TexmlGetCallRecordingResponseBody implements BaseModel
     /**
      * Subresources details for a recording if available.
      *
-     * @param TexmlRecordingSubresourcesUris|array{
-     *   transcriptions?: string|null
-     * } $subresourcesUris
+     * @param TexmlRecordingSubresourcesUrisShape $subresourcesUris
      */
     public function withSubresourcesUris(
         TexmlRecordingSubresourcesUris|array $subresourcesUris

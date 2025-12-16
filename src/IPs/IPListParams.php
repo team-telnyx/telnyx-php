@@ -16,11 +16,11 @@ use Telnyx\IPs\IPListParams\Page;
  *
  * @see Telnyx\Services\IPsService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\IPs\IPListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\IPs\IPListParams\Page
+ *
  * @phpstan-type IPListParamsShape = array{
- *   filter?: Filter|array{
- *     connectionID?: string|null, ipAddress?: string|null, port?: int|null
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   filter?: FilterShape|null, page?: PageShape|null
  * }
  */
 final class IPListParams implements BaseModel
@@ -51,10 +51,8 @@ final class IPListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   connectionID?: string|null, ipAddress?: string|null, port?: int|null
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -71,9 +69,7 @@ final class IPListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[connection_id], filter[ip_address], filter[port].
      *
-     * @param Filter|array{
-     *   connectionID?: string|null, ipAddress?: string|null, port?: int|null
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -86,7 +82,7 @@ final class IPListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

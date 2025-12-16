@@ -22,7 +22,7 @@ interface NotificationChannelsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|NotificationChannelCreateParams $params
+     * @param array<string,mixed>|NotificationChannelCreateParams $params
      *
      * @return BaseResponse<NotificationChannelNewResponse>
      *
@@ -51,7 +51,7 @@ interface NotificationChannelsRawContract
      * @api
      *
      * @param string $notificationChannelID the id of the resource
-     * @param array<mixed>|NotificationChannelUpdateParams $params
+     * @param array<string,mixed>|NotificationChannelUpdateParams $params
      *
      * @return BaseResponse<NotificationChannelUpdateResponse>
      *
@@ -66,7 +66,7 @@ interface NotificationChannelsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|NotificationChannelListParams $params
+     * @param array<string,mixed>|NotificationChannelListParams $params
      *
      * @return BaseResponse<DefaultPagination<NotificationChannel>>
      *

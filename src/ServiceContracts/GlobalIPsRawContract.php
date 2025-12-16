@@ -20,7 +20,7 @@ interface GlobalIPsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|GlobalIPCreateParams $params
+     * @param array<string,mixed>|GlobalIPCreateParams $params
      *
      * @return BaseResponse<GlobalIPNewResponse>
      *
@@ -48,7 +48,7 @@ interface GlobalIPsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|GlobalIPListParams $params
+     * @param array<string,mixed>|GlobalIPListParams $params
      *
      * @return BaseResponse<DefaultPagination<GlobalIPListResponse>>
      *

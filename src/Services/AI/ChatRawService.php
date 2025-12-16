@@ -30,7 +30,7 @@ final class ChatRawService implements ChatRawContract
      *
      * @param array{
      *   messages: list<array{
-     *     content: string|list<array<mixed>>,
+     *     content: string|list<array<string,mixed>>,
      *     role: 'system'|'user'|'assistant'|'tool'|Role,
      *   }>,
      *   apiKeyRef?: string,

@@ -11,7 +11,7 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesRe
 
 /**
  * @phpstan-type PhoneNumberShape = array{
- *   phoneNumber: string, status: value-of<Status>
+ *   phoneNumber: string, status: Status|value-of<Status>
  * }
  */
 final class PhoneNumber implements BaseModel

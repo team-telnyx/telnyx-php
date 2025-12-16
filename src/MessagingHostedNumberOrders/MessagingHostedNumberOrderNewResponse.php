@@ -7,13 +7,13 @@ namespace Telnyx\MessagingHostedNumberOrders;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\HostedNumber;
 use Telnyx\MessagingHostedNumberOrder;
-use Telnyx\MessagingHostedNumberOrder\Status;
 
 /**
+ * @phpstan-import-type MessagingHostedNumberOrderShape from \Telnyx\MessagingHostedNumberOrder
+ *
  * @phpstan-type MessagingHostedNumberOrderNewResponseShape = array{
- *   data?: MessagingHostedNumberOrder|null
+ *   data?: null|MessagingHostedNumberOrder|MessagingHostedNumberOrderShape
  * }
  */
 final class MessagingHostedNumberOrderNewResponse implements BaseModel
@@ -34,13 +34,7 @@ final class MessagingHostedNumberOrderNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MessagingHostedNumberOrder|array{
-     *   id?: string|null,
-     *   messagingProfileID?: string|null,
-     *   phoneNumbers?: list<HostedNumber>|null,
-     *   recordType?: string|null,
-     *   status?: value-of<Status>|null,
-     * } $data
+     * @param MessagingHostedNumberOrderShape $data
      */
     public static function with(
         MessagingHostedNumberOrder|array|null $data = null
@@ -53,13 +47,7 @@ final class MessagingHostedNumberOrderNewResponse implements BaseModel
     }
 
     /**
-     * @param MessagingHostedNumberOrder|array{
-     *   id?: string|null,
-     *   messagingProfileID?: string|null,
-     *   phoneNumbers?: list<HostedNumber>|null,
-     *   recordType?: string|null,
-     *   status?: value-of<Status>|null,
-     * } $data
+     * @param MessagingHostedNumberOrderShape $data
      */
     public function withData(MessagingHostedNumberOrder|array $data): self
     {

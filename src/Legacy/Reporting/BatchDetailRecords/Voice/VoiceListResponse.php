@@ -7,12 +7,15 @@ namespace Telnyx\Legacy\Reporting\BatchDetailRecords\Voice;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\BatchCsvPaginationMeta;
 
 /**
+ * @phpstan-import-type CdrDetailedReqResponseShape from \Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\CdrDetailedReqResponse
+ * @phpstan-import-type BatchCsvPaginationMetaShape from \Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\BatchCsvPaginationMeta
+ *
  * @phpstan-type VoiceListResponseShape = array{
- *   data?: list<CdrDetailedReqResponse>|null, meta?: BatchCsvPaginationMeta|null
+ *   data?: list<CdrDetailedReqResponseShape>|null,
+ *   meta?: null|BatchCsvPaginationMeta|BatchCsvPaginationMetaShape,
  * }
  */
 final class VoiceListResponse implements BaseModel
@@ -37,28 +40,8 @@ final class VoiceListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<CdrDetailedReqResponse|array{
-     *   id?: string|null,
-     *   callTypes?: list<int>|null,
-     *   connections?: list<int>|null,
-     *   createdAt?: string|null,
-     *   endTime?: string|null,
-     *   filters?: list<Filter>|null,
-     *   managedAccounts?: list<string>|null,
-     *   recordType?: string|null,
-     *   recordTypes?: list<int>|null,
-     *   reportName?: string|null,
-     *   reportURL?: string|null,
-     *   retry?: int|null,
-     *   source?: string|null,
-     *   startTime?: string|null,
-     *   status?: int|null,
-     *   timezone?: string|null,
-     *   updatedAt?: string|null,
-     * }> $data
-     * @param BatchCsvPaginationMeta|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param list<CdrDetailedReqResponseShape> $data
+     * @param BatchCsvPaginationMetaShape $meta
      */
     public static function with(
         ?array $data = null,
@@ -73,25 +56,7 @@ final class VoiceListResponse implements BaseModel
     }
 
     /**
-     * @param list<CdrDetailedReqResponse|array{
-     *   id?: string|null,
-     *   callTypes?: list<int>|null,
-     *   connections?: list<int>|null,
-     *   createdAt?: string|null,
-     *   endTime?: string|null,
-     *   filters?: list<Filter>|null,
-     *   managedAccounts?: list<string>|null,
-     *   recordType?: string|null,
-     *   recordTypes?: list<int>|null,
-     *   reportName?: string|null,
-     *   reportURL?: string|null,
-     *   retry?: int|null,
-     *   source?: string|null,
-     *   startTime?: string|null,
-     *   status?: int|null,
-     *   timezone?: string|null,
-     *   updatedAt?: string|null,
-     * }> $data
+     * @param list<CdrDetailedReqResponseShape> $data
      */
     public function withData(array $data): self
     {
@@ -102,9 +67,7 @@ final class VoiceListResponse implements BaseModel
     }
 
     /**
-     * @param BatchCsvPaginationMeta|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param BatchCsvPaginationMetaShape $meta
      */
     public function withMeta(BatchCsvPaginationMeta|array $meta): self
     {

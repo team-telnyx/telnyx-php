@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Messaging10dlc\PartnerCampaignsService::listSharedByMe()
  *
  * @phpstan-type PartnerCampaignListSharedByMeParamsShape = array{
- *   page?: int, recordsPerPage?: int
+ *   page?: int|null, recordsPerPage?: int|null
  * }
  */
 final class PartnerCampaignListSharedByMeParams implements BaseModel

@@ -19,7 +19,7 @@ interface VoiceRawContract
     /**
      * @api
      *
-     * @param array<mixed>|VoiceCreateParams $params
+     * @param array<string,mixed>|VoiceCreateParams $params
      *
      * @return BaseResponse<VoiceNewResponse>
      *

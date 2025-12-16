@@ -17,12 +17,13 @@ use Telnyx\TexmlApplications\TexmlApplicationListParams\Sort;
  *
  * @see Telnyx\Services\TexmlApplicationsService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\TexmlApplications\TexmlApplicationListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\TexmlApplications\TexmlApplicationListParams\Page
+ *
  * @phpstan-type TexmlApplicationListParamsShape = array{
- *   filter?: Filter|array{
- *     friendlyName?: string|null, outboundVoiceProfileID?: string|null
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
- *   sort?: Sort|value-of<Sort>,
+ *   filter?: FilterShape|null,
+ *   page?: PageShape|null,
+ *   sort?: null|Sort|value-of<Sort>,
  * }
  */
 final class TexmlApplicationListParams implements BaseModel
@@ -72,10 +73,8 @@ final class TexmlApplicationListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   friendlyName?: string|null, outboundVoiceProfileID?: string|null
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
@@ -95,9 +94,7 @@ final class TexmlApplicationListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[outbound_voice_profile_id], filter[friendly_name].
      *
-     * @param Filter|array{
-     *   friendlyName?: string|null, outboundVoiceProfileID?: string|null
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -110,7 +107,7 @@ final class TexmlApplicationListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

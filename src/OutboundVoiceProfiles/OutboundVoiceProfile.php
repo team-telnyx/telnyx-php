@@ -8,18 +8,18 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\OutboundVoiceProfiles\OutboundCallRecording\CallRecordingChannels;
-use Telnyx\OutboundVoiceProfiles\OutboundCallRecording\CallRecordingFormat;
-use Telnyx\OutboundVoiceProfiles\OutboundCallRecording\CallRecordingType;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile\CallingWindow;
 
 /**
+ * @phpstan-import-type OutboundCallRecordingShape from \Telnyx\OutboundVoiceProfiles\OutboundCallRecording
+ * @phpstan-import-type CallingWindowShape from \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile\CallingWindow
+ *
  * @phpstan-type OutboundVoiceProfileShape = array{
  *   name: string,
  *   id?: string|null,
  *   billingGroupID?: string|null,
- *   callRecording?: OutboundCallRecording|null,
- *   callingWindow?: CallingWindow|null,
+ *   callRecording?: null|OutboundCallRecording|OutboundCallRecordingShape,
+ *   callingWindow?: null|CallingWindow|CallingWindowShape,
  *   concurrentCallLimit?: int|null,
  *   connectionsCount?: int|null,
  *   createdAt?: string|null,
@@ -28,11 +28,11 @@ use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile\CallingWindow;
  *   enabled?: bool|null,
  *   maxDestinationRate?: float|null,
  *   recordType?: string|null,
- *   servicePlan?: value-of<ServicePlan>|null,
+ *   servicePlan?: null|ServicePlan|value-of<ServicePlan>,
  *   tags?: list<string>|null,
- *   trafficType?: value-of<TrafficType>|null,
+ *   trafficType?: null|TrafficType|value-of<TrafficType>,
  *   updatedAt?: string|null,
- *   usagePaymentMethod?: value-of<UsagePaymentMethod>|null,
+ *   usagePaymentMethod?: null|UsagePaymentMethod|value-of<UsagePaymentMethod>,
  *   whitelistedDestinations?: list<string>|null,
  * }
  */
@@ -182,15 +182,8 @@ final class OutboundVoiceProfile implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param OutboundCallRecording|array{
-     *   callRecordingCallerPhoneNumbers?: list<string>|null,
-     *   callRecordingChannels?: value-of<CallRecordingChannels>|null,
-     *   callRecordingFormat?: value-of<CallRecordingFormat>|null,
-     *   callRecordingType?: value-of<CallRecordingType>|null,
-     * } $callRecording
-     * @param CallingWindow|array{
-     *   callsPerCld?: int|null, endTime?: string|null, startTime?: string|null
-     * } $callingWindow
+     * @param OutboundCallRecordingShape $callRecording
+     * @param CallingWindowShape $callingWindow
      * @param ServicePlan|value-of<ServicePlan> $servicePlan
      * @param list<string> $tags
      * @param TrafficType|value-of<TrafficType> $trafficType
@@ -278,12 +271,7 @@ final class OutboundVoiceProfile implements BaseModel
     }
 
     /**
-     * @param OutboundCallRecording|array{
-     *   callRecordingCallerPhoneNumbers?: list<string>|null,
-     *   callRecordingChannels?: value-of<CallRecordingChannels>|null,
-     *   callRecordingFormat?: value-of<CallRecordingFormat>|null,
-     *   callRecordingType?: value-of<CallRecordingType>|null,
-     * } $callRecording
+     * @param OutboundCallRecordingShape $callRecording
      */
     public function withCallRecording(
         OutboundCallRecording|array $callRecording
@@ -297,9 +285,7 @@ final class OutboundVoiceProfile implements BaseModel
     /**
      * (BETA) Specifies the time window and call limits for calls made using this outbound voice profile. Note that all times are UTC in 24-hour clock time.
      *
-     * @param CallingWindow|array{
-     *   callsPerCld?: int|null, endTime?: string|null, startTime?: string|null
-     * } $callingWindow
+     * @param CallingWindowShape $callingWindow
      */
     public function withCallingWindow(CallingWindow|array $callingWindow): self
     {

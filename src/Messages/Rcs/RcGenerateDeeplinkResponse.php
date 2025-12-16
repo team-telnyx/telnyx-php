@@ -10,7 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\Rcs\RcGenerateDeeplinkResponse\Data;
 
 /**
- * @phpstan-type RcGenerateDeeplinkResponseShape = array{data: Data}
+ * @phpstan-import-type DataShape from \Telnyx\Messages\Rcs\RcGenerateDeeplinkResponse\Data
+ *
+ * @phpstan-type RcGenerateDeeplinkResponseShape = array{data: Data|DataShape}
  */
 final class RcGenerateDeeplinkResponse implements BaseModel
 {
@@ -44,7 +46,7 @@ final class RcGenerateDeeplinkResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{url: string} $data
+     * @param DataShape $data
      */
     public static function with(Data|array $data): self
     {
@@ -56,7 +58,7 @@ final class RcGenerateDeeplinkResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{url: string} $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

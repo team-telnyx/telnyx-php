@@ -10,7 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OAuth\OAuthGetJwksResponse\Key;
 
 /**
- * @phpstan-type OAuthGetJwksResponseShape = array{keys?: list<Key>|null}
+ * @phpstan-import-type KeyShape from \Telnyx\OAuth\OAuthGetJwksResponse\Key
+ *
+ * @phpstan-type OAuthGetJwksResponseShape = array{keys?: list<KeyShape>|null}
  */
 final class OAuthGetJwksResponse implements BaseModel
 {
@@ -31,9 +33,7 @@ final class OAuthGetJwksResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Key|array{
-     *   alg?: string|null, kid?: string|null, kty?: string|null, use?: string|null
-     * }> $keys
+     * @param list<KeyShape> $keys
      */
     public static function with(?array $keys = null): self
     {
@@ -45,9 +45,7 @@ final class OAuthGetJwksResponse implements BaseModel
     }
 
     /**
-     * @param list<Key|array{
-     *   alg?: string|null, kid?: string|null, kty?: string|null, use?: string|null
-     * }> $keys
+     * @param list<KeyShape> $keys
      */
     public function withKeys(array $keys): self
     {

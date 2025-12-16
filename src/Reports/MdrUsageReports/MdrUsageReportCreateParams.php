@@ -20,7 +20,7 @@ use Telnyx\Reports\MdrUsageReports\MdrUsageReportCreateParams\AggregationType;
  *   aggregationType: AggregationType|value-of<AggregationType>,
  *   endDate: \DateTimeInterface,
  *   startDate: \DateTimeInterface,
- *   profiles?: string,
+ *   profiles?: string|null,
  * }
  */
 final class MdrUsageReportCreateParams implements BaseModel

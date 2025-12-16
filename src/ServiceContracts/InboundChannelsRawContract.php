@@ -16,7 +16,7 @@ interface InboundChannelsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|InboundChannelUpdateParams $params
+     * @param array<string,mixed>|InboundChannelUpdateParams $params
      *
      * @return BaseResponse<InboundChannelUpdateResponse>
      *

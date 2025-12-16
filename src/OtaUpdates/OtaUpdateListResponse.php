@@ -18,8 +18,8 @@ use Telnyx\OtaUpdates\OtaUpdateListResponse\Type;
  *   createdAt?: string|null,
  *   recordType?: string|null,
  *   simCardID?: string|null,
- *   status?: value-of<Status>|null,
- *   type?: value-of<Type>|null,
+ *   status?: null|Status|value-of<Status>,
+ *   type?: null|Type|value-of<Type>,
  *   updatedAt?: string|null,
  * }
  */

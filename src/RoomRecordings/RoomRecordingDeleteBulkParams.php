@@ -9,8 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Filter;
-use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Filter\DateEndedAt;
-use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Filter\DateStartedAt;
 use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Page;
 
 /**
@@ -18,18 +16,11 @@ use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Page;
  *
  * @see Telnyx\Services\RoomRecordingsService::deleteBulk()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Page
+ *
  * @phpstan-type RoomRecordingDeleteBulkParamsShape = array{
- *   filter?: Filter|array{
- *     dateEndedAt?: DateEndedAt|null,
- *     dateStartedAt?: DateStartedAt|null,
- *     durationSecs?: int|null,
- *     participantID?: string|null,
- *     roomID?: string|null,
- *     sessionID?: string|null,
- *     status?: string|null,
- *     type?: string|null,
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   filter?: FilterShape|null, page?: PageShape|null
  * }
  */
 final class RoomRecordingDeleteBulkParams implements BaseModel
@@ -60,17 +51,8 @@ final class RoomRecordingDeleteBulkParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   dateEndedAt?: DateEndedAt|null,
-     *   dateStartedAt?: DateStartedAt|null,
-     *   durationSecs?: int|null,
-     *   participantID?: string|null,
-     *   roomID?: string|null,
-     *   sessionID?: string|null,
-     *   status?: string|null,
-     *   type?: string|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -87,16 +69,7 @@ final class RoomRecordingDeleteBulkParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[date_started_at][eq], filter[date_started_at][gte], filter[date_started_at][lte], filter[room_id], filter[participant_id], filter[session_id], filter[status], filter[type], filter[duration_secs].
      *
-     * @param Filter|array{
-     *   dateEndedAt?: DateEndedAt|null,
-     *   dateStartedAt?: DateStartedAt|null,
-     *   durationSecs?: int|null,
-     *   participantID?: string|null,
-     *   roomID?: string|null,
-     *   sessionID?: string|null,
-     *   status?: string|null,
-     *   type?: string|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -109,7 +82,7 @@ final class RoomRecordingDeleteBulkParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

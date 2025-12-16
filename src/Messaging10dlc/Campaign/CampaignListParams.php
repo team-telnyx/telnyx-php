@@ -17,7 +17,10 @@ use Telnyx\Messaging10dlc\Campaign\CampaignListParams\Sort;
  * @see Telnyx\Services\Messaging10dlc\CampaignService::list()
  *
  * @phpstan-type CampaignListParamsShape = array{
- *   brandID: string, page?: int, recordsPerPage?: int, sort?: Sort|value-of<Sort>
+ *   brandID: string,
+ *   page?: int|null,
+ *   recordsPerPage?: int|null,
+ *   sort?: null|Sort|value-of<Sort>,
  * }
  */
 final class CampaignListParams implements BaseModel

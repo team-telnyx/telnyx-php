@@ -19,7 +19,7 @@ interface CommentsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|CommentCreateParams $params
+     * @param array<string,mixed>|CommentCreateParams $params
      *
      * @return BaseResponse<CommentNewResponse>
      *
@@ -47,7 +47,7 @@ interface CommentsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|CommentListParams $params
+     * @param array<string,mixed>|CommentListParams $params
      *
      * @return BaseResponse<CommentListResponse>
      *

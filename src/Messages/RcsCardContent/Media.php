@@ -13,8 +13,11 @@ use Telnyx\Messages\RcsContentInfo;
 /**
  * A media file within a rich card.
  *
+ * @phpstan-import-type RcsContentInfoShape from \Telnyx\Messages\RcsContentInfo
+ *
  * @phpstan-type MediaShape = array{
- *   contentInfo?: RcsContentInfo|null, height?: value-of<Height>|null
+ *   contentInfo?: null|RcsContentInfo|RcsContentInfoShape,
+ *   height?: null|Height|value-of<Height>,
  * }
  */
 final class Media implements BaseModel
@@ -43,9 +46,7 @@ final class Media implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RcsContentInfo|array{
-     *   fileURL: string, forceRefresh?: bool|null, thumbnailURL?: string|null
-     * } $contentInfo
+     * @param RcsContentInfoShape $contentInfo
      * @param Height|value-of<Height> $height
      */
     public static function with(
@@ -61,9 +62,7 @@ final class Media implements BaseModel
     }
 
     /**
-     * @param RcsContentInfo|array{
-     *   fileURL: string, forceRefresh?: bool|null, thumbnailURL?: string|null
-     * } $contentInfo
+     * @param RcsContentInfoShape $contentInfo
      */
     public function withContentInfo(RcsContentInfo|array $contentInfo): self
     {

@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\PortingOrdersService::retrieveLoaTemplate()
  *
  * @phpstan-type PortingOrderRetrieveLoaTemplateParamsShape = array{
- *   loaConfigurationID?: string
+ *   loaConfigurationID?: string|null
  * }
  */
 final class PortingOrderRetrieveLoaTemplateParams implements BaseModel

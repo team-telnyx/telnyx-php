@@ -14,10 +14,10 @@ use Telnyx\SimCards\Actions\ActionListParams\Filter\Status;
  * Consolidated filter parameter for SIM card actions (deepObject style). Originally: filter[sim_card_id], filter[status], filter[bulk_sim_card_action_id], filter[action_type].
  *
  * @phpstan-type FilterShape = array{
- *   actionType?: value-of<ActionType>|null,
+ *   actionType?: null|ActionType|value-of<ActionType>,
  *   bulkSimCardActionID?: string|null,
  *   simCardID?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  * }
  */
 final class Filter implements BaseModel

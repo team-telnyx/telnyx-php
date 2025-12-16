@@ -8,12 +8,11 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data;
-use Telnyx\NumberLookup\NumberLookupGetResponse\Data\CallerName;
-use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Carrier;
-use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Portability;
 
 /**
- * @phpstan-type NumberLookupGetResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\NumberLookup\NumberLookupGetResponse\Data
+ *
+ * @phpstan-type NumberLookupGetResponseShape = array{data?: null|Data|DataShape}
  */
 final class NumberLookupGetResponse implements BaseModel
 {
@@ -33,16 +32,7 @@ final class NumberLookupGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   callerName?: CallerName|null,
-     *   carrier?: Carrier|null,
-     *   countryCode?: string|null,
-     *   fraud?: string|null,
-     *   nationalFormat?: string|null,
-     *   phoneNumber?: string|null,
-     *   portability?: Portability|null,
-     *   recordType?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -54,16 +44,7 @@ final class NumberLookupGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   callerName?: CallerName|null,
-     *   carrier?: Carrier|null,
-     *   countryCode?: string|null,
-     *   fraud?: string|null,
-     *   nationalFormat?: string|null,
-     *   phoneNumber?: string|null,
-     *   portability?: Portability|null,
-     *   recordType?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

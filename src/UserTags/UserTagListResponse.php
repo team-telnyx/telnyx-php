@@ -10,7 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\UserTags\UserTagListResponse\Data;
 
 /**
- * @phpstan-type UserTagListResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\UserTags\UserTagListResponse\Data
+ *
+ * @phpstan-type UserTagListResponseShape = array{data?: null|Data|DataShape}
  */
 final class UserTagListResponse implements BaseModel
 {
@@ -30,9 +32,7 @@ final class UserTagListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   numberTags?: list<string>|null, outboundProfileTags?: list<string>|null
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -44,9 +44,7 @@ final class UserTagListResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   numberTags?: list<string>|null, outboundProfileTags?: list<string>|null
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

@@ -8,10 +8,11 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\TexmlSecretsResponse\Data;
-use Telnyx\Texml\TexmlSecretsResponse\Data\Value;
 
 /**
- * @phpstan-type TexmlSecretsResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\Texml\TexmlSecretsResponse\Data
+ *
+ * @phpstan-type TexmlSecretsResponseShape = array{data?: null|Data|DataShape}
  */
 final class TexmlSecretsResponse implements BaseModel
 {
@@ -31,7 +32,7 @@ final class TexmlSecretsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{name?: string|null, value?: value-of<Value>|null} $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -43,7 +44,7 @@ final class TexmlSecretsResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{name?: string|null, value?: value-of<Value>|null} $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

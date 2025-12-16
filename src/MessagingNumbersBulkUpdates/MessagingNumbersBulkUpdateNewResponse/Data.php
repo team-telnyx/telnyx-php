@@ -14,7 +14,7 @@ use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateNewResponse\Dat
  *   failed?: list<string>|null,
  *   orderID?: string|null,
  *   pending?: list<string>|null,
- *   recordType?: value-of<RecordType>|null,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  *   success?: list<string>|null,
  * }
  */

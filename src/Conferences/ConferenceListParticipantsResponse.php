@@ -12,18 +12,20 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type ConferenceShape from \Telnyx\Conferences\ConferenceListParticipantsResponse\Conference
+ *
  * @phpstan-type ConferenceListParticipantsResponseShape = array{
  *   id: string,
  *   callControlID: string,
  *   callLegID: string,
- *   conference: \Telnyx\Conferences\ConferenceListParticipantsResponse\Conference,
+ *   conference: \Telnyx\Conferences\ConferenceListParticipantsResponse\Conference|ConferenceShape,
  *   createdAt: string,
  *   endConferenceOnExit: bool,
  *   muted: bool,
  *   onHold: bool,
- *   recordType: value-of<RecordType>,
+ *   recordType: RecordType|value-of<RecordType>,
  *   softEndConferenceOnExit: bool,
- *   status: value-of<Status>,
+ *   status: Status|value-of<Status>,
  *   updatedAt: string,
  *   whisperCallControlIDs: list<string>,
  * }
@@ -164,9 +166,7 @@ final class ConferenceListParticipantsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Conference|array{
-     *   id?: string|null, name?: string|null
-     * } $conference
+     * @param ConferenceShape $conference
      * @param RecordType|value-of<RecordType> $recordType
      * @param Status|value-of<Status> $status
      * @param list<string> $whisperCallControlIDs
@@ -241,9 +241,7 @@ final class ConferenceListParticipantsResponse implements BaseModel
     /**
      * Info about the conference that the participant is in.
      *
-     * @param Conference|array{
-     *   id?: string|null, name?: string|null
-     * } $conference
+     * @param ConferenceShape $conference
      */
     public function withConference(
         Conference|array $conference,

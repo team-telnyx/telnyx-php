@@ -8,21 +8,21 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DocReqsRequirementType;
-use Telnyx\DocReqsRequirementType\AcceptanceCriteria;
-use Telnyx\DocReqsRequirementType\Type;
 use Telnyx\Requirements\RequirementListResponse\Action;
 use Telnyx\Requirements\RequirementListResponse\PhoneNumberType;
 
 /**
+ * @phpstan-import-type DocReqsRequirementTypeShape from \Telnyx\DocReqsRequirementType
+ *
  * @phpstan-type RequirementListResponseShape = array{
  *   id?: string|null,
- *   action?: value-of<Action>|null,
+ *   action?: null|Action|value-of<Action>,
  *   countryCode?: string|null,
  *   createdAt?: string|null,
  *   locality?: string|null,
- *   phoneNumberType?: value-of<PhoneNumberType>|null,
+ *   phoneNumberType?: null|PhoneNumberType|value-of<PhoneNumberType>,
  *   recordType?: string|null,
- *   requirementsTypes?: list<DocReqsRequirementType>|null,
+ *   requirementsTypes?: list<DocReqsRequirementTypeShape>|null,
  *   updatedAt?: string|null,
  * }
  */
@@ -103,17 +103,7 @@ final class RequirementListResponse implements BaseModel
      *
      * @param Action|value-of<Action> $action
      * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
-     * @param list<DocReqsRequirementType|array{
-     *   id?: string|null,
-     *   acceptanceCriteria?: AcceptanceCriteria|null,
-     *   createdAt?: string|null,
-     *   description?: string|null,
-     *   example?: string|null,
-     *   name?: string|null,
-     *   recordType?: string|null,
-     *   type?: value-of<Type>|null,
-     *   updatedAt?: string|null,
-     * }> $requirementsTypes
+     * @param list<DocReqsRequirementTypeShape> $requirementsTypes
      */
     public static function with(
         ?string $id = null,
@@ -226,17 +216,7 @@ final class RequirementListResponse implements BaseModel
     /**
      * Lists the requirement types necessary to fulfill this requirement.
      *
-     * @param list<DocReqsRequirementType|array{
-     *   id?: string|null,
-     *   acceptanceCriteria?: AcceptanceCriteria|null,
-     *   createdAt?: string|null,
-     *   description?: string|null,
-     *   example?: string|null,
-     *   name?: string|null,
-     *   recordType?: string|null,
-     *   type?: value-of<Type>|null,
-     *   updatedAt?: string|null,
-     * }> $requirementsTypes
+     * @param list<DocReqsRequirementTypeShape> $requirementsTypes
      */
     public function withRequirementsTypes(array $requirementsTypes): self
     {

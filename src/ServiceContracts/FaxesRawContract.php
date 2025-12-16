@@ -19,7 +19,7 @@ interface FaxesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|FaxCreateParams $params
+     * @param array<string,mixed>|FaxCreateParams $params
      *
      * @return BaseResponse<FaxNewResponse>
      *
@@ -47,7 +47,7 @@ interface FaxesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|FaxListParams $params
+     * @param array<string,mixed>|FaxListParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<Fax>>
      *

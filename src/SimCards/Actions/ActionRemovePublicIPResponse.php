@@ -7,12 +7,12 @@ namespace Telnyx\SimCards\Actions;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\SimCards\Actions\SimCardAction\ActionType;
-use Telnyx\SimCards\Actions\SimCardAction\Status;
 
 /**
+ * @phpstan-import-type SimCardActionShape from \Telnyx\SimCards\Actions\SimCardAction
+ *
  * @phpstan-type ActionRemovePublicIPResponseShape = array{
- *   data?: SimCardAction|null
+ *   data?: null|SimCardAction|SimCardActionShape
  * }
  */
 final class ActionRemovePublicIPResponse implements BaseModel
@@ -36,16 +36,7 @@ final class ActionRemovePublicIPResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SimCardAction|array{
-     *   id?: string|null,
-     *   actionType?: value-of<ActionType>|null,
-     *   createdAt?: string|null,
-     *   recordType?: string|null,
-     *   settings?: array<string,mixed>|null,
-     *   simCardID?: string|null,
-     *   status?: Status|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param SimCardActionShape $data
      */
     public static function with(SimCardAction|array|null $data = null): self
     {
@@ -59,16 +50,7 @@ final class ActionRemovePublicIPResponse implements BaseModel
     /**
      * This object represents a SIM card action. It allows tracking the current status of an operation that impacts the SIM card.
      *
-     * @param SimCardAction|array{
-     *   id?: string|null,
-     *   actionType?: value-of<ActionType>|null,
-     *   createdAt?: string|null,
-     *   recordType?: string|null,
-     *   settings?: array<string,mixed>|null,
-     *   simCardID?: string|null,
-     *   status?: Status|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param SimCardActionShape $data
      */
     public function withData(SimCardAction|array $data): self
     {

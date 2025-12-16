@@ -9,7 +9,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type IPDeleteResponseShape = array{data?: IP|null}
+ * @phpstan-import-type IPShape from \Telnyx\IPs\IP
+ *
+ * @phpstan-type IPDeleteResponseShape = array{data?: null|IP|IPShape}
  */
 final class IPDeleteResponse implements BaseModel
 {
@@ -29,15 +31,7 @@ final class IPDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param IP|array{
-     *   id?: string|null,
-     *   connectionID?: string|null,
-     *   createdAt?: string|null,
-     *   ipAddress?: string|null,
-     *   port?: int|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param IPShape $data
      */
     public static function with(IP|array|null $data = null): self
     {
@@ -49,15 +43,7 @@ final class IPDeleteResponse implements BaseModel
     }
 
     /**
-     * @param IP|array{
-     *   id?: string|null,
-     *   connectionID?: string|null,
-     *   createdAt?: string|null,
-     *   ipAddress?: string|null,
-     *   port?: int|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param IPShape $data
      */
     public function withData(IP|array $data): self
     {

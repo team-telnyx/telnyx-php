@@ -7,17 +7,17 @@ namespace Telnyx\Porting\Events\EventGetResponse\Data\PortingEventStatusChangedE
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\PortingOrdersExceptionType;
 use Telnyx\PortingOrderStatus;
-use Telnyx\PortingOrderStatus\Value;
 
 /**
  * The webhook payload for the porting_order.status_changed event.
  *
+ * @phpstan-import-type PortingOrderStatusShape from \Telnyx\PortingOrderStatus
+ *
  * @phpstan-type PayloadShape = array{
  *   id?: string|null,
  *   customerReference?: string|null,
- *   status?: PortingOrderStatus|null,
+ *   status?: null|PortingOrderStatus|PortingOrderStatusShape,
  *   supportKey?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
  *   webhookURL?: string|null,
@@ -74,9 +74,7 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortingOrderStatus|array{
-     *   details?: list<PortingOrdersExceptionType>|null, value?: value-of<Value>|null
-     * } $status
+     * @param PortingOrderStatusShape $status
      */
     public static function with(
         ?string $id = null,
@@ -123,9 +121,7 @@ final class Payload implements BaseModel
     /**
      * Porting order status.
      *
-     * @param PortingOrderStatus|array{
-     *   details?: list<PortingOrdersExceptionType>|null, value?: value-of<Value>|null
-     * } $status
+     * @param PortingOrderStatusShape $status
      */
     public function withStatus(PortingOrderStatus|array $status): self
     {

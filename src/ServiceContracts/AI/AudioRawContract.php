@@ -15,7 +15,7 @@ interface AudioRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AudioTranscribeParams $params
+     * @param array<string,mixed>|AudioTranscribeParams $params
      *
      * @return BaseResponse<AudioTranscribeResponse>
      *

@@ -9,8 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type TelcoDataUsageReportResponseShape from \Telnyx\Legacy\Reporting\UsageReports\NumberLookup\TelcoDataUsageReportResponse
+ *
  * @phpstan-type NumberLookupGetResponseShape = array{
- *   data?: TelcoDataUsageReportResponse|null
+ *   data?: null|TelcoDataUsageReportResponse|TelcoDataUsageReportResponseShape
  * }
  */
 final class NumberLookupGetResponse implements BaseModel
@@ -34,19 +36,7 @@ final class NumberLookupGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param TelcoDataUsageReportResponse|array{
-     *   id?: string|null,
-     *   aggregationType?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   endDate?: string|null,
-     *   managedAccounts?: list<string>|null,
-     *   recordType?: string|null,
-     *   reportURL?: string|null,
-     *   result?: list<TelcoDataUsageRecord>|null,
-     *   startDate?: string|null,
-     *   status?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param TelcoDataUsageReportResponseShape $data
      */
     public static function with(
         TelcoDataUsageReportResponse|array|null $data = null
@@ -61,19 +51,7 @@ final class NumberLookupGetResponse implements BaseModel
     /**
      * Telco data usage report response.
      *
-     * @param TelcoDataUsageReportResponse|array{
-     *   id?: string|null,
-     *   aggregationType?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   endDate?: string|null,
-     *   managedAccounts?: list<string>|null,
-     *   recordType?: string|null,
-     *   reportURL?: string|null,
-     *   result?: list<TelcoDataUsageRecord>|null,
-     *   startDate?: string|null,
-     *   status?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param TelcoDataUsageReportResponseShape $data
      */
     public function withData(TelcoDataUsageReportResponse|array $data): self
     {

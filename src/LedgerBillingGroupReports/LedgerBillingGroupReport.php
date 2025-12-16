@@ -15,9 +15,9 @@ use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReport\Status;
  *   id?: string|null,
  *   createdAt?: \DateTimeInterface|null,
  *   organizationID?: string|null,
- *   recordType?: value-of<RecordType>|null,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  *   reportURL?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */

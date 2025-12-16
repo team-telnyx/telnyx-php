@@ -13,19 +13,22 @@ use Telnyx\Webhooks\ConferenceRecordingSavedWebhookEvent\Data\Payload\PublicReco
 use Telnyx\Webhooks\ConferenceRecordingSavedWebhookEvent\Data\Payload\RecordingURLs;
 
 /**
+ * @phpstan-import-type PublicRecordingURLsShape from \Telnyx\Webhooks\ConferenceRecordingSavedWebhookEvent\Data\Payload\PublicRecordingURLs
+ * @phpstan-import-type RecordingURLsShape from \Telnyx\Webhooks\ConferenceRecordingSavedWebhookEvent\Data\Payload\RecordingURLs
+ *
  * @phpstan-type PayloadShape = array{
  *   callControlID?: string|null,
  *   callSessionID?: string|null,
- *   channels?: value-of<Channels>|null,
+ *   channels?: null|Channels|value-of<Channels>,
  *   clientState?: string|null,
  *   conferenceID?: string|null,
  *   connectionID?: string|null,
- *   format?: value-of<Format>|null,
- *   publicRecordingURLs?: PublicRecordingURLs|null,
+ *   format?: null|Format|value-of<Format>,
+ *   publicRecordingURLs?: null|PublicRecordingURLs|PublicRecordingURLsShape,
  *   recordingEndedAt?: \DateTimeInterface|null,
  *   recordingID?: string|null,
  *   recordingStartedAt?: \DateTimeInterface|null,
- *   recordingURLs?: RecordingURLs|null,
+ *   recordingURLs?: null|RecordingURLs|RecordingURLsShape,
  * }
  */
 final class Payload implements BaseModel
@@ -121,10 +124,8 @@ final class Payload implements BaseModel
      *
      * @param Channels|value-of<Channels> $channels
      * @param Format|value-of<Format> $format
-     * @param PublicRecordingURLs|array{
-     *   mp3?: string|null, wav?: string|null
-     * } $publicRecordingURLs
-     * @param RecordingURLs|array{mp3?: string|null, wav?: string|null} $recordingURLs
+     * @param PublicRecordingURLsShape $publicRecordingURLs
+     * @param RecordingURLsShape $recordingURLs
      */
     public static function with(
         ?string $callControlID = null,
@@ -242,9 +243,7 @@ final class Payload implements BaseModel
     /**
      * Recording URLs in requested format. The URL is valid for as long as the file exists. For security purposes, this feature is activated on a per request basis.  Please contact customer support with your Account ID to request activation.
      *
-     * @param PublicRecordingURLs|array{
-     *   mp3?: string|null, wav?: string|null
-     * } $publicRecordingURLs
+     * @param PublicRecordingURLsShape $publicRecordingURLs
      */
     public function withPublicRecordingURLs(
         PublicRecordingURLs|array $publicRecordingURLs
@@ -293,7 +292,7 @@ final class Payload implements BaseModel
     /**
      * Recording URLs in requested format. These URLs are valid for 10 minutes. After 10 minutes, you may retrieve recordings via API using Reports -> Call Recordings documentation, or via Mission Control under Reporting -> Recordings.
      *
-     * @param RecordingURLs|array{mp3?: string|null, wav?: string|null} $recordingURLs
+     * @param RecordingURLsShape $recordingURLs
      */
     public function withRecordingURLs(RecordingURLs|array $recordingURLs): self
     {

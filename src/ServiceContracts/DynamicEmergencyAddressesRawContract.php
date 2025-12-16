@@ -20,7 +20,7 @@ interface DynamicEmergencyAddressesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|DynamicEmergencyAddressCreateParams $params
+     * @param array<string,mixed>|DynamicEmergencyAddressCreateParams $params
      *
      * @return BaseResponse<DynamicEmergencyAddressNewResponse>
      *
@@ -48,7 +48,7 @@ interface DynamicEmergencyAddressesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|DynamicEmergencyAddressListParams $params
+     * @param array<string,mixed>|DynamicEmergencyAddressListParams $params
      *
      * @return BaseResponse<DefaultPagination<DynamicEmergencyAddress>>
      *

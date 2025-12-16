@@ -7,17 +7,19 @@ namespace Telnyx\Addresses\Actions\ActionValidateResponse;
 use Telnyx\Addresses\Actions\ActionValidateResponse\Data\Result;
 use Telnyx\Addresses\Actions\ActionValidateResponse\Data\Suggested;
 use Telnyx\APIError;
-use Telnyx\APIError\Source;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type SuggestedShape from \Telnyx\Addresses\Actions\ActionValidateResponse\Data\Suggested
+ * @phpstan-import-type APIErrorShape from \Telnyx\APIError
+ *
  * @phpstan-type DataShape = array{
- *   result: value-of<Result>,
- *   suggested: Suggested,
- *   errors?: list<APIError>|null,
+ *   result: Result|value-of<Result>,
+ *   suggested: Suggested|SuggestedShape,
+ *   errors?: list<APIErrorShape>|null,
  *   recordType?: string|null,
  * }
  */
@@ -75,21 +77,8 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Result|value-of<Result> $result
-     * @param Suggested|array{
-     *   administrativeArea?: string|null,
-     *   countryCode?: string|null,
-     *   extendedAddress?: string|null,
-     *   locality?: string|null,
-     *   postalCode?: string|null,
-     *   streetAddress?: string|null,
-     * } $suggested
-     * @param list<APIError|array{
-     *   code: string,
-     *   title: string,
-     *   detail?: string|null,
-     *   meta?: array<string,mixed>|null,
-     *   source?: Source|null,
-     * }> $errors
+     * @param SuggestedShape $suggested
+     * @param list<APIErrorShape> $errors
      */
     public static function with(
         Result|string $result,
@@ -124,14 +113,7 @@ final class Data implements BaseModel
     /**
      * Provides normalized address when available.
      *
-     * @param Suggested|array{
-     *   administrativeArea?: string|null,
-     *   countryCode?: string|null,
-     *   extendedAddress?: string|null,
-     *   locality?: string|null,
-     *   postalCode?: string|null,
-     *   streetAddress?: string|null,
-     * } $suggested
+     * @param SuggestedShape $suggested
      */
     public function withSuggested(Suggested|array $suggested): self
     {
@@ -142,13 +124,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<APIError|array{
-     *   code: string,
-     *   title: string,
-     *   detail?: string|null,
-     *   meta?: array<string,mixed>|null,
-     *   source?: Source|null,
-     * }> $errors
+     * @param list<APIErrorShape> $errors
      */
     public function withErrors(array $errors): self
     {

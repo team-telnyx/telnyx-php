@@ -18,9 +18,9 @@ use Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType
  *
  * @phpstan-type MdrUsageReportFetchSyncParamsShape = array{
  *   aggregationType: AggregationType|value-of<AggregationType>,
- *   endDate?: \DateTimeInterface,
- *   profiles?: list<string>,
- *   startDate?: \DateTimeInterface,
+ *   endDate?: \DateTimeInterface|null,
+ *   profiles?: list<string>|null,
+ *   startDate?: \DateTimeInterface|null,
  * }
  */
 final class MdrUsageReportFetchSyncParams implements BaseModel

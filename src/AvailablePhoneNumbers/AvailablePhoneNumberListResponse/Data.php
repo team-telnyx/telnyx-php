@@ -8,20 +8,23 @@ use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\CostInfor
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\Feature;
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\RecordType;
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\RegionInformation;
-use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\RegionInformation\RegionType;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type CostInformationShape from \Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\CostInformation
+ * @phpstan-import-type FeatureShape from \Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\Feature
+ * @phpstan-import-type RegionInformationShape from \Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\RegionInformation
+ *
  * @phpstan-type DataShape = array{
  *   bestEffort?: bool|null,
- *   costInformation?: CostInformation|null,
- *   features?: list<Feature>|null,
+ *   costInformation?: null|CostInformation|CostInformationShape,
+ *   features?: list<FeatureShape>|null,
  *   phoneNumber?: string|null,
  *   quickship?: bool|null,
- *   recordType?: value-of<RecordType>|null,
- *   regionInformation?: list<RegionInformation>|null,
+ *   recordType?: null|RecordType|value-of<RecordType>,
+ *   regionInformation?: list<RegionInformationShape>|null,
  *   reservable?: bool|null,
  *   vanityFormat?: string|null,
  * }
@@ -80,14 +83,10 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CostInformation|array{
-     *   currency?: string|null, monthlyCost?: string|null, upfrontCost?: string|null
-     * } $costInformation
-     * @param list<Feature|array{name?: string|null}> $features
+     * @param CostInformationShape $costInformation
+     * @param list<FeatureShape> $features
      * @param RecordType|value-of<RecordType> $recordType
-     * @param list<RegionInformation|array{
-     *   regionName?: string|null, regionType?: value-of<RegionType>|null
-     * }> $regionInformation
+     * @param list<RegionInformationShape> $regionInformation
      */
     public static function with(
         ?bool $bestEffort = null,
@@ -127,9 +126,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param CostInformation|array{
-     *   currency?: string|null, monthlyCost?: string|null, upfrontCost?: string|null
-     * } $costInformation
+     * @param CostInformationShape $costInformation
      */
     public function withCostInformation(
         CostInformation|array $costInformation
@@ -141,7 +138,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<Feature|array{name?: string|null}> $features
+     * @param list<FeatureShape> $features
      */
     public function withFeatures(array $features): self
     {
@@ -182,9 +179,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<RegionInformation|array{
-     *   regionName?: string|null, regionType?: value-of<RegionType>|null
-     * }> $regionInformation
+     * @param list<RegionInformationShape> $regionInformation
      */
     public function withRegionInformation(array $regionInformation): self
     {

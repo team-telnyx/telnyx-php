@@ -7,12 +7,12 @@ namespace Telnyx\Storage\Buckets\SslCertificate;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Storage\Buckets\SslCertificate\SslCertificate\IssuedBy;
-use Telnyx\Storage\Buckets\SslCertificate\SslCertificate\IssuedTo;
 
 /**
+ * @phpstan-import-type SslCertificateShape from \Telnyx\Storage\Buckets\SslCertificate\SslCertificate
+ *
  * @phpstan-type SslCertificateDeleteResponseShape = array{
- *   data?: SslCertificate|null
+ *   data?: null|SslCertificate|SslCertificateShape
  * }
  */
 final class SslCertificateDeleteResponse implements BaseModel
@@ -33,14 +33,7 @@ final class SslCertificateDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SslCertificate|array{
-     *   id?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   issuedBy?: IssuedBy|null,
-     *   issuedTo?: IssuedTo|null,
-     *   validFrom?: \DateTimeInterface|null,
-     *   validTo?: \DateTimeInterface|null,
-     * } $data
+     * @param SslCertificateShape $data
      */
     public static function with(SslCertificate|array|null $data = null): self
     {
@@ -52,14 +45,7 @@ final class SslCertificateDeleteResponse implements BaseModel
     }
 
     /**
-     * @param SslCertificate|array{
-     *   id?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   issuedBy?: IssuedBy|null,
-     *   issuedTo?: IssuedTo|null,
-     *   validFrom?: \DateTimeInterface|null,
-     *   validTo?: \DateTimeInterface|null,
-     * } $data
+     * @param SslCertificateShape $data
      */
     public function withData(SslCertificate|array $data): self
     {

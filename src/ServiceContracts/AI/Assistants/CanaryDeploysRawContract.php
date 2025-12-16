@@ -16,7 +16,7 @@ interface CanaryDeploysRawContract
     /**
      * @api
      *
-     * @param array<mixed>|CanaryDeployCreateParams $params
+     * @param array<string,mixed>|CanaryDeployCreateParams $params
      *
      * @return BaseResponse<CanaryDeployResponse>
      *
@@ -43,7 +43,7 @@ interface CanaryDeploysRawContract
     /**
      * @api
      *
-     * @param array<mixed>|CanaryDeployUpdateParams $params
+     * @param array<string,mixed>|CanaryDeployUpdateParams $params
      *
      * @return BaseResponse<CanaryDeployResponse>
      *

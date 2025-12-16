@@ -18,7 +18,7 @@ interface IntegrationSecretsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|IntegrationSecretCreateParams $params
+     * @param array<string,mixed>|IntegrationSecretCreateParams $params
      *
      * @return BaseResponse<IntegrationSecretNewResponse>
      *
@@ -32,7 +32,7 @@ interface IntegrationSecretsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|IntegrationSecretListParams $params
+     * @param array<string,mixed>|IntegrationSecretListParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<IntegrationSecret>>
      *

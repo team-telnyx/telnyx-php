@@ -10,37 +10,28 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\CldFilter;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\CliFilter;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\FilterType;
 
 /**
  * Creates a new CDR report request with the specified filters.
  *
  * @see Telnyx\Services\Legacy\Reporting\BatchDetailRecords\VoiceService::create()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\Legacy\Reporting\BatchDetailRecords\Filter
+ *
  * @phpstan-type VoiceCreateParamsShape = array{
  *   endTime: \DateTimeInterface,
  *   startTime: \DateTimeInterface,
- *   callTypes?: list<int>,
- *   connections?: list<int>,
- *   fields?: list<string>,
- *   filters?: list<Filter|array{
- *     billingGroup?: string|null,
- *     cld?: string|null,
- *     cldFilter?: value-of<CldFilter>|null,
- *     cli?: string|null,
- *     cliFilter?: value-of<CliFilter>|null,
- *     filterType?: value-of<FilterType>|null,
- *     tagsList?: string|null,
- *   }>,
- *   includeAllMetadata?: bool,
- *   managedAccounts?: list<string>,
- *   recordTypes?: list<int>,
- *   reportName?: string,
- *   selectAllManagedAccounts?: bool,
- *   source?: string,
- *   timezone?: string,
+ *   callTypes?: list<int>|null,
+ *   connections?: list<int>|null,
+ *   fields?: list<string>|null,
+ *   filters?: list<FilterShape>|null,
+ *   includeAllMetadata?: bool|null,
+ *   managedAccounts?: list<string>|null,
+ *   recordTypes?: list<int>|null,
+ *   reportName?: string|null,
+ *   selectAllManagedAccounts?: bool|null,
+ *   source?: string|null,
+ *   timezone?: string|null,
  * }
  */
 final class VoiceCreateParams implements BaseModel
@@ -166,15 +157,7 @@ final class VoiceCreateParams implements BaseModel
      * @param list<int> $callTypes
      * @param list<int> $connections
      * @param list<string> $fields
-     * @param list<Filter|array{
-     *   billingGroup?: string|null,
-     *   cld?: string|null,
-     *   cldFilter?: value-of<CldFilter>|null,
-     *   cli?: string|null,
-     *   cliFilter?: value-of<CliFilter>|null,
-     *   filterType?: value-of<FilterType>|null,
-     *   tagsList?: string|null,
-     * }> $filters
+     * @param list<FilterShape> $filters
      * @param list<string> $managedAccounts
      * @param list<int> $recordTypes
      */
@@ -277,15 +260,7 @@ final class VoiceCreateParams implements BaseModel
     /**
      * List of filters to apply.
      *
-     * @param list<Filter|array{
-     *   billingGroup?: string|null,
-     *   cld?: string|null,
-     *   cldFilter?: value-of<CldFilter>|null,
-     *   cli?: string|null,
-     *   cliFilter?: value-of<CliFilter>|null,
-     *   filterType?: value-of<FilterType>|null,
-     *   tagsList?: string|null,
-     * }> $filters
+     * @param list<FilterShape> $filters
      */
     public function withFilters(array $filters): self
     {

@@ -11,12 +11,15 @@ use Telnyx\CountryCoverage\CountryCoverageGetResponse\Data\Local;
 use Telnyx\CountryCoverage\CountryCoverageGetResponse\Data\TollFree;
 
 /**
+ * @phpstan-import-type LocalShape from \Telnyx\CountryCoverage\CountryCoverageGetResponse\Data\Local
+ * @phpstan-import-type TollFreeShape from \Telnyx\CountryCoverage\CountryCoverageGetResponse\Data\TollFree
+ *
  * @phpstan-type DataShape = array{
  *   code?: string|null,
  *   features?: list<string>|null,
  *   internationalSMS?: bool|null,
  *   inventoryCoverage?: bool|null,
- *   local?: Local|null,
+ *   local?: null|Local|LocalShape,
  *   mobile?: array<string,mixed>|null,
  *   national?: array<string,mixed>|null,
  *   numbers?: bool|null,
@@ -26,7 +29,7 @@ use Telnyx\CountryCoverage\CountryCoverageGetResponse\Data\TollFree;
  *   region?: string|null,
  *   reservable?: bool|null,
  *   sharedCost?: array<string,mixed>|null,
- *   tollFree?: TollFree|null,
+ *   tollFree?: null|TollFree|TollFreeShape,
  * }
  */
 final class Data implements BaseModel
@@ -118,26 +121,12 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $features
-     * @param Local|array{
-     *   features?: list<string>|null,
-     *   fullPstnReplacement?: bool|null,
-     *   internationalSMS?: bool|null,
-     *   p2p?: bool|null,
-     *   quickship?: bool|null,
-     *   reservable?: bool|null,
-     * } $local
+     * @param LocalShape $local
      * @param array<string,mixed> $mobile
      * @param array<string,mixed> $national
      * @param list<string> $phoneNumberType
      * @param array<string,mixed> $sharedCost
-     * @param TollFree|array{
-     *   features?: list<string>|null,
-     *   fullPstnReplacement?: bool|null,
-     *   internationalSMS?: bool|null,
-     *   p2p?: bool|null,
-     *   quickship?: bool|null,
-     *   reservable?: bool|null,
-     * } $tollFree
+     * @param TollFreeShape $tollFree
      */
     public static function with(
         ?string $code = null,
@@ -221,14 +210,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param Local|array{
-     *   features?: list<string>|null,
-     *   fullPstnReplacement?: bool|null,
-     *   internationalSMS?: bool|null,
-     *   p2p?: bool|null,
-     *   quickship?: bool|null,
-     *   reservable?: bool|null,
-     * } $local
+     * @param LocalShape $local
      */
     public function withLocal(Local|array $local): self
     {
@@ -334,14 +316,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param TollFree|array{
-     *   features?: list<string>|null,
-     *   fullPstnReplacement?: bool|null,
-     *   internationalSMS?: bool|null,
-     *   p2p?: bool|null,
-     *   quickship?: bool|null,
-     *   reservable?: bool|null,
-     * } $tollFree
+     * @param TollFreeShape $tollFree
      */
     public function withTollFree(TollFree|array $tollFree): self
     {

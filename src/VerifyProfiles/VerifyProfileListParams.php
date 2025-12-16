@@ -15,8 +15,10 @@ use Telnyx\VerifyProfiles\VerifyProfileListParams\Filter;
  *
  * @see Telnyx\Services\VerifyProfilesService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\VerifyProfiles\VerifyProfileListParams\Filter
+ *
  * @phpstan-type VerifyProfileListParamsShape = array{
- *   filter?: Filter|array{name?: string|null}, pageNumber?: int, pageSize?: int
+ *   filter?: FilterShape|null, pageNumber?: int|null, pageSize?: int|null
  * }
  */
 final class VerifyProfileListParams implements BaseModel
@@ -47,7 +49,7 @@ final class VerifyProfileListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{name?: string|null} $filter
+     * @param FilterShape $filter
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -66,7 +68,7 @@ final class VerifyProfileListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[name].
      *
-     * @param Filter|array{name?: string|null} $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

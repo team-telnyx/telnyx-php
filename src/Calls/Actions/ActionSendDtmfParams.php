@@ -20,7 +20,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Calls\ActionsService::sendDtmf()
  *
  * @phpstan-type ActionSendDtmfParamsShape = array{
- *   digits: string, clientState?: string, commandID?: string, durationMillis?: int
+ *   digits: string,
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   durationMillis?: int|null,
  * }
  */
 final class ActionSendDtmfParams implements BaseModel

@@ -32,7 +32,7 @@ interface LogMessagesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|LogMessageListParams $params
+     * @param array<string,mixed>|LogMessageListParams $params
      *
      * @return BaseResponse<DefaultPaginationForLogMessages<LogMessageListResponse>>
      *

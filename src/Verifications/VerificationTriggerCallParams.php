@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   verifyProfileID: string,
  *   customCode?: string|null,
  *   extension?: string|null,
- *   timeoutSecs?: int,
+ *   timeoutSecs?: int|null,
  * }
  */
 final class VerificationTriggerCallParams implements BaseModel

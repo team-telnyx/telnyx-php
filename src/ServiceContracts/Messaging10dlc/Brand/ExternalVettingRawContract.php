@@ -30,7 +30,7 @@ interface ExternalVettingRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ExternalVettingImportsParams $params
+     * @param array<string,mixed>|ExternalVettingImportsParams $params
      *
      * @return BaseResponse<ExternalVettingImportsResponse>
      *
@@ -45,7 +45,7 @@ interface ExternalVettingRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ExternalVettingOrderParams $params
+     * @param array<string,mixed>|ExternalVettingOrderParams $params
      *
      * @return BaseResponse<ExternalVettingOrderResponse>
      *

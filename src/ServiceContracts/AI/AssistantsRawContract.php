@@ -24,7 +24,7 @@ interface AssistantsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AssistantCreateParams $params
+     * @param array<string,mixed>|AssistantCreateParams $params
      *
      * @return BaseResponse<InferenceEmbedding>
      *
@@ -38,7 +38,7 @@ interface AssistantsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AssistantRetrieveParams $params
+     * @param array<string,mixed>|AssistantRetrieveParams $params
      *
      * @return BaseResponse<InferenceEmbedding>
      *
@@ -53,7 +53,7 @@ interface AssistantsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AssistantUpdateParams $params
+     * @param array<string,mixed>|AssistantUpdateParams $params
      *
      * @return BaseResponse<InferenceEmbedding>
      *
@@ -89,7 +89,7 @@ interface AssistantsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AssistantChatParams $params
+     * @param array<string,mixed>|AssistantChatParams $params
      *
      * @return BaseResponse<AssistantChatResponse>
      *
@@ -128,7 +128,7 @@ interface AssistantsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AssistantImportsParams $params
+     * @param array<string,mixed>|AssistantImportsParams $params
      *
      * @return BaseResponse<AssistantsList>
      *
@@ -142,7 +142,7 @@ interface AssistantsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AssistantSendSMSParams $params
+     * @param array<string,mixed>|AssistantSendSMSParams $params
      *
      * @return BaseResponse<AssistantSendSMSResponse>
      *

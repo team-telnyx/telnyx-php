@@ -8,13 +8,16 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingPaginationMeta;
-use Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfig\Op;
 
 /**
  * List of Auto-Response Settings.
  *
+ * @phpstan-import-type AutoRespConfigShape from \Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfig
+ * @phpstan-import-type MessagingPaginationMetaShape from \Telnyx\MessagingPaginationMeta
+ *
  * @phpstan-type AutorespConfigListResponseShape = array{
- *   data: list<AutoRespConfig>, meta: MessagingPaginationMeta
+ *   data: list<AutoRespConfigShape>,
+ *   meta: MessagingPaginationMeta|MessagingPaginationMetaShape,
  * }
  */
 final class AutorespConfigListResponse implements BaseModel
@@ -53,18 +56,8 @@ final class AutorespConfigListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AutoRespConfig|array{
-     *   id: string,
-     *   countryCode: string,
-     *   createdAt: \DateTimeInterface,
-     *   keywords: list<string>,
-     *   op: value-of<Op>,
-     *   updatedAt: \DateTimeInterface,
-     *   respText?: string|null,
-     * }> $data
-     * @param MessagingPaginationMeta|array{
-     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
-     * } $meta
+     * @param list<AutoRespConfigShape> $data
+     * @param MessagingPaginationMetaShape $meta
      */
     public static function with(
         array $data,
@@ -79,15 +72,7 @@ final class AutorespConfigListResponse implements BaseModel
     }
 
     /**
-     * @param list<AutoRespConfig|array{
-     *   id: string,
-     *   countryCode: string,
-     *   createdAt: \DateTimeInterface,
-     *   keywords: list<string>,
-     *   op: value-of<Op>,
-     *   updatedAt: \DateTimeInterface,
-     *   respText?: string|null,
-     * }> $data
+     * @param list<AutoRespConfigShape> $data
      */
     public function withData(array $data): self
     {
@@ -98,9 +83,7 @@ final class AutorespConfigListResponse implements BaseModel
     }
 
     /**
-     * @param MessagingPaginationMeta|array{
-     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
-     * } $meta
+     * @param MessagingPaginationMetaShape $meta
      */
     public function withMeta(MessagingPaginationMeta|array $meta): self
     {

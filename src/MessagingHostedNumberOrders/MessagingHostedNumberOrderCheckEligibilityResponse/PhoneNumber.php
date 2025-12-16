@@ -13,7 +13,7 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilit
  * @phpstan-type PhoneNumberShape = array{
  *   detail?: string|null,
  *   eligible?: bool|null,
- *   eligibleStatus?: value-of<EligibleStatus>|null,
+ *   eligibleStatus?: null|EligibleStatus|value-of<EligibleStatus>,
  *   phoneNumber?: string|null,
  * }
  */

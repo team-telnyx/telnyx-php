@@ -20,7 +20,7 @@ interface PrivateWirelessGatewaysRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PrivateWirelessGatewayCreateParams $params
+     * @param array<string,mixed>|PrivateWirelessGatewayCreateParams $params
      *
      * @return BaseResponse<PrivateWirelessGatewayNewResponse>
      *
@@ -48,7 +48,7 @@ interface PrivateWirelessGatewaysRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PrivateWirelessGatewayListParams $params
+     * @param array<string,mixed>|PrivateWirelessGatewayListParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<PrivateWirelessGateway>>
      *

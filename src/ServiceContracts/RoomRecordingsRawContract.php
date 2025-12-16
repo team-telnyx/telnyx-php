@@ -33,7 +33,7 @@ interface RoomRecordingsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|RoomRecordingListParams $params
+     * @param array<string,mixed>|RoomRecordingListParams $params
      *
      * @return BaseResponse<DefaultPagination<RoomRecordingListResponse>>
      *
@@ -61,7 +61,7 @@ interface RoomRecordingsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|RoomRecordingDeleteBulkParams $params
+     * @param array<string,mixed>|RoomRecordingDeleteBulkParams $params
      *
      * @return BaseResponse<RoomRecordingDeleteBulkResponse>
      *

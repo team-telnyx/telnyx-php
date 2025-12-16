@@ -14,7 +14,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\MessagingHostedNumberOrders\ActionsService::uploadFile()
  *
- * @phpstan-type ActionUploadFileParamsShape = array{bill?: string, loa?: string}
+ * @phpstan-type ActionUploadFileParamsShape = array{
+ *   bill?: string|null, loa?: string|null
+ * }
  */
 final class ActionUploadFileParams implements BaseModel
 {

@@ -12,6 +12,13 @@ use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data\Count
 use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data\Mcc;
 use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data\Plmn;
 
+/**
+ * @phpstan-import-type CountryShape from \Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data\Country
+ * @phpstan-import-type MccShape from \Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data\Mcc
+ * @phpstan-import-type PlmnShape from \Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data\Plmn
+ *
+ * @phpstan-type DataShape = list<CountryShape>|list<MccShape>|list<PlmnShape>
+ */
 final class Data implements ConverterSource
 {
     use SdkUnion;

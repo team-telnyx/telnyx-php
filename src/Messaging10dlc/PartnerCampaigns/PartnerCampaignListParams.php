@@ -18,7 +18,7 @@ use Telnyx\Messaging10dlc\PartnerCampaigns\PartnerCampaignListParams\Sort;
  * @see Telnyx\Services\Messaging10dlc\PartnerCampaignsService::list()
  *
  * @phpstan-type PartnerCampaignListParamsShape = array{
- *   page?: int, recordsPerPage?: int, sort?: Sort|value-of<Sort>
+ *   page?: int|null, recordsPerPage?: int|null, sort?: null|Sort|value-of<Sort>
  * }
  */
 final class PartnerCampaignListParams implements BaseModel

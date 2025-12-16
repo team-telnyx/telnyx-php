@@ -10,7 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Regions\RegionListResponse\Data;
 
 /**
- * @phpstan-type RegionListResponseShape = array{data?: list<Data>|null}
+ * @phpstan-import-type DataShape from \Telnyx\Regions\RegionListResponse\Data
+ *
+ * @phpstan-type RegionListResponseShape = array{data?: list<DataShape>|null}
  */
 final class RegionListResponse implements BaseModel
 {
@@ -31,14 +33,7 @@ final class RegionListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   code?: string|null,
-     *   createdAt?: string|null,
-     *   name?: string|null,
-     *   recordType?: string|null,
-     *   supportedInterfaces?: list<string>|null,
-     *   updatedAt?: string|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public static function with(?array $data = null): self
     {
@@ -50,14 +45,7 @@ final class RegionListResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   code?: string|null,
-     *   createdAt?: string|null,
-     *   name?: string|null,
-     *   recordType?: string|null,
-     *   supportedInterfaces?: list<string>|null,
-     *   updatedAt?: string|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {

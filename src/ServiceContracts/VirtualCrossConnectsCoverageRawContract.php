@@ -16,7 +16,7 @@ interface VirtualCrossConnectsCoverageRawContract
     /**
      * @api
      *
-     * @param array<mixed>|VirtualCrossConnectsCoverageListParams $params
+     * @param array<string,mixed>|VirtualCrossConnectsCoverageListParams $params
      *
      * @return BaseResponse<DefaultPagination<VirtualCrossConnectsCoverageListResponse,>,>
      *

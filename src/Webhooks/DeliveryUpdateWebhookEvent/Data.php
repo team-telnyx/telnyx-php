@@ -7,26 +7,19 @@ namespace Telnyx\Webhooks\DeliveryUpdateWebhookEvent;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Messages\MessagingError;
 use Telnyx\Messages\OutboundMessagePayload;
-use Telnyx\Messages\OutboundMessagePayload\Cc;
-use Telnyx\Messages\OutboundMessagePayload\Cost;
-use Telnyx\Messages\OutboundMessagePayload\CostBreakdown;
-use Telnyx\Messages\OutboundMessagePayload\Direction;
-use Telnyx\Messages\OutboundMessagePayload\From;
-use Telnyx\Messages\OutboundMessagePayload\Media;
-use Telnyx\Messages\OutboundMessagePayload\To;
-use Telnyx\Messages\OutboundMessagePayload\Type;
 use Telnyx\Webhooks\DeliveryUpdateWebhookEvent\Data\EventType;
 use Telnyx\Webhooks\DeliveryUpdateWebhookEvent\Data\RecordType;
 
 /**
+ * @phpstan-import-type OutboundMessagePayloadShape from \Telnyx\Messages\OutboundMessagePayload
+ *
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   eventType?: value-of<EventType>|null,
+ *   eventType?: null|EventType|value-of<EventType>,
  *   occurredAt?: \DateTimeInterface|null,
- *   payload?: OutboundMessagePayload|null,
- *   recordType?: value-of<RecordType>|null,
+ *   payload?: null|OutboundMessagePayload|OutboundMessagePayloadShape,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  * }
  */
 final class Data implements BaseModel
@@ -76,35 +69,7 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param EventType|value-of<EventType> $eventType
-     * @param OutboundMessagePayload|array{
-     *   id?: string|null,
-     *   cc?: list<Cc>|null,
-     *   completedAt?: \DateTimeInterface|null,
-     *   cost?: Cost|null,
-     *   costBreakdown?: CostBreakdown|null,
-     *   direction?: value-of<Direction>|null,
-     *   encoding?: string|null,
-     *   errors?: list<MessagingError>|null,
-     *   from?: From|null,
-     *   media?: list<Media>|null,
-     *   messagingProfileID?: string|null,
-     *   organizationID?: string|null,
-     *   parts?: int|null,
-     *   receivedAt?: \DateTimeInterface|null,
-     *   recordType?: value-of<OutboundMessagePayload\RecordType>|null,
-     *   sentAt?: \DateTimeInterface|null,
-     *   subject?: string|null,
-     *   tags?: list<string>|null,
-     *   tcrCampaignBillable?: bool|null,
-     *   tcrCampaignID?: string|null,
-     *   tcrCampaignRegistered?: string|null,
-     *   text?: string|null,
-     *   to?: list<To>|null,
-     *   type?: value-of<Type>|null,
-     *   validUntil?: \DateTimeInterface|null,
-     *   webhookFailoverURL?: string|null,
-     *   webhookURL?: string|null,
-     * } $payload
+     * @param OutboundMessagePayloadShape $payload
      * @param RecordType|value-of<RecordType> $recordType
      */
     public static function with(
@@ -161,35 +126,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param OutboundMessagePayload|array{
-     *   id?: string|null,
-     *   cc?: list<Cc>|null,
-     *   completedAt?: \DateTimeInterface|null,
-     *   cost?: Cost|null,
-     *   costBreakdown?: CostBreakdown|null,
-     *   direction?: value-of<Direction>|null,
-     *   encoding?: string|null,
-     *   errors?: list<MessagingError>|null,
-     *   from?: From|null,
-     *   media?: list<Media>|null,
-     *   messagingProfileID?: string|null,
-     *   organizationID?: string|null,
-     *   parts?: int|null,
-     *   receivedAt?: \DateTimeInterface|null,
-     *   recordType?: value-of<OutboundMessagePayload\RecordType>|null,
-     *   sentAt?: \DateTimeInterface|null,
-     *   subject?: string|null,
-     *   tags?: list<string>|null,
-     *   tcrCampaignBillable?: bool|null,
-     *   tcrCampaignID?: string|null,
-     *   tcrCampaignRegistered?: string|null,
-     *   text?: string|null,
-     *   to?: list<To>|null,
-     *   type?: value-of<Type>|null,
-     *   validUntil?: \DateTimeInterface|null,
-     *   webhookFailoverURL?: string|null,
-     *   webhookURL?: string|null,
-     * } $payload
+     * @param OutboundMessagePayloadShape $payload
      */
     public function withPayload(OutboundMessagePayload|array $payload): self
     {

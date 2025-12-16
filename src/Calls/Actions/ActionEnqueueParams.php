@@ -17,11 +17,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type ActionEnqueueParamsShape = array{
  *   queueName: string,
- *   clientState?: string,
- *   commandID?: string,
- *   keepAfterHangup?: bool,
- *   maxSize?: int,
- *   maxWaitTimeSecs?: int,
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   keepAfterHangup?: bool|null,
+ *   maxSize?: int|null,
+ *   maxWaitTimeSecs?: int|null,
  * }
  */
 final class ActionEnqueueParams implements BaseModel

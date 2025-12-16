@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\SimCardsService::delete()
  *
- * @phpstan-type SimCardDeleteParamsShape = array{reportLost?: bool}
+ * @phpstan-type SimCardDeleteParamsShape = array{reportLost?: bool|null}
  */
 final class SimCardDeleteParams implements BaseModel
 {

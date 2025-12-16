@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\ManagedAccountsService::update()
  *
  * @phpstan-type ManagedAccountUpdateParamsShape = array{
- *   managedAccountAllowCustomPricing?: bool
+ *   managedAccountAllowCustomPricing?: bool|null
  * }
  */
 final class ManagedAccountUpdateParams implements BaseModel

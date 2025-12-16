@@ -20,9 +20,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type ActionUpdateParamsShape = array{
  *   callControlID: string,
  *   supervisorRole: SupervisorRole|value-of<SupervisorRole>,
- *   commandID?: string,
- *   region?: Region|value-of<Region>,
- *   whisperCallControlIDs?: list<string>,
+ *   commandID?: string|null,
+ *   region?: null|Region|value-of<Region>,
+ *   whisperCallControlIDs?: list<string>|null,
  * }
  */
 final class ActionUpdateParams implements BaseModel

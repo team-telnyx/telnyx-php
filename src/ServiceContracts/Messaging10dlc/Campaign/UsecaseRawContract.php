@@ -15,7 +15,7 @@ interface UsecaseRawContract
     /**
      * @api
      *
-     * @param array<mixed>|UsecaseGetCostParams $params
+     * @param array<string,mixed>|UsecaseGetCostParams $params
      *
      * @return BaseResponse<UsecaseGetCostResponse>
      *

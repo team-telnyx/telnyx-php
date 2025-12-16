@@ -10,6 +10,12 @@ use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 
+/**
+ * @phpstan-import-type ChatCompletionToolParamShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam
+ * @phpstan-import-type RetrievalShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\Retrieval
+ *
+ * @phpstan-type ToolShape = ChatCompletionToolParamShape|RetrievalShape
+ */
 final class Tool implements ConverterSource
 {
     use SdkUnion;

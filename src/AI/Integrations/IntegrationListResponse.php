@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Telnyx\AI\Integrations;
 
 use Telnyx\AI\Integrations\IntegrationListResponse\Data;
-use Telnyx\AI\Integrations\IntegrationListResponse\Data\Status;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type IntegrationListResponseShape = array{data: list<Data>}
+ * @phpstan-import-type DataShape from \Telnyx\AI\Integrations\IntegrationListResponse\Data
+ *
+ * @phpstan-type IntegrationListResponseShape = array{data: list<DataShape>}
  */
 final class IntegrationListResponse implements BaseModel
 {
@@ -46,15 +47,7 @@ final class IntegrationListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   id: string,
-     *   availableTools: list<string>,
-     *   description: string,
-     *   displayName: string,
-     *   logoURL: string,
-     *   name: string,
-     *   status: value-of<Status>,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public static function with(array $data): self
     {
@@ -66,15 +59,7 @@ final class IntegrationListResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   id: string,
-     *   availableTools: list<string>,
-     *   description: string,
-     *   displayName: string,
-     *   logoURL: string,
-     *   name: string,
-     *   status: value-of<Status>,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {

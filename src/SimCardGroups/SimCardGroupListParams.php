@@ -15,11 +15,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\SimCardGroupsService::list()
  *
  * @phpstan-type SimCardGroupListParamsShape = array{
- *   filterName?: string,
- *   filterPrivateWirelessGatewayID?: string,
- *   filterWirelessBlocklistID?: string,
- *   pageNumber?: int,
- *   pageSize?: int,
+ *   filterName?: string|null,
+ *   filterPrivateWirelessGatewayID?: string|null,
+ *   filterWirelessBlocklistID?: string|null,
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
  * }
  */
 final class SimCardGroupListParams implements BaseModel

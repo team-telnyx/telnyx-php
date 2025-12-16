@@ -21,7 +21,7 @@ interface PhoneNumbersRawContract
      * @api
      *
      * @param string $phoneNumberID A phone number's ID via the Telnyx API
-     * @param array<mixed>|PhoneNumberRetrieveParams $params
+     * @param array<string,mixed>|PhoneNumberRetrieveParams $params
      *
      * @return BaseResponse<PhoneNumberGetResponse>
      *
@@ -37,7 +37,7 @@ interface PhoneNumbersRawContract
      * @api
      *
      * @param string $phoneNumberID Path param: A phone number's ID via the Telnyx API
-     * @param array<mixed>|PhoneNumberUpdateParams $params
+     * @param array<string,mixed>|PhoneNumberUpdateParams $params
      *
      * @return BaseResponse<PhoneNumberUpdateResponse>
      *
@@ -53,7 +53,7 @@ interface PhoneNumbersRawContract
      * @api
      *
      * @param string $id identifies the resource
-     * @param array<mixed>|PhoneNumberListParams $params
+     * @param array<string,mixed>|PhoneNumberListParams $params
      *
      * @return BaseResponse<DefaultPagination<ExternalConnectionPhoneNumber>>
      *

@@ -5,20 +5,19 @@ declare(strict_types=1);
 namespace Telnyx\AvailablePhoneNumbers;
 
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data;
-use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\CostInformation;
-use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\Feature;
-use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\RecordType;
-use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\RegionInformation;
 use Telnyx\AvailablePhoneNumbersMetadata;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data
+ * @phpstan-import-type AvailablePhoneNumbersMetadataShape from \Telnyx\AvailablePhoneNumbersMetadata
+ *
  * @phpstan-type AvailablePhoneNumberListResponseShape = array{
- *   data?: list<Data>|null,
- *   meta?: AvailablePhoneNumbersMetadata|null,
- *   metadata?: AvailablePhoneNumbersMetadata|null,
+ *   data?: list<DataShape>|null,
+ *   meta?: null|AvailablePhoneNumbersMetadata|AvailablePhoneNumbersMetadataShape,
+ *   metadata?: null|AvailablePhoneNumbersMetadata|AvailablePhoneNumbersMetadataShape,
  * }
  */
 final class AvailablePhoneNumberListResponse implements BaseModel
@@ -46,23 +45,9 @@ final class AvailablePhoneNumberListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   bestEffort?: bool|null,
-     *   costInformation?: CostInformation|null,
-     *   features?: list<Feature>|null,
-     *   phoneNumber?: string|null,
-     *   quickship?: bool|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   regionInformation?: list<RegionInformation>|null,
-     *   reservable?: bool|null,
-     *   vanityFormat?: string|null,
-     * }> $data
-     * @param AvailablePhoneNumbersMetadata|array{
-     *   bestEffortResults?: int|null, totalResults?: int|null
-     * } $meta
-     * @param AvailablePhoneNumbersMetadata|array{
-     *   bestEffortResults?: int|null, totalResults?: int|null
-     * } $metadata
+     * @param list<DataShape> $data
+     * @param AvailablePhoneNumbersMetadataShape $meta
+     * @param AvailablePhoneNumbersMetadataShape $metadata
      */
     public static function with(
         ?array $data = null,
@@ -79,17 +64,7 @@ final class AvailablePhoneNumberListResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   bestEffort?: bool|null,
-     *   costInformation?: CostInformation|null,
-     *   features?: list<Feature>|null,
-     *   phoneNumber?: string|null,
-     *   quickship?: bool|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   regionInformation?: list<RegionInformation>|null,
-     *   reservable?: bool|null,
-     *   vanityFormat?: string|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {
@@ -100,9 +75,7 @@ final class AvailablePhoneNumberListResponse implements BaseModel
     }
 
     /**
-     * @param AvailablePhoneNumbersMetadata|array{
-     *   bestEffortResults?: int|null, totalResults?: int|null
-     * } $meta
+     * @param AvailablePhoneNumbersMetadataShape $meta
      */
     public function withMeta(AvailablePhoneNumbersMetadata|array $meta): self
     {
@@ -113,9 +86,7 @@ final class AvailablePhoneNumberListResponse implements BaseModel
     }
 
     /**
-     * @param AvailablePhoneNumbersMetadata|array{
-     *   bestEffortResults?: int|null, totalResults?: int|null
-     * } $metadata
+     * @param AvailablePhoneNumbersMetadataShape $metadata
      */
     public function withMetadata(
         AvailablePhoneNumbersMetadata|array $metadata

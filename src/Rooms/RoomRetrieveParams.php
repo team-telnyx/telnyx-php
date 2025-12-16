@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\RoomsService::retrieve()
  *
- * @phpstan-type RoomRetrieveParamsShape = array{includeSessions?: bool}
+ * @phpstan-type RoomRetrieveParamsShape = array{includeSessions?: bool|null}
  */
 final class RoomRetrieveParams implements BaseModel
 {

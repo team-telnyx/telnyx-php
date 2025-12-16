@@ -9,19 +9,20 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCards\Actions\SimCardAction\ActionType;
 use Telnyx\SimCards\Actions\SimCardAction\Status;
-use Telnyx\SimCards\Actions\SimCardAction\Status\Value;
 
 /**
  * This object represents a SIM card action. It allows tracking the current status of an operation that impacts the SIM card.
  *
+ * @phpstan-import-type StatusShape from \Telnyx\SimCards\Actions\SimCardAction\Status
+ *
  * @phpstan-type SimCardActionShape = array{
  *   id?: string|null,
- *   actionType?: value-of<ActionType>|null,
+ *   actionType?: null|ActionType|value-of<ActionType>,
  *   createdAt?: string|null,
  *   recordType?: string|null,
  *   settings?: array<string,mixed>|null,
  *   simCardID?: string|null,
- *   status?: Status|null,
+ *   status?: null|Status|StatusShape,
  *   updatedAt?: string|null,
  * }
  */
@@ -94,7 +95,7 @@ final class SimCardAction implements BaseModel
      *
      * @param ActionType|value-of<ActionType> $actionType
      * @param array<string,mixed>|null $settings
-     * @param Status|array{reason?: string|null, value?: value-of<Value>|null} $status
+     * @param StatusShape $status
      */
     public static function with(
         ?string $id = null,
@@ -194,7 +195,7 @@ final class SimCardAction implements BaseModel
     }
 
     /**
-     * @param Status|array{reason?: string|null, value?: value-of<Value>|null} $status
+     * @param StatusShape $status
      */
     public function withStatus(Status|array $status): self
     {

@@ -18,7 +18,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $addressUuid the UUID of the address that should be accepted
-     * @param array<mixed>|ActionAcceptSuggestionsParams $params
+     * @param array<string,mixed>|ActionAcceptSuggestionsParams $params
      *
      * @return BaseResponse<ActionAcceptSuggestionsResponse>
      *
@@ -33,7 +33,7 @@ interface ActionsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ActionValidateParams $params
+     * @param array<string,mixed>|ActionValidateParams $params
      *
      * @return BaseResponse<ActionValidateResponse>
      *

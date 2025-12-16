@@ -14,6 +14,16 @@ use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 
+/**
+ * @phpstan-import-type BookAppointmentToolShape from \Telnyx\AI\Assistants\Assistant\Tool\BookAppointmentTool
+ * @phpstan-import-type CheckAvailabilityToolShape from \Telnyx\AI\Assistants\Assistant\Tool\CheckAvailabilityTool
+ * @phpstan-import-type WebhookToolShape from \Telnyx\AI\Assistants\WebhookTool
+ * @phpstan-import-type HangupToolShape from \Telnyx\AI\Assistants\HangupTool
+ * @phpstan-import-type TransferToolShape from \Telnyx\AI\Assistants\TransferTool
+ * @phpstan-import-type RetrievalToolShape from \Telnyx\AI\Assistants\RetrievalTool
+ *
+ * @phpstan-type ToolShape = BookAppointmentToolShape|CheckAvailabilityToolShape|WebhookToolShape|HangupToolShape|TransferToolShape|RetrievalToolShape
+ */
 final class Tool implements ConverterSource
 {
     use SdkUnion;

@@ -8,12 +8,13 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallSiprecStartedWebhookEvent\Data;
-use Telnyx\Webhooks\CallSiprecStartedWebhookEvent\Data\EventType;
-use Telnyx\Webhooks\CallSiprecStartedWebhookEvent\Data\Payload;
-use Telnyx\Webhooks\CallSiprecStartedWebhookEvent\Data\RecordType;
 
 /**
- * @phpstan-type CallSiprecStartedWebhookEventShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\Webhooks\CallSiprecStartedWebhookEvent\Data
+ *
+ * @phpstan-type CallSiprecStartedWebhookEventShape = array{
+ *   data?: null|Data|DataShape
+ * }
  */
 final class CallSiprecStartedWebhookEvent implements BaseModel
 {
@@ -33,13 +34,7 @@ final class CallSiprecStartedWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   id?: string|null,
-     *   eventType?: value-of<EventType>|null,
-     *   occurredAt?: \DateTimeInterface|null,
-     *   payload?: Payload|null,
-     *   recordType?: value-of<RecordType>|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -51,13 +46,7 @@ final class CallSiprecStartedWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   id?: string|null,
-     *   eventType?: value-of<EventType>|null,
-     *   occurredAt?: \DateTimeInterface|null,
-     *   payload?: Payload|null,
-     *   recordType?: value-of<RecordType>|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

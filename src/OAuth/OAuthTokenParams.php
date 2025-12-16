@@ -18,13 +18,13 @@ use Telnyx\OAuth\OAuthTokenParams\GrantType;
  *
  * @phpstan-type OAuthTokenParamsShape = array{
  *   grantType: GrantType|value-of<GrantType>,
- *   clientID?: string,
- *   clientSecret?: string,
- *   code?: string,
- *   codeVerifier?: string,
- *   redirectUri?: string,
- *   refreshToken?: string,
- *   scope?: string,
+ *   clientID?: string|null,
+ *   clientSecret?: string|null,
+ *   code?: string|null,
+ *   codeVerifier?: string|null,
+ *   redirectUri?: string|null,
+ *   refreshToken?: string|null,
+ *   scope?: string|null,
  * }
  */
 final class OAuthTokenParams implements BaseModel

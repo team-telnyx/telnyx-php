@@ -19,7 +19,7 @@ interface ReleasesRawContract
      * @api
      *
      * @param string $releaseID Identifies a Release request
-     * @param array<mixed>|ReleaseRetrieveParams $params
+     * @param array<string,mixed>|ReleaseRetrieveParams $params
      *
      * @return BaseResponse<ReleaseGetResponse>
      *
@@ -35,7 +35,7 @@ interface ReleasesRawContract
      * @api
      *
      * @param string $id identifies the resource
-     * @param array<mixed>|ReleaseListParams $params
+     * @param array<string,mixed>|ReleaseListParams $params
      *
      * @return BaseResponse<DefaultPagination<ReleaseListResponse>>
      *

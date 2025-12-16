@@ -9,16 +9,16 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParams\Threshold;
-use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParams\Threshold\Unit;
 
 /**
  * Updates information for a SIM Card Data Usage Notification.
  *
  * @see Telnyx\Services\SimCardDataUsageNotificationsService::update()
  *
+ * @phpstan-import-type ThresholdShape from \Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParams\Threshold
+ *
  * @phpstan-type SimCardDataUsageNotificationUpdateParamsShape = array{
- *   simCardID?: string,
- *   threshold?: Threshold|array{amount?: string|null, unit?: value-of<Unit>|null},
+ *   simCardID?: string|null, threshold?: ThresholdShape|null
  * }
  */
 final class SimCardDataUsageNotificationUpdateParams implements BaseModel
@@ -49,9 +49,7 @@ final class SimCardDataUsageNotificationUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Threshold|array{
-     *   amount?: string|null, unit?: value-of<Unit>|null
-     * } $threshold
+     * @param ThresholdShape $threshold
      */
     public static function with(
         ?string $simCardID = null,
@@ -79,9 +77,7 @@ final class SimCardDataUsageNotificationUpdateParams implements BaseModel
     /**
      * Data usage threshold that will trigger the notification.
      *
-     * @param Threshold|array{
-     *   amount?: string|null, unit?: value-of<Unit>|null
-     * } $threshold
+     * @param ThresholdShape $threshold
      */
     public function withThreshold(Threshold|array $threshold): self
     {

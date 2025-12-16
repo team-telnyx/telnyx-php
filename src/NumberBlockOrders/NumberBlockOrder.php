@@ -21,7 +21,7 @@ use Telnyx\NumberBlockOrders\NumberBlockOrder\Status;
  *   recordType?: string|null,
  *   requirementsMet?: bool|null,
  *   startingNumber?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */

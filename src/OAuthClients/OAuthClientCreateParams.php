@@ -22,11 +22,11 @@ use Telnyx\OAuthClients\OAuthClientCreateParams\ClientType;
  *   allowedScopes: list<string>,
  *   clientType: ClientType|value-of<ClientType>,
  *   name: string,
- *   logoUri?: string,
- *   policyUri?: string,
- *   redirectUris?: list<string>,
- *   requirePkce?: bool,
- *   tosUri?: string,
+ *   logoUri?: string|null,
+ *   policyUri?: string|null,
+ *   redirectUris?: list<string>|null,
+ *   requirePkce?: bool|null,
+ *   tosUri?: string|null,
  * }
  */
 final class OAuthClientCreateParams implements BaseModel

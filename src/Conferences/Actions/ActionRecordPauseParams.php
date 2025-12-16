@@ -16,7 +16,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Conferences\ActionsService::recordPause()
  *
  * @phpstan-type ActionRecordPauseParamsShape = array{
- *   commandID?: string, recordingID?: string, region?: Region|value-of<Region>
+ *   commandID?: string|null,
+ *   recordingID?: string|null,
+ *   region?: null|Region|value-of<Region>,
  * }
  */
 final class ActionRecordPauseParams implements BaseModel

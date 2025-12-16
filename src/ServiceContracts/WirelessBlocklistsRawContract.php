@@ -22,7 +22,7 @@ interface WirelessBlocklistsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|WirelessBlocklistCreateParams $params
+     * @param array<string,mixed>|WirelessBlocklistCreateParams $params
      *
      * @return BaseResponse<WirelessBlocklistNewResponse>
      *
@@ -50,7 +50,7 @@ interface WirelessBlocklistsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|WirelessBlocklistUpdateParams $params
+     * @param array<string,mixed>|WirelessBlocklistUpdateParams $params
      *
      * @return BaseResponse<WirelessBlocklistUpdateResponse>
      *
@@ -64,7 +64,7 @@ interface WirelessBlocklistsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|WirelessBlocklistListParams $params
+     * @param array<string,mixed>|WirelessBlocklistListParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<WirelessBlocklist>>
      *

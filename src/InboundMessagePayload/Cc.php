@@ -13,9 +13,9 @@ use Telnyx\InboundMessagePayload\Cc\Status;
 /**
  * @phpstan-type CcShape = array{
  *   carrier?: string|null,
- *   lineType?: value-of<LineType>|null,
+ *   lineType?: null|LineType|value-of<LineType>,
  *   phoneNumber?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  * }
  */
 final class Cc implements BaseModel

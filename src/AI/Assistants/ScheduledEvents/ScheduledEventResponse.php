@@ -10,6 +10,11 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
 
 /**
  * Union type for different scheduled event response types.
+ *
+ * @phpstan-import-type ScheduledPhoneCallEventResponseShape from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledPhoneCallEventResponse
+ * @phpstan-import-type ScheduledSMSEventResponseShape from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledSMSEventResponse
+ *
+ * @phpstan-type ScheduledEventResponseShape = ScheduledPhoneCallEventResponseShape|ScheduledSMSEventResponseShape
  */
 final class ScheduledEventResponse implements ConverterSource
 {

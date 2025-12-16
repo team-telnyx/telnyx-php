@@ -8,11 +8,12 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse\Data;
-use Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse\Data\RegulatoryRequirement;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse\Data
+ *
  * @phpstan-type RegulatoryRequirementGetResponseShape = array{
- *   data?: list<Data>|null
+ *   data?: list<DataShape>|null
  * }
  */
 final class RegulatoryRequirementGetResponse implements BaseModel
@@ -34,12 +35,7 @@ final class RegulatoryRequirementGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   action?: string|null,
-     *   countryCode?: string|null,
-     *   phoneNumberType?: string|null,
-     *   regulatoryRequirements?: list<RegulatoryRequirement>|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public static function with(?array $data = null): self
     {
@@ -51,12 +47,7 @@ final class RegulatoryRequirementGetResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   action?: string|null,
-     *   countryCode?: string|null,
-     *   phoneNumberType?: string|null,
-     *   regulatoryRequirements?: list<RegulatoryRequirement>|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {

@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Messaging10dlc\Brand\ExternalVettingService::imports()
  *
  * @phpstan-type ExternalVettingImportsParamsShape = array{
- *   evpID: string, vettingID: string, vettingToken?: string
+ *   evpID: string, vettingID: string, vettingToken?: string|null
  * }
  */
 final class ExternalVettingImportsParams implements BaseModel

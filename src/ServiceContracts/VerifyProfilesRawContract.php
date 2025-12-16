@@ -23,7 +23,7 @@ interface VerifyProfilesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|VerifyProfileCreateParams $params
+     * @param array<string,mixed>|VerifyProfileCreateParams $params
      *
      * @return BaseResponse<VerifyProfileData>
      *
@@ -52,7 +52,7 @@ interface VerifyProfilesRawContract
      * @api
      *
      * @param string $verifyProfileID the identifier of the Verify profile to update
-     * @param array<mixed>|VerifyProfileUpdateParams $params
+     * @param array<string,mixed>|VerifyProfileUpdateParams $params
      *
      * @return BaseResponse<VerifyProfileData>
      *
@@ -67,7 +67,7 @@ interface VerifyProfilesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|VerifyProfileListParams $params
+     * @param array<string,mixed>|VerifyProfileListParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<VerifyProfile>>
      *
@@ -95,7 +95,7 @@ interface VerifyProfilesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|VerifyProfileCreateTemplateParams $params
+     * @param array<string,mixed>|VerifyProfileCreateTemplateParams $params
      *
      * @return BaseResponse<MessageTemplate>
      *
@@ -121,7 +121,7 @@ interface VerifyProfilesRawContract
      * @api
      *
      * @param string $templateID the identifier of the message template to update
-     * @param array<mixed>|VerifyProfileUpdateTemplateParams $params
+     * @param array<string,mixed>|VerifyProfileUpdateTemplateParams $params
      *
      * @return BaseResponse<MessageTemplate>
      *

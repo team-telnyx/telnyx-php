@@ -18,7 +18,7 @@ interface ReportsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ReportListMdrsParams $params
+     * @param array<string,mixed>|ReportListMdrsParams $params
      *
      * @return BaseResponse<ReportListMdrsResponse>
      *
@@ -32,7 +32,7 @@ interface ReportsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ReportListWdrsParams $params
+     * @param array<string,mixed>|ReportListWdrsParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<ReportListWdrsResponse>>
      *

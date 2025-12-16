@@ -9,8 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RoomCompositions\RoomCompositionListParams\Filter;
-use Telnyx\RoomCompositions\RoomCompositionListParams\Filter\DateCreatedAt;
-use Telnyx\RoomCompositions\RoomCompositionListParams\Filter\Status;
 use Telnyx\RoomCompositions\RoomCompositionListParams\Page;
 
 /**
@@ -18,13 +16,11 @@ use Telnyx\RoomCompositions\RoomCompositionListParams\Page;
  *
  * @see Telnyx\Services\RoomCompositionsService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\RoomCompositions\RoomCompositionListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\RoomCompositions\RoomCompositionListParams\Page
+ *
  * @phpstan-type RoomCompositionListParamsShape = array{
- *   filter?: Filter|array{
- *     dateCreatedAt?: DateCreatedAt|null,
- *     sessionID?: string|null,
- *     status?: value-of<Status>|null,
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   filter?: FilterShape|null, page?: PageShape|null
  * }
  */
 final class RoomCompositionListParams implements BaseModel
@@ -55,12 +51,8 @@ final class RoomCompositionListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   dateCreatedAt?: DateCreatedAt|null,
-     *   sessionID?: string|null,
-     *   status?: value-of<Status>|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -77,11 +69,7 @@ final class RoomCompositionListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[session_id], filter[status].
      *
-     * @param Filter|array{
-     *   dateCreatedAt?: DateCreatedAt|null,
-     *   sessionID?: string|null,
-     *   status?: value-of<Status>|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -94,7 +82,7 @@ final class RoomCompositionListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

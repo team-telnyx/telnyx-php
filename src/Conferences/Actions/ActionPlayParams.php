@@ -15,12 +15,14 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Conferences\ActionsService::play()
  *
+ * @phpstan-import-type LoopcountShape from \Telnyx\Calls\Actions\Loopcount
+ *
  * @phpstan-type ActionPlayParamsShape = array{
- *   audioURL?: string,
- *   callControlIDs?: list<string>,
- *   loop?: string|int,
- *   mediaName?: string,
- *   region?: Region|value-of<Region>,
+ *   audioURL?: string|null,
+ *   callControlIDs?: list<string>|null,
+ *   loop?: LoopcountShape|null,
+ *   mediaName?: string|null,
+ *   region?: null|Region|value-of<Region>,
  * }
  */
 final class ActionPlayParams implements BaseModel
@@ -74,6 +76,7 @@ final class ActionPlayParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $callControlIDs
+     * @param LoopcountShape $loop
      * @param Region|value-of<Region> $region
      */
     public static function with(
@@ -120,6 +123,8 @@ final class ActionPlayParams implements BaseModel
 
     /**
      * The number of times the audio file should be played. If supplied, the value must be an integer between 1 and 100, or the special string `infinity` for an endless loop.
+     *
+     * @param LoopcountShape $loop
      */
     public function withLoop(string|int $loop): self
     {

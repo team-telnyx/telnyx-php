@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\BundlePricing\UserBundlesService::listResources()
  *
  * @phpstan-type UserBundleListResourcesParamsShape = array{
- *   authorizationBearer?: string
+ *   authorizationBearer?: string|null
  * }
  */
 final class UserBundleListResourcesParams implements BaseModel

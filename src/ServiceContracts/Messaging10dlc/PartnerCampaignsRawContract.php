@@ -32,7 +32,7 @@ interface PartnerCampaignsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PartnerCampaignUpdateParams $params
+     * @param array<string,mixed>|PartnerCampaignUpdateParams $params
      *
      * @return BaseResponse<TelnyxDownstreamCampaign>
      *
@@ -47,7 +47,7 @@ interface PartnerCampaignsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PartnerCampaignListParams $params
+     * @param array<string,mixed>|PartnerCampaignListParams $params
      *
      * @return BaseResponse<PerPagePaginationV2<TelnyxDownstreamCampaign>>
      *
@@ -61,7 +61,7 @@ interface PartnerCampaignsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PartnerCampaignListSharedByMeParams $params
+     * @param array<string,mixed>|PartnerCampaignListSharedByMeParams $params
      *
      * @return BaseResponse<PerPagePaginationV2<PartnerCampaignListSharedByMeResponse>>
      *

@@ -11,8 +11,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type FunctionShape from \Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall\Function_
+ *
  * @phpstan-type ToolCallShape = array{
- *   id: string, function: Function_, type: value-of<Type>
+ *   id: string, function: Function_|FunctionShape, type: Type|value-of<Type>
  * }
  */
 final class ToolCall implements BaseModel
@@ -61,7 +63,7 @@ final class ToolCall implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Function_|array{arguments: string, name: string} $function
+     * @param FunctionShape $function
      * @param Type|value-of<Type> $type
      */
     public static function with(
@@ -90,7 +92,7 @@ final class ToolCall implements BaseModel
     }
 
     /**
-     * @param Function_|array{arguments: string, name: string} $function
+     * @param FunctionShape $function
      */
     public function withFunction(Function_|array $function): self
     {

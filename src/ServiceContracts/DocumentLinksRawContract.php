@@ -16,7 +16,7 @@ interface DocumentLinksRawContract
     /**
      * @api
      *
-     * @param array<mixed>|DocumentLinkListParams $params
+     * @param array<string,mixed>|DocumentLinkListParams $params
      *
      * @return BaseResponse<DefaultPagination<DocumentLinkListResponse>>
      *

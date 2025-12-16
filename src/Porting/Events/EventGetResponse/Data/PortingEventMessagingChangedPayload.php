@@ -10,17 +10,18 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventMessagingChangedPayload\AvailableNotificationMethod;
 use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventMessagingChangedPayload\EventType;
 use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventMessagingChangedPayload\Payload;
-use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventMessagingChangedPayload\Payload\Messaging;
 use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventMessagingChangedPayload\PayloadStatus;
 
 /**
+ * @phpstan-import-type PayloadShape from \Telnyx\Porting\Events\EventGetResponse\Data\PortingEventMessagingChangedPayload\Payload
+ *
  * @phpstan-type PortingEventMessagingChangedPayloadShape = array{
  *   id?: string|null,
- *   availableNotificationMethods?: list<value-of<AvailableNotificationMethod>>|null,
+ *   availableNotificationMethods?: list<AvailableNotificationMethod|value-of<AvailableNotificationMethod>>|null,
  *   createdAt?: \DateTimeInterface|null,
- *   eventType?: value-of<EventType>|null,
- *   payload?: Payload|null,
- *   payloadStatus?: value-of<PayloadStatus>|null,
+ *   eventType?: null|EventType|value-of<EventType>,
+ *   payload?: null|Payload|PayloadShape,
+ *   payloadStatus?: null|PayloadStatus|value-of<PayloadStatus>,
  *   portingOrderID?: string|null,
  *   recordType?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
@@ -106,12 +107,7 @@ final class PortingEventMessagingChangedPayload implements BaseModel
      *
      * @param list<AvailableNotificationMethod|value-of<AvailableNotificationMethod>> $availableNotificationMethods
      * @param EventType|value-of<EventType> $eventType
-     * @param Payload|array{
-     *   id?: string|null,
-     *   customerReference?: string|null,
-     *   messaging?: Messaging|null,
-     *   supportKey?: string|null,
-     * } $payload
+     * @param PayloadShape $payload
      * @param PayloadStatus|value-of<PayloadStatus> $payloadStatus
      */
     public static function with(
@@ -192,12 +188,7 @@ final class PortingEventMessagingChangedPayload implements BaseModel
     /**
      * The webhook payload for the porting_order.messaging_changed event.
      *
-     * @param Payload|array{
-     *   id?: string|null,
-     *   customerReference?: string|null,
-     *   messaging?: Messaging|null,
-     *   supportKey?: string|null,
-     * } $payload
+     * @param PayloadShape $payload
      */
     public function withPayload(Payload|array $payload): self
     {

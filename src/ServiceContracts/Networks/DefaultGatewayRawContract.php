@@ -18,7 +18,7 @@ interface DefaultGatewayRawContract
      * @api
      *
      * @param string $networkIdentifier identifies the resource
-     * @param array<mixed>|DefaultGatewayCreateParams $params
+     * @param array<string,mixed>|DefaultGatewayCreateParams $params
      *
      * @return BaseResponse<DefaultGatewayNewResponse>
      *

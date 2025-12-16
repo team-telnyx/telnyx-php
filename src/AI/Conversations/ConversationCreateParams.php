@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\ConversationsService::create()
  *
  * @phpstan-type ConversationCreateParamsShape = array{
- *   metadata?: array<string,string>, name?: string
+ *   metadata?: array<string,string>|null, name?: string|null
  * }
  */
 final class ConversationCreateParams implements BaseModel

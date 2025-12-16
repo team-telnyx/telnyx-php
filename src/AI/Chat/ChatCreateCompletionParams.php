@@ -4,15 +4,10 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Chat;
 
-use Telnyx\AI\Assistants\InferenceEmbeddingBucketIDs;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Message;
-use Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Content\TextAndImageArray;
-use Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Role;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\ResponseFormat;
-use Telnyx\AI\Chat\ChatCreateCompletionParams\ResponseFormat\Type;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam;
-use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam\Function_;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\Retrieval;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\ToolChoice;
 use Telnyx\Core\Attributes\Optional;
@@ -26,36 +21,34 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\ChatService::createCompletion()
  *
+ * @phpstan-import-type MessageShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\Message
+ * @phpstan-import-type ResponseFormatShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\ResponseFormat
+ * @phpstan-import-type ToolShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\Tool
+ *
  * @phpstan-type ChatCreateCompletionParamsShape = array{
- *   messages: list<Message|array{
- *     content: string|list<TextAndImageArray>, role: value-of<Role>
- *   }>,
- *   apiKeyRef?: string,
- *   bestOf?: int,
- *   earlyStopping?: bool,
- *   frequencyPenalty?: float,
- *   guidedChoice?: list<string>,
- *   guidedJson?: array<string,mixed>,
- *   guidedRegex?: string,
- *   lengthPenalty?: float,
- *   logprobs?: bool,
- *   maxTokens?: int,
- *   minP?: float,
- *   model?: string,
- *   n?: float,
- *   presencePenalty?: float,
- *   responseFormat?: ResponseFormat|array{type: value-of<Type>},
- *   stream?: bool,
- *   temperature?: float,
- *   toolChoice?: ToolChoice|value-of<ToolChoice>,
- *   tools?: list<ChatCompletionToolParam|array{
- *     function: Function_, type?: 'function'
- *   }|Retrieval|array{
- *     retrieval: InferenceEmbeddingBucketIDs, type?: 'retrieval'
- *   }>,
- *   topLogprobs?: int,
- *   topP?: float,
- *   useBeamSearch?: bool,
+ *   messages: list<MessageShape>,
+ *   apiKeyRef?: string|null,
+ *   bestOf?: int|null,
+ *   earlyStopping?: bool|null,
+ *   frequencyPenalty?: float|null,
+ *   guidedChoice?: list<string>|null,
+ *   guidedJson?: array<string,mixed>|null,
+ *   guidedRegex?: string|null,
+ *   lengthPenalty?: float|null,
+ *   logprobs?: bool|null,
+ *   maxTokens?: int|null,
+ *   minP?: float|null,
+ *   model?: string|null,
+ *   n?: float|null,
+ *   presencePenalty?: float|null,
+ *   responseFormat?: ResponseFormatShape|null,
+ *   stream?: bool|null,
+ *   temperature?: float|null,
+ *   toolChoice?: null|ToolChoice|value-of<ToolChoice>,
+ *   tools?: list<ToolShape>|null,
+ *   topLogprobs?: int|null,
+ *   topP?: float|null,
+ *   useBeamSearch?: bool|null,
  * }
  */
 final class ChatCreateCompletionParams implements BaseModel
@@ -232,18 +225,12 @@ final class ChatCreateCompletionParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Message|array{
-     *   content: string|list<TextAndImageArray>, role: value-of<Role>
-     * }> $messages
+     * @param list<MessageShape> $messages
      * @param list<string> $guidedChoice
      * @param array<string,mixed> $guidedJson
-     * @param ResponseFormat|array{type: value-of<Type>} $responseFormat
+     * @param ResponseFormatShape $responseFormat
      * @param ToolChoice|value-of<ToolChoice> $toolChoice
-     * @param list<ChatCompletionToolParam|array{
-     *   function: Function_, type?: 'function'
-     * }|Retrieval|array{
-     *   retrieval: InferenceEmbeddingBucketIDs, type?: 'retrieval'
-     * }> $tools
+     * @param list<ToolShape> $tools
      */
     public static function with(
         array $messages,
@@ -303,9 +290,7 @@ final class ChatCreateCompletionParams implements BaseModel
     /**
      * A list of the previous chat messages for context.
      *
-     * @param list<Message|array{
-     *   content: string|list<TextAndImageArray>, role: value-of<Role>
-     * }> $messages
+     * @param list<MessageShape> $messages
      */
     public function withMessages(array $messages): self
     {
@@ -476,7 +461,7 @@ final class ChatCreateCompletionParams implements BaseModel
     /**
      * Use this is you want to guarantee a JSON output without defining a schema. For control over the schema, use `guided_json`.
      *
-     * @param ResponseFormat|array{type: value-of<Type>} $responseFormat
+     * @param ResponseFormatShape $responseFormat
      */
     public function withResponseFormat(
         ResponseFormat|array $responseFormat
@@ -523,11 +508,7 @@ final class ChatCreateCompletionParams implements BaseModel
     /**
      * The `function` tool type follows the same schema as the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat). The `retrieval` tool type is unique to Telnyx. You may pass a list of [embedded storage buckets](https://developers.telnyx.com/api/inference/inference-embedding/post-embedding) for retrieval-augmented generation.
      *
-     * @param list<ChatCompletionToolParam|array{
-     *   function: Function_, type?: 'function'
-     * }|Retrieval|array{
-     *   retrieval: InferenceEmbeddingBucketIDs, type?: 'retrieval'
-     * }> $tools
+     * @param list<ToolShape> $tools
      */
     public function withTools(array $tools): self
     {

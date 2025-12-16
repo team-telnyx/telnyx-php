@@ -18,7 +18,7 @@ interface SslCertificateRawContract
      * @api
      *
      * @param string $bucketName The name of the bucket
-     * @param array<mixed>|SslCertificateCreateParams $params
+     * @param array<string,mixed>|SslCertificateCreateParams $params
      *
      * @return BaseResponse<SslCertificateNewResponse>
      *

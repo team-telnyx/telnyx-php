@@ -22,7 +22,7 @@ use Telnyx\SimCards\SimCardListWirelessConnectivityLogsResponse\LogType;
  *   ipv4?: string|null,
  *   ipv6?: string|null,
  *   lastSeen?: string|null,
- *   logType?: value-of<LogType>|null,
+ *   logType?: null|LogType|value-of<LogType>,
  *   mobileCountryCode?: string|null,
  *   mobileNetworkCode?: string|null,
  *   radioAccessTechnology?: string|null,

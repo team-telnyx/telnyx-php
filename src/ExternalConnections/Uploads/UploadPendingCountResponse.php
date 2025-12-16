@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\Uploads\UploadPendingCountResponse\Data;
 
 /**
- * @phpstan-type UploadPendingCountResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\ExternalConnections\Uploads\UploadPendingCountResponse\Data
+ *
+ * @phpstan-type UploadPendingCountResponseShape = array{
+ *   data?: null|Data|DataShape
+ * }
  */
 final class UploadPendingCountResponse implements BaseModel
 {
@@ -30,9 +34,7 @@ final class UploadPendingCountResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   pendingNumbersCount?: int|null, pendingOrdersCount?: int|null
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -44,9 +46,7 @@ final class UploadPendingCountResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   pendingNumbersCount?: int|null, pendingOrdersCount?: int|null
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

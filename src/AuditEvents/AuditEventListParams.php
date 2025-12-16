@@ -17,13 +17,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AuditEventsService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\AuditEvents\AuditEventListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\AuditEvents\AuditEventListParams\Page
+ *
  * @phpstan-type AuditEventListParamsShape = array{
- *   filter?: Filter|array{
- *     createdAfter?: \DateTimeInterface|null,
- *     createdBefore?: \DateTimeInterface|null,
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
- *   sort?: Sort|value-of<Sort>,
+ *   filter?: FilterShape|null,
+ *   page?: PageShape|null,
+ *   sort?: null|Sort|value-of<Sort>,
  * }
  */
 final class AuditEventListParams implements BaseModel
@@ -62,11 +62,8 @@ final class AuditEventListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   createdAfter?: \DateTimeInterface|null,
-     *   createdBefore?: \DateTimeInterface|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
@@ -86,10 +83,7 @@ final class AuditEventListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[created_before], filter[created_after].
      *
-     * @param Filter|array{
-     *   createdAfter?: \DateTimeInterface|null,
-     *   createdBefore?: \DateTimeInterface|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -102,7 +96,7 @@ final class AuditEventListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

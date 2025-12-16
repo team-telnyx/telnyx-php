@@ -7,17 +7,13 @@ namespace Telnyx\SimCards;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\SimCards\SimCard\CurrentBillingPeriodConsumedData;
-use Telnyx\SimCards\SimCard\CurrentDeviceLocation;
-use Telnyx\SimCards\SimCard\DataLimit;
-use Telnyx\SimCards\SimCard\EsimInstallationStatus;
-use Telnyx\SimCards\SimCard\LiveDataSession;
-use Telnyx\SimCards\SimCard\PinPukCodes;
-use Telnyx\SimCards\SimCard\Type;
-use Telnyx\SimCardStatus;
 
 /**
- * @phpstan-type SimCardUpdateResponseShape = array{data?: SimCard|null}
+ * @phpstan-import-type SimCardShape from \Telnyx\SimCards\SimCard
+ *
+ * @phpstan-type SimCardUpdateResponseShape = array{
+ *   data?: null|SimCard|SimCardShape
+ * }
  */
 final class SimCardUpdateResponse implements BaseModel
 {
@@ -37,35 +33,7 @@ final class SimCardUpdateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SimCard|array{
-     *   id?: string|null,
-     *   actionsInProgress?: bool|null,
-     *   authorizedImeis?: list<string>|null,
-     *   createdAt?: string|null,
-     *   currentBillingPeriodConsumedData?: CurrentBillingPeriodConsumedData|null,
-     *   currentDeviceLocation?: CurrentDeviceLocation|null,
-     *   currentImei?: string|null,
-     *   currentMcc?: string|null,
-     *   currentMnc?: string|null,
-     *   dataLimit?: DataLimit|null,
-     *   eid?: string|null,
-     *   esimInstallationStatus?: value-of<EsimInstallationStatus>|null,
-     *   iccid?: string|null,
-     *   imsi?: string|null,
-     *   ipv4?: string|null,
-     *   ipv6?: string|null,
-     *   liveDataSession?: value-of<LiveDataSession>|null,
-     *   msisdn?: string|null,
-     *   pinPukCodes?: PinPukCodes|null,
-     *   recordType?: string|null,
-     *   resourcesWithInProgressActions?: list<array<string,mixed>>|null,
-     *   simCardGroupID?: string|null,
-     *   status?: SimCardStatus|null,
-     *   tags?: list<string>|null,
-     *   type?: value-of<Type>|null,
-     *   updatedAt?: string|null,
-     *   version?: string|null,
-     * } $data
+     * @param SimCardShape $data
      */
     public static function with(SimCard|array|null $data = null): self
     {
@@ -77,35 +45,7 @@ final class SimCardUpdateResponse implements BaseModel
     }
 
     /**
-     * @param SimCard|array{
-     *   id?: string|null,
-     *   actionsInProgress?: bool|null,
-     *   authorizedImeis?: list<string>|null,
-     *   createdAt?: string|null,
-     *   currentBillingPeriodConsumedData?: CurrentBillingPeriodConsumedData|null,
-     *   currentDeviceLocation?: CurrentDeviceLocation|null,
-     *   currentImei?: string|null,
-     *   currentMcc?: string|null,
-     *   currentMnc?: string|null,
-     *   dataLimit?: DataLimit|null,
-     *   eid?: string|null,
-     *   esimInstallationStatus?: value-of<EsimInstallationStatus>|null,
-     *   iccid?: string|null,
-     *   imsi?: string|null,
-     *   ipv4?: string|null,
-     *   ipv6?: string|null,
-     *   liveDataSession?: value-of<LiveDataSession>|null,
-     *   msisdn?: string|null,
-     *   pinPukCodes?: PinPukCodes|null,
-     *   recordType?: string|null,
-     *   resourcesWithInProgressActions?: list<array<string,mixed>>|null,
-     *   simCardGroupID?: string|null,
-     *   status?: SimCardStatus|null,
-     *   tags?: list<string>|null,
-     *   type?: value-of<Type>|null,
-     *   updatedAt?: string|null,
-     *   version?: string|null,
-     * } $data
+     * @param SimCardShape $data
      */
     public function withData(SimCard|array $data): self
     {

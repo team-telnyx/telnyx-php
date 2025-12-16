@@ -16,7 +16,7 @@ interface CallEventsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|CallEventListParams $params
+     * @param array<string,mixed>|CallEventListParams $params
      *
      * @return BaseResponse<DefaultPagination<CallEventListResponse>>
      *

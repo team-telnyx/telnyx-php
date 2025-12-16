@@ -24,19 +24,19 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Calls\ActionsService::gatherUsingAudio()
  *
  * @phpstan-type ActionGatherUsingAudioParamsShape = array{
- *   audioURL?: string,
- *   clientState?: string,
- *   commandID?: string,
- *   interDigitTimeoutMillis?: int,
- *   invalidAudioURL?: string,
- *   invalidMediaName?: string,
- *   maximumDigits?: int,
- *   maximumTries?: int,
- *   mediaName?: string,
- *   minimumDigits?: int,
- *   terminatingDigit?: string,
- *   timeoutMillis?: int,
- *   validDigits?: string,
+ *   audioURL?: string|null,
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   interDigitTimeoutMillis?: int|null,
+ *   invalidAudioURL?: string|null,
+ *   invalidMediaName?: string|null,
+ *   maximumDigits?: int|null,
+ *   maximumTries?: int|null,
+ *   mediaName?: string|null,
+ *   minimumDigits?: int|null,
+ *   terminatingDigit?: string|null,
+ *   timeoutMillis?: int|null,
+ *   validDigits?: string|null,
  * }
  */
 final class ActionGatherUsingAudioParams implements BaseModel

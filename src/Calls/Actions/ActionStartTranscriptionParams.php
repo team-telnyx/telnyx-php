@@ -7,12 +7,7 @@ namespace Telnyx\Calls\Actions;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngine;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\DeepgramNova2Config;
-use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\DeepgramNova2Config\Language;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\DeepgramNova3Config;
-use Telnyx\Calls\Actions\TranscriptionEngineAzureConfig\Region;
-use Telnyx\Calls\Actions\TranscriptionEngineGoogleConfig\Model;
-use Telnyx\Calls\Actions\TranscriptionEngineGoogleConfig\SpeechContext;
-use Telnyx\Calls\Actions\TranscriptionEngineTelnyxConfig\TranscriptionModel;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -27,59 +22,14 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Calls\ActionsService::startTranscription()
  *
+ * @phpstan-import-type TranscriptionEngineConfigShape from \Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig
+ *
  * @phpstan-type ActionStartTranscriptionParamsShape = array{
- *   clientState?: string,
- *   commandID?: string,
- *   transcriptionEngine?: TranscriptionEngine|value-of<TranscriptionEngine>,
- *   transcriptionEngineConfig?: TranscriptionEngineGoogleConfig|array{
- *     enableSpeakerDiarization?: bool|null,
- *     hints?: list<string>|null,
- *     interimResults?: bool|null,
- *     language?: value-of<GoogleTranscriptionLanguage>|null,
- *     maxSpeakerCount?: int|null,
- *     minSpeakerCount?: int|null,
- *     model?: value-of<Model>|null,
- *     profanityFilter?: bool|null,
- *     speechContext?: list<SpeechContext>|null,
- *     transcriptionEngine?: value-of<\Telnyx\Calls\Actions\TranscriptionEngineGoogleConfig\TranscriptionEngine>|null,
- *     useEnhanced?: bool|null,
- *   }|TranscriptionEngineTelnyxConfig|array{
- *     language?: value-of<TelnyxTranscriptionLanguage>|null,
- *     transcriptionEngine?: value-of<\Telnyx\Calls\Actions\TranscriptionEngineTelnyxConfig\TranscriptionEngine>|null,
- *     transcriptionModel?: value-of<TranscriptionModel>|null,
- *   }|DeepgramNova2Config|array{
- *     transcriptionEngine?: 'Deepgram',
- *     transcriptionModel: value-of<\Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\DeepgramNova2Config\TranscriptionModel>,
- *     keywordsBoosting?: array<string,float>|null,
- *     language?: value-of<Language>|null,
- *   }|DeepgramNova3Config|array{
- *     transcriptionEngine?: 'Deepgram',
- *     transcriptionModel: value-of<\Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\DeepgramNova3Config\TranscriptionModel>,
- *     keywordsBoosting?: array<string,float>|null,
- *     language?: value-of<\Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\DeepgramNova3Config\Language>|null,
- *   }|TranscriptionEngineAzureConfig|array{
- *     region: value-of<Region>,
- *     transcriptionEngine: value-of<\Telnyx\Calls\Actions\TranscriptionEngineAzureConfig\TranscriptionEngine>,
- *     apiKeyRef?: string|null,
- *     language?: value-of<\Telnyx\Calls\Actions\TranscriptionEngineAzureConfig\Language>|null,
- *   }|TranscriptionEngineAConfig|array{
- *     enableSpeakerDiarization?: bool|null,
- *     hints?: list<string>|null,
- *     interimResults?: bool|null,
- *     language?: value-of<GoogleTranscriptionLanguage>|null,
- *     maxSpeakerCount?: int|null,
- *     minSpeakerCount?: int|null,
- *     model?: value-of<\Telnyx\Calls\Actions\TranscriptionEngineAConfig\Model>|null,
- *     profanityFilter?: bool|null,
- *     speechContext?: list<\Telnyx\Calls\Actions\TranscriptionEngineAConfig\SpeechContext>|null,
- *     transcriptionEngine?: value-of<\Telnyx\Calls\Actions\TranscriptionEngineAConfig\TranscriptionEngine>|null,
- *     useEnhanced?: bool|null,
- *   }|TranscriptionEngineBConfig|array{
- *     language?: value-of<TelnyxTranscriptionLanguage>|null,
- *     transcriptionEngine?: value-of<\Telnyx\Calls\Actions\TranscriptionEngineBConfig\TranscriptionEngine>|null,
- *     transcriptionModel?: value-of<\Telnyx\Calls\Actions\TranscriptionEngineBConfig\TranscriptionModel>|null,
- *   },
- *   transcriptionTracks?: string,
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   transcriptionEngine?: null|TranscriptionEngine|value-of<TranscriptionEngine>,
+ *   transcriptionEngineConfig?: TranscriptionEngineConfigShape|null,
+ *   transcriptionTracks?: string|null,
  * }
  */
 final class ActionStartTranscriptionParams implements BaseModel
@@ -131,54 +81,7 @@ final class ActionStartTranscriptionParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine
-     * @param TranscriptionEngineGoogleConfig|array{
-     *   enableSpeakerDiarization?: bool|null,
-     *   hints?: list<string>|null,
-     *   interimResults?: bool|null,
-     *   language?: value-of<GoogleTranscriptionLanguage>|null,
-     *   maxSpeakerCount?: int|null,
-     *   minSpeakerCount?: int|null,
-     *   model?: value-of<Model>|null,
-     *   profanityFilter?: bool|null,
-     *   speechContext?: list<SpeechContext>|null,
-     *   transcriptionEngine?: value-of<TranscriptionEngineGoogleConfig\TranscriptionEngine>|null,
-     *   useEnhanced?: bool|null,
-     * }|TranscriptionEngineTelnyxConfig|array{
-     *   language?: value-of<TelnyxTranscriptionLanguage>|null,
-     *   transcriptionEngine?: value-of<TranscriptionEngineTelnyxConfig\TranscriptionEngine>|null,
-     *   transcriptionModel?: value-of<TranscriptionModel>|null,
-     * }|DeepgramNova2Config|array{
-     *   transcriptionEngine?: 'Deepgram',
-     *   transcriptionModel: value-of<DeepgramNova2Config\TranscriptionModel>,
-     *   keywordsBoosting?: array<string,float>|null,
-     *   language?: value-of<Language>|null,
-     * }|DeepgramNova3Config|array{
-     *   transcriptionEngine?: 'Deepgram',
-     *   transcriptionModel: value-of<DeepgramNova3Config\TranscriptionModel>,
-     *   keywordsBoosting?: array<string,float>|null,
-     *   language?: value-of<DeepgramNova3Config\Language>|null,
-     * }|TranscriptionEngineAzureConfig|array{
-     *   region: value-of<Region>,
-     *   transcriptionEngine: value-of<TranscriptionEngineAzureConfig\TranscriptionEngine>,
-     *   apiKeyRef?: string|null,
-     *   language?: value-of<TranscriptionEngineAzureConfig\Language>|null,
-     * }|TranscriptionEngineAConfig|array{
-     *   enableSpeakerDiarization?: bool|null,
-     *   hints?: list<string>|null,
-     *   interimResults?: bool|null,
-     *   language?: value-of<GoogleTranscriptionLanguage>|null,
-     *   maxSpeakerCount?: int|null,
-     *   minSpeakerCount?: int|null,
-     *   model?: value-of<TranscriptionEngineAConfig\Model>|null,
-     *   profanityFilter?: bool|null,
-     *   speechContext?: list<TranscriptionEngineAConfig\SpeechContext>|null,
-     *   transcriptionEngine?: value-of<TranscriptionEngineAConfig\TranscriptionEngine>|null,
-     *   useEnhanced?: bool|null,
-     * }|TranscriptionEngineBConfig|array{
-     *   language?: value-of<TelnyxTranscriptionLanguage>|null,
-     *   transcriptionEngine?: value-of<TranscriptionEngineBConfig\TranscriptionEngine>|null,
-     *   transcriptionModel?: value-of<TranscriptionEngineBConfig\TranscriptionModel>|null,
-     * } $transcriptionEngineConfig
+     * @param TranscriptionEngineConfigShape $transcriptionEngineConfig
      */
     public static function with(
         ?string $clientState = null,
@@ -235,54 +138,7 @@ final class ActionStartTranscriptionParams implements BaseModel
     }
 
     /**
-     * @param TranscriptionEngineGoogleConfig|array{
-     *   enableSpeakerDiarization?: bool|null,
-     *   hints?: list<string>|null,
-     *   interimResults?: bool|null,
-     *   language?: value-of<GoogleTranscriptionLanguage>|null,
-     *   maxSpeakerCount?: int|null,
-     *   minSpeakerCount?: int|null,
-     *   model?: value-of<Model>|null,
-     *   profanityFilter?: bool|null,
-     *   speechContext?: list<SpeechContext>|null,
-     *   transcriptionEngine?: value-of<TranscriptionEngineGoogleConfig\TranscriptionEngine>|null,
-     *   useEnhanced?: bool|null,
-     * }|TranscriptionEngineTelnyxConfig|array{
-     *   language?: value-of<TelnyxTranscriptionLanguage>|null,
-     *   transcriptionEngine?: value-of<TranscriptionEngineTelnyxConfig\TranscriptionEngine>|null,
-     *   transcriptionModel?: value-of<TranscriptionModel>|null,
-     * }|DeepgramNova2Config|array{
-     *   transcriptionEngine?: 'Deepgram',
-     *   transcriptionModel: value-of<DeepgramNova2Config\TranscriptionModel>,
-     *   keywordsBoosting?: array<string,float>|null,
-     *   language?: value-of<Language>|null,
-     * }|DeepgramNova3Config|array{
-     *   transcriptionEngine?: 'Deepgram',
-     *   transcriptionModel: value-of<DeepgramNova3Config\TranscriptionModel>,
-     *   keywordsBoosting?: array<string,float>|null,
-     *   language?: value-of<DeepgramNova3Config\Language>|null,
-     * }|TranscriptionEngineAzureConfig|array{
-     *   region: value-of<Region>,
-     *   transcriptionEngine: value-of<TranscriptionEngineAzureConfig\TranscriptionEngine>,
-     *   apiKeyRef?: string|null,
-     *   language?: value-of<TranscriptionEngineAzureConfig\Language>|null,
-     * }|TranscriptionEngineAConfig|array{
-     *   enableSpeakerDiarization?: bool|null,
-     *   hints?: list<string>|null,
-     *   interimResults?: bool|null,
-     *   language?: value-of<GoogleTranscriptionLanguage>|null,
-     *   maxSpeakerCount?: int|null,
-     *   minSpeakerCount?: int|null,
-     *   model?: value-of<TranscriptionEngineAConfig\Model>|null,
-     *   profanityFilter?: bool|null,
-     *   speechContext?: list<TranscriptionEngineAConfig\SpeechContext>|null,
-     *   transcriptionEngine?: value-of<TranscriptionEngineAConfig\TranscriptionEngine>|null,
-     *   useEnhanced?: bool|null,
-     * }|TranscriptionEngineBConfig|array{
-     *   language?: value-of<TelnyxTranscriptionLanguage>|null,
-     *   transcriptionEngine?: value-of<TranscriptionEngineBConfig\TranscriptionEngine>|null,
-     *   transcriptionModel?: value-of<TranscriptionEngineBConfig\TranscriptionModel>|null,
-     * } $transcriptionEngineConfig
+     * @param TranscriptionEngineConfigShape $transcriptionEngineConfig
      */
     public function withTranscriptionEngineConfig(
         TranscriptionEngineGoogleConfig|array|TranscriptionEngineTelnyxConfig|DeepgramNova2Config|DeepgramNova3Config|TranscriptionEngineAzureConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig $transcriptionEngineConfig,

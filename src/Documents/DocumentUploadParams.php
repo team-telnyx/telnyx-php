@@ -15,14 +15,9 @@ use Telnyx\Documents\DocumentUploadParams\Document;
  *
  * @see Telnyx\Services\DocumentsService::upload()
  *
- * @phpstan-type DocumentUploadParamsShape = array{
- *   document: Document|array{
- *     customerReference?: string|null,
- *     file?: string|null,
- *     filename?: string|null,
- *     url?: string|null,
- *   },
- * }
+ * @phpstan-import-type DocumentShape from \Telnyx\Documents\DocumentUploadParams\Document
+ *
+ * @phpstan-type DocumentUploadParamsShape = array{document: DocumentShape}
  */
 final class DocumentUploadParams implements BaseModel
 {
@@ -57,12 +52,7 @@ final class DocumentUploadParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Document|array{
-     *   customerReference?: string|null,
-     *   file?: string|null,
-     *   filename?: string|null,
-     *   url?: string|null,
-     * } $document
+     * @param DocumentShape $document
      */
     public static function with(Document|array $document): self
     {
@@ -74,12 +64,7 @@ final class DocumentUploadParams implements BaseModel
     }
 
     /**
-     * @param Document|array{
-     *   customerReference?: string|null,
-     *   file?: string|null,
-     *   filename?: string|null,
-     *   url?: string|null,
-     * } $document
+     * @param DocumentShape $document
      */
     public function withDocument(Document|array $document): self
     {

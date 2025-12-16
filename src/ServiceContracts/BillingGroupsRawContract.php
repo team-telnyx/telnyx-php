@@ -22,7 +22,7 @@ interface BillingGroupsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|BillingGroupCreateParams $params
+     * @param array<string,mixed>|BillingGroupCreateParams $params
      *
      * @return BaseResponse<BillingGroupNewResponse>
      *
@@ -51,7 +51,7 @@ interface BillingGroupsRawContract
      * @api
      *
      * @param string $id The id of the billing group
-     * @param array<mixed>|BillingGroupUpdateParams $params
+     * @param array<string,mixed>|BillingGroupUpdateParams $params
      *
      * @return BaseResponse<BillingGroupUpdateResponse>
      *
@@ -66,7 +66,7 @@ interface BillingGroupsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|BillingGroupListParams $params
+     * @param array<string,mixed>|BillingGroupListParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<BillingGroup>>
      *

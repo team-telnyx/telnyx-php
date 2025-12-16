@@ -15,9 +15,9 @@ use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadListParams\Page;
  *
  * @see Telnyx\Services\PhoneNumbers\CsvDownloadsService::list()
  *
- * @phpstan-type CsvDownloadListParamsShape = array{
- *   page?: Page|array{number?: int|null, size?: int|null}
- * }
+ * @phpstan-import-type PageShape from \Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadListParams\Page
+ *
+ * @phpstan-type CsvDownloadListParamsShape = array{page?: PageShape|null}
  */
 final class CsvDownloadListParams implements BaseModel
 {
@@ -41,7 +41,7 @@ final class CsvDownloadListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public static function with(Page|array|null $page = null): self
     {
@@ -55,7 +55,7 @@ final class CsvDownloadListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

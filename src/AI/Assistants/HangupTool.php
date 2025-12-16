@@ -10,8 +10,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type HangupToolParamsShape from \Telnyx\AI\Assistants\HangupToolParams
+ *
  * @phpstan-type HangupToolShape = array{
- *   hangup: HangupToolParams, type: value-of<Type>
+ *   hangup: HangupToolParams|HangupToolParamsShape, type: Type|value-of<Type>
  * }
  */
 final class HangupTool implements BaseModel
@@ -50,7 +52,7 @@ final class HangupTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param HangupToolParams|array{description?: string|null} $hangup
+     * @param HangupToolParamsShape $hangup
      * @param Type|value-of<Type> $type
      */
     public static function with(
@@ -66,7 +68,7 @@ final class HangupTool implements BaseModel
     }
 
     /**
-     * @param HangupToolParams|array{description?: string|null} $hangup
+     * @param HangupToolParamsShape $hangup
      */
     public function withHangup(HangupToolParams|array $hangup): self
     {

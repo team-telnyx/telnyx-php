@@ -17,6 +17,16 @@ use Telnyx\DetailRecords\DetailRecordListResponse\VerifyDetailRecord;
 
 /**
  * An object following one of the schemas published in https://developers.telnyx.com/docs/api/v2/detail-records.
+ *
+ * @phpstan-import-type MessageDetailRecordShape from \Telnyx\DetailRecords\DetailRecordListResponse\MessageDetailRecord
+ * @phpstan-import-type ConferenceDetailRecordShape from \Telnyx\DetailRecords\DetailRecordListResponse\ConferenceDetailRecord
+ * @phpstan-import-type ConferenceParticipantDetailRecordShape from \Telnyx\DetailRecords\DetailRecordListResponse\ConferenceParticipantDetailRecord
+ * @phpstan-import-type AmdDetailRecordShape from \Telnyx\DetailRecords\DetailRecordListResponse\AmdDetailRecord
+ * @phpstan-import-type VerifyDetailRecordShape from \Telnyx\DetailRecords\DetailRecordListResponse\VerifyDetailRecord
+ * @phpstan-import-type SimCardUsageDetailRecordShape from \Telnyx\DetailRecords\DetailRecordListResponse\SimCardUsageDetailRecord
+ * @phpstan-import-type MediaStorageDetailRecordShape from \Telnyx\DetailRecords\DetailRecordListResponse\MediaStorageDetailRecord
+ *
+ * @phpstan-type DetailRecordListResponseShape = MessageDetailRecordShape|ConferenceDetailRecordShape|ConferenceParticipantDetailRecordShape|AmdDetailRecordShape|VerifyDetailRecordShape|SimCardUsageDetailRecordShape|MediaStorageDetailRecordShape
  */
 final class DetailRecordListResponse implements ConverterSource
 {

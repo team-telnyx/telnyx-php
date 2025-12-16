@@ -16,7 +16,7 @@ use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Carrier\Type;
  *   mobileNetworkCode?: string|null,
  *   name?: string|null,
  *   normalizedCarrier?: string|null,
- *   type?: value-of<Type>|null,
+ *   type?: null|Type|value-of<Type>,
  * }
  */
 final class Carrier implements BaseModel

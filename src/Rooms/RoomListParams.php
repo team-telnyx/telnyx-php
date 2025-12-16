@@ -9,8 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Rooms\RoomListParams\Filter;
-use Telnyx\Rooms\RoomListParams\Filter\DateCreatedAt;
-use Telnyx\Rooms\RoomListParams\Filter\DateUpdatedAt;
 use Telnyx\Rooms\RoomListParams\Page;
 
 /**
@@ -18,14 +16,11 @@ use Telnyx\Rooms\RoomListParams\Page;
  *
  * @see Telnyx\Services\RoomsService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\Rooms\RoomListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Rooms\RoomListParams\Page
+ *
  * @phpstan-type RoomListParamsShape = array{
- *   filter?: Filter|array{
- *     dateCreatedAt?: DateCreatedAt|null,
- *     dateUpdatedAt?: DateUpdatedAt|null,
- *     uniqueName?: string|null,
- *   },
- *   includeSessions?: bool,
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   filter?: FilterShape|null, includeSessions?: bool|null, page?: PageShape|null
  * }
  */
 final class RoomListParams implements BaseModel
@@ -62,12 +57,8 @@ final class RoomListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   dateCreatedAt?: DateCreatedAt|null,
-     *   dateUpdatedAt?: DateUpdatedAt|null,
-     *   uniqueName?: string|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -86,11 +77,7 @@ final class RoomListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[unique_name].
      *
-     * @param Filter|array{
-     *   dateCreatedAt?: DateCreatedAt|null,
-     *   dateUpdatedAt?: DateUpdatedAt|null,
-     *   uniqueName?: string|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -114,7 +101,7 @@ final class RoomListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

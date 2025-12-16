@@ -13,7 +13,7 @@ use Telnyx\Webhooks\CallStreamingFailed\Payload\StreamParams\Track;
  * Streaming parameters as they were originally given to the Call Control API.
  *
  * @phpstan-type StreamParamsShape = array{
- *   streamURL?: string|null, track?: value-of<Track>|null
+ *   streamURL?: string|null, track?: null|Track|value-of<Track>
  * }
  */
 final class StreamParams implements BaseModel

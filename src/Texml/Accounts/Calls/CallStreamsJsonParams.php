@@ -21,13 +21,13 @@ use Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\Track;
  *
  * @phpstan-type CallStreamsJsonParamsShape = array{
  *   accountSid: string,
- *   bidirectionalCodec?: BidirectionalCodec|value-of<BidirectionalCodec>,
- *   bidirectionalMode?: BidirectionalMode|value-of<BidirectionalMode>,
- *   name?: string,
- *   statusCallback?: string,
- *   statusCallbackMethod?: StatusCallbackMethod|value-of<StatusCallbackMethod>,
- *   track?: Track|value-of<Track>,
- *   url?: string,
+ *   bidirectionalCodec?: null|BidirectionalCodec|value-of<BidirectionalCodec>,
+ *   bidirectionalMode?: null|BidirectionalMode|value-of<BidirectionalMode>,
+ *   name?: string|null,
+ *   statusCallback?: string|null,
+ *   statusCallbackMethod?: null|StatusCallbackMethod|value-of<StatusCallbackMethod>,
+ *   track?: null|Track|value-of<Track>,
+ *   url?: string|null,
  * }
  */
 final class CallStreamsJsonParams implements BaseModel

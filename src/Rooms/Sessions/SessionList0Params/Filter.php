@@ -14,11 +14,15 @@ use Telnyx\Rooms\Sessions\SessionList0Params\Filter\DateUpdatedAt;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[room_id], filter[active].
  *
+ * @phpstan-import-type DateCreatedAtShape from \Telnyx\Rooms\Sessions\SessionList0Params\Filter\DateCreatedAt
+ * @phpstan-import-type DateEndedAtShape from \Telnyx\Rooms\Sessions\SessionList0Params\Filter\DateEndedAt
+ * @phpstan-import-type DateUpdatedAtShape from \Telnyx\Rooms\Sessions\SessionList0Params\Filter\DateUpdatedAt
+ *
  * @phpstan-type FilterShape = array{
  *   active?: bool|null,
- *   dateCreatedAt?: DateCreatedAt|null,
- *   dateEndedAt?: DateEndedAt|null,
- *   dateUpdatedAt?: DateUpdatedAt|null,
+ *   dateCreatedAt?: null|DateCreatedAt|DateCreatedAtShape,
+ *   dateEndedAt?: null|DateEndedAt|DateEndedAtShape,
+ *   dateUpdatedAt?: null|DateUpdatedAt|DateUpdatedAtShape,
  *   roomID?: string|null,
  * }
  */
@@ -58,15 +62,9 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DateCreatedAt|array{
-     *   eq?: string|null, gte?: string|null, lte?: string|null
-     * } $dateCreatedAt
-     * @param DateEndedAt|array{
-     *   eq?: string|null, gte?: string|null, lte?: string|null
-     * } $dateEndedAt
-     * @param DateUpdatedAt|array{
-     *   eq?: string|null, gte?: string|null, lte?: string|null
-     * } $dateUpdatedAt
+     * @param DateCreatedAtShape $dateCreatedAt
+     * @param DateEndedAtShape $dateEndedAt
+     * @param DateUpdatedAtShape $dateUpdatedAt
      */
     public static function with(
         ?bool $active = null,
@@ -98,9 +96,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param DateCreatedAt|array{
-     *   eq?: string|null, gte?: string|null, lte?: string|null
-     * } $dateCreatedAt
+     * @param DateCreatedAtShape $dateCreatedAt
      */
     public function withDateCreatedAt(DateCreatedAt|array $dateCreatedAt): self
     {
@@ -111,9 +107,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param DateEndedAt|array{
-     *   eq?: string|null, gte?: string|null, lte?: string|null
-     * } $dateEndedAt
+     * @param DateEndedAtShape $dateEndedAt
      */
     public function withDateEndedAt(DateEndedAt|array $dateEndedAt): self
     {
@@ -124,9 +118,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param DateUpdatedAt|array{
-     *   eq?: string|null, gte?: string|null, lte?: string|null
-     * } $dateUpdatedAt
+     * @param DateUpdatedAtShape $dateUpdatedAt
      */
     public function withDateUpdatedAt(DateUpdatedAt|array $dateUpdatedAt): self
     {

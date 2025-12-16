@@ -16,10 +16,13 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\UpdatedAt;
  *
  * @see Telnyx\Services\MessagingProfiles\AutorespConfigsService::list()
  *
+ * @phpstan-import-type CreatedAtShape from \Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\CreatedAt
+ * @phpstan-import-type UpdatedAtShape from \Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\UpdatedAt
+ *
  * @phpstan-type AutorespConfigListParamsShape = array{
- *   countryCode?: string,
- *   createdAt?: CreatedAt|array{gte?: string|null, lte?: string|null},
- *   updatedAt?: UpdatedAt|array{gte?: string|null, lte?: string|null},
+ *   countryCode?: string|null,
+ *   createdAt?: CreatedAtShape|null,
+ *   updatedAt?: UpdatedAtShape|null,
  * }
  */
 final class AutorespConfigListParams implements BaseModel
@@ -53,8 +56,8 @@ final class AutorespConfigListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CreatedAt|array{gte?: string|null, lte?: string|null} $createdAt
-     * @param UpdatedAt|array{gte?: string|null, lte?: string|null} $updatedAt
+     * @param CreatedAtShape $createdAt
+     * @param UpdatedAtShape $updatedAt
      */
     public static function with(
         ?string $countryCode = null,
@@ -81,7 +84,7 @@ final class AutorespConfigListParams implements BaseModel
     /**
      * Consolidated created_at parameter (deepObject style). Originally: created_at[gte], created_at[lte].
      *
-     * @param CreatedAt|array{gte?: string|null, lte?: string|null} $createdAt
+     * @param CreatedAtShape $createdAt
      */
     public function withCreatedAt(CreatedAt|array $createdAt): self
     {
@@ -94,7 +97,7 @@ final class AutorespConfigListParams implements BaseModel
     /**
      * Consolidated updated_at parameter (deepObject style). Originally: updated_at[gte], updated_at[lte].
      *
-     * @param UpdatedAt|array{gte?: string|null, lte?: string|null} $updatedAt
+     * @param UpdatedAtShape $updatedAt
      */
     public function withUpdatedAt(UpdatedAt|array $updatedAt): self
     {

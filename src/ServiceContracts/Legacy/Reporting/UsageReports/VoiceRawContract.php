@@ -20,7 +20,7 @@ interface VoiceRawContract
     /**
      * @api
      *
-     * @param array<mixed>|VoiceCreateParams $params
+     * @param array<string,mixed>|VoiceCreateParams $params
      *
      * @return BaseResponse<VoiceNewResponse>
      *
@@ -46,7 +46,7 @@ interface VoiceRawContract
     /**
      * @api
      *
-     * @param array<mixed>|VoiceListParams $params
+     * @param array<string,mixed>|VoiceListParams $params
      *
      * @return BaseResponse<PerPagePagination<CdrUsageReportResponseLegacy>>
      *

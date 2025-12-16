@@ -17,7 +17,7 @@ use Telnyx\ManagedAccounts\ManagedAccountListResponse\RecordType;
  *   createdAt: string,
  *   email: string,
  *   managerAccountID: string,
- *   recordType: value-of<RecordType>,
+ *   recordType: RecordType|value-of<RecordType>,
  *   updatedAt: string,
  *   managedAccountAllowCustomPricing?: bool|null,
  *   organizationName?: string|null,

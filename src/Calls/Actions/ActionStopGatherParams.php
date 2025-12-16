@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Calls\ActionsService::stopGather()
  *
  * @phpstan-type ActionStopGatherParamsShape = array{
- *   clientState?: string, commandID?: string
+ *   clientState?: string|null, commandID?: string|null
  * }
  */
 final class ActionStopGatherParams implements BaseModel

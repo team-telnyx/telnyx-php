@@ -15,7 +15,7 @@ use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings\Emergency\Emergency
  * @phpstan-type EmergencyShape = array{
  *   emergencyAddressID?: string|null,
  *   emergencyEnabled?: bool|null,
- *   emergencyStatus?: value-of<EmergencyStatus>|null,
+ *   emergencyStatus?: null|EmergencyStatus|value-of<EmergencyStatus>,
  * }
  */
 final class Emergency implements BaseModel

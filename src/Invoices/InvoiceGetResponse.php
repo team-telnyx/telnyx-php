@@ -10,7 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Invoices\InvoiceGetResponse\Data;
 
 /**
- * @phpstan-type InvoiceGetResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\Invoices\InvoiceGetResponse\Data
+ *
+ * @phpstan-type InvoiceGetResponseShape = array{data?: null|Data|DataShape}
  */
 final class InvoiceGetResponse implements BaseModel
 {
@@ -30,15 +32,7 @@ final class InvoiceGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   downloadURL?: string|null,
-     *   fileID?: string|null,
-     *   invoiceID?: string|null,
-     *   paid?: bool|null,
-     *   periodEnd?: string|null,
-     *   periodStart?: string|null,
-     *   url?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -50,15 +44,7 @@ final class InvoiceGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   downloadURL?: string|null,
-     *   fileID?: string|null,
-     *   invoiceID?: string|null,
-     *   paid?: bool|null,
-     *   periodEnd?: string|null,
-     *   periodStart?: string|null,
-     *   url?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

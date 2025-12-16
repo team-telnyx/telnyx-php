@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\CallControlApplications;
 
 use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter;
-use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter\ApplicationName;
-use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter\OccurredAt;
-use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter\Product;
-use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter\Status;
-use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter\Type;
 use Telnyx\CallControlApplications\CallControlApplicationListParams\Page;
 use Telnyx\CallControlApplications\CallControlApplicationListParams\Sort;
 use Telnyx\Core\Attributes\Optional;
@@ -22,30 +17,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\CallControlApplicationsService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\CallControlApplications\CallControlApplicationListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\CallControlApplications\CallControlApplicationListParams\Page
+ *
  * @phpstan-type CallControlApplicationListParamsShape = array{
- *   filter?: Filter|array{
- *     applicationName?: ApplicationName|null,
- *     applicationSessionID?: string|null,
- *     connectionID?: string|null,
- *     failed?: bool|null,
- *     from?: string|null,
- *     legID?: string|null,
- *     name?: string|null,
- *     occurredAt?: OccurredAt|null,
- *     outboundOutboundVoiceProfileID?: string|null,
- *     product?: value-of<Product>|null,
- *     status?: value-of<Status>|null,
- *     to?: string|null,
- *     type?: value-of<Type>|null,
- *   },
- *   page?: Page|array{
- *     after?: string|null,
- *     before?: string|null,
- *     limit?: int|null,
- *     number?: int|null,
- *     size?: int|null,
- *   },
- *   sort?: Sort|value-of<Sort>,
+ *   filter?: FilterShape|null,
+ *   page?: PageShape|null,
+ *   sort?: null|Sort|value-of<Sort>,
  * }
  */
 final class CallControlApplicationListParams implements BaseModel
@@ -95,28 +73,8 @@ final class CallControlApplicationListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   applicationName?: ApplicationName|null,
-     *   applicationSessionID?: string|null,
-     *   connectionID?: string|null,
-     *   failed?: bool|null,
-     *   from?: string|null,
-     *   legID?: string|null,
-     *   name?: string|null,
-     *   occurredAt?: OccurredAt|null,
-     *   outboundOutboundVoiceProfileID?: string|null,
-     *   product?: value-of<Product>|null,
-     *   status?: value-of<Status>|null,
-     *   to?: string|null,
-     *   type?: value-of<Type>|null,
-     * } $filter
-     * @param Page|array{
-     *   after?: string|null,
-     *   before?: string|null,
-     *   limit?: int|null,
-     *   number?: int|null,
-     *   size?: int|null,
-     * } $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
@@ -136,21 +94,7 @@ final class CallControlApplicationListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound.outbound_voice_profile_id], filter[leg_id], filter[application_session_id], filter[connection_id], filter[product], filter[failed], filter[from], filter[to], filter[name], filter[type], filter[occurred_at][eq/gt/gte/lt/lte], filter[status].
      *
-     * @param Filter|array{
-     *   applicationName?: ApplicationName|null,
-     *   applicationSessionID?: string|null,
-     *   connectionID?: string|null,
-     *   failed?: bool|null,
-     *   from?: string|null,
-     *   legID?: string|null,
-     *   name?: string|null,
-     *   occurredAt?: OccurredAt|null,
-     *   outboundOutboundVoiceProfileID?: string|null,
-     *   product?: value-of<Product>|null,
-     *   status?: value-of<Status>|null,
-     *   to?: string|null,
-     *   type?: value-of<Type>|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -163,13 +107,7 @@ final class CallControlApplicationListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number].
      *
-     * @param Page|array{
-     *   after?: string|null,
-     *   before?: string|null,
-     *   limit?: int|null,
-     *   number?: int|null,
-     *   size?: int|null,
-     * } $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

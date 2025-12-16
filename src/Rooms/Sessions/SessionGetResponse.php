@@ -7,11 +7,14 @@ namespace Telnyx\Rooms\Sessions;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\RoomParticipant;
 use Telnyx\Rooms\RoomSession;
 
 /**
- * @phpstan-type SessionGetResponseShape = array{data?: RoomSession|null}
+ * @phpstan-import-type RoomSessionShape from \Telnyx\Rooms\RoomSession
+ *
+ * @phpstan-type SessionGetResponseShape = array{
+ *   data?: null|RoomSession|RoomSessionShape
+ * }
  */
 final class SessionGetResponse implements BaseModel
 {
@@ -31,16 +34,7 @@ final class SessionGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RoomSession|array{
-     *   id?: string|null,
-     *   active?: bool|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   endedAt?: \DateTimeInterface|null,
-     *   participants?: list<RoomParticipant>|null,
-     *   recordType?: string|null,
-     *   roomID?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param RoomSessionShape $data
      */
     public static function with(RoomSession|array|null $data = null): self
     {
@@ -52,16 +46,7 @@ final class SessionGetResponse implements BaseModel
     }
 
     /**
-     * @param RoomSession|array{
-     *   id?: string|null,
-     *   active?: bool|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   endedAt?: \DateTimeInterface|null,
-     *   participants?: list<RoomParticipant>|null,
-     *   recordType?: string|null,
-     *   roomID?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param RoomSessionShape $data
      */
     public function withData(RoomSession|array $data): self
     {

@@ -7,13 +7,11 @@ namespace Telnyx\PhoneNumberBlocks\Jobs;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\PhoneNumberBlocks\Jobs\Job\FailedOperation;
-use Telnyx\PhoneNumberBlocks\Jobs\Job\Status;
-use Telnyx\PhoneNumberBlocks\Jobs\Job\SuccessfulOperation;
-use Telnyx\PhoneNumberBlocks\Jobs\Job\Type;
 
 /**
- * @phpstan-type JobGetResponseShape = array{data?: Job|null}
+ * @phpstan-import-type JobShape from \Telnyx\PhoneNumberBlocks\Jobs\Job
+ *
+ * @phpstan-type JobGetResponseShape = array{data?: null|Job|JobShape}
  */
 final class JobGetResponse implements BaseModel
 {
@@ -33,17 +31,7 @@ final class JobGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Job|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   etc?: \DateTimeInterface|null,
-     *   failedOperations?: list<FailedOperation>|null,
-     *   recordType?: string|null,
-     *   status?: value-of<Status>|null,
-     *   successfulOperations?: list<SuccessfulOperation>|null,
-     *   type?: value-of<Type>|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param JobShape $data
      */
     public static function with(Job|array|null $data = null): self
     {
@@ -55,17 +43,7 @@ final class JobGetResponse implements BaseModel
     }
 
     /**
-     * @param Job|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   etc?: \DateTimeInterface|null,
-     *   failedOperations?: list<FailedOperation>|null,
-     *   recordType?: string|null,
-     *   status?: value-of<Status>|null,
-     *   successfulOperations?: list<SuccessfulOperation>|null,
-     *   type?: value-of<Type>|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param JobShape $data
      */
     public function withData(Job|array $data): self
     {

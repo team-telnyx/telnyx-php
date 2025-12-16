@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\VerifiedNumbersService::list()
  *
  * @phpstan-type VerifiedNumberListParamsShape = array{
- *   pageNumber?: int, pageSize?: int
+ *   pageNumber?: int|null, pageSize?: int|null
  * }
  */
 final class VerifiedNumberListParams implements BaseModel

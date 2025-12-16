@@ -14,9 +14,9 @@ use Telnyx\OutboundVoiceProfiles\OutboundCallRecording\CallRecordingType;
 /**
  * @phpstan-type OutboundCallRecordingShape = array{
  *   callRecordingCallerPhoneNumbers?: list<string>|null,
- *   callRecordingChannels?: value-of<CallRecordingChannels>|null,
- *   callRecordingFormat?: value-of<CallRecordingFormat>|null,
- *   callRecordingType?: value-of<CallRecordingType>|null,
+ *   callRecordingChannels?: null|CallRecordingChannels|value-of<CallRecordingChannels>,
+ *   callRecordingFormat?: null|CallRecordingFormat|value-of<CallRecordingFormat>,
+ *   callRecordingType?: null|CallRecordingType|value-of<CallRecordingType>,
  * }
  */
 final class OutboundCallRecording implements BaseModel

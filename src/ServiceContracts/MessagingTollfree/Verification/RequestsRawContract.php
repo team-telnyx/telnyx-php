@@ -19,7 +19,7 @@ interface RequestsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|RequestCreateParams $params
+     * @param array<string,mixed>|RequestCreateParams $params
      *
      * @return BaseResponse<VerificationRequestEgress>
      *
@@ -45,7 +45,7 @@ interface RequestsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|RequestUpdateParams $params
+     * @param array<string,mixed>|RequestUpdateParams $params
      *
      * @return BaseResponse<VerificationRequestEgress>
      *
@@ -60,7 +60,7 @@ interface RequestsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|RequestListParams $params
+     * @param array<string,mixed>|RequestListParams $params
      *
      * @return BaseResponse<DefaultPaginationForMessagingTollfree<VerificationRequestStatus,>,>
      *

@@ -8,10 +8,11 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Queues\Calls\CallGetResponse\Data;
-use Telnyx\Queues\Calls\CallGetResponse\Data\RecordType;
 
 /**
- * @phpstan-type CallGetResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\Queues\Calls\CallGetResponse\Data
+ *
+ * @phpstan-type CallGetResponseShape = array{data?: null|Data|DataShape}
  */
 final class CallGetResponse implements BaseModel
 {
@@ -31,20 +32,7 @@ final class CallGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   callControlID: string,
-     *   callLegID: string,
-     *   callSessionID: string,
-     *   connectionID: string,
-     *   enqueuedAt: string,
-     *   from: string,
-     *   queueID: string,
-     *   queuePosition: int,
-     *   recordType: value-of<RecordType>,
-     *   to: string,
-     *   waitTimeSecs: int,
-     *   isAlive?: bool|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -56,20 +44,7 @@ final class CallGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   callControlID: string,
-     *   callLegID: string,
-     *   callSessionID: string,
-     *   connectionID: string,
-     *   enqueuedAt: string,
-     *   from: string,
-     *   queueID: string,
-     *   queuePosition: int,
-     *   recordType: value-of<RecordType>,
-     *   to: string,
-     *   waitTimeSecs: int,
-     *   isAlive?: bool|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Conferences\ActionsService::stop()
  *
  * @phpstan-type ActionStopParamsShape = array{
- *   callControlIDs?: list<string>, region?: Region|value-of<Region>
+ *   callControlIDs?: list<string>|null, region?: null|Region|value-of<Region>
  * }
  */
 final class ActionStopParams implements BaseModel

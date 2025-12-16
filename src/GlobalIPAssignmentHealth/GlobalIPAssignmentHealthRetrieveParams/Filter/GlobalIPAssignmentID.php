@@ -11,6 +11,10 @@ use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filte
 
 /**
  * Filter by exact Global IP Assignment ID.
+ *
+ * @phpstan-import-type InShape from \Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filter\GlobalIPAssignmentID\In
+ *
+ * @phpstan-type GlobalIPAssignmentIDShape = string|InShape
  */
 final class GlobalIPAssignmentID implements ConverterSource
 {

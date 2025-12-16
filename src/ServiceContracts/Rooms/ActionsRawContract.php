@@ -18,7 +18,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $roomID the unique identifier of a room
-     * @param array<mixed>|ActionGenerateJoinClientTokenParams $params
+     * @param array<string,mixed>|ActionGenerateJoinClientTokenParams $params
      *
      * @return BaseResponse<ActionGenerateJoinClientTokenResponse>
      *
@@ -34,7 +34,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $roomID the unique identifier of a room
-     * @param array<mixed>|ActionRefreshClientTokenParams $params
+     * @param array<string,mixed>|ActionRefreshClientTokenParams $params
      *
      * @return BaseResponse<ActionRefreshClientTokenResponse>
      *

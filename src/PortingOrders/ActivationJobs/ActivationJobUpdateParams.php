@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\PortingOrders\ActivationJobsService::update()
  *
  * @phpstan-type ActivationJobUpdateParamsShape = array{
- *   id: string, activateAt?: \DateTimeInterface
+ *   id: string, activateAt?: \DateTimeInterface|null
  * }
  */
 final class ActivationJobUpdateParams implements BaseModel

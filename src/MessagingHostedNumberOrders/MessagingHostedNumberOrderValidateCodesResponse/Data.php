@@ -8,11 +8,12 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesResponse\Data\PhoneNumber;
-use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesResponse\Data\PhoneNumber\Status;
 
 /**
+ * @phpstan-import-type PhoneNumberShape from \Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesResponse\Data\PhoneNumber
+ *
  * @phpstan-type DataShape = array{
- *   orderID: string, phoneNumbers: list<PhoneNumber>
+ *   orderID: string, phoneNumbers: list<PhoneNumberShape>
  * }
  */
 final class Data implements BaseModel
@@ -51,9 +52,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PhoneNumber|array{
-     *   phoneNumber: string, status: value-of<Status>
-     * }> $phoneNumbers
+     * @param list<PhoneNumberShape> $phoneNumbers
      */
     public static function with(string $orderID, array $phoneNumbers): self
     {
@@ -74,9 +73,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<PhoneNumber|array{
-     *   phoneNumber: string, status: value-of<Status>
-     * }> $phoneNumbers
+     * @param list<PhoneNumberShape> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {

@@ -12,7 +12,7 @@ use Telnyx\CustomStorageCredentials\AzureConfigurationData\Backend;
 
 /**
  * @phpstan-type AzureConfigurationDataShape = array{
- *   backend: value-of<Backend>,
+ *   backend: Backend|value-of<Backend>,
  *   accountKey?: string|null,
  *   accountName?: string|null,
  *   bucket?: string|null,

@@ -8,15 +8,14 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\RcsSuggestion\Action;
-use Telnyx\Messages\RcsSuggestion\Action\CreateCalendarEventAction;
-use Telnyx\Messages\RcsSuggestion\Action\DialAction;
-use Telnyx\Messages\RcsSuggestion\Action\OpenURLAction;
-use Telnyx\Messages\RcsSuggestion\Action\ViewLocationAction;
 use Telnyx\Messages\RcsSuggestion\Reply;
 
 /**
+ * @phpstan-import-type ActionShape from \Telnyx\Messages\RcsSuggestion\Action
+ * @phpstan-import-type ReplyShape from \Telnyx\Messages\RcsSuggestion\Reply
+ *
  * @phpstan-type RcsSuggestionShape = array{
- *   action?: Action|null, reply?: Reply|null
+ *   action?: null|Action|ActionShape, reply?: null|Reply|ReplyShape
  * }
  */
 final class RcsSuggestion implements BaseModel
@@ -43,17 +42,8 @@ final class RcsSuggestion implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Action|array{
-     *   createCalendarEventAction?: CreateCalendarEventAction|null,
-     *   dialAction?: DialAction|null,
-     *   fallbackURL?: string|null,
-     *   openURLAction?: OpenURLAction|null,
-     *   postbackData?: string|null,
-     *   shareLocationAction?: array<string,mixed>|null,
-     *   text?: string|null,
-     *   viewLocationAction?: ViewLocationAction|null,
-     * } $action
-     * @param Reply|array{postbackData?: string|null, text?: string|null} $reply
+     * @param ActionShape $action
+     * @param ReplyShape $reply
      */
     public static function with(
         Action|array|null $action = null,
@@ -70,16 +60,7 @@ final class RcsSuggestion implements BaseModel
     /**
      * When tapped, initiates the corresponding native action on the device.
      *
-     * @param Action|array{
-     *   createCalendarEventAction?: CreateCalendarEventAction|null,
-     *   dialAction?: DialAction|null,
-     *   fallbackURL?: string|null,
-     *   openURLAction?: OpenURLAction|null,
-     *   postbackData?: string|null,
-     *   shareLocationAction?: array<string,mixed>|null,
-     *   text?: string|null,
-     *   viewLocationAction?: ViewLocationAction|null,
-     * } $action
+     * @param ActionShape $action
      */
     public function withAction(Action|array $action): self
     {
@@ -90,7 +71,7 @@ final class RcsSuggestion implements BaseModel
     }
 
     /**
-     * @param Reply|array{postbackData?: string|null, text?: string|null} $reply
+     * @param ReplyShape $reply
      */
     public function withReply(Reply|array $reply): self
     {

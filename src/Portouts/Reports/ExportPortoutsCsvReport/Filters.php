@@ -18,7 +18,7 @@ use Telnyx\Portouts\Reports\ExportPortoutsCsvReport\Filters\StatusIn;
  *   customerReferenceIn?: list<string>|null,
  *   endUserName?: string|null,
  *   phoneNumbersOverlaps?: list<string>|null,
- *   statusIn?: list<value-of<StatusIn>>|null,
+ *   statusIn?: list<StatusIn|value-of<StatusIn>>|null,
  * }
  */
 final class Filters implements BaseModel

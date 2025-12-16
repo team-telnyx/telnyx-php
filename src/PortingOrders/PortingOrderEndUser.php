@@ -9,9 +9,12 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type PortingOrderEndUserAdminShape from \Telnyx\PortingOrders\PortingOrderEndUserAdmin
+ * @phpstan-import-type PortingOrderEndUserLocationShape from \Telnyx\PortingOrders\PortingOrderEndUserLocation
+ *
  * @phpstan-type PortingOrderEndUserShape = array{
- *   admin?: PortingOrderEndUserAdmin|null,
- *   location?: PortingOrderEndUserLocation|null,
+ *   admin?: null|PortingOrderEndUserAdmin|PortingOrderEndUserAdminShape,
+ *   location?: null|PortingOrderEndUserLocation|PortingOrderEndUserLocationShape,
  * }
  */
 final class PortingOrderEndUser implements BaseModel
@@ -35,23 +38,8 @@ final class PortingOrderEndUser implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortingOrderEndUserAdmin|array{
-     *   accountNumber?: string|null,
-     *   authPersonName?: string|null,
-     *   billingPhoneNumber?: string|null,
-     *   businessIdentifier?: string|null,
-     *   entityName?: string|null,
-     *   pinPasscode?: string|null,
-     *   taxIdentifier?: string|null,
-     * } $admin
-     * @param PortingOrderEndUserLocation|array{
-     *   administrativeArea?: string|null,
-     *   countryCode?: string|null,
-     *   extendedAddress?: string|null,
-     *   locality?: string|null,
-     *   postalCode?: string|null,
-     *   streetAddress?: string|null,
-     * } $location
+     * @param PortingOrderEndUserAdminShape $admin
+     * @param PortingOrderEndUserLocationShape $location
      */
     public static function with(
         PortingOrderEndUserAdmin|array|null $admin = null,
@@ -66,15 +54,7 @@ final class PortingOrderEndUser implements BaseModel
     }
 
     /**
-     * @param PortingOrderEndUserAdmin|array{
-     *   accountNumber?: string|null,
-     *   authPersonName?: string|null,
-     *   billingPhoneNumber?: string|null,
-     *   businessIdentifier?: string|null,
-     *   entityName?: string|null,
-     *   pinPasscode?: string|null,
-     *   taxIdentifier?: string|null,
-     * } $admin
+     * @param PortingOrderEndUserAdminShape $admin
      */
     public function withAdmin(PortingOrderEndUserAdmin|array $admin): self
     {
@@ -85,14 +65,7 @@ final class PortingOrderEndUser implements BaseModel
     }
 
     /**
-     * @param PortingOrderEndUserLocation|array{
-     *   administrativeArea?: string|null,
-     *   countryCode?: string|null,
-     *   extendedAddress?: string|null,
-     *   locality?: string|null,
-     *   postalCode?: string|null,
-     *   streetAddress?: string|null,
-     * } $location
+     * @param PortingOrderEndUserLocationShape $location
      */
     public function withLocation(
         PortingOrderEndUserLocation|array $location

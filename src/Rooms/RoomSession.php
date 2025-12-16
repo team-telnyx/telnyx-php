@@ -10,12 +10,14 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RoomParticipant;
 
 /**
+ * @phpstan-import-type RoomParticipantShape from \Telnyx\RoomParticipant
+ *
  * @phpstan-type RoomSessionShape = array{
  *   id?: string|null,
  *   active?: bool|null,
  *   createdAt?: \DateTimeInterface|null,
  *   endedAt?: \DateTimeInterface|null,
- *   participants?: list<RoomParticipant>|null,
+ *   participants?: list<RoomParticipantShape>|null,
  *   recordType?: string|null,
  *   roomID?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
@@ -79,15 +81,7 @@ final class RoomSession implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RoomParticipant|array{
-     *   id?: string|null,
-     *   context?: string|null,
-     *   joinedAt?: \DateTimeInterface|null,
-     *   leftAt?: \DateTimeInterface|null,
-     *   recordType?: string|null,
-     *   sessionID?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }> $participants
+     * @param list<RoomParticipantShape> $participants
      */
     public static function with(
         ?string $id = null,
@@ -158,15 +152,7 @@ final class RoomSession implements BaseModel
     }
 
     /**
-     * @param list<RoomParticipant|array{
-     *   id?: string|null,
-     *   context?: string|null,
-     *   joinedAt?: \DateTimeInterface|null,
-     *   leftAt?: \DateTimeInterface|null,
-     *   recordType?: string|null,
-     *   sessionID?: string|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }> $participants
+     * @param list<RoomParticipantShape> $participants
      */
     public function withParticipants(array $participants): self
     {

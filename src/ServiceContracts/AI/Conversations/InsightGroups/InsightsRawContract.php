@@ -16,7 +16,7 @@ interface InsightsRawContract
      * @api
      *
      * @param string $insightID The ID of the insight
-     * @param array<mixed>|InsightAssignParams $params
+     * @param array<string,mixed>|InsightAssignParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -32,7 +32,7 @@ interface InsightsRawContract
      * @api
      *
      * @param string $insightID The ID of the insight
-     * @param array<mixed>|InsightDeleteUnassignParams $params
+     * @param array<string,mixed>|InsightDeleteUnassignParams $params
      *
      * @return BaseResponse<mixed>
      *

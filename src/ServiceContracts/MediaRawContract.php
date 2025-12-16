@@ -35,7 +35,7 @@ interface MediaRawContract
      * @api
      *
      * @param string $mediaName uniquely identifies a media resource
-     * @param array<mixed>|MediaUpdateParams $params
+     * @param array<string,mixed>|MediaUpdateParams $params
      *
      * @return BaseResponse<MediaUpdateResponse>
      *
@@ -50,7 +50,7 @@ interface MediaRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MediaListParams $params
+     * @param array<string,mixed>|MediaListParams $params
      *
      * @return BaseResponse<MediaListResponse>
      *
@@ -92,7 +92,7 @@ interface MediaRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MediaUploadParams $params
+     * @param array<string,mixed>|MediaUploadParams $params
      *
      * @return BaseResponse<MediaUploadResponse>
      *

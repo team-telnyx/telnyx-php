@@ -8,29 +8,32 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Reports\ReportListWdrsResponse\Cost;
-use Telnyx\Reports\ReportListWdrsResponse\Cost\Currency;
 use Telnyx\Reports\ReportListWdrsResponse\DownlinkData;
-use Telnyx\Reports\ReportListWdrsResponse\DownlinkData\Unit;
 use Telnyx\Reports\ReportListWdrsResponse\Rate;
 use Telnyx\Reports\ReportListWdrsResponse\UplinkData;
 
 /**
+ * @phpstan-import-type CostShape from \Telnyx\Reports\ReportListWdrsResponse\Cost
+ * @phpstan-import-type DownlinkDataShape from \Telnyx\Reports\ReportListWdrsResponse\DownlinkData
+ * @phpstan-import-type RateShape from \Telnyx\Reports\ReportListWdrsResponse\Rate
+ * @phpstan-import-type UplinkDataShape from \Telnyx\Reports\ReportListWdrsResponse\UplinkData
+ *
  * @phpstan-type ReportListWdrsResponseShape = array{
  *   id?: string|null,
- *   cost?: Cost|null,
+ *   cost?: null|Cost|CostShape,
  *   createdAt?: \DateTimeInterface|null,
- *   downlinkData?: DownlinkData|null,
+ *   downlinkData?: null|DownlinkData|DownlinkDataShape,
  *   durationSeconds?: float|null,
  *   imsi?: string|null,
  *   mcc?: string|null,
  *   mnc?: string|null,
  *   phoneNumber?: string|null,
- *   rate?: Rate|null,
+ *   rate?: null|Rate|RateShape,
  *   recordType?: string|null,
  *   simCardID?: string|null,
  *   simGroupID?: string|null,
  *   simGroupName?: string|null,
- *   uplinkData?: UplinkData|null,
+ *   uplinkData?: null|UplinkData|UplinkDataShape,
  * }
  */
 final class ReportListWdrsResponse implements BaseModel
@@ -123,20 +126,10 @@ final class ReportListWdrsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Cost|array{
-     *   amount?: string|null, currency?: value-of<Currency>|null
-     * } $cost
-     * @param DownlinkData|array{
-     *   amount?: float|null, unit?: value-of<Unit>|null
-     * } $downlinkData
-     * @param Rate|array{
-     *   amount?: string|null,
-     *   currency?: value-of<Rate\Currency>|null,
-     * } $rate
-     * @param UplinkData|array{
-     *   amount?: float|null,
-     *   unit?: value-of<UplinkData\Unit>|null,
-     * } $uplinkData
+     * @param CostShape $cost
+     * @param DownlinkDataShape $downlinkData
+     * @param RateShape $rate
+     * @param UplinkDataShape $uplinkData
      */
     public static function with(
         ?string $id = null,
@@ -188,9 +181,7 @@ final class ReportListWdrsResponse implements BaseModel
     }
 
     /**
-     * @param Cost|array{
-     *   amount?: string|null, currency?: value-of<Currency>|null
-     * } $cost
+     * @param CostShape $cost
      */
     public function withCost(Cost|array $cost): self
     {
@@ -212,9 +203,7 @@ final class ReportListWdrsResponse implements BaseModel
     }
 
     /**
-     * @param DownlinkData|array{
-     *   amount?: float|null, unit?: value-of<Unit>|null
-     * } $downlinkData
+     * @param DownlinkDataShape $downlinkData
      */
     public function withDownlinkData(DownlinkData|array $downlinkData): self
     {
@@ -280,10 +269,7 @@ final class ReportListWdrsResponse implements BaseModel
     }
 
     /**
-     * @param Rate|array{
-     *   amount?: string|null,
-     *   currency?: value-of<Rate\Currency>|null,
-     * } $rate
+     * @param RateShape $rate
      */
     public function withRate(Rate|array $rate): self
     {
@@ -335,10 +321,7 @@ final class ReportListWdrsResponse implements BaseModel
     }
 
     /**
-     * @param UplinkData|array{
-     *   amount?: float|null,
-     *   unit?: value-of<UplinkData\Unit>|null,
-     * } $uplinkData
+     * @param UplinkDataShape $uplinkData
      */
     public function withUplinkData(UplinkData|array $uplinkData): self
     {

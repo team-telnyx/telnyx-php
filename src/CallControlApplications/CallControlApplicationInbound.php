@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   channelLimit?: int|null,
  *   shakenStirEnabled?: bool|null,
  *   sipSubdomain?: string|null,
- *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
+ *   sipSubdomainReceiveSettings?: null|SipSubdomainReceiveSettings|value-of<SipSubdomainReceiveSettings>,
  * }
  */
 final class CallControlApplicationInbound implements BaseModel

@@ -26,14 +26,14 @@ use Telnyx\PhoneNumbers\PhoneNumberSlimListResponse\Status;
  *   customerReference?: string|null,
  *   emergencyAddressID?: string|null,
  *   emergencyEnabled?: bool|null,
- *   emergencyStatus?: value-of<EmergencyStatus>|null,
+ *   emergencyStatus?: null|EmergencyStatus|value-of<EmergencyStatus>,
  *   externalPin?: string|null,
- *   inboundCallScreening?: value-of<InboundCallScreening>|null,
+ *   inboundCallScreening?: null|InboundCallScreening|value-of<InboundCallScreening>,
  *   phoneNumber?: string|null,
- *   phoneNumberType?: value-of<PhoneNumberType>|null,
+ *   phoneNumberType?: null|PhoneNumberType|value-of<PhoneNumberType>,
  *   purchasedAt?: string|null,
  *   recordType?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   t38FaxGatewayEnabled?: bool|null,
  * }
  */

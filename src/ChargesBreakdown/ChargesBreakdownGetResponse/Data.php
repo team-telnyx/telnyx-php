@@ -5,16 +5,17 @@ declare(strict_types=1);
 namespace Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse;
 
 use Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse\Data\Result;
-use Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse\Data\Result\Service;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type ResultShape from \Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse\Data\Result
+ *
  * @phpstan-type DataShape = array{
  *   currency: string,
  *   endDate: string,
- *   results: list<Result>,
+ *   results: list<ResultShape>,
  *   startDate: string,
  *   userEmail: string,
  *   userID: string,
@@ -100,13 +101,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Result|array{
-     *   chargeType: string,
-     *   serviceOwnerEmail: string,
-     *   serviceOwnerUserID: string,
-     *   services: list<Service>,
-     *   tn: string,
-     * }> $results
+     * @param list<ResultShape> $results
      */
     public static function with(
         string $currency,
@@ -153,13 +148,7 @@ final class Data implements BaseModel
     /**
      * List of phone number charge breakdowns.
      *
-     * @param list<Result|array{
-     *   chargeType: string,
-     *   serviceOwnerEmail: string,
-     *   serviceOwnerUserID: string,
-     *   services: list<Service>,
-     *   tn: string,
-     * }> $results
+     * @param list<ResultShape> $results
      */
     public function withResults(array $results): self
     {

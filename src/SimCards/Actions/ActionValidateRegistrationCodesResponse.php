@@ -10,8 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCards\Actions\ActionValidateRegistrationCodesResponse\Data;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\SimCards\Actions\ActionValidateRegistrationCodesResponse\Data
+ *
  * @phpstan-type ActionValidateRegistrationCodesResponseShape = array{
- *   data?: list<Data>|null
+ *   data?: list<DataShape>|null
  * }
  */
 final class ActionValidateRegistrationCodesResponse implements BaseModel
@@ -33,12 +35,7 @@ final class ActionValidateRegistrationCodesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   invalidDetail?: string|null,
-     *   recordType?: string|null,
-     *   registrationCode?: string|null,
-     *   valid?: bool|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public static function with(?array $data = null): self
     {
@@ -50,12 +47,7 @@ final class ActionValidateRegistrationCodesResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   invalidDetail?: string|null,
-     *   recordType?: string|null,
-     *   registrationCode?: string|null,
-     *   valid?: bool|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {

@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Reports\MdrUsageReportsService::list()
  *
  * @phpstan-type MdrUsageReportListParamsShape = array{
- *   pageNumber?: int, pageSize?: int
+ *   pageNumber?: int|null, pageSize?: int|null
  * }
  */
 final class MdrUsageReportListParams implements BaseModel

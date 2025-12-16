@@ -17,7 +17,7 @@ interface NumberLookupRawContract
     /**
      * @api
      *
-     * @param array<mixed>|NumberLookupCreateParams $params
+     * @param array<string,mixed>|NumberLookupCreateParams $params
      *
      * @return BaseResponse<NumberLookupNewResponse>
      *

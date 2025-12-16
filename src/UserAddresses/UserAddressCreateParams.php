@@ -22,14 +22,14 @@ use Telnyx\Core\Contracts\BaseModel;
  *   lastName: string,
  *   locality: string,
  *   streetAddress: string,
- *   administrativeArea?: string,
- *   borough?: string,
- *   customerReference?: string,
- *   extendedAddress?: string,
- *   neighborhood?: string,
- *   phoneNumber?: string,
- *   postalCode?: string,
- *   skipAddressVerification?: bool,
+ *   administrativeArea?: string|null,
+ *   borough?: string|null,
+ *   customerReference?: string|null,
+ *   extendedAddress?: string|null,
+ *   neighborhood?: string|null,
+ *   phoneNumber?: string|null,
+ *   postalCode?: string|null,
+ *   skipAddressVerification?: bool|null,
  * }
  */
 final class UserAddressCreateParams implements BaseModel

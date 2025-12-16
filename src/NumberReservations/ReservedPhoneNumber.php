@@ -16,7 +16,7 @@ use Telnyx\NumberReservations\ReservedPhoneNumber\Status;
  *   expiredAt?: \DateTimeInterface|null,
  *   phoneNumber?: string|null,
  *   recordType?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */

@@ -10,21 +10,19 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\GlobalIP;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\MeanLatency;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_0;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_100;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_25;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_50;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_75;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_90;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_99;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\ProberLocation;
 
 /**
+ * @phpstan-import-type GlobalIPShape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\GlobalIP
+ * @phpstan-import-type MeanLatencyShape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\MeanLatency
+ * @phpstan-import-type PercentileLatencyShape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency
+ * @phpstan-import-type ProberLocationShape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\ProberLocation
+ *
  * @phpstan-type DataShape = array{
- *   globalIP?: GlobalIP|null,
- *   meanLatency?: MeanLatency|null,
- *   percentileLatency?: PercentileLatency|null,
- *   proberLocation?: ProberLocation|null,
+ *   globalIP?: null|GlobalIP|GlobalIPShape,
+ *   meanLatency?: null|MeanLatency|MeanLatencyShape,
+ *   percentileLatency?: null|PercentileLatency|PercentileLatencyShape,
+ *   proberLocation?: null|ProberLocation|ProberLocationShape,
  *   timestamp?: \DateTimeInterface|null,
  * }
  */
@@ -61,20 +59,10 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param GlobalIP|array{id?: string|null, ipAddress?: string|null} $globalIP
-     * @param MeanLatency|array{amount?: float|null, unit?: string|null} $meanLatency
-     * @param PercentileLatency|array{
-     *   p0?: _0|null,
-     *   p100?: _100|null,
-     *   p25?: _25|null,
-     *   p50?: _50|null,
-     *   p75?: _75|null,
-     *   p90?: _90|null,
-     *   p99?: _99|null,
-     * } $percentileLatency
-     * @param ProberLocation|array{
-     *   id?: string|null, lat?: float|null, lon?: float|null, name?: string|null
-     * } $proberLocation
+     * @param GlobalIPShape $globalIP
+     * @param MeanLatencyShape $meanLatency
+     * @param PercentileLatencyShape $percentileLatency
+     * @param ProberLocationShape $proberLocation
      */
     public static function with(
         GlobalIP|array|null $globalIP = null,
@@ -95,7 +83,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param GlobalIP|array{id?: string|null, ipAddress?: string|null} $globalIP
+     * @param GlobalIPShape $globalIP
      */
     public function withGlobalIP(GlobalIP|array $globalIP): self
     {
@@ -106,7 +94,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param MeanLatency|array{amount?: float|null, unit?: string|null} $meanLatency
+     * @param MeanLatencyShape $meanLatency
      */
     public function withMeanLatency(MeanLatency|array $meanLatency): self
     {
@@ -117,15 +105,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param PercentileLatency|array{
-     *   p0?: _0|null,
-     *   p100?: _100|null,
-     *   p25?: _25|null,
-     *   p50?: _50|null,
-     *   p75?: _75|null,
-     *   p90?: _90|null,
-     *   p99?: _99|null,
-     * } $percentileLatency
+     * @param PercentileLatencyShape $percentileLatency
      */
     public function withPercentileLatency(
         PercentileLatency|array $percentileLatency
@@ -137,9 +117,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param ProberLocation|array{
-     *   id?: string|null, lat?: float|null, lon?: float|null, name?: string|null
-     * } $proberLocation
+     * @param ProberLocationShape $proberLocation
      */
     public function withProberLocation(
         ProberLocation|array $proberLocation

@@ -9,7 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Filter;
-use Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Filter\CreatedAt;
 use Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Page;
 
 /**
@@ -17,13 +16,11 @@ use Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Page;
  *
  * @see Telnyx\Services\NumberBlockOrdersService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Page
+ *
  * @phpstan-type NumberBlockOrderListParamsShape = array{
- *   filter?: Filter|array{
- *     createdAt?: CreatedAt|null,
- *     phoneNumbersStartingNumber?: string|null,
- *     status?: string|null,
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   filter?: FilterShape|null, page?: PageShape|null
  * }
  */
 final class NumberBlockOrderListParams implements BaseModel
@@ -54,12 +51,8 @@ final class NumberBlockOrderListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   createdAt?: CreatedAt|null,
-     *   phoneNumbersStartingNumber?: string|null,
-     *   status?: string|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -76,11 +69,7 @@ final class NumberBlockOrderListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers.starting_number].
      *
-     * @param Filter|array{
-     *   createdAt?: CreatedAt|null,
-     *   phoneNumbersStartingNumber?: string|null,
-     *   status?: string|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -93,7 +82,7 @@ final class NumberBlockOrderListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

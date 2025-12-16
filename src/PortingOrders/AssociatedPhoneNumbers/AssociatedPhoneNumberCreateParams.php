@@ -16,11 +16,10 @@ use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParam
  *
  * @see Telnyx\Services\PortingOrders\AssociatedPhoneNumbersService::create()
  *
+ * @phpstan-import-type PhoneNumberRangeShape from \Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams\PhoneNumberRange
+ *
  * @phpstan-type AssociatedPhoneNumberCreateParamsShape = array{
- *   action: Action|value-of<Action>,
- *   phoneNumberRange: PhoneNumberRange|array{
- *     endAt?: string|null, startAt?: string|null
- *   },
+ *   action: Action|value-of<Action>, phoneNumberRange: PhoneNumberRangeShape
  * }
  */
 final class AssociatedPhoneNumberCreateParams implements BaseModel
@@ -67,9 +66,7 @@ final class AssociatedPhoneNumberCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Action|value-of<Action> $action
-     * @param PhoneNumberRange|array{
-     *   endAt?: string|null, startAt?: string|null
-     * } $phoneNumberRange
+     * @param PhoneNumberRangeShape $phoneNumberRange
      */
     public static function with(
         Action|string $action,
@@ -97,9 +94,7 @@ final class AssociatedPhoneNumberCreateParams implements BaseModel
     }
 
     /**
-     * @param PhoneNumberRange|array{
-     *   endAt?: string|null, startAt?: string|null
-     * } $phoneNumberRange
+     * @param PhoneNumberRangeShape $phoneNumberRange
      */
     public function withPhoneNumberRange(
         PhoneNumberRange|array $phoneNumberRange

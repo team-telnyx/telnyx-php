@@ -19,10 +19,10 @@ use Telnyx\ExternalConnections\Uploads\UploadCreateParams\Usage;
  *
  * @phpstan-type UploadCreateParamsShape = array{
  *   numberIDs: list<string>,
- *   additionalUsages?: list<AdditionalUsage|value-of<AdditionalUsage>>,
- *   civicAddressID?: string,
- *   locationID?: string,
- *   usage?: Usage|value-of<Usage>,
+ *   additionalUsages?: list<AdditionalUsage|value-of<AdditionalUsage>>|null,
+ *   civicAddressID?: string|null,
+ *   locationID?: string|null,
+ *   usage?: null|Usage|value-of<Usage>,
  * }
  */
 final class UploadCreateParams implements BaseModel

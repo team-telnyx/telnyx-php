@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   phoneNumber: string,
  *   verifyProfileID: string,
  *   customCode?: string|null,
- *   timeoutSecs?: int,
+ *   timeoutSecs?: int|null,
  * }
  */
 final class VerificationTriggerSMSParams implements BaseModel

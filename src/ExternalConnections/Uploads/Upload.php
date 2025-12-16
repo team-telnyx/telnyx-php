@@ -7,21 +7,21 @@ namespace Telnyx\ExternalConnections\Uploads;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\ExternalConnections\Uploads\TnUploadEntry\ErrorCode;
-use Telnyx\ExternalConnections\Uploads\TnUploadEntry\InternalStatus;
 use Telnyx\ExternalConnections\Uploads\Upload\AvailableUsage;
 use Telnyx\ExternalConnections\Uploads\Upload\Status;
 
 /**
+ * @phpstan-import-type TnUploadEntryShape from \Telnyx\ExternalConnections\Uploads\TnUploadEntry
+ *
  * @phpstan-type UploadShape = array{
- *   availableUsages?: list<value-of<AvailableUsage>>|null,
+ *   availableUsages?: list<AvailableUsage|value-of<AvailableUsage>>|null,
  *   errorCode?: string|null,
  *   errorMessage?: string|null,
  *   locationID?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   tenantID?: string|null,
  *   ticketID?: string|null,
- *   tnUploadEntries?: list<TnUploadEntry>|null,
+ *   tnUploadEntries?: list<TnUploadEntryShape>|null,
  * }
  */
 final class Upload implements BaseModel
@@ -81,16 +81,7 @@ final class Upload implements BaseModel
      *
      * @param list<AvailableUsage|value-of<AvailableUsage>> $availableUsages
      * @param Status|value-of<Status> $status
-     * @param list<TnUploadEntry|array{
-     *   civicAddressID?: string|null,
-     *   errorCode?: value-of<ErrorCode>|null,
-     *   errorMessage?: string|null,
-     *   internalStatus?: value-of<InternalStatus>|null,
-     *   locationID?: string|null,
-     *   numberID?: string|null,
-     *   phoneNumber?: string|null,
-     *   status?: value-of<TnUploadEntry\Status>|null,
-     * }> $tnUploadEntries
+     * @param list<TnUploadEntryShape> $tnUploadEntries
      */
     public static function with(
         ?array $availableUsages = null,
@@ -190,16 +181,7 @@ final class Upload implements BaseModel
     }
 
     /**
-     * @param list<TnUploadEntry|array{
-     *   civicAddressID?: string|null,
-     *   errorCode?: value-of<ErrorCode>|null,
-     *   errorMessage?: string|null,
-     *   internalStatus?: value-of<InternalStatus>|null,
-     *   locationID?: string|null,
-     *   numberID?: string|null,
-     *   phoneNumber?: string|null,
-     *   status?: value-of<TnUploadEntry\Status>|null,
-     * }> $tnUploadEntries
+     * @param list<TnUploadEntryShape> $tnUploadEntries
      */
     public function withTnUploadEntries(array $tnUploadEntries): self
     {

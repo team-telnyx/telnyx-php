@@ -10,8 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messaging10dlc\Brand\BrandGetFeedbackResponse\Category;
 
 /**
+ * @phpstan-import-type CategoryShape from \Telnyx\Messaging10dlc\Brand\BrandGetFeedbackResponse\Category
+ *
  * @phpstan-type BrandGetFeedbackResponseShape = array{
- *   brandID: string, category: list<Category>
+ *   brandID: string, category: list<CategoryShape>
  * }
  */
 final class BrandGetFeedbackResponse implements BaseModel
@@ -57,9 +59,7 @@ final class BrandGetFeedbackResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Category|array{
-     *   id: string, description: string, displayName: string, fields: list<string>
-     * }> $category
+     * @param list<CategoryShape> $category
      */
     public static function with(string $brandID, array $category): self
     {
@@ -85,9 +85,7 @@ final class BrandGetFeedbackResponse implements BaseModel
     /**
      * A list of reasons why brand creation/revetting didn't go as planned.
      *
-     * @param list<Category|array{
-     *   id: string, description: string, displayName: string, fields: list<string>
-     * }> $category
+     * @param list<CategoryShape> $category
      */
     public function withCategory(array $category): self
     {

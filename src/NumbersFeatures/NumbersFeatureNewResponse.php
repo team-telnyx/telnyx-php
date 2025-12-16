@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumbersFeatures\NumbersFeatureNewResponse\Data;
 
 /**
- * @phpstan-type NumbersFeatureNewResponseShape = array{data?: list<Data>|null}
+ * @phpstan-import-type DataShape from \Telnyx\NumbersFeatures\NumbersFeatureNewResponse\Data
+ *
+ * @phpstan-type NumbersFeatureNewResponseShape = array{
+ *   data?: list<DataShape>|null
+ * }
  */
 final class NumbersFeatureNewResponse implements BaseModel
 {
@@ -31,7 +35,7 @@ final class NumbersFeatureNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{features: list<string>, phoneNumber: string}> $data
+     * @param list<DataShape> $data
      */
     public static function with(?array $data = null): self
     {
@@ -43,7 +47,7 @@ final class NumbersFeatureNewResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{features: list<string>, phoneNumber: string}> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {

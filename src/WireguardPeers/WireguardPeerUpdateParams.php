@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\WireguardPeersService::update()
  *
- * @phpstan-type WireguardPeerUpdateParamsShape = array{publicKey?: string}
+ * @phpstan-type WireguardPeerUpdateParamsShape = array{publicKey?: string|null}
  */
 final class WireguardPeerUpdateParams implements BaseModel
 {

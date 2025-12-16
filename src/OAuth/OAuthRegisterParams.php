@@ -17,15 +17,15 @@ use Telnyx\OAuth\OAuthRegisterParams\TokenEndpointAuthMethod;
  * @see Telnyx\Services\OAuthService::register()
  *
  * @phpstan-type OAuthRegisterParamsShape = array{
- *   clientName?: string,
- *   grantTypes?: list<GrantType|value-of<GrantType>>,
- *   logoUri?: string,
- *   policyUri?: string,
- *   redirectUris?: list<string>,
- *   responseTypes?: list<string>,
- *   scope?: string,
- *   tokenEndpointAuthMethod?: TokenEndpointAuthMethod|value-of<TokenEndpointAuthMethod>,
- *   tosUri?: string,
+ *   clientName?: string|null,
+ *   grantTypes?: list<GrantType|value-of<GrantType>>|null,
+ *   logoUri?: string|null,
+ *   policyUri?: string|null,
+ *   redirectUris?: list<string>|null,
+ *   responseTypes?: list<string>|null,
+ *   scope?: string|null,
+ *   tokenEndpointAuthMethod?: null|TokenEndpointAuthMethod|value-of<TokenEndpointAuthMethod>,
+ *   tosUri?: string|null,
  * }
  */
 final class OAuthRegisterParams implements BaseModel

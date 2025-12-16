@@ -12,8 +12,10 @@ use Telnyx\FqdnConnections\FqdnConnectionListParams\Filter\ConnectionName;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[connection_name], filter[fqdn], filter[outbound_voice_profile_id], filter[outbound.outbound_voice_profile_id].
  *
+ * @phpstan-import-type ConnectionNameShape from \Telnyx\FqdnConnections\FqdnConnectionListParams\Filter\ConnectionName
+ *
  * @phpstan-type FilterShape = array{
- *   connectionName?: ConnectionName|null,
+ *   connectionName?: null|ConnectionName|ConnectionNameShape,
  *   fqdn?: string|null,
  *   outboundVoiceProfileID?: string|null,
  * }
@@ -51,7 +53,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ConnectionName|array{contains?: string|null} $connectionName
+     * @param ConnectionNameShape $connectionName
      */
     public static function with(
         ConnectionName|array|null $connectionName = null,
@@ -70,7 +72,7 @@ final class Filter implements BaseModel
     /**
      * Filter by connection_name using nested operations.
      *
-     * @param ConnectionName|array{contains?: string|null} $connectionName
+     * @param ConnectionNameShape $connectionName
      */
     public function withConnectionName(
         ConnectionName|array $connectionName

@@ -9,7 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ConversationUpdateResponseShape = array{data?: Conversation|null}
+ * @phpstan-import-type ConversationShape from \Telnyx\AI\Conversations\Conversation
+ *
+ * @phpstan-type ConversationUpdateResponseShape = array{
+ *   data?: null|Conversation|ConversationShape
+ * }
  */
 final class ConversationUpdateResponse implements BaseModel
 {
@@ -29,13 +33,7 @@ final class ConversationUpdateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Conversation|array{
-     *   id: string,
-     *   createdAt: \DateTimeInterface,
-     *   lastMessageAt: \DateTimeInterface,
-     *   metadata: array<string,string>,
-     *   name?: string|null,
-     * } $data
+     * @param ConversationShape $data
      */
     public static function with(Conversation|array|null $data = null): self
     {
@@ -47,13 +45,7 @@ final class ConversationUpdateResponse implements BaseModel
     }
 
     /**
-     * @param Conversation|array{
-     *   id: string,
-     *   createdAt: \DateTimeInterface,
-     *   lastMessageAt: \DateTimeInterface,
-     *   metadata: array<string,string>,
-     *   name?: string|null,
-     * } $data
+     * @param ConversationShape $data
      */
     public function withData(Conversation|array $data): self
     {

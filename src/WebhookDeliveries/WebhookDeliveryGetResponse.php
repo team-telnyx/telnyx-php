@@ -8,12 +8,13 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data;
-use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt;
-use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Status;
-use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Webhook;
 
 /**
- * @phpstan-type WebhookDeliveryGetResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data
+ *
+ * @phpstan-type WebhookDeliveryGetResponseShape = array{
+ *   data?: null|Data|DataShape
+ * }
  */
 final class WebhookDeliveryGetResponse implements BaseModel
 {
@@ -36,16 +37,7 @@ final class WebhookDeliveryGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   id?: string|null,
-     *   attempts?: list<Attempt>|null,
-     *   finishedAt?: \DateTimeInterface|null,
-     *   recordType?: string|null,
-     *   startedAt?: \DateTimeInterface|null,
-     *   status?: value-of<Status>|null,
-     *   userID?: string|null,
-     *   webhook?: Webhook|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -59,16 +51,7 @@ final class WebhookDeliveryGetResponse implements BaseModel
     /**
      * Record of all attempts to deliver a webhook.
      *
-     * @param Data|array{
-     *   id?: string|null,
-     *   attempts?: list<Attempt>|null,
-     *   finishedAt?: \DateTimeInterface|null,
-     *   recordType?: string|null,
-     *   startedAt?: \DateTimeInterface|null,
-     *   status?: value-of<Status>|null,
-     *   userID?: string|null,
-     *   webhook?: Webhook|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

@@ -10,8 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Rooms\Actions\ActionGenerateJoinClientTokenResponse\Data;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\Rooms\Actions\ActionGenerateJoinClientTokenResponse\Data
+ *
  * @phpstan-type ActionGenerateJoinClientTokenResponseShape = array{
- *   data?: Data|null
+ *   data?: null|Data|DataShape
  * }
  */
 final class ActionGenerateJoinClientTokenResponse implements BaseModel
@@ -32,12 +34,7 @@ final class ActionGenerateJoinClientTokenResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   token?: string|null,
-     *   refreshToken?: string|null,
-     *   refreshTokenExpiresAt?: \DateTimeInterface|null,
-     *   tokenExpiresAt?: \DateTimeInterface|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -49,12 +46,7 @@ final class ActionGenerateJoinClientTokenResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   token?: string|null,
-     *   refreshToken?: string|null,
-     *   refreshTokenExpiresAt?: \DateTimeInterface|null,
-     *   tokenExpiresAt?: \DateTimeInterface|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

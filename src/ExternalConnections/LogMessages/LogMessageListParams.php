@@ -9,7 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Filter;
-use Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Filter\TelephoneNumber;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Page;
 
 /**
@@ -17,11 +16,11 @@ use Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Page;
  *
  * @see Telnyx\Services\ExternalConnections\LogMessagesService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Page
+ *
  * @phpstan-type LogMessageListParamsShape = array{
- *   filter?: Filter|array{
- *     externalConnectionID?: string|null, telephoneNumber?: TelephoneNumber|null
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   filter?: FilterShape|null, page?: PageShape|null
  * }
  */
 final class LogMessageListParams implements BaseModel
@@ -52,10 +51,8 @@ final class LogMessageListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   externalConnectionID?: string|null, telephoneNumber?: TelephoneNumber|null
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -72,9 +69,7 @@ final class LogMessageListParams implements BaseModel
     /**
      * Filter parameter for log messages (deepObject style). Supports filtering by external_connection_id and telephone_number with eq/contains operations.
      *
-     * @param Filter|array{
-     *   externalConnectionID?: string|null, telephoneNumber?: TelephoneNumber|null
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -87,7 +82,7 @@ final class LogMessageListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

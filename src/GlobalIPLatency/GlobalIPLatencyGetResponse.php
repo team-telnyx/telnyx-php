@@ -8,13 +8,13 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\GlobalIP;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\MeanLatency;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\ProberLocation;
 
 /**
- * @phpstan-type GlobalIPLatencyGetResponseShape = array{data?: list<Data>|null}
+ * @phpstan-import-type DataShape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data
+ *
+ * @phpstan-type GlobalIPLatencyGetResponseShape = array{
+ *   data?: list<DataShape>|null
+ * }
  */
 final class GlobalIPLatencyGetResponse implements BaseModel
 {
@@ -35,13 +35,7 @@ final class GlobalIPLatencyGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   globalIP?: GlobalIP|null,
-     *   meanLatency?: MeanLatency|null,
-     *   percentileLatency?: PercentileLatency|null,
-     *   proberLocation?: ProberLocation|null,
-     *   timestamp?: \DateTimeInterface|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public static function with(?array $data = null): self
     {
@@ -53,13 +47,7 @@ final class GlobalIPLatencyGetResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   globalIP?: GlobalIP|null,
-     *   meanLatency?: MeanLatency|null,
-     *   percentileLatency?: PercentileLatency|null,
-     *   proberLocation?: ProberLocation|null,
-     *   timestamp?: \DateTimeInterface|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {

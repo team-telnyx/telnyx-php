@@ -12,8 +12,10 @@ use Telnyx\NumberReservations\NumberReservationListParams\Filter\CreatedAt;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers.phone_number], filter[customer_reference].
  *
+ * @phpstan-import-type CreatedAtShape from \Telnyx\NumberReservations\NumberReservationListParams\Filter\CreatedAt
+ *
  * @phpstan-type FilterShape = array{
- *   createdAt?: CreatedAt|null,
+ *   createdAt?: null|CreatedAt|CreatedAtShape,
  *   customerReference?: string|null,
  *   phoneNumbersPhoneNumber?: string|null,
  *   status?: string|null,
@@ -58,7 +60,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CreatedAt|array{gt?: string|null, lt?: string|null} $createdAt
+     * @param CreatedAtShape $createdAt
      */
     public static function with(
         CreatedAt|array|null $createdAt = null,
@@ -79,7 +81,7 @@ final class Filter implements BaseModel
     /**
      * Filter number reservations by date range.
      *
-     * @param CreatedAt|array{gt?: string|null, lt?: string|null} $createdAt
+     * @param CreatedAtShape $createdAt
      */
     public function withCreatedAt(CreatedAt|array $createdAt): self
     {

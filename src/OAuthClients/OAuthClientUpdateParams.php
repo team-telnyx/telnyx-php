@@ -16,14 +16,14 @@ use Telnyx\OAuthClients\OAuthClientUpdateParams\AllowedGrantType;
  * @see Telnyx\Services\OAuthClientsService::update()
  *
  * @phpstan-type OAuthClientUpdateParamsShape = array{
- *   allowedGrantTypes?: list<AllowedGrantType|value-of<AllowedGrantType>>,
- *   allowedScopes?: list<string>,
- *   logoUri?: string,
- *   name?: string,
- *   policyUri?: string,
- *   redirectUris?: list<string>,
- *   requirePkce?: bool,
- *   tosUri?: string,
+ *   allowedGrantTypes?: list<AllowedGrantType|value-of<AllowedGrantType>>|null,
+ *   allowedScopes?: list<string>|null,
+ *   logoUri?: string|null,
+ *   name?: string|null,
+ *   policyUri?: string|null,
+ *   redirectUris?: list<string>|null,
+ *   requirePkce?: bool|null,
+ *   tosUri?: string|null,
  * }
  */
 final class OAuthClientUpdateParams implements BaseModel

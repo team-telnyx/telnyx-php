@@ -8,12 +8,12 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse\Conference;
-use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse\Conference\ReasonConferenceEnded;
-use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse\Conference\Status;
 
 /**
+ * @phpstan-import-type ConferenceShape from \Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse\Conference
+ *
  * @phpstan-type ConferenceGetConferencesResponseShape = array{
- *   conferences?: list<Conference>|null,
+ *   conferences?: list<ConferenceShape>|null,
  *   end?: int|null,
  *   firstPageUri?: string|null,
  *   nextPageUri?: string|null,
@@ -84,20 +84,7 @@ final class ConferenceGetConferencesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Conference|array{
-     *   accountSid?: string|null,
-     *   apiVersion?: string|null,
-     *   callSidEndingConference?: string|null,
-     *   dateCreated?: string|null,
-     *   dateUpdated?: string|null,
-     *   friendlyName?: string|null,
-     *   reasonConferenceEnded?: value-of<ReasonConferenceEnded>|null,
-     *   region?: string|null,
-     *   sid?: string|null,
-     *   status?: value-of<Status>|null,
-     *   subresourceUris?: array<string,mixed>|null,
-     *   uri?: string|null,
-     * }> $conferences
+     * @param list<ConferenceShape> $conferences
      */
     public static function with(
         ?array $conferences = null,
@@ -124,20 +111,7 @@ final class ConferenceGetConferencesResponse implements BaseModel
     }
 
     /**
-     * @param list<Conference|array{
-     *   accountSid?: string|null,
-     *   apiVersion?: string|null,
-     *   callSidEndingConference?: string|null,
-     *   dateCreated?: string|null,
-     *   dateUpdated?: string|null,
-     *   friendlyName?: string|null,
-     *   reasonConferenceEnded?: value-of<ReasonConferenceEnded>|null,
-     *   region?: string|null,
-     *   sid?: string|null,
-     *   status?: value-of<Status>|null,
-     *   subresourceUris?: array<string,mixed>|null,
-     *   uri?: string|null,
-     * }> $conferences
+     * @param list<ConferenceShape> $conferences
      */
     public function withConferences(array $conferences): self
     {

@@ -14,10 +14,10 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type TranscriptionEngineAzureConfigShape = array{
- *   region: value-of<Region>,
- *   transcriptionEngine: value-of<TranscriptionEngine>,
+ *   region: Region|value-of<Region>,
+ *   transcriptionEngine: TranscriptionEngine|value-of<TranscriptionEngine>,
  *   apiKeyRef?: string|null,
- *   language?: value-of<Language>|null,
+ *   language?: null|Language|value-of<Language>,
  * }
  */
 final class TranscriptionEngineAzureConfig implements BaseModel

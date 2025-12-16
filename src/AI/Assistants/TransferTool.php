@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\AI\Assistants\InferenceEmbeddingTransferToolParams\CustomHeader;
-use Telnyx\AI\Assistants\InferenceEmbeddingTransferToolParams\Target;
 use Telnyx\AI\Assistants\TransferTool\Type;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type InferenceEmbeddingTransferToolParamsShape from \Telnyx\AI\Assistants\InferenceEmbeddingTransferToolParams
+ *
  * @phpstan-type TransferToolShape = array{
- *   transfer: InferenceEmbeddingTransferToolParams, type: value-of<Type>
+ *   transfer: InferenceEmbeddingTransferToolParams|InferenceEmbeddingTransferToolParamsShape,
+ *   type: Type|value-of<Type>,
  * }
  */
 final class TransferTool implements BaseModel
@@ -52,12 +53,7 @@ final class TransferTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param InferenceEmbeddingTransferToolParams|array{
-     *   from: string,
-     *   targets: list<Target>,
-     *   customHeaders?: list<CustomHeader>|null,
-     *   warmTransferInstructions?: string|null,
-     * } $transfer
+     * @param InferenceEmbeddingTransferToolParamsShape $transfer
      * @param Type|value-of<Type> $type
      */
     public static function with(
@@ -73,12 +69,7 @@ final class TransferTool implements BaseModel
     }
 
     /**
-     * @param InferenceEmbeddingTransferToolParams|array{
-     *   from: string,
-     *   targets: list<Target>,
-     *   customHeaders?: list<CustomHeader>|null,
-     *   warmTransferInstructions?: string|null,
-     * } $transfer
+     * @param InferenceEmbeddingTransferToolParamsShape $transfer
      */
     public function withTransfer(
         InferenceEmbeddingTransferToolParams|array $transfer

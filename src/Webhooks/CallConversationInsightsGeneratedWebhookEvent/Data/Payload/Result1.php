@@ -10,8 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data\Payload\Result1\Result;
 
 /**
+ * @phpstan-import-type ResultShape from \Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data\Payload\Result1\Result
+ *
  * @phpstan-type Result1Shape = array{
- *   insightID?: string|null, result?: string|null|array<string,mixed>
+ *   insightID?: string|null, result?: ResultShape|null
  * }
  */
 final class Result1 implements BaseModel
@@ -43,7 +45,7 @@ final class Result1 implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param string|array<string,mixed> $result
+     * @param ResultShape $result
      */
     public static function with(
         ?string $insightID = null,
@@ -71,7 +73,7 @@ final class Result1 implements BaseModel
     /**
      * The result of the insight.
      *
-     * @param string|array<string,mixed> $result
+     * @param ResultShape $result
      */
     public function withResult(string|array $result): self
     {

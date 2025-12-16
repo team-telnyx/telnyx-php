@@ -6,33 +6,34 @@ namespace Telnyx\Webhooks\CallHangupWebhookEvent\Data;
 
 use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Calls\SipHeader;
-use Telnyx\Calls\SipHeader\Name;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\CallQualityStats;
-use Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\CallQualityStats\Inbound;
-use Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\CallQualityStats\Outbound;
 use Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\HangupCause;
 use Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\HangupSource;
 use Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\State;
 
 /**
+ * @phpstan-import-type CallQualityStatsShape from \Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\CallQualityStats
+ * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
+ * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
+ *
  * @phpstan-type PayloadShape = array{
  *   callControlID?: string|null,
  *   callLegID?: string|null,
- *   callQualityStats?: CallQualityStats|null,
+ *   callQualityStats?: null|CallQualityStats|CallQualityStatsShape,
  *   callSessionID?: string|null,
  *   clientState?: string|null,
  *   connectionID?: string|null,
- *   customHeaders?: list<CustomSipHeader>|null,
+ *   customHeaders?: list<CustomSipHeaderShape>|null,
  *   from?: string|null,
- *   hangupCause?: value-of<HangupCause>|null,
- *   hangupSource?: value-of<HangupSource>|null,
+ *   hangupCause?: null|HangupCause|value-of<HangupCause>,
+ *   hangupSource?: null|HangupSource|value-of<HangupSource>,
  *   sipHangupCause?: string|null,
- *   sipHeaders?: list<SipHeader>|null,
+ *   sipHeaders?: list<SipHeaderShape>|null,
  *   startTime?: \DateTimeInterface|null,
- *   state?: value-of<State>|null,
+ *   state?: null|State|value-of<State>,
  *   tags?: list<string>|null,
  *   to?: string|null,
  * }
@@ -160,13 +161,11 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CallQualityStats|array{
-     *   inbound?: Inbound|null, outbound?: Outbound|null
-     * }|null $callQualityStats
-     * @param list<CustomSipHeader|array{name: string, value: string}> $customHeaders
+     * @param CallQualityStatsShape|null $callQualityStats
+     * @param list<CustomSipHeaderShape> $customHeaders
      * @param HangupCause|value-of<HangupCause> $hangupCause
      * @param HangupSource|value-of<HangupSource> $hangupSource
-     * @param list<SipHeader|array{name: value-of<Name>, value: string}> $sipHeaders
+     * @param list<SipHeaderShape> $sipHeaders
      * @param State|value-of<State> $state
      * @param list<string> $tags
      */
@@ -235,9 +234,7 @@ final class Payload implements BaseModel
     /**
      * Call quality statistics aggregated from the CHANNEL_HANGUP_COMPLETE event. Only includes metrics that are available (filters out nil values). Returns nil if no metrics are available.
      *
-     * @param CallQualityStats|array{
-     *   inbound?: Inbound|null, outbound?: Outbound|null
-     * }|null $callQualityStats
+     * @param CallQualityStatsShape|null $callQualityStats
      */
     public function withCallQualityStats(
         CallQualityStats|array|null $callQualityStats
@@ -284,7 +281,7 @@ final class Payload implements BaseModel
     /**
      * Custom headers set on answer command.
      *
-     * @param list<CustomSipHeader|array{name: string, value: string}> $customHeaders
+     * @param list<CustomSipHeaderShape> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {
@@ -345,7 +342,7 @@ final class Payload implements BaseModel
     /**
      * User-to-User and Diversion headers from sip invite.
      *
-     * @param list<SipHeader|array{name: value-of<Name>, value: string}> $sipHeaders
+     * @param list<SipHeaderShape> $sipHeaders
      */
     public function withSipHeaders(array $sipHeaders): self
     {

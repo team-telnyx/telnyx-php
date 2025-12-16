@@ -22,7 +22,7 @@ interface VirtualCrossConnectsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|VirtualCrossConnectCreateParams $params
+     * @param array<string,mixed>|VirtualCrossConnectCreateParams $params
      *
      * @return BaseResponse<VirtualCrossConnectNewResponse>
      *
@@ -51,7 +51,7 @@ interface VirtualCrossConnectsRawContract
      * @api
      *
      * @param string $id identifies the resource
-     * @param array<mixed>|VirtualCrossConnectUpdateParams $params
+     * @param array<string,mixed>|VirtualCrossConnectUpdateParams $params
      *
      * @return BaseResponse<VirtualCrossConnectUpdateResponse>
      *
@@ -66,7 +66,7 @@ interface VirtualCrossConnectsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|VirtualCrossConnectListParams $params
+     * @param array<string,mixed>|VirtualCrossConnectListParams $params
      *
      * @return BaseResponse<DefaultPagination<VirtualCrossConnectListResponse>>
      *

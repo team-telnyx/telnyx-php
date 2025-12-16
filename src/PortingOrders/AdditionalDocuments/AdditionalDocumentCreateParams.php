@@ -9,17 +9,16 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\AdditionalDocument;
-use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\AdditionalDocument\DocumentType;
 
 /**
  * Creates a list of additional documents for a porting order.
  *
  * @see Telnyx\Services\PortingOrders\AdditionalDocumentsService::create()
  *
+ * @phpstan-import-type AdditionalDocumentShape from \Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\AdditionalDocument
+ *
  * @phpstan-type AdditionalDocumentCreateParamsShape = array{
- *   additionalDocuments?: list<AdditionalDocument|array{
- *     documentID?: string|null, documentType?: value-of<DocumentType>|null
- *   }>,
+ *   additionalDocuments?: list<AdditionalDocumentShape>|null
  * }
  */
 final class AdditionalDocumentCreateParams implements BaseModel
@@ -42,9 +41,7 @@ final class AdditionalDocumentCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AdditionalDocument|array{
-     *   documentID?: string|null, documentType?: value-of<DocumentType>|null
-     * }> $additionalDocuments
+     * @param list<AdditionalDocumentShape> $additionalDocuments
      */
     public static function with(?array $additionalDocuments = null): self
     {
@@ -56,9 +53,7 @@ final class AdditionalDocumentCreateParams implements BaseModel
     }
 
     /**
-     * @param list<AdditionalDocument|array{
-     *   documentID?: string|null, documentType?: value-of<DocumentType>|null
-     * }> $additionalDocuments
+     * @param list<AdditionalDocumentShape> $additionalDocuments
      */
     public function withAdditionalDocuments(array $additionalDocuments): self
     {

@@ -31,7 +31,7 @@ interface MessagingRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MessagingListParams $params
+     * @param array<string,mixed>|MessagingListParams $params
      *
      * @return BaseResponse<DefaultPagination<MessagingListResponse>>
      *

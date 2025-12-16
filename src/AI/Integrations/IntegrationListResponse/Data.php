@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   displayName: string,
  *   logoURL: string,
  *   name: string,
- *   status: value-of<Status>,
+ *   status: Status|value-of<Status>,
  * }
  */
 final class Data implements BaseModel

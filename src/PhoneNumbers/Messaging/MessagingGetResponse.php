@@ -7,15 +7,13 @@ namespace Telnyx\PhoneNumbers\Messaging;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\NumberHealthMetrics;
 use Telnyx\PhoneNumberWithMessagingSettings;
-use Telnyx\PhoneNumberWithMessagingSettings\Features;
-use Telnyx\PhoneNumberWithMessagingSettings\RecordType;
-use Telnyx\PhoneNumberWithMessagingSettings\Type;
 
 /**
+ * @phpstan-import-type PhoneNumberWithMessagingSettingsShape from \Telnyx\PhoneNumberWithMessagingSettings
+ *
  * @phpstan-type MessagingGetResponseShape = array{
- *   data?: PhoneNumberWithMessagingSettings|null
+ *   data?: null|PhoneNumberWithMessagingSettings|PhoneNumberWithMessagingSettingsShape,
  * }
  */
 final class MessagingGetResponse implements BaseModel
@@ -36,21 +34,7 @@ final class MessagingGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PhoneNumberWithMessagingSettings|array{
-     *   id?: string|null,
-     *   countryCode?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   eligibleMessagingProducts?: list<string>|null,
-     *   features?: Features|null,
-     *   health?: NumberHealthMetrics|null,
-     *   messagingProduct?: string|null,
-     *   messagingProfileID?: string|null,
-     *   phoneNumber?: string|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   trafficType?: string|null,
-     *   type?: value-of<Type>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param PhoneNumberWithMessagingSettingsShape $data
      */
     public static function with(
         PhoneNumberWithMessagingSettings|array|null $data = null
@@ -63,21 +47,7 @@ final class MessagingGetResponse implements BaseModel
     }
 
     /**
-     * @param PhoneNumberWithMessagingSettings|array{
-     *   id?: string|null,
-     *   countryCode?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   eligibleMessagingProducts?: list<string>|null,
-     *   features?: Features|null,
-     *   health?: NumberHealthMetrics|null,
-     *   messagingProduct?: string|null,
-     *   messagingProfileID?: string|null,
-     *   phoneNumber?: string|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   trafficType?: string|null,
-     *   type?: value-of<Type>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param PhoneNumberWithMessagingSettingsShape $data
      */
     public function withData(PhoneNumberWithMessagingSettings|array $data): self
     {

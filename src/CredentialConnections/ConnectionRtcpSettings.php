@@ -12,7 +12,7 @@ use Telnyx\CredentialConnections\ConnectionRtcpSettings\Port;
 /**
  * @phpstan-type ConnectionRtcpSettingsShape = array{
  *   captureEnabled?: bool|null,
- *   port?: value-of<Port>|null,
+ *   port?: null|Port|value-of<Port>,
  *   reportFrequencySecs?: int|null,
  * }
  */

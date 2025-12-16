@@ -6,14 +6,17 @@ namespace Telnyx\AI\Conversations\Messages;
 
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\Meta;
 use Telnyx\AI\Conversations\Messages\MessageListResponse\Data;
-use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\Role;
-use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type MessageListResponseShape = array{data: list<Data>, meta: Meta}
+ * @phpstan-import-type DataShape from \Telnyx\AI\Conversations\Messages\MessageListResponse\Data
+ * @phpstan-import-type MetaShape from \Telnyx\AI\Assistants\Tests\TestSuites\Runs\Meta
+ *
+ * @phpstan-type MessageListResponseShape = array{
+ *   data: list<DataShape>, meta: Meta|MetaShape
+ * }
  */
 final class MessageListResponse implements BaseModel
 {
@@ -51,16 +54,8 @@ final class MessageListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   role: value-of<Role>,
-     *   text: string,
-     *   createdAt?: \DateTimeInterface|null,
-     *   sentAt?: \DateTimeInterface|null,
-     *   toolCalls?: list<ToolCall>|null,
-     * }> $data
-     * @param Meta|array{
-     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
-     * } $meta
+     * @param list<DataShape> $data
+     * @param MetaShape $meta
      */
     public static function with(array $data, Meta|array $meta): self
     {
@@ -73,13 +68,7 @@ final class MessageListResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   role: value-of<Role>,
-     *   text: string,
-     *   createdAt?: \DateTimeInterface|null,
-     *   sentAt?: \DateTimeInterface|null,
-     *   toolCalls?: list<ToolCall>|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {
@@ -90,9 +79,7 @@ final class MessageListResponse implements BaseModel
     }
 
     /**
-     * @param Meta|array{
-     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
-     * } $meta
+     * @param MetaShape $meta
      */
     public function withMeta(Meta|array $meta): self
     {

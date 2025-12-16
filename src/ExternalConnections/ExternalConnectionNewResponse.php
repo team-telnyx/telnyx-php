@@ -7,14 +7,12 @@ namespace Telnyx\ExternalConnections;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\ExternalConnections\ExternalConnection\ExternalSipConnection;
-use Telnyx\ExternalConnections\ExternalConnection\Inbound;
-use Telnyx\ExternalConnections\ExternalConnection\Outbound;
-use Telnyx\ExternalConnections\ExternalConnection\WebhookAPIVersion;
 
 /**
+ * @phpstan-import-type ExternalConnectionShape from \Telnyx\ExternalConnections\ExternalConnection
+ *
  * @phpstan-type ExternalConnectionNewResponseShape = array{
- *   data?: ExternalConnection|null
+ *   data?: null|ExternalConnection|ExternalConnectionShape
  * }
  */
 final class ExternalConnectionNewResponse implements BaseModel
@@ -35,22 +33,7 @@ final class ExternalConnectionNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalConnection|array{
-     *   id?: string|null,
-     *   active?: bool|null,
-     *   createdAt?: string|null,
-     *   credentialActive?: bool|null,
-     *   externalSipConnection?: value-of<ExternalSipConnection>|null,
-     *   inbound?: Inbound|null,
-     *   outbound?: Outbound|null,
-     *   recordType?: string|null,
-     *   tags?: list<string>|null,
-     *   updatedAt?: string|null,
-     *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
-     *   webhookEventFailoverURL?: string|null,
-     *   webhookEventURL?: string|null,
-     *   webhookTimeoutSecs?: int|null,
-     * } $data
+     * @param ExternalConnectionShape $data
      */
     public static function with(ExternalConnection|array|null $data = null): self
     {
@@ -62,22 +45,7 @@ final class ExternalConnectionNewResponse implements BaseModel
     }
 
     /**
-     * @param ExternalConnection|array{
-     *   id?: string|null,
-     *   active?: bool|null,
-     *   createdAt?: string|null,
-     *   credentialActive?: bool|null,
-     *   externalSipConnection?: value-of<ExternalSipConnection>|null,
-     *   inbound?: Inbound|null,
-     *   outbound?: Outbound|null,
-     *   recordType?: string|null,
-     *   tags?: list<string>|null,
-     *   updatedAt?: string|null,
-     *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
-     *   webhookEventFailoverURL?: string|null,
-     *   webhookEventURL?: string|null,
-     *   webhookTimeoutSecs?: int|null,
-     * } $data
+     * @param ExternalConnectionShape $data
      */
     public function withData(ExternalConnection|array $data): self
     {

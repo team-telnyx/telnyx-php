@@ -8,11 +8,10 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderResponse\OrderingGroup;
-use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderResponse\OrderingGroup\Order;
-use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderResponse\OrderingGroup\Status;
-use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderResponse\OrderingGroup\Strategy;
 
 /**
+ * @phpstan-import-type OrderingGroupShape from \Telnyx\InexplicitNumberOrders\InexplicitNumberOrderResponse\OrderingGroup
+ *
  * @phpstan-type InexplicitNumberOrderResponseShape = array{
  *   id?: string|null,
  *   billingGroupID?: string|null,
@@ -20,7 +19,7 @@ use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderResponse\OrderingGroup\St
  *   createdAt?: \DateTimeInterface|null,
  *   customerReference?: string|null,
  *   messagingProfileID?: string|null,
- *   orderingGroups?: list<OrderingGroup>|null,
+ *   orderingGroups?: list<OrderingGroupShape>|null,
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */
@@ -85,25 +84,7 @@ final class InexplicitNumberOrderResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<OrderingGroup|array{
-     *   administrativeArea?: string|null,
-     *   countAllocated?: int|null,
-     *   countRequested?: int|null,
-     *   countryISO?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   errorReason?: string|null,
-     *   excludeHeldNumbers?: bool|null,
-     *   nationalDestinationCode?: string|null,
-     *   orders?: list<Order>|null,
-     *   phoneNumberType?: string|null,
-     *   phoneNumberContains?: string|null,
-     *   phoneNumberEndsWith?: string|null,
-     *   phoneNumberStartsWith?: string|null,
-     *   quickship?: bool|null,
-     *   status?: value-of<Status>|null,
-     *   strategy?: value-of<Strategy>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }> $orderingGroups
+     * @param list<OrderingGroupShape> $orderingGroups
      */
     public static function with(
         ?string $id = null,
@@ -196,25 +177,7 @@ final class InexplicitNumberOrderResponse implements BaseModel
     }
 
     /**
-     * @param list<OrderingGroup|array{
-     *   administrativeArea?: string|null,
-     *   countAllocated?: int|null,
-     *   countRequested?: int|null,
-     *   countryISO?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   errorReason?: string|null,
-     *   excludeHeldNumbers?: bool|null,
-     *   nationalDestinationCode?: string|null,
-     *   orders?: list<Order>|null,
-     *   phoneNumberType?: string|null,
-     *   phoneNumberContains?: string|null,
-     *   phoneNumberEndsWith?: string|null,
-     *   phoneNumberStartsWith?: string|null,
-     *   quickship?: bool|null,
-     *   status?: value-of<Status>|null,
-     *   strategy?: value-of<Strategy>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }> $orderingGroups
+     * @param list<OrderingGroupShape> $orderingGroups
      */
     public function withOrderingGroups(array $orderingGroups): self
     {

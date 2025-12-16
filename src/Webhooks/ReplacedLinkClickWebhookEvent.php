@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\ReplacedLinkClickWebhookEvent\Data;
 
 /**
- * @phpstan-type ReplacedLinkClickWebhookEventShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\Webhooks\ReplacedLinkClickWebhookEvent\Data
+ *
+ * @phpstan-type ReplacedLinkClickWebhookEventShape = array{
+ *   data?: null|Data|DataShape
+ * }
  */
 final class ReplacedLinkClickWebhookEvent implements BaseModel
 {
@@ -30,13 +34,7 @@ final class ReplacedLinkClickWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   messageID?: string|null,
-     *   recordType?: string|null,
-     *   timeClicked?: \DateTimeInterface|null,
-     *   to?: string|null,
-     *   url?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -48,13 +46,7 @@ final class ReplacedLinkClickWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   messageID?: string|null,
-     *   recordType?: string|null,
-     *   timeClicked?: \DateTimeInterface|null,
-     *   to?: string|null,
-     *   url?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

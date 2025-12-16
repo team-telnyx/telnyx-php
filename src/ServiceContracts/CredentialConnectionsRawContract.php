@@ -22,7 +22,7 @@ interface CredentialConnectionsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|CredentialConnectionCreateParams $params
+     * @param array<string,mixed>|CredentialConnectionCreateParams $params
      *
      * @return BaseResponse<CredentialConnectionNewResponse>
      *
@@ -51,7 +51,7 @@ interface CredentialConnectionsRawContract
      * @api
      *
      * @param string $id identifies the resource
-     * @param array<mixed>|CredentialConnectionUpdateParams $params
+     * @param array<string,mixed>|CredentialConnectionUpdateParams $params
      *
      * @return BaseResponse<CredentialConnectionUpdateResponse>
      *
@@ -66,7 +66,7 @@ interface CredentialConnectionsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|CredentialConnectionListParams $params
+     * @param array<string,mixed>|CredentialConnectionListParams $params
      *
      * @return BaseResponse<DefaultPagination<CredentialConnection>>
      *

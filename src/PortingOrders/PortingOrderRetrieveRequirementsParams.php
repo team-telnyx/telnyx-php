@@ -15,8 +15,10 @@ use Telnyx\PortingOrders\PortingOrderRetrieveRequirementsParams\Page;
  *
  * @see Telnyx\Services\PortingOrdersService::retrieveRequirements()
  *
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\PortingOrderRetrieveRequirementsParams\Page
+ *
  * @phpstan-type PortingOrderRetrieveRequirementsParamsShape = array{
- *   page?: Page|array{number?: int|null, size?: int|null}
+ *   page?: PageShape|null
  * }
  */
 final class PortingOrderRetrieveRequirementsParams implements BaseModel
@@ -41,7 +43,7 @@ final class PortingOrderRetrieveRequirementsParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public static function with(Page|array|null $page = null): self
     {
@@ -55,7 +57,7 @@ final class PortingOrderRetrieveRequirementsParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

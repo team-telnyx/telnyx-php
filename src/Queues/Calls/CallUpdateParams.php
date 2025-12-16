@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Queues\CallsService::update()
  *
  * @phpstan-type CallUpdateParamsShape = array{
- *   queueName: string, keepAfterHangup?: bool
+ *   queueName: string, keepAfterHangup?: bool|null
  * }
  */
 final class CallUpdateParams implements BaseModel

@@ -8,10 +8,11 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OAuth\OAuthGetResponse\Data;
-use Telnyx\OAuth\OAuthGetResponse\Data\RequestedScope;
 
 /**
- * @phpstan-type OAuthGetResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\OAuth\OAuthGetResponse\Data
+ *
+ * @phpstan-type OAuthGetResponseShape = array{data?: null|Data|DataShape}
  */
 final class OAuthGetResponse implements BaseModel
 {
@@ -31,16 +32,7 @@ final class OAuthGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   clientID?: string|null,
-     *   logoUri?: string|null,
-     *   name?: string|null,
-     *   policyUri?: string|null,
-     *   redirectUri?: string|null,
-     *   requestedScopes?: list<RequestedScope>|null,
-     *   tosUri?: string|null,
-     *   verified?: bool|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -52,16 +44,7 @@ final class OAuthGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   clientID?: string|null,
-     *   logoUri?: string|null,
-     *   name?: string|null,
-     *   policyUri?: string|null,
-     *   redirectUri?: string|null,
-     *   requestedScopes?: list<RequestedScope>|null,
-     *   tosUri?: string|null,
-     *   verified?: bool|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

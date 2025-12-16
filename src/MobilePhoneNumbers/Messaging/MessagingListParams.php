@@ -15,9 +15,9 @@ use Telnyx\MobilePhoneNumbers\Messaging\MessagingListParams\Page;
  *
  * @see Telnyx\Services\MobilePhoneNumbers\MessagingService::list()
  *
- * @phpstan-type MessagingListParamsShape = array{
- *   page?: Page|array{number?: int|null, size?: int|null}
- * }
+ * @phpstan-import-type PageShape from \Telnyx\MobilePhoneNumbers\Messaging\MessagingListParams\Page
+ *
+ * @phpstan-type MessagingListParamsShape = array{page?: PageShape|null}
  */
 final class MessagingListParams implements BaseModel
 {
@@ -41,7 +41,7 @@ final class MessagingListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public static function with(Page|array|null $page = null): self
     {
@@ -55,7 +55,7 @@ final class MessagingListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

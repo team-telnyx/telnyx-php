@@ -9,8 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ManagedAccounts\ManagedAccountListParams\Filter;
-use Telnyx\ManagedAccounts\ManagedAccountListParams\Filter\Email;
-use Telnyx\ManagedAccounts\ManagedAccountListParams\Filter\OrganizationName;
 use Telnyx\ManagedAccounts\ManagedAccountListParams\Page;
 use Telnyx\ManagedAccounts\ManagedAccountListParams\Sort;
 
@@ -19,13 +17,14 @@ use Telnyx\ManagedAccounts\ManagedAccountListParams\Sort;
  *
  * @see Telnyx\Services\ManagedAccountsService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\ManagedAccounts\ManagedAccountListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\ManagedAccounts\ManagedAccountListParams\Page
+ *
  * @phpstan-type ManagedAccountListParamsShape = array{
- *   filter?: Filter|array{
- *     email?: Email|null, organizationName?: OrganizationName|null
- *   },
- *   includeCancelledAccounts?: bool,
- *   page?: Page|array{number?: int|null, size?: int|null},
- *   sort?: Sort|value-of<Sort>,
+ *   filter?: FilterShape|null,
+ *   includeCancelledAccounts?: bool|null,
+ *   page?: PageShape|null,
+ *   sort?: null|Sort|value-of<Sort>,
  * }
  */
 final class ManagedAccountListParams implements BaseModel
@@ -81,10 +80,8 @@ final class ManagedAccountListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   email?: Email|null, organizationName?: OrganizationName|null
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
@@ -106,9 +103,7 @@ final class ManagedAccountListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[email][contains], filter[email][eq], filter[organization_name][contains], filter[organization_name][eq].
      *
-     * @param Filter|array{
-     *   email?: Email|null, organizationName?: OrganizationName|null
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -133,7 +128,7 @@ final class ManagedAccountListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

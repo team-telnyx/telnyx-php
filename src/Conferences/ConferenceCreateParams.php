@@ -29,16 +29,16 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type ConferenceCreateParamsShape = array{
  *   callControlID: string,
  *   name: string,
- *   beepEnabled?: BeepEnabled|value-of<BeepEnabled>,
- *   clientState?: string,
- *   comfortNoise?: bool,
- *   commandID?: string,
- *   durationMinutes?: int,
- *   holdAudioURL?: string,
- *   holdMediaName?: string,
- *   maxParticipants?: int,
- *   region?: Region|value-of<Region>,
- *   startConferenceOnCreate?: bool,
+ *   beepEnabled?: null|BeepEnabled|value-of<BeepEnabled>,
+ *   clientState?: string|null,
+ *   comfortNoise?: bool|null,
+ *   commandID?: string|null,
+ *   durationMinutes?: int|null,
+ *   holdAudioURL?: string|null,
+ *   holdMediaName?: string|null,
+ *   maxParticipants?: int|null,
+ *   region?: null|Region|value-of<Region>,
+ *   startConferenceOnCreate?: bool|null,
  * }
  */
 final class ConferenceCreateParams implements BaseModel

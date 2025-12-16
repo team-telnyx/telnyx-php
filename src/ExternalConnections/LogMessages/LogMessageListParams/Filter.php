@@ -12,8 +12,11 @@ use Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Filter\Telephone
 /**
  * Filter parameter for log messages (deepObject style). Supports filtering by external_connection_id and telephone_number with eq/contains operations.
  *
+ * @phpstan-import-type TelephoneNumberShape from \Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Filter\TelephoneNumber
+ *
  * @phpstan-type FilterShape = array{
- *   externalConnectionID?: string|null, telephoneNumber?: TelephoneNumber|null
+ *   externalConnectionID?: string|null,
+ *   telephoneNumber?: null|TelephoneNumber|TelephoneNumberShape,
  * }
  */
 final class Filter implements BaseModel
@@ -43,9 +46,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param TelephoneNumber|array{
-     *   contains?: string|null, eq?: string|null
-     * } $telephoneNumber
+     * @param TelephoneNumberShape $telephoneNumber
      */
     public static function with(
         ?string $externalConnectionID = null,
@@ -73,9 +74,7 @@ final class Filter implements BaseModel
     /**
      * Telephone number filter operations for log messages. Use 'eq' for exact matches or 'contains' for partial matches.
      *
-     * @param TelephoneNumber|array{
-     *   contains?: string|null, eq?: string|null
-     * } $telephoneNumber
+     * @param TelephoneNumberShape $telephoneNumber
      */
     public function withTelephoneNumber(
         TelephoneNumber|array $telephoneNumber

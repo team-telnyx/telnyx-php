@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type BodyParametersShape = array{
  *   properties?: array<string,mixed>|null,
  *   required?: list<string>|null,
- *   type?: value-of<Type>|null,
+ *   type?: null|Type|value-of<Type>,
  * }
  */
 final class BodyParameters implements BaseModel

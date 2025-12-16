@@ -8,11 +8,13 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberReservations\NumberReservation;
-use Telnyx\NumberReservations\NumberReservation\Status;
-use Telnyx\NumberReservations\ReservedPhoneNumber;
 
 /**
- * @phpstan-type ActionExtendResponseShape = array{data?: NumberReservation|null}
+ * @phpstan-import-type NumberReservationShape from \Telnyx\NumberReservations\NumberReservation
+ *
+ * @phpstan-type ActionExtendResponseShape = array{
+ *   data?: null|NumberReservation|NumberReservationShape
+ * }
  */
 final class ActionExtendResponse implements BaseModel
 {
@@ -32,15 +34,7 @@ final class ActionExtendResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param NumberReservation|array{
-     *   id?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   customerReference?: string|null,
-     *   phoneNumbers?: list<ReservedPhoneNumber>|null,
-     *   recordType?: string|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param NumberReservationShape $data
      */
     public static function with(NumberReservation|array|null $data = null): self
     {
@@ -52,15 +46,7 @@ final class ActionExtendResponse implements BaseModel
     }
 
     /**
-     * @param NumberReservation|array{
-     *   id?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   customerReference?: string|null,
-     *   phoneNumbers?: list<ReservedPhoneNumber>|null,
-     *   recordType?: string|null,
-     *   status?: value-of<Status>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param NumberReservationShape $data
      */
     public function withData(NumberReservation|array $data): self
     {

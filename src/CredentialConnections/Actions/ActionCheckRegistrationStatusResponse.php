@@ -8,11 +8,12 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\Actions\ActionCheckRegistrationStatusResponse\Data;
-use Telnyx\CredentialConnections\Actions\ActionCheckRegistrationStatusResponse\Data\Status;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\CredentialConnections\Actions\ActionCheckRegistrationStatusResponse\Data
+ *
  * @phpstan-type ActionCheckRegistrationStatusResponseShape = array{
- *   data?: Data|null
+ *   data?: null|Data|DataShape
  * }
  */
 final class ActionCheckRegistrationStatusResponse implements BaseModel
@@ -33,16 +34,7 @@ final class ActionCheckRegistrationStatusResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   ipAddress?: string|null,
-     *   lastRegistration?: string|null,
-     *   port?: int|null,
-     *   recordType?: string|null,
-     *   sipUsername?: string|null,
-     *   status?: value-of<Status>|null,
-     *   transport?: string|null,
-     *   userAgent?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -54,16 +46,7 @@ final class ActionCheckRegistrationStatusResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   ipAddress?: string|null,
-     *   lastRegistration?: string|null,
-     *   port?: int|null,
-     *   recordType?: string|null,
-     *   sipUsername?: string|null,
-     *   status?: value-of<Status>|null,
-     *   transport?: string|null,
-     *   userAgent?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

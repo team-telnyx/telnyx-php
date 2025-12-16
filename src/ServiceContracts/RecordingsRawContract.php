@@ -32,7 +32,7 @@ interface RecordingsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|RecordingListParams $params
+     * @param array<string,mixed>|RecordingListParams $params
      *
      * @return BaseResponse<DefaultPagination<RecordingResponseData>>
      *

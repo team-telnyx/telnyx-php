@@ -16,7 +16,7 @@ interface JobsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|JobCreateParams $params
+     * @param array<string,mixed>|JobCreateParams $params
      *
      * @return BaseResponse<FineTuningJob>
      *

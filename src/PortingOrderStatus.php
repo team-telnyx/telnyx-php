@@ -7,14 +7,16 @@ namespace Telnyx;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\PortingOrdersExceptionType\Code;
 use Telnyx\PortingOrderStatus\Value;
 
 /**
  * Porting order status.
  *
+ * @phpstan-import-type PortingOrdersExceptionTypeShape from \Telnyx\PortingOrdersExceptionType
+ *
  * @phpstan-type PortingOrderStatusShape = array{
- *   details?: list<PortingOrdersExceptionType>|null, value?: value-of<Value>|null
+ *   details?: list<PortingOrdersExceptionTypeShape>|null,
+ *   value?: null|Value|value-of<Value>,
  * }
  */
 final class PortingOrderStatus implements BaseModel
@@ -48,9 +50,7 @@ final class PortingOrderStatus implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PortingOrdersExceptionType|array{
-     *   code?: value-of<Code>|null, description?: string|null
-     * }> $details
+     * @param list<PortingOrdersExceptionTypeShape> $details
      * @param Value|value-of<Value> $value
      */
     public static function with(
@@ -68,9 +68,7 @@ final class PortingOrderStatus implements BaseModel
     /**
      * A list of 0 or more details about this porting order's status.
      *
-     * @param list<PortingOrdersExceptionType|array{
-     *   code?: value-of<Code>|null, description?: string|null
-     * }> $details
+     * @param list<PortingOrdersExceptionTypeShape> $details
      */
     public function withDetails(array $details): self
     {

@@ -15,10 +15,12 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\BundlePricing\UserBundlesService::create()
  *
+ * @phpstan-import-type ItemShape from \Telnyx\BundlePricing\UserBundles\UserBundleCreateParams\Item
+ *
  * @phpstan-type UserBundleCreateParamsShape = array{
- *   idempotencyKey?: string,
- *   items?: list<Item|array{billingBundleID: string, quantity: int}>,
- *   authorizationBearer?: string,
+ *   idempotencyKey?: string|null,
+ *   items?: list<ItemShape>|null,
+ *   authorizationBearer?: string|null,
  * }
  */
 final class UserBundleCreateParams implements BaseModel
@@ -53,7 +55,7 @@ final class UserBundleCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Item|array{billingBundleID: string, quantity: int}> $items
+     * @param list<ItemShape> $items
      */
     public static function with(
         ?string $idempotencyKey = null,
@@ -81,7 +83,7 @@ final class UserBundleCreateParams implements BaseModel
     }
 
     /**
-     * @param list<Item|array{billingBundleID: string, quantity: int}> $items
+     * @param list<ItemShape> $items
      */
     public function withItems(array $items): self
     {

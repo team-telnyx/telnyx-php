@@ -14,11 +14,11 @@ use Telnyx\Texml\Accounts\Calls\CallGetResponse\Status;
 /**
  * @phpstan-type CallGetResponseShape = array{
  *   accountSid?: string|null,
- *   answeredBy?: value-of<AnsweredBy>|null,
+ *   answeredBy?: null|AnsweredBy|value-of<AnsweredBy>,
  *   callerName?: string|null,
  *   dateCreated?: string|null,
  *   dateUpdated?: string|null,
- *   direction?: value-of<Direction>|null,
+ *   direction?: null|Direction|value-of<Direction>,
  *   duration?: string|null,
  *   endTime?: string|null,
  *   from?: string|null,
@@ -27,7 +27,7 @@ use Telnyx\Texml\Accounts\Calls\CallGetResponse\Status;
  *   priceUnit?: string|null,
  *   sid?: string|null,
  *   startTime?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   to?: string|null,
  *   toFormatted?: string|null,
  *   uri?: string|null,

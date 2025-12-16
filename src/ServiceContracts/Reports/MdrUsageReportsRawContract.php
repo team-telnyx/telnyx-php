@@ -22,7 +22,7 @@ interface MdrUsageReportsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MdrUsageReportCreateParams $params
+     * @param array<string,mixed>|MdrUsageReportCreateParams $params
      *
      * @return BaseResponse<MdrUsageReportNewResponse>
      *
@@ -48,7 +48,7 @@ interface MdrUsageReportsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MdrUsageReportListParams $params
+     * @param array<string,mixed>|MdrUsageReportListParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<MdrUsageReport>>
      *
@@ -74,7 +74,7 @@ interface MdrUsageReportsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MdrUsageReportFetchSyncParams $params
+     * @param array<string,mixed>|MdrUsageReportFetchSyncParams $params
      *
      * @return BaseResponse<MdrUsageReportFetchSyncResponse>
      *

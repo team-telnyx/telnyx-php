@@ -9,9 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Documents\DocumentListParams\Filter;
-use Telnyx\Documents\DocumentListParams\Filter\CreatedAt;
-use Telnyx\Documents\DocumentListParams\Filter\CustomerReference;
-use Telnyx\Documents\DocumentListParams\Filter\Filename;
 use Telnyx\Documents\DocumentListParams\Page;
 use Telnyx\Documents\DocumentListParams\Sort;
 
@@ -20,14 +17,13 @@ use Telnyx\Documents\DocumentListParams\Sort;
  *
  * @see Telnyx\Services\DocumentsService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\Documents\DocumentListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Documents\DocumentListParams\Page
+ *
  * @phpstan-type DocumentListParamsShape = array{
- *   filter?: Filter|array{
- *     createdAt?: CreatedAt|null,
- *     customerReference?: CustomerReference|null,
- *     filename?: Filename|null,
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
- *   sort?: list<Sort|value-of<Sort>>,
+ *   filter?: FilterShape|null,
+ *   page?: PageShape|null,
+ *   sort?: list<Sort|value-of<Sort>>|null,
  * }
  */
 final class DocumentListParams implements BaseModel
@@ -66,12 +62,8 @@ final class DocumentListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   createdAt?: CreatedAt|null,
-     *   customerReference?: CustomerReference|null,
-     *   filename?: Filename|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      * @param list<Sort|value-of<Sort>> $sort
      */
     public static function with(
@@ -91,11 +83,7 @@ final class DocumentListParams implements BaseModel
     /**
      * Consolidated filter parameter for documents (deepObject style). Originally: filter[filename][contains], filter[customer_reference][eq], filter[customer_reference][in][], filter[created_at][gt], filter[created_at][lt].
      *
-     * @param Filter|array{
-     *   createdAt?: CreatedAt|null,
-     *   customerReference?: CustomerReference|null,
-     *   filename?: Filename|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -108,7 +96,7 @@ final class DocumentListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

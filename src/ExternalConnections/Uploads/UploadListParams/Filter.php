@@ -11,16 +11,20 @@ use Telnyx\ExternalConnections\Uploads\UploadListParams\Filter\CivicAddressID;
 use Telnyx\ExternalConnections\Uploads\UploadListParams\Filter\LocationID;
 use Telnyx\ExternalConnections\Uploads\UploadListParams\Filter\PhoneNumber;
 use Telnyx\ExternalConnections\Uploads\UploadListParams\Filter\Status;
-use Telnyx\ExternalConnections\Uploads\UploadListParams\Filter\Status\Eq;
 
 /**
  * Filter parameter for uploads (deepObject style). Supports filtering by status, civic_address_id, location_id, and phone_number with eq/contains operations.
  *
+ * @phpstan-import-type CivicAddressIDShape from \Telnyx\ExternalConnections\Uploads\UploadListParams\Filter\CivicAddressID
+ * @phpstan-import-type LocationIDShape from \Telnyx\ExternalConnections\Uploads\UploadListParams\Filter\LocationID
+ * @phpstan-import-type PhoneNumberShape from \Telnyx\ExternalConnections\Uploads\UploadListParams\Filter\PhoneNumber
+ * @phpstan-import-type StatusShape from \Telnyx\ExternalConnections\Uploads\UploadListParams\Filter\Status
+ *
  * @phpstan-type FilterShape = array{
- *   civicAddressID?: CivicAddressID|null,
- *   locationID?: LocationID|null,
- *   phoneNumber?: PhoneNumber|null,
- *   status?: Status|null,
+ *   civicAddressID?: null|CivicAddressID|CivicAddressIDShape,
+ *   locationID?: null|LocationID|LocationIDShape,
+ *   phoneNumber?: null|PhoneNumber|PhoneNumberShape,
+ *   status?: null|Status|StatusShape,
  * }
  */
 final class Filter implements BaseModel
@@ -50,10 +54,10 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CivicAddressID|array{eq?: string|null} $civicAddressID
-     * @param LocationID|array{eq?: string|null} $locationID
-     * @param PhoneNumber|array{contains?: string|null, eq?: string|null} $phoneNumber
-     * @param Status|array{eq?: list<value-of<Eq>>|null} $status
+     * @param CivicAddressIDShape $civicAddressID
+     * @param LocationIDShape $locationID
+     * @param PhoneNumberShape $phoneNumber
+     * @param StatusShape $status
      */
     public static function with(
         CivicAddressID|array|null $civicAddressID = null,
@@ -72,7 +76,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param CivicAddressID|array{eq?: string|null} $civicAddressID
+     * @param CivicAddressIDShape $civicAddressID
      */
     public function withCivicAddressID(
         CivicAddressID|array $civicAddressID
@@ -84,7 +88,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param LocationID|array{eq?: string|null} $locationID
+     * @param LocationIDShape $locationID
      */
     public function withLocationID(LocationID|array $locationID): self
     {
@@ -95,7 +99,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param PhoneNumber|array{contains?: string|null, eq?: string|null} $phoneNumber
+     * @param PhoneNumberShape $phoneNumber
      */
     public function withPhoneNumber(PhoneNumber|array $phoneNumber): self
     {
@@ -106,7 +110,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param Status|array{eq?: list<value-of<Eq>>|null} $status
+     * @param StatusShape $status
      */
     public function withStatus(Status|array $status): self
     {

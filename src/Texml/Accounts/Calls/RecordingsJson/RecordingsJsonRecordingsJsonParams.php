@@ -20,13 +20,13 @@ use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParam
  *
  * @phpstan-type RecordingsJsonRecordingsJsonParamsShape = array{
  *   accountSid: string,
- *   playBeep?: bool,
- *   recordingChannels?: RecordingChannels|value-of<RecordingChannels>,
- *   recordingStatusCallback?: string,
- *   recordingStatusCallbackEvent?: string,
- *   recordingStatusCallbackMethod?: RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod>,
- *   recordingTrack?: RecordingTrack|value-of<RecordingTrack>,
- *   sendRecordingURL?: bool,
+ *   playBeep?: bool|null,
+ *   recordingChannels?: null|RecordingChannels|value-of<RecordingChannels>,
+ *   recordingStatusCallback?: string|null,
+ *   recordingStatusCallbackEvent?: string|null,
+ *   recordingStatusCallbackMethod?: null|RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod>,
+ *   recordingTrack?: null|RecordingTrack|value-of<RecordingTrack>,
+ *   sendRecordingURL?: bool|null,
  * }
  */
 final class RecordingsJsonRecordingsJsonParams implements BaseModel

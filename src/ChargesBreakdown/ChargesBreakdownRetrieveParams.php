@@ -17,7 +17,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\ChargesBreakdownService::retrieve()
  *
  * @phpstan-type ChargesBreakdownRetrieveParamsShape = array{
- *   startDate: string, endDate?: string, format?: Format|value-of<Format>
+ *   startDate: string,
+ *   endDate?: string|null,
+ *   format?: null|Format|value-of<Format>,
  * }
  */
 final class ChargesBreakdownRetrieveParams implements BaseModel

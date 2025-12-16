@@ -4,20 +4,10 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls;
 
-use Telnyx\Calls\Actions\TranscriptionEngineAConfig;
-use Telnyx\Calls\Actions\TranscriptionEngineAzureConfig;
-use Telnyx\Calls\Actions\TranscriptionEngineBConfig;
-use Telnyx\Calls\Actions\TranscriptionEngineGoogleConfig;
-use Telnyx\Calls\Actions\TranscriptionEngineTelnyxConfig;
 use Telnyx\Calls\Actions\TranscriptionStartRequest;
-use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngine;
-use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\DeepgramNova2Config;
-use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\DeepgramNova3Config;
 use Telnyx\Calls\CallDialParams\AnsweringMachineDetection;
 use Telnyx\Calls\CallDialParams\AnsweringMachineDetectionConfig;
 use Telnyx\Calls\CallDialParams\ConferenceConfig;
-use Telnyx\Calls\CallDialParams\ConferenceConfig\BeepEnabled;
-use Telnyx\Calls\CallDialParams\ConferenceConfig\SupervisorRole;
 use Telnyx\Calls\CallDialParams\MediaEncryption;
 use Telnyx\Calls\CallDialParams\Record;
 use Telnyx\Calls\CallDialParams\RecordChannels;
@@ -27,9 +17,9 @@ use Telnyx\Calls\CallDialParams\RecordTrim;
 use Telnyx\Calls\CallDialParams\SipRegion;
 use Telnyx\Calls\CallDialParams\SipTransportProtocol;
 use Telnyx\Calls\CallDialParams\StreamTrack;
+use Telnyx\Calls\CallDialParams\SupervisorRole;
 use Telnyx\Calls\CallDialParams\To;
 use Telnyx\Calls\CallDialParams\WebhookURLMethod;
-use Telnyx\Calls\SipHeader\Name;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -53,98 +43,68 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\CallsService::dial()
  *
+ * @phpstan-import-type ToShape from \Telnyx\Calls\CallDialParams\To
+ * @phpstan-import-type AnsweringMachineDetectionConfigShape from \Telnyx\Calls\CallDialParams\AnsweringMachineDetectionConfig
+ * @phpstan-import-type ConferenceConfigShape from \Telnyx\Calls\CallDialParams\ConferenceConfig
+ * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
+ * @phpstan-import-type DialogflowConfigShape from \Telnyx\Calls\DialogflowConfig
+ * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
+ * @phpstan-import-type SoundModificationsShape from \Telnyx\Calls\SoundModifications
+ * @phpstan-import-type TranscriptionStartRequestShape from \Telnyx\Calls\Actions\TranscriptionStartRequest
+ *
  * @phpstan-type CallDialParamsShape = array{
  *   connectionID: string,
  *   from: string,
- *   to: string|list<string>,
- *   answeringMachineDetection?: AnsweringMachineDetection|value-of<AnsweringMachineDetection>,
- *   answeringMachineDetectionConfig?: AnsweringMachineDetectionConfig|array{
- *     afterGreetingSilenceMillis?: int|null,
- *     betweenWordsSilenceMillis?: int|null,
- *     greetingDurationMillis?: int|null,
- *     greetingSilenceDurationMillis?: int|null,
- *     greetingTotalAnalysisTimeMillis?: int|null,
- *     initialSilenceMillis?: int|null,
- *     maximumNumberOfWords?: int|null,
- *     maximumWordLengthMillis?: int|null,
- *     silenceThreshold?: int|null,
- *     totalAnalysisTimeMillis?: int|null,
- *   },
- *   audioURL?: string,
- *   billingGroupID?: string,
- *   bridgeIntent?: bool,
- *   bridgeOnAnswer?: bool,
- *   clientState?: string,
- *   commandID?: string,
- *   conferenceConfig?: ConferenceConfig|array{
- *     id?: string|null,
- *     beepEnabled?: value-of<BeepEnabled>|null,
- *     conferenceName?: string|null,
- *     earlyMedia?: bool|null,
- *     endConferenceOnExit?: bool|null,
- *     hold?: bool|null,
- *     holdAudioURL?: string|null,
- *     holdMediaName?: string|null,
- *     mute?: bool|null,
- *     softEndConferenceOnExit?: bool|null,
- *     startConferenceOnCreate?: bool|null,
- *     startConferenceOnEnter?: bool|null,
- *     supervisorRole?: value-of<SupervisorRole>|null,
- *     whisperCallControlIDs?: list<string>|null,
- *   },
- *   customHeaders?: list<CustomSipHeader|array{name: string, value: string}>,
- *   dialogflowConfig?: DialogflowConfig|array{
- *     analyzeSentiment?: bool|null, partialAutomatedAgentReply?: bool|null
- *   },
- *   enableDialogflow?: bool,
- *   fromDisplayName?: string,
- *   linkTo?: string,
- *   mediaEncryption?: MediaEncryption|value-of<MediaEncryption>,
- *   mediaName?: string,
- *   parkAfterUnbridge?: string,
- *   preferredCodecs?: string,
- *   record?: Record|value-of<Record>,
- *   recordChannels?: RecordChannels|value-of<RecordChannels>,
- *   recordCustomFileName?: string,
- *   recordFormat?: RecordFormat|value-of<RecordFormat>,
- *   recordMaxLength?: int,
- *   recordTimeoutSecs?: int,
- *   recordTrack?: RecordTrack|value-of<RecordTrack>,
- *   recordTrim?: RecordTrim|value-of<RecordTrim>,
- *   sendSilenceWhenIdle?: bool,
- *   sipAuthPassword?: string,
- *   sipAuthUsername?: string,
- *   sipHeaders?: list<SipHeader|array{name: value-of<Name>, value: string}>,
- *   sipRegion?: SipRegion|value-of<SipRegion>,
- *   sipTransportProtocol?: SipTransportProtocol|value-of<SipTransportProtocol>,
- *   soundModifications?: SoundModifications|array{
- *     octaves?: float|null,
- *     pitch?: float|null,
- *     semitone?: float|null,
- *     track?: string|null,
- *   },
- *   streamBidirectionalCodec?: StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
- *   streamBidirectionalMode?: StreamBidirectionalMode|value-of<StreamBidirectionalMode>,
- *   streamBidirectionalSamplingRate?: 8000|16000|22050|24000|48000,
- *   streamBidirectionalTargetLegs?: StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs>,
- *   streamCodec?: StreamCodec|value-of<StreamCodec>,
- *   streamEstablishBeforeCallOriginate?: bool,
- *   streamTrack?: StreamTrack|value-of<StreamTrack>,
- *   streamURL?: string,
- *   superviseCallControlID?: string,
- *   supervisorRole?: \Telnyx\Calls\CallDialParams\SupervisorRole|value-of<\Telnyx\Calls\CallDialParams\SupervisorRole>,
- *   timeLimitSecs?: int,
- *   timeoutSecs?: int,
- *   transcription?: bool,
- *   transcriptionConfig?: TranscriptionStartRequest|array{
- *     clientState?: string|null,
- *     commandID?: string|null,
- *     transcriptionEngine?: value-of<TranscriptionEngine>|null,
- *     transcriptionEngineConfig?: null|TranscriptionEngineGoogleConfig|TranscriptionEngineTelnyxConfig|DeepgramNova2Config|DeepgramNova3Config|TranscriptionEngineAzureConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig,
- *     transcriptionTracks?: string|null,
- *   },
- *   webhookURL?: string,
- *   webhookURLMethod?: WebhookURLMethod|value-of<WebhookURLMethod>,
+ *   to: ToShape,
+ *   answeringMachineDetection?: null|AnsweringMachineDetection|value-of<AnsweringMachineDetection>,
+ *   answeringMachineDetectionConfig?: AnsweringMachineDetectionConfigShape|null,
+ *   audioURL?: string|null,
+ *   billingGroupID?: string|null,
+ *   bridgeIntent?: bool|null,
+ *   bridgeOnAnswer?: bool|null,
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   conferenceConfig?: ConferenceConfigShape|null,
+ *   customHeaders?: list<CustomSipHeaderShape>|null,
+ *   dialogflowConfig?: DialogflowConfigShape|null,
+ *   enableDialogflow?: bool|null,
+ *   fromDisplayName?: string|null,
+ *   linkTo?: string|null,
+ *   mediaEncryption?: null|MediaEncryption|value-of<MediaEncryption>,
+ *   mediaName?: string|null,
+ *   parkAfterUnbridge?: string|null,
+ *   preferredCodecs?: string|null,
+ *   record?: null|Record|value-of<Record>,
+ *   recordChannels?: null|RecordChannels|value-of<RecordChannels>,
+ *   recordCustomFileName?: string|null,
+ *   recordFormat?: null|RecordFormat|value-of<RecordFormat>,
+ *   recordMaxLength?: int|null,
+ *   recordTimeoutSecs?: int|null,
+ *   recordTrack?: null|RecordTrack|value-of<RecordTrack>,
+ *   recordTrim?: null|RecordTrim|value-of<RecordTrim>,
+ *   sendSilenceWhenIdle?: bool|null,
+ *   sipAuthPassword?: string|null,
+ *   sipAuthUsername?: string|null,
+ *   sipHeaders?: list<SipHeaderShape>|null,
+ *   sipRegion?: null|SipRegion|value-of<SipRegion>,
+ *   sipTransportProtocol?: null|SipTransportProtocol|value-of<SipTransportProtocol>,
+ *   soundModifications?: SoundModificationsShape|null,
+ *   streamBidirectionalCodec?: null|StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
+ *   streamBidirectionalMode?: null|StreamBidirectionalMode|value-of<StreamBidirectionalMode>,
+ *   streamBidirectionalSamplingRate?: null|8000|16000|22050|24000|48000,
+ *   streamBidirectionalTargetLegs?: null|StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs>,
+ *   streamCodec?: null|StreamCodec|value-of<StreamCodec>,
+ *   streamEstablishBeforeCallOriginate?: bool|null,
+ *   streamTrack?: null|StreamTrack|value-of<StreamTrack>,
+ *   streamURL?: string|null,
+ *   superviseCallControlID?: string|null,
+ *   supervisorRole?: null|SupervisorRole|value-of<SupervisorRole>,
+ *   timeLimitSecs?: int|null,
+ *   timeoutSecs?: int|null,
+ *   transcription?: bool|null,
+ *   transcriptionConfig?: TranscriptionStartRequestShape|null,
+ *   webhookURL?: string|null,
+ *   webhookURLMethod?: null|WebhookURLMethod|value-of<WebhookURLMethod>,
  * }
  */
 final class CallDialParams implements BaseModel
@@ -471,12 +431,9 @@ final class CallDialParams implements BaseModel
     /**
      * The role of the supervisor call. 'barge' means that supervisor call hears and is being heard by both ends of the call (caller & callee). 'whisper' means that only supervised_call_control_id hears supervisor but supervisor can hear everything. 'monitor' means that nobody can hear supervisor call, but supervisor can hear everything on the call.
      *
-     * @var value-of<CallDialParams\SupervisorRole>|null $supervisorRole
+     * @var value-of<SupervisorRole>|null $supervisorRole
      */
-    #[Optional(
-        'supervisor_role',
-        enum: CallDialParams\SupervisorRole::class
-    )]
+    #[Optional('supervisor_role', enum: SupervisorRole::class)]
     public ?string $supervisorRole;
 
     /**
@@ -538,69 +495,30 @@ final class CallDialParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param string|list<string> $to
+     * @param ToShape $to
      * @param AnsweringMachineDetection|value-of<AnsweringMachineDetection> $answeringMachineDetection
-     * @param AnsweringMachineDetectionConfig|array{
-     *   afterGreetingSilenceMillis?: int|null,
-     *   betweenWordsSilenceMillis?: int|null,
-     *   greetingDurationMillis?: int|null,
-     *   greetingSilenceDurationMillis?: int|null,
-     *   greetingTotalAnalysisTimeMillis?: int|null,
-     *   initialSilenceMillis?: int|null,
-     *   maximumNumberOfWords?: int|null,
-     *   maximumWordLengthMillis?: int|null,
-     *   silenceThreshold?: int|null,
-     *   totalAnalysisTimeMillis?: int|null,
-     * } $answeringMachineDetectionConfig
-     * @param ConferenceConfig|array{
-     *   id?: string|null,
-     *   beepEnabled?: value-of<BeepEnabled>|null,
-     *   conferenceName?: string|null,
-     *   earlyMedia?: bool|null,
-     *   endConferenceOnExit?: bool|null,
-     *   hold?: bool|null,
-     *   holdAudioURL?: string|null,
-     *   holdMediaName?: string|null,
-     *   mute?: bool|null,
-     *   softEndConferenceOnExit?: bool|null,
-     *   startConferenceOnCreate?: bool|null,
-     *   startConferenceOnEnter?: bool|null,
-     *   supervisorRole?: value-of<SupervisorRole>|null,
-     *   whisperCallControlIDs?: list<string>|null,
-     * } $conferenceConfig
-     * @param list<CustomSipHeader|array{name: string, value: string}> $customHeaders
-     * @param DialogflowConfig|array{
-     *   analyzeSentiment?: bool|null, partialAutomatedAgentReply?: bool|null
-     * } $dialogflowConfig
+     * @param AnsweringMachineDetectionConfigShape $answeringMachineDetectionConfig
+     * @param ConferenceConfigShape $conferenceConfig
+     * @param list<CustomSipHeaderShape> $customHeaders
+     * @param DialogflowConfigShape $dialogflowConfig
      * @param MediaEncryption|value-of<MediaEncryption> $mediaEncryption
      * @param Record|value-of<Record> $record
      * @param RecordChannels|value-of<RecordChannels> $recordChannels
      * @param RecordFormat|value-of<RecordFormat> $recordFormat
      * @param RecordTrack|value-of<RecordTrack> $recordTrack
      * @param RecordTrim|value-of<RecordTrim> $recordTrim
-     * @param list<SipHeader|array{name: value-of<Name>, value: string}> $sipHeaders
+     * @param list<SipHeaderShape> $sipHeaders
      * @param SipRegion|value-of<SipRegion> $sipRegion
      * @param SipTransportProtocol|value-of<SipTransportProtocol> $sipTransportProtocol
-     * @param SoundModifications|array{
-     *   octaves?: float|null,
-     *   pitch?: float|null,
-     *   semitone?: float|null,
-     *   track?: string|null,
-     * } $soundModifications
+     * @param SoundModificationsShape $soundModifications
      * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec> $streamBidirectionalCodec
      * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode> $streamBidirectionalMode
      * @param 8000|16000|22050|24000|48000 $streamBidirectionalSamplingRate
      * @param StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs> $streamBidirectionalTargetLegs
      * @param StreamCodec|value-of<StreamCodec> $streamCodec
      * @param StreamTrack|value-of<StreamTrack> $streamTrack
-     * @param CallDialParams\SupervisorRole|value-of<CallDialParams\SupervisorRole> $supervisorRole
-     * @param TranscriptionStartRequest|array{
-     *   clientState?: string|null,
-     *   commandID?: string|null,
-     *   transcriptionEngine?: value-of<TranscriptionEngine>|null,
-     *   transcriptionEngineConfig?: TranscriptionEngineGoogleConfig|TranscriptionEngineTelnyxConfig|DeepgramNova2Config|DeepgramNova3Config|TranscriptionEngineAzureConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null,
-     *   transcriptionTracks?: string|null,
-     * } $transcriptionConfig
+     * @param SupervisorRole|value-of<SupervisorRole> $supervisorRole
+     * @param TranscriptionStartRequestShape $transcriptionConfig
      * @param WebhookURLMethod|value-of<WebhookURLMethod> $webhookURLMethod
      */
     public static function with(
@@ -649,7 +567,7 @@ final class CallDialParams implements BaseModel
         StreamTrack|string|null $streamTrack = null,
         ?string $streamURL = null,
         ?string $superviseCallControlID = null,
-        CallDialParams\SupervisorRole|string|null $supervisorRole = null,
+        SupervisorRole|string|null $supervisorRole = null,
         ?int $timeLimitSecs = null,
         ?int $timeoutSecs = null,
         ?bool $transcription = null,
@@ -741,7 +659,7 @@ final class CallDialParams implements BaseModel
     /**
      * The DID or SIP URI to dial out to. Multiple DID or SIP URIs can be provided using an array of strings.
      *
-     * @param string|list<string> $to
+     * @param ToShape $to
      */
     public function withTo(string|array $to): self
     {
@@ -768,18 +686,7 @@ final class CallDialParams implements BaseModel
     /**
      * Optional configuration parameters to modify 'answering_machine_detection' performance.
      *
-     * @param AnsweringMachineDetectionConfig|array{
-     *   afterGreetingSilenceMillis?: int|null,
-     *   betweenWordsSilenceMillis?: int|null,
-     *   greetingDurationMillis?: int|null,
-     *   greetingSilenceDurationMillis?: int|null,
-     *   greetingTotalAnalysisTimeMillis?: int|null,
-     *   initialSilenceMillis?: int|null,
-     *   maximumNumberOfWords?: int|null,
-     *   maximumWordLengthMillis?: int|null,
-     *   silenceThreshold?: int|null,
-     *   totalAnalysisTimeMillis?: int|null,
-     * } $answeringMachineDetectionConfig
+     * @param AnsweringMachineDetectionConfigShape $answeringMachineDetectionConfig
      */
     public function withAnsweringMachineDetectionConfig(
         AnsweringMachineDetectionConfig|array $answeringMachineDetectionConfig
@@ -859,22 +766,7 @@ final class CallDialParams implements BaseModel
     /**
      * Optional configuration parameters to dial new participant into a conference.
      *
-     * @param ConferenceConfig|array{
-     *   id?: string|null,
-     *   beepEnabled?: value-of<BeepEnabled>|null,
-     *   conferenceName?: string|null,
-     *   earlyMedia?: bool|null,
-     *   endConferenceOnExit?: bool|null,
-     *   hold?: bool|null,
-     *   holdAudioURL?: string|null,
-     *   holdMediaName?: string|null,
-     *   mute?: bool|null,
-     *   softEndConferenceOnExit?: bool|null,
-     *   startConferenceOnCreate?: bool|null,
-     *   startConferenceOnEnter?: bool|null,
-     *   supervisorRole?: value-of<SupervisorRole>|null,
-     *   whisperCallControlIDs?: list<string>|null,
-     * } $conferenceConfig
+     * @param ConferenceConfigShape $conferenceConfig
      */
     public function withConferenceConfig(
         ConferenceConfig|array $conferenceConfig
@@ -888,7 +780,7 @@ final class CallDialParams implements BaseModel
     /**
      * Custom headers to be added to the SIP INVITE.
      *
-     * @param list<CustomSipHeader|array{name: string, value: string}> $customHeaders
+     * @param list<CustomSipHeaderShape> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {
@@ -899,9 +791,7 @@ final class CallDialParams implements BaseModel
     }
 
     /**
-     * @param DialogflowConfig|array{
-     *   analyzeSentiment?: bool|null, partialAutomatedAgentReply?: bool|null
-     * } $dialogflowConfig
+     * @param DialogflowConfigShape $dialogflowConfig
      */
     public function withDialogflowConfig(
         DialogflowConfig|array $dialogflowConfig
@@ -1127,7 +1017,7 @@ final class CallDialParams implements BaseModel
     /**
      * SIP headers to be added to the SIP INVITE request. Currently only User-to-User header is supported.
      *
-     * @param list<SipHeader|array{name: value-of<Name>, value: string}> $sipHeaders
+     * @param list<SipHeaderShape> $sipHeaders
      */
     public function withSipHeaders(array $sipHeaders): self
     {
@@ -1167,12 +1057,7 @@ final class CallDialParams implements BaseModel
     /**
      * Use this field to modify sound effects, for example adjust the pitch.
      *
-     * @param SoundModifications|array{
-     *   octaves?: float|null,
-     *   pitch?: float|null,
-     *   semitone?: float|null,
-     *   track?: string|null,
-     * } $soundModifications
+     * @param SoundModificationsShape $soundModifications
      */
     public function withSoundModifications(
         SoundModifications|array $soundModifications
@@ -1303,10 +1188,10 @@ final class CallDialParams implements BaseModel
     /**
      * The role of the supervisor call. 'barge' means that supervisor call hears and is being heard by both ends of the call (caller & callee). 'whisper' means that only supervised_call_control_id hears supervisor but supervisor can hear everything. 'monitor' means that nobody can hear supervisor call, but supervisor can hear everything on the call.
      *
-     * @param CallDialParams\SupervisorRole|value-of<CallDialParams\SupervisorRole> $supervisorRole
+     * @param SupervisorRole|value-of<SupervisorRole> $supervisorRole
      */
     public function withSupervisorRole(
-        CallDialParams\SupervisorRole|string $supervisorRole
+        SupervisorRole|string $supervisorRole
     ): self {
         $self = clone $this;
         $self['supervisorRole'] = $supervisorRole;
@@ -1348,13 +1233,7 @@ final class CallDialParams implements BaseModel
     }
 
     /**
-     * @param TranscriptionStartRequest|array{
-     *   clientState?: string|null,
-     *   commandID?: string|null,
-     *   transcriptionEngine?: value-of<TranscriptionEngine>|null,
-     *   transcriptionEngineConfig?: TranscriptionEngineGoogleConfig|TranscriptionEngineTelnyxConfig|DeepgramNova2Config|DeepgramNova3Config|TranscriptionEngineAzureConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null,
-     *   transcriptionTracks?: string|null,
-     * } $transcriptionConfig
+     * @param TranscriptionStartRequestShape $transcriptionConfig
      */
     public function withTranscriptionConfig(
         TranscriptionStartRequest|array $transcriptionConfig

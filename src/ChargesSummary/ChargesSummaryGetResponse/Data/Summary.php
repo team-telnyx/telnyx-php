@@ -8,14 +8,16 @@ use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Adjustment;
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line;
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\ComparativeLine;
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\SimpleLine;
-use Telnyx\ChargesSummary\MonthDetail;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type AdjustmentShape from \Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Adjustment
+ * @phpstan-import-type LineShape from \Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line
+ *
  * @phpstan-type SummaryShape = array{
- *   adjustments: list<Adjustment>, lines: list<ComparativeLine|SimpleLine>
+ *   adjustments: list<AdjustmentShape>, lines: list<LineShape>
  * }
  */
 final class Summary implements BaseModel
@@ -63,18 +65,8 @@ final class Summary implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Adjustment|array{
-     *   amount: string, description: string, eventDate: string
-     * }> $adjustments
-     * @param list<ComparativeLine|array{
-     *   alias: string,
-     *   existingThisMonth: MonthDetail,
-     *   name: string,
-     *   newThisMonth: MonthDetail,
-     *   type?: 'comparative',
-     * }|SimpleLine|array{
-     *   alias: string, amount: string, name: string, quantity: int, type?: 'simple'
-     * }> $lines
+     * @param list<AdjustmentShape> $adjustments
+     * @param list<LineShape> $lines
      */
     public static function with(array $adjustments, array $lines): self
     {
@@ -89,9 +81,7 @@ final class Summary implements BaseModel
     /**
      * List of billing adjustments.
      *
-     * @param list<Adjustment|array{
-     *   amount: string, description: string, eventDate: string
-     * }> $adjustments
+     * @param list<AdjustmentShape> $adjustments
      */
     public function withAdjustments(array $adjustments): self
     {
@@ -104,15 +94,7 @@ final class Summary implements BaseModel
     /**
      * List of charge summary lines.
      *
-     * @param list<ComparativeLine|array{
-     *   alias: string,
-     *   existingThisMonth: MonthDetail,
-     *   name: string,
-     *   newThisMonth: MonthDetail,
-     *   type?: 'comparative',
-     * }|SimpleLine|array{
-     *   alias: string, amount: string, name: string, quantity: int, type?: 'simple'
-     * }> $lines
+     * @param list<LineShape> $lines
      */
     public function withLines(array $lines): self
     {

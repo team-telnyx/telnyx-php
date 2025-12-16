@@ -12,7 +12,7 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\Status\
 
 /**
  * @phpstan-type StatusShape = array{
- *   eq?: value-of<Eq>|null, in?: list<value-of<In>>|null
+ *   eq?: null|Eq|value-of<Eq>, in?: list<In|value-of<In>>|null
  * }
  */
 final class Status implements BaseModel

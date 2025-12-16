@@ -17,7 +17,7 @@ interface UsageRawContract
      * @api
      *
      * @param string $bucketName The name of the bucket
-     * @param array<mixed>|UsageGetAPIUsageParams $params
+     * @param array<string,mixed>|UsageGetAPIUsageParams $params
      *
      * @return BaseResponse<UsageGetAPIUsageResponse>
      *

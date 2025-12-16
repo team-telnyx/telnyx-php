@@ -17,10 +17,10 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type ClusterComputeParamsShape = array{
  *   bucket: string,
- *   files?: list<string>,
- *   minClusterSize?: int,
- *   minSubclusterSize?: int,
- *   prefix?: string,
+ *   files?: list<string>|null,
+ *   minClusterSize?: int|null,
+ *   minSubclusterSize?: int|null,
+ *   prefix?: string|null,
  * }
  */
 final class ClusterComputeParams implements BaseModel

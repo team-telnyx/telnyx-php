@@ -19,7 +19,7 @@ interface VerifiedNumbersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|VerifiedNumberCreateParams $params
+     * @param array<string,mixed>|VerifiedNumberCreateParams $params
      *
      * @return BaseResponse<VerifiedNumberNewResponse>
      *
@@ -47,7 +47,7 @@ interface VerifiedNumbersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|VerifiedNumberListParams $params
+     * @param array<string,mixed>|VerifiedNumberListParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<VerifiedNumber>>
      *

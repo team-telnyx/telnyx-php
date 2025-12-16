@@ -12,9 +12,9 @@ use Telnyx\MobilePhoneNumbers\MobilePhoneNumber\CallRecording\InboundCallRecordi
 
 /**
  * @phpstan-type CallRecordingShape = array{
- *   inboundCallRecordingChannels?: value-of<InboundCallRecordingChannels>|null,
+ *   inboundCallRecordingChannels?: null|InboundCallRecordingChannels|value-of<InboundCallRecordingChannels>,
  *   inboundCallRecordingEnabled?: bool|null,
- *   inboundCallRecordingFormat?: value-of<InboundCallRecordingFormat>|null,
+ *   inboundCallRecordingFormat?: null|InboundCallRecordingFormat|value-of<InboundCallRecordingFormat>,
  * }
  */
 final class CallRecording implements BaseModel

@@ -18,7 +18,7 @@ interface PhoneNumberCampaignsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PhoneNumberCampaignCreateParams $params
+     * @param array<string,mixed>|PhoneNumberCampaignCreateParams $params
      *
      * @return BaseResponse<PhoneNumberCampaign>
      *
@@ -44,7 +44,7 @@ interface PhoneNumberCampaignsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PhoneNumberCampaignUpdateParams $params
+     * @param array<string,mixed>|PhoneNumberCampaignUpdateParams $params
      *
      * @return BaseResponse<PhoneNumberCampaign>
      *
@@ -59,7 +59,7 @@ interface PhoneNumberCampaignsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PhoneNumberCampaignListParams $params
+     * @param array<string,mixed>|PhoneNumberCampaignListParams $params
      *
      * @return BaseResponse<PerPagePaginationV2<PhoneNumberCampaign>>
      *

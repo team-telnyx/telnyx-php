@@ -15,9 +15,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\GlobalIPHealthChecksService::create()
  *
  * @phpstan-type GlobalIPHealthCheckCreateParamsShape = array{
- *   globalIPID?: string,
- *   healthCheckParams?: array<string,mixed>,
- *   healthCheckType?: string,
+ *   globalIPID?: string|null,
+ *   healthCheckParams?: array<string,mixed>|null,
+ *   healthCheckType?: string|null,
  * }
  */
 final class GlobalIPHealthCheckCreateParams implements BaseModel

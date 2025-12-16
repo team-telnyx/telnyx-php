@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   sourceID: string,
  *   targetBucketName: string,
  *   targetRegion: string,
- *   refresh?: bool,
+ *   refresh?: bool|null,
  * }
  */
 final class MigrationCreateParams implements BaseModel

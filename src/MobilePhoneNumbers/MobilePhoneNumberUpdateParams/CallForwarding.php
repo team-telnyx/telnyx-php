@@ -12,7 +12,7 @@ use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallForwarding\Forwa
 /**
  * @phpstan-type CallForwardingShape = array{
  *   callForwardingEnabled?: bool|null,
- *   forwardingType?: value-of<ForwardingType>|null,
+ *   forwardingType?: null|ForwardingType|value-of<ForwardingType>,
  *   forwardsTo?: string|null,
  * }
  */

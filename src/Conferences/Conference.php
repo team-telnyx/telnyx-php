@@ -14,17 +14,19 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type EndedByShape from \Telnyx\Conferences\Conference\EndedBy
+ *
  * @phpstan-type ConferenceShape = array{
  *   id: string,
  *   createdAt: string,
  *   expiresAt: string,
  *   name: string,
- *   recordType: value-of<RecordType>,
+ *   recordType: RecordType|value-of<RecordType>,
  *   connectionID?: string|null,
- *   endReason?: value-of<EndReason>|null,
- *   endedBy?: EndedBy|null,
+ *   endReason?: null|EndReason|value-of<EndReason>,
+ *   endedBy?: null|EndedBy|EndedByShape,
  *   region?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   updatedAt?: string|null,
  * }
  */
@@ -134,9 +136,7 @@ final class Conference implements BaseModel
      *
      * @param RecordType|value-of<RecordType> $recordType
      * @param EndReason|value-of<EndReason> $endReason
-     * @param EndedBy|array{
-     *   callControlID?: string|null, callSessionID?: string|null
-     * } $endedBy
+     * @param EndedByShape $endedBy
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -252,9 +252,7 @@ final class Conference implements BaseModel
     /**
      * IDs related to who ended the conference. It is expected for them to all be there or all be null.
      *
-     * @param EndedBy|array{
-     *   callControlID?: string|null, callSessionID?: string|null
-     * } $endedBy
+     * @param EndedByShape $endedBy
      */
     public function withEndedBy(EndedBy|array $endedBy): self
     {

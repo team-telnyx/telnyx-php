@@ -36,7 +36,7 @@ interface PortoutsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PortoutListParams $params
+     * @param array<string,mixed>|PortoutListParams $params
      *
      * @return BaseResponse<DefaultPagination<PortoutDetails>>
      *
@@ -51,7 +51,7 @@ interface PortoutsRawContract
      * @api
      *
      * @param string $portoutID identifies a port out order
-     * @param array<mixed>|PortoutListRejectionCodesParams $params
+     * @param array<string,mixed>|PortoutListRejectionCodesParams $params
      *
      * @return BaseResponse<PortoutListRejectionCodesResponse>
      *
@@ -67,7 +67,7 @@ interface PortoutsRawContract
      * @api
      *
      * @param Status|value-of<Status> $status Path param: Updated portout status
-     * @param array<mixed>|PortoutUpdateStatusParams $params
+     * @param array<string,mixed>|PortoutUpdateStatusParams $params
      *
      * @return BaseResponse<PortoutUpdateStatusResponse>
      *

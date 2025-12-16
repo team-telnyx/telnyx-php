@@ -32,7 +32,7 @@ use Telnyx\Portouts\PortoutDetails\Status;
  *   serviceAddress?: string|null,
  *   spid?: string|null,
  *   state?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   supportKey?: string|null,
  *   updatedAt?: string|null,
  *   userID?: string|null,

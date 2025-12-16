@@ -12,12 +12,15 @@ use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse\LogMessage\Meta
 use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse\LogMessage\Source;
 
 /**
+ * @phpstan-import-type MetaShape from \Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse\LogMessage\Meta
+ * @phpstan-import-type SourceShape from \Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse\LogMessage\Source
+ *
  * @phpstan-type LogMessageShape = array{
  *   code: string,
  *   title: string,
  *   detail?: string|null,
- *   meta?: Meta|null,
- *   source?: Source|null,
+ *   meta?: null|Meta|MetaShape,
+ *   source?: null|Source|SourceShape,
  * }
  */
 final class LogMessage implements BaseModel
@@ -64,12 +67,8 @@ final class LogMessage implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Meta|array{
-     *   externalConnectionID?: string|null,
-     *   telephoneNumber?: string|null,
-     *   ticketID?: string|null,
-     * } $meta
-     * @param Source|array{pointer?: string|null} $source
+     * @param MetaShape $meta
+     * @param SourceShape $source
      */
     public static function with(
         string $code,
@@ -115,11 +114,7 @@ final class LogMessage implements BaseModel
     }
 
     /**
-     * @param Meta|array{
-     *   externalConnectionID?: string|null,
-     *   telephoneNumber?: string|null,
-     *   ticketID?: string|null,
-     * } $meta
+     * @param MetaShape $meta
      */
     public function withMeta(Meta|array $meta): self
     {
@@ -130,7 +125,7 @@ final class LogMessage implements BaseModel
     }
 
     /**
-     * @param Source|array{pointer?: string|null} $source
+     * @param SourceShape $source
      */
     public function withSource(Source|array $source): self
     {

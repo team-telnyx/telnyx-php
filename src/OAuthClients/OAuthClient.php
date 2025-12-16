@@ -15,15 +15,15 @@ use Telnyx\OAuthClients\OAuthClient\RecordType;
 /**
  * @phpstan-type OAuthClientShape = array{
  *   clientID: string,
- *   clientType: value-of<ClientType>,
+ *   clientType: ClientType|value-of<ClientType>,
  *   createdAt: \DateTimeInterface,
  *   name: string,
  *   orgID: string,
- *   recordType: value-of<RecordType>,
+ *   recordType: RecordType|value-of<RecordType>,
  *   requirePkce: bool,
  *   updatedAt: \DateTimeInterface,
  *   userID: string,
- *   allowedGrantTypes?: list<value-of<AllowedGrantType>>|null,
+ *   allowedGrantTypes?: list<AllowedGrantType|value-of<AllowedGrantType>>|null,
  *   allowedScopes?: list<string>|null,
  *   clientSecret?: string|null,
  *   logoUri?: string|null,

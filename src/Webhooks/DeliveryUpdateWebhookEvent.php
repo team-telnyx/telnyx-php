@@ -7,15 +7,15 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Messages\OutboundMessagePayload;
 use Telnyx\Webhooks\DeliveryUpdateWebhookEvent\Data;
-use Telnyx\Webhooks\DeliveryUpdateWebhookEvent\Data\EventType;
-use Telnyx\Webhooks\DeliveryUpdateWebhookEvent\Data\RecordType;
 use Telnyx\Webhooks\DeliveryUpdateWebhookEvent\Meta;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\Webhooks\DeliveryUpdateWebhookEvent\Data
+ * @phpstan-import-type MetaShape from \Telnyx\Webhooks\DeliveryUpdateWebhookEvent\Meta
+ *
  * @phpstan-type DeliveryUpdateWebhookEventShape = array{
- *   data?: Data|null, meta?: Meta|null
+ *   data?: null|Data|DataShape, meta?: null|Meta|MetaShape
  * }
  */
 final class DeliveryUpdateWebhookEvent implements BaseModel
@@ -39,14 +39,8 @@ final class DeliveryUpdateWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   id?: string|null,
-     *   eventType?: value-of<EventType>|null,
-     *   occurredAt?: \DateTimeInterface|null,
-     *   payload?: OutboundMessagePayload|null,
-     *   recordType?: value-of<RecordType>|null,
-     * } $data
-     * @param Meta|array{attempt?: int|null, deliveredTo?: string|null} $meta
+     * @param DataShape $data
+     * @param MetaShape $meta
      */
     public static function with(
         Data|array|null $data = null,
@@ -61,13 +55,7 @@ final class DeliveryUpdateWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   id?: string|null,
-     *   eventType?: value-of<EventType>|null,
-     *   occurredAt?: \DateTimeInterface|null,
-     *   payload?: OutboundMessagePayload|null,
-     *   recordType?: value-of<RecordType>|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {
@@ -78,7 +66,7 @@ final class DeliveryUpdateWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Meta|array{attempt?: int|null, deliveredTo?: string|null} $meta
+     * @param MetaShape $meta
      */
     public function withMeta(Meta|array $meta): self
     {

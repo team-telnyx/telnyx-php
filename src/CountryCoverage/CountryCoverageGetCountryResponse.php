@@ -8,11 +8,13 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CountryCoverage\CountryCoverageGetCountryResponse\Data;
-use Telnyx\CountryCoverage\CountryCoverageGetCountryResponse\Data\Local;
-use Telnyx\CountryCoverage\CountryCoverageGetCountryResponse\Data\TollFree;
 
 /**
- * @phpstan-type CountryCoverageGetCountryResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\CountryCoverage\CountryCoverageGetCountryResponse\Data
+ *
+ * @phpstan-type CountryCoverageGetCountryResponseShape = array{
+ *   data?: null|Data|DataShape
+ * }
  */
 final class CountryCoverageGetCountryResponse implements BaseModel
 {
@@ -32,23 +34,7 @@ final class CountryCoverageGetCountryResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   code?: string|null,
-     *   features?: list<string>|null,
-     *   internationalSMS?: bool|null,
-     *   inventoryCoverage?: bool|null,
-     *   local?: Local|null,
-     *   mobile?: array<string,mixed>|null,
-     *   national?: array<string,mixed>|null,
-     *   numbers?: bool|null,
-     *   p2p?: bool|null,
-     *   phoneNumberType?: list<string>|null,
-     *   quickship?: bool|null,
-     *   region?: string|null,
-     *   reservable?: bool|null,
-     *   sharedCost?: array<string,mixed>|null,
-     *   tollFree?: TollFree|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -60,23 +46,7 @@ final class CountryCoverageGetCountryResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   code?: string|null,
-     *   features?: list<string>|null,
-     *   internationalSMS?: bool|null,
-     *   inventoryCoverage?: bool|null,
-     *   local?: Local|null,
-     *   mobile?: array<string,mixed>|null,
-     *   national?: array<string,mixed>|null,
-     *   numbers?: bool|null,
-     *   p2p?: bool|null,
-     *   phoneNumberType?: list<string>|null,
-     *   quickship?: bool|null,
-     *   region?: string|null,
-     *   reservable?: bool|null,
-     *   sharedCost?: array<string,mixed>|null,
-     *   tollFree?: TollFree|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

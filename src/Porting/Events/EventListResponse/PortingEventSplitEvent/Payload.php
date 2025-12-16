@@ -14,10 +14,14 @@ use Telnyx\Porting\Events\EventListResponse\PortingEventSplitEvent\Payload\To;
 /**
  * The webhook payload for the porting_order.split event.
  *
+ * @phpstan-import-type FromShape from \Telnyx\Porting\Events\EventListResponse\PortingEventSplitEvent\Payload\From
+ * @phpstan-import-type PortingPhoneNumberShape from \Telnyx\Porting\Events\EventListResponse\PortingEventSplitEvent\Payload\PortingPhoneNumber
+ * @phpstan-import-type ToShape from \Telnyx\Porting\Events\EventListResponse\PortingEventSplitEvent\Payload\To
+ *
  * @phpstan-type PayloadShape = array{
- *   from?: From|null,
- *   portingPhoneNumbers?: list<PortingPhoneNumber>|null,
- *   to?: To|null,
+ *   from?: null|From|FromShape,
+ *   portingPhoneNumbers?: list<PortingPhoneNumberShape>|null,
+ *   to?: null|To|ToShape,
  * }
  */
 final class Payload implements BaseModel
@@ -55,9 +59,9 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param From|array{id?: string|null} $from
-     * @param list<PortingPhoneNumber|array{id?: string|null}> $portingPhoneNumbers
-     * @param To|array{id?: string|null} $to
+     * @param FromShape $from
+     * @param list<PortingPhoneNumberShape> $portingPhoneNumbers
+     * @param ToShape $to
      */
     public static function with(
         From|array|null $from = null,
@@ -76,7 +80,7 @@ final class Payload implements BaseModel
     /**
      * The porting order that was split.
      *
-     * @param From|array{id?: string|null} $from
+     * @param FromShape $from
      */
     public function withFrom(From|array $from): self
     {
@@ -89,7 +93,7 @@ final class Payload implements BaseModel
     /**
      * The list of porting phone numbers that were moved to the new porting order.
      *
-     * @param list<PortingPhoneNumber|array{id?: string|null}> $portingPhoneNumbers
+     * @param list<PortingPhoneNumberShape> $portingPhoneNumbers
      */
     public function withPortingPhoneNumbers(array $portingPhoneNumbers): self
     {
@@ -102,7 +106,7 @@ final class Payload implements BaseModel
     /**
      * The new porting order that the phone numbers was moved to.
      *
-     * @param To|array{id?: string|null} $to
+     * @param ToShape $to
      */
     public function withTo(To|array $to): self
     {

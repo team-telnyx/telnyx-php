@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\MediaService::upload()
  *
  * @phpstan-type MediaUploadParamsShape = array{
- *   mediaURL: string, mediaName?: string, ttlSecs?: int
+ *   mediaURL: string, mediaName?: string|null, ttlSecs?: int|null
  * }
  */
 final class MediaUploadParams implements BaseModel

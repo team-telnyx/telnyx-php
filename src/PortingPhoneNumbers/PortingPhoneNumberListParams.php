@@ -9,7 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Filter;
-use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Filter\PortingOrderStatus;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Page;
 
 /**
@@ -17,9 +16,11 @@ use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Page;
  *
  * @see Telnyx\Services\PortingPhoneNumbersService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Page
+ *
  * @phpstan-type PortingPhoneNumberListParamsShape = array{
- *   filter?: Filter|array{portingOrderStatus?: value-of<PortingOrderStatus>|null},
- *   page?: Page|array{number?: int|null, size?: int|null},
+ *   filter?: FilterShape|null, page?: PageShape|null
  * }
  */
 final class PortingPhoneNumberListParams implements BaseModel
@@ -50,10 +51,8 @@ final class PortingPhoneNumberListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   portingOrderStatus?: value-of<PortingOrderStatus>|null
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -70,9 +69,7 @@ final class PortingPhoneNumberListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[porting_order_status].
      *
-     * @param Filter|array{
-     *   portingOrderStatus?: value-of<PortingOrderStatus>|null
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -85,7 +82,7 @@ final class PortingPhoneNumberListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

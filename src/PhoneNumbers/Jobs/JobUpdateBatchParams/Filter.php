@@ -14,6 +14,8 @@ use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams\Filter\VoiceUsagePaymentMethod
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[has_bundle], filter[tag], filter[connection_id], filter[phone_number], filter[status], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference].
  *
+ * @phpstan-import-type VoiceConnectionNameShape from \Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams\Filter\VoiceConnectionName
+ *
  * @phpstan-type FilterShape = array{
  *   billingGroupID?: string|null,
  *   connectionID?: string|null,
@@ -21,10 +23,10 @@ use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams\Filter\VoiceUsagePaymentMethod
  *   emergencyAddressID?: string|null,
  *   hasBundle?: string|null,
  *   phoneNumber?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   tag?: string|null,
- *   voiceConnectionName?: VoiceConnectionName|null,
- *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
+ *   voiceConnectionName?: null|VoiceConnectionName|VoiceConnectionNameShape,
+ *   voiceUsagePaymentMethod?: null|VoiceUsagePaymentMethod|value-of<VoiceUsagePaymentMethod>,
  * }
  */
 final class Filter implements BaseModel
@@ -111,12 +113,7 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Status|value-of<Status> $status
-     * @param VoiceConnectionName|array{
-     *   contains?: string|null,
-     *   endsWith?: string|null,
-     *   eq?: string|null,
-     *   startsWith?: string|null,
-     * } $voiceConnectionName
+     * @param VoiceConnectionNameShape $voiceConnectionName
      * @param VoiceUsagePaymentMethod|value-of<VoiceUsagePaymentMethod> $voiceUsagePaymentMethod
      */
     public static function with(
@@ -241,12 +238,7 @@ final class Filter implements BaseModel
     /**
      * Filter by voice connection name pattern matching.
      *
-     * @param VoiceConnectionName|array{
-     *   contains?: string|null,
-     *   endsWith?: string|null,
-     *   eq?: string|null,
-     *   startsWith?: string|null,
-     * } $voiceConnectionName
+     * @param VoiceConnectionNameShape $voiceConnectionName
      */
     public function withVoiceConnectionName(
         VoiceConnectionName|array $voiceConnectionName

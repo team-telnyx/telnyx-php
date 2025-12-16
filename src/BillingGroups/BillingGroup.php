@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   deletedAt?: \DateTimeInterface|null,
  *   name?: string|null,
  *   organizationID?: string|null,
- *   recordType?: value-of<RecordType>|null,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */

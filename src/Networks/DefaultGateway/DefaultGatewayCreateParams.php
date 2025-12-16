@@ -14,7 +14,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Networks\DefaultGatewayService::create()
  *
- * @phpstan-type DefaultGatewayCreateParamsShape = array{wireguardPeerID?: string}
+ * @phpstan-type DefaultGatewayCreateParamsShape = array{
+ *   wireguardPeerID?: string|null
+ * }
  */
 final class DefaultGatewayCreateParams implements BaseModel
 {

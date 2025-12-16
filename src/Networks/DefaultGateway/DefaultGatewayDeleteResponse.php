@@ -9,11 +9,13 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Networks\DefaultGateway\DefaultGatewayDeleteResponse\Data;
-use Telnyx\Networks\InterfaceStatus;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\Networks\DefaultGateway\DefaultGatewayDeleteResponse\Data
+ * @phpstan-import-type PaginationMetaShape from \Telnyx\AuthenticationProviders\PaginationMeta
+ *
  * @phpstan-type DefaultGatewayDeleteResponseShape = array{
- *   data?: list<Data>|null, meta?: PaginationMeta|null
+ *   data?: list<DataShape>|null, meta?: null|PaginationMeta|PaginationMetaShape
  * }
  */
 final class DefaultGatewayDeleteResponse implements BaseModel
@@ -38,18 +40,8 @@ final class DefaultGatewayDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     *   networkID?: string|null,
-     *   status?: value-of<InterfaceStatus>|null,
-     *   wireguardPeerID?: string|null,
-     * }> $data
-     * @param PaginationMeta|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param list<DataShape> $data
+     * @param PaginationMetaShape $meta
      */
     public static function with(
         ?array $data = null,
@@ -64,15 +56,7 @@ final class DefaultGatewayDeleteResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     *   networkID?: string|null,
-     *   status?: value-of<InterfaceStatus>|null,
-     *   wireguardPeerID?: string|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {
@@ -83,9 +67,7 @@ final class DefaultGatewayDeleteResponse implements BaseModel
     }
 
     /**
-     * @param PaginationMeta|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param PaginationMetaShape $meta
      */
     public function withMeta(PaginationMeta|array $meta): self
     {

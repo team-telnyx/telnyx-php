@@ -20,7 +20,7 @@ interface PhoneNumberAssignmentByProfileRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PhoneNumberAssignmentByProfileAssignParams $params
+     * @param array<string,mixed>|PhoneNumberAssignmentByProfileAssignParams $params
      *
      * @return BaseResponse<PhoneNumberAssignmentByProfileAssignResponse>
      *
@@ -34,7 +34,7 @@ interface PhoneNumberAssignmentByProfileRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PhoneNumberAssignmentByProfileListPhoneNumberStatusParams $params
+     * @param array<string,mixed>|PhoneNumberAssignmentByProfileListPhoneNumberStatusParams $params
      *
      * @return BaseResponse<PhoneNumberAssignmentByProfileListPhoneNumberStatusResponse,>
      *
@@ -49,7 +49,7 @@ interface PhoneNumberAssignmentByProfileRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParams $params
+     * @param array<string,mixed>|PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParams $params
      *
      * @return BaseResponse<PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse>
      *

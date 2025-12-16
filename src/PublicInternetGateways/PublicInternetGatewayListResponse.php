@@ -17,7 +17,7 @@ use Telnyx\Networks\InterfaceStatus;
  *   updatedAt?: string|null,
  *   name?: string|null,
  *   networkID?: string|null,
- *   status?: value-of<InterfaceStatus>|null,
+ *   status?: null|InterfaceStatus|value-of<InterfaceStatus>,
  *   publicIP?: string|null,
  *   regionCode?: string|null,
  * }

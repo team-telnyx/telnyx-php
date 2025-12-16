@@ -15,7 +15,7 @@ interface SimCardOrderPreviewRawContract
     /**
      * @api
      *
-     * @param array<mixed>|SimCardOrderPreviewPreviewParams $params
+     * @param array<string,mixed>|SimCardOrderPreviewPreviewParams $params
      *
      * @return BaseResponse<SimCardOrderPreviewPreviewResponse>
      *

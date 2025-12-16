@@ -7,13 +7,13 @@ namespace Telnyx\FqdnConnections;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\CredentialConnections\AnchorsiteOverride;
-use Telnyx\CredentialConnections\ConnectionRtcpSettings;
-use Telnyx\CredentialConnections\DtmfType;
-use Telnyx\CredentialConnections\EncryptedMedia;
 
 /**
- * @phpstan-type FqdnConnectionNewResponseShape = array{data?: FqdnConnection|null}
+ * @phpstan-import-type FqdnConnectionShape from \Telnyx\FqdnConnections\FqdnConnection
+ *
+ * @phpstan-type FqdnConnectionNewResponseShape = array{
+ *   data?: null|FqdnConnection|FqdnConnectionShape
+ * }
  */
 final class FqdnConnectionNewResponse implements BaseModel
 {
@@ -33,44 +33,7 @@ final class FqdnConnectionNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FqdnConnection|array{
-     *   connectionName: string,
-     *   id?: string|null,
-     *   active?: bool|null,
-     *   adjustDtmfTimestamp?: bool|null,
-     *   anchorsiteOverride?: value-of<AnchorsiteOverride>|null,
-     *   callCostEnabled?: bool|null,
-     *   callCostInWebhooks?: bool|null,
-     *   createdAt?: string|null,
-     *   defaultOnHoldComfortNoiseEnabled?: bool|null,
-     *   dtmfType?: value-of<DtmfType>|null,
-     *   encodeContactHeaderEnabled?: bool|null,
-     *   encryptedMedia?: value-of<EncryptedMedia>|null,
-     *   ignoreDtmfDuration?: bool|null,
-     *   ignoreMarkBit?: bool|null,
-     *   inbound?: InboundFqdn|null,
-     *   microsoftTeamsSbc?: bool|null,
-     *   noiseSuppression?: bool|null,
-     *   onnetT38PassthroughEnabled?: bool|null,
-     *   outbound?: OutboundFqdn|null,
-     *   password?: string|null,
-     *   recordType?: string|null,
-     *   rtcpSettings?: ConnectionRtcpSettings|null,
-     *   rtpPassCodecsOnStreamChange?: bool|null,
-     *   sendNormalizedTimestamps?: bool|null,
-     *   tags?: list<string>|null,
-     *   thirdPartyControlEnabled?: bool|null,
-     *   transportProtocol?: value-of<TransportProtocol>|null,
-     *   txtName?: string|null,
-     *   txtTtl?: int|null,
-     *   txtValue?: string|null,
-     *   updatedAt?: string|null,
-     *   userName?: string|null,
-     *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
-     *   webhookEventFailoverURL?: string|null,
-     *   webhookEventURL?: string|null,
-     *   webhookTimeoutSecs?: int|null,
-     * } $data
+     * @param FqdnConnectionShape $data
      */
     public static function with(FqdnConnection|array|null $data = null): self
     {
@@ -82,44 +45,7 @@ final class FqdnConnectionNewResponse implements BaseModel
     }
 
     /**
-     * @param FqdnConnection|array{
-     *   connectionName: string,
-     *   id?: string|null,
-     *   active?: bool|null,
-     *   adjustDtmfTimestamp?: bool|null,
-     *   anchorsiteOverride?: value-of<AnchorsiteOverride>|null,
-     *   callCostEnabled?: bool|null,
-     *   callCostInWebhooks?: bool|null,
-     *   createdAt?: string|null,
-     *   defaultOnHoldComfortNoiseEnabled?: bool|null,
-     *   dtmfType?: value-of<DtmfType>|null,
-     *   encodeContactHeaderEnabled?: bool|null,
-     *   encryptedMedia?: value-of<EncryptedMedia>|null,
-     *   ignoreDtmfDuration?: bool|null,
-     *   ignoreMarkBit?: bool|null,
-     *   inbound?: InboundFqdn|null,
-     *   microsoftTeamsSbc?: bool|null,
-     *   noiseSuppression?: bool|null,
-     *   onnetT38PassthroughEnabled?: bool|null,
-     *   outbound?: OutboundFqdn|null,
-     *   password?: string|null,
-     *   recordType?: string|null,
-     *   rtcpSettings?: ConnectionRtcpSettings|null,
-     *   rtpPassCodecsOnStreamChange?: bool|null,
-     *   sendNormalizedTimestamps?: bool|null,
-     *   tags?: list<string>|null,
-     *   thirdPartyControlEnabled?: bool|null,
-     *   transportProtocol?: value-of<TransportProtocol>|null,
-     *   txtName?: string|null,
-     *   txtTtl?: int|null,
-     *   txtValue?: string|null,
-     *   updatedAt?: string|null,
-     *   userName?: string|null,
-     *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
-     *   webhookEventFailoverURL?: string|null,
-     *   webhookEventURL?: string|null,
-     *   webhookTimeoutSecs?: int|null,
-     * } $data
+     * @param FqdnConnectionShape $data
      */
     public function withData(FqdnConnection|array $data): self
     {

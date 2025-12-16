@@ -19,7 +19,7 @@ interface InsightsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|InsightCreateParams $params
+     * @param array<string,mixed>|InsightCreateParams $params
      *
      * @return BaseResponse<InsightTemplateDetail>
      *
@@ -48,7 +48,7 @@ interface InsightsRawContract
      * @api
      *
      * @param string $insightID The ID of the insight
-     * @param array<mixed>|InsightUpdateParams $params
+     * @param array<string,mixed>|InsightUpdateParams $params
      *
      * @return BaseResponse<InsightTemplateDetail>
      *
@@ -63,7 +63,7 @@ interface InsightsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|InsightListParams $params
+     * @param array<string,mixed>|InsightListParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<InsightTemplate>>
      *

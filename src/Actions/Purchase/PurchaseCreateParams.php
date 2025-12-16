@@ -19,11 +19,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type PurchaseCreateParamsShape = array{
  *   amount: int,
- *   product?: string,
- *   simCardGroupID?: string,
- *   status?: Status|value-of<Status>,
- *   tags?: list<string>,
- *   whitelabelName?: string,
+ *   product?: string|null,
+ *   simCardGroupID?: string|null,
+ *   status?: null|Status|value-of<Status>,
+ *   tags?: list<string>|null,
+ *   whitelabelName?: string|null,
  * }
  */
 final class PurchaseCreateParams implements BaseModel

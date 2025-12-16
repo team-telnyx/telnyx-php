@@ -7,13 +7,12 @@ namespace Telnyx\SimCardGroups\Actions;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\SimCardGroups\Actions\SimCardGroupAction\Settings;
-use Telnyx\SimCardGroups\Actions\SimCardGroupAction\Status;
-use Telnyx\SimCardGroups\Actions\SimCardGroupAction\Type;
 
 /**
+ * @phpstan-import-type SimCardGroupActionShape from \Telnyx\SimCardGroups\Actions\SimCardGroupAction
+ *
  * @phpstan-type ActionRemoveWirelessBlocklistResponseShape = array{
- *   data?: SimCardGroupAction|null
+ *   data?: null|SimCardGroupAction|SimCardGroupActionShape
  * }
  */
 final class ActionRemoveWirelessBlocklistResponse implements BaseModel
@@ -37,16 +36,7 @@ final class ActionRemoveWirelessBlocklistResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SimCardGroupAction|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   recordType?: string|null,
-     *   settings?: Settings|null,
-     *   simCardGroupID?: string|null,
-     *   status?: value-of<Status>|null,
-     *   type?: value-of<Type>|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param SimCardGroupActionShape $data
      */
     public static function with(SimCardGroupAction|array|null $data = null): self
     {
@@ -60,16 +50,7 @@ final class ActionRemoveWirelessBlocklistResponse implements BaseModel
     /**
      * This object represents a SIM card group action request. It allows tracking the current status of an operation that impacts the SIM card group and SIM card in it.
      *
-     * @param SimCardGroupAction|array{
-     *   id?: string|null,
-     *   createdAt?: string|null,
-     *   recordType?: string|null,
-     *   settings?: Settings|null,
-     *   simCardGroupID?: string|null,
-     *   status?: value-of<Status>|null,
-     *   type?: value-of<Type>|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param SimCardGroupActionShape $data
      */
     public function withData(SimCardGroupAction|array $data): self
     {

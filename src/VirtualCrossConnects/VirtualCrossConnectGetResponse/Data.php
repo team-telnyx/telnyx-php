@@ -12,6 +12,8 @@ use Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse\Data\CloudProvide
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse\Data\Region;
 
 /**
+ * @phpstan-import-type RegionShape from \Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse\Data\Region
+ *
  * @phpstan-type DataShape = array{
  *   id?: string|null,
  *   createdAt?: string|null,
@@ -19,11 +21,11 @@ use Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse\Data\Region;
  *   updatedAt?: string|null,
  *   name?: string|null,
  *   networkID?: string|null,
- *   status?: value-of<InterfaceStatus>|null,
+ *   status?: null|InterfaceStatus|value-of<InterfaceStatus>,
  *   regionCode?: string|null,
  *   bandwidthMbps?: float|null,
  *   bgpAsn?: float|null,
- *   cloudProvider?: value-of<CloudProvider>|null,
+ *   cloudProvider?: null|CloudProvider|value-of<CloudProvider>,
  *   cloudProviderRegion?: string|null,
  *   primaryBgpKey?: string|null,
  *   primaryCloudAccountID?: string|null,
@@ -31,7 +33,7 @@ use Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse\Data\Region;
  *   primaryEnabled?: bool|null,
  *   primaryRoutingAnnouncement?: bool|null,
  *   primaryTelnyxIP?: string|null,
- *   region?: Region|null,
+ *   region?: null|Region|RegionShape,
  *   secondaryBgpKey?: string|null,
  *   secondaryCloudAccountID?: string|null,
  *   secondaryCloudIP?: string|null,
@@ -208,9 +210,7 @@ final class Data implements BaseModel
      *
      * @param InterfaceStatus|value-of<InterfaceStatus> $status
      * @param CloudProvider|value-of<CloudProvider> $cloudProvider
-     * @param Region|array{
-     *   code?: string|null, name?: string|null, recordType?: string|null
-     * } $region
+     * @param RegionShape $region
      */
     public static function with(
         ?string $id = null,
@@ -475,9 +475,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param Region|array{
-     *   code?: string|null, name?: string|null, recordType?: string|null
-     * } $region
+     * @param RegionShape $region
      */
     public function withRegion(Region|array $region): self
     {

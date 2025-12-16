@@ -7,12 +7,13 @@ namespace Telnyx\OAuthClients;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\OAuthClients\OAuthClient\AllowedGrantType;
-use Telnyx\OAuthClients\OAuthClient\ClientType;
-use Telnyx\OAuthClients\OAuthClient\RecordType;
 
 /**
- * @phpstan-type OAuthClientGetResponseShape = array{data?: OAuthClient|null}
+ * @phpstan-import-type OAuthClientShape from \Telnyx\OAuthClients\OAuthClient
+ *
+ * @phpstan-type OAuthClientGetResponseShape = array{
+ *   data?: null|OAuthClient|OAuthClientShape
+ * }
  */
 final class OAuthClientGetResponse implements BaseModel
 {
@@ -32,24 +33,7 @@ final class OAuthClientGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param OAuthClient|array{
-     *   clientID: string,
-     *   clientType: value-of<ClientType>,
-     *   createdAt: \DateTimeInterface,
-     *   name: string,
-     *   orgID: string,
-     *   recordType: value-of<RecordType>,
-     *   requirePkce: bool,
-     *   updatedAt: \DateTimeInterface,
-     *   userID: string,
-     *   allowedGrantTypes?: list<value-of<AllowedGrantType>>|null,
-     *   allowedScopes?: list<string>|null,
-     *   clientSecret?: string|null,
-     *   logoUri?: string|null,
-     *   policyUri?: string|null,
-     *   redirectUris?: list<string>|null,
-     *   tosUri?: string|null,
-     * } $data
+     * @param OAuthClientShape $data
      */
     public static function with(OAuthClient|array|null $data = null): self
     {
@@ -61,24 +45,7 @@ final class OAuthClientGetResponse implements BaseModel
     }
 
     /**
-     * @param OAuthClient|array{
-     *   clientID: string,
-     *   clientType: value-of<ClientType>,
-     *   createdAt: \DateTimeInterface,
-     *   name: string,
-     *   orgID: string,
-     *   recordType: value-of<RecordType>,
-     *   requirePkce: bool,
-     *   updatedAt: \DateTimeInterface,
-     *   userID: string,
-     *   allowedGrantTypes?: list<value-of<AllowedGrantType>>|null,
-     *   allowedScopes?: list<string>|null,
-     *   clientSecret?: string|null,
-     *   logoUri?: string|null,
-     *   policyUri?: string|null,
-     *   redirectUris?: list<string>|null,
-     *   tosUri?: string|null,
-     * } $data
+     * @param OAuthClientShape $data
      */
     public function withData(OAuthClient|array $data): self
     {

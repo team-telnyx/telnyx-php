@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\PrivateWirelessGatewaysService::create()
  *
  * @phpstan-type PrivateWirelessGatewayCreateParamsShape = array{
- *   name: string, networkID: string, regionCode?: string
+ *   name: string, networkID: string, regionCode?: string|null
  * }
  */
 final class PrivateWirelessGatewayCreateParams implements BaseModel

@@ -12,9 +12,9 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type TranscriptionEngineTelnyxConfigShape = array{
- *   language?: value-of<TelnyxTranscriptionLanguage>|null,
- *   transcriptionEngine?: value-of<TranscriptionEngine>|null,
- *   transcriptionModel?: value-of<TranscriptionModel>|null,
+ *   language?: null|TelnyxTranscriptionLanguage|value-of<TelnyxTranscriptionLanguage>,
+ *   transcriptionEngine?: null|TranscriptionEngine|value-of<TranscriptionEngine>,
+ *   transcriptionModel?: null|TranscriptionModel|value-of<TranscriptionModel>,
  * }
  */
 final class TranscriptionEngineTelnyxConfig implements BaseModel

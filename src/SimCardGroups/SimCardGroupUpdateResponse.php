@@ -7,10 +7,13 @@ namespace Telnyx\SimCardGroups;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\SimCardGroups\SimCardGroup\DataLimit;
 
 /**
- * @phpstan-type SimCardGroupUpdateResponseShape = array{data?: SimCardGroup|null}
+ * @phpstan-import-type SimCardGroupShape from \Telnyx\SimCardGroups\SimCardGroup
+ *
+ * @phpstan-type SimCardGroupUpdateResponseShape = array{
+ *   data?: null|SimCardGroup|SimCardGroupShape
+ * }
  */
 final class SimCardGroupUpdateResponse implements BaseModel
 {
@@ -30,18 +33,7 @@ final class SimCardGroupUpdateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SimCardGroup|array{
-     *   id?: string|null,
-     *   consumedData?: ConsumedData|null,
-     *   createdAt?: string|null,
-     *   dataLimit?: DataLimit|null,
-     *   default?: bool|null,
-     *   name?: string|null,
-     *   privateWirelessGatewayID?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     *   wirelessBlocklistID?: string|null,
-     * } $data
+     * @param SimCardGroupShape $data
      */
     public static function with(SimCardGroup|array|null $data = null): self
     {
@@ -53,18 +45,7 @@ final class SimCardGroupUpdateResponse implements BaseModel
     }
 
     /**
-     * @param SimCardGroup|array{
-     *   id?: string|null,
-     *   consumedData?: ConsumedData|null,
-     *   createdAt?: string|null,
-     *   dataLimit?: DataLimit|null,
-     *   default?: bool|null,
-     *   name?: string|null,
-     *   privateWirelessGatewayID?: string|null,
-     *   recordType?: string|null,
-     *   updatedAt?: string|null,
-     *   wirelessBlocklistID?: string|null,
-     * } $data
+     * @param SimCardGroupShape $data
      */
     public function withData(SimCardGroup|array $data): self
     {

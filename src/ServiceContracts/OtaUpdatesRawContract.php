@@ -31,7 +31,7 @@ interface OtaUpdatesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|OtaUpdateListParams $params
+     * @param array<string,mixed>|OtaUpdateListParams $params
      *
      * @return BaseResponse<DefaultPagination<OtaUpdateListResponse>>
      *

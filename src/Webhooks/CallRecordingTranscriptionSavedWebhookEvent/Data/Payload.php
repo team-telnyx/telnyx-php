@@ -15,12 +15,12 @@ use Telnyx\Webhooks\CallRecordingTranscriptionSavedWebhookEvent\Data\Payload\Sta
  *   callControlID?: string|null,
  *   callLegID?: string|null,
  *   callSessionID?: string|null,
- *   callingPartyType?: value-of<CallingPartyType>|null,
+ *   callingPartyType?: null|CallingPartyType|value-of<CallingPartyType>,
  *   clientState?: string|null,
  *   connectionID?: string|null,
  *   recordingID?: string|null,
  *   recordingTranscriptionID?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   transcriptionText?: string|null,
  * }
  */

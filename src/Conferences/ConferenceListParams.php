@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\Conferences;
 
 use Telnyx\Conferences\ConferenceListParams\Filter;
-use Telnyx\Conferences\ConferenceListParams\Filter\ApplicationName;
-use Telnyx\Conferences\ConferenceListParams\Filter\OccurredAt;
-use Telnyx\Conferences\ConferenceListParams\Filter\Product;
-use Telnyx\Conferences\ConferenceListParams\Filter\Status;
-use Telnyx\Conferences\ConferenceListParams\Filter\Type;
 use Telnyx\Conferences\ConferenceListParams\Page;
 use Telnyx\Conferences\ConferenceListParams\Region;
 use Telnyx\Core\Attributes\Optional;
@@ -22,30 +17,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\ConferencesService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\Conferences\ConferenceListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Conferences\ConferenceListParams\Page
+ *
  * @phpstan-type ConferenceListParamsShape = array{
- *   filter?: Filter|array{
- *     applicationName?: ApplicationName|null,
- *     applicationSessionID?: string|null,
- *     connectionID?: string|null,
- *     failed?: bool|null,
- *     from?: string|null,
- *     legID?: string|null,
- *     name?: string|null,
- *     occurredAt?: OccurredAt|null,
- *     outboundOutboundVoiceProfileID?: string|null,
- *     product?: value-of<Product>|null,
- *     status?: value-of<Status>|null,
- *     to?: string|null,
- *     type?: value-of<Type>|null,
- *   },
- *   page?: Page|array{
- *     after?: string|null,
- *     before?: string|null,
- *     limit?: int|null,
- *     number?: int|null,
- *     size?: int|null,
- *   },
- *   region?: Region|value-of<Region>,
+ *   filter?: FilterShape|null,
+ *   page?: PageShape|null,
+ *   region?: null|Region|value-of<Region>,
  * }
  */
 final class ConferenceListParams implements BaseModel
@@ -84,28 +62,8 @@ final class ConferenceListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   applicationName?: ApplicationName|null,
-     *   applicationSessionID?: string|null,
-     *   connectionID?: string|null,
-     *   failed?: bool|null,
-     *   from?: string|null,
-     *   legID?: string|null,
-     *   name?: string|null,
-     *   occurredAt?: OccurredAt|null,
-     *   outboundOutboundVoiceProfileID?: string|null,
-     *   product?: value-of<Product>|null,
-     *   status?: value-of<Status>|null,
-     *   to?: string|null,
-     *   type?: value-of<Type>|null,
-     * } $filter
-     * @param Page|array{
-     *   after?: string|null,
-     *   before?: string|null,
-     *   limit?: int|null,
-     *   number?: int|null,
-     *   size?: int|null,
-     * } $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      * @param Region|value-of<Region> $region
      */
     public static function with(
@@ -125,21 +83,7 @@ final class ConferenceListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound.outbound_voice_profile_id], filter[leg_id], filter[application_session_id], filter[connection_id], filter[product], filter[failed], filter[from], filter[to], filter[name], filter[type], filter[occurred_at][eq/gt/gte/lt/lte], filter[status].
      *
-     * @param Filter|array{
-     *   applicationName?: ApplicationName|null,
-     *   applicationSessionID?: string|null,
-     *   connectionID?: string|null,
-     *   failed?: bool|null,
-     *   from?: string|null,
-     *   legID?: string|null,
-     *   name?: string|null,
-     *   occurredAt?: OccurredAt|null,
-     *   outboundOutboundVoiceProfileID?: string|null,
-     *   product?: value-of<Product>|null,
-     *   status?: value-of<Status>|null,
-     *   to?: string|null,
-     *   type?: value-of<Type>|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -152,13 +96,7 @@ final class ConferenceListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number].
      *
-     * @param Page|array{
-     *   after?: string|null,
-     *   before?: string|null,
-     *   limit?: int|null,
-     *   number?: int|null,
-     *   size?: int|null,
-     * } $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

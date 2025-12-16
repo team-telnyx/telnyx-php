@@ -9,26 +9,20 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter;
-use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\CreatedAt;
-use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\PhoneNumber;
-use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\Status;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Page;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Sort;
-use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Sort\Value;
 
 /**
  * List customer service records.
  *
  * @see Telnyx\Services\CustomerServiceRecordsService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Page
+ * @phpstan-import-type SortShape from \Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Sort
+ *
  * @phpstan-type CustomerServiceRecordListParamsShape = array{
- *   filter?: Filter|array{
- *     createdAt?: CreatedAt|null,
- *     phoneNumber?: PhoneNumber|null,
- *     status?: Status|null,
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
- *   sort?: Sort|array{value?: value-of<Value>|null},
+ *   filter?: FilterShape|null, page?: PageShape|null, sort?: SortShape|null
  * }
  */
 final class CustomerServiceRecordListParams implements BaseModel
@@ -65,13 +59,9 @@ final class CustomerServiceRecordListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   createdAt?: CreatedAt|null,
-     *   phoneNumber?: PhoneNumber|null,
-     *   status?: Status|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
-     * @param Sort|array{value?: value-of<Value>|null} $sort
+     * @param FilterShape $filter
+     * @param PageShape $page
+     * @param SortShape $sort
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -90,11 +80,7 @@ final class CustomerServiceRecordListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[phone_number][eq], filter[phone_number][in][], filter[status][eq], filter[status][in][], filter[created_at][lt], filter[created_at][gt].
      *
-     * @param Filter|array{
-     *   createdAt?: CreatedAt|null,
-     *   phoneNumber?: PhoneNumber|null,
-     *   status?: Status|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -107,7 +93,7 @@ final class CustomerServiceRecordListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {
@@ -120,7 +106,7 @@ final class CustomerServiceRecordListParams implements BaseModel
     /**
      * Consolidated sort parameter (deepObject style). Originally: sort[value].
      *
-     * @param Sort|array{value?: value-of<Value>|null} $sort
+     * @param SortShape $sort
      */
     public function withSort(Sort|array $sort): self
     {

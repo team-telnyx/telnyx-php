@@ -22,7 +22,7 @@ interface WireguardPeersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|WireguardPeerCreateParams $params
+     * @param array<string,mixed>|WireguardPeerCreateParams $params
      *
      * @return BaseResponse<WireguardPeerNewResponse>
      *
@@ -51,7 +51,7 @@ interface WireguardPeersRawContract
      * @api
      *
      * @param string $id identifies the resource
-     * @param array<mixed>|WireguardPeerUpdateParams $params
+     * @param array<string,mixed>|WireguardPeerUpdateParams $params
      *
      * @return BaseResponse<WireguardPeerUpdateResponse>
      *
@@ -66,7 +66,7 @@ interface WireguardPeersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|WireguardPeerListParams $params
+     * @param array<string,mixed>|WireguardPeerListParams $params
      *
      * @return BaseResponse<DefaultPagination<WireguardPeerListResponse>>
      *

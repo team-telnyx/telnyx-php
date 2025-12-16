@@ -19,7 +19,7 @@ interface NumberReservationsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|NumberReservationCreateParams $params
+     * @param array<string,mixed>|NumberReservationCreateParams $params
      *
      * @return BaseResponse<NumberReservationNewResponse>
      *
@@ -47,7 +47,7 @@ interface NumberReservationsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|NumberReservationListParams $params
+     * @param array<string,mixed>|NumberReservationListParams $params
      *
      * @return BaseResponse<DefaultPagination<NumberReservation>>
      *

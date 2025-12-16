@@ -16,7 +16,7 @@ use Telnyx\Invoices\InvoiceRetrieveParams\Action;
  * @see Telnyx\Services\InvoicesService::retrieve()
  *
  * @phpstan-type InvoiceRetrieveParamsShape = array{
- *   action?: Action|value-of<Action>
+ *   action?: null|Action|value-of<Action>
  * }
  */
 final class InvoiceRetrieveParams implements BaseModel

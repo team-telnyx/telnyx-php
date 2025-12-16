@@ -15,7 +15,7 @@ interface GlobalIPAssignmentHealthRawContract
     /**
      * @api
      *
-     * @param array<mixed>|GlobalIPAssignmentHealthRetrieveParams $params
+     * @param array<string,mixed>|GlobalIPAssignmentHealthRetrieveParams $params
      *
      * @return BaseResponse<GlobalIPAssignmentHealthGetResponse>
      *

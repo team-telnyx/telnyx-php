@@ -16,7 +16,7 @@ use Telnyx\Webhooks\CallForkStoppedWebhookEvent\Data\Payload\StreamType;
  *   callSessionID?: string|null,
  *   clientState?: string|null,
  *   connectionID?: string|null,
- *   streamType?: value-of<StreamType>|null,
+ *   streamType?: null|StreamType|value-of<StreamType>,
  * }
  */
 final class Payload implements BaseModel

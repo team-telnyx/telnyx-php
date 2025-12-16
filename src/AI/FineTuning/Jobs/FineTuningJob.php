@@ -13,14 +13,16 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The `fine_tuning.job` object represents a fine-tuning job that has been created through the API.
  *
+ * @phpstan-import-type HyperparametersShape from \Telnyx\AI\FineTuning\Jobs\FineTuningJob\Hyperparameters
+ *
  * @phpstan-type FineTuningJobShape = array{
  *   id: string,
  *   createdAt: int,
  *   finishedAt: int|null,
- *   hyperparameters: Hyperparameters,
+ *   hyperparameters: Hyperparameters|HyperparametersShape,
  *   model: string,
  *   organizationID: string,
- *   status: value-of<Status>,
+ *   status: Status|value-of<Status>,
  *   trainedTokens: int|null,
  *   trainingFile: string,
  * }
@@ -129,7 +131,7 @@ final class FineTuningJob implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Hyperparameters|array{nEpochs: int} $hyperparameters
+     * @param HyperparametersShape $hyperparameters
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -194,7 +196,7 @@ final class FineTuningJob implements BaseModel
     /**
      * The hyperparameters used for the fine-tuning job.
      *
-     * @param Hyperparameters|array{nEpochs: int} $hyperparameters
+     * @param HyperparametersShape $hyperparameters
      */
     public function withHyperparameters(
         Hyperparameters|array $hyperparameters

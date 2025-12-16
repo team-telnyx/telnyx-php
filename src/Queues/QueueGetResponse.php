@@ -8,10 +8,11 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Queues\QueueGetResponse\Data;
-use Telnyx\Queues\QueueGetResponse\Data\RecordType;
 
 /**
- * @phpstan-type QueueGetResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\Queues\QueueGetResponse\Data
+ *
+ * @phpstan-type QueueGetResponseShape = array{data?: null|Data|DataShape}
  */
 final class QueueGetResponse implements BaseModel
 {
@@ -31,16 +32,7 @@ final class QueueGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   id: string,
-     *   averageWaitTimeSecs: int,
-     *   createdAt: string,
-     *   currentSize: int,
-     *   maxSize: int,
-     *   name: string,
-     *   recordType: value-of<RecordType>,
-     *   updatedAt: string,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -52,16 +44,7 @@ final class QueueGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   id: string,
-     *   averageWaitTimeSecs: int,
-     *   createdAt: string,
-     *   currentSize: int,
-     *   maxSize: int,
-     *   name: string,
-     *   recordType: value-of<RecordType>,
-     *   updatedAt: string,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

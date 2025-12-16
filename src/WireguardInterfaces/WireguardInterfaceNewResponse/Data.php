@@ -11,6 +11,8 @@ use Telnyx\Networks\InterfaceStatus;
 use Telnyx\WireguardInterfaces\WireguardInterfaceNewResponse\Data\Region;
 
 /**
+ * @phpstan-import-type RegionShape from \Telnyx\WireguardInterfaces\WireguardInterfaceNewResponse\Data\Region
+ *
  * @phpstan-type DataShape = array{
  *   id?: string|null,
  *   createdAt?: string|null,
@@ -18,11 +20,11 @@ use Telnyx\WireguardInterfaces\WireguardInterfaceNewResponse\Data\Region;
  *   updatedAt?: string|null,
  *   name?: string|null,
  *   networkID?: string|null,
- *   status?: value-of<InterfaceStatus>|null,
+ *   status?: null|InterfaceStatus|value-of<InterfaceStatus>,
  *   enableSipTrunking?: bool|null,
  *   endpoint?: string|null,
  *   publicKey?: string|null,
- *   region?: Region|null,
+ *   region?: null|Region|RegionShape,
  *   regionCode?: string|null,
  * }
  */
@@ -113,9 +115,7 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param InterfaceStatus|value-of<InterfaceStatus> $status
-     * @param Region|array{
-     *   code?: string|null, name?: string|null, recordType?: string|null
-     * } $region
+     * @param RegionShape $region
      */
     public static function with(
         ?string $id = null,
@@ -262,9 +262,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param Region|array{
-     *   code?: string|null, name?: string|null, recordType?: string|null
-     * } $region
+     * @param RegionShape $region
      */
     public function withRegion(Region|array $region): self
     {

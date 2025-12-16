@@ -15,9 +15,9 @@ use Telnyx\RecordingTranscriptions\RecordingTranscription\Status;
  *   id?: string|null,
  *   createdAt?: string|null,
  *   durationMillis?: int|null,
- *   recordType?: value-of<RecordType>|null,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  *   recordingID?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   transcriptionText?: string|null,
  *   updatedAt?: string|null,
  * }

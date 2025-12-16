@@ -19,7 +19,7 @@ interface SimCardOrdersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|SimCardOrderCreateParams $params
+     * @param array<string,mixed>|SimCardOrderCreateParams $params
      *
      * @return BaseResponse<SimCardOrderNewResponse>
      *
@@ -47,7 +47,7 @@ interface SimCardOrdersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|SimCardOrderListParams $params
+     * @param array<string,mixed>|SimCardOrderListParams $params
      *
      * @return BaseResponse<DefaultPagination<SimCardOrder>>
      *

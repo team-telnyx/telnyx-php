@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCards\SimCardGetDeviceDetailsResponse\Data;
 
 /**
- * @phpstan-type SimCardGetDeviceDetailsResponseShape = array{data?: Data|null}
+ * @phpstan-import-type DataShape from \Telnyx\SimCards\SimCardGetDeviceDetailsResponse\Data
+ *
+ * @phpstan-type SimCardGetDeviceDetailsResponseShape = array{
+ *   data?: null|Data|DataShape
+ * }
  */
 final class SimCardGetDeviceDetailsResponse implements BaseModel
 {
@@ -30,14 +34,7 @@ final class SimCardGetDeviceDetailsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   brandName?: string|null,
-     *   deviceType?: string|null,
-     *   imei?: string|null,
-     *   modelName?: string|null,
-     *   operatingSystem?: string|null,
-     *   recordType?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -49,14 +46,7 @@ final class SimCardGetDeviceDetailsResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   brandName?: string|null,
-     *   deviceType?: string|null,
-     *   imei?: string|null,
-     *   modelName?: string|null,
-     *   operatingSystem?: string|null,
-     *   recordType?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

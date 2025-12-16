@@ -9,11 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter;
-use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\NumberType;
-use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\Source;
-use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\Status;
-use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\VoiceConnectionName;
-use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\VoiceUsagePaymentMethod;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Page;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Sort;
 
@@ -22,25 +17,15 @@ use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Sort;
  *
  * @see Telnyx\Services\PhoneNumbersService::slimList()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Page
+ *
  * @phpstan-type PhoneNumberSlimListParamsShape = array{
- *   filter?: Filter|array{
- *     billingGroupID?: string|null,
- *     connectionID?: string|null,
- *     countryISOAlpha2?: string|null|list<string>,
- *     customerReference?: string|null,
- *     emergencyAddressID?: string|null,
- *     numberType?: NumberType|null,
- *     phoneNumber?: string|null,
- *     source?: value-of<Source>|null,
- *     status?: value-of<Status>|null,
- *     tag?: string|null,
- *     voiceConnectionName?: VoiceConnectionName|null,
- *     voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
- *   },
- *   includeConnection?: bool,
- *   includeTags?: bool,
- *   page?: Page|array{number?: int|null, size?: int|null},
- *   sort?: Sort|value-of<Sort>,
+ *   filter?: FilterShape|null,
+ *   includeConnection?: bool|null,
+ *   includeTags?: bool|null,
+ *   page?: PageShape|null,
+ *   sort?: null|Sort|value-of<Sort>,
  * }
  */
 final class PhoneNumberSlimListParams implements BaseModel
@@ -91,21 +76,8 @@ final class PhoneNumberSlimListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   billingGroupID?: string|null,
-     *   connectionID?: string|null,
-     *   countryISOAlpha2?: string|list<string>|null,
-     *   customerReference?: string|null,
-     *   emergencyAddressID?: string|null,
-     *   numberType?: NumberType|null,
-     *   phoneNumber?: string|null,
-     *   source?: value-of<Source>|null,
-     *   status?: value-of<Status>|null,
-     *   tag?: string|null,
-     *   voiceConnectionName?: VoiceConnectionName|null,
-     *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
@@ -129,20 +101,7 @@ final class PhoneNumberSlimListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[phone_number], filter[status], filter[country_iso_alpha2], filter[connection_id], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference], filter[number_type], filter[source].
      *
-     * @param Filter|array{
-     *   billingGroupID?: string|null,
-     *   connectionID?: string|null,
-     *   countryISOAlpha2?: string|list<string>|null,
-     *   customerReference?: string|null,
-     *   emergencyAddressID?: string|null,
-     *   numberType?: NumberType|null,
-     *   phoneNumber?: string|null,
-     *   source?: value-of<Source>|null,
-     *   status?: value-of<Status>|null,
-     *   tag?: string|null,
-     *   voiceConnectionName?: VoiceConnectionName|null,
-     *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -177,7 +136,7 @@ final class PhoneNumberSlimListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

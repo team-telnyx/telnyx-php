@@ -21,7 +21,7 @@ interface CustomerServiceRecordsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|CustomerServiceRecordCreateParams $params
+     * @param array<string,mixed>|CustomerServiceRecordCreateParams $params
      *
      * @return BaseResponse<CustomerServiceRecordNewResponse>
      *
@@ -49,7 +49,7 @@ interface CustomerServiceRecordsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|CustomerServiceRecordListParams $params
+     * @param array<string,mixed>|CustomerServiceRecordListParams $params
      *
      * @return BaseResponse<DefaultPagination<CustomerServiceRecord>>
      *
@@ -63,7 +63,7 @@ interface CustomerServiceRecordsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|CustomerServiceRecordVerifyPhoneNumberCoverageParams $params
+     * @param array<string,mixed>|CustomerServiceRecordVerifyPhoneNumberCoverageParams $params
      *
      * @return BaseResponse<CustomerServiceRecordVerifyPhoneNumberCoverageResponse>
      *

@@ -16,18 +16,18 @@ use Telnyx\Texml\Accounts\Calls\CallRetrieveCallsParams\Status;
  * @see Telnyx\Services\Texml\Accounts\CallsService::retrieveCalls()
  *
  * @phpstan-type CallRetrieveCallsParamsShape = array{
- *   endTime?: string,
- *   endTimeGt?: string,
- *   endTimeLt?: string,
- *   from?: string,
- *   page?: int,
- *   pageSize?: int,
- *   pageToken?: string,
- *   startTime?: string,
- *   startTimeGt?: string,
- *   startTimeLt?: string,
- *   status?: Status|value-of<Status>,
- *   to?: string,
+ *   endTime?: string|null,
+ *   endTimeGt?: string|null,
+ *   endTimeLt?: string|null,
+ *   from?: string|null,
+ *   page?: int|null,
+ *   pageSize?: int|null,
+ *   pageToken?: string|null,
+ *   startTime?: string|null,
+ *   startTimeGt?: string|null,
+ *   startTimeLt?: string|null,
+ *   status?: null|Status|value-of<Status>,
+ *   to?: string|null,
  * }
  */
 final class CallRetrieveCallsParams implements BaseModel

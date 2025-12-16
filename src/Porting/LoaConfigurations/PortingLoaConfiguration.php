@@ -10,16 +10,19 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Address;
 use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Contact;
 use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Logo;
-use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Logo\ContentType;
 
 /**
+ * @phpstan-import-type AddressShape from \Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Address
+ * @phpstan-import-type ContactShape from \Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Contact
+ * @phpstan-import-type LogoShape from \Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Logo
+ *
  * @phpstan-type PortingLoaConfigurationShape = array{
  *   id?: string|null,
- *   address?: Address|null,
+ *   address?: null|Address|AddressShape,
  *   companyName?: string|null,
- *   contact?: Contact|null,
+ *   contact?: null|Contact|ContactShape,
  *   createdAt?: \DateTimeInterface|null,
- *   logo?: Logo|null,
+ *   logo?: null|Logo|LogoShape,
  *   name?: string|null,
  *   organizationID?: string|null,
  *   recordType?: string|null,
@@ -101,18 +104,9 @@ final class PortingLoaConfiguration implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Address|array{
-     *   city?: string|null,
-     *   countryCode?: string|null,
-     *   extendedAddress?: string|null,
-     *   state?: string|null,
-     *   streetAddress?: string|null,
-     *   zipCode?: string|null,
-     * } $address
-     * @param Contact|array{email?: string|null, phoneNumber?: string|null} $contact
-     * @param Logo|array{
-     *   contentType?: value-of<ContentType>|null, documentID?: string|null
-     * } $logo
+     * @param AddressShape $address
+     * @param ContactShape $contact
+     * @param LogoShape $logo
      */
     public static function with(
         ?string $id = null,
@@ -156,14 +150,7 @@ final class PortingLoaConfiguration implements BaseModel
     /**
      * The address of the company.
      *
-     * @param Address|array{
-     *   city?: string|null,
-     *   countryCode?: string|null,
-     *   extendedAddress?: string|null,
-     *   state?: string|null,
-     *   streetAddress?: string|null,
-     *   zipCode?: string|null,
-     * } $address
+     * @param AddressShape $address
      */
     public function withAddress(Address|array $address): self
     {
@@ -187,7 +174,7 @@ final class PortingLoaConfiguration implements BaseModel
     /**
      * The contact information of the company.
      *
-     * @param Contact|array{email?: string|null, phoneNumber?: string|null} $contact
+     * @param ContactShape $contact
      */
     public function withContact(Contact|array $contact): self
     {
@@ -211,9 +198,7 @@ final class PortingLoaConfiguration implements BaseModel
     /**
      * The logo to be used in the LOA.
      *
-     * @param Logo|array{
-     *   contentType?: value-of<ContentType>|null, documentID?: string|null
-     * } $logo
+     * @param LogoShape $logo
      */
     public function withLogo(Logo|array $logo): self
     {

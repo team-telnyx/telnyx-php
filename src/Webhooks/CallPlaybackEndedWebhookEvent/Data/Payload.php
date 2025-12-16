@@ -19,7 +19,7 @@ use Telnyx\Webhooks\CallPlaybackEndedWebhookEvent\Data\Payload\Status;
  *   mediaName?: string|null,
  *   mediaURL?: string|null,
  *   overlay?: bool|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   statusDetail?: string|null,
  * }
  */

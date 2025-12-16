@@ -11,6 +11,10 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
 
 /**
  * Filter by exact CIDR block match.
+ *
+ * @phpstan-import-type CidrBlockPatternFilterShape from \Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter\CidrBlock\CidrBlockPatternFilter
+ *
+ * @phpstan-type CidrBlockShape = string|CidrBlockPatternFilterShape
  */
 final class CidrBlock implements ConverterSource
 {

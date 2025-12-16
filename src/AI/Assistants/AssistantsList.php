@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\AI\Assistants\AssistantTool\DtmfTool;
-use Telnyx\AI\Assistants\AssistantTool\HandoffTool;
-use Telnyx\AI\Assistants\AssistantTool\SipReferTool;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type AssistantsListShape = array{data: list<InferenceEmbedding>}
+ * @phpstan-import-type InferenceEmbeddingShape from \Telnyx\AI\Assistants\InferenceEmbedding
+ *
+ * @phpstan-type AssistantsListShape = array{data: list<InferenceEmbeddingShape>}
  */
 final class AssistantsList implements BaseModel
 {
@@ -47,27 +46,7 @@ final class AssistantsList implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<InferenceEmbedding|array{
-     *   id: string,
-     *   createdAt: \DateTimeInterface,
-     *   instructions: string,
-     *   model: string,
-     *   name: string,
-     *   description?: string|null,
-     *   dynamicVariables?: array<string,mixed>|null,
-     *   dynamicVariablesWebhookURL?: string|null,
-     *   enabledFeatures?: list<value-of<EnabledFeatures>>|null,
-     *   greeting?: string|null,
-     *   importMetadata?: ImportMetadata|null,
-     *   insightSettings?: InsightSettings|null,
-     *   llmAPIKeyRef?: string|null,
-     *   messagingSettings?: MessagingSettings|null,
-     *   privacySettings?: PrivacySettings|null,
-     *   telephonySettings?: TelephonySettings|null,
-     *   tools?: list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool>|null,
-     *   transcription?: TranscriptionSettings|null,
-     *   voiceSettings?: VoiceSettings|null,
-     * }> $data
+     * @param list<InferenceEmbeddingShape> $data
      */
     public static function with(array $data): self
     {
@@ -79,27 +58,7 @@ final class AssistantsList implements BaseModel
     }
 
     /**
-     * @param list<InferenceEmbedding|array{
-     *   id: string,
-     *   createdAt: \DateTimeInterface,
-     *   instructions: string,
-     *   model: string,
-     *   name: string,
-     *   description?: string|null,
-     *   dynamicVariables?: array<string,mixed>|null,
-     *   dynamicVariablesWebhookURL?: string|null,
-     *   enabledFeatures?: list<value-of<EnabledFeatures>>|null,
-     *   greeting?: string|null,
-     *   importMetadata?: ImportMetadata|null,
-     *   insightSettings?: InsightSettings|null,
-     *   llmAPIKeyRef?: string|null,
-     *   messagingSettings?: MessagingSettings|null,
-     *   privacySettings?: PrivacySettings|null,
-     *   telephonySettings?: TelephonySettings|null,
-     *   tools?: list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool>|null,
-     *   transcription?: TranscriptionSettings|null,
-     *   voiceSettings?: VoiceSettings|null,
-     * }> $data
+     * @param list<InferenceEmbeddingShape> $data
      */
     public function withData(array $data): self
     {

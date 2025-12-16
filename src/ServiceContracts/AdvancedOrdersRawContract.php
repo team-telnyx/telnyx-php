@@ -19,7 +19,7 @@ interface AdvancedOrdersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AdvancedOrderCreateParams $params
+     * @param array<string,mixed>|AdvancedOrderCreateParams $params
      *
      * @return BaseResponse<AdvancedOrderNewResponse>
      *
@@ -54,7 +54,7 @@ interface AdvancedOrdersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AdvancedOrderUpdateRequirementGroupParams $params
+     * @param array<string,mixed>|AdvancedOrderUpdateRequirementGroupParams $params
      *
      * @return BaseResponse<AdvancedOrderUpdateRequirementGroupResponse>
      *

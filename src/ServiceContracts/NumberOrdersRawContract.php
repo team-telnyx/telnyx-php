@@ -21,7 +21,7 @@ interface NumberOrdersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|NumberOrderCreateParams $params
+     * @param array<string,mixed>|NumberOrderCreateParams $params
      *
      * @return BaseResponse<NumberOrderNewResponse>
      *
@@ -50,7 +50,7 @@ interface NumberOrdersRawContract
      * @api
      *
      * @param string $numberOrderID the number order ID
-     * @param array<mixed>|NumberOrderUpdateParams $params
+     * @param array<string,mixed>|NumberOrderUpdateParams $params
      *
      * @return BaseResponse<NumberOrderUpdateResponse>
      *
@@ -65,7 +65,7 @@ interface NumberOrdersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|NumberOrderListParams $params
+     * @param array<string,mixed>|NumberOrderListParams $params
      *
      * @return BaseResponse<DefaultPagination<NumberOrderListResponse>>
      *

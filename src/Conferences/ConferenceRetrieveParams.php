@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\ConferencesService::retrieve()
  *
  * @phpstan-type ConferenceRetrieveParamsShape = array{
- *   region?: Region|value-of<Region>
+ *   region?: null|Region|value-of<Region>
  * }
  */
 final class ConferenceRetrieveParams implements BaseModel

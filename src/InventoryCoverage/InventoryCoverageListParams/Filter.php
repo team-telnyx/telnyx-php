@@ -18,12 +18,12 @@ use Telnyx\InventoryCoverage\InventoryCoverageListParams\Filter\PhoneNumberType;
  * @phpstan-type FilterShape = array{
  *   administrativeArea?: string|null,
  *   count?: bool|null,
- *   countryCode?: value-of<CountryCode>|null,
- *   features?: list<value-of<Feature>>|null,
- *   groupBy?: value-of<GroupBy>|null,
+ *   countryCode?: null|CountryCode|value-of<CountryCode>,
+ *   features?: list<Feature|value-of<Feature>>|null,
+ *   groupBy?: null|GroupBy|value-of<GroupBy>,
  *   npa?: int|null,
  *   nxx?: int|null,
- *   phoneNumberType?: value-of<PhoneNumberType>|null,
+ *   phoneNumberType?: null|PhoneNumberType|value-of<PhoneNumberType>,
  * }
  */
 final class Filter implements BaseModel

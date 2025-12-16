@@ -36,7 +36,7 @@ interface EventsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|EventListParams $params
+     * @param array<string,mixed>|EventListParams $params
      *
      * @return BaseResponse<DefaultPagination<PortingEventDeletedPayload|PortingEventMessagingChangedPayload|PortingEventStatusChangedEvent|PortingEventNewCommentEvent|PortingEventSplitEvent|PortingEventWithoutWebhook,>,>
      *

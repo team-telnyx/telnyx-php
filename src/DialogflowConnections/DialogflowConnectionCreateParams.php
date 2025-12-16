@@ -18,10 +18,10 @@ use Telnyx\DialogflowConnections\DialogflowConnectionCreateParams\DialogflowAPI;
  *
  * @phpstan-type DialogflowConnectionCreateParamsShape = array{
  *   serviceAccount: array<string,mixed>,
- *   conversationProfileID?: string,
- *   dialogflowAPI?: DialogflowAPI|value-of<DialogflowAPI>,
- *   environment?: string,
- *   location?: string,
+ *   conversationProfileID?: string|null,
+ *   dialogflowAPI?: null|DialogflowAPI|value-of<DialogflowAPI>,
+ *   environment?: string|null,
+ *   location?: string|null,
  * }
  */
 final class DialogflowConnectionCreateParams implements BaseModel

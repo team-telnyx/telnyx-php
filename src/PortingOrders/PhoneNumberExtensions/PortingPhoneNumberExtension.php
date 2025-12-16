@@ -11,11 +11,14 @@ use Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension\Activ
 use Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension\ExtensionRange;
 
 /**
+ * @phpstan-import-type ActivationRangeShape from \Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension\ActivationRange
+ * @phpstan-import-type ExtensionRangeShape from \Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension\ExtensionRange
+ *
  * @phpstan-type PortingPhoneNumberExtensionShape = array{
  *   id?: string|null,
- *   activationRanges?: list<ActivationRange>|null,
+ *   activationRanges?: list<ActivationRangeShape>|null,
  *   createdAt?: \DateTimeInterface|null,
- *   extensionRange?: ExtensionRange|null,
+ *   extensionRange?: null|ExtensionRange|ExtensionRangeShape,
  *   portingPhoneNumberID?: string|null,
  *   recordType?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
@@ -80,12 +83,8 @@ final class PortingPhoneNumberExtension implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ActivationRange|array{
-     *   endAt?: int|null, startAt?: int|null
-     * }> $activationRanges
-     * @param ExtensionRange|array{
-     *   endAt?: int|null, startAt?: int|null
-     * } $extensionRange
+     * @param list<ActivationRangeShape> $activationRanges
+     * @param ExtensionRangeShape $extensionRange
      */
     public static function with(
         ?string $id = null,
@@ -123,9 +122,7 @@ final class PortingPhoneNumberExtension implements BaseModel
     /**
      * Specifies the activation ranges for this porting phone number extension. The activation range must be within the extension range and should not overlap with other activation ranges.
      *
-     * @param list<ActivationRange|array{
-     *   endAt?: int|null, startAt?: int|null
-     * }> $activationRanges
+     * @param list<ActivationRangeShape> $activationRanges
      */
     public function withActivationRanges(array $activationRanges): self
     {
@@ -149,9 +146,7 @@ final class PortingPhoneNumberExtension implements BaseModel
     /**
      * Specifies the extension range for this porting phone number extension.
      *
-     * @param ExtensionRange|array{
-     *   endAt?: int|null, startAt?: int|null
-     * } $extensionRange
+     * @param ExtensionRangeShape $extensionRange
      */
     public function withExtensionRange(
         ExtensionRange|array $extensionRange

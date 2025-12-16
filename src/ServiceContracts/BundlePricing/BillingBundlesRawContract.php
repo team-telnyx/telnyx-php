@@ -19,7 +19,7 @@ interface BillingBundlesRawContract
      * @api
      *
      * @param string $bundleID billing bundle's ID, this is used to identify the billing bundle in the API
-     * @param array<mixed>|BillingBundleRetrieveParams $params
+     * @param array<string,mixed>|BillingBundleRetrieveParams $params
      *
      * @return BaseResponse<BillingBundleGetResponse>
      *
@@ -34,7 +34,7 @@ interface BillingBundlesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|BillingBundleListParams $params
+     * @param array<string,mixed>|BillingBundleListParams $params
      *
      * @return BaseResponse<DefaultPagination<BillingBundleSummary>>
      *

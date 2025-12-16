@@ -12,6 +12,8 @@ use Telnyx\Rooms\Sessions\Actions\ActionMuteParams\Participants\AllParticipants;
 
 /**
  * Either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant.
+ *
+ * @phpstan-type ParticipantsShape = AllParticipants|list<string>|value-of<AllParticipants>
  */
 final class Participants implements ConverterSource
 {

@@ -15,9 +15,9 @@ use Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams\Page;
  *
  * @see Telnyx\Services\PortingOrders\ActivationJobsService::list()
  *
- * @phpstan-type ActivationJobListParamsShape = array{
- *   page?: Page|array{number?: int|null, size?: int|null}
- * }
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams\Page
+ *
+ * @phpstan-type ActivationJobListParamsShape = array{page?: PageShape|null}
  */
 final class ActivationJobListParams implements BaseModel
 {
@@ -41,7 +41,7 @@ final class ActivationJobListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public static function with(Page|array|null $page = null): self
     {
@@ -55,7 +55,7 @@ final class ActivationJobListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

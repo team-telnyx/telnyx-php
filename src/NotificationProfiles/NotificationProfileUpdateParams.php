@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\NotificationProfilesService::update()
  *
- * @phpstan-type NotificationProfileUpdateParamsShape = array{name?: string}
+ * @phpstan-type NotificationProfileUpdateParamsShape = array{name?: string|null}
  */
 final class NotificationProfileUpdateParams implements BaseModel
 {

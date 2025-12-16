@@ -7,10 +7,13 @@ namespace Telnyx\OAuthGrants;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\OAuthGrants\OAuthGrant\RecordType;
 
 /**
- * @phpstan-type OAuthGrantDeleteResponseShape = array{data?: OAuthGrant|null}
+ * @phpstan-import-type OAuthGrantShape from \Telnyx\OAuthGrants\OAuthGrant
+ *
+ * @phpstan-type OAuthGrantDeleteResponseShape = array{
+ *   data?: null|OAuthGrant|OAuthGrantShape
+ * }
  */
 final class OAuthGrantDeleteResponse implements BaseModel
 {
@@ -30,14 +33,7 @@ final class OAuthGrantDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param OAuthGrant|array{
-     *   id: string,
-     *   clientID: string,
-     *   createdAt: \DateTimeInterface,
-     *   recordType: value-of<RecordType>,
-     *   scopes: list<string>,
-     *   lastUsedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param OAuthGrantShape $data
      */
     public static function with(OAuthGrant|array|null $data = null): self
     {
@@ -49,14 +45,7 @@ final class OAuthGrantDeleteResponse implements BaseModel
     }
 
     /**
-     * @param OAuthGrant|array{
-     *   id: string,
-     *   clientID: string,
-     *   createdAt: \DateTimeInterface,
-     *   recordType: value-of<RecordType>,
-     *   scopes: list<string>,
-     *   lastUsedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param OAuthGrantShape $data
      */
     public function withData(OAuthGrant|array $data): self
     {

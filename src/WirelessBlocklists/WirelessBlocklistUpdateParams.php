@@ -16,7 +16,9 @@ use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams\Type;
  * @see Telnyx\Services\WirelessBlocklistsService::update()
  *
  * @phpstan-type WirelessBlocklistUpdateParamsShape = array{
- *   name?: string, type?: Type|value-of<Type>, values?: list<string>
+ *   name?: string|null,
+ *   type?: null|Type|value-of<Type>,
+ *   values?: list<string>|null,
  * }
  */
 final class WirelessBlocklistUpdateParams implements BaseModel

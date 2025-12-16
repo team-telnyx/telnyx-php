@@ -16,20 +16,23 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound.outbound_voice_profile_id], filter[leg_id], filter[application_session_id], filter[connection_id], filter[product], filter[failed], filter[from], filter[to], filter[name], filter[type], filter[occurred_at][eq/gt/gte/lt/lte], filter[status].
  *
+ * @phpstan-import-type ApplicationNameShape from \Telnyx\CallEvents\CallEventListParams\Filter\ApplicationName
+ * @phpstan-import-type OccurredAtShape from \Telnyx\CallEvents\CallEventListParams\Filter\OccurredAt
+ *
  * @phpstan-type FilterShape = array{
- *   applicationName?: ApplicationName|null,
+ *   applicationName?: null|ApplicationName|ApplicationNameShape,
  *   applicationSessionID?: string|null,
  *   connectionID?: string|null,
  *   failed?: bool|null,
  *   from?: string|null,
  *   legID?: string|null,
  *   name?: string|null,
- *   occurredAt?: OccurredAt|null,
+ *   occurredAt?: null|OccurredAt|OccurredAtShape,
  *   outboundOutboundVoiceProfileID?: string|null,
- *   product?: value-of<Product>|null,
- *   status?: value-of<Status>|null,
+ *   product?: null|Product|value-of<Product>,
+ *   status?: null|Status|value-of<Status>,
  *   to?: string|null,
- *   type?: value-of<Type>|null,
+ *   type?: null|Type|value-of<Type>,
  * }
  */
 final class Filter implements BaseModel
@@ -131,14 +134,8 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ApplicationName|array{contains?: string|null} $applicationName
-     * @param OccurredAt|array{
-     *   eq?: string|null,
-     *   gt?: string|null,
-     *   gte?: string|null,
-     *   lt?: string|null,
-     *   lte?: string|null,
-     * } $occurredAt
+     * @param ApplicationNameShape $applicationName
+     * @param OccurredAtShape $occurredAt
      * @param Product|value-of<Product> $product
      * @param Status|value-of<Status> $status
      * @param Type|value-of<Type> $type
@@ -180,7 +177,7 @@ final class Filter implements BaseModel
     /**
      * Application name filters.
      *
-     * @param ApplicationName|array{contains?: string|null} $applicationName
+     * @param ApplicationNameShape $applicationName
      */
     public function withApplicationName(
         ApplicationName|array $applicationName
@@ -260,13 +257,7 @@ final class Filter implements BaseModel
     /**
      * Event occurred_at filters.
      *
-     * @param OccurredAt|array{
-     *   eq?: string|null,
-     *   gt?: string|null,
-     *   gte?: string|null,
-     *   lt?: string|null,
-     *   lte?: string|null,
-     * } $occurredAt
+     * @param OccurredAtShape $occurredAt
      */
     public function withOccurredAt(OccurredAt|array $occurredAt): self
     {

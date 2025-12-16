@@ -18,15 +18,18 @@ use Telnyx\Core\Conversion\MapOf;
  *
  * @see Telnyx\Services\AI\ConversationsService::addMessage()
  *
+ * @phpstan-import-type MetadataShape from \Telnyx\AI\Conversations\ConversationAddMessageParams\Metadata
+ * @phpstan-import-type ToolChoiceShape from \Telnyx\AI\Conversations\ConversationAddMessageParams\ToolChoice
+ *
  * @phpstan-type ConversationAddMessageParamsShape = array{
  *   role: string,
- *   content?: string,
- *   metadata?: array<string,string|int|bool|list<string|int|bool>>,
- *   name?: string,
- *   sentAt?: \DateTimeInterface,
- *   toolCallID?: string,
- *   toolCalls?: list<array<string,mixed>>,
- *   toolChoice?: string|array<string,mixed>,
+ *   content?: string|null,
+ *   metadata?: array<string,MetadataShape>|null,
+ *   name?: string|null,
+ *   sentAt?: \DateTimeInterface|null,
+ *   toolCallID?: string|null,
+ *   toolCalls?: list<array<string,mixed>>|null,
+ *   toolChoice?: ToolChoiceShape|null,
  * }
  */
 final class ConversationAddMessageParams implements BaseModel
@@ -86,9 +89,9 @@ final class ConversationAddMessageParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,string|int|bool|list<string|int|bool>> $metadata
+     * @param array<string,MetadataShape> $metadata
      * @param list<array<string,mixed>> $toolCalls
-     * @param string|array<string,mixed> $toolChoice
+     * @param ToolChoiceShape $toolChoice
      */
     public static function with(
         string $role,
@@ -132,7 +135,7 @@ final class ConversationAddMessageParams implements BaseModel
     }
 
     /**
-     * @param array<string,string|int|bool|list<string|int|bool>> $metadata
+     * @param array<string,MetadataShape> $metadata
      */
     public function withMetadata(array $metadata): self
     {
@@ -178,7 +181,7 @@ final class ConversationAddMessageParams implements BaseModel
     }
 
     /**
-     * @param string|array<string,mixed> $toolChoice
+     * @param ToolChoiceShape $toolChoice
      */
     public function withToolChoice(string|array $toolChoice): self
     {

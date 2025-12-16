@@ -18,8 +18,8 @@ use Telnyx\Webhooks\CampaignStatusUpdateWebhookEvent\Type;
  *   cspID?: string|null,
  *   description?: string|null,
  *   isTMobileRegistered?: bool|null,
- *   status?: value-of<Status>|null,
- *   type?: value-of<Type>|null,
+ *   status?: null|Status|value-of<Status>,
+ *   type?: null|Type|value-of<Type>,
  * }
  */
 final class CampaignStatusUpdateWebhookEvent implements BaseModel

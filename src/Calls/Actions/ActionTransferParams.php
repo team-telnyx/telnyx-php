@@ -18,7 +18,6 @@ use Telnyx\Calls\Actions\ActionTransferParams\SipTransportProtocol;
 use Telnyx\Calls\Actions\ActionTransferParams\WebhookURLMethod;
 use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Calls\SipHeader;
-use Telnyx\Calls\SipHeader\Name;
 use Telnyx\Calls\SoundModifications;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -41,56 +40,45 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Calls\ActionsService::transfer()
  *
+ * @phpstan-import-type AnsweringMachineDetectionConfigShape from \Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetectionConfig
+ * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
+ * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
+ * @phpstan-import-type SoundModificationsShape from \Telnyx\Calls\SoundModifications
+ *
  * @phpstan-type ActionTransferParamsShape = array{
  *   to: string,
- *   answeringMachineDetection?: AnsweringMachineDetection|value-of<AnsweringMachineDetection>,
- *   answeringMachineDetectionConfig?: AnsweringMachineDetectionConfig|array{
- *     afterGreetingSilenceMillis?: int|null,
- *     betweenWordsSilenceMillis?: int|null,
- *     greetingDurationMillis?: int|null,
- *     greetingSilenceDurationMillis?: int|null,
- *     greetingTotalAnalysisTimeMillis?: int|null,
- *     initialSilenceMillis?: int|null,
- *     maximumNumberOfWords?: int|null,
- *     maximumWordLengthMillis?: int|null,
- *     silenceThreshold?: int|null,
- *     totalAnalysisTimeMillis?: int|null,
- *   },
- *   audioURL?: string,
- *   clientState?: string,
- *   commandID?: string,
- *   customHeaders?: list<CustomSipHeader|array{name: string, value: string}>,
- *   earlyMedia?: bool,
- *   from?: string,
- *   fromDisplayName?: string,
- *   mediaEncryption?: MediaEncryption|value-of<MediaEncryption>,
- *   mediaName?: string,
- *   muteDtmf?: MuteDtmf|value-of<MuteDtmf>,
- *   parkAfterUnbridge?: string,
- *   record?: Record|value-of<Record>,
- *   recordChannels?: RecordChannels|value-of<RecordChannels>,
- *   recordCustomFileName?: string,
- *   recordFormat?: RecordFormat|value-of<RecordFormat>,
- *   recordMaxLength?: int,
- *   recordTimeoutSecs?: int,
- *   recordTrack?: RecordTrack|value-of<RecordTrack>,
- *   recordTrim?: RecordTrim|value-of<RecordTrim>,
- *   sipAuthPassword?: string,
- *   sipAuthUsername?: string,
- *   sipHeaders?: list<SipHeader|array{name: value-of<Name>, value: string}>,
- *   sipRegion?: SipRegion|value-of<SipRegion>,
- *   sipTransportProtocol?: SipTransportProtocol|value-of<SipTransportProtocol>,
- *   soundModifications?: SoundModifications|array{
- *     octaves?: float|null,
- *     pitch?: float|null,
- *     semitone?: float|null,
- *     track?: string|null,
- *   },
- *   targetLegClientState?: string,
- *   timeLimitSecs?: int,
- *   timeoutSecs?: int,
- *   webhookURL?: string,
- *   webhookURLMethod?: WebhookURLMethod|value-of<WebhookURLMethod>,
+ *   answeringMachineDetection?: null|AnsweringMachineDetection|value-of<AnsweringMachineDetection>,
+ *   answeringMachineDetectionConfig?: AnsweringMachineDetectionConfigShape|null,
+ *   audioURL?: string|null,
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   customHeaders?: list<CustomSipHeaderShape>|null,
+ *   earlyMedia?: bool|null,
+ *   from?: string|null,
+ *   fromDisplayName?: string|null,
+ *   mediaEncryption?: null|MediaEncryption|value-of<MediaEncryption>,
+ *   mediaName?: string|null,
+ *   muteDtmf?: null|MuteDtmf|value-of<MuteDtmf>,
+ *   parkAfterUnbridge?: string|null,
+ *   record?: null|Record|value-of<Record>,
+ *   recordChannels?: null|RecordChannels|value-of<RecordChannels>,
+ *   recordCustomFileName?: string|null,
+ *   recordFormat?: null|RecordFormat|value-of<RecordFormat>,
+ *   recordMaxLength?: int|null,
+ *   recordTimeoutSecs?: int|null,
+ *   recordTrack?: null|RecordTrack|value-of<RecordTrack>,
+ *   recordTrim?: null|RecordTrim|value-of<RecordTrim>,
+ *   sipAuthPassword?: string|null,
+ *   sipAuthUsername?: string|null,
+ *   sipHeaders?: list<SipHeaderShape>|null,
+ *   sipRegion?: null|SipRegion|value-of<SipRegion>,
+ *   sipTransportProtocol?: null|SipTransportProtocol|value-of<SipTransportProtocol>,
+ *   soundModifications?: SoundModificationsShape|null,
+ *   targetLegClientState?: string|null,
+ *   timeLimitSecs?: int|null,
+ *   timeoutSecs?: int|null,
+ *   webhookURL?: string|null,
+ *   webhookURLMethod?: null|WebhookURLMethod|value-of<WebhookURLMethod>,
  * }
  */
 final class ActionTransferParams implements BaseModel
@@ -351,19 +339,8 @@ final class ActionTransferParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param AnsweringMachineDetection|value-of<AnsweringMachineDetection> $answeringMachineDetection
-     * @param AnsweringMachineDetectionConfig|array{
-     *   afterGreetingSilenceMillis?: int|null,
-     *   betweenWordsSilenceMillis?: int|null,
-     *   greetingDurationMillis?: int|null,
-     *   greetingSilenceDurationMillis?: int|null,
-     *   greetingTotalAnalysisTimeMillis?: int|null,
-     *   initialSilenceMillis?: int|null,
-     *   maximumNumberOfWords?: int|null,
-     *   maximumWordLengthMillis?: int|null,
-     *   silenceThreshold?: int|null,
-     *   totalAnalysisTimeMillis?: int|null,
-     * } $answeringMachineDetectionConfig
-     * @param list<CustomSipHeader|array{name: string, value: string}> $customHeaders
+     * @param AnsweringMachineDetectionConfigShape $answeringMachineDetectionConfig
+     * @param list<CustomSipHeaderShape> $customHeaders
      * @param MediaEncryption|value-of<MediaEncryption> $mediaEncryption
      * @param MuteDtmf|value-of<MuteDtmf> $muteDtmf
      * @param Record|value-of<Record> $record
@@ -371,15 +348,10 @@ final class ActionTransferParams implements BaseModel
      * @param RecordFormat|value-of<RecordFormat> $recordFormat
      * @param RecordTrack|value-of<RecordTrack> $recordTrack
      * @param RecordTrim|value-of<RecordTrim> $recordTrim
-     * @param list<SipHeader|array{name: value-of<Name>, value: string}> $sipHeaders
+     * @param list<SipHeaderShape> $sipHeaders
      * @param SipRegion|value-of<SipRegion> $sipRegion
      * @param SipTransportProtocol|value-of<SipTransportProtocol> $sipTransportProtocol
-     * @param SoundModifications|array{
-     *   octaves?: float|null,
-     *   pitch?: float|null,
-     *   semitone?: float|null,
-     *   track?: string|null,
-     * } $soundModifications
+     * @param SoundModificationsShape $soundModifications
      * @param WebhookURLMethod|value-of<WebhookURLMethod> $webhookURLMethod
      */
     public static function with(
@@ -485,18 +457,7 @@ final class ActionTransferParams implements BaseModel
     /**
      * Optional configuration parameters to modify 'answering_machine_detection' performance.
      *
-     * @param AnsweringMachineDetectionConfig|array{
-     *   afterGreetingSilenceMillis?: int|null,
-     *   betweenWordsSilenceMillis?: int|null,
-     *   greetingDurationMillis?: int|null,
-     *   greetingSilenceDurationMillis?: int|null,
-     *   greetingTotalAnalysisTimeMillis?: int|null,
-     *   initialSilenceMillis?: int|null,
-     *   maximumNumberOfWords?: int|null,
-     *   maximumWordLengthMillis?: int|null,
-     *   silenceThreshold?: int|null,
-     *   totalAnalysisTimeMillis?: int|null,
-     * } $answeringMachineDetectionConfig
+     * @param AnsweringMachineDetectionConfigShape $answeringMachineDetectionConfig
      */
     public function withAnsweringMachineDetectionConfig(
         AnsweringMachineDetectionConfig|array $answeringMachineDetectionConfig
@@ -543,7 +504,7 @@ final class ActionTransferParams implements BaseModel
     /**
      * Custom headers to be added to the SIP INVITE.
      *
-     * @param list<CustomSipHeader|array{name: string, value: string}> $customHeaders
+     * @param list<CustomSipHeaderShape> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {
@@ -759,7 +720,7 @@ final class ActionTransferParams implements BaseModel
     /**
      * SIP headers to be added to the SIP INVITE. Currently only User-to-User header is supported.
      *
-     * @param list<SipHeader|array{name: value-of<Name>, value: string}> $sipHeaders
+     * @param list<SipHeaderShape> $sipHeaders
      */
     public function withSipHeaders(array $sipHeaders): self
     {
@@ -799,12 +760,7 @@ final class ActionTransferParams implements BaseModel
     /**
      * Use this field to modify sound effects, for example adjust the pitch.
      *
-     * @param SoundModifications|array{
-     *   octaves?: float|null,
-     *   pitch?: float|null,
-     *   semitone?: float|null,
-     *   track?: string|null,
-     * } $soundModifications
+     * @param SoundModificationsShape $soundModifications
      */
     public function withSoundModifications(
         SoundModifications|array $soundModifications

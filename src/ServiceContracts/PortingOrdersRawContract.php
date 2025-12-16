@@ -28,7 +28,7 @@ interface PortingOrdersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PortingOrderCreateParams $params
+     * @param array<string,mixed>|PortingOrderCreateParams $params
      *
      * @return BaseResponse<PortingOrderNewResponse>
      *
@@ -43,7 +43,7 @@ interface PortingOrdersRawContract
      * @api
      *
      * @param string $id Porting Order id
-     * @param array<mixed>|PortingOrderRetrieveParams $params
+     * @param array<string,mixed>|PortingOrderRetrieveParams $params
      *
      * @return BaseResponse<PortingOrderGetResponse>
      *
@@ -59,7 +59,7 @@ interface PortingOrdersRawContract
      * @api
      *
      * @param string $id Porting Order id
-     * @param array<mixed>|PortingOrderUpdateParams $params
+     * @param array<string,mixed>|PortingOrderUpdateParams $params
      *
      * @return BaseResponse<PortingOrderUpdateResponse>
      *
@@ -74,7 +74,7 @@ interface PortingOrdersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PortingOrderListParams $params
+     * @param array<string,mixed>|PortingOrderListParams $params
      *
      * @return BaseResponse<DefaultPagination<PortingOrder>>
      *
@@ -128,7 +128,7 @@ interface PortingOrdersRawContract
      * @api
      *
      * @param string $id Porting Order id
-     * @param array<mixed>|PortingOrderRetrieveLoaTemplateParams $params
+     * @param array<string,mixed>|PortingOrderRetrieveLoaTemplateParams $params
      *
      * @return BaseResponse<string>
      *
@@ -144,7 +144,7 @@ interface PortingOrdersRawContract
      * @api
      *
      * @param string $id Porting Order id
-     * @param array<mixed>|PortingOrderRetrieveRequirementsParams $params
+     * @param array<string,mixed>|PortingOrderRetrieveRequirementsParams $params
      *
      * @return BaseResponse<DefaultPagination<PortingOrderGetRequirementsResponse>>
      *

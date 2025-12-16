@@ -10,36 +10,27 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\CldFilter;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\CliFilter;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\FilterType;
 
 /**
  * Creates a new MDR detailed report request with the specified filters.
  *
  * @see Telnyx\Services\Legacy\Reporting\BatchDetailRecords\MessagingService::create()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\Legacy\Reporting\BatchDetailRecords\Filter
+ *
  * @phpstan-type MessagingCreateParamsShape = array{
  *   endTime: \DateTimeInterface,
  *   startTime: \DateTimeInterface,
- *   connections?: list<int>,
- *   directions?: list<int>,
- *   filters?: list<Filter|array{
- *     billingGroup?: string|null,
- *     cld?: string|null,
- *     cldFilter?: value-of<CldFilter>|null,
- *     cli?: string|null,
- *     cliFilter?: value-of<CliFilter>|null,
- *     filterType?: value-of<FilterType>|null,
- *     tagsList?: string|null,
- *   }>,
- *   includeMessageBody?: bool,
- *   managedAccounts?: list<string>,
- *   profiles?: list<string>,
- *   recordTypes?: list<int>,
- *   reportName?: string,
- *   selectAllManagedAccounts?: bool,
- *   timezone?: string,
+ *   connections?: list<int>|null,
+ *   directions?: list<int>|null,
+ *   filters?: list<FilterShape>|null,
+ *   includeMessageBody?: bool|null,
+ *   managedAccounts?: list<string>|null,
+ *   profiles?: list<string>|null,
+ *   recordTypes?: list<int>|null,
+ *   reportName?: string|null,
+ *   selectAllManagedAccounts?: bool|null,
+ *   timezone?: string|null,
  * }
  */
 final class MessagingCreateParams implements BaseModel
@@ -158,15 +149,7 @@ final class MessagingCreateParams implements BaseModel
      *
      * @param list<int> $connections
      * @param list<int> $directions
-     * @param list<Filter|array{
-     *   billingGroup?: string|null,
-     *   cld?: string|null,
-     *   cldFilter?: value-of<CldFilter>|null,
-     *   cli?: string|null,
-     *   cliFilter?: value-of<CliFilter>|null,
-     *   filterType?: value-of<FilterType>|null,
-     *   tagsList?: string|null,
-     * }> $filters
+     * @param list<FilterShape> $filters
      * @param list<string> $managedAccounts
      * @param list<string> $profiles
      * @param list<int> $recordTypes
@@ -255,15 +238,7 @@ final class MessagingCreateParams implements BaseModel
     /**
      * List of filters to apply.
      *
-     * @param list<Filter|array{
-     *   billingGroup?: string|null,
-     *   cld?: string|null,
-     *   cldFilter?: value-of<CldFilter>|null,
-     *   cli?: string|null,
-     *   cliFilter?: value-of<CliFilter>|null,
-     *   filterType?: value-of<FilterType>|null,
-     *   tagsList?: string|null,
-     * }> $filters
+     * @param list<FilterShape> $filters
      */
     public function withFilters(array $filters): self
     {

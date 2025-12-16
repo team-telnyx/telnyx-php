@@ -9,8 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type ConferenceCommandResultShape from \Telnyx\Conferences\Actions\ConferenceCommandResult
+ *
  * @phpstan-type ActionUnmuteResponseShape = array{
- *   data?: ConferenceCommandResult|null
+ *   data?: null|ConferenceCommandResult|ConferenceCommandResultShape
  * }
  */
 final class ActionUnmuteResponse implements BaseModel
@@ -31,7 +33,7 @@ final class ActionUnmuteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ConferenceCommandResult|array{result: string} $data
+     * @param ConferenceCommandResultShape $data
      */
     public static function with(
         ConferenceCommandResult|array|null $data = null
@@ -44,7 +46,7 @@ final class ActionUnmuteResponse implements BaseModel
     }
 
     /**
-     * @param ConferenceCommandResult|array{result: string} $data
+     * @param ConferenceCommandResultShape $data
      */
     public function withData(ConferenceCommandResult|array $data): self
     {

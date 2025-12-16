@@ -9,8 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type PrivateWirelessGatewayShape from \Telnyx\PrivateWirelessGateways\PrivateWirelessGateway
+ *
  * @phpstan-type PrivateWirelessGatewayDeleteResponseShape = array{
- *   data?: PrivateWirelessGateway|null
+ *   data?: null|PrivateWirelessGateway|PrivateWirelessGatewayShape
  * }
  */
 final class PrivateWirelessGatewayDeleteResponse implements BaseModel
@@ -31,18 +33,7 @@ final class PrivateWirelessGatewayDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PrivateWirelessGateway|array{
-     *   id?: string|null,
-     *   assignedResources?: list<PwgAssignedResourcesSummary>|null,
-     *   createdAt?: string|null,
-     *   ipRange?: string|null,
-     *   name?: string|null,
-     *   networkID?: string|null,
-     *   recordType?: string|null,
-     *   regionCode?: string|null,
-     *   status?: PrivateWirelessGatewayStatus|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param PrivateWirelessGatewayShape $data
      */
     public static function with(PrivateWirelessGateway|array|null $data = null): self
     {
@@ -54,18 +45,7 @@ final class PrivateWirelessGatewayDeleteResponse implements BaseModel
     }
 
     /**
-     * @param PrivateWirelessGateway|array{
-     *   id?: string|null,
-     *   assignedResources?: list<PwgAssignedResourcesSummary>|null,
-     *   createdAt?: string|null,
-     *   ipRange?: string|null,
-     *   name?: string|null,
-     *   networkID?: string|null,
-     *   recordType?: string|null,
-     *   regionCode?: string|null,
-     *   status?: PrivateWirelessGatewayStatus|null,
-     *   updatedAt?: string|null,
-     * } $data
+     * @param PrivateWirelessGatewayShape $data
      */
     public function withData(PrivateWirelessGateway|array $data): self
     {

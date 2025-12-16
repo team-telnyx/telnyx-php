@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   callLegID: string,
  *   callSessionID: string,
  *   isAlive: bool,
- *   recordType: value-of<RecordType>,
+ *   recordType: RecordType|value-of<RecordType>,
  *   callDuration?: int|null,
  *   clientState?: string|null,
  *   endTime?: string|null,

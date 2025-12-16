@@ -8,10 +8,11 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messaging\Rcs\RcInviteTestNumberResponse\Data;
-use Telnyx\Messaging\Rcs\RcInviteTestNumberResponse\Data\RecordType;
 
 /**
- * @phpstan-type RcInviteTestNumberResponseShape = array{data: Data}
+ * @phpstan-import-type DataShape from \Telnyx\Messaging\Rcs\RcInviteTestNumberResponse\Data
+ *
+ * @phpstan-type RcInviteTestNumberResponseShape = array{data: Data|DataShape}
  */
 final class RcInviteTestNumberResponse implements BaseModel
 {
@@ -45,12 +46,7 @@ final class RcInviteTestNumberResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   agentID?: string|null,
-     *   phoneNumber?: string|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   status?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array $data): self
     {
@@ -62,12 +58,7 @@ final class RcInviteTestNumberResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   agentID?: string|null,
-     *   phoneNumber?: string|null,
-     *   recordType?: value-of<RecordType>|null,
-     *   status?: string|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

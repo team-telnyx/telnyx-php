@@ -17,7 +17,7 @@ use Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonParams\Status;
  * @see Telnyx\Services\Texml\Accounts\Calls\SiprecService::siprecSidJson()
  *
  * @phpstan-type SiprecSiprecSidJsonParamsShape = array{
- *   accountSid: string, callSid: string, status?: Status|value-of<Status>
+ *   accountSid: string, callSid: string, status?: null|Status|value-of<Status>
  * }
  */
 final class SiprecSiprecSidJsonParams implements BaseModel

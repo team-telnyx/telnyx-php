@@ -10,7 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Filter\PortingOrder\Status;
 
 /**
- * @phpstan-type PortingOrderShape = array{status?: list<value-of<Status>>|null}
+ * @phpstan-type PortingOrderShape = array{
+ *   status?: list<Status|value-of<Status>>|null
+ * }
  */
 final class PortingOrder implements BaseModel
 {

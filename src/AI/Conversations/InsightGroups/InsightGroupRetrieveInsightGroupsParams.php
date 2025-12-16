@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\Conversations\InsightGroupsService::retrieveInsightGroups()
  *
  * @phpstan-type InsightGroupRetrieveInsightGroupsParamsShape = array{
- *   pageNumber?: int, pageSize?: int
+ *   pageNumber?: int|null, pageSize?: int|null
  * }
  */
 final class InsightGroupRetrieveInsightGroupsParams implements BaseModel

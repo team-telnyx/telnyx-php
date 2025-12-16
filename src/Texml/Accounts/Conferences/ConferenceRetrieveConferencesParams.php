@@ -16,13 +16,13 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveConferencesParams\Status
  * @see Telnyx\Services\Texml\Accounts\ConferencesService::retrieveConferences()
  *
  * @phpstan-type ConferenceRetrieveConferencesParamsShape = array{
- *   dateCreated?: string,
- *   dateUpdated?: string,
- *   friendlyName?: string,
- *   page?: int,
- *   pageSize?: int,
- *   pageToken?: string,
- *   status?: Status|value-of<Status>,
+ *   dateCreated?: string|null,
+ *   dateUpdated?: string|null,
+ *   friendlyName?: string|null,
+ *   page?: int|null,
+ *   pageSize?: int|null,
+ *   pageToken?: string|null,
+ *   status?: null|Status|value-of<Status>,
  * }
  */
 final class ConferenceRetrieveConferencesParams implements BaseModel

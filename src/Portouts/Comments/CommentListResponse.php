@@ -11,8 +11,11 @@ use Telnyx\Metadata;
 use Telnyx\Portouts\Comments\CommentListResponse\Data;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\Portouts\Comments\CommentListResponse\Data
+ * @phpstan-import-type MetadataShape from \Telnyx\Metadata
+ *
  * @phpstan-type CommentListResponseShape = array{
- *   data?: list<Data>|null, meta?: Metadata|null
+ *   data?: list<DataShape>|null, meta?: null|Metadata|MetadataShape
  * }
  */
 final class CommentListResponse implements BaseModel
@@ -37,20 +40,8 @@ final class CommentListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   id: string,
-     *   body: string,
-     *   createdAt: string,
-     *   userID: string,
-     *   portoutID?: string|null,
-     *   recordType?: string|null,
-     * }> $data
-     * @param Metadata|array{
-     *   pageNumber: float,
-     *   totalPages: float,
-     *   pageSize?: float|null,
-     *   totalResults?: float|null,
-     * } $meta
+     * @param list<DataShape> $data
+     * @param MetadataShape $meta
      */
     public static function with(
         ?array $data = null,
@@ -65,14 +56,7 @@ final class CommentListResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   id: string,
-     *   body: string,
-     *   createdAt: string,
-     *   userID: string,
-     *   portoutID?: string|null,
-     *   recordType?: string|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {
@@ -83,12 +67,7 @@ final class CommentListResponse implements BaseModel
     }
 
     /**
-     * @param Metadata|array{
-     *   pageNumber: float,
-     *   totalPages: float,
-     *   pageSize?: float|null,
-     *   totalResults?: float|null,
-     * } $meta
+     * @param MetadataShape $meta
      */
     public function withMeta(Metadata|array $meta): self
     {

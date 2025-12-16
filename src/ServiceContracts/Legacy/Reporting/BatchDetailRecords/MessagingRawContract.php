@@ -18,7 +18,7 @@ interface MessagingRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MessagingCreateParams $params
+     * @param array<string,mixed>|MessagingCreateParams $params
      *
      * @return BaseResponse<MessagingNewResponse>
      *

@@ -11,7 +11,7 @@ use Telnyx\SimCards\Actions\SimCardAction\Status\Value;
 
 /**
  * @phpstan-type StatusShape = array{
- *   reason?: string|null, value?: value-of<Value>|null
+ *   reason?: string|null, value?: null|Value|value-of<Value>
  * }
  */
 final class Status implements BaseModel

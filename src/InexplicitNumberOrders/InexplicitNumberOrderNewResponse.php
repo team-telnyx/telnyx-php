@@ -7,11 +7,12 @@ namespace Telnyx\InexplicitNumberOrders;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderResponse\OrderingGroup;
 
 /**
+ * @phpstan-import-type InexplicitNumberOrderResponseShape from \Telnyx\InexplicitNumberOrders\InexplicitNumberOrderResponse
+ *
  * @phpstan-type InexplicitNumberOrderNewResponseShape = array{
- *   data?: InexplicitNumberOrderResponse|null
+ *   data?: null|InexplicitNumberOrderResponse|InexplicitNumberOrderResponseShape
  * }
  */
 final class InexplicitNumberOrderNewResponse implements BaseModel
@@ -32,16 +33,7 @@ final class InexplicitNumberOrderNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param InexplicitNumberOrderResponse|array{
-     *   id?: string|null,
-     *   billingGroupID?: string|null,
-     *   connectionID?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   customerReference?: string|null,
-     *   messagingProfileID?: string|null,
-     *   orderingGroups?: list<OrderingGroup>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param InexplicitNumberOrderResponseShape $data
      */
     public static function with(
         InexplicitNumberOrderResponse|array|null $data = null
@@ -54,16 +46,7 @@ final class InexplicitNumberOrderNewResponse implements BaseModel
     }
 
     /**
-     * @param InexplicitNumberOrderResponse|array{
-     *   id?: string|null,
-     *   billingGroupID?: string|null,
-     *   connectionID?: string|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   customerReference?: string|null,
-     *   messagingProfileID?: string|null,
-     *   orderingGroups?: list<OrderingGroup>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param InexplicitNumberOrderResponseShape $data
      */
     public function withData(InexplicitNumberOrderResponse|array $data): self
     {

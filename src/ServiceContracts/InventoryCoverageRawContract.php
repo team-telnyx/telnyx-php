@@ -15,7 +15,7 @@ interface InventoryCoverageRawContract
     /**
      * @api
      *
-     * @param array<mixed>|InventoryCoverageListParams $params
+     * @param array<string,mixed>|InventoryCoverageListParams $params
      *
      * @return BaseResponse<InventoryCoverageListResponse>
      *

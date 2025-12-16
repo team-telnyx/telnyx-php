@@ -11,6 +11,8 @@ use Telnyx\RoomCompositions\RoomComposition\Format;
 use Telnyx\RoomCompositions\RoomComposition\Status;
 
 /**
+ * @phpstan-import-type VideoRegionShape from \Telnyx\RoomCompositions\VideoRegion
+ *
  * @phpstan-type RoomCompositionShape = array{
  *   id?: string|null,
  *   completedAt?: \DateTimeInterface|null,
@@ -18,16 +20,16 @@ use Telnyx\RoomCompositions\RoomComposition\Status;
  *   downloadURL?: string|null,
  *   durationSecs?: int|null,
  *   endedAt?: \DateTimeInterface|null,
- *   format?: value-of<Format>|null,
+ *   format?: null|Format|value-of<Format>,
  *   recordType?: string|null,
  *   roomID?: string|null,
  *   sessionID?: string|null,
  *   sizeMB?: float|null,
  *   startedAt?: \DateTimeInterface|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   updatedAt?: \DateTimeInterface|null,
  *   userID?: string|null,
- *   videoLayout?: array<string,VideoRegion>|null,
+ *   videoLayout?: array<string,VideoRegionShape>|null,
  *   webhookEventFailoverURL?: string|null,
  *   webhookEventURL?: string|null,
  *   webhookTimeoutSecs?: int|null,
@@ -167,16 +169,7 @@ final class RoomComposition implements BaseModel
      *
      * @param Format|value-of<Format> $format
      * @param Status|value-of<Status> $status
-     * @param array<string,VideoRegion|array{
-     *   height?: int|null,
-     *   maxColumns?: int|null,
-     *   maxRows?: int|null,
-     *   videoSources?: list<string>|null,
-     *   width?: int|null,
-     *   xPos?: int|null,
-     *   yPos?: int|null,
-     *   zPos?: int|null,
-     * }> $videoLayout
+     * @param array<string,VideoRegionShape> $videoLayout
      */
     public static function with(
         ?string $id = null,
@@ -393,16 +386,7 @@ final class RoomComposition implements BaseModel
     /**
      * Describes the video layout of the room composition in terms of regions. Limited to 2 regions.
      *
-     * @param array<string,VideoRegion|array{
-     *   height?: int|null,
-     *   maxColumns?: int|null,
-     *   maxRows?: int|null,
-     *   videoSources?: list<string>|null,
-     *   width?: int|null,
-     *   xPos?: int|null,
-     *   yPos?: int|null,
-     *   zPos?: int|null,
-     * }> $videoLayout
+     * @param array<string,VideoRegionShape> $videoLayout
      */
     public function withVideoLayout(array $videoLayout): self
     {

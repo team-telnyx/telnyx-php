@@ -9,12 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter;
-use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\NumberType;
-use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\Source;
-use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\Status;
-use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\VoiceConnectionName;
-use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\VoiceUsagePaymentMethod;
-use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\WithoutTags;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\HandleMessagingProfileError;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Page;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Sort;
@@ -24,25 +18,14 @@ use Telnyx\PhoneNumbers\PhoneNumberListParams\Sort;
  *
  * @see Telnyx\Services\PhoneNumbersService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\PhoneNumberListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PhoneNumbers\PhoneNumberListParams\Page
+ *
  * @phpstan-type PhoneNumberListParamsShape = array{
- *   filter?: Filter|array{
- *     billingGroupID?: string|null,
- *     connectionID?: string|null,
- *     countryISOAlpha2?: string|null|list<string>,
- *     customerReference?: string|null,
- *     emergencyAddressID?: string|null,
- *     numberType?: NumberType|null,
- *     phoneNumber?: string|null,
- *     source?: value-of<Source>|null,
- *     status?: value-of<Status>|null,
- *     tag?: string|null,
- *     voiceConnectionName?: VoiceConnectionName|null,
- *     voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
- *     withoutTags?: value-of<WithoutTags>|null,
- *   },
- *   handleMessagingProfileError?: HandleMessagingProfileError|value-of<HandleMessagingProfileError>,
- *   page?: Page|array{number?: int|null, size?: int|null},
- *   sort?: Sort|value-of<Sort>,
+ *   filter?: FilterShape|null,
+ *   handleMessagingProfileError?: null|HandleMessagingProfileError|value-of<HandleMessagingProfileError>,
+ *   page?: PageShape|null,
+ *   sort?: null|Sort|value-of<Sort>,
  * }
  */
 final class PhoneNumberListParams implements BaseModel
@@ -89,23 +72,9 @@ final class PhoneNumberListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   billingGroupID?: string|null,
-     *   connectionID?: string|null,
-     *   countryISOAlpha2?: string|list<string>|null,
-     *   customerReference?: string|null,
-     *   emergencyAddressID?: string|null,
-     *   numberType?: NumberType|null,
-     *   phoneNumber?: string|null,
-     *   source?: value-of<Source>|null,
-     *   status?: value-of<Status>|null,
-     *   tag?: string|null,
-     *   voiceConnectionName?: VoiceConnectionName|null,
-     *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
-     *   withoutTags?: value-of<WithoutTags>|null,
-     * } $filter
+     * @param FilterShape $filter
      * @param HandleMessagingProfileError|value-of<HandleMessagingProfileError> $handleMessagingProfileError
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
@@ -127,21 +96,7 @@ final class PhoneNumberListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[phone_number], filter[status], filter[country_iso_alpha2], filter[connection_id], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference], filter[number_type], filter[source].
      *
-     * @param Filter|array{
-     *   billingGroupID?: string|null,
-     *   connectionID?: string|null,
-     *   countryISOAlpha2?: string|list<string>|null,
-     *   customerReference?: string|null,
-     *   emergencyAddressID?: string|null,
-     *   numberType?: NumberType|null,
-     *   phoneNumber?: string|null,
-     *   source?: value-of<Source>|null,
-     *   status?: value-of<Status>|null,
-     *   tag?: string|null,
-     *   voiceConnectionName?: VoiceConnectionName|null,
-     *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
-     *   withoutTags?: value-of<WithoutTags>|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -168,7 +123,7 @@ final class PhoneNumberListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

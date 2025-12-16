@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AccessIPAddressService::create()
  *
  * @phpstan-type AccessIPAddressCreateParamsShape = array{
- *   ipAddress: string, description?: string
+ *   ipAddress: string, description?: string|null
  * }
  */
 final class AccessIPAddressCreateParams implements BaseModel

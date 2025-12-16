@@ -22,7 +22,7 @@ interface FqdnConnectionsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|FqdnConnectionCreateParams $params
+     * @param array<string,mixed>|FqdnConnectionCreateParams $params
      *
      * @return BaseResponse<FqdnConnectionNewResponse>
      *
@@ -51,7 +51,7 @@ interface FqdnConnectionsRawContract
      * @api
      *
      * @param string $id identifies the resource
-     * @param array<mixed>|FqdnConnectionUpdateParams $params
+     * @param array<string,mixed>|FqdnConnectionUpdateParams $params
      *
      * @return BaseResponse<FqdnConnectionUpdateResponse>
      *
@@ -66,7 +66,7 @@ interface FqdnConnectionsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|FqdnConnectionListParams $params
+     * @param array<string,mixed>|FqdnConnectionListParams $params
      *
      * @return BaseResponse<DefaultPagination<FqdnConnection>>
      *

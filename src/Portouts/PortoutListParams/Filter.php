@@ -15,18 +15,21 @@ use Telnyx\Portouts\PortoutListParams\Filter\StatusIn;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[carrier_name], filter[country_code], filter[country_code_in], filter[foc_date], filter[inserted_at], filter[phone_number], filter[pon], filter[ported_out_at], filter[spid], filter[status], filter[status_in], filter[support_key].
  *
+ * @phpstan-import-type InsertedAtShape from \Telnyx\Portouts\PortoutListParams\Filter\InsertedAt
+ * @phpstan-import-type PortedOutAtShape from \Telnyx\Portouts\PortoutListParams\Filter\PortedOutAt
+ *
  * @phpstan-type FilterShape = array{
  *   carrierName?: string|null,
  *   countryCode?: string|null,
  *   countryCodeIn?: list<string>|null,
  *   focDate?: \DateTimeInterface|null,
- *   insertedAt?: InsertedAt|null,
+ *   insertedAt?: null|InsertedAt|InsertedAtShape,
  *   phoneNumber?: string|null,
  *   pon?: string|null,
- *   portedOutAt?: PortedOutAt|null,
+ *   portedOutAt?: null|PortedOutAt|PortedOutAtShape,
  *   spid?: string|null,
- *   status?: value-of<Status>|null,
- *   statusIn?: list<value-of<StatusIn>>|null,
+ *   status?: null|Status|value-of<Status>,
+ *   statusIn?: list<StatusIn|value-of<StatusIn>>|null,
  *   supportKey?: string|null,
  * }
  */
@@ -124,12 +127,8 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $countryCodeIn
-     * @param InsertedAt|array{
-     *   gte?: \DateTimeInterface|null, lte?: \DateTimeInterface|null
-     * } $insertedAt
-     * @param PortedOutAt|array{
-     *   gte?: \DateTimeInterface|null, lte?: \DateTimeInterface|null
-     * } $portedOutAt
+     * @param InsertedAtShape $insertedAt
+     * @param PortedOutAtShape $portedOutAt
      * @param Status|value-of<Status> $status
      * @param list<StatusIn|value-of<StatusIn>> $statusIn
      */
@@ -214,9 +213,7 @@ final class Filter implements BaseModel
     /**
      * Filter by inserted_at date range using nested operations.
      *
-     * @param InsertedAt|array{
-     *   gte?: \DateTimeInterface|null, lte?: \DateTimeInterface|null
-     * } $insertedAt
+     * @param InsertedAtShape $insertedAt
      */
     public function withInsertedAt(InsertedAt|array $insertedAt): self
     {
@@ -251,9 +248,7 @@ final class Filter implements BaseModel
     /**
      * Filter by ported_out_at date range using nested operations.
      *
-     * @param PortedOutAt|array{
-     *   gte?: \DateTimeInterface|null, lte?: \DateTimeInterface|null
-     * } $portedOutAt
+     * @param PortedOutAtShape $portedOutAt
      */
     public function withPortedOutAt(PortedOutAt|array $portedOutAt): self
     {

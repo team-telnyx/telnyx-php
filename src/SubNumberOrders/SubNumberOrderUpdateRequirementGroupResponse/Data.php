@@ -11,6 +11,9 @@ use Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse\Data\Pho
 use Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse\Data\RegulatoryRequirement;
 
 /**
+ * @phpstan-import-type PhoneNumberShape from \Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse\Data\PhoneNumber
+ * @phpstan-import-type RegulatoryRequirementShape from \Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse\Data\RegulatoryRequirement
+ *
  * @phpstan-type DataShape = array{
  *   id?: string|null,
  *   countryCode?: string|null,
@@ -19,10 +22,10 @@ use Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse\Data\Reg
  *   isBlockSubNumberOrder?: bool|null,
  *   orderRequestID?: string|null,
  *   phoneNumberType?: string|null,
- *   phoneNumbers?: list<PhoneNumber>|null,
+ *   phoneNumbers?: list<PhoneNumberShape>|null,
  *   phoneNumbersCount?: int|null,
  *   recordType?: string|null,
- *   regulatoryRequirements?: list<RegulatoryRequirement>|null,
+ *   regulatoryRequirements?: list<RegulatoryRequirementShape>|null,
  *   requirementsMet?: bool|null,
  *   status?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
@@ -87,21 +90,8 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PhoneNumber|array{
-     *   id?: string|null,
-     *   bundleID?: string|null,
-     *   countryCode?: string|null,
-     *   phoneNumber?: string|null,
-     *   phoneNumberType?: string|null,
-     *   recordType?: string|null,
-     *   regulatoryRequirements?: list<PhoneNumber\RegulatoryRequirement>|null,
-     *   requirementsMet?: bool|null,
-     *   requirementsStatus?: string|null,
-     *   status?: string|null,
-     * }> $phoneNumbers
-     * @param list<RegulatoryRequirement|array{
-     *   fieldType?: string|null, recordType?: string|null, requirementID?: string|null
-     * }> $regulatoryRequirements
+     * @param list<PhoneNumberShape> $phoneNumbers
+     * @param list<RegulatoryRequirementShape> $regulatoryRequirements
      */
     public static function with(
         ?string $id = null,
@@ -196,18 +186,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<PhoneNumber|array{
-     *   id?: string|null,
-     *   bundleID?: string|null,
-     *   countryCode?: string|null,
-     *   phoneNumber?: string|null,
-     *   phoneNumberType?: string|null,
-     *   recordType?: string|null,
-     *   regulatoryRequirements?: list<PhoneNumber\RegulatoryRequirement>|null,
-     *   requirementsMet?: bool|null,
-     *   requirementsStatus?: string|null,
-     *   status?: string|null,
-     * }> $phoneNumbers
+     * @param list<PhoneNumberShape> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
@@ -234,9 +213,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<RegulatoryRequirement|array{
-     *   fieldType?: string|null, recordType?: string|null, requirementID?: string|null
-     * }> $regulatoryRequirements
+     * @param list<RegulatoryRequirementShape> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements

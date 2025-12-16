@@ -8,14 +8,15 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\RcsAgentMessage\ContentMessage;
-use Telnyx\Messages\RcsAgentMessage\ContentMessage\RichCard;
 use Telnyx\Messages\RcsAgentMessage\Event;
-use Telnyx\Messages\RcsAgentMessage\Event\EventType;
 
 /**
+ * @phpstan-import-type ContentMessageShape from \Telnyx\Messages\RcsAgentMessage\ContentMessage
+ * @phpstan-import-type EventShape from \Telnyx\Messages\RcsAgentMessage\Event
+ *
  * @phpstan-type RcsAgentMessageShape = array{
- *   contentMessage?: ContentMessage|null,
- *   event?: Event|null,
+ *   contentMessage?: null|ContentMessage|ContentMessageShape,
+ *   event?: null|Event|EventShape,
  *   expireTime?: \DateTimeInterface|null,
  *   ttl?: string|null,
  * }
@@ -56,13 +57,8 @@ final class RcsAgentMessage implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ContentMessage|array{
-     *   contentInfo?: RcsContentInfo|null,
-     *   richCard?: RichCard|null,
-     *   suggestions?: list<RcsSuggestion>|null,
-     *   text?: string|null,
-     * } $contentMessage
-     * @param Event|array{eventType?: value-of<EventType>|null} $event
+     * @param ContentMessageShape $contentMessage
+     * @param EventShape $event
      */
     public static function with(
         ContentMessage|array|null $contentMessage = null,
@@ -81,12 +77,7 @@ final class RcsAgentMessage implements BaseModel
     }
 
     /**
-     * @param ContentMessage|array{
-     *   contentInfo?: RcsContentInfo|null,
-     *   richCard?: RichCard|null,
-     *   suggestions?: list<RcsSuggestion>|null,
-     *   text?: string|null,
-     * } $contentMessage
+     * @param ContentMessageShape $contentMessage
      */
     public function withContentMessage(
         ContentMessage|array $contentMessage
@@ -100,7 +91,7 @@ final class RcsAgentMessage implements BaseModel
     /**
      * RCS Event to send to the recipient.
      *
-     * @param Event|array{eventType?: value-of<EventType>|null} $event
+     * @param EventShape $event
      */
     public function withEvent(Event|array $event): self
     {

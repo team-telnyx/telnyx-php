@@ -37,7 +37,7 @@ interface ActionsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ActionListParams $params
+     * @param array<string,mixed>|ActionListParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<SimCardGroupAction>>
      *
@@ -80,7 +80,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $id identifies the SIM group
-     * @param array<mixed>|ActionSetPrivateWirelessGatewayParams $params
+     * @param array<string,mixed>|ActionSetPrivateWirelessGatewayParams $params
      *
      * @return BaseResponse<ActionSetPrivateWirelessGatewayResponse>
      *
@@ -96,7 +96,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $id identifies the SIM group
-     * @param array<mixed>|ActionSetWirelessBlocklistParams $params
+     * @param array<string,mixed>|ActionSetWirelessBlocklistParams $params
      *
      * @return BaseResponse<ActionSetWirelessBlocklistResponse>
      *

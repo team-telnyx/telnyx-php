@@ -8,14 +8,14 @@ use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumber\PhoneNumberType;
-use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumber\RequirementsStatus;
-use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumber\Status;
-use Telnyx\SubNumberOrderRegulatoryRequirementWithValue;
 
 /**
+ * @phpstan-import-type NumberOrderPhoneNumberShape from \Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumber
+ * @phpstan-import-type PaginationMetaShape from \Telnyx\AuthenticationProviders\PaginationMeta
+ *
  * @phpstan-type NumberOrderPhoneNumberListResponseShape = array{
- *   data?: list<NumberOrderPhoneNumber>|null, meta?: PaginationMeta|null
+ *   data?: list<NumberOrderPhoneNumberShape>|null,
+ *   meta?: null|PaginationMeta|PaginationMetaShape,
  * }
  */
 final class NumberOrderPhoneNumberListResponse implements BaseModel
@@ -40,26 +40,8 @@ final class NumberOrderPhoneNumberListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<NumberOrderPhoneNumber|array{
-     *   id?: string|null,
-     *   bundleID?: string|null,
-     *   countryCode?: string|null,
-     *   deadline?: \DateTimeInterface|null,
-     *   isBlockNumber?: bool|null,
-     *   locality?: string|null,
-     *   orderRequestID?: string|null,
-     *   phoneNumber?: string|null,
-     *   phoneNumberType?: value-of<PhoneNumberType>|null,
-     *   recordType?: string|null,
-     *   regulatoryRequirements?: list<SubNumberOrderRegulatoryRequirementWithValue>|null,
-     *   requirementsMet?: bool|null,
-     *   requirementsStatus?: value-of<RequirementsStatus>|null,
-     *   status?: value-of<Status>|null,
-     *   subNumberOrderID?: string|null,
-     * }> $data
-     * @param PaginationMeta|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param list<NumberOrderPhoneNumberShape> $data
+     * @param PaginationMetaShape $meta
      */
     public static function with(
         ?array $data = null,
@@ -74,23 +56,7 @@ final class NumberOrderPhoneNumberListResponse implements BaseModel
     }
 
     /**
-     * @param list<NumberOrderPhoneNumber|array{
-     *   id?: string|null,
-     *   bundleID?: string|null,
-     *   countryCode?: string|null,
-     *   deadline?: \DateTimeInterface|null,
-     *   isBlockNumber?: bool|null,
-     *   locality?: string|null,
-     *   orderRequestID?: string|null,
-     *   phoneNumber?: string|null,
-     *   phoneNumberType?: value-of<PhoneNumberType>|null,
-     *   recordType?: string|null,
-     *   regulatoryRequirements?: list<SubNumberOrderRegulatoryRequirementWithValue>|null,
-     *   requirementsMet?: bool|null,
-     *   requirementsStatus?: value-of<RequirementsStatus>|null,
-     *   status?: value-of<Status>|null,
-     *   subNumberOrderID?: string|null,
-     * }> $data
+     * @param list<NumberOrderPhoneNumberShape> $data
      */
     public function withData(array $data): self
     {
@@ -101,9 +67,7 @@ final class NumberOrderPhoneNumberListResponse implements BaseModel
     }
 
     /**
-     * @param PaginationMeta|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param PaginationMetaShape $meta
      */
     public function withMeta(PaginationMeta|array $meta): self
     {

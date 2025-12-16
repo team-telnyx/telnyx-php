@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type ConferenceConfigShape = array{
  *   id?: string|null,
- *   beepEnabled?: value-of<BeepEnabled>|null,
+ *   beepEnabled?: null|BeepEnabled|value-of<BeepEnabled>,
  *   conferenceName?: string|null,
  *   earlyMedia?: bool|null,
  *   endConferenceOnExit?: bool|null,
@@ -26,7 +26,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   softEndConferenceOnExit?: bool|null,
  *   startConferenceOnCreate?: bool|null,
  *   startConferenceOnEnter?: bool|null,
- *   supervisorRole?: value-of<\Telnyx\Calls\CallDialParams\ConferenceConfig\SupervisorRole>|null,
+ *   supervisorRole?: null|\Telnyx\Calls\CallDialParams\ConferenceConfig\SupervisorRole|value-of<\Telnyx\Calls\CallDialParams\ConferenceConfig\SupervisorRole>,
  *   whisperCallControlIDs?: list<string>|null,
  * }
  */

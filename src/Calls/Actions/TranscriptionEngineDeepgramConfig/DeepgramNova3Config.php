@@ -13,10 +13,10 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DeepgramNova3ConfigShape = array{
- *   transcriptionEngine: value-of<TranscriptionEngine>,
- *   transcriptionModel?: 'deepgram/nova-3',
+ *   transcriptionEngine: TranscriptionEngine|value-of<TranscriptionEngine>,
+ *   transcriptionModel: 'deepgram/nova-3',
  *   keywordsBoosting?: array<string,float>|null,
- *   language?: value-of<Language>|null,
+ *   language?: null|Language|value-of<Language>,
  * }
  */
 final class DeepgramNova3Config implements BaseModel

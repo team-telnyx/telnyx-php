@@ -15,8 +15,10 @@ use Telnyx\SubNumberOrders\SubNumberOrderRetrieveParams\Filter;
  *
  * @see Telnyx\Services\SubNumberOrdersService::retrieve()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\SubNumberOrders\SubNumberOrderRetrieveParams\Filter
+ *
  * @phpstan-type SubNumberOrderRetrieveParamsShape = array{
- *   filter?: Filter|array{includePhoneNumbers?: bool|null}
+ *   filter?: FilterShape|null
  * }
  */
 final class SubNumberOrderRetrieveParams implements BaseModel
@@ -41,7 +43,7 @@ final class SubNumberOrderRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{includePhoneNumbers?: bool|null} $filter
+     * @param FilterShape $filter
      */
     public static function with(Filter|array|null $filter = null): self
     {
@@ -55,7 +57,7 @@ final class SubNumberOrderRetrieveParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[include_phone_numbers].
      *
-     * @param Filter|array{includePhoneNumbers?: bool|null} $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

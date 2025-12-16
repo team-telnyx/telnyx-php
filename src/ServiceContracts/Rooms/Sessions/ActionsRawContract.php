@@ -35,7 +35,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $roomSessionID the unique identifier of a room session
-     * @param array<mixed>|ActionKickParams $params
+     * @param array<string,mixed>|ActionKickParams $params
      *
      * @return BaseResponse<ActionKickResponse>
      *
@@ -51,7 +51,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $roomSessionID the unique identifier of a room session
-     * @param array<mixed>|ActionMuteParams $params
+     * @param array<string,mixed>|ActionMuteParams $params
      *
      * @return BaseResponse<ActionMuteResponse>
      *
@@ -67,7 +67,7 @@ interface ActionsRawContract
      * @api
      *
      * @param string $roomSessionID the unique identifier of a room session
-     * @param array<mixed>|ActionUnmuteParams $params
+     * @param array<string,mixed>|ActionUnmuteParams $params
      *
      * @return BaseResponse<ActionUnmuteResponse>
      *

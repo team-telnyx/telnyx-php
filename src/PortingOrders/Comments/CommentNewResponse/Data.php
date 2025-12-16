@@ -16,7 +16,7 @@ use Telnyx\PortingOrders\Comments\CommentNewResponse\Data\UserType;
  *   createdAt?: \DateTimeInterface|null,
  *   portingOrderID?: string|null,
  *   recordType?: string|null,
- *   userType?: value-of<UserType>|null,
+ *   userType?: null|UserType|value-of<UserType>,
  * }
  */
 final class Data implements BaseModel

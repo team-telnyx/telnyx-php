@@ -13,8 +13,12 @@ use Telnyx\ManagedAccounts\ManagedAccountListParams\Filter\OrganizationName;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[email][contains], filter[email][eq], filter[organization_name][contains], filter[organization_name][eq].
  *
+ * @phpstan-import-type EmailShape from \Telnyx\ManagedAccounts\ManagedAccountListParams\Filter\Email
+ * @phpstan-import-type OrganizationNameShape from \Telnyx\ManagedAccounts\ManagedAccountListParams\Filter\OrganizationName
+ *
  * @phpstan-type FilterShape = array{
- *   email?: Email|null, organizationName?: OrganizationName|null
+ *   email?: null|Email|EmailShape,
+ *   organizationName?: null|OrganizationName|OrganizationNameShape,
  * }
  */
 final class Filter implements BaseModel
@@ -38,10 +42,8 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Email|array{contains?: string|null, eq?: string|null} $email
-     * @param OrganizationName|array{
-     *   contains?: string|null, eq?: string|null
-     * } $organizationName
+     * @param EmailShape $email
+     * @param OrganizationNameShape $organizationName
      */
     public static function with(
         Email|array|null $email = null,
@@ -56,7 +58,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param Email|array{contains?: string|null, eq?: string|null} $email
+     * @param EmailShape $email
      */
     public function withEmail(Email|array $email): self
     {
@@ -67,9 +69,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param OrganizationName|array{
-     *   contains?: string|null, eq?: string|null
-     * } $organizationName
+     * @param OrganizationNameShape $organizationName
      */
     public function withOrganizationName(
         OrganizationName|array $organizationName

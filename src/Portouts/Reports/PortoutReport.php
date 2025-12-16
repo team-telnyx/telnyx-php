@@ -7,19 +7,20 @@ namespace Telnyx\Portouts\Reports;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Portouts\Reports\ExportPortoutsCsvReport\Filters;
 use Telnyx\Portouts\Reports\PortoutReport\ReportType;
 use Telnyx\Portouts\Reports\PortoutReport\Status;
 
 /**
+ * @phpstan-import-type ExportPortoutsCsvReportShape from \Telnyx\Portouts\Reports\ExportPortoutsCsvReport
+ *
  * @phpstan-type PortoutReportShape = array{
  *   id?: string|null,
  *   createdAt?: \DateTimeInterface|null,
  *   documentID?: string|null,
- *   params?: ExportPortoutsCsvReport|null,
+ *   params?: null|ExportPortoutsCsvReport|ExportPortoutsCsvReportShape,
  *   recordType?: string|null,
- *   reportType?: value-of<ReportType>|null,
- *   status?: value-of<Status>|null,
+ *   reportType?: null|ReportType|value-of<ReportType>,
+ *   status?: null|Status|value-of<Status>,
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */
@@ -90,7 +91,7 @@ final class PortoutReport implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExportPortoutsCsvReport|array{filters: Filters} $params
+     * @param ExportPortoutsCsvReportShape $params
      * @param ReportType|value-of<ReportType> $reportType
      * @param Status|value-of<Status> $status
      */
@@ -154,7 +155,7 @@ final class PortoutReport implements BaseModel
     /**
      * The parameters for generating a port-outs CSV report.
      *
-     * @param ExportPortoutsCsvReport|array{filters: Filters} $params
+     * @param ExportPortoutsCsvReportShape $params
      */
     public function withParams(ExportPortoutsCsvReport|array $params): self
     {

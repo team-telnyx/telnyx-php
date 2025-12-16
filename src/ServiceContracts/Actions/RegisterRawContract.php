@@ -15,7 +15,7 @@ interface RegisterRawContract
     /**
      * @api
      *
-     * @param array<mixed>|RegisterCreateParams $params
+     * @param array<string,mixed>|RegisterCreateParams $params
      *
      * @return BaseResponse<RegisterNewResponse>
      *

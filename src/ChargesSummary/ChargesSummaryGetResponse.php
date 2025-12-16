@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace Telnyx\ChargesSummary;
 
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data;
-use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary;
-use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Total;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ChargesSummaryGetResponseShape = array{data: Data}
+ * @phpstan-import-type DataShape from \Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data
+ *
+ * @phpstan-type ChargesSummaryGetResponseShape = array{data: Data|DataShape}
  */
 final class ChargesSummaryGetResponse implements BaseModel
 {
@@ -46,15 +46,7 @@ final class ChargesSummaryGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   currency: string,
-     *   endDate: string,
-     *   startDate: string,
-     *   summary: Summary,
-     *   total: Total,
-     *   userEmail: string,
-     *   userID: string,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array $data): self
     {
@@ -66,15 +58,7 @@ final class ChargesSummaryGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|array{
-     *   currency: string,
-     *   endDate: string,
-     *   startDate: string,
-     *   summary: Summary,
-     *   total: Total,
-     *   userEmail: string,
-     *   userID: string,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

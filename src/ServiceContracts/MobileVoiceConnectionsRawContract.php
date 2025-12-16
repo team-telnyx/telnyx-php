@@ -22,7 +22,7 @@ interface MobileVoiceConnectionsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MobileVoiceConnectionCreateParams $params
+     * @param array<string,mixed>|MobileVoiceConnectionCreateParams $params
      *
      * @return BaseResponse<MobileVoiceConnectionNewResponse>
      *
@@ -51,7 +51,7 @@ interface MobileVoiceConnectionsRawContract
      * @api
      *
      * @param string $id The ID of the mobile voice connection
-     * @param array<mixed>|MobileVoiceConnectionUpdateParams $params
+     * @param array<string,mixed>|MobileVoiceConnectionUpdateParams $params
      *
      * @return BaseResponse<MobileVoiceConnectionUpdateResponse>
      *
@@ -66,7 +66,7 @@ interface MobileVoiceConnectionsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MobileVoiceConnectionListParams $params
+     * @param array<string,mixed>|MobileVoiceConnectionListParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<MobileVoiceConnection>>
      *

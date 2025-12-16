@@ -10,9 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse\Data\RegulatoryRequirement\AcceptanceCriteria;
 
 /**
+ * @phpstan-import-type AcceptanceCriteriaShape from \Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse\Data\RegulatoryRequirement\AcceptanceCriteria
+ *
  * @phpstan-type RegulatoryRequirementShape = array{
  *   id?: string|null,
- *   acceptanceCriteria?: AcceptanceCriteria|null,
+ *   acceptanceCriteria?: null|AcceptanceCriteria|AcceptanceCriteriaShape,
  *   description?: string|null,
  *   example?: string|null,
  *   fieldType?: string|null,
@@ -52,16 +54,7 @@ final class RegulatoryRequirement implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AcceptanceCriteria|array{
-     *   acceptableCharacters?: string|null,
-     *   acceptableValues?: list<string>|null,
-     *   caseSensitive?: string|null,
-     *   localityLimit?: string|null,
-     *   maxLength?: string|null,
-     *   minLength?: string|null,
-     *   regex?: string|null,
-     *   timeLimit?: string|null,
-     * } $acceptanceCriteria
+     * @param AcceptanceCriteriaShape $acceptanceCriteria
      */
     public static function with(
         ?string $id = null,
@@ -92,16 +85,7 @@ final class RegulatoryRequirement implements BaseModel
     }
 
     /**
-     * @param AcceptanceCriteria|array{
-     *   acceptableCharacters?: string|null,
-     *   acceptableValues?: list<string>|null,
-     *   caseSensitive?: string|null,
-     *   localityLimit?: string|null,
-     *   maxLength?: string|null,
-     *   minLength?: string|null,
-     *   regex?: string|null,
-     *   timeLimit?: string|null,
-     * } $acceptanceCriteria
+     * @param AcceptanceCriteriaShape $acceptanceCriteria
      */
     public function withAcceptanceCriteria(
         AcceptanceCriteria|array $acceptanceCriteria

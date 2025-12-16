@@ -9,11 +9,14 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Storage\Buckets\Usage\PaginationMetaSimple;
 use Telnyx\Storage\StorageListMigrationSourceCoverageResponse\Data;
-use Telnyx\Storage\StorageListMigrationSourceCoverageResponse\Data\Provider;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\Storage\StorageListMigrationSourceCoverageResponse\Data
+ * @phpstan-import-type PaginationMetaSimpleShape from \Telnyx\Storage\Buckets\Usage\PaginationMetaSimple
+ *
  * @phpstan-type StorageListMigrationSourceCoverageResponseShape = array{
- *   data?: list<Data>|null, meta?: PaginationMetaSimple|null
+ *   data?: list<DataShape>|null,
+ *   meta?: null|PaginationMetaSimple|PaginationMetaSimpleShape,
  * }
  */
 final class StorageListMigrationSourceCoverageResponse implements BaseModel
@@ -38,12 +41,8 @@ final class StorageListMigrationSourceCoverageResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   provider?: value-of<Provider>|null, sourceRegion?: string|null
-     * }> $data
-     * @param PaginationMetaSimple|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param list<DataShape> $data
+     * @param PaginationMetaSimpleShape $meta
      */
     public static function with(
         ?array $data = null,
@@ -58,9 +57,7 @@ final class StorageListMigrationSourceCoverageResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   provider?: value-of<Provider>|null, sourceRegion?: string|null
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {
@@ -71,9 +68,7 @@ final class StorageListMigrationSourceCoverageResponse implements BaseModel
     }
 
     /**
-     * @param PaginationMetaSimple|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param PaginationMetaSimpleShape $meta
      */
     public function withMeta(PaginationMetaSimple|array $meta): self
     {

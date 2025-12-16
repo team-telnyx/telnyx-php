@@ -6,14 +6,7 @@ namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\AssistantTool\DtmfTool;
 use Telnyx\AI\Assistants\AssistantTool\HandoffTool;
-use Telnyx\AI\Assistants\AssistantTool\HandoffTool\Handoff;
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool;
-use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer;
-use Telnyx\AI\Assistants\TranscriptionSettings\Model;
-use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\MediaName;
-use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\MediaURL;
-use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\PredefinedMedia;
-use Telnyx\AI\Assistants\WebhookTool\Type;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -24,52 +17,32 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\AssistantsService::update()
  *
+ * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
+ * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
+ * @phpstan-import-type PrivacySettingsShape from \Telnyx\AI\Assistants\PrivacySettings
+ * @phpstan-import-type TelephonySettingsShape from \Telnyx\AI\Assistants\TelephonySettings
+ * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
+ * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\AI\Assistants\VoiceSettings
+ *
  * @phpstan-type AssistantUpdateParamsShape = array{
- *   description?: string,
- *   dynamicVariables?: array<string,mixed>,
- *   dynamicVariablesWebhookURL?: string,
- *   enabledFeatures?: list<EnabledFeatures|value-of<EnabledFeatures>>,
- *   greeting?: string,
- *   insightSettings?: InsightSettings|array{insightGroupID?: string|null},
- *   instructions?: string,
- *   llmAPIKeyRef?: string,
- *   messagingSettings?: MessagingSettings|array{
- *     defaultMessagingProfileID?: string|null,
- *     deliveryStatusWebhookURL?: string|null,
- *   },
- *   model?: string,
- *   name?: string,
- *   privacySettings?: PrivacySettings|array{dataRetention?: bool|null},
- *   promoteToMain?: bool,
- *   telephonySettings?: TelephonySettings|array{
- *     defaultTexmlAppID?: string|null, supportsUnauthenticatedWebCalls?: bool|null
- *   },
- *   tools?: list<WebhookTool|array{
- *     type: value-of<Type>, webhook: InferenceEmbeddingWebhookToolParams
- *   }|RetrievalTool|array{
- *     retrieval: InferenceEmbeddingBucketIDs,
- *     type: value-of<\Telnyx\AI\Assistants\RetrievalTool\Type>,
- *   }|HandoffTool|array{handoff: Handoff, type?: 'handoff'}|HangupTool|array{
- *     hangup: HangupToolParams,
- *     type: value-of<\Telnyx\AI\Assistants\HangupTool\Type>,
- *   }|TransferTool|array{
- *     transfer: InferenceEmbeddingTransferToolParams,
- *     type: value-of<\Telnyx\AI\Assistants\TransferTool\Type>,
- *   }|SipReferTool|array{refer: Refer, type?: 'refer'}|DtmfTool|array{
- *     sendDtmf: array<string,mixed>, type?: 'send_dtmf'
- *   }>,
- *   transcription?: TranscriptionSettings|array{
- *     language?: string|null,
- *     model?: value-of<Model>|null,
- *     region?: string|null,
- *     settings?: TranscriptionSettingsConfig|null,
- *   },
- *   voiceSettings?: VoiceSettings|array{
- *     voice: string,
- *     apiKeyRef?: string|null,
- *     backgroundAudio?: null|PredefinedMedia|MediaURL|MediaName,
- *     voiceSpeed?: float|null,
- *   },
+ *   description?: string|null,
+ *   dynamicVariables?: array<string,mixed>|null,
+ *   dynamicVariablesWebhookURL?: string|null,
+ *   enabledFeatures?: list<EnabledFeatures|value-of<EnabledFeatures>>|null,
+ *   greeting?: string|null,
+ *   insightSettings?: InsightSettingsShape|null,
+ *   instructions?: string|null,
+ *   llmAPIKeyRef?: string|null,
+ *   messagingSettings?: MessagingSettingsShape|null,
+ *   model?: string|null,
+ *   name?: string|null,
+ *   privacySettings?: PrivacySettingsShape|null,
+ *   promoteToMain?: bool|null,
+ *   telephonySettings?: TelephonySettingsShape|null,
+ *   tools?: list<AssistantToolShape>|null,
+ *   transcription?: TranscriptionSettingsShape|null,
+ *   voiceSettings?: VoiceSettingsShape|null,
  * }
  */
 final class AssistantUpdateParams implements BaseModel
@@ -170,41 +143,13 @@ final class AssistantUpdateParams implements BaseModel
      *
      * @param array<string,mixed> $dynamicVariables
      * @param list<EnabledFeatures|value-of<EnabledFeatures>> $enabledFeatures
-     * @param InsightSettings|array{insightGroupID?: string|null} $insightSettings
-     * @param MessagingSettings|array{
-     *   defaultMessagingProfileID?: string|null,
-     *   deliveryStatusWebhookURL?: string|null,
-     * } $messagingSettings
-     * @param PrivacySettings|array{dataRetention?: bool|null} $privacySettings
-     * @param TelephonySettings|array{
-     *   defaultTexmlAppID?: string|null, supportsUnauthenticatedWebCalls?: bool|null
-     * } $telephonySettings
-     * @param list<WebhookTool|array{
-     *   type: value-of<Type>, webhook: InferenceEmbeddingWebhookToolParams
-     * }|RetrievalTool|array{
-     *   retrieval: InferenceEmbeddingBucketIDs,
-     *   type: value-of<RetrievalTool\Type>,
-     * }|HandoffTool|array{handoff: Handoff, type?: 'handoff'}|HangupTool|array{
-     *   hangup: HangupToolParams,
-     *   type: value-of<HangupTool\Type>,
-     * }|TransferTool|array{
-     *   transfer: InferenceEmbeddingTransferToolParams,
-     *   type: value-of<TransferTool\Type>,
-     * }|SipReferTool|array{refer: Refer, type?: 'refer'}|DtmfTool|array{
-     *   sendDtmf: array<string,mixed>, type?: 'send_dtmf'
-     * }> $tools
-     * @param TranscriptionSettings|array{
-     *   language?: string|null,
-     *   model?: value-of<Model>|null,
-     *   region?: string|null,
-     *   settings?: TranscriptionSettingsConfig|null,
-     * } $transcription
-     * @param VoiceSettings|array{
-     *   voice: string,
-     *   apiKeyRef?: string|null,
-     *   backgroundAudio?: PredefinedMedia|MediaURL|MediaName|null,
-     *   voiceSpeed?: float|null,
-     * } $voiceSettings
+     * @param InsightSettingsShape $insightSettings
+     * @param MessagingSettingsShape $messagingSettings
+     * @param PrivacySettingsShape $privacySettings
+     * @param TelephonySettingsShape $telephonySettings
+     * @param list<AssistantToolShape> $tools
+     * @param TranscriptionSettingsShape $transcription
+     * @param VoiceSettingsShape $voiceSettings
      */
     public static function with(
         ?string $description = null,
@@ -304,7 +249,7 @@ final class AssistantUpdateParams implements BaseModel
     }
 
     /**
-     * @param InsightSettings|array{insightGroupID?: string|null} $insightSettings
+     * @param InsightSettingsShape $insightSettings
      */
     public function withInsightSettings(
         InsightSettings|array $insightSettings
@@ -338,10 +283,7 @@ final class AssistantUpdateParams implements BaseModel
     }
 
     /**
-     * @param MessagingSettings|array{
-     *   defaultMessagingProfileID?: string|null,
-     *   deliveryStatusWebhookURL?: string|null,
-     * } $messagingSettings
+     * @param MessagingSettingsShape $messagingSettings
      */
     public function withMessagingSettings(
         MessagingSettings|array $messagingSettings
@@ -372,7 +314,7 @@ final class AssistantUpdateParams implements BaseModel
     }
 
     /**
-     * @param PrivacySettings|array{dataRetention?: bool|null} $privacySettings
+     * @param PrivacySettingsShape $privacySettings
      */
     public function withPrivacySettings(
         PrivacySettings|array $privacySettings
@@ -395,9 +337,7 @@ final class AssistantUpdateParams implements BaseModel
     }
 
     /**
-     * @param TelephonySettings|array{
-     *   defaultTexmlAppID?: string|null, supportsUnauthenticatedWebCalls?: bool|null
-     * } $telephonySettings
+     * @param TelephonySettingsShape $telephonySettings
      */
     public function withTelephonySettings(
         TelephonySettings|array $telephonySettings
@@ -411,20 +351,7 @@ final class AssistantUpdateParams implements BaseModel
     /**
      * The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
      *
-     * @param list<WebhookTool|array{
-     *   type: value-of<Type>, webhook: InferenceEmbeddingWebhookToolParams
-     * }|RetrievalTool|array{
-     *   retrieval: InferenceEmbeddingBucketIDs,
-     *   type: value-of<RetrievalTool\Type>,
-     * }|HandoffTool|array{handoff: Handoff, type?: 'handoff'}|HangupTool|array{
-     *   hangup: HangupToolParams,
-     *   type: value-of<HangupTool\Type>,
-     * }|TransferTool|array{
-     *   transfer: InferenceEmbeddingTransferToolParams,
-     *   type: value-of<TransferTool\Type>,
-     * }|SipReferTool|array{refer: Refer, type?: 'refer'}|DtmfTool|array{
-     *   sendDtmf: array<string,mixed>, type?: 'send_dtmf'
-     * }> $tools
+     * @param list<AssistantToolShape> $tools
      */
     public function withTools(array $tools): self
     {
@@ -435,12 +362,7 @@ final class AssistantUpdateParams implements BaseModel
     }
 
     /**
-     * @param TranscriptionSettings|array{
-     *   language?: string|null,
-     *   model?: value-of<Model>|null,
-     *   region?: string|null,
-     *   settings?: TranscriptionSettingsConfig|null,
-     * } $transcription
+     * @param TranscriptionSettingsShape $transcription
      */
     public function withTranscription(
         TranscriptionSettings|array $transcription
@@ -452,12 +374,7 @@ final class AssistantUpdateParams implements BaseModel
     }
 
     /**
-     * @param VoiceSettings|array{
-     *   voice: string,
-     *   apiKeyRef?: string|null,
-     *   backgroundAudio?: PredefinedMedia|MediaURL|MediaName|null,
-     *   voiceSpeed?: float|null,
-     * } $voiceSettings
+     * @param VoiceSettingsShape $voiceSettings
      */
     public function withVoiceSettings(VoiceSettings|array $voiceSettings): self
     {

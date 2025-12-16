@@ -15,7 +15,7 @@ use Telnyx\WirelessBlocklists\WirelessBlocklist\Type;
  *   createdAt?: string|null,
  *   name?: string|null,
  *   recordType?: string|null,
- *   type?: value-of<Type>|null,
+ *   type?: null|Type|value-of<Type>,
  *   updatedAt?: string|null,
  *   values?: list<string>|null,
  * }

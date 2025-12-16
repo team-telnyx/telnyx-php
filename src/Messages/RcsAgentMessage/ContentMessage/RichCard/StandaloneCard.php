@@ -10,16 +10,16 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\RcsAgentMessage\ContentMessage\RichCard\StandaloneCard\CardOrientation;
 use Telnyx\Messages\RcsAgentMessage\ContentMessage\RichCard\StandaloneCard\ThumbnailImageAlignment;
 use Telnyx\Messages\RcsCardContent;
-use Telnyx\Messages\RcsCardContent\Media;
-use Telnyx\Messages\RcsSuggestion;
 
 /**
  * Standalone card.
  *
+ * @phpstan-import-type RcsCardContentShape from \Telnyx\Messages\RcsCardContent
+ *
  * @phpstan-type StandaloneCardShape = array{
- *   cardContent: RcsCardContent,
- *   cardOrientation: value-of<CardOrientation>,
- *   thumbnailImageAlignment: value-of<ThumbnailImageAlignment>,
+ *   cardContent: RcsCardContent|RcsCardContentShape,
+ *   cardOrientation: CardOrientation|value-of<CardOrientation>,
+ *   thumbnailImageAlignment: ThumbnailImageAlignment|value-of<ThumbnailImageAlignment>,
  * }
  */
 final class StandaloneCard implements BaseModel
@@ -75,12 +75,7 @@ final class StandaloneCard implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RcsCardContent|array{
-     *   description?: string|null,
-     *   media?: Media|null,
-     *   suggestions?: list<RcsSuggestion>|null,
-     *   title?: string|null,
-     * } $cardContent
+     * @param RcsCardContentShape $cardContent
      * @param CardOrientation|value-of<CardOrientation> $cardOrientation
      * @param ThumbnailImageAlignment|value-of<ThumbnailImageAlignment> $thumbnailImageAlignment
      */
@@ -99,12 +94,7 @@ final class StandaloneCard implements BaseModel
     }
 
     /**
-     * @param RcsCardContent|array{
-     *   description?: string|null,
-     *   media?: Media|null,
-     *   suggestions?: list<RcsSuggestion>|null,
-     *   title?: string|null,
-     * } $cardContent
+     * @param RcsCardContentShape $cardContent
      */
     public function withCardContent(RcsCardContent|array $cardContent): self
     {

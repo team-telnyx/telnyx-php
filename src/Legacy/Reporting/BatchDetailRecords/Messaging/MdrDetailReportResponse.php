@@ -8,28 +8,27 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\CldFilter;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\CliFilter;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\FilterType;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MdrDetailReportResponse\Direction;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MdrDetailReportResponse\RecordType;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MdrDetailReportResponse\Status;
 
 /**
+ * @phpstan-import-type FilterShape from \Telnyx\Legacy\Reporting\BatchDetailRecords\Filter
+ *
  * @phpstan-type MdrDetailReportResponseShape = array{
  *   id?: string|null,
  *   connections?: list<int>|null,
  *   createdAt?: \DateTimeInterface|null,
- *   directions?: list<value-of<Direction>>|null,
+ *   directions?: list<Direction|value-of<Direction>>|null,
  *   endDate?: \DateTimeInterface|null,
- *   filters?: list<Filter>|null,
+ *   filters?: list<FilterShape>|null,
  *   profiles?: list<string>|null,
  *   recordType?: string|null,
- *   recordTypes?: list<value-of<RecordType>>|null,
+ *   recordTypes?: list<RecordType|value-of<RecordType>>|null,
  *   reportName?: string|null,
  *   reportURL?: string|null,
  *   startDate?: \DateTimeInterface|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */
@@ -105,15 +104,7 @@ final class MdrDetailReportResponse implements BaseModel
      *
      * @param list<int> $connections
      * @param list<Direction|value-of<Direction>> $directions
-     * @param list<Filter|array{
-     *   billingGroup?: string|null,
-     *   cld?: string|null,
-     *   cldFilter?: value-of<CldFilter>|null,
-     *   cli?: string|null,
-     *   cliFilter?: value-of<CliFilter>|null,
-     *   filterType?: value-of<FilterType>|null,
-     *   tagsList?: string|null,
-     * }> $filters
+     * @param list<FilterShape> $filters
      * @param list<string> $profiles
      * @param list<RecordType|value-of<RecordType>> $recordTypes
      * @param Status|value-of<Status> $status
@@ -204,15 +195,7 @@ final class MdrDetailReportResponse implements BaseModel
     }
 
     /**
-     * @param list<Filter|array{
-     *   billingGroup?: string|null,
-     *   cld?: string|null,
-     *   cldFilter?: value-of<CldFilter>|null,
-     *   cli?: string|null,
-     *   cliFilter?: value-of<CliFilter>|null,
-     *   filterType?: value-of<FilterType>|null,
-     *   tagsList?: string|null,
-     * }> $filters
+     * @param list<FilterShape> $filters
      */
     public function withFilters(array $filters): self
     {

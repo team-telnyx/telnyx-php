@@ -13,7 +13,7 @@ use Telnyx\SimpleSimCard\DataLimit\Unit;
  * The SIM card individual data limit configuration.
  *
  * @phpstan-type DataLimitShape = array{
- *   amount?: string|null, unit?: value-of<Unit>|null
+ *   amount?: string|null, unit?: null|Unit|value-of<Unit>
  * }
  */
 final class DataLimit implements BaseModel

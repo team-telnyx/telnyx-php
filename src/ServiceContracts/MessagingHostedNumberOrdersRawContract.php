@@ -26,7 +26,7 @@ interface MessagingHostedNumberOrdersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MessagingHostedNumberOrderCreateParams $params
+     * @param array<string,mixed>|MessagingHostedNumberOrderCreateParams $params
      *
      * @return BaseResponse<MessagingHostedNumberOrderNewResponse>
      *
@@ -54,7 +54,7 @@ interface MessagingHostedNumberOrdersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MessagingHostedNumberOrderListParams $params
+     * @param array<string,mixed>|MessagingHostedNumberOrderListParams $params
      *
      * @return BaseResponse<DefaultPagination<MessagingHostedNumberOrder>>
      *
@@ -82,7 +82,7 @@ interface MessagingHostedNumberOrdersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|MessagingHostedNumberOrderCheckEligibilityParams $params
+     * @param array<string,mixed>|MessagingHostedNumberOrderCheckEligibilityParams $params
      *
      * @return BaseResponse<MessagingHostedNumberOrderCheckEligibilityResponse>
      *
@@ -97,7 +97,7 @@ interface MessagingHostedNumberOrdersRawContract
      * @api
      *
      * @param string $id order ID to have a verification code created
-     * @param array<mixed>|MessagingHostedNumberOrderCreateVerificationCodesParams $params
+     * @param array<string,mixed>|MessagingHostedNumberOrderCreateVerificationCodesParams $params
      *
      * @return BaseResponse<MessagingHostedNumberOrderNewVerificationCodesResponse>
      *
@@ -113,7 +113,7 @@ interface MessagingHostedNumberOrdersRawContract
      * @api
      *
      * @param string $id order ID related to the validation codes
-     * @param array<mixed>|MessagingHostedNumberOrderValidateCodesParams $params
+     * @param array<string,mixed>|MessagingHostedNumberOrderValidateCodesParams $params
      *
      * @return BaseResponse<MessagingHostedNumberOrderValidateCodesResponse>
      *

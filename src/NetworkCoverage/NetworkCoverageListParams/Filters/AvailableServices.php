@@ -12,6 +12,10 @@ use Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters\AvailableServices\C
 
 /**
  * Filter by exact available service match.
+ *
+ * @phpstan-import-type ContainsShape from \Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters\AvailableServices\Contains
+ *
+ * @phpstan-type AvailableServicesShape = AvailableService|ContainsShape|value-of<AvailableService>
  */
 final class AvailableServices implements ConverterSource
 {

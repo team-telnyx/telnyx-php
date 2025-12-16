@@ -11,11 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Response model for canary deploy operations.
  *
+ * @phpstan-import-type VersionConfigShape from \Telnyx\AI\Assistants\CanaryDeploys\VersionConfig
+ *
  * @phpstan-type CanaryDeployResponseShape = array{
  *   assistantID: string,
  *   createdAt: \DateTimeInterface,
  *   updatedAt: \DateTimeInterface,
- *   versions: list<VersionConfig>,
+ *   versions: list<VersionConfigShape>,
  * }
  */
 final class CanaryDeployResponse implements BaseModel
@@ -66,7 +68,7 @@ final class CanaryDeployResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VersionConfig|array{percentage: float, versionID: string}> $versions
+     * @param list<VersionConfigShape> $versions
      */
     public static function with(
         string $assistantID,
@@ -109,7 +111,7 @@ final class CanaryDeployResponse implements BaseModel
     }
 
     /**
-     * @param list<VersionConfig|array{percentage: float, versionID: string}> $versions
+     * @param list<VersionConfigShape> $versions
      */
     public function withVersions(array $versions): self
     {

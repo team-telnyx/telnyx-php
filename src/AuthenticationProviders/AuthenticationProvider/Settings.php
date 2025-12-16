@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type SettingsShape = array{
  *   assertionConsumerServiceURL?: string|null,
  *   idpCertFingerprint?: string|null,
- *   idpCertFingerprintAlgorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
+ *   idpCertFingerprintAlgorithm?: null|IdpCertFingerprintAlgorithm|value-of<IdpCertFingerprintAlgorithm>,
  *   idpEntityID?: string|null,
  *   idpSSOTargetURL?: string|null,
  *   nameIdentifierFormat?: string|null,

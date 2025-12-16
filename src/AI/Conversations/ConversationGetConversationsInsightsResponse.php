@@ -6,15 +6,16 @@ namespace Telnyx\AI\Conversations;
 
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\Meta;
 use Telnyx\AI\Conversations\ConversationGetConversationsInsightsResponse\Data;
-use Telnyx\AI\Conversations\ConversationGetConversationsInsightsResponse\Data\ConversationInsight;
-use Telnyx\AI\Conversations\ConversationGetConversationsInsightsResponse\Data\Status;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\AI\Conversations\ConversationGetConversationsInsightsResponse\Data
+ * @phpstan-import-type MetaShape from \Telnyx\AI\Assistants\Tests\TestSuites\Runs\Meta
+ *
  * @phpstan-type ConversationGetConversationsInsightsResponseShape = array{
- *   data: list<Data>, meta: Meta
+ *   data: list<DataShape>, meta: Meta|MetaShape
  * }
  */
 final class ConversationGetConversationsInsightsResponse implements BaseModel
@@ -53,15 +54,8 @@ final class ConversationGetConversationsInsightsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   id: string,
-     *   conversationInsights: list<ConversationInsight>,
-     *   createdAt: \DateTimeInterface,
-     *   status: value-of<Status>,
-     * }> $data
-     * @param Meta|array{
-     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
-     * } $meta
+     * @param list<DataShape> $data
+     * @param MetaShape $meta
      */
     public static function with(array $data, Meta|array $meta): self
     {
@@ -74,12 +68,7 @@ final class ConversationGetConversationsInsightsResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   id: string,
-     *   conversationInsights: list<ConversationInsight>,
-     *   createdAt: \DateTimeInterface,
-     *   status: value-of<Status>,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {
@@ -90,9 +79,7 @@ final class ConversationGetConversationsInsightsResponse implements BaseModel
     }
 
     /**
-     * @param Meta|array{
-     *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
-     * } $meta
+     * @param MetaShape $meta
      */
     public function withMeta(Meta|array $meta): self
     {

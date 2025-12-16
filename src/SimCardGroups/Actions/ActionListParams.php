@@ -17,11 +17,11 @@ use Telnyx\SimCardGroups\Actions\ActionListParams\FilterType;
  * @see Telnyx\Services\SimCardGroups\ActionsService::list()
  *
  * @phpstan-type ActionListParamsShape = array{
- *   filterSimCardGroupID?: string,
- *   filterStatus?: FilterStatus|value-of<FilterStatus>,
- *   filterType?: FilterType|value-of<FilterType>,
- *   pageNumber?: int,
- *   pageSize?: int,
+ *   filterSimCardGroupID?: string|null,
+ *   filterStatus?: null|FilterStatus|value-of<FilterStatus>,
+ *   filterType?: null|FilterType|value-of<FilterType>,
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
  * }
  */
 final class ActionListParams implements BaseModel

@@ -15,9 +15,9 @@ use Telnyx\MessagingURLDomains\MessagingURLDomainListParams\Page;
  *
  * @see Telnyx\Services\MessagingURLDomainsService::list()
  *
- * @phpstan-type MessagingURLDomainListParamsShape = array{
- *   page?: Page|array{number?: int|null, size?: int|null}
- * }
+ * @phpstan-import-type PageShape from \Telnyx\MessagingURLDomains\MessagingURLDomainListParams\Page
+ *
+ * @phpstan-type MessagingURLDomainListParamsShape = array{page?: PageShape|null}
  */
 final class MessagingURLDomainListParams implements BaseModel
 {
@@ -41,7 +41,7 @@ final class MessagingURLDomainListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public static function with(Page|array|null $page = null): self
     {
@@ -55,7 +55,7 @@ final class MessagingURLDomainListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

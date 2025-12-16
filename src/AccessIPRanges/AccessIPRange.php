@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type AccessIPRangeShape = array{
  *   id: string,
  *   cidrBlock: string,
- *   status: value-of<CloudflareSyncStatus>,
+ *   status: CloudflareSyncStatus|value-of<CloudflareSyncStatus>,
  *   userID: string,
  *   createdAt?: \DateTimeInterface|null,
  *   description?: string|null,

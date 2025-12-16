@@ -9,7 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RequirementTypes\RequirementTypeListParams\Filter;
-use Telnyx\RequirementTypes\RequirementTypeListParams\Filter\Name;
 use Telnyx\RequirementTypes\RequirementTypeListParams\Sort;
 
 /**
@@ -17,8 +16,10 @@ use Telnyx\RequirementTypes\RequirementTypeListParams\Sort;
  *
  * @see Telnyx\Services\RequirementTypesService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\RequirementTypes\RequirementTypeListParams\Filter
+ *
  * @phpstan-type RequirementTypeListParamsShape = array{
- *   filter?: Filter|array{name?: Name|null}, sort?: list<Sort|value-of<Sort>>
+ *   filter?: FilterShape|null, sort?: list<Sort|value-of<Sort>>|null
  * }
  */
 final class RequirementTypeListParams implements BaseModel
@@ -51,7 +52,7 @@ final class RequirementTypeListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{name?: Name|null} $filter
+     * @param FilterShape $filter
      * @param list<Sort|value-of<Sort>> $sort
      */
     public static function with(
@@ -69,7 +70,7 @@ final class RequirementTypeListParams implements BaseModel
     /**
      * Consolidated filter parameter for requirement types (deepObject style). Originally: filter[name].
      *
-     * @param Filter|array{name?: Name|null} $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

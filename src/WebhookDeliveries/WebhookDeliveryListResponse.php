@@ -8,23 +8,24 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Attempt;
-use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Attempt\HTTP;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Status;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Webhook;
-use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Webhook\RecordType;
 
 /**
  * Record of all attempts to deliver a webhook.
  *
+ * @phpstan-import-type AttemptShape from \Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Attempt
+ * @phpstan-import-type WebhookShape from \Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Webhook
+ *
  * @phpstan-type WebhookDeliveryListResponseShape = array{
  *   id?: string|null,
- *   attempts?: list<Attempt>|null,
+ *   attempts?: list<AttemptShape>|null,
  *   finishedAt?: \DateTimeInterface|null,
  *   recordType?: string|null,
  *   startedAt?: \DateTimeInterface|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   userID?: string|null,
- *   webhook?: Webhook|null,
+ *   webhook?: null|Webhook|WebhookShape,
  * }
  */
 final class WebhookDeliveryListResponse implements BaseModel
@@ -94,21 +95,9 @@ final class WebhookDeliveryListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Attempt|array{
-     *   errors?: list<int>|null,
-     *   finishedAt?: \DateTimeInterface|null,
-     *   http?: HTTP|null,
-     *   startedAt?: \DateTimeInterface|null,
-     *   status?: value-of<Attempt\Status>|null,
-     * }> $attempts
+     * @param list<AttemptShape> $attempts
      * @param Status|value-of<Status> $status
-     * @param Webhook|array{
-     *   id?: string|null,
-     *   eventType?: string|null,
-     *   occurredAt?: \DateTimeInterface|null,
-     *   payload?: array<string,mixed>|null,
-     *   recordType?: value-of<RecordType>|null,
-     * } $webhook
+     * @param WebhookShape $webhook
      */
     public static function with(
         ?string $id = null,
@@ -148,13 +137,7 @@ final class WebhookDeliveryListResponse implements BaseModel
     /**
      * Detailed delivery attempts, ordered by most recent.
      *
-     * @param list<Attempt|array{
-     *   errors?: list<int>|null,
-     *   finishedAt?: \DateTimeInterface|null,
-     *   http?: HTTP|null,
-     *   startedAt?: \DateTimeInterface|null,
-     *   status?: value-of<Attempt\Status>|null,
-     * }> $attempts
+     * @param list<AttemptShape> $attempts
      */
     public function withAttempts(array $attempts): self
     {
@@ -224,13 +207,7 @@ final class WebhookDeliveryListResponse implements BaseModel
     /**
      * Original webhook JSON data. Payload fields vary according to event type.
      *
-     * @param Webhook|array{
-     *   id?: string|null,
-     *   eventType?: string|null,
-     *   occurredAt?: \DateTimeInterface|null,
-     *   payload?: array<string,mixed>|null,
-     *   recordType?: value-of<RecordType>|null,
-     * } $webhook
+     * @param WebhookShape $webhook
      */
     public function withWebhook(Webhook|array $webhook): self
     {

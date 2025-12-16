@@ -13,9 +13,12 @@ use Telnyx\Rooms\RoomListParams\Filter\DateUpdatedAt;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[unique_name].
  *
+ * @phpstan-import-type DateCreatedAtShape from \Telnyx\Rooms\RoomListParams\Filter\DateCreatedAt
+ * @phpstan-import-type DateUpdatedAtShape from \Telnyx\Rooms\RoomListParams\Filter\DateUpdatedAt
+ *
  * @phpstan-type FilterShape = array{
- *   dateCreatedAt?: DateCreatedAt|null,
- *   dateUpdatedAt?: DateUpdatedAt|null,
+ *   dateCreatedAt?: null|DateCreatedAt|DateCreatedAtShape,
+ *   dateUpdatedAt?: null|DateUpdatedAt|DateUpdatedAtShape,
  *   uniqueName?: string|null,
  * }
  */
@@ -46,12 +49,8 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DateCreatedAt|array{
-     *   eq?: string|null, gte?: string|null, lte?: string|null
-     * } $dateCreatedAt
-     * @param DateUpdatedAt|array{
-     *   eq?: string|null, gte?: string|null, lte?: string|null
-     * } $dateUpdatedAt
+     * @param DateCreatedAtShape $dateCreatedAt
+     * @param DateUpdatedAtShape $dateUpdatedAt
      */
     public static function with(
         DateCreatedAt|array|null $dateCreatedAt = null,
@@ -68,9 +67,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param DateCreatedAt|array{
-     *   eq?: string|null, gte?: string|null, lte?: string|null
-     * } $dateCreatedAt
+     * @param DateCreatedAtShape $dateCreatedAt
      */
     public function withDateCreatedAt(DateCreatedAt|array $dateCreatedAt): self
     {
@@ -81,9 +78,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param DateUpdatedAt|array{
-     *   eq?: string|null, gte?: string|null, lte?: string|null
-     * } $dateUpdatedAt
+     * @param DateUpdatedAtShape $dateUpdatedAt
      */
     public function withDateUpdatedAt(DateUpdatedAt|array $dateUpdatedAt): self
     {

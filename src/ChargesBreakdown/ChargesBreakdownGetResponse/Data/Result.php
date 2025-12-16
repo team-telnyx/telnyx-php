@@ -10,11 +10,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type ServiceShape from \Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse\Data\Result\Service
+ *
  * @phpstan-type ResultShape = array{
  *   chargeType: string,
  *   serviceOwnerEmail: string,
  *   serviceOwnerUserID: string,
- *   services: list<Service>,
+ *   services: list<ServiceShape>,
  *   tn: string,
  * }
  */
@@ -90,9 +92,7 @@ final class Result implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Service|array{
-     *   cost: string, costType: string, name: string
-     * }> $services
+     * @param list<ServiceShape> $services
      */
     public static function with(
         string $chargeType,
@@ -148,9 +148,7 @@ final class Result implements BaseModel
     /**
      * List of services associated with this number.
      *
-     * @param list<Service|array{
-     *   cost: string, costType: string, name: string
-     * }> $services
+     * @param list<ServiceShape> $services
      */
     public function withServices(array $services): self
     {

@@ -8,13 +8,12 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\ConferenceParticipantPlaybackStartedWebhookEvent\Data;
-use Telnyx\Webhooks\ConferenceParticipantPlaybackStartedWebhookEvent\Data\EventType;
-use Telnyx\Webhooks\ConferenceParticipantPlaybackStartedWebhookEvent\Data\Payload;
-use Telnyx\Webhooks\ConferenceParticipantPlaybackStartedWebhookEvent\Data\RecordType;
 
 /**
+ * @phpstan-import-type DataShape from \Telnyx\Webhooks\ConferenceParticipantPlaybackStartedWebhookEvent\Data
+ *
  * @phpstan-type ConferenceParticipantPlaybackStartedWebhookEventShape = array{
- *   data?: Data|null
+ *   data?: null|Data|DataShape
  * }
  */
 final class ConferenceParticipantPlaybackStartedWebhookEvent implements BaseModel
@@ -35,12 +34,7 @@ final class ConferenceParticipantPlaybackStartedWebhookEvent implements BaseMode
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|array{
-     *   id?: string|null,
-     *   eventType?: value-of<EventType>|null,
-     *   payload?: Payload|null,
-     *   recordType?: value-of<RecordType>|null,
-     * } $data
+     * @param DataShape $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -52,12 +46,7 @@ final class ConferenceParticipantPlaybackStartedWebhookEvent implements BaseMode
     }
 
     /**
-     * @param Data|array{
-     *   id?: string|null,
-     *   eventType?: value-of<EventType>|null,
-     *   payload?: Payload|null,
-     *   recordType?: value-of<RecordType>|null,
-     * } $data
+     * @param DataShape $data
      */
     public function withData(Data|array $data): self
     {

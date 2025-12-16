@@ -10,6 +10,12 @@ use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 
+/**
+ * @phpstan-import-type ComparativeLineShape from \Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\ComparativeLine
+ * @phpstan-import-type SimpleLineShape from \Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\SimpleLine
+ *
+ * @phpstan-type LineShape = ComparativeLineShape|SimpleLineShape
+ */
 final class Line implements ConverterSource
 {
     use SdkUnion;

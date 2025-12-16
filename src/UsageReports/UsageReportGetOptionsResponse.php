@@ -8,12 +8,15 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\UsageReports\UsageReportGetOptionsResponse\Data;
-use Telnyx\UsageReports\UsageReportGetOptionsResponse\Data\RecordType;
 
 /**
  * An object following one of the schemas published in https://developers.telnyx.com/docs/api/v2/detail-records.
  *
- * @phpstan-type UsageReportGetOptionsResponseShape = array{data?: list<Data>|null}
+ * @phpstan-import-type DataShape from \Telnyx\UsageReports\UsageReportGetOptionsResponse\Data
+ *
+ * @phpstan-type UsageReportGetOptionsResponseShape = array{
+ *   data?: list<DataShape>|null
+ * }
  */
 final class UsageReportGetOptionsResponse implements BaseModel
 {
@@ -38,12 +41,7 @@ final class UsageReportGetOptionsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   product?: string|null,
-     *   productDimensions?: list<string>|null,
-     *   productMetrics?: list<string>|null,
-     *   recordTypes?: list<RecordType>|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public static function with(?array $data = null): self
     {
@@ -57,12 +55,7 @@ final class UsageReportGetOptionsResponse implements BaseModel
     /**
      * Collection of product description.
      *
-     * @param list<Data|array{
-     *   product?: string|null,
-     *   productDimensions?: list<string>|null,
-     *   productMetrics?: list<string>|null,
-     *   recordTypes?: list<RecordType>|null,
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {

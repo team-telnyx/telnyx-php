@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Rooms\ActionsService::refreshClientToken()
  *
  * @phpstan-type ActionRefreshClientTokenParamsShape = array{
- *   refreshToken: string, tokenTtlSecs?: int
+ *   refreshToken: string, tokenTtlSecs?: int|null
  * }
  */
 final class ActionRefreshClientTokenParams implements BaseModel

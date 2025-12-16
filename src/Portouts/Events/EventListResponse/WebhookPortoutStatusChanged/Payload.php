@@ -19,7 +19,7 @@ use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutStatusChanged\Payload
  *   phoneNumbers?: list<string>|null,
  *   rejectionReason?: string|null,
  *   spid?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   subscriberName?: string|null,
  *   userID?: string|null,
  * }

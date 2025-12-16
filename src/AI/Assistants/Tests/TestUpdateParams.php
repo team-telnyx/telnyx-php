@@ -15,15 +15,17 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\Assistants\TestsService::update()
  *
+ * @phpstan-import-type RubricShape from \Telnyx\AI\Assistants\Tests\TestUpdateParams\Rubric
+ *
  * @phpstan-type TestUpdateParamsShape = array{
- *   description?: string,
- *   destination?: string,
- *   instructions?: string,
- *   maxDurationSeconds?: int,
- *   name?: string,
- *   rubric?: list<Rubric|array{criteria: string, name: string}>,
- *   telnyxConversationChannel?: TelnyxConversationChannel|value-of<TelnyxConversationChannel>,
- *   testSuite?: string,
+ *   description?: string|null,
+ *   destination?: string|null,
+ *   instructions?: string|null,
+ *   maxDurationSeconds?: int|null,
+ *   name?: string|null,
+ *   rubric?: list<RubricShape>|null,
+ *   telnyxConversationChannel?: null|TelnyxConversationChannel|value-of<TelnyxConversationChannel>,
+ *   testSuite?: string|null,
  * }
  */
 final class TestUpdateParams implements BaseModel
@@ -97,7 +99,7 @@ final class TestUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Rubric|array{criteria: string, name: string}> $rubric
+     * @param list<RubricShape> $rubric
      * @param TelnyxConversationChannel|value-of<TelnyxConversationChannel> $telnyxConversationChannel
      */
     public static function with(
@@ -182,7 +184,7 @@ final class TestUpdateParams implements BaseModel
     /**
      * Updated evaluation criteria for assessing assistant performance.
      *
-     * @param list<Rubric|array{criteria: string, name: string}> $rubric
+     * @param list<RubricShape> $rubric
      */
     public function withRubric(array $rubric): self
     {

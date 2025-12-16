@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\ShortCodesService::update()
  *
  * @phpstan-type ShortCodeUpdateParamsShape = array{
- *   messagingProfileID: string, tags?: list<string>
+ *   messagingProfileID: string, tags?: list<string>|null
  * }
  */
 final class ShortCodeUpdateParams implements BaseModel

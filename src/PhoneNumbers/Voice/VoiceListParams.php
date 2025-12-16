@@ -9,8 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\Voice\VoiceListParams\Filter;
-use Telnyx\PhoneNumbers\Voice\VoiceListParams\Filter\ConnectionName;
-use Telnyx\PhoneNumbers\Voice\VoiceListParams\Filter\VoiceUsagePaymentMethod;
 use Telnyx\PhoneNumbers\Voice\VoiceListParams\Page;
 use Telnyx\PhoneNumbers\Voice\VoiceListParams\Sort;
 
@@ -19,15 +17,13 @@ use Telnyx\PhoneNumbers\Voice\VoiceListParams\Sort;
  *
  * @see Telnyx\Services\PhoneNumbers\VoiceService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\Voice\VoiceListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PhoneNumbers\Voice\VoiceListParams\Page
+ *
  * @phpstan-type VoiceListParamsShape = array{
- *   filter?: Filter|array{
- *     connectionName?: ConnectionName|null,
- *     customerReference?: string|null,
- *     phoneNumber?: string|null,
- *     voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
- *   },
- *   page?: Page|array{number?: int|null, size?: int|null},
- *   sort?: Sort|value-of<Sort>,
+ *   filter?: FilterShape|null,
+ *   page?: PageShape|null,
+ *   sort?: null|Sort|value-of<Sort>,
  * }
  */
 final class VoiceListParams implements BaseModel
@@ -66,13 +62,8 @@ final class VoiceListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   connectionName?: ConnectionName|null,
-     *   customerReference?: string|null,
-     *   phoneNumber?: string|null,
-     *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param FilterShape $filter
+     * @param PageShape $page
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
@@ -92,12 +83,7 @@ final class VoiceListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[connection_name], filter[customer_reference], filter[voice.usage_payment_method].
      *
-     * @param Filter|array{
-     *   connectionName?: ConnectionName|null,
-     *   customerReference?: string|null,
-     *   phoneNumber?: string|null,
-     *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -110,7 +96,7 @@ final class VoiceListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {

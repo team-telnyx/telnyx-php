@@ -17,8 +17,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *   eventTimestamp: string,
  *   metadata: array<string,mixed>,
  *   name: string,
- *   recordType: value-of<RecordType>,
- *   type: value-of<Type>,
+ *   recordType: RecordType|value-of<RecordType>,
+ *   type: Type|value-of<Type>,
  * }
  */
 final class CallEventListResponse implements BaseModel

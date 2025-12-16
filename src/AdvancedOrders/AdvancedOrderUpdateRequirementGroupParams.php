@@ -17,14 +17,14 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AdvancedOrdersService::updateRequirementGroup()
  *
  * @phpstan-type AdvancedOrderUpdateRequirementGroupParamsShape = array{
- *   areaCode?: string,
- *   comments?: string,
- *   countryCode?: string,
- *   customerReference?: string,
- *   features?: list<Feature|value-of<Feature>>,
- *   phoneNumberType?: PhoneNumberType|value-of<PhoneNumberType>,
- *   quantity?: int,
- *   requirementGroupID?: string,
+ *   areaCode?: string|null,
+ *   comments?: string|null,
+ *   countryCode?: string|null,
+ *   customerReference?: string|null,
+ *   features?: list<Feature|value-of<Feature>>|null,
+ *   phoneNumberType?: null|PhoneNumberType|value-of<PhoneNumberType>,
+ *   quantity?: int|null,
+ *   requirementGroupID?: string|null,
  * }
  */
 final class AdvancedOrderUpdateRequirementGroupParams implements BaseModel

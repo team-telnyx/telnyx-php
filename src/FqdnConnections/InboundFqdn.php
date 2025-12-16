@@ -15,22 +15,22 @@ use Telnyx\FqdnConnections\InboundFqdn\SipSubdomainReceiveSettings;
 
 /**
  * @phpstan-type InboundFqdnShape = array{
- *   aniNumberFormat?: value-of<AniNumberFormat>|null,
+ *   aniNumberFormat?: null|AniNumberFormat|value-of<AniNumberFormat>,
  *   channelLimit?: int|null,
  *   codecs?: list<string>|null,
  *   defaultPrimaryFqdnID?: string|null,
- *   defaultRoutingMethod?: value-of<DefaultRoutingMethod>|null,
+ *   defaultRoutingMethod?: null|DefaultRoutingMethod|value-of<DefaultRoutingMethod>,
  *   defaultSecondaryFqdnID?: string|null,
  *   defaultTertiaryFqdnID?: string|null,
- *   dnisNumberFormat?: value-of<DnisNumberFormat>|null,
+ *   dnisNumberFormat?: null|DnisNumberFormat|value-of<DnisNumberFormat>,
  *   generateRingbackTone?: bool|null,
  *   isupHeadersEnabled?: bool|null,
  *   prackEnabled?: bool|null,
  *   shakenStirEnabled?: bool|null,
  *   sipCompactHeadersEnabled?: bool|null,
- *   sipRegion?: value-of<SipRegion>|null,
+ *   sipRegion?: null|SipRegion|value-of<SipRegion>,
  *   sipSubdomain?: string|null,
- *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
+ *   sipSubdomainReceiveSettings?: null|SipSubdomainReceiveSettings|value-of<SipSubdomainReceiveSettings>,
  *   timeout1xxSecs?: int|null,
  *   timeout2xxSecs?: int|null,
  * }

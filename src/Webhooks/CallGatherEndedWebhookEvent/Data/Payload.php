@@ -18,7 +18,7 @@ use Telnyx\Webhooks\CallGatherEndedWebhookEvent\Data\Payload\Status;
  *   connectionID?: string|null,
  *   digits?: string|null,
  *   from?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   to?: string|null,
  * }
  */

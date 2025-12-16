@@ -24,7 +24,7 @@ interface ExternalConnectionsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ExternalConnectionCreateParams $params
+     * @param array<string,mixed>|ExternalConnectionCreateParams $params
      *
      * @return BaseResponse<ExternalConnectionNewResponse>
      *
@@ -53,7 +53,7 @@ interface ExternalConnectionsRawContract
      * @api
      *
      * @param string $id identifies the resource
-     * @param array<mixed>|ExternalConnectionUpdateParams $params
+     * @param array<string,mixed>|ExternalConnectionUpdateParams $params
      *
      * @return BaseResponse<ExternalConnectionUpdateResponse>
      *
@@ -68,7 +68,7 @@ interface ExternalConnectionsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ExternalConnectionListParams $params
+     * @param array<string,mixed>|ExternalConnectionListParams $params
      *
      * @return BaseResponse<DefaultPagination<ExternalConnection>>
      *
@@ -97,7 +97,7 @@ interface ExternalConnectionsRawContract
      * @api
      *
      * @param string $locationID Path param: The ID of the location to update
-     * @param array<mixed>|ExternalConnectionUpdateLocationParams $params
+     * @param array<string,mixed>|ExternalConnectionUpdateLocationParams $params
      *
      * @return BaseResponse<ExternalConnectionUpdateLocationResponse>
      *

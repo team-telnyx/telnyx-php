@@ -9,17 +9,21 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse\Data\GlobalIP;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse\Data\GlobalIPAssignment;
-use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse\Data\GlobalIPAssignment\WireguardPeer;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse\Data\Received;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse\Data\Transmitted;
 
 /**
+ * @phpstan-import-type GlobalIPShape from \Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse\Data\GlobalIP
+ * @phpstan-import-type GlobalIPAssignmentShape from \Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse\Data\GlobalIPAssignment
+ * @phpstan-import-type ReceivedShape from \Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse\Data\Received
+ * @phpstan-import-type TransmittedShape from \Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse\Data\Transmitted
+ *
  * @phpstan-type DataShape = array{
- *   globalIP?: GlobalIP|null,
- *   globalIPAssignment?: GlobalIPAssignment|null,
- *   received?: Received|null,
+ *   globalIP?: null|GlobalIP|GlobalIPShape,
+ *   globalIPAssignment?: null|GlobalIPAssignment|GlobalIPAssignmentShape,
+ *   received?: null|Received|ReceivedShape,
  *   timestamp?: \DateTimeInterface|null,
- *   transmitted?: Transmitted|null,
+ *   transmitted?: null|Transmitted|TransmittedShape,
  * }
  */
 final class Data implements BaseModel
@@ -55,14 +59,10 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param GlobalIP|array{id?: string|null, ipAddress?: string|null} $globalIP
-     * @param GlobalIPAssignment|array{
-     *   id?: string|null,
-     *   wireguardPeer?: WireguardPeer|null,
-     *   wireguardPeerID?: string|null,
-     * } $globalIPAssignment
-     * @param Received|array{amount?: float|null, unit?: string|null} $received
-     * @param Transmitted|array{amount?: float|null, unit?: string|null} $transmitted
+     * @param GlobalIPShape $globalIP
+     * @param GlobalIPAssignmentShape $globalIPAssignment
+     * @param ReceivedShape $received
+     * @param TransmittedShape $transmitted
      */
     public static function with(
         GlobalIP|array|null $globalIP = null,
@@ -83,7 +83,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param GlobalIP|array{id?: string|null, ipAddress?: string|null} $globalIP
+     * @param GlobalIPShape $globalIP
      */
     public function withGlobalIP(GlobalIP|array $globalIP): self
     {
@@ -94,11 +94,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param GlobalIPAssignment|array{
-     *   id?: string|null,
-     *   wireguardPeer?: WireguardPeer|null,
-     *   wireguardPeerID?: string|null,
-     * } $globalIPAssignment
+     * @param GlobalIPAssignmentShape $globalIPAssignment
      */
     public function withGlobalIPAssignment(
         GlobalIPAssignment|array $globalIPAssignment
@@ -110,7 +106,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param Received|array{amount?: float|null, unit?: string|null} $received
+     * @param ReceivedShape $received
      */
     public function withReceived(Received|array $received): self
     {
@@ -132,7 +128,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param Transmitted|array{amount?: float|null, unit?: string|null} $transmitted
+     * @param TransmittedShape $transmitted
      */
     public function withTransmitted(Transmitted|array $transmitted): self
     {

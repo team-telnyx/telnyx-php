@@ -15,18 +15,18 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\ConversationsService::list()
  *
  * @phpstan-type ConversationListParamsShape = array{
- *   id?: string,
- *   createdAt?: string,
- *   lastMessageAt?: string,
- *   limit?: int,
- *   metadataAssistantID?: string,
- *   metadataCallControlID?: string,
- *   metadataTelnyxAgentTarget?: string,
- *   metadataTelnyxConversationChannel?: string,
- *   metadataTelnyxEndUserTarget?: string,
- *   name?: string,
- *   or?: string,
- *   order?: string,
+ *   id?: string|null,
+ *   createdAt?: string|null,
+ *   lastMessageAt?: string|null,
+ *   limit?: int|null,
+ *   metadataAssistantID?: string|null,
+ *   metadataCallControlID?: string|null,
+ *   metadataTelnyxAgentTarget?: string|null,
+ *   metadataTelnyxConversationChannel?: string|null,
+ *   metadataTelnyxEndUserTarget?: string|null,
+ *   name?: string|null,
+ *   or?: string|null,
+ *   order?: string|null,
  * }
  */
 final class ConversationListParams implements BaseModel

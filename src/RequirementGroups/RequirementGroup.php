@@ -11,6 +11,8 @@ use Telnyx\RequirementGroups\RequirementGroup\RegulatoryRequirement;
 use Telnyx\RequirementGroups\RequirementGroup\Status;
 
 /**
+ * @phpstan-import-type RegulatoryRequirementShape from \Telnyx\RequirementGroups\RequirementGroup\RegulatoryRequirement
+ *
  * @phpstan-type RequirementGroupShape = array{
  *   id?: string|null,
  *   action?: string|null,
@@ -19,8 +21,8 @@ use Telnyx\RequirementGroups\RequirementGroup\Status;
  *   customerReference?: string|null,
  *   phoneNumberType?: string|null,
  *   recordType?: string|null,
- *   regulatoryRequirements?: list<RegulatoryRequirement>|null,
- *   status?: value-of<Status>|null,
+ *   regulatoryRequirements?: list<RegulatoryRequirementShape>|null,
+ *   status?: null|Status|value-of<Status>,
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */
@@ -71,15 +73,7 @@ final class RequirementGroup implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RegulatoryRequirement|array{
-     *   createdAt?: \DateTimeInterface|null,
-     *   expiresAt?: \DateTimeInterface|null,
-     *   fieldType?: string|null,
-     *   fieldValue?: string|null,
-     *   requirementID?: string|null,
-     *   status?: value-of<RegulatoryRequirement\Status>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }> $regulatoryRequirements
+     * @param list<RegulatoryRequirementShape> $regulatoryRequirements
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -167,15 +161,7 @@ final class RequirementGroup implements BaseModel
     }
 
     /**
-     * @param list<RegulatoryRequirement|array{
-     *   createdAt?: \DateTimeInterface|null,
-     *   expiresAt?: \DateTimeInterface|null,
-     *   fieldType?: string|null,
-     *   fieldValue?: string|null,
-     *   requirementID?: string|null,
-     *   status?: value-of<RegulatoryRequirement\Status>|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * }> $regulatoryRequirements
+     * @param list<RegulatoryRequirementShape> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements

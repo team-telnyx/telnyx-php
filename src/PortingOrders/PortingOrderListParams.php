@@ -9,32 +9,23 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderListParams\Filter;
-use Telnyx\PortingOrders\PortingOrderListParams\Filter\ActivationSettings;
-use Telnyx\PortingOrders\PortingOrderListParams\Filter\EndUser;
-use Telnyx\PortingOrders\PortingOrderListParams\Filter\Misc;
-use Telnyx\PortingOrders\PortingOrderListParams\Filter\PhoneNumbers;
 use Telnyx\PortingOrders\PortingOrderListParams\Page;
 use Telnyx\PortingOrders\PortingOrderListParams\Sort;
-use Telnyx\PortingOrders\PortingOrderListParams\Sort\Value;
 
 /**
  * Returns a list of your porting order.
  *
  * @see Telnyx\Services\PortingOrdersService::list()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\PortingOrderListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\PortingOrderListParams\Page
+ * @phpstan-import-type SortShape from \Telnyx\PortingOrders\PortingOrderListParams\Sort
+ *
  * @phpstan-type PortingOrderListParamsShape = array{
- *   filter?: Filter|array{
- *     activationSettings?: ActivationSettings|null,
- *     customerGroupReference?: string|null,
- *     customerReference?: string|null,
- *     endUser?: EndUser|null,
- *     misc?: Misc|null,
- *     parentSupportKey?: string|null,
- *     phoneNumbers?: PhoneNumbers|null,
- *   },
- *   includePhoneNumbers?: bool,
- *   page?: Page|array{number?: int|null, size?: int|null},
- *   sort?: Sort|array{value?: value-of<Value>|null},
+ *   filter?: FilterShape|null,
+ *   includePhoneNumbers?: bool|null,
+ *   page?: PageShape|null,
+ *   sort?: SortShape|null,
  * }
  */
 final class PortingOrderListParams implements BaseModel
@@ -77,17 +68,9 @@ final class PortingOrderListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{
-     *   activationSettings?: ActivationSettings|null,
-     *   customerGroupReference?: string|null,
-     *   customerReference?: string|null,
-     *   endUser?: EndUser|null,
-     *   misc?: Misc|null,
-     *   parentSupportKey?: string|null,
-     *   phoneNumbers?: PhoneNumbers|null,
-     * } $filter
-     * @param Page|array{number?: int|null, size?: int|null} $page
-     * @param Sort|array{value?: value-of<Value>|null} $sort
+     * @param FilterShape $filter
+     * @param PageShape $page
+     * @param SortShape $sort
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -108,15 +91,7 @@ final class PortingOrderListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[customer_reference], filter[customer_group_reference], filter[parent_support_key], filter[phone_numbers.country_code], filter[phone_numbers.carrier_name], filter[misc.type], filter[end_user.admin.entity_name], filter[end_user.admin.auth_person_name], filter[activation_settings.fast_port_eligible], filter[activation_settings.foc_datetime_requested][gt], filter[activation_settings.foc_datetime_requested][lt], filter[phone_numbers.phone_number][contains].
      *
-     * @param Filter|array{
-     *   activationSettings?: ActivationSettings|null,
-     *   customerGroupReference?: string|null,
-     *   customerReference?: string|null,
-     *   endUser?: EndUser|null,
-     *   misc?: Misc|null,
-     *   parentSupportKey?: string|null,
-     *   phoneNumbers?: PhoneNumbers|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -140,7 +115,7 @@ final class PortingOrderListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param Page|array{number?: int|null, size?: int|null} $page
+     * @param PageShape $page
      */
     public function withPage(Page|array $page): self
     {
@@ -153,7 +128,7 @@ final class PortingOrderListParams implements BaseModel
     /**
      * Consolidated sort parameter (deepObject style). Originally: sort[value].
      *
-     * @param Sort|array{value?: value-of<Value>|null} $sort
+     * @param SortShape $sort
      */
     public function withSort(Sort|array $sort): self
     {

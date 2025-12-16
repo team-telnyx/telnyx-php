@@ -26,18 +26,20 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Calls\ActionsService::startPlayback()
  *
+ * @phpstan-import-type LoopcountShape from \Telnyx\Calls\Actions\Loopcount
+ *
  * @phpstan-type ActionStartPlaybackParamsShape = array{
- *   audioType?: AudioType|value-of<AudioType>,
- *   audioURL?: string,
- *   cacheAudio?: bool,
- *   clientState?: string,
- *   commandID?: string,
- *   loop?: string|int,
- *   mediaName?: string,
- *   overlay?: bool,
- *   playbackContent?: string,
- *   stop?: string,
- *   targetLegs?: string,
+ *   audioType?: null|AudioType|value-of<AudioType>,
+ *   audioURL?: string|null,
+ *   cacheAudio?: bool|null,
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   loop?: LoopcountShape|null,
+ *   mediaName?: string|null,
+ *   overlay?: bool|null,
+ *   playbackContent?: string|null,
+ *   stop?: string|null,
+ *   targetLegs?: string|null,
  * }
  */
 final class ActionStartPlaybackParams implements BaseModel
@@ -125,6 +127,7 @@ final class ActionStartPlaybackParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param AudioType|value-of<AudioType> $audioType
+     * @param LoopcountShape $loop
      */
     public static function with(
         AudioType|string|null $audioType = null,
@@ -215,6 +218,8 @@ final class ActionStartPlaybackParams implements BaseModel
 
     /**
      * The number of times the audio file should be played. If supplied, the value must be an integer between 1 and 100, or the special string `infinity` for an endless loop.
+     *
+     * @param LoopcountShape $loop
      */
     public function withLoop(string|int $loop): self
     {

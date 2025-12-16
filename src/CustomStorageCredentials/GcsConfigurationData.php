@@ -12,7 +12,9 @@ use Telnyx\CustomStorageCredentials\GcsConfigurationData\Backend;
 
 /**
  * @phpstan-type GcsConfigurationDataShape = array{
- *   backend: value-of<Backend>, bucket?: string|null, credentials?: string|null
+ *   backend: Backend|value-of<Backend>,
+ *   bucket?: string|null,
+ *   credentials?: string|null,
  * }
  */
 final class GcsConfigurationData implements BaseModel

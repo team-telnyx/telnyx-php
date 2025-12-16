@@ -16,7 +16,7 @@ use Telnyx\Verifications\Actions\ActionVerifyParams\Status;
  * @see Telnyx\Services\Verifications\ActionsService::verify()
  *
  * @phpstan-type ActionVerifyParamsShape = array{
- *   code?: string, status?: Status|value-of<Status>
+ *   code?: string|null, status?: null|Status|value-of<Status>
  * }
  */
 final class ActionVerifyParams implements BaseModel

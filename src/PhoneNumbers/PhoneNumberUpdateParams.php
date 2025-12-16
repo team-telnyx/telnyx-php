@@ -15,12 +15,12 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\PhoneNumbersService::update()
  *
  * @phpstan-type PhoneNumberUpdateParamsShape = array{
- *   billingGroupID?: string,
- *   connectionID?: string,
- *   customerReference?: string,
- *   externalPin?: string,
- *   hdVoiceEnabled?: bool,
- *   tags?: list<string>,
+ *   billingGroupID?: string|null,
+ *   connectionID?: string|null,
+ *   customerReference?: string|null,
+ *   externalPin?: string|null,
+ *   hdVoiceEnabled?: bool|null,
+ *   tags?: list<string>|null,
  * }
  */
 final class PhoneNumberUpdateParams implements BaseModel

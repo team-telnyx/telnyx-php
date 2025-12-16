@@ -15,8 +15,10 @@ use Telnyx\Portouts\PortoutListRejectionCodesParams\Filter;
  *
  * @see Telnyx\Services\PortoutsService::listRejectionCodes()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\Portouts\PortoutListRejectionCodesParams\Filter
+ *
  * @phpstan-type PortoutListRejectionCodesParamsShape = array{
- *   filter?: Filter|array{code?: int|null|list<int>}
+ *   filter?: FilterShape|null
  * }
  */
 final class PortoutListRejectionCodesParams implements BaseModel
@@ -41,7 +43,7 @@ final class PortoutListRejectionCodesParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Filter|array{code?: int|list<int>|null} $filter
+     * @param FilterShape $filter
      */
     public static function with(Filter|array|null $filter = null): self
     {
@@ -55,7 +57,7 @@ final class PortoutListRejectionCodesParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[code], filter[code][in].
      *
-     * @param Filter|array{code?: int|list<int>|null} $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

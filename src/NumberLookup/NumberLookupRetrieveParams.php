@@ -16,7 +16,7 @@ use Telnyx\NumberLookup\NumberLookupRetrieveParams\Type;
  * @see Telnyx\Services\NumberLookupService::retrieve()
  *
  * @phpstan-type NumberLookupRetrieveParamsShape = array{
- *   type?: Type|value-of<Type>
+ *   type?: null|Type|value-of<Type>
  * }
  */
 final class NumberLookupRetrieveParams implements BaseModel

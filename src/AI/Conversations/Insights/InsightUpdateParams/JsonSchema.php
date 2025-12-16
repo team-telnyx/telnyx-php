@@ -9,6 +9,9 @@ use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 use Telnyx\Core\Conversion\MapOf;
 
+/**
+ * @phpstan-type JsonSchemaShape = string|array<string,mixed>
+ */
 final class JsonSchema implements ConverterSource
 {
     use SdkUnion;

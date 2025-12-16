@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\Assistants\VersionsService::retrieve()
  *
  * @phpstan-type VersionRetrieveParamsShape = array{
- *   assistantID: string, includeMcpServers?: bool
+ *   assistantID: string, includeMcpServers?: bool|null
  * }
  */
 final class VersionRetrieveParams implements BaseModel

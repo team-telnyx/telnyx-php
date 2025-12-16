@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\BodyParameters;
-use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Header;
-use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Method;
-use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\PathParameters;
-use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\QueryParameters;
 use Telnyx\AI\Assistants\WebhookTool\Type;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type InferenceEmbeddingWebhookToolParamsShape from \Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams
+ *
  * @phpstan-type WebhookToolShape = array{
- *   type: value-of<Type>, webhook: InferenceEmbeddingWebhookToolParams
+ *   type: Type|value-of<Type>,
+ *   webhook: InferenceEmbeddingWebhookToolParams|InferenceEmbeddingWebhookToolParamsShape,
  * }
  */
 final class WebhookTool implements BaseModel
@@ -56,16 +54,7 @@ final class WebhookTool implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Type|value-of<Type> $type
-     * @param InferenceEmbeddingWebhookToolParams|array{
-     *   description: string,
-     *   name: string,
-     *   url: string,
-     *   bodyParameters?: BodyParameters|null,
-     *   headers?: list<Header>|null,
-     *   method?: value-of<Method>|null,
-     *   pathParameters?: PathParameters|null,
-     *   queryParameters?: QueryParameters|null,
-     * } $webhook
+     * @param InferenceEmbeddingWebhookToolParamsShape $webhook
      */
     public static function with(
         Type|string $type,
@@ -91,16 +80,7 @@ final class WebhookTool implements BaseModel
     }
 
     /**
-     * @param InferenceEmbeddingWebhookToolParams|array{
-     *   description: string,
-     *   name: string,
-     *   url: string,
-     *   bodyParameters?: BodyParameters|null,
-     *   headers?: list<Header>|null,
-     *   method?: value-of<Method>|null,
-     *   pathParameters?: PathParameters|null,
-     *   queryParameters?: QueryParameters|null,
-     * } $webhook
+     * @param InferenceEmbeddingWebhookToolParamsShape $webhook
      */
     public function withWebhook(
         InferenceEmbeddingWebhookToolParams|array $webhook

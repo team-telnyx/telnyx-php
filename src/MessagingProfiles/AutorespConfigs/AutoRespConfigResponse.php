@@ -7,10 +7,13 @@ namespace Telnyx\MessagingProfiles\AutorespConfigs;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfig\Op;
 
 /**
- * @phpstan-type AutoRespConfigResponseShape = array{data: AutoRespConfig}
+ * @phpstan-import-type AutoRespConfigShape from \Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfig
+ *
+ * @phpstan-type AutoRespConfigResponseShape = array{
+ *   data: AutoRespConfig|AutoRespConfigShape
+ * }
  */
 final class AutoRespConfigResponse implements BaseModel
 {
@@ -44,15 +47,7 @@ final class AutoRespConfigResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AutoRespConfig|array{
-     *   id: string,
-     *   countryCode: string,
-     *   createdAt: \DateTimeInterface,
-     *   keywords: list<string>,
-     *   op: value-of<Op>,
-     *   updatedAt: \DateTimeInterface,
-     *   respText?: string|null,
-     * } $data
+     * @param AutoRespConfigShape $data
      */
     public static function with(AutoRespConfig|array $data): self
     {
@@ -64,15 +59,7 @@ final class AutoRespConfigResponse implements BaseModel
     }
 
     /**
-     * @param AutoRespConfig|array{
-     *   id: string,
-     *   countryCode: string,
-     *   createdAt: \DateTimeInterface,
-     *   keywords: list<string>,
-     *   op: value-of<Op>,
-     *   updatedAt: \DateTimeInterface,
-     *   respText?: string|null,
-     * } $data
+     * @param AutoRespConfigShape $data
      */
     public function withData(AutoRespConfig|array $data): self
     {

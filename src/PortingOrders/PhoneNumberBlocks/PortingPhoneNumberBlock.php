@@ -12,13 +12,16 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock\PhoneNumberRa
 use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock\PhoneNumberType;
 
 /**
+ * @phpstan-import-type ActivationRangeShape from \Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock\ActivationRange
+ * @phpstan-import-type PhoneNumberRangeShape from \Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock\PhoneNumberRange
+ *
  * @phpstan-type PortingPhoneNumberBlockShape = array{
  *   id?: string|null,
- *   activationRanges?: list<ActivationRange>|null,
+ *   activationRanges?: list<ActivationRangeShape>|null,
  *   countryCode?: string|null,
  *   createdAt?: \DateTimeInterface|null,
- *   phoneNumberRange?: PhoneNumberRange|null,
- *   phoneNumberType?: value-of<PhoneNumberType>|null,
+ *   phoneNumberRange?: null|PhoneNumberRange|PhoneNumberRangeShape,
+ *   phoneNumberType?: null|PhoneNumberType|value-of<PhoneNumberType>,
  *   recordType?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
  * }
@@ -90,12 +93,8 @@ final class PortingPhoneNumberBlock implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ActivationRange|array{
-     *   endAt?: string|null, startAt?: string|null
-     * }> $activationRanges
-     * @param PhoneNumberRange|array{
-     *   endAt?: string|null, startAt?: string|null
-     * } $phoneNumberRange
+     * @param list<ActivationRangeShape> $activationRanges
+     * @param PhoneNumberRangeShape $phoneNumberRange
      * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
      */
     public static function with(
@@ -136,9 +135,7 @@ final class PortingPhoneNumberBlock implements BaseModel
     /**
      * Specifies the activation ranges for this porting phone number block. The activation range must be within the phone number range and should not overlap with other activation ranges.
      *
-     * @param list<ActivationRange|array{
-     *   endAt?: string|null, startAt?: string|null
-     * }> $activationRanges
+     * @param list<ActivationRangeShape> $activationRanges
      */
     public function withActivationRanges(array $activationRanges): self
     {
@@ -173,9 +170,7 @@ final class PortingPhoneNumberBlock implements BaseModel
     /**
      * Specifies the phone number range for this porting phone number block.
      *
-     * @param PhoneNumberRange|array{
-     *   endAt?: string|null, startAt?: string|null
-     * } $phoneNumberRange
+     * @param PhoneNumberRangeShape $phoneNumberRange
      */
     public function withPhoneNumberRange(
         PhoneNumberRange|array $phoneNumberRange

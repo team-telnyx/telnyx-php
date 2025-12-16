@@ -5,13 +5,16 @@ declare(strict_types=1);
 namespace Telnyx\AI\Embeddings;
 
 use Telnyx\AI\Embeddings\EmbeddingSimilaritySearchResponse\Data;
-use Telnyx\AI\Embeddings\EmbeddingSimilaritySearchResponse\Data\Metadata;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type EmbeddingSimilaritySearchResponseShape = array{data: list<Data>}
+ * @phpstan-import-type DataShape from \Telnyx\AI\Embeddings\EmbeddingSimilaritySearchResponse\Data
+ *
+ * @phpstan-type EmbeddingSimilaritySearchResponseShape = array{
+ *   data: list<DataShape>
+ * }
  */
 final class EmbeddingSimilaritySearchResponse implements BaseModel
 {
@@ -46,9 +49,7 @@ final class EmbeddingSimilaritySearchResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|array{
-     *   distance: float, documentChunk: string, metadata: Metadata
-     * }> $data
+     * @param list<DataShape> $data
      */
     public static function with(array $data): self
     {
@@ -60,9 +61,7 @@ final class EmbeddingSimilaritySearchResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|array{
-     *   distance: float, documentChunk: string, metadata: Metadata
-     * }> $data
+     * @param list<DataShape> $data
      */
     public function withData(array $data): self
     {

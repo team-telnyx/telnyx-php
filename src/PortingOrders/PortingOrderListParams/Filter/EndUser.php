@@ -10,7 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderListParams\Filter\EndUser\Admin;
 
 /**
- * @phpstan-type EndUserShape = array{admin?: Admin|null}
+ * @phpstan-import-type AdminShape from \Telnyx\PortingOrders\PortingOrderListParams\Filter\EndUser\Admin
+ *
+ * @phpstan-type EndUserShape = array{admin?: null|Admin|AdminShape}
  */
 final class EndUser implements BaseModel
 {
@@ -30,9 +32,7 @@ final class EndUser implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Admin|array{
-     *   authPersonName?: string|null, entityName?: string|null
-     * } $admin
+     * @param AdminShape $admin
      */
     public static function with(Admin|array|null $admin = null): self
     {
@@ -44,9 +44,7 @@ final class EndUser implements BaseModel
     }
 
     /**
-     * @param Admin|array{
-     *   authPersonName?: string|null, entityName?: string|null
-     * } $admin
+     * @param AdminShape $admin
      */
     public function withAdmin(Admin|array $admin): self
     {

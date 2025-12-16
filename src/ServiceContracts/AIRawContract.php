@@ -27,7 +27,7 @@ interface AIRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AISummarizeParams $params
+     * @param array<string,mixed>|AISummarizeParams $params
      *
      * @return BaseResponse<AISummarizeResponse>
      *

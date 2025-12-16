@@ -8,12 +8,14 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Storage\Buckets\Usage\PaginationMetaSimple;
-use Telnyx\Storage\MigrationSources\MigrationSourceParams\Provider;
-use Telnyx\Storage\MigrationSources\MigrationSourceParams\ProviderAuth;
 
 /**
+ * @phpstan-import-type MigrationSourceParamsShape from \Telnyx\Storage\MigrationSources\MigrationSourceParams
+ * @phpstan-import-type PaginationMetaSimpleShape from \Telnyx\Storage\Buckets\Usage\PaginationMetaSimple
+ *
  * @phpstan-type MigrationSourceListResponseShape = array{
- *   data?: list<MigrationSourceParams>|null, meta?: PaginationMetaSimple|null
+ *   data?: list<MigrationSourceParamsShape>|null,
+ *   meta?: null|PaginationMetaSimple|PaginationMetaSimpleShape,
  * }
  */
 final class MigrationSourceListResponse implements BaseModel
@@ -38,16 +40,8 @@ final class MigrationSourceListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<MigrationSourceParams|array{
-     *   bucketName: string,
-     *   provider: value-of<Provider>,
-     *   providerAuth: ProviderAuth,
-     *   id?: string|null,
-     *   sourceRegion?: string|null,
-     * }> $data
-     * @param PaginationMetaSimple|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param list<MigrationSourceParamsShape> $data
+     * @param PaginationMetaSimpleShape $meta
      */
     public static function with(
         ?array $data = null,
@@ -62,13 +56,7 @@ final class MigrationSourceListResponse implements BaseModel
     }
 
     /**
-     * @param list<MigrationSourceParams|array{
-     *   bucketName: string,
-     *   provider: value-of<Provider>,
-     *   providerAuth: ProviderAuth,
-     *   id?: string|null,
-     *   sourceRegion?: string|null,
-     * }> $data
+     * @param list<MigrationSourceParamsShape> $data
      */
     public function withData(array $data): self
     {
@@ -79,9 +67,7 @@ final class MigrationSourceListResponse implements BaseModel
     }
 
     /**
-     * @param PaginationMetaSimple|array{
-     *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
-     * } $meta
+     * @param PaginationMetaSimpleShape $meta
      */
     public function withMeta(PaginationMetaSimple|array $meta): self
     {

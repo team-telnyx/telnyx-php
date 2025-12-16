@@ -12,14 +12,17 @@ use Telnyx\SimCardOrders\SimCardOrder\OrderAddress;
 use Telnyx\SimCardOrders\SimCardOrder\Status;
 
 /**
+ * @phpstan-import-type CostShape from \Telnyx\SimCardOrders\SimCardOrder\Cost
+ * @phpstan-import-type OrderAddressShape from \Telnyx\SimCardOrders\SimCardOrder\OrderAddress
+ *
  * @phpstan-type SimCardOrderShape = array{
  *   id?: string|null,
- *   cost?: Cost|null,
+ *   cost?: null|Cost|CostShape,
  *   createdAt?: string|null,
- *   orderAddress?: OrderAddress|null,
+ *   orderAddress?: null|OrderAddress|OrderAddressShape,
  *   quantity?: int|null,
  *   recordType?: string|null,
- *   status?: value-of<Status>|null,
+ *   status?: null|Status|value-of<Status>,
  *   trackingURL?: string|null,
  *   updatedAt?: string|null,
  * }
@@ -95,19 +98,8 @@ final class SimCardOrder implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Cost|array{amount?: string|null, currency?: string|null} $cost
-     * @param OrderAddress|array{
-     *   id?: string|null,
-     *   administrativeArea?: string|null,
-     *   businessName?: string|null,
-     *   countryCode?: string|null,
-     *   extendedAddress?: string|null,
-     *   firstName?: string|null,
-     *   lastName?: string|null,
-     *   locality?: string|null,
-     *   postalCode?: string|null,
-     *   streetAddress?: string|null,
-     * } $orderAddress
+     * @param CostShape $cost
+     * @param OrderAddressShape $orderAddress
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -150,7 +142,7 @@ final class SimCardOrder implements BaseModel
     /**
      * An object representing the total cost of the order.
      *
-     * @param Cost|array{amount?: string|null, currency?: string|null} $cost
+     * @param CostShape $cost
      */
     public function withCost(Cost|array $cost): self
     {
@@ -174,18 +166,7 @@ final class SimCardOrder implements BaseModel
     /**
      * An object representing the address information from when the order was submitted.
      *
-     * @param OrderAddress|array{
-     *   id?: string|null,
-     *   administrativeArea?: string|null,
-     *   businessName?: string|null,
-     *   countryCode?: string|null,
-     *   extendedAddress?: string|null,
-     *   firstName?: string|null,
-     *   lastName?: string|null,
-     *   locality?: string|null,
-     *   postalCode?: string|null,
-     *   streetAddress?: string|null,
-     * } $orderAddress
+     * @param OrderAddressShape $orderAddress
      */
     public function withOrderAddress(OrderAddress|array $orderAddress): self
     {

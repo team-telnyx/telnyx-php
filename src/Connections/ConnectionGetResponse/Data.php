@@ -14,14 +14,14 @@ use Telnyx\CredentialConnections\AnchorsiteOverride;
  * @phpstan-type DataShape = array{
  *   id?: string|null,
  *   active?: bool|null,
- *   anchorsiteOverride?: value-of<AnchorsiteOverride>|null,
+ *   anchorsiteOverride?: null|AnchorsiteOverride|value-of<AnchorsiteOverride>,
  *   connectionName?: string|null,
  *   createdAt?: string|null,
  *   outboundVoiceProfileID?: string|null,
  *   recordType?: string|null,
  *   tags?: list<string>|null,
  *   updatedAt?: string|null,
- *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
+ *   webhookAPIVersion?: null|WebhookAPIVersion|value-of<WebhookAPIVersion>,
  *   webhookEventFailoverURL?: string|null,
  *   webhookEventURL?: string|null,
  * }

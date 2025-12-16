@@ -11,7 +11,6 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\FaxApplications\FaxApplicationCreateParams\Inbound;
-use Telnyx\FaxApplications\FaxApplicationCreateParams\Inbound\SipSubdomainReceiveSettings;
 use Telnyx\FaxApplications\FaxApplicationCreateParams\Outbound;
 
 /**
@@ -19,20 +18,17 @@ use Telnyx\FaxApplications\FaxApplicationCreateParams\Outbound;
  *
  * @see Telnyx\Services\FaxApplicationsService::create()
  *
+ * @phpstan-import-type InboundShape from \Telnyx\FaxApplications\FaxApplicationCreateParams\Inbound
+ * @phpstan-import-type OutboundShape from \Telnyx\FaxApplications\FaxApplicationCreateParams\Outbound
+ *
  * @phpstan-type FaxApplicationCreateParamsShape = array{
  *   applicationName: string,
  *   webhookEventURL: string,
- *   active?: bool,
- *   anchorsiteOverride?: AnchorsiteOverride|value-of<AnchorsiteOverride>,
- *   inbound?: Inbound|array{
- *     channelLimit?: int|null,
- *     sipSubdomain?: string|null,
- *     sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
- *   },
- *   outbound?: Outbound|array{
- *     channelLimit?: int|null, outboundVoiceProfileID?: string|null
- *   },
- *   tags?: list<string>,
+ *   active?: bool|null,
+ *   anchorsiteOverride?: null|AnchorsiteOverride|value-of<AnchorsiteOverride>,
+ *   inbound?: InboundShape|null,
+ *   outbound?: OutboundShape|null,
+ *   tags?: list<string>|null,
  *   webhookEventFailoverURL?: string|null,
  *   webhookTimeoutSecs?: int|null,
  * }
@@ -122,14 +118,8 @@ final class FaxApplicationCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
-     * @param Inbound|array{
-     *   channelLimit?: int|null,
-     *   sipSubdomain?: string|null,
-     *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
-     * } $inbound
-     * @param Outbound|array{
-     *   channelLimit?: int|null, outboundVoiceProfileID?: string|null
-     * } $outbound
+     * @param InboundShape $inbound
+     * @param OutboundShape $outbound
      * @param list<string> $tags
      */
     public static function with(
@@ -207,11 +197,7 @@ final class FaxApplicationCreateParams implements BaseModel
     }
 
     /**
-     * @param Inbound|array{
-     *   channelLimit?: int|null,
-     *   sipSubdomain?: string|null,
-     *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
-     * } $inbound
+     * @param InboundShape $inbound
      */
     public function withInbound(Inbound|array $inbound): self
     {
@@ -222,9 +208,7 @@ final class FaxApplicationCreateParams implements BaseModel
     }
 
     /**
-     * @param Outbound|array{
-     *   channelLimit?: int|null, outboundVoiceProfileID?: string|null
-     * } $outbound
+     * @param OutboundShape $outbound
      */
     public function withOutbound(Outbound|array $outbound): self
     {

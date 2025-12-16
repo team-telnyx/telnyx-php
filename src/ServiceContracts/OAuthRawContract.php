@@ -38,7 +38,7 @@ interface OAuthRawContract
     /**
      * @api
      *
-     * @param array<mixed>|OAuthGrantsParams $params
+     * @param array<string,mixed>|OAuthGrantsParams $params
      *
      * @return BaseResponse<OAuthGrantsResponse>
      *
@@ -52,7 +52,7 @@ interface OAuthRawContract
     /**
      * @api
      *
-     * @param array<mixed>|OAuthIntrospectParams $params
+     * @param array<string,mixed>|OAuthIntrospectParams $params
      *
      * @return BaseResponse<OAuthIntrospectResponse>
      *
@@ -66,7 +66,7 @@ interface OAuthRawContract
     /**
      * @api
      *
-     * @param array<mixed>|OAuthRegisterParams $params
+     * @param array<string,mixed>|OAuthRegisterParams $params
      *
      * @return BaseResponse<OAuthRegisterResponse>
      *
@@ -80,7 +80,7 @@ interface OAuthRawContract
     /**
      * @api
      *
-     * @param array<mixed>|OAuthRetrieveAuthorizeParams $params
+     * @param array<string,mixed>|OAuthRetrieveAuthorizeParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -105,7 +105,7 @@ interface OAuthRawContract
     /**
      * @api
      *
-     * @param array<mixed>|OAuthTokenParams $params
+     * @param array<string,mixed>|OAuthTokenParams $params
      *
      * @return BaseResponse<OAuthTokenResponse>
      *

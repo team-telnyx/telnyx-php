@@ -8,18 +8,18 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\RcsAgentMessage\ContentMessage\RichCard;
-use Telnyx\Messages\RcsAgentMessage\ContentMessage\RichCard\CarouselCard;
-use Telnyx\Messages\RcsAgentMessage\ContentMessage\RichCard\StandaloneCard;
 use Telnyx\Messages\RcsContentInfo;
 use Telnyx\Messages\RcsSuggestion;
-use Telnyx\Messages\RcsSuggestion\Action;
-use Telnyx\Messages\RcsSuggestion\Reply;
 
 /**
+ * @phpstan-import-type RcsContentInfoShape from \Telnyx\Messages\RcsContentInfo
+ * @phpstan-import-type RichCardShape from \Telnyx\Messages\RcsAgentMessage\ContentMessage\RichCard
+ * @phpstan-import-type RcsSuggestionShape from \Telnyx\Messages\RcsSuggestion
+ *
  * @phpstan-type ContentMessageShape = array{
- *   contentInfo?: RcsContentInfo|null,
- *   richCard?: RichCard|null,
- *   suggestions?: list<RcsSuggestion>|null,
+ *   contentInfo?: null|RcsContentInfo|RcsContentInfoShape,
+ *   richCard?: null|RichCard|RichCardShape,
+ *   suggestions?: list<RcsSuggestionShape>|null,
  *   text?: string|null,
  * }
  */
@@ -58,15 +58,9 @@ final class ContentMessage implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RcsContentInfo|array{
-     *   fileURL: string, forceRefresh?: bool|null, thumbnailURL?: string|null
-     * } $contentInfo
-     * @param RichCard|array{
-     *   carouselCard?: CarouselCard|null, standaloneCard?: StandaloneCard|null
-     * } $richCard
-     * @param list<RcsSuggestion|array{
-     *   action?: Action|null, reply?: Reply|null
-     * }> $suggestions
+     * @param RcsContentInfoShape $contentInfo
+     * @param RichCardShape $richCard
+     * @param list<RcsSuggestionShape> $suggestions
      */
     public static function with(
         RcsContentInfo|array|null $contentInfo = null,
@@ -85,9 +79,7 @@ final class ContentMessage implements BaseModel
     }
 
     /**
-     * @param RcsContentInfo|array{
-     *   fileURL: string, forceRefresh?: bool|null, thumbnailURL?: string|null
-     * } $contentInfo
+     * @param RcsContentInfoShape $contentInfo
      */
     public function withContentInfo(RcsContentInfo|array $contentInfo): self
     {
@@ -98,9 +90,7 @@ final class ContentMessage implements BaseModel
     }
 
     /**
-     * @param RichCard|array{
-     *   carouselCard?: CarouselCard|null, standaloneCard?: StandaloneCard|null
-     * } $richCard
+     * @param RichCardShape $richCard
      */
     public function withRichCard(RichCard|array $richCard): self
     {
@@ -113,9 +103,7 @@ final class ContentMessage implements BaseModel
     /**
      * List of suggested actions and replies.
      *
-     * @param list<RcsSuggestion|array{
-     *   action?: Action|null, reply?: Reply|null
-     * }> $suggestions
+     * @param list<RcsSuggestionShape> $suggestions
      */
     public function withSuggestions(array $suggestions): self
     {

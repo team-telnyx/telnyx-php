@@ -17,7 +17,7 @@ interface AccessIPRangesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AccessIPRangeCreateParams $params
+     * @param array<string,mixed>|AccessIPRangeCreateParams $params
      *
      * @return BaseResponse<AccessIPRange>
      *
@@ -31,7 +31,7 @@ interface AccessIPRangesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AccessIPRangeListParams $params
+     * @param array<string,mixed>|AccessIPRangeListParams $params
      *
      * @return BaseResponse<DefaultFlatPagination<AccessIPRange>>
      *

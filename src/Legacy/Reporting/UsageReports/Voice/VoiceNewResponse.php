@@ -9,8 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type CdrUsageReportResponseLegacyShape from \Telnyx\Legacy\Reporting\UsageReports\Voice\CdrUsageReportResponseLegacy
+ *
  * @phpstan-type VoiceNewResponseShape = array{
- *   data?: CdrUsageReportResponseLegacy|null
+ *   data?: null|CdrUsageReportResponseLegacy|CdrUsageReportResponseLegacyShape
  * }
  */
 final class VoiceNewResponse implements BaseModel
@@ -34,20 +36,7 @@ final class VoiceNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CdrUsageReportResponseLegacy|array{
-     *   id?: string|null,
-     *   aggregationType?: int|null,
-     *   connections?: list<string>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   endTime?: \DateTimeInterface|null,
-     *   productBreakdown?: int|null,
-     *   recordType?: string|null,
-     *   reportURL?: string|null,
-     *   result?: array<string,mixed>|null,
-     *   startTime?: \DateTimeInterface|null,
-     *   status?: int|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param CdrUsageReportResponseLegacyShape $data
      */
     public static function with(
         CdrUsageReportResponseLegacy|array|null $data = null
@@ -62,20 +51,7 @@ final class VoiceNewResponse implements BaseModel
     /**
      * Legacy V2 CDR usage report response.
      *
-     * @param CdrUsageReportResponseLegacy|array{
-     *   id?: string|null,
-     *   aggregationType?: int|null,
-     *   connections?: list<string>|null,
-     *   createdAt?: \DateTimeInterface|null,
-     *   endTime?: \DateTimeInterface|null,
-     *   productBreakdown?: int|null,
-     *   recordType?: string|null,
-     *   reportURL?: string|null,
-     *   result?: array<string,mixed>|null,
-     *   startTime?: \DateTimeInterface|null,
-     *   status?: int|null,
-     *   updatedAt?: \DateTimeInterface|null,
-     * } $data
+     * @param CdrUsageReportResponseLegacyShape $data
      */
     public function withData(CdrUsageReportResponseLegacy|array $data): self
     {

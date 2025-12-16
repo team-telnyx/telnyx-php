@@ -12,8 +12,10 @@ use Telnyx\Messages\RcsSuggestion\Action\ViewLocationAction\LatLong;
 /**
  * Opens the user's default map app and selects the agent-specified location.
  *
+ * @phpstan-import-type LatLongShape from \Telnyx\Messages\RcsSuggestion\Action\ViewLocationAction\LatLong
+ *
  * @phpstan-type ViewLocationActionShape = array{
- *   label?: string|null, latLong?: LatLong|null, query?: string|null
+ *   label?: string|null, latLong?: null|LatLong|LatLongShape, query?: string|null
  * }
  */
 final class ViewLocationAction implements BaseModel
@@ -46,7 +48,7 @@ final class ViewLocationAction implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param LatLong|array{latitude: float, longitude: float} $latLong
+     * @param LatLongShape $latLong
      */
     public static function with(
         ?string $label = null,
@@ -74,7 +76,7 @@ final class ViewLocationAction implements BaseModel
     }
 
     /**
-     * @param LatLong|array{latitude: float, longitude: float} $latLong
+     * @param LatLongShape $latLong
      */
     public function withLatLong(LatLong|array $latLong): self
     {

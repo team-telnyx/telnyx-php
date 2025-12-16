@@ -7,7 +7,6 @@ namespace Telnyx\PhoneNumbers\Jobs;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\PhoneNumberBlocks\Jobs\JobError;
 use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\FailedOperation;
 use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\PendingOperation;
 use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\PhoneNumber;
@@ -16,17 +15,22 @@ use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\SuccessfulOperation;
 use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\Type;
 
 /**
+ * @phpstan-import-type FailedOperationShape from \Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\FailedOperation
+ * @phpstan-import-type PendingOperationShape from \Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\PendingOperation
+ * @phpstan-import-type PhoneNumberShape from \Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\PhoneNumber
+ * @phpstan-import-type SuccessfulOperationShape from \Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\SuccessfulOperation
+ *
  * @phpstan-type PhoneNumbersJobShape = array{
  *   id?: string|null,
  *   createdAt?: string|null,
  *   etc?: \DateTimeInterface|null,
- *   failedOperations?: list<FailedOperation>|null,
- *   pendingOperations?: list<PendingOperation>|null,
- *   phoneNumbers?: list<PhoneNumber>|null,
+ *   failedOperations?: list<FailedOperationShape>|null,
+ *   pendingOperations?: list<PendingOperationShape>|null,
+ *   phoneNumbers?: list<PhoneNumberShape>|null,
  *   recordType?: string|null,
- *   status?: value-of<Status>|null,
- *   successfulOperations?: list<SuccessfulOperation>|null,
- *   type?: value-of<Type>|null,
+ *   status?: null|Status|value-of<Status>,
+ *   successfulOperations?: list<SuccessfulOperationShape>|null,
+ *   type?: null|Type|value-of<Type>,
  *   updatedAt?: string|null,
  * }
  */
@@ -107,19 +111,11 @@ final class PhoneNumbersJob implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<FailedOperation|array{
-     *   id?: string|null, errors?: list<JobError>|null, phoneNumber?: string|null
-     * }> $failedOperations
-     * @param list<PendingOperation|array{
-     *   id?: string|null, phoneNumber?: string|null
-     * }> $pendingOperations
-     * @param list<PhoneNumber|array{
-     *   id?: string|null, phoneNumber?: string|null
-     * }> $phoneNumbers
+     * @param list<FailedOperationShape> $failedOperations
+     * @param list<PendingOperationShape> $pendingOperations
+     * @param list<PhoneNumberShape> $phoneNumbers
      * @param Status|value-of<Status> $status
-     * @param list<SuccessfulOperation|array{
-     *   id?: string|null, phoneNumber?: string|null
-     * }> $successfulOperations
+     * @param list<SuccessfulOperationShape> $successfulOperations
      * @param Type|value-of<Type> $type
      */
     public static function with(
@@ -186,9 +182,7 @@ final class PhoneNumbersJob implements BaseModel
     }
 
     /**
-     * @param list<FailedOperation|array{
-     *   id?: string|null, errors?: list<JobError>|null, phoneNumber?: string|null
-     * }> $failedOperations
+     * @param list<FailedOperationShape> $failedOperations
      */
     public function withFailedOperations(array $failedOperations): self
     {
@@ -199,9 +193,7 @@ final class PhoneNumbersJob implements BaseModel
     }
 
     /**
-     * @param list<PendingOperation|array{
-     *   id?: string|null, phoneNumber?: string|null
-     * }> $pendingOperations
+     * @param list<PendingOperationShape> $pendingOperations
      */
     public function withPendingOperations(array $pendingOperations): self
     {
@@ -212,9 +204,7 @@ final class PhoneNumbersJob implements BaseModel
     }
 
     /**
-     * @param list<PhoneNumber|array{
-     *   id?: string|null, phoneNumber?: string|null
-     * }> $phoneNumbers
+     * @param list<PhoneNumberShape> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
@@ -249,9 +239,7 @@ final class PhoneNumbersJob implements BaseModel
     }
 
     /**
-     * @param list<SuccessfulOperation|array{
-     *   id?: string|null, phoneNumber?: string|null
-     * }> $successfulOperations
+     * @param list<SuccessfulOperationShape> $successfulOperations
      */
     public function withSuccessfulOperations(array $successfulOperations): self
     {

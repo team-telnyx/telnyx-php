@@ -15,11 +15,13 @@ use Telnyx\NotificationSettings\NotificationSettingCreateParams\Parameter;
  *
  * @see Telnyx\Services\NotificationSettingsService::create()
  *
+ * @phpstan-import-type ParameterShape from \Telnyx\NotificationSettings\NotificationSettingCreateParams\Parameter
+ *
  * @phpstan-type NotificationSettingCreateParamsShape = array{
- *   notificationChannelID?: string,
- *   notificationEventConditionID?: string,
- *   notificationProfileID?: string,
- *   parameters?: list<Parameter|array{name?: string|null, value?: string|null}>,
+ *   notificationChannelID?: string|null,
+ *   notificationEventConditionID?: string|null,
+ *   notificationProfileID?: string|null,
+ *   parameters?: list<ParameterShape>|null,
  * }
  */
 final class NotificationSettingCreateParams implements BaseModel
@@ -60,9 +62,7 @@ final class NotificationSettingCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Parameter|array{
-     *   name?: string|null, value?: string|null
-     * }> $parameters
+     * @param list<ParameterShape> $parameters
      */
     public static function with(
         ?string $notificationChannelID = null,
@@ -117,9 +117,7 @@ final class NotificationSettingCreateParams implements BaseModel
     }
 
     /**
-     * @param list<Parameter|array{
-     *   name?: string|null, value?: string|null
-     * }> $parameters
+     * @param list<ParameterShape> $parameters
      */
     public function withParameters(array $parameters): self
     {

@@ -15,7 +15,7 @@ interface WirelessBlocklistValuesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|WirelessBlocklistValueListParams $params
+     * @param array<string,mixed>|WirelessBlocklistValueListParams $params
      *
      * @return BaseResponse<WirelessBlocklistValueListResponse>
      *

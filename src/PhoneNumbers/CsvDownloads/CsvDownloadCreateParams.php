@@ -10,29 +10,16 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\CsvFormat;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter;
-use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter\Status;
-use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter\VoiceConnectionName;
-use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter\VoiceUsagePaymentMethod;
 
 /**
  * Create a CSV download.
  *
  * @see Telnyx\Services\PhoneNumbers\CsvDownloadsService::create()
  *
+ * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter
+ *
  * @phpstan-type CsvDownloadCreateParamsShape = array{
- *   csvFormat?: CsvFormat|value-of<CsvFormat>,
- *   filter?: Filter|array{
- *     billingGroupID?: string|null,
- *     connectionID?: string|null,
- *     customerReference?: string|null,
- *     emergencyAddressID?: string|null,
- *     hasBundle?: string|null,
- *     phoneNumber?: string|null,
- *     status?: value-of<Status>|null,
- *     tag?: string|null,
- *     voiceConnectionName?: VoiceConnectionName|null,
- *     voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
- *   },
+ *   csvFormat?: null|CsvFormat|value-of<CsvFormat>, filter?: FilterShape|null
  * }
  */
 final class CsvDownloadCreateParams implements BaseModel
@@ -66,18 +53,7 @@ final class CsvDownloadCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param CsvFormat|value-of<CsvFormat> $csvFormat
-     * @param Filter|array{
-     *   billingGroupID?: string|null,
-     *   connectionID?: string|null,
-     *   customerReference?: string|null,
-     *   emergencyAddressID?: string|null,
-     *   hasBundle?: string|null,
-     *   phoneNumber?: string|null,
-     *   status?: value-of<Status>|null,
-     *   tag?: string|null,
-     *   voiceConnectionName?: VoiceConnectionName|null,
-     *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public static function with(
         CsvFormat|string|null $csvFormat = null,
@@ -107,18 +83,7 @@ final class CsvDownloadCreateParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[has_bundle], filter[tag], filter[connection_id], filter[phone_number], filter[status], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference].
      *
-     * @param Filter|array{
-     *   billingGroupID?: string|null,
-     *   connectionID?: string|null,
-     *   customerReference?: string|null,
-     *   emergencyAddressID?: string|null,
-     *   hasBundle?: string|null,
-     *   phoneNumber?: string|null,
-     *   status?: value-of<Status>|null,
-     *   tag?: string|null,
-     *   voiceConnectionName?: VoiceConnectionName|null,
-     *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
-     * } $filter
+     * @param FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

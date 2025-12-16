@@ -16,15 +16,15 @@ use Telnyx\Messaging10dlc\Brand\BrandListParams\Sort;
  * @see Telnyx\Services\Messaging10dlc\BrandService::list()
  *
  * @phpstan-type BrandListParamsShape = array{
- *   brandID?: string,
- *   country?: string,
- *   displayName?: string,
- *   entityType?: string,
- *   page?: int,
- *   recordsPerPage?: int,
- *   sort?: Sort|value-of<Sort>,
- *   state?: string,
- *   tcrBrandID?: string,
+ *   brandID?: string|null,
+ *   country?: string|null,
+ *   displayName?: string|null,
+ *   entityType?: string|null,
+ *   page?: int|null,
+ *   recordsPerPage?: int|null,
+ *   sort?: null|Sort|value-of<Sort>,
+ *   state?: string|null,
+ *   tcrBrandID?: string|null,
  * }
  */
 final class BrandListParams implements BaseModel

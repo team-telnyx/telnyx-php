@@ -13,15 +13,18 @@ use Telnyx\PhoneNumberBlocks\Jobs\Job\SuccessfulOperation;
 use Telnyx\PhoneNumberBlocks\Jobs\Job\Type;
 
 /**
+ * @phpstan-import-type FailedOperationShape from \Telnyx\PhoneNumberBlocks\Jobs\Job\FailedOperation
+ * @phpstan-import-type SuccessfulOperationShape from \Telnyx\PhoneNumberBlocks\Jobs\Job\SuccessfulOperation
+ *
  * @phpstan-type JobShape = array{
  *   id?: string|null,
  *   createdAt?: string|null,
  *   etc?: \DateTimeInterface|null,
- *   failedOperations?: list<FailedOperation>|null,
+ *   failedOperations?: list<FailedOperationShape>|null,
  *   recordType?: string|null,
- *   status?: value-of<Status>|null,
- *   successfulOperations?: list<SuccessfulOperation>|null,
- *   type?: value-of<Type>|null,
+ *   status?: null|Status|value-of<Status>,
+ *   successfulOperations?: list<SuccessfulOperationShape>|null,
+ *   type?: null|Type|value-of<Type>,
  *   updatedAt?: string|null,
  * }
  */
@@ -94,13 +97,9 @@ final class Job implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<FailedOperation|array{
-     *   id?: string|null, errors?: list<JobError>|null, phoneNumber?: string|null
-     * }> $failedOperations
+     * @param list<FailedOperationShape> $failedOperations
      * @param Status|value-of<Status> $status
-     * @param list<SuccessfulOperation|array{
-     *   id?: string|null, phoneNumber?: string|null
-     * }> $successfulOperations
+     * @param list<SuccessfulOperationShape> $successfulOperations
      * @param Type|value-of<Type> $type
      */
     public static function with(
@@ -163,9 +162,7 @@ final class Job implements BaseModel
     }
 
     /**
-     * @param list<FailedOperation|array{
-     *   id?: string|null, errors?: list<JobError>|null, phoneNumber?: string|null
-     * }> $failedOperations
+     * @param list<FailedOperationShape> $failedOperations
      */
     public function withFailedOperations(array $failedOperations): self
     {
@@ -200,9 +197,7 @@ final class Job implements BaseModel
     }
 
     /**
-     * @param list<SuccessfulOperation|array{
-     *   id?: string|null, phoneNumber?: string|null
-     * }> $successfulOperations
+     * @param list<SuccessfulOperationShape> $successfulOperations
      */
     public function withSuccessfulOperations(array $successfulOperations): self
     {

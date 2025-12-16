@@ -11,7 +11,7 @@ use Telnyx\PortingOrders\PortingOrderActivationSettings\ActivationStatus;
 
 /**
  * @phpstan-type PortingOrderActivationSettingsShape = array{
- *   activationStatus?: value-of<ActivationStatus>|null,
+ *   activationStatus?: null|ActivationStatus|value-of<ActivationStatus>,
  *   fastPortEligible?: bool|null,
  *   focDatetimeActual?: \DateTimeInterface|null,
  *   focDatetimeRequested?: \DateTimeInterface|null,

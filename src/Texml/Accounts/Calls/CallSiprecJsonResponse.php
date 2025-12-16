@@ -19,8 +19,8 @@ use Telnyx\Texml\Accounts\Calls\CallSiprecJsonResponse\Track;
  *   errorCode?: string|null,
  *   sid?: string|null,
  *   startTime?: string|null,
- *   status?: value-of<Status>|null,
- *   track?: value-of<Track>|null,
+ *   status?: null|Status|value-of<Status>,
+ *   track?: null|Track|value-of<Track>,
  *   uri?: string|null,
  * }
  */

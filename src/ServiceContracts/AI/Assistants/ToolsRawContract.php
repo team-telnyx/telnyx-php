@@ -16,7 +16,7 @@ interface ToolsRawContract
      * @api
      *
      * @param string $toolID Path param:
-     * @param array<mixed>|ToolTestParams $params
+     * @param array<string,mixed>|ToolTestParams $params
      *
      * @return BaseResponse<ToolTestResponse>
      *
