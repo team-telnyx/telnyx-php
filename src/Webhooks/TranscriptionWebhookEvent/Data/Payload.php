@@ -69,7 +69,7 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param TranscriptionDataShape $transcriptionData
+     * @param TranscriptionData|TranscriptionDataShape|null $transcriptionData
      */
     public static function with(
         ?string $callControlID = null,
@@ -147,7 +147,7 @@ final class Payload implements BaseModel
     }
 
     /**
-     * @param TranscriptionDataShape $transcriptionData
+     * @param TranscriptionData|TranscriptionDataShape $transcriptionData
      */
     public function withTranscriptionData(
         TranscriptionData|array $transcriptionData

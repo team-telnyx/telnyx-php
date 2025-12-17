@@ -44,7 +44,7 @@ final class Settings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<MobileNetworkOperatorsPreferenceShape> $mobileNetworkOperatorsPreferences
+     * @param list<MobileNetworkOperatorsPreferenceShape>|null $mobileNetworkOperatorsPreferences
      */
     public static function with(
         ?array $mobileNetworkOperatorsPreferences = null

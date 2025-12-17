@@ -67,8 +67,8 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ConnectionNameShape $connectionName
-     * @param VoiceUsagePaymentMethod|value-of<VoiceUsagePaymentMethod> $voiceUsagePaymentMethod
+     * @param ConnectionName|ConnectionNameShape|null $connectionName
+     * @param VoiceUsagePaymentMethod|value-of<VoiceUsagePaymentMethod>|null $voiceUsagePaymentMethod
      */
     public static function with(
         ConnectionName|array|null $connectionName = null,
@@ -89,7 +89,7 @@ final class Filter implements BaseModel
     /**
      * Filter by connection name pattern matching.
      *
-     * @param ConnectionNameShape $connectionName
+     * @param ConnectionName|ConnectionNameShape $connectionName
      */
     public function withConnectionName(
         ConnectionName|array $connectionName

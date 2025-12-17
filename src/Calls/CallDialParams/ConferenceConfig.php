@@ -138,9 +138,9 @@ final class ConferenceConfig implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BeepEnabled|value-of<BeepEnabled> $beepEnabled
-     * @param SupervisorRole|value-of<SupervisorRole> $supervisorRole
-     * @param list<string> $whisperCallControlIDs
+     * @param BeepEnabled|value-of<BeepEnabled>|null $beepEnabled
+     * @param SupervisorRole|value-of<SupervisorRole>|null $supervisorRole
+     * @param list<string>|null $whisperCallControlIDs
      */
     public static function with(
         ?string $id = null,

@@ -67,7 +67,7 @@ final class Comment implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param UserType|value-of<UserType> $userType
+     * @param UserType|value-of<UserType>|null $userType
      */
     public static function with(
         ?string $id = null,

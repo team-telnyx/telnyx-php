@@ -35,7 +35,7 @@ final class PortingOrderGetExceptionTypesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PortingOrdersExceptionTypeShape> $data
+     * @param list<PortingOrdersExceptionTypeShape>|null $data
      */
     public static function with(?array $data = null): self
     {

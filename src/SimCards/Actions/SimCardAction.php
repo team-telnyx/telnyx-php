@@ -93,9 +93,9 @@ final class SimCardAction implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ActionType|value-of<ActionType> $actionType
+     * @param ActionType|value-of<ActionType>|null $actionType
      * @param array<string,mixed>|null $settings
-     * @param StatusShape $status
+     * @param Status|StatusShape|null $status
      */
     public static function with(
         ?string $id = null,
@@ -195,7 +195,7 @@ final class SimCardAction implements BaseModel
     }
 
     /**
-     * @param StatusShape $status
+     * @param Status|StatusShape $status
      */
     public function withStatus(Status|array $status): self
     {

@@ -60,8 +60,8 @@ final class TranscriptionSettings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Model|value-of<Model> $model
-     * @param TranscriptionSettingsConfigShape $settings
+     * @param Model|value-of<Model>|null $model
+     * @param TranscriptionSettingsConfig|TranscriptionSettingsConfigShape|null $settings
      */
     public static function with(
         ?string $language = null,
@@ -118,7 +118,7 @@ final class TranscriptionSettings implements BaseModel
     }
 
     /**
-     * @param TranscriptionSettingsConfigShape $settings
+     * @param TranscriptionSettingsConfig|TranscriptionSettingsConfigShape $settings
      */
     public function withSettings(
         TranscriptionSettingsConfig|array $settings

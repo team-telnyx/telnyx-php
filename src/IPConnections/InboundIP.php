@@ -172,12 +172,12 @@ final class InboundIP implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AniNumberFormat|value-of<AniNumberFormat> $aniNumberFormat
-     * @param list<string> $codecs
-     * @param DefaultRoutingMethod|value-of<DefaultRoutingMethod> $defaultRoutingMethod
-     * @param DnisNumberFormat|value-of<DnisNumberFormat> $dnisNumberFormat
-     * @param SipRegion|value-of<SipRegion> $sipRegion
-     * @param SipSubdomainReceiveSettings|value-of<SipSubdomainReceiveSettings> $sipSubdomainReceiveSettings
+     * @param AniNumberFormat|value-of<AniNumberFormat>|null $aniNumberFormat
+     * @param list<string>|null $codecs
+     * @param DefaultRoutingMethod|value-of<DefaultRoutingMethod>|null $defaultRoutingMethod
+     * @param DnisNumberFormat|value-of<DnisNumberFormat>|null $dnisNumberFormat
+     * @param SipRegion|value-of<SipRegion>|null $sipRegion
+     * @param SipSubdomainReceiveSettings|value-of<SipSubdomainReceiveSettings>|null $sipSubdomainReceiveSettings
      */
     public static function with(
         AniNumberFormat|string|null $aniNumberFormat = null,

@@ -48,7 +48,7 @@ final class RequirementGroupUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RegulatoryRequirementShape> $regulatoryRequirements
+     * @param list<RegulatoryRequirementShape>|null $regulatoryRequirements
      */
     public static function with(
         ?string $customerReference = null,

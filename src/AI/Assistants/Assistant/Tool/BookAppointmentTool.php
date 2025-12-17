@@ -53,7 +53,7 @@ final class BookAppointmentTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BookAppointmentShape $bookAppointment
+     * @param BookAppointment|BookAppointmentShape $bookAppointment
      */
     public static function with(BookAppointment|array $bookAppointment): self
     {
@@ -65,7 +65,7 @@ final class BookAppointmentTool implements BaseModel
     }
 
     /**
-     * @param BookAppointmentShape $bookAppointment
+     * @param BookAppointment|BookAppointmentShape $bookAppointment
      */
     public function withBookAppointment(
         BookAppointment|array $bookAppointment

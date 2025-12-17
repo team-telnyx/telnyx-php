@@ -45,8 +45,8 @@ final class RegisterNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SimpleSimCardShape> $data
-     * @param list<ErrorShape> $errors
+     * @param list<SimpleSimCardShape>|null $data
+     * @param list<ErrorShape>|null $errors
      */
     public static function with(?array $data = null, ?array $errors = null): self
     {

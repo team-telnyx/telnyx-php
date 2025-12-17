@@ -88,7 +88,7 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<MessageHistoryShape> $messageHistory
+     * @param list<MessageHistoryShape>|null $messageHistory
      */
     public static function with(
         ?string $callControlID = null,

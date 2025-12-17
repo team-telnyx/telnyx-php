@@ -135,12 +135,12 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CountryISOAlpha2Shape $countryISOAlpha2
-     * @param NumberTypeShape $numberType
-     * @param Source|value-of<Source> $source
-     * @param Status|value-of<Status> $status
-     * @param VoiceConnectionNameShape $voiceConnectionName
-     * @param VoiceUsagePaymentMethod|value-of<VoiceUsagePaymentMethod> $voiceUsagePaymentMethod
+     * @param CountryISOAlpha2Shape|null $countryISOAlpha2
+     * @param NumberType|NumberTypeShape|null $numberType
+     * @param Source|value-of<Source>|null $source
+     * @param Status|value-of<Status>|null $status
+     * @param VoiceConnectionName|VoiceConnectionNameShape|null $voiceConnectionName
+     * @param VoiceUsagePaymentMethod|value-of<VoiceUsagePaymentMethod>|null $voiceUsagePaymentMethod
      */
     public static function with(
         ?string $billingGroupID = null,
@@ -234,7 +234,7 @@ final class Filter implements BaseModel
     /**
      * Filter phone numbers by phone number type.
      *
-     * @param NumberTypeShape $numberType
+     * @param NumberType|NumberTypeShape $numberType
      */
     public function withNumberType(NumberType|array $numberType): self
     {
@@ -296,7 +296,7 @@ final class Filter implements BaseModel
     /**
      * Filter by voice connection name pattern matching (requires include_connection param).
      *
-     * @param VoiceConnectionNameShape $voiceConnectionName
+     * @param VoiceConnectionName|VoiceConnectionNameShape $voiceConnectionName
      */
     public function withVoiceConnectionName(
         VoiceConnectionName|array $voiceConnectionName

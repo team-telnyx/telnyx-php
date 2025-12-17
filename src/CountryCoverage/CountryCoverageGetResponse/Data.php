@@ -120,13 +120,13 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $features
-     * @param LocalShape $local
-     * @param array<string,mixed> $mobile
-     * @param array<string,mixed> $national
-     * @param list<string> $phoneNumberType
-     * @param array<string,mixed> $sharedCost
-     * @param TollFreeShape $tollFree
+     * @param list<string>|null $features
+     * @param Local|LocalShape|null $local
+     * @param array<string,mixed>|null $mobile
+     * @param array<string,mixed>|null $national
+     * @param list<string>|null $phoneNumberType
+     * @param array<string,mixed>|null $sharedCost
+     * @param TollFree|TollFreeShape|null $tollFree
      */
     public static function with(
         ?string $code = null,
@@ -210,7 +210,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param LocalShape $local
+     * @param Local|LocalShape $local
      */
     public function withLocal(Local|array $local): self
     {
@@ -316,7 +316,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param TollFreeShape $tollFree
+     * @param TollFree|TollFreeShape $tollFree
      */
     public function withTollFree(TollFree|array $tollFree): self
     {

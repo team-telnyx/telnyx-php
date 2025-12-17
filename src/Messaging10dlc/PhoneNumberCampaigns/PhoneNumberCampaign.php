@@ -112,7 +112,7 @@ final class PhoneNumberCampaign implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AssignmentStatus|value-of<AssignmentStatus> $assignmentStatus
+     * @param AssignmentStatus|value-of<AssignmentStatus>|null $assignmentStatus
      */
     public static function with(
         string $campaignID,

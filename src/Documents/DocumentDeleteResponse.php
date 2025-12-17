@@ -33,7 +33,7 @@ final class DocumentDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DocServiceDocumentShape $data
+     * @param DocServiceDocument|DocServiceDocumentShape|null $data
      */
     public static function with(DocServiceDocument|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class DocumentDeleteResponse implements BaseModel
     }
 
     /**
-     * @param DocServiceDocumentShape $data
+     * @param DocServiceDocument|DocServiceDocumentShape $data
      */
     public function withData(DocServiceDocument|array $data): self
     {

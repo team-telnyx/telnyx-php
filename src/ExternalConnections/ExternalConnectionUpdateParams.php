@@ -21,9 +21,9 @@ use Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Outbound;
  * @phpstan-import-type InboundShape from \Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Inbound
  *
  * @phpstan-type ExternalConnectionUpdateParamsShape = array{
- *   outbound: OutboundShape,
+ *   outbound: Outbound|OutboundShape,
  *   active?: bool|null,
- *   inbound?: InboundShape|null,
+ *   inbound?: null|Inbound|InboundShape,
  *   tags?: list<string>|null,
  *   webhookEventFailoverURL?: string|null,
  *   webhookEventURL?: string|null,
@@ -98,9 +98,9 @@ final class ExternalConnectionUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param OutboundShape $outbound
-     * @param InboundShape $inbound
-     * @param list<string> $tags
+     * @param Outbound|OutboundShape $outbound
+     * @param Inbound|InboundShape|null $inbound
+     * @param list<string>|null $tags
      */
     public static function with(
         Outbound|array $outbound,
@@ -126,7 +126,7 @@ final class ExternalConnectionUpdateParams implements BaseModel
     }
 
     /**
-     * @param OutboundShape $outbound
+     * @param Outbound|OutboundShape $outbound
      */
     public function withOutbound(Outbound|array $outbound): self
     {
@@ -148,7 +148,7 @@ final class ExternalConnectionUpdateParams implements BaseModel
     }
 
     /**
-     * @param InboundShape $inbound
+     * @param Inbound|InboundShape $inbound
      */
     public function withInbound(Inbound|array $inbound): self
     {

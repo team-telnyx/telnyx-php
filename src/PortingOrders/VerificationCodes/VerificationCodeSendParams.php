@@ -44,8 +44,8 @@ final class VerificationCodeSendParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $phoneNumbers
-     * @param VerificationMethod|value-of<VerificationMethod> $verificationMethod
+     * @param list<string>|null $phoneNumbers
+     * @param VerificationMethod|value-of<VerificationMethod>|null $verificationMethod
      */
     public static function with(
         ?array $phoneNumbers = null,

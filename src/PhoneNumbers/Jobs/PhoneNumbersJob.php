@@ -111,12 +111,12 @@ final class PhoneNumbersJob implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<FailedOperationShape> $failedOperations
-     * @param list<PendingOperationShape> $pendingOperations
-     * @param list<PhoneNumberShape> $phoneNumbers
-     * @param Status|value-of<Status> $status
-     * @param list<SuccessfulOperationShape> $successfulOperations
-     * @param Type|value-of<Type> $type
+     * @param list<FailedOperationShape>|null $failedOperations
+     * @param list<PendingOperationShape>|null $pendingOperations
+     * @param list<PhoneNumberShape>|null $phoneNumbers
+     * @param Status|value-of<Status>|null $status
+     * @param list<SuccessfulOperationShape>|null $successfulOperations
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         ?string $id = null,

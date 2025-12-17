@@ -53,9 +53,9 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param GlobalIPShape $globalIP
-     * @param ReceivedShape $received
-     * @param TransmittedShape $transmitted
+     * @param GlobalIP|GlobalIPShape|null $globalIP
+     * @param Received|ReceivedShape|null $received
+     * @param Transmitted|TransmittedShape|null $transmitted
      */
     public static function with(
         GlobalIP|array|null $globalIP = null,
@@ -74,7 +74,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param GlobalIPShape $globalIP
+     * @param GlobalIP|GlobalIPShape $globalIP
      */
     public function withGlobalIP(GlobalIP|array $globalIP): self
     {
@@ -85,7 +85,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param ReceivedShape $received
+     * @param Received|ReceivedShape $received
      */
     public function withReceived(Received|array $received): self
     {
@@ -107,7 +107,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param TransmittedShape $transmitted
+     * @param Transmitted|TransmittedShape $transmitted
      */
     public function withTransmitted(Transmitted|array $transmitted): self
     {

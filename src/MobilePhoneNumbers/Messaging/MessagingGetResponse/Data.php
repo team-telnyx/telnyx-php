@@ -110,9 +110,9 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FeaturesShape $features
-     * @param RecordType|value-of<RecordType> $recordType
-     * @param Type|value-of<Type> $type
+     * @param Features|FeaturesShape|null $features
+     * @param RecordType|value-of<RecordType>|null $recordType
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         ?string $id = null,
@@ -178,7 +178,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param FeaturesShape $features
+     * @param Features|FeaturesShape $features
      */
     public function withFeatures(Features|array $features): self
     {

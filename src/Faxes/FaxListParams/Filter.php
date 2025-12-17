@@ -66,10 +66,10 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CreatedAtShape $createdAt
-     * @param DirectionShape $direction
-     * @param FromShape $from
-     * @param ToShape $to
+     * @param CreatedAt|CreatedAtShape|null $createdAt
+     * @param Direction|DirectionShape|null $direction
+     * @param From|FromShape|null $from
+     * @param To|ToShape|null $to
      */
     public static function with(
         CreatedAt|array|null $createdAt = null,
@@ -90,7 +90,7 @@ final class Filter implements BaseModel
     /**
      * Date range filtering operations for fax creation timestamp.
      *
-     * @param CreatedAtShape $createdAt
+     * @param CreatedAt|CreatedAtShape $createdAt
      */
     public function withCreatedAt(CreatedAt|array $createdAt): self
     {
@@ -103,7 +103,7 @@ final class Filter implements BaseModel
     /**
      * Direction filtering operations.
      *
-     * @param DirectionShape $direction
+     * @param Direction|DirectionShape $direction
      */
     public function withDirection(Direction|array $direction): self
     {
@@ -116,7 +116,7 @@ final class Filter implements BaseModel
     /**
      * From number filtering operations.
      *
-     * @param FromShape $from
+     * @param From|FromShape $from
      */
     public function withFrom(From|array $from): self
     {
@@ -129,7 +129,7 @@ final class Filter implements BaseModel
     /**
      * To number filtering operations.
      *
-     * @param ToShape $to
+     * @param To|ToShape $to
      */
     public function withTo(To|array $to): self
     {

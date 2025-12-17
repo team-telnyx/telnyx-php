@@ -76,8 +76,8 @@ final class RecursiveCluster implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<NodeShape> $nodes
-     * @param list<mixed> $subclusters
+     * @param list<NodeShape>|null $nodes
+     * @param list<mixed>|null $subclusters
      */
     public static function with(
         string $clusterID,

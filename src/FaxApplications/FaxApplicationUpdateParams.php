@@ -27,8 +27,8 @@ use Telnyx\FaxApplications\FaxApplicationUpdateParams\Outbound;
  *   active?: bool|null,
  *   anchorsiteOverride?: null|AnchorsiteOverride|value-of<AnchorsiteOverride>,
  *   faxEmailRecipient?: string|null,
- *   inbound?: InboundShape|null,
- *   outbound?: OutboundShape|null,
+ *   inbound?: null|Inbound|InboundShape,
+ *   outbound?: null|Outbound|OutboundShape,
  *   tags?: list<string>|null,
  *   webhookEventFailoverURL?: string|null,
  *   webhookTimeoutSecs?: int|null,
@@ -124,10 +124,10 @@ final class FaxApplicationUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
-     * @param InboundShape $inbound
-     * @param OutboundShape $outbound
-     * @param list<string> $tags
+     * @param AnchorsiteOverride|value-of<AnchorsiteOverride>|null $anchorsiteOverride
+     * @param Inbound|InboundShape|null $inbound
+     * @param Outbound|OutboundShape|null $outbound
+     * @param list<string>|null $tags
      */
     public static function with(
         string $applicationName,
@@ -217,7 +217,7 @@ final class FaxApplicationUpdateParams implements BaseModel
     }
 
     /**
-     * @param InboundShape $inbound
+     * @param Inbound|InboundShape $inbound
      */
     public function withInbound(Inbound|array $inbound): self
     {
@@ -228,7 +228,7 @@ final class FaxApplicationUpdateParams implements BaseModel
     }
 
     /**
-     * @param OutboundShape $outbound
+     * @param Outbound|OutboundShape $outbound
      */
     public function withOutbound(Outbound|array $outbound): self
     {

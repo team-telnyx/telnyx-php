@@ -129,9 +129,9 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Feature|value-of<Feature>> $features
-     * @param PhoneNumberShape $phoneNumber
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
+     * @param list<Feature|value-of<Feature>>|null $features
+     * @param PhoneNumber|PhoneNumberShape|null $phoneNumber
+     * @param PhoneNumberType|value-of<PhoneNumberType>|null $phoneNumberType
      */
     public static function with(
         ?string $administrativeArea = null,
@@ -261,7 +261,7 @@ final class Filter implements BaseModel
     /**
      * Filter phone numbers by pattern matching.
      *
-     * @param PhoneNumberShape $phoneNumber
+     * @param PhoneNumber|PhoneNumberShape $phoneNumber
      */
     public function withPhoneNumber(PhoneNumber|array $phoneNumber): self
     {

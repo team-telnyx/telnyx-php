@@ -37,7 +37,7 @@ final class PortingOrder implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Status|value-of<Status>> $status
+     * @param list<Status|value-of<Status>>|null $status
      */
     public static function with(?array $status = null): self
     {

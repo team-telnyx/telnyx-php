@@ -21,9 +21,9 @@ use Telnyx\SimCardStatus;
  *
  * @phpstan-type SimCardUpdateParamsShape = array{
  *   authorizedImeis?: list<string>|null,
- *   dataLimit?: DataLimitShape|null,
+ *   dataLimit?: null|DataLimit|DataLimitShape,
  *   simCardGroupID?: string|null,
- *   status?: SimCardStatusShape|null,
+ *   status?: null|SimCardStatus|SimCardStatusShape,
  *   tags?: list<string>|null,
  * }
  */
@@ -75,9 +75,9 @@ final class SimCardUpdateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string>|null $authorizedImeis
-     * @param DataLimitShape $dataLimit
-     * @param SimCardStatusShape $status
-     * @param list<string> $tags
+     * @param DataLimit|DataLimitShape|null $dataLimit
+     * @param SimCardStatus|SimCardStatusShape|null $status
+     * @param list<string>|null $tags
      */
     public static function with(
         ?array $authorizedImeis = null,
@@ -113,7 +113,7 @@ final class SimCardUpdateParams implements BaseModel
     /**
      * The SIM card individual data limit configuration.
      *
-     * @param DataLimitShape $dataLimit
+     * @param DataLimit|DataLimitShape $dataLimit
      */
     public function withDataLimit(DataLimit|array $dataLimit): self
     {
@@ -135,7 +135,7 @@ final class SimCardUpdateParams implements BaseModel
     }
 
     /**
-     * @param SimCardStatusShape $status
+     * @param SimCardStatus|SimCardStatusShape $status
      */
     public function withStatus(SimCardStatus|array $status): self
     {

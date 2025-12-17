@@ -33,7 +33,7 @@ final class OAuthGrantGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param OAuthGrantShape $data
+     * @param OAuthGrant|OAuthGrantShape|null $data
      */
     public static function with(OAuthGrant|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class OAuthGrantGetResponse implements BaseModel
     }
 
     /**
-     * @param OAuthGrantShape $data
+     * @param OAuthGrant|OAuthGrantShape $data
      */
     public function withData(OAuthGrant|array $data): self
     {

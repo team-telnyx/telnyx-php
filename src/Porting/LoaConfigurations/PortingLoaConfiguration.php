@@ -104,9 +104,9 @@ final class PortingLoaConfiguration implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AddressShape $address
-     * @param ContactShape $contact
-     * @param LogoShape $logo
+     * @param Address|AddressShape|null $address
+     * @param Contact|ContactShape|null $contact
+     * @param Logo|LogoShape|null $logo
      */
     public static function with(
         ?string $id = null,
@@ -150,7 +150,7 @@ final class PortingLoaConfiguration implements BaseModel
     /**
      * The address of the company.
      *
-     * @param AddressShape $address
+     * @param Address|AddressShape $address
      */
     public function withAddress(Address|array $address): self
     {
@@ -174,7 +174,7 @@ final class PortingLoaConfiguration implements BaseModel
     /**
      * The contact information of the company.
      *
-     * @param ContactShape $contact
+     * @param Contact|ContactShape $contact
      */
     public function withContact(Contact|array $contact): self
     {
@@ -198,7 +198,7 @@ final class PortingLoaConfiguration implements BaseModel
     /**
      * The logo to be used in the LOA.
      *
-     * @param LogoShape $logo
+     * @param Logo|LogoShape $logo
      */
     public function withLogo(Logo|array $logo): self
     {

@@ -58,7 +58,7 @@ final class PortingOrderMisc implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param RemainingNumbersAction|value-of<RemainingNumbersAction>|null $remainingNumbersAction
-     * @param PortingOrderType|value-of<PortingOrderType> $type
+     * @param PortingOrderType|value-of<PortingOrderType>|null $type
      */
     public static function with(
         ?string $newBillingPhoneNumber = null,

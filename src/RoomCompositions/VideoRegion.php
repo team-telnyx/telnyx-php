@@ -85,7 +85,7 @@ final class VideoRegion implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $videoSources
+     * @param list<string>|null $videoSources
      */
     public static function with(
         ?int $height = null,

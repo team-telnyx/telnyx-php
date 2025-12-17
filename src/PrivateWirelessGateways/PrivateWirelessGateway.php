@@ -99,8 +99,8 @@ final class PrivateWirelessGateway implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PwgAssignedResourcesSummaryShape> $assignedResources
-     * @param PrivateWirelessGatewayStatusShape $status
+     * @param list<PwgAssignedResourcesSummaryShape>|null $assignedResources
+     * @param PrivateWirelessGatewayStatus|PrivateWirelessGatewayStatusShape|null $status
      */
     public static function with(
         ?string $id = null,
@@ -220,7 +220,7 @@ final class PrivateWirelessGateway implements BaseModel
     /**
      * The current status or failure details of the Private Wireless Gateway.
      *
-     * @param PrivateWirelessGatewayStatusShape $status
+     * @param PrivateWirelessGatewayStatus|PrivateWirelessGatewayStatusShape $status
      */
     public function withStatus(PrivateWirelessGatewayStatus|array $status): self
     {

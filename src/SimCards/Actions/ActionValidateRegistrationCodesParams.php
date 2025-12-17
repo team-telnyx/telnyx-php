@@ -38,7 +38,7 @@ final class ActionValidateRegistrationCodesParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $registrationCodes
+     * @param list<string>|null $registrationCodes
      */
     public static function with(?array $registrationCodes = null): self
     {

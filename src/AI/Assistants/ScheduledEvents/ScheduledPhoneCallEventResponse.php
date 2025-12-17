@@ -116,9 +116,9 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param ConversationChannelType|value-of<ConversationChannelType> $telnyxConversationChannel
-     * @param array<string,ConversationMetadataShape> $conversationMetadata
-     * @param list<string> $errors
-     * @param EventStatus|value-of<EventStatus> $status
+     * @param array<string,ConversationMetadataShape>|null $conversationMetadata
+     * @param list<string>|null $errors
+     * @param EventStatus|value-of<EventStatus>|null $status
      */
     public static function with(
         string $assistantID,

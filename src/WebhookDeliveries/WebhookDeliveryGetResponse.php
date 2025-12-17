@@ -37,7 +37,7 @@ final class WebhookDeliveryGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DataShape $data
+     * @param Data|DataShape|null $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -51,7 +51,7 @@ final class WebhookDeliveryGetResponse implements BaseModel
     /**
      * Record of all attempts to deliver a webhook.
      *
-     * @param DataShape $data
+     * @param Data|DataShape $data
      */
     public function withData(Data|array $data): self
     {

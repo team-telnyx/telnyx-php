@@ -156,7 +156,7 @@ final class VirtualCrossConnectCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CloudProvider|value-of<CloudProvider> $cloudProvider
+     * @param CloudProvider|value-of<CloudProvider>|null $cloudProvider
      */
     public static function with(
         string $regionCode,

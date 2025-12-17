@@ -43,7 +43,7 @@ final class MessageHistory implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Role|value-of<Role> $role
+     * @param Role|value-of<Role>|null $role
      */
     public static function with(
         ?string $content = null,

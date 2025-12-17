@@ -33,7 +33,7 @@ final class GlobalIPAssignmentDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param GlobalIPAssignmentShape $data
+     * @param GlobalIPAssignment|GlobalIPAssignmentShape|null $data
      */
     public static function with(GlobalIPAssignment|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class GlobalIPAssignmentDeleteResponse implements BaseModel
     }
 
     /**
-     * @param GlobalIPAssignmentShape $data
+     * @param GlobalIPAssignment|GlobalIPAssignmentShape $data
      */
     public function withData(GlobalIPAssignment|array $data): self
     {

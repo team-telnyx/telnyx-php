@@ -39,8 +39,8 @@ final class DeliveryUpdateWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DataShape $data
-     * @param MetaShape $meta
+     * @param Data|DataShape|null $data
+     * @param Meta|MetaShape|null $meta
      */
     public static function with(
         Data|array|null $data = null,
@@ -55,7 +55,7 @@ final class DeliveryUpdateWebhookEvent implements BaseModel
     }
 
     /**
-     * @param DataShape $data
+     * @param Data|DataShape $data
      */
     public function withData(Data|array $data): self
     {
@@ -66,7 +66,7 @@ final class DeliveryUpdateWebhookEvent implements BaseModel
     }
 
     /**
-     * @param MetaShape $meta
+     * @param Meta|MetaShape $meta
      */
     public function withMeta(Meta|array $meta): self
     {

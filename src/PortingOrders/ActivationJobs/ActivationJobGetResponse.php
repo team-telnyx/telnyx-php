@@ -34,7 +34,7 @@ final class ActivationJobGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortingOrdersActivationJobShape $data
+     * @param PortingOrdersActivationJob|PortingOrdersActivationJobShape|null $data
      */
     public static function with(
         PortingOrdersActivationJob|array|null $data = null
@@ -47,7 +47,7 @@ final class ActivationJobGetResponse implements BaseModel
     }
 
     /**
-     * @param PortingOrdersActivationJobShape $data
+     * @param PortingOrdersActivationJob|PortingOrdersActivationJobShape $data
      */
     public function withData(PortingOrdersActivationJob|array $data): self
     {

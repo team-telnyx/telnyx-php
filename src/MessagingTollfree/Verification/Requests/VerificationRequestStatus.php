@@ -265,7 +265,7 @@ final class VerificationRequestStatus implements BaseModel
      * @param list<TfPhoneNumberShape> $phoneNumbers
      * @param UseCaseCategories|value-of<UseCaseCategories> $useCase
      * @param TfVerificationStatus|value-of<TfVerificationStatus> $verificationStatus
-     * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType> $entityType
+     * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null $entityType
      */
     public static function with(
         string $id,

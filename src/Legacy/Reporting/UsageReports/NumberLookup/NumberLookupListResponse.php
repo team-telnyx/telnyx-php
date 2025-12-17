@@ -40,8 +40,8 @@ final class NumberLookupListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TelcoDataUsageReportResponseShape> $data
-     * @param StandardPaginationMetaShape $meta
+     * @param list<TelcoDataUsageReportResponseShape>|null $data
+     * @param StandardPaginationMeta|StandardPaginationMetaShape|null $meta
      */
     public static function with(
         ?array $data = null,
@@ -67,7 +67,7 @@ final class NumberLookupListResponse implements BaseModel
     }
 
     /**
-     * @param StandardPaginationMetaShape $meta
+     * @param StandardPaginationMeta|StandardPaginationMetaShape $meta
      */
     public function withMeta(StandardPaginationMeta|array $meta): self
     {

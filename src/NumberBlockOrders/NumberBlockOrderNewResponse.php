@@ -33,7 +33,7 @@ final class NumberBlockOrderNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param NumberBlockOrderShape $data
+     * @param NumberBlockOrder|NumberBlockOrderShape|null $data
      */
     public static function with(NumberBlockOrder|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class NumberBlockOrderNewResponse implements BaseModel
     }
 
     /**
-     * @param NumberBlockOrderShape $data
+     * @param NumberBlockOrder|NumberBlockOrderShape $data
      */
     public function withData(NumberBlockOrder|array $data): self
     {

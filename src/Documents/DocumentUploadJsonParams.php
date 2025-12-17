@@ -17,7 +17,9 @@ use Telnyx\Documents\DocumentUploadJsonParams\Document;
  *
  * @phpstan-import-type DocumentShape from \Telnyx\Documents\DocumentUploadJsonParams\Document
  *
- * @phpstan-type DocumentUploadJsonParamsShape = array{document: DocumentShape}
+ * @phpstan-type DocumentUploadJsonParamsShape = array{
+ *   document: Document|DocumentShape
+ * }
  */
 final class DocumentUploadJsonParams implements BaseModel
 {
@@ -52,7 +54,7 @@ final class DocumentUploadJsonParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DocumentShape $document
+     * @param Document|DocumentShape $document
      */
     public static function with(Document|array $document): self
     {
@@ -64,7 +66,7 @@ final class DocumentUploadJsonParams implements BaseModel
     }
 
     /**
-     * @param DocumentShape $document
+     * @param Document|DocumentShape $document
      */
     public function withDocument(Document|array $document): self
     {

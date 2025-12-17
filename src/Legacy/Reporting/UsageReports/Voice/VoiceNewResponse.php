@@ -36,7 +36,7 @@ final class VoiceNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CdrUsageReportResponseLegacyShape $data
+     * @param CdrUsageReportResponseLegacy|CdrUsageReportResponseLegacyShape|null $data
      */
     public static function with(
         CdrUsageReportResponseLegacy|array|null $data = null
@@ -51,7 +51,7 @@ final class VoiceNewResponse implements BaseModel
     /**
      * Legacy V2 CDR usage report response.
      *
-     * @param CdrUsageReportResponseLegacyShape $data
+     * @param CdrUsageReportResponseLegacy|CdrUsageReportResponseLegacyShape $data
      */
     public function withData(CdrUsageReportResponseLegacy|array $data): self
     {

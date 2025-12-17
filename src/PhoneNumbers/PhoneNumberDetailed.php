@@ -275,8 +275,8 @@ final class PhoneNumberDetailed implements BaseModel
      * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
      * @param Status|value-of<Status> $status
      * @param list<string> $tags
-     * @param EmergencyStatus|value-of<EmergencyStatus> $emergencyStatus
-     * @param InboundCallScreening|value-of<InboundCallScreening> $inboundCallScreening
+     * @param EmergencyStatus|value-of<EmergencyStatus>|null $emergencyStatus
+     * @param InboundCallScreening|value-of<InboundCallScreening>|null $inboundCallScreening
      * @param SourceType|value-of<SourceType>|null $sourceType
      */
     public static function with(

@@ -76,8 +76,8 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ActionType|value-of<ActionType> $actionType
-     * @param array<string,mixed> $settings
+     * @param ActionType|value-of<ActionType>|null $actionType
+     * @param array<string,mixed>|null $settings
      */
     public static function with(
         ?string $id = null,

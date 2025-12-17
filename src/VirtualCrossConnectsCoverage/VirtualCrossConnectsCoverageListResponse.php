@@ -67,9 +67,9 @@ final class VirtualCrossConnectsCoverageListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<float> $availableBandwidth
-     * @param CloudProvider|value-of<CloudProvider> $cloudProvider
-     * @param LocationShape $location
+     * @param list<float>|null $availableBandwidth
+     * @param CloudProvider|value-of<CloudProvider>|null $cloudProvider
+     * @param Location|LocationShape|null $location
      */
     public static function with(
         ?array $availableBandwidth = null,
@@ -127,7 +127,7 @@ final class VirtualCrossConnectsCoverageListResponse implements BaseModel
     }
 
     /**
-     * @param LocationShape $location
+     * @param Location|LocationShape $location
      */
     public function withLocation(Location|array $location): self
     {

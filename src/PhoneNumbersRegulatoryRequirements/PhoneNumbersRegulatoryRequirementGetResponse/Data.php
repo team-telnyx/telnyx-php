@@ -54,8 +54,8 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RegionInformationShape> $regionInformation
-     * @param list<RegulatoryRequirementShape> $regulatoryRequirements
+     * @param list<RegionInformationShape>|null $regionInformation
+     * @param list<RegulatoryRequirementShape>|null $regulatoryRequirements
      */
     public static function with(
         ?string $phoneNumber = null,

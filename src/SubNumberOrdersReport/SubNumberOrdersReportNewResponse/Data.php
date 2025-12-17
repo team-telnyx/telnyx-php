@@ -82,8 +82,8 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FiltersShape $filters
-     * @param Status|value-of<Status> $status
+     * @param Filters|FiltersShape|null $filters
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,
@@ -132,7 +132,7 @@ final class Data implements BaseModel
     /**
      * The filters that were applied to generate this report.
      *
-     * @param FiltersShape $filters
+     * @param Filters|FiltersShape $filters
      */
     public function withFilters(Filters|array $filters): self
     {

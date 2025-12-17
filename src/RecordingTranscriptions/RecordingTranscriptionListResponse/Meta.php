@@ -48,7 +48,7 @@ final class Meta implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CursorsShape $cursors
+     * @param Cursors|CursorsShape|null $cursors
      */
     public static function with(
         Cursors|array|null $cursors = null,
@@ -65,7 +65,7 @@ final class Meta implements BaseModel
     }
 
     /**
-     * @param CursorsShape $cursors
+     * @param Cursors|CursorsShape $cursors
      */
     public function withCursors(Cursors|array $cursors): self
     {

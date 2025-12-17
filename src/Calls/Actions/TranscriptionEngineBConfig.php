@@ -56,9 +56,9 @@ final class TranscriptionEngineBConfig implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param TelnyxTranscriptionLanguage|value-of<TelnyxTranscriptionLanguage> $language
-     * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine
-     * @param TranscriptionModel|value-of<TranscriptionModel> $transcriptionModel
+     * @param TelnyxTranscriptionLanguage|value-of<TelnyxTranscriptionLanguage>|null $language
+     * @param TranscriptionEngine|value-of<TranscriptionEngine>|null $transcriptionEngine
+     * @param TranscriptionModel|value-of<TranscriptionModel>|null $transcriptionModel
      */
     public static function with(
         TelnyxTranscriptionLanguage|string|null $language = null,

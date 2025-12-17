@@ -130,7 +130,7 @@ final class OAuthClientCreateParams implements BaseModel
      * @param list<AllowedGrantType|value-of<AllowedGrantType>> $allowedGrantTypes
      * @param list<string> $allowedScopes
      * @param ClientType|value-of<ClientType> $clientType
-     * @param list<string> $redirectUris
+     * @param list<string>|null $redirectUris
      */
     public static function with(
         array $allowedGrantTypes,

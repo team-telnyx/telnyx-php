@@ -33,7 +33,7 @@ final class RecordingTranscriptionGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordingTranscriptionShape $data
+     * @param RecordingTranscription|RecordingTranscriptionShape|null $data
      */
     public static function with(RecordingTranscription|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class RecordingTranscriptionGetResponse implements BaseModel
     }
 
     /**
-     * @param RecordingTranscriptionShape $data
+     * @param RecordingTranscription|RecordingTranscriptionShape $data
      */
     public function withData(RecordingTranscription|array $data): self
     {

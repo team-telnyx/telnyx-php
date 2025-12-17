@@ -68,8 +68,8 @@ final class PortingOrderGetRequirementsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FieldType|value-of<FieldType> $fieldType
-     * @param RequirementTypeShape $requirementType
+     * @param FieldType|value-of<FieldType>|null $fieldType
+     * @param RequirementType|RequirementTypeShape|null $requirementType
      */
     public static function with(
         FieldType|string|null $fieldType = null,
@@ -138,7 +138,7 @@ final class PortingOrderGetRequirementsResponse implements BaseModel
     /**
      * Identifies the requirement type that meets this requirement.
      *
-     * @param RequirementTypeShape $requirementType
+     * @param RequirementType|RequirementTypeShape $requirementType
      */
     public function withRequirementType(
         RequirementType|array $requirementType

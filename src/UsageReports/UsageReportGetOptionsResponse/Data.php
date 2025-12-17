@@ -66,9 +66,9 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $productDimensions
-     * @param list<string> $productMetrics
-     * @param list<RecordTypeShape> $recordTypes
+     * @param list<string>|null $productDimensions
+     * @param list<string>|null $productMetrics
+     * @param list<RecordTypeShape>|null $recordTypes
      */
     public static function with(
         ?string $product = null,

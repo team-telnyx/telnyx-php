@@ -18,7 +18,7 @@ use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\GlobalIPAssignment
  * @phpstan-import-type GlobalIPAssignmentUpdateRequestShape from \Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\GlobalIPAssignmentUpdateRequest
  *
  * @phpstan-type GlobalIPAssignmentUpdateParamsShape = array{
- *   globalIPAssignmentUpdateRequest: GlobalIPAssignmentUpdateRequestShape
+ *   globalIPAssignmentUpdateRequest: GlobalIPAssignmentUpdateRequest|GlobalIPAssignmentUpdateRequestShape,
  * }
  */
 final class GlobalIPAssignmentUpdateParams implements BaseModel
@@ -54,7 +54,7 @@ final class GlobalIPAssignmentUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param GlobalIPAssignmentUpdateRequestShape $globalIPAssignmentUpdateRequest
+     * @param GlobalIPAssignmentUpdateRequest|GlobalIPAssignmentUpdateRequestShape $globalIPAssignmentUpdateRequest
      */
     public static function with(
         GlobalIPAssignmentUpdateRequest|array $globalIPAssignmentUpdateRequest
@@ -67,7 +67,7 @@ final class GlobalIPAssignmentUpdateParams implements BaseModel
     }
 
     /**
-     * @param GlobalIPAssignmentUpdateRequestShape $globalIPAssignmentUpdateRequest
+     * @param GlobalIPAssignmentUpdateRequest|GlobalIPAssignmentUpdateRequestShape $globalIPAssignmentUpdateRequest
      */
     public function withGlobalIPAssignmentUpdateRequest(
         GlobalIPAssignmentUpdateRequest|array $globalIPAssignmentUpdateRequest

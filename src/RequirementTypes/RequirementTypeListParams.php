@@ -19,7 +19,7 @@ use Telnyx\RequirementTypes\RequirementTypeListParams\Sort;
  * @phpstan-import-type FilterShape from \Telnyx\RequirementTypes\RequirementTypeListParams\Filter
  *
  * @phpstan-type RequirementTypeListParamsShape = array{
- *   filter?: FilterShape|null, sort?: list<Sort|value-of<Sort>>|null
+ *   filter?: null|Filter|FilterShape, sort?: list<Sort|value-of<Sort>>|null
  * }
  */
 final class RequirementTypeListParams implements BaseModel
@@ -52,8 +52,8 @@ final class RequirementTypeListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
-     * @param list<Sort|value-of<Sort>> $sort
+     * @param Filter|FilterShape|null $filter
+     * @param list<Sort|value-of<Sort>>|null $sort
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -70,7 +70,7 @@ final class RequirementTypeListParams implements BaseModel
     /**
      * Consolidated filter parameter for requirement types (deepObject style). Originally: filter[name].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

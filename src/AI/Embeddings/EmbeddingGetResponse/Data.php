@@ -53,7 +53,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BackgroundTaskStatus|value-of<BackgroundTaskStatus> $status
+     * @param BackgroundTaskStatus|value-of<BackgroundTaskStatus>|null $status
      */
     public static function with(
         ?string $createdAt = null,

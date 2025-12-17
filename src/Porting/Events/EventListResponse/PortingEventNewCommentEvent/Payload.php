@@ -53,7 +53,7 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CommentShape $comment
+     * @param Comment|CommentShape|null $comment
      */
     public static function with(
         Comment|array|null $comment = null,
@@ -72,7 +72,7 @@ final class Payload implements BaseModel
     /**
      * The comment that was added to the porting order.
      *
-     * @param CommentShape $comment
+     * @param Comment|CommentShape $comment
      */
     public function withComment(Comment|array $comment): self
     {

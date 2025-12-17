@@ -42,8 +42,8 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param EmailShape $email
-     * @param OrganizationNameShape $organizationName
+     * @param Email|EmailShape|null $email
+     * @param OrganizationName|OrganizationNameShape|null $organizationName
      */
     public static function with(
         Email|array|null $email = null,
@@ -58,7 +58,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param EmailShape $email
+     * @param Email|EmailShape $email
      */
     public function withEmail(Email|array $email): self
     {
@@ -69,7 +69,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param OrganizationNameShape $organizationName
+     * @param OrganizationName|OrganizationNameShape $organizationName
      */
     public function withOrganizationName(
         OrganizationName|array $organizationName

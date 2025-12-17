@@ -17,7 +17,9 @@ use Telnyx\RequirementGroups\RequirementGroupListParams\Filter;
  *
  * @phpstan-import-type FilterShape from \Telnyx\RequirementGroups\RequirementGroupListParams\Filter
  *
- * @phpstan-type RequirementGroupListParamsShape = array{filter?: FilterShape|null}
+ * @phpstan-type RequirementGroupListParamsShape = array{
+ *   filter?: null|Filter|FilterShape
+ * }
  */
 final class RequirementGroupListParams implements BaseModel
 {
@@ -41,7 +43,7 @@ final class RequirementGroupListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape|null $filter
      */
     public static function with(Filter|array|null $filter = null): self
     {
@@ -55,7 +57,7 @@ final class RequirementGroupListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[country_code], filter[phone_number_type], filter[action], filter[status], filter[customer_reference].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

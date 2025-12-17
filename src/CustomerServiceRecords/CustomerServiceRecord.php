@@ -89,8 +89,8 @@ final class CustomerServiceRecord implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ResultShape|null $result
-     * @param Status|value-of<Status> $status
+     * @param Result|ResultShape|null $result
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,
@@ -174,7 +174,7 @@ final class CustomerServiceRecord implements BaseModel
     /**
      * The result of the CSR request. This field would be null in case of `pending` or `failed` status.
      *
-     * @param ResultShape|null $result
+     * @param Result|ResultShape|null $result
      */
     public function withResult(Result|array|null $result): self
     {

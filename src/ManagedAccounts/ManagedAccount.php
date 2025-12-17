@@ -155,7 +155,7 @@ final class ManagedAccount implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param RecordType|value-of<RecordType> $recordType
-     * @param ManagedAccountBalanceShape $balance
+     * @param ManagedAccountBalance|ManagedAccountBalanceShape|null $balance
      */
     public static function with(
         string $id,
@@ -294,7 +294,7 @@ final class ManagedAccount implements BaseModel
     }
 
     /**
-     * @param ManagedAccountBalanceShape $balance
+     * @param ManagedAccountBalance|ManagedAccountBalanceShape $balance
      */
     public function withBalance(ManagedAccountBalance|array $balance): self
     {

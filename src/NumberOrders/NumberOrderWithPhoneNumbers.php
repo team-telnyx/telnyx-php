@@ -113,9 +113,9 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PhoneNumberShape> $phoneNumbers
-     * @param Status|value-of<Status> $status
-     * @param list<string> $subNumberOrdersIDs
+     * @param list<PhoneNumberShape>|null $phoneNumbers
+     * @param Status|value-of<Status>|null $status
+     * @param list<string>|null $subNumberOrdersIDs
      */
     public static function with(
         ?string $id = null,

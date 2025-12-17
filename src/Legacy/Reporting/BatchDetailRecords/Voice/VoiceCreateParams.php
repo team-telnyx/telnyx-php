@@ -154,12 +154,12 @@ final class VoiceCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<int> $callTypes
-     * @param list<int> $connections
-     * @param list<string> $fields
-     * @param list<FilterShape> $filters
-     * @param list<string> $managedAccounts
-     * @param list<int> $recordTypes
+     * @param list<int>|null $callTypes
+     * @param list<int>|null $connections
+     * @param list<string>|null $fields
+     * @param list<FilterShape>|null $filters
+     * @param list<string>|null $managedAccounts
+     * @param list<int>|null $recordTypes
      */
     public static function with(
         \DateTimeInterface $endTime,

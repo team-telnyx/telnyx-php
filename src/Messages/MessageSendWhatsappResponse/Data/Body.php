@@ -88,16 +88,16 @@ final class Body implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param WhatsappMediaShape $audio
-     * @param list<ContactShape> $contacts
-     * @param WhatsappMediaShape $document
-     * @param WhatsappMediaShape $image
-     * @param InteractiveShape $interactive
-     * @param LocationShape $location
-     * @param ReactionShape $reaction
-     * @param WhatsappMediaShape $sticker
-     * @param Type|value-of<Type> $type
-     * @param WhatsappMediaShape $video
+     * @param WhatsappMedia|WhatsappMediaShape|null $audio
+     * @param list<ContactShape>|null $contacts
+     * @param WhatsappMedia|WhatsappMediaShape|null $document
+     * @param WhatsappMedia|WhatsappMediaShape|null $image
+     * @param Interactive|InteractiveShape|null $interactive
+     * @param Location|LocationShape|null $location
+     * @param Reaction|ReactionShape|null $reaction
+     * @param WhatsappMedia|WhatsappMediaShape|null $sticker
+     * @param Type|value-of<Type>|null $type
+     * @param WhatsappMedia|WhatsappMediaShape|null $video
      */
     public static function with(
         WhatsappMedia|array|null $audio = null,
@@ -130,7 +130,7 @@ final class Body implements BaseModel
     }
 
     /**
-     * @param WhatsappMediaShape $audio
+     * @param WhatsappMedia|WhatsappMediaShape $audio
      */
     public function withAudio(WhatsappMedia|array $audio): self
     {
@@ -164,7 +164,7 @@ final class Body implements BaseModel
     }
 
     /**
-     * @param WhatsappMediaShape $document
+     * @param WhatsappMedia|WhatsappMediaShape $document
      */
     public function withDocument(WhatsappMedia|array $document): self
     {
@@ -175,7 +175,7 @@ final class Body implements BaseModel
     }
 
     /**
-     * @param WhatsappMediaShape $image
+     * @param WhatsappMedia|WhatsappMediaShape $image
      */
     public function withImage(WhatsappMedia|array $image): self
     {
@@ -186,7 +186,7 @@ final class Body implements BaseModel
     }
 
     /**
-     * @param InteractiveShape $interactive
+     * @param Interactive|InteractiveShape $interactive
      */
     public function withInteractive(Interactive|array $interactive): self
     {
@@ -197,7 +197,7 @@ final class Body implements BaseModel
     }
 
     /**
-     * @param LocationShape $location
+     * @param Location|LocationShape $location
      */
     public function withLocation(Location|array $location): self
     {
@@ -208,7 +208,7 @@ final class Body implements BaseModel
     }
 
     /**
-     * @param ReactionShape $reaction
+     * @param Reaction|ReactionShape $reaction
      */
     public function withReaction(Reaction|array $reaction): self
     {
@@ -219,7 +219,7 @@ final class Body implements BaseModel
     }
 
     /**
-     * @param WhatsappMediaShape $sticker
+     * @param WhatsappMedia|WhatsappMediaShape $sticker
      */
     public function withSticker(WhatsappMedia|array $sticker): self
     {
@@ -241,7 +241,7 @@ final class Body implements BaseModel
     }
 
     /**
-     * @param WhatsappMediaShape $video
+     * @param WhatsappMedia|WhatsappMediaShape $video
      */
     public function withVideo(WhatsappMedia|array $video): self
     {

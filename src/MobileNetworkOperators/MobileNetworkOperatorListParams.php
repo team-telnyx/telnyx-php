@@ -20,7 +20,7 @@ use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Page;
  * @phpstan-import-type PageShape from \Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Page
  *
  * @phpstan-type MobileNetworkOperatorListParamsShape = array{
- *   filter?: FilterShape|null, page?: PageShape|null
+ *   filter?: null|Filter|FilterShape, page?: null|Page|PageShape
  * }
  */
 final class MobileNetworkOperatorListParams implements BaseModel
@@ -51,8 +51,8 @@ final class MobileNetworkOperatorListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
-     * @param PageShape $page
+     * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -69,7 +69,7 @@ final class MobileNetworkOperatorListParams implements BaseModel
     /**
      * Consolidated filter parameter for mobile network operators (deepObject style). Originally: filter[name][starts_with], filter[name][contains], filter[name][ends_with], filter[country_code], filter[mcc], filter[mnc], filter[tadig], filter[network_preferences_enabled].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -82,7 +82,7 @@ final class MobileNetworkOperatorListParams implements BaseModel
     /**
      * Consolidated pagination parameter (deepObject style). Originally: page[number], page[size].
      *
-     * @param PageShape $page
+     * @param Page|PageShape $page
      */
     public function withPage(Page|array $page): self
     {

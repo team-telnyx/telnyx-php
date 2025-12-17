@@ -33,7 +33,7 @@ final class SpeechToTextDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SttDetailReportResponseShape $data
+     * @param SttDetailReportResponse|SttDetailReportResponseShape|null $data
      */
     public static function with(
         SttDetailReportResponse|array|null $data = null
@@ -46,7 +46,7 @@ final class SpeechToTextDeleteResponse implements BaseModel
     }
 
     /**
-     * @param SttDetailReportResponseShape $data
+     * @param SttDetailReportResponse|SttDetailReportResponseShape $data
      */
     public function withData(SttDetailReportResponse|array $data): self
     {

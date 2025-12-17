@@ -93,7 +93,7 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Reason|value-of<Reason> $reason
+     * @param Reason|value-of<Reason>|null $reason
      */
     public static function with(
         ?string $callControlID = null,

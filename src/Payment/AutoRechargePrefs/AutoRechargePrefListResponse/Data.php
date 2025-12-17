@@ -76,7 +76,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Preference|value-of<Preference> $preference
+     * @param Preference|value-of<Preference>|null $preference
      */
     public static function with(
         ?string $id = null,

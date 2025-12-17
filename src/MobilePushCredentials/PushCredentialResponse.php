@@ -35,7 +35,7 @@ final class PushCredentialResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PushCredentialShape $data
+     * @param PushCredential|PushCredentialShape|null $data
      */
     public static function with(PushCredential|array|null $data = null): self
     {
@@ -47,7 +47,7 @@ final class PushCredentialResponse implements BaseModel
     }
 
     /**
-     * @param PushCredentialShape $data
+     * @param PushCredential|PushCredentialShape $data
      */
     public function withData(PushCredential|array $data): self
     {

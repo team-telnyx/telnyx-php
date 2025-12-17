@@ -98,9 +98,9 @@ final class SimCardOrder implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CostShape $cost
-     * @param OrderAddressShape $orderAddress
-     * @param Status|value-of<Status> $status
+     * @param Cost|CostShape|null $cost
+     * @param OrderAddress|OrderAddressShape|null $orderAddress
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,
@@ -142,7 +142,7 @@ final class SimCardOrder implements BaseModel
     /**
      * An object representing the total cost of the order.
      *
-     * @param CostShape $cost
+     * @param Cost|CostShape $cost
      */
     public function withCost(Cost|array $cost): self
     {
@@ -166,7 +166,7 @@ final class SimCardOrder implements BaseModel
     /**
      * An object representing the address information from when the order was submitted.
      *
-     * @param OrderAddressShape $orderAddress
+     * @param OrderAddress|OrderAddressShape $orderAddress
      */
     public function withOrderAddress(OrderAddress|array $orderAddress): self
     {

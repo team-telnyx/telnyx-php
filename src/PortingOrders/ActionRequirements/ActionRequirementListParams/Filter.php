@@ -65,9 +65,9 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $id
-     * @param ActionType|value-of<ActionType> $actionType
-     * @param Status|value-of<Status> $status
+     * @param list<string>|null $id
+     * @param ActionType|value-of<ActionType>|null $actionType
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?array $id = null,

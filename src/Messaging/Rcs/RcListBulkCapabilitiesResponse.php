@@ -34,7 +34,7 @@ final class RcListBulkCapabilitiesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RcsCapabilitiesShape> $data
+     * @param list<RcsCapabilitiesShape>|null $data
      */
     public static function with(?array $data = null): self
     {

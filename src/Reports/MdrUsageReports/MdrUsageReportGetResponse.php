@@ -33,7 +33,7 @@ final class MdrUsageReportGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MdrUsageReportShape $data
+     * @param MdrUsageReport|MdrUsageReportShape|null $data
      */
     public static function with(MdrUsageReport|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class MdrUsageReportGetResponse implements BaseModel
     }
 
     /**
-     * @param MdrUsageReportShape $data
+     * @param MdrUsageReport|MdrUsageReportShape $data
      */
     public function withData(MdrUsageReport|array $data): self
     {

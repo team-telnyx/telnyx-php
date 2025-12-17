@@ -47,7 +47,7 @@ final class AutoRespConfigResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AutoRespConfigShape $data
+     * @param AutoRespConfig|AutoRespConfigShape $data
      */
     public static function with(AutoRespConfig|array $data): self
     {
@@ -59,7 +59,7 @@ final class AutoRespConfigResponse implements BaseModel
     }
 
     /**
-     * @param AutoRespConfigShape $data
+     * @param AutoRespConfig|AutoRespConfigShape $data
      */
     public function withData(AutoRespConfig|array $data): self
     {

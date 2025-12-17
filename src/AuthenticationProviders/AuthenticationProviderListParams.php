@@ -59,7 +59,7 @@ final class AuthenticationProviderListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Sort|value-of<Sort> $sort
+     * @param Sort|value-of<Sort>|null $sort
      */
     public static function with(
         ?int $pageNumber = null,

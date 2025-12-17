@@ -108,7 +108,7 @@ final class Room implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RoomSessionShape> $sessions
+     * @param list<RoomSessionShape>|null $sessions
      */
     public static function with(
         ?string $id = null,

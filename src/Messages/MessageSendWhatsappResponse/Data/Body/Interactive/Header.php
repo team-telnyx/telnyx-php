@@ -53,9 +53,9 @@ final class Header implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param WhatsappMediaShape $document
-     * @param WhatsappMediaShape $image
-     * @param WhatsappMediaShape $video
+     * @param WhatsappMedia|WhatsappMediaShape|null $document
+     * @param WhatsappMedia|WhatsappMediaShape|null $image
+     * @param WhatsappMedia|WhatsappMediaShape|null $video
      */
     public static function with(
         WhatsappMedia|array|null $document = null,
@@ -76,7 +76,7 @@ final class Header implements BaseModel
     }
 
     /**
-     * @param WhatsappMediaShape $document
+     * @param WhatsappMedia|WhatsappMediaShape $document
      */
     public function withDocument(WhatsappMedia|array $document): self
     {
@@ -87,7 +87,7 @@ final class Header implements BaseModel
     }
 
     /**
-     * @param WhatsappMediaShape $image
+     * @param WhatsappMedia|WhatsappMediaShape $image
      */
     public function withImage(WhatsappMedia|array $image): self
     {
@@ -117,7 +117,7 @@ final class Header implements BaseModel
     }
 
     /**
-     * @param WhatsappMediaShape $video
+     * @param WhatsappMedia|WhatsappMediaShape $video
      */
     public function withVideo(WhatsappMedia|array $video): self
     {

@@ -126,11 +126,11 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $countryCodeIn
-     * @param InsertedAtShape $insertedAt
-     * @param PortedOutAtShape $portedOutAt
-     * @param Status|value-of<Status> $status
-     * @param list<StatusIn|value-of<StatusIn>> $statusIn
+     * @param list<string>|null $countryCodeIn
+     * @param InsertedAt|InsertedAtShape|null $insertedAt
+     * @param PortedOutAt|PortedOutAtShape|null $portedOutAt
+     * @param Status|value-of<Status>|null $status
+     * @param list<StatusIn|value-of<StatusIn>>|null $statusIn
      */
     public static function with(
         ?string $carrierName = null,
@@ -213,7 +213,7 @@ final class Filter implements BaseModel
     /**
      * Filter by inserted_at date range using nested operations.
      *
-     * @param InsertedAtShape $insertedAt
+     * @param InsertedAt|InsertedAtShape $insertedAt
      */
     public function withInsertedAt(InsertedAt|array $insertedAt): self
     {
@@ -248,7 +248,7 @@ final class Filter implements BaseModel
     /**
      * Filter by ported_out_at date range using nested operations.
      *
-     * @param PortedOutAtShape $portedOutAt
+     * @param PortedOutAt|PortedOutAtShape $portedOutAt
      */
     public function withPortedOutAt(PortedOutAt|array $portedOutAt): self
     {

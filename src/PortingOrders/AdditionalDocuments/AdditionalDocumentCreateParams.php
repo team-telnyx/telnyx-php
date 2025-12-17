@@ -41,7 +41,7 @@ final class AdditionalDocumentCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AdditionalDocumentShape> $additionalDocuments
+     * @param list<AdditionalDocumentShape>|null $additionalDocuments
      */
     public static function with(?array $additionalDocuments = null): self
     {

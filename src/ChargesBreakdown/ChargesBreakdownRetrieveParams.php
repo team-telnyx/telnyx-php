@@ -72,7 +72,7 @@ final class ChargesBreakdownRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Format|value-of<Format> $format
+     * @param Format|value-of<Format>|null $format
      */
     public static function with(
         string $startDate,

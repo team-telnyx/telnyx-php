@@ -33,7 +33,7 @@ final class ActionUnholdResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ConferenceCommandResultShape $data
+     * @param ConferenceCommandResult|ConferenceCommandResultShape|null $data
      */
     public static function with(
         ConferenceCommandResult|array|null $data = null
@@ -46,7 +46,7 @@ final class ActionUnholdResponse implements BaseModel
     }
 
     /**
-     * @param ConferenceCommandResultShape $data
+     * @param ConferenceCommandResult|ConferenceCommandResultShape $data
      */
     public function withData(ConferenceCommandResult|array $data): self
     {

@@ -47,7 +47,7 @@ final class NumberReservationCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ReservedPhoneNumberShape> $phoneNumbers
+     * @param list<ReservedPhoneNumberShape>|null $phoneNumbers
      */
     public static function with(
         ?string $customerReference = null,

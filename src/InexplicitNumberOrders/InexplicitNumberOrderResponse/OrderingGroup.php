@@ -157,9 +157,9 @@ final class OrderingGroup implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<OrderShape> $orders
-     * @param Status|value-of<Status> $status
-     * @param Strategy|value-of<Strategy> $strategy
+     * @param list<OrderShape>|null $orders
+     * @param Status|value-of<Status>|null $status
+     * @param Strategy|value-of<Strategy>|null $strategy
      */
     public static function with(
         ?string $administrativeArea = null,

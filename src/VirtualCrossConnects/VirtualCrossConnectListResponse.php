@@ -208,9 +208,9 @@ final class VirtualCrossConnectListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param InterfaceStatus|value-of<InterfaceStatus> $status
-     * @param CloudProvider|value-of<CloudProvider> $cloudProvider
-     * @param RegionShape $region
+     * @param InterfaceStatus|value-of<InterfaceStatus>|null $status
+     * @param CloudProvider|value-of<CloudProvider>|null $cloudProvider
+     * @param Region|RegionShape|null $region
      */
     public static function with(
         ?string $id = null,
@@ -475,7 +475,7 @@ final class VirtualCrossConnectListResponse implements BaseModel
     }
 
     /**
-     * @param RegionShape $region
+     * @param Region|RegionShape $region
      */
     public function withRegion(Region|array $region): self
     {

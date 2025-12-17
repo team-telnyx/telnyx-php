@@ -93,9 +93,9 @@ final class MdrUsageReportResponseLegacy implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $connections
-     * @param list<string> $profiles
-     * @param array<string,mixed> $result
+     * @param list<string>|null $connections
+     * @param list<string>|null $profiles
+     * @param array<string,mixed>|null $result
      */
     public static function with(
         ?string $id = null,

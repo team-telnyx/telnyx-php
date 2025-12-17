@@ -123,10 +123,10 @@ final class MobileVoiceConnection implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param InboundShape $inbound
-     * @param OutboundShape $outbound
-     * @param RecordType|value-of<RecordType> $recordType
-     * @param list<string> $tags
+     * @param Inbound|InboundShape|null $inbound
+     * @param Outbound|OutboundShape|null $outbound
+     * @param RecordType|value-of<RecordType>|null $recordType
+     * @param list<string>|null $tags
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion>|null $webhookAPIVersion
      */
     public static function with(
@@ -205,7 +205,7 @@ final class MobileVoiceConnection implements BaseModel
     }
 
     /**
-     * @param InboundShape $inbound
+     * @param Inbound|InboundShape $inbound
      */
     public function withInbound(Inbound|array $inbound): self
     {
@@ -216,7 +216,7 @@ final class MobileVoiceConnection implements BaseModel
     }
 
     /**
-     * @param OutboundShape $outbound
+     * @param Outbound|OutboundShape $outbound
      */
     public function withOutbound(Outbound|array $outbound): self
     {

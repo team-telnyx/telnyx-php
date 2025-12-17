@@ -234,17 +234,17 @@ final class InboundMessagePayload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<CcShape> $cc
-     * @param CostShape|null $cost
-     * @param CostBreakdownShape|null $costBreakdown
-     * @param Direction|value-of<Direction> $direction
-     * @param list<MessagingErrorShape> $errors
-     * @param FromShape $from
-     * @param list<MediaShape> $media
-     * @param RecordType|value-of<RecordType> $recordType
-     * @param list<string> $tags
-     * @param list<ToShape> $to
-     * @param Type|value-of<Type> $type
+     * @param list<CcShape>|null $cc
+     * @param Cost|CostShape|null $cost
+     * @param CostBreakdown|CostBreakdownShape|null $costBreakdown
+     * @param Direction|value-of<Direction>|null $direction
+     * @param list<MessagingErrorShape>|null $errors
+     * @param From|FromShape|null $from
+     * @param list<MediaShape>|null $media
+     * @param RecordType|value-of<RecordType>|null $recordType
+     * @param list<string>|null $tags
+     * @param list<ToShape>|null $to
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         ?string $id = null,
@@ -342,7 +342,7 @@ final class InboundMessagePayload implements BaseModel
     }
 
     /**
-     * @param CostShape|null $cost
+     * @param Cost|CostShape|null $cost
      */
     public function withCost(Cost|array|null $cost): self
     {
@@ -355,7 +355,7 @@ final class InboundMessagePayload implements BaseModel
     /**
      * Detailed breakdown of the message cost components.
      *
-     * @param CostBreakdownShape|null $costBreakdown
+     * @param CostBreakdown|CostBreakdownShape|null $costBreakdown
      */
     public function withCostBreakdown(
         CostBreakdown|array|null $costBreakdown
@@ -404,7 +404,7 @@ final class InboundMessagePayload implements BaseModel
     }
 
     /**
-     * @param FromShape $from
+     * @param From|FromShape $from
      */
     public function withFrom(From|array $from): self
     {

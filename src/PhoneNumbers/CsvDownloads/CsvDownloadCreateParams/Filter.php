@@ -112,9 +112,9 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Status|value-of<Status> $status
-     * @param VoiceConnectionNameShape $voiceConnectionName
-     * @param VoiceUsagePaymentMethod|value-of<VoiceUsagePaymentMethod> $voiceUsagePaymentMethod
+     * @param Status|value-of<Status>|null $status
+     * @param VoiceConnectionName|VoiceConnectionNameShape|null $voiceConnectionName
+     * @param VoiceUsagePaymentMethod|value-of<VoiceUsagePaymentMethod>|null $voiceUsagePaymentMethod
      */
     public static function with(
         ?string $billingGroupID = null,
@@ -238,7 +238,7 @@ final class Filter implements BaseModel
     /**
      * Filter by voice connection name pattern matching.
      *
-     * @param VoiceConnectionNameShape $voiceConnectionName
+     * @param VoiceConnectionName|VoiceConnectionNameShape $voiceConnectionName
      */
     public function withVoiceConnectionName(
         VoiceConnectionName|array $voiceConnectionName

@@ -20,7 +20,7 @@ use Telnyx\OtaUpdates\OtaUpdateListParams\Page;
  * @phpstan-import-type PageShape from \Telnyx\OtaUpdates\OtaUpdateListParams\Page
  *
  * @phpstan-type OtaUpdateListParamsShape = array{
- *   filter?: FilterShape|null, page?: PageShape|null
+ *   filter?: null|Filter|FilterShape, page?: null|Page|PageShape
  * }
  */
 final class OtaUpdateListParams implements BaseModel
@@ -51,8 +51,8 @@ final class OtaUpdateListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
-     * @param PageShape $page
+     * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -69,7 +69,7 @@ final class OtaUpdateListParams implements BaseModel
     /**
      * Consolidated filter parameter for OTA updates (deepObject style). Originally: filter[status], filter[sim_card_id], filter[type].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -82,7 +82,7 @@ final class OtaUpdateListParams implements BaseModel
     /**
      * Consolidated pagination parameter (deepObject style). Originally: page[number], page[size].
      *
-     * @param PageShape $page
+     * @param Page|PageShape $page
      */
     public function withPage(Page|array $page): self
     {

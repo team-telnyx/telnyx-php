@@ -46,8 +46,8 @@ final class Media implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RcsContentInfoShape $contentInfo
-     * @param Height|value-of<Height> $height
+     * @param RcsContentInfo|RcsContentInfoShape|null $contentInfo
+     * @param Height|value-of<Height>|null $height
      */
     public static function with(
         RcsContentInfo|array|null $contentInfo = null,
@@ -62,7 +62,7 @@ final class Media implements BaseModel
     }
 
     /**
-     * @param RcsContentInfoShape $contentInfo
+     * @param RcsContentInfo|RcsContentInfoShape $contentInfo
      */
     public function withContentInfo(RcsContentInfo|array $contentInfo): self
     {

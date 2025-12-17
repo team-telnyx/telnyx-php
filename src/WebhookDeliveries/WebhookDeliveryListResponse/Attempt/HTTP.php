@@ -47,8 +47,8 @@ final class HTTP implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RequestShape $request
-     * @param ResponseShape $response
+     * @param Request|RequestShape|null $request
+     * @param Response|ResponseShape|null $response
      */
     public static function with(
         Request|array|null $request = null,
@@ -65,7 +65,7 @@ final class HTTP implements BaseModel
     /**
      * Request details.
      *
-     * @param RequestShape $request
+     * @param Request|RequestShape $request
      */
     public function withRequest(Request|array $request): self
     {
@@ -78,7 +78,7 @@ final class HTTP implements BaseModel
     /**
      * Response details, optional.
      *
-     * @param ResponseShape $response
+     * @param Response|ResponseShape $response
      */
     public function withResponse(Response|array $response): self
     {

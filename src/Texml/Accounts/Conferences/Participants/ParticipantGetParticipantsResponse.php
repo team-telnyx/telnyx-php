@@ -84,7 +84,7 @@ final class ParticipantGetParticipantsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ParticipantShape> $participants
+     * @param list<ParticipantShape>|null $participants
      */
     public static function with(
         ?int $end = null,

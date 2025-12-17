@@ -33,7 +33,7 @@ final class MessageTemplate implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param VerifyProfileMessageTemplateResponseShape $data
+     * @param VerifyProfileMessageTemplateResponse|VerifyProfileMessageTemplateResponseShape|null $data
      */
     public static function with(
         VerifyProfileMessageTemplateResponse|array|null $data = null
@@ -46,7 +46,7 @@ final class MessageTemplate implements BaseModel
     }
 
     /**
-     * @param VerifyProfileMessageTemplateResponseShape $data
+     * @param VerifyProfileMessageTemplateResponse|VerifyProfileMessageTemplateResponseShape $data
      */
     public function withData(
         VerifyProfileMessageTemplateResponse|array $data

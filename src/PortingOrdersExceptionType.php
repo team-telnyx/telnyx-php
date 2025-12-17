@@ -43,7 +43,7 @@ final class PortingOrdersExceptionType implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Code|value-of<Code> $code
+     * @param Code|value-of<Code>|null $code
      */
     public static function with(
         Code|string|null $code = null,

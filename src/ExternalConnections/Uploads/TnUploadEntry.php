@@ -92,9 +92,9 @@ final class TnUploadEntry implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ErrorCode|value-of<ErrorCode> $errorCode
-     * @param InternalStatus|value-of<InternalStatus> $internalStatus
-     * @param Status|value-of<Status> $status
+     * @param ErrorCode|value-of<ErrorCode>|null $errorCode
+     * @param InternalStatus|value-of<InternalStatus>|null $internalStatus
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $civicAddressID = null,

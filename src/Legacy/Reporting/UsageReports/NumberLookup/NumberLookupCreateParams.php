@@ -66,8 +66,8 @@ final class NumberLookupCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AggregationType|value-of<AggregationType> $aggregationType
-     * @param list<string> $managedAccounts
+     * @param AggregationType|value-of<AggregationType>|null $aggregationType
+     * @param list<string>|null $managedAccounts
      */
     public static function with(
         AggregationType|string|null $aggregationType = null,

@@ -48,8 +48,8 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CustomerReferenceShape $customerReference
-     * @param StreetAddressShape $streetAddress
+     * @param CustomerReference|CustomerReferenceShape|null $customerReference
+     * @param StreetAddress|StreetAddressShape|null $streetAddress
      */
     public static function with(
         CustomerReference|array|null $customerReference = null,
@@ -66,7 +66,7 @@ final class Filter implements BaseModel
     /**
      * Filter user addresses via the customer reference. Supports both exact matching (eq) and partial matching (contains). Matching is not case-sensitive.
      *
-     * @param CustomerReferenceShape $customerReference
+     * @param CustomerReference|CustomerReferenceShape $customerReference
      */
     public function withCustomerReference(
         CustomerReference|array $customerReference
@@ -80,7 +80,7 @@ final class Filter implements BaseModel
     /**
      * Filter user addresses via street address. Supports partial matching (contains). Matching is not case-sensitive.
      *
-     * @param StreetAddressShape $streetAddress
+     * @param StreetAddress|StreetAddressShape $streetAddress
      */
     public function withStreetAddress(StreetAddress|array $streetAddress): self
     {

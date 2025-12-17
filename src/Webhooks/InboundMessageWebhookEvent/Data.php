@@ -68,9 +68,9 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param EventType|value-of<EventType> $eventType
-     * @param InboundMessagePayloadShape $payload
-     * @param RecordType|value-of<RecordType> $recordType
+     * @param EventType|value-of<EventType>|null $eventType
+     * @param InboundMessagePayload|InboundMessagePayloadShape|null $payload
+     * @param RecordType|value-of<RecordType>|null $recordType
      */
     public static function with(
         ?string $id = null,
@@ -126,7 +126,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param InboundMessagePayloadShape $payload
+     * @param InboundMessagePayload|InboundMessagePayloadShape $payload
      */
     public function withPayload(InboundMessagePayload|array $payload): self
     {

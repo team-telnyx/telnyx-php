@@ -33,7 +33,7 @@ final class ActionStopForkingResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CallControlCommandResultShape $data
+     * @param CallControlCommandResult|CallControlCommandResultShape|null $data
      */
     public static function with(
         CallControlCommandResult|array|null $data = null
@@ -46,7 +46,7 @@ final class ActionStopForkingResponse implements BaseModel
     }
 
     /**
-     * @param CallControlCommandResultShape $data
+     * @param CallControlCommandResult|CallControlCommandResultShape $data
      */
     public function withData(CallControlCommandResult|array $data): self
     {

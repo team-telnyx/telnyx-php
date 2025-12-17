@@ -18,7 +18,7 @@ use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParam
  * @phpstan-import-type ThresholdShape from \Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParams\Threshold
  *
  * @phpstan-type SimCardDataUsageNotificationUpdateParamsShape = array{
- *   simCardID?: string|null, threshold?: ThresholdShape|null
+ *   simCardID?: string|null, threshold?: null|Threshold|ThresholdShape
  * }
  */
 final class SimCardDataUsageNotificationUpdateParams implements BaseModel
@@ -49,7 +49,7 @@ final class SimCardDataUsageNotificationUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ThresholdShape $threshold
+     * @param Threshold|ThresholdShape|null $threshold
      */
     public static function with(
         ?string $simCardID = null,
@@ -77,7 +77,7 @@ final class SimCardDataUsageNotificationUpdateParams implements BaseModel
     /**
      * Data usage threshold that will trigger the notification.
      *
-     * @param ThresholdShape $threshold
+     * @param Threshold|ThresholdShape $threshold
      */
     public function withThreshold(Threshold|array $threshold): self
     {

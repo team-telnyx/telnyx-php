@@ -94,9 +94,9 @@ final class PortingOrdersActivationJob implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ActivationType|value-of<ActivationType> $activationType
-     * @param list<ActivationWindowShape> $activationWindows
-     * @param Status|value-of<Status> $status
+     * @param ActivationType|value-of<ActivationType>|null $activationType
+     * @param list<ActivationWindowShape>|null $activationWindows
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,

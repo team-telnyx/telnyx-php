@@ -52,7 +52,7 @@ final class Local implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $features
+     * @param list<string>|null $features
      */
     public static function with(
         ?array $features = null,

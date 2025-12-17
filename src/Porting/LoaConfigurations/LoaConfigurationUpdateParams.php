@@ -22,10 +22,10 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo;
  * @phpstan-import-type LogoShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo
  *
  * @phpstan-type LoaConfigurationUpdateParamsShape = array{
- *   address: AddressShape,
+ *   address: Address|AddressShape,
  *   companyName: string,
- *   contact: ContactShape,
- *   logo: LogoShape,
+ *   contact: Contact|ContactShape,
+ *   logo: Logo|LogoShape,
  *   name: string,
  * }
  */
@@ -96,9 +96,9 @@ final class LoaConfigurationUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AddressShape $address
-     * @param ContactShape $contact
-     * @param LogoShape $logo
+     * @param Address|AddressShape $address
+     * @param Contact|ContactShape $contact
+     * @param Logo|LogoShape $logo
      */
     public static function with(
         Address|array $address,
@@ -121,7 +121,7 @@ final class LoaConfigurationUpdateParams implements BaseModel
     /**
      * The address of the company.
      *
-     * @param AddressShape $address
+     * @param Address|AddressShape $address
      */
     public function withAddress(Address|array $address): self
     {
@@ -145,7 +145,7 @@ final class LoaConfigurationUpdateParams implements BaseModel
     /**
      * The contact information of the company.
      *
-     * @param ContactShape $contact
+     * @param Contact|ContactShape $contact
      */
     public function withContact(Contact|array $contact): self
     {
@@ -158,7 +158,7 @@ final class LoaConfigurationUpdateParams implements BaseModel
     /**
      * The logo of the LOA configuration.
      *
-     * @param LogoShape $logo
+     * @param Logo|LogoShape $logo
      */
     public function withLogo(Logo|array $logo): self
     {

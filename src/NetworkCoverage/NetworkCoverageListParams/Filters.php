@@ -43,7 +43,7 @@ final class Filters implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AvailableServicesShape $availableServices
+     * @param AvailableServicesShape|null $availableServices
      */
     public static function with(
         AvailableService|Contains|array|string|null $availableServices = null

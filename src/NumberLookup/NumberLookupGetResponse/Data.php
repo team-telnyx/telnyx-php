@@ -81,9 +81,9 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CallerNameShape $callerName
-     * @param CarrierShape $carrier
-     * @param PortabilityShape $portability
+     * @param CallerName|CallerNameShape|null $callerName
+     * @param Carrier|CarrierShape|null $carrier
+     * @param Portability|PortabilityShape|null $portability
      */
     public static function with(
         CallerName|array|null $callerName = null,
@@ -110,7 +110,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param CallerNameShape $callerName
+     * @param CallerName|CallerNameShape $callerName
      */
     public function withCallerName(CallerName|array $callerName): self
     {
@@ -121,7 +121,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param CarrierShape $carrier
+     * @param Carrier|CarrierShape $carrier
      */
     public function withCarrier(Carrier|array $carrier): self
     {
@@ -176,7 +176,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param PortabilityShape $portability
+     * @param Portability|PortabilityShape $portability
      */
     public function withPortability(Portability|array $portability): self
     {

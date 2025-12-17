@@ -61,8 +61,8 @@ final class MessagingHostedNumberOrder implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<HostedNumberShape> $phoneNumbers
-     * @param Status|value-of<Status> $status
+     * @param list<HostedNumberShape>|null $phoneNumbers
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,

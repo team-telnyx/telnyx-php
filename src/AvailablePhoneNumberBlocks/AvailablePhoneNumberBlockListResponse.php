@@ -41,8 +41,8 @@ final class AvailablePhoneNumberBlockListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DataShape> $data
-     * @param AvailablePhoneNumbersMetadataShape $meta
+     * @param list<DataShape>|null $data
+     * @param AvailablePhoneNumbersMetadata|AvailablePhoneNumbersMetadataShape|null $meta
      */
     public static function with(
         ?array $data = null,
@@ -68,7 +68,7 @@ final class AvailablePhoneNumberBlockListResponse implements BaseModel
     }
 
     /**
-     * @param AvailablePhoneNumbersMetadataShape $meta
+     * @param AvailablePhoneNumbersMetadata|AvailablePhoneNumbersMetadataShape $meta
      */
     public function withMeta(AvailablePhoneNumbersMetadata|array $meta): self
     {

@@ -53,7 +53,7 @@ final class Emergency implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param EmergencyStatus|value-of<EmergencyStatus> $emergencyStatus
+     * @param EmergencyStatus|value-of<EmergencyStatus>|null $emergencyStatus
      */
     public static function with(
         ?string $emergencyAddressID = null,

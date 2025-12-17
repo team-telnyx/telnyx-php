@@ -57,7 +57,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   recordTrim?: null|RecordTrim|value-of<RecordTrim>,
  *   sendSilenceWhenIdle?: bool|null,
  *   sipHeaders?: list<SipHeaderShape>|null,
- *   soundModifications?: SoundModificationsShape|null,
+ *   soundModifications?: null|SoundModifications|SoundModificationsShape,
  *   streamBidirectionalCodec?: null|StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
  *   streamBidirectionalMode?: null|StreamBidirectionalMode|value-of<StreamBidirectionalMode>,
  *   streamBidirectionalTargetLegs?: null|StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs>,
@@ -65,7 +65,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   streamTrack?: null|StreamTrack|value-of<StreamTrack>,
  *   streamURL?: string|null,
  *   transcription?: bool|null,
- *   transcriptionConfig?: TranscriptionStartRequestShape|null,
+ *   transcriptionConfig?: null|TranscriptionStartRequest|TranscriptionStartRequestShape,
  *   webhookURL?: string|null,
  *   webhookURLMethod?: null|WebhookURLMethod|value-of<WebhookURLMethod>,
  * }
@@ -273,22 +273,22 @@ final class ActionAnswerParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<CustomSipHeaderShape> $customHeaders
-     * @param PreferredCodecs|value-of<PreferredCodecs> $preferredCodecs
-     * @param Record|value-of<Record> $record
-     * @param RecordChannels|value-of<RecordChannels> $recordChannels
-     * @param RecordFormat|value-of<RecordFormat> $recordFormat
-     * @param RecordTrack|value-of<RecordTrack> $recordTrack
-     * @param RecordTrim|value-of<RecordTrim> $recordTrim
-     * @param list<SipHeaderShape> $sipHeaders
-     * @param SoundModificationsShape $soundModifications
-     * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec> $streamBidirectionalCodec
-     * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode> $streamBidirectionalMode
-     * @param StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs> $streamBidirectionalTargetLegs
-     * @param StreamCodec|value-of<StreamCodec> $streamCodec
-     * @param StreamTrack|value-of<StreamTrack> $streamTrack
-     * @param TranscriptionStartRequestShape $transcriptionConfig
-     * @param WebhookURLMethod|value-of<WebhookURLMethod> $webhookURLMethod
+     * @param list<CustomSipHeaderShape>|null $customHeaders
+     * @param PreferredCodecs|value-of<PreferredCodecs>|null $preferredCodecs
+     * @param Record|value-of<Record>|null $record
+     * @param RecordChannels|value-of<RecordChannels>|null $recordChannels
+     * @param RecordFormat|value-of<RecordFormat>|null $recordFormat
+     * @param RecordTrack|value-of<RecordTrack>|null $recordTrack
+     * @param RecordTrim|value-of<RecordTrim>|null $recordTrim
+     * @param list<SipHeaderShape>|null $sipHeaders
+     * @param SoundModifications|SoundModificationsShape|null $soundModifications
+     * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>|null $streamBidirectionalCodec
+     * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode>|null $streamBidirectionalMode
+     * @param StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs>|null $streamBidirectionalTargetLegs
+     * @param StreamCodec|value-of<StreamCodec>|null $streamCodec
+     * @param StreamTrack|value-of<StreamTrack>|null $streamTrack
+     * @param TranscriptionStartRequest|TranscriptionStartRequestShape|null $transcriptionConfig
+     * @param WebhookURLMethod|value-of<WebhookURLMethod>|null $webhookURLMethod
      */
     public static function with(
         ?string $billingGroupID = null,
@@ -536,7 +536,7 @@ final class ActionAnswerParams implements BaseModel
     /**
      * Use this field to modify sound effects, for example adjust the pitch.
      *
-     * @param SoundModificationsShape $soundModifications
+     * @param SoundModifications|SoundModificationsShape $soundModifications
      */
     public function withSoundModifications(
         SoundModifications|array $soundModifications
@@ -638,7 +638,7 @@ final class ActionAnswerParams implements BaseModel
     }
 
     /**
-     * @param TranscriptionStartRequestShape $transcriptionConfig
+     * @param TranscriptionStartRequest|TranscriptionStartRequestShape $transcriptionConfig
      */
     public function withTranscriptionConfig(
         TranscriptionStartRequest|array $transcriptionConfig

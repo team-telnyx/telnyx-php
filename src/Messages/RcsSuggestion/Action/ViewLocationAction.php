@@ -48,7 +48,7 @@ final class ViewLocationAction implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param LatLongShape $latLong
+     * @param LatLong|LatLongShape|null $latLong
      */
     public static function with(
         ?string $label = null,
@@ -76,7 +76,7 @@ final class ViewLocationAction implements BaseModel
     }
 
     /**
-     * @param LatLongShape $latLong
+     * @param LatLong|LatLongShape $latLong
      */
     public function withLatLong(LatLong|array $latLong): self
     {

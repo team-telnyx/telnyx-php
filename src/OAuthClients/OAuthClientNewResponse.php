@@ -33,7 +33,7 @@ final class OAuthClientNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param OAuthClientShape $data
+     * @param OAuthClient|OAuthClientShape|null $data
      */
     public static function with(OAuthClient|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class OAuthClientNewResponse implements BaseModel
     }
 
     /**
-     * @param OAuthClientShape $data
+     * @param OAuthClient|OAuthClientShape $data
      */
     public function withData(OAuthClient|array $data): self
     {

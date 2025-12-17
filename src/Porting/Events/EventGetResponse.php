@@ -18,9 +18,7 @@ use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventWithoutWebhook;
 /**
  * @phpstan-import-type DataShape from \Telnyx\Porting\Events\EventGetResponse\Data
  *
- * @phpstan-type EventGetResponseShape = array{
- *   data?: null|DataShape|PortingEventDeletedPayload|PortingEventMessagingChangedPayload|PortingEventStatusChangedEvent|PortingEventNewCommentEvent|PortingEventSplitEvent|PortingEventWithoutWebhook,
- * }
+ * @phpstan-type EventGetResponseShape = array{data?: DataShape|null}
  */
 final class EventGetResponse implements BaseModel
 {
@@ -40,7 +38,7 @@ final class EventGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DataShape $data
+     * @param DataShape|null $data
      */
     public static function with(
         PortingEventDeletedPayload|array|PortingEventMessagingChangedPayload|PortingEventStatusChangedEvent|PortingEventNewCommentEvent|PortingEventSplitEvent|PortingEventWithoutWebhook|null $data = null,

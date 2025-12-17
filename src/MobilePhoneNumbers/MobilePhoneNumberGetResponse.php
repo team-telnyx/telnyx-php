@@ -33,7 +33,7 @@ final class MobilePhoneNumberGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MobilePhoneNumberShape $data
+     * @param MobilePhoneNumber|MobilePhoneNumberShape|null $data
      */
     public static function with(MobilePhoneNumber|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class MobilePhoneNumberGetResponse implements BaseModel
     }
 
     /**
-     * @param MobilePhoneNumberShape $data
+     * @param MobilePhoneNumber|MobilePhoneNumberShape $data
      */
     public function withData(MobilePhoneNumber|array $data): self
     {

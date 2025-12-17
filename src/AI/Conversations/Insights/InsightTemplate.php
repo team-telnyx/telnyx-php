@@ -80,8 +80,8 @@ final class InsightTemplate implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param InsightType|value-of<InsightType> $insightType
-     * @param JsonSchemaShape $jsonSchema
+     * @param InsightType|value-of<InsightType>|null $insightType
+     * @param JsonSchemaShape|null $jsonSchema
      */
     public static function with(
         string $id,

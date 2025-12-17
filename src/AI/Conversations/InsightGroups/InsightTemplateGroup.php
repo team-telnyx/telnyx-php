@@ -70,7 +70,7 @@ final class InsightTemplateGroup implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<InsightTemplateShape> $insights
+     * @param list<InsightTemplateShape>|null $insights
      */
     public static function with(
         string $id,

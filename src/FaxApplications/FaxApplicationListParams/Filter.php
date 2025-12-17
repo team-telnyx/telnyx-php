@@ -46,7 +46,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ApplicationNameShape $applicationName
+     * @param ApplicationName|ApplicationNameShape|null $applicationName
      */
     public static function with(
         ApplicationName|array|null $applicationName = null,
@@ -63,7 +63,7 @@ final class Filter implements BaseModel
     /**
      * Application name filtering operations.
      *
-     * @param ApplicationNameShape $applicationName
+     * @param ApplicationName|ApplicationNameShape $applicationName
      */
     public function withApplicationName(
         ApplicationName|array $applicationName

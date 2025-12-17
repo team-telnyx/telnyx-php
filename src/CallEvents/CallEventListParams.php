@@ -22,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type PageShape from \Telnyx\CallEvents\CallEventListParams\Page
  *
  * @phpstan-type CallEventListParamsShape = array{
- *   filter?: FilterShape|null, page?: PageShape|null
+ *   filter?: null|Filter|FilterShape, page?: null|Page|PageShape
  * }
  */
 final class CallEventListParams implements BaseModel
@@ -53,8 +53,8 @@ final class CallEventListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
-     * @param PageShape $page
+     * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -71,7 +71,7 @@ final class CallEventListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound.outbound_voice_profile_id], filter[leg_id], filter[application_session_id], filter[connection_id], filter[product], filter[failed], filter[from], filter[to], filter[name], filter[type], filter[occurred_at][eq/gt/gte/lt/lte], filter[status].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -84,7 +84,7 @@ final class CallEventListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number].
      *
-     * @param PageShape $page
+     * @param Page|PageShape $page
      */
     public function withPage(Page|array $page): self
     {

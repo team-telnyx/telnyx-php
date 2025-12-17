@@ -27,12 +27,12 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings
  *
  * @phpstan-type ActionStartAIAssistantParamsShape = array{
- *   assistant?: AssistantShape|null,
+ *   assistant?: null|Assistant|AssistantShape,
  *   clientState?: string|null,
  *   commandID?: string|null,
  *   greeting?: string|null,
- *   interruptionSettings?: InterruptionSettingsShape|null,
- *   transcription?: TranscriptionConfigShape|null,
+ *   interruptionSettings?: null|InterruptionSettings|InterruptionSettingsShape,
+ *   transcription?: null|TranscriptionConfig|TranscriptionConfigShape,
  *   voice?: string|null,
  *   voiceSettings?: VoiceSettingsShape|null,
  * }
@@ -107,10 +107,10 @@ final class ActionStartAIAssistantParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AssistantShape $assistant
-     * @param InterruptionSettingsShape $interruptionSettings
-     * @param TranscriptionConfigShape $transcription
-     * @param VoiceSettingsShape $voiceSettings
+     * @param Assistant|AssistantShape|null $assistant
+     * @param InterruptionSettings|InterruptionSettingsShape|null $interruptionSettings
+     * @param TranscriptionConfig|TranscriptionConfigShape|null $transcription
+     * @param VoiceSettingsShape|null $voiceSettings
      */
     public static function with(
         Assistant|array|null $assistant = null,
@@ -139,7 +139,7 @@ final class ActionStartAIAssistantParams implements BaseModel
     /**
      * AI Assistant configuration.
      *
-     * @param AssistantShape $assistant
+     * @param Assistant|AssistantShape $assistant
      */
     public function withAssistant(Assistant|array $assistant): self
     {
@@ -185,7 +185,7 @@ final class ActionStartAIAssistantParams implements BaseModel
     /**
      * Settings for handling user interruptions during assistant speech.
      *
-     * @param InterruptionSettingsShape $interruptionSettings
+     * @param InterruptionSettings|InterruptionSettingsShape $interruptionSettings
      */
     public function withInterruptionSettings(
         InterruptionSettings|array $interruptionSettings
@@ -199,7 +199,7 @@ final class ActionStartAIAssistantParams implements BaseModel
     /**
      * The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
      *
-     * @param TranscriptionConfigShape $transcription
+     * @param TranscriptionConfig|TranscriptionConfigShape $transcription
      */
     public function withTranscription(
         TranscriptionConfig|array $transcription

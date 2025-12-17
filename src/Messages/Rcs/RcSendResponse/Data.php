@@ -82,9 +82,9 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RcsAgentMessageShape $body
-     * @param FromShape $from
-     * @param list<ToShape> $to
+     * @param RcsAgentMessage|RcsAgentMessageShape|null $body
+     * @param From|FromShape|null $from
+     * @param list<ToShape>|null $to
      */
     public static function with(
         ?string $id = null,
@@ -128,7 +128,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param RcsAgentMessageShape $body
+     * @param RcsAgentMessage|RcsAgentMessageShape $body
      */
     public function withBody(RcsAgentMessage|array $body): self
     {
@@ -155,7 +155,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param FromShape $from
+     * @param From|FromShape $from
      */
     public function withFrom(From|array $from): self
     {

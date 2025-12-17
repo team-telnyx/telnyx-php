@@ -77,7 +77,7 @@ final class AssistantSendSMSParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,ConversationMetadataShape> $conversationMetadata
+     * @param array<string,ConversationMetadataShape>|null $conversationMetadata
      */
     public static function with(
         string $from,

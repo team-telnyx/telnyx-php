@@ -85,7 +85,7 @@ final class ClusterComputeParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $files
+     * @param list<string>|null $files
      */
     public static function with(
         string $bucket,

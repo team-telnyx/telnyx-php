@@ -172,10 +172,10 @@ final class Fax implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Direction|value-of<Direction> $direction
-     * @param Quality|value-of<Quality> $quality
-     * @param RecordType|value-of<RecordType> $recordType
-     * @param Status|value-of<Status> $status
+     * @param Direction|value-of<Direction>|null $direction
+     * @param Quality|value-of<Quality>|null $quality
+     * @param RecordType|value-of<RecordType>|null $recordType
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,

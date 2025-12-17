@@ -44,7 +44,7 @@ final class PhoneNumberConfigurationCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PhoneNumberConfigurationShape> $phoneNumberConfigurations
+     * @param list<PhoneNumberConfigurationShape>|null $phoneNumberConfigurations
      */
     public static function with(?array $phoneNumberConfigurations = null): self
     {

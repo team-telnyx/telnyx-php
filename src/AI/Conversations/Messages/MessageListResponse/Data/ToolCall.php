@@ -65,7 +65,7 @@ final class ToolCall implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CallFunctionShape $function
+     * @param CallFunction|CallFunctionShape $function
      * @param Type|value-of<Type> $type
      */
     public static function with(
@@ -94,7 +94,7 @@ final class ToolCall implements BaseModel
     }
 
     /**
-     * @param CallFunctionShape $function
+     * @param CallFunction|CallFunctionShape $function
      */
     public function withFunction(CallFunction|array $function): self
     {

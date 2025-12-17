@@ -59,10 +59,10 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param GlobalIPShape $globalIP
-     * @param MeanLatencyShape $meanLatency
-     * @param PercentileLatencyShape $percentileLatency
-     * @param ProberLocationShape $proberLocation
+     * @param GlobalIP|GlobalIPShape|null $globalIP
+     * @param MeanLatency|MeanLatencyShape|null $meanLatency
+     * @param PercentileLatency|PercentileLatencyShape|null $percentileLatency
+     * @param ProberLocation|ProberLocationShape|null $proberLocation
      */
     public static function with(
         GlobalIP|array|null $globalIP = null,
@@ -83,7 +83,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param GlobalIPShape $globalIP
+     * @param GlobalIP|GlobalIPShape $globalIP
      */
     public function withGlobalIP(GlobalIP|array $globalIP): self
     {
@@ -94,7 +94,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param MeanLatencyShape $meanLatency
+     * @param MeanLatency|MeanLatencyShape $meanLatency
      */
     public function withMeanLatency(MeanLatency|array $meanLatency): self
     {
@@ -105,7 +105,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param PercentileLatencyShape $percentileLatency
+     * @param PercentileLatency|PercentileLatencyShape $percentileLatency
      */
     public function withPercentileLatency(
         PercentileLatency|array $percentileLatency
@@ -117,7 +117,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param ProberLocationShape $proberLocation
+     * @param ProberLocation|ProberLocationShape $proberLocation
      */
     public function withProberLocation(
         ProberLocation|array $proberLocation

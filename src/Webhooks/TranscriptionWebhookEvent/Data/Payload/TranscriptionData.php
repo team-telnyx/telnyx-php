@@ -58,7 +58,7 @@ final class TranscriptionData implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param TranscriptionTrack|value-of<TranscriptionTrack> $transcriptionTrack
+     * @param TranscriptionTrack|value-of<TranscriptionTrack>|null $transcriptionTrack
      */
     public static function with(
         ?float $confidence = null,

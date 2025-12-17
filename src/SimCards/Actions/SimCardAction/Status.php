@@ -43,7 +43,7 @@ final class Status implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Value|value-of<Value> $value
+     * @param Value|value-of<Value>|null $value
      */
     public static function with(
         ?string $reason = null,

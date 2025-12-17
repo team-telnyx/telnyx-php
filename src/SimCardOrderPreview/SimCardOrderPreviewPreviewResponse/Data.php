@@ -60,9 +60,9 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ShippingCostShape $shippingCost
-     * @param SimCardsCostShape $simCardsCost
-     * @param TotalCostShape $totalCost
+     * @param ShippingCost|ShippingCostShape|null $shippingCost
+     * @param SimCardsCost|SimCardsCostShape|null $simCardsCost
+     * @param TotalCost|TotalCostShape|null $totalCost
      */
     public static function with(
         ?int $quantity = null,
@@ -105,7 +105,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param ShippingCostShape $shippingCost
+     * @param ShippingCost|ShippingCostShape $shippingCost
      */
     public function withShippingCost(ShippingCost|array $shippingCost): self
     {
@@ -116,7 +116,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param SimCardsCostShape $simCardsCost
+     * @param SimCardsCost|SimCardsCostShape $simCardsCost
      */
     public function withSimCardsCost(SimCardsCost|array $simCardsCost): self
     {
@@ -127,7 +127,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param TotalCostShape $totalCost
+     * @param TotalCost|TotalCostShape $totalCost
      */
     public function withTotalCost(TotalCost|array $totalCost): self
     {

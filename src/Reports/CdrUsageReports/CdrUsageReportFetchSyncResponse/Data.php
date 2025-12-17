@@ -86,11 +86,11 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AggregationType|value-of<AggregationType> $aggregationType
-     * @param list<int> $connections
-     * @param ProductBreakdown|value-of<ProductBreakdown> $productBreakdown
-     * @param array<string,mixed> $result
-     * @param Status|value-of<Status> $status
+     * @param AggregationType|value-of<AggregationType>|null $aggregationType
+     * @param list<int>|null $connections
+     * @param ProductBreakdown|value-of<ProductBreakdown>|null $productBreakdown
+     * @param array<string,mixed>|null $result
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,

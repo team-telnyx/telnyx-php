@@ -65,7 +65,7 @@ final class ManagedAccountBalance implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $recordType
+     * @param RecordType|value-of<RecordType>|null $recordType
      */
     public static function with(
         ?string $availableCredit = null,

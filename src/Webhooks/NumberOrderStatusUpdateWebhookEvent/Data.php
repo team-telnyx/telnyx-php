@@ -83,7 +83,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param NumberOrderWithPhoneNumbersShape $payload
+     * @param NumberOrderWithPhoneNumbers|NumberOrderWithPhoneNumbersShape $payload
      */
     public static function with(
         string $id,
@@ -137,7 +137,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param NumberOrderWithPhoneNumbersShape $payload
+     * @param NumberOrderWithPhoneNumbers|NumberOrderWithPhoneNumbersShape $payload
      */
     public function withPayload(
         NumberOrderWithPhoneNumbers|array $payload

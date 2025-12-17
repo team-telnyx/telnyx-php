@@ -97,8 +97,8 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $phoneNumbers
-     * @param Status|value-of<Status> $status
+     * @param list<string>|null $phoneNumbers
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,

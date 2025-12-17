@@ -33,7 +33,7 @@ final class RecordingGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordingResponseDataShape $data
+     * @param RecordingResponseData|RecordingResponseDataShape|null $data
      */
     public static function with(RecordingResponseData|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class RecordingGetResponse implements BaseModel
     }
 
     /**
-     * @param RecordingResponseDataShape $data
+     * @param RecordingResponseData|RecordingResponseDataShape $data
      */
     public function withData(RecordingResponseData|array $data): self
     {

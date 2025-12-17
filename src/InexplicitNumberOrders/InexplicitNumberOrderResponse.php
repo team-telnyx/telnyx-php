@@ -84,7 +84,7 @@ final class InexplicitNumberOrderResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<OrderingGroupShape> $orderingGroups
+     * @param list<OrderingGroupShape>|null $orderingGroups
      */
     public static function with(
         ?string $id = null,

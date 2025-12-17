@@ -34,7 +34,7 @@ final class BucketNewPresignedURLResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ContentShape $content
+     * @param Content|ContentShape|null $content
      */
     public static function with(Content|array|null $content = null): self
     {
@@ -46,7 +46,7 @@ final class BucketNewPresignedURLResponse implements BaseModel
     }
 
     /**
-     * @param ContentShape $content
+     * @param Content|ContentShape $content
      */
     public function withContent(Content|array $content): self
     {

@@ -75,7 +75,7 @@ final class StandaloneCard implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RcsCardContentShape $cardContent
+     * @param RcsCardContent|RcsCardContentShape $cardContent
      * @param CardOrientation|value-of<CardOrientation> $cardOrientation
      * @param ThumbnailImageAlignment|value-of<ThumbnailImageAlignment> $thumbnailImageAlignment
      */
@@ -94,7 +94,7 @@ final class StandaloneCard implements BaseModel
     }
 
     /**
-     * @param RcsCardContentShape $cardContent
+     * @param RcsCardContent|RcsCardContentShape $cardContent
      */
     public function withCardContent(RcsCardContent|array $cardContent): self
     {

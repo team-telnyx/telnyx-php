@@ -47,8 +47,8 @@ final class CallQualityStats implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param InboundShape $inbound
-     * @param OutboundShape $outbound
+     * @param Inbound|InboundShape|null $inbound
+     * @param Outbound|OutboundShape|null $outbound
      */
     public static function with(
         Inbound|array|null $inbound = null,
@@ -65,7 +65,7 @@ final class CallQualityStats implements BaseModel
     /**
      * Inbound call quality statistics.
      *
-     * @param InboundShape $inbound
+     * @param Inbound|InboundShape $inbound
      */
     public function withInbound(Inbound|array $inbound): self
     {
@@ -78,7 +78,7 @@ final class CallQualityStats implements BaseModel
     /**
      * Outbound call quality statistics.
      *
-     * @param OutboundShape $outbound
+     * @param Outbound|OutboundShape $outbound
      */
     public function withOutbound(Outbound|array $outbound): self
     {

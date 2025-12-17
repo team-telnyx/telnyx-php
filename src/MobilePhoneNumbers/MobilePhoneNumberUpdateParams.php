@@ -27,16 +27,16 @@ use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\Outbound;
  * @phpstan-import-type OutboundShape from \Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\Outbound
  *
  * @phpstan-type MobilePhoneNumberUpdateParamsShape = array{
- *   callForwarding?: CallForwardingShape|null,
- *   callRecording?: CallRecordingShape|null,
+ *   callForwarding?: null|CallForwarding|CallForwardingShape,
+ *   callRecording?: null|CallRecording|CallRecordingShape,
  *   callerIDNameEnabled?: bool|null,
- *   cnamListing?: CnamListingShape|null,
+ *   cnamListing?: null|CnamListing|CnamListingShape,
  *   connectionID?: string|null,
  *   customerReference?: string|null,
- *   inbound?: InboundShape|null,
+ *   inbound?: null|Inbound|InboundShape,
  *   inboundCallScreening?: null|InboundCallScreening|value-of<InboundCallScreening>,
  *   noiseSuppression?: bool|null,
- *   outbound?: OutboundShape|null,
+ *   outbound?: null|Outbound|OutboundShape,
  *   tags?: list<string>|null,
  * }
  */
@@ -91,13 +91,13 @@ final class MobilePhoneNumberUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CallForwardingShape $callForwarding
-     * @param CallRecordingShape $callRecording
-     * @param CnamListingShape $cnamListing
-     * @param InboundShape $inbound
-     * @param InboundCallScreening|value-of<InboundCallScreening> $inboundCallScreening
-     * @param OutboundShape $outbound
-     * @param list<string> $tags
+     * @param CallForwarding|CallForwardingShape|null $callForwarding
+     * @param CallRecording|CallRecordingShape|null $callRecording
+     * @param CnamListing|CnamListingShape|null $cnamListing
+     * @param Inbound|InboundShape|null $inbound
+     * @param InboundCallScreening|value-of<InboundCallScreening>|null $inboundCallScreening
+     * @param Outbound|OutboundShape|null $outbound
+     * @param list<string>|null $tags
      */
     public static function with(
         CallForwarding|array|null $callForwarding = null,
@@ -130,7 +130,7 @@ final class MobilePhoneNumberUpdateParams implements BaseModel
     }
 
     /**
-     * @param CallForwardingShape $callForwarding
+     * @param CallForwarding|CallForwardingShape $callForwarding
      */
     public function withCallForwarding(
         CallForwarding|array $callForwarding
@@ -142,7 +142,7 @@ final class MobilePhoneNumberUpdateParams implements BaseModel
     }
 
     /**
-     * @param CallRecordingShape $callRecording
+     * @param CallRecording|CallRecordingShape $callRecording
      */
     public function withCallRecording(CallRecording|array $callRecording): self
     {
@@ -161,7 +161,7 @@ final class MobilePhoneNumberUpdateParams implements BaseModel
     }
 
     /**
-     * @param CnamListingShape $cnamListing
+     * @param CnamListing|CnamListingShape $cnamListing
      */
     public function withCnamListing(CnamListing|array $cnamListing): self
     {
@@ -188,7 +188,7 @@ final class MobilePhoneNumberUpdateParams implements BaseModel
     }
 
     /**
-     * @param InboundShape $inbound
+     * @param Inbound|InboundShape $inbound
      */
     public function withInbound(Inbound|array $inbound): self
     {
@@ -219,7 +219,7 @@ final class MobilePhoneNumberUpdateParams implements BaseModel
     }
 
     /**
-     * @param OutboundShape $outbound
+     * @param Outbound|OutboundShape $outbound
      */
     public function withOutbound(Outbound|array $outbound): self
     {

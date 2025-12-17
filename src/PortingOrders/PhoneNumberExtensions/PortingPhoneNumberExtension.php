@@ -83,8 +83,8 @@ final class PortingPhoneNumberExtension implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ActivationRangeShape> $activationRanges
-     * @param ExtensionRangeShape $extensionRange
+     * @param list<ActivationRangeShape>|null $activationRanges
+     * @param ExtensionRange|ExtensionRangeShape|null $extensionRange
      */
     public static function with(
         ?string $id = null,
@@ -146,7 +146,7 @@ final class PortingPhoneNumberExtension implements BaseModel
     /**
      * Specifies the extension range for this porting phone number extension.
      *
-     * @param ExtensionRangeShape $extensionRange
+     * @param ExtensionRange|ExtensionRangeShape $extensionRange
      */
     public function withExtensionRange(
         ExtensionRange|array $extensionRange

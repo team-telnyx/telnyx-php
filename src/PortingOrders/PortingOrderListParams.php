@@ -22,10 +22,10 @@ use Telnyx\PortingOrders\PortingOrderListParams\Sort;
  * @phpstan-import-type SortShape from \Telnyx\PortingOrders\PortingOrderListParams\Sort
  *
  * @phpstan-type PortingOrderListParamsShape = array{
- *   filter?: FilterShape|null,
+ *   filter?: null|Filter|FilterShape,
  *   includePhoneNumbers?: bool|null,
- *   page?: PageShape|null,
- *   sort?: SortShape|null,
+ *   page?: null|Page|PageShape,
+ *   sort?: null|Sort|SortShape,
  * }
  */
 final class PortingOrderListParams implements BaseModel
@@ -68,9 +68,9 @@ final class PortingOrderListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
-     * @param PageShape $page
-     * @param SortShape $sort
+     * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
+     * @param Sort|SortShape|null $sort
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -91,7 +91,7 @@ final class PortingOrderListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[customer_reference], filter[customer_group_reference], filter[parent_support_key], filter[phone_numbers.country_code], filter[phone_numbers.carrier_name], filter[misc.type], filter[end_user.admin.entity_name], filter[end_user.admin.auth_person_name], filter[activation_settings.fast_port_eligible], filter[activation_settings.foc_datetime_requested][gt], filter[activation_settings.foc_datetime_requested][lt], filter[phone_numbers.phone_number][contains].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -115,7 +115,7 @@ final class PortingOrderListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param PageShape $page
+     * @param Page|PageShape $page
      */
     public function withPage(Page|array $page): self
     {
@@ -128,7 +128,7 @@ final class PortingOrderListParams implements BaseModel
     /**
      * Consolidated sort parameter (deepObject style). Originally: sort[value].
      *
-     * @param SortShape $sort
+     * @param Sort|SortShape $sort
      */
     public function withSort(Sort|array $sort): self
     {

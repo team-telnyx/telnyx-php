@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type FilterShape from \Telnyx\BundlePricing\UserBundles\UserBundleListUnusedParams\Filter
  *
  * @phpstan-type UserBundleListUnusedParamsShape = array{
- *   filter?: FilterShape|null, authorizationBearer?: string|null
+ *   filter?: null|Filter|FilterShape, authorizationBearer?: string|null
  * }
  */
 final class UserBundleListUnusedParams implements BaseModel
@@ -49,7 +49,7 @@ final class UserBundleListUnusedParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape|null $filter
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -66,7 +66,7 @@ final class UserBundleListUnusedParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Supports filtering by country_iso and resource. Examples: filter[country_iso]=US or filter[resource]=+15617819942.
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

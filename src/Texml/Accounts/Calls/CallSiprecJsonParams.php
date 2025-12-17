@@ -124,9 +124,9 @@ final class CallSiprecJsonParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SipTransport|value-of<SipTransport> $sipTransport
-     * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $statusCallbackMethod
-     * @param Track|value-of<Track> $track
+     * @param SipTransport|value-of<SipTransport>|null $sipTransport
+     * @param StatusCallbackMethod|value-of<StatusCallbackMethod>|null $statusCallbackMethod
+     * @param Track|value-of<Track>|null $track
      */
     public static function with(
         string $accountSid,

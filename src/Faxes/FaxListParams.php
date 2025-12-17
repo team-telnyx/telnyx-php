@@ -18,7 +18,7 @@ use Telnyx\Faxes\FaxListParams\Filter;
  * @phpstan-import-type FilterShape from \Telnyx\Faxes\FaxListParams\Filter
  *
  * @phpstan-type FaxListParamsShape = array{
- *   filter?: FilterShape|null, pageNumber?: int|null, pageSize?: int|null
+ *   filter?: null|Filter|FilterShape, pageNumber?: int|null, pageSize?: int|null
  * }
  */
 final class FaxListParams implements BaseModel
@@ -49,7 +49,7 @@ final class FaxListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape|null $filter
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -68,7 +68,7 @@ final class FaxListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[created_at][gte], filter[created_at][gt], filter[created_at][lte], filter[created_at][lt], filter[direction][eq], filter[from][eq], filter[to][eq].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

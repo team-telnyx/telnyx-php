@@ -139,8 +139,8 @@ final class ParticipantUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AnnounceMethod|value-of<AnnounceMethod> $announceMethod
-     * @param HoldMethod|value-of<HoldMethod> $holdMethod
+     * @param AnnounceMethod|value-of<AnnounceMethod>|null $announceMethod
+     * @param HoldMethod|value-of<HoldMethod>|null $holdMethod
      */
     public static function with(
         string $accountSid,

@@ -21,8 +21,8 @@ use Telnyx\Requirements\RequirementListParams\Sort;
  * @phpstan-import-type PageShape from \Telnyx\Requirements\RequirementListParams\Page
  *
  * @phpstan-type RequirementListParamsShape = array{
- *   filter?: FilterShape|null,
- *   page?: PageShape|null,
+ *   filter?: null|Filter|FilterShape,
+ *   page?: null|Page|PageShape,
  *   sort?: list<Sort|value-of<Sort>>|null,
  * }
  */
@@ -62,9 +62,9 @@ final class RequirementListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
-     * @param PageShape $page
-     * @param list<Sort|value-of<Sort>> $sort
+     * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
+     * @param list<Sort|value-of<Sort>>|null $sort
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -83,7 +83,7 @@ final class RequirementListParams implements BaseModel
     /**
      * Consolidated filter parameter for requirements (deepObject style). Originally: filter[country_code], filter[phone_number_type], filter[action].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -96,7 +96,7 @@ final class RequirementListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param PageShape $page
+     * @param Page|PageShape $page
      */
     public function withPage(Page|array $page): self
     {

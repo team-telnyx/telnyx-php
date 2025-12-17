@@ -20,7 +20,7 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams\AdditionalDa
  *
  * @phpstan-type CustomerServiceRecordCreateParamsShape = array{
  *   phoneNumber: string,
- *   additionalData?: AdditionalDataShape|null,
+ *   additionalData?: null|AdditionalData|AdditionalDataShape,
  *   webhookURL?: string|null,
  * }
  */
@@ -69,7 +69,7 @@ final class CustomerServiceRecordCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AdditionalDataShape $additionalData
+     * @param AdditionalData|AdditionalDataShape|null $additionalData
      */
     public static function with(
         string $phoneNumber,
@@ -98,7 +98,7 @@ final class CustomerServiceRecordCreateParams implements BaseModel
     }
 
     /**
-     * @param AdditionalDataShape $additionalData
+     * @param AdditionalData|AdditionalDataShape $additionalData
      */
     public function withAdditionalData(
         AdditionalData|array $additionalData

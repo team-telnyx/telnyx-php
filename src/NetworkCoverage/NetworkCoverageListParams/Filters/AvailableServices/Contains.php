@@ -39,7 +39,7 @@ final class Contains implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AvailableService|value-of<AvailableService> $contains
+     * @param AvailableService|value-of<AvailableService>|null $contains
      */
     public static function with(AvailableService|string|null $contains = null): self
     {

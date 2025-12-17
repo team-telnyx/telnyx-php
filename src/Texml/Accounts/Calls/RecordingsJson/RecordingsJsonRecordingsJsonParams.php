@@ -113,9 +113,9 @@ final class RecordingsJsonRecordingsJsonParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordingChannels|value-of<RecordingChannels> $recordingChannels
-     * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod> $recordingStatusCallbackMethod
-     * @param RecordingTrack|value-of<RecordingTrack> $recordingTrack
+     * @param RecordingChannels|value-of<RecordingChannels>|null $recordingChannels
+     * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod>|null $recordingStatusCallbackMethod
+     * @param RecordingTrack|value-of<RecordingTrack>|null $recordingTrack
      */
     public static function with(
         string $accountSid,

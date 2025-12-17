@@ -33,7 +33,7 @@ final class WirelessBlocklistNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param WirelessBlocklistShape $data
+     * @param WirelessBlocklist|WirelessBlocklistShape|null $data
      */
     public static function with(WirelessBlocklist|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class WirelessBlocklistNewResponse implements BaseModel
     }
 
     /**
-     * @param WirelessBlocklistShape $data
+     * @param WirelessBlocklist|WirelessBlocklistShape $data
      */
     public function withData(WirelessBlocklist|array $data): self
     {

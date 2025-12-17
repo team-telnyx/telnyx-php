@@ -70,11 +70,11 @@ final class Contact implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AddressShape> $addresses
-     * @param list<EmailShape> $emails
-     * @param OrgShape $org
-     * @param list<PhoneShape> $phones
-     * @param list<URLShape> $urls
+     * @param list<AddressShape>|null $addresses
+     * @param list<EmailShape>|null $emails
+     * @param Org|OrgShape|null $org
+     * @param list<PhoneShape>|null $phones
+     * @param list<URLShape>|null $urls
      */
     public static function with(
         ?array $addresses = null,
@@ -137,7 +137,7 @@ final class Contact implements BaseModel
     }
 
     /**
-     * @param OrgShape $org
+     * @param Org|OrgShape $org
      */
     public function withOrg(Org|array $org): self
     {

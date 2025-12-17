@@ -84,7 +84,7 @@ final class ConferenceGetRecordingsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RecordingShape> $recordings
+     * @param list<RecordingShape>|null $recordings
      */
     public static function with(
         ?int $end = null,

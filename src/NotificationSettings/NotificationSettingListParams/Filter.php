@@ -66,12 +66,12 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AssociatedRecordTypeShape $associatedRecordType
-     * @param ChannelTypeIDShape $channelTypeID
-     * @param NotificationChannelShape $notificationChannel
-     * @param NotificationEventConditionIDShape $notificationEventConditionID
-     * @param NotificationProfileIDShape $notificationProfileID
-     * @param StatusShape $status
+     * @param AssociatedRecordType|AssociatedRecordTypeShape|null $associatedRecordType
+     * @param ChannelTypeID|ChannelTypeIDShape|null $channelTypeID
+     * @param NotificationChannel|NotificationChannelShape|null $notificationChannel
+     * @param NotificationEventConditionID|NotificationEventConditionIDShape|null $notificationEventConditionID
+     * @param NotificationProfileID|NotificationProfileIDShape|null $notificationProfileID
+     * @param Status|StatusShape|null $status
      */
     public static function with(
         AssociatedRecordType|array|null $associatedRecordType = null,
@@ -94,7 +94,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param AssociatedRecordTypeShape $associatedRecordType
+     * @param AssociatedRecordType|AssociatedRecordTypeShape $associatedRecordType
      */
     public function withAssociatedRecordType(
         AssociatedRecordType|array $associatedRecordType
@@ -106,7 +106,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param ChannelTypeIDShape $channelTypeID
+     * @param ChannelTypeID|ChannelTypeIDShape $channelTypeID
      */
     public function withChannelTypeID(ChannelTypeID|array $channelTypeID): self
     {
@@ -117,7 +117,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param NotificationChannelShape $notificationChannel
+     * @param NotificationChannel|NotificationChannelShape $notificationChannel
      */
     public function withNotificationChannel(
         NotificationChannel|array $notificationChannel
@@ -129,7 +129,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param NotificationEventConditionIDShape $notificationEventConditionID
+     * @param NotificationEventConditionID|NotificationEventConditionIDShape $notificationEventConditionID
      */
     public function withNotificationEventConditionID(
         NotificationEventConditionID|array $notificationEventConditionID
@@ -141,7 +141,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param NotificationProfileIDShape $notificationProfileID
+     * @param NotificationProfileID|NotificationProfileIDShape $notificationProfileID
      */
     public function withNotificationProfileID(
         NotificationProfileID|array $notificationProfileID
@@ -153,7 +153,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param StatusShape $status
+     * @param Status|StatusShape $status
      */
     public function withStatus(Status|array $status): self
     {

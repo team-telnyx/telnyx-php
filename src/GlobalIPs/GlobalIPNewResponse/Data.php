@@ -85,7 +85,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,mixed> $ports
+     * @param array<string,mixed>|null $ports
      */
     public static function with(
         ?string $id = null,

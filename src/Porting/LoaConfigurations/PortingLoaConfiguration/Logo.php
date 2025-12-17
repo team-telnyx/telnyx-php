@@ -45,7 +45,7 @@ final class Logo implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ContentType|value-of<ContentType> $contentType
+     * @param ContentType|value-of<ContentType>|null $contentType
      */
     public static function with(
         ContentType|string|null $contentType = null,

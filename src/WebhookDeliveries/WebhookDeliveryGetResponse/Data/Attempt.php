@@ -72,9 +72,9 @@ final class Attempt implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<int> $errors
-     * @param HTTPShape $http
-     * @param Status|value-of<Status> $status
+     * @param list<int>|null $errors
+     * @param HTTP|HTTPShape|null $http
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?array $errors = null,
@@ -121,7 +121,7 @@ final class Attempt implements BaseModel
     /**
      * HTTP request and response information.
      *
-     * @param HTTPShape $http
+     * @param HTTP|HTTPShape $http
      */
     public function withHTTP(HTTP|array $http): self
     {

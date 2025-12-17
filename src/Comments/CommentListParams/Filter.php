@@ -46,7 +46,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CommentRecordType|value-of<CommentRecordType> $commentRecordType
+     * @param CommentRecordType|value-of<CommentRecordType>|null $commentRecordType
      */
     public static function with(
         ?string $commentRecordID = null,

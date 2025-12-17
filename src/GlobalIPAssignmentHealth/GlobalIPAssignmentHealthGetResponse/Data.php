@@ -53,9 +53,9 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param GlobalIPShape $globalIP
-     * @param GlobalIPAssignmentShape $globalIPAssignment
-     * @param HealthShape $health
+     * @param GlobalIP|GlobalIPShape|null $globalIP
+     * @param GlobalIPAssignment|GlobalIPAssignmentShape|null $globalIPAssignment
+     * @param Health|HealthShape|null $health
      */
     public static function with(
         GlobalIP|array|null $globalIP = null,
@@ -74,7 +74,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param GlobalIPShape $globalIP
+     * @param GlobalIP|GlobalIPShape $globalIP
      */
     public function withGlobalIP(GlobalIP|array $globalIP): self
     {
@@ -85,7 +85,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param GlobalIPAssignmentShape $globalIPAssignment
+     * @param GlobalIPAssignment|GlobalIPAssignmentShape $globalIPAssignment
      */
     public function withGlobalIPAssignment(
         GlobalIPAssignment|array $globalIPAssignment
@@ -97,7 +97,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param HealthShape $health
+     * @param Health|HealthShape $health
      */
     public function withHealth(Health|array $health): self
     {

@@ -18,7 +18,7 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams\Para
  * @phpstan-import-type ParamsShape from \Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams\Params
  *
  * @phpstan-type ActionRequirementInitiateParamsShape = array{
- *   portingOrderID: string, params: ParamsShape
+ *   portingOrderID: string, params: Params|ParamsShape
  * }
  */
 final class ActionRequirementInitiateParams implements BaseModel
@@ -60,7 +60,7 @@ final class ActionRequirementInitiateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ParamsShape $params
+     * @param Params|ParamsShape $params
      */
     public static function with(
         string $portingOrderID,
@@ -85,7 +85,7 @@ final class ActionRequirementInitiateParams implements BaseModel
     /**
      * Required information for initiating the action requirement for AU ID verification.
      *
-     * @param ParamsShape $params
+     * @param Params|ParamsShape $params
      */
     public function withParams(Params|array $params): self
     {

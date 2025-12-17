@@ -34,7 +34,7 @@ final class RoomParticipantGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RoomParticipantShape $data
+     * @param RoomParticipant|RoomParticipantShape|null $data
      */
     public static function with(RoomParticipant|array|null $data = null): self
     {
@@ -46,7 +46,7 @@ final class RoomParticipantGetResponse implements BaseModel
     }
 
     /**
-     * @param RoomParticipantShape $data
+     * @param RoomParticipant|RoomParticipantShape $data
      */
     public function withData(RoomParticipant|array $data): self
     {

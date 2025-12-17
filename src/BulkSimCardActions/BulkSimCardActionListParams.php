@@ -57,7 +57,7 @@ final class BulkSimCardActionListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterActionType|value-of<FilterActionType> $filterActionType
+     * @param FilterActionType|value-of<FilterActionType>|null $filterActionType
      */
     public static function with(
         FilterActionType|string|null $filterActionType = null,

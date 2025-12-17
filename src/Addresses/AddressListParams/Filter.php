@@ -58,9 +58,9 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AddressBookShape $addressBook
-     * @param CustomerReferenceShape $customerReference
-     * @param StreetAddressShape $streetAddress
+     * @param AddressBook|AddressBookShape|null $addressBook
+     * @param CustomerReferenceShape|null $customerReference
+     * @param StreetAddress|StreetAddressShape|null $streetAddress
      */
     public static function with(
         AddressBook|array|null $addressBook = null,
@@ -79,7 +79,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param AddressBookShape $addressBook
+     * @param AddressBook|AddressBookShape $addressBook
      */
     public function withAddressBook(AddressBook|array $addressBook): self
     {
@@ -104,7 +104,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param StreetAddressShape $streetAddress
+     * @param StreetAddress|StreetAddressShape $streetAddress
      */
     public function withStreetAddress(StreetAddress|array $streetAddress): self
     {

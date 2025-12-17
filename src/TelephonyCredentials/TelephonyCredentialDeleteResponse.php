@@ -33,7 +33,7 @@ final class TelephonyCredentialDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param TelephonyCredentialShape $data
+     * @param TelephonyCredential|TelephonyCredentialShape|null $data
      */
     public static function with(TelephonyCredential|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class TelephonyCredentialDeleteResponse implements BaseModel
     }
 
     /**
-     * @param TelephonyCredentialShape $data
+     * @param TelephonyCredential|TelephonyCredentialShape $data
      */
     public function withData(TelephonyCredential|array $data): self
     {

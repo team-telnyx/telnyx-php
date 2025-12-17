@@ -78,8 +78,8 @@ final class WirelessBlocklist implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Type|value-of<Type> $type
-     * @param list<string> $values
+     * @param Type|value-of<Type>|null $type
+     * @param list<string>|null $values
      */
     public static function with(
         ?string $id = null,

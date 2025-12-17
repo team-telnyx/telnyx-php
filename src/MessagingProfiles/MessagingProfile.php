@@ -202,11 +202,11 @@ final class MessagingProfile implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param NumberPoolSettingsShape|null $numberPoolSettings
-     * @param RecordType|value-of<RecordType> $recordType
-     * @param URLShortenerSettingsShape|null $urlShortenerSettings
-     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion
-     * @param list<string> $whitelistedDestinations
+     * @param NumberPoolSettings|NumberPoolSettingsShape|null $numberPoolSettings
+     * @param RecordType|value-of<RecordType>|null $recordType
+     * @param URLShortenerSettings|URLShortenerSettingsShape|null $urlShortenerSettings
+     * @param WebhookAPIVersion|value-of<WebhookAPIVersion>|null $webhookAPIVersion
+     * @param list<string>|null $whitelistedDestinations
      */
     public static function with(
         ?string $id = null,
@@ -389,7 +389,7 @@ final class MessagingProfile implements BaseModel
      *
      * To disable this feature, set the object field to `null`.
      *
-     * @param NumberPoolSettingsShape|null $numberPoolSettings
+     * @param NumberPoolSettings|NumberPoolSettingsShape|null $numberPoolSettings
      */
     public function withNumberPoolSettings(
         NumberPoolSettings|array|null $numberPoolSettings
@@ -455,7 +455,7 @@ final class MessagingProfile implements BaseModel
      *
      * To disable this feature, set the object field to `null`.
      *
-     * @param URLShortenerSettingsShape|null $urlShortenerSettings
+     * @param URLShortenerSettings|URLShortenerSettingsShape|null $urlShortenerSettings
      */
     public function withURLShortenerSettings(
         URLShortenerSettings|array|null $urlShortenerSettings

@@ -140,9 +140,9 @@ final class Recording implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Source|value-of<Source> $source
-     * @param Status|value-of<Status> $status
-     * @param array<string,mixed> $subresourceUris
+     * @param Source|value-of<Source>|null $source
+     * @param Status|value-of<Status>|null $status
+     * @param array<string,mixed>|null $subresourceUris
      */
     public static function with(
         ?string $accountSid = null,

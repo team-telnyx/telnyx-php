@@ -41,8 +41,8 @@ final class ReportListMdrsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DataShape> $data
-     * @param PaginationMetaReportingShape $meta
+     * @param list<DataShape>|null $data
+     * @param PaginationMetaReporting|PaginationMetaReportingShape|null $meta
      */
     public static function with(
         ?array $data = null,
@@ -68,7 +68,7 @@ final class ReportListMdrsResponse implements BaseModel
     }
 
     /**
-     * @param PaginationMetaReportingShape $meta
+     * @param PaginationMetaReporting|PaginationMetaReportingShape $meta
      */
     public function withMeta(PaginationMetaReporting|array $meta): self
     {

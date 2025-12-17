@@ -200,13 +200,13 @@ final class ActionBridgeParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MuteDtmf|value-of<MuteDtmf> $muteDtmf
-     * @param Record|value-of<Record> $record
-     * @param RecordChannels|value-of<RecordChannels> $recordChannels
-     * @param RecordFormat|value-of<RecordFormat> $recordFormat
-     * @param RecordTrack|value-of<RecordTrack> $recordTrack
-     * @param RecordTrim|value-of<RecordTrim> $recordTrim
-     * @param Ringtone|value-of<Ringtone> $ringtone
+     * @param MuteDtmf|value-of<MuteDtmf>|null $muteDtmf
+     * @param Record|value-of<Record>|null $record
+     * @param RecordChannels|value-of<RecordChannels>|null $recordChannels
+     * @param RecordFormat|value-of<RecordFormat>|null $recordFormat
+     * @param RecordTrack|value-of<RecordTrack>|null $recordTrack
+     * @param RecordTrim|value-of<RecordTrim>|null $recordTrim
+     * @param Ringtone|value-of<Ringtone>|null $ringtone
      */
     public static function with(
         string $callControlIDToBridgeWith,

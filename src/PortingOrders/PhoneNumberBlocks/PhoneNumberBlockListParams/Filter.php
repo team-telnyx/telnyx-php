@@ -92,12 +92,12 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ActivationStatus|value-of<ActivationStatus> $activationStatus
-     * @param list<string> $phoneNumber
-     * @param PortabilityStatus|value-of<PortabilityStatus> $portabilityStatus
-     * @param list<string> $portingOrderID
-     * @param StatusShape $status
-     * @param SupportKeyShape $supportKey
+     * @param ActivationStatus|value-of<ActivationStatus>|null $activationStatus
+     * @param list<string>|null $phoneNumber
+     * @param PortabilityStatus|value-of<PortabilityStatus>|null $portabilityStatus
+     * @param list<string>|null $portingOrderID
+     * @param StatusShape|null $status
+     * @param SupportKeyShape|null $supportKey
      */
     public static function with(
         ActivationStatus|string|null $activationStatus = null,

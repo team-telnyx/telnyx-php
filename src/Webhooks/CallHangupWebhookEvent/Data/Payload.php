@@ -161,13 +161,13 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CallQualityStatsShape|null $callQualityStats
-     * @param list<CustomSipHeaderShape> $customHeaders
-     * @param HangupCause|value-of<HangupCause> $hangupCause
-     * @param HangupSource|value-of<HangupSource> $hangupSource
-     * @param list<SipHeaderShape> $sipHeaders
-     * @param State|value-of<State> $state
-     * @param list<string> $tags
+     * @param CallQualityStats|CallQualityStatsShape|null $callQualityStats
+     * @param list<CustomSipHeaderShape>|null $customHeaders
+     * @param HangupCause|value-of<HangupCause>|null $hangupCause
+     * @param HangupSource|value-of<HangupSource>|null $hangupSource
+     * @param list<SipHeaderShape>|null $sipHeaders
+     * @param State|value-of<State>|null $state
+     * @param list<string>|null $tags
      */
     public static function with(
         ?string $callControlID = null,
@@ -234,7 +234,7 @@ final class Payload implements BaseModel
     /**
      * Call quality statistics aggregated from the CHANNEL_HANGUP_COMPLETE event. Only includes metrics that are available (filters out nil values). Returns nil if no metrics are available.
      *
-     * @param CallQualityStatsShape|null $callQualityStats
+     * @param CallQualityStats|CallQualityStatsShape|null $callQualityStats
      */
     public function withCallQualityStats(
         CallQualityStats|array|null $callQualityStats

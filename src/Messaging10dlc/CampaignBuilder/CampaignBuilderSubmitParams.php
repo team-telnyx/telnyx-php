@@ -302,9 +302,9 @@ final class CampaignBuilderSubmitParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<int> $mnoIDs
-     * @param list<string> $subUsecases
-     * @param list<string> $tag
+     * @param list<int>|null $mnoIDs
+     * @param list<string>|null $subUsecases
+     * @param list<string>|null $tag
      */
     public static function with(
         string $brandID,

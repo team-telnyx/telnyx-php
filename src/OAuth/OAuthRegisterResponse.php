@@ -132,9 +132,9 @@ final class OAuthRegisterResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $grantTypes
-     * @param list<string> $redirectUris
-     * @param list<string> $responseTypes
+     * @param list<string>|null $grantTypes
+     * @param list<string>|null $redirectUris
+     * @param list<string>|null $responseTypes
      */
     public static function with(
         string $clientID,

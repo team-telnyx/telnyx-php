@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   commandID?: string|null,
  *   direction?: null|Direction|value-of<Direction>,
  *   noiseSuppressionEngine?: null|NoiseSuppressionEngine|value-of<NoiseSuppressionEngine>,
- *   noiseSuppressionEngineConfig?: NoiseSuppressionEngineConfigShape|null,
+ *   noiseSuppressionEngineConfig?: null|NoiseSuppressionEngineConfig|NoiseSuppressionEngineConfigShape,
  * }
  */
 final class ActionStartNoiseSuppressionParams implements BaseModel
@@ -80,9 +80,9 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Direction|value-of<Direction> $direction
-     * @param NoiseSuppressionEngine|value-of<NoiseSuppressionEngine> $noiseSuppressionEngine
-     * @param NoiseSuppressionEngineConfigShape $noiseSuppressionEngineConfig
+     * @param Direction|value-of<Direction>|null $direction
+     * @param NoiseSuppressionEngine|value-of<NoiseSuppressionEngine>|null $noiseSuppressionEngine
+     * @param NoiseSuppressionEngineConfig|NoiseSuppressionEngineConfigShape|null $noiseSuppressionEngineConfig
      */
     public static function with(
         ?string $clientState = null,
@@ -157,7 +157,7 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
     /**
      * Configuration parameters for noise suppression engines.
      *
-     * @param NoiseSuppressionEngineConfigShape $noiseSuppressionEngineConfig
+     * @param NoiseSuppressionEngineConfig|NoiseSuppressionEngineConfigShape $noiseSuppressionEngineConfig
      */
     public function withNoiseSuppressionEngineConfig(
         NoiseSuppressionEngineConfig|array $noiseSuppressionEngineConfig

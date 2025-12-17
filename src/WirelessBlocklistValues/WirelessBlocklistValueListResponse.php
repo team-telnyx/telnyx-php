@@ -43,8 +43,8 @@ final class WirelessBlocklistValueListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DataShape $data
-     * @param PaginationMetaShape $meta
+     * @param DataShape|null $data
+     * @param PaginationMeta|PaginationMetaShape|null $meta
      */
     public static function with(
         ?array $data = null,
@@ -70,7 +70,7 @@ final class WirelessBlocklistValueListResponse implements BaseModel
     }
 
     /**
-     * @param PaginationMetaShape $meta
+     * @param PaginationMeta|PaginationMetaShape $meta
      */
     public function withMeta(PaginationMeta|array $meta): self
     {

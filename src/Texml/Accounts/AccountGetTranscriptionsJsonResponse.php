@@ -91,7 +91,7 @@ final class AccountGetTranscriptionsJsonResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TranscriptionShape> $transcriptions
+     * @param list<TranscriptionShape>|null $transcriptions
      */
     public static function with(
         ?int $end = null,

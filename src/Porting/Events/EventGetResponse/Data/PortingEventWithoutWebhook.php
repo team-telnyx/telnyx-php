@@ -100,9 +100,9 @@ final class PortingEventWithoutWebhook implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AvailableNotificationMethod|value-of<AvailableNotificationMethod>> $availableNotificationMethods
-     * @param EventType|value-of<EventType> $eventType
-     * @param PayloadStatus|value-of<PayloadStatus> $payloadStatus
+     * @param list<AvailableNotificationMethod|value-of<AvailableNotificationMethod>>|null $availableNotificationMethods
+     * @param EventType|value-of<EventType>|null $eventType
+     * @param PayloadStatus|value-of<PayloadStatus>|null $payloadStatus
      */
     public static function with(
         ?string $id = null,

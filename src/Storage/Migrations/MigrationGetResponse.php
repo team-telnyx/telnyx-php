@@ -33,7 +33,7 @@ final class MigrationGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MigrationParamsShape $data
+     * @param MigrationParams|MigrationParamsShape|null $data
      */
     public static function with(MigrationParams|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class MigrationGetResponse implements BaseModel
     }
 
     /**
-     * @param MigrationParamsShape $data
+     * @param MigrationParams|MigrationParamsShape $data
      */
     public function withData(MigrationParams|array $data): self
     {

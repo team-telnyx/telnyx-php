@@ -33,7 +33,7 @@ final class FqdnConnectionGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FqdnConnectionShape $data
+     * @param FqdnConnection|FqdnConnectionShape|null $data
      */
     public static function with(FqdnConnection|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class FqdnConnectionGetResponse implements BaseModel
     }
 
     /**
-     * @param FqdnConnectionShape $data
+     * @param FqdnConnection|FqdnConnectionShape $data
      */
     public function withData(FqdnConnection|array $data): self
     {

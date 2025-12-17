@@ -96,8 +96,8 @@ final class CredentialOutbound implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AniOverrideType|value-of<AniOverrideType> $aniOverrideType
-     * @param T38ReinviteSource|value-of<T38ReinviteSource> $t38ReinviteSource
+     * @param AniOverrideType|value-of<AniOverrideType>|null $aniOverrideType
+     * @param T38ReinviteSource|value-of<T38ReinviteSource>|null $t38ReinviteSource
      */
     public static function with(
         ?string $aniOverride = null,

@@ -127,11 +127,11 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $eligibleMessagingProducts
-     * @param FeaturesShape $features
-     * @param NumberHealthMetricsShape $health
-     * @param RecordType|value-of<RecordType> $recordType
-     * @param Type|value-of<Type> $type
+     * @param list<string>|null $eligibleMessagingProducts
+     * @param Features|FeaturesShape|null $features
+     * @param NumberHealthMetrics|NumberHealthMetricsShape|null $health
+     * @param RecordType|value-of<RecordType>|null $recordType
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         ?string $id = null,
@@ -215,7 +215,7 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
     }
 
     /**
-     * @param FeaturesShape $features
+     * @param Features|FeaturesShape $features
      */
     public function withFeatures(Features|array $features): self
     {
@@ -228,7 +228,7 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
     /**
      * High level health metrics about the number and it's messaging sending patterns.
      *
-     * @param NumberHealthMetricsShape $health
+     * @param NumberHealthMetrics|NumberHealthMetricsShape $health
      */
     public function withHealth(NumberHealthMetrics|array $health): self
     {

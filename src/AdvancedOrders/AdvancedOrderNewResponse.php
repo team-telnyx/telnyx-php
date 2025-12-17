@@ -81,10 +81,10 @@ final class AdvancedOrderNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Feature|value-of<Feature>> $features
-     * @param list<string> $orders
-     * @param list<PhoneNumberType|value-of<PhoneNumberType>> $phoneNumberType
-     * @param list<Status|value-of<Status>> $status
+     * @param list<Feature|value-of<Feature>>|null $features
+     * @param list<string>|null $orders
+     * @param list<PhoneNumberType|value-of<PhoneNumberType>>|null $phoneNumberType
+     * @param list<Status|value-of<Status>>|null $status
      */
     public static function with(
         ?string $id = null,

@@ -34,7 +34,7 @@ final class CsvDownloadGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<CsvDownloadShape> $data
+     * @param list<CsvDownloadShape>|null $data
      */
     public static function with(?array $data = null): self
     {

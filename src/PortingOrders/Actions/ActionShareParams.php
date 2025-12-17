@@ -50,7 +50,7 @@ final class ActionShareParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Permissions|value-of<Permissions> $permissions
+     * @param Permissions|value-of<Permissions>|null $permissions
      */
     public static function with(
         ?int $expiresInSeconds = null,

@@ -86,7 +86,7 @@ final class RequirementGroupCreateParams implements BaseModel
      *
      * @param Action|value-of<Action> $action
      * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
-     * @param list<RegulatoryRequirementShape> $regulatoryRequirements
+     * @param list<RegulatoryRequirementShape>|null $regulatoryRequirements
      */
     public static function with(
         Action|string $action,

@@ -33,7 +33,7 @@ final class ExternalConnectionDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalConnectionShape $data
+     * @param ExternalConnection|ExternalConnectionShape|null $data
      */
     public static function with(ExternalConnection|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class ExternalConnectionDeleteResponse implements BaseModel
     }
 
     /**
-     * @param ExternalConnectionShape $data
+     * @param ExternalConnection|ExternalConnectionShape $data
      */
     public function withData(ExternalConnection|array $data): self
     {

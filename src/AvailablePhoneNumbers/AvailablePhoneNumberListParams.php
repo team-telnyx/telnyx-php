@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type FilterShape from \Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListParams\Filter
  *
  * @phpstan-type AvailablePhoneNumberListParamsShape = array{
- *   filter?: FilterShape|null
+ *   filter?: null|Filter|FilterShape
  * }
  */
 final class AvailablePhoneNumberListParams implements BaseModel
@@ -43,7 +43,7 @@ final class AvailablePhoneNumberListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape|null $filter
      */
     public static function with(Filter|array|null $filter = null): self
     {
@@ -57,7 +57,7 @@ final class AvailablePhoneNumberListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[locality], filter[administrative_area], filter[country_code], filter[national_destination_code], filter[rate_center], filter[phone_number_type], filter[features], filter[limit], filter[best_effort], filter[quickship], filter[reservable], filter[exclude_held_numbers].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

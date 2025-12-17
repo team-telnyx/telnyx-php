@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type PageShape from \Telnyx\Connections\ConnectionListActiveCallsParams\Page
  *
  * @phpstan-type ConnectionListActiveCallsParamsShape = array{
- *   page?: PageShape|null
+ *   page?: null|Page|PageShape
  * }
  */
 final class ConnectionListActiveCallsParams implements BaseModel
@@ -43,7 +43,7 @@ final class ConnectionListActiveCallsParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PageShape $page
+     * @param Page|PageShape|null $page
      */
     public static function with(Page|array|null $page = null): self
     {
@@ -57,7 +57,7 @@ final class ConnectionListActiveCallsParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number].
      *
-     * @param PageShape $page
+     * @param Page|PageShape $page
      */
     public function withPage(Page|array $page): self
     {

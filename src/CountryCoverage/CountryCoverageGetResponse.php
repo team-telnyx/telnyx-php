@@ -35,7 +35,7 @@ final class CountryCoverageGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,DataShape> $data
+     * @param array<string,DataShape>|null $data
      */
     public static function with(?array $data = null): self
     {

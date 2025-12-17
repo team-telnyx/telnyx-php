@@ -33,7 +33,7 @@ final class JobDeleteBatchResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PhoneNumbersJobShape $data
+     * @param PhoneNumbersJob|PhoneNumbersJobShape|null $data
      */
     public static function with(PhoneNumbersJob|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class JobDeleteBatchResponse implements BaseModel
     }
 
     /**
-     * @param PhoneNumbersJobShape $data
+     * @param PhoneNumbersJob|PhoneNumbersJobShape $data
      */
     public function withData(PhoneNumbersJob|array $data): self
     {

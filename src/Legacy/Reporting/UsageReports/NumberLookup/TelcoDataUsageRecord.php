@@ -52,7 +52,7 @@ final class TelcoDataUsageRecord implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TelcoDataAggregationShape> $aggregations
+     * @param list<TelcoDataAggregationShape>|null $aggregations
      */
     public static function with(
         ?array $aggregations = null,

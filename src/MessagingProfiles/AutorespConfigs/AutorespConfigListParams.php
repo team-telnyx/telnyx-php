@@ -21,8 +21,8 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\UpdatedAt;
  *
  * @phpstan-type AutorespConfigListParamsShape = array{
  *   countryCode?: string|null,
- *   createdAt?: CreatedAtShape|null,
- *   updatedAt?: UpdatedAtShape|null,
+ *   createdAt?: null|CreatedAt|CreatedAtShape,
+ *   updatedAt?: null|UpdatedAt|UpdatedAtShape,
  * }
  */
 final class AutorespConfigListParams implements BaseModel
@@ -56,8 +56,8 @@ final class AutorespConfigListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CreatedAtShape $createdAt
-     * @param UpdatedAtShape $updatedAt
+     * @param CreatedAt|CreatedAtShape|null $createdAt
+     * @param UpdatedAt|UpdatedAtShape|null $updatedAt
      */
     public static function with(
         ?string $countryCode = null,
@@ -84,7 +84,7 @@ final class AutorespConfigListParams implements BaseModel
     /**
      * Consolidated created_at parameter (deepObject style). Originally: created_at[gte], created_at[lte].
      *
-     * @param CreatedAtShape $createdAt
+     * @param CreatedAt|CreatedAtShape $createdAt
      */
     public function withCreatedAt(CreatedAt|array $createdAt): self
     {
@@ -97,7 +97,7 @@ final class AutorespConfigListParams implements BaseModel
     /**
      * Consolidated updated_at parameter (deepObject style). Originally: updated_at[gte], updated_at[lte].
      *
-     * @param UpdatedAtShape $updatedAt
+     * @param UpdatedAt|UpdatedAtShape $updatedAt
      */
     public function withUpdatedAt(UpdatedAt|array $updatedAt): self
     {

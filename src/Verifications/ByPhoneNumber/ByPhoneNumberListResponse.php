@@ -54,7 +54,7 @@ final class ByPhoneNumberListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<VerificationShape> $data
-     * @param VerifyMetaShape $meta
+     * @param VerifyMeta|VerifyMetaShape $meta
      */
     public static function with(array $data, VerifyMeta|array $meta): self
     {
@@ -78,7 +78,7 @@ final class ByPhoneNumberListResponse implements BaseModel
     }
 
     /**
-     * @param VerifyMetaShape $meta
+     * @param VerifyMeta|VerifyMetaShape $meta
      */
     public function withMeta(VerifyMeta|array $meta): self
     {

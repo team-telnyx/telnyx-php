@@ -46,8 +46,8 @@ final class RichCard implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CarouselCardShape $carouselCard
-     * @param StandaloneCardShape $standaloneCard
+     * @param CarouselCard|CarouselCardShape|null $carouselCard
+     * @param StandaloneCard|StandaloneCardShape|null $standaloneCard
      */
     public static function with(
         CarouselCard|array|null $carouselCard = null,
@@ -64,7 +64,7 @@ final class RichCard implements BaseModel
     /**
      * Carousel of cards.
      *
-     * @param CarouselCardShape $carouselCard
+     * @param CarouselCard|CarouselCardShape $carouselCard
      */
     public function withCarouselCard(CarouselCard|array $carouselCard): self
     {
@@ -77,7 +77,7 @@ final class RichCard implements BaseModel
     /**
      * Standalone card.
      *
-     * @param StandaloneCardShape $standaloneCard
+     * @param StandaloneCard|StandaloneCardShape $standaloneCard
      */
     public function withStandaloneCard(
         StandaloneCard|array $standaloneCard

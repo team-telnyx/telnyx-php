@@ -59,9 +59,9 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FromShape $from
-     * @param list<PortingPhoneNumberShape> $portingPhoneNumbers
-     * @param ToShape $to
+     * @param From|FromShape|null $from
+     * @param list<PortingPhoneNumberShape>|null $portingPhoneNumbers
+     * @param To|ToShape|null $to
      */
     public static function with(
         From|array|null $from = null,
@@ -80,7 +80,7 @@ final class Payload implements BaseModel
     /**
      * The porting order that was split.
      *
-     * @param FromShape $from
+     * @param From|FromShape $from
      */
     public function withFrom(From|array $from): self
     {
@@ -106,7 +106,7 @@ final class Payload implements BaseModel
     /**
      * The new porting order that the phone numbers was moved to.
      *
-     * @param ToShape $to
+     * @param To|ToShape $to
      */
     public function withTo(To|array $to): self
     {

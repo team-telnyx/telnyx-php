@@ -33,7 +33,7 @@ final class TexmlApplicationGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param TexmlApplicationShape $data
+     * @param TexmlApplication|TexmlApplicationShape|null $data
      */
     public static function with(TexmlApplication|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class TexmlApplicationGetResponse implements BaseModel
     }
 
     /**
-     * @param TexmlApplicationShape $data
+     * @param TexmlApplication|TexmlApplicationShape $data
      */
     public function withData(TexmlApplication|array $data): self
     {

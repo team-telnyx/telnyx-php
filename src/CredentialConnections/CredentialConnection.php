@@ -204,15 +204,15 @@ final class CredentialConnection implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
-     * @param DtmfType|value-of<DtmfType> $dtmfType
+     * @param AnchorsiteOverride|value-of<AnchorsiteOverride>|null $anchorsiteOverride
+     * @param DtmfType|value-of<DtmfType>|null $dtmfType
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
-     * @param CredentialInboundShape $inbound
-     * @param CredentialOutboundShape $outbound
-     * @param ConnectionRtcpSettingsShape $rtcpSettings
-     * @param SipUriCallingPreference|value-of<SipUriCallingPreference> $sipUriCallingPreference
-     * @param list<string> $tags
-     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion
+     * @param CredentialInbound|CredentialInboundShape|null $inbound
+     * @param CredentialOutbound|CredentialOutboundShape|null $outbound
+     * @param ConnectionRtcpSettings|ConnectionRtcpSettingsShape|null $rtcpSettings
+     * @param SipUriCallingPreference|value-of<SipUriCallingPreference>|null $sipUriCallingPreference
+     * @param list<string>|null $tags
+     * @param WebhookAPIVersion|value-of<WebhookAPIVersion>|null $webhookAPIVersion
      */
     public static function with(
         ?string $id = null,
@@ -388,7 +388,7 @@ final class CredentialConnection implements BaseModel
     }
 
     /**
-     * @param CredentialInboundShape $inbound
+     * @param CredentialInbound|CredentialInboundShape $inbound
      */
     public function withInbound(CredentialInbound|array $inbound): self
     {
@@ -411,7 +411,7 @@ final class CredentialConnection implements BaseModel
     }
 
     /**
-     * @param CredentialOutboundShape $outbound
+     * @param CredentialOutbound|CredentialOutboundShape $outbound
      */
     public function withOutbound(CredentialOutbound|array $outbound): self
     {
@@ -444,7 +444,7 @@ final class CredentialConnection implements BaseModel
     }
 
     /**
-     * @param ConnectionRtcpSettingsShape $rtcpSettings
+     * @param ConnectionRtcpSettings|ConnectionRtcpSettingsShape $rtcpSettings
      */
     public function withRtcpSettings(
         ConnectionRtcpSettings|array $rtcpSettings

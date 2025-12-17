@@ -18,7 +18,7 @@ use Telnyx\RegulatoryRequirements\RegulatoryRequirementRetrieveParams\Filter;
  * @phpstan-import-type FilterShape from \Telnyx\RegulatoryRequirements\RegulatoryRequirementRetrieveParams\Filter
  *
  * @phpstan-type RegulatoryRequirementRetrieveParamsShape = array{
- *   filter?: FilterShape|null
+ *   filter?: null|Filter|FilterShape
  * }
  */
 final class RegulatoryRequirementRetrieveParams implements BaseModel
@@ -43,7 +43,7 @@ final class RegulatoryRequirementRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape|null $filter
      */
     public static function with(Filter|array|null $filter = null): self
     {
@@ -57,7 +57,7 @@ final class RegulatoryRequirementRetrieveParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[requirement_group_id], filter[country_code], filter[phone_number_type], filter[action].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

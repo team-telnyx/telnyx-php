@@ -33,7 +33,7 @@ final class InexplicitNumberOrderGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param InexplicitNumberOrderResponseShape $data
+     * @param InexplicitNumberOrderResponse|InexplicitNumberOrderResponseShape|null $data
      */
     public static function with(
         InexplicitNumberOrderResponse|array|null $data = null
@@ -46,7 +46,7 @@ final class InexplicitNumberOrderGetResponse implements BaseModel
     }
 
     /**
-     * @param InexplicitNumberOrderResponseShape $data
+     * @param InexplicitNumberOrderResponse|InexplicitNumberOrderResponseShape $data
      */
     public function withData(InexplicitNumberOrderResponse|array $data): self
     {

@@ -132,7 +132,7 @@ final class MigrationParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Status|value-of<Status> $status
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         string $sourceID,

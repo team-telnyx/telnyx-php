@@ -102,12 +102,12 @@ final class MdrDetailReportResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<int> $connections
-     * @param list<Direction|value-of<Direction>> $directions
-     * @param list<FilterShape> $filters
-     * @param list<string> $profiles
-     * @param list<RecordType|value-of<RecordType>> $recordTypes
-     * @param Status|value-of<Status> $status
+     * @param list<int>|null $connections
+     * @param list<Direction|value-of<Direction>>|null $directions
+     * @param list<FilterShape>|null $filters
+     * @param list<string>|null $profiles
+     * @param list<RecordType|value-of<RecordType>>|null $recordTypes
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,

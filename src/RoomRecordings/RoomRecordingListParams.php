@@ -20,7 +20,7 @@ use Telnyx\RoomRecordings\RoomRecordingListParams\Page;
  * @phpstan-import-type PageShape from \Telnyx\RoomRecordings\RoomRecordingListParams\Page
  *
  * @phpstan-type RoomRecordingListParamsShape = array{
- *   filter?: FilterShape|null, page?: PageShape|null
+ *   filter?: null|Filter|FilterShape, page?: null|Page|PageShape
  * }
  */
 final class RoomRecordingListParams implements BaseModel
@@ -51,8 +51,8 @@ final class RoomRecordingListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
-     * @param PageShape $page
+     * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -69,7 +69,7 @@ final class RoomRecordingListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[date_started_at][eq], filter[date_started_at][gte], filter[date_started_at][lte], filter[room_id], filter[participant_id], filter[session_id], filter[status], filter[type], filter[duration_secs].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -82,7 +82,7 @@ final class RoomRecordingListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param PageShape $page
+     * @param Page|PageShape $page
      */
     public function withPage(Page|array $page): self
     {

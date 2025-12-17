@@ -22,7 +22,9 @@ use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\P
  * @phpstan-import-type PageShape from \Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Page
  *
  * @phpstan-type VirtualCrossConnectsCoverageListParamsShape = array{
- *   filter?: FilterShape|null, filters?: FiltersShape|null, page?: PageShape|null
+ *   filter?: null|Filter|FilterShape,
+ *   filters?: null|Filters|FiltersShape,
+ *   page?: null|Page|PageShape,
  * }
  */
 final class VirtualCrossConnectsCoverageListParams implements BaseModel
@@ -59,9 +61,9 @@ final class VirtualCrossConnectsCoverageListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
-     * @param FiltersShape $filters
-     * @param PageShape $page
+     * @param Filter|FilterShape|null $filter
+     * @param Filters|FiltersShape|null $filters
+     * @param Page|PageShape|null $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -80,7 +82,7 @@ final class VirtualCrossConnectsCoverageListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[cloud_provider], filter[cloud_provider_region], filter[location.region], filter[location.site], filter[location.pop], filter[location.code].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -93,7 +95,7 @@ final class VirtualCrossConnectsCoverageListParams implements BaseModel
     /**
      * Consolidated filters parameter (deepObject style). Originally: filters[available_bandwidth][contains].
      *
-     * @param FiltersShape $filters
+     * @param Filters|FiltersShape $filters
      */
     public function withFilters(Filters|array $filters): self
     {
@@ -106,7 +108,7 @@ final class VirtualCrossConnectsCoverageListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      *
-     * @param PageShape $page
+     * @param Page|PageShape $page
      */
     public function withPage(Page|array $page): self
     {

@@ -40,7 +40,7 @@ final class PhoneNumber implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $in
+     * @param list<string>|null $in
      */
     public static function with(?string $eq = null, ?array $in = null): self
     {

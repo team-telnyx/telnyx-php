@@ -35,11 +35,11 @@ use Telnyx\IPConnections\IPConnectionCreateParams\WebhookAPIVersion;
  *   dtmfType?: null|DtmfType|value-of<DtmfType>,
  *   encodeContactHeaderEnabled?: bool|null,
  *   encryptedMedia?: null|EncryptedMedia|value-of<EncryptedMedia>,
- *   inbound?: InboundShape|null,
+ *   inbound?: null|Inbound|InboundShape,
  *   iosPushCredentialID?: string|null,
  *   onnetT38PassthroughEnabled?: bool|null,
- *   outbound?: OutboundIPShape|null,
- *   rtcpSettings?: ConnectionRtcpSettingsShape|null,
+ *   outbound?: null|OutboundIP|OutboundIPShape,
+ *   rtcpSettings?: null|ConnectionRtcpSettings|ConnectionRtcpSettingsShape,
  *   tags?: list<string>|null,
  *   transportProtocol?: null|TransportProtocol|value-of<TransportProtocol>,
  *   webhookAPIVersion?: null|WebhookAPIVersion|value-of<WebhookAPIVersion>,
@@ -184,15 +184,15 @@ final class IPConnectionCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
-     * @param DtmfType|value-of<DtmfType> $dtmfType
+     * @param AnchorsiteOverride|value-of<AnchorsiteOverride>|null $anchorsiteOverride
+     * @param DtmfType|value-of<DtmfType>|null $dtmfType
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
-     * @param InboundShape $inbound
-     * @param OutboundIPShape $outbound
-     * @param ConnectionRtcpSettingsShape $rtcpSettings
-     * @param list<string> $tags
-     * @param TransportProtocol|value-of<TransportProtocol> $transportProtocol
-     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion
+     * @param Inbound|InboundShape|null $inbound
+     * @param OutboundIP|OutboundIPShape|null $outbound
+     * @param ConnectionRtcpSettings|ConnectionRtcpSettingsShape|null $rtcpSettings
+     * @param list<string>|null $tags
+     * @param TransportProtocol|value-of<TransportProtocol>|null $transportProtocol
+     * @param WebhookAPIVersion|value-of<WebhookAPIVersion>|null $webhookAPIVersion
      */
     public static function with(
         ?bool $active = null,
@@ -350,7 +350,7 @@ final class IPConnectionCreateParams implements BaseModel
     }
 
     /**
-     * @param InboundShape $inbound
+     * @param Inbound|InboundShape $inbound
      */
     public function withInbound(Inbound|array $inbound): self
     {
@@ -384,7 +384,7 @@ final class IPConnectionCreateParams implements BaseModel
     }
 
     /**
-     * @param OutboundIPShape $outbound
+     * @param OutboundIP|OutboundIPShape $outbound
      */
     public function withOutbound(OutboundIP|array $outbound): self
     {
@@ -395,7 +395,7 @@ final class IPConnectionCreateParams implements BaseModel
     }
 
     /**
-     * @param ConnectionRtcpSettingsShape $rtcpSettings
+     * @param ConnectionRtcpSettings|ConnectionRtcpSettingsShape $rtcpSettings
      */
     public function withRtcpSettings(
         ConnectionRtcpSettings|array $rtcpSettings

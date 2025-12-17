@@ -50,7 +50,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,mixed> $healthCheckParams
+     * @param array<string,mixed>|null $healthCheckParams
      */
     public static function with(
         ?array $healthCheckParams = null,

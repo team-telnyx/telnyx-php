@@ -34,7 +34,7 @@ final class MessagingUpdateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PhoneNumberWithMessagingSettingsShape $data
+     * @param PhoneNumberWithMessagingSettings|PhoneNumberWithMessagingSettingsShape|null $data
      */
     public static function with(
         PhoneNumberWithMessagingSettings|array|null $data = null
@@ -47,7 +47,7 @@ final class MessagingUpdateResponse implements BaseModel
     }
 
     /**
-     * @param PhoneNumberWithMessagingSettingsShape $data
+     * @param PhoneNumberWithMessagingSettings|PhoneNumberWithMessagingSettingsShape $data
      */
     public function withData(PhoneNumberWithMessagingSettings|array $data): self
     {

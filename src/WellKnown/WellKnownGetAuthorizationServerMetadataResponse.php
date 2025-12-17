@@ -114,11 +114,11 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $codeChallengeMethodsSupported
-     * @param list<string> $grantTypesSupported
-     * @param list<string> $responseTypesSupported
-     * @param list<string> $scopesSupported
-     * @param list<string> $tokenEndpointAuthMethodsSupported
+     * @param list<string>|null $codeChallengeMethodsSupported
+     * @param list<string>|null $grantTypesSupported
+     * @param list<string>|null $responseTypesSupported
+     * @param list<string>|null $scopesSupported
+     * @param list<string>|null $tokenEndpointAuthMethodsSupported
      */
     public static function with(
         ?string $authorizationEndpoint = null,

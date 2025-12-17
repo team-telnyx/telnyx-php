@@ -17,7 +17,9 @@ use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListParams\Page;
  *
  * @phpstan-import-type PageShape from \Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListParams\Page
  *
- * @phpstan-type GlobalIPHealthCheckListParamsShape = array{page?: PageShape|null}
+ * @phpstan-type GlobalIPHealthCheckListParamsShape = array{
+ *   page?: null|Page|PageShape
+ * }
  */
 final class GlobalIPHealthCheckListParams implements BaseModel
 {
@@ -41,7 +43,7 @@ final class GlobalIPHealthCheckListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PageShape $page
+     * @param Page|PageShape|null $page
      */
     public static function with(Page|array|null $page = null): self
     {
@@ -55,7 +57,7 @@ final class GlobalIPHealthCheckListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      *
-     * @param PageShape $page
+     * @param Page|PageShape $page
      */
     public function withPage(Page|array $page): self
     {

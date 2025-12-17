@@ -54,8 +54,8 @@ final class RecordType implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $productDimensions
-     * @param list<string> $productMetrics
+     * @param list<string>|null $productDimensions
+     * @param list<string>|null $productMetrics
      */
     public static function with(
         ?array $productDimensions = null,

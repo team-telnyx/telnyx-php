@@ -40,7 +40,7 @@ final class EmbeddingListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $status
+     * @param list<string>|null $status
      */
     public static function with(?array $status = null): self
     {

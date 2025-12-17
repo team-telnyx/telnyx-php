@@ -30,8 +30,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *   dtmfType?: null|DtmfType|value-of<DtmfType>,
  *   firstCommandTimeout?: bool|null,
  *   firstCommandTimeoutSecs?: int|null,
- *   inbound?: CallControlApplicationInboundShape|null,
- *   outbound?: CallControlApplicationOutboundShape|null,
+ *   inbound?: null|CallControlApplicationInbound|CallControlApplicationInboundShape,
+ *   outbound?: null|CallControlApplicationOutbound|CallControlApplicationOutboundShape,
  *   redactDtmfDebugLogging?: bool|null,
  *   tags?: list<string>|null,
  *   webhookAPIVersion?: null|WebhookAPIVersion|value-of<WebhookAPIVersion>,
@@ -165,12 +165,12 @@ final class CallControlApplicationUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
-     * @param DtmfType|value-of<DtmfType> $dtmfType
-     * @param CallControlApplicationInboundShape $inbound
-     * @param CallControlApplicationOutboundShape $outbound
-     * @param list<string> $tags
-     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion
+     * @param AnchorsiteOverride|value-of<AnchorsiteOverride>|null $anchorsiteOverride
+     * @param DtmfType|value-of<DtmfType>|null $dtmfType
+     * @param CallControlApplicationInbound|CallControlApplicationInboundShape|null $inbound
+     * @param CallControlApplicationOutbound|CallControlApplicationOutboundShape|null $outbound
+     * @param list<string>|null $tags
+     * @param WebhookAPIVersion|value-of<WebhookAPIVersion>|null $webhookAPIVersion
      */
     public static function with(
         string $applicationName,
@@ -306,7 +306,7 @@ final class CallControlApplicationUpdateParams implements BaseModel
     }
 
     /**
-     * @param CallControlApplicationInboundShape $inbound
+     * @param CallControlApplicationInbound|CallControlApplicationInboundShape $inbound
      */
     public function withInbound(
         CallControlApplicationInbound|array $inbound
@@ -318,7 +318,7 @@ final class CallControlApplicationUpdateParams implements BaseModel
     }
 
     /**
-     * @param CallControlApplicationOutboundShape $outbound
+     * @param CallControlApplicationOutbound|CallControlApplicationOutboundShape $outbound
      */
     public function withOutbound(
         CallControlApplicationOutbound|array $outbound

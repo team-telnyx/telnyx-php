@@ -23,8 +23,8 @@ use Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams\WebhookAPIVe
  * @phpstan-type MobileVoiceConnectionCreateParamsShape = array{
  *   active?: bool|null,
  *   connectionName?: string|null,
- *   inbound?: InboundShape|null,
- *   outbound?: OutboundShape|null,
+ *   inbound?: null|Inbound|InboundShape,
+ *   outbound?: null|Outbound|OutboundShape,
  *   tags?: list<string>|null,
  *   webhookAPIVersion?: null|WebhookAPIVersion|value-of<WebhookAPIVersion>,
  *   webhookEventFailoverURL?: string|null,
@@ -77,10 +77,10 @@ final class MobileVoiceConnectionCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param InboundShape $inbound
-     * @param OutboundShape $outbound
-     * @param list<string> $tags
-     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion
+     * @param Inbound|InboundShape|null $inbound
+     * @param Outbound|OutboundShape|null $outbound
+     * @param list<string>|null $tags
+     * @param WebhookAPIVersion|value-of<WebhookAPIVersion>|null $webhookAPIVersion
      */
     public static function with(
         ?bool $active = null,
@@ -125,7 +125,7 @@ final class MobileVoiceConnectionCreateParams implements BaseModel
     }
 
     /**
-     * @param InboundShape $inbound
+     * @param Inbound|InboundShape $inbound
      */
     public function withInbound(Inbound|array $inbound): self
     {
@@ -136,7 +136,7 @@ final class MobileVoiceConnectionCreateParams implements BaseModel
     }
 
     /**
-     * @param OutboundShape $outbound
+     * @param Outbound|OutboundShape $outbound
      */
     public function withOutbound(Outbound|array $outbound): self
     {

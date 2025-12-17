@@ -34,7 +34,7 @@ final class CampaignGetMnoMetadataResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Mno10999Shape $_10999
+     * @param Mno10999|Mno10999Shape|null $_10999
      */
     public static function with(Mno10999|array|null $_10999 = null): self
     {
@@ -46,7 +46,7 @@ final class CampaignGetMnoMetadataResponse implements BaseModel
     }
 
     /**
-     * @param Mno10999Shape $_10999
+     * @param Mno10999|Mno10999Shape $_10999
      */
     public function with10999(Mno10999|array $_10999): self
     {

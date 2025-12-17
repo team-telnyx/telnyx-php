@@ -62,8 +62,8 @@ final class Filters implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $customerReferenceIn
-     * @param list<StatusIn|value-of<StatusIn>> $statusIn
+     * @param list<string>|null $customerReferenceIn
+     * @param list<StatusIn|value-of<StatusIn>>|null $statusIn
      */
     public static function with(
         ?\DateTimeInterface $createdAtGt = null,

@@ -33,7 +33,7 @@ final class VerifiedNumberDataWrapper implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param VerifiedNumberShape $data
+     * @param VerifiedNumber|VerifiedNumberShape|null $data
      */
     public static function with(VerifiedNumber|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class VerifiedNumberDataWrapper implements BaseModel
     }
 
     /**
-     * @param VerifiedNumberShape $data
+     * @param VerifiedNumber|VerifiedNumberShape $data
      */
     public function withData(VerifiedNumber|array $data): self
     {

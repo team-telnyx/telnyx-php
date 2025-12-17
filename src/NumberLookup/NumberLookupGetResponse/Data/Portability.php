@@ -118,7 +118,7 @@ final class Portability implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortedStatus|value-of<PortedStatus> $portedStatus
+     * @param PortedStatus|value-of<PortedStatus>|null $portedStatus
      */
     public static function with(
         ?string $altspid = null,

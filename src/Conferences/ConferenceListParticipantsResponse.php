@@ -166,7 +166,7 @@ final class ConferenceListParticipantsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ConferenceShape $conference
+     * @param Conference|ConferenceShape $conference
      * @param RecordType|value-of<RecordType> $recordType
      * @param Status|value-of<Status> $status
      * @param list<string> $whisperCallControlIDs
@@ -241,7 +241,7 @@ final class ConferenceListParticipantsResponse implements BaseModel
     /**
      * Info about the conference that the participant is in.
      *
-     * @param ConferenceShape $conference
+     * @param Conference|ConferenceShape $conference
      */
     public function withConference(
         Conference|array $conference,

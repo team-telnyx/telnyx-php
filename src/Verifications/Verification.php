@@ -97,9 +97,9 @@ final class Verification implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $recordType
-     * @param Status|value-of<Status> $status
-     * @param Type|value-of<Type> $type
+     * @param RecordType|value-of<RecordType>|null $recordType
+     * @param Status|value-of<Status>|null $status
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         ?string $id = null,

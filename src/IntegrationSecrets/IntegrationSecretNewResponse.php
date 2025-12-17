@@ -47,7 +47,7 @@ final class IntegrationSecretNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param IntegrationSecretShape $data
+     * @param IntegrationSecret|IntegrationSecretShape $data
      */
     public static function with(IntegrationSecret|array $data): self
     {
@@ -59,7 +59,7 @@ final class IntegrationSecretNewResponse implements BaseModel
     }
 
     /**
-     * @param IntegrationSecretShape $data
+     * @param IntegrationSecret|IntegrationSecretShape $data
      */
     public function withData(IntegrationSecret|array $data): self
     {

@@ -84,7 +84,7 @@ final class MigrationSourceParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Provider|value-of<Provider> $provider
-     * @param ProviderAuthShape $providerAuth
+     * @param ProviderAuth|ProviderAuthShape $providerAuth
      */
     public static function with(
         string $bucketName,
@@ -130,7 +130,7 @@ final class MigrationSourceParams implements BaseModel
     }
 
     /**
-     * @param ProviderAuthShape $providerAuth
+     * @param ProviderAuth|ProviderAuthShape $providerAuth
      */
     public function withProviderAuth(ProviderAuth|array $providerAuth): self
     {

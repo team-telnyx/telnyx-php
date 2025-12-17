@@ -60,7 +60,7 @@ final class PortingOrderMessaging implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MessagingPortStatus|value-of<MessagingPortStatus> $messagingPortStatus
+     * @param MessagingPortStatus|value-of<MessagingPortStatus>|null $messagingPortStatus
      */
     public static function with(
         ?bool $enableMessaging = null,

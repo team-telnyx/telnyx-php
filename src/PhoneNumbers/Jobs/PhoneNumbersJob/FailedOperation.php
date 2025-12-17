@@ -47,7 +47,7 @@ final class FailedOperation implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<JobErrorShape> $errors
+     * @param list<JobErrorShape>|null $errors
      */
     public static function with(
         ?string $id = null,

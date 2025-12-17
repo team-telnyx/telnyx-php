@@ -39,7 +39,7 @@ final class Filters implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AvailableBandwidthShape $availableBandwidth
+     * @param AvailableBandwidthShape|null $availableBandwidth
      */
     public static function with(
         int|Contains|array|null $availableBandwidth = null

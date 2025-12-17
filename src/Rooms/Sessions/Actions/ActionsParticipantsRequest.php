@@ -48,8 +48,8 @@ final class ActionsParticipantsRequest implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $exclude
-     * @param ParticipantsShape $participants
+     * @param list<string>|null $exclude
+     * @param ParticipantsShape|null $participants
      */
     public static function with(
         ?array $exclude = null,

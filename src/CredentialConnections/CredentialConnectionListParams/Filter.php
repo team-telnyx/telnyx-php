@@ -53,7 +53,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ConnectionNameShape $connectionName
+     * @param ConnectionName|ConnectionNameShape|null $connectionName
      */
     public static function with(
         ConnectionName|array|null $connectionName = null,
@@ -72,7 +72,7 @@ final class Filter implements BaseModel
     /**
      * Filter by connection_name using nested operations.
      *
-     * @param ConnectionNameShape $connectionName
+     * @param ConnectionName|ConnectionNameShape $connectionName
      */
     public function withConnectionName(
         ConnectionName|array $connectionName

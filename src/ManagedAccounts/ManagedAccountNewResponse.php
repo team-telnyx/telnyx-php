@@ -33,7 +33,7 @@ final class ManagedAccountNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ManagedAccountShape $data
+     * @param ManagedAccount|ManagedAccountShape|null $data
      */
     public static function with(ManagedAccount|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class ManagedAccountNewResponse implements BaseModel
     }
 
     /**
-     * @param ManagedAccountShape $data
+     * @param ManagedAccount|ManagedAccountShape $data
      */
     public function withData(ManagedAccount|array $data): self
     {

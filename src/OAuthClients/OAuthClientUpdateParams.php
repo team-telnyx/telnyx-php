@@ -96,9 +96,9 @@ final class OAuthClientUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AllowedGrantType|value-of<AllowedGrantType>> $allowedGrantTypes
-     * @param list<string> $allowedScopes
-     * @param list<string> $redirectUris
+     * @param list<AllowedGrantType|value-of<AllowedGrantType>>|null $allowedGrantTypes
+     * @param list<string>|null $allowedScopes
+     * @param list<string>|null $redirectUris
      */
     public static function with(
         ?array $allowedGrantTypes = null,

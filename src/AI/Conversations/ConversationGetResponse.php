@@ -33,7 +33,7 @@ final class ConversationGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ConversationShape $data
+     * @param Conversation|ConversationShape|null $data
      */
     public static function with(Conversation|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class ConversationGetResponse implements BaseModel
     }
 
     /**
-     * @param ConversationShape $data
+     * @param Conversation|ConversationShape $data
      */
     public function withData(Conversation|array $data): self
     {

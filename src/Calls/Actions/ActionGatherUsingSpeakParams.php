@@ -189,10 +189,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Language|value-of<Language> $language
-     * @param PayloadType|value-of<PayloadType> $payloadType
-     * @param ServiceLevel|value-of<ServiceLevel> $serviceLevel
-     * @param VoiceSettingsShape $voiceSettings
+     * @param Language|value-of<Language>|null $language
+     * @param PayloadType|value-of<PayloadType>|null $payloadType
+     * @param ServiceLevel|value-of<ServiceLevel>|null $serviceLevel
+     * @param VoiceSettingsShape|null $voiceSettings
      */
     public static function with(
         string $payload,

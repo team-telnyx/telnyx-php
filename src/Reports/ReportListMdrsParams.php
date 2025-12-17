@@ -105,9 +105,9 @@ final class ReportListMdrsParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Direction|value-of<Direction> $direction
-     * @param MessageType|value-of<MessageType> $messageType
-     * @param Status|value-of<Status> $status
+     * @param Direction|value-of<Direction>|null $direction
+     * @param MessageType|value-of<MessageType>|null $messageType
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,

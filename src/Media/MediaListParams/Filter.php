@@ -36,7 +36,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $contentType
+     * @param list<string>|null $contentType
      */
     public static function with(?array $contentType = null): self
     {

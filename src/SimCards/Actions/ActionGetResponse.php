@@ -36,7 +36,7 @@ final class ActionGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SimCardActionShape $data
+     * @param SimCardAction|SimCardActionShape|null $data
      */
     public static function with(SimCardAction|array|null $data = null): self
     {
@@ -50,7 +50,7 @@ final class ActionGetResponse implements BaseModel
     /**
      * This object represents a SIM card action. It allows tracking the current status of an operation that impacts the SIM card.
      *
-     * @param SimCardActionShape $data
+     * @param SimCardAction|SimCardActionShape $data
      */
     public function withData(SimCardAction|array $data): self
     {

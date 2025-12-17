@@ -33,7 +33,7 @@ final class PhoneNumberExtensionDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortingPhoneNumberExtensionShape $data
+     * @param PortingPhoneNumberExtension|PortingPhoneNumberExtensionShape|null $data
      */
     public static function with(
         PortingPhoneNumberExtension|array|null $data = null
@@ -46,7 +46,7 @@ final class PhoneNumberExtensionDeleteResponse implements BaseModel
     }
 
     /**
-     * @param PortingPhoneNumberExtensionShape $data
+     * @param PortingPhoneNumberExtension|PortingPhoneNumberExtensionShape $data
      */
     public function withData(PortingPhoneNumberExtension|array $data): self
     {

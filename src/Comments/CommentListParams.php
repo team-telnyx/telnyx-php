@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-import-type FilterShape from \Telnyx\Comments\CommentListParams\Filter
  *
- * @phpstan-type CommentListParamsShape = array{filter?: FilterShape|null}
+ * @phpstan-type CommentListParamsShape = array{filter?: null|Filter|FilterShape}
  */
 final class CommentListParams implements BaseModel
 {
@@ -41,7 +41,7 @@ final class CommentListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape|null $filter
      */
     public static function with(Filter|array|null $filter = null): self
     {
@@ -55,7 +55,7 @@ final class CommentListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[comment_record_type], filter[comment_record_id].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

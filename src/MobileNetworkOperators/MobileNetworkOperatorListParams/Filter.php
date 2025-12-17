@@ -74,7 +74,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param NameShape $name
+     * @param Name|NameShape|null $name
      */
     public static function with(
         ?string $countryCode = null,
@@ -132,7 +132,7 @@ final class Filter implements BaseModel
     /**
      * Advanced name filtering operations.
      *
-     * @param NameShape $name
+     * @param Name|NameShape $name
      */
     public function withName(Name|array $name): self
     {

@@ -147,12 +147,12 @@ final class MessagingCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<int> $connections
-     * @param list<int> $directions
-     * @param list<FilterShape> $filters
-     * @param list<string> $managedAccounts
-     * @param list<string> $profiles
-     * @param list<int> $recordTypes
+     * @param list<int>|null $connections
+     * @param list<int>|null $directions
+     * @param list<FilterShape>|null $filters
+     * @param list<string>|null $managedAccounts
+     * @param list<string>|null $profiles
+     * @param list<int>|null $recordTypes
      */
     public static function with(
         \DateTimeInterface $endTime,

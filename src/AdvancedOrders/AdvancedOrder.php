@@ -66,8 +66,8 @@ final class AdvancedOrder implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Feature|value-of<Feature>> $features
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
+     * @param list<Feature|value-of<Feature>>|null $features
+     * @param PhoneNumberType|value-of<PhoneNumberType>|null $phoneNumberType
      */
     public static function with(
         ?string $areaCode = null,

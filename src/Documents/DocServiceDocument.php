@@ -113,9 +113,9 @@ final class DocServiceDocument implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AvScanStatus|value-of<AvScanStatus> $avScanStatus
-     * @param SizeShape $size
-     * @param Status|value-of<Status> $status
+     * @param AvScanStatus|value-of<AvScanStatus>|null $avScanStatus
+     * @param Size|SizeShape|null $size
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,
@@ -240,7 +240,7 @@ final class DocServiceDocument implements BaseModel
     /**
      * Indicates the document's filesize.
      *
-     * @param SizeShape $size
+     * @param Size|SizeShape $size
      */
     public function withSize(Size|array $size): self
     {

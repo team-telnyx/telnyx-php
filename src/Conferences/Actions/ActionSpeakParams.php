@@ -131,11 +131,11 @@ final class ActionSpeakParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $callControlIDs
-     * @param Language|value-of<Language> $language
-     * @param PayloadType|value-of<PayloadType> $payloadType
-     * @param Region|value-of<Region> $region
-     * @param VoiceSettingsShape $voiceSettings
+     * @param list<string>|null $callControlIDs
+     * @param Language|value-of<Language>|null $language
+     * @param PayloadType|value-of<PayloadType>|null $payloadType
+     * @param Region|value-of<Region>|null $region
+     * @param VoiceSettingsShape|null $voiceSettings
      */
     public static function with(
         string $payload,

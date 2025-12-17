@@ -54,7 +54,7 @@ final class HandoffTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param HandoffShape $handoff
+     * @param Handoff|HandoffShape $handoff
      */
     public static function with(Handoff|array $handoff): self
     {
@@ -66,7 +66,7 @@ final class HandoffTool implements BaseModel
     }
 
     /**
-     * @param HandoffShape $handoff
+     * @param Handoff|HandoffShape $handoff
      */
     public function withHandoff(Handoff|array $handoff): self
     {

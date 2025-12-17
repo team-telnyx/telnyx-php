@@ -64,9 +64,9 @@ final class Result implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AddressShape $address
-     * @param AdminShape $admin
-     * @param list<string> $associatedPhoneNumbers
+     * @param Address|AddressShape|null $address
+     * @param Admin|AdminShape|null $admin
+     * @param list<string>|null $associatedPhoneNumbers
      */
     public static function with(
         Address|array|null $address = null,
@@ -87,7 +87,7 @@ final class Result implements BaseModel
     /**
      * The address of the customer service record.
      *
-     * @param AddressShape $address
+     * @param Address|AddressShape $address
      */
     public function withAddress(Address|array $address): self
     {
@@ -100,7 +100,7 @@ final class Result implements BaseModel
     /**
      * The admin of the customer service record.
      *
-     * @param AdminShape $admin
+     * @param Admin|AdminShape $admin
      */
     public function withAdmin(Admin|array $admin): self
     {

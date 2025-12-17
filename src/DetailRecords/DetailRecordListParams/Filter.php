@@ -65,7 +65,7 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param RecordType|value-of<RecordType> $recordType
-     * @param DateRange|value-of<DateRange> $dateRange
+     * @param DateRange|value-of<DateRange>|null $dateRange
      */
     public static function with(
         RecordType|string $recordType,

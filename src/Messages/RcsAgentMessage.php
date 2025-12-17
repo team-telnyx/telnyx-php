@@ -57,8 +57,8 @@ final class RcsAgentMessage implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ContentMessageShape $contentMessage
-     * @param EventShape $event
+     * @param ContentMessage|ContentMessageShape|null $contentMessage
+     * @param Event|EventShape|null $event
      */
     public static function with(
         ContentMessage|array|null $contentMessage = null,
@@ -77,7 +77,7 @@ final class RcsAgentMessage implements BaseModel
     }
 
     /**
-     * @param ContentMessageShape $contentMessage
+     * @param ContentMessage|ContentMessageShape $contentMessage
      */
     public function withContentMessage(
         ContentMessage|array $contentMessage
@@ -91,7 +91,7 @@ final class RcsAgentMessage implements BaseModel
     /**
      * RCS Event to send to the recipient.
      *
-     * @param EventShape $event
+     * @param Event|EventShape $event
      */
     public function withEvent(Event|array $event): self
     {

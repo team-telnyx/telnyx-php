@@ -69,9 +69,9 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ConnectionNameShape $connectionName
-     * @param ExternalSipConnection|value-of<ExternalSipConnection> $externalSipConnection
-     * @param PhoneNumberShape $phoneNumber
+     * @param ConnectionName|ConnectionNameShape|null $connectionName
+     * @param ExternalSipConnection|value-of<ExternalSipConnection>|null $externalSipConnection
+     * @param PhoneNumber|PhoneNumberShape|null $phoneNumber
      */
     public static function with(
         ?string $id = null,
@@ -103,7 +103,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param ConnectionNameShape $connectionName
+     * @param ConnectionName|ConnectionNameShape $connectionName
      */
     public function withConnectionName(
         ConnectionName|array $connectionName
@@ -142,7 +142,7 @@ final class Filter implements BaseModel
     /**
      * Phone number filter for connections. Note: Despite the 'contains' name, this requires a full E164 match per the original specification.
      *
-     * @param PhoneNumberShape $phoneNumber
+     * @param PhoneNumber|PhoneNumberShape $phoneNumber
      */
     public function withPhoneNumber(PhoneNumber|array $phoneNumber): self
     {

@@ -51,7 +51,7 @@ final class ConnectionRtcpSettings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Port|value-of<Port> $port
+     * @param Port|value-of<Port>|null $port
      */
     public static function with(
         ?bool $captureEnabled = null,

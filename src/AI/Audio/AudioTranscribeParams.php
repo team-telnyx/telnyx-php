@@ -93,8 +93,8 @@ final class AudioTranscribeParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Model|value-of<Model> $model
-     * @param ResponseFormat|value-of<ResponseFormat> $responseFormat
-     * @param TimestampGranularities|value-of<TimestampGranularities> $timestampGranularities
+     * @param ResponseFormat|value-of<ResponseFormat>|null $responseFormat
+     * @param TimestampGranularities|value-of<TimestampGranularities>|null $timestampGranularities
      */
     public static function with(
         Model|string $model = 'distil-whisper/distil-large-v2',

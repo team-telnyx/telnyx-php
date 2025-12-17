@@ -48,9 +48,9 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CreatedAtShape $createdAt
-     * @param PhoneNumberShape $phoneNumber
-     * @param StatusShape $status
+     * @param CreatedAt|CreatedAtShape|null $createdAt
+     * @param PhoneNumber|PhoneNumberShape|null $phoneNumber
+     * @param Status|StatusShape|null $status
      */
     public static function with(
         CreatedAt|array|null $createdAt = null,
@@ -67,7 +67,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param CreatedAtShape $createdAt
+     * @param CreatedAt|CreatedAtShape $createdAt
      */
     public function withCreatedAt(CreatedAt|array $createdAt): self
     {
@@ -78,7 +78,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param PhoneNumberShape $phoneNumber
+     * @param PhoneNumber|PhoneNumberShape $phoneNumber
      */
     public function withPhoneNumber(PhoneNumber|array $phoneNumber): self
     {
@@ -89,7 +89,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param StatusShape $status
+     * @param Status|StatusShape $status
      */
     public function withStatus(Status|array $status): self
     {

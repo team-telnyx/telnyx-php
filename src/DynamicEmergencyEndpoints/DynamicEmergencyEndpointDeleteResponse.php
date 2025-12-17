@@ -33,7 +33,7 @@ final class DynamicEmergencyEndpointDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DynamicEmergencyEndpointShape $data
+     * @param DynamicEmergencyEndpoint|DynamicEmergencyEndpointShape|null $data
      */
     public static function with(
         DynamicEmergencyEndpoint|array|null $data = null
@@ -46,7 +46,7 @@ final class DynamicEmergencyEndpointDeleteResponse implements BaseModel
     }
 
     /**
-     * @param DynamicEmergencyEndpointShape $data
+     * @param DynamicEmergencyEndpoint|DynamicEmergencyEndpointShape $data
      */
     public function withData(DynamicEmergencyEndpoint|array $data): self
     {

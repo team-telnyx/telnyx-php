@@ -71,7 +71,7 @@ final class SMS implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $whitelistedDestinations
+     * @param list<string>|null $whitelistedDestinations
      */
     public static function with(
         ?string $alphaSender = null,

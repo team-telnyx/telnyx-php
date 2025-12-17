@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type VoiceSettingsShape = array{
  *   voice: string,
  *   apiKeyRef?: string|null,
- *   backgroundAudio?: null|BackgroundAudioShape|PredefinedMedia|MediaURL|MediaName,
+ *   backgroundAudio?: BackgroundAudioShape|null,
  *   voiceSpeed?: float|null,
  * }
  */
@@ -77,7 +77,7 @@ final class VoiceSettings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BackgroundAudioShape $backgroundAudio
+     * @param BackgroundAudioShape|null $backgroundAudio
      */
     public static function with(
         string $voice,

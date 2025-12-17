@@ -33,7 +33,7 @@ final class MediaGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MediaResourceShape $data
+     * @param MediaResource|MediaResourceShape|null $data
      */
     public static function with(MediaResource|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class MediaGetResponse implements BaseModel
     }
 
     /**
-     * @param MediaResourceShape $data
+     * @param MediaResource|MediaResourceShape $data
      */
     public function withData(MediaResource|array $data): self
     {

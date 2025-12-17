@@ -51,7 +51,7 @@ final class SubNumberOrderRegulatoryRequirementWithValue implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FieldType|value-of<FieldType> $fieldType
+     * @param FieldType|value-of<FieldType>|null $fieldType
      */
     public static function with(
         FieldType|string|null $fieldType = null,

@@ -173,13 +173,13 @@ final class TexmlApplication implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
-     * @param DtmfType|value-of<DtmfType> $dtmfType
-     * @param InboundShape $inbound
-     * @param OutboundShape $outbound
-     * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $statusCallbackMethod
-     * @param list<string> $tags
-     * @param VoiceMethod|value-of<VoiceMethod> $voiceMethod
+     * @param AnchorsiteOverride|value-of<AnchorsiteOverride>|null $anchorsiteOverride
+     * @param DtmfType|value-of<DtmfType>|null $dtmfType
+     * @param Inbound|InboundShape|null $inbound
+     * @param Outbound|OutboundShape|null $outbound
+     * @param StatusCallbackMethod|value-of<StatusCallbackMethod>|null $statusCallbackMethod
+     * @param list<string>|null $tags
+     * @param VoiceMethod|value-of<VoiceMethod>|null $voiceMethod
      */
     public static function with(
         ?string $id = null,
@@ -333,7 +333,7 @@ final class TexmlApplication implements BaseModel
     }
 
     /**
-     * @param InboundShape $inbound
+     * @param Inbound|InboundShape $inbound
      */
     public function withInbound(Inbound|array $inbound): self
     {
@@ -344,7 +344,7 @@ final class TexmlApplication implements BaseModel
     }
 
     /**
-     * @param OutboundShape $outbound
+     * @param Outbound|OutboundShape $outbound
      */
     public function withOutbound(Outbound|array $outbound): self
     {

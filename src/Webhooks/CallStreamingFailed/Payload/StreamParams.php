@@ -45,7 +45,7 @@ final class StreamParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Track|value-of<Track> $track
+     * @param Track|value-of<Track>|null $track
      */
     public static function with(
         ?string $streamURL = null,

@@ -37,7 +37,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param GlobalIPIDShape $globalIPID
+     * @param GlobalIPIDShape|null $globalIPID
      */
     public static function with(string|In|array|null $globalIPID = null): self
     {

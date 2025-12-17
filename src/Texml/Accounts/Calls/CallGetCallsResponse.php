@@ -84,7 +84,7 @@ final class CallGetCallsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<CallShape> $calls
+     * @param list<CallShape>|null $calls
      */
     public static function with(
         ?array $calls = null,

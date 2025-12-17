@@ -33,11 +33,11 @@ use Telnyx\CredentialConnections\CredentialConnectionCreateParams\WebhookAPIVers
  *   dtmfType?: null|DtmfType|value-of<DtmfType>,
  *   encodeContactHeaderEnabled?: bool|null,
  *   encryptedMedia?: null|EncryptedMedia|value-of<EncryptedMedia>,
- *   inbound?: CredentialInboundShape|null,
+ *   inbound?: null|CredentialInbound|CredentialInboundShape,
  *   iosPushCredentialID?: string|null,
  *   onnetT38PassthroughEnabled?: bool|null,
- *   outbound?: CredentialOutboundShape|null,
- *   rtcpSettings?: ConnectionRtcpSettingsShape|null,
+ *   outbound?: null|CredentialOutbound|CredentialOutboundShape,
+ *   rtcpSettings?: null|ConnectionRtcpSettings|ConnectionRtcpSettingsShape,
  *   sipUriCallingPreference?: null|SipUriCallingPreference|value-of<SipUriCallingPreference>,
  *   tags?: list<string>|null,
  *   webhookAPIVersion?: null|WebhookAPIVersion|value-of<WebhookAPIVersion>,
@@ -219,15 +219,15 @@ final class CredentialConnectionCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
-     * @param DtmfType|value-of<DtmfType> $dtmfType
+     * @param AnchorsiteOverride|value-of<AnchorsiteOverride>|null $anchorsiteOverride
+     * @param DtmfType|value-of<DtmfType>|null $dtmfType
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
-     * @param CredentialInboundShape $inbound
-     * @param CredentialOutboundShape $outbound
-     * @param ConnectionRtcpSettingsShape $rtcpSettings
-     * @param SipUriCallingPreference|value-of<SipUriCallingPreference> $sipUriCallingPreference
-     * @param list<string> $tags
-     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion
+     * @param CredentialInbound|CredentialInboundShape|null $inbound
+     * @param CredentialOutbound|CredentialOutboundShape|null $outbound
+     * @param ConnectionRtcpSettings|ConnectionRtcpSettingsShape|null $rtcpSettings
+     * @param SipUriCallingPreference|value-of<SipUriCallingPreference>|null $sipUriCallingPreference
+     * @param list<string>|null $tags
+     * @param WebhookAPIVersion|value-of<WebhookAPIVersion>|null $webhookAPIVersion
      */
     public static function with(
         string $connectionName,
@@ -415,7 +415,7 @@ final class CredentialConnectionCreateParams implements BaseModel
     }
 
     /**
-     * @param CredentialInboundShape $inbound
+     * @param CredentialInbound|CredentialInboundShape $inbound
      */
     public function withInbound(CredentialInbound|array $inbound): self
     {
@@ -449,7 +449,7 @@ final class CredentialConnectionCreateParams implements BaseModel
     }
 
     /**
-     * @param CredentialOutboundShape $outbound
+     * @param CredentialOutbound|CredentialOutboundShape $outbound
      */
     public function withOutbound(CredentialOutbound|array $outbound): self
     {
@@ -460,7 +460,7 @@ final class CredentialConnectionCreateParams implements BaseModel
     }
 
     /**
-     * @param ConnectionRtcpSettingsShape $rtcpSettings
+     * @param ConnectionRtcpSettings|ConnectionRtcpSettingsShape $rtcpSettings
      */
     public function withRtcpSettings(
         ConnectionRtcpSettings|array $rtcpSettings

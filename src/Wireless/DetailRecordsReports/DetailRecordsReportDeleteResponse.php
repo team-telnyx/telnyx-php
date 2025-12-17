@@ -33,7 +33,7 @@ final class DetailRecordsReportDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param WdrReportShape $data
+     * @param WdrReport|WdrReportShape|null $data
      */
     public static function with(WdrReport|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class DetailRecordsReportDeleteResponse implements BaseModel
     }
 
     /**
-     * @param WdrReportShape $data
+     * @param WdrReport|WdrReportShape $data
      */
     public function withData(WdrReport|array $data): self
     {

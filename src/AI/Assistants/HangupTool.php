@@ -52,7 +52,7 @@ final class HangupTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param HangupToolParamsShape $hangup
+     * @param HangupToolParams|HangupToolParamsShape $hangup
      * @param Type|value-of<Type> $type
      */
     public static function with(
@@ -68,7 +68,7 @@ final class HangupTool implements BaseModel
     }
 
     /**
-     * @param HangupToolParamsShape $hangup
+     * @param HangupToolParams|HangupToolParamsShape $hangup
      */
     public function withHangup(HangupToolParams|array $hangup): self
     {

@@ -21,8 +21,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type PageShape from \Telnyx\Addresses\AddressListParams\Page
  *
  * @phpstan-type AddressListParamsShape = array{
- *   filter?: FilterShape|null,
- *   page?: PageShape|null,
+ *   filter?: null|Filter|FilterShape,
+ *   page?: null|Page|PageShape,
  *   sort?: null|Sort|value-of<Sort>,
  * }
  */
@@ -73,9 +73,9 @@ final class AddressListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
-     * @param PageShape $page
-     * @param Sort|value-of<Sort> $sort
+     * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
+     * @param Sort|value-of<Sort>|null $sort
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -94,7 +94,7 @@ final class AddressListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[customer_reference][eq], filter[customer_reference][contains], filter[used_as_emergency], filter[street_address][contains], filter[address_book][eq].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -107,7 +107,7 @@ final class AddressListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      *
-     * @param PageShape $page
+     * @param Page|PageShape $page
      */
     public function withPage(Page|array $page): self
     {

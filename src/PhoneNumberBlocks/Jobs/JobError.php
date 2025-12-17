@@ -52,8 +52,8 @@ final class JobError implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MetaShape $meta
-     * @param SourceShape $source
+     * @param Meta|MetaShape|null $meta
+     * @param Source|SourceShape|null $source
      */
     public static function with(
         ?string $code = null,
@@ -90,7 +90,7 @@ final class JobError implements BaseModel
     }
 
     /**
-     * @param MetaShape $meta
+     * @param Meta|MetaShape $meta
      */
     public function withMeta(Meta|array $meta): self
     {
@@ -101,7 +101,7 @@ final class JobError implements BaseModel
     }
 
     /**
-     * @param SourceShape $source
+     * @param Source|SourceShape $source
      */
     public function withSource(Source|array $source): self
     {

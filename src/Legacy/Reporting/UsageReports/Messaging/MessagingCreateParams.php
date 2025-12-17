@@ -85,8 +85,8 @@ final class MessagingCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $managedAccounts
-     * @param list<string> $profiles
+     * @param list<string>|null $managedAccounts
+     * @param list<string>|null $profiles
      */
     public static function with(
         int $aggregationType,

@@ -44,7 +44,7 @@ final class ActivationSettings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FocDatetimeRequestedShape $focDatetimeRequested
+     * @param FocDatetimeRequested|FocDatetimeRequestedShape|null $focDatetimeRequested
      */
     public static function with(
         ?bool $fastPortEligible = null,
@@ -72,7 +72,7 @@ final class ActivationSettings implements BaseModel
     /**
      * FOC datetime range filtering operations.
      *
-     * @param FocDatetimeRequestedShape $focDatetimeRequested
+     * @param FocDatetimeRequested|FocDatetimeRequestedShape $focDatetimeRequested
      */
     public function withFocDatetimeRequested(
         FocDatetimeRequested|array $focDatetimeRequested

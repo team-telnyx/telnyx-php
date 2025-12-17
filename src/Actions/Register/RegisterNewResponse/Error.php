@@ -66,8 +66,8 @@ final class Error implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,mixed> $meta
-     * @param SourceShape $source
+     * @param array<string,mixed>|null $meta
+     * @param Source|SourceShape|null $source
      */
     public static function with(
         string $code,
@@ -124,7 +124,7 @@ final class Error implements BaseModel
     }
 
     /**
-     * @param SourceShape $source
+     * @param Source|SourceShape $source
      */
     public function withSource(Source|array $source): self
     {

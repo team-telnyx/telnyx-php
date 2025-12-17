@@ -53,7 +53,7 @@ final class CallForwarding implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ForwardingType|value-of<ForwardingType> $forwardingType
+     * @param ForwardingType|value-of<ForwardingType>|null $forwardingType
      */
     public static function with(
         ?bool $callForwardingEnabled = null,

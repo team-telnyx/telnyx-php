@@ -33,7 +33,7 @@ final class CredentialConnectionNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CredentialConnectionShape $data
+     * @param CredentialConnection|CredentialConnectionShape|null $data
      */
     public static function with(CredentialConnection|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class CredentialConnectionNewResponse implements BaseModel
     }
 
     /**
-     * @param CredentialConnectionShape $data
+     * @param CredentialConnection|CredentialConnectionShape $data
      */
     public function withData(CredentialConnection|array $data): self
     {

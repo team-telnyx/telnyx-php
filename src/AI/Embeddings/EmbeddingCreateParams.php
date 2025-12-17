@@ -99,8 +99,8 @@ final class EmbeddingCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param EmbeddingModel|value-of<EmbeddingModel> $embeddingModel
-     * @param Loader|value-of<Loader> $loader
+     * @param EmbeddingModel|value-of<EmbeddingModel>|null $embeddingModel
+     * @param Loader|value-of<Loader>|null $loader
      */
     public static function with(
         string $bucketName,

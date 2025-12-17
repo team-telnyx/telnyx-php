@@ -86,8 +86,8 @@ final class UpdateConference implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param SupervisorRole|value-of<SupervisorRole> $supervisorRole
-     * @param Region|value-of<Region> $region
-     * @param list<string> $whisperCallControlIDs
+     * @param Region|value-of<Region>|null $region
+     * @param list<string>|null $whisperCallControlIDs
      */
     public static function with(
         string $callControlID,

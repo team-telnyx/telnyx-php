@@ -50,8 +50,8 @@ final class PortingOrderStatus implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PortingOrdersExceptionTypeShape> $details
-     * @param Value|value-of<Value> $value
+     * @param list<PortingOrdersExceptionTypeShape>|null $details
+     * @param Value|value-of<Value>|null $value
      */
     public static function with(
         ?array $details = null,

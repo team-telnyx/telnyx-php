@@ -35,7 +35,7 @@ final class LogMessageGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<LogMessageShape> $logMessages
+     * @param list<LogMessageShape>|null $logMessages
      */
     public static function with(?array $logMessages = null): self
     {

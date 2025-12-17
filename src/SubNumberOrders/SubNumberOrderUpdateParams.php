@@ -44,7 +44,7 @@ final class SubNumberOrderUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<UpdateRegulatoryRequirementShape> $regulatoryRequirements
+     * @param list<UpdateRegulatoryRequirementShape>|null $regulatoryRequirements
      */
     public static function with(?array $regulatoryRequirements = null): self
     {

@@ -103,8 +103,8 @@ final class CallSiprecJsonResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Status|value-of<Status> $status
-     * @param Track|value-of<Track> $track
+     * @param Status|value-of<Status>|null $status
+     * @param Track|value-of<Track>|null $track
      */
     public static function with(
         ?string $accountSid = null,

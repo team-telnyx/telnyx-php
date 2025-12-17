@@ -20,7 +20,7 @@ use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Page;
  * @phpstan-import-type PageShape from \Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Page
  *
  * @phpstan-type PortingPhoneNumberListParamsShape = array{
- *   filter?: FilterShape|null, page?: PageShape|null
+ *   filter?: null|Filter|FilterShape, page?: null|Page|PageShape
  * }
  */
 final class PortingPhoneNumberListParams implements BaseModel
@@ -51,8 +51,8 @@ final class PortingPhoneNumberListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
-     * @param PageShape $page
+     * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -69,7 +69,7 @@ final class PortingPhoneNumberListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[porting_order_status].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -82,7 +82,7 @@ final class PortingPhoneNumberListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param PageShape $page
+     * @param Page|PageShape $page
      */
     public function withPage(Page|array $page): self
     {

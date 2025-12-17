@@ -45,7 +45,7 @@ final class SupportingDocumentCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DocumentShape> $documents
+     * @param list<DocumentShape>|null $documents
      */
     public static function with(?array $documents = null): self
     {

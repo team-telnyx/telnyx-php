@@ -73,8 +73,8 @@ final class DeepgramNova3Config implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param TranscriptionModel|value-of<TranscriptionModel> $transcriptionModel
-     * @param array<string,float> $keywordsBoosting
-     * @param Language|value-of<Language> $language
+     * @param array<string,float>|null $keywordsBoosting
+     * @param Language|value-of<Language>|null $language
      */
     public static function with(
         TranscriptionModel|string $transcriptionModel,

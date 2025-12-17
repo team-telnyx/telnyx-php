@@ -93,7 +93,7 @@ final class AuthenticationProvider implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SettingsShape $settings
+     * @param Settings|SettingsShape|null $settings
      */
     public static function with(
         ?string $id = null,
@@ -190,7 +190,7 @@ final class AuthenticationProvider implements BaseModel
     /**
      * The settings associated with the authentication provider.
      *
-     * @param SettingsShape $settings
+     * @param Settings|SettingsShape $settings
      */
     public function withSettings(
         Settings|array $settings,

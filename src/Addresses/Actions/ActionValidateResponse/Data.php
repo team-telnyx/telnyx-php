@@ -77,8 +77,8 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Result|value-of<Result> $result
-     * @param SuggestedShape $suggested
-     * @param list<APIErrorShape> $errors
+     * @param Suggested|SuggestedShape $suggested
+     * @param list<APIErrorShape>|null $errors
      */
     public static function with(
         Result|string $result,
@@ -113,7 +113,7 @@ final class Data implements BaseModel
     /**
      * Provides normalized address when available.
      *
-     * @param SuggestedShape $suggested
+     * @param Suggested|SuggestedShape $suggested
      */
     public function withSuggested(Suggested|array $suggested): self
     {

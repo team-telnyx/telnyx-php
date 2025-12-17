@@ -117,9 +117,9 @@ final class CallUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FallbackMethod|value-of<FallbackMethod> $fallbackMethod
-     * @param Method|value-of<Method> $method
-     * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $statusCallbackMethod
+     * @param FallbackMethod|value-of<FallbackMethod>|null $fallbackMethod
+     * @param Method|value-of<Method>|null $method
+     * @param StatusCallbackMethod|value-of<StatusCallbackMethod>|null $statusCallbackMethod
      */
     public static function with(
         string $accountSid,

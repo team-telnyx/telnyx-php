@@ -79,7 +79,7 @@ final class ActionStartForkingParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param StreamType|value-of<StreamType> $streamType
+     * @param StreamType|value-of<StreamType>|null $streamType
      */
     public static function with(
         ?string $clientState = null,

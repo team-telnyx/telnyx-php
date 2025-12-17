@@ -70,8 +70,8 @@ final class ReleaseListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Status|value-of<Status> $status
-     * @param list<TelephoneNumberShape> $telephoneNumbers
+     * @param Status|value-of<Status>|null $status
+     * @param list<TelephoneNumberShape>|null $telephoneNumbers
      */
     public static function with(
         ?string $createdAt = null,

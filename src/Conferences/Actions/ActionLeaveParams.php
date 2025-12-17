@@ -86,8 +86,8 @@ final class ActionLeaveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BeepEnabled|value-of<BeepEnabled> $beepEnabled
-     * @param Region|value-of<Region> $region
+     * @param BeepEnabled|value-of<BeepEnabled>|null $beepEnabled
+     * @param Region|value-of<Region>|null $region
      */
     public static function with(
         string $callControlID,

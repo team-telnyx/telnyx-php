@@ -230,7 +230,7 @@ final class BrandCreateParams implements BaseModel
      *
      * @param EntityType|value-of<EntityType> $entityType
      * @param Vertical|value-of<Vertical> $vertical
-     * @param StockExchange|value-of<StockExchange> $stockExchange
+     * @param StockExchange|value-of<StockExchange>|null $stockExchange
      */
     public static function with(
         string $country,

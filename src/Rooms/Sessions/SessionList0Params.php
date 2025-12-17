@@ -20,9 +20,9 @@ use Telnyx\Rooms\Sessions\SessionList0Params\Page;
  * @phpstan-import-type PageShape from \Telnyx\Rooms\Sessions\SessionList0Params\Page
  *
  * @phpstan-type SessionList0ParamsShape = array{
- *   filter?: FilterShape|null,
+ *   filter?: null|Filter|FilterShape,
  *   includeParticipants?: bool|null,
- *   page?: PageShape|null,
+ *   page?: null|Page|PageShape,
  * }
  */
 final class SessionList0Params implements BaseModel
@@ -59,8 +59,8 @@ final class SessionList0Params implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
-     * @param PageShape $page
+     * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -79,7 +79,7 @@ final class SessionList0Params implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[room_id], filter[active].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -103,7 +103,7 @@ final class SessionList0Params implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param PageShape $page
+     * @param Page|PageShape $page
      */
     public function withPage(Page|array $page): self
     {

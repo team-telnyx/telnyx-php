@@ -31,7 +31,7 @@ final class RcsAgentResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RcsAgentShape $data
+     * @param RcsAgent|RcsAgentShape|null $data
      */
     public static function with(RcsAgent|array|null $data = null): self
     {
@@ -43,7 +43,7 @@ final class RcsAgentResponse implements BaseModel
     }
 
     /**
-     * @param RcsAgentShape $data
+     * @param RcsAgent|RcsAgentShape $data
      */
     public function withData(RcsAgent|array $data): self
     {

@@ -33,7 +33,7 @@ final class LedgerBillingGroupReportNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param LedgerBillingGroupReportShape $data
+     * @param LedgerBillingGroupReport|LedgerBillingGroupReportShape|null $data
      */
     public static function with(
         LedgerBillingGroupReport|array|null $data = null
@@ -46,7 +46,7 @@ final class LedgerBillingGroupReportNewResponse implements BaseModel
     }
 
     /**
-     * @param LedgerBillingGroupReportShape $data
+     * @param LedgerBillingGroupReport|LedgerBillingGroupReportShape $data
      */
     public function withData(LedgerBillingGroupReport|array $data): self
     {

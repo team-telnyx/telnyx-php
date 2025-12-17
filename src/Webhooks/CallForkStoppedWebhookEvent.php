@@ -34,7 +34,7 @@ final class CallForkStoppedWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DataShape $data
+     * @param Data|DataShape|null $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -46,7 +46,7 @@ final class CallForkStoppedWebhookEvent implements BaseModel
     }
 
     /**
-     * @param DataShape $data
+     * @param Data|DataShape $data
      */
     public function withData(Data|array $data): self
     {

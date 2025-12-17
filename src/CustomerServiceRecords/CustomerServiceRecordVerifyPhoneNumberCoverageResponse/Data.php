@@ -65,7 +65,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AdditionalDataRequired|value-of<AdditionalDataRequired>> $additionalDataRequired
+     * @param list<AdditionalDataRequired|value-of<AdditionalDataRequired>>|null $additionalDataRequired
      */
     public static function with(
         ?array $additionalDataRequired = null,

@@ -96,11 +96,11 @@ final class Action implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CreateCalendarEventActionShape $createCalendarEventAction
-     * @param DialActionShape $dialAction
-     * @param OpenURLActionShape $openURLAction
-     * @param array<string,mixed> $shareLocationAction
-     * @param ViewLocationActionShape $viewLocationAction
+     * @param CreateCalendarEventAction|CreateCalendarEventActionShape|null $createCalendarEventAction
+     * @param DialAction|DialActionShape|null $dialAction
+     * @param OpenURLAction|OpenURLActionShape|null $openURLAction
+     * @param array<string,mixed>|null $shareLocationAction
+     * @param ViewLocationAction|ViewLocationActionShape|null $viewLocationAction
      */
     public static function with(
         CreateCalendarEventAction|array|null $createCalendarEventAction = null,
@@ -129,7 +129,7 @@ final class Action implements BaseModel
     /**
      * Opens the user's default calendar app and starts the new calendar event flow with the agent-specified event data pre-filled.
      *
-     * @param CreateCalendarEventActionShape $createCalendarEventAction
+     * @param CreateCalendarEventAction|CreateCalendarEventActionShape $createCalendarEventAction
      */
     public function withCreateCalendarEventAction(
         CreateCalendarEventAction|array $createCalendarEventAction
@@ -143,7 +143,7 @@ final class Action implements BaseModel
     /**
      * Opens the user's default dialer app with the agent-specified phone number filled in.
      *
-     * @param DialActionShape $dialAction
+     * @param DialAction|DialActionShape $dialAction
      */
     public function withDialAction(DialAction|array $dialAction): self
     {
@@ -167,7 +167,7 @@ final class Action implements BaseModel
     /**
      * Opens the user's default web browser app to the specified URL.
      *
-     * @param OpenURLActionShape $openURLAction
+     * @param OpenURLAction|OpenURLActionShape $openURLAction
      */
     public function withOpenURLAction(OpenURLAction|array $openURLAction): self
     {
@@ -215,7 +215,7 @@ final class Action implements BaseModel
     /**
      * Opens the user's default map app and selects the agent-specified location.
      *
-     * @param ViewLocationActionShape $viewLocationAction
+     * @param ViewLocationAction|ViewLocationActionShape $viewLocationAction
      */
     public function withViewLocationAction(
         ViewLocationAction|array $viewLocationAction

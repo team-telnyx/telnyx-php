@@ -241,9 +241,9 @@ final class BrandUpdateParams implements BaseModel
      *
      * @param EntityType|value-of<EntityType> $entityType
      * @param Vertical|value-of<Vertical> $vertical
-     * @param AltBusinessIDType|value-of<AltBusinessIDType> $altBusinessIDType
-     * @param BrandIdentityStatus|value-of<BrandIdentityStatus> $identityStatus
-     * @param StockExchange|value-of<StockExchange> $stockExchange
+     * @param AltBusinessIDType|value-of<AltBusinessIDType>|null $altBusinessIDType
+     * @param BrandIdentityStatus|value-of<BrandIdentityStatus>|null $identityStatus
+     * @param StockExchange|value-of<StockExchange>|null $stockExchange
      */
     public static function with(
         string $country,

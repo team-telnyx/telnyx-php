@@ -22,11 +22,11 @@ use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\SMS;
  * @phpstan-import-type SMSShape from \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\SMS
  *
  * @phpstan-type VerifyProfileUpdateParamsShape = array{
- *   call?: CallShape|null,
- *   flashcall?: FlashcallShape|null,
+ *   call?: null|Call|CallShape,
+ *   flashcall?: null|Flashcall|FlashcallShape,
  *   language?: string|null,
  *   name?: string|null,
- *   sms?: SMSShape|null,
+ *   sms?: null|SMS|SMSShape,
  *   webhookFailoverURL?: string|null,
  *   webhookURL?: string|null,
  * }
@@ -68,9 +68,9 @@ final class VerifyProfileUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CallShape $call
-     * @param FlashcallShape $flashcall
-     * @param SMSShape $sms
+     * @param Call|CallShape|null $call
+     * @param Flashcall|FlashcallShape|null $flashcall
+     * @param SMS|SMSShape|null $sms
      */
     public static function with(
         Call|array|null $call = null,
@@ -95,7 +95,7 @@ final class VerifyProfileUpdateParams implements BaseModel
     }
 
     /**
-     * @param CallShape $call
+     * @param Call|CallShape $call
      */
     public function withCall(Call|array $call): self
     {
@@ -106,7 +106,7 @@ final class VerifyProfileUpdateParams implements BaseModel
     }
 
     /**
-     * @param FlashcallShape $flashcall
+     * @param Flashcall|FlashcallShape $flashcall
      */
     public function withFlashcall(Flashcall|array $flashcall): self
     {
@@ -133,7 +133,7 @@ final class VerifyProfileUpdateParams implements BaseModel
     }
 
     /**
-     * @param SMSShape $sms
+     * @param SMS|SMSShape $sms
      */
     public function withSMS(SMS|array $sms): self
     {

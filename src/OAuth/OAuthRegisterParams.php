@@ -109,10 +109,10 @@ final class OAuthRegisterParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<GrantType|value-of<GrantType>> $grantTypes
-     * @param list<string> $redirectUris
-     * @param list<string> $responseTypes
-     * @param TokenEndpointAuthMethod|value-of<TokenEndpointAuthMethod> $tokenEndpointAuthMethod
+     * @param list<GrantType|value-of<GrantType>>|null $grantTypes
+     * @param list<string>|null $redirectUris
+     * @param list<string>|null $responseTypes
+     * @param TokenEndpointAuthMethod|value-of<TokenEndpointAuthMethod>|null $tokenEndpointAuthMethod
      */
     public static function with(
         ?string $clientName = null,

@@ -203,17 +203,17 @@ final class PortingOrder implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortingOrderActivationSettingsShape $activationSettings
-     * @param list<AdditionalStep|value-of<AdditionalStep>> $additionalSteps
-     * @param PortingOrderDocumentsShape $documents
-     * @param PortingOrderEndUserShape $endUser
-     * @param PortingOrderMessagingShape $messaging
-     * @param PortingOrderMiscShape|null $misc
-     * @param PortingOrderPhoneNumberConfigurationShape $phoneNumberConfiguration
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
-     * @param list<PortingOrderRequirementShape> $requirements
-     * @param PortingOrderStatusShape $status
-     * @param PortingOrderUserFeedbackShape $userFeedback
+     * @param PortingOrderActivationSettings|PortingOrderActivationSettingsShape|null $activationSettings
+     * @param list<AdditionalStep|value-of<AdditionalStep>>|null $additionalSteps
+     * @param PortingOrderDocuments|PortingOrderDocumentsShape|null $documents
+     * @param PortingOrderEndUser|PortingOrderEndUserShape|null $endUser
+     * @param PortingOrderMessaging|PortingOrderMessagingShape|null $messaging
+     * @param PortingOrderMisc|PortingOrderMiscShape|null $misc
+     * @param PortingOrderPhoneNumberConfiguration|PortingOrderPhoneNumberConfigurationShape|null $phoneNumberConfiguration
+     * @param PhoneNumberType|value-of<PhoneNumberType>|null $phoneNumberType
+     * @param list<PortingOrderRequirementShape>|null $requirements
+     * @param PortingOrderStatus|PortingOrderStatusShape|null $status
+     * @param PortingOrderUserFeedback|PortingOrderUserFeedbackShape|null $userFeedback
      */
     public static function with(
         ?string $id = null,
@@ -285,7 +285,7 @@ final class PortingOrder implements BaseModel
     }
 
     /**
-     * @param PortingOrderActivationSettingsShape $activationSettings
+     * @param PortingOrderActivationSettings|PortingOrderActivationSettingsShape $activationSettings
      */
     public function withActivationSettings(
         PortingOrderActivationSettings|array $activationSettings
@@ -357,7 +357,7 @@ final class PortingOrder implements BaseModel
     /**
      * Can be specified directly or via the `requirement_group_id` parameter.
      *
-     * @param PortingOrderDocumentsShape $documents
+     * @param PortingOrderDocuments|PortingOrderDocumentsShape $documents
      */
     public function withDocuments(PortingOrderDocuments|array $documents): self
     {
@@ -368,7 +368,7 @@ final class PortingOrder implements BaseModel
     }
 
     /**
-     * @param PortingOrderEndUserShape $endUser
+     * @param PortingOrderEndUser|PortingOrderEndUserShape $endUser
      */
     public function withEndUser(PortingOrderEndUser|array $endUser): self
     {
@@ -381,7 +381,7 @@ final class PortingOrder implements BaseModel
     /**
      * Information about messaging porting process.
      *
-     * @param PortingOrderMessagingShape $messaging
+     * @param PortingOrderMessaging|PortingOrderMessagingShape $messaging
      */
     public function withMessaging(PortingOrderMessaging|array $messaging): self
     {
@@ -392,7 +392,7 @@ final class PortingOrder implements BaseModel
     }
 
     /**
-     * @param PortingOrderMiscShape|null $misc
+     * @param PortingOrderMisc|PortingOrderMiscShape|null $misc
      */
     public function withMisc(PortingOrderMisc|array|null $misc): self
     {
@@ -426,7 +426,7 @@ final class PortingOrder implements BaseModel
     }
 
     /**
-     * @param PortingOrderPhoneNumberConfigurationShape $phoneNumberConfiguration
+     * @param PortingOrderPhoneNumberConfiguration|PortingOrderPhoneNumberConfigurationShape $phoneNumberConfiguration
      */
     public function withPhoneNumberConfiguration(
         PortingOrderPhoneNumberConfiguration|array $phoneNumberConfiguration
@@ -501,7 +501,7 @@ final class PortingOrder implements BaseModel
     /**
      * Porting order status.
      *
-     * @param PortingOrderStatusShape $status
+     * @param PortingOrderStatus|PortingOrderStatusShape $status
      */
     public function withStatus(PortingOrderStatus|array $status): self
     {
@@ -534,7 +534,7 @@ final class PortingOrder implements BaseModel
     }
 
     /**
-     * @param PortingOrderUserFeedbackShape $userFeedback
+     * @param PortingOrderUserFeedback|PortingOrderUserFeedbackShape $userFeedback
      */
     public function withUserFeedback(
         PortingOrderUserFeedback|array $userFeedback

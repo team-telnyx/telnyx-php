@@ -42,7 +42,7 @@ final class PortabilityCheckRunParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $phoneNumbers
+     * @param list<string>|null $phoneNumbers
      */
     public static function with(?array $phoneNumbers = null): self
     {

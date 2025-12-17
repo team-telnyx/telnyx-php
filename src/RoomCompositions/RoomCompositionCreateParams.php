@@ -86,7 +86,7 @@ final class RoomCompositionCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,VideoRegionShape> $videoLayout
+     * @param array<string,VideoRegionShape>|null $videoLayout
      */
     public static function with(
         ?string $format = null,

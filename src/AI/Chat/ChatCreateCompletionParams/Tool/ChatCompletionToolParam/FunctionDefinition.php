@@ -53,7 +53,7 @@ final class FunctionDefinition implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,mixed> $parameters
+     * @param array<string,mixed>|null $parameters
      */
     public static function with(
         string $name,
