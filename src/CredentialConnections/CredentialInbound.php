@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\CredentialInbound\AniNumberFormat;
 use Telnyx\CredentialConnections\CredentialInbound\DnisNumberFormat;
+use Telnyx\CredentialConnections\CredentialInbound\SimultaneousRinging;
 
 /**
  * @phpstan-type CredentialInboundShape = array{
@@ -20,6 +21,7 @@ use Telnyx\CredentialConnections\CredentialInbound\DnisNumberFormat;
  *   isupHeadersEnabled?: bool|null,
  *   prackEnabled?: bool|null,
  *   shakenStirEnabled?: bool|null,
+ *   simultaneousRinging?: null|SimultaneousRinging|value-of<SimultaneousRinging>,
  *   sipCompactHeadersEnabled?: bool|null,
  *   timeout1xxSecs?: int|null,
  *   timeout2xxSecs?: int|null,
@@ -81,6 +83,14 @@ final class CredentialInbound implements BaseModel
     public ?bool $shakenStirEnabled;
 
     /**
+     * When enabled, allows multiple devices to ring simultaneously on incoming calls.
+     *
+     * @var value-of<SimultaneousRinging>|null $simultaneousRinging
+     */
+    #[Optional('simultaneous_ringing', enum: SimultaneousRinging::class)]
+    public ?string $simultaneousRinging;
+
+    /**
      * Defaults to true.
      */
     #[Optional('sip_compact_headers_enabled')]
@@ -111,6 +121,7 @@ final class CredentialInbound implements BaseModel
      * @param AniNumberFormat|value-of<AniNumberFormat>|null $aniNumberFormat
      * @param list<string>|null $codecs
      * @param DnisNumberFormat|value-of<DnisNumberFormat>|null $dnisNumberFormat
+     * @param SimultaneousRinging|value-of<SimultaneousRinging>|null $simultaneousRinging
      */
     public static function with(
         AniNumberFormat|string|null $aniNumberFormat = null,
@@ -121,6 +132,7 @@ final class CredentialInbound implements BaseModel
         ?bool $isupHeadersEnabled = null,
         ?bool $prackEnabled = null,
         ?bool $shakenStirEnabled = null,
+        SimultaneousRinging|string|null $simultaneousRinging = null,
         ?bool $sipCompactHeadersEnabled = null,
         ?int $timeout1xxSecs = null,
         ?int $timeout2xxSecs = null,
@@ -135,6 +147,7 @@ final class CredentialInbound implements BaseModel
         null !== $isupHeadersEnabled && $self['isupHeadersEnabled'] = $isupHeadersEnabled;
         null !== $prackEnabled && $self['prackEnabled'] = $prackEnabled;
         null !== $shakenStirEnabled && $self['shakenStirEnabled'] = $shakenStirEnabled;
+        null !== $simultaneousRinging && $self['simultaneousRinging'] = $simultaneousRinging;
         null !== $sipCompactHeadersEnabled && $self['sipCompactHeadersEnabled'] = $sipCompactHeadersEnabled;
         null !== $timeout1xxSecs && $self['timeout1xxSecs'] = $timeout1xxSecs;
         null !== $timeout2xxSecs && $self['timeout2xxSecs'] = $timeout2xxSecs;
@@ -232,6 +245,20 @@ final class CredentialInbound implements BaseModel
     {
         $self = clone $this;
         $self['shakenStirEnabled'] = $shakenStirEnabled;
+
+        return $self;
+    }
+
+    /**
+     * When enabled, allows multiple devices to ring simultaneously on incoming calls.
+     *
+     * @param SimultaneousRinging|value-of<SimultaneousRinging> $simultaneousRinging
+     */
+    public function withSimultaneousRinging(
+        SimultaneousRinging|string $simultaneousRinging
+    ): self {
+        $self = clone $this;
+        $self['simultaneousRinging'] = $simultaneousRinging;
 
         return $self;
     }

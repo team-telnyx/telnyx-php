@@ -24,6 +24,7 @@ use Telnyx\CredentialConnections\CredentialConnectionUpdateResponse;
 use Telnyx\CredentialConnections\CredentialInbound;
 use Telnyx\CredentialConnections\CredentialInbound\AniNumberFormat;
 use Telnyx\CredentialConnections\CredentialInbound\DnisNumberFormat;
+use Telnyx\CredentialConnections\CredentialInbound\SimultaneousRinging;
 use Telnyx\CredentialConnections\CredentialOutbound;
 use Telnyx\CredentialConnections\CredentialOutbound\AniOverrideType;
 use Telnyx\CredentialConnections\CredentialOutbound\T38ReinviteSource;
@@ -67,6 +68,7 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
      *     isupHeadersEnabled?: bool,
      *     prackEnabled?: bool,
      *     shakenStirEnabled?: bool,
+     *     simultaneousRinging?: 'disabled'|'enabled'|SimultaneousRinging,
      *     sipCompactHeadersEnabled?: bool,
      *     timeout1xxSecs?: int,
      *     timeout2xxSecs?: int,
@@ -169,6 +171,7 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
      *     isupHeadersEnabled?: bool,
      *     prackEnabled?: bool,
      *     shakenStirEnabled?: bool,
+     *     simultaneousRinging?: 'disabled'|'enabled'|SimultaneousRinging,
      *     sipCompactHeadersEnabled?: bool,
      *     timeout1xxSecs?: int,
      *     timeout2xxSecs?: int,

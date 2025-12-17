@@ -80,6 +80,7 @@ final class CredentialConnectionsTest extends TestCase
                 'isupHeadersEnabled' => true,
                 'prackEnabled' => true,
                 'shakenStirEnabled' => true,
+                'simultaneousRinging' => 'disabled',
                 'sipCompactHeadersEnabled' => true,
                 'timeout1xxSecs' => 10,
                 'timeout2xxSecs' => 20,
