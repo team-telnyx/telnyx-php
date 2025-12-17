@@ -20,11 +20,19 @@ final class TranscriptionEngineDeepgramConfig implements ConverterSource
 {
     use SdkUnion;
 
+    public static function discriminator(): string
+    {
+        return 'transcriptionModel';
+    }
+
     /**
      * @return list<string|Converter|ConverterSource>|array<string,string|Converter|ConverterSource>
      */
     public static function variants(): array
     {
-        return [DeepgramNova2Config::class, DeepgramNova3Config::class];
+        return [
+            'deepgram/nova-2' => DeepgramNova2Config::class,
+            'deepgram/nova-3' => DeepgramNova3Config::class,
+        ];
     }
 }
