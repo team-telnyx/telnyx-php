@@ -7,21 +7,17 @@ namespace Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage\Interactive;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage\Interactive\Header\Document;
-use Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage\Interactive\Header\Image;
-use Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage\Interactive\Header\Video;
+use Telnyx\Messages\WhatsappMedia;
 
 /**
- * @phpstan-import-type DocumentShape from \Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage\Interactive\Header\Document
- * @phpstan-import-type ImageShape from \Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage\Interactive\Header\Image
- * @phpstan-import-type VideoShape from \Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage\Interactive\Header\Video
+ * @phpstan-import-type WhatsappMediaShape from \Telnyx\Messages\WhatsappMedia
  *
  * @phpstan-type HeaderShape = array{
- *   document?: null|Document|DocumentShape,
- *   image?: null|Image|ImageShape,
+ *   document?: null|WhatsappMedia|WhatsappMediaShape,
+ *   image?: null|WhatsappMedia|WhatsappMediaShape,
  *   subText?: string|null,
  *   text?: string|null,
- *   video?: null|Video|VideoShape,
+ *   video?: null|WhatsappMedia|WhatsappMediaShape,
  * }
  */
 final class Header implements BaseModel
@@ -30,10 +26,10 @@ final class Header implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Document $document;
+    public ?WhatsappMedia $document;
 
     #[Optional]
-    public ?Image $image;
+    public ?WhatsappMedia $image;
 
     #[Optional('sub_text')]
     public ?string $subText;
@@ -45,7 +41,7 @@ final class Header implements BaseModel
     public ?string $text;
 
     #[Optional]
-    public ?Video $video;
+    public ?WhatsappMedia $video;
 
     public function __construct()
     {
@@ -57,16 +53,16 @@ final class Header implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DocumentShape $document
-     * @param ImageShape $image
-     * @param VideoShape $video
+     * @param WhatsappMediaShape $document
+     * @param WhatsappMediaShape $image
+     * @param WhatsappMediaShape $video
      */
     public static function with(
-        Document|array|null $document = null,
-        Image|array|null $image = null,
+        WhatsappMedia|array|null $document = null,
+        WhatsappMedia|array|null $image = null,
         ?string $subText = null,
         ?string $text = null,
-        Video|array|null $video = null,
+        WhatsappMedia|array|null $video = null,
     ): self {
         $self = new self;
 
@@ -80,9 +76,9 @@ final class Header implements BaseModel
     }
 
     /**
-     * @param DocumentShape $document
+     * @param WhatsappMediaShape $document
      */
-    public function withDocument(Document|array $document): self
+    public function withDocument(WhatsappMedia|array $document): self
     {
         $self = clone $this;
         $self['document'] = $document;
@@ -91,9 +87,9 @@ final class Header implements BaseModel
     }
 
     /**
-     * @param ImageShape $image
+     * @param WhatsappMediaShape $image
      */
-    public function withImage(Image|array $image): self
+    public function withImage(WhatsappMedia|array $image): self
     {
         $self = clone $this;
         $self['image'] = $image;
@@ -121,9 +117,9 @@ final class Header implements BaseModel
     }
 
     /**
-     * @param VideoShape $video
+     * @param WhatsappMediaShape $video
      */
-    public function withVideo(Video|array $video): self
+    public function withVideo(WhatsappMedia|array $video): self
     {
         $self = clone $this;
         $self['video'] = $video;

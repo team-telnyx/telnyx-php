@@ -12,14 +12,14 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\Rcs\RcSendParams\MmsFallback;
 use Telnyx\Messages\Rcs\RcSendParams\SMSFallback;
 use Telnyx\Messages\Rcs\RcSendParams\Type;
-use Telnyx\Messsages\RcsAgentMessage;
+use Telnyx\Messages\RcsAgentMessage;
 
 /**
  * Send an RCS message.
  *
  * @see Telnyx\Services\Messages\RcsService::send()
  *
- * @phpstan-import-type RcsAgentMessageShape from \Telnyx\Messsages\RcsAgentMessage
+ * @phpstan-import-type RcsAgentMessageShape from \Telnyx\Messages\RcsAgentMessage
  * @phpstan-import-type MmsFallbackShape from \Telnyx\Messages\Rcs\RcSendParams\MmsFallback
  * @phpstan-import-type SMSFallbackShape from \Telnyx\Messages\Rcs\RcSendParams\SMSFallback
  *

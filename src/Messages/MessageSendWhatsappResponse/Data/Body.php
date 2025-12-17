@@ -7,40 +7,32 @@ namespace Telnyx\Messages\MessageSendWhatsappResponse\Data;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Audio;
 use Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Contact;
-use Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Document;
-use Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Image;
 use Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Interactive;
 use Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Location;
 use Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Reaction;
-use Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Sticker;
 use Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Type;
-use Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Video;
+use Telnyx\Messages\WhatsappMedia;
 
 /**
- * @phpstan-import-type AudioShape from \Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Audio
+ * @phpstan-import-type WhatsappMediaShape from \Telnyx\Messages\WhatsappMedia
  * @phpstan-import-type ContactShape from \Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Contact
- * @phpstan-import-type DocumentShape from \Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Document
- * @phpstan-import-type ImageShape from \Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Image
  * @phpstan-import-type InteractiveShape from \Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Interactive
  * @phpstan-import-type LocationShape from \Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Location
  * @phpstan-import-type ReactionShape from \Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Reaction
- * @phpstan-import-type StickerShape from \Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Sticker
- * @phpstan-import-type VideoShape from \Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Video
  *
  * @phpstan-type BodyShape = array{
- *   audio?: null|Audio|AudioShape,
+ *   audio?: null|WhatsappMedia|WhatsappMediaShape,
  *   bizOpaqueCallbackData?: string|null,
  *   contacts?: list<ContactShape>|null,
- *   document?: null|Document|DocumentShape,
- *   image?: null|Image|ImageShape,
+ *   document?: null|WhatsappMedia|WhatsappMediaShape,
+ *   image?: null|WhatsappMedia|WhatsappMediaShape,
  *   interactive?: null|Interactive|InteractiveShape,
  *   location?: null|Location|LocationShape,
  *   reaction?: null|Reaction|ReactionShape,
- *   sticker?: null|Sticker|StickerShape,
+ *   sticker?: null|WhatsappMedia|WhatsappMediaShape,
  *   type?: null|Type|value-of<Type>,
- *   video?: null|Video|VideoShape,
+ *   video?: null|WhatsappMedia|WhatsappMediaShape,
  * }
  */
 final class Body implements BaseModel
@@ -49,7 +41,7 @@ final class Body implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Audio $audio;
+    public ?WhatsappMedia $audio;
 
     /**
      * custom data to return with status update.
@@ -62,10 +54,10 @@ final class Body implements BaseModel
     public ?array $contacts;
 
     #[Optional]
-    public ?Document $document;
+    public ?WhatsappMedia $document;
 
     #[Optional]
-    public ?Image $image;
+    public ?WhatsappMedia $image;
 
     #[Optional]
     public ?Interactive $interactive;
@@ -77,14 +69,14 @@ final class Body implements BaseModel
     public ?Reaction $reaction;
 
     #[Optional]
-    public ?Sticker $sticker;
+    public ?WhatsappMedia $sticker;
 
     /** @var value-of<Type>|null $type */
     #[Optional(enum: Type::class)]
     public ?string $type;
 
     #[Optional]
-    public ?Video $video;
+    public ?WhatsappMedia $video;
 
     public function __construct()
     {
@@ -96,29 +88,29 @@ final class Body implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AudioShape $audio
+     * @param WhatsappMediaShape $audio
      * @param list<ContactShape> $contacts
-     * @param DocumentShape $document
-     * @param ImageShape $image
+     * @param WhatsappMediaShape $document
+     * @param WhatsappMediaShape $image
      * @param InteractiveShape $interactive
      * @param LocationShape $location
      * @param ReactionShape $reaction
-     * @param StickerShape $sticker
+     * @param WhatsappMediaShape $sticker
      * @param Type|value-of<Type> $type
-     * @param VideoShape $video
+     * @param WhatsappMediaShape $video
      */
     public static function with(
-        Audio|array|null $audio = null,
+        WhatsappMedia|array|null $audio = null,
         ?string $bizOpaqueCallbackData = null,
         ?array $contacts = null,
-        Document|array|null $document = null,
-        Image|array|null $image = null,
+        WhatsappMedia|array|null $document = null,
+        WhatsappMedia|array|null $image = null,
         Interactive|array|null $interactive = null,
         Location|array|null $location = null,
         Reaction|array|null $reaction = null,
-        Sticker|array|null $sticker = null,
+        WhatsappMedia|array|null $sticker = null,
         Type|string|null $type = null,
-        Video|array|null $video = null,
+        WhatsappMedia|array|null $video = null,
     ): self {
         $self = new self;
 
@@ -138,9 +130,9 @@ final class Body implements BaseModel
     }
 
     /**
-     * @param AudioShape $audio
+     * @param WhatsappMediaShape $audio
      */
-    public function withAudio(Audio|array $audio): self
+    public function withAudio(WhatsappMedia|array $audio): self
     {
         $self = clone $this;
         $self['audio'] = $audio;
@@ -172,9 +164,9 @@ final class Body implements BaseModel
     }
 
     /**
-     * @param DocumentShape $document
+     * @param WhatsappMediaShape $document
      */
-    public function withDocument(Document|array $document): self
+    public function withDocument(WhatsappMedia|array $document): self
     {
         $self = clone $this;
         $self['document'] = $document;
@@ -183,9 +175,9 @@ final class Body implements BaseModel
     }
 
     /**
-     * @param ImageShape $image
+     * @param WhatsappMediaShape $image
      */
-    public function withImage(Image|array $image): self
+    public function withImage(WhatsappMedia|array $image): self
     {
         $self = clone $this;
         $self['image'] = $image;
@@ -227,9 +219,9 @@ final class Body implements BaseModel
     }
 
     /**
-     * @param StickerShape $sticker
+     * @param WhatsappMediaShape $sticker
      */
-    public function withSticker(Sticker|array $sticker): self
+    public function withSticker(WhatsappMedia|array $sticker): self
     {
         $self = clone $this;
         $self['sticker'] = $sticker;
@@ -249,9 +241,9 @@ final class Body implements BaseModel
     }
 
     /**
-     * @param VideoShape $video
+     * @param WhatsappMediaShape $video
      */
-    public function withVideo(Video|array $video): self
+    public function withVideo(WhatsappMedia|array $video): self
     {
         $self = clone $this;
         $self['video'] = $video;
