@@ -19,6 +19,7 @@ use Telnyx\Messages\MessageSendShortCodeResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagesContract;
 use Telnyx\Services\Messages\RcsService;
+use Telnyx\Services\Messages\WhatsappService;
 
 final class MessagesService implements MessagesContract
 {
@@ -33,12 +34,18 @@ final class MessagesService implements MessagesContract
     public RcsService $rcs;
 
     /**
+     * @api
+     */
+    public WhatsappService $whatsapp;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
     {
         $this->raw = new MessagesRawService($client);
         $this->rcs = new RcsService($client);
+        $this->whatsapp = new WhatsappService($client);
     }
 
     /**
