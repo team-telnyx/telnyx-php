@@ -32,22 +32,22 @@ final class RoomCompositionsRawService implements RoomCompositionsRawContract
      * Asynchronously create a room composition.
      *
      * @param array{
-     *   format?: string|null,
-     *   resolution?: string|null,
-     *   sessionID?: string|null,
+     *   format?: string,
+     *   resolution?: string,
+     *   sessionID?: string,
      *   videoLayout?: array<string,array{
-     *     height?: int|null,
-     *     maxColumns?: int|null,
-     *     maxRows?: int|null,
+     *     height?: int,
+     *     maxColumns?: int,
+     *     maxRows?: int,
      *     videoSources?: list<string>,
-     *     width?: int|null,
-     *     xPos?: int|null,
-     *     yPos?: int|null,
-     *     zPos?: int|null,
+     *     width?: int,
+     *     xPos?: int,
+     *     yPos?: int,
+     *     zPos?: int,
      *   }|VideoRegion>,
-     *   webhookEventFailoverURL?: string|null,
+     *   webhookEventFailoverURL?: string,
      *   webhookEventURL?: string,
-     *   webhookTimeoutSecs?: int|null,
+     *   webhookTimeoutSecs?: int,
      * }|RoomCompositionCreateParams $params
      *
      * @return BaseResponse<RoomCompositionNewResponse>

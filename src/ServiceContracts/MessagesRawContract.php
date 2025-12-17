@@ -20,6 +20,8 @@ use Telnyx\Messages\MessageSendParams;
 use Telnyx\Messages\MessageSendResponse;
 use Telnyx\Messages\MessageSendShortCodeParams;
 use Telnyx\Messages\MessageSendShortCodeResponse;
+use Telnyx\Messages\MessageSendWhatsappParams;
+use Telnyx\Messages\MessageSendWhatsappResponse;
 use Telnyx\RequestOptions;
 
 interface MessagesRawContract
@@ -133,6 +135,20 @@ interface MessagesRawContract
      */
     public function sendShortCode(
         array|MessageSendShortCodeParams $params,
+        ?RequestOptions $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string,mixed>|MessageSendWhatsappParams $params
+     *
+     * @return BaseResponse<MessageSendWhatsappResponse>
+     *
+     * @throws APIException
+     */
+    public function sendWhatsapp(
+        array|MessageSendWhatsappParams $params,
         ?RequestOptions $requestOptions = null,
     ): BaseResponse;
 }

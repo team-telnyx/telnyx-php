@@ -52,9 +52,9 @@ final class RoomsService implements RoomsContract
      * @param bool $enableRecording enable or disable recording for that room
      * @param int $maxParticipants The maximum amount of participants allowed in a room. If new participants try to join after that limit is reached, their request will be rejected.
      * @param string $uniqueName the unique (within the Telnyx account scope) name of the room
-     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this room will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+     * @param string $webhookEventFailoverURL The failover URL where webhooks related to this room will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this room will be sent. Must include a scheme, such as 'https'.
-     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param int $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @throws APIException
      */
@@ -62,7 +62,7 @@ final class RoomsService implements RoomsContract
         bool $enableRecording = false,
         int $maxParticipants = 10,
         ?string $uniqueName = null,
-        ?string $webhookEventFailoverURL = '',
+        string $webhookEventFailoverURL = '',
         ?string $webhookEventURL = null,
         ?int $webhookTimeoutSecs = null,
         ?RequestOptions $requestOptions = null,
@@ -116,9 +116,9 @@ final class RoomsService implements RoomsContract
      * @param bool $enableRecording enable or disable recording for that room
      * @param int $maxParticipants The maximum amount of participants allowed in a room. If new participants try to join after that limit is reached, their request will be rejected.
      * @param string $uniqueName the unique (within the Telnyx account scope) name of the room
-     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this room will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+     * @param string $webhookEventFailoverURL The failover URL where webhooks related to this room will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this room will be sent. Must include a scheme, such as 'https'.
-     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param int $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @throws APIException
      */
@@ -127,7 +127,7 @@ final class RoomsService implements RoomsContract
         bool $enableRecording = false,
         int $maxParticipants = 10,
         ?string $uniqueName = null,
-        ?string $webhookEventFailoverURL = '',
+        string $webhookEventFailoverURL = '',
         ?string $webhookEventURL = null,
         ?int $webhookTimeoutSecs = null,
         ?RequestOptions $requestOptions = null,

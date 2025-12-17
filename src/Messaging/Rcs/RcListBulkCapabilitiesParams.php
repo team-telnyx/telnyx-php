@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List RCS capabilities of a given batch of phone numbers.
+ * Check RCS capabilities (batch).
  *
  * @see Telnyx\Services\Messaging\RcsService::listBulkCapabilities()
  *

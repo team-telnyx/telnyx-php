@@ -61,7 +61,7 @@ final class RcsService implements RcsContract
     /**
      * @api
      *
-     * List RCS capabilities of a given batch of phone numbers
+     * Check RCS capabilities (batch)
      *
      * @param string $agentID RCS Agent ID
      * @param list<string> $phoneNumbers List of phone numbers to check
@@ -86,7 +86,7 @@ final class RcsService implements RcsContract
     /**
      * @api
      *
-     * List RCS capabilities of a phone number
+     * Check RCS capabilities
      *
      * @param string $phoneNumber Phone number in E164 format
      * @param string $agentID RCS agent ID

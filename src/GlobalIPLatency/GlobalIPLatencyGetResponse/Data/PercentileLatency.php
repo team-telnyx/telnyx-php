@@ -7,31 +7,31 @@ namespace Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_0;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_100;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_25;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_50;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_75;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_90;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_99;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\P0;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\P100;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\P25;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\P50;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\P75;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\P90;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\P99;
 
 /**
- * @phpstan-import-type _0Shape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_0
- * @phpstan-import-type _100Shape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_100
- * @phpstan-import-type _25Shape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_25
- * @phpstan-import-type _50Shape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_50
- * @phpstan-import-type _75Shape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_75
- * @phpstan-import-type _90Shape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_90
- * @phpstan-import-type _99Shape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\_99
+ * @phpstan-import-type P0Shape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\P0
+ * @phpstan-import-type P100Shape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\P100
+ * @phpstan-import-type P25Shape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\P25
+ * @phpstan-import-type P50Shape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\P50
+ * @phpstan-import-type P75Shape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\P75
+ * @phpstan-import-type P90Shape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\P90
+ * @phpstan-import-type P99Shape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\P99
  *
  * @phpstan-type PercentileLatencyShape = array{
- *   p0?: null|_0|_0Shape,
- *   p100?: null|_100|_100Shape,
- *   p25?: null|_25|_25Shape,
- *   p50?: null|_50|_50Shape,
- *   p75?: null|_75|_75Shape,
- *   p90?: null|_90|_90Shape,
- *   p99?: null|_99|_99Shape,
+ *   p0?: null|P0|P0Shape,
+ *   p100?: null|P100|P100Shape,
+ *   p25?: null|P25|P25Shape,
+ *   p50?: null|P50|P50Shape,
+ *   p75?: null|P75|P75Shape,
+ *   p90?: null|P90|P90Shape,
+ *   p99?: null|P99|P99Shape,
  * }
  */
 final class PercentileLatency implements BaseModel
@@ -40,25 +40,25 @@ final class PercentileLatency implements BaseModel
     use SdkModel;
 
     #[Optional('0')]
-    public ?_0 $p0;
+    public ?P0 $p0;
 
     #[Optional('100')]
-    public ?_100 $p100;
+    public ?P100 $p100;
 
     #[Optional('25')]
-    public ?_25 $p25;
+    public ?P25 $p25;
 
     #[Optional('50')]
-    public ?_50 $p50;
+    public ?P50 $p50;
 
     #[Optional('75')]
-    public ?_75 $p75;
+    public ?P75 $p75;
 
     #[Optional('90')]
-    public ?_90 $p90;
+    public ?P90 $p90;
 
     #[Optional('99')]
-    public ?_99 $p99;
+    public ?P99 $p99;
 
     public function __construct()
     {
@@ -70,22 +70,22 @@ final class PercentileLatency implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param _0Shape $p0
-     * @param _100Shape $p100
-     * @param _25Shape $p25
-     * @param _50Shape $p50
-     * @param _75Shape $p75
-     * @param _90Shape $p90
-     * @param _99Shape $p99
+     * @param P0Shape $p0
+     * @param P100Shape $p100
+     * @param P25Shape $p25
+     * @param P50Shape $p50
+     * @param P75Shape $p75
+     * @param P90Shape $p90
+     * @param P99Shape $p99
      */
     public static function with(
-        _0|array|null $p0 = null,
-        _100|array|null $p100 = null,
-        _25|array|null $p25 = null,
-        _50|array|null $p50 = null,
-        _75|array|null $p75 = null,
-        _90|array|null $p90 = null,
-        _99|array|null $p99 = null,
+        P0|array|null $p0 = null,
+        P100|array|null $p100 = null,
+        P25|array|null $p25 = null,
+        P50|array|null $p50 = null,
+        P75|array|null $p75 = null,
+        P90|array|null $p90 = null,
+        P99|array|null $p99 = null,
     ): self {
         $self = new self;
 
@@ -101,9 +101,9 @@ final class PercentileLatency implements BaseModel
     }
 
     /**
-     * @param _0Shape $p0
+     * @param P0Shape $p0
      */
-    public function withP0(_0|array $p0): self
+    public function withP0(P0|array $p0): self
     {
         $self = clone $this;
         $self['p0'] = $p0;
@@ -112,9 +112,9 @@ final class PercentileLatency implements BaseModel
     }
 
     /**
-     * @param _100Shape $p100
+     * @param P100Shape $p100
      */
-    public function withP100(_100|array $p100): self
+    public function withP100(P100|array $p100): self
     {
         $self = clone $this;
         $self['p100'] = $p100;
@@ -123,9 +123,9 @@ final class PercentileLatency implements BaseModel
     }
 
     /**
-     * @param _25Shape $p25
+     * @param P25Shape $p25
      */
-    public function withP25(_25|array $p25): self
+    public function withP25(P25|array $p25): self
     {
         $self = clone $this;
         $self['p25'] = $p25;
@@ -134,9 +134,9 @@ final class PercentileLatency implements BaseModel
     }
 
     /**
-     * @param _50Shape $p50
+     * @param P50Shape $p50
      */
-    public function withP50(_50|array $p50): self
+    public function withP50(P50|array $p50): self
     {
         $self = clone $this;
         $self['p50'] = $p50;
@@ -145,9 +145,9 @@ final class PercentileLatency implements BaseModel
     }
 
     /**
-     * @param _75Shape $p75
+     * @param P75Shape $p75
      */
-    public function withP75(_75|array $p75): self
+    public function withP75(P75|array $p75): self
     {
         $self = clone $this;
         $self['p75'] = $p75;
@@ -156,9 +156,9 @@ final class PercentileLatency implements BaseModel
     }
 
     /**
-     * @param _90Shape $p90
+     * @param P90Shape $p90
      */
-    public function withP90(_90|array $p90): self
+    public function withP90(P90|array $p90): self
     {
         $self = clone $this;
         $self['p90'] = $p90;
@@ -167,9 +167,9 @@ final class PercentileLatency implements BaseModel
     }
 
     /**
-     * @param _99Shape $p99
+     * @param P99Shape $p99
      */
-    public function withP99(_99|array $p99): self
+    public function withP99(P99|array $p99): self
     {
         $self = clone $this;
         $self['p99'] = $p99;

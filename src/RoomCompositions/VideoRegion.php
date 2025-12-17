@@ -28,19 +28,19 @@ final class VideoRegion implements BaseModel
     /**
      * Height of the video region.
      */
-    #[Optional(nullable: true)]
+    #[Optional]
     public ?int $height;
 
     /**
      * Maximum number of columns of the region's placement grid. By default, the region has as many columns as needed to layout all the specified video sources.
      */
-    #[Optional('max_columns', nullable: true)]
+    #[Optional('max_columns')]
     public ?int $maxColumns;
 
     /**
      * Maximum number of rows of the region's placement grid. By default, the region has as many rows as needed to layout all the specified video sources.
      */
-    #[Optional('max_rows', nullable: true)]
+    #[Optional('max_rows')]
     public ?int $maxRows;
 
     /**
@@ -54,25 +54,25 @@ final class VideoRegion implements BaseModel
     /**
      * Width of the video region.
      */
-    #[Optional(nullable: true)]
+    #[Optional]
     public ?int $width;
 
     /**
      * X axis value (in pixels) of the region's upper left corner relative to the upper left corner of the whole room composition viewport.
      */
-    #[Optional('x_pos', nullable: true)]
+    #[Optional('x_pos')]
     public ?int $xPos;
 
     /**
      * Y axis value (in pixels) of the region's upper left corner relative to the upper left corner of the whole room composition viewport.
      */
-    #[Optional('y_pos', nullable: true)]
+    #[Optional('y_pos')]
     public ?int $yPos;
 
     /**
      * Regions with higher z_pos values are stacked on top of regions with lower z_pos values.
      */
-    #[Optional('z_pos', nullable: true)]
+    #[Optional('z_pos')]
     public ?int $zPos;
 
     public function __construct()
@@ -114,7 +114,7 @@ final class VideoRegion implements BaseModel
     /**
      * Height of the video region.
      */
-    public function withHeight(?int $height): self
+    public function withHeight(int $height): self
     {
         $self = clone $this;
         $self['height'] = $height;
@@ -125,7 +125,7 @@ final class VideoRegion implements BaseModel
     /**
      * Maximum number of columns of the region's placement grid. By default, the region has as many columns as needed to layout all the specified video sources.
      */
-    public function withMaxColumns(?int $maxColumns): self
+    public function withMaxColumns(int $maxColumns): self
     {
         $self = clone $this;
         $self['maxColumns'] = $maxColumns;
@@ -136,7 +136,7 @@ final class VideoRegion implements BaseModel
     /**
      * Maximum number of rows of the region's placement grid. By default, the region has as many rows as needed to layout all the specified video sources.
      */
-    public function withMaxRows(?int $maxRows): self
+    public function withMaxRows(int $maxRows): self
     {
         $self = clone $this;
         $self['maxRows'] = $maxRows;
@@ -160,7 +160,7 @@ final class VideoRegion implements BaseModel
     /**
      * Width of the video region.
      */
-    public function withWidth(?int $width): self
+    public function withWidth(int $width): self
     {
         $self = clone $this;
         $self['width'] = $width;
@@ -171,7 +171,7 @@ final class VideoRegion implements BaseModel
     /**
      * X axis value (in pixels) of the region's upper left corner relative to the upper left corner of the whole room composition viewport.
      */
-    public function withXPos(?int $xPos): self
+    public function withXPos(int $xPos): self
     {
         $self = clone $this;
         $self['xPos'] = $xPos;
@@ -182,7 +182,7 @@ final class VideoRegion implements BaseModel
     /**
      * Y axis value (in pixels) of the region's upper left corner relative to the upper left corner of the whole room composition viewport.
      */
-    public function withYPos(?int $yPos): self
+    public function withYPos(int $yPos): self
     {
         $self = clone $this;
         $self['yPos'] = $yPos;
@@ -193,7 +193,7 @@ final class VideoRegion implements BaseModel
     /**
      * Regions with higher z_pos values are stacked on top of regions with lower z_pos values.
      */
-    public function withZPos(?int $zPos): self
+    public function withZPos(int $zPos): self
     {
         $self = clone $this;
         $self['zPos'] = $zPos;

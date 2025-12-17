@@ -37,9 +37,9 @@ final class RoomsRawService implements RoomsRawContract
      *   enableRecording?: bool,
      *   maxParticipants?: int,
      *   uniqueName?: string,
-     *   webhookEventFailoverURL?: string|null,
+     *   webhookEventFailoverURL?: string,
      *   webhookEventURL?: string,
-     *   webhookTimeoutSecs?: int|null,
+     *   webhookTimeoutSecs?: int,
      * }|RoomCreateParams $params
      *
      * @return BaseResponse<RoomNewResponse>
@@ -110,9 +110,9 @@ final class RoomsRawService implements RoomsRawContract
      *   enableRecording?: bool,
      *   maxParticipants?: int,
      *   uniqueName?: string,
-     *   webhookEventFailoverURL?: string|null,
+     *   webhookEventFailoverURL?: string,
      *   webhookEventURL?: string,
-     *   webhookTimeoutSecs?: int|null,
+     *   webhookTimeoutSecs?: int,
      * }|RoomUpdateParams $params
      *
      * @return BaseResponse<RoomUpdateResponse>

@@ -36,31 +36,31 @@ final class RoomCompositionsService implements RoomCompositionsContract
      *
      * Asynchronously create a room composition.
      *
-     * @param string|null $format the desired format of the room composition
-     * @param string|null $resolution The desired resolution (width/height in pixels) of the resulting video of the room composition. Both width and height are required to be between 16 and 1280; and width * height should not exceed 1280 * 720
-     * @param string|null $sessionID id of the room session associated with the room composition
+     * @param string $format the desired format of the room composition
+     * @param string $resolution The desired resolution (width/height in pixels) of the resulting video of the room composition. Both width and height are required to be between 16 and 1280; and width * height should not exceed 1280 * 720
+     * @param string $sessionID id of the room session associated with the room composition
      * @param array<string,array{
-     *   height?: int|null,
-     *   maxColumns?: int|null,
-     *   maxRows?: int|null,
+     *   height?: int,
+     *   maxColumns?: int,
+     *   maxRows?: int,
      *   videoSources?: list<string>,
-     *   width?: int|null,
-     *   xPos?: int|null,
-     *   yPos?: int|null,
-     *   zPos?: int|null,
+     *   width?: int,
+     *   xPos?: int,
+     *   yPos?: int,
+     *   zPos?: int,
      * }|VideoRegion> $videoLayout Describes the video layout of the room composition in terms of regions
-     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this room composition will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+     * @param string $webhookEventFailoverURL The failover URL where webhooks related to this room composition will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this room composition will be sent. Must include a scheme, such as 'https'.
-     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param int $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @throws APIException
      */
     public function create(
-        ?string $format = 'mp4',
-        ?string $resolution = '1280x720',
+        string $format = 'mp4',
+        string $resolution = '1280x720',
         ?string $sessionID = null,
         ?array $videoLayout = null,
-        ?string $webhookEventFailoverURL = '',
+        string $webhookEventFailoverURL = '',
         ?string $webhookEventURL = null,
         ?int $webhookTimeoutSecs = null,
         ?RequestOptions $requestOptions = null,

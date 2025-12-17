@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Chat\ChatCreateCompletionParams\Tool;
 
-use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam\Function_;
+use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam\FunctionDefinition;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type FunctionShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam\Function_
+ * @phpstan-import-type FunctionDefinitionShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam\FunctionDefinition
  *
  * @phpstan-type ChatCompletionToolParamShape = array{
- *   function: Function_|FunctionShape, type: 'function'
+ *   function: FunctionDefinition|FunctionDefinitionShape, type: 'function'
  * }
  */
 final class ChatCompletionToolParam implements BaseModel
@@ -26,7 +26,7 @@ final class ChatCompletionToolParam implements BaseModel
     public string $type = 'function';
 
     #[Required]
-    public Function_ $function;
+    public FunctionDefinition $function;
 
     /**
      * `new ChatCompletionToolParam()` is missing required properties by the API.
@@ -52,9 +52,9 @@ final class ChatCompletionToolParam implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FunctionShape $function
+     * @param FunctionDefinitionShape $function
      */
-    public static function with(Function_|array $function): self
+    public static function with(FunctionDefinition|array $function): self
     {
         $self = new self;
 
@@ -64,9 +64,9 @@ final class ChatCompletionToolParam implements BaseModel
     }
 
     /**
-     * @param FunctionShape $function
+     * @param FunctionDefinitionShape $function
      */
-    public function withFunction(Function_|array $function): self
+    public function withFunction(FunctionDefinition|array $function): self
     {
         $self = clone $this;
         $self['function'] = $function;

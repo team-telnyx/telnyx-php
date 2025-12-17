@@ -8,6 +8,8 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Messages\Rcs\RcGenerateDeeplinkParams;
 use Telnyx\Messages\Rcs\RcGenerateDeeplinkResponse;
+use Telnyx\Messages\Rcs\RcSendParams;
+use Telnyx\Messages\Rcs\RcSendResponse;
 use Telnyx\RequestOptions;
 
 interface RcsRawContract
@@ -26,5 +28,19 @@ interface RcsRawContract
         string $agentID,
         array|RcGenerateDeeplinkParams $params,
         ?RequestOptions $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string,mixed>|RcSendParams $params
+     *
+     * @return BaseResponse<RcSendResponse>
+     *
+     * @throws APIException
+     */
+    public function send(
+        array|RcSendParams $params,
+        ?RequestOptions $requestOptions = null
     ): BaseResponse;
 }
