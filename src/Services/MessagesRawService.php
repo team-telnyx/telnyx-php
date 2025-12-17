@@ -22,6 +22,8 @@ use Telnyx\Messages\MessageSendParams;
 use Telnyx\Messages\MessageSendResponse;
 use Telnyx\Messages\MessageSendShortCodeParams;
 use Telnyx\Messages\MessageSendShortCodeResponse;
+use Telnyx\Messages\MessageSendWhatsappParams;
+use Telnyx\Messages\MessageSendWhatsappResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagesRawContract;
 
@@ -334,6 +336,96 @@ final class MessagesRawService implements MessagesRawContract
             body: (object) $parsed,
             options: $options,
             convert: MessageSendShortCodeResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Send a Whatsapp message
+     *
+     * @param array{
+     *   from: string,
+     *   to: string,
+     *   whatsappMessage: array{
+     *     audio?: array{
+     *       caption?: string, filename?: string, link?: string, voice?: bool
+     *     },
+     *     bizOpaqueCallbackData?: string,
+     *     contacts?: list<array{
+     *       addresses?: list<array<string,mixed>>,
+     *       birthday?: string,
+     *       emails?: list<array<string,mixed>>,
+     *       name?: string,
+     *       org?: array<string,mixed>,
+     *       phones?: list<array<string,mixed>>,
+     *       urls?: list<array<string,mixed>>,
+     *     }>,
+     *     document?: array{
+     *       caption?: string, filename?: string, link?: string, voice?: bool
+     *     },
+     *     image?: array{
+     *       caption?: string, filename?: string, link?: string, voice?: bool
+     *     },
+     *     interactive?: array{
+     *       action?: array{
+     *         button?: string,
+     *         buttons?: list<array<string,mixed>>,
+     *         cards?: list<array<string,mixed>>,
+     *         catalogID?: string,
+     *         mode?: string,
+     *         name?: string,
+     *         parameters?: array<string,mixed>,
+     *         productRetailerID?: string,
+     *         sections?: list<array<string,mixed>>,
+     *       },
+     *       body?: array{text?: string},
+     *       footer?: array{text?: string},
+     *       header?: array{
+     *         document?: array<string,mixed>,
+     *         image?: array<string,mixed>,
+     *         subText?: string,
+     *         text?: string,
+     *         video?: array<string,mixed>,
+     *       },
+     *       type?: 'cta_url'|'list'|'carousel'|'button'|'location_request_message'|MessageSendWhatsappParams\WhatsappMessage\Interactive\Type,
+     *     },
+     *     location?: array{
+     *       address?: string, latitude?: string, longitude?: string, name?: string
+     *     },
+     *     reaction?: array{emoji?: string, messageID?: string},
+     *     sticker?: array{
+     *       caption?: string, filename?: string, link?: string, voice?: bool
+     *     },
+     *     type?: 'audio'|'document'|'image'|'sticker'|'video'|'interactive'|'location'|'template'|'reaction'|'contacts'|MessageSendWhatsappParams\WhatsappMessage\Type,
+     *     video?: array{
+     *       caption?: string, filename?: string, link?: string, voice?: bool
+     *     },
+     *   },
+     *   type?: 'WHATSAPP'|MessageSendWhatsappParams\Type,
+     *   webhookURL?: string,
+     * }|MessageSendWhatsappParams $params
+     *
+     * @return BaseResponse<MessageSendWhatsappResponse>
+     *
+     * @throws APIException
+     */
+    public function sendWhatsapp(
+        array|MessageSendWhatsappParams $params,
+        ?RequestOptions $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = MessageSendWhatsappParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: 'messages/whatsapp',
+            body: (object) $parsed,
+            options: $options,
+            convert: MessageSendWhatsappResponse::class,
         );
     }
 }

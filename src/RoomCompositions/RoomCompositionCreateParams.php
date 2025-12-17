@@ -35,19 +35,19 @@ final class RoomCompositionCreateParams implements BaseModel
     /**
      * The desired format of the room composition.
      */
-    #[Optional(nullable: true)]
+    #[Optional]
     public ?string $format;
 
     /**
      * The desired resolution (width/height in pixels) of the resulting video of the room composition. Both width and height are required to be between 16 and 1280; and width * height should not exceed 1280 * 720.
      */
-    #[Optional(nullable: true)]
+    #[Optional]
     public ?string $resolution;
 
     /**
      * id of the room session associated with the room composition.
      */
-    #[Optional('session_id', nullable: true)]
+    #[Optional('session_id')]
     public ?string $sessionID;
 
     /**
@@ -61,7 +61,7 @@ final class RoomCompositionCreateParams implements BaseModel
     /**
      * The failover URL where webhooks related to this room composition will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
-    #[Optional('webhook_event_failover_url', nullable: true)]
+    #[Optional('webhook_event_failover_url')]
     public ?string $webhookEventFailoverURL;
 
     /**
@@ -73,7 +73,7 @@ final class RoomCompositionCreateParams implements BaseModel
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    #[Optional('webhook_timeout_secs', nullable: true)]
+    #[Optional('webhook_timeout_secs')]
     public ?int $webhookTimeoutSecs;
 
     public function __construct()
@@ -113,7 +113,7 @@ final class RoomCompositionCreateParams implements BaseModel
     /**
      * The desired format of the room composition.
      */
-    public function withFormat(?string $format): self
+    public function withFormat(string $format): self
     {
         $self = clone $this;
         $self['format'] = $format;
@@ -124,7 +124,7 @@ final class RoomCompositionCreateParams implements BaseModel
     /**
      * The desired resolution (width/height in pixels) of the resulting video of the room composition. Both width and height are required to be between 16 and 1280; and width * height should not exceed 1280 * 720.
      */
-    public function withResolution(?string $resolution): self
+    public function withResolution(string $resolution): self
     {
         $self = clone $this;
         $self['resolution'] = $resolution;
@@ -135,7 +135,7 @@ final class RoomCompositionCreateParams implements BaseModel
     /**
      * id of the room session associated with the room composition.
      */
-    public function withSessionID(?string $sessionID): self
+    public function withSessionID(string $sessionID): self
     {
         $self = clone $this;
         $self['sessionID'] = $sessionID;
@@ -160,7 +160,7 @@ final class RoomCompositionCreateParams implements BaseModel
      * The failover URL where webhooks related to this room composition will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
     public function withWebhookEventFailoverURL(
-        ?string $webhookEventFailoverURL
+        string $webhookEventFailoverURL
     ): self {
         $self = clone $this;
         $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
@@ -182,7 +182,7 @@ final class RoomCompositionCreateParams implements BaseModel
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
+    public function withWebhookTimeoutSecs(int $webhookTimeoutSecs): self
     {
         $self = clone $this;
         $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;

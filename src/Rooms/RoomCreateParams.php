@@ -50,7 +50,7 @@ final class RoomCreateParams implements BaseModel
     /**
      * The failover URL where webhooks related to this room will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
-    #[Optional('webhook_event_failover_url', nullable: true)]
+    #[Optional('webhook_event_failover_url')]
     public ?string $webhookEventFailoverURL;
 
     /**
@@ -62,7 +62,7 @@ final class RoomCreateParams implements BaseModel
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    #[Optional('webhook_timeout_secs', nullable: true)]
+    #[Optional('webhook_timeout_secs')]
     public ?int $webhookTimeoutSecs;
 
     public function __construct()
@@ -132,7 +132,7 @@ final class RoomCreateParams implements BaseModel
      * The failover URL where webhooks related to this room will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
     public function withWebhookEventFailoverURL(
-        ?string $webhookEventFailoverURL
+        string $webhookEventFailoverURL
     ): self {
         $self = clone $this;
         $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
@@ -154,7 +154,7 @@ final class RoomCreateParams implements BaseModel
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
+    public function withWebhookTimeoutSecs(int $webhookTimeoutSecs): self
     {
         $self = clone $this;
         $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;

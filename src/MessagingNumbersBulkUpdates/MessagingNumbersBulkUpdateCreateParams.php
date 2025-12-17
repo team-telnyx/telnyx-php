@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update the messaging profile of multiple phone numbers.
+ * Bulk update phone number profiles.
  *
  * @see Telnyx\Services\MessagingNumbersBulkUpdatesService::create()
  *

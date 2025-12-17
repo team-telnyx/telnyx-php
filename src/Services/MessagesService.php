@@ -9,17 +9,17 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\Messages\MessageCancelScheduledResponse;
 use Telnyx\Messages\MessageGetResponse;
-use Telnyx\Messages\MessageScheduleParams\Type;
 use Telnyx\Messages\MessageScheduleResponse;
 use Telnyx\Messages\MessageSendGroupMmsResponse;
 use Telnyx\Messages\MessageSendLongCodeResponse;
 use Telnyx\Messages\MessageSendNumberPoolResponse;
 use Telnyx\Messages\MessageSendResponse;
 use Telnyx\Messages\MessageSendShortCodeResponse;
+use Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage\Interactive\Action\Button\Type;
+use Telnyx\Messages\MessageSendWhatsappResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagesContract;
 use Telnyx\Services\Messages\RcsService;
-use Telnyx\Services\Messages\WhatsappService;
 
 final class MessagesService implements MessagesContract
 {
@@ -34,18 +34,12 @@ final class MessagesService implements MessagesContract
     public RcsService $rcs;
 
     /**
-     * @api
-     */
-    public WhatsappService $whatsapp;
-
-    /**
      * @internal
      */
     public function __construct(private Client $client)
     {
         $this->raw = new MessagesRawService($client);
         $this->rcs = new RcsService($client);
-        $this->whatsapp = new WhatsappService($client);
     }
 
     /**
@@ -111,7 +105,7 @@ final class MessagesService implements MessagesContract
      * @param string $text Message body (i.e., content) as a non-empty string.
      *
      * **Required for SMS**
-     * @param 'SMS'|'MMS'|Type $type the protocol for sending the message, either SMS or MMS
+     * @param 'SMS'|'MMS'|\Telnyx\Messages\MessageScheduleParams\Type $type the protocol for sending the message, either SMS or MMS
      * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
@@ -127,7 +121,7 @@ final class MessagesService implements MessagesContract
         string|\DateTimeInterface|null $sendAt = null,
         ?string $subject = null,
         ?string $text = null,
-        string|Type|null $type = null,
+        string|\Telnyx\Messages\MessageScheduleParams\Type|null $type = null,
         bool $useProfileWebhooks = true,
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
@@ -436,6 +430,131 @@ final class MessagesService implements MessagesContract
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->sendShortCode(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Send a Whatsapp message
+     *
+     * @param string $from Phone number in +E.164 format associated with Whatsapp account
+     * @param string $to Phone number in +E.164 format
+     * @param array{
+     *   audio?: array{
+     *     caption?: string, filename?: string, link?: string, voice?: bool
+     *   },
+     *   bizOpaqueCallbackData?: string,
+     *   contacts?: list<array{
+     *     addresses?: list<array{
+     *       city?: string,
+     *       country?: string,
+     *       countryCode?: string,
+     *       state?: string,
+     *       street?: string,
+     *       type?: string,
+     *       zip?: string,
+     *     }>,
+     *     birthday?: string,
+     *     emails?: list<array{email?: string, type?: string}>,
+     *     name?: string,
+     *     org?: array{company?: string, department?: string, title?: string},
+     *     phones?: list<array{phone?: string, type?: string, waID?: string}>,
+     *     urls?: list<array{type?: string, url?: string}>,
+     *   }>,
+     *   document?: array{
+     *     caption?: string, filename?: string, link?: string, voice?: bool
+     *   },
+     *   image?: array{
+     *     caption?: string, filename?: string, link?: string, voice?: bool
+     *   },
+     *   interactive?: array{
+     *     action?: array{
+     *       button?: string,
+     *       buttons?: list<array{
+     *         reply?: array{id?: string, title?: string}, type?: 'reply'|Type
+     *       }>,
+     *       cards?: list<array{
+     *         action?: array{catalogID?: string, productRetailerID?: string},
+     *         body?: array{text?: string},
+     *         cardIndex?: int,
+     *         header?: array{
+     *           image?: array{
+     *             caption?: string, filename?: string, link?: string, voice?: bool
+     *           },
+     *           type?: 'image'|'video'|\Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage\Interactive\Action\Card\Header\Type,
+     *           video?: array{
+     *             caption?: string, filename?: string, link?: string, voice?: bool
+     *           },
+     *         },
+     *         type?: 'cta_url'|\Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage\Interactive\Action\Card\Type,
+     *       }>,
+     *       catalogID?: string,
+     *       mode?: string,
+     *       name?: string,
+     *       parameters?: array{displayText?: string, url?: string},
+     *       productRetailerID?: string,
+     *       sections?: list<array{
+     *         productItems?: list<array{productRetailerID?: string}>,
+     *         rows?: list<array{id?: string, description?: string, title?: string}>,
+     *         title?: string,
+     *       }>,
+     *     },
+     *     body?: array{text?: string},
+     *     footer?: array{text?: string},
+     *     header?: array{
+     *       document?: array{
+     *         caption?: string, filename?: string, link?: string, voice?: bool
+     *       },
+     *       image?: array{
+     *         caption?: string, filename?: string, link?: string, voice?: bool
+     *       },
+     *       subText?: string,
+     *       text?: string,
+     *       video?: array{
+     *         caption?: string, filename?: string, link?: string, voice?: bool
+     *       },
+     *     },
+     *     type?: 'cta_url'|'list'|'carousel'|'button'|'location_request_message'|\Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage\Interactive\Type,
+     *   },
+     *   location?: array{
+     *     address?: string, latitude?: string, longitude?: string, name?: string
+     *   },
+     *   reaction?: array{emoji?: string, messageID?: string},
+     *   sticker?: array{
+     *     caption?: string, filename?: string, link?: string, voice?: bool
+     *   },
+     *   type?: 'audio'|'document'|'image'|'sticker'|'video'|'interactive'|'location'|'template'|'reaction'|'contacts'|\Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage\Type,
+     *   video?: array{
+     *     caption?: string, filename?: string, link?: string, voice?: bool
+     *   },
+     * } $whatsappMessage
+     * @param 'WHATSAPP'|\Telnyx\Messages\MessageSendWhatsappParams\Type $type Message type - must be set to "WHATSAPP"
+     * @param string $webhookURL the URL where webhooks related to this message will be sent
+     *
+     * @throws APIException
+     */
+    public function sendWhatsapp(
+        string $from,
+        string $to,
+        array $whatsappMessage,
+        string|\Telnyx\Messages\MessageSendWhatsappParams\Type|null $type = null,
+        ?string $webhookURL = null,
+        ?RequestOptions $requestOptions = null,
+    ): MessageSendWhatsappResponse {
+        $params = Util::removeNulls(
+            [
+                'from' => $from,
+                'to' => $to,
+                'whatsappMessage' => $whatsappMessage,
+                'type' => $type,
+                'webhookURL' => $webhookURL,
+            ],
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->sendWhatsapp(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

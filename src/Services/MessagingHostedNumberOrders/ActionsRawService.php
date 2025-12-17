@@ -23,7 +23,7 @@ final class ActionsRawService implements ActionsRawContract
     /**
      * @api
      *
-     * Upload file required for a messaging hosted number order
+     * Upload hosted number document
      *
      * @param string $id identifies the type of resource
      * @param array{bill?: string, loa?: string}|ActionUploadFileParams $params

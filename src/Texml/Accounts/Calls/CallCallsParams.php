@@ -19,6 +19,7 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingTrack;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\SipRegion;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackEvent;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackMethod;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\SupervisingRole;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Trim;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\URLMethod;
 
@@ -62,6 +63,8 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\URLMethod;
  *   statusCallback?: string|null,
  *   statusCallbackEvent?: null|StatusCallbackEvent|value-of<StatusCallbackEvent>,
  *   statusCallbackMethod?: null|StatusCallbackMethod|value-of<StatusCallbackMethod>,
+ *   superviseCallSid?: string|null,
+ *   supervisingRole?: null|SupervisingRole|value-of<SupervisingRole>,
  *   trim?: null|Trim|value-of<Trim>,
  *   url?: string|null,
  *   urlMethod?: null|URLMethod|value-of<URLMethod>,
@@ -292,6 +295,20 @@ final class CallCallsParams implements BaseModel
     public ?string $statusCallbackMethod;
 
     /**
+     * The call control ID of the existing call to supervise. When provided, the created leg will be added to the specified call in supervising mode. Status callbacks and action callbacks will NOT be sent for the supervising leg.
+     */
+    #[Optional('SuperviseCallSid')]
+    public ?string $superviseCallSid;
+
+    /**
+     * The supervising role for the new leg. Determines the audio behavior: barge (hear both sides), whisper (only hear supervisor), monitor (hear both sides but supervisor muted). Default: barge.
+     *
+     * @var value-of<SupervisingRole>|null $supervisingRole
+     */
+    #[Optional('SupervisingRole', enum: SupervisingRole::class)]
+    public ?string $supervisingRole;
+
+    /**
      * Whether to trim any leading and trailing silence from the recording. Defaults to `trim-silence`.
      *
      * @var value-of<Trim>|null $trim
@@ -347,6 +364,7 @@ final class CallCallsParams implements BaseModel
      * @param SipRegion|value-of<SipRegion> $sipRegion
      * @param StatusCallbackEvent|value-of<StatusCallbackEvent> $statusCallbackEvent
      * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $statusCallbackMethod
+     * @param SupervisingRole|value-of<SupervisingRole> $supervisingRole
      * @param Trim|value-of<Trim> $trim
      * @param URLMethod|value-of<URLMethod> $urlMethod
      */
@@ -383,6 +401,8 @@ final class CallCallsParams implements BaseModel
         ?string $statusCallback = null,
         StatusCallbackEvent|string|null $statusCallbackEvent = null,
         StatusCallbackMethod|string|null $statusCallbackMethod = null,
+        ?string $superviseCallSid = null,
+        SupervisingRole|string|null $supervisingRole = null,
         Trim|string|null $trim = null,
         ?string $url = null,
         URLMethod|string|null $urlMethod = null,
@@ -422,6 +442,8 @@ final class CallCallsParams implements BaseModel
         null !== $statusCallback && $self['statusCallback'] = $statusCallback;
         null !== $statusCallbackEvent && $self['statusCallbackEvent'] = $statusCallbackEvent;
         null !== $statusCallbackMethod && $self['statusCallbackMethod'] = $statusCallbackMethod;
+        null !== $superviseCallSid && $self['superviseCallSid'] = $superviseCallSid;
+        null !== $supervisingRole && $self['supervisingRole'] = $supervisingRole;
         null !== $trim && $self['trim'] = $trim;
         null !== $url && $self['url'] = $url;
         null !== $urlMethod && $self['urlMethod'] = $urlMethod;
@@ -813,6 +835,31 @@ final class CallCallsParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['statusCallbackMethod'] = $statusCallbackMethod;
+
+        return $self;
+    }
+
+    /**
+     * The call control ID of the existing call to supervise. When provided, the created leg will be added to the specified call in supervising mode. Status callbacks and action callbacks will NOT be sent for the supervising leg.
+     */
+    public function withSuperviseCallSid(string $superviseCallSid): self
+    {
+        $self = clone $this;
+        $self['superviseCallSid'] = $superviseCallSid;
+
+        return $self;
+    }
+
+    /**
+     * The supervising role for the new leg. Determines the audio behavior: barge (hear both sides), whisper (only hear supervisor), monitor (hear both sides but supervisor muted). Default: barge.
+     *
+     * @param SupervisingRole|value-of<SupervisingRole> $supervisingRole
+     */
+    public function withSupervisingRole(
+        SupervisingRole|string $supervisingRole
+    ): self {
+        $self = clone $this;
+        $self['supervisingRole'] = $supervisingRole;
 
         return $self;
     }

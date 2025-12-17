@@ -27,7 +27,7 @@ final class OsrService implements OsrContract
     /**
      * @api
      *
-     * Get My Osr Campaign Attributes
+     * Get OSR campaign attributes
      *
      * @return array<string,mixed>
      *
