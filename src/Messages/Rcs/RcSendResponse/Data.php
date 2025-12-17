@@ -9,10 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\Rcs\RcSendResponse\Data\From;
 use Telnyx\Messages\Rcs\RcSendResponse\Data\To;
-use Telnyx\Messsages\RcsAgentMessage;
+use Telnyx\Messages\RcsAgentMessage;
 
 /**
- * @phpstan-import-type RcsAgentMessageShape from \Telnyx\Messsages\RcsAgentMessage
+ * @phpstan-import-type RcsAgentMessageShape from \Telnyx\Messages\RcsAgentMessage
  * @phpstan-import-type FromShape from \Telnyx\Messages\Rcs\RcSendResponse\Data\From
  * @phpstan-import-type ToShape from \Telnyx\Messages\Rcs\RcSendResponse\Data\To
  *

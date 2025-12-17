@@ -17,6 +17,7 @@ use Telnyx\Messages\MessageSendResponse;
 use Telnyx\Messages\MessageSendShortCodeResponse;
 use Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage\Interactive\Action\Button\Type;
 use Telnyx\Messages\MessageSendWhatsappResponse;
+use Telnyx\Messages\WhatsappMedia;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagesContract;
 use Telnyx\Services\Messages\RcsService;
@@ -444,7 +445,7 @@ final class MessagesService implements MessagesContract
      * @param array{
      *   audio?: array{
      *     caption?: string, filename?: string, link?: string, voice?: bool
-     *   },
+     *   }|WhatsappMedia,
      *   bizOpaqueCallbackData?: string,
      *   contacts?: list<array{
      *     addresses?: list<array{
@@ -465,10 +466,10 @@ final class MessagesService implements MessagesContract
      *   }>,
      *   document?: array{
      *     caption?: string, filename?: string, link?: string, voice?: bool
-     *   },
+     *   }|WhatsappMedia,
      *   image?: array{
      *     caption?: string, filename?: string, link?: string, voice?: bool
-     *   },
+     *   }|WhatsappMedia,
      *   interactive?: array{
      *     action?: array{
      *       button?: string,
@@ -482,11 +483,11 @@ final class MessagesService implements MessagesContract
      *         header?: array{
      *           image?: array{
      *             caption?: string, filename?: string, link?: string, voice?: bool
-     *           },
+     *           }|WhatsappMedia,
      *           type?: 'image'|'video'|\Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage\Interactive\Action\Card\Header\Type,
      *           video?: array{
      *             caption?: string, filename?: string, link?: string, voice?: bool
-     *           },
+     *           }|WhatsappMedia,
      *         },
      *         type?: 'cta_url'|\Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage\Interactive\Action\Card\Type,
      *       }>,
@@ -506,15 +507,15 @@ final class MessagesService implements MessagesContract
      *     header?: array{
      *       document?: array{
      *         caption?: string, filename?: string, link?: string, voice?: bool
-     *       },
+     *       }|WhatsappMedia,
      *       image?: array{
      *         caption?: string, filename?: string, link?: string, voice?: bool
-     *       },
+     *       }|WhatsappMedia,
      *       subText?: string,
      *       text?: string,
      *       video?: array{
      *         caption?: string, filename?: string, link?: string, voice?: bool
-     *       },
+     *       }|WhatsappMedia,
      *     },
      *     type?: 'cta_url'|'list'|'carousel'|'button'|'location_request_message'|\Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage\Interactive\Type,
      *   },
@@ -524,11 +525,11 @@ final class MessagesService implements MessagesContract
      *   reaction?: array{emoji?: string, messageID?: string},
      *   sticker?: array{
      *     caption?: string, filename?: string, link?: string, voice?: bool
-     *   },
+     *   }|WhatsappMedia,
      *   type?: 'audio'|'document'|'image'|'sticker'|'video'|'interactive'|'location'|'template'|'reaction'|'contacts'|\Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage\Type,
      *   video?: array{
      *     caption?: string, filename?: string, link?: string, voice?: bool
-     *   },
+     *   }|WhatsappMedia,
      * } $whatsappMessage
      * @param 'WHATSAPP'|\Telnyx\Messages\MessageSendWhatsappParams\Type $type Message type - must be set to "WHATSAPP"
      * @param string $webhookURL the URL where webhooks related to this message will be sent

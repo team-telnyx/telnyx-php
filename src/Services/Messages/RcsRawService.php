@@ -13,9 +13,9 @@ use Telnyx\Messages\Rcs\RcGenerateDeeplinkResponse;
 use Telnyx\Messages\Rcs\RcSendParams;
 use Telnyx\Messages\Rcs\RcSendParams\Type;
 use Telnyx\Messages\Rcs\RcSendResponse;
-use Telnyx\Messsages\RcsAgentMessage;
-use Telnyx\Messsages\RcsAgentMessage\Event\EventType;
-use Telnyx\Messsages\RcsContentInfo;
+use Telnyx\Messages\RcsAgentMessage;
+use Telnyx\Messages\RcsAgentMessage\Event\EventType;
+use Telnyx\Messages\RcsContentInfo;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messages\RcsRawContract;
 

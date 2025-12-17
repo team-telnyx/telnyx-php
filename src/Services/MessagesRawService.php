@@ -24,6 +24,7 @@ use Telnyx\Messages\MessageSendShortCodeParams;
 use Telnyx\Messages\MessageSendShortCodeResponse;
 use Telnyx\Messages\MessageSendWhatsappParams;
 use Telnyx\Messages\MessageSendWhatsappResponse;
+use Telnyx\Messages\WhatsappMedia;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagesRawContract;
 
@@ -350,7 +351,7 @@ final class MessagesRawService implements MessagesRawContract
      *   whatsappMessage: array{
      *     audio?: array{
      *       caption?: string, filename?: string, link?: string, voice?: bool
-     *     },
+     *     }|WhatsappMedia,
      *     bizOpaqueCallbackData?: string,
      *     contacts?: list<array{
      *       addresses?: list<array<string,mixed>>,
@@ -363,10 +364,10 @@ final class MessagesRawService implements MessagesRawContract
      *     }>,
      *     document?: array{
      *       caption?: string, filename?: string, link?: string, voice?: bool
-     *     },
+     *     }|WhatsappMedia,
      *     image?: array{
      *       caption?: string, filename?: string, link?: string, voice?: bool
-     *     },
+     *     }|WhatsappMedia,
      *     interactive?: array{
      *       action?: array{
      *         button?: string,
@@ -382,11 +383,11 @@ final class MessagesRawService implements MessagesRawContract
      *       body?: array{text?: string},
      *       footer?: array{text?: string},
      *       header?: array{
-     *         document?: array<string,mixed>,
-     *         image?: array<string,mixed>,
+     *         document?: array<string,mixed>|WhatsappMedia,
+     *         image?: array<string,mixed>|WhatsappMedia,
      *         subText?: string,
      *         text?: string,
-     *         video?: array<string,mixed>,
+     *         video?: array<string,mixed>|WhatsappMedia,
      *       },
      *       type?: 'cta_url'|'list'|'carousel'|'button'|'location_request_message'|MessageSendWhatsappParams\WhatsappMessage\Interactive\Type,
      *     },
@@ -396,11 +397,11 @@ final class MessagesRawService implements MessagesRawContract
      *     reaction?: array{emoji?: string, messageID?: string},
      *     sticker?: array{
      *       caption?: string, filename?: string, link?: string, voice?: bool
-     *     },
+     *     }|WhatsappMedia,
      *     type?: 'audio'|'document'|'image'|'sticker'|'video'|'interactive'|'location'|'template'|'reaction'|'contacts'|MessageSendWhatsappParams\WhatsappMessage\Type,
      *     video?: array{
      *       caption?: string, filename?: string, link?: string, voice?: bool
-     *     },
+     *     }|WhatsappMedia,
      *   },
      *   type?: 'WHATSAPP'|MessageSendWhatsappParams\Type,
      *   webhookURL?: string,

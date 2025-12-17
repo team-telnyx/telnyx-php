@@ -1,0 +1,130 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Telnyx\Messages;
+
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Messages\RcsCardContent\Media;
+
+/**
+ * @phpstan-import-type MediaShape from \Telnyx\Messages\RcsCardContent\Media
+ * @phpstan-import-type RcsSuggestionShape from \Telnyx\Messages\RcsSuggestion
+ *
+ * @phpstan-type RcsCardContentShape = array{
+ *   description?: string|null,
+ *   media?: null|Media|MediaShape,
+ *   suggestions?: list<RcsSuggestionShape>|null,
+ *   title?: string|null,
+ * }
+ */
+final class RcsCardContent implements BaseModel
+{
+    /** @use SdkModel<RcsCardContentShape> */
+    use SdkModel;
+
+    /**
+     * Description of the card (at most 2000 characters).
+     */
+    #[Optional]
+    public ?string $description;
+
+    /**
+     * A media file within a rich card.
+     */
+    #[Optional]
+    public ?Media $media;
+
+    /**
+     * List of suggestions to include in the card. Maximum 10 suggestions.
+     *
+     * @var list<RcsSuggestion>|null $suggestions
+     */
+    #[Optional(list: RcsSuggestion::class)]
+    public ?array $suggestions;
+
+    /**
+     * Title of the card (at most 200 characters).
+     */
+    #[Optional]
+    public ?string $title;
+
+    public function __construct()
+    {
+        $this->initialize();
+    }
+
+    /**
+     * Construct an instance from the required parameters.
+     *
+     * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param MediaShape $media
+     * @param list<RcsSuggestionShape> $suggestions
+     */
+    public static function with(
+        ?string $description = null,
+        Media|array|null $media = null,
+        ?array $suggestions = null,
+        ?string $title = null,
+    ): self {
+        $self = new self;
+
+        null !== $description && $self['description'] = $description;
+        null !== $media && $self['media'] = $media;
+        null !== $suggestions && $self['suggestions'] = $suggestions;
+        null !== $title && $self['title'] = $title;
+
+        return $self;
+    }
+
+    /**
+     * Description of the card (at most 2000 characters).
+     */
+    public function withDescription(string $description): self
+    {
+        $self = clone $this;
+        $self['description'] = $description;
+
+        return $self;
+    }
+
+    /**
+     * A media file within a rich card.
+     *
+     * @param MediaShape $media
+     */
+    public function withMedia(Media|array $media): self
+    {
+        $self = clone $this;
+        $self['media'] = $media;
+
+        return $self;
+    }
+
+    /**
+     * List of suggestions to include in the card. Maximum 10 suggestions.
+     *
+     * @param list<RcsSuggestionShape> $suggestions
+     */
+    public function withSuggestions(array $suggestions): self
+    {
+        $self = clone $this;
+        $self['suggestions'] = $suggestions;
+
+        return $self;
+    }
+
+    /**
+     * Title of the card (at most 200 characters).
+     */
+    public function withTitle(string $title): self
+    {
+        $self = clone $this;
+        $self['title'] = $title;
+
+        return $self;
+    }
+}

@@ -7,18 +7,16 @@ namespace Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Interactive\Acti
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Interactive\Action\Card\Header\Image;
 use Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Interactive\Action\Card\Header\Type;
-use Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Interactive\Action\Card\Header\Video;
+use Telnyx\Messages\WhatsappMedia;
 
 /**
- * @phpstan-import-type ImageShape from \Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Interactive\Action\Card\Header\Image
- * @phpstan-import-type VideoShape from \Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Interactive\Action\Card\Header\Video
+ * @phpstan-import-type WhatsappMediaShape from \Telnyx\Messages\WhatsappMedia
  *
  * @phpstan-type HeaderShape = array{
- *   image?: null|Image|ImageShape,
+ *   image?: null|WhatsappMedia|WhatsappMediaShape,
  *   type?: null|\Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Interactive\Action\Card\Header\Type|value-of<\Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Interactive\Action\Card\Header\Type>,
- *   video?: null|Video|VideoShape,
+ *   video?: null|WhatsappMedia|WhatsappMediaShape,
  * }
  */
 final class Header implements BaseModel
@@ -27,7 +25,7 @@ final class Header implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Image $image;
+    public ?WhatsappMedia $image;
 
     /**
      * @var value-of<Type>|null $type
@@ -38,7 +36,7 @@ final class Header implements BaseModel
     public ?string $type;
 
     #[Optional]
-    public ?Video $video;
+    public ?WhatsappMedia $video;
 
     public function __construct()
     {
@@ -50,14 +48,14 @@ final class Header implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ImageShape $image
+     * @param WhatsappMediaShape $image
      * @param Type|value-of<Type> $type
-     * @param VideoShape $video
+     * @param WhatsappMediaShape $video
      */
     public static function with(
-        Image|array|null $image = null,
+        WhatsappMedia|array|null $image = null,
         Type|string|null $type = null,
-        Video|array|null $video = null,
+        WhatsappMedia|array|null $video = null,
     ): self {
         $self = new self;
 
@@ -69,9 +67,9 @@ final class Header implements BaseModel
     }
 
     /**
-     * @param ImageShape $image
+     * @param WhatsappMediaShape $image
      */
-    public function withImage(Image|array $image): self
+    public function withImage(WhatsappMedia|array $image): self
     {
         $self = clone $this;
         $self['image'] = $image;
@@ -92,9 +90,9 @@ final class Header implements BaseModel
     }
 
     /**
-     * @param VideoShape $video
+     * @param WhatsappMediaShape $video
      */
-    public function withVideo(Video|array $video): self
+    public function withVideo(WhatsappMedia|array $video): self
     {
         $self = clone $this;
         $self['video'] = $video;
