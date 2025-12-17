@@ -45,7 +45,7 @@ final class Result1 implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ResultShape $result
+     * @param ResultShape|null $result
      */
     public static function with(
         ?string $insightID = null,

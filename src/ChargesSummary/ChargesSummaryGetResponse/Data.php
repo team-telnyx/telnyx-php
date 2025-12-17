@@ -104,8 +104,8 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SummaryShape $summary
-     * @param TotalShape $total
+     * @param Summary|SummaryShape $summary
+     * @param Total|TotalShape $total
      */
     public static function with(
         string $currency,
@@ -163,7 +163,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param SummaryShape $summary
+     * @param Summary|SummaryShape $summary
      */
     public function withSummary(Summary|array $summary): self
     {
@@ -174,7 +174,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param TotalShape $total
+     * @param Total|TotalShape $total
      */
     public function withTotal(Total|array $total): self
     {

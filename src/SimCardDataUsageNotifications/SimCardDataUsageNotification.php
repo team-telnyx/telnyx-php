@@ -71,7 +71,7 @@ final class SimCardDataUsageNotification implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ThresholdShape $threshold
+     * @param Threshold|ThresholdShape|null $threshold
      */
     public static function with(
         ?string $id = null,
@@ -137,7 +137,7 @@ final class SimCardDataUsageNotification implements BaseModel
     /**
      * Data usage threshold that will trigger the notification.
      *
-     * @param ThresholdShape $threshold
+     * @param Threshold|ThresholdShape $threshold
      */
     public function withThreshold(Threshold|array $threshold): self
     {

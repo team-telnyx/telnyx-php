@@ -47,7 +47,7 @@ final class InsightTemplateDetail implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param InsightTemplateShape $data
+     * @param InsightTemplate|InsightTemplateShape $data
      */
     public static function with(InsightTemplate|array $data): self
     {
@@ -59,7 +59,7 @@ final class InsightTemplateDetail implements BaseModel
     }
 
     /**
-     * @param InsightTemplateShape $data
+     * @param InsightTemplate|InsightTemplateShape $data
      */
     public function withData(InsightTemplate|array $data): self
     {

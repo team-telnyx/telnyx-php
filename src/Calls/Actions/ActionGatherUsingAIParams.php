@@ -35,16 +35,16 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type ActionGatherUsingAIParamsShape = array{
  *   parameters: array<string,mixed>,
- *   assistant?: AssistantShape|null,
+ *   assistant?: null|Assistant|AssistantShape,
  *   clientState?: string|null,
  *   commandID?: string|null,
  *   greeting?: string|null,
- *   interruptionSettings?: InterruptionSettingsShape|null,
+ *   interruptionSettings?: null|InterruptionSettings|InterruptionSettingsShape,
  *   language?: null|GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage>,
  *   messageHistory?: list<MessageHistoryShape>|null,
  *   sendMessageHistoryUpdates?: bool|null,
  *   sendPartialResults?: bool|null,
- *   transcription?: TranscriptionConfigShape|null,
+ *   transcription?: null|TranscriptionConfig|TranscriptionConfigShape,
  *   userResponseTimeoutMs?: int|null,
  *   voice?: string|null,
  *   voiceSettings?: VoiceSettingsShape|null,
@@ -177,12 +177,12 @@ final class ActionGatherUsingAIParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param array<string,mixed> $parameters
-     * @param AssistantShape $assistant
-     * @param InterruptionSettingsShape $interruptionSettings
-     * @param GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage> $language
-     * @param list<MessageHistoryShape> $messageHistory
-     * @param TranscriptionConfigShape $transcription
-     * @param VoiceSettingsShape $voiceSettings
+     * @param Assistant|AssistantShape|null $assistant
+     * @param InterruptionSettings|InterruptionSettingsShape|null $interruptionSettings
+     * @param GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage>|null $language
+     * @param list<MessageHistoryShape>|null $messageHistory
+     * @param TranscriptionConfig|TranscriptionConfigShape|null $transcription
+     * @param VoiceSettingsShape|null $voiceSettings
      */
     public static function with(
         array $parameters,
@@ -237,7 +237,7 @@ final class ActionGatherUsingAIParams implements BaseModel
     /**
      * Assistant configuration including choice of LLM, custom instructions, and tools.
      *
-     * @param AssistantShape $assistant
+     * @param Assistant|AssistantShape $assistant
      */
     public function withAssistant(Assistant|array $assistant): self
     {
@@ -283,7 +283,7 @@ final class ActionGatherUsingAIParams implements BaseModel
     /**
      * Settings for handling user interruptions during assistant speech.
      *
-     * @param InterruptionSettingsShape $interruptionSettings
+     * @param InterruptionSettings|InterruptionSettingsShape $interruptionSettings
      */
     public function withInterruptionSettings(
         InterruptionSettings|array $interruptionSettings
@@ -347,7 +347,7 @@ final class ActionGatherUsingAIParams implements BaseModel
     /**
      * The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
      *
-     * @param TranscriptionConfigShape $transcription
+     * @param TranscriptionConfig|TranscriptionConfigShape $transcription
      */
     public function withTranscription(
         TranscriptionConfig|array $transcription

@@ -60,7 +60,7 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MessagingShape $messaging
+     * @param Messaging|MessagingShape|null $messaging
      */
     public static function with(
         ?string $id = null,
@@ -103,7 +103,7 @@ final class Payload implements BaseModel
     /**
      * The messaging portability status of the porting order.
      *
-     * @param MessagingShape $messaging
+     * @param Messaging|MessagingShape $messaging
      */
     public function withMessaging(Messaging|array $messaging): self
     {

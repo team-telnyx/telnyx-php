@@ -68,8 +68,8 @@ final class SslCertificate implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param IssuedByShape $issuedBy
-     * @param IssuedToShape $issuedTo
+     * @param IssuedBy|IssuedByShape|null $issuedBy
+     * @param IssuedTo|IssuedToShape|null $issuedTo
      */
     public static function with(
         ?string $id = null,
@@ -114,7 +114,7 @@ final class SslCertificate implements BaseModel
     }
 
     /**
-     * @param IssuedByShape $issuedBy
+     * @param IssuedBy|IssuedByShape $issuedBy
      */
     public function withIssuedBy(IssuedBy|array $issuedBy): self
     {
@@ -125,7 +125,7 @@ final class SslCertificate implements BaseModel
     }
 
     /**
-     * @param IssuedToShape $issuedTo
+     * @param IssuedTo|IssuedToShape $issuedTo
      */
     public function withIssuedTo(IssuedTo|array $issuedTo): self
     {

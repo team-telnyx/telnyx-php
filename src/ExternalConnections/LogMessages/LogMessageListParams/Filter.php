@@ -46,7 +46,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param TelephoneNumberShape $telephoneNumber
+     * @param TelephoneNumber|TelephoneNumberShape|null $telephoneNumber
      */
     public static function with(
         ?string $externalConnectionID = null,
@@ -74,7 +74,7 @@ final class Filter implements BaseModel
     /**
      * Telephone number filter operations for log messages. Use 'eq' for exact matches or 'contains' for partial matches.
      *
-     * @param TelephoneNumberShape $telephoneNumber
+     * @param TelephoneNumber|TelephoneNumberShape $telephoneNumber
      */
     public function withTelephoneNumber(
         TelephoneNumber|array $telephoneNumber

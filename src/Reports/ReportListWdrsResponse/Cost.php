@@ -43,7 +43,7 @@ final class Cost implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Currency|value-of<Currency> $currency
+     * @param Currency|value-of<Currency>|null $currency
      */
     public static function with(
         ?string $amount = null,

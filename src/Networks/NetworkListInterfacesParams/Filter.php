@@ -53,7 +53,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param InterfaceStatus|value-of<InterfaceStatus> $status
+     * @param InterfaceStatus|value-of<InterfaceStatus>|null $status
      */
     public static function with(
         ?string $name = null,

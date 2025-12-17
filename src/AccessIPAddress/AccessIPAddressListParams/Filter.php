@@ -53,7 +53,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CreatedAtShape $createdAt
+     * @param CreatedAtShape|null $createdAt
      */
     public static function with(
         \DateTimeInterface|DateRangeFilter|array|null $createdAt = null,

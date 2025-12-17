@@ -33,7 +33,7 @@ final class SslCertificateNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SslCertificateShape $data
+     * @param SslCertificate|SslCertificateShape|null $data
      */
     public static function with(SslCertificate|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class SslCertificateNewResponse implements BaseModel
     }
 
     /**
-     * @param SslCertificateShape $data
+     * @param SslCertificate|SslCertificateShape $data
      */
     public function withData(SslCertificate|array $data): self
     {

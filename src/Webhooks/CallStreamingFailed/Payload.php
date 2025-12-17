@@ -96,8 +96,8 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param StreamParamsShape $streamParams
-     * @param StreamType|value-of<StreamType> $streamType
+     * @param StreamParams|StreamParamsShape|null $streamParams
+     * @param StreamType|value-of<StreamType>|null $streamType
      */
     public static function with(
         ?string $callControlID = null,
@@ -205,7 +205,7 @@ final class Payload implements BaseModel
     /**
      * Streaming parameters as they were originally given to the Call Control API.
      *
-     * @param StreamParamsShape $streamParams
+     * @param StreamParams|StreamParamsShape $streamParams
      */
     public function withStreamParams(StreamParams|array $streamParams): self
     {

@@ -77,8 +77,8 @@ final class Refer implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<TargetShape> $targets
-     * @param list<CustomHeaderShape> $customHeaders
-     * @param list<SipHeaderShape> $sipHeaders
+     * @param list<CustomHeaderShape>|null $customHeaders
+     * @param list<SipHeaderShape>|null $sipHeaders
      */
     public static function with(
         array $targets,

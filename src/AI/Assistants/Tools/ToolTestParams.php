@@ -70,8 +70,8 @@ final class ToolTestParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,mixed> $arguments
-     * @param array<string,mixed> $dynamicVariables
+     * @param array<string,mixed>|null $arguments
+     * @param array<string,mixed>|null $dynamicVariables
      */
     public static function with(
         string $assistantID,

@@ -142,7 +142,7 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CallingPartyType|value-of<CallingPartyType> $callingPartyType
+     * @param CallingPartyType|value-of<CallingPartyType>|null $callingPartyType
      */
     public static function with(
         ?string $assistantID = null,

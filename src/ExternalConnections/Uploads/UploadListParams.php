@@ -20,7 +20,7 @@ use Telnyx\ExternalConnections\Uploads\UploadListParams\Page;
  * @phpstan-import-type PageShape from \Telnyx\ExternalConnections\Uploads\UploadListParams\Page
  *
  * @phpstan-type UploadListParamsShape = array{
- *   filter?: FilterShape|null, page?: PageShape|null
+ *   filter?: null|Filter|FilterShape, page?: null|Page|PageShape
  * }
  */
 final class UploadListParams implements BaseModel
@@ -51,8 +51,8 @@ final class UploadListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
-     * @param PageShape $page
+     * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -69,7 +69,7 @@ final class UploadListParams implements BaseModel
     /**
      * Filter parameter for uploads (deepObject style). Supports filtering by status, civic_address_id, location_id, and phone_number with eq/contains operations.
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -82,7 +82,7 @@ final class UploadListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param PageShape $page
+     * @param Page|PageShape $page
      */
     public function withPage(Page|array $page): self
     {

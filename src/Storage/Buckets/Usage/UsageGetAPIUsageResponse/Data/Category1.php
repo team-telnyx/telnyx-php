@@ -65,7 +65,7 @@ final class Category1 implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Category|value-of<Category> $category
+     * @param Category|value-of<Category>|null $category
      */
     public static function with(
         ?int $bytesReceived = null,

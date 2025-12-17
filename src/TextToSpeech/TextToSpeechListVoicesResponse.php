@@ -35,7 +35,7 @@ final class TextToSpeechListVoicesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VoiceShape> $voices
+     * @param list<VoiceShape>|null $voices
      */
     public static function with(?array $voices = null): self
     {

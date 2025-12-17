@@ -105,10 +105,10 @@ final class PortingEventMessagingChangedPayload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AvailableNotificationMethod|value-of<AvailableNotificationMethod>> $availableNotificationMethods
-     * @param EventType|value-of<EventType> $eventType
-     * @param PayloadShape $payload
-     * @param PayloadStatus|value-of<PayloadStatus> $payloadStatus
+     * @param list<AvailableNotificationMethod|value-of<AvailableNotificationMethod>>|null $availableNotificationMethods
+     * @param EventType|value-of<EventType>|null $eventType
+     * @param Payload|PayloadShape|null $payload
+     * @param PayloadStatus|value-of<PayloadStatus>|null $payloadStatus
      */
     public static function with(
         ?string $id = null,
@@ -188,7 +188,7 @@ final class PortingEventMessagingChangedPayload implements BaseModel
     /**
      * The webhook payload for the porting_order.messaging_changed event.
      *
-     * @param PayloadShape $payload
+     * @param Payload|PayloadShape $payload
      */
     public function withPayload(Payload|array $payload): self
     {

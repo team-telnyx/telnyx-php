@@ -96,8 +96,8 @@ final class PurchaseCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Status|value-of<Status> $status
-     * @param list<string> $tags
+     * @param Status|value-of<Status>|null $status
+     * @param list<string>|null $tags
      */
     public static function with(
         int $amount,

@@ -19,7 +19,7 @@ use Telnyx\SimCardGroups\SimCardGroupCreateParams\DataLimit;
  * @phpstan-import-type DataLimitShape from \Telnyx\SimCardGroups\SimCardGroupCreateParams\DataLimit
  *
  * @phpstan-type SimCardGroupCreateParamsShape = array{
- *   name: string, dataLimit?: DataLimitShape|null
+ *   name: string, dataLimit?: null|DataLimit|DataLimitShape
  * }
  */
 final class SimCardGroupCreateParams implements BaseModel
@@ -64,7 +64,7 @@ final class SimCardGroupCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DataLimitShape $dataLimit
+     * @param DataLimit|DataLimitShape|null $dataLimit
      */
     public static function with(
         string $name,
@@ -93,7 +93,7 @@ final class SimCardGroupCreateParams implements BaseModel
     /**
      * Upper limit on the amount of data the SIM cards, within the group, can use.
      *
-     * @param DataLimitShape $dataLimit
+     * @param DataLimit|DataLimitShape $dataLimit
      */
     public function withDataLimit(DataLimit|array $dataLimit): self
     {

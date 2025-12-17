@@ -76,9 +76,9 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CoverageType|value-of<CoverageType> $coverageType
-     * @param NumberType|value-of<NumberType> $numberType
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
+     * @param CoverageType|value-of<CoverageType>|null $coverageType
+     * @param NumberType|value-of<NumberType>|null $numberType
+     * @param PhoneNumberType|value-of<PhoneNumberType>|null $phoneNumberType
      */
     public static function with(
         ?string $administrativeArea = null,

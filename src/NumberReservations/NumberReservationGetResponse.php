@@ -33,7 +33,7 @@ final class NumberReservationGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param NumberReservationShape $data
+     * @param NumberReservation|NumberReservationShape|null $data
      */
     public static function with(NumberReservation|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class NumberReservationGetResponse implements BaseModel
     }
 
     /**
-     * @param NumberReservationShape $data
+     * @param NumberReservation|NumberReservationShape $data
      */
     public function withData(NumberReservation|array $data): self
     {

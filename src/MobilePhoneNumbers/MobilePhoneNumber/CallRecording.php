@@ -49,8 +49,8 @@ final class CallRecording implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param InboundCallRecordingChannels|value-of<InboundCallRecordingChannels> $inboundCallRecordingChannels
-     * @param InboundCallRecordingFormat|value-of<InboundCallRecordingFormat> $inboundCallRecordingFormat
+     * @param InboundCallRecordingChannels|value-of<InboundCallRecordingChannels>|null $inboundCallRecordingChannels
+     * @param InboundCallRecordingFormat|value-of<InboundCallRecordingFormat>|null $inboundCallRecordingFormat
      */
     public static function with(
         InboundCallRecordingChannels|string|null $inboundCallRecordingChannels = null,

@@ -84,10 +84,10 @@ final class VerifyProfile implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CallShape $call
-     * @param FlashcallShape $flashcall
-     * @param RecordType|value-of<RecordType> $recordType
-     * @param SMSShape $sms
+     * @param Call|CallShape|null $call
+     * @param Flashcall|FlashcallShape|null $flashcall
+     * @param RecordType|value-of<RecordType>|null $recordType
+     * @param SMS|SMSShape|null $sms
      */
     public static function with(
         ?string $id = null,
@@ -128,7 +128,7 @@ final class VerifyProfile implements BaseModel
     }
 
     /**
-     * @param CallShape $call
+     * @param Call|CallShape $call
      */
     public function withCall(Call|array $call): self
     {
@@ -147,7 +147,7 @@ final class VerifyProfile implements BaseModel
     }
 
     /**
-     * @param FlashcallShape $flashcall
+     * @param Flashcall|FlashcallShape $flashcall
      */
     public function withFlashcall(Flashcall|array $flashcall): self
     {
@@ -187,7 +187,7 @@ final class VerifyProfile implements BaseModel
     }
 
     /**
-     * @param SMSShape $sms
+     * @param SMS|SMSShape $sms
      */
     public function withSMS(SMS|array $sms): self
     {

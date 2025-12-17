@@ -84,7 +84,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RequestedScopeShape> $requestedScopes
+     * @param list<RequestedScopeShape>|null $requestedScopes
      */
     public static function with(
         ?string $clientID = null,

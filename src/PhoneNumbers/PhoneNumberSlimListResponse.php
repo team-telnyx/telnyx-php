@@ -187,10 +187,10 @@ final class PhoneNumberSlimListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param EmergencyStatus|value-of<EmergencyStatus> $emergencyStatus
-     * @param InboundCallScreening|value-of<InboundCallScreening> $inboundCallScreening
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
-     * @param Status|value-of<Status> $status
+     * @param EmergencyStatus|value-of<EmergencyStatus>|null $emergencyStatus
+     * @param InboundCallScreening|value-of<InboundCallScreening>|null $inboundCallScreening
+     * @param PhoneNumberType|value-of<PhoneNumberType>|null $phoneNumberType
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,

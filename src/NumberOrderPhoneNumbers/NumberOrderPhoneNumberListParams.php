@@ -18,7 +18,7 @@ use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListParams\Filter;
  * @phpstan-import-type FilterShape from \Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListParams\Filter
  *
  * @phpstan-type NumberOrderPhoneNumberListParamsShape = array{
- *   filter?: FilterShape|null
+ *   filter?: null|Filter|FilterShape
  * }
  */
 final class NumberOrderPhoneNumberListParams implements BaseModel
@@ -43,7 +43,7 @@ final class NumberOrderPhoneNumberListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape|null $filter
      */
     public static function with(Filter|array|null $filter = null): self
     {
@@ -57,7 +57,7 @@ final class NumberOrderPhoneNumberListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[country_code].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

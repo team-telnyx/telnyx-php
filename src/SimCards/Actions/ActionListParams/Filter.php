@@ -63,8 +63,8 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ActionType|value-of<ActionType> $actionType
-     * @param Status|value-of<Status> $status
+     * @param ActionType|value-of<ActionType>|null $actionType
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ActionType|string|null $actionType = null,

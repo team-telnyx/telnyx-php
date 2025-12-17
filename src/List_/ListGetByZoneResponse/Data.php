@@ -47,7 +47,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<NumberShape> $numbers
+     * @param list<NumberShape>|null $numbers
      */
     public static function with(
         ?int $numberOfChannels = null,

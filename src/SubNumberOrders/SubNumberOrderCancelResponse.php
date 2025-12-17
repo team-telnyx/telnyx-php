@@ -33,7 +33,7 @@ final class SubNumberOrderCancelResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SubNumberOrderShape $data
+     * @param SubNumberOrder|SubNumberOrderShape|null $data
      */
     public static function with(SubNumberOrder|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class SubNumberOrderCancelResponse implements BaseModel
     }
 
     /**
-     * @param SubNumberOrderShape $data
+     * @param SubNumberOrder|SubNumberOrderShape $data
      */
     public function withData(SubNumberOrder|array $data): self
     {

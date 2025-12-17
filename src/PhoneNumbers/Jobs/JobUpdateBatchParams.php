@@ -22,7 +22,7 @@ use Telnyx\PhoneNumbers\Voice\UpdateVoiceSettings;
  *
  * @phpstan-type JobUpdateBatchParamsShape = array{
  *   phoneNumbers: list<string>,
- *   filter?: FilterShape|null,
+ *   filter?: null|Filter|FilterShape,
  *   billingGroupID?: string|null,
  *   connectionID?: string|null,
  *   customerReference?: string|null,
@@ -30,7 +30,7 @@ use Telnyx\PhoneNumbers\Voice\UpdateVoiceSettings;
  *   externalPin?: string|null,
  *   hdVoiceEnabled?: bool|null,
  *   tags?: list<string>|null,
- *   voice?: UpdateVoiceSettingsShape|null,
+ *   voice?: null|UpdateVoiceSettings|UpdateVoiceSettingsShape,
  * }
  */
 final class JobUpdateBatchParams implements BaseModel
@@ -125,9 +125,9 @@ final class JobUpdateBatchParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $phoneNumbers
-     * @param FilterShape $filter
-     * @param list<string> $tags
-     * @param UpdateVoiceSettingsShape $voice
+     * @param Filter|FilterShape|null $filter
+     * @param list<string>|null $tags
+     * @param UpdateVoiceSettings|UpdateVoiceSettingsShape|null $voice
      */
     public static function with(
         array $phoneNumbers,
@@ -174,7 +174,7 @@ final class JobUpdateBatchParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[has_bundle], filter[tag], filter[connection_id], filter[phone_number], filter[status], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -264,7 +264,7 @@ final class JobUpdateBatchParams implements BaseModel
     }
 
     /**
-     * @param UpdateVoiceSettingsShape $voice
+     * @param UpdateVoiceSettings|UpdateVoiceSettingsShape $voice
      */
     public function withVoice(UpdateVoiceSettings|array $voice): self
     {

@@ -54,7 +54,7 @@ final class ScheduledEventListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ConversationChannelType|value-of<ConversationChannelType> $conversationChannel
+     * @param ConversationChannelType|value-of<ConversationChannelType>|null $conversationChannel
      */
     public static function with(
         ConversationChannelType|string|null $conversationChannel = null,

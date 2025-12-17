@@ -71,10 +71,10 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $failed
-     * @param list<string> $pending
-     * @param RecordType|value-of<RecordType> $recordType
-     * @param list<string> $success
+     * @param list<string>|null $failed
+     * @param list<string>|null $pending
+     * @param RecordType|value-of<RecordType>|null $recordType
+     * @param list<string>|null $success
      */
     public static function with(
         ?array $failed = null,

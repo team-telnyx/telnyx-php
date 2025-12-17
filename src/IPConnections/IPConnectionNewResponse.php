@@ -33,7 +33,7 @@ final class IPConnectionNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param IPConnectionShape $data
+     * @param IPConnection|IPConnectionShape|null $data
      */
     public static function with(IPConnection|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class IPConnectionNewResponse implements BaseModel
     }
 
     /**
-     * @param IPConnectionShape $data
+     * @param IPConnection|IPConnectionShape $data
      */
     public function withData(IPConnection|array $data): self
     {

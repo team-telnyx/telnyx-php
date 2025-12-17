@@ -93,7 +93,7 @@ final class AdditionalDocumentListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DocumentType|value-of<DocumentType> $documentType
+     * @param DocumentType|value-of<DocumentType>|null $documentType
      */
     public static function with(
         ?string $id = null,

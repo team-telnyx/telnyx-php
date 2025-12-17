@@ -113,10 +113,10 @@ final class CallStreamsJsonParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BidirectionalCodec|value-of<BidirectionalCodec> $bidirectionalCodec
-     * @param BidirectionalMode|value-of<BidirectionalMode> $bidirectionalMode
-     * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $statusCallbackMethod
-     * @param Track|value-of<Track> $track
+     * @param BidirectionalCodec|value-of<BidirectionalCodec>|null $bidirectionalCodec
+     * @param BidirectionalMode|value-of<BidirectionalMode>|null $bidirectionalMode
+     * @param StatusCallbackMethod|value-of<StatusCallbackMethod>|null $statusCallbackMethod
+     * @param Track|value-of<Track>|null $track
      */
     public static function with(
         string $accountSid,

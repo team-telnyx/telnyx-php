@@ -33,7 +33,7 @@ final class NumberOrderPhoneNumberUpdateRequirementsResponse implements BaseMode
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param NumberOrderPhoneNumberShape $data
+     * @param NumberOrderPhoneNumber|NumberOrderPhoneNumberShape|null $data
      */
     public static function with(NumberOrderPhoneNumber|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class NumberOrderPhoneNumberUpdateRequirementsResponse implements BaseMode
     }
 
     /**
-     * @param NumberOrderPhoneNumberShape $data
+     * @param NumberOrderPhoneNumber|NumberOrderPhoneNumberShape $data
      */
     public function withData(NumberOrderPhoneNumber|array $data): self
     {

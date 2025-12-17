@@ -28,7 +28,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type ActionStartStreamingParamsShape = array{
  *   clientState?: string|null,
  *   commandID?: string|null,
- *   dialogflowConfig?: DialogflowConfigShape|null,
+ *   dialogflowConfig?: null|DialogflowConfig|DialogflowConfigShape,
  *   enableDialogflow?: bool|null,
  *   streamBidirectionalCodec?: null|StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
  *   streamBidirectionalMode?: null|StreamBidirectionalMode|value-of<StreamBidirectionalMode>,
@@ -139,13 +139,13 @@ final class ActionStartStreamingParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DialogflowConfigShape $dialogflowConfig
-     * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec> $streamBidirectionalCodec
-     * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode> $streamBidirectionalMode
-     * @param 8000|16000|22050|24000|48000 $streamBidirectionalSamplingRate
-     * @param StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs> $streamBidirectionalTargetLegs
-     * @param StreamCodec|value-of<StreamCodec> $streamCodec
-     * @param StreamTrack|value-of<StreamTrack> $streamTrack
+     * @param DialogflowConfig|DialogflowConfigShape|null $dialogflowConfig
+     * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>|null $streamBidirectionalCodec
+     * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode>|null $streamBidirectionalMode
+     * @param 8000|16000|22050|24000|48000|null $streamBidirectionalSamplingRate
+     * @param StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs>|null $streamBidirectionalTargetLegs
+     * @param StreamCodec|value-of<StreamCodec>|null $streamCodec
+     * @param StreamTrack|value-of<StreamTrack>|null $streamTrack
      */
     public static function with(
         ?string $clientState = null,
@@ -200,7 +200,7 @@ final class ActionStartStreamingParams implements BaseModel
     }
 
     /**
-     * @param DialogflowConfigShape $dialogflowConfig
+     * @param DialogflowConfig|DialogflowConfigShape $dialogflowConfig
      */
     public function withDialogflowConfig(
         DialogflowConfig|array $dialogflowConfig

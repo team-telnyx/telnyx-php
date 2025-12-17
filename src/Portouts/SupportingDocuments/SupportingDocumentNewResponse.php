@@ -35,7 +35,7 @@ final class SupportingDocumentNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DataShape> $data
+     * @param list<DataShape>|null $data
      */
     public static function with(?array $data = null): self
     {

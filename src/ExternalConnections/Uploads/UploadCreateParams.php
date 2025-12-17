@@ -84,8 +84,8 @@ final class UploadCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $numberIDs
-     * @param list<AdditionalUsage|value-of<AdditionalUsage>> $additionalUsages
-     * @param Usage|value-of<Usage> $usage
+     * @param list<AdditionalUsage|value-of<AdditionalUsage>>|null $additionalUsages
+     * @param Usage|value-of<Usage>|null $usage
      */
     public static function with(
         array $numberIDs,

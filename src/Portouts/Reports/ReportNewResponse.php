@@ -33,7 +33,7 @@ final class ReportNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortoutReportShape $data
+     * @param PortoutReport|PortoutReportShape|null $data
      */
     public static function with(PortoutReport|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class ReportNewResponse implements BaseModel
     }
 
     /**
-     * @param PortoutReportShape $data
+     * @param PortoutReport|PortoutReportShape $data
      */
     public function withData(PortoutReport|array $data): self
     {

@@ -33,7 +33,7 @@ final class DynamicEmergencyAddressGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DynamicEmergencyAddressShape $data
+     * @param DynamicEmergencyAddress|DynamicEmergencyAddressShape|null $data
      */
     public static function with(
         DynamicEmergencyAddress|array|null $data = null
@@ -46,7 +46,7 @@ final class DynamicEmergencyAddressGetResponse implements BaseModel
     }
 
     /**
-     * @param DynamicEmergencyAddressShape $data
+     * @param DynamicEmergencyAddress|DynamicEmergencyAddressShape $data
      */
     public function withData(DynamicEmergencyAddress|array $data): self
     {

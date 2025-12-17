@@ -69,7 +69,7 @@ final class CustomStorageCredentialNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CustomStorageConfigurationShape $data
+     * @param CustomStorageConfiguration|CustomStorageConfigurationShape $data
      * @param RecordType|value-of<RecordType> $recordType
      */
     public static function with(
@@ -98,7 +98,7 @@ final class CustomStorageCredentialNewResponse implements BaseModel
     }
 
     /**
-     * @param CustomStorageConfigurationShape $data
+     * @param CustomStorageConfiguration|CustomStorageConfigurationShape $data
      */
     public function withData(CustomStorageConfiguration|array $data): self
     {

@@ -42,8 +42,8 @@ final class RcsSuggestion implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ActionShape $action
-     * @param ReplyShape $reply
+     * @param Action|ActionShape|null $action
+     * @param Reply|ReplyShape|null $reply
      */
     public static function with(
         Action|array|null $action = null,
@@ -60,7 +60,7 @@ final class RcsSuggestion implements BaseModel
     /**
      * When tapped, initiates the corresponding native action on the device.
      *
-     * @param ActionShape $action
+     * @param Action|ActionShape $action
      */
     public function withAction(Action|array $action): self
     {
@@ -71,7 +71,7 @@ final class RcsSuggestion implements BaseModel
     }
 
     /**
-     * @param ReplyShape $reply
+     * @param Reply|ReplyShape $reply
      */
     public function withReply(Reply|array $reply): self
     {

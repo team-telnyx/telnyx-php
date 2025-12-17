@@ -189,14 +189,14 @@ final class MobilePhoneNumber implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CallForwardingShape $callForwarding
-     * @param CallRecordingShape $callRecording
-     * @param CnamListingShape $cnamListing
-     * @param InboundShape $inbound
+     * @param CallForwarding|CallForwardingShape|null $callForwarding
+     * @param CallRecording|CallRecordingShape|null $callRecording
+     * @param CnamListing|CnamListingShape|null $cnamListing
+     * @param Inbound|InboundShape|null $inbound
      * @param InboundCallScreening|value-of<InboundCallScreening>|null $inboundCallScreening
-     * @param NoiseSuppression|value-of<NoiseSuppression> $noiseSuppression
-     * @param OutboundShape $outbound
-     * @param list<string> $tags
+     * @param NoiseSuppression|value-of<NoiseSuppression>|null $noiseSuppression
+     * @param Outbound|OutboundShape|null $outbound
+     * @param list<string>|null $tags
      */
     public static function with(
         ?string $id = null,
@@ -262,7 +262,7 @@ final class MobilePhoneNumber implements BaseModel
     }
 
     /**
-     * @param CallForwardingShape $callForwarding
+     * @param CallForwarding|CallForwardingShape $callForwarding
      */
     public function withCallForwarding(
         CallForwarding|array $callForwarding
@@ -274,7 +274,7 @@ final class MobilePhoneNumber implements BaseModel
     }
 
     /**
-     * @param CallRecordingShape $callRecording
+     * @param CallRecording|CallRecordingShape $callRecording
      */
     public function withCallRecording(CallRecording|array $callRecording): self
     {
@@ -296,7 +296,7 @@ final class MobilePhoneNumber implements BaseModel
     }
 
     /**
-     * @param CnamListingShape $cnamListing
+     * @param CnamListing|CnamListingShape $cnamListing
      */
     public function withCnamListing(CnamListing|array $cnamListing): self
     {
@@ -373,7 +373,7 @@ final class MobilePhoneNumber implements BaseModel
     }
 
     /**
-     * @param InboundShape $inbound
+     * @param Inbound|InboundShape $inbound
      */
     public function withInbound(Inbound|array $inbound): self
     {
@@ -423,7 +423,7 @@ final class MobilePhoneNumber implements BaseModel
     }
 
     /**
-     * @param OutboundShape $outbound
+     * @param Outbound|OutboundShape $outbound
      */
     public function withOutbound(Outbound|array $outbound): self
     {

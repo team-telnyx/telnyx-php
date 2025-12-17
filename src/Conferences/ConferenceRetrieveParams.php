@@ -43,7 +43,7 @@ final class ConferenceRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Region|value-of<Region> $region
+     * @param Region|value-of<Region>|null $region
      */
     public static function with(Region|string|null $region = null): self
     {

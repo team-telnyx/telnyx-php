@@ -51,7 +51,7 @@ final class ToolTestResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DataShape $data
+     * @param Data|DataShape $data
      */
     public static function with(Data|array $data): self
     {
@@ -65,7 +65,7 @@ final class ToolTestResponse implements BaseModel
     /**
      * Response model for webhook tool test results.
      *
-     * @param DataShape $data
+     * @param Data|DataShape $data
      */
     public function withData(Data|array $data): self
     {

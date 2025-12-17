@@ -110,7 +110,7 @@ final class BillingBundleSummary implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $specs
+     * @param list<string>|null $specs
      */
     public static function with(
         string $id,

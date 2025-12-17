@@ -74,8 +74,8 @@ final class ActionListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterStatus|value-of<FilterStatus> $filterStatus
-     * @param FilterType|value-of<FilterType> $filterType
+     * @param FilterStatus|value-of<FilterStatus>|null $filterStatus
+     * @param FilterType|value-of<FilterType>|null $filterType
      */
     public static function with(
         ?string $filterSimCardGroupID = null,

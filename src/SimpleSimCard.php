@@ -180,13 +180,13 @@ final class SimpleSimCard implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string>|null $authorizedImeis
-     * @param CurrentBillingPeriodConsumedDataShape $currentBillingPeriodConsumedData
-     * @param DataLimitShape $dataLimit
+     * @param CurrentBillingPeriodConsumedData|CurrentBillingPeriodConsumedDataShape|null $currentBillingPeriodConsumedData
+     * @param DataLimit|DataLimitShape|null $dataLimit
      * @param EsimInstallationStatus|value-of<EsimInstallationStatus>|null $esimInstallationStatus
-     * @param list<array<string,mixed>> $resourcesWithInProgressActions
-     * @param SimCardStatusShape $status
-     * @param list<string> $tags
-     * @param Type|value-of<Type> $type
+     * @param list<array<string,mixed>>|null $resourcesWithInProgressActions
+     * @param SimCardStatus|SimCardStatusShape|null $status
+     * @param list<string>|null $tags
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         ?string $id = null,
@@ -283,7 +283,7 @@ final class SimpleSimCard implements BaseModel
     /**
      * The SIM card consumption so far in the current billing cycle.
      *
-     * @param CurrentBillingPeriodConsumedDataShape $currentBillingPeriodConsumedData
+     * @param CurrentBillingPeriodConsumedData|CurrentBillingPeriodConsumedDataShape $currentBillingPeriodConsumedData
      */
     public function withCurrentBillingPeriodConsumedData(
         CurrentBillingPeriodConsumedData|array $currentBillingPeriodConsumedData
@@ -297,7 +297,7 @@ final class SimpleSimCard implements BaseModel
     /**
      * The SIM card individual data limit configuration.
      *
-     * @param DataLimitShape $dataLimit
+     * @param DataLimit|DataLimitShape $dataLimit
      */
     public function withDataLimit(DataLimit|array $dataLimit): self
     {
@@ -401,7 +401,7 @@ final class SimpleSimCard implements BaseModel
     }
 
     /**
-     * @param SimCardStatusShape $status
+     * @param SimCardStatus|SimCardStatusShape $status
      */
     public function withStatus(SimCardStatus|array $status): self
     {

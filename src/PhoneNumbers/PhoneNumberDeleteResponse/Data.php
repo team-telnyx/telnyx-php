@@ -203,9 +203,9 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
-     * @param Status|value-of<Status> $status
-     * @param list<string> $tags
+     * @param PhoneNumberType|value-of<PhoneNumberType>|null $phoneNumberType
+     * @param Status|value-of<Status>|null $status
+     * @param list<string>|null $tags
      */
     public static function with(
         ?string $id = null,

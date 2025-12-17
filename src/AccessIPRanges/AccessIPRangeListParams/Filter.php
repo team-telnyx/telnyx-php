@@ -47,8 +47,8 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CidrBlockShape $cidrBlock
-     * @param CreatedAtShape $createdAt
+     * @param CidrBlockShape|null $cidrBlock
+     * @param CreatedAtShape|null $createdAt
      */
     public static function with(
         string|CidrBlockPatternFilter|array|null $cidrBlock = null,

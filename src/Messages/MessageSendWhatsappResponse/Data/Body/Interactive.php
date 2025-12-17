@@ -62,11 +62,11 @@ final class Interactive implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ActionShape $action
-     * @param BodyShape $body
-     * @param FooterShape $footer
-     * @param HeaderShape $header
-     * @param Type|value-of<Type> $type
+     * @param Action|ActionShape|null $action
+     * @param Body|BodyShape|null $body
+     * @param Footer|FooterShape|null $footer
+     * @param Header|HeaderShape|null $header
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         Action|array|null $action = null,
@@ -87,7 +87,7 @@ final class Interactive implements BaseModel
     }
 
     /**
-     * @param ActionShape $action
+     * @param Action|ActionShape $action
      */
     public function withAction(Action|array $action): self
     {
@@ -98,7 +98,7 @@ final class Interactive implements BaseModel
     }
 
     /**
-     * @param BodyShape $body
+     * @param Body|BodyShape $body
      */
     public function withBody(Body|array $body): self
     {
@@ -109,7 +109,7 @@ final class Interactive implements BaseModel
     }
 
     /**
-     * @param FooterShape $footer
+     * @param Footer|FooterShape $footer
      */
     public function withFooter(Footer|array $footer): self
     {
@@ -120,7 +120,7 @@ final class Interactive implements BaseModel
     }
 
     /**
-     * @param HeaderShape $header
+     * @param Header|HeaderShape $header
      */
     public function withHeader(Header|array $header): self
     {

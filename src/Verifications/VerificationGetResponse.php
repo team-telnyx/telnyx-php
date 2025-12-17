@@ -47,7 +47,7 @@ final class VerificationGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param VerificationShape $data
+     * @param Verification|VerificationShape $data
      */
     public static function with(Verification|array $data): self
     {
@@ -59,7 +59,7 @@ final class VerificationGetResponse implements BaseModel
     }
 
     /**
-     * @param VerificationShape $data
+     * @param Verification|VerificationShape $data
      */
     public function withData(Verification|array $data): self
     {

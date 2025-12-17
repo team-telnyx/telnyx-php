@@ -31,7 +31,7 @@ final class FaxNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FaxShape $data
+     * @param Fax|FaxShape|null $data
      */
     public static function with(Fax|array|null $data = null): self
     {
@@ -43,7 +43,7 @@ final class FaxNewResponse implements BaseModel
     }
 
     /**
-     * @param FaxShape $data
+     * @param Fax|FaxShape $data
      */
     public function withData(Fax|array $data): self
     {

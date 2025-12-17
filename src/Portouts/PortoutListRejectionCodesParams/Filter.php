@@ -39,7 +39,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CodeShape $code
+     * @param CodeShape|null $code
      */
     public static function with(int|array|null $code = null): self
     {

@@ -270,10 +270,10 @@ final class MessageDetailRecord implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Direction|value-of<Direction> $direction
-     * @param list<string> $errors
-     * @param MessageType|value-of<MessageType> $messageType
-     * @param Status|value-of<Status> $status
+     * @param Direction|value-of<Direction>|null $direction
+     * @param list<string>|null $errors
+     * @param MessageType|value-of<MessageType>|null $messageType
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         string $recordType = 'message_detail_record',

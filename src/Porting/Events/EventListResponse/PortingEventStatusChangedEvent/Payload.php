@@ -74,7 +74,7 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortingOrderStatusShape $status
+     * @param PortingOrderStatus|PortingOrderStatusShape|null $status
      */
     public static function with(
         ?string $id = null,
@@ -121,7 +121,7 @@ final class Payload implements BaseModel
     /**
      * Porting order status.
      *
-     * @param PortingOrderStatusShape $status
+     * @param PortingOrderStatus|PortingOrderStatusShape $status
      */
     public function withStatus(PortingOrderStatus|array $status): self
     {

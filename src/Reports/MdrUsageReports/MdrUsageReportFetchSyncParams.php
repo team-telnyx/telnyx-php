@@ -68,7 +68,7 @@ final class MdrUsageReportFetchSyncParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param AggregationType|value-of<AggregationType> $aggregationType
-     * @param list<string> $profiles
+     * @param list<string>|null $profiles
      */
     public static function with(
         AggregationType|string $aggregationType,

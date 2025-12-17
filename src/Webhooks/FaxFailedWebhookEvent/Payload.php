@@ -113,9 +113,9 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Direction|value-of<Direction> $direction
-     * @param FailureReason|value-of<FailureReason> $failureReason
-     * @param Status|value-of<Status> $status
+     * @param Direction|value-of<Direction>|null $direction
+     * @param FailureReason|value-of<FailureReason>|null $failureReason
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $clientState = null,

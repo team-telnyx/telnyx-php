@@ -53,9 +53,9 @@ final class QueryParameters implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,mixed> $properties
-     * @param list<string> $required
-     * @param Type|value-of<Type> $type
+     * @param array<string,mixed>|null $properties
+     * @param list<string>|null $required
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         ?array $properties = null,

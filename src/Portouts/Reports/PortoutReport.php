@@ -91,9 +91,9 @@ final class PortoutReport implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExportPortoutsCsvReportShape $params
-     * @param ReportType|value-of<ReportType> $reportType
-     * @param Status|value-of<Status> $status
+     * @param ExportPortoutsCsvReport|ExportPortoutsCsvReportShape|null $params
+     * @param ReportType|value-of<ReportType>|null $reportType
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,
@@ -155,7 +155,7 @@ final class PortoutReport implements BaseModel
     /**
      * The parameters for generating a port-outs CSV report.
      *
-     * @param ExportPortoutsCsvReportShape $params
+     * @param ExportPortoutsCsvReport|ExportPortoutsCsvReportShape $params
      */
     public function withParams(ExportPortoutsCsvReport|array $params): self
     {

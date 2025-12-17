@@ -53,7 +53,7 @@ final class CheckAvailabilityTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CheckAvailabilityShape $checkAvailability
+     * @param CheckAvailability|CheckAvailabilityShape $checkAvailability
      */
     public static function with(
         CheckAvailability|array $checkAvailability
@@ -66,7 +66,7 @@ final class CheckAvailabilityTool implements BaseModel
     }
 
     /**
-     * @param CheckAvailabilityShape $checkAvailability
+     * @param CheckAvailability|CheckAvailabilityShape $checkAvailability
      */
     public function withCheckAvailability(
         CheckAvailability|array $checkAvailability

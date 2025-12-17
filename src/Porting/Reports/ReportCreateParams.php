@@ -18,7 +18,7 @@ use Telnyx\Porting\Reports\ReportCreateParams\ReportType;
  * @phpstan-import-type ExportPortingOrdersCsvReportShape from \Telnyx\Porting\Reports\ExportPortingOrdersCsvReport
  *
  * @phpstan-type ReportCreateParamsShape = array{
- *   params: ExportPortingOrdersCsvReportShape,
+ *   params: ExportPortingOrdersCsvReport|ExportPortingOrdersCsvReportShape,
  *   reportType: ReportType|value-of<ReportType>,
  * }
  */
@@ -66,7 +66,7 @@ final class ReportCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExportPortingOrdersCsvReportShape $params
+     * @param ExportPortingOrdersCsvReport|ExportPortingOrdersCsvReportShape $params
      * @param ReportType|value-of<ReportType> $reportType
      */
     public static function with(
@@ -84,7 +84,7 @@ final class ReportCreateParams implements BaseModel
     /**
      * The parameters for generating a porting orders CSV report.
      *
-     * @param ExportPortingOrdersCsvReportShape $params
+     * @param ExportPortingOrdersCsvReport|ExportPortingOrdersCsvReportShape $params
      */
     public function withParams(ExportPortingOrdersCsvReport|array $params): self
     {

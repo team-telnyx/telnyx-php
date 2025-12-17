@@ -108,9 +108,9 @@ final class CredentialInbound implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AniNumberFormat|value-of<AniNumberFormat> $aniNumberFormat
-     * @param list<string> $codecs
-     * @param DnisNumberFormat|value-of<DnisNumberFormat> $dnisNumberFormat
+     * @param AniNumberFormat|value-of<AniNumberFormat>|null $aniNumberFormat
+     * @param list<string>|null $codecs
+     * @param DnisNumberFormat|value-of<DnisNumberFormat>|null $dnisNumberFormat
      */
     public static function with(
         AniNumberFormat|string|null $aniNumberFormat = null,

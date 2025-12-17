@@ -33,7 +33,7 @@ final class Event implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param EventType|value-of<EventType> $eventType
+     * @param EventType|value-of<EventType>|null $eventType
      */
     public static function with(EventType|string|null $eventType = null): self
     {

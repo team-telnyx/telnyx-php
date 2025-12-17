@@ -74,7 +74,7 @@ final class NotificationChannel implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ChannelTypeID|value-of<ChannelTypeID> $channelTypeID
+     * @param ChannelTypeID|value-of<ChannelTypeID>|null $channelTypeID
      */
     public static function with(
         ?string $id = null,

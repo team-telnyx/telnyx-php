@@ -33,7 +33,7 @@ final class CustomerServiceRecordNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CustomerServiceRecordShape $data
+     * @param CustomerServiceRecord|CustomerServiceRecordShape|null $data
      */
     public static function with(CustomerServiceRecord|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class CustomerServiceRecordNewResponse implements BaseModel
     }
 
     /**
-     * @param CustomerServiceRecordShape $data
+     * @param CustomerServiceRecord|CustomerServiceRecordShape $data
      */
     public function withData(CustomerServiceRecord|array $data): self
     {

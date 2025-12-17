@@ -55,8 +55,8 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<FoundShape> $found
-     * @param list<string> $notFound
+     * @param list<FoundShape>|null $found
+     * @param list<string>|null $notFound
      */
     public static function with(
         ?array $found = null,

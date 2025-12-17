@@ -36,7 +36,7 @@ final class NumberLookupGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param TelcoDataUsageReportResponseShape $data
+     * @param TelcoDataUsageReportResponse|TelcoDataUsageReportResponseShape|null $data
      */
     public static function with(
         TelcoDataUsageReportResponse|array|null $data = null
@@ -51,7 +51,7 @@ final class NumberLookupGetResponse implements BaseModel
     /**
      * Telco data usage report response.
      *
-     * @param TelcoDataUsageReportResponseShape $data
+     * @param TelcoDataUsageReportResponse|TelcoDataUsageReportResponseShape $data
      */
     public function withData(TelcoDataUsageReportResponse|array $data): self
     {

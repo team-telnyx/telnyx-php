@@ -90,7 +90,7 @@ final class AccountGetRecordingsJsonResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TexmlGetCallRecordingResponseBodyShape> $recordings
+     * @param list<TexmlGetCallRecordingResponseBodyShape>|null $recordings
      */
     public static function with(
         ?int $end = null,

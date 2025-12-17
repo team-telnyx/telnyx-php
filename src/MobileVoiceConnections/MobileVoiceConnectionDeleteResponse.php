@@ -33,7 +33,7 @@ final class MobileVoiceConnectionDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MobileVoiceConnectionShape $data
+     * @param MobileVoiceConnection|MobileVoiceConnectionShape|null $data
      */
     public static function with(MobileVoiceConnection|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class MobileVoiceConnectionDeleteResponse implements BaseModel
     }
 
     /**
-     * @param MobileVoiceConnectionShape $data
+     * @param MobileVoiceConnection|MobileVoiceConnectionShape $data
      */
     public function withData(MobileVoiceConnection|array $data): self
     {

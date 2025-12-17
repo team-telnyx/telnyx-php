@@ -33,7 +33,7 @@ final class AddressDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AddressShape $data
+     * @param Address|AddressShape|null $data
      */
     public static function with(Address|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class AddressDeleteResponse implements BaseModel
     }
 
     /**
-     * @param AddressShape $data
+     * @param Address|AddressShape $data
      */
     public function withData(Address|array $data): self
     {

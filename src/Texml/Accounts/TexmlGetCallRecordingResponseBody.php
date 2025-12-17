@@ -111,10 +111,10 @@ final class TexmlGetCallRecordingResponseBody implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param 1|2 $channels
-     * @param Source|value-of<Source> $source
-     * @param Status|value-of<Status> $status
-     * @param TexmlRecordingSubresourcesUrisShape $subresourcesUris
+     * @param 1|2|null $channels
+     * @param Source|value-of<Source>|null $source
+     * @param Status|value-of<Status>|null $status
+     * @param TexmlRecordingSubresourcesUris|TexmlRecordingSubresourcesUrisShape|null $subresourcesUris
      */
     public static function with(
         ?string $accountSid = null,
@@ -278,7 +278,7 @@ final class TexmlGetCallRecordingResponseBody implements BaseModel
     /**
      * Subresources details for a recording if available.
      *
-     * @param TexmlRecordingSubresourcesUrisShape $subresourcesUris
+     * @param TexmlRecordingSubresourcesUris|TexmlRecordingSubresourcesUrisShape $subresourcesUris
      */
     public function withSubresourcesUris(
         TexmlRecordingSubresourcesUris|array $subresourcesUris

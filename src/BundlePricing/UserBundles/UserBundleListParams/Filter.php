@@ -46,8 +46,8 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $countryISO
-     * @param list<string> $resource
+     * @param list<string>|null $countryISO
+     * @param list<string>|null $resource
      */
     public static function with(
         ?array $countryISO = null,

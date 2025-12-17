@@ -95,8 +95,8 @@ final class NotificationSetting implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ParameterShape> $parameters
-     * @param Status|value-of<Status> $status
+     * @param list<ParameterShape>|null $parameters
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,

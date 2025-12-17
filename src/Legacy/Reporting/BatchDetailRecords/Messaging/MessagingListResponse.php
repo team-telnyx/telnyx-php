@@ -39,8 +39,8 @@ final class MessagingListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<MdrDetailReportResponseShape> $data
-     * @param BatchCsvPaginationMetaShape $meta
+     * @param list<MdrDetailReportResponseShape>|null $data
+     * @param BatchCsvPaginationMeta|BatchCsvPaginationMetaShape|null $meta
      */
     public static function with(
         ?array $data = null,
@@ -66,7 +66,7 @@ final class MessagingListResponse implements BaseModel
     }
 
     /**
-     * @param BatchCsvPaginationMetaShape $meta
+     * @param BatchCsvPaginationMeta|BatchCsvPaginationMetaShape $meta
      */
     public function withMeta(BatchCsvPaginationMeta|array $meta): self
     {

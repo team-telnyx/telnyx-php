@@ -65,8 +65,8 @@ final class Webhook implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,mixed> $payload
-     * @param RecordType|value-of<RecordType> $recordType
+     * @param array<string,mixed>|null $payload
+     * @param RecordType|value-of<RecordType>|null $recordType
      */
     public static function with(
         ?string $id = null,

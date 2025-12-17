@@ -33,7 +33,7 @@ final class UserAddressGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param UserAddressShape $data
+     * @param UserAddress|UserAddressShape|null $data
      */
     public static function with(UserAddress|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class UserAddressGetResponse implements BaseModel
     }
 
     /**
-     * @param UserAddressShape $data
+     * @param UserAddress|UserAddressShape $data
      */
     public function withData(UserAddress|array $data): self
     {

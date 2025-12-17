@@ -17,7 +17,7 @@ use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageParams\Filter;
  *
  * @phpstan-import-type FilterShape from \Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageParams\Filter
  *
- * @phpstan-type UsageGetAPIUsageParamsShape = array{filter: FilterShape}
+ * @phpstan-type UsageGetAPIUsageParamsShape = array{filter: Filter|FilterShape}
  */
 final class UsageGetAPIUsageParams implements BaseModel
 {
@@ -55,7 +55,7 @@ final class UsageGetAPIUsageParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public static function with(Filter|array $filter): self
     {
@@ -69,7 +69,7 @@ final class UsageGetAPIUsageParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[start_time], filter[end_time].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

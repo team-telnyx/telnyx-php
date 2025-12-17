@@ -33,7 +33,7 @@ final class ActionEnableEmergencyResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PhoneNumberWithVoiceSettingsShape $data
+     * @param PhoneNumberWithVoiceSettings|PhoneNumberWithVoiceSettingsShape|null $data
      */
     public static function with(
         PhoneNumberWithVoiceSettings|array|null $data = null
@@ -46,7 +46,7 @@ final class ActionEnableEmergencyResponse implements BaseModel
     }
 
     /**
-     * @param PhoneNumberWithVoiceSettingsShape $data
+     * @param PhoneNumberWithVoiceSettings|PhoneNumberWithVoiceSettingsShape $data
      */
     public function withData(PhoneNumberWithVoiceSettings|array $data): self
     {

@@ -22,7 +22,9 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Sort;
  * @phpstan-import-type SortShape from \Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Sort
  *
  * @phpstan-type PhoneNumberBlockListParamsShape = array{
- *   filter?: FilterShape|null, page?: PageShape|null, sort?: SortShape|null
+ *   filter?: null|Filter|FilterShape,
+ *   page?: null|Page|PageShape,
+ *   sort?: null|Sort|SortShape,
  * }
  */
 final class PhoneNumberBlockListParams implements BaseModel
@@ -59,9 +61,9 @@ final class PhoneNumberBlockListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
-     * @param PageShape $page
-     * @param SortShape $sort
+     * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
+     * @param Sort|SortShape|null $sort
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -80,7 +82,7 @@ final class PhoneNumberBlockListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[porting_order_id], filter[support_key], filter[status], filter[phone_number], filter[activation_status], filter[portability_status].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -93,7 +95,7 @@ final class PhoneNumberBlockListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param PageShape $page
+     * @param Page|PageShape $page
      */
     public function withPage(Page|array $page): self
     {
@@ -106,7 +108,7 @@ final class PhoneNumberBlockListParams implements BaseModel
     /**
      * Consolidated sort parameter (deepObject style). Originally: sort[value].
      *
-     * @param SortShape $sort
+     * @param Sort|SortShape $sort
      */
     public function withSort(Sort|array $sort): self
     {

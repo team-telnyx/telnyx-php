@@ -39,8 +39,8 @@ final class ActionConfirmResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortingOrderShape $data
-     * @param MetaShape $meta
+     * @param PortingOrder|PortingOrderShape|null $data
+     * @param Meta|MetaShape|null $meta
      */
     public static function with(
         PortingOrder|array|null $data = null,
@@ -55,7 +55,7 @@ final class ActionConfirmResponse implements BaseModel
     }
 
     /**
-     * @param PortingOrderShape $data
+     * @param PortingOrder|PortingOrderShape $data
      */
     public function withData(PortingOrder|array $data): self
     {
@@ -66,7 +66,7 @@ final class ActionConfirmResponse implements BaseModel
     }
 
     /**
-     * @param MetaShape $meta
+     * @param Meta|MetaShape $meta
      */
     public function withMeta(Meta|array $meta): self
     {

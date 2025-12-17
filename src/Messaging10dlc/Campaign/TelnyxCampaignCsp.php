@@ -421,8 +421,8 @@ final class TelnyxCampaignCsp implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $subUsecases
-     * @param CampaignStatus|value-of<CampaignStatus> $campaignStatus
-     * @param SubmissionStatus|value-of<SubmissionStatus> $submissionStatus
+     * @param CampaignStatus|value-of<CampaignStatus>|null $campaignStatus
+     * @param SubmissionStatus|value-of<SubmissionStatus>|null $submissionStatus
      */
     public static function with(
         string $brandID,

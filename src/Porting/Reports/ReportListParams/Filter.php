@@ -49,8 +49,8 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ReportType|value-of<ReportType> $reportType
-     * @param Status|value-of<Status> $status
+     * @param ReportType|value-of<ReportType>|null $reportType
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ReportType|string|null $reportType = null,

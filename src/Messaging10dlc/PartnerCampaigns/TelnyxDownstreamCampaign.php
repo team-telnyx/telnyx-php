@@ -308,8 +308,8 @@ final class TelnyxDownstreamCampaign implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CampaignStatus|value-of<CampaignStatus> $campaignStatus
-     * @param list<string> $subUsecases
+     * @param CampaignStatus|value-of<CampaignStatus>|null $campaignStatus
+     * @param list<string>|null $subUsecases
      */
     public static function with(
         string $tcrBrandID,

@@ -188,9 +188,9 @@ final class OAuthClient implements BaseModel
      *
      * @param ClientType|value-of<ClientType> $clientType
      * @param RecordType|value-of<RecordType> $recordType
-     * @param list<AllowedGrantType|value-of<AllowedGrantType>> $allowedGrantTypes
-     * @param list<string> $allowedScopes
-     * @param list<string> $redirectUris
+     * @param list<AllowedGrantType|value-of<AllowedGrantType>>|null $allowedGrantTypes
+     * @param list<string>|null $allowedScopes
+     * @param list<string>|null $redirectUris
      */
     public static function with(
         string $clientID,

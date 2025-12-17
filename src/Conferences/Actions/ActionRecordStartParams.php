@@ -104,8 +104,8 @@ final class ActionRecordStartParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Format|value-of<Format> $format
-     * @param Region|value-of<Region> $region
-     * @param Trim|value-of<Trim> $trim
+     * @param Region|value-of<Region>|null $region
+     * @param Trim|value-of<Trim>|null $trim
      */
     public static function with(
         Format|string $format,

@@ -18,7 +18,7 @@ use Telnyx\IntegrationSecrets\IntegrationSecretListParams\Filter;
  * @phpstan-import-type FilterShape from \Telnyx\IntegrationSecrets\IntegrationSecretListParams\Filter
  *
  * @phpstan-type IntegrationSecretListParamsShape = array{
- *   filter?: FilterShape|null, pageNumber?: int|null, pageSize?: int|null
+ *   filter?: null|Filter|FilterShape, pageNumber?: int|null, pageSize?: int|null
  * }
  */
 final class IntegrationSecretListParams implements BaseModel
@@ -49,7 +49,7 @@ final class IntegrationSecretListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape|null $filter
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -68,7 +68,7 @@ final class IntegrationSecretListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[type].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

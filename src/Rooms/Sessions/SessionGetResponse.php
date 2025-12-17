@@ -34,7 +34,7 @@ final class SessionGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RoomSessionShape $data
+     * @param RoomSession|RoomSessionShape|null $data
      */
     public static function with(RoomSession|array|null $data = null): self
     {
@@ -46,7 +46,7 @@ final class SessionGetResponse implements BaseModel
     }
 
     /**
-     * @param RoomSessionShape $data
+     * @param RoomSession|RoomSessionShape $data
      */
     public function withData(RoomSession|array $data): self
     {

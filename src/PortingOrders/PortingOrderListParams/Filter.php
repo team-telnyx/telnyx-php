@@ -75,10 +75,10 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ActivationSettingsShape $activationSettings
-     * @param EndUserShape $endUser
-     * @param MiscShape $misc
-     * @param PhoneNumbersShape $phoneNumbers
+     * @param ActivationSettings|ActivationSettingsShape|null $activationSettings
+     * @param EndUser|EndUserShape|null $endUser
+     * @param Misc|MiscShape|null $misc
+     * @param PhoneNumbers|PhoneNumbersShape|null $phoneNumbers
      */
     public static function with(
         ActivationSettings|array|null $activationSettings = null,
@@ -103,7 +103,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param ActivationSettingsShape $activationSettings
+     * @param ActivationSettings|ActivationSettingsShape $activationSettings
      */
     public function withActivationSettings(
         ActivationSettings|array $activationSettings
@@ -138,7 +138,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param EndUserShape $endUser
+     * @param EndUser|EndUserShape $endUser
      */
     public function withEndUser(EndUser|array $endUser): self
     {
@@ -149,7 +149,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param MiscShape $misc
+     * @param Misc|MiscShape $misc
      */
     public function withMisc(Misc|array $misc): self
     {
@@ -171,7 +171,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param PhoneNumbersShape $phoneNumbers
+     * @param PhoneNumbers|PhoneNumbersShape $phoneNumbers
      */
     public function withPhoneNumbers(PhoneNumbers|array $phoneNumbers): self
     {

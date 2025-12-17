@@ -94,8 +94,8 @@ final class ActionStartSiprecParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SipTransport|value-of<SipTransport> $sipTransport
-     * @param SiprecTrack|value-of<SiprecTrack> $siprecTrack
+     * @param SipTransport|value-of<SipTransport>|null $sipTransport
+     * @param SiprecTrack|value-of<SiprecTrack>|null $siprecTrack
      */
     public static function with(
         ?string $clientState = null,

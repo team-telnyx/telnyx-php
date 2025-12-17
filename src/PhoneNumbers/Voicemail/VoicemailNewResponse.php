@@ -33,7 +33,7 @@ final class VoicemailNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param VoicemailPrefResponseShape $data
+     * @param VoicemailPrefResponse|VoicemailPrefResponseShape|null $data
      */
     public static function with(VoicemailPrefResponse|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class VoicemailNewResponse implements BaseModel
     }
 
     /**
-     * @param VoicemailPrefResponseShape $data
+     * @param VoicemailPrefResponse|VoicemailPrefResponseShape $data
      */
     public function withData(VoicemailPrefResponse|array $data): self
     {

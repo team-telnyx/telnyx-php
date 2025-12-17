@@ -109,7 +109,7 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param ResponseType|value-of<ResponseType> $responseType
-     * @param CodeChallengeMethod|value-of<CodeChallengeMethod> $codeChallengeMethod
+     * @param CodeChallengeMethod|value-of<CodeChallengeMethod>|null $codeChallengeMethod
      */
     public static function with(
         string $clientID,

@@ -33,7 +33,7 @@ final class VerifyProfileData implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param VerifyProfileShape $data
+     * @param VerifyProfile|VerifyProfileShape|null $data
      */
     public static function with(VerifyProfile|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class VerifyProfileData implements BaseModel
     }
 
     /**
-     * @param VerifyProfileShape $data
+     * @param VerifyProfile|VerifyProfileShape $data
      */
     public function withData(VerifyProfile|array $data): self
     {

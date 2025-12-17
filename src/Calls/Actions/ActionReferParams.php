@@ -112,8 +112,8 @@ final class ActionReferParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<CustomSipHeaderShape> $customHeaders
-     * @param list<SipHeaderShape> $sipHeaders
+     * @param list<CustomSipHeaderShape>|null $customHeaders
+     * @param list<SipHeaderShape>|null $sipHeaders
      */
     public static function with(
         string $sipAddress,

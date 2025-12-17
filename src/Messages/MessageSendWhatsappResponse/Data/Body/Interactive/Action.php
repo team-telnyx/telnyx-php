@@ -75,10 +75,10 @@ final class Action implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ButtonShape> $buttons
-     * @param list<CardShape> $cards
-     * @param ParametersShape $parameters
-     * @param list<SectionShape> $sections
+     * @param list<ButtonShape>|null $buttons
+     * @param list<CardShape>|null $cards
+     * @param Parameters|ParametersShape|null $parameters
+     * @param list<SectionShape>|null $sections
      */
     public static function with(
         ?string $button = null,
@@ -161,7 +161,7 @@ final class Action implements BaseModel
     }
 
     /**
-     * @param ParametersShape $parameters
+     * @param Parameters|ParametersShape $parameters
      */
     public function withParameters(Parameters|array $parameters): self
     {

@@ -40,8 +40,8 @@ final class MigrationSourceListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<MigrationSourceParamsShape> $data
-     * @param PaginationMetaSimpleShape $meta
+     * @param list<MigrationSourceParamsShape>|null $data
+     * @param PaginationMetaSimple|PaginationMetaSimpleShape|null $meta
      */
     public static function with(
         ?array $data = null,
@@ -67,7 +67,7 @@ final class MigrationSourceListResponse implements BaseModel
     }
 
     /**
-     * @param PaginationMetaSimpleShape $meta
+     * @param PaginationMetaSimple|PaginationMetaSimpleShape $meta
      */
     public function withMeta(PaginationMetaSimple|array $meta): self
     {

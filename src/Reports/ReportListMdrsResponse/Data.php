@@ -124,9 +124,9 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Currency|value-of<Currency> $currency
-     * @param MessageType|value-of<MessageType> $messageType
-     * @param Status|value-of<Status> $status
+     * @param Currency|value-of<Currency>|null $currency
+     * @param MessageType|value-of<MessageType>|null $messageType
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,

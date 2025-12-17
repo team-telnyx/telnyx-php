@@ -44,8 +44,8 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $numberTags
-     * @param list<string> $outboundProfileTags
+     * @param list<string>|null $numberTags
+     * @param list<string>|null $outboundProfileTags
      */
     public static function with(
         ?array $numberTags = null,

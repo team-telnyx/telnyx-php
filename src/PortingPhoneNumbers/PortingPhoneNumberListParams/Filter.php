@@ -39,7 +39,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortingOrderStatus|value-of<PortingOrderStatus> $portingOrderStatus
+     * @param PortingOrderStatus|value-of<PortingOrderStatus>|null $portingOrderStatus
      */
     public static function with(
         PortingOrderStatus|string|null $portingOrderStatus = null

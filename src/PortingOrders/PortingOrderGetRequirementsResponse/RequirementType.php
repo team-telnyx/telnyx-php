@@ -73,7 +73,7 @@ final class RequirementType implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,mixed> $acceptanceCriteria
+     * @param array<string,mixed>|null $acceptanceCriteria
      */
     public static function with(
         ?string $id = null,

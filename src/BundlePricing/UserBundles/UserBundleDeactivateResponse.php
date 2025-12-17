@@ -47,7 +47,7 @@ final class UserBundleDeactivateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param UserBundleShape $data
+     * @param UserBundle|UserBundleShape $data
      */
     public static function with(UserBundle|array $data): self
     {
@@ -59,7 +59,7 @@ final class UserBundleDeactivateResponse implements BaseModel
     }
 
     /**
-     * @param UserBundleShape $data
+     * @param UserBundle|UserBundleShape $data
      */
     public function withData(UserBundle|array $data): self
     {

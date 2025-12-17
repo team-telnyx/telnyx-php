@@ -33,7 +33,7 @@ final class OutboundVoiceProfileDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param OutboundVoiceProfileShape $data
+     * @param OutboundVoiceProfile|OutboundVoiceProfileShape|null $data
      */
     public static function with(OutboundVoiceProfile|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class OutboundVoiceProfileDeleteResponse implements BaseModel
     }
 
     /**
-     * @param OutboundVoiceProfileShape $data
+     * @param OutboundVoiceProfile|OutboundVoiceProfileShape $data
      */
     public function withData(OutboundVoiceProfile|array $data): self
     {

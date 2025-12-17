@@ -80,8 +80,8 @@ final class ActionStartTranscriptionParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine
-     * @param TranscriptionEngineConfigShape $transcriptionEngineConfig
+     * @param TranscriptionEngine|value-of<TranscriptionEngine>|null $transcriptionEngine
+     * @param TranscriptionEngineConfigShape|null $transcriptionEngineConfig
      */
     public static function with(
         ?string $clientState = null,

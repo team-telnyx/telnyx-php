@@ -61,9 +61,9 @@ final class FaxSendingStartedWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param EventType|value-of<EventType> $eventType
-     * @param PayloadShape $payload
-     * @param RecordType|value-of<RecordType> $recordType
+     * @param EventType|value-of<EventType>|null $eventType
+     * @param Payload|PayloadShape|null $payload
+     * @param RecordType|value-of<RecordType>|null $recordType
      */
     public static function with(
         ?string $id = null,
@@ -106,7 +106,7 @@ final class FaxSendingStartedWebhookEvent implements BaseModel
     }
 
     /**
-     * @param PayloadShape $payload
+     * @param Payload|PayloadShape $payload
      */
     public function withPayload(Payload|array $payload): self
     {

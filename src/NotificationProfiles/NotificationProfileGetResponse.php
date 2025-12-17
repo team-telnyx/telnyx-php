@@ -36,7 +36,7 @@ final class NotificationProfileGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param NotificationProfileShape $data
+     * @param NotificationProfile|NotificationProfileShape|null $data
      */
     public static function with(NotificationProfile|array|null $data = null): self
     {
@@ -50,7 +50,7 @@ final class NotificationProfileGetResponse implements BaseModel
     /**
      * A Collection of Notification Channels.
      *
-     * @param NotificationProfileShape $data
+     * @param NotificationProfile|NotificationProfileShape $data
      */
     public function withData(NotificationProfile|array $data): self
     {

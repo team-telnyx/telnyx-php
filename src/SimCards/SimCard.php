@@ -246,16 +246,16 @@ final class SimCard implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string>|null $authorizedImeis
-     * @param CurrentBillingPeriodConsumedDataShape $currentBillingPeriodConsumedData
-     * @param CurrentDeviceLocationShape $currentDeviceLocation
-     * @param DataLimitShape $dataLimit
+     * @param CurrentBillingPeriodConsumedData|CurrentBillingPeriodConsumedDataShape|null $currentBillingPeriodConsumedData
+     * @param CurrentDeviceLocation|CurrentDeviceLocationShape|null $currentDeviceLocation
+     * @param DataLimit|DataLimitShape|null $dataLimit
      * @param EsimInstallationStatus|value-of<EsimInstallationStatus>|null $esimInstallationStatus
-     * @param LiveDataSession|value-of<LiveDataSession> $liveDataSession
-     * @param PinPukCodesShape $pinPukCodes
-     * @param list<array<string,mixed>> $resourcesWithInProgressActions
-     * @param SimCardStatusShape $status
-     * @param list<string> $tags
-     * @param Type|value-of<Type> $type
+     * @param LiveDataSession|value-of<LiveDataSession>|null $liveDataSession
+     * @param PinPukCodes|PinPukCodesShape|null $pinPukCodes
+     * @param list<array<string,mixed>>|null $resourcesWithInProgressActions
+     * @param SimCardStatus|SimCardStatusShape|null $status
+     * @param list<string>|null $tags
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         ?string $id = null,
@@ -368,7 +368,7 @@ final class SimCard implements BaseModel
     /**
      * The SIM card consumption so far in the current billing cycle.
      *
-     * @param CurrentBillingPeriodConsumedDataShape $currentBillingPeriodConsumedData
+     * @param CurrentBillingPeriodConsumedData|CurrentBillingPeriodConsumedDataShape $currentBillingPeriodConsumedData
      */
     public function withCurrentBillingPeriodConsumedData(
         CurrentBillingPeriodConsumedData|array $currentBillingPeriodConsumedData
@@ -382,7 +382,7 @@ final class SimCard implements BaseModel
     /**
      * Current physical location data of a given SIM card. Accuracy is given in meters.
      *
-     * @param CurrentDeviceLocationShape $currentDeviceLocation
+     * @param CurrentDeviceLocation|CurrentDeviceLocationShape $currentDeviceLocation
      */
     public function withCurrentDeviceLocation(
         CurrentDeviceLocation|array $currentDeviceLocation
@@ -431,7 +431,7 @@ final class SimCard implements BaseModel
     /**
      * The SIM card individual data limit configuration.
      *
-     * @param DataLimitShape $dataLimit
+     * @param DataLimit|DataLimitShape $dataLimit
      */
     public function withDataLimit(DataLimit|array $dataLimit): self
     {
@@ -540,7 +540,7 @@ final class SimCard implements BaseModel
     /**
      * PIN and PUK codes for the SIM card. Only available when include_pin_puk_codes=true is set in the request.
      *
-     * @param PinPukCodesShape $pinPukCodes
+     * @param PinPukCodes|PinPukCodesShape $pinPukCodes
      */
     public function withPinPukCodes(PinPukCodes|array $pinPukCodes): self
     {
@@ -584,7 +584,7 @@ final class SimCard implements BaseModel
     }
 
     /**
-     * @param SimCardStatusShape $status
+     * @param SimCardStatus|SimCardStatusShape $status
      */
     public function withStatus(SimCardStatus|array $status): self
     {

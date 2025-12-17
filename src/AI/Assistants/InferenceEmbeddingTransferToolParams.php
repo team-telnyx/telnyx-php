@@ -80,7 +80,7 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<TargetShape> $targets
-     * @param list<CustomHeaderShape> $customHeaders
+     * @param list<CustomHeaderShape>|null $customHeaders
      */
     public static function with(
         string $from,

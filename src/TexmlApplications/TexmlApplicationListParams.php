@@ -21,8 +21,8 @@ use Telnyx\TexmlApplications\TexmlApplicationListParams\Sort;
  * @phpstan-import-type PageShape from \Telnyx\TexmlApplications\TexmlApplicationListParams\Page
  *
  * @phpstan-type TexmlApplicationListParamsShape = array{
- *   filter?: FilterShape|null,
- *   page?: PageShape|null,
+ *   filter?: null|Filter|FilterShape,
+ *   page?: null|Page|PageShape,
  *   sort?: null|Sort|value-of<Sort>,
  * }
  */
@@ -73,9 +73,9 @@ final class TexmlApplicationListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
-     * @param PageShape $page
-     * @param Sort|value-of<Sort> $sort
+     * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
+     * @param Sort|value-of<Sort>|null $sort
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -94,7 +94,7 @@ final class TexmlApplicationListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[outbound_voice_profile_id], filter[friendly_name].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -107,7 +107,7 @@ final class TexmlApplicationListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param PageShape $page
+     * @param Page|PageShape $page
      */
     public function withPage(Page|array $page): self
     {

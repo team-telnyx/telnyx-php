@@ -53,7 +53,7 @@ final class Retrieval implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param InferenceEmbeddingBucketIDsShape $retrieval
+     * @param InferenceEmbeddingBucketIDs|InferenceEmbeddingBucketIDsShape $retrieval
      */
     public static function with(
         InferenceEmbeddingBucketIDs|array $retrieval
@@ -66,7 +66,7 @@ final class Retrieval implements BaseModel
     }
 
     /**
-     * @param InferenceEmbeddingBucketIDsShape $retrieval
+     * @param InferenceEmbeddingBucketIDs|InferenceEmbeddingBucketIDsShape $retrieval
      */
     public function withRetrieval(
         InferenceEmbeddingBucketIDs|array $retrieval

@@ -82,7 +82,7 @@ final class RequestListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param TfVerificationStatus|value-of<TfVerificationStatus> $status
+     * @param TfVerificationStatus|value-of<TfVerificationStatus>|null $status
      */
     public static function with(
         int $page,

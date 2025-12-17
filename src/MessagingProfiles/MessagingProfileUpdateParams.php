@@ -27,8 +27,8 @@ use Telnyx\MessagingProfiles\MessagingProfileUpdateParams\WebhookAPIVersion;
  *   mmsTranscoding?: bool|null,
  *   mobileOnly?: bool|null,
  *   name?: string|null,
- *   numberPoolSettings?: NumberPoolSettingsShape|null,
- *   urlShortenerSettings?: URLShortenerSettingsShape|null,
+ *   numberPoolSettings?: null|NumberPoolSettings|NumberPoolSettingsShape,
+ *   urlShortenerSettings?: null|URLShortenerSettings|URLShortenerSettingsShape,
  *   v1Secret?: string|null,
  *   webhookAPIVersion?: null|WebhookAPIVersion|value-of<WebhookAPIVersion>,
  *   webhookFailoverURL?: string|null,
@@ -158,10 +158,10 @@ final class MessagingProfileUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param NumberPoolSettingsShape|null $numberPoolSettings
-     * @param URLShortenerSettingsShape|null $urlShortenerSettings
-     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion
-     * @param list<string> $whitelistedDestinations
+     * @param NumberPoolSettings|NumberPoolSettingsShape|null $numberPoolSettings
+     * @param URLShortenerSettings|URLShortenerSettingsShape|null $urlShortenerSettings
+     * @param WebhookAPIVersion|value-of<WebhookAPIVersion>|null $webhookAPIVersion
+     * @param list<string>|null $whitelistedDestinations
      */
     public static function with(
         ?string $alphaSender = null,
@@ -297,7 +297,7 @@ final class MessagingProfileUpdateParams implements BaseModel
      *
      * To disable this feature, set the object field to `null`.
      *
-     * @param NumberPoolSettingsShape|null $numberPoolSettings
+     * @param NumberPoolSettings|NumberPoolSettingsShape|null $numberPoolSettings
      */
     public function withNumberPoolSettings(
         NumberPoolSettings|array|null $numberPoolSettings
@@ -317,7 +317,7 @@ final class MessagingProfileUpdateParams implements BaseModel
      *
      * To disable this feature, set the object field to `null`.
      *
-     * @param URLShortenerSettingsShape|null $urlShortenerSettings
+     * @param URLShortenerSettings|URLShortenerSettingsShape|null $urlShortenerSettings
      */
     public function withURLShortenerSettings(
         URLShortenerSettings|array|null $urlShortenerSettings

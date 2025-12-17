@@ -33,7 +33,7 @@ final class ConferenceGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ConferenceShape $data
+     * @param Conference|ConferenceShape|null $data
      */
     public static function with(Conference|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class ConferenceGetResponse implements BaseModel
     }
 
     /**
-     * @param ConferenceShape $data
+     * @param Conference|ConferenceShape $data
      */
     public function withData(Conference|array $data): self
     {

@@ -50,7 +50,7 @@ final class SipReferTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ReferShape $refer
+     * @param Refer|ReferShape $refer
      */
     public static function with(Refer|array $refer): self
     {
@@ -62,7 +62,7 @@ final class SipReferTool implements BaseModel
     }
 
     /**
-     * @param ReferShape $refer
+     * @param Refer|ReferShape $refer
      */
     public function withRefer(Refer|array $refer): self
     {

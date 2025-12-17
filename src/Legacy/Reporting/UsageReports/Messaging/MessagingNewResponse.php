@@ -36,7 +36,7 @@ final class MessagingNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MdrUsageReportResponseLegacyShape $data
+     * @param MdrUsageReportResponseLegacy|MdrUsageReportResponseLegacyShape|null $data
      */
     public static function with(
         MdrUsageReportResponseLegacy|array|null $data = null
@@ -51,7 +51,7 @@ final class MessagingNewResponse implements BaseModel
     /**
      * Legacy V2 MDR usage report response.
      *
-     * @param MdrUsageReportResponseLegacyShape $data
+     * @param MdrUsageReportResponseLegacy|MdrUsageReportResponseLegacyShape $data
      */
     public function withData(MdrUsageReportResponseLegacy|array $data): self
     {

@@ -34,7 +34,7 @@ final class PortingOrderNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PortingOrderShape> $data
+     * @param list<PortingOrderShape>|null $data
      */
     public static function with(?array $data = null): self
     {

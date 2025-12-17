@@ -34,7 +34,7 @@ final class RequirementTypeGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DocReqsRequirementTypeShape $data
+     * @param DocReqsRequirementType|DocReqsRequirementTypeShape|null $data
      */
     public static function with(DocReqsRequirementType|array|null $data = null): self
     {
@@ -46,7 +46,7 @@ final class RequirementTypeGetResponse implements BaseModel
     }
 
     /**
-     * @param DocReqsRequirementTypeShape $data
+     * @param DocReqsRequirementType|DocReqsRequirementTypeShape $data
      */
     public function withData(DocReqsRequirementType|array $data): self
     {

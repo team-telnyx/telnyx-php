@@ -354,19 +354,19 @@ final class CallCallsParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AsyncAmdStatusCallbackMethod|value-of<AsyncAmdStatusCallbackMethod> $asyncAmdStatusCallbackMethod
-     * @param list<CustomHeaderShape> $customHeaders
-     * @param DetectionMode|value-of<DetectionMode> $detectionMode
-     * @param MachineDetection|value-of<MachineDetection> $machineDetection
-     * @param RecordingChannels|value-of<RecordingChannels> $recordingChannels
-     * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod> $recordingStatusCallbackMethod
-     * @param RecordingTrack|value-of<RecordingTrack> $recordingTrack
-     * @param SipRegion|value-of<SipRegion> $sipRegion
-     * @param StatusCallbackEvent|value-of<StatusCallbackEvent> $statusCallbackEvent
-     * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $statusCallbackMethod
-     * @param SupervisingRole|value-of<SupervisingRole> $supervisingRole
-     * @param Trim|value-of<Trim> $trim
-     * @param URLMethod|value-of<URLMethod> $urlMethod
+     * @param AsyncAmdStatusCallbackMethod|value-of<AsyncAmdStatusCallbackMethod>|null $asyncAmdStatusCallbackMethod
+     * @param list<CustomHeaderShape>|null $customHeaders
+     * @param DetectionMode|value-of<DetectionMode>|null $detectionMode
+     * @param MachineDetection|value-of<MachineDetection>|null $machineDetection
+     * @param RecordingChannels|value-of<RecordingChannels>|null $recordingChannels
+     * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod>|null $recordingStatusCallbackMethod
+     * @param RecordingTrack|value-of<RecordingTrack>|null $recordingTrack
+     * @param SipRegion|value-of<SipRegion>|null $sipRegion
+     * @param StatusCallbackEvent|value-of<StatusCallbackEvent>|null $statusCallbackEvent
+     * @param StatusCallbackMethod|value-of<StatusCallbackMethod>|null $statusCallbackMethod
+     * @param SupervisingRole|value-of<SupervisingRole>|null $supervisingRole
+     * @param Trim|value-of<Trim>|null $trim
+     * @param URLMethod|value-of<URLMethod>|null $urlMethod
      */
     public static function with(
         string $applicationSid,

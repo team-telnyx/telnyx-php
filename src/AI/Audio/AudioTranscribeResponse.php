@@ -66,7 +66,7 @@ final class AudioTranscribeResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SegmentShape> $segments
+     * @param list<SegmentShape>|null $segments
      */
     public static function with(
         string $text,

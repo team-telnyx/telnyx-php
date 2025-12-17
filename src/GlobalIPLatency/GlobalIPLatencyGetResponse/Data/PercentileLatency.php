@@ -70,13 +70,13 @@ final class PercentileLatency implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param P0Shape $p0
-     * @param P100Shape $p100
-     * @param P25Shape $p25
-     * @param P50Shape $p50
-     * @param P75Shape $p75
-     * @param P90Shape $p90
-     * @param P99Shape $p99
+     * @param P0|P0Shape|null $p0
+     * @param P100|P100Shape|null $p100
+     * @param P25|P25Shape|null $p25
+     * @param P50|P50Shape|null $p50
+     * @param P75|P75Shape|null $p75
+     * @param P90|P90Shape|null $p90
+     * @param P99|P99Shape|null $p99
      */
     public static function with(
         P0|array|null $p0 = null,
@@ -101,7 +101,7 @@ final class PercentileLatency implements BaseModel
     }
 
     /**
-     * @param P0Shape $p0
+     * @param P0|P0Shape $p0
      */
     public function withP0(P0|array $p0): self
     {
@@ -112,7 +112,7 @@ final class PercentileLatency implements BaseModel
     }
 
     /**
-     * @param P100Shape $p100
+     * @param P100|P100Shape $p100
      */
     public function withP100(P100|array $p100): self
     {
@@ -123,7 +123,7 @@ final class PercentileLatency implements BaseModel
     }
 
     /**
-     * @param P25Shape $p25
+     * @param P25|P25Shape $p25
      */
     public function withP25(P25|array $p25): self
     {
@@ -134,7 +134,7 @@ final class PercentileLatency implements BaseModel
     }
 
     /**
-     * @param P50Shape $p50
+     * @param P50|P50Shape $p50
      */
     public function withP50(P50|array $p50): self
     {
@@ -145,7 +145,7 @@ final class PercentileLatency implements BaseModel
     }
 
     /**
-     * @param P75Shape $p75
+     * @param P75|P75Shape $p75
      */
     public function withP75(P75|array $p75): self
     {
@@ -156,7 +156,7 @@ final class PercentileLatency implements BaseModel
     }
 
     /**
-     * @param P90Shape $p90
+     * @param P90|P90Shape $p90
      */
     public function withP90(P90|array $p90): self
     {
@@ -167,7 +167,7 @@ final class PercentileLatency implements BaseModel
     }
 
     /**
-     * @param P99Shape $p99
+     * @param P99|P99Shape $p99
      */
     public function withP99(P99|array $p99): self
     {

@@ -40,8 +40,8 @@ final class InventoryCoverageListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DataShape> $data
-     * @param MetaShape $meta
+     * @param list<DataShape>|null $data
+     * @param Meta|MetaShape|null $meta
      */
     public static function with(
         ?array $data = null,
@@ -67,7 +67,7 @@ final class InventoryCoverageListResponse implements BaseModel
     }
 
     /**
-     * @param MetaShape $meta
+     * @param Meta|MetaShape $meta
      */
     public function withMeta(Meta|array $meta): self
     {

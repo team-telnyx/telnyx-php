@@ -18,7 +18,7 @@ use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filte
  * @phpstan-import-type FilterShape from \Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filter
  *
  * @phpstan-type GlobalIPAssignmentHealthRetrieveParamsShape = array{
- *   filter?: FilterShape|null
+ *   filter?: null|Filter|FilterShape
  * }
  */
 final class GlobalIPAssignmentHealthRetrieveParams implements BaseModel
@@ -43,7 +43,7 @@ final class GlobalIPAssignmentHealthRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape|null $filter
      */
     public static function with(Filter|array|null $filter = null): self
     {
@@ -57,7 +57,7 @@ final class GlobalIPAssignmentHealthRetrieveParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in], filter[global_ip_assignment_id][in].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

@@ -89,9 +89,9 @@ final class ConversationAddMessageParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,MetadataShape> $metadata
-     * @param list<array<string,mixed>> $toolCalls
-     * @param ToolChoiceShape $toolChoice
+     * @param array<string,MetadataShape>|null $metadata
+     * @param list<array<string,mixed>>|null $toolCalls
+     * @param ToolChoiceShape|null $toolChoice
      */
     public static function with(
         string $role,

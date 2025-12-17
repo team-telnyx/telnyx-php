@@ -33,7 +33,7 @@ final class NumberOrderNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param NumberOrderWithPhoneNumbersShape $data
+     * @param NumberOrderWithPhoneNumbers|NumberOrderWithPhoneNumbersShape|null $data
      */
     public static function with(
         NumberOrderWithPhoneNumbers|array|null $data = null
@@ -46,7 +46,7 @@ final class NumberOrderNewResponse implements BaseModel
     }
 
     /**
-     * @param NumberOrderWithPhoneNumbersShape $data
+     * @param NumberOrderWithPhoneNumbers|NumberOrderWithPhoneNumbersShape $data
      */
     public function withData(NumberOrderWithPhoneNumbers|array $data): self
     {

@@ -67,11 +67,11 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AttemptsShape $attempts
-     * @param FinishedAtShape $finishedAt
-     * @param StartedAtShape $startedAt
-     * @param StatusShape $status
-     * @param WebhookShape $webhook
+     * @param Attempts|AttemptsShape|null $attempts
+     * @param FinishedAt|FinishedAtShape|null $finishedAt
+     * @param StartedAt|StartedAtShape|null $startedAt
+     * @param Status|StatusShape|null $status
+     * @param Webhook|WebhookShape|null $webhook
      */
     public static function with(
         Attempts|array|null $attempts = null,
@@ -94,7 +94,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param AttemptsShape $attempts
+     * @param Attempts|AttemptsShape $attempts
      */
     public function withAttempts(Attempts|array $attempts): self
     {
@@ -116,7 +116,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param FinishedAtShape $finishedAt
+     * @param FinishedAt|FinishedAtShape $finishedAt
      */
     public function withFinishedAt(FinishedAt|array $finishedAt): self
     {
@@ -127,7 +127,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param StartedAtShape $startedAt
+     * @param StartedAt|StartedAtShape $startedAt
      */
     public function withStartedAt(StartedAt|array $startedAt): self
     {
@@ -138,7 +138,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param StatusShape $status
+     * @param Status|StatusShape $status
      */
     public function withStatus(Status|array $status): self
     {
@@ -149,7 +149,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param WebhookShape $webhook
+     * @param Webhook|WebhookShape $webhook
      */
     public function withWebhook(Webhook|array $webhook): self
     {

@@ -32,7 +32,7 @@ final class EndUser implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AdminShape $admin
+     * @param Admin|AdminShape|null $admin
      */
     public static function with(Admin|array|null $admin = null): self
     {
@@ -44,7 +44,7 @@ final class EndUser implements BaseModel
     }
 
     /**
-     * @param AdminShape $admin
+     * @param Admin|AdminShape $admin
      */
     public function withAdmin(Admin|array $admin): self
     {

@@ -31,7 +31,7 @@ final class FqdnUpdateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FqdnShape $data
+     * @param Fqdn|FqdnShape|null $data
      */
     public static function with(Fqdn|array|null $data = null): self
     {
@@ -43,7 +43,7 @@ final class FqdnUpdateResponse implements BaseModel
     }
 
     /**
-     * @param FqdnShape $data
+     * @param Fqdn|FqdnShape $data
      */
     public function withData(Fqdn|array $data): self
     {

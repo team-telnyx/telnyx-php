@@ -18,7 +18,7 @@ use Telnyx\Seti\SetiRetrieveBlackBoxTestResultsParams\Filter;
  * @phpstan-import-type FilterShape from \Telnyx\Seti\SetiRetrieveBlackBoxTestResultsParams\Filter
  *
  * @phpstan-type SetiRetrieveBlackBoxTestResultsParamsShape = array{
- *   filter?: FilterShape|null
+ *   filter?: null|Filter|FilterShape
  * }
  */
 final class SetiRetrieveBlackBoxTestResultsParams implements BaseModel
@@ -43,7 +43,7 @@ final class SetiRetrieveBlackBoxTestResultsParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape|null $filter
      */
     public static function with(Filter|array|null $filter = null): self
     {
@@ -57,7 +57,7 @@ final class SetiRetrieveBlackBoxTestResultsParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[product].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

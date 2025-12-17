@@ -18,7 +18,7 @@ use Telnyx\DetailRecords\DetailRecordListParams\Filter;
  * @phpstan-import-type FilterShape from \Telnyx\DetailRecords\DetailRecordListParams\Filter
  *
  * @phpstan-type DetailRecordListParamsShape = array{
- *   filter?: FilterShape|null,
+ *   filter?: null|Filter|FilterShape,
  *   pageNumber?: int|null,
  *   pageSize?: int|null,
  *   sort?: list<string>|null,
@@ -60,8 +60,8 @@ final class DetailRecordListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
-     * @param list<string> $sort
+     * @param Filter|FilterShape|null $filter
+     * @param list<string>|null $sort
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -82,7 +82,7 @@ final class DetailRecordListParams implements BaseModel
     /**
      * Filter records on a given record attribute and value. <br/>Example: filter[status]=delivered. <br/>Required: filter[record_type] must be specified.
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

@@ -62,8 +62,8 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Status|value-of<Status>> $status
-     * @param list<string> $tags
+     * @param list<Status|value-of<Status>>|null $status
+     * @param list<string>|null $tags
      */
     public static function with(
         ?string $iccid = null,

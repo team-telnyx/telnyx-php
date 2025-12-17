@@ -190,9 +190,9 @@ final class ActionStartRecordingParams implements BaseModel
      *
      * @param Channels|value-of<Channels> $channels
      * @param Format|value-of<Format> $format
-     * @param RecordingTrack|value-of<RecordingTrack> $recordingTrack
-     * @param TranscriptionLanguage|value-of<TranscriptionLanguage> $transcriptionLanguage
-     * @param Trim|value-of<Trim> $trim
+     * @param RecordingTrack|value-of<RecordingTrack>|null $recordingTrack
+     * @param TranscriptionLanguage|value-of<TranscriptionLanguage>|null $transcriptionLanguage
+     * @param Trim|value-of<Trim>|null $trim
      */
     public static function with(
         Channels|string $channels,

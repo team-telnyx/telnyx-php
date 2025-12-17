@@ -84,7 +84,7 @@ final class Settings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param IdpCertFingerprintAlgorithm|value-of<IdpCertFingerprintAlgorithm> $idpCertFingerprintAlgorithm
+     * @param IdpCertFingerprintAlgorithm|value-of<IdpCertFingerprintAlgorithm>|null $idpCertFingerprintAlgorithm
      */
     public static function with(
         ?string $assertionConsumerServiceURL = null,

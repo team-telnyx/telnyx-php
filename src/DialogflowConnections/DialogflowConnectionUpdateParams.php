@@ -89,7 +89,7 @@ final class DialogflowConnectionUpdateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param array<string,mixed> $serviceAccount
-     * @param DialogflowAPI|value-of<DialogflowAPI> $dialogflowAPI
+     * @param DialogflowAPI|value-of<DialogflowAPI>|null $dialogflowAPI
      */
     public static function with(
         array $serviceAccount,

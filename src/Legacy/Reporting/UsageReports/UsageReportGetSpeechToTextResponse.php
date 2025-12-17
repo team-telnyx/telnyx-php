@@ -32,7 +32,7 @@ final class UsageReportGetSpeechToTextResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,mixed> $data
+     * @param array<string,mixed>|null $data
      */
     public static function with(?array $data = null): self
     {

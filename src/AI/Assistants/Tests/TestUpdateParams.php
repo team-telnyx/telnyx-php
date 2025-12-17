@@ -99,8 +99,8 @@ final class TestUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RubricShape> $rubric
-     * @param TelnyxConversationChannel|value-of<TelnyxConversationChannel> $telnyxConversationChannel
+     * @param list<RubricShape>|null $rubric
+     * @param TelnyxConversationChannel|value-of<TelnyxConversationChannel>|null $telnyxConversationChannel
      */
     public static function with(
         ?string $description = null,

@@ -119,9 +119,9 @@ final class ConferenceGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ReasonConferenceEnded|value-of<ReasonConferenceEnded> $reasonConferenceEnded
-     * @param Status|value-of<Status> $status
-     * @param array<string,mixed> $subresourceUris
+     * @param ReasonConferenceEnded|value-of<ReasonConferenceEnded>|null $reasonConferenceEnded
+     * @param Status|value-of<Status>|null $status
+     * @param array<string,mixed>|null $subresourceUris
      */
     public static function with(
         ?string $accountSid = null,

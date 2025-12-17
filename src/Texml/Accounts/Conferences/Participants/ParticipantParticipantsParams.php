@@ -424,19 +424,19 @@ final class ParticipantParticipantsParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AmdStatusCallbackMethod|value-of<AmdStatusCallbackMethod> $amdStatusCallbackMethod
-     * @param Beep|value-of<Beep> $beep
-     * @param ConferenceRecord|value-of<ConferenceRecord> $conferenceRecord
-     * @param ConferenceRecordingStatusCallbackMethod|value-of<ConferenceRecordingStatusCallbackMethod> $conferenceRecordingStatusCallbackMethod
-     * @param ConferenceStatusCallbackMethod|value-of<ConferenceStatusCallbackMethod> $conferenceStatusCallbackMethod
-     * @param ConferenceTrim|value-of<ConferenceTrim> $conferenceTrim
-     * @param list<CustomHeaderShape> $customHeaders
-     * @param MachineDetection|value-of<MachineDetection> $machineDetection
-     * @param RecordingChannels|value-of<RecordingChannels> $recordingChannels
-     * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod> $recordingStatusCallbackMethod
-     * @param RecordingTrack|value-of<RecordingTrack> $recordingTrack
-     * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $statusCallbackMethod
-     * @param Trim|value-of<Trim> $trim
+     * @param AmdStatusCallbackMethod|value-of<AmdStatusCallbackMethod>|null $amdStatusCallbackMethod
+     * @param Beep|value-of<Beep>|null $beep
+     * @param ConferenceRecord|value-of<ConferenceRecord>|null $conferenceRecord
+     * @param ConferenceRecordingStatusCallbackMethod|value-of<ConferenceRecordingStatusCallbackMethod>|null $conferenceRecordingStatusCallbackMethod
+     * @param ConferenceStatusCallbackMethod|value-of<ConferenceStatusCallbackMethod>|null $conferenceStatusCallbackMethod
+     * @param ConferenceTrim|value-of<ConferenceTrim>|null $conferenceTrim
+     * @param list<CustomHeaderShape>|null $customHeaders
+     * @param MachineDetection|value-of<MachineDetection>|null $machineDetection
+     * @param RecordingChannels|value-of<RecordingChannels>|null $recordingChannels
+     * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod>|null $recordingStatusCallbackMethod
+     * @param RecordingTrack|value-of<RecordingTrack>|null $recordingTrack
+     * @param StatusCallbackMethod|value-of<StatusCallbackMethod>|null $statusCallbackMethod
+     * @param Trim|value-of<Trim>|null $trim
      */
     public static function with(
         string $accountSid,

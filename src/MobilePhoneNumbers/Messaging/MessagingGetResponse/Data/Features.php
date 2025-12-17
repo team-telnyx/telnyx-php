@@ -39,7 +39,7 @@ final class Features implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MessagingFeatureSetShape|null $sms
+     * @param MessagingFeatureSet|MessagingFeatureSetShape|null $sms
      */
     public static function with(
         MessagingFeatureSet|array|null $sms = null
@@ -56,7 +56,7 @@ final class Features implements BaseModel
      * can vary depending on the characteristics the phone number, as well as its current
      * product configuration.
      *
-     * @param MessagingFeatureSetShape|null $sms
+     * @param MessagingFeatureSet|MessagingFeatureSetShape|null $sms
      */
     public function withSMS(MessagingFeatureSet|array|null $sms): self
     {

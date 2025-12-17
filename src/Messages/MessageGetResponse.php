@@ -13,9 +13,7 @@ use Telnyx\Messages\MessageGetResponse\Data;
 /**
  * @phpstan-import-type DataShape from \Telnyx\Messages\MessageGetResponse\Data
  *
- * @phpstan-type MessageGetResponseShape = array{
- *   data?: null|DataShape|OutboundMessagePayload|InboundMessagePayload
- * }
+ * @phpstan-type MessageGetResponseShape = array{data?: DataShape|null}
  */
 final class MessageGetResponse implements BaseModel
 {
@@ -35,7 +33,7 @@ final class MessageGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DataShape $data
+     * @param DataShape|null $data
      */
     public static function with(
         OutboundMessagePayload|array|InboundMessagePayload|null $data = null

@@ -17,7 +17,9 @@ use Telnyx\NotificationEvents\NotificationEventListParams\Page;
  *
  * @phpstan-import-type PageShape from \Telnyx\NotificationEvents\NotificationEventListParams\Page
  *
- * @phpstan-type NotificationEventListParamsShape = array{page?: PageShape|null}
+ * @phpstan-type NotificationEventListParamsShape = array{
+ *   page?: null|Page|PageShape
+ * }
  */
 final class NotificationEventListParams implements BaseModel
 {
@@ -41,7 +43,7 @@ final class NotificationEventListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PageShape $page
+     * @param Page|PageShape|null $page
      */
     public static function with(Page|array|null $page = null): self
     {
@@ -55,7 +57,7 @@ final class NotificationEventListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      *
-     * @param PageShape $page
+     * @param Page|PageShape $page
      */
     public function withPage(Page|array $page): self
     {

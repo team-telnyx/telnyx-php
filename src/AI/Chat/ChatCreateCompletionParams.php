@@ -41,7 +41,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   model?: string|null,
  *   n?: float|null,
  *   presencePenalty?: float|null,
- *   responseFormat?: ResponseFormatShape|null,
+ *   responseFormat?: null|ResponseFormat|ResponseFormatShape,
  *   stream?: bool|null,
  *   temperature?: float|null,
  *   toolChoice?: null|ToolChoice|value-of<ToolChoice>,
@@ -226,11 +226,11 @@ final class ChatCreateCompletionParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<MessageShape> $messages
-     * @param list<string> $guidedChoice
-     * @param array<string,mixed> $guidedJson
-     * @param ResponseFormatShape $responseFormat
-     * @param ToolChoice|value-of<ToolChoice> $toolChoice
-     * @param list<ToolShape> $tools
+     * @param list<string>|null $guidedChoice
+     * @param array<string,mixed>|null $guidedJson
+     * @param ResponseFormat|ResponseFormatShape|null $responseFormat
+     * @param ToolChoice|value-of<ToolChoice>|null $toolChoice
+     * @param list<ToolShape>|null $tools
      */
     public static function with(
         array $messages,
@@ -461,7 +461,7 @@ final class ChatCreateCompletionParams implements BaseModel
     /**
      * Use this is you want to guarantee a JSON output without defining a schema. For control over the schema, use `guided_json`.
      *
-     * @param ResponseFormatShape $responseFormat
+     * @param ResponseFormat|ResponseFormatShape $responseFormat
      */
     public function withResponseFormat(
         ResponseFormat|array $responseFormat

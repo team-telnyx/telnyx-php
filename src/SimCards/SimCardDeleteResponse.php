@@ -33,7 +33,7 @@ final class SimCardDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SimCardShape $data
+     * @param SimCard|SimCardShape|null $data
      */
     public static function with(SimCard|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class SimCardDeleteResponse implements BaseModel
     }
 
     /**
-     * @param SimCardShape $data
+     * @param SimCard|SimCardShape $data
      */
     public function withData(SimCard|array $data): self
     {

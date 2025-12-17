@@ -125,9 +125,9 @@ final class BrandListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param EntityType|value-of<EntityType> $entityType
-     * @param BrandIdentityStatus|value-of<BrandIdentityStatus> $identityStatus
-     * @param Status|value-of<Status> $status
+     * @param EntityType|value-of<EntityType>|null $entityType
+     * @param BrandIdentityStatus|value-of<BrandIdentityStatus>|null $identityStatus
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?int $assignedCampaingsCount = null,

@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-import-type PageShape from \Telnyx\ChannelZones\ChannelZoneListParams\Page
  *
- * @phpstan-type ChannelZoneListParamsShape = array{page?: PageShape|null}
+ * @phpstan-type ChannelZoneListParamsShape = array{page?: null|Page|PageShape}
  */
 final class ChannelZoneListParams implements BaseModel
 {
@@ -41,7 +41,7 @@ final class ChannelZoneListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PageShape $page
+     * @param Page|PageShape|null $page
      */
     public static function with(Page|array|null $page = null): self
     {
@@ -55,7 +55,7 @@ final class ChannelZoneListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param PageShape $page
+     * @param Page|PageShape $page
      */
     public function withPage(Page|array $page): self
     {

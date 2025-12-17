@@ -108,8 +108,8 @@ final class SimCardGroupListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ConsumedDataShape $consumedData
-     * @param DataLimitShape $dataLimit
+     * @param ConsumedData|ConsumedDataShape|null $consumedData
+     * @param DataLimit|DataLimitShape|null $dataLimit
      */
     public static function with(
         ?string $id = null,
@@ -155,7 +155,7 @@ final class SimCardGroupListResponse implements BaseModel
     /**
      * Represents the amount of data consumed.
      *
-     * @param ConsumedDataShape $consumedData
+     * @param ConsumedData|ConsumedDataShape $consumedData
      */
     public function withConsumedData(ConsumedData|array $consumedData): self
     {
@@ -179,7 +179,7 @@ final class SimCardGroupListResponse implements BaseModel
     /**
      * Upper limit on the amount of data the SIM cards, within the group, can use.
      *
-     * @param DataLimitShape $dataLimit
+     * @param DataLimit|DataLimitShape $dataLimit
      */
     public function withDataLimit(DataLimit|array $dataLimit): self
     {

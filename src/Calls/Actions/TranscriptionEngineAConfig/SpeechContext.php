@@ -38,7 +38,7 @@ final class SpeechContext implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $phrases
+     * @param list<string>|null $phrases
      */
     public static function with(
         ?float $boost = null,

@@ -48,7 +48,7 @@ final class GlobalIPAssignment implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param WireguardPeerShape $wireguardPeer
+     * @param WireguardPeer|WireguardPeerShape|null $wireguardPeer
      */
     public static function with(
         ?string $id = null,
@@ -76,7 +76,7 @@ final class GlobalIPAssignment implements BaseModel
     }
 
     /**
-     * @param WireguardPeerShape $wireguardPeer
+     * @param WireguardPeer|WireguardPeerShape $wireguardPeer
      */
     public function withWireguardPeer(WireguardPeer|array $wireguardPeer): self
     {

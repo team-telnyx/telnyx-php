@@ -22,7 +22,7 @@ use Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage;
  * @phpstan-type MessageSendWhatsappParamsShape = array{
  *   from: string,
  *   to: string,
- *   whatsappMessage: WhatsappMessageShape,
+ *   whatsappMessage: WhatsappMessage|WhatsappMessageShape,
  *   type?: null|Type|value-of<Type>,
  *   webhookURL?: string|null,
  * }
@@ -89,8 +89,8 @@ final class MessageSendWhatsappParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param WhatsappMessageShape $whatsappMessage
-     * @param Type|value-of<Type> $type
+     * @param WhatsappMessage|WhatsappMessageShape $whatsappMessage
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         string $from,
@@ -134,7 +134,7 @@ final class MessageSendWhatsappParams implements BaseModel
     }
 
     /**
-     * @param WhatsappMessageShape $whatsappMessage
+     * @param WhatsappMessage|WhatsappMessageShape $whatsappMessage
      */
     public function withWhatsappMessage(
         WhatsappMessage|array $whatsappMessage

@@ -52,7 +52,7 @@ final class ChatCompletionToolParam implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FunctionDefinitionShape $function
+     * @param FunctionDefinition|FunctionDefinitionShape $function
      */
     public static function with(FunctionDefinition|array $function): self
     {
@@ -64,7 +64,7 @@ final class ChatCompletionToolParam implements BaseModel
     }
 
     /**
-     * @param FunctionDefinitionShape $function
+     * @param FunctionDefinition|FunctionDefinitionShape $function
      */
     public function withFunction(FunctionDefinition|array $function): self
     {

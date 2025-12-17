@@ -140,15 +140,15 @@ final class UpdateAssistant implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,mixed> $dynamicVariables
-     * @param list<EnabledFeatures|value-of<EnabledFeatures>> $enabledFeatures
-     * @param InsightSettingsShape $insightSettings
-     * @param MessagingSettingsShape $messagingSettings
-     * @param PrivacySettingsShape $privacySettings
-     * @param TelephonySettingsShape $telephonySettings
-     * @param list<AssistantToolShape> $tools
-     * @param TranscriptionSettingsShape $transcription
-     * @param VoiceSettingsShape $voiceSettings
+     * @param array<string,mixed>|null $dynamicVariables
+     * @param list<EnabledFeatures|value-of<EnabledFeatures>>|null $enabledFeatures
+     * @param InsightSettings|InsightSettingsShape|null $insightSettings
+     * @param MessagingSettings|MessagingSettingsShape|null $messagingSettings
+     * @param PrivacySettings|PrivacySettingsShape|null $privacySettings
+     * @param TelephonySettings|TelephonySettingsShape|null $telephonySettings
+     * @param list<AssistantToolShape>|null $tools
+     * @param TranscriptionSettings|TranscriptionSettingsShape|null $transcription
+     * @param VoiceSettings|VoiceSettingsShape|null $voiceSettings
      */
     public static function with(
         ?string $description = null,
@@ -246,7 +246,7 @@ final class UpdateAssistant implements BaseModel
     }
 
     /**
-     * @param InsightSettingsShape $insightSettings
+     * @param InsightSettings|InsightSettingsShape $insightSettings
      */
     public function withInsightSettings(
         InsightSettings|array $insightSettings
@@ -280,7 +280,7 @@ final class UpdateAssistant implements BaseModel
     }
 
     /**
-     * @param MessagingSettingsShape $messagingSettings
+     * @param MessagingSettings|MessagingSettingsShape $messagingSettings
      */
     public function withMessagingSettings(
         MessagingSettings|array $messagingSettings
@@ -311,7 +311,7 @@ final class UpdateAssistant implements BaseModel
     }
 
     /**
-     * @param PrivacySettingsShape $privacySettings
+     * @param PrivacySettings|PrivacySettingsShape $privacySettings
      */
     public function withPrivacySettings(
         PrivacySettings|array $privacySettings
@@ -323,7 +323,7 @@ final class UpdateAssistant implements BaseModel
     }
 
     /**
-     * @param TelephonySettingsShape $telephonySettings
+     * @param TelephonySettings|TelephonySettingsShape $telephonySettings
      */
     public function withTelephonySettings(
         TelephonySettings|array $telephonySettings
@@ -348,7 +348,7 @@ final class UpdateAssistant implements BaseModel
     }
 
     /**
-     * @param TranscriptionSettingsShape $transcription
+     * @param TranscriptionSettings|TranscriptionSettingsShape $transcription
      */
     public function withTranscription(
         TranscriptionSettings|array $transcription
@@ -360,7 +360,7 @@ final class UpdateAssistant implements BaseModel
     }
 
     /**
-     * @param VoiceSettingsShape $voiceSettings
+     * @param VoiceSettings|VoiceSettingsShape $voiceSettings
      */
     public function withVoiceSettings(VoiceSettings|array $voiceSettings): self
     {

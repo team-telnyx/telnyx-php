@@ -115,11 +115,11 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BodyParametersShape $bodyParameters
-     * @param list<HeaderShape> $headers
-     * @param Method|value-of<Method> $method
-     * @param PathParametersShape $pathParameters
-     * @param QueryParametersShape $queryParameters
+     * @param BodyParameters|BodyParametersShape|null $bodyParameters
+     * @param list<HeaderShape>|null $headers
+     * @param Method|value-of<Method>|null $method
+     * @param PathParameters|PathParametersShape|null $pathParameters
+     * @param QueryParameters|QueryParametersShape|null $queryParameters
      */
     public static function with(
         string $description,
@@ -182,7 +182,7 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
     /**
      * The body parameters the webhook tool accepts, described as a JSON Schema object. These parameters will be passed to the webhook as the body of the request. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
      *
-     * @param BodyParametersShape $bodyParameters
+     * @param BodyParameters|BodyParametersShape $bodyParameters
      */
     public function withBodyParameters(
         BodyParameters|array $bodyParameters
@@ -222,7 +222,7 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
     /**
      * The path parameters the webhook tool accepts, described as a JSON Schema object. These parameters will be passed to the webhook as the path of the request if the URL contains a placeholder for a value. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
      *
-     * @param PathParametersShape $pathParameters
+     * @param PathParameters|PathParametersShape $pathParameters
      */
     public function withPathParameters(
         PathParameters|array $pathParameters
@@ -236,7 +236,7 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
     /**
      * The query parameters the webhook tool accepts, described as a JSON Schema object. These parameters will be passed to the webhook as the query of the request. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
      *
-     * @param QueryParametersShape $queryParameters
+     * @param QueryParameters|QueryParametersShape $queryParameters
      */
     public function withQueryParameters(
         QueryParameters|array $queryParameters

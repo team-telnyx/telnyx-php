@@ -131,7 +131,7 @@ final class FineTuningJob implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param HyperparametersShape $hyperparameters
+     * @param Hyperparameters|HyperparametersShape $hyperparameters
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -196,7 +196,7 @@ final class FineTuningJob implements BaseModel
     /**
      * The hyperparameters used for the fine-tuning job.
      *
-     * @param HyperparametersShape $hyperparameters
+     * @param Hyperparameters|HyperparametersShape $hyperparameters
      */
     public function withHyperparameters(
         Hyperparameters|array $hyperparameters

@@ -78,7 +78,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $alternativeCupids
+     * @param list<string>|null $alternativeCupids
      */
     public static function with(
         ?string $id = null,

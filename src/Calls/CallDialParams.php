@@ -57,16 +57,16 @@ use Telnyx\Core\Contracts\BaseModel;
  *   from: string,
  *   to: ToShape,
  *   answeringMachineDetection?: null|AnsweringMachineDetection|value-of<AnsweringMachineDetection>,
- *   answeringMachineDetectionConfig?: AnsweringMachineDetectionConfigShape|null,
+ *   answeringMachineDetectionConfig?: null|AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape,
  *   audioURL?: string|null,
  *   billingGroupID?: string|null,
  *   bridgeIntent?: bool|null,
  *   bridgeOnAnswer?: bool|null,
  *   clientState?: string|null,
  *   commandID?: string|null,
- *   conferenceConfig?: ConferenceConfigShape|null,
+ *   conferenceConfig?: null|ConferenceConfig|ConferenceConfigShape,
  *   customHeaders?: list<CustomSipHeaderShape>|null,
- *   dialogflowConfig?: DialogflowConfigShape|null,
+ *   dialogflowConfig?: null|DialogflowConfig|DialogflowConfigShape,
  *   enableDialogflow?: bool|null,
  *   fromDisplayName?: string|null,
  *   linkTo?: string|null,
@@ -88,7 +88,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   sipHeaders?: list<SipHeaderShape>|null,
  *   sipRegion?: null|SipRegion|value-of<SipRegion>,
  *   sipTransportProtocol?: null|SipTransportProtocol|value-of<SipTransportProtocol>,
- *   soundModifications?: SoundModificationsShape|null,
+ *   soundModifications?: null|SoundModifications|SoundModificationsShape,
  *   streamBidirectionalCodec?: null|StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
  *   streamBidirectionalMode?: null|StreamBidirectionalMode|value-of<StreamBidirectionalMode>,
  *   streamBidirectionalSamplingRate?: null|8000|16000|22050|24000|48000,
@@ -102,7 +102,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   timeLimitSecs?: int|null,
  *   timeoutSecs?: int|null,
  *   transcription?: bool|null,
- *   transcriptionConfig?: TranscriptionStartRequestShape|null,
+ *   transcriptionConfig?: null|TranscriptionStartRequest|TranscriptionStartRequestShape,
  *   webhookURL?: string|null,
  *   webhookURLMethod?: null|WebhookURLMethod|value-of<WebhookURLMethod>,
  * }
@@ -496,30 +496,30 @@ final class CallDialParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param ToShape $to
-     * @param AnsweringMachineDetection|value-of<AnsweringMachineDetection> $answeringMachineDetection
-     * @param AnsweringMachineDetectionConfigShape $answeringMachineDetectionConfig
-     * @param ConferenceConfigShape $conferenceConfig
-     * @param list<CustomSipHeaderShape> $customHeaders
-     * @param DialogflowConfigShape $dialogflowConfig
-     * @param MediaEncryption|value-of<MediaEncryption> $mediaEncryption
-     * @param Record|value-of<Record> $record
-     * @param RecordChannels|value-of<RecordChannels> $recordChannels
-     * @param RecordFormat|value-of<RecordFormat> $recordFormat
-     * @param RecordTrack|value-of<RecordTrack> $recordTrack
-     * @param RecordTrim|value-of<RecordTrim> $recordTrim
-     * @param list<SipHeaderShape> $sipHeaders
-     * @param SipRegion|value-of<SipRegion> $sipRegion
-     * @param SipTransportProtocol|value-of<SipTransportProtocol> $sipTransportProtocol
-     * @param SoundModificationsShape $soundModifications
-     * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec> $streamBidirectionalCodec
-     * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode> $streamBidirectionalMode
-     * @param 8000|16000|22050|24000|48000 $streamBidirectionalSamplingRate
-     * @param StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs> $streamBidirectionalTargetLegs
-     * @param StreamCodec|value-of<StreamCodec> $streamCodec
-     * @param StreamTrack|value-of<StreamTrack> $streamTrack
-     * @param SupervisorRole|value-of<SupervisorRole> $supervisorRole
-     * @param TranscriptionStartRequestShape $transcriptionConfig
-     * @param WebhookURLMethod|value-of<WebhookURLMethod> $webhookURLMethod
+     * @param AnsweringMachineDetection|value-of<AnsweringMachineDetection>|null $answeringMachineDetection
+     * @param AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape|null $answeringMachineDetectionConfig
+     * @param ConferenceConfig|ConferenceConfigShape|null $conferenceConfig
+     * @param list<CustomSipHeaderShape>|null $customHeaders
+     * @param DialogflowConfig|DialogflowConfigShape|null $dialogflowConfig
+     * @param MediaEncryption|value-of<MediaEncryption>|null $mediaEncryption
+     * @param Record|value-of<Record>|null $record
+     * @param RecordChannels|value-of<RecordChannels>|null $recordChannels
+     * @param RecordFormat|value-of<RecordFormat>|null $recordFormat
+     * @param RecordTrack|value-of<RecordTrack>|null $recordTrack
+     * @param RecordTrim|value-of<RecordTrim>|null $recordTrim
+     * @param list<SipHeaderShape>|null $sipHeaders
+     * @param SipRegion|value-of<SipRegion>|null $sipRegion
+     * @param SipTransportProtocol|value-of<SipTransportProtocol>|null $sipTransportProtocol
+     * @param SoundModifications|SoundModificationsShape|null $soundModifications
+     * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>|null $streamBidirectionalCodec
+     * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode>|null $streamBidirectionalMode
+     * @param 8000|16000|22050|24000|48000|null $streamBidirectionalSamplingRate
+     * @param StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs>|null $streamBidirectionalTargetLegs
+     * @param StreamCodec|value-of<StreamCodec>|null $streamCodec
+     * @param StreamTrack|value-of<StreamTrack>|null $streamTrack
+     * @param SupervisorRole|value-of<SupervisorRole>|null $supervisorRole
+     * @param TranscriptionStartRequest|TranscriptionStartRequestShape|null $transcriptionConfig
+     * @param WebhookURLMethod|value-of<WebhookURLMethod>|null $webhookURLMethod
      */
     public static function with(
         string $connectionID,
@@ -686,7 +686,7 @@ final class CallDialParams implements BaseModel
     /**
      * Optional configuration parameters to modify 'answering_machine_detection' performance.
      *
-     * @param AnsweringMachineDetectionConfigShape $answeringMachineDetectionConfig
+     * @param AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape $answeringMachineDetectionConfig
      */
     public function withAnsweringMachineDetectionConfig(
         AnsweringMachineDetectionConfig|array $answeringMachineDetectionConfig
@@ -766,7 +766,7 @@ final class CallDialParams implements BaseModel
     /**
      * Optional configuration parameters to dial new participant into a conference.
      *
-     * @param ConferenceConfigShape $conferenceConfig
+     * @param ConferenceConfig|ConferenceConfigShape $conferenceConfig
      */
     public function withConferenceConfig(
         ConferenceConfig|array $conferenceConfig
@@ -791,7 +791,7 @@ final class CallDialParams implements BaseModel
     }
 
     /**
-     * @param DialogflowConfigShape $dialogflowConfig
+     * @param DialogflowConfig|DialogflowConfigShape $dialogflowConfig
      */
     public function withDialogflowConfig(
         DialogflowConfig|array $dialogflowConfig
@@ -1057,7 +1057,7 @@ final class CallDialParams implements BaseModel
     /**
      * Use this field to modify sound effects, for example adjust the pitch.
      *
-     * @param SoundModificationsShape $soundModifications
+     * @param SoundModifications|SoundModificationsShape $soundModifications
      */
     public function withSoundModifications(
         SoundModifications|array $soundModifications
@@ -1233,7 +1233,7 @@ final class CallDialParams implements BaseModel
     }
 
     /**
-     * @param TranscriptionStartRequestShape $transcriptionConfig
+     * @param TranscriptionStartRequest|TranscriptionStartRequestShape $transcriptionConfig
      */
     public function withTranscriptionConfig(
         TranscriptionStartRequest|array $transcriptionConfig

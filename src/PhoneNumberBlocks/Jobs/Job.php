@@ -97,10 +97,10 @@ final class Job implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<FailedOperationShape> $failedOperations
-     * @param Status|value-of<Status> $status
-     * @param list<SuccessfulOperationShape> $successfulOperations
-     * @param Type|value-of<Type> $type
+     * @param list<FailedOperationShape>|null $failedOperations
+     * @param Status|value-of<Status>|null $status
+     * @param list<SuccessfulOperationShape>|null $successfulOperations
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         ?string $id = null,

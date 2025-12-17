@@ -21,7 +21,7 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\PhoneNum
  *
  * @phpstan-type PhoneNumberBlockCreateParamsShape = array{
  *   activationRanges: list<ActivationRangeShape>,
- *   phoneNumberRange: PhoneNumberRangeShape,
+ *   phoneNumberRange: PhoneNumberRange|PhoneNumberRangeShape,
  * }
  */
 final class PhoneNumberBlockCreateParams implements BaseModel
@@ -68,7 +68,7 @@ final class PhoneNumberBlockCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<ActivationRangeShape> $activationRanges
-     * @param PhoneNumberRangeShape $phoneNumberRange
+     * @param PhoneNumberRange|PhoneNumberRangeShape $phoneNumberRange
      */
     public static function with(
         array $activationRanges,
@@ -96,7 +96,7 @@ final class PhoneNumberBlockCreateParams implements BaseModel
     }
 
     /**
-     * @param PhoneNumberRangeShape $phoneNumberRange
+     * @param PhoneNumberRange|PhoneNumberRangeShape $phoneNumberRange
      */
     public function withPhoneNumberRange(
         PhoneNumberRange|array $phoneNumberRange

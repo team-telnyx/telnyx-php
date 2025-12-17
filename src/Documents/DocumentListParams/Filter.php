@@ -48,9 +48,9 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CreatedAtShape $createdAt
-     * @param CustomerReferenceShape $customerReference
-     * @param FilenameShape $filename
+     * @param CreatedAt|CreatedAtShape|null $createdAt
+     * @param CustomerReference|CustomerReferenceShape|null $customerReference
+     * @param Filename|FilenameShape|null $filename
      */
     public static function with(
         CreatedAt|array|null $createdAt = null,
@@ -67,7 +67,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param CreatedAtShape $createdAt
+     * @param CreatedAt|CreatedAtShape $createdAt
      */
     public function withCreatedAt(CreatedAt|array $createdAt): self
     {
@@ -78,7 +78,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param CustomerReferenceShape $customerReference
+     * @param CustomerReference|CustomerReferenceShape $customerReference
      */
     public function withCustomerReference(
         CustomerReference|array $customerReference
@@ -90,7 +90,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param FilenameShape $filename
+     * @param Filename|FilenameShape $filename
      */
     public function withFilename(Filename|array $filename): self
     {

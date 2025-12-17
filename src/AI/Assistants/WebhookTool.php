@@ -54,7 +54,7 @@ final class WebhookTool implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Type|value-of<Type> $type
-     * @param InferenceEmbeddingWebhookToolParamsShape $webhook
+     * @param InferenceEmbeddingWebhookToolParams|InferenceEmbeddingWebhookToolParamsShape $webhook
      */
     public static function with(
         Type|string $type,
@@ -80,7 +80,7 @@ final class WebhookTool implements BaseModel
     }
 
     /**
-     * @param InferenceEmbeddingWebhookToolParamsShape $webhook
+     * @param InferenceEmbeddingWebhookToolParams|InferenceEmbeddingWebhookToolParamsShape $webhook
      */
     public function withWebhook(
         InferenceEmbeddingWebhookToolParams|array $webhook

@@ -33,7 +33,7 @@ final class PrivateWirelessGatewayDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PrivateWirelessGatewayShape $data
+     * @param PrivateWirelessGateway|PrivateWirelessGatewayShape|null $data
      */
     public static function with(PrivateWirelessGateway|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class PrivateWirelessGatewayDeleteResponse implements BaseModel
     }
 
     /**
-     * @param PrivateWirelessGatewayShape $data
+     * @param PrivateWirelessGateway|PrivateWirelessGatewayShape $data
      */
     public function withData(PrivateWirelessGateway|array $data): self
     {

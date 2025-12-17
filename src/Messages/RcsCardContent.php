@@ -61,8 +61,8 @@ final class RcsCardContent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MediaShape $media
-     * @param list<RcsSuggestionShape> $suggestions
+     * @param Media|MediaShape|null $media
+     * @param list<RcsSuggestionShape>|null $suggestions
      */
     public static function with(
         ?string $description = null,
@@ -94,7 +94,7 @@ final class RcsCardContent implements BaseModel
     /**
      * A media file within a rich card.
      *
-     * @param MediaShape $media
+     * @param Media|MediaShape $media
      */
     public function withMedia(Media|array $media): self
     {

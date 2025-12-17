@@ -36,7 +36,7 @@ final class ActionSetPrivateWirelessGatewayResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SimCardGroupActionShape $data
+     * @param SimCardGroupAction|SimCardGroupActionShape|null $data
      */
     public static function with(SimCardGroupAction|array|null $data = null): self
     {
@@ -50,7 +50,7 @@ final class ActionSetPrivateWirelessGatewayResponse implements BaseModel
     /**
      * This object represents a SIM card group action request. It allows tracking the current status of an operation that impacts the SIM card group and SIM card in it.
      *
-     * @param SimCardGroupActionShape $data
+     * @param SimCardGroupAction|SimCardGroupActionShape $data
      */
     public function withData(SimCardGroupAction|array $data): self
     {

@@ -58,9 +58,9 @@ final class ContentMessage implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RcsContentInfoShape $contentInfo
-     * @param RichCardShape $richCard
-     * @param list<RcsSuggestionShape> $suggestions
+     * @param RcsContentInfo|RcsContentInfoShape|null $contentInfo
+     * @param RichCard|RichCardShape|null $richCard
+     * @param list<RcsSuggestionShape>|null $suggestions
      */
     public static function with(
         RcsContentInfo|array|null $contentInfo = null,
@@ -79,7 +79,7 @@ final class ContentMessage implements BaseModel
     }
 
     /**
-     * @param RcsContentInfoShape $contentInfo
+     * @param RcsContentInfo|RcsContentInfoShape $contentInfo
      */
     public function withContentInfo(RcsContentInfo|array $contentInfo): self
     {
@@ -90,7 +90,7 @@ final class ContentMessage implements BaseModel
     }
 
     /**
-     * @param RichCardShape $richCard
+     * @param RichCard|RichCardShape $richCard
      */
     public function withRichCard(RichCard|array $richCard): self
     {

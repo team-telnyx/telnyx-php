@@ -76,8 +76,8 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CommentRecordType|value-of<CommentRecordType> $commentRecordType
-     * @param CommenterType|value-of<CommenterType> $commenterType
+     * @param CommentRecordType|value-of<CommentRecordType>|null $commentRecordType
+     * @param CommenterType|value-of<CommenterType>|null $commenterType
      */
     public static function with(
         ?string $id = null,

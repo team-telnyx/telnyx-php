@@ -101,9 +101,9 @@ final class RequirementListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Action|value-of<Action> $action
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
-     * @param list<DocReqsRequirementTypeShape> $requirementsTypes
+     * @param Action|value-of<Action>|null $action
+     * @param PhoneNumberType|value-of<PhoneNumberType>|null $phoneNumberType
+     * @param list<DocReqsRequirementTypeShape>|null $requirementsTypes
      */
     public static function with(
         ?string $id = null,

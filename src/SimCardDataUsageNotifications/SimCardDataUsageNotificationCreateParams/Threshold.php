@@ -38,7 +38,7 @@ final class Threshold implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Unit|value-of<Unit> $unit
+     * @param Unit|value-of<Unit>|null $unit
      */
     public static function with(
         ?string $amount = null,

@@ -46,7 +46,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<BlackBoxTestShape> $blackBoxTests
+     * @param list<BlackBoxTestShape>|null $blackBoxTests
      */
     public static function with(
         ?array $blackBoxTests = null,

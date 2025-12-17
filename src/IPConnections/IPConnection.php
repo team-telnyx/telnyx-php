@@ -191,15 +191,15 @@ final class IPConnection implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
-     * @param DtmfType|value-of<DtmfType> $dtmfType
+     * @param AnchorsiteOverride|value-of<AnchorsiteOverride>|null $anchorsiteOverride
+     * @param DtmfType|value-of<DtmfType>|null $dtmfType
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
-     * @param InboundIPShape $inbound
-     * @param OutboundIPShape $outbound
-     * @param ConnectionRtcpSettingsShape $rtcpSettings
-     * @param list<string> $tags
-     * @param TransportProtocol|value-of<TransportProtocol> $transportProtocol
-     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion
+     * @param InboundIP|InboundIPShape|null $inbound
+     * @param OutboundIP|OutboundIPShape|null $outbound
+     * @param ConnectionRtcpSettings|ConnectionRtcpSettingsShape|null $rtcpSettings
+     * @param list<string>|null $tags
+     * @param TransportProtocol|value-of<TransportProtocol>|null $transportProtocol
+     * @param WebhookAPIVersion|value-of<WebhookAPIVersion>|null $webhookAPIVersion
      */
     public static function with(
         ?string $id = null,
@@ -371,7 +371,7 @@ final class IPConnection implements BaseModel
     }
 
     /**
-     * @param InboundIPShape $inbound
+     * @param InboundIP|InboundIPShape $inbound
      */
     public function withInbound(InboundIP|array $inbound): self
     {
@@ -394,7 +394,7 @@ final class IPConnection implements BaseModel
     }
 
     /**
-     * @param OutboundIPShape $outbound
+     * @param OutboundIP|OutboundIPShape $outbound
      */
     public function withOutbound(OutboundIP|array $outbound): self
     {
@@ -416,7 +416,7 @@ final class IPConnection implements BaseModel
     }
 
     /**
-     * @param ConnectionRtcpSettingsShape $rtcpSettings
+     * @param ConnectionRtcpSettings|ConnectionRtcpSettingsShape $rtcpSettings
      */
     public function withRtcpSettings(
         ConnectionRtcpSettings|array $rtcpSettings

@@ -95,8 +95,8 @@ final class OAuthClientListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterAllowedGrantTypesContains|value-of<FilterAllowedGrantTypesContains> $filterAllowedGrantTypesContains
-     * @param FilterClientType|value-of<FilterClientType> $filterClientType
+     * @param FilterAllowedGrantTypesContains|value-of<FilterAllowedGrantTypesContains>|null $filterAllowedGrantTypesContains
+     * @param FilterClientType|value-of<FilterClientType>|null $filterClientType
      */
     public static function with(
         FilterAllowedGrantTypesContains|string|null $filterAllowedGrantTypesContains = null,

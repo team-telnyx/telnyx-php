@@ -67,8 +67,8 @@ final class RcsCapabilities implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $features
-     * @param RecordType|value-of<RecordType> $recordType
+     * @param list<string>|null $features
+     * @param RecordType|value-of<RecordType>|null $recordType
      */
     public static function with(
         ?string $agentID = null,

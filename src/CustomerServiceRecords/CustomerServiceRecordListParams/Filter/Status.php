@@ -46,8 +46,8 @@ final class Status implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Eq|value-of<Eq> $eq
-     * @param list<In|value-of<In>> $in
+     * @param Eq|value-of<Eq>|null $eq
+     * @param list<In|value-of<In>>|null $in
      */
     public static function with(Eq|string|null $eq = null, ?array $in = null): self
     {

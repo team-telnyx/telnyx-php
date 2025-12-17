@@ -119,11 +119,11 @@ final class TranscriptionEngineAConfig implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $hints
-     * @param GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage> $language
-     * @param Model|value-of<Model> $model
-     * @param list<SpeechContextShape> $speechContext
-     * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine
+     * @param list<string>|null $hints
+     * @param GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage>|null $language
+     * @param Model|value-of<Model>|null $model
+     * @param list<SpeechContextShape>|null $speechContext
+     * @param TranscriptionEngine|value-of<TranscriptionEngine>|null $transcriptionEngine
      */
     public static function with(
         ?bool $enableSpeakerDiarization = null,

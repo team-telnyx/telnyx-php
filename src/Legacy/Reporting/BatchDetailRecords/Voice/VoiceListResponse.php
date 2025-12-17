@@ -40,8 +40,8 @@ final class VoiceListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<CdrDetailedReqResponseShape> $data
-     * @param BatchCsvPaginationMetaShape $meta
+     * @param list<CdrDetailedReqResponseShape>|null $data
+     * @param BatchCsvPaginationMeta|BatchCsvPaginationMetaShape|null $meta
      */
     public static function with(
         ?array $data = null,
@@ -67,7 +67,7 @@ final class VoiceListResponse implements BaseModel
     }
 
     /**
-     * @param BatchCsvPaginationMetaShape $meta
+     * @param BatchCsvPaginationMeta|BatchCsvPaginationMetaShape $meta
      */
     public function withMeta(BatchCsvPaginationMeta|array $meta): self
     {

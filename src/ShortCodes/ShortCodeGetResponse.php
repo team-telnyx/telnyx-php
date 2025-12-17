@@ -34,7 +34,7 @@ final class ShortCodeGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ShortCodeShape $data
+     * @param ShortCode|ShortCodeShape|null $data
      */
     public static function with(ShortCode|array|null $data = null): self
     {
@@ -46,7 +46,7 @@ final class ShortCodeGetResponse implements BaseModel
     }
 
     /**
-     * @param ShortCodeShape $data
+     * @param ShortCode|ShortCodeShape $data
      */
     public function withData(ShortCode|array $data): self
     {

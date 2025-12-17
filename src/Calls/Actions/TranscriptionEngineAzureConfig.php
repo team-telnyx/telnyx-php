@@ -83,7 +83,7 @@ final class TranscriptionEngineAzureConfig implements BaseModel
      *
      * @param Region|value-of<Region> $region
      * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine
-     * @param Language|value-of<Language> $language
+     * @param Language|value-of<Language>|null $language
      */
     public static function with(
         Region|string $region,

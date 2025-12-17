@@ -393,9 +393,9 @@ final class CampaignListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CampaignStatus|value-of<CampaignStatus> $campaignStatus
-     * @param SubmissionStatus|value-of<SubmissionStatus> $submissionStatus
-     * @param list<string> $subUsecases
+     * @param CampaignStatus|value-of<CampaignStatus>|null $campaignStatus
+     * @param SubmissionStatus|value-of<SubmissionStatus>|null $submissionStatus
+     * @param list<string>|null $subUsecases
      */
     public static function with(
         ?bool $ageGated = null,

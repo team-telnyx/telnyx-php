@@ -53,7 +53,7 @@ final class ExportPortoutsCsvReport implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FiltersShape $filters
+     * @param Filters|FiltersShape $filters
      */
     public static function with(Filters|array $filters): self
     {
@@ -67,7 +67,7 @@ final class ExportPortoutsCsvReport implements BaseModel
     /**
      * The filters to apply to the export port-out CSV report.
      *
-     * @param FiltersShape $filters
+     * @param Filters|FiltersShape $filters
      */
     public function withFilters(Filters|array $filters): self
     {

@@ -18,7 +18,7 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderListParams\Page
  * @phpstan-import-type PageShape from \Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderListParams\Page
  *
  * @phpstan-type MessagingHostedNumberOrderListParamsShape = array{
- *   page?: PageShape|null
+ *   page?: null|Page|PageShape
  * }
  */
 final class MessagingHostedNumberOrderListParams implements BaseModel
@@ -43,7 +43,7 @@ final class MessagingHostedNumberOrderListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PageShape $page
+     * @param Page|PageShape|null $page
      */
     public static function with(Page|array|null $page = null): self
     {
@@ -57,7 +57,7 @@ final class MessagingHostedNumberOrderListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      *
-     * @param PageShape $page
+     * @param Page|PageShape $page
      */
     public function withPage(Page|array $page): self
     {

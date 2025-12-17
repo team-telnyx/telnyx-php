@@ -50,8 +50,8 @@ final class NetworkCoverageListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AvailableService|value-of<AvailableService>> $availableServices
-     * @param LocationShape $location
+     * @param list<AvailableService|value-of<AvailableService>>|null $availableServices
+     * @param Location|LocationShape|null $location
      */
     public static function with(
         ?array $availableServices = null,
@@ -81,7 +81,7 @@ final class NetworkCoverageListResponse implements BaseModel
     }
 
     /**
-     * @param LocationShape $location
+     * @param Location|LocationShape $location
      */
     public function withLocation(Location|array $location): self
     {

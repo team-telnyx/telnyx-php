@@ -62,7 +62,7 @@ final class NotificationSettingCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ParameterShape> $parameters
+     * @param list<ParameterShape>|null $parameters
      */
     public static function with(
         ?string $notificationChannelID = null,

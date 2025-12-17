@@ -21,7 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type JobCreateParamsShape = array{
  *   model: string,
  *   trainingFile: string,
- *   hyperparameters?: HyperparametersShape|null,
+ *   hyperparameters?: null|Hyperparameters|HyperparametersShape,
  *   suffix?: string|null,
  * }
  */
@@ -79,7 +79,7 @@ final class JobCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param HyperparametersShape $hyperparameters
+     * @param Hyperparameters|HyperparametersShape|null $hyperparameters
      */
     public static function with(
         string $model,
@@ -123,7 +123,7 @@ final class JobCreateParams implements BaseModel
     /**
      * The hyperparameters used for the fine-tuning job.
      *
-     * @param HyperparametersShape $hyperparameters
+     * @param Hyperparameters|HyperparametersShape $hyperparameters
      */
     public function withHyperparameters(
         Hyperparameters|array $hyperparameters

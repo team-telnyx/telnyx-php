@@ -77,7 +77,7 @@ final class CdrUsageReportFetchSyncParams implements BaseModel
      *
      * @param AggregationType|value-of<AggregationType> $aggregationType
      * @param ProductBreakdown|value-of<ProductBreakdown> $productBreakdown
-     * @param list<float> $connections
+     * @param list<float>|null $connections
      */
     public static function with(
         AggregationType|string $aggregationType,

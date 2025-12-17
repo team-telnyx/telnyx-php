@@ -86,7 +86,7 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Role|value-of<Role> $role
-     * @param list<ToolCallShape> $toolCalls
+     * @param list<ToolCallShape>|null $toolCalls
      */
     public static function with(
         Role|string $role,

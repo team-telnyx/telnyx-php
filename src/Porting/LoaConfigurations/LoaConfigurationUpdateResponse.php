@@ -33,7 +33,7 @@ final class LoaConfigurationUpdateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortingLoaConfigurationShape $data
+     * @param PortingLoaConfiguration|PortingLoaConfigurationShape|null $data
      */
     public static function with(
         PortingLoaConfiguration|array|null $data = null
@@ -46,7 +46,7 @@ final class LoaConfigurationUpdateResponse implements BaseModel
     }
 
     /**
-     * @param PortingLoaConfigurationShape $data
+     * @param PortingLoaConfiguration|PortingLoaConfigurationShape $data
      */
     public function withData(PortingLoaConfiguration|array $data): self
     {

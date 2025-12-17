@@ -21,8 +21,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type PageShape from \Telnyx\Conferences\ConferenceListParticipantsParams\Page
  *
  * @phpstan-type ConferenceListParticipantsParamsShape = array{
- *   filter?: FilterShape|null,
- *   page?: PageShape|null,
+ *   filter?: null|Filter|FilterShape,
+ *   page?: null|Page|PageShape,
  *   region?: null|Region|value-of<Region>,
  * }
  */
@@ -62,9 +62,9 @@ final class ConferenceListParticipantsParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
-     * @param PageShape $page
-     * @param Region|value-of<Region> $region
+     * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
+     * @param Region|value-of<Region>|null $region
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -83,7 +83,7 @@ final class ConferenceListParticipantsParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[muted], filter[on_hold], filter[whispering].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -96,7 +96,7 @@ final class ConferenceListParticipantsParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number].
      *
-     * @param PageShape $page
+     * @param Page|PageShape $page
      */
     public function withPage(Page|array $page): self
     {

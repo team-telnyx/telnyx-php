@@ -33,7 +33,7 @@ final class CallControlApplicationDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CallControlApplicationShape $data
+     * @param CallControlApplication|CallControlApplicationShape|null $data
      */
     public static function with(CallControlApplication|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class CallControlApplicationDeleteResponse implements BaseModel
     }
 
     /**
-     * @param CallControlApplicationShape $data
+     * @param CallControlApplication|CallControlApplicationShape $data
      */
     public function withData(CallControlApplication|array $data): self
     {

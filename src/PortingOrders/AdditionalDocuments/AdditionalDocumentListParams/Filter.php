@@ -39,7 +39,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DocumentType|value-of<DocumentType>> $documentType
+     * @param list<DocumentType|value-of<DocumentType>>|null $documentType
      */
     public static function with(?array $documentType = null): self
     {

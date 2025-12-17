@@ -57,7 +57,7 @@ final class AutorespConfigListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<AutoRespConfigShape> $data
-     * @param MessagingPaginationMetaShape $meta
+     * @param MessagingPaginationMeta|MessagingPaginationMetaShape $meta
      */
     public static function with(
         array $data,
@@ -83,7 +83,7 @@ final class AutorespConfigListResponse implements BaseModel
     }
 
     /**
-     * @param MessagingPaginationMetaShape $meta
+     * @param MessagingPaginationMeta|MessagingPaginationMetaShape $meta
      */
     public function withMeta(MessagingPaginationMeta|array $meta): self
     {

@@ -135,9 +135,9 @@ final class Conference implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param RecordType|value-of<RecordType> $recordType
-     * @param EndReason|value-of<EndReason> $endReason
-     * @param EndedByShape $endedBy
-     * @param Status|value-of<Status> $status
+     * @param EndReason|value-of<EndReason>|null $endReason
+     * @param EndedBy|EndedByShape|null $endedBy
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         string $id,
@@ -252,7 +252,7 @@ final class Conference implements BaseModel
     /**
      * IDs related to who ended the conference. It is expected for them to all be there or all be null.
      *
-     * @param EndedByShape $endedBy
+     * @param EndedBy|EndedByShape $endedBy
      */
     public function withEndedBy(EndedBy|array $endedBy): self
     {

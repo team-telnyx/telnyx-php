@@ -143,11 +143,11 @@ final class RecordingResponseData implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Channels|value-of<Channels> $channels
-     * @param DownloadURLsShape $downloadURLs
-     * @param RecordType|value-of<RecordType> $recordType
-     * @param Source|value-of<Source> $source
-     * @param Status|value-of<Status> $status
+     * @param Channels|value-of<Channels>|null $channels
+     * @param DownloadURLs|DownloadURLsShape|null $downloadURLs
+     * @param RecordType|value-of<RecordType>|null $recordType
+     * @param Source|value-of<Source>|null $source
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,
@@ -269,7 +269,7 @@ final class RecordingResponseData implements BaseModel
     /**
      * Links to download the recording files.
      *
-     * @param DownloadURLsShape $downloadURLs
+     * @param DownloadURLs|DownloadURLsShape $downloadURLs
      */
     public function withDownloadURLs(DownloadURLs|array $downloadURLs): self
     {

@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type FilterShape from \Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter
  *
  * @phpstan-type AccessIPRangeListParamsShape = array{
- *   filter?: FilterShape|null, pageNumber?: int|null, pageSize?: int|null
+ *   filter?: null|Filter|FilterShape, pageNumber?: int|null, pageSize?: int|null
  * }
  */
 final class AccessIPRangeListParams implements BaseModel
@@ -49,7 +49,7 @@ final class AccessIPRangeListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape|null $filter
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -68,7 +68,7 @@ final class AccessIPRangeListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[cidr_block], filter[cidr_block][startswith], filter[cidr_block][endswith], filter[cidr_block][contains], filter[created_at]. Supports complex bracket operations for dynamic filtering.
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

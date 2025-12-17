@@ -53,7 +53,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CreatedAtShape $createdAt
+     * @param CreatedAt|CreatedAtShape|null $createdAt
      */
     public static function with(
         CreatedAt|array|null $createdAt = null,
@@ -72,7 +72,7 @@ final class Filter implements BaseModel
     /**
      * Filter number block orders by date range.
      *
-     * @param CreatedAtShape $createdAt
+     * @param CreatedAt|CreatedAtShape $createdAt
      */
     public function withCreatedAt(CreatedAt|array $createdAt): self
     {

@@ -36,7 +36,7 @@ final class RegionInformation implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RegionType|value-of<RegionType> $regionType
+     * @param RegionType|value-of<RegionType>|null $regionType
      */
     public static function with(
         ?string $regionName = null,

@@ -19,7 +19,7 @@ use Telnyx\Messaging10dlc\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Sor
  * @phpstan-import-type FilterShape from \Telnyx\Messaging10dlc\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Filter
  *
  * @phpstan-type PhoneNumberCampaignListParamsShape = array{
- *   filter?: FilterShape|null,
+ *   filter?: null|Filter|FilterShape,
  *   page?: int|null,
  *   recordsPerPage?: int|null,
  *   sort?: null|Sort|value-of<Sort>,
@@ -61,8 +61,8 @@ final class PhoneNumberCampaignListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
-     * @param Sort|value-of<Sort> $sort
+     * @param Filter|FilterShape|null $filter
+     * @param Sort|value-of<Sort>|null $sort
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -83,7 +83,7 @@ final class PhoneNumberCampaignListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[telnyx_campaign_id], filter[telnyx_brand_id], filter[tcr_campaign_id], filter[tcr_brand_id].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

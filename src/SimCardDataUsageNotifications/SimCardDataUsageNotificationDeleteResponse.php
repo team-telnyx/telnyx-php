@@ -36,7 +36,7 @@ final class SimCardDataUsageNotificationDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SimCardDataUsageNotificationShape $data
+     * @param SimCardDataUsageNotification|SimCardDataUsageNotificationShape|null $data
      */
     public static function with(
         SimCardDataUsageNotification|array|null $data = null
@@ -51,7 +51,7 @@ final class SimCardDataUsageNotificationDeleteResponse implements BaseModel
     /**
      * The SIM card individual data usage notification information.
      *
-     * @param SimCardDataUsageNotificationShape $data
+     * @param SimCardDataUsageNotification|SimCardDataUsageNotificationShape $data
      */
     public function withData(SimCardDataUsageNotification|array $data): self
     {

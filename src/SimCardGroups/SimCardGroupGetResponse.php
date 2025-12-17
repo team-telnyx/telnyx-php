@@ -33,7 +33,7 @@ final class SimCardGroupGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SimCardGroupShape $data
+     * @param SimCardGroup|SimCardGroupShape|null $data
      */
     public static function with(SimCardGroup|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class SimCardGroupGetResponse implements BaseModel
     }
 
     /**
-     * @param SimCardGroupShape $data
+     * @param SimCardGroup|SimCardGroupShape $data
      */
     public function withData(SimCardGroup|array $data): self
     {

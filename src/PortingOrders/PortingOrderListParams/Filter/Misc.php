@@ -37,7 +37,7 @@ final class Misc implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortingOrderType|value-of<PortingOrderType> $type
+     * @param PortingOrderType|value-of<PortingOrderType>|null $type
      */
     public static function with(PortingOrderType|string|null $type = null): self
     {

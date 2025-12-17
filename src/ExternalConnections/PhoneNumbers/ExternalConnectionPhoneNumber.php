@@ -75,7 +75,7 @@ final class ExternalConnectionPhoneNumber implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AcquiredCapability|value-of<AcquiredCapability>> $acquiredCapabilities
+     * @param list<AcquiredCapability|value-of<AcquiredCapability>>|null $acquiredCapabilities
      */
     public static function with(
         ?array $acquiredCapabilities = null,

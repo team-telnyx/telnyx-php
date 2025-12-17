@@ -71,7 +71,7 @@ final class Metadata implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,mixed> $loaderMetadata
+     * @param array<string,mixed>|null $loaderMetadata
      */
     public static function with(
         string $checksum,

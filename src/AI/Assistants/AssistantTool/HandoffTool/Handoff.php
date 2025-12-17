@@ -65,7 +65,7 @@ final class Handoff implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<AIAssistantShape> $aiAssistants
-     * @param VoiceMode|value-of<VoiceMode> $voiceMode
+     * @param VoiceMode|value-of<VoiceMode>|null $voiceMode
      */
     public static function with(
         array $aiAssistants,

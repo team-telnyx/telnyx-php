@@ -129,7 +129,7 @@ final class VerifyDetailRecord implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param VerifyChannelType|value-of<VerifyChannelType> $verifyChannelType
+     * @param VerifyChannelType|value-of<VerifyChannelType>|null $verifyChannelType
      */
     public static function with(
         string $recordType = 'verification_detail_record',

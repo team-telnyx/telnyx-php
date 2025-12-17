@@ -34,7 +34,7 @@ final class MessagingHostedNumberOrderGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MessagingHostedNumberOrderShape $data
+     * @param MessagingHostedNumberOrder|MessagingHostedNumberOrderShape|null $data
      */
     public static function with(
         MessagingHostedNumberOrder|array|null $data = null
@@ -47,7 +47,7 @@ final class MessagingHostedNumberOrderGetResponse implements BaseModel
     }
 
     /**
-     * @param MessagingHostedNumberOrderShape $data
+     * @param MessagingHostedNumberOrder|MessagingHostedNumberOrderShape $data
      */
     public function withData(MessagingHostedNumberOrder|array $data): self
     {

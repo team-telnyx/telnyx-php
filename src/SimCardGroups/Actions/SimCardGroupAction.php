@@ -87,9 +87,9 @@ final class SimCardGroupAction implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SettingsShape $settings
-     * @param Status|value-of<Status> $status
-     * @param Type|value-of<Type> $type
+     * @param Settings|SettingsShape|null $settings
+     * @param Status|value-of<Status>|null $status
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         ?string $id = null,
@@ -148,7 +148,7 @@ final class SimCardGroupAction implements BaseModel
     /**
      * A JSON object representation of the action params.
      *
-     * @param SettingsShape $settings
+     * @param Settings|SettingsShape $settings
      */
     public function withSettings(Settings|array $settings): self
     {

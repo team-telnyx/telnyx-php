@@ -112,8 +112,8 @@ final class TelcoDataUsageReportResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $managedAccounts
-     * @param list<TelcoDataUsageRecordShape> $result
+     * @param list<string>|null $managedAccounts
+     * @param list<TelcoDataUsageRecordShape>|null $result
      */
     public static function with(
         ?string $id = null,

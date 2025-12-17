@@ -33,7 +33,7 @@ final class AuthenticationProviderNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AuthenticationProviderShape $data
+     * @param AuthenticationProvider|AuthenticationProviderShape|null $data
      */
     public static function with(AuthenticationProvider|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class AuthenticationProviderNewResponse implements BaseModel
     }
 
     /**
-     * @param AuthenticationProviderShape $data
+     * @param AuthenticationProvider|AuthenticationProviderShape $data
      */
     public function withData(AuthenticationProvider|array $data): self
     {

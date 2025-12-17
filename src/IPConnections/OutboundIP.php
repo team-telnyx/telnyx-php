@@ -113,9 +113,9 @@ final class OutboundIP implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AniOverrideType|value-of<AniOverrideType> $aniOverrideType
-     * @param IPAuthenticationMethod|value-of<IPAuthenticationMethod> $ipAuthenticationMethod
-     * @param T38ReinviteSource|value-of<T38ReinviteSource> $t38ReinviteSource
+     * @param AniOverrideType|value-of<AniOverrideType>|null $aniOverrideType
+     * @param IPAuthenticationMethod|value-of<IPAuthenticationMethod>|null $ipAuthenticationMethod
+     * @param T38ReinviteSource|value-of<T38ReinviteSource>|null $t38ReinviteSource
      */
     public static function with(
         ?string $aniOverride = null,

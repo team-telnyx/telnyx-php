@@ -95,9 +95,9 @@ final class WebhookDeliveryListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AttemptShape> $attempts
-     * @param Status|value-of<Status> $status
-     * @param WebhookShape $webhook
+     * @param list<AttemptShape>|null $attempts
+     * @param Status|value-of<Status>|null $status
+     * @param Webhook|WebhookShape|null $webhook
      */
     public static function with(
         ?string $id = null,
@@ -207,7 +207,7 @@ final class WebhookDeliveryListResponse implements BaseModel
     /**
      * Original webhook JSON data. Payload fields vary according to event type.
      *
-     * @param WebhookShape $webhook
+     * @param Webhook|WebhookShape $webhook
      */
     public function withWebhook(Webhook|array $webhook): self
     {

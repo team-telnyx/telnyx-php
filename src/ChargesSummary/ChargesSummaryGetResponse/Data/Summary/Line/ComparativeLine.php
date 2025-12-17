@@ -77,8 +77,8 @@ final class ComparativeLine implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MonthDetailShape $existingThisMonth
-     * @param MonthDetailShape $newThisMonth
+     * @param MonthDetail|MonthDetailShape $existingThisMonth
+     * @param MonthDetail|MonthDetailShape $newThisMonth
      */
     public static function with(
         string $alias,
@@ -108,7 +108,7 @@ final class ComparativeLine implements BaseModel
     }
 
     /**
-     * @param MonthDetailShape $existingThisMonth
+     * @param MonthDetail|MonthDetailShape $existingThisMonth
      */
     public function withExistingThisMonth(
         MonthDetail|array $existingThisMonth
@@ -131,7 +131,7 @@ final class ComparativeLine implements BaseModel
     }
 
     /**
-     * @param MonthDetailShape $newThisMonth
+     * @param MonthDetail|MonthDetailShape $newThisMonth
      */
     public function withNewThisMonth(MonthDetail|array $newThisMonth): self
     {

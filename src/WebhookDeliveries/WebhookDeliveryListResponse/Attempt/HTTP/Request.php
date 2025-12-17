@@ -42,7 +42,7 @@ final class Request implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<list<string>> $headers
+     * @param list<list<string>>|null $headers
      */
     public static function with(?array $headers = null, ?string $url = null): self
     {

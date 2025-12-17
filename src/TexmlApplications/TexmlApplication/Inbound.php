@@ -61,7 +61,7 @@ final class Inbound implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SipSubdomainReceiveSettings|value-of<SipSubdomainReceiveSettings> $sipSubdomainReceiveSettings
+     * @param SipSubdomainReceiveSettings|value-of<SipSubdomainReceiveSettings>|null $sipSubdomainReceiveSettings
      */
     public static function with(
         ?int $channelLimit = null,

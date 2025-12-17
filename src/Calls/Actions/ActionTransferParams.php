@@ -48,7 +48,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type ActionTransferParamsShape = array{
  *   to: string,
  *   answeringMachineDetection?: null|AnsweringMachineDetection|value-of<AnsweringMachineDetection>,
- *   answeringMachineDetectionConfig?: AnsweringMachineDetectionConfigShape|null,
+ *   answeringMachineDetectionConfig?: null|AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape,
  *   audioURL?: string|null,
  *   clientState?: string|null,
  *   commandID?: string|null,
@@ -73,7 +73,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   sipHeaders?: list<SipHeaderShape>|null,
  *   sipRegion?: null|SipRegion|value-of<SipRegion>,
  *   sipTransportProtocol?: null|SipTransportProtocol|value-of<SipTransportProtocol>,
- *   soundModifications?: SoundModificationsShape|null,
+ *   soundModifications?: null|SoundModifications|SoundModificationsShape,
  *   targetLegClientState?: string|null,
  *   timeLimitSecs?: int|null,
  *   timeoutSecs?: int|null,
@@ -338,21 +338,21 @@ final class ActionTransferParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AnsweringMachineDetection|value-of<AnsweringMachineDetection> $answeringMachineDetection
-     * @param AnsweringMachineDetectionConfigShape $answeringMachineDetectionConfig
-     * @param list<CustomSipHeaderShape> $customHeaders
-     * @param MediaEncryption|value-of<MediaEncryption> $mediaEncryption
-     * @param MuteDtmf|value-of<MuteDtmf> $muteDtmf
-     * @param Record|value-of<Record> $record
-     * @param RecordChannels|value-of<RecordChannels> $recordChannels
-     * @param RecordFormat|value-of<RecordFormat> $recordFormat
-     * @param RecordTrack|value-of<RecordTrack> $recordTrack
-     * @param RecordTrim|value-of<RecordTrim> $recordTrim
-     * @param list<SipHeaderShape> $sipHeaders
-     * @param SipRegion|value-of<SipRegion> $sipRegion
-     * @param SipTransportProtocol|value-of<SipTransportProtocol> $sipTransportProtocol
-     * @param SoundModificationsShape $soundModifications
-     * @param WebhookURLMethod|value-of<WebhookURLMethod> $webhookURLMethod
+     * @param AnsweringMachineDetection|value-of<AnsweringMachineDetection>|null $answeringMachineDetection
+     * @param AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape|null $answeringMachineDetectionConfig
+     * @param list<CustomSipHeaderShape>|null $customHeaders
+     * @param MediaEncryption|value-of<MediaEncryption>|null $mediaEncryption
+     * @param MuteDtmf|value-of<MuteDtmf>|null $muteDtmf
+     * @param Record|value-of<Record>|null $record
+     * @param RecordChannels|value-of<RecordChannels>|null $recordChannels
+     * @param RecordFormat|value-of<RecordFormat>|null $recordFormat
+     * @param RecordTrack|value-of<RecordTrack>|null $recordTrack
+     * @param RecordTrim|value-of<RecordTrim>|null $recordTrim
+     * @param list<SipHeaderShape>|null $sipHeaders
+     * @param SipRegion|value-of<SipRegion>|null $sipRegion
+     * @param SipTransportProtocol|value-of<SipTransportProtocol>|null $sipTransportProtocol
+     * @param SoundModifications|SoundModificationsShape|null $soundModifications
+     * @param WebhookURLMethod|value-of<WebhookURLMethod>|null $webhookURLMethod
      */
     public static function with(
         string $to,
@@ -457,7 +457,7 @@ final class ActionTransferParams implements BaseModel
     /**
      * Optional configuration parameters to modify 'answering_machine_detection' performance.
      *
-     * @param AnsweringMachineDetectionConfigShape $answeringMachineDetectionConfig
+     * @param AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape $answeringMachineDetectionConfig
      */
     public function withAnsweringMachineDetectionConfig(
         AnsweringMachineDetectionConfig|array $answeringMachineDetectionConfig
@@ -760,7 +760,7 @@ final class ActionTransferParams implements BaseModel
     /**
      * Use this field to modify sound effects, for example adjust the pitch.
      *
-     * @param SoundModificationsShape $soundModifications
+     * @param SoundModifications|SoundModificationsShape $soundModifications
      */
     public function withSoundModifications(
         SoundModifications|array $soundModifications

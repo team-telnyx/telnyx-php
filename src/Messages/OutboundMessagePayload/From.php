@@ -51,7 +51,7 @@ final class From implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param LineType|value-of<LineType> $lineType
+     * @param LineType|value-of<LineType>|null $lineType
      */
     public static function with(
         ?string $carrier = null,

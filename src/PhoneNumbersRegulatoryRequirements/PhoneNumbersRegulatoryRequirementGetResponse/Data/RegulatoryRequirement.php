@@ -58,7 +58,7 @@ final class RegulatoryRequirement implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AcceptanceCriteriaShape $acceptanceCriteria
+     * @param AcceptanceCriteria|AcceptanceCriteriaShape|null $acceptanceCriteria
      */
     public static function with(
         ?string $id = null,
@@ -91,7 +91,7 @@ final class RegulatoryRequirement implements BaseModel
     }
 
     /**
-     * @param AcceptanceCriteriaShape $acceptanceCriteria
+     * @param AcceptanceCriteria|AcceptanceCriteriaShape $acceptanceCriteria
      */
     public function withAcceptanceCriteria(
         AcceptanceCriteria|array $acceptanceCriteria

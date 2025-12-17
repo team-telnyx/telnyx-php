@@ -87,10 +87,10 @@ final class MdrUsageReport implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AggregationType|value-of<AggregationType> $aggregationType
-     * @param list<int> $connections
-     * @param list<ResultShape> $result
-     * @param Status|value-of<Status> $status
+     * @param AggregationType|value-of<AggregationType>|null $aggregationType
+     * @param list<int>|null $connections
+     * @param list<ResultShape>|null $result
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,

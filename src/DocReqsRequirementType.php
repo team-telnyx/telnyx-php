@@ -96,8 +96,8 @@ final class DocReqsRequirementType implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AcceptanceCriteriaShape $acceptanceCriteria
-     * @param Type|value-of<Type> $type
+     * @param AcceptanceCriteria|AcceptanceCriteriaShape|null $acceptanceCriteria
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         ?string $id = null,
@@ -139,7 +139,7 @@ final class DocReqsRequirementType implements BaseModel
     /**
      * Specifies objective criteria for acceptance.
      *
-     * @param AcceptanceCriteriaShape $acceptanceCriteria
+     * @param AcceptanceCriteria|AcceptanceCriteriaShape $acceptanceCriteria
      */
     public function withAcceptanceCriteria(
         AcceptanceCriteria|array $acceptanceCriteria

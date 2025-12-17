@@ -53,8 +53,8 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DateCreatedAtShape $dateCreatedAt
-     * @param Status|value-of<Status> $status
+     * @param DateCreatedAt|DateCreatedAtShape|null $dateCreatedAt
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         DateCreatedAt|array|null $dateCreatedAt = null,
@@ -71,7 +71,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param DateCreatedAtShape $dateCreatedAt
+     * @param DateCreatedAt|DateCreatedAtShape $dateCreatedAt
      */
     public function withDateCreatedAt(DateCreatedAt|array $dateCreatedAt): self
     {

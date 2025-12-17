@@ -106,7 +106,7 @@ final class ScheduledEventCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param ConversationChannelType|value-of<ConversationChannelType> $telnyxConversationChannel
-     * @param array<string,ConversationMetadataShape> $conversationMetadata
+     * @param array<string,ConversationMetadataShape>|null $conversationMetadata
      */
     public static function with(
         \DateTimeInterface $scheduledAtFixedDatetime,

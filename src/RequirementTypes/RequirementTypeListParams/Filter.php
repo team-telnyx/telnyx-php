@@ -34,7 +34,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param NameShape $name
+     * @param Name|NameShape|null $name
      */
     public static function with(Name|array|null $name = null): self
     {
@@ -46,7 +46,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param NameShape $name
+     * @param Name|NameShape $name
      */
     public function withName(Name|array $name): self
     {

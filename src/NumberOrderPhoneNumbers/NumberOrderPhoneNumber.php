@@ -113,10 +113,10 @@ final class NumberOrderPhoneNumber implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
-     * @param list<SubNumberOrderRegulatoryRequirementWithValueShape> $regulatoryRequirements
-     * @param RequirementsStatus|value-of<RequirementsStatus> $requirementsStatus
-     * @param Status|value-of<Status> $status
+     * @param PhoneNumberType|value-of<PhoneNumberType>|null $phoneNumberType
+     * @param list<SubNumberOrderRegulatoryRequirementWithValueShape>|null $regulatoryRequirements
+     * @param RequirementsStatus|value-of<RequirementsStatus>|null $requirementsStatus
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,

@@ -134,11 +134,11 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ApplicationNameShape $applicationName
-     * @param OccurredAtShape $occurredAt
-     * @param Product|value-of<Product> $product
-     * @param Status|value-of<Status> $status
-     * @param Type|value-of<Type> $type
+     * @param ApplicationName|ApplicationNameShape|null $applicationName
+     * @param OccurredAt|OccurredAtShape|null $occurredAt
+     * @param Product|value-of<Product>|null $product
+     * @param Status|value-of<Status>|null $status
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         ApplicationName|array|null $applicationName = null,
@@ -177,7 +177,7 @@ final class Filter implements BaseModel
     /**
      * Application name filters.
      *
-     * @param ApplicationNameShape $applicationName
+     * @param ApplicationName|ApplicationNameShape $applicationName
      */
     public function withApplicationName(
         ApplicationName|array $applicationName
@@ -257,7 +257,7 @@ final class Filter implements BaseModel
     /**
      * Event occurred_at filters.
      *
-     * @param OccurredAtShape $occurredAt
+     * @param OccurredAt|OccurredAtShape $occurredAt
      */
     public function withOccurredAt(OccurredAt|array $occurredAt): self
     {

@@ -38,8 +38,8 @@ final class PortingOrderEndUser implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortingOrderEndUserAdminShape $admin
-     * @param PortingOrderEndUserLocationShape $location
+     * @param PortingOrderEndUserAdmin|PortingOrderEndUserAdminShape|null $admin
+     * @param PortingOrderEndUserLocation|PortingOrderEndUserLocationShape|null $location
      */
     public static function with(
         PortingOrderEndUserAdmin|array|null $admin = null,
@@ -54,7 +54,7 @@ final class PortingOrderEndUser implements BaseModel
     }
 
     /**
-     * @param PortingOrderEndUserAdminShape $admin
+     * @param PortingOrderEndUserAdmin|PortingOrderEndUserAdminShape $admin
      */
     public function withAdmin(PortingOrderEndUserAdmin|array $admin): self
     {
@@ -65,7 +65,7 @@ final class PortingOrderEndUser implements BaseModel
     }
 
     /**
-     * @param PortingOrderEndUserLocationShape $location
+     * @param PortingOrderEndUserLocation|PortingOrderEndUserLocationShape $location
      */
     public function withLocation(
         PortingOrderEndUserLocation|array $location

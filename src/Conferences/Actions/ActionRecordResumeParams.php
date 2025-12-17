@@ -57,7 +57,7 @@ final class ActionRecordResumeParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Region|value-of<Region> $region
+     * @param Region|value-of<Region>|null $region
      */
     public static function with(
         ?string $commandID = null,

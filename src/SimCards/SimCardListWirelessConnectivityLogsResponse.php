@@ -158,7 +158,7 @@ final class SimCardListWirelessConnectivityLogsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param LogType|value-of<LogType> $logType
+     * @param LogType|value-of<LogType>|null $logType
      */
     public static function with(
         ?int $id = null,

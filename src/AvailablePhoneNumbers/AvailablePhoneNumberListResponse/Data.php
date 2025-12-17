@@ -83,10 +83,10 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CostInformationShape $costInformation
-     * @param list<FeatureShape> $features
-     * @param RecordType|value-of<RecordType> $recordType
-     * @param list<RegionInformationShape> $regionInformation
+     * @param CostInformation|CostInformationShape|null $costInformation
+     * @param list<FeatureShape>|null $features
+     * @param RecordType|value-of<RecordType>|null $recordType
+     * @param list<RegionInformationShape>|null $regionInformation
      */
     public static function with(
         ?bool $bestEffort = null,
@@ -126,7 +126,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param CostInformationShape $costInformation
+     * @param CostInformation|CostInformationShape $costInformation
      */
     public function withCostInformation(
         CostInformation|array $costInformation

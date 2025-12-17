@@ -126,10 +126,10 @@ final class ReportListWdrsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CostShape $cost
-     * @param DownlinkDataShape $downlinkData
-     * @param RateShape $rate
-     * @param UplinkDataShape $uplinkData
+     * @param Cost|CostShape|null $cost
+     * @param DownlinkData|DownlinkDataShape|null $downlinkData
+     * @param Rate|RateShape|null $rate
+     * @param UplinkData|UplinkDataShape|null $uplinkData
      */
     public static function with(
         ?string $id = null,
@@ -181,7 +181,7 @@ final class ReportListWdrsResponse implements BaseModel
     }
 
     /**
-     * @param CostShape $cost
+     * @param Cost|CostShape $cost
      */
     public function withCost(Cost|array $cost): self
     {
@@ -203,7 +203,7 @@ final class ReportListWdrsResponse implements BaseModel
     }
 
     /**
-     * @param DownlinkDataShape $downlinkData
+     * @param DownlinkData|DownlinkDataShape $downlinkData
      */
     public function withDownlinkData(DownlinkData|array $downlinkData): self
     {
@@ -269,7 +269,7 @@ final class ReportListWdrsResponse implements BaseModel
     }
 
     /**
-     * @param RateShape $rate
+     * @param Rate|RateShape $rate
      */
     public function withRate(Rate|array $rate): self
     {
@@ -321,7 +321,7 @@ final class ReportListWdrsResponse implements BaseModel
     }
 
     /**
-     * @param UplinkDataShape $uplinkData
+     * @param UplinkData|UplinkDataShape $uplinkData
      */
     public function withUplinkData(UplinkData|array $uplinkData): self
     {

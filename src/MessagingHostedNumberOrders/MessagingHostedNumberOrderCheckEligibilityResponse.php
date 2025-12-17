@@ -39,7 +39,7 @@ final class MessagingHostedNumberOrderCheckEligibilityResponse implements BaseMo
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PhoneNumberShape> $phoneNumbers
+     * @param list<PhoneNumberShape>|null $phoneNumbers
      */
     public static function with(?array $phoneNumbers = null): self
     {

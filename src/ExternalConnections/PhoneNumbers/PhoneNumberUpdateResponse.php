@@ -33,7 +33,7 @@ final class PhoneNumberUpdateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalConnectionPhoneNumberShape $data
+     * @param ExternalConnectionPhoneNumber|ExternalConnectionPhoneNumberShape|null $data
      */
     public static function with(
         ExternalConnectionPhoneNumber|array|null $data = null
@@ -46,7 +46,7 @@ final class PhoneNumberUpdateResponse implements BaseModel
     }
 
     /**
-     * @param ExternalConnectionPhoneNumberShape $data
+     * @param ExternalConnectionPhoneNumber|ExternalConnectionPhoneNumberShape $data
      */
     public function withData(ExternalConnectionPhoneNumber|array $data): self
     {

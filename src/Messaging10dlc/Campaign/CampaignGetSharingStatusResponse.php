@@ -37,8 +37,8 @@ final class CampaignGetSharingStatusResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CampaignSharingStatusShape $sharedByMe
-     * @param CampaignSharingStatusShape $sharedWithMe
+     * @param CampaignSharingStatus|CampaignSharingStatusShape|null $sharedByMe
+     * @param CampaignSharingStatus|CampaignSharingStatusShape|null $sharedWithMe
      */
     public static function with(
         CampaignSharingStatus|array|null $sharedByMe = null,
@@ -53,7 +53,7 @@ final class CampaignGetSharingStatusResponse implements BaseModel
     }
 
     /**
-     * @param CampaignSharingStatusShape $sharedByMe
+     * @param CampaignSharingStatus|CampaignSharingStatusShape $sharedByMe
      */
     public function withSharedByMe(
         CampaignSharingStatus|array $sharedByMe
@@ -65,7 +65,7 @@ final class CampaignGetSharingStatusResponse implements BaseModel
     }
 
     /**
-     * @param CampaignSharingStatusShape $sharedWithMe
+     * @param CampaignSharingStatus|CampaignSharingStatusShape $sharedWithMe
      */
     public function withSharedWithMe(
         CampaignSharingStatus|array $sharedWithMe

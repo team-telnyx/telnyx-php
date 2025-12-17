@@ -51,8 +51,8 @@ final class ActionStopParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $callControlIDs
-     * @param Region|value-of<Region> $region
+     * @param list<string>|null $callControlIDs
+     * @param Region|value-of<Region>|null $region
      */
     public static function with(
         ?array $callControlIDs = null,

@@ -33,7 +33,7 @@ final class MessageSendResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param OutboundMessagePayloadShape $data
+     * @param OutboundMessagePayload|OutboundMessagePayloadShape|null $data
      */
     public static function with(OutboundMessagePayload|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class MessageSendResponse implements BaseModel
     }
 
     /**
-     * @param OutboundMessagePayloadShape $data
+     * @param OutboundMessagePayload|OutboundMessagePayloadShape $data
      */
     public function withData(OutboundMessagePayload|array $data): self
     {

@@ -147,8 +147,8 @@ final class UsageReportListParams implements BaseModel
      *
      * @param list<string> $dimensions
      * @param list<string> $metrics
-     * @param Format|value-of<Format> $format
-     * @param list<string> $sort
+     * @param Format|value-of<Format>|null $format
+     * @param list<string>|null $sort
      */
     public static function with(
         array $dimensions,

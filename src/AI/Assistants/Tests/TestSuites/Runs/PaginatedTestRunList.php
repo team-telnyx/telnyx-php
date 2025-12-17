@@ -66,7 +66,7 @@ final class PaginatedTestRunList implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<TestRunResponseShape> $data
-     * @param MetaShape $meta
+     * @param Meta|MetaShape $meta
      */
     public static function with(array $data, Meta|array $meta): self
     {
@@ -94,7 +94,7 @@ final class PaginatedTestRunList implements BaseModel
     /**
      * Pagination metadata including total counts and current page info.
      *
-     * @param MetaShape $meta
+     * @param Meta|MetaShape $meta
      */
     public function withMeta(Meta|array $meta): self
     {

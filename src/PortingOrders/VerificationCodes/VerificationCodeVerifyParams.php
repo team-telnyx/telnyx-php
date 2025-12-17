@@ -41,7 +41,7 @@ final class VerificationCodeVerifyParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VerificationCodeShape> $verificationCodes
+     * @param list<VerificationCodeShape>|null $verificationCodes
      */
     public static function with(?array $verificationCodes = null): self
     {

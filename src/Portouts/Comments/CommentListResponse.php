@@ -40,8 +40,8 @@ final class CommentListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DataShape> $data
-     * @param MetadataShape $meta
+     * @param list<DataShape>|null $data
+     * @param Metadata|MetadataShape|null $meta
      */
     public static function with(
         ?array $data = null,
@@ -67,7 +67,7 @@ final class CommentListResponse implements BaseModel
     }
 
     /**
-     * @param MetadataShape $meta
+     * @param Metadata|MetadataShape $meta
      */
     public function withMeta(Metadata|array $meta): self
     {

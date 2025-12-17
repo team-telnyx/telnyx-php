@@ -33,7 +33,7 @@ final class BillingGroupUpdateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BillingGroupShape $data
+     * @param BillingGroup|BillingGroupShape|null $data
      */
     public static function with(BillingGroup|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class BillingGroupUpdateResponse implements BaseModel
     }
 
     /**
-     * @param BillingGroupShape $data
+     * @param BillingGroup|BillingGroupShape $data
      */
     public function withData(BillingGroup|array $data): self
     {

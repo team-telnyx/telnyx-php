@@ -114,8 +114,8 @@ final class WireguardInterfaceListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param InterfaceStatus|value-of<InterfaceStatus> $status
-     * @param RegionShape $region
+     * @param InterfaceStatus|value-of<InterfaceStatus>|null $status
+     * @param Region|RegionShape|null $region
      */
     public static function with(
         ?string $id = null,
@@ -262,7 +262,7 @@ final class WireguardInterfaceListResponse implements BaseModel
     }
 
     /**
-     * @param RegionShape $region
+     * @param Region|RegionShape $region
      */
     public function withRegion(Region|array $region): self
     {

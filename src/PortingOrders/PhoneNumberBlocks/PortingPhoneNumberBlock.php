@@ -93,9 +93,9 @@ final class PortingPhoneNumberBlock implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ActivationRangeShape> $activationRanges
-     * @param PhoneNumberRangeShape $phoneNumberRange
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
+     * @param list<ActivationRangeShape>|null $activationRanges
+     * @param PhoneNumberRange|PhoneNumberRangeShape|null $phoneNumberRange
+     * @param PhoneNumberType|value-of<PhoneNumberType>|null $phoneNumberType
      */
     public static function with(
         ?string $id = null,
@@ -170,7 +170,7 @@ final class PortingPhoneNumberBlock implements BaseModel
     /**
      * Specifies the phone number range for this porting phone number block.
      *
-     * @param PhoneNumberRangeShape $phoneNumberRange
+     * @param PhoneNumberRange|PhoneNumberRangeShape $phoneNumberRange
      */
     public function withPhoneNumberRange(
         PhoneNumberRange|array $phoneNumberRange

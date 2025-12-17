@@ -126,8 +126,8 @@ final class ActionStartPlaybackParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AudioType|value-of<AudioType> $audioType
-     * @param LoopcountShape $loop
+     * @param AudioType|value-of<AudioType>|null $audioType
+     * @param LoopcountShape|null $loop
      */
     public static function with(
         AudioType|string|null $audioType = null,

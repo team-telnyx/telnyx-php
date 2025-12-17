@@ -48,9 +48,9 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CivicAddressIDShape $civicAddressID
-     * @param LocationIDShape $locationID
-     * @param PhoneNumberShape $phoneNumber
+     * @param CivicAddressID|CivicAddressIDShape|null $civicAddressID
+     * @param LocationID|LocationIDShape|null $locationID
+     * @param PhoneNumber|PhoneNumberShape|null $phoneNumber
      */
     public static function with(
         CivicAddressID|array|null $civicAddressID = null,
@@ -67,7 +67,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param CivicAddressIDShape $civicAddressID
+     * @param CivicAddressID|CivicAddressIDShape $civicAddressID
      */
     public function withCivicAddressID(
         CivicAddressID|array $civicAddressID
@@ -79,7 +79,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param LocationIDShape $locationID
+     * @param LocationID|LocationIDShape $locationID
      */
     public function withLocationID(LocationID|array $locationID): self
     {
@@ -90,7 +90,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param PhoneNumberShape $phoneNumber
+     * @param PhoneNumber|PhoneNumberShape $phoneNumber
      */
     public function withPhoneNumber(PhoneNumber|array $phoneNumber): self
     {

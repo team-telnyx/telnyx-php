@@ -22,8 +22,8 @@ use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileCreateParams\CallingWindow;
  * @phpstan-type OutboundVoiceProfileCreateParamsShape = array{
  *   name: string,
  *   billingGroupID?: string|null,
- *   callRecording?: OutboundCallRecordingShape|null,
- *   callingWindow?: CallingWindowShape|null,
+ *   callRecording?: null|OutboundCallRecording|OutboundCallRecordingShape,
+ *   callingWindow?: null|CallingWindow|CallingWindowShape,
  *   concurrentCallLimit?: int|null,
  *   dailySpendLimit?: string|null,
  *   dailySpendLimitEnabled?: bool|null,
@@ -153,13 +153,13 @@ final class OutboundVoiceProfileCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param OutboundCallRecordingShape $callRecording
-     * @param CallingWindowShape $callingWindow
-     * @param ServicePlan|value-of<ServicePlan> $servicePlan
-     * @param list<string> $tags
-     * @param TrafficType|value-of<TrafficType> $trafficType
-     * @param UsagePaymentMethod|value-of<UsagePaymentMethod> $usagePaymentMethod
-     * @param list<string> $whitelistedDestinations
+     * @param OutboundCallRecording|OutboundCallRecordingShape|null $callRecording
+     * @param CallingWindow|CallingWindowShape|null $callingWindow
+     * @param ServicePlan|value-of<ServicePlan>|null $servicePlan
+     * @param list<string>|null $tags
+     * @param TrafficType|value-of<TrafficType>|null $trafficType
+     * @param UsagePaymentMethod|value-of<UsagePaymentMethod>|null $usagePaymentMethod
+     * @param list<string>|null $whitelistedDestinations
      */
     public static function with(
         string $name,
@@ -221,7 +221,7 @@ final class OutboundVoiceProfileCreateParams implements BaseModel
     }
 
     /**
-     * @param OutboundCallRecordingShape $callRecording
+     * @param OutboundCallRecording|OutboundCallRecordingShape $callRecording
      */
     public function withCallRecording(
         OutboundCallRecording|array $callRecording
@@ -235,7 +235,7 @@ final class OutboundVoiceProfileCreateParams implements BaseModel
     /**
      * (BETA) Specifies the time window and call limits for calls made using this outbound voice profile. Note that all times are UTC in 24-hour clock time.
      *
-     * @param CallingWindowShape $callingWindow
+     * @param CallingWindow|CallingWindowShape $callingWindow
      */
     public function withCallingWindow(CallingWindow|array $callingWindow): self
     {

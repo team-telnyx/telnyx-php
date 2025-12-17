@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type AuthenticationProviderCreateParamsShape = array{
  *   name: string,
- *   settings: SettingsShape,
+ *   settings: Settings|SettingsShape,
  *   shortName: string,
  *   active?: bool|null,
  *   settingsURL?: string|null,
@@ -90,7 +90,7 @@ final class AuthenticationProviderCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SettingsShape $settings
+     * @param Settings|SettingsShape $settings
      */
     public static function with(
         string $name,
@@ -125,7 +125,7 @@ final class AuthenticationProviderCreateParams implements BaseModel
     /**
      * The settings associated with the authentication provider.
      *
-     * @param SettingsShape $settings
+     * @param Settings|SettingsShape $settings
      */
     public function withSettings(Settings|array $settings): self
     {

@@ -137,10 +137,10 @@ final class OutboundFqdn implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AniOverrideType|value-of<AniOverrideType> $aniOverrideType
+     * @param AniOverrideType|value-of<AniOverrideType>|null $aniOverrideType
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
-     * @param IPAuthenticationMethod|value-of<IPAuthenticationMethod> $ipAuthenticationMethod
-     * @param T38ReinviteSource|value-of<T38ReinviteSource> $t38ReinviteSource
+     * @param IPAuthenticationMethod|value-of<IPAuthenticationMethod>|null $ipAuthenticationMethod
+     * @param T38ReinviteSource|value-of<T38ReinviteSource>|null $t38ReinviteSource
      */
     public static function with(
         ?string $aniOverride = null,

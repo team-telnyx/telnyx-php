@@ -31,7 +31,7 @@ final class UploadGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param UploadShape $data
+     * @param Upload|UploadShape|null $data
      */
     public static function with(Upload|array|null $data = null): self
     {
@@ -43,7 +43,7 @@ final class UploadGetResponse implements BaseModel
     }
 
     /**
-     * @param UploadShape $data
+     * @param Upload|UploadShape $data
      */
     public function withData(Upload|array $data): self
     {

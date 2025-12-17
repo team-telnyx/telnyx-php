@@ -64,7 +64,7 @@ final class Assistant implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ToolShape> $tools
+     * @param list<ToolShape>|null $tools
      */
     public static function with(
         ?string $instructions = null,

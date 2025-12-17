@@ -42,7 +42,7 @@ final class WellKnownGetProtectedResourceMetadataResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $authorizationServers
+     * @param list<string>|null $authorizationServers
      */
     public static function with(
         ?array $authorizationServers = null,

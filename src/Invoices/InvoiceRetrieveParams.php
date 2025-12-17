@@ -43,7 +43,7 @@ final class InvoiceRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Action|value-of<Action> $action
+     * @param Action|value-of<Action>|null $action
      */
     public static function with(Action|string|null $action = null): self
     {

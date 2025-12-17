@@ -36,7 +36,7 @@ final class VoiceDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CdrDetailedReqResponseShape $data
+     * @param CdrDetailedReqResponse|CdrDetailedReqResponseShape|null $data
      */
     public static function with(CdrDetailedReqResponse|array|null $data = null): self
     {
@@ -50,7 +50,7 @@ final class VoiceDeleteResponse implements BaseModel
     /**
      * Response object for CDR detailed report.
      *
-     * @param CdrDetailedReqResponseShape $data
+     * @param CdrDetailedReqResponse|CdrDetailedReqResponseShape $data
      */
     public function withData(CdrDetailedReqResponse|array $data): self
     {

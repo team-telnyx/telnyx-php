@@ -134,9 +134,9 @@ final class OrderingGroup implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param CountryISO|value-of<CountryISO> $countryISO
-     * @param list<string> $features
-     * @param PhoneNumberShape $phoneNumber
-     * @param Strategy|value-of<Strategy> $strategy
+     * @param list<string>|null $features
+     * @param PhoneNumber|PhoneNumberShape|null $phoneNumber
+     * @param Strategy|value-of<Strategy>|null $strategy
      */
     public static function with(
         string $countRequested,
@@ -265,7 +265,7 @@ final class OrderingGroup implements BaseModel
     /**
      * Phone number search criteria.
      *
-     * @param PhoneNumberShape $phoneNumber
+     * @param PhoneNumber|PhoneNumberShape $phoneNumber
      */
     public function withPhoneNumber(PhoneNumber|array $phoneNumber): self
     {

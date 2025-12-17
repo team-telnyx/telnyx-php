@@ -39,8 +39,8 @@ final class RecordingTranscriptionListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RecordingTranscriptionShape> $data
-     * @param MetaShape $meta
+     * @param list<RecordingTranscriptionShape>|null $data
+     * @param Meta|MetaShape|null $meta
      */
     public static function with(
         ?array $data = null,
@@ -66,7 +66,7 @@ final class RecordingTranscriptionListResponse implements BaseModel
     }
 
     /**
-     * @param MetaShape $meta
+     * @param Meta|MetaShape $meta
      */
     public function withMeta(Meta|array $meta): self
     {

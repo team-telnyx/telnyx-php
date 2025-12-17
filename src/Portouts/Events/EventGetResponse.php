@@ -15,9 +15,7 @@ use Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutStatusChanged;
 /**
  * @phpstan-import-type DataShape from \Telnyx\Portouts\Events\EventGetResponse\Data
  *
- * @phpstan-type EventGetResponseShape = array{
- *   data?: null|DataShape|WebhookPortoutStatusChanged|WebhookPortoutNewComment|WebhookPortoutFocDateChanged,
- * }
+ * @phpstan-type EventGetResponseShape = array{data?: DataShape|null}
  */
 final class EventGetResponse implements BaseModel
 {
@@ -37,7 +35,7 @@ final class EventGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DataShape $data
+     * @param DataShape|null $data
      */
     public static function with(
         WebhookPortoutStatusChanged|array|WebhookPortoutNewComment|WebhookPortoutFocDateChanged|null $data = null,

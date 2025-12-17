@@ -62,9 +62,9 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DateJoinedAtShape $dateJoinedAt
-     * @param DateLeftAtShape $dateLeftAt
-     * @param DateUpdatedAtShape $dateUpdatedAt
+     * @param DateJoinedAt|DateJoinedAtShape|null $dateJoinedAt
+     * @param DateLeftAt|DateLeftAtShape|null $dateLeftAt
+     * @param DateUpdatedAt|DateUpdatedAtShape|null $dateUpdatedAt
      */
     public static function with(
         ?string $context = null,
@@ -96,7 +96,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param DateJoinedAtShape $dateJoinedAt
+     * @param DateJoinedAt|DateJoinedAtShape $dateJoinedAt
      */
     public function withDateJoinedAt(DateJoinedAt|array $dateJoinedAt): self
     {
@@ -107,7 +107,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param DateLeftAtShape $dateLeftAt
+     * @param DateLeftAt|DateLeftAtShape $dateLeftAt
      */
     public function withDateLeftAt(DateLeftAt|array $dateLeftAt): self
     {
@@ -118,7 +118,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param DateUpdatedAtShape $dateUpdatedAt
+     * @param DateUpdatedAt|DateUpdatedAtShape $dateUpdatedAt
      */
     public function withDateUpdatedAt(DateUpdatedAt|array $dateUpdatedAt): self
     {

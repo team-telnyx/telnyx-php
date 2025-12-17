@@ -33,7 +33,7 @@ final class NotificationSettingGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param NotificationSettingShape $data
+     * @param NotificationSetting|NotificationSettingShape|null $data
      */
     public static function with(NotificationSetting|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class NotificationSettingGetResponse implements BaseModel
     }
 
     /**
-     * @param NotificationSettingShape $data
+     * @param NotificationSetting|NotificationSettingShape $data
      */
     public function withData(NotificationSetting|array $data): self
     {

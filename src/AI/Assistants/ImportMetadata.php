@@ -44,7 +44,7 @@ final class ImportMetadata implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ImportProvider|value-of<ImportProvider> $importProvider
+     * @param ImportProvider|value-of<ImportProvider>|null $importProvider
      */
     public static function with(
         ?string $importID = null,

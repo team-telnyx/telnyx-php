@@ -152,7 +152,7 @@ final class TestRunResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param TestStatus|value-of<TestStatus> $status
-     * @param list<DetailStatusShape> $detailStatus
+     * @param list<DetailStatusShape>|null $detailStatus
      */
     public static function with(
         \DateTimeInterface $createdAt,

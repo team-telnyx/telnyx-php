@@ -57,7 +57,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BillingBundleSummaryShape $billingBundle
+     * @param BillingBundleSummary|BillingBundleSummaryShape $billingBundle
      * @param list<string> $userBundleIDs
      */
     public static function with(
@@ -73,7 +73,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param BillingBundleSummaryShape $billingBundle
+     * @param BillingBundleSummary|BillingBundleSummaryShape $billingBundle
      */
     public function withBillingBundle(
         BillingBundleSummary|array $billingBundle

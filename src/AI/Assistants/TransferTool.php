@@ -53,7 +53,7 @@ final class TransferTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param InferenceEmbeddingTransferToolParamsShape $transfer
+     * @param InferenceEmbeddingTransferToolParams|InferenceEmbeddingTransferToolParamsShape $transfer
      * @param Type|value-of<Type> $type
      */
     public static function with(
@@ -69,7 +69,7 @@ final class TransferTool implements BaseModel
     }
 
     /**
-     * @param InferenceEmbeddingTransferToolParamsShape $transfer
+     * @param InferenceEmbeddingTransferToolParams|InferenceEmbeddingTransferToolParamsShape $transfer
      */
     public function withTransfer(
         InferenceEmbeddingTransferToolParams|array $transfer

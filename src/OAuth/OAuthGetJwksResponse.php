@@ -33,7 +33,7 @@ final class OAuthGetJwksResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<KeyShape> $keys
+     * @param list<KeyShape>|null $keys
      */
     public static function with(?array $keys = null): self
     {

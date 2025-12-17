@@ -33,7 +33,7 @@ final class MessagingProfileGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MessagingProfileShape $data
+     * @param MessagingProfile|MessagingProfileShape|null $data
      */
     public static function with(MessagingProfile|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class MessagingProfileGetResponse implements BaseModel
     }
 
     /**
-     * @param MessagingProfileShape $data
+     * @param MessagingProfile|MessagingProfileShape $data
      */
     public function withData(MessagingProfile|array $data): self
     {

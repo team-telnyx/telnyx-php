@@ -101,9 +101,9 @@ final class NotificationEventConditionListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AssociatedRecordType|value-of<AssociatedRecordType> $associatedRecordType
-     * @param list<ParameterShape> $parameters
-     * @param list<string> $supportedChannels
+     * @param AssociatedRecordType|value-of<AssociatedRecordType>|null $associatedRecordType
+     * @param list<ParameterShape>|null $parameters
+     * @param list<string>|null $supportedChannels
      */
     public static function with(
         ?string $id = null,

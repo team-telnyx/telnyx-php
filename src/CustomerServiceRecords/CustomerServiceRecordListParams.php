@@ -22,7 +22,9 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Sort;
  * @phpstan-import-type SortShape from \Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Sort
  *
  * @phpstan-type CustomerServiceRecordListParamsShape = array{
- *   filter?: FilterShape|null, page?: PageShape|null, sort?: SortShape|null
+ *   filter?: null|Filter|FilterShape,
+ *   page?: null|Page|PageShape,
+ *   sort?: null|Sort|SortShape,
  * }
  */
 final class CustomerServiceRecordListParams implements BaseModel
@@ -59,9 +61,9 @@ final class CustomerServiceRecordListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
-     * @param PageShape $page
-     * @param SortShape $sort
+     * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
+     * @param Sort|SortShape|null $sort
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -80,7 +82,7 @@ final class CustomerServiceRecordListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[phone_number][eq], filter[phone_number][in][], filter[status][eq], filter[status][in][], filter[created_at][lt], filter[created_at][gt].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -93,7 +95,7 @@ final class CustomerServiceRecordListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param PageShape $page
+     * @param Page|PageShape $page
      */
     public function withPage(Page|array $page): self
     {
@@ -106,7 +108,7 @@ final class CustomerServiceRecordListParams implements BaseModel
     /**
      * Consolidated sort parameter (deepObject style). Originally: sort[value].
      *
-     * @param SortShape $sort
+     * @param Sort|SortShape $sort
      */
     public function withSort(Sort|array $sort): self
     {

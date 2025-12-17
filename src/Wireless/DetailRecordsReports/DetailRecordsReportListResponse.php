@@ -34,7 +34,7 @@ final class DetailRecordsReportListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<WdrReportShape> $data
+     * @param list<WdrReportShape>|null $data
      */
     public static function with(?array $data = null): self
     {

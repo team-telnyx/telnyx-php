@@ -99,8 +99,8 @@ final class ShortCode implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $recordType
-     * @param list<string> $tags
+     * @param RecordType|value-of<RecordType>|null $recordType
+     * @param list<string>|null $tags
      */
     public static function with(
         ?string $messagingProfileID,

@@ -98,9 +98,9 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Channels|value-of<Channels> $channels
-     * @param PublicRecordingURLsShape $publicRecordingURLs
-     * @param RecordingURLsShape $recordingURLs
+     * @param Channels|value-of<Channels>|null $channels
+     * @param PublicRecordingURLs|PublicRecordingURLsShape|null $publicRecordingURLs
+     * @param RecordingURLs|RecordingURLsShape|null $recordingURLs
      */
     public static function with(
         ?string $callLegID = null,
@@ -188,7 +188,7 @@ final class Payload implements BaseModel
     /**
      * Recording URLs in requested format. The URL is valid for as long as the file exists. For security purposes, this feature is activated on a per request basis.  Please contact customer support with your Account ID to request activation.
      *
-     * @param PublicRecordingURLsShape $publicRecordingURLs
+     * @param PublicRecordingURLs|PublicRecordingURLsShape $publicRecordingURLs
      */
     public function withPublicRecordingURLs(
         PublicRecordingURLs|array $publicRecordingURLs
@@ -226,7 +226,7 @@ final class Payload implements BaseModel
     /**
      * Recording URLs in requested format. These URLs are valid for 10 minutes. After 10 minutes, you may retrieve recordings via API using Reports -> Call Recordings documentation, or via Mission Control under Reporting -> Recordings.
      *
-     * @param RecordingURLsShape $recordingURLs
+     * @param RecordingURLs|RecordingURLsShape $recordingURLs
      */
     public function withRecordingURLs(RecordingURLs|array $recordingURLs): self
     {

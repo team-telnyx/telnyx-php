@@ -76,7 +76,7 @@ final class ConferenceUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AnnounceMethod|value-of<AnnounceMethod> $announceMethod
+     * @param AnnounceMethod|value-of<AnnounceMethod>|null $announceMethod
      */
     public static function with(
         string $accountSid,

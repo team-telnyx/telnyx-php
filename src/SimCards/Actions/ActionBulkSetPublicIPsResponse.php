@@ -37,7 +37,7 @@ final class ActionBulkSetPublicIPsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DataShape $data
+     * @param Data|DataShape|null $data
      */
     public static function with(Data|array|null $data = null): self
     {
@@ -51,7 +51,7 @@ final class ActionBulkSetPublicIPsResponse implements BaseModel
     /**
      * This object represents a bulk SIM card action. It groups SIM card actions created through a bulk endpoint under a single resource for further lookup.
      *
-     * @param DataShape $data
+     * @param Data|DataShape $data
      */
     public function withData(Data|array $data): self
     {

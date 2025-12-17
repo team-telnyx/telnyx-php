@@ -154,7 +154,7 @@ final class AmdDetailRecord implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Feature|value-of<Feature> $feature
+     * @param Feature|value-of<Feature>|null $feature
      */
     public static function with(
         string $recordType = 'amd_detail_record',

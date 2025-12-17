@@ -79,9 +79,9 @@ final class Upload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AvailableUsage|value-of<AvailableUsage>> $availableUsages
-     * @param Status|value-of<Status> $status
-     * @param list<TnUploadEntryShape> $tnUploadEntries
+     * @param list<AvailableUsage|value-of<AvailableUsage>>|null $availableUsages
+     * @param Status|value-of<Status>|null $status
+     * @param list<TnUploadEntryShape>|null $tnUploadEntries
      */
     public static function with(
         ?array $availableUsages = null,

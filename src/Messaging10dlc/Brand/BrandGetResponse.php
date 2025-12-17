@@ -348,11 +348,11 @@ final class BrandGetResponse implements BaseModel
      *
      * @param BrandRelationship|value-of<BrandRelationship> $brandRelationship
      * @param EntityType|value-of<EntityType> $entityType
-     * @param AltBusinessIDType|value-of<AltBusinessIDType> $altBusinessIDType
-     * @param BrandIdentityStatus|value-of<BrandIdentityStatus> $identityStatus
-     * @param OptionalAttributesShape $optionalAttributes
-     * @param Status|value-of<Status> $status
-     * @param StockExchange|value-of<StockExchange> $stockExchange
+     * @param AltBusinessIDType|value-of<AltBusinessIDType>|null $altBusinessIDType
+     * @param BrandIdentityStatus|value-of<BrandIdentityStatus>|null $identityStatus
+     * @param OptionalAttributes|OptionalAttributesShape|null $optionalAttributes
+     * @param Status|value-of<Status>|null $status
+     * @param StockExchange|value-of<StockExchange>|null $stockExchange
      */
     public static function with(
         BrandRelationship|string $brandRelationship,
@@ -708,7 +708,7 @@ final class BrandGetResponse implements BaseModel
     }
 
     /**
-     * @param OptionalAttributesShape $optionalAttributes
+     * @param OptionalAttributes|OptionalAttributesShape $optionalAttributes
      */
     public function withOptionalAttributes(
         OptionalAttributes|array $optionalAttributes

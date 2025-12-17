@@ -19,7 +19,8 @@ use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter;
  * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter
  *
  * @phpstan-type CsvDownloadCreateParamsShape = array{
- *   csvFormat?: null|CsvFormat|value-of<CsvFormat>, filter?: FilterShape|null
+ *   csvFormat?: null|CsvFormat|value-of<CsvFormat>,
+ *   filter?: null|Filter|FilterShape,
  * }
  */
 final class CsvDownloadCreateParams implements BaseModel
@@ -52,8 +53,8 @@ final class CsvDownloadCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CsvFormat|value-of<CsvFormat> $csvFormat
-     * @param FilterShape $filter
+     * @param CsvFormat|value-of<CsvFormat>|null $csvFormat
+     * @param Filter|FilterShape|null $filter
      */
     public static function with(
         CsvFormat|string|null $csvFormat = null,
@@ -83,7 +84,7 @@ final class CsvDownloadCreateParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[has_bundle], filter[tag], filter[connection_id], filter[phone_number], filter[status], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {

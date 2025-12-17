@@ -84,7 +84,7 @@ final class ConferenceGetConferencesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ConferenceShape> $conferences
+     * @param list<ConferenceShape>|null $conferences
      */
     public static function with(
         ?array $conferences = null,

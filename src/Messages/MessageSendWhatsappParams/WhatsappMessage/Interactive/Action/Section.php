@@ -49,8 +49,8 @@ final class Section implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ProductItemShape> $productItems
-     * @param list<RowShape> $rows
+     * @param list<ProductItemShape>|null $productItems
+     * @param list<RowShape>|null $rows
      */
     public static function with(
         ?array $productItems = null,

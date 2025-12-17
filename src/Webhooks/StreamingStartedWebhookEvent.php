@@ -33,7 +33,7 @@ final class StreamingStartedWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CallStreamingStartedShape $data
+     * @param CallStreamingStarted|CallStreamingStartedShape|null $data
      */
     public static function with(CallStreamingStarted|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class StreamingStartedWebhookEvent implements BaseModel
     }
 
     /**
-     * @param CallStreamingStartedShape $data
+     * @param CallStreamingStarted|CallStreamingStartedShape $data
      */
     public function withData(CallStreamingStarted|array $data): self
     {

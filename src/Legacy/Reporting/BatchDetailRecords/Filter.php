@@ -87,9 +87,9 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CldFilter|value-of<CldFilter> $cldFilter
-     * @param CliFilter|value-of<CliFilter> $cliFilter
-     * @param FilterType|value-of<FilterType> $filterType
+     * @param CldFilter|value-of<CldFilter>|null $cldFilter
+     * @param CliFilter|value-of<CliFilter>|null $cliFilter
+     * @param FilterType|value-of<FilterType>|null $filterType
      */
     public static function with(
         ?string $billingGroup = null,

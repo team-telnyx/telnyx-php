@@ -105,7 +105,7 @@ final class AuditEventListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ChangeMadeBy|value-of<ChangeMadeBy> $changeMadeBy
+     * @param ChangeMadeBy|value-of<ChangeMadeBy>|null $changeMadeBy
      * @param list<ChangeShape>|null $changes
      */
     public static function with(

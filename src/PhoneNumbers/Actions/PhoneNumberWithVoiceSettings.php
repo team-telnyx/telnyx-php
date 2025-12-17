@@ -142,13 +142,13 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CallForwardingShape $callForwarding
-     * @param CallRecordingShape $callRecording
-     * @param CnamListingShape $cnamListing
-     * @param EmergencyShape $emergency
-     * @param InboundCallScreening|value-of<InboundCallScreening> $inboundCallScreening
-     * @param MediaFeaturesShape $mediaFeatures
-     * @param UsagePaymentMethod|value-of<UsagePaymentMethod> $usagePaymentMethod
+     * @param CallForwarding|CallForwardingShape|null $callForwarding
+     * @param CallRecording|CallRecordingShape|null $callRecording
+     * @param CnamListing|CnamListingShape|null $cnamListing
+     * @param Emergency|EmergencyShape|null $emergency
+     * @param InboundCallScreening|value-of<InboundCallScreening>|null $inboundCallScreening
+     * @param MediaFeatures|MediaFeaturesShape|null $mediaFeatures
+     * @param UsagePaymentMethod|value-of<UsagePaymentMethod>|null $usagePaymentMethod
      */
     public static function with(
         ?string $id = null,
@@ -200,7 +200,7 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
     /**
      * The call forwarding settings for a phone number.
      *
-     * @param CallForwardingShape $callForwarding
+     * @param CallForwarding|CallForwardingShape $callForwarding
      */
     public function withCallForwarding(
         CallForwarding|array $callForwarding
@@ -214,7 +214,7 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
     /**
      * The call recording settings for a phone number.
      *
-     * @param CallRecordingShape $callRecording
+     * @param CallRecording|CallRecordingShape $callRecording
      */
     public function withCallRecording(CallRecording|array $callRecording): self
     {
@@ -227,7 +227,7 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
     /**
      * The CNAM listing settings for a phone number.
      *
-     * @param CnamListingShape $cnamListing
+     * @param CnamListing|CnamListingShape $cnamListing
      */
     public function withCnamListing(CnamListing|array $cnamListing): self
     {
@@ -262,7 +262,7 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
     /**
      * The emergency services settings for a phone number.
      *
-     * @param EmergencyShape $emergency
+     * @param Emergency|EmergencyShape $emergency
      */
     public function withEmergency(Emergency|array $emergency): self
     {
@@ -289,7 +289,7 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
     /**
      * The media features settings for a phone number.
      *
-     * @param MediaFeaturesShape $mediaFeatures
+     * @param MediaFeatures|MediaFeaturesShape $mediaFeatures
      */
     public function withMediaFeatures(MediaFeatures|array $mediaFeatures): self
     {

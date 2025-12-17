@@ -45,17 +45,17 @@ use Telnyx\Core\Contracts\BaseModel;
  *   dynamicVariablesWebhookURL?: string|null,
  *   enabledFeatures?: list<EnabledFeatures|value-of<EnabledFeatures>>|null,
  *   greeting?: string|null,
- *   insightSettings?: InsightSettingsShape|null,
+ *   insightSettings?: null|InsightSettings|InsightSettingsShape,
  *   instructions?: string|null,
  *   llmAPIKeyRef?: string|null,
- *   messagingSettings?: MessagingSettingsShape|null,
+ *   messagingSettings?: null|MessagingSettings|MessagingSettingsShape,
  *   model?: string|null,
  *   name?: string|null,
- *   privacySettings?: PrivacySettingsShape|null,
- *   telephonySettings?: TelephonySettingsShape|null,
+ *   privacySettings?: null|PrivacySettings|PrivacySettingsShape,
+ *   telephonySettings?: null|TelephonySettings|TelephonySettingsShape,
  *   tools?: list<AssistantToolShape>|null,
- *   transcription?: TranscriptionSettingsShape|null,
- *   voiceSettings?: VoiceSettingsShape|null,
+ *   transcription?: null|TranscriptionSettings|TranscriptionSettingsShape,
+ *   voiceSettings?: null|VoiceSettings|VoiceSettingsShape,
  * }
  */
 final class VersionUpdateParams implements BaseModel
@@ -165,15 +165,15 @@ final class VersionUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,mixed> $dynamicVariables
-     * @param list<EnabledFeatures|value-of<EnabledFeatures>> $enabledFeatures
-     * @param InsightSettingsShape $insightSettings
-     * @param MessagingSettingsShape $messagingSettings
-     * @param PrivacySettingsShape $privacySettings
-     * @param TelephonySettingsShape $telephonySettings
-     * @param list<AssistantToolShape> $tools
-     * @param TranscriptionSettingsShape $transcription
-     * @param VoiceSettingsShape $voiceSettings
+     * @param array<string,mixed>|null $dynamicVariables
+     * @param list<EnabledFeatures|value-of<EnabledFeatures>>|null $enabledFeatures
+     * @param InsightSettings|InsightSettingsShape|null $insightSettings
+     * @param MessagingSettings|MessagingSettingsShape|null $messagingSettings
+     * @param PrivacySettings|PrivacySettingsShape|null $privacySettings
+     * @param TelephonySettings|TelephonySettingsShape|null $telephonySettings
+     * @param list<AssistantToolShape>|null $tools
+     * @param TranscriptionSettings|TranscriptionSettingsShape|null $transcription
+     * @param VoiceSettings|VoiceSettingsShape|null $voiceSettings
      */
     public static function with(
         string $assistantID,
@@ -282,7 +282,7 @@ final class VersionUpdateParams implements BaseModel
     }
 
     /**
-     * @param InsightSettingsShape $insightSettings
+     * @param InsightSettings|InsightSettingsShape $insightSettings
      */
     public function withInsightSettings(
         InsightSettings|array $insightSettings
@@ -316,7 +316,7 @@ final class VersionUpdateParams implements BaseModel
     }
 
     /**
-     * @param MessagingSettingsShape $messagingSettings
+     * @param MessagingSettings|MessagingSettingsShape $messagingSettings
      */
     public function withMessagingSettings(
         MessagingSettings|array $messagingSettings
@@ -347,7 +347,7 @@ final class VersionUpdateParams implements BaseModel
     }
 
     /**
-     * @param PrivacySettingsShape $privacySettings
+     * @param PrivacySettings|PrivacySettingsShape $privacySettings
      */
     public function withPrivacySettings(
         PrivacySettings|array $privacySettings
@@ -359,7 +359,7 @@ final class VersionUpdateParams implements BaseModel
     }
 
     /**
-     * @param TelephonySettingsShape $telephonySettings
+     * @param TelephonySettings|TelephonySettingsShape $telephonySettings
      */
     public function withTelephonySettings(
         TelephonySettings|array $telephonySettings
@@ -384,7 +384,7 @@ final class VersionUpdateParams implements BaseModel
     }
 
     /**
-     * @param TranscriptionSettingsShape $transcription
+     * @param TranscriptionSettings|TranscriptionSettingsShape $transcription
      */
     public function withTranscription(
         TranscriptionSettings|array $transcription
@@ -396,7 +396,7 @@ final class VersionUpdateParams implements BaseModel
     }
 
     /**
-     * @param VoiceSettingsShape $voiceSettings
+     * @param VoiceSettings|VoiceSettingsShape $voiceSettings
      */
     public function withVoiceSettings(VoiceSettings|array $voiceSettings): self
     {

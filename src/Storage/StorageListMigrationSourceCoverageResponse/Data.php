@@ -43,7 +43,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Provider|value-of<Provider> $provider
+     * @param Provider|value-of<Provider>|null $provider
      */
     public static function with(
         Provider|string|null $provider = null,

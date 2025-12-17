@@ -74,7 +74,7 @@ final class NumberOrderCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PhoneNumberShape> $phoneNumbers
+     * @param list<PhoneNumberShape>|null $phoneNumbers
      */
     public static function with(
         ?string $billingGroupID = null,

@@ -54,9 +54,9 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortingOrderShape $portingOrder
-     * @param list<string> $portingPhoneNumber
-     * @param list<string> $userBundleID
+     * @param PortingOrder|PortingOrderShape|null $portingOrder
+     * @param list<string>|null $portingPhoneNumber
+     * @param list<string>|null $userBundleID
      */
     public static function with(
         PortingOrder|array|null $portingOrder = null,
@@ -73,7 +73,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param PortingOrderShape $portingOrder
+     * @param PortingOrder|PortingOrderShape $portingOrder
      */
     public function withPortingOrder(PortingOrder|array $portingOrder): self
     {

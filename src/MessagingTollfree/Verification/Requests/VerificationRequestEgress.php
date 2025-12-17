@@ -256,8 +256,8 @@ final class VerificationRequestEgress implements BaseModel
      * @param list<URLShape> $optInWorkflowImageURLs
      * @param list<TfPhoneNumberShape> $phoneNumbers
      * @param UseCaseCategories|value-of<UseCaseCategories> $useCase
-     * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType> $entityType
-     * @param TfVerificationStatus|value-of<TfVerificationStatus> $verificationStatus
+     * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null $entityType
+     * @param TfVerificationStatus|value-of<TfVerificationStatus>|null $verificationStatus
      */
     public static function with(
         string $id,

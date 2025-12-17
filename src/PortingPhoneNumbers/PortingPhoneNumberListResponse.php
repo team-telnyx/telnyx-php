@@ -105,11 +105,11 @@ final class PortingPhoneNumberListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ActivationStatus|value-of<ActivationStatus> $activationStatus
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
-     * @param PortabilityStatus|value-of<PortabilityStatus> $portabilityStatus
-     * @param PortingOrderStatus|value-of<PortingOrderStatus> $portingOrderStatus
-     * @param RequirementsStatus|value-of<RequirementsStatus> $requirementsStatus
+     * @param ActivationStatus|value-of<ActivationStatus>|null $activationStatus
+     * @param PhoneNumberType|value-of<PhoneNumberType>|null $phoneNumberType
+     * @param PortabilityStatus|value-of<PortabilityStatus>|null $portabilityStatus
+     * @param PortingOrderStatus|value-of<PortingOrderStatus>|null $portingOrderStatus
+     * @param RequirementsStatus|value-of<RequirementsStatus>|null $requirementsStatus
      */
     public static function with(
         ActivationStatus|string|null $activationStatus = null,

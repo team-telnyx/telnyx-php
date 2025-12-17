@@ -113,8 +113,8 @@ final class BundleLimit implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Direction|value-of<Direction> $direction
-     * @param list<string> $types
+     * @param Direction|value-of<Direction>|null $direction
+     * @param list<string>|null $types
      */
     public static function with(
         string $id,

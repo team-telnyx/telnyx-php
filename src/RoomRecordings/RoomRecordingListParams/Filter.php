@@ -84,8 +84,8 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DateEndedAtShape $dateEndedAt
-     * @param DateStartedAtShape $dateStartedAt
+     * @param DateEndedAt|DateEndedAtShape|null $dateEndedAt
+     * @param DateStartedAt|DateStartedAtShape|null $dateStartedAt
      */
     public static function with(
         DateEndedAt|array|null $dateEndedAt = null,
@@ -112,7 +112,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param DateEndedAtShape $dateEndedAt
+     * @param DateEndedAt|DateEndedAtShape $dateEndedAt
      */
     public function withDateEndedAt(DateEndedAt|array $dateEndedAt): self
     {
@@ -123,7 +123,7 @@ final class Filter implements BaseModel
     }
 
     /**
-     * @param DateStartedAtShape $dateStartedAt
+     * @param DateStartedAt|DateStartedAtShape $dateStartedAt
      */
     public function withDateStartedAt(DateStartedAt|array $dateStartedAt): self
     {

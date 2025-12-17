@@ -33,7 +33,7 @@ final class MessagingGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MdrDetailReportResponseShape $data
+     * @param MdrDetailReportResponse|MdrDetailReportResponseShape|null $data
      */
     public static function with(
         MdrDetailReportResponse|array|null $data = null
@@ -46,7 +46,7 @@ final class MessagingGetResponse implements BaseModel
     }
 
     /**
-     * @param MdrDetailReportResponseShape $data
+     * @param MdrDetailReportResponse|MdrDetailReportResponseShape $data
      */
     public function withData(MdrDetailReportResponse|array $data): self
     {

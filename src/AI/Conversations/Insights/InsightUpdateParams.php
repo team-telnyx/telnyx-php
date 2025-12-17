@@ -53,7 +53,7 @@ final class InsightUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param JsonSchemaShape $jsonSchema
+     * @param JsonSchemaShape|null $jsonSchema
      */
     public static function with(
         ?string $instructions = null,

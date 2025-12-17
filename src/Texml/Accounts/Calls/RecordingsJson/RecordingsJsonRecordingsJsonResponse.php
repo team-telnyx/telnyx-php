@@ -116,9 +116,9 @@ final class RecordingsJsonRecordingsJsonResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param 1|2 $channels
-     * @param Source|value-of<Source> $source
-     * @param Track|value-of<Track> $track
+     * @param 1|2|null $channels
+     * @param Source|value-of<Source>|null $source
+     * @param Track|value-of<Track>|null $track
      */
     public static function with(
         ?string $accountSid = null,

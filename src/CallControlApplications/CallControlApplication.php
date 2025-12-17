@@ -161,13 +161,13 @@ final class CallControlApplication implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
-     * @param DtmfType|value-of<DtmfType> $dtmfType
-     * @param CallControlApplicationInboundShape $inbound
-     * @param CallControlApplicationOutboundShape $outbound
-     * @param RecordType|value-of<RecordType> $recordType
-     * @param list<string> $tags
-     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion
+     * @param AnchorsiteOverride|value-of<AnchorsiteOverride>|null $anchorsiteOverride
+     * @param DtmfType|value-of<DtmfType>|null $dtmfType
+     * @param CallControlApplicationInbound|CallControlApplicationInboundShape|null $inbound
+     * @param CallControlApplicationOutbound|CallControlApplicationOutboundShape|null $outbound
+     * @param RecordType|value-of<RecordType>|null $recordType
+     * @param list<string>|null $tags
+     * @param WebhookAPIVersion|value-of<WebhookAPIVersion>|null $webhookAPIVersion
      */
     public static function with(
         ?string $id = null,
@@ -318,7 +318,7 @@ final class CallControlApplication implements BaseModel
     }
 
     /**
-     * @param CallControlApplicationInboundShape $inbound
+     * @param CallControlApplicationInbound|CallControlApplicationInboundShape $inbound
      */
     public function withInbound(
         CallControlApplicationInbound|array $inbound
@@ -330,7 +330,7 @@ final class CallControlApplication implements BaseModel
     }
 
     /**
-     * @param CallControlApplicationOutboundShape $outbound
+     * @param CallControlApplicationOutbound|CallControlApplicationOutboundShape $outbound
      */
     public function withOutbound(
         CallControlApplicationOutbound|array $outbound

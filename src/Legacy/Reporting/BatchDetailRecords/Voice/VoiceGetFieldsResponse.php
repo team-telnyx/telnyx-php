@@ -65,10 +65,10 @@ final class VoiceGetFieldsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $billing
-     * @param list<string> $interactionData
-     * @param list<string> $numberInformation
-     * @param list<string> $telephonyData
+     * @param list<string>|null $billing
+     * @param list<string>|null $interactionData
+     * @param list<string>|null $numberInformation
+     * @param list<string>|null $telephonyData
      */
     public static function with(
         ?array $billing = null,

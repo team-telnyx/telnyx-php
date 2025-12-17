@@ -48,8 +48,8 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Category1Shape> $categories
-     * @param TotalShape $total
+     * @param list<Category1Shape>|null $categories
+     * @param Total|TotalShape|null $total
      */
     public static function with(
         ?array $categories = null,
@@ -88,7 +88,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param TotalShape $total
+     * @param Total|TotalShape $total
      */
     public function withTotal(Total|array $total): self
     {

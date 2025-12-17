@@ -39,7 +39,7 @@ final class SipHeader implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Name|value-of<Name> $name
+     * @param Name|value-of<Name>|null $name
      */
     public static function with(
         Name|string|null $name = null,

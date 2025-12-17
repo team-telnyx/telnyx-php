@@ -58,7 +58,7 @@ final class PhoneNumber implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param EligibleStatus|value-of<EligibleStatus> $eligibleStatus
+     * @param EligibleStatus|value-of<EligibleStatus>|null $eligibleStatus
      */
     public static function with(
         ?string $detail = null,

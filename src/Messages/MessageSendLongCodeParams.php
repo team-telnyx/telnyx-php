@@ -127,8 +127,8 @@ final class MessageSendLongCodeParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $mediaURLs
-     * @param Type|value-of<Type> $type
+     * @param list<string>|null $mediaURLs
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         string $from,

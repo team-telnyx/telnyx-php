@@ -25,11 +25,11 @@ use Telnyx\Messages\RcsAgentMessage;
  *
  * @phpstan-type RcSendParamsShape = array{
  *   agentID: string,
- *   agentMessage: RcsAgentMessageShape,
+ *   agentMessage: RcsAgentMessage|RcsAgentMessageShape,
  *   messagingProfileID: string,
  *   to: string,
- *   mmsFallback?: MmsFallbackShape|null,
- *   smsFallback?: SMSFallbackShape|null,
+ *   mmsFallback?: null|MmsFallback|MmsFallbackShape,
+ *   smsFallback?: null|SMSFallback|SMSFallbackShape,
  *   type?: null|Type|value-of<Type>,
  *   webhookURL?: string|null,
  * }
@@ -111,10 +111,10 @@ final class RcSendParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RcsAgentMessageShape $agentMessage
-     * @param MmsFallbackShape $mmsFallback
-     * @param SMSFallbackShape $smsFallback
-     * @param Type|value-of<Type> $type
+     * @param RcsAgentMessage|RcsAgentMessageShape $agentMessage
+     * @param MmsFallback|MmsFallbackShape|null $mmsFallback
+     * @param SMSFallback|SMSFallbackShape|null $smsFallback
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         string $agentID,
@@ -153,7 +153,7 @@ final class RcSendParams implements BaseModel
     }
 
     /**
-     * @param RcsAgentMessageShape $agentMessage
+     * @param RcsAgentMessage|RcsAgentMessageShape $agentMessage
      */
     public function withAgentMessage(RcsAgentMessage|array $agentMessage): self
     {
@@ -186,7 +186,7 @@ final class RcSendParams implements BaseModel
     }
 
     /**
-     * @param MmsFallbackShape $mmsFallback
+     * @param MmsFallback|MmsFallbackShape $mmsFallback
      */
     public function withMmsFallback(MmsFallback|array $mmsFallback): self
     {
@@ -197,7 +197,7 @@ final class RcSendParams implements BaseModel
     }
 
     /**
-     * @param SMSFallbackShape $smsFallback
+     * @param SMSFallback|SMSFallbackShape $smsFallback
      */
     public function withSMSFallback(SMSFallback|array $smsFallback): self
     {

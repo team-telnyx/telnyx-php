@@ -97,10 +97,10 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CountryCode|value-of<CountryCode> $countryCode
-     * @param list<Feature|value-of<Feature>> $features
-     * @param GroupBy|value-of<GroupBy> $groupBy
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
+     * @param CountryCode|value-of<CountryCode>|null $countryCode
+     * @param list<Feature|value-of<Feature>>|null $features
+     * @param GroupBy|value-of<GroupBy>|null $groupBy
+     * @param PhoneNumberType|value-of<PhoneNumberType>|null $phoneNumberType
      */
     public static function with(
         ?string $administrativeArea = null,

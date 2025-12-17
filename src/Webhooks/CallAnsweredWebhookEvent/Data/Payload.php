@@ -125,10 +125,10 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<CustomSipHeaderShape> $customHeaders
-     * @param list<SipHeaderShape> $sipHeaders
-     * @param State|value-of<State> $state
-     * @param list<string> $tags
+     * @param list<CustomSipHeaderShape>|null $customHeaders
+     * @param list<SipHeaderShape>|null $sipHeaders
+     * @param State|value-of<State>|null $state
+     * @param list<string>|null $tags
      */
     public static function with(
         ?string $callControlID = null,

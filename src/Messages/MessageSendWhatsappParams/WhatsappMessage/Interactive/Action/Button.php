@@ -39,8 +39,8 @@ final class Button implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ReplyShape $reply
-     * @param Type|value-of<Type> $type
+     * @param Reply|ReplyShape|null $reply
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         Reply|array|null $reply = null,
@@ -55,7 +55,7 @@ final class Button implements BaseModel
     }
 
     /**
-     * @param ReplyShape $reply
+     * @param Reply|ReplyShape $reply
      */
     public function withReply(Reply|array $reply): self
     {

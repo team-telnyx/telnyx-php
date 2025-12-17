@@ -20,7 +20,7 @@ use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Page;
  * @phpstan-import-type PageShape from \Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Page
  *
  * @phpstan-type DynamicEmergencyAddressListParamsShape = array{
- *   filter?: FilterShape|null, page?: PageShape|null
+ *   filter?: null|Filter|FilterShape, page?: null|Page|PageShape
  * }
  */
 final class DynamicEmergencyAddressListParams implements BaseModel
@@ -51,8 +51,8 @@ final class DynamicEmergencyAddressListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterShape $filter
-     * @param PageShape $page
+     * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
      */
     public static function with(
         Filter|array|null $filter = null,
@@ -69,7 +69,7 @@ final class DynamicEmergencyAddressListParams implements BaseModel
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[country_code].
      *
-     * @param FilterShape $filter
+     * @param Filter|FilterShape $filter
      */
     public function withFilter(Filter|array $filter): self
     {
@@ -82,7 +82,7 @@ final class DynamicEmergencyAddressListParams implements BaseModel
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      *
-     * @param PageShape $page
+     * @param Page|PageShape $page
      */
     public function withPage(Page|array $page): self
     {

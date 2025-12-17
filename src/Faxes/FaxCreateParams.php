@@ -160,8 +160,8 @@ final class FaxCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PreviewFormat|value-of<PreviewFormat> $previewFormat
-     * @param Quality|value-of<Quality> $quality
+     * @param PreviewFormat|value-of<PreviewFormat>|null $previewFormat
+     * @param Quality|value-of<Quality>|null $quality
      */
     public static function with(
         string $connectionID,

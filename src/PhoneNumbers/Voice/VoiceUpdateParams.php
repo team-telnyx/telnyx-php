@@ -22,12 +22,12 @@ use Telnyx\PhoneNumbers\Voice\VoiceUpdateParams\UsagePaymentMethod;
  * @phpstan-import-type MediaFeaturesShape from \Telnyx\PhoneNumbers\Voice\MediaFeatures
  *
  * @phpstan-type VoiceUpdateParamsShape = array{
- *   callForwarding?: CallForwardingShape|null,
- *   callRecording?: CallRecordingShape|null,
+ *   callForwarding?: null|CallForwarding|CallForwardingShape,
+ *   callRecording?: null|CallRecording|CallRecordingShape,
  *   callerIDNameEnabled?: bool|null,
- *   cnamListing?: CnamListingShape|null,
+ *   cnamListing?: null|CnamListing|CnamListingShape,
  *   inboundCallScreening?: null|InboundCallScreening|value-of<InboundCallScreening>,
- *   mediaFeatures?: MediaFeaturesShape|null,
+ *   mediaFeatures?: null|MediaFeatures|MediaFeaturesShape,
  *   techPrefixEnabled?: bool|null,
  *   translatedNumber?: string|null,
  *   usagePaymentMethod?: null|UsagePaymentMethod|value-of<UsagePaymentMethod>,
@@ -107,12 +107,12 @@ final class VoiceUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CallForwardingShape $callForwarding
-     * @param CallRecordingShape $callRecording
-     * @param CnamListingShape $cnamListing
-     * @param InboundCallScreening|value-of<InboundCallScreening> $inboundCallScreening
-     * @param MediaFeaturesShape $mediaFeatures
-     * @param UsagePaymentMethod|value-of<UsagePaymentMethod> $usagePaymentMethod
+     * @param CallForwarding|CallForwardingShape|null $callForwarding
+     * @param CallRecording|CallRecordingShape|null $callRecording
+     * @param CnamListing|CnamListingShape|null $cnamListing
+     * @param InboundCallScreening|value-of<InboundCallScreening>|null $inboundCallScreening
+     * @param MediaFeatures|MediaFeaturesShape|null $mediaFeatures
+     * @param UsagePaymentMethod|value-of<UsagePaymentMethod>|null $usagePaymentMethod
      */
     public static function with(
         CallForwarding|array|null $callForwarding = null,
@@ -143,7 +143,7 @@ final class VoiceUpdateParams implements BaseModel
     /**
      * The call forwarding settings for a phone number.
      *
-     * @param CallForwardingShape $callForwarding
+     * @param CallForwarding|CallForwardingShape $callForwarding
      */
     public function withCallForwarding(
         CallForwarding|array $callForwarding
@@ -157,7 +157,7 @@ final class VoiceUpdateParams implements BaseModel
     /**
      * The call recording settings for a phone number.
      *
-     * @param CallRecordingShape $callRecording
+     * @param CallRecording|CallRecordingShape $callRecording
      */
     public function withCallRecording(CallRecording|array $callRecording): self
     {
@@ -181,7 +181,7 @@ final class VoiceUpdateParams implements BaseModel
     /**
      * The CNAM listing settings for a phone number.
      *
-     * @param CnamListingShape $cnamListing
+     * @param CnamListing|CnamListingShape $cnamListing
      */
     public function withCnamListing(CnamListing|array $cnamListing): self
     {
@@ -208,7 +208,7 @@ final class VoiceUpdateParams implements BaseModel
     /**
      * The media features settings for a phone number.
      *
-     * @param MediaFeaturesShape $mediaFeatures
+     * @param MediaFeatures|MediaFeaturesShape $mediaFeatures
      */
     public function withMediaFeatures(MediaFeatures|array $mediaFeatures): self
     {

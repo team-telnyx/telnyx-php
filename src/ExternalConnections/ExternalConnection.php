@@ -132,11 +132,11 @@ final class ExternalConnection implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalSipConnection|value-of<ExternalSipConnection> $externalSipConnection
-     * @param InboundShape $inbound
-     * @param OutboundShape $outbound
-     * @param list<string> $tags
-     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion
+     * @param ExternalSipConnection|value-of<ExternalSipConnection>|null $externalSipConnection
+     * @param Inbound|InboundShape|null $inbound
+     * @param Outbound|OutboundShape|null $outbound
+     * @param list<string>|null $tags
+     * @param WebhookAPIVersion|value-of<WebhookAPIVersion>|null $webhookAPIVersion
      */
     public static function with(
         ?string $id = null,
@@ -233,7 +233,7 @@ final class ExternalConnection implements BaseModel
     }
 
     /**
-     * @param InboundShape $inbound
+     * @param Inbound|InboundShape $inbound
      */
     public function withInbound(Inbound|array $inbound): self
     {
@@ -244,7 +244,7 @@ final class ExternalConnection implements BaseModel
     }
 
     /**
-     * @param OutboundShape $outbound
+     * @param Outbound|OutboundShape $outbound
      */
     public function withOutbound(Outbound|array $outbound): self
     {

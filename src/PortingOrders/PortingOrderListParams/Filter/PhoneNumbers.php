@@ -51,7 +51,7 @@ final class PhoneNumbers implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PhoneNumberShape $phoneNumber
+     * @param PhoneNumber|PhoneNumberShape|null $phoneNumber
      */
     public static function with(
         ?string $carrierName = null,
@@ -92,7 +92,7 @@ final class PhoneNumbers implements BaseModel
     /**
      * Phone number pattern filtering operations.
      *
-     * @param PhoneNumberShape $phoneNumber
+     * @param PhoneNumber|PhoneNumberShape $phoneNumber
      */
     public function withPhoneNumber(PhoneNumber|array $phoneNumber): self
     {

@@ -33,7 +33,7 @@ final class RcGetCapabilitiesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RcsCapabilitiesShape $data
+     * @param RcsCapabilities|RcsCapabilitiesShape|null $data
      */
     public static function with(RcsCapabilities|array|null $data = null): self
     {
@@ -45,7 +45,7 @@ final class RcGetCapabilitiesResponse implements BaseModel
     }
 
     /**
-     * @param RcsCapabilitiesShape $data
+     * @param RcsCapabilities|RcsCapabilitiesShape $data
      */
     public function withData(RcsCapabilities|array $data): self
     {

@@ -41,8 +41,8 @@ final class CostBreakdown implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CarrierFeeShape $carrierFee
-     * @param RateShape $rate
+     * @param CarrierFee|CarrierFeeShape|null $carrierFee
+     * @param Rate|RateShape|null $rate
      */
     public static function with(
         CarrierFee|array|null $carrierFee = null,
@@ -57,7 +57,7 @@ final class CostBreakdown implements BaseModel
     }
 
     /**
-     * @param CarrierFeeShape $carrierFee
+     * @param CarrierFee|CarrierFeeShape $carrierFee
      */
     public function withCarrierFee(CarrierFee|array $carrierFee): self
     {
@@ -68,7 +68,7 @@ final class CostBreakdown implements BaseModel
     }
 
     /**
-     * @param RateShape $rate
+     * @param Rate|RateShape $rate
      */
     public function withRate(Rate|array $rate): self
     {
