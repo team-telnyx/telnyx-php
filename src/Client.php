@@ -134,6 +134,7 @@ use Telnyx\Services\SimCardOrderPreviewService;
 use Telnyx\Services\SimCardOrdersService;
 use Telnyx\Services\SimCardsService;
 use Telnyx\Services\SiprecConnectorsService;
+use Telnyx\Services\SpeechToTextService;
 use Telnyx\Services\StorageService;
 use Telnyx\Services\SubNumberOrdersReportService;
 use Telnyx\Services\SubNumberOrdersService;
@@ -915,6 +916,11 @@ class Client extends BaseClient
      */
     public Messaging10dlcService $messaging10dlc;
 
+    /**
+     * @api
+     */
+    public SpeechToTextService $speechToText;
+
     public function __construct(
         ?string $apiKey = null,
         ?string $clientID = null,
@@ -1103,6 +1109,7 @@ class Client extends BaseClient
         $this->mobilePhoneNumbers = new MobilePhoneNumbersService($this);
         $this->mobileVoiceConnections = new MobileVoiceConnectionsService($this);
         $this->messaging10dlc = new Messaging10dlcService($this);
+        $this->speechToText = new SpeechToTextService($this);
     }
 
     /** @return array<string,string> */
