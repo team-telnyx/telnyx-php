@@ -11,6 +11,7 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\AccountsContract;
 use Telnyx\Services\Texml\Accounts\CallsService;
 use Telnyx\Services\Texml\Accounts\ConferencesService;
+use Telnyx\Services\Texml\Accounts\QueuesService;
 use Telnyx\Services\Texml\Accounts\RecordingsService;
 use Telnyx\Services\Texml\Accounts\TranscriptionsService;
 use Telnyx\Texml\Accounts\AccountGetRecordingsJsonResponse;
@@ -44,6 +45,11 @@ final class AccountsService implements AccountsContract
     public TranscriptionsService $transcriptions;
 
     /**
+     * @api
+     */
+    public QueuesService $queues;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
@@ -53,6 +59,7 @@ final class AccountsService implements AccountsContract
         $this->conferences = new ConferencesService($client);
         $this->recordings = new RecordingsService($client);
         $this->transcriptions = new TranscriptionsService($client);
+        $this->queues = new QueuesService($client);
     }
 
     /**
