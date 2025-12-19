@@ -1,0 +1,130 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Telnyx\Services\Texml\Accounts;
+
+use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
+use Telnyx\RequestOptions;
+use Telnyx\ServiceContracts\Texml\Accounts\QueuesContract;
+use Telnyx\Texml\Accounts\Queues\QueueGetResponse;
+use Telnyx\Texml\Accounts\Queues\QueueNewResponse;
+use Telnyx\Texml\Accounts\Queues\QueueUpdateResponse;
+
+final class QueuesService implements QueuesContract
+{
+    /**
+     * @api
+     */
+    public QueuesRawService $raw;
+
+    /**
+     * @internal
+     */
+    public function __construct(private Client $client)
+    {
+        $this->raw = new QueuesRawService($client);
+    }
+
+    /**
+     * @api
+     *
+     * Creates a new queue resource.
+     *
+     * @param string $accountSid the id of the account the resource belongs to
+     * @param string $friendlyName a human readable name for the queue
+     * @param int $maxSize the maximum size of the queue
+     *
+     * @throws APIException
+     */
+    public function create(
+        string $accountSid,
+        ?string $friendlyName = null,
+        ?int $maxSize = null,
+        ?RequestOptions $requestOptions = null,
+    ): QueueNewResponse {
+        $params = Util::removeNulls(
+            ['friendlyName' => $friendlyName, 'maxSize' => $maxSize]
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create($accountSid, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Returns a queue resource.
+     *
+     * @param string $queueSid the QueueSid that identifies the call queue
+     * @param string $accountSid the id of the account the resource belongs to
+     *
+     * @throws APIException
+     */
+    public function retrieve(
+        string $queueSid,
+        string $accountSid,
+        ?RequestOptions $requestOptions = null
+    ): QueueGetResponse {
+        $params = Util::removeNulls(['accountSid' => $accountSid]);
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($queueSid, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Updates a queue resource.
+     *
+     * @param string $queueSid path param: The QueueSid that identifies the call queue
+     * @param string $accountSid path param: The id of the account the resource belongs to
+     * @param int $maxSize body param: The maximum size of the queue
+     *
+     * @throws APIException
+     */
+    public function update(
+        string $queueSid,
+        string $accountSid,
+        ?int $maxSize = null,
+        ?RequestOptions $requestOptions = null,
+    ): QueueUpdateResponse {
+        $params = Util::removeNulls(
+            ['accountSid' => $accountSid, 'maxSize' => $maxSize]
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($queueSid, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Delete a queue resource.
+     *
+     * @param string $queueSid the QueueSid that identifies the call queue
+     * @param string $accountSid the id of the account the resource belongs to
+     *
+     * @throws APIException
+     */
+    public function delete(
+        string $queueSid,
+        string $accountSid,
+        ?RequestOptions $requestOptions = null
+    ): mixed {
+        $params = Util::removeNulls(['accountSid' => $accountSid]);
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($queueSid, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+}
