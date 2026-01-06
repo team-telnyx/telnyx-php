@@ -241,7 +241,7 @@ final class TelnyxDownstreamCampaign implements BaseModel
     public ?bool $subscriberOptout;
 
     /**
-     * Campaign sub-usecases. Must be of defined valid sub-usecase types. Use `/registry/enum/usecase` operation to retrieve list of valid sub-usecases.
+     * Campaign sub-usecases. Must be of defined valid sub-usecase types. Use `/10dlc/enum/usecase` operation to retrieve list of valid sub-usecases.
      *
      * @var list<string>|null $subUsecases
      */
@@ -267,7 +267,7 @@ final class TelnyxDownstreamCampaign implements BaseModel
     public ?string $updatedAt;
 
     /**
-     * Campaign usecase. Must be of defined valid types. Use `/registry/enum/usecase` operation to retrieve usecases available for given brand.
+     * Campaign usecase. Must be of defined valid types. Use `/10dlc/enum/usecase` operation to retrieve usecases available for given brand.
      */
     #[Optional]
     public ?string $usecase;
@@ -730,7 +730,7 @@ final class TelnyxDownstreamCampaign implements BaseModel
     }
 
     /**
-     * Campaign sub-usecases. Must be of defined valid sub-usecase types. Use `/registry/enum/usecase` operation to retrieve list of valid sub-usecases.
+     * Campaign sub-usecases. Must be of defined valid sub-usecase types. Use `/10dlc/enum/usecase` operation to retrieve list of valid sub-usecases.
      *
      * @param list<string> $subUsecases
      */
@@ -777,7 +777,7 @@ final class TelnyxDownstreamCampaign implements BaseModel
     }
 
     /**
-     * Campaign usecase. Must be of defined valid types. Use `/registry/enum/usecase` operation to retrieve usecases available for given brand.
+     * Campaign usecase. Must be of defined valid types. Use `/10dlc/enum/usecase` operation to retrieve usecases available for given brand.
      */
     public function withUsecase(string $usecase): self
     {
