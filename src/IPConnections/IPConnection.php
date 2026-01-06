@@ -11,11 +11,14 @@ use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
+use Telnyx\IPConnections\IPConnection\NoiseSuppression;
+use Telnyx\IPConnections\IPConnection\NoiseSuppressionDetails;
 use Telnyx\IPConnections\IPConnection\TransportProtocol;
 use Telnyx\IPConnections\IPConnection\WebhookAPIVersion;
 
 /**
  * @phpstan-import-type InboundIPShape from \Telnyx\IPConnections\InboundIP
+ * @phpstan-import-type NoiseSuppressionDetailsShape from \Telnyx\IPConnections\IPConnection\NoiseSuppressionDetails
  * @phpstan-import-type OutboundIPShape from \Telnyx\IPConnections\OutboundIP
  * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
  *
@@ -31,6 +34,8 @@ use Telnyx\IPConnections\IPConnection\WebhookAPIVersion;
  *   encodeContactHeaderEnabled?: bool|null,
  *   encryptedMedia?: null|EncryptedMedia|value-of<EncryptedMedia>,
  *   inbound?: null|InboundIP|InboundIPShape,
+ *   noiseSuppression?: null|NoiseSuppression|value-of<NoiseSuppression>,
+ *   noiseSuppressionDetails?: null|NoiseSuppressionDetails|NoiseSuppressionDetailsShape,
  *   onnetT38PassthroughEnabled?: bool|null,
  *   outbound?: null|OutboundIP|OutboundIPShape,
  *   recordType?: string|null,
@@ -116,6 +121,20 @@ final class IPConnection implements BaseModel
     public ?InboundIP $inbound;
 
     /**
+     * Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
+     *
+     * @var value-of<NoiseSuppression>|null $noiseSuppression
+     */
+    #[Optional('noise_suppression', enum: NoiseSuppression::class)]
+    public ?string $noiseSuppression;
+
+    /**
+     * Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
+     */
+    #[Optional('noise_suppression_details')]
+    public ?NoiseSuppressionDetails $noiseSuppressionDetails;
+
+    /**
      * Enable on-net T38 if you prefer the sender and receiver negotiating T38 directly if both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call depending on each leg's settings.
      */
     #[Optional('onnet_t38_passthrough_enabled')]
@@ -195,6 +214,8 @@ final class IPConnection implements BaseModel
      * @param DtmfType|value-of<DtmfType>|null $dtmfType
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
      * @param InboundIP|InboundIPShape|null $inbound
+     * @param NoiseSuppression|value-of<NoiseSuppression>|null $noiseSuppression
+     * @param NoiseSuppressionDetails|NoiseSuppressionDetailsShape|null $noiseSuppressionDetails
      * @param OutboundIP|OutboundIPShape|null $outbound
      * @param ConnectionRtcpSettings|ConnectionRtcpSettingsShape|null $rtcpSettings
      * @param list<string>|null $tags
@@ -213,6 +234,8 @@ final class IPConnection implements BaseModel
         ?bool $encodeContactHeaderEnabled = null,
         EncryptedMedia|string|null $encryptedMedia = null,
         InboundIP|array|null $inbound = null,
+        NoiseSuppression|string|null $noiseSuppression = null,
+        NoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
         ?bool $onnetT38PassthroughEnabled = null,
         OutboundIP|array|null $outbound = null,
         ?string $recordType = null,
@@ -238,6 +261,8 @@ final class IPConnection implements BaseModel
         null !== $encodeContactHeaderEnabled && $self['encodeContactHeaderEnabled'] = $encodeContactHeaderEnabled;
         null !== $encryptedMedia && $self['encryptedMedia'] = $encryptedMedia;
         null !== $inbound && $self['inbound'] = $inbound;
+        null !== $noiseSuppression && $self['noiseSuppression'] = $noiseSuppression;
+        null !== $noiseSuppressionDetails && $self['noiseSuppressionDetails'] = $noiseSuppressionDetails;
         null !== $onnetT38PassthroughEnabled && $self['onnetT38PassthroughEnabled'] = $onnetT38PassthroughEnabled;
         null !== $outbound && $self['outbound'] = $outbound;
         null !== $recordType && $self['recordType'] = $recordType;
@@ -377,6 +402,34 @@ final class IPConnection implements BaseModel
     {
         $self = clone $this;
         $self['inbound'] = $inbound;
+
+        return $self;
+    }
+
+    /**
+     * Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
+     *
+     * @param NoiseSuppression|value-of<NoiseSuppression> $noiseSuppression
+     */
+    public function withNoiseSuppression(
+        NoiseSuppression|string $noiseSuppression
+    ): self {
+        $self = clone $this;
+        $self['noiseSuppression'] = $noiseSuppression;
+
+        return $self;
+    }
+
+    /**
+     * Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
+     *
+     * @param NoiseSuppressionDetails|NoiseSuppressionDetailsShape $noiseSuppressionDetails
+     */
+    public function withNoiseSuppressionDetails(
+        NoiseSuppressionDetails|array $noiseSuppressionDetails
+    ): self {
+        $self = clone $this;
+        $self['noiseSuppressionDetails'] = $noiseSuppressionDetails;
 
         return $self;
     }

@@ -12,9 +12,12 @@ use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
+use Telnyx\FqdnConnections\FqdnConnection\NoiseSuppression;
+use Telnyx\FqdnConnections\FqdnConnection\NoiseSuppressionDetails;
 
 /**
  * @phpstan-import-type InboundFqdnShape from \Telnyx\FqdnConnections\InboundFqdn
+ * @phpstan-import-type NoiseSuppressionDetailsShape from \Telnyx\FqdnConnections\FqdnConnection\NoiseSuppressionDetails
  * @phpstan-import-type OutboundFqdnShape from \Telnyx\FqdnConnections\OutboundFqdn
  * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
  *
@@ -35,7 +38,8 @@ use Telnyx\CredentialConnections\EncryptedMedia;
  *   ignoreMarkBit?: bool|null,
  *   inbound?: null|InboundFqdn|InboundFqdnShape,
  *   microsoftTeamsSbc?: bool|null,
- *   noiseSuppression?: bool|null,
+ *   noiseSuppression?: null|NoiseSuppression|value-of<NoiseSuppression>,
+ *   noiseSuppressionDetails?: null|NoiseSuppressionDetails|NoiseSuppressionDetailsShape,
  *   onnetT38PassthroughEnabled?: bool|null,
  *   outbound?: null|OutboundFqdn|OutboundFqdnShape,
  *   password?: string|null,
@@ -162,10 +166,18 @@ final class FqdnConnection implements BaseModel
     public ?bool $microsoftTeamsSbc;
 
     /**
-     * Indicates whether noise suppression is enabled.
+     * Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
+     *
+     * @var value-of<NoiseSuppression>|null $noiseSuppression
      */
-    #[Optional('noise_suppression')]
-    public ?bool $noiseSuppression;
+    #[Optional('noise_suppression', enum: NoiseSuppression::class)]
+    public ?string $noiseSuppression;
+
+    /**
+     * Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
+     */
+    #[Optional('noise_suppression_details')]
+    public ?NoiseSuppressionDetails $noiseSuppressionDetails;
 
     /**
      * Enable on-net T38 if you prefer that the sender and receiver negotiate T38 directly when both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call according to each leg's settings.
@@ -309,6 +321,8 @@ final class FqdnConnection implements BaseModel
      * @param DtmfType|value-of<DtmfType>|null $dtmfType
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
      * @param InboundFqdn|InboundFqdnShape|null $inbound
+     * @param NoiseSuppression|value-of<NoiseSuppression>|null $noiseSuppression
+     * @param NoiseSuppressionDetails|NoiseSuppressionDetailsShape|null $noiseSuppressionDetails
      * @param OutboundFqdn|OutboundFqdnShape|null $outbound
      * @param ConnectionRtcpSettings|ConnectionRtcpSettingsShape|null $rtcpSettings
      * @param list<string>|null $tags
@@ -332,7 +346,8 @@ final class FqdnConnection implements BaseModel
         ?bool $ignoreMarkBit = null,
         InboundFqdn|array|null $inbound = null,
         ?bool $microsoftTeamsSbc = null,
-        ?bool $noiseSuppression = null,
+        NoiseSuppression|string|null $noiseSuppression = null,
+        NoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
         ?bool $onnetT38PassthroughEnabled = null,
         OutboundFqdn|array|null $outbound = null,
         ?string $password = null,
@@ -373,6 +388,7 @@ final class FqdnConnection implements BaseModel
         null !== $inbound && $self['inbound'] = $inbound;
         null !== $microsoftTeamsSbc && $self['microsoftTeamsSbc'] = $microsoftTeamsSbc;
         null !== $noiseSuppression && $self['noiseSuppression'] = $noiseSuppression;
+        null !== $noiseSuppressionDetails && $self['noiseSuppressionDetails'] = $noiseSuppressionDetails;
         null !== $onnetT38PassthroughEnabled && $self['onnetT38PassthroughEnabled'] = $onnetT38PassthroughEnabled;
         null !== $outbound && $self['outbound'] = $outbound;
         null !== $password && $self['password'] = $password;
@@ -583,12 +599,29 @@ final class FqdnConnection implements BaseModel
     }
 
     /**
-     * Indicates whether noise suppression is enabled.
+     * Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
+     *
+     * @param NoiseSuppression|value-of<NoiseSuppression> $noiseSuppression
      */
-    public function withNoiseSuppression(bool $noiseSuppression): self
-    {
+    public function withNoiseSuppression(
+        NoiseSuppression|string $noiseSuppression
+    ): self {
         $self = clone $this;
         $self['noiseSuppression'] = $noiseSuppression;
+
+        return $self;
+    }
+
+    /**
+     * Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
+     *
+     * @param NoiseSuppressionDetails|NoiseSuppressionDetailsShape $noiseSuppressionDetails
+     */
+    public function withNoiseSuppressionDetails(
+        NoiseSuppressionDetails|array $noiseSuppressionDetails
+    ): self {
+        $self = clone $this;
+        $self['noiseSuppressionDetails'] = $noiseSuppressionDetails;
 
         return $self;
     }
