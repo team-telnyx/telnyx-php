@@ -15,6 +15,8 @@ use Telnyx\CredentialConnections\EncryptedMedia;
 use Telnyx\DefaultPagination;
 use Telnyx\FqdnConnections\FqdnConnection;
 use Telnyx\FqdnConnections\FqdnConnectionCreateParams;
+use Telnyx\FqdnConnections\FqdnConnectionCreateParams\NoiseSuppression;
+use Telnyx\FqdnConnections\FqdnConnectionCreateParams\NoiseSuppressionDetails\Engine;
 use Telnyx\FqdnConnections\FqdnConnectionDeleteResponse;
 use Telnyx\FqdnConnections\FqdnConnectionGetResponse;
 use Telnyx\FqdnConnections\FqdnConnectionListParams;
@@ -82,6 +84,11 @@ final class FqdnConnectionsRawService implements FqdnConnectionsRawContract
      *   }|InboundFqdn,
      *   iosPushCredentialID?: string|null,
      *   microsoftTeamsSbc?: bool,
+     *   noiseSuppression?: 'inbound'|'outbound'|'both'|'disabled'|NoiseSuppression,
+     *   noiseSuppressionDetails?: array{
+     *     attenuationLimit?: int,
+     *     engine?: 'denoiser'|'deep_filter_net'|'deep_filter_net_large'|'krisp_viva_tel'|'krisp_viva_tel_lite'|'krisp_viva_promodel'|'krisp_viva_ss'|Engine,
+     *   },
      *   onnetT38PassthroughEnabled?: bool,
      *   outbound?: array{
      *     aniOverride?: string,
@@ -197,6 +204,11 @@ final class FqdnConnectionsRawService implements FqdnConnectionsRawContract
      *     timeout2xxSecs?: int,
      *   }|InboundFqdn,
      *   iosPushCredentialID?: string|null,
+     *   noiseSuppression?: 'inbound'|'outbound'|'both'|'disabled'|FqdnConnectionUpdateParams\NoiseSuppression,
+     *   noiseSuppressionDetails?: array{
+     *     attenuationLimit?: int,
+     *     engine?: 'denoiser'|'deep_filter_net'|'deep_filter_net_large'|'krisp_viva_tel'|'krisp_viva_tel_lite'|'krisp_viva_promodel'|'krisp_viva_ss'|FqdnConnectionUpdateParams\NoiseSuppressionDetails\Engine,
+     *   },
      *   onnetT38PassthroughEnabled?: bool,
      *   outbound?: array{
      *     aniOverride?: string,

@@ -7,11 +7,14 @@ namespace Telnyx\CredentialConnections;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\CredentialConnections\CredentialConnection\NoiseSuppression;
+use Telnyx\CredentialConnections\CredentialConnection\NoiseSuppressionDetails;
 use Telnyx\CredentialConnections\CredentialConnection\SipUriCallingPreference;
 use Telnyx\CredentialConnections\CredentialConnection\WebhookAPIVersion;
 
 /**
  * @phpstan-import-type CredentialInboundShape from \Telnyx\CredentialConnections\CredentialInbound
+ * @phpstan-import-type NoiseSuppressionDetailsShape from \Telnyx\CredentialConnections\CredentialConnection\NoiseSuppressionDetails
  * @phpstan-import-type CredentialOutboundShape from \Telnyx\CredentialConnections\CredentialOutbound
  * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
  *
@@ -27,6 +30,8 @@ use Telnyx\CredentialConnections\CredentialConnection\WebhookAPIVersion;
  *   encodeContactHeaderEnabled?: bool|null,
  *   encryptedMedia?: null|EncryptedMedia|value-of<EncryptedMedia>,
  *   inbound?: null|CredentialInbound|CredentialInboundShape,
+ *   noiseSuppression?: null|NoiseSuppression|value-of<NoiseSuppression>,
+ *   noiseSuppressionDetails?: null|NoiseSuppressionDetails|NoiseSuppressionDetailsShape,
  *   onnetT38PassthroughEnabled?: bool|null,
  *   outbound?: null|CredentialOutbound|CredentialOutboundShape,
  *   password?: string|null,
@@ -112,6 +117,20 @@ final class CredentialConnection implements BaseModel
 
     #[Optional]
     public ?CredentialInbound $inbound;
+
+    /**
+     * Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
+     *
+     * @var value-of<NoiseSuppression>|null $noiseSuppression
+     */
+    #[Optional('noise_suppression', enum: NoiseSuppression::class)]
+    public ?string $noiseSuppression;
+
+    /**
+     * Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
+     */
+    #[Optional('noise_suppression_details')]
+    public ?NoiseSuppressionDetails $noiseSuppressionDetails;
 
     /**
      * Enable on-net T38 if you prefer the sender and receiver negotiating T38 directly if both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call depending on each leg's settings.
@@ -208,6 +227,8 @@ final class CredentialConnection implements BaseModel
      * @param DtmfType|value-of<DtmfType>|null $dtmfType
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
      * @param CredentialInbound|CredentialInboundShape|null $inbound
+     * @param NoiseSuppression|value-of<NoiseSuppression>|null $noiseSuppression
+     * @param NoiseSuppressionDetails|NoiseSuppressionDetailsShape|null $noiseSuppressionDetails
      * @param CredentialOutbound|CredentialOutboundShape|null $outbound
      * @param ConnectionRtcpSettings|ConnectionRtcpSettingsShape|null $rtcpSettings
      * @param SipUriCallingPreference|value-of<SipUriCallingPreference>|null $sipUriCallingPreference
@@ -226,6 +247,8 @@ final class CredentialConnection implements BaseModel
         ?bool $encodeContactHeaderEnabled = null,
         EncryptedMedia|string|null $encryptedMedia = null,
         CredentialInbound|array|null $inbound = null,
+        NoiseSuppression|string|null $noiseSuppression = null,
+        NoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
         ?bool $onnetT38PassthroughEnabled = null,
         CredentialOutbound|array|null $outbound = null,
         ?string $password = null,
@@ -253,6 +276,8 @@ final class CredentialConnection implements BaseModel
         null !== $encodeContactHeaderEnabled && $self['encodeContactHeaderEnabled'] = $encodeContactHeaderEnabled;
         null !== $encryptedMedia && $self['encryptedMedia'] = $encryptedMedia;
         null !== $inbound && $self['inbound'] = $inbound;
+        null !== $noiseSuppression && $self['noiseSuppression'] = $noiseSuppression;
+        null !== $noiseSuppressionDetails && $self['noiseSuppressionDetails'] = $noiseSuppressionDetails;
         null !== $onnetT38PassthroughEnabled && $self['onnetT38PassthroughEnabled'] = $onnetT38PassthroughEnabled;
         null !== $outbound && $self['outbound'] = $outbound;
         null !== $password && $self['password'] = $password;
@@ -394,6 +419,34 @@ final class CredentialConnection implements BaseModel
     {
         $self = clone $this;
         $self['inbound'] = $inbound;
+
+        return $self;
+    }
+
+    /**
+     * Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
+     *
+     * @param NoiseSuppression|value-of<NoiseSuppression> $noiseSuppression
+     */
+    public function withNoiseSuppression(
+        NoiseSuppression|string $noiseSuppression
+    ): self {
+        $self = clone $this;
+        $self['noiseSuppression'] = $noiseSuppression;
+
+        return $self;
+    }
+
+    /**
+     * Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
+     *
+     * @param NoiseSuppressionDetails|NoiseSuppressionDetailsShape $noiseSuppressionDetails
+     */
+    public function withNoiseSuppressionDetails(
+        NoiseSuppressionDetails|array $noiseSuppressionDetails
+    ): self {
+        $self = clone $this;
+        $self['noiseSuppressionDetails'] = $noiseSuppressionDetails;
 
         return $self;
     }

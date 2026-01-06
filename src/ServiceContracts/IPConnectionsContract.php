@@ -18,6 +18,8 @@ use Telnyx\IPConnections\IPConnectionCreateParams\Inbound\DefaultRoutingMethod;
 use Telnyx\IPConnections\IPConnectionCreateParams\Inbound\DnisNumberFormat;
 use Telnyx\IPConnections\IPConnectionCreateParams\Inbound\SipRegion;
 use Telnyx\IPConnections\IPConnectionCreateParams\Inbound\SipSubdomainReceiveSettings;
+use Telnyx\IPConnections\IPConnectionCreateParams\NoiseSuppression;
+use Telnyx\IPConnections\IPConnectionCreateParams\NoiseSuppressionDetails\Engine;
 use Telnyx\IPConnections\IPConnectionCreateParams\TransportProtocol;
 use Telnyx\IPConnections\IPConnectionCreateParams\WebhookAPIVersion;
 use Telnyx\IPConnections\IPConnectionDeleteResponse;
@@ -62,6 +64,11 @@ interface IPConnectionsContract
      *   timeout2xxSecs?: int,
      * } $inbound
      * @param string|null $iosPushCredentialID The uuid of the push credential for Ios
+     * @param 'inbound'|'outbound'|'both'|'disabled'|NoiseSuppression $noiseSuppression Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
+     * @param array{
+     *   attenuationLimit?: int,
+     *   engine?: 'denoiser'|'deep_filter_net'|'deep_filter_net_large'|'krisp_viva_tel'|'krisp_viva_tel_lite'|'krisp_viva_promodel'|'krisp_viva_ss'|Engine,
+     * } $noiseSuppressionDetails Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
      * @param bool $onnetT38PassthroughEnabled Enable on-net T38 if you prefer the sender and receiver negotiating T38 directly if both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call depending on each leg's settings.
      * @param array{
      *   aniOverride?: string,
@@ -103,6 +110,8 @@ interface IPConnectionsContract
         string|EncryptedMedia|null $encryptedMedia = null,
         ?array $inbound = null,
         ?string $iosPushCredentialID = null,
+        string|NoiseSuppression|null $noiseSuppression = null,
+        ?array $noiseSuppressionDetails = null,
         bool $onnetT38PassthroughEnabled = false,
         array|OutboundIP|null $outbound = null,
         array|ConnectionRtcpSettings|null $rtcpSettings = null,
@@ -160,6 +169,11 @@ interface IPConnectionsContract
      *   timeout2xxSecs?: int,
      * }|InboundIP $inbound
      * @param string|null $iosPushCredentialID The uuid of the push credential for Ios
+     * @param 'inbound'|'outbound'|'both'|'disabled'|\Telnyx\IPConnections\IPConnectionUpdateParams\NoiseSuppression $noiseSuppression Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
+     * @param array{
+     *   attenuationLimit?: int,
+     *   engine?: 'denoiser'|'deep_filter_net'|'deep_filter_net_large'|'krisp_viva_tel'|'krisp_viva_tel_lite'|'krisp_viva_promodel'|'krisp_viva_ss'|\Telnyx\IPConnections\IPConnectionUpdateParams\NoiseSuppressionDetails\Engine,
+     * } $noiseSuppressionDetails Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
      * @param bool $onnetT38PassthroughEnabled Enable on-net T38 if you prefer the sender and receiver negotiating T38 directly if both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call depending on each leg's settings.
      * @param array{
      *   aniOverride?: string,
@@ -202,6 +216,8 @@ interface IPConnectionsContract
         string|EncryptedMedia|null $encryptedMedia = null,
         array|InboundIP|null $inbound = null,
         ?string $iosPushCredentialID = null,
+        string|\Telnyx\IPConnections\IPConnectionUpdateParams\NoiseSuppression|null $noiseSuppression = null,
+        ?array $noiseSuppressionDetails = null,
         bool $onnetT38PassthroughEnabled = false,
         array|OutboundIP|null $outbound = null,
         array|ConnectionRtcpSettings|null $rtcpSettings = null,

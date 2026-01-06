@@ -12,6 +12,8 @@ use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings\Port;
 use Telnyx\CredentialConnections\CredentialConnection;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams;
+use Telnyx\CredentialConnections\CredentialConnectionCreateParams\NoiseSuppression;
+use Telnyx\CredentialConnections\CredentialConnectionCreateParams\NoiseSuppressionDetails\Engine;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\SipUriCallingPreference;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\WebhookAPIVersion;
 use Telnyx\CredentialConnections\CredentialConnectionDeleteResponse;
@@ -74,6 +76,11 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
      *     timeout2xxSecs?: int,
      *   }|CredentialInbound,
      *   iosPushCredentialID?: string|null,
+     *   noiseSuppression?: 'inbound'|'outbound'|'both'|'disabled'|NoiseSuppression,
+     *   noiseSuppressionDetails?: array{
+     *     attenuationLimit?: int,
+     *     engine?: 'denoiser'|'deep_filter_net'|'deep_filter_net_large'|'krisp_viva_tel'|'krisp_viva_tel_lite'|'krisp_viva_promodel'|'krisp_viva_ss'|Engine,
+     *   },
      *   onnetT38PassthroughEnabled?: bool,
      *   outbound?: array{
      *     aniOverride?: string,
@@ -177,6 +184,11 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
      *     timeout2xxSecs?: int,
      *   }|CredentialInbound,
      *   iosPushCredentialID?: string|null,
+     *   noiseSuppression?: 'inbound'|'outbound'|'both'|'disabled'|CredentialConnectionUpdateParams\NoiseSuppression,
+     *   noiseSuppressionDetails?: array{
+     *     attenuationLimit?: int,
+     *     engine?: 'denoiser'|'deep_filter_net'|'deep_filter_net_large'|'krisp_viva_tel'|'krisp_viva_tel_lite'|'krisp_viva_promodel'|'krisp_viva_ss'|CredentialConnectionUpdateParams\NoiseSuppressionDetails\Engine,
+     *   },
      *   onnetT38PassthroughEnabled?: bool,
      *   outbound?: array{
      *     aniOverride?: string,

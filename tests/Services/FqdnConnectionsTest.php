@@ -89,6 +89,10 @@ final class FqdnConnectionsTest extends TestCase
             ],
             iosPushCredentialID: 'ec0c8e5d-439e-4620-a0c1-9d9c8d02a836',
             microsoftTeamsSbc: true,
+            noiseSuppression: 'both',
+            noiseSuppressionDetails: [
+                'attenuationLimit' => 80, 'engine' => 'deep_filter_net',
+            ],
             onnetT38PassthroughEnabled: true,
             outbound: [
                 'aniOverride' => '+1234567890',

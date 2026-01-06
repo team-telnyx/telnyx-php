@@ -21,6 +21,8 @@ use Telnyx\IPConnections\IPConnectionCreateParams\Inbound\DefaultRoutingMethod;
 use Telnyx\IPConnections\IPConnectionCreateParams\Inbound\DnisNumberFormat;
 use Telnyx\IPConnections\IPConnectionCreateParams\Inbound\SipRegion;
 use Telnyx\IPConnections\IPConnectionCreateParams\Inbound\SipSubdomainReceiveSettings;
+use Telnyx\IPConnections\IPConnectionCreateParams\NoiseSuppression;
+use Telnyx\IPConnections\IPConnectionCreateParams\NoiseSuppressionDetails\Engine;
 use Telnyx\IPConnections\IPConnectionCreateParams\TransportProtocol;
 use Telnyx\IPConnections\IPConnectionCreateParams\WebhookAPIVersion;
 use Telnyx\IPConnections\IPConnectionDeleteResponse;
@@ -78,6 +80,11 @@ final class IPConnectionsRawService implements IPConnectionsRawContract
      *     timeout2xxSecs?: int,
      *   },
      *   iosPushCredentialID?: string|null,
+     *   noiseSuppression?: 'inbound'|'outbound'|'both'|'disabled'|NoiseSuppression,
+     *   noiseSuppressionDetails?: array{
+     *     attenuationLimit?: int,
+     *     engine?: 'denoiser'|'deep_filter_net'|'deep_filter_net_large'|'krisp_viva_tel'|'krisp_viva_tel_lite'|'krisp_viva_promodel'|'krisp_viva_ss'|Engine,
+     *   },
      *   onnetT38PassthroughEnabled?: bool,
      *   outbound?: array{
      *     aniOverride?: string,
@@ -190,6 +197,11 @@ final class IPConnectionsRawService implements IPConnectionsRawContract
      *     timeout2xxSecs?: int,
      *   }|InboundIP,
      *   iosPushCredentialID?: string|null,
+     *   noiseSuppression?: 'inbound'|'outbound'|'both'|'disabled'|IPConnectionUpdateParams\NoiseSuppression,
+     *   noiseSuppressionDetails?: array{
+     *     attenuationLimit?: int,
+     *     engine?: 'denoiser'|'deep_filter_net'|'deep_filter_net_large'|'krisp_viva_tel'|'krisp_viva_tel_lite'|'krisp_viva_promodel'|'krisp_viva_ss'|IPConnectionUpdateParams\NoiseSuppressionDetails\Engine,
+     *   },
      *   onnetT38PassthroughEnabled?: bool,
      *   outbound?: array{
      *     aniOverride?: string,

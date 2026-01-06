@@ -86,6 +86,10 @@ final class CredentialConnectionsTest extends TestCase
                 'timeout2xxSecs' => 20,
             ],
             iosPushCredentialID: 'ec0c8e5d-439e-4620-a0c1-9d9c8d02a836',
+            noiseSuppression: 'both',
+            noiseSuppressionDetails: [
+                'attenuationLimit' => 80, 'engine' => 'deep_filter_net',
+            ],
             onnetT38PassthroughEnabled: true,
             outbound: [
                 'aniOverride' => 'always',
