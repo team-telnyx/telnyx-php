@@ -15,7 +15,7 @@ interface CampaignBuilderContract
      *
      * @param string $brandID alphanumeric identifier of the brand associated with this campaign
      * @param string $description summary description of this campaign
-     * @param string $usecase Campaign usecase. Must be of defined valid types. Use `/registry/enum/usecase` operation to retrieve usecases available for given brand.
+     * @param string $usecase Campaign usecase. Must be of defined valid types. Use `/10dlc/enum/usecase` operation to retrieve usecases available for given brand.
      * @param bool $ageGated age gated message content in campaign
      * @param bool $autoRenewal Campaign subscription auto-renewal option. If set to true, then campaign will automatically renewal at end of billing cycle.
      * @param bool $directLending Direct lending or loan arrangement
@@ -42,7 +42,7 @@ interface CampaignBuilderContract
      * @param bool $subscriberHelp Does campaign responds to help keyword(s)?
      * @param bool $subscriberOptin Does campaign require subscriber to opt-in before SMS is sent to subscriber?
      * @param bool $subscriberOptout Does campaign support subscriber opt-out keyword(s)?
-     * @param list<string> $subUsecases Campaign sub-usecases. Must be of defined valid sub-usecase types. Use `/registry/enum/usecase` operation to retrieve list of valid sub-usecases
+     * @param list<string> $subUsecases Campaign sub-usecases. Must be of defined valid sub-usecase types. Use `/10dlc/enum/usecase` operation to retrieve list of valid sub-usecases
      * @param list<string> $tag tags to be set on the Campaign
      * @param bool $termsAndConditions Is terms and conditions accepted?
      * @param string $termsAndConditionsLink link to the campaign's terms and conditions
