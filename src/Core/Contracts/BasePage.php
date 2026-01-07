@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\Core\Contracts;
 
 /**
- * @internal
+ * @phpstan-import-type NormalizedRequest from \Telnyx\Core\BaseClient
  *
- * @phpstan-import-type normalized_request from \Telnyx\Core\BaseClient
+ * @internal
  *
  * @template Item
  *
