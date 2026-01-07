@@ -4,13 +4,21 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
+use Telnyx\AI\Assistants\TelephonySettings\NoiseSuppression;
+use Telnyx\AI\Assistants\TelephonySettings\NoiseSuppressionConfig;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type NoiseSuppressionConfigShape from \Telnyx\AI\Assistants\TelephonySettings\NoiseSuppressionConfig
+ *
  * @phpstan-type TelephonySettingsShape = array{
- *   defaultTexmlAppID?: string|null, supportsUnauthenticatedWebCalls?: bool|null
+ *   defaultTexmlAppID?: string|null,
+ *   noiseSuppression?: null|NoiseSuppression|value-of<NoiseSuppression>,
+ *   noiseSuppressionConfig?: null|NoiseSuppressionConfig|NoiseSuppressionConfigShape,
+ *   supportsUnauthenticatedWebCalls?: bool|null,
+ *   timeLimitSecs?: int|null,
  * }
  */
 final class TelephonySettings implements BaseModel
@@ -25,10 +33,30 @@ final class TelephonySettings implements BaseModel
     public ?string $defaultTexmlAppID;
 
     /**
+     * The noise suppression engine to use. Use 'disabled' to turn off noise suppression.
+     *
+     * @var value-of<NoiseSuppression>|null $noiseSuppression
+     */
+    #[Optional('noise_suppression', enum: NoiseSuppression::class)]
+    public ?string $noiseSuppression;
+
+    /**
+     * Configuration for noise suppression. Only applicable when noise_suppression is 'deepfilternet'.
+     */
+    #[Optional('noise_suppression_config')]
+    public ?NoiseSuppressionConfig $noiseSuppressionConfig;
+
+    /**
      * When enabled, allows users to interact with your AI assistant directly from your website without requiring authentication. This is required for FE widgets that work with assistants that have telephony enabled.
      */
     #[Optional('supports_unauthenticated_web_calls')]
     public ?bool $supportsUnauthenticatedWebCalls;
+
+    /**
+     * Maximum duration in seconds for the AI assistant to participate on the call. When this limit is reached the assistant will be stopped. This limit does not apply to portions of a call without an active assistant (for instance, a call transferred to a human representative).
+     */
+    #[Optional('time_limit_secs')]
+    public ?int $timeLimitSecs;
 
     public function __construct()
     {
@@ -39,15 +67,24 @@ final class TelephonySettings implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param NoiseSuppression|value-of<NoiseSuppression>|null $noiseSuppression
+     * @param NoiseSuppressionConfig|NoiseSuppressionConfigShape|null $noiseSuppressionConfig
      */
     public static function with(
         ?string $defaultTexmlAppID = null,
+        NoiseSuppression|string|null $noiseSuppression = null,
+        NoiseSuppressionConfig|array|null $noiseSuppressionConfig = null,
         ?bool $supportsUnauthenticatedWebCalls = null,
+        ?int $timeLimitSecs = null,
     ): self {
         $self = new self;
 
         null !== $defaultTexmlAppID && $self['defaultTexmlAppID'] = $defaultTexmlAppID;
+        null !== $noiseSuppression && $self['noiseSuppression'] = $noiseSuppression;
+        null !== $noiseSuppressionConfig && $self['noiseSuppressionConfig'] = $noiseSuppressionConfig;
         null !== $supportsUnauthenticatedWebCalls && $self['supportsUnauthenticatedWebCalls'] = $supportsUnauthenticatedWebCalls;
+        null !== $timeLimitSecs && $self['timeLimitSecs'] = $timeLimitSecs;
 
         return $self;
     }
@@ -64,6 +101,34 @@ final class TelephonySettings implements BaseModel
     }
 
     /**
+     * The noise suppression engine to use. Use 'disabled' to turn off noise suppression.
+     *
+     * @param NoiseSuppression|value-of<NoiseSuppression> $noiseSuppression
+     */
+    public function withNoiseSuppression(
+        NoiseSuppression|string $noiseSuppression
+    ): self {
+        $self = clone $this;
+        $self['noiseSuppression'] = $noiseSuppression;
+
+        return $self;
+    }
+
+    /**
+     * Configuration for noise suppression. Only applicable when noise_suppression is 'deepfilternet'.
+     *
+     * @param NoiseSuppressionConfig|NoiseSuppressionConfigShape $noiseSuppressionConfig
+     */
+    public function withNoiseSuppressionConfig(
+        NoiseSuppressionConfig|array $noiseSuppressionConfig
+    ): self {
+        $self = clone $this;
+        $self['noiseSuppressionConfig'] = $noiseSuppressionConfig;
+
+        return $self;
+    }
+
+    /**
      * When enabled, allows users to interact with your AI assistant directly from your website without requiring authentication. This is required for FE widgets that work with assistants that have telephony enabled.
      */
     public function withSupportsUnauthenticatedWebCalls(
@@ -71,6 +136,17 @@ final class TelephonySettings implements BaseModel
     ): self {
         $self = clone $this;
         $self['supportsUnauthenticatedWebCalls'] = $supportsUnauthenticatedWebCalls;
+
+        return $self;
+    }
+
+    /**
+     * Maximum duration in seconds for the AI assistant to participate on the call. When this limit is reached the assistant will be stopped. This limit does not apply to portions of a call without an active assistant (for instance, a call transferred to a human representative).
+     */
+    public function withTimeLimitSecs(int $timeLimitSecs): self
+    {
+        $self = clone $this;
+        $self['timeLimitSecs'] = $timeLimitSecs;
 
         return $self;
     }

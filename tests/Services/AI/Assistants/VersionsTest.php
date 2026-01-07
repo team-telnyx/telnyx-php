@@ -105,7 +105,12 @@ final class VersionsTest extends TestCase
             privacySettings: ['dataRetention' => true],
             telephonySettings: [
                 'defaultTexmlAppID' => 'default_texml_app_id',
+                'noiseSuppression' => 'deepfilternet',
+                'noiseSuppressionConfig' => [
+                    'attenuationLimit' => 0, 'mode' => 'advanced',
+                ],
                 'supportsUnauthenticatedWebCalls' => true,
+                'timeLimitSecs' => 30,
             ],
             tools: [
                 [
@@ -139,6 +144,7 @@ final class VersionsTest extends TestCase
                 'model' => 'deepgram/flux',
                 'region' => 'region',
                 'settings' => [
+                    'eagerEotThreshold' => 0.3,
                     'eotThreshold' => 0,
                     'eotTimeoutMs' => 0,
                     'numerals' => true,
@@ -151,6 +157,11 @@ final class VersionsTest extends TestCase
                 'backgroundAudio' => [
                     'type' => 'predefined_media', 'value' => 'silence',
                 ],
+                'similarityBoost' => 0,
+                'speed' => 0,
+                'style' => 0,
+                'temperature' => 0,
+                'useSpeakerBoost' => true,
                 'voiceSpeed' => 0,
             ],
         );

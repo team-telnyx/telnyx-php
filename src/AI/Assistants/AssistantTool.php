@@ -6,6 +6,7 @@ namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\AssistantTool\DtmfTool;
 use Telnyx\AI\Assistants\AssistantTool\HandoffTool;
+use Telnyx\AI\Assistants\AssistantTool\SendMessageTool;
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
@@ -21,9 +22,10 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type TransferToolShape from \Telnyx\AI\Assistants\TransferTool
  * @phpstan-import-type SipReferToolShape from \Telnyx\AI\Assistants\AssistantTool\SipReferTool
  * @phpstan-import-type DtmfToolShape from \Telnyx\AI\Assistants\AssistantTool\DtmfTool
+ * @phpstan-import-type SendMessageToolShape from \Telnyx\AI\Assistants\AssistantTool\SendMessageTool
  *
- * @phpstan-type AssistantToolVariants = WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool
- * @phpstan-type AssistantToolShape = AssistantToolVariants|WebhookToolShape|RetrievalToolShape|HandoffToolShape|HangupToolShape|TransferToolShape|SipReferToolShape|DtmfToolShape
+ * @phpstan-type AssistantToolVariants = WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool|SendMessageTool
+ * @phpstan-type AssistantToolShape = AssistantToolVariants|WebhookToolShape|RetrievalToolShape|HandoffToolShape|HangupToolShape|TransferToolShape|SipReferToolShape|DtmfToolShape|SendMessageToolShape
  */
 final class AssistantTool implements ConverterSource
 {
@@ -47,6 +49,7 @@ final class AssistantTool implements ConverterSource
             'transfer' => TransferTool::class,
             'refer' => SipReferTool::class,
             'send_dtmf' => DtmfTool::class,
+            'send_message' => SendMessageTool::class,
         ];
     }
 }
