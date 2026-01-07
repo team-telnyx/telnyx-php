@@ -14,13 +14,13 @@ use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 
 /**
+ * @phpstan-import-type NormalizedRequest from \Telnyx\Core\BaseClient
+ *
  * @internal
  *
  * @template R
  *
  * @implements BaseResponse<R>
- *
- * @phpstan-import-type normalized_request from \Telnyx\Core\BaseClient
  */
 class RawResponse implements BaseResponse
 {
@@ -35,7 +35,7 @@ class RawResponse implements BaseResponse
     private bool $coerced = false;
 
     /**
-     * @param normalized_request $requestInfo
+     * @param NormalizedRequest $requestInfo
      * @param list<string|int>|string|int|null $unwrap
      */
     public function __construct(
