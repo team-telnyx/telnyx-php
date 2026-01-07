@@ -19,7 +19,7 @@ use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderResponse\OrderingGroup;
  *   createdAt?: \DateTimeInterface|null,
  *   customerReference?: string|null,
  *   messagingProfileID?: string|null,
- *   orderingGroups?: list<OrderingGroupShape>|null,
+ *   orderingGroups?: list<OrderingGroup|OrderingGroupShape>|null,
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */
@@ -84,7 +84,7 @@ final class InexplicitNumberOrderResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<OrderingGroupShape>|null $orderingGroups
+     * @param list<OrderingGroup|OrderingGroupShape>|null $orderingGroups
      */
     public static function with(
         ?string $id = null,
@@ -177,7 +177,7 @@ final class InexplicitNumberOrderResponse implements BaseModel
     }
 
     /**
-     * @param list<OrderingGroupShape> $orderingGroups
+     * @param list<OrderingGroup|OrderingGroupShape> $orderingGroups
      */
     public function withOrderingGroups(array $orderingGroups): self
     {

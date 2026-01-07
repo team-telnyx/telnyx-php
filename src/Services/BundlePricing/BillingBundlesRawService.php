@@ -6,6 +6,8 @@ namespace Telnyx\Services\BundlePricing;
 
 use Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleListParams;
+use Telnyx\BundlePricing\BillingBundles\BillingBundleListParams\Filter;
+use Telnyx\BundlePricing\BillingBundles\BillingBundleListParams\Page;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleRetrieveParams;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleSummary;
 use Telnyx\Client;
@@ -16,6 +18,11 @@ use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BundlePricing\BillingBundlesRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\BundlePricing\BillingBundles\BillingBundleListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\BundlePricing\BillingBundles\BillingBundleListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class BillingBundlesRawService implements BillingBundlesRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,6 +38,7 @@ final class BillingBundlesRawService implements BillingBundlesRawContract
      *
      * @param string $bundleID billing bundle's ID, this is used to identify the billing bundle in the API
      * @param array{authorizationBearer?: string}|BillingBundleRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BillingBundleGetResponse>
      *
@@ -39,7 +47,7 @@ final class BillingBundlesRawService implements BillingBundlesRawContract
     public function retrieve(
         string $bundleID,
         array|BillingBundleRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = BillingBundleRetrieveParams::parseRequest(
             $params,
@@ -65,10 +73,11 @@ final class BillingBundlesRawService implements BillingBundlesRawContract
      * Get all allowed bundles.
      *
      * @param array{
-     *   filter?: array{countryISO?: list<string>, resource?: list<string>},
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape,
+     *   page?: Page|PageShape,
      *   authorizationBearer?: string,
      * }|BillingBundleListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<BillingBundleSummary>>
      *
@@ -76,7 +85,7 @@ final class BillingBundlesRawService implements BillingBundlesRawContract
      */
     public function list(
         array|BillingBundleListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = BillingBundleListParams::parseRequest(
             $params,

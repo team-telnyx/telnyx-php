@@ -14,6 +14,9 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SpeechToTextNewRespo
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\BatchDetailRecords\SpeechToTextContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class SpeechToTextService implements SpeechToTextContract
 {
     /**
@@ -34,15 +37,16 @@ final class SpeechToTextService implements SpeechToTextContract
      *
      * Creates a new Speech to Text batch report request with the specified filters
      *
-     * @param string|\DateTimeInterface $endDate End date in ISO format with timezone (date range must be up to one month)
-     * @param string|\DateTimeInterface $startDate Start date in ISO format with timezone
+     * @param \DateTimeInterface $endDate End date in ISO format with timezone (date range must be up to one month)
+     * @param \DateTimeInterface $startDate Start date in ISO format with timezone
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        string|\DateTimeInterface $endDate,
-        string|\DateTimeInterface $startDate,
-        ?RequestOptions $requestOptions = null,
+        \DateTimeInterface $endDate,
+        \DateTimeInterface $startDate,
+        RequestOptions|array|null $requestOptions = null,
     ): SpeechToTextNewResponse {
         $params = Util::removeNulls(
             ['endDate' => $endDate, 'startDate' => $startDate]
@@ -59,11 +63,13 @@ final class SpeechToTextService implements SpeechToTextContract
      *
      * Retrieves a specific Speech to Text batch report request by ID
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): SpeechToTextGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -76,10 +82,12 @@ final class SpeechToTextService implements SpeechToTextContract
      *
      * Retrieves all Speech to Text batch report requests for the authenticated user
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): SpeechToTextListResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(requestOptions: $requestOptions);
@@ -92,11 +100,13 @@ final class SpeechToTextService implements SpeechToTextContract
      *
      * Deletes a specific Speech to Text batch report request by ID
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): SpeechToTextDeleteResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, requestOptions: $requestOptions);

@@ -14,6 +14,9 @@ use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyParams;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface VerificationCodesRawContract
 {
     /**
@@ -21,6 +24,7 @@ interface VerificationCodesRawContract
      *
      * @param string $id Porting Order id
      * @param array<string,mixed>|VerificationCodeListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<VerificationCodeListResponse>>
      *
@@ -29,7 +33,7 @@ interface VerificationCodesRawContract
     public function list(
         string $id,
         array|VerificationCodeListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -37,6 +41,7 @@ interface VerificationCodesRawContract
      *
      * @param string $id Porting Order id
      * @param array<string,mixed>|VerificationCodeSendParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -45,7 +50,7 @@ interface VerificationCodesRawContract
     public function send(
         string $id,
         array|VerificationCodeSendParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -53,6 +58,7 @@ interface VerificationCodesRawContract
      *
      * @param string $id Porting Order id
      * @param array<string,mixed>|VerificationCodeVerifyParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VerificationCodeVerifyResponse>
      *
@@ -61,6 +67,6 @@ interface VerificationCodesRawContract
     public function verify(
         string $id,
         array|VerificationCodeVerifyParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

@@ -12,6 +12,9 @@ use Telnyx\ServiceContracts\TexmlRawContract;
 use Telnyx\Texml\TexmlSecretsParams;
 use Telnyx\Texml\TexmlSecretsResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class TexmlRawService implements TexmlRawContract
 {
     // @phpstan-ignore-next-line
@@ -26,6 +29,7 @@ final class TexmlRawService implements TexmlRawContract
      * Create a TeXML secret which can be later used as a Dynamic Parameter for TeXML when using Mustache Templates in your TeXML. In your TeXML you will be able to use your secret name, and this name will be replaced by the actual secret value when processing the TeXML on Telnyx side.  The secrets are not visible in any logs.
      *
      * @param array{name: string, value: string}|TexmlSecretsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TexmlSecretsResponse>
      *
@@ -33,7 +37,7 @@ final class TexmlRawService implements TexmlRawContract
      */
     public function secrets(
         array|TexmlSecretsParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TexmlSecretsParams::parseRequest(
             $params,

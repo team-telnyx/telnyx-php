@@ -12,6 +12,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Integrations\ConnectionsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ConnectionsRawService implements ConnectionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -26,6 +29,7 @@ final class ConnectionsRawService implements ConnectionsRawContract
      * Get user setup integrations
      *
      * @param string $userConnectionID The connection id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ConnectionGetResponse>
      *
@@ -33,7 +37,7 @@ final class ConnectionsRawService implements ConnectionsRawContract
      */
     public function retrieve(
         string $userConnectionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -49,12 +53,15 @@ final class ConnectionsRawService implements ConnectionsRawContract
      *
      * List user setup integrations
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<ConnectionListResponse>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse
-    {
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
@@ -70,6 +77,7 @@ final class ConnectionsRawService implements ConnectionsRawContract
      * Delete a specific integration connection.
      *
      * @param string $userConnectionID The user integration connection identifier
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -77,7 +85,7 @@ final class ConnectionsRawService implements ConnectionsRawContract
      */
     public function delete(
         string $userConnectionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

@@ -15,6 +15,9 @@ use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging10dlc\PartnerCampaignsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class PartnerCampaignsService implements PartnerCampaignsContract
 {
     /**
@@ -35,11 +38,13 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      *
      * Retrieve campaign details by `campaignId`.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): TelnyxDownstreamCampaign {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($campaignID, requestOptions: $requestOptions);
@@ -54,6 +59,7 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      *
      * @param string $webhookFailoverURL webhook failover to which campaign status updates are sent
      * @param string $webhookURL webhook to which campaign status updates are sent
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -61,7 +67,7 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
         string $campaignID,
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): TelnyxDownstreamCampaign {
         $params = Util::removeNulls(
             ['webhookFailoverURL' => $webhookFailoverURL, 'webhookURL' => $webhookURL]
@@ -82,7 +88,8 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      *
      * @param int $page The 1-indexed page number to get. The default value is `1`.
      * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
-     * @param 'assignedPhoneNumbersCount'|'-assignedPhoneNumbersCount'|'brandDisplayName'|'-brandDisplayName'|'tcrBrandId'|'-tcrBranId'|'tcrCampaignId'|'-tcrCampaignId'|'createdAt'|'-createdAt'|'campaignStatus'|'-campaignStatus'|Sort $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
+     * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
+     * @param RequestOpts|null $requestOptions
      *
      * @return PerPagePaginationV2<TelnyxDownstreamCampaign>
      *
@@ -91,8 +98,8 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
     public function list(
         int $page = 1,
         int $recordsPerPage = 10,
-        string|Sort $sort = '-createdAt',
-        ?RequestOptions $requestOptions = null,
+        Sort|string $sort = '-createdAt',
+        RequestOptions|array|null $requestOptions = null,
     ): PerPagePaginationV2 {
         $params = Util::removeNulls(
             ['page' => $page, 'recordsPerPage' => $recordsPerPage, 'sort' => $sort]
@@ -115,6 +122,7 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      *
      * @param int $page The 1-indexed page number to get. The default value is `1`.
      * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
+     * @param RequestOpts|null $requestOptions
      *
      * @return PerPagePaginationV2<PartnerCampaignListSharedByMeResponse>
      *
@@ -123,7 +131,7 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
     public function listSharedByMe(
         int $page = 1,
         int $recordsPerPage = 10,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): PerPagePaginationV2 {
         $params = Util::removeNulls(
             ['page' => $page, 'recordsPerPage' => $recordsPerPage]
@@ -141,6 +149,7 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      * Get Sharing Status
      *
      * @param string $campaignID ID of the campaign in question
+     * @param RequestOpts|null $requestOptions
      *
      * @return array<string,CampaignSharingStatus>
      *
@@ -148,7 +157,7 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      */
     public function retrieveSharingStatus(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): array {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveSharingStatus($campaignID, requestOptions: $requestOptions);

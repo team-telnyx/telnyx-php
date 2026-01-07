@@ -14,6 +14,9 @@ use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ChargesBreakdownRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ChargesBreakdownRawService implements ChargesBreakdownRawContract
 {
     // @phpstan-ignore-next-line
@@ -28,8 +31,9 @@ final class ChargesBreakdownRawService implements ChargesBreakdownRawContract
      * Retrieve a detailed breakdown of monthly charges for phone numbers in a specified date range. The date range cannot exceed 31 days.
      *
      * @param array{
-     *   startDate: string, endDate?: string, format?: 'json'|'csv'|Format
+     *   startDate: string, endDate?: string, format?: Format|value-of<Format>
      * }|ChargesBreakdownRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ChargesBreakdownGetResponse>
      *
@@ -37,7 +41,7 @@ final class ChargesBreakdownRawService implements ChargesBreakdownRawContract
      */
     public function retrieve(
         array|ChargesBreakdownRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ChargesBreakdownRetrieveParams::parseRequest(
             $params,

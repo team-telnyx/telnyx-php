@@ -9,7 +9,8 @@ use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 
 /**
- * @phpstan-type LoopcountShape = string|int
+ * @phpstan-type LoopcountVariants = string|int
+ * @phpstan-type LoopcountShape = LoopcountVariants
  */
 final class Loopcount implements ConverterSource
 {

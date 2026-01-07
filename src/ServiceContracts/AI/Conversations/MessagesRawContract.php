@@ -9,10 +9,15 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface MessagesRawContract
 {
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessageListResponse>
      *
@@ -20,6 +25,6 @@ interface MessagesRawContract
      */
     public function list(
         string $conversationID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

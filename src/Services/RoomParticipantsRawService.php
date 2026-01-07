@@ -12,8 +12,15 @@ use Telnyx\RequestOptions;
 use Telnyx\RoomParticipant;
 use Telnyx\RoomParticipants\RoomParticipantGetResponse;
 use Telnyx\RoomParticipants\RoomParticipantListParams;
+use Telnyx\RoomParticipants\RoomParticipantListParams\Filter;
+use Telnyx\RoomParticipants\RoomParticipantListParams\Page;
 use Telnyx\ServiceContracts\RoomParticipantsRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\RoomParticipants\RoomParticipantListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\RoomParticipants\RoomParticipantListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class RoomParticipantsRawService implements RoomParticipantsRawContract
 {
     // @phpstan-ignore-next-line
@@ -28,6 +35,7 @@ final class RoomParticipantsRawService implements RoomParticipantsRawContract
      * View a room participant.
      *
      * @param string $roomParticipantID the unique identifier of a room participant
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RoomParticipantGetResponse>
      *
@@ -35,7 +43,7 @@ final class RoomParticipantsRawService implements RoomParticipantsRawContract
      */
     public function retrieve(
         string $roomParticipantID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -52,15 +60,9 @@ final class RoomParticipantsRawService implements RoomParticipantsRawContract
      * View a list of room participants.
      *
      * @param array{
-     *   filter?: array{
-     *     context?: string,
-     *     dateJoinedAt?: array{eq?: string, gte?: string, lte?: string},
-     *     dateLeftAt?: array{eq?: string, gte?: string, lte?: string},
-     *     dateUpdatedAt?: array{eq?: string, gte?: string, lte?: string},
-     *     sessionID?: string,
-     *   },
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|RoomParticipantListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<RoomParticipant>>
      *
@@ -68,7 +70,7 @@ final class RoomParticipantsRawService implements RoomParticipantsRawContract
      */
     public function list(
         array|RoomParticipantListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RoomParticipantListParams::parseRequest(
             $params,

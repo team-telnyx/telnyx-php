@@ -10,9 +10,17 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VirtualCrossConnectsCoverageContract;
-use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filter\CloudProvider;
+use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filter;
+use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filters;
+use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Page;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filter
+ * @phpstan-import-type FiltersShape from \Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filters
+ * @phpstan-import-type PageShape from \Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class VirtualCrossConnectsCoverageService implements VirtualCrossConnectsCoverageContract
 {
     /**
@@ -33,30 +41,20 @@ final class VirtualCrossConnectsCoverageService implements VirtualCrossConnectsC
      *
      * List Virtual Cross Connects Cloud Coverage.<br /><br />This endpoint shows which cloud regions are available for the `location_code` your Virtual Cross Connect will be provisioned in.
      *
-     * @param array{
-     *   cloudProvider?: 'aws'|'azure'|'gce'|CloudProvider,
-     *   cloudProviderRegion?: string,
-     *   locationCode?: string,
-     *   locationPop?: string,
-     *   locationRegion?: string,
-     *   locationSite?: string,
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[cloud_provider], filter[cloud_provider_region], filter[location.region], filter[location.site], filter[location.pop], filter[location.code]
-     * @param array{
-     *   availableBandwidth?: int|array{contains?: int}
-     * } $filters Consolidated filters parameter (deepObject style). Originally: filters[available_bandwidth][contains]
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[cloud_provider], filter[cloud_provider_region], filter[location.region], filter[location.site], filter[location.pop], filter[location.code]
+     * @param Filters|FiltersShape $filters Consolidated filters parameter (deepObject style). Originally: filters[available_bandwidth][contains]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<VirtualCrossConnectsCoverageListResponse>
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
-        ?array $filters = null,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null,
+        Filter|array|null $filter = null,
+        Filters|array|null $filters = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination {
         $params = Util::removeNulls(
             ['filter' => $filter, 'filters' => $filters, 'page' => $page]

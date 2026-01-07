@@ -8,14 +8,19 @@ use Telnyx\AI\Assistants\Tests\TestSuites\TestSuiteListResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface TestSuitesContract
 {
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): TestSuiteListResponse;
 }

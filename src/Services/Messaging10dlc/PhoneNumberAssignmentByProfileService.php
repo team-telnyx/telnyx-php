@@ -14,6 +14,9 @@ use Telnyx\Messaging10dlc\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentBy
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging10dlc\PhoneNumberAssignmentByProfileContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignmentByProfileContract
 {
     /**
@@ -37,6 +40,7 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
      * @param string $messagingProfileID the ID of the messaging profile that you want to link to the specified campaign
      * @param string $campaignID The ID of the campaign you want to link to the specified messaging profile. If you supply this ID in the request, do not also include a tcrCampaignId.
      * @param string $tcrCampaignID The TCR ID of the shared campaign you want to link to the specified messaging profile (for campaigns not created using Telnyx 10DLC services only). If you supply this ID in the request, do not also include a campaignId.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -44,7 +48,7 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
         string $messagingProfileID,
         ?string $campaignID = null,
         ?string $tcrCampaignID = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberAssignmentByProfileAssignResponse {
         $params = Util::removeNulls(
             [
@@ -65,13 +69,15 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
      *
      * Check the status of the individual phone number/campaign assignments associated with the supplied `taskId`.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function listPhoneNumberStatus(
         string $taskID,
         int $page = 1,
         int $recordsPerPage = 20,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberAssignmentByProfileListPhoneNumberStatusResponse {
         $params = Util::removeNulls(
             ['page' => $page, 'recordsPerPage' => $recordsPerPage]
@@ -88,13 +94,15 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
      *
      * Check the status of the individual phone number/campaign assignments associated with the supplied `taskId`.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrievePhoneNumberStatus(
         string $taskID,
         int $page = 1,
         int $recordsPerPage = 20,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse {
         $params = Util::removeNulls(
             ['page' => $page, 'recordsPerPage' => $recordsPerPage]
@@ -111,11 +119,13 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
      *
      * Check the status of the task associated with assigning all phone numbers on a messaging profile to a campaign by `taskId`.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieveStatus(
         string $taskID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): PhoneNumberAssignmentByProfileGetStatusResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveStatus($taskID, requestOptions: $requestOptions);

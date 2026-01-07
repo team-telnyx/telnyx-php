@@ -12,12 +12,16 @@ use Telnyx\Storage\Migrations\MigrationGetResponse;
 use Telnyx\Storage\Migrations\MigrationListResponse;
 use Telnyx\Storage\Migrations\MigrationNewResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface MigrationsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|MigrationCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MigrationNewResponse>
      *
@@ -25,13 +29,14 @@ interface MigrationsRawContract
      */
     public function create(
         array|MigrationCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id unique identifier for the data migration
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MigrationGetResponse>
      *
@@ -39,15 +44,19 @@ interface MigrationsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<MigrationListResponse>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse;
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse;
 }

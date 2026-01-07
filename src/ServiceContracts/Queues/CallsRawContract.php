@@ -15,6 +15,9 @@ use Telnyx\Queues\Calls\CallRetrieveParams;
 use Telnyx\Queues\Calls\CallUpdateParams;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface CallsRawContract
 {
     /**
@@ -22,6 +25,7 @@ interface CallsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|CallRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallGetResponse>
      *
@@ -30,7 +34,7 @@ interface CallsRawContract
     public function retrieve(
         string $callControlID,
         array|CallRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -38,6 +42,7 @@ interface CallsRawContract
      *
      * @param string $callControlID Path param: Unique identifier and token for controlling the call
      * @param array<string,mixed>|CallUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -46,7 +51,7 @@ interface CallsRawContract
     public function update(
         string $callControlID,
         array|CallUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -54,6 +59,7 @@ interface CallsRawContract
      *
      * @param string $queueName Uniquely identifies the queue by name
      * @param array<string,mixed>|CallListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<CallListResponse>>
      *
@@ -62,7 +68,7 @@ interface CallsRawContract
     public function list(
         string $queueName,
         array|CallListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -70,6 +76,7 @@ interface CallsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|CallRemoveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -78,6 +85,6 @@ interface CallsRawContract
     public function remove(
         string $callControlID,
         array|CallRemoveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

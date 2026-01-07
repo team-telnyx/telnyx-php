@@ -10,12 +10,18 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type JsonSchemaShape from \Telnyx\AI\Conversations\Insights\InsightCreateParams\JsonSchema
+ * @phpstan-import-type JsonSchemaShape from \Telnyx\AI\Conversations\Insights\InsightUpdateParams\JsonSchema as JsonSchemaShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface InsightsContract
 {
     /**
      * @api
      *
-     * @param string|array<string,mixed> $jsonSchema if specified, the output will follow the JSON schema
+     * @param JsonSchemaShape $jsonSchema if specified, the output will follow the JSON schema
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -24,26 +30,28 @@ interface InsightsContract
         string $name,
         string|array|null $jsonSchema = null,
         string $webhook = '',
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): InsightTemplateDetail;
 
     /**
      * @api
      *
      * @param string $insightID The ID of the insight
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $insightID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): InsightTemplateDetail;
 
     /**
      * @api
      *
      * @param string $insightID The ID of the insight
-     * @param string|array<string,mixed> $jsonSchema
+     * @param JsonSchemaShape1 $jsonSchema
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -53,11 +61,13 @@ interface InsightsContract
         string|array|null $jsonSchema = null,
         ?string $name = null,
         ?string $webhook = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): InsightTemplateDetail;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<InsightTemplate>
      *
@@ -66,18 +76,19 @@ interface InsightsContract
     public function list(
         ?int $pageNumber = null,
         ?int $pageSize = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination;
 
     /**
      * @api
      *
      * @param string $insightID The ID of the insight
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $insightID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed;
 }

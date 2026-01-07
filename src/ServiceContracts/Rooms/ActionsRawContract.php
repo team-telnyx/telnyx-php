@@ -12,6 +12,9 @@ use Telnyx\Rooms\Actions\ActionGenerateJoinClientTokenResponse;
 use Telnyx\Rooms\Actions\ActionRefreshClientTokenParams;
 use Telnyx\Rooms\Actions\ActionRefreshClientTokenResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ActionsRawContract
 {
     /**
@@ -19,6 +22,7 @@ interface ActionsRawContract
      *
      * @param string $roomID the unique identifier of a room
      * @param array<string,mixed>|ActionGenerateJoinClientTokenParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionGenerateJoinClientTokenResponse>
      *
@@ -27,7 +31,7 @@ interface ActionsRawContract
     public function generateJoinClientToken(
         string $roomID,
         array|ActionGenerateJoinClientTokenParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -35,6 +39,7 @@ interface ActionsRawContract
      *
      * @param string $roomID the unique identifier of a room
      * @param array<string,mixed>|ActionRefreshClientTokenParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionRefreshClientTokenResponse>
      *
@@ -43,6 +48,6 @@ interface ActionsRawContract
     public function refreshClientToken(
         string $roomID,
         array|ActionRefreshClientTokenParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

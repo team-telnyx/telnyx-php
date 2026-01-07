@@ -10,10 +10,15 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\MobilePhoneNumbers\Messaging\MessagingGetResponse;
 use Telnyx\MobilePhoneNumbers\Messaging\MessagingListParams;
+use Telnyx\MobilePhoneNumbers\Messaging\MessagingListParams\Page;
 use Telnyx\MobilePhoneNumbers\Messaging\MessagingListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MobilePhoneNumbers\MessagingRawContract;
 
+/**
+ * @phpstan-import-type PageShape from \Telnyx\MobilePhoneNumbers\Messaging\MessagingListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MessagingRawService implements MessagingRawContract
 {
     // @phpstan-ignore-next-line
@@ -28,6 +33,7 @@ final class MessagingRawService implements MessagingRawContract
      * Retrieve a mobile phone number with messaging settings
      *
      * @param string $id identifies the type of resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingGetResponse>
      *
@@ -35,7 +41,7 @@ final class MessagingRawService implements MessagingRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -51,7 +57,8 @@ final class MessagingRawService implements MessagingRawContract
      *
      * List mobile phone numbers with messaging settings
      *
-     * @param array{page?: array{number?: int, size?: int}}|MessagingListParams $params
+     * @param array{page?: Page|PageShape}|MessagingListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<MessagingListResponse>>
      *
@@ -59,7 +66,7 @@ final class MessagingRawService implements MessagingRawContract
      */
     public function list(
         array|MessagingListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MessagingListParams::parseRequest(
             $params,

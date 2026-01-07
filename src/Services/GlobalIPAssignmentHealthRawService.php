@@ -9,9 +9,14 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams;
+use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filter;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPAssignmentHealthRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class GlobalIPAssignmentHealthRawService implements GlobalIPAssignmentHealthRawContract
 {
     // @phpstan-ignore-next-line
@@ -26,11 +31,9 @@ final class GlobalIPAssignmentHealthRawService implements GlobalIPAssignmentHeal
      * Global IP Assignment Health Check Metrics
      *
      * @param array{
-     *   filter?: array{
-     *     globalIPAssignmentID?: string|array{in?: string},
-     *     globalIPID?: string|array{in?: string},
-     *   },
+     *   filter?: Filter|FilterShape
      * }|GlobalIPAssignmentHealthRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<GlobalIPAssignmentHealthGetResponse>
      *
@@ -38,7 +41,7 @@ final class GlobalIPAssignmentHealthRawService implements GlobalIPAssignmentHeal
      */
     public function retrieve(
         array|GlobalIPAssignmentHealthRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = GlobalIPAssignmentHealthRetrieveParams::parseRequest(
             $params,

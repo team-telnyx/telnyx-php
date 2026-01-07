@@ -11,6 +11,7 @@ use Telnyx\InboundMessagePayload;
 use Telnyx\Messages\MessageGetResponse\Data;
 
 /**
+ * @phpstan-import-type DataVariants from \Telnyx\Messages\MessageGetResponse\Data
  * @phpstan-import-type DataShape from \Telnyx\Messages\MessageGetResponse\Data
  *
  * @phpstan-type MessageGetResponseShape = array{data?: DataShape|null}
@@ -20,6 +21,7 @@ final class MessageGetResponse implements BaseModel
     /** @use SdkModel<MessageGetResponseShape> */
     use SdkModel;
 
+    /** @var DataVariants|null $data */
     #[Optional(union: Data::class)]
     public OutboundMessagePayload|InboundMessagePayload|null $data;
 

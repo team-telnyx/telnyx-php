@@ -18,7 +18,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsRes
  *   nextPageUri?: string|null,
  *   page?: int|null,
  *   pageSize?: int|null,
- *   participants?: list<ParticipantShape>|null,
+ *   participants?: list<Participant|ParticipantShape>|null,
  *   start?: int|null,
  *   uri?: string|null,
  * }
@@ -84,7 +84,7 @@ final class ParticipantGetParticipantsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ParticipantShape>|null $participants
+     * @param list<Participant|ParticipantShape>|null $participants
      */
     public static function with(
         ?int $end = null,
@@ -166,7 +166,7 @@ final class ParticipantGetParticipantsResponse implements BaseModel
     }
 
     /**
-     * @param list<ParticipantShape> $participants
+     * @param list<Participant|ParticipantShape> $participants
      */
     public function withParticipants(array $participants): self
     {

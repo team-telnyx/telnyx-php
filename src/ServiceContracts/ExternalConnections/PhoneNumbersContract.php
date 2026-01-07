@@ -8,9 +8,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\ExternalConnections\PhoneNumbers\ExternalConnectionPhoneNumber;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberGetResponse;
+use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Filter;
+use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Page;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface PhoneNumbersContract
 {
     /**
@@ -18,13 +25,14 @@ interface PhoneNumbersContract
      *
      * @param string $phoneNumberID A phone number's ID via the Telnyx API
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $phoneNumberID,
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberGetResponse;
 
     /**
@@ -33,6 +41,7 @@ interface PhoneNumbersContract
      * @param string $phoneNumberID Path param: A phone number's ID via the Telnyx API
      * @param string $id path param: Identifies the resource
      * @param string $locationID body param: Identifies the location to assign the phone number to
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -40,21 +49,16 @@ interface PhoneNumbersContract
         string $phoneNumberID,
         string $id,
         ?string $locationID = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberUpdateResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
-     * @param array{
-     *   civicAddressID?: array{eq?: string},
-     *   locationID?: array{eq?: string},
-     *   phoneNumber?: array{contains?: string, eq?: string},
-     * } $filter Filter parameter for phone numbers (deepObject style). Supports filtering by phone_number, civic_address_id, and location_id with eq/contains operations.
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Filter|FilterShape $filter Filter parameter for phone numbers (deepObject style). Supports filtering by phone_number, civic_address_id, and location_id with eq/contains operations.
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<ExternalConnectionPhoneNumber>
      *
@@ -62,8 +66,8 @@ interface PhoneNumbersContract
      */
     public function list(
         string $id,
-        ?array $filter = null,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null,
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination;
 }

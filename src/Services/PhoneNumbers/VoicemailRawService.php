@@ -15,6 +15,9 @@ use Telnyx\PhoneNumbers\Voicemail\VoicemailUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbers\VoicemailRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class VoicemailRawService implements VoicemailRawContract
 {
     // @phpstan-ignore-next-line
@@ -30,6 +33,7 @@ final class VoicemailRawService implements VoicemailRawContract
      *
      * @param string $phoneNumberID the ID of the phone number
      * @param array{enabled?: bool, pin?: string}|VoicemailCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VoicemailNewResponse>
      *
@@ -38,7 +42,7 @@ final class VoicemailRawService implements VoicemailRawContract
     public function create(
         string $phoneNumberID,
         array|VoicemailCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = VoicemailCreateParams::parseRequest(
             $params,
@@ -61,6 +65,7 @@ final class VoicemailRawService implements VoicemailRawContract
      * Returns the voicemail settings for a phone number
      *
      * @param string $phoneNumberID the ID of the phone number
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VoicemailGetResponse>
      *
@@ -68,7 +73,7 @@ final class VoicemailRawService implements VoicemailRawContract
      */
     public function retrieve(
         string $phoneNumberID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -86,6 +91,7 @@ final class VoicemailRawService implements VoicemailRawContract
      *
      * @param string $phoneNumberID the ID of the phone number
      * @param array{enabled?: bool, pin?: string}|VoicemailUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VoicemailUpdateResponse>
      *
@@ -94,7 +100,7 @@ final class VoicemailRawService implements VoicemailRawContract
     public function update(
         string $phoneNumberID,
         array|VoicemailUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = VoicemailUpdateParams::parseRequest(
             $params,

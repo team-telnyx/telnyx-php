@@ -13,6 +13,9 @@ use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonParams;
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonParams\Status;
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class RecordingsRawService implements RecordingsRawContract
 {
     // @phpstan-ignore-next-line
@@ -28,10 +31,9 @@ final class RecordingsRawService implements RecordingsRawContract
      *
      * @param string $recordingSid path param: Uniquely identifies the recording by id
      * @param array{
-     *   accountSid: string,
-     *   callSid: string,
-     *   status?: 'in-progress'|'paused'|'stopped'|Status,
+     *   accountSid: string, callSid: string, status?: Status|value-of<Status>
      * }|RecordingRecordingSidJsonParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RecordingRecordingSidJsonResponse>
      *
@@ -40,7 +42,7 @@ final class RecordingsRawService implements RecordingsRawContract
     public function recordingSidJson(
         string $recordingSid,
         array|RecordingRecordingSidJsonParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RecordingRecordingSidJsonParams::parseRequest(
             $params,

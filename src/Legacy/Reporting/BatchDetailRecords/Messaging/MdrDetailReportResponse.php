@@ -21,7 +21,7 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MdrDetailReportResponse
  *   createdAt?: \DateTimeInterface|null,
  *   directions?: list<Direction|value-of<Direction>>|null,
  *   endDate?: \DateTimeInterface|null,
- *   filters?: list<FilterShape>|null,
+ *   filters?: list<Filter|FilterShape>|null,
  *   profiles?: list<string>|null,
  *   recordType?: string|null,
  *   recordTypes?: list<RecordType|value-of<RecordType>>|null,
@@ -104,7 +104,7 @@ final class MdrDetailReportResponse implements BaseModel
      *
      * @param list<int>|null $connections
      * @param list<Direction|value-of<Direction>>|null $directions
-     * @param list<FilterShape>|null $filters
+     * @param list<Filter|FilterShape>|null $filters
      * @param list<string>|null $profiles
      * @param list<RecordType|value-of<RecordType>>|null $recordTypes
      * @param Status|value-of<Status>|null $status
@@ -195,7 +195,7 @@ final class MdrDetailReportResponse implements BaseModel
     }
 
     /**
-     * @param list<FilterShape> $filters
+     * @param list<Filter|FilterShape> $filters
      */
     public function withFilters(array $filters): self
     {

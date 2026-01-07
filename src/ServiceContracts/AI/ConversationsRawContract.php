@@ -17,12 +17,16 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ConversationsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|ConversationCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<Conversation>
      *
@@ -30,13 +34,14 @@ interface ConversationsRawContract
      */
     public function create(
         array|ConversationCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $conversationID The ID of the conversation to retrieve
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ConversationGetResponse>
      *
@@ -44,7 +49,7 @@ interface ConversationsRawContract
      */
     public function retrieve(
         string $conversationID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -52,6 +57,7 @@ interface ConversationsRawContract
      *
      * @param string $conversationID The ID of the conversation to update
      * @param array<string,mixed>|ConversationUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ConversationUpdateResponse>
      *
@@ -60,13 +66,14 @@ interface ConversationsRawContract
     public function update(
         string $conversationID,
         array|ConversationUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ConversationListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ConversationListResponse>
      *
@@ -74,13 +81,14 @@ interface ConversationsRawContract
      */
     public function list(
         array|ConversationListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $conversationID The ID of the conversation to delete
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -88,7 +96,7 @@ interface ConversationsRawContract
      */
     public function delete(
         string $conversationID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -96,6 +104,7 @@ interface ConversationsRawContract
      *
      * @param string $conversationID The ID of the conversation
      * @param array<string,mixed>|ConversationAddMessageParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -104,11 +113,13 @@ interface ConversationsRawContract
     public function addMessage(
         string $conversationID,
         array|ConversationAddMessageParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ConversationGetConversationsInsightsResponse>
      *
@@ -116,6 +127,6 @@ interface ConversationsRawContract
      */
     public function retrieveConversationsInsights(
         string $conversationID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

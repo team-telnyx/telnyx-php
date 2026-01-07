@@ -11,6 +11,9 @@ use Telnyx\Porting\PortingListUkCarriersResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class PortingRawService implements PortingRawContract
 {
     // @phpstan-ignore-next-line
@@ -24,12 +27,14 @@ final class PortingRawService implements PortingRawContract
      *
      * List available carriers in the UK.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<PortingListUkCarriersResponse>
      *
      * @throws APIException
      */
     public function listUkCarriers(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

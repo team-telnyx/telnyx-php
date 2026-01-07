@@ -14,6 +14,9 @@ use Telnyx\DialogflowConnections\DialogflowConnectionUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DialogflowConnectionsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class DialogflowConnectionsService implements DialogflowConnectionsContract
 {
     /**
@@ -37,9 +40,10 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control)
      * @param array<string,mixed> $serviceAccount the JSON map to connect your Dialoglow account
      * @param string $conversationProfileID The id of a configured conversation profile on your Dialogflow account. (If you use Dialogflow CX, this param is required)
-     * @param 'cx'|'es'|DialogflowAPI $dialogflowAPI determine which Dialogflow will be used
+     * @param DialogflowAPI|value-of<DialogflowAPI> $dialogflowAPI determine which Dialogflow will be used
      * @param string $environment which Dialogflow environment will be used
      * @param string $location The region of your agent is. (If you use Dialogflow CX, this param is required)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -47,10 +51,10 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
         string $connectionID,
         array $serviceAccount,
         ?string $conversationProfileID = null,
-        string|DialogflowAPI $dialogflowAPI = 'es',
+        DialogflowAPI|string $dialogflowAPI = 'es',
         ?string $environment = null,
         ?string $location = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DialogflowConnectionNewResponse {
         $params = Util::removeNulls(
             [
@@ -74,12 +78,13 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
      * Return details of the Dialogflow connection associated with the given CallControl connection.
      *
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $connectionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): DialogflowConnectionGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($connectionID, requestOptions: $requestOptions);
@@ -95,9 +100,10 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control)
      * @param array<string,mixed> $serviceAccount the JSON map to connect your Dialoglow account
      * @param string $conversationProfileID The id of a configured conversation profile on your Dialogflow account. (If you use Dialogflow CX, this param is required)
-     * @param 'cx'|'es'|\Telnyx\DialogflowConnections\DialogflowConnectionUpdateParams\DialogflowAPI $dialogflowAPI determine which Dialogflow will be used
+     * @param \Telnyx\DialogflowConnections\DialogflowConnectionUpdateParams\DialogflowAPI|value-of<\Telnyx\DialogflowConnections\DialogflowConnectionUpdateParams\DialogflowAPI> $dialogflowAPI determine which Dialogflow will be used
      * @param string $environment which Dialogflow environment will be used
      * @param string $location The region of your agent is. (If you use Dialogflow CX, this param is required)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -105,10 +111,10 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
         string $connectionID,
         array $serviceAccount,
         ?string $conversationProfileID = null,
-        string|\Telnyx\DialogflowConnections\DialogflowConnectionUpdateParams\DialogflowAPI $dialogflowAPI = 'es',
+        \Telnyx\DialogflowConnections\DialogflowConnectionUpdateParams\DialogflowAPI|string $dialogflowAPI = 'es',
         ?string $environment = null,
         ?string $location = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DialogflowConnectionUpdateResponse {
         $params = Util::removeNulls(
             [
@@ -132,12 +138,13 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
      * Deletes a stored Dialogflow Connection.
      *
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $connectionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($connectionID, requestOptions: $requestOptions);

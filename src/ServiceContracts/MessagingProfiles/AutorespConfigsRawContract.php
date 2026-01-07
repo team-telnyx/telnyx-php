@@ -15,12 +15,16 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigRetrieveParams;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface AutorespConfigsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|AutorespConfigCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AutoRespConfigResponse>
      *
@@ -29,13 +33,14 @@ interface AutorespConfigsRawContract
     public function create(
         string $profileID,
         array|AutorespConfigCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|AutorespConfigRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AutoRespConfigResponse>
      *
@@ -44,7 +49,7 @@ interface AutorespConfigsRawContract
     public function retrieve(
         string $autorespCfgID,
         array|AutorespConfigRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -52,6 +57,7 @@ interface AutorespConfigsRawContract
      *
      * @param string $autorespCfgID Path param:
      * @param array<string,mixed>|AutorespConfigUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AutoRespConfigResponse>
      *
@@ -60,13 +66,14 @@ interface AutorespConfigsRawContract
     public function update(
         string $autorespCfgID,
         array|AutorespConfigUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|AutorespConfigListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AutorespConfigListResponse>
      *
@@ -75,13 +82,14 @@ interface AutorespConfigsRawContract
     public function list(
         string $profileID,
         array|AutorespConfigListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|AutorespConfigDeleteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
      *
@@ -90,6 +98,6 @@ interface AutorespConfigsRawContract
     public function delete(
         string $autorespCfgID,
         array|AutorespConfigDeleteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

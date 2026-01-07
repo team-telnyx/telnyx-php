@@ -16,6 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\Assistants\ScheduledEventsService::create()
  *
+ * @phpstan-import-type ConversationMetadataVariants from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventCreateParams\ConversationMetadata
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventCreateParams\ConversationMetadata
  *
  * @phpstan-type ScheduledEventCreateParamsShape = array{
@@ -61,7 +62,7 @@ final class ScheduledEventCreateParams implements BaseModel
     /**
      * Metadata associated with the conversation. Telnyx provides several pieces of metadata, but customers can also add their own.
      *
-     * @var array<string,string|int|bool>|null $conversationMetadata
+     * @var array<string,ConversationMetadataVariants>|null $conversationMetadata
      */
     #[Optional('conversation_metadata', map: ConversationMetadata::class)]
     public ?array $conversationMetadata;

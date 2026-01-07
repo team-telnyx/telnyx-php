@@ -6,33 +6,26 @@ namespace Telnyx\ServiceContracts\Legacy\Reporting\BatchDetailRecords;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\CldFilter;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\CliFilter;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\FilterType;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingDeleteResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingGetResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingListResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Legacy\Reporting\BatchDetailRecords\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface MessagingContract
 {
     /**
      * @api
      *
-     * @param string|\DateTimeInterface $endTime End time in ISO format. Note: If end time includes the last 4 hours, some MDRs might not appear in this report, due to wait time for downstream message delivery confirmation
-     * @param string|\DateTimeInterface $startTime Start time in ISO format
+     * @param \DateTimeInterface $endTime End time in ISO format. Note: If end time includes the last 4 hours, some MDRs might not appear in this report, due to wait time for downstream message delivery confirmation
+     * @param \DateTimeInterface $startTime Start time in ISO format
      * @param list<int> $connections List of connections to filter by
      * @param list<int> $directions List of directions to filter by (Inbound = 1, Outbound = 2)
-     * @param list<array{
-     *   billingGroup?: string,
-     *   cld?: string,
-     *   cldFilter?: 'contains'|'starts_with'|'ends_with'|CldFilter,
-     *   cli?: string,
-     *   cliFilter?: 'contains'|'starts_with'|'ends_with'|CliFilter,
-     *   filterType?: 'and'|'or'|FilterType,
-     *   tagsList?: string,
-     * }|Filter> $filters List of filters to apply
+     * @param list<Filter|FilterShape> $filters List of filters to apply
      * @param bool $includeMessageBody Whether to include message body in the report
      * @param list<string> $managedAccounts List of managed accounts to include
      * @param list<string> $profiles List of messaging profile IDs to filter by
@@ -40,12 +33,13 @@ interface MessagingContract
      * @param string $reportName Name of the report
      * @param bool $selectAllManagedAccounts Whether to select all managed accounts
      * @param string $timezone Timezone for the report
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        string|\DateTimeInterface $endTime,
-        string|\DateTimeInterface $startTime,
+        \DateTimeInterface $endTime,
+        \DateTimeInterface $startTime,
         ?array $connections = null,
         ?array $directions = null,
         ?array $filters = null,
@@ -56,35 +50,41 @@ interface MessagingContract
         ?string $reportName = null,
         ?bool $selectAllManagedAccounts = null,
         ?string $timezone = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MessagingNewResponse;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MessagingGetResponse;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MessagingListResponse;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MessagingDeleteResponse;
 }

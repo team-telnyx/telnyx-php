@@ -16,6 +16,9 @@ use Telnyx\VerifiedNumbers\VerifiedNumberCreateParams\VerificationMethod;
 use Telnyx\VerifiedNumbers\VerifiedNumberDataWrapper;
 use Telnyx\VerifiedNumbers\VerifiedNumberNewResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class VerifiedNumbersService implements VerifiedNumbersContract
 {
     /**
@@ -42,16 +45,17 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
      *
      * Initiates phone number verification procedure. Supports DTMF extension dialing for voice calls to numbers behind IVR systems.
      *
-     * @param 'sms'|'call'|VerificationMethod $verificationMethod verification method
+     * @param VerificationMethod|value-of<VerificationMethod> $verificationMethod verification method
      * @param string $extension Optional DTMF extension sequence to dial after the call is answered. This parameter enables verification of phone numbers behind IVR systems that require extension dialing. Valid characters: digits 0-9, letters A-D, symbols * and #. Pauses: w = 0.5 second pause, W = 1 second pause. Maximum length: 50 characters. Only works with 'call' verification method.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $phoneNumber,
-        string|VerificationMethod $verificationMethod,
+        VerificationMethod|string $verificationMethod,
         ?string $extension = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): VerifiedNumberNewResponse {
         $params = Util::removeNulls(
             [
@@ -73,12 +77,13 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
      * Retrieve a verified number
      *
      * @param string $phoneNumber +E164 formatted phone number
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $phoneNumber,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): VerifiedNumberDataWrapper {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($phoneNumber, requestOptions: $requestOptions);
@@ -91,6 +96,8 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
      *
      * Gets a paginated list of Verified Numbers.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return DefaultFlatPagination<VerifiedNumber>
      *
      * @throws APIException
@@ -98,7 +105,7 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
     public function list(
         ?int $pageNumber = null,
         ?int $pageSize = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
         $params = Util::removeNulls(
             ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
@@ -116,12 +123,13 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
      * Delete a verified number
      *
      * @param string $phoneNumber +E164 formatted phone number
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $phoneNumber,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): VerifiedNumberDataWrapper {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($phoneNumber, requestOptions: $requestOptions);

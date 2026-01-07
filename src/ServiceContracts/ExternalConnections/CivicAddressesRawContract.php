@@ -12,6 +12,9 @@ use Telnyx\ExternalConnections\CivicAddresses\CivicAddressListResponse;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressRetrieveParams;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface CivicAddressesRawContract
 {
     /**
@@ -19,6 +22,7 @@ interface CivicAddressesRawContract
      *
      * @param string $addressID identifies a civic address or a location
      * @param array<string,mixed>|CivicAddressRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CivicAddressGetResponse>
      *
@@ -27,7 +31,7 @@ interface CivicAddressesRawContract
     public function retrieve(
         string $addressID,
         array|CivicAddressRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -35,6 +39,7 @@ interface CivicAddressesRawContract
      *
      * @param string $id identifies the resource
      * @param array<string,mixed>|CivicAddressListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CivicAddressListResponse>
      *
@@ -43,6 +48,6 @@ interface CivicAddressesRawContract
     public function list(
         string $id,
         array|CivicAddressListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

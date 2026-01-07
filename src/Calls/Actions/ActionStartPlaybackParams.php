@@ -26,6 +26,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Calls\ActionsService::startPlayback()
  *
+ * @phpstan-import-type LoopcountVariants from \Telnyx\Calls\Actions\Loopcount
  * @phpstan-import-type LoopcountShape from \Telnyx\Calls\Actions\Loopcount
  *
  * @phpstan-type ActionStartPlaybackParamsShape = array{
@@ -82,6 +83,8 @@ final class ActionStartPlaybackParams implements BaseModel
 
     /**
      * The number of times the audio file should be played. If supplied, the value must be an integer between 1 and 100, or the special string `infinity` for an endless loop.
+     *
+     * @var LoopcountVariants|null $loop
      */
     #[Optional]
     public string|int|null $loop;

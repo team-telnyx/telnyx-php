@@ -13,6 +13,9 @@ use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Reports\CdrUsageReportsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class CdrUsageReportsService implements CdrUsageReportsContract
 {
     /**
@@ -33,19 +36,20 @@ final class CdrUsageReportsService implements CdrUsageReportsContract
      *
      * Generate and fetch voice usage report synchronously. This endpoint will both generate and fetch the voice report over a specified time period. No polling is necessary but the response may take up to a couple of minutes.
      *
-     * @param 'NO_AGGREGATION'|'CONNECTION'|'TAG'|'BILLING_GROUP'|AggregationType $aggregationType
-     * @param 'NO_BREAKDOWN'|'DID_VS_TOLL_FREE'|'COUNTRY'|'DID_VS_TOLL_FREE_PER_COUNTRY'|ProductBreakdown $productBreakdown
+     * @param AggregationType|value-of<AggregationType> $aggregationType
+     * @param ProductBreakdown|value-of<ProductBreakdown> $productBreakdown
      * @param list<float> $connections
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function fetchSync(
-        string|AggregationType $aggregationType,
-        string|ProductBreakdown $productBreakdown,
+        AggregationType|string $aggregationType,
+        ProductBreakdown|string $productBreakdown,
         ?array $connections = null,
-        string|\DateTimeInterface|null $endDate = null,
-        string|\DateTimeInterface|null $startDate = null,
-        ?RequestOptions $requestOptions = null,
+        ?\DateTimeInterface $endDate = null,
+        ?\DateTimeInterface $startDate = null,
+        RequestOptions|array|null $requestOptions = null,
     ): CdrUsageReportFetchSyncResponse {
         $params = Util::removeNulls(
             [

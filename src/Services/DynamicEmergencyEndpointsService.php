@@ -11,11 +11,17 @@ use Telnyx\DefaultPagination;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpoint;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointDeleteResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointGetResponse;
-use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams\Filter\Status;
+use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams\Filter;
+use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams\Page;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DynamicEmergencyEndpointsContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpointsContract
 {
     /**
@@ -37,6 +43,7 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
      * Creates a dynamic emergency endpoints.
      *
      * @param string $dynamicEmergencyAddressID an id of a currently active dynamic emergency location
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -44,7 +51,7 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
         string $callbackNumber,
         string $callerName,
         string $dynamicEmergencyAddressID,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DynamicEmergencyEndpointNewResponse {
         $params = Util::removeNulls(
             [
@@ -66,12 +73,13 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
      * Returns the dynamic emergency endpoint based on the ID provided
      *
      * @param string $id Dynamic Emergency Endpoint id
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): DynamicEmergencyEndpointGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -84,21 +92,18 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
      *
      * Returns the dynamic emergency endpoints according to filters
      *
-     * @param array{
-     *   countryCode?: string, status?: 'pending'|'activated'|'rejected'|Status
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[country_code]
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[country_code]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<DynamicEmergencyEndpoint>
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null,
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
@@ -114,12 +119,13 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
      * Deletes the dynamic emergency endpoint based on the ID provided
      *
      * @param string $id Dynamic Emergency Endpoint id
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): DynamicEmergencyEndpointDeleteResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, requestOptions: $requestOptions);

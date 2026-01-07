@@ -11,6 +11,9 @@ use Telnyx\Messaging10dlc\CampaignBuilder\Brand\BrandQualifyByUsecaseResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging10dlc\CampaignBuilder\BrandContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class BrandService implements BrandContract
 {
     /**
@@ -31,12 +34,14 @@ final class BrandService implements BrandContract
      *
      * This endpoint allows you to see whether or not the supplied brand is suitable for your desired campaign use case.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function qualifyByUsecase(
         string $usecase,
         string $brandID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BrandQualifyByUsecaseResponse {
         $params = Util::removeNulls(['brandID' => $brandID]);
 

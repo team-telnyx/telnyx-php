@@ -17,6 +17,9 @@ use Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupParams;
 use Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse;
 use Telnyx\SubNumberOrders\SubNumberOrderUpdateResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface SubNumberOrdersRawContract
 {
     /**
@@ -24,6 +27,7 @@ interface SubNumberOrdersRawContract
      *
      * @param string $subNumberOrderID the sub number order ID
      * @param array<string,mixed>|SubNumberOrderRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SubNumberOrderGetResponse>
      *
@@ -32,7 +36,7 @@ interface SubNumberOrdersRawContract
     public function retrieve(
         string $subNumberOrderID,
         array|SubNumberOrderRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -40,6 +44,7 @@ interface SubNumberOrdersRawContract
      *
      * @param string $subNumberOrderID the sub number order ID
      * @param array<string,mixed>|SubNumberOrderUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SubNumberOrderUpdateResponse>
      *
@@ -48,13 +53,14 @@ interface SubNumberOrdersRawContract
     public function update(
         string $subNumberOrderID,
         array|SubNumberOrderUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|SubNumberOrderListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SubNumberOrderListResponse>
      *
@@ -62,13 +68,14 @@ interface SubNumberOrdersRawContract
      */
     public function list(
         array|SubNumberOrderListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $subNumberOrderID the ID of the sub number order
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SubNumberOrderCancelResponse>
      *
@@ -76,7 +83,7 @@ interface SubNumberOrdersRawContract
      */
     public function cancel(
         string $subNumberOrderID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -84,6 +91,7 @@ interface SubNumberOrdersRawContract
      *
      * @param string $id The ID of the sub number order
      * @param array<string,mixed>|SubNumberOrderUpdateRequirementGroupParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SubNumberOrderUpdateRequirementGroupResponse>
      *
@@ -92,6 +100,6 @@ interface SubNumberOrdersRawContract
     public function updateRequirementGroup(
         string $id,
         array|SubNumberOrderUpdateRequirementGroupParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

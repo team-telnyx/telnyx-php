@@ -10,7 +10,8 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
 use Telnyx\Core\Conversion\MapOf;
 
 /**
- * @phpstan-type JsonSchemaShape = string|array<string,mixed>
+ * @phpstan-type JsonSchemaVariants = string|array<string,mixed>
+ * @phpstan-type JsonSchemaShape = JsonSchemaVariants
  */
 final class JsonSchema implements ConverterSource
 {

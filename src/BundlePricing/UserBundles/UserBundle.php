@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   active: bool,
  *   billingBundle: BillingBundleSummary|BillingBundleSummaryShape,
  *   createdAt: string,
- *   resources: list<UserBundleResourceShape>,
+ *   resources: list<UserBundleResource|UserBundleResourceShape>,
  *   userID: string,
  *   updatedAt?: string|null,
  * }
@@ -104,7 +104,7 @@ final class UserBundle implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param BillingBundleSummary|BillingBundleSummaryShape $billingBundle
-     * @param list<UserBundleResourceShape> $resources
+     * @param list<UserBundleResource|UserBundleResourceShape> $resources
      */
     public static function with(
         string $id,
@@ -175,7 +175,7 @@ final class UserBundle implements BaseModel
     }
 
     /**
-     * @param list<UserBundleResourceShape> $resources
+     * @param list<UserBundleResource|UserBundleResourceShape> $resources
      */
     public function withResources(array $resources): self
     {

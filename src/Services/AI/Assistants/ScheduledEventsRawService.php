@@ -21,6 +21,10 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\ScheduledEventsRawContract;
 
+/**
+ * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventCreateParams\ConversationMetadata
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ScheduledEventsRawService implements ScheduledEventsRawContract
 {
     // @phpstan-ignore-next-line
@@ -35,13 +39,14 @@ final class ScheduledEventsRawService implements ScheduledEventsRawContract
      * Create a scheduled event for an assistant
      *
      * @param array{
-     *   scheduledAtFixedDatetime: string|\DateTimeInterface,
+     *   scheduledAtFixedDatetime: \DateTimeInterface,
      *   telnyxAgentTarget: string,
-     *   telnyxConversationChannel: 'phone_call'|'sms_chat'|ConversationChannelType,
+     *   telnyxConversationChannel: ConversationChannelType|value-of<ConversationChannelType>,
      *   telnyxEndUserTarget: string,
-     *   conversationMetadata?: array<string,string|int|bool>,
+     *   conversationMetadata?: array<string,ConversationMetadataShape>,
      *   text?: string,
      * }|ScheduledEventCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse>
      *
@@ -50,7 +55,7 @@ final class ScheduledEventsRawService implements ScheduledEventsRawContract
     public function create(
         string $assistantID,
         array|ScheduledEventCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ScheduledEventCreateParams::parseRequest(
             $params,
@@ -73,6 +78,7 @@ final class ScheduledEventsRawService implements ScheduledEventsRawContract
      * Retrieve a scheduled event by event ID
      *
      * @param array{assistantID: string}|ScheduledEventRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse>
      *
@@ -81,7 +87,7 @@ final class ScheduledEventsRawService implements ScheduledEventsRawContract
     public function retrieve(
         string $eventID,
         array|ScheduledEventRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ScheduledEventRetrieveParams::parseRequest(
             $params,
@@ -107,12 +113,13 @@ final class ScheduledEventsRawService implements ScheduledEventsRawContract
      * Get scheduled events for an assistant with pagination and filtering
      *
      * @param array{
-     *   conversationChannel?: 'phone_call'|'sms_chat'|ConversationChannelType,
-     *   fromDate?: string|\DateTimeInterface,
+     *   conversationChannel?: ConversationChannelType|value-of<ConversationChannelType>,
+     *   fromDate?: \DateTimeInterface,
      *   pageNumber?: int,
      *   pageSize?: int,
-     *   toDate?: string|\DateTimeInterface,
+     *   toDate?: \DateTimeInterface,
      * }|ScheduledEventListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse,>,>
      *
@@ -121,7 +128,7 @@ final class ScheduledEventsRawService implements ScheduledEventsRawContract
     public function list(
         string $assistantID,
         array|ScheduledEventListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ScheduledEventListParams::parseRequest(
             $params,
@@ -154,6 +161,7 @@ final class ScheduledEventsRawService implements ScheduledEventsRawContract
      * If the event is pending, this will cancel the event. Otherwise, this will simply remove the record of the event.
      *
      * @param array{assistantID: string}|ScheduledEventDeleteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -162,7 +170,7 @@ final class ScheduledEventsRawService implements ScheduledEventsRawContract
     public function delete(
         string $eventID,
         array|ScheduledEventDeleteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ScheduledEventDeleteParams::parseRequest(
             $params,

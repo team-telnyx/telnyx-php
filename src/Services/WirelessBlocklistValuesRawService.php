@@ -13,6 +13,9 @@ use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListParams;
 use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListParams\Type;
 use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class WirelessBlocklistValuesRawService implements WirelessBlocklistValuesRawContract
 {
     // @phpstan-ignore-next-line
@@ -26,9 +29,8 @@ final class WirelessBlocklistValuesRawService implements WirelessBlocklistValues
      *
      * Retrieve all wireless blocklist values for a given blocklist type.
      *
-     * @param array{
-     *   type: 'country'|'mcc'|'plmn'|Type
-     * }|WirelessBlocklistValueListParams $params
+     * @param array{type: Type|value-of<Type>}|WirelessBlocklistValueListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WirelessBlocklistValueListResponse>
      *
@@ -36,7 +38,7 @@ final class WirelessBlocklistValuesRawService implements WirelessBlocklistValues
      */
     public function list(
         array|WirelessBlocklistValueListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = WirelessBlocklistValueListParams::parseRequest(
             $params,

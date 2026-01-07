@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type VersionConfigShape from \Telnyx\AI\Assistants\CanaryDeploys\VersionConfig
  *
  * @phpstan-type CanaryDeployCreateParamsShape = array{
- *   versions: list<VersionConfigShape>
+ *   versions: list<VersionConfig|VersionConfigShape>
  * }
  */
 final class CanaryDeployCreateParams implements BaseModel
@@ -61,7 +61,7 @@ final class CanaryDeployCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VersionConfigShape> $versions
+     * @param list<VersionConfig|VersionConfigShape> $versions
      */
     public static function with(array $versions): self
     {
@@ -75,7 +75,7 @@ final class CanaryDeployCreateParams implements BaseModel
     /**
      * List of version configurations.
      *
-     * @param list<VersionConfigShape> $versions
+     * @param list<VersionConfig|VersionConfigShape> $versions
      */
     public function withVersions(array $versions): self
     {

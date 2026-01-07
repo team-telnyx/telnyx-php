@@ -13,9 +13,16 @@ use Telnyx\ServiceContracts\ShortCodesRawContract;
 use Telnyx\ShortCode;
 use Telnyx\ShortCodes\ShortCodeGetResponse;
 use Telnyx\ShortCodes\ShortCodeListParams;
+use Telnyx\ShortCodes\ShortCodeListParams\Filter;
+use Telnyx\ShortCodes\ShortCodeListParams\Page;
 use Telnyx\ShortCodes\ShortCodeUpdateParams;
 use Telnyx\ShortCodes\ShortCodeUpdateResponse;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\ShortCodes\ShortCodeListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\ShortCodes\ShortCodeListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ShortCodesRawService implements ShortCodesRawContract
 {
     // @phpstan-ignore-next-line
@@ -30,6 +37,7 @@ final class ShortCodesRawService implements ShortCodesRawContract
      * Retrieve a short code
      *
      * @param string $id The id of the short code
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ShortCodeGetResponse>
      *
@@ -37,7 +45,7 @@ final class ShortCodesRawService implements ShortCodesRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -58,6 +66,7 @@ final class ShortCodesRawService implements ShortCodesRawContract
      * @param array{
      *   messagingProfileID: string, tags?: list<string>
      * }|ShortCodeUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ShortCodeUpdateResponse>
      *
@@ -66,7 +75,7 @@ final class ShortCodesRawService implements ShortCodesRawContract
     public function update(
         string $id,
         array|ShortCodeUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ShortCodeUpdateParams::parseRequest(
             $params,
@@ -89,9 +98,9 @@ final class ShortCodesRawService implements ShortCodesRawContract
      * List short codes
      *
      * @param array{
-     *   filter?: array{messagingProfileID?: string},
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|ShortCodeListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<ShortCode>>
      *
@@ -99,7 +108,7 @@ final class ShortCodesRawService implements ShortCodesRawContract
      */
     public function list(
         array|ShortCodeListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ShortCodeListParams::parseRequest(
             $params,

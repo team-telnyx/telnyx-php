@@ -17,12 +17,16 @@ use Telnyx\WirelessBlocklists\WirelessBlocklistNewResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams;
 use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface WirelessBlocklistsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|WirelessBlocklistCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WirelessBlocklistNewResponse>
      *
@@ -30,13 +34,14 @@ interface WirelessBlocklistsRawContract
      */
     public function create(
         array|WirelessBlocklistCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the wireless blocklist
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WirelessBlocklistGetResponse>
      *
@@ -44,13 +49,14 @@ interface WirelessBlocklistsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|WirelessBlocklistUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WirelessBlocklistUpdateResponse>
      *
@@ -58,13 +64,14 @@ interface WirelessBlocklistsRawContract
      */
     public function update(
         array|WirelessBlocklistUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|WirelessBlocklistListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<WirelessBlocklist>>
      *
@@ -72,13 +79,14 @@ interface WirelessBlocklistsRawContract
      */
     public function list(
         array|WirelessBlocklistListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the wireless blocklist
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WirelessBlocklistDeleteResponse>
      *
@@ -86,6 +94,6 @@ interface WirelessBlocklistsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

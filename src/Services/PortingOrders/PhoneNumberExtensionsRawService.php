@@ -9,15 +9,27 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams;
+use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams\ActivationRange;
+use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams\ExtensionRange;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionDeleteParams;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionDeleteResponse;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams;
-use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams\Sort\Value;
+use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams\Filter;
+use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams\Page;
+use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams\Sort;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionNewResponse;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\PhoneNumberExtensionsRawContract;
 
+/**
+ * @phpstan-import-type ActivationRangeShape from \Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams\ActivationRange
+ * @phpstan-import-type ExtensionRangeShape from \Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams\ExtensionRange
+ * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams\Page
+ * @phpstan-import-type SortShape from \Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams\Sort
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class PhoneNumberExtensionsRawService implements PhoneNumberExtensionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -33,10 +45,11 @@ final class PhoneNumberExtensionsRawService implements PhoneNumberExtensionsRawC
      *
      * @param string $portingOrderID Identifies the Porting Order associated with the phone number extension
      * @param array{
-     *   activationRanges: list<array{endAt: int, startAt: int}>,
-     *   extensionRange: array{endAt: int, startAt: int},
+     *   activationRanges: list<ActivationRange|ActivationRangeShape>,
+     *   extensionRange: ExtensionRange|ExtensionRangeShape,
      *   portingPhoneNumberID: string,
      * }|PhoneNumberExtensionCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberExtensionNewResponse>
      *
@@ -45,7 +58,7 @@ final class PhoneNumberExtensionsRawService implements PhoneNumberExtensionsRawC
     public function create(
         string $portingOrderID,
         array|PhoneNumberExtensionCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PhoneNumberExtensionCreateParams::parseRequest(
             $params,
@@ -69,10 +82,9 @@ final class PhoneNumberExtensionsRawService implements PhoneNumberExtensionsRawC
      *
      * @param string $portingOrderID Identifies the Porting Order associated with the phone number extensions
      * @param array{
-     *   filter?: array{portingPhoneNumberID?: string},
-     *   page?: array{number?: int, size?: int},
-     *   sort?: array{value?: '-created_at'|'created_at'|Value},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|SortShape
      * }|PhoneNumberExtensionListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PortingPhoneNumberExtension>>
      *
@@ -81,7 +93,7 @@ final class PhoneNumberExtensionsRawService implements PhoneNumberExtensionsRawC
     public function list(
         string $portingOrderID,
         array|PhoneNumberExtensionListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PhoneNumberExtensionListParams::parseRequest(
             $params,
@@ -106,6 +118,7 @@ final class PhoneNumberExtensionsRawService implements PhoneNumberExtensionsRawC
      *
      * @param string $id Identifies the phone number extension to be deleted
      * @param array{portingOrderID: string}|PhoneNumberExtensionDeleteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberExtensionDeleteResponse>
      *
@@ -114,7 +127,7 @@ final class PhoneNumberExtensionsRawService implements PhoneNumberExtensionsRawC
     public function delete(
         string $id,
         array|PhoneNumberExtensionDeleteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PhoneNumberExtensionDeleteParams::parseRequest(
             $params,

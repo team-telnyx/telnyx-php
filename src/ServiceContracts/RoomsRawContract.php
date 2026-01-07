@@ -17,12 +17,16 @@ use Telnyx\Rooms\RoomRetrieveParams;
 use Telnyx\Rooms\RoomUpdateParams;
 use Telnyx\Rooms\RoomUpdateResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface RoomsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|RoomCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RoomNewResponse>
      *
@@ -30,7 +34,7 @@ interface RoomsRawContract
      */
     public function create(
         array|RoomCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -38,6 +42,7 @@ interface RoomsRawContract
      *
      * @param string $roomID the unique identifier of a room
      * @param array<string,mixed>|RoomRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RoomGetResponse>
      *
@@ -46,7 +51,7 @@ interface RoomsRawContract
     public function retrieve(
         string $roomID,
         array|RoomRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -54,6 +59,7 @@ interface RoomsRawContract
      *
      * @param string $roomID the unique identifier of a room
      * @param array<string,mixed>|RoomUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RoomUpdateResponse>
      *
@@ -62,13 +68,14 @@ interface RoomsRawContract
     public function update(
         string $roomID,
         array|RoomUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|RoomListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<Room>>
      *
@@ -76,13 +83,14 @@ interface RoomsRawContract
      */
     public function list(
         array|RoomListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $roomID the unique identifier of a room
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -90,6 +98,6 @@ interface RoomsRawContract
      */
     public function delete(
         string $roomID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

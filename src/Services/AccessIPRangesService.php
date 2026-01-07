@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\AccessIPRanges\AccessIPRange;
+use Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
@@ -12,6 +13,10 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AccessIPRangesContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AccessIPRangesService implements AccessIPRangesContract
 {
     /**
@@ -32,12 +37,14 @@ final class AccessIPRangesService implements AccessIPRangesContract
      *
      * Create new Access IP Range
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function create(
         string $cidrBlock,
         ?string $description = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AccessIPRange {
         $params = Util::removeNulls(
             ['cidrBlock' => $cidrBlock, 'description' => $description]
@@ -54,27 +61,18 @@ final class AccessIPRangesService implements AccessIPRangesContract
      *
      * List all Access IP Ranges
      *
-     * @param array{
-     *   cidrBlock?: string|array{
-     *     contains?: string, endswith?: string, startswith?: string
-     *   },
-     *   createdAt?: string|\DateTimeInterface|array{
-     *     gt?: string|\DateTimeInterface,
-     *     gte?: string|\DateTimeInterface,
-     *     lt?: string|\DateTimeInterface,
-     *     lte?: string|\DateTimeInterface,
-     *   },
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[cidr_block], filter[cidr_block][startswith], filter[cidr_block][endswith], filter[cidr_block][contains], filter[created_at]. Supports complex bracket operations for dynamic filtering.
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[cidr_block], filter[cidr_block][startswith], filter[cidr_block][endswith], filter[cidr_block][contains], filter[created_at]. Supports complex bracket operations for dynamic filtering.
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<AccessIPRange>
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
+        Filter|array|null $filter = null,
         ?int $pageNumber = null,
         ?int $pageSize = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
         $params = Util::removeNulls(
             [
@@ -95,11 +93,13 @@ final class AccessIPRangesService implements AccessIPRangesContract
      *
      * Delete access IP ranges
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $accessIPRangeID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AccessIPRange {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($accessIPRangeID, requestOptions: $requestOptions);

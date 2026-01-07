@@ -14,11 +14,18 @@ use Telnyx\Porting\Reports\ReportCreateParams;
 use Telnyx\Porting\Reports\ReportCreateParams\ReportType;
 use Telnyx\Porting\Reports\ReportGetResponse;
 use Telnyx\Porting\Reports\ReportListParams;
-use Telnyx\Porting\Reports\ReportListParams\Filter\Status;
+use Telnyx\Porting\Reports\ReportListParams\Filter;
+use Telnyx\Porting\Reports\ReportListParams\Page;
 use Telnyx\Porting\Reports\ReportNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Porting\ReportsRawContract;
 
+/**
+ * @phpstan-import-type ExportPortingOrdersCsvReportShape from \Telnyx\Porting\Reports\ExportPortingOrdersCsvReport
+ * @phpstan-import-type FilterShape from \Telnyx\Porting\Reports\ReportListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Porting\Reports\ReportListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ReportsRawService implements ReportsRawContract
 {
     // @phpstan-ignore-next-line
@@ -33,16 +40,10 @@ final class ReportsRawService implements ReportsRawContract
      * Generate reports about porting operations.
      *
      * @param array{
-     *   params: array{
-     *     filters: array{
-     *       createdAtGt?: string|\DateTimeInterface,
-     *       createdAtLt?: string|\DateTimeInterface,
-     *       customerReferenceIn?: list<string>,
-     *       statusIn?: list<mixed>,
-     *     },
-     *   }|ExportPortingOrdersCsvReport,
-     *   reportType: 'export_porting_orders_csv'|ReportType,
+     *   params: ExportPortingOrdersCsvReport|ExportPortingOrdersCsvReportShape,
+     *   reportType: ReportType|value-of<ReportType>,
      * }|ReportCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ReportNewResponse>
      *
@@ -50,7 +51,7 @@ final class ReportsRawService implements ReportsRawContract
      */
     public function create(
         array|ReportCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ReportCreateParams::parseRequest(
             $params,
@@ -73,6 +74,7 @@ final class ReportsRawService implements ReportsRawContract
      * Retrieve a specific report generated.
      *
      * @param string $id identifies a report
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ReportGetResponse>
      *
@@ -80,7 +82,7 @@ final class ReportsRawService implements ReportsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -97,12 +99,9 @@ final class ReportsRawService implements ReportsRawContract
      * List the reports generated about porting operations.
      *
      * @param array{
-     *   filter?: array{
-     *     reportType?: 'export_porting_orders_csv'|ReportListParams\Filter\ReportType,
-     *     status?: 'pending'|'completed'|Status,
-     *   },
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|ReportListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PortingReport>>
      *
@@ -110,7 +109,7 @@ final class ReportsRawService implements ReportsRawContract
      */
     public function list(
         array|ReportListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ReportListParams::parseRequest(
             $params,

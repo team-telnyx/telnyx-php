@@ -11,6 +11,9 @@ use Telnyx\NumberReservations\Actions\ActionExtendResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumberReservations\ActionsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsRawService implements ActionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -25,6 +28,7 @@ final class ActionsRawService implements ActionsRawContract
      * Extends reservation expiry time on all phone numbers.
      *
      * @param string $numberReservationID the number reservation ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionExtendResponse>
      *
@@ -32,7 +36,7 @@ final class ActionsRawService implements ActionsRawContract
      */
     public function extend(
         string $numberReservationID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

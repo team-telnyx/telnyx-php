@@ -24,7 +24,7 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
  *   callTypes?: list<int>|null,
  *   connections?: list<int>|null,
  *   fields?: list<string>|null,
- *   filters?: list<FilterShape>|null,
+ *   filters?: list<Filter|FilterShape>|null,
  *   includeAllMetadata?: bool|null,
  *   managedAccounts?: list<string>|null,
  *   recordTypes?: list<int>|null,
@@ -157,7 +157,7 @@ final class VoiceCreateParams implements BaseModel
      * @param list<int>|null $callTypes
      * @param list<int>|null $connections
      * @param list<string>|null $fields
-     * @param list<FilterShape>|null $filters
+     * @param list<Filter|FilterShape>|null $filters
      * @param list<string>|null $managedAccounts
      * @param list<int>|null $recordTypes
      */
@@ -260,7 +260,7 @@ final class VoiceCreateParams implements BaseModel
     /**
      * List of filters to apply.
      *
-     * @param list<FilterShape> $filters
+     * @param list<Filter|FilterShape> $filters
      */
     public function withFilters(array $filters): self
     {

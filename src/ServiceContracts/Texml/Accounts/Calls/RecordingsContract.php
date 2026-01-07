@@ -9,6 +9,9 @@ use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonParams\Status;
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface RecordingsContract
 {
     /**
@@ -17,7 +20,8 @@ interface RecordingsContract
      * @param string $recordingSid path param: Uniquely identifies the recording by id
      * @param string $accountSid path param: The id of the account the resource belongs to
      * @param string $callSid path param: The CallSid that identifies the call to update
-     * @param 'in-progress'|'paused'|'stopped'|Status $status Body param:
+     * @param Status|value-of<Status> $status Body param:
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -25,7 +29,7 @@ interface RecordingsContract
         string $recordingSid,
         string $accountSid,
         string $callSid,
-        string|Status|null $status = null,
-        ?RequestOptions $requestOptions = null,
+        Status|string|null $status = null,
+        RequestOptions|array|null $requestOptions = null,
     ): RecordingRecordingSidJsonResponse;
 }

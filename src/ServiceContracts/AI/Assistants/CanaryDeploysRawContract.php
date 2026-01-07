@@ -11,12 +11,16 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface CanaryDeploysRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|CanaryDeployCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CanaryDeployResponse>
      *
@@ -25,11 +29,13 @@ interface CanaryDeploysRawContract
     public function create(
         string $assistantID,
         array|CanaryDeployCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CanaryDeployResponse>
      *
@@ -37,13 +43,14 @@ interface CanaryDeploysRawContract
      */
     public function retrieve(
         string $assistantID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|CanaryDeployUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CanaryDeployResponse>
      *
@@ -52,11 +59,13 @@ interface CanaryDeploysRawContract
     public function update(
         string $assistantID,
         array|CanaryDeployUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -64,6 +73,6 @@ interface CanaryDeploysRawContract
      */
     public function delete(
         string $assistantID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

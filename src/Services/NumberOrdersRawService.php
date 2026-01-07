@@ -8,9 +8,13 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
+use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
 use Telnyx\NumberOrders\NumberOrderCreateParams;
+use Telnyx\NumberOrders\NumberOrderCreateParams\PhoneNumber;
 use Telnyx\NumberOrders\NumberOrderGetResponse;
 use Telnyx\NumberOrders\NumberOrderListParams;
+use Telnyx\NumberOrders\NumberOrderListParams\Filter;
+use Telnyx\NumberOrders\NumberOrderListParams\Page;
 use Telnyx\NumberOrders\NumberOrderListResponse;
 use Telnyx\NumberOrders\NumberOrderNewResponse;
 use Telnyx\NumberOrders\NumberOrderUpdateParams;
@@ -18,6 +22,13 @@ use Telnyx\NumberOrders\NumberOrderUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumberOrdersRawContract;
 
+/**
+ * @phpstan-import-type PhoneNumberShape from \Telnyx\NumberOrders\NumberOrderCreateParams\PhoneNumber
+ * @phpstan-import-type UpdateRegulatoryRequirementShape from \Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement
+ * @phpstan-import-type FilterShape from \Telnyx\NumberOrders\NumberOrderListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\NumberOrders\NumberOrderListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class NumberOrdersRawService implements NumberOrdersRawContract
 {
     // @phpstan-ignore-next-line
@@ -36,10 +47,9 @@ final class NumberOrdersRawService implements NumberOrdersRawContract
      *   connectionID?: string,
      *   customerReference?: string,
      *   messagingProfileID?: string,
-     *   phoneNumbers?: list<array{
-     *     phoneNumber: string, bundleID?: string, requirementGroupID?: string
-     *   }>,
+     *   phoneNumbers?: list<PhoneNumber|PhoneNumberShape>,
      * }|NumberOrderCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NumberOrderNewResponse>
      *
@@ -47,7 +57,7 @@ final class NumberOrdersRawService implements NumberOrdersRawContract
      */
     public function create(
         array|NumberOrderCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = NumberOrderCreateParams::parseRequest(
             $params,
@@ -70,6 +80,7 @@ final class NumberOrdersRawService implements NumberOrdersRawContract
      * Get an existing phone number order.
      *
      * @param string $numberOrderID the number order ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NumberOrderGetResponse>
      *
@@ -77,7 +88,7 @@ final class NumberOrdersRawService implements NumberOrdersRawContract
      */
     public function retrieve(
         string $numberOrderID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -96,10 +107,9 @@ final class NumberOrdersRawService implements NumberOrdersRawContract
      * @param string $numberOrderID the number order ID
      * @param array{
      *   customerReference?: string,
-     *   regulatoryRequirements?: list<array{
-     *     fieldValue?: string, requirementID?: string
-     *   }>,
+     *   regulatoryRequirements?: list<UpdateRegulatoryRequirement|UpdateRegulatoryRequirementShape>,
      * }|NumberOrderUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NumberOrderUpdateResponse>
      *
@@ -108,7 +118,7 @@ final class NumberOrdersRawService implements NumberOrdersRawContract
     public function update(
         string $numberOrderID,
         array|NumberOrderUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = NumberOrderUpdateParams::parseRequest(
             $params,
@@ -131,15 +141,9 @@ final class NumberOrdersRawService implements NumberOrdersRawContract
      * Get a paginated list of number orders.
      *
      * @param array{
-     *   filter?: array{
-     *     createdAt?: array{gt?: string, lt?: string},
-     *     customerReference?: string,
-     *     phoneNumbersCount?: string,
-     *     requirementsMet?: bool,
-     *     status?: string,
-     *   },
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|NumberOrderListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<NumberOrderListResponse>>
      *
@@ -147,7 +151,7 @@ final class NumberOrdersRawService implements NumberOrdersRawContract
      */
     public function list(
         array|NumberOrderListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = NumberOrderListParams::parseRequest(
             $params,

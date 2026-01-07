@@ -13,11 +13,18 @@ use Telnyx\RoomCompositions\RoomComposition;
 use Telnyx\RoomCompositions\RoomCompositionCreateParams;
 use Telnyx\RoomCompositions\RoomCompositionGetResponse;
 use Telnyx\RoomCompositions\RoomCompositionListParams;
-use Telnyx\RoomCompositions\RoomCompositionListParams\Filter\Status;
+use Telnyx\RoomCompositions\RoomCompositionListParams\Filter;
+use Telnyx\RoomCompositions\RoomCompositionListParams\Page;
 use Telnyx\RoomCompositions\RoomCompositionNewResponse;
 use Telnyx\RoomCompositions\VideoRegion;
 use Telnyx\ServiceContracts\RoomCompositionsRawContract;
 
+/**
+ * @phpstan-import-type VideoRegionShape from \Telnyx\RoomCompositions\VideoRegion
+ * @phpstan-import-type FilterShape from \Telnyx\RoomCompositions\RoomCompositionListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\RoomCompositions\RoomCompositionListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class RoomCompositionsRawService implements RoomCompositionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -35,20 +42,12 @@ final class RoomCompositionsRawService implements RoomCompositionsRawContract
      *   format?: string,
      *   resolution?: string,
      *   sessionID?: string,
-     *   videoLayout?: array<string,array{
-     *     height?: int,
-     *     maxColumns?: int,
-     *     maxRows?: int,
-     *     videoSources?: list<string>,
-     *     width?: int,
-     *     xPos?: int,
-     *     yPos?: int,
-     *     zPos?: int,
-     *   }|VideoRegion>,
+     *   videoLayout?: array<string,VideoRegion|VideoRegionShape>,
      *   webhookEventFailoverURL?: string,
      *   webhookEventURL?: string,
      *   webhookTimeoutSecs?: int,
      * }|RoomCompositionCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RoomCompositionNewResponse>
      *
@@ -56,7 +55,7 @@ final class RoomCompositionsRawService implements RoomCompositionsRawContract
      */
     public function create(
         array|RoomCompositionCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RoomCompositionCreateParams::parseRequest(
             $params,
@@ -79,6 +78,7 @@ final class RoomCompositionsRawService implements RoomCompositionsRawContract
      * View a room composition.
      *
      * @param string $roomCompositionID the unique identifier of a room composition
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RoomCompositionGetResponse>
      *
@@ -86,7 +86,7 @@ final class RoomCompositionsRawService implements RoomCompositionsRawContract
      */
     public function retrieve(
         string $roomCompositionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -103,13 +103,9 @@ final class RoomCompositionsRawService implements RoomCompositionsRawContract
      * View a list of room compositions.
      *
      * @param array{
-     *   filter?: array{
-     *     dateCreatedAt?: array{eq?: string, gte?: string, lte?: string},
-     *     sessionID?: string,
-     *     status?: 'completed'|'processing'|'enqueued'|Status,
-     *   },
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|RoomCompositionListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<RoomComposition>>
      *
@@ -117,7 +113,7 @@ final class RoomCompositionsRawService implements RoomCompositionsRawContract
      */
     public function list(
         array|RoomCompositionListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RoomCompositionListParams::parseRequest(
             $params,
@@ -141,6 +137,7 @@ final class RoomCompositionsRawService implements RoomCompositionsRawContract
      * Synchronously delete a room composition.
      *
      * @param string $roomCompositionID the unique identifier of a room composition
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -148,7 +145,7 @@ final class RoomCompositionsRawService implements RoomCompositionsRawContract
      */
     public function delete(
         string $roomCompositionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

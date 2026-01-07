@@ -45,6 +45,11 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Conferences\ActionsRawContract;
 
+/**
+ * @phpstan-import-type LoopcountShape from \Telnyx\Calls\Actions\Loopcount
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\Conferences\Actions\ActionSpeakParams\VoiceSettings
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsRawService implements ActionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -61,11 +66,12 @@ final class ActionsRawService implements ActionsRawContract
      * @param string $id Uniquely identifies the conference by id or name
      * @param array{
      *   callControlID: string,
-     *   supervisorRole: 'barge'|'monitor'|'none'|'whisper'|SupervisorRole,
+     *   supervisorRole: SupervisorRole|value-of<SupervisorRole>,
      *   commandID?: string,
-     *   region?: 'Australia'|'Europe'|'Middle East'|'US'|Region,
+     *   region?: Region|value-of<Region>,
      *   whisperCallControlIDs?: list<string>,
      * }|ActionUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionUpdateResponse>
      *
@@ -74,7 +80,7 @@ final class ActionsRawService implements ActionsRawContract
     public function update(
         string $id,
         array|ActionUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionUpdateParams::parseRequest(
             $params,
@@ -101,8 +107,9 @@ final class ActionsRawService implements ActionsRawContract
      *   audioURL?: string,
      *   callControlIDs?: list<string>,
      *   mediaName?: string,
-     *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ActionHoldParams\Region,
+     *   region?: ActionHoldParams\Region|value-of<ActionHoldParams\Region>,
      * }|ActionHoldParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionHoldResponse>
      *
@@ -111,7 +118,7 @@ final class ActionsRawService implements ActionsRawContract
     public function hold(
         string $id,
         array|ActionHoldParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionHoldParams::parseRequest(
             $params,
@@ -141,7 +148,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param string $id Uniquely identifies the conference by id or name
      * @param array{
      *   callControlID: string,
-     *   beepEnabled?: 'always'|'never'|'on_enter'|'on_exit'|BeepEnabled,
+     *   beepEnabled?: BeepEnabled|value-of<BeepEnabled>,
      *   clientState?: string,
      *   commandID?: string,
      *   endConferenceOnExit?: bool,
@@ -149,12 +156,13 @@ final class ActionsRawService implements ActionsRawContract
      *   holdAudioURL?: string,
      *   holdMediaName?: string,
      *   mute?: bool,
-     *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ActionJoinParams\Region,
+     *   region?: ActionJoinParams\Region|value-of<ActionJoinParams\Region>,
      *   softEndConferenceOnExit?: bool,
      *   startConferenceOnEnter?: bool,
-     *   supervisorRole?: 'barge'|'monitor'|'none'|'whisper'|ActionJoinParams\SupervisorRole,
+     *   supervisorRole?: ActionJoinParams\SupervisorRole|value-of<ActionJoinParams\SupervisorRole>,
      *   whisperCallControlIDs?: list<string>,
      * }|ActionJoinParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionJoinResponse>
      *
@@ -163,7 +171,7 @@ final class ActionsRawService implements ActionsRawContract
     public function join(
         string $id,
         array|ActionJoinParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionJoinParams::parseRequest(
             $params,
@@ -192,10 +200,11 @@ final class ActionsRawService implements ActionsRawContract
      * @param string $id Uniquely identifies the conference by id or name
      * @param array{
      *   callControlID: string,
-     *   beepEnabled?: 'always'|'never'|'on_enter'|'on_exit'|ActionLeaveParams\BeepEnabled,
+     *   beepEnabled?: ActionLeaveParams\BeepEnabled|value-of<ActionLeaveParams\BeepEnabled>,
      *   commandID?: string,
-     *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ActionLeaveParams\Region,
+     *   region?: ActionLeaveParams\Region|value-of<ActionLeaveParams\Region>,
      * }|ActionLeaveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionLeaveResponse>
      *
@@ -204,7 +213,7 @@ final class ActionsRawService implements ActionsRawContract
     public function leave(
         string $id,
         array|ActionLeaveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionLeaveParams::parseRequest(
             $params,
@@ -229,8 +238,9 @@ final class ActionsRawService implements ActionsRawContract
      * @param string $id Uniquely identifies the conference by id or name
      * @param array{
      *   callControlIDs?: list<string>,
-     *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ActionMuteParams\Region,
+     *   region?: ActionMuteParams\Region|value-of<ActionMuteParams\Region>,
      * }|ActionMuteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionMuteResponse>
      *
@@ -239,7 +249,7 @@ final class ActionsRawService implements ActionsRawContract
     public function mute(
         string $id,
         array|ActionMuteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionMuteParams::parseRequest(
             $params,
@@ -265,10 +275,11 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   audioURL?: string,
      *   callControlIDs?: list<string>,
-     *   loop?: string|int,
+     *   loop?: LoopcountShape,
      *   mediaName?: string,
-     *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ActionPlayParams\Region,
+     *   region?: ActionPlayParams\Region|value-of<ActionPlayParams\Region>,
      * }|ActionPlayParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionPlayResponse>
      *
@@ -277,7 +288,7 @@ final class ActionsRawService implements ActionsRawContract
     public function play(
         string $id,
         array|ActionPlayParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionPlayParams::parseRequest(
             $params,
@@ -303,8 +314,9 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   commandID?: string,
      *   recordingID?: string,
-     *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ActionRecordPauseParams\Region,
+     *   region?: ActionRecordPauseParams\Region|value-of<ActionRecordPauseParams\Region>,
      * }|ActionRecordPauseParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionRecordPauseResponse>
      *
@@ -313,7 +325,7 @@ final class ActionsRawService implements ActionsRawContract
     public function recordPause(
         string $id,
         array|ActionRecordPauseParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionRecordPauseParams::parseRequest(
             $params,
@@ -339,8 +351,9 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   commandID?: string,
      *   recordingID?: string,
-     *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ActionRecordResumeParams\Region,
+     *   region?: ActionRecordResumeParams\Region|value-of<ActionRecordResumeParams\Region>,
      * }|ActionRecordResumeParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionRecordResumeResponse>
      *
@@ -349,7 +362,7 @@ final class ActionsRawService implements ActionsRawContract
     public function recordResume(
         string $id,
         array|ActionRecordResumeParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionRecordResumeParams::parseRequest(
             $params,
@@ -377,13 +390,14 @@ final class ActionsRawService implements ActionsRawContract
      *
      * @param string $id Specifies the conference to record by id or name
      * @param array{
-     *   format: 'wav'|'mp3'|Format,
+     *   format: Format|value-of<Format>,
      *   commandID?: string,
      *   customFileName?: string,
      *   playBeep?: bool,
-     *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ActionRecordStartParams\Region,
-     *   trim?: 'trim-silence'|Trim,
+     *   region?: ActionRecordStartParams\Region|value-of<ActionRecordStartParams\Region>,
+     *   trim?: Trim|value-of<Trim>,
      * }|ActionRecordStartParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionRecordStartResponse>
      *
@@ -392,7 +406,7 @@ final class ActionsRawService implements ActionsRawContract
     public function recordStart(
         string $id,
         array|ActionRecordStartParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionRecordStartParams::parseRequest(
             $params,
@@ -423,8 +437,9 @@ final class ActionsRawService implements ActionsRawContract
      *   clientState?: string,
      *   commandID?: string,
      *   recordingID?: string,
-     *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ActionRecordStopParams\Region,
+     *   region?: ActionRecordStopParams\Region|value-of<ActionRecordStopParams\Region>,
      * }|ActionRecordStopParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionRecordStopResponse>
      *
@@ -433,7 +448,7 @@ final class ActionsRawService implements ActionsRawContract
     public function recordStop(
         string $id,
         array|ActionRecordStopParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionRecordStopParams::parseRequest(
             $params,
@@ -462,10 +477,11 @@ final class ActionsRawService implements ActionsRawContract
      *   callControlIDs?: list<string>,
      *   commandID?: string,
      *   language?: value-of<Language>,
-     *   payloadType?: 'text'|'ssml'|PayloadType,
-     *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ActionSpeakParams\Region,
-     *   voiceSettings?: array<string,mixed>,
+     *   payloadType?: PayloadType|value-of<PayloadType>,
+     *   region?: ActionSpeakParams\Region|value-of<ActionSpeakParams\Region>,
+     *   voiceSettings?: VoiceSettingsShape,
      * }|ActionSpeakParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionSpeakResponse>
      *
@@ -474,7 +490,7 @@ final class ActionsRawService implements ActionsRawContract
     public function speak(
         string $id,
         array|ActionSpeakParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionSpeakParams::parseRequest(
             $params,
@@ -499,8 +515,9 @@ final class ActionsRawService implements ActionsRawContract
      * @param string $id Uniquely identifies the conference by id or name
      * @param array{
      *   callControlIDs?: list<string>,
-     *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ActionStopParams\Region,
+     *   region?: ActionStopParams\Region|value-of<ActionStopParams\Region>,
      * }|ActionStopParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStopResponse>
      *
@@ -509,7 +526,7 @@ final class ActionsRawService implements ActionsRawContract
     public function stop(
         string $id,
         array|ActionStopParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionStopParams::parseRequest(
             $params,
@@ -534,8 +551,9 @@ final class ActionsRawService implements ActionsRawContract
      * @param string $id Uniquely identifies the conference by id or name
      * @param array{
      *   callControlIDs: list<string>,
-     *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ActionUnholdParams\Region,
+     *   region?: ActionUnholdParams\Region|value-of<ActionUnholdParams\Region>,
      * }|ActionUnholdParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionUnholdResponse>
      *
@@ -544,7 +562,7 @@ final class ActionsRawService implements ActionsRawContract
     public function unhold(
         string $id,
         array|ActionUnholdParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionUnholdParams::parseRequest(
             $params,
@@ -569,8 +587,9 @@ final class ActionsRawService implements ActionsRawContract
      * @param string $id Uniquely identifies the conference by id or name
      * @param array{
      *   callControlIDs?: list<string>,
-     *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ActionUnmuteParams\Region,
+     *   region?: ActionUnmuteParams\Region|value-of<ActionUnmuteParams\Region>,
      * }|ActionUnmuteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionUnmuteResponse>
      *
@@ -579,7 +598,7 @@ final class ActionsRawService implements ActionsRawContract
     public function unmute(
         string $id,
         array|ActionUnmuteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionUnmuteParams::parseRequest(
             $params,

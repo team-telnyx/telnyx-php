@@ -14,6 +14,9 @@ use Telnyx\Storage\Buckets\SslCertificate\SslCertificateDeleteResponse;
 use Telnyx\Storage\Buckets\SslCertificate\SslCertificateGetResponse;
 use Telnyx\Storage\Buckets\SslCertificate\SslCertificateNewResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class SslCertificateRawService implements SslCertificateRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,6 +34,7 @@ final class SslCertificateRawService implements SslCertificateRawContract
      * @param array{
      *   certificate?: string, privateKey?: string
      * }|SslCertificateCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SslCertificateNewResponse>
      *
@@ -39,7 +43,7 @@ final class SslCertificateRawService implements SslCertificateRawContract
     public function create(
         string $bucketName,
         array|SslCertificateCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SslCertificateCreateParams::parseRequest(
             $params,
@@ -63,6 +67,7 @@ final class SslCertificateRawService implements SslCertificateRawContract
      * Returns the stored certificate detail of a bucket, if applicable.
      *
      * @param string $bucketName The name of the bucket
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SslCertificateGetResponse>
      *
@@ -70,7 +75,7 @@ final class SslCertificateRawService implements SslCertificateRawContract
      */
     public function retrieve(
         string $bucketName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -87,6 +92,7 @@ final class SslCertificateRawService implements SslCertificateRawContract
      * Deletes an SSL certificate and its matching secret.
      *
      * @param string $bucketName Bucket Name
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SslCertificateDeleteResponse>
      *
@@ -94,7 +100,7 @@ final class SslCertificateRawService implements SslCertificateRawContract
      */
     public function delete(
         string $bucketName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

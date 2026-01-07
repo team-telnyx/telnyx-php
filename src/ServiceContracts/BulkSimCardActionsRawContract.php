@@ -12,12 +12,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface BulkSimCardActionsRawContract
 {
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BulkSimCardActionGetResponse>
      *
@@ -25,13 +29,14 @@ interface BulkSimCardActionsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|BulkSimCardActionListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<BulkSimCardActionListResponse>>
      *
@@ -39,6 +44,6 @@ interface BulkSimCardActionsRawContract
      */
     public function list(
         array|BulkSimCardActionListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

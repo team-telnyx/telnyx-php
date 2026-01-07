@@ -18,7 +18,7 @@ use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document;
  * @phpstan-import-type DocumentShape from \Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document
  *
  * @phpstan-type SupportingDocumentCreateParamsShape = array{
- *   documents?: list<DocumentShape>|null
+ *   documents?: list<Document|DocumentShape>|null
  * }
  */
 final class SupportingDocumentCreateParams implements BaseModel
@@ -45,7 +45,7 @@ final class SupportingDocumentCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DocumentShape>|null $documents
+     * @param list<Document|DocumentShape>|null $documents
      */
     public static function with(?array $documents = null): self
     {
@@ -59,7 +59,7 @@ final class SupportingDocumentCreateParams implements BaseModel
     /**
      * List of supporting documents parameters.
      *
-     * @param list<DocumentShape> $documents
+     * @param list<Document|DocumentShape> $documents
      */
     public function withDocuments(array $documents): self
     {

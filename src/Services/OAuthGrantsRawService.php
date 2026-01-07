@@ -16,6 +16,9 @@ use Telnyx\OAuthGrants\OAuthGrantListParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\OAuthGrantsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class OAuthGrantsRawService implements OAuthGrantsRawContract
 {
     // @phpstan-ignore-next-line
@@ -30,6 +33,7 @@ final class OAuthGrantsRawService implements OAuthGrantsRawContract
      * Retrieve a single OAuth grant by ID
      *
      * @param string $id OAuth grant ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OAuthGrantGetResponse>
      *
@@ -37,7 +41,7 @@ final class OAuthGrantsRawService implements OAuthGrantsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -54,6 +58,7 @@ final class OAuthGrantsRawService implements OAuthGrantsRawContract
      * Retrieve a paginated list of OAuth grants for the authenticated user
      *
      * @param array{pageNumber?: int, pageSize?: int}|OAuthGrantListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<OAuthGrant>>
      *
@@ -61,7 +66,7 @@ final class OAuthGrantsRawService implements OAuthGrantsRawContract
      */
     public function list(
         array|OAuthGrantListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = OAuthGrantListParams::parseRequest(
             $params,
@@ -88,6 +93,7 @@ final class OAuthGrantsRawService implements OAuthGrantsRawContract
      * Revoke an OAuth grant
      *
      * @param string $id OAuth grant ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OAuthGrantDeleteResponse>
      *
@@ -95,7 +101,7 @@ final class OAuthGrantsRawService implements OAuthGrantsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

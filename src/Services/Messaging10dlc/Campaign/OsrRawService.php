@@ -11,6 +11,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging10dlc\Campaign\OsrRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class OsrRawService implements OsrRawContract
 {
     // @phpstan-ignore-next-line
@@ -24,13 +27,15 @@ final class OsrRawService implements OsrRawContract
      *
      * Get OSR campaign attributes
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<array<string,mixed>>
      *
      * @throws APIException
      */
     public function getAttributes(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

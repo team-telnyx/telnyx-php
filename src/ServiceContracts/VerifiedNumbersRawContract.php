@@ -14,12 +14,16 @@ use Telnyx\VerifiedNumbers\VerifiedNumberDataWrapper;
 use Telnyx\VerifiedNumbers\VerifiedNumberListParams;
 use Telnyx\VerifiedNumbers\VerifiedNumberNewResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface VerifiedNumbersRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|VerifiedNumberCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VerifiedNumberNewResponse>
      *
@@ -27,13 +31,14 @@ interface VerifiedNumbersRawContract
      */
     public function create(
         array|VerifiedNumberCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $phoneNumber +E164 formatted phone number
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VerifiedNumberDataWrapper>
      *
@@ -41,13 +46,14 @@ interface VerifiedNumbersRawContract
      */
     public function retrieve(
         string $phoneNumber,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|VerifiedNumberListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<VerifiedNumber>>
      *
@@ -55,13 +61,14 @@ interface VerifiedNumbersRawContract
      */
     public function list(
         array|VerifiedNumberListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $phoneNumber +E164 formatted phone number
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VerifiedNumberDataWrapper>
      *
@@ -69,6 +76,6 @@ interface VerifiedNumbersRawContract
      */
     public function delete(
         string $phoneNumber,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

@@ -13,6 +13,9 @@ use Telnyx\DialogflowConnections\DialogflowConnectionUpdateParams;
 use Telnyx\DialogflowConnections\DialogflowConnectionUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface DialogflowConnectionsRawContract
 {
     /**
@@ -20,6 +23,7 @@ interface DialogflowConnectionsRawContract
      *
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control)
      * @param array<string,mixed>|DialogflowConnectionCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DialogflowConnectionNewResponse>
      *
@@ -28,13 +32,14 @@ interface DialogflowConnectionsRawContract
     public function create(
         string $connectionID,
         array|DialogflowConnectionCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control)
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DialogflowConnectionGetResponse>
      *
@@ -42,7 +47,7 @@ interface DialogflowConnectionsRawContract
      */
     public function retrieve(
         string $connectionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -50,6 +55,7 @@ interface DialogflowConnectionsRawContract
      *
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control)
      * @param array<string,mixed>|DialogflowConnectionUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DialogflowConnectionUpdateResponse>
      *
@@ -58,13 +64,14 @@ interface DialogflowConnectionsRawContract
     public function update(
         string $connectionID,
         array|DialogflowConnectionUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control)
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -72,6 +79,6 @@ interface DialogflowConnectionsRawContract
      */
     public function delete(
         string $connectionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

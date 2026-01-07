@@ -10,12 +10,16 @@ use Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse;
 use Telnyx\RegulatoryRequirements\RegulatoryRequirementRetrieveParams;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface RegulatoryRequirementsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|RegulatoryRequirementRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RegulatoryRequirementGetResponse>
      *
@@ -23,6 +27,6 @@ interface RegulatoryRequirementsRawContract
      */
     public function retrieve(
         array|RegulatoryRequirementRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

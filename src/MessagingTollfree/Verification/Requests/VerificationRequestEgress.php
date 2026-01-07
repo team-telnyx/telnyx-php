@@ -31,8 +31,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *   isvReseller: string,
  *   messageVolume: Volume|value-of<Volume>,
  *   optInWorkflow: string,
- *   optInWorkflowImageURLs: list<URLShape>,
- *   phoneNumbers: list<TfPhoneNumberShape>,
+ *   optInWorkflowImageURLs: list<URL|URLShape>,
+ *   phoneNumbers: list<TfPhoneNumber|TfPhoneNumberShape>,
  *   productionMessageContent: string,
  *   useCase: UseCaseCategories|value-of<UseCaseCategories>,
  *   useCaseSummary: string,
@@ -253,8 +253,8 @@ final class VerificationRequestEgress implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Volume|value-of<Volume> $messageVolume
-     * @param list<URLShape> $optInWorkflowImageURLs
-     * @param list<TfPhoneNumberShape> $phoneNumbers
+     * @param list<URL|URLShape> $optInWorkflowImageURLs
+     * @param list<TfPhoneNumber|TfPhoneNumberShape> $phoneNumbers
      * @param UseCaseCategories|value-of<UseCaseCategories> $useCase
      * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null $entityType
      * @param TfVerificationStatus|value-of<TfVerificationStatus>|null $verificationStatus
@@ -467,7 +467,7 @@ final class VerificationRequestEgress implements BaseModel
     }
 
     /**
-     * @param list<URLShape> $optInWorkflowImageURLs
+     * @param list<URL|URLShape> $optInWorkflowImageURLs
      */
     public function withOptInWorkflowImageURLs(
         array $optInWorkflowImageURLs
@@ -479,7 +479,7 @@ final class VerificationRequestEgress implements BaseModel
     }
 
     /**
-     * @param list<TfPhoneNumberShape> $phoneNumbers
+     * @param list<TfPhoneNumber|TfPhoneNumberShape> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {

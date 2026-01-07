@@ -17,12 +17,16 @@ use Telnyx\PhoneNumbers\PhoneNumberUpdateParams;
 use Telnyx\PhoneNumbers\PhoneNumberUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface PhoneNumbersRawContract
 {
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberGetResponse>
      *
@@ -30,7 +34,7 @@ interface PhoneNumbersRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -38,6 +42,7 @@ interface PhoneNumbersRawContract
      *
      * @param string $phoneNumberID identifies the resource
      * @param array<string,mixed>|PhoneNumberUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberUpdateResponse>
      *
@@ -46,13 +51,14 @@ interface PhoneNumbersRawContract
     public function update(
         string $phoneNumberID,
         array|PhoneNumberUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|PhoneNumberListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PhoneNumberDetailed>>
      *
@@ -60,13 +66,14 @@ interface PhoneNumbersRawContract
      */
     public function list(
         array|PhoneNumberListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberDeleteResponse>
      *
@@ -74,13 +81,14 @@ interface PhoneNumbersRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|PhoneNumberSlimListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PhoneNumberSlimListResponse>>
      *
@@ -88,6 +96,6 @@ interface PhoneNumbersRawContract
      */
     public function slimList(
         array|PhoneNumberSlimListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

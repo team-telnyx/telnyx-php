@@ -12,6 +12,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Embeddings\BucketsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class BucketsRawService implements BucketsRawContract
 {
     // @phpstan-ignore-next-line
@@ -25,13 +28,15 @@ final class BucketsRawService implements BucketsRawContract
      *
      * Get all embedded files for a given user bucket, including their processing status.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<BucketGetResponse>
      *
      * @throws APIException
      */
     public function retrieve(
         string $bucketName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -47,12 +52,15 @@ final class BucketsRawService implements BucketsRawContract
      *
      * Get all embedding buckets for a user.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<BucketListResponse>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse
-    {
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
@@ -67,13 +75,15 @@ final class BucketsRawService implements BucketsRawContract
      *
      * Deletes an entire bucket's embeddings and disables the bucket for AI-use, returning it to normal storage pricing.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<mixed>
      *
      * @throws APIException
      */
     public function delete(
         string $bucketName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

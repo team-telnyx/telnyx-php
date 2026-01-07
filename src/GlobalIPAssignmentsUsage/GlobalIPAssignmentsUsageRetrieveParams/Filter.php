@@ -12,6 +12,8 @@ use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filte
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[global_ip_assignment_id][in], filter[global_ip_id][in].
  *
+ * @phpstan-import-type GlobalIPAssignmentIDVariants from \Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filter\GlobalIPAssignmentID
+ * @phpstan-import-type GlobalIPIDVariants from \Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filter\GlobalIPID
  * @phpstan-import-type GlobalIPAssignmentIDShape from \Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filter\GlobalIPAssignmentID
  * @phpstan-import-type GlobalIPIDShape from \Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filter\GlobalIPID
  *
@@ -27,12 +29,16 @@ final class Filter implements BaseModel
 
     /**
      * Filter by exact Global IP Assignment ID.
+     *
+     * @var GlobalIPAssignmentIDVariants|null $globalIPAssignmentID
      */
     #[Optional('global_ip_assignment_id')]
     public string|In|null $globalIPAssignmentID;
 
     /**
      * Filter by exact Global IP ID.
+     *
+     * @var GlobalIPIDVariants|null $globalIPID
      */
     #[Optional('global_ip_id')]
     public string|Filter\GlobalIPID\In|null $globalIPID;

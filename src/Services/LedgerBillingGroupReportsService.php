@@ -12,6 +12,9 @@ use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReportNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\LedgerBillingGroupReportsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class LedgerBillingGroupReportsService implements LedgerBillingGroupReportsContract
 {
     /**
@@ -34,13 +37,14 @@ final class LedgerBillingGroupReportsService implements LedgerBillingGroupReport
      *
      * @param int $month Month of the ledger billing group report
      * @param int $year Year of the ledger billing group report
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         ?int $month = null,
         ?int $year = null,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): LedgerBillingGroupReportNewResponse {
         $params = Util::removeNulls(['month' => $month, 'year' => $year]);
 
@@ -56,12 +60,13 @@ final class LedgerBillingGroupReportsService implements LedgerBillingGroupReport
      * Get a ledger billing group report
      *
      * @param string $id The id of the ledger billing group report
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): LedgerBillingGroupReportGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);

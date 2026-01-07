@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
-use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListParams\Filter\PhoneNumberType;
+use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListParams\Filter;
 use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
@@ -12,6 +12,10 @@ use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AvailablePhoneNumberBlocksContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AvailablePhoneNumberBlocksService implements AvailablePhoneNumberBlocksContract
 {
     /**
@@ -32,18 +36,14 @@ final class AvailablePhoneNumberBlocksService implements AvailablePhoneNumberBlo
      *
      * List available phone number blocks
      *
-     * @param array{
-     *   countryCode?: string,
-     *   locality?: string,
-     *   nationalDestinationCode?: string,
-     *   phoneNumberType?: 'local'|'toll_free'|'mobile'|'national'|'shared_cost'|PhoneNumberType,
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[locality], filter[country_code], filter[national_destination_code], filter[phone_number_type]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[locality], filter[country_code], filter[national_destination_code], filter[phone_number_type]
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
-        ?RequestOptions $requestOptions = null
+        Filter|array|null $filter = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AvailablePhoneNumberBlockListResponse {
         $params = Util::removeNulls(['filter' => $filter]);
 

@@ -15,7 +15,7 @@ use Telnyx\Storage\StorageListMigrationSourceCoverageResponse\Data;
  * @phpstan-import-type PaginationMetaSimpleShape from \Telnyx\Storage\Buckets\Usage\PaginationMetaSimple
  *
  * @phpstan-type StorageListMigrationSourceCoverageResponseShape = array{
- *   data?: list<DataShape>|null,
+ *   data?: list<Data|DataShape>|null,
  *   meta?: null|PaginationMetaSimple|PaginationMetaSimpleShape,
  * }
  */
@@ -41,7 +41,7 @@ final class StorageListMigrationSourceCoverageResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DataShape>|null $data
+     * @param list<Data|DataShape>|null $data
      * @param PaginationMetaSimple|PaginationMetaSimpleShape|null $meta
      */
     public static function with(
@@ -57,7 +57,7 @@ final class StorageListMigrationSourceCoverageResponse implements BaseModel
     }
 
     /**
-     * @param list<DataShape> $data
+     * @param list<Data|DataShape> $data
      */
     public function withData(array $data): self
     {

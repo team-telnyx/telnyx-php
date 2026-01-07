@@ -14,12 +14,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface InsightGroupsRawContract
 {
     /**
      * @api
      *
      * @param string $groupID The ID of the insight group
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InsightTemplateGroupDetail>
      *
@@ -27,7 +31,7 @@ interface InsightGroupsRawContract
      */
     public function retrieve(
         string $groupID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -35,6 +39,7 @@ interface InsightGroupsRawContract
      *
      * @param string $groupID The ID of the insight group
      * @param array<string,mixed>|InsightGroupUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InsightTemplateGroupDetail>
      *
@@ -43,13 +48,14 @@ interface InsightGroupsRawContract
     public function update(
         string $groupID,
         array|InsightGroupUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $groupID The ID of the insight group
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -57,13 +63,14 @@ interface InsightGroupsRawContract
      */
     public function delete(
         string $groupID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|InsightGroupInsightGroupsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InsightTemplateGroupDetail>
      *
@@ -71,13 +78,14 @@ interface InsightGroupsRawContract
      */
     public function insightGroups(
         array|InsightGroupInsightGroupsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|InsightGroupRetrieveInsightGroupsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<InsightTemplateGroup>>
      *
@@ -85,6 +93,6 @@ interface InsightGroupsRawContract
      */
     public function retrieveInsightGroups(
         array|InsightGroupRetrieveInsightGroupsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

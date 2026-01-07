@@ -15,6 +15,9 @@ use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberNewResponse
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface AssociatedPhoneNumbersRawContract
 {
     /**
@@ -22,6 +25,7 @@ interface AssociatedPhoneNumbersRawContract
      *
      * @param string $portingOrderID Identifies the Porting Order associated with the phone number
      * @param array<string,mixed>|AssociatedPhoneNumberCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AssociatedPhoneNumberNewResponse>
      *
@@ -30,7 +34,7 @@ interface AssociatedPhoneNumbersRawContract
     public function create(
         string $portingOrderID,
         array|AssociatedPhoneNumberCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -38,6 +42,7 @@ interface AssociatedPhoneNumbersRawContract
      *
      * @param string $portingOrderID Identifies the Porting Order associated with the phone numbers
      * @param array<string,mixed>|AssociatedPhoneNumberListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PortingAssociatedPhoneNumber>>
      *
@@ -46,7 +51,7 @@ interface AssociatedPhoneNumbersRawContract
     public function list(
         string $portingOrderID,
         array|AssociatedPhoneNumberListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -54,6 +59,7 @@ interface AssociatedPhoneNumbersRawContract
      *
      * @param string $id Identifies the associated phone number to be deleted
      * @param array<string,mixed>|AssociatedPhoneNumberDeleteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AssociatedPhoneNumberDeleteResponse>
      *
@@ -62,6 +68,6 @@ interface AssociatedPhoneNumbersRawContract
     public function delete(
         string $id,
         array|AssociatedPhoneNumberDeleteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

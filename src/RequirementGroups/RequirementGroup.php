@@ -21,7 +21,7 @@ use Telnyx\RequirementGroups\RequirementGroup\Status;
  *   customerReference?: string|null,
  *   phoneNumberType?: string|null,
  *   recordType?: string|null,
- *   regulatoryRequirements?: list<RegulatoryRequirementShape>|null,
+ *   regulatoryRequirements?: list<RegulatoryRequirement|RegulatoryRequirementShape>|null,
  *   status?: null|Status|value-of<Status>,
  *   updatedAt?: \DateTimeInterface|null,
  * }
@@ -73,7 +73,7 @@ final class RequirementGroup implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RegulatoryRequirementShape>|null $regulatoryRequirements
+     * @param list<RegulatoryRequirement|RegulatoryRequirementShape>|null $regulatoryRequirements
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
@@ -161,7 +161,7 @@ final class RequirementGroup implements BaseModel
     }
 
     /**
-     * @param list<RegulatoryRequirementShape> $regulatoryRequirements
+     * @param list<RegulatoryRequirement|RegulatoryRequirementShape> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements

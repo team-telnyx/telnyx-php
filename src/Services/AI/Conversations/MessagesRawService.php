@@ -11,6 +11,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\MessagesRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MessagesRawService implements MessagesRawContract
 {
     // @phpstan-ignore-next-line
@@ -24,13 +27,15 @@ final class MessagesRawService implements MessagesRawContract
      *
      * Retrieve messages for a specific conversation, including tool calls made by the assistant.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<MessageListResponse>
      *
      * @throws APIException
      */
     public function list(
         string $conversationID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

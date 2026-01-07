@@ -10,6 +10,9 @@ use Telnyx\NumberLookup\NumberLookupGetResponse;
 use Telnyx\NumberLookup\NumberLookupRetrieveParams;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface NumberLookupRawContract
 {
     /**
@@ -17,6 +20,7 @@ interface NumberLookupRawContract
      *
      * @param string $phoneNumber The phone number to be looked up
      * @param array<string,mixed>|NumberLookupRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NumberLookupGetResponse>
      *
@@ -25,6 +29,6 @@ interface NumberLookupRawContract
     public function retrieve(
         string $phoneNumber,
         array|NumberLookupRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

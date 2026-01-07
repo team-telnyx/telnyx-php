@@ -30,10 +30,10 @@ use Telnyx\Core\Contracts\BaseModel;
  *   sipAddress: string,
  *   clientState?: string|null,
  *   commandID?: string|null,
- *   customHeaders?: list<CustomSipHeaderShape>|null,
+ *   customHeaders?: list<CustomSipHeader|CustomSipHeaderShape>|null,
  *   sipAuthPassword?: string|null,
  *   sipAuthUsername?: string|null,
- *   sipHeaders?: list<SipHeaderShape>|null,
+ *   sipHeaders?: list<SipHeader|SipHeaderShape>|null,
  * }
  */
 final class ActionReferParams implements BaseModel
@@ -112,8 +112,8 @@ final class ActionReferParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<CustomSipHeaderShape>|null $customHeaders
-     * @param list<SipHeaderShape>|null $sipHeaders
+     * @param list<CustomSipHeader|CustomSipHeaderShape>|null $customHeaders
+     * @param list<SipHeader|SipHeaderShape>|null $sipHeaders
      */
     public static function with(
         string $sipAddress,
@@ -174,7 +174,7 @@ final class ActionReferParams implements BaseModel
     /**
      * Custom headers to be added to the SIP INVITE.
      *
-     * @param list<CustomSipHeaderShape> $customHeaders
+     * @param list<CustomSipHeader|CustomSipHeaderShape> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {
@@ -209,7 +209,7 @@ final class ActionReferParams implements BaseModel
     /**
      * SIP headers to be added to the request. Currently only User-to-User header is supported.
      *
-     * @param list<SipHeaderShape> $sipHeaders
+     * @param list<SipHeader|SipHeaderShape> $sipHeaders
      */
     public function withSipHeaders(array $sipHeaders): self
     {

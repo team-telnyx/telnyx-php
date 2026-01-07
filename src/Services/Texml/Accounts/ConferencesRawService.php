@@ -23,6 +23,9 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateParams;
 use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateParams\AnnounceMethod;
 use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ConferencesRawService implements ConferencesRawContract
 {
     // @phpstan-ignore-next-line
@@ -38,6 +41,7 @@ final class ConferencesRawService implements ConferencesRawContract
      *
      * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
      * @param array{accountSid: string}|ConferenceRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ConferenceGetResponse>
      *
@@ -46,7 +50,7 @@ final class ConferencesRawService implements ConferencesRawContract
     public function retrieve(
         string $conferenceSid,
         array|ConferenceRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ConferenceRetrieveParams::parseRequest(
             $params,
@@ -74,10 +78,11 @@ final class ConferencesRawService implements ConferencesRawContract
      * @param string $conferenceSid path param: The ConferenceSid that uniquely identifies a conference
      * @param array{
      *   accountSid: string,
-     *   announceMethod?: 'GET'|'POST'|AnnounceMethod,
+     *   announceMethod?: AnnounceMethod|value-of<AnnounceMethod>,
      *   announceURL?: string,
      *   status?: string,
      * }|ConferenceUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ConferenceUpdateResponse>
      *
@@ -86,7 +91,7 @@ final class ConferencesRawService implements ConferencesRawContract
     public function update(
         string $conferenceSid,
         array|ConferenceUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ConferenceUpdateParams::parseRequest(
             $params,
@@ -121,8 +126,9 @@ final class ConferencesRawService implements ConferencesRawContract
      *   page?: int,
      *   pageSize?: int,
      *   pageToken?: string,
-     *   status?: 'init'|'in-progress'|'completed'|Status,
+     *   status?: Status|value-of<Status>,
      * }|ConferenceRetrieveConferencesParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ConferenceGetConferencesResponse>
      *
@@ -131,7 +137,7 @@ final class ConferencesRawService implements ConferencesRawContract
     public function retrieveConferences(
         string $accountSid,
         array|ConferenceRetrieveConferencesParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ConferenceRetrieveConferencesParams::parseRequest(
             $params,
@@ -166,6 +172,7 @@ final class ConferencesRawService implements ConferencesRawContract
      *
      * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
      * @param array{accountSid: string}|ConferenceRetrieveRecordingsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ConferenceGetRecordingsResponse>
      *
@@ -174,7 +181,7 @@ final class ConferencesRawService implements ConferencesRawContract
     public function retrieveRecordings(
         string $conferenceSid,
         array|ConferenceRetrieveRecordingsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ConferenceRetrieveRecordingsParams::parseRequest(
             $params,
@@ -203,6 +210,7 @@ final class ConferencesRawService implements ConferencesRawContract
      *
      * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
      * @param array{accountSid: string}|ConferenceRetrieveRecordingsJsonParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ConferenceGetRecordingsJsonResponse>
      *
@@ -211,7 +219,7 @@ final class ConferencesRawService implements ConferencesRawContract
     public function retrieveRecordingsJson(
         string $conferenceSid,
         array|ConferenceRetrieveRecordingsJsonParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ConferenceRetrieveRecordingsJsonParams::parseRequest(
             $params,

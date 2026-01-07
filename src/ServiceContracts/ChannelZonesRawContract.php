@@ -13,6 +13,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ChannelZonesRawContract
 {
     /**
@@ -20,6 +23,7 @@ interface ChannelZonesRawContract
      *
      * @param string $channelZoneID Channel zone identifier
      * @param array<string,mixed>|ChannelZoneUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ChannelZoneUpdateResponse>
      *
@@ -28,13 +32,14 @@ interface ChannelZonesRawContract
     public function update(
         string $channelZoneID,
         array|ChannelZoneUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ChannelZoneListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<ChannelZoneListResponse>>
      *
@@ -42,6 +47,6 @@ interface ChannelZonesRawContract
      */
     public function list(
         array|ChannelZoneListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

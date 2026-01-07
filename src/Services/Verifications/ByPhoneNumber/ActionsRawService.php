@@ -12,6 +12,9 @@ use Telnyx\ServiceContracts\Verifications\ByPhoneNumber\ActionsRawContract;
 use Telnyx\Verifications\ByPhoneNumber\Actions\ActionVerifyParams;
 use Telnyx\Verifications\ByPhoneNumber\Actions\VerifyVerificationCodeResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsRawService implements ActionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -27,6 +30,7 @@ final class ActionsRawService implements ActionsRawContract
      *
      * @param string $phoneNumber +E164 formatted phone number
      * @param array{code: string, verifyProfileID: string}|ActionVerifyParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VerifyVerificationCodeResponse>
      *
@@ -35,7 +39,7 @@ final class ActionsRawService implements ActionsRawContract
     public function verify(
         string $phoneNumber,
         array|ActionVerifyParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionVerifyParams::parseRequest(
             $params,

@@ -11,15 +11,22 @@ use Telnyx\DefaultPagination;
 use Telnyx\Portouts\PortoutDetails;
 use Telnyx\Portouts\PortoutGetResponse;
 use Telnyx\Portouts\PortoutListParams;
-use Telnyx\Portouts\PortoutListParams\Filter\Status;
-use Telnyx\Portouts\PortoutListParams\Filter\StatusIn;
+use Telnyx\Portouts\PortoutListParams\Filter;
+use Telnyx\Portouts\PortoutListParams\Page;
 use Telnyx\Portouts\PortoutListRejectionCodesParams;
 use Telnyx\Portouts\PortoutListRejectionCodesResponse;
 use Telnyx\Portouts\PortoutUpdateStatusParams;
+use Telnyx\Portouts\PortoutUpdateStatusParams\Status;
 use Telnyx\Portouts\PortoutUpdateStatusResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortoutsRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Portouts\PortoutListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Portouts\PortoutListParams\Page
+ * @phpstan-import-type FilterShape from \Telnyx\Portouts\PortoutListRejectionCodesParams\Filter as FilterShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class PortoutsRawService implements PortoutsRawContract
 {
     // @phpstan-ignore-next-line
@@ -34,6 +41,7 @@ final class PortoutsRawService implements PortoutsRawContract
      * Returns the portout request based on the ID provided
      *
      * @param string $id Portout id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PortoutGetResponse>
      *
@@ -41,7 +49,7 @@ final class PortoutsRawService implements PortoutsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -58,26 +66,9 @@ final class PortoutsRawService implements PortoutsRawContract
      * Returns the portout requests according to filters
      *
      * @param array{
-     *   filter?: array{
-     *     carrierName?: string,
-     *     countryCode?: string,
-     *     countryCodeIn?: list<string>,
-     *     focDate?: string|\DateTimeInterface,
-     *     insertedAt?: array{
-     *       gte?: string|\DateTimeInterface, lte?: string|\DateTimeInterface
-     *     },
-     *     phoneNumber?: string,
-     *     pon?: string,
-     *     portedOutAt?: array{
-     *       gte?: string|\DateTimeInterface, lte?: string|\DateTimeInterface
-     *     },
-     *     spid?: string,
-     *     status?: 'pending'|'authorized'|'ported'|'rejected'|'rejected-pending'|'canceled'|Status,
-     *     statusIn?: list<'pending'|'authorized'|'ported'|'rejected'|'rejected-pending'|'canceled'|StatusIn>,
-     *     supportKey?: string,
-     *   },
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|PortoutListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PortoutDetails>>
      *
@@ -85,7 +76,7 @@ final class PortoutsRawService implements PortoutsRawContract
      */
     public function list(
         array|PortoutListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PortoutListParams::parseRequest(
             $params,
@@ -110,8 +101,9 @@ final class PortoutsRawService implements PortoutsRawContract
      *
      * @param string $portoutID identifies a port out order
      * @param array{
-     *   filter?: array{code?: int|list<int>}
+     *   filter?: PortoutListRejectionCodesParams\Filter|FilterShape1
      * }|PortoutListRejectionCodesParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PortoutListRejectionCodesResponse>
      *
@@ -120,7 +112,7 @@ final class PortoutsRawService implements PortoutsRawContract
     public function listRejectionCodes(
         string $portoutID,
         array|PortoutListRejectionCodesParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PortoutListRejectionCodesParams::parseRequest(
             $params,
@@ -142,19 +134,20 @@ final class PortoutsRawService implements PortoutsRawContract
      *
      * Authorize or reject portout request
      *
-     * @param PortoutUpdateStatusParams\Status|value-of<PortoutUpdateStatusParams\Status> $status Path param: Updated portout status
+     * @param Status|value-of<Status> $status Path param: Updated portout status
      * @param array{
      *   id: string, reason: string, hostMessaging?: bool
      * }|PortoutUpdateStatusParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PortoutUpdateStatusResponse>
      *
      * @throws APIException
      */
     public function updateStatus(
-        PortoutUpdateStatusParams\Status|string $status,
+        Status|string $status,
         array|PortoutUpdateStatusParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PortoutUpdateStatusParams::parseRequest(
             $params,

@@ -40,7 +40,7 @@ use Telnyx\PortingOrderStatus;
  *   phoneNumberType?: null|PhoneNumberType|value-of<PhoneNumberType>,
  *   portingPhoneNumbersCount?: int|null,
  *   recordType?: string|null,
- *   requirements?: list<PortingOrderRequirementShape>|null,
+ *   requirements?: list<PortingOrderRequirement|PortingOrderRequirementShape>|null,
  *   requirementsMet?: bool|null,
  *   status?: null|PortingOrderStatus|PortingOrderStatusShape,
  *   supportKey?: string|null,
@@ -211,7 +211,7 @@ final class PortingOrder implements BaseModel
      * @param PortingOrderMisc|PortingOrderMiscShape|null $misc
      * @param PortingOrderPhoneNumberConfiguration|PortingOrderPhoneNumberConfigurationShape|null $phoneNumberConfiguration
      * @param PhoneNumberType|value-of<PhoneNumberType>|null $phoneNumberType
-     * @param list<PortingOrderRequirementShape>|null $requirements
+     * @param list<PortingOrderRequirement|PortingOrderRequirementShape>|null $requirements
      * @param PortingOrderStatus|PortingOrderStatusShape|null $status
      * @param PortingOrderUserFeedback|PortingOrderUserFeedbackShape|null $userFeedback
      */
@@ -477,7 +477,7 @@ final class PortingOrder implements BaseModel
     /**
      * List of documentation requirements for porting numbers. Can be set directly or via the `requirement_group_id` parameter.
      *
-     * @param list<PortingOrderRequirementShape> $requirements
+     * @param list<PortingOrderRequirement|PortingOrderRequirementShape> $requirements
      */
     public function withRequirements(array $requirements): self
     {

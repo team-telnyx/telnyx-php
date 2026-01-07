@@ -9,17 +9,21 @@ use Telnyx\RequestOptions;
 use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListParams\Type;
 use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface WirelessBlocklistValuesContract
 {
     /**
      * @api
      *
-     * @param 'country'|'mcc'|'plmn'|Type $type The Wireless Blocklist type for which to list possible values (e.g., `country`, `mcc`, `plmn`).
+     * @param Type|value-of<Type> $type The Wireless Blocklist type for which to list possible values (e.g., `country`, `mcc`, `plmn`).
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function list(
-        string|Type $type,
-        ?RequestOptions $requestOptions = null
+        Type|string $type,
+        RequestOptions|array|null $requestOptions = null
     ): WirelessBlocklistValueListResponse;
 }

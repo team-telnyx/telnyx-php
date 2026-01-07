@@ -13,11 +13,17 @@ use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointCreateParams;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointDeleteResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointGetResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams;
-use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams\Filter\Status;
+use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams\Filter;
+use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams\Page;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DynamicEmergencyEndpointsRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class DynamicEmergencyEndpointsRawService implements DynamicEmergencyEndpointsRawContract
 {
     // @phpstan-ignore-next-line
@@ -34,6 +40,7 @@ final class DynamicEmergencyEndpointsRawService implements DynamicEmergencyEndpo
      * @param array{
      *   callbackNumber: string, callerName: string, dynamicEmergencyAddressID: string
      * }|DynamicEmergencyEndpointCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DynamicEmergencyEndpointNewResponse>
      *
@@ -41,7 +48,7 @@ final class DynamicEmergencyEndpointsRawService implements DynamicEmergencyEndpo
      */
     public function create(
         array|DynamicEmergencyEndpointCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = DynamicEmergencyEndpointCreateParams::parseRequest(
             $params,
@@ -64,6 +71,7 @@ final class DynamicEmergencyEndpointsRawService implements DynamicEmergencyEndpo
      * Returns the dynamic emergency endpoint based on the ID provided
      *
      * @param string $id Dynamic Emergency Endpoint id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DynamicEmergencyEndpointGetResponse>
      *
@@ -71,7 +79,7 @@ final class DynamicEmergencyEndpointsRawService implements DynamicEmergencyEndpo
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -88,11 +96,9 @@ final class DynamicEmergencyEndpointsRawService implements DynamicEmergencyEndpo
      * Returns the dynamic emergency endpoints according to filters
      *
      * @param array{
-     *   filter?: array{
-     *     countryCode?: string, status?: 'pending'|'activated'|'rejected'|Status
-     *   },
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|DynamicEmergencyEndpointListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<DynamicEmergencyEndpoint>>
      *
@@ -100,7 +106,7 @@ final class DynamicEmergencyEndpointsRawService implements DynamicEmergencyEndpo
      */
     public function list(
         array|DynamicEmergencyEndpointListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = DynamicEmergencyEndpointListParams::parseRequest(
             $params,
@@ -124,6 +130,7 @@ final class DynamicEmergencyEndpointsRawService implements DynamicEmergencyEndpo
      * Deletes the dynamic emergency endpoint based on the ID provided
      *
      * @param string $id Dynamic Emergency Endpoint id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DynamicEmergencyEndpointDeleteResponse>
      *
@@ -131,7 +138,7 @@ final class DynamicEmergencyEndpointsRawService implements DynamicEmergencyEndpo
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

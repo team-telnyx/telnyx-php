@@ -14,7 +14,7 @@ use Telnyx\Storage\Buckets\Usage\PaginationMetaSimple;
  * @phpstan-import-type PaginationMetaSimpleShape from \Telnyx\Storage\Buckets\Usage\PaginationMetaSimple
  *
  * @phpstan-type MigrationListResponseShape = array{
- *   data?: list<MigrationParamsShape>|null,
+ *   data?: list<MigrationParams|MigrationParamsShape>|null,
  *   meta?: null|PaginationMetaSimple|PaginationMetaSimpleShape,
  * }
  */
@@ -40,7 +40,7 @@ final class MigrationListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<MigrationParamsShape>|null $data
+     * @param list<MigrationParams|MigrationParamsShape>|null $data
      * @param PaginationMetaSimple|PaginationMetaSimpleShape|null $meta
      */
     public static function with(
@@ -56,7 +56,7 @@ final class MigrationListResponse implements BaseModel
     }
 
     /**
-     * @param list<MigrationParamsShape> $data
+     * @param list<MigrationParams|MigrationParamsShape> $data
      */
     public function withData(array $data): self
     {

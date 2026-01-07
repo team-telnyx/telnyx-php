@@ -13,6 +13,9 @@ use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface CustomStorageCredentialsRawContract
 {
     /**
@@ -20,6 +23,7 @@ interface CustomStorageCredentialsRawContract
      *
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control, TeXML) or Sip connection resource
      * @param array<string,mixed>|CustomStorageCredentialCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CustomStorageCredentialNewResponse>
      *
@@ -28,13 +32,14 @@ interface CustomStorageCredentialsRawContract
     public function create(
         string $connectionID,
         array|CustomStorageCredentialCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control, TeXML) or Sip connection resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CustomStorageCredentialGetResponse>
      *
@@ -42,7 +47,7 @@ interface CustomStorageCredentialsRawContract
      */
     public function retrieve(
         string $connectionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -50,6 +55,7 @@ interface CustomStorageCredentialsRawContract
      *
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control, TeXML) or Sip connection resource
      * @param array<string,mixed>|CustomStorageCredentialUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CustomStorageCredentialUpdateResponse>
      *
@@ -58,13 +64,14 @@ interface CustomStorageCredentialsRawContract
     public function update(
         string $connectionID,
         array|CustomStorageCredentialUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control, TeXML) or Sip connection resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -72,6 +79,6 @@ interface CustomStorageCredentialsRawContract
      */
     public function delete(
         string $connectionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

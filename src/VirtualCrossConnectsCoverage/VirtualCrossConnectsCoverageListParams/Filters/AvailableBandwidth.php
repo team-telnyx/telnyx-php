@@ -14,7 +14,8 @@ use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\F
  *
  * @phpstan-import-type ContainsShape from \Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filters\AvailableBandwidth\Contains
  *
- * @phpstan-type AvailableBandwidthShape = int|ContainsShape
+ * @phpstan-type AvailableBandwidthVariants = int|Contains
+ * @phpstan-type AvailableBandwidthShape = AvailableBandwidthVariants|ContainsShape
  */
 final class AvailableBandwidth implements ConverterSource
 {

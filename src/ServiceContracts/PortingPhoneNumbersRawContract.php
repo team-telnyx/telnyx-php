@@ -11,12 +11,16 @@ use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface PortingPhoneNumbersRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|PortingPhoneNumberListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PortingPhoneNumberListResponse>>
      *
@@ -24,6 +28,6 @@ interface PortingPhoneNumbersRawContract
      */
     public function list(
         array|PortingPhoneNumberListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

@@ -11,6 +11,9 @@ use Telnyx\MessagingHostedNumberOrders\Actions\ActionUploadFileResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingHostedNumberOrders\ActionsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsService implements ActionsContract
 {
     /**
@@ -34,6 +37,7 @@ final class ActionsService implements ActionsContract
      * @param string $id identifies the type of resource
      * @param string $bill must be the last month's bill with proof of ownership of all of the numbers in the order in PDF format
      * @param string $loa must be a signed LOA for the numbers in the order in PDF format
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -41,7 +45,7 @@ final class ActionsService implements ActionsContract
         string $id,
         ?string $bill = null,
         ?string $loa = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionUploadFileResponse {
         $params = Util::removeNulls(['bill' => $bill, 'loa' => $loa]);
 

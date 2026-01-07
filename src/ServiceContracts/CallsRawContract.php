@@ -11,12 +11,16 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface CallsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|CallDialParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallDialResponse>
      *
@@ -24,13 +28,14 @@ interface CallsRawContract
      */
     public function dial(
         array|CallDialParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallGetStatusResponse>
      *
@@ -38,6 +43,6 @@ interface CallsRawContract
      */
     public function retrieveStatus(
         string $callControlID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

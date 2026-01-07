@@ -10,8 +10,13 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\UserTagsRawContract;
 use Telnyx\UserTags\UserTagListParams;
+use Telnyx\UserTags\UserTagListParams\Filter;
 use Telnyx\UserTags\UserTagListResponse;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\UserTags\UserTagListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class UserTagsRawService implements UserTagsRawContract
 {
     // @phpstan-ignore-next-line
@@ -25,7 +30,8 @@ final class UserTagsRawService implements UserTagsRawContract
      *
      * List all user tags.
      *
-     * @param array{filter?: array{startsWith?: string}}|UserTagListParams $params
+     * @param array{filter?: Filter|FilterShape}|UserTagListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UserTagListResponse>
      *
@@ -33,7 +39,7 @@ final class UserTagsRawService implements UserTagsRawContract
      */
     public function list(
         array|UserTagListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = UserTagListParams::parseRequest(
             $params,

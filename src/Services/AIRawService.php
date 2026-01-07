@@ -13,6 +13,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AIRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AIRawService implements AIRawContract
 {
     // @phpstan-ignore-next-line
@@ -26,12 +29,14 @@ final class AIRawService implements AIRawContract
      *
      * This endpoint returns a list of Open Source and OpenAI models that are available for use. <br /><br /> **Note**: Model `id`'s will be in the form `{source}/{model_name}`. For example `openai/gpt-4` or `mistralai/Mistral-7B-Instruct-v0.1` consistent with HuggingFace naming conventions.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<AIGetModelsResponse>
      *
      * @throws APIException
      */
     public function retrieveModels(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -57,6 +62,7 @@ final class AIRawService implements AIRawContract
      * @param array{
      *   bucket: string, filename: string, systemPrompt?: string
      * }|AISummarizeParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AISummarizeResponse>
      *
@@ -64,7 +70,7 @@ final class AIRawService implements AIRawContract
      */
     public function summarize(
         array|AISummarizeParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AISummarizeParams::parseRequest(
             $params,

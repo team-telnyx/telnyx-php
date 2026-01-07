@@ -11,6 +11,9 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\QueuesContract;
 use Telnyx\Services\Queues\CallsService;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class QueuesService implements QueuesContract
 {
     /**
@@ -38,12 +41,13 @@ final class QueuesService implements QueuesContract
      * Retrieve an existing call queue
      *
      * @param string $queueName Uniquely identifies the queue by name
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $queueName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): QueueGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($queueName, requestOptions: $requestOptions);

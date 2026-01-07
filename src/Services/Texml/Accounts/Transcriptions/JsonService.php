@@ -11,6 +11,9 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Transcriptions\JsonContract;
 use Telnyx\Texml\Accounts\Transcriptions\Json\JsonGetRecordingTranscriptionSidJsonResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class JsonService implements JsonContract
 {
     /**
@@ -33,13 +36,14 @@ final class JsonService implements JsonContract
      *
      * @param string $recordingTranscriptionSid uniquely identifies the recording transcription by id
      * @param string $accountSid the id of the account the resource belongs to
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function deleteRecordingTranscriptionSidJson(
         string $recordingTranscriptionSid,
         string $accountSid,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed {
         $params = Util::removeNulls(['accountSid' => $accountSid]);
 
@@ -56,13 +60,14 @@ final class JsonService implements JsonContract
      *
      * @param string $recordingTranscriptionSid uniquely identifies the recording transcription by id
      * @param string $accountSid the id of the account the resource belongs to
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieveRecordingTranscriptionSidJson(
         string $recordingTranscriptionSid,
         string $accountSid,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): JsonGetRecordingTranscriptionSidJsonResponse {
         $params = Util::removeNulls(['accountSid' => $accountSid]);
 

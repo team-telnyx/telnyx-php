@@ -9,9 +9,14 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse;
 use Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams;
+use Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams\Filter;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPUsageRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class GlobalIPUsageRawService implements GlobalIPUsageRawContract
 {
     // @phpstan-ignore-next-line
@@ -25,9 +30,8 @@ final class GlobalIPUsageRawService implements GlobalIPUsageRawContract
      *
      * Global IP Usage Metrics
      *
-     * @param array{
-     *   filter?: array{globalIPID?: string|array{in?: string}}
-     * }|GlobalIPUsageRetrieveParams $params
+     * @param array{filter?: Filter|FilterShape}|GlobalIPUsageRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<GlobalIPUsageGetResponse>
      *
@@ -35,7 +39,7 @@ final class GlobalIPUsageRawService implements GlobalIPUsageRawContract
      */
     public function retrieve(
         array|GlobalIPUsageRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = GlobalIPUsageRetrieveParams::parseRequest(
             $params,

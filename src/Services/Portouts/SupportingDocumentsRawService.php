@@ -8,12 +8,16 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams;
-use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document\Type;
+use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentListResponse;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Portouts\SupportingDocumentsRawContract;
 
+/**
+ * @phpstan-import-type DocumentShape from \Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class SupportingDocumentsRawService implements SupportingDocumentsRawContract
 {
     // @phpstan-ignore-next-line
@@ -29,8 +33,9 @@ final class SupportingDocumentsRawService implements SupportingDocumentsRawContr
      *
      * @param string $id Portout id
      * @param array{
-     *   documents?: list<array{documentID: string, type: 'loa'|'invoice'|Type}>
+     *   documents?: list<Document|DocumentShape>
      * }|SupportingDocumentCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SupportingDocumentNewResponse>
      *
@@ -39,7 +44,7 @@ final class SupportingDocumentsRawService implements SupportingDocumentsRawContr
     public function create(
         string $id,
         array|SupportingDocumentCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SupportingDocumentCreateParams::parseRequest(
             $params,
@@ -62,6 +67,7 @@ final class SupportingDocumentsRawService implements SupportingDocumentsRawContr
      * List every supporting documents for a portout request.
      *
      * @param string $id Portout id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SupportingDocumentListResponse>
      *
@@ -69,7 +75,7 @@ final class SupportingDocumentsRawService implements SupportingDocumentsRawContr
      */
     public function list(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

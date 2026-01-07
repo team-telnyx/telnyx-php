@@ -14,6 +14,9 @@ use Telnyx\Storage\Migrations\MigrationGetResponse;
 use Telnyx\Storage\Migrations\MigrationListResponse;
 use Telnyx\Storage\Migrations\MigrationNewResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MigrationsRawService implements MigrationsRawContract
 {
     // @phpstan-ignore-next-line
@@ -33,6 +36,7 @@ final class MigrationsRawService implements MigrationsRawContract
      *   targetRegion: string,
      *   refresh?: bool,
      * }|MigrationCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MigrationNewResponse>
      *
@@ -40,7 +44,7 @@ final class MigrationsRawService implements MigrationsRawContract
      */
     public function create(
         array|MigrationCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MigrationCreateParams::parseRequest(
             $params,
@@ -63,6 +67,7 @@ final class MigrationsRawService implements MigrationsRawContract
      * Get a Migration
      *
      * @param string $id unique identifier for the data migration
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MigrationGetResponse>
      *
@@ -70,7 +75,7 @@ final class MigrationsRawService implements MigrationsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -86,12 +91,15 @@ final class MigrationsRawService implements MigrationsRawContract
      *
      * List all Migrations
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<MigrationListResponse>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse
-    {
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',

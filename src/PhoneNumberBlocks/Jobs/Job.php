@@ -20,10 +20,10 @@ use Telnyx\PhoneNumberBlocks\Jobs\Job\Type;
  *   id?: string|null,
  *   createdAt?: string|null,
  *   etc?: \DateTimeInterface|null,
- *   failedOperations?: list<FailedOperationShape>|null,
+ *   failedOperations?: list<FailedOperation|FailedOperationShape>|null,
  *   recordType?: string|null,
  *   status?: null|Status|value-of<Status>,
- *   successfulOperations?: list<SuccessfulOperationShape>|null,
+ *   successfulOperations?: list<SuccessfulOperation|SuccessfulOperationShape>|null,
  *   type?: null|Type|value-of<Type>,
  *   updatedAt?: string|null,
  * }
@@ -97,9 +97,9 @@ final class Job implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<FailedOperationShape>|null $failedOperations
+     * @param list<FailedOperation|FailedOperationShape>|null $failedOperations
      * @param Status|value-of<Status>|null $status
-     * @param list<SuccessfulOperationShape>|null $successfulOperations
+     * @param list<SuccessfulOperation|SuccessfulOperationShape>|null $successfulOperations
      * @param Type|value-of<Type>|null $type
      */
     public static function with(
@@ -162,7 +162,7 @@ final class Job implements BaseModel
     }
 
     /**
-     * @param list<FailedOperationShape> $failedOperations
+     * @param list<FailedOperation|FailedOperationShape> $failedOperations
      */
     public function withFailedOperations(array $failedOperations): self
     {
@@ -197,7 +197,7 @@ final class Job implements BaseModel
     }
 
     /**
-     * @param list<SuccessfulOperationShape> $successfulOperations
+     * @param list<SuccessfulOperation|SuccessfulOperationShape> $successfulOperations
      */
     public function withSuccessfulOperations(array $successfulOperations): self
     {

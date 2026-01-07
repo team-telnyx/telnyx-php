@@ -6,6 +6,7 @@ namespace Telnyx\Services\AI\Assistants;
 
 use Telnyx\AI\Assistants\Tests\AssistantTest;
 use Telnyx\AI\Assistants\Tests\TelnyxConversationChannel;
+use Telnyx\AI\Assistants\Tests\TestCreateParams\Rubric;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
@@ -15,6 +16,11 @@ use Telnyx\ServiceContracts\AI\Assistants\TestsContract;
 use Telnyx\Services\AI\Assistants\Tests\RunsService;
 use Telnyx\Services\AI\Assistants\Tests\TestSuitesService;
 
+/**
+ * @phpstan-import-type RubricShape from \Telnyx\AI\Assistants\Tests\TestCreateParams\Rubric
+ * @phpstan-import-type RubricShape from \Telnyx\AI\Assistants\Tests\TestUpdateParams\Rubric as RubricShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class TestsService implements TestsContract
 {
     /**
@@ -50,13 +56,12 @@ final class TestsService implements TestsContract
      * @param string $destination The target destination for the test conversation. Format depends on the channel: phone number for SMS/voice, webhook URL for web chat, etc.
      * @param string $instructions Detailed instructions that define the test scenario and what the assistant should accomplish. This guides the test execution and evaluation.
      * @param string $name A descriptive name for the assistant test. This will be used to identify the test in the UI and reports.
-     * @param list<array{
-     *   criteria: string, name: string
-     * }> $rubric Evaluation criteria used to assess the assistant's performance. Each rubric item contains a name and specific criteria for evaluation.
+     * @param list<Rubric|RubricShape> $rubric Evaluation criteria used to assess the assistant's performance. Each rubric item contains a name and specific criteria for evaluation.
      * @param string $description Optional detailed description of what this test evaluates and its purpose. Helps team members understand the test's objectives.
      * @param int $maxDurationSeconds Maximum duration in seconds that the test conversation should run before timing out. If not specified, uses system default timeout.
-     * @param 'phone_call'|'web_call'|'sms_chat'|'web_chat'|TelnyxConversationChannel $telnyxConversationChannel The communication channel through which the test will be conducted. Determines how the assistant will receive and respond to test messages.
+     * @param TelnyxConversationChannel|value-of<TelnyxConversationChannel> $telnyxConversationChannel The communication channel through which the test will be conducted. Determines how the assistant will receive and respond to test messages.
      * @param string $testSuite Optional test suite name to group related tests together. Useful for organizing tests by feature, team, or release cycle.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -67,9 +72,9 @@ final class TestsService implements TestsContract
         array $rubric,
         ?string $description = null,
         ?int $maxDurationSeconds = null,
-        string|TelnyxConversationChannel|null $telnyxConversationChannel = null,
+        TelnyxConversationChannel|string|null $telnyxConversationChannel = null,
         ?string $testSuite = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AssistantTest {
         $params = Util::removeNulls(
             [
@@ -95,11 +100,13 @@ final class TestsService implements TestsContract
      *
      * Retrieves detailed information about a specific assistant test
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $testID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AssistantTest {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($testID, requestOptions: $requestOptions);
@@ -117,11 +124,10 @@ final class TestsService implements TestsContract
      * @param string $instructions updated test scenario instructions and objectives
      * @param int $maxDurationSeconds updated maximum test duration in seconds
      * @param string $name Updated name for the assistant test. Must be unique and descriptive.
-     * @param list<array{
-     *   criteria: string, name: string
-     * }> $rubric Updated evaluation criteria for assessing assistant performance
-     * @param 'phone_call'|'web_call'|'sms_chat'|'web_chat'|TelnyxConversationChannel $telnyxConversationChannel updated communication channel for the test execution
+     * @param list<\Telnyx\AI\Assistants\Tests\TestUpdateParams\Rubric|RubricShape1> $rubric updated evaluation criteria for assessing assistant performance
+     * @param TelnyxConversationChannel|value-of<TelnyxConversationChannel> $telnyxConversationChannel updated communication channel for the test execution
      * @param string $testSuite updated test suite assignment for better organization
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -133,9 +139,9 @@ final class TestsService implements TestsContract
         ?int $maxDurationSeconds = null,
         ?string $name = null,
         ?array $rubric = null,
-        string|TelnyxConversationChannel|null $telnyxConversationChannel = null,
+        TelnyxConversationChannel|string|null $telnyxConversationChannel = null,
         ?string $testSuite = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AssistantTest {
         $params = Util::removeNulls(
             [
@@ -164,6 +170,7 @@ final class TestsService implements TestsContract
      * @param string $destination Filter tests by destination (phone number, webhook URL, etc.)
      * @param string $telnyxConversationChannel Filter tests by communication channel (e.g., 'web_chat', 'sms')
      * @param string $testSuite Filter tests by test suite name
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<AssistantTest>
      *
@@ -175,7 +182,7 @@ final class TestsService implements TestsContract
         ?int $pageSize = null,
         ?string $telnyxConversationChannel = null,
         ?string $testSuite = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
         $params = Util::removeNulls(
             [
@@ -198,11 +205,13 @@ final class TestsService implements TestsContract
      *
      * Permanently removes an assistant test and all associated data
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $testID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($testID, requestOptions: $requestOptions);

@@ -14,6 +14,9 @@ use Telnyx\Services\Legacy\Reporting\UsageReports\MessagingService;
 use Telnyx\Services\Legacy\Reporting\UsageReports\NumberLookupService;
 use Telnyx\Services\Legacy\Reporting\UsageReports\VoiceService;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class UsageReportsService implements UsageReportsContract
 {
     /**
@@ -52,12 +55,14 @@ final class UsageReportsService implements UsageReportsContract
      *
      * Generate and fetch speech to text usage report synchronously. This endpoint will both generate and fetch the speech to text report over a specified time period.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieveSpeechToText(
-        string|\DateTimeInterface|null $endDate = null,
-        string|\DateTimeInterface|null $startDate = null,
-        ?RequestOptions $requestOptions = null,
+        ?\DateTimeInterface $endDate = null,
+        ?\DateTimeInterface $startDate = null,
+        RequestOptions|array|null $requestOptions = null,
     ): UsageReportGetSpeechToTextResponse {
         $params = Util::removeNulls(
             ['endDate' => $endDate, 'startDate' => $startDate]

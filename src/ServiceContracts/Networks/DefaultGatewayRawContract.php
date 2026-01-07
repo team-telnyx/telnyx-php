@@ -12,6 +12,9 @@ use Telnyx\Networks\DefaultGateway\DefaultGatewayGetResponse;
 use Telnyx\Networks\DefaultGateway\DefaultGatewayNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface DefaultGatewayRawContract
 {
     /**
@@ -19,6 +22,7 @@ interface DefaultGatewayRawContract
      *
      * @param string $networkIdentifier identifies the resource
      * @param array<string,mixed>|DefaultGatewayCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultGatewayNewResponse>
      *
@@ -27,13 +31,14 @@ interface DefaultGatewayRawContract
     public function create(
         string $networkIdentifier,
         array|DefaultGatewayCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultGatewayGetResponse>
      *
@@ -41,13 +46,14 @@ interface DefaultGatewayRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultGatewayDeleteResponse>
      *
@@ -55,6 +61,6 @@ interface DefaultGatewayRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

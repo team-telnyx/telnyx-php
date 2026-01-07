@@ -21,7 +21,7 @@ use Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data\Payload\R
  *   clientState?: string|null,
  *   connectionID?: string|null,
  *   insightGroupID?: string|null,
- *   results?: list<Result1Shape>|null,
+ *   results?: list<Result|Result1Shape>|null,
  * }
  */
 final class Payload implements BaseModel
@@ -92,7 +92,7 @@ final class Payload implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param CallingPartyType|value-of<CallingPartyType>|null $callingPartyType
-     * @param list<Result1Shape>|null $results
+     * @param list<Result|Result1Shape>|null $results
      */
     public static function with(
         ?string $callControlID = null,
@@ -201,7 +201,7 @@ final class Payload implements BaseModel
     /**
      * Array of insight results being generated for the call.
      *
-     * @param list<Result1Shape> $results
+     * @param list<Result|Result1Shape> $results
      */
     public function withResults(array $results): self
     {

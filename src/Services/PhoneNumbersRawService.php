@@ -13,12 +13,9 @@ use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse;
 use Telnyx\PhoneNumbers\PhoneNumberDetailed;
 use Telnyx\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\PhoneNumbers\PhoneNumberListParams;
-use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\NumberType\Eq;
-use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\Source;
-use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\Status;
-use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\VoiceUsagePaymentMethod;
-use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\WithoutTags;
+use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\HandleMessagingProfileError;
+use Telnyx\PhoneNumbers\PhoneNumberListParams\Page;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Sort;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListParams;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListResponse;
@@ -27,6 +24,13 @@ use Telnyx\PhoneNumbers\PhoneNumberUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbersRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\PhoneNumberListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PhoneNumbers\PhoneNumberListParams\Page
+ * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter as FilterShape1
+ * @phpstan-import-type PageShape from \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Page as PageShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class PhoneNumbersRawService implements PhoneNumbersRawContract
 {
     // @phpstan-ignore-next-line
@@ -41,6 +45,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
      * Retrieve a phone number
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberGetResponse>
      *
@@ -48,7 +53,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -73,6 +78,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
      *   hdVoiceEnabled?: bool,
      *   tags?: list<string>,
      * }|PhoneNumberUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberUpdateResponse>
      *
@@ -81,7 +87,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
     public function update(
         string $phoneNumberID,
         array|PhoneNumberUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PhoneNumberUpdateParams::parseRequest(
             $params,
@@ -104,29 +110,12 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
      * List phone numbers
      *
      * @param array{
-     *   filter?: array{
-     *     billingGroupID?: string,
-     *     connectionID?: string,
-     *     countryISOAlpha2?: string|list<string>,
-     *     customerReference?: string,
-     *     emergencyAddressID?: string,
-     *     numberType?: array{
-     *       eq?: 'local'|'national'|'toll_free'|'mobile'|'shared_cost'|Eq
-     *     },
-     *     phoneNumber?: string,
-     *     source?: 'ported'|'purchased'|Source,
-     *     status?: 'purchase-pending'|'purchase-failed'|'port-pending'|'active'|'deleted'|'port-failed'|'emergency-only'|'ported-out'|'port-out-pending'|Status,
-     *     tag?: string,
-     *     voiceConnectionName?: array{
-     *       contains?: string, endsWith?: string, eq?: string, startsWith?: string
-     *     },
-     *     voiceUsagePaymentMethod?: 'pay-per-minute'|'channel'|VoiceUsagePaymentMethod,
-     *     withoutTags?: 'true'|'false'|WithoutTags,
-     *   },
-     *   handleMessagingProfileError?: 'true'|'false'|HandleMessagingProfileError,
-     *   page?: array{number?: int, size?: int},
-     *   sort?: 'purchased_at'|'phone_number'|'connection_name'|'usage_payment_method'|Sort,
+     *   filter?: Filter|FilterShape,
+     *   handleMessagingProfileError?: HandleMessagingProfileError|value-of<HandleMessagingProfileError>,
+     *   page?: Page|PageShape,
+     *   sort?: Sort|value-of<Sort>,
      * }|PhoneNumberListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PhoneNumberDetailed>>
      *
@@ -134,7 +123,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
      */
     public function list(
         array|PhoneNumberListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PhoneNumberListParams::parseRequest(
             $params,
@@ -161,6 +150,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
      * Delete a phone number
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberDeleteResponse>
      *
@@ -168,7 +158,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -185,29 +175,13 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
      * List phone numbers, This endpoint is a lighter version of the /phone_numbers endpoint having higher performance and rate limit.
      *
      * @param array{
-     *   filter?: array{
-     *     billingGroupID?: string,
-     *     connectionID?: string,
-     *     countryISOAlpha2?: string|list<string>,
-     *     customerReference?: string,
-     *     emergencyAddressID?: string,
-     *     numberType?: array{
-     *       eq?: 'local'|'national'|'toll_free'|'mobile'|'shared_cost'|PhoneNumberSlimListParams\Filter\NumberType\Eq,
-     *     },
-     *     phoneNumber?: string,
-     *     source?: 'ported'|'purchased'|PhoneNumberSlimListParams\Filter\Source,
-     *     status?: 'purchase-pending'|'purchase-failed'|'port_pending'|'active'|'deleted'|'port-failed'|'emergency-only'|'ported-out'|'port-out-pending'|PhoneNumberSlimListParams\Filter\Status,
-     *     tag?: string,
-     *     voiceConnectionName?: array{
-     *       contains?: string, endsWith?: string, eq?: string, startsWith?: string
-     *     },
-     *     voiceUsagePaymentMethod?: 'pay-per-minute'|'channel'|PhoneNumberSlimListParams\Filter\VoiceUsagePaymentMethod,
-     *   },
+     *   filter?: PhoneNumberSlimListParams\Filter|FilterShape1,
      *   includeConnection?: bool,
      *   includeTags?: bool,
-     *   page?: array{number?: int, size?: int},
-     *   sort?: 'purchased_at'|'phone_number'|'connection_name'|'usage_payment_method'|PhoneNumberSlimListParams\Sort,
+     *   page?: PhoneNumberSlimListParams\Page|PageShape1,
+     *   sort?: PhoneNumberSlimListParams\Sort|value-of<PhoneNumberSlimListParams\Sort>,
      * }|PhoneNumberSlimListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PhoneNumberSlimListResponse>>
      *
@@ -215,7 +189,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
      */
     public function slimList(
         array|PhoneNumberSlimListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PhoneNumberSlimListParams::parseRequest(
             $params,

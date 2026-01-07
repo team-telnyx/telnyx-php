@@ -22,7 +22,7 @@ use Telnyx\Requirements\RequirementListResponse\PhoneNumberType;
  *   locality?: string|null,
  *   phoneNumberType?: null|PhoneNumberType|value-of<PhoneNumberType>,
  *   recordType?: string|null,
- *   requirementsTypes?: list<DocReqsRequirementTypeShape>|null,
+ *   requirementsTypes?: list<DocReqsRequirementType|DocReqsRequirementTypeShape>|null,
  *   updatedAt?: string|null,
  * }
  */
@@ -103,7 +103,7 @@ final class RequirementListResponse implements BaseModel
      *
      * @param Action|value-of<Action>|null $action
      * @param PhoneNumberType|value-of<PhoneNumberType>|null $phoneNumberType
-     * @param list<DocReqsRequirementTypeShape>|null $requirementsTypes
+     * @param list<DocReqsRequirementType|DocReqsRequirementTypeShape>|null $requirementsTypes
      */
     public static function with(
         ?string $id = null,
@@ -216,7 +216,7 @@ final class RequirementListResponse implements BaseModel
     /**
      * Lists the requirement types necessary to fulfill this requirement.
      *
-     * @param list<DocReqsRequirementTypeShape> $requirementsTypes
+     * @param list<DocReqsRequirementType|DocReqsRequirementTypeShape> $requirementsTypes
      */
     public function withRequirementsTypes(array $requirementsTypes): self
     {

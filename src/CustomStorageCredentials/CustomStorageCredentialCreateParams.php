@@ -16,6 +16,7 @@ use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Configur
  *
  * @see Telnyx\Services\CustomStorageCredentialsService::create()
  *
+ * @phpstan-import-type ConfigurationVariants from \Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Configuration
  * @phpstan-import-type ConfigurationShape from \Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Configuration
  *
  * @phpstan-type CustomStorageCredentialCreateParamsShape = array{
@@ -32,6 +33,7 @@ final class CustomStorageCredentialCreateParams implements BaseModel
     #[Required(enum: Backend::class)]
     public string $backend;
 
+    /** @var ConfigurationVariants $configuration */
     #[Required(union: Configuration::class)]
     public GcsConfigurationData|S3ConfigurationData|AzureConfigurationData $configuration;
 

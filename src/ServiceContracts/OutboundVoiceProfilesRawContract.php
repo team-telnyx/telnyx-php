@@ -17,12 +17,16 @@ use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateParams;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface OutboundVoiceProfilesRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|OutboundVoiceProfileCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OutboundVoiceProfileNewResponse>
      *
@@ -30,13 +34,14 @@ interface OutboundVoiceProfilesRawContract
      */
     public function create(
         array|OutboundVoiceProfileCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OutboundVoiceProfileGetResponse>
      *
@@ -44,7 +49,7 @@ interface OutboundVoiceProfilesRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -52,6 +57,7 @@ interface OutboundVoiceProfilesRawContract
      *
      * @param string $id identifies the resource
      * @param array<string,mixed>|OutboundVoiceProfileUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OutboundVoiceProfileUpdateResponse>
      *
@@ -60,13 +66,14 @@ interface OutboundVoiceProfilesRawContract
     public function update(
         string $id,
         array|OutboundVoiceProfileUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|OutboundVoiceProfileListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<OutboundVoiceProfile>>
      *
@@ -74,13 +81,14 @@ interface OutboundVoiceProfilesRawContract
      */
     public function list(
         array|OutboundVoiceProfileListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OutboundVoiceProfileDeleteResponse>
      *
@@ -88,6 +96,6 @@ interface OutboundVoiceProfilesRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

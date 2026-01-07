@@ -10,12 +10,16 @@ use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface GlobalIPAssignmentsUsageRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|GlobalIPAssignmentsUsageRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<GlobalIPAssignmentsUsageGetResponse>
      *
@@ -23,6 +27,6 @@ interface GlobalIPAssignmentsUsageRawContract
      */
     public function retrieve(
         array|GlobalIPAssignmentsUsageRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

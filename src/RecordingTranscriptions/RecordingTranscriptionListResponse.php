@@ -14,7 +14,8 @@ use Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse\Meta;
  * @phpstan-import-type MetaShape from \Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse\Meta
  *
  * @phpstan-type RecordingTranscriptionListResponseShape = array{
- *   data?: list<RecordingTranscriptionShape>|null, meta?: null|Meta|MetaShape
+ *   data?: list<RecordingTranscription|RecordingTranscriptionShape>|null,
+ *   meta?: null|Meta|MetaShape,
  * }
  */
 final class RecordingTranscriptionListResponse implements BaseModel
@@ -39,7 +40,7 @@ final class RecordingTranscriptionListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RecordingTranscriptionShape>|null $data
+     * @param list<RecordingTranscription|RecordingTranscriptionShape>|null $data
      * @param Meta|MetaShape|null $meta
      */
     public static function with(
@@ -55,7 +56,7 @@ final class RecordingTranscriptionListResponse implements BaseModel
     }
 
     /**
-     * @param list<RecordingTranscriptionShape> $data
+     * @param list<RecordingTranscription|RecordingTranscriptionShape> $data
      */
     public function withData(array $data): self
     {

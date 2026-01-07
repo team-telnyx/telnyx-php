@@ -12,26 +12,31 @@ use Telnyx\Invoices\InvoiceListResponse;
 use Telnyx\Invoices\InvoiceRetrieveParams\Action;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface InvoicesContract
 {
     /**
      * @api
      *
      * @param string $id Invoice UUID
-     * @param 'json'|'link'|Action $action Invoice action
+     * @param Action|value-of<Action> $action Invoice action
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        string|Action|null $action = null,
-        ?RequestOptions $requestOptions = null,
+        Action|string|null $action = null,
+        RequestOptions|array|null $requestOptions = null,
     ): InvoiceGetResponse;
 
     /**
      * @api
      *
-     * @param 'period_start'|'-period_start'|Sort $sort specifies the sort order for results
+     * @param Sort|value-of<Sort> $sort specifies the sort order for results
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<InvoiceListResponse>
      *
@@ -40,7 +45,7 @@ interface InvoicesContract
     public function list(
         ?int $pageNumber = null,
         ?int $pageSize = null,
-        string|Sort|null $sort = null,
-        ?RequestOptions $requestOptions = null,
+        Sort|string|null $sort = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination;
 }

@@ -10,12 +10,16 @@ use Telnyx\InventoryCoverage\InventoryCoverageListParams;
 use Telnyx\InventoryCoverage\InventoryCoverageListResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface InventoryCoverageRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|InventoryCoverageListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InventoryCoverageListResponse>
      *
@@ -23,6 +27,6 @@ interface InventoryCoverageRawContract
      */
     public function list(
         array|InventoryCoverageListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

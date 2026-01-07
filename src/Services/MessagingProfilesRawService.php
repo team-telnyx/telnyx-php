@@ -14,6 +14,8 @@ use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
 use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
 use Telnyx\MessagingProfiles\MessagingProfileGetResponse;
 use Telnyx\MessagingProfiles\MessagingProfileListParams;
+use Telnyx\MessagingProfiles\MessagingProfileListParams\Filter;
+use Telnyx\MessagingProfiles\MessagingProfileListParams\Page;
 use Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersParams;
 use Telnyx\MessagingProfiles\MessagingProfileListShortCodesParams;
 use Telnyx\MessagingProfiles\MessagingProfileNewResponse;
@@ -26,6 +28,15 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingProfilesRawContract;
 use Telnyx\ShortCode;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\MessagingProfiles\MessagingProfileListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\MessagingProfiles\MessagingProfileListParams\Page
+ * @phpstan-import-type PageShape from \Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersParams\Page as PageShape1
+ * @phpstan-import-type PageShape from \Telnyx\MessagingProfiles\MessagingProfileListShortCodesParams\Page as PageShape2
+ * @phpstan-import-type NumberPoolSettingsShape from \Telnyx\MessagingProfiles\NumberPoolSettings
+ * @phpstan-import-type URLShortenerSettingsShape from \Telnyx\MessagingProfiles\URLShortenerSettings
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MessagingProfilesRawService implements MessagingProfilesRawContract
 {
     // @phpstan-ignore-next-line
@@ -49,23 +60,13 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      *   mmsFallBackToSMS?: bool,
      *   mmsTranscoding?: bool,
      *   mobileOnly?: bool,
-     *   numberPoolSettings?: array{
-     *     longCodeWeight: float,
-     *     skipUnhealthy: bool,
-     *     tollFreeWeight: float,
-     *     geomatch?: bool,
-     *     stickySender?: bool,
-     *   }|NumberPoolSettings|null,
-     *   urlShortenerSettings?: array{
-     *     domain: string,
-     *     prefix?: string,
-     *     replaceBlacklistOnly?: bool,
-     *     sendWebhooks?: bool,
-     *   }|URLShortenerSettings|null,
-     *   webhookAPIVersion?: '1'|'2'|'2010-04-01'|WebhookAPIVersion,
+     *   numberPoolSettings?: NumberPoolSettings|NumberPoolSettingsShape|null,
+     *   urlShortenerSettings?: URLShortenerSettings|URLShortenerSettingsShape|null,
+     *   webhookAPIVersion?: WebhookAPIVersion|value-of<WebhookAPIVersion>,
      *   webhookFailoverURL?: string|null,
      *   webhookURL?: string|null,
      * }|MessagingProfileCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingProfileNewResponse>
      *
@@ -73,7 +74,7 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      */
     public function create(
         array|MessagingProfileCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MessagingProfileCreateParams::parseRequest(
             $params,
@@ -96,6 +97,7 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      * Retrieve a messaging profile
      *
      * @param string $messagingProfileID The id of the messaging profile to retrieve
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingProfileGetResponse>
      *
@@ -103,7 +105,7 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      */
     public function retrieve(
         string $messagingProfileID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -129,25 +131,15 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      *   mmsTranscoding?: bool,
      *   mobileOnly?: bool,
      *   name?: string,
-     *   numberPoolSettings?: array{
-     *     longCodeWeight: float,
-     *     skipUnhealthy: bool,
-     *     tollFreeWeight: float,
-     *     geomatch?: bool,
-     *     stickySender?: bool,
-     *   }|NumberPoolSettings|null,
-     *   urlShortenerSettings?: array{
-     *     domain: string,
-     *     prefix?: string,
-     *     replaceBlacklistOnly?: bool,
-     *     sendWebhooks?: bool,
-     *   }|URLShortenerSettings|null,
+     *   numberPoolSettings?: NumberPoolSettings|NumberPoolSettingsShape|null,
+     *   urlShortenerSettings?: URLShortenerSettings|URLShortenerSettingsShape|null,
      *   v1Secret?: string,
-     *   webhookAPIVersion?: '1'|'2'|'2010-04-01'|MessagingProfileUpdateParams\WebhookAPIVersion,
+     *   webhookAPIVersion?: MessagingProfileUpdateParams\WebhookAPIVersion|value-of<MessagingProfileUpdateParams\WebhookAPIVersion>,
      *   webhookFailoverURL?: string|null,
      *   webhookURL?: string|null,
      *   whitelistedDestinations?: list<string>,
      * }|MessagingProfileUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingProfileUpdateResponse>
      *
@@ -156,7 +148,7 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
     public function update(
         string $messagingProfileID,
         array|MessagingProfileUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MessagingProfileUpdateParams::parseRequest(
             $params,
@@ -179,8 +171,9 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      * List messaging profiles
      *
      * @param array{
-     *   filter?: array{name?: string}, page?: array{number?: int, size?: int}
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|MessagingProfileListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<MessagingProfile>>
      *
@@ -188,7 +181,7 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      */
     public function list(
         array|MessagingProfileListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MessagingProfileListParams::parseRequest(
             $params,
@@ -212,6 +205,7 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      * Delete a messaging profile
      *
      * @param string $messagingProfileID The id of the messaging profile to retrieve
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingProfileDeleteResponse>
      *
@@ -219,7 +213,7 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      */
     public function delete(
         string $messagingProfileID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -237,8 +231,9 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      *
      * @param string $messagingProfileID The id of the messaging profile to retrieve
      * @param array{
-     *   page?: array{number?: int, size?: int}
+     *   page?: MessagingProfileListPhoneNumbersParams\Page|PageShape1,
      * }|MessagingProfileListPhoneNumbersParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PhoneNumberWithMessagingSettings>>
      *
@@ -247,7 +242,7 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
     public function listPhoneNumbers(
         string $messagingProfileID,
         array|MessagingProfileListPhoneNumbersParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MessagingProfileListPhoneNumbersParams::parseRequest(
             $params,
@@ -272,8 +267,9 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      *
      * @param string $messagingProfileID The id of the messaging profile to retrieve
      * @param array{
-     *   page?: array{number?: int, size?: int}
+     *   page?: MessagingProfileListShortCodesParams\Page|PageShape2,
      * }|MessagingProfileListShortCodesParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<ShortCode>>
      *
@@ -282,7 +278,7 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
     public function listShortCodes(
         string $messagingProfileID,
         array|MessagingProfileListShortCodesParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MessagingProfileListShortCodesParams::parseRequest(
             $params,

@@ -10,12 +10,16 @@ use Telnyx\RequestOptions;
 use Telnyx\Texml\TexmlSecretsParams;
 use Telnyx\Texml\TexmlSecretsResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface TexmlRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|TexmlSecretsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TexmlSecretsResponse>
      *
@@ -23,6 +27,6 @@ interface TexmlRawContract
      */
     public function secrets(
         array|TexmlSecretsParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

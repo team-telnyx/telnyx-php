@@ -15,12 +15,16 @@ use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementsParam
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementsResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface NumberOrderPhoneNumbersRawContract
 {
     /**
      * @api
      *
      * @param string $numberOrderPhoneNumberID the number order phone number ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NumberOrderPhoneNumberGetResponse>
      *
@@ -28,13 +32,14 @@ interface NumberOrderPhoneNumbersRawContract
      */
     public function retrieve(
         string $numberOrderPhoneNumberID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|NumberOrderPhoneNumberListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NumberOrderPhoneNumberListResponse>
      *
@@ -42,7 +47,7 @@ interface NumberOrderPhoneNumbersRawContract
      */
     public function list(
         array|NumberOrderPhoneNumberListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -50,6 +55,7 @@ interface NumberOrderPhoneNumbersRawContract
      *
      * @param string $id The unique identifier of the number order phone number
      * @param array<string,mixed>|NumberOrderPhoneNumberUpdateRequirementGroupParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NumberOrderPhoneNumberUpdateRequirementGroupResponse>
      *
@@ -58,7 +64,7 @@ interface NumberOrderPhoneNumbersRawContract
     public function updateRequirementGroup(
         string $id,
         array|NumberOrderPhoneNumberUpdateRequirementGroupParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -66,6 +72,7 @@ interface NumberOrderPhoneNumbersRawContract
      *
      * @param string $numberOrderPhoneNumberID the number order phone number ID
      * @param array<string,mixed>|NumberOrderPhoneNumberUpdateRequirementsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NumberOrderPhoneNumberUpdateRequirementsResponse>
      *
@@ -74,6 +81,6 @@ interface NumberOrderPhoneNumbersRawContract
     public function updateRequirements(
         string $numberOrderPhoneNumberID,
         array|NumberOrderPhoneNumberUpdateRequirementsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

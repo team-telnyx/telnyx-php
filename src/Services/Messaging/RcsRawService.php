@@ -16,6 +16,9 @@ use Telnyx\Messaging\Rcs\RcRetrieveCapabilitiesParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging\RcsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class RcsRawService implements RcsRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,6 +34,7 @@ final class RcsRawService implements RcsRawContract
      *
      * @param string $phoneNumber Phone number in E164 format to invite for testing
      * @param array{id: string}|RcInviteTestNumberParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RcInviteTestNumberResponse>
      *
@@ -39,7 +43,7 @@ final class RcsRawService implements RcsRawContract
     public function inviteTestNumber(
         string $phoneNumber,
         array|RcInviteTestNumberParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RcInviteTestNumberParams::parseRequest(
             $params,
@@ -65,6 +69,7 @@ final class RcsRawService implements RcsRawContract
      * @param array{
      *   agentID: string, phoneNumbers: list<string>
      * }|RcListBulkCapabilitiesParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RcListBulkCapabilitiesResponse>
      *
@@ -72,7 +77,7 @@ final class RcsRawService implements RcsRawContract
      */
     public function listBulkCapabilities(
         array|RcListBulkCapabilitiesParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RcListBulkCapabilitiesParams::parseRequest(
             $params,
@@ -96,6 +101,7 @@ final class RcsRawService implements RcsRawContract
      *
      * @param string $phoneNumber Phone number in E164 format
      * @param array{agentID: string}|RcRetrieveCapabilitiesParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RcGetCapabilitiesResponse>
      *
@@ -104,7 +110,7 @@ final class RcsRawService implements RcsRawContract
     public function retrieveCapabilities(
         string $phoneNumber,
         array|RcRetrieveCapabilitiesParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RcRetrieveCapabilitiesParams::parseRequest(
             $params,

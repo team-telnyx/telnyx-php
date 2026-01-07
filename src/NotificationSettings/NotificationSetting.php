@@ -21,7 +21,7 @@ use Telnyx\NotificationSettings\NotificationSetting\Status;
  *   notificationChannelID?: string|null,
  *   notificationEventConditionID?: string|null,
  *   notificationProfileID?: string|null,
- *   parameters?: list<ParameterShape>|null,
+ *   parameters?: list<Parameter|ParameterShape>|null,
  *   status?: null|Status|value-of<Status>,
  *   updatedAt?: \DateTimeInterface|null,
  * }
@@ -95,7 +95,7 @@ final class NotificationSetting implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ParameterShape>|null $parameters
+     * @param list<Parameter|ParameterShape>|null $parameters
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
@@ -202,7 +202,7 @@ final class NotificationSetting implements BaseModel
     }
 
     /**
-     * @param list<ParameterShape> $parameters
+     * @param list<Parameter|ParameterShape> $parameters
      */
     public function withParameters(array $parameters): self
     {

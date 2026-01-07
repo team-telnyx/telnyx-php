@@ -26,6 +26,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Calls\ActionsService::gatherUsingSpeak()
  *
+ * @phpstan-import-type VoiceSettingsVariants from \Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings
  *
  * @phpstan-type ActionGatherUsingSpeakParamsShape = array{
@@ -161,6 +162,8 @@ final class ActionGatherUsingSpeakParams implements BaseModel
 
     /**
      * The settings associated with the voice selected.
+     *
+     * @var VoiceSettingsVariants|null $voiceSettings
      */
     #[Optional('voice_settings', union: VoiceSettings::class)]
     public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|null $voiceSettings;

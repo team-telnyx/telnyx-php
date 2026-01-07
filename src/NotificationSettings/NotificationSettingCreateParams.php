@@ -21,7 +21,7 @@ use Telnyx\NotificationSettings\NotificationSettingCreateParams\Parameter;
  *   notificationChannelID?: string|null,
  *   notificationEventConditionID?: string|null,
  *   notificationProfileID?: string|null,
- *   parameters?: list<ParameterShape>|null,
+ *   parameters?: list<Parameter|ParameterShape>|null,
  * }
  */
 final class NotificationSettingCreateParams implements BaseModel
@@ -62,7 +62,7 @@ final class NotificationSettingCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ParameterShape>|null $parameters
+     * @param list<Parameter|ParameterShape>|null $parameters
      */
     public static function with(
         ?string $notificationChannelID = null,
@@ -117,7 +117,7 @@ final class NotificationSettingCreateParams implements BaseModel
     }
 
     /**
-     * @param list<ParameterShape> $parameters
+     * @param list<Parameter|ParameterShape> $parameters
      */
     public function withParameters(array $parameters): self
     {

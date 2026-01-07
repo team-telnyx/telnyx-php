@@ -10,6 +10,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobGetResponse;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams;
+use Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams\Page;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobRetrieveParams;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobUpdateParams;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobUpdateResponse;
@@ -17,6 +18,10 @@ use Telnyx\PortingOrders\PortingOrdersActivationJob;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\ActivationJobsRawContract;
 
+/**
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActivationJobsRawService implements ActivationJobsRawContract
 {
     // @phpstan-ignore-next-line
@@ -32,6 +37,7 @@ final class ActivationJobsRawService implements ActivationJobsRawContract
      *
      * @param string $activationJobID Activation Job Identifier
      * @param array{id: string}|ActivationJobRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActivationJobGetResponse>
      *
@@ -40,7 +46,7 @@ final class ActivationJobsRawService implements ActivationJobsRawContract
     public function retrieve(
         string $activationJobID,
         array|ActivationJobRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActivationJobRetrieveParams::parseRequest(
             $params,
@@ -65,8 +71,9 @@ final class ActivationJobsRawService implements ActivationJobsRawContract
      *
      * @param string $activationJobID Path param: Activation Job Identifier
      * @param array{
-     *   id: string, activateAt?: string|\DateTimeInterface
+     *   id: string, activateAt?: \DateTimeInterface
      * }|ActivationJobUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActivationJobUpdateResponse>
      *
@@ -75,7 +82,7 @@ final class ActivationJobsRawService implements ActivationJobsRawContract
     public function update(
         string $activationJobID,
         array|ActivationJobUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActivationJobUpdateParams::parseRequest(
             $params,
@@ -100,9 +107,8 @@ final class ActivationJobsRawService implements ActivationJobsRawContract
      * Returns a list of your porting activation jobs.
      *
      * @param string $id Porting Order id
-     * @param array{
-     *   page?: array{number?: int, size?: int}
-     * }|ActivationJobListParams $params
+     * @param array{page?: Page|PageShape}|ActivationJobListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PortingOrdersActivationJob>>
      *
@@ -111,7 +117,7 @@ final class ActivationJobsRawService implements ActivationJobsRawContract
     public function list(
         string $id,
         array|ActivationJobListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActivationJobListParams::parseRequest(
             $params,

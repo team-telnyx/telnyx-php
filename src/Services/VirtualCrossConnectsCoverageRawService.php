@@ -11,9 +11,17 @@ use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VirtualCrossConnectsCoverageRawContract;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams;
-use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filter\CloudProvider;
+use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filter;
+use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filters;
+use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Page;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filter
+ * @phpstan-import-type FiltersShape from \Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filters
+ * @phpstan-import-type PageShape from \Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class VirtualCrossConnectsCoverageRawService implements VirtualCrossConnectsCoverageRawContract
 {
     // @phpstan-ignore-next-line
@@ -28,17 +36,11 @@ final class VirtualCrossConnectsCoverageRawService implements VirtualCrossConnec
      * List Virtual Cross Connects Cloud Coverage.<br /><br />This endpoint shows which cloud regions are available for the `location_code` your Virtual Cross Connect will be provisioned in.
      *
      * @param array{
-     *   filter?: array{
-     *     cloudProvider?: 'aws'|'azure'|'gce'|CloudProvider,
-     *     cloudProviderRegion?: string,
-     *     locationCode?: string,
-     *     locationPop?: string,
-     *     locationRegion?: string,
-     *     locationSite?: string,
-     *   },
-     *   filters?: array{availableBandwidth?: int|array{contains?: int}},
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape,
+     *   filters?: Filters|FiltersShape,
+     *   page?: Page|PageShape,
      * }|VirtualCrossConnectsCoverageListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<VirtualCrossConnectsCoverageListResponse,>,>
      *
@@ -46,7 +48,7 @@ final class VirtualCrossConnectsCoverageRawService implements VirtualCrossConnec
      */
     public function list(
         array|VirtualCrossConnectsCoverageListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = VirtualCrossConnectsCoverageListParams::parseRequest(
             $params,

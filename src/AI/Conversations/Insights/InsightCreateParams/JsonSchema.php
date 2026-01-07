@@ -12,7 +12,8 @@ use Telnyx\Core\Conversion\MapOf;
 /**
  * If specified, the output will follow the JSON schema.
  *
- * @phpstan-type JsonSchemaShape = string|array<string,mixed>
+ * @phpstan-type JsonSchemaVariants = string|array<string,mixed>
+ * @phpstan-type JsonSchemaShape = JsonSchemaVariants
  */
 final class JsonSchema implements ConverterSource
 {

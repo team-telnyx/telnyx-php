@@ -13,6 +13,9 @@ use Telnyx\InboundChannels\InboundChannelUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\InboundChannelsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class InboundChannelsRawService implements InboundChannelsRawContract
 {
     // @phpstan-ignore-next-line
@@ -27,6 +30,7 @@ final class InboundChannelsRawService implements InboundChannelsRawContract
      * Update the number of Voice Channels for the US Zone. This allows your account to handle multiple simultaneous inbound calls to US numbers. Use this endpoint to increase or decrease your capacity based on expected call volume.
      *
      * @param array{channels: int}|InboundChannelUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InboundChannelUpdateResponse>
      *
@@ -34,7 +38,7 @@ final class InboundChannelsRawService implements InboundChannelsRawContract
      */
     public function update(
         array|InboundChannelUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = InboundChannelUpdateParams::parseRequest(
             $params,
@@ -56,12 +60,15 @@ final class InboundChannelsRawService implements InboundChannelsRawContract
      *
      * Returns the US Zone voice channels for your account. voice channels allows you to use Channel Billing for calls to your Telnyx phone numbers. Please check the <a href="https://support.telnyx.com/en/articles/8428806-global-channel-billing">Telnyx Support Articles</a> section for full information and examples of how to utilize Channel Billing.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<InboundChannelListResponse>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse
-    {
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',

@@ -14,9 +14,16 @@ use Telnyx\UserAddresses\UserAddress;
 use Telnyx\UserAddresses\UserAddressCreateParams;
 use Telnyx\UserAddresses\UserAddressGetResponse;
 use Telnyx\UserAddresses\UserAddressListParams;
+use Telnyx\UserAddresses\UserAddressListParams\Filter;
+use Telnyx\UserAddresses\UserAddressListParams\Page;
 use Telnyx\UserAddresses\UserAddressListParams\Sort;
 use Telnyx\UserAddresses\UserAddressNewResponse;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\UserAddresses\UserAddressListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\UserAddresses\UserAddressListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class UserAddressesRawService implements UserAddressesRawContract
 {
     // @phpstan-ignore-next-line
@@ -46,6 +53,7 @@ final class UserAddressesRawService implements UserAddressesRawContract
      *   postalCode?: string,
      *   skipAddressVerification?: bool,
      * }|UserAddressCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UserAddressNewResponse>
      *
@@ -53,7 +61,7 @@ final class UserAddressesRawService implements UserAddressesRawContract
      */
     public function create(
         array|UserAddressCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = UserAddressCreateParams::parseRequest(
             $params,
@@ -76,6 +84,7 @@ final class UserAddressesRawService implements UserAddressesRawContract
      * Retrieves the details of an existing user address.
      *
      * @param string $id user address ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UserAddressGetResponse>
      *
@@ -83,7 +92,7 @@ final class UserAddressesRawService implements UserAddressesRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -100,13 +109,9 @@ final class UserAddressesRawService implements UserAddressesRawContract
      * Returns a list of your user addresses.
      *
      * @param array{
-     *   filter?: array{
-     *     customerReference?: array{contains?: string, eq?: string},
-     *     streetAddress?: array{contains?: string},
-     *   },
-     *   page?: array{number?: int, size?: int},
-     *   sort?: 'created_at'|'first_name'|'last_name'|'business_name'|'street_address'|Sort,
+     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|value-of<Sort>
      * }|UserAddressListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<UserAddress>>
      *
@@ -114,7 +119,7 @@ final class UserAddressesRawService implements UserAddressesRawContract
      */
     public function list(
         array|UserAddressListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = UserAddressListParams::parseRequest(
             $params,

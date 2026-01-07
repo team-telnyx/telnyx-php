@@ -13,6 +13,9 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ActionRequirementsRawContract
 {
     /**
@@ -20,6 +23,7 @@ interface ActionRequirementsRawContract
      *
      * @param string $portingOrderID The ID of the porting order
      * @param array<string,mixed>|ActionRequirementListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<ActionRequirementListResponse>>
      *
@@ -28,7 +32,7 @@ interface ActionRequirementsRawContract
     public function list(
         string $portingOrderID,
         array|ActionRequirementListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -36,6 +40,7 @@ interface ActionRequirementsRawContract
      *
      * @param string $id Path param: The ID of the action requirement
      * @param array<string,mixed>|ActionRequirementInitiateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionRequirementInitiateResponse>
      *
@@ -44,6 +49,6 @@ interface ActionRequirementsRawContract
     public function initiate(
         string $id,
         array|ActionRequirementInitiateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

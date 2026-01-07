@@ -13,6 +13,9 @@ use Telnyx\PortingOrders\Comments\CommentListResponse;
 use Telnyx\PortingOrders\Comments\CommentNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface CommentsRawContract
 {
     /**
@@ -20,6 +23,7 @@ interface CommentsRawContract
      *
      * @param string $id Porting Order id
      * @param array<string,mixed>|CommentCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CommentNewResponse>
      *
@@ -28,7 +32,7 @@ interface CommentsRawContract
     public function create(
         string $id,
         array|CommentCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -36,6 +40,7 @@ interface CommentsRawContract
      *
      * @param string $id Porting Order id
      * @param array<string,mixed>|CommentListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<CommentListResponse>>
      *
@@ -44,6 +49,6 @@ interface CommentsRawContract
     public function list(
         string $id,
         array|CommentListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

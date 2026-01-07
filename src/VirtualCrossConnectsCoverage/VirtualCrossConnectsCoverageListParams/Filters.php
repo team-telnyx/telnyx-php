@@ -12,6 +12,7 @@ use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\F
 /**
  * Consolidated filters parameter (deepObject style). Originally: filters[available_bandwidth][contains].
  *
+ * @phpstan-import-type AvailableBandwidthVariants from \Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filters\AvailableBandwidth
  * @phpstan-import-type AvailableBandwidthShape from \Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filters\AvailableBandwidth
  *
  * @phpstan-type FiltersShape = array{
@@ -25,6 +26,8 @@ final class Filters implements BaseModel
 
     /**
      * Filter by exact available bandwidth match.
+     *
+     * @var AvailableBandwidthVariants|null $availableBandwidth
      */
     #[Optional('available_bandwidth')]
     public int|Contains|null $availableBandwidth;

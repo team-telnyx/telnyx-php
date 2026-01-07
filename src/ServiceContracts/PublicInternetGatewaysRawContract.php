@@ -15,12 +15,16 @@ use Telnyx\PublicInternetGateways\PublicInternetGatewayListResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface PublicInternetGatewaysRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|PublicInternetGatewayCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PublicInternetGatewayNewResponse>
      *
@@ -28,13 +32,14 @@ interface PublicInternetGatewaysRawContract
      */
     public function create(
         array|PublicInternetGatewayCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PublicInternetGatewayGetResponse>
      *
@@ -42,13 +47,14 @@ interface PublicInternetGatewaysRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|PublicInternetGatewayListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PublicInternetGatewayListResponse>>
      *
@@ -56,13 +62,14 @@ interface PublicInternetGatewaysRawContract
      */
     public function list(
         array|PublicInternetGatewayListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PublicInternetGatewayDeleteResponse>
      *
@@ -70,6 +77,6 @@ interface PublicInternetGatewaysRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

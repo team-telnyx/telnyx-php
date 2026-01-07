@@ -14,12 +14,16 @@ use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportListParams;
 use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportListResponse;
 use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportNewResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface DetailRecordsReportsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|DetailRecordsReportCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DetailRecordsReportNewResponse>
      *
@@ -27,13 +31,14 @@ interface DetailRecordsReportsRawContract
      */
     public function create(
         array|DetailRecordsReportCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DetailRecordsReportGetResponse>
      *
@@ -41,13 +46,14 @@ interface DetailRecordsReportsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|DetailRecordsReportListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DetailRecordsReportListResponse>
      *
@@ -55,13 +61,14 @@ interface DetailRecordsReportsRawContract
      */
     public function list(
         array|DetailRecordsReportListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DetailRecordsReportDeleteResponse>
      *
@@ -69,6 +76,6 @@ interface DetailRecordsReportsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

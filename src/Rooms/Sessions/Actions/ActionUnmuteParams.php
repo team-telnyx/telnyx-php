@@ -16,6 +16,7 @@ use Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants\AllParticipant
  *
  * @see Telnyx\Services\Rooms\Sessions\ActionsService::unmute()
  *
+ * @phpstan-import-type ParticipantsVariants from \Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants
  * @phpstan-import-type ParticipantsShape from \Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants
  *
  * @phpstan-type ActionUnmuteParamsShape = array{
@@ -39,7 +40,7 @@ final class ActionUnmuteParams implements BaseModel
     /**
      * Either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant.
      *
-     * @var list<string>|value-of<AllParticipants>|null $participants
+     * @var ParticipantsVariants|null $participants
      */
     #[Optional(union: Participants::class)]
     public array|string|null $participants;

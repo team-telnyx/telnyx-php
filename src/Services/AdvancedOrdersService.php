@@ -16,6 +16,9 @@ use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AdvancedOrdersContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AdvancedOrdersService implements AdvancedOrdersContract
 {
     /**
@@ -36,9 +39,10 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
      *
      * Create Advanced Order
      *
-     * @param list<'sms'|'mms'|'voice'|'fax'|'emergency'|Feature> $features
-     * @param 'local'|'mobile'|'toll_free'|'shared_cost'|'national'|'landline'|PhoneNumberType $phoneNumberType
+     * @param list<Feature|value-of<Feature>> $features
+     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
      * @param string $requirementGroupID The ID of the requirement group to associate with this advanced order
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -48,10 +52,10 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
         string $countryCode = 'US',
         string $customerReference = '',
         ?array $features = null,
-        string|PhoneNumberType $phoneNumberType = 'local',
+        PhoneNumberType|string $phoneNumberType = 'local',
         int $quantity = 1,
         ?string $requirementGroupID = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AdvancedOrderNewResponse {
         $params = Util::removeNulls(
             [
@@ -77,11 +81,13 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
      *
      * Get Advanced Order
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $orderID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AdvancedOrderGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($orderID, requestOptions: $requestOptions);
@@ -94,10 +100,12 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
      *
      * List Advanced Orders
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AdvancedOrderListResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(requestOptions: $requestOptions);
@@ -110,9 +118,10 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
      *
      * Update Advanced Order
      *
-     * @param list<'sms'|'mms'|'voice'|'fax'|'emergency'|\Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\Feature> $features
-     * @param 'local'|'mobile'|'toll_free'|'shared_cost'|'national'|'landline'|\Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\PhoneNumberType $phoneNumberType
+     * @param list<\Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\Feature|value-of<\Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\Feature>> $features
+     * @param \Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\PhoneNumberType|value-of<\Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\PhoneNumberType> $phoneNumberType
      * @param string $requirementGroupID The ID of the requirement group to associate with this advanced order
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -123,10 +132,10 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
         string $countryCode = 'US',
         string $customerReference = '',
         ?array $features = null,
-        string|\Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\PhoneNumberType $phoneNumberType = 'local',
+        \Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\PhoneNumberType|string $phoneNumberType = 'local',
         int $quantity = 1,
         ?string $requirementGroupID = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AdvancedOrderUpdateRequirementGroupResponse {
         $params = Util::removeNulls(
             [

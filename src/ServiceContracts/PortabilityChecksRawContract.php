@@ -10,12 +10,16 @@ use Telnyx\PortabilityChecks\PortabilityCheckRunParams;
 use Telnyx\PortabilityChecks\PortabilityCheckRunResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface PortabilityChecksRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|PortabilityCheckRunParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PortabilityCheckRunResponse>
      *
@@ -23,6 +27,6 @@ interface PortabilityChecksRawContract
      */
     public function run(
         array|PortabilityCheckRunParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

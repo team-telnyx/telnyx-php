@@ -11,6 +11,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BalanceRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class BalanceRawService implements BalanceRawContract
 {
     // @phpstan-ignore-next-line
@@ -24,12 +27,14 @@ final class BalanceRawService implements BalanceRawContract
      *
      * Get user balance details
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<BalanceGetResponse>
      *
      * @throws APIException
      */
     public function retrieve(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

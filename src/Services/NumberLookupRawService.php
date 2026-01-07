@@ -13,6 +13,9 @@ use Telnyx\NumberLookup\NumberLookupRetrieveParams\Type;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumberLookupRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class NumberLookupRawService implements NumberLookupRawContract
 {
     // @phpstan-ignore-next-line
@@ -27,9 +30,8 @@ final class NumberLookupRawService implements NumberLookupRawContract
      * Returns information about the provided phone number.
      *
      * @param string $phoneNumber The phone number to be looked up
-     * @param array{
-     *   type?: 'carrier'|'caller-name'|Type
-     * }|NumberLookupRetrieveParams $params
+     * @param array{type?: Type|value-of<Type>}|NumberLookupRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NumberLookupGetResponse>
      *
@@ -38,7 +40,7 @@ final class NumberLookupRawService implements NumberLookupRawContract
     public function retrieve(
         string $phoneNumber,
         array|NumberLookupRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = NumberLookupRetrieveParams::parseRequest(
             $params,

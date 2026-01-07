@@ -17,6 +17,9 @@ use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportListParams;
 use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportListResponse;
 use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportNewResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class DetailRecordsReportsRawService implements DetailRecordsReportsRawContract
 {
     // @phpstan-ignore-next-line
@@ -33,6 +36,7 @@ final class DetailRecordsReportsRawService implements DetailRecordsReportsRawCon
      * @param array{
      *   endTime?: string, startTime?: string
      * }|DetailRecordsReportCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DetailRecordsReportNewResponse>
      *
@@ -40,7 +44,7 @@ final class DetailRecordsReportsRawService implements DetailRecordsReportsRawCon
      */
     public function create(
         array|DetailRecordsReportCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = DetailRecordsReportCreateParams::parseRequest(
             $params,
@@ -63,6 +67,7 @@ final class DetailRecordsReportsRawService implements DetailRecordsReportsRawCon
      * Returns one specific WDR report
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DetailRecordsReportGetResponse>
      *
@@ -70,7 +75,7 @@ final class DetailRecordsReportsRawService implements DetailRecordsReportsRawCon
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -89,6 +94,7 @@ final class DetailRecordsReportsRawService implements DetailRecordsReportsRawCon
      * @param array{
      *   pageNumber?: int, pageSize?: int
      * }|DetailRecordsReportListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DetailRecordsReportListResponse>
      *
@@ -96,7 +102,7 @@ final class DetailRecordsReportsRawService implements DetailRecordsReportsRawCon
      */
     public function list(
         array|DetailRecordsReportListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = DetailRecordsReportListParams::parseRequest(
             $params,
@@ -122,6 +128,7 @@ final class DetailRecordsReportsRawService implements DetailRecordsReportsRawCon
      * Deletes one specific WDR report.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DetailRecordsReportDeleteResponse>
      *
@@ -129,7 +136,7 @@ final class DetailRecordsReportsRawService implements DetailRecordsReportsRawCon
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

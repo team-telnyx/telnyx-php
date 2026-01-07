@@ -8,12 +8,21 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
-use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Filter\Type;
+use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest\CreateAndroidPushCredentialRequest;
+use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest\CreateIosPushCredentialRequest;
+use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Filter;
+use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Page;
 use Telnyx\MobilePushCredentials\PushCredential;
 use Telnyx\MobilePushCredentials\PushCredentialResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MobilePushCredentialsContract;
 
+/**
+ * @phpstan-import-type CreateMobilePushCredentialRequestShape from \Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest
+ * @phpstan-import-type FilterShape from \Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MobilePushCredentialsService implements MobilePushCredentialsContract
 {
     /**
@@ -34,13 +43,14 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
      *
      * Creates a new mobile push credential
      *
-     * @param array<string,mixed> $createMobilePushCredentialRequest
+     * @param CreateMobilePushCredentialRequestShape $createMobilePushCredentialRequest
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        array $createMobilePushCredentialRequest,
-        ?RequestOptions $requestOptions = null,
+        CreateIosPushCredentialRequest|array|CreateAndroidPushCredentialRequest $createMobilePushCredentialRequest,
+        RequestOptions|array|null $requestOptions = null,
     ): PushCredentialResponse {
         $params = Util::removeNulls(
             [
@@ -60,12 +70,13 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
      * Retrieves mobile push credential based on the given `push_credential_id`
      *
      * @param string $pushCredentialID The unique identifier of a mobile push credential
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $pushCredentialID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): PushCredentialResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($pushCredentialID, requestOptions: $requestOptions);
@@ -78,21 +89,18 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
      *
      * List mobile push credentials
      *
-     * @param array{
-     *   alias?: string, type?: 'ios'|'android'|Type
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[type], filter[alias]
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[type], filter[alias]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<PushCredential>
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null,
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
@@ -108,12 +116,13 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
      * Deletes a mobile push credential based on the given `push_credential_id`
      *
      * @param string $pushCredentialID The unique identifier of a mobile push credential
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $pushCredentialID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($pushCredentialID, requestOptions: $requestOptions);

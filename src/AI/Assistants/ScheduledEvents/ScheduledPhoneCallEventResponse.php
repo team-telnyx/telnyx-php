@@ -11,6 +11,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type ConversationMetadataVariants from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledPhoneCallEventResponse\ConversationMetadata
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledPhoneCallEventResponse\ConversationMetadata
  *
  * @phpstan-type ScheduledPhoneCallEventResponseShape = array{
@@ -56,7 +57,7 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
     #[Optional('conversation_id')]
     public ?string $conversationID;
 
-    /** @var array<string,string|int|bool>|null $conversationMetadata */
+    /** @var array<string,ConversationMetadataVariants>|null $conversationMetadata */
     #[Optional('conversation_metadata', map: ConversationMetadata::class)]
     public ?array $conversationMetadata;
 

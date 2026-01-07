@@ -12,12 +12,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface RunsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|RunListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<TestRunResponse>>
      *
@@ -26,13 +30,14 @@ interface RunsRawContract
     public function list(
         string $suiteName,
         array|RunListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|RunTriggerParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<TestRunResponse>>
      *
@@ -41,6 +46,6 @@ interface RunsRawContract
     public function trigger(
         string $suiteName,
         array|RunTriggerParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

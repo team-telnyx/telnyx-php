@@ -10,6 +10,9 @@ use Telnyx\SiprecConnectors\SiprecConnectorGetResponse;
 use Telnyx\SiprecConnectors\SiprecConnectorNewResponse;
 use Telnyx\SiprecConnectors\SiprecConnectorUpdateResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface SiprecConnectorsContract
 {
     /**
@@ -19,6 +22,7 @@ interface SiprecConnectorsContract
      * @param string $name name for the SIPREC connector resource
      * @param int $port port for the SIPREC SRS
      * @param string $appSubdomain subdomain to route the call when using Telnyx SRS (optional for non-Telnyx SRS)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -27,19 +31,20 @@ interface SiprecConnectorsContract
         string $name,
         int $port,
         ?string $appSubdomain = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): SiprecConnectorNewResponse;
 
     /**
      * @api
      *
      * @param string $connectorName uniquely identifies a SIPREC connector
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $connectorName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): SiprecConnectorGetResponse;
 
     /**
@@ -50,6 +55,7 @@ interface SiprecConnectorsContract
      * @param string $name name for the SIPREC connector resource
      * @param int $port port for the SIPREC SRS
      * @param string $appSubdomain subdomain to route the call when using Telnyx SRS (optional for non-Telnyx SRS)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -59,18 +65,19 @@ interface SiprecConnectorsContract
         string $name,
         int $port,
         ?string $appSubdomain = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): SiprecConnectorUpdateResponse;
 
     /**
      * @api
      *
      * @param string $connectorName uniquely identifies a SIPREC connector
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $connectorName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed;
 }

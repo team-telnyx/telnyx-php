@@ -12,6 +12,9 @@ use Telnyx\Storage\Buckets\SslCertificate\SslCertificateDeleteResponse;
 use Telnyx\Storage\Buckets\SslCertificate\SslCertificateGetResponse;
 use Telnyx\Storage\Buckets\SslCertificate\SslCertificateNewResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface SslCertificateRawContract
 {
     /**
@@ -19,6 +22,7 @@ interface SslCertificateRawContract
      *
      * @param string $bucketName The name of the bucket
      * @param array<string,mixed>|SslCertificateCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SslCertificateNewResponse>
      *
@@ -27,13 +31,14 @@ interface SslCertificateRawContract
     public function create(
         string $bucketName,
         array|SslCertificateCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $bucketName The name of the bucket
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SslCertificateGetResponse>
      *
@@ -41,13 +46,14 @@ interface SslCertificateRawContract
      */
     public function retrieve(
         string $bucketName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $bucketName Bucket Name
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SslCertificateDeleteResponse>
      *
@@ -55,6 +61,6 @@ interface SslCertificateRawContract
      */
     public function delete(
         string $bucketName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

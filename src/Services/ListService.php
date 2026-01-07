@@ -11,6 +11,9 @@ use Telnyx\List_\ListGetByZoneResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ListContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ListService implements ListContract
 {
     /**
@@ -31,10 +34,12 @@ final class ListService implements ListContract
      *
      * Retrieve a list of all phone numbers using Channel Billing, grouped by Zone.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieveAll(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ListGetAllResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveAll(requestOptions: $requestOptions);
@@ -48,12 +53,13 @@ final class ListService implements ListContract
      * Retrieve a list of phone numbers using Channel Billing for a specific Zone.
      *
      * @param string $channelZoneID Channel zone identifier
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieveByZone(
         string $channelZoneID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ListGetByZoneResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveByZone($channelZoneID, requestOptions: $requestOptions);

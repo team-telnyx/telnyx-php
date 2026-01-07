@@ -13,7 +13,7 @@ use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse\Call;
  * @phpstan-import-type CallShape from \Telnyx\Texml\Accounts\Calls\CallGetCallsResponse\Call
  *
  * @phpstan-type CallGetCallsResponseShape = array{
- *   calls?: list<CallShape>|null,
+ *   calls?: list<Call|CallShape>|null,
  *   end?: int|null,
  *   firstPageUri?: string|null,
  *   nextPageUri?: string|null,
@@ -84,7 +84,7 @@ final class CallGetCallsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<CallShape>|null $calls
+     * @param list<Call|CallShape>|null $calls
      */
     public static function with(
         ?array $calls = null,
@@ -111,7 +111,7 @@ final class CallGetCallsResponse implements BaseModel
     }
 
     /**
-     * @param list<CallShape> $calls
+     * @param list<Call|CallShape> $calls
      */
     public function withCalls(array $calls): self
     {

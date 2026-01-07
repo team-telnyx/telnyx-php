@@ -25,7 +25,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   name: string,
  *   url: string,
  *   bodyParameters?: null|BodyParameters|BodyParametersShape,
- *   headers?: list<HeaderShape>|null,
+ *   headers?: list<Header|HeaderShape>|null,
  *   method?: null|Method|value-of<Method>,
  *   pathParameters?: null|PathParameters|PathParametersShape,
  *   queryParameters?: null|QueryParameters|QueryParametersShape,
@@ -116,7 +116,7 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param BodyParameters|BodyParametersShape|null $bodyParameters
-     * @param list<HeaderShape>|null $headers
+     * @param list<Header|HeaderShape>|null $headers
      * @param Method|value-of<Method>|null $method
      * @param PathParameters|PathParametersShape|null $pathParameters
      * @param QueryParameters|QueryParametersShape|null $queryParameters
@@ -196,7 +196,7 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
     /**
      * The headers to be sent to the external tool.
      *
-     * @param list<HeaderShape> $headers
+     * @param list<Header|HeaderShape> $headers
      */
     public function withHeaders(array $headers): self
     {

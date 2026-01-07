@@ -13,13 +13,17 @@ use Telnyx\AI\Embeddings\EmbeddingSimilaritySearchResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface EmbeddingsContract
 {
     /**
      * @api
      *
-     * @param 'thenlper/gte-large'|'intfloat/multilingual-e5-large'|EmbeddingModel $embeddingModel supported models to vectorize and embed documents
-     * @param 'default'|'intercom'|Loader $loader supported types of custom document loaders for embeddings
+     * @param EmbeddingModel|value-of<EmbeddingModel> $embeddingModel supported models to vectorize and embed documents
+     * @param Loader|value-of<Loader> $loader supported types of custom document loaders for embeddings
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -27,35 +31,40 @@ interface EmbeddingsContract
         string $bucketName,
         int $documentChunkOverlapSize = 512,
         int $documentChunkSize = 1024,
-        string|EmbeddingModel $embeddingModel = 'thenlper/gte-large',
-        string|Loader $loader = 'default',
-        ?RequestOptions $requestOptions = null,
+        EmbeddingModel|string $embeddingModel = 'thenlper/gte-large',
+        Loader|string $loader = 'default',
+        RequestOptions|array|null $requestOptions = null,
     ): EmbeddingResponse;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $taskID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): EmbeddingGetResponse;
 
     /**
      * @api
      *
      * @param list<string> $status List of task statuses i.e. `status=queued&status=processing`
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function list(
         array $status = ['processing', 'queued'],
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): EmbeddingListResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -63,7 +72,7 @@ interface EmbeddingsContract
         string $bucketName,
         string $query,
         int $numOfDocs = 3,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): EmbeddingSimilaritySearchResponse;
 
     /**
@@ -71,12 +80,13 @@ interface EmbeddingsContract
      *
      * @param string $bucketName Name of the bucket to store the embeddings. This bucket must already exist.
      * @param string $url The URL of the webpage to embed
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function url(
         string $bucketName,
         string $url,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): EmbeddingResponse;
 }

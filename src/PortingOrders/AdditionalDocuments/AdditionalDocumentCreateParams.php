@@ -18,7 +18,7 @@ use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\Addi
  * @phpstan-import-type AdditionalDocumentShape from \Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\AdditionalDocument
  *
  * @phpstan-type AdditionalDocumentCreateParamsShape = array{
- *   additionalDocuments?: list<AdditionalDocumentShape>|null
+ *   additionalDocuments?: list<AdditionalDocument|AdditionalDocumentShape>|null
  * }
  */
 final class AdditionalDocumentCreateParams implements BaseModel
@@ -41,7 +41,7 @@ final class AdditionalDocumentCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AdditionalDocumentShape>|null $additionalDocuments
+     * @param list<AdditionalDocument|AdditionalDocumentShape>|null $additionalDocuments
      */
     public static function with(?array $additionalDocuments = null): self
     {
@@ -53,7 +53,7 @@ final class AdditionalDocumentCreateParams implements BaseModel
     }
 
     /**
-     * @param list<AdditionalDocumentShape> $additionalDocuments
+     * @param list<AdditionalDocument|AdditionalDocumentShape> $additionalDocuments
      */
     public function withAdditionalDocuments(array $additionalDocuments): self
     {

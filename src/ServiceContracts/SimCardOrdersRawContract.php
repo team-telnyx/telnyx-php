@@ -14,12 +14,16 @@ use Telnyx\SimCardOrders\SimCardOrderGetResponse;
 use Telnyx\SimCardOrders\SimCardOrderListParams;
 use Telnyx\SimCardOrders\SimCardOrderNewResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface SimCardOrdersRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|SimCardOrderCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardOrderNewResponse>
      *
@@ -27,13 +31,14 @@ interface SimCardOrdersRawContract
      */
     public function create(
         array|SimCardOrderCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardOrderGetResponse>
      *
@@ -41,13 +46,14 @@ interface SimCardOrdersRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|SimCardOrderListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<SimCardOrder>>
      *
@@ -55,6 +61,6 @@ interface SimCardOrdersRawContract
      */
     public function list(
         array|SimCardOrderListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

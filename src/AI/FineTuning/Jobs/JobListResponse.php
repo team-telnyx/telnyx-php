@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-import-type FineTuningJobShape from \Telnyx\AI\FineTuning\Jobs\FineTuningJob
  *
- * @phpstan-type JobListResponseShape = array{data: list<FineTuningJobShape>}
+ * @phpstan-type JobListResponseShape = array{
+ *   data: list<FineTuningJob|FineTuningJobShape>
+ * }
  */
 final class JobListResponse implements BaseModel
 {
@@ -46,7 +48,7 @@ final class JobListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<FineTuningJobShape> $data
+     * @param list<FineTuningJob|FineTuningJobShape> $data
      */
     public static function with(array $data): self
     {
@@ -58,7 +60,7 @@ final class JobListResponse implements BaseModel
     }
 
     /**
-     * @param list<FineTuningJobShape> $data
+     * @param list<FineTuningJob|FineTuningJobShape> $data
      */
     public function withData(array $data): self
     {

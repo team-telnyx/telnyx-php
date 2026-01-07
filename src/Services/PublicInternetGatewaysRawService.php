@@ -12,11 +12,18 @@ use Telnyx\PublicInternetGateways\PublicInternetGatewayCreateParams;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayDeleteResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayGetResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams;
+use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Filter;
+use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Page;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayListResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PublicInternetGatewaysRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class PublicInternetGatewaysRawService implements PublicInternetGatewaysRawContract
 {
     // @phpstan-ignore-next-line
@@ -33,6 +40,7 @@ final class PublicInternetGatewaysRawService implements PublicInternetGatewaysRa
      * @param array{
      *   name?: string, networkID?: string, regionCode?: string
      * }|PublicInternetGatewayCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PublicInternetGatewayNewResponse>
      *
@@ -40,7 +48,7 @@ final class PublicInternetGatewaysRawService implements PublicInternetGatewaysRa
      */
     public function create(
         array|PublicInternetGatewayCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PublicInternetGatewayCreateParams::parseRequest(
             $params,
@@ -63,6 +71,7 @@ final class PublicInternetGatewaysRawService implements PublicInternetGatewaysRa
      * Retrieve a Public Internet Gateway.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PublicInternetGatewayGetResponse>
      *
@@ -70,7 +79,7 @@ final class PublicInternetGatewaysRawService implements PublicInternetGatewaysRa
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -87,8 +96,9 @@ final class PublicInternetGatewaysRawService implements PublicInternetGatewaysRa
      * List all Public Internet Gateways.
      *
      * @param array{
-     *   filter?: array{networkID?: string}, page?: array{number?: int, size?: int}
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|PublicInternetGatewayListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PublicInternetGatewayListResponse>>
      *
@@ -96,7 +106,7 @@ final class PublicInternetGatewaysRawService implements PublicInternetGatewaysRa
      */
     public function list(
         array|PublicInternetGatewayListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PublicInternetGatewayListParams::parseRequest(
             $params,
@@ -120,6 +130,7 @@ final class PublicInternetGatewaysRawService implements PublicInternetGatewaysRa
      * Delete a Public Internet Gateway.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PublicInternetGatewayDeleteResponse>
      *
@@ -127,7 +138,7 @@ final class PublicInternetGatewaysRawService implements PublicInternetGatewaysRa
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

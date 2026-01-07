@@ -9,19 +9,23 @@ use Telnyx\NumberLookup\NumberLookupGetResponse;
 use Telnyx\NumberLookup\NumberLookupRetrieveParams\Type;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface NumberLookupContract
 {
     /**
      * @api
      *
      * @param string $phoneNumber The phone number to be looked up
-     * @param 'carrier'|'caller-name'|Type $type Specifies the type of number lookup to be performed
+     * @param Type|value-of<Type> $type Specifies the type of number lookup to be performed
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $phoneNumber,
-        string|Type|null $type = null,
-        ?RequestOptions $requestOptions = null,
+        Type|string|null $type = null,
+        RequestOptions|array|null $requestOptions = null,
     ): NumberLookupGetResponse;
 }

@@ -11,46 +11,54 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventCreateParams\ConversationMetadata
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ScheduledEventsContract
 {
     /**
      * @api
      *
-     * @param string|\DateTimeInterface $scheduledAtFixedDatetime The datetime at which the event should be scheduled. Formatted as ISO 8601.
+     * @param \DateTimeInterface $scheduledAtFixedDatetime The datetime at which the event should be scheduled. Formatted as ISO 8601.
      * @param string $telnyxAgentTarget the phone number, SIP URI, to schedule the call or text from
-     * @param 'phone_call'|'sms_chat'|ConversationChannelType $telnyxConversationChannel
+     * @param ConversationChannelType|value-of<ConversationChannelType> $telnyxConversationChannel
      * @param string $telnyxEndUserTarget the phone number, SIP URI, to schedule the call or text to
-     * @param array<string,string|int|bool> $conversationMetadata Metadata associated with the conversation. Telnyx provides several pieces of metadata, but customers can also add their own.
+     * @param array<string,ConversationMetadataShape> $conversationMetadata Metadata associated with the conversation. Telnyx provides several pieces of metadata, but customers can also add their own.
      * @param string $text Required for sms scheduled events. The text to be sent to the end user.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $assistantID,
-        string|\DateTimeInterface $scheduledAtFixedDatetime,
+        \DateTimeInterface $scheduledAtFixedDatetime,
         string $telnyxAgentTarget,
-        string|ConversationChannelType $telnyxConversationChannel,
+        ConversationChannelType|string $telnyxConversationChannel,
         string $telnyxEndUserTarget,
         ?array $conversationMetadata = null,
         ?string $text = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $eventID,
         string $assistantID,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse;
 
     /**
      * @api
      *
-     * @param 'phone_call'|'sms_chat'|ConversationChannelType $conversationChannel
+     * @param ConversationChannelType|value-of<ConversationChannelType> $conversationChannel
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse,>
      *
@@ -58,22 +66,24 @@ interface ScheduledEventsContract
      */
     public function list(
         string $assistantID,
-        string|ConversationChannelType|null $conversationChannel = null,
-        string|\DateTimeInterface|null $fromDate = null,
+        ConversationChannelType|string|null $conversationChannel = null,
+        ?\DateTimeInterface $fromDate = null,
         ?int $pageNumber = null,
         ?int $pageSize = null,
-        string|\DateTimeInterface|null $toDate = null,
-        ?RequestOptions $requestOptions = null,
+        ?\DateTimeInterface $toDate = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $eventID,
         string $assistantID,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed;
 }

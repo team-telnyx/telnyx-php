@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type RcsCapabilitiesShape from \Telnyx\Messaging\Rcs\RcsCapabilities
  *
  * @phpstan-type RcListBulkCapabilitiesResponseShape = array{
- *   data?: list<RcsCapabilitiesShape>|null
+ *   data?: list<RcsCapabilities|RcsCapabilitiesShape>|null
  * }
  */
 final class RcListBulkCapabilitiesResponse implements BaseModel
@@ -34,7 +34,7 @@ final class RcListBulkCapabilitiesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RcsCapabilitiesShape>|null $data
+     * @param list<RcsCapabilities|RcsCapabilitiesShape>|null $data
      */
     public static function with(?array $data = null): self
     {
@@ -46,7 +46,7 @@ final class RcListBulkCapabilitiesResponse implements BaseModel
     }
 
     /**
-     * @param list<RcsCapabilitiesShape> $data
+     * @param list<RcsCapabilities|RcsCapabilitiesShape> $data
      */
     public function withData(array $data): self
     {

@@ -10,12 +10,16 @@ use Telnyx\Messaging10dlc\Campaign\Usecase\UsecaseGetCostParams;
 use Telnyx\Messaging10dlc\Campaign\Usecase\UsecaseGetCostResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface UsecaseRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|UsecaseGetCostParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UsecaseGetCostResponse>
      *
@@ -23,6 +27,6 @@ interface UsecaseRawContract
      */
     public function getCost(
         array|UsecaseGetCostParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

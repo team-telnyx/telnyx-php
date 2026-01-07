@@ -13,7 +13,7 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse\Conferenc
  * @phpstan-import-type ConferenceShape from \Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse\Conference
  *
  * @phpstan-type ConferenceGetConferencesResponseShape = array{
- *   conferences?: list<ConferenceShape>|null,
+ *   conferences?: list<Conference|ConferenceShape>|null,
  *   end?: int|null,
  *   firstPageUri?: string|null,
  *   nextPageUri?: string|null,
@@ -84,7 +84,7 @@ final class ConferenceGetConferencesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ConferenceShape>|null $conferences
+     * @param list<Conference|ConferenceShape>|null $conferences
      */
     public static function with(
         ?array $conferences = null,
@@ -111,7 +111,7 @@ final class ConferenceGetConferencesResponse implements BaseModel
     }
 
     /**
-     * @param list<ConferenceShape> $conferences
+     * @param list<Conference|ConferenceShape> $conferences
      */
     public function withConferences(array $conferences): self
     {

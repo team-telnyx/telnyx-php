@@ -13,6 +13,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Actions\PurchaseRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class PurchaseRawService implements PurchaseRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,10 +34,11 @@ final class PurchaseRawService implements PurchaseRawContract
      *   amount: int,
      *   product?: string,
      *   simCardGroupID?: string,
-     *   status?: 'enabled'|'disabled'|'standby'|Status,
+     *   status?: Status|value-of<Status>,
      *   tags?: list<string>,
      *   whitelabelName?: string,
      * }|PurchaseCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PurchaseNewResponse>
      *
@@ -42,7 +46,7 @@ final class PurchaseRawService implements PurchaseRawContract
      */
     public function create(
         array|PurchaseCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PurchaseCreateParams::parseRequest(
             $params,

@@ -11,12 +11,16 @@ use Telnyx\InboundChannels\InboundChannelUpdateParams;
 use Telnyx\InboundChannels\InboundChannelUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface InboundChannelsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|InboundChannelUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InboundChannelUpdateResponse>
      *
@@ -24,15 +28,19 @@ interface InboundChannelsRawContract
      */
     public function update(
         array|InboundChannelUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<InboundChannelListResponse>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse;
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse;
 }

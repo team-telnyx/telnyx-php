@@ -10,6 +10,9 @@ use Telnyx\GlobalIPProtocols\GlobalIPProtocolListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPProtocolsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class GlobalIPProtocolsService implements GlobalIPProtocolsContract
 {
     /**
@@ -30,10 +33,12 @@ final class GlobalIPProtocolsService implements GlobalIPProtocolsContract
      *
      * List all Global IP Protocols
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): GlobalIPProtocolListResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(requestOptions: $requestOptions);

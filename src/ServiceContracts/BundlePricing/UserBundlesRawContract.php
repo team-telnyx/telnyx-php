@@ -21,12 +21,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface UserBundlesRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|UserBundleCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UserBundleNewResponse>
      *
@@ -34,7 +38,7 @@ interface UserBundlesRawContract
      */
     public function create(
         array|UserBundleCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -42,6 +46,7 @@ interface UserBundlesRawContract
      *
      * @param string $userBundleID user bundle's ID, this is used to identify the user bundle in the API
      * @param array<string,mixed>|UserBundleRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UserBundleGetResponse>
      *
@@ -50,13 +55,14 @@ interface UserBundlesRawContract
     public function retrieve(
         string $userBundleID,
         array|UserBundleRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|UserBundleListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<UserBundle>>
      *
@@ -64,7 +70,7 @@ interface UserBundlesRawContract
      */
     public function list(
         array|UserBundleListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -72,6 +78,7 @@ interface UserBundlesRawContract
      *
      * @param string $userBundleID user bundle's ID, this is used to identify the user bundle in the API
      * @param array<string,mixed>|UserBundleDeactivateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UserBundleDeactivateResponse>
      *
@@ -80,7 +87,7 @@ interface UserBundlesRawContract
     public function deactivate(
         string $userBundleID,
         array|UserBundleDeactivateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -88,6 +95,7 @@ interface UserBundlesRawContract
      *
      * @param string $userBundleID user bundle's ID, this is used to identify the user bundle in the API
      * @param array<string,mixed>|UserBundleListResourcesParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UserBundleListResourcesResponse>
      *
@@ -96,13 +104,14 @@ interface UserBundlesRawContract
     public function listResources(
         string $userBundleID,
         array|UserBundleListResourcesParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|UserBundleListUnusedParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UserBundleListUnusedResponse>
      *
@@ -110,6 +119,6 @@ interface UserBundlesRawContract
      */
     public function listUnused(
         array|UserBundleListUnusedParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

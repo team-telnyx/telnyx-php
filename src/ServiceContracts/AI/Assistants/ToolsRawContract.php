@@ -10,6 +10,9 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ToolsRawContract
 {
     /**
@@ -17,6 +20,7 @@ interface ToolsRawContract
      *
      * @param string $toolID Path param:
      * @param array<string,mixed>|ToolTestParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ToolTestResponse>
      *
@@ -25,6 +29,6 @@ interface ToolsRawContract
     public function test(
         string $toolID,
         array|ToolTestParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

@@ -22,7 +22,8 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type TransferToolShape from \Telnyx\AI\Assistants\TransferTool
  * @phpstan-import-type RetrievalToolShape from \Telnyx\AI\Assistants\RetrievalTool
  *
- * @phpstan-type ToolShape = BookAppointmentToolShape|CheckAvailabilityToolShape|WebhookToolShape|HangupToolShape|TransferToolShape|RetrievalToolShape
+ * @phpstan-type ToolVariants = BookAppointmentTool|CheckAvailabilityTool|WebhookTool|HangupTool|TransferTool|RetrievalTool
+ * @phpstan-type ToolShape = ToolVariants|BookAppointmentToolShape|CheckAvailabilityToolShape|WebhookToolShape|HangupToolShape|TransferToolShape|RetrievalToolShape
  */
 final class Tool implements ConverterSource
 {

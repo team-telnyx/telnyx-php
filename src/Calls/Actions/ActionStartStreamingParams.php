@@ -32,7 +32,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   enableDialogflow?: bool|null,
  *   streamBidirectionalCodec?: null|StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
  *   streamBidirectionalMode?: null|StreamBidirectionalMode|value-of<StreamBidirectionalMode>,
- *   streamBidirectionalSamplingRate?: null|8000|16000|22050|24000|48000,
+ *   streamBidirectionalSamplingRate?: null|StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate>,
  *   streamBidirectionalTargetLegs?: null|StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs>,
  *   streamCodec?: null|StreamCodec|value-of<StreamCodec>,
  *   streamTrack?: null|StreamTrack|value-of<StreamTrack>,
@@ -88,7 +88,7 @@ final class ActionStartStreamingParams implements BaseModel
     /**
      * Audio sampling rate.
      *
-     * @var 8000|16000|22050|24000|48000|null $streamBidirectionalSamplingRate
+     * @var value-of<StreamBidirectionalSamplingRate>|null $streamBidirectionalSamplingRate
      */
     #[Optional(
         'stream_bidirectional_sampling_rate',
@@ -142,7 +142,7 @@ final class ActionStartStreamingParams implements BaseModel
      * @param DialogflowConfig|DialogflowConfigShape|null $dialogflowConfig
      * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>|null $streamBidirectionalCodec
      * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode>|null $streamBidirectionalMode
-     * @param 8000|16000|22050|24000|48000|null $streamBidirectionalSamplingRate
+     * @param StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate>|null $streamBidirectionalSamplingRate
      * @param StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs>|null $streamBidirectionalTargetLegs
      * @param StreamCodec|value-of<StreamCodec>|null $streamCodec
      * @param StreamTrack|value-of<StreamTrack>|null $streamTrack
@@ -154,7 +154,7 @@ final class ActionStartStreamingParams implements BaseModel
         ?bool $enableDialogflow = null,
         StreamBidirectionalCodec|string|null $streamBidirectionalCodec = null,
         StreamBidirectionalMode|string|null $streamBidirectionalMode = null,
-        ?int $streamBidirectionalSamplingRate = null,
+        StreamBidirectionalSamplingRate|int|null $streamBidirectionalSamplingRate = null,
         StreamBidirectionalTargetLegs|string|null $streamBidirectionalTargetLegs = null,
         StreamCodec|string|null $streamCodec = null,
         StreamTrack|string|null $streamTrack = null,
@@ -253,10 +253,10 @@ final class ActionStartStreamingParams implements BaseModel
     /**
      * Audio sampling rate.
      *
-     * @param 8000|16000|22050|24000|48000 $streamBidirectionalSamplingRate
+     * @param StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate> $streamBidirectionalSamplingRate
      */
     public function withStreamBidirectionalSamplingRate(
-        int $streamBidirectionalSamplingRate
+        StreamBidirectionalSamplingRate|int $streamBidirectionalSamplingRate
     ): self {
         $self = clone $this;
         $self['streamBidirectionalSamplingRate'] = $streamBidirectionalSamplingRate;

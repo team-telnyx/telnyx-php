@@ -16,12 +16,16 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverage
 use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface CustomerServiceRecordsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|CustomerServiceRecordCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CustomerServiceRecordNewResponse>
      *
@@ -29,13 +33,14 @@ interface CustomerServiceRecordsRawContract
      */
     public function create(
         array|CustomerServiceRecordCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $customerServiceRecordID The ID of the customer service record
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CustomerServiceRecordGetResponse>
      *
@@ -43,13 +48,14 @@ interface CustomerServiceRecordsRawContract
      */
     public function retrieve(
         string $customerServiceRecordID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|CustomerServiceRecordListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<CustomerServiceRecord>>
      *
@@ -57,13 +63,14 @@ interface CustomerServiceRecordsRawContract
      */
     public function list(
         array|CustomerServiceRecordListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|CustomerServiceRecordVerifyPhoneNumberCoverageParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CustomerServiceRecordVerifyPhoneNumberCoverageResponse>
      *
@@ -71,6 +78,6 @@ interface CustomerServiceRecordsRawContract
      */
     public function verifyPhoneNumberCoverage(
         array|CustomerServiceRecordVerifyPhoneNumberCoverageParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

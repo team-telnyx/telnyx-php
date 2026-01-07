@@ -12,6 +12,9 @@ use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Addresses\ActionsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsService implements ActionsContract
 {
     /**
@@ -34,13 +37,14 @@ final class ActionsService implements ActionsContract
      *
      * @param string $addressUuid the UUID of the address that should be accepted
      * @param string $id the ID of the address
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function acceptSuggestions(
         string $addressUuid,
         ?string $id = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionAcceptSuggestionsResponse {
         $params = Util::removeNulls(['id' => $id]);
 
@@ -61,6 +65,7 @@ final class ActionsService implements ActionsContract
      * @param string $administrativeArea The locality of the address. For US addresses, this corresponds to the state of the address.
      * @param string $extendedAddress additional street address information about the address such as, but not limited to, unit number or apartment number
      * @param string $locality The locality of the address. For US addresses, this corresponds to the city of the address.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -71,7 +76,7 @@ final class ActionsService implements ActionsContract
         ?string $administrativeArea = null,
         ?string $extendedAddress = null,
         ?string $locality = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionValidateResponse {
         $params = Util::removeNulls(
             [

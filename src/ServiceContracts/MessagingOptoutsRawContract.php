@@ -11,12 +11,16 @@ use Telnyx\MessagingOptouts\MessagingOptoutListParams;
 use Telnyx\MessagingOptouts\MessagingOptoutListResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface MessagingOptoutsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|MessagingOptoutListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<MessagingOptoutListResponse>>
      *
@@ -24,6 +28,6 @@ interface MessagingOptoutsRawContract
      */
     public function list(
         array|MessagingOptoutListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

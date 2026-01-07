@@ -16,7 +16,7 @@ use Telnyx\MessagingPaginationMeta;
  * @phpstan-import-type MessagingPaginationMetaShape from \Telnyx\MessagingPaginationMeta
  *
  * @phpstan-type AutorespConfigListResponseShape = array{
- *   data: list<AutoRespConfigShape>,
+ *   data: list<AutoRespConfig|AutoRespConfigShape>,
  *   meta: MessagingPaginationMeta|MessagingPaginationMetaShape,
  * }
  */
@@ -56,7 +56,7 @@ final class AutorespConfigListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AutoRespConfigShape> $data
+     * @param list<AutoRespConfig|AutoRespConfigShape> $data
      * @param MessagingPaginationMeta|MessagingPaginationMetaShape $meta
      */
     public static function with(
@@ -72,7 +72,7 @@ final class AutorespConfigListResponse implements BaseModel
     }
 
     /**
-     * @param list<AutoRespConfigShape> $data
+     * @param list<AutoRespConfig|AutoRespConfigShape> $data
      */
     public function withData(array $data): self
     {

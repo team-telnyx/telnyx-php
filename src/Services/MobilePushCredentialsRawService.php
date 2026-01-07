@@ -10,12 +10,19 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListParams;
-use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Filter\Type;
+use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Filter;
+use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Page;
 use Telnyx\MobilePushCredentials\PushCredential;
 use Telnyx\MobilePushCredentials\PushCredentialResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MobilePushCredentialsRawContract;
 
+/**
+ * @phpstan-import-type CreateMobilePushCredentialRequestShape from \Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest
+ * @phpstan-import-type FilterShape from \Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MobilePushCredentialsRawService implements MobilePushCredentialsRawContract
 {
     // @phpstan-ignore-next-line
@@ -30,8 +37,9 @@ final class MobilePushCredentialsRawService implements MobilePushCredentialsRawC
      * Creates a new mobile push credential
      *
      * @param array{
-     *   createMobilePushCredentialRequest: array<string,mixed>
+     *   createMobilePushCredentialRequest: CreateMobilePushCredentialRequestShape
      * }|MobilePushCredentialCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PushCredentialResponse>
      *
@@ -39,7 +47,7 @@ final class MobilePushCredentialsRawService implements MobilePushCredentialsRawC
      */
     public function create(
         array|MobilePushCredentialCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MobilePushCredentialCreateParams::parseRequest(
             $params,
@@ -62,6 +70,7 @@ final class MobilePushCredentialsRawService implements MobilePushCredentialsRawC
      * Retrieves mobile push credential based on the given `push_credential_id`
      *
      * @param string $pushCredentialID The unique identifier of a mobile push credential
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PushCredentialResponse>
      *
@@ -69,7 +78,7 @@ final class MobilePushCredentialsRawService implements MobilePushCredentialsRawC
      */
     public function retrieve(
         string $pushCredentialID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -86,9 +95,9 @@ final class MobilePushCredentialsRawService implements MobilePushCredentialsRawC
      * List mobile push credentials
      *
      * @param array{
-     *   filter?: array{alias?: string, type?: 'ios'|'android'|Type},
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|MobilePushCredentialListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PushCredential>>
      *
@@ -96,7 +105,7 @@ final class MobilePushCredentialsRawService implements MobilePushCredentialsRawC
      */
     public function list(
         array|MobilePushCredentialListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MobilePushCredentialListParams::parseRequest(
             $params,
@@ -120,6 +129,7 @@ final class MobilePushCredentialsRawService implements MobilePushCredentialsRawC
      * Deletes a mobile push credential based on the given `push_credential_id`
      *
      * @param string $pushCredentialID The unique identifier of a mobile push credential
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -127,7 +137,7 @@ final class MobilePushCredentialsRawService implements MobilePushCredentialsRawC
      */
     public function delete(
         string $pushCredentialID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

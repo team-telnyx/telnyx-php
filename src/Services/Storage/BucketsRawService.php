@@ -12,6 +12,9 @@ use Telnyx\ServiceContracts\Storage\BucketsRawContract;
 use Telnyx\Storage\Buckets\BucketCreatePresignedURLParams;
 use Telnyx\Storage\Buckets\BucketNewPresignedURLResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class BucketsRawService implements BucketsRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,6 +34,7 @@ final class BucketsRawService implements BucketsRawContract
      * @param array{
      *   bucketName: string, ttl?: int
      * }|BucketCreatePresignedURLParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BucketNewPresignedURLResponse>
      *
@@ -39,7 +43,7 @@ final class BucketsRawService implements BucketsRawContract
     public function createPresignedURL(
         string $objectName,
         array|BucketCreatePresignedURLParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = BucketCreatePresignedURLParams::parseRequest(
             $params,

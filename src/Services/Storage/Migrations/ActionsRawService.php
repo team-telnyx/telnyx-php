@@ -11,6 +11,9 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\Migrations\ActionsRawContract;
 use Telnyx\Storage\Migrations\Actions\ActionStopResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsRawService implements ActionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -25,6 +28,7 @@ final class ActionsRawService implements ActionsRawContract
      * Stop a Migration
      *
      * @param string $id unique identifier for the data migration
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStopResponse>
      *
@@ -32,7 +36,7 @@ final class ActionsRawService implements ActionsRawContract
      */
     public function stop(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

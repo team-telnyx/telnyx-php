@@ -11,10 +11,17 @@ use Telnyx\DefaultPaginationForLogMessages;
 use Telnyx\ExternalConnections\LogMessages\LogMessageDismissResponse;
 use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListParams;
+use Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Filter;
+use Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Page;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ExternalConnections\LogMessagesRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class LogMessagesRawService implements LogMessagesRawContract
 {
     // @phpstan-ignore-next-line
@@ -29,6 +36,7 @@ final class LogMessagesRawService implements LogMessagesRawContract
      * Retrieve a log message for an external connection associated with your account.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<LogMessageGetResponse>
      *
@@ -36,7 +44,7 @@ final class LogMessagesRawService implements LogMessagesRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -53,12 +61,9 @@ final class LogMessagesRawService implements LogMessagesRawContract
      * Retrieve a list of log messages for all external connections associated with your account.
      *
      * @param array{
-     *   filter?: array{
-     *     externalConnectionID?: string,
-     *     telephoneNumber?: array{contains?: string, eq?: string},
-     *   },
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|LogMessageListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPaginationForLogMessages<LogMessageListResponse>>
      *
@@ -66,7 +71,7 @@ final class LogMessagesRawService implements LogMessagesRawContract
      */
     public function list(
         array|LogMessageListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = LogMessageListParams::parseRequest(
             $params,
@@ -90,6 +95,7 @@ final class LogMessagesRawService implements LogMessagesRawContract
      * Dismiss a log message for an external connection associated with your account.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<LogMessageDismissResponse>
      *
@@ -97,7 +103,7 @@ final class LogMessagesRawService implements LogMessagesRawContract
      */
     public function dismiss(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

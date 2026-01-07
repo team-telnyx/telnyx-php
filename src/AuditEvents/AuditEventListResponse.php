@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   alternateResourceID?: string|null,
  *   changeMadeBy?: null|ChangeMadeBy|value-of<ChangeMadeBy>,
  *   changeType?: string|null,
- *   changes?: list<ChangeShape>|null,
+ *   changes?: list<Change|ChangeShape>|null,
  *   createdAt?: \DateTimeInterface|null,
  *   organizationID?: string|null,
  *   recordType?: string|null,
@@ -106,7 +106,7 @@ final class AuditEventListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param ChangeMadeBy|value-of<ChangeMadeBy>|null $changeMadeBy
-     * @param list<ChangeShape>|null $changes
+     * @param list<Change|ChangeShape>|null $changes
      */
     public static function with(
         ?string $id = null,
@@ -185,7 +185,7 @@ final class AuditEventListResponse implements BaseModel
     /**
      * Details of the changes made to the resource.
      *
-     * @param list<ChangeShape>|null $changes
+     * @param list<Change|ChangeShape>|null $changes
      */
     public function withChanges(?array $changes): self
     {

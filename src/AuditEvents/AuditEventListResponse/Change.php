@@ -13,6 +13,8 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Details of the changes made to a resource.
  *
+ * @phpstan-import-type FromVariants from \Telnyx\AuditEvents\AuditEventListResponse\Change\From
+ * @phpstan-import-type ToVariants from \Telnyx\AuditEvents\AuditEventListResponse\Change\To
  * @phpstan-import-type FromShape from \Telnyx\AuditEvents\AuditEventListResponse\Change\From
  * @phpstan-import-type ToShape from \Telnyx\AuditEvents\AuditEventListResponse\Change\To
  *
@@ -34,7 +36,7 @@ final class Change implements BaseModel
     /**
      * The previous value of the field. Can be any JSON type.
      *
-     * @var string|float|bool|list<array<string,mixed>>|array<string,mixed>|null $from
+     * @var FromVariants|null $from
      */
     #[Optional(union: From::class, nullable: true)]
     public string|float|bool|array|null $from;
@@ -42,7 +44,7 @@ final class Change implements BaseModel
     /**
      * The new value of the field. Can be any JSON type.
      *
-     * @var string|float|bool|list<array<string,mixed>>|array<string,mixed>|null $to
+     * @var ToVariants|null $to
      */
     #[Optional(union: To::class, nullable: true)]
     public string|float|bool|array|null $to;

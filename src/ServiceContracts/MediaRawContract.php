@@ -15,12 +15,16 @@ use Telnyx\Media\MediaUploadParams;
 use Telnyx\Media\MediaUploadResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface MediaRawContract
 {
     /**
      * @api
      *
      * @param string $mediaName uniquely identifies a media resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MediaGetResponse>
      *
@@ -28,7 +32,7 @@ interface MediaRawContract
      */
     public function retrieve(
         string $mediaName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -36,6 +40,7 @@ interface MediaRawContract
      *
      * @param string $mediaName uniquely identifies a media resource
      * @param array<string,mixed>|MediaUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MediaUpdateResponse>
      *
@@ -44,13 +49,14 @@ interface MediaRawContract
     public function update(
         string $mediaName,
         array|MediaUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|MediaListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MediaListResponse>
      *
@@ -58,13 +64,14 @@ interface MediaRawContract
      */
     public function list(
         array|MediaListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $mediaName uniquely identifies a media resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -72,13 +79,14 @@ interface MediaRawContract
      */
     public function delete(
         string $mediaName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $mediaName uniquely identifies a media resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
      *
@@ -86,13 +94,14 @@ interface MediaRawContract
      */
     public function download(
         string $mediaName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|MediaUploadParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MediaUploadResponse>
      *
@@ -100,6 +109,6 @@ interface MediaRawContract
      */
     public function upload(
         array|MediaUploadParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

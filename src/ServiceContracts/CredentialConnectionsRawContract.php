@@ -17,12 +17,16 @@ use Telnyx\CredentialConnections\CredentialConnectionUpdateResponse;
 use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface CredentialConnectionsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|CredentialConnectionCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CredentialConnectionNewResponse>
      *
@@ -30,13 +34,14 @@ interface CredentialConnectionsRawContract
      */
     public function create(
         array|CredentialConnectionCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CredentialConnectionGetResponse>
      *
@@ -44,7 +49,7 @@ interface CredentialConnectionsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -52,6 +57,7 @@ interface CredentialConnectionsRawContract
      *
      * @param string $id identifies the resource
      * @param array<string,mixed>|CredentialConnectionUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CredentialConnectionUpdateResponse>
      *
@@ -60,13 +66,14 @@ interface CredentialConnectionsRawContract
     public function update(
         string $id,
         array|CredentialConnectionUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|CredentialConnectionListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<CredentialConnection>>
      *
@@ -74,13 +81,14 @@ interface CredentialConnectionsRawContract
      */
     public function list(
         array|CredentialConnectionListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CredentialConnectionDeleteResponse>
      *
@@ -88,6 +96,6 @@ interface CredentialConnectionsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

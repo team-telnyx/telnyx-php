@@ -16,6 +16,9 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\Tests\RunsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class RunsRawService implements RunsRawContract
 {
     // @phpstan-ignore-next-line
@@ -30,6 +33,7 @@ final class RunsRawService implements RunsRawContract
      * Retrieves detailed information about a specific test run execution
      *
      * @param array{testID: string}|RunRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TestRunResponse>
      *
@@ -38,7 +42,7 @@ final class RunsRawService implements RunsRawContract
     public function retrieve(
         string $runID,
         array|RunRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RunRetrieveParams::parseRequest(
             $params,
@@ -64,6 +68,7 @@ final class RunsRawService implements RunsRawContract
      * @param array{
      *   pageNumber?: int, pageSize?: int, status?: string
      * }|RunListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<TestRunResponse>>
      *
@@ -72,7 +77,7 @@ final class RunsRawService implements RunsRawContract
     public function list(
         string $testID,
         array|RunListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RunListParams::parseRequest(
             $params,
@@ -99,6 +104,7 @@ final class RunsRawService implements RunsRawContract
      * Initiates immediate execution of a specific assistant test
      *
      * @param array{destinationVersionID?: string}|RunTriggerParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TestRunResponse>
      *
@@ -107,7 +113,7 @@ final class RunsRawService implements RunsRawContract
     public function trigger(
         string $testID,
         array|RunTriggerParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RunTriggerParams::parseRequest(
             $params,

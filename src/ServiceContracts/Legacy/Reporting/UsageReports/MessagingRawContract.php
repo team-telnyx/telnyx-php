@@ -15,12 +15,16 @@ use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingNewResponse;
 use Telnyx\PerPagePagination;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface MessagingRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|MessagingCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingNewResponse>
      *
@@ -28,11 +32,13 @@ interface MessagingRawContract
      */
     public function create(
         array|MessagingCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingGetResponse>
      *
@@ -40,13 +46,14 @@ interface MessagingRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|MessagingListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PerPagePagination<MdrUsageReportResponseLegacy>>
      *
@@ -54,11 +61,13 @@ interface MessagingRawContract
      */
     public function list(
         array|MessagingListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingDeleteResponse>
      *
@@ -66,6 +75,6 @@ interface MessagingRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

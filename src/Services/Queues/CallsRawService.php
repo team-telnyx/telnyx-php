@@ -10,6 +10,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\Queues\Calls\CallGetResponse;
 use Telnyx\Queues\Calls\CallListParams;
+use Telnyx\Queues\Calls\CallListParams\Page;
 use Telnyx\Queues\Calls\CallListResponse;
 use Telnyx\Queues\Calls\CallRemoveParams;
 use Telnyx\Queues\Calls\CallRetrieveParams;
@@ -17,6 +18,10 @@ use Telnyx\Queues\Calls\CallUpdateParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Queues\CallsRawContract;
 
+/**
+ * @phpstan-import-type PageShape from \Telnyx\Queues\Calls\CallListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class CallsRawService implements CallsRawContract
 {
     // @phpstan-ignore-next-line
@@ -32,6 +37,7 @@ final class CallsRawService implements CallsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array{queueName: string}|CallRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallGetResponse>
      *
@@ -40,7 +46,7 @@ final class CallsRawService implements CallsRawContract
     public function retrieve(
         string $callControlID,
         array|CallRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CallRetrieveParams::parseRequest(
             $params,
@@ -65,6 +71,7 @@ final class CallsRawService implements CallsRawContract
      *
      * @param string $callControlID Path param: Unique identifier and token for controlling the call
      * @param array{queueName: string, keepAfterHangup?: bool}|CallUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -73,7 +80,7 @@ final class CallsRawService implements CallsRawContract
     public function update(
         string $callControlID,
         array|CallUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CallUpdateParams::parseRequest(
             $params,
@@ -98,11 +105,8 @@ final class CallsRawService implements CallsRawContract
      * Retrieve the list of calls in an existing queue
      *
      * @param string $queueName Uniquely identifies the queue by name
-     * @param array{
-     *   page?: array{
-     *     after?: string, before?: string, limit?: int, number?: int, size?: int
-     *   },
-     * }|CallListParams $params
+     * @param array{page?: Page|PageShape}|CallListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<CallListResponse>>
      *
@@ -111,7 +115,7 @@ final class CallsRawService implements CallsRawContract
     public function list(
         string $queueName,
         array|CallListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CallListParams::parseRequest(
             $params,
@@ -136,6 +140,7 @@ final class CallsRawService implements CallsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array{queueName: string}|CallRemoveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -144,7 +149,7 @@ final class CallsRawService implements CallsRawContract
     public function remove(
         string $callControlID,
         array|CallRemoveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CallRemoveParams::parseRequest(
             $params,

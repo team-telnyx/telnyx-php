@@ -8,9 +8,14 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyRetrieveParams\Filter;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPLatencyContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\GlobalIPLatency\GlobalIPLatencyRetrieveParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class GlobalIPLatencyService implements GlobalIPLatencyContract
 {
     /**
@@ -31,15 +36,14 @@ final class GlobalIPLatencyService implements GlobalIPLatencyContract
      *
      * Global IP Latency Metrics
      *
-     * @param array{
-     *   globalIPID?: string|array{in?: string}
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in]
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
-        ?array $filter = null,
-        ?RequestOptions $requestOptions = null
+        Filter|array|null $filter = null,
+        RequestOptions|array|null $requestOptions = null,
     ): GlobalIPLatencyGetResponse {
         $params = Util::removeNulls(['filter' => $filter]);
 

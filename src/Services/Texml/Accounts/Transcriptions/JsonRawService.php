@@ -13,6 +13,9 @@ use Telnyx\Texml\Accounts\Transcriptions\Json\JsonDeleteRecordingTranscriptionSi
 use Telnyx\Texml\Accounts\Transcriptions\Json\JsonGetRecordingTranscriptionSidJsonResponse;
 use Telnyx\Texml\Accounts\Transcriptions\Json\JsonRetrieveRecordingTranscriptionSidJsonParams;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class JsonRawService implements JsonRawContract
 {
     // @phpstan-ignore-next-line
@@ -30,6 +33,7 @@ final class JsonRawService implements JsonRawContract
      * @param array{
      *   accountSid: string
      * }|JsonDeleteRecordingTranscriptionSidJsonParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -38,7 +42,7 @@ final class JsonRawService implements JsonRawContract
     public function deleteRecordingTranscriptionSidJson(
         string $recordingTranscriptionSid,
         array|JsonDeleteRecordingTranscriptionSidJsonParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = JsonDeleteRecordingTranscriptionSidJsonParams::parseRequest(
             $params,
@@ -69,6 +73,7 @@ final class JsonRawService implements JsonRawContract
      * @param array{
      *   accountSid: string
      * }|JsonRetrieveRecordingTranscriptionSidJsonParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<JsonGetRecordingTranscriptionSidJsonResponse>
      *
@@ -77,7 +82,7 @@ final class JsonRawService implements JsonRawContract
     public function retrieveRecordingTranscriptionSidJson(
         string $recordingTranscriptionSid,
         array|JsonRetrieveRecordingTranscriptionSidJsonParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = JsonRetrieveRecordingTranscriptionSidJsonParams::parseRequest(
             $params,

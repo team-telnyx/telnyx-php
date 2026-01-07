@@ -49,7 +49,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams
  *   conferenceStatusCallbackEvent?: string|null,
  *   conferenceStatusCallbackMethod?: null|ConferenceStatusCallbackMethod|value-of<ConferenceStatusCallbackMethod>,
  *   conferenceTrim?: null|ConferenceTrim|value-of<ConferenceTrim>,
- *   customHeaders?: list<CustomHeaderShape>|null,
+ *   customHeaders?: list<CustomHeader|CustomHeaderShape>|null,
  *   earlyMedia?: bool|null,
  *   endConferenceOnExit?: bool|null,
  *   from?: string|null,
@@ -430,7 +430,7 @@ final class ParticipantParticipantsParams implements BaseModel
      * @param ConferenceRecordingStatusCallbackMethod|value-of<ConferenceRecordingStatusCallbackMethod>|null $conferenceRecordingStatusCallbackMethod
      * @param ConferenceStatusCallbackMethod|value-of<ConferenceStatusCallbackMethod>|null $conferenceStatusCallbackMethod
      * @param ConferenceTrim|value-of<ConferenceTrim>|null $conferenceTrim
-     * @param list<CustomHeaderShape>|null $customHeaders
+     * @param list<CustomHeader|CustomHeaderShape>|null $customHeaders
      * @param MachineDetection|value-of<MachineDetection>|null $machineDetection
      * @param RecordingChannels|value-of<RecordingChannels>|null $recordingChannels
      * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod>|null $recordingStatusCallbackMethod
@@ -763,7 +763,7 @@ final class ParticipantParticipantsParams implements BaseModel
     /**
      * Custom HTTP headers to be sent with the call. Each header should be an object with 'name' and 'value' properties.
      *
-     * @param list<CustomHeaderShape> $customHeaders
+     * @param list<CustomHeader|CustomHeaderShape> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {

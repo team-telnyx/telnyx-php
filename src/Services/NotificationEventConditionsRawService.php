@@ -9,11 +9,17 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListParams;
-use Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Filter\AssociatedRecordType\Eq;
+use Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Filter;
+use Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Page;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NotificationEventConditionsRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class NotificationEventConditionsRawService implements NotificationEventConditionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -28,20 +34,9 @@ final class NotificationEventConditionsRawService implements NotificationEventCo
      * Returns a list of your notifications events conditions.
      *
      * @param array{
-     *   filter?: array{
-     *     associatedRecordType?: array{eq?: 'account'|'phone_number'|Eq},
-     *     channelTypeID?: array{
-     *       eq?: 'webhook'|'sms'|'email'|'voice'|NotificationEventConditionListParams\Filter\ChannelTypeID\Eq,
-     *     },
-     *     notificationChannel?: array{eq?: string},
-     *     notificationEventConditionID?: array{eq?: string},
-     *     notificationProfileID?: array{eq?: string},
-     *     status?: array{
-     *       eq?: 'enabled'|'enable-received'|'enable-pending'|'enable-submtited'|'delete-received'|'delete-pending'|'delete-submitted'|'deleted'|NotificationEventConditionListParams\Filter\Status\Eq,
-     *     },
-     *   },
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|NotificationEventConditionListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<NotificationEventConditionListResponse>>
      *
@@ -49,7 +44,7 @@ final class NotificationEventConditionsRawService implements NotificationEventCo
      */
     public function list(
         array|NotificationEventConditionListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = NotificationEventConditionListParams::parseRequest(
             $params,

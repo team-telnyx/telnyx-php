@@ -14,7 +14,8 @@ use Telnyx\ExternalConnections\Uploads\UploadCreateParams\AdditionalUsage;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams\Usage;
 use Telnyx\ExternalConnections\Uploads\UploadGetResponse;
 use Telnyx\ExternalConnections\Uploads\UploadListParams;
-use Telnyx\ExternalConnections\Uploads\UploadListParams\Filter\Status\Eq;
+use Telnyx\ExternalConnections\Uploads\UploadListParams\Filter;
+use Telnyx\ExternalConnections\Uploads\UploadListParams\Page;
 use Telnyx\ExternalConnections\Uploads\UploadNewResponse;
 use Telnyx\ExternalConnections\Uploads\UploadPendingCountResponse;
 use Telnyx\ExternalConnections\Uploads\UploadRefreshStatusResponse;
@@ -24,6 +25,11 @@ use Telnyx\ExternalConnections\Uploads\UploadRetryResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ExternalConnections\UploadsRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\ExternalConnections\Uploads\UploadListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\ExternalConnections\Uploads\UploadListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class UploadsRawService implements UploadsRawContract
 {
     // @phpstan-ignore-next-line
@@ -40,11 +46,12 @@ final class UploadsRawService implements UploadsRawContract
      * @param string $id identifies the resource
      * @param array{
      *   numberIDs: list<string>,
-     *   additionalUsages?: list<'calling_user_assignment'|'first_party_app_assignment'|AdditionalUsage>,
+     *   additionalUsages?: list<AdditionalUsage|value-of<AdditionalUsage>>,
      *   civicAddressID?: string,
      *   locationID?: string,
-     *   usage?: 'calling_user_assignment'|'first_party_app_assignment'|Usage,
+     *   usage?: Usage|value-of<Usage>,
      * }|UploadCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UploadNewResponse>
      *
@@ -53,7 +60,7 @@ final class UploadsRawService implements UploadsRawContract
     public function create(
         string $id,
         array|UploadCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = UploadCreateParams::parseRequest(
             $params,
@@ -77,6 +84,7 @@ final class UploadsRawService implements UploadsRawContract
      *
      * @param string $ticketID Identifies an Upload request
      * @param array{id: string}|UploadRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UploadGetResponse>
      *
@@ -85,7 +93,7 @@ final class UploadsRawService implements UploadsRawContract
     public function retrieve(
         string $ticketID,
         array|UploadRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = UploadRetrieveParams::parseRequest(
             $params,
@@ -110,16 +118,9 @@ final class UploadsRawService implements UploadsRawContract
      *
      * @param string $id identifies the resource
      * @param array{
-     *   filter?: array{
-     *     civicAddressID?: array{eq?: string},
-     *     locationID?: array{eq?: string},
-     *     phoneNumber?: array{contains?: string, eq?: string},
-     *     status?: array{
-     *       eq?: list<'pending_upload'|'pending'|'in_progress'|'success'|'error'|Eq>
-     *     },
-     *   },
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|UploadListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<Upload>>
      *
@@ -128,7 +129,7 @@ final class UploadsRawService implements UploadsRawContract
     public function list(
         string $id,
         array|UploadListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = UploadListParams::parseRequest(
             $params,
@@ -152,6 +153,7 @@ final class UploadsRawService implements UploadsRawContract
      * Returns the count of all pending upload requests for the given external connection.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UploadPendingCountResponse>
      *
@@ -159,7 +161,7 @@ final class UploadsRawService implements UploadsRawContract
      */
     public function pendingCount(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -176,6 +178,7 @@ final class UploadsRawService implements UploadsRawContract
      * Forces a recheck of the status of all pending Upload requests for the given external connection in the background.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UploadRefreshStatusResponse>
      *
@@ -183,7 +186,7 @@ final class UploadsRawService implements UploadsRawContract
      */
     public function refreshStatus(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -201,6 +204,7 @@ final class UploadsRawService implements UploadsRawContract
      *
      * @param string $ticketID Identifies an Upload request
      * @param array{id: string}|UploadRetryParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UploadRetryResponse>
      *
@@ -209,7 +213,7 @@ final class UploadsRawService implements UploadsRawContract
     public function retry(
         string $ticketID,
         array|UploadRetryParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = UploadRetryParams::parseRequest(
             $params,

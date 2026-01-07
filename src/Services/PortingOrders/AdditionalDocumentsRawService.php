@@ -9,15 +9,24 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams;
-use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\AdditionalDocument\DocumentType;
+use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\AdditionalDocument;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentDeleteParams;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams;
-use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Sort\Value;
+use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Filter;
+use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Page;
+use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Sort;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListResponse;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\AdditionalDocumentsRawContract;
 
+/**
+ * @phpstan-import-type AdditionalDocumentShape from \Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\AdditionalDocument
+ * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Page
+ * @phpstan-import-type SortShape from \Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Sort
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AdditionalDocumentsRawService implements AdditionalDocumentsRawContract
 {
     // @phpstan-ignore-next-line
@@ -33,11 +42,9 @@ final class AdditionalDocumentsRawService implements AdditionalDocumentsRawContr
      *
      * @param string $id Porting Order id
      * @param array{
-     *   additionalDocuments?: list<array{
-     *     documentID?: string,
-     *     documentType?: 'loa'|'invoice'|'csr'|'other'|DocumentType,
-     *   }>,
+     *   additionalDocuments?: list<AdditionalDocument|AdditionalDocumentShape>
      * }|AdditionalDocumentCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AdditionalDocumentNewResponse>
      *
@@ -46,7 +53,7 @@ final class AdditionalDocumentsRawService implements AdditionalDocumentsRawContr
     public function create(
         string $id,
         array|AdditionalDocumentCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AdditionalDocumentCreateParams::parseRequest(
             $params,
@@ -70,12 +77,9 @@ final class AdditionalDocumentsRawService implements AdditionalDocumentsRawContr
      *
      * @param string $id Porting Order id
      * @param array{
-     *   filter?: array{
-     *     documentType?: list<'loa'|'invoice'|'csr'|'other'|AdditionalDocumentListParams\Filter\DocumentType>,
-     *   },
-     *   page?: array{number?: int, size?: int},
-     *   sort?: array{value?: 'created_at'|'-created_at'|Value},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|SortShape
      * }|AdditionalDocumentListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<AdditionalDocumentListResponse>>
      *
@@ -84,7 +88,7 @@ final class AdditionalDocumentsRawService implements AdditionalDocumentsRawContr
     public function list(
         string $id,
         array|AdditionalDocumentListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AdditionalDocumentListParams::parseRequest(
             $params,
@@ -109,6 +113,7 @@ final class AdditionalDocumentsRawService implements AdditionalDocumentsRawContr
      *
      * @param string $additionalDocumentID additional document identification
      * @param array{id: string}|AdditionalDocumentDeleteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -117,7 +122,7 @@ final class AdditionalDocumentsRawService implements AdditionalDocumentsRawContr
     public function delete(
         string $additionalDocumentID,
         array|AdditionalDocumentDeleteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AdditionalDocumentDeleteParams::parseRequest(
             $params,

@@ -13,7 +13,8 @@ use Telnyx\Core\Conversion\ListOf;
 /**
  * @phpstan-import-type TextAndImageArrayShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Content\TextAndImageArray
  *
- * @phpstan-type ContentShape = string|list<TextAndImageArrayShape>
+ * @phpstan-type ContentVariants = string|list<TextAndImageArray>
+ * @phpstan-type ContentShape = ContentVariants|list<TextAndImageArrayShape>
  */
 final class Content implements ConverterSource
 {

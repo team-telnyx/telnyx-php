@@ -11,12 +11,16 @@ use Telnyx\NetworkCoverage\NetworkCoverageListParams;
 use Telnyx\NetworkCoverage\NetworkCoverageListResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface NetworkCoverageRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|NetworkCoverageListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<NetworkCoverageListResponse>>
      *
@@ -24,6 +28,6 @@ interface NetworkCoverageRawContract
      */
     public function list(
         array|NetworkCoverageListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

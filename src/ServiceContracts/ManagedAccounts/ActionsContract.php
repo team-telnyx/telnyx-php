@@ -9,18 +9,22 @@ use Telnyx\ManagedAccounts\Actions\ActionDisableResponse;
 use Telnyx\ManagedAccounts\Actions\ActionEnableResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ActionsContract
 {
     /**
      * @api
      *
      * @param string $id Managed Account User ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function disable(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ActionDisableResponse;
 
     /**
@@ -28,12 +32,13 @@ interface ActionsContract
      *
      * @param string $id Managed Account User ID
      * @param bool $reenableAllConnections When true, all connections owned by this managed account will automatically be re-enabled. Note: Any connections that do not pass validations will not be re-enabled.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function enable(
         string $id,
         bool $reenableAllConnections = false,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionEnableResponse;
 }

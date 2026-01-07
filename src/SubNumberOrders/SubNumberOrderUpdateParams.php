@@ -18,7 +18,7 @@ use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
  * @phpstan-import-type UpdateRegulatoryRequirementShape from \Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement
  *
  * @phpstan-type SubNumberOrderUpdateParamsShape = array{
- *   regulatoryRequirements?: list<UpdateRegulatoryRequirementShape>|null
+ *   regulatoryRequirements?: list<UpdateRegulatoryRequirement|UpdateRegulatoryRequirementShape>|null,
  * }
  */
 final class SubNumberOrderUpdateParams implements BaseModel
@@ -44,7 +44,7 @@ final class SubNumberOrderUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<UpdateRegulatoryRequirementShape>|null $regulatoryRequirements
+     * @param list<UpdateRegulatoryRequirement|UpdateRegulatoryRequirementShape>|null $regulatoryRequirements
      */
     public static function with(?array $regulatoryRequirements = null): self
     {
@@ -56,7 +56,7 @@ final class SubNumberOrderUpdateParams implements BaseModel
     }
 
     /**
-     * @param list<UpdateRegulatoryRequirementShape> $regulatoryRequirements
+     * @param list<UpdateRegulatoryRequirement|UpdateRegulatoryRequirementShape> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements

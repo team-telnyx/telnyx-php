@@ -23,6 +23,11 @@ use Telnyx\MessagingTollfree\Verification\Requests\Volume;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingTollfree\Verification\RequestsRawContract;
 
+/**
+ * @phpstan-import-type URLShape from \Telnyx\MessagingTollfree\Verification\Requests\URL
+ * @phpstan-import-type TfPhoneNumberShape from \Telnyx\MessagingTollfree\Verification\Requests\TfPhoneNumber
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class RequestsRawService implements RequestsRawContract
 {
     // @phpstan-ignore-next-line
@@ -51,8 +56,8 @@ final class RequestsRawService implements RequestsRawContract
      *   isvReseller: string,
      *   messageVolume: value-of<Volume>,
      *   optInWorkflow: string,
-     *   optInWorkflowImageURLs: list<array{url: string}|URL>,
-     *   phoneNumbers: list<array{phoneNumber: string}|TfPhoneNumber>,
+     *   optInWorkflowImageURLs: list<URL|URLShape>,
+     *   phoneNumbers: list<TfPhoneNumber|TfPhoneNumberShape>,
      *   productionMessageContent: string,
      *   useCase: value-of<UseCaseCategories>,
      *   useCaseSummary: string,
@@ -62,7 +67,7 @@ final class RequestsRawService implements RequestsRawContract
      *   businessRegistrationNumber?: string|null,
      *   businessRegistrationType?: string|null,
      *   doingBusinessAs?: string|null,
-     *   entityType?: 'SOLE_PROPRIETOR'|'PRIVATE_PROFIT'|'PUBLIC_PROFIT'|'NON_PROFIT'|'GOVERNMENT'|TollFreeVerificationEntityType|null,
+     *   entityType?: TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null,
      *   helpMessageResponse?: string|null,
      *   optInConfirmationResponse?: string|null,
      *   optInKeywords?: string|null,
@@ -70,6 +75,7 @@ final class RequestsRawService implements RequestsRawContract
      *   termsAndConditionURL?: string|null,
      *   webhookURL?: string,
      * }|RequestCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VerificationRequestEgress>
      *
@@ -77,7 +83,7 @@ final class RequestsRawService implements RequestsRawContract
      */
     public function create(
         array|RequestCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RequestCreateParams::parseRequest(
             $params,
@@ -99,13 +105,15 @@ final class RequestsRawService implements RequestsRawContract
      *
      * Get a single verification request by its ID.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<VerificationRequestStatus>
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -136,8 +144,8 @@ final class RequestsRawService implements RequestsRawContract
      *   isvReseller: string,
      *   messageVolume: value-of<Volume>,
      *   optInWorkflow: string,
-     *   optInWorkflowImageURLs: list<array{url: string}|URL>,
-     *   phoneNumbers: list<array{phoneNumber: string}|TfPhoneNumber>,
+     *   optInWorkflowImageURLs: list<URL|URLShape>,
+     *   phoneNumbers: list<TfPhoneNumber|TfPhoneNumberShape>,
      *   productionMessageContent: string,
      *   useCase: value-of<UseCaseCategories>,
      *   useCaseSummary: string,
@@ -147,7 +155,7 @@ final class RequestsRawService implements RequestsRawContract
      *   businessRegistrationNumber?: string|null,
      *   businessRegistrationType?: string|null,
      *   doingBusinessAs?: string|null,
-     *   entityType?: 'SOLE_PROPRIETOR'|'PRIVATE_PROFIT'|'PUBLIC_PROFIT'|'NON_PROFIT'|'GOVERNMENT'|TollFreeVerificationEntityType|null,
+     *   entityType?: TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null,
      *   helpMessageResponse?: string|null,
      *   optInConfirmationResponse?: string|null,
      *   optInKeywords?: string|null,
@@ -155,6 +163,7 @@ final class RequestsRawService implements RequestsRawContract
      *   termsAndConditionURL?: string|null,
      *   webhookURL?: string,
      * }|RequestUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VerificationRequestEgress>
      *
@@ -163,7 +172,7 @@ final class RequestsRawService implements RequestsRawContract
     public function update(
         string $id,
         array|RequestUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RequestUpdateParams::parseRequest(
             $params,
@@ -188,11 +197,12 @@ final class RequestsRawService implements RequestsRawContract
      * @param array{
      *   page: int,
      *   pageSize: int,
-     *   dateEnd?: string|\DateTimeInterface,
-     *   dateStart?: string|\DateTimeInterface,
+     *   dateEnd?: \DateTimeInterface,
+     *   dateStart?: \DateTimeInterface,
      *   phoneNumber?: string,
      *   status?: value-of<TfVerificationStatus>,
      * }|RequestListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPaginationForMessagingTollfree<VerificationRequestStatus,>,>
      *
@@ -200,7 +210,7 @@ final class RequestsRawService implements RequestsRawContract
      */
     public function list(
         array|RequestListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RequestListParams::parseRequest(
             $params,
@@ -237,13 +247,15 @@ final class RequestsRawService implements RequestsRawContract
      * * `HTTP 400`: request exists but can't be deleted (i.e. not rejected)
      * * `HTTP 404`: request unknown or already deleted
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<mixed>
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

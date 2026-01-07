@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\Services\AI\Assistants;
 
 use Telnyx\AI\Assistants\AssistantsList;
-use Telnyx\AI\Assistants\AssistantTool;
 use Telnyx\AI\Assistants\EnabledFeatures;
 use Telnyx\AI\Assistants\InferenceEmbedding;
 use Telnyx\AI\Assistants\InsightSettings;
@@ -13,8 +12,6 @@ use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
-use Telnyx\AI\Assistants\TranscriptionSettings\Model;
-use Telnyx\AI\Assistants\TranscriptionSettingsConfig;
 use Telnyx\AI\Assistants\Versions\VersionDeleteParams;
 use Telnyx\AI\Assistants\Versions\VersionPromoteParams;
 use Telnyx\AI\Assistants\Versions\VersionRetrieveParams;
@@ -27,6 +24,16 @@ use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\VersionsRawContract;
 
+/**
+ * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
+ * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
+ * @phpstan-import-type PrivacySettingsShape from \Telnyx\AI\Assistants\PrivacySettings
+ * @phpstan-import-type TelephonySettingsShape from \Telnyx\AI\Assistants\TelephonySettings
+ * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
+ * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\AI\Assistants\VoiceSettings
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class VersionsRawService implements VersionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -44,6 +51,7 @@ final class VersionsRawService implements VersionsRawContract
      * @param array{
      *   assistantID: string, includeMcpServers?: bool
      * }|VersionRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InferenceEmbedding>
      *
@@ -52,7 +60,7 @@ final class VersionsRawService implements VersionsRawContract
     public function retrieve(
         string $versionID,
         array|VersionRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = VersionRetrieveParams::parseRequest(
             $params,
@@ -85,34 +93,21 @@ final class VersionsRawService implements VersionsRawContract
      *   description?: string,
      *   dynamicVariables?: array<string,mixed>,
      *   dynamicVariablesWebhookURL?: string,
-     *   enabledFeatures?: list<'telephony'|'messaging'|EnabledFeatures>,
+     *   enabledFeatures?: list<EnabledFeatures|value-of<EnabledFeatures>>,
      *   greeting?: string,
-     *   insightSettings?: array{insightGroupID?: string}|InsightSettings,
+     *   insightSettings?: InsightSettings|InsightSettingsShape,
      *   instructions?: string,
      *   llmAPIKeyRef?: string,
-     *   messagingSettings?: array{
-     *     defaultMessagingProfileID?: string, deliveryStatusWebhookURL?: string
-     *   }|MessagingSettings,
+     *   messagingSettings?: MessagingSettings|MessagingSettingsShape,
      *   model?: string,
      *   name?: string,
-     *   privacySettings?: array{dataRetention?: bool}|PrivacySettings,
-     *   telephonySettings?: array{
-     *     defaultTexmlAppID?: string, supportsUnauthenticatedWebCalls?: bool
-     *   }|TelephonySettings,
-     *   tools?: list<AssistantTool|array<string,mixed>>,
-     *   transcription?: array{
-     *     language?: string,
-     *     model?: 'deepgram/flux'|'deepgram/nova-3'|'deepgram/nova-2'|'azure/fast'|'distil-whisper/distil-large-v2'|'openai/whisper-large-v3-turbo'|Model,
-     *     region?: string,
-     *     settings?: array<string,mixed>|TranscriptionSettingsConfig,
-     *   }|TranscriptionSettings,
-     *   voiceSettings?: array{
-     *     voice: string,
-     *     apiKeyRef?: string,
-     *     backgroundAudio?: array<string,mixed>,
-     *     voiceSpeed?: float,
-     *   }|VoiceSettings,
+     *   privacySettings?: PrivacySettings|PrivacySettingsShape,
+     *   telephonySettings?: TelephonySettings|TelephonySettingsShape,
+     *   tools?: list<AssistantToolShape>,
+     *   transcription?: TranscriptionSettings|TranscriptionSettingsShape,
+     *   voiceSettings?: VoiceSettings|VoiceSettingsShape,
      * }|VersionUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InferenceEmbedding>
      *
@@ -121,7 +116,7 @@ final class VersionsRawService implements VersionsRawContract
     public function update(
         string $versionID,
         array|VersionUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = VersionUpdateParams::parseRequest(
             $params,
@@ -145,13 +140,15 @@ final class VersionsRawService implements VersionsRawContract
      *
      * Retrieves all versions of a specific assistant with complete configuration and metadata
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<AssistantsList>
      *
      * @throws APIException
      */
     public function list(
         string $assistantID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -168,6 +165,7 @@ final class VersionsRawService implements VersionsRawContract
      * Permanently removes a specific version of an assistant. Can not delete main version
      *
      * @param array{assistantID: string}|VersionDeleteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -176,7 +174,7 @@ final class VersionsRawService implements VersionsRawContract
     public function delete(
         string $versionID,
         array|VersionDeleteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = VersionDeleteParams::parseRequest(
             $params,
@@ -200,6 +198,7 @@ final class VersionsRawService implements VersionsRawContract
      * Promotes a specific version to be the main/current version of the assistant. This will delete any existing canary deploy configuration and send all live production traffic to this version.
      *
      * @param array{assistantID: string}|VersionPromoteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InferenceEmbedding>
      *
@@ -208,7 +207,7 @@ final class VersionsRawService implements VersionsRawContract
     public function promote(
         string $versionID,
         array|VersionPromoteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = VersionPromoteParams::parseRequest(
             $params,

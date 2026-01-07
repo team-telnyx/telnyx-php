@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type VerifyProfileMessageTemplateResponseShape from \Telnyx\VerifyProfiles\VerifyProfileMessageTemplateResponse
  *
  * @phpstan-type VerifyProfileGetTemplatesResponseShape = array{
- *   data: list<VerifyProfileMessageTemplateResponseShape>
+ *   data: list<VerifyProfileMessageTemplateResponse|VerifyProfileMessageTemplateResponseShape>,
  * }
  */
 final class VerifyProfileGetTemplatesResponse implements BaseModel
@@ -50,7 +50,7 @@ final class VerifyProfileGetTemplatesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VerifyProfileMessageTemplateResponseShape> $data
+     * @param list<VerifyProfileMessageTemplateResponse|VerifyProfileMessageTemplateResponseShape> $data
      */
     public static function with(array $data): self
     {
@@ -62,7 +62,7 @@ final class VerifyProfileGetTemplatesResponse implements BaseModel
     }
 
     /**
-     * @param list<VerifyProfileMessageTemplateResponseShape> $data
+     * @param list<VerifyProfileMessageTemplateResponse|VerifyProfileMessageTemplateResponseShape> $data
      */
     public function withData(array $data): self
     {

@@ -25,13 +25,13 @@ use Telnyx\Webhooks\CallInitiatedWebhookEvent\Data\Payload\State;
  *   clientState?: string|null,
  *   connectionCodecs?: string|null,
  *   connectionID?: string|null,
- *   customHeaders?: list<CustomSipHeaderShape>|null,
+ *   customHeaders?: list<CustomSipHeader|CustomSipHeaderShape>|null,
  *   direction?: null|Direction|value-of<Direction>,
  *   from?: string|null,
  *   offeredCodecs?: string|null,
  *   shakenStirAttestation?: string|null,
  *   shakenStirValidated?: bool|null,
- *   sipHeaders?: list<SipHeaderShape>|null,
+ *   sipHeaders?: list<SipHeader|SipHeaderShape>|null,
  *   startTime?: \DateTimeInterface|null,
  *   state?: null|State|value-of<State>,
  *   tags?: list<string>|null,
@@ -177,9 +177,9 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<CustomSipHeaderShape>|null $customHeaders
+     * @param list<CustomSipHeader|CustomSipHeaderShape>|null $customHeaders
      * @param Direction|value-of<Direction>|null $direction
-     * @param list<SipHeaderShape>|null $sipHeaders
+     * @param list<SipHeader|SipHeaderShape>|null $sipHeaders
      * @param State|value-of<State>|null $state
      * @param list<string>|null $tags
      */
@@ -320,7 +320,7 @@ final class Payload implements BaseModel
     /**
      * Custom headers from sip invite.
      *
-     * @param list<CustomSipHeaderShape> $customHeaders
+     * @param list<CustomSipHeader|CustomSipHeaderShape> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {
@@ -391,7 +391,7 @@ final class Payload implements BaseModel
     /**
      * User-to-User and Diversion headers from sip invite.
      *
-     * @param list<SipHeaderShape> $sipHeaders
+     * @param list<SipHeader|SipHeaderShape> $sipHeaders
      */
     public function withSipHeaders(array $sipHeaders): self
     {

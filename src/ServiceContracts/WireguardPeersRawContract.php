@@ -17,12 +17,16 @@ use Telnyx\WireguardPeers\WireguardPeerNewResponse;
 use Telnyx\WireguardPeers\WireguardPeerUpdateParams;
 use Telnyx\WireguardPeers\WireguardPeerUpdateResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface WireguardPeersRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|WireguardPeerCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WireguardPeerNewResponse>
      *
@@ -30,13 +34,14 @@ interface WireguardPeersRawContract
      */
     public function create(
         array|WireguardPeerCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WireguardPeerGetResponse>
      *
@@ -44,7 +49,7 @@ interface WireguardPeersRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -52,6 +57,7 @@ interface WireguardPeersRawContract
      *
      * @param string $id identifies the resource
      * @param array<string,mixed>|WireguardPeerUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WireguardPeerUpdateResponse>
      *
@@ -60,13 +66,14 @@ interface WireguardPeersRawContract
     public function update(
         string $id,
         array|WireguardPeerUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|WireguardPeerListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<WireguardPeerListResponse>>
      *
@@ -74,13 +81,14 @@ interface WireguardPeersRawContract
      */
     public function list(
         array|WireguardPeerListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WireguardPeerDeleteResponse>
      *
@@ -88,13 +96,14 @@ interface WireguardPeersRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
      *
@@ -102,6 +111,6 @@ interface WireguardPeersRawContract
      */
     public function retrieveConfig(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

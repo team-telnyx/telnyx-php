@@ -16,6 +16,9 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BillingGroupsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class BillingGroupsService implements BillingGroupsContract
 {
     /**
@@ -37,12 +40,13 @@ final class BillingGroupsService implements BillingGroupsContract
      * Create a billing group
      *
      * @param string $name A name for the billing group
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         ?string $name = null,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BillingGroupNewResponse {
         $params = Util::removeNulls(['name' => $name]);
 
@@ -58,12 +62,13 @@ final class BillingGroupsService implements BillingGroupsContract
      * Get a billing group
      *
      * @param string $id The id of the billing group
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BillingGroupGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -78,13 +83,14 @@ final class BillingGroupsService implements BillingGroupsContract
      *
      * @param string $id The id of the billing group
      * @param string $name A name for the billing group
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $id,
         ?string $name = null,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BillingGroupUpdateResponse {
         $params = Util::removeNulls(['name' => $name]);
 
@@ -99,6 +105,8 @@ final class BillingGroupsService implements BillingGroupsContract
      *
      * List all billing groups
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return DefaultFlatPagination<BillingGroup>
      *
      * @throws APIException
@@ -106,7 +114,7 @@ final class BillingGroupsService implements BillingGroupsContract
     public function list(
         ?int $pageNumber = null,
         ?int $pageSize = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
         $params = Util::removeNulls(
             ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
@@ -124,12 +132,13 @@ final class BillingGroupsService implements BillingGroupsContract
      * Delete a billing group
      *
      * @param string $id The id of the billing group
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BillingGroupDeleteResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, requestOptions: $requestOptions);

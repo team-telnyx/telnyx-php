@@ -18,7 +18,7 @@ use Telnyx\PortingOrders\PortingOrdersActivationJob\Status;
  *   id?: string|null,
  *   activateAt?: \DateTimeInterface|null,
  *   activationType?: null|ActivationType|value-of<ActivationType>,
- *   activationWindows?: list<ActivationWindowShape>|null,
+ *   activationWindows?: list<ActivationWindow|ActivationWindowShape>|null,
  *   createdAt?: \DateTimeInterface|null,
  *   recordType?: string|null,
  *   status?: null|Status|value-of<Status>,
@@ -95,7 +95,7 @@ final class PortingOrdersActivationJob implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param ActivationType|value-of<ActivationType>|null $activationType
-     * @param list<ActivationWindowShape>|null $activationWindows
+     * @param list<ActivationWindow|ActivationWindowShape>|null $activationWindows
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
@@ -161,7 +161,7 @@ final class PortingOrdersActivationJob implements BaseModel
     /**
      * List of allowed activation windows for this activation job.
      *
-     * @param list<ActivationWindowShape> $activationWindows
+     * @param list<ActivationWindow|ActivationWindowShape> $activationWindows
      */
     public function withActivationWindows(array $activationWindows): self
     {

@@ -14,7 +14,6 @@ use Telnyx\AI\Assistants\AssistantRetrieveParams;
 use Telnyx\AI\Assistants\AssistantSendSMSParams;
 use Telnyx\AI\Assistants\AssistantSendSMSResponse;
 use Telnyx\AI\Assistants\AssistantsList;
-use Telnyx\AI\Assistants\AssistantTool;
 use Telnyx\AI\Assistants\AssistantUpdateParams;
 use Telnyx\AI\Assistants\EnabledFeatures;
 use Telnyx\AI\Assistants\InferenceEmbedding;
@@ -23,8 +22,6 @@ use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
-use Telnyx\AI\Assistants\TranscriptionSettings\Model;
-use Telnyx\AI\Assistants\TranscriptionSettingsConfig;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
@@ -33,6 +30,17 @@ use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\AssistantsRawContract;
 
+/**
+ * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantSendSMSParams\ConversationMetadata
+ * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
+ * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
+ * @phpstan-import-type PrivacySettingsShape from \Telnyx\AI\Assistants\PrivacySettings
+ * @phpstan-import-type TelephonySettingsShape from \Telnyx\AI\Assistants\TelephonySettings
+ * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
+ * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\AI\Assistants\VoiceSettings
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AssistantsRawService implements AssistantsRawContract
 {
     // @phpstan-ignore-next-line
@@ -53,31 +61,18 @@ final class AssistantsRawService implements AssistantsRawContract
      *   description?: string,
      *   dynamicVariables?: array<string,mixed>,
      *   dynamicVariablesWebhookURL?: string,
-     *   enabledFeatures?: list<'telephony'|'messaging'|EnabledFeatures>,
+     *   enabledFeatures?: list<EnabledFeatures|value-of<EnabledFeatures>>,
      *   greeting?: string,
-     *   insightSettings?: array{insightGroupID?: string}|InsightSettings,
+     *   insightSettings?: InsightSettings|InsightSettingsShape,
      *   llmAPIKeyRef?: string,
-     *   messagingSettings?: array{
-     *     defaultMessagingProfileID?: string, deliveryStatusWebhookURL?: string
-     *   }|MessagingSettings,
-     *   privacySettings?: array{dataRetention?: bool}|PrivacySettings,
-     *   telephonySettings?: array{
-     *     defaultTexmlAppID?: string, supportsUnauthenticatedWebCalls?: bool
-     *   }|TelephonySettings,
-     *   tools?: list<AssistantTool|array<string,mixed>>,
-     *   transcription?: array{
-     *     language?: string,
-     *     model?: 'deepgram/flux'|'deepgram/nova-3'|'deepgram/nova-2'|'azure/fast'|'distil-whisper/distil-large-v2'|'openai/whisper-large-v3-turbo'|Model,
-     *     region?: string,
-     *     settings?: array<string,mixed>|TranscriptionSettingsConfig,
-     *   }|TranscriptionSettings,
-     *   voiceSettings?: array{
-     *     voice: string,
-     *     apiKeyRef?: string,
-     *     backgroundAudio?: array<string,mixed>,
-     *     voiceSpeed?: float,
-     *   }|VoiceSettings,
+     *   messagingSettings?: MessagingSettings|MessagingSettingsShape,
+     *   privacySettings?: PrivacySettings|PrivacySettingsShape,
+     *   telephonySettings?: TelephonySettings|TelephonySettingsShape,
+     *   tools?: list<AssistantToolShape>,
+     *   transcription?: TranscriptionSettings|TranscriptionSettingsShape,
+     *   voiceSettings?: VoiceSettings|VoiceSettingsShape,
      * }|AssistantCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InferenceEmbedding>
      *
@@ -85,7 +80,7 @@ final class AssistantsRawService implements AssistantsRawContract
      */
     public function create(
         array|AssistantCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AssistantCreateParams::parseRequest(
             $params,
@@ -113,6 +108,7 @@ final class AssistantsRawService implements AssistantsRawContract
      *   from?: string,
      *   to?: string,
      * }|AssistantRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InferenceEmbedding>
      *
@@ -121,7 +117,7 @@ final class AssistantsRawService implements AssistantsRawContract
     public function retrieve(
         string $assistantID,
         array|AssistantRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AssistantRetrieveParams::parseRequest(
             $params,
@@ -153,35 +149,22 @@ final class AssistantsRawService implements AssistantsRawContract
      *   description?: string,
      *   dynamicVariables?: array<string,mixed>,
      *   dynamicVariablesWebhookURL?: string,
-     *   enabledFeatures?: list<'telephony'|'messaging'|EnabledFeatures>,
+     *   enabledFeatures?: list<EnabledFeatures|value-of<EnabledFeatures>>,
      *   greeting?: string,
-     *   insightSettings?: array{insightGroupID?: string}|InsightSettings,
+     *   insightSettings?: InsightSettings|InsightSettingsShape,
      *   instructions?: string,
      *   llmAPIKeyRef?: string,
-     *   messagingSettings?: array{
-     *     defaultMessagingProfileID?: string, deliveryStatusWebhookURL?: string
-     *   }|MessagingSettings,
+     *   messagingSettings?: MessagingSettings|MessagingSettingsShape,
      *   model?: string,
      *   name?: string,
-     *   privacySettings?: array{dataRetention?: bool}|PrivacySettings,
+     *   privacySettings?: PrivacySettings|PrivacySettingsShape,
      *   promoteToMain?: bool,
-     *   telephonySettings?: array{
-     *     defaultTexmlAppID?: string, supportsUnauthenticatedWebCalls?: bool
-     *   }|TelephonySettings,
-     *   tools?: list<AssistantTool|array<string,mixed>>,
-     *   transcription?: array{
-     *     language?: string,
-     *     model?: 'deepgram/flux'|'deepgram/nova-3'|'deepgram/nova-2'|'azure/fast'|'distil-whisper/distil-large-v2'|'openai/whisper-large-v3-turbo'|Model,
-     *     region?: string,
-     *     settings?: array<string,mixed>|TranscriptionSettingsConfig,
-     *   }|TranscriptionSettings,
-     *   voiceSettings?: array{
-     *     voice: string,
-     *     apiKeyRef?: string,
-     *     backgroundAudio?: array<string,mixed>,
-     *     voiceSpeed?: float,
-     *   }|VoiceSettings,
+     *   telephonySettings?: TelephonySettings|TelephonySettingsShape,
+     *   tools?: list<AssistantToolShape>,
+     *   transcription?: TranscriptionSettings|TranscriptionSettingsShape,
+     *   voiceSettings?: VoiceSettings|VoiceSettingsShape,
      * }|AssistantUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InferenceEmbedding>
      *
@@ -190,7 +173,7 @@ final class AssistantsRawService implements AssistantsRawContract
     public function update(
         string $assistantID,
         array|AssistantUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AssistantUpdateParams::parseRequest(
             $params,
@@ -212,12 +195,15 @@ final class AssistantsRawService implements AssistantsRawContract
      *
      * Retrieve a list of all AI Assistants configured by the user.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<AssistantsList>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse
-    {
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
@@ -232,13 +218,15 @@ final class AssistantsRawService implements AssistantsRawContract
      *
      * Delete an AI Assistant by `assistant_id`.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<AssistantDeleteResponse>
      *
      * @throws APIException
      */
     public function delete(
         string $assistantID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -257,6 +245,7 @@ final class AssistantsRawService implements AssistantsRawContract
      * @param array{
      *   content: string, conversationID: string, name?: string
      * }|AssistantChatParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AssistantChatResponse>
      *
@@ -265,7 +254,7 @@ final class AssistantsRawService implements AssistantsRawContract
     public function chat(
         string $assistantID,
         array|AssistantChatParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AssistantChatParams::parseRequest(
             $params,
@@ -287,13 +276,15 @@ final class AssistantsRawService implements AssistantsRawContract
      *
      * Clone an existing assistant, excluding telephony and messaging settings.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<InferenceEmbedding>
      *
      * @throws APIException
      */
     public function clone(
         string $assistantID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -309,13 +300,15 @@ final class AssistantsRawService implements AssistantsRawContract
      *
      * Get an assistant texml by `assistant_id`.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<string>
      *
      * @throws APIException
      */
     public function getTexml(
         string $assistantID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -332,8 +325,9 @@ final class AssistantsRawService implements AssistantsRawContract
      * Import assistants from external providers. Any assistant that has already been imported will be overwritten with its latest version from the importing provider.
      *
      * @param array{
-     *   apiKeyRef: string, provider: 'elevenlabs'|'vapi'|'retell'|Provider
+     *   apiKeyRef: string, provider: Provider|value-of<Provider>
      * }|AssistantImportsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AssistantsList>
      *
@@ -341,7 +335,7 @@ final class AssistantsRawService implements AssistantsRawContract
      */
     public function imports(
         array|AssistantImportsParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AssistantImportsParams::parseRequest(
             $params,
@@ -372,9 +366,10 @@ final class AssistantsRawService implements AssistantsRawContract
      *   from: string,
      *   text: string,
      *   to: string,
-     *   conversationMetadata?: array<string,string|int|bool>,
+     *   conversationMetadata?: array<string,ConversationMetadataShape>,
      *   shouldCreateConversation?: bool,
      * }|AssistantSendSMSParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AssistantSendSMSResponse>
      *
@@ -383,7 +378,7 @@ final class AssistantsRawService implements AssistantsRawContract
     public function sendSMS(
         string $assistantID,
         array|AssistantSendSMSParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AssistantSendSMSParams::parseRequest(
             $params,

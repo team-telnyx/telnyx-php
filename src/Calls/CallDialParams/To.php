@@ -12,7 +12,8 @@ use Telnyx\Core\Conversion\ListOf;
 /**
  * The DID or SIP URI to dial out to. Multiple DID or SIP URIs can be provided using an array of strings.
  *
- * @phpstan-type ToShape = string|list<string>
+ * @phpstan-type ToVariants = string|list<string>
+ * @phpstan-type ToShape = ToVariants
  */
 final class To implements ConverterSource
 {

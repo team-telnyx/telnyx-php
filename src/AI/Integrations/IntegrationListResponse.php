@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-import-type DataShape from \Telnyx\AI\Integrations\IntegrationListResponse\Data
  *
- * @phpstan-type IntegrationListResponseShape = array{data: list<DataShape>}
+ * @phpstan-type IntegrationListResponseShape = array{data: list<Data|DataShape>}
  */
 final class IntegrationListResponse implements BaseModel
 {
@@ -47,7 +47,7 @@ final class IntegrationListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DataShape> $data
+     * @param list<Data|DataShape> $data
      */
     public static function with(array $data): self
     {
@@ -59,7 +59,7 @@ final class IntegrationListResponse implements BaseModel
     }
 
     /**
-     * @param list<DataShape> $data
+     * @param list<Data|DataShape> $data
      */
     public function withData(array $data): self
     {

@@ -14,11 +14,22 @@ use Telnyx\RoomParticipant;
 use Telnyx\Rooms\RoomSession;
 use Telnyx\Rooms\Sessions\SessionGetResponse;
 use Telnyx\Rooms\Sessions\SessionList0Params;
+use Telnyx\Rooms\Sessions\SessionList0Params\Filter;
+use Telnyx\Rooms\Sessions\SessionList0Params\Page;
 use Telnyx\Rooms\Sessions\SessionList1Params;
 use Telnyx\Rooms\Sessions\SessionRetrieveParams;
 use Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams;
 use Telnyx\ServiceContracts\Rooms\SessionsRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Rooms\Sessions\SessionList0Params\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Rooms\Sessions\SessionList0Params\Page
+ * @phpstan-import-type FilterShape from \Telnyx\Rooms\Sessions\SessionList1Params\Filter as FilterShape1
+ * @phpstan-import-type PageShape from \Telnyx\Rooms\Sessions\SessionList1Params\Page as PageShape1
+ * @phpstan-import-type FilterShape from \Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Filter as FilterShape2
+ * @phpstan-import-type PageShape from \Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Page as PageShape2
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class SessionsRawService implements SessionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -34,6 +45,7 @@ final class SessionsRawService implements SessionsRawContract
      *
      * @param string $roomSessionID the unique identifier of a room session
      * @param array{includeParticipants?: bool}|SessionRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SessionGetResponse>
      *
@@ -42,7 +54,7 @@ final class SessionsRawService implements SessionsRawContract
     public function retrieve(
         string $roomSessionID,
         array|SessionRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SessionRetrieveParams::parseRequest(
             $params,
@@ -68,16 +80,9 @@ final class SessionsRawService implements SessionsRawContract
      * View a list of room sessions.
      *
      * @param array{
-     *   filter?: array{
-     *     active?: bool,
-     *     dateCreatedAt?: array{eq?: string, gte?: string, lte?: string},
-     *     dateEndedAt?: array{eq?: string, gte?: string, lte?: string},
-     *     dateUpdatedAt?: array{eq?: string, gte?: string, lte?: string},
-     *     roomID?: string,
-     *   },
-     *   includeParticipants?: bool,
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, includeParticipants?: bool, page?: Page|PageShape
      * }|SessionList0Params $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<RoomSession>>
      *
@@ -85,7 +90,7 @@ final class SessionsRawService implements SessionsRawContract
      */
     public function list0(
         array|SessionList0Params $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SessionList0Params::parseRequest(
             $params,
@@ -113,15 +118,11 @@ final class SessionsRawService implements SessionsRawContract
      *
      * @param string $roomID the unique identifier of a room
      * @param array{
-     *   filter?: array{
-     *     active?: bool,
-     *     dateCreatedAt?: array{eq?: string, gte?: string, lte?: string},
-     *     dateEndedAt?: array{eq?: string, gte?: string, lte?: string},
-     *     dateUpdatedAt?: array{eq?: string, gte?: string, lte?: string},
-     *   },
+     *   filter?: SessionList1Params\Filter|FilterShape1,
      *   includeParticipants?: bool,
-     *   page?: array{number?: int, size?: int},
+     *   page?: SessionList1Params\Page|PageShape1,
      * }|SessionList1Params $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<RoomSession>>
      *
@@ -130,7 +131,7 @@ final class SessionsRawService implements SessionsRawContract
     public function list1(
         string $roomID,
         array|SessionList1Params $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SessionList1Params::parseRequest(
             $params,
@@ -158,14 +159,10 @@ final class SessionsRawService implements SessionsRawContract
      *
      * @param string $roomSessionID the unique identifier of a room session
      * @param array{
-     *   filter?: array{
-     *     context?: string,
-     *     dateJoinedAt?: array{eq?: string, gte?: string, lte?: string},
-     *     dateLeftAt?: array{eq?: string, gte?: string, lte?: string},
-     *     dateUpdatedAt?: array{eq?: string, gte?: string, lte?: string},
-     *   },
-     *   page?: array{number?: int, size?: int},
+     *   filter?: SessionRetrieveParticipantsParams\Filter|FilterShape2,
+     *   page?: SessionRetrieveParticipantsParams\Page|PageShape2,
      * }|SessionRetrieveParticipantsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<RoomParticipant>>
      *
@@ -174,7 +171,7 @@ final class SessionsRawService implements SessionsRawContract
     public function retrieveParticipants(
         string $roomSessionID,
         array|SessionRetrieveParticipantsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SessionRetrieveParticipantsParams::parseRequest(
             $params,

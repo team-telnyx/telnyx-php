@@ -17,12 +17,16 @@ use Telnyx\Fqdns\FqdnUpdateParams;
 use Telnyx\Fqdns\FqdnUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface FqdnsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|FqdnCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FqdnNewResponse>
      *
@@ -30,13 +34,14 @@ interface FqdnsRawContract
      */
     public function create(
         array|FqdnCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FqdnGetResponse>
      *
@@ -44,7 +49,7 @@ interface FqdnsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -52,6 +57,7 @@ interface FqdnsRawContract
      *
      * @param string $id identifies the resource
      * @param array<string,mixed>|FqdnUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FqdnUpdateResponse>
      *
@@ -60,13 +66,14 @@ interface FqdnsRawContract
     public function update(
         string $id,
         array|FqdnUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|FqdnListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<Fqdn>>
      *
@@ -74,13 +81,14 @@ interface FqdnsRawContract
      */
     public function list(
         array|FqdnListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FqdnDeleteResponse>
      *
@@ -88,6 +96,6 @@ interface FqdnsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

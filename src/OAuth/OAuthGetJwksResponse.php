@@ -12,7 +12,7 @@ use Telnyx\OAuth\OAuthGetJwksResponse\Key;
 /**
  * @phpstan-import-type KeyShape from \Telnyx\OAuth\OAuthGetJwksResponse\Key
  *
- * @phpstan-type OAuthGetJwksResponseShape = array{keys?: list<KeyShape>|null}
+ * @phpstan-type OAuthGetJwksResponseShape = array{keys?: list<Key|KeyShape>|null}
  */
 final class OAuthGetJwksResponse implements BaseModel
 {
@@ -33,7 +33,7 @@ final class OAuthGetJwksResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<KeyShape>|null $keys
+     * @param list<Key|KeyShape>|null $keys
      */
     public static function with(?array $keys = null): self
     {
@@ -45,7 +45,7 @@ final class OAuthGetJwksResponse implements BaseModel
     }
 
     /**
-     * @param list<KeyShape> $keys
+     * @param list<Key|KeyShape> $keys
      */
     public function withKeys(array $keys): self
     {

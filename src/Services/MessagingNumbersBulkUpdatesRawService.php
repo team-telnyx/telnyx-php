@@ -13,6 +13,9 @@ use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingNumbersBulkUpdatesRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MessagingNumbersBulkUpdatesRawService implements MessagingNumbersBulkUpdatesRawContract
 {
     // @phpstan-ignore-next-line
@@ -29,6 +32,7 @@ final class MessagingNumbersBulkUpdatesRawService implements MessagingNumbersBul
      * @param array{
      *   messagingProfileID: string, numbers: list<string>
      * }|MessagingNumbersBulkUpdateCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingNumbersBulkUpdateNewResponse>
      *
@@ -36,7 +40,7 @@ final class MessagingNumbersBulkUpdatesRawService implements MessagingNumbersBul
      */
     public function create(
         array|MessagingNumbersBulkUpdateCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MessagingNumbersBulkUpdateCreateParams::parseRequest(
             $params,
@@ -59,6 +63,7 @@ final class MessagingNumbersBulkUpdatesRawService implements MessagingNumbersBul
      * Retrieve bulk update status
      *
      * @param string $orderID order ID to verify bulk update status
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingNumbersBulkUpdateGetResponse>
      *
@@ -66,7 +71,7 @@ final class MessagingNumbersBulkUpdatesRawService implements MessagingNumbersBul
      */
     public function retrieve(
         string $orderID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

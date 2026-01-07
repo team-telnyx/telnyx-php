@@ -15,6 +15,9 @@ use Telnyx\PerPagePagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\UsageReports\MessagingContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MessagingService implements MessagingContract
 {
     /**
@@ -38,17 +41,18 @@ final class MessagingService implements MessagingContract
      * @param int $aggregationType Aggregation type: No aggregation = 0, By Messaging Profile = 1, By Tags = 2
      * @param list<string> $managedAccounts List of managed accounts to include
      * @param list<string> $profiles List of messaging profile IDs to filter by
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         int $aggregationType,
-        string|\DateTimeInterface|null $endTime = null,
+        ?\DateTimeInterface $endTime = null,
         ?array $managedAccounts = null,
         ?array $profiles = null,
         ?bool $selectAllManagedAccounts = null,
-        string|\DateTimeInterface|null $startTime = null,
-        ?RequestOptions $requestOptions = null,
+        ?\DateTimeInterface $startTime = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MessagingNewResponse {
         $params = Util::removeNulls(
             [
@@ -72,11 +76,13 @@ final class MessagingService implements MessagingContract
      *
      * Fetch single MDR usage report by id.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MessagingGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -91,6 +97,7 @@ final class MessagingService implements MessagingContract
      *
      * @param int $page Page number
      * @param int $perPage Size of the page
+     * @param RequestOpts|null $requestOptions
      *
      * @return PerPagePagination<MdrUsageReportResponseLegacy>
      *
@@ -99,7 +106,7 @@ final class MessagingService implements MessagingContract
     public function list(
         int $page = 1,
         int $perPage = 20,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): PerPagePagination {
         $params = Util::removeNulls(['page' => $page, 'perPage' => $perPage]);
 
@@ -114,11 +121,13 @@ final class MessagingService implements MessagingContract
      *
      * Deletes a specific V2 legacy usage MDR report request by ID
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MessagingDeleteResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, requestOptions: $requestOptions);

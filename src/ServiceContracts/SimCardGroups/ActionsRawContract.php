@@ -18,12 +18,16 @@ use Telnyx\SimCardGroups\Actions\ActionSetWirelessBlocklistParams;
 use Telnyx\SimCardGroups\Actions\ActionSetWirelessBlocklistResponse;
 use Telnyx\SimCardGroups\Actions\SimCardGroupAction;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ActionsRawContract
 {
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionGetResponse>
      *
@@ -31,13 +35,14 @@ interface ActionsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ActionListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<SimCardGroupAction>>
      *
@@ -45,13 +50,14 @@ interface ActionsRawContract
      */
     public function list(
         array|ActionListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the SIM group
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionRemovePrivateWirelessGatewayResponse>
      *
@@ -59,13 +65,14 @@ interface ActionsRawContract
      */
     public function removePrivateWirelessGateway(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the SIM group
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionRemoveWirelessBlocklistResponse>
      *
@@ -73,7 +80,7 @@ interface ActionsRawContract
      */
     public function removeWirelessBlocklist(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -81,6 +88,7 @@ interface ActionsRawContract
      *
      * @param string $id identifies the SIM group
      * @param array<string,mixed>|ActionSetPrivateWirelessGatewayParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionSetPrivateWirelessGatewayResponse>
      *
@@ -89,7 +97,7 @@ interface ActionsRawContract
     public function setPrivateWirelessGateway(
         string $id,
         array|ActionSetPrivateWirelessGatewayParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -97,6 +105,7 @@ interface ActionsRawContract
      *
      * @param string $id identifies the SIM group
      * @param array<string,mixed>|ActionSetWirelessBlocklistParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionSetWirelessBlocklistResponse>
      *
@@ -105,6 +114,6 @@ interface ActionsRawContract
     public function setWirelessBlocklist(
         string $id,
         array|ActionSetWirelessBlocklistParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

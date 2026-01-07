@@ -12,6 +12,7 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardGroupsRawContract;
 use Telnyx\SimCardGroups\SimCardGroupCreateParams;
+use Telnyx\SimCardGroups\SimCardGroupCreateParams\DataLimit;
 use Telnyx\SimCardGroups\SimCardGroupDeleteResponse;
 use Telnyx\SimCardGroups\SimCardGroupGetResponse;
 use Telnyx\SimCardGroups\SimCardGroupListParams;
@@ -21,6 +22,11 @@ use Telnyx\SimCardGroups\SimCardGroupRetrieveParams;
 use Telnyx\SimCardGroups\SimCardGroupUpdateParams;
 use Telnyx\SimCardGroups\SimCardGroupUpdateResponse;
 
+/**
+ * @phpstan-import-type DataLimitShape from \Telnyx\SimCardGroups\SimCardGroupCreateParams\DataLimit
+ * @phpstan-import-type DataLimitShape from \Telnyx\SimCardGroups\SimCardGroupUpdateParams\DataLimit as DataLimitShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class SimCardGroupsRawService implements SimCardGroupsRawContract
 {
     // @phpstan-ignore-next-line
@@ -35,8 +41,9 @@ final class SimCardGroupsRawService implements SimCardGroupsRawContract
      * Creates a new SIM card group object
      *
      * @param array{
-     *   name: string, dataLimit?: array{amount?: string, unit?: string}
+     *   name: string, dataLimit?: DataLimit|DataLimitShape
      * }|SimCardGroupCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardGroupNewResponse>
      *
@@ -44,7 +51,7 @@ final class SimCardGroupsRawService implements SimCardGroupsRawContract
      */
     public function create(
         array|SimCardGroupCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SimCardGroupCreateParams::parseRequest(
             $params,
@@ -68,6 +75,7 @@ final class SimCardGroupsRawService implements SimCardGroupsRawContract
      *
      * @param string $id identifies the SIM group
      * @param array{includeIccids?: bool}|SimCardGroupRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardGroupGetResponse>
      *
@@ -76,7 +84,7 @@ final class SimCardGroupsRawService implements SimCardGroupsRawContract
     public function retrieve(
         string $id,
         array|SimCardGroupRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SimCardGroupRetrieveParams::parseRequest(
             $params,
@@ -103,8 +111,10 @@ final class SimCardGroupsRawService implements SimCardGroupsRawContract
      *
      * @param string $id identifies the SIM group
      * @param array{
-     *   dataLimit?: array{amount?: string, unit?: string}, name?: string
+     *   dataLimit?: SimCardGroupUpdateParams\DataLimit|DataLimitShape1,
+     *   name?: string,
      * }|SimCardGroupUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardGroupUpdateResponse>
      *
@@ -113,7 +123,7 @@ final class SimCardGroupsRawService implements SimCardGroupsRawContract
     public function update(
         string $id,
         array|SimCardGroupUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SimCardGroupUpdateParams::parseRequest(
             $params,
@@ -142,6 +152,7 @@ final class SimCardGroupsRawService implements SimCardGroupsRawContract
      *   pageNumber?: int,
      *   pageSize?: int,
      * }|SimCardGroupListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<SimCardGroupListResponse>>
      *
@@ -149,7 +160,7 @@ final class SimCardGroupsRawService implements SimCardGroupsRawContract
      */
     public function list(
         array|SimCardGroupListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SimCardGroupListParams::parseRequest(
             $params,
@@ -182,6 +193,7 @@ final class SimCardGroupsRawService implements SimCardGroupsRawContract
      * Permanently deletes a SIM card group
      *
      * @param string $id identifies the SIM group
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardGroupDeleteResponse>
      *
@@ -189,7 +201,7 @@ final class SimCardGroupsRawService implements SimCardGroupsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

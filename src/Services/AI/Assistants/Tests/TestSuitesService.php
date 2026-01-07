@@ -11,6 +11,9 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\Tests\TestSuitesContract;
 use Telnyx\Services\AI\Assistants\Tests\TestSuites\RunsService;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class TestSuitesService implements TestSuitesContract
 {
     /**
@@ -37,10 +40,12 @@ final class TestSuitesService implements TestSuitesContract
      *
      * Retrieves a list of all distinct test suite names available to the current user
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): TestSuiteListResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(requestOptions: $requestOptions);

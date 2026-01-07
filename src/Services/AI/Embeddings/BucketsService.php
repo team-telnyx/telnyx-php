@@ -11,6 +11,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Embeddings\BucketsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class BucketsService implements BucketsContract
 {
     /**
@@ -31,11 +34,13 @@ final class BucketsService implements BucketsContract
      *
      * Get all embedded files for a given user bucket, including their processing status.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $bucketName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BucketGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($bucketName, requestOptions: $requestOptions);
@@ -48,10 +53,12 @@ final class BucketsService implements BucketsContract
      *
      * Get all embedding buckets for a user.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BucketListResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(requestOptions: $requestOptions);
@@ -64,11 +71,13 @@ final class BucketsService implements BucketsContract
      *
      * Deletes an entire bucket's embeddings and disables the bucket for AI-use, returning it to normal storage pricing.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $bucketName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($bucketName, requestOptions: $requestOptions);

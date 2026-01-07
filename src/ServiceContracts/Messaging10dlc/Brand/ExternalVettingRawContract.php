@@ -13,10 +13,15 @@ use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVettingOrderParams;
 use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVettingOrderResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ExternalVettingRawContract
 {
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<ExternalVettingListResponseItem>>
      *
@@ -24,13 +29,14 @@ interface ExternalVettingRawContract
      */
     public function list(
         string $brandID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ExternalVettingImportsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ExternalVettingImportsResponse>
      *
@@ -39,13 +45,14 @@ interface ExternalVettingRawContract
     public function imports(
         string $brandID,
         array|ExternalVettingImportsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ExternalVettingOrderParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ExternalVettingOrderResponse>
      *
@@ -54,6 +61,6 @@ interface ExternalVettingRawContract
     public function order(
         string $brandID,
         array|ExternalVettingOrderParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

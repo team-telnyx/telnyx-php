@@ -14,12 +14,16 @@ use Telnyx\MessagingTollfree\Verification\Requests\VerificationRequestEgress;
 use Telnyx\MessagingTollfree\Verification\Requests\VerificationRequestStatus;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface RequestsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|RequestCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VerificationRequestEgress>
      *
@@ -27,11 +31,13 @@ interface RequestsRawContract
      */
     public function create(
         array|RequestCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VerificationRequestStatus>
      *
@@ -39,13 +45,14 @@ interface RequestsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|RequestUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VerificationRequestEgress>
      *
@@ -54,13 +61,14 @@ interface RequestsRawContract
     public function update(
         string $id,
         array|RequestUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|RequestListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPaginationForMessagingTollfree<VerificationRequestStatus,>,>
      *
@@ -68,11 +76,13 @@ interface RequestsRawContract
      */
     public function list(
         array|RequestListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -80,6 +90,6 @@ interface RequestsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

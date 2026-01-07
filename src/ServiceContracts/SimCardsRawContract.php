@@ -23,6 +23,9 @@ use Telnyx\SimCards\SimCardUpdateParams;
 use Telnyx\SimCards\SimCardUpdateResponse;
 use Telnyx\SimpleSimCard;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface SimCardsRawContract
 {
     /**
@@ -30,6 +33,7 @@ interface SimCardsRawContract
      *
      * @param string $id identifies the SIM
      * @param array<string,mixed>|SimCardRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardGetResponse>
      *
@@ -38,7 +42,7 @@ interface SimCardsRawContract
     public function retrieve(
         string $id,
         array|SimCardRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -46,6 +50,7 @@ interface SimCardsRawContract
      *
      * @param string $simCardID identifies the SIM
      * @param array<string,mixed>|SimCardUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardUpdateResponse>
      *
@@ -54,13 +59,14 @@ interface SimCardsRawContract
     public function update(
         string $simCardID,
         array|SimCardUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|SimCardListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<SimpleSimCard>>
      *
@@ -68,7 +74,7 @@ interface SimCardsRawContract
      */
     public function list(
         array|SimCardListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -76,6 +82,7 @@ interface SimCardsRawContract
      *
      * @param string $id identifies the SIM
      * @param array<string,mixed>|SimCardDeleteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardDeleteResponse>
      *
@@ -84,13 +91,14 @@ interface SimCardsRawContract
     public function delete(
         string $id,
         array|SimCardDeleteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the SIM
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardGetActivationCodeResponse>
      *
@@ -98,13 +106,14 @@ interface SimCardsRawContract
      */
     public function getActivationCode(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the SIM
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardGetDeviceDetailsResponse>
      *
@@ -112,13 +121,14 @@ interface SimCardsRawContract
      */
     public function getDeviceDetails(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the SIM
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardGetPublicIPResponse>
      *
@@ -126,7 +136,7 @@ interface SimCardsRawContract
      */
     public function getPublicIP(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -134,6 +144,7 @@ interface SimCardsRawContract
      *
      * @param string $id identifies the SIM
      * @param array<string,mixed>|SimCardListWirelessConnectivityLogsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<SimCardListWirelessConnectivityLogsResponse,>,>
      *
@@ -142,6 +153,6 @@ interface SimCardsRawContract
     public function listWirelessConnectivityLogs(
         string $id,
         array|SimCardListWirelessConnectivityLogsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

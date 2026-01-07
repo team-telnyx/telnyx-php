@@ -17,12 +17,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface CallControlApplicationsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|CallControlApplicationCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallControlApplicationNewResponse>
      *
@@ -30,13 +34,14 @@ interface CallControlApplicationsRawContract
      */
     public function create(
         array|CallControlApplicationCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallControlApplicationGetResponse>
      *
@@ -44,7 +49,7 @@ interface CallControlApplicationsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -52,6 +57,7 @@ interface CallControlApplicationsRawContract
      *
      * @param string $id identifies the resource
      * @param array<string,mixed>|CallControlApplicationUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallControlApplicationUpdateResponse>
      *
@@ -60,13 +66,14 @@ interface CallControlApplicationsRawContract
     public function update(
         string $id,
         array|CallControlApplicationUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|CallControlApplicationListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<CallControlApplication>>
      *
@@ -74,13 +81,14 @@ interface CallControlApplicationsRawContract
      */
     public function list(
         array|CallControlApplicationListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallControlApplicationDeleteResponse>
      *
@@ -88,6 +96,6 @@ interface CallControlApplicationsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

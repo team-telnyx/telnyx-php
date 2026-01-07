@@ -13,30 +13,35 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface BillingGroupsContract
 {
     /**
      * @api
      *
      * @param string $name A name for the billing group
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         ?string $name = null,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BillingGroupNewResponse;
 
     /**
      * @api
      *
      * @param string $id The id of the billing group
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BillingGroupGetResponse;
 
     /**
@@ -44,17 +49,20 @@ interface BillingGroupsContract
      *
      * @param string $id The id of the billing group
      * @param string $name A name for the billing group
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $id,
         ?string $name = null,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BillingGroupUpdateResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<BillingGroup>
      *
@@ -63,18 +71,19 @@ interface BillingGroupsContract
     public function list(
         ?int $pageNumber = null,
         ?int $pageSize = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination;
 
     /**
      * @api
      *
      * @param string $id The id of the billing group
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BillingGroupDeleteResponse;
 }

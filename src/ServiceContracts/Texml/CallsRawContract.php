@@ -12,6 +12,9 @@ use Telnyx\Texml\Calls\CallInitiateResponse;
 use Telnyx\Texml\Calls\CallUpdateParams;
 use Telnyx\Texml\Calls\CallUpdateResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface CallsRawContract
 {
     /**
@@ -19,6 +22,7 @@ interface CallsRawContract
      *
      * @param string $callSid the CallSid that identifies the call to update
      * @param array<string,mixed>|CallUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallUpdateResponse>
      *
@@ -27,7 +31,7 @@ interface CallsRawContract
     public function update(
         string $callSid,
         array|CallUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -35,6 +39,7 @@ interface CallsRawContract
      *
      * @param string $applicationID the ID of the TeXML application used for the call
      * @param array<string,mixed>|CallInitiateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallInitiateResponse>
      *
@@ -43,6 +48,6 @@ interface CallsRawContract
     public function initiate(
         string $applicationID,
         array|CallInitiateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

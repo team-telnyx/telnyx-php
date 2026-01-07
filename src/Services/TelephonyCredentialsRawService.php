@@ -15,10 +15,17 @@ use Telnyx\TelephonyCredentials\TelephonyCredentialCreateParams;
 use Telnyx\TelephonyCredentials\TelephonyCredentialDeleteResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialGetResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialListParams;
+use Telnyx\TelephonyCredentials\TelephonyCredentialListParams\Filter;
+use Telnyx\TelephonyCredentials\TelephonyCredentialListParams\Page;
 use Telnyx\TelephonyCredentials\TelephonyCredentialNewResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialUpdateParams;
 use Telnyx\TelephonyCredentials\TelephonyCredentialUpdateResponse;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\TelephonyCredentials\TelephonyCredentialListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\TelephonyCredentials\TelephonyCredentialListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class TelephonyCredentialsRawService implements TelephonyCredentialsRawContract
 {
     // @phpstan-ignore-next-line
@@ -35,6 +42,7 @@ final class TelephonyCredentialsRawService implements TelephonyCredentialsRawCon
      * @param array{
      *   connectionID: string, expiresAt?: string, name?: string, tag?: string
      * }|TelephonyCredentialCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TelephonyCredentialNewResponse>
      *
@@ -42,7 +50,7 @@ final class TelephonyCredentialsRawService implements TelephonyCredentialsRawCon
      */
     public function create(
         array|TelephonyCredentialCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TelephonyCredentialCreateParams::parseRequest(
             $params,
@@ -65,6 +73,7 @@ final class TelephonyCredentialsRawService implements TelephonyCredentialsRawCon
      * Get the details of an existing On-demand Credential.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TelephonyCredentialGetResponse>
      *
@@ -72,7 +81,7 @@ final class TelephonyCredentialsRawService implements TelephonyCredentialsRawCon
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -92,6 +101,7 @@ final class TelephonyCredentialsRawService implements TelephonyCredentialsRawCon
      * @param array{
      *   connectionID?: string, expiresAt?: string, name?: string, tag?: string
      * }|TelephonyCredentialUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TelephonyCredentialUpdateResponse>
      *
@@ -100,7 +110,7 @@ final class TelephonyCredentialsRawService implements TelephonyCredentialsRawCon
     public function update(
         string $id,
         array|TelephonyCredentialUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TelephonyCredentialUpdateParams::parseRequest(
             $params,
@@ -123,15 +133,9 @@ final class TelephonyCredentialsRawService implements TelephonyCredentialsRawCon
      * List all On-demand Credentials.
      *
      * @param array{
-     *   filter?: array{
-     *     name?: string,
-     *     resourceID?: string,
-     *     sipUsername?: string,
-     *     status?: string,
-     *     tag?: string,
-     *   },
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|TelephonyCredentialListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<TelephonyCredential>>
      *
@@ -139,7 +143,7 @@ final class TelephonyCredentialsRawService implements TelephonyCredentialsRawCon
      */
     public function list(
         array|TelephonyCredentialListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TelephonyCredentialListParams::parseRequest(
             $params,
@@ -163,6 +167,7 @@ final class TelephonyCredentialsRawService implements TelephonyCredentialsRawCon
      * Delete an existing credential.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TelephonyCredentialDeleteResponse>
      *
@@ -170,7 +175,7 @@ final class TelephonyCredentialsRawService implements TelephonyCredentialsRawCon
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -187,6 +192,7 @@ final class TelephonyCredentialsRawService implements TelephonyCredentialsRawCon
      * Create an Access Token (JWT) for the credential.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
      *
@@ -194,7 +200,7 @@ final class TelephonyCredentialsRawService implements TelephonyCredentialsRawCon
      */
     public function createToken(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

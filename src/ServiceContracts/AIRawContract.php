@@ -11,23 +11,29 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface AIRawContract
 {
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AIGetModelsResponse>
      *
      * @throws APIException
      */
     public function retrieveModels(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|AISummarizeParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AISummarizeResponse>
      *
@@ -35,6 +41,6 @@ interface AIRawContract
      */
     public function summarize(
         array|AISummarizeParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

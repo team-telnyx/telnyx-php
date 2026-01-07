@@ -13,6 +13,9 @@ use Telnyx\PhoneNumbers\Voicemail\VoicemailUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbers\VoicemailContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class VoicemailService implements VoicemailContract
 {
     /**
@@ -36,6 +39,7 @@ final class VoicemailService implements VoicemailContract
      * @param string $phoneNumberID the ID of the phone number
      * @param bool $enabled whether voicemail is enabled
      * @param string $pin The pin used for voicemail
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -43,7 +47,7 @@ final class VoicemailService implements VoicemailContract
         string $phoneNumberID,
         ?bool $enabled = null,
         ?string $pin = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): VoicemailNewResponse {
         $params = Util::removeNulls(['enabled' => $enabled, 'pin' => $pin]);
 
@@ -59,12 +63,13 @@ final class VoicemailService implements VoicemailContract
      * Returns the voicemail settings for a phone number
      *
      * @param string $phoneNumberID the ID of the phone number
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $phoneNumberID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): VoicemailGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($phoneNumberID, requestOptions: $requestOptions);
@@ -80,6 +85,7 @@ final class VoicemailService implements VoicemailContract
      * @param string $phoneNumberID the ID of the phone number
      * @param bool $enabled whether voicemail is enabled
      * @param string $pin The pin used for voicemail
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -87,7 +93,7 @@ final class VoicemailService implements VoicemailContract
         string $phoneNumberID,
         ?bool $enabled = null,
         ?string $pin = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): VoicemailUpdateResponse {
         $params = Util::removeNulls(['enabled' => $enabled, 'pin' => $pin]);
 

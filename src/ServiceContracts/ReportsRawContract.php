@@ -13,12 +13,16 @@ use Telnyx\Reports\ReportListWdrsParams;
 use Telnyx\Reports\ReportListWdrsResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ReportsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|ReportListMdrsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ReportListMdrsResponse>
      *
@@ -26,13 +30,14 @@ interface ReportsRawContract
      */
     public function listMdrs(
         array|ReportListMdrsParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ReportListWdrsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<ReportListWdrsResponse>>
      *
@@ -40,6 +45,6 @@ interface ReportsRawContract
      */
     public function listWdrs(
         array|ReportListWdrsParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

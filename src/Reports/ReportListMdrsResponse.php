@@ -15,7 +15,7 @@ use Telnyx\Reports\ReportListMdrsResponse\Data;
  * @phpstan-import-type PaginationMetaReportingShape from \Telnyx\Reports\MdrUsageReports\PaginationMetaReporting
  *
  * @phpstan-type ReportListMdrsResponseShape = array{
- *   data?: list<DataShape>|null,
+ *   data?: list<Data|DataShape>|null,
  *   meta?: null|PaginationMetaReporting|PaginationMetaReportingShape,
  * }
  */
@@ -41,7 +41,7 @@ final class ReportListMdrsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DataShape>|null $data
+     * @param list<Data|DataShape>|null $data
      * @param PaginationMetaReporting|PaginationMetaReportingShape|null $meta
      */
     public static function with(
@@ -57,7 +57,7 @@ final class ReportListMdrsResponse implements BaseModel
     }
 
     /**
-     * @param list<DataShape> $data
+     * @param list<Data|DataShape> $data
      */
     public function withData(array $data): self
     {

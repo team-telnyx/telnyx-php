@@ -12,6 +12,9 @@ use Telnyx\NumbersFeatures\NumbersFeatureNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumbersFeaturesRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class NumbersFeaturesRawService implements NumbersFeaturesRawContract
 {
     // @phpstan-ignore-next-line
@@ -26,6 +29,7 @@ final class NumbersFeaturesRawService implements NumbersFeaturesRawContract
      * Retrieve the features for a list of numbers
      *
      * @param array{phoneNumbers: list<string>}|NumbersFeatureCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NumbersFeatureNewResponse>
      *
@@ -33,7 +37,7 @@ final class NumbersFeaturesRawService implements NumbersFeaturesRawContract
      */
     public function create(
         array|NumbersFeatureCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = NumbersFeatureCreateParams::parseRequest(
             $params,

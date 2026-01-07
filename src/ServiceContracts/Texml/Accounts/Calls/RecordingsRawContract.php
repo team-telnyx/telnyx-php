@@ -10,6 +10,9 @@ use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonParams;
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface RecordingsRawContract
 {
     /**
@@ -17,6 +20,7 @@ interface RecordingsRawContract
      *
      * @param string $recordingSid path param: Uniquely identifies the recording by id
      * @param array<string,mixed>|RecordingRecordingSidJsonParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RecordingRecordingSidJsonResponse>
      *
@@ -25,6 +29,6 @@ interface RecordingsRawContract
     public function recordingSidJson(
         string $recordingSid,
         array|RecordingRecordingSidJsonParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

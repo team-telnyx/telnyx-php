@@ -15,8 +15,8 @@ use Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Interactive\Action\Sec
  * @phpstan-import-type RowShape from \Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Interactive\Action\Section\Row
  *
  * @phpstan-type SectionShape = array{
- *   productItems?: list<ProductItemShape>|null,
- *   rows?: list<RowShape>|null,
+ *   productItems?: list<ProductItem|ProductItemShape>|null,
+ *   rows?: list<Row|RowShape>|null,
  *   title?: string|null,
  * }
  */
@@ -49,8 +49,8 @@ final class Section implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ProductItemShape>|null $productItems
-     * @param list<RowShape>|null $rows
+     * @param list<ProductItem|ProductItemShape>|null $productItems
+     * @param list<Row|RowShape>|null $rows
      */
     public static function with(
         ?array $productItems = null,
@@ -67,7 +67,7 @@ final class Section implements BaseModel
     }
 
     /**
-     * @param list<ProductItemShape> $productItems
+     * @param list<ProductItem|ProductItemShape> $productItems
      */
     public function withProductItems(array $productItems): self
     {
@@ -78,7 +78,7 @@ final class Section implements BaseModel
     }
 
     /**
-     * @param list<RowShape> $rows
+     * @param list<Row|RowShape> $rows
      */
     public function withRows(array $rows): self
     {

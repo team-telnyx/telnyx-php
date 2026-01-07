@@ -15,6 +15,9 @@ use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse;
 use Telnyx\Texml\Accounts\AccountRetrieveRecordingsJsonParams;
 use Telnyx\Texml\Accounts\AccountRetrieveTranscriptionsJsonParams;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AccountsRawService implements AccountsRawContract
 {
     // @phpstan-ignore-next-line
@@ -30,8 +33,9 @@ final class AccountsRawService implements AccountsRawContract
      *
      * @param string $accountSid the id of the account the resource belongs to
      * @param array{
-     *   dateCreated?: string|\DateTimeInterface, page?: int, pageSize?: int
+     *   dateCreated?: \DateTimeInterface, page?: int, pageSize?: int
      * }|AccountRetrieveRecordingsJsonParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AccountGetRecordingsJsonResponse>
      *
@@ -40,7 +44,7 @@ final class AccountsRawService implements AccountsRawContract
     public function retrieveRecordingsJson(
         string $accountSid,
         array|AccountRetrieveRecordingsJsonParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AccountRetrieveRecordingsJsonParams::parseRequest(
             $params,
@@ -73,6 +77,7 @@ final class AccountsRawService implements AccountsRawContract
      * @param array{
      *   pageSize?: int, pageToken?: string
      * }|AccountRetrieveTranscriptionsJsonParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AccountGetTranscriptionsJsonResponse>
      *
@@ -81,7 +86,7 @@ final class AccountsRawService implements AccountsRawContract
     public function retrieveTranscriptionsJson(
         string $accountSid,
         array|AccountRetrieveTranscriptionsJsonParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AccountRetrieveTranscriptionsJsonParams::parseRequest(
             $params,

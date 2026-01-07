@@ -21,6 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Calls\ActionsService::startAIAssistant()
  *
+ * @phpstan-import-type VoiceSettingsVariants from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings
  * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant
  * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\InterruptionSettings
  * @phpstan-import-type TranscriptionConfigShape from \Telnyx\Calls\Actions\TranscriptionConfig
@@ -93,6 +94,8 @@ final class ActionStartAIAssistantParams implements BaseModel
 
     /**
      * The settings associated with the voice selected.
+     *
+     * @var VoiceSettingsVariants|null $voiceSettings
      */
     #[Optional('voice_settings', union: VoiceSettings::class)]
     public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|null $voiceSettings;

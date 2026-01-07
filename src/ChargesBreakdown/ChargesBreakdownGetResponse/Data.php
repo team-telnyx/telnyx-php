@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type DataShape = array{
  *   currency: string,
  *   endDate: string,
- *   results: list<ResultShape>,
+ *   results: list<Result|ResultShape>,
  *   startDate: string,
  *   userEmail: string,
  *   userID: string,
@@ -101,7 +101,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ResultShape> $results
+     * @param list<Result|ResultShape> $results
      */
     public static function with(
         string $currency,
@@ -148,7 +148,7 @@ final class Data implements BaseModel
     /**
      * List of phone number charge breakdowns.
      *
-     * @param list<ResultShape> $results
+     * @param list<Result|ResultShape> $results
      */
     public function withResults(array $results): self
     {

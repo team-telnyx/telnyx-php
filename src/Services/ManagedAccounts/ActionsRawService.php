@@ -13,6 +13,9 @@ use Telnyx\ManagedAccounts\Actions\ActionEnableResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ManagedAccounts\ActionsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsRawService implements ActionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -27,6 +30,7 @@ final class ActionsRawService implements ActionsRawContract
      * Disables a managed account, forbidding it to use Telnyx services, including sending or receiving phone calls and SMS messages. Ongoing phone calls will not be affected. The managed account and its sub-users will no longer be able to log in via the mission control portal.
      *
      * @param string $id Managed Account User ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionDisableResponse>
      *
@@ -34,7 +38,7 @@ final class ActionsRawService implements ActionsRawContract
      */
     public function disable(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -52,6 +56,7 @@ final class ActionsRawService implements ActionsRawContract
      *
      * @param string $id Managed Account User ID
      * @param array{reenableAllConnections?: bool}|ActionEnableParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionEnableResponse>
      *
@@ -60,7 +65,7 @@ final class ActionsRawService implements ActionsRawContract
     public function enable(
         string $id,
         array|ActionEnableParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionEnableParams::parseRequest(
             $params,

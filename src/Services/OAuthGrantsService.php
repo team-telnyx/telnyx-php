@@ -14,6 +14,9 @@ use Telnyx\OAuthGrants\OAuthGrantGetResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\OAuthGrantsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class OAuthGrantsService implements OAuthGrantsContract
 {
     /**
@@ -35,12 +38,13 @@ final class OAuthGrantsService implements OAuthGrantsContract
      * Retrieve a single OAuth grant by ID
      *
      * @param string $id OAuth grant ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): OAuthGrantGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -55,6 +59,7 @@ final class OAuthGrantsService implements OAuthGrantsContract
      *
      * @param int $pageNumber Page number
      * @param int $pageSize Number of results per page
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<OAuthGrant>
      *
@@ -63,7 +68,7 @@ final class OAuthGrantsService implements OAuthGrantsContract
     public function list(
         int $pageNumber = 1,
         int $pageSize = 20,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
         $params = Util::removeNulls(
             ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
@@ -81,12 +86,13 @@ final class OAuthGrantsService implements OAuthGrantsContract
      * Revoke an OAuth grant
      *
      * @param string $id OAuth grant ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): OAuthGrantDeleteResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, requestOptions: $requestOptions);

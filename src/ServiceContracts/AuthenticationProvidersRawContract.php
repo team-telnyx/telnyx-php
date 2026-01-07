@@ -17,12 +17,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface AuthenticationProvidersRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|AuthenticationProviderCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AuthenticationProviderNewResponse>
      *
@@ -30,13 +34,14 @@ interface AuthenticationProvidersRawContract
      */
     public function create(
         array|AuthenticationProviderCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id authentication provider ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AuthenticationProviderGetResponse>
      *
@@ -44,7 +49,7 @@ interface AuthenticationProvidersRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -52,6 +57,7 @@ interface AuthenticationProvidersRawContract
      *
      * @param string $id identifies the resource
      * @param array<string,mixed>|AuthenticationProviderUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AuthenticationProviderUpdateResponse>
      *
@@ -60,13 +66,14 @@ interface AuthenticationProvidersRawContract
     public function update(
         string $id,
         array|AuthenticationProviderUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|AuthenticationProviderListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<AuthenticationProvider>>
      *
@@ -74,13 +81,14 @@ interface AuthenticationProvidersRawContract
      */
     public function list(
         array|AuthenticationProviderListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id authentication provider ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AuthenticationProviderDeleteResponse>
      *
@@ -88,6 +96,6 @@ interface AuthenticationProvidersRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

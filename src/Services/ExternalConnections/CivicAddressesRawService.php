@@ -9,11 +9,16 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressGetResponse;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressListParams;
+use Telnyx\ExternalConnections\CivicAddresses\CivicAddressListParams\Filter;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressListResponse;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressRetrieveParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ExternalConnections\CivicAddressesRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\ExternalConnections\CivicAddresses\CivicAddressListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class CivicAddressesRawService implements CivicAddressesRawContract
 {
     // @phpstan-ignore-next-line
@@ -29,6 +34,7 @@ final class CivicAddressesRawService implements CivicAddressesRawContract
      *
      * @param string $addressID identifies a civic address or a location
      * @param array{id: string}|CivicAddressRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CivicAddressGetResponse>
      *
@@ -37,7 +43,7 @@ final class CivicAddressesRawService implements CivicAddressesRawContract
     public function retrieve(
         string $addressID,
         array|CivicAddressRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CivicAddressRetrieveParams::parseRequest(
             $params,
@@ -61,9 +67,8 @@ final class CivicAddressesRawService implements CivicAddressesRawContract
      * Returns the civic addresses and locations from Microsoft Teams.
      *
      * @param string $id identifies the resource
-     * @param array{
-     *   filter?: array{country?: list<string>}
-     * }|CivicAddressListParams $params
+     * @param array{filter?: Filter|FilterShape}|CivicAddressListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CivicAddressListResponse>
      *
@@ -72,7 +77,7 @@ final class CivicAddressesRawService implements CivicAddressesRawContract
     public function list(
         string $id,
         array|CivicAddressListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CivicAddressListParams::parseRequest(
             $params,

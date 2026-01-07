@@ -11,6 +11,9 @@ use Telnyx\GlobalIPProtocols\GlobalIPProtocolListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPProtocolsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class GlobalIPProtocolsRawService implements GlobalIPProtocolsRawContract
 {
     // @phpstan-ignore-next-line
@@ -24,12 +27,15 @@ final class GlobalIPProtocolsRawService implements GlobalIPProtocolsRawContract
      *
      * List all Global IP Protocols
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<GlobalIPProtocolListResponse>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse
-    {
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',

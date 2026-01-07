@@ -11,6 +11,9 @@ use Telnyx\Recordings\Actions\ActionDeleteParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Recordings\ActionsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsRawService implements ActionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -25,6 +28,7 @@ final class ActionsRawService implements ActionsRawContract
      * Permanently deletes a list of call recordings.
      *
      * @param array{ids: list<string>}|ActionDeleteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -32,7 +36,7 @@ final class ActionsRawService implements ActionsRawContract
      */
     public function delete(
         array|ActionDeleteParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionDeleteParams::parseRequest(
             $params,

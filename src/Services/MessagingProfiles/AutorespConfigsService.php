@@ -8,11 +8,18 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigCreateParams\Op;
+use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\CreatedAt;
+use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\UpdatedAt;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListResponse;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfigResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingProfiles\AutorespConfigsContract;
 
+/**
+ * @phpstan-import-type CreatedAtShape from \Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\CreatedAt
+ * @phpstan-import-type UpdatedAtShape from \Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\UpdatedAt
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AutorespConfigsService implements AutorespConfigsContract
 {
     /**
@@ -34,7 +41,8 @@ final class AutorespConfigsService implements AutorespConfigsContract
      * Create auto-response setting
      *
      * @param list<string> $keywords
-     * @param 'start'|'stop'|'info'|Op $op
+     * @param Op|value-of<Op> $op
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -42,9 +50,9 @@ final class AutorespConfigsService implements AutorespConfigsContract
         string $profileID,
         string $countryCode,
         array $keywords,
-        string|Op $op,
+        Op|string $op,
         ?string $respText = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AutoRespConfigResponse {
         $params = Util::removeNulls(
             [
@@ -66,12 +74,14 @@ final class AutorespConfigsService implements AutorespConfigsContract
      *
      * Get Auto-Response Setting
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $autorespCfgID,
         string $profileID,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AutoRespConfigResponse {
         $params = Util::removeNulls(['profileID' => $profileID]);
 
@@ -90,8 +100,9 @@ final class AutorespConfigsService implements AutorespConfigsContract
      * @param string $profileID Path param:
      * @param string $countryCode Body param:
      * @param list<string> $keywords Body param:
-     * @param 'start'|'stop'|'info'|\Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op $op Body param:
+     * @param \Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op|value-of<\Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op> $op Body param:
      * @param string $respText Body param:
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -100,9 +111,9 @@ final class AutorespConfigsService implements AutorespConfigsContract
         string $profileID,
         string $countryCode,
         array $keywords,
-        string|\Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op $op,
+        \Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op|string $op,
         ?string $respText = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AutoRespConfigResponse {
         $params = Util::removeNulls(
             [
@@ -125,21 +136,18 @@ final class AutorespConfigsService implements AutorespConfigsContract
      *
      * List Auto-Response Settings
      *
-     * @param array{
-     *   gte?: string, lte?: string
-     * } $createdAt Consolidated created_at parameter (deepObject style). Originally: created_at[gte], created_at[lte]
-     * @param array{
-     *   gte?: string, lte?: string
-     * } $updatedAt Consolidated updated_at parameter (deepObject style). Originally: updated_at[gte], updated_at[lte]
+     * @param CreatedAt|CreatedAtShape $createdAt Consolidated created_at parameter (deepObject style). Originally: created_at[gte], created_at[lte]
+     * @param UpdatedAt|UpdatedAtShape $updatedAt Consolidated updated_at parameter (deepObject style). Originally: updated_at[gte], updated_at[lte]
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function list(
         string $profileID,
         ?string $countryCode = null,
-        ?array $createdAt = null,
-        ?array $updatedAt = null,
-        ?RequestOptions $requestOptions = null,
+        CreatedAt|array|null $createdAt = null,
+        UpdatedAt|array|null $updatedAt = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AutorespConfigListResponse {
         $params = Util::removeNulls(
             [
@@ -160,12 +168,14 @@ final class AutorespConfigsService implements AutorespConfigsContract
      *
      * Delete Auto-Response Setting
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $autorespCfgID,
         string $profileID,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): string {
         $params = Util::removeNulls(['profileID' => $profileID]);
 

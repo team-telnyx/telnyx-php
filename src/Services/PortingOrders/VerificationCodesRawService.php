@@ -9,15 +9,25 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams;
-use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Sort\Value;
+use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Filter;
+use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Page;
+use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Sort;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListResponse;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeSendParams;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeSendParams\VerificationMethod;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyParams;
+use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyParams\VerificationCode;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\VerificationCodesRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Page
+ * @phpstan-import-type SortShape from \Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Sort
+ * @phpstan-import-type VerificationCodeShape from \Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyParams\VerificationCode
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class VerificationCodesRawService implements VerificationCodesRawContract
 {
     // @phpstan-ignore-next-line
@@ -33,10 +43,9 @@ final class VerificationCodesRawService implements VerificationCodesRawContract
      *
      * @param string $id Porting Order id
      * @param array{
-     *   filter?: array{verified?: bool},
-     *   page?: array{number?: int, size?: int},
-     *   sort?: array{value?: 'created_at'|'-created_at'|Value},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|SortShape
      * }|VerificationCodeListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<VerificationCodeListResponse>>
      *
@@ -45,7 +54,7 @@ final class VerificationCodesRawService implements VerificationCodesRawContract
     public function list(
         string $id,
         array|VerificationCodeListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = VerificationCodeListParams::parseRequest(
             $params,
@@ -71,8 +80,9 @@ final class VerificationCodesRawService implements VerificationCodesRawContract
      * @param string $id Porting Order id
      * @param array{
      *   phoneNumbers?: list<string>,
-     *   verificationMethod?: 'sms'|'call'|VerificationMethod,
+     *   verificationMethod?: VerificationMethod|value-of<VerificationMethod>,
      * }|VerificationCodeSendParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -81,7 +91,7 @@ final class VerificationCodesRawService implements VerificationCodesRawContract
     public function send(
         string $id,
         array|VerificationCodeSendParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = VerificationCodeSendParams::parseRequest(
             $params,
@@ -105,8 +115,9 @@ final class VerificationCodesRawService implements VerificationCodesRawContract
      *
      * @param string $id Porting Order id
      * @param array{
-     *   verificationCodes?: list<array{code?: string, phoneNumber?: string}>
+     *   verificationCodes?: list<VerificationCode|VerificationCodeShape>
      * }|VerificationCodeVerifyParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VerificationCodeVerifyResponse>
      *
@@ -115,7 +126,7 @@ final class VerificationCodesRawService implements VerificationCodesRawContract
     public function verify(
         string $id,
         array|VerificationCodeVerifyParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = VerificationCodeVerifyParams::parseRequest(
             $params,

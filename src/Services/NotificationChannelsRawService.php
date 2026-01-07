@@ -14,13 +14,19 @@ use Telnyx\NotificationChannels\NotificationChannelCreateParams\ChannelTypeID;
 use Telnyx\NotificationChannels\NotificationChannelDeleteResponse;
 use Telnyx\NotificationChannels\NotificationChannelGetResponse;
 use Telnyx\NotificationChannels\NotificationChannelListParams;
-use Telnyx\NotificationChannels\NotificationChannelListParams\Filter\AssociatedRecordType\Eq;
+use Telnyx\NotificationChannels\NotificationChannelListParams\Filter;
+use Telnyx\NotificationChannels\NotificationChannelListParams\Page;
 use Telnyx\NotificationChannels\NotificationChannelNewResponse;
 use Telnyx\NotificationChannels\NotificationChannelUpdateParams;
 use Telnyx\NotificationChannels\NotificationChannelUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NotificationChannelsRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\NotificationChannels\NotificationChannelListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\NotificationChannels\NotificationChannelListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class NotificationChannelsRawService implements NotificationChannelsRawContract
 {
     // @phpstan-ignore-next-line
@@ -36,9 +42,10 @@ final class NotificationChannelsRawService implements NotificationChannelsRawCon
      *
      * @param array{
      *   channelDestination?: string,
-     *   channelTypeID?: 'sms'|'voice'|'email'|'webhook'|ChannelTypeID,
+     *   channelTypeID?: ChannelTypeID|value-of<ChannelTypeID>,
      *   notificationProfileID?: string,
      * }|NotificationChannelCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NotificationChannelNewResponse>
      *
@@ -46,7 +53,7 @@ final class NotificationChannelsRawService implements NotificationChannelsRawCon
      */
     public function create(
         array|NotificationChannelCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = NotificationChannelCreateParams::parseRequest(
             $params,
@@ -69,6 +76,7 @@ final class NotificationChannelsRawService implements NotificationChannelsRawCon
      * Get a notification channel.
      *
      * @param string $id the id of the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NotificationChannelGetResponse>
      *
@@ -76,7 +84,7 @@ final class NotificationChannelsRawService implements NotificationChannelsRawCon
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -95,9 +103,10 @@ final class NotificationChannelsRawService implements NotificationChannelsRawCon
      * @param string $notificationChannelID the id of the resource
      * @param array{
      *   channelDestination?: string,
-     *   channelTypeID?: 'sms'|'voice'|'email'|'webhook'|NotificationChannelUpdateParams\ChannelTypeID,
+     *   channelTypeID?: NotificationChannelUpdateParams\ChannelTypeID|value-of<NotificationChannelUpdateParams\ChannelTypeID>,
      *   notificationProfileID?: string,
      * }|NotificationChannelUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NotificationChannelUpdateResponse>
      *
@@ -106,7 +115,7 @@ final class NotificationChannelsRawService implements NotificationChannelsRawCon
     public function update(
         string $notificationChannelID,
         array|NotificationChannelUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = NotificationChannelUpdateParams::parseRequest(
             $params,
@@ -129,20 +138,9 @@ final class NotificationChannelsRawService implements NotificationChannelsRawCon
      * List notification channels.
      *
      * @param array{
-     *   filter?: array{
-     *     associatedRecordType?: array{eq?: 'account'|'phone_number'|Eq},
-     *     channelTypeID?: array{
-     *       eq?: 'webhook'|'sms'|'email'|'voice'|NotificationChannelListParams\Filter\ChannelTypeID\Eq,
-     *     },
-     *     notificationChannel?: array{eq?: string},
-     *     notificationEventConditionID?: array{eq?: string},
-     *     notificationProfileID?: array{eq?: string},
-     *     status?: array{
-     *       eq?: 'enabled'|'enable-received'|'enable-pending'|'enable-submtited'|'delete-received'|'delete-pending'|'delete-submitted'|'deleted'|NotificationChannelListParams\Filter\Status\Eq,
-     *     },
-     *   },
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|NotificationChannelListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<NotificationChannel>>
      *
@@ -150,7 +148,7 @@ final class NotificationChannelsRawService implements NotificationChannelsRawCon
      */
     public function list(
         array|NotificationChannelListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = NotificationChannelListParams::parseRequest(
             $params,
@@ -174,6 +172,7 @@ final class NotificationChannelsRawService implements NotificationChannelsRawCon
      * Delete a notification channel.
      *
      * @param string $id the id of the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NotificationChannelDeleteResponse>
      *
@@ -181,7 +180,7 @@ final class NotificationChannelsRawService implements NotificationChannelsRawCon
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

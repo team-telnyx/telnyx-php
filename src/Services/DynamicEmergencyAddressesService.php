@@ -12,11 +12,17 @@ use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddress;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressCreateParams\CountryCode;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressDeleteResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressGetResponse;
-use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Filter\Status;
+use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Filter;
+use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Page;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DynamicEmergencyAddressesContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class DynamicEmergencyAddressesService implements DynamicEmergencyAddressesContract
 {
     /**
@@ -37,13 +43,14 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
      *
      * Creates a dynamic emergency address.
      *
-     * @param 'US'|'CA'|'PR'|CountryCode $countryCode
+     * @param CountryCode|value-of<CountryCode> $countryCode
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $administrativeArea,
-        string|CountryCode $countryCode,
+        CountryCode|string $countryCode,
         string $houseNumber,
         string $locality,
         string $postalCode,
@@ -53,7 +60,7 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
         ?string $streetPostDirectional = null,
         ?string $streetPreDirectional = null,
         ?string $streetSuffix = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DynamicEmergencyAddressNewResponse {
         $params = Util::removeNulls(
             [
@@ -83,12 +90,13 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
      * Returns the dynamic emergency address based on the ID provided
      *
      * @param string $id Dynamic Emergency Address id
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): DynamicEmergencyAddressGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -101,21 +109,18 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
      *
      * Returns the dynamic emergency addresses according to filters
      *
-     * @param array{
-     *   countryCode?: string, status?: 'pending'|'activated'|'rejected'|Status
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[country_code]
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[country_code]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<DynamicEmergencyAddress>
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null,
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
@@ -131,12 +136,13 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
      * Deletes the dynamic emergency address based on the ID provided
      *
      * @param string $id Dynamic Emergency Address id
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): DynamicEmergencyAddressDeleteResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, requestOptions: $requestOptions);

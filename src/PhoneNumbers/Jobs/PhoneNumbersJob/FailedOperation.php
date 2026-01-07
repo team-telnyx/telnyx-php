@@ -13,7 +13,9 @@ use Telnyx\PhoneNumberBlocks\Jobs\JobError;
  * @phpstan-import-type JobErrorShape from \Telnyx\PhoneNumberBlocks\Jobs\JobError
  *
  * @phpstan-type FailedOperationShape = array{
- *   id?: string|null, errors?: list<JobErrorShape>|null, phoneNumber?: string|null
+ *   id?: string|null,
+ *   errors?: list<JobError|JobErrorShape>|null,
+ *   phoneNumber?: string|null,
  * }
  */
 final class FailedOperation implements BaseModel
@@ -47,7 +49,7 @@ final class FailedOperation implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<JobErrorShape>|null $errors
+     * @param list<JobError|JobErrorShape>|null $errors
      */
     public static function with(
         ?string $id = null,
@@ -75,7 +77,7 @@ final class FailedOperation implements BaseModel
     }
 
     /**
-     * @param list<JobErrorShape> $errors
+     * @param list<JobError|JobErrorShape> $errors
      */
     public function withErrors(array $errors): self
     {

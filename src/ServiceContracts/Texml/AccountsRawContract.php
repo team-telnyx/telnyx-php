@@ -12,6 +12,9 @@ use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse;
 use Telnyx\Texml\Accounts\AccountRetrieveRecordingsJsonParams;
 use Telnyx\Texml\Accounts\AccountRetrieveTranscriptionsJsonParams;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface AccountsRawContract
 {
     /**
@@ -19,6 +22,7 @@ interface AccountsRawContract
      *
      * @param string $accountSid the id of the account the resource belongs to
      * @param array<string,mixed>|AccountRetrieveRecordingsJsonParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AccountGetRecordingsJsonResponse>
      *
@@ -27,7 +31,7 @@ interface AccountsRawContract
     public function retrieveRecordingsJson(
         string $accountSid,
         array|AccountRetrieveRecordingsJsonParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -35,6 +39,7 @@ interface AccountsRawContract
      *
      * @param string $accountSid the id of the account the resource belongs to
      * @param array<string,mixed>|AccountRetrieveTranscriptionsJsonParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AccountGetTranscriptionsJsonResponse>
      *
@@ -43,6 +48,6 @@ interface AccountsRawContract
     public function retrieveTranscriptionsJson(
         string $accountSid,
         array|AccountRetrieveTranscriptionsJsonParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

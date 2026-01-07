@@ -9,10 +9,17 @@ use Telnyx\DefaultPagination;
 use Telnyx\Fqdns\Fqdn;
 use Telnyx\Fqdns\FqdnDeleteResponse;
 use Telnyx\Fqdns\FqdnGetResponse;
+use Telnyx\Fqdns\FqdnListParams\Filter;
+use Telnyx\Fqdns\FqdnListParams\Page;
 use Telnyx\Fqdns\FqdnNewResponse;
 use Telnyx\Fqdns\FqdnUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Fqdns\FqdnListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Fqdns\FqdnListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface FqdnsContract
 {
     /**
@@ -22,6 +29,7 @@ interface FqdnsContract
      * @param string $dnsRecordType The DNS record type for the FQDN. For cases where a port is not set, the DNS record type must be 'srv'. For cases where a port is set, the DNS record type must be 'a'. If the DNS record type is 'a' and a port is not specified, 5060 will be used.
      * @param string $fqdn FQDN represented by this resource
      * @param int|null $port port to use when connecting to this FQDN
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -30,19 +38,20 @@ interface FqdnsContract
         string $dnsRecordType,
         string $fqdn,
         ?int $port = 5060,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): FqdnNewResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): FqdnGetResponse;
 
     /**
@@ -53,6 +62,7 @@ interface FqdnsContract
      * @param string $dnsRecordType The DNS record type for the FQDN. For cases where a port is not set, the DNS record type must be 'srv'. For cases where a port is set, the DNS record type must be 'a'. If the DNS record type is 'a' and a port is not specified, 5060 will be used.
      * @param string $fqdn FQDN represented by this resource
      * @param int|null $port port to use when connecting to this FQDN
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -62,38 +72,36 @@ interface FqdnsContract
         ?string $dnsRecordType = null,
         ?string $fqdn = null,
         ?int $port = 5060,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): FqdnUpdateResponse;
 
     /**
      * @api
      *
-     * @param array{
-     *   connectionID?: string, dnsRecordType?: string, fqdn?: string, port?: int
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_id], filter[fqdn], filter[port], filter[dns_record_type]
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_id], filter[fqdn], filter[port], filter[dns_record_type]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<Fqdn>
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null,
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): FqdnDeleteResponse;
 }

@@ -7,10 +7,15 @@ namespace Telnyx\ServiceContracts\Messaging10dlc\Campaign;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface OsrContract
 {
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return array<string,mixed>
      *
@@ -18,6 +23,6 @@ interface OsrContract
      */
     public function getAttributes(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): array;
 }

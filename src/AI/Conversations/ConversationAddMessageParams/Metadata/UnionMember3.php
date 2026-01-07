@@ -9,7 +9,8 @@ use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 
 /**
- * @phpstan-type UnionMember3Shape = string|int|bool
+ * @phpstan-type UnionMember3Variants = string|int|bool
+ * @phpstan-type UnionMember3Shape = UnionMember3Variants
  */
 final class UnionMember3 implements ConverterSource
 {

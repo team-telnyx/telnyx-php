@@ -14,12 +14,19 @@ use Telnyx\Rooms\Room;
 use Telnyx\Rooms\RoomCreateParams;
 use Telnyx\Rooms\RoomGetResponse;
 use Telnyx\Rooms\RoomListParams;
+use Telnyx\Rooms\RoomListParams\Filter;
+use Telnyx\Rooms\RoomListParams\Page;
 use Telnyx\Rooms\RoomNewResponse;
 use Telnyx\Rooms\RoomRetrieveParams;
 use Telnyx\Rooms\RoomUpdateParams;
 use Telnyx\Rooms\RoomUpdateResponse;
 use Telnyx\ServiceContracts\RoomsRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Rooms\RoomListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Rooms\RoomListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class RoomsRawService implements RoomsRawContract
 {
     // @phpstan-ignore-next-line
@@ -41,6 +48,7 @@ final class RoomsRawService implements RoomsRawContract
      *   webhookEventURL?: string,
      *   webhookTimeoutSecs?: int,
      * }|RoomCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RoomNewResponse>
      *
@@ -48,7 +56,7 @@ final class RoomsRawService implements RoomsRawContract
      */
     public function create(
         array|RoomCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RoomCreateParams::parseRequest(
             $params,
@@ -72,6 +80,7 @@ final class RoomsRawService implements RoomsRawContract
      *
      * @param string $roomID the unique identifier of a room
      * @param array{includeSessions?: bool}|RoomRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RoomGetResponse>
      *
@@ -80,7 +89,7 @@ final class RoomsRawService implements RoomsRawContract
     public function retrieve(
         string $roomID,
         array|RoomRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RoomRetrieveParams::parseRequest(
             $params,
@@ -114,6 +123,7 @@ final class RoomsRawService implements RoomsRawContract
      *   webhookEventURL?: string,
      *   webhookTimeoutSecs?: int,
      * }|RoomUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RoomUpdateResponse>
      *
@@ -122,7 +132,7 @@ final class RoomsRawService implements RoomsRawContract
     public function update(
         string $roomID,
         array|RoomUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RoomUpdateParams::parseRequest(
             $params,
@@ -145,14 +155,9 @@ final class RoomsRawService implements RoomsRawContract
      * View a list of rooms.
      *
      * @param array{
-     *   filter?: array{
-     *     dateCreatedAt?: array{eq?: string, gte?: string, lte?: string},
-     *     dateUpdatedAt?: array{eq?: string, gte?: string, lte?: string},
-     *     uniqueName?: string,
-     *   },
-     *   includeSessions?: bool,
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, includeSessions?: bool, page?: Page|PageShape
      * }|RoomListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<Room>>
      *
@@ -160,7 +165,7 @@ final class RoomsRawService implements RoomsRawContract
      */
     public function list(
         array|RoomListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RoomListParams::parseRequest(
             $params,
@@ -187,6 +192,7 @@ final class RoomsRawService implements RoomsRawContract
      * Synchronously delete a Room. Participants from that room will be kicked out, they won't be able to join that room anymore, and you won't be charged anymore for that room.
      *
      * @param string $roomID the unique identifier of a room
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -194,7 +200,7 @@ final class RoomsRawService implements RoomsRawContract
      */
     public function delete(
         string $roomID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

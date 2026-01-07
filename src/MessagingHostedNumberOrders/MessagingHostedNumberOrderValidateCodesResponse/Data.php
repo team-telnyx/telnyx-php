@@ -13,7 +13,7 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesRe
  * @phpstan-import-type PhoneNumberShape from \Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesResponse\Data\PhoneNumber
  *
  * @phpstan-type DataShape = array{
- *   orderID: string, phoneNumbers: list<PhoneNumberShape>
+ *   orderID: string, phoneNumbers: list<PhoneNumber|PhoneNumberShape>
  * }
  */
 final class Data implements BaseModel
@@ -52,7 +52,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PhoneNumberShape> $phoneNumbers
+     * @param list<PhoneNumber|PhoneNumberShape> $phoneNumbers
      */
     public static function with(string $orderID, array $phoneNumbers): self
     {
@@ -73,7 +73,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<PhoneNumberShape> $phoneNumbers
+     * @param list<PhoneNumber|PhoneNumberShape> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {

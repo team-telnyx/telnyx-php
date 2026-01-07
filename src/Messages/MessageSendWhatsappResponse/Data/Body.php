@@ -24,7 +24,7 @@ use Telnyx\Messages\WhatsappMedia;
  * @phpstan-type BodyShape = array{
  *   audio?: null|WhatsappMedia|WhatsappMediaShape,
  *   bizOpaqueCallbackData?: string|null,
- *   contacts?: list<ContactShape>|null,
+ *   contacts?: list<Contact|ContactShape>|null,
  *   document?: null|WhatsappMedia|WhatsappMediaShape,
  *   image?: null|WhatsappMedia|WhatsappMediaShape,
  *   interactive?: null|Interactive|InteractiveShape,
@@ -89,7 +89,7 @@ final class Body implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param WhatsappMedia|WhatsappMediaShape|null $audio
-     * @param list<ContactShape>|null $contacts
+     * @param list<Contact|ContactShape>|null $contacts
      * @param WhatsappMedia|WhatsappMediaShape|null $document
      * @param WhatsappMedia|WhatsappMediaShape|null $image
      * @param Interactive|InteractiveShape|null $interactive
@@ -153,7 +153,7 @@ final class Body implements BaseModel
     }
 
     /**
-     * @param list<ContactShape> $contacts
+     * @param list<Contact|ContactShape> $contacts
      */
     public function withContacts(array $contacts): self
     {

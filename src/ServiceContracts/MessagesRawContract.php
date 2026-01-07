@@ -24,12 +24,16 @@ use Telnyx\Messages\MessageSendWhatsappParams;
 use Telnyx\Messages\MessageSendWhatsappResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface MessagesRawContract
 {
     /**
      * @api
      *
      * @param string $id The id of the message
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessageGetResponse>
      *
@@ -37,13 +41,14 @@ interface MessagesRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id The id of the message to cancel
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessageCancelScheduledResponse>
      *
@@ -51,13 +56,14 @@ interface MessagesRawContract
      */
     public function cancelScheduled(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|MessageScheduleParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessageScheduleResponse>
      *
@@ -65,13 +71,14 @@ interface MessagesRawContract
      */
     public function schedule(
         array|MessageScheduleParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|MessageSendParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessageSendResponse>
      *
@@ -79,13 +86,14 @@ interface MessagesRawContract
      */
     public function send(
         array|MessageSendParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|MessageSendGroupMmsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessageSendGroupMmsResponse>
      *
@@ -93,13 +101,14 @@ interface MessagesRawContract
      */
     public function sendGroupMms(
         array|MessageSendGroupMmsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|MessageSendLongCodeParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessageSendLongCodeResponse>
      *
@@ -107,13 +116,14 @@ interface MessagesRawContract
      */
     public function sendLongCode(
         array|MessageSendLongCodeParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|MessageSendNumberPoolParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessageSendNumberPoolResponse>
      *
@@ -121,13 +131,14 @@ interface MessagesRawContract
      */
     public function sendNumberPool(
         array|MessageSendNumberPoolParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|MessageSendShortCodeParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessageSendShortCodeResponse>
      *
@@ -135,13 +146,14 @@ interface MessagesRawContract
      */
     public function sendShortCode(
         array|MessageSendShortCodeParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|MessageSendWhatsappParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessageSendWhatsappResponse>
      *
@@ -149,6 +161,6 @@ interface MessagesRawContract
      */
     public function sendWhatsapp(
         array|MessageSendWhatsappParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

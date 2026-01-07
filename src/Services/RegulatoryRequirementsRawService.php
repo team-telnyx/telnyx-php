@@ -9,11 +9,14 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse;
 use Telnyx\RegulatoryRequirements\RegulatoryRequirementRetrieveParams;
-use Telnyx\RegulatoryRequirements\RegulatoryRequirementRetrieveParams\Filter\Action;
-use Telnyx\RegulatoryRequirements\RegulatoryRequirementRetrieveParams\Filter\PhoneNumberType;
+use Telnyx\RegulatoryRequirements\RegulatoryRequirementRetrieveParams\Filter;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\RegulatoryRequirementsRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\RegulatoryRequirements\RegulatoryRequirementRetrieveParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class RegulatoryRequirementsRawService implements RegulatoryRequirementsRawContract
 {
     // @phpstan-ignore-next-line
@@ -28,14 +31,9 @@ final class RegulatoryRequirementsRawService implements RegulatoryRequirementsRa
      * Retrieve regulatory requirements
      *
      * @param array{
-     *   filter?: array{
-     *     action?: 'ordering'|'porting'|'action'|Action,
-     *     countryCode?: string,
-     *     phoneNumber?: string,
-     *     phoneNumberType?: 'local'|'toll_free'|'mobile'|'national'|'shared_cost'|PhoneNumberType,
-     *     requirementGroupID?: string,
-     *   },
+     *   filter?: Filter|FilterShape
      * }|RegulatoryRequirementRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RegulatoryRequirementGetResponse>
      *
@@ -43,7 +41,7 @@ final class RegulatoryRequirementsRawService implements RegulatoryRequirementsRa
      */
     public function retrieve(
         array|RegulatoryRequirementRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RegulatoryRequirementRetrieveParams::parseRequest(
             $params,

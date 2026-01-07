@@ -13,12 +13,17 @@ use Telnyx\NotificationProfiles\NotificationProfileCreateParams;
 use Telnyx\NotificationProfiles\NotificationProfileDeleteResponse;
 use Telnyx\NotificationProfiles\NotificationProfileGetResponse;
 use Telnyx\NotificationProfiles\NotificationProfileListParams;
+use Telnyx\NotificationProfiles\NotificationProfileListParams\Page;
 use Telnyx\NotificationProfiles\NotificationProfileNewResponse;
 use Telnyx\NotificationProfiles\NotificationProfileUpdateParams;
 use Telnyx\NotificationProfiles\NotificationProfileUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NotificationProfilesRawContract;
 
+/**
+ * @phpstan-import-type PageShape from \Telnyx\NotificationProfiles\NotificationProfileListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class NotificationProfilesRawService implements NotificationProfilesRawContract
 {
     // @phpstan-ignore-next-line
@@ -33,6 +38,7 @@ final class NotificationProfilesRawService implements NotificationProfilesRawCon
      * Create a notification profile.
      *
      * @param array{name?: string}|NotificationProfileCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NotificationProfileNewResponse>
      *
@@ -40,7 +46,7 @@ final class NotificationProfilesRawService implements NotificationProfilesRawCon
      */
     public function create(
         array|NotificationProfileCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = NotificationProfileCreateParams::parseRequest(
             $params,
@@ -63,6 +69,7 @@ final class NotificationProfilesRawService implements NotificationProfilesRawCon
      * Get a notification profile.
      *
      * @param string $id the id of the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NotificationProfileGetResponse>
      *
@@ -70,7 +77,7 @@ final class NotificationProfilesRawService implements NotificationProfilesRawCon
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -88,6 +95,7 @@ final class NotificationProfilesRawService implements NotificationProfilesRawCon
      *
      * @param string $notificationProfileID the id of the resource
      * @param array{name?: string}|NotificationProfileUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NotificationProfileUpdateResponse>
      *
@@ -96,7 +104,7 @@ final class NotificationProfilesRawService implements NotificationProfilesRawCon
     public function update(
         string $notificationProfileID,
         array|NotificationProfileUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = NotificationProfileUpdateParams::parseRequest(
             $params,
@@ -118,9 +126,8 @@ final class NotificationProfilesRawService implements NotificationProfilesRawCon
      *
      * Returns a list of your notifications profiles.
      *
-     * @param array{
-     *   page?: array{number?: int, size?: int}
-     * }|NotificationProfileListParams $params
+     * @param array{page?: Page|PageShape}|NotificationProfileListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<NotificationProfile>>
      *
@@ -128,7 +135,7 @@ final class NotificationProfilesRawService implements NotificationProfilesRawCon
      */
     public function list(
         array|NotificationProfileListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = NotificationProfileListParams::parseRequest(
             $params,
@@ -152,6 +159,7 @@ final class NotificationProfilesRawService implements NotificationProfilesRawCon
      * Delete a notification profile.
      *
      * @param string $id the id of the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NotificationProfileDeleteResponse>
      *
@@ -159,7 +167,7 @@ final class NotificationProfilesRawService implements NotificationProfilesRawCon
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

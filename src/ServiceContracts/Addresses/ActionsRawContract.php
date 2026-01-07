@@ -12,6 +12,9 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ActionsRawContract
 {
     /**
@@ -19,6 +22,7 @@ interface ActionsRawContract
      *
      * @param string $addressUuid the UUID of the address that should be accepted
      * @param array<string,mixed>|ActionAcceptSuggestionsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionAcceptSuggestionsResponse>
      *
@@ -27,13 +31,14 @@ interface ActionsRawContract
     public function acceptSuggestions(
         string $addressUuid,
         array|ActionAcceptSuggestionsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ActionValidateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionValidateResponse>
      *
@@ -41,6 +46,6 @@ interface ActionsRawContract
      */
     public function validate(
         array|ActionValidateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

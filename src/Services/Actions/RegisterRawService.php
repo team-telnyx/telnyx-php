@@ -13,6 +13,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Actions\RegisterRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class RegisterRawService implements RegisterRawContract
 {
     // @phpstan-ignore-next-line
@@ -30,9 +33,10 @@ final class RegisterRawService implements RegisterRawContract
      * @param array{
      *   registrationCodes: list<string>,
      *   simCardGroupID?: string,
-     *   status?: 'enabled'|'disabled'|'standby'|Status,
+     *   status?: Status|value-of<Status>,
      *   tags?: list<string>,
      * }|RegisterCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RegisterNewResponse>
      *
@@ -40,7 +44,7 @@ final class RegisterRawService implements RegisterRawContract
      */
     public function create(
         array|RegisterCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RegisterCreateParams::parseRequest(
             $params,

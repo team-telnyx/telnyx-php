@@ -12,7 +12,8 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type ScheduledPhoneCallEventResponseShape from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledPhoneCallEventResponse
  * @phpstan-import-type ScheduledSMSEventResponseShape from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledSMSEventResponse
  *
- * @phpstan-type ScheduledEventListResponseShape = ScheduledPhoneCallEventResponseShape|ScheduledSMSEventResponseShape
+ * @phpstan-type ScheduledEventListResponseVariants = ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse
+ * @phpstan-type ScheduledEventListResponseShape = ScheduledEventListResponseVariants|ScheduledPhoneCallEventResponseShape|ScheduledSMSEventResponseShape
  */
 final class ScheduledEventListResponse implements ConverterSource
 {

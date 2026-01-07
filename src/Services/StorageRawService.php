@@ -11,6 +11,9 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\StorageRawContract;
 use Telnyx\Storage\StorageListMigrationSourceCoverageResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class StorageRawService implements StorageRawContract
 {
     // @phpstan-ignore-next-line
@@ -24,12 +27,14 @@ final class StorageRawService implements StorageRawContract
      *
      * List Migration Source coverage
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<StorageListMigrationSourceCoverageResponse>
      *
      * @throws APIException
      */
     public function listMigrationSourceCoverage(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

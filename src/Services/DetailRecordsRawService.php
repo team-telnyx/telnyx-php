@@ -10,8 +10,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\DetailRecords\DetailRecordListParams;
-use Telnyx\DetailRecords\DetailRecordListParams\Filter\DateRange;
-use Telnyx\DetailRecords\DetailRecordListParams\Filter\RecordType;
+use Telnyx\DetailRecords\DetailRecordListParams\Filter;
 use Telnyx\DetailRecords\DetailRecordListResponse;
 use Telnyx\DetailRecords\DetailRecordListResponse\AmdDetailRecord;
 use Telnyx\DetailRecords\DetailRecordListResponse\ConferenceDetailRecord;
@@ -23,6 +22,10 @@ use Telnyx\DetailRecords\DetailRecordListResponse\VerifyDetailRecord;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DetailRecordsRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\DetailRecords\DetailRecordListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class DetailRecordsRawService implements DetailRecordsRawContract
 {
     // @phpstan-ignore-next-line
@@ -37,14 +40,12 @@ final class DetailRecordsRawService implements DetailRecordsRawContract
      * Search for any detail record across the Telnyx Platform
      *
      * @param array{
-     *   filter?: array{
-     *     recordType: 'ai-voice-assistant'|'amd'|'call-control'|'conference'|'conference-participant'|'embedding'|'fax'|'inference'|'inference-speech-to-text'|'media_storage'|'media-streaming'|'messaging'|'noise-suppression'|'recording'|'sip-trunking'|'siprec-client'|'stt'|'tts'|'verify'|'webrtc'|'wireless'|RecordType,
-     *     dateRange?: 'yesterday'|'today'|'tomorrow'|'last_week'|'this_week'|'next_week'|'last_month'|'this_month'|'next_month'|DateRange,
-     *   },
+     *   filter?: Filter|FilterShape,
      *   pageNumber?: int,
      *   pageSize?: int,
      *   sort?: list<string>,
      * }|DetailRecordListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<MessageDetailRecord|ConferenceDetailRecord|ConferenceParticipantDetailRecord|AmdDetailRecord|VerifyDetailRecord|SimCardUsageDetailRecord|MediaStorageDetailRecord,>,>
      *
@@ -52,7 +53,7 @@ final class DetailRecordsRawService implements DetailRecordsRawContract
      */
     public function list(
         array|DetailRecordListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = DetailRecordListParams::parseRequest(
             $params,

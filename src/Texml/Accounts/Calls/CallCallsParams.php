@@ -40,7 +40,7 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\URLMethod;
  *   callerID?: string|null,
  *   cancelPlaybackOnDetectMessageEnd?: bool|null,
  *   cancelPlaybackOnMachineDetection?: bool|null,
- *   customHeaders?: list<CustomHeaderShape>|null,
+ *   customHeaders?: list<CustomHeader|CustomHeaderShape>|null,
  *   detectionMode?: null|DetectionMode|value-of<DetectionMode>,
  *   fallbackURL?: string|null,
  *   machineDetection?: null|MachineDetection|value-of<MachineDetection>,
@@ -355,7 +355,7 @@ final class CallCallsParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param AsyncAmdStatusCallbackMethod|value-of<AsyncAmdStatusCallbackMethod>|null $asyncAmdStatusCallbackMethod
-     * @param list<CustomHeaderShape>|null $customHeaders
+     * @param list<CustomHeader|CustomHeaderShape>|null $customHeaders
      * @param DetectionMode|value-of<DetectionMode>|null $detectionMode
      * @param MachineDetection|value-of<MachineDetection>|null $machineDetection
      * @param RecordingChannels|value-of<RecordingChannels>|null $recordingChannels
@@ -559,7 +559,7 @@ final class CallCallsParams implements BaseModel
     /**
      * Custom HTTP headers to be sent with the call. Each header should be an object with 'name' and 'value' properties.
      *
-     * @param list<CustomHeaderShape> $customHeaders
+     * @param list<CustomHeader|CustomHeaderShape> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {

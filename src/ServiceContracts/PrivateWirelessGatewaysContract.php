@@ -12,6 +12,9 @@ use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayGetResponse;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface PrivateWirelessGatewaysContract
 {
     /**
@@ -20,6 +23,7 @@ interface PrivateWirelessGatewaysContract
      * @param string $name the private wireless gateway name
      * @param string $networkID the identification of the related network resource
      * @param string $regionCode The code of the region where the private wireless gateway will be assigned. A list of available regions can be found at the regions endpoint
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -27,19 +31,20 @@ interface PrivateWirelessGatewaysContract
         string $name,
         string $networkID,
         ?string $regionCode = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): PrivateWirelessGatewayNewResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the private wireless gateway
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): PrivateWirelessGatewayGetResponse;
 
     /**
@@ -52,6 +57,7 @@ interface PrivateWirelessGatewaysContract
      * @param string $filterUpdatedAt when the Private Wireless Gateway was last updated
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<PrivateWirelessGateway>
      *
@@ -65,18 +71,19 @@ interface PrivateWirelessGatewaysContract
         ?string $filterUpdatedAt = null,
         int $pageNumber = 1,
         int $pageSize = 20,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination;
 
     /**
      * @api
      *
      * @param string $id identifies the private wireless gateway
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): PrivateWirelessGatewayDeleteResponse;
 }

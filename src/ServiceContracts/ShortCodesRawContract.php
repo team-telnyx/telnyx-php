@@ -14,12 +14,16 @@ use Telnyx\ShortCodes\ShortCodeListParams;
 use Telnyx\ShortCodes\ShortCodeUpdateParams;
 use Telnyx\ShortCodes\ShortCodeUpdateResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ShortCodesRawContract
 {
     /**
      * @api
      *
      * @param string $id The id of the short code
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ShortCodeGetResponse>
      *
@@ -27,7 +31,7 @@ interface ShortCodesRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -35,6 +39,7 @@ interface ShortCodesRawContract
      *
      * @param string $id The id of the short code
      * @param array<string,mixed>|ShortCodeUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ShortCodeUpdateResponse>
      *
@@ -43,13 +48,14 @@ interface ShortCodesRawContract
     public function update(
         string $id,
         array|ShortCodeUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ShortCodeListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<ShortCode>>
      *
@@ -57,6 +63,6 @@ interface ShortCodesRawContract
      */
     public function list(
         array|ShortCodeListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

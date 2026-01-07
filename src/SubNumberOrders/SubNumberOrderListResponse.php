@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type PaginationMetaShape from \Telnyx\AuthenticationProviders\PaginationMeta
  *
  * @phpstan-type SubNumberOrderListResponseShape = array{
- *   data?: list<SubNumberOrderShape>|null,
+ *   data?: list<SubNumberOrder|SubNumberOrderShape>|null,
  *   meta?: null|PaginationMeta|PaginationMetaShape,
  * }
  */
@@ -40,7 +40,7 @@ final class SubNumberOrderListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SubNumberOrderShape>|null $data
+     * @param list<SubNumberOrder|SubNumberOrderShape>|null $data
      * @param PaginationMeta|PaginationMetaShape|null $meta
      */
     public static function with(
@@ -56,7 +56,7 @@ final class SubNumberOrderListResponse implements BaseModel
     }
 
     /**
-     * @param list<SubNumberOrderShape> $data
+     * @param list<SubNumberOrder|SubNumberOrderShape> $data
      */
     public function withData(array $data): self
     {

@@ -17,6 +17,9 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantRetrieveParticipan
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateParams;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ParticipantsRawContract
 {
     /**
@@ -24,6 +27,7 @@ interface ParticipantsRawContract
      *
      * @param string $callSidOrParticipantLabel callSid or Label of the Participant to update
      * @param array<string,mixed>|ParticipantRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ParticipantGetResponse>
      *
@@ -32,7 +36,7 @@ interface ParticipantsRawContract
     public function retrieve(
         string $callSidOrParticipantLabel,
         array|ParticipantRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -40,6 +44,7 @@ interface ParticipantsRawContract
      *
      * @param string $callSidOrParticipantLabel path param: CallSid or Label of the Participant to update
      * @param array<string,mixed>|ParticipantUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ParticipantUpdateResponse>
      *
@@ -48,7 +53,7 @@ interface ParticipantsRawContract
     public function update(
         string $callSidOrParticipantLabel,
         array|ParticipantUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -56,6 +61,7 @@ interface ParticipantsRawContract
      *
      * @param string $callSidOrParticipantLabel callSid or Label of the Participant to update
      * @param array<string,mixed>|ParticipantDeleteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -64,7 +70,7 @@ interface ParticipantsRawContract
     public function delete(
         string $callSidOrParticipantLabel,
         array|ParticipantDeleteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -72,6 +78,7 @@ interface ParticipantsRawContract
      *
      * @param string $conferenceSid path param: The ConferenceSid that uniquely identifies a conference
      * @param array<string,mixed>|ParticipantParticipantsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ParticipantParticipantsResponse>
      *
@@ -80,7 +87,7 @@ interface ParticipantsRawContract
     public function participants(
         string $conferenceSid,
         array|ParticipantParticipantsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -88,6 +95,7 @@ interface ParticipantsRawContract
      *
      * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
      * @param array<string,mixed>|ParticipantRetrieveParticipantsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ParticipantGetParticipantsResponse>
      *
@@ -96,6 +104,6 @@ interface ParticipantsRawContract
     public function retrieveParticipants(
         string $conferenceSid,
         array|ParticipantRetrieveParticipantsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

@@ -18,8 +18,8 @@ use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementG
  *   phoneNumber?: string|null,
  *   phoneNumberType?: string|null,
  *   recordType?: string|null,
- *   regionInformation?: list<RegionInformationShape>|null,
- *   regulatoryRequirements?: list<RegulatoryRequirementShape>|null,
+ *   regionInformation?: list<RegionInformation|RegionInformationShape>|null,
+ *   regulatoryRequirements?: list<RegulatoryRequirement|RegulatoryRequirementShape>|null,
  * }
  */
 final class Data implements BaseModel
@@ -54,8 +54,8 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RegionInformationShape>|null $regionInformation
-     * @param list<RegulatoryRequirementShape>|null $regulatoryRequirements
+     * @param list<RegionInformation|RegionInformationShape>|null $regionInformation
+     * @param list<RegulatoryRequirement|RegulatoryRequirementShape>|null $regulatoryRequirements
      */
     public static function with(
         ?string $phoneNumber = null,
@@ -100,7 +100,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<RegionInformationShape> $regionInformation
+     * @param list<RegionInformation|RegionInformationShape> $regionInformation
      */
     public function withRegionInformation(array $regionInformation): self
     {
@@ -111,7 +111,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<RegulatoryRequirementShape> $regulatoryRequirements
+     * @param list<RegulatoryRequirement|RegulatoryRequirementShape> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements

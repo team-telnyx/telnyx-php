@@ -11,12 +11,19 @@ use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\Room;
 use Telnyx\Rooms\RoomGetResponse;
+use Telnyx\Rooms\RoomListParams\Filter;
+use Telnyx\Rooms\RoomListParams\Page;
 use Telnyx\Rooms\RoomNewResponse;
 use Telnyx\Rooms\RoomUpdateResponse;
 use Telnyx\ServiceContracts\RoomsContract;
 use Telnyx\Services\Rooms\ActionsService;
 use Telnyx\Services\Rooms\SessionsService;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Rooms\RoomListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Rooms\RoomListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class RoomsService implements RoomsContract
 {
     /**
@@ -55,6 +62,7 @@ final class RoomsService implements RoomsContract
      * @param string $webhookEventFailoverURL The failover URL where webhooks related to this room will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this room will be sent. Must include a scheme, such as 'https'.
      * @param int $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -65,7 +73,7 @@ final class RoomsService implements RoomsContract
         string $webhookEventFailoverURL = '',
         ?string $webhookEventURL = null,
         ?int $webhookTimeoutSecs = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): RoomNewResponse {
         $params = Util::removeNulls(
             [
@@ -91,13 +99,14 @@ final class RoomsService implements RoomsContract
      *
      * @param string $roomID the unique identifier of a room
      * @param bool $includeSessions to decide if room sessions should be included in the response
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $roomID,
         ?bool $includeSessions = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): RoomGetResponse {
         $params = Util::removeNulls(['includeSessions' => $includeSessions]);
 
@@ -119,6 +128,7 @@ final class RoomsService implements RoomsContract
      * @param string $webhookEventFailoverURL The failover URL where webhooks related to this room will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this room will be sent. Must include a scheme, such as 'https'.
      * @param int $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -130,7 +140,7 @@ final class RoomsService implements RoomsContract
         string $webhookEventFailoverURL = '',
         ?string $webhookEventURL = null,
         ?int $webhookTimeoutSecs = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): RoomUpdateResponse {
         $params = Util::removeNulls(
             [
@@ -154,25 +164,20 @@ final class RoomsService implements RoomsContract
      *
      * View a list of rooms.
      *
-     * @param array{
-     *   dateCreatedAt?: array{eq?: string, gte?: string, lte?: string},
-     *   dateUpdatedAt?: array{eq?: string, gte?: string, lte?: string},
-     *   uniqueName?: string,
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[unique_name]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[unique_name]
      * @param bool $includeSessions to decide if room sessions should be included in the response
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<Room>
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
+        Filter|array|null $filter = null,
         ?bool $includeSessions = null,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination {
         $params = Util::removeNulls(
             [
@@ -194,12 +199,13 @@ final class RoomsService implements RoomsContract
      * Synchronously delete a Room. Participants from that room will be kicked out, they won't be able to join that room anymore, and you won't be charged anymore for that room.
      *
      * @param string $roomID the unique identifier of a room
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $roomID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($roomID, requestOptions: $requestOptions);

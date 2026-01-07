@@ -14,12 +14,16 @@ use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderNewResponse;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface InexplicitNumberOrdersRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|InexplicitNumberOrderCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InexplicitNumberOrderNewResponse>
      *
@@ -27,13 +31,14 @@ interface InexplicitNumberOrdersRawContract
      */
     public function create(
         array|InexplicitNumberOrderCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id Identifies the inexplicit number order
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InexplicitNumberOrderGetResponse>
      *
@@ -41,13 +46,14 @@ interface InexplicitNumberOrdersRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|InexplicitNumberOrderListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPaginationForInexplicitNumberOrders<InexplicitNumberOrderResponse,>,>
      *
@@ -55,6 +61,6 @@ interface InexplicitNumberOrdersRawContract
      */
     public function list(
         array|InexplicitNumberOrderListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

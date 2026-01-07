@@ -10,12 +10,16 @@ use Telnyx\Legacy\Reporting\UsageReports\UsageReportGetSpeechToTextResponse;
 use Telnyx\Legacy\Reporting\UsageReports\UsageReportRetrieveSpeechToTextParams;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface UsageReportsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|UsageReportRetrieveSpeechToTextParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UsageReportGetSpeechToTextResponse>
      *
@@ -23,6 +27,6 @@ interface UsageReportsRawContract
      */
     public function retrieveSpeechToText(
         array|UsageReportRetrieveSpeechToTextParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

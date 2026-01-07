@@ -14,12 +14,16 @@ use Telnyx\Porting\Reports\ReportListParams;
 use Telnyx\Porting\Reports\ReportNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ReportsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|ReportCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ReportNewResponse>
      *
@@ -27,13 +31,14 @@ interface ReportsRawContract
      */
     public function create(
         array|ReportCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies a report
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ReportGetResponse>
      *
@@ -41,13 +46,14 @@ interface ReportsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ReportListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PortingReport>>
      *
@@ -55,6 +61,6 @@ interface ReportsRawContract
      */
     public function list(
         array|ReportListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

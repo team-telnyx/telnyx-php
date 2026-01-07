@@ -13,14 +13,24 @@ use Telnyx\MobilePhoneNumbers\MobilePhoneNumber;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberGetResponse;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberListParams;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams;
-use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallForwarding\ForwardingType;
-use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallRecording\InboundCallRecordingChannels;
-use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallRecording\InboundCallRecordingFormat;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallForwarding;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallRecording;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CnamListing;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\Inbound;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\InboundCallScreening;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\Outbound;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MobilePhoneNumbersRawContract;
 
+/**
+ * @phpstan-import-type CallForwardingShape from \Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallForwarding
+ * @phpstan-import-type CallRecordingShape from \Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallRecording
+ * @phpstan-import-type CnamListingShape from \Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CnamListing
+ * @phpstan-import-type InboundShape from \Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\Inbound
+ * @phpstan-import-type OutboundShape from \Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\Outbound
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MobilePhoneNumbersRawService implements MobilePhoneNumbersRawContract
 {
     // @phpstan-ignore-next-line
@@ -35,6 +45,7 @@ final class MobilePhoneNumbersRawService implements MobilePhoneNumbersRawContrac
      * Retrieve a Mobile Phone Number
      *
      * @param string $id The ID of the mobile phone number
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MobilePhoneNumberGetResponse>
      *
@@ -42,7 +53,7 @@ final class MobilePhoneNumbersRawService implements MobilePhoneNumbersRawContrac
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -60,28 +71,19 @@ final class MobilePhoneNumbersRawService implements MobilePhoneNumbersRawContrac
      *
      * @param string $id The ID of the mobile phone number
      * @param array{
-     *   callForwarding?: array{
-     *     callForwardingEnabled?: bool,
-     *     forwardingType?: 'always'|'on-failure'|ForwardingType|null,
-     *     forwardsTo?: string|null,
-     *   },
-     *   callRecording?: array{
-     *     inboundCallRecordingChannels?: 'single'|'dual'|InboundCallRecordingChannels,
-     *     inboundCallRecordingEnabled?: bool,
-     *     inboundCallRecordingFormat?: 'wav'|'mp3'|InboundCallRecordingFormat,
-     *   },
+     *   callForwarding?: CallForwarding|CallForwardingShape,
+     *   callRecording?: CallRecording|CallRecordingShape,
      *   callerIDNameEnabled?: bool,
-     *   cnamListing?: array{
-     *     cnamListingDetails?: string|null, cnamListingEnabled?: bool
-     *   },
+     *   cnamListing?: CnamListing|CnamListingShape,
      *   connectionID?: string|null,
      *   customerReference?: string|null,
-     *   inbound?: array{interceptionAppID?: string|null},
-     *   inboundCallScreening?: 'disabled'|'reject_calls'|'flag_calls'|InboundCallScreening,
+     *   inbound?: Inbound|InboundShape,
+     *   inboundCallScreening?: InboundCallScreening|value-of<InboundCallScreening>,
      *   noiseSuppression?: bool,
-     *   outbound?: array{interceptionAppID?: string|null},
+     *   outbound?: Outbound|OutboundShape,
      *   tags?: list<string>,
      * }|MobilePhoneNumberUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MobilePhoneNumberUpdateResponse>
      *
@@ -90,7 +92,7 @@ final class MobilePhoneNumbersRawService implements MobilePhoneNumbersRawContrac
     public function update(
         string $id,
         array|MobilePhoneNumberUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MobilePhoneNumberUpdateParams::parseRequest(
             $params,
@@ -115,6 +117,7 @@ final class MobilePhoneNumbersRawService implements MobilePhoneNumbersRawContrac
      * @param array{
      *   pageNumber?: int, pageSize?: int
      * }|MobilePhoneNumberListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<MobilePhoneNumber>>
      *
@@ -122,7 +125,7 @@ final class MobilePhoneNumbersRawService implements MobilePhoneNumbersRawContrac
      */
     public function list(
         array|MobilePhoneNumberListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MobilePhoneNumberListParams::parseRequest(
             $params,

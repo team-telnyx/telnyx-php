@@ -19,12 +19,16 @@ use Telnyx\ManagedAccounts\ManagedAccountUpdateParams;
 use Telnyx\ManagedAccounts\ManagedAccountUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ManagedAccountsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|ManagedAccountCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ManagedAccountNewResponse>
      *
@@ -32,13 +36,14 @@ interface ManagedAccountsRawContract
      */
     public function create(
         array|ManagedAccountCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id Managed Account User ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ManagedAccountGetResponse>
      *
@@ -46,7 +51,7 @@ interface ManagedAccountsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -54,6 +59,7 @@ interface ManagedAccountsRawContract
      *
      * @param string $id Managed Account User ID
      * @param array<string,mixed>|ManagedAccountUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ManagedAccountUpdateResponse>
      *
@@ -62,13 +68,14 @@ interface ManagedAccountsRawContract
     public function update(
         string $id,
         array|ManagedAccountUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ManagedAccountListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<ManagedAccountListResponse>>
      *
@@ -76,18 +83,20 @@ interface ManagedAccountsRawContract
      */
     public function list(
         array|ManagedAccountListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ManagedAccountGetAllocatableGlobalOutboundChannelsResponse>
      *
      * @throws APIException
      */
     public function getAllocatableGlobalOutboundChannels(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -95,6 +104,7 @@ interface ManagedAccountsRawContract
      *
      * @param string $id Managed Account User ID
      * @param array<string,mixed>|ManagedAccountUpdateGlobalChannelLimitParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ManagedAccountUpdateGlobalChannelLimitResponse>
      *
@@ -103,6 +113,6 @@ interface ManagedAccountsRawContract
     public function updateGlobalChannelLimit(
         string $id,
         array|ManagedAccountUpdateGlobalChannelLimitParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

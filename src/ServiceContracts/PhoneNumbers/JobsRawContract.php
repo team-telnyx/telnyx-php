@@ -18,12 +18,16 @@ use Telnyx\PhoneNumbers\Jobs\JobUpdateEmergencySettingsBatchResponse;
 use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface JobsRawContract
 {
     /**
      * @api
      *
      * @param string $id identifies the Phone Numbers Job
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<JobGetResponse>
      *
@@ -31,13 +35,14 @@ interface JobsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|JobListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PhoneNumbersJob>>
      *
@@ -45,13 +50,14 @@ interface JobsRawContract
      */
     public function list(
         array|JobListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|JobDeleteBatchParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<JobDeleteBatchResponse>
      *
@@ -59,13 +65,14 @@ interface JobsRawContract
      */
     public function deleteBatch(
         array|JobDeleteBatchParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|JobUpdateBatchParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<JobUpdateBatchResponse>
      *
@@ -73,13 +80,14 @@ interface JobsRawContract
      */
     public function updateBatch(
         array|JobUpdateBatchParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|JobUpdateEmergencySettingsBatchParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<JobUpdateEmergencySettingsBatchResponse>
      *
@@ -87,6 +95,6 @@ interface JobsRawContract
      */
     public function updateEmergencySettingsBatch(
         array|JobUpdateEmergencySettingsBatchParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

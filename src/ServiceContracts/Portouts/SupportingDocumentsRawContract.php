@@ -11,6 +11,9 @@ use Telnyx\Portouts\SupportingDocuments\SupportingDocumentListResponse;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface SupportingDocumentsRawContract
 {
     /**
@@ -18,6 +21,7 @@ interface SupportingDocumentsRawContract
      *
      * @param string $id Portout id
      * @param array<string,mixed>|SupportingDocumentCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SupportingDocumentNewResponse>
      *
@@ -26,13 +30,14 @@ interface SupportingDocumentsRawContract
     public function create(
         string $id,
         array|SupportingDocumentCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id Portout id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SupportingDocumentListResponse>
      *
@@ -40,6 +45,6 @@ interface SupportingDocumentsRawContract
      */
     public function list(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

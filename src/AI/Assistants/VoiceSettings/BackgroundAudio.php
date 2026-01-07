@@ -18,7 +18,8 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type MediaURLShape from \Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\MediaURL
  * @phpstan-import-type MediaNameShape from \Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\MediaName
  *
- * @phpstan-type BackgroundAudioShape = PredefinedMediaShape|MediaURLShape|MediaNameShape
+ * @phpstan-type BackgroundAudioVariants = PredefinedMedia|MediaURL|MediaName
+ * @phpstan-type BackgroundAudioShape = BackgroundAudioVariants|PredefinedMediaShape|MediaURLShape|MediaNameShape
  */
 final class BackgroundAudio implements ConverterSource
 {

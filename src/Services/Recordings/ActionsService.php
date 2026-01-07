@@ -10,6 +10,9 @@ use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Recordings\ActionsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsService implements ActionsContract
 {
     /**
@@ -31,12 +34,13 @@ final class ActionsService implements ActionsContract
      * Permanently deletes a list of call recordings.
      *
      * @param list<string> $ids list of call recording IDs to delete
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         array $ids,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed {
         $params = Util::removeNulls(['ids' => $ids]);
 

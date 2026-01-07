@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   chargeType: string,
  *   serviceOwnerEmail: string,
  *   serviceOwnerUserID: string,
- *   services: list<ServiceShape>,
+ *   services: list<Service|ServiceShape>,
  *   tn: string,
  * }
  */
@@ -92,7 +92,7 @@ final class Result implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ServiceShape> $services
+     * @param list<Service|ServiceShape> $services
      */
     public static function with(
         string $chargeType,
@@ -148,7 +148,7 @@ final class Result implements BaseModel
     /**
      * List of services associated with this number.
      *
-     * @param list<ServiceShape> $services
+     * @param list<Service|ServiceShape> $services
      */
     public function withServices(array $services): self
     {

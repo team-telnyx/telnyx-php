@@ -23,7 +23,7 @@ use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementGroupR
  *   phoneNumber?: string|null,
  *   phoneNumberType?: string|null,
  *   recordType?: string|null,
- *   regulatoryRequirements?: list<RegulatoryRequirementShape>|null,
+ *   regulatoryRequirements?: list<RegulatoryRequirement|RegulatoryRequirementShape>|null,
  *   requirementsMet?: bool|null,
  *   requirementsStatus?: string|null,
  *   status?: string|null,
@@ -91,7 +91,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RegulatoryRequirementShape>|null $regulatoryRequirements
+     * @param list<RegulatoryRequirement|RegulatoryRequirementShape>|null $regulatoryRequirements
      */
     public static function with(
         ?string $id = null,
@@ -212,7 +212,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<RegulatoryRequirementShape> $regulatoryRequirements
+     * @param list<RegulatoryRequirement|RegulatoryRequirementShape> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements

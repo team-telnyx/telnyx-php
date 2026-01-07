@@ -9,10 +9,15 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\MessagingURLDomains\MessagingURLDomainListParams;
+use Telnyx\MessagingURLDomains\MessagingURLDomainListParams\Page;
 use Telnyx\MessagingURLDomains\MessagingURLDomainListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingURLDomainsRawContract;
 
+/**
+ * @phpstan-import-type PageShape from \Telnyx\MessagingURLDomains\MessagingURLDomainListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MessagingURLDomainsRawService implements MessagingURLDomainsRawContract
 {
     // @phpstan-ignore-next-line
@@ -26,9 +31,8 @@ final class MessagingURLDomainsRawService implements MessagingURLDomainsRawContr
      *
      * List messaging URL domains
      *
-     * @param array{
-     *   page?: array{number?: int, size?: int}
-     * }|MessagingURLDomainListParams $params
+     * @param array{page?: Page|PageShape}|MessagingURLDomainListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<MessagingURLDomainListResponse>>
      *
@@ -36,7 +40,7 @@ final class MessagingURLDomainsRawService implements MessagingURLDomainsRawContr
      */
     public function list(
         array|MessagingURLDomainListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MessagingURLDomainListParams::parseRequest(
             $params,

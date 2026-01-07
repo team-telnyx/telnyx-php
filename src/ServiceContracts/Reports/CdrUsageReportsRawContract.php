@@ -10,12 +10,16 @@ use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface CdrUsageReportsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|CdrUsageReportFetchSyncParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CdrUsageReportFetchSyncResponse>
      *
@@ -23,6 +27,6 @@ interface CdrUsageReportsRawContract
      */
     public function fetchSync(
         array|CdrUsageReportFetchSyncParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

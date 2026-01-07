@@ -12,6 +12,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type JsonSchemaVariants from \Telnyx\AI\Conversations\Insights\InsightTemplate\JsonSchema
  * @phpstan-import-type JsonSchemaShape from \Telnyx\AI\Conversations\Insights\InsightTemplate\JsonSchema
  *
  * @phpstan-type InsightTemplateShape = array{
@@ -45,7 +46,7 @@ final class InsightTemplate implements BaseModel
     /**
      * If specified, the output will follow the JSON schema.
      *
-     * @var string|array<string,mixed>|null $jsonSchema
+     * @var JsonSchemaVariants|null $jsonSchema
      */
     #[Optional('json_schema', union: JsonSchema::class)]
     public string|array|null $jsonSchema;

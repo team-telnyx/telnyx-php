@@ -11,12 +11,17 @@ use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\Requirements\RequirementGetResponse;
 use Telnyx\Requirements\RequirementListParams;
-use Telnyx\Requirements\RequirementListParams\Filter\Action;
-use Telnyx\Requirements\RequirementListParams\Filter\PhoneNumberType;
+use Telnyx\Requirements\RequirementListParams\Filter;
+use Telnyx\Requirements\RequirementListParams\Page;
 use Telnyx\Requirements\RequirementListParams\Sort;
 use Telnyx\Requirements\RequirementListResponse;
 use Telnyx\ServiceContracts\RequirementsRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Requirements\RequirementListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Requirements\RequirementListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class RequirementsRawService implements RequirementsRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,6 +36,7 @@ final class RequirementsRawService implements RequirementsRawContract
      * Retrieve a document requirement record
      *
      * @param string $id Uniquely identifies the requirement_type record
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RequirementGetResponse>
      *
@@ -38,7 +44,7 @@ final class RequirementsRawService implements RequirementsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -55,14 +61,11 @@ final class RequirementsRawService implements RequirementsRawContract
      * List all requirements with filtering, sorting, and pagination
      *
      * @param array{
-     *   filter?: array{
-     *     action?: 'branded_calling'|'ordering'|'porting'|Action,
-     *     countryCode?: string,
-     *     phoneNumberType?: 'local'|'national'|'toll_free'|PhoneNumberType,
-     *   },
-     *   page?: array{number?: int, size?: int},
-     *   sort?: list<'created_at'|'updated_at'|'country_code'|'phone_number_type'|'-created_at'|'-updated_at'|'-country_code'|'-phone_number_type'|Sort>,
+     *   filter?: Filter|FilterShape,
+     *   page?: Page|PageShape,
+     *   sort?: list<Sort|value-of<Sort>>,
      * }|RequirementListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<RequirementListResponse>>
      *
@@ -70,7 +73,7 @@ final class RequirementsRawService implements RequirementsRawContract
      */
     public function list(
         array|RequirementListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RequirementListParams::parseRequest(
             $params,

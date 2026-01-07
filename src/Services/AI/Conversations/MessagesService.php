@@ -10,6 +10,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\MessagesContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MessagesService implements MessagesContract
 {
     /**
@@ -30,11 +33,13 @@ final class MessagesService implements MessagesContract
      *
      * Retrieve messages for a specific conversation, including tool calls made by the assistant.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function list(
         string $conversationID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MessageListResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($conversationID, requestOptions: $requestOptions);

@@ -17,12 +17,16 @@ use Telnyx\FqdnConnections\FqdnConnectionUpdateParams;
 use Telnyx\FqdnConnections\FqdnConnectionUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface FqdnConnectionsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|FqdnConnectionCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FqdnConnectionNewResponse>
      *
@@ -30,13 +34,14 @@ interface FqdnConnectionsRawContract
      */
     public function create(
         array|FqdnConnectionCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FqdnConnectionGetResponse>
      *
@@ -44,7 +49,7 @@ interface FqdnConnectionsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -52,6 +57,7 @@ interface FqdnConnectionsRawContract
      *
      * @param string $id identifies the resource
      * @param array<string,mixed>|FqdnConnectionUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FqdnConnectionUpdateResponse>
      *
@@ -60,13 +66,14 @@ interface FqdnConnectionsRawContract
     public function update(
         string $id,
         array|FqdnConnectionUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|FqdnConnectionListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<FqdnConnection>>
      *
@@ -74,13 +81,14 @@ interface FqdnConnectionsRawContract
      */
     public function list(
         array|FqdnConnectionListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FqdnConnectionDeleteResponse>
      *
@@ -88,6 +96,6 @@ interface FqdnConnectionsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

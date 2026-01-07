@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\AccessIPRanges\AccessIPRange;
 use Telnyx\AccessIPRanges\AccessIPRangeCreateParams;
 use Telnyx\AccessIPRanges\AccessIPRangeListParams;
+use Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -15,6 +16,10 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AccessIPRangesRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AccessIPRangesRawService implements AccessIPRangesRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,6 +36,7 @@ final class AccessIPRangesRawService implements AccessIPRangesRawContract
      * @param array{
      *   cidrBlock: string, description?: string
      * }|AccessIPRangeCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AccessIPRange>
      *
@@ -38,7 +44,7 @@ final class AccessIPRangesRawService implements AccessIPRangesRawContract
      */
     public function create(
         array|AccessIPRangeCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AccessIPRangeCreateParams::parseRequest(
             $params,
@@ -61,20 +67,9 @@ final class AccessIPRangesRawService implements AccessIPRangesRawContract
      * List all Access IP Ranges
      *
      * @param array{
-     *   filter?: array{
-     *     cidrBlock?: string|array{
-     *       contains?: string, endswith?: string, startswith?: string
-     *     },
-     *     createdAt?: string|\DateTimeInterface|array{
-     *       gt?: string|\DateTimeInterface,
-     *       gte?: string|\DateTimeInterface,
-     *       lt?: string|\DateTimeInterface,
-     *       lte?: string|\DateTimeInterface,
-     *     },
-     *   },
-     *   pageNumber?: int,
-     *   pageSize?: int,
+     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
      * }|AccessIPRangeListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<AccessIPRange>>
      *
@@ -82,7 +77,7 @@ final class AccessIPRangesRawService implements AccessIPRangesRawContract
      */
     public function list(
         array|AccessIPRangeListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AccessIPRangeListParams::parseRequest(
             $params,
@@ -108,13 +103,15 @@ final class AccessIPRangesRawService implements AccessIPRangesRawContract
      *
      * Delete access IP ranges
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<AccessIPRange>
      *
      * @throws APIException
      */
     public function delete(
         string $accessIPRangeID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

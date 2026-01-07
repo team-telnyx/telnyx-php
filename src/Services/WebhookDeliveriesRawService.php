@@ -12,9 +12,15 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WebhookDeliveriesRawContract;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListParams;
-use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\Status\Eq;
+use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter;
+use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Page;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class WebhookDeliveriesRawService implements WebhookDeliveriesRawContract
 {
     // @phpstan-ignore-next-line
@@ -29,6 +35,7 @@ final class WebhookDeliveriesRawService implements WebhookDeliveriesRawContract
      * Provides webhook_delivery debug data, such as timestamps, delivery status and attempts.
      *
      * @param string $id uniquely identifies the webhook_delivery
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WebhookDeliveryGetResponse>
      *
@@ -36,7 +43,7 @@ final class WebhookDeliveriesRawService implements WebhookDeliveriesRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -53,16 +60,9 @@ final class WebhookDeliveriesRawService implements WebhookDeliveriesRawContract
      * Lists webhook_deliveries for the authenticated user
      *
      * @param array{
-     *   filter?: array{
-     *     attempts?: array{contains?: string},
-     *     eventType?: string,
-     *     finishedAt?: array{gte?: string, lte?: string},
-     *     startedAt?: array{gte?: string, lte?: string},
-     *     status?: array{eq?: 'delivered'|'failed'|Eq},
-     *     webhook?: array{contains?: string},
-     *   },
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|WebhookDeliveryListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<WebhookDeliveryListResponse>>
      *
@@ -70,7 +70,7 @@ final class WebhookDeliveriesRawService implements WebhookDeliveriesRawContract
      */
     public function list(
         array|WebhookDeliveryListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = WebhookDeliveryListParams::parseRequest(
             $params,

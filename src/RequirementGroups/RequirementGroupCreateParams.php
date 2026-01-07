@@ -25,7 +25,7 @@ use Telnyx\RequirementGroups\RequirementGroupCreateParams\RegulatoryRequirement;
  *   countryCode: string,
  *   phoneNumberType: PhoneNumberType|value-of<PhoneNumberType>,
  *   customerReference?: string|null,
- *   regulatoryRequirements?: list<RegulatoryRequirementShape>|null,
+ *   regulatoryRequirements?: list<RegulatoryRequirement|RegulatoryRequirementShape>|null,
  * }
  */
 final class RequirementGroupCreateParams implements BaseModel
@@ -86,7 +86,7 @@ final class RequirementGroupCreateParams implements BaseModel
      *
      * @param Action|value-of<Action> $action
      * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
-     * @param list<RegulatoryRequirementShape>|null $regulatoryRequirements
+     * @param list<RegulatoryRequirement|RegulatoryRequirementShape>|null $regulatoryRequirements
      */
     public static function with(
         Action|string $action,
@@ -150,7 +150,7 @@ final class RequirementGroupCreateParams implements BaseModel
     }
 
     /**
-     * @param list<RegulatoryRequirementShape> $regulatoryRequirements
+     * @param list<RegulatoryRequirement|RegulatoryRequirementShape> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements

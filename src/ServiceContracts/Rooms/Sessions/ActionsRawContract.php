@@ -15,12 +15,16 @@ use Telnyx\Rooms\Sessions\Actions\ActionMuteResponse;
 use Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams;
 use Telnyx\Rooms\Sessions\Actions\ActionUnmuteResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ActionsRawContract
 {
     /**
      * @api
      *
      * @param string $roomSessionID the unique identifier of a room session
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionEndResponse>
      *
@@ -28,7 +32,7 @@ interface ActionsRawContract
      */
     public function end(
         string $roomSessionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -36,6 +40,7 @@ interface ActionsRawContract
      *
      * @param string $roomSessionID the unique identifier of a room session
      * @param array<string,mixed>|ActionKickParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionKickResponse>
      *
@@ -44,7 +49,7 @@ interface ActionsRawContract
     public function kick(
         string $roomSessionID,
         array|ActionKickParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -52,6 +57,7 @@ interface ActionsRawContract
      *
      * @param string $roomSessionID the unique identifier of a room session
      * @param array<string,mixed>|ActionMuteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionMuteResponse>
      *
@@ -60,7 +66,7 @@ interface ActionsRawContract
     public function mute(
         string $roomSessionID,
         array|ActionMuteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -68,6 +74,7 @@ interface ActionsRawContract
      *
      * @param string $roomSessionID the unique identifier of a room session
      * @param array<string,mixed>|ActionUnmuteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionUnmuteResponse>
      *
@@ -76,6 +83,6 @@ interface ActionsRawContract
     public function unmute(
         string $roomSessionID,
         array|ActionUnmuteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

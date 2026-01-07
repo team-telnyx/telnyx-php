@@ -11,12 +11,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface AuditEventsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|AuditEventListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<AuditEventListResponse>>
      *
@@ -24,6 +28,6 @@ interface AuditEventsRawContract
      */
     public function list(
         array|AuditEventListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

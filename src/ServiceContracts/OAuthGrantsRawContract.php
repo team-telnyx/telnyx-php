@@ -13,12 +13,16 @@ use Telnyx\OAuthGrants\OAuthGrantGetResponse;
 use Telnyx\OAuthGrants\OAuthGrantListParams;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface OAuthGrantsRawContract
 {
     /**
      * @api
      *
      * @param string $id OAuth grant ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OAuthGrantGetResponse>
      *
@@ -26,13 +30,14 @@ interface OAuthGrantsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|OAuthGrantListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<OAuthGrant>>
      *
@@ -40,13 +45,14 @@ interface OAuthGrantsRawContract
      */
     public function list(
         array|OAuthGrantListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id OAuth grant ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OAuthGrantDeleteResponse>
      *
@@ -54,6 +60,6 @@ interface OAuthGrantsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

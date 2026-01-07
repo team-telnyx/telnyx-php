@@ -12,11 +12,16 @@ use Telnyx\GlobalIPs\GlobalIPCreateParams;
 use Telnyx\GlobalIPs\GlobalIPDeleteResponse;
 use Telnyx\GlobalIPs\GlobalIPGetResponse;
 use Telnyx\GlobalIPs\GlobalIPListParams;
+use Telnyx\GlobalIPs\GlobalIPListParams\Page;
 use Telnyx\GlobalIPs\GlobalIPListResponse;
 use Telnyx\GlobalIPs\GlobalIPNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPsRawContract;
 
+/**
+ * @phpstan-import-type PageShape from \Telnyx\GlobalIPs\GlobalIPListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class GlobalIPsRawService implements GlobalIPsRawContract
 {
     // @phpstan-ignore-next-line
@@ -33,6 +38,7 @@ final class GlobalIPsRawService implements GlobalIPsRawContract
      * @param array{
      *   description?: string, name?: string, ports?: array<string,mixed>
      * }|GlobalIPCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<GlobalIPNewResponse>
      *
@@ -40,7 +46,7 @@ final class GlobalIPsRawService implements GlobalIPsRawContract
      */
     public function create(
         array|GlobalIPCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = GlobalIPCreateParams::parseRequest(
             $params,
@@ -63,6 +69,7 @@ final class GlobalIPsRawService implements GlobalIPsRawContract
      * Retrieve a Global IP.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<GlobalIPGetResponse>
      *
@@ -70,7 +77,7 @@ final class GlobalIPsRawService implements GlobalIPsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -86,7 +93,8 @@ final class GlobalIPsRawService implements GlobalIPsRawContract
      *
      * List all Global IPs.
      *
-     * @param array{page?: array{number?: int, size?: int}}|GlobalIPListParams $params
+     * @param array{page?: Page|PageShape}|GlobalIPListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<GlobalIPListResponse>>
      *
@@ -94,7 +102,7 @@ final class GlobalIPsRawService implements GlobalIPsRawContract
      */
     public function list(
         array|GlobalIPListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = GlobalIPListParams::parseRequest(
             $params,
@@ -118,6 +126,7 @@ final class GlobalIPsRawService implements GlobalIPsRawContract
      * Delete a Global IP.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<GlobalIPDeleteResponse>
      *
@@ -125,7 +134,7 @@ final class GlobalIPsRawService implements GlobalIPsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

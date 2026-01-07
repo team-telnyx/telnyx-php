@@ -16,7 +16,7 @@ use Telnyx\Messages\RcsCardContent\Media;
  * @phpstan-type RcsCardContentShape = array{
  *   description?: string|null,
  *   media?: null|Media|MediaShape,
- *   suggestions?: list<RcsSuggestionShape>|null,
+ *   suggestions?: list<RcsSuggestion|RcsSuggestionShape>|null,
  *   title?: string|null,
  * }
  */
@@ -62,7 +62,7 @@ final class RcsCardContent implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Media|MediaShape|null $media
-     * @param list<RcsSuggestionShape>|null $suggestions
+     * @param list<RcsSuggestion|RcsSuggestionShape>|null $suggestions
      */
     public static function with(
         ?string $description = null,
@@ -107,7 +107,7 @@ final class RcsCardContent implements BaseModel
     /**
      * List of suggestions to include in the card. Maximum 10 suggestions.
      *
-     * @param list<RcsSuggestionShape> $suggestions
+     * @param list<RcsSuggestion|RcsSuggestionShape> $suggestions
      */
     public function withSuggestions(array $suggestions): self
     {

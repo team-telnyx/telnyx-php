@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   createdAt?: string|null,
  *   recordType?: string|null,
  *   settings?: array<string,mixed>|null,
- *   simCardActionsSummary?: list<SimCardActionsSummaryShape>|null,
+ *   simCardActionsSummary?: list<SimCardActionsSummary|SimCardActionsSummaryShape>|null,
  *   updatedAt?: string|null,
  * }
  */
@@ -84,7 +84,7 @@ final class Data implements BaseModel
      *
      * @param ActionType|value-of<ActionType>|null $actionType
      * @param array<string,mixed>|null $settings
-     * @param list<SimCardActionsSummaryShape>|null $simCardActionsSummary
+     * @param list<SimCardActionsSummary|SimCardActionsSummaryShape>|null $simCardActionsSummary
      */
     public static function with(
         ?string $id = null,
@@ -168,7 +168,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<SimCardActionsSummaryShape> $simCardActionsSummary
+     * @param list<SimCardActionsSummary|SimCardActionsSummaryShape> $simCardActionsSummary
      */
     public function withSimCardActionsSummary(
         array $simCardActionsSummary

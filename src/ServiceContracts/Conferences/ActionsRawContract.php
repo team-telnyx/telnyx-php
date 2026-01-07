@@ -36,6 +36,9 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ActionsRawContract
 {
     /**
@@ -43,6 +46,7 @@ interface ActionsRawContract
      *
      * @param string $id Uniquely identifies the conference by id or name
      * @param array<string,mixed>|ActionUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionUpdateResponse>
      *
@@ -51,7 +55,7 @@ interface ActionsRawContract
     public function update(
         string $id,
         array|ActionUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -59,6 +63,7 @@ interface ActionsRawContract
      *
      * @param string $id Uniquely identifies the conference by id or name
      * @param array<string,mixed>|ActionHoldParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionHoldResponse>
      *
@@ -67,7 +72,7 @@ interface ActionsRawContract
     public function hold(
         string $id,
         array|ActionHoldParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -75,6 +80,7 @@ interface ActionsRawContract
      *
      * @param string $id Uniquely identifies the conference by id or name
      * @param array<string,mixed>|ActionJoinParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionJoinResponse>
      *
@@ -83,7 +89,7 @@ interface ActionsRawContract
     public function join(
         string $id,
         array|ActionJoinParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -91,6 +97,7 @@ interface ActionsRawContract
      *
      * @param string $id Uniquely identifies the conference by id or name
      * @param array<string,mixed>|ActionLeaveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionLeaveResponse>
      *
@@ -99,7 +106,7 @@ interface ActionsRawContract
     public function leave(
         string $id,
         array|ActionLeaveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -107,6 +114,7 @@ interface ActionsRawContract
      *
      * @param string $id Uniquely identifies the conference by id or name
      * @param array<string,mixed>|ActionMuteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionMuteResponse>
      *
@@ -115,7 +123,7 @@ interface ActionsRawContract
     public function mute(
         string $id,
         array|ActionMuteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -123,6 +131,7 @@ interface ActionsRawContract
      *
      * @param string $id Uniquely identifies the conference by id or name
      * @param array<string,mixed>|ActionPlayParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionPlayResponse>
      *
@@ -131,7 +140,7 @@ interface ActionsRawContract
     public function play(
         string $id,
         array|ActionPlayParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -139,6 +148,7 @@ interface ActionsRawContract
      *
      * @param string $id Specifies the conference by id or name
      * @param array<string,mixed>|ActionRecordPauseParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionRecordPauseResponse>
      *
@@ -147,7 +157,7 @@ interface ActionsRawContract
     public function recordPause(
         string $id,
         array|ActionRecordPauseParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -155,6 +165,7 @@ interface ActionsRawContract
      *
      * @param string $id Specifies the conference by id or name
      * @param array<string,mixed>|ActionRecordResumeParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionRecordResumeResponse>
      *
@@ -163,7 +174,7 @@ interface ActionsRawContract
     public function recordResume(
         string $id,
         array|ActionRecordResumeParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -171,6 +182,7 @@ interface ActionsRawContract
      *
      * @param string $id Specifies the conference to record by id or name
      * @param array<string,mixed>|ActionRecordStartParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionRecordStartResponse>
      *
@@ -179,7 +191,7 @@ interface ActionsRawContract
     public function recordStart(
         string $id,
         array|ActionRecordStartParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -187,6 +199,7 @@ interface ActionsRawContract
      *
      * @param string $id Specifies the conference to stop the recording for by id or name
      * @param array<string,mixed>|ActionRecordStopParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionRecordStopResponse>
      *
@@ -195,7 +208,7 @@ interface ActionsRawContract
     public function recordStop(
         string $id,
         array|ActionRecordStopParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -203,6 +216,7 @@ interface ActionsRawContract
      *
      * @param string $id Specifies the conference by id or name
      * @param array<string,mixed>|ActionSpeakParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionSpeakResponse>
      *
@@ -211,7 +225,7 @@ interface ActionsRawContract
     public function speak(
         string $id,
         array|ActionSpeakParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -219,6 +233,7 @@ interface ActionsRawContract
      *
      * @param string $id Uniquely identifies the conference by id or name
      * @param array<string,mixed>|ActionStopParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStopResponse>
      *
@@ -227,7 +242,7 @@ interface ActionsRawContract
     public function stop(
         string $id,
         array|ActionStopParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -235,6 +250,7 @@ interface ActionsRawContract
      *
      * @param string $id Uniquely identifies the conference by id or name
      * @param array<string,mixed>|ActionUnholdParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionUnholdResponse>
      *
@@ -243,7 +259,7 @@ interface ActionsRawContract
     public function unhold(
         string $id,
         array|ActionUnholdParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -251,6 +267,7 @@ interface ActionsRawContract
      *
      * @param string $id Uniquely identifies the conference by id or name
      * @param array<string,mixed>|ActionUnmuteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionUnmuteResponse>
      *
@@ -259,6 +276,6 @@ interface ActionsRawContract
     public function unmute(
         string $id,
         array|ActionUnmuteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

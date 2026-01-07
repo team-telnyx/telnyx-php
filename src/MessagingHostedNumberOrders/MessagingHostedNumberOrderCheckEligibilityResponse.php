@@ -13,7 +13,7 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilit
  * @phpstan-import-type PhoneNumberShape from \Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityResponse\PhoneNumber
  *
  * @phpstan-type MessagingHostedNumberOrderCheckEligibilityResponseShape = array{
- *   phoneNumbers?: list<PhoneNumberShape>|null
+ *   phoneNumbers?: list<PhoneNumber|PhoneNumberShape>|null
  * }
  */
 final class MessagingHostedNumberOrderCheckEligibilityResponse implements BaseModel
@@ -39,7 +39,7 @@ final class MessagingHostedNumberOrderCheckEligibilityResponse implements BaseMo
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PhoneNumberShape>|null $phoneNumbers
+     * @param list<PhoneNumber|PhoneNumberShape>|null $phoneNumbers
      */
     public static function with(?array $phoneNumbers = null): self
     {
@@ -53,7 +53,7 @@ final class MessagingHostedNumberOrderCheckEligibilityResponse implements BaseMo
     /**
      * List of phone numbers with their eligibility status.
      *
-     * @param list<PhoneNumberShape> $phoneNumbers
+     * @param list<PhoneNumber|PhoneNumberShape> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {

@@ -16,6 +16,9 @@ use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVettingOrderResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging10dlc\Brand\ExternalVettingRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ExternalVettingRawService implements ExternalVettingRawContract
 {
     // @phpstan-ignore-next-line
@@ -29,13 +32,15 @@ final class ExternalVettingRawService implements ExternalVettingRawContract
      *
      * Get list of valid external vetting record for a given brand
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<list<ExternalVettingListResponseItem>>
      *
      * @throws APIException
      */
     public function list(
         string $brandID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -56,6 +61,7 @@ final class ExternalVettingRawService implements ExternalVettingRawContract
      * @param array{
      *   evpID: string, vettingID: string, vettingToken?: string
      * }|ExternalVettingImportsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ExternalVettingImportsResponse>
      *
@@ -64,7 +70,7 @@ final class ExternalVettingRawService implements ExternalVettingRawContract
     public function imports(
         string $brandID,
         array|ExternalVettingImportsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ExternalVettingImportsParams::parseRequest(
             $params,
@@ -89,6 +95,7 @@ final class ExternalVettingRawService implements ExternalVettingRawContract
      * @param array{
      *   evpID: string, vettingClass: string
      * }|ExternalVettingOrderParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ExternalVettingOrderResponse>
      *
@@ -97,7 +104,7 @@ final class ExternalVettingRawService implements ExternalVettingRawContract
     public function order(
         string $brandID,
         array|ExternalVettingOrderParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ExternalVettingOrderParams::parseRequest(
             $params,

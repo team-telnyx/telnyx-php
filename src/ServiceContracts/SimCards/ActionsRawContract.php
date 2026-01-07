@@ -22,12 +22,16 @@ use Telnyx\SimCards\Actions\ActionValidateRegistrationCodesParams;
 use Telnyx\SimCards\Actions\ActionValidateRegistrationCodesResponse;
 use Telnyx\SimCards\Actions\SimCardAction;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ActionsRawContract
 {
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionGetResponse>
      *
@@ -35,13 +39,14 @@ interface ActionsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ActionListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<SimCardAction>>
      *
@@ -49,13 +54,14 @@ interface ActionsRawContract
      */
     public function list(
         array|ActionListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ActionBulkSetPublicIPsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionBulkSetPublicIPsResponse>
      *
@@ -63,13 +69,14 @@ interface ActionsRawContract
      */
     public function bulkSetPublicIPs(
         array|ActionBulkSetPublicIPsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the SIM
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionDisableResponse>
      *
@@ -77,13 +84,14 @@ interface ActionsRawContract
      */
     public function disable(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the SIM
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionEnableResponse>
      *
@@ -91,13 +99,14 @@ interface ActionsRawContract
      */
     public function enable(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the SIM
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionRemovePublicIPResponse>
      *
@@ -105,7 +114,7 @@ interface ActionsRawContract
      */
     public function removePublicIP(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -113,6 +122,7 @@ interface ActionsRawContract
      *
      * @param string $id identifies the SIM
      * @param array<string,mixed>|ActionSetPublicIPParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionSetPublicIPResponse>
      *
@@ -121,13 +131,14 @@ interface ActionsRawContract
     public function setPublicIP(
         string $id,
         array|ActionSetPublicIPParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the SIM
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionSetStandbyResponse>
      *
@@ -135,13 +146,14 @@ interface ActionsRawContract
      */
     public function setStandby(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ActionValidateRegistrationCodesParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionValidateRegistrationCodesResponse>
      *
@@ -149,6 +161,6 @@ interface ActionsRawContract
      */
     public function validateRegistrationCodes(
         array|ActionValidateRegistrationCodesParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

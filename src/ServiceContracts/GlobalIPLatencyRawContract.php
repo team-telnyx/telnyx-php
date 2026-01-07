@@ -10,12 +10,16 @@ use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyRetrieveParams;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface GlobalIPLatencyRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|GlobalIPLatencyRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<GlobalIPLatencyGetResponse>
      *
@@ -23,6 +27,6 @@ interface GlobalIPLatencyRawContract
      */
     public function retrieve(
         array|GlobalIPLatencyRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

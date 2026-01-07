@@ -14,12 +14,16 @@ use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadListParams;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface CsvDownloadsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|CsvDownloadCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CsvDownloadNewResponse>
      *
@@ -27,13 +31,14 @@ interface CsvDownloadsRawContract
      */
     public function create(
         array|CsvDownloadCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the CSV download
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CsvDownloadGetResponse>
      *
@@ -41,13 +46,14 @@ interface CsvDownloadsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|CsvDownloadListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<CsvDownload>>
      *
@@ -55,6 +61,6 @@ interface CsvDownloadsRawContract
      */
     public function list(
         array|CsvDownloadListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

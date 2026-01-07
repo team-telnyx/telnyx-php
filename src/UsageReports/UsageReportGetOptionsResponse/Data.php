@@ -18,7 +18,7 @@ use Telnyx\UsageReports\UsageReportGetOptionsResponse\Data\RecordType;
  *   product?: string|null,
  *   productDimensions?: list<string>|null,
  *   productMetrics?: list<string>|null,
- *   recordTypes?: list<RecordTypeShape>|null,
+ *   recordTypes?: list<RecordType|RecordTypeShape>|null,
  * }
  */
 final class Data implements BaseModel
@@ -68,7 +68,7 @@ final class Data implements BaseModel
      *
      * @param list<string>|null $productDimensions
      * @param list<string>|null $productMetrics
-     * @param list<RecordTypeShape>|null $recordTypes
+     * @param list<RecordType|RecordTypeShape>|null $recordTypes
      */
     public static function with(
         ?string $product = null,
@@ -126,7 +126,7 @@ final class Data implements BaseModel
     /**
      * Subproducts if applicable.
      *
-     * @param list<RecordTypeShape> $recordTypes
+     * @param list<RecordType|RecordTypeShape> $recordTypes
      */
     public function withRecordTypes(array $recordTypes): self
     {

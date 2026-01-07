@@ -10,8 +10,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPaginationForInexplicitNumberOrders;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams;
-use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams\OrderingGroup\CountryISO;
-use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams\OrderingGroup\Strategy;
+use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams\OrderingGroup;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderGetResponse;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderListParams;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderNewResponse;
@@ -19,6 +18,10 @@ use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\InexplicitNumberOrdersRawContract;
 
+/**
+ * @phpstan-import-type OrderingGroupShape from \Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams\OrderingGroup
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class InexplicitNumberOrdersRawService implements InexplicitNumberOrdersRawContract
 {
     // @phpstan-ignore-next-line
@@ -33,26 +36,13 @@ final class InexplicitNumberOrdersRawService implements InexplicitNumberOrdersRa
      * Create an inexplicit number order to programmatically purchase phone numbers without specifying exact numbers.
      *
      * @param array{
-     *   orderingGroups: list<array{
-     *     countRequested: string,
-     *     countryISO: 'US'|'CA'|CountryISO,
-     *     phoneNumberType: string,
-     *     administrativeArea?: string,
-     *     excludeHeldNumbers?: bool,
-     *     features?: list<string>,
-     *     locality?: string,
-     *     nationalDestinationCode?: string,
-     *     phoneNumber?: array{
-     *       contains?: string, endsWith?: string, startsWith?: string
-     *     },
-     *     quickship?: bool,
-     *     strategy?: 'always'|'never'|Strategy,
-     *   }>,
+     *   orderingGroups: list<OrderingGroup|OrderingGroupShape>,
      *   billingGroupID?: string,
      *   connectionID?: string,
      *   customerReference?: string,
      *   messagingProfileID?: string,
      * }|InexplicitNumberOrderCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InexplicitNumberOrderNewResponse>
      *
@@ -60,7 +50,7 @@ final class InexplicitNumberOrdersRawService implements InexplicitNumberOrdersRa
      */
     public function create(
         array|InexplicitNumberOrderCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = InexplicitNumberOrderCreateParams::parseRequest(
             $params,
@@ -83,6 +73,7 @@ final class InexplicitNumberOrdersRawService implements InexplicitNumberOrdersRa
      * Get an existing inexplicit number order by ID.
      *
      * @param string $id Identifies the inexplicit number order
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InexplicitNumberOrderGetResponse>
      *
@@ -90,7 +81,7 @@ final class InexplicitNumberOrdersRawService implements InexplicitNumberOrdersRa
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -109,6 +100,7 @@ final class InexplicitNumberOrdersRawService implements InexplicitNumberOrdersRa
      * @param array{
      *   pageNumber?: int, pageSize?: int
      * }|InexplicitNumberOrderListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPaginationForInexplicitNumberOrders<InexplicitNumberOrderResponse,>,>
      *
@@ -116,7 +108,7 @@ final class InexplicitNumberOrdersRawService implements InexplicitNumberOrdersRa
      */
     public function list(
         array|InexplicitNumberOrderListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = InexplicitNumberOrderListParams::parseRequest(
             $params,

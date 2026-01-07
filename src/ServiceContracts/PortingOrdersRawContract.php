@@ -23,12 +23,16 @@ use Telnyx\PortingOrders\PortingOrderUpdateParams;
 use Telnyx\PortingOrders\PortingOrderUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface PortingOrdersRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|PortingOrderCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PortingOrderNewResponse>
      *
@@ -36,7 +40,7 @@ interface PortingOrdersRawContract
      */
     public function create(
         array|PortingOrderCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -44,6 +48,7 @@ interface PortingOrdersRawContract
      *
      * @param string $id Porting Order id
      * @param array<string,mixed>|PortingOrderRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PortingOrderGetResponse>
      *
@@ -52,7 +57,7 @@ interface PortingOrdersRawContract
     public function retrieve(
         string $id,
         array|PortingOrderRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -60,6 +65,7 @@ interface PortingOrdersRawContract
      *
      * @param string $id Porting Order id
      * @param array<string,mixed>|PortingOrderUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PortingOrderUpdateResponse>
      *
@@ -68,13 +74,14 @@ interface PortingOrdersRawContract
     public function update(
         string $id,
         array|PortingOrderUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|PortingOrderListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PortingOrder>>
      *
@@ -82,13 +89,14 @@ interface PortingOrdersRawContract
      */
     public function list(
         array|PortingOrderListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id Porting Order id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -96,13 +104,14 @@ interface PortingOrdersRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id Porting Order id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PortingOrderGetAllowedFocWindowsResponse>
      *
@@ -110,18 +119,20 @@ interface PortingOrdersRawContract
      */
     public function retrieveAllowedFocWindows(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PortingOrderGetExceptionTypesResponse>
      *
      * @throws APIException
      */
     public function retrieveExceptionTypes(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -129,6 +140,7 @@ interface PortingOrdersRawContract
      *
      * @param string $id Porting Order id
      * @param array<string,mixed>|PortingOrderRetrieveLoaTemplateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
      *
@@ -137,7 +149,7 @@ interface PortingOrdersRawContract
     public function retrieveLoaTemplate(
         string $id,
         array|PortingOrderRetrieveLoaTemplateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -145,6 +157,7 @@ interface PortingOrdersRawContract
      *
      * @param string $id Porting Order id
      * @param array<string,mixed>|PortingOrderRetrieveRequirementsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PortingOrderGetRequirementsResponse>>
      *
@@ -153,13 +166,14 @@ interface PortingOrdersRawContract
     public function retrieveRequirements(
         string $id,
         array|PortingOrderRetrieveRequirementsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id Porting Order id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PortingOrderGetSubRequestResponse>
      *
@@ -167,6 +181,6 @@ interface PortingOrdersRawContract
      */
     public function retrieveSubRequest(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

@@ -17,6 +17,9 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\EmbeddingsContract;
 use Telnyx\Services\AI\Embeddings\BucketsService;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class EmbeddingsService implements EmbeddingsContract
 {
     /**
@@ -62,8 +65,9 @@ final class EmbeddingsService implements EmbeddingsContract
      * This loader will split each article into paragraphs and save additional parameters relevant to Intercom docs, such as
      * `article_url` and `heading`. These values will be returned by the `/v2/ai/embeddings/similarity-search` endpoint in the `loader_metadata` field.
      *
-     * @param 'thenlper/gte-large'|'intfloat/multilingual-e5-large'|EmbeddingModel $embeddingModel supported models to vectorize and embed documents
-     * @param 'default'|'intercom'|Loader $loader supported types of custom document loaders for embeddings
+     * @param EmbeddingModel|value-of<EmbeddingModel> $embeddingModel supported models to vectorize and embed documents
+     * @param Loader|value-of<Loader> $loader supported types of custom document loaders for embeddings
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -71,9 +75,9 @@ final class EmbeddingsService implements EmbeddingsContract
         string $bucketName,
         int $documentChunkOverlapSize = 512,
         int $documentChunkSize = 1024,
-        string|EmbeddingModel $embeddingModel = 'thenlper/gte-large',
-        string|Loader $loader = 'default',
-        ?RequestOptions $requestOptions = null,
+        EmbeddingModel|string $embeddingModel = 'thenlper/gte-large',
+        Loader|string $loader = 'default',
+        RequestOptions|array|null $requestOptions = null,
     ): EmbeddingResponse {
         $params = Util::removeNulls(
             [
@@ -101,11 +105,13 @@ final class EmbeddingsService implements EmbeddingsContract
      * - `failure` - Task failed and no files were embedded successfully
      * - `partial_success` - Some files were embedded successfully, but at least one failed
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $taskID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): EmbeddingGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($taskID, requestOptions: $requestOptions);
@@ -119,12 +125,13 @@ final class EmbeddingsService implements EmbeddingsContract
      * Retrieve tasks for the user that are either `queued`, `processing`, `failed`, `success` or `partial_success` based on the query string. Defaults to `queued` and `processing`.
      *
      * @param list<string> $status List of task statuses i.e. `status=queued&status=processing`
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function list(
         array $status = ['processing', 'queued'],
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): EmbeddingListResponse {
         $params = Util::removeNulls(['status' => $status]);
 
@@ -147,13 +154,15 @@ final class EmbeddingsService implements EmbeddingsContract
      * If a bucket was embedded using a custom loader, such as `intercom`, the additional metadata will be returned in the
      * `loader_metadata` field.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function similaritySearch(
         string $bucketName,
         string $query,
         int $numOfDocs = 3,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): EmbeddingSimilaritySearchResponse {
         $params = Util::removeNulls(
             [
@@ -176,13 +185,14 @@ final class EmbeddingsService implements EmbeddingsContract
      *
      * @param string $bucketName Name of the bucket to store the embeddings. This bucket must already exist.
      * @param string $url The URL of the webpage to embed
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function url(
         string $bucketName,
         string $url,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): EmbeddingResponse {
         $params = Util::removeNulls(['bucketName' => $bucketName, 'url' => $url]);
 

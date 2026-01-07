@@ -10,12 +10,16 @@ use Telnyx\RequestOptions;
 use Telnyx\Seti\SetiGetBlackBoxTestResultsResponse;
 use Telnyx\Seti\SetiRetrieveBlackBoxTestResultsParams;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface SetiRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|SetiRetrieveBlackBoxTestResultsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SetiGetBlackBoxTestResultsResponse>
      *
@@ -23,6 +27,6 @@ interface SetiRawContract
      */
     public function retrieveBlackBoxTestResults(
         array|SetiRetrieveBlackBoxTestResultsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

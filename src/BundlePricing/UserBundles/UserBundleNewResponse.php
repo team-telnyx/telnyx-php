@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-import-type UserBundleShape from \Telnyx\BundlePricing\UserBundles\UserBundle
  *
- * @phpstan-type UserBundleNewResponseShape = array{data: list<UserBundleShape>}
+ * @phpstan-type UserBundleNewResponseShape = array{
+ *   data: list<UserBundle|UserBundleShape>
+ * }
  */
 final class UserBundleNewResponse implements BaseModel
 {
@@ -46,7 +48,7 @@ final class UserBundleNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<UserBundleShape> $data
+     * @param list<UserBundle|UserBundleShape> $data
      */
     public static function with(array $data): self
     {
@@ -58,7 +60,7 @@ final class UserBundleNewResponse implements BaseModel
     }
 
     /**
-     * @param list<UserBundleShape> $data
+     * @param list<UserBundle|UserBundleShape> $data
      */
     public function withData(array $data): self
     {

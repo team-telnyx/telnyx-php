@@ -10,23 +10,29 @@ use Telnyx\CountryCoverage\CountryCoverageGetCountryResponse;
 use Telnyx\CountryCoverage\CountryCoverageGetResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface CountryCoverageRawContract
 {
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CountryCoverageGetResponse>
      *
      * @throws APIException
      */
     public function retrieve(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $countryCode country ISO code
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CountryCoverageGetCountryResponse>
      *
@@ -34,6 +40,6 @@ interface CountryCoverageRawContract
      */
     public function retrieveCountry(
         string $countryCode,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type MetaShape from \Telnyx\AI\Assistants\Tests\TestSuites\Runs\Meta
  *
  * @phpstan-type PaginatedTestRunListShape = array{
- *   data: list<TestRunResponseShape>, meta: Meta|MetaShape
+ *   data: list<TestRunResponse|TestRunResponseShape>, meta: Meta|MetaShape
  * }
  */
 final class PaginatedTestRunList implements BaseModel
@@ -65,7 +65,7 @@ final class PaginatedTestRunList implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TestRunResponseShape> $data
+     * @param list<TestRunResponse|TestRunResponseShape> $data
      * @param Meta|MetaShape $meta
      */
     public static function with(array $data, Meta|array $meta): self
@@ -81,7 +81,7 @@ final class PaginatedTestRunList implements BaseModel
     /**
      * Array of test run objects for the current page.
      *
-     * @param list<TestRunResponseShape> $data
+     * @param list<TestRunResponse|TestRunResponseShape> $data
      */
     public function withData(array $data): self
     {

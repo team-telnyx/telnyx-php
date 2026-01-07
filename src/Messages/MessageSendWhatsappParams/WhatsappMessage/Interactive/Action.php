@@ -20,14 +20,14 @@ use Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage\Interactive\Action
  *
  * @phpstan-type ActionShape = array{
  *   button?: string|null,
- *   buttons?: list<ButtonShape>|null,
- *   cards?: list<CardShape>|null,
+ *   buttons?: list<Button|ButtonShape>|null,
+ *   cards?: list<Card|CardShape>|null,
  *   catalogID?: string|null,
  *   mode?: string|null,
  *   name?: string|null,
  *   parameters?: null|Parameters|ParametersShape,
  *   productRetailerID?: string|null,
- *   sections?: list<SectionShape>|null,
+ *   sections?: list<Section|SectionShape>|null,
  * }
  */
 final class Action implements BaseModel
@@ -75,10 +75,10 @@ final class Action implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ButtonShape>|null $buttons
-     * @param list<CardShape>|null $cards
+     * @param list<Button|ButtonShape>|null $buttons
+     * @param list<Card|CardShape>|null $cards
      * @param Parameters|ParametersShape|null $parameters
-     * @param list<SectionShape>|null $sections
+     * @param list<Section|SectionShape>|null $sections
      */
     public static function with(
         ?string $button = null,
@@ -115,7 +115,7 @@ final class Action implements BaseModel
     }
 
     /**
-     * @param list<ButtonShape> $buttons
+     * @param list<Button|ButtonShape> $buttons
      */
     public function withButtons(array $buttons): self
     {
@@ -126,7 +126,7 @@ final class Action implements BaseModel
     }
 
     /**
-     * @param list<CardShape> $cards
+     * @param list<Card|CardShape> $cards
      */
     public function withCards(array $cards): self
     {
@@ -180,7 +180,7 @@ final class Action implements BaseModel
     }
 
     /**
-     * @param list<SectionShape> $sections
+     * @param list<Section|SectionShape> $sections
      */
     public function withSections(array $sections): self
     {

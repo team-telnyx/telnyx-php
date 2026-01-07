@@ -15,12 +15,16 @@ use Telnyx\WireguardInterfaces\WireguardInterfaceListParams;
 use Telnyx\WireguardInterfaces\WireguardInterfaceListResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceNewResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface WireguardInterfacesRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|WireguardInterfaceCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WireguardInterfaceNewResponse>
      *
@@ -28,13 +32,14 @@ interface WireguardInterfacesRawContract
      */
     public function create(
         array|WireguardInterfaceCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WireguardInterfaceGetResponse>
      *
@@ -42,13 +47,14 @@ interface WireguardInterfacesRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|WireguardInterfaceListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<WireguardInterfaceListResponse>>
      *
@@ -56,13 +62,14 @@ interface WireguardInterfacesRawContract
      */
     public function list(
         array|WireguardInterfaceListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WireguardInterfaceDeleteResponse>
      *
@@ -70,6 +77,6 @@ interface WireguardInterfacesRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

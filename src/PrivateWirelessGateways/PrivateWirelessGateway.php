@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type PrivateWirelessGatewayShape = array{
  *   id?: string|null,
- *   assignedResources?: list<PwgAssignedResourcesSummaryShape>|null,
+ *   assignedResources?: list<PwgAssignedResourcesSummary|PwgAssignedResourcesSummaryShape>|null,
  *   createdAt?: string|null,
  *   ipRange?: string|null,
  *   name?: string|null,
@@ -99,7 +99,7 @@ final class PrivateWirelessGateway implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PwgAssignedResourcesSummaryShape>|null $assignedResources
+     * @param list<PwgAssignedResourcesSummary|PwgAssignedResourcesSummaryShape>|null $assignedResources
      * @param PrivateWirelessGatewayStatus|PrivateWirelessGatewayStatusShape|null $status
      */
     public static function with(
@@ -144,7 +144,7 @@ final class PrivateWirelessGateway implements BaseModel
     /**
      * A list of the resources that have been assigned to the Private Wireless Gateway.
      *
-     * @param list<PwgAssignedResourcesSummaryShape> $assignedResources
+     * @param list<PwgAssignedResourcesSummary|PwgAssignedResourcesSummaryShape> $assignedResources
      */
     public function withAssignedResources(array $assignedResources): self
     {

@@ -18,6 +18,9 @@ use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PrivateWirelessGatewaysRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class PrivateWirelessGatewaysRawService implements PrivateWirelessGatewaysRawContract
 {
     // @phpstan-ignore-next-line
@@ -34,6 +37,7 @@ final class PrivateWirelessGatewaysRawService implements PrivateWirelessGateways
      * @param array{
      *   name: string, networkID: string, regionCode?: string
      * }|PrivateWirelessGatewayCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PrivateWirelessGatewayNewResponse>
      *
@@ -41,7 +45,7 @@ final class PrivateWirelessGatewaysRawService implements PrivateWirelessGateways
      */
     public function create(
         array|PrivateWirelessGatewayCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PrivateWirelessGatewayCreateParams::parseRequest(
             $params,
@@ -64,6 +68,7 @@ final class PrivateWirelessGatewaysRawService implements PrivateWirelessGateways
      * Retrieve information about a Private Wireless Gateway.
      *
      * @param string $id identifies the private wireless gateway
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PrivateWirelessGatewayGetResponse>
      *
@@ -71,7 +76,7 @@ final class PrivateWirelessGatewaysRawService implements PrivateWirelessGateways
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -96,6 +101,7 @@ final class PrivateWirelessGatewaysRawService implements PrivateWirelessGateways
      *   pageNumber?: int,
      *   pageSize?: int,
      * }|PrivateWirelessGatewayListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<PrivateWirelessGateway>>
      *
@@ -103,7 +109,7 @@ final class PrivateWirelessGatewaysRawService implements PrivateWirelessGateways
      */
     public function list(
         array|PrivateWirelessGatewayListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PrivateWirelessGatewayListParams::parseRequest(
             $params,
@@ -138,6 +144,7 @@ final class PrivateWirelessGatewaysRawService implements PrivateWirelessGateways
      * Deletes the Private Wireless Gateway.
      *
      * @param string $id identifies the private wireless gateway
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PrivateWirelessGatewayDeleteResponse>
      *
@@ -145,7 +152,7 @@ final class PrivateWirelessGatewaysRawService implements PrivateWirelessGateways
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

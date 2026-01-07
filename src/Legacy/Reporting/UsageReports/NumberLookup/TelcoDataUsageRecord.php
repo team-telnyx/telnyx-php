@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type TelcoDataAggregationShape from \Telnyx\Legacy\Reporting\UsageReports\NumberLookup\TelcoDataAggregation
  *
  * @phpstan-type TelcoDataUsageRecordShape = array{
- *   aggregations?: list<TelcoDataAggregationShape>|null,
+ *   aggregations?: list<TelcoDataAggregation|TelcoDataAggregationShape>|null,
  *   recordType?: string|null,
  *   userID?: string|null,
  * }
@@ -52,7 +52,7 @@ final class TelcoDataUsageRecord implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TelcoDataAggregationShape>|null $aggregations
+     * @param list<TelcoDataAggregation|TelcoDataAggregationShape>|null $aggregations
      */
     public static function with(
         ?array $aggregations = null,
@@ -71,7 +71,7 @@ final class TelcoDataUsageRecord implements BaseModel
     /**
      * List of aggregations by lookup type.
      *
-     * @param list<TelcoDataAggregationShape> $aggregations
+     * @param list<TelcoDataAggregation|TelcoDataAggregationShape> $aggregations
      */
     public function withAggregations(array $aggregations): self
     {

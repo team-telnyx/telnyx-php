@@ -12,6 +12,9 @@ use Telnyx\ServiceContracts\WirelessRawContract;
 use Telnyx\Wireless\WirelessGetRegionsResponse;
 use Telnyx\Wireless\WirelessRetrieveRegionsParams;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class WirelessRawService implements WirelessRawContract
 {
     // @phpstan-ignore-next-line
@@ -26,6 +29,7 @@ final class WirelessRawService implements WirelessRawContract
      * Retrieve all wireless regions for the given product.
      *
      * @param array{product: string}|WirelessRetrieveRegionsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WirelessGetRegionsResponse>
      *
@@ -33,7 +37,7 @@ final class WirelessRawService implements WirelessRawContract
      */
     public function retrieveRegions(
         array|WirelessRetrieveRegionsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = WirelessRetrieveRegionsParams::parseRequest(
             $params,

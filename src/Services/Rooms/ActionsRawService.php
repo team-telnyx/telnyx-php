@@ -14,6 +14,9 @@ use Telnyx\Rooms\Actions\ActionRefreshClientTokenParams;
 use Telnyx\Rooms\Actions\ActionRefreshClientTokenResponse;
 use Telnyx\ServiceContracts\Rooms\ActionsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsRawService implements ActionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,6 +34,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   refreshTokenTtlSecs?: int, tokenTtlSecs?: int
      * }|ActionGenerateJoinClientTokenParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionGenerateJoinClientTokenResponse>
      *
@@ -39,7 +43,7 @@ final class ActionsRawService implements ActionsRawContract
     public function generateJoinClientToken(
         string $roomID,
         array|ActionGenerateJoinClientTokenParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionGenerateJoinClientTokenParams::parseRequest(
             $params,
@@ -65,6 +69,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   refreshToken: string, tokenTtlSecs?: int
      * }|ActionRefreshClientTokenParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionRefreshClientTokenResponse>
      *
@@ -73,7 +78,7 @@ final class ActionsRawService implements ActionsRawContract
     public function refreshClientToken(
         string $roomID,
         array|ActionRefreshClientTokenParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionRefreshClientTokenParams::parseRequest(
             $params,

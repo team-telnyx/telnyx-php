@@ -13,6 +13,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface BillingBundlesRawContract
 {
     /**
@@ -20,6 +23,7 @@ interface BillingBundlesRawContract
      *
      * @param string $bundleID billing bundle's ID, this is used to identify the billing bundle in the API
      * @param array<string,mixed>|BillingBundleRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BillingBundleGetResponse>
      *
@@ -28,13 +32,14 @@ interface BillingBundlesRawContract
     public function retrieve(
         string $bundleID,
         array|BillingBundleRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|BillingBundleListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<BillingBundleSummary>>
      *
@@ -42,6 +47,6 @@ interface BillingBundlesRawContract
      */
     public function list(
         array|BillingBundleListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

@@ -9,10 +9,15 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\NotificationEvents\NotificationEventListParams;
+use Telnyx\NotificationEvents\NotificationEventListParams\Page;
 use Telnyx\NotificationEvents\NotificationEventListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NotificationEventsRawContract;
 
+/**
+ * @phpstan-import-type PageShape from \Telnyx\NotificationEvents\NotificationEventListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class NotificationEventsRawService implements NotificationEventsRawContract
 {
     // @phpstan-ignore-next-line
@@ -26,9 +31,8 @@ final class NotificationEventsRawService implements NotificationEventsRawContrac
      *
      * Returns a list of your notifications events.
      *
-     * @param array{
-     *   page?: array{number?: int, size?: int}
-     * }|NotificationEventListParams $params
+     * @param array{page?: Page|PageShape}|NotificationEventListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<NotificationEventListResponse>>
      *
@@ -36,7 +40,7 @@ final class NotificationEventsRawService implements NotificationEventsRawContrac
      */
     public function list(
         array|NotificationEventListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = NotificationEventListParams::parseRequest(
             $params,

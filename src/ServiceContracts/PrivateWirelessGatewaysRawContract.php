@@ -15,12 +15,16 @@ use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayListParams;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface PrivateWirelessGatewaysRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|PrivateWirelessGatewayCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PrivateWirelessGatewayNewResponse>
      *
@@ -28,13 +32,14 @@ interface PrivateWirelessGatewaysRawContract
      */
     public function create(
         array|PrivateWirelessGatewayCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the private wireless gateway
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PrivateWirelessGatewayGetResponse>
      *
@@ -42,13 +47,14 @@ interface PrivateWirelessGatewaysRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|PrivateWirelessGatewayListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<PrivateWirelessGateway>>
      *
@@ -56,13 +62,14 @@ interface PrivateWirelessGatewaysRawContract
      */
     public function list(
         array|PrivateWirelessGatewayListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the private wireless gateway
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PrivateWirelessGatewayDeleteResponse>
      *
@@ -70,6 +77,6 @@ interface PrivateWirelessGatewaysRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

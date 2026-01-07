@@ -12,6 +12,9 @@ use Telnyx\ServiceContracts\VerifiedNumbers\ActionsRawContract;
 use Telnyx\VerifiedNumbers\Actions\ActionSubmitVerificationCodeParams;
 use Telnyx\VerifiedNumbers\VerifiedNumberDataWrapper;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsRawService implements ActionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -29,6 +32,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   verificationCode: string
      * }|ActionSubmitVerificationCodeParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VerifiedNumberDataWrapper>
      *
@@ -37,7 +41,7 @@ final class ActionsRawService implements ActionsRawContract
     public function submitVerificationCode(
         string $phoneNumber,
         array|ActionSubmitVerificationCodeParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionSubmitVerificationCodeParams::parseRequest(
             $params,

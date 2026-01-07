@@ -9,11 +9,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\Messaging\MessagingGetResponse;
+use Telnyx\PhoneNumbers\Messaging\MessagingListParams\Page;
 use Telnyx\PhoneNumbers\Messaging\MessagingUpdateResponse;
 use Telnyx\PhoneNumberWithMessagingSettings;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbers\MessagingContract;
 
+/**
+ * @phpstan-import-type PageShape from \Telnyx\PhoneNumbers\Messaging\MessagingListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MessagingService implements MessagingContract
 {
     /**
@@ -35,12 +40,13 @@ final class MessagingService implements MessagingContract
      * Retrieve a phone number with messaging settings
      *
      * @param string $id identifies the type of resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MessagingGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -63,6 +69,7 @@ final class MessagingService implements MessagingContract
      * * Omit this field or set its value to `null` to keep the current value.
      * * Set this field to `""` to unassign the number from its messaging profile
      * * Set this field to a quoted UUID of a messaging profile to assign this number to that messaging profile
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -70,7 +77,7 @@ final class MessagingService implements MessagingContract
         string $id,
         ?string $messagingProduct = null,
         ?string $messagingProfileID = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MessagingUpdateResponse {
         $params = Util::removeNulls(
             [
@@ -90,17 +97,16 @@ final class MessagingService implements MessagingContract
      *
      * List phone numbers with messaging settings
      *
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<PhoneNumberWithMessagingSettings>
      *
      * @throws APIException
      */
     public function list(
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null
     ): DefaultPagination {
         $params = Util::removeNulls(['page' => $page]);
 

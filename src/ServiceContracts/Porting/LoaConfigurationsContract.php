@@ -6,152 +6,147 @@ namespace Telnyx\ServiceContracts\Porting;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
+use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Address;
+use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Contact;
+use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Logo;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationGetResponse;
+use Telnyx\Porting\LoaConfigurations\LoaConfigurationListParams\Page;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationNewResponse;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateResponse;
 use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type AddressShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Address
+ * @phpstan-import-type ContactShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Contact
+ * @phpstan-import-type LogoShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Logo
+ * @phpstan-import-type AddressShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Address as AddressShape1
+ * @phpstan-import-type ContactShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Contact as ContactShape1
+ * @phpstan-import-type LogoShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo as LogoShape1
+ * @phpstan-import-type PageShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationListParams\Page
+ * @phpstan-import-type AddressShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address as AddressShape2
+ * @phpstan-import-type ContactShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact as ContactShape2
+ * @phpstan-import-type LogoShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo as LogoShape2
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface LoaConfigurationsContract
 {
     /**
      * @api
      *
-     * @param array{
-     *   city: string,
-     *   countryCode: string,
-     *   state: string,
-     *   streetAddress: string,
-     *   zipCode: string,
-     *   extendedAddress?: string,
-     * } $address The address of the company
+     * @param Address|AddressShape $address the address of the company
      * @param string $companyName The name of the company
-     * @param array{
-     *   email: string, phoneNumber: string
-     * } $contact The contact information of the company
-     * @param array{documentID: string} $logo The logo of the LOA configuration
+     * @param Contact|ContactShape $contact the contact information of the company
+     * @param Logo|LogoShape $logo The logo of the LOA configuration
      * @param string $name The name of the LOA configuration
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        array $address,
+        Address|array $address,
         string $companyName,
-        array $contact,
-        array $logo,
+        Contact|array $contact,
+        Logo|array $logo,
         string $name,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): LoaConfigurationNewResponse;
 
     /**
      * @api
      *
      * @param string $id identifies a LOA configuration
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): LoaConfigurationGetResponse;
 
     /**
      * @api
      *
      * @param string $id identifies a LOA configuration
-     * @param array{
-     *   city: string,
-     *   countryCode: string,
-     *   state: string,
-     *   streetAddress: string,
-     *   zipCode: string,
-     *   extendedAddress?: string,
-     * } $address The address of the company
+     * @param \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Address|AddressShape1 $address the address of the company
      * @param string $companyName The name of the company
-     * @param array{
-     *   email: string, phoneNumber: string
-     * } $contact The contact information of the company
-     * @param array{documentID: string} $logo The logo of the LOA configuration
+     * @param \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Contact|ContactShape1 $contact the contact information of the company
+     * @param \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo|LogoShape1 $logo The logo of the LOA configuration
      * @param string $name The name of the LOA configuration
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array $address,
+        \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Address|array $address,
         string $companyName,
-        array $contact,
-        array $logo,
+        \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Contact|array $contact,
+        \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo|array $logo,
         string $name,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): LoaConfigurationUpdateResponse;
 
     /**
      * @api
      *
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<PortingLoaConfiguration>
      *
      * @throws APIException
      */
     public function list(
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null
     ): DefaultPagination;
 
     /**
      * @api
      *
      * @param string $id identifies a LOA configuration
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed;
 
     /**
      * @api
      *
-     * @param array{
-     *   city: string,
-     *   countryCode: string,
-     *   state: string,
-     *   streetAddress: string,
-     *   zipCode: string,
-     *   extendedAddress?: string,
-     * } $address The address of the company
+     * @param \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address|AddressShape2 $address the address of the company
      * @param string $companyName The name of the company
-     * @param array{
-     *   email: string, phoneNumber: string
-     * } $contact The contact information of the company
-     * @param array{documentID: string} $logo The logo of the LOA configuration
+     * @param \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact|ContactShape2 $contact the contact information of the company
+     * @param \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo|LogoShape2 $logo The logo of the LOA configuration
      * @param string $name The name of the LOA configuration
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function preview0(
-        array $address,
+        \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address|array $address,
         string $companyName,
-        array $contact,
-        array $logo,
+        \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact|array $contact,
+        \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo|array $logo,
         string $name,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): string;
 
     /**
      * @api
      *
      * @param string $id identifies a LOA configuration
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function preview1(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): string;
 }

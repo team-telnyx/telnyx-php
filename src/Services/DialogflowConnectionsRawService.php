@@ -16,6 +16,9 @@ use Telnyx\DialogflowConnections\DialogflowConnectionUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DialogflowConnectionsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class DialogflowConnectionsRawService implements DialogflowConnectionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -33,10 +36,11 @@ final class DialogflowConnectionsRawService implements DialogflowConnectionsRawC
      * @param array{
      *   serviceAccount: array<string,mixed>,
      *   conversationProfileID?: string,
-     *   dialogflowAPI?: 'cx'|'es'|DialogflowAPI,
+     *   dialogflowAPI?: DialogflowAPI|value-of<DialogflowAPI>,
      *   environment?: string,
      *   location?: string,
      * }|DialogflowConnectionCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DialogflowConnectionNewResponse>
      *
@@ -45,7 +49,7 @@ final class DialogflowConnectionsRawService implements DialogflowConnectionsRawC
     public function create(
         string $connectionID,
         array|DialogflowConnectionCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = DialogflowConnectionCreateParams::parseRequest(
             $params,
@@ -68,6 +72,7 @@ final class DialogflowConnectionsRawService implements DialogflowConnectionsRawC
      * Return details of the Dialogflow connection associated with the given CallControl connection.
      *
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control)
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DialogflowConnectionGetResponse>
      *
@@ -75,7 +80,7 @@ final class DialogflowConnectionsRawService implements DialogflowConnectionsRawC
      */
     public function retrieve(
         string $connectionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -95,10 +100,11 @@ final class DialogflowConnectionsRawService implements DialogflowConnectionsRawC
      * @param array{
      *   serviceAccount: array<string,mixed>,
      *   conversationProfileID?: string,
-     *   dialogflowAPI?: 'cx'|'es'|DialogflowConnectionUpdateParams\DialogflowAPI,
+     *   dialogflowAPI?: DialogflowConnectionUpdateParams\DialogflowAPI|value-of<DialogflowConnectionUpdateParams\DialogflowAPI>,
      *   environment?: string,
      *   location?: string,
      * }|DialogflowConnectionUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DialogflowConnectionUpdateResponse>
      *
@@ -107,7 +113,7 @@ final class DialogflowConnectionsRawService implements DialogflowConnectionsRawC
     public function update(
         string $connectionID,
         array|DialogflowConnectionUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = DialogflowConnectionUpdateParams::parseRequest(
             $params,
@@ -130,6 +136,7 @@ final class DialogflowConnectionsRawService implements DialogflowConnectionsRawC
      * Deletes a stored Dialogflow Connection.
      *
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control)
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -137,7 +144,7 @@ final class DialogflowConnectionsRawService implements DialogflowConnectionsRawC
      */
     public function delete(
         string $connectionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

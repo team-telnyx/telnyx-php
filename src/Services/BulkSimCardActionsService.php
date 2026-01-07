@@ -14,6 +14,9 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BulkSimCardActionsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class BulkSimCardActionsService implements BulkSimCardActionsContract
 {
     /**
@@ -35,12 +38,13 @@ final class BulkSimCardActionsService implements BulkSimCardActionsContract
      * This API fetches information about a bulk SIM card action. A bulk SIM card action contains details about a collection of individual SIM card actions.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BulkSimCardActionGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -53,19 +57,20 @@ final class BulkSimCardActionsService implements BulkSimCardActionsContract
      *
      * This API lists a paginated collection of bulk SIM card actions. A bulk SIM card action contains details about a collection of individual SIM card actions.
      *
-     * @param 'bulk_set_public_ips'|FilterActionType $filterActionType filter by action type
+     * @param FilterActionType|value-of<FilterActionType> $filterActionType filter by action type
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<BulkSimCardActionListResponse>
      *
      * @throws APIException
      */
     public function list(
-        string|FilterActionType|null $filterActionType = null,
+        FilterActionType|string|null $filterActionType = null,
         int $pageNumber = 1,
         int $pageSize = 20,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
         $params = Util::removeNulls(
             [

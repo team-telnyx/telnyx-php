@@ -13,10 +13,15 @@ use Telnyx\IntegrationSecrets\IntegrationSecret;
 use Telnyx\IntegrationSecrets\IntegrationSecretCreateParams;
 use Telnyx\IntegrationSecrets\IntegrationSecretCreateParams\Type;
 use Telnyx\IntegrationSecrets\IntegrationSecretListParams;
+use Telnyx\IntegrationSecrets\IntegrationSecretListParams\Filter;
 use Telnyx\IntegrationSecrets\IntegrationSecretNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\IntegrationSecretsRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\IntegrationSecrets\IntegrationSecretListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class IntegrationSecretsRawService implements IntegrationSecretsRawContract
 {
     // @phpstan-ignore-next-line
@@ -32,11 +37,12 @@ final class IntegrationSecretsRawService implements IntegrationSecretsRawContrac
      *
      * @param array{
      *   identifier: string,
-     *   type: 'bearer'|'basic'|Type,
+     *   type: Type|value-of<Type>,
      *   token?: string,
      *   password?: string,
      *   username?: string,
      * }|IntegrationSecretCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<IntegrationSecretNewResponse>
      *
@@ -44,7 +50,7 @@ final class IntegrationSecretsRawService implements IntegrationSecretsRawContrac
      */
     public function create(
         array|IntegrationSecretCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = IntegrationSecretCreateParams::parseRequest(
             $params,
@@ -67,12 +73,9 @@ final class IntegrationSecretsRawService implements IntegrationSecretsRawContrac
      * Retrieve a list of all integration secrets configured by the user.
      *
      * @param array{
-     *   filter?: array{
-     *     type?: 'bearer'|'basic'|IntegrationSecretListParams\Filter\Type,
-     *   },
-     *   pageNumber?: int,
-     *   pageSize?: int,
+     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
      * }|IntegrationSecretListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<IntegrationSecret>>
      *
@@ -80,7 +83,7 @@ final class IntegrationSecretsRawService implements IntegrationSecretsRawContrac
      */
     public function list(
         array|IntegrationSecretListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = IntegrationSecretListParams::parseRequest(
             $params,
@@ -106,13 +109,15 @@ final class IntegrationSecretsRawService implements IntegrationSecretsRawContrac
      *
      * Delete an integration secret given its ID.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<mixed>
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

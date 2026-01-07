@@ -13,6 +13,8 @@ use Telnyx\ManagedAccounts\ManagedAccountCreateParams;
 use Telnyx\ManagedAccounts\ManagedAccountGetAllocatableGlobalOutboundChannelsResponse;
 use Telnyx\ManagedAccounts\ManagedAccountGetResponse;
 use Telnyx\ManagedAccounts\ManagedAccountListParams;
+use Telnyx\ManagedAccounts\ManagedAccountListParams\Filter;
+use Telnyx\ManagedAccounts\ManagedAccountListParams\Page;
 use Telnyx\ManagedAccounts\ManagedAccountListParams\Sort;
 use Telnyx\ManagedAccounts\ManagedAccountListResponse;
 use Telnyx\ManagedAccounts\ManagedAccountNewResponse;
@@ -23,6 +25,11 @@ use Telnyx\ManagedAccounts\ManagedAccountUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ManagedAccountsRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\ManagedAccounts\ManagedAccountListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\ManagedAccounts\ManagedAccountListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ManagedAccountsRawService implements ManagedAccountsRawContract
 {
     // @phpstan-ignore-next-line
@@ -43,6 +50,7 @@ final class ManagedAccountsRawService implements ManagedAccountsRawContract
      *   password?: string,
      *   rollupBilling?: bool,
      * }|ManagedAccountCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ManagedAccountNewResponse>
      *
@@ -50,7 +58,7 @@ final class ManagedAccountsRawService implements ManagedAccountsRawContract
      */
     public function create(
         array|ManagedAccountCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ManagedAccountCreateParams::parseRequest(
             $params,
@@ -73,6 +81,7 @@ final class ManagedAccountsRawService implements ManagedAccountsRawContract
      * Retrieves the details of a single managed account.
      *
      * @param string $id Managed Account User ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ManagedAccountGetResponse>
      *
@@ -80,7 +89,7 @@ final class ManagedAccountsRawService implements ManagedAccountsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -100,6 +109,7 @@ final class ManagedAccountsRawService implements ManagedAccountsRawContract
      * @param array{
      *   managedAccountAllowCustomPricing?: bool
      * }|ManagedAccountUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ManagedAccountUpdateResponse>
      *
@@ -108,7 +118,7 @@ final class ManagedAccountsRawService implements ManagedAccountsRawContract
     public function update(
         string $id,
         array|ManagedAccountUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ManagedAccountUpdateParams::parseRequest(
             $params,
@@ -131,14 +141,12 @@ final class ManagedAccountsRawService implements ManagedAccountsRawContract
      * Lists the accounts managed by the current user. Users need to be explictly approved by Telnyx in order to become manager accounts.
      *
      * @param array{
-     *   filter?: array{
-     *     email?: array{contains?: string, eq?: string},
-     *     organizationName?: array{contains?: string, eq?: string},
-     *   },
+     *   filter?: Filter|FilterShape,
      *   includeCancelledAccounts?: bool,
-     *   page?: array{number?: int, size?: int},
-     *   sort?: 'created_at'|'email'|Sort,
+     *   page?: Page|PageShape,
+     *   sort?: Sort|value-of<Sort>,
      * }|ManagedAccountListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<ManagedAccountListResponse>>
      *
@@ -146,7 +154,7 @@ final class ManagedAccountsRawService implements ManagedAccountsRawContract
      */
     public function list(
         array|ManagedAccountListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ManagedAccountListParams::parseRequest(
             $params,
@@ -172,12 +180,14 @@ final class ManagedAccountsRawService implements ManagedAccountsRawContract
      *
      * Display information about allocatable global outbound channels for the current user. Only usable by account managers.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<ManagedAccountGetAllocatableGlobalOutboundChannelsResponse>
      *
      * @throws APIException
      */
     public function getAllocatableGlobalOutboundChannels(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -197,6 +207,7 @@ final class ManagedAccountsRawService implements ManagedAccountsRawContract
      * @param array{
      *   channelLimit?: int
      * }|ManagedAccountUpdateGlobalChannelLimitParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ManagedAccountUpdateGlobalChannelLimitResponse>
      *
@@ -205,7 +216,7 @@ final class ManagedAccountsRawService implements ManagedAccountsRawContract
     public function updateGlobalChannelLimit(
         string $id,
         array|ManagedAccountUpdateGlobalChannelLimitParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ManagedAccountUpdateGlobalChannelLimitParams::parseRequest(
             $params,

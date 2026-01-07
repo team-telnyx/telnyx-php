@@ -8,17 +8,21 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Queues\QueueGetResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface QueuesContract
 {
     /**
      * @api
      *
      * @param string $queueName Uniquely identifies the queue by name
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $queueName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): QueueGetResponse;
 }

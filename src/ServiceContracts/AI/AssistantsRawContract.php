@@ -19,12 +19,16 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface AssistantsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|AssistantCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InferenceEmbedding>
      *
@@ -32,13 +36,14 @@ interface AssistantsRawContract
      */
     public function create(
         array|AssistantCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|AssistantRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InferenceEmbedding>
      *
@@ -47,13 +52,14 @@ interface AssistantsRawContract
     public function retrieve(
         string $assistantID,
         array|AssistantRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|AssistantUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InferenceEmbedding>
      *
@@ -62,20 +68,26 @@ interface AssistantsRawContract
     public function update(
         string $assistantID,
         array|AssistantUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<AssistantsList>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse;
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AssistantDeleteResponse>
      *
@@ -83,13 +95,14 @@ interface AssistantsRawContract
      */
     public function delete(
         string $assistantID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|AssistantChatParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AssistantChatResponse>
      *
@@ -98,11 +111,13 @@ interface AssistantsRawContract
     public function chat(
         string $assistantID,
         array|AssistantChatParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InferenceEmbedding>
      *
@@ -110,11 +125,13 @@ interface AssistantsRawContract
      */
     public function clone(
         string $assistantID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
      *
@@ -122,13 +139,14 @@ interface AssistantsRawContract
      */
     public function getTexml(
         string $assistantID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|AssistantImportsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AssistantsList>
      *
@@ -136,13 +154,14 @@ interface AssistantsRawContract
      */
     public function imports(
         array|AssistantImportsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|AssistantSendSMSParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AssistantSendSMSResponse>
      *
@@ -151,6 +170,6 @@ interface AssistantsRawContract
     public function sendSMS(
         string $assistantID,
         array|AssistantSendSMSParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

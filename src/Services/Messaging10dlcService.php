@@ -17,6 +17,9 @@ use Telnyx\Services\Messaging10dlc\PartnerCampaignsService;
 use Telnyx\Services\Messaging10dlc\PhoneNumberAssignmentByProfileService;
 use Telnyx\Services\Messaging10dlc\PhoneNumberCampaignsService;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class Messaging10dlcService implements Messaging10dlcContract
 {
     /**
@@ -74,6 +77,7 @@ final class Messaging10dlcService implements Messaging10dlcContract
      * Get Enum
      *
      * @param Endpoint|value-of<Endpoint> $endpoint
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<string>|list<array<string,mixed>>|EnumPaginatedResponse|array<string,mixed>|array<string,mixed>
      *
@@ -81,7 +85,7 @@ final class Messaging10dlcService implements Messaging10dlcContract
      */
     public function getEnum(
         Endpoint|string $endpoint,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): array|EnumPaginatedResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getEnum($endpoint, requestOptions: $requestOptions);

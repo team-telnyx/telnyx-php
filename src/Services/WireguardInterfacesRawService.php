@@ -14,9 +14,16 @@ use Telnyx\WireguardInterfaces\WireguardInterfaceCreateParams;
 use Telnyx\WireguardInterfaces\WireguardInterfaceDeleteResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceGetResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceListParams;
+use Telnyx\WireguardInterfaces\WireguardInterfaceListParams\Filter;
+use Telnyx\WireguardInterfaces\WireguardInterfaceListParams\Page;
 use Telnyx\WireguardInterfaces\WireguardInterfaceListResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceNewResponse;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\WireguardInterfaces\WireguardInterfaceListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\WireguardInterfaces\WireguardInterfaceListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class WireguardInterfacesRawService implements WireguardInterfacesRawContract
 {
     // @phpstan-ignore-next-line
@@ -36,6 +43,7 @@ final class WireguardInterfacesRawService implements WireguardInterfacesRawContr
      *   name?: string,
      *   networkID?: string,
      * }|WireguardInterfaceCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WireguardInterfaceNewResponse>
      *
@@ -43,7 +51,7 @@ final class WireguardInterfacesRawService implements WireguardInterfacesRawContr
      */
     public function create(
         array|WireguardInterfaceCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = WireguardInterfaceCreateParams::parseRequest(
             $params,
@@ -66,6 +74,7 @@ final class WireguardInterfacesRawService implements WireguardInterfacesRawContr
      * Retrieve a WireGuard Interfaces.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WireguardInterfaceGetResponse>
      *
@@ -73,7 +82,7 @@ final class WireguardInterfacesRawService implements WireguardInterfacesRawContr
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -90,8 +99,9 @@ final class WireguardInterfacesRawService implements WireguardInterfacesRawContr
      * List all WireGuard Interfaces.
      *
      * @param array{
-     *   filter?: array{networkID?: string}, page?: array{number?: int, size?: int}
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|WireguardInterfaceListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<WireguardInterfaceListResponse>>
      *
@@ -99,7 +109,7 @@ final class WireguardInterfacesRawService implements WireguardInterfacesRawContr
      */
     public function list(
         array|WireguardInterfaceListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = WireguardInterfaceListParams::parseRequest(
             $params,
@@ -123,6 +133,7 @@ final class WireguardInterfacesRawService implements WireguardInterfacesRawContr
      * Delete a WireGuard Interface.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WireguardInterfaceDeleteResponse>
      *
@@ -130,7 +141,7 @@ final class WireguardInterfacesRawService implements WireguardInterfacesRawContr
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

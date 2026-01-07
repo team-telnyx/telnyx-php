@@ -15,7 +15,7 @@ use Telnyx\MessagingHostedNumberOrder\Status;
  * @phpstan-type MessagingHostedNumberOrderShape = array{
  *   id?: string|null,
  *   messagingProfileID?: string|null,
- *   phoneNumbers?: list<HostedNumberShape>|null,
+ *   phoneNumbers?: list<HostedNumber|HostedNumberShape>|null,
  *   recordType?: string|null,
  *   status?: null|Status|value-of<Status>,
  * }
@@ -61,7 +61,7 @@ final class MessagingHostedNumberOrder implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<HostedNumberShape>|null $phoneNumbers
+     * @param list<HostedNumber|HostedNumberShape>|null $phoneNumbers
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
@@ -105,7 +105,7 @@ final class MessagingHostedNumberOrder implements BaseModel
     }
 
     /**
-     * @param list<HostedNumberShape> $phoneNumbers
+     * @param list<HostedNumber|HostedNumberShape> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {

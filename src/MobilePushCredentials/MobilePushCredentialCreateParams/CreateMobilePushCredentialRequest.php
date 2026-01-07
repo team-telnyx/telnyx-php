@@ -14,7 +14,8 @@ use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePu
  * @phpstan-import-type CreateIosPushCredentialRequestShape from \Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest\CreateIosPushCredentialRequest
  * @phpstan-import-type CreateAndroidPushCredentialRequestShape from \Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest\CreateAndroidPushCredentialRequest
  *
- * @phpstan-type CreateMobilePushCredentialRequestShape = CreateIosPushCredentialRequestShape|CreateAndroidPushCredentialRequestShape
+ * @phpstan-type CreateMobilePushCredentialRequestVariants = CreateIosPushCredentialRequest|CreateAndroidPushCredentialRequest
+ * @phpstan-type CreateMobilePushCredentialRequestShape = CreateMobilePushCredentialRequestVariants|CreateIosPushCredentialRequestShape|CreateAndroidPushCredentialRequestShape
  */
 final class CreateMobilePushCredentialRequest implements ConverterSource
 {

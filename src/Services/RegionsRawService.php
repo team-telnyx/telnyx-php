@@ -11,6 +11,9 @@ use Telnyx\Regions\RegionListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\RegionsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class RegionsRawService implements RegionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -24,12 +27,15 @@ final class RegionsRawService implements RegionsRawContract
      *
      * List all regions and the interfaces that region supports
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<RegionListResponse>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse
-    {
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',

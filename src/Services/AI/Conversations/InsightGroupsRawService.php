@@ -17,6 +17,9 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\InsightGroupsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class InsightGroupsRawService implements InsightGroupsRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,6 +34,7 @@ final class InsightGroupsRawService implements InsightGroupsRawContract
      * Get insight group by ID
      *
      * @param string $groupID The ID of the insight group
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InsightTemplateGroupDetail>
      *
@@ -38,7 +42,7 @@ final class InsightGroupsRawService implements InsightGroupsRawContract
      */
     public function retrieve(
         string $groupID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -58,6 +62,7 @@ final class InsightGroupsRawService implements InsightGroupsRawContract
      * @param array{
      *   description?: string, name?: string, webhook?: string
      * }|InsightGroupUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InsightTemplateGroupDetail>
      *
@@ -66,7 +71,7 @@ final class InsightGroupsRawService implements InsightGroupsRawContract
     public function update(
         string $groupID,
         array|InsightGroupUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = InsightGroupUpdateParams::parseRequest(
             $params,
@@ -89,6 +94,7 @@ final class InsightGroupsRawService implements InsightGroupsRawContract
      * Delete insight group by ID
      *
      * @param string $groupID The ID of the insight group
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -96,7 +102,7 @@ final class InsightGroupsRawService implements InsightGroupsRawContract
      */
     public function delete(
         string $groupID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -115,6 +121,7 @@ final class InsightGroupsRawService implements InsightGroupsRawContract
      * @param array{
      *   name: string, description?: string, webhook?: string
      * }|InsightGroupInsightGroupsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InsightTemplateGroupDetail>
      *
@@ -122,7 +129,7 @@ final class InsightGroupsRawService implements InsightGroupsRawContract
      */
     public function insightGroups(
         array|InsightGroupInsightGroupsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = InsightGroupInsightGroupsParams::parseRequest(
             $params,
@@ -147,6 +154,7 @@ final class InsightGroupsRawService implements InsightGroupsRawContract
      * @param array{
      *   pageNumber?: int, pageSize?: int
      * }|InsightGroupRetrieveInsightGroupsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<InsightTemplateGroup>>
      *
@@ -154,7 +162,7 @@ final class InsightGroupsRawService implements InsightGroupsRawContract
      */
     public function retrieveInsightGroups(
         array|InsightGroupRetrieveInsightGroupsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = InsightGroupRetrieveInsightGroupsParams::parseRequest(
             $params,

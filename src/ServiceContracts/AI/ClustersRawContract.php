@@ -16,12 +16,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ClustersRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|ClusterRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ClusterGetResponse>
      *
@@ -30,13 +34,14 @@ interface ClustersRawContract
     public function retrieve(
         string $taskID,
         array|ClusterRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ClusterListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<ClusterListResponse>>
      *
@@ -44,11 +49,13 @@ interface ClustersRawContract
      */
     public function list(
         array|ClusterListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -56,13 +63,14 @@ interface ClustersRawContract
      */
     public function delete(
         string $taskID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ClusterComputeParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ClusterComputeResponse>
      *
@@ -70,13 +78,14 @@ interface ClustersRawContract
      */
     public function compute(
         array|ClusterComputeParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ClusterFetchGraphParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
      *
@@ -85,6 +94,6 @@ interface ClustersRawContract
     public function fetchGraph(
         string $taskID,
         array|ClusterFetchGraphParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

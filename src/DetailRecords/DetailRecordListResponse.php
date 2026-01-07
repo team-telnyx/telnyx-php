@@ -26,7 +26,8 @@ use Telnyx\DetailRecords\DetailRecordListResponse\VerifyDetailRecord;
  * @phpstan-import-type SimCardUsageDetailRecordShape from \Telnyx\DetailRecords\DetailRecordListResponse\SimCardUsageDetailRecord
  * @phpstan-import-type MediaStorageDetailRecordShape from \Telnyx\DetailRecords\DetailRecordListResponse\MediaStorageDetailRecord
  *
- * @phpstan-type DetailRecordListResponseShape = MessageDetailRecordShape|ConferenceDetailRecordShape|ConferenceParticipantDetailRecordShape|AmdDetailRecordShape|VerifyDetailRecordShape|SimCardUsageDetailRecordShape|MediaStorageDetailRecordShape
+ * @phpstan-type DetailRecordListResponseVariants = MessageDetailRecord|ConferenceDetailRecord|ConferenceParticipantDetailRecord|AmdDetailRecord|VerifyDetailRecord|SimCardUsageDetailRecord|MediaStorageDetailRecord
+ * @phpstan-type DetailRecordListResponseShape = DetailRecordListResponseVariants|MessageDetailRecordShape|ConferenceDetailRecordShape|ConferenceParticipantDetailRecordShape|AmdDetailRecordShape|VerifyDetailRecordShape|SimCardUsageDetailRecordShape|MediaStorageDetailRecordShape
  */
 final class DetailRecordListResponse implements ConverterSource
 {

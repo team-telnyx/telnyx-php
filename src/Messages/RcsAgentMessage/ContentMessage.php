@@ -19,7 +19,7 @@ use Telnyx\Messages\RcsSuggestion;
  * @phpstan-type ContentMessageShape = array{
  *   contentInfo?: null|RcsContentInfo|RcsContentInfoShape,
  *   richCard?: null|RichCard|RichCardShape,
- *   suggestions?: list<RcsSuggestionShape>|null,
+ *   suggestions?: list<RcsSuggestion|RcsSuggestionShape>|null,
  *   text?: string|null,
  * }
  */
@@ -60,7 +60,7 @@ final class ContentMessage implements BaseModel
      *
      * @param RcsContentInfo|RcsContentInfoShape|null $contentInfo
      * @param RichCard|RichCardShape|null $richCard
-     * @param list<RcsSuggestionShape>|null $suggestions
+     * @param list<RcsSuggestion|RcsSuggestionShape>|null $suggestions
      */
     public static function with(
         RcsContentInfo|array|null $contentInfo = null,
@@ -103,7 +103,7 @@ final class ContentMessage implements BaseModel
     /**
      * List of suggested actions and replies.
      *
-     * @param list<RcsSuggestionShape> $suggestions
+     * @param list<RcsSuggestion|RcsSuggestionShape> $suggestions
      */
     public function withSuggestions(array $suggestions): self
     {

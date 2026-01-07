@@ -18,10 +18,15 @@ use Telnyx\Messaging10dlc\Campaign\TelnyxCampaignCsp;
 use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface CampaignRawContract
 {
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TelnyxCampaignCsp>
      *
@@ -29,13 +34,14 @@ interface CampaignRawContract
      */
     public function retrieve(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|CampaignUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TelnyxCampaignCsp>
      *
@@ -44,13 +50,14 @@ interface CampaignRawContract
     public function update(
         string $campaignID,
         array|CampaignUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|CampaignListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PerPagePaginationV2<CampaignListResponse>>
      *
@@ -58,13 +65,14 @@ interface CampaignRawContract
      */
     public function list(
         array|CampaignListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $campaignID TCR's ID for the campaign to import
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<array<string,mixed>>
      *
@@ -72,11 +80,13 @@ interface CampaignRawContract
      */
     public function acceptSharing(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CampaignDeactivateResponse>
      *
@@ -84,13 +94,14 @@ interface CampaignRawContract
      */
     public function deactivate(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $campaignID ID of the campaign in question
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CampaignGetMnoMetadataResponse>
      *
@@ -98,11 +109,13 @@ interface CampaignRawContract
      */
     public function getMnoMetadata(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<array<string,mixed>>
      *
@@ -110,13 +123,14 @@ interface CampaignRawContract
      */
     public function getOperationStatus(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $campaignID ID of the campaign in question
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CampaignGetSharingStatusResponse>
      *
@@ -124,7 +138,7 @@ interface CampaignRawContract
      */
     public function getSharingStatus(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -132,6 +146,7 @@ interface CampaignRawContract
      *
      * @param string $campaignID The Telnyx campaign identifier
      * @param array<string,mixed>|CampaignSubmitAppealParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CampaignSubmitAppealResponse>
      *
@@ -140,6 +155,6 @@ interface CampaignRawContract
     public function submitAppeal(
         string $campaignID,
         array|CampaignSubmitAppealParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

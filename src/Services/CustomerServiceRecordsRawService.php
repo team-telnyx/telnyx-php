@@ -9,11 +9,12 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecord;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams;
+use Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams\AdditionalData;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordGetResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams;
-use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\Status\Eq;
-use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\Status\In;
-use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Sort\Value;
+use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter;
+use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Page;
+use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Sort;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordNewResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageParams;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageResponse;
@@ -21,6 +22,13 @@ use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CustomerServiceRecordsRawContract;
 
+/**
+ * @phpstan-import-type AdditionalDataShape from \Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams\AdditionalData
+ * @phpstan-import-type FilterShape from \Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Page
+ * @phpstan-import-type SortShape from \Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Sort
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class CustomerServiceRecordsRawService implements CustomerServiceRecordsRawContract
 {
     // @phpstan-ignore-next-line
@@ -36,20 +44,10 @@ final class CustomerServiceRecordsRawService implements CustomerServiceRecordsRa
      *
      * @param array{
      *   phoneNumber: string,
-     *   additionalData?: array{
-     *     accountNumber?: string,
-     *     addressLine1?: string,
-     *     authorizedPersonName?: string,
-     *     billingPhoneNumber?: string,
-     *     city?: string,
-     *     customerCode?: string,
-     *     name?: string,
-     *     pin?: string,
-     *     state?: string,
-     *     zipCode?: string,
-     *   },
+     *   additionalData?: AdditionalData|AdditionalDataShape,
      *   webhookURL?: string,
      * }|CustomerServiceRecordCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CustomerServiceRecordNewResponse>
      *
@@ -57,7 +55,7 @@ final class CustomerServiceRecordsRawService implements CustomerServiceRecordsRa
      */
     public function create(
         array|CustomerServiceRecordCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CustomerServiceRecordCreateParams::parseRequest(
             $params,
@@ -80,6 +78,7 @@ final class CustomerServiceRecordsRawService implements CustomerServiceRecordsRa
      * Get a specific customer service record.
      *
      * @param string $customerServiceRecordID The ID of the customer service record
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CustomerServiceRecordGetResponse>
      *
@@ -87,7 +86,7 @@ final class CustomerServiceRecordsRawService implements CustomerServiceRecordsRa
      */
     public function retrieve(
         string $customerServiceRecordID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -104,19 +103,9 @@ final class CustomerServiceRecordsRawService implements CustomerServiceRecordsRa
      * List customer service records.
      *
      * @param array{
-     *   filter?: array{
-     *     createdAt?: array{
-     *       gt?: string|\DateTimeInterface, lt?: string|\DateTimeInterface
-     *     },
-     *     phoneNumber?: array{eq?: string, in?: list<string>},
-     *     status?: array{
-     *       eq?: 'pending'|'completed'|'failed'|Eq,
-     *       in?: list<'pending'|'completed'|'failed'|In>,
-     *     },
-     *   },
-     *   page?: array{number?: int, size?: int},
-     *   sort?: array{value?: 'created_at'|'-created_at'|Value},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|SortShape
      * }|CustomerServiceRecordListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<CustomerServiceRecord>>
      *
@@ -124,7 +113,7 @@ final class CustomerServiceRecordsRawService implements CustomerServiceRecordsRa
      */
     public function list(
         array|CustomerServiceRecordListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CustomerServiceRecordListParams::parseRequest(
             $params,
@@ -150,6 +139,7 @@ final class CustomerServiceRecordsRawService implements CustomerServiceRecordsRa
      * @param array{
      *   phoneNumbers: list<string>
      * }|CustomerServiceRecordVerifyPhoneNumberCoverageParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CustomerServiceRecordVerifyPhoneNumberCoverageResponse>
      *
@@ -157,7 +147,7 @@ final class CustomerServiceRecordsRawService implements CustomerServiceRecordsRa
      */
     public function verifyPhoneNumberCoverage(
         array|CustomerServiceRecordVerifyPhoneNumberCoverageParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CustomerServiceRecordVerifyPhoneNumberCoverageParams::parseRequest(
             $params,

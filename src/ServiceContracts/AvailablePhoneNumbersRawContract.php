@@ -10,12 +10,16 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface AvailablePhoneNumbersRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|AvailablePhoneNumberListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AvailablePhoneNumberListResponse>
      *
@@ -23,6 +27,6 @@ interface AvailablePhoneNumbersRawContract
      */
     public function list(
         array|AvailablePhoneNumberListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

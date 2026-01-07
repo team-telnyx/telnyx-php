@@ -11,12 +11,16 @@ use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateParams;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface AutoRechargePrefsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|AutoRechargePrefUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AutoRechargePrefUpdateResponse>
      *
@@ -24,15 +28,19 @@ interface AutoRechargePrefsRawContract
      */
     public function update(
         array|AutoRechargePrefUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<AutoRechargePrefListResponse>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse;
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse;
 }

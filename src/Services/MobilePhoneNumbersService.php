@@ -10,15 +10,25 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumber;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberGetResponse;
-use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallForwarding\ForwardingType;
-use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallRecording\InboundCallRecordingChannels;
-use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallRecording\InboundCallRecordingFormat;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallForwarding;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallRecording;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CnamListing;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\Inbound;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\InboundCallScreening;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\Outbound;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MobilePhoneNumbersContract;
 use Telnyx\Services\MobilePhoneNumbers\MessagingService;
 
+/**
+ * @phpstan-import-type CallForwardingShape from \Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallForwarding
+ * @phpstan-import-type CallRecordingShape from \Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallRecording
+ * @phpstan-import-type CnamListingShape from \Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CnamListing
+ * @phpstan-import-type InboundShape from \Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\Inbound
+ * @phpstan-import-type OutboundShape from \Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\Outbound
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MobilePhoneNumbersService implements MobilePhoneNumbersContract
 {
     /**
@@ -46,12 +56,13 @@ final class MobilePhoneNumbersService implements MobilePhoneNumbersContract
      * Retrieve a Mobile Phone Number
      *
      * @param string $id The ID of the mobile phone number
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MobilePhoneNumberGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -65,40 +76,31 @@ final class MobilePhoneNumbersService implements MobilePhoneNumbersContract
      * Update a Mobile Phone Number
      *
      * @param string $id The ID of the mobile phone number
-     * @param array{
-     *   callForwardingEnabled?: bool,
-     *   forwardingType?: 'always'|'on-failure'|ForwardingType|null,
-     *   forwardsTo?: string|null,
-     * } $callForwarding
-     * @param array{
-     *   inboundCallRecordingChannels?: 'single'|'dual'|InboundCallRecordingChannels,
-     *   inboundCallRecordingEnabled?: bool,
-     *   inboundCallRecordingFormat?: 'wav'|'mp3'|InboundCallRecordingFormat,
-     * } $callRecording
-     * @param array{
-     *   cnamListingDetails?: string|null, cnamListingEnabled?: bool
-     * } $cnamListing
-     * @param array{interceptionAppID?: string|null} $inbound
-     * @param 'disabled'|'reject_calls'|'flag_calls'|InboundCallScreening $inboundCallScreening
-     * @param array{interceptionAppID?: string|null} $outbound
+     * @param CallForwarding|CallForwardingShape $callForwarding
+     * @param CallRecording|CallRecordingShape $callRecording
+     * @param CnamListing|CnamListingShape $cnamListing
+     * @param Inbound|InboundShape $inbound
+     * @param InboundCallScreening|value-of<InboundCallScreening> $inboundCallScreening
+     * @param Outbound|OutboundShape $outbound
      * @param list<string> $tags
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        ?array $callForwarding = null,
-        ?array $callRecording = null,
+        CallForwarding|array|null $callForwarding = null,
+        CallRecording|array|null $callRecording = null,
         ?bool $callerIDNameEnabled = null,
-        ?array $cnamListing = null,
+        CnamListing|array|null $cnamListing = null,
         ?string $connectionID = null,
         ?string $customerReference = null,
-        ?array $inbound = null,
-        string|InboundCallScreening|null $inboundCallScreening = null,
+        Inbound|array|null $inbound = null,
+        InboundCallScreening|string|null $inboundCallScreening = null,
         ?bool $noiseSuppression = null,
-        ?array $outbound = null,
+        Outbound|array|null $outbound = null,
         ?array $tags = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MobilePhoneNumberUpdateResponse {
         $params = Util::removeNulls(
             [
@@ -129,6 +131,7 @@ final class MobilePhoneNumbersService implements MobilePhoneNumbersContract
      *
      * @param int $pageNumber The page number to load
      * @param int $pageSize The size of the page
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<MobilePhoneNumber>
      *
@@ -137,7 +140,7 @@ final class MobilePhoneNumbersService implements MobilePhoneNumbersContract
     public function list(
         ?int $pageNumber = null,
         ?int $pageSize = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
         $params = Util::removeNulls(
             ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]

@@ -16,28 +16,33 @@ use Telnyx\SimCardGroups\Actions\ActionSetPrivateWirelessGatewayResponse;
 use Telnyx\SimCardGroups\Actions\ActionSetWirelessBlocklistResponse;
 use Telnyx\SimCardGroups\Actions\SimCardGroupAction;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ActionsContract
 {
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ActionGetResponse;
 
     /**
      * @api
      *
      * @param string $filterSimCardGroupID a valid SIM card group ID
-     * @param 'in-progress'|'completed'|'failed'|FilterStatus $filterStatus filter by a specific status of the resource's lifecycle
-     * @param 'set_private_wireless_gateway'|'remove_private_wireless_gateway'|'set_wireless_blocklist'|'remove_wireless_blocklist'|FilterType $filterType filter by action type
+     * @param FilterStatus|value-of<FilterStatus> $filterStatus filter by a specific status of the resource's lifecycle
+     * @param FilterType|value-of<FilterType> $filterType filter by action type
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<SimCardGroupAction>
      *
@@ -45,35 +50,37 @@ interface ActionsContract
      */
     public function list(
         ?string $filterSimCardGroupID = null,
-        string|FilterStatus|null $filterStatus = null,
-        string|FilterType|null $filterType = null,
+        FilterStatus|string|null $filterStatus = null,
+        FilterType|string|null $filterType = null,
         int $pageNumber = 1,
         int $pageSize = 20,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination;
 
     /**
      * @api
      *
      * @param string $id identifies the SIM group
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function removePrivateWirelessGateway(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ActionRemovePrivateWirelessGatewayResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the SIM group
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function removeWirelessBlocklist(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ActionRemoveWirelessBlocklistResponse;
 
     /**
@@ -81,13 +88,14 @@ interface ActionsContract
      *
      * @param string $id identifies the SIM group
      * @param string $privateWirelessGatewayID the identification of the related Private Wireless Gateway resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function setPrivateWirelessGateway(
         string $id,
         string $privateWirelessGatewayID,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionSetPrivateWirelessGatewayResponse;
 
     /**
@@ -95,12 +103,13 @@ interface ActionsContract
      *
      * @param string $id identifies the SIM group
      * @param string $wirelessBlocklistID the identification of the related Wireless Blocklist resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function setWirelessBlocklist(
         string $id,
         string $wirelessBlocklistID,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionSetWirelessBlocklistResponse;
 }

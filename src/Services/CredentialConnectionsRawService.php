@@ -9,33 +9,39 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
-use Telnyx\CredentialConnections\ConnectionRtcpSettings\Port;
 use Telnyx\CredentialConnections\CredentialConnection;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\NoiseSuppression;
-use Telnyx\CredentialConnections\CredentialConnectionCreateParams\NoiseSuppressionDetails\Engine;
+use Telnyx\CredentialConnections\CredentialConnectionCreateParams\NoiseSuppressionDetails;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\SipUriCallingPreference;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\WebhookAPIVersion;
 use Telnyx\CredentialConnections\CredentialConnectionDeleteResponse;
 use Telnyx\CredentialConnections\CredentialConnectionGetResponse;
 use Telnyx\CredentialConnections\CredentialConnectionListParams;
+use Telnyx\CredentialConnections\CredentialConnectionListParams\Filter;
+use Telnyx\CredentialConnections\CredentialConnectionListParams\Page;
 use Telnyx\CredentialConnections\CredentialConnectionListParams\Sort;
 use Telnyx\CredentialConnections\CredentialConnectionNewResponse;
 use Telnyx\CredentialConnections\CredentialConnectionUpdateParams;
 use Telnyx\CredentialConnections\CredentialConnectionUpdateResponse;
 use Telnyx\CredentialConnections\CredentialInbound;
-use Telnyx\CredentialConnections\CredentialInbound\AniNumberFormat;
-use Telnyx\CredentialConnections\CredentialInbound\DnisNumberFormat;
-use Telnyx\CredentialConnections\CredentialInbound\SimultaneousRinging;
 use Telnyx\CredentialConnections\CredentialOutbound;
-use Telnyx\CredentialConnections\CredentialOutbound\AniOverrideType;
-use Telnyx\CredentialConnections\CredentialOutbound\T38ReinviteSource;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
 use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CredentialConnectionsRawContract;
 
+/**
+ * @phpstan-import-type NoiseSuppressionDetailsShape from \Telnyx\CredentialConnections\CredentialConnectionCreateParams\NoiseSuppressionDetails
+ * @phpstan-import-type NoiseSuppressionDetailsShape from \Telnyx\CredentialConnections\CredentialConnectionUpdateParams\NoiseSuppressionDetails as NoiseSuppressionDetailsShape1
+ * @phpstan-import-type FilterShape from \Telnyx\CredentialConnections\CredentialConnectionListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\CredentialConnections\CredentialConnectionListParams\Page
+ * @phpstan-import-type CredentialInboundShape from \Telnyx\CredentialConnections\CredentialInbound
+ * @phpstan-import-type CredentialOutboundShape from \Telnyx\CredentialConnections\CredentialOutbound
+ * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class CredentialConnectionsRawService implements CredentialConnectionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -58,53 +64,24 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
      *   androidPushCredentialID?: string|null,
      *   callCostInWebhooks?: bool,
      *   defaultOnHoldComfortNoiseEnabled?: bool,
-     *   dtmfType?: 'RFC 2833'|'Inband'|'SIP INFO'|DtmfType,
+     *   dtmfType?: DtmfType|value-of<DtmfType>,
      *   encodeContactHeaderEnabled?: bool,
-     *   encryptedMedia?: 'SRTP'|EncryptedMedia|null,
-     *   inbound?: array{
-     *     aniNumberFormat?: '+E.164'|'E.164'|'+E.164-national'|'E.164-national'|AniNumberFormat,
-     *     channelLimit?: int,
-     *     codecs?: list<string>,
-     *     dnisNumberFormat?: '+e164'|'e164'|'national'|'sip_username'|DnisNumberFormat,
-     *     generateRingbackTone?: bool,
-     *     isupHeadersEnabled?: bool,
-     *     prackEnabled?: bool,
-     *     shakenStirEnabled?: bool,
-     *     simultaneousRinging?: 'disabled'|'enabled'|SimultaneousRinging,
-     *     sipCompactHeadersEnabled?: bool,
-     *     timeout1xxSecs?: int,
-     *     timeout2xxSecs?: int,
-     *   }|CredentialInbound,
+     *   encryptedMedia?: EncryptedMedia|value-of<EncryptedMedia>|null,
+     *   inbound?: CredentialInbound|CredentialInboundShape,
      *   iosPushCredentialID?: string|null,
-     *   noiseSuppression?: 'inbound'|'outbound'|'both'|'disabled'|NoiseSuppression,
-     *   noiseSuppressionDetails?: array{
-     *     attenuationLimit?: int,
-     *     engine?: 'denoiser'|'deep_filter_net'|'deep_filter_net_large'|'krisp_viva_tel'|'krisp_viva_tel_lite'|'krisp_viva_promodel'|'krisp_viva_ss'|Engine,
-     *   },
+     *   noiseSuppression?: NoiseSuppression|value-of<NoiseSuppression>,
+     *   noiseSuppressionDetails?: NoiseSuppressionDetails|NoiseSuppressionDetailsShape,
      *   onnetT38PassthroughEnabled?: bool,
-     *   outbound?: array{
-     *     aniOverride?: string,
-     *     aniOverrideType?: 'always'|'normal'|'emergency'|AniOverrideType,
-     *     callParkingEnabled?: bool|null,
-     *     channelLimit?: int,
-     *     generateRingbackTone?: bool,
-     *     instantRingbackEnabled?: bool,
-     *     localization?: string,
-     *     outboundVoiceProfileID?: string,
-     *     t38ReinviteSource?: 'telnyx'|'customer'|'disabled'|'passthru'|'caller-passthru'|'callee-passthru'|T38ReinviteSource,
-     *   }|CredentialOutbound,
-     *   rtcpSettings?: array{
-     *     captureEnabled?: bool,
-     *     port?: 'rtcp-mux'|'rtp+1'|Port,
-     *     reportFrequencySecs?: int,
-     *   }|ConnectionRtcpSettings,
-     *   sipUriCallingPreference?: 'disabled'|'unrestricted'|'internal'|SipUriCallingPreference,
+     *   outbound?: CredentialOutbound|CredentialOutboundShape,
+     *   rtcpSettings?: ConnectionRtcpSettings|ConnectionRtcpSettingsShape,
+     *   sipUriCallingPreference?: SipUriCallingPreference|value-of<SipUriCallingPreference>,
      *   tags?: list<string>,
-     *   webhookAPIVersion?: '1'|'2'|'texml'|WebhookAPIVersion,
+     *   webhookAPIVersion?: WebhookAPIVersion|value-of<WebhookAPIVersion>,
      *   webhookEventFailoverURL?: string|null,
      *   webhookEventURL?: string,
      *   webhookTimeoutSecs?: int|null,
      * }|CredentialConnectionCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CredentialConnectionNewResponse>
      *
@@ -112,7 +89,7 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
      */
     public function create(
         array|CredentialConnectionCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CredentialConnectionCreateParams::parseRequest(
             $params,
@@ -135,6 +112,7 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
      * Retrieves the details of an existing credential connection.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CredentialConnectionGetResponse>
      *
@@ -142,7 +120,7 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -166,55 +144,26 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
      *   callCostInWebhooks?: bool,
      *   connectionName?: string,
      *   defaultOnHoldComfortNoiseEnabled?: bool,
-     *   dtmfType?: 'RFC 2833'|'Inband'|'SIP INFO'|DtmfType,
+     *   dtmfType?: DtmfType|value-of<DtmfType>,
      *   encodeContactHeaderEnabled?: bool,
-     *   encryptedMedia?: 'SRTP'|EncryptedMedia|null,
-     *   inbound?: array{
-     *     aniNumberFormat?: '+E.164'|'E.164'|'+E.164-national'|'E.164-national'|AniNumberFormat,
-     *     channelLimit?: int,
-     *     codecs?: list<string>,
-     *     dnisNumberFormat?: '+e164'|'e164'|'national'|'sip_username'|DnisNumberFormat,
-     *     generateRingbackTone?: bool,
-     *     isupHeadersEnabled?: bool,
-     *     prackEnabled?: bool,
-     *     shakenStirEnabled?: bool,
-     *     simultaneousRinging?: 'disabled'|'enabled'|SimultaneousRinging,
-     *     sipCompactHeadersEnabled?: bool,
-     *     timeout1xxSecs?: int,
-     *     timeout2xxSecs?: int,
-     *   }|CredentialInbound,
+     *   encryptedMedia?: EncryptedMedia|value-of<EncryptedMedia>|null,
+     *   inbound?: CredentialInbound|CredentialInboundShape,
      *   iosPushCredentialID?: string|null,
-     *   noiseSuppression?: 'inbound'|'outbound'|'both'|'disabled'|CredentialConnectionUpdateParams\NoiseSuppression,
-     *   noiseSuppressionDetails?: array{
-     *     attenuationLimit?: int,
-     *     engine?: 'denoiser'|'deep_filter_net'|'deep_filter_net_large'|'krisp_viva_tel'|'krisp_viva_tel_lite'|'krisp_viva_promodel'|'krisp_viva_ss'|CredentialConnectionUpdateParams\NoiseSuppressionDetails\Engine,
-     *   },
+     *   noiseSuppression?: CredentialConnectionUpdateParams\NoiseSuppression|value-of<CredentialConnectionUpdateParams\NoiseSuppression>,
+     *   noiseSuppressionDetails?: CredentialConnectionUpdateParams\NoiseSuppressionDetails|NoiseSuppressionDetailsShape1,
      *   onnetT38PassthroughEnabled?: bool,
-     *   outbound?: array{
-     *     aniOverride?: string,
-     *     aniOverrideType?: 'always'|'normal'|'emergency'|AniOverrideType,
-     *     callParkingEnabled?: bool|null,
-     *     channelLimit?: int,
-     *     generateRingbackTone?: bool,
-     *     instantRingbackEnabled?: bool,
-     *     localization?: string,
-     *     outboundVoiceProfileID?: string,
-     *     t38ReinviteSource?: 'telnyx'|'customer'|'disabled'|'passthru'|'caller-passthru'|'callee-passthru'|T38ReinviteSource,
-     *   }|CredentialOutbound,
+     *   outbound?: CredentialOutbound|CredentialOutboundShape,
      *   password?: string,
-     *   rtcpSettings?: array{
-     *     captureEnabled?: bool,
-     *     port?: 'rtcp-mux'|'rtp+1'|Port,
-     *     reportFrequencySecs?: int,
-     *   }|ConnectionRtcpSettings,
-     *   sipUriCallingPreference?: 'disabled'|'unrestricted'|'internal'|CredentialConnectionUpdateParams\SipUriCallingPreference,
+     *   rtcpSettings?: ConnectionRtcpSettings|ConnectionRtcpSettingsShape,
+     *   sipUriCallingPreference?: CredentialConnectionUpdateParams\SipUriCallingPreference|value-of<CredentialConnectionUpdateParams\SipUriCallingPreference>,
      *   tags?: list<string>,
      *   userName?: string,
-     *   webhookAPIVersion?: '1'|'2'|CredentialConnectionUpdateParams\WebhookAPIVersion,
+     *   webhookAPIVersion?: CredentialConnectionUpdateParams\WebhookAPIVersion|value-of<CredentialConnectionUpdateParams\WebhookAPIVersion>,
      *   webhookEventFailoverURL?: string|null,
      *   webhookEventURL?: string,
      *   webhookTimeoutSecs?: int|null,
      * }|CredentialConnectionUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CredentialConnectionUpdateResponse>
      *
@@ -223,7 +172,7 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
     public function update(
         string $id,
         array|CredentialConnectionUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CredentialConnectionUpdateParams::parseRequest(
             $params,
@@ -246,14 +195,9 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
      * Returns a list of your credential connections.
      *
      * @param array{
-     *   filter?: array{
-     *     connectionName?: array{contains?: string},
-     *     fqdn?: string,
-     *     outboundVoiceProfileID?: string,
-     *   },
-     *   page?: array{number?: int, size?: int},
-     *   sort?: 'created_at'|'connection_name'|'active'|Sort,
+     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|value-of<Sort>
      * }|CredentialConnectionListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<CredentialConnection>>
      *
@@ -261,7 +205,7 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
      */
     public function list(
         array|CredentialConnectionListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CredentialConnectionListParams::parseRequest(
             $params,
@@ -285,6 +229,7 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
      * Deletes an existing credential connection.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CredentialConnectionDeleteResponse>
      *
@@ -292,7 +237,7 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

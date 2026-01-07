@@ -13,12 +13,16 @@ use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListR
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface PhoneNumberConfigurationsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|PhoneNumberConfigurationCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberConfigurationNewResponse>
      *
@@ -26,13 +30,14 @@ interface PhoneNumberConfigurationsRawContract
      */
     public function create(
         array|PhoneNumberConfigurationCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|PhoneNumberConfigurationListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PhoneNumberConfigurationListResponse>>
      *
@@ -40,6 +45,6 @@ interface PhoneNumberConfigurationsRawContract
      */
     public function list(
         array|PhoneNumberConfigurationListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

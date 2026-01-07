@@ -14,7 +14,8 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type ChatCompletionToolParamShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam
  * @phpstan-import-type RetrievalShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\Retrieval
  *
- * @phpstan-type ToolShape = ChatCompletionToolParamShape|RetrievalShape
+ * @phpstan-type ToolVariants = ChatCompletionToolParam|Retrieval
+ * @phpstan-type ToolShape = ToolVariants|ChatCompletionToolParamShape|RetrievalShape
  */
 final class Tool implements ConverterSource
 {

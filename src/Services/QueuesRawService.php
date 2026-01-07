@@ -11,6 +11,9 @@ use Telnyx\Queues\QueueGetResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\QueuesRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class QueuesRawService implements QueuesRawContract
 {
     // @phpstan-ignore-next-line
@@ -25,6 +28,7 @@ final class QueuesRawService implements QueuesRawContract
      * Retrieve an existing call queue
      *
      * @param string $queueName Uniquely identifies the queue by name
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<QueueGetResponse>
      *
@@ -32,7 +36,7 @@ final class QueuesRawService implements QueuesRawContract
      */
     public function retrieve(
         string $queueName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

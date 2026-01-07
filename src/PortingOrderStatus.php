@@ -15,7 +15,7 @@ use Telnyx\PortingOrderStatus\Value;
  * @phpstan-import-type PortingOrdersExceptionTypeShape from \Telnyx\PortingOrdersExceptionType
  *
  * @phpstan-type PortingOrderStatusShape = array{
- *   details?: list<PortingOrdersExceptionTypeShape>|null,
+ *   details?: list<PortingOrdersExceptionType|PortingOrdersExceptionTypeShape>|null,
  *   value?: null|Value|value-of<Value>,
  * }
  */
@@ -50,7 +50,7 @@ final class PortingOrderStatus implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PortingOrdersExceptionTypeShape>|null $details
+     * @param list<PortingOrdersExceptionType|PortingOrdersExceptionTypeShape>|null $details
      * @param Value|value-of<Value>|null $value
      */
     public static function with(
@@ -68,7 +68,7 @@ final class PortingOrderStatus implements BaseModel
     /**
      * A list of 0 or more details about this porting order's status.
      *
-     * @param list<PortingOrdersExceptionTypeShape> $details
+     * @param list<PortingOrdersExceptionType|PortingOrdersExceptionTypeShape> $details
      */
     public function withDetails(array $details): self
     {

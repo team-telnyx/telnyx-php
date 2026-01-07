@@ -9,12 +9,15 @@ use Telnyx\Messaging10dlc\Messaging10dlcGetEnumParams\Endpoint;
 use Telnyx\Messaging10dlc\Messaging10dlcGetEnumResponse\EnumPaginatedResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface Messaging10dlcContract
 {
     /**
      * @api
      *
-     * @param Endpoint|value-of<Endpoint> $endpoint
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<string>|list<array<string,mixed>>|EnumPaginatedResponse|array<string,mixed>|array<string,mixed>
      *
@@ -22,6 +25,6 @@ interface Messaging10dlcContract
      */
     public function getEnum(
         Endpoint|string $endpoint,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): array|EnumPaginatedResponse;
 }

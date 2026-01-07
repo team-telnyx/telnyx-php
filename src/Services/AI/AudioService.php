@@ -14,6 +14,9 @@ use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\AudioContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AudioService implements AudioContract
 {
     /**
@@ -34,21 +37,22 @@ final class AudioService implements AudioContract
      *
      * Transcribe speech to text. This endpoint is consistent with the [OpenAI Transcription API](https://platform.openai.com/docs/api-reference/audio/createTranscription) and may be used with the OpenAI JS or Python SDK.
      *
-     * @param 'distil-whisper/distil-large-v2'|'openai/whisper-large-v3-turbo'|Model $model ID of the model to use. `distil-whisper/distil-large-v2` is lower latency but English-only. `openai/whisper-large-v3-turbo` is multi-lingual but slightly higher latency.
+     * @param Model|value-of<Model> $model ID of the model to use. `distil-whisper/distil-large-v2` is lower latency but English-only. `openai/whisper-large-v3-turbo` is multi-lingual but slightly higher latency.
      * @param string $file The audio file object to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. File uploads are limited to 100 MB. Cannot be used together with `file_url`
      * @param string $fileURL Link to audio file in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. Support for hosted files is limited to 100MB. Cannot be used together with `file`
-     * @param 'json'|'verbose_json'|ResponseFormat $responseFormat The format of the transcript output. Use `verbose_json` to take advantage of timestamps.
-     * @param 'segment'|TimestampGranularities $timestampGranularities The timestamp granularities to populate for this transcription. `response_format` must be set verbose_json to use timestamp granularities. Currently `segment` is supported.
+     * @param ResponseFormat|value-of<ResponseFormat> $responseFormat The format of the transcript output. Use `verbose_json` to take advantage of timestamps.
+     * @param TimestampGranularities|value-of<TimestampGranularities> $timestampGranularities The timestamp granularities to populate for this transcription. `response_format` must be set verbose_json to use timestamp granularities. Currently `segment` is supported.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function transcribe(
-        string|Model $model = 'distil-whisper/distil-large-v2',
+        Model|string $model = 'distil-whisper/distil-large-v2',
         ?string $file = null,
         ?string $fileURL = null,
-        string|ResponseFormat $responseFormat = 'json',
-        string|TimestampGranularities|null $timestampGranularities = null,
-        ?RequestOptions $requestOptions = null,
+        ResponseFormat|string $responseFormat = 'json',
+        TimestampGranularities|string|null $timestampGranularities = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AudioTranscribeResponse {
         $params = Util::removeNulls(
             [

@@ -20,12 +20,16 @@ use Telnyx\Documents\DocumentUploadParams;
 use Telnyx\Documents\DocumentUploadResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface DocumentsRawContract
 {
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DocumentGetResponse>
      *
@@ -33,7 +37,7 @@ interface DocumentsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -41,6 +45,7 @@ interface DocumentsRawContract
      *
      * @param string $documentID identifies the resource
      * @param array<string,mixed>|DocumentUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DocumentUpdateResponse>
      *
@@ -49,13 +54,14 @@ interface DocumentsRawContract
     public function update(
         string $documentID,
         array|DocumentUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|DocumentListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<DocServiceDocument>>
      *
@@ -63,13 +69,14 @@ interface DocumentsRawContract
      */
     public function list(
         array|DocumentListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DocumentDeleteResponse>
      *
@@ -77,13 +84,14 @@ interface DocumentsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
      *
@@ -91,13 +99,14 @@ interface DocumentsRawContract
      */
     public function download(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id Uniquely identifies the document
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DocumentGenerateDownloadLinkResponse>
      *
@@ -105,13 +114,14 @@ interface DocumentsRawContract
      */
     public function generateDownloadLink(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|DocumentUploadParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DocumentUploadResponse>
      *
@@ -119,13 +129,14 @@ interface DocumentsRawContract
      */
     public function upload(
         array|DocumentUploadParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|DocumentUploadJsonParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DocumentUploadJsonResponse>
      *
@@ -133,6 +144,6 @@ interface DocumentsRawContract
      */
     public function uploadJson(
         array|DocumentUploadJsonParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

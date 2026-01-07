@@ -10,12 +10,17 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\Messaging\MessagingGetResponse;
 use Telnyx\PhoneNumbers\Messaging\MessagingListParams;
+use Telnyx\PhoneNumbers\Messaging\MessagingListParams\Page;
 use Telnyx\PhoneNumbers\Messaging\MessagingUpdateParams;
 use Telnyx\PhoneNumbers\Messaging\MessagingUpdateResponse;
 use Telnyx\PhoneNumberWithMessagingSettings;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbers\MessagingRawContract;
 
+/**
+ * @phpstan-import-type PageShape from \Telnyx\PhoneNumbers\Messaging\MessagingListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MessagingRawService implements MessagingRawContract
 {
     // @phpstan-ignore-next-line
@@ -30,6 +35,7 @@ final class MessagingRawService implements MessagingRawContract
      * Retrieve a phone number with messaging settings
      *
      * @param string $id identifies the type of resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingGetResponse>
      *
@@ -37,7 +43,7 @@ final class MessagingRawService implements MessagingRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -57,6 +63,7 @@ final class MessagingRawService implements MessagingRawContract
      * @param array{
      *   messagingProduct?: string, messagingProfileID?: string
      * }|MessagingUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingUpdateResponse>
      *
@@ -65,7 +72,7 @@ final class MessagingRawService implements MessagingRawContract
     public function update(
         string $id,
         array|MessagingUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MessagingUpdateParams::parseRequest(
             $params,
@@ -87,7 +94,8 @@ final class MessagingRawService implements MessagingRawContract
      *
      * List phone numbers with messaging settings
      *
-     * @param array{page?: array{number?: int, size?: int}}|MessagingListParams $params
+     * @param array{page?: Page|PageShape}|MessagingListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PhoneNumberWithMessagingSettings>>
      *
@@ -95,7 +103,7 @@ final class MessagingRawService implements MessagingRawContract
      */
     public function list(
         array|MessagingListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MessagingListParams::parseRequest(
             $params,

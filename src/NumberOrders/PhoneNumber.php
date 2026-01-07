@@ -23,7 +23,7 @@ use Telnyx\SubNumberOrderRegulatoryRequirementWithValue;
  *   phoneNumber?: string|null,
  *   phoneNumberType?: null|PhoneNumberType|value-of<PhoneNumberType>,
  *   recordType?: string|null,
- *   regulatoryRequirements?: list<SubNumberOrderRegulatoryRequirementWithValueShape>|null,
+ *   regulatoryRequirements?: list<SubNumberOrderRegulatoryRequirementWithValue|SubNumberOrderRegulatoryRequirementWithValueShape>|null,
  *   requirementsMet?: bool|null,
  *   requirementsStatus?: null|RequirementsStatus|value-of<RequirementsStatus>,
  *   status?: null|Status|value-of<Status>,
@@ -108,7 +108,7 @@ final class PhoneNumber implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param PhoneNumberType|value-of<PhoneNumberType>|null $phoneNumberType
-     * @param list<SubNumberOrderRegulatoryRequirementWithValueShape>|null $regulatoryRequirements
+     * @param list<SubNumberOrderRegulatoryRequirementWithValue|SubNumberOrderRegulatoryRequirementWithValueShape>|null $regulatoryRequirements
      * @param RequirementsStatus|value-of<RequirementsStatus>|null $requirementsStatus
      * @param Status|value-of<Status>|null $status
      */
@@ -211,7 +211,7 @@ final class PhoneNumber implements BaseModel
     }
 
     /**
-     * @param list<SubNumberOrderRegulatoryRequirementWithValueShape> $regulatoryRequirements
+     * @param list<SubNumberOrderRegulatoryRequirementWithValue|SubNumberOrderRegulatoryRequirementWithValueShape> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements

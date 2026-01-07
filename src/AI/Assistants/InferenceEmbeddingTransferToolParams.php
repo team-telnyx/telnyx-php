@@ -17,8 +17,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type InferenceEmbeddingTransferToolParamsShape = array{
  *   from: string,
- *   targets: list<TargetShape>,
- *   customHeaders?: list<CustomHeaderShape>|null,
+ *   targets: list<Target|TargetShape>,
+ *   customHeaders?: list<CustomHeader|CustomHeaderShape>|null,
  *   warmTransferInstructions?: string|null,
  * }
  */
@@ -79,8 +79,8 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TargetShape> $targets
-     * @param list<CustomHeaderShape>|null $customHeaders
+     * @param list<Target|TargetShape> $targets
+     * @param list<CustomHeader|CustomHeaderShape>|null $customHeaders
      */
     public static function with(
         string $from,
@@ -113,7 +113,7 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
     /**
      * The different possible targets of the transfer. The assistant will be able to choose one of the targets to transfer the call to.
      *
-     * @param list<TargetShape> $targets
+     * @param list<Target|TargetShape> $targets
      */
     public function withTargets(array $targets): self
     {
@@ -126,7 +126,7 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
     /**
      * Custom headers to be added to the SIP INVITE for the transfer command.
      *
-     * @param list<CustomHeaderShape> $customHeaders
+     * @param list<CustomHeader|CustomHeaderShape> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {

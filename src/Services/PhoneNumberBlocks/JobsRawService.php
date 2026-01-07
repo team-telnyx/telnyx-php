@@ -13,12 +13,17 @@ use Telnyx\PhoneNumberBlocks\Jobs\JobDeletePhoneNumberBlockParams;
 use Telnyx\PhoneNumberBlocks\Jobs\JobDeletePhoneNumberBlockResponse;
 use Telnyx\PhoneNumberBlocks\Jobs\JobGetResponse;
 use Telnyx\PhoneNumberBlocks\Jobs\JobListParams;
-use Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Filter\Status;
-use Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Filter\Type;
+use Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Filter;
+use Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Page;
 use Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Sort;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumberBlocks\JobsRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class JobsRawService implements JobsRawContract
 {
     // @phpstan-ignore-next-line
@@ -33,6 +38,7 @@ final class JobsRawService implements JobsRawContract
      * Retrieves a phone number blocks job
      *
      * @param string $id identifies the Phone Number Blocks Job
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<JobGetResponse>
      *
@@ -40,7 +46,7 @@ final class JobsRawService implements JobsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -57,13 +63,9 @@ final class JobsRawService implements JobsRawContract
      * Lists the phone number blocks jobs
      *
      * @param array{
-     *   filter?: array{
-     *     status?: 'pending'|'in_progress'|'completed'|'failed'|Status,
-     *     type?: 'delete_phone_number_block'|Type,
-     *   },
-     *   page?: array{number?: int, size?: int},
-     *   sort?: 'created_at'|Sort,
+     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|value-of<Sort>
      * }|JobListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<Job>>
      *
@@ -71,7 +73,7 @@ final class JobsRawService implements JobsRawContract
      */
     public function list(
         array|JobListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = JobListParams::parseRequest(
             $params,
@@ -95,6 +97,7 @@ final class JobsRawService implements JobsRawContract
      * Creates a new background job to delete all the phone numbers associated with the given block. We will only consider the phone number block as deleted after all phone numbers associated with it are removed, so multiple executions of this job may be necessary in case some of the phone numbers present errors during the deletion process.
      *
      * @param array{phoneNumberBlockID: string}|JobDeletePhoneNumberBlockParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<JobDeletePhoneNumberBlockResponse>
      *
@@ -102,7 +105,7 @@ final class JobsRawService implements JobsRawContract
      */
     public function deletePhoneNumberBlock(
         array|JobDeletePhoneNumberBlockParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = JobDeletePhoneNumberBlockParams::parseRequest(
             $params,

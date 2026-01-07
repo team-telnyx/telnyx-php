@@ -10,12 +10,16 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ChargesSummaryRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|ChargesSummaryRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ChargesSummaryGetResponse>
      *
@@ -23,6 +27,6 @@ interface ChargesSummaryRawContract
      */
     public function retrieve(
         array|ChargesSummaryRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

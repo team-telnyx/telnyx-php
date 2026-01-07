@@ -8,6 +8,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\Texml\TexmlSecretsResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface TexmlContract
 {
     /**
@@ -15,12 +18,13 @@ interface TexmlContract
      *
      * @param string $name Name used as a reference for the secret, if the name already exists within the account its value will be replaced
      * @param string $value Secret value which will be used when rendering the TeXML template
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function secrets(
         string $name,
         string $value,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): TexmlSecretsResponse;
 }

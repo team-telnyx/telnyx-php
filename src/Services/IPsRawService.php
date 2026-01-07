@@ -13,12 +13,19 @@ use Telnyx\IPs\IPCreateParams;
 use Telnyx\IPs\IPDeleteResponse;
 use Telnyx\IPs\IPGetResponse;
 use Telnyx\IPs\IPListParams;
+use Telnyx\IPs\IPListParams\Filter;
+use Telnyx\IPs\IPListParams\Page;
 use Telnyx\IPs\IPNewResponse;
 use Telnyx\IPs\IPUpdateParams;
 use Telnyx\IPs\IPUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\IPsRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\IPs\IPListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\IPs\IPListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class IPsRawService implements IPsRawContract
 {
     // @phpstan-ignore-next-line
@@ -35,6 +42,7 @@ final class IPsRawService implements IPsRawContract
      * @param array{
      *   ipAddress: string, connectionID?: string, port?: int
      * }|IPCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<IPNewResponse>
      *
@@ -42,7 +50,7 @@ final class IPsRawService implements IPsRawContract
      */
     public function create(
         array|IPCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = IPCreateParams::parseRequest(
             $params,
@@ -65,6 +73,7 @@ final class IPsRawService implements IPsRawContract
      * Return the details regarding a specific IP.
      *
      * @param string $id identifies the type of resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<IPGetResponse>
      *
@@ -72,7 +81,7 @@ final class IPsRawService implements IPsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -92,6 +101,7 @@ final class IPsRawService implements IPsRawContract
      * @param array{
      *   ipAddress: string, connectionID?: string, port?: int
      * }|IPUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<IPUpdateResponse>
      *
@@ -100,7 +110,7 @@ final class IPsRawService implements IPsRawContract
     public function update(
         string $id,
         array|IPUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = IPUpdateParams::parseRequest(
             $params,
@@ -123,9 +133,9 @@ final class IPsRawService implements IPsRawContract
      * Get all IPs belonging to the user that match the given filters.
      *
      * @param array{
-     *   filter?: array{connectionID?: string, ipAddress?: string, port?: int},
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|IPListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<IP>>
      *
@@ -133,7 +143,7 @@ final class IPsRawService implements IPsRawContract
      */
     public function list(
         array|IPListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         [$parsed, $options] = IPListParams::parseRequest(
             $params,
@@ -157,6 +167,7 @@ final class IPsRawService implements IPsRawContract
      * Delete an IP.
      *
      * @param string $id identifies the type of resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<IPDeleteResponse>
      *
@@ -164,7 +175,7 @@ final class IPsRawService implements IPsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

@@ -43,6 +43,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\CallsService::dial()
  *
+ * @phpstan-import-type ToVariants from \Telnyx\Calls\CallDialParams\To
  * @phpstan-import-type ToShape from \Telnyx\Calls\CallDialParams\To
  * @phpstan-import-type AnsweringMachineDetectionConfigShape from \Telnyx\Calls\CallDialParams\AnsweringMachineDetectionConfig
  * @phpstan-import-type ConferenceConfigShape from \Telnyx\Calls\CallDialParams\ConferenceConfig
@@ -65,7 +66,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   clientState?: string|null,
  *   commandID?: string|null,
  *   conferenceConfig?: null|ConferenceConfig|ConferenceConfigShape,
- *   customHeaders?: list<CustomSipHeaderShape>|null,
+ *   customHeaders?: list<CustomSipHeader|CustomSipHeaderShape>|null,
  *   dialogflowConfig?: null|DialogflowConfig|DialogflowConfigShape,
  *   enableDialogflow?: bool|null,
  *   fromDisplayName?: string|null,
@@ -85,13 +86,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *   sendSilenceWhenIdle?: bool|null,
  *   sipAuthPassword?: string|null,
  *   sipAuthUsername?: string|null,
- *   sipHeaders?: list<SipHeaderShape>|null,
+ *   sipHeaders?: list<SipHeader|SipHeaderShape>|null,
  *   sipRegion?: null|SipRegion|value-of<SipRegion>,
  *   sipTransportProtocol?: null|SipTransportProtocol|value-of<SipTransportProtocol>,
  *   soundModifications?: null|SoundModifications|SoundModificationsShape,
  *   streamBidirectionalCodec?: null|StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
  *   streamBidirectionalMode?: null|StreamBidirectionalMode|value-of<StreamBidirectionalMode>,
- *   streamBidirectionalSamplingRate?: null|8000|16000|22050|24000|48000,
+ *   streamBidirectionalSamplingRate?: null|StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate>,
  *   streamBidirectionalTargetLegs?: null|StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs>,
  *   streamCodec?: null|StreamCodec|value-of<StreamCodec>,
  *   streamEstablishBeforeCallOriginate?: bool|null,
@@ -128,7 +129,7 @@ final class CallDialParams implements BaseModel
     /**
      * The DID or SIP URI to dial out to. Multiple DID or SIP URIs can be provided using an array of strings.
      *
-     * @var string|list<string> $to
+     * @var ToVariants $to
      */
     #[Required(union: To::class)]
     public string|array $to;
@@ -375,7 +376,7 @@ final class CallDialParams implements BaseModel
     /**
      * Audio sampling rate.
      *
-     * @var 8000|16000|22050|24000|48000|null $streamBidirectionalSamplingRate
+     * @var value-of<StreamBidirectionalSamplingRate>|null $streamBidirectionalSamplingRate
      */
     #[Optional(
         'stream_bidirectional_sampling_rate',
@@ -499,7 +500,7 @@ final class CallDialParams implements BaseModel
      * @param AnsweringMachineDetection|value-of<AnsweringMachineDetection>|null $answeringMachineDetection
      * @param AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape|null $answeringMachineDetectionConfig
      * @param ConferenceConfig|ConferenceConfigShape|null $conferenceConfig
-     * @param list<CustomSipHeaderShape>|null $customHeaders
+     * @param list<CustomSipHeader|CustomSipHeaderShape>|null $customHeaders
      * @param DialogflowConfig|DialogflowConfigShape|null $dialogflowConfig
      * @param MediaEncryption|value-of<MediaEncryption>|null $mediaEncryption
      * @param Record|value-of<Record>|null $record
@@ -507,13 +508,13 @@ final class CallDialParams implements BaseModel
      * @param RecordFormat|value-of<RecordFormat>|null $recordFormat
      * @param RecordTrack|value-of<RecordTrack>|null $recordTrack
      * @param RecordTrim|value-of<RecordTrim>|null $recordTrim
-     * @param list<SipHeaderShape>|null $sipHeaders
+     * @param list<SipHeader|SipHeaderShape>|null $sipHeaders
      * @param SipRegion|value-of<SipRegion>|null $sipRegion
      * @param SipTransportProtocol|value-of<SipTransportProtocol>|null $sipTransportProtocol
      * @param SoundModifications|SoundModificationsShape|null $soundModifications
      * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>|null $streamBidirectionalCodec
      * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode>|null $streamBidirectionalMode
-     * @param 8000|16000|22050|24000|48000|null $streamBidirectionalSamplingRate
+     * @param StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate>|null $streamBidirectionalSamplingRate
      * @param StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs>|null $streamBidirectionalTargetLegs
      * @param StreamCodec|value-of<StreamCodec>|null $streamCodec
      * @param StreamTrack|value-of<StreamTrack>|null $streamTrack
@@ -560,7 +561,7 @@ final class CallDialParams implements BaseModel
         SoundModifications|array|null $soundModifications = null,
         StreamBidirectionalCodec|string|null $streamBidirectionalCodec = null,
         StreamBidirectionalMode|string|null $streamBidirectionalMode = null,
-        ?int $streamBidirectionalSamplingRate = null,
+        StreamBidirectionalSamplingRate|int|null $streamBidirectionalSamplingRate = null,
         StreamBidirectionalTargetLegs|string|null $streamBidirectionalTargetLegs = null,
         StreamCodec|string|null $streamCodec = null,
         ?bool $streamEstablishBeforeCallOriginate = null,
@@ -780,7 +781,7 @@ final class CallDialParams implements BaseModel
     /**
      * Custom headers to be added to the SIP INVITE.
      *
-     * @param list<CustomSipHeaderShape> $customHeaders
+     * @param list<CustomSipHeader|CustomSipHeaderShape> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {
@@ -1017,7 +1018,7 @@ final class CallDialParams implements BaseModel
     /**
      * SIP headers to be added to the SIP INVITE request. Currently only User-to-User header is supported.
      *
-     * @param list<SipHeaderShape> $sipHeaders
+     * @param list<SipHeader|SipHeaderShape> $sipHeaders
      */
     public function withSipHeaders(array $sipHeaders): self
     {
@@ -1099,10 +1100,10 @@ final class CallDialParams implements BaseModel
     /**
      * Audio sampling rate.
      *
-     * @param 8000|16000|22050|24000|48000 $streamBidirectionalSamplingRate
+     * @param StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate> $streamBidirectionalSamplingRate
      */
     public function withStreamBidirectionalSamplingRate(
-        int $streamBidirectionalSamplingRate
+        StreamBidirectionalSamplingRate|int $streamBidirectionalSamplingRate
     ): self {
         $self = clone $this;
         $self['streamBidirectionalSamplingRate'] = $streamBidirectionalSamplingRate;

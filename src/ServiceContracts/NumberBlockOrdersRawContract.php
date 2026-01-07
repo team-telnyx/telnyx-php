@@ -14,12 +14,16 @@ use Telnyx\NumberBlockOrders\NumberBlockOrderListParams;
 use Telnyx\NumberBlockOrders\NumberBlockOrderNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface NumberBlockOrdersRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|NumberBlockOrderCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NumberBlockOrderNewResponse>
      *
@@ -27,13 +31,14 @@ interface NumberBlockOrdersRawContract
      */
     public function create(
         array|NumberBlockOrderCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $numberBlockOrderID the number block order ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NumberBlockOrderGetResponse>
      *
@@ -41,13 +46,14 @@ interface NumberBlockOrdersRawContract
      */
     public function retrieve(
         string $numberBlockOrderID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|NumberBlockOrderListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<NumberBlockOrder>>
      *
@@ -55,6 +61,6 @@ interface NumberBlockOrdersRawContract
      */
     public function list(
         array|NumberBlockOrderListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

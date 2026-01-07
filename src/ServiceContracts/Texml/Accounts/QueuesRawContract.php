@@ -15,6 +15,9 @@ use Telnyx\Texml\Accounts\Queues\QueueRetrieveParams;
 use Telnyx\Texml\Accounts\Queues\QueueUpdateParams;
 use Telnyx\Texml\Accounts\Queues\QueueUpdateResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface QueuesRawContract
 {
     /**
@@ -22,6 +25,7 @@ interface QueuesRawContract
      *
      * @param string $accountSid the id of the account the resource belongs to
      * @param array<string,mixed>|QueueCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<QueueNewResponse>
      *
@@ -30,7 +34,7 @@ interface QueuesRawContract
     public function create(
         string $accountSid,
         array|QueueCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -38,6 +42,7 @@ interface QueuesRawContract
      *
      * @param string $queueSid the QueueSid that identifies the call queue
      * @param array<string,mixed>|QueueRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<QueueGetResponse>
      *
@@ -46,7 +51,7 @@ interface QueuesRawContract
     public function retrieve(
         string $queueSid,
         array|QueueRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -54,6 +59,7 @@ interface QueuesRawContract
      *
      * @param string $queueSid path param: The QueueSid that identifies the call queue
      * @param array<string,mixed>|QueueUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<QueueUpdateResponse>
      *
@@ -62,7 +68,7 @@ interface QueuesRawContract
     public function update(
         string $queueSid,
         array|QueueUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -70,6 +76,7 @@ interface QueuesRawContract
      *
      * @param string $queueSid the QueueSid that identifies the call queue
      * @param array<string,mixed>|QueueDeleteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -78,6 +85,6 @@ interface QueuesRawContract
     public function delete(
         string $queueSid,
         array|QueueDeleteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

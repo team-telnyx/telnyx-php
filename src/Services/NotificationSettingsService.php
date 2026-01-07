@@ -9,13 +9,21 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\NotificationSettings\NotificationSetting;
+use Telnyx\NotificationSettings\NotificationSettingCreateParams\Parameter;
 use Telnyx\NotificationSettings\NotificationSettingDeleteResponse;
 use Telnyx\NotificationSettings\NotificationSettingGetResponse;
-use Telnyx\NotificationSettings\NotificationSettingListParams\Filter\AssociatedRecordType\Eq;
+use Telnyx\NotificationSettings\NotificationSettingListParams\Filter;
+use Telnyx\NotificationSettings\NotificationSettingListParams\Page;
 use Telnyx\NotificationSettings\NotificationSettingNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NotificationSettingsContract;
 
+/**
+ * @phpstan-import-type ParameterShape from \Telnyx\NotificationSettings\NotificationSettingCreateParams\Parameter
+ * @phpstan-import-type FilterShape from \Telnyx\NotificationSettings\NotificationSettingListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\NotificationSettings\NotificationSettingListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class NotificationSettingsService implements NotificationSettingsContract
 {
     /**
@@ -39,7 +47,8 @@ final class NotificationSettingsService implements NotificationSettingsContract
      * @param string $notificationChannelID a UUID reference to the associated Notification Channel
      * @param string $notificationEventConditionID a UUID reference to the associated Notification Event Condition
      * @param string $notificationProfileID a UUID reference to the associated Notification Profile
-     * @param list<array{name?: string, value?: string}> $parameters
+     * @param list<Parameter|ParameterShape> $parameters
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -48,7 +57,7 @@ final class NotificationSettingsService implements NotificationSettingsContract
         ?string $notificationEventConditionID = null,
         ?string $notificationProfileID = null,
         ?array $parameters = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): NotificationSettingNewResponse {
         $params = Util::removeNulls(
             [
@@ -71,12 +80,13 @@ final class NotificationSettingsService implements NotificationSettingsContract
      * Get a notification setting.
      *
      * @param string $id the id of the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): NotificationSettingGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -89,30 +99,18 @@ final class NotificationSettingsService implements NotificationSettingsContract
      *
      * List notification settings.
      *
-     * @param array{
-     *   associatedRecordType?: array{eq?: 'account'|'phone_number'|Eq},
-     *   channelTypeID?: array{
-     *     eq?: 'webhook'|'sms'|'email'|'voice'|\Telnyx\NotificationSettings\NotificationSettingListParams\Filter\ChannelTypeID\Eq,
-     *   },
-     *   notificationChannel?: array{eq?: string},
-     *   notificationEventConditionID?: array{eq?: string},
-     *   notificationProfileID?: array{eq?: string},
-     *   status?: array{
-     *     eq?: 'enabled'|'enable-received'|'enable-pending'|'enable-submtited'|'delete-received'|'delete-pending'|'delete-submitted'|'deleted'|\Telnyx\NotificationSettings\NotificationSettingListParams\Filter\Status\Eq,
-     *   },
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[associated_record_type][eq], filter[channel_type_id][eq], filter[notification_profile_id][eq], filter[notification_channel][eq], filter[notification_event_condition_id][eq], filter[status][eq]
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[associated_record_type][eq], filter[channel_type_id][eq], filter[notification_profile_id][eq], filter[notification_channel][eq], filter[notification_event_condition_id][eq], filter[status][eq]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<NotificationSetting>
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null,
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
@@ -128,12 +126,13 @@ final class NotificationSettingsService implements NotificationSettingsContract
      * Delete a notification setting.
      *
      * @param string $id the id of the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): NotificationSettingDeleteResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, requestOptions: $requestOptions);

@@ -11,6 +11,9 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerifiedNumbers\ActionsContract;
 use Telnyx\VerifiedNumbers\VerifiedNumberDataWrapper;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsService implements ActionsContract
 {
     /**
@@ -32,13 +35,14 @@ final class ActionsService implements ActionsContract
      * Submit verification code
      *
      * @param string $phoneNumber +E164 formatted phone number
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function submitVerificationCode(
         string $phoneNumber,
         string $verificationCode,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): VerifiedNumberDataWrapper {
         $params = Util::removeNulls(['verificationCode' => $verificationCode]);
 

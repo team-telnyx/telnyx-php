@@ -10,12 +10,16 @@ use Telnyx\Messaging10dlc\CampaignBuilder\Brand\BrandQualifyByUsecaseParams;
 use Telnyx\Messaging10dlc\CampaignBuilder\Brand\BrandQualifyByUsecaseResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface BrandRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|BrandQualifyByUsecaseParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BrandQualifyByUsecaseResponse>
      *
@@ -24,6 +28,6 @@ interface BrandRawContract
     public function qualifyByUsecase(
         string $usecase,
         array|BrandQualifyByUsecaseParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

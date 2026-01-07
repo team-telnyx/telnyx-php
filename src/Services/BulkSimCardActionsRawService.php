@@ -16,6 +16,9 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BulkSimCardActionsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class BulkSimCardActionsRawService implements BulkSimCardActionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -30,6 +33,7 @@ final class BulkSimCardActionsRawService implements BulkSimCardActionsRawContrac
      * This API fetches information about a bulk SIM card action. A bulk SIM card action contains details about a collection of individual SIM card actions.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BulkSimCardActionGetResponse>
      *
@@ -37,7 +41,7 @@ final class BulkSimCardActionsRawService implements BulkSimCardActionsRawContrac
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -54,10 +58,11 @@ final class BulkSimCardActionsRawService implements BulkSimCardActionsRawContrac
      * This API lists a paginated collection of bulk SIM card actions. A bulk SIM card action contains details about a collection of individual SIM card actions.
      *
      * @param array{
-     *   filterActionType?: 'bulk_set_public_ips'|FilterActionType,
+     *   filterActionType?: FilterActionType|value-of<FilterActionType>,
      *   pageNumber?: int,
      *   pageSize?: int,
      * }|BulkSimCardActionListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<BulkSimCardActionListResponse>>
      *
@@ -65,7 +70,7 @@ final class BulkSimCardActionsRawService implements BulkSimCardActionsRawContrac
      */
     public function list(
         array|BulkSimCardActionListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = BulkSimCardActionListParams::parseRequest(
             $params,

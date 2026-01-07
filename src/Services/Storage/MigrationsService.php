@@ -14,6 +14,9 @@ use Telnyx\Storage\Migrations\MigrationGetResponse;
 use Telnyx\Storage\Migrations\MigrationListResponse;
 use Telnyx\Storage\Migrations\MigrationNewResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MigrationsService implements MigrationsContract
 {
     /**
@@ -44,6 +47,7 @@ final class MigrationsService implements MigrationsContract
      * @param string $targetBucketName Bucket name to migrate the data into. Will default to the same name as the `source_bucket_name`.
      * @param string $targetRegion telnyx Cloud Storage region to migrate the data to
      * @param bool $refresh if true, will continue to poll the source bucket to ensure new data is continually migrated over
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -52,7 +56,7 @@ final class MigrationsService implements MigrationsContract
         string $targetBucketName,
         string $targetRegion,
         ?bool $refresh = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MigrationNewResponse {
         $params = Util::removeNulls(
             [
@@ -75,12 +79,13 @@ final class MigrationsService implements MigrationsContract
      * Get a Migration
      *
      * @param string $id unique identifier for the data migration
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MigrationGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -93,10 +98,12 @@ final class MigrationsService implements MigrationsContract
      *
      * List all Migrations
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MigrationListResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(requestOptions: $requestOptions);

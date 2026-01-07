@@ -16,6 +16,7 @@ use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventStatusChangedEvent;
 use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventWithoutWebhook;
 
 /**
+ * @phpstan-import-type DataVariants from \Telnyx\Porting\Events\EventGetResponse\Data
  * @phpstan-import-type DataShape from \Telnyx\Porting\Events\EventGetResponse\Data
  *
  * @phpstan-type EventGetResponseShape = array{data?: DataShape|null}
@@ -25,6 +26,7 @@ final class EventGetResponse implements BaseModel
     /** @use SdkModel<EventGetResponseShape> */
     use SdkModel;
 
+    /** @var DataVariants|null $data */
     #[Optional(union: Data::class)]
     public PortingEventDeletedPayload|PortingEventMessagingChangedPayload|PortingEventStatusChangedEvent|PortingEventNewCommentEvent|PortingEventSplitEvent|PortingEventWithoutWebhook|null $data;
 

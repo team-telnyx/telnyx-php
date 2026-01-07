@@ -13,6 +13,9 @@ use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVettingOrderResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging10dlc\Brand\ExternalVettingContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ExternalVettingService implements ExternalVettingContract
 {
     /**
@@ -33,13 +36,15 @@ final class ExternalVettingService implements ExternalVettingContract
      *
      * Get list of valid external vetting record for a given brand
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return list<ExternalVettingListResponseItem>
      *
      * @throws APIException
      */
     public function list(
         string $brandID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): array {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($brandID, requestOptions: $requestOptions);
@@ -57,6 +62,7 @@ final class ExternalVettingService implements ExternalVettingContract
      * @param string $evpID external vetting provider ID for the brand
      * @param string $vettingID Unique ID that identifies a vetting transaction performed by a vetting provider. This ID is provided by the vetting provider at time of vetting.
      * @param string $vettingToken required by some providers for vetting record confirmation
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -65,7 +71,7 @@ final class ExternalVettingService implements ExternalVettingContract
         string $evpID,
         string $vettingID,
         ?string $vettingToken = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ExternalVettingImportsResponse {
         $params = Util::removeNulls(
             [
@@ -88,6 +94,7 @@ final class ExternalVettingService implements ExternalVettingContract
      *
      * @param string $evpID external vetting provider ID for the brand
      * @param string $vettingClass identifies the vetting classification
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -95,7 +102,7 @@ final class ExternalVettingService implements ExternalVettingContract
         string $brandID,
         string $evpID,
         string $vettingClass,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ExternalVettingOrderResponse {
         $params = Util::removeNulls(
             ['evpID' => $evpID, 'vettingClass' => $vettingClass]

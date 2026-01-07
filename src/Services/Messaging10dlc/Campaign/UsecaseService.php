@@ -11,6 +11,9 @@ use Telnyx\Messaging10dlc\Campaign\Usecase\UsecaseGetCostResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging10dlc\Campaign\UsecaseContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class UsecaseService implements UsecaseContract
 {
     /**
@@ -31,11 +34,13 @@ final class UsecaseService implements UsecaseContract
      *
      * Get Campaign Cost
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function getCost(
         string $usecase,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): UsecaseGetCostResponse {
         $params = Util::removeNulls(['usecase' => $usecase]);
 

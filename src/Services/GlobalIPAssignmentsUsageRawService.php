@@ -9,9 +9,14 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams;
+use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filter;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPAssignmentsUsageRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class GlobalIPAssignmentsUsageRawService implements GlobalIPAssignmentsUsageRawContract
 {
     // @phpstan-ignore-next-line
@@ -26,11 +31,9 @@ final class GlobalIPAssignmentsUsageRawService implements GlobalIPAssignmentsUsa
      * Global IP Assignment Usage Metrics
      *
      * @param array{
-     *   filter?: array{
-     *     globalIPAssignmentID?: string|array{in?: string},
-     *     globalIPID?: string|array{in?: string},
-     *   },
+     *   filter?: Filter|FilterShape
      * }|GlobalIPAssignmentsUsageRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<GlobalIPAssignmentsUsageGetResponse>
      *
@@ -38,7 +41,7 @@ final class GlobalIPAssignmentsUsageRawService implements GlobalIPAssignmentsUsa
      */
     public function retrieve(
         array|GlobalIPAssignmentsUsageRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = GlobalIPAssignmentsUsageRetrieveParams::parseRequest(
             $params,

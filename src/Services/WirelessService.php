@@ -12,6 +12,9 @@ use Telnyx\ServiceContracts\WirelessContract;
 use Telnyx\Services\Wireless\DetailRecordsReportsService;
 use Telnyx\Wireless\WirelessGetRegionsResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class WirelessService implements WirelessContract
 {
     /**
@@ -39,12 +42,13 @@ final class WirelessService implements WirelessContract
      * Retrieve all wireless regions for the given product.
      *
      * @param string $product The product for which to list regions (e.g., 'public_ips', 'private_wireless_gateways').
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieveRegions(
         string $product,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): WirelessGetRegionsResponse {
         $params = Util::removeNulls(['product' => $product]);
 

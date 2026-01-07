@@ -20,6 +20,9 @@ use Telnyx\Texml\Accounts\Calls\CallStreamsJsonResponse;
 use Telnyx\Texml\Accounts\Calls\CallUpdateParams;
 use Telnyx\Texml\Accounts\Calls\CallUpdateResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface CallsRawContract
 {
     /**
@@ -27,6 +30,7 @@ interface CallsRawContract
      *
      * @param string $callSid the CallSid that identifies the call to update
      * @param array<string,mixed>|CallRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallGetResponse>
      *
@@ -35,7 +39,7 @@ interface CallsRawContract
     public function retrieve(
         string $callSid,
         array|CallRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -43,6 +47,7 @@ interface CallsRawContract
      *
      * @param string $callSid path param: The CallSid that identifies the call to update
      * @param array<string,mixed>|CallUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallUpdateResponse>
      *
@@ -51,7 +56,7 @@ interface CallsRawContract
     public function update(
         string $callSid,
         array|CallUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -59,6 +64,7 @@ interface CallsRawContract
      *
      * @param string $accountSid the id of the account the resource belongs to
      * @param array<string,mixed>|CallCallsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallCallsResponse>
      *
@@ -67,7 +73,7 @@ interface CallsRawContract
     public function calls(
         string $accountSid,
         array|CallCallsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -75,6 +81,7 @@ interface CallsRawContract
      *
      * @param string $accountSid the id of the account the resource belongs to
      * @param array<string,mixed>|CallRetrieveCallsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallGetCallsResponse>
      *
@@ -83,7 +90,7 @@ interface CallsRawContract
     public function retrieveCalls(
         string $accountSid,
         array|CallRetrieveCallsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -91,6 +98,7 @@ interface CallsRawContract
      *
      * @param string $callSid path param: The CallSid that identifies the call to update
      * @param array<string,mixed>|CallSiprecJsonParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallSiprecJsonResponse>
      *
@@ -99,7 +107,7 @@ interface CallsRawContract
     public function siprecJson(
         string $callSid,
         array|CallSiprecJsonParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -107,6 +115,7 @@ interface CallsRawContract
      *
      * @param string $callSid path param: The CallSid that identifies the call to update
      * @param array<string,mixed>|CallStreamsJsonParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallStreamsJsonResponse>
      *
@@ -115,6 +124,6 @@ interface CallsRawContract
     public function streamsJson(
         string $callSid,
         array|CallStreamsJsonParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

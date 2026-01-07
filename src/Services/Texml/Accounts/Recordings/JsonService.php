@@ -11,6 +11,9 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Recordings\JsonContract;
 use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class JsonService implements JsonContract
 {
     /**
@@ -33,13 +36,14 @@ final class JsonService implements JsonContract
      *
      * @param string $recordingSid uniquely identifies the recording by id
      * @param string $accountSid the id of the account the resource belongs to
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function deleteRecordingSidJson(
         string $recordingSid,
         string $accountSid,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed {
         $params = Util::removeNulls(['accountSid' => $accountSid]);
 
@@ -56,13 +60,14 @@ final class JsonService implements JsonContract
      *
      * @param string $recordingSid uniquely identifies the recording by id
      * @param string $accountSid the id of the account the resource belongs to
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieveRecordingSidJson(
         string $recordingSid,
         string $accountSid,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): TexmlGetCallRecordingResponseBody {
         $params = Util::removeNulls(['accountSid' => $accountSid]);
 

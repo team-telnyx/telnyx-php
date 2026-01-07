@@ -11,6 +11,9 @@ use Telnyx\GlobalIPAllowedPorts\GlobalIPAllowedPortListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPAllowedPortsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class GlobalIPAllowedPortsRawService implements GlobalIPAllowedPortsRawContract
 {
     // @phpstan-ignore-next-line
@@ -24,12 +27,15 @@ final class GlobalIPAllowedPortsRawService implements GlobalIPAllowedPortsRawCon
      *
      * List all Global IP Allowed Ports
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<GlobalIPAllowedPortListResponse>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse
-    {
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',

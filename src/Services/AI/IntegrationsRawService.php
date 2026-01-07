@@ -12,6 +12,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\IntegrationsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class IntegrationsRawService implements IntegrationsRawContract
 {
     // @phpstan-ignore-next-line
@@ -26,6 +29,7 @@ final class IntegrationsRawService implements IntegrationsRawContract
      * Retrieve integration details
      *
      * @param string $integrationID The integration id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<IntegrationGetResponse>
      *
@@ -33,7 +37,7 @@ final class IntegrationsRawService implements IntegrationsRawContract
      */
     public function retrieve(
         string $integrationID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -49,12 +53,15 @@ final class IntegrationsRawService implements IntegrationsRawContract
      *
      * List all available integrations.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<IntegrationListResponse>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse
-    {
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',

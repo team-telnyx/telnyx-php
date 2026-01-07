@@ -13,7 +13,7 @@ use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse\LogMessage;
  * @phpstan-import-type LogMessageShape from \Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse\LogMessage
  *
  * @phpstan-type LogMessageGetResponseShape = array{
- *   logMessages?: list<LogMessageShape>|null
+ *   logMessages?: list<LogMessage|LogMessageShape>|null
  * }
  */
 final class LogMessageGetResponse implements BaseModel
@@ -35,7 +35,7 @@ final class LogMessageGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<LogMessageShape>|null $logMessages
+     * @param list<LogMessage|LogMessageShape>|null $logMessages
      */
     public static function with(?array $logMessages = null): self
     {
@@ -47,7 +47,7 @@ final class LogMessageGetResponse implements BaseModel
     }
 
     /**
-     * @param list<LogMessageShape> $logMessages
+     * @param list<LogMessage|LogMessageShape> $logMessages
      */
     public function withLogMessages(array $logMessages): self
     {

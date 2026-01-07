@@ -14,12 +14,16 @@ use Telnyx\RoomRecordings\RoomRecordingGetResponse;
 use Telnyx\RoomRecordings\RoomRecordingListParams;
 use Telnyx\RoomRecordings\RoomRecordingListResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface RoomRecordingsRawContract
 {
     /**
      * @api
      *
      * @param string $roomRecordingID the unique identifier of a room recording
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RoomRecordingGetResponse>
      *
@@ -27,13 +31,14 @@ interface RoomRecordingsRawContract
      */
     public function retrieve(
         string $roomRecordingID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|RoomRecordingListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<RoomRecordingListResponse>>
      *
@@ -41,13 +46,14 @@ interface RoomRecordingsRawContract
      */
     public function list(
         array|RoomRecordingListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $roomRecordingID the unique identifier of a room recording
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -55,13 +61,14 @@ interface RoomRecordingsRawContract
      */
     public function delete(
         string $roomRecordingID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|RoomRecordingDeleteBulkParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RoomRecordingDeleteBulkResponse>
      *
@@ -69,6 +76,6 @@ interface RoomRecordingsRawContract
      */
     public function deleteBulk(
         array|RoomRecordingDeleteBulkParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

@@ -10,15 +10,25 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams\Action;
+use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams\PhoneNumberRange;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberDeleteParams;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberDeleteResponse;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams;
-use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams\Sort\Value;
+use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams\Filter;
+use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams\Page;
+use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams\Sort;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberNewResponse;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\AssociatedPhoneNumbersRawContract;
 
+/**
+ * @phpstan-import-type PhoneNumberRangeShape from \Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams\PhoneNumberRange
+ * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams\Page
+ * @phpstan-import-type SortShape from \Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams\Sort
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AssociatedPhoneNumbersRawService implements AssociatedPhoneNumbersRawContract
 {
     // @phpstan-ignore-next-line
@@ -34,9 +44,10 @@ final class AssociatedPhoneNumbersRawService implements AssociatedPhoneNumbersRa
      *
      * @param string $portingOrderID Identifies the Porting Order associated with the phone number
      * @param array{
-     *   action: 'keep'|'disconnect'|Action,
-     *   phoneNumberRange: array{endAt?: string, startAt?: string},
+     *   action: Action|value-of<Action>,
+     *   phoneNumberRange: PhoneNumberRange|PhoneNumberRangeShape,
      * }|AssociatedPhoneNumberCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AssociatedPhoneNumberNewResponse>
      *
@@ -45,7 +56,7 @@ final class AssociatedPhoneNumbersRawService implements AssociatedPhoneNumbersRa
     public function create(
         string $portingOrderID,
         array|AssociatedPhoneNumberCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AssociatedPhoneNumberCreateParams::parseRequest(
             $params,
@@ -69,13 +80,9 @@ final class AssociatedPhoneNumbersRawService implements AssociatedPhoneNumbersRa
      *
      * @param string $portingOrderID Identifies the Porting Order associated with the phone numbers
      * @param array{
-     *   filter?: array{
-     *     action?: 'keep'|'disconnect'|AssociatedPhoneNumberListParams\Filter\Action,
-     *     phoneNumber?: string,
-     *   },
-     *   page?: array{number?: int, size?: int},
-     *   sort?: array{value?: '-created_at'|'created_at'|Value},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|SortShape
      * }|AssociatedPhoneNumberListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PortingAssociatedPhoneNumber>>
      *
@@ -84,7 +91,7 @@ final class AssociatedPhoneNumbersRawService implements AssociatedPhoneNumbersRa
     public function list(
         string $portingOrderID,
         array|AssociatedPhoneNumberListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AssociatedPhoneNumberListParams::parseRequest(
             $params,
@@ -109,6 +116,7 @@ final class AssociatedPhoneNumbersRawService implements AssociatedPhoneNumbersRa
      *
      * @param string $id Identifies the associated phone number to be deleted
      * @param array{portingOrderID: string}|AssociatedPhoneNumberDeleteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AssociatedPhoneNumberDeleteResponse>
      *
@@ -117,7 +125,7 @@ final class AssociatedPhoneNumbersRawService implements AssociatedPhoneNumbersRa
     public function delete(
         string $id,
         array|AssociatedPhoneNumberDeleteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AssociatedPhoneNumberDeleteParams::parseRequest(
             $params,

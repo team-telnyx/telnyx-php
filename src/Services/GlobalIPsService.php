@@ -10,11 +10,16 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\GlobalIPs\GlobalIPDeleteResponse;
 use Telnyx\GlobalIPs\GlobalIPGetResponse;
+use Telnyx\GlobalIPs\GlobalIPListParams\Page;
 use Telnyx\GlobalIPs\GlobalIPListResponse;
 use Telnyx\GlobalIPs\GlobalIPNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPsContract;
 
+/**
+ * @phpstan-import-type PageShape from \Telnyx\GlobalIPs\GlobalIPListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class GlobalIPsService implements GlobalIPsContract
 {
     /**
@@ -38,6 +43,7 @@ final class GlobalIPsService implements GlobalIPsContract
      * @param string $description a user specified description for the address
      * @param string $name a user specified name for the address
      * @param array<string,mixed> $ports a Global IP ports grouped by protocol code
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -45,7 +51,7 @@ final class GlobalIPsService implements GlobalIPsContract
         ?string $description = null,
         ?string $name = null,
         ?array $ports = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): GlobalIPNewResponse {
         $params = Util::removeNulls(
             ['description' => $description, 'name' => $name, 'ports' => $ports]
@@ -63,12 +69,13 @@ final class GlobalIPsService implements GlobalIPsContract
      * Retrieve a Global IP.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): GlobalIPGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -81,17 +88,16 @@ final class GlobalIPsService implements GlobalIPsContract
      *
      * List all Global IPs.
      *
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<GlobalIPListResponse>
      *
      * @throws APIException
      */
     public function list(
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null
     ): DefaultPagination {
         $params = Util::removeNulls(['page' => $page]);
 
@@ -107,12 +113,13 @@ final class GlobalIPsService implements GlobalIPsContract
      * Delete a Global IP.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): GlobalIPDeleteResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, requestOptions: $requestOptions);

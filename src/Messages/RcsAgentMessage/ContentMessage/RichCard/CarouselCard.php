@@ -16,7 +16,7 @@ use Telnyx\Messages\RcsCardContent;
  * @phpstan-import-type RcsCardContentShape from \Telnyx\Messages\RcsCardContent
  *
  * @phpstan-type CarouselCardShape = array{
- *   cardContents: list<RcsCardContentShape>,
+ *   cardContents: list<RcsCardContent|RcsCardContentShape>,
  *   cardWidth: CardWidth|value-of<CardWidth>,
  * }
  */
@@ -65,7 +65,7 @@ final class CarouselCard implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RcsCardContentShape> $cardContents
+     * @param list<RcsCardContent|RcsCardContentShape> $cardContents
      * @param CardWidth|value-of<CardWidth> $cardWidth
      */
     public static function with(
@@ -83,7 +83,7 @@ final class CarouselCard implements BaseModel
     /**
      * The list of contents for each card in the carousel. A carousel can have a minimum of 2 cards and a maximum 10 cards.
      *
-     * @param list<RcsCardContentShape> $cardContents
+     * @param list<RcsCardContent|RcsCardContentShape> $cardContents
      */
     public function withCardContents(array $cardContents): self
     {

@@ -10,12 +10,16 @@ use Telnyx\RequestOptions;
 use Telnyx\Wireless\WirelessGetRegionsResponse;
 use Telnyx\Wireless\WirelessRetrieveRegionsParams;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface WirelessRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|WirelessRetrieveRegionsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WirelessGetRegionsResponse>
      *
@@ -23,6 +27,6 @@ interface WirelessRawContract
      */
     public function retrieveRegions(
         array|WirelessRetrieveRegionsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

@@ -14,6 +14,9 @@ use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportCreateParams\Status;
 use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportGetResponse;
 use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportNewResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class SubNumberOrdersReportRawService implements SubNumberOrdersReportRawContract
 {
     // @phpstan-ignore-next-line
@@ -29,12 +32,13 @@ final class SubNumberOrdersReportRawService implements SubNumberOrdersReportRawC
      *
      * @param array{
      *   countryCode?: string,
-     *   createdAtGt?: string|\DateTimeInterface,
-     *   createdAtLt?: string|\DateTimeInterface,
+     *   createdAtGt?: \DateTimeInterface,
+     *   createdAtLt?: \DateTimeInterface,
      *   customerReference?: string,
      *   orderRequestID?: string,
-     *   status?: 'pending'|'success'|'failure'|Status,
+     *   status?: Status|value-of<Status>,
      * }|SubNumberOrdersReportCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SubNumberOrdersReportNewResponse>
      *
@@ -42,7 +46,7 @@ final class SubNumberOrdersReportRawService implements SubNumberOrdersReportRawC
      */
     public function create(
         array|SubNumberOrdersReportCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SubNumberOrdersReportCreateParams::parseRequest(
             $params,
@@ -65,6 +69,7 @@ final class SubNumberOrdersReportRawService implements SubNumberOrdersReportRawC
      * Get the status and details of a sub number orders report.
      *
      * @param string $reportID The unique identifier of the sub number orders report
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SubNumberOrdersReportGetResponse>
      *
@@ -72,7 +77,7 @@ final class SubNumberOrdersReportRawService implements SubNumberOrdersReportRawC
      */
     public function retrieve(
         string $reportID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -89,6 +94,7 @@ final class SubNumberOrdersReportRawService implements SubNumberOrdersReportRawC
      * Download the CSV file for a completed sub number orders report. The report status must be 'success' before the file can be downloaded.
      *
      * @param string $reportID The unique identifier of the sub number orders report
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
      *
@@ -96,7 +102,7 @@ final class SubNumberOrdersReportRawService implements SubNumberOrdersReportRawC
      */
     public function download(
         string $reportID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

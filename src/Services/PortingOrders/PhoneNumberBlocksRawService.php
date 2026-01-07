@@ -9,19 +9,27 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams;
+use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\ActivationRange;
+use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\PhoneNumberRange;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockDeleteParams;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockDeleteResponse;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\ActivationStatus;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\PortabilityStatus;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\PortingOrderSingleStatus;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\UnionMember1;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Sort\Value;
+use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter;
+use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Page;
+use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Sort;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockNewResponse;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\PhoneNumberBlocksRawContract;
 
+/**
+ * @phpstan-import-type ActivationRangeShape from \Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\ActivationRange
+ * @phpstan-import-type PhoneNumberRangeShape from \Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\PhoneNumberRange
+ * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Page
+ * @phpstan-import-type SortShape from \Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Sort
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class PhoneNumberBlocksRawService implements PhoneNumberBlocksRawContract
 {
     // @phpstan-ignore-next-line
@@ -37,9 +45,10 @@ final class PhoneNumberBlocksRawService implements PhoneNumberBlocksRawContract
      *
      * @param string $portingOrderID Identifies the Porting Order associated with the phone number block
      * @param array{
-     *   activationRanges: list<array{endAt: string, startAt: string}>,
-     *   phoneNumberRange: array{endAt: string, startAt: string},
+     *   activationRanges: list<ActivationRange|ActivationRangeShape>,
+     *   phoneNumberRange: PhoneNumberRange|PhoneNumberRangeShape,
      * }|PhoneNumberBlockCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberBlockNewResponse>
      *
@@ -48,7 +57,7 @@ final class PhoneNumberBlocksRawService implements PhoneNumberBlocksRawContract
     public function create(
         string $portingOrderID,
         array|PhoneNumberBlockCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PhoneNumberBlockCreateParams::parseRequest(
             $params,
@@ -72,17 +81,9 @@ final class PhoneNumberBlocksRawService implements PhoneNumberBlocksRawContract
      *
      * @param string $portingOrderID Identifies the Porting Order associated with the phone number blocks
      * @param array{
-     *   filter?: array{
-     *     activationStatus?: 'New'|'Pending'|'Conflict'|'Cancel Pending'|'Failed'|'Concurred'|'Activate RDY'|'Disconnect Pending'|'Concurrence Sent'|'Old'|'Sending'|'Active'|'Cancelled'|ActivationStatus,
-     *     phoneNumber?: list<string>,
-     *     portabilityStatus?: 'pending'|'confirmed'|'provisional'|PortabilityStatus,
-     *     portingOrderID?: list<string>,
-     *     status?: 'draft'|'in-process'|'submitted'|'exception'|'foc-date-confirmed'|'cancel-pending'|'ported'|'cancelled'|PortingOrderSingleStatus|list<'draft'|'in-process'|'submitted'|'exception'|'foc-date-confirmed'|'cancel-pending'|'ported'|'cancelled'|UnionMember1>,
-     *     supportKey?: string|list<string>,
-     *   },
-     *   page?: array{number?: int, size?: int},
-     *   sort?: array{value?: '-created_at'|'created_at'|Value},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|SortShape
      * }|PhoneNumberBlockListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PortingPhoneNumberBlock>>
      *
@@ -91,7 +92,7 @@ final class PhoneNumberBlocksRawService implements PhoneNumberBlocksRawContract
     public function list(
         string $portingOrderID,
         array|PhoneNumberBlockListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PhoneNumberBlockListParams::parseRequest(
             $params,
@@ -116,6 +117,7 @@ final class PhoneNumberBlocksRawService implements PhoneNumberBlocksRawContract
      *
      * @param string $id Identifies the phone number block to be deleted
      * @param array{portingOrderID: string}|PhoneNumberBlockDeleteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberBlockDeleteResponse>
      *
@@ -124,7 +126,7 @@ final class PhoneNumberBlocksRawService implements PhoneNumberBlocksRawContract
     public function delete(
         string $id,
         array|PhoneNumberBlockDeleteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PhoneNumberBlockDeleteParams::parseRequest(
             $params,

@@ -21,7 +21,7 @@ use Telnyx\ExternalConnections\Uploads\Upload\Status;
  *   status?: null|Status|value-of<Status>,
  *   tenantID?: string|null,
  *   ticketID?: string|null,
- *   tnUploadEntries?: list<TnUploadEntryShape>|null,
+ *   tnUploadEntries?: list<TnUploadEntry|TnUploadEntryShape>|null,
  * }
  */
 final class Upload implements BaseModel
@@ -81,7 +81,7 @@ final class Upload implements BaseModel
      *
      * @param list<AvailableUsage|value-of<AvailableUsage>>|null $availableUsages
      * @param Status|value-of<Status>|null $status
-     * @param list<TnUploadEntryShape>|null $tnUploadEntries
+     * @param list<TnUploadEntry|TnUploadEntryShape>|null $tnUploadEntries
      */
     public static function with(
         ?array $availableUsages = null,
@@ -181,7 +181,7 @@ final class Upload implements BaseModel
     }
 
     /**
-     * @param list<TnUploadEntryShape> $tnUploadEntries
+     * @param list<TnUploadEntry|TnUploadEntryShape> $tnUploadEntries
      */
     public function withTnUploadEntries(array $tnUploadEntries): self
     {

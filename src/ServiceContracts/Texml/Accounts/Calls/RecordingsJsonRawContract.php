@@ -12,6 +12,9 @@ use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParam
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonResponse;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRetrieveRecordingsJsonParams;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface RecordingsJsonRawContract
 {
     /**
@@ -19,6 +22,7 @@ interface RecordingsJsonRawContract
      *
      * @param string $callSid path param: The CallSid that identifies the call to update
      * @param array<string,mixed>|RecordingsJsonRecordingsJsonParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RecordingsJsonRecordingsJsonResponse>
      *
@@ -27,7 +31,7 @@ interface RecordingsJsonRawContract
     public function recordingsJson(
         string $callSid,
         array|RecordingsJsonRecordingsJsonParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -35,6 +39,7 @@ interface RecordingsJsonRawContract
      *
      * @param string $callSid the CallSid that identifies the call to update
      * @param array<string,mixed>|RecordingsJsonRetrieveRecordingsJsonParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RecordingsJsonGetRecordingsJsonResponse>
      *
@@ -43,6 +48,6 @@ interface RecordingsJsonRawContract
     public function retrieveRecordingsJson(
         string $callSid,
         array|RecordingsJsonRetrieveRecordingsJsonParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

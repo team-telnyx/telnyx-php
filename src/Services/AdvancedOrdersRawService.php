@@ -18,6 +18,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AdvancedOrdersRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AdvancedOrdersRawService implements AdvancedOrdersRawContract
 {
     // @phpstan-ignore-next-line
@@ -36,11 +39,12 @@ final class AdvancedOrdersRawService implements AdvancedOrdersRawContract
      *   comments?: string,
      *   countryCode?: string,
      *   customerReference?: string,
-     *   features?: list<'sms'|'mms'|'voice'|'fax'|'emergency'|Feature>,
-     *   phoneNumberType?: 'local'|'mobile'|'toll_free'|'shared_cost'|'national'|'landline'|PhoneNumberType,
+     *   features?: list<Feature|value-of<Feature>>,
+     *   phoneNumberType?: PhoneNumberType|value-of<PhoneNumberType>,
      *   quantity?: int,
      *   requirementGroupID?: string,
      * }|AdvancedOrderCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AdvancedOrderNewResponse>
      *
@@ -48,7 +52,7 @@ final class AdvancedOrdersRawService implements AdvancedOrdersRawContract
      */
     public function create(
         array|AdvancedOrderCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AdvancedOrderCreateParams::parseRequest(
             $params,
@@ -70,13 +74,15 @@ final class AdvancedOrdersRawService implements AdvancedOrdersRawContract
      *
      * Get Advanced Order
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<AdvancedOrderGetResponse>
      *
      * @throws APIException
      */
     public function retrieve(
         string $orderID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -92,12 +98,15 @@ final class AdvancedOrdersRawService implements AdvancedOrdersRawContract
      *
      * List Advanced Orders
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<AdvancedOrderListResponse>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse
-    {
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
@@ -117,11 +126,12 @@ final class AdvancedOrdersRawService implements AdvancedOrdersRawContract
      *   comments?: string,
      *   countryCode?: string,
      *   customerReference?: string,
-     *   features?: list<'sms'|'mms'|'voice'|'fax'|'emergency'|AdvancedOrderUpdateRequirementGroupParams\Feature>,
-     *   phoneNumberType?: 'local'|'mobile'|'toll_free'|'shared_cost'|'national'|'landline'|AdvancedOrderUpdateRequirementGroupParams\PhoneNumberType,
+     *   features?: list<AdvancedOrderUpdateRequirementGroupParams\Feature|value-of<AdvancedOrderUpdateRequirementGroupParams\Feature>>,
+     *   phoneNumberType?: AdvancedOrderUpdateRequirementGroupParams\PhoneNumberType|value-of<AdvancedOrderUpdateRequirementGroupParams\PhoneNumberType>,
      *   quantity?: int,
      *   requirementGroupID?: string,
      * }|AdvancedOrderUpdateRequirementGroupParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AdvancedOrderUpdateRequirementGroupResponse>
      *
@@ -130,7 +140,7 @@ final class AdvancedOrdersRawService implements AdvancedOrdersRawContract
     public function updateRequirementGroup(
         string $advancedOrderID,
         array|AdvancedOrderUpdateRequirementGroupParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AdvancedOrderUpdateRequirementGroupParams::parseRequest(
             $params,

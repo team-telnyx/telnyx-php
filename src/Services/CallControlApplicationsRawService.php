@@ -12,11 +12,9 @@ use Telnyx\CallControlApplications\CallControlApplicationCreateParams\WebhookAPI
 use Telnyx\CallControlApplications\CallControlApplicationDeleteResponse;
 use Telnyx\CallControlApplications\CallControlApplicationGetResponse;
 use Telnyx\CallControlApplications\CallControlApplicationInbound;
-use Telnyx\CallControlApplications\CallControlApplicationInbound\SipSubdomainReceiveSettings;
 use Telnyx\CallControlApplications\CallControlApplicationListParams;
-use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter\Product;
-use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter\Status;
-use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter\Type;
+use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter;
+use Telnyx\CallControlApplications\CallControlApplicationListParams\Page;
 use Telnyx\CallControlApplications\CallControlApplicationListParams\Sort;
 use Telnyx\CallControlApplications\CallControlApplicationNewResponse;
 use Telnyx\CallControlApplications\CallControlApplicationOutbound;
@@ -29,6 +27,13 @@ use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CallControlApplicationsRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\CallControlApplications\CallControlApplicationListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\CallControlApplications\CallControlApplicationListParams\Page
+ * @phpstan-import-type CallControlApplicationInboundShape from \Telnyx\CallControlApplications\CallControlApplicationInbound
+ * @phpstan-import-type CallControlApplicationOutboundShape from \Telnyx\CallControlApplications\CallControlApplicationOutbound
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class CallControlApplicationsRawService implements CallControlApplicationsRawContract
 {
     // @phpstan-ignore-next-line
@@ -48,23 +53,17 @@ final class CallControlApplicationsRawService implements CallControlApplications
      *   active?: bool,
      *   anchorsiteOverride?: value-of<AnchorsiteOverride>,
      *   callCostInWebhooks?: bool,
-     *   dtmfType?: 'RFC 2833'|'Inband'|'SIP INFO'|DtmfType,
+     *   dtmfType?: DtmfType|value-of<DtmfType>,
      *   firstCommandTimeout?: bool,
      *   firstCommandTimeoutSecs?: int,
-     *   inbound?: array{
-     *     channelLimit?: int,
-     *     shakenStirEnabled?: bool,
-     *     sipSubdomain?: string,
-     *     sipSubdomainReceiveSettings?: 'only_my_connections'|'from_anyone'|SipSubdomainReceiveSettings,
-     *   }|CallControlApplicationInbound,
-     *   outbound?: array{
-     *     channelLimit?: int, outboundVoiceProfileID?: string
-     *   }|CallControlApplicationOutbound,
+     *   inbound?: CallControlApplicationInbound|CallControlApplicationInboundShape,
+     *   outbound?: CallControlApplicationOutbound|CallControlApplicationOutboundShape,
      *   redactDtmfDebugLogging?: bool,
-     *   webhookAPIVersion?: '1'|'2'|WebhookAPIVersion,
+     *   webhookAPIVersion?: WebhookAPIVersion|value-of<WebhookAPIVersion>,
      *   webhookEventFailoverURL?: string|null,
      *   webhookTimeoutSecs?: int|null,
      * }|CallControlApplicationCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallControlApplicationNewResponse>
      *
@@ -72,7 +71,7 @@ final class CallControlApplicationsRawService implements CallControlApplications
      */
     public function create(
         array|CallControlApplicationCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CallControlApplicationCreateParams::parseRequest(
             $params,
@@ -95,6 +94,7 @@ final class CallControlApplicationsRawService implements CallControlApplications
      * Retrieves the details of an existing call control application.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallControlApplicationGetResponse>
      *
@@ -102,7 +102,7 @@ final class CallControlApplicationsRawService implements CallControlApplications
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -125,24 +125,18 @@ final class CallControlApplicationsRawService implements CallControlApplications
      *   active?: bool,
      *   anchorsiteOverride?: value-of<CallControlApplicationUpdateParams\AnchorsiteOverride>,
      *   callCostInWebhooks?: bool,
-     *   dtmfType?: 'RFC 2833'|'Inband'|'SIP INFO'|CallControlApplicationUpdateParams\DtmfType,
+     *   dtmfType?: CallControlApplicationUpdateParams\DtmfType|value-of<CallControlApplicationUpdateParams\DtmfType>,
      *   firstCommandTimeout?: bool,
      *   firstCommandTimeoutSecs?: int,
-     *   inbound?: array{
-     *     channelLimit?: int,
-     *     shakenStirEnabled?: bool,
-     *     sipSubdomain?: string,
-     *     sipSubdomainReceiveSettings?: 'only_my_connections'|'from_anyone'|SipSubdomainReceiveSettings,
-     *   }|CallControlApplicationInbound,
-     *   outbound?: array{
-     *     channelLimit?: int, outboundVoiceProfileID?: string
-     *   }|CallControlApplicationOutbound,
+     *   inbound?: CallControlApplicationInbound|CallControlApplicationInboundShape,
+     *   outbound?: CallControlApplicationOutbound|CallControlApplicationOutboundShape,
      *   redactDtmfDebugLogging?: bool,
      *   tags?: list<string>,
-     *   webhookAPIVersion?: '1'|'2'|CallControlApplicationUpdateParams\WebhookAPIVersion,
+     *   webhookAPIVersion?: CallControlApplicationUpdateParams\WebhookAPIVersion|value-of<CallControlApplicationUpdateParams\WebhookAPIVersion>,
      *   webhookEventFailoverURL?: string|null,
      *   webhookTimeoutSecs?: int|null,
      * }|CallControlApplicationUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallControlApplicationUpdateResponse>
      *
@@ -151,7 +145,7 @@ final class CallControlApplicationsRawService implements CallControlApplications
     public function update(
         string $id,
         array|CallControlApplicationUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CallControlApplicationUpdateParams::parseRequest(
             $params,
@@ -174,28 +168,9 @@ final class CallControlApplicationsRawService implements CallControlApplications
      * Return a list of call control applications.
      *
      * @param array{
-     *   filter?: array{
-     *     applicationName?: array{contains?: string},
-     *     applicationSessionID?: string,
-     *     connectionID?: string,
-     *     failed?: bool,
-     *     from?: string,
-     *     legID?: string,
-     *     name?: string,
-     *     occurredAt?: array{
-     *       eq?: string, gt?: string, gte?: string, lt?: string, lte?: string
-     *     },
-     *     outboundOutboundVoiceProfileID?: string,
-     *     product?: 'call_control'|'fax'|'texml'|Product,
-     *     status?: 'init'|'in_progress'|'completed'|Status,
-     *     to?: string,
-     *     type?: 'command'|'webhook'|Type,
-     *   },
-     *   page?: array{
-     *     after?: string, before?: string, limit?: int, number?: int, size?: int
-     *   },
-     *   sort?: 'created_at'|'connection_name'|'active'|Sort,
+     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|value-of<Sort>
      * }|CallControlApplicationListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<CallControlApplication>>
      *
@@ -203,7 +178,7 @@ final class CallControlApplicationsRawService implements CallControlApplications
      */
     public function list(
         array|CallControlApplicationListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CallControlApplicationListParams::parseRequest(
             $params,
@@ -227,6 +202,7 @@ final class CallControlApplicationsRawService implements CallControlApplications
      * Deletes a call control application.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallControlApplicationDeleteResponse>
      *
@@ -234,7 +210,7 @@ final class CallControlApplicationsRawService implements CallControlApplications
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

@@ -20,7 +20,7 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
  *   connections?: list<int>|null,
  *   createdAt?: string|null,
  *   endTime?: string|null,
- *   filters?: list<FilterShape>|null,
+ *   filters?: list<Filter|FilterShape>|null,
  *   managedAccounts?: list<string>|null,
  *   recordType?: string|null,
  *   recordTypes?: list<int>|null,
@@ -160,7 +160,7 @@ final class CdrDetailedReqResponse implements BaseModel
      *
      * @param list<int>|null $callTypes
      * @param list<int>|null $connections
-     * @param list<FilterShape>|null $filters
+     * @param list<Filter|FilterShape>|null $filters
      * @param list<string>|null $managedAccounts
      * @param list<int>|null $recordTypes
      */
@@ -268,7 +268,7 @@ final class CdrDetailedReqResponse implements BaseModel
     /**
      * List of filters.
      *
-     * @param list<FilterShape> $filters
+     * @param list<Filter|FilterShape> $filters
      */
     public function withFilters(array $filters): self
     {

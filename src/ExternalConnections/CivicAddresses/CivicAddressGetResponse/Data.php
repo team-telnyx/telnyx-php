@@ -23,7 +23,7 @@ use Telnyx\ExternalConnections\CivicAddresses\CivicAddressGetResponse\Data\Locat
  *   description?: string|null,
  *   houseNumber?: string|null,
  *   houseNumberSuffix?: string|null,
- *   locations?: list<LocationShape>|null,
+ *   locations?: list<Location|LocationShape>|null,
  *   postalOrZipCode?: string|null,
  *   recordType?: string|null,
  *   stateOrProvince?: string|null,
@@ -104,7 +104,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<LocationShape>|null $locations
+     * @param list<Location|LocationShape>|null $locations
      */
     public static function with(
         ?string $id = null,
@@ -233,7 +233,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<LocationShape> $locations
+     * @param list<Location|LocationShape> $locations
      */
     public function withLocations(array $locations): self
     {

@@ -12,6 +12,7 @@ use Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams\Filter\GlobalIPID\In;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in].
  *
+ * @phpstan-import-type GlobalIPIDVariants from \Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams\Filter\GlobalIPID
  * @phpstan-import-type GlobalIPIDShape from \Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams\Filter\GlobalIPID
  *
  * @phpstan-type FilterShape = array{globalIPID?: GlobalIPIDShape|null}
@@ -23,6 +24,8 @@ final class Filter implements BaseModel
 
     /**
      * Filter by exact Global IP ID.
+     *
+     * @var GlobalIPIDVariants|null $globalIPID
      */
     #[Optional('global_ip_id')]
     public string|In|null $globalIPID;

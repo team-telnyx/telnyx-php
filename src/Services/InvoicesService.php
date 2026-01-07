@@ -15,6 +15,9 @@ use Telnyx\Invoices\InvoiceRetrieveParams\Action;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\InvoicesContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class InvoicesService implements InvoicesContract
 {
     /**
@@ -36,14 +39,15 @@ final class InvoicesService implements InvoicesContract
      * Retrieve a single invoice by its unique identifier.
      *
      * @param string $id Invoice UUID
-     * @param 'json'|'link'|Action $action Invoice action
+     * @param Action|value-of<Action> $action Invoice action
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        string|Action|null $action = null,
-        ?RequestOptions $requestOptions = null,
+        Action|string|null $action = null,
+        RequestOptions|array|null $requestOptions = null,
     ): InvoiceGetResponse {
         $params = Util::removeNulls(['action' => $action]);
 
@@ -58,7 +62,8 @@ final class InvoicesService implements InvoicesContract
      *
      * Retrieve a paginated list of invoices.
      *
-     * @param 'period_start'|'-period_start'|Sort $sort specifies the sort order for results
+     * @param Sort|value-of<Sort> $sort specifies the sort order for results
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<InvoiceListResponse>
      *
@@ -67,8 +72,8 @@ final class InvoicesService implements InvoicesContract
     public function list(
         ?int $pageNumber = null,
         ?int $pageSize = null,
-        string|Sort|null $sort = null,
-        ?RequestOptions $requestOptions = null,
+        Sort|string|null $sort = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
         $params = Util::removeNulls(
             ['pageNumber' => $pageNumber, 'pageSize' => $pageSize, 'sort' => $sort]

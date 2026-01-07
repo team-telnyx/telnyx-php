@@ -18,9 +18,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type SipHeaderShape from \Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\SipHeader
  *
  * @phpstan-type ReferShape = array{
- *   targets: list<TargetShape>,
- *   customHeaders?: list<CustomHeaderShape>|null,
- *   sipHeaders?: list<SipHeaderShape>|null,
+ *   targets: list<Target|TargetShape>,
+ *   customHeaders?: list<CustomHeader|CustomHeaderShape>|null,
+ *   sipHeaders?: list<SipHeader|SipHeaderShape>|null,
  * }
  */
 final class Refer implements BaseModel
@@ -76,9 +76,9 @@ final class Refer implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TargetShape> $targets
-     * @param list<CustomHeaderShape>|null $customHeaders
-     * @param list<SipHeaderShape>|null $sipHeaders
+     * @param list<Target|TargetShape> $targets
+     * @param list<CustomHeader|CustomHeaderShape>|null $customHeaders
+     * @param list<SipHeader|SipHeaderShape>|null $sipHeaders
      */
     public static function with(
         array $targets,
@@ -98,7 +98,7 @@ final class Refer implements BaseModel
     /**
      * The different possible targets of the SIP refer. The assistant will be able to choose one of the targets to refer the call to.
      *
-     * @param list<TargetShape> $targets
+     * @param list<Target|TargetShape> $targets
      */
     public function withTargets(array $targets): self
     {
@@ -111,7 +111,7 @@ final class Refer implements BaseModel
     /**
      * Custom headers to be added to the SIP REFER.
      *
-     * @param list<CustomHeaderShape> $customHeaders
+     * @param list<CustomHeader|CustomHeaderShape> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {
@@ -124,7 +124,7 @@ final class Refer implements BaseModel
     /**
      * SIP headers to be added to the SIP REFER. Currently only User-to-User and Diversion headers are supported.
      *
-     * @param list<SipHeaderShape> $sipHeaders
+     * @param list<SipHeader|SipHeaderShape> $sipHeaders
      */
     public function withSipHeaders(array $sipHeaders): self
     {

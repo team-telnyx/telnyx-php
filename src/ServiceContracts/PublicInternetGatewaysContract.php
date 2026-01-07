@@ -8,10 +8,17 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayDeleteResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayGetResponse;
+use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Filter;
+use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Page;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayListResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface PublicInternetGatewaysContract
 {
     /**
@@ -20,6 +27,7 @@ interface PublicInternetGatewaysContract
      * @param string $name a user specified name for the interface
      * @param string $networkID the id of the network associated with the interface
      * @param string $regionCode the region interface is deployed to
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -27,50 +35,49 @@ interface PublicInternetGatewaysContract
         ?string $name = null,
         ?string $networkID = null,
         ?string $regionCode = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): PublicInternetGatewayNewResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): PublicInternetGatewayGetResponse;
 
     /**
      * @api
      *
-     * @param array{
-     *   networkID?: string
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[network_id]
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[network_id]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<PublicInternetGatewayListResponse>
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null,
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): PublicInternetGatewayDeleteResponse;
 }

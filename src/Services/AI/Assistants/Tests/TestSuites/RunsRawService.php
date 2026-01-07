@@ -16,6 +16,9 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\Tests\TestSuites\RunsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class RunsRawService implements RunsRawContract
 {
     // @phpstan-ignore-next-line
@@ -32,6 +35,7 @@ final class RunsRawService implements RunsRawContract
      * @param array{
      *   pageNumber?: int, pageSize?: int, status?: string, testSuiteRunID?: string
      * }|RunListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<TestRunResponse>>
      *
@@ -40,7 +44,7 @@ final class RunsRawService implements RunsRawContract
     public function list(
         string $suiteName,
         array|RunListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RunListParams::parseRequest(
             $params,
@@ -71,6 +75,7 @@ final class RunsRawService implements RunsRawContract
      * Executes all tests within a specific test suite as a batch operation
      *
      * @param array{destinationVersionID?: string}|RunTriggerParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<TestRunResponse>>
      *
@@ -79,7 +84,7 @@ final class RunsRawService implements RunsRawContract
     public function trigger(
         string $suiteName,
         array|RunTriggerParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RunTriggerParams::parseRequest(
             $params,

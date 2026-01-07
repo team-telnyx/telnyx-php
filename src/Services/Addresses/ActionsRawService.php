@@ -14,6 +14,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Addresses\ActionsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsRawService implements ActionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -29,6 +32,7 @@ final class ActionsRawService implements ActionsRawContract
      *
      * @param string $addressUuid the UUID of the address that should be accepted
      * @param array{id?: string}|ActionAcceptSuggestionsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionAcceptSuggestionsResponse>
      *
@@ -37,7 +41,7 @@ final class ActionsRawService implements ActionsRawContract
     public function acceptSuggestions(
         string $addressUuid,
         array|ActionAcceptSuggestionsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionAcceptSuggestionsParams::parseRequest(
             $params,
@@ -67,6 +71,7 @@ final class ActionsRawService implements ActionsRawContract
      *   extendedAddress?: string,
      *   locality?: string,
      * }|ActionValidateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionValidateResponse>
      *
@@ -74,7 +79,7 @@ final class ActionsRawService implements ActionsRawContract
      */
     public function validate(
         array|ActionValidateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionValidateParams::parseRequest(
             $params,

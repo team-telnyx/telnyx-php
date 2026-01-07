@@ -10,7 +10,18 @@ use Telnyx\RequestOptions;
 use Telnyx\RoomParticipant;
 use Telnyx\Rooms\RoomSession;
 use Telnyx\Rooms\Sessions\SessionGetResponse;
+use Telnyx\Rooms\Sessions\SessionList0Params\Filter;
+use Telnyx\Rooms\Sessions\SessionList0Params\Page;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Rooms\Sessions\SessionList0Params\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Rooms\Sessions\SessionList0Params\Page
+ * @phpstan-import-type FilterShape from \Telnyx\Rooms\Sessions\SessionList1Params\Filter as FilterShape1
+ * @phpstan-import-type PageShape from \Telnyx\Rooms\Sessions\SessionList1Params\Page as PageShape1
+ * @phpstan-import-type FilterShape from \Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Filter as FilterShape2
+ * @phpstan-import-type PageShape from \Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Page as PageShape2
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface SessionsContract
 {
     /**
@@ -18,55 +29,43 @@ interface SessionsContract
      *
      * @param string $roomSessionID the unique identifier of a room session
      * @param bool $includeParticipants to decide if room participants should be included in the response
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $roomSessionID,
         ?bool $includeParticipants = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): SessionGetResponse;
 
     /**
      * @api
      *
-     * @param array{
-     *   active?: bool,
-     *   dateCreatedAt?: array{eq?: string, gte?: string, lte?: string},
-     *   dateEndedAt?: array{eq?: string, gte?: string, lte?: string},
-     *   dateUpdatedAt?: array{eq?: string, gte?: string, lte?: string},
-     *   roomID?: string,
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[room_id], filter[active]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[room_id], filter[active]
      * @param bool $includeParticipants to decide if room participants should be included in the response
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<RoomSession>
      *
      * @throws APIException
      */
     public function list0(
-        ?array $filter = null,
+        Filter|array|null $filter = null,
         ?bool $includeParticipants = null,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination;
 
     /**
      * @api
      *
      * @param string $roomID the unique identifier of a room
-     * @param array{
-     *   active?: bool,
-     *   dateCreatedAt?: array{eq?: string, gte?: string, lte?: string},
-     *   dateEndedAt?: array{eq?: string, gte?: string, lte?: string},
-     *   dateUpdatedAt?: array{eq?: string, gte?: string, lte?: string},
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[active]
+     * @param \Telnyx\Rooms\Sessions\SessionList1Params\Filter|FilterShape1 $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[active]
      * @param bool $includeParticipants to decide if room participants should be included in the response
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param \Telnyx\Rooms\Sessions\SessionList1Params\Page|PageShape1 $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<RoomSession>
      *
@@ -74,25 +73,19 @@ interface SessionsContract
      */
     public function list1(
         string $roomID,
-        ?array $filter = null,
+        \Telnyx\Rooms\Sessions\SessionList1Params\Filter|array|null $filter = null,
         ?bool $includeParticipants = null,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null,
+        \Telnyx\Rooms\Sessions\SessionList1Params\Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination;
 
     /**
      * @api
      *
      * @param string $roomSessionID the unique identifier of a room session
-     * @param array{
-     *   context?: string,
-     *   dateJoinedAt?: array{eq?: string, gte?: string, lte?: string},
-     *   dateLeftAt?: array{eq?: string, gte?: string, lte?: string},
-     *   dateUpdatedAt?: array{eq?: string, gte?: string, lte?: string},
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[date_joined_at][eq], filter[date_joined_at][gte], filter[date_joined_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_left_at][eq], filter[date_left_at][gte], filter[date_left_at][lte], filter[context]
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param \Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Filter|FilterShape2 $filter Consolidated filter parameter (deepObject style). Originally: filter[date_joined_at][eq], filter[date_joined_at][gte], filter[date_joined_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_left_at][eq], filter[date_left_at][gte], filter[date_left_at][lte], filter[context]
+     * @param \Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Page|PageShape2 $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<RoomParticipant>
      *
@@ -100,8 +93,8 @@ interface SessionsContract
      */
     public function retrieveParticipants(
         string $roomSessionID,
-        ?array $filter = null,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null,
+        \Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Filter|array|null $filter = null,
+        \Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination;
 }

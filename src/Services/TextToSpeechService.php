@@ -12,6 +12,9 @@ use Telnyx\ServiceContracts\TextToSpeechContract;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesParams\Provider;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class TextToSpeechService implements TextToSpeechContract
 {
     /**
@@ -42,13 +45,14 @@ final class TextToSpeechService implements TextToSpeechContract
      * - Telnyx.KokoroTTS.af
      *
      * Use the `GET /text-to-speech/voices` endpoint to get a complete list of available voices.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function generateSpeech(
         string $text,
         string $voice,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): string {
         $params = Util::removeNulls(['text' => $text, 'voice' => $voice]);
 
@@ -64,14 +68,15 @@ final class TextToSpeechService implements TextToSpeechContract
      * Returns a list of voices that can be used with the text to speech commands.
      *
      * @param string $elevenlabsAPIKeyRef Reference to your ElevenLabs API key stored in the Telnyx Portal
-     * @param 'aws'|'azure'|'elevenlabs'|'telnyx'|Provider $provider Filter voices by provider
+     * @param Provider|value-of<Provider> $provider Filter voices by provider
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function listVoices(
         ?string $elevenlabsAPIKeyRef = null,
-        string|Provider|null $provider = null,
-        ?RequestOptions $requestOptions = null,
+        Provider|string|null $provider = null,
+        RequestOptions|array|null $requestOptions = null,
     ): TextToSpeechListVoicesResponse {
         $params = Util::removeNulls(
             ['elevenlabsAPIKeyRef' => $elevenlabsAPIKeyRef, 'provider' => $provider]

@@ -16,7 +16,8 @@ use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutStatusChanged;
  * @phpstan-import-type WebhookPortoutNewCommentShape from \Telnyx\Portouts\Events\EventListResponse\WebhookPortoutNewComment
  * @phpstan-import-type WebhookPortoutFocDateChangedShape from \Telnyx\Portouts\Events\EventListResponse\WebhookPortoutFocDateChanged
  *
- * @phpstan-type EventListResponseShape = WebhookPortoutStatusChangedShape|WebhookPortoutNewCommentShape|WebhookPortoutFocDateChangedShape
+ * @phpstan-type EventListResponseVariants = WebhookPortoutStatusChanged|WebhookPortoutNewComment|WebhookPortoutFocDateChanged
+ * @phpstan-type EventListResponseShape = EventListResponseVariants|WebhookPortoutStatusChangedShape|WebhookPortoutNewCommentShape|WebhookPortoutFocDateChangedShape
  */
 final class EventListResponse implements ConverterSource
 {

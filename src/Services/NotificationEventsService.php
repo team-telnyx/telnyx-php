@@ -8,10 +8,15 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
+use Telnyx\NotificationEvents\NotificationEventListParams\Page;
 use Telnyx\NotificationEvents\NotificationEventListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NotificationEventsContract;
 
+/**
+ * @phpstan-import-type PageShape from \Telnyx\NotificationEvents\NotificationEventListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class NotificationEventsService implements NotificationEventsContract
 {
     /**
@@ -32,17 +37,16 @@ final class NotificationEventsService implements NotificationEventsContract
      *
      * Returns a list of your notifications events.
      *
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<NotificationEventListResponse>
      *
      * @throws APIException
      */
     public function list(
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null
     ): DefaultPagination {
         $params = Util::removeNulls(['page' => $page]);
 

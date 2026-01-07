@@ -13,12 +13,16 @@ use Telnyx\Recordings\RecordingListParams;
 use Telnyx\Recordings\RecordingResponseData;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface RecordingsRawContract
 {
     /**
      * @api
      *
      * @param string $recordingID uniquely identifies the recording by id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RecordingGetResponse>
      *
@@ -26,13 +30,14 @@ interface RecordingsRawContract
      */
     public function retrieve(
         string $recordingID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|RecordingListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<RecordingResponseData>>
      *
@@ -40,13 +45,14 @@ interface RecordingsRawContract
      */
     public function list(
         array|RecordingListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $recordingID uniquely identifies the recording by id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RecordingDeleteResponse>
      *
@@ -54,6 +60,6 @@ interface RecordingsRawContract
      */
     public function delete(
         string $recordingID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

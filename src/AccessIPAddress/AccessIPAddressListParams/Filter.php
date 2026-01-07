@@ -12,6 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[ip_source], filter[ip_address], filter[created_at]. Supports complex bracket operations for dynamic filtering.
  *
+ * @phpstan-import-type CreatedAtVariants from \Telnyx\AccessIPAddress\AccessIPAddressListParams\Filter\CreatedAt
  * @phpstan-import-type CreatedAtShape from \Telnyx\AccessIPAddress\AccessIPAddressListParams\Filter\CreatedAt
  *
  * @phpstan-type FilterShape = array{
@@ -27,6 +28,8 @@ final class Filter implements BaseModel
 
     /**
      * Filter by exact creation date-time.
+     *
+     * @var CreatedAtVariants|null $createdAt
      */
     #[Optional('created_at')]
     public \DateTimeInterface|DateRangeFilter|null $createdAt;

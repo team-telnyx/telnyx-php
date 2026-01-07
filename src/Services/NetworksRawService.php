@@ -8,13 +8,14 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
-use Telnyx\Networks\InterfaceStatus;
 use Telnyx\Networks\NetworkCreateParams;
 use Telnyx\Networks\NetworkDeleteResponse;
 use Telnyx\Networks\NetworkGetResponse;
 use Telnyx\Networks\NetworkListInterfacesParams;
 use Telnyx\Networks\NetworkListInterfacesResponse;
 use Telnyx\Networks\NetworkListParams;
+use Telnyx\Networks\NetworkListParams\Filter;
+use Telnyx\Networks\NetworkListParams\Page;
 use Telnyx\Networks\NetworkListResponse;
 use Telnyx\Networks\NetworkNewResponse;
 use Telnyx\Networks\NetworkUpdateParams;
@@ -22,6 +23,13 @@ use Telnyx\Networks\NetworkUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NetworksRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Networks\NetworkListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Networks\NetworkListParams\Page
+ * @phpstan-import-type FilterShape from \Telnyx\Networks\NetworkListInterfacesParams\Filter as FilterShape1
+ * @phpstan-import-type PageShape from \Telnyx\Networks\NetworkListInterfacesParams\Page as PageShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class NetworksRawService implements NetworksRawContract
 {
     // @phpstan-ignore-next-line
@@ -36,6 +44,7 @@ final class NetworksRawService implements NetworksRawContract
      * Create a new Network.
      *
      * @param array{name: string}|NetworkCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NetworkNewResponse>
      *
@@ -43,7 +52,7 @@ final class NetworksRawService implements NetworksRawContract
      */
     public function create(
         array|NetworkCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = NetworkCreateParams::parseRequest(
             $params,
@@ -66,6 +75,7 @@ final class NetworksRawService implements NetworksRawContract
      * Retrieve a Network.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NetworkGetResponse>
      *
@@ -73,7 +83,7 @@ final class NetworksRawService implements NetworksRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -91,6 +101,7 @@ final class NetworksRawService implements NetworksRawContract
      *
      * @param string $networkID identifies the resource
      * @param array{name: string}|NetworkUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NetworkUpdateResponse>
      *
@@ -99,7 +110,7 @@ final class NetworksRawService implements NetworksRawContract
     public function update(
         string $networkID,
         array|NetworkUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = NetworkUpdateParams::parseRequest(
             $params,
@@ -122,8 +133,9 @@ final class NetworksRawService implements NetworksRawContract
      * List all Networks.
      *
      * @param array{
-     *   filter?: array{name?: string}, page?: array{number?: int, size?: int}
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|NetworkListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<NetworkListResponse>>
      *
@@ -131,7 +143,7 @@ final class NetworksRawService implements NetworksRawContract
      */
     public function list(
         array|NetworkListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = NetworkListParams::parseRequest(
             $params,
@@ -155,6 +167,7 @@ final class NetworksRawService implements NetworksRawContract
      * Delete a Network.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NetworkDeleteResponse>
      *
@@ -162,7 +175,7 @@ final class NetworksRawService implements NetworksRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -180,13 +193,10 @@ final class NetworksRawService implements NetworksRawContract
      *
      * @param string $id identifies the resource
      * @param array{
-     *   filter?: array{
-     *     name?: string,
-     *     status?: 'created'|'provisioning'|'provisioned'|'deleting'|InterfaceStatus,
-     *     type?: string,
-     *   },
-     *   page?: array{number?: int, size?: int},
+     *   filter?: NetworkListInterfacesParams\Filter|FilterShape1,
+     *   page?: NetworkListInterfacesParams\Page|PageShape1,
      * }|NetworkListInterfacesParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<NetworkListInterfacesResponse>>
      *
@@ -195,7 +205,7 @@ final class NetworksRawService implements NetworksRawContract
     public function listInterfaces(
         string $id,
         array|NetworkListInterfacesParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = NetworkListInterfacesParams::parseRequest(
             $params,

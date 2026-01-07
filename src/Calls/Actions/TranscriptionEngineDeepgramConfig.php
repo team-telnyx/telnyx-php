@@ -14,7 +14,8 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type DeepgramNova2ConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineDeepgramConfig\DeepgramNova2Config
  * @phpstan-import-type DeepgramNova3ConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineDeepgramConfig\DeepgramNova3Config
  *
- * @phpstan-type TranscriptionEngineDeepgramConfigShape = DeepgramNova2ConfigShape|DeepgramNova3ConfigShape
+ * @phpstan-type TranscriptionEngineDeepgramConfigVariants = DeepgramNova2Config|DeepgramNova3Config
+ * @phpstan-type TranscriptionEngineDeepgramConfigShape = TranscriptionEngineDeepgramConfigVariants|DeepgramNova2ConfigShape|DeepgramNova3ConfigShape
  */
 final class TranscriptionEngineDeepgramConfig implements ConverterSource
 {

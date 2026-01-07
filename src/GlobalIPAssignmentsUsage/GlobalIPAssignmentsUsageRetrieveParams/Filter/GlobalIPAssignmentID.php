@@ -14,7 +14,8 @@ use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filte
  *
  * @phpstan-import-type InShape from \Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filter\GlobalIPAssignmentID\In
  *
- * @phpstan-type GlobalIPAssignmentIDShape = string|InShape
+ * @phpstan-type GlobalIPAssignmentIDVariants = string|In
+ * @phpstan-type GlobalIPAssignmentIDShape = GlobalIPAssignmentIDVariants|InShape
  */
 final class GlobalIPAssignmentID implements ConverterSource
 {

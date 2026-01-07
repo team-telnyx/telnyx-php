@@ -21,12 +21,16 @@ use Telnyx\Messaging10dlc\Brand\TelnyxBrand;
 use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface BrandRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|BrandCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TelnyxBrand>
      *
@@ -34,11 +38,13 @@ interface BrandRawContract
      */
     public function create(
         array|BrandCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BrandGetResponse>
      *
@@ -46,13 +52,14 @@ interface BrandRawContract
      */
     public function retrieve(
         string $brandID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|BrandUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TelnyxBrand>
      *
@@ -61,13 +68,14 @@ interface BrandRawContract
     public function update(
         string $brandID,
         array|BrandUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|BrandListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PerPagePaginationV2<BrandListResponse>>
      *
@@ -75,11 +83,13 @@ interface BrandRawContract
      */
     public function list(
         array|BrandListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -87,11 +97,13 @@ interface BrandRawContract
      */
     public function delete(
         string $brandID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BrandGetFeedbackResponse>
      *
@@ -99,11 +111,13 @@ interface BrandRawContract
      */
     public function getFeedback(
         string $brandID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -111,7 +125,7 @@ interface BrandRawContract
      */
     public function resend2faEmail(
         string $brandID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -119,6 +133,7 @@ interface BrandRawContract
      *
      * @param string $referenceID The reference ID returned when the OTP was initially triggered
      * @param array<string,mixed>|BrandRetrieveSMSOtpStatusParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BrandGetSMSOtpStatusResponse>
      *
@@ -127,11 +142,13 @@ interface BrandRawContract
     public function retrieveSMSOtpStatus(
         string $referenceID,
         array|BrandRetrieveSMSOtpStatusParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TelnyxBrand>
      *
@@ -139,7 +156,7 @@ interface BrandRawContract
      */
     public function revet(
         string $brandID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -147,6 +164,7 @@ interface BrandRawContract
      *
      * @param string $brandID The Brand ID for which to trigger the OTP
      * @param array<string,mixed>|BrandTriggerSMSOtpParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BrandTriggerSMSOtpResponse>
      *
@@ -155,7 +173,7 @@ interface BrandRawContract
     public function triggerSMSOtp(
         string $brandID,
         array|BrandTriggerSMSOtpParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -163,6 +181,7 @@ interface BrandRawContract
      *
      * @param string $brandID The Brand ID for which to verify the OTP
      * @param array<string,mixed>|BrandVerifySMSOtpParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -171,6 +190,6 @@ interface BrandRawContract
     public function verifySMSOtp(
         string $brandID,
         array|BrandVerifySMSOtpParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }
