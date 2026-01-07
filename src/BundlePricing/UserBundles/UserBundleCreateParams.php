@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type UserBundleCreateParamsShape = array{
  *   idempotencyKey?: string|null,
- *   items?: list<ItemShape>|null,
+ *   items?: list<Item|ItemShape>|null,
  *   authorizationBearer?: string|null,
  * }
  */
@@ -55,7 +55,7 @@ final class UserBundleCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ItemShape>|null $items
+     * @param list<Item|ItemShape>|null $items
      */
     public static function with(
         ?string $idempotencyKey = null,
@@ -83,7 +83,7 @@ final class UserBundleCreateParams implements BaseModel
     }
 
     /**
-     * @param list<ItemShape> $items
+     * @param list<Item|ItemShape> $items
      */
     public function withItems(array $items): self
     {

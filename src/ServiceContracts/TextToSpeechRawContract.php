@@ -11,12 +11,16 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesParams;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface TextToSpeechRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|TextToSpeechGenerateSpeechParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
      *
@@ -24,13 +28,14 @@ interface TextToSpeechRawContract
      */
     public function generateSpeech(
         array|TextToSpeechGenerateSpeechParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|TextToSpeechListVoicesParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TextToSpeechListVoicesResponse>
      *
@@ -38,6 +43,6 @@ interface TextToSpeechRawContract
      */
     public function listVoices(
         array|TextToSpeechListVoicesParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

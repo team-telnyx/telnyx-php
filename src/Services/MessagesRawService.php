@@ -23,11 +23,15 @@ use Telnyx\Messages\MessageSendResponse;
 use Telnyx\Messages\MessageSendShortCodeParams;
 use Telnyx\Messages\MessageSendShortCodeResponse;
 use Telnyx\Messages\MessageSendWhatsappParams;
+use Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage;
 use Telnyx\Messages\MessageSendWhatsappResponse;
-use Telnyx\Messages\WhatsappMedia;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagesRawContract;
 
+/**
+ * @phpstan-import-type WhatsappMessageShape from \Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MessagesRawService implements MessagesRawContract
 {
     // @phpstan-ignore-next-line
@@ -42,6 +46,7 @@ final class MessagesRawService implements MessagesRawContract
      * Note: This API endpoint can only retrieve messages that are no older than 10 days since their creation. If you require messages older than this, please generate an [MDR report.](https://developers.telnyx.com/api/v1/mission-control/add-mdr-request)
      *
      * @param string $id The id of the message
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessageGetResponse>
      *
@@ -49,7 +54,7 @@ final class MessagesRawService implements MessagesRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -66,6 +71,7 @@ final class MessagesRawService implements MessagesRawContract
      * Cancel a scheduled message that has not yet been sent. Only messages with `status=scheduled` and `send_at` more than a minute from now can be cancelled.
      *
      * @param string $id The id of the message to cancel
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessageCancelScheduledResponse>
      *
@@ -73,7 +79,7 @@ final class MessagesRawService implements MessagesRawContract
      */
     public function cancelScheduled(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -99,14 +105,15 @@ final class MessagesRawService implements MessagesRawContract
      *   from?: string,
      *   mediaURLs?: list<string>,
      *   messagingProfileID?: string,
-     *   sendAt?: string|\DateTimeInterface,
+     *   sendAt?: \DateTimeInterface,
      *   subject?: string,
      *   text?: string,
-     *   type?: 'SMS'|'MMS'|Type,
+     *   type?: Type|value-of<Type>,
      *   useProfileWebhooks?: bool,
      *   webhookFailoverURL?: string,
      *   webhookURL?: string,
      * }|MessageScheduleParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessageScheduleResponse>
      *
@@ -114,7 +121,7 @@ final class MessagesRawService implements MessagesRawContract
      */
     public function schedule(
         array|MessageScheduleParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MessageScheduleParams::parseRequest(
             $params,
@@ -146,14 +153,15 @@ final class MessagesRawService implements MessagesRawContract
      *   from?: string,
      *   mediaURLs?: list<string>,
      *   messagingProfileID?: string,
-     *   sendAt?: string|\DateTimeInterface|null,
+     *   sendAt?: \DateTimeInterface|null,
      *   subject?: string,
      *   text?: string,
-     *   type?: 'SMS'|'MMS'|MessageSendParams\Type,
+     *   type?: MessageSendParams\Type|value-of<MessageSendParams\Type>,
      *   useProfileWebhooks?: bool,
      *   webhookFailoverURL?: string,
      *   webhookURL?: string,
      * }|MessageSendParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessageSendResponse>
      *
@@ -161,7 +169,7 @@ final class MessagesRawService implements MessagesRawContract
      */
     public function send(
         array|MessageSendParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MessageSendParams::parseRequest(
             $params,
@@ -193,6 +201,7 @@ final class MessagesRawService implements MessagesRawContract
      *   webhookFailoverURL?: string,
      *   webhookURL?: string,
      * }|MessageSendGroupMmsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessageSendGroupMmsResponse>
      *
@@ -200,7 +209,7 @@ final class MessagesRawService implements MessagesRawContract
      */
     public function sendGroupMms(
         array|MessageSendGroupMmsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MessageSendGroupMmsParams::parseRequest(
             $params,
@@ -229,11 +238,12 @@ final class MessagesRawService implements MessagesRawContract
      *   mediaURLs?: list<string>,
      *   subject?: string,
      *   text?: string,
-     *   type?: 'SMS'|'MMS'|MessageSendLongCodeParams\Type,
+     *   type?: MessageSendLongCodeParams\Type|value-of<MessageSendLongCodeParams\Type>,
      *   useProfileWebhooks?: bool,
      *   webhookFailoverURL?: string,
      *   webhookURL?: string,
      * }|MessageSendLongCodeParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessageSendLongCodeResponse>
      *
@@ -241,7 +251,7 @@ final class MessagesRawService implements MessagesRawContract
      */
     public function sendLongCode(
         array|MessageSendLongCodeParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MessageSendLongCodeParams::parseRequest(
             $params,
@@ -270,11 +280,12 @@ final class MessagesRawService implements MessagesRawContract
      *   mediaURLs?: list<string>,
      *   subject?: string,
      *   text?: string,
-     *   type?: 'SMS'|'MMS'|MessageSendNumberPoolParams\Type,
+     *   type?: MessageSendNumberPoolParams\Type|value-of<MessageSendNumberPoolParams\Type>,
      *   useProfileWebhooks?: bool,
      *   webhookFailoverURL?: string,
      *   webhookURL?: string,
      * }|MessageSendNumberPoolParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessageSendNumberPoolResponse>
      *
@@ -282,7 +293,7 @@ final class MessagesRawService implements MessagesRawContract
      */
     public function sendNumberPool(
         array|MessageSendNumberPoolParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MessageSendNumberPoolParams::parseRequest(
             $params,
@@ -311,11 +322,12 @@ final class MessagesRawService implements MessagesRawContract
      *   mediaURLs?: list<string>,
      *   subject?: string,
      *   text?: string,
-     *   type?: 'SMS'|'MMS'|MessageSendShortCodeParams\Type,
+     *   type?: MessageSendShortCodeParams\Type|value-of<MessageSendShortCodeParams\Type>,
      *   useProfileWebhooks?: bool,
      *   webhookFailoverURL?: string,
      *   webhookURL?: string,
      * }|MessageSendShortCodeParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessageSendShortCodeResponse>
      *
@@ -323,7 +335,7 @@ final class MessagesRawService implements MessagesRawContract
      */
     public function sendShortCode(
         array|MessageSendShortCodeParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MessageSendShortCodeParams::parseRequest(
             $params,
@@ -348,64 +360,11 @@ final class MessagesRawService implements MessagesRawContract
      * @param array{
      *   from: string,
      *   to: string,
-     *   whatsappMessage: array{
-     *     audio?: array{
-     *       caption?: string, filename?: string, link?: string, voice?: bool
-     *     }|WhatsappMedia,
-     *     bizOpaqueCallbackData?: string,
-     *     contacts?: list<array{
-     *       addresses?: list<array<string,mixed>>,
-     *       birthday?: string,
-     *       emails?: list<array<string,mixed>>,
-     *       name?: string,
-     *       org?: array<string,mixed>,
-     *       phones?: list<array<string,mixed>>,
-     *       urls?: list<array<string,mixed>>,
-     *     }>,
-     *     document?: array{
-     *       caption?: string, filename?: string, link?: string, voice?: bool
-     *     }|WhatsappMedia,
-     *     image?: array{
-     *       caption?: string, filename?: string, link?: string, voice?: bool
-     *     }|WhatsappMedia,
-     *     interactive?: array{
-     *       action?: array{
-     *         button?: string,
-     *         buttons?: list<array<string,mixed>>,
-     *         cards?: list<array<string,mixed>>,
-     *         catalogID?: string,
-     *         mode?: string,
-     *         name?: string,
-     *         parameters?: array<string,mixed>,
-     *         productRetailerID?: string,
-     *         sections?: list<array<string,mixed>>,
-     *       },
-     *       body?: array{text?: string},
-     *       footer?: array{text?: string},
-     *       header?: array{
-     *         document?: array<string,mixed>|WhatsappMedia,
-     *         image?: array<string,mixed>|WhatsappMedia,
-     *         subText?: string,
-     *         text?: string,
-     *         video?: array<string,mixed>|WhatsappMedia,
-     *       },
-     *       type?: 'cta_url'|'list'|'carousel'|'button'|'location_request_message'|MessageSendWhatsappParams\WhatsappMessage\Interactive\Type,
-     *     },
-     *     location?: array{
-     *       address?: string, latitude?: string, longitude?: string, name?: string
-     *     },
-     *     reaction?: array{emoji?: string, messageID?: string},
-     *     sticker?: array{
-     *       caption?: string, filename?: string, link?: string, voice?: bool
-     *     }|WhatsappMedia,
-     *     type?: 'audio'|'document'|'image'|'sticker'|'video'|'interactive'|'location'|'template'|'reaction'|'contacts'|MessageSendWhatsappParams\WhatsappMessage\Type,
-     *     video?: array{
-     *       caption?: string, filename?: string, link?: string, voice?: bool
-     *     }|WhatsappMedia,
-     *   },
-     *   type?: 'WHATSAPP'|MessageSendWhatsappParams\Type,
+     *   whatsappMessage: WhatsappMessage|WhatsappMessageShape,
+     *   type?: MessageSendWhatsappParams\Type|value-of<MessageSendWhatsappParams\Type>,
      *   webhookURL?: string,
      * }|MessageSendWhatsappParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessageSendWhatsappResponse>
      *
@@ -413,7 +372,7 @@ final class MessagesRawService implements MessagesRawContract
      */
     public function sendWhatsapp(
         array|MessageSendWhatsappParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MessageSendWhatsappParams::parseRequest(
             $params,

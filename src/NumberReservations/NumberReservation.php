@@ -16,7 +16,7 @@ use Telnyx\NumberReservations\NumberReservation\Status;
  *   id?: string|null,
  *   createdAt?: \DateTimeInterface|null,
  *   customerReference?: string|null,
- *   phoneNumbers?: list<ReservedPhoneNumberShape>|null,
+ *   phoneNumbers?: list<ReservedPhoneNumber|ReservedPhoneNumberShape>|null,
  *   recordType?: string|null,
  *   status?: null|Status|value-of<Status>,
  *   updatedAt?: \DateTimeInterface|null,
@@ -73,7 +73,7 @@ final class NumberReservation implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ReservedPhoneNumberShape>|null $phoneNumbers
+     * @param list<ReservedPhoneNumber|ReservedPhoneNumberShape>|null $phoneNumbers
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
@@ -129,7 +129,7 @@ final class NumberReservation implements BaseModel
     }
 
     /**
-     * @param list<ReservedPhoneNumberShape> $phoneNumbers
+     * @param list<ReservedPhoneNumber|ReservedPhoneNumberShape> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {

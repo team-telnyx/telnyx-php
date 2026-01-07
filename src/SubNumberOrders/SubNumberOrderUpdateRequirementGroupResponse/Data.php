@@ -22,10 +22,10 @@ use Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse\Data\Reg
  *   isBlockSubNumberOrder?: bool|null,
  *   orderRequestID?: string|null,
  *   phoneNumberType?: string|null,
- *   phoneNumbers?: list<PhoneNumberShape>|null,
+ *   phoneNumbers?: list<PhoneNumber|PhoneNumberShape>|null,
  *   phoneNumbersCount?: int|null,
  *   recordType?: string|null,
- *   regulatoryRequirements?: list<RegulatoryRequirementShape>|null,
+ *   regulatoryRequirements?: list<RegulatoryRequirement|RegulatoryRequirementShape>|null,
  *   requirementsMet?: bool|null,
  *   status?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
@@ -90,8 +90,8 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PhoneNumberShape>|null $phoneNumbers
-     * @param list<RegulatoryRequirementShape>|null $regulatoryRequirements
+     * @param list<PhoneNumber|PhoneNumberShape>|null $phoneNumbers
+     * @param list<RegulatoryRequirement|RegulatoryRequirementShape>|null $regulatoryRequirements
      */
     public static function with(
         ?string $id = null,
@@ -186,7 +186,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<PhoneNumberShape> $phoneNumbers
+     * @param list<PhoneNumber|PhoneNumberShape> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
@@ -213,7 +213,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<RegulatoryRequirementShape> $regulatoryRequirements
+     * @param list<RegulatoryRequirement|RegulatoryRequirementShape> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements

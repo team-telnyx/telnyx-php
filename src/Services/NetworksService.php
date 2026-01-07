@@ -8,10 +8,11 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
-use Telnyx\Networks\InterfaceStatus;
 use Telnyx\Networks\NetworkDeleteResponse;
 use Telnyx\Networks\NetworkGetResponse;
 use Telnyx\Networks\NetworkListInterfacesResponse;
+use Telnyx\Networks\NetworkListParams\Filter;
+use Telnyx\Networks\NetworkListParams\Page;
 use Telnyx\Networks\NetworkListResponse;
 use Telnyx\Networks\NetworkNewResponse;
 use Telnyx\Networks\NetworkUpdateResponse;
@@ -19,6 +20,13 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NetworksContract;
 use Telnyx\Services\Networks\DefaultGatewayService;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Networks\NetworkListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Networks\NetworkListParams\Page
+ * @phpstan-import-type FilterShape from \Telnyx\Networks\NetworkListInterfacesParams\Filter as FilterShape1
+ * @phpstan-import-type PageShape from \Telnyx\Networks\NetworkListInterfacesParams\Page as PageShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class NetworksService implements NetworksContract
 {
     /**
@@ -46,12 +54,13 @@ final class NetworksService implements NetworksContract
      * Create a new Network.
      *
      * @param string $name a user specified name for the network
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $name,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): NetworkNewResponse {
         $params = Util::removeNulls(['name' => $name]);
 
@@ -67,12 +76,13 @@ final class NetworksService implements NetworksContract
      * Retrieve a Network.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): NetworkGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -87,13 +97,14 @@ final class NetworksService implements NetworksContract
      *
      * @param string $networkID identifies the resource
      * @param string $name a user specified name for the network
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $networkID,
         string $name,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): NetworkUpdateResponse {
         $params = Util::removeNulls(['name' => $name]);
 
@@ -108,21 +119,18 @@ final class NetworksService implements NetworksContract
      *
      * List all Networks.
      *
-     * @param array{
-     *   name?: string
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<NetworkListResponse>
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null,
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
@@ -138,12 +146,13 @@ final class NetworksService implements NetworksContract
      * Delete a Network.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): NetworkDeleteResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, requestOptions: $requestOptions);
@@ -157,14 +166,9 @@ final class NetworksService implements NetworksContract
      * List all Interfaces for a Network.
      *
      * @param string $id identifies the resource
-     * @param array{
-     *   name?: string,
-     *   status?: 'created'|'provisioning'|'provisioned'|'deleting'|InterfaceStatus,
-     *   type?: string,
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[name], filter[type], filter[status]
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param \Telnyx\Networks\NetworkListInterfacesParams\Filter|FilterShape1 $filter Consolidated filter parameter (deepObject style). Originally: filter[name], filter[type], filter[status]
+     * @param \Telnyx\Networks\NetworkListInterfacesParams\Page|PageShape1 $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<NetworkListInterfacesResponse>
      *
@@ -172,9 +176,9 @@ final class NetworksService implements NetworksContract
      */
     public function listInterfaces(
         string $id,
-        ?array $filter = null,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null,
+        \Telnyx\Networks\NetworkListInterfacesParams\Filter|array|null $filter = null,
+        \Telnyx\Networks\NetworkListInterfacesParams\Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 

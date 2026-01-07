@@ -8,9 +8,6 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\CldFilter;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\CliFilter;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\FilterType;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceCreateParams;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceDeleteResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceGetFieldsResponse;
@@ -20,6 +17,10 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\BatchDetailRecords\VoiceRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Legacy\Reporting\BatchDetailRecords\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class VoiceRawService implements VoiceRawContract
 {
     // @phpstan-ignore-next-line
@@ -34,20 +35,12 @@ final class VoiceRawService implements VoiceRawContract
      * Creates a new CDR report request with the specified filters
      *
      * @param array{
-     *   endTime: string|\DateTimeInterface,
-     *   startTime: string|\DateTimeInterface,
+     *   endTime: \DateTimeInterface,
+     *   startTime: \DateTimeInterface,
      *   callTypes?: list<int>,
      *   connections?: list<int>,
      *   fields?: list<string>,
-     *   filters?: list<array{
-     *     billingGroup?: string,
-     *     cld?: string,
-     *     cldFilter?: 'contains'|'starts_with'|'ends_with'|CldFilter,
-     *     cli?: string,
-     *     cliFilter?: 'contains'|'starts_with'|'ends_with'|CliFilter,
-     *     filterType?: 'and'|'or'|FilterType,
-     *     tagsList?: string,
-     *   }|Filter>,
+     *   filters?: list<Filter|FilterShape>,
      *   includeAllMetadata?: bool,
      *   managedAccounts?: list<string>,
      *   recordTypes?: list<int>,
@@ -56,6 +49,7 @@ final class VoiceRawService implements VoiceRawContract
      *   source?: string,
      *   timezone?: string,
      * }|VoiceCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VoiceNewResponse>
      *
@@ -63,7 +57,7 @@ final class VoiceRawService implements VoiceRawContract
      */
     public function create(
         array|VoiceCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = VoiceCreateParams::parseRequest(
             $params,
@@ -85,13 +79,15 @@ final class VoiceRawService implements VoiceRawContract
      *
      * Retrieves a specific CDR report request by ID
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<VoiceGetResponse>
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -107,12 +103,15 @@ final class VoiceRawService implements VoiceRawContract
      *
      * Retrieves all CDR report requests for the authenticated user
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<VoiceListResponse>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse
-    {
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
@@ -127,13 +126,15 @@ final class VoiceRawService implements VoiceRawContract
      *
      * Deletes a specific CDR report request by ID
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<VoiceDeleteResponse>
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -149,12 +150,14 @@ final class VoiceRawService implements VoiceRawContract
      *
      * Retrieves all available fields that can be used in CDR reports
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<VoiceGetFieldsResponse>
      *
      * @throws APIException
      */
     public function retrieveFields(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

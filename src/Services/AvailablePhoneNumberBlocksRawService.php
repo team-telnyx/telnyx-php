@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListParams;
-use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListParams\Filter\PhoneNumberType;
+use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListParams\Filter;
 use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
@@ -13,6 +13,10 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AvailablePhoneNumberBlocksRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AvailablePhoneNumberBlocksRawService implements AvailablePhoneNumberBlocksRawContract
 {
     // @phpstan-ignore-next-line
@@ -27,13 +31,9 @@ final class AvailablePhoneNumberBlocksRawService implements AvailablePhoneNumber
      * List available phone number blocks
      *
      * @param array{
-     *   filter?: array{
-     *     countryCode?: string,
-     *     locality?: string,
-     *     nationalDestinationCode?: string,
-     *     phoneNumberType?: 'local'|'toll_free'|'mobile'|'national'|'shared_cost'|PhoneNumberType,
-     *   },
+     *   filter?: Filter|FilterShape
      * }|AvailablePhoneNumberBlockListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AvailablePhoneNumberBlockListResponse>
      *
@@ -41,7 +41,7 @@ final class AvailablePhoneNumberBlocksRawService implements AvailablePhoneNumber
      */
     public function list(
         array|AvailablePhoneNumberBlockListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AvailablePhoneNumberBlockListParams::parseRequest(
             $params,

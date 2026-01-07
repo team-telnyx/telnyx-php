@@ -15,6 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\Conversations\InsightsService::update()
  *
+ * @phpstan-import-type JsonSchemaVariants from \Telnyx\AI\Conversations\Insights\InsightUpdateParams\JsonSchema
  * @phpstan-import-type JsonSchemaShape from \Telnyx\AI\Conversations\Insights\InsightUpdateParams\JsonSchema
  *
  * @phpstan-type InsightUpdateParamsShape = array{
@@ -33,7 +34,7 @@ final class InsightUpdateParams implements BaseModel
     #[Optional]
     public ?string $instructions;
 
-    /** @var string|array<string,mixed>|null $jsonSchema */
+    /** @var JsonSchemaVariants|null $jsonSchema */
     #[Optional('json_schema', union: JsonSchema::class)]
     public string|array|null $jsonSchema;
 

@@ -15,6 +15,9 @@ use Telnyx\DefaultFlatPaginationTopLevelArray;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\McpServersContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class McpServersService implements McpServersContract
 {
     /**
@@ -36,6 +39,7 @@ final class McpServersService implements McpServersContract
      * Create a new MCP server.
      *
      * @param list<string>|null $allowedTools
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -45,7 +49,7 @@ final class McpServersService implements McpServersContract
         string $url,
         ?array $allowedTools = null,
         ?string $apiKeyRef = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): McpServerNewResponse {
         $params = Util::removeNulls(
             [
@@ -68,11 +72,13 @@ final class McpServersService implements McpServersContract
      *
      * Retrieve details for a specific MCP server.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $mcpServerID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): McpServerGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($mcpServerID, requestOptions: $requestOptions);
@@ -86,6 +92,7 @@ final class McpServersService implements McpServersContract
      * Update an existing MCP server.
      *
      * @param list<string>|null $allowedTools
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -94,11 +101,11 @@ final class McpServersService implements McpServersContract
         ?string $id = null,
         ?array $allowedTools = null,
         ?string $apiKeyRef = null,
-        string|\DateTimeInterface|null $createdAt = null,
+        ?\DateTimeInterface $createdAt = null,
         ?string $name = null,
         ?string $type = null,
         ?string $url = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): McpServerUpdateResponse {
         $params = Util::removeNulls(
             [
@@ -123,6 +130,8 @@ final class McpServersService implements McpServersContract
      *
      * Retrieve a list of MCP servers.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return DefaultFlatPaginationTopLevelArray<McpServerListResponse>
      *
      * @throws APIException
@@ -132,7 +141,7 @@ final class McpServersService implements McpServersContract
         int $pageSize = 20,
         ?string $type = null,
         ?string $url = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPaginationTopLevelArray {
         $params = Util::removeNulls(
             [
@@ -154,11 +163,13 @@ final class McpServersService implements McpServersContract
      *
      * Delete a specific MCP server.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $mcpServerID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($mcpServerID, requestOptions: $requestOptions);

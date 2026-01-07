@@ -14,6 +14,9 @@ use Telnyx\Networks\DefaultGateway\DefaultGatewayNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Networks\DefaultGatewayRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class DefaultGatewayRawService implements DefaultGatewayRawContract
 {
     // @phpstan-ignore-next-line
@@ -29,6 +32,7 @@ final class DefaultGatewayRawService implements DefaultGatewayRawContract
      *
      * @param string $networkIdentifier identifies the resource
      * @param array{wireguardPeerID?: string}|DefaultGatewayCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultGatewayNewResponse>
      *
@@ -37,7 +41,7 @@ final class DefaultGatewayRawService implements DefaultGatewayRawContract
     public function create(
         string $networkIdentifier,
         array|DefaultGatewayCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = DefaultGatewayCreateParams::parseRequest(
             $params,
@@ -60,6 +64,7 @@ final class DefaultGatewayRawService implements DefaultGatewayRawContract
      * Get Default Gateway status.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultGatewayGetResponse>
      *
@@ -67,7 +72,7 @@ final class DefaultGatewayRawService implements DefaultGatewayRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -84,6 +89,7 @@ final class DefaultGatewayRawService implements DefaultGatewayRawContract
      * Delete Default Gateway.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultGatewayDeleteResponse>
      *
@@ -91,7 +97,7 @@ final class DefaultGatewayRawService implements DefaultGatewayRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

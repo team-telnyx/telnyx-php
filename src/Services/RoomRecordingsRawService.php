@@ -13,9 +13,18 @@ use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams;
 use Telnyx\RoomRecordings\RoomRecordingDeleteBulkResponse;
 use Telnyx\RoomRecordings\RoomRecordingGetResponse;
 use Telnyx\RoomRecordings\RoomRecordingListParams;
+use Telnyx\RoomRecordings\RoomRecordingListParams\Filter;
+use Telnyx\RoomRecordings\RoomRecordingListParams\Page;
 use Telnyx\RoomRecordings\RoomRecordingListResponse;
 use Telnyx\ServiceContracts\RoomRecordingsRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\RoomRecordings\RoomRecordingListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\RoomRecordings\RoomRecordingListParams\Page
+ * @phpstan-import-type FilterShape from \Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Filter as FilterShape1
+ * @phpstan-import-type PageShape from \Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Page as PageShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class RoomRecordingsRawService implements RoomRecordingsRawContract
 {
     // @phpstan-ignore-next-line
@@ -30,6 +39,7 @@ final class RoomRecordingsRawService implements RoomRecordingsRawContract
      * View a room recording.
      *
      * @param string $roomRecordingID the unique identifier of a room recording
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RoomRecordingGetResponse>
      *
@@ -37,7 +47,7 @@ final class RoomRecordingsRawService implements RoomRecordingsRawContract
      */
     public function retrieve(
         string $roomRecordingID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -54,18 +64,9 @@ final class RoomRecordingsRawService implements RoomRecordingsRawContract
      * View a list of room recordings.
      *
      * @param array{
-     *   filter?: array{
-     *     dateEndedAt?: array{eq?: string, gte?: string, lte?: string},
-     *     dateStartedAt?: array{eq?: string, gte?: string, lte?: string},
-     *     durationSecs?: int,
-     *     participantID?: string,
-     *     roomID?: string,
-     *     sessionID?: string,
-     *     status?: string,
-     *     type?: string,
-     *   },
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|RoomRecordingListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<RoomRecordingListResponse>>
      *
@@ -73,7 +74,7 @@ final class RoomRecordingsRawService implements RoomRecordingsRawContract
      */
     public function list(
         array|RoomRecordingListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RoomRecordingListParams::parseRequest(
             $params,
@@ -97,6 +98,7 @@ final class RoomRecordingsRawService implements RoomRecordingsRawContract
      * Synchronously delete a Room Recording.
      *
      * @param string $roomRecordingID the unique identifier of a room recording
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -104,7 +106,7 @@ final class RoomRecordingsRawService implements RoomRecordingsRawContract
      */
     public function delete(
         string $roomRecordingID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -121,18 +123,10 @@ final class RoomRecordingsRawService implements RoomRecordingsRawContract
      * Delete several room recordings in a bulk.
      *
      * @param array{
-     *   filter?: array{
-     *     dateEndedAt?: array{eq?: string, gte?: string, lte?: string},
-     *     dateStartedAt?: array{eq?: string, gte?: string, lte?: string},
-     *     durationSecs?: int,
-     *     participantID?: string,
-     *     roomID?: string,
-     *     sessionID?: string,
-     *     status?: string,
-     *     type?: string,
-     *   },
-     *   page?: array{number?: int, size?: int},
+     *   filter?: RoomRecordingDeleteBulkParams\Filter|FilterShape1,
+     *   page?: RoomRecordingDeleteBulkParams\Page|PageShape1,
      * }|RoomRecordingDeleteBulkParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RoomRecordingDeleteBulkResponse>
      *
@@ -140,7 +134,7 @@ final class RoomRecordingsRawService implements RoomRecordingsRawContract
      */
     public function deleteBulk(
         array|RoomRecordingDeleteBulkParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RoomRecordingDeleteBulkParams::parseRequest(
             $params,

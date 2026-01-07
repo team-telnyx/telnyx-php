@@ -14,7 +14,8 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  *
  * @phpstan-import-type CidrBlockPatternFilterShape from \Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter\CidrBlock\CidrBlockPatternFilter
  *
- * @phpstan-type CidrBlockShape = string|CidrBlockPatternFilterShape
+ * @phpstan-type CidrBlockVariants = string|CidrBlockPatternFilter
+ * @phpstan-type CidrBlockShape = CidrBlockVariants|CidrBlockPatternFilterShape
  */
 final class CidrBlock implements ConverterSource
 {

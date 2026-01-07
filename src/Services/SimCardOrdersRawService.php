@@ -14,8 +14,15 @@ use Telnyx\SimCardOrders\SimCardOrder;
 use Telnyx\SimCardOrders\SimCardOrderCreateParams;
 use Telnyx\SimCardOrders\SimCardOrderGetResponse;
 use Telnyx\SimCardOrders\SimCardOrderListParams;
+use Telnyx\SimCardOrders\SimCardOrderListParams\Filter;
+use Telnyx\SimCardOrders\SimCardOrderListParams\Page;
 use Telnyx\SimCardOrders\SimCardOrderNewResponse;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\SimCardOrders\SimCardOrderListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\SimCardOrders\SimCardOrderListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class SimCardOrdersRawService implements SimCardOrdersRawContract
 {
     // @phpstan-ignore-next-line
@@ -30,6 +37,7 @@ final class SimCardOrdersRawService implements SimCardOrdersRawContract
      * Creates a new order for SIM cards.
      *
      * @param array{addressID: string, quantity: int}|SimCardOrderCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardOrderNewResponse>
      *
@@ -37,7 +45,7 @@ final class SimCardOrdersRawService implements SimCardOrdersRawContract
      */
     public function create(
         array|SimCardOrderCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SimCardOrderCreateParams::parseRequest(
             $params,
@@ -60,6 +68,7 @@ final class SimCardOrdersRawService implements SimCardOrdersRawContract
      * Get a single SIM card order by its ID.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardOrderGetResponse>
      *
@@ -67,7 +76,7 @@ final class SimCardOrdersRawService implements SimCardOrdersRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -84,22 +93,9 @@ final class SimCardOrdersRawService implements SimCardOrdersRawContract
      * Get all SIM card orders according to filters.
      *
      * @param array{
-     *   filter?: array{
-     *     addressAdministrativeArea?: string,
-     *     addressCountryCode?: string,
-     *     addressExtendedAddress?: string,
-     *     addressID?: string,
-     *     addressLocality?: string,
-     *     addressPostalCode?: string,
-     *     addressStreetAddress?: string,
-     *     costAmount?: string,
-     *     costCurrency?: string,
-     *     createdAt?: string|\DateTimeInterface,
-     *     quantity?: int,
-     *     updatedAt?: string|\DateTimeInterface,
-     *   },
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|SimCardOrderListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<SimCardOrder>>
      *
@@ -107,7 +103,7 @@ final class SimCardOrdersRawService implements SimCardOrdersRawContract
      */
     public function list(
         array|SimCardOrderListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SimCardOrderListParams::parseRequest(
             $params,

@@ -9,6 +9,8 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnection;
+use Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams\Inbound;
+use Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams\Outbound;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams\WebhookAPIVersion;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionDeleteResponse;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionGetResponse;
@@ -17,6 +19,13 @@ use Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MobileVoiceConnectionsContract;
 
+/**
+ * @phpstan-import-type InboundShape from \Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams\Inbound
+ * @phpstan-import-type OutboundShape from \Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams\Outbound
+ * @phpstan-import-type InboundShape from \Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams\Inbound as InboundShape1
+ * @phpstan-import-type OutboundShape from \Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams\Outbound as OutboundShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContract
 {
     /**
@@ -37,24 +46,25 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
      *
      * Create a Mobile Voice Connection
      *
-     * @param array{channelLimit?: int} $inbound
-     * @param array{channelLimit?: int, outboundVoiceProfileID?: string} $outbound
+     * @param Inbound|InboundShape $inbound
+     * @param Outbound|OutboundShape $outbound
      * @param list<string> $tags
-     * @param '1'|'2'|WebhookAPIVersion $webhookAPIVersion
+     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         bool $active = true,
         string $connectionName = 'Telnyx Mobile Voice IMS',
-        ?array $inbound = null,
-        ?array $outbound = null,
+        Inbound|array|null $inbound = null,
+        Outbound|array|null $outbound = null,
         ?array $tags = null,
-        string|WebhookAPIVersion $webhookAPIVersion = '2',
+        WebhookAPIVersion|string $webhookAPIVersion = '2',
         ?string $webhookEventFailoverURL = null,
         ?string $webhookEventURL = null,
         ?int $webhookTimeoutSecs = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MobileVoiceConnectionNewResponse {
         $params = Util::removeNulls(
             [
@@ -82,12 +92,13 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
      * Retrieve a Mobile Voice Connection
      *
      * @param string $id The ID of the mobile voice connection
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MobileVoiceConnectionGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -101,10 +112,11 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
      * Update a Mobile Voice Connection
      *
      * @param string $id The ID of the mobile voice connection
-     * @param array{channelLimit?: int} $inbound
-     * @param array{channelLimit?: int, outboundVoiceProfileID?: string} $outbound
+     * @param \Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams\Inbound|InboundShape1 $inbound
+     * @param \Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams\Outbound|OutboundShape1 $outbound
      * @param list<string> $tags
-     * @param '1'|'2'|\Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams\WebhookAPIVersion $webhookAPIVersion
+     * @param \Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams\WebhookAPIVersion|value-of<\Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams\WebhookAPIVersion> $webhookAPIVersion
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -112,14 +124,14 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
         string $id,
         ?bool $active = null,
         ?string $connectionName = null,
-        ?array $inbound = null,
-        ?array $outbound = null,
+        \Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams\Inbound|array|null $inbound = null,
+        \Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams\Outbound|array|null $outbound = null,
         ?array $tags = null,
-        string|\Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams\WebhookAPIVersion|null $webhookAPIVersion = null,
+        \Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams\WebhookAPIVersion|string|null $webhookAPIVersion = null,
         ?string $webhookEventFailoverURL = null,
         ?string $webhookEventURL = null,
         ?int $webhookTimeoutSecs = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MobileVoiceConnectionUpdateResponse {
         $params = Util::removeNulls(
             [
@@ -150,6 +162,7 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
      * @param int $pageNumber The page number to load
      * @param int $pageSize The size of the page
      * @param string $sort Sort by field (e.g., created_at, connection_name, active). Prefix with - for descending order.
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<MobileVoiceConnection>
      *
@@ -160,7 +173,7 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
         ?int $pageNumber = null,
         ?int $pageSize = null,
         ?string $sort = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
         $params = Util::removeNulls(
             [
@@ -183,12 +196,13 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
      * Delete a Mobile Voice Connection
      *
      * @param string $id The ID of the mobile voice connection
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MobileVoiceConnectionDeleteResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, requestOptions: $requestOptions);

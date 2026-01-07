@@ -33,8 +33,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *   isvReseller: string,
  *   messageVolume: Volume|value-of<Volume>,
  *   optInWorkflow: string,
- *   optInWorkflowImageURLs: list<URLShape>,
- *   phoneNumbers: list<TfPhoneNumberShape>,
+ *   optInWorkflowImageURLs: list<URL|URLShape>,
+ *   phoneNumbers: list<TfPhoneNumber|TfPhoneNumberShape>,
  *   productionMessageContent: string,
  *   useCase: UseCaseCategories|value-of<UseCaseCategories>,
  *   useCaseSummary: string,
@@ -325,8 +325,8 @@ final class RequestCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Volume|value-of<Volume> $messageVolume
-     * @param list<URLShape> $optInWorkflowImageURLs
-     * @param list<TfPhoneNumberShape> $phoneNumbers
+     * @param list<URL|URLShape> $optInWorkflowImageURLs
+     * @param list<TfPhoneNumber|TfPhoneNumberShape> $phoneNumbers
      * @param UseCaseCategories|value-of<UseCaseCategories> $useCase
      * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null $entityType
      */
@@ -565,7 +565,7 @@ final class RequestCreateParams implements BaseModel
     /**
      * Images showing the opt-in workflow.
      *
-     * @param list<URLShape> $optInWorkflowImageURLs
+     * @param list<URL|URLShape> $optInWorkflowImageURLs
      */
     public function withOptInWorkflowImageURLs(
         array $optInWorkflowImageURLs
@@ -579,7 +579,7 @@ final class RequestCreateParams implements BaseModel
     /**
      * The phone numbers to request the verification of.
      *
-     * @param list<TfPhoneNumberShape> $phoneNumbers
+     * @param list<TfPhoneNumber|TfPhoneNumberShape> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {

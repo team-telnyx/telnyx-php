@@ -13,6 +13,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type TranscriptionEngineConfigVariants from \Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig
  * @phpstan-import-type TranscriptionEngineConfigShape from \Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig
  *
  * @phpstan-type TranscriptionStartRequestShape = array{
@@ -48,6 +49,7 @@ final class TranscriptionStartRequest implements BaseModel
     #[Optional('transcription_engine', enum: TranscriptionEngine::class)]
     public ?string $transcriptionEngine;
 
+    /** @var TranscriptionEngineConfigVariants|null $transcriptionEngineConfig */
     #[Optional(
         'transcription_engine_config',
         union: TranscriptionEngineConfig::class

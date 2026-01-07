@@ -14,7 +14,7 @@ use Telnyx\List_\ListGetAllResponse\Data\Number;
  *
  * @phpstan-type DataShape = array{
  *   numberOfChannels?: int|null,
- *   numbers?: list<NumberShape>|null,
+ *   numbers?: list<Number|NumberShape>|null,
  *   zoneID?: string|null,
  *   zoneName?: string|null,
  * }
@@ -47,7 +47,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<NumberShape>|null $numbers
+     * @param list<Number|NumberShape>|null $numbers
      */
     public static function with(
         ?int $numberOfChannels = null,
@@ -74,7 +74,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<NumberShape> $numbers
+     * @param list<Number|NumberShape> $numbers
      */
     public function withNumbers(array $numbers): self
     {

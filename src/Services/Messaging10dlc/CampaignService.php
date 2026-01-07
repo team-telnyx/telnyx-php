@@ -20,6 +20,9 @@ use Telnyx\ServiceContracts\Messaging10dlc\CampaignContract;
 use Telnyx\Services\Messaging10dlc\Campaign\OsrService;
 use Telnyx\Services\Messaging10dlc\Campaign\UsecaseService;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class CampaignService implements CampaignContract
 {
     /**
@@ -52,11 +55,13 @@ final class CampaignService implements CampaignContract
      *
      * Retrieve campaign details by `campaignId`.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): TelnyxCampaignCsp {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($campaignID, requestOptions: $requestOptions);
@@ -80,6 +85,7 @@ final class CampaignService implements CampaignContract
      * @param string $sample5 Message sample. Some campaign tiers require 5 or more message samples.
      * @param string $webhookFailoverURL webhook failover to which campaign status updates are sent
      * @param string $webhookURL webhook to which campaign status updates are sent
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -96,7 +102,7 @@ final class CampaignService implements CampaignContract
         ?string $sample5 = null,
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): TelnyxCampaignCsp {
         $params = Util::removeNulls(
             [
@@ -127,7 +133,8 @@ final class CampaignService implements CampaignContract
      *
      * @param int $page The 1-indexed page number to get. The default value is `1`.
      * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
-     * @param 'assignedPhoneNumbersCount'|'-assignedPhoneNumbersCount'|'campaignId'|'-campaignId'|'createdAt'|'-createdAt'|'status'|'-status'|'tcrCampaignId'|'-tcrCampaignId'|Sort $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
+     * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
+     * @param RequestOpts|null $requestOptions
      *
      * @return PerPagePaginationV2<CampaignListResponse>
      *
@@ -137,8 +144,8 @@ final class CampaignService implements CampaignContract
         string $brandID,
         int $page = 1,
         int $recordsPerPage = 10,
-        string|Sort $sort = '-createdAt',
-        ?RequestOptions $requestOptions = null,
+        Sort|string $sort = '-createdAt',
+        RequestOptions|array|null $requestOptions = null,
     ): PerPagePaginationV2 {
         $params = Util::removeNulls(
             [
@@ -161,6 +168,7 @@ final class CampaignService implements CampaignContract
      * Manually accept a campaign shared with Telnyx
      *
      * @param string $campaignID TCR's ID for the campaign to import
+     * @param RequestOpts|null $requestOptions
      *
      * @return array<string,mixed>
      *
@@ -168,7 +176,7 @@ final class CampaignService implements CampaignContract
      */
     public function acceptSharing(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): array {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->acceptSharing($campaignID, requestOptions: $requestOptions);
@@ -181,11 +189,13 @@ final class CampaignService implements CampaignContract
      *
      * Terminate a campaign. Note that once deactivated, a campaign cannot be restored.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function deactivate(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): CampaignDeactivateResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->deactivate($campaignID, requestOptions: $requestOptions);
@@ -199,12 +209,13 @@ final class CampaignService implements CampaignContract
      * Get the campaign metadata for each MNO it was submitted to.
      *
      * @param string $campaignID ID of the campaign in question
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function getMnoMetadata(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): CampaignGetMnoMetadataResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getMnoMetadata($campaignID, requestOptions: $requestOptions);
@@ -217,13 +228,15 @@ final class CampaignService implements CampaignContract
      *
      * Retrieve campaign's operation status at MNO level.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return array<string,mixed>
      *
      * @throws APIException
      */
     public function getOperationStatus(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): array {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getOperationStatus($campaignID, requestOptions: $requestOptions);
@@ -237,12 +250,13 @@ final class CampaignService implements CampaignContract
      * Get Sharing Status
      *
      * @param string $campaignID ID of the campaign in question
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function getSharingStatus(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): CampaignGetSharingStatusResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getSharingStatus($campaignID, requestOptions: $requestOptions);
@@ -257,13 +271,14 @@ final class CampaignService implements CampaignContract
      *
      * @param string $campaignID The Telnyx campaign identifier
      * @param string $appealReason detailed explanation of why the campaign should be reconsidered and what changes have been made to address the rejection reason
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function submitAppeal(
         string $campaignID,
         string $appealReason,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): CampaignSubmitAppealResponse {
         $params = Util::removeNulls(['appealReason' => $appealReason]);
 

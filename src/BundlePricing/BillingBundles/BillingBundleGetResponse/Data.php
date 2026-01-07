@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type DataShape = array{
  *   id: string,
  *   active: bool,
- *   bundleLimits: list<BundleLimitShape>,
+ *   bundleLimits: list<BundleLimit|BundleLimitShape>,
  *   costCode: string,
  *   createdAt: string,
  *   isPublic: bool,
@@ -114,7 +114,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<BundleLimitShape> $bundleLimits
+     * @param list<BundleLimit|BundleLimitShape> $bundleLimits
      */
     public static function with(
         string $id,
@@ -164,7 +164,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<BundleLimitShape> $bundleLimits
+     * @param list<BundleLimit|BundleLimitShape> $bundleLimits
      */
     public function withBundleLimits(array $bundleLimits): self
     {

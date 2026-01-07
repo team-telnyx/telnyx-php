@@ -11,6 +11,9 @@ use Telnyx\CredentialConnections\Actions\ActionCheckRegistrationStatusResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CredentialConnections\ActionsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsRawService implements ActionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -25,6 +28,7 @@ final class ActionsRawService implements ActionsRawContract
      * Checks the registration_status for a credential connection, (`registration_status`) as well as the timestamp for the last SIP registration event (`registration_status_updated_at`)
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionCheckRegistrationStatusResponse>
      *
@@ -32,7 +36,7 @@ final class ActionsRawService implements ActionsRawContract
      */
     public function checkRegistrationStatus(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

@@ -11,14 +11,20 @@ use Telnyx\Core\Util;
 use Telnyx\Messages\Rcs\RcGenerateDeeplinkParams;
 use Telnyx\Messages\Rcs\RcGenerateDeeplinkResponse;
 use Telnyx\Messages\Rcs\RcSendParams;
+use Telnyx\Messages\Rcs\RcSendParams\MmsFallback;
+use Telnyx\Messages\Rcs\RcSendParams\SMSFallback;
 use Telnyx\Messages\Rcs\RcSendParams\Type;
 use Telnyx\Messages\Rcs\RcSendResponse;
 use Telnyx\Messages\RcsAgentMessage;
-use Telnyx\Messages\RcsAgentMessage\Event\EventType;
-use Telnyx\Messages\RcsContentInfo;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messages\RcsRawContract;
 
+/**
+ * @phpstan-import-type RcsAgentMessageShape from \Telnyx\Messages\RcsAgentMessage
+ * @phpstan-import-type MmsFallbackShape from \Telnyx\Messages\Rcs\RcSendParams\MmsFallback
+ * @phpstan-import-type SMSFallbackShape from \Telnyx\Messages\Rcs\RcSendParams\SMSFallback
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class RcsRawService implements RcsRawContract
 {
     // @phpstan-ignore-next-line
@@ -36,6 +42,7 @@ final class RcsRawService implements RcsRawContract
      * @param array{
      *   body?: string, phoneNumber?: string
      * }|RcGenerateDeeplinkParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RcGenerateDeeplinkResponse>
      *
@@ -44,7 +51,7 @@ final class RcsRawService implements RcsRawContract
     public function generateDeeplink(
         string $agentID,
         array|RcGenerateDeeplinkParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RcGenerateDeeplinkParams::parseRequest(
             $params,
@@ -71,26 +78,15 @@ final class RcsRawService implements RcsRawContract
      *
      * @param array{
      *   agentID: string,
-     *   agentMessage: array{
-     *     contentMessage?: array{
-     *       contentInfo?: array<string,mixed>|RcsContentInfo,
-     *       richCard?: array<string,mixed>,
-     *       suggestions?: list<mixed>,
-     *       text?: string,
-     *     },
-     *     event?: array{eventType?: 'TYPE_UNSPECIFIED'|'IS_TYPING'|'READ'|EventType},
-     *     expireTime?: string|\DateTimeInterface,
-     *     ttl?: string,
-     *   }|RcsAgentMessage,
+     *   agentMessage: RcsAgentMessage|RcsAgentMessageShape,
      *   messagingProfileID: string,
      *   to: string,
-     *   mmsFallback?: array{
-     *     from?: string, mediaURLs?: list<string>, subject?: string, text?: string
-     *   },
-     *   smsFallback?: array{from?: string, text?: string},
-     *   type?: 'RCS'|Type,
+     *   mmsFallback?: MmsFallback|MmsFallbackShape,
+     *   smsFallback?: SMSFallback|SMSFallbackShape,
+     *   type?: Type|value-of<Type>,
      *   webhookURL?: string,
      * }|RcSendParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RcSendResponse>
      *
@@ -98,7 +94,7 @@ final class RcsRawService implements RcsRawContract
      */
     public function send(
         array|RcSendParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         [$parsed, $options] = RcSendParams::parseRequest(
             $params,

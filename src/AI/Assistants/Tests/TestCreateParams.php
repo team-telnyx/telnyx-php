@@ -22,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   destination: string,
  *   instructions: string,
  *   name: string,
- *   rubric: list<RubricShape>,
+ *   rubric: list<Rubric|RubricShape>,
  *   description?: string|null,
  *   maxDurationSeconds?: int|null,
  *   telnyxConversationChannel?: null|TelnyxConversationChannel|value-of<TelnyxConversationChannel>,
@@ -120,7 +120,7 @@ final class TestCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RubricShape> $rubric
+     * @param list<Rubric|RubricShape> $rubric
      * @param TelnyxConversationChannel|value-of<TelnyxConversationChannel>|null $telnyxConversationChannel
      */
     public static function with(
@@ -184,7 +184,7 @@ final class TestCreateParams implements BaseModel
     /**
      * Evaluation criteria used to assess the assistant's performance. Each rubric item contains a name and specific criteria for evaluation.
      *
-     * @param list<RubricShape> $rubric
+     * @param list<Rubric|RubricShape> $rubric
      */
     public function withRubric(array $rubric): self
     {

@@ -17,12 +17,16 @@ use Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface MobileVoiceConnectionsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|MobileVoiceConnectionCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MobileVoiceConnectionNewResponse>
      *
@@ -30,13 +34,14 @@ interface MobileVoiceConnectionsRawContract
      */
     public function create(
         array|MobileVoiceConnectionCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id The ID of the mobile voice connection
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MobileVoiceConnectionGetResponse>
      *
@@ -44,7 +49,7 @@ interface MobileVoiceConnectionsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -52,6 +57,7 @@ interface MobileVoiceConnectionsRawContract
      *
      * @param string $id The ID of the mobile voice connection
      * @param array<string,mixed>|MobileVoiceConnectionUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MobileVoiceConnectionUpdateResponse>
      *
@@ -60,13 +66,14 @@ interface MobileVoiceConnectionsRawContract
     public function update(
         string $id,
         array|MobileVoiceConnectionUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|MobileVoiceConnectionListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<MobileVoiceConnection>>
      *
@@ -74,13 +81,14 @@ interface MobileVoiceConnectionsRawContract
      */
     public function list(
         array|MobileVoiceConnectionListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id The ID of the mobile voice connection
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MobileVoiceConnectionDeleteResponse>
      *
@@ -88,6 +96,6 @@ interface MobileVoiceConnectionsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

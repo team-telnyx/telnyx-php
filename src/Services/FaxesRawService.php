@@ -15,10 +15,15 @@ use Telnyx\Faxes\FaxCreateParams\PreviewFormat;
 use Telnyx\Faxes\FaxCreateParams\Quality;
 use Telnyx\Faxes\FaxGetResponse;
 use Telnyx\Faxes\FaxListParams;
+use Telnyx\Faxes\FaxListParams\Filter;
 use Telnyx\Faxes\FaxNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\FaxesRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Faxes\FaxListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class FaxesRawService implements FaxesRawContract
 {
     // @phpstan-ignore-next-line
@@ -49,13 +54,14 @@ final class FaxesRawService implements FaxesRawContract
      *   mediaName?: string,
      *   mediaURL?: string,
      *   monochrome?: bool,
-     *   previewFormat?: 'pdf'|'tiff'|PreviewFormat,
-     *   quality?: 'normal'|'high'|'very_high'|'ultra_light'|'ultra_dark'|Quality,
+     *   previewFormat?: PreviewFormat|value-of<PreviewFormat>,
+     *   quality?: Quality|value-of<Quality>,
      *   storeMedia?: bool,
      *   storePreview?: bool,
      *   t38Enabled?: bool,
      *   webhookURL?: string,
      * }|FaxCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FaxNewResponse>
      *
@@ -63,7 +69,7 @@ final class FaxesRawService implements FaxesRawContract
      */
     public function create(
         array|FaxCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = FaxCreateParams::parseRequest(
             $params,
@@ -86,6 +92,7 @@ final class FaxesRawService implements FaxesRawContract
      * View a fax
      *
      * @param string $id the unique identifier of a fax
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FaxGetResponse>
      *
@@ -93,7 +100,7 @@ final class FaxesRawService implements FaxesRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -110,20 +117,9 @@ final class FaxesRawService implements FaxesRawContract
      * View a list of faxes
      *
      * @param array{
-     *   filter?: array{
-     *     createdAt?: array{
-     *       gt?: string|\DateTimeInterface,
-     *       gte?: string|\DateTimeInterface,
-     *       lt?: string|\DateTimeInterface,
-     *       lte?: string|\DateTimeInterface,
-     *     },
-     *     direction?: array{eq?: string},
-     *     from?: array{eq?: string},
-     *     to?: array{eq?: string},
-     *   },
-     *   pageNumber?: int,
-     *   pageSize?: int,
+     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
      * }|FaxListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<Fax>>
      *
@@ -131,7 +127,7 @@ final class FaxesRawService implements FaxesRawContract
      */
     public function list(
         array|FaxListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = FaxListParams::parseRequest(
             $params,
@@ -158,6 +154,7 @@ final class FaxesRawService implements FaxesRawContract
      * Delete a fax
      *
      * @param string $id the unique identifier of a fax
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -165,7 +162,7 @@ final class FaxesRawService implements FaxesRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

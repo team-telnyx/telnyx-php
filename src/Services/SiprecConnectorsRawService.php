@@ -15,6 +15,9 @@ use Telnyx\SiprecConnectors\SiprecConnectorNewResponse;
 use Telnyx\SiprecConnectors\SiprecConnectorUpdateParams;
 use Telnyx\SiprecConnectors\SiprecConnectorUpdateResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class SiprecConnectorsRawService implements SiprecConnectorsRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,6 +34,7 @@ final class SiprecConnectorsRawService implements SiprecConnectorsRawContract
      * @param array{
      *   host: string, name: string, port: int, appSubdomain?: string
      * }|SiprecConnectorCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SiprecConnectorNewResponse>
      *
@@ -38,7 +42,7 @@ final class SiprecConnectorsRawService implements SiprecConnectorsRawContract
      */
     public function create(
         array|SiprecConnectorCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SiprecConnectorCreateParams::parseRequest(
             $params,
@@ -61,6 +65,7 @@ final class SiprecConnectorsRawService implements SiprecConnectorsRawContract
      * Returns details of a stored SIPREC connector.
      *
      * @param string $connectorName uniquely identifies a SIPREC connector
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SiprecConnectorGetResponse>
      *
@@ -68,7 +73,7 @@ final class SiprecConnectorsRawService implements SiprecConnectorsRawContract
      */
     public function retrieve(
         string $connectorName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -88,6 +93,7 @@ final class SiprecConnectorsRawService implements SiprecConnectorsRawContract
      * @param array{
      *   host: string, name: string, port: int, appSubdomain?: string
      * }|SiprecConnectorUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SiprecConnectorUpdateResponse>
      *
@@ -96,7 +102,7 @@ final class SiprecConnectorsRawService implements SiprecConnectorsRawContract
     public function update(
         string $connectorName,
         array|SiprecConnectorUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SiprecConnectorUpdateParams::parseRequest(
             $params,
@@ -119,6 +125,7 @@ final class SiprecConnectorsRawService implements SiprecConnectorsRawContract
      * Deletes a stored SIPREC connector.
      *
      * @param string $connectorName uniquely identifies a SIPREC connector
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -126,7 +133,7 @@ final class SiprecConnectorsRawService implements SiprecConnectorsRawContract
      */
     public function delete(
         string $connectorName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

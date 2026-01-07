@@ -15,6 +15,9 @@ use Telnyx\SpeechToText\SpeechToTextTranscribeParams\InputFormat;
 use Telnyx\SpeechToText\SpeechToTextTranscribeParams\Model;
 use Telnyx\SpeechToText\SpeechToTextTranscribeParams\TranscriptionEngine;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class SpeechToTextRawService implements SpeechToTextRawContract
 {
     // @phpstan-ignore-next-line
@@ -29,12 +32,13 @@ final class SpeechToTextRawService implements SpeechToTextRawContract
      * Transcribe audio streams to text over WebSocket.
      *
      * @param array{
-     *   inputFormat: 'mp3'|'wav'|InputFormat,
-     *   transcriptionEngine: 'Azure'|'Deepgram'|'Google'|'Telnyx'|TranscriptionEngine,
+     *   inputFormat: InputFormat|value-of<InputFormat>,
+     *   transcriptionEngine: TranscriptionEngine|value-of<TranscriptionEngine>,
      *   interimResults?: bool,
      *   language?: string,
      *   model?: value-of<Model>,
      * }|SpeechToTextTranscribeParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -42,7 +46,7 @@ final class SpeechToTextRawService implements SpeechToTextRawContract
      */
     public function transcribe(
         array|SpeechToTextTranscribeParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SpeechToTextTranscribeParams::parseRequest(
             $params,

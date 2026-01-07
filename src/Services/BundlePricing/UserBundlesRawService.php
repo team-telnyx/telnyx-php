@@ -6,10 +6,13 @@ namespace Telnyx\Services\BundlePricing;
 
 use Telnyx\BundlePricing\UserBundles\UserBundle;
 use Telnyx\BundlePricing\UserBundles\UserBundleCreateParams;
+use Telnyx\BundlePricing\UserBundles\UserBundleCreateParams\Item;
 use Telnyx\BundlePricing\UserBundles\UserBundleDeactivateParams;
 use Telnyx\BundlePricing\UserBundles\UserBundleDeactivateResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleGetResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleListParams;
+use Telnyx\BundlePricing\UserBundles\UserBundleListParams\Filter;
+use Telnyx\BundlePricing\UserBundles\UserBundleListParams\Page;
 use Telnyx\BundlePricing\UserBundles\UserBundleListResourcesParams;
 use Telnyx\BundlePricing\UserBundles\UserBundleListResourcesResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedParams;
@@ -24,6 +27,13 @@ use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BundlePricing\UserBundlesRawContract;
 
+/**
+ * @phpstan-import-type ItemShape from \Telnyx\BundlePricing\UserBundles\UserBundleCreateParams\Item
+ * @phpstan-import-type FilterShape from \Telnyx\BundlePricing\UserBundles\UserBundleListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\BundlePricing\UserBundles\UserBundleListParams\Page
+ * @phpstan-import-type FilterShape from \Telnyx\BundlePricing\UserBundles\UserBundleListUnusedParams\Filter as FilterShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class UserBundlesRawService implements UserBundlesRawContract
 {
     // @phpstan-ignore-next-line
@@ -39,9 +49,10 @@ final class UserBundlesRawService implements UserBundlesRawContract
      *
      * @param array{
      *   idempotencyKey?: string,
-     *   items?: list<array{billingBundleID: string, quantity: int}>,
+     *   items?: list<Item|ItemShape>,
      *   authorizationBearer?: string,
      * }|UserBundleCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UserBundleNewResponse>
      *
@@ -49,7 +60,7 @@ final class UserBundlesRawService implements UserBundlesRawContract
      */
     public function create(
         array|UserBundleCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = UserBundleCreateParams::parseRequest(
             $params,
@@ -81,6 +92,7 @@ final class UserBundlesRawService implements UserBundlesRawContract
      *
      * @param string $userBundleID user bundle's ID, this is used to identify the user bundle in the API
      * @param array{authorizationBearer?: string}|UserBundleRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UserBundleGetResponse>
      *
@@ -89,7 +101,7 @@ final class UserBundlesRawService implements UserBundlesRawContract
     public function retrieve(
         string $userBundleID,
         array|UserBundleRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = UserBundleRetrieveParams::parseRequest(
             $params,
@@ -115,10 +127,11 @@ final class UserBundlesRawService implements UserBundlesRawContract
      * Get a paginated list of user bundles.
      *
      * @param array{
-     *   filter?: array{countryISO?: list<string>, resource?: list<string>},
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape,
+     *   page?: Page|PageShape,
      *   authorizationBearer?: string,
      * }|UserBundleListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<UserBundle>>
      *
@@ -126,7 +139,7 @@ final class UserBundlesRawService implements UserBundlesRawContract
      */
     public function list(
         array|UserBundleListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = UserBundleListParams::parseRequest(
             $params,
@@ -159,6 +172,7 @@ final class UserBundlesRawService implements UserBundlesRawContract
      *
      * @param string $userBundleID user bundle's ID, this is used to identify the user bundle in the API
      * @param array{authorizationBearer?: string}|UserBundleDeactivateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UserBundleDeactivateResponse>
      *
@@ -167,7 +181,7 @@ final class UserBundlesRawService implements UserBundlesRawContract
     public function deactivate(
         string $userBundleID,
         array|UserBundleDeactivateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = UserBundleDeactivateParams::parseRequest(
             $params,
@@ -194,6 +208,7 @@ final class UserBundlesRawService implements UserBundlesRawContract
      *
      * @param string $userBundleID user bundle's ID, this is used to identify the user bundle in the API
      * @param array{authorizationBearer?: string}|UserBundleListResourcesParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UserBundleListResourcesResponse>
      *
@@ -202,7 +217,7 @@ final class UserBundlesRawService implements UserBundlesRawContract
     public function listResources(
         string $userBundleID,
         array|UserBundleListResourcesParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = UserBundleListResourcesParams::parseRequest(
             $params,
@@ -228,9 +243,10 @@ final class UserBundlesRawService implements UserBundlesRawContract
      * Returns all user bundles that aren't in use.
      *
      * @param array{
-     *   filter?: array{countryISO?: list<string>, resource?: list<string>},
+     *   filter?: UserBundleListUnusedParams\Filter|FilterShape1,
      *   authorizationBearer?: string,
      * }|UserBundleListUnusedParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UserBundleListUnusedResponse>
      *
@@ -238,7 +254,7 @@ final class UserBundlesRawService implements UserBundlesRawContract
      */
     public function listUnused(
         array|UserBundleListUnusedParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = UserBundleListUnusedParams::parseRequest(
             $params,

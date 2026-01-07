@@ -13,7 +13,8 @@ use Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants\AllParticipant
 /**
  * Either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant.
  *
- * @phpstan-type ParticipantsShape = AllParticipants|list<string>|value-of<AllParticipants>
+ * @phpstan-type ParticipantsVariants = list<string>|value-of<AllParticipants>
+ * @phpstan-type ParticipantsShape = ParticipantsVariants
  */
 final class Participants implements ConverterSource
 {

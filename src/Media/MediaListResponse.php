@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type PaginationMetaShape from \Telnyx\AuthenticationProviders\PaginationMeta
  *
  * @phpstan-type MediaListResponseShape = array{
- *   data?: list<MediaResourceShape>|null,
+ *   data?: list<MediaResource|MediaResourceShape>|null,
  *   meta?: null|PaginationMeta|PaginationMetaShape,
  * }
  */
@@ -40,7 +40,7 @@ final class MediaListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<MediaResourceShape>|null $data
+     * @param list<MediaResource|MediaResourceShape>|null $data
      * @param PaginationMeta|PaginationMetaShape|null $meta
      */
     public static function with(
@@ -56,7 +56,7 @@ final class MediaListResponse implements BaseModel
     }
 
     /**
-     * @param list<MediaResourceShape> $data
+     * @param list<MediaResource|MediaResourceShape> $data
      */
     public function withData(array $data): self
     {

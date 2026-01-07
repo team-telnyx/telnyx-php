@@ -18,6 +18,9 @@ use Telnyx\PerPagePagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\UsageReports\VoiceRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class VoiceRawService implements VoiceRawContract
 {
     // @phpstan-ignore-next-line
@@ -32,14 +35,15 @@ final class VoiceRawService implements VoiceRawContract
      * Creates a new legacy usage V2 CDR report request with the specified filters
      *
      * @param array{
-     *   endTime: string|\DateTimeInterface,
-     *   startTime: string|\DateTimeInterface,
+     *   endTime: \DateTimeInterface,
+     *   startTime: \DateTimeInterface,
      *   aggregationType?: int,
      *   connections?: list<int>,
      *   managedAccounts?: list<string>,
      *   productBreakdown?: int,
      *   selectAllManagedAccounts?: bool,
      * }|VoiceCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VoiceNewResponse>
      *
@@ -47,7 +51,7 @@ final class VoiceRawService implements VoiceRawContract
      */
     public function create(
         array|VoiceCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = VoiceCreateParams::parseRequest(
             $params,
@@ -70,13 +74,15 @@ final class VoiceRawService implements VoiceRawContract
      *
      * Fetch single cdr usage report by id.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<VoiceGetResponse>
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -93,6 +99,7 @@ final class VoiceRawService implements VoiceRawContract
      * Fetch all previous requests for cdr usage reports.
      *
      * @param array{page?: int, perPage?: int}|VoiceListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PerPagePagination<CdrUsageReportResponseLegacy>>
      *
@@ -100,7 +107,7 @@ final class VoiceRawService implements VoiceRawContract
      */
     public function list(
         array|VoiceListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = VoiceListParams::parseRequest(
             $params,
@@ -123,13 +130,15 @@ final class VoiceRawService implements VoiceRawContract
      *
      * Deletes a specific V2 legacy usage CDR report request by ID
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<VoiceDeleteResponse>
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

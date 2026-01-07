@@ -13,12 +13,16 @@ use Telnyx\PortingOrders\Actions\ActionShareParams;
 use Telnyx\PortingOrders\Actions\ActionShareResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ActionsRawContract
 {
     /**
      * @api
      *
      * @param string $id Porting Order id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionActivateResponse>
      *
@@ -26,13 +30,14 @@ interface ActionsRawContract
      */
     public function activate(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id Porting Order id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionCancelResponse>
      *
@@ -40,13 +45,14 @@ interface ActionsRawContract
      */
     public function cancel(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id Porting Order id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionConfirmResponse>
      *
@@ -54,7 +60,7 @@ interface ActionsRawContract
      */
     public function confirm(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -62,6 +68,7 @@ interface ActionsRawContract
      *
      * @param string $id Porting Order id
      * @param array<string,mixed>|ActionShareParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionShareResponse>
      *
@@ -70,6 +77,6 @@ interface ActionsRawContract
     public function share(
         string $id,
         array|ActionShareParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

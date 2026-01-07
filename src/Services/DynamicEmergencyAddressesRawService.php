@@ -14,11 +14,17 @@ use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressCreateParams\Country
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressDeleteResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressGetResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams;
-use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Filter\Status;
+use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Filter;
+use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Page;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DynamicEmergencyAddressesRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class DynamicEmergencyAddressesRawService implements DynamicEmergencyAddressesRawContract
 {
     // @phpstan-ignore-next-line
@@ -34,7 +40,7 @@ final class DynamicEmergencyAddressesRawService implements DynamicEmergencyAddre
      *
      * @param array{
      *   administrativeArea: string,
-     *   countryCode: 'US'|'CA'|'PR'|CountryCode,
+     *   countryCode: CountryCode|value-of<CountryCode>,
      *   houseNumber: string,
      *   locality: string,
      *   postalCode: string,
@@ -45,6 +51,7 @@ final class DynamicEmergencyAddressesRawService implements DynamicEmergencyAddre
      *   streetPreDirectional?: string,
      *   streetSuffix?: string,
      * }|DynamicEmergencyAddressCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DynamicEmergencyAddressNewResponse>
      *
@@ -52,7 +59,7 @@ final class DynamicEmergencyAddressesRawService implements DynamicEmergencyAddre
      */
     public function create(
         array|DynamicEmergencyAddressCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = DynamicEmergencyAddressCreateParams::parseRequest(
             $params,
@@ -75,6 +82,7 @@ final class DynamicEmergencyAddressesRawService implements DynamicEmergencyAddre
      * Returns the dynamic emergency address based on the ID provided
      *
      * @param string $id Dynamic Emergency Address id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DynamicEmergencyAddressGetResponse>
      *
@@ -82,7 +90,7 @@ final class DynamicEmergencyAddressesRawService implements DynamicEmergencyAddre
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -99,11 +107,9 @@ final class DynamicEmergencyAddressesRawService implements DynamicEmergencyAddre
      * Returns the dynamic emergency addresses according to filters
      *
      * @param array{
-     *   filter?: array{
-     *     countryCode?: string, status?: 'pending'|'activated'|'rejected'|Status
-     *   },
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|DynamicEmergencyAddressListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<DynamicEmergencyAddress>>
      *
@@ -111,7 +117,7 @@ final class DynamicEmergencyAddressesRawService implements DynamicEmergencyAddre
      */
     public function list(
         array|DynamicEmergencyAddressListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = DynamicEmergencyAddressListParams::parseRequest(
             $params,
@@ -135,6 +141,7 @@ final class DynamicEmergencyAddressesRawService implements DynamicEmergencyAddre
      * Deletes the dynamic emergency address based on the ID provided
      *
      * @param string $id Dynamic Emergency Address id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DynamicEmergencyAddressDeleteResponse>
      *
@@ -142,7 +149,7 @@ final class DynamicEmergencyAddressesRawService implements DynamicEmergencyAddre
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

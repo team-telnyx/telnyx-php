@@ -13,12 +13,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface TestsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|TestCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AssistantTest>
      *
@@ -26,11 +30,13 @@ interface TestsRawContract
      */
     public function create(
         array|TestCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AssistantTest>
      *
@@ -38,13 +44,14 @@ interface TestsRawContract
      */
     public function retrieve(
         string $testID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|TestUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AssistantTest>
      *
@@ -53,13 +60,14 @@ interface TestsRawContract
     public function update(
         string $testID,
         array|TestUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|TestListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<AssistantTest>>
      *
@@ -67,11 +75,13 @@ interface TestsRawContract
      */
     public function list(
         array|TestListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -79,6 +89,6 @@ interface TestsRawContract
      */
     public function delete(
         string $testID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

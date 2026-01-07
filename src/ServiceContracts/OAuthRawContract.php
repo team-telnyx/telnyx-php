@@ -19,12 +19,16 @@ use Telnyx\OAuth\OAuthTokenParams;
 use Telnyx\OAuth\OAuthTokenResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface OAuthRawContract
 {
     /**
      * @api
      *
      * @param string $consentToken OAuth consent token
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OAuthGetResponse>
      *
@@ -32,13 +36,14 @@ interface OAuthRawContract
      */
     public function retrieve(
         string $consentToken,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|OAuthGrantsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OAuthGrantsResponse>
      *
@@ -46,13 +51,14 @@ interface OAuthRawContract
      */
     public function grants(
         array|OAuthGrantsParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|OAuthIntrospectParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OAuthIntrospectResponse>
      *
@@ -60,13 +66,14 @@ interface OAuthRawContract
      */
     public function introspect(
         array|OAuthIntrospectParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|OAuthRegisterParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OAuthRegisterResponse>
      *
@@ -74,13 +81,14 @@ interface OAuthRawContract
      */
     public function register(
         array|OAuthRegisterParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|OAuthRetrieveAuthorizeParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -88,24 +96,27 @@ interface OAuthRawContract
      */
     public function retrieveAuthorize(
         array|OAuthRetrieveAuthorizeParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OAuthGetJwksResponse>
      *
      * @throws APIException
      */
     public function retrieveJwks(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|OAuthTokenParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OAuthTokenResponse>
      *
@@ -113,6 +124,6 @@ interface OAuthRawContract
      */
     public function token(
         array|OAuthTokenParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

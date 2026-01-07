@@ -17,12 +17,16 @@ use Telnyx\NotificationProfiles\NotificationProfileUpdateParams;
 use Telnyx\NotificationProfiles\NotificationProfileUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface NotificationProfilesRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|NotificationProfileCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NotificationProfileNewResponse>
      *
@@ -30,13 +34,14 @@ interface NotificationProfilesRawContract
      */
     public function create(
         array|NotificationProfileCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id the id of the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NotificationProfileGetResponse>
      *
@@ -44,7 +49,7 @@ interface NotificationProfilesRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -52,6 +57,7 @@ interface NotificationProfilesRawContract
      *
      * @param string $notificationProfileID the id of the resource
      * @param array<string,mixed>|NotificationProfileUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NotificationProfileUpdateResponse>
      *
@@ -60,13 +66,14 @@ interface NotificationProfilesRawContract
     public function update(
         string $notificationProfileID,
         array|NotificationProfileUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|NotificationProfileListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<NotificationProfile>>
      *
@@ -74,13 +81,14 @@ interface NotificationProfilesRawContract
      */
     public function list(
         array|NotificationProfileListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id the id of the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NotificationProfileDeleteResponse>
      *
@@ -88,6 +96,6 @@ interface NotificationProfilesRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

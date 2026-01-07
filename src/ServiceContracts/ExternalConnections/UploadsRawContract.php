@@ -19,6 +19,9 @@ use Telnyx\ExternalConnections\Uploads\UploadRetryParams;
 use Telnyx\ExternalConnections\Uploads\UploadRetryResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface UploadsRawContract
 {
     /**
@@ -26,6 +29,7 @@ interface UploadsRawContract
      *
      * @param string $id identifies the resource
      * @param array<string,mixed>|UploadCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UploadNewResponse>
      *
@@ -34,7 +38,7 @@ interface UploadsRawContract
     public function create(
         string $id,
         array|UploadCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -42,6 +46,7 @@ interface UploadsRawContract
      *
      * @param string $ticketID Identifies an Upload request
      * @param array<string,mixed>|UploadRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UploadGetResponse>
      *
@@ -50,7 +55,7 @@ interface UploadsRawContract
     public function retrieve(
         string $ticketID,
         array|UploadRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -58,6 +63,7 @@ interface UploadsRawContract
      *
      * @param string $id identifies the resource
      * @param array<string,mixed>|UploadListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<Upload>>
      *
@@ -66,13 +72,14 @@ interface UploadsRawContract
     public function list(
         string $id,
         array|UploadListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UploadPendingCountResponse>
      *
@@ -80,13 +87,14 @@ interface UploadsRawContract
      */
     public function pendingCount(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UploadRefreshStatusResponse>
      *
@@ -94,7 +102,7 @@ interface UploadsRawContract
      */
     public function refreshStatus(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -102,6 +110,7 @@ interface UploadsRawContract
      *
      * @param string $ticketID Identifies an Upload request
      * @param array<string,mixed>|UploadRetryParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UploadRetryResponse>
      *
@@ -110,6 +119,6 @@ interface UploadsRawContract
     public function retry(
         string $ticketID,
         array|UploadRetryParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

@@ -17,12 +17,16 @@ use Telnyx\IPs\IPUpdateParams;
 use Telnyx\IPs\IPUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface IPsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|IPCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<IPNewResponse>
      *
@@ -30,13 +34,14 @@ interface IPsRawContract
      */
     public function create(
         array|IPCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the type of resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<IPGetResponse>
      *
@@ -44,7 +49,7 @@ interface IPsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -52,6 +57,7 @@ interface IPsRawContract
      *
      * @param string $id identifies the type of resource
      * @param array<string,mixed>|IPUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<IPUpdateResponse>
      *
@@ -60,13 +66,14 @@ interface IPsRawContract
     public function update(
         string $id,
         array|IPUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|IPListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<IP>>
      *
@@ -74,13 +81,14 @@ interface IPsRawContract
      */
     public function list(
         array|IPListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the type of resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<IPDeleteResponse>
      *
@@ -88,6 +96,6 @@ interface IPsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

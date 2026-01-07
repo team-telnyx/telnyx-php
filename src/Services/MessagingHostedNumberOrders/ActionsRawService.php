@@ -12,6 +12,9 @@ use Telnyx\MessagingHostedNumberOrders\Actions\ActionUploadFileResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingHostedNumberOrders\ActionsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsRawService implements ActionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -27,6 +30,7 @@ final class ActionsRawService implements ActionsRawContract
      *
      * @param string $id identifies the type of resource
      * @param array{bill?: string, loa?: string}|ActionUploadFileParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionUploadFileResponse>
      *
@@ -35,7 +39,7 @@ final class ActionsRawService implements ActionsRawContract
     public function uploadFile(
         string $id,
         array|ActionUploadFileParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionUploadFileParams::parseRequest(
             $params,

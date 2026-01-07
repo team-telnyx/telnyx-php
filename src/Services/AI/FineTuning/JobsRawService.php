@@ -6,6 +6,7 @@ namespace Telnyx\Services\AI\FineTuning;
 
 use Telnyx\AI\FineTuning\Jobs\FineTuningJob;
 use Telnyx\AI\FineTuning\Jobs\JobCreateParams;
+use Telnyx\AI\FineTuning\Jobs\JobCreateParams\Hyperparameters;
 use Telnyx\AI\FineTuning\Jobs\JobListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
@@ -13,6 +14,10 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\FineTuning\JobsRawContract;
 
+/**
+ * @phpstan-import-type HyperparametersShape from \Telnyx\AI\FineTuning\Jobs\JobCreateParams\Hyperparameters
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class JobsRawService implements JobsRawContract
 {
     // @phpstan-ignore-next-line
@@ -29,9 +34,10 @@ final class JobsRawService implements JobsRawContract
      * @param array{
      *   model: string,
      *   trainingFile: string,
-     *   hyperparameters?: array{nEpochs?: int},
+     *   hyperparameters?: Hyperparameters|HyperparametersShape,
      *   suffix?: string,
      * }|JobCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FineTuningJob>
      *
@@ -39,7 +45,7 @@ final class JobsRawService implements JobsRawContract
      */
     public function create(
         array|JobCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = JobCreateParams::parseRequest(
             $params,
@@ -61,13 +67,15 @@ final class JobsRawService implements JobsRawContract
      *
      * Retrieve a fine tuning job by `job_id`.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<FineTuningJob>
      *
      * @throws APIException
      */
     public function retrieve(
         string $jobID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -83,12 +91,15 @@ final class JobsRawService implements JobsRawContract
      *
      * Retrieve a list of all fine tuning jobs created by the user.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<JobListResponse>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse
-    {
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
@@ -103,13 +114,15 @@ final class JobsRawService implements JobsRawContract
      *
      * Cancel a fine tuning job.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<FineTuningJob>
      *
      * @throws APIException
      */
     public function cancel(
         string $jobID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

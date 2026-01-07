@@ -13,6 +13,9 @@ use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ChargesSummaryRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ChargesSummaryRawService implements ChargesSummaryRawContract
 {
     // @phpstan-ignore-next-line
@@ -29,6 +32,7 @@ final class ChargesSummaryRawService implements ChargesSummaryRawContract
      * @param array{
      *   endDate: string, startDate: string
      * }|ChargesSummaryRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ChargesSummaryGetResponse>
      *
@@ -36,7 +40,7 @@ final class ChargesSummaryRawService implements ChargesSummaryRawContract
      */
     public function retrieve(
         array|ChargesSummaryRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ChargesSummaryRetrieveParams::parseRequest(
             $params,

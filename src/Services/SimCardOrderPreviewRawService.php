@@ -12,6 +12,9 @@ use Telnyx\ServiceContracts\SimCardOrderPreviewRawContract;
 use Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewParams;
 use Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class SimCardOrderPreviewRawService implements SimCardOrderPreviewRawContract
 {
     // @phpstan-ignore-next-line
@@ -28,6 +31,7 @@ final class SimCardOrderPreviewRawService implements SimCardOrderPreviewRawContr
      * @param array{
      *   addressID: string, quantity: int
      * }|SimCardOrderPreviewPreviewParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardOrderPreviewPreviewResponse>
      *
@@ -35,7 +39,7 @@ final class SimCardOrderPreviewRawService implements SimCardOrderPreviewRawContr
      */
     public function preview(
         array|SimCardOrderPreviewPreviewParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SimCardOrderPreviewPreviewParams::parseRequest(
             $params,

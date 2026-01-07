@@ -15,12 +15,16 @@ use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface DynamicEmergencyEndpointsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|DynamicEmergencyEndpointCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DynamicEmergencyEndpointNewResponse>
      *
@@ -28,13 +32,14 @@ interface DynamicEmergencyEndpointsRawContract
      */
     public function create(
         array|DynamicEmergencyEndpointCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id Dynamic Emergency Endpoint id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DynamicEmergencyEndpointGetResponse>
      *
@@ -42,13 +47,14 @@ interface DynamicEmergencyEndpointsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|DynamicEmergencyEndpointListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<DynamicEmergencyEndpoint>>
      *
@@ -56,13 +62,14 @@ interface DynamicEmergencyEndpointsRawContract
      */
     public function list(
         array|DynamicEmergencyEndpointListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id Dynamic Emergency Endpoint id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DynamicEmergencyEndpointDeleteResponse>
      *
@@ -70,6 +77,6 @@ interface DynamicEmergencyEndpointsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

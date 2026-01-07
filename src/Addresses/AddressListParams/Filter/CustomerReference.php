@@ -14,7 +14,8 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  *
  * @phpstan-import-type CustomerReferenceMatcherShape from \Telnyx\Addresses\AddressListParams\Filter\CustomerReference\CustomerReferenceMatcher
  *
- * @phpstan-type CustomerReferenceShape = string|CustomerReferenceMatcherShape
+ * @phpstan-type CustomerReferenceVariants = string|CustomerReferenceMatcher
+ * @phpstan-type CustomerReferenceShape = CustomerReferenceVariants|CustomerReferenceMatcherShape
  */
 final class CustomerReference implements ConverterSource
 {

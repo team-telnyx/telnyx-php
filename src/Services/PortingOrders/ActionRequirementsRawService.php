@@ -9,15 +9,23 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams;
+use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams\Params;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams;
-use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter\ActionType;
-use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter\Status;
-use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Sort\Value;
+use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter;
+use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Page;
+use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Sort;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\ActionRequirementsRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Page
+ * @phpstan-import-type SortShape from \Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Sort
+ * @phpstan-import-type ParamsShape from \Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams\Params
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionRequirementsRawService implements ActionRequirementsRawContract
 {
     // @phpstan-ignore-next-line
@@ -33,17 +41,9 @@ final class ActionRequirementsRawService implements ActionRequirementsRawContrac
      *
      * @param string $portingOrderID The ID of the porting order
      * @param array{
-     *   filter?: array{
-     *     id?: list<string>,
-     *     actionType?: 'au_id_verification'|ActionType,
-     *     requirementTypeID?: string,
-     *     status?: 'created'|'pending'|'completed'|'cancelled'|'failed'|Status,
-     *   },
-     *   page?: array{number?: int, size?: int},
-     *   sort?: array{
-     *     value?: 'created_at'|'-created_at'|'updated_at'|'-updated_at'|Value
-     *   },
+     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|SortShape
      * }|ActionRequirementListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<ActionRequirementListResponse>>
      *
@@ -52,7 +52,7 @@ final class ActionRequirementsRawService implements ActionRequirementsRawContrac
     public function list(
         string $portingOrderID,
         array|ActionRequirementListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionRequirementListParams::parseRequest(
             $params,
@@ -77,8 +77,9 @@ final class ActionRequirementsRawService implements ActionRequirementsRawContrac
      *
      * @param string $id Path param: The ID of the action requirement
      * @param array{
-     *   portingOrderID: string, params: array{firstName: string, lastName: string}
+     *   portingOrderID: string, params: Params|ParamsShape
      * }|ActionRequirementInitiateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionRequirementInitiateResponse>
      *
@@ -87,7 +88,7 @@ final class ActionRequirementsRawService implements ActionRequirementsRawContrac
     public function initiate(
         string $id,
         array|ActionRequirementInitiateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionRequirementInitiateParams::parseRequest(
             $params,

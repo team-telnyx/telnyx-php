@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type DataShape from \Telnyx\AI\AIGetModelsResponse\Data
  *
  * @phpstan-type AIGetModelsResponseShape = array{
- *   data: list<DataShape>, object?: string|null
+ *   data: list<Data|DataShape>, object?: string|null
  * }
  */
 final class AIGetModelsResponse implements BaseModel
@@ -53,7 +53,7 @@ final class AIGetModelsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DataShape> $data
+     * @param list<Data|DataShape> $data
      */
     public static function with(array $data, ?string $object = null): self
     {
@@ -67,7 +67,7 @@ final class AIGetModelsResponse implements BaseModel
     }
 
     /**
-     * @param list<DataShape> $data
+     * @param list<Data|DataShape> $data
      */
     public function withData(array $data): self
     {

@@ -13,12 +13,16 @@ use Telnyx\Storage\MigrationSources\MigrationSourceGetResponse;
 use Telnyx\Storage\MigrationSources\MigrationSourceListResponse;
 use Telnyx\Storage\MigrationSources\MigrationSourceNewResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface MigrationSourcesRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|MigrationSourceCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MigrationSourceNewResponse>
      *
@@ -26,13 +30,14 @@ interface MigrationSourcesRawContract
      */
     public function create(
         array|MigrationSourceCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id unique identifier for the data migration source
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MigrationSourceGetResponse>
      *
@@ -40,22 +45,27 @@ interface MigrationSourcesRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<MigrationSourceListResponse>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse;
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id unique identifier for the data migration source
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MigrationSourceDeleteResponse>
      *
@@ -63,6 +73,6 @@ interface MigrationSourcesRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

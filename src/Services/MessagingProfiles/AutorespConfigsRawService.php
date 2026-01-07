@@ -12,6 +12,8 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigCreateParams;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigCreateParams\Op;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigDeleteParams;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams;
+use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\CreatedAt;
+use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\UpdatedAt;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListResponse;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfigResponse;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigRetrieveParams;
@@ -19,6 +21,11 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingProfiles\AutorespConfigsRawContract;
 
+/**
+ * @phpstan-import-type CreatedAtShape from \Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\CreatedAt
+ * @phpstan-import-type UpdatedAtShape from \Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\UpdatedAt
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AutorespConfigsRawService implements AutorespConfigsRawContract
 {
     // @phpstan-ignore-next-line
@@ -35,9 +42,10 @@ final class AutorespConfigsRawService implements AutorespConfigsRawContract
      * @param array{
      *   countryCode: string,
      *   keywords: list<string>,
-     *   op: 'start'|'stop'|'info'|Op,
+     *   op: Op|value-of<Op>,
      *   respText?: string,
      * }|AutorespConfigCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AutoRespConfigResponse>
      *
@@ -46,7 +54,7 @@ final class AutorespConfigsRawService implements AutorespConfigsRawContract
     public function create(
         string $profileID,
         array|AutorespConfigCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AutorespConfigCreateParams::parseRequest(
             $params,
@@ -69,6 +77,7 @@ final class AutorespConfigsRawService implements AutorespConfigsRawContract
      * Get Auto-Response Setting
      *
      * @param array{profileID: string}|AutorespConfigRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AutoRespConfigResponse>
      *
@@ -77,7 +86,7 @@ final class AutorespConfigsRawService implements AutorespConfigsRawContract
     public function retrieve(
         string $autorespCfgID,
         array|AutorespConfigRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AutorespConfigRetrieveParams::parseRequest(
             $params,
@@ -109,9 +118,10 @@ final class AutorespConfigsRawService implements AutorespConfigsRawContract
      *   profileID: string,
      *   countryCode: string,
      *   keywords: list<string>,
-     *   op: 'start'|'stop'|'info'|AutorespConfigUpdateParams\Op,
+     *   op: AutorespConfigUpdateParams\Op|value-of<AutorespConfigUpdateParams\Op>,
      *   respText?: string,
      * }|AutorespConfigUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AutoRespConfigResponse>
      *
@@ -120,7 +130,7 @@ final class AutorespConfigsRawService implements AutorespConfigsRawContract
     public function update(
         string $autorespCfgID,
         array|AutorespConfigUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AutorespConfigUpdateParams::parseRequest(
             $params,
@@ -150,9 +160,10 @@ final class AutorespConfigsRawService implements AutorespConfigsRawContract
      *
      * @param array{
      *   countryCode?: string,
-     *   createdAt?: array{gte?: string, lte?: string},
-     *   updatedAt?: array{gte?: string, lte?: string},
+     *   createdAt?: CreatedAt|CreatedAtShape,
+     *   updatedAt?: UpdatedAt|UpdatedAtShape,
      * }|AutorespConfigListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AutorespConfigListResponse>
      *
@@ -161,7 +172,7 @@ final class AutorespConfigsRawService implements AutorespConfigsRawContract
     public function list(
         string $profileID,
         array|AutorespConfigListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AutorespConfigListParams::parseRequest(
             $params,
@@ -191,6 +202,7 @@ final class AutorespConfigsRawService implements AutorespConfigsRawContract
      * Delete Auto-Response Setting
      *
      * @param array{profileID: string}|AutorespConfigDeleteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
      *
@@ -199,7 +211,7 @@ final class AutorespConfigsRawService implements AutorespConfigsRawContract
     public function delete(
         string $autorespCfgID,
         array|AutorespConfigDeleteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AutorespConfigDeleteParams::parseRequest(
             $params,

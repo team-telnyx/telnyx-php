@@ -10,7 +10,8 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
 use Telnyx\Core\Conversion\MapOf;
 
 /**
- * @phpstan-type ToolChoiceShape = string|array<string,mixed>
+ * @phpstan-type ToolChoiceVariants = string|array<string,mixed>
+ * @phpstan-type ToolChoiceShape = ToolChoiceVariants
  */
 final class ToolChoice implements ConverterSource
 {

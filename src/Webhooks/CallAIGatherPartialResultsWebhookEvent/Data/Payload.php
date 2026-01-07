@@ -19,7 +19,7 @@ use Telnyx\Webhooks\CallAIGatherPartialResultsWebhookEvent\Data\Payload\MessageH
  *   clientState?: string|null,
  *   connectionID?: string|null,
  *   from?: string|null,
- *   messageHistory?: list<MessageHistoryShape>|null,
+ *   messageHistory?: list<MessageHistory|MessageHistoryShape>|null,
  *   partialResults?: array<string,mixed>|null,
  *   to?: string|null,
  * }
@@ -97,7 +97,7 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<MessageHistoryShape>|null $messageHistory
+     * @param list<MessageHistory|MessageHistoryShape>|null $messageHistory
      * @param array<string,mixed>|null $partialResults
      */
     public static function with(
@@ -195,7 +195,7 @@ final class Payload implements BaseModel
     /**
      * The history of the messages exchanged during the AI gather.
      *
-     * @param list<MessageHistoryShape> $messageHistory
+     * @param list<MessageHistory|MessageHistoryShape> $messageHistory
      */
     public function withMessageHistory(array $messageHistory): self
     {

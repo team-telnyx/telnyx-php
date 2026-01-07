@@ -20,7 +20,7 @@ use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventSplitEvent\Payload\T
  *
  * @phpstan-type PayloadShape = array{
  *   from?: null|From|FromShape,
- *   portingPhoneNumbers?: list<PortingPhoneNumberShape>|null,
+ *   portingPhoneNumbers?: list<PortingPhoneNumber|PortingPhoneNumberShape>|null,
  *   to?: null|To|ToShape,
  * }
  */
@@ -60,7 +60,7 @@ final class Payload implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param From|FromShape|null $from
-     * @param list<PortingPhoneNumberShape>|null $portingPhoneNumbers
+     * @param list<PortingPhoneNumber|PortingPhoneNumberShape>|null $portingPhoneNumbers
      * @param To|ToShape|null $to
      */
     public static function with(
@@ -93,7 +93,7 @@ final class Payload implements BaseModel
     /**
      * The list of porting phone numbers that were moved to the new porting order.
      *
-     * @param list<PortingPhoneNumberShape> $portingPhoneNumbers
+     * @param list<PortingPhoneNumber|PortingPhoneNumberShape> $portingPhoneNumbers
      */
     public function withPortingPhoneNumbers(array $portingPhoneNumbers): self
     {

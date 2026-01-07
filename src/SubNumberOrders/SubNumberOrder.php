@@ -23,7 +23,7 @@ use Telnyx\SubNumberOrders\SubNumberOrder\Status;
  *   phoneNumberType?: null|PhoneNumberType|value-of<PhoneNumberType>,
  *   phoneNumbersCount?: int|null,
  *   recordType?: string|null,
- *   regulatoryRequirements?: list<SubNumberOrderRegulatoryRequirementShape>|null,
+ *   regulatoryRequirements?: list<SubNumberOrderRegulatoryRequirement|SubNumberOrderRegulatoryRequirementShape>|null,
  *   requirementsMet?: bool|null,
  *   status?: null|Status|value-of<Status>,
  *   updatedAt?: \DateTimeInterface|null,
@@ -116,7 +116,7 @@ final class SubNumberOrder implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param PhoneNumberType|value-of<PhoneNumberType>|null $phoneNumberType
-     * @param list<SubNumberOrderRegulatoryRequirementShape>|null $regulatoryRequirements
+     * @param list<SubNumberOrderRegulatoryRequirement|SubNumberOrderRegulatoryRequirementShape>|null $regulatoryRequirements
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
@@ -244,7 +244,7 @@ final class SubNumberOrder implements BaseModel
     }
 
     /**
-     * @param list<SubNumberOrderRegulatoryRequirementShape> $regulatoryRequirements
+     * @param list<SubNumberOrderRegulatoryRequirement|SubNumberOrderRegulatoryRequirementShape> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements

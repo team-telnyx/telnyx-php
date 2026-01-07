@@ -14,12 +14,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ConnectionsRawContract
 {
     /**
      * @api
      *
      * @param string $id IP Connection ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ConnectionGetResponse>
      *
@@ -27,13 +31,14 @@ interface ConnectionsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ConnectionListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<ConnectionListResponse>>
      *
@@ -41,7 +46,7 @@ interface ConnectionsRawContract
      */
     public function list(
         array|ConnectionListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -49,6 +54,7 @@ interface ConnectionsRawContract
      *
      * @param string $connectionID Telnyx connection id
      * @param array<string,mixed>|ConnectionListActiveCallsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<ConnectionListActiveCallsResponse>>
      *
@@ -57,6 +63,6 @@ interface ConnectionsRawContract
     public function listActiveCalls(
         string $connectionID,
         array|ConnectionListActiveCallsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

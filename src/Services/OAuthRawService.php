@@ -26,6 +26,9 @@ use Telnyx\OAuth\OAuthTokenResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\OAuthRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class OAuthRawService implements OAuthRawContract
 {
     // @phpstan-ignore-next-line
@@ -40,6 +43,7 @@ final class OAuthRawService implements OAuthRawContract
      * Retrieve details about an OAuth consent token
      *
      * @param string $consentToken OAuth consent token
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OAuthGetResponse>
      *
@@ -47,7 +51,7 @@ final class OAuthRawService implements OAuthRawContract
      */
     public function retrieve(
         string $consentToken,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -64,6 +68,7 @@ final class OAuthRawService implements OAuthRawContract
      * Create an OAuth authorization grant
      *
      * @param array{allowed: bool, consentToken: string}|OAuthGrantsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OAuthGrantsResponse>
      *
@@ -71,7 +76,7 @@ final class OAuthRawService implements OAuthRawContract
      */
     public function grants(
         array|OAuthGrantsParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = OAuthGrantsParams::parseRequest(
             $params,
@@ -94,6 +99,7 @@ final class OAuthRawService implements OAuthRawContract
      * Introspect an OAuth access token to check its validity and metadata
      *
      * @param array{token: string}|OAuthIntrospectParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OAuthIntrospectResponse>
      *
@@ -101,7 +107,7 @@ final class OAuthRawService implements OAuthRawContract
      */
     public function introspect(
         array|OAuthIntrospectParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = OAuthIntrospectParams::parseRequest(
             $params,
@@ -126,15 +132,16 @@ final class OAuthRawService implements OAuthRawContract
      *
      * @param array{
      *   clientName?: string,
-     *   grantTypes?: list<'authorization_code'|'client_credentials'|'refresh_token'|OAuthRegisterParams\GrantType>,
+     *   grantTypes?: list<OAuthRegisterParams\GrantType|value-of<OAuthRegisterParams\GrantType>>,
      *   logoUri?: string,
      *   policyUri?: string,
      *   redirectUris?: list<string>,
      *   responseTypes?: list<string>,
      *   scope?: string,
-     *   tokenEndpointAuthMethod?: 'none'|'client_secret_basic'|'client_secret_post'|TokenEndpointAuthMethod,
+     *   tokenEndpointAuthMethod?: TokenEndpointAuthMethod|value-of<TokenEndpointAuthMethod>,
      *   tosUri?: string,
      * }|OAuthRegisterParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OAuthRegisterResponse>
      *
@@ -142,7 +149,7 @@ final class OAuthRawService implements OAuthRawContract
      */
     public function register(
         array|OAuthRegisterParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = OAuthRegisterParams::parseRequest(
             $params,
@@ -167,12 +174,13 @@ final class OAuthRawService implements OAuthRawContract
      * @param array{
      *   clientID: string,
      *   redirectUri: string,
-     *   responseType: 'code'|ResponseType,
+     *   responseType: ResponseType|value-of<ResponseType>,
      *   codeChallenge?: string,
-     *   codeChallengeMethod?: 'plain'|'S256'|CodeChallengeMethod,
+     *   codeChallengeMethod?: CodeChallengeMethod|value-of<CodeChallengeMethod>,
      *   scope?: string,
      *   state?: string,
      * }|OAuthRetrieveAuthorizeParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -180,7 +188,7 @@ final class OAuthRawService implements OAuthRawContract
      */
     public function retrieveAuthorize(
         array|OAuthRetrieveAuthorizeParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = OAuthRetrieveAuthorizeParams::parseRequest(
             $params,
@@ -211,12 +219,14 @@ final class OAuthRawService implements OAuthRawContract
      *
      * Retrieve the JSON Web Key Set for token verification
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<OAuthGetJwksResponse>
      *
      * @throws APIException
      */
     public function retrieveJwks(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -233,7 +243,7 @@ final class OAuthRawService implements OAuthRawContract
      * Exchange authorization code, client credentials, or refresh token for access token
      *
      * @param array{
-     *   grantType: 'client_credentials'|'authorization_code'|'refresh_token'|GrantType,
+     *   grantType: GrantType|value-of<GrantType>,
      *   clientID?: string,
      *   clientSecret?: string,
      *   code?: string,
@@ -242,6 +252,7 @@ final class OAuthRawService implements OAuthRawContract
      *   refreshToken?: string,
      *   scope?: string,
      * }|OAuthTokenParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OAuthTokenResponse>
      *
@@ -249,7 +260,7 @@ final class OAuthRawService implements OAuthRawContract
      */
     public function token(
         array|OAuthTokenParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = OAuthTokenParams::parseRequest(
             $params,

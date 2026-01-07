@@ -17,12 +17,16 @@ use Telnyx\VirtualCrossConnects\VirtualCrossConnectNewResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectUpdateParams;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectUpdateResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface VirtualCrossConnectsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|VirtualCrossConnectCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VirtualCrossConnectNewResponse>
      *
@@ -30,13 +34,14 @@ interface VirtualCrossConnectsRawContract
      */
     public function create(
         array|VirtualCrossConnectCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VirtualCrossConnectGetResponse>
      *
@@ -44,7 +49,7 @@ interface VirtualCrossConnectsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -52,6 +57,7 @@ interface VirtualCrossConnectsRawContract
      *
      * @param string $id identifies the resource
      * @param array<string,mixed>|VirtualCrossConnectUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VirtualCrossConnectUpdateResponse>
      *
@@ -60,13 +66,14 @@ interface VirtualCrossConnectsRawContract
     public function update(
         string $id,
         array|VirtualCrossConnectUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|VirtualCrossConnectListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<VirtualCrossConnectListResponse>>
      *
@@ -74,13 +81,14 @@ interface VirtualCrossConnectsRawContract
      */
     public function list(
         array|VirtualCrossConnectListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VirtualCrossConnectDeleteResponse>
      *
@@ -88,6 +96,6 @@ interface VirtualCrossConnectsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

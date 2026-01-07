@@ -22,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type AssistantTestShape = array{
  *   createdAt: \DateTimeInterface,
  *   name: string,
- *   rubric: list<RubricShape>,
+ *   rubric: list<Rubric|RubricShape>,
  *   telnyxConversationChannel: TelnyxConversationChannel|value-of<TelnyxConversationChannel>,
  *   testID: string,
  *   description?: string|null,
@@ -139,7 +139,7 @@ final class AssistantTest implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RubricShape> $rubric
+     * @param list<Rubric|RubricShape> $rubric
      * @param TelnyxConversationChannel|value-of<TelnyxConversationChannel> $telnyxConversationChannel
      */
     public static function with(
@@ -196,7 +196,7 @@ final class AssistantTest implements BaseModel
     /**
      * Evaluation criteria used to assess test performance.
      *
-     * @param list<RubricShape> $rubric
+     * @param list<Rubric|RubricShape> $rubric
      */
     public function withRubric(array $rubric): self
     {

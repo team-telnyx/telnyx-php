@@ -14,12 +14,16 @@ use Telnyx\PhoneNumberBlocks\Jobs\JobGetResponse;
 use Telnyx\PhoneNumberBlocks\Jobs\JobListParams;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface JobsRawContract
 {
     /**
      * @api
      *
      * @param string $id identifies the Phone Number Blocks Job
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<JobGetResponse>
      *
@@ -27,13 +31,14 @@ interface JobsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|JobListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<Job>>
      *
@@ -41,13 +46,14 @@ interface JobsRawContract
      */
     public function list(
         array|JobListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|JobDeletePhoneNumberBlockParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<JobDeletePhoneNumberBlockResponse>
      *
@@ -55,6 +61,6 @@ interface JobsRawContract
      */
     public function deletePhoneNumberBlock(
         array|JobDeletePhoneNumberBlockParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

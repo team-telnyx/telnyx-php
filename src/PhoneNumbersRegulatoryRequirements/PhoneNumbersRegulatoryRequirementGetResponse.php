@@ -15,7 +15,8 @@ use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementG
  * @phpstan-import-type PaginationMetaShape from \Telnyx\AuthenticationProviders\PaginationMeta
  *
  * @phpstan-type PhoneNumbersRegulatoryRequirementGetResponseShape = array{
- *   data?: list<DataShape>|null, meta?: null|PaginationMeta|PaginationMetaShape
+ *   data?: list<Data|DataShape>|null,
+ *   meta?: null|PaginationMeta|PaginationMetaShape,
  * }
  */
 final class PhoneNumbersRegulatoryRequirementGetResponse implements BaseModel
@@ -40,7 +41,7 @@ final class PhoneNumbersRegulatoryRequirementGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DataShape>|null $data
+     * @param list<Data|DataShape>|null $data
      * @param PaginationMeta|PaginationMetaShape|null $meta
      */
     public static function with(
@@ -56,7 +57,7 @@ final class PhoneNumbersRegulatoryRequirementGetResponse implements BaseModel
     }
 
     /**
-     * @param list<DataShape> $data
+     * @param list<Data|DataShape> $data
      */
     public function withData(array $data): self
     {

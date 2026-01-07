@@ -17,6 +17,11 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\InsightsRawContract;
 
+/**
+ * @phpstan-import-type JsonSchemaShape from \Telnyx\AI\Conversations\Insights\InsightCreateParams\JsonSchema
+ * @phpstan-import-type JsonSchemaShape from \Telnyx\AI\Conversations\Insights\InsightUpdateParams\JsonSchema as JsonSchemaShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class InsightsRawService implements InsightsRawContract
 {
     // @phpstan-ignore-next-line
@@ -33,9 +38,10 @@ final class InsightsRawService implements InsightsRawContract
      * @param array{
      *   instructions: string,
      *   name: string,
-     *   jsonSchema?: string|array<string,mixed>,
+     *   jsonSchema?: JsonSchemaShape,
      *   webhook?: string,
      * }|InsightCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InsightTemplateDetail>
      *
@@ -43,7 +49,7 @@ final class InsightsRawService implements InsightsRawContract
      */
     public function create(
         array|InsightCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = InsightCreateParams::parseRequest(
             $params,
@@ -66,6 +72,7 @@ final class InsightsRawService implements InsightsRawContract
      * Get insight by ID
      *
      * @param string $insightID The ID of the insight
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InsightTemplateDetail>
      *
@@ -73,7 +80,7 @@ final class InsightsRawService implements InsightsRawContract
      */
     public function retrieve(
         string $insightID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -92,10 +99,11 @@ final class InsightsRawService implements InsightsRawContract
      * @param string $insightID The ID of the insight
      * @param array{
      *   instructions?: string,
-     *   jsonSchema?: string|array<string,mixed>,
+     *   jsonSchema?: JsonSchemaShape1,
      *   name?: string,
      *   webhook?: string,
      * }|InsightUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InsightTemplateDetail>
      *
@@ -104,7 +112,7 @@ final class InsightsRawService implements InsightsRawContract
     public function update(
         string $insightID,
         array|InsightUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = InsightUpdateParams::parseRequest(
             $params,
@@ -127,6 +135,7 @@ final class InsightsRawService implements InsightsRawContract
      * Get all insights
      *
      * @param array{pageNumber?: int, pageSize?: int}|InsightListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<InsightTemplate>>
      *
@@ -134,7 +143,7 @@ final class InsightsRawService implements InsightsRawContract
      */
     public function list(
         array|InsightListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = InsightListParams::parseRequest(
             $params,
@@ -161,6 +170,7 @@ final class InsightsRawService implements InsightsRawContract
      * Delete insight by ID
      *
      * @param string $insightID The ID of the insight
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -168,7 +178,7 @@ final class InsightsRawService implements InsightsRawContract
      */
     public function delete(
         string $insightID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

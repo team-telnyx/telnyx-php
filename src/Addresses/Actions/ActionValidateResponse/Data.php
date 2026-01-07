@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type DataShape = array{
  *   result: Result|value-of<Result>,
  *   suggested: Suggested|SuggestedShape,
- *   errors?: list<APIErrorShape>|null,
+ *   errors?: list<APIError|APIErrorShape>|null,
  *   recordType?: string|null,
  * }
  */
@@ -78,7 +78,7 @@ final class Data implements BaseModel
      *
      * @param Result|value-of<Result> $result
      * @param Suggested|SuggestedShape $suggested
-     * @param list<APIErrorShape>|null $errors
+     * @param list<APIError|APIErrorShape>|null $errors
      */
     public static function with(
         Result|string $result,
@@ -124,7 +124,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<APIErrorShape> $errors
+     * @param list<APIError|APIErrorShape> $errors
      */
     public function withErrors(array $errors): self
     {

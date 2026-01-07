@@ -17,6 +17,9 @@ use Telnyx\Messaging10dlc\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentBy
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging10dlc\PhoneNumberAssignmentByProfileRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class PhoneNumberAssignmentByProfileRawService implements PhoneNumberAssignmentByProfileRawContract
 {
     // @phpstan-ignore-next-line
@@ -33,6 +36,7 @@ final class PhoneNumberAssignmentByProfileRawService implements PhoneNumberAssig
      * @param array{
      *   messagingProfileID: string, campaignID?: string, tcrCampaignID?: string
      * }|PhoneNumberAssignmentByProfileAssignParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberAssignmentByProfileAssignResponse>
      *
@@ -40,7 +44,7 @@ final class PhoneNumberAssignmentByProfileRawService implements PhoneNumberAssig
      */
     public function assign(
         array|PhoneNumberAssignmentByProfileAssignParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PhoneNumberAssignmentByProfileAssignParams::parseRequest(
             $params,
@@ -65,6 +69,7 @@ final class PhoneNumberAssignmentByProfileRawService implements PhoneNumberAssig
      * @param array{
      *   page?: int, recordsPerPage?: int
      * }|PhoneNumberAssignmentByProfileListPhoneNumberStatusParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberAssignmentByProfileListPhoneNumberStatusResponse,>
      *
@@ -73,7 +78,7 @@ final class PhoneNumberAssignmentByProfileRawService implements PhoneNumberAssig
     public function listPhoneNumberStatus(
         string $taskID,
         array|PhoneNumberAssignmentByProfileListPhoneNumberStatusParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PhoneNumberAssignmentByProfileListPhoneNumberStatusParams::parseRequest(
             $params,
@@ -98,6 +103,7 @@ final class PhoneNumberAssignmentByProfileRawService implements PhoneNumberAssig
      * @param array{
      *   page?: int, recordsPerPage?: int
      * }|PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse>
      *
@@ -106,7 +112,7 @@ final class PhoneNumberAssignmentByProfileRawService implements PhoneNumberAssig
     public function retrievePhoneNumberStatus(
         string $taskID,
         array|PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParams::parseRequest(
             $params,
@@ -128,13 +134,15 @@ final class PhoneNumberAssignmentByProfileRawService implements PhoneNumberAssig
      *
      * Check the status of the task associated with assigning all phone numbers on a messaging profile to a campaign by `taskId`.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<PhoneNumberAssignmentByProfileGetStatusResponse>
      *
      * @throws APIException
      */
     public function retrieveStatus(
         string $taskID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

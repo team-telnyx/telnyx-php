@@ -10,6 +10,9 @@ use Telnyx\RequestOptions;
 use Telnyx\Verifications\ByPhoneNumber\Actions\ActionVerifyParams;
 use Telnyx\Verifications\ByPhoneNumber\Actions\VerifyVerificationCodeResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ActionsRawContract
 {
     /**
@@ -17,6 +20,7 @@ interface ActionsRawContract
      *
      * @param string $phoneNumber +E164 formatted phone number
      * @param array<string,mixed>|ActionVerifyParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VerifyVerificationCodeResponse>
      *
@@ -25,6 +29,6 @@ interface ActionsRawContract
     public function verify(
         string $phoneNumber,
         array|ActionVerifyParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

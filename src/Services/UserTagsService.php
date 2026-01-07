@@ -9,8 +9,13 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\UserTagsContract;
+use Telnyx\UserTags\UserTagListParams\Filter;
 use Telnyx\UserTags\UserTagListResponse;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\UserTags\UserTagListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class UserTagsService implements UserTagsContract
 {
     /**
@@ -31,15 +36,14 @@ final class UserTagsService implements UserTagsContract
      *
      * List all user tags.
      *
-     * @param array{
-     *   startsWith?: string
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[starts_with]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[starts_with]
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
-        ?RequestOptions $requestOptions = null
+        Filter|array|null $filter = null,
+        RequestOptions|array|null $requestOptions = null,
     ): UserTagListResponse {
         $params = Util::removeNulls(['filter' => $filter]);
 

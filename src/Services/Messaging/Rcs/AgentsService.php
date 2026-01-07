@@ -8,11 +8,16 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
+use Telnyx\Messaging\Rcs\Agents\AgentListParams\Page;
 use Telnyx\RcsAgents\RcsAgent;
 use Telnyx\RcsAgents\RcsAgentResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging\Rcs\AgentsContract;
 
+/**
+ * @phpstan-import-type PageShape from \Telnyx\Messaging\Rcs\Agents\AgentListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AgentsService implements AgentsContract
 {
     /**
@@ -34,12 +39,13 @@ final class AgentsService implements AgentsContract
      * Retrieve an RCS agent
      *
      * @param string $id RCS agent ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): RcsAgentResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -56,6 +62,7 @@ final class AgentsService implements AgentsContract
      * @param string|null $profileID Messaging profile ID associated with the RCS Agent
      * @param string|null $webhookFailoverURL Failover URL to receive RCS events
      * @param string|null $webhookURL URL to receive RCS events
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -64,7 +71,7 @@ final class AgentsService implements AgentsContract
         ?string $profileID = null,
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): RcsAgentResponse {
         $params = Util::removeNulls(
             [
@@ -85,17 +92,16 @@ final class AgentsService implements AgentsContract
      *
      * List all RCS agents
      *
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<RcsAgent>
      *
      * @throws APIException
      */
     public function list(
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null
     ): DefaultPagination {
         $params = Util::removeNulls(['page' => $page]);
 

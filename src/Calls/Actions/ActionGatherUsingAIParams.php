@@ -27,6 +27,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Calls\ActionsService::gatherUsingAI()
  *
+ * @phpstan-import-type VoiceSettingsVariants from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings
  * @phpstan-import-type AssistantShape from \Telnyx\AI\Assistants\Assistant
  * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\InterruptionSettings
  * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory
@@ -41,7 +42,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   greeting?: string|null,
  *   interruptionSettings?: null|InterruptionSettings|InterruptionSettingsShape,
  *   language?: null|GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage>,
- *   messageHistory?: list<MessageHistoryShape>|null,
+ *   messageHistory?: list<MessageHistory|MessageHistoryShape>|null,
  *   sendMessageHistoryUpdates?: bool|null,
  *   sendPartialResults?: bool|null,
  *   transcription?: null|TranscriptionConfig|TranscriptionConfigShape,
@@ -148,6 +149,8 @@ final class ActionGatherUsingAIParams implements BaseModel
 
     /**
      * The settings associated with the voice selected.
+     *
+     * @var VoiceSettingsVariants|null $voiceSettings
      */
     #[Optional('voice_settings', union: VoiceSettings::class)]
     public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|null $voiceSettings;
@@ -180,7 +183,7 @@ final class ActionGatherUsingAIParams implements BaseModel
      * @param Assistant|AssistantShape|null $assistant
      * @param InterruptionSettings|InterruptionSettingsShape|null $interruptionSettings
      * @param GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage>|null $language
-     * @param list<MessageHistoryShape>|null $messageHistory
+     * @param list<MessageHistory|MessageHistoryShape>|null $messageHistory
      * @param TranscriptionConfig|TranscriptionConfigShape|null $transcription
      * @param VoiceSettingsShape|null $voiceSettings
      */
@@ -311,7 +314,7 @@ final class ActionGatherUsingAIParams implements BaseModel
     /**
      * The message history you want the voice assistant to be aware of, this can be useful to keep the context of the conversation, or to pass additional information to the voice assistant.
      *
-     * @param list<MessageHistoryShape> $messageHistory
+     * @param list<MessageHistory|MessageHistoryShape> $messageHistory
      */
     public function withMessageHistory(array $messageHistory): self
     {

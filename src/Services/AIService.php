@@ -21,6 +21,9 @@ use Telnyx\Services\AI\FineTuningService;
 use Telnyx\Services\AI\IntegrationsService;
 use Telnyx\Services\AI\McpServersService;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AIService implements AIContract
 {
     /**
@@ -95,10 +98,12 @@ final class AIService implements AIContract
      *
      * This endpoint returns a list of Open Source and OpenAI models that are available for use. <br /><br /> **Note**: Model `id`'s will be in the form `{source}/{model_name}`. For example `openai/gpt-4` or `mistralai/Mistral-7B-Instruct-v0.1` consistent with HuggingFace naming conventions.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieveModels(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AIGetModelsResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveModels(requestOptions: $requestOptions);
@@ -121,6 +126,7 @@ final class AIService implements AIContract
      * @param string $bucket the name of the bucket that contains the file to be summarized
      * @param string $filename the name of the file to be summarized
      * @param string $systemPrompt a system prompt to guide the summary generation
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -128,7 +134,7 @@ final class AIService implements AIContract
         string $bucket,
         string $filename,
         ?string $systemPrompt = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AISummarizeResponse {
         $params = Util::removeNulls(
             [

@@ -12,12 +12,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface AccessIPAddressRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|AccessIPAddressCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AccessIPAddressResponse>
      *
@@ -25,11 +29,13 @@ interface AccessIPAddressRawContract
      */
     public function create(
         array|AccessIPAddressCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AccessIPAddressResponse>
      *
@@ -37,13 +43,14 @@ interface AccessIPAddressRawContract
      */
     public function retrieve(
         string $accessIPAddressID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|AccessIPAddressListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<AccessIPAddressResponse>>
      *
@@ -51,11 +58,13 @@ interface AccessIPAddressRawContract
      */
     public function list(
         array|AccessIPAddressListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AccessIPAddressResponse>
      *
@@ -63,6 +72,6 @@ interface AccessIPAddressRawContract
      */
     public function delete(
         string $accessIPAddressID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

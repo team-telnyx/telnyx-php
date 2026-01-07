@@ -10,12 +10,16 @@ use Telnyx\NumbersFeatures\NumbersFeatureCreateParams;
 use Telnyx\NumbersFeatures\NumbersFeatureNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface NumbersFeaturesRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|NumbersFeatureCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NumbersFeatureNewResponse>
      *
@@ -23,6 +27,6 @@ interface NumbersFeaturesRawContract
      */
     public function create(
         array|NumbersFeatureCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

@@ -19,6 +19,9 @@ use Telnyx\Reports\ReportListWdrsResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ReportsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ReportsRawService implements ReportsRawContract
 {
     // @phpstan-ignore-next-line
@@ -36,13 +39,14 @@ final class ReportsRawService implements ReportsRawContract
      *   id?: string,
      *   cld?: string,
      *   cli?: string,
-     *   direction?: 'INBOUND'|'OUTBOUND'|Direction,
+     *   direction?: Direction|value-of<Direction>,
      *   endDate?: string,
-     *   messageType?: 'SMS'|'MMS'|MessageType,
+     *   messageType?: MessageType|value-of<MessageType>,
      *   profile?: string,
      *   startDate?: string,
      *   status?: value-of<Status>,
      * }|ReportListMdrsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ReportListMdrsResponse>
      *
@@ -50,7 +54,7 @@ final class ReportsRawService implements ReportsRawContract
      */
     public function listMdrs(
         array|ReportListMdrsParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ReportListMdrsParams::parseRequest(
             $params,
@@ -94,6 +98,7 @@ final class ReportsRawService implements ReportsRawContract
      *   sort?: list<string>,
      *   startDate?: string,
      * }|ReportListWdrsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<ReportListWdrsResponse>>
      *
@@ -101,7 +106,7 @@ final class ReportsRawService implements ReportsRawContract
      */
     public function listWdrs(
         array|ReportListWdrsParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ReportListWdrsParams::parseRequest(
             $params,

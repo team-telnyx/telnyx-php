@@ -14,6 +14,9 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\ClustersContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ClustersService implements ClustersContract
 {
     /**
@@ -36,6 +39,7 @@ final class ClustersService implements ClustersContract
      *
      * @param bool $showSubclusters whether or not to include subclusters and their nodes in the response
      * @param int $topNNodes The number of nodes in the cluster to return in the response. Nodes will be sorted by their centrality within the cluster.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -43,7 +47,7 @@ final class ClustersService implements ClustersContract
         string $taskID,
         bool $showSubclusters = false,
         int $topNNodes = 0,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ClusterGetResponse {
         $params = Util::removeNulls(
             ['showSubclusters' => $showSubclusters, 'topNNodes' => $topNNodes]
@@ -60,6 +64,8 @@ final class ClustersService implements ClustersContract
      *
      * List all clusters
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return DefaultFlatPagination<ClusterListResponse>
      *
      * @throws APIException
@@ -67,7 +73,7 @@ final class ClustersService implements ClustersContract
     public function list(
         ?int $pageNumber = null,
         ?int $pageSize = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
         $params = Util::removeNulls(
             ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
@@ -84,11 +90,13 @@ final class ClustersService implements ClustersContract
      *
      * Delete a cluster
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $taskID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($taskID, requestOptions: $requestOptions);
@@ -106,6 +114,7 @@ final class ClustersService implements ClustersContract
      * @param int $minClusterSize Smallest number of related text chunks to qualify as a cluster. Top-level clusters should be thought of as identifying broad themes in your data.
      * @param int $minSubclusterSize Smallest number of related text chunks to qualify as a sub-cluster. Sub-clusters should be thought of as identifying more specific topics within a broader theme.
      * @param string $prefix prefix to filter whcih files in the buckets are included
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -115,7 +124,7 @@ final class ClustersService implements ClustersContract
         int $minClusterSize = 25,
         int $minSubclusterSize = 5,
         ?string $prefix = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ClusterComputeResponse {
         $params = Util::removeNulls(
             [
@@ -138,12 +147,14 @@ final class ClustersService implements ClustersContract
      *
      * Fetch a cluster visualization
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function fetchGraph(
         string $taskID,
         ?int $clusterID = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): string {
         $params = Util::removeNulls(['clusterID' => $clusterID]);
 

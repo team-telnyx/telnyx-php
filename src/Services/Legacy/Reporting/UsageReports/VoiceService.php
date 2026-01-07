@@ -15,6 +15,9 @@ use Telnyx\PerPagePagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\UsageReports\VoiceContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class VoiceService implements VoiceContract
 {
     /**
@@ -35,25 +38,26 @@ final class VoiceService implements VoiceContract
      *
      * Creates a new legacy usage V2 CDR report request with the specified filters
      *
-     * @param string|\DateTimeInterface $endTime End time in ISO format
-     * @param string|\DateTimeInterface $startTime Start time in ISO format
+     * @param \DateTimeInterface $endTime End time in ISO format
+     * @param \DateTimeInterface $startTime Start time in ISO format
      * @param int $aggregationType Aggregation type: All = 0, By Connections = 1, By Tags = 2, By Billing Group = 3
      * @param list<int> $connections List of connections to filter by
      * @param list<string> $managedAccounts List of managed accounts to include
      * @param int $productBreakdown Product breakdown type: No breakdown = 0, DID vs Toll-free = 1, Country = 2, DID vs Toll-free per Country = 3
      * @param bool $selectAllManagedAccounts Whether to select all managed accounts
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        string|\DateTimeInterface $endTime,
-        string|\DateTimeInterface $startTime,
+        \DateTimeInterface $endTime,
+        \DateTimeInterface $startTime,
         ?int $aggregationType = null,
         ?array $connections = null,
         ?array $managedAccounts = null,
         ?int $productBreakdown = null,
         ?bool $selectAllManagedAccounts = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): VoiceNewResponse {
         $params = Util::removeNulls(
             [
@@ -78,11 +82,13 @@ final class VoiceService implements VoiceContract
      *
      * Fetch single cdr usage report by id.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): VoiceGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -97,6 +103,7 @@ final class VoiceService implements VoiceContract
      *
      * @param int $page Page number
      * @param int $perPage Size of the page
+     * @param RequestOpts|null $requestOptions
      *
      * @return PerPagePagination<CdrUsageReportResponseLegacy>
      *
@@ -105,7 +112,7 @@ final class VoiceService implements VoiceContract
     public function list(
         int $page = 1,
         int $perPage = 20,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): PerPagePagination {
         $params = Util::removeNulls(['page' => $page, 'perPage' => $perPage]);
 
@@ -120,11 +127,13 @@ final class VoiceService implements VoiceContract
      *
      * Deletes a specific V2 legacy usage CDR report request by ID
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): VoiceDeleteResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, requestOptions: $requestOptions);

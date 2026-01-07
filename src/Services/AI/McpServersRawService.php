@@ -19,6 +19,9 @@ use Telnyx\DefaultFlatPaginationTopLevelArray;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\McpServersRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class McpServersRawService implements McpServersRawContract
 {
     // @phpstan-ignore-next-line
@@ -39,6 +42,7 @@ final class McpServersRawService implements McpServersRawContract
      *   allowedTools?: list<string>|null,
      *   apiKeyRef?: string|null,
      * }|McpServerCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<McpServerNewResponse>
      *
@@ -46,7 +50,7 @@ final class McpServersRawService implements McpServersRawContract
      */
     public function create(
         array|McpServerCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = McpServerCreateParams::parseRequest(
             $params,
@@ -68,13 +72,15 @@ final class McpServersRawService implements McpServersRawContract
      *
      * Retrieve details for a specific MCP server.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<McpServerGetResponse>
      *
      * @throws APIException
      */
     public function retrieve(
         string $mcpServerID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -94,11 +100,12 @@ final class McpServersRawService implements McpServersRawContract
      *   id?: string,
      *   allowedTools?: list<string>|null,
      *   apiKeyRef?: string|null,
-     *   createdAt?: string|\DateTimeInterface,
+     *   createdAt?: \DateTimeInterface,
      *   name?: string,
      *   type?: string,
      *   url?: string,
      * }|McpServerUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<McpServerUpdateResponse>
      *
@@ -107,7 +114,7 @@ final class McpServersRawService implements McpServersRawContract
     public function update(
         string $mcpServerID,
         array|McpServerUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = McpServerUpdateParams::parseRequest(
             $params,
@@ -132,6 +139,7 @@ final class McpServersRawService implements McpServersRawContract
      * @param array{
      *   pageNumber?: int, pageSize?: int, type?: string, url?: string
      * }|McpServerListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPaginationTopLevelArray<McpServerListResponse>>
      *
@@ -139,7 +147,7 @@ final class McpServersRawService implements McpServersRawContract
      */
     public function list(
         array|McpServerListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = McpServerListParams::parseRequest(
             $params,
@@ -165,13 +173,15 @@ final class McpServersRawService implements McpServersRawContract
      *
      * Delete a specific MCP server.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<mixed>
      *
      * @throws APIException
      */
     public function delete(
         string $mcpServerID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

@@ -12,11 +12,16 @@ use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckCreateParams;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckDeleteResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckGetResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListParams;
+use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListParams\Page;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPHealthChecksRawContract;
 
+/**
+ * @phpstan-import-type PageShape from \Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class GlobalIPHealthChecksRawService implements GlobalIPHealthChecksRawContract
 {
     // @phpstan-ignore-next-line
@@ -35,6 +40,7 @@ final class GlobalIPHealthChecksRawService implements GlobalIPHealthChecksRawCon
      *   healthCheckParams?: array<string,mixed>,
      *   healthCheckType?: string,
      * }|GlobalIPHealthCheckCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<GlobalIPHealthCheckNewResponse>
      *
@@ -42,7 +48,7 @@ final class GlobalIPHealthChecksRawService implements GlobalIPHealthChecksRawCon
      */
     public function create(
         array|GlobalIPHealthCheckCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = GlobalIPHealthCheckCreateParams::parseRequest(
             $params,
@@ -65,6 +71,7 @@ final class GlobalIPHealthChecksRawService implements GlobalIPHealthChecksRawCon
      * Retrieve a Global IP health check.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<GlobalIPHealthCheckGetResponse>
      *
@@ -72,7 +79,7 @@ final class GlobalIPHealthChecksRawService implements GlobalIPHealthChecksRawCon
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -88,9 +95,8 @@ final class GlobalIPHealthChecksRawService implements GlobalIPHealthChecksRawCon
      *
      * List all Global IP health checks.
      *
-     * @param array{
-     *   page?: array{number?: int, size?: int}
-     * }|GlobalIPHealthCheckListParams $params
+     * @param array{page?: Page|PageShape}|GlobalIPHealthCheckListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<GlobalIPHealthCheckListResponse>>
      *
@@ -98,7 +104,7 @@ final class GlobalIPHealthChecksRawService implements GlobalIPHealthChecksRawCon
      */
     public function list(
         array|GlobalIPHealthCheckListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = GlobalIPHealthCheckListParams::parseRequest(
             $params,
@@ -122,6 +128,7 @@ final class GlobalIPHealthChecksRawService implements GlobalIPHealthChecksRawCon
      * Delete a Global IP health check.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<GlobalIPHealthCheckDeleteResponse>
      *
@@ -129,7 +136,7 @@ final class GlobalIPHealthChecksRawService implements GlobalIPHealthChecksRawCon
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

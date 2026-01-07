@@ -9,12 +9,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\SpeechToText\SpeechToTextTranscribeParams;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface SpeechToTextRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|SpeechToTextTranscribeParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -22,6 +26,6 @@ interface SpeechToTextRawContract
      */
     public function transcribe(
         array|SpeechToTextTranscribeParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

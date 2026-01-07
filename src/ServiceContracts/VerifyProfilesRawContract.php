@@ -18,12 +18,16 @@ use Telnyx\VerifyProfiles\VerifyProfileListParams;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateParams;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateTemplateParams;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface VerifyProfilesRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|VerifyProfileCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VerifyProfileData>
      *
@@ -31,13 +35,14 @@ interface VerifyProfilesRawContract
      */
     public function create(
         array|VerifyProfileCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $verifyProfileID the identifier of the Verify profile to retrieve
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VerifyProfileData>
      *
@@ -45,7 +50,7 @@ interface VerifyProfilesRawContract
      */
     public function retrieve(
         string $verifyProfileID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -53,6 +58,7 @@ interface VerifyProfilesRawContract
      *
      * @param string $verifyProfileID the identifier of the Verify profile to update
      * @param array<string,mixed>|VerifyProfileUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VerifyProfileData>
      *
@@ -61,13 +67,14 @@ interface VerifyProfilesRawContract
     public function update(
         string $verifyProfileID,
         array|VerifyProfileUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|VerifyProfileListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<VerifyProfile>>
      *
@@ -75,13 +82,14 @@ interface VerifyProfilesRawContract
      */
     public function list(
         array|VerifyProfileListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $verifyProfileID the identifier of the Verify profile to delete
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VerifyProfileData>
      *
@@ -89,13 +97,14 @@ interface VerifyProfilesRawContract
      */
     public function delete(
         string $verifyProfileID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|VerifyProfileCreateTemplateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessageTemplate>
      *
@@ -103,18 +112,20 @@ interface VerifyProfilesRawContract
      */
     public function createTemplate(
         array|VerifyProfileCreateTemplateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VerifyProfileGetTemplatesResponse>
      *
      * @throws APIException
      */
     public function retrieveTemplates(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -122,6 +133,7 @@ interface VerifyProfilesRawContract
      *
      * @param string $templateID the identifier of the message template to update
      * @param array<string,mixed>|VerifyProfileUpdateTemplateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessageTemplate>
      *
@@ -130,6 +142,6 @@ interface VerifyProfilesRawContract
     public function updateTemplate(
         string $templateID,
         array|VerifyProfileUpdateTemplateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

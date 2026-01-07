@@ -11,12 +11,16 @@ use Telnyx\ManagedAccounts\Actions\ActionEnableParams;
 use Telnyx\ManagedAccounts\Actions\ActionEnableResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ActionsRawContract
 {
     /**
      * @api
      *
      * @param string $id Managed Account User ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionDisableResponse>
      *
@@ -24,7 +28,7 @@ interface ActionsRawContract
      */
     public function disable(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -32,6 +36,7 @@ interface ActionsRawContract
      *
      * @param string $id Managed Account User ID
      * @param array<string,mixed>|ActionEnableParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionEnableResponse>
      *
@@ -40,6 +45,6 @@ interface ActionsRawContract
     public function enable(
         string $id,
         array|ActionEnableParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

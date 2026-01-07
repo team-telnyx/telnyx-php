@@ -12,7 +12,9 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-import-type DataShape from \Telnyx\BundlePricing\UserBundles\UserBundleListUnusedResponse\Data
  *
- * @phpstan-type UserBundleListUnusedResponseShape = array{data: list<DataShape>}
+ * @phpstan-type UserBundleListUnusedResponseShape = array{
+ *   data: list<Data|DataShape>
+ * }
  */
 final class UserBundleListUnusedResponse implements BaseModel
 {
@@ -47,7 +49,7 @@ final class UserBundleListUnusedResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DataShape> $data
+     * @param list<Data|DataShape> $data
      */
     public static function with(array $data): self
     {
@@ -59,7 +61,7 @@ final class UserBundleListUnusedResponse implements BaseModel
     }
 
     /**
-     * @param list<DataShape> $data
+     * @param list<Data|DataShape> $data
      */
     public function withData(array $data): self
     {

@@ -9,6 +9,9 @@ use Telnyx\RequestOptions;
 use Telnyx\Rooms\Actions\ActionGenerateJoinClientTokenResponse;
 use Telnyx\Rooms\Actions\ActionRefreshClientTokenResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ActionsContract
 {
     /**
@@ -17,6 +20,7 @@ interface ActionsContract
      * @param string $roomID the unique identifier of a room
      * @param int $refreshTokenTtlSecs the time to live in seconds of the Refresh Token, after that time the Refresh Token is invalid and can't be used to refresh Client Token
      * @param int $tokenTtlSecs the time to live in seconds of the Client Token, after that time the Client Token is invalid and can't be used to join a Room
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -24,7 +28,7 @@ interface ActionsContract
         string $roomID,
         int $refreshTokenTtlSecs = 3600,
         int $tokenTtlSecs = 600,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionGenerateJoinClientTokenResponse;
 
     /**
@@ -32,6 +36,7 @@ interface ActionsContract
      *
      * @param string $roomID the unique identifier of a room
      * @param int $tokenTtlSecs the time to live in seconds of the Client Token, after that time the Client Token is invalid and can't be used to join a Room
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -39,6 +44,6 @@ interface ActionsContract
         string $roomID,
         string $refreshToken,
         int $tokenTtlSecs = 600,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionRefreshClientTokenResponse;
 }

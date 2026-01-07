@@ -11,12 +11,16 @@ use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateGetResponse;
 use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface MessagingNumbersBulkUpdatesRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|MessagingNumbersBulkUpdateCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingNumbersBulkUpdateNewResponse>
      *
@@ -24,13 +28,14 @@ interface MessagingNumbersBulkUpdatesRawContract
      */
     public function create(
         array|MessagingNumbersBulkUpdateCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $orderID order ID to verify bulk update status
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingNumbersBulkUpdateGetResponse>
      *
@@ -38,6 +43,6 @@ interface MessagingNumbersBulkUpdatesRawContract
      */
     public function retrieve(
         string $orderID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

@@ -8,11 +8,19 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
-use Telnyx\NetworkCoverage\AvailableService;
+use Telnyx\NetworkCoverage\NetworkCoverageListParams\Filter;
+use Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters;
+use Telnyx\NetworkCoverage\NetworkCoverageListParams\Page;
 use Telnyx\NetworkCoverage\NetworkCoverageListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NetworkCoverageContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\NetworkCoverage\NetworkCoverageListParams\Filter
+ * @phpstan-import-type FiltersShape from \Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters
+ * @phpstan-import-type PageShape from \Telnyx\NetworkCoverage\NetworkCoverageListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class NetworkCoverageService implements NetworkCoverageContract
 {
     /**
@@ -33,30 +41,20 @@ final class NetworkCoverageService implements NetworkCoverageContract
      *
      * List all locations and the interfaces that region supports
      *
-     * @param array{
-     *   locationCode?: string,
-     *   locationPop?: string,
-     *   locationRegion?: string,
-     *   locationSite?: string,
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[location.region], filter[location.site], filter[location.pop], filter[location.code]
-     * @param array{
-     *   availableServices?: 'cloud_vpn'|'private_wireless_gateway'|'virtual_cross_connect'|AvailableService|array{
-     *     contains?: 'cloud_vpn'|'private_wireless_gateway'|'virtual_cross_connect'|AvailableService,
-     *   },
-     * } $filters Consolidated filters parameter (deepObject style). Originally: filters[available_services][contains]
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[location.region], filter[location.site], filter[location.pop], filter[location.code]
+     * @param Filters|FiltersShape $filters Consolidated filters parameter (deepObject style). Originally: filters[available_services][contains]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<NetworkCoverageListResponse>
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
-        ?array $filters = null,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null,
+        Filter|array|null $filter = null,
+        Filters|array|null $filters = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination {
         $params = Util::removeNulls(
             ['filter' => $filter, 'filters' => $filters, 'page' => $page]

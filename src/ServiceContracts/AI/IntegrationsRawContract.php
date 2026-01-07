@@ -10,12 +10,16 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface IntegrationsRawContract
 {
     /**
      * @api
      *
      * @param string $integrationID The integration id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<IntegrationGetResponse>
      *
@@ -23,15 +27,19 @@ interface IntegrationsRawContract
      */
     public function retrieve(
         string $integrationID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<IntegrationListResponse>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse;
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse;
 }

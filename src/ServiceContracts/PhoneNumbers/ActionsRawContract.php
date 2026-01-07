@@ -14,6 +14,9 @@ use Telnyx\PhoneNumbers\Actions\ActionVerifyOwnershipParams;
 use Telnyx\PhoneNumbers\Actions\ActionVerifyOwnershipResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ActionsRawContract
 {
     /**
@@ -21,6 +24,7 @@ interface ActionsRawContract
      *
      * @param string $id identifies the resource
      * @param array<string,mixed>|ActionChangeBundleStatusParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionChangeBundleStatusResponse>
      *
@@ -29,7 +33,7 @@ interface ActionsRawContract
     public function changeBundleStatus(
         string $id,
         array|ActionChangeBundleStatusParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -37,6 +41,7 @@ interface ActionsRawContract
      *
      * @param string $id identifies the resource
      * @param array<string,mixed>|ActionEnableEmergencyParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionEnableEmergencyResponse>
      *
@@ -45,13 +50,14 @@ interface ActionsRawContract
     public function enableEmergency(
         string $id,
         array|ActionEnableEmergencyParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ActionVerifyOwnershipParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionVerifyOwnershipResponse>
      *
@@ -59,6 +65,6 @@ interface ActionsRawContract
      */
     public function verifyOwnership(
         array|ActionVerifyOwnershipParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

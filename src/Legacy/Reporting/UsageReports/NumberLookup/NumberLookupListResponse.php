@@ -14,7 +14,7 @@ use Telnyx\Legacy\Reporting\UsageReports\Messaging\StandardPaginationMeta;
  * @phpstan-import-type StandardPaginationMetaShape from \Telnyx\Legacy\Reporting\UsageReports\Messaging\StandardPaginationMeta
  *
  * @phpstan-type NumberLookupListResponseShape = array{
- *   data?: list<TelcoDataUsageReportResponseShape>|null,
+ *   data?: list<TelcoDataUsageReportResponse|TelcoDataUsageReportResponseShape>|null,
  *   meta?: null|StandardPaginationMeta|StandardPaginationMetaShape,
  * }
  */
@@ -40,7 +40,7 @@ final class NumberLookupListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TelcoDataUsageReportResponseShape>|null $data
+     * @param list<TelcoDataUsageReportResponse|TelcoDataUsageReportResponseShape>|null $data
      * @param StandardPaginationMeta|StandardPaginationMetaShape|null $meta
      */
     public static function with(
@@ -56,7 +56,7 @@ final class NumberLookupListResponse implements BaseModel
     }
 
     /**
-     * @param list<TelcoDataUsageReportResponseShape> $data
+     * @param list<TelcoDataUsageReportResponse|TelcoDataUsageReportResponseShape> $data
      */
     public function withData(array $data): self
     {

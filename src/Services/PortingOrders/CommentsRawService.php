@@ -10,11 +10,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\Comments\CommentCreateParams;
 use Telnyx\PortingOrders\Comments\CommentListParams;
+use Telnyx\PortingOrders\Comments\CommentListParams\Page;
 use Telnyx\PortingOrders\Comments\CommentListResponse;
 use Telnyx\PortingOrders\Comments\CommentNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\CommentsRawContract;
 
+/**
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\Comments\CommentListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class CommentsRawService implements CommentsRawContract
 {
     // @phpstan-ignore-next-line
@@ -30,6 +35,7 @@ final class CommentsRawService implements CommentsRawContract
      *
      * @param string $id Porting Order id
      * @param array{body?: string}|CommentCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CommentNewResponse>
      *
@@ -38,7 +44,7 @@ final class CommentsRawService implements CommentsRawContract
     public function create(
         string $id,
         array|CommentCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CommentCreateParams::parseRequest(
             $params,
@@ -61,7 +67,8 @@ final class CommentsRawService implements CommentsRawContract
      * Returns a list of all comments of a porting order.
      *
      * @param string $id Porting Order id
-     * @param array{page?: array{number?: int, size?: int}}|CommentListParams $params
+     * @param array{page?: Page|PageShape}|CommentListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<CommentListResponse>>
      *
@@ -70,7 +77,7 @@ final class CommentsRawService implements CommentsRawContract
     public function list(
         string $id,
         array|CommentListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CommentListParams::parseRequest(
             $params,

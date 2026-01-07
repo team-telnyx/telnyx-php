@@ -15,16 +15,21 @@ use Telnyx\Messaging10dlc\Campaign\TelnyxCampaignCsp;
 use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface CampaignContract
 {
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): TelnyxCampaignCsp;
 
     /**
@@ -41,6 +46,7 @@ interface CampaignContract
      * @param string $sample5 Message sample. Some campaign tiers require 5 or more message samples.
      * @param string $webhookFailoverURL webhook failover to which campaign status updates are sent
      * @param string $webhookURL webhook to which campaign status updates are sent
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -57,7 +63,7 @@ interface CampaignContract
         ?string $sample5 = null,
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): TelnyxCampaignCsp;
 
     /**
@@ -65,7 +71,8 @@ interface CampaignContract
      *
      * @param int $page The 1-indexed page number to get. The default value is `1`.
      * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
-     * @param 'assignedPhoneNumbersCount'|'-assignedPhoneNumbersCount'|'campaignId'|'-campaignId'|'createdAt'|'-createdAt'|'status'|'-status'|'tcrCampaignId'|'-tcrCampaignId'|Sort $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
+     * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
+     * @param RequestOpts|null $requestOptions
      *
      * @return PerPagePaginationV2<CampaignListResponse>
      *
@@ -75,14 +82,15 @@ interface CampaignContract
         string $brandID,
         int $page = 1,
         int $recordsPerPage = 10,
-        string|Sort $sort = '-createdAt',
-        ?RequestOptions $requestOptions = null,
+        Sort|string $sort = '-createdAt',
+        RequestOptions|array|null $requestOptions = null,
     ): PerPagePaginationV2;
 
     /**
      * @api
      *
      * @param string $campaignID TCR's ID for the campaign to import
+     * @param RequestOpts|null $requestOptions
      *
      * @return array<string,mixed>
      *
@@ -90,33 +98,38 @@ interface CampaignContract
      */
     public function acceptSharing(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): array;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function deactivate(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): CampaignDeactivateResponse;
 
     /**
      * @api
      *
      * @param string $campaignID ID of the campaign in question
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function getMnoMetadata(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): CampaignGetMnoMetadataResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return array<string,mixed>
      *
@@ -124,19 +137,20 @@ interface CampaignContract
      */
     public function getOperationStatus(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): array;
 
     /**
      * @api
      *
      * @param string $campaignID ID of the campaign in question
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function getSharingStatus(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): CampaignGetSharingStatusResponse;
 
     /**
@@ -144,12 +158,13 @@ interface CampaignContract
      *
      * @param string $campaignID The Telnyx campaign identifier
      * @param string $appealReason detailed explanation of why the campaign should be reconsidered and what changes have been made to address the rejection reason
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function submitAppeal(
         string $campaignID,
         string $appealReason,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): CampaignSubmitAppealResponse;
 }

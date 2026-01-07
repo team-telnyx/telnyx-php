@@ -13,6 +13,9 @@ use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReportNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\LedgerBillingGroupReportsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class LedgerBillingGroupReportsRawService implements LedgerBillingGroupReportsRawContract
 {
     // @phpstan-ignore-next-line
@@ -29,6 +32,7 @@ final class LedgerBillingGroupReportsRawService implements LedgerBillingGroupRep
      * @param array{
      *   month?: int, year?: int
      * }|LedgerBillingGroupReportCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<LedgerBillingGroupReportNewResponse>
      *
@@ -36,7 +40,7 @@ final class LedgerBillingGroupReportsRawService implements LedgerBillingGroupRep
      */
     public function create(
         array|LedgerBillingGroupReportCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = LedgerBillingGroupReportCreateParams::parseRequest(
             $params,
@@ -59,6 +63,7 @@ final class LedgerBillingGroupReportsRawService implements LedgerBillingGroupRep
      * Get a ledger billing group report
      *
      * @param string $id The id of the ledger billing group report
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<LedgerBillingGroupReportGetResponse>
      *
@@ -66,7 +71,7 @@ final class LedgerBillingGroupReportsRawService implements LedgerBillingGroupRep
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

@@ -9,12 +9,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CredentialConnections\Actions\ActionCheckRegistrationStatusResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ActionsRawContract
 {
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionCheckRegistrationStatusResponse>
      *
@@ -22,6 +26,6 @@ interface ActionsRawContract
      */
     public function checkRegistrationStatus(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

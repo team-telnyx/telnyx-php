@@ -16,6 +16,7 @@ use Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants\AllParticipants;
  *
  * @see Telnyx\Services\Rooms\Sessions\ActionsService::kick()
  *
+ * @phpstan-import-type ParticipantsVariants from \Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants
  * @phpstan-import-type ParticipantsShape from \Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants
  *
  * @phpstan-type ActionKickParamsShape = array{
@@ -39,7 +40,7 @@ final class ActionKickParams implements BaseModel
     /**
      * Either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant.
      *
-     * @var list<string>|value-of<AllParticipants>|null $participants
+     * @var ParticipantsVariants|null $participants
      */
     #[Optional(union: Participants::class)]
     public array|string|null $participants;

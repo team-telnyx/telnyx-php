@@ -40,7 +40,7 @@ use Telnyx\PortingOrders\PortingOrderUpdateParams\Requirement;
  *   misc?: null|PortingOrderMisc|PortingOrderMiscShape,
  *   phoneNumberConfiguration?: null|PortingOrderPhoneNumberConfiguration|PortingOrderPhoneNumberConfigurationShape,
  *   requirementGroupID?: string|null,
- *   requirements?: list<RequirementShape>|null,
+ *   requirements?: list<Requirement|RequirementShape>|null,
  *   userFeedback?: null|PortingOrderUserFeedback|PortingOrderUserFeedbackShape,
  *   webhookURL?: string|null,
  * }
@@ -114,7 +114,7 @@ final class PortingOrderUpdateParams implements BaseModel
      * @param Messaging|MessagingShape|null $messaging
      * @param PortingOrderMisc|PortingOrderMiscShape|null $misc
      * @param PortingOrderPhoneNumberConfiguration|PortingOrderPhoneNumberConfigurationShape|null $phoneNumberConfiguration
-     * @param list<RequirementShape>|null $requirements
+     * @param list<Requirement|RequirementShape>|null $requirements
      * @param PortingOrderUserFeedback|PortingOrderUserFeedbackShape|null $userFeedback
      */
     public static function with(
@@ -250,7 +250,7 @@ final class PortingOrderUpdateParams implements BaseModel
     /**
      * List of requirements for porting numbers.
      *
-     * @param list<RequirementShape> $requirements
+     * @param list<Requirement|RequirementShape> $requirements
      */
     public function withRequirements(array $requirements): self
     {

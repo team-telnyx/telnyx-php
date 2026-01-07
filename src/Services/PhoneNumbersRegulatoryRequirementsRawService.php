@@ -9,9 +9,14 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse;
 use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementRetrieveParams;
+use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementRetrieveParams\Filter;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbersRegulatoryRequirementsRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementRetrieveParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class PhoneNumbersRegulatoryRequirementsRawService implements PhoneNumbersRegulatoryRequirementsRawContract
 {
     // @phpstan-ignore-next-line
@@ -26,8 +31,9 @@ final class PhoneNumbersRegulatoryRequirementsRawService implements PhoneNumbers
      * Retrieve regulatory requirements for a list of phone numbers
      *
      * @param array{
-     *   filter?: array{phoneNumber?: string}
+     *   filter?: Filter|FilterShape
      * }|PhoneNumbersRegulatoryRequirementRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumbersRegulatoryRequirementGetResponse>
      *
@@ -35,7 +41,7 @@ final class PhoneNumbersRegulatoryRequirementsRawService implements PhoneNumbers
      */
     public function retrieve(
         array|PhoneNumbersRegulatoryRequirementRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PhoneNumbersRegulatoryRequirementRetrieveParams::parseRequest(
             $params,

@@ -17,6 +17,7 @@ use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePu
  *
  * @see Telnyx\Services\MobilePushCredentialsService::create()
  *
+ * @phpstan-import-type CreateMobilePushCredentialRequestVariants from \Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest
  * @phpstan-import-type CreateMobilePushCredentialRequestShape from \Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest
  *
  * @phpstan-type MobilePushCredentialCreateParamsShape = array{
@@ -29,6 +30,9 @@ final class MobilePushCredentialCreateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
+    /**
+     * @var CreateMobilePushCredentialRequestVariants $createMobilePushCredentialRequest
+     */
     #[Required(union: CreateMobilePushCredentialRequest::class)]
     public CreateIosPushCredentialRequest|CreateAndroidPushCredentialRequest $createMobilePushCredentialRequest;
 

@@ -16,6 +16,11 @@ use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CustomStorageCredentialsRawContract;
 
+/**
+ * @phpstan-import-type ConfigurationShape from \Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Configuration
+ * @phpstan-import-type ConfigurationShape from \Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Configuration as ConfigurationShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class CustomStorageCredentialsRawService implements CustomStorageCredentialsRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,8 +36,9 @@ final class CustomStorageCredentialsRawService implements CustomStorageCredentia
      *
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control, TeXML) or Sip connection resource
      * @param array{
-     *   backend: 'gcs'|'s3'|'azure'|Backend, configuration: array<string,mixed>
+     *   backend: Backend|value-of<Backend>, configuration: ConfigurationShape
      * }|CustomStorageCredentialCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CustomStorageCredentialNewResponse>
      *
@@ -41,7 +47,7 @@ final class CustomStorageCredentialsRawService implements CustomStorageCredentia
     public function create(
         string $connectionID,
         array|CustomStorageCredentialCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CustomStorageCredentialCreateParams::parseRequest(
             $params,
@@ -64,6 +70,7 @@ final class CustomStorageCredentialsRawService implements CustomStorageCredentia
      * Returns the information about custom storage credentials.
      *
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control, TeXML) or Sip connection resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CustomStorageCredentialGetResponse>
      *
@@ -71,7 +78,7 @@ final class CustomStorageCredentialsRawService implements CustomStorageCredentia
      */
     public function retrieve(
         string $connectionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -89,9 +96,10 @@ final class CustomStorageCredentialsRawService implements CustomStorageCredentia
      *
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control, TeXML) or Sip connection resource
      * @param array{
-     *   backend: 'gcs'|'s3'|'azure'|CustomStorageCredentialUpdateParams\Backend,
-     *   configuration: array<string,mixed>,
+     *   backend: CustomStorageCredentialUpdateParams\Backend|value-of<CustomStorageCredentialUpdateParams\Backend>,
+     *   configuration: ConfigurationShape1,
      * }|CustomStorageCredentialUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CustomStorageCredentialUpdateResponse>
      *
@@ -100,7 +108,7 @@ final class CustomStorageCredentialsRawService implements CustomStorageCredentia
     public function update(
         string $connectionID,
         array|CustomStorageCredentialUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CustomStorageCredentialUpdateParams::parseRequest(
             $params,
@@ -123,6 +131,7 @@ final class CustomStorageCredentialsRawService implements CustomStorageCredentia
      * Deletes a stored custom credentials configuration.
      *
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control, TeXML) or Sip connection resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -130,7 +139,7 @@ final class CustomStorageCredentialsRawService implements CustomStorageCredentia
      */
     public function delete(
         string $connectionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

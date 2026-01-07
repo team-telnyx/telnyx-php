@@ -13,12 +13,16 @@ use Telnyx\MobilePushCredentials\PushCredential;
 use Telnyx\MobilePushCredentials\PushCredentialResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface MobilePushCredentialsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|MobilePushCredentialCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PushCredentialResponse>
      *
@@ -26,13 +30,14 @@ interface MobilePushCredentialsRawContract
      */
     public function create(
         array|MobilePushCredentialCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $pushCredentialID The unique identifier of a mobile push credential
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PushCredentialResponse>
      *
@@ -40,13 +45,14 @@ interface MobilePushCredentialsRawContract
      */
     public function retrieve(
         string $pushCredentialID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|MobilePushCredentialListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PushCredential>>
      *
@@ -54,13 +60,14 @@ interface MobilePushCredentialsRawContract
      */
     public function list(
         array|MobilePushCredentialListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $pushCredentialID The unique identifier of a mobile push credential
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -68,6 +75,6 @@ interface MobilePushCredentialsRawContract
      */
     public function delete(
         string $pushCredentialID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

@@ -11,6 +11,9 @@ use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageParams;
 use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse;
 use Telnyx\Storage\Buckets\Usage\UsageGetBucketUsageResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface UsageRawContract
 {
     /**
@@ -18,6 +21,7 @@ interface UsageRawContract
      *
      * @param string $bucketName The name of the bucket
      * @param array<string,mixed>|UsageGetAPIUsageParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UsageGetAPIUsageResponse>
      *
@@ -26,13 +30,14 @@ interface UsageRawContract
     public function getAPIUsage(
         string $bucketName,
         array|UsageGetAPIUsageParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $bucketName The name of the bucket
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UsageGetBucketUsageResponse>
      *
@@ -40,6 +45,6 @@ interface UsageRawContract
      */
     public function getBucketUsage(
         string $bucketName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

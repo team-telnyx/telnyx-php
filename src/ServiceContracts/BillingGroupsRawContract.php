@@ -17,12 +17,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface BillingGroupsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|BillingGroupCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BillingGroupNewResponse>
      *
@@ -30,13 +34,14 @@ interface BillingGroupsRawContract
      */
     public function create(
         array|BillingGroupCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id The id of the billing group
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BillingGroupGetResponse>
      *
@@ -44,7 +49,7 @@ interface BillingGroupsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -52,6 +57,7 @@ interface BillingGroupsRawContract
      *
      * @param string $id The id of the billing group
      * @param array<string,mixed>|BillingGroupUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BillingGroupUpdateResponse>
      *
@@ -60,13 +66,14 @@ interface BillingGroupsRawContract
     public function update(
         string $id,
         array|BillingGroupUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|BillingGroupListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<BillingGroup>>
      *
@@ -74,13 +81,14 @@ interface BillingGroupsRawContract
      */
     public function list(
         array|BillingGroupListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id The id of the billing group
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BillingGroupDeleteResponse>
      *
@@ -88,6 +96,6 @@ interface BillingGroupsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

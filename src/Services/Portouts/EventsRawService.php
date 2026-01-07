@@ -10,7 +10,8 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\Portouts\Events\EventGetResponse;
 use Telnyx\Portouts\Events\EventListParams;
-use Telnyx\Portouts\Events\EventListParams\Filter\EventType;
+use Telnyx\Portouts\Events\EventListParams\Filter;
+use Telnyx\Portouts\Events\EventListParams\Page;
 use Telnyx\Portouts\Events\EventListResponse;
 use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutFocDateChanged;
 use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutNewComment;
@@ -18,6 +19,11 @@ use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutStatusChanged;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Portouts\EventsRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Portouts\Events\EventListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Portouts\Events\EventListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class EventsRawService implements EventsRawContract
 {
     // @phpstan-ignore-next-line
@@ -32,6 +38,7 @@ final class EventsRawService implements EventsRawContract
      * Show a specific port-out event.
      *
      * @param string $id identifies the port-out event
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<EventGetResponse>
      *
@@ -39,7 +46,7 @@ final class EventsRawService implements EventsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -56,15 +63,9 @@ final class EventsRawService implements EventsRawContract
      * Returns a list of all port-out events.
      *
      * @param array{
-     *   filter?: array{
-     *     createdAt?: array{
-     *       gte?: string|\DateTimeInterface, lte?: string|\DateTimeInterface
-     *     },
-     *     eventType?: 'portout.status_changed'|'portout.new_comment'|'portout.foc_date_changed'|EventType,
-     *     portoutID?: string,
-     *   },
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|EventListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<WebhookPortoutStatusChanged|WebhookPortoutNewComment|WebhookPortoutFocDateChanged,>,>
      *
@@ -72,7 +73,7 @@ final class EventsRawService implements EventsRawContract
      */
     public function list(
         array|EventListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = EventListParams::parseRequest(
             $params,
@@ -96,6 +97,7 @@ final class EventsRawService implements EventsRawContract
      * Republish a specific port-out event.
      *
      * @param string $id identifies the port-out event
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -103,7 +105,7 @@ final class EventsRawService implements EventsRawContract
      */
     public function republish(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

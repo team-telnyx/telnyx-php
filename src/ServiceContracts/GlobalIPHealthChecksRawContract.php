@@ -15,12 +15,16 @@ use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface GlobalIPHealthChecksRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|GlobalIPHealthCheckCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<GlobalIPHealthCheckNewResponse>
      *
@@ -28,13 +32,14 @@ interface GlobalIPHealthChecksRawContract
      */
     public function create(
         array|GlobalIPHealthCheckCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<GlobalIPHealthCheckGetResponse>
      *
@@ -42,13 +47,14 @@ interface GlobalIPHealthChecksRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|GlobalIPHealthCheckListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<GlobalIPHealthCheckListResponse>>
      *
@@ -56,13 +62,14 @@ interface GlobalIPHealthChecksRawContract
      */
     public function list(
         array|GlobalIPHealthCheckListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<GlobalIPHealthCheckDeleteResponse>
      *
@@ -70,6 +77,6 @@ interface GlobalIPHealthChecksRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

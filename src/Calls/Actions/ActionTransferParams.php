@@ -52,7 +52,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   audioURL?: string|null,
  *   clientState?: string|null,
  *   commandID?: string|null,
- *   customHeaders?: list<CustomSipHeaderShape>|null,
+ *   customHeaders?: list<CustomSipHeader|CustomSipHeaderShape>|null,
  *   earlyMedia?: bool|null,
  *   from?: string|null,
  *   fromDisplayName?: string|null,
@@ -70,7 +70,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   recordTrim?: null|RecordTrim|value-of<RecordTrim>,
  *   sipAuthPassword?: string|null,
  *   sipAuthUsername?: string|null,
- *   sipHeaders?: list<SipHeaderShape>|null,
+ *   sipHeaders?: list<SipHeader|SipHeaderShape>|null,
  *   sipRegion?: null|SipRegion|value-of<SipRegion>,
  *   sipTransportProtocol?: null|SipTransportProtocol|value-of<SipTransportProtocol>,
  *   soundModifications?: null|SoundModifications|SoundModificationsShape,
@@ -340,7 +340,7 @@ final class ActionTransferParams implements BaseModel
      *
      * @param AnsweringMachineDetection|value-of<AnsweringMachineDetection>|null $answeringMachineDetection
      * @param AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape|null $answeringMachineDetectionConfig
-     * @param list<CustomSipHeaderShape>|null $customHeaders
+     * @param list<CustomSipHeader|CustomSipHeaderShape>|null $customHeaders
      * @param MediaEncryption|value-of<MediaEncryption>|null $mediaEncryption
      * @param MuteDtmf|value-of<MuteDtmf>|null $muteDtmf
      * @param Record|value-of<Record>|null $record
@@ -348,7 +348,7 @@ final class ActionTransferParams implements BaseModel
      * @param RecordFormat|value-of<RecordFormat>|null $recordFormat
      * @param RecordTrack|value-of<RecordTrack>|null $recordTrack
      * @param RecordTrim|value-of<RecordTrim>|null $recordTrim
-     * @param list<SipHeaderShape>|null $sipHeaders
+     * @param list<SipHeader|SipHeaderShape>|null $sipHeaders
      * @param SipRegion|value-of<SipRegion>|null $sipRegion
      * @param SipTransportProtocol|value-of<SipTransportProtocol>|null $sipTransportProtocol
      * @param SoundModifications|SoundModificationsShape|null $soundModifications
@@ -504,7 +504,7 @@ final class ActionTransferParams implements BaseModel
     /**
      * Custom headers to be added to the SIP INVITE.
      *
-     * @param list<CustomSipHeaderShape> $customHeaders
+     * @param list<CustomSipHeader|CustomSipHeaderShape> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {
@@ -720,7 +720,7 @@ final class ActionTransferParams implements BaseModel
     /**
      * SIP headers to be added to the SIP INVITE. Currently only User-to-User header is supported.
      *
-     * @param list<SipHeaderShape> $sipHeaders
+     * @param list<SipHeader|SipHeaderShape> $sipHeaders
      */
     public function withSipHeaders(array $sipHeaders): self
     {

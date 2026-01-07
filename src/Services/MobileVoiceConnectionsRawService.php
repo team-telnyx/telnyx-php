@@ -11,6 +11,8 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnection;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams;
+use Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams\Inbound;
+use Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams\Outbound;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams\WebhookAPIVersion;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionDeleteResponse;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionGetResponse;
@@ -21,6 +23,13 @@ use Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MobileVoiceConnectionsRawContract;
 
+/**
+ * @phpstan-import-type InboundShape from \Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams\Inbound
+ * @phpstan-import-type OutboundShape from \Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams\Outbound
+ * @phpstan-import-type InboundShape from \Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams\Inbound as InboundShape1
+ * @phpstan-import-type OutboundShape from \Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams\Outbound as OutboundShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MobileVoiceConnectionsRawService implements MobileVoiceConnectionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -37,14 +46,15 @@ final class MobileVoiceConnectionsRawService implements MobileVoiceConnectionsRa
      * @param array{
      *   active?: bool,
      *   connectionName?: string,
-     *   inbound?: array{channelLimit?: int},
-     *   outbound?: array{channelLimit?: int, outboundVoiceProfileID?: string},
+     *   inbound?: Inbound|InboundShape,
+     *   outbound?: Outbound|OutboundShape,
      *   tags?: list<string>,
-     *   webhookAPIVersion?: '1'|'2'|WebhookAPIVersion,
+     *   webhookAPIVersion?: WebhookAPIVersion|value-of<WebhookAPIVersion>,
      *   webhookEventFailoverURL?: string|null,
      *   webhookEventURL?: string|null,
      *   webhookTimeoutSecs?: int|null,
      * }|MobileVoiceConnectionCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MobileVoiceConnectionNewResponse>
      *
@@ -52,7 +62,7 @@ final class MobileVoiceConnectionsRawService implements MobileVoiceConnectionsRa
      */
     public function create(
         array|MobileVoiceConnectionCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MobileVoiceConnectionCreateParams::parseRequest(
             $params,
@@ -75,6 +85,7 @@ final class MobileVoiceConnectionsRawService implements MobileVoiceConnectionsRa
      * Retrieve a Mobile Voice Connection
      *
      * @param string $id The ID of the mobile voice connection
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MobileVoiceConnectionGetResponse>
      *
@@ -82,7 +93,7 @@ final class MobileVoiceConnectionsRawService implements MobileVoiceConnectionsRa
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -102,14 +113,15 @@ final class MobileVoiceConnectionsRawService implements MobileVoiceConnectionsRa
      * @param array{
      *   active?: bool,
      *   connectionName?: string,
-     *   inbound?: array{channelLimit?: int},
-     *   outbound?: array{channelLimit?: int, outboundVoiceProfileID?: string},
+     *   inbound?: MobileVoiceConnectionUpdateParams\Inbound|InboundShape1,
+     *   outbound?: MobileVoiceConnectionUpdateParams\Outbound|OutboundShape1,
      *   tags?: list<string>,
-     *   webhookAPIVersion?: '1'|'2'|MobileVoiceConnectionUpdateParams\WebhookAPIVersion,
+     *   webhookAPIVersion?: MobileVoiceConnectionUpdateParams\WebhookAPIVersion|value-of<MobileVoiceConnectionUpdateParams\WebhookAPIVersion>,
      *   webhookEventFailoverURL?: string|null,
      *   webhookEventURL?: string|null,
      *   webhookTimeoutSecs?: int,
      * }|MobileVoiceConnectionUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MobileVoiceConnectionUpdateResponse>
      *
@@ -118,7 +130,7 @@ final class MobileVoiceConnectionsRawService implements MobileVoiceConnectionsRa
     public function update(
         string $id,
         array|MobileVoiceConnectionUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MobileVoiceConnectionUpdateParams::parseRequest(
             $params,
@@ -146,6 +158,7 @@ final class MobileVoiceConnectionsRawService implements MobileVoiceConnectionsRa
      *   pageSize?: int,
      *   sort?: string,
      * }|MobileVoiceConnectionListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<MobileVoiceConnection>>
      *
@@ -153,7 +166,7 @@ final class MobileVoiceConnectionsRawService implements MobileVoiceConnectionsRa
      */
     public function list(
         array|MobileVoiceConnectionListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MobileVoiceConnectionListParams::parseRequest(
             $params,
@@ -184,6 +197,7 @@ final class MobileVoiceConnectionsRawService implements MobileVoiceConnectionsRa
      * Delete a Mobile Voice Connection
      *
      * @param string $id The ID of the mobile voice connection
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MobileVoiceConnectionDeleteResponse>
      *
@@ -191,7 +205,7 @@ final class MobileVoiceConnectionsRawService implements MobileVoiceConnectionsRa
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

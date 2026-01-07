@@ -13,6 +13,9 @@ use Telnyx\Networks\DefaultGateway\DefaultGatewayNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Networks\DefaultGatewayContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class DefaultGatewayService implements DefaultGatewayContract
 {
     /**
@@ -35,13 +38,14 @@ final class DefaultGatewayService implements DefaultGatewayContract
      *
      * @param string $networkIdentifier identifies the resource
      * @param string $wireguardPeerID wireguard peer ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $networkIdentifier,
         ?string $wireguardPeerID = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultGatewayNewResponse {
         $params = Util::removeNulls(['wireguardPeerID' => $wireguardPeerID]);
 
@@ -57,12 +61,13 @@ final class DefaultGatewayService implements DefaultGatewayContract
      * Get Default Gateway status.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): DefaultGatewayGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -76,12 +81,13 @@ final class DefaultGatewayService implements DefaultGatewayContract
      * Delete Default Gateway.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): DefaultGatewayDeleteResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, requestOptions: $requestOptions);

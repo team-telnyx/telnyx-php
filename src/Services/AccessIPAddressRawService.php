@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\AccessIPAddress\AccessIPAddressCreateParams;
 use Telnyx\AccessIPAddress\AccessIPAddressListParams;
+use Telnyx\AccessIPAddress\AccessIPAddressListParams\Filter;
 use Telnyx\AccessIPAddress\AccessIPAddressResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
@@ -15,6 +16,10 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AccessIPAddressRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\AccessIPAddress\AccessIPAddressListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AccessIPAddressRawService implements AccessIPAddressRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,6 +36,7 @@ final class AccessIPAddressRawService implements AccessIPAddressRawContract
      * @param array{
      *   ipAddress: string, description?: string
      * }|AccessIPAddressCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AccessIPAddressResponse>
      *
@@ -38,7 +44,7 @@ final class AccessIPAddressRawService implements AccessIPAddressRawContract
      */
     public function create(
         array|AccessIPAddressCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AccessIPAddressCreateParams::parseRequest(
             $params,
@@ -60,13 +66,15 @@ final class AccessIPAddressRawService implements AccessIPAddressRawContract
      *
      * Retrieve an access IP address
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<AccessIPAddressResponse>
      *
      * @throws APIException
      */
     public function retrieve(
         string $accessIPAddressID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -83,19 +91,9 @@ final class AccessIPAddressRawService implements AccessIPAddressRawContract
      * List all Access IP Addresses
      *
      * @param array{
-     *   filter?: array{
-     *     createdAt?: string|\DateTimeInterface|array{
-     *       gt?: string|\DateTimeInterface,
-     *       gte?: string|\DateTimeInterface,
-     *       lt?: string|\DateTimeInterface,
-     *       lte?: string|\DateTimeInterface,
-     *     },
-     *     ipAddress?: string,
-     *     ipSource?: string,
-     *   },
-     *   pageNumber?: int,
-     *   pageSize?: int,
+     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
      * }|AccessIPAddressListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<AccessIPAddressResponse>>
      *
@@ -103,7 +101,7 @@ final class AccessIPAddressRawService implements AccessIPAddressRawContract
      */
     public function list(
         array|AccessIPAddressListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AccessIPAddressListParams::parseRequest(
             $params,
@@ -129,13 +127,15 @@ final class AccessIPAddressRawService implements AccessIPAddressRawContract
      *
      * Delete access IP address
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<AccessIPAddressResponse>
      *
      * @throws APIException
      */
     public function delete(
         string $accessIPAddressID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

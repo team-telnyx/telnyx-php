@@ -11,10 +11,17 @@ use Telnyx\DefaultPagination;
 use Telnyx\Recordings\RecordingDeleteResponse;
 use Telnyx\Recordings\RecordingGetResponse;
 use Telnyx\Recordings\RecordingListParams;
+use Telnyx\Recordings\RecordingListParams\Filter;
+use Telnyx\Recordings\RecordingListParams\Page;
 use Telnyx\Recordings\RecordingResponseData;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\RecordingsRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Recordings\RecordingListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Recordings\RecordingListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class RecordingsRawService implements RecordingsRawContract
 {
     // @phpstan-ignore-next-line
@@ -29,6 +36,7 @@ final class RecordingsRawService implements RecordingsRawContract
      * Retrieves the details of an existing call recording.
      *
      * @param string $recordingID uniquely identifies the recording by id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RecordingGetResponse>
      *
@@ -36,7 +44,7 @@ final class RecordingsRawService implements RecordingsRawContract
      */
     public function retrieve(
         string $recordingID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -53,18 +61,9 @@ final class RecordingsRawService implements RecordingsRawContract
      * Returns a list of your call recordings.
      *
      * @param array{
-     *   filter?: array{
-     *     callLegID?: string,
-     *     callSessionID?: string,
-     *     conferenceID?: string,
-     *     connectionID?: string,
-     *     createdAt?: array{gte?: string, lte?: string},
-     *     from?: string,
-     *     sipCallID?: string,
-     *     to?: string,
-     *   },
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|RecordingListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<RecordingResponseData>>
      *
@@ -72,7 +71,7 @@ final class RecordingsRawService implements RecordingsRawContract
      */
     public function list(
         array|RecordingListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RecordingListParams::parseRequest(
             $params,
@@ -96,6 +95,7 @@ final class RecordingsRawService implements RecordingsRawContract
      * Permanently deletes a call recording.
      *
      * @param string $recordingID uniquely identifies the recording by id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RecordingDeleteResponse>
      *
@@ -103,7 +103,7 @@ final class RecordingsRawService implements RecordingsRawContract
      */
     public function delete(
         string $recordingID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

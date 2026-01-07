@@ -15,6 +15,9 @@ use Telnyx\TextToSpeech\TextToSpeechListVoicesParams;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesParams\Provider;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class TextToSpeechRawService implements TextToSpeechRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,6 +34,7 @@ final class TextToSpeechRawService implements TextToSpeechRawContract
      * @param array{
      *   text: string, voice: string
      * }|TextToSpeechGenerateSpeechParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
      *
@@ -38,7 +42,7 @@ final class TextToSpeechRawService implements TextToSpeechRawContract
      */
     public function generateSpeech(
         array|TextToSpeechGenerateSpeechParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TextToSpeechGenerateSpeechParams::parseRequest(
             $params,
@@ -62,9 +66,9 @@ final class TextToSpeechRawService implements TextToSpeechRawContract
      * Returns a list of voices that can be used with the text to speech commands.
      *
      * @param array{
-     *   elevenlabsAPIKeyRef?: string,
-     *   provider?: 'aws'|'azure'|'elevenlabs'|'telnyx'|Provider,
+     *   elevenlabsAPIKeyRef?: string, provider?: Provider|value-of<Provider>
      * }|TextToSpeechListVoicesParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TextToSpeechListVoicesResponse>
      *
@@ -72,7 +76,7 @@ final class TextToSpeechRawService implements TextToSpeechRawContract
      */
     public function listVoices(
         array|TextToSpeechListVoicesParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TextToSpeechListVoicesParams::parseRequest(
             $params,

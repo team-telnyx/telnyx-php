@@ -17,6 +17,9 @@ use Telnyx\UsageReports\UsageReportGetOptionsResponse;
 use Telnyx\UsageReports\UsageReportListParams;
 use Telnyx\UsageReports\UsageReportListParams\Format;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class UsageReportsRawService implements UsageReportsRawContract
 {
     // @phpstan-ignore-next-line
@@ -37,7 +40,7 @@ final class UsageReportsRawService implements UsageReportsRawContract
      *   dateRange?: string,
      *   endDate?: string,
      *   filter?: string,
-     *   format?: 'csv'|'json'|Format,
+     *   format?: Format|value-of<Format>,
      *   managedAccounts?: bool,
      *   pageNumber?: int,
      *   pageSize?: int,
@@ -45,6 +48,7 @@ final class UsageReportsRawService implements UsageReportsRawContract
      *   startDate?: string,
      *   authorizationBearer?: string,
      * }|UsageReportListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<array<string,mixed>>>
      *
@@ -52,7 +56,7 @@ final class UsageReportsRawService implements UsageReportsRawContract
      */
     public function list(
         array|UsageReportListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = UsageReportListParams::parseRequest(
             $params,
@@ -111,6 +115,7 @@ final class UsageReportsRawService implements UsageReportsRawContract
      * @param array{
      *   product?: string, authorizationBearer?: string
      * }|UsageReportGetOptionsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UsageReportGetOptionsResponse>
      *
@@ -118,7 +123,7 @@ final class UsageReportsRawService implements UsageReportsRawContract
      */
     public function getOptions(
         array|UsageReportGetOptionsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = UsageReportGetOptionsParams::parseRequest(
             $params,

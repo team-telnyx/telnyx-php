@@ -10,24 +10,29 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface InsightGroupsContract
 {
     /**
      * @api
      *
      * @param string $groupID The ID of the insight group
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $groupID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): InsightTemplateGroupDetail;
 
     /**
      * @api
      *
      * @param string $groupID The ID of the insight group
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -36,23 +41,26 @@ interface InsightGroupsContract
         ?string $description = null,
         ?string $name = null,
         ?string $webhook = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): InsightTemplateGroupDetail;
 
     /**
      * @api
      *
      * @param string $groupID The ID of the insight group
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $groupID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -60,11 +68,13 @@ interface InsightGroupsContract
         string $name,
         ?string $description = null,
         string $webhook = '',
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): InsightTemplateGroupDetail;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<InsightTemplateGroup>
      *
@@ -73,6 +83,6 @@ interface InsightGroupsContract
     public function retrieveInsightGroups(
         ?int $pageNumber = null,
         ?int $pageSize = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination;
 }

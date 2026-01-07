@@ -14,6 +14,9 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\InsightGroupsContract;
 use Telnyx\Services\AI\Conversations\InsightGroups\InsightsService;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class InsightGroupsService implements InsightGroupsContract
 {
     /**
@@ -41,12 +44,13 @@ final class InsightGroupsService implements InsightGroupsContract
      * Get insight group by ID
      *
      * @param string $groupID The ID of the insight group
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $groupID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): InsightTemplateGroupDetail {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($groupID, requestOptions: $requestOptions);
@@ -60,6 +64,7 @@ final class InsightGroupsService implements InsightGroupsContract
      * Update an insight template group
      *
      * @param string $groupID The ID of the insight group
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -68,7 +73,7 @@ final class InsightGroupsService implements InsightGroupsContract
         ?string $description = null,
         ?string $name = null,
         ?string $webhook = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): InsightTemplateGroupDetail {
         $params = Util::removeNulls(
             ['description' => $description, 'name' => $name, 'webhook' => $webhook]
@@ -86,12 +91,13 @@ final class InsightGroupsService implements InsightGroupsContract
      * Delete insight group by ID
      *
      * @param string $groupID The ID of the insight group
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $groupID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($groupID, requestOptions: $requestOptions);
@@ -104,13 +110,15 @@ final class InsightGroupsService implements InsightGroupsContract
      *
      * Create a new insight group
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function insightGroups(
         string $name,
         ?string $description = null,
         string $webhook = '',
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): InsightTemplateGroupDetail {
         $params = Util::removeNulls(
             ['name' => $name, 'description' => $description, 'webhook' => $webhook]
@@ -127,6 +135,8 @@ final class InsightGroupsService implements InsightGroupsContract
      *
      * Get all insight groups
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return DefaultFlatPagination<InsightTemplateGroup>
      *
      * @throws APIException
@@ -134,7 +144,7 @@ final class InsightGroupsService implements InsightGroupsContract
     public function retrieveInsightGroups(
         ?int $pageNumber = null,
         ?int $pageSize = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
         $params = Util::removeNulls(
             ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]

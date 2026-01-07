@@ -20,7 +20,7 @@ use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse\Transcription;
  *   pageSize?: int|null,
  *   previousPageUri?: string|null,
  *   start?: int|null,
- *   transcriptions?: list<TranscriptionShape>|null,
+ *   transcriptions?: list<Transcription|TranscriptionShape>|null,
  *   uri?: string|null,
  * }
  */
@@ -91,7 +91,7 @@ final class AccountGetTranscriptionsJsonResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TranscriptionShape>|null $transcriptions
+     * @param list<Transcription|TranscriptionShape>|null $transcriptions
      */
     public static function with(
         ?int $end = null,
@@ -197,7 +197,7 @@ final class AccountGetTranscriptionsJsonResponse implements BaseModel
     }
 
     /**
-     * @param list<TranscriptionShape> $transcriptions
+     * @param list<Transcription|TranscriptionShape> $transcriptions
      */
     public function withTranscriptions(array $transcriptions): self
     {

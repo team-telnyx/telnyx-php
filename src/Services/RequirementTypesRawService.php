@@ -10,10 +10,15 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\RequirementTypes\RequirementTypeGetResponse;
 use Telnyx\RequirementTypes\RequirementTypeListParams;
+use Telnyx\RequirementTypes\RequirementTypeListParams\Filter;
 use Telnyx\RequirementTypes\RequirementTypeListParams\Sort;
 use Telnyx\RequirementTypes\RequirementTypeListResponse;
 use Telnyx\ServiceContracts\RequirementTypesRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\RequirementTypes\RequirementTypeListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class RequirementTypesRawService implements RequirementTypesRawContract
 {
     // @phpstan-ignore-next-line
@@ -28,6 +33,7 @@ final class RequirementTypesRawService implements RequirementTypesRawContract
      * Retrieve a requirement type by id
      *
      * @param string $id Uniquely identifies the requirement_type record
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RequirementTypeGetResponse>
      *
@@ -35,7 +41,7 @@ final class RequirementTypesRawService implements RequirementTypesRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -52,9 +58,9 @@ final class RequirementTypesRawService implements RequirementTypesRawContract
      * List all requirement types ordered by created_at descending
      *
      * @param array{
-     *   filter?: array{name?: array{contains?: string}},
-     *   sort?: list<'name'|'created_at'|'updated_at'|'-name'|'-created_at'|'-updated_at'|Sort>,
+     *   filter?: Filter|FilterShape, sort?: list<Sort|value-of<Sort>>
      * }|RequirementTypeListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RequirementTypeListResponse>
      *
@@ -62,7 +68,7 @@ final class RequirementTypesRawService implements RequirementTypesRawContract
      */
     public function list(
         array|RequirementTypeListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RequirementTypeListParams::parseRequest(
             $params,

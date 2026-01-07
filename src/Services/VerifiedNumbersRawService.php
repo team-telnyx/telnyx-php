@@ -18,6 +18,9 @@ use Telnyx\VerifiedNumbers\VerifiedNumberDataWrapper;
 use Telnyx\VerifiedNumbers\VerifiedNumberListParams;
 use Telnyx\VerifiedNumbers\VerifiedNumberNewResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class VerifiedNumbersRawService implements VerifiedNumbersRawContract
 {
     // @phpstan-ignore-next-line
@@ -33,9 +36,10 @@ final class VerifiedNumbersRawService implements VerifiedNumbersRawContract
      *
      * @param array{
      *   phoneNumber: string,
-     *   verificationMethod: 'sms'|'call'|VerificationMethod,
+     *   verificationMethod: VerificationMethod|value-of<VerificationMethod>,
      *   extension?: string,
      * }|VerifiedNumberCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VerifiedNumberNewResponse>
      *
@@ -43,7 +47,7 @@ final class VerifiedNumbersRawService implements VerifiedNumbersRawContract
      */
     public function create(
         array|VerifiedNumberCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = VerifiedNumberCreateParams::parseRequest(
             $params,
@@ -66,6 +70,7 @@ final class VerifiedNumbersRawService implements VerifiedNumbersRawContract
      * Retrieve a verified number
      *
      * @param string $phoneNumber +E164 formatted phone number
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VerifiedNumberDataWrapper>
      *
@@ -73,7 +78,7 @@ final class VerifiedNumbersRawService implements VerifiedNumbersRawContract
      */
     public function retrieve(
         string $phoneNumber,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -90,6 +95,7 @@ final class VerifiedNumbersRawService implements VerifiedNumbersRawContract
      * Gets a paginated list of Verified Numbers.
      *
      * @param array{pageNumber?: int, pageSize?: int}|VerifiedNumberListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<VerifiedNumber>>
      *
@@ -97,7 +103,7 @@ final class VerifiedNumbersRawService implements VerifiedNumbersRawContract
      */
     public function list(
         array|VerifiedNumberListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = VerifiedNumberListParams::parseRequest(
             $params,
@@ -124,6 +130,7 @@ final class VerifiedNumbersRawService implements VerifiedNumbersRawContract
      * Delete a verified number
      *
      * @param string $phoneNumber +E164 formatted phone number
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VerifiedNumberDataWrapper>
      *
@@ -131,7 +138,7 @@ final class VerifiedNumbersRawService implements VerifiedNumbersRawContract
      */
     public function delete(
         string $phoneNumber,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

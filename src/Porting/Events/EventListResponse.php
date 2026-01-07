@@ -22,7 +22,8 @@ use Telnyx\Porting\Events\EventListResponse\PortingEventWithoutWebhook;
  * @phpstan-import-type PortingEventSplitEventShape from \Telnyx\Porting\Events\EventListResponse\PortingEventSplitEvent
  * @phpstan-import-type PortingEventWithoutWebhookShape from \Telnyx\Porting\Events\EventListResponse\PortingEventWithoutWebhook
  *
- * @phpstan-type EventListResponseShape = PortingEventDeletedPayloadShape|PortingEventMessagingChangedPayloadShape|PortingEventStatusChangedEventShape|PortingEventNewCommentEventShape|PortingEventSplitEventShape|PortingEventWithoutWebhookShape
+ * @phpstan-type EventListResponseVariants = PortingEventDeletedPayload|PortingEventMessagingChangedPayload|PortingEventStatusChangedEvent|PortingEventNewCommentEvent|PortingEventSplitEvent|PortingEventWithoutWebhook
+ * @phpstan-type EventListResponseShape = EventListResponseVariants|PortingEventDeletedPayloadShape|PortingEventMessagingChangedPayloadShape|PortingEventStatusChangedEventShape|PortingEventNewCommentEventShape|PortingEventSplitEventShape|PortingEventWithoutWebhookShape
  */
 final class EventListResponse implements ConverterSource
 {

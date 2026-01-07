@@ -11,12 +11,16 @@ use Telnyx\NotificationEvents\NotificationEventListParams;
 use Telnyx\NotificationEvents\NotificationEventListResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface NotificationEventsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|NotificationEventListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<NotificationEventListResponse>>
      *
@@ -24,6 +28,6 @@ interface NotificationEventsRawContract
      */
     public function list(
         array|NotificationEventListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

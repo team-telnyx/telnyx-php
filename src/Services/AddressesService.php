@@ -7,6 +7,8 @@ namespace Telnyx\Services;
 use Telnyx\Addresses\Address;
 use Telnyx\Addresses\AddressDeleteResponse;
 use Telnyx\Addresses\AddressGetResponse;
+use Telnyx\Addresses\AddressListParams\Filter;
+use Telnyx\Addresses\AddressListParams\Page;
 use Telnyx\Addresses\AddressListParams\Sort;
 use Telnyx\Addresses\AddressNewResponse;
 use Telnyx\Client;
@@ -17,6 +19,11 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AddressesContract;
 use Telnyx\Services\Addresses\ActionsService;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Addresses\AddressListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Addresses\AddressListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AddressesService implements AddressesContract
 {
     /**
@@ -58,6 +65,7 @@ final class AddressesService implements AddressesContract
      * @param string $phoneNumber the phone number associated with the address
      * @param string $postalCode the postal code of the address
      * @param bool $validateAddress Indicates whether or not the address should be validated for emergency use upon creation or not. This should be left with the default value of `true` unless you have used the `/addresses/actions/validate` endpoint to validate the address separately prior to creation. If an address is not validated for emergency use upon creation and it is not valid, it will not be able to be used for emergency services.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -77,7 +85,7 @@ final class AddressesService implements AddressesContract
         ?string $phoneNumber = null,
         ?string $postalCode = null,
         bool $validateAddress = true,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AddressNewResponse {
         $params = Util::removeNulls(
             [
@@ -111,12 +119,13 @@ final class AddressesService implements AddressesContract
      * Retrieves the details of an existing address.
      *
      * @param string $id address ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AddressGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -129,16 +138,9 @@ final class AddressesService implements AddressesContract
      *
      * Returns a list of your addresses.
      *
-     * @param array{
-     *   addressBook?: array{eq?: string},
-     *   customerReference?: string|array{contains?: string, eq?: string},
-     *   streetAddress?: array{contains?: string},
-     *   usedAsEmergency?: string,
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[customer_reference][eq], filter[customer_reference][contains], filter[used_as_emergency], filter[street_address][contains], filter[address_book][eq]
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
-     * @param 'created_at'|'first_name'|'last_name'|'business_name'|'street_address'|Sort $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[customer_reference][eq], filter[customer_reference][contains], filter[used_as_emergency], filter[street_address][contains], filter[address_book][eq]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
      * That is: <ul>
      *   <li>
      *     <code>street_address</code>: sorts the result by the
@@ -150,16 +152,17 @@ final class AddressesService implements AddressesContract
      *     <code>street_address</code> field in descending order.
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<Address>
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
-        ?array $page = null,
-        string|Sort $sort = 'created_at',
-        ?RequestOptions $requestOptions = null,
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        Sort|string $sort = 'created_at',
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination {
         $params = Util::removeNulls(
             ['filter' => $filter, 'page' => $page, 'sort' => $sort]
@@ -177,12 +180,13 @@ final class AddressesService implements AddressesContract
      * Deletes an existing address.
      *
      * @param string $id address ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AddressDeleteResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, requestOptions: $requestOptions);

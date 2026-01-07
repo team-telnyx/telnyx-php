@@ -14,12 +14,16 @@ use Telnyx\Faxes\FaxListParams;
 use Telnyx\Faxes\FaxNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface FaxesRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|FaxCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FaxNewResponse>
      *
@@ -27,13 +31,14 @@ interface FaxesRawContract
      */
     public function create(
         array|FaxCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id the unique identifier of a fax
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FaxGetResponse>
      *
@@ -41,13 +46,14 @@ interface FaxesRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|FaxListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<Fax>>
      *
@@ -55,13 +61,14 @@ interface FaxesRawContract
      */
     public function list(
         array|FaxListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id the unique identifier of a fax
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -69,6 +76,6 @@ interface FaxesRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

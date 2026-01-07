@@ -10,12 +10,16 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ChargesBreakdownRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|ChargesBreakdownRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ChargesBreakdownGetResponse>
      *
@@ -23,6 +27,6 @@ interface ChargesBreakdownRawContract
      */
     public function retrieve(
         array|ChargesBreakdownRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

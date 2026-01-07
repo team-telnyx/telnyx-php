@@ -8,14 +8,15 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\InventoryCoverage\InventoryCoverageListParams;
-use Telnyx\InventoryCoverage\InventoryCoverageListParams\Filter\CountryCode;
-use Telnyx\InventoryCoverage\InventoryCoverageListParams\Filter\Feature;
-use Telnyx\InventoryCoverage\InventoryCoverageListParams\Filter\GroupBy;
-use Telnyx\InventoryCoverage\InventoryCoverageListParams\Filter\PhoneNumberType;
+use Telnyx\InventoryCoverage\InventoryCoverageListParams\Filter;
 use Telnyx\InventoryCoverage\InventoryCoverageListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\InventoryCoverageRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\InventoryCoverage\InventoryCoverageListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class InventoryCoverageRawService implements InventoryCoverageRawContract
 {
     // @phpstan-ignore-next-line
@@ -29,18 +30,8 @@ final class InventoryCoverageRawService implements InventoryCoverageRawContract
      *
      * Creates an inventory coverage request. If locality, npa or national_destination_code is used in groupBy, and no region or locality filters are used, the whole paginated set is returned.
      *
-     * @param array{
-     *   filter?: array{
-     *     administrativeArea?: string,
-     *     count?: bool,
-     *     countryCode?: 'AT'|'AU'|'BE'|'BG'|'CA'|'CH'|'CN'|'CY'|'CZ'|'DE'|'DK'|'EE'|'ES'|'FI'|'FR'|'GB'|'GR'|'HU'|'HR'|'IE'|'IT'|'LT'|'LU'|'LV'|'NL'|'NZ'|'MX'|'NO'|'PL'|'PT'|'RO'|'SE'|'SG'|'SI'|'SK'|'US'|CountryCode,
-     *     features?: list<'sms'|'mms'|'voice'|'fax'|'emergency'|Feature>,
-     *     groupBy?: 'locality'|'npa'|'national_destination_code'|GroupBy,
-     *     npa?: int,
-     *     nxx?: int,
-     *     phoneNumberType?: 'local'|'toll_free'|'national'|'mobile'|'landline'|'shared_cost'|PhoneNumberType,
-     *   },
-     * }|InventoryCoverageListParams $params
+     * @param array{filter?: Filter|FilterShape}|InventoryCoverageListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InventoryCoverageListResponse>
      *
@@ -48,7 +39,7 @@ final class InventoryCoverageRawService implements InventoryCoverageRawContract
      */
     public function list(
         array|InventoryCoverageListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = InventoryCoverageListParams::parseRequest(
             $params,

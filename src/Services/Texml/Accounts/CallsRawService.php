@@ -12,6 +12,7 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\CallsRawContract;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\AsyncAmdStatusCallbackMethod;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\CustomHeader;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\DetectionMode;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\MachineDetection;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingChannels;
@@ -42,6 +43,10 @@ use Telnyx\Texml\Accounts\Calls\CallUpdateParams\Method;
 use Telnyx\Texml\Accounts\Calls\CallUpdateParams\StatusCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallUpdateResponse;
 
+/**
+ * @phpstan-import-type CustomHeaderShape from \Telnyx\Texml\Accounts\Calls\CallCallsParams\CustomHeader
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class CallsRawService implements CallsRawContract
 {
     // @phpstan-ignore-next-line
@@ -57,6 +62,7 @@ final class CallsRawService implements CallsRawContract
      *
      * @param string $callSid the CallSid that identifies the call to update
      * @param array{accountSid: string}|CallRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallGetResponse>
      *
@@ -65,7 +71,7 @@ final class CallsRawService implements CallsRawContract
     public function retrieve(
         string $callSid,
         array|CallRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CallRetrieveParams::parseRequest(
             $params,
@@ -91,15 +97,16 @@ final class CallsRawService implements CallsRawContract
      * @param string $callSid path param: The CallSid that identifies the call to update
      * @param array{
      *   accountSid: string,
-     *   fallbackMethod?: 'GET'|'POST'|FallbackMethod,
+     *   fallbackMethod?: FallbackMethod|value-of<FallbackMethod>,
      *   fallbackURL?: string,
-     *   method?: 'GET'|'POST'|Method,
+     *   method?: Method|value-of<Method>,
      *   status?: string,
      *   statusCallback?: string,
-     *   statusCallbackMethod?: 'GET'|'POST'|StatusCallbackMethod,
+     *   statusCallbackMethod?: StatusCallbackMethod|value-of<StatusCallbackMethod>,
      *   texml?: string,
      *   url?: string,
      * }|CallUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallUpdateResponse>
      *
@@ -108,7 +115,7 @@ final class CallsRawService implements CallsRawContract
     public function update(
         string $callSid,
         array|CallUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CallUpdateParams::parseRequest(
             $params,
@@ -140,39 +147,40 @@ final class CallsRawService implements CallsRawContract
      *   to: string,
      *   asyncAmd?: bool,
      *   asyncAmdStatusCallback?: string,
-     *   asyncAmdStatusCallbackMethod?: 'GET'|'POST'|AsyncAmdStatusCallbackMethod,
+     *   asyncAmdStatusCallbackMethod?: AsyncAmdStatusCallbackMethod|value-of<AsyncAmdStatusCallbackMethod>,
      *   callerID?: string,
      *   cancelPlaybackOnDetectMessageEnd?: bool,
      *   cancelPlaybackOnMachineDetection?: bool,
-     *   customHeaders?: list<array{name: string, value: string}>,
-     *   detectionMode?: 'Premium'|'Regular'|DetectionMode,
+     *   customHeaders?: list<CustomHeader|CustomHeaderShape>,
+     *   detectionMode?: DetectionMode|value-of<DetectionMode>,
      *   fallbackURL?: string,
-     *   machineDetection?: 'Enable'|'Disable'|'DetectMessageEnd'|MachineDetection,
+     *   machineDetection?: MachineDetection|value-of<MachineDetection>,
      *   machineDetectionSilenceTimeout?: int,
      *   machineDetectionSpeechEndThreshold?: int,
      *   machineDetectionSpeechThreshold?: int,
      *   machineDetectionTimeout?: int,
      *   preferredCodecs?: string,
      *   record?: bool,
-     *   recordingChannels?: 'mono'|'dual'|RecordingChannels,
+     *   recordingChannels?: RecordingChannels|value-of<RecordingChannels>,
      *   recordingStatusCallback?: string,
      *   recordingStatusCallbackEvent?: string,
-     *   recordingStatusCallbackMethod?: 'GET'|'POST'|RecordingStatusCallbackMethod,
+     *   recordingStatusCallbackMethod?: RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod>,
      *   recordingTimeout?: int,
-     *   recordingTrack?: 'inbound'|'outbound'|'both'|RecordingTrack,
+     *   recordingTrack?: RecordingTrack|value-of<RecordingTrack>,
      *   sendRecordingURL?: bool,
      *   sipAuthPassword?: string,
      *   sipAuthUsername?: string,
-     *   sipRegion?: 'US'|'Europe'|'Canada'|'Australia'|'Middle East'|SipRegion,
+     *   sipRegion?: SipRegion|value-of<SipRegion>,
      *   statusCallback?: string,
-     *   statusCallbackEvent?: 'initiated'|'ringing'|'answered'|'completed'|StatusCallbackEvent,
-     *   statusCallbackMethod?: 'GET'|'POST'|CallCallsParams\StatusCallbackMethod,
+     *   statusCallbackEvent?: StatusCallbackEvent|value-of<StatusCallbackEvent>,
+     *   statusCallbackMethod?: CallCallsParams\StatusCallbackMethod|value-of<CallCallsParams\StatusCallbackMethod>,
      *   superviseCallSid?: string,
-     *   supervisingRole?: 'barge'|'whisper'|'monitor'|SupervisingRole,
-     *   trim?: 'trim-silence'|'do-not-trim'|Trim,
+     *   supervisingRole?: SupervisingRole|value-of<SupervisingRole>,
+     *   trim?: Trim|value-of<Trim>,
      *   url?: string,
-     *   urlMethod?: 'GET'|'POST'|URLMethod,
+     *   urlMethod?: URLMethod|value-of<URLMethod>,
      * }|CallCallsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallCallsResponse>
      *
@@ -181,7 +189,7 @@ final class CallsRawService implements CallsRawContract
     public function calls(
         string $accountSid,
         array|CallCallsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CallCallsParams::parseRequest(
             $params,
@@ -215,9 +223,10 @@ final class CallsRawService implements CallsRawContract
      *   startTime?: string,
      *   startTimeGt?: string,
      *   startTimeLt?: string,
-     *   status?: 'canceled'|'completed'|'failed'|'busy'|'no-answer'|Status,
+     *   status?: Status|value-of<Status>,
      *   to?: string,
      * }|CallRetrieveCallsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallGetCallsResponse>
      *
@@ -226,7 +235,7 @@ final class CallsRawService implements CallsRawContract
     public function retrieveCalls(
         string $accountSid,
         array|CallRetrieveCallsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CallRetrieveCallsParams::parseRequest(
             $params,
@@ -272,11 +281,12 @@ final class CallsRawService implements CallsRawContract
      *   name?: string,
      *   secure?: bool,
      *   sessionTimeoutSecs?: int,
-     *   sipTransport?: 'udp'|'tcp'|'tls'|SipTransport,
+     *   sipTransport?: SipTransport|value-of<SipTransport>,
      *   statusCallback?: string,
-     *   statusCallbackMethod?: 'GET'|'POST'|CallSiprecJsonParams\StatusCallbackMethod,
-     *   track?: 'both_tracks'|'inbound_track'|'outbound_track'|Track,
+     *   statusCallbackMethod?: CallSiprecJsonParams\StatusCallbackMethod|value-of<CallSiprecJsonParams\StatusCallbackMethod>,
+     *   track?: Track|value-of<Track>,
      * }|CallSiprecJsonParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallSiprecJsonResponse>
      *
@@ -285,7 +295,7 @@ final class CallsRawService implements CallsRawContract
     public function siprecJson(
         string $callSid,
         array|CallSiprecJsonParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CallSiprecJsonParams::parseRequest(
             $params,
@@ -315,14 +325,15 @@ final class CallsRawService implements CallsRawContract
      * @param string $callSid path param: The CallSid that identifies the call to update
      * @param array{
      *   accountSid: string,
-     *   bidirectionalCodec?: 'PCMU'|'PCMA'|'G722'|BidirectionalCodec,
-     *   bidirectionalMode?: 'mp3'|'rtp'|BidirectionalMode,
+     *   bidirectionalCodec?: BidirectionalCodec|value-of<BidirectionalCodec>,
+     *   bidirectionalMode?: BidirectionalMode|value-of<BidirectionalMode>,
      *   name?: string,
      *   statusCallback?: string,
-     *   statusCallbackMethod?: 'GET'|'POST'|CallStreamsJsonParams\StatusCallbackMethod,
-     *   track?: 'inbound_track'|'outbound_track'|'both_tracks'|CallStreamsJsonParams\Track,
+     *   statusCallbackMethod?: CallStreamsJsonParams\StatusCallbackMethod|value-of<CallStreamsJsonParams\StatusCallbackMethod>,
+     *   track?: CallStreamsJsonParams\Track|value-of<CallStreamsJsonParams\Track>,
      *   url?: string,
      * }|CallStreamsJsonParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallStreamsJsonResponse>
      *
@@ -331,7 +342,7 @@ final class CallsRawService implements CallsRawContract
     public function streamsJson(
         string $callSid,
         array|CallStreamsJsonParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CallStreamsJsonParams::parseRequest(
             $params,

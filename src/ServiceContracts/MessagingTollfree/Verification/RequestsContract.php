@@ -16,6 +16,11 @@ use Telnyx\MessagingTollfree\Verification\Requests\VerificationRequestStatus;
 use Telnyx\MessagingTollfree\Verification\Requests\Volume;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type URLShape from \Telnyx\MessagingTollfree\Verification\Requests\URL
+ * @phpstan-import-type TfPhoneNumberShape from \Telnyx\MessagingTollfree\Verification\Requests\TfPhoneNumber
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface RequestsContract
 {
     /**
@@ -33,16 +38,12 @@ interface RequestsContract
      * @param string $businessZip The ZIP code of the business address
      * @param string $corporateWebsite A URL, including the scheme, pointing to the corporate website
      * @param string $isvReseller ISV name
-     * @param '10'|'100'|'1,000'|'10,000'|'100,000'|'250,000'|'500,000'|'750,000'|'1,000,000'|'5,000,000'|'10,000,000+'|Volume $messageVolume Message Volume Enums
+     * @param Volume|value-of<Volume> $messageVolume Message Volume Enums
      * @param string $optInWorkflow Human-readable description of how end users will opt into receiving messages from the given phone numbers
-     * @param list<array{
-     *   url: string
-     * }|URL> $optInWorkflowImageURLs Images showing the opt-in workflow
-     * @param list<array{
-     *   phoneNumber: string
-     * }|TfPhoneNumber> $phoneNumbers The phone numbers to request the verification of
+     * @param list<URL|URLShape> $optInWorkflowImageURLs Images showing the opt-in workflow
+     * @param list<TfPhoneNumber|TfPhoneNumberShape> $phoneNumbers The phone numbers to request the verification of
      * @param string $productionMessageContent An example of a message that will be sent from the given phone numbers
-     * @param '2FA'|'App Notifications'|'Appointments'|'Auctions'|'Auto Repair Services'|'Bank Transfers'|'Billing'|'Booking Confirmations'|'Business Updates'|'COVID-19 Alerts'|'Career Training'|'Chatbot'|'Conversational / Alerts'|'Courier Services & Deliveries'|'Emergency Alerts'|'Events & Planning'|'Financial Services'|'Fraud Alerts'|'Fundraising'|'General Marketing'|'General School Updates'|'HR / Staffing'|'Healthcare Alerts'|'Housing Community Updates'|'Insurance Services'|'Job Dispatch'|'Legal Services'|'Mixed'|'Motivational Reminders'|'Notary Notifications'|'Order Notifications'|'Political'|'Public Works'|'Real Estate Services'|'Religious Services'|'Repair and Diagnostics Alerts'|'Rewards Program'|'Surveys'|'System Alerts'|'Voting Reminders'|'Waitlist Alerts'|'Webinar Reminders'|'Workshop Alerts'|UseCaseCategories $useCase Tollfree usecase categories
+     * @param UseCaseCategories|value-of<UseCaseCategories> $useCase Tollfree usecase categories
      * @param string $useCaseSummary Human-readable summary of the desired use-case
      * @param bool $ageGatedContent Indicates if messaging content requires age gating (e.g., 18+). Defaults to false if not provided.
      * @param string $businessAddr2 Line 2 of the business address
@@ -50,13 +51,14 @@ interface RequestsContract
      * @param string|null $businessRegistrationNumber Official business registration number (e.g., Employer Identification Number (EIN) in the U.S.). Required from January 2026.
      * @param string|null $businessRegistrationType Type of business registration being provided. Required from January 2026.
      * @param string|null $doingBusinessAs Doing Business As (DBA) name if different from legal name
-     * @param 'SOLE_PROPRIETOR'|'PRIVATE_PROFIT'|'PUBLIC_PROFIT'|'NON_PROFIT'|'GOVERNMENT'|TollFreeVerificationEntityType|null $entityType Business entity classification
+     * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null $entityType Business entity classification
      * @param string|null $helpMessageResponse The message returned when users text 'HELP'
      * @param string|null $optInConfirmationResponse Message sent to users confirming their opt-in to receive messages
      * @param string|null $optInKeywords Keywords used to collect and process consumer opt-ins
      * @param string|null $privacyPolicyURL URL pointing to the business's privacy policy. Plain string, no URL format validation.
      * @param string|null $termsAndConditionURL URL pointing to the business's terms and conditions. Plain string, no URL format validation.
      * @param string $webhookURL URL that should receive webhooks relating to this verification request
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -73,12 +75,12 @@ interface RequestsContract
         string $businessZip,
         string $corporateWebsite,
         string $isvReseller,
-        string|Volume $messageVolume,
+        Volume|string $messageVolume,
         string $optInWorkflow,
         array $optInWorkflowImageURLs,
         array $phoneNumbers,
         string $productionMessageContent,
-        string|UseCaseCategories $useCase,
+        UseCaseCategories|string $useCase,
         string $useCaseSummary,
         bool $ageGatedContent = false,
         ?string $businessAddr2 = null,
@@ -86,24 +88,26 @@ interface RequestsContract
         ?string $businessRegistrationNumber = null,
         ?string $businessRegistrationType = null,
         ?string $doingBusinessAs = null,
-        string|TollFreeVerificationEntityType|null $entityType = null,
+        TollFreeVerificationEntityType|string|null $entityType = null,
         ?string $helpMessageResponse = null,
         ?string $optInConfirmationResponse = null,
         ?string $optInKeywords = null,
         ?string $privacyPolicyURL = null,
         ?string $termsAndConditionURL = null,
         ?string $webhookURL = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): VerificationRequestEgress;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): VerificationRequestStatus;
 
     /**
@@ -121,16 +125,12 @@ interface RequestsContract
      * @param string $businessZip The ZIP code of the business address
      * @param string $corporateWebsite A URL, including the scheme, pointing to the corporate website
      * @param string $isvReseller ISV name
-     * @param '10'|'100'|'1,000'|'10,000'|'100,000'|'250,000'|'500,000'|'750,000'|'1,000,000'|'5,000,000'|'10,000,000+'|Volume $messageVolume Message Volume Enums
+     * @param Volume|value-of<Volume> $messageVolume Message Volume Enums
      * @param string $optInWorkflow Human-readable description of how end users will opt into receiving messages from the given phone numbers
-     * @param list<array{
-     *   url: string
-     * }|URL> $optInWorkflowImageURLs Images showing the opt-in workflow
-     * @param list<array{
-     *   phoneNumber: string
-     * }|TfPhoneNumber> $phoneNumbers The phone numbers to request the verification of
+     * @param list<URL|URLShape> $optInWorkflowImageURLs Images showing the opt-in workflow
+     * @param list<TfPhoneNumber|TfPhoneNumberShape> $phoneNumbers The phone numbers to request the verification of
      * @param string $productionMessageContent An example of a message that will be sent from the given phone numbers
-     * @param '2FA'|'App Notifications'|'Appointments'|'Auctions'|'Auto Repair Services'|'Bank Transfers'|'Billing'|'Booking Confirmations'|'Business Updates'|'COVID-19 Alerts'|'Career Training'|'Chatbot'|'Conversational / Alerts'|'Courier Services & Deliveries'|'Emergency Alerts'|'Events & Planning'|'Financial Services'|'Fraud Alerts'|'Fundraising'|'General Marketing'|'General School Updates'|'HR / Staffing'|'Healthcare Alerts'|'Housing Community Updates'|'Insurance Services'|'Job Dispatch'|'Legal Services'|'Mixed'|'Motivational Reminders'|'Notary Notifications'|'Order Notifications'|'Political'|'Public Works'|'Real Estate Services'|'Religious Services'|'Repair and Diagnostics Alerts'|'Rewards Program'|'Surveys'|'System Alerts'|'Voting Reminders'|'Waitlist Alerts'|'Webinar Reminders'|'Workshop Alerts'|UseCaseCategories $useCase Tollfree usecase categories
+     * @param UseCaseCategories|value-of<UseCaseCategories> $useCase Tollfree usecase categories
      * @param string $useCaseSummary Human-readable summary of the desired use-case
      * @param bool $ageGatedContent Indicates if messaging content requires age gating (e.g., 18+). Defaults to false if not provided.
      * @param string $businessAddr2 Line 2 of the business address
@@ -138,13 +138,14 @@ interface RequestsContract
      * @param string|null $businessRegistrationNumber Official business registration number (e.g., Employer Identification Number (EIN) in the U.S.). Required from January 2026.
      * @param string|null $businessRegistrationType Type of business registration being provided. Required from January 2026.
      * @param string|null $doingBusinessAs Doing Business As (DBA) name if different from legal name
-     * @param 'SOLE_PROPRIETOR'|'PRIVATE_PROFIT'|'PUBLIC_PROFIT'|'NON_PROFIT'|'GOVERNMENT'|TollFreeVerificationEntityType|null $entityType Business entity classification
+     * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null $entityType Business entity classification
      * @param string|null $helpMessageResponse The message returned when users text 'HELP'
      * @param string|null $optInConfirmationResponse Message sent to users confirming their opt-in to receive messages
      * @param string|null $optInKeywords Keywords used to collect and process consumer opt-ins
      * @param string|null $privacyPolicyURL URL pointing to the business's privacy policy. Plain string, no URL format validation.
      * @param string|null $termsAndConditionURL URL pointing to the business's terms and conditions. Plain string, no URL format validation.
      * @param string $webhookURL URL that should receive webhooks relating to this verification request
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -162,12 +163,12 @@ interface RequestsContract
         string $businessZip,
         string $corporateWebsite,
         string $isvReseller,
-        string|Volume $messageVolume,
+        Volume|string $messageVolume,
         string $optInWorkflow,
         array $optInWorkflowImageURLs,
         array $phoneNumbers,
         string $productionMessageContent,
-        string|UseCaseCategories $useCase,
+        UseCaseCategories|string $useCase,
         string $useCaseSummary,
         bool $ageGatedContent = false,
         ?string $businessAddr2 = null,
@@ -175,14 +176,14 @@ interface RequestsContract
         ?string $businessRegistrationNumber = null,
         ?string $businessRegistrationType = null,
         ?string $doingBusinessAs = null,
-        string|TollFreeVerificationEntityType|null $entityType = null,
+        TollFreeVerificationEntityType|string|null $entityType = null,
         ?string $helpMessageResponse = null,
         ?string $optInConfirmationResponse = null,
         ?string $optInKeywords = null,
         ?string $privacyPolicyURL = null,
         ?string $termsAndConditionURL = null,
         ?string $webhookURL = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): VerificationRequestEgress;
 
     /**
@@ -192,7 +193,8 @@ interface RequestsContract
      *         Request this many records per page
      *
      *         This value is automatically clamped if the provided value is too large
-     * @param 'Verified'|'Rejected'|'Waiting For Vendor'|'Waiting For Customer'|'Waiting For Telnyx'|'In Progress'|TfVerificationStatus $status Tollfree verification status
+     * @param TfVerificationStatus|value-of<TfVerificationStatus> $status Tollfree verification status
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPaginationForMessagingTollfree<VerificationRequestStatus>
      *
@@ -201,20 +203,22 @@ interface RequestsContract
     public function list(
         int $page,
         int $pageSize,
-        string|\DateTimeInterface|null $dateEnd = null,
-        string|\DateTimeInterface|null $dateStart = null,
+        ?\DateTimeInterface $dateEnd = null,
+        ?\DateTimeInterface $dateStart = null,
         ?string $phoneNumber = null,
-        string|TfVerificationStatus|null $status = null,
-        ?RequestOptions $requestOptions = null,
+        TfVerificationStatus|string|null $status = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPaginationForMessagingTollfree;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed;
 }

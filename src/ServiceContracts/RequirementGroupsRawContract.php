@@ -12,12 +12,16 @@ use Telnyx\RequirementGroups\RequirementGroupCreateParams;
 use Telnyx\RequirementGroups\RequirementGroupListParams;
 use Telnyx\RequirementGroups\RequirementGroupUpdateParams;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface RequirementGroupsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|RequirementGroupCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RequirementGroup>
      *
@@ -25,13 +29,14 @@ interface RequirementGroupsRawContract
      */
     public function create(
         array|RequirementGroupCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id ID of the requirement group to retrieve
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RequirementGroup>
      *
@@ -39,7 +44,7 @@ interface RequirementGroupsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -47,6 +52,7 @@ interface RequirementGroupsRawContract
      *
      * @param string $id ID of the requirement group
      * @param array<string,mixed>|RequirementGroupUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RequirementGroup>
      *
@@ -55,13 +61,14 @@ interface RequirementGroupsRawContract
     public function update(
         string $id,
         array|RequirementGroupUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|RequirementGroupListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<RequirementGroup>>
      *
@@ -69,13 +76,14 @@ interface RequirementGroupsRawContract
      */
     public function list(
         array|RequirementGroupListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id ID of the requirement group
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RequirementGroup>
      *
@@ -83,13 +91,14 @@ interface RequirementGroupsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id ID of the requirement group to submit
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RequirementGroup>
      *
@@ -97,6 +106,6 @@ interface RequirementGroupsRawContract
      */
     public function submitForApproval(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

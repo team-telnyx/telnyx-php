@@ -13,7 +13,8 @@ use Telnyx\Core\Conversion\ListOf;
 /**
  * @phpstan-import-type UnionMember3Shape from \Telnyx\AI\Conversations\ConversationAddMessageParams\Metadata\UnionMember3
  *
- * @phpstan-type MetadataShape = string|int|bool|list<UnionMember3Shape>
+ * @phpstan-type MetadataVariants = string|int|bool|list<string|int|bool>
+ * @phpstan-type MetadataShape = MetadataVariants|list<UnionMember3Shape>
  */
 final class Metadata implements ConverterSource
 {

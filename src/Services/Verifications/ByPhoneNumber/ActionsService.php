@@ -11,6 +11,9 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Verifications\ByPhoneNumber\ActionsContract;
 use Telnyx\Verifications\ByPhoneNumber\Actions\VerifyVerificationCodeResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsService implements ActionsContract
 {
     /**
@@ -34,6 +37,7 @@ final class ActionsService implements ActionsContract
      * @param string $phoneNumber +E164 formatted phone number
      * @param string $code this is the code the user submits for verification
      * @param string $verifyProfileID the identifier of the associated Verify profile
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -41,7 +45,7 @@ final class ActionsService implements ActionsContract
         string $phoneNumber,
         string $code,
         string $verifyProfileID,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): VerifyVerificationCodeResponse {
         $params = Util::removeNulls(
             ['code' => $code, 'verifyProfileID' => $verifyProfileID]

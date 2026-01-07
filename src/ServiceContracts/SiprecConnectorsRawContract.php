@@ -13,12 +13,16 @@ use Telnyx\SiprecConnectors\SiprecConnectorNewResponse;
 use Telnyx\SiprecConnectors\SiprecConnectorUpdateParams;
 use Telnyx\SiprecConnectors\SiprecConnectorUpdateResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface SiprecConnectorsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|SiprecConnectorCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SiprecConnectorNewResponse>
      *
@@ -26,13 +30,14 @@ interface SiprecConnectorsRawContract
      */
     public function create(
         array|SiprecConnectorCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $connectorName uniquely identifies a SIPREC connector
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SiprecConnectorGetResponse>
      *
@@ -40,7 +45,7 @@ interface SiprecConnectorsRawContract
      */
     public function retrieve(
         string $connectorName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -48,6 +53,7 @@ interface SiprecConnectorsRawContract
      *
      * @param string $connectorName uniquely identifies a SIPREC connector
      * @param array<string,mixed>|SiprecConnectorUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SiprecConnectorUpdateResponse>
      *
@@ -56,13 +62,14 @@ interface SiprecConnectorsRawContract
     public function update(
         string $connectorName,
         array|SiprecConnectorUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $connectorName uniquely identifies a SIPREC connector
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -70,6 +77,6 @@ interface SiprecConnectorsRawContract
      */
     public function delete(
         string $connectorName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

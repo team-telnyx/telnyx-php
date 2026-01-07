@@ -80,6 +80,9 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ActionsRawContract
 {
     /**
@@ -87,6 +90,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionAnswerParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionAnswerResponse>
      *
@@ -95,7 +99,7 @@ interface ActionsRawContract
     public function answer(
         string $callControlID,
         array|ActionAnswerParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -103,6 +107,7 @@ interface ActionsRawContract
      *
      * @param string $callControlIDToBridge Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionBridgeParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionBridgeResponse>
      *
@@ -111,7 +116,7 @@ interface ActionsRawContract
     public function bridge(
         string $callControlIDToBridge,
         array|ActionBridgeParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -119,6 +124,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionEnqueueParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionEnqueueResponse>
      *
@@ -127,7 +133,7 @@ interface ActionsRawContract
     public function enqueue(
         string $callControlID,
         array|ActionEnqueueParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -135,6 +141,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionGatherParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionGatherResponse>
      *
@@ -143,7 +150,7 @@ interface ActionsRawContract
     public function gather(
         string $callControlID,
         array|ActionGatherParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -151,6 +158,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionGatherUsingAIParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionGatherUsingAIResponse>
      *
@@ -159,7 +167,7 @@ interface ActionsRawContract
     public function gatherUsingAI(
         string $callControlID,
         array|ActionGatherUsingAIParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -167,6 +175,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionGatherUsingAudioParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionGatherUsingAudioResponse>
      *
@@ -175,7 +184,7 @@ interface ActionsRawContract
     public function gatherUsingAudio(
         string $callControlID,
         array|ActionGatherUsingAudioParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -183,6 +192,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionGatherUsingSpeakParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionGatherUsingSpeakResponse>
      *
@@ -191,7 +201,7 @@ interface ActionsRawContract
     public function gatherUsingSpeak(
         string $callControlID,
         array|ActionGatherUsingSpeakParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -199,6 +209,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionHangupParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionHangupResponse>
      *
@@ -207,7 +218,7 @@ interface ActionsRawContract
     public function hangup(
         string $callControlID,
         array|ActionHangupParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -215,6 +226,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionLeaveQueueParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionLeaveQueueResponse>
      *
@@ -223,7 +235,7 @@ interface ActionsRawContract
     public function leaveQueue(
         string $callControlID,
         array|ActionLeaveQueueParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -231,6 +243,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionPauseRecordingParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionPauseRecordingResponse>
      *
@@ -239,7 +252,7 @@ interface ActionsRawContract
     public function pauseRecording(
         string $callControlID,
         array|ActionPauseRecordingParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -247,6 +260,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionReferParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionReferResponse>
      *
@@ -255,7 +269,7 @@ interface ActionsRawContract
     public function refer(
         string $callControlID,
         array|ActionReferParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -263,6 +277,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionRejectParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionRejectResponse>
      *
@@ -271,7 +286,7 @@ interface ActionsRawContract
     public function reject(
         string $callControlID,
         array|ActionRejectParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -279,6 +294,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionResumeRecordingParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionResumeRecordingResponse>
      *
@@ -287,7 +303,7 @@ interface ActionsRawContract
     public function resumeRecording(
         string $callControlID,
         array|ActionResumeRecordingParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -295,6 +311,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionSendDtmfParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionSendDtmfResponse>
      *
@@ -303,7 +320,7 @@ interface ActionsRawContract
     public function sendDtmf(
         string $callControlID,
         array|ActionSendDtmfParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -311,6 +328,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionSendSipInfoParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionSendSipInfoResponse>
      *
@@ -319,7 +337,7 @@ interface ActionsRawContract
     public function sendSipInfo(
         string $callControlID,
         array|ActionSendSipInfoParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -327,6 +345,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionSpeakParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionSpeakResponse>
      *
@@ -335,7 +354,7 @@ interface ActionsRawContract
     public function speak(
         string $callControlID,
         array|ActionSpeakParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -343,6 +362,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionStartAIAssistantParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStartAIAssistantResponse>
      *
@@ -351,7 +371,7 @@ interface ActionsRawContract
     public function startAIAssistant(
         string $callControlID,
         array|ActionStartAIAssistantParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -359,6 +379,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionStartForkingParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStartForkingResponse>
      *
@@ -367,7 +388,7 @@ interface ActionsRawContract
     public function startForking(
         string $callControlID,
         array|ActionStartForkingParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -375,6 +396,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionStartNoiseSuppressionParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStartNoiseSuppressionResponse>
      *
@@ -383,7 +405,7 @@ interface ActionsRawContract
     public function startNoiseSuppression(
         string $callControlID,
         array|ActionStartNoiseSuppressionParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -391,6 +413,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionStartPlaybackParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStartPlaybackResponse>
      *
@@ -399,7 +422,7 @@ interface ActionsRawContract
     public function startPlayback(
         string $callControlID,
         array|ActionStartPlaybackParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -407,6 +430,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionStartRecordingParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStartRecordingResponse>
      *
@@ -415,7 +439,7 @@ interface ActionsRawContract
     public function startRecording(
         string $callControlID,
         array|ActionStartRecordingParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -423,6 +447,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionStartSiprecParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStartSiprecResponse>
      *
@@ -431,7 +456,7 @@ interface ActionsRawContract
     public function startSiprec(
         string $callControlID,
         array|ActionStartSiprecParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -439,6 +464,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionStartStreamingParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStartStreamingResponse>
      *
@@ -447,7 +473,7 @@ interface ActionsRawContract
     public function startStreaming(
         string $callControlID,
         array|ActionStartStreamingParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -455,6 +481,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionStartTranscriptionParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStartTranscriptionResponse>
      *
@@ -463,7 +490,7 @@ interface ActionsRawContract
     public function startTranscription(
         string $callControlID,
         array|ActionStartTranscriptionParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -471,6 +498,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionStopAIAssistantParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStopAIAssistantResponse>
      *
@@ -479,7 +507,7 @@ interface ActionsRawContract
     public function stopAIAssistant(
         string $callControlID,
         array|ActionStopAIAssistantParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -487,6 +515,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionStopForkingParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStopForkingResponse>
      *
@@ -495,7 +524,7 @@ interface ActionsRawContract
     public function stopForking(
         string $callControlID,
         array|ActionStopForkingParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -503,6 +532,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionStopGatherParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStopGatherResponse>
      *
@@ -511,7 +541,7 @@ interface ActionsRawContract
     public function stopGather(
         string $callControlID,
         array|ActionStopGatherParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -519,6 +549,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionStopNoiseSuppressionParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStopNoiseSuppressionResponse>
      *
@@ -527,7 +558,7 @@ interface ActionsRawContract
     public function stopNoiseSuppression(
         string $callControlID,
         array|ActionStopNoiseSuppressionParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -535,6 +566,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionStopPlaybackParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStopPlaybackResponse>
      *
@@ -543,7 +575,7 @@ interface ActionsRawContract
     public function stopPlayback(
         string $callControlID,
         array|ActionStopPlaybackParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -551,6 +583,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionStopRecordingParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStopRecordingResponse>
      *
@@ -559,7 +592,7 @@ interface ActionsRawContract
     public function stopRecording(
         string $callControlID,
         array|ActionStopRecordingParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -567,6 +600,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionStopSiprecParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStopSiprecResponse>
      *
@@ -575,7 +609,7 @@ interface ActionsRawContract
     public function stopSiprec(
         string $callControlID,
         array|ActionStopSiprecParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -583,6 +617,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionStopStreamingParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStopStreamingResponse>
      *
@@ -591,7 +626,7 @@ interface ActionsRawContract
     public function stopStreaming(
         string $callControlID,
         array|ActionStopStreamingParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -599,6 +634,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionStopTranscriptionParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStopTranscriptionResponse>
      *
@@ -607,7 +643,7 @@ interface ActionsRawContract
     public function stopTranscription(
         string $callControlID,
         array|ActionStopTranscriptionParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -615,6 +651,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionSwitchSupervisorRoleParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionSwitchSupervisorRoleResponse>
      *
@@ -623,7 +660,7 @@ interface ActionsRawContract
     public function switchSupervisorRole(
         string $callControlID,
         array|ActionSwitchSupervisorRoleParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -631,6 +668,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionTransferParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionTransferResponse>
      *
@@ -639,7 +677,7 @@ interface ActionsRawContract
     public function transfer(
         string $callControlID,
         array|ActionTransferParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -647,6 +685,7 @@ interface ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionUpdateClientStateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionUpdateClientStateResponse>
      *
@@ -655,6 +694,6 @@ interface ActionsRawContract
     public function updateClientState(
         string $callControlID,
         array|ActionUpdateClientStateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

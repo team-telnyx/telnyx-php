@@ -9,10 +9,17 @@ use Telnyx\DefaultPagination;
 use Telnyx\IPs\IP;
 use Telnyx\IPs\IPDeleteResponse;
 use Telnyx\IPs\IPGetResponse;
+use Telnyx\IPs\IPListParams\Filter;
+use Telnyx\IPs\IPListParams\Page;
 use Telnyx\IPs\IPNewResponse;
 use Telnyx\IPs\IPUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\IPs\IPListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\IPs\IPListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface IPsContract
 {
     /**
@@ -21,6 +28,7 @@ interface IPsContract
      * @param string $ipAddress IP adddress represented by this resource
      * @param string $connectionID ID of the IP Connection to which this IP should be attached
      * @param int $port port to use when connecting to this IP
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -28,19 +36,20 @@ interface IPsContract
         string $ipAddress,
         ?string $connectionID = null,
         int $port = 5060,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): IPNewResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the type of resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): IPGetResponse;
 
     /**
@@ -50,6 +59,7 @@ interface IPsContract
      * @param string $ipAddress IP adddress represented by this resource
      * @param string $connectionID ID of the IP Connection to which this IP should be attached
      * @param int $port port to use when connecting to this IP
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -58,38 +68,36 @@ interface IPsContract
         string $ipAddress,
         ?string $connectionID = null,
         int $port = 5060,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): IPUpdateResponse;
 
     /**
      * @api
      *
-     * @param array{
-     *   connectionID?: string, ipAddress?: string, port?: int
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_id], filter[ip_address], filter[port]
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_id], filter[ip_address], filter[port]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<IP>
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null,
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination;
 
     /**
      * @api
      *
      * @param string $id identifies the type of resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): IPDeleteResponse;
 }

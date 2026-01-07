@@ -9,7 +9,8 @@ use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 
 /**
- * @phpstan-type ConversationMetadataShape = string|int|bool
+ * @phpstan-type ConversationMetadataVariants = string|int|bool
+ * @phpstan-type ConversationMetadataShape = ConversationMetadataVariants
  */
 final class ConversationMetadata implements ConverterSource
 {

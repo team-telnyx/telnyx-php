@@ -12,9 +12,16 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\UserAddressesContract;
 use Telnyx\UserAddresses\UserAddress;
 use Telnyx\UserAddresses\UserAddressGetResponse;
+use Telnyx\UserAddresses\UserAddressListParams\Filter;
+use Telnyx\UserAddresses\UserAddressListParams\Page;
 use Telnyx\UserAddresses\UserAddressListParams\Sort;
 use Telnyx\UserAddresses\UserAddressNewResponse;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\UserAddresses\UserAddressListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\UserAddresses\UserAddressListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class UserAddressesService implements UserAddressesContract
 {
     /**
@@ -49,6 +56,7 @@ final class UserAddressesService implements UserAddressesContract
      * @param string $phoneNumber the phone number associated with the user address
      * @param string $postalCode the postal code of the user address
      * @param bool $skipAddressVerification An optional boolean value specifying if verification of the address should be skipped or not. UserAddresses are generally used for shipping addresses, and failure to validate your shipping address will likely result in a failure to deliver SIM cards or other items ordered from Telnyx. Do not use this parameter unless you are sure that the address is correct even though it cannot be validated. If this is set to any value other than true, verification of the address will be attempted, and the user address will not be allowed if verification fails. If verification fails but suggested values are available that might make the address correct, they will be present in the response as well. If this value is set to true, then the verification will not be attempted. Defaults to false (verification will be performed).
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -67,7 +75,7 @@ final class UserAddressesService implements UserAddressesContract
         ?string $phoneNumber = null,
         ?string $postalCode = null,
         bool $skipAddressVerification = false,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): UserAddressNewResponse {
         $params = Util::removeNulls(
             [
@@ -100,12 +108,13 @@ final class UserAddressesService implements UserAddressesContract
      * Retrieves the details of an existing user address.
      *
      * @param string $id user address ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): UserAddressGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -118,14 +127,9 @@ final class UserAddressesService implements UserAddressesContract
      *
      * Returns a list of your user addresses.
      *
-     * @param array{
-     *   customerReference?: array{contains?: string, eq?: string},
-     *   streetAddress?: array{contains?: string},
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[customer_reference][eq], filter[customer_reference][contains], filter[street_address][contains]
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
-     * @param 'created_at'|'first_name'|'last_name'|'business_name'|'street_address'|Sort $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[customer_reference][eq], filter[customer_reference][contains], filter[street_address][contains]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
      * That is: <ul>
      *   <li>
      *     <code>street_address</code>: sorts the result by the
@@ -137,16 +141,17 @@ final class UserAddressesService implements UserAddressesContract
      *     <code>street_address</code> field in descending order.
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<UserAddress>
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
-        ?array $page = null,
-        string|Sort $sort = 'created_at',
-        ?RequestOptions $requestOptions = null,
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        Sort|string $sort = 'created_at',
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination {
         $params = Util::removeNulls(
             ['filter' => $filter, 'page' => $page, 'sort' => $sort]

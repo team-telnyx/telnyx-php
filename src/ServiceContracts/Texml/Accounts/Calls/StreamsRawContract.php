@@ -10,6 +10,9 @@ use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonParams;
 use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface StreamsRawContract
 {
     /**
@@ -17,6 +20,7 @@ interface StreamsRawContract
      *
      * @param string $streamingSid path param: Uniquely identifies the streaming by id
      * @param array<string,mixed>|StreamStreamingSidJsonParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<StreamStreamingSidJsonResponse>
      *
@@ -25,6 +29,6 @@ interface StreamsRawContract
     public function streamingSidJson(
         string $streamingSid,
         array|StreamStreamingSidJsonParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

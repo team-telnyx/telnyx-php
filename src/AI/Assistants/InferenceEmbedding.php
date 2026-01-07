@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\AI\Assistants\AssistantTool\DtmfTool;
-use Telnyx\AI\Assistants\AssistantTool\HandoffTool;
-use Telnyx\AI\Assistants\AssistantTool\SipReferTool;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type AssistantToolVariants from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type ImportMetadataShape from \Telnyx\AI\Assistants\ImportMetadata
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
@@ -121,7 +119,7 @@ final class InferenceEmbedding implements BaseModel
     /**
      * The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
      *
-     * @var list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool>|null $tools
+     * @var list<AssistantToolVariants>|null $tools
      */
     #[Optional(list: AssistantTool::class)]
     public ?array $tools;

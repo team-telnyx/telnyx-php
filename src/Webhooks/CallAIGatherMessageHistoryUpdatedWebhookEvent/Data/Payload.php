@@ -19,7 +19,7 @@ use Telnyx\Webhooks\CallAIGatherMessageHistoryUpdatedWebhookEvent\Data\Payload\M
  *   clientState?: string|null,
  *   connectionID?: string|null,
  *   from?: string|null,
- *   messageHistory?: list<MessageHistoryShape>|null,
+ *   messageHistory?: list<MessageHistory|MessageHistoryShape>|null,
  *   to?: string|null,
  * }
  */
@@ -88,7 +88,7 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<MessageHistoryShape>|null $messageHistory
+     * @param list<MessageHistory|MessageHistoryShape>|null $messageHistory
      */
     public static function with(
         ?string $callControlID = null,
@@ -183,7 +183,7 @@ final class Payload implements BaseModel
     /**
      * The history of the messages exchanged during the AI gather.
      *
-     * @param list<MessageHistoryShape> $messageHistory
+     * @param list<MessageHistory|MessageHistoryShape> $messageHistory
      */
     public function withMessageHistory(array $messageHistory): self
     {

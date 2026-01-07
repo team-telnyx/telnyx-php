@@ -8,17 +8,21 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\Verifications\ByPhoneNumber\ByPhoneNumberListResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ByPhoneNumberContract
 {
     /**
      * @api
      *
      * @param string $phoneNumber +E164 formatted phone number
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function list(
         string $phoneNumber,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ByPhoneNumberListResponse;
 }

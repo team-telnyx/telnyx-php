@@ -8,66 +8,59 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownload;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\CsvFormat;
-use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter\Status;
-use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter\VoiceUsagePaymentMethod;
+use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadGetResponse;
+use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadListParams\Page;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface CsvDownloadsContract
 {
     /**
      * @api
      *
-     * @param 'V1'|'V2'|CsvFormat $csvFormat Which format to use when generating the CSV file. The default for backwards compatibility is 'V1'
-     * @param array{
-     *   billingGroupID?: string,
-     *   connectionID?: string,
-     *   customerReference?: string,
-     *   emergencyAddressID?: string,
-     *   hasBundle?: string,
-     *   phoneNumber?: string,
-     *   status?: 'purchase-pending'|'purchase-failed'|'port-pending'|'active'|'deleted'|'port-failed'|'emergency-only'|'ported-out'|'port-out-pending'|Status,
-     *   tag?: string,
-     *   voiceConnectionName?: array{
-     *     contains?: string, endsWith?: string, eq?: string, startsWith?: string
-     *   },
-     *   voiceUsagePaymentMethod?: 'pay-per-minute'|'channel'|VoiceUsagePaymentMethod,
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[has_bundle], filter[tag], filter[connection_id], filter[phone_number], filter[status], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference]
+     * @param CsvFormat|value-of<CsvFormat> $csvFormat Which format to use when generating the CSV file. The default for backwards compatibility is 'V1'
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[has_bundle], filter[tag], filter[connection_id], filter[phone_number], filter[status], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference]
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        string|CsvFormat $csvFormat = 'V1',
-        ?array $filter = null,
-        ?RequestOptions $requestOptions = null,
+        CsvFormat|string $csvFormat = 'V1',
+        Filter|array|null $filter = null,
+        RequestOptions|array|null $requestOptions = null,
     ): CsvDownloadNewResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the CSV download
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): CsvDownloadGetResponse;
 
     /**
      * @api
      *
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<CsvDownload>
      *
      * @throws APIException
      */
     public function list(
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null
     ): DefaultPagination;
 }

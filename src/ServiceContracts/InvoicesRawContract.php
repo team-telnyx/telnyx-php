@@ -13,6 +13,9 @@ use Telnyx\Invoices\InvoiceListResponse;
 use Telnyx\Invoices\InvoiceRetrieveParams;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface InvoicesRawContract
 {
     /**
@@ -20,6 +23,7 @@ interface InvoicesRawContract
      *
      * @param string $id Invoice UUID
      * @param array<string,mixed>|InvoiceRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InvoiceGetResponse>
      *
@@ -28,13 +32,14 @@ interface InvoicesRawContract
     public function retrieve(
         string $id,
         array|InvoiceRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|InvoiceListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<InvoiceListResponse>>
      *
@@ -42,6 +47,6 @@ interface InvoicesRawContract
      */
     public function list(
         array|InvoiceListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

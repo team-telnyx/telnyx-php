@@ -15,7 +15,8 @@ use Telnyx\SimpleSimCard;
  * @phpstan-import-type ErrorShape from \Telnyx\Actions\Purchase\PurchaseNewResponse\Error
  *
  * @phpstan-type PurchaseNewResponseShape = array{
- *   data?: list<SimpleSimCardShape>|null, errors?: list<ErrorShape>|null
+ *   data?: list<SimpleSimCard|SimpleSimCardShape>|null,
+ *   errors?: list<Error|ErrorShape>|null,
  * }
  */
 final class PurchaseNewResponse implements BaseModel
@@ -45,8 +46,8 @@ final class PurchaseNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SimpleSimCardShape>|null $data
-     * @param list<ErrorShape>|null $errors
+     * @param list<SimpleSimCard|SimpleSimCardShape>|null $data
+     * @param list<Error|ErrorShape>|null $errors
      */
     public static function with(?array $data = null, ?array $errors = null): self
     {
@@ -61,7 +62,7 @@ final class PurchaseNewResponse implements BaseModel
     /**
      * Successfully registered SIM cards.
      *
-     * @param list<SimpleSimCardShape> $data
+     * @param list<SimpleSimCard|SimpleSimCardShape> $data
      */
     public function withData(array $data): self
     {
@@ -72,7 +73,7 @@ final class PurchaseNewResponse implements BaseModel
     }
 
     /**
-     * @param list<ErrorShape> $errors
+     * @param list<Error|ErrorShape> $errors
      */
     public function withErrors(array $errors): self
     {

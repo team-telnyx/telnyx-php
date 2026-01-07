@@ -17,12 +17,16 @@ use Telnyx\FaxApplications\FaxApplicationUpdateParams;
 use Telnyx\FaxApplications\FaxApplicationUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface FaxApplicationsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|FaxApplicationCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FaxApplicationNewResponse>
      *
@@ -30,13 +34,14 @@ interface FaxApplicationsRawContract
      */
     public function create(
         array|FaxApplicationCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FaxApplicationGetResponse>
      *
@@ -44,7 +49,7 @@ interface FaxApplicationsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -52,6 +57,7 @@ interface FaxApplicationsRawContract
      *
      * @param string $id identifies the resource
      * @param array<string,mixed>|FaxApplicationUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FaxApplicationUpdateResponse>
      *
@@ -60,13 +66,14 @@ interface FaxApplicationsRawContract
     public function update(
         string $id,
         array|FaxApplicationUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|FaxApplicationListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<FaxApplication>>
      *
@@ -74,13 +81,14 @@ interface FaxApplicationsRawContract
      */
     public function list(
         array|FaxApplicationListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FaxApplicationDeleteResponse>
      *
@@ -88,6 +96,6 @@ interface FaxApplicationsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

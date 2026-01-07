@@ -9,11 +9,17 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams;
-use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Filter\PortingOrderStatus;
+use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Filter;
+use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Page;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingPhoneNumbersRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class PortingPhoneNumbersRawService implements PortingPhoneNumbersRawContract
 {
     // @phpstan-ignore-next-line
@@ -28,11 +34,9 @@ final class PortingPhoneNumbersRawService implements PortingPhoneNumbersRawContr
      * Returns a list of your porting phone numbers.
      *
      * @param array{
-     *   filter?: array{
-     *     portingOrderStatus?: 'draft'|'in-process'|'submitted'|'exception'|'foc-date-confirmed'|'cancel-pending'|'ported'|'cancelled'|PortingOrderStatus,
-     *   },
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|PortingPhoneNumberListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PortingPhoneNumberListResponse>>
      *
@@ -40,7 +44,7 @@ final class PortingPhoneNumbersRawService implements PortingPhoneNumbersRawContr
      */
     public function list(
         array|PortingPhoneNumberListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PortingPhoneNumberListParams::parseRequest(
             $params,

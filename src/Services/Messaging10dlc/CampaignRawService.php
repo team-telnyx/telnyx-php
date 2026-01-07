@@ -23,6 +23,9 @@ use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging10dlc\CampaignRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class CampaignRawService implements CampaignRawContract
 {
     // @phpstan-ignore-next-line
@@ -36,13 +39,15 @@ final class CampaignRawService implements CampaignRawContract
      *
      * Retrieve campaign details by `campaignId`.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<TelnyxCampaignCsp>
      *
      * @throws APIException
      */
     public function retrieve(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -71,6 +76,7 @@ final class CampaignRawService implements CampaignRawContract
      *   webhookFailoverURL?: string,
      *   webhookURL?: string,
      * }|CampaignUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TelnyxCampaignCsp>
      *
@@ -79,7 +85,7 @@ final class CampaignRawService implements CampaignRawContract
     public function update(
         string $campaignID,
         array|CampaignUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CampaignUpdateParams::parseRequest(
             $params,
@@ -104,6 +110,7 @@ final class CampaignRawService implements CampaignRawContract
      * @param array{
      *   brandID: string, page?: int, recordsPerPage?: int, sort?: value-of<Sort>
      * }|CampaignListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PerPagePaginationV2<CampaignListResponse>>
      *
@@ -111,7 +118,7 @@ final class CampaignRawService implements CampaignRawContract
      */
     public function list(
         array|CampaignListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CampaignListParams::parseRequest(
             $params,
@@ -135,6 +142,7 @@ final class CampaignRawService implements CampaignRawContract
      * Manually accept a campaign shared with Telnyx
      *
      * @param string $campaignID TCR's ID for the campaign to import
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<array<string,mixed>>
      *
@@ -142,7 +150,7 @@ final class CampaignRawService implements CampaignRawContract
      */
     public function acceptSharing(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -158,13 +166,15 @@ final class CampaignRawService implements CampaignRawContract
      *
      * Terminate a campaign. Note that once deactivated, a campaign cannot be restored.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<CampaignDeactivateResponse>
      *
      * @throws APIException
      */
     public function deactivate(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -181,6 +191,7 @@ final class CampaignRawService implements CampaignRawContract
      * Get the campaign metadata for each MNO it was submitted to.
      *
      * @param string $campaignID ID of the campaign in question
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CampaignGetMnoMetadataResponse>
      *
@@ -188,7 +199,7 @@ final class CampaignRawService implements CampaignRawContract
      */
     public function getMnoMetadata(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -204,13 +215,15 @@ final class CampaignRawService implements CampaignRawContract
      *
      * Retrieve campaign's operation status at MNO level.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<array<string,mixed>>
      *
      * @throws APIException
      */
     public function getOperationStatus(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -227,6 +240,7 @@ final class CampaignRawService implements CampaignRawContract
      * Get Sharing Status
      *
      * @param string $campaignID ID of the campaign in question
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CampaignGetSharingStatusResponse>
      *
@@ -234,7 +248,7 @@ final class CampaignRawService implements CampaignRawContract
      */
     public function getSharingStatus(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -252,6 +266,7 @@ final class CampaignRawService implements CampaignRawContract
      *
      * @param string $campaignID The Telnyx campaign identifier
      * @param array{appealReason: string}|CampaignSubmitAppealParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CampaignSubmitAppealResponse>
      *
@@ -260,7 +275,7 @@ final class CampaignRawService implements CampaignRawContract
     public function submitAppeal(
         string $campaignID,
         array|CampaignSubmitAppealParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CampaignSubmitAppealParams::parseRequest(
             $params,

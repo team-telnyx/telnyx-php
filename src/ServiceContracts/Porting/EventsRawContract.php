@@ -17,12 +17,16 @@ use Telnyx\Porting\Events\EventListResponse\PortingEventStatusChangedEvent;
 use Telnyx\Porting\Events\EventListResponse\PortingEventWithoutWebhook;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface EventsRawContract
 {
     /**
      * @api
      *
      * @param string $id identifies the porting event
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<EventGetResponse>
      *
@@ -30,13 +34,14 @@ interface EventsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|EventListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PortingEventDeletedPayload|PortingEventMessagingChangedPayload|PortingEventStatusChangedEvent|PortingEventNewCommentEvent|PortingEventSplitEvent|PortingEventWithoutWebhook,>,>
      *
@@ -44,13 +49,14 @@ interface EventsRawContract
      */
     public function list(
         array|EventListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the porting event
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -58,6 +64,6 @@ interface EventsRawContract
      */
     public function republish(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

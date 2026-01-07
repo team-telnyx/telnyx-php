@@ -14,6 +14,9 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging\RcsContract;
 use Telnyx\Services\Messaging\Rcs\AgentsService;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class RcsService implements RcsContract
 {
     /**
@@ -42,13 +45,14 @@ final class RcsService implements RcsContract
      *
      * @param string $phoneNumber Phone number in E164 format to invite for testing
      * @param string $id RCS agent ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function inviteTestNumber(
         string $phoneNumber,
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): RcInviteTestNumberResponse {
         $params = Util::removeNulls(['id' => $id]);
 
@@ -65,13 +69,14 @@ final class RcsService implements RcsContract
      *
      * @param string $agentID RCS Agent ID
      * @param list<string> $phoneNumbers List of phone numbers to check
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function listBulkCapabilities(
         string $agentID,
         array $phoneNumbers,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): RcListBulkCapabilitiesResponse {
         $params = Util::removeNulls(
             ['agentID' => $agentID, 'phoneNumbers' => $phoneNumbers]
@@ -90,13 +95,14 @@ final class RcsService implements RcsContract
      *
      * @param string $phoneNumber Phone number in E164 format
      * @param string $agentID RCS agent ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieveCapabilities(
         string $phoneNumber,
         string $agentID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): RcGetCapabilitiesResponse {
         $params = Util::removeNulls(['agentID' => $agentID]);
 

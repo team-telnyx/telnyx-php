@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type WdrReportShape from \Telnyx\Wireless\DetailRecordsReports\WdrReport
  *
  * @phpstan-type DetailRecordsReportListResponseShape = array{
- *   data?: list<WdrReportShape>|null
+ *   data?: list<WdrReport|WdrReportShape>|null
  * }
  */
 final class DetailRecordsReportListResponse implements BaseModel
@@ -34,7 +34,7 @@ final class DetailRecordsReportListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<WdrReportShape>|null $data
+     * @param list<WdrReport|WdrReportShape>|null $data
      */
     public static function with(?array $data = null): self
     {
@@ -46,7 +46,7 @@ final class DetailRecordsReportListResponse implements BaseModel
     }
 
     /**
-     * @param list<WdrReportShape> $data
+     * @param list<WdrReport|WdrReportShape> $data
      */
     public function withData(array $data): self
     {

@@ -9,6 +9,8 @@ use Telnyx\Addresses\AddressCreateParams;
 use Telnyx\Addresses\AddressDeleteResponse;
 use Telnyx\Addresses\AddressGetResponse;
 use Telnyx\Addresses\AddressListParams;
+use Telnyx\Addresses\AddressListParams\Filter;
+use Telnyx\Addresses\AddressListParams\Page;
 use Telnyx\Addresses\AddressListParams\Sort;
 use Telnyx\Addresses\AddressNewResponse;
 use Telnyx\Client;
@@ -18,6 +20,11 @@ use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AddressesRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Addresses\AddressListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Addresses\AddressListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AddressesRawService implements AddressesRawContract
 {
     // @phpstan-ignore-next-line
@@ -48,6 +55,7 @@ final class AddressesRawService implements AddressesRawContract
      *   postalCode?: string,
      *   validateAddress?: bool,
      * }|AddressCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AddressNewResponse>
      *
@@ -55,7 +63,7 @@ final class AddressesRawService implements AddressesRawContract
      */
     public function create(
         array|AddressCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AddressCreateParams::parseRequest(
             $params,
@@ -78,6 +86,7 @@ final class AddressesRawService implements AddressesRawContract
      * Retrieves the details of an existing address.
      *
      * @param string $id address ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AddressGetResponse>
      *
@@ -85,7 +94,7 @@ final class AddressesRawService implements AddressesRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -102,15 +111,9 @@ final class AddressesRawService implements AddressesRawContract
      * Returns a list of your addresses.
      *
      * @param array{
-     *   filter?: array{
-     *     addressBook?: array{eq?: string},
-     *     customerReference?: string|array{contains?: string, eq?: string},
-     *     streetAddress?: array{contains?: string},
-     *     usedAsEmergency?: string,
-     *   },
-     *   page?: array{number?: int, size?: int},
-     *   sort?: 'created_at'|'first_name'|'last_name'|'business_name'|'street_address'|Sort,
+     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|value-of<Sort>
      * }|AddressListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<Address>>
      *
@@ -118,7 +121,7 @@ final class AddressesRawService implements AddressesRawContract
      */
     public function list(
         array|AddressListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AddressListParams::parseRequest(
             $params,
@@ -142,6 +145,7 @@ final class AddressesRawService implements AddressesRawContract
      * Deletes an existing address.
      *
      * @param string $id address ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AddressDeleteResponse>
      *
@@ -149,7 +153,7 @@ final class AddressesRawService implements AddressesRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

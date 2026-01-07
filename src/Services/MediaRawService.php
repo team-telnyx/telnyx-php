@@ -9,6 +9,7 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Media\MediaGetResponse;
 use Telnyx\Media\MediaListParams;
+use Telnyx\Media\MediaListParams\Filter;
 use Telnyx\Media\MediaListResponse;
 use Telnyx\Media\MediaUpdateParams;
 use Telnyx\Media\MediaUpdateResponse;
@@ -17,6 +18,10 @@ use Telnyx\Media\MediaUploadResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MediaRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Media\MediaListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MediaRawService implements MediaRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,6 +36,7 @@ final class MediaRawService implements MediaRawContract
      * Returns the information about a stored media file.
      *
      * @param string $mediaName uniquely identifies a media resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MediaGetResponse>
      *
@@ -38,7 +44,7 @@ final class MediaRawService implements MediaRawContract
      */
     public function retrieve(
         string $mediaName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -56,6 +62,7 @@ final class MediaRawService implements MediaRawContract
      *
      * @param string $mediaName uniquely identifies a media resource
      * @param array{mediaURL?: string, ttlSecs?: int}|MediaUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MediaUpdateResponse>
      *
@@ -64,7 +71,7 @@ final class MediaRawService implements MediaRawContract
     public function update(
         string $mediaName,
         array|MediaUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MediaUpdateParams::parseRequest(
             $params,
@@ -86,7 +93,8 @@ final class MediaRawService implements MediaRawContract
      *
      * Returns a list of stored media files.
      *
-     * @param array{filter?: array{contentType?: list<string>}}|MediaListParams $params
+     * @param array{filter?: Filter|FilterShape}|MediaListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MediaListResponse>
      *
@@ -94,7 +102,7 @@ final class MediaRawService implements MediaRawContract
      */
     public function list(
         array|MediaListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MediaListParams::parseRequest(
             $params,
@@ -117,6 +125,7 @@ final class MediaRawService implements MediaRawContract
      * Deletes a stored media file.
      *
      * @param string $mediaName uniquely identifies a media resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -124,7 +133,7 @@ final class MediaRawService implements MediaRawContract
      */
     public function delete(
         string $mediaName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -141,6 +150,7 @@ final class MediaRawService implements MediaRawContract
      * Downloads a stored media file.
      *
      * @param string $mediaName uniquely identifies a media resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
      *
@@ -148,7 +158,7 @@ final class MediaRawService implements MediaRawContract
      */
     public function download(
         string $mediaName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -168,6 +178,7 @@ final class MediaRawService implements MediaRawContract
      * @param array{
      *   mediaURL: string, mediaName?: string, ttlSecs?: int
      * }|MediaUploadParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MediaUploadResponse>
      *
@@ -175,7 +186,7 @@ final class MediaRawService implements MediaRawContract
      */
     public function upload(
         array|MediaUploadParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MediaUploadParams::parseRequest(
             $params,

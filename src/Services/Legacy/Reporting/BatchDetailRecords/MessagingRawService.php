@@ -8,9 +8,6 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\CldFilter;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\CliFilter;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\FilterType;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingCreateParams;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingDeleteResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingGetResponse;
@@ -19,6 +16,10 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\BatchDetailRecords\MessagingRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Legacy\Reporting\BatchDetailRecords\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MessagingRawService implements MessagingRawContract
 {
     // @phpstan-ignore-next-line
@@ -33,19 +34,11 @@ final class MessagingRawService implements MessagingRawContract
      * Creates a new MDR detailed report request with the specified filters
      *
      * @param array{
-     *   endTime: string|\DateTimeInterface,
-     *   startTime: string|\DateTimeInterface,
+     *   endTime: \DateTimeInterface,
+     *   startTime: \DateTimeInterface,
      *   connections?: list<int>,
      *   directions?: list<int>,
-     *   filters?: list<array{
-     *     billingGroup?: string,
-     *     cld?: string,
-     *     cldFilter?: 'contains'|'starts_with'|'ends_with'|CldFilter,
-     *     cli?: string,
-     *     cliFilter?: 'contains'|'starts_with'|'ends_with'|CliFilter,
-     *     filterType?: 'and'|'or'|FilterType,
-     *     tagsList?: string,
-     *   }|Filter>,
+     *   filters?: list<Filter|FilterShape>,
      *   includeMessageBody?: bool,
      *   managedAccounts?: list<string>,
      *   profiles?: list<string>,
@@ -54,6 +47,7 @@ final class MessagingRawService implements MessagingRawContract
      *   selectAllManagedAccounts?: bool,
      *   timezone?: string,
      * }|MessagingCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingNewResponse>
      *
@@ -61,7 +55,7 @@ final class MessagingRawService implements MessagingRawContract
      */
     public function create(
         array|MessagingCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MessagingCreateParams::parseRequest(
             $params,
@@ -83,13 +77,15 @@ final class MessagingRawService implements MessagingRawContract
      *
      * Retrieves a specific MDR detailed report request by ID
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<MessagingGetResponse>
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -105,12 +101,15 @@ final class MessagingRawService implements MessagingRawContract
      *
      * Retrieves all MDR detailed report requests for the authenticated user
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<MessagingListResponse>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse
-    {
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
@@ -125,13 +124,15 @@ final class MessagingRawService implements MessagingRawContract
      *
      * Deletes a specific MDR detailed report request by ID
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<MessagingDeleteResponse>
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

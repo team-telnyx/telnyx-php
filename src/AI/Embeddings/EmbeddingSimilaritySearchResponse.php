@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type DataShape from \Telnyx\AI\Embeddings\EmbeddingSimilaritySearchResponse\Data
  *
  * @phpstan-type EmbeddingSimilaritySearchResponseShape = array{
- *   data: list<DataShape>
+ *   data: list<Data|DataShape>
  * }
  */
 final class EmbeddingSimilaritySearchResponse implements BaseModel
@@ -49,7 +49,7 @@ final class EmbeddingSimilaritySearchResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DataShape> $data
+     * @param list<Data|DataShape> $data
      */
     public static function with(array $data): self
     {
@@ -61,7 +61,7 @@ final class EmbeddingSimilaritySearchResponse implements BaseModel
     }
 
     /**
-     * @param list<DataShape> $data
+     * @param list<Data|DataShape> $data
      */
     public function withData(array $data): self
     {

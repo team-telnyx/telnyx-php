@@ -5,25 +5,19 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\Versions;
 
 use Telnyx\AI\Assistants\AssistantTool;
-use Telnyx\AI\Assistants\AssistantTool\DtmfTool;
-use Telnyx\AI\Assistants\AssistantTool\HandoffTool;
-use Telnyx\AI\Assistants\AssistantTool\SipReferTool;
 use Telnyx\AI\Assistants\EnabledFeatures;
-use Telnyx\AI\Assistants\HangupTool;
 use Telnyx\AI\Assistants\InsightSettings;
 use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\PrivacySettings;
-use Telnyx\AI\Assistants\RetrievalTool;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
-use Telnyx\AI\Assistants\TransferTool;
 use Telnyx\AI\Assistants\VoiceSettings;
-use Telnyx\AI\Assistants\WebhookTool;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type AssistantToolVariants from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
  * @phpstan-import-type PrivacySettingsShape from \Telnyx\AI\Assistants\PrivacySettings
@@ -119,7 +113,7 @@ final class UpdateAssistant implements BaseModel
     /**
      * The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
      *
-     * @var list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool>|null $tools
+     * @var list<AssistantToolVariants>|null $tools
      */
     #[Optional(list: AssistantTool::class)]
     public ?array $tools;

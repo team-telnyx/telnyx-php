@@ -7,22 +7,28 @@ namespace Telnyx\ServiceContracts\PhoneNumbers;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\Messaging\MessagingGetResponse;
+use Telnyx\PhoneNumbers\Messaging\MessagingListParams\Page;
 use Telnyx\PhoneNumbers\Messaging\MessagingUpdateResponse;
 use Telnyx\PhoneNumberWithMessagingSettings;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type PageShape from \Telnyx\PhoneNumbers\Messaging\MessagingListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface MessagingContract
 {
     /**
      * @api
      *
      * @param string $id identifies the type of resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MessagingGetResponse;
 
     /**
@@ -38,6 +44,7 @@ interface MessagingContract
      * * Omit this field or set its value to `null` to keep the current value.
      * * Set this field to `""` to unassign the number from its messaging profile
      * * Set this field to a quoted UUID of a messaging profile to assign this number to that messaging profile
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -45,22 +52,21 @@ interface MessagingContract
         string $id,
         ?string $messagingProduct = null,
         ?string $messagingProfileID = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MessagingUpdateResponse;
 
     /**
      * @api
      *
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<PhoneNumberWithMessagingSettings>
      *
      * @throws APIException
      */
     public function list(
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null
     ): DefaultPagination;
 }

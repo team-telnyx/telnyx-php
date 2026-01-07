@@ -12,6 +12,9 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\IntegrationsContract;
 use Telnyx\Services\AI\Integrations\ConnectionsService;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class IntegrationsService implements IntegrationsContract
 {
     /**
@@ -39,12 +42,13 @@ final class IntegrationsService implements IntegrationsContract
      * Retrieve integration details
      *
      * @param string $integrationID The integration id
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $integrationID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): IntegrationGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($integrationID, requestOptions: $requestOptions);
@@ -57,10 +61,12 @@ final class IntegrationsService implements IntegrationsContract
      *
      * List all available integrations.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): IntegrationListResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(requestOptions: $requestOptions);

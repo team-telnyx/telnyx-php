@@ -19,7 +19,7 @@ use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams\OrderingGrou
  * @phpstan-import-type OrderingGroupShape from \Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams\OrderingGroup
  *
  * @phpstan-type InexplicitNumberOrderCreateParamsShape = array{
- *   orderingGroups: list<OrderingGroupShape>,
+ *   orderingGroups: list<OrderingGroup|OrderingGroupShape>,
  *   billingGroupID?: string|null,
  *   connectionID?: string|null,
  *   customerReference?: string|null,
@@ -88,7 +88,7 @@ final class InexplicitNumberOrderCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<OrderingGroupShape> $orderingGroups
+     * @param list<OrderingGroup|OrderingGroupShape> $orderingGroups
      */
     public static function with(
         array $orderingGroups,
@@ -112,7 +112,7 @@ final class InexplicitNumberOrderCreateParams implements BaseModel
     /**
      * Group(s) of numbers to order. You can have multiple ordering_groups objects added to a single request.
      *
-     * @param list<OrderingGroupShape> $orderingGroups
+     * @param list<OrderingGroup|OrderingGroupShape> $orderingGroups
      */
     public function withOrderingGroups(array $orderingGroups): self
     {

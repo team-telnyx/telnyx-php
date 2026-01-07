@@ -20,11 +20,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type DataShape = array{
  *   bestEffort?: bool|null,
  *   costInformation?: null|CostInformation|CostInformationShape,
- *   features?: list<FeatureShape>|null,
+ *   features?: list<Feature|FeatureShape>|null,
  *   phoneNumber?: string|null,
  *   quickship?: bool|null,
  *   recordType?: null|RecordType|value-of<RecordType>,
- *   regionInformation?: list<RegionInformationShape>|null,
+ *   regionInformation?: list<RegionInformation|RegionInformationShape>|null,
  *   reservable?: bool|null,
  *   vanityFormat?: string|null,
  * }
@@ -84,9 +84,9 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param CostInformation|CostInformationShape|null $costInformation
-     * @param list<FeatureShape>|null $features
+     * @param list<Feature|FeatureShape>|null $features
      * @param RecordType|value-of<RecordType>|null $recordType
-     * @param list<RegionInformationShape>|null $regionInformation
+     * @param list<RegionInformation|RegionInformationShape>|null $regionInformation
      */
     public static function with(
         ?bool $bestEffort = null,
@@ -138,7 +138,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<FeatureShape> $features
+     * @param list<Feature|FeatureShape> $features
      */
     public function withFeatures(array $features): self
     {
@@ -179,7 +179,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<RegionInformationShape> $regionInformation
+     * @param list<RegionInformation|RegionInformationShape> $regionInformation
      */
     public function withRegionInformation(array $regionInformation): self
     {

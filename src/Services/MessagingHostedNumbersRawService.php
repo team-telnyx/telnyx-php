@@ -11,6 +11,9 @@ use Telnyx\MessagingHostedNumbers\MessagingHostedNumberDeleteResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingHostedNumbersRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MessagingHostedNumbersRawService implements MessagingHostedNumbersRawContract
 {
     // @phpstan-ignore-next-line
@@ -25,6 +28,7 @@ final class MessagingHostedNumbersRawService implements MessagingHostedNumbersRa
      * Delete a messaging hosted number
      *
      * @param string $id identifies the type of resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingHostedNumberDeleteResponse>
      *
@@ -32,7 +36,7 @@ final class MessagingHostedNumbersRawService implements MessagingHostedNumbersRa
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

@@ -13,12 +13,16 @@ use Telnyx\Messaging10dlc\PhoneNumberCampaigns\PhoneNumberCampaignUpdateParams;
 use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface PhoneNumberCampaignsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|PhoneNumberCampaignCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberCampaign>
      *
@@ -26,11 +30,13 @@ interface PhoneNumberCampaignsRawContract
      */
     public function create(
         array|PhoneNumberCampaignCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberCampaign>
      *
@@ -38,13 +44,14 @@ interface PhoneNumberCampaignsRawContract
      */
     public function retrieve(
         string $phoneNumber,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|PhoneNumberCampaignUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberCampaign>
      *
@@ -53,13 +60,14 @@ interface PhoneNumberCampaignsRawContract
     public function update(
         string $campaignPhoneNumber,
         array|PhoneNumberCampaignUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|PhoneNumberCampaignListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PerPagePaginationV2<PhoneNumberCampaign>>
      *
@@ -67,11 +75,13 @@ interface PhoneNumberCampaignsRawContract
      */
     public function list(
         array|PhoneNumberCampaignListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberCampaign>
      *
@@ -79,6 +89,6 @@ interface PhoneNumberCampaignsRawContract
      */
     public function delete(
         string $phoneNumber,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

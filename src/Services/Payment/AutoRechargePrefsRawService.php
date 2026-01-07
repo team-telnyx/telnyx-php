@@ -14,6 +14,9 @@ use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Payment\AutoRechargePrefsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AutoRechargePrefsRawService implements AutoRechargePrefsRawContract
 {
     // @phpstan-ignore-next-line
@@ -30,10 +33,11 @@ final class AutoRechargePrefsRawService implements AutoRechargePrefsRawContract
      * @param array{
      *   enabled?: bool,
      *   invoiceEnabled?: bool,
-     *   preference?: 'credit_paypal'|'ach'|Preference,
+     *   preference?: Preference|value-of<Preference>,
      *   rechargeAmount?: string,
      *   thresholdAmount?: string,
      * }|AutoRechargePrefUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AutoRechargePrefUpdateResponse>
      *
@@ -41,7 +45,7 @@ final class AutoRechargePrefsRawService implements AutoRechargePrefsRawContract
      */
     public function update(
         array|AutoRechargePrefUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AutoRechargePrefUpdateParams::parseRequest(
             $params,
@@ -63,12 +67,15 @@ final class AutoRechargePrefsRawService implements AutoRechargePrefsRawContract
      *
      * Returns the payment auto recharge preferences.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<AutoRechargePrefListResponse>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse
-    {
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',

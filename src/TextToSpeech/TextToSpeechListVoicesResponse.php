@@ -13,7 +13,7 @@ use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse\Voice;
  * @phpstan-import-type VoiceShape from \Telnyx\TextToSpeech\TextToSpeechListVoicesResponse\Voice
  *
  * @phpstan-type TextToSpeechListVoicesResponseShape = array{
- *   voices?: list<VoiceShape>|null
+ *   voices?: list<Voice|VoiceShape>|null
  * }
  */
 final class TextToSpeechListVoicesResponse implements BaseModel
@@ -35,7 +35,7 @@ final class TextToSpeechListVoicesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VoiceShape>|null $voices
+     * @param list<Voice|VoiceShape>|null $voices
      */
     public static function with(?array $voices = null): self
     {
@@ -47,7 +47,7 @@ final class TextToSpeechListVoicesResponse implements BaseModel
     }
 
     /**
-     * @param list<VoiceShape> $voices
+     * @param list<Voice|VoiceShape> $voices
      */
     public function withVoices(array $voices): self
     {

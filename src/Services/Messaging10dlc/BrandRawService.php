@@ -30,6 +30,9 @@ use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging10dlc\BrandRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class BrandRawService implements BrandRawContract
 {
     // @phpstan-ignore-next-line
@@ -47,7 +50,7 @@ final class BrandRawService implements BrandRawContract
      *   country: string,
      *   displayName: string,
      *   email: string,
-     *   entityType: 'PRIVATE_PROFIT'|'PUBLIC_PROFIT'|'NON_PROFIT'|'GOVERNMENT'|'SOLE_PROPRIETOR'|EntityType,
+     *   entityType: EntityType|value-of<EntityType>,
      *   vertical: value-of<Vertical>,
      *   businessContactEmail?: string,
      *   city?: string,
@@ -69,6 +72,7 @@ final class BrandRawService implements BrandRawContract
      *   webhookURL?: string,
      *   website?: string,
      * }|BrandCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TelnyxBrand>
      *
@@ -76,7 +80,7 @@ final class BrandRawService implements BrandRawContract
      */
     public function create(
         array|BrandCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = BrandCreateParams::parseRequest(
             $params,
@@ -98,13 +102,15 @@ final class BrandRawService implements BrandRawContract
      *
      * Retrieve a brand by `brandId`.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<BrandGetResponse>
      *
      * @throws APIException
      */
     public function retrieve(
         string $brandID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -124,16 +130,16 @@ final class BrandRawService implements BrandRawContract
      *   country: string,
      *   displayName: string,
      *   email: string,
-     *   entityType: 'PRIVATE_PROFIT'|'PUBLIC_PROFIT'|'NON_PROFIT'|'GOVERNMENT'|'SOLE_PROPRIETOR'|EntityType,
+     *   entityType: EntityType|value-of<EntityType>,
      *   vertical: value-of<Vertical>,
      *   altBusinessID?: string,
-     *   altBusinessIDType?: 'NONE'|'DUNS'|'GIIN'|'LEI'|AltBusinessIDType,
+     *   altBusinessIDType?: AltBusinessIDType|value-of<AltBusinessIDType>,
      *   businessContactEmail?: string,
      *   city?: string,
      *   companyName?: string,
      *   ein?: string,
      *   firstName?: string,
-     *   identityStatus?: 'VERIFIED'|'UNVERIFIED'|'SELF_DECLARED'|'VETTED_VERIFIED'|BrandIdentityStatus,
+     *   identityStatus?: BrandIdentityStatus|value-of<BrandIdentityStatus>,
      *   ipAddress?: string,
      *   isReseller?: bool,
      *   lastName?: string,
@@ -147,6 +153,7 @@ final class BrandRawService implements BrandRawContract
      *   webhookURL?: string,
      *   website?: string,
      * }|BrandUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TelnyxBrand>
      *
@@ -155,7 +162,7 @@ final class BrandRawService implements BrandRawContract
     public function update(
         string $brandID,
         array|BrandUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = BrandUpdateParams::parseRequest(
             $params,
@@ -188,6 +195,7 @@ final class BrandRawService implements BrandRawContract
      *   state?: string,
      *   tcrBrandID?: string,
      * }|BrandListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PerPagePaginationV2<BrandListResponse>>
      *
@@ -195,7 +203,7 @@ final class BrandRawService implements BrandRawContract
      */
     public function list(
         array|BrandListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = BrandListParams::parseRequest(
             $params,
@@ -221,13 +229,15 @@ final class BrandRawService implements BrandRawContract
      *
      * Delete Brand. This endpoint is used to delete a brand. Note the brand cannot be deleted if it contains one or more active campaigns, the campaigns need to be inactive and at least 3 months old due to billing purposes.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<mixed>
      *
      * @throws APIException
      */
     public function delete(
         string $brandID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -255,13 +265,15 @@ final class BrandRawService implements BrandRawContract
      *   found.
      * * `OTHERS` - Details of the data misrepresentation if any.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<BrandGetFeedbackResponse>
      *
      * @throws APIException
      */
     public function getFeedback(
         string $brandID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -277,13 +289,15 @@ final class BrandRawService implements BrandRawContract
      *
      * Resend brand 2FA email
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<mixed>
      *
      * @throws APIException
      */
     public function resend2faEmail(
         string $brandID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -308,6 +322,7 @@ final class BrandRawService implements BrandRawContract
      *
      * @param string $referenceID The reference ID returned when the OTP was initially triggered
      * @param array{brandID?: string}|BrandRetrieveSMSOtpStatusParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BrandGetSMSOtpStatusResponse>
      *
@@ -316,7 +331,7 @@ final class BrandRawService implements BrandRawContract
     public function retrieveSMSOtpStatus(
         string $referenceID,
         array|BrandRetrieveSMSOtpStatusParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = BrandRetrieveSMSOtpStatusParams::parseRequest(
             $params,
@@ -338,13 +353,15 @@ final class BrandRawService implements BrandRawContract
      *
      * This operation allows you to revet the brand. However, revetting is allowed once after the successful brand registration and thereafter limited to once every 3 months.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<TelnyxBrand>
      *
      * @throws APIException
      */
     public function revet(
         string $brandID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -377,6 +394,7 @@ final class BrandRawService implements BrandRawContract
      * @param array{
      *   pinSMS: string, successSMS: string
      * }|BrandTriggerSMSOtpParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BrandTriggerSMSOtpResponse>
      *
@@ -385,7 +403,7 @@ final class BrandRawService implements BrandRawContract
     public function triggerSMSOtp(
         string $brandID,
         array|BrandTriggerSMSOtpParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = BrandTriggerSMSOtpParams::parseRequest(
             $params,
@@ -425,6 +443,7 @@ final class BrandRawService implements BrandRawContract
      *
      * @param string $brandID The Brand ID for which to verify the OTP
      * @param array{otpPin: string}|BrandVerifySMSOtpParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -433,7 +452,7 @@ final class BrandRawService implements BrandRawContract
     public function verifySMSOtp(
         string $brandID,
         array|BrandVerifySMSOtpParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = BrandVerifySMSOtpParams::parseRequest(
             $params,

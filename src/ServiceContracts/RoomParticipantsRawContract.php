@@ -12,12 +12,16 @@ use Telnyx\RoomParticipant;
 use Telnyx\RoomParticipants\RoomParticipantGetResponse;
 use Telnyx\RoomParticipants\RoomParticipantListParams;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface RoomParticipantsRawContract
 {
     /**
      * @api
      *
      * @param string $roomParticipantID the unique identifier of a room participant
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RoomParticipantGetResponse>
      *
@@ -25,13 +29,14 @@ interface RoomParticipantsRawContract
      */
     public function retrieve(
         string $roomParticipantID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|RoomParticipantListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<RoomParticipant>>
      *
@@ -39,6 +44,6 @@ interface RoomParticipantsRawContract
      */
     public function list(
         array|RoomParticipantListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

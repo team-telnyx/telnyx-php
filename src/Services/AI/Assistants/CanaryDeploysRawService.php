@@ -14,6 +14,10 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\CanaryDeploysRawContract;
 
+/**
+ * @phpstan-import-type VersionConfigShape from \Telnyx\AI\Assistants\CanaryDeploys\VersionConfig
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class CanaryDeploysRawService implements CanaryDeploysRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,8 +35,9 @@ final class CanaryDeploysRawService implements CanaryDeploysRawContract
      * percentages for A/B testing or gradual rollouts of assistant versions.
      *
      * @param array{
-     *   versions: list<array{percentage: float, versionID: string}|VersionConfig>
+     *   versions: list<VersionConfig|VersionConfigShape>
      * }|CanaryDeployCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CanaryDeployResponse>
      *
@@ -41,7 +46,7 @@ final class CanaryDeploysRawService implements CanaryDeploysRawContract
     public function create(
         string $assistantID,
         array|CanaryDeployCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CanaryDeployCreateParams::parseRequest(
             $params,
@@ -66,13 +71,15 @@ final class CanaryDeploysRawService implements CanaryDeploysRawContract
      * Retrieves the current canary deploy configuration with all version IDs and their
      * traffic percentages for the specified assistant.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<CanaryDeployResponse>
      *
      * @throws APIException
      */
     public function retrieve(
         string $assistantID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -92,8 +99,9 @@ final class CanaryDeploysRawService implements CanaryDeploysRawContract
      *   All old versions and percentages are replaces by new ones from this request.
      *
      * @param array{
-     *   versions: list<array{percentage: float, versionID: string}|VersionConfig>
+     *   versions: list<VersionConfig|VersionConfigShape>
      * }|CanaryDeployUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CanaryDeployResponse>
      *
@@ -102,7 +110,7 @@ final class CanaryDeploysRawService implements CanaryDeploysRawContract
     public function update(
         string $assistantID,
         array|CanaryDeployUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CanaryDeployUpdateParams::parseRequest(
             $params,
@@ -126,13 +134,15 @@ final class CanaryDeploysRawService implements CanaryDeploysRawContract
      *
      * Removes all canary deploy configurations for the specified assistant.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<mixed>
      *
      * @throws APIException
      */
     public function delete(
         string $assistantID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

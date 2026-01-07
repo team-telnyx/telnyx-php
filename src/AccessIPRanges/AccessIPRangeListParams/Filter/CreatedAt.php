@@ -14,7 +14,8 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  *
  * @phpstan-import-type DateRangeFilterShape from \Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter\CreatedAt\DateRangeFilter
  *
- * @phpstan-type CreatedAtShape = \DateTimeInterface|DateRangeFilterShape
+ * @phpstan-type CreatedAtVariants = \DateTimeInterface|DateRangeFilter
+ * @phpstan-type CreatedAtShape = CreatedAtVariants|DateRangeFilterShape
  */
 final class CreatedAt implements ConverterSource
 {

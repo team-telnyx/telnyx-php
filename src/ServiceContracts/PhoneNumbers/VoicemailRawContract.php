@@ -13,6 +13,9 @@ use Telnyx\PhoneNumbers\Voicemail\VoicemailUpdateParams;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface VoicemailRawContract
 {
     /**
@@ -20,6 +23,7 @@ interface VoicemailRawContract
      *
      * @param string $phoneNumberID the ID of the phone number
      * @param array<string,mixed>|VoicemailCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VoicemailNewResponse>
      *
@@ -28,13 +32,14 @@ interface VoicemailRawContract
     public function create(
         string $phoneNumberID,
         array|VoicemailCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $phoneNumberID the ID of the phone number
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VoicemailGetResponse>
      *
@@ -42,7 +47,7 @@ interface VoicemailRawContract
      */
     public function retrieve(
         string $phoneNumberID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -50,6 +55,7 @@ interface VoicemailRawContract
      *
      * @param string $phoneNumberID the ID of the phone number
      * @param array<string,mixed>|VoicemailUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VoicemailUpdateResponse>
      *
@@ -58,6 +64,6 @@ interface VoicemailRawContract
     public function update(
         string $phoneNumberID,
         array|VoicemailUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

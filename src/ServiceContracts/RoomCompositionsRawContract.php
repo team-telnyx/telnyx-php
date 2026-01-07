@@ -14,12 +14,16 @@ use Telnyx\RoomCompositions\RoomCompositionGetResponse;
 use Telnyx\RoomCompositions\RoomCompositionListParams;
 use Telnyx\RoomCompositions\RoomCompositionNewResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface RoomCompositionsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|RoomCompositionCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RoomCompositionNewResponse>
      *
@@ -27,13 +31,14 @@ interface RoomCompositionsRawContract
      */
     public function create(
         array|RoomCompositionCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $roomCompositionID the unique identifier of a room composition
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RoomCompositionGetResponse>
      *
@@ -41,13 +46,14 @@ interface RoomCompositionsRawContract
      */
     public function retrieve(
         string $roomCompositionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|RoomCompositionListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<RoomComposition>>
      *
@@ -55,13 +61,14 @@ interface RoomCompositionsRawContract
      */
     public function list(
         array|RoomCompositionListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $roomCompositionID the unique identifier of a room composition
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -69,6 +76,6 @@ interface RoomCompositionsRawContract
      */
     public function delete(
         string $roomCompositionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

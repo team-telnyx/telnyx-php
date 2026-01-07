@@ -13,6 +13,9 @@ use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonParams;
 use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonParams\Status;
 use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class StreamsRawService implements StreamsRawContract
 {
     // @phpstan-ignore-next-line
@@ -28,8 +31,9 @@ final class StreamsRawService implements StreamsRawContract
      *
      * @param string $streamingSid path param: Uniquely identifies the streaming by id
      * @param array{
-     *   accountSid: string, callSid: string, status?: 'stopped'|Status
+     *   accountSid: string, callSid: string, status?: Status|value-of<Status>
      * }|StreamStreamingSidJsonParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<StreamStreamingSidJsonResponse>
      *
@@ -38,7 +42,7 @@ final class StreamsRawService implements StreamsRawContract
     public function streamingSidJson(
         string $streamingSid,
         array|StreamStreamingSidJsonParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = StreamStreamingSidJsonParams::parseRequest(
             $params,

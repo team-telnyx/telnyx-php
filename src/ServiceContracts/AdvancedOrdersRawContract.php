@@ -14,12 +14,16 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface AdvancedOrdersRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|AdvancedOrderCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AdvancedOrderNewResponse>
      *
@@ -27,11 +31,13 @@ interface AdvancedOrdersRawContract
      */
     public function create(
         array|AdvancedOrderCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AdvancedOrderGetResponse>
      *
@@ -39,22 +45,27 @@ interface AdvancedOrdersRawContract
      */
     public function retrieve(
         string $orderID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<AdvancedOrderListResponse>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse;
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|AdvancedOrderUpdateRequirementGroupParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AdvancedOrderUpdateRequirementGroupResponse>
      *
@@ -63,6 +74,6 @@ interface AdvancedOrdersRawContract
     public function updateRequirementGroup(
         string $advancedOrderID,
         array|AdvancedOrderUpdateRequirementGroupParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

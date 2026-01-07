@@ -7,6 +7,8 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Connections\ConnectionGetResponse;
 use Telnyx\Connections\ConnectionListActiveCallsResponse;
+use Telnyx\Connections\ConnectionListParams\Filter;
+use Telnyx\Connections\ConnectionListParams\Page;
 use Telnyx\Connections\ConnectionListParams\Sort;
 use Telnyx\Connections\ConnectionListResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -15,6 +17,12 @@ use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ConnectionsContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Connections\ConnectionListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Connections\ConnectionListParams\Page
+ * @phpstan-import-type PageShape from \Telnyx\Connections\ConnectionListActiveCallsParams\Page as PageShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ConnectionsService implements ConnectionsContract
 {
     /**
@@ -36,12 +44,13 @@ final class ConnectionsService implements ConnectionsContract
      * Retrieves the high-level details of an existing connection. To retrieve specific authentication information, use the endpoint for the specific connection type.
      *
      * @param string $id IP Connection ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ConnectionGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -54,15 +63,9 @@ final class ConnectionsService implements ConnectionsContract
      *
      * Returns a list of your connections irrespective of type.
      *
-     * @param array{
-     *   connectionName?: array{contains?: string},
-     *   fqdn?: string,
-     *   outboundVoiceProfileID?: string,
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_name], filter[fqdn], filter[outbound_voice_profile_id], filter[outbound.outbound_voice_profile_id]
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
-     * @param 'created_at'|'connection_name'|'active'|Sort $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_name], filter[fqdn], filter[outbound_voice_profile_id], filter[outbound.outbound_voice_profile_id]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
      * That is: <ul>
      *   <li>
      *     <code>connection_name</code>: sorts the result by the
@@ -74,16 +77,17 @@ final class ConnectionsService implements ConnectionsContract
      *     <code>connection_name</code> field in descending order.
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<ConnectionListResponse>
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
-        ?array $page = null,
-        string|Sort $sort = 'created_at',
-        ?RequestOptions $requestOptions = null,
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        Sort|string $sort = 'created_at',
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination {
         $params = Util::removeNulls(
             ['filter' => $filter, 'page' => $page, 'sort' => $sort]
@@ -101,9 +105,8 @@ final class ConnectionsService implements ConnectionsContract
      * Lists all active calls for given connection. Acceptable connections are either SIP connections with webhook_url or xml_request_url, call control or texml. Returned results are cursor paginated.
      *
      * @param string $connectionID Telnyx connection id
-     * @param array{
-     *   after?: string, before?: string, limit?: int, number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
+     * @param \Telnyx\Connections\ConnectionListActiveCallsParams\Page|PageShape1 $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<ConnectionListActiveCallsResponse>
      *
@@ -111,8 +114,8 @@ final class ConnectionsService implements ConnectionsContract
      */
     public function listActiveCalls(
         string $connectionID,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null,
+        \Telnyx\Connections\ConnectionListActiveCallsParams\Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination {
         $params = Util::removeNulls(['page' => $page]);
 

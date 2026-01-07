@@ -14,35 +14,43 @@ use Telnyx\Reports\MdrUsageReports\MdrUsageReportGetResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface MdrUsageReportsContract
 {
     /**
      * @api
      *
-     * @param 'NO_AGGREGATION'|'PROFILE'|'TAGS'|AggregationType $aggregationType
+     * @param AggregationType|value-of<AggregationType> $aggregationType
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        string|AggregationType $aggregationType,
-        string|\DateTimeInterface $endDate,
-        string|\DateTimeInterface $startDate,
+        AggregationType|string $aggregationType,
+        \DateTimeInterface $endDate,
+        \DateTimeInterface $startDate,
         ?string $profiles = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MdrUsageReportNewResponse;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MdrUsageReportGetResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<MdrUsageReport>
      *
@@ -51,32 +59,35 @@ interface MdrUsageReportsContract
     public function list(
         ?int $pageNumber = null,
         ?int $pageSize = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MdrUsageReportDeleteResponse;
 
     /**
      * @api
      *
-     * @param 'NO_AGGREGATION'|'PROFILE'|'TAGS'|\Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType $aggregationType
+     * @param \Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType|value-of<\Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType> $aggregationType
      * @param list<string> $profiles
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function fetchSync(
-        string|\Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType $aggregationType,
-        string|\DateTimeInterface|null $endDate = null,
+        \Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType|string $aggregationType,
+        ?\DateTimeInterface $endDate = null,
         ?array $profiles = null,
-        string|\DateTimeInterface|null $startDate = null,
-        ?RequestOptions $requestOptions = null,
+        ?\DateTimeInterface $startDate = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MdrUsageReportFetchSyncResponse;
 }

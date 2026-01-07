@@ -28,15 +28,15 @@ use Telnyx\Messages\MessageCancelScheduledResponse\Type;
  *
  * @phpstan-type MessageCancelScheduledResponseShape = array{
  *   id?: string|null,
- *   cc?: list<CcShape>|null,
+ *   cc?: list<Cc|CcShape>|null,
  *   completedAt?: \DateTimeInterface|null,
  *   cost?: null|Cost|CostShape,
  *   costBreakdown?: null|CostBreakdown|CostBreakdownShape,
  *   direction?: null|Direction|value-of<Direction>,
  *   encoding?: string|null,
- *   errors?: list<MessagingErrorShape>|null,
+ *   errors?: list<MessagingError|MessagingErrorShape>|null,
  *   from?: null|From|FromShape,
- *   media?: list<MediaShape>|null,
+ *   media?: list<Media|MediaShape>|null,
  *   messagingProfileID?: string|null,
  *   organizationID?: string|null,
  *   parts?: int|null,
@@ -49,7 +49,7 @@ use Telnyx\Messages\MessageCancelScheduledResponse\Type;
  *   tcrCampaignID?: string|null,
  *   tcrCampaignRegistered?: string|null,
  *   text?: string|null,
- *   to?: list<ToShape>|null,
+ *   to?: list<To|ToShape>|null,
  *   type?: null|Type|value-of<Type>,
  *   validUntil?: \DateTimeInterface|null,
  *   webhookFailoverURL?: string|null,
@@ -233,16 +233,16 @@ final class MessageCancelScheduledResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<CcShape>|null $cc
+     * @param list<Cc|CcShape>|null $cc
      * @param Cost|CostShape|null $cost
      * @param CostBreakdown|CostBreakdownShape|null $costBreakdown
      * @param Direction|value-of<Direction>|null $direction
-     * @param list<MessagingErrorShape>|null $errors
+     * @param list<MessagingError|MessagingErrorShape>|null $errors
      * @param From|FromShape|null $from
-     * @param list<MediaShape>|null $media
+     * @param list<Media|MediaShape>|null $media
      * @param RecordType|value-of<RecordType>|null $recordType
      * @param list<string>|null $tags
-     * @param list<ToShape>|null $to
+     * @param list<To|ToShape>|null $to
      * @param Type|value-of<Type>|null $type
      */
     public static function with(
@@ -319,7 +319,7 @@ final class MessageCancelScheduledResponse implements BaseModel
     }
 
     /**
-     * @param list<CcShape> $cc
+     * @param list<Cc|CcShape> $cc
      */
     public function withCc(array $cc): self
     {
@@ -392,7 +392,7 @@ final class MessageCancelScheduledResponse implements BaseModel
     /**
      * These errors may point at addressees when referring to unsuccessful/unconfirmed delivery statuses.
      *
-     * @param list<MessagingErrorShape> $errors
+     * @param list<MessagingError|MessagingErrorShape> $errors
      */
     public function withErrors(array $errors): self
     {
@@ -414,7 +414,7 @@ final class MessageCancelScheduledResponse implements BaseModel
     }
 
     /**
-     * @param list<MediaShape> $media
+     * @param list<Media|MediaShape> $media
      */
     public function withMedia(array $media): self
     {
@@ -564,7 +564,7 @@ final class MessageCancelScheduledResponse implements BaseModel
     }
 
     /**
-     * @param list<ToShape> $to
+     * @param list<To|ToShape> $to
      */
     public function withTo(array $to): self
     {

@@ -23,7 +23,7 @@ use Telnyx\NotificationEventConditions\NotificationEventConditionListResponse\Pa
  *   enabled?: bool|null,
  *   name?: string|null,
  *   notificationEventID?: string|null,
- *   parameters?: list<ParameterShape>|null,
+ *   parameters?: list<Parameter|ParameterShape>|null,
  *   supportedChannels?: list<string>|null,
  *   updatedAt?: \DateTimeInterface|null,
  * }
@@ -102,7 +102,7 @@ final class NotificationEventConditionListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param AssociatedRecordType|value-of<AssociatedRecordType>|null $associatedRecordType
-     * @param list<ParameterShape>|null $parameters
+     * @param list<Parameter|ParameterShape>|null $parameters
      * @param list<string>|null $supportedChannels
      */
     public static function with(
@@ -226,7 +226,7 @@ final class NotificationEventConditionListResponse implements BaseModel
     }
 
     /**
-     * @param list<ParameterShape> $parameters
+     * @param list<Parameter|ParameterShape> $parameters
      */
     public function withParameters(array $parameters): self
     {

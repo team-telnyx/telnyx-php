@@ -10,6 +10,9 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\Migrations\ActionsContract;
 use Telnyx\Storage\Migrations\Actions\ActionStopResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsService implements ActionsContract
 {
     /**
@@ -31,12 +34,13 @@ final class ActionsService implements ActionsContract
      * Stop a Migration
      *
      * @param string $id unique identifier for the data migration
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function stop(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ActionStopResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->stop($id, requestOptions: $requestOptions);

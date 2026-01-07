@@ -12,6 +12,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\InsightGroups\InsightsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class InsightsRawService implements InsightsRawContract
 {
     // @phpstan-ignore-next-line
@@ -27,6 +30,7 @@ final class InsightsRawService implements InsightsRawContract
      *
      * @param string $insightID The ID of the insight
      * @param array{groupID: string}|InsightAssignParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -35,7 +39,7 @@ final class InsightsRawService implements InsightsRawContract
     public function assign(
         string $insightID,
         array|InsightAssignParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = InsightAssignParams::parseRequest(
             $params,
@@ -64,6 +68,7 @@ final class InsightsRawService implements InsightsRawContract
      *
      * @param string $insightID The ID of the insight
      * @param array{groupID: string}|InsightDeleteUnassignParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -72,7 +77,7 @@ final class InsightsRawService implements InsightsRawContract
     public function deleteUnassign(
         string $insightID,
         array|InsightDeleteUnassignParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = InsightDeleteUnassignParams::parseRequest(
             $params,

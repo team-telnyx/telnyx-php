@@ -17,7 +17,7 @@ use Telnyx\ExternalConnections\Releases\ReleaseListResponse\TelephoneNumber;
  *   createdAt?: string|null,
  *   errorMessage?: string|null,
  *   status?: null|Status|value-of<Status>,
- *   telephoneNumbers?: list<TelephoneNumberShape>|null,
+ *   telephoneNumbers?: list<TelephoneNumber|TelephoneNumberShape>|null,
  *   tenantID?: string|null,
  *   ticketID?: string|null,
  * }
@@ -71,7 +71,7 @@ final class ReleaseListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Status|value-of<Status>|null $status
-     * @param list<TelephoneNumberShape>|null $telephoneNumbers
+     * @param list<TelephoneNumber|TelephoneNumberShape>|null $telephoneNumbers
      */
     public static function with(
         ?string $createdAt = null,
@@ -129,7 +129,7 @@ final class ReleaseListResponse implements BaseModel
     }
 
     /**
-     * @param list<TelephoneNumberShape> $telephoneNumbers
+     * @param list<TelephoneNumber|TelephoneNumberShape> $telephoneNumbers
      */
     public function withTelephoneNumbers(array $telephoneNumbers): self
     {

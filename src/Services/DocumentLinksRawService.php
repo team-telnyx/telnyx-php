@@ -9,10 +9,17 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\DocumentLinks\DocumentLinkListParams;
+use Telnyx\DocumentLinks\DocumentLinkListParams\Filter;
+use Telnyx\DocumentLinks\DocumentLinkListParams\Page;
 use Telnyx\DocumentLinks\DocumentLinkListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DocumentLinksRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\DocumentLinks\DocumentLinkListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\DocumentLinks\DocumentLinkListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class DocumentLinksRawService implements DocumentLinksRawContract
 {
     // @phpstan-ignore-next-line
@@ -27,9 +34,9 @@ final class DocumentLinksRawService implements DocumentLinksRawContract
      * List all documents links ordered by created_at descending.
      *
      * @param array{
-     *   filter?: array{linkedRecordType?: string, linkedResourceID?: string},
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|DocumentLinkListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<DocumentLinkListResponse>>
      *
@@ -37,7 +44,7 @@ final class DocumentLinksRawService implements DocumentLinksRawContract
      */
     public function list(
         array|DocumentLinkListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = DocumentLinkListParams::parseRequest(
             $params,

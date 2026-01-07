@@ -11,6 +11,7 @@ use Telnyx\Rooms\Sessions\Actions\ActionsParticipantsRequest\Participants;
 use Telnyx\Rooms\Sessions\Actions\ActionsParticipantsRequest\Participants\AllParticipants;
 
 /**
+ * @phpstan-import-type ParticipantsVariants from \Telnyx\Rooms\Sessions\Actions\ActionsParticipantsRequest\Participants
  * @phpstan-import-type ParticipantsShape from \Telnyx\Rooms\Sessions\Actions\ActionsParticipantsRequest\Participants
  *
  * @phpstan-type ActionsParticipantsRequestShape = array{
@@ -33,7 +34,7 @@ final class ActionsParticipantsRequest implements BaseModel
     /**
      * Either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant.
      *
-     * @var list<string>|value-of<AllParticipants>|null $participants
+     * @var ParticipantsVariants|null $participants
      */
     #[Optional(union: Participants::class)]
     public array|string|null $participants;

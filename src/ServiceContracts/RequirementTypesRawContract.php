@@ -11,12 +11,16 @@ use Telnyx\RequirementTypes\RequirementTypeGetResponse;
 use Telnyx\RequirementTypes\RequirementTypeListParams;
 use Telnyx\RequirementTypes\RequirementTypeListResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface RequirementTypesRawContract
 {
     /**
      * @api
      *
      * @param string $id Uniquely identifies the requirement_type record
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RequirementTypeGetResponse>
      *
@@ -24,13 +28,14 @@ interface RequirementTypesRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|RequirementTypeListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RequirementTypeListResponse>
      *
@@ -38,6 +43,6 @@ interface RequirementTypesRawContract
      */
     public function list(
         array|RequirementTypeListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

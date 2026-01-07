@@ -10,23 +10,29 @@ use Telnyx\List_\ListGetAllResponse;
 use Telnyx\List_\ListGetByZoneResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ListRawContract
 {
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ListGetAllResponse>
      *
      * @throws APIException
      */
     public function retrieveAll(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $channelZoneID Channel zone identifier
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ListGetByZoneResponse>
      *
@@ -34,6 +40,6 @@ interface ListRawContract
      */
     public function retrieveByZone(
         string $channelZoneID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

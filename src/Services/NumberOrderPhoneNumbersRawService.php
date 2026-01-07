@@ -9,14 +9,21 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberGetResponse;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListParams;
+use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListParams\Filter;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListResponse;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementGroupParams;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementGroupResponse;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementsParams;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementsResponse;
+use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumberOrderPhoneNumbersRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListParams\Filter
+ * @phpstan-import-type UpdateRegulatoryRequirementShape from \Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class NumberOrderPhoneNumbersRawService implements NumberOrderPhoneNumbersRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,6 +38,7 @@ final class NumberOrderPhoneNumbersRawService implements NumberOrderPhoneNumbers
      * Get an existing phone number in number order.
      *
      * @param string $numberOrderPhoneNumberID the number order phone number ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NumberOrderPhoneNumberGetResponse>
      *
@@ -38,7 +46,7 @@ final class NumberOrderPhoneNumbersRawService implements NumberOrderPhoneNumbers
      */
     public function retrieve(
         string $numberOrderPhoneNumberID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -55,8 +63,9 @@ final class NumberOrderPhoneNumbersRawService implements NumberOrderPhoneNumbers
      * Get a list of phone numbers associated to orders.
      *
      * @param array{
-     *   filter?: array{countryCode?: string}
+     *   filter?: Filter|FilterShape
      * }|NumberOrderPhoneNumberListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NumberOrderPhoneNumberListResponse>
      *
@@ -64,7 +73,7 @@ final class NumberOrderPhoneNumbersRawService implements NumberOrderPhoneNumbers
      */
     public function list(
         array|NumberOrderPhoneNumberListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = NumberOrderPhoneNumberListParams::parseRequest(
             $params,
@@ -90,6 +99,7 @@ final class NumberOrderPhoneNumbersRawService implements NumberOrderPhoneNumbers
      * @param array{
      *   requirementGroupID: string
      * }|NumberOrderPhoneNumberUpdateRequirementGroupParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NumberOrderPhoneNumberUpdateRequirementGroupResponse>
      *
@@ -98,7 +108,7 @@ final class NumberOrderPhoneNumbersRawService implements NumberOrderPhoneNumbers
     public function updateRequirementGroup(
         string $id,
         array|NumberOrderPhoneNumberUpdateRequirementGroupParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = NumberOrderPhoneNumberUpdateRequirementGroupParams::parseRequest(
             $params,
@@ -122,10 +132,9 @@ final class NumberOrderPhoneNumbersRawService implements NumberOrderPhoneNumbers
      *
      * @param string $numberOrderPhoneNumberID the number order phone number ID
      * @param array{
-     *   regulatoryRequirements?: list<array{
-     *     fieldValue?: string, requirementID?: string
-     *   }>,
+     *   regulatoryRequirements?: list<UpdateRegulatoryRequirement|UpdateRegulatoryRequirementShape>,
      * }|NumberOrderPhoneNumberUpdateRequirementsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NumberOrderPhoneNumberUpdateRequirementsResponse>
      *
@@ -134,7 +143,7 @@ final class NumberOrderPhoneNumbersRawService implements NumberOrderPhoneNumbers
     public function updateRequirements(
         string $numberOrderPhoneNumberID,
         array|NumberOrderPhoneNumberUpdateRequirementsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = NumberOrderPhoneNumberUpdateRequirementsParams::parseRequest(
             $params,

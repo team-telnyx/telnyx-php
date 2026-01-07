@@ -13,6 +13,9 @@ use Telnyx\Legacy\Reporting\UsageReports\UsageReportRetrieveSpeechToTextParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\UsageReportsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class UsageReportsRawService implements UsageReportsRawContract
 {
     // @phpstan-ignore-next-line
@@ -27,8 +30,9 @@ final class UsageReportsRawService implements UsageReportsRawContract
      * Generate and fetch speech to text usage report synchronously. This endpoint will both generate and fetch the speech to text report over a specified time period.
      *
      * @param array{
-     *   endDate?: string|\DateTimeInterface, startDate?: string|\DateTimeInterface
+     *   endDate?: \DateTimeInterface, startDate?: \DateTimeInterface
      * }|UsageReportRetrieveSpeechToTextParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UsageReportGetSpeechToTextResponse>
      *
@@ -36,7 +40,7 @@ final class UsageReportsRawService implements UsageReportsRawContract
      */
     public function retrieveSpeechToText(
         array|UsageReportRetrieveSpeechToTextParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = UsageReportRetrieveSpeechToTextParams::parseRequest(
             $params,

@@ -23,6 +23,9 @@ use Telnyx\OAuthClients\OAuthClientUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\OAuthClientsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class OAuthClientsRawService implements OAuthClientsRawContract
 {
     // @phpstan-ignore-next-line
@@ -37,9 +40,9 @@ final class OAuthClientsRawService implements OAuthClientsRawContract
      * Create a new OAuth client
      *
      * @param array{
-     *   allowedGrantTypes: list<'client_credentials'|'authorization_code'|'refresh_token'|AllowedGrantType>,
+     *   allowedGrantTypes: list<AllowedGrantType|value-of<AllowedGrantType>>,
      *   allowedScopes: list<string>,
-     *   clientType: 'public'|'confidential'|ClientType,
+     *   clientType: ClientType|value-of<ClientType>,
      *   name: string,
      *   logoUri?: string,
      *   policyUri?: string,
@@ -47,6 +50,7 @@ final class OAuthClientsRawService implements OAuthClientsRawContract
      *   requirePkce?: bool,
      *   tosUri?: string,
      * }|OAuthClientCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OAuthClientNewResponse>
      *
@@ -54,7 +58,7 @@ final class OAuthClientsRawService implements OAuthClientsRawContract
      */
     public function create(
         array|OAuthClientCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = OAuthClientCreateParams::parseRequest(
             $params,
@@ -77,6 +81,7 @@ final class OAuthClientsRawService implements OAuthClientsRawContract
      * Retrieve a single OAuth client by ID
      *
      * @param string $id OAuth client ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OAuthClientGetResponse>
      *
@@ -84,7 +89,7 @@ final class OAuthClientsRawService implements OAuthClientsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -102,7 +107,7 @@ final class OAuthClientsRawService implements OAuthClientsRawContract
      *
      * @param string $id OAuth client ID
      * @param array{
-     *   allowedGrantTypes?: list<'client_credentials'|'authorization_code'|'refresh_token'|OAuthClientUpdateParams\AllowedGrantType>,
+     *   allowedGrantTypes?: list<OAuthClientUpdateParams\AllowedGrantType|value-of<OAuthClientUpdateParams\AllowedGrantType>>,
      *   allowedScopes?: list<string>,
      *   logoUri?: string,
      *   name?: string,
@@ -111,6 +116,7 @@ final class OAuthClientsRawService implements OAuthClientsRawContract
      *   requirePkce?: bool,
      *   tosUri?: string,
      * }|OAuthClientUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OAuthClientUpdateResponse>
      *
@@ -119,7 +125,7 @@ final class OAuthClientsRawService implements OAuthClientsRawContract
     public function update(
         string $id,
         array|OAuthClientUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = OAuthClientUpdateParams::parseRequest(
             $params,
@@ -142,15 +148,16 @@ final class OAuthClientsRawService implements OAuthClientsRawContract
      * Retrieve a paginated list of OAuth clients for the authenticated user
      *
      * @param array{
-     *   filterAllowedGrantTypesContains?: 'client_credentials'|'authorization_code'|'refresh_token'|FilterAllowedGrantTypesContains,
+     *   filterAllowedGrantTypesContains?: FilterAllowedGrantTypesContains|value-of<FilterAllowedGrantTypesContains>,
      *   filterClientID?: string,
-     *   filterClientType?: 'confidential'|'public'|FilterClientType,
+     *   filterClientType?: FilterClientType|value-of<FilterClientType>,
      *   filterName?: string,
      *   filterNameContains?: string,
      *   filterVerified?: bool,
      *   pageNumber?: int,
      *   pageSize?: int,
      * }|OAuthClientListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<OAuthClient>>
      *
@@ -158,7 +165,7 @@ final class OAuthClientsRawService implements OAuthClientsRawContract
      */
     public function list(
         array|OAuthClientListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = OAuthClientListParams::parseRequest(
             $params,
@@ -194,6 +201,7 @@ final class OAuthClientsRawService implements OAuthClientsRawContract
      * Delete an OAuth client
      *
      * @param string $id OAuth client ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -201,7 +209,7 @@ final class OAuthClientsRawService implements OAuthClientsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

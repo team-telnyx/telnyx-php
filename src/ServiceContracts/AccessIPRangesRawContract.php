@@ -12,12 +12,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface AccessIPRangesRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|AccessIPRangeCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AccessIPRange>
      *
@@ -25,13 +29,14 @@ interface AccessIPRangesRawContract
      */
     public function create(
         array|AccessIPRangeCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|AccessIPRangeListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<AccessIPRange>>
      *
@@ -39,11 +44,13 @@ interface AccessIPRangesRawContract
      */
     public function list(
         array|AccessIPRangeListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AccessIPRange>
      *
@@ -51,6 +58,6 @@ interface AccessIPRangesRawContract
      */
     public function delete(
         string $accessIPRangeID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

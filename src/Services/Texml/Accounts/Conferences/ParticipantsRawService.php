@@ -19,6 +19,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceRecordingStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceTrim;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\CustomHeader;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\MachineDetection;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\RecordingChannels;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\RecordingStatusCallbackMethod;
@@ -33,6 +34,10 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateParams\Annou
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateParams\HoldMethod;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateResponse;
 
+/**
+ * @phpstan-import-type CustomHeaderShape from \Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\CustomHeader
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ParticipantsRawService implements ParticipantsRawContract
 {
     // @phpstan-ignore-next-line
@@ -50,6 +55,7 @@ final class ParticipantsRawService implements ParticipantsRawContract
      * @param array{
      *   accountSid: string, conferenceSid: string
      * }|ParticipantRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ParticipantGetResponse>
      *
@@ -58,7 +64,7 @@ final class ParticipantsRawService implements ParticipantsRawContract
     public function retrieve(
         string $callSidOrParticipantLabel,
         array|ParticipantRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ParticipantRetrieveParams::parseRequest(
             $params,
@@ -92,18 +98,19 @@ final class ParticipantsRawService implements ParticipantsRawContract
      * @param array{
      *   accountSid: string,
      *   conferenceSid: string,
-     *   announceMethod?: 'GET'|'POST'|AnnounceMethod,
+     *   announceMethod?: AnnounceMethod|value-of<AnnounceMethod>,
      *   announceURL?: string,
      *   beepOnExit?: bool,
      *   callSidToCoach?: string,
      *   coaching?: bool,
      *   endConferenceOnExit?: bool,
      *   hold?: bool,
-     *   holdMethod?: 'GET'|'POST'|HoldMethod,
+     *   holdMethod?: HoldMethod|value-of<HoldMethod>,
      *   holdURL?: string,
      *   muted?: bool,
      *   waitURL?: string,
      * }|ParticipantUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ParticipantUpdateResponse>
      *
@@ -112,7 +119,7 @@ final class ParticipantsRawService implements ParticipantsRawContract
     public function update(
         string $callSidOrParticipantLabel,
         array|ParticipantUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ParticipantUpdateParams::parseRequest(
             $params,
@@ -151,6 +158,7 @@ final class ParticipantsRawService implements ParticipantsRawContract
      * @param array{
      *   accountSid: string, conferenceSid: string
      * }|ParticipantDeleteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -159,7 +167,7 @@ final class ParticipantsRawService implements ParticipantsRawContract
     public function delete(
         string $callSidOrParticipantLabel,
         array|ParticipantDeleteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ParticipantDeleteParams::parseRequest(
             $params,
@@ -193,27 +201,27 @@ final class ParticipantsRawService implements ParticipantsRawContract
      * @param array{
      *   accountSid: string,
      *   amdStatusCallback?: string,
-     *   amdStatusCallbackMethod?: 'GET'|'POST'|AmdStatusCallbackMethod,
-     *   beep?: 'true'|'false'|'onEnter'|'onExit'|Beep,
+     *   amdStatusCallbackMethod?: AmdStatusCallbackMethod|value-of<AmdStatusCallbackMethod>,
+     *   beep?: Beep|value-of<Beep>,
      *   callerID?: string,
      *   callSidToCoach?: string,
      *   cancelPlaybackOnDetectMessageEnd?: bool,
      *   cancelPlaybackOnMachineDetection?: bool,
      *   coaching?: bool,
-     *   conferenceRecord?: 'true'|'false'|'record-from-start'|'do-not-record'|ConferenceRecord,
+     *   conferenceRecord?: ConferenceRecord|value-of<ConferenceRecord>,
      *   conferenceRecordingStatusCallback?: string,
      *   conferenceRecordingStatusCallbackEvent?: string,
-     *   conferenceRecordingStatusCallbackMethod?: 'GET'|'POST'|ConferenceRecordingStatusCallbackMethod,
+     *   conferenceRecordingStatusCallbackMethod?: ConferenceRecordingStatusCallbackMethod|value-of<ConferenceRecordingStatusCallbackMethod>,
      *   conferenceRecordingTimeout?: int,
      *   conferenceStatusCallback?: string,
      *   conferenceStatusCallbackEvent?: string,
-     *   conferenceStatusCallbackMethod?: 'GET'|'POST'|ConferenceStatusCallbackMethod,
-     *   conferenceTrim?: 'trim-silence'|'do-not-trim'|ConferenceTrim,
-     *   customHeaders?: list<array{name: string, value: string}>,
+     *   conferenceStatusCallbackMethod?: ConferenceStatusCallbackMethod|value-of<ConferenceStatusCallbackMethod>,
+     *   conferenceTrim?: ConferenceTrim|value-of<ConferenceTrim>,
+     *   customHeaders?: list<CustomHeader|CustomHeaderShape>,
      *   earlyMedia?: bool,
      *   endConferenceOnExit?: bool,
      *   from?: string,
-     *   machineDetection?: 'Enable'|'DetectMessageEnd'|MachineDetection,
+     *   machineDetection?: MachineDetection|value-of<MachineDetection>,
      *   machineDetectionSilenceTimeout?: int,
      *   machineDetectionSpeechEndThreshold?: int,
      *   machineDetectionSpeechThreshold?: int,
@@ -222,23 +230,24 @@ final class ParticipantsRawService implements ParticipantsRawContract
      *   muted?: bool,
      *   preferredCodecs?: string,
      *   record?: bool,
-     *   recordingChannels?: 'mono'|'dual'|RecordingChannels,
+     *   recordingChannels?: RecordingChannels|value-of<RecordingChannels>,
      *   recordingStatusCallback?: string,
      *   recordingStatusCallbackEvent?: string,
-     *   recordingStatusCallbackMethod?: 'GET'|'POST'|RecordingStatusCallbackMethod,
-     *   recordingTrack?: 'inbound'|'outbound'|'both'|RecordingTrack,
+     *   recordingStatusCallbackMethod?: RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod>,
+     *   recordingTrack?: RecordingTrack|value-of<RecordingTrack>,
      *   sipAuthPassword?: string,
      *   sipAuthUsername?: string,
      *   startConferenceOnEnter?: bool,
      *   statusCallback?: string,
      *   statusCallbackEvent?: string,
-     *   statusCallbackMethod?: 'GET'|'POST'|StatusCallbackMethod,
+     *   statusCallbackMethod?: StatusCallbackMethod|value-of<StatusCallbackMethod>,
      *   timeLimit?: int,
      *   timeoutSeconds?: int,
      *   to?: string,
-     *   trim?: 'trim-silence'|'do-not-trim'|Trim,
+     *   trim?: Trim|value-of<Trim>,
      *   waitURL?: string,
      * }|ParticipantParticipantsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ParticipantParticipantsResponse>
      *
@@ -247,7 +256,7 @@ final class ParticipantsRawService implements ParticipantsRawContract
     public function participants(
         string $conferenceSid,
         array|ParticipantParticipantsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ParticipantParticipantsParams::parseRequest(
             $params,
@@ -278,6 +287,7 @@ final class ParticipantsRawService implements ParticipantsRawContract
      *
      * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
      * @param array{accountSid: string}|ParticipantRetrieveParticipantsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ParticipantGetParticipantsResponse>
      *
@@ -286,7 +296,7 @@ final class ParticipantsRawService implements ParticipantsRawContract
     public function retrieveParticipants(
         string $conferenceSid,
         array|ParticipantRetrieveParticipantsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ParticipantRetrieveParticipantsParams::parseRequest(
             $params,

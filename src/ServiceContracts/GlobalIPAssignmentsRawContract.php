@@ -16,23 +16,29 @@ use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface GlobalIPAssignmentsRawContract
 {
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<GlobalIPAssignmentNewResponse>
      *
      * @throws APIException
      */
     public function create(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<GlobalIPAssignmentGetResponse>
      *
@@ -40,7 +46,7 @@ interface GlobalIPAssignmentsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -48,6 +54,7 @@ interface GlobalIPAssignmentsRawContract
      *
      * @param string $globalIPAssignmentID identifies the resource
      * @param array<string,mixed>|GlobalIPAssignmentUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<GlobalIPAssignmentUpdateResponse>
      *
@@ -56,13 +63,14 @@ interface GlobalIPAssignmentsRawContract
     public function update(
         string $globalIPAssignmentID,
         array|GlobalIPAssignmentUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|GlobalIPAssignmentListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<GlobalIPAssignment>>
      *
@@ -70,13 +78,14 @@ interface GlobalIPAssignmentsRawContract
      */
     public function list(
         array|GlobalIPAssignmentListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<GlobalIPAssignmentDeleteResponse>
      *
@@ -84,6 +93,6 @@ interface GlobalIPAssignmentsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

@@ -26,7 +26,7 @@ use Telnyx\Messages\RcsAgentMessage;
  *   organizationID?: string|null,
  *   receivedAt?: \DateTimeInterface|null,
  *   recordType?: string|null,
- *   to?: list<ToShape>|null,
+ *   to?: list<To|ToShape>|null,
  *   type?: string|null,
  * }
  */
@@ -84,7 +84,7 @@ final class Data implements BaseModel
      *
      * @param RcsAgentMessage|RcsAgentMessageShape|null $body
      * @param From|FromShape|null $from
-     * @param list<ToShape>|null $to
+     * @param list<To|ToShape>|null $to
      */
     public static function with(
         ?string $id = null,
@@ -198,7 +198,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<ToShape> $to
+     * @param list<To|ToShape> $to
      */
     public function withTo(array $to): self
     {

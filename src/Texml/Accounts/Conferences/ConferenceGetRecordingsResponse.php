@@ -18,7 +18,7 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording;
  *   nextPageUri?: string|null,
  *   page?: int|null,
  *   pageSize?: int|null,
- *   recordings?: list<RecordingShape>|null,
+ *   recordings?: list<Recording|RecordingShape>|null,
  *   start?: int|null,
  *   uri?: string|null,
  * }
@@ -84,7 +84,7 @@ final class ConferenceGetRecordingsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RecordingShape>|null $recordings
+     * @param list<Recording|RecordingShape>|null $recordings
      */
     public static function with(
         ?int $end = null,
@@ -166,7 +166,7 @@ final class ConferenceGetRecordingsResponse implements BaseModel
     }
 
     /**
-     * @param list<RecordingShape> $recordings
+     * @param list<Recording|RecordingShape> $recordings
      */
     public function withRecordings(array $recordings): self
     {

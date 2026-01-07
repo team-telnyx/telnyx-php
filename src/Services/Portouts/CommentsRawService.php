@@ -13,6 +13,9 @@ use Telnyx\Portouts\Comments\CommentNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Portouts\CommentsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class CommentsRawService implements CommentsRawContract
 {
     // @phpstan-ignore-next-line
@@ -28,6 +31,7 @@ final class CommentsRawService implements CommentsRawContract
      *
      * @param string $id Portout id
      * @param array{body?: string}|CommentCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CommentNewResponse>
      *
@@ -36,7 +40,7 @@ final class CommentsRawService implements CommentsRawContract
     public function create(
         string $id,
         array|CommentCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CommentCreateParams::parseRequest(
             $params,
@@ -59,6 +63,7 @@ final class CommentsRawService implements CommentsRawContract
      * Returns a list of comments for a portout request.
      *
      * @param string $id Portout id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CommentListResponse>
      *
@@ -66,7 +71,7 @@ final class CommentsRawService implements CommentsRawContract
      */
     public function list(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

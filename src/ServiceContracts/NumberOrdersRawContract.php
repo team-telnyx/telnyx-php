@@ -16,12 +16,16 @@ use Telnyx\NumberOrders\NumberOrderUpdateParams;
 use Telnyx\NumberOrders\NumberOrderUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface NumberOrdersRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|NumberOrderCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NumberOrderNewResponse>
      *
@@ -29,13 +33,14 @@ interface NumberOrdersRawContract
      */
     public function create(
         array|NumberOrderCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $numberOrderID the number order ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NumberOrderGetResponse>
      *
@@ -43,7 +48,7 @@ interface NumberOrdersRawContract
      */
     public function retrieve(
         string $numberOrderID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -51,6 +56,7 @@ interface NumberOrdersRawContract
      *
      * @param string $numberOrderID the number order ID
      * @param array<string,mixed>|NumberOrderUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NumberOrderUpdateResponse>
      *
@@ -59,13 +65,14 @@ interface NumberOrdersRawContract
     public function update(
         string $numberOrderID,
         array|NumberOrderUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|NumberOrderListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<NumberOrderListResponse>>
      *
@@ -73,6 +80,6 @@ interface NumberOrdersRawContract
      */
     public function list(
         array|NumberOrderListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

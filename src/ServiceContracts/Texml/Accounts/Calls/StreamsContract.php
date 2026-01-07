@@ -9,6 +9,9 @@ use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonParams\Status;
 use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface StreamsContract
 {
     /**
@@ -17,7 +20,8 @@ interface StreamsContract
      * @param string $streamingSid path param: Uniquely identifies the streaming by id
      * @param string $accountSid path param: The id of the account the resource belongs to
      * @param string $callSid path param: The CallSid that identifies the call to update
-     * @param 'stopped'|Status $status body param: The status of the Stream you wish to update
+     * @param Status|value-of<Status> $status body param: The status of the Stream you wish to update
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -25,7 +29,7 @@ interface StreamsContract
         string $streamingSid,
         string $accountSid,
         string $callSid,
-        string|Status $status = 'stopped',
-        ?RequestOptions $requestOptions = null,
+        Status|string $status = 'stopped',
+        RequestOptions|array|null $requestOptions = null,
     ): StreamStreamingSidJsonResponse;
 }

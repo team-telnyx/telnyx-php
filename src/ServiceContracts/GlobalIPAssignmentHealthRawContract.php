@@ -10,12 +10,16 @@ use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface GlobalIPAssignmentHealthRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|GlobalIPAssignmentHealthRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<GlobalIPAssignmentHealthGetResponse>
      *
@@ -23,6 +27,6 @@ interface GlobalIPAssignmentHealthRawContract
      */
     public function retrieve(
         array|GlobalIPAssignmentHealthRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

@@ -17,7 +17,7 @@ use Telnyx\RoomParticipant;
  *   active?: bool|null,
  *   createdAt?: \DateTimeInterface|null,
  *   endedAt?: \DateTimeInterface|null,
- *   participants?: list<RoomParticipantShape>|null,
+ *   participants?: list<RoomParticipant|RoomParticipantShape>|null,
  *   recordType?: string|null,
  *   roomID?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
@@ -81,7 +81,7 @@ final class RoomSession implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RoomParticipantShape>|null $participants
+     * @param list<RoomParticipant|RoomParticipantShape>|null $participants
      */
     public static function with(
         ?string $id = null,
@@ -152,7 +152,7 @@ final class RoomSession implements BaseModel
     }
 
     /**
-     * @param list<RoomParticipantShape> $participants
+     * @param list<RoomParticipant|RoomParticipantShape> $participants
      */
     public function withParticipants(array $participants): self
     {

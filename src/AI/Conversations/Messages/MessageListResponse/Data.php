@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   text: string,
  *   createdAt?: \DateTimeInterface|null,
  *   sentAt?: \DateTimeInterface|null,
- *   toolCalls?: list<ToolCallShape>|null,
+ *   toolCalls?: list<ToolCall|ToolCallShape>|null,
  * }
  */
 final class Data implements BaseModel
@@ -86,7 +86,7 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Role|value-of<Role> $role
-     * @param list<ToolCallShape>|null $toolCalls
+     * @param list<ToolCall|ToolCallShape>|null $toolCalls
      */
     public static function with(
         Role|string $role,
@@ -156,7 +156,7 @@ final class Data implements BaseModel
     /**
      * Optional tool calls made by the assistant.
      *
-     * @param list<ToolCallShape> $toolCalls
+     * @param list<ToolCall|ToolCallShape> $toolCalls
      */
     public function withToolCalls(array $toolCalls): self
     {

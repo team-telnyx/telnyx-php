@@ -9,12 +9,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Recordings\Actions\ActionDeleteParams;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ActionsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|ActionDeleteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -22,6 +26,6 @@ interface ActionsRawContract
      */
     public function delete(
         array|ActionDeleteParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

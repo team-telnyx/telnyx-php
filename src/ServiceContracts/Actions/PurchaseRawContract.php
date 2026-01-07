@@ -10,12 +10,16 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface PurchaseRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|PurchaseCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PurchaseNewResponse>
      *
@@ -23,6 +27,6 @@ interface PurchaseRawContract
      */
     public function create(
         array|PurchaseCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

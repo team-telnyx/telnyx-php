@@ -16,6 +16,9 @@ use Telnyx\Rooms\Sessions\SessionList1Params;
 use Telnyx\Rooms\Sessions\SessionRetrieveParams;
 use Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface SessionsRawContract
 {
     /**
@@ -23,6 +26,7 @@ interface SessionsRawContract
      *
      * @param string $roomSessionID the unique identifier of a room session
      * @param array<string,mixed>|SessionRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SessionGetResponse>
      *
@@ -31,13 +35,14 @@ interface SessionsRawContract
     public function retrieve(
         string $roomSessionID,
         array|SessionRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|SessionList0Params $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<RoomSession>>
      *
@@ -45,7 +50,7 @@ interface SessionsRawContract
      */
     public function list0(
         array|SessionList0Params $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -53,6 +58,7 @@ interface SessionsRawContract
      *
      * @param string $roomID the unique identifier of a room
      * @param array<string,mixed>|SessionList1Params $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<RoomSession>>
      *
@@ -61,7 +67,7 @@ interface SessionsRawContract
     public function list1(
         string $roomID,
         array|SessionList1Params $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -69,6 +75,7 @@ interface SessionsRawContract
      *
      * @param string $roomSessionID the unique identifier of a room session
      * @param array<string,mixed>|SessionRetrieveParticipantsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<RoomParticipant>>
      *
@@ -77,6 +84,6 @@ interface SessionsRawContract
     public function retrieveParticipants(
         string $roomSessionID,
         array|SessionRetrieveParticipantsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

@@ -15,7 +15,7 @@ use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data\Total;
  * @phpstan-import-type TotalShape from \Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data\Total
  *
  * @phpstan-type DataShape = array{
- *   categories?: list<Category1Shape>|null,
+ *   categories?: list<Category|Category1Shape>|null,
  *   timestamp?: \DateTimeInterface|null,
  *   total?: null|Total|TotalShape,
  * }
@@ -48,7 +48,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Category1Shape>|null $categories
+     * @param list<Category|Category1Shape>|null $categories
      * @param Total|TotalShape|null $total
      */
     public static function with(
@@ -66,7 +66,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<Category1Shape> $categories
+     * @param list<Category|Category1Shape> $categories
      */
     public function withCategories(array $categories): self
     {

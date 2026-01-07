@@ -15,12 +15,16 @@ use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceNewResponse;
 use Telnyx\PerPagePagination;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface VoiceRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|VoiceCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VoiceNewResponse>
      *
@@ -28,11 +32,13 @@ interface VoiceRawContract
      */
     public function create(
         array|VoiceCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VoiceGetResponse>
      *
@@ -40,13 +46,14 @@ interface VoiceRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|VoiceListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PerPagePagination<CdrUsageReportResponseLegacy>>
      *
@@ -54,11 +61,13 @@ interface VoiceRawContract
      */
     public function list(
         array|VoiceListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VoiceDeleteResponse>
      *
@@ -66,6 +75,6 @@ interface VoiceRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

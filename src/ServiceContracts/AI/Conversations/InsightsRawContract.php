@@ -14,12 +14,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface InsightsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|InsightCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InsightTemplateDetail>
      *
@@ -27,13 +31,14 @@ interface InsightsRawContract
      */
     public function create(
         array|InsightCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $insightID The ID of the insight
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InsightTemplateDetail>
      *
@@ -41,7 +46,7 @@ interface InsightsRawContract
      */
     public function retrieve(
         string $insightID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -49,6 +54,7 @@ interface InsightsRawContract
      *
      * @param string $insightID The ID of the insight
      * @param array<string,mixed>|InsightUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InsightTemplateDetail>
      *
@@ -57,13 +63,14 @@ interface InsightsRawContract
     public function update(
         string $insightID,
         array|InsightUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|InsightListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<InsightTemplate>>
      *
@@ -71,13 +78,14 @@ interface InsightsRawContract
      */
     public function list(
         array|InsightListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $insightID The ID of the insight
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -85,6 +93,6 @@ interface InsightsRawContract
      */
     public function delete(
         string $insightID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

@@ -12,6 +12,9 @@ use Telnyx\Messaging10dlc\CampaignBuilder\CampaignBuilderSubmitParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging10dlc\CampaignBuilderRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class CampaignBuilderRawService implements CampaignBuilderRawContract
 {
     // @phpstan-ignore-next-line
@@ -62,6 +65,7 @@ final class CampaignBuilderRawService implements CampaignBuilderRawContract
      *   webhookFailoverURL?: string,
      *   webhookURL?: string,
      * }|CampaignBuilderSubmitParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TelnyxCampaignCsp>
      *
@@ -69,7 +73,7 @@ final class CampaignBuilderRawService implements CampaignBuilderRawContract
      */
     public function submit(
         array|CampaignBuilderSubmitParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CampaignBuilderSubmitParams::parseRequest(
             $params,

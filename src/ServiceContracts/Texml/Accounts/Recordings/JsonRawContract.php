@@ -11,6 +11,9 @@ use Telnyx\Texml\Accounts\Recordings\Json\JsonDeleteRecordingSidJsonParams;
 use Telnyx\Texml\Accounts\Recordings\Json\JsonRetrieveRecordingSidJsonParams;
 use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface JsonRawContract
 {
     /**
@@ -18,6 +21,7 @@ interface JsonRawContract
      *
      * @param string $recordingSid uniquely identifies the recording by id
      * @param array<string,mixed>|JsonDeleteRecordingSidJsonParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -26,7 +30,7 @@ interface JsonRawContract
     public function deleteRecordingSidJson(
         string $recordingSid,
         array|JsonDeleteRecordingSidJsonParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -34,6 +38,7 @@ interface JsonRawContract
      *
      * @param string $recordingSid uniquely identifies the recording by id
      * @param array<string,mixed>|JsonRetrieveRecordingSidJsonParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TexmlGetCallRecordingResponseBody>
      *
@@ -42,6 +47,6 @@ interface JsonRawContract
     public function retrieveRecordingSidJson(
         string $recordingSid,
         array|JsonRetrieveRecordingSidJsonParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

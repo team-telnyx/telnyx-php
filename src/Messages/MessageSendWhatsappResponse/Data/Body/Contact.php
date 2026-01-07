@@ -21,13 +21,13 @@ use Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Contact\URL;
  * @phpstan-import-type URLShape from \Telnyx\Messages\MessageSendWhatsappResponse\Data\Body\Contact\URL
  *
  * @phpstan-type ContactShape = array{
- *   addresses?: list<AddressShape>|null,
+ *   addresses?: list<Address|AddressShape>|null,
  *   birthday?: string|null,
- *   emails?: list<EmailShape>|null,
+ *   emails?: list<Email|EmailShape>|null,
  *   name?: string|null,
  *   org?: null|Org|OrgShape,
- *   phones?: list<PhoneShape>|null,
- *   urls?: list<URLShape>|null,
+ *   phones?: list<Phone|PhoneShape>|null,
+ *   urls?: list<URL|URLShape>|null,
  * }
  */
 final class Contact implements BaseModel
@@ -70,11 +70,11 @@ final class Contact implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AddressShape>|null $addresses
-     * @param list<EmailShape>|null $emails
+     * @param list<Address|AddressShape>|null $addresses
+     * @param list<Email|EmailShape>|null $emails
      * @param Org|OrgShape|null $org
-     * @param list<PhoneShape>|null $phones
-     * @param list<URLShape>|null $urls
+     * @param list<Phone|PhoneShape>|null $phones
+     * @param list<URL|URLShape>|null $urls
      */
     public static function with(
         ?array $addresses = null,
@@ -99,7 +99,7 @@ final class Contact implements BaseModel
     }
 
     /**
-     * @param list<AddressShape> $addresses
+     * @param list<Address|AddressShape> $addresses
      */
     public function withAddresses(array $addresses): self
     {
@@ -118,7 +118,7 @@ final class Contact implements BaseModel
     }
 
     /**
-     * @param list<EmailShape> $emails
+     * @param list<Email|EmailShape> $emails
      */
     public function withEmails(array $emails): self
     {
@@ -148,7 +148,7 @@ final class Contact implements BaseModel
     }
 
     /**
-     * @param list<PhoneShape> $phones
+     * @param list<Phone|PhoneShape> $phones
      */
     public function withPhones(array $phones): self
     {
@@ -159,7 +159,7 @@ final class Contact implements BaseModel
     }
 
     /**
-     * @param list<URLShape> $urls
+     * @param list<URL|URLShape> $urls
      */
     public function withURLs(array $urls): self
     {

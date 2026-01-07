@@ -17,12 +17,16 @@ use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationNewResponse
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParams;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface SimCardDataUsageNotificationsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|SimCardDataUsageNotificationCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardDataUsageNotificationNewResponse>
      *
@@ -30,13 +34,14 @@ interface SimCardDataUsageNotificationsRawContract
      */
     public function create(
         array|SimCardDataUsageNotificationCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardDataUsageNotificationGetResponse>
      *
@@ -44,7 +49,7 @@ interface SimCardDataUsageNotificationsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -52,6 +57,7 @@ interface SimCardDataUsageNotificationsRawContract
      *
      * @param string $simCardDataUsageNotificationID identifies the resource
      * @param array<string,mixed>|SimCardDataUsageNotificationUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardDataUsageNotificationUpdateResponse>
      *
@@ -60,13 +66,14 @@ interface SimCardDataUsageNotificationsRawContract
     public function update(
         string $simCardDataUsageNotificationID,
         array|SimCardDataUsageNotificationUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|SimCardDataUsageNotificationListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<SimCardDataUsageNotification>>
      *
@@ -74,13 +81,14 @@ interface SimCardDataUsageNotificationsRawContract
      */
     public function list(
         array|SimCardDataUsageNotificationListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardDataUsageNotificationDeleteResponse>
      *
@@ -88,6 +96,6 @@ interface SimCardDataUsageNotificationsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

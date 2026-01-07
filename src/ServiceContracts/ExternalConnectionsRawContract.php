@@ -19,12 +19,16 @@ use Telnyx\ExternalConnections\ExternalConnectionUpdateParams;
 use Telnyx\ExternalConnections\ExternalConnectionUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ExternalConnectionsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|ExternalConnectionCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ExternalConnectionNewResponse>
      *
@@ -32,13 +36,14 @@ interface ExternalConnectionsRawContract
      */
     public function create(
         array|ExternalConnectionCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ExternalConnectionGetResponse>
      *
@@ -46,7 +51,7 @@ interface ExternalConnectionsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -54,6 +59,7 @@ interface ExternalConnectionsRawContract
      *
      * @param string $id identifies the resource
      * @param array<string,mixed>|ExternalConnectionUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ExternalConnectionUpdateResponse>
      *
@@ -62,13 +68,14 @@ interface ExternalConnectionsRawContract
     public function update(
         string $id,
         array|ExternalConnectionUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ExternalConnectionListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<ExternalConnection>>
      *
@@ -76,13 +83,14 @@ interface ExternalConnectionsRawContract
      */
     public function list(
         array|ExternalConnectionListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ExternalConnectionDeleteResponse>
      *
@@ -90,7 +98,7 @@ interface ExternalConnectionsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -98,6 +106,7 @@ interface ExternalConnectionsRawContract
      *
      * @param string $locationID Path param: The ID of the location to update
      * @param array<string,mixed>|ExternalConnectionUpdateLocationParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ExternalConnectionUpdateLocationResponse>
      *
@@ -106,6 +115,6 @@ interface ExternalConnectionsRawContract
     public function updateLocation(
         string $locationID,
         array|ExternalConnectionUpdateLocationParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

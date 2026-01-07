@@ -10,6 +10,9 @@ use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonParams;
 use Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface SiprecRawContract
 {
     /**
@@ -17,6 +20,7 @@ interface SiprecRawContract
      *
      * @param string $siprecSid path param: The SiprecSid that uniquely identifies the Sip Recording
      * @param array<string,mixed>|SiprecSiprecSidJsonParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SiprecSiprecSidJsonResponse>
      *
@@ -25,6 +29,6 @@ interface SiprecRawContract
     public function siprecSidJson(
         string $siprecSid,
         array|SiprecSiprecSidJsonParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

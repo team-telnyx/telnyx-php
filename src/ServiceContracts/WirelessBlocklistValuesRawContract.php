@@ -10,12 +10,16 @@ use Telnyx\RequestOptions;
 use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListParams;
 use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface WirelessBlocklistValuesRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|WirelessBlocklistValueListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WirelessBlocklistValueListResponse>
      *
@@ -23,6 +27,6 @@ interface WirelessBlocklistValuesRawContract
      */
     public function list(
         array|WirelessBlocklistValueListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

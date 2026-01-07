@@ -9,9 +9,14 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyRetrieveParams;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyRetrieveParams\Filter;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPLatencyRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\GlobalIPLatency\GlobalIPLatencyRetrieveParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class GlobalIPLatencyRawService implements GlobalIPLatencyRawContract
 {
     // @phpstan-ignore-next-line
@@ -25,9 +30,8 @@ final class GlobalIPLatencyRawService implements GlobalIPLatencyRawContract
      *
      * Global IP Latency Metrics
      *
-     * @param array{
-     *   filter?: array{globalIPID?: string|array{in?: string}}
-     * }|GlobalIPLatencyRetrieveParams $params
+     * @param array{filter?: Filter|FilterShape}|GlobalIPLatencyRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<GlobalIPLatencyGetResponse>
      *
@@ -35,7 +39,7 @@ final class GlobalIPLatencyRawService implements GlobalIPLatencyRawContract
      */
     public function retrieve(
         array|GlobalIPLatencyRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = GlobalIPLatencyRetrieveParams::parseRequest(
             $params,

@@ -14,7 +14,8 @@ use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filte
  *
  * @phpstan-import-type InShape from \Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filter\GlobalIPID\In
  *
- * @phpstan-type GlobalIPIDShape = string|InShape
+ * @phpstan-type GlobalIPIDVariants = string|In
+ * @phpstan-type GlobalIPIDShape = GlobalIPIDVariants|InShape
  */
 final class GlobalIPID implements ConverterSource
 {

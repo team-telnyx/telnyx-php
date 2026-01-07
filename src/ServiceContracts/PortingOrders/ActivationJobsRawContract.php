@@ -15,6 +15,9 @@ use Telnyx\PortingOrders\ActivationJobs\ActivationJobUpdateResponse;
 use Telnyx\PortingOrders\PortingOrdersActivationJob;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ActivationJobsRawContract
 {
     /**
@@ -22,6 +25,7 @@ interface ActivationJobsRawContract
      *
      * @param string $activationJobID Activation Job Identifier
      * @param array<string,mixed>|ActivationJobRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActivationJobGetResponse>
      *
@@ -30,7 +34,7 @@ interface ActivationJobsRawContract
     public function retrieve(
         string $activationJobID,
         array|ActivationJobRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -38,6 +42,7 @@ interface ActivationJobsRawContract
      *
      * @param string $activationJobID Path param: Activation Job Identifier
      * @param array<string,mixed>|ActivationJobUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActivationJobUpdateResponse>
      *
@@ -46,7 +51,7 @@ interface ActivationJobsRawContract
     public function update(
         string $activationJobID,
         array|ActivationJobUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -54,6 +59,7 @@ interface ActivationJobsRawContract
      *
      * @param string $id Porting Order id
      * @param array<string,mixed>|ActivationJobListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PortingOrdersActivationJob>>
      *
@@ -62,6 +68,6 @@ interface ActivationJobsRawContract
     public function list(
         string $id,
         array|ActivationJobListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

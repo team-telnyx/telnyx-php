@@ -22,7 +22,7 @@ use Telnyx\NumberOrders\NumberOrderCreateParams\PhoneNumber;
  *   connectionID?: string|null,
  *   customerReference?: string|null,
  *   messagingProfileID?: string|null,
- *   phoneNumbers?: list<PhoneNumberShape>|null,
+ *   phoneNumbers?: list<\Telnyx\NumberOrders\NumberOrderCreateParams\PhoneNumber|PhoneNumberShape>|null,
  * }
  */
 final class NumberOrderCreateParams implements BaseModel
@@ -74,7 +74,7 @@ final class NumberOrderCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PhoneNumberShape>|null $phoneNumbers
+     * @param list<PhoneNumber|PhoneNumberShape>|null $phoneNumbers
      */
     public static function with(
         ?string $billingGroupID = null,
@@ -139,7 +139,7 @@ final class NumberOrderCreateParams implements BaseModel
     }
 
     /**
-     * @param list<PhoneNumberShape> $phoneNumbers
+     * @param list<PhoneNumber|PhoneNumberShape> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {

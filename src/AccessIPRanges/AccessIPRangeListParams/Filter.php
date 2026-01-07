@@ -13,6 +13,8 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[cidr_block], filter[cidr_block][startswith], filter[cidr_block][endswith], filter[cidr_block][contains], filter[created_at]. Supports complex bracket operations for dynamic filtering.
  *
+ * @phpstan-import-type CidrBlockVariants from \Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter\CidrBlock
+ * @phpstan-import-type CreatedAtVariants from \Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter\CreatedAt
  * @phpstan-import-type CidrBlockShape from \Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter\CidrBlock
  * @phpstan-import-type CreatedAtShape from \Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter\CreatedAt
  *
@@ -27,12 +29,16 @@ final class Filter implements BaseModel
 
     /**
      * Filter by exact CIDR block match.
+     *
+     * @var CidrBlockVariants|null $cidrBlock
      */
     #[Optional('cidr_block')]
     public string|CidrBlockPatternFilter|null $cidrBlock;
 
     /**
      * Filter by exact creation date-time.
+     *
+     * @var CreatedAtVariants|null $createdAt
      */
     #[Optional('created_at')]
     public \DateTimeInterface|DateRangeFilter|null $createdAt;

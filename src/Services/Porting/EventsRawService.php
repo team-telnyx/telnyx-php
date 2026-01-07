@@ -10,7 +10,8 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\Porting\Events\EventGetResponse;
 use Telnyx\Porting\Events\EventListParams;
-use Telnyx\Porting\Events\EventListParams\Filter\Type;
+use Telnyx\Porting\Events\EventListParams\Filter;
+use Telnyx\Porting\Events\EventListParams\Page;
 use Telnyx\Porting\Events\EventListResponse;
 use Telnyx\Porting\Events\EventListResponse\PortingEventDeletedPayload;
 use Telnyx\Porting\Events\EventListResponse\PortingEventMessagingChangedPayload;
@@ -21,6 +22,11 @@ use Telnyx\Porting\Events\EventListResponse\PortingEventWithoutWebhook;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Porting\EventsRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Porting\Events\EventListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Porting\Events\EventListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class EventsRawService implements EventsRawContract
 {
     // @phpstan-ignore-next-line
@@ -35,6 +41,7 @@ final class EventsRawService implements EventsRawContract
      * Show a specific porting event.
      *
      * @param string $id identifies the porting event
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<EventGetResponse>
      *
@@ -42,7 +49,7 @@ final class EventsRawService implements EventsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -59,15 +66,9 @@ final class EventsRawService implements EventsRawContract
      * Returns a list of all porting events.
      *
      * @param array{
-     *   filter?: array{
-     *     createdAt?: array{
-     *       gte?: string|\DateTimeInterface, lte?: string|\DateTimeInterface
-     *     },
-     *     portingOrderID?: string,
-     *     type?: 'porting_order.deleted'|'porting_order.loa_updated'|'porting_order.messaging_changed'|'porting_order.status_changed'|'porting_order.sharing_token_expired'|'porting_order.new_comment'|'porting_order.split'|Type,
-     *   },
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|EventListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PortingEventDeletedPayload|PortingEventMessagingChangedPayload|PortingEventStatusChangedEvent|PortingEventNewCommentEvent|PortingEventSplitEvent|PortingEventWithoutWebhook,>,>
      *
@@ -75,7 +76,7 @@ final class EventsRawService implements EventsRawContract
      */
     public function list(
         array|EventListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = EventListParams::parseRequest(
             $params,
@@ -99,6 +100,7 @@ final class EventsRawService implements EventsRawContract
      * Republish a specific porting event.
      *
      * @param string $id identifies the porting event
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -106,7 +108,7 @@ final class EventsRawService implements EventsRawContract
      */
     public function republish(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

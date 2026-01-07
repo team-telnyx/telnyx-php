@@ -13,6 +13,7 @@ use Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutNewComment;
 use Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutStatusChanged;
 
 /**
+ * @phpstan-import-type DataVariants from \Telnyx\Portouts\Events\EventGetResponse\Data
  * @phpstan-import-type DataShape from \Telnyx\Portouts\Events\EventGetResponse\Data
  *
  * @phpstan-type EventGetResponseShape = array{data?: DataShape|null}
@@ -22,6 +23,7 @@ final class EventGetResponse implements BaseModel
     /** @use SdkModel<EventGetResponseShape> */
     use SdkModel;
 
+    /** @var DataVariants|null $data */
     #[Optional(union: Data::class)]
     public WebhookPortoutStatusChanged|WebhookPortoutNewComment|WebhookPortoutFocDateChanged|null $data;
 

@@ -11,6 +11,9 @@ use Telnyx\Messaging10dlc\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentBy
 use Telnyx\Messaging10dlc\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileListPhoneNumberStatusResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface PhoneNumberAssignmentByProfileContract
 {
     /**
@@ -19,6 +22,7 @@ interface PhoneNumberAssignmentByProfileContract
      * @param string $messagingProfileID the ID of the messaging profile that you want to link to the specified campaign
      * @param string $campaignID The ID of the campaign you want to link to the specified messaging profile. If you supply this ID in the request, do not also include a tcrCampaignId.
      * @param string $tcrCampaignID The TCR ID of the shared campaign you want to link to the specified messaging profile (for campaigns not created using Telnyx 10DLC services only). If you supply this ID in the request, do not also include a campaignId.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -26,11 +30,13 @@ interface PhoneNumberAssignmentByProfileContract
         string $messagingProfileID,
         ?string $campaignID = null,
         ?string $tcrCampaignID = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberAssignmentByProfileAssignResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -38,11 +44,13 @@ interface PhoneNumberAssignmentByProfileContract
         string $taskID,
         int $page = 1,
         int $recordsPerPage = 20,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberAssignmentByProfileListPhoneNumberStatusResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -50,16 +58,18 @@ interface PhoneNumberAssignmentByProfileContract
         string $taskID,
         int $page = 1,
         int $recordsPerPage = 20,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieveStatus(
         string $taskID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): PhoneNumberAssignmentByProfileGetStatusResponse;
 }

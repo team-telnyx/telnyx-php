@@ -8,9 +8,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\NumberBlockOrders\NumberBlockOrder;
 use Telnyx\NumberBlockOrders\NumberBlockOrderGetResponse;
+use Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Filter;
+use Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Page;
 use Telnyx\NumberBlockOrders\NumberBlockOrderNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface NumberBlockOrdersContract
 {
     /**
@@ -21,6 +28,7 @@ interface NumberBlockOrdersContract
      * @param string $connectionID identifies the connection associated with this phone number
      * @param string $customerReference a customer reference string for customer look ups
      * @param string $messagingProfileID identifies the messaging profile associated with the phone number
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -30,40 +38,36 @@ interface NumberBlockOrdersContract
         ?string $connectionID = null,
         ?string $customerReference = null,
         ?string $messagingProfileID = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): NumberBlockOrderNewResponse;
 
     /**
      * @api
      *
      * @param string $numberBlockOrderID the number block order ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $numberBlockOrderID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): NumberBlockOrderGetResponse;
 
     /**
      * @api
      *
-     * @param array{
-     *   createdAt?: array{gt?: string, lt?: string},
-     *   phoneNumbersStartingNumber?: string,
-     *   status?: string,
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers.starting_number]
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers.starting_number]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<NumberBlockOrder>
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null,
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination;
 }

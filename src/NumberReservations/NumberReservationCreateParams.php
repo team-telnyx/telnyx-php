@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type NumberReservationCreateParamsShape = array{
  *   customerReference?: string|null,
- *   phoneNumbers?: list<ReservedPhoneNumberShape>|null,
+ *   phoneNumbers?: list<ReservedPhoneNumber|ReservedPhoneNumberShape>|null,
  * }
  */
 final class NumberReservationCreateParams implements BaseModel
@@ -47,7 +47,7 @@ final class NumberReservationCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ReservedPhoneNumberShape>|null $phoneNumbers
+     * @param list<ReservedPhoneNumber|ReservedPhoneNumberShape>|null $phoneNumbers
      */
     public static function with(
         ?string $customerReference = null,
@@ -73,7 +73,7 @@ final class NumberReservationCreateParams implements BaseModel
     }
 
     /**
-     * @param list<ReservedPhoneNumberShape> $phoneNumbers
+     * @param list<ReservedPhoneNumber|ReservedPhoneNumberShape> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {

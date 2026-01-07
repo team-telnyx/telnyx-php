@@ -160,8 +160,8 @@ use Telnyx\Services\WirelessBlocklistValuesService;
 use Telnyx\Services\WirelessService;
 
 /**
- * @phpstan-import-type NormalizedRequest from \Telnyx\Core\BaseClient
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ * @phpstan-import-type NormalizedRequest from \Telnyx\Core\BaseClient
  */
 class Client extends BaseClient
 {

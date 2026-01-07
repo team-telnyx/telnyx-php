@@ -20,6 +20,11 @@ use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\ConversationsRawContract;
 
+/**
+ * @phpstan-import-type MetadataShape from \Telnyx\AI\Conversations\ConversationAddMessageParams\Metadata
+ * @phpstan-import-type ToolChoiceShape from \Telnyx\AI\Conversations\ConversationAddMessageParams\ToolChoice
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ConversationsRawService implements ConversationsRawContract
 {
     // @phpstan-ignore-next-line
@@ -36,6 +41,7 @@ final class ConversationsRawService implements ConversationsRawContract
      * @param array{
      *   metadata?: array<string,string>, name?: string
      * }|ConversationCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<Conversation>
      *
@@ -43,7 +49,7 @@ final class ConversationsRawService implements ConversationsRawContract
      */
     public function create(
         array|ConversationCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ConversationCreateParams::parseRequest(
             $params,
@@ -66,6 +72,7 @@ final class ConversationsRawService implements ConversationsRawContract
      * Retrieve a specific AI conversation by its ID.
      *
      * @param string $conversationID The ID of the conversation to retrieve
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ConversationGetResponse>
      *
@@ -73,7 +80,7 @@ final class ConversationsRawService implements ConversationsRawContract
      */
     public function retrieve(
         string $conversationID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -91,6 +98,7 @@ final class ConversationsRawService implements ConversationsRawContract
      *
      * @param string $conversationID The ID of the conversation to update
      * @param array{metadata?: array<string,string>}|ConversationUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ConversationUpdateResponse>
      *
@@ -99,7 +107,7 @@ final class ConversationsRawService implements ConversationsRawContract
     public function update(
         string $conversationID,
         array|ConversationUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ConversationUpdateParams::parseRequest(
             $params,
@@ -135,6 +143,7 @@ final class ConversationsRawService implements ConversationsRawContract
      *   or?: string,
      *   order?: string,
      * }|ConversationListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ConversationListResponse>
      *
@@ -142,7 +151,7 @@ final class ConversationsRawService implements ConversationsRawContract
      */
     public function list(
         array|ConversationListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ConversationListParams::parseRequest(
             $params,
@@ -176,6 +185,7 @@ final class ConversationsRawService implements ConversationsRawContract
      * Delete a specific conversation by its ID.
      *
      * @param string $conversationID The ID of the conversation to delete
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -183,7 +193,7 @@ final class ConversationsRawService implements ConversationsRawContract
      */
     public function delete(
         string $conversationID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -203,13 +213,14 @@ final class ConversationsRawService implements ConversationsRawContract
      * @param array{
      *   role: string,
      *   content?: string,
-     *   metadata?: array<string,mixed>,
+     *   metadata?: array<string,MetadataShape>,
      *   name?: string,
-     *   sentAt?: string|\DateTimeInterface,
+     *   sentAt?: \DateTimeInterface,
      *   toolCallID?: string,
      *   toolCalls?: list<array<string,mixed>>,
-     *   toolChoice?: string|array<string,mixed>,
+     *   toolChoice?: ToolChoiceShape,
      * }|ConversationAddMessageParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -218,7 +229,7 @@ final class ConversationsRawService implements ConversationsRawContract
     public function addMessage(
         string $conversationID,
         array|ConversationAddMessageParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ConversationAddMessageParams::parseRequest(
             $params,
@@ -240,13 +251,15 @@ final class ConversationsRawService implements ConversationsRawContract
      *
      * Retrieve insights for a specific conversation
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<ConversationGetConversationsInsightsResponse>
      *
      * @throws APIException
      */
     public function retrieveConversationsInsights(
         string $conversationID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

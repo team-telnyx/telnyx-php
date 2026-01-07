@@ -11,6 +11,9 @@ use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\ToolsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ToolsService implements ToolsContract
 {
     /**
@@ -35,6 +38,7 @@ final class ToolsService implements ToolsContract
      * @param string $assistantID Path param:
      * @param array<string,mixed> $arguments Body param: Key-value arguments to use for the webhook test
      * @param array<string,mixed> $dynamicVariables Body param: Key-value dynamic variables to use for the webhook test
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -43,7 +47,7 @@ final class ToolsService implements ToolsContract
         string $assistantID,
         ?array $arguments = null,
         ?array $dynamicVariables = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ToolTestResponse {
         $params = Util::removeNulls(
             [

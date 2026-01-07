@@ -9,11 +9,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobGetResponse;
+use Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams\Page;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobUpdateResponse;
 use Telnyx\PortingOrders\PortingOrdersActivationJob;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\ActivationJobsContract;
 
+/**
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActivationJobsService implements ActivationJobsContract
 {
     /**
@@ -36,13 +41,14 @@ final class ActivationJobsService implements ActivationJobsContract
      *
      * @param string $activationJobID Activation Job Identifier
      * @param string $id Porting Order id
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $activationJobID,
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): ActivationJobGetResponse {
         $params = Util::removeNulls(['id' => $id]);
 
@@ -59,15 +65,16 @@ final class ActivationJobsService implements ActivationJobsContract
      *
      * @param string $activationJobID Path param: Activation Job Identifier
      * @param string $id Path param: Porting Order id
-     * @param string|\DateTimeInterface $activateAt Body param: The desired activation time. The activation time should be between any of the activation windows.
+     * @param \DateTimeInterface $activateAt Body param: The desired activation time. The activation time should be between any of the activation windows.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $activationJobID,
         string $id,
-        string|\DateTimeInterface|null $activateAt = null,
-        ?RequestOptions $requestOptions = null,
+        ?\DateTimeInterface $activateAt = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActivationJobUpdateResponse {
         $params = Util::removeNulls(['id' => $id, 'activateAt' => $activateAt]);
 
@@ -83,9 +90,8 @@ final class ActivationJobsService implements ActivationJobsContract
      * Returns a list of your porting activation jobs.
      *
      * @param string $id Porting Order id
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<PortingOrdersActivationJob>
      *
@@ -93,8 +99,8 @@ final class ActivationJobsService implements ActivationJobsContract
      */
     public function list(
         string $id,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination {
         $params = Util::removeNulls(['page' => $page]);
 

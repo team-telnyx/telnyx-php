@@ -10,12 +10,16 @@ use Telnyx\RequestOptions;
 use Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewParams;
 use Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface SimCardOrderPreviewRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|SimCardOrderPreviewPreviewParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardOrderPreviewPreviewResponse>
      *
@@ -23,6 +27,6 @@ interface SimCardOrderPreviewRawContract
      */
     public function preview(
         array|SimCardOrderPreviewPreviewParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

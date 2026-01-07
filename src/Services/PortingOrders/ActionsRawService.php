@@ -16,6 +16,9 @@ use Telnyx\PortingOrders\Actions\ActionShareResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\ActionsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsRawService implements ActionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -30,6 +33,7 @@ final class ActionsRawService implements ActionsRawContract
      * Activate each number in a porting order asynchronously. This operation is limited to US FastPort orders only.
      *
      * @param string $id Porting Order id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionActivateResponse>
      *
@@ -37,7 +41,7 @@ final class ActionsRawService implements ActionsRawContract
      */
     public function activate(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -54,6 +58,7 @@ final class ActionsRawService implements ActionsRawContract
      * Cancel a porting order
      *
      * @param string $id Porting Order id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionCancelResponse>
      *
@@ -61,7 +66,7 @@ final class ActionsRawService implements ActionsRawContract
      */
     public function cancel(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -78,6 +83,7 @@ final class ActionsRawService implements ActionsRawContract
      * Confirm and submit your porting order.
      *
      * @param string $id Porting Order id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionConfirmResponse>
      *
@@ -85,7 +91,7 @@ final class ActionsRawService implements ActionsRawContract
      */
     public function confirm(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -103,9 +109,9 @@ final class ActionsRawService implements ActionsRawContract
      *
      * @param string $id Porting Order id
      * @param array{
-     *   expiresInSeconds?: int,
-     *   permissions?: 'porting_order.document.read'|'porting_order.document.update'|Permissions,
+     *   expiresInSeconds?: int, permissions?: Permissions|value-of<Permissions>
      * }|ActionShareParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionShareResponse>
      *
@@ -114,7 +120,7 @@ final class ActionsRawService implements ActionsRawContract
     public function share(
         string $id,
         array|ActionShareParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionShareParams::parseRequest(
             $params,

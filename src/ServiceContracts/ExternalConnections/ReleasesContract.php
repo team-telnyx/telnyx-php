@@ -7,10 +7,16 @@ namespace Telnyx\ServiceContracts\ExternalConnections;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse;
-use Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter\Status\Eq;
+use Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter;
+use Telnyx\ExternalConnections\Releases\ReleaseListParams\Page;
 use Telnyx\ExternalConnections\Releases\ReleaseListResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\ExternalConnections\Releases\ReleaseListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ReleasesContract
 {
     /**
@@ -18,30 +24,23 @@ interface ReleasesContract
      *
      * @param string $releaseID Identifies a Release request
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $releaseID,
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): ReleaseGetResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
-     * @param array{
-     *   civicAddressID?: array{eq?: string},
-     *   locationID?: array{eq?: string},
-     *   phoneNumber?: array{contains?: string, eq?: string},
-     *   status?: array{
-     *     eq?: list<'pending_upload'|'pending'|'in_progress'|'complete'|'failed'|'expired'|'unknown'|Eq>,
-     *   },
-     * } $filter Filter parameter for releases (deepObject style). Supports filtering by status, civic_address_id, location_id, and phone_number with eq/contains operations.
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Filter|FilterShape $filter Filter parameter for releases (deepObject style). Supports filtering by status, civic_address_id, location_id, and phone_number with eq/contains operations.
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<ReleaseListResponse>
      *
@@ -49,8 +48,8 @@ interface ReleasesContract
      */
     public function list(
         string $id,
-        ?array $filter = null,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null,
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination;
 }

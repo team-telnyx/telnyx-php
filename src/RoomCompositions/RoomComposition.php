@@ -29,7 +29,7 @@ use Telnyx\RoomCompositions\RoomComposition\Status;
  *   status?: null|Status|value-of<Status>,
  *   updatedAt?: \DateTimeInterface|null,
  *   userID?: string|null,
- *   videoLayout?: array<string,VideoRegionShape>|null,
+ *   videoLayout?: array<string,VideoRegion|VideoRegionShape>|null,
  *   webhookEventFailoverURL?: string|null,
  *   webhookEventURL?: string|null,
  *   webhookTimeoutSecs?: int|null,
@@ -169,7 +169,7 @@ final class RoomComposition implements BaseModel
      *
      * @param Format|value-of<Format>|null $format
      * @param Status|value-of<Status>|null $status
-     * @param array<string,VideoRegionShape>|null $videoLayout
+     * @param array<string,VideoRegion|VideoRegionShape>|null $videoLayout
      */
     public static function with(
         ?string $id = null,
@@ -386,7 +386,7 @@ final class RoomComposition implements BaseModel
     /**
      * Describes the video layout of the room composition in terms of regions. Limited to 2 regions.
      *
-     * @param array<string,VideoRegionShape> $videoLayout
+     * @param array<string,VideoRegion|VideoRegionShape> $videoLayout
      */
     public function withVideoLayout(array $videoLayout): self
     {

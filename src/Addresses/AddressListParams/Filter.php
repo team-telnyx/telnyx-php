@@ -14,6 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[customer_reference][eq], filter[customer_reference][contains], filter[used_as_emergency], filter[street_address][contains], filter[address_book][eq].
  *
+ * @phpstan-import-type CustomerReferenceVariants from \Telnyx\Addresses\AddressListParams\Filter\CustomerReference
  * @phpstan-import-type AddressBookShape from \Telnyx\Addresses\AddressListParams\Filter\AddressBook
  * @phpstan-import-type CustomerReferenceShape from \Telnyx\Addresses\AddressListParams\Filter\CustomerReference
  * @phpstan-import-type StreetAddressShape from \Telnyx\Addresses\AddressListParams\Filter\StreetAddress
@@ -35,6 +36,8 @@ final class Filter implements BaseModel
 
     /**
      * If present, addresses with <code>customer_reference</code> containing the given value will be returned. Matching is not case-sensitive.
+     *
+     * @var CustomerReferenceVariants|null $customerReference
      */
     #[Optional('customer_reference')]
     public string|CustomerReferenceMatcher|null $customerReference;

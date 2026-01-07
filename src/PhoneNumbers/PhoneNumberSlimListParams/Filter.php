@@ -17,6 +17,7 @@ use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\VoiceUsagePaymentMethod
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[phone_number], filter[status], filter[country_iso_alpha2], filter[connection_id], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference], filter[number_type], filter[source].
  *
+ * @phpstan-import-type CountryISOAlpha2Variants from \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\CountryISOAlpha2
  * @phpstan-import-type CountryISOAlpha2Shape from \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\CountryISOAlpha2
  * @phpstan-import-type NumberTypeShape from \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\NumberType
  * @phpstan-import-type VoiceConnectionNameShape from \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\VoiceConnectionName
@@ -56,7 +57,7 @@ final class Filter implements BaseModel
     /**
      * Filter by phone number country ISO alpha-2 code. Can be a single value or an array of values.
      *
-     * @var string|list<string>|null $countryISOAlpha2
+     * @var CountryISOAlpha2Variants|null $countryISOAlpha2
      */
     #[Optional('country_iso_alpha2', union: CountryISOAlpha2::class)]
     public string|array|null $countryISOAlpha2;

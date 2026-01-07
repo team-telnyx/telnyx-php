@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\Assistant\Tool;
-use Telnyx\AI\Assistants\Assistant\Tool\BookAppointmentTool;
-use Telnyx\AI\Assistants\Assistant\Tool\CheckAvailabilityTool;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -14,6 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Assistant configuration including choice of LLM, custom instructions, and tools.
  *
+ * @phpstan-import-type ToolVariants from \Telnyx\AI\Assistants\Assistant\Tool
  * @phpstan-import-type ToolShape from \Telnyx\AI\Assistants\Assistant\Tool
  *
  * @phpstan-type AssistantShape = array{
@@ -49,7 +48,7 @@ final class Assistant implements BaseModel
     /**
      * The tools that the voice assistant can use.
      *
-     * @var list<BookAppointmentTool|CheckAvailabilityTool|WebhookTool|HangupTool|TransferTool|RetrievalTool>|null $tools
+     * @var list<ToolVariants>|null $tools
      */
     #[Optional(list: Tool::class)]
     public ?array $tools;

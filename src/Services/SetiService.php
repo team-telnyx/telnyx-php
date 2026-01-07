@@ -10,7 +10,12 @@ use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SetiContract;
 use Telnyx\Seti\SetiGetBlackBoxTestResultsResponse;
+use Telnyx\Seti\SetiRetrieveBlackBoxTestResultsParams\Filter;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Seti\SetiRetrieveBlackBoxTestResultsParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class SetiService implements SetiContract
 {
     /**
@@ -31,15 +36,14 @@ final class SetiService implements SetiContract
      *
      * Returns the results of the various black box tests
      *
-     * @param array{
-     *   product?: string
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[product]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[product]
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieveBlackBoxTestResults(
-        ?array $filter = null,
-        ?RequestOptions $requestOptions = null
+        Filter|array|null $filter = null,
+        RequestOptions|array|null $requestOptions = null,
     ): SetiGetBlackBoxTestResultsResponse {
         $params = Util::removeNulls(['filter' => $filter]);
 

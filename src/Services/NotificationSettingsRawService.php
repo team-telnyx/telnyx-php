@@ -10,14 +10,22 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\NotificationSettings\NotificationSetting;
 use Telnyx\NotificationSettings\NotificationSettingCreateParams;
+use Telnyx\NotificationSettings\NotificationSettingCreateParams\Parameter;
 use Telnyx\NotificationSettings\NotificationSettingDeleteResponse;
 use Telnyx\NotificationSettings\NotificationSettingGetResponse;
 use Telnyx\NotificationSettings\NotificationSettingListParams;
-use Telnyx\NotificationSettings\NotificationSettingListParams\Filter\AssociatedRecordType\Eq;
+use Telnyx\NotificationSettings\NotificationSettingListParams\Filter;
+use Telnyx\NotificationSettings\NotificationSettingListParams\Page;
 use Telnyx\NotificationSettings\NotificationSettingNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NotificationSettingsRawContract;
 
+/**
+ * @phpstan-import-type ParameterShape from \Telnyx\NotificationSettings\NotificationSettingCreateParams\Parameter
+ * @phpstan-import-type FilterShape from \Telnyx\NotificationSettings\NotificationSettingListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\NotificationSettings\NotificationSettingListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class NotificationSettingsRawService implements NotificationSettingsRawContract
 {
     // @phpstan-ignore-next-line
@@ -35,8 +43,9 @@ final class NotificationSettingsRawService implements NotificationSettingsRawCon
      *   notificationChannelID?: string,
      *   notificationEventConditionID?: string,
      *   notificationProfileID?: string,
-     *   parameters?: list<array{name?: string, value?: string}>,
+     *   parameters?: list<Parameter|ParameterShape>,
      * }|NotificationSettingCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NotificationSettingNewResponse>
      *
@@ -44,7 +53,7 @@ final class NotificationSettingsRawService implements NotificationSettingsRawCon
      */
     public function create(
         array|NotificationSettingCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = NotificationSettingCreateParams::parseRequest(
             $params,
@@ -67,6 +76,7 @@ final class NotificationSettingsRawService implements NotificationSettingsRawCon
      * Get a notification setting.
      *
      * @param string $id the id of the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NotificationSettingGetResponse>
      *
@@ -74,7 +84,7 @@ final class NotificationSettingsRawService implements NotificationSettingsRawCon
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -91,20 +101,9 @@ final class NotificationSettingsRawService implements NotificationSettingsRawCon
      * List notification settings.
      *
      * @param array{
-     *   filter?: array{
-     *     associatedRecordType?: array{eq?: 'account'|'phone_number'|Eq},
-     *     channelTypeID?: array{
-     *       eq?: 'webhook'|'sms'|'email'|'voice'|NotificationSettingListParams\Filter\ChannelTypeID\Eq,
-     *     },
-     *     notificationChannel?: array{eq?: string},
-     *     notificationEventConditionID?: array{eq?: string},
-     *     notificationProfileID?: array{eq?: string},
-     *     status?: array{
-     *       eq?: 'enabled'|'enable-received'|'enable-pending'|'enable-submtited'|'delete-received'|'delete-pending'|'delete-submitted'|'deleted'|NotificationSettingListParams\Filter\Status\Eq,
-     *     },
-     *   },
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|NotificationSettingListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<NotificationSetting>>
      *
@@ -112,7 +111,7 @@ final class NotificationSettingsRawService implements NotificationSettingsRawCon
      */
     public function list(
         array|NotificationSettingListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = NotificationSettingListParams::parseRequest(
             $params,
@@ -136,6 +135,7 @@ final class NotificationSettingsRawService implements NotificationSettingsRawCon
      * Delete a notification setting.
      *
      * @param string $id the id of the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NotificationSettingDeleteResponse>
      *
@@ -143,7 +143,7 @@ final class NotificationSettingsRawService implements NotificationSettingsRawCon
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

@@ -17,12 +17,16 @@ use Telnyx\DetailRecords\DetailRecordListResponse\SimCardUsageDetailRecord;
 use Telnyx\DetailRecords\DetailRecordListResponse\VerifyDetailRecord;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface DetailRecordsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|DetailRecordListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<MessageDetailRecord|ConferenceDetailRecord|ConferenceParticipantDetailRecord|AmdDetailRecord|VerifyDetailRecord|SimCardUsageDetailRecord|MediaStorageDetailRecord,>,>
      *
@@ -30,6 +34,6 @@ interface DetailRecordsRawContract
      */
     public function list(
         array|DetailRecordListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

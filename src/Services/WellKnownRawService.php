@@ -12,6 +12,9 @@ use Telnyx\ServiceContracts\WellKnownRawContract;
 use Telnyx\WellKnown\WellKnownGetAuthorizationServerMetadataResponse;
 use Telnyx\WellKnown\WellKnownGetProtectedResourceMetadataResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class WellKnownRawService implements WellKnownRawContract
 {
     // @phpstan-ignore-next-line
@@ -25,12 +28,14 @@ final class WellKnownRawService implements WellKnownRawContract
      *
      * OAuth 2.0 Authorization Server Metadata (RFC 8414)
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<WellKnownGetAuthorizationServerMetadataResponse>
      *
      * @throws APIException
      */
     public function retrieveAuthorizationServerMetadata(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         $path = $this
             ->client
@@ -50,12 +55,14 @@ final class WellKnownRawService implements WellKnownRawContract
      *
      * OAuth 2.0 Protected Resource Metadata for resource discovery
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<WellKnownGetProtectedResourceMetadataResponse>
      *
      * @throws APIException
      */
     public function retrieveProtectedResourceMetadata(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         $path = $this
             ->client

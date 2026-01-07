@@ -13,6 +13,9 @@ use Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\RecordingTranscriptionsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class RecordingTranscriptionsRawService implements RecordingTranscriptionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -27,6 +30,7 @@ final class RecordingTranscriptionsRawService implements RecordingTranscriptions
      * Retrieves the details of an existing recording transcription.
      *
      * @param string $recordingTranscriptionID uniquely identifies the recording transcription by id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RecordingTranscriptionGetResponse>
      *
@@ -34,7 +38,7 @@ final class RecordingTranscriptionsRawService implements RecordingTranscriptions
      */
     public function retrieve(
         string $recordingTranscriptionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -50,12 +54,15 @@ final class RecordingTranscriptionsRawService implements RecordingTranscriptions
      *
      * Returns a list of your recording transcriptions.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<RecordingTranscriptionListResponse>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse
-    {
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
@@ -71,6 +78,7 @@ final class RecordingTranscriptionsRawService implements RecordingTranscriptions
      * Permanently deletes a recording transcription.
      *
      * @param string $recordingTranscriptionID uniquely identifies the recording transcription by id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RecordingTranscriptionDeleteResponse>
      *
@@ -78,7 +86,7 @@ final class RecordingTranscriptionsRawService implements RecordingTranscriptions
      */
     public function delete(
         string $recordingTranscriptionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

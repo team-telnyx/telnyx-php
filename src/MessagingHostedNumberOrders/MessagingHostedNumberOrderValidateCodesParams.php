@@ -18,7 +18,7 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesPa
  * @phpstan-import-type VerificationCodeShape from \Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesParams\VerificationCode
  *
  * @phpstan-type MessagingHostedNumberOrderValidateCodesParamsShape = array{
- *   verificationCodes: list<VerificationCodeShape>
+ *   verificationCodes: list<VerificationCode|VerificationCodeShape>
  * }
  */
 final class MessagingHostedNumberOrderValidateCodesParams implements BaseModel
@@ -55,7 +55,7 @@ final class MessagingHostedNumberOrderValidateCodesParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VerificationCodeShape> $verificationCodes
+     * @param list<VerificationCode|VerificationCodeShape> $verificationCodes
      */
     public static function with(array $verificationCodes): self
     {
@@ -67,7 +67,7 @@ final class MessagingHostedNumberOrderValidateCodesParams implements BaseModel
     }
 
     /**
-     * @param list<VerificationCodeShape> $verificationCodes
+     * @param list<VerificationCode|VerificationCodeShape> $verificationCodes
      */
     public function withVerificationCodes(array $verificationCodes): self
     {

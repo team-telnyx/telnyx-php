@@ -26,6 +26,9 @@ use Telnyx\Texml\Calls\CallUpdateParams\Method;
 use Telnyx\Texml\Calls\CallUpdateParams\StatusCallbackMethod;
 use Telnyx\Texml\Calls\CallUpdateResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class CallsRawService implements CallsRawContract
 {
     // @phpstan-ignore-next-line
@@ -41,15 +44,16 @@ final class CallsRawService implements CallsRawContract
      *
      * @param string $callSid the CallSid that identifies the call to update
      * @param array{
-     *   fallbackMethod?: 'GET'|'POST'|FallbackMethod,
+     *   fallbackMethod?: FallbackMethod|value-of<FallbackMethod>,
      *   fallbackURL?: string,
-     *   method?: 'GET'|'POST'|Method,
+     *   method?: Method|value-of<Method>,
      *   status?: string,
      *   statusCallback?: string,
-     *   statusCallbackMethod?: 'GET'|'POST'|StatusCallbackMethod,
+     *   statusCallbackMethod?: StatusCallbackMethod|value-of<StatusCallbackMethod>,
      *   texml?: string,
      *   url?: string,
      * }|CallUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallUpdateResponse>
      *
@@ -58,7 +62,7 @@ final class CallsRawService implements CallsRawContract
     public function update(
         string $callSid,
         array|CallUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CallUpdateParams::parseRequest(
             $params,
@@ -86,34 +90,35 @@ final class CallsRawService implements CallsRawContract
      *   to: string,
      *   asyncAmd?: bool,
      *   asyncAmdStatusCallback?: string,
-     *   asyncAmdStatusCallbackMethod?: 'GET'|'POST'|AsyncAmdStatusCallbackMethod,
+     *   asyncAmdStatusCallbackMethod?: AsyncAmdStatusCallbackMethod|value-of<AsyncAmdStatusCallbackMethod>,
      *   callerID?: string,
      *   cancelPlaybackOnDetectMessageEnd?: bool,
      *   cancelPlaybackOnMachineDetection?: bool,
-     *   detectionMode?: 'Premium'|'Regular'|DetectionMode,
+     *   detectionMode?: DetectionMode|value-of<DetectionMode>,
      *   fallbackURL?: string,
-     *   machineDetection?: 'Enable'|'Disable'|'DetectMessageEnd'|MachineDetection,
+     *   machineDetection?: MachineDetection|value-of<MachineDetection>,
      *   machineDetectionSilenceTimeout?: int,
      *   machineDetectionSpeechEndThreshold?: int,
      *   machineDetectionSpeechThreshold?: int,
      *   machineDetectionTimeout?: int,
      *   preferredCodecs?: string,
      *   record?: bool,
-     *   recordingChannels?: 'mono'|'dual'|RecordingChannels,
+     *   recordingChannels?: RecordingChannels|value-of<RecordingChannels>,
      *   recordingStatusCallback?: string,
      *   recordingStatusCallbackEvent?: string,
-     *   recordingStatusCallbackMethod?: 'GET'|'POST'|RecordingStatusCallbackMethod,
+     *   recordingStatusCallbackMethod?: RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod>,
      *   recordingTimeout?: int,
-     *   recordingTrack?: 'inbound'|'outbound'|'both'|RecordingTrack,
+     *   recordingTrack?: RecordingTrack|value-of<RecordingTrack>,
      *   sipAuthPassword?: string,
      *   sipAuthUsername?: string,
      *   statusCallback?: string,
-     *   statusCallbackEvent?: 'initiated'|'ringing'|'answered'|'completed'|StatusCallbackEvent,
-     *   statusCallbackMethod?: 'GET'|'POST'|CallInitiateParams\StatusCallbackMethod,
-     *   trim?: 'trim-silence'|'do-not-trim'|Trim,
+     *   statusCallbackEvent?: StatusCallbackEvent|value-of<StatusCallbackEvent>,
+     *   statusCallbackMethod?: CallInitiateParams\StatusCallbackMethod|value-of<CallInitiateParams\StatusCallbackMethod>,
+     *   trim?: Trim|value-of<Trim>,
      *   url?: string,
-     *   urlMethod?: 'GET'|'POST'|URLMethod,
+     *   urlMethod?: URLMethod|value-of<URLMethod>,
      * }|CallInitiateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallInitiateResponse>
      *
@@ -122,7 +127,7 @@ final class CallsRawService implements CallsRawContract
     public function initiate(
         string $applicationID,
         array|CallInitiateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CallInitiateParams::parseRequest(
             $params,

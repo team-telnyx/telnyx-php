@@ -12,6 +12,9 @@ use Telnyx\Faxes\Actions\ActionRefreshResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Faxes\ActionsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsRawService implements ActionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -26,6 +29,7 @@ final class ActionsRawService implements ActionsRawContract
      * Cancel the outbound fax that is in one of the following states: `queued`, `media.processed`, `originated` or `sending`
      *
      * @param string $id the unique identifier of a fax
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionCancelResponse>
      *
@@ -33,7 +37,7 @@ final class ActionsRawService implements ActionsRawContract
      */
     public function cancel(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -50,6 +54,7 @@ final class ActionsRawService implements ActionsRawContract
      * Refreshes the inbound fax's media_url when it has expired
      *
      * @param string $id the unique identifier of a fax
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionRefreshResponse>
      *
@@ -57,7 +62,7 @@ final class ActionsRawService implements ActionsRawContract
      */
     public function refresh(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

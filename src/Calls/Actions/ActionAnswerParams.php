@@ -45,7 +45,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   billingGroupID?: string|null,
  *   clientState?: string|null,
  *   commandID?: string|null,
- *   customHeaders?: list<CustomSipHeaderShape>|null,
+ *   customHeaders?: list<CustomSipHeader|CustomSipHeaderShape>|null,
  *   preferredCodecs?: null|PreferredCodecs|value-of<PreferredCodecs>,
  *   record?: null|Record|value-of<Record>,
  *   recordChannels?: null|RecordChannels|value-of<RecordChannels>,
@@ -56,7 +56,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   recordTrack?: null|RecordTrack|value-of<RecordTrack>,
  *   recordTrim?: null|RecordTrim|value-of<RecordTrim>,
  *   sendSilenceWhenIdle?: bool|null,
- *   sipHeaders?: list<SipHeaderShape>|null,
+ *   sipHeaders?: list<SipHeader|SipHeaderShape>|null,
  *   soundModifications?: null|SoundModifications|SoundModificationsShape,
  *   streamBidirectionalCodec?: null|StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
  *   streamBidirectionalMode?: null|StreamBidirectionalMode|value-of<StreamBidirectionalMode>,
@@ -273,14 +273,14 @@ final class ActionAnswerParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<CustomSipHeaderShape>|null $customHeaders
+     * @param list<CustomSipHeader|CustomSipHeaderShape>|null $customHeaders
      * @param PreferredCodecs|value-of<PreferredCodecs>|null $preferredCodecs
      * @param Record|value-of<Record>|null $record
      * @param RecordChannels|value-of<RecordChannels>|null $recordChannels
      * @param RecordFormat|value-of<RecordFormat>|null $recordFormat
      * @param RecordTrack|value-of<RecordTrack>|null $recordTrack
      * @param RecordTrim|value-of<RecordTrim>|null $recordTrim
-     * @param list<SipHeaderShape>|null $sipHeaders
+     * @param list<SipHeader|SipHeaderShape>|null $sipHeaders
      * @param SoundModifications|SoundModificationsShape|null $soundModifications
      * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>|null $streamBidirectionalCodec
      * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode>|null $streamBidirectionalMode
@@ -386,7 +386,7 @@ final class ActionAnswerParams implements BaseModel
     /**
      * Custom headers to be added to the SIP INVITE response.
      *
-     * @param list<CustomSipHeaderShape> $customHeaders
+     * @param list<CustomSipHeader|CustomSipHeaderShape> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {
@@ -523,7 +523,7 @@ final class ActionAnswerParams implements BaseModel
     /**
      * SIP headers to be added to the SIP INVITE response. Currently only User-to-User header is supported.
      *
-     * @param list<SipHeaderShape> $sipHeaders
+     * @param list<SipHeader|SipHeaderShape> $sipHeaders
      */
     public function withSipHeaders(array $sipHeaders): self
     {

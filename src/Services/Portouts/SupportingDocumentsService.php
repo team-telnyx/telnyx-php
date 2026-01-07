@@ -7,12 +7,16 @@ namespace Telnyx\Services\Portouts;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document\Type;
+use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentListResponse;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Portouts\SupportingDocumentsContract;
 
+/**
+ * @phpstan-import-type DocumentShape from \Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class SupportingDocumentsService implements SupportingDocumentsContract
 {
     /**
@@ -34,16 +38,15 @@ final class SupportingDocumentsService implements SupportingDocumentsContract
      * Creates a list of supporting documents on a portout request.
      *
      * @param string $id Portout id
-     * @param list<array{
-     *   documentID: string, type: 'loa'|'invoice'|Type
-     * }> $documents List of supporting documents parameters
+     * @param list<Document|DocumentShape> $documents List of supporting documents parameters
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $id,
         ?array $documents = null,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): SupportingDocumentNewResponse {
         $params = Util::removeNulls(['documents' => $documents]);
 
@@ -59,12 +62,13 @@ final class SupportingDocumentsService implements SupportingDocumentsContract
      * List every supporting documents for a portout request.
      *
      * @param string $id Portout id
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function list(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): SupportingDocumentListResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($id, requestOptions: $requestOptions);

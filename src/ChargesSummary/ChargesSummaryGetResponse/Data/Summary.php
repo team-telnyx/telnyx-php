@@ -6,18 +6,17 @@ namespace Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data;
 
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Adjustment;
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line;
-use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\ComparativeLine;
-use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\SimpleLine;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type LineVariants from \Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line
  * @phpstan-import-type AdjustmentShape from \Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Adjustment
  * @phpstan-import-type LineShape from \Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line
  *
  * @phpstan-type SummaryShape = array{
- *   adjustments: list<AdjustmentShape>, lines: list<LineShape>
+ *   adjustments: list<Adjustment|AdjustmentShape>, lines: list<LineShape>
  * }
  */
 final class Summary implements BaseModel
@@ -36,7 +35,7 @@ final class Summary implements BaseModel
     /**
      * List of charge summary lines.
      *
-     * @var list<ComparativeLine|SimpleLine> $lines
+     * @var list<LineVariants> $lines
      */
     #[Required(list: Line::class)]
     public array $lines;
@@ -65,7 +64,7 @@ final class Summary implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AdjustmentShape> $adjustments
+     * @param list<Adjustment|AdjustmentShape> $adjustments
      * @param list<LineShape> $lines
      */
     public static function with(array $adjustments, array $lines): self
@@ -81,7 +80,7 @@ final class Summary implements BaseModel
     /**
      * List of billing adjustments.
      *
-     * @param list<AdjustmentShape> $adjustments
+     * @param list<Adjustment|AdjustmentShape> $adjustments
      */
     public function withAdjustments(array $adjustments): self
     {

@@ -14,12 +14,16 @@ use Telnyx\NumberReservations\NumberReservationListParams;
 use Telnyx\NumberReservations\NumberReservationNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface NumberReservationsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|NumberReservationCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NumberReservationNewResponse>
      *
@@ -27,13 +31,14 @@ interface NumberReservationsRawContract
      */
     public function create(
         array|NumberReservationCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $numberReservationID the number reservation ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NumberReservationGetResponse>
      *
@@ -41,13 +46,14 @@ interface NumberReservationsRawContract
      */
     public function retrieve(
         string $numberReservationID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|NumberReservationListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<NumberReservation>>
      *
@@ -55,6 +61,6 @@ interface NumberReservationsRawContract
      */
     public function list(
         array|NumberReservationListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

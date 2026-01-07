@@ -12,10 +12,17 @@ use Telnyx\NumberBlockOrders\NumberBlockOrder;
 use Telnyx\NumberBlockOrders\NumberBlockOrderCreateParams;
 use Telnyx\NumberBlockOrders\NumberBlockOrderGetResponse;
 use Telnyx\NumberBlockOrders\NumberBlockOrderListParams;
+use Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Filter;
+use Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Page;
 use Telnyx\NumberBlockOrders\NumberBlockOrderNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumberBlockOrdersRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class NumberBlockOrdersRawService implements NumberBlockOrdersRawContract
 {
     // @phpstan-ignore-next-line
@@ -36,6 +43,7 @@ final class NumberBlockOrdersRawService implements NumberBlockOrdersRawContract
      *   customerReference?: string,
      *   messagingProfileID?: string,
      * }|NumberBlockOrderCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NumberBlockOrderNewResponse>
      *
@@ -43,7 +51,7 @@ final class NumberBlockOrdersRawService implements NumberBlockOrdersRawContract
      */
     public function create(
         array|NumberBlockOrderCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = NumberBlockOrderCreateParams::parseRequest(
             $params,
@@ -66,6 +74,7 @@ final class NumberBlockOrdersRawService implements NumberBlockOrdersRawContract
      * Get an existing phone number block order.
      *
      * @param string $numberBlockOrderID the number block order ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NumberBlockOrderGetResponse>
      *
@@ -73,7 +82,7 @@ final class NumberBlockOrdersRawService implements NumberBlockOrdersRawContract
      */
     public function retrieve(
         string $numberBlockOrderID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -90,13 +99,9 @@ final class NumberBlockOrdersRawService implements NumberBlockOrdersRawContract
      * Get a paginated list of number block orders.
      *
      * @param array{
-     *   filter?: array{
-     *     createdAt?: array{gt?: string, lt?: string},
-     *     phoneNumbersStartingNumber?: string,
-     *     status?: string,
-     *   },
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|NumberBlockOrderListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<NumberBlockOrder>>
      *
@@ -104,7 +109,7 @@ final class NumberBlockOrdersRawService implements NumberBlockOrdersRawContract
      */
     public function list(
         array|NumberBlockOrderListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = NumberBlockOrderListParams::parseRequest(
             $params,

@@ -11,18 +11,22 @@ use Telnyx\OAuthGrants\OAuthGrantDeleteResponse;
 use Telnyx\OAuthGrants\OAuthGrantGetResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface OAuthGrantsContract
 {
     /**
      * @api
      *
      * @param string $id OAuth grant ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): OAuthGrantGetResponse;
 
     /**
@@ -30,6 +34,7 @@ interface OAuthGrantsContract
      *
      * @param int $pageNumber Page number
      * @param int $pageSize Number of results per page
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<OAuthGrant>
      *
@@ -38,18 +43,19 @@ interface OAuthGrantsContract
     public function list(
         int $pageNumber = 1,
         int $pageSize = 20,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination;
 
     /**
      * @api
      *
      * @param string $id OAuth grant ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): OAuthGrantDeleteResponse;
 }

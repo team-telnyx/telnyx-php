@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SubNumberOrdersRawContract;
 use Telnyx\SubNumberOrders\SubNumberOrderCancelResponse;
@@ -14,11 +15,18 @@ use Telnyx\SubNumberOrders\SubNumberOrderGetResponse;
 use Telnyx\SubNumberOrders\SubNumberOrderListParams;
 use Telnyx\SubNumberOrders\SubNumberOrderListResponse;
 use Telnyx\SubNumberOrders\SubNumberOrderRetrieveParams;
+use Telnyx\SubNumberOrders\SubNumberOrderRetrieveParams\Filter;
 use Telnyx\SubNumberOrders\SubNumberOrderUpdateParams;
 use Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupParams;
 use Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse;
 use Telnyx\SubNumberOrders\SubNumberOrderUpdateResponse;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\SubNumberOrders\SubNumberOrderRetrieveParams\Filter
+ * @phpstan-import-type UpdateRegulatoryRequirementShape from \Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement
+ * @phpstan-import-type FilterShape from \Telnyx\SubNumberOrders\SubNumberOrderListParams\Filter as FilterShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class SubNumberOrdersRawService implements SubNumberOrdersRawContract
 {
     // @phpstan-ignore-next-line
@@ -33,9 +41,8 @@ final class SubNumberOrdersRawService implements SubNumberOrdersRawContract
      * Get an existing sub number order.
      *
      * @param string $subNumberOrderID the sub number order ID
-     * @param array{
-     *   filter?: array{includePhoneNumbers?: bool}
-     * }|SubNumberOrderRetrieveParams $params
+     * @param array{filter?: Filter|FilterShape}|SubNumberOrderRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SubNumberOrderGetResponse>
      *
@@ -44,7 +51,7 @@ final class SubNumberOrdersRawService implements SubNumberOrdersRawContract
     public function retrieve(
         string $subNumberOrderID,
         array|SubNumberOrderRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SubNumberOrderRetrieveParams::parseRequest(
             $params,
@@ -68,10 +75,9 @@ final class SubNumberOrdersRawService implements SubNumberOrdersRawContract
      *
      * @param string $subNumberOrderID the sub number order ID
      * @param array{
-     *   regulatoryRequirements?: list<array{
-     *     fieldValue?: string, requirementID?: string
-     *   }>,
+     *   regulatoryRequirements?: list<UpdateRegulatoryRequirement|UpdateRegulatoryRequirementShape>,
      * }|SubNumberOrderUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SubNumberOrderUpdateResponse>
      *
@@ -80,7 +86,7 @@ final class SubNumberOrdersRawService implements SubNumberOrdersRawContract
     public function update(
         string $subNumberOrderID,
         array|SubNumberOrderUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SubNumberOrderUpdateParams::parseRequest(
             $params,
@@ -103,14 +109,9 @@ final class SubNumberOrdersRawService implements SubNumberOrdersRawContract
      * Get a paginated list of sub number orders.
      *
      * @param array{
-     *   filter?: array{
-     *     countryCode?: string,
-     *     orderRequestID?: string,
-     *     phoneNumberType?: string,
-     *     phoneNumbersCount?: int,
-     *     status?: string,
-     *   },
+     *   filter?: SubNumberOrderListParams\Filter|FilterShape1
      * }|SubNumberOrderListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SubNumberOrderListResponse>
      *
@@ -118,7 +119,7 @@ final class SubNumberOrdersRawService implements SubNumberOrdersRawContract
      */
     public function list(
         array|SubNumberOrderListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SubNumberOrderListParams::parseRequest(
             $params,
@@ -141,6 +142,7 @@ final class SubNumberOrdersRawService implements SubNumberOrdersRawContract
      * Allows you to cancel a sub number order in 'pending' status.
      *
      * @param string $subNumberOrderID the ID of the sub number order
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SubNumberOrderCancelResponse>
      *
@@ -148,7 +150,7 @@ final class SubNumberOrdersRawService implements SubNumberOrdersRawContract
      */
     public function cancel(
         string $subNumberOrderID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -168,6 +170,7 @@ final class SubNumberOrdersRawService implements SubNumberOrdersRawContract
      * @param array{
      *   requirementGroupID: string
      * }|SubNumberOrderUpdateRequirementGroupParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SubNumberOrderUpdateRequirementGroupResponse>
      *
@@ -176,7 +179,7 @@ final class SubNumberOrdersRawService implements SubNumberOrdersRawContract
     public function updateRequirementGroup(
         string $id,
         array|SubNumberOrderUpdateRequirementGroupParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SubNumberOrderUpdateRequirementGroupParams::parseRequest(
             $params,

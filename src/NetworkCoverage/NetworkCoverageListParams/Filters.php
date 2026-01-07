@@ -14,6 +14,7 @@ use Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters\AvailableServices\C
 /**
  * Consolidated filters parameter (deepObject style). Originally: filters[available_services][contains].
  *
+ * @phpstan-import-type AvailableServicesVariants from \Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters\AvailableServices
  * @phpstan-import-type AvailableServicesShape from \Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters\AvailableServices
  *
  * @phpstan-type FiltersShape = array{
@@ -28,7 +29,7 @@ final class Filters implements BaseModel
     /**
      * Filter by exact available service match.
      *
-     * @var Contains|value-of<AvailableService>|null $availableServices
+     * @var AvailableServicesVariants|null $availableServices
      */
     #[Optional('available_services', union: AvailableServices::class)]
     public Contains|string|null $availableServices;

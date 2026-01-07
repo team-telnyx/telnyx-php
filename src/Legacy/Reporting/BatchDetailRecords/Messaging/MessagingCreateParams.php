@@ -23,7 +23,7 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
  *   startTime: \DateTimeInterface,
  *   connections?: list<int>|null,
  *   directions?: list<int>|null,
- *   filters?: list<FilterShape>|null,
+ *   filters?: list<Filter|FilterShape>|null,
  *   includeMessageBody?: bool|null,
  *   managedAccounts?: list<string>|null,
  *   profiles?: list<string>|null,
@@ -149,7 +149,7 @@ final class MessagingCreateParams implements BaseModel
      *
      * @param list<int>|null $connections
      * @param list<int>|null $directions
-     * @param list<FilterShape>|null $filters
+     * @param list<Filter|FilterShape>|null $filters
      * @param list<string>|null $managedAccounts
      * @param list<string>|null $profiles
      * @param list<int>|null $recordTypes
@@ -238,7 +238,7 @@ final class MessagingCreateParams implements BaseModel
     /**
      * List of filters to apply.
      *
-     * @param list<FilterShape> $filters
+     * @param list<Filter|FilterShape> $filters
      */
     public function withFilters(array $filters): self
     {

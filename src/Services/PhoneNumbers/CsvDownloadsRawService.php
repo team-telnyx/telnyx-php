@@ -12,14 +12,19 @@ use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownload;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\CsvFormat;
-use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter\Status;
-use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter\VoiceUsagePaymentMethod;
+use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadGetResponse;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadListParams;
+use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadListParams\Page;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbers\CsvDownloadsRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class CsvDownloadsRawService implements CsvDownloadsRawContract
 {
     // @phpstan-ignore-next-line
@@ -34,22 +39,9 @@ final class CsvDownloadsRawService implements CsvDownloadsRawContract
      * Create a CSV download
      *
      * @param array{
-     *   csvFormat?: 'V1'|'V2'|CsvFormat,
-     *   filter?: array{
-     *     billingGroupID?: string,
-     *     connectionID?: string,
-     *     customerReference?: string,
-     *     emergencyAddressID?: string,
-     *     hasBundle?: string,
-     *     phoneNumber?: string,
-     *     status?: 'purchase-pending'|'purchase-failed'|'port-pending'|'active'|'deleted'|'port-failed'|'emergency-only'|'ported-out'|'port-out-pending'|Status,
-     *     tag?: string,
-     *     voiceConnectionName?: array{
-     *       contains?: string, endsWith?: string, eq?: string, startsWith?: string
-     *     },
-     *     voiceUsagePaymentMethod?: 'pay-per-minute'|'channel'|VoiceUsagePaymentMethod,
-     *   },
+     *   csvFormat?: CsvFormat|value-of<CsvFormat>, filter?: Filter|FilterShape
      * }|CsvDownloadCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CsvDownloadNewResponse>
      *
@@ -57,7 +49,7 @@ final class CsvDownloadsRawService implements CsvDownloadsRawContract
      */
     public function create(
         array|CsvDownloadCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CsvDownloadCreateParams::parseRequest(
             $params,
@@ -80,6 +72,7 @@ final class CsvDownloadsRawService implements CsvDownloadsRawContract
      * Retrieve a CSV download
      *
      * @param string $id identifies the CSV download
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CsvDownloadGetResponse>
      *
@@ -87,7 +80,7 @@ final class CsvDownloadsRawService implements CsvDownloadsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -103,9 +96,8 @@ final class CsvDownloadsRawService implements CsvDownloadsRawContract
      *
      * List CSV downloads
      *
-     * @param array{
-     *   page?: array{number?: int, size?: int}
-     * }|CsvDownloadListParams $params
+     * @param array{page?: Page|PageShape}|CsvDownloadListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<CsvDownload>>
      *
@@ -113,7 +105,7 @@ final class CsvDownloadsRawService implements CsvDownloadsRawContract
      */
     public function list(
         array|CsvDownloadListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CsvDownloadListParams::parseRequest(
             $params,

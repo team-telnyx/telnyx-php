@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Services\AI;
 
 use Telnyx\AI\Chat\ChatCreateCompletionParams;
-use Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Role;
-use Telnyx\AI\Chat\ChatCreateCompletionParams\ResponseFormat\Type;
+use Telnyx\AI\Chat\ChatCreateCompletionParams\Message;
+use Telnyx\AI\Chat\ChatCreateCompletionParams\ResponseFormat;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\ToolChoice;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
@@ -15,6 +15,12 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\ChatRawContract;
 
+/**
+ * @phpstan-import-type MessageShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\Message
+ * @phpstan-import-type ResponseFormatShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\ResponseFormat
+ * @phpstan-import-type ToolShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\Tool
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ChatRawService implements ChatRawContract
 {
     // @phpstan-ignore-next-line
@@ -29,10 +35,7 @@ final class ChatRawService implements ChatRawContract
      * Chat with a language model. This endpoint is consistent with the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat) and may be used with the OpenAI JS or Python SDK.
      *
      * @param array{
-     *   messages: list<array{
-     *     content: string|list<array<string,mixed>>,
-     *     role: 'system'|'user'|'assistant'|'tool'|Role,
-     *   }>,
+     *   messages: list<Message|MessageShape>,
      *   apiKeyRef?: string,
      *   bestOf?: int,
      *   earlyStopping?: bool,
@@ -47,15 +50,16 @@ final class ChatRawService implements ChatRawContract
      *   model?: string,
      *   n?: float,
      *   presencePenalty?: float,
-     *   responseFormat?: array{type: 'text'|'json_object'|Type},
+     *   responseFormat?: ResponseFormat|ResponseFormatShape,
      *   stream?: bool,
      *   temperature?: float,
-     *   toolChoice?: 'none'|'auto'|'required'|ToolChoice,
-     *   tools?: list<array<string,mixed>>,
+     *   toolChoice?: ToolChoice|value-of<ToolChoice>,
+     *   tools?: list<ToolShape>,
      *   topLogprobs?: int,
      *   topP?: float,
      *   useBeamSearch?: bool,
      * }|ChatCreateCompletionParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<array<string,mixed>>
      *
@@ -63,7 +67,7 @@ final class ChatRawService implements ChatRawContract
      */
     public function createCompletion(
         array|ChatCreateCompletionParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ChatCreateCompletionParams::parseRequest(
             $params,

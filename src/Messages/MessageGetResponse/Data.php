@@ -14,7 +14,8 @@ use Telnyx\Messages\OutboundMessagePayload;
  * @phpstan-import-type OutboundMessagePayloadShape from \Telnyx\Messages\OutboundMessagePayload
  * @phpstan-import-type InboundMessagePayloadShape from \Telnyx\InboundMessagePayload
  *
- * @phpstan-type DataShape = OutboundMessagePayloadShape|InboundMessagePayloadShape
+ * @phpstan-type DataVariants = OutboundMessagePayload|InboundMessagePayload
+ * @phpstan-type DataShape = DataVariants|OutboundMessagePayloadShape|InboundMessagePayloadShape
  */
 final class Data implements ConverterSource
 {

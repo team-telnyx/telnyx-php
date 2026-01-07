@@ -8,13 +8,24 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
+use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
+use Telnyx\NumberOrders\NumberOrderCreateParams\PhoneNumber;
 use Telnyx\NumberOrders\NumberOrderGetResponse;
+use Telnyx\NumberOrders\NumberOrderListParams\Filter;
+use Telnyx\NumberOrders\NumberOrderListParams\Page;
 use Telnyx\NumberOrders\NumberOrderListResponse;
 use Telnyx\NumberOrders\NumberOrderNewResponse;
 use Telnyx\NumberOrders\NumberOrderUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumberOrdersContract;
 
+/**
+ * @phpstan-import-type PhoneNumberShape from \Telnyx\NumberOrders\NumberOrderCreateParams\PhoneNumber
+ * @phpstan-import-type UpdateRegulatoryRequirementShape from \Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement
+ * @phpstan-import-type FilterShape from \Telnyx\NumberOrders\NumberOrderListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\NumberOrders\NumberOrderListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class NumberOrdersService implements NumberOrdersContract
 {
     /**
@@ -39,9 +50,8 @@ final class NumberOrdersService implements NumberOrdersContract
      * @param string $connectionID identifies the connection associated with this phone number
      * @param string $customerReference a customer reference string for customer look ups
      * @param string $messagingProfileID identifies the messaging profile associated with the phone number
-     * @param list<array{
-     *   phoneNumber: string, bundleID?: string, requirementGroupID?: string
-     * }> $phoneNumbers
+     * @param list<PhoneNumber|PhoneNumberShape> $phoneNumbers
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -51,7 +61,7 @@ final class NumberOrdersService implements NumberOrdersContract
         ?string $customerReference = null,
         ?string $messagingProfileID = null,
         ?array $phoneNumbers = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): NumberOrderNewResponse {
         $params = Util::removeNulls(
             [
@@ -75,12 +85,13 @@ final class NumberOrdersService implements NumberOrdersContract
      * Get an existing phone number order.
      *
      * @param string $numberOrderID the number order ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $numberOrderID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): NumberOrderGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($numberOrderID, requestOptions: $requestOptions);
@@ -95,9 +106,8 @@ final class NumberOrdersService implements NumberOrdersContract
      *
      * @param string $numberOrderID the number order ID
      * @param string $customerReference a customer reference string for customer look ups
-     * @param list<array{
-     *   fieldValue?: string, requirementID?: string
-     * }> $regulatoryRequirements
+     * @param list<UpdateRegulatoryRequirement|UpdateRegulatoryRequirementShape> $regulatoryRequirements
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -105,7 +115,7 @@ final class NumberOrdersService implements NumberOrdersContract
         string $numberOrderID,
         ?string $customerReference = null,
         ?array $regulatoryRequirements = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): NumberOrderUpdateResponse {
         $params = Util::removeNulls(
             [
@@ -125,25 +135,18 @@ final class NumberOrdersService implements NumberOrdersContract
      *
      * Get a paginated list of number orders.
      *
-     * @param array{
-     *   createdAt?: array{gt?: string, lt?: string},
-     *   customerReference?: string,
-     *   phoneNumbersCount?: string,
-     *   requirementsMet?: bool,
-     *   status?: string,
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers_count], filter[customer_reference], filter[requirements_met]
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers_count], filter[customer_reference], filter[requirements_met]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<NumberOrderListResponse>
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null,
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 

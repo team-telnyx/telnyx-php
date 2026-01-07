@@ -13,7 +13,7 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardDataUsageNotificationsRawContract;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotification;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationCreateParams;
-use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationCreateParams\Threshold\Unit;
+use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationCreateParams\Threshold;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationDeleteResponse;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationGetResponse;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationListParams;
@@ -21,6 +21,11 @@ use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationNewResponse
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParams;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateResponse;
 
+/**
+ * @phpstan-import-type ThresholdShape from \Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationCreateParams\Threshold
+ * @phpstan-import-type ThresholdShape from \Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParams\Threshold as ThresholdShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class SimCardDataUsageNotificationsRawService implements SimCardDataUsageNotificationsRawContract
 {
     // @phpstan-ignore-next-line
@@ -35,8 +40,9 @@ final class SimCardDataUsageNotificationsRawService implements SimCardDataUsageN
      * Creates a new SIM card data usage notification.
      *
      * @param array{
-     *   simCardID: string, threshold: array{amount?: string, unit?: 'MB'|'GB'|Unit}
+     *   simCardID: string, threshold: Threshold|ThresholdShape
      * }|SimCardDataUsageNotificationCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardDataUsageNotificationNewResponse>
      *
@@ -44,7 +50,7 @@ final class SimCardDataUsageNotificationsRawService implements SimCardDataUsageN
      */
     public function create(
         array|SimCardDataUsageNotificationCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SimCardDataUsageNotificationCreateParams::parseRequest(
             $params,
@@ -67,6 +73,7 @@ final class SimCardDataUsageNotificationsRawService implements SimCardDataUsageN
      * Get a single SIM Card Data Usage Notification.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardDataUsageNotificationGetResponse>
      *
@@ -74,7 +81,7 @@ final class SimCardDataUsageNotificationsRawService implements SimCardDataUsageN
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -93,11 +100,9 @@ final class SimCardDataUsageNotificationsRawService implements SimCardDataUsageN
      * @param string $simCardDataUsageNotificationID identifies the resource
      * @param array{
      *   simCardID?: string,
-     *   threshold?: array{
-     *     amount?: string,
-     *     unit?: 'MB'|'GB'|SimCardDataUsageNotificationUpdateParams\Threshold\Unit,
-     *   },
+     *   threshold?: SimCardDataUsageNotificationUpdateParams\Threshold|ThresholdShape1,
      * }|SimCardDataUsageNotificationUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardDataUsageNotificationUpdateResponse>
      *
@@ -106,7 +111,7 @@ final class SimCardDataUsageNotificationsRawService implements SimCardDataUsageN
     public function update(
         string $simCardDataUsageNotificationID,
         array|SimCardDataUsageNotificationUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SimCardDataUsageNotificationUpdateParams::parseRequest(
             $params,
@@ -134,6 +139,7 @@ final class SimCardDataUsageNotificationsRawService implements SimCardDataUsageN
      * @param array{
      *   filterSimCardID?: string, pageNumber?: int, pageSize?: int
      * }|SimCardDataUsageNotificationListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<SimCardDataUsageNotification>>
      *
@@ -141,7 +147,7 @@ final class SimCardDataUsageNotificationsRawService implements SimCardDataUsageN
      */
     public function list(
         array|SimCardDataUsageNotificationListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SimCardDataUsageNotificationListParams::parseRequest(
             $params,
@@ -172,6 +178,7 @@ final class SimCardDataUsageNotificationsRawService implements SimCardDataUsageN
      * Delete the SIM Card Data Usage Notification.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardDataUsageNotificationDeleteResponse>
      *
@@ -179,7 +186,7 @@ final class SimCardDataUsageNotificationsRawService implements SimCardDataUsageN
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

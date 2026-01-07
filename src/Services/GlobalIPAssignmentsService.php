@@ -11,11 +11,18 @@ use Telnyx\DefaultPagination;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignment;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentDeleteResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentGetResponse;
+use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListParams\Page;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentNewResponse;
+use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\GlobalIPAssignmentUpdateRequest;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPAssignmentsContract;
 
+/**
+ * @phpstan-import-type GlobalIPAssignmentUpdateRequestShape from \Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\GlobalIPAssignmentUpdateRequest
+ * @phpstan-import-type PageShape from \Telnyx\GlobalIPAssignments\GlobalIPAssignmentListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
 {
     /**
@@ -36,10 +43,12 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      *
      * Create a Global IP assignment.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function create(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): GlobalIPAssignmentNewResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(requestOptions: $requestOptions);
@@ -53,12 +62,13 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      * Retrieve a Global IP assignment.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): GlobalIPAssignmentGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -72,21 +82,15 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      * Update a Global IP assignment.
      *
      * @param string $globalIPAssignmentID identifies the resource
-     * @param array{
-     *   id?: string,
-     *   createdAt?: string,
-     *   recordType?: string,
-     *   updatedAt?: string,
-     *   globalIPID?: string,
-     *   wireguardPeerID?: string,
-     * } $globalIPAssignmentUpdateRequest
+     * @param GlobalIPAssignmentUpdateRequest|GlobalIPAssignmentUpdateRequestShape $globalIPAssignmentUpdateRequest
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $globalIPAssignmentID,
-        array $globalIPAssignmentUpdateRequest,
-        ?RequestOptions $requestOptions = null,
+        GlobalIPAssignmentUpdateRequest|array $globalIPAssignmentUpdateRequest,
+        RequestOptions|array|null $requestOptions = null,
     ): GlobalIPAssignmentUpdateResponse {
         $params = Util::removeNulls(
             ['globalIPAssignmentUpdateRequest' => $globalIPAssignmentUpdateRequest]
@@ -103,17 +107,16 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      *
      * List all Global IP assignments.
      *
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<GlobalIPAssignment>
      *
      * @throws APIException
      */
     public function list(
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null
     ): DefaultPagination {
         $params = Util::removeNulls(['page' => $page]);
 
@@ -129,12 +132,13 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      * Delete a Global IP assignment.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): GlobalIPAssignmentDeleteResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, requestOptions: $requestOptions);

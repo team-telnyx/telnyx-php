@@ -13,6 +13,9 @@ use Telnyx\Services\Storage\Buckets\SslCertificateService;
 use Telnyx\Services\Storage\Buckets\UsageService;
 use Telnyx\Storage\Buckets\BucketNewPresignedURLResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class BucketsService implements BucketsContract
 {
     /**
@@ -50,6 +53,7 @@ final class BucketsService implements BucketsContract
      * @param string $objectName Path param: The name of the object
      * @param string $bucketName Path param: The name of the bucket
      * @param int $ttl Body param: The time to live of the token in seconds
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -57,7 +61,7 @@ final class BucketsService implements BucketsContract
         string $objectName,
         string $bucketName,
         ?int $ttl = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BucketNewPresignedURLResponse {
         $params = Util::removeNulls(['bucketName' => $bucketName, 'ttl' => $ttl]);
 

@@ -6,21 +6,25 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
+use Telnyx\UserTags\UserTagListParams\Filter;
 use Telnyx\UserTags\UserTagListResponse;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\UserTags\UserTagListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface UserTagsContract
 {
     /**
      * @api
      *
-     * @param array{
-     *   startsWith?: string
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[starts_with]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[starts_with]
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
-        ?RequestOptions $requestOptions = null
+        Filter|array|null $filter = null,
+        RequestOptions|array|null $requestOptions = null,
     ): UserTagListResponse;
 }

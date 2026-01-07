@@ -9,15 +9,21 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\Portouts\Reports\ExportPortoutsCsvReport;
-use Telnyx\Portouts\Reports\ExportPortoutsCsvReport\Filters\StatusIn;
 use Telnyx\Portouts\Reports\PortoutReport;
+use Telnyx\Portouts\Reports\ReportCreateParams\ReportType;
 use Telnyx\Portouts\Reports\ReportGetResponse;
-use Telnyx\Portouts\Reports\ReportListParams\Filter\ReportType;
-use Telnyx\Portouts\Reports\ReportListParams\Filter\Status;
+use Telnyx\Portouts\Reports\ReportListParams\Filter;
+use Telnyx\Portouts\Reports\ReportListParams\Page;
 use Telnyx\Portouts\Reports\ReportNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Portouts\ReportsContract;
 
+/**
+ * @phpstan-import-type ExportPortoutsCsvReportShape from \Telnyx\Portouts\Reports\ExportPortoutsCsvReport
+ * @phpstan-import-type FilterShape from \Telnyx\Portouts\Reports\ReportListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Portouts\Reports\ReportListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ReportsService implements ReportsContract
 {
     /**
@@ -38,24 +44,16 @@ final class ReportsService implements ReportsContract
      *
      * Generate reports about port-out operations.
      *
-     * @param array{
-     *   filters: array{
-     *     createdAtGt?: string|\DateTimeInterface,
-     *     createdAtLt?: string|\DateTimeInterface,
-     *     customerReferenceIn?: list<string>,
-     *     endUserName?: string,
-     *     phoneNumbersOverlaps?: list<string>,
-     *     statusIn?: list<'pending'|'authorized'|'ported'|'rejected'|'rejected-pending'|'canceled'|StatusIn>,
-     *   },
-     * }|ExportPortoutsCsvReport $params The parameters for generating a port-outs CSV report
-     * @param 'export_portouts_csv'|\Telnyx\Portouts\Reports\ReportCreateParams\ReportType $reportType Identifies the type of report
+     * @param ExportPortoutsCsvReport|ExportPortoutsCsvReportShape $params the parameters for generating a port-outs CSV report
+     * @param ReportType|value-of<ReportType> $reportType Identifies the type of report
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        array|ExportPortoutsCsvReport $params,
-        string|\Telnyx\Portouts\Reports\ReportCreateParams\ReportType $reportType,
-        ?RequestOptions $requestOptions = null,
+        ExportPortoutsCsvReport|array $params,
+        ReportType|string $reportType,
+        RequestOptions|array|null $requestOptions = null,
     ): ReportNewResponse {
         $params1 = Util::removeNulls(
             ['params' => $params, 'reportType' => $reportType]
@@ -73,12 +71,13 @@ final class ReportsService implements ReportsContract
      * Retrieve a specific report generated.
      *
      * @param string $id identifies a report
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ReportGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -91,22 +90,18 @@ final class ReportsService implements ReportsContract
      *
      * List the reports generated about port-out operations.
      *
-     * @param array{
-     *   reportType?: 'export_portouts_csv'|ReportType,
-     *   status?: 'pending'|'completed'|Status,
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[report_type], filter[status]
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[report_type], filter[status]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<PortoutReport>
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null,
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 

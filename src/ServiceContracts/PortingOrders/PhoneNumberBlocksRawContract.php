@@ -15,6 +15,9 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockNewResponse;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface PhoneNumberBlocksRawContract
 {
     /**
@@ -22,6 +25,7 @@ interface PhoneNumberBlocksRawContract
      *
      * @param string $portingOrderID Identifies the Porting Order associated with the phone number block
      * @param array<string,mixed>|PhoneNumberBlockCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberBlockNewResponse>
      *
@@ -30,7 +34,7 @@ interface PhoneNumberBlocksRawContract
     public function create(
         string $portingOrderID,
         array|PhoneNumberBlockCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -38,6 +42,7 @@ interface PhoneNumberBlocksRawContract
      *
      * @param string $portingOrderID Identifies the Porting Order associated with the phone number blocks
      * @param array<string,mixed>|PhoneNumberBlockListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PortingPhoneNumberBlock>>
      *
@@ -46,7 +51,7 @@ interface PhoneNumberBlocksRawContract
     public function list(
         string $portingOrderID,
         array|PhoneNumberBlockListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -54,6 +59,7 @@ interface PhoneNumberBlocksRawContract
      *
      * @param string $id Identifies the phone number block to be deleted
      * @param array<string,mixed>|PhoneNumberBlockDeleteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberBlockDeleteResponse>
      *
@@ -62,6 +68,6 @@ interface PhoneNumberBlocksRawContract
     public function delete(
         string $id,
         array|PhoneNumberBlockDeleteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

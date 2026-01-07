@@ -13,7 +13,7 @@ use Telnyx\PortingOrdersExceptionType;
  * @phpstan-import-type PortingOrdersExceptionTypeShape from \Telnyx\PortingOrdersExceptionType
  *
  * @phpstan-type PortingOrderGetExceptionTypesResponseShape = array{
- *   data?: list<PortingOrdersExceptionTypeShape>|null
+ *   data?: list<PortingOrdersExceptionType|PortingOrdersExceptionTypeShape>|null
  * }
  */
 final class PortingOrderGetExceptionTypesResponse implements BaseModel
@@ -35,7 +35,7 @@ final class PortingOrderGetExceptionTypesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PortingOrdersExceptionTypeShape>|null $data
+     * @param list<PortingOrdersExceptionType|PortingOrdersExceptionTypeShape>|null $data
      */
     public static function with(?array $data = null): self
     {
@@ -47,7 +47,7 @@ final class PortingOrderGetExceptionTypesResponse implements BaseModel
     }
 
     /**
-     * @param list<PortingOrdersExceptionTypeShape> $data
+     * @param list<PortingOrdersExceptionType|PortingOrdersExceptionTypeShape> $data
      */
     public function withData(array $data): self
     {

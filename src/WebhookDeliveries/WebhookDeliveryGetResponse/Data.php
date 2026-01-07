@@ -19,7 +19,7 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Webhook;
  *
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   attempts?: list<AttemptShape>|null,
+ *   attempts?: list<Attempt|AttemptShape>|null,
  *   finishedAt?: \DateTimeInterface|null,
  *   recordType?: string|null,
  *   startedAt?: \DateTimeInterface|null,
@@ -95,7 +95,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AttemptShape>|null $attempts
+     * @param list<Attempt|AttemptShape>|null $attempts
      * @param Status|value-of<Status>|null $status
      * @param Webhook|WebhookShape|null $webhook
      */
@@ -137,7 +137,7 @@ final class Data implements BaseModel
     /**
      * Detailed delivery attempts, ordered by most recent.
      *
-     * @param list<AttemptShape> $attempts
+     * @param list<Attempt|AttemptShape> $attempts
      */
     public function withAttempts(array $attempts): self
     {

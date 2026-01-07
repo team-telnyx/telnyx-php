@@ -14,7 +14,7 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\BatchCsvPaginationMeta;
  * @phpstan-import-type BatchCsvPaginationMetaShape from \Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\BatchCsvPaginationMeta
  *
  * @phpstan-type VoiceListResponseShape = array{
- *   data?: list<CdrDetailedReqResponseShape>|null,
+ *   data?: list<CdrDetailedReqResponse|CdrDetailedReqResponseShape>|null,
  *   meta?: null|BatchCsvPaginationMeta|BatchCsvPaginationMetaShape,
  * }
  */
@@ -40,7 +40,7 @@ final class VoiceListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<CdrDetailedReqResponseShape>|null $data
+     * @param list<CdrDetailedReqResponse|CdrDetailedReqResponseShape>|null $data
      * @param BatchCsvPaginationMeta|BatchCsvPaginationMetaShape|null $meta
      */
     public static function with(
@@ -56,7 +56,7 @@ final class VoiceListResponse implements BaseModel
     }
 
     /**
-     * @param list<CdrDetailedReqResponseShape> $data
+     * @param list<CdrDetailedReqResponse|CdrDetailedReqResponseShape> $data
      */
     public function withData(array $data): self
     {

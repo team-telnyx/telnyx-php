@@ -10,10 +10,19 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\MessagingOptouts\MessagingOptoutListParams;
+use Telnyx\MessagingOptouts\MessagingOptoutListParams\CreatedAt;
+use Telnyx\MessagingOptouts\MessagingOptoutListParams\Filter;
+use Telnyx\MessagingOptouts\MessagingOptoutListParams\Page;
 use Telnyx\MessagingOptouts\MessagingOptoutListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingOptoutsRawContract;
 
+/**
+ * @phpstan-import-type CreatedAtShape from \Telnyx\MessagingOptouts\MessagingOptoutListParams\CreatedAt
+ * @phpstan-import-type FilterShape from \Telnyx\MessagingOptouts\MessagingOptoutListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\MessagingOptouts\MessagingOptoutListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MessagingOptoutsRawService implements MessagingOptoutsRawContract
 {
     // @phpstan-ignore-next-line
@@ -28,13 +37,12 @@ final class MessagingOptoutsRawService implements MessagingOptoutsRawContract
      * Retrieve a list of opt-out blocks.
      *
      * @param array{
-     *   createdAt?: array{
-     *     gte?: string|\DateTimeInterface, lte?: string|\DateTimeInterface
-     *   },
-     *   filter?: array{from?: string, messagingProfileID?: string},
-     *   page?: array{number?: int, size?: int},
+     *   createdAt?: CreatedAt|CreatedAtShape,
+     *   filter?: Filter|FilterShape,
+     *   page?: Page|PageShape,
      *   redactionEnabled?: string,
      * }|MessagingOptoutListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<MessagingOptoutListResponse>>
      *
@@ -42,7 +50,7 @@ final class MessagingOptoutsRawService implements MessagingOptoutsRawContract
      */
     public function list(
         array|MessagingOptoutListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MessagingOptoutListParams::parseRequest(
             $params,

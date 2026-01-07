@@ -18,6 +18,8 @@ use Telnyx\Core\Conversion\MapOf;
  *
  * @see Telnyx\Services\AI\ConversationsService::addMessage()
  *
+ * @phpstan-import-type MetadataVariants from \Telnyx\AI\Conversations\ConversationAddMessageParams\Metadata
+ * @phpstan-import-type ToolChoiceVariants from \Telnyx\AI\Conversations\ConversationAddMessageParams\ToolChoice
  * @phpstan-import-type MetadataShape from \Telnyx\AI\Conversations\ConversationAddMessageParams\Metadata
  * @phpstan-import-type ToolChoiceShape from \Telnyx\AI\Conversations\ConversationAddMessageParams\ToolChoice
  *
@@ -44,7 +46,7 @@ final class ConversationAddMessageParams implements BaseModel
     #[Optional]
     public ?string $content;
 
-    /** @var array<string,string|int|bool|list<string|int|bool>>|null $metadata */
+    /** @var array<string,MetadataVariants>|null $metadata */
     #[Optional(map: Metadata::class)]
     public ?array $metadata;
 
@@ -61,7 +63,7 @@ final class ConversationAddMessageParams implements BaseModel
     #[Optional('tool_calls', list: new MapOf('mixed'))]
     public ?array $toolCalls;
 
-    /** @var string|array<string,mixed>|null $toolChoice */
+    /** @var ToolChoiceVariants|null $toolChoice */
     #[Optional('tool_choice', union: ToolChoice::class)]
     public string|array|null $toolChoice;
 

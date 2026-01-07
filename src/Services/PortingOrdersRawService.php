@@ -13,29 +13,45 @@ use Telnyx\PortingOrders\PortingOrder;
 use Telnyx\PortingOrders\PortingOrderCreateParams;
 use Telnyx\PortingOrders\PortingOrderDocuments;
 use Telnyx\PortingOrders\PortingOrderEndUser;
-use Telnyx\PortingOrders\PortingOrderEndUserAdmin;
-use Telnyx\PortingOrders\PortingOrderEndUserLocation;
 use Telnyx\PortingOrders\PortingOrderGetAllowedFocWindowsResponse;
 use Telnyx\PortingOrders\PortingOrderGetExceptionTypesResponse;
 use Telnyx\PortingOrders\PortingOrderGetRequirementsResponse;
 use Telnyx\PortingOrders\PortingOrderGetResponse;
 use Telnyx\PortingOrders\PortingOrderGetSubRequestResponse;
 use Telnyx\PortingOrders\PortingOrderListParams;
-use Telnyx\PortingOrders\PortingOrderListParams\Sort\Value;
+use Telnyx\PortingOrders\PortingOrderListParams\Filter;
+use Telnyx\PortingOrders\PortingOrderListParams\Page;
+use Telnyx\PortingOrders\PortingOrderListParams\Sort;
 use Telnyx\PortingOrders\PortingOrderMisc;
-use Telnyx\PortingOrders\PortingOrderMisc\RemainingNumbersAction;
 use Telnyx\PortingOrders\PortingOrderNewResponse;
 use Telnyx\PortingOrders\PortingOrderPhoneNumberConfiguration;
 use Telnyx\PortingOrders\PortingOrderRetrieveLoaTemplateParams;
 use Telnyx\PortingOrders\PortingOrderRetrieveParams;
 use Telnyx\PortingOrders\PortingOrderRetrieveRequirementsParams;
-use Telnyx\PortingOrders\PortingOrderType;
 use Telnyx\PortingOrders\PortingOrderUpdateParams;
+use Telnyx\PortingOrders\PortingOrderUpdateParams\ActivationSettings;
+use Telnyx\PortingOrders\PortingOrderUpdateParams\Messaging;
+use Telnyx\PortingOrders\PortingOrderUpdateParams\Requirement;
 use Telnyx\PortingOrders\PortingOrderUpdateResponse;
 use Telnyx\PortingOrders\PortingOrderUserFeedback;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrdersRawContract;
 
+/**
+ * @phpstan-import-type ActivationSettingsShape from \Telnyx\PortingOrders\PortingOrderUpdateParams\ActivationSettings
+ * @phpstan-import-type PortingOrderDocumentsShape from \Telnyx\PortingOrders\PortingOrderDocuments
+ * @phpstan-import-type PortingOrderEndUserShape from \Telnyx\PortingOrders\PortingOrderEndUser
+ * @phpstan-import-type MessagingShape from \Telnyx\PortingOrders\PortingOrderUpdateParams\Messaging
+ * @phpstan-import-type PortingOrderMiscShape from \Telnyx\PortingOrders\PortingOrderMisc
+ * @phpstan-import-type PortingOrderPhoneNumberConfigurationShape from \Telnyx\PortingOrders\PortingOrderPhoneNumberConfiguration
+ * @phpstan-import-type RequirementShape from \Telnyx\PortingOrders\PortingOrderUpdateParams\Requirement
+ * @phpstan-import-type PortingOrderUserFeedbackShape from \Telnyx\PortingOrders\PortingOrderUserFeedback
+ * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\PortingOrderListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\PortingOrderListParams\Page
+ * @phpstan-import-type SortShape from \Telnyx\PortingOrders\PortingOrderListParams\Sort
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\PortingOrderRetrieveRequirementsParams\Page as PageShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class PortingOrdersRawService implements PortingOrdersRawContract
 {
     // @phpstan-ignore-next-line
@@ -54,6 +70,7 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
      *   customerGroupReference?: string,
      *   customerReference?: string|null,
      * }|PortingOrderCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PortingOrderNewResponse>
      *
@@ -61,7 +78,7 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
      */
     public function create(
         array|PortingOrderCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PortingOrderCreateParams::parseRequest(
             $params,
@@ -85,6 +102,7 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
      *
      * @param string $id Porting Order id
      * @param array{includePhoneNumbers?: bool}|PortingOrderRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PortingOrderGetResponse>
      *
@@ -93,7 +111,7 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
     public function retrieve(
         string $id,
         array|PortingOrderRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PortingOrderRetrieveParams::parseRequest(
             $params,
@@ -124,36 +142,20 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
      *
      * @param string $id Porting Order id
      * @param array{
-     *   activationSettings?: array{focDatetimeRequested?: string|\DateTimeInterface},
+     *   activationSettings?: ActivationSettings|ActivationSettingsShape,
      *   customerGroupReference?: string,
      *   customerReference?: string,
-     *   documents?: array{
-     *     invoice?: string|null, loa?: string|null
-     *   }|PortingOrderDocuments,
-     *   endUser?: array{
-     *     admin?: array<string,mixed>|PortingOrderEndUserAdmin,
-     *     location?: array<string,mixed>|PortingOrderEndUserLocation,
-     *   }|PortingOrderEndUser,
-     *   messaging?: array{enableMessaging?: bool},
-     *   misc?: array{
-     *     newBillingPhoneNumber?: string|null,
-     *     remainingNumbersAction?: 'keep'|'disconnect'|RemainingNumbersAction|null,
-     *     type?: 'full'|'partial'|PortingOrderType,
-     *   }|PortingOrderMisc|null,
-     *   phoneNumberConfiguration?: array{
-     *     billingGroupID?: string|null,
-     *     connectionID?: string|null,
-     *     emergencyAddressID?: string|null,
-     *     messagingProfileID?: string|null,
-     *     tags?: list<string>,
-     *   }|PortingOrderPhoneNumberConfiguration,
+     *   documents?: PortingOrderDocuments|PortingOrderDocumentsShape,
+     *   endUser?: PortingOrderEndUser|PortingOrderEndUserShape,
+     *   messaging?: Messaging|MessagingShape,
+     *   misc?: PortingOrderMisc|PortingOrderMiscShape|null,
+     *   phoneNumberConfiguration?: PortingOrderPhoneNumberConfiguration|PortingOrderPhoneNumberConfigurationShape,
      *   requirementGroupID?: string,
-     *   requirements?: list<array{fieldValue: string, requirementTypeID: string}>,
-     *   userFeedback?: array{
-     *     userComment?: string|null, userRating?: int|null
-     *   }|PortingOrderUserFeedback,
+     *   requirements?: list<Requirement|RequirementShape>,
+     *   userFeedback?: PortingOrderUserFeedback|PortingOrderUserFeedbackShape,
      *   webhookURL?: string,
      * }|PortingOrderUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PortingOrderUpdateResponse>
      *
@@ -162,7 +164,7 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
     public function update(
         string $id,
         array|PortingOrderUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PortingOrderUpdateParams::parseRequest(
             $params,
@@ -185,30 +187,12 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
      * Returns a list of your porting order.
      *
      * @param array{
-     *   filter?: array{
-     *     activationSettings?: array{
-     *       fastPortEligible?: bool,
-     *       focDatetimeRequested?: array{gt?: string, lt?: string},
-     *     },
-     *     customerGroupReference?: string,
-     *     customerReference?: string,
-     *     endUser?: array{
-     *       admin?: array{authPersonName?: string, entityName?: string}
-     *     },
-     *     misc?: array{type?: 'full'|'partial'|PortingOrderType},
-     *     parentSupportKey?: string,
-     *     phoneNumbers?: array{
-     *       carrierName?: string,
-     *       countryCode?: string,
-     *       phoneNumber?: array{contains?: string},
-     *     },
-     *   },
+     *   filter?: Filter|FilterShape,
      *   includePhoneNumbers?: bool,
-     *   page?: array{number?: int, size?: int},
-     *   sort?: array{
-     *     value?: 'created_at'|'-created_at'|'activation_settings.foc_datetime_requested'|'-activation_settings.foc_datetime_requested'|Value,
-     *   },
+     *   page?: Page|PageShape,
+     *   sort?: Sort|SortShape,
      * }|PortingOrderListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PortingOrder>>
      *
@@ -216,7 +200,7 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
      */
     public function list(
         array|PortingOrderListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PortingOrderListParams::parseRequest(
             $params,
@@ -243,6 +227,7 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
      * Deletes an existing porting order. This operation is restrict to porting orders in draft state.
      *
      * @param string $id Porting Order id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -250,7 +235,7 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -267,6 +252,7 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
      * Returns a list of allowed FOC dates for a porting order.
      *
      * @param string $id Porting Order id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PortingOrderGetAllowedFocWindowsResponse>
      *
@@ -274,7 +260,7 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
      */
     public function retrieveAllowedFocWindows(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -290,12 +276,14 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
      *
      * Returns a list of all possible exception types for a porting order.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<PortingOrderGetExceptionTypesResponse>
      *
      * @throws APIException
      */
     public function retrieveExceptionTypes(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -315,6 +303,7 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
      * @param array{
      *   loaConfigurationID?: string
      * }|PortingOrderRetrieveLoaTemplateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
      *
@@ -323,7 +312,7 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
     public function retrieveLoaTemplate(
         string $id,
         array|PortingOrderRetrieveLoaTemplateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PortingOrderRetrieveLoaTemplateParams::parseRequest(
             $params,
@@ -351,8 +340,9 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
      *
      * @param string $id Porting Order id
      * @param array{
-     *   page?: array{number?: int, size?: int}
+     *   page?: PortingOrderRetrieveRequirementsParams\Page|PageShape1,
      * }|PortingOrderRetrieveRequirementsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PortingOrderGetRequirementsResponse>>
      *
@@ -361,7 +351,7 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
     public function retrieveRequirements(
         string $id,
         array|PortingOrderRetrieveRequirementsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PortingOrderRetrieveRequirementsParams::parseRequest(
             $params,
@@ -385,6 +375,7 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
      * Retrieve the associated V1 sub_request_id and port_request_id
      *
      * @param string $id Porting Order id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PortingOrderGetSubRequestResponse>
      *
@@ -392,7 +383,7 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
      */
     public function retrieveSubRequest(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

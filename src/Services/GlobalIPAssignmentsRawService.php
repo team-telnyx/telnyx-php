@@ -12,12 +12,19 @@ use Telnyx\GlobalIPAssignments\GlobalIPAssignment;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentDeleteResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentGetResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListParams;
+use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListParams\Page;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentNewResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams;
+use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\GlobalIPAssignmentUpdateRequest;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPAssignmentsRawContract;
 
+/**
+ * @phpstan-import-type GlobalIPAssignmentUpdateRequestShape from \Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\GlobalIPAssignmentUpdateRequest
+ * @phpstan-import-type PageShape from \Telnyx\GlobalIPAssignments\GlobalIPAssignmentListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class GlobalIPAssignmentsRawService implements GlobalIPAssignmentsRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,12 +38,15 @@ final class GlobalIPAssignmentsRawService implements GlobalIPAssignmentsRawContr
      *
      * Create a Global IP assignment.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<GlobalIPAssignmentNewResponse>
      *
      * @throws APIException
      */
-    public function create(?RequestOptions $requestOptions = null): BaseResponse
-    {
+    public function create(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
@@ -52,6 +62,7 @@ final class GlobalIPAssignmentsRawService implements GlobalIPAssignmentsRawContr
      * Retrieve a Global IP assignment.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<GlobalIPAssignmentGetResponse>
      *
@@ -59,7 +70,7 @@ final class GlobalIPAssignmentsRawService implements GlobalIPAssignmentsRawContr
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -77,15 +88,9 @@ final class GlobalIPAssignmentsRawService implements GlobalIPAssignmentsRawContr
      *
      * @param string $globalIPAssignmentID identifies the resource
      * @param array{
-     *   globalIPAssignmentUpdateRequest: array{
-     *     id?: string,
-     *     createdAt?: string,
-     *     recordType?: string,
-     *     updatedAt?: string,
-     *     globalIPID?: string,
-     *     wireguardPeerID?: string,
-     *   },
+     *   globalIPAssignmentUpdateRequest: GlobalIPAssignmentUpdateRequest|GlobalIPAssignmentUpdateRequestShape,
      * }|GlobalIPAssignmentUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<GlobalIPAssignmentUpdateResponse>
      *
@@ -94,7 +99,7 @@ final class GlobalIPAssignmentsRawService implements GlobalIPAssignmentsRawContr
     public function update(
         string $globalIPAssignmentID,
         array|GlobalIPAssignmentUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = GlobalIPAssignmentUpdateParams::parseRequest(
             $params,
@@ -116,9 +121,8 @@ final class GlobalIPAssignmentsRawService implements GlobalIPAssignmentsRawContr
      *
      * List all Global IP assignments.
      *
-     * @param array{
-     *   page?: array{number?: int, size?: int}
-     * }|GlobalIPAssignmentListParams $params
+     * @param array{page?: Page|PageShape}|GlobalIPAssignmentListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<GlobalIPAssignment>>
      *
@@ -126,7 +130,7 @@ final class GlobalIPAssignmentsRawService implements GlobalIPAssignmentsRawContr
      */
     public function list(
         array|GlobalIPAssignmentListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = GlobalIPAssignmentListParams::parseRequest(
             $params,
@@ -150,6 +154,7 @@ final class GlobalIPAssignmentsRawService implements GlobalIPAssignmentsRawContr
      * Delete a Global IP assignment.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<GlobalIPAssignmentDeleteResponse>
      *
@@ -157,7 +162,7 @@ final class GlobalIPAssignmentsRawService implements GlobalIPAssignmentsRawContr
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

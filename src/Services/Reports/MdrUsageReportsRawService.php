@@ -21,6 +21,9 @@ use Telnyx\Reports\MdrUsageReports\MdrUsageReportNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Reports\MdrUsageReportsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MdrUsageReportsRawService implements MdrUsageReportsRawContract
 {
     // @phpstan-ignore-next-line
@@ -35,11 +38,12 @@ final class MdrUsageReportsRawService implements MdrUsageReportsRawContract
      * Submit request for new new messaging usage report. This endpoint will pull and aggregate messaging data in specified time period.
      *
      * @param array{
-     *   aggregationType: 'NO_AGGREGATION'|'PROFILE'|'TAGS'|AggregationType,
-     *   endDate: string|\DateTimeInterface,
-     *   startDate: string|\DateTimeInterface,
+     *   aggregationType: AggregationType|value-of<AggregationType>,
+     *   endDate: \DateTimeInterface,
+     *   startDate: \DateTimeInterface,
      *   profiles?: string,
      * }|MdrUsageReportCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MdrUsageReportNewResponse>
      *
@@ -47,7 +51,7 @@ final class MdrUsageReportsRawService implements MdrUsageReportsRawContract
      */
     public function create(
         array|MdrUsageReportCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MdrUsageReportCreateParams::parseRequest(
             $params,
@@ -70,13 +74,15 @@ final class MdrUsageReportsRawService implements MdrUsageReportsRawContract
      *
      * Fetch a single messaging usage report by id
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<MdrUsageReportGetResponse>
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -93,6 +99,7 @@ final class MdrUsageReportsRawService implements MdrUsageReportsRawContract
      * Fetch all messaging usage reports. Usage reports are aggregated messaging data for specified time period and breakdown
      *
      * @param array{pageNumber?: int, pageSize?: int}|MdrUsageReportListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<MdrUsageReport>>
      *
@@ -100,7 +107,7 @@ final class MdrUsageReportsRawService implements MdrUsageReportsRawContract
      */
     public function list(
         array|MdrUsageReportListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MdrUsageReportListParams::parseRequest(
             $params,
@@ -126,13 +133,15 @@ final class MdrUsageReportsRawService implements MdrUsageReportsRawContract
      *
      * Delete messaging usage report by id
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<MdrUsageReportDeleteResponse>
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -149,11 +158,12 @@ final class MdrUsageReportsRawService implements MdrUsageReportsRawContract
      * Generate and fetch messaging usage report synchronously. This endpoint will both generate and fetch the messaging report over a specified time period. No polling is necessary but the response may take up to a couple of minutes.
      *
      * @param array{
-     *   aggregationType: 'NO_AGGREGATION'|'PROFILE'|'TAGS'|MdrUsageReportFetchSyncParams\AggregationType,
-     *   endDate?: string|\DateTimeInterface,
+     *   aggregationType: MdrUsageReportFetchSyncParams\AggregationType|value-of<MdrUsageReportFetchSyncParams\AggregationType>,
+     *   endDate?: \DateTimeInterface,
      *   profiles?: list<string>,
-     *   startDate?: string|\DateTimeInterface,
+     *   startDate?: \DateTimeInterface,
      * }|MdrUsageReportFetchSyncParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MdrUsageReportFetchSyncResponse>
      *
@@ -161,7 +171,7 @@ final class MdrUsageReportsRawService implements MdrUsageReportsRawContract
      */
     public function fetchSync(
         array|MdrUsageReportFetchSyncParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MdrUsageReportFetchSyncParams::parseRequest(
             $params,

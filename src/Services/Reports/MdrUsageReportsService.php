@@ -17,6 +17,9 @@ use Telnyx\Reports\MdrUsageReports\MdrUsageReportNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Reports\MdrUsageReportsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MdrUsageReportsService implements MdrUsageReportsContract
 {
     /**
@@ -37,16 +40,17 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
      *
      * Submit request for new new messaging usage report. This endpoint will pull and aggregate messaging data in specified time period.
      *
-     * @param 'NO_AGGREGATION'|'PROFILE'|'TAGS'|AggregationType $aggregationType
+     * @param AggregationType|value-of<AggregationType> $aggregationType
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        string|AggregationType $aggregationType,
-        string|\DateTimeInterface $endDate,
-        string|\DateTimeInterface $startDate,
+        AggregationType|string $aggregationType,
+        \DateTimeInterface $endDate,
+        \DateTimeInterface $startDate,
         ?string $profiles = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MdrUsageReportNewResponse {
         $params = Util::removeNulls(
             [
@@ -68,11 +72,13 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
      *
      * Fetch a single messaging usage report by id
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MdrUsageReportGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -85,6 +91,8 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
      *
      * Fetch all messaging usage reports. Usage reports are aggregated messaging data for specified time period and breakdown
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return DefaultFlatPagination<MdrUsageReport>
      *
      * @throws APIException
@@ -92,7 +100,7 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
     public function list(
         ?int $pageNumber = null,
         ?int $pageSize = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
         $params = Util::removeNulls(
             ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
@@ -109,11 +117,13 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
      *
      * Delete messaging usage report by id
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MdrUsageReportDeleteResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, requestOptions: $requestOptions);
@@ -126,17 +136,18 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
      *
      * Generate and fetch messaging usage report synchronously. This endpoint will both generate and fetch the messaging report over a specified time period. No polling is necessary but the response may take up to a couple of minutes.
      *
-     * @param 'NO_AGGREGATION'|'PROFILE'|'TAGS'|\Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType $aggregationType
+     * @param \Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType|value-of<\Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType> $aggregationType
      * @param list<string> $profiles
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function fetchSync(
-        string|\Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType $aggregationType,
-        string|\DateTimeInterface|null $endDate = null,
+        \Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType|string $aggregationType,
+        ?\DateTimeInterface $endDate = null,
         ?array $profiles = null,
-        string|\DateTimeInterface|null $startDate = null,
-        ?RequestOptions $requestOptions = null,
+        ?\DateTimeInterface $startDate = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MdrUsageReportFetchSyncResponse {
         $params = Util::removeNulls(
             [

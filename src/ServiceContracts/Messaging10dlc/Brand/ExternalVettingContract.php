@@ -10,10 +10,15 @@ use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVettingListResponseItem;
 use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVettingOrderResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ExternalVettingContract
 {
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<ExternalVettingListResponseItem>
      *
@@ -21,7 +26,7 @@ interface ExternalVettingContract
      */
     public function list(
         string $brandID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): array;
 
     /**
@@ -30,6 +35,7 @@ interface ExternalVettingContract
      * @param string $evpID external vetting provider ID for the brand
      * @param string $vettingID Unique ID that identifies a vetting transaction performed by a vetting provider. This ID is provided by the vetting provider at time of vetting.
      * @param string $vettingToken required by some providers for vetting record confirmation
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -38,7 +44,7 @@ interface ExternalVettingContract
         string $evpID,
         string $vettingID,
         ?string $vettingToken = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ExternalVettingImportsResponse;
 
     /**
@@ -46,6 +52,7 @@ interface ExternalVettingContract
      *
      * @param string $evpID external vetting provider ID for the brand
      * @param string $vettingClass identifies the vetting classification
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -53,6 +60,6 @@ interface ExternalVettingContract
         string $brandID,
         string $evpID,
         string $vettingClass,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ExternalVettingOrderResponse;
 }

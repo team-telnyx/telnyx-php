@@ -13,7 +13,7 @@ use Telnyx\Messaging10dlc\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentBy
  * @phpstan-import-type RecordShape from \Telnyx\Messaging10dlc\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse\Record
  *
  * @phpstan-type PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponseShape = array{
- *   records: list<RecordShape>
+ *   records: list<Record|RecordShape>
  * }
  */
 final class PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse implements BaseModel
@@ -50,7 +50,7 @@ final class PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse implement
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RecordShape> $records
+     * @param list<Record|RecordShape> $records
      */
     public static function with(array $records): self
     {
@@ -62,7 +62,7 @@ final class PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse implement
     }
 
     /**
-     * @param list<RecordShape> $records
+     * @param list<Record|RecordShape> $records
      */
     public function withRecords(array $records): self
     {

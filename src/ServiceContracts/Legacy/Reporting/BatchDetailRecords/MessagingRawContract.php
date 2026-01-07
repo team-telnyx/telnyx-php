@@ -13,12 +13,16 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingListResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface MessagingRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|MessagingCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingNewResponse>
      *
@@ -26,11 +30,13 @@ interface MessagingRawContract
      */
     public function create(
         array|MessagingCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingGetResponse>
      *
@@ -38,20 +44,26 @@ interface MessagingRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<MessagingListResponse>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse;
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingDeleteResponse>
      *
@@ -59,6 +71,6 @@ interface MessagingRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

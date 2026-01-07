@@ -18,6 +18,9 @@ use Telnyx\PerPagePagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\UsageReports\MessagingRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MessagingRawService implements MessagingRawContract
 {
     // @phpstan-ignore-next-line
@@ -33,12 +36,13 @@ final class MessagingRawService implements MessagingRawContract
      *
      * @param array{
      *   aggregationType: int,
-     *   endTime?: string|\DateTimeInterface,
+     *   endTime?: \DateTimeInterface,
      *   managedAccounts?: list<string>,
      *   profiles?: list<string>,
      *   selectAllManagedAccounts?: bool,
-     *   startTime?: string|\DateTimeInterface,
+     *   startTime?: \DateTimeInterface,
      * }|MessagingCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingNewResponse>
      *
@@ -46,7 +50,7 @@ final class MessagingRawService implements MessagingRawContract
      */
     public function create(
         array|MessagingCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MessagingCreateParams::parseRequest(
             $params,
@@ -69,13 +73,15 @@ final class MessagingRawService implements MessagingRawContract
      *
      * Fetch single MDR usage report by id.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<MessagingGetResponse>
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -92,6 +98,7 @@ final class MessagingRawService implements MessagingRawContract
      * Fetch all previous requests for MDR usage reports.
      *
      * @param array{page?: int, perPage?: int}|MessagingListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PerPagePagination<MdrUsageReportResponseLegacy>>
      *
@@ -99,7 +106,7 @@ final class MessagingRawService implements MessagingRawContract
      */
     public function list(
         array|MessagingListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MessagingListParams::parseRequest(
             $params,
@@ -122,13 +129,15 @@ final class MessagingRawService implements MessagingRawContract
      *
      * Deletes a specific V2 legacy usage MDR report request by ID
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<MessagingDeleteResponse>
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

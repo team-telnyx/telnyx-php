@@ -11,48 +11,58 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SpeechToTextListResp
 use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SpeechToTextNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface SpeechToTextContract
 {
     /**
      * @api
      *
-     * @param string|\DateTimeInterface $endDate End date in ISO format with timezone (date range must be up to one month)
-     * @param string|\DateTimeInterface $startDate Start date in ISO format with timezone
+     * @param \DateTimeInterface $endDate End date in ISO format with timezone (date range must be up to one month)
+     * @param \DateTimeInterface $startDate Start date in ISO format with timezone
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        string|\DateTimeInterface $endDate,
-        string|\DateTimeInterface $startDate,
-        ?RequestOptions $requestOptions = null,
+        \DateTimeInterface $endDate,
+        \DateTimeInterface $startDate,
+        RequestOptions|array|null $requestOptions = null,
     ): SpeechToTextNewResponse;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): SpeechToTextGetResponse;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): SpeechToTextListResponse;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): SpeechToTextDeleteResponse;
 }

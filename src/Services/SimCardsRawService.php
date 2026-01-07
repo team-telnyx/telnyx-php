@@ -19,18 +19,25 @@ use Telnyx\SimCards\SimCardGetDeviceDetailsResponse;
 use Telnyx\SimCards\SimCardGetPublicIPResponse;
 use Telnyx\SimCards\SimCardGetResponse;
 use Telnyx\SimCards\SimCardListParams;
-use Telnyx\SimCards\SimCardListParams\Filter\Status;
+use Telnyx\SimCards\SimCardListParams\Filter;
+use Telnyx\SimCards\SimCardListParams\Page;
 use Telnyx\SimCards\SimCardListParams\Sort;
 use Telnyx\SimCards\SimCardListWirelessConnectivityLogsParams;
 use Telnyx\SimCards\SimCardListWirelessConnectivityLogsResponse;
 use Telnyx\SimCards\SimCardRetrieveParams;
 use Telnyx\SimCards\SimCardUpdateParams;
-use Telnyx\SimCards\SimCardUpdateParams\DataLimit\Unit;
+use Telnyx\SimCards\SimCardUpdateParams\DataLimit;
 use Telnyx\SimCards\SimCardUpdateResponse;
 use Telnyx\SimCardStatus;
-use Telnyx\SimCardStatus\Value;
 use Telnyx\SimpleSimCard;
 
+/**
+ * @phpstan-import-type DataLimitShape from \Telnyx\SimCards\SimCardUpdateParams\DataLimit
+ * @phpstan-import-type SimCardStatusShape from \Telnyx\SimCardStatus
+ * @phpstan-import-type FilterShape from \Telnyx\SimCards\SimCardListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\SimCards\SimCardListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class SimCardsRawService implements SimCardsRawContract
 {
     // @phpstan-ignore-next-line
@@ -48,6 +55,7 @@ final class SimCardsRawService implements SimCardsRawContract
      * @param array{
      *   includePinPukCodes?: bool, includeSimCardGroup?: bool
      * }|SimCardRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardGetResponse>
      *
@@ -56,7 +64,7 @@ final class SimCardsRawService implements SimCardsRawContract
     public function retrieve(
         string $id,
         array|SimCardRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SimCardRetrieveParams::parseRequest(
             $params,
@@ -87,14 +95,12 @@ final class SimCardsRawService implements SimCardsRawContract
      * @param string $simCardID identifies the SIM
      * @param array{
      *   authorizedImeis?: list<string>|null,
-     *   dataLimit?: array{amount?: string, unit?: 'MB'|'GB'|Unit},
+     *   dataLimit?: DataLimit|DataLimitShape,
      *   simCardGroupID?: string,
-     *   status?: array{
-     *     reason?: string,
-     *     value?: 'registering'|'enabling'|'enabled'|'disabling'|'disabled'|'data_limit_exceeded'|'setting_standby'|'standby'|Value,
-     *   }|SimCardStatus,
+     *   status?: SimCardStatus|SimCardStatusShape,
      *   tags?: list<string>,
      * }|SimCardUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardUpdateResponse>
      *
@@ -103,7 +109,7 @@ final class SimCardsRawService implements SimCardsRawContract
     public function update(
         string $simCardID,
         array|SimCardUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SimCardUpdateParams::parseRequest(
             $params,
@@ -126,16 +132,13 @@ final class SimCardsRawService implements SimCardsRawContract
      * Get all SIM cards belonging to the user that match the given filters.
      *
      * @param array{
-     *   filter?: array{
-     *     iccid?: string,
-     *     status?: list<'enabled'|'disabled'|'standby'|'data_limit_exceeded'|'unauthorized_imei'|Status>,
-     *     tags?: list<string>,
-     *   },
+     *   filter?: Filter|FilterShape,
      *   filterSimCardGroupID?: string,
      *   includeSimCardGroup?: bool,
-     *   page?: array{number?: int, size?: int},
+     *   page?: Page|PageShape,
      *   sort?: value-of<Sort>,
      * }|SimCardListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<SimpleSimCard>>
      *
@@ -143,7 +146,7 @@ final class SimCardsRawService implements SimCardsRawContract
      */
     public function list(
         array|SimCardListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SimCardListParams::parseRequest(
             $params,
@@ -176,6 +179,7 @@ final class SimCardsRawService implements SimCardsRawContract
      *
      * @param string $id identifies the SIM
      * @param array{reportLost?: bool}|SimCardDeleteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardDeleteResponse>
      *
@@ -184,7 +188,7 @@ final class SimCardsRawService implements SimCardsRawContract
     public function delete(
         string $id,
         array|SimCardDeleteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SimCardDeleteParams::parseRequest(
             $params,
@@ -211,6 +215,7 @@ final class SimCardsRawService implements SimCardsRawContract
      *  This API is only available for eSIMs. If the given SIM is a physical SIM card, or has already been installed, an error will be returned.
      *
      * @param string $id identifies the SIM
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardGetActivationCodeResponse>
      *
@@ -218,7 +223,7 @@ final class SimCardsRawService implements SimCardsRawContract
      */
     public function getActivationCode(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -235,6 +240,7 @@ final class SimCardsRawService implements SimCardsRawContract
      * It returns the device details where a SIM card is currently being used.
      *
      * @param string $id identifies the SIM
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardGetDeviceDetailsResponse>
      *
@@ -242,7 +248,7 @@ final class SimCardsRawService implements SimCardsRawContract
      */
     public function getDeviceDetails(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -259,6 +265,7 @@ final class SimCardsRawService implements SimCardsRawContract
      * It returns the public IP requested for a SIM card.
      *
      * @param string $id identifies the SIM
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardGetPublicIPResponse>
      *
@@ -266,7 +273,7 @@ final class SimCardsRawService implements SimCardsRawContract
      */
     public function getPublicIP(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -286,6 +293,7 @@ final class SimCardsRawService implements SimCardsRawContract
      * @param array{
      *   pageNumber?: int, pageSize?: int
      * }|SimCardListWirelessConnectivityLogsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<SimCardListWirelessConnectivityLogsResponse,>,>
      *
@@ -294,7 +302,7 @@ final class SimCardsRawService implements SimCardsRawContract
     public function listWirelessConnectivityLogs(
         string $id,
         array|SimCardListWirelessConnectivityLogsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SimCardListWirelessConnectivityLogsParams::parseRequest(
             $params,

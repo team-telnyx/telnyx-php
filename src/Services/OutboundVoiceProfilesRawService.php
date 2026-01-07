@@ -9,14 +9,14 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\OutboundVoiceProfiles\OutboundCallRecording;
-use Telnyx\OutboundVoiceProfiles\OutboundCallRecording\CallRecordingChannels;
-use Telnyx\OutboundVoiceProfiles\OutboundCallRecording\CallRecordingFormat;
-use Telnyx\OutboundVoiceProfiles\OutboundCallRecording\CallRecordingType;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileCreateParams;
+use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileCreateParams\CallingWindow;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileDeleteResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileGetResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams;
+use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Filter;
+use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Page;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Sort;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileNewResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateParams;
@@ -27,6 +27,14 @@ use Telnyx\OutboundVoiceProfiles\UsagePaymentMethod;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\OutboundVoiceProfilesRawContract;
 
+/**
+ * @phpstan-import-type CallingWindowShape from \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileCreateParams\CallingWindow
+ * @phpstan-import-type CallingWindowShape from \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateParams\CallingWindow as CallingWindowShape1
+ * @phpstan-import-type FilterShape from \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Page
+ * @phpstan-import-type OutboundCallRecordingShape from \Telnyx\OutboundVoiceProfiles\OutboundCallRecording
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class OutboundVoiceProfilesRawService implements OutboundVoiceProfilesRawContract
 {
     // @phpstan-ignore-next-line
@@ -43,26 +51,20 @@ final class OutboundVoiceProfilesRawService implements OutboundVoiceProfilesRawC
      * @param array{
      *   name: string,
      *   billingGroupID?: string|null,
-     *   callRecording?: array{
-     *     callRecordingCallerPhoneNumbers?: list<string>,
-     *     callRecordingChannels?: 'single'|'dual'|CallRecordingChannels,
-     *     callRecordingFormat?: 'wav'|'mp3'|CallRecordingFormat,
-     *     callRecordingType?: 'all'|'none'|'by_caller_phone_number'|CallRecordingType,
-     *   }|OutboundCallRecording,
-     *   callingWindow?: array{
-     *     callsPerCld?: int, endTime?: string, startTime?: string
-     *   },
+     *   callRecording?: OutboundCallRecording|OutboundCallRecordingShape,
+     *   callingWindow?: CallingWindow|CallingWindowShape,
      *   concurrentCallLimit?: int|null,
      *   dailySpendLimit?: string,
      *   dailySpendLimitEnabled?: bool,
      *   enabled?: bool,
      *   maxDestinationRate?: float,
-     *   servicePlan?: 'global'|ServicePlan,
+     *   servicePlan?: ServicePlan|value-of<ServicePlan>,
      *   tags?: list<string>,
-     *   trafficType?: 'conversational'|TrafficType,
-     *   usagePaymentMethod?: 'rate-deck'|UsagePaymentMethod,
+     *   trafficType?: TrafficType|value-of<TrafficType>,
+     *   usagePaymentMethod?: UsagePaymentMethod|value-of<UsagePaymentMethod>,
      *   whitelistedDestinations?: list<string>,
      * }|OutboundVoiceProfileCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OutboundVoiceProfileNewResponse>
      *
@@ -70,7 +72,7 @@ final class OutboundVoiceProfilesRawService implements OutboundVoiceProfilesRawC
      */
     public function create(
         array|OutboundVoiceProfileCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = OutboundVoiceProfileCreateParams::parseRequest(
             $params,
@@ -93,6 +95,7 @@ final class OutboundVoiceProfilesRawService implements OutboundVoiceProfilesRawC
      * Retrieves the details of an existing outbound voice profile.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OutboundVoiceProfileGetResponse>
      *
@@ -100,7 +103,7 @@ final class OutboundVoiceProfilesRawService implements OutboundVoiceProfilesRawC
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -120,26 +123,20 @@ final class OutboundVoiceProfilesRawService implements OutboundVoiceProfilesRawC
      * @param array{
      *   name: string,
      *   billingGroupID?: string|null,
-     *   callRecording?: array{
-     *     callRecordingCallerPhoneNumbers?: list<string>,
-     *     callRecordingChannels?: 'single'|'dual'|CallRecordingChannels,
-     *     callRecordingFormat?: 'wav'|'mp3'|CallRecordingFormat,
-     *     callRecordingType?: 'all'|'none'|'by_caller_phone_number'|CallRecordingType,
-     *   }|OutboundCallRecording,
-     *   callingWindow?: array{
-     *     callsPerCld?: int, endTime?: string, startTime?: string
-     *   },
+     *   callRecording?: OutboundCallRecording|OutboundCallRecordingShape,
+     *   callingWindow?: OutboundVoiceProfileUpdateParams\CallingWindow|CallingWindowShape1,
      *   concurrentCallLimit?: int|null,
      *   dailySpendLimit?: string,
      *   dailySpendLimitEnabled?: bool,
      *   enabled?: bool,
      *   maxDestinationRate?: float,
-     *   servicePlan?: 'global'|ServicePlan,
+     *   servicePlan?: ServicePlan|value-of<ServicePlan>,
      *   tags?: list<string>,
-     *   trafficType?: 'conversational'|TrafficType,
-     *   usagePaymentMethod?: 'rate-deck'|UsagePaymentMethod,
+     *   trafficType?: TrafficType|value-of<TrafficType>,
+     *   usagePaymentMethod?: UsagePaymentMethod|value-of<UsagePaymentMethod>,
      *   whitelistedDestinations?: list<string>,
      * }|OutboundVoiceProfileUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OutboundVoiceProfileUpdateResponse>
      *
@@ -148,7 +145,7 @@ final class OutboundVoiceProfilesRawService implements OutboundVoiceProfilesRawC
     public function update(
         string $id,
         array|OutboundVoiceProfileUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = OutboundVoiceProfileUpdateParams::parseRequest(
             $params,
@@ -171,10 +168,9 @@ final class OutboundVoiceProfilesRawService implements OutboundVoiceProfilesRawC
      * Get all outbound voice profiles belonging to the user that match the given filters.
      *
      * @param array{
-     *   filter?: array{name?: array{contains?: string}},
-     *   page?: array{number?: int, size?: int},
-     *   sort?: value-of<Sort>,
+     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: value-of<Sort>
      * }|OutboundVoiceProfileListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<OutboundVoiceProfile>>
      *
@@ -182,7 +178,7 @@ final class OutboundVoiceProfilesRawService implements OutboundVoiceProfilesRawC
      */
     public function list(
         array|OutboundVoiceProfileListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = OutboundVoiceProfileListParams::parseRequest(
             $params,
@@ -206,6 +202,7 @@ final class OutboundVoiceProfilesRawService implements OutboundVoiceProfilesRawC
      * Deletes an existing outbound voice profile.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OutboundVoiceProfileDeleteResponse>
      *
@@ -213,7 +210,7 @@ final class OutboundVoiceProfilesRawService implements OutboundVoiceProfilesRawC
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

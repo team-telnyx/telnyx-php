@@ -17,12 +17,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ConferencesRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|ConferenceCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ConferenceNewResponse>
      *
@@ -30,7 +34,7 @@ interface ConferencesRawContract
      */
     public function create(
         array|ConferenceCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -38,6 +42,7 @@ interface ConferencesRawContract
      *
      * @param string $id Uniquely identifies the conference by id
      * @param array<string,mixed>|ConferenceRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ConferenceGetResponse>
      *
@@ -46,13 +51,14 @@ interface ConferencesRawContract
     public function retrieve(
         string $id,
         array|ConferenceRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ConferenceListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<Conference>>
      *
@@ -60,7 +66,7 @@ interface ConferencesRawContract
      */
     public function list(
         array|ConferenceListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -68,6 +74,7 @@ interface ConferencesRawContract
      *
      * @param string $conferenceID Uniquely identifies the conference by id
      * @param array<string,mixed>|ConferenceListParticipantsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<ConferenceListParticipantsResponse>>
      *
@@ -76,6 +83,6 @@ interface ConferencesRawContract
     public function listParticipants(
         string $conferenceID,
         array|ConferenceListParticipantsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

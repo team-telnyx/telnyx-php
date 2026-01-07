@@ -13,6 +13,9 @@ use Telnyx\Verifications\Actions\ActionVerifyParams;
 use Telnyx\Verifications\Actions\ActionVerifyParams\Status;
 use Telnyx\Verifications\ByPhoneNumber\Actions\VerifyVerificationCodeResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsRawService implements ActionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -28,8 +31,9 @@ final class ActionsRawService implements ActionsRawContract
      *
      * @param string $verificationID the identifier of the verification to retrieve
      * @param array{
-     *   code?: string, status?: 'accepted'|'rejected'|Status
+     *   code?: string, status?: Status|value-of<Status>
      * }|ActionVerifyParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VerifyVerificationCodeResponse>
      *
@@ -38,7 +42,7 @@ final class ActionsRawService implements ActionsRawContract
     public function verify(
         string $verificationID,
         array|ActionVerifyParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionVerifyParams::parseRequest(
             $params,

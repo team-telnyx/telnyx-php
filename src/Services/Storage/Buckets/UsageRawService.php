@@ -10,9 +10,14 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\Buckets\UsageRawContract;
 use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageParams;
+use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageParams\Filter;
 use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse;
 use Telnyx\Storage\Buckets\Usage\UsageGetBucketUsageResponse;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class UsageRawService implements UsageRawContract
 {
     // @phpstan-ignore-next-line
@@ -27,11 +32,8 @@ final class UsageRawService implements UsageRawContract
      * Returns the detail on API usage on a bucket of a particular time period, group by method category.
      *
      * @param string $bucketName The name of the bucket
-     * @param array{
-     *   filter: array{
-     *     endTime: string|\DateTimeInterface, startTime: string|\DateTimeInterface
-     *   },
-     * }|UsageGetAPIUsageParams $params
+     * @param array{filter: Filter|FilterShape}|UsageGetAPIUsageParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UsageGetAPIUsageResponse>
      *
@@ -40,7 +42,7 @@ final class UsageRawService implements UsageRawContract
     public function getAPIUsage(
         string $bucketName,
         array|UsageGetAPIUsageParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = UsageGetAPIUsageParams::parseRequest(
             $params,
@@ -63,6 +65,7 @@ final class UsageRawService implements UsageRawContract
      * Returns the amount of storage space and number of files a bucket takes up.
      *
      * @param string $bucketName The name of the bucket
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UsageGetBucketUsageResponse>
      *
@@ -70,7 +73,7 @@ final class UsageRawService implements UsageRawContract
      */
     public function getBucketUsage(
         string $bucketName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

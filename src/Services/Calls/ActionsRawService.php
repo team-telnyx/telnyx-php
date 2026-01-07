@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\Calls;
 
+use Telnyx\AI\Assistants\Assistant;
 use Telnyx\Calls\Actions\ActionAnswerParams;
 use Telnyx\Calls\Actions\ActionAnswerParams\PreferredCodecs;
 use Telnyx\Calls\Actions\ActionAnswerParams\Record;
@@ -23,7 +24,7 @@ use Telnyx\Calls\Actions\ActionEnqueueResponse;
 use Telnyx\Calls\Actions\ActionGatherParams;
 use Telnyx\Calls\Actions\ActionGatherResponse;
 use Telnyx\Calls\Actions\ActionGatherUsingAIParams;
-use Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory\Role;
+use Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory;
 use Telnyx\Calls\Actions\ActionGatherUsingAIResponse;
 use Telnyx\Calls\Actions\ActionGatherUsingAudioParams;
 use Telnyx\Calls\Actions\ActionGatherUsingAudioResponse;
@@ -59,6 +60,7 @@ use Telnyx\Calls\Actions\ActionStartForkingResponse;
 use Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams;
 use Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\Direction;
 use Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\NoiseSuppressionEngine;
+use Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\NoiseSuppressionEngineConfig;
 use Telnyx\Calls\Actions\ActionStartNoiseSuppressionResponse;
 use Telnyx\Calls\Actions\ActionStartPlaybackParams;
 use Telnyx\Calls\Actions\ActionStartPlaybackParams\AudioType;
@@ -77,6 +79,7 @@ use Telnyx\Calls\Actions\ActionStartSiprecResponse;
 use Telnyx\Calls\Actions\ActionStartStreamingParams;
 use Telnyx\Calls\Actions\ActionStartStreamingResponse;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams;
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngine;
 use Telnyx\Calls\Actions\ActionStartTranscriptionResponse;
 use Telnyx\Calls\Actions\ActionStopAIAssistantParams;
 use Telnyx\Calls\Actions\ActionStopAIAssistantResponse;
@@ -97,9 +100,11 @@ use Telnyx\Calls\Actions\ActionStopStreamingResponse;
 use Telnyx\Calls\Actions\ActionStopTranscriptionParams;
 use Telnyx\Calls\Actions\ActionStopTranscriptionResponse;
 use Telnyx\Calls\Actions\ActionSwitchSupervisorRoleParams;
+use Telnyx\Calls\Actions\ActionSwitchSupervisorRoleParams\Role;
 use Telnyx\Calls\Actions\ActionSwitchSupervisorRoleResponse;
 use Telnyx\Calls\Actions\ActionTransferParams;
 use Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetection;
+use Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetectionConfig;
 use Telnyx\Calls\Actions\ActionTransferParams\MediaEncryption;
 use Telnyx\Calls\Actions\ActionTransferParams\SipRegion;
 use Telnyx\Calls\Actions\ActionTransferParams\SipTransportProtocol;
@@ -107,10 +112,13 @@ use Telnyx\Calls\Actions\ActionTransferResponse;
 use Telnyx\Calls\Actions\ActionUpdateClientStateParams;
 use Telnyx\Calls\Actions\ActionUpdateClientStateResponse;
 use Telnyx\Calls\Actions\GoogleTranscriptionLanguage;
-use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngine;
+use Telnyx\Calls\Actions\InterruptionSettings;
+use Telnyx\Calls\Actions\TranscriptionConfig;
+use Telnyx\Calls\Actions\TranscriptionStartRequest;
 use Telnyx\Calls\CustomSipHeader;
+use Telnyx\Calls\DialogflowConfig;
 use Telnyx\Calls\SipHeader;
-use Telnyx\Calls\SipHeader\Name;
+use Telnyx\Calls\SoundModifications;
 use Telnyx\Calls\StreamBidirectionalCodec;
 use Telnyx\Calls\StreamBidirectionalMode;
 use Telnyx\Calls\StreamBidirectionalSamplingRate;
@@ -122,6 +130,27 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Calls\ActionsRawContract;
 
+/**
+ * @phpstan-import-type TranscriptionStartRequestShape from \Telnyx\Calls\Actions\TranscriptionStartRequest
+ * @phpstan-import-type AssistantShape from \Telnyx\AI\Assistants\Assistant
+ * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings as VoiceSettingsShape1
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings as VoiceSettingsShape2
+ * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant as AssistantShape1
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings as VoiceSettingsShape3
+ * @phpstan-import-type NoiseSuppressionEngineConfigShape from \Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\NoiseSuppressionEngineConfig
+ * @phpstan-import-type LoopcountShape from \Telnyx\Calls\Actions\Loopcount
+ * @phpstan-import-type DialogflowConfigShape from \Telnyx\Calls\DialogflowConfig
+ * @phpstan-import-type TranscriptionEngineConfigShape from \Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig
+ * @phpstan-import-type AnsweringMachineDetectionConfigShape from \Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetectionConfig
+ * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
+ * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
+ * @phpstan-import-type SoundModificationsShape from \Telnyx\Calls\SoundModifications
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\InterruptionSettings
+ * @phpstan-import-type TranscriptionConfigShape from \Telnyx\Calls\Actions\TranscriptionConfig
+ */
 final class ActionsRawService implements ActionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -147,38 +176,31 @@ final class ActionsRawService implements ActionsRawContract
      *   billingGroupID?: string,
      *   clientState?: string,
      *   commandID?: string,
-     *   customHeaders?: list<array{name: string, value: string}|CustomSipHeader>,
-     *   preferredCodecs?: 'G722,PCMU,PCMA,G729,OPUS,VP8,H264'|PreferredCodecs,
-     *   record?: 'record-from-answer'|Record,
-     *   recordChannels?: 'single'|'dual'|RecordChannels,
+     *   customHeaders?: list<CustomSipHeader|CustomSipHeaderShape>,
+     *   preferredCodecs?: PreferredCodecs|value-of<PreferredCodecs>,
+     *   record?: Record|value-of<Record>,
+     *   recordChannels?: RecordChannels|value-of<RecordChannels>,
      *   recordCustomFileName?: string,
-     *   recordFormat?: 'wav'|'mp3'|RecordFormat,
+     *   recordFormat?: RecordFormat|value-of<RecordFormat>,
      *   recordMaxLength?: int,
      *   recordTimeoutSecs?: int,
-     *   recordTrack?: 'both'|'inbound'|'outbound'|RecordTrack,
-     *   recordTrim?: 'trim-silence'|RecordTrim,
+     *   recordTrack?: RecordTrack|value-of<RecordTrack>,
+     *   recordTrim?: RecordTrim|value-of<RecordTrim>,
      *   sendSilenceWhenIdle?: bool,
-     *   sipHeaders?: list<array{name: 'User-to-User'|Name, value: string}|SipHeader>,
-     *   soundModifications?: array{
-     *     octaves?: float, pitch?: float, semitone?: float, track?: string
-     *   },
-     *   streamBidirectionalCodec?: 'PCMU'|'PCMA'|'G722'|'OPUS'|'AMR-WB'|'L16'|StreamBidirectionalCodec,
-     *   streamBidirectionalMode?: 'mp3'|'rtp'|StreamBidirectionalMode,
-     *   streamBidirectionalTargetLegs?: 'both'|'self'|'opposite'|StreamBidirectionalTargetLegs,
-     *   streamCodec?: 'PCMU'|'PCMA'|'G722'|'OPUS'|'AMR-WB'|'L16'|'default'|StreamCodec,
-     *   streamTrack?: 'inbound_track'|'outbound_track'|'both_tracks'|StreamTrack,
+     *   sipHeaders?: list<SipHeader|SipHeaderShape>,
+     *   soundModifications?: SoundModifications|SoundModificationsShape,
+     *   streamBidirectionalCodec?: StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
+     *   streamBidirectionalMode?: StreamBidirectionalMode|value-of<StreamBidirectionalMode>,
+     *   streamBidirectionalTargetLegs?: StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs>,
+     *   streamCodec?: StreamCodec|value-of<StreamCodec>,
+     *   streamTrack?: StreamTrack|value-of<StreamTrack>,
      *   streamURL?: string,
      *   transcription?: bool,
-     *   transcriptionConfig?: array{
-     *     clientState?: string,
-     *     commandID?: string,
-     *     transcriptionEngine?: 'Google'|'Telnyx'|'Deepgram'|'Azure'|'A'|'B'|TranscriptionEngine,
-     *     transcriptionEngineConfig?: array<string,mixed>,
-     *     transcriptionTracks?: string,
-     *   },
+     *   transcriptionConfig?: TranscriptionStartRequest|TranscriptionStartRequestShape,
      *   webhookURL?: string,
-     *   webhookURLMethod?: 'POST'|'GET'|WebhookURLMethod,
+     *   webhookURLMethod?: WebhookURLMethod|value-of<WebhookURLMethod>,
      * }|ActionAnswerParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionAnswerResponse>
      *
@@ -187,7 +209,7 @@ final class ActionsRawService implements ActionsRawContract
     public function answer(
         string $callControlID,
         array|ActionAnswerParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionAnswerParams::parseRequest(
             $params,
@@ -219,22 +241,23 @@ final class ActionsRawService implements ActionsRawContract
      *   callControlIDToBridgeWith: string,
      *   clientState?: string,
      *   commandID?: string,
-     *   muteDtmf?: 'none'|'both'|'self'|'opposite'|MuteDtmf,
+     *   muteDtmf?: MuteDtmf|value-of<MuteDtmf>,
      *   parkAfterUnbridge?: string,
      *   playRingtone?: bool,
      *   queue?: string,
-     *   record?: 'record-from-answer'|ActionBridgeParams\Record,
-     *   recordChannels?: 'single'|'dual'|ActionBridgeParams\RecordChannels,
+     *   record?: ActionBridgeParams\Record|value-of<ActionBridgeParams\Record>,
+     *   recordChannels?: ActionBridgeParams\RecordChannels|value-of<ActionBridgeParams\RecordChannels>,
      *   recordCustomFileName?: string,
-     *   recordFormat?: 'wav'|'mp3'|ActionBridgeParams\RecordFormat,
+     *   recordFormat?: ActionBridgeParams\RecordFormat|value-of<ActionBridgeParams\RecordFormat>,
      *   recordMaxLength?: int,
      *   recordTimeoutSecs?: int,
-     *   recordTrack?: 'both'|'inbound'|'outbound'|ActionBridgeParams\RecordTrack,
-     *   recordTrim?: 'trim-silence'|ActionBridgeParams\RecordTrim,
+     *   recordTrack?: ActionBridgeParams\RecordTrack|value-of<ActionBridgeParams\RecordTrack>,
+     *   recordTrim?: ActionBridgeParams\RecordTrim|value-of<ActionBridgeParams\RecordTrim>,
      *   ringtone?: value-of<Ringtone>,
      *   videoRoomContext?: string,
      *   videoRoomID?: string,
      * }|ActionBridgeParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionBridgeResponse>
      *
@@ -243,7 +266,7 @@ final class ActionsRawService implements ActionsRawContract
     public function bridge(
         string $callControlIDToBridge,
         array|ActionBridgeParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionBridgeParams::parseRequest(
             $params,
@@ -274,6 +297,7 @@ final class ActionsRawService implements ActionsRawContract
      *   maxSize?: int,
      *   maxWaitTimeSecs?: int,
      * }|ActionEnqueueParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionEnqueueResponse>
      *
@@ -282,7 +306,7 @@ final class ActionsRawService implements ActionsRawContract
     public function enqueue(
         string $callControlID,
         array|ActionEnqueueParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionEnqueueParams::parseRequest(
             $params,
@@ -324,6 +348,7 @@ final class ActionsRawService implements ActionsRawContract
      *   timeoutMillis?: int,
      *   validDigits?: string,
      * }|ActionGatherParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionGatherResponse>
      *
@@ -332,7 +357,7 @@ final class ActionsRawService implements ActionsRawContract
     public function gather(
         string $callControlID,
         array|ActionGatherParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionGatherParams::parseRequest(
             $params,
@@ -366,27 +391,21 @@ final class ActionsRawService implements ActionsRawContract
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array{
      *   parameters: array<string,mixed>,
-     *   assistant?: array{
-     *     instructions?: string,
-     *     model?: string,
-     *     openaiAPIKeyRef?: string,
-     *     tools?: list<array<string,mixed>>,
-     *   },
+     *   assistant?: Assistant|AssistantShape,
      *   clientState?: string,
      *   commandID?: string,
      *   greeting?: string,
-     *   interruptionSettings?: array{enable?: bool},
+     *   interruptionSettings?: InterruptionSettings|InterruptionSettingsShape,
      *   language?: value-of<GoogleTranscriptionLanguage>,
-     *   messageHistory?: list<array{
-     *     content?: string, role?: 'assistant'|'user'|Role
-     *   }>,
+     *   messageHistory?: list<MessageHistory|MessageHistoryShape>,
      *   sendMessageHistoryUpdates?: bool,
      *   sendPartialResults?: bool,
-     *   transcription?: array{model?: string},
+     *   transcription?: TranscriptionConfig|TranscriptionConfigShape,
      *   userResponseTimeoutMs?: int,
      *   voice?: string,
-     *   voiceSettings?: array<string,mixed>,
+     *   voiceSettings?: VoiceSettingsShape,
      * }|ActionGatherUsingAIParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionGatherUsingAIResponse>
      *
@@ -395,7 +414,7 @@ final class ActionsRawService implements ActionsRawContract
     public function gatherUsingAI(
         string $callControlID,
         array|ActionGatherUsingAIParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionGatherUsingAIParams::parseRequest(
             $params,
@@ -442,6 +461,7 @@ final class ActionsRawService implements ActionsRawContract
      *   timeoutMillis?: int,
      *   validDigits?: string,
      * }|ActionGatherUsingAudioParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionGatherUsingAudioResponse>
      *
@@ -450,7 +470,7 @@ final class ActionsRawService implements ActionsRawContract
     public function gatherUsingAudio(
         string $callControlID,
         array|ActionGatherUsingAudioParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionGatherUsingAudioParams::parseRequest(
             $params,
@@ -491,13 +511,14 @@ final class ActionsRawService implements ActionsRawContract
      *   maximumDigits?: int,
      *   maximumTries?: int,
      *   minimumDigits?: int,
-     *   payloadType?: 'text'|'ssml'|PayloadType,
-     *   serviceLevel?: 'basic'|'premium'|ServiceLevel,
+     *   payloadType?: PayloadType|value-of<PayloadType>,
+     *   serviceLevel?: ServiceLevel|value-of<ServiceLevel>,
      *   terminatingDigit?: string,
      *   timeoutMillis?: int,
      *   validDigits?: string,
-     *   voiceSettings?: array<string,mixed>,
+     *   voiceSettings?: VoiceSettingsShape1,
      * }|ActionGatherUsingSpeakParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionGatherUsingSpeakResponse>
      *
@@ -506,7 +527,7 @@ final class ActionsRawService implements ActionsRawContract
     public function gatherUsingSpeak(
         string $callControlID,
         array|ActionGatherUsingSpeakParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionGatherUsingSpeakParams::parseRequest(
             $params,
@@ -537,6 +558,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   clientState?: string, commandID?: string
      * }|ActionHangupParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionHangupResponse>
      *
@@ -545,7 +567,7 @@ final class ActionsRawService implements ActionsRawContract
     public function hangup(
         string $callControlID,
         array|ActionHangupParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionHangupParams::parseRequest(
             $params,
@@ -571,6 +593,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   clientState?: string, commandID?: string
      * }|ActionLeaveQueueParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionLeaveQueueResponse>
      *
@@ -579,7 +602,7 @@ final class ActionsRawService implements ActionsRawContract
     public function leaveQueue(
         string $callControlID,
         array|ActionLeaveQueueParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionLeaveQueueParams::parseRequest(
             $params,
@@ -609,6 +632,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   clientState?: string, commandID?: string, recordingID?: string
      * }|ActionPauseRecordingParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionPauseRecordingResponse>
      *
@@ -617,7 +641,7 @@ final class ActionsRawService implements ActionsRawContract
     public function pauseRecording(
         string $callControlID,
         array|ActionPauseRecordingParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionPauseRecordingParams::parseRequest(
             $params,
@@ -650,11 +674,12 @@ final class ActionsRawService implements ActionsRawContract
      *   sipAddress: string,
      *   clientState?: string,
      *   commandID?: string,
-     *   customHeaders?: list<array{name: string, value: string}|CustomSipHeader>,
+     *   customHeaders?: list<CustomSipHeader|CustomSipHeaderShape>,
      *   sipAuthPassword?: string,
      *   sipAuthUsername?: string,
-     *   sipHeaders?: list<array{name: 'User-to-User'|Name, value: string}|SipHeader>,
+     *   sipHeaders?: list<SipHeader|SipHeaderShape>,
      * }|ActionReferParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionReferResponse>
      *
@@ -663,7 +688,7 @@ final class ActionsRawService implements ActionsRawContract
     public function refer(
         string $callControlID,
         array|ActionReferParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionReferParams::parseRequest(
             $params,
@@ -691,10 +716,9 @@ final class ActionsRawService implements ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array{
-     *   cause: 'CALL_REJECTED'|'USER_BUSY'|Cause,
-     *   clientState?: string,
-     *   commandID?: string,
+     *   cause: Cause|value-of<Cause>, clientState?: string, commandID?: string
      * }|ActionRejectParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionRejectResponse>
      *
@@ -703,7 +727,7 @@ final class ActionsRawService implements ActionsRawContract
     public function reject(
         string $callControlID,
         array|ActionRejectParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionRejectParams::parseRequest(
             $params,
@@ -733,6 +757,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   clientState?: string, commandID?: string, recordingID?: string
      * }|ActionResumeRecordingParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionResumeRecordingResponse>
      *
@@ -741,7 +766,7 @@ final class ActionsRawService implements ActionsRawContract
     public function resumeRecording(
         string $callControlID,
         array|ActionResumeRecordingParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionResumeRecordingParams::parseRequest(
             $params,
@@ -771,6 +796,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   digits: string, clientState?: string, commandID?: string, durationMillis?: int
      * }|ActionSendDtmfParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionSendDtmfResponse>
      *
@@ -779,7 +805,7 @@ final class ActionsRawService implements ActionsRawContract
     public function sendDtmf(
         string $callControlID,
         array|ActionSendDtmfParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionSendDtmfParams::parseRequest(
             $params,
@@ -809,6 +835,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   body: string, contentType: string, clientState?: string, commandID?: string
      * }|ActionSendSipInfoParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionSendSipInfoResponse>
      *
@@ -817,7 +844,7 @@ final class ActionsRawService implements ActionsRawContract
     public function sendSipInfo(
         string $callControlID,
         array|ActionSendSipInfoParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionSendSipInfoParams::parseRequest(
             $params,
@@ -851,11 +878,12 @@ final class ActionsRawService implements ActionsRawContract
      *   clientState?: string,
      *   commandID?: string,
      *   language?: value-of<ActionSpeakParams\Language>,
-     *   payloadType?: 'text'|'ssml'|ActionSpeakParams\PayloadType,
-     *   serviceLevel?: 'basic'|'premium'|ActionSpeakParams\ServiceLevel,
+     *   payloadType?: ActionSpeakParams\PayloadType|value-of<ActionSpeakParams\PayloadType>,
+     *   serviceLevel?: ActionSpeakParams\ServiceLevel|value-of<ActionSpeakParams\ServiceLevel>,
      *   stop?: string,
-     *   voiceSettings?: array<string,mixed>,
+     *   voiceSettings?: VoiceSettingsShape2,
      * }|ActionSpeakParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionSpeakResponse>
      *
@@ -864,7 +892,7 @@ final class ActionsRawService implements ActionsRawContract
     public function speak(
         string $callControlID,
         array|ActionSpeakParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionSpeakParams::parseRequest(
             $params,
@@ -893,17 +921,16 @@ final class ActionsRawService implements ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array{
-     *   assistant?: array{
-     *     id?: string, instructions?: string, openaiAPIKeyRef?: string
-     *   },
+     *   assistant?: ActionStartAIAssistantParams\Assistant|AssistantShape1,
      *   clientState?: string,
      *   commandID?: string,
      *   greeting?: string,
-     *   interruptionSettings?: array{enable?: bool},
-     *   transcription?: array{model?: string},
+     *   interruptionSettings?: InterruptionSettings|InterruptionSettingsShape,
+     *   transcription?: TranscriptionConfig|TranscriptionConfigShape,
      *   voice?: string,
-     *   voiceSettings?: array<string,mixed>,
+     *   voiceSettings?: VoiceSettingsShape3,
      * }|ActionStartAIAssistantParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStartAIAssistantResponse>
      *
@@ -912,7 +939,7 @@ final class ActionsRawService implements ActionsRawContract
     public function startAIAssistant(
         string $callControlID,
         array|ActionStartAIAssistantParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionStartAIAssistantParams::parseRequest(
             $params,
@@ -947,9 +974,10 @@ final class ActionsRawService implements ActionsRawContract
      *   clientState?: string,
      *   commandID?: string,
      *   rx?: string,
-     *   streamType?: 'decrypted'|StreamType,
+     *   streamType?: StreamType|value-of<StreamType>,
      *   tx?: string,
      * }|ActionStartForkingParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStartForkingResponse>
      *
@@ -958,7 +986,7 @@ final class ActionsRawService implements ActionsRawContract
     public function startForking(
         string $callControlID,
         array|ActionStartForkingParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionStartForkingParams::parseRequest(
             $params,
@@ -984,10 +1012,11 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   clientState?: string,
      *   commandID?: string,
-     *   direction?: 'inbound'|'outbound'|'both'|Direction,
-     *   noiseSuppressionEngine?: 'Denoiser'|'DeepFilterNet'|NoiseSuppressionEngine,
-     *   noiseSuppressionEngineConfig?: array{attenuationLimit?: int},
+     *   direction?: Direction|value-of<Direction>,
+     *   noiseSuppressionEngine?: NoiseSuppressionEngine|value-of<NoiseSuppressionEngine>,
+     *   noiseSuppressionEngineConfig?: NoiseSuppressionEngineConfig|NoiseSuppressionEngineConfigShape,
      * }|ActionStartNoiseSuppressionParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStartNoiseSuppressionResponse>
      *
@@ -996,7 +1025,7 @@ final class ActionsRawService implements ActionsRawContract
     public function startNoiseSuppression(
         string $callControlID,
         array|ActionStartNoiseSuppressionParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionStartNoiseSuppressionParams::parseRequest(
             $params,
@@ -1031,18 +1060,19 @@ final class ActionsRawService implements ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array{
-     *   audioType?: 'mp3'|'wav'|AudioType,
+     *   audioType?: AudioType|value-of<AudioType>,
      *   audioURL?: string,
      *   cacheAudio?: bool,
      *   clientState?: string,
      *   commandID?: string,
-     *   loop?: string|int,
+     *   loop?: LoopcountShape,
      *   mediaName?: string,
      *   overlay?: bool,
      *   playbackContent?: string,
      *   stop?: string,
      *   targetLegs?: string,
      * }|ActionStartPlaybackParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStartPlaybackResponse>
      *
@@ -1051,7 +1081,7 @@ final class ActionsRawService implements ActionsRawContract
     public function startPlayback(
         string $callControlID,
         array|ActionStartPlaybackParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionStartPlaybackParams::parseRequest(
             $params,
@@ -1081,14 +1111,14 @@ final class ActionsRawService implements ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array{
-     *   channels: 'single'|'dual'|Channels,
-     *   format: 'wav'|'mp3'|Format,
+     *   channels: Channels|value-of<Channels>,
+     *   format: Format|value-of<Format>,
      *   clientState?: string,
      *   commandID?: string,
      *   customFileName?: string,
      *   maxLength?: int,
      *   playBeep?: bool,
-     *   recordingTrack?: 'both'|'inbound'|'outbound'|RecordingTrack,
+     *   recordingTrack?: RecordingTrack|value-of<RecordingTrack>,
      *   timeoutSecs?: int,
      *   transcription?: bool,
      *   transcriptionEngine?: string,
@@ -1097,8 +1127,9 @@ final class ActionsRawService implements ActionsRawContract
      *   transcriptionMinSpeakerCount?: int,
      *   transcriptionProfanityFilter?: bool,
      *   transcriptionSpeakerDiarization?: bool,
-     *   trim?: 'trim-silence'|Trim,
+     *   trim?: Trim|value-of<Trim>,
      * }|ActionStartRecordingParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStartRecordingResponse>
      *
@@ -1107,7 +1138,7 @@ final class ActionsRawService implements ActionsRawContract
     public function startRecording(
         string $callControlID,
         array|ActionStartRecordingParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionStartRecordingParams::parseRequest(
             $params,
@@ -1142,9 +1173,10 @@ final class ActionsRawService implements ActionsRawContract
      *   includeMetadataCustomHeaders?: bool,
      *   secure?: bool,
      *   sessionTimeoutSecs?: int,
-     *   sipTransport?: 'udp'|'tcp'|'tls'|SipTransport,
-     *   siprecTrack?: 'inbound_track'|'outbound_track'|'both_tracks'|SiprecTrack,
+     *   sipTransport?: SipTransport|value-of<SipTransport>,
+     *   siprecTrack?: SiprecTrack|value-of<SiprecTrack>,
      * }|ActionStartSiprecParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStartSiprecResponse>
      *
@@ -1153,7 +1185,7 @@ final class ActionsRawService implements ActionsRawContract
     public function startSiprec(
         string $callControlID,
         array|ActionStartSiprecParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionStartSiprecParams::parseRequest(
             $params,
@@ -1181,18 +1213,17 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   clientState?: string,
      *   commandID?: string,
-     *   dialogflowConfig?: array{
-     *     analyzeSentiment?: bool, partialAutomatedAgentReply?: bool
-     *   },
+     *   dialogflowConfig?: DialogflowConfig|DialogflowConfigShape,
      *   enableDialogflow?: bool,
-     *   streamBidirectionalCodec?: 'PCMU'|'PCMA'|'G722'|'OPUS'|'AMR-WB'|'L16'|StreamBidirectionalCodec,
-     *   streamBidirectionalMode?: 'mp3'|'rtp'|StreamBidirectionalMode,
-     *   streamBidirectionalSamplingRate?: 8000|16000|22050|24000|48000|StreamBidirectionalSamplingRate,
-     *   streamBidirectionalTargetLegs?: 'both'|'self'|'opposite'|StreamBidirectionalTargetLegs,
-     *   streamCodec?: 'PCMU'|'PCMA'|'G722'|'OPUS'|'AMR-WB'|'L16'|'default'|StreamCodec,
-     *   streamTrack?: 'inbound_track'|'outbound_track'|'both_tracks'|ActionStartStreamingParams\StreamTrack,
+     *   streamBidirectionalCodec?: StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
+     *   streamBidirectionalMode?: StreamBidirectionalMode|value-of<StreamBidirectionalMode>,
+     *   streamBidirectionalSamplingRate?: StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate>,
+     *   streamBidirectionalTargetLegs?: StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs>,
+     *   streamCodec?: StreamCodec|value-of<StreamCodec>,
+     *   streamTrack?: ActionStartStreamingParams\StreamTrack|value-of<ActionStartStreamingParams\StreamTrack>,
      *   streamURL?: string,
      * }|ActionStartStreamingParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStartStreamingResponse>
      *
@@ -1201,7 +1232,7 @@ final class ActionsRawService implements ActionsRawContract
     public function startStreaming(
         string $callControlID,
         array|ActionStartStreamingParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionStartStreamingParams::parseRequest(
             $params,
@@ -1231,10 +1262,11 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   clientState?: string,
      *   commandID?: string,
-     *   transcriptionEngine?: 'Google'|'Telnyx'|'Deepgram'|'Azure'|'A'|'B'|ActionStartTranscriptionParams\TranscriptionEngine,
-     *   transcriptionEngineConfig?: array<string,mixed>,
+     *   transcriptionEngine?: TranscriptionEngine|value-of<TranscriptionEngine>,
+     *   transcriptionEngineConfig?: TranscriptionEngineConfigShape,
      *   transcriptionTracks?: string,
      * }|ActionStartTranscriptionParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStartTranscriptionResponse>
      *
@@ -1243,7 +1275,7 @@ final class ActionsRawService implements ActionsRawContract
     public function startTranscription(
         string $callControlID,
         array|ActionStartTranscriptionParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionStartTranscriptionParams::parseRequest(
             $params,
@@ -1269,6 +1301,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   clientState?: string, commandID?: string
      * }|ActionStopAIAssistantParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStopAIAssistantResponse>
      *
@@ -1277,7 +1310,7 @@ final class ActionsRawService implements ActionsRawContract
     public function stopAIAssistant(
         string $callControlID,
         array|ActionStopAIAssistantParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionStopAIAssistantParams::parseRequest(
             $params,
@@ -1307,8 +1340,9 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   clientState?: string,
      *   commandID?: string,
-     *   streamType?: 'raw'|'decrypted'|ActionStopForkingParams\StreamType,
+     *   streamType?: ActionStopForkingParams\StreamType|value-of<ActionStopForkingParams\StreamType>,
      * }|ActionStopForkingParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStopForkingResponse>
      *
@@ -1317,7 +1351,7 @@ final class ActionsRawService implements ActionsRawContract
     public function stopForking(
         string $callControlID,
         array|ActionStopForkingParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionStopForkingParams::parseRequest(
             $params,
@@ -1347,6 +1381,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   clientState?: string, commandID?: string
      * }|ActionStopGatherParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStopGatherResponse>
      *
@@ -1355,7 +1390,7 @@ final class ActionsRawService implements ActionsRawContract
     public function stopGather(
         string $callControlID,
         array|ActionStopGatherParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionStopGatherParams::parseRequest(
             $params,
@@ -1381,6 +1416,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   clientState?: string, commandID?: string
      * }|ActionStopNoiseSuppressionParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStopNoiseSuppressionResponse>
      *
@@ -1389,7 +1425,7 @@ final class ActionsRawService implements ActionsRawContract
     public function stopNoiseSuppression(
         string $callControlID,
         array|ActionStopNoiseSuppressionParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionStopNoiseSuppressionParams::parseRequest(
             $params,
@@ -1419,6 +1455,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   clientState?: string, commandID?: string, overlay?: bool, stop?: string
      * }|ActionStopPlaybackParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStopPlaybackResponse>
      *
@@ -1427,7 +1464,7 @@ final class ActionsRawService implements ActionsRawContract
     public function stopPlayback(
         string $callControlID,
         array|ActionStopPlaybackParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionStopPlaybackParams::parseRequest(
             $params,
@@ -1457,6 +1494,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   clientState?: string, commandID?: string, recordingID?: string
      * }|ActionStopRecordingParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStopRecordingResponse>
      *
@@ -1465,7 +1503,7 @@ final class ActionsRawService implements ActionsRawContract
     public function stopRecording(
         string $callControlID,
         array|ActionStopRecordingParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionStopRecordingParams::parseRequest(
             $params,
@@ -1495,6 +1533,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   clientState?: string, commandID?: string
      * }|ActionStopSiprecParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStopSiprecResponse>
      *
@@ -1503,7 +1542,7 @@ final class ActionsRawService implements ActionsRawContract
     public function stopSiprec(
         string $callControlID,
         array|ActionStopSiprecParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionStopSiprecParams::parseRequest(
             $params,
@@ -1533,6 +1572,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   clientState?: string, commandID?: string, streamID?: string
      * }|ActionStopStreamingParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStopStreamingResponse>
      *
@@ -1541,7 +1581,7 @@ final class ActionsRawService implements ActionsRawContract
     public function stopStreaming(
         string $callControlID,
         array|ActionStopStreamingParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionStopStreamingParams::parseRequest(
             $params,
@@ -1567,6 +1607,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   clientState?: string, commandID?: string
      * }|ActionStopTranscriptionParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionStopTranscriptionResponse>
      *
@@ -1575,7 +1616,7 @@ final class ActionsRawService implements ActionsRawContract
     public function stopTranscription(
         string $callControlID,
         array|ActionStopTranscriptionParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionStopTranscriptionParams::parseRequest(
             $params,
@@ -1598,9 +1639,8 @@ final class ActionsRawService implements ActionsRawContract
      * Switch the supervisor role for a bridged call. This allows switching between different supervisor modes during an active call
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param array{
-     *   role: 'barge'|'whisper'|'monitor'|ActionSwitchSupervisorRoleParams\Role,
-     * }|ActionSwitchSupervisorRoleParams $params
+     * @param array{role: Role|value-of<Role>}|ActionSwitchSupervisorRoleParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionSwitchSupervisorRoleResponse>
      *
@@ -1609,7 +1649,7 @@ final class ActionsRawService implements ActionsRawContract
     public function switchSupervisorRole(
         string $callControlID,
         array|ActionSwitchSupervisorRoleParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionSwitchSupervisorRoleParams::parseRequest(
             $params,
@@ -1644,52 +1684,40 @@ final class ActionsRawService implements ActionsRawContract
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array{
      *   to: string,
-     *   answeringMachineDetection?: 'premium'|'detect'|'detect_beep'|'detect_words'|'greeting_end'|'disabled'|AnsweringMachineDetection,
-     *   answeringMachineDetectionConfig?: array{
-     *     afterGreetingSilenceMillis?: int,
-     *     betweenWordsSilenceMillis?: int,
-     *     greetingDurationMillis?: int,
-     *     greetingSilenceDurationMillis?: int,
-     *     greetingTotalAnalysisTimeMillis?: int,
-     *     initialSilenceMillis?: int,
-     *     maximumNumberOfWords?: int,
-     *     maximumWordLengthMillis?: int,
-     *     silenceThreshold?: int,
-     *     totalAnalysisTimeMillis?: int,
-     *   },
+     *   answeringMachineDetection?: AnsweringMachineDetection|value-of<AnsweringMachineDetection>,
+     *   answeringMachineDetectionConfig?: AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape,
      *   audioURL?: string,
      *   clientState?: string,
      *   commandID?: string,
-     *   customHeaders?: list<array{name: string, value: string}|CustomSipHeader>,
+     *   customHeaders?: list<CustomSipHeader|CustomSipHeaderShape>,
      *   earlyMedia?: bool,
      *   from?: string,
      *   fromDisplayName?: string,
-     *   mediaEncryption?: 'disabled'|'SRTP'|'DTLS'|MediaEncryption,
+     *   mediaEncryption?: MediaEncryption|value-of<MediaEncryption>,
      *   mediaName?: string,
-     *   muteDtmf?: 'none'|'both'|'self'|'opposite'|ActionTransferParams\MuteDtmf,
+     *   muteDtmf?: ActionTransferParams\MuteDtmf|value-of<ActionTransferParams\MuteDtmf>,
      *   parkAfterUnbridge?: string,
-     *   record?: 'record-from-answer'|ActionTransferParams\Record,
-     *   recordChannels?: 'single'|'dual'|ActionTransferParams\RecordChannels,
+     *   record?: ActionTransferParams\Record|value-of<ActionTransferParams\Record>,
+     *   recordChannels?: ActionTransferParams\RecordChannels|value-of<ActionTransferParams\RecordChannels>,
      *   recordCustomFileName?: string,
-     *   recordFormat?: 'wav'|'mp3'|ActionTransferParams\RecordFormat,
+     *   recordFormat?: ActionTransferParams\RecordFormat|value-of<ActionTransferParams\RecordFormat>,
      *   recordMaxLength?: int,
      *   recordTimeoutSecs?: int,
-     *   recordTrack?: 'both'|'inbound'|'outbound'|ActionTransferParams\RecordTrack,
-     *   recordTrim?: 'trim-silence'|ActionTransferParams\RecordTrim,
+     *   recordTrack?: ActionTransferParams\RecordTrack|value-of<ActionTransferParams\RecordTrack>,
+     *   recordTrim?: ActionTransferParams\RecordTrim|value-of<ActionTransferParams\RecordTrim>,
      *   sipAuthPassword?: string,
      *   sipAuthUsername?: string,
-     *   sipHeaders?: list<array{name: 'User-to-User'|Name, value: string}|SipHeader>,
-     *   sipRegion?: 'US'|'Europe'|'Canada'|'Australia'|'Middle East'|SipRegion,
-     *   sipTransportProtocol?: 'UDP'|'TCP'|'TLS'|SipTransportProtocol,
-     *   soundModifications?: array{
-     *     octaves?: float, pitch?: float, semitone?: float, track?: string
-     *   },
+     *   sipHeaders?: list<SipHeader|SipHeaderShape>,
+     *   sipRegion?: SipRegion|value-of<SipRegion>,
+     *   sipTransportProtocol?: SipTransportProtocol|value-of<SipTransportProtocol>,
+     *   soundModifications?: SoundModifications|SoundModificationsShape,
      *   targetLegClientState?: string,
      *   timeLimitSecs?: int,
      *   timeoutSecs?: int,
      *   webhookURL?: string,
-     *   webhookURLMethod?: 'POST'|'GET'|ActionTransferParams\WebhookURLMethod,
+     *   webhookURLMethod?: ActionTransferParams\WebhookURLMethod|value-of<ActionTransferParams\WebhookURLMethod>,
      * }|ActionTransferParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionTransferResponse>
      *
@@ -1698,7 +1726,7 @@ final class ActionsRawService implements ActionsRawContract
     public function transfer(
         string $callControlID,
         array|ActionTransferParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionTransferParams::parseRequest(
             $params,
@@ -1722,6 +1750,7 @@ final class ActionsRawService implements ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array{clientState: string}|ActionUpdateClientStateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionUpdateClientStateResponse>
      *
@@ -1730,7 +1759,7 @@ final class ActionsRawService implements ActionsRawContract
     public function updateClientState(
         string $callControlID,
         array|ActionUpdateClientStateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionUpdateClientStateParams::parseRequest(
             $params,

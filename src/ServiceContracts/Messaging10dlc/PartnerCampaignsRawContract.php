@@ -15,10 +15,15 @@ use Telnyx\Messaging10dlc\PartnerCampaigns\TelnyxDownstreamCampaign;
 use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface PartnerCampaignsRawContract
 {
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TelnyxDownstreamCampaign>
      *
@@ -26,13 +31,14 @@ interface PartnerCampaignsRawContract
      */
     public function retrieve(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|PartnerCampaignUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TelnyxDownstreamCampaign>
      *
@@ -41,13 +47,14 @@ interface PartnerCampaignsRawContract
     public function update(
         string $campaignID,
         array|PartnerCampaignUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|PartnerCampaignListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PerPagePaginationV2<TelnyxDownstreamCampaign>>
      *
@@ -55,13 +62,14 @@ interface PartnerCampaignsRawContract
      */
     public function list(
         array|PartnerCampaignListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|PartnerCampaignListSharedByMeParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PerPagePaginationV2<PartnerCampaignListSharedByMeResponse>>
      *
@@ -69,13 +77,14 @@ interface PartnerCampaignsRawContract
      */
     public function listSharedByMe(
         array|PartnerCampaignListSharedByMeParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $campaignID ID of the campaign in question
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<array<string,CampaignSharingStatus>>
      *
@@ -83,6 +92,6 @@ interface PartnerCampaignsRawContract
      */
     public function retrieveSharingStatus(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

@@ -12,8 +12,15 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardOrdersContract;
 use Telnyx\SimCardOrders\SimCardOrder;
 use Telnyx\SimCardOrders\SimCardOrderGetResponse;
+use Telnyx\SimCardOrders\SimCardOrderListParams\Filter;
+use Telnyx\SimCardOrders\SimCardOrderListParams\Page;
 use Telnyx\SimCardOrders\SimCardOrderNewResponse;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\SimCardOrders\SimCardOrderListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\SimCardOrders\SimCardOrderListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class SimCardOrdersService implements SimCardOrdersContract
 {
     /**
@@ -36,13 +43,14 @@ final class SimCardOrdersService implements SimCardOrdersContract
      *
      * @param string $addressID uniquely identifies the address for the order
      * @param int $quantity the amount of SIM cards to order
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $addressID,
         int $quantity,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): SimCardOrderNewResponse {
         $params = Util::removeNulls(
             ['addressID' => $addressID, 'quantity' => $quantity]
@@ -60,12 +68,13 @@ final class SimCardOrdersService implements SimCardOrdersContract
      * Get a single SIM card order by its ID.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): SimCardOrderGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -78,32 +87,18 @@ final class SimCardOrdersService implements SimCardOrdersContract
      *
      * Get all SIM card orders according to filters.
      *
-     * @param array{
-     *   addressAdministrativeArea?: string,
-     *   addressCountryCode?: string,
-     *   addressExtendedAddress?: string,
-     *   addressID?: string,
-     *   addressLocality?: string,
-     *   addressPostalCode?: string,
-     *   addressStreetAddress?: string,
-     *   costAmount?: string,
-     *   costCurrency?: string,
-     *   createdAt?: string|\DateTimeInterface,
-     *   quantity?: int,
-     *   updatedAt?: string|\DateTimeInterface,
-     * } $filter Consolidated filter parameter for SIM card orders (deepObject style). Originally: filter[created_at], filter[updated_at], filter[quantity], filter[cost.amount], filter[cost.currency], filter[address.id], filter[address.street_address], filter[address.extended_address], filter[address.locality], filter[address.administrative_area], filter[address.country_code], filter[address.postal_code]
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
+     * @param Filter|FilterShape $filter Consolidated filter parameter for SIM card orders (deepObject style). Originally: filter[created_at], filter[updated_at], filter[quantity], filter[cost.amount], filter[cost.currency], filter[address.id], filter[address.street_address], filter[address.extended_address], filter[address.locality], filter[address.administrative_area], filter[address.country_code], filter[address.postal_code]
+     * @param Page|PageShape $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<SimCardOrder>
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null,
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 

@@ -12,8 +12,15 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ShortCodesContract;
 use Telnyx\ShortCode;
 use Telnyx\ShortCodes\ShortCodeGetResponse;
+use Telnyx\ShortCodes\ShortCodeListParams\Filter;
+use Telnyx\ShortCodes\ShortCodeListParams\Page;
 use Telnyx\ShortCodes\ShortCodeUpdateResponse;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\ShortCodes\ShortCodeListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\ShortCodes\ShortCodeListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ShortCodesService implements ShortCodesContract
 {
     /**
@@ -35,12 +42,13 @@ final class ShortCodesService implements ShortCodesContract
      * Retrieve a short code
      *
      * @param string $id The id of the short code
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ShortCodeGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -57,6 +65,7 @@ final class ShortCodesService implements ShortCodesContract
      * @param string $id The id of the short code
      * @param string $messagingProfileID unique identifier for a messaging profile
      * @param list<string> $tags
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -64,7 +73,7 @@ final class ShortCodesService implements ShortCodesContract
         string $id,
         string $messagingProfileID,
         ?array $tags = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ShortCodeUpdateResponse {
         $params = Util::removeNulls(
             ['messagingProfileID' => $messagingProfileID, 'tags' => $tags]
@@ -81,21 +90,18 @@ final class ShortCodesService implements ShortCodesContract
      *
      * List short codes
      *
-     * @param array{
-     *   messagingProfileID?: string
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[messaging_profile_id]
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[messaging_profile_id]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<ShortCode>
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null,
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 

@@ -10,6 +10,9 @@ use Telnyx\Storage\Buckets\SslCertificate\SslCertificateDeleteResponse;
 use Telnyx\Storage\Buckets\SslCertificate\SslCertificateGetResponse;
 use Telnyx\Storage\Buckets\SslCertificate\SslCertificateNewResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface SslCertificateContract
 {
     /**
@@ -18,6 +21,7 @@ interface SslCertificateContract
      * @param string $bucketName The name of the bucket
      * @param string $certificate The SSL certificate file
      * @param string $privateKey The private key file
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -25,30 +29,32 @@ interface SslCertificateContract
         string $bucketName,
         ?string $certificate = null,
         ?string $privateKey = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): SslCertificateNewResponse;
 
     /**
      * @api
      *
      * @param string $bucketName The name of the bucket
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $bucketName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): SslCertificateGetResponse;
 
     /**
      * @api
      *
      * @param string $bucketName Bucket Name
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $bucketName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): SslCertificateDeleteResponse;
 }

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type SttDetailReportResponseShape from \Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SttDetailReportResponse
  *
  * @phpstan-type SpeechToTextListResponseShape = array{
- *   data?: list<SttDetailReportResponseShape>|null
+ *   data?: list<SttDetailReportResponse|SttDetailReportResponseShape>|null
  * }
  */
 final class SpeechToTextListResponse implements BaseModel
@@ -34,7 +34,7 @@ final class SpeechToTextListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SttDetailReportResponseShape>|null $data
+     * @param list<SttDetailReportResponse|SttDetailReportResponseShape>|null $data
      */
     public static function with(?array $data = null): self
     {
@@ -46,7 +46,7 @@ final class SpeechToTextListResponse implements BaseModel
     }
 
     /**
-     * @param list<SttDetailReportResponseShape> $data
+     * @param list<SttDetailReportResponse|SttDetailReportResponseShape> $data
      */
     public function withData(array $data): self
     {

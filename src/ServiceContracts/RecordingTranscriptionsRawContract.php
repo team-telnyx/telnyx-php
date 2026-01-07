@@ -11,12 +11,16 @@ use Telnyx\RecordingTranscriptions\RecordingTranscriptionGetResponse;
 use Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface RecordingTranscriptionsRawContract
 {
     /**
      * @api
      *
      * @param string $recordingTranscriptionID uniquely identifies the recording transcription by id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RecordingTranscriptionGetResponse>
      *
@@ -24,22 +28,27 @@ interface RecordingTranscriptionsRawContract
      */
     public function retrieve(
         string $recordingTranscriptionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<RecordingTranscriptionListResponse>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse;
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $recordingTranscriptionID uniquely identifies the recording transcription by id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RecordingTranscriptionDeleteResponse>
      *
@@ -47,6 +56,6 @@ interface RecordingTranscriptionsRawContract
      */
     public function delete(
         string $recordingTranscriptionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

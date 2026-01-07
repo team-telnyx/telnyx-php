@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Telnyx\AI\Chat\ChatCreateCompletionParams;
 
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Content;
-use Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Content\TextAndImageArray;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Role;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type ContentVariants from \Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Content
  * @phpstan-import-type ContentShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Content
  *
  * @phpstan-type MessageShape = array{
@@ -23,7 +23,7 @@ final class Message implements BaseModel
     /** @use SdkModel<MessageShape> */
     use SdkModel;
 
-    /** @var string|list<TextAndImageArray> $content */
+    /** @var ContentVariants $content */
     #[Required(union: Content::class)]
     public string|array $content;
 

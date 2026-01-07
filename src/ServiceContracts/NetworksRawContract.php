@@ -19,12 +19,16 @@ use Telnyx\Networks\NetworkUpdateParams;
 use Telnyx\Networks\NetworkUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface NetworksRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|NetworkCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NetworkNewResponse>
      *
@@ -32,13 +36,14 @@ interface NetworksRawContract
      */
     public function create(
         array|NetworkCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NetworkGetResponse>
      *
@@ -46,7 +51,7 @@ interface NetworksRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -54,6 +59,7 @@ interface NetworksRawContract
      *
      * @param string $networkID identifies the resource
      * @param array<string,mixed>|NetworkUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NetworkUpdateResponse>
      *
@@ -62,13 +68,14 @@ interface NetworksRawContract
     public function update(
         string $networkID,
         array|NetworkUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|NetworkListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<NetworkListResponse>>
      *
@@ -76,13 +83,14 @@ interface NetworksRawContract
      */
     public function list(
         array|NetworkListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NetworkDeleteResponse>
      *
@@ -90,7 +98,7 @@ interface NetworksRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -98,6 +106,7 @@ interface NetworksRawContract
      *
      * @param string $id identifies the resource
      * @param array<string,mixed>|NetworkListInterfacesParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<NetworkListInterfacesResponse>>
      *
@@ -106,6 +115,6 @@ interface NetworksRawContract
     public function listInterfaces(
         string $id,
         array|NetworkListInterfacesParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

@@ -11,6 +11,9 @@ use Telnyx\GlobalIPHealthCheckTypes\GlobalIPHealthCheckTypeListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPHealthCheckTypesRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class GlobalIPHealthCheckTypesRawService implements GlobalIPHealthCheckTypesRawContract
 {
     // @phpstan-ignore-next-line
@@ -24,12 +27,15 @@ final class GlobalIPHealthCheckTypesRawService implements GlobalIPHealthCheckTyp
      *
      * List all Global IP Health check types.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<GlobalIPHealthCheckTypeListResponse>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse
-    {
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',

@@ -12,6 +12,9 @@ use Telnyx\Portouts\Comments\CommentNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Portouts\CommentsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class CommentsService implements CommentsContract
 {
     /**
@@ -34,13 +37,14 @@ final class CommentsService implements CommentsContract
      *
      * @param string $id Portout id
      * @param string $body Comment to post on this portout request
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $id,
         ?string $body = null,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): CommentNewResponse {
         $params = Util::removeNulls(['body' => $body]);
 
@@ -56,12 +60,13 @@ final class CommentsService implements CommentsContract
      * Returns a list of comments for a portout request.
      *
      * @param string $id Portout id
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function list(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): CommentListResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($id, requestOptions: $requestOptions);

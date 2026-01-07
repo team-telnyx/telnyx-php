@@ -27,7 +27,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   completedAt?: \DateTimeInterface|null,
  *   conversationID?: string|null,
  *   conversationInsightsID?: string|null,
- *   detailStatus?: list<DetailStatusShape>|null,
+ *   detailStatus?: list<DetailStatus|DetailStatusShape>|null,
  *   logs?: string|null,
  *   testSuiteRunID?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
@@ -152,7 +152,7 @@ final class TestRunResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param TestStatus|value-of<TestStatus> $status
-     * @param list<DetailStatusShape>|null $detailStatus
+     * @param list<DetailStatus|DetailStatusShape>|null $detailStatus
      */
     public static function with(
         \DateTimeInterface $createdAt,
@@ -287,7 +287,7 @@ final class TestRunResponse implements BaseModel
     /**
      * Detailed evaluation results for each rubric criteria. Name is name of the criteria from the rubric and status is the result of the evaluation. This list will have a result for every criteria in the rubric section.
      *
-     * @param list<DetailStatusShape> $detailStatus
+     * @param list<DetailStatus|DetailStatusShape> $detailStatus
      */
     public function withDetailStatus(array $detailStatus): self
     {

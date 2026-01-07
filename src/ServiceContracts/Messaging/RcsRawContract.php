@@ -14,6 +14,9 @@ use Telnyx\Messaging\Rcs\RcListBulkCapabilitiesResponse;
 use Telnyx\Messaging\Rcs\RcRetrieveCapabilitiesParams;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface RcsRawContract
 {
     /**
@@ -21,6 +24,7 @@ interface RcsRawContract
      *
      * @param string $phoneNumber Phone number in E164 format to invite for testing
      * @param array<string,mixed>|RcInviteTestNumberParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RcInviteTestNumberResponse>
      *
@@ -29,13 +33,14 @@ interface RcsRawContract
     public function inviteTestNumber(
         string $phoneNumber,
         array|RcInviteTestNumberParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|RcListBulkCapabilitiesParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RcListBulkCapabilitiesResponse>
      *
@@ -43,7 +48,7 @@ interface RcsRawContract
      */
     public function listBulkCapabilities(
         array|RcListBulkCapabilitiesParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -51,6 +56,7 @@ interface RcsRawContract
      *
      * @param string $phoneNumber Phone number in E164 format
      * @param array<string,mixed>|RcRetrieveCapabilitiesParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RcGetCapabilitiesResponse>
      *
@@ -59,6 +65,6 @@ interface RcsRawContract
     public function retrieveCapabilities(
         string $phoneNumber,
         array|RcRetrieveCapabilitiesParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

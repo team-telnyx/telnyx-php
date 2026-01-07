@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\CallEvents\CallEventListParams;
-use Telnyx\CallEvents\CallEventListParams\Filter\Product;
-use Telnyx\CallEvents\CallEventListParams\Filter\Status;
-use Telnyx\CallEvents\CallEventListParams\Filter\Type;
+use Telnyx\CallEvents\CallEventListParams\Filter;
+use Telnyx\CallEvents\CallEventListParams\Page;
 use Telnyx\CallEvents\CallEventListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
@@ -16,6 +15,11 @@ use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CallEventsRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\CallEvents\CallEventListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\CallEvents\CallEventListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class CallEventsRawService implements CallEventsRawContract
 {
     // @phpstan-ignore-next-line
@@ -32,27 +36,9 @@ final class CallEventsRawService implements CallEventsRawContract
      * **Note**: Only one `filter[occurred_at]` can be passed.
      *
      * @param array{
-     *   filter?: array{
-     *     applicationName?: array{contains?: string},
-     *     applicationSessionID?: string,
-     *     connectionID?: string,
-     *     failed?: bool,
-     *     from?: string,
-     *     legID?: string,
-     *     name?: string,
-     *     occurredAt?: array{
-     *       eq?: string, gt?: string, gte?: string, lt?: string, lte?: string
-     *     },
-     *     outboundOutboundVoiceProfileID?: string,
-     *     product?: 'call_control'|'fax'|'texml'|Product,
-     *     status?: 'init'|'in_progress'|'completed'|Status,
-     *     to?: string,
-     *     type?: 'command'|'webhook'|Type,
-     *   },
-     *   page?: array{
-     *     after?: string, before?: string, limit?: int, number?: int, size?: int
-     *   },
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|CallEventListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<CallEventListResponse>>
      *
@@ -60,7 +46,7 @@ final class CallEventsRawService implements CallEventsRawContract
      */
     public function list(
         array|CallEventListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CallEventListParams::parseRequest(
             $params,

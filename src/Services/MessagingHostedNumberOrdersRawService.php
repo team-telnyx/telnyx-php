@@ -17,13 +17,20 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCreateVerificat
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderDeleteResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderGetResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderListParams;
+use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderListParams\Page;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesParams;
+use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesParams\VerificationCode;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingHostedNumberOrdersRawContract;
 
+/**
+ * @phpstan-import-type PageShape from \Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderListParams\Page
+ * @phpstan-import-type VerificationCodeShape from \Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesParams\VerificationCode
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MessagingHostedNumberOrdersRawService implements MessagingHostedNumberOrdersRawContract
 {
     // @phpstan-ignore-next-line
@@ -40,6 +47,7 @@ final class MessagingHostedNumberOrdersRawService implements MessagingHostedNumb
      * @param array{
      *   messagingProfileID?: string, phoneNumbers?: list<string>
      * }|MessagingHostedNumberOrderCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingHostedNumberOrderNewResponse>
      *
@@ -47,7 +55,7 @@ final class MessagingHostedNumberOrdersRawService implements MessagingHostedNumb
      */
     public function create(
         array|MessagingHostedNumberOrderCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MessagingHostedNumberOrderCreateParams::parseRequest(
             $params,
@@ -70,6 +78,7 @@ final class MessagingHostedNumberOrdersRawService implements MessagingHostedNumb
      * Retrieve a messaging hosted number order
      *
      * @param string $id identifies the type of resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingHostedNumberOrderGetResponse>
      *
@@ -77,7 +86,7 @@ final class MessagingHostedNumberOrdersRawService implements MessagingHostedNumb
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -93,9 +102,8 @@ final class MessagingHostedNumberOrdersRawService implements MessagingHostedNumb
      *
      * List messaging hosted number orders
      *
-     * @param array{
-     *   page?: array{number?: int, size?: int}
-     * }|MessagingHostedNumberOrderListParams $params
+     * @param array{page?: Page|PageShape}|MessagingHostedNumberOrderListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<MessagingHostedNumberOrder>>
      *
@@ -103,7 +111,7 @@ final class MessagingHostedNumberOrdersRawService implements MessagingHostedNumb
      */
     public function list(
         array|MessagingHostedNumberOrderListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MessagingHostedNumberOrderListParams::parseRequest(
             $params,
@@ -127,6 +135,7 @@ final class MessagingHostedNumberOrdersRawService implements MessagingHostedNumb
      * Delete a messaging hosted number order and all associated phone numbers.
      *
      * @param string $id identifies the messaging hosted number order to delete
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingHostedNumberOrderDeleteResponse>
      *
@@ -134,7 +143,7 @@ final class MessagingHostedNumberOrdersRawService implements MessagingHostedNumb
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -153,6 +162,7 @@ final class MessagingHostedNumberOrdersRawService implements MessagingHostedNumb
      * @param array{
      *   phoneNumbers: list<string>
      * }|MessagingHostedNumberOrderCheckEligibilityParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingHostedNumberOrderCheckEligibilityResponse>
      *
@@ -160,7 +170,7 @@ final class MessagingHostedNumberOrdersRawService implements MessagingHostedNumb
      */
     public function checkEligibility(
         array|MessagingHostedNumberOrderCheckEligibilityParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MessagingHostedNumberOrderCheckEligibilityParams::parseRequest(
             $params,
@@ -185,8 +195,9 @@ final class MessagingHostedNumberOrdersRawService implements MessagingHostedNumb
      * @param string $id order ID to have a verification code created
      * @param array{
      *   phoneNumbers: list<string>,
-     *   verificationMethod: 'sms'|'call'|'flashcall'|VerificationMethod,
+     *   verificationMethod: VerificationMethod|value-of<VerificationMethod>,
      * }|MessagingHostedNumberOrderCreateVerificationCodesParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingHostedNumberOrderNewVerificationCodesResponse>
      *
@@ -195,7 +206,7 @@ final class MessagingHostedNumberOrdersRawService implements MessagingHostedNumb
     public function createVerificationCodes(
         string $id,
         array|MessagingHostedNumberOrderCreateVerificationCodesParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MessagingHostedNumberOrderCreateVerificationCodesParams::parseRequest(
             $params,
@@ -219,8 +230,9 @@ final class MessagingHostedNumberOrdersRawService implements MessagingHostedNumb
      *
      * @param string $id order ID related to the validation codes
      * @param array{
-     *   verificationCodes: list<array{code: string, phoneNumber: string}>
+     *   verificationCodes: list<VerificationCode|VerificationCodeShape>
      * }|MessagingHostedNumberOrderValidateCodesParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingHostedNumberOrderValidateCodesResponse>
      *
@@ -229,7 +241,7 @@ final class MessagingHostedNumberOrdersRawService implements MessagingHostedNumb
     public function validateCodes(
         string $id,
         array|MessagingHostedNumberOrderValidateCodesParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MessagingHostedNumberOrderValidateCodesParams::parseRequest(
             $params,

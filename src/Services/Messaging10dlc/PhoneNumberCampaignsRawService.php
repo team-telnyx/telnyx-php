@@ -10,12 +10,17 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Messaging10dlc\PhoneNumberCampaigns\PhoneNumberCampaign;
 use Telnyx\Messaging10dlc\PhoneNumberCampaigns\PhoneNumberCampaignCreateParams;
 use Telnyx\Messaging10dlc\PhoneNumberCampaigns\PhoneNumberCampaignListParams;
+use Telnyx\Messaging10dlc\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Filter;
 use Telnyx\Messaging10dlc\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Sort;
 use Telnyx\Messaging10dlc\PhoneNumberCampaigns\PhoneNumberCampaignUpdateParams;
 use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging10dlc\PhoneNumberCampaignsRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Messaging10dlc\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class PhoneNumberCampaignsRawService implements PhoneNumberCampaignsRawContract
 {
     // @phpstan-ignore-next-line
@@ -32,6 +37,7 @@ final class PhoneNumberCampaignsRawService implements PhoneNumberCampaignsRawCon
      * @param array{
      *   campaignID: string, phoneNumber: string
      * }|PhoneNumberCampaignCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberCampaign>
      *
@@ -39,7 +45,7 @@ final class PhoneNumberCampaignsRawService implements PhoneNumberCampaignsRawCon
      */
     public function create(
         array|PhoneNumberCampaignCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PhoneNumberCampaignCreateParams::parseRequest(
             $params,
@@ -61,13 +67,15 @@ final class PhoneNumberCampaignsRawService implements PhoneNumberCampaignsRawCon
      *
      * Retrieve an individual phone number/campaign assignment by `phoneNumber`.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<PhoneNumberCampaign>
      *
      * @throws APIException
      */
     public function retrieve(
         string $phoneNumber,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -86,6 +94,7 @@ final class PhoneNumberCampaignsRawService implements PhoneNumberCampaignsRawCon
      * @param array{
      *   campaignID: string, phoneNumber: string
      * }|PhoneNumberCampaignUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberCampaign>
      *
@@ -94,7 +103,7 @@ final class PhoneNumberCampaignsRawService implements PhoneNumberCampaignsRawCon
     public function update(
         string $campaignPhoneNumber,
         array|PhoneNumberCampaignUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PhoneNumberCampaignUpdateParams::parseRequest(
             $params,
@@ -117,16 +126,12 @@ final class PhoneNumberCampaignsRawService implements PhoneNumberCampaignsRawCon
      * List phone number campaigns
      *
      * @param array{
-     *   filter?: array{
-     *     tcrBrandID?: string,
-     *     tcrCampaignID?: string,
-     *     telnyxBrandID?: string,
-     *     telnyxCampaignID?: string,
-     *   },
+     *   filter?: Filter|FilterShape,
      *   page?: int,
      *   recordsPerPage?: int,
      *   sort?: value-of<Sort>,
      * }|PhoneNumberCampaignListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PerPagePaginationV2<PhoneNumberCampaign>>
      *
@@ -134,7 +139,7 @@ final class PhoneNumberCampaignsRawService implements PhoneNumberCampaignsRawCon
      */
     public function list(
         array|PhoneNumberCampaignListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PhoneNumberCampaignListParams::parseRequest(
             $params,
@@ -157,13 +162,15 @@ final class PhoneNumberCampaignsRawService implements PhoneNumberCampaignsRawCon
      *
      * This endpoint allows you to remove a campaign assignment from the supplied `phoneNumber`.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<PhoneNumberCampaign>
      *
      * @throws APIException
      */
     public function delete(
         string $phoneNumber,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

@@ -8,6 +8,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Messaging10dlc\Campaign\TelnyxCampaignCsp;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface CampaignBuilderContract
 {
     /**
@@ -48,6 +51,7 @@ interface CampaignBuilderContract
      * @param string $termsAndConditionsLink link to the campaign's terms and conditions
      * @param string $webhookFailoverURL failover webhook to which campaign status updates are sent
      * @param string $webhookURL webhook to which campaign status updates are sent
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -87,6 +91,6 @@ interface CampaignBuilderContract
         ?string $termsAndConditionsLink = null,
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): TelnyxCampaignCsp;
 }

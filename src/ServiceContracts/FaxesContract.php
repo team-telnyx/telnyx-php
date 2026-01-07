@@ -10,9 +10,14 @@ use Telnyx\Faxes\Fax;
 use Telnyx\Faxes\FaxCreateParams\PreviewFormat;
 use Telnyx\Faxes\FaxCreateParams\Quality;
 use Telnyx\Faxes\FaxGetResponse;
+use Telnyx\Faxes\FaxListParams\Filter;
 use Telnyx\Faxes\FaxNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Faxes\FaxListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface FaxesContract
 {
     /**
@@ -26,12 +31,13 @@ interface FaxesContract
      * @param string $mediaName The media_name used for the fax's media. Must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. media_name and media_url/contents can't be submitted together.
      * @param string $mediaURL The URL (or list of URLs) to the PDF used for the fax's media. media_url and media_name/contents can't be submitted together.
      * @param bool $monochrome the flag to enable monochrome, true black and white fax results
-     * @param 'pdf'|'tiff'|PreviewFormat $previewFormat the format for the preview file in case the `store_preview` is `true`
-     * @param 'normal'|'high'|'very_high'|'ultra_light'|'ultra_dark'|Quality $quality The quality of the fax. The `ultra` settings provides the highest quality available, but also present longer fax processing times. `ultra_light` is best suited for images, wihle `ultra_dark` is best suited for text.
+     * @param PreviewFormat|value-of<PreviewFormat> $previewFormat the format for the preview file in case the `store_preview` is `true`
+     * @param Quality|value-of<Quality> $quality The quality of the fax. The `ultra` settings provides the highest quality available, but also present longer fax processing times. `ultra_light` is best suited for images, wihle `ultra_dark` is best suited for text.
      * @param bool $storeMedia Should fax media be stored on temporary URL. It does not support media_name, they can't be submitted together.
      * @param bool $storePreview should fax preview be stored on temporary URL
      * @param bool $t38Enabled The flag to disable the T.38 protocol.
      * @param string $webhookURL use this field to override the URL to which Telnyx will send subsequent webhooks for this fax
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -44,62 +50,55 @@ interface FaxesContract
         ?string $mediaName = null,
         ?string $mediaURL = null,
         bool $monochrome = false,
-        string|PreviewFormat $previewFormat = 'tiff',
-        string|Quality $quality = 'high',
+        PreviewFormat|string $previewFormat = 'tiff',
+        Quality|string $quality = 'high',
         bool $storeMedia = false,
         bool $storePreview = false,
         bool $t38Enabled = true,
         ?string $webhookURL = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): FaxNewResponse;
 
     /**
      * @api
      *
      * @param string $id the unique identifier of a fax
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): FaxGetResponse;
 
     /**
      * @api
      *
-     * @param array{
-     *   createdAt?: array{
-     *     gt?: string|\DateTimeInterface,
-     *     gte?: string|\DateTimeInterface,
-     *     lt?: string|\DateTimeInterface,
-     *     lte?: string|\DateTimeInterface,
-     *   },
-     *   direction?: array{eq?: string},
-     *   from?: array{eq?: string},
-     *   to?: array{eq?: string},
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[created_at][gte], filter[created_at][gt], filter[created_at][lte], filter[created_at][lt], filter[direction][eq], filter[from][eq], filter[to][eq]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[created_at][gte], filter[created_at][gt], filter[created_at][lte], filter[created_at][lt], filter[direction][eq], filter[from][eq], filter[to][eq]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<Fax>
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
+        Filter|array|null $filter = null,
         ?int $pageNumber = null,
         ?int $pageSize = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination;
 
     /**
      * @api
      *
      * @param string $id the unique identifier of a fax
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed;
 }

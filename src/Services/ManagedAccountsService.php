@@ -10,6 +10,8 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\ManagedAccounts\ManagedAccountGetAllocatableGlobalOutboundChannelsResponse;
 use Telnyx\ManagedAccounts\ManagedAccountGetResponse;
+use Telnyx\ManagedAccounts\ManagedAccountListParams\Filter;
+use Telnyx\ManagedAccounts\ManagedAccountListParams\Page;
 use Telnyx\ManagedAccounts\ManagedAccountListParams\Sort;
 use Telnyx\ManagedAccounts\ManagedAccountListResponse;
 use Telnyx\ManagedAccounts\ManagedAccountNewResponse;
@@ -19,6 +21,11 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ManagedAccountsContract;
 use Telnyx\Services\ManagedAccounts\ActionsService;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\ManagedAccounts\ManagedAccountListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\ManagedAccounts\ManagedAccountListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ManagedAccountsService implements ManagedAccountsContract
 {
     /**
@@ -50,6 +57,7 @@ final class ManagedAccountsService implements ManagedAccountsContract
      * @param bool $managedAccountAllowCustomPricing Boolean value that indicates if the managed account is able to have custom pricing set for it or not. If false, uses the pricing of the manager account. Defaults to false. This value may be changed after creation, but there may be time lag between when the value is changed and pricing changes take effect.
      * @param string $password Password for the managed account. If a password is not supplied, the account will not be able to be signed into directly. (A password reset may still be performed later to enable sign-in via password.)
      * @param bool $rollupBilling Boolean value that indicates if the billing information and charges to the managed account "roll up" to the manager account. If true, the managed account will not have its own balance and will use the shared balance with the manager account. This value cannot be changed after account creation without going through Telnyx support as changes require manual updates to the account ledger. Defaults to false.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -59,7 +67,7 @@ final class ManagedAccountsService implements ManagedAccountsContract
         ?bool $managedAccountAllowCustomPricing = null,
         ?string $password = null,
         ?bool $rollupBilling = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ManagedAccountNewResponse {
         $params = Util::removeNulls(
             [
@@ -83,12 +91,13 @@ final class ManagedAccountsService implements ManagedAccountsContract
      * Retrieves the details of a single managed account.
      *
      * @param string $id Managed Account User ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ManagedAccountGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -103,13 +112,14 @@ final class ManagedAccountsService implements ManagedAccountsContract
      *
      * @param string $id Managed Account User ID
      * @param bool $managedAccountAllowCustomPricing Boolean value that indicates if the managed account is able to have custom pricing set for it or not. If false, uses the pricing of the manager account. Defaults to false. This value may be changed, but there may be time lag between when the value is changed and pricing changes take effect.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $id,
         ?bool $managedAccountAllowCustomPricing = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ManagedAccountUpdateResponse {
         $params = Util::removeNulls(
             ['managedAccountAllowCustomPricing' => $managedAccountAllowCustomPricing]
@@ -126,15 +136,10 @@ final class ManagedAccountsService implements ManagedAccountsContract
      *
      * Lists the accounts managed by the current user. Users need to be explictly approved by Telnyx in order to become manager accounts.
      *
-     * @param array{
-     *   email?: array{contains?: string, eq?: string},
-     *   organizationName?: array{contains?: string, eq?: string},
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[email][contains], filter[email][eq], filter[organization_name][contains], filter[organization_name][eq]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[email][contains], filter[email][eq], filter[organization_name][contains], filter[organization_name][eq]
      * @param bool $includeCancelledAccounts specifies if cancelled accounts should be included in the results
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
-     * @param 'created_at'|'email'|Sort $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
      * That is: <ul>
      *   <li>
      *     <code>email</code>: sorts the result by the
@@ -146,17 +151,18 @@ final class ManagedAccountsService implements ManagedAccountsContract
      *     <code>email</code> field in descending order.
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<ManagedAccountListResponse>
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
+        Filter|array|null $filter = null,
         bool $includeCancelledAccounts = false,
-        ?array $page = null,
-        string|Sort $sort = 'created_at',
-        ?RequestOptions $requestOptions = null,
+        Page|array|null $page = null,
+        Sort|string $sort = 'created_at',
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination {
         $params = Util::removeNulls(
             [
@@ -178,10 +184,12 @@ final class ManagedAccountsService implements ManagedAccountsContract
      *
      * Display information about allocatable global outbound channels for the current user. Only usable by account managers.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function getAllocatableGlobalOutboundChannels(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ManagedAccountGetAllocatableGlobalOutboundChannelsResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getAllocatableGlobalOutboundChannels(requestOptions: $requestOptions);
@@ -196,13 +204,14 @@ final class ManagedAccountsService implements ManagedAccountsContract
      *
      * @param string $id Managed Account User ID
      * @param int $channelLimit Integer value that indicates the number of allocatable global outbound channels that should be allocated to the managed account. Must be 0 or more. If the value is 0 then the account will have no usable channels and will not be able to perform outbound calling.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function updateGlobalChannelLimit(
         string $id,
         ?int $channelLimit = null,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): ManagedAccountUpdateGlobalChannelLimitResponse {
         $params = Util::removeNulls(['channelLimit' => $channelLimit]);
 

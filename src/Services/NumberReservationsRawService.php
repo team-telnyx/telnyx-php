@@ -12,12 +12,19 @@ use Telnyx\NumberReservations\NumberReservation;
 use Telnyx\NumberReservations\NumberReservationCreateParams;
 use Telnyx\NumberReservations\NumberReservationGetResponse;
 use Telnyx\NumberReservations\NumberReservationListParams;
+use Telnyx\NumberReservations\NumberReservationListParams\Filter;
+use Telnyx\NumberReservations\NumberReservationListParams\Page;
 use Telnyx\NumberReservations\NumberReservationNewResponse;
 use Telnyx\NumberReservations\ReservedPhoneNumber;
-use Telnyx\NumberReservations\ReservedPhoneNumber\Status;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumberReservationsRawContract;
 
+/**
+ * @phpstan-import-type ReservedPhoneNumberShape from \Telnyx\NumberReservations\ReservedPhoneNumber
+ * @phpstan-import-type FilterShape from \Telnyx\NumberReservations\NumberReservationListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\NumberReservations\NumberReservationListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class NumberReservationsRawService implements NumberReservationsRawContract
 {
     // @phpstan-ignore-next-line
@@ -33,16 +40,9 @@ final class NumberReservationsRawService implements NumberReservationsRawContrac
      *
      * @param array{
      *   customerReference?: string,
-     *   phoneNumbers?: list<array{
-     *     id?: string,
-     *     createdAt?: string|\DateTimeInterface,
-     *     expiredAt?: string|\DateTimeInterface,
-     *     phoneNumber?: string,
-     *     recordType?: string,
-     *     status?: 'pending'|'success'|'failure'|Status,
-     *     updatedAt?: string|\DateTimeInterface,
-     *   }|ReservedPhoneNumber>,
+     *   phoneNumbers?: list<ReservedPhoneNumber|ReservedPhoneNumberShape>,
      * }|NumberReservationCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NumberReservationNewResponse>
      *
@@ -50,7 +50,7 @@ final class NumberReservationsRawService implements NumberReservationsRawContrac
      */
     public function create(
         array|NumberReservationCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = NumberReservationCreateParams::parseRequest(
             $params,
@@ -73,6 +73,7 @@ final class NumberReservationsRawService implements NumberReservationsRawContrac
      * Gets a single phone number reservation.
      *
      * @param string $numberReservationID the number reservation ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NumberReservationGetResponse>
      *
@@ -80,7 +81,7 @@ final class NumberReservationsRawService implements NumberReservationsRawContrac
      */
     public function retrieve(
         string $numberReservationID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -97,14 +98,9 @@ final class NumberReservationsRawService implements NumberReservationsRawContrac
      * Gets a paginated list of phone number reservations.
      *
      * @param array{
-     *   filter?: array{
-     *     createdAt?: array{gt?: string, lt?: string},
-     *     customerReference?: string,
-     *     phoneNumbersPhoneNumber?: string,
-     *     status?: string,
-     *   },
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|NumberReservationListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<NumberReservation>>
      *
@@ -112,7 +108,7 @@ final class NumberReservationsRawService implements NumberReservationsRawContrac
      */
     public function list(
         array|NumberReservationListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = NumberReservationListParams::parseRequest(
             $params,

@@ -15,12 +15,16 @@ use Telnyx\Messaging10dlc\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentBy
 use Telnyx\Messaging10dlc\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParams;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface PhoneNumberAssignmentByProfileRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|PhoneNumberAssignmentByProfileAssignParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberAssignmentByProfileAssignResponse>
      *
@@ -28,13 +32,14 @@ interface PhoneNumberAssignmentByProfileRawContract
      */
     public function assign(
         array|PhoneNumberAssignmentByProfileAssignParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|PhoneNumberAssignmentByProfileListPhoneNumberStatusParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberAssignmentByProfileListPhoneNumberStatusResponse,>
      *
@@ -43,13 +48,14 @@ interface PhoneNumberAssignmentByProfileRawContract
     public function listPhoneNumberStatus(
         string $taskID,
         array|PhoneNumberAssignmentByProfileListPhoneNumberStatusParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse>
      *
@@ -58,11 +64,13 @@ interface PhoneNumberAssignmentByProfileRawContract
     public function retrievePhoneNumberStatus(
         string $taskID,
         array|PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberAssignmentByProfileGetStatusResponse>
      *
@@ -70,6 +78,6 @@ interface PhoneNumberAssignmentByProfileRawContract
      */
     public function retrieveStatus(
         string $taskID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

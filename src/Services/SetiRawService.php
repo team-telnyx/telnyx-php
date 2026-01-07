@@ -11,7 +11,12 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SetiRawContract;
 use Telnyx\Seti\SetiGetBlackBoxTestResultsResponse;
 use Telnyx\Seti\SetiRetrieveBlackBoxTestResultsParams;
+use Telnyx\Seti\SetiRetrieveBlackBoxTestResultsParams\Filter;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Seti\SetiRetrieveBlackBoxTestResultsParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class SetiRawService implements SetiRawContract
 {
     // @phpstan-ignore-next-line
@@ -26,8 +31,9 @@ final class SetiRawService implements SetiRawContract
      * Returns the results of the various black box tests
      *
      * @param array{
-     *   filter?: array{product?: string}
+     *   filter?: Filter|FilterShape
      * }|SetiRetrieveBlackBoxTestResultsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SetiGetBlackBoxTestResultsResponse>
      *
@@ -35,7 +41,7 @@ final class SetiRawService implements SetiRawContract
      */
     public function retrieveBlackBoxTestResults(
         array|SetiRetrieveBlackBoxTestResultsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SetiRetrieveBlackBoxTestResultsParams::parseRequest(
             $params,

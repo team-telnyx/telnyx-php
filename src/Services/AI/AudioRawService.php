@@ -15,6 +15,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\AudioRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AudioRawService implements AudioRawContract
 {
     // @phpstan-ignore-next-line
@@ -29,12 +32,13 @@ final class AudioRawService implements AudioRawContract
      * Transcribe speech to text. This endpoint is consistent with the [OpenAI Transcription API](https://platform.openai.com/docs/api-reference/audio/createTranscription) and may be used with the OpenAI JS or Python SDK.
      *
      * @param array{
-     *   model: 'distil-whisper/distil-large-v2'|'openai/whisper-large-v3-turbo'|Model,
+     *   model: Model|value-of<Model>,
      *   file?: string,
      *   fileURL?: string,
-     *   responseFormat?: 'json'|'verbose_json'|ResponseFormat,
-     *   timestampGranularities?: 'segment'|TimestampGranularities,
+     *   responseFormat?: ResponseFormat|value-of<ResponseFormat>,
+     *   timestampGranularities?: TimestampGranularities|value-of<TimestampGranularities>,
      * }|AudioTranscribeParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AudioTranscribeResponse>
      *
@@ -42,7 +46,7 @@ final class AudioRawService implements AudioRawContract
      */
     public function transcribe(
         array|AudioTranscribeParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AudioTranscribeParams::parseRequest(
             $params,

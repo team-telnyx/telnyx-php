@@ -11,12 +11,16 @@ use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReportGetResponse;
 use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReportNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface LedgerBillingGroupReportsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|LedgerBillingGroupReportCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<LedgerBillingGroupReportNewResponse>
      *
@@ -24,13 +28,14 @@ interface LedgerBillingGroupReportsRawContract
      */
     public function create(
         array|LedgerBillingGroupReportCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id The id of the ledger billing group report
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<LedgerBillingGroupReportGetResponse>
      *
@@ -38,6 +43,6 @@ interface LedgerBillingGroupReportsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

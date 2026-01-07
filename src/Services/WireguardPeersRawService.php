@@ -14,11 +14,18 @@ use Telnyx\WireguardPeers\WireguardPeerCreateParams;
 use Telnyx\WireguardPeers\WireguardPeerDeleteResponse;
 use Telnyx\WireguardPeers\WireguardPeerGetResponse;
 use Telnyx\WireguardPeers\WireguardPeerListParams;
+use Telnyx\WireguardPeers\WireguardPeerListParams\Filter;
+use Telnyx\WireguardPeers\WireguardPeerListParams\Page;
 use Telnyx\WireguardPeers\WireguardPeerListResponse;
 use Telnyx\WireguardPeers\WireguardPeerNewResponse;
 use Telnyx\WireguardPeers\WireguardPeerUpdateParams;
 use Telnyx\WireguardPeers\WireguardPeerUpdateResponse;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\WireguardPeers\WireguardPeerListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\WireguardPeers\WireguardPeerListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class WireguardPeersRawService implements WireguardPeersRawContract
 {
     // @phpstan-ignore-next-line
@@ -35,6 +42,7 @@ final class WireguardPeersRawService implements WireguardPeersRawContract
      * @param array{
      *   wireguardInterfaceID: string, publicKey?: string
      * }|WireguardPeerCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WireguardPeerNewResponse>
      *
@@ -42,7 +50,7 @@ final class WireguardPeersRawService implements WireguardPeersRawContract
      */
     public function create(
         array|WireguardPeerCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = WireguardPeerCreateParams::parseRequest(
             $params,
@@ -65,6 +73,7 @@ final class WireguardPeersRawService implements WireguardPeersRawContract
      * Retrieve the WireGuard peer.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WireguardPeerGetResponse>
      *
@@ -72,7 +81,7 @@ final class WireguardPeersRawService implements WireguardPeersRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -90,6 +99,7 @@ final class WireguardPeersRawService implements WireguardPeersRawContract
      *
      * @param string $id identifies the resource
      * @param array{publicKey?: string}|WireguardPeerUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WireguardPeerUpdateResponse>
      *
@@ -98,7 +108,7 @@ final class WireguardPeersRawService implements WireguardPeersRawContract
     public function update(
         string $id,
         array|WireguardPeerUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = WireguardPeerUpdateParams::parseRequest(
             $params,
@@ -121,9 +131,9 @@ final class WireguardPeersRawService implements WireguardPeersRawContract
      * List all WireGuard peers.
      *
      * @param array{
-     *   filter?: array{wireguardInterfaceID?: string},
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|WireguardPeerListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<WireguardPeerListResponse>>
      *
@@ -131,7 +141,7 @@ final class WireguardPeersRawService implements WireguardPeersRawContract
      */
     public function list(
         array|WireguardPeerListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = WireguardPeerListParams::parseRequest(
             $params,
@@ -155,6 +165,7 @@ final class WireguardPeersRawService implements WireguardPeersRawContract
      * Delete the WireGuard peer.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WireguardPeerDeleteResponse>
      *
@@ -162,7 +173,7 @@ final class WireguardPeersRawService implements WireguardPeersRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -179,6 +190,7 @@ final class WireguardPeersRawService implements WireguardPeersRawContract
      * Retrieve Wireguard config template for Peer
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
      *
@@ -186,7 +198,7 @@ final class WireguardPeersRawService implements WireguardPeersRawContract
      */
     public function retrieveConfig(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

@@ -13,6 +13,9 @@ use Telnyx\Messaging10dlc\Messaging10dlcGetEnumResponse\EnumPaginatedResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging10dlcRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class Messaging10dlcRawService implements Messaging10dlcRawContract
 {
     // @phpstan-ignore-next-line
@@ -27,6 +30,7 @@ final class Messaging10dlcRawService implements Messaging10dlcRawContract
      * Get Enum
      *
      * @param Endpoint|value-of<Endpoint> $endpoint
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<string>|list<array<string,mixed>>|EnumPaginatedResponse|array<string,mixed>|array<string,mixed>,>
      *
@@ -34,7 +38,7 @@ final class Messaging10dlcRawService implements Messaging10dlcRawContract
      */
     public function getEnum(
         Endpoint|string $endpoint,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

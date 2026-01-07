@@ -16,12 +16,16 @@ use Telnyx\OAuthClients\OAuthClientUpdateParams;
 use Telnyx\OAuthClients\OAuthClientUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface OAuthClientsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|OAuthClientCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OAuthClientNewResponse>
      *
@@ -29,13 +33,14 @@ interface OAuthClientsRawContract
      */
     public function create(
         array|OAuthClientCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id OAuth client ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OAuthClientGetResponse>
      *
@@ -43,7 +48,7 @@ interface OAuthClientsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -51,6 +56,7 @@ interface OAuthClientsRawContract
      *
      * @param string $id OAuth client ID
      * @param array<string,mixed>|OAuthClientUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<OAuthClientUpdateResponse>
      *
@@ -59,13 +65,14 @@ interface OAuthClientsRawContract
     public function update(
         string $id,
         array|OAuthClientUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|OAuthClientListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<OAuthClient>>
      *
@@ -73,13 +80,14 @@ interface OAuthClientsRawContract
      */
     public function list(
         array|OAuthClientListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id OAuth client ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -87,6 +95,6 @@ interface OAuthClientsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

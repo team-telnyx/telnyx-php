@@ -9,6 +9,9 @@ use Telnyx\RequestOptions;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesParams\Provider;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface TextToSpeechContract
 {
     /**
@@ -24,26 +27,28 @@ interface TextToSpeechContract
      * - Telnyx.KokoroTTS.af
      *
      * Use the `GET /text-to-speech/voices` endpoint to get a complete list of available voices.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function generateSpeech(
         string $text,
         string $voice,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): string;
 
     /**
      * @api
      *
      * @param string $elevenlabsAPIKeyRef Reference to your ElevenLabs API key stored in the Telnyx Portal
-     * @param 'aws'|'azure'|'elevenlabs'|'telnyx'|Provider $provider Filter voices by provider
+     * @param Provider|value-of<Provider> $provider Filter voices by provider
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function listVoices(
         ?string $elevenlabsAPIKeyRef = null,
-        string|Provider|null $provider = null,
-        ?RequestOptions $requestOptions = null,
+        Provider|string|null $provider = null,
+        RequestOptions|array|null $requestOptions = null,
     ): TextToSpeechListVoicesResponse;
 }

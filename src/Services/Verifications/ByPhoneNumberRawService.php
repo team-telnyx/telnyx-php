@@ -11,6 +11,9 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Verifications\ByPhoneNumberRawContract;
 use Telnyx\Verifications\ByPhoneNumber\ByPhoneNumberListResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ByPhoneNumberRawService implements ByPhoneNumberRawContract
 {
     // @phpstan-ignore-next-line
@@ -25,6 +28,7 @@ final class ByPhoneNumberRawService implements ByPhoneNumberRawContract
      * List verifications by phone number
      *
      * @param string $phoneNumber +E164 formatted phone number
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ByPhoneNumberListResponse>
      *
@@ -32,7 +36,7 @@ final class ByPhoneNumberRawService implements ByPhoneNumberRawContract
      */
     public function list(
         string $phoneNumber,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

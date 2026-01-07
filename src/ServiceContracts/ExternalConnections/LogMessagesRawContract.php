@@ -13,12 +13,16 @@ use Telnyx\ExternalConnections\LogMessages\LogMessageListParams;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface LogMessagesRawContract
 {
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<LogMessageGetResponse>
      *
@@ -26,13 +30,14 @@ interface LogMessagesRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|LogMessageListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPaginationForLogMessages<LogMessageListResponse>>
      *
@@ -40,13 +45,14 @@ interface LogMessagesRawContract
      */
     public function list(
         array|LogMessageListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<LogMessageDismissResponse>
      *
@@ -54,6 +60,6 @@ interface LogMessagesRawContract
      */
     public function dismiss(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

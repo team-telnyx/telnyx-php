@@ -12,6 +12,9 @@ use Telnyx\PortabilityChecks\PortabilityCheckRunResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortabilityChecksRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class PortabilityChecksRawService implements PortabilityChecksRawContract
 {
     // @phpstan-ignore-next-line
@@ -26,6 +29,7 @@ final class PortabilityChecksRawService implements PortabilityChecksRawContract
      * Runs a portability check, returning the results immediately.
      *
      * @param array{phoneNumbers?: list<string>}|PortabilityCheckRunParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PortabilityCheckRunResponse>
      *
@@ -33,7 +37,7 @@ final class PortabilityChecksRawService implements PortabilityChecksRawContract
      */
     public function run(
         array|PortabilityCheckRunParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PortabilityCheckRunParams::parseRequest(
             $params,

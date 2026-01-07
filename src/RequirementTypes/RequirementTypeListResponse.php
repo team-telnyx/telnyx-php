@@ -15,7 +15,7 @@ use Telnyx\DocReqsRequirementType;
  * @phpstan-import-type PaginationMetaShape from \Telnyx\AuthenticationProviders\PaginationMeta
  *
  * @phpstan-type RequirementTypeListResponseShape = array{
- *   data?: list<DocReqsRequirementTypeShape>|null,
+ *   data?: list<DocReqsRequirementType|DocReqsRequirementTypeShape>|null,
  *   meta?: null|PaginationMeta|PaginationMetaShape,
  * }
  */
@@ -41,7 +41,7 @@ final class RequirementTypeListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DocReqsRequirementTypeShape>|null $data
+     * @param list<DocReqsRequirementType|DocReqsRequirementTypeShape>|null $data
      * @param PaginationMeta|PaginationMetaShape|null $meta
      */
     public static function with(
@@ -57,7 +57,7 @@ final class RequirementTypeListResponse implements BaseModel
     }
 
     /**
-     * @param list<DocReqsRequirementTypeShape> $data
+     * @param list<DocReqsRequirementType|DocReqsRequirementTypeShape> $data
      */
     public function withData(array $data): self
     {

@@ -11,12 +11,16 @@ use Telnyx\DocumentLinks\DocumentLinkListParams;
 use Telnyx\DocumentLinks\DocumentLinkListResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface DocumentLinksRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|DocumentLinkListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<DocumentLinkListResponse>>
      *
@@ -24,6 +28,6 @@ interface DocumentLinksRawContract
      */
     public function list(
         array|DocumentLinkListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

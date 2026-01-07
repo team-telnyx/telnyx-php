@@ -9,12 +9,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\NumberReservations\Actions\ActionExtendResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ActionsRawContract
 {
     /**
      * @api
      *
      * @param string $numberReservationID the number reservation ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionExtendResponse>
      *
@@ -22,6 +26,6 @@ interface ActionsRawContract
      */
     public function extend(
         string $numberReservationID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

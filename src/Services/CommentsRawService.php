@@ -9,6 +9,7 @@ use Telnyx\Comments\CommentCreateParams;
 use Telnyx\Comments\CommentCreateParams\CommentRecordType;
 use Telnyx\Comments\CommentGetResponse;
 use Telnyx\Comments\CommentListParams;
+use Telnyx\Comments\CommentListParams\Filter;
 use Telnyx\Comments\CommentListResponse;
 use Telnyx\Comments\CommentMarkAsReadResponse;
 use Telnyx\Comments\CommentNewResponse;
@@ -17,6 +18,10 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CommentsRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Comments\CommentListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class CommentsRawService implements CommentsRawContract
 {
     // @phpstan-ignore-next-line
@@ -33,8 +38,9 @@ final class CommentsRawService implements CommentsRawContract
      * @param array{
      *   body?: string,
      *   commentRecordID?: string,
-     *   commentRecordType?: 'sub_number_order'|'requirement_group'|CommentRecordType,
+     *   commentRecordType?: CommentRecordType|value-of<CommentRecordType>,
      * }|CommentCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CommentNewResponse>
      *
@@ -42,7 +48,7 @@ final class CommentsRawService implements CommentsRawContract
      */
     public function create(
         array|CommentCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CommentCreateParams::parseRequest(
             $params,
@@ -65,6 +71,7 @@ final class CommentsRawService implements CommentsRawContract
      * Retrieve a comment
      *
      * @param string $id the comment ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CommentGetResponse>
      *
@@ -72,7 +79,7 @@ final class CommentsRawService implements CommentsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -88,12 +95,8 @@ final class CommentsRawService implements CommentsRawContract
      *
      * Retrieve all comments
      *
-     * @param array{
-     *   filter?: array{
-     *     commentRecordID?: string,
-     *     commentRecordType?: 'sub_number_order'|'requirement_group'|CommentListParams\Filter\CommentRecordType,
-     *   },
-     * }|CommentListParams $params
+     * @param array{filter?: Filter|FilterShape}|CommentListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CommentListResponse>
      *
@@ -101,7 +104,7 @@ final class CommentsRawService implements CommentsRawContract
      */
     public function list(
         array|CommentListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CommentListParams::parseRequest(
             $params,
@@ -124,6 +127,7 @@ final class CommentsRawService implements CommentsRawContract
      * Mark a comment as read
      *
      * @param string $id the comment ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CommentMarkAsReadResponse>
      *
@@ -131,7 +135,7 @@ final class CommentsRawService implements CommentsRawContract
      */
     public function markAsRead(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

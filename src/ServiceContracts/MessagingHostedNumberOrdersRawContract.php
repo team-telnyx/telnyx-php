@@ -21,12 +21,16 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesPa
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface MessagingHostedNumberOrdersRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|MessagingHostedNumberOrderCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingHostedNumberOrderNewResponse>
      *
@@ -34,13 +38,14 @@ interface MessagingHostedNumberOrdersRawContract
      */
     public function create(
         array|MessagingHostedNumberOrderCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the type of resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingHostedNumberOrderGetResponse>
      *
@@ -48,13 +53,14 @@ interface MessagingHostedNumberOrdersRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|MessagingHostedNumberOrderListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<MessagingHostedNumberOrder>>
      *
@@ -62,13 +68,14 @@ interface MessagingHostedNumberOrdersRawContract
      */
     public function list(
         array|MessagingHostedNumberOrderListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the messaging hosted number order to delete
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingHostedNumberOrderDeleteResponse>
      *
@@ -76,13 +83,14 @@ interface MessagingHostedNumberOrdersRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|MessagingHostedNumberOrderCheckEligibilityParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingHostedNumberOrderCheckEligibilityResponse>
      *
@@ -90,7 +98,7 @@ interface MessagingHostedNumberOrdersRawContract
      */
     public function checkEligibility(
         array|MessagingHostedNumberOrderCheckEligibilityParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -98,6 +106,7 @@ interface MessagingHostedNumberOrdersRawContract
      *
      * @param string $id order ID to have a verification code created
      * @param array<string,mixed>|MessagingHostedNumberOrderCreateVerificationCodesParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingHostedNumberOrderNewVerificationCodesResponse>
      *
@@ -106,7 +115,7 @@ interface MessagingHostedNumberOrdersRawContract
     public function createVerificationCodes(
         string $id,
         array|MessagingHostedNumberOrderCreateVerificationCodesParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -114,6 +123,7 @@ interface MessagingHostedNumberOrdersRawContract
      *
      * @param string $id order ID related to the validation codes
      * @param array<string,mixed>|MessagingHostedNumberOrderValidateCodesParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingHostedNumberOrderValidateCodesResponse>
      *
@@ -122,6 +132,6 @@ interface MessagingHostedNumberOrdersRawContract
     public function validateCodes(
         string $id,
         array|MessagingHostedNumberOrderValidateCodesParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

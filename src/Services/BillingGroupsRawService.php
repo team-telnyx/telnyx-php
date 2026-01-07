@@ -20,6 +20,9 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BillingGroupsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class BillingGroupsRawService implements BillingGroupsRawContract
 {
     // @phpstan-ignore-next-line
@@ -34,6 +37,7 @@ final class BillingGroupsRawService implements BillingGroupsRawContract
      * Create a billing group
      *
      * @param array{name?: string}|BillingGroupCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BillingGroupNewResponse>
      *
@@ -41,7 +45,7 @@ final class BillingGroupsRawService implements BillingGroupsRawContract
      */
     public function create(
         array|BillingGroupCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = BillingGroupCreateParams::parseRequest(
             $params,
@@ -64,6 +68,7 @@ final class BillingGroupsRawService implements BillingGroupsRawContract
      * Get a billing group
      *
      * @param string $id The id of the billing group
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BillingGroupGetResponse>
      *
@@ -71,7 +76,7 @@ final class BillingGroupsRawService implements BillingGroupsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -89,6 +94,7 @@ final class BillingGroupsRawService implements BillingGroupsRawContract
      *
      * @param string $id The id of the billing group
      * @param array{name?: string}|BillingGroupUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BillingGroupUpdateResponse>
      *
@@ -97,7 +103,7 @@ final class BillingGroupsRawService implements BillingGroupsRawContract
     public function update(
         string $id,
         array|BillingGroupUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = BillingGroupUpdateParams::parseRequest(
             $params,
@@ -120,6 +126,7 @@ final class BillingGroupsRawService implements BillingGroupsRawContract
      * List all billing groups
      *
      * @param array{pageNumber?: int, pageSize?: int}|BillingGroupListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<BillingGroup>>
      *
@@ -127,7 +134,7 @@ final class BillingGroupsRawService implements BillingGroupsRawContract
      */
     public function list(
         array|BillingGroupListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = BillingGroupListParams::parseRequest(
             $params,
@@ -154,6 +161,7 @@ final class BillingGroupsRawService implements BillingGroupsRawContract
      * Delete a billing group
      *
      * @param string $id The id of the billing group
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BillingGroupDeleteResponse>
      *
@@ -161,7 +169,7 @@ final class BillingGroupsRawService implements BillingGroupsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

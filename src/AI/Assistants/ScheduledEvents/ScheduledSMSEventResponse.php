@@ -11,6 +11,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type ConversationMetadataVariants from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledSMSEventResponse\ConversationMetadata
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledSMSEventResponse\ConversationMetadata
  *
  * @phpstan-type ScheduledSMSEventResponseShape = array{
@@ -59,7 +60,7 @@ final class ScheduledSMSEventResponse implements BaseModel
     #[Optional('conversation_id')]
     public ?string $conversationID;
 
-    /** @var array<string,string|int|bool>|null $conversationMetadata */
+    /** @var array<string,ConversationMetadataVariants>|null $conversationMetadata */
     #[Optional('conversation_metadata', map: ConversationMetadata::class)]
     public ?array $conversationMetadata;
 

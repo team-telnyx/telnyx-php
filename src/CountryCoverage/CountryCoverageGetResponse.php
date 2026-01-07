@@ -13,7 +13,7 @@ use Telnyx\CountryCoverage\CountryCoverageGetResponse\Data;
  * @phpstan-import-type DataShape from \Telnyx\CountryCoverage\CountryCoverageGetResponse\Data
  *
  * @phpstan-type CountryCoverageGetResponseShape = array{
- *   data?: array<string,DataShape>|null
+ *   data?: array<string,Data|DataShape>|null
  * }
  */
 final class CountryCoverageGetResponse implements BaseModel
@@ -35,7 +35,7 @@ final class CountryCoverageGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,DataShape>|null $data
+     * @param array<string,Data|DataShape>|null $data
      */
     public static function with(?array $data = null): self
     {
@@ -47,7 +47,7 @@ final class CountryCoverageGetResponse implements BaseModel
     }
 
     /**
-     * @param array<string,DataShape> $data
+     * @param array<string,Data|DataShape> $data
      */
     public function withData(array $data): self
     {

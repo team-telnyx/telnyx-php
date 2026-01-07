@@ -12,31 +12,38 @@ use Telnyx\AI\Conversations\ConversationUpdateResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type MetadataShape from \Telnyx\AI\Conversations\ConversationAddMessageParams\Metadata
+ * @phpstan-import-type ToolChoiceShape from \Telnyx\AI\Conversations\ConversationAddMessageParams\ToolChoice
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ConversationsContract
 {
     /**
      * @api
      *
      * @param array<string,string> $metadata metadata associated with the conversation
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         ?array $metadata = null,
         ?string $name = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): Conversation;
 
     /**
      * @api
      *
      * @param string $conversationID The ID of the conversation to retrieve
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $conversationID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ConversationGetResponse;
 
     /**
@@ -44,13 +51,14 @@ interface ConversationsContract
      *
      * @param string $conversationID The ID of the conversation to update
      * @param array<string,string> $metadata metadata associated with the conversation
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $conversationID,
         ?array $metadata = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ConversationUpdateResponse;
 
     /**
@@ -68,6 +76,7 @@ interface ConversationsContract
      * @param string $name Filter by conversation Name (e.g. `name=like.Voice%`)
      * @param string $or Apply OR conditions using PostgREST syntax (e.g., `or=(created_at.gte.2025-04-01,last_message_at.gte.2025-04-01)`)
      * @param string $order Order the results by specific fields (e.g., `order=created_at.desc` or `order=last_message_at.asc`)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -84,28 +93,30 @@ interface ConversationsContract
         ?string $name = null,
         ?string $or = null,
         ?string $order = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ConversationListResponse;
 
     /**
      * @api
      *
      * @param string $conversationID The ID of the conversation to delete
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $conversationID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed;
 
     /**
      * @api
      *
      * @param string $conversationID The ID of the conversation
-     * @param array<string,mixed> $metadata
+     * @param array<string,MetadataShape> $metadata
      * @param list<array<string,mixed>> $toolCalls
-     * @param string|array<string,mixed> $toolChoice
+     * @param ToolChoiceShape $toolChoice
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -115,20 +126,22 @@ interface ConversationsContract
         string $content = '',
         ?array $metadata = null,
         ?string $name = null,
-        string|\DateTimeInterface|null $sentAt = null,
+        ?\DateTimeInterface $sentAt = null,
         ?string $toolCallID = null,
         ?array $toolCalls = null,
         string|array|null $toolChoice = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieveConversationsInsights(
         string $conversationID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ConversationGetConversationsInsightsResponse;
 }

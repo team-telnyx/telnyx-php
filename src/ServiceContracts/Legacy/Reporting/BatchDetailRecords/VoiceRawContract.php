@@ -14,12 +14,16 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceListResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface VoiceRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|VoiceCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VoiceNewResponse>
      *
@@ -27,11 +31,13 @@ interface VoiceRawContract
      */
     public function create(
         array|VoiceCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VoiceGetResponse>
      *
@@ -39,20 +45,26 @@ interface VoiceRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<VoiceListResponse>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse;
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VoiceDeleteResponse>
      *
@@ -60,17 +72,19 @@ interface VoiceRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VoiceGetFieldsResponse>
      *
      * @throws APIException
      */
     public function retrieveFields(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

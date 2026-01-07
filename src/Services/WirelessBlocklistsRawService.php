@@ -21,6 +21,9 @@ use Telnyx\WirelessBlocklists\WirelessBlocklistNewResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams;
 use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class WirelessBlocklistsRawService implements WirelessBlocklistsRawContract
 {
     // @phpstan-ignore-next-line
@@ -35,8 +38,9 @@ final class WirelessBlocklistsRawService implements WirelessBlocklistsRawContrac
      * Create a Wireless Blocklist to prevent SIMs from connecting to certain networks.
      *
      * @param array{
-     *   name: string, type: 'country'|'mcc'|'plmn'|Type, values: list<string>
+     *   name: string, type: Type|value-of<Type>, values: list<string>
      * }|WirelessBlocklistCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WirelessBlocklistNewResponse>
      *
@@ -44,7 +48,7 @@ final class WirelessBlocklistsRawService implements WirelessBlocklistsRawContrac
      */
     public function create(
         array|WirelessBlocklistCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = WirelessBlocklistCreateParams::parseRequest(
             $params,
@@ -67,6 +71,7 @@ final class WirelessBlocklistsRawService implements WirelessBlocklistsRawContrac
      * Retrieve information about a Wireless Blocklist.
      *
      * @param string $id identifies the wireless blocklist
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WirelessBlocklistGetResponse>
      *
@@ -74,7 +79,7 @@ final class WirelessBlocklistsRawService implements WirelessBlocklistsRawContrac
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -92,9 +97,10 @@ final class WirelessBlocklistsRawService implements WirelessBlocklistsRawContrac
      *
      * @param array{
      *   name?: string,
-     *   type?: 'country'|'mcc'|'plmn'|WirelessBlocklistUpdateParams\Type,
+     *   type?: WirelessBlocklistUpdateParams\Type|value-of<WirelessBlocklistUpdateParams\Type>,
      *   values?: list<string>,
      * }|WirelessBlocklistUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WirelessBlocklistUpdateResponse>
      *
@@ -102,7 +108,7 @@ final class WirelessBlocklistsRawService implements WirelessBlocklistsRawContrac
      */
     public function update(
         array|WirelessBlocklistUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = WirelessBlocklistUpdateParams::parseRequest(
             $params,
@@ -131,6 +137,7 @@ final class WirelessBlocklistsRawService implements WirelessBlocklistsRawContrac
      *   pageNumber?: int,
      *   pageSize?: int,
      * }|WirelessBlocklistListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<WirelessBlocklist>>
      *
@@ -138,7 +145,7 @@ final class WirelessBlocklistsRawService implements WirelessBlocklistsRawContrac
      */
     public function list(
         array|WirelessBlocklistListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = WirelessBlocklistListParams::parseRequest(
             $params,
@@ -171,6 +178,7 @@ final class WirelessBlocklistsRawService implements WirelessBlocklistsRawContrac
      * Deletes the Wireless Blocklist.
      *
      * @param string $id identifies the wireless blocklist
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WirelessBlocklistDeleteResponse>
      *
@@ -178,7 +186,7 @@ final class WirelessBlocklistsRawService implements WirelessBlocklistsRawContrac
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

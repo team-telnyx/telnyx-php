@@ -14,14 +14,19 @@ use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsResponse;
 use Telnyx\SimCards\Actions\ActionDisableResponse;
 use Telnyx\SimCards\Actions\ActionEnableResponse;
 use Telnyx\SimCards\Actions\ActionGetResponse;
-use Telnyx\SimCards\Actions\ActionListParams\Filter\ActionType;
-use Telnyx\SimCards\Actions\ActionListParams\Filter\Status;
+use Telnyx\SimCards\Actions\ActionListParams\Filter;
+use Telnyx\SimCards\Actions\ActionListParams\Page;
 use Telnyx\SimCards\Actions\ActionRemovePublicIPResponse;
 use Telnyx\SimCards\Actions\ActionSetPublicIPResponse;
 use Telnyx\SimCards\Actions\ActionSetStandbyResponse;
 use Telnyx\SimCards\Actions\ActionValidateRegistrationCodesResponse;
 use Telnyx\SimCards\Actions\SimCardAction;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\SimCards\Actions\ActionListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\SimCards\Actions\ActionListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsService implements ActionsContract
 {
     /**
@@ -43,12 +48,13 @@ final class ActionsService implements ActionsContract
      * This API fetches detailed information about a SIM card action to follow-up on an existing asynchronous operation.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ActionGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -61,24 +67,18 @@ final class ActionsService implements ActionsContract
      *
      * This API lists a paginated collection of SIM card actions. It enables exploring a collection of existing asynchronous operations using specific filters.
      *
-     * @param array{
-     *   actionType?: 'enable'|'enable_standby_sim_card'|'disable'|'set_standby'|'remove_public_ip'|'set_public_ip'|ActionType,
-     *   bulkSimCardActionID?: string,
-     *   simCardID?: string,
-     *   status?: 'in-progress'|'completed'|'failed'|Status,
-     * } $filter Consolidated filter parameter for SIM card actions (deepObject style). Originally: filter[sim_card_id], filter[status], filter[bulk_sim_card_action_id], filter[action_type]
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
+     * @param Filter|FilterShape $filter Consolidated filter parameter for SIM card actions (deepObject style). Originally: filter[sim_card_id], filter[status], filter[bulk_sim_card_action_id], filter[action_type]
+     * @param Page|PageShape $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<SimCardAction>
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null,
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
@@ -95,12 +95,13 @@ final class ActionsService implements ActionsContract
      * For each SIM Card a SIM Card Action will be generated. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api/wireless/list-sim-card-actions) API.
      *
      * @param list<string> $simCardIDs
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function bulkSetPublicIPs(
         array $simCardIDs,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ActionBulkSetPublicIPsResponse {
         $params = Util::removeNulls(['simCardIDs' => $simCardIDs]);
 
@@ -117,12 +118,13 @@ final class ActionsService implements ActionsContract
      * The API will trigger an asynchronous operation called a SIM Card Action. Transitioning to the disabled state may take a period of time. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api/wireless/list-sim-card-actions) API.
      *
      * @param string $id identifies the SIM
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function disable(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ActionDisableResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->disable($id, requestOptions: $requestOptions);
@@ -138,12 +140,13 @@ final class ActionsService implements ActionsContract
      * The API will trigger an asynchronous operation called a SIM Card Action. Transitioning to the enabled state may take a period of time. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api/wireless/list-sim-card-actions) API.
      *
      * @param string $id identifies the SIM
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function enable(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ActionEnableResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->enable($id, requestOptions: $requestOptions);
@@ -158,12 +161,13 @@ final class ActionsService implements ActionsContract
      *  The API will trigger an asynchronous operation called a SIM Card Action. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api/wireless/list-sim-card-actions) API.
      *
      * @param string $id identifies the SIM
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function removePublicIP(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ActionRemovePublicIPResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->removePublicIP($id, requestOptions: $requestOptions);
@@ -180,13 +184,14 @@ final class ActionsService implements ActionsContract
      *
      * @param string $id identifies the SIM
      * @param string $regionCode The code of the region where the public IP should be assigned. A list of available regions can be found at the regions endpoint
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function setPublicIP(
         string $id,
         ?string $regionCode = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionSetPublicIPResponse {
         $params = Util::removeNulls(['regionCode' => $regionCode]);
 
@@ -204,12 +209,13 @@ final class ActionsService implements ActionsContract
      * The API will trigger an asynchronous operation called a SIM Card Action. Transitioning to the standby state may take a period of time. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api/wireless/list-sim-card-actions) API.
      *
      * @param string $id identifies the SIM
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function setStandby(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ActionSetStandbyResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->setStandby($id, requestOptions: $requestOptions);
@@ -223,12 +229,13 @@ final class ActionsService implements ActionsContract
      * It validates whether SIM card registration codes are valid or not.
      *
      * @param list<string> $registrationCodes
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function validateRegistrationCodes(
         ?array $registrationCodes = null,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): ActionValidateRegistrationCodesResponse {
         $params = Util::removeNulls(['registrationCodes' => $registrationCodes]);
 

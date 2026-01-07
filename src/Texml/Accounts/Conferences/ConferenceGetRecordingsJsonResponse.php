@@ -19,7 +19,7 @@ use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody;
  *   page?: int|null,
  *   pageSize?: int|null,
  *   previousPageUri?: string|null,
- *   recordings?: list<TexmlGetCallRecordingResponseBodyShape>|null,
+ *   recordings?: list<TexmlGetCallRecordingResponseBody|TexmlGetCallRecordingResponseBodyShape>|null,
  *   start?: int|null,
  *   uri?: string|null,
  * }
@@ -91,7 +91,7 @@ final class ConferenceGetRecordingsJsonResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TexmlGetCallRecordingResponseBodyShape>|null $recordings
+     * @param list<TexmlGetCallRecordingResponseBody|TexmlGetCallRecordingResponseBodyShape>|null $recordings
      */
     public static function with(
         ?int $end = null,
@@ -186,7 +186,7 @@ final class ConferenceGetRecordingsJsonResponse implements BaseModel
     }
 
     /**
-     * @param list<TexmlGetCallRecordingResponseBodyShape> $recordings
+     * @param list<TexmlGetCallRecordingResponseBody|TexmlGetCallRecordingResponseBodyShape> $recordings
      */
     public function withRecordings(array $recordings): self
     {

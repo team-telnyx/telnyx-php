@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   enableRecording?: bool|null,
  *   maxParticipants?: int|null,
  *   recordType?: string|null,
- *   sessions?: list<RoomSessionShape>|null,
+ *   sessions?: list<RoomSession|RoomSessionShape>|null,
  *   uniqueName?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
  *   webhookEventFailoverURL?: string|null,
@@ -108,7 +108,7 @@ final class Room implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RoomSessionShape>|null $sessions
+     * @param list<RoomSession|RoomSessionShape>|null $sessions
      */
     public static function with(
         ?string $id = null,
@@ -206,7 +206,7 @@ final class Room implements BaseModel
     }
 
     /**
-     * @param list<RoomSessionShape> $sessions
+     * @param list<RoomSession|RoomSessionShape> $sessions
      */
     public function withSessions(array $sessions): self
     {

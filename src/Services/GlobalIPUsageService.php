@@ -8,9 +8,14 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse;
+use Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams\Filter;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPUsageContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class GlobalIPUsageService implements GlobalIPUsageContract
 {
     /**
@@ -31,15 +36,14 @@ final class GlobalIPUsageService implements GlobalIPUsageContract
      *
      * Global IP Usage Metrics
      *
-     * @param array{
-     *   globalIPID?: string|array{in?: string}
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in]
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
-        ?array $filter = null,
-        ?RequestOptions $requestOptions = null
+        Filter|array|null $filter = null,
+        RequestOptions|array|null $requestOptions = null,
     ): GlobalIPUsageGetResponse {
         $params = Util::removeNulls(['filter' => $filter]);
 

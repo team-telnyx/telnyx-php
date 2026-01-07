@@ -10,6 +10,9 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface InsightsRawContract
 {
     /**
@@ -17,6 +20,7 @@ interface InsightsRawContract
      *
      * @param string $insightID The ID of the insight
      * @param array<string,mixed>|InsightAssignParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -25,7 +29,7 @@ interface InsightsRawContract
     public function assign(
         string $insightID,
         array|InsightAssignParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -33,6 +37,7 @@ interface InsightsRawContract
      *
      * @param string $insightID The ID of the insight
      * @param array<string,mixed>|InsightDeleteUnassignParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -41,6 +46,6 @@ interface InsightsRawContract
     public function deleteUnassign(
         string $insightID,
         array|InsightDeleteUnassignParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

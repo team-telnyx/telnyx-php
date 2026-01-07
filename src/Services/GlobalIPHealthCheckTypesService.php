@@ -10,6 +10,9 @@ use Telnyx\GlobalIPHealthCheckTypes\GlobalIPHealthCheckTypeListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPHealthCheckTypesContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class GlobalIPHealthCheckTypesService implements GlobalIPHealthCheckTypesContract
 {
     /**
@@ -30,10 +33,12 @@ final class GlobalIPHealthCheckTypesService implements GlobalIPHealthCheckTypesC
      *
      * List all Global IP Health check types.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): GlobalIPHealthCheckTypeListResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(requestOptions: $requestOptions);

@@ -13,7 +13,7 @@ use Telnyx\AuthenticationProviders\AuthenticationProviderListParams\Sort;
 use Telnyx\AuthenticationProviders\AuthenticationProviderNewResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateParams;
 use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateResponse;
-use Telnyx\AuthenticationProviders\Settings\IdpCertFingerprintAlgorithm;
+use Telnyx\AuthenticationProviders\Settings;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -22,6 +22,10 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AuthenticationProvidersRawContract;
 
+/**
+ * @phpstan-import-type SettingsShape from \Telnyx\AuthenticationProviders\Settings
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AuthenticationProvidersRawService implements AuthenticationProvidersRawContract
 {
     // @phpstan-ignore-next-line
@@ -37,16 +41,12 @@ final class AuthenticationProvidersRawService implements AuthenticationProviders
      *
      * @param array{
      *   name: string,
-     *   settings: array{
-     *     idpCertFingerprint: string,
-     *     idpEntityID: string,
-     *     idpSSOTargetURL: string,
-     *     idpCertFingerprintAlgorithm?: 'sha1'|'sha256'|'sha384'|'sha512'|IdpCertFingerprintAlgorithm,
-     *   },
+     *   settings: Settings|SettingsShape,
      *   shortName: string,
      *   active?: bool,
      *   settingsURL?: string,
      * }|AuthenticationProviderCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AuthenticationProviderNewResponse>
      *
@@ -54,7 +54,7 @@ final class AuthenticationProvidersRawService implements AuthenticationProviders
      */
     public function create(
         array|AuthenticationProviderCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AuthenticationProviderCreateParams::parseRequest(
             $params,
@@ -77,6 +77,7 @@ final class AuthenticationProvidersRawService implements AuthenticationProviders
      * Retrieves the details of an existing authentication provider.
      *
      * @param string $id authentication provider ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AuthenticationProviderGetResponse>
      *
@@ -84,7 +85,7 @@ final class AuthenticationProvidersRawService implements AuthenticationProviders
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -104,15 +105,11 @@ final class AuthenticationProvidersRawService implements AuthenticationProviders
      * @param array{
      *   active?: bool,
      *   name?: string,
-     *   settings?: array{
-     *     idpCertFingerprint: string,
-     *     idpEntityID: string,
-     *     idpSSOTargetURL: string,
-     *     idpCertFingerprintAlgorithm?: 'sha1'|'sha256'|'sha384'|'sha512'|IdpCertFingerprintAlgorithm,
-     *   },
+     *   settings?: Settings|SettingsShape,
      *   settingsURL?: string,
      *   shortName?: string,
      * }|AuthenticationProviderUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AuthenticationProviderUpdateResponse>
      *
@@ -121,7 +118,7 @@ final class AuthenticationProvidersRawService implements AuthenticationProviders
     public function update(
         string $id,
         array|AuthenticationProviderUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AuthenticationProviderUpdateParams::parseRequest(
             $params,
@@ -146,6 +143,7 @@ final class AuthenticationProvidersRawService implements AuthenticationProviders
      * @param array{
      *   pageNumber?: int, pageSize?: int, sort?: value-of<Sort>
      * }|AuthenticationProviderListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<AuthenticationProvider>>
      *
@@ -153,7 +151,7 @@ final class AuthenticationProvidersRawService implements AuthenticationProviders
      */
     public function list(
         array|AuthenticationProviderListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AuthenticationProviderListParams::parseRequest(
             $params,
@@ -180,6 +178,7 @@ final class AuthenticationProvidersRawService implements AuthenticationProviders
      * Deletes an existing authentication provider.
      *
      * @param string $id authentication provider ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AuthenticationProviderDeleteResponse>
      *
@@ -187,7 +186,7 @@ final class AuthenticationProvidersRawService implements AuthenticationProviders
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

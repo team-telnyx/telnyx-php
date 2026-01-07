@@ -11,12 +11,16 @@ use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportCreateParams;
 use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportGetResponse;
 use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportNewResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface SubNumberOrdersReportRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|SubNumberOrdersReportCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SubNumberOrdersReportNewResponse>
      *
@@ -24,13 +28,14 @@ interface SubNumberOrdersReportRawContract
      */
     public function create(
         array|SubNumberOrdersReportCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $reportID The unique identifier of the sub number orders report
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SubNumberOrdersReportGetResponse>
      *
@@ -38,13 +43,14 @@ interface SubNumberOrdersReportRawContract
      */
     public function retrieve(
         string $reportID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $reportID The unique identifier of the sub number orders report
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
      *
@@ -52,6 +58,6 @@ interface SubNumberOrdersReportRawContract
      */
     public function download(
         string $reportID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

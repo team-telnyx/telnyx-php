@@ -18,7 +18,7 @@ use Telnyx\OAuth\OAuthGetResponse\Data\RequestedScope;
  *   name?: string|null,
  *   policyUri?: string|null,
  *   redirectUri?: string|null,
- *   requestedScopes?: list<RequestedScopeShape>|null,
+ *   requestedScopes?: list<RequestedScope|RequestedScopeShape>|null,
  *   tosUri?: string|null,
  *   verified?: bool|null,
  * }
@@ -84,7 +84,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RequestedScopeShape>|null $requestedScopes
+     * @param list<RequestedScope|RequestedScopeShape>|null $requestedScopes
      */
     public static function with(
         ?string $clientID = null,
@@ -166,7 +166,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<RequestedScopeShape> $requestedScopes
+     * @param list<RequestedScope|RequestedScopeShape> $requestedScopes
      */
     public function withRequestedScopes(array $requestedScopes): self
     {

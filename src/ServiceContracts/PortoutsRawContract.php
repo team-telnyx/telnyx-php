@@ -17,12 +17,16 @@ use Telnyx\Portouts\PortoutUpdateStatusParams\Status;
 use Telnyx\Portouts\PortoutUpdateStatusResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface PortoutsRawContract
 {
     /**
      * @api
      *
      * @param string $id Portout id
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PortoutGetResponse>
      *
@@ -30,13 +34,14 @@ interface PortoutsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|PortoutListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PortoutDetails>>
      *
@@ -44,7 +49,7 @@ interface PortoutsRawContract
      */
     public function list(
         array|PortoutListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -52,6 +57,7 @@ interface PortoutsRawContract
      *
      * @param string $portoutID identifies a port out order
      * @param array<string,mixed>|PortoutListRejectionCodesParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PortoutListRejectionCodesResponse>
      *
@@ -60,14 +66,15 @@ interface PortoutsRawContract
     public function listRejectionCodes(
         string $portoutID,
         array|PortoutListRejectionCodesParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
-     * @param Status|value-of<Status> $status Path param: Updated portout status
+     * @param Status|string $status Path param: Updated portout status
      * @param array<string,mixed>|PortoutUpdateStatusParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PortoutUpdateStatusResponse>
      *
@@ -76,6 +83,6 @@ interface PortoutsRawContract
     public function updateStatus(
         Status|string $status,
         array|PortoutUpdateStatusParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

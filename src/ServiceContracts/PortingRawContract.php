@@ -9,16 +9,21 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Porting\PortingListUkCarriersResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface PortingRawContract
 {
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PortingListUkCarriersResponse>
      *
      * @throws APIException
      */
     public function listUkCarriers(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

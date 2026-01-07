@@ -12,12 +12,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPaginationTopLevelArray;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface McpServersContract
 {
     /**
      * @api
      *
      * @param list<string>|null $allowedTools
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -27,23 +31,26 @@ interface McpServersContract
         string $url,
         ?array $allowedTools = null,
         ?string $apiKeyRef = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): McpServerNewResponse;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $mcpServerID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): McpServerGetResponse;
 
     /**
      * @api
      *
      * @param list<string>|null $allowedTools
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -52,15 +59,17 @@ interface McpServersContract
         ?string $id = null,
         ?array $allowedTools = null,
         ?string $apiKeyRef = null,
-        string|\DateTimeInterface|null $createdAt = null,
+        ?\DateTimeInterface $createdAt = null,
         ?string $name = null,
         ?string $type = null,
         ?string $url = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): McpServerUpdateResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPaginationTopLevelArray<McpServerListResponse>
      *
@@ -71,16 +80,18 @@ interface McpServersContract
         int $pageSize = 20,
         ?string $type = null,
         ?string $url = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPaginationTopLevelArray;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $mcpServerID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed;
 }

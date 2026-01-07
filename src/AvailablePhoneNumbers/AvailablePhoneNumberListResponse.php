@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type AvailablePhoneNumbersMetadataShape from \Telnyx\AvailablePhoneNumbersMetadata
  *
  * @phpstan-type AvailablePhoneNumberListResponseShape = array{
- *   data?: list<DataShape>|null,
+ *   data?: list<Data|DataShape>|null,
  *   meta?: null|AvailablePhoneNumbersMetadata|AvailablePhoneNumbersMetadataShape,
  *   metadata?: null|AvailablePhoneNumbersMetadata|AvailablePhoneNumbersMetadataShape,
  * }
@@ -45,7 +45,7 @@ final class AvailablePhoneNumberListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DataShape>|null $data
+     * @param list<Data|DataShape>|null $data
      * @param AvailablePhoneNumbersMetadata|AvailablePhoneNumbersMetadataShape|null $meta
      * @param AvailablePhoneNumbersMetadata|AvailablePhoneNumbersMetadataShape|null $metadata
      */
@@ -64,7 +64,7 @@ final class AvailablePhoneNumberListResponse implements BaseModel
     }
 
     /**
-     * @param list<DataShape> $data
+     * @param list<Data|DataShape> $data
      */
     public function withData(array $data): self
     {

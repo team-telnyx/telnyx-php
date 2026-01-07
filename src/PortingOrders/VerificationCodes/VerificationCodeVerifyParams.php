@@ -18,7 +18,7 @@ use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyParams\Verifica
  * @phpstan-import-type VerificationCodeShape from \Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyParams\VerificationCode
  *
  * @phpstan-type VerificationCodeVerifyParamsShape = array{
- *   verificationCodes?: list<VerificationCodeShape>|null
+ *   verificationCodes?: list<VerificationCode|VerificationCodeShape>|null
  * }
  */
 final class VerificationCodeVerifyParams implements BaseModel
@@ -41,7 +41,7 @@ final class VerificationCodeVerifyParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VerificationCodeShape>|null $verificationCodes
+     * @param list<VerificationCode|VerificationCodeShape>|null $verificationCodes
      */
     public static function with(?array $verificationCodes = null): self
     {
@@ -53,7 +53,7 @@ final class VerificationCodeVerifyParams implements BaseModel
     }
 
     /**
-     * @param list<VerificationCodeShape> $verificationCodes
+     * @param list<VerificationCode|VerificationCodeShape> $verificationCodes
      */
     public function withVerificationCodes(array $verificationCodes): self
     {

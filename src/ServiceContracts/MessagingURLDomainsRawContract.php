@@ -11,12 +11,16 @@ use Telnyx\MessagingURLDomains\MessagingURLDomainListParams;
 use Telnyx\MessagingURLDomains\MessagingURLDomainListResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface MessagingURLDomainsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|MessagingURLDomainListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<MessagingURLDomainListResponse>>
      *
@@ -24,6 +28,6 @@ interface MessagingURLDomainsRawContract
      */
     public function list(
         array|MessagingURLDomainListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

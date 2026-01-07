@@ -10,12 +10,16 @@ use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementG
 use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementRetrieveParams;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface PhoneNumbersRegulatoryRequirementsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|PhoneNumbersRegulatoryRequirementRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumbersRegulatoryRequirementGetResponse>
      *
@@ -23,6 +27,6 @@ interface PhoneNumbersRegulatoryRequirementsRawContract
      */
     public function retrieve(
         array|PhoneNumbersRegulatoryRequirementRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

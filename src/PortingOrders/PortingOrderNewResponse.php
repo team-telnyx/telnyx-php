@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type PortingOrderShape from \Telnyx\PortingOrders\PortingOrder
  *
  * @phpstan-type PortingOrderNewResponseShape = array{
- *   data?: list<PortingOrderShape>|null
+ *   data?: list<PortingOrder|PortingOrderShape>|null
  * }
  */
 final class PortingOrderNewResponse implements BaseModel
@@ -34,7 +34,7 @@ final class PortingOrderNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PortingOrderShape>|null $data
+     * @param list<PortingOrder|PortingOrderShape>|null $data
      */
     public static function with(?array $data = null): self
     {
@@ -46,7 +46,7 @@ final class PortingOrderNewResponse implements BaseModel
     }
 
     /**
-     * @param list<PortingOrderShape> $data
+     * @param list<PortingOrder|PortingOrderShape> $data
      */
     public function withData(array $data): self
     {

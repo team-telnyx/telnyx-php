@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   createdAt: \DateTimeInterface,
  *   name: string,
  *   description?: string|null,
- *   insights?: list<InsightTemplateShape>|null,
+ *   insights?: list<InsightTemplate|InsightTemplateShape>|null,
  *   webhook?: string|null,
  * }
  */
@@ -70,7 +70,7 @@ final class InsightTemplateGroup implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<InsightTemplateShape>|null $insights
+     * @param list<InsightTemplate|InsightTemplateShape>|null $insights
      */
     public static function with(
         string $id,
@@ -126,7 +126,7 @@ final class InsightTemplateGroup implements BaseModel
     }
 
     /**
-     * @param list<InsightTemplateShape> $insights
+     * @param list<InsightTemplate|InsightTemplateShape> $insights
      */
     public function withInsights(array $insights): self
     {

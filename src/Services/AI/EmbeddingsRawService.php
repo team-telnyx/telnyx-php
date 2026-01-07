@@ -20,6 +20,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\EmbeddingsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class EmbeddingsRawService implements EmbeddingsRawContract
 {
     // @phpstan-ignore-next-line
@@ -56,9 +59,10 @@ final class EmbeddingsRawService implements EmbeddingsRawContract
      *   bucketName: string,
      *   documentChunkOverlapSize?: int,
      *   documentChunkSize?: int,
-     *   embeddingModel?: 'thenlper/gte-large'|'intfloat/multilingual-e5-large'|EmbeddingModel,
-     *   loader?: 'default'|'intercom'|Loader,
+     *   embeddingModel?: EmbeddingModel|value-of<EmbeddingModel>,
+     *   loader?: Loader|value-of<Loader>,
      * }|EmbeddingCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<EmbeddingResponse>
      *
@@ -66,7 +70,7 @@ final class EmbeddingsRawService implements EmbeddingsRawContract
      */
     public function create(
         array|EmbeddingCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = EmbeddingCreateParams::parseRequest(
             $params,
@@ -93,13 +97,15 @@ final class EmbeddingsRawService implements EmbeddingsRawContract
      * - `failure` - Task failed and no files were embedded successfully
      * - `partial_success` - Some files were embedded successfully, but at least one failed
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<EmbeddingGetResponse>
      *
      * @throws APIException
      */
     public function retrieve(
         string $taskID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -116,6 +122,7 @@ final class EmbeddingsRawService implements EmbeddingsRawContract
      * Retrieve tasks for the user that are either `queued`, `processing`, `failed`, `success` or `partial_success` based on the query string. Defaults to `queued` and `processing`.
      *
      * @param array{status?: list<string>}|EmbeddingListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<EmbeddingListResponse>
      *
@@ -123,7 +130,7 @@ final class EmbeddingsRawService implements EmbeddingsRawContract
      */
     public function list(
         array|EmbeddingListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = EmbeddingListParams::parseRequest(
             $params,
@@ -156,6 +163,7 @@ final class EmbeddingsRawService implements EmbeddingsRawContract
      * @param array{
      *   bucketName: string, query: string, numOfDocs?: int
      * }|EmbeddingSimilaritySearchParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<EmbeddingSimilaritySearchResponse>
      *
@@ -163,7 +171,7 @@ final class EmbeddingsRawService implements EmbeddingsRawContract
      */
     public function similaritySearch(
         array|EmbeddingSimilaritySearchParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = EmbeddingSimilaritySearchParams::parseRequest(
             $params,
@@ -186,6 +194,7 @@ final class EmbeddingsRawService implements EmbeddingsRawContract
      * Embed website content from a specified URL, including child pages up to 5 levels deep within the same domain. The process crawls and loads content from the main URL and its linked pages into a Telnyx Cloud Storage bucket. As soon as each webpage is added to the bucket, its content is immediately processed for embeddings, that can be used for [similarity search](https://developers.telnyx.com/api/inference/inference-embedding/post-embedding-similarity-search) and [clustering](https://developers.telnyx.com/docs/inference/clusters).
      *
      * @param array{bucketName: string, url: string}|EmbeddingURLParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<EmbeddingResponse>
      *
@@ -193,7 +202,7 @@ final class EmbeddingsRawService implements EmbeddingsRawContract
      */
     public function url(
         array|EmbeddingURLParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = EmbeddingURLParams::parseRequest(
             $params,

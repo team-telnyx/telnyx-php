@@ -17,12 +17,16 @@ use Telnyx\TelephonyCredentials\TelephonyCredentialNewResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialUpdateParams;
 use Telnyx\TelephonyCredentials\TelephonyCredentialUpdateResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface TelephonyCredentialsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|TelephonyCredentialCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TelephonyCredentialNewResponse>
      *
@@ -30,13 +34,14 @@ interface TelephonyCredentialsRawContract
      */
     public function create(
         array|TelephonyCredentialCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TelephonyCredentialGetResponse>
      *
@@ -44,7 +49,7 @@ interface TelephonyCredentialsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -52,6 +57,7 @@ interface TelephonyCredentialsRawContract
      *
      * @param string $id identifies the resource
      * @param array<string,mixed>|TelephonyCredentialUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TelephonyCredentialUpdateResponse>
      *
@@ -60,13 +66,14 @@ interface TelephonyCredentialsRawContract
     public function update(
         string $id,
         array|TelephonyCredentialUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|TelephonyCredentialListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<TelephonyCredential>>
      *
@@ -74,13 +81,14 @@ interface TelephonyCredentialsRawContract
      */
     public function list(
         array|TelephonyCredentialListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TelephonyCredentialDeleteResponse>
      *
@@ -88,13 +96,14 @@ interface TelephonyCredentialsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
      *
@@ -102,6 +111,6 @@ interface TelephonyCredentialsRawContract
      */
     public function createToken(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

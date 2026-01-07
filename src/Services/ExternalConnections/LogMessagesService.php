@@ -10,10 +10,17 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultPaginationForLogMessages;
 use Telnyx\ExternalConnections\LogMessages\LogMessageDismissResponse;
 use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse;
+use Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Filter;
+use Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Page;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ExternalConnections\LogMessagesContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class LogMessagesService implements LogMessagesContract
 {
     /**
@@ -35,12 +42,13 @@ final class LogMessagesService implements LogMessagesContract
      * Retrieve a log message for an external connection associated with your account.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): LogMessageGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -53,22 +61,18 @@ final class LogMessagesService implements LogMessagesContract
      *
      * Retrieve a list of log messages for all external connections associated with your account.
      *
-     * @param array{
-     *   externalConnectionID?: string,
-     *   telephoneNumber?: array{contains?: string, eq?: string},
-     * } $filter Filter parameter for log messages (deepObject style). Supports filtering by external_connection_id and telephone_number with eq/contains operations.
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Filter|FilterShape $filter Filter parameter for log messages (deepObject style). Supports filtering by external_connection_id and telephone_number with eq/contains operations.
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPaginationForLogMessages<LogMessageListResponse>
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null,
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPaginationForLogMessages {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
@@ -84,12 +88,13 @@ final class LogMessagesService implements LogMessagesContract
      * Dismiss a log message for an external connection associated with your account.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function dismiss(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): LogMessageDismissResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->dismiss($id, requestOptions: $requestOptions);

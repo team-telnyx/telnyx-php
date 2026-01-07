@@ -10,12 +10,16 @@ use Telnyx\Messaging10dlc\Campaign\TelnyxCampaignCsp;
 use Telnyx\Messaging10dlc\CampaignBuilder\CampaignBuilderSubmitParams;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface CampaignBuilderRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|CampaignBuilderSubmitParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TelnyxCampaignCsp>
      *
@@ -23,6 +27,6 @@ interface CampaignBuilderRawContract
      */
     public function submit(
         array|CampaignBuilderSubmitParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

@@ -15,7 +15,8 @@ use Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters\AvailableServices\C
  *
  * @phpstan-import-type ContainsShape from \Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters\AvailableServices\Contains
  *
- * @phpstan-type AvailableServicesShape = AvailableService|ContainsShape|value-of<AvailableService>
+ * @phpstan-type AvailableServicesVariants = Contains|value-of<AvailableService>
+ * @phpstan-type AvailableServicesShape = AvailableServicesVariants|ContainsShape
  */
 final class AvailableServices implements ConverterSource
 {

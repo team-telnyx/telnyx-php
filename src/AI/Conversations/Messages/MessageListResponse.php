@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type MetaShape from \Telnyx\AI\Assistants\Tests\TestSuites\Runs\Meta
  *
  * @phpstan-type MessageListResponseShape = array{
- *   data: list<DataShape>, meta: Meta|MetaShape
+ *   data: list<Data|DataShape>, meta: Meta|MetaShape
  * }
  */
 final class MessageListResponse implements BaseModel
@@ -54,7 +54,7 @@ final class MessageListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DataShape> $data
+     * @param list<Data|DataShape> $data
      * @param Meta|MetaShape $meta
      */
     public static function with(array $data, Meta|array $meta): self
@@ -68,7 +68,7 @@ final class MessageListResponse implements BaseModel
     }
 
     /**
-     * @param list<DataShape> $data
+     * @param list<Data|DataShape> $data
      */
     public function withData(array $data): self
     {

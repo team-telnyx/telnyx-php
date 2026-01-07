@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type CsvDownloadShape from \Telnyx\PhoneNumbers\CsvDownloads\CsvDownload
  *
  * @phpstan-type CsvDownloadGetResponseShape = array{
- *   data?: list<CsvDownloadShape>|null
+ *   data?: list<CsvDownload|CsvDownloadShape>|null
  * }
  */
 final class CsvDownloadGetResponse implements BaseModel
@@ -34,7 +34,7 @@ final class CsvDownloadGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<CsvDownloadShape>|null $data
+     * @param list<CsvDownload|CsvDownloadShape>|null $data
      */
     public static function with(?array $data = null): self
     {
@@ -46,7 +46,7 @@ final class CsvDownloadGetResponse implements BaseModel
     }
 
     /**
-     * @param list<CsvDownloadShape> $data
+     * @param list<CsvDownload|CsvDownloadShape> $data
      */
     public function withData(array $data): self
     {

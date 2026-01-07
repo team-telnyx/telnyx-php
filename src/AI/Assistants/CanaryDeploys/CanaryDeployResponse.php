@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   assistantID: string,
  *   createdAt: \DateTimeInterface,
  *   updatedAt: \DateTimeInterface,
- *   versions: list<VersionConfigShape>,
+ *   versions: list<VersionConfig|VersionConfigShape>,
  * }
  */
 final class CanaryDeployResponse implements BaseModel
@@ -68,7 +68,7 @@ final class CanaryDeployResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VersionConfigShape> $versions
+     * @param list<VersionConfig|VersionConfigShape> $versions
      */
     public static function with(
         string $assistantID,
@@ -111,7 +111,7 @@ final class CanaryDeployResponse implements BaseModel
     }
 
     /**
-     * @param list<VersionConfigShape> $versions
+     * @param list<VersionConfig|VersionConfigShape> $versions
      */
     public function withVersions(array $versions): self
     {

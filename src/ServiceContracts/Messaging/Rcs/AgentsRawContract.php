@@ -13,12 +13,16 @@ use Telnyx\RcsAgents\RcsAgent;
 use Telnyx\RcsAgents\RcsAgentResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface AgentsRawContract
 {
     /**
      * @api
      *
      * @param string $id RCS agent ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RcsAgentResponse>
      *
@@ -26,7 +30,7 @@ interface AgentsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -34,6 +38,7 @@ interface AgentsRawContract
      *
      * @param string $id RCS agent ID
      * @param array<string,mixed>|AgentUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RcsAgentResponse>
      *
@@ -42,13 +47,14 @@ interface AgentsRawContract
     public function update(
         string $id,
         array|AgentUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|AgentListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<RcsAgent>>
      *
@@ -56,6 +62,6 @@ interface AgentsRawContract
      */
     public function list(
         array|AgentListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

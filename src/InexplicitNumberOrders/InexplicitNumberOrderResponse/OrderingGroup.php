@@ -23,7 +23,7 @@ use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderResponse\OrderingGroup\St
  *   errorReason?: string|null,
  *   excludeHeldNumbers?: bool|null,
  *   nationalDestinationCode?: string|null,
- *   orders?: list<OrderShape>|null,
+ *   orders?: list<Order|OrderShape>|null,
  *   phoneNumberType?: string|null,
  *   phoneNumberContains?: string|null,
  *   phoneNumberEndsWith?: string|null,
@@ -157,7 +157,7 @@ final class OrderingGroup implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<OrderShape>|null $orders
+     * @param list<Order|OrderShape>|null $orders
      * @param Status|value-of<Status>|null $status
      * @param Strategy|value-of<Strategy>|null $strategy
      */
@@ -295,7 +295,7 @@ final class OrderingGroup implements BaseModel
     /**
      * Array of orders created to fulfill the inexplicit order.
      *
-     * @param list<OrderShape> $orders
+     * @param list<Order|OrderShape> $orders
      */
     public function withOrders(array $orders): self
     {

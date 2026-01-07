@@ -11,11 +11,16 @@ use Telnyx\DefaultPagination;
 use Telnyx\NotificationProfiles\NotificationProfile;
 use Telnyx\NotificationProfiles\NotificationProfileDeleteResponse;
 use Telnyx\NotificationProfiles\NotificationProfileGetResponse;
+use Telnyx\NotificationProfiles\NotificationProfileListParams\Page;
 use Telnyx\NotificationProfiles\NotificationProfileNewResponse;
 use Telnyx\NotificationProfiles\NotificationProfileUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NotificationProfilesContract;
 
+/**
+ * @phpstan-import-type PageShape from \Telnyx\NotificationProfiles\NotificationProfileListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class NotificationProfilesService implements NotificationProfilesContract
 {
     /**
@@ -37,12 +42,13 @@ final class NotificationProfilesService implements NotificationProfilesContract
      * Create a notification profile.
      *
      * @param string $name a human readable name
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         ?string $name = null,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): NotificationProfileNewResponse {
         $params = Util::removeNulls(['name' => $name]);
 
@@ -58,12 +64,13 @@ final class NotificationProfilesService implements NotificationProfilesContract
      * Get a notification profile.
      *
      * @param string $id the id of the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): NotificationProfileGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -78,13 +85,14 @@ final class NotificationProfilesService implements NotificationProfilesContract
      *
      * @param string $notificationProfileID the id of the resource
      * @param string $name a human readable name
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $notificationProfileID,
         ?string $name = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): NotificationProfileUpdateResponse {
         $params = Util::removeNulls(['name' => $name]);
 
@@ -99,17 +107,16 @@ final class NotificationProfilesService implements NotificationProfilesContract
      *
      * Returns a list of your notifications profiles.
      *
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<NotificationProfile>
      *
      * @throws APIException
      */
     public function list(
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null
     ): DefaultPagination {
         $params = Util::removeNulls(['page' => $page]);
 
@@ -125,12 +132,13 @@ final class NotificationProfilesService implements NotificationProfilesContract
      * Delete a notification profile.
      *
      * @param string $id the id of the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): NotificationProfileDeleteResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, requestOptions: $requestOptions);

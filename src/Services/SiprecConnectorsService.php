@@ -13,6 +13,9 @@ use Telnyx\SiprecConnectors\SiprecConnectorGetResponse;
 use Telnyx\SiprecConnectors\SiprecConnectorNewResponse;
 use Telnyx\SiprecConnectors\SiprecConnectorUpdateResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class SiprecConnectorsService implements SiprecConnectorsContract
 {
     /**
@@ -37,6 +40,7 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
      * @param string $name name for the SIPREC connector resource
      * @param int $port port for the SIPREC SRS
      * @param string $appSubdomain subdomain to route the call when using Telnyx SRS (optional for non-Telnyx SRS)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -45,7 +49,7 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
         string $name,
         int $port,
         ?string $appSubdomain = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): SiprecConnectorNewResponse {
         $params = Util::removeNulls(
             [
@@ -68,12 +72,13 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
      * Returns details of a stored SIPREC connector.
      *
      * @param string $connectorName uniquely identifies a SIPREC connector
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $connectorName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): SiprecConnectorGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($connectorName, requestOptions: $requestOptions);
@@ -91,6 +96,7 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
      * @param string $name name for the SIPREC connector resource
      * @param int $port port for the SIPREC SRS
      * @param string $appSubdomain subdomain to route the call when using Telnyx SRS (optional for non-Telnyx SRS)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -100,7 +106,7 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
         string $name,
         int $port,
         ?string $appSubdomain = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): SiprecConnectorUpdateResponse {
         $params = Util::removeNulls(
             [
@@ -123,12 +129,13 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
      * Deletes a stored SIPREC connector.
      *
      * @param string $connectorName uniquely identifies a SIPREC connector
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $connectorName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($connectorName, requestOptions: $requestOptions);

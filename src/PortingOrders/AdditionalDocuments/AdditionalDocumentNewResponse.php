@@ -13,7 +13,7 @@ use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentNewResponse\Data;
  * @phpstan-import-type DataShape from \Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentNewResponse\Data
  *
  * @phpstan-type AdditionalDocumentNewResponseShape = array{
- *   data?: list<DataShape>|null
+ *   data?: list<Data|DataShape>|null
  * }
  */
 final class AdditionalDocumentNewResponse implements BaseModel
@@ -35,7 +35,7 @@ final class AdditionalDocumentNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DataShape>|null $data
+     * @param list<Data|DataShape>|null $data
      */
     public static function with(?array $data = null): self
     {
@@ -47,7 +47,7 @@ final class AdditionalDocumentNewResponse implements BaseModel
     }
 
     /**
-     * @param list<DataShape> $data
+     * @param list<Data|DataShape> $data
      */
     public function withData(array $data): self
     {

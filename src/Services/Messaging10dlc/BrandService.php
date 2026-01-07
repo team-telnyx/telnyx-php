@@ -24,6 +24,9 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging10dlc\BrandContract;
 use Telnyx\Services\Messaging10dlc\Brand\ExternalVettingService;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class BrandService implements BrandContract
 {
     /**
@@ -53,8 +56,8 @@ final class BrandService implements BrandContract
      * @param string $country ISO2 2 characters country code. Example: US - United States
      * @param string $displayName display name, marketing name, or DBA name of the brand
      * @param string $email valid email address of brand support contact
-     * @param 'PRIVATE_PROFIT'|'PUBLIC_PROFIT'|'NON_PROFIT'|'GOVERNMENT'|'SOLE_PROPRIETOR'|EntityType $entityType Entity type behind the brand. This is the form of business establishment.
-     * @param 'REAL_ESTATE'|'HEALTHCARE'|'ENERGY'|'ENTERTAINMENT'|'RETAIL'|'AGRICULTURE'|'INSURANCE'|'EDUCATION'|'HOSPITALITY'|'FINANCIAL'|'GAMBLING'|'CONSTRUCTION'|'NGO'|'MANUFACTURING'|'GOVERNMENT'|'TECHNOLOGY'|'COMMUNICATION'|Vertical $vertical vertical or industry segment of the brand or campaign
+     * @param EntityType|value-of<EntityType> $entityType Entity type behind the brand. This is the form of business establishment.
+     * @param Vertical|value-of<Vertical> $vertical vertical or industry segment of the brand or campaign
      * @param string $businessContactEmail Business contact email.
      *
      * Required if `entityType` is `PUBLIC_PROFIT`. Otherwise, it is recommended to either omit this field or set it to `null`.
@@ -69,12 +72,13 @@ final class BrandService implements BrandContract
      * @param string $phone Valid phone number in e.164 international format.
      * @param string $postalCode Postal codes. Use 5 digit zipcode for United States
      * @param string $state State. Must be 2 letters code for United States.
-     * @param 'NONE'|'NASDAQ'|'NYSE'|'AMEX'|'AMX'|'ASX'|'B3'|'BME'|'BSE'|'FRA'|'ICEX'|'JPX'|'JSE'|'KRX'|'LON'|'NSE'|'OMX'|'SEHK'|'SSE'|'STO'|'SWX'|'SZSE'|'TSX'|'TWSE'|'VSE'|StockExchange $stockExchange (Required for public company) stock exchange
+     * @param StockExchange|value-of<StockExchange> $stockExchange (Required for public company) stock exchange
      * @param string $stockSymbol (Required for public company) stock symbol
      * @param string $street street number and name
      * @param string $webhookFailoverURL webhook failover URL for brand status updates
      * @param string $webhookURL webhook URL for brand status updates
      * @param string $website brand website URL
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -82,8 +86,8 @@ final class BrandService implements BrandContract
         string $country,
         string $displayName,
         string $email,
-        string|EntityType $entityType,
-        string|Vertical $vertical,
+        EntityType|string $entityType,
+        Vertical|string $vertical,
         ?string $businessContactEmail = null,
         ?string $city = null,
         ?string $companyName = null,
@@ -97,13 +101,13 @@ final class BrandService implements BrandContract
         ?string $phone = null,
         ?string $postalCode = null,
         ?string $state = null,
-        string|StockExchange|null $stockExchange = null,
+        StockExchange|string|null $stockExchange = null,
         ?string $stockSymbol = null,
         ?string $street = null,
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
         ?string $website = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): TelnyxBrand {
         $params = Util::removeNulls(
             [
@@ -145,11 +149,13 @@ final class BrandService implements BrandContract
      *
      * Retrieve a brand by `brandId`.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $brandID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BrandGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($brandID, requestOptions: $requestOptions);
@@ -165,10 +171,10 @@ final class BrandService implements BrandContract
      * @param string $country ISO2 2 characters country code. Example: US - United States
      * @param string $displayName display or marketing name of the brand
      * @param string $email valid email address of brand support contact
-     * @param 'PRIVATE_PROFIT'|'PUBLIC_PROFIT'|'NON_PROFIT'|'GOVERNMENT'|'SOLE_PROPRIETOR'|EntityType $entityType Entity type behind the brand. This is the form of business establishment.
-     * @param 'REAL_ESTATE'|'HEALTHCARE'|'ENERGY'|'ENTERTAINMENT'|'RETAIL'|'AGRICULTURE'|'INSURANCE'|'EDUCATION'|'HOSPITALITY'|'FINANCIAL'|'GAMBLING'|'CONSTRUCTION'|'NGO'|'MANUFACTURING'|'GOVERNMENT'|'TECHNOLOGY'|'COMMUNICATION'|Vertical $vertical vertical or industry segment of the brand or campaign
+     * @param EntityType|value-of<EntityType> $entityType Entity type behind the brand. This is the form of business establishment.
+     * @param Vertical|value-of<Vertical> $vertical vertical or industry segment of the brand or campaign
      * @param string $altBusinessID Alternate business identifier such as DUNS, LEI, or GIIN
-     * @param 'NONE'|'DUNS'|'GIIN'|'LEI'|AltBusinessIDType $altBusinessIDType an enumeration
+     * @param AltBusinessIDType|value-of<AltBusinessIDType> $altBusinessIDType an enumeration
      * @param string $businessContactEmail Business contact email.
      *
      * Required if `entityType` will be changed to `PUBLIC_PROFIT`. Otherwise, it is recommended to either omit this field or set it to `null`.
@@ -176,18 +182,19 @@ final class BrandService implements BrandContract
      * @param string $companyName (Required for Non-profit/private/public) Legal company name
      * @param string $ein (Required for Non-profit) Government assigned corporate tax ID. EIN is 9-digits in U.S.
      * @param string $firstName first name of business contact
-     * @param 'VERIFIED'|'UNVERIFIED'|'SELF_DECLARED'|'VETTED_VERIFIED'|BrandIdentityStatus $identityStatus The verification status of an active brand
+     * @param BrandIdentityStatus|value-of<BrandIdentityStatus> $identityStatus The verification status of an active brand
      * @param string $ipAddress IP address of the browser requesting to create brand identity
      * @param string $lastName last name of business contact
      * @param string $phone Valid phone number in e.164 international format.
      * @param string $postalCode Postal codes. Use 5 digit zipcode for United States
      * @param string $state State. Must be 2 letters code for United States.
-     * @param 'NONE'|'NASDAQ'|'NYSE'|'AMEX'|'AMX'|'ASX'|'B3'|'BME'|'BSE'|'FRA'|'ICEX'|'JPX'|'JSE'|'KRX'|'LON'|'NSE'|'OMX'|'SEHK'|'SSE'|'STO'|'SWX'|'SZSE'|'TSX'|'TWSE'|'VSE'|StockExchange $stockExchange (Required for public company) stock exchange
+     * @param StockExchange|value-of<StockExchange> $stockExchange (Required for public company) stock exchange
      * @param string $stockSymbol (Required for public company) stock symbol
      * @param string $street street number and name
      * @param string $webhookFailoverURL webhook failover URL for brand status updates
      * @param string $webhookURL webhook URL for brand status updates
      * @param string $website brand website URL
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -196,29 +203,29 @@ final class BrandService implements BrandContract
         string $country,
         string $displayName,
         string $email,
-        string|EntityType $entityType,
-        string|Vertical $vertical,
+        EntityType|string $entityType,
+        Vertical|string $vertical,
         ?string $altBusinessID = null,
-        string|AltBusinessIDType|null $altBusinessIDType = null,
+        AltBusinessIDType|string|null $altBusinessIDType = null,
         ?string $businessContactEmail = null,
         ?string $city = null,
         ?string $companyName = null,
         ?string $ein = null,
         ?string $firstName = null,
-        string|BrandIdentityStatus|null $identityStatus = null,
+        BrandIdentityStatus|string|null $identityStatus = null,
         ?string $ipAddress = null,
         ?bool $isReseller = null,
         ?string $lastName = null,
         ?string $phone = null,
         ?string $postalCode = null,
         ?string $state = null,
-        string|StockExchange|null $stockExchange = null,
+        StockExchange|string|null $stockExchange = null,
         ?string $stockSymbol = null,
         ?string $street = null,
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
         ?string $website = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): TelnyxBrand {
         $params = Util::removeNulls(
             [
@@ -263,8 +270,9 @@ final class BrandService implements BrandContract
      *
      * @param string $brandID Filter results by the Telnyx Brand id
      * @param int $recordsPerPage number of records per page. maximum of 500
-     * @param 'assignedCampaignsCount'|'-assignedCampaignsCount'|'brandId'|'-brandId'|'createdAt'|'-createdAt'|'displayName'|'-displayName'|'identityStatus'|'-identityStatus'|'status'|'-status'|'tcrBrandId'|'-tcrBrandId'|Sort $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
+     * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
      * @param string $tcrBrandID Filter results by the TCR Brand id
+     * @param RequestOpts|null $requestOptions
      *
      * @return PerPagePaginationV2<BrandListResponse>
      *
@@ -277,10 +285,10 @@ final class BrandService implements BrandContract
         ?string $entityType = null,
         int $page = 1,
         int $recordsPerPage = 10,
-        string|Sort $sort = '-createdAt',
+        Sort|string $sort = '-createdAt',
         ?string $state = null,
         ?string $tcrBrandID = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): PerPagePaginationV2 {
         $params = Util::removeNulls(
             [
@@ -307,11 +315,13 @@ final class BrandService implements BrandContract
      *
      * Delete Brand. This endpoint is used to delete a brand. Note the brand cannot be deleted if it contains one or more active campaigns, the campaigns need to be inactive and at least 3 months old due to billing purposes.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $brandID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($brandID, requestOptions: $requestOptions);
@@ -336,11 +346,13 @@ final class BrandService implements BrandContract
      *   found.
      * * `OTHERS` - Details of the data misrepresentation if any.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function getFeedback(
         string $brandID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BrandGetFeedbackResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getFeedback($brandID, requestOptions: $requestOptions);
@@ -353,11 +365,13 @@ final class BrandService implements BrandContract
      *
      * Resend brand 2FA email
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function resend2faEmail(
         string $brandID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->resend2faEmail($brandID, requestOptions: $requestOptions);
@@ -379,13 +393,14 @@ final class BrandService implements BrandContract
      *
      * @param string $referenceID The reference ID returned when the OTP was initially triggered
      * @param string $brandID Filter by Brand ID for easier lookup in portal applications
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieveSMSOtpStatus(
         string $referenceID,
         ?string $brandID = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BrandGetSMSOtpStatusResponse {
         $params = Util::removeNulls(['brandID' => $brandID]);
 
@@ -400,11 +415,13 @@ final class BrandService implements BrandContract
      *
      * This operation allows you to revet the brand. However, revetting is allowed once after the successful brand registration and thereafter limited to once every 3 months.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function revet(
         string $brandID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): TelnyxBrand {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->revet($brandID, requestOptions: $requestOptions);
@@ -433,6 +450,7 @@ final class BrandService implements BrandContract
      * @param string $brandID The Brand ID for which to trigger the OTP
      * @param string $pinSMS SMS message template to send the OTP. Must include `@OTP_PIN@` placeholder which will be replaced with the actual PIN
      * @param string $successSMS SMS message to send upon successful OTP verification
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -440,7 +458,7 @@ final class BrandService implements BrandContract
         string $brandID,
         string $pinSMS,
         string $successSMS,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BrandTriggerSMSOtpResponse {
         $params = Util::removeNulls(
             ['pinSMS' => $pinSMS, 'successSMS' => $successSMS]
@@ -475,13 +493,14 @@ final class BrandService implements BrandContract
      *
      * @param string $brandID The Brand ID for which to verify the OTP
      * @param string $otpPin The OTP PIN received via SMS
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function verifySMSOtp(
         string $brandID,
         string $otpPin,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): mixed {
         $params = Util::removeNulls(['otpPin' => $otpPin]);
 

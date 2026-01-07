@@ -21,7 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   managedAccounts?: list<string>|null,
  *   recordType?: string|null,
  *   reportURL?: string|null,
- *   result?: list<TelcoDataUsageRecordShape>|null,
+ *   result?: list<TelcoDataUsageRecord|TelcoDataUsageRecordShape>|null,
  *   startDate?: string|null,
  *   status?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
@@ -113,7 +113,7 @@ final class TelcoDataUsageReportResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string>|null $managedAccounts
-     * @param list<TelcoDataUsageRecordShape>|null $result
+     * @param list<TelcoDataUsageRecord|TelcoDataUsageRecordShape>|null $result
      */
     public static function with(
         ?string $id = null,
@@ -227,7 +227,7 @@ final class TelcoDataUsageReportResponse implements BaseModel
     /**
      * Array of usage records.
      *
-     * @param list<TelcoDataUsageRecordShape> $result
+     * @param list<TelcoDataUsageRecord|TelcoDataUsageRecordShape> $result
      */
     public function withResult(array $result): self
     {

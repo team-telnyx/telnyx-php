@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-import-type InferenceEmbeddingShape from \Telnyx\AI\Assistants\InferenceEmbedding
  *
- * @phpstan-type AssistantsListShape = array{data: list<InferenceEmbeddingShape>}
+ * @phpstan-type AssistantsListShape = array{
+ *   data: list<InferenceEmbedding|InferenceEmbeddingShape>
+ * }
  */
 final class AssistantsList implements BaseModel
 {
@@ -46,7 +48,7 @@ final class AssistantsList implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<InferenceEmbeddingShape> $data
+     * @param list<InferenceEmbedding|InferenceEmbeddingShape> $data
      */
     public static function with(array $data): self
     {
@@ -58,7 +60,7 @@ final class AssistantsList implements BaseModel
     }
 
     /**
-     * @param list<InferenceEmbeddingShape> $data
+     * @param list<InferenceEmbedding|InferenceEmbeddingShape> $data
      */
     public function withData(array $data): self
     {

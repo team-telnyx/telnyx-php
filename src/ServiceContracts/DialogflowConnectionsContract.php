@@ -11,6 +11,9 @@ use Telnyx\DialogflowConnections\DialogflowConnectionNewResponse;
 use Telnyx\DialogflowConnections\DialogflowConnectionUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface DialogflowConnectionsContract
 {
     /**
@@ -19,9 +22,10 @@ interface DialogflowConnectionsContract
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control)
      * @param array<string,mixed> $serviceAccount the JSON map to connect your Dialoglow account
      * @param string $conversationProfileID The id of a configured conversation profile on your Dialogflow account. (If you use Dialogflow CX, this param is required)
-     * @param 'cx'|'es'|DialogflowAPI $dialogflowAPI determine which Dialogflow will be used
+     * @param DialogflowAPI|value-of<DialogflowAPI> $dialogflowAPI determine which Dialogflow will be used
      * @param string $environment which Dialogflow environment will be used
      * @param string $location The region of your agent is. (If you use Dialogflow CX, this param is required)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -29,22 +33,23 @@ interface DialogflowConnectionsContract
         string $connectionID,
         array $serviceAccount,
         ?string $conversationProfileID = null,
-        string|DialogflowAPI $dialogflowAPI = 'es',
+        DialogflowAPI|string $dialogflowAPI = 'es',
         ?string $environment = null,
         ?string $location = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DialogflowConnectionNewResponse;
 
     /**
      * @api
      *
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $connectionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): DialogflowConnectionGetResponse;
 
     /**
@@ -53,9 +58,10 @@ interface DialogflowConnectionsContract
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control)
      * @param array<string,mixed> $serviceAccount the JSON map to connect your Dialoglow account
      * @param string $conversationProfileID The id of a configured conversation profile on your Dialogflow account. (If you use Dialogflow CX, this param is required)
-     * @param 'cx'|'es'|\Telnyx\DialogflowConnections\DialogflowConnectionUpdateParams\DialogflowAPI $dialogflowAPI determine which Dialogflow will be used
+     * @param \Telnyx\DialogflowConnections\DialogflowConnectionUpdateParams\DialogflowAPI|value-of<\Telnyx\DialogflowConnections\DialogflowConnectionUpdateParams\DialogflowAPI> $dialogflowAPI determine which Dialogflow will be used
      * @param string $environment which Dialogflow environment will be used
      * @param string $location The region of your agent is. (If you use Dialogflow CX, this param is required)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -63,21 +69,22 @@ interface DialogflowConnectionsContract
         string $connectionID,
         array $serviceAccount,
         ?string $conversationProfileID = null,
-        string|\Telnyx\DialogflowConnections\DialogflowConnectionUpdateParams\DialogflowAPI $dialogflowAPI = 'es',
+        \Telnyx\DialogflowConnections\DialogflowConnectionUpdateParams\DialogflowAPI|string $dialogflowAPI = 'es',
         ?string $environment = null,
         ?string $location = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DialogflowConnectionUpdateResponse;
 
     /**
      * @api
      *
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $connectionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed;
 }

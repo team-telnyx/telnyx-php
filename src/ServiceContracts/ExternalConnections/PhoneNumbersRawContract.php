@@ -15,6 +15,9 @@ use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberUpdateParams;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface PhoneNumbersRawContract
 {
     /**
@@ -22,6 +25,7 @@ interface PhoneNumbersRawContract
      *
      * @param string $phoneNumberID A phone number's ID via the Telnyx API
      * @param array<string,mixed>|PhoneNumberRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberGetResponse>
      *
@@ -30,7 +34,7 @@ interface PhoneNumbersRawContract
     public function retrieve(
         string $phoneNumberID,
         array|PhoneNumberRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -38,6 +42,7 @@ interface PhoneNumbersRawContract
      *
      * @param string $phoneNumberID Path param: A phone number's ID via the Telnyx API
      * @param array<string,mixed>|PhoneNumberUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberUpdateResponse>
      *
@@ -46,7 +51,7 @@ interface PhoneNumbersRawContract
     public function update(
         string $phoneNumberID,
         array|PhoneNumberUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -54,6 +59,7 @@ interface PhoneNumbersRawContract
      *
      * @param string $id identifies the resource
      * @param array<string,mixed>|PhoneNumberListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<ExternalConnectionPhoneNumber>>
      *
@@ -62,6 +68,6 @@ interface PhoneNumbersRawContract
     public function list(
         string $id,
         array|PhoneNumberListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

@@ -15,6 +15,9 @@ use Telnyx\Verifications\VerificationTriggerCallParams;
 use Telnyx\Verifications\VerificationTriggerFlashcallParams;
 use Telnyx\Verifications\VerificationTriggerSMSParams;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class VerificationsRawService implements VerificationsRawContract
 {
     // @phpstan-ignore-next-line
@@ -29,6 +32,7 @@ final class VerificationsRawService implements VerificationsRawContract
      * Retrieve verification
      *
      * @param string $verificationID the identifier of the verification to retrieve
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VerificationGetResponse>
      *
@@ -36,7 +40,7 @@ final class VerificationsRawService implements VerificationsRawContract
      */
     public function retrieve(
         string $verificationID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -59,6 +63,7 @@ final class VerificationsRawService implements VerificationsRawContract
      *   extension?: string|null,
      *   timeoutSecs?: int,
      * }|VerificationTriggerCallParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CreateVerificationResponse>
      *
@@ -66,7 +71,7 @@ final class VerificationsRawService implements VerificationsRawContract
      */
     public function triggerCall(
         array|VerificationTriggerCallParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = VerificationTriggerCallParams::parseRequest(
             $params,
@@ -91,6 +96,7 @@ final class VerificationsRawService implements VerificationsRawContract
      * @param array{
      *   phoneNumber: string, verifyProfileID: string, timeoutSecs?: int
      * }|VerificationTriggerFlashcallParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CreateVerificationResponse>
      *
@@ -98,7 +104,7 @@ final class VerificationsRawService implements VerificationsRawContract
      */
     public function triggerFlashcall(
         array|VerificationTriggerFlashcallParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = VerificationTriggerFlashcallParams::parseRequest(
             $params,
@@ -126,6 +132,7 @@ final class VerificationsRawService implements VerificationsRawContract
      *   customCode?: string|null,
      *   timeoutSecs?: int,
      * }|VerificationTriggerSMSParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CreateVerificationResponse>
      *
@@ -133,7 +140,7 @@ final class VerificationsRawService implements VerificationsRawContract
      */
     public function triggerSMS(
         array|VerificationTriggerSMSParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = VerificationTriggerSMSParams::parseRequest(
             $params,

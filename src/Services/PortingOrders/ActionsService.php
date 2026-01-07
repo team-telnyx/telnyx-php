@@ -15,6 +15,9 @@ use Telnyx\PortingOrders\Actions\ActionShareResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\ActionsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsService implements ActionsContract
 {
     /**
@@ -36,12 +39,13 @@ final class ActionsService implements ActionsContract
      * Activate each number in a porting order asynchronously. This operation is limited to US FastPort orders only.
      *
      * @param string $id Porting Order id
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function activate(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ActionActivateResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->activate($id, requestOptions: $requestOptions);
@@ -55,12 +59,13 @@ final class ActionsService implements ActionsContract
      * Cancel a porting order
      *
      * @param string $id Porting Order id
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function cancel(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ActionCancelResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->cancel($id, requestOptions: $requestOptions);
@@ -74,12 +79,13 @@ final class ActionsService implements ActionsContract
      * Confirm and submit your porting order.
      *
      * @param string $id Porting Order id
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function confirm(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ActionConfirmResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->confirm($id, requestOptions: $requestOptions);
@@ -94,15 +100,16 @@ final class ActionsService implements ActionsContract
      *
      * @param string $id Porting Order id
      * @param int $expiresInSeconds The number of seconds the token will be valid for
-     * @param 'porting_order.document.read'|'porting_order.document.update'|Permissions $permissions The permissions the token will have
+     * @param Permissions|value-of<Permissions> $permissions The permissions the token will have
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function share(
         string $id,
         ?int $expiresInSeconds = null,
-        string|Permissions|null $permissions = null,
-        ?RequestOptions $requestOptions = null,
+        Permissions|string|null $permissions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionShareResponse {
         $params = Util::removeNulls(
             ['expiresInSeconds' => $expiresInSeconds, 'permissions' => $permissions]

@@ -18,6 +18,9 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveRecordingsParams;
 use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateParams;
 use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ConferencesRawContract
 {
     /**
@@ -25,6 +28,7 @@ interface ConferencesRawContract
      *
      * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
      * @param array<string,mixed>|ConferenceRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ConferenceGetResponse>
      *
@@ -33,7 +37,7 @@ interface ConferencesRawContract
     public function retrieve(
         string $conferenceSid,
         array|ConferenceRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -41,6 +45,7 @@ interface ConferencesRawContract
      *
      * @param string $conferenceSid path param: The ConferenceSid that uniquely identifies a conference
      * @param array<string,mixed>|ConferenceUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ConferenceUpdateResponse>
      *
@@ -49,7 +54,7 @@ interface ConferencesRawContract
     public function update(
         string $conferenceSid,
         array|ConferenceUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -57,6 +62,7 @@ interface ConferencesRawContract
      *
      * @param string $accountSid the id of the account the resource belongs to
      * @param array<string,mixed>|ConferenceRetrieveConferencesParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ConferenceGetConferencesResponse>
      *
@@ -65,7 +71,7 @@ interface ConferencesRawContract
     public function retrieveConferences(
         string $accountSid,
         array|ConferenceRetrieveConferencesParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -73,6 +79,7 @@ interface ConferencesRawContract
      *
      * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
      * @param array<string,mixed>|ConferenceRetrieveRecordingsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ConferenceGetRecordingsResponse>
      *
@@ -81,7 +88,7 @@ interface ConferencesRawContract
     public function retrieveRecordings(
         string $conferenceSid,
         array|ConferenceRetrieveRecordingsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -89,6 +96,7 @@ interface ConferencesRawContract
      *
      * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
      * @param array<string,mixed>|ConferenceRetrieveRecordingsJsonParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ConferenceGetRecordingsJsonResponse>
      *
@@ -97,6 +105,6 @@ interface ConferencesRawContract
     public function retrieveRecordingsJson(
         string $conferenceSid,
         array|ConferenceRetrieveRecordingsJsonParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

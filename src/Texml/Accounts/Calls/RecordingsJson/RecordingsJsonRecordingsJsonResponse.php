@@ -15,7 +15,7 @@ use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonRespo
  * @phpstan-type RecordingsJsonRecordingsJsonResponseShape = array{
  *   accountSid?: string|null,
  *   callSid?: string|null,
- *   channels?: null|1|2,
+ *   channels?: null|Channels|value-of<Channels>,
  *   conferenceSid?: string|null,
  *   dateCreated?: \DateTimeInterface|null,
  *   dateUpdated?: \DateTimeInterface|null,
@@ -41,7 +41,7 @@ final class RecordingsJsonRecordingsJsonResponse implements BaseModel
     #[Optional('call_sid')]
     public ?string $callSid;
 
-    /** @var 1|2|null $channels */
+    /** @var value-of<Channels>|null $channels */
     #[Optional(enum: Channels::class)]
     public ?int $channels;
 
@@ -116,14 +116,14 @@ final class RecordingsJsonRecordingsJsonResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param 1|2|null $channels
+     * @param Channels|value-of<Channels>|null $channels
      * @param Source|value-of<Source>|null $source
      * @param Track|value-of<Track>|null $track
      */
     public static function with(
         ?string $accountSid = null,
         ?string $callSid = null,
-        ?int $channels = null,
+        Channels|int|null $channels = null,
         ?string $conferenceSid = null,
         ?\DateTimeInterface $dateCreated = null,
         ?\DateTimeInterface $dateUpdated = null,
@@ -175,9 +175,9 @@ final class RecordingsJsonRecordingsJsonResponse implements BaseModel
     }
 
     /**
-     * @param 1|2 $channels
+     * @param Channels|value-of<Channels> $channels
      */
-    public function withChannels(int $channels): self
+    public function withChannels(Channels|int $channels): self
     {
         $self = clone $this;
         $self['channels'] = $channels;

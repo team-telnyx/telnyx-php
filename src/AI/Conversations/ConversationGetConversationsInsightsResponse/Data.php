@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type DataShape = array{
  *   id: string,
- *   conversationInsights: list<ConversationInsightShape>,
+ *   conversationInsights: list<ConversationInsight|ConversationInsightShape>,
  *   createdAt: \DateTimeInterface,
  *   status: Status|value-of<Status>,
  * }
@@ -81,7 +81,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ConversationInsightShape> $conversationInsights
+     * @param list<ConversationInsight|ConversationInsightShape> $conversationInsights
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -114,7 +114,7 @@ final class Data implements BaseModel
     /**
      * List of insights extracted from the conversation.
      *
-     * @param list<ConversationInsightShape> $conversationInsights
+     * @param list<ConversationInsight|ConversationInsightShape> $conversationInsights
      */
     public function withConversationInsights(array $conversationInsights): self
     {

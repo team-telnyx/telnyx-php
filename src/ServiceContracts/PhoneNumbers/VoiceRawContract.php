@@ -14,12 +14,16 @@ use Telnyx\PhoneNumbers\Voice\VoiceUpdateParams;
 use Telnyx\PhoneNumbers\Voice\VoiceUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface VoiceRawContract
 {
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VoiceGetResponse>
      *
@@ -27,7 +31,7 @@ interface VoiceRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -35,6 +39,7 @@ interface VoiceRawContract
      *
      * @param string $id identifies the resource
      * @param array<string,mixed>|VoiceUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VoiceUpdateResponse>
      *
@@ -43,13 +48,14 @@ interface VoiceRawContract
     public function update(
         string $id,
         array|VoiceUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|VoiceListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PhoneNumberWithVoiceSettings>>
      *
@@ -57,6 +63,6 @@ interface VoiceRawContract
      */
     public function list(
         array|VoiceListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

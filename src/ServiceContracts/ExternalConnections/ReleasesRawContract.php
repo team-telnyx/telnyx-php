@@ -13,6 +13,9 @@ use Telnyx\ExternalConnections\Releases\ReleaseListResponse;
 use Telnyx\ExternalConnections\Releases\ReleaseRetrieveParams;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ReleasesRawContract
 {
     /**
@@ -20,6 +23,7 @@ interface ReleasesRawContract
      *
      * @param string $releaseID Identifies a Release request
      * @param array<string,mixed>|ReleaseRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ReleaseGetResponse>
      *
@@ -28,7 +32,7 @@ interface ReleasesRawContract
     public function retrieve(
         string $releaseID,
         array|ReleaseRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -36,6 +40,7 @@ interface ReleasesRawContract
      *
      * @param string $id identifies the resource
      * @param array<string,mixed>|ReleaseListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<ReleaseListResponse>>
      *
@@ -44,6 +49,6 @@ interface ReleasesRawContract
     public function list(
         string $id,
         array|ReleaseListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

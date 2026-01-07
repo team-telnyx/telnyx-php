@@ -12,6 +12,9 @@ use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingNumbersBulkUpdatesContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MessagingNumbersBulkUpdatesService implements MessagingNumbersBulkUpdatesContract
 {
     /**
@@ -37,13 +40,14 @@ final class MessagingNumbersBulkUpdatesService implements MessagingNumbersBulkUp
      * * Set this field to `""` to unassign each number from their respective messaging profile
      * * Set this field to a quoted UUID of a messaging profile to assign these numbers to that messaging profile
      * @param list<string> $numbers the list of phone numbers to update
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $messagingProfileID,
         array $numbers,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MessagingNumbersBulkUpdateNewResponse {
         $params = Util::removeNulls(
             ['messagingProfileID' => $messagingProfileID, 'numbers' => $numbers]
@@ -61,12 +65,13 @@ final class MessagingNumbersBulkUpdatesService implements MessagingNumbersBulkUp
      * Retrieve bulk update status
      *
      * @param string $orderID order ID to verify bulk update status
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $orderID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MessagingNumbersBulkUpdateGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($orderID, requestOptions: $requestOptions);

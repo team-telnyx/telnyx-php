@@ -12,6 +12,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\ToolsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ToolsRawService implements ToolsRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,6 +34,7 @@ final class ToolsRawService implements ToolsRawContract
      *   arguments?: array<string,mixed>,
      *   dynamicVariables?: array<string,mixed>,
      * }|ToolTestParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ToolTestResponse>
      *
@@ -39,7 +43,7 @@ final class ToolsRawService implements ToolsRawContract
     public function test(
         string $toolID,
         array|ToolTestParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ToolTestParams::parseRequest(
             $params,

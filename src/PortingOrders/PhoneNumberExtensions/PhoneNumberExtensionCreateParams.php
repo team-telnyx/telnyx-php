@@ -20,7 +20,7 @@ use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams\
  * @phpstan-import-type ExtensionRangeShape from \Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams\ExtensionRange
  *
  * @phpstan-type PhoneNumberExtensionCreateParamsShape = array{
- *   activationRanges: list<ActivationRangeShape>,
+ *   activationRanges: list<ActivationRange|ActivationRangeShape>,
  *   extensionRange: ExtensionRange|ExtensionRangeShape,
  *   portingPhoneNumberID: string,
  * }
@@ -77,7 +77,7 @@ final class PhoneNumberExtensionCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ActivationRangeShape> $activationRanges
+     * @param list<ActivationRange|ActivationRangeShape> $activationRanges
      * @param ExtensionRange|ExtensionRangeShape $extensionRange
      */
     public static function with(
@@ -97,7 +97,7 @@ final class PhoneNumberExtensionCreateParams implements BaseModel
     /**
      * Specifies the activation ranges for this porting phone number extension. The activation range must be within the extension range and should not overlap with other activation ranges.
      *
-     * @param list<ActivationRangeShape> $activationRanges
+     * @param list<ActivationRange|ActivationRangeShape> $activationRanges
      */
     public function withActivationRanges(array $activationRanges): self
     {

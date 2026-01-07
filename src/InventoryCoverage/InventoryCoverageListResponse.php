@@ -15,7 +15,7 @@ use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Meta;
  * @phpstan-import-type MetaShape from \Telnyx\InventoryCoverage\InventoryCoverageListResponse\Meta
  *
  * @phpstan-type InventoryCoverageListResponseShape = array{
- *   data?: list<DataShape>|null, meta?: null|Meta|MetaShape
+ *   data?: list<Data|DataShape>|null, meta?: null|Meta|MetaShape
  * }
  */
 final class InventoryCoverageListResponse implements BaseModel
@@ -40,7 +40,7 @@ final class InventoryCoverageListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DataShape>|null $data
+     * @param list<Data|DataShape>|null $data
      * @param Meta|MetaShape|null $meta
      */
     public static function with(
@@ -56,7 +56,7 @@ final class InventoryCoverageListResponse implements BaseModel
     }
 
     /**
-     * @param list<DataShape> $data
+     * @param list<Data|DataShape> $data
      */
     public function withData(array $data): self
     {

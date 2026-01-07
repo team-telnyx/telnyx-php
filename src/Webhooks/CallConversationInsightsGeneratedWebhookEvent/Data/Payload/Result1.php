@@ -10,6 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data\Payload\Result1\Result;
 
 /**
+ * @phpstan-import-type ResultVariants from \Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data\Payload\Result1\Result
  * @phpstan-import-type ResultShape from \Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data\Payload\Result1\Result
  *
  * @phpstan-type Result1Shape = array{
@@ -30,7 +31,7 @@ final class Result1 implements BaseModel
     /**
      * The result of the insight.
      *
-     * @var string|array<string,mixed>|null $result
+     * @var ResultVariants|null $result
      */
     #[Optional(union: Result::class)]
     public string|array|null $result;

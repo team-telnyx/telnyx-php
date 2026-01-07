@@ -11,11 +11,16 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\MigrationSourcesRawContract;
 use Telnyx\Storage\MigrationSources\MigrationSourceCreateParams;
 use Telnyx\Storage\MigrationSources\MigrationSourceCreateParams\Provider;
+use Telnyx\Storage\MigrationSources\MigrationSourceCreateParams\ProviderAuth;
 use Telnyx\Storage\MigrationSources\MigrationSourceDeleteResponse;
 use Telnyx\Storage\MigrationSources\MigrationSourceGetResponse;
 use Telnyx\Storage\MigrationSources\MigrationSourceListResponse;
 use Telnyx\Storage\MigrationSources\MigrationSourceNewResponse;
 
+/**
+ * @phpstan-import-type ProviderAuthShape from \Telnyx\Storage\MigrationSources\MigrationSourceCreateParams\ProviderAuth
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MigrationSourcesRawService implements MigrationSourcesRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,10 +36,11 @@ final class MigrationSourcesRawService implements MigrationSourcesRawContract
      *
      * @param array{
      *   bucketName: string,
-     *   provider: 'aws'|'telnyx'|Provider,
-     *   providerAuth: array{accessKey?: string, secretAccessKey?: string},
+     *   provider: Provider|value-of<Provider>,
+     *   providerAuth: ProviderAuth|ProviderAuthShape,
      *   sourceRegion?: string,
      * }|MigrationSourceCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MigrationSourceNewResponse>
      *
@@ -42,7 +48,7 @@ final class MigrationSourcesRawService implements MigrationSourcesRawContract
      */
     public function create(
         array|MigrationSourceCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = MigrationSourceCreateParams::parseRequest(
             $params,
@@ -65,6 +71,7 @@ final class MigrationSourcesRawService implements MigrationSourcesRawContract
      * Get a Migration Source
      *
      * @param string $id unique identifier for the data migration source
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MigrationSourceGetResponse>
      *
@@ -72,7 +79,7 @@ final class MigrationSourcesRawService implements MigrationSourcesRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -88,12 +95,15 @@ final class MigrationSourcesRawService implements MigrationSourcesRawContract
      *
      * List all Migration Sources
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<MigrationSourceListResponse>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse
-    {
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
@@ -109,6 +119,7 @@ final class MigrationSourcesRawService implements MigrationSourcesRawContract
      * Delete a Migration Source
      *
      * @param string $id unique identifier for the data migration source
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MigrationSourceDeleteResponse>
      *
@@ -116,7 +127,7 @@ final class MigrationSourcesRawService implements MigrationSourcesRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

@@ -11,6 +11,9 @@ use Telnyx\NumbersFeatures\NumbersFeatureNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumbersFeaturesContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class NumbersFeaturesService implements NumbersFeaturesContract
 {
     /**
@@ -32,12 +35,13 @@ final class NumbersFeaturesService implements NumbersFeaturesContract
      * Retrieve the features for a list of numbers
      *
      * @param list<string> $phoneNumbers
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         array $phoneNumbers,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): NumbersFeatureNewResponse {
         $params = Util::removeNulls(['phoneNumbers' => $phoneNumbers]);
 

@@ -22,7 +22,8 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type SipReferToolShape from \Telnyx\AI\Assistants\AssistantTool\SipReferTool
  * @phpstan-import-type DtmfToolShape from \Telnyx\AI\Assistants\AssistantTool\DtmfTool
  *
- * @phpstan-type AssistantToolShape = WebhookToolShape|RetrievalToolShape|HandoffToolShape|HangupToolShape|TransferToolShape|SipReferToolShape|DtmfToolShape
+ * @phpstan-type AssistantToolVariants = WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool
+ * @phpstan-type AssistantToolShape = AssistantToolVariants|WebhookToolShape|RetrievalToolShape|HandoffToolShape|HangupToolShape|TransferToolShape|SipReferToolShape|DtmfToolShape
  */
 final class AssistantTool implements ConverterSource
 {

@@ -23,7 +23,7 @@ use Telnyx\Reports\MdrUsageReports\MdrUsageReport\Status;
  *   profiles?: string|null,
  *   recordType?: string|null,
  *   reportURL?: string|null,
- *   result?: list<ResultShape>|null,
+ *   result?: list<Result|ResultShape>|null,
  *   startDate?: \DateTimeInterface|null,
  *   status?: null|Status|value-of<Status>,
  *   updatedAt?: \DateTimeInterface|null,
@@ -89,7 +89,7 @@ final class MdrUsageReport implements BaseModel
      *
      * @param AggregationType|value-of<AggregationType>|null $aggregationType
      * @param list<int>|null $connections
-     * @param list<ResultShape>|null $result
+     * @param list<Result|ResultShape>|null $result
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
@@ -199,7 +199,7 @@ final class MdrUsageReport implements BaseModel
     }
 
     /**
-     * @param list<ResultShape> $result
+     * @param list<Result|ResultShape> $result
      */
     public function withResult(array $result): self
     {

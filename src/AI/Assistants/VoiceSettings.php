@@ -14,6 +14,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type BackgroundAudioVariants from \Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio
  * @phpstan-import-type BackgroundAudioShape from \Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio
  *
  * @phpstan-type VoiceSettingsShape = array{
@@ -43,6 +44,8 @@ final class VoiceSettings implements BaseModel
 
     /**
      * Optional background audio to play on the call. Use a predefined media bed, or supply a looped MP3 URL. If a media URL is chosen in the portal, customers can preview it before saving.
+     *
+     * @var BackgroundAudioVariants|null $backgroundAudio
      */
     #[Optional('background_audio', union: BackgroundAudio::class)]
     public PredefinedMedia|MediaURL|MediaName|null $backgroundAudio;

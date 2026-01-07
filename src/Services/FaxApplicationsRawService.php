@@ -11,10 +11,13 @@ use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\DefaultPagination;
 use Telnyx\FaxApplications\FaxApplication;
 use Telnyx\FaxApplications\FaxApplicationCreateParams;
-use Telnyx\FaxApplications\FaxApplicationCreateParams\Inbound\SipSubdomainReceiveSettings;
+use Telnyx\FaxApplications\FaxApplicationCreateParams\Inbound;
+use Telnyx\FaxApplications\FaxApplicationCreateParams\Outbound;
 use Telnyx\FaxApplications\FaxApplicationDeleteResponse;
 use Telnyx\FaxApplications\FaxApplicationGetResponse;
 use Telnyx\FaxApplications\FaxApplicationListParams;
+use Telnyx\FaxApplications\FaxApplicationListParams\Filter;
+use Telnyx\FaxApplications\FaxApplicationListParams\Page;
 use Telnyx\FaxApplications\FaxApplicationListParams\Sort;
 use Telnyx\FaxApplications\FaxApplicationNewResponse;
 use Telnyx\FaxApplications\FaxApplicationUpdateParams;
@@ -22,6 +25,15 @@ use Telnyx\FaxApplications\FaxApplicationUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\FaxApplicationsRawContract;
 
+/**
+ * @phpstan-import-type InboundShape from \Telnyx\FaxApplications\FaxApplicationCreateParams\Inbound
+ * @phpstan-import-type OutboundShape from \Telnyx\FaxApplications\FaxApplicationCreateParams\Outbound
+ * @phpstan-import-type InboundShape from \Telnyx\FaxApplications\FaxApplicationUpdateParams\Inbound as InboundShape1
+ * @phpstan-import-type OutboundShape from \Telnyx\FaxApplications\FaxApplicationUpdateParams\Outbound as OutboundShape1
+ * @phpstan-import-type FilterShape from \Telnyx\FaxApplications\FaxApplicationListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\FaxApplications\FaxApplicationListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class FaxApplicationsRawService implements FaxApplicationsRawContract
 {
     // @phpstan-ignore-next-line
@@ -40,16 +52,13 @@ final class FaxApplicationsRawService implements FaxApplicationsRawContract
      *   webhookEventURL: string,
      *   active?: bool,
      *   anchorsiteOverride?: value-of<AnchorsiteOverride>,
-     *   inbound?: array{
-     *     channelLimit?: int,
-     *     sipSubdomain?: string,
-     *     sipSubdomainReceiveSettings?: 'only_my_connections'|'from_anyone'|SipSubdomainReceiveSettings,
-     *   },
-     *   outbound?: array{channelLimit?: int, outboundVoiceProfileID?: string},
+     *   inbound?: Inbound|InboundShape,
+     *   outbound?: Outbound|OutboundShape,
      *   tags?: list<string>,
      *   webhookEventFailoverURL?: string|null,
      *   webhookTimeoutSecs?: int|null,
      * }|FaxApplicationCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FaxApplicationNewResponse>
      *
@@ -57,7 +66,7 @@ final class FaxApplicationsRawService implements FaxApplicationsRawContract
      */
     public function create(
         array|FaxApplicationCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = FaxApplicationCreateParams::parseRequest(
             $params,
@@ -80,6 +89,7 @@ final class FaxApplicationsRawService implements FaxApplicationsRawContract
      * Return the details of an existing Fax Application inside the 'data' attribute of the response.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FaxApplicationGetResponse>
      *
@@ -87,7 +97,7 @@ final class FaxApplicationsRawService implements FaxApplicationsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -110,16 +120,13 @@ final class FaxApplicationsRawService implements FaxApplicationsRawContract
      *   active?: bool,
      *   anchorsiteOverride?: value-of<AnchorsiteOverride>,
      *   faxEmailRecipient?: string|null,
-     *   inbound?: array{
-     *     channelLimit?: int,
-     *     sipSubdomain?: string,
-     *     sipSubdomainReceiveSettings?: 'only_my_connections'|'from_anyone'|FaxApplicationUpdateParams\Inbound\SipSubdomainReceiveSettings,
-     *   },
-     *   outbound?: array{channelLimit?: int, outboundVoiceProfileID?: string},
+     *   inbound?: FaxApplicationUpdateParams\Inbound|InboundShape1,
+     *   outbound?: FaxApplicationUpdateParams\Outbound|OutboundShape1,
      *   tags?: list<string>,
      *   webhookEventFailoverURL?: string|null,
      *   webhookTimeoutSecs?: int|null,
      * }|FaxApplicationUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FaxApplicationUpdateResponse>
      *
@@ -128,7 +135,7 @@ final class FaxApplicationsRawService implements FaxApplicationsRawContract
     public function update(
         string $id,
         array|FaxApplicationUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = FaxApplicationUpdateParams::parseRequest(
             $params,
@@ -151,12 +158,9 @@ final class FaxApplicationsRawService implements FaxApplicationsRawContract
      * This endpoint returns a list of your Fax Applications inside the 'data' attribute of the response. You can adjust which applications are listed by using filters. Fax Applications are used to configure how you send and receive faxes using the Programmable Fax API with Telnyx.
      *
      * @param array{
-     *   filter?: array{
-     *     applicationName?: array{contains?: string}, outboundVoiceProfileID?: string
-     *   },
-     *   page?: array{number?: int, size?: int},
-     *   sort?: 'created_at'|'application_name'|'active'|Sort,
+     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|value-of<Sort>
      * }|FaxApplicationListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<FaxApplication>>
      *
@@ -164,7 +168,7 @@ final class FaxApplicationsRawService implements FaxApplicationsRawContract
      */
     public function list(
         array|FaxApplicationListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = FaxApplicationListParams::parseRequest(
             $params,
@@ -188,6 +192,7 @@ final class FaxApplicationsRawService implements FaxApplicationsRawContract
      * Permanently deletes a Fax Application. Deletion may be prevented if the application is in use by phone numbers.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FaxApplicationDeleteResponse>
      *
@@ -195,7 +200,7 @@ final class FaxApplicationsRawService implements FaxApplicationsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

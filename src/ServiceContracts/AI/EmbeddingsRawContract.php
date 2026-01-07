@@ -16,12 +16,16 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface EmbeddingsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|EmbeddingCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<EmbeddingResponse>
      *
@@ -29,11 +33,13 @@ interface EmbeddingsRawContract
      */
     public function create(
         array|EmbeddingCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<EmbeddingGetResponse>
      *
@@ -41,13 +47,14 @@ interface EmbeddingsRawContract
      */
     public function retrieve(
         string $taskID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|EmbeddingListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<EmbeddingListResponse>
      *
@@ -55,13 +62,14 @@ interface EmbeddingsRawContract
      */
     public function list(
         array|EmbeddingListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|EmbeddingSimilaritySearchParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<EmbeddingSimilaritySearchResponse>
      *
@@ -69,13 +77,14 @@ interface EmbeddingsRawContract
      */
     public function similaritySearch(
         array|EmbeddingSimilaritySearchParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|EmbeddingURLParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<EmbeddingResponse>
      *
@@ -83,6 +92,6 @@ interface EmbeddingsRawContract
      */
     public function url(
         array|EmbeddingURLParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

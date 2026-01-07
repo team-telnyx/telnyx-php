@@ -17,12 +17,16 @@ use Telnyx\TexmlApplications\TexmlApplicationNewResponse;
 use Telnyx\TexmlApplications\TexmlApplicationUpdateParams;
 use Telnyx\TexmlApplications\TexmlApplicationUpdateResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface TexmlApplicationsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|TexmlApplicationCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TexmlApplicationNewResponse>
      *
@@ -30,13 +34,14 @@ interface TexmlApplicationsRawContract
      */
     public function create(
         array|TexmlApplicationCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TexmlApplicationGetResponse>
      *
@@ -44,7 +49,7 @@ interface TexmlApplicationsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -52,6 +57,7 @@ interface TexmlApplicationsRawContract
      *
      * @param string $id identifies the resource
      * @param array<string,mixed>|TexmlApplicationUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TexmlApplicationUpdateResponse>
      *
@@ -60,13 +66,14 @@ interface TexmlApplicationsRawContract
     public function update(
         string $id,
         array|TexmlApplicationUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|TexmlApplicationListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<TexmlApplication>>
      *
@@ -74,13 +81,14 @@ interface TexmlApplicationsRawContract
      */
     public function list(
         array|TexmlApplicationListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TexmlApplicationDeleteResponse>
      *
@@ -88,6 +96,6 @@ interface TexmlApplicationsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

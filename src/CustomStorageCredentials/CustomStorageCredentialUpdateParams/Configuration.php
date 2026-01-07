@@ -16,7 +16,8 @@ use Telnyx\CustomStorageCredentials\S3ConfigurationData;
  * @phpstan-import-type S3ConfigurationDataShape from \Telnyx\CustomStorageCredentials\S3ConfigurationData
  * @phpstan-import-type AzureConfigurationDataShape from \Telnyx\CustomStorageCredentials\AzureConfigurationData
  *
- * @phpstan-type ConfigurationShape = GcsConfigurationDataShape|S3ConfigurationDataShape|AzureConfigurationDataShape
+ * @phpstan-type ConfigurationVariants = GcsConfigurationData|S3ConfigurationData|AzureConfigurationData
+ * @phpstan-type ConfigurationShape = ConfigurationVariants|GcsConfigurationDataShape|S3ConfigurationDataShape|AzureConfigurationDataShape
  */
 final class Configuration implements ConverterSource
 {

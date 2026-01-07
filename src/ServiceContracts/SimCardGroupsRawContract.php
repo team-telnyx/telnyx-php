@@ -18,12 +18,16 @@ use Telnyx\SimCardGroups\SimCardGroupRetrieveParams;
 use Telnyx\SimCardGroups\SimCardGroupUpdateParams;
 use Telnyx\SimCardGroups\SimCardGroupUpdateResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface SimCardGroupsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|SimCardGroupCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardGroupNewResponse>
      *
@@ -31,7 +35,7 @@ interface SimCardGroupsRawContract
      */
     public function create(
         array|SimCardGroupCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -39,6 +43,7 @@ interface SimCardGroupsRawContract
      *
      * @param string $id identifies the SIM group
      * @param array<string,mixed>|SimCardGroupRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardGroupGetResponse>
      *
@@ -47,7 +52,7 @@ interface SimCardGroupsRawContract
     public function retrieve(
         string $id,
         array|SimCardGroupRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -55,6 +60,7 @@ interface SimCardGroupsRawContract
      *
      * @param string $id identifies the SIM group
      * @param array<string,mixed>|SimCardGroupUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardGroupUpdateResponse>
      *
@@ -63,13 +69,14 @@ interface SimCardGroupsRawContract
     public function update(
         string $id,
         array|SimCardGroupUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|SimCardGroupListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<SimCardGroupListResponse>>
      *
@@ -77,13 +84,14 @@ interface SimCardGroupsRawContract
      */
     public function list(
         array|SimCardGroupListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies the SIM group
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SimCardGroupDeleteResponse>
      *
@@ -91,6 +99,6 @@ interface SimCardGroupsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

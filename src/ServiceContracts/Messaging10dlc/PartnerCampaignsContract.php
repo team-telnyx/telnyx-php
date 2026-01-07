@@ -12,16 +12,21 @@ use Telnyx\Messaging10dlc\PartnerCampaigns\TelnyxDownstreamCampaign;
 use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface PartnerCampaignsContract
 {
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): TelnyxDownstreamCampaign;
 
     /**
@@ -29,6 +34,7 @@ interface PartnerCampaignsContract
      *
      * @param string $webhookFailoverURL webhook failover to which campaign status updates are sent
      * @param string $webhookURL webhook to which campaign status updates are sent
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -36,7 +42,7 @@ interface PartnerCampaignsContract
         string $campaignID,
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): TelnyxDownstreamCampaign;
 
     /**
@@ -44,7 +50,8 @@ interface PartnerCampaignsContract
      *
      * @param int $page The 1-indexed page number to get. The default value is `1`.
      * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
-     * @param 'assignedPhoneNumbersCount'|'-assignedPhoneNumbersCount'|'brandDisplayName'|'-brandDisplayName'|'tcrBrandId'|'-tcrBranId'|'tcrCampaignId'|'-tcrCampaignId'|'createdAt'|'-createdAt'|'campaignStatus'|'-campaignStatus'|Sort $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
+     * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
+     * @param RequestOpts|null $requestOptions
      *
      * @return PerPagePaginationV2<TelnyxDownstreamCampaign>
      *
@@ -53,8 +60,8 @@ interface PartnerCampaignsContract
     public function list(
         int $page = 1,
         int $recordsPerPage = 10,
-        string|Sort $sort = '-createdAt',
-        ?RequestOptions $requestOptions = null,
+        Sort|string $sort = '-createdAt',
+        RequestOptions|array|null $requestOptions = null,
     ): PerPagePaginationV2;
 
     /**
@@ -62,6 +69,7 @@ interface PartnerCampaignsContract
      *
      * @param int $page The 1-indexed page number to get. The default value is `1`.
      * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
+     * @param RequestOpts|null $requestOptions
      *
      * @return PerPagePaginationV2<PartnerCampaignListSharedByMeResponse>
      *
@@ -70,13 +78,14 @@ interface PartnerCampaignsContract
     public function listSharedByMe(
         int $page = 1,
         int $recordsPerPage = 10,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): PerPagePaginationV2;
 
     /**
      * @api
      *
      * @param string $campaignID ID of the campaign in question
+     * @param RequestOpts|null $requestOptions
      *
      * @return array<string,CampaignSharingStatus>
      *
@@ -84,6 +93,6 @@ interface PartnerCampaignsContract
      */
     public function retrieveSharingStatus(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): array;
 }

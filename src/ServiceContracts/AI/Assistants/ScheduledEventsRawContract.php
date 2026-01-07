@@ -15,12 +15,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ScheduledEventsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|ScheduledEventCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse>
      *
@@ -29,13 +33,14 @@ interface ScheduledEventsRawContract
     public function create(
         string $assistantID,
         array|ScheduledEventCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ScheduledEventRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse>
      *
@@ -44,13 +49,14 @@ interface ScheduledEventsRawContract
     public function retrieve(
         string $eventID,
         array|ScheduledEventRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ScheduledEventListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse,>,>
      *
@@ -59,13 +65,14 @@ interface ScheduledEventsRawContract
     public function list(
         string $assistantID,
         array|ScheduledEventListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ScheduledEventDeleteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -74,6 +81,6 @@ interface ScheduledEventsRawContract
     public function delete(
         string $eventID,
         array|ScheduledEventDeleteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

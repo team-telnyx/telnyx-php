@@ -18,6 +18,9 @@ use Telnyx\ServiceContracts\ReportsContract;
 use Telnyx\Services\Reports\CdrUsageReportsService;
 use Telnyx\Services\Reports\MdrUsageReportsService;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ReportsService implements ReportsContract
 {
     /**
@@ -53,12 +56,13 @@ final class ReportsService implements ReportsContract
      * @param string $id Message uuid
      * @param string $cld Destination number
      * @param string $cli Origination number
-     * @param 'INBOUND'|'OUTBOUND'|Direction $direction Direction (inbound or outbound)
+     * @param Direction|value-of<Direction> $direction Direction (inbound or outbound)
      * @param string $endDate Pagination end date
-     * @param 'SMS'|'MMS'|MessageType $messageType Type of message
+     * @param MessageType|value-of<MessageType> $messageType Type of message
      * @param string $profile Name of the profile
      * @param string $startDate Pagination start date
-     * @param 'GW_TIMEOUT'|'DELIVERED'|'DLR_UNCONFIRMED'|'DLR_TIMEOUT'|'RECEIVED'|'GW_REJECT'|'FAILED'|Status $status Message status
+     * @param Status|value-of<Status> $status Message status
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -66,13 +70,13 @@ final class ReportsService implements ReportsContract
         ?string $id = null,
         ?string $cld = null,
         ?string $cli = null,
-        string|Direction|null $direction = null,
+        Direction|string|null $direction = null,
         ?string $endDate = null,
-        string|MessageType|null $messageType = null,
+        MessageType|string|null $messageType = null,
         ?string $profile = null,
         ?string $startDate = null,
-        string|Status|null $status = null,
-        ?RequestOptions $requestOptions = null,
+        Status|string|null $status = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ReportListMdrsResponse {
         $params = Util::removeNulls(
             [
@@ -110,6 +114,7 @@ final class ReportsService implements ReportsContract
      * @param string $simGroupName Sim group name
      * @param list<string> $sort Field used to order the data. If no field is specified, default value is 'created_at'
      * @param string $startDate Start date
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<ReportListWdrsResponse>
      *
@@ -129,7 +134,7 @@ final class ReportsService implements ReportsContract
         ?string $simGroupName = null,
         array $sort = ['created_at'],
         ?string $startDate = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
         $params = Util::removeNulls(
             [

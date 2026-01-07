@@ -21,6 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\AssistantsService::sendSMS()
  *
+ * @phpstan-import-type ConversationMetadataVariants from \Telnyx\AI\Assistants\AssistantSendSMSParams\ConversationMetadata
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantSendSMSParams\ConversationMetadata
  *
  * @phpstan-type AssistantSendSMSParamsShape = array{
@@ -46,7 +47,7 @@ final class AssistantSendSMSParams implements BaseModel
     #[Required]
     public string $to;
 
-    /** @var array<string,string|int|bool>|null $conversationMetadata */
+    /** @var array<string,ConversationMetadataVariants>|null $conversationMetadata */
     #[Optional('conversation_metadata', map: ConversationMetadata::class)]
     public ?array $conversationMetadata;
 

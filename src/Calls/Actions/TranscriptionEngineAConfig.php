@@ -23,7 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   minSpeakerCount?: int|null,
  *   model?: null|Model|value-of<Model>,
  *   profanityFilter?: bool|null,
- *   speechContext?: list<SpeechContextShape>|null,
+ *   speechContext?: list<SpeechContext|SpeechContextShape>|null,
  *   transcriptionEngine?: null|TranscriptionEngine|value-of<TranscriptionEngine>,
  *   useEnhanced?: bool|null,
  * }
@@ -122,7 +122,7 @@ final class TranscriptionEngineAConfig implements BaseModel
      * @param list<string>|null $hints
      * @param GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage>|null $language
      * @param Model|value-of<Model>|null $model
-     * @param list<SpeechContextShape>|null $speechContext
+     * @param list<SpeechContext|SpeechContextShape>|null $speechContext
      * @param TranscriptionEngine|value-of<TranscriptionEngine>|null $transcriptionEngine
      */
     public static function with(
@@ -254,7 +254,7 @@ final class TranscriptionEngineAConfig implements BaseModel
     /**
      * Speech context to improve transcription accuracy.
      *
-     * @param list<SpeechContextShape> $speechContext
+     * @param list<SpeechContext|SpeechContextShape> $speechContext
      */
     public function withSpeechContext(array $speechContext): self
     {

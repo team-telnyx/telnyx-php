@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   format?: string|null,
  *   resolution?: string|null,
  *   sessionID?: string|null,
- *   videoLayout?: array<string,VideoRegionShape>|null,
+ *   videoLayout?: array<string,VideoRegion|VideoRegionShape>|null,
  *   webhookEventFailoverURL?: string|null,
  *   webhookEventURL?: string|null,
  *   webhookTimeoutSecs?: int|null,
@@ -86,7 +86,7 @@ final class RoomCompositionCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,VideoRegionShape>|null $videoLayout
+     * @param array<string,VideoRegion|VideoRegionShape>|null $videoLayout
      */
     public static function with(
         ?string $format = null,
@@ -146,7 +146,7 @@ final class RoomCompositionCreateParams implements BaseModel
     /**
      * Describes the video layout of the room composition in terms of regions.
      *
-     * @param array<string,VideoRegionShape> $videoLayout
+     * @param array<string,VideoRegion|VideoRegionShape> $videoLayout
      */
     public function withVideoLayout(array $videoLayout): self
     {

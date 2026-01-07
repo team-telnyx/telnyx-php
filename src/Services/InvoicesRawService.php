@@ -18,6 +18,9 @@ use Telnyx\Invoices\InvoiceRetrieveParams\Action;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\InvoicesRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class InvoicesRawService implements InvoicesRawContract
 {
     // @phpstan-ignore-next-line
@@ -32,7 +35,8 @@ final class InvoicesRawService implements InvoicesRawContract
      * Retrieve a single invoice by its unique identifier.
      *
      * @param string $id Invoice UUID
-     * @param array{action?: 'json'|'link'|Action}|InvoiceRetrieveParams $params
+     * @param array{action?: Action|value-of<Action>}|InvoiceRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InvoiceGetResponse>
      *
@@ -41,7 +45,7 @@ final class InvoicesRawService implements InvoicesRawContract
     public function retrieve(
         string $id,
         array|InvoiceRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = InvoiceRetrieveParams::parseRequest(
             $params,
@@ -64,8 +68,9 @@ final class InvoicesRawService implements InvoicesRawContract
      * Retrieve a paginated list of invoices.
      *
      * @param array{
-     *   pageNumber?: int, pageSize?: int, sort?: 'period_start'|'-period_start'|Sort
+     *   pageNumber?: int, pageSize?: int, sort?: Sort|value-of<Sort>
      * }|InvoiceListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<InvoiceListResponse>>
      *
@@ -73,7 +78,7 @@ final class InvoicesRawService implements InvoicesRawContract
      */
     public function list(
         array|InvoiceListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = InvoiceListParams::parseRequest(
             $params,

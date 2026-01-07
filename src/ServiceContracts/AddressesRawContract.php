@@ -15,12 +15,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface AddressesRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|AddressCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AddressNewResponse>
      *
@@ -28,13 +32,14 @@ interface AddressesRawContract
      */
     public function create(
         array|AddressCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id address ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AddressGetResponse>
      *
@@ -42,13 +47,14 @@ interface AddressesRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|AddressListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<Address>>
      *
@@ -56,13 +62,14 @@ interface AddressesRawContract
      */
     public function list(
         array|AddressListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id address ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AddressDeleteResponse>
      *
@@ -70,6 +77,6 @@ interface AddressesRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type BatchCsvPaginationMetaShape from \Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\BatchCsvPaginationMeta
  *
  * @phpstan-type MessagingListResponseShape = array{
- *   data?: list<MdrDetailReportResponseShape>|null,
+ *   data?: list<MdrDetailReportResponse|MdrDetailReportResponseShape>|null,
  *   meta?: null|BatchCsvPaginationMeta|BatchCsvPaginationMetaShape,
  * }
  */
@@ -39,7 +39,7 @@ final class MessagingListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<MdrDetailReportResponseShape>|null $data
+     * @param list<MdrDetailReportResponse|MdrDetailReportResponseShape>|null $data
      * @param BatchCsvPaginationMeta|BatchCsvPaginationMetaShape|null $meta
      */
     public static function with(
@@ -55,7 +55,7 @@ final class MessagingListResponse implements BaseModel
     }
 
     /**
-     * @param list<MdrDetailReportResponseShape> $data
+     * @param list<MdrDetailReportResponse|MdrDetailReportResponseShape> $data
      */
     public function withData(array $data): self
     {

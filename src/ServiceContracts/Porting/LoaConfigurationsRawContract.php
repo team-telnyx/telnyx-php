@@ -17,12 +17,16 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateResponse;
 use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface LoaConfigurationsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|LoaConfigurationCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<LoaConfigurationNewResponse>
      *
@@ -30,13 +34,14 @@ interface LoaConfigurationsRawContract
      */
     public function create(
         array|LoaConfigurationCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies a LOA configuration
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<LoaConfigurationGetResponse>
      *
@@ -44,7 +49,7 @@ interface LoaConfigurationsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -52,6 +57,7 @@ interface LoaConfigurationsRawContract
      *
      * @param string $id identifies a LOA configuration
      * @param array<string,mixed>|LoaConfigurationUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<LoaConfigurationUpdateResponse>
      *
@@ -60,13 +66,14 @@ interface LoaConfigurationsRawContract
     public function update(
         string $id,
         array|LoaConfigurationUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|LoaConfigurationListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PortingLoaConfiguration>>
      *
@@ -74,13 +81,14 @@ interface LoaConfigurationsRawContract
      */
     public function list(
         array|LoaConfigurationListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies a LOA configuration
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -88,13 +96,14 @@ interface LoaConfigurationsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|LoaConfigurationPreview0Params $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
      *
@@ -102,13 +111,14 @@ interface LoaConfigurationsRawContract
      */
     public function preview0(
         array|LoaConfigurationPreview0Params $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id identifies a LOA configuration
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
      *
@@ -116,6 +126,6 @@ interface LoaConfigurationsRawContract
      */
     public function preview1(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

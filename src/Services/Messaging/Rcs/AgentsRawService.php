@@ -9,12 +9,17 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPagination;
 use Telnyx\Messaging\Rcs\Agents\AgentListParams;
+use Telnyx\Messaging\Rcs\Agents\AgentListParams\Page;
 use Telnyx\Messaging\Rcs\Agents\AgentUpdateParams;
 use Telnyx\RcsAgents\RcsAgent;
 use Telnyx\RcsAgents\RcsAgentResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging\Rcs\AgentsRawContract;
 
+/**
+ * @phpstan-import-type PageShape from \Telnyx\Messaging\Rcs\Agents\AgentListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AgentsRawService implements AgentsRawContract
 {
     // @phpstan-ignore-next-line
@@ -29,6 +34,7 @@ final class AgentsRawService implements AgentsRawContract
      * Retrieve an RCS agent
      *
      * @param string $id RCS agent ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RcsAgentResponse>
      *
@@ -36,7 +42,7 @@ final class AgentsRawService implements AgentsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -58,6 +64,7 @@ final class AgentsRawService implements AgentsRawContract
      *   webhookFailoverURL?: string|null,
      *   webhookURL?: string|null,
      * }|AgentUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RcsAgentResponse>
      *
@@ -66,7 +73,7 @@ final class AgentsRawService implements AgentsRawContract
     public function update(
         string $id,
         array|AgentUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AgentUpdateParams::parseRequest(
             $params,
@@ -88,7 +95,8 @@ final class AgentsRawService implements AgentsRawContract
      *
      * List all RCS agents
      *
-     * @param array{page?: array{number?: int, size?: int}}|AgentListParams $params
+     * @param array{page?: Page|PageShape}|AgentListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<RcsAgent>>
      *
@@ -96,7 +104,7 @@ final class AgentsRawService implements AgentsRawContract
      */
     public function list(
         array|AgentListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AgentListParams::parseRequest(
             $params,

@@ -16,6 +16,9 @@ use Telnyx\PhoneNumbers\Actions\ActionVerifyOwnershipResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbers\ActionsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsRawService implements ActionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,6 +34,7 @@ final class ActionsRawService implements ActionsRawContract
      *
      * @param string $id identifies the resource
      * @param array{bundleID: string}|ActionChangeBundleStatusParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionChangeBundleStatusResponse>
      *
@@ -39,7 +43,7 @@ final class ActionsRawService implements ActionsRawContract
     public function changeBundleStatus(
         string $id,
         array|ActionChangeBundleStatusParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionChangeBundleStatusParams::parseRequest(
             $params,
@@ -65,6 +69,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   emergencyAddressID: string, emergencyEnabled: bool
      * }|ActionEnableEmergencyParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionEnableEmergencyResponse>
      *
@@ -73,7 +78,7 @@ final class ActionsRawService implements ActionsRawContract
     public function enableEmergency(
         string $id,
         array|ActionEnableEmergencyParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionEnableEmergencyParams::parseRequest(
             $params,
@@ -96,6 +101,7 @@ final class ActionsRawService implements ActionsRawContract
      * Verifies ownership of the provided phone numbers and returns a mapping of numbers to their IDs, plus a list of numbers not found in the account.
      *
      * @param array{phoneNumbers: list<string>}|ActionVerifyOwnershipParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionVerifyOwnershipResponse>
      *
@@ -103,7 +109,7 @@ final class ActionsRawService implements ActionsRawContract
      */
     public function verifyOwnership(
         array|ActionVerifyOwnershipParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionVerifyOwnershipParams::parseRequest(
             $params,

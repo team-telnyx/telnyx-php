@@ -14,6 +14,9 @@ use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListResponse;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface AdditionalDocumentsRawContract
 {
     /**
@@ -21,6 +24,7 @@ interface AdditionalDocumentsRawContract
      *
      * @param string $id Porting Order id
      * @param array<string,mixed>|AdditionalDocumentCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AdditionalDocumentNewResponse>
      *
@@ -29,7 +33,7 @@ interface AdditionalDocumentsRawContract
     public function create(
         string $id,
         array|AdditionalDocumentCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -37,6 +41,7 @@ interface AdditionalDocumentsRawContract
      *
      * @param string $id Porting Order id
      * @param array<string,mixed>|AdditionalDocumentListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<AdditionalDocumentListResponse>>
      *
@@ -45,7 +50,7 @@ interface AdditionalDocumentsRawContract
     public function list(
         string $id,
         array|AdditionalDocumentListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -53,6 +58,7 @@ interface AdditionalDocumentsRawContract
      *
      * @param string $additionalDocumentID additional document identification
      * @param array<string,mixed>|AdditionalDocumentDeleteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -61,6 +67,6 @@ interface AdditionalDocumentsRawContract
     public function delete(
         string $additionalDocumentID,
         array|AdditionalDocumentDeleteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

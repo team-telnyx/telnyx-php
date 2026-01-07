@@ -17,12 +17,16 @@ use Telnyx\Reports\MdrUsageReports\MdrUsageReportListParams;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface MdrUsageReportsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|MdrUsageReportCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MdrUsageReportNewResponse>
      *
@@ -30,11 +34,13 @@ interface MdrUsageReportsRawContract
      */
     public function create(
         array|MdrUsageReportCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MdrUsageReportGetResponse>
      *
@@ -42,13 +48,14 @@ interface MdrUsageReportsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|MdrUsageReportListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<MdrUsageReport>>
      *
@@ -56,11 +63,13 @@ interface MdrUsageReportsRawContract
      */
     public function list(
         array|MdrUsageReportListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MdrUsageReportDeleteResponse>
      *
@@ -68,13 +77,14 @@ interface MdrUsageReportsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|MdrUsageReportFetchSyncParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MdrUsageReportFetchSyncResponse>
      *
@@ -82,6 +92,6 @@ interface MdrUsageReportsRawContract
      */
     public function fetchSync(
         array|MdrUsageReportFetchSyncParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

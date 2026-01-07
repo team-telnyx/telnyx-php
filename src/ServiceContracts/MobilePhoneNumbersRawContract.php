@@ -14,12 +14,16 @@ use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface MobilePhoneNumbersRawContract
 {
     /**
      * @api
      *
      * @param string $id The ID of the mobile phone number
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MobilePhoneNumberGetResponse>
      *
@@ -27,7 +31,7 @@ interface MobilePhoneNumbersRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -35,6 +39,7 @@ interface MobilePhoneNumbersRawContract
      *
      * @param string $id The ID of the mobile phone number
      * @param array<string,mixed>|MobilePhoneNumberUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MobilePhoneNumberUpdateResponse>
      *
@@ -43,13 +48,14 @@ interface MobilePhoneNumbersRawContract
     public function update(
         string $id,
         array|MobilePhoneNumberUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|MobilePhoneNumberListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<MobilePhoneNumber>>
      *
@@ -57,6 +63,6 @@ interface MobilePhoneNumbersRawContract
      */
     public function list(
         array|MobilePhoneNumberListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

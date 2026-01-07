@@ -8,11 +8,17 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
-use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Filter\PortingOrderStatus;
+use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Filter;
+use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Page;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingPhoneNumbersContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class PortingPhoneNumbersService implements PortingPhoneNumbersContract
 {
     /**
@@ -33,21 +39,18 @@ final class PortingPhoneNumbersService implements PortingPhoneNumbersContract
      *
      * Returns a list of your porting phone numbers.
      *
-     * @param array{
-     *   portingOrderStatus?: 'draft'|'in-process'|'submitted'|'exception'|'foc-date-confirmed'|'cancel-pending'|'ported'|'cancelled'|PortingOrderStatus,
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[porting_order_status]
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[porting_order_status]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<PortingPhoneNumberListResponse>
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null,
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 

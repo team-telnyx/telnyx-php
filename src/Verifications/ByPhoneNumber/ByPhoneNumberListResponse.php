@@ -14,7 +14,7 @@ use Telnyx\Verifications\Verification;
  * @phpstan-import-type VerifyMetaShape from \Telnyx\Verifications\ByPhoneNumber\VerifyMeta
  *
  * @phpstan-type ByPhoneNumberListResponseShape = array{
- *   data: list<VerificationShape>, meta: VerifyMeta|VerifyMetaShape
+ *   data: list<Verification|VerificationShape>, meta: VerifyMeta|VerifyMetaShape
  * }
  */
 final class ByPhoneNumberListResponse implements BaseModel
@@ -53,7 +53,7 @@ final class ByPhoneNumberListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VerificationShape> $data
+     * @param list<Verification|VerificationShape> $data
      * @param VerifyMeta|VerifyMetaShape $meta
      */
     public static function with(array $data, VerifyMeta|array $meta): self
@@ -67,7 +67,7 @@ final class ByPhoneNumberListResponse implements BaseModel
     }
 
     /**
-     * @param list<VerificationShape> $data
+     * @param list<Verification|VerificationShape> $data
      */
     public function withData(array $data): self
     {

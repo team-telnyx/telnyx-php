@@ -16,12 +16,16 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPaginationTopLevelArray;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface McpServersRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|McpServerCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<McpServerNewResponse>
      *
@@ -29,11 +33,13 @@ interface McpServersRawContract
      */
     public function create(
         array|McpServerCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<McpServerGetResponse>
      *
@@ -41,13 +47,14 @@ interface McpServersRawContract
      */
     public function retrieve(
         string $mcpServerID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|McpServerUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<McpServerUpdateResponse>
      *
@@ -56,13 +63,14 @@ interface McpServersRawContract
     public function update(
         string $mcpServerID,
         array|McpServerUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|McpServerListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPaginationTopLevelArray<McpServerListResponse>>
      *
@@ -70,11 +78,13 @@ interface McpServersRawContract
      */
     public function list(
         array|McpServerListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -82,6 +92,6 @@ interface McpServersRawContract
      */
     public function delete(
         string $mcpServerID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

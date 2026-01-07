@@ -10,7 +10,6 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\Sessions\Actions\ActionEndResponse;
 use Telnyx\Rooms\Sessions\Actions\ActionKickParams;
-use Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants\AllParticipants;
 use Telnyx\Rooms\Sessions\Actions\ActionKickResponse;
 use Telnyx\Rooms\Sessions\Actions\ActionMuteParams;
 use Telnyx\Rooms\Sessions\Actions\ActionMuteResponse;
@@ -18,6 +17,12 @@ use Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams;
 use Telnyx\Rooms\Sessions\Actions\ActionUnmuteResponse;
 use Telnyx\ServiceContracts\Rooms\Sessions\ActionsRawContract;
 
+/**
+ * @phpstan-import-type ParticipantsShape from \Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants
+ * @phpstan-import-type ParticipantsShape from \Telnyx\Rooms\Sessions\Actions\ActionMuteParams\Participants as ParticipantsShape1
+ * @phpstan-import-type ParticipantsShape from \Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants as ParticipantsShape2
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsRawService implements ActionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -32,6 +37,7 @@ final class ActionsRawService implements ActionsRawContract
      * Note: this will also kick all participants currently present in the room
      *
      * @param string $roomSessionID the unique identifier of a room session
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionEndResponse>
      *
@@ -39,7 +45,7 @@ final class ActionsRawService implements ActionsRawContract
      */
     public function end(
         string $roomSessionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -57,8 +63,9 @@ final class ActionsRawService implements ActionsRawContract
      *
      * @param string $roomSessionID the unique identifier of a room session
      * @param array{
-     *   exclude?: list<string>, participants?: 'all'|AllParticipants|list<string>
+     *   exclude?: list<string>, participants?: ParticipantsShape
      * }|ActionKickParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionKickResponse>
      *
@@ -67,7 +74,7 @@ final class ActionsRawService implements ActionsRawContract
     public function kick(
         string $roomSessionID,
         array|ActionKickParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionKickParams::parseRequest(
             $params,
@@ -91,9 +98,9 @@ final class ActionsRawService implements ActionsRawContract
      *
      * @param string $roomSessionID the unique identifier of a room session
      * @param array{
-     *   exclude?: list<string>,
-     *   participants?: 'all'|ActionMuteParams\Participants\AllParticipants|list<string>,
+     *   exclude?: list<string>, participants?: ParticipantsShape1
      * }|ActionMuteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionMuteResponse>
      *
@@ -102,7 +109,7 @@ final class ActionsRawService implements ActionsRawContract
     public function mute(
         string $roomSessionID,
         array|ActionMuteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionMuteParams::parseRequest(
             $params,
@@ -126,9 +133,9 @@ final class ActionsRawService implements ActionsRawContract
      *
      * @param string $roomSessionID the unique identifier of a room session
      * @param array{
-     *   exclude?: list<string>,
-     *   participants?: 'all'|ActionUnmuteParams\Participants\AllParticipants|list<string>,
+     *   exclude?: list<string>, participants?: ParticipantsShape2
      * }|ActionUnmuteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionUnmuteResponse>
      *
@@ -137,7 +144,7 @@ final class ActionsRawService implements ActionsRawContract
     public function unmute(
         string $roomSessionID,
         array|ActionUnmuteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ActionUnmuteParams::parseRequest(
             $params,

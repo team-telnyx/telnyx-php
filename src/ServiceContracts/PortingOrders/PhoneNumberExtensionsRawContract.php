@@ -15,6 +15,9 @@ use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionNewResponse;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface PhoneNumberExtensionsRawContract
 {
     /**
@@ -22,6 +25,7 @@ interface PhoneNumberExtensionsRawContract
      *
      * @param string $portingOrderID Identifies the Porting Order associated with the phone number extension
      * @param array<string,mixed>|PhoneNumberExtensionCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberExtensionNewResponse>
      *
@@ -30,7 +34,7 @@ interface PhoneNumberExtensionsRawContract
     public function create(
         string $portingOrderID,
         array|PhoneNumberExtensionCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -38,6 +42,7 @@ interface PhoneNumberExtensionsRawContract
      *
      * @param string $portingOrderID Identifies the Porting Order associated with the phone number extensions
      * @param array<string,mixed>|PhoneNumberExtensionListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<PortingPhoneNumberExtension>>
      *
@@ -46,7 +51,7 @@ interface PhoneNumberExtensionsRawContract
     public function list(
         string $portingOrderID,
         array|PhoneNumberExtensionListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -54,6 +59,7 @@ interface PhoneNumberExtensionsRawContract
      *
      * @param string $id Identifies the phone number extension to be deleted
      * @param array<string,mixed>|PhoneNumberExtensionDeleteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberExtensionDeleteResponse>
      *
@@ -62,6 +68,6 @@ interface PhoneNumberExtensionsRawContract
     public function delete(
         string $id,
         array|PhoneNumberExtensionDeleteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

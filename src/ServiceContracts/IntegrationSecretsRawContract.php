@@ -13,12 +13,16 @@ use Telnyx\IntegrationSecrets\IntegrationSecretListParams;
 use Telnyx\IntegrationSecrets\IntegrationSecretNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface IntegrationSecretsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|IntegrationSecretCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<IntegrationSecretNewResponse>
      *
@@ -26,13 +30,14 @@ interface IntegrationSecretsRawContract
      */
     public function create(
         array|IntegrationSecretCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|IntegrationSecretListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<IntegrationSecret>>
      *
@@ -40,11 +45,13 @@ interface IntegrationSecretsRawContract
      */
     public function list(
         array|IntegrationSecretListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -52,6 +59,6 @@ interface IntegrationSecretsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

@@ -11,9 +11,8 @@ use Telnyx\Conferences\ConferenceCreateParams\BeepEnabled;
 use Telnyx\Conferences\ConferenceCreateParams\Region;
 use Telnyx\Conferences\ConferenceGetResponse;
 use Telnyx\Conferences\ConferenceListParams;
-use Telnyx\Conferences\ConferenceListParams\Filter\Product;
-use Telnyx\Conferences\ConferenceListParams\Filter\Status;
-use Telnyx\Conferences\ConferenceListParams\Filter\Type;
+use Telnyx\Conferences\ConferenceListParams\Filter;
+use Telnyx\Conferences\ConferenceListParams\Page;
 use Telnyx\Conferences\ConferenceListParticipantsParams;
 use Telnyx\Conferences\ConferenceListParticipantsResponse;
 use Telnyx\Conferences\ConferenceNewResponse;
@@ -24,6 +23,13 @@ use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ConferencesRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Conferences\ConferenceListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Conferences\ConferenceListParams\Page
+ * @phpstan-import-type FilterShape from \Telnyx\Conferences\ConferenceListParticipantsParams\Filter as FilterShape1
+ * @phpstan-import-type PageShape from \Telnyx\Conferences\ConferenceListParticipantsParams\Page as PageShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ConferencesRawService implements ConferencesRawContract
 {
     // @phpstan-ignore-next-line
@@ -49,7 +55,7 @@ final class ConferencesRawService implements ConferencesRawContract
      * @param array{
      *   callControlID: string,
      *   name: string,
-     *   beepEnabled?: 'always'|'never'|'on_enter'|'on_exit'|BeepEnabled,
+     *   beepEnabled?: BeepEnabled|value-of<BeepEnabled>,
      *   clientState?: string,
      *   comfortNoise?: bool,
      *   commandID?: string,
@@ -57,9 +63,10 @@ final class ConferencesRawService implements ConferencesRawContract
      *   holdAudioURL?: string,
      *   holdMediaName?: string,
      *   maxParticipants?: int,
-     *   region?: 'Australia'|'Europe'|'Middle East'|'US'|Region,
+     *   region?: Region|value-of<Region>,
      *   startConferenceOnCreate?: bool,
      * }|ConferenceCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ConferenceNewResponse>
      *
@@ -67,7 +74,7 @@ final class ConferencesRawService implements ConferencesRawContract
      */
     public function create(
         array|ConferenceCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ConferenceCreateParams::parseRequest(
             $params,
@@ -91,8 +98,9 @@ final class ConferencesRawService implements ConferencesRawContract
      *
      * @param string $id Uniquely identifies the conference by id
      * @param array{
-     *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ConferenceRetrieveParams\Region,
+     *   region?: ConferenceRetrieveParams\Region|value-of<ConferenceRetrieveParams\Region>,
      * }|ConferenceRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ConferenceGetResponse>
      *
@@ -101,7 +109,7 @@ final class ConferencesRawService implements ConferencesRawContract
     public function retrieve(
         string $id,
         array|ConferenceRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ConferenceRetrieveParams::parseRequest(
             $params,
@@ -124,28 +132,11 @@ final class ConferencesRawService implements ConferencesRawContract
      * Lists conferences. Conferences are created on demand, and will expire after all participants have left the conference or after 4 hours regardless of the number of active participants. Conferences are listed in descending order by `expires_at`.
      *
      * @param array{
-     *   filter?: array{
-     *     applicationName?: array{contains?: string},
-     *     applicationSessionID?: string,
-     *     connectionID?: string,
-     *     failed?: bool,
-     *     from?: string,
-     *     legID?: string,
-     *     name?: string,
-     *     occurredAt?: array{
-     *       eq?: string, gt?: string, gte?: string, lt?: string, lte?: string
-     *     },
-     *     outboundOutboundVoiceProfileID?: string,
-     *     product?: 'call_control'|'fax'|'texml'|Product,
-     *     status?: 'init'|'in_progress'|'completed'|Status,
-     *     to?: string,
-     *     type?: 'command'|'webhook'|Type,
-     *   },
-     *   page?: array{
-     *     after?: string, before?: string, limit?: int, number?: int, size?: int
-     *   },
-     *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ConferenceListParams\Region,
+     *   filter?: Filter|FilterShape,
+     *   page?: Page|PageShape,
+     *   region?: ConferenceListParams\Region|value-of<ConferenceListParams\Region>,
      * }|ConferenceListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<Conference>>
      *
@@ -153,7 +144,7 @@ final class ConferencesRawService implements ConferencesRawContract
      */
     public function list(
         array|ConferenceListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ConferenceListParams::parseRequest(
             $params,
@@ -178,12 +169,11 @@ final class ConferencesRawService implements ConferencesRawContract
      *
      * @param string $conferenceID Uniquely identifies the conference by id
      * @param array{
-     *   filter?: array{muted?: bool, onHold?: bool, whispering?: bool},
-     *   page?: array{
-     *     after?: string, before?: string, limit?: int, number?: int, size?: int
-     *   },
-     *   region?: 'Australia'|'Europe'|'Middle East'|'US'|ConferenceListParticipantsParams\Region,
+     *   filter?: ConferenceListParticipantsParams\Filter|FilterShape1,
+     *   page?: ConferenceListParticipantsParams\Page|PageShape1,
+     *   region?: ConferenceListParticipantsParams\Region|value-of<ConferenceListParticipantsParams\Region>,
      * }|ConferenceListParticipantsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<ConferenceListParticipantsResponse>>
      *
@@ -192,7 +182,7 @@ final class ConferencesRawService implements ConferencesRawContract
     public function listParticipants(
         string $conferenceID,
         array|ConferenceListParticipantsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ConferenceListParticipantsParams::parseRequest(
             $params,

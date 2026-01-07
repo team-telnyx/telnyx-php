@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
+use Telnyx\AccessIPAddress\AccessIPAddressListParams\Filter;
 use Telnyx\AccessIPAddress\AccessIPAddressResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
@@ -12,6 +13,10 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AccessIPAddressContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\AccessIPAddress\AccessIPAddressListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AccessIPAddressService implements AccessIPAddressContract
 {
     /**
@@ -32,12 +37,14 @@ final class AccessIPAddressService implements AccessIPAddressContract
      *
      * Create new Access IP Address
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function create(
         string $ipAddress,
         ?string $description = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AccessIPAddressResponse {
         $params = Util::removeNulls(
             ['ipAddress' => $ipAddress, 'description' => $description]
@@ -54,11 +61,13 @@ final class AccessIPAddressService implements AccessIPAddressContract
      *
      * Retrieve an access IP address
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $accessIPAddressID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AccessIPAddressResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($accessIPAddressID, requestOptions: $requestOptions);
@@ -71,26 +80,18 @@ final class AccessIPAddressService implements AccessIPAddressContract
      *
      * List all Access IP Addresses
      *
-     * @param array{
-     *   createdAt?: string|\DateTimeInterface|array{
-     *     gt?: string|\DateTimeInterface,
-     *     gte?: string|\DateTimeInterface,
-     *     lt?: string|\DateTimeInterface,
-     *     lte?: string|\DateTimeInterface,
-     *   },
-     *   ipAddress?: string,
-     *   ipSource?: string,
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[ip_source], filter[ip_address], filter[created_at]. Supports complex bracket operations for dynamic filtering.
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[ip_source], filter[ip_address], filter[created_at]. Supports complex bracket operations for dynamic filtering.
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<AccessIPAddressResponse>
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
+        Filter|array|null $filter = null,
         ?int $pageNumber = null,
         ?int $pageSize = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
         $params = Util::removeNulls(
             [
@@ -111,11 +112,13 @@ final class AccessIPAddressService implements AccessIPAddressContract
      *
      * Delete access IP address
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $accessIPAddressID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AccessIPAddressResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($accessIPAddressID, requestOptions: $requestOptions);

@@ -14,6 +14,9 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface VersionsRawContract
 {
     /**
@@ -21,6 +24,7 @@ interface VersionsRawContract
      *
      * @param string $versionID Path param:
      * @param array<string,mixed>|VersionRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InferenceEmbedding>
      *
@@ -29,7 +33,7 @@ interface VersionsRawContract
     public function retrieve(
         string $versionID,
         array|VersionRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -37,6 +41,7 @@ interface VersionsRawContract
      *
      * @param string $versionID Path param:
      * @param array<string,mixed>|VersionUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InferenceEmbedding>
      *
@@ -45,11 +50,13 @@ interface VersionsRawContract
     public function update(
         string $versionID,
         array|VersionUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AssistantsList>
      *
@@ -57,13 +64,14 @@ interface VersionsRawContract
      */
     public function list(
         string $assistantID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|VersionDeleteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -72,13 +80,14 @@ interface VersionsRawContract
     public function delete(
         string $versionID,
         array|VersionDeleteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|VersionPromoteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InferenceEmbedding>
      *
@@ -87,6 +96,6 @@ interface VersionsRawContract
     public function promote(
         string $versionID,
         array|VersionPromoteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

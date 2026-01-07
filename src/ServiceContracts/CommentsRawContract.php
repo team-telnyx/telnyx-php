@@ -14,12 +14,16 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface CommentsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|CommentCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CommentNewResponse>
      *
@@ -27,13 +31,14 @@ interface CommentsRawContract
      */
     public function create(
         array|CommentCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id the comment ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CommentGetResponse>
      *
@@ -41,13 +46,14 @@ interface CommentsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|CommentListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CommentListResponse>
      *
@@ -55,13 +61,14 @@ interface CommentsRawContract
      */
     public function list(
         array|CommentListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id the comment ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CommentMarkAsReadResponse>
      *
@@ -69,6 +76,6 @@ interface CommentsRawContract
      */
     public function markAsRead(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

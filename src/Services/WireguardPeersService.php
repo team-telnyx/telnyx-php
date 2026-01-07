@@ -12,10 +12,17 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WireguardPeersContract;
 use Telnyx\WireguardPeers\WireguardPeerDeleteResponse;
 use Telnyx\WireguardPeers\WireguardPeerGetResponse;
+use Telnyx\WireguardPeers\WireguardPeerListParams\Filter;
+use Telnyx\WireguardPeers\WireguardPeerListParams\Page;
 use Telnyx\WireguardPeers\WireguardPeerListResponse;
 use Telnyx\WireguardPeers\WireguardPeerNewResponse;
 use Telnyx\WireguardPeers\WireguardPeerUpdateResponse;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\WireguardPeers\WireguardPeerListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\WireguardPeers\WireguardPeerListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class WireguardPeersService implements WireguardPeersContract
 {
     /**
@@ -38,13 +45,14 @@ final class WireguardPeersService implements WireguardPeersContract
      *
      * @param string $wireguardInterfaceID the id of the wireguard interface associated with the peer
      * @param string $publicKey The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $wireguardInterfaceID,
         ?string $publicKey = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): WireguardPeerNewResponse {
         $params = Util::removeNulls(
             [
@@ -65,12 +73,13 @@ final class WireguardPeersService implements WireguardPeersContract
      * Retrieve the WireGuard peer.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): WireguardPeerGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -85,13 +94,14 @@ final class WireguardPeersService implements WireguardPeersContract
      *
      * @param string $id identifies the resource
      * @param string $publicKey The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $id,
         ?string $publicKey = null,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): WireguardPeerUpdateResponse {
         $params = Util::removeNulls(['publicKey' => $publicKey]);
 
@@ -106,21 +116,18 @@ final class WireguardPeersService implements WireguardPeersContract
      *
      * List all WireGuard peers.
      *
-     * @param array{
-     *   wireguardInterfaceID?: string
-     * } $filter Consolidated filter parameter (deepObject style). Originally: filter[wireguard_interface_id]
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[wireguard_interface_id]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<WireguardPeerListResponse>
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null,
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
@@ -136,12 +143,13 @@ final class WireguardPeersService implements WireguardPeersContract
      * Delete the WireGuard peer.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): WireguardPeerDeleteResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, requestOptions: $requestOptions);
@@ -155,12 +163,13 @@ final class WireguardPeersService implements WireguardPeersContract
      * Retrieve Wireguard config template for Peer
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieveConfig(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): string {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveConfig($id, requestOptions: $requestOptions);

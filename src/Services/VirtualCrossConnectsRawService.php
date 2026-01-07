@@ -15,11 +15,18 @@ use Telnyx\VirtualCrossConnects\VirtualCrossConnectCreateParams\CloudProvider;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectDeleteResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectListParams;
+use Telnyx\VirtualCrossConnects\VirtualCrossConnectListParams\Filter;
+use Telnyx\VirtualCrossConnects\VirtualCrossConnectListParams\Page;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectListResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectNewResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectUpdateParams;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectUpdateResponse;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\VirtualCrossConnects\VirtualCrossConnectListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\VirtualCrossConnects\VirtualCrossConnectListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class VirtualCrossConnectsRawService implements VirtualCrossConnectsRawContract
 {
     // @phpstan-ignore-next-line
@@ -37,7 +44,7 @@ final class VirtualCrossConnectsRawService implements VirtualCrossConnectsRawCon
      *   regionCode: string,
      *   bandwidthMbps?: float,
      *   bgpAsn?: float,
-     *   cloudProvider?: 'aws'|'azure'|'gce'|CloudProvider,
+     *   cloudProvider?: CloudProvider|value-of<CloudProvider>,
      *   cloudProviderRegion?: string,
      *   name?: string,
      *   networkID?: string,
@@ -50,6 +57,7 @@ final class VirtualCrossConnectsRawService implements VirtualCrossConnectsRawCon
      *   secondaryCloudIP?: string,
      *   secondaryTelnyxIP?: string,
      * }|VirtualCrossConnectCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VirtualCrossConnectNewResponse>
      *
@@ -57,7 +65,7 @@ final class VirtualCrossConnectsRawService implements VirtualCrossConnectsRawCon
      */
     public function create(
         array|VirtualCrossConnectCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = VirtualCrossConnectCreateParams::parseRequest(
             $params,
@@ -80,6 +88,7 @@ final class VirtualCrossConnectsRawService implements VirtualCrossConnectsRawCon
      * Retrieve a Virtual Cross Connect.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VirtualCrossConnectGetResponse>
      *
@@ -87,7 +96,7 @@ final class VirtualCrossConnectsRawService implements VirtualCrossConnectsRawCon
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -112,6 +121,7 @@ final class VirtualCrossConnectsRawService implements VirtualCrossConnectsRawCon
      *   secondaryEnabled?: bool,
      *   secondaryRoutingAnnouncement?: bool,
      * }|VirtualCrossConnectUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VirtualCrossConnectUpdateResponse>
      *
@@ -120,7 +130,7 @@ final class VirtualCrossConnectsRawService implements VirtualCrossConnectsRawCon
     public function update(
         string $id,
         array|VirtualCrossConnectUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = VirtualCrossConnectUpdateParams::parseRequest(
             $params,
@@ -143,8 +153,9 @@ final class VirtualCrossConnectsRawService implements VirtualCrossConnectsRawCon
      * List all Virtual Cross Connects.
      *
      * @param array{
-     *   filter?: array{networkID?: string}, page?: array{number?: int, size?: int}
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|VirtualCrossConnectListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<VirtualCrossConnectListResponse>>
      *
@@ -152,7 +163,7 @@ final class VirtualCrossConnectsRawService implements VirtualCrossConnectsRawCon
      */
     public function list(
         array|VirtualCrossConnectListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = VirtualCrossConnectListParams::parseRequest(
             $params,
@@ -176,6 +187,7 @@ final class VirtualCrossConnectsRawService implements VirtualCrossConnectsRawCon
      * Delete a Virtual Cross Connect.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VirtualCrossConnectDeleteResponse>
      *
@@ -183,7 +195,7 @@ final class VirtualCrossConnectsRawService implements VirtualCrossConnectsRawCon
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

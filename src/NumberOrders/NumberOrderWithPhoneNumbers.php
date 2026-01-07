@@ -19,7 +19,7 @@ use Telnyx\NumberOrders\NumberOrderWithPhoneNumbers\Status;
  *   createdAt?: \DateTimeInterface|null,
  *   customerReference?: string|null,
  *   messagingProfileID?: string|null,
- *   phoneNumbers?: list<PhoneNumberShape>|null,
+ *   phoneNumbers?: list<PhoneNumber|PhoneNumberShape>|null,
  *   phoneNumbersCount?: int|null,
  *   recordType?: string|null,
  *   requirementsMet?: bool|null,
@@ -113,7 +113,7 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PhoneNumberShape>|null $phoneNumbers
+     * @param list<PhoneNumber|PhoneNumberShape>|null $phoneNumbers
      * @param Status|value-of<Status>|null $status
      * @param list<string>|null $subNumberOrdersIDs
      */
@@ -215,7 +215,7 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
     }
 
     /**
-     * @param list<PhoneNumberShape> $phoneNumbers
+     * @param list<PhoneNumber|PhoneNumberShape> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {

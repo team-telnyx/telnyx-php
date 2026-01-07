@@ -10,6 +10,9 @@ use Telnyx\GlobalIPAllowedPorts\GlobalIPAllowedPortListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPAllowedPortsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class GlobalIPAllowedPortsService implements GlobalIPAllowedPortsContract
 {
     /**
@@ -30,10 +33,12 @@ final class GlobalIPAllowedPortsService implements GlobalIPAllowedPortsContract
      *
      * List all Global IP Allowed Ports
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): GlobalIPAllowedPortListResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(requestOptions: $requestOptions);

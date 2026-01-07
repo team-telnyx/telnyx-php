@@ -13,12 +13,16 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SpeechToTextListResp
 use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SpeechToTextNewResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface SpeechToTextRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|SpeechToTextCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SpeechToTextNewResponse>
      *
@@ -26,11 +30,13 @@ interface SpeechToTextRawContract
      */
     public function create(
         array|SpeechToTextCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SpeechToTextGetResponse>
      *
@@ -38,20 +44,26 @@ interface SpeechToTextRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<SpeechToTextListResponse>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse;
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SpeechToTextDeleteResponse>
      *
@@ -59,6 +71,6 @@ interface SpeechToTextRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

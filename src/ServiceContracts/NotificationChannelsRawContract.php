@@ -17,12 +17,16 @@ use Telnyx\NotificationChannels\NotificationChannelUpdateParams;
 use Telnyx\NotificationChannels\NotificationChannelUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface NotificationChannelsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|NotificationChannelCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NotificationChannelNewResponse>
      *
@@ -30,13 +34,14 @@ interface NotificationChannelsRawContract
      */
     public function create(
         array|NotificationChannelCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id the id of the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NotificationChannelGetResponse>
      *
@@ -44,7 +49,7 @@ interface NotificationChannelsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -52,6 +57,7 @@ interface NotificationChannelsRawContract
      *
      * @param string $notificationChannelID the id of the resource
      * @param array<string,mixed>|NotificationChannelUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NotificationChannelUpdateResponse>
      *
@@ -60,13 +66,14 @@ interface NotificationChannelsRawContract
     public function update(
         string $notificationChannelID,
         array|NotificationChannelUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|NotificationChannelListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<NotificationChannel>>
      *
@@ -74,13 +81,14 @@ interface NotificationChannelsRawContract
      */
     public function list(
         array|NotificationChannelListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id the id of the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NotificationChannelDeleteResponse>
      *
@@ -88,6 +96,6 @@ interface NotificationChannelsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

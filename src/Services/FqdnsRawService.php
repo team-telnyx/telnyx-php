@@ -13,12 +13,19 @@ use Telnyx\Fqdns\FqdnCreateParams;
 use Telnyx\Fqdns\FqdnDeleteResponse;
 use Telnyx\Fqdns\FqdnGetResponse;
 use Telnyx\Fqdns\FqdnListParams;
+use Telnyx\Fqdns\FqdnListParams\Filter;
+use Telnyx\Fqdns\FqdnListParams\Page;
 use Telnyx\Fqdns\FqdnNewResponse;
 use Telnyx\Fqdns\FqdnUpdateParams;
 use Telnyx\Fqdns\FqdnUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\FqdnsRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Fqdns\FqdnListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Fqdns\FqdnListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class FqdnsRawService implements FqdnsRawContract
 {
     // @phpstan-ignore-next-line
@@ -35,6 +42,7 @@ final class FqdnsRawService implements FqdnsRawContract
      * @param array{
      *   connectionID: string, dnsRecordType: string, fqdn: string, port?: int|null
      * }|FqdnCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FqdnNewResponse>
      *
@@ -42,7 +50,7 @@ final class FqdnsRawService implements FqdnsRawContract
      */
     public function create(
         array|FqdnCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = FqdnCreateParams::parseRequest(
             $params,
@@ -65,6 +73,7 @@ final class FqdnsRawService implements FqdnsRawContract
      * Return the details regarding a specific FQDN.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FqdnGetResponse>
      *
@@ -72,7 +81,7 @@ final class FqdnsRawService implements FqdnsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -92,6 +101,7 @@ final class FqdnsRawService implements FqdnsRawContract
      * @param array{
      *   connectionID?: string, dnsRecordType?: string, fqdn?: string, port?: int|null
      * }|FqdnUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FqdnUpdateResponse>
      *
@@ -100,7 +110,7 @@ final class FqdnsRawService implements FqdnsRawContract
     public function update(
         string $id,
         array|FqdnUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = FqdnUpdateParams::parseRequest(
             $params,
@@ -123,11 +133,9 @@ final class FqdnsRawService implements FqdnsRawContract
      * Get all FQDNs belonging to the user that match the given filters.
      *
      * @param array{
-     *   filter?: array{
-     *     connectionID?: string, dnsRecordType?: string, fqdn?: string, port?: int
-     *   },
-     *   page?: array{number?: int, size?: int},
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|FqdnListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<Fqdn>>
      *
@@ -135,7 +143,7 @@ final class FqdnsRawService implements FqdnsRawContract
      */
     public function list(
         array|FqdnListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = FqdnListParams::parseRequest(
             $params,
@@ -159,6 +167,7 @@ final class FqdnsRawService implements FqdnsRawContract
      * Delete an FQDN.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FqdnDeleteResponse>
      *
@@ -166,7 +175,7 @@ final class FqdnsRawService implements FqdnsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

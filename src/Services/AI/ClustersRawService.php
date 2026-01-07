@@ -19,6 +19,9 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\ClustersRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ClustersRawService implements ClustersRawContract
 {
     // @phpstan-ignore-next-line
@@ -35,6 +38,7 @@ final class ClustersRawService implements ClustersRawContract
      * @param array{
      *   showSubclusters?: bool, topNNodes?: int
      * }|ClusterRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ClusterGetResponse>
      *
@@ -43,7 +47,7 @@ final class ClustersRawService implements ClustersRawContract
     public function retrieve(
         string $taskID,
         array|ClusterRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ClusterRetrieveParams::parseRequest(
             $params,
@@ -69,6 +73,7 @@ final class ClustersRawService implements ClustersRawContract
      * List all clusters
      *
      * @param array{pageNumber?: int, pageSize?: int}|ClusterListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<ClusterListResponse>>
      *
@@ -76,7 +81,7 @@ final class ClustersRawService implements ClustersRawContract
      */
     public function list(
         array|ClusterListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ClusterListParams::parseRequest(
             $params,
@@ -102,13 +107,15 @@ final class ClustersRawService implements ClustersRawContract
      *
      * Delete a cluster
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<mixed>
      *
      * @throws APIException
      */
     public function delete(
         string $taskID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -131,6 +138,7 @@ final class ClustersRawService implements ClustersRawContract
      *   minSubclusterSize?: int,
      *   prefix?: string,
      * }|ClusterComputeParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ClusterComputeResponse>
      *
@@ -138,7 +146,7 @@ final class ClustersRawService implements ClustersRawContract
      */
     public function compute(
         array|ClusterComputeParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ClusterComputeParams::parseRequest(
             $params,
@@ -161,6 +169,7 @@ final class ClustersRawService implements ClustersRawContract
      * Fetch a cluster visualization
      *
      * @param array{clusterID?: int}|ClusterFetchGraphParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
      *
@@ -169,7 +178,7 @@ final class ClustersRawService implements ClustersRawContract
     public function fetchGraph(
         string $taskID,
         array|ClusterFetchGraphParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ClusterFetchGraphParams::parseRequest(
             $params,

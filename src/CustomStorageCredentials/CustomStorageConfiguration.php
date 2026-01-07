@@ -11,6 +11,7 @@ use Telnyx\CustomStorageCredentials\CustomStorageConfiguration\Backend;
 use Telnyx\CustomStorageCredentials\CustomStorageConfiguration\Configuration;
 
 /**
+ * @phpstan-import-type ConfigurationVariants from \Telnyx\CustomStorageCredentials\CustomStorageConfiguration\Configuration
  * @phpstan-import-type ConfigurationShape from \Telnyx\CustomStorageCredentials\CustomStorageConfiguration\Configuration
  *
  * @phpstan-type CustomStorageConfigurationShape = array{
@@ -26,6 +27,7 @@ final class CustomStorageConfiguration implements BaseModel
     #[Required(enum: Backend::class)]
     public string $backend;
 
+    /** @var ConfigurationVariants $configuration */
     #[Required(union: Configuration::class)]
     public GcsConfigurationData|S3ConfigurationData|AzureConfigurationData $configuration;
 

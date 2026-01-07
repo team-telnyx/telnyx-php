@@ -9,11 +9,9 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data;
-use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data\Country;
-use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data\Mcc;
-use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data\Plmn;
 
 /**
+ * @phpstan-import-type DataVariants from \Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data
  * @phpstan-import-type DataShape from \Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data
  * @phpstan-import-type PaginationMetaShape from \Telnyx\AuthenticationProviders\PaginationMeta
  *
@@ -26,7 +24,7 @@ final class WirelessBlocklistValueListResponse implements BaseModel
     /** @use SdkModel<WirelessBlocklistValueListResponseShape> */
     use SdkModel;
 
-    /** @var list<Country>|list<Mcc>|list<Plmn>|null $data */
+    /** @var DataVariants|null $data */
     #[Optional(union: Data::class)]
     public ?array $data;
 

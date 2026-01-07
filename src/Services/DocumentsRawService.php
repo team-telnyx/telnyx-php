@@ -13,16 +13,26 @@ use Telnyx\Documents\DocumentDeleteResponse;
 use Telnyx\Documents\DocumentGenerateDownloadLinkResponse;
 use Telnyx\Documents\DocumentGetResponse;
 use Telnyx\Documents\DocumentListParams;
+use Telnyx\Documents\DocumentListParams\Filter;
+use Telnyx\Documents\DocumentListParams\Page;
 use Telnyx\Documents\DocumentListParams\Sort;
 use Telnyx\Documents\DocumentUpdateParams;
 use Telnyx\Documents\DocumentUpdateResponse;
 use Telnyx\Documents\DocumentUploadJsonParams;
 use Telnyx\Documents\DocumentUploadJsonResponse;
 use Telnyx\Documents\DocumentUploadParams;
+use Telnyx\Documents\DocumentUploadParams\Document;
 use Telnyx\Documents\DocumentUploadResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DocumentsRawContract;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Documents\DocumentListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Documents\DocumentListParams\Page
+ * @phpstan-import-type DocumentShape from \Telnyx\Documents\DocumentUploadParams\Document
+ * @phpstan-import-type DocumentShape from \Telnyx\Documents\DocumentUploadJsonParams\Document as DocumentShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class DocumentsRawService implements DocumentsRawContract
 {
     // @phpstan-ignore-next-line
@@ -37,6 +47,7 @@ final class DocumentsRawService implements DocumentsRawContract
      * Retrieve a document.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DocumentGetResponse>
      *
@@ -44,7 +55,7 @@ final class DocumentsRawService implements DocumentsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -64,6 +75,7 @@ final class DocumentsRawService implements DocumentsRawContract
      * @param array{
      *   customerReference?: string, filename?: string
      * }|DocumentUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DocumentUpdateResponse>
      *
@@ -72,7 +84,7 @@ final class DocumentsRawService implements DocumentsRawContract
     public function update(
         string $documentID,
         array|DocumentUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = DocumentUpdateParams::parseRequest(
             $params,
@@ -95,16 +107,11 @@ final class DocumentsRawService implements DocumentsRawContract
      * List all documents ordered by created_at descending.
      *
      * @param array{
-     *   filter?: array{
-     *     createdAt?: array{
-     *       gt?: string|\DateTimeInterface, lt?: string|\DateTimeInterface
-     *     },
-     *     customerReference?: array{eq?: string, in?: list<string>},
-     *     filename?: array{contains?: string},
-     *   },
-     *   page?: array{number?: int, size?: int},
-     *   sort?: list<'filename'|'created_at'|'updated_at'|'-filename'|'-created_at'|'-updated_at'|Sort>,
+     *   filter?: Filter|FilterShape,
+     *   page?: Page|PageShape,
+     *   sort?: list<Sort|value-of<Sort>>,
      * }|DocumentListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<DocServiceDocument>>
      *
@@ -112,7 +119,7 @@ final class DocumentsRawService implements DocumentsRawContract
      */
     public function list(
         array|DocumentListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = DocumentListParams::parseRequest(
             $params,
@@ -136,6 +143,7 @@ final class DocumentsRawService implements DocumentsRawContract
      * Delete a document.<br /><br />A document can only be deleted if it's not linked to a service. If it is linked to a service, it must be unlinked prior to deleting.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DocumentDeleteResponse>
      *
@@ -143,7 +151,7 @@ final class DocumentsRawService implements DocumentsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -160,6 +168,7 @@ final class DocumentsRawService implements DocumentsRawContract
      * Download a document.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
      *
@@ -167,7 +176,7 @@ final class DocumentsRawService implements DocumentsRawContract
      */
     public function download(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -185,6 +194,7 @@ final class DocumentsRawService implements DocumentsRawContract
      * Generates a temporary pre-signed URL that can be used to download the document directly from the storage backend without authentication.
      *
      * @param string $id Uniquely identifies the document
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DocumentGenerateDownloadLinkResponse>
      *
@@ -192,7 +202,7 @@ final class DocumentsRawService implements DocumentsRawContract
      */
     public function generateDownloadLink(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -208,11 +218,8 @@ final class DocumentsRawService implements DocumentsRawContract
      *
      * Upload a document.<br /><br />Uploaded files must be linked to a service within 30 minutes or they will be automatically deleted.
      *
-     * @param array{
-     *   document: array{
-     *     customerReference?: string, file?: string, filename?: string, url?: string
-     *   },
-     * }|DocumentUploadParams $params
+     * @param array{document: Document|DocumentShape}|DocumentUploadParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DocumentUploadResponse>
      *
@@ -220,7 +227,7 @@ final class DocumentsRawService implements DocumentsRawContract
      */
     public function upload(
         array|DocumentUploadParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = DocumentUploadParams::parseRequest(
             $params,
@@ -243,10 +250,9 @@ final class DocumentsRawService implements DocumentsRawContract
      * Upload a document.<br /><br />Uploaded files must be linked to a service within 30 minutes or they will be automatically deleted.
      *
      * @param array{
-     *   document: array{
-     *     customerReference?: string, file?: string, filename?: string, url?: string
-     *   },
+     *   document: DocumentUploadJsonParams\Document|DocumentShape1
      * }|DocumentUploadJsonParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DocumentUploadJsonResponse>
      *
@@ -254,7 +260,7 @@ final class DocumentsRawService implements DocumentsRawContract
      */
     public function uploadJson(
         array|DocumentUploadJsonParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = DocumentUploadJsonParams::parseRequest(
             $params,

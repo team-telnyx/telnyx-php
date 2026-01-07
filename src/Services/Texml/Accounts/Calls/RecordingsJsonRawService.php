@@ -17,6 +17,9 @@ use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParam
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonResponse;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRetrieveRecordingsJsonParams;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class RecordingsJsonRawService implements RecordingsJsonRawContract
 {
     // @phpstan-ignore-next-line
@@ -34,13 +37,14 @@ final class RecordingsJsonRawService implements RecordingsJsonRawContract
      * @param array{
      *   accountSid: string,
      *   playBeep?: bool,
-     *   recordingChannels?: 'single'|'dual'|RecordingChannels,
+     *   recordingChannels?: RecordingChannels|value-of<RecordingChannels>,
      *   recordingStatusCallback?: string,
      *   recordingStatusCallbackEvent?: string,
-     *   recordingStatusCallbackMethod?: 'GET'|'POST'|RecordingStatusCallbackMethod,
-     *   recordingTrack?: 'inbound'|'outbound'|'both'|RecordingTrack,
+     *   recordingStatusCallbackMethod?: RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod>,
+     *   recordingTrack?: RecordingTrack|value-of<RecordingTrack>,
      *   sendRecordingURL?: bool,
      * }|RecordingsJsonRecordingsJsonParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RecordingsJsonRecordingsJsonResponse>
      *
@@ -49,7 +53,7 @@ final class RecordingsJsonRawService implements RecordingsJsonRawContract
     public function recordingsJson(
         string $callSid,
         array|RecordingsJsonRecordingsJsonParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RecordingsJsonRecordingsJsonParams::parseRequest(
             $params,
@@ -80,6 +84,7 @@ final class RecordingsJsonRawService implements RecordingsJsonRawContract
      * @param array{
      *   accountSid: string
      * }|RecordingsJsonRetrieveRecordingsJsonParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RecordingsJsonGetRecordingsJsonResponse>
      *
@@ -88,7 +93,7 @@ final class RecordingsJsonRawService implements RecordingsJsonRawContract
     public function retrieveRecordingsJson(
         string $callSid,
         array|RecordingsJsonRetrieveRecordingsJsonParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RecordingsJsonRetrieveRecordingsJsonParams::parseRequest(
             $params,

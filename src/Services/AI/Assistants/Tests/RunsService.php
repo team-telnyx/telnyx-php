@@ -12,6 +12,9 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\Tests\RunsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class RunsService implements RunsContract
 {
     /**
@@ -32,12 +35,14 @@ final class RunsService implements RunsContract
      *
      * Retrieves detailed information about a specific test run execution
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $runID,
         string $testID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): TestRunResponse {
         $params = Util::removeNulls(['testID' => $testID]);
 
@@ -53,6 +58,7 @@ final class RunsService implements RunsContract
      * Retrieves paginated execution history for a specific assistant test with filtering options
      *
      * @param string $status Filter runs by execution status (pending, running, completed, failed, timeout)
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<TestRunResponse>
      *
@@ -63,7 +69,7 @@ final class RunsService implements RunsContract
         ?int $pageNumber = null,
         ?int $pageSize = null,
         ?string $status = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
         $params = Util::removeNulls(
             [
@@ -85,13 +91,14 @@ final class RunsService implements RunsContract
      * Initiates immediate execution of a specific assistant test
      *
      * @param string $destinationVersionID Optional assistant version ID to use for this test run. If provided, the version must exist or a 400 error will be returned. If not provided, test will run on main version
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function trigger(
         string $testID,
         ?string $destinationVersionID = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): TestRunResponse {
         $params = Util::removeNulls(
             ['destinationVersionID' => $destinationVersionID]

@@ -11,12 +11,13 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Act
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\PortabilityStatus;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\PortingOrderSingleStatus;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\UnionMember1;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\SupportKey;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[porting_order_id], filter[support_key], filter[status], filter[phone_number], filter[activation_status], filter[portability_status].
  *
+ * @phpstan-import-type StatusVariants from \Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status
+ * @phpstan-import-type SupportKeyVariants from \Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\SupportKey
  * @phpstan-import-type StatusShape from \Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status
  * @phpstan-import-type SupportKeyShape from \Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\SupportKey
  *
@@ -69,7 +70,7 @@ final class Filter implements BaseModel
     /**
      * Filter porting orders by status(es). Originally: filter[status], filter[status][in][].
      *
-     * @var list<value-of<UnionMember1>>|value-of<PortingOrderSingleStatus>|null $status
+     * @var StatusVariants|null $status
      */
     #[Optional(union: Status::class)]
     public array|string|null $status;
@@ -77,7 +78,7 @@ final class Filter implements BaseModel
     /**
      * Filter results by support key(s). Originally: filter[support_key][eq], filter[support_key][in][].
      *
-     * @var string|list<string>|null $supportKey
+     * @var SupportKeyVariants|null $supportKey
      */
     #[Optional('support_key', union: SupportKey::class)]
     public string|array|null $supportKey;

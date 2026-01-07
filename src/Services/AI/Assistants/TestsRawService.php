@@ -7,6 +7,7 @@ namespace Telnyx\Services\AI\Assistants;
 use Telnyx\AI\Assistants\Tests\AssistantTest;
 use Telnyx\AI\Assistants\Tests\TelnyxConversationChannel;
 use Telnyx\AI\Assistants\Tests\TestCreateParams;
+use Telnyx\AI\Assistants\Tests\TestCreateParams\Rubric;
 use Telnyx\AI\Assistants\Tests\TestListParams;
 use Telnyx\AI\Assistants\Tests\TestUpdateParams;
 use Telnyx\Client;
@@ -17,6 +18,11 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\TestsRawContract;
 
+/**
+ * @phpstan-import-type RubricShape from \Telnyx\AI\Assistants\Tests\TestCreateParams\Rubric
+ * @phpstan-import-type RubricShape from \Telnyx\AI\Assistants\Tests\TestUpdateParams\Rubric as RubricShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class TestsRawService implements TestsRawContract
 {
     // @phpstan-ignore-next-line
@@ -34,12 +40,13 @@ final class TestsRawService implements TestsRawContract
      *   destination: string,
      *   instructions: string,
      *   name: string,
-     *   rubric: list<array{criteria: string, name: string}>,
+     *   rubric: list<Rubric|RubricShape>,
      *   description?: string,
      *   maxDurationSeconds?: int,
-     *   telnyxConversationChannel?: 'phone_call'|'web_call'|'sms_chat'|'web_chat'|TelnyxConversationChannel,
+     *   telnyxConversationChannel?: TelnyxConversationChannel|value-of<TelnyxConversationChannel>,
      *   testSuite?: string,
      * }|TestCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AssistantTest>
      *
@@ -47,7 +54,7 @@ final class TestsRawService implements TestsRawContract
      */
     public function create(
         array|TestCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TestCreateParams::parseRequest(
             $params,
@@ -69,13 +76,15 @@ final class TestsRawService implements TestsRawContract
      *
      * Retrieves detailed information about a specific assistant test
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<AssistantTest>
      *
      * @throws APIException
      */
     public function retrieve(
         string $testID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -97,10 +106,11 @@ final class TestsRawService implements TestsRawContract
      *   instructions?: string,
      *   maxDurationSeconds?: int,
      *   name?: string,
-     *   rubric?: list<array{criteria: string, name: string}>,
-     *   telnyxConversationChannel?: 'phone_call'|'web_call'|'sms_chat'|'web_chat'|TelnyxConversationChannel,
+     *   rubric?: list<TestUpdateParams\Rubric|RubricShape1>,
+     *   telnyxConversationChannel?: TelnyxConversationChannel|value-of<TelnyxConversationChannel>,
      *   testSuite?: string,
      * }|TestUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AssistantTest>
      *
@@ -109,7 +119,7 @@ final class TestsRawService implements TestsRawContract
     public function update(
         string $testID,
         array|TestUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TestUpdateParams::parseRequest(
             $params,
@@ -138,6 +148,7 @@ final class TestsRawService implements TestsRawContract
      *   telnyxConversationChannel?: string,
      *   testSuite?: string,
      * }|TestListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<AssistantTest>>
      *
@@ -145,7 +156,7 @@ final class TestsRawService implements TestsRawContract
      */
     public function list(
         array|TestListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TestListParams::parseRequest(
             $params,
@@ -176,13 +187,15 @@ final class TestsRawService implements TestsRawContract
      *
      * Permanently removes an assistant test and all associated data
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<mixed>
      *
      * @throws APIException
      */
     public function delete(
         string $testID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

@@ -17,6 +17,9 @@ use Telnyx\Texml\Accounts\Queues\QueueRetrieveParams;
 use Telnyx\Texml\Accounts\Queues\QueueUpdateParams;
 use Telnyx\Texml\Accounts\Queues\QueueUpdateResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class QueuesRawService implements QueuesRawContract
 {
     // @phpstan-ignore-next-line
@@ -32,6 +35,7 @@ final class QueuesRawService implements QueuesRawContract
      *
      * @param string $accountSid the id of the account the resource belongs to
      * @param array{friendlyName?: string, maxSize?: int}|QueueCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<QueueNewResponse>
      *
@@ -40,7 +44,7 @@ final class QueuesRawService implements QueuesRawContract
     public function create(
         string $accountSid,
         array|QueueCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = QueueCreateParams::parseRequest(
             $params,
@@ -65,6 +69,7 @@ final class QueuesRawService implements QueuesRawContract
      *
      * @param string $queueSid the QueueSid that identifies the call queue
      * @param array{accountSid: string}|QueueRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<QueueGetResponse>
      *
@@ -73,7 +78,7 @@ final class QueuesRawService implements QueuesRawContract
     public function retrieve(
         string $queueSid,
         array|QueueRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = QueueRetrieveParams::parseRequest(
             $params,
@@ -98,6 +103,7 @@ final class QueuesRawService implements QueuesRawContract
      *
      * @param string $queueSid path param: The QueueSid that identifies the call queue
      * @param array{accountSid: string, maxSize?: int}|QueueUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<QueueUpdateResponse>
      *
@@ -106,7 +112,7 @@ final class QueuesRawService implements QueuesRawContract
     public function update(
         string $queueSid,
         array|QueueUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = QueueUpdateParams::parseRequest(
             $params,
@@ -133,6 +139,7 @@ final class QueuesRawService implements QueuesRawContract
      *
      * @param string $queueSid the QueueSid that identifies the call queue
      * @param array{accountSid: string}|QueueDeleteParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -141,7 +148,7 @@ final class QueuesRawService implements QueuesRawContract
     public function delete(
         string $queueSid,
         array|QueueDeleteParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = QueueDeleteParams::parseRequest(
             $params,

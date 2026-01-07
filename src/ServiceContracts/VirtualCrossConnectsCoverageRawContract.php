@@ -11,12 +11,16 @@ use Telnyx\RequestOptions;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface VirtualCrossConnectsCoverageRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|VirtualCrossConnectsCoverageListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<VirtualCrossConnectsCoverageListResponse,>,>
      *
@@ -24,6 +28,6 @@ interface VirtualCrossConnectsCoverageRawContract
      */
     public function list(
         array|VirtualCrossConnectsCoverageListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

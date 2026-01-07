@@ -10,6 +10,9 @@ use Telnyx\PhoneNumbers\Voicemail\VoicemailNewResponse;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailUpdateResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface VoicemailContract
 {
     /**
@@ -18,6 +21,7 @@ interface VoicemailContract
      * @param string $phoneNumberID the ID of the phone number
      * @param bool $enabled whether voicemail is enabled
      * @param string $pin The pin used for voicemail
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -25,19 +29,20 @@ interface VoicemailContract
         string $phoneNumberID,
         ?bool $enabled = null,
         ?string $pin = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): VoicemailNewResponse;
 
     /**
      * @api
      *
      * @param string $phoneNumberID the ID of the phone number
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $phoneNumberID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): VoicemailGetResponse;
 
     /**
@@ -46,6 +51,7 @@ interface VoicemailContract
      * @param string $phoneNumberID the ID of the phone number
      * @param bool $enabled whether voicemail is enabled
      * @param string $pin The pin used for voicemail
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -53,6 +59,6 @@ interface VoicemailContract
         string $phoneNumberID,
         ?bool $enabled = null,
         ?string $pin = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): VoicemailUpdateResponse;
 }

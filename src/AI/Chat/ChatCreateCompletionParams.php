@@ -7,8 +7,6 @@ namespace Telnyx\AI\Chat;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Message;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\ResponseFormat;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool;
-use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam;
-use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\Retrieval;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\ToolChoice;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -21,12 +19,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\ChatService::createCompletion()
  *
+ * @phpstan-import-type ToolVariants from \Telnyx\AI\Chat\ChatCreateCompletionParams\Tool
  * @phpstan-import-type MessageShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\Message
  * @phpstan-import-type ResponseFormatShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\ResponseFormat
  * @phpstan-import-type ToolShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\Tool
  *
  * @phpstan-type ChatCreateCompletionParamsShape = array{
- *   messages: list<MessageShape>,
+ *   messages: list<Message|MessageShape>,
  *   apiKeyRef?: string|null,
  *   bestOf?: int|null,
  *   earlyStopping?: bool|null,
@@ -178,7 +177,7 @@ final class ChatCreateCompletionParams implements BaseModel
     /**
      * The `function` tool type follows the same schema as the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat). The `retrieval` tool type is unique to Telnyx. You may pass a list of [embedded storage buckets](https://developers.telnyx.com/api/inference/inference-embedding/post-embedding) for retrieval-augmented generation.
      *
-     * @var list<ChatCompletionToolParam|Retrieval>|null $tools
+     * @var list<ToolVariants>|null $tools
      */
     #[Optional(list: Tool::class)]
     public ?array $tools;
@@ -225,7 +224,7 @@ final class ChatCreateCompletionParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<MessageShape> $messages
+     * @param list<Message|MessageShape> $messages
      * @param list<string>|null $guidedChoice
      * @param array<string,mixed>|null $guidedJson
      * @param ResponseFormat|ResponseFormatShape|null $responseFormat
@@ -290,7 +289,7 @@ final class ChatCreateCompletionParams implements BaseModel
     /**
      * A list of the previous chat messages for context.
      *
-     * @param list<MessageShape> $messages
+     * @param list<Message|MessageShape> $messages
      */
     public function withMessages(array $messages): self
     {

@@ -9,9 +9,13 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultPagination;
 use Telnyx\ExternalConnections\ExternalConnection;
+use Telnyx\ExternalConnections\ExternalConnectionCreateParams\ExternalSipConnection;
+use Telnyx\ExternalConnections\ExternalConnectionCreateParams\Inbound;
+use Telnyx\ExternalConnections\ExternalConnectionCreateParams\Outbound;
 use Telnyx\ExternalConnections\ExternalConnectionDeleteResponse;
 use Telnyx\ExternalConnections\ExternalConnectionGetResponse;
-use Telnyx\ExternalConnections\ExternalConnectionListParams\Filter\ExternalSipConnection;
+use Telnyx\ExternalConnections\ExternalConnectionListParams\Filter;
+use Telnyx\ExternalConnections\ExternalConnectionListParams\Page;
 use Telnyx\ExternalConnections\ExternalConnectionNewResponse;
 use Telnyx\ExternalConnections\ExternalConnectionUpdateLocationResponse;
 use Telnyx\ExternalConnections\ExternalConnectionUpdateResponse;
@@ -23,6 +27,15 @@ use Telnyx\Services\ExternalConnections\PhoneNumbersService;
 use Telnyx\Services\ExternalConnections\ReleasesService;
 use Telnyx\Services\ExternalConnections\UploadsService;
 
+/**
+ * @phpstan-import-type OutboundShape from \Telnyx\ExternalConnections\ExternalConnectionCreateParams\Outbound
+ * @phpstan-import-type InboundShape from \Telnyx\ExternalConnections\ExternalConnectionCreateParams\Inbound
+ * @phpstan-import-type OutboundShape from \Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Outbound as OutboundShape1
+ * @phpstan-import-type InboundShape from \Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Inbound as InboundShape1
+ * @phpstan-import-type FilterShape from \Telnyx\ExternalConnections\ExternalConnectionListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\ExternalConnections\ExternalConnectionListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ExternalConnectionsService implements ExternalConnectionsContract
 {
     /**
@@ -73,27 +86,28 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      *
      * Creates a new External Connection based on the parameters sent in the request. The external_sip_connection and outbound voice profile id are required. Once created, you can assign phone numbers to your application using the `/phone_numbers` endpoint.
      *
-     * @param array{channelLimit?: int, outboundVoiceProfileID?: string} $outbound
-     * @param 'zoom'|\Telnyx\ExternalConnections\ExternalConnectionCreateParams\ExternalSipConnection $externalSipConnection the service that will be consuming this connection
+     * @param Outbound|OutboundShape $outbound
+     * @param ExternalSipConnection|value-of<ExternalSipConnection> $externalSipConnection the service that will be consuming this connection
      * @param bool $active specifies whether the connection can be used
-     * @param array{outboundVoiceProfileID: string, channelLimit?: int} $inbound
+     * @param Inbound|InboundShape $inbound
      * @param list<string> $tags tags associated with the connection
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        array $outbound,
-        string|\Telnyx\ExternalConnections\ExternalConnectionCreateParams\ExternalSipConnection $externalSipConnection = 'zoom',
+        Outbound|array $outbound,
+        ExternalSipConnection|string $externalSipConnection = 'zoom',
         bool $active = true,
-        ?array $inbound = null,
+        Inbound|array|null $inbound = null,
         ?array $tags = null,
         ?string $webhookEventFailoverURL = '',
         ?string $webhookEventURL = null,
         ?int $webhookTimeoutSecs = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ExternalConnectionNewResponse {
         $params = Util::removeNulls(
             [
@@ -120,12 +134,13 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      * Return the details of an existing External Connection inside the 'data' attribute of the response.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ExternalConnectionGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -139,26 +154,27 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      * Updates settings of an existing External Connection based on the parameters of the request.
      *
      * @param string $id identifies the resource
-     * @param array{outboundVoiceProfileID: string, channelLimit?: int} $outbound
+     * @param \Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Outbound|OutboundShape1 $outbound
      * @param bool $active specifies whether the connection can be used
-     * @param array{channelLimit?: int} $inbound
+     * @param \Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Inbound|InboundShape1 $inbound
      * @param list<string> $tags tags associated with the connection
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array $outbound,
+        \Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Outbound|array $outbound,
         bool $active = true,
-        ?array $inbound = null,
+        \Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Inbound|array|null $inbound = null,
         ?array $tags = null,
         ?string $webhookEventFailoverURL = '',
         ?string $webhookEventURL = null,
         ?int $webhookTimeoutSecs = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ExternalConnectionUpdateResponse {
         $params = Util::removeNulls(
             [
@@ -183,25 +199,18 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      *
      * This endpoint returns a list of your External Connections inside the 'data' attribute of the response. External Connections are used by Telnyx customers to seamless configure SIP trunking integrations with Telnyx Partners, through External Voice Integrations in Mission Control Portal.
      *
-     * @param array{
-     *   id?: string,
-     *   connectionName?: array{contains?: string},
-     *   createdAt?: string,
-     *   externalSipConnection?: 'zoom'|'operator_connect'|ExternalSipConnection,
-     *   phoneNumber?: array{contains?: string},
-     * } $filter Filter parameter for external connections (deepObject style). Supports filtering by connection_name, external_sip_connection, id, created_at, and phone_number.
-     * @param array{
-     *   number?: int, size?: int
-     * } $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Filter|FilterShape $filter Filter parameter for external connections (deepObject style). Supports filtering by connection_name, external_sip_connection, id, created_at, and phone_number.
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPagination<ExternalConnection>
      *
      * @throws APIException
      */
     public function list(
-        ?array $filter = null,
-        ?array $page = null,
-        ?RequestOptions $requestOptions = null,
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultPagination {
         $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
@@ -217,12 +226,13 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      * Permanently deletes an External Connection. Deletion may be prevented if the application is in use by phone numbers, is active, or if it is an Operator Connect connection. To remove an Operator Connect integration please contact Telnyx support.
      *
      * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ExternalConnectionDeleteResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, requestOptions: $requestOptions);
@@ -238,6 +248,7 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      * @param string $locationID Path param: The ID of the location to update
      * @param string $id Path param: The ID of the external connection
      * @param string $staticEmergencyAddressID Body param: A new static emergency address ID to update the location with
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -245,7 +256,7 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
         string $locationID,
         string $id,
         string $staticEmergencyAddressID,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ExternalConnectionUpdateLocationResponse {
         $params = Util::removeNulls(
             ['id' => $id, 'staticEmergencyAddressID' => $staticEmergencyAddressID]

@@ -12,12 +12,16 @@ use Telnyx\MobilePhoneNumbers\Messaging\MessagingListParams;
 use Telnyx\MobilePhoneNumbers\Messaging\MessagingListResponse;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface MessagingRawContract
 {
     /**
      * @api
      *
      * @param string $id identifies the type of resource
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingGetResponse>
      *
@@ -25,13 +29,14 @@ interface MessagingRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|MessagingListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultPagination<MessagingListResponse>>
      *
@@ -39,6 +44,6 @@ interface MessagingRawContract
      */
     public function list(
         array|MessagingListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

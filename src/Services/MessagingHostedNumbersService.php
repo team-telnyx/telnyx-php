@@ -10,6 +10,9 @@ use Telnyx\MessagingHostedNumbers\MessagingHostedNumberDeleteResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingHostedNumbersContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MessagingHostedNumbersService implements MessagingHostedNumbersContract
 {
     /**
@@ -31,12 +34,13 @@ final class MessagingHostedNumbersService implements MessagingHostedNumbersContr
      * Delete a messaging hosted number
      *
      * @param string $id identifies the type of resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MessagingHostedNumberDeleteResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, requestOptions: $requestOptions);
