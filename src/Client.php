@@ -160,8 +160,8 @@ use Telnyx\Services\WirelessBlocklistValuesService;
 use Telnyx\Services\WirelessService;
 
 /**
- * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  * @phpstan-import-type NormalizedRequest from \Telnyx\Core\BaseClient
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 class Client extends BaseClient
 {
@@ -925,12 +925,16 @@ class Client extends BaseClient
      */
     public SpeechToTextService $speechToText;
 
+    /**
+     * @param RequestOpts|null $requestOptions
+     */
     public function __construct(
         ?string $apiKey = null,
         ?string $clientID = null,
         ?string $clientSecret = null,
         ?string $publicKey = null,
         ?string $baseUrl = null,
+        RequestOptions|array|null $requestOptions = null,
     ) {
         $this->apiKey = (string) ($apiKey ?? getenv('TELNYX_API_KEY'));
         $this->clientID = (string) ($clientID ?? getenv('TELNYX_CLIENT_ID'));
@@ -941,11 +945,14 @@ class Client extends BaseClient
 
         $baseUrl ??= getenv('TELNYX_BASE_URL') ?: 'https://api.telnyx.com/v2';
 
-        $options = RequestOptions::with(
-            uriFactory: Psr17FactoryDiscovery::findUriFactory(),
-            streamFactory: Psr17FactoryDiscovery::findStreamFactory(),
-            requestFactory: Psr17FactoryDiscovery::findRequestFactory(),
-            transporter: Psr18ClientDiscovery::find(),
+        $options = RequestOptions::parse(
+            RequestOptions::with(
+                uriFactory: Psr17FactoryDiscovery::findUriFactory(),
+                streamFactory: Psr17FactoryDiscovery::findStreamFactory(),
+                requestFactory: Psr17FactoryDiscovery::findRequestFactory(),
+                transporter: Psr18ClientDiscovery::find(),
+            ),
+            $requestOptions,
         );
 
         parent::__construct(
