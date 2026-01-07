@@ -10,6 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type TranscriptionSettingsConfigShape = array{
+ *   eagerEotThreshold?: float|null,
  *   eotThreshold?: float|null,
  *   eotTimeoutMs?: int|null,
  *   numerals?: bool|null,
@@ -20,6 +21,12 @@ final class TranscriptionSettingsConfig implements BaseModel
 {
     /** @use SdkModel<TranscriptionSettingsConfigShape> */
     use SdkModel;
+
+    /**
+     * Available only for deepgram/flux. Confidence threshold for eager end of turn detection. Must be lower than or equal to eot_threshold. Setting this equal to eot_threshold effectively disables eager end of turn.
+     */
+    #[Optional('eager_eot_threshold')]
+    public ?float $eagerEotThreshold;
 
     /**
      * Available only for deepgram/flux. Confidence required to trigger an end of turn. Higher values = more reliable turn detection but slightly increased latency.
@@ -50,6 +57,7 @@ final class TranscriptionSettingsConfig implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
+        ?float $eagerEotThreshold = null,
         ?float $eotThreshold = null,
         ?int $eotTimeoutMs = null,
         ?bool $numerals = null,
@@ -57,10 +65,22 @@ final class TranscriptionSettingsConfig implements BaseModel
     ): self {
         $self = new self;
 
+        null !== $eagerEotThreshold && $self['eagerEotThreshold'] = $eagerEotThreshold;
         null !== $eotThreshold && $self['eotThreshold'] = $eotThreshold;
         null !== $eotTimeoutMs && $self['eotTimeoutMs'] = $eotTimeoutMs;
         null !== $numerals && $self['numerals'] = $numerals;
         null !== $smartFormat && $self['smartFormat'] = $smartFormat;
+
+        return $self;
+    }
+
+    /**
+     * Available only for deepgram/flux. Confidence threshold for eager end of turn detection. Must be lower than or equal to eot_threshold. Setting this equal to eot_threshold effectively disables eager end of turn.
+     */
+    public function withEagerEotThreshold(float $eagerEotThreshold): self
+    {
+        $self = clone $this;
+        $self['eagerEotThreshold'] = $eagerEotThreshold;
 
         return $self;
     }

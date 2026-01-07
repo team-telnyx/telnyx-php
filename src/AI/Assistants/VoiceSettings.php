@@ -21,6 +21,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *   voice: string,
  *   apiKeyRef?: string|null,
  *   backgroundAudio?: BackgroundAudioShape|null,
+ *   similarityBoost?: float|null,
+ *   speed?: float|null,
+ *   style?: float|null,
+ *   temperature?: float|null,
+ *   useSpeakerBoost?: bool|null,
  *   voiceSpeed?: float|null,
  * }
  */
@@ -49,6 +54,36 @@ final class VoiceSettings implements BaseModel
      */
     #[Optional('background_audio', union: BackgroundAudio::class)]
     public PredefinedMedia|MediaURL|MediaName|null $backgroundAudio;
+
+    /**
+     * Determines how closely the AI should adhere to the original voice when attempting to replicate it. Only applicable when using ElevenLabs.
+     */
+    #[Optional('similarity_boost')]
+    public ?float $similarityBoost;
+
+    /**
+     * Adjusts speech velocity. 1.0 is default speed; values less than 1.0 slow speech; values greater than 1.0 accelerate it. Only applicable when using ElevenLabs.
+     */
+    #[Optional]
+    public ?float $speed;
+
+    /**
+     * Determines the style exaggeration of the voice. Amplifies speaker style but consumes additional resources when set above 0. Only applicable when using ElevenLabs.
+     */
+    #[Optional]
+    public ?float $style;
+
+    /**
+     * Determines how stable the voice is and the randomness between each generation. Lower values create a broader emotional range; higher values produce more consistent, monotonous output. Only applicable when using ElevenLabs.
+     */
+    #[Optional]
+    public ?float $temperature;
+
+    /**
+     * Amplifies similarity to the original speaker voice. Increases computational load and latency slightly. Only applicable when using ElevenLabs.
+     */
+    #[Optional('use_speaker_boost')]
+    public ?bool $useSpeakerBoost;
 
     /**
      * The speed of the voice in the range [0.25, 2.0]. 1.0 is deafult speed. Larger numbers make the voice faster, smaller numbers make it slower. This is only applicable for Telnyx Natural voices.
@@ -86,6 +121,11 @@ final class VoiceSettings implements BaseModel
         string $voice,
         ?string $apiKeyRef = null,
         PredefinedMedia|array|MediaURL|MediaName|null $backgroundAudio = null,
+        ?float $similarityBoost = null,
+        ?float $speed = null,
+        ?float $style = null,
+        ?float $temperature = null,
+        ?bool $useSpeakerBoost = null,
         ?float $voiceSpeed = null,
     ): self {
         $self = new self;
@@ -94,6 +134,11 @@ final class VoiceSettings implements BaseModel
 
         null !== $apiKeyRef && $self['apiKeyRef'] = $apiKeyRef;
         null !== $backgroundAudio && $self['backgroundAudio'] = $backgroundAudio;
+        null !== $similarityBoost && $self['similarityBoost'] = $similarityBoost;
+        null !== $speed && $self['speed'] = $speed;
+        null !== $style && $self['style'] = $style;
+        null !== $temperature && $self['temperature'] = $temperature;
+        null !== $useSpeakerBoost && $self['useSpeakerBoost'] = $useSpeakerBoost;
         null !== $voiceSpeed && $self['voiceSpeed'] = $voiceSpeed;
 
         return $self;
@@ -132,6 +177,61 @@ final class VoiceSettings implements BaseModel
     ): self {
         $self = clone $this;
         $self['backgroundAudio'] = $backgroundAudio;
+
+        return $self;
+    }
+
+    /**
+     * Determines how closely the AI should adhere to the original voice when attempting to replicate it. Only applicable when using ElevenLabs.
+     */
+    public function withSimilarityBoost(float $similarityBoost): self
+    {
+        $self = clone $this;
+        $self['similarityBoost'] = $similarityBoost;
+
+        return $self;
+    }
+
+    /**
+     * Adjusts speech velocity. 1.0 is default speed; values less than 1.0 slow speech; values greater than 1.0 accelerate it. Only applicable when using ElevenLabs.
+     */
+    public function withSpeed(float $speed): self
+    {
+        $self = clone $this;
+        $self['speed'] = $speed;
+
+        return $self;
+    }
+
+    /**
+     * Determines the style exaggeration of the voice. Amplifies speaker style but consumes additional resources when set above 0. Only applicable when using ElevenLabs.
+     */
+    public function withStyle(float $style): self
+    {
+        $self = clone $this;
+        $self['style'] = $style;
+
+        return $self;
+    }
+
+    /**
+     * Determines how stable the voice is and the randomness between each generation. Lower values create a broader emotional range; higher values produce more consistent, monotonous output. Only applicable when using ElevenLabs.
+     */
+    public function withTemperature(float $temperature): self
+    {
+        $self = clone $this;
+        $self['temperature'] = $temperature;
+
+        return $self;
+    }
+
+    /**
+     * Amplifies similarity to the original speaker voice. Increases computational load and latency slightly. Only applicable when using ElevenLabs.
+     */
+    public function withUseSpeakerBoost(bool $useSpeakerBoost): self
+    {
+        $self = clone $this;
+        $self['useSpeakerBoost'] = $useSpeakerBoost;
 
         return $self;
     }
