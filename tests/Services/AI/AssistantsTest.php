@@ -294,7 +294,6 @@ final class AssistantsTest extends TestCase
         $result = $this->client->ai->assistants->sendSMS(
             'assistant_id',
             from: 'from',
-            text: 'text',
             to: 'to'
         );
 
@@ -312,10 +311,10 @@ final class AssistantsTest extends TestCase
         $result = $this->client->ai->assistants->sendSMS(
             'assistant_id',
             from: 'from',
-            text: 'text',
             to: 'to',
             conversationMetadata: ['foo' => 'string'],
             shouldCreateConversation: true,
+            text: 'text',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

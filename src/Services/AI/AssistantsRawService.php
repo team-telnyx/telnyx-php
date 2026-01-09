@@ -364,10 +364,10 @@ final class AssistantsRawService implements AssistantsRawContract
      *
      * @param array{
      *   from: string,
-     *   text: string,
      *   to: string,
      *   conversationMetadata?: array<string,ConversationMetadataShape>,
      *   shouldCreateConversation?: bool,
+     *   text?: string,
      * }|AssistantSendSMSParams $params
      * @param RequestOpts|null $requestOptions
      *

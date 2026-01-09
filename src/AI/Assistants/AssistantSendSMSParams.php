@@ -26,10 +26,10 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type AssistantSendSMSParamsShape = array{
  *   from: string,
- *   text: string,
  *   to: string,
  *   conversationMetadata?: array<string,ConversationMetadataShape>|null,
  *   shouldCreateConversation?: bool|null,
+ *   text?: string|null,
  * }
  */
 final class AssistantSendSMSParams implements BaseModel
@@ -42,9 +42,6 @@ final class AssistantSendSMSParams implements BaseModel
     public string $from;
 
     #[Required]
-    public string $text;
-
-    #[Required]
     public string $to;
 
     /** @var array<string,ConversationMetadataVariants>|null $conversationMetadata */
@@ -54,18 +51,21 @@ final class AssistantSendSMSParams implements BaseModel
     #[Optional('should_create_conversation')]
     public ?bool $shouldCreateConversation;
 
+    #[Optional]
+    public ?string $text;
+
     /**
      * `new AssistantSendSMSParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * AssistantSendSMSParams::with(from: ..., text: ..., to: ...)
+     * AssistantSendSMSParams::with(from: ..., to: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new AssistantSendSMSParams)->withFrom(...)->withText(...)->withTo(...)
+     * (new AssistantSendSMSParams)->withFrom(...)->withTo(...)
      * ```
      */
     public function __construct()
@@ -82,19 +82,19 @@ final class AssistantSendSMSParams implements BaseModel
      */
     public static function with(
         string $from,
-        string $text,
         string $to,
         ?array $conversationMetadata = null,
         ?bool $shouldCreateConversation = null,
+        ?string $text = null,
     ): self {
         $self = new self;
 
         $self['from'] = $from;
-        $self['text'] = $text;
         $self['to'] = $to;
 
         null !== $conversationMetadata && $self['conversationMetadata'] = $conversationMetadata;
         null !== $shouldCreateConversation && $self['shouldCreateConversation'] = $shouldCreateConversation;
+        null !== $text && $self['text'] = $text;
 
         return $self;
     }
@@ -103,14 +103,6 @@ final class AssistantSendSMSParams implements BaseModel
     {
         $self = clone $this;
         $self['from'] = $from;
-
-        return $self;
-    }
-
-    public function withText(string $text): self
-    {
-        $self = clone $this;
-        $self['text'] = $text;
 
         return $self;
     }
@@ -139,6 +131,14 @@ final class AssistantSendSMSParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['shouldCreateConversation'] = $shouldCreateConversation;
+
+        return $self;
+    }
+
+    public function withText(string $text): self
+    {
+        $self = clone $this;
+        $self['text'] = $text;
 
         return $self;
     }
