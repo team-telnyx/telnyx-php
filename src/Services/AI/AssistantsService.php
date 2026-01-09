@@ -410,19 +410,19 @@ final class AssistantsService implements AssistantsContract
     public function sendSMS(
         string $assistantID,
         string $from,
-        string $text,
         string $to,
         ?array $conversationMetadata = null,
         ?bool $shouldCreateConversation = null,
+        ?string $text = null,
         RequestOptions|array|null $requestOptions = null,
     ): AssistantSendSMSResponse {
         $params = Util::removeNulls(
             [
                 'from' => $from,
-                'text' => $text,
                 'to' => $to,
                 'conversationMetadata' => $conversationMetadata,
                 'shouldCreateConversation' => $shouldCreateConversation,
+                'text' => $text,
             ],
         );
 

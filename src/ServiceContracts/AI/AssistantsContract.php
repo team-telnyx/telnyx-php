@@ -225,10 +225,10 @@ interface AssistantsContract
     public function sendSMS(
         string $assistantID,
         string $from,
-        string $text,
         string $to,
         ?array $conversationMetadata = null,
         ?bool $shouldCreateConversation = null,
+        ?string $text = null,
         RequestOptions|array|null $requestOptions = null,
     ): AssistantSendSMSResponse;
 }
