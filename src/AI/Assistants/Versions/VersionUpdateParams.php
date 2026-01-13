@@ -11,6 +11,7 @@ use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
+use Telnyx\AI\Assistants\Versions\VersionUpdateParams\WidgetSettings;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -31,6 +32,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\AI\Assistants\VoiceSettings
+ * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\WidgetSettings
  *
  * @phpstan-type VersionUpdateParamsShape = array{
  *   assistantID: string,
@@ -50,6 +52,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   tools?: list<AssistantToolShape>|null,
  *   transcription?: null|TranscriptionSettings|TranscriptionSettingsShape,
  *   voiceSettings?: null|VoiceSettings|VoiceSettingsShape,
+ *   widgetSettings?: null|WidgetSettings|WidgetSettingsShape,
  * }
  */
 final class VersionUpdateParams implements BaseModel
@@ -136,6 +139,12 @@ final class VersionUpdateParams implements BaseModel
     public ?VoiceSettings $voiceSettings;
 
     /**
+     * Configuration settings for the assistant's web widget.
+     */
+    #[Optional('widget_settings')]
+    public ?WidgetSettings $widgetSettings;
+
+    /**
      * `new VersionUpdateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
@@ -168,6 +177,7 @@ final class VersionUpdateParams implements BaseModel
      * @param list<AssistantToolShape>|null $tools
      * @param TranscriptionSettings|TranscriptionSettingsShape|null $transcription
      * @param VoiceSettings|VoiceSettingsShape|null $voiceSettings
+     * @param WidgetSettings|WidgetSettingsShape|null $widgetSettings
      */
     public static function with(
         string $assistantID,
@@ -187,6 +197,7 @@ final class VersionUpdateParams implements BaseModel
         ?array $tools = null,
         TranscriptionSettings|array|null $transcription = null,
         VoiceSettings|array|null $voiceSettings = null,
+        WidgetSettings|array|null $widgetSettings = null,
     ): self {
         $self = new self;
 
@@ -208,6 +219,7 @@ final class VersionUpdateParams implements BaseModel
         null !== $tools && $self['tools'] = $tools;
         null !== $transcription && $self['transcription'] = $transcription;
         null !== $voiceSettings && $self['voiceSettings'] = $voiceSettings;
+        null !== $widgetSettings && $self['widgetSettings'] = $widgetSettings;
 
         return $self;
     }
@@ -396,6 +408,20 @@ final class VersionUpdateParams implements BaseModel
     {
         $self = clone $this;
         $self['voiceSettings'] = $voiceSettings;
+
+        return $self;
+    }
+
+    /**
+     * Configuration settings for the assistant's web widget.
+     *
+     * @param WidgetSettings|WidgetSettingsShape $widgetSettings
+     */
+    public function withWidgetSettings(
+        WidgetSettings|array $widgetSettings
+    ): self {
+        $self = clone $this;
+        $self['widgetSettings'] = $widgetSettings;
 
         return $self;
     }

@@ -164,6 +164,19 @@ final class VersionsTest extends TestCase
                 'useSpeakerBoost' => true,
                 'voiceSpeed' => 0,
             ],
+            widgetSettings: [
+                'agentThinkingText' => 'agent_thinking_text',
+                'audioVisualizerConfig' => ['color' => 'verdant', 'preset' => 'preset'],
+                'defaultState' => 'expanded',
+                'giveFeedbackURL' => 'give_feedback_url',
+                'logoIconURL' => 'logo_icon_url',
+                'position' => 'fixed',
+                'reportIssueURL' => 'report_issue_url',
+                'speakToInterruptText' => 'speak_to_interrupt_text',
+                'startCallText' => 'start_call_text',
+                'theme' => 'light',
+                'viewHistoryURL' => 'view_history_url',
+            ],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

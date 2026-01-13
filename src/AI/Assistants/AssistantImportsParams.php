@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\AssistantImportsParams\Provider;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -16,7 +17,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\AssistantsService::imports()
  *
  * @phpstan-type AssistantImportsParamsShape = array{
- *   apiKeyRef: string, provider: Provider|value-of<Provider>
+ *   apiKeyRef: string,
+ *   provider: Provider|value-of<Provider>,
+ *   importIDs?: list<string>|null,
  * }
  */
 final class AssistantImportsParams implements BaseModel
@@ -38,6 +41,14 @@ final class AssistantImportsParams implements BaseModel
      */
     #[Required(enum: Provider::class)]
     public string $provider;
+
+    /**
+     * Optional list of assistant IDs to import from the external provider. If not provided, all assistants will be imported.
+     *
+     * @var list<string>|null $importIDs
+     */
+    #[Optional('import_ids', list: 'string')]
+    public ?array $importIDs;
 
     /**
      * `new AssistantImportsParams()` is missing required properties by the API.
@@ -64,15 +75,19 @@ final class AssistantImportsParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Provider|value-of<Provider> $provider
+     * @param list<string>|null $importIDs
      */
     public static function with(
         string $apiKeyRef,
-        Provider|string $provider
+        Provider|string $provider,
+        ?array $importIDs = null
     ): self {
         $self = new self;
 
         $self['apiKeyRef'] = $apiKeyRef;
         $self['provider'] = $provider;
+
+        null !== $importIDs && $self['importIDs'] = $importIDs;
 
         return $self;
     }
@@ -97,6 +112,19 @@ final class AssistantImportsParams implements BaseModel
     {
         $self = clone $this;
         $self['provider'] = $provider;
+
+        return $self;
+    }
+
+    /**
+     * Optional list of assistant IDs to import from the external provider. If not provided, all assistants will be imported.
+     *
+     * @param list<string> $importIDs
+     */
+    public function withImportIDs(array $importIDs): self
+    {
+        $self = clone $this;
+        $self['importIDs'] = $importIDs;
 
         return $self;
     }

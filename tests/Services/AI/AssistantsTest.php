@@ -133,6 +133,19 @@ final class AssistantsTest extends TestCase
                 'useSpeakerBoost' => true,
                 'voiceSpeed' => 0,
             ],
+            widgetSettings: [
+                'agentThinkingText' => 'agent_thinking_text',
+                'audioVisualizerConfig' => ['color' => 'verdant', 'preset' => 'preset'],
+                'defaultState' => 'expanded',
+                'giveFeedbackURL' => 'give_feedback_url',
+                'logoIconURL' => 'logo_icon_url',
+                'position' => 'fixed',
+                'reportIssueURL' => 'report_issue_url',
+                'speakToInterruptText' => 'speak_to_interrupt_text',
+                'startCallText' => 'start_call_text',
+                'theme' => 'light',
+                'viewHistoryURL' => 'view_history_url',
+            ],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -277,7 +290,8 @@ final class AssistantsTest extends TestCase
 
         $result = $this->client->ai->assistants->imports(
             apiKeyRef: 'api_key_ref',
-            provider: 'elevenlabs'
+            provider: 'elevenlabs',
+            importIDs: ['string']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

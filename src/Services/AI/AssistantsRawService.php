@@ -7,6 +7,7 @@ namespace Telnyx\Services\AI;
 use Telnyx\AI\Assistants\AssistantChatParams;
 use Telnyx\AI\Assistants\AssistantChatResponse;
 use Telnyx\AI\Assistants\AssistantCreateParams;
+use Telnyx\AI\Assistants\AssistantCreateParams\WidgetSettings;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
 use Telnyx\AI\Assistants\AssistantImportsParams;
 use Telnyx\AI\Assistants\AssistantImportsParams\Provider;
@@ -31,6 +32,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\AssistantsRawContract;
 
 /**
+ * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\AssistantCreateParams\WidgetSettings
+ * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\AssistantUpdateParams\WidgetSettings as WidgetSettingsShape1
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantSendSMSParams\ConversationMetadata
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
@@ -71,6 +74,7 @@ final class AssistantsRawService implements AssistantsRawContract
      *   tools?: list<AssistantToolShape>,
      *   transcription?: TranscriptionSettings|TranscriptionSettingsShape,
      *   voiceSettings?: VoiceSettings|VoiceSettingsShape,
+     *   widgetSettings?: WidgetSettings|WidgetSettingsShape,
      * }|AssistantCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -163,6 +167,7 @@ final class AssistantsRawService implements AssistantsRawContract
      *   tools?: list<AssistantToolShape>,
      *   transcription?: TranscriptionSettings|TranscriptionSettingsShape,
      *   voiceSettings?: VoiceSettings|VoiceSettingsShape,
+     *   widgetSettings?: AssistantUpdateParams\WidgetSettings|WidgetSettingsShape1,
      * }|AssistantUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -325,7 +330,9 @@ final class AssistantsRawService implements AssistantsRawContract
      * Import assistants from external providers. Any assistant that has already been imported will be overwritten with its latest version from the importing provider.
      *
      * @param array{
-     *   apiKeyRef: string, provider: Provider|value-of<Provider>
+     *   apiKeyRef: string,
+     *   provider: Provider|value-of<Provider>,
+     *   importIDs?: list<string>,
      * }|AssistantImportsParams $params
      * @param RequestOpts|null $requestOptions
      *
