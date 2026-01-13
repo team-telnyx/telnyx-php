@@ -59,6 +59,7 @@ final class FaxesService implements FaxesContract
      * @param string $connectionID the connection ID to send the fax with
      * @param string $from The phone number, in E.164 format, the fax will be sent from.
      * @param string $to The phone number, in E.164 format, the fax will be sent to or SIP URI
+     * @param int $blackThreshold The black threshold percentage for monochrome faxes. Only applicable if `monochrome` is set to `true`.
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $fromDisplayName The `from_display_name` string to be used as the caller id name (SIP From Display Name) presented to the destination (`to` number). The string should have a maximum of 128 characters, containing only letters, numbers, spaces, and -_~!.+ special characters. If ommited, the display name will be the same as the number in the `from` field.
      * @param string $mediaName The media_name used for the fax's media. Must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. media_name and media_url/contents can't be submitted together.
@@ -78,6 +79,7 @@ final class FaxesService implements FaxesContract
         string $connectionID,
         string $from,
         string $to,
+        int $blackThreshold = 95,
         ?string $clientState = null,
         ?string $fromDisplayName = null,
         ?string $mediaName = null,
@@ -96,6 +98,7 @@ final class FaxesService implements FaxesContract
                 'connectionID' => $connectionID,
                 'from' => $from,
                 'to' => $to,
+                'blackThreshold' => $blackThreshold,
                 'clientState' => $clientState,
                 'fromDisplayName' => $fromDisplayName,
                 'mediaName' => $mediaName,
