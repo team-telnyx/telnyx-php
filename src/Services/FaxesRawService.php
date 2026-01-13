@@ -49,6 +49,7 @@ final class FaxesRawService implements FaxesRawContract
      *   connectionID: string,
      *   from: string,
      *   to: string,
+     *   blackThreshold?: int,
      *   clientState?: string,
      *   fromDisplayName?: string,
      *   mediaName?: string,

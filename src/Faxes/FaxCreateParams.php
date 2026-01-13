@@ -29,6 +29,7 @@ use Telnyx\Faxes\FaxCreateParams\Quality;
  *   connectionID: string,
  *   from: string,
  *   to: string,
+ *   blackThreshold?: int|null,
  *   clientState?: string|null,
  *   fromDisplayName?: string|null,
  *   mediaName?: string|null,
@@ -65,6 +66,12 @@ final class FaxCreateParams implements BaseModel
      */
     #[Required]
     public string $to;
+
+    /**
+     * The black threshold percentage for monochrome faxes. Only applicable if `monochrome` is set to `true`.
+     */
+    #[Optional('black_threshold')]
+    public ?int $blackThreshold;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
@@ -167,6 +174,7 @@ final class FaxCreateParams implements BaseModel
         string $connectionID,
         string $from,
         string $to,
+        ?int $blackThreshold = null,
         ?string $clientState = null,
         ?string $fromDisplayName = null,
         ?string $mediaName = null,
@@ -185,6 +193,7 @@ final class FaxCreateParams implements BaseModel
         $self['from'] = $from;
         $self['to'] = $to;
 
+        null !== $blackThreshold && $self['blackThreshold'] = $blackThreshold;
         null !== $clientState && $self['clientState'] = $clientState;
         null !== $fromDisplayName && $self['fromDisplayName'] = $fromDisplayName;
         null !== $mediaName && $self['mediaName'] = $mediaName;
@@ -229,6 +238,17 @@ final class FaxCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['to'] = $to;
+
+        return $self;
+    }
+
+    /**
+     * The black threshold percentage for monochrome faxes. Only applicable if `monochrome` is set to `true`.
+     */
+    public function withBlackThreshold(int $blackThreshold): self
+    {
+        $self = clone $this;
+        $self['blackThreshold'] = $blackThreshold;
 
         return $self;
     }
