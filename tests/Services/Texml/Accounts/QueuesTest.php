@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Texml\Accounts\Queues\QueueGetResponse;
+use Telnyx\Texml\Accounts\Queues\QueueListResponse;
 use Telnyx\Texml\Accounts\Queues\QueueNewResponse;
 use Telnyx\Texml\Accounts\Queues\QueueUpdateResponse;
 use Tests\UnsupportedMockTests;
@@ -105,6 +106,19 @@ final class QueuesTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(QueueUpdateResponse::class, $result);
+    }
+
+    #[Test]
+    public function testList(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->texml->accounts->queues->list('account_sid');
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(QueueListResponse::class, $result);
     }
 
     #[Test]
