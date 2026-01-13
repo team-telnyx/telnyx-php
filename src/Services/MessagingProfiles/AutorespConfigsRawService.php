@@ -113,7 +113,7 @@ final class AutorespConfigsRawService implements AutorespConfigsRawContract
      *
      * Update Auto-Response Setting
      *
-     * @param string $autorespCfgID Path param:
+     * @param string $autorespCfgID Path param
      * @param array{
      *   profileID: string,
      *   countryCode: string,

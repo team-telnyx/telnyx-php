@@ -28,7 +28,7 @@ final class ToolsRawService implements ToolsRawContract
      *
      * Test a webhook tool for an assistant
      *
-     * @param string $toolID Path param:
+     * @param string $toolID Path param
      * @param array{
      *   assistantID: string,
      *   arguments?: array<string,mixed>,

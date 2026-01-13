@@ -38,7 +38,7 @@ final class RecordingsService implements RecordingsContract
      * @param string $recordingSid path param: Uniquely identifies the recording by id
      * @param string $accountSid path param: The id of the account the resource belongs to
      * @param string $callSid path param: The CallSid that identifies the call to update
-     * @param Status|value-of<Status> $status Body param:
+     * @param Status|value-of<Status> $status Body param
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

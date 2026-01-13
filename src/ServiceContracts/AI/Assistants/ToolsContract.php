@@ -16,8 +16,8 @@ interface ToolsContract
     /**
      * @api
      *
-     * @param string $toolID Path param:
-     * @param string $assistantID Path param:
+     * @param string $toolID Path param
+     * @param string $assistantID Path param
      * @param array<string,mixed> $arguments Body param: Key-value arguments to use for the webhook test
      * @param array<string,mixed> $dynamicVariables Body param: Key-value dynamic variables to use for the webhook test
      * @param RequestOpts|null $requestOptions
