@@ -13,7 +13,7 @@ use Telnyx\Conferences\ConferenceListParams\Page;
 use Telnyx\Conferences\ConferenceListParticipantsResponse;
 use Telnyx\Conferences\ConferenceNewResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 /**
@@ -83,16 +83,18 @@ interface ConferencesContract
      * @param \Telnyx\Conferences\ConferenceListParams\Region|value-of<\Telnyx\Conferences\ConferenceListParams\Region> $region Region where the conference data is located
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<Conference>
+     * @return DefaultFlatPagination<Conference>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
         Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         \Telnyx\Conferences\ConferenceListParams\Region|string|null $region = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination;
+    ): DefaultFlatPagination;
 
     /**
      * @api
@@ -103,7 +105,7 @@ interface ConferencesContract
      * @param \Telnyx\Conferences\ConferenceListParticipantsParams\Region|value-of<\Telnyx\Conferences\ConferenceListParticipantsParams\Region> $region Region where the conference data is located
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<ConferenceListParticipantsResponse>
+     * @return DefaultFlatPagination<ConferenceListParticipantsResponse>
      *
      * @throws APIException
      */
@@ -111,7 +113,9 @@ interface ConferencesContract
         string $conferenceID,
         \Telnyx\Conferences\ConferenceListParticipantsParams\Filter|array|null $filter = null,
         \Telnyx\Conferences\ConferenceListParticipantsParams\Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         \Telnyx\Conferences\ConferenceListParticipantsParams\Region|string|null $region = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination;
+    ): DefaultFlatPagination;
 }

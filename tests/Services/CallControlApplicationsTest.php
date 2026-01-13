@@ -11,7 +11,7 @@ use Telnyx\CallControlApplications\CallControlApplicationGetResponse;
 use Telnyx\CallControlApplications\CallControlApplicationNewResponse;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateResponse;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -168,7 +168,7 @@ final class CallControlApplicationsTest extends TestCase
         $page = $this->client->callControlApplications->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $page);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType

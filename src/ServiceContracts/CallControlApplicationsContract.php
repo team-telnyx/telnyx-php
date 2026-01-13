@@ -18,7 +18,7 @@ use Telnyx\CallControlApplications\CallControlApplicationNewResponse;
 use Telnyx\CallControlApplications\CallControlApplicationOutbound;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 /**
@@ -144,16 +144,18 @@ interface CallControlApplicationsContract
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<CallControlApplication>
+     * @return DefaultFlatPagination<CallControlApplication>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
         Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         Sort|string $sort = 'created_at',
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination;
+    ): DefaultFlatPagination;
 
     /**
      * @api

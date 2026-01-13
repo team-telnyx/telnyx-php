@@ -20,7 +20,7 @@ use Telnyx\CallControlApplications\CallControlApplicationUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CallControlApplicationsContract;
 
@@ -222,18 +222,26 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<CallControlApplication>
+     * @return DefaultFlatPagination<CallControlApplication>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
         Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         Sort|string $sort = 'created_at',
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination {
+    ): DefaultFlatPagination {
         $params = Util::removeNulls(
-            ['filter' => $filter, 'page' => $page, 'sort' => $sort]
+            [
+                'filter' => $filter,
+                'page' => $page,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+                'sort' => $sort,
+            ],
         );
 
         // @phpstan-ignore-next-line argument.type

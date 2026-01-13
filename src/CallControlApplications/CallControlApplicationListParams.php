@@ -23,6 +23,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type CallControlApplicationListParamsShape = array{
  *   filter?: null|Filter|FilterShape,
  *   page?: null|Page|PageShape,
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
  *   sort?: null|Sort|value-of<Sort>,
  * }
  */
@@ -43,6 +45,12 @@ final class CallControlApplicationListParams implements BaseModel
      */
     #[Optional]
     public ?Page $page;
+
+    #[Optional]
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
 
     /**
      * Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
@@ -80,12 +88,16 @@ final class CallControlApplicationListParams implements BaseModel
     public static function with(
         Filter|array|null $filter = null,
         Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         Sort|string|null $sort = null,
     ): self {
         $self = new self;
 
         null !== $filter && $self['filter'] = $filter;
         null !== $page && $self['page'] = $page;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
         null !== $sort && $self['sort'] = $sort;
 
         return $self;
@@ -113,6 +125,22 @@ final class CallControlApplicationListParams implements BaseModel
     {
         $self = clone $this;
         $self['page'] = $page;
+
+        return $self;
+    }
+
+    public function withPageNumber(int $pageNumber): self
+    {
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
+
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
         return $self;
     }

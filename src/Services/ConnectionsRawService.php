@@ -15,6 +15,8 @@ use Telnyx\Connections\ConnectionListParams\Sort;
 use Telnyx\Connections\ConnectionListResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ConnectionsRawContract;
@@ -99,11 +101,13 @@ final class ConnectionsRawService implements ConnectionsRawContract
      *
      * @param string $connectionID Telnyx connection id
      * @param array{
-     *   page?: ConnectionListActiveCallsParams\Page|PageShape1
+     *   page?: ConnectionListActiveCallsParams\Page|PageShape1,
+     *   pageNumber?: int,
+     *   pageSize?: int,
      * }|ConnectionListActiveCallsParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<ConnectionListActiveCallsResponse>>
+     * @return BaseResponse<DefaultFlatPagination<ConnectionListActiveCallsResponse>>
      *
      * @throws APIException
      */
@@ -121,10 +125,13 @@ final class ConnectionsRawService implements ConnectionsRawContract
         return $this->client->request(
             method: 'get',
             path: ['connections/%1$s/active_calls', $connectionID],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: ConnectionListActiveCallsResponse::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 }

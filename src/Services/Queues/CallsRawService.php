@@ -7,7 +7,8 @@ namespace Telnyx\Services\Queues;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\Queues\Calls\CallGetResponse;
 use Telnyx\Queues\Calls\CallListParams;
 use Telnyx\Queues\Calls\CallListParams\Page;
@@ -105,10 +106,12 @@ final class CallsRawService implements CallsRawContract
      * Retrieve the list of calls in an existing queue
      *
      * @param string $queueName Uniquely identifies the queue by name
-     * @param array{page?: Page|PageShape}|CallListParams $params
+     * @param array{
+     *   page?: Page|PageShape, pageNumber?: int, pageSize?: int
+     * }|CallListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<CallListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<CallListResponse>>
      *
      * @throws APIException
      */
@@ -126,10 +129,13 @@ final class CallsRawService implements CallsRawContract
         return $this->client->request(
             method: 'get',
             path: ['queues/%1$s/calls', $queueName],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: CallListResponse::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

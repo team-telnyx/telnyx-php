@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts\Queues;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\Queues\Calls\CallGetResponse;
 use Telnyx\Queues\Calls\CallListParams;
 use Telnyx\Queues\Calls\CallListResponse;
@@ -61,7 +61,7 @@ interface CallsRawContract
      * @param array<string,mixed>|CallListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<CallListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<CallListResponse>>
      *
      * @throws APIException
      */

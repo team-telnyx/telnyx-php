@@ -19,7 +19,8 @@ use Telnyx\Conferences\ConferenceNewResponse;
 use Telnyx\Conferences\ConferenceRetrieveParams;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ConferencesRawContract;
 
@@ -134,11 +135,13 @@ final class ConferencesRawService implements ConferencesRawContract
      * @param array{
      *   filter?: Filter|FilterShape,
      *   page?: Page|PageShape,
+     *   pageNumber?: int,
+     *   pageSize?: int,
      *   region?: ConferenceListParams\Region|value-of<ConferenceListParams\Region>,
      * }|ConferenceListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<Conference>>
+     * @return BaseResponse<DefaultFlatPagination<Conference>>
      *
      * @throws APIException
      */
@@ -155,10 +158,13 @@ final class ConferencesRawService implements ConferencesRawContract
         return $this->client->request(
             method: 'get',
             path: 'conferences',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: Conference::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 
@@ -171,11 +177,13 @@ final class ConferencesRawService implements ConferencesRawContract
      * @param array{
      *   filter?: ConferenceListParticipantsParams\Filter|FilterShape1,
      *   page?: ConferenceListParticipantsParams\Page|PageShape1,
+     *   pageNumber?: int,
+     *   pageSize?: int,
      *   region?: ConferenceListParticipantsParams\Region|value-of<ConferenceListParticipantsParams\Region>,
      * }|ConferenceListParticipantsParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<ConferenceListParticipantsResponse>>
+     * @return BaseResponse<DefaultFlatPagination<ConferenceListParticipantsResponse>>
      *
      * @throws APIException
      */
@@ -193,10 +201,13 @@ final class ConferencesRawService implements ConferencesRawContract
         return $this->client->request(
             method: 'get',
             path: ['conferences/%1$s/participants', $conferenceID],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: ConferenceListParticipantsResponse::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 }
