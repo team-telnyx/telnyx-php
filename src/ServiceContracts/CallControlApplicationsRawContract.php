@@ -14,7 +14,7 @@ use Telnyx\CallControlApplications\CallControlApplicationUpdateParams;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 /**
@@ -75,7 +75,7 @@ interface CallControlApplicationsRawContract
      * @param array<string,mixed>|CallControlApplicationListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<CallControlApplication>>
+     * @return BaseResponse<DefaultFlatPagination<CallControlApplication>>
      *
      * @throws APIException
      */

@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type PageShape from \Telnyx\Connections\ConnectionListActiveCallsParams\Page
  *
  * @phpstan-type ConnectionListActiveCallsParamsShape = array{
- *   page?: null|Page|PageShape
+ *   page?: null|Page|PageShape, pageNumber?: int|null, pageSize?: int|null
  * }
  */
 final class ConnectionListActiveCallsParams implements BaseModel
@@ -33,6 +33,12 @@ final class ConnectionListActiveCallsParams implements BaseModel
     #[Optional]
     public ?Page $page;
 
+    #[Optional]
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
+
     public function __construct()
     {
         $this->initialize();
@@ -45,11 +51,16 @@ final class ConnectionListActiveCallsParams implements BaseModel
      *
      * @param Page|PageShape|null $page
      */
-    public static function with(Page|array|null $page = null): self
-    {
+    public static function with(
+        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null
+    ): self {
         $self = new self;
 
         null !== $page && $self['page'] = $page;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
 
         return $self;
     }
@@ -63,6 +74,22 @@ final class ConnectionListActiveCallsParams implements BaseModel
     {
         $self = clone $this;
         $self['page'] = $page;
+
+        return $self;
+    }
+
+    public function withPageNumber(int $pageNumber): self
+    {
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
+
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
         return $self;
     }

@@ -12,11 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number].
  *
  * @phpstan-type PageShape = array{
- *   after?: string|null,
- *   before?: string|null,
- *   limit?: int|null,
- *   number?: int|null,
- *   size?: int|null,
+ *   after?: string|null, before?: string|null, limit?: int|null
  * }
  */
 final class Page implements BaseModel
@@ -42,18 +38,6 @@ final class Page implements BaseModel
     #[Optional]
     public ?int $limit;
 
-    /**
-     * The page number to load.
-     */
-    #[Optional]
-    public ?int $number;
-
-    /**
-     * The size of the page.
-     */
-    #[Optional]
-    public ?int $size;
-
     public function __construct()
     {
         $this->initialize();
@@ -67,17 +51,13 @@ final class Page implements BaseModel
     public static function with(
         ?string $after = null,
         ?string $before = null,
-        ?int $limit = null,
-        ?int $number = null,
-        ?int $size = null,
+        ?int $limit = null
     ): self {
         $self = new self;
 
         null !== $after && $self['after'] = $after;
         null !== $before && $self['before'] = $before;
         null !== $limit && $self['limit'] = $limit;
-        null !== $number && $self['number'] = $number;
-        null !== $size && $self['size'] = $size;
 
         return $self;
     }
@@ -111,28 +91,6 @@ final class Page implements BaseModel
     {
         $self = clone $this;
         $self['limit'] = $limit;
-
-        return $self;
-    }
-
-    /**
-     * The page number to load.
-     */
-    public function withNumber(int $number): self
-    {
-        $self = clone $this;
-        $self['number'] = $number;
-
-        return $self;
-    }
-
-    /**
-     * The size of the page.
-     */
-    public function withSize(int $size): self
-    {
-        $self = clone $this;
-        $self['size'] = $size;
 
         return $self;
     }

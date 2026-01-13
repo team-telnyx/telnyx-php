@@ -13,6 +13,7 @@ use Telnyx\Connections\ConnectionListParams\Sort;
 use Telnyx\Connections\ConnectionListResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ConnectionsContract;
@@ -108,16 +109,20 @@ final class ConnectionsService implements ConnectionsContract
      * @param \Telnyx\Connections\ConnectionListActiveCallsParams\Page|PageShape1 $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<ConnectionListActiveCallsResponse>
+     * @return DefaultFlatPagination<ConnectionListActiveCallsResponse>
      *
      * @throws APIException
      */
     public function listActiveCalls(
         string $connectionID,
         \Telnyx\Connections\ConnectionListActiveCallsParams\Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination {
-        $params = Util::removeNulls(['page' => $page]);
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
+            ['page' => $page, 'pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listActiveCalls($connectionID, params: $params, requestOptions: $requestOptions);

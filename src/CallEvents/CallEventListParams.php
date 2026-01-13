@@ -22,7 +22,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type PageShape from \Telnyx\CallEvents\CallEventListParams\Page
  *
  * @phpstan-type CallEventListParamsShape = array{
- *   filter?: null|Filter|FilterShape, page?: null|Page|PageShape
+ *   filter?: null|Filter|FilterShape,
+ *   page?: null|Page|PageShape,
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
  * }
  */
 final class CallEventListParams implements BaseModel
@@ -43,6 +46,12 @@ final class CallEventListParams implements BaseModel
     #[Optional]
     public ?Page $page;
 
+    #[Optional]
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
+
     public function __construct()
     {
         $this->initialize();
@@ -58,12 +67,16 @@ final class CallEventListParams implements BaseModel
      */
     public static function with(
         Filter|array|null $filter = null,
-        Page|array|null $page = null
+        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
     ): self {
         $self = new self;
 
         null !== $filter && $self['filter'] = $filter;
         null !== $page && $self['page'] = $page;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
 
         return $self;
     }
@@ -90,6 +103,22 @@ final class CallEventListParams implements BaseModel
     {
         $self = clone $this;
         $self['page'] = $page;
+
+        return $self;
+    }
+
+    public function withPageNumber(int $pageNumber): self
+    {
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
+
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
         return $self;
     }

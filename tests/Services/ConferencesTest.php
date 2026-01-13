@@ -10,7 +10,7 @@ use Telnyx\Conferences\Conference;
 use Telnyx\Conferences\ConferenceGetResponse;
 use Telnyx\Conferences\ConferenceListParticipantsResponse;
 use Telnyx\Conferences\ConferenceNewResponse;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -96,7 +96,7 @@ final class ConferencesTest extends TestCase
         $page = $this->client->conferences->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $page);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -114,7 +114,7 @@ final class ConferencesTest extends TestCase
         $page = $this->client->conferences->listParticipants('conference_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $page);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType

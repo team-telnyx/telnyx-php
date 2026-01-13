@@ -14,7 +14,7 @@ use Telnyx\Conferences\ConferenceNewResponse;
 use Telnyx\Conferences\ConferenceRetrieveParams;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 /**
@@ -60,7 +60,7 @@ interface ConferencesRawContract
      * @param array<string,mixed>|ConferenceListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<Conference>>
+     * @return BaseResponse<DefaultFlatPagination<Conference>>
      *
      * @throws APIException
      */
@@ -76,7 +76,7 @@ interface ConferencesRawContract
      * @param array<string,mixed>|ConferenceListParticipantsParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<ConferenceListParticipantsResponse>>
+     * @return BaseResponse<DefaultFlatPagination<ConferenceListParticipantsResponse>>
      *
      * @throws APIException
      */

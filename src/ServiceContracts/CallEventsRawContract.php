@@ -8,7 +8,7 @@ use Telnyx\CallEvents\CallEventListParams;
 use Telnyx\CallEvents\CallEventListResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 /**
@@ -22,7 +22,7 @@ interface CallEventsRawContract
      * @param array<string,mixed>|CallEventListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<CallEventListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<CallEventListResponse>>
      *
      * @throws APIException
      */

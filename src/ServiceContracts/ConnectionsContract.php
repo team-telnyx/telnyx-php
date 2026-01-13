@@ -11,6 +11,7 @@ use Telnyx\Connections\ConnectionListParams\Page;
 use Telnyx\Connections\ConnectionListParams\Sort;
 use Telnyx\Connections\ConnectionListResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
@@ -72,13 +73,15 @@ interface ConnectionsContract
      * @param \Telnyx\Connections\ConnectionListActiveCallsParams\Page|PageShape1 $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<ConnectionListActiveCallsResponse>
+     * @return DefaultFlatPagination<ConnectionListActiveCallsResponse>
      *
      * @throws APIException
      */
     public function listActiveCalls(
         string $connectionID,
         \Telnyx\Connections\ConnectionListActiveCallsParams\Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination;
+    ): DefaultFlatPagination;
 }

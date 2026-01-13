@@ -23,7 +23,8 @@ use Telnyx\CallControlApplications\CallControlApplicationUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CallControlApplicationsRawContract;
 
@@ -168,11 +169,15 @@ final class CallControlApplicationsRawService implements CallControlApplications
      * Return a list of call control applications.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|value-of<Sort>
+     *   filter?: Filter|FilterShape,
+     *   page?: Page|PageShape,
+     *   pageNumber?: int,
+     *   pageSize?: int,
+     *   sort?: Sort|value-of<Sort>,
      * }|CallControlApplicationListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<CallControlApplication>>
+     * @return BaseResponse<DefaultFlatPagination<CallControlApplication>>
      *
      * @throws APIException
      */
@@ -189,10 +194,13 @@ final class CallControlApplicationsRawService implements CallControlApplications
         return $this->client->request(
             method: 'get',
             path: 'call_control_applications',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: CallControlApplication::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

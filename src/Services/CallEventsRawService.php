@@ -11,7 +11,8 @@ use Telnyx\CallEvents\CallEventListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CallEventsRawContract;
 
@@ -36,11 +37,14 @@ final class CallEventsRawService implements CallEventsRawContract
      * **Note**: Only one `filter[occurred_at]` can be passed.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, page?: Page|PageShape
+     *   filter?: Filter|FilterShape,
+     *   page?: Page|PageShape,
+     *   pageNumber?: int,
+     *   pageSize?: int,
      * }|CallEventListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<CallEventListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<CallEventListResponse>>
      *
      * @throws APIException
      */
@@ -57,10 +61,13 @@ final class CallEventsRawService implements CallEventsRawContract
         return $this->client->request(
             method: 'get',
             path: 'call_events',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: CallEventListResponse::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 }
