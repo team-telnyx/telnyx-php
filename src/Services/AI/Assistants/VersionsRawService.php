@@ -47,7 +47,7 @@ final class VersionsRawService implements VersionsRawContract
      *
      * Retrieves a specific version of an assistant by assistant_id and version_id
      *
-     * @param string $versionID Path param:
+     * @param string $versionID Path param
      * @param array{
      *   assistantID: string, includeMcpServers?: bool
      * }|VersionRetrieveParams $params
@@ -87,7 +87,7 @@ final class VersionsRawService implements VersionsRawContract
      *
      * Updates the configuration of a specific assistant version. Can not update main version
      *
-     * @param string $versionID Path param:
+     * @param string $versionID Path param
      * @param array{
      *   assistantID: string,
      *   description?: string,

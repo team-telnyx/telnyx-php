@@ -30,7 +30,7 @@ interface UserBundlesContract
      * @api
      *
      * @param string $idempotencyKey Body param: Idempotency key for the request. Can be any UUID, but should always be unique for each request.
-     * @param list<Item|ItemShape> $items Body param:
+     * @param list<Item|ItemShape> $items Body param
      * @param string $authorizationBearer Header param: Authenticates the request with your Telnyx API V2 KEY
      * @param RequestOpts|null $requestOptions
      *

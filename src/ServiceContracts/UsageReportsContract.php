@@ -26,8 +26,8 @@ interface UsageReportsContract
      * @param string $filter Query param: Filter records on dimensions
      * @param Format|value-of<Format> $format Query param: Specify the response format (csv or json). JSON is returned by default, even if not specified.
      * @param bool $managedAccounts query param: Return the aggregations for all Managed Accounts under the user making the request
-     * @param int $pageNumber Query param:
-     * @param int $pageSize Query param:
+     * @param int $pageNumber Query param
+     * @param int $pageSize Query param
      * @param list<string> $sort Query param: Specifies the sort order for results
      * @param string $startDate Query param: The start date for the time range you are interested in. The maximum time range is 31 days. Format: YYYY-MM-DDTHH:mm:ssZ
      * @param string $authorizationBearer Header param: Authenticates the request with your Telnyx API V2 KEY

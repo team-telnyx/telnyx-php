@@ -55,7 +55,7 @@ interface AutorespConfigsRawContract
     /**
      * @api
      *
-     * @param string $autorespCfgID Path param:
+     * @param string $autorespCfgID Path param
      * @param array<string,mixed>|AutorespConfigUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *

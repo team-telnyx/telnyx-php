@@ -49,9 +49,9 @@ final class VersionsService implements VersionsContract
      *
      * Retrieves a specific version of an assistant by assistant_id and version_id
      *
-     * @param string $versionID Path param:
-     * @param string $assistantID Path param:
-     * @param bool $includeMcpServers Query param:
+     * @param string $versionID Path param
+     * @param string $assistantID Path param
+     * @param bool $includeMcpServers Query param
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -77,24 +77,24 @@ final class VersionsService implements VersionsContract
      *
      * Updates the configuration of a specific assistant version. Can not update main version
      *
-     * @param string $versionID Path param:
-     * @param string $assistantID Path param:
-     * @param string $description Body param:
+     * @param string $versionID Path param
+     * @param string $assistantID Path param
+     * @param string $description Body param
      * @param array<string,mixed> $dynamicVariables Body param: Map of dynamic variables and their default values
      * @param string $dynamicVariablesWebhookURL Body param: If the dynamic_variables_webhook_url is set for the assistant, we will send a request at the start of the conversation. See our [guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) for more information.
-     * @param list<EnabledFeatures|value-of<EnabledFeatures>> $enabledFeatures Body param:
+     * @param list<EnabledFeatures|value-of<EnabledFeatures>> $enabledFeatures Body param
      * @param string $greeting Body param: Text that the assistant will use to start the conversation. This may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
-     * @param InsightSettings|InsightSettingsShape $insightSettings Body param:
+     * @param InsightSettings|InsightSettingsShape $insightSettings Body param
      * @param string $instructions Body param: System instructions for the assistant. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
      * @param string $llmAPIKeyRef Body param: This is only needed when using third-party inference providers. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) that refers to your LLM provider's API key. Warning: Free plans are unlikely to work with this integration.
-     * @param MessagingSettings|MessagingSettingsShape $messagingSettings Body param:
+     * @param MessagingSettings|MessagingSettingsShape $messagingSettings Body param
      * @param string $model Body param: ID of the model to use. You can use the [Get models API](https://developers.telnyx.com/api/inference/inference-embedding/get-models-public-models-get) to see all of your available models,
-     * @param string $name Body param:
-     * @param PrivacySettings|PrivacySettingsShape $privacySettings Body param:
-     * @param TelephonySettings|TelephonySettingsShape $telephonySettings Body param:
+     * @param string $name Body param
+     * @param PrivacySettings|PrivacySettingsShape $privacySettings Body param
+     * @param TelephonySettings|TelephonySettingsShape $telephonySettings Body param
      * @param list<AssistantToolShape> $tools Body param: The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
-     * @param TranscriptionSettings|TranscriptionSettingsShape $transcription Body param:
-     * @param VoiceSettings|VoiceSettingsShape $voiceSettings Body param:
+     * @param TranscriptionSettings|TranscriptionSettingsShape $transcription Body param
+     * @param VoiceSettings|VoiceSettingsShape $voiceSettings Body param
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

@@ -83,7 +83,7 @@ interface JobsContract
      * @param string $externalPin Body param: If someone attempts to port your phone number away from Telnyx and your phone number has an external PIN set, we will attempt to verify that you provided the correct external PIN to the winning carrier. Note that not all carriers cooperate with this security mechanism.
      * @param bool $hdVoiceEnabled Body param: Indicates whether to enable or disable HD Voice on each phone number. HD Voice is a paid feature and may not be available for all phone numbers, more details about it can be found in the Telnyx support documentation.
      * @param list<string> $tags body param: A list of user-assigned tags to help organize phone numbers
-     * @param UpdateVoiceSettings|UpdateVoiceSettingsShape $voice Body param:
+     * @param UpdateVoiceSettings|UpdateVoiceSettingsShape $voice Body param
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

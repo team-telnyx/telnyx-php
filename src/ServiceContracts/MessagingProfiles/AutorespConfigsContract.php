@@ -53,12 +53,12 @@ interface AutorespConfigsContract
     /**
      * @api
      *
-     * @param string $autorespCfgID Path param:
-     * @param string $profileID Path param:
-     * @param string $countryCode Body param:
-     * @param list<string> $keywords Body param:
-     * @param \Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op|value-of<\Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op> $op Body param:
-     * @param string $respText Body param:
+     * @param string $autorespCfgID Path param
+     * @param string $profileID Path param
+     * @param string $countryCode Body param
+     * @param list<string> $keywords Body param
+     * @param \Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op|value-of<\Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op> $op Body param
+     * @param string $respText Body param
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

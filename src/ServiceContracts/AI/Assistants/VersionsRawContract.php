@@ -22,7 +22,7 @@ interface VersionsRawContract
     /**
      * @api
      *
-     * @param string $versionID Path param:
+     * @param string $versionID Path param
      * @param array<string,mixed>|VersionRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -39,7 +39,7 @@ interface VersionsRawContract
     /**
      * @api
      *
-     * @param string $versionID Path param:
+     * @param string $versionID Path param
      * @param array<string,mixed>|VersionUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
