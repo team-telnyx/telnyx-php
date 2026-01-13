@@ -10,6 +10,8 @@ use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\Queues\QueueCreateParams;
 use Telnyx\Texml\Accounts\Queues\QueueDeleteParams;
 use Telnyx\Texml\Accounts\Queues\QueueGetResponse;
+use Telnyx\Texml\Accounts\Queues\QueueListParams;
+use Telnyx\Texml\Accounts\Queues\QueueListResponse;
 use Telnyx\Texml\Accounts\Queues\QueueNewResponse;
 use Telnyx\Texml\Accounts\Queues\QueueRetrieveParams;
 use Telnyx\Texml\Accounts\Queues\QueueUpdateParams;
@@ -68,6 +70,23 @@ interface QueuesRawContract
     public function update(
         string $queueSid,
         array|QueueUpdateParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $accountSid the id of the account the resource belongs to
+     * @param array<string,mixed>|QueueListParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<QueueListResponse>
+     *
+     * @throws APIException
+     */
+    public function list(
+        string $accountSid,
+        array|QueueListParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 

@@ -7,11 +7,14 @@ namespace Telnyx\Services\Texml\Accounts;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\QueuesRawContract;
 use Telnyx\Texml\Accounts\Queues\QueueCreateParams;
 use Telnyx\Texml\Accounts\Queues\QueueDeleteParams;
 use Telnyx\Texml\Accounts\Queues\QueueGetResponse;
+use Telnyx\Texml\Accounts\Queues\QueueListParams;
+use Telnyx\Texml\Accounts\Queues\QueueListResponse;
 use Telnyx\Texml\Accounts\Queues\QueueNewResponse;
 use Telnyx\Texml\Accounts\Queues\QueueRetrieveParams;
 use Telnyx\Texml\Accounts\Queues\QueueUpdateParams;
@@ -129,6 +132,54 @@ final class QueuesRawService implements QueuesRawContract
             body: (object) array_diff_key($parsed, array_flip(['accountSid'])),
             options: $options,
             convert: QueueUpdateResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Lists queue resources.
+     *
+     * @param string $accountSid the id of the account the resource belongs to
+     * @param array{
+     *   dateCreated?: string,
+     *   dateUpdated?: string,
+     *   page?: int,
+     *   pageSize?: int,
+     *   pageToken?: string,
+     * }|QueueListParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<QueueListResponse>
+     *
+     * @throws APIException
+     */
+    public function list(
+        string $accountSid,
+        array|QueueListParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = QueueListParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'get',
+            path: ['texml/Accounts/%1$s/Queues', $accountSid],
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'dateCreated' => 'DateCreated',
+                    'dateUpdated' => 'DateUpdated',
+                    'page' => 'Page',
+                    'pageSize' => 'PageSize',
+                    'pageToken' => 'PageToken',
+                ],
+            ),
+            options: $options,
+            convert: QueueListResponse::class,
         );
     }
 

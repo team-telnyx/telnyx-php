@@ -1,0 +1,200 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Telnyx\Texml\Accounts\Queues;
+
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Texml\Accounts\Queues\QueueListResponse\Queue;
+
+/**
+ * @phpstan-import-type QueueShape from \Telnyx\Texml\Accounts\Queues\QueueListResponse\Queue
+ *
+ * @phpstan-type QueueListResponseShape = array{
+ *   end?: int|null,
+ *   firstPageUri?: string|null,
+ *   nextPageUri?: string|null,
+ *   page?: int|null,
+ *   pageSize?: int|null,
+ *   queues?: list<Queue|QueueShape>|null,
+ *   start?: int|null,
+ *   uri?: string|null,
+ * }
+ */
+final class QueueListResponse implements BaseModel
+{
+    /** @use SdkModel<QueueListResponseShape> */
+    use SdkModel;
+
+    /**
+     * The number of the last element on the page, zero-indexed.
+     */
+    #[Optional]
+    public ?int $end;
+
+    /**
+     * /v2/texml/Accounts/61bf923e-5e4d-4595-a110-56190ea18a1b/Queues.json?Page=0&PageSize=1.
+     */
+    #[Optional('first_page_uri')]
+    public ?string $firstPageUri;
+
+    /**
+     * /v2/texml/Accounts/61bf923e-5e4d-4595-a110-56190ea18a1b/Queues.json?Page=1&PageSize=1&PageToken=MTY4AjgyNDkwNzIxMQ.
+     */
+    #[Optional('next_page_uri')]
+    public ?string $nextPageUri;
+
+    /**
+     * Current page number, zero-indexed.
+     */
+    #[Optional]
+    public ?int $page;
+
+    /**
+     * The number of items on the page.
+     */
+    #[Optional('page_size')]
+    public ?int $pageSize;
+
+    /** @var list<Queue>|null $queues */
+    #[Optional(list: Queue::class)]
+    public ?array $queues;
+
+    /**
+     * The number of the first element on the page, zero-indexed.
+     */
+    #[Optional]
+    public ?int $start;
+
+    /**
+     * The URI of the current page.
+     */
+    #[Optional]
+    public ?string $uri;
+
+    public function __construct()
+    {
+        $this->initialize();
+    }
+
+    /**
+     * Construct an instance from the required parameters.
+     *
+     * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param list<Queue|QueueShape>|null $queues
+     */
+    public static function with(
+        ?int $end = null,
+        ?string $firstPageUri = null,
+        ?string $nextPageUri = null,
+        ?int $page = null,
+        ?int $pageSize = null,
+        ?array $queues = null,
+        ?int $start = null,
+        ?string $uri = null,
+    ): self {
+        $self = new self;
+
+        null !== $end && $self['end'] = $end;
+        null !== $firstPageUri && $self['firstPageUri'] = $firstPageUri;
+        null !== $nextPageUri && $self['nextPageUri'] = $nextPageUri;
+        null !== $page && $self['page'] = $page;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $queues && $self['queues'] = $queues;
+        null !== $start && $self['start'] = $start;
+        null !== $uri && $self['uri'] = $uri;
+
+        return $self;
+    }
+
+    /**
+     * The number of the last element on the page, zero-indexed.
+     */
+    public function withEnd(int $end): self
+    {
+        $self = clone $this;
+        $self['end'] = $end;
+
+        return $self;
+    }
+
+    /**
+     * /v2/texml/Accounts/61bf923e-5e4d-4595-a110-56190ea18a1b/Queues.json?Page=0&PageSize=1.
+     */
+    public function withFirstPageUri(string $firstPageUri): self
+    {
+        $self = clone $this;
+        $self['firstPageUri'] = $firstPageUri;
+
+        return $self;
+    }
+
+    /**
+     * /v2/texml/Accounts/61bf923e-5e4d-4595-a110-56190ea18a1b/Queues.json?Page=1&PageSize=1&PageToken=MTY4AjgyNDkwNzIxMQ.
+     */
+    public function withNextPageUri(string $nextPageUri): self
+    {
+        $self = clone $this;
+        $self['nextPageUri'] = $nextPageUri;
+
+        return $self;
+    }
+
+    /**
+     * Current page number, zero-indexed.
+     */
+    public function withPage(int $page): self
+    {
+        $self = clone $this;
+        $self['page'] = $page;
+
+        return $self;
+    }
+
+    /**
+     * The number of items on the page.
+     */
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
+
+        return $self;
+    }
+
+    /**
+     * @param list<Queue|QueueShape> $queues
+     */
+    public function withQueues(array $queues): self
+    {
+        $self = clone $this;
+        $self['queues'] = $queues;
+
+        return $self;
+    }
+
+    /**
+     * The number of the first element on the page, zero-indexed.
+     */
+    public function withStart(int $start): self
+    {
+        $self = clone $this;
+        $self['start'] = $start;
+
+        return $self;
+    }
+
+    /**
+     * The URI of the current page.
+     */
+    public function withUri(string $uri): self
+    {
+        $self = clone $this;
+        $self['uri'] = $uri;
+
+        return $self;
+    }
+}
