@@ -12,6 +12,7 @@ use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
+use Telnyx\AI\Assistants\Versions\VersionUpdateParams\WidgetSettings;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
@@ -27,6 +28,7 @@ use Telnyx\ServiceContracts\AI\Assistants\VersionsContract;
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\AI\Assistants\VoiceSettings
+ * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\WidgetSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class VersionsService implements VersionsContract
@@ -95,6 +97,7 @@ final class VersionsService implements VersionsContract
      * @param list<AssistantToolShape> $tools Body param: The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
      * @param TranscriptionSettings|TranscriptionSettingsShape $transcription Body param
      * @param VoiceSettings|VoiceSettingsShape $voiceSettings Body param
+     * @param WidgetSettings|WidgetSettingsShape $widgetSettings body param: Configuration settings for the assistant's web widget
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -118,6 +121,7 @@ final class VersionsService implements VersionsContract
         ?array $tools = null,
         TranscriptionSettings|array|null $transcription = null,
         VoiceSettings|array|null $voiceSettings = null,
+        WidgetSettings|array|null $widgetSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): InferenceEmbedding {
         $params = Util::removeNulls(
@@ -139,6 +143,7 @@ final class VersionsService implements VersionsContract
                 'tools' => $tools,
                 'transcription' => $transcription,
                 'voiceSettings' => $voiceSettings,
+                'widgetSettings' => $widgetSettings,
             ],
         );
 

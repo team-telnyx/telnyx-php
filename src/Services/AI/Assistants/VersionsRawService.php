@@ -16,6 +16,7 @@ use Telnyx\AI\Assistants\Versions\VersionDeleteParams;
 use Telnyx\AI\Assistants\Versions\VersionPromoteParams;
 use Telnyx\AI\Assistants\Versions\VersionRetrieveParams;
 use Telnyx\AI\Assistants\Versions\VersionUpdateParams;
+use Telnyx\AI\Assistants\Versions\VersionUpdateParams\WidgetSettings;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
@@ -32,6 +33,7 @@ use Telnyx\ServiceContracts\AI\Assistants\VersionsRawContract;
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\AI\Assistants\VoiceSettings
+ * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\WidgetSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class VersionsRawService implements VersionsRawContract
@@ -106,6 +108,7 @@ final class VersionsRawService implements VersionsRawContract
      *   tools?: list<AssistantToolShape>,
      *   transcription?: TranscriptionSettings|TranscriptionSettingsShape,
      *   voiceSettings?: VoiceSettings|VoiceSettingsShape,
+     *   widgetSettings?: WidgetSettings|WidgetSettingsShape,
      * }|VersionUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *

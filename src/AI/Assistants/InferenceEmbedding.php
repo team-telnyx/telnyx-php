@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
+use Telnyx\AI\Assistants\InferenceEmbedding\WidgetSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -19,6 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\AI\Assistants\VoiceSettings
+ * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\InferenceEmbedding\WidgetSettings
  *
  * @phpstan-type InferenceEmbeddingShape = array{
  *   id: string,
@@ -40,6 +42,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   tools?: list<AssistantToolShape>|null,
  *   transcription?: null|TranscriptionSettings|TranscriptionSettingsShape,
  *   voiceSettings?: null|VoiceSettings|VoiceSettingsShape,
+ *   widgetSettings?: null|WidgetSettings|WidgetSettingsShape,
  * }
  */
 final class InferenceEmbedding implements BaseModel
@@ -131,6 +134,12 @@ final class InferenceEmbedding implements BaseModel
     public ?VoiceSettings $voiceSettings;
 
     /**
+     * Configuration settings for the assistant's web widget.
+     */
+    #[Optional('widget_settings')]
+    public ?WidgetSettings $widgetSettings;
+
+    /**
      * `new InferenceEmbedding()` is missing required properties by the API.
      *
      * To enforce required parameters use
@@ -171,6 +180,7 @@ final class InferenceEmbedding implements BaseModel
      * @param list<AssistantToolShape>|null $tools
      * @param TranscriptionSettings|TranscriptionSettingsShape|null $transcription
      * @param VoiceSettings|VoiceSettingsShape|null $voiceSettings
+     * @param WidgetSettings|WidgetSettingsShape|null $widgetSettings
      */
     public static function with(
         string $id,
@@ -192,6 +202,7 @@ final class InferenceEmbedding implements BaseModel
         ?array $tools = null,
         TranscriptionSettings|array|null $transcription = null,
         VoiceSettings|array|null $voiceSettings = null,
+        WidgetSettings|array|null $widgetSettings = null,
     ): self {
         $self = new self;
 
@@ -215,6 +226,7 @@ final class InferenceEmbedding implements BaseModel
         null !== $tools && $self['tools'] = $tools;
         null !== $transcription && $self['transcription'] = $transcription;
         null !== $voiceSettings && $self['voiceSettings'] = $voiceSettings;
+        null !== $widgetSettings && $self['widgetSettings'] = $widgetSettings;
 
         return $self;
     }
@@ -423,6 +435,20 @@ final class InferenceEmbedding implements BaseModel
     {
         $self = clone $this;
         $self['voiceSettings'] = $voiceSettings;
+
+        return $self;
+    }
+
+    /**
+     * Configuration settings for the assistant's web widget.
+     *
+     * @param WidgetSettings|WidgetSettingsShape $widgetSettings
+     */
+    public function withWidgetSettings(
+        WidgetSettings|array $widgetSettings
+    ): self {
+        $self = clone $this;
+        $self['widgetSettings'] = $widgetSettings;
 
         return $self;
     }

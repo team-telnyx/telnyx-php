@@ -12,6 +12,7 @@ use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
+use Telnyx\AI\Assistants\Versions\VersionUpdateParams\WidgetSettings;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -24,6 +25,7 @@ use Telnyx\RequestOptions;
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\AI\Assistants\VoiceSettings
+ * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\WidgetSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface VersionsContract
@@ -66,6 +68,7 @@ interface VersionsContract
      * @param list<AssistantToolShape> $tools Body param: The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
      * @param TranscriptionSettings|TranscriptionSettingsShape $transcription Body param
      * @param VoiceSettings|VoiceSettingsShape $voiceSettings Body param
+     * @param WidgetSettings|WidgetSettingsShape $widgetSettings body param: Configuration settings for the assistant's web widget
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -89,6 +92,7 @@ interface VersionsContract
         ?array $tools = null,
         TranscriptionSettings|array|null $transcription = null,
         VoiceSettings|array|null $voiceSettings = null,
+        WidgetSettings|array|null $widgetSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): InferenceEmbedding;
 
