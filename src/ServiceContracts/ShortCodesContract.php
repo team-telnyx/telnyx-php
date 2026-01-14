@@ -5,17 +5,15 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ShortCode;
 use Telnyx\ShortCodes\ShortCodeGetResponse;
 use Telnyx\ShortCodes\ShortCodeListParams\Filter;
-use Telnyx\ShortCodes\ShortCodeListParams\Page;
 use Telnyx\ShortCodes\ShortCodeUpdateResponse;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\ShortCodes\ShortCodeListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\ShortCodes\ShortCodeListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface ShortCodesContract
@@ -54,16 +52,16 @@ interface ShortCodesContract
      * @api
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[messaging_profile_id]
-     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<ShortCode>
+     * @return DefaultFlatPagination<ShortCode>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination;
+    ): DefaultFlatPagination;
 }

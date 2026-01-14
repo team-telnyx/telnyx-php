@@ -7,11 +7,10 @@ namespace Telnyx\Services\PhoneNumbers;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\PhoneNumbers\Jobs\JobDeleteBatchResponse;
 use Telnyx\PhoneNumbers\Jobs\JobGetResponse;
 use Telnyx\PhoneNumbers\Jobs\JobListParams\Filter;
-use Telnyx\PhoneNumbers\Jobs\JobListParams\Page;
 use Telnyx\PhoneNumbers\Jobs\JobListParams\Sort;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchResponse;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateEmergencySettingsBatchResponse;
@@ -22,7 +21,6 @@ use Telnyx\ServiceContracts\PhoneNumbers\JobsContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\Jobs\JobListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\PhoneNumbers\Jobs\JobListParams\Page
  * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams\Filter as FilterShape1
  * @phpstan-import-type UpdateVoiceSettingsShape from \Telnyx\PhoneNumbers\Voice\UpdateVoiceSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -68,22 +66,27 @@ final class JobsService implements JobsContract
      * Lists the phone numbers jobs
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[type]
-     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<PhoneNumbersJob>
+     * @return DefaultFlatPagination<PhoneNumbersJob>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         Sort|string|null $sort = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination {
+    ): DefaultFlatPagination {
         $params = Util::removeNulls(
-            ['filter' => $filter, 'page' => $page, 'sort' => $sort]
+            [
+                'filter' => $filter,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+                'sort' => $sort,
+            ],
         );
 
         // @phpstan-ignore-next-line argument.type

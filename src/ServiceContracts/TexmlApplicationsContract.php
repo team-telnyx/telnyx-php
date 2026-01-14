@@ -7,7 +7,7 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\DtmfType;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\TexmlApplications\TexmlApplication;
 use Telnyx\TexmlApplications\TexmlApplicationCreateParams\Inbound;
@@ -17,7 +17,6 @@ use Telnyx\TexmlApplications\TexmlApplicationCreateParams\VoiceMethod;
 use Telnyx\TexmlApplications\TexmlApplicationDeleteResponse;
 use Telnyx\TexmlApplications\TexmlApplicationGetResponse;
 use Telnyx\TexmlApplications\TexmlApplicationListParams\Filter;
-use Telnyx\TexmlApplications\TexmlApplicationListParams\Page;
 use Telnyx\TexmlApplications\TexmlApplicationListParams\Sort;
 use Telnyx\TexmlApplications\TexmlApplicationNewResponse;
 use Telnyx\TexmlApplications\TexmlApplicationUpdateResponse;
@@ -28,7 +27,6 @@ use Telnyx\TexmlApplications\TexmlApplicationUpdateResponse;
  * @phpstan-import-type InboundShape from \Telnyx\TexmlApplications\TexmlApplicationUpdateParams\Inbound as InboundShape1
  * @phpstan-import-type OutboundShape from \Telnyx\TexmlApplications\TexmlApplicationUpdateParams\Outbound as OutboundShape1
  * @phpstan-import-type FilterShape from \Telnyx\TexmlApplications\TexmlApplicationListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\TexmlApplications\TexmlApplicationListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface TexmlApplicationsContract
@@ -134,7 +132,6 @@ interface TexmlApplicationsContract
      * @api
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[outbound_voice_profile_id], filter[friendly_name]
-     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
      * That is: <ul>
      *   <li>
@@ -149,16 +146,17 @@ interface TexmlApplicationsContract
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<TexmlApplication>
+     * @return DefaultFlatPagination<TexmlApplication>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         Sort|string $sort = 'created_at',
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination;
+    ): DefaultFlatPagination;
 
     /**
      * @api

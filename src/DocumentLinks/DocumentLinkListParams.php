@@ -9,7 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DocumentLinks\DocumentLinkListParams\Filter;
-use Telnyx\DocumentLinks\DocumentLinkListParams\Page;
 
 /**
  * List all documents links ordered by created_at descending.
@@ -17,10 +16,9 @@ use Telnyx\DocumentLinks\DocumentLinkListParams\Page;
  * @see Telnyx\Services\DocumentLinksService::list()
  *
  * @phpstan-import-type FilterShape from \Telnyx\DocumentLinks\DocumentLinkListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\DocumentLinks\DocumentLinkListParams\Page
  *
  * @phpstan-type DocumentLinkListParamsShape = array{
- *   filter?: null|Filter|FilterShape, page?: null|Page|PageShape
+ *   filter?: null|Filter|FilterShape, pageNumber?: int|null, pageSize?: int|null
  * }
  */
 final class DocumentLinkListParams implements BaseModel
@@ -35,11 +33,11 @@ final class DocumentLinkListParams implements BaseModel
     #[Optional]
     public ?Filter $filter;
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     */
     #[Optional]
-    public ?Page $page;
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
 
     public function __construct()
     {
@@ -52,16 +50,17 @@ final class DocumentLinkListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|FilterShape|null $filter
-     * @param Page|PageShape|null $page
      */
     public static function with(
         Filter|array|null $filter = null,
-        Page|array|null $page = null
+        ?int $pageNumber = null,
+        ?int $pageSize = null
     ): self {
         $self = new self;
 
         null !== $filter && $self['filter'] = $filter;
-        null !== $page && $self['page'] = $page;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
 
         return $self;
     }
@@ -79,15 +78,18 @@ final class DocumentLinkListParams implements BaseModel
         return $self;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     *
-     * @param Page|PageShape $page
-     */
-    public function withPage(Page|array $page): self
+    public function withPageNumber(int $pageNumber): self
     {
         $self = clone $this;
-        $self['page'] = $page;
+        $self['pageNumber'] = $pageNumber;
+
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
         return $self;
     }

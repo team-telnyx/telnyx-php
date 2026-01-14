@@ -9,7 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCardOrders\SimCardOrderListParams\Filter;
-use Telnyx\SimCardOrders\SimCardOrderListParams\Page;
 
 /**
  * Get all SIM card orders according to filters.
@@ -17,10 +16,9 @@ use Telnyx\SimCardOrders\SimCardOrderListParams\Page;
  * @see Telnyx\Services\SimCardOrdersService::list()
  *
  * @phpstan-import-type FilterShape from \Telnyx\SimCardOrders\SimCardOrderListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\SimCardOrders\SimCardOrderListParams\Page
  *
  * @phpstan-type SimCardOrderListParamsShape = array{
- *   filter?: null|Filter|FilterShape, page?: null|Page|PageShape
+ *   filter?: null|Filter|FilterShape, pageNumber?: int|null, pageSize?: int|null
  * }
  */
 final class SimCardOrderListParams implements BaseModel
@@ -35,11 +33,11 @@ final class SimCardOrderListParams implements BaseModel
     #[Optional]
     public ?Filter $filter;
 
-    /**
-     * Consolidated pagination parameter (deepObject style). Originally: page[number], page[size].
-     */
     #[Optional]
-    public ?Page $page;
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
 
     public function __construct()
     {
@@ -52,16 +50,17 @@ final class SimCardOrderListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|FilterShape|null $filter
-     * @param Page|PageShape|null $page
      */
     public static function with(
         Filter|array|null $filter = null,
-        Page|array|null $page = null
+        ?int $pageNumber = null,
+        ?int $pageSize = null
     ): self {
         $self = new self;
 
         null !== $filter && $self['filter'] = $filter;
-        null !== $page && $self['page'] = $page;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
 
         return $self;
     }
@@ -79,15 +78,18 @@ final class SimCardOrderListParams implements BaseModel
         return $self;
     }
 
-    /**
-     * Consolidated pagination parameter (deepObject style). Originally: page[number], page[size].
-     *
-     * @param Page|PageShape $page
-     */
-    public function withPage(Page|array $page): self
+    public function withPageNumber(int $pageNumber): self
     {
         $self = clone $this;
-        $self['page'] = $page;
+        $self['pageNumber'] = $pageNumber;
+
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
         return $self;
     }

@@ -12,31 +12,28 @@ use Telnyx\Core\Conversion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 use Telnyx\Core\Conversion\ListOf;
-use Telnyx\DefaultPagination\Meta;
+use Telnyx\Core\Util;
 
 /**
- * @phpstan-type DefaultPaginationShape = array{
- *   data?: list<array<string,mixed>>|null, meta?: Meta|null
+ * @phpstan-type DefaultPaginationForQueuesShape = array{
+ *   queues?: list<array<string,mixed>>|null
  * }
  *
  * @template TItem
  *
  * @implements BasePage<TItem>
  */
-final class DefaultPagination implements BaseModel, BasePage
+final class DefaultPaginationForQueues implements BaseModel, BasePage
 {
-    /** @use SdkModel<DefaultPaginationShape> */
+    /** @use SdkModel<DefaultPaginationForQueuesShape> */
     use SdkModel;
 
     /** @use SdkPage<TItem> */
     use SdkPage;
 
-    /** @var list<TItem>|null $data */
+    /** @var list<TItem>|null $queues */
     #[Optional(list: 'mixed')]
-    public ?array $data;
-
-    #[Optional]
-    public ?Meta $meta;
+    public ?array $queues;
 
     /**
      * @internal
@@ -66,10 +63,10 @@ final class DefaultPagination implements BaseModel, BasePage
         // @phpstan-ignore-next-line argument.type
         self::__unserialize($this->parsedBody);
 
-        if (is_array($items = $this->offsetGet('data'))) {
+        if (is_array($items = $this->offsetGet('queues'))) {
             $parsed = Conversion::coerce(new ListOf($convert), value: $items);
             // @phpstan-ignore-next-line
-            $this->offsetSet('data', value: $parsed);
+            $this->offsetSet('queues', value: $parsed);
         }
     }
 
@@ -77,7 +74,7 @@ final class DefaultPagination implements BaseModel, BasePage
     public function getItems(): array
     {
         // @phpstan-ignore-next-line return.type
-        return $this->offsetGet('data') ?? [];
+        return $this->offsetGet('queues') ?? [];
     }
 
     /**
@@ -97,9 +94,8 @@ final class DefaultPagination implements BaseModel, BasePage
     public function nextRequest(): ?array
     {
         /** @var int */
-        $curr = $this->meta->pageNumber ?? null;
-        if (!count($this->getItems()) || ($curr >= ($this
-            ->meta->totalPages ?? null))) {
+        $curr = Util::dig($this->requestInfo, ['query', 'Page']) ?? 1;
+        if (!count($this->getItems())) {
             return null;
         }
 

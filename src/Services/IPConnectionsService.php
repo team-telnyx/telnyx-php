@@ -11,7 +11,7 @@ use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\IPConnections\InboundIP;
 use Telnyx\IPConnections\IPConnection;
 use Telnyx\IPConnections\IPConnectionCreateParams\Inbound;
@@ -22,7 +22,6 @@ use Telnyx\IPConnections\IPConnectionCreateParams\WebhookAPIVersion;
 use Telnyx\IPConnections\IPConnectionDeleteResponse;
 use Telnyx\IPConnections\IPConnectionGetResponse;
 use Telnyx\IPConnections\IPConnectionListParams\Filter;
-use Telnyx\IPConnections\IPConnectionListParams\Page;
 use Telnyx\IPConnections\IPConnectionListParams\Sort;
 use Telnyx\IPConnections\IPConnectionNewResponse;
 use Telnyx\IPConnections\IPConnectionUpdateResponse;
@@ -36,7 +35,6 @@ use Telnyx\ServiceContracts\IPConnectionsContract;
  * @phpstan-import-type InboundIPShape from \Telnyx\IPConnections\InboundIP
  * @phpstan-import-type NoiseSuppressionDetailsShape from \Telnyx\IPConnections\IPConnectionUpdateParams\NoiseSuppressionDetails as NoiseSuppressionDetailsShape1
  * @phpstan-import-type FilterShape from \Telnyx\IPConnections\IPConnectionListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\IPConnections\IPConnectionListParams\Page
  * @phpstan-import-type OutboundIPShape from \Telnyx\IPConnections\OutboundIP
  * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -260,7 +258,6 @@ final class IPConnectionsService implements IPConnectionsContract
      * Returns a list of your IP connections.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_name], filter[fqdn], filter[outbound_voice_profile_id], filter[outbound.outbound_voice_profile_id]
-     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
      * That is: <ul>
      *   <li>
@@ -275,18 +272,24 @@ final class IPConnectionsService implements IPConnectionsContract
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<IPConnection>
+     * @return DefaultFlatPagination<IPConnection>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         Sort|string $sort = 'created_at',
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination {
+    ): DefaultFlatPagination {
         $params = Util::removeNulls(
-            ['filter' => $filter, 'page' => $page, 'sort' => $sort]
+            [
+                'filter' => $filter,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+                'sort' => $sort,
+            ],
         );
 
         // @phpstan-ignore-next-line argument.type

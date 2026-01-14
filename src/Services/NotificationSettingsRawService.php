@@ -7,7 +7,8 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\NotificationSettings\NotificationSetting;
 use Telnyx\NotificationSettings\NotificationSettingCreateParams;
 use Telnyx\NotificationSettings\NotificationSettingCreateParams\Parameter;
@@ -15,7 +16,6 @@ use Telnyx\NotificationSettings\NotificationSettingDeleteResponse;
 use Telnyx\NotificationSettings\NotificationSettingGetResponse;
 use Telnyx\NotificationSettings\NotificationSettingListParams;
 use Telnyx\NotificationSettings\NotificationSettingListParams\Filter;
-use Telnyx\NotificationSettings\NotificationSettingListParams\Page;
 use Telnyx\NotificationSettings\NotificationSettingNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NotificationSettingsRawContract;
@@ -23,7 +23,6 @@ use Telnyx\ServiceContracts\NotificationSettingsRawContract;
 /**
  * @phpstan-import-type ParameterShape from \Telnyx\NotificationSettings\NotificationSettingCreateParams\Parameter
  * @phpstan-import-type FilterShape from \Telnyx\NotificationSettings\NotificationSettingListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\NotificationSettings\NotificationSettingListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class NotificationSettingsRawService implements NotificationSettingsRawContract
@@ -101,11 +100,11 @@ final class NotificationSettingsRawService implements NotificationSettingsRawCon
      * List notification settings.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, page?: Page|PageShape
+     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
      * }|NotificationSettingListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<NotificationSetting>>
+     * @return BaseResponse<DefaultFlatPagination<NotificationSetting>>
      *
      * @throws APIException
      */
@@ -122,10 +121,13 @@ final class NotificationSettingsRawService implements NotificationSettingsRawCon
         return $this->client->request(
             method: 'get',
             path: 'notification_settings',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: NotificationSetting::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

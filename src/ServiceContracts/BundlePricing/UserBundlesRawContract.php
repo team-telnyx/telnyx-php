@@ -18,7 +18,7 @@ use Telnyx\BundlePricing\UserBundles\UserBundleNewResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleRetrieveParams;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 /**
@@ -64,7 +64,7 @@ interface UserBundlesRawContract
      * @param array<string,mixed>|UserBundleListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<UserBundle>>
+     * @return BaseResponse<DefaultFlatPagination<UserBundle>>
      *
      * @throws APIException
      */

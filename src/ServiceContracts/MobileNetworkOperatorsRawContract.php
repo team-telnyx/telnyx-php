@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams;
 use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListResponse;
 use Telnyx\RequestOptions;
@@ -22,7 +22,7 @@ interface MobileNetworkOperatorsRawContract
      * @param array<string,mixed>|MobileNetworkOperatorListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<MobileNetworkOperatorListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<MobileNetworkOperatorListResponse>>
      *
      * @throws APIException
      */

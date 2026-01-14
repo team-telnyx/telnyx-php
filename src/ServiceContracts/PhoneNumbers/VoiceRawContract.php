@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts\PhoneNumbers;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings;
 use Telnyx\PhoneNumbers\Voice\VoiceGetResponse;
 use Telnyx\PhoneNumbers\Voice\VoiceListParams;
@@ -57,7 +57,7 @@ interface VoiceRawContract
      * @param array<string,mixed>|VoiceListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<PhoneNumberWithVoiceSettings>>
+     * @return BaseResponse<DefaultFlatPagination<PhoneNumberWithVoiceSettings>>
      *
      * @throws APIException
      */

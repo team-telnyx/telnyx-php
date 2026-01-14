@@ -7,12 +7,12 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\Portouts\PortoutDetails;
 use Telnyx\Portouts\PortoutGetResponse;
 use Telnyx\Portouts\PortoutListParams;
 use Telnyx\Portouts\PortoutListParams\Filter;
-use Telnyx\Portouts\PortoutListParams\Page;
 use Telnyx\Portouts\PortoutListRejectionCodesParams;
 use Telnyx\Portouts\PortoutListRejectionCodesResponse;
 use Telnyx\Portouts\PortoutUpdateStatusParams;
@@ -23,7 +23,6 @@ use Telnyx\ServiceContracts\PortoutsRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\Portouts\PortoutListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\Portouts\PortoutListParams\Page
  * @phpstan-import-type FilterShape from \Telnyx\Portouts\PortoutListRejectionCodesParams\Filter as FilterShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -66,11 +65,11 @@ final class PortoutsRawService implements PortoutsRawContract
      * Returns the portout requests according to filters
      *
      * @param array{
-     *   filter?: Filter|FilterShape, page?: Page|PageShape
+     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
      * }|PortoutListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<PortoutDetails>>
+     * @return BaseResponse<DefaultFlatPagination<PortoutDetails>>
      *
      * @throws APIException
      */
@@ -87,10 +86,13 @@ final class PortoutsRawService implements PortoutsRawContract
         return $this->client->request(
             method: 'get',
             path: 'portouts',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: PortoutDetails::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

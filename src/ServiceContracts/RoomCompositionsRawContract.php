@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\RoomCompositions\RoomComposition;
 use Telnyx\RoomCompositions\RoomCompositionCreateParams;
@@ -55,7 +55,7 @@ interface RoomCompositionsRawContract
      * @param array<string,mixed>|RoomCompositionListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<RoomComposition>>
+     * @return BaseResponse<DefaultFlatPagination<RoomComposition>>
      *
      * @throws APIException
      */

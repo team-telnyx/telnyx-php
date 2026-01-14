@@ -7,15 +7,13 @@ namespace Telnyx\Services\PortingOrders;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
-use Telnyx\PortingOrders\Comments\CommentListParams\Page;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\PortingOrders\Comments\CommentListResponse;
 use Telnyx\PortingOrders\Comments\CommentNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\CommentsContract;
 
 /**
- * @phpstan-import-type PageShape from \Telnyx\PortingOrders\Comments\CommentListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class CommentsService implements CommentsContract
@@ -62,19 +60,21 @@ final class CommentsService implements CommentsContract
      * Returns a list of all comments of a porting order.
      *
      * @param string $id Porting Order id
-     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<CommentListResponse>
+     * @return DefaultFlatPagination<CommentListResponse>
      *
      * @throws APIException
      */
     public function list(
         string $id,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination {
-        $params = Util::removeNulls(['page' => $page]);
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
+            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($id, params: $params, requestOptions: $requestOptions);

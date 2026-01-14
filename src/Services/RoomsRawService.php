@@ -8,14 +8,13 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\Room;
 use Telnyx\Rooms\RoomCreateParams;
 use Telnyx\Rooms\RoomGetResponse;
 use Telnyx\Rooms\RoomListParams;
 use Telnyx\Rooms\RoomListParams\Filter;
-use Telnyx\Rooms\RoomListParams\Page;
 use Telnyx\Rooms\RoomNewResponse;
 use Telnyx\Rooms\RoomRetrieveParams;
 use Telnyx\Rooms\RoomUpdateParams;
@@ -24,7 +23,6 @@ use Telnyx\ServiceContracts\RoomsRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\Rooms\RoomListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\Rooms\RoomListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class RoomsRawService implements RoomsRawContract
@@ -155,11 +153,14 @@ final class RoomsRawService implements RoomsRawContract
      * View a list of rooms.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, includeSessions?: bool, page?: Page|PageShape
+     *   filter?: Filter|FilterShape,
+     *   includeSessions?: bool,
+     *   pageNumber?: int,
+     *   pageSize?: int,
      * }|RoomListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<Room>>
+     * @return BaseResponse<DefaultFlatPagination<Room>>
      *
      * @throws APIException
      */
@@ -178,11 +179,15 @@ final class RoomsRawService implements RoomsRawContract
             path: 'rooms',
             query: Util::array_transform_keys(
                 $parsed,
-                ['includeSessions' => 'include_sessions']
+                [
+                    'includeSessions' => 'include_sessions',
+                    'pageNumber' => 'page[number]',
+                    'pageSize' => 'page[size]',
+                ],
             ),
             options: $options,
             convert: Room::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

@@ -7,7 +7,8 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VirtualCrossConnectsRawContract;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectCreateParams;
@@ -16,7 +17,6 @@ use Telnyx\VirtualCrossConnects\VirtualCrossConnectDeleteResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectListParams;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectListParams\Filter;
-use Telnyx\VirtualCrossConnects\VirtualCrossConnectListParams\Page;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectListResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectNewResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectUpdateParams;
@@ -24,7 +24,6 @@ use Telnyx\VirtualCrossConnects\VirtualCrossConnectUpdateResponse;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\VirtualCrossConnects\VirtualCrossConnectListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\VirtualCrossConnects\VirtualCrossConnectListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class VirtualCrossConnectsRawService implements VirtualCrossConnectsRawContract
@@ -153,11 +152,11 @@ final class VirtualCrossConnectsRawService implements VirtualCrossConnectsRawCon
      * List all Virtual Cross Connects.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, page?: Page|PageShape
+     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
      * }|VirtualCrossConnectListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<VirtualCrossConnectListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<VirtualCrossConnectListResponse>>
      *
      * @throws APIException
      */
@@ -174,10 +173,13 @@ final class VirtualCrossConnectsRawService implements VirtualCrossConnectsRawCon
         return $this->client->request(
             method: 'get',
             path: 'virtual_cross_connects',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: VirtualCrossConnectListResponse::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

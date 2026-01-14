@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts\Rooms;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\RoomParticipant;
 use Telnyx\Rooms\RoomSession;
@@ -44,7 +44,7 @@ interface SessionsRawContract
      * @param array<string,mixed>|SessionList0Params $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<RoomSession>>
+     * @return BaseResponse<DefaultFlatPagination<RoomSession>>
      *
      * @throws APIException
      */
@@ -60,7 +60,7 @@ interface SessionsRawContract
      * @param array<string,mixed>|SessionList1Params $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<RoomSession>>
+     * @return BaseResponse<DefaultFlatPagination<RoomSession>>
      *
      * @throws APIException
      */
@@ -77,7 +77,7 @@ interface SessionsRawContract
      * @param array<string,mixed>|SessionRetrieveParticipantsParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<RoomParticipant>>
+     * @return BaseResponse<DefaultFlatPagination<RoomParticipant>>
      *
      * @throws APIException
      */

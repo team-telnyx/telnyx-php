@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\CallEvents\CallEventListParams\Filter;
-use Telnyx\CallEvents\CallEventListParams\Page;
 use Telnyx\CallEvents\CallEventListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
@@ -16,7 +15,6 @@ use Telnyx\ServiceContracts\CallEventsContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\CallEvents\CallEventListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\CallEvents\CallEventListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class CallEventsService implements CallEventsContract
@@ -42,7 +40,6 @@ final class CallEventsService implements CallEventsContract
      * **Note**: Only one `filter[occurred_at]` can be passed.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound.outbound_voice_profile_id], filter[leg_id], filter[application_session_id], filter[connection_id], filter[product], filter[failed], filter[from], filter[to], filter[name], filter[type], filter[occurred_at][eq/gt/gte/lt/lte], filter[status]
-     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<CallEventListResponse>
@@ -51,7 +48,6 @@ final class CallEventsService implements CallEventsContract
      */
     public function list(
         Filter|array|null $filter = null,
-        Page|array|null $page = null,
         ?int $pageNumber = null,
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
@@ -59,7 +55,6 @@ final class CallEventsService implements CallEventsContract
         $params = Util::removeNulls(
             [
                 'filter' => $filter,
-                'page' => $page,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
             ],
