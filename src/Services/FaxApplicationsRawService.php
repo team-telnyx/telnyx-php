@@ -7,8 +7,9 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\FaxApplications\FaxApplication;
 use Telnyx\FaxApplications\FaxApplicationCreateParams;
 use Telnyx\FaxApplications\FaxApplicationCreateParams\Inbound;
@@ -17,7 +18,6 @@ use Telnyx\FaxApplications\FaxApplicationDeleteResponse;
 use Telnyx\FaxApplications\FaxApplicationGetResponse;
 use Telnyx\FaxApplications\FaxApplicationListParams;
 use Telnyx\FaxApplications\FaxApplicationListParams\Filter;
-use Telnyx\FaxApplications\FaxApplicationListParams\Page;
 use Telnyx\FaxApplications\FaxApplicationListParams\Sort;
 use Telnyx\FaxApplications\FaxApplicationNewResponse;
 use Telnyx\FaxApplications\FaxApplicationUpdateParams;
@@ -31,7 +31,6 @@ use Telnyx\ServiceContracts\FaxApplicationsRawContract;
  * @phpstan-import-type InboundShape from \Telnyx\FaxApplications\FaxApplicationUpdateParams\Inbound as InboundShape1
  * @phpstan-import-type OutboundShape from \Telnyx\FaxApplications\FaxApplicationUpdateParams\Outbound as OutboundShape1
  * @phpstan-import-type FilterShape from \Telnyx\FaxApplications\FaxApplicationListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\FaxApplications\FaxApplicationListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class FaxApplicationsRawService implements FaxApplicationsRawContract
@@ -158,11 +157,14 @@ final class FaxApplicationsRawService implements FaxApplicationsRawContract
      * This endpoint returns a list of your Fax Applications inside the 'data' attribute of the response. You can adjust which applications are listed by using filters. Fax Applications are used to configure how you send and receive faxes using the Programmable Fax API with Telnyx.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|value-of<Sort>
+     *   filter?: Filter|FilterShape,
+     *   pageNumber?: int,
+     *   pageSize?: int,
+     *   sort?: Sort|value-of<Sort>,
      * }|FaxApplicationListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<FaxApplication>>
+     * @return BaseResponse<DefaultFlatPagination<FaxApplication>>
      *
      * @throws APIException
      */
@@ -179,10 +181,13 @@ final class FaxApplicationsRawService implements FaxApplicationsRawContract
         return $this->client->request(
             method: 'get',
             path: 'fax_applications',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: FaxApplication::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

@@ -7,7 +7,8 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WireguardPeersRawContract;
 use Telnyx\WireguardPeers\WireguardPeerCreateParams;
@@ -15,7 +16,6 @@ use Telnyx\WireguardPeers\WireguardPeerDeleteResponse;
 use Telnyx\WireguardPeers\WireguardPeerGetResponse;
 use Telnyx\WireguardPeers\WireguardPeerListParams;
 use Telnyx\WireguardPeers\WireguardPeerListParams\Filter;
-use Telnyx\WireguardPeers\WireguardPeerListParams\Page;
 use Telnyx\WireguardPeers\WireguardPeerListResponse;
 use Telnyx\WireguardPeers\WireguardPeerNewResponse;
 use Telnyx\WireguardPeers\WireguardPeerUpdateParams;
@@ -23,7 +23,6 @@ use Telnyx\WireguardPeers\WireguardPeerUpdateResponse;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\WireguardPeers\WireguardPeerListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\WireguardPeers\WireguardPeerListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class WireguardPeersRawService implements WireguardPeersRawContract
@@ -131,11 +130,11 @@ final class WireguardPeersRawService implements WireguardPeersRawContract
      * List all WireGuard peers.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, page?: Page|PageShape
+     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
      * }|WireguardPeerListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<WireguardPeerListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<WireguardPeerListResponse>>
      *
      * @throws APIException
      */
@@ -152,10 +151,13 @@ final class WireguardPeersRawService implements WireguardPeersRawContract
         return $this->client->request(
             method: 'get',
             path: 'wireguard_peers',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: WireguardPeerListResponse::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

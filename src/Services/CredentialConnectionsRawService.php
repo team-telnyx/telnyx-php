@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\CredentialConnection;
@@ -19,7 +20,6 @@ use Telnyx\CredentialConnections\CredentialConnectionDeleteResponse;
 use Telnyx\CredentialConnections\CredentialConnectionGetResponse;
 use Telnyx\CredentialConnections\CredentialConnectionListParams;
 use Telnyx\CredentialConnections\CredentialConnectionListParams\Filter;
-use Telnyx\CredentialConnections\CredentialConnectionListParams\Page;
 use Telnyx\CredentialConnections\CredentialConnectionListParams\Sort;
 use Telnyx\CredentialConnections\CredentialConnectionNewResponse;
 use Telnyx\CredentialConnections\CredentialConnectionUpdateParams;
@@ -28,7 +28,7 @@ use Telnyx\CredentialConnections\CredentialInbound;
 use Telnyx\CredentialConnections\CredentialOutbound;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CredentialConnectionsRawContract;
 
@@ -36,7 +36,6 @@ use Telnyx\ServiceContracts\CredentialConnectionsRawContract;
  * @phpstan-import-type NoiseSuppressionDetailsShape from \Telnyx\CredentialConnections\CredentialConnectionCreateParams\NoiseSuppressionDetails
  * @phpstan-import-type NoiseSuppressionDetailsShape from \Telnyx\CredentialConnections\CredentialConnectionUpdateParams\NoiseSuppressionDetails as NoiseSuppressionDetailsShape1
  * @phpstan-import-type FilterShape from \Telnyx\CredentialConnections\CredentialConnectionListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\CredentialConnections\CredentialConnectionListParams\Page
  * @phpstan-import-type CredentialInboundShape from \Telnyx\CredentialConnections\CredentialInbound
  * @phpstan-import-type CredentialOutboundShape from \Telnyx\CredentialConnections\CredentialOutbound
  * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
@@ -195,11 +194,14 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
      * Returns a list of your credential connections.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|value-of<Sort>
+     *   filter?: Filter|FilterShape,
+     *   pageNumber?: int,
+     *   pageSize?: int,
+     *   sort?: Sort|value-of<Sort>,
      * }|CredentialConnectionListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<CredentialConnection>>
+     * @return BaseResponse<DefaultFlatPagination<CredentialConnection>>
      *
      * @throws APIException
      */
@@ -216,10 +218,13 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
         return $this->client->request(
             method: 'get',
             path: 'credential_connections',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: CredentialConnection::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

@@ -7,14 +7,14 @@ namespace Telnyx\Services\Porting;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Address;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Contact;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Logo;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationGetResponse;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationListParams;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationListParams\Page;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationNewResponse;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams;
@@ -30,7 +30,6 @@ use Telnyx\ServiceContracts\Porting\LoaConfigurationsRawContract;
  * @phpstan-import-type AddressShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Address as AddressShape1
  * @phpstan-import-type ContactShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Contact as ContactShape1
  * @phpstan-import-type LogoShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo as LogoShape1
- * @phpstan-import-type PageShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationListParams\Page
  * @phpstan-import-type AddressShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address as AddressShape2
  * @phpstan-import-type ContactShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact as ContactShape2
  * @phpstan-import-type LogoShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo as LogoShape2
@@ -150,10 +149,12 @@ final class LoaConfigurationsRawService implements LoaConfigurationsRawContract
      *
      * List the LOA configurations.
      *
-     * @param array{page?: Page|PageShape}|LoaConfigurationListParams $params
+     * @param array{
+     *   pageNumber?: int, pageSize?: int
+     * }|LoaConfigurationListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<PortingLoaConfiguration>>
+     * @return BaseResponse<DefaultFlatPagination<PortingLoaConfiguration>>
      *
      * @throws APIException
      */
@@ -170,10 +171,13 @@ final class LoaConfigurationsRawService implements LoaConfigurationsRawContract
         return $this->client->request(
             method: 'get',
             path: 'porting/loa_configurations',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: PortingLoaConfiguration::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\ExternalConnections\ExternalConnection;
 use Telnyx\ExternalConnections\ExternalConnectionCreateParams\ExternalSipConnection;
 use Telnyx\ExternalConnections\ExternalConnectionCreateParams\Inbound;
@@ -13,7 +13,6 @@ use Telnyx\ExternalConnections\ExternalConnectionCreateParams\Outbound;
 use Telnyx\ExternalConnections\ExternalConnectionDeleteResponse;
 use Telnyx\ExternalConnections\ExternalConnectionGetResponse;
 use Telnyx\ExternalConnections\ExternalConnectionListParams\Filter;
-use Telnyx\ExternalConnections\ExternalConnectionListParams\Page;
 use Telnyx\ExternalConnections\ExternalConnectionNewResponse;
 use Telnyx\ExternalConnections\ExternalConnectionUpdateLocationResponse;
 use Telnyx\ExternalConnections\ExternalConnectionUpdateResponse;
@@ -25,7 +24,6 @@ use Telnyx\RequestOptions;
  * @phpstan-import-type OutboundShape from \Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Outbound as OutboundShape1
  * @phpstan-import-type InboundShape from \Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Inbound as InboundShape1
  * @phpstan-import-type FilterShape from \Telnyx\ExternalConnections\ExternalConnectionListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\ExternalConnections\ExternalConnectionListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface ExternalConnectionsContract
@@ -101,18 +99,18 @@ interface ExternalConnectionsContract
      * @api
      *
      * @param Filter|FilterShape $filter Filter parameter for external connections (deepObject style). Supports filtering by connection_name, external_sip_connection, id, created_at, and phone_number.
-     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<ExternalConnection>
+     * @return DefaultFlatPagination<ExternalConnection>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination;
+    ): DefaultFlatPagination;
 
     /**
      * @api

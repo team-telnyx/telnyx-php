@@ -11,14 +11,13 @@ use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\FqdnConnections\FqdnConnection;
 use Telnyx\FqdnConnections\FqdnConnectionCreateParams\NoiseSuppression;
 use Telnyx\FqdnConnections\FqdnConnectionCreateParams\NoiseSuppressionDetails;
 use Telnyx\FqdnConnections\FqdnConnectionDeleteResponse;
 use Telnyx\FqdnConnections\FqdnConnectionGetResponse;
 use Telnyx\FqdnConnections\FqdnConnectionListParams\Filter;
-use Telnyx\FqdnConnections\FqdnConnectionListParams\Page;
 use Telnyx\FqdnConnections\FqdnConnectionListParams\Sort;
 use Telnyx\FqdnConnections\FqdnConnectionNewResponse;
 use Telnyx\FqdnConnections\FqdnConnectionUpdateResponse;
@@ -33,7 +32,6 @@ use Telnyx\ServiceContracts\FqdnConnectionsContract;
  * @phpstan-import-type NoiseSuppressionDetailsShape from \Telnyx\FqdnConnections\FqdnConnectionCreateParams\NoiseSuppressionDetails
  * @phpstan-import-type NoiseSuppressionDetailsShape from \Telnyx\FqdnConnections\FqdnConnectionUpdateParams\NoiseSuppressionDetails as NoiseSuppressionDetailsShape1
  * @phpstan-import-type FilterShape from \Telnyx\FqdnConnections\FqdnConnectionListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\FqdnConnections\FqdnConnectionListParams\Page
  * @phpstan-import-type InboundFqdnShape from \Telnyx\FqdnConnections\InboundFqdn
  * @phpstan-import-type OutboundFqdnShape from \Telnyx\FqdnConnections\OutboundFqdn
  * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
@@ -263,7 +261,6 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
      * Returns a list of your FQDN connections.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_name], filter[fqdn], filter[outbound_voice_profile_id], filter[outbound.outbound_voice_profile_id]
-     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
      * That is: <ul>
      *   <li>
@@ -278,18 +275,24 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<FqdnConnection>
+     * @return DefaultFlatPagination<FqdnConnection>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         Sort|string $sort = 'created_at',
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination {
+    ): DefaultFlatPagination {
         $params = Util::removeNulls(
-            ['filter' => $filter, 'page' => $page, 'sort' => $sort]
+            [
+                'filter' => $filter,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+                'sort' => $sort,
+            ],
         );
 
         // @phpstan-ignore-next-line argument.type

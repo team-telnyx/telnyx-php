@@ -10,7 +10,6 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingOptouts\MessagingOptoutListParams\CreatedAt;
 use Telnyx\MessagingOptouts\MessagingOptoutListParams\Filter;
-use Telnyx\MessagingOptouts\MessagingOptoutListParams\Page;
 
 /**
  * Retrieve a list of opt-out blocks.
@@ -19,12 +18,12 @@ use Telnyx\MessagingOptouts\MessagingOptoutListParams\Page;
  *
  * @phpstan-import-type CreatedAtShape from \Telnyx\MessagingOptouts\MessagingOptoutListParams\CreatedAt
  * @phpstan-import-type FilterShape from \Telnyx\MessagingOptouts\MessagingOptoutListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\MessagingOptouts\MessagingOptoutListParams\Page
  *
  * @phpstan-type MessagingOptoutListParamsShape = array{
  *   createdAt?: null|CreatedAt|CreatedAtShape,
  *   filter?: null|Filter|FilterShape,
- *   page?: null|Page|PageShape,
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
  *   redactionEnabled?: string|null,
  * }
  */
@@ -46,11 +45,11 @@ final class MessagingOptoutListParams implements BaseModel
     #[Optional]
     public ?Filter $filter;
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
-     */
     #[Optional]
-    public ?Page $page;
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
 
     /**
      * If receiving address (+E.164 formatted phone number) should be redacted.
@@ -70,19 +69,20 @@ final class MessagingOptoutListParams implements BaseModel
      *
      * @param CreatedAt|CreatedAtShape|null $createdAt
      * @param Filter|FilterShape|null $filter
-     * @param Page|PageShape|null $page
      */
     public static function with(
         CreatedAt|array|null $createdAt = null,
         Filter|array|null $filter = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         ?string $redactionEnabled = null,
     ): self {
         $self = new self;
 
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $filter && $self['filter'] = $filter;
-        null !== $page && $self['page'] = $page;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
         null !== $redactionEnabled && $self['redactionEnabled'] = $redactionEnabled;
 
         return $self;
@@ -114,15 +114,18 @@ final class MessagingOptoutListParams implements BaseModel
         return $self;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
-     *
-     * @param Page|PageShape $page
-     */
-    public function withPage(Page|array $page): self
+    public function withPageNumber(int $pageNumber): self
     {
         $self = clone $this;
-        $self['page'] = $page;
+        $self['pageNumber'] = $pageNumber;
+
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
         return $self;
     }

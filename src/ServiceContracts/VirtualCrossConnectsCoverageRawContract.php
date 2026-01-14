@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse;
@@ -22,7 +22,7 @@ interface VirtualCrossConnectsCoverageRawContract
      * @param array<string,mixed>|VirtualCrossConnectsCoverageListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<VirtualCrossConnectsCoverageListResponse,>,>
+     * @return BaseResponse<DefaultFlatPagination<VirtualCrossConnectsCoverageListResponse,>,>
      *
      * @throws APIException
      */

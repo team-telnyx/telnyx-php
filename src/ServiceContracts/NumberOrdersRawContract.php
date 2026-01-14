@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\NumberOrders\NumberOrderCreateParams;
 use Telnyx\NumberOrders\NumberOrderGetResponse;
 use Telnyx\NumberOrders\NumberOrderListParams;
@@ -74,7 +74,7 @@ interface NumberOrdersRawContract
      * @param array<string,mixed>|NumberOrderListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<NumberOrderListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<NumberOrderListResponse>>
      *
      * @throws APIException
      */

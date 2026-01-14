@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\Networks\NetworkDeleteResponse;
 use Telnyx\Networks\NetworkGetResponse;
 use Telnyx\Networks\NetworkListInterfacesResponse;
 use Telnyx\Networks\NetworkListParams\Filter;
-use Telnyx\Networks\NetworkListParams\Page;
 use Telnyx\Networks\NetworkListResponse;
 use Telnyx\Networks\NetworkNewResponse;
 use Telnyx\Networks\NetworkUpdateResponse;
@@ -18,9 +17,7 @@ use Telnyx\RequestOptions;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\Networks\NetworkListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\Networks\NetworkListParams\Page
  * @phpstan-import-type FilterShape from \Telnyx\Networks\NetworkListInterfacesParams\Filter as FilterShape1
- * @phpstan-import-type PageShape from \Telnyx\Networks\NetworkListInterfacesParams\Page as PageShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface NetworksContract
@@ -70,18 +67,18 @@ interface NetworksContract
      * @api
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
-     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<NetworkListResponse>
+     * @return DefaultFlatPagination<NetworkListResponse>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination;
+    ): DefaultFlatPagination;
 
     /**
      * @api
@@ -101,17 +98,17 @@ interface NetworksContract
      *
      * @param string $id identifies the resource
      * @param \Telnyx\Networks\NetworkListInterfacesParams\Filter|FilterShape1 $filter Consolidated filter parameter (deepObject style). Originally: filter[name], filter[type], filter[status]
-     * @param \Telnyx\Networks\NetworkListInterfacesParams\Page|PageShape1 $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<NetworkListInterfacesResponse>
+     * @return DefaultFlatPagination<NetworkListInterfacesResponse>
      *
      * @throws APIException
      */
     public function listInterfaces(
         string $id,
         \Telnyx\Networks\NetworkListInterfacesParams\Filter|array|null $filter = null,
-        \Telnyx\Networks\NetworkListInterfacesParams\Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination;
+    ): DefaultFlatPagination;
 }

@@ -7,13 +7,12 @@ namespace Telnyx\Services\ExternalConnections;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\ExternalConnections\Uploads\Upload;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams\AdditionalUsage;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams\Usage;
 use Telnyx\ExternalConnections\Uploads\UploadGetResponse;
 use Telnyx\ExternalConnections\Uploads\UploadListParams\Filter;
-use Telnyx\ExternalConnections\Uploads\UploadListParams\Page;
 use Telnyx\ExternalConnections\Uploads\UploadNewResponse;
 use Telnyx\ExternalConnections\Uploads\UploadPendingCountResponse;
 use Telnyx\ExternalConnections\Uploads\UploadRefreshStatusResponse;
@@ -23,7 +22,6 @@ use Telnyx\ServiceContracts\ExternalConnections\UploadsContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\ExternalConnections\Uploads\UploadListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\ExternalConnections\Uploads\UploadListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class UploadsService implements UploadsContract
@@ -112,20 +110,26 @@ final class UploadsService implements UploadsContract
      *
      * @param string $id identifies the resource
      * @param Filter|FilterShape $filter Filter parameter for uploads (deepObject style). Supports filtering by status, civic_address_id, location_id, and phone_number with eq/contains operations.
-     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<Upload>
+     * @return DefaultFlatPagination<Upload>
      *
      * @throws APIException
      */
     public function list(
         string $id,
         Filter|array|null $filter = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination {
-        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
+            [
+                'filter' => $filter,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($id, params: $params, requestOptions: $requestOptions);

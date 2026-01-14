@@ -7,14 +7,14 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\Fqdns\Fqdn;
 use Telnyx\Fqdns\FqdnCreateParams;
 use Telnyx\Fqdns\FqdnDeleteResponse;
 use Telnyx\Fqdns\FqdnGetResponse;
 use Telnyx\Fqdns\FqdnListParams;
 use Telnyx\Fqdns\FqdnListParams\Filter;
-use Telnyx\Fqdns\FqdnListParams\Page;
 use Telnyx\Fqdns\FqdnNewResponse;
 use Telnyx\Fqdns\FqdnUpdateParams;
 use Telnyx\Fqdns\FqdnUpdateResponse;
@@ -23,7 +23,6 @@ use Telnyx\ServiceContracts\FqdnsRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\Fqdns\FqdnListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\Fqdns\FqdnListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class FqdnsRawService implements FqdnsRawContract
@@ -133,11 +132,11 @@ final class FqdnsRawService implements FqdnsRawContract
      * Get all FQDNs belonging to the user that match the given filters.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, page?: Page|PageShape
+     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
      * }|FqdnListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<Fqdn>>
+     * @return BaseResponse<DefaultFlatPagination<Fqdn>>
      *
      * @throws APIException
      */
@@ -154,10 +153,13 @@ final class FqdnsRawService implements FqdnsRawContract
         return $this->client->request(
             method: 'get',
             path: 'fqdns',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: Fqdn::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

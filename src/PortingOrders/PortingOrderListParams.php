@@ -9,7 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderListParams\Filter;
-use Telnyx\PortingOrders\PortingOrderListParams\Page;
 use Telnyx\PortingOrders\PortingOrderListParams\Sort;
 
 /**
@@ -18,13 +17,13 @@ use Telnyx\PortingOrders\PortingOrderListParams\Sort;
  * @see Telnyx\Services\PortingOrdersService::list()
  *
  * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\PortingOrderListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\PortingOrders\PortingOrderListParams\Page
  * @phpstan-import-type SortShape from \Telnyx\PortingOrders\PortingOrderListParams\Sort
  *
  * @phpstan-type PortingOrderListParamsShape = array{
  *   filter?: null|Filter|FilterShape,
  *   includePhoneNumbers?: bool|null,
- *   page?: null|Page|PageShape,
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
  *   sort?: null|Sort|SortShape,
  * }
  */
@@ -46,11 +45,11 @@ final class PortingOrderListParams implements BaseModel
     #[Optional]
     public ?bool $includePhoneNumbers;
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     */
     #[Optional]
-    public ?Page $page;
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
 
     /**
      * Consolidated sort parameter (deepObject style). Originally: sort[value].
@@ -69,20 +68,21 @@ final class PortingOrderListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|FilterShape|null $filter
-     * @param Page|PageShape|null $page
      * @param Sort|SortShape|null $sort
      */
     public static function with(
         Filter|array|null $filter = null,
         ?bool $includePhoneNumbers = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         Sort|array|null $sort = null,
     ): self {
         $self = new self;
 
         null !== $filter && $self['filter'] = $filter;
         null !== $includePhoneNumbers && $self['includePhoneNumbers'] = $includePhoneNumbers;
-        null !== $page && $self['page'] = $page;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
         null !== $sort && $self['sort'] = $sort;
 
         return $self;
@@ -112,15 +112,18 @@ final class PortingOrderListParams implements BaseModel
         return $self;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     *
-     * @param Page|PageShape $page
-     */
-    public function withPage(Page|array $page): self
+    public function withPageNumber(int $pageNumber): self
     {
         $self = clone $this;
-        $self['page'] = $page;
+        $self['pageNumber'] = $pageNumber;
+
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
         return $self;
     }
