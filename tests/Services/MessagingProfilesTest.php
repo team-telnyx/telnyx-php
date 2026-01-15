@@ -74,6 +74,7 @@ final class MessagingProfilesTest extends TestCase
                 'geomatch' => false,
                 'stickySender' => false,
             ],
+            smartEncoding: true,
             urlShortenerSettings: [
                 'domain' => 'example.ex',
                 'prefix' => '',

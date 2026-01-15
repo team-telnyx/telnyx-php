@@ -30,6 +30,7 @@ use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
  *   mmsTranscoding?: bool|null,
  *   mobileOnly?: bool|null,
  *   numberPoolSettings?: null|NumberPoolSettings|NumberPoolSettingsShape,
+ *   smartEncoding?: bool|null,
  *   urlShortenerSettings?: null|URLShortenerSettings|URLShortenerSettingsShape,
  *   webhookAPIVersion?: null|WebhookAPIVersion|value-of<WebhookAPIVersion>,
  *   webhookFailoverURL?: string|null,
@@ -109,6 +110,12 @@ final class MessagingProfileCreateParams implements BaseModel
     public ?NumberPoolSettings $numberPoolSettings;
 
     /**
+     * Enables automatic character encoding optimization for SMS messages. When enabled, the system automatically selects the most efficient encoding (GSM-7 or UCS-2) based on message content to maximize character limits and minimize costs.
+     */
+    #[Optional('smart_encoding')]
+    public ?bool $smartEncoding;
+
+    /**
      * The URL shortener feature allows automatic replacement of URLs that were generated using
      * a public URL shortener service. Some examples include bit.do, bit.ly, goo.gl, ht.ly,
      * is.gd, ow.ly, rebrand.ly, t.co, tiny.cc, and tinyurl.com. Such URLs are replaced with
@@ -182,6 +189,7 @@ final class MessagingProfileCreateParams implements BaseModel
         ?bool $mmsTranscoding = null,
         ?bool $mobileOnly = null,
         NumberPoolSettings|array|null $numberPoolSettings = null,
+        ?bool $smartEncoding = null,
         URLShortenerSettings|array|null $urlShortenerSettings = null,
         WebhookAPIVersion|string|null $webhookAPIVersion = null,
         ?string $webhookFailoverURL = null,
@@ -200,6 +208,7 @@ final class MessagingProfileCreateParams implements BaseModel
         null !== $mmsTranscoding && $self['mmsTranscoding'] = $mmsTranscoding;
         null !== $mobileOnly && $self['mobileOnly'] = $mobileOnly;
         null !== $numberPoolSettings && $self['numberPoolSettings'] = $numberPoolSettings;
+        null !== $smartEncoding && $self['smartEncoding'] = $smartEncoding;
         null !== $urlShortenerSettings && $self['urlShortenerSettings'] = $urlShortenerSettings;
         null !== $webhookAPIVersion && $self['webhookAPIVersion'] = $webhookAPIVersion;
         null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
@@ -325,6 +334,17 @@ final class MessagingProfileCreateParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['numberPoolSettings'] = $numberPoolSettings;
+
+        return $self;
+    }
+
+    /**
+     * Enables automatic character encoding optimization for SMS messages. When enabled, the system automatically selects the most efficient encoding (GSM-7 or UCS-2) based on message content to maximize character limits and minimize costs.
+     */
+    public function withSmartEncoding(bool $smartEncoding): self
+    {
+        $self = clone $this;
+        $self['smartEncoding'] = $smartEncoding;
 
         return $self;
     }

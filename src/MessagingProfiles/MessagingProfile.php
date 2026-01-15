@@ -30,6 +30,7 @@ use Telnyx\MessagingProfiles\MessagingProfile\WebhookAPIVersion;
  *   recordType?: null|RecordType|value-of<RecordType>,
  *   redactionEnabled?: bool|null,
  *   redactionLevel?: int|null,
+ *   smartEncoding?: bool|null,
  *   updatedAt?: \DateTimeInterface|null,
  *   urlShortenerSettings?: null|URLShortenerSettings|URLShortenerSettingsShape,
  *   v1Secret?: string|null,
@@ -141,6 +142,12 @@ final class MessagingProfile implements BaseModel
     public ?int $redactionLevel;
 
     /**
+     * Enables automatic character encoding optimization for SMS messages. When enabled, the system automatically selects the most efficient encoding (GSM-7 or UCS-2) based on message content to maximize character limits and minimize costs.
+     */
+    #[Optional('smart_encoding')]
+    public ?bool $smartEncoding;
+
+    /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
     #[Optional('updated_at')]
@@ -224,6 +231,7 @@ final class MessagingProfile implements BaseModel
         RecordType|string|null $recordType = null,
         ?bool $redactionEnabled = null,
         ?int $redactionLevel = null,
+        ?bool $smartEncoding = null,
         ?\DateTimeInterface $updatedAt = null,
         URLShortenerSettings|array|null $urlShortenerSettings = null,
         ?string $v1Secret = null,
@@ -249,6 +257,7 @@ final class MessagingProfile implements BaseModel
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $redactionEnabled && $self['redactionEnabled'] = $redactionEnabled;
         null !== $redactionLevel && $self['redactionLevel'] = $redactionLevel;
+        null !== $smartEncoding && $self['smartEncoding'] = $smartEncoding;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
         null !== $urlShortenerSettings && $self['urlShortenerSettings'] = $urlShortenerSettings;
         null !== $v1Secret && $self['v1Secret'] = $v1Secret;
@@ -431,6 +440,17 @@ final class MessagingProfile implements BaseModel
     {
         $self = clone $this;
         $self['redactionLevel'] = $redactionLevel;
+
+        return $self;
+    }
+
+    /**
+     * Enables automatic character encoding optimization for SMS messages. When enabled, the system automatically selects the most efficient encoding (GSM-7 or UCS-2) based on message content to maximize character limits and minimize costs.
+     */
+    public function withSmartEncoding(bool $smartEncoding): self
+    {
+        $self = clone $this;
+        $self['smartEncoding'] = $smartEncoding;
 
         return $self;
     }
